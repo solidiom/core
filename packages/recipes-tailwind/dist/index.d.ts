@@ -1,0 +1,23 @@
+/**
+ * @solidiom/recipes-tailwind — Tailwind recipe profiles for Solidiom primitives.
+ *
+ * Dual emission:
+ *   - Raw stylesheets: Tailwind @apply + data-* attribute selectors
+ *   - TSX wrappers: pre-styled component wrappers with Tailwind utility classes
+ */
+export { recipeProfile, supportedPrimitives } from "./meta";
+export { StyledDialog } from "./recipes/dialog";
+export { StyledButton, buttonVariants, type ButtonVariantProps } from "./recipes/button";
+export { StyledCheckbox } from "./recipes/checkbox";
+export { StyledSwitch } from "./recipes/switch";
+export { StyledTabs } from "./recipes/tabs";
+export { StyledAccordion } from "./recipes/accordion";
+export { StyledPopover } from "./recipes/popover";
+export { StyledTooltip } from "./recipes/tooltip";
+export { StyledMenu } from "./recipes/menu";
+export { StyledToast } from "./recipes/toast";
+export { StyledSelect } from "./recipes/select";
+export { StyledBadge, type BadgeVariant } from "./recipes/badge";
+export { StyledAlert, type AlertVariant } from "./recipes/alert";
+export { typeset, type TypesetKey } from "./recipes/typeset";
+//# sourceMappingURL=index.d.ts.map

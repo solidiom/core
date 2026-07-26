@@ -1,0 +1,440 @@
+/**
+ * tools/registry-build — generates registry manifests for all primitives.
+ *
+ * Scans packages/ for directories tagged "layer:primitive", reads their source/
+ * files, and outputs:
+ *   - registry/<name>.json (per-primitive manifest)
+ *   - registry/index.json (catalog of all primitives and adapters)
+ *
+ * Detection logic:
+ *   - Dependencies: extracted from package.json "dependencies" field.
+ *   - Source files: lists non-test .ts/.tsx files in source/.
+ *   - Runtime modules: scans source imports from @solidiom/runtime (e.g. "overlay/layer-stack").
+ *   - Capabilities: detects port interfaces (PositioningPort → positioning@1,
+ *     CalendarDateMathPort → date-math@1, CarouselPhysicsPort → carousel-physics@1).
+ *
+ * Usage: pnpm exec tsx tools/registry-build.ts
+ */
+
+import { readdirSync, readFileSync, writeFileSync, existsSync, statSync, unlinkSync } from "node:fs"
+import { join, relative, dirname } from "node:path"
+import { fileURLToPath } from "node:url"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const ROOT = join(__dirname, "..")
+const PACKAGES_DIR = join(ROOT, "packages")
+const REGISTRY_DIR = join(ROOT, "registry")
+
+// ─── Capability Detection ────────────────────────────────────────────────────
+
+interface Capability {
+  name: string
+  version: number
+  default: string
+}
+
+/** Port interface → capability mapping. */
+const PORT_TO_CAPABILITY: Record<string, Capability> = {
+  PositioningPort: {
+    name: "positioning",
+    version: 1,
+    default: "@solidiom/adapter-positioning-floating-ui",
+  },
+  CalendarDateMathPort: {
+    name: "date-math",
+    version: 1,
+    default: "@solidiom/adapter-date-internationalized",
+  },
+  CarouselPhysicsPort: {
+    name: "carousel-physics",
+    version: 1,
+    default: "@solidiom/adapter-carousel-embla",
+  },
+  VirtualizationPort: {
+    name: "virtualization",
+    version: 1,
+    default: "@solidiom/adapter-virtualization-tanstack",
+  },
+  TablePort: {
+    name: "table",
+    version: 1,
+    default: "@solidiom/adapter-table-tanstack",
+  },
+}
+
+// ─── Manifest Types ──────────────────────────────────────────────────────────
+
+interface PrimitiveManifest {
+  name: string
+  version: string
+  package: string
+  capabilities: Capability[]
+  dependencies: string[]
+  source: {
+    entry: string
+    files: string[]
+  }
+  runtime: string[]
+}
+
+interface IndexManifest {
+  version: number
+  generatedAt: string
+  primitives: Array<{
+    name: string
+    version: string
+    package: string
+    label?: string
+    description?: string
+    category?: string
+  }>
+  adapters: Array<{
+    name: string
+    package: string
+    capability: string
+  }>
+}
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+/** Check if a package dir is a public primitive with complete registry metadata. */
+function isPublicPrimitive(pkgDir: string): boolean {
+  const pkgPath = join(pkgDir, "package.json")
+  if (!existsSync(pkgPath)) return false
+
+  try {
+    const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as Record<string, unknown>
+    const nx = pkg["nx"] as Record<string, unknown> | undefined
+    const tags = nx?.["tags"] as string[] | undefined
+    const metadata = nx?.["metadata"] as Record<string, unknown> | undefined
+    const metadataFields = [metadata?.["label"], metadata?.["description"], metadata?.["category"]]
+
+    return (
+      tags?.includes("layer:primitive") === true &&
+      pkg["private"] !== true &&
+      metadataFields.every((value) => typeof value === "string" && value.trim().length > 0)
+    )
+  } catch {
+    return false
+  }
+}
+
+/** Check if a package dir is an adapter (has "layer:adapter" tag). */
+function isAdapter(pkgDir: string): boolean {
+  const pkgPath = join(pkgDir, "package.json")
+  if (!existsSync(pkgPath)) return false
+
+  try {
+    const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as Record<string, unknown>
+    const nx = pkg["nx"] as Record<string, unknown> | undefined
+    const tags = nx?.["tags"] as string[] | undefined
+    return tags?.includes("layer:adapter") ?? false
+  } catch {
+    return false
+  }
+}
+
+/** Collect non-test source files recursively. */
+function collectSourceFiles(dir: string): string[] {
+  const files: string[] = []
+  if (!existsSync(dir)) return files
+
+  function walk(d: string): void {
+    for (const entry of readdirSync(d)) {
+      const full = join(d, entry)
+      if (statSync(full).isDirectory()) {
+        walk(full)
+      } else if (
+        (entry.endsWith(".ts") || entry.endsWith(".tsx")) &&
+        !entry.includes(".test.") &&
+        !entry.endsWith(".d.ts") &&
+        !entry.endsWith(".d.ts.map")
+      ) {
+        files.push(relative(dir, full))
+      }
+    }
+  }
+  walk(dir)
+  return files
+}
+
+/** Extract runtime module paths from source imports of @solidiom/runtime. */
+function extractRuntimeModules(sourceDir: string): string[] {
+  const modules = new Set<string>()
+  if (!existsSync(sourceDir)) return []
+
+  function walk(dir: string): void {
+    for (const entry of readdirSync(dir)) {
+      const full = join(dir, entry)
+      if (statSync(full).isDirectory()) {
+        walk(full)
+      } else if (
+        (entry.endsWith(".ts") || entry.endsWith(".tsx")) &&
+        !entry.includes(".test.") &&
+        !entry.endsWith(".d.ts")
+      ) {
+        const content = readFileSync(full, "utf8")
+        // Match: from "@solidiom/runtime/collection/roving-focus"
+        const subpathMatches = content.matchAll(/from\s+["']@solidiom\/runtime\/([^"']+)["']/g)
+        for (const m of subpathMatches) {
+          modules.add(m[1]!)
+        }
+        // Match: from "@solidiom/runtime" — extract used types/values to infer modules
+        const barrelMatch = content.match(/from\s+["']@solidiom\/runtime["']/)
+        if (barrelMatch) {
+          // Parse the import specifiers to figure out which runtime modules are used
+          const importMatches = content.matchAll(
+            /import\s+(?:type\s+)?{([^}]+)}\s+from\s+["']@solidiom\/runtime["']/g,
+          )
+          for (const im of importMatches) {
+            const specifiers = im[1]!
+              .split(",")
+              .map((s: string) => s.trim().split(" as ")[0]!.trim())
+            for (const spec of specifiers) {
+              const mod = SPECIFIER_TO_MODULE[spec]
+              if (mod) modules.add(mod)
+            }
+          }
+        }
+      }
+    }
+  }
+  walk(sourceDir)
+  return [...modules].sort()
+}
+
+/** Detect capabilities by scanning for port interfaces in source files. */
+function detectCapabilities(sourceDir: string): Capability[] {
+  const caps: Capability[] = []
+  if (!existsSync(sourceDir)) return caps
+
+  function walk(dir: string): void {
+    for (const entry of readdirSync(dir)) {
+      const full = join(dir, entry)
+      if (statSync(full).isDirectory()) {
+        walk(full)
+      } else if (
+        (entry.endsWith(".ts") || entry.endsWith(".tsx")) &&
+        !entry.includes(".test.") &&
+        !entry.endsWith(".d.ts")
+      ) {
+        const content = readFileSync(full, "utf8")
+        for (const [portName, cap] of Object.entries(PORT_TO_CAPABILITY)) {
+          if (content.includes(`interface ${portName}`) || content.includes(`: ${portName}`)) {
+            if (!caps.some((c) => c.name === cap.name)) {
+              caps.push(cap)
+            }
+          }
+        }
+      }
+    }
+  }
+  walk(sourceDir)
+  return caps
+}
+
+/**
+ * Mapping of commonly imported specifiers from @solidiom/runtime barrel
+ * to their module paths.
+ */
+const SPECIFIER_TO_MODULE: Record<string, string> = {
+  // state
+  DisclosureState: "state/disclosure-state",
+  createDisclosureState: "state/disclosure-state",
+  DisclosureReason: "state/disclosure-state",
+  ControllableValue: "state/controllable-value",
+  createControllableValue: "state/controllable-value",
+  // overlay
+  LayerStack: "overlay/layer-stack",
+  createLayerStack: "overlay/layer-stack",
+  DismissableLayer: "overlay/dismissable-layer",
+  createDismissableLayer: "overlay/dismissable-layer",
+  FocusScope: "overlay/focus-scope",
+  createFocusScope: "overlay/focus-scope",
+  ModalIsolation: "overlay/modal-isolation",
+  createModalIsolation: "overlay/modal-isolation",
+  ScrollLock: "overlay/scroll-lock",
+  createScrollLock: "overlay/scroll-lock",
+  Portal: "overlay/portal",
+  // presence
+  Presence: "presence/presence",
+  createPresence: "presence/presence",
+  PresencePhase: "presence/presence",
+  // collection
+  Collection: "collection/collection",
+  createCollection: "collection/collection",
+  CompositeNavigation: "collection/composite-navigation",
+  createCompositeNavigation: "collection/composite-navigation",
+  RovingFocus: "collection/roving-focus",
+  createRovingFocus: "collection/roving-focus",
+  Typeahead: "collection/typeahead",
+  createTypeahead: "collection/typeahead",
+  // dom
+  SemanticAttrs: "dom/semantic-attrs",
+  semanticAttr: "dom/semantic-attrs",
+  StableId: "dom/stable-id",
+  createStableId: "dom/stable-id",
+  ComposeRef: "dom/compose-ref",
+  composeRef: "dom/compose-ref",
+  ObserveElement: "dom/observe-element",
+  observeElement: "dom/observe-element",
+  OwnerCleanup: "dom/owner-cleanup",
+  onCleanup: "dom/owner-cleanup",
+  // events
+  ChangeDetails: "events/change-details",
+  composeEventHandlers: "events/compose-event-handlers",
+  // form
+  HiddenInput: "form/hidden-input",
+  createHiddenInput: "form/hidden-input",
+  FormControl: "form/form-control",
+  createFormControl: "form/form-control",
+  Validation: "form/validation",
+  // i18n
+  Direction: "i18n/direction",
+  getDirection: "i18n/direction",
+  Locale: "i18n/locale",
+  getLocale: "i18n/locale",
+}
+
+// ─── Main Build Logic ────────────────────────────────────────────────────────
+
+function buildRegistry(): void {
+  const packageDirs = readdirSync(PACKAGES_DIR)
+    .map((name: string) => ({ name, path: join(PACKAGES_DIR, name) }))
+    .filter((d: { name: string; path: string }) => statSync(d.path).isDirectory())
+
+  const primitives: PrimitiveManifest[] = []
+  const adapterEntries: Array<{ name: string; package: string; capability: string }> = []
+
+  // Process adapters first to build the adapter catalog
+  for (const { name, path: pkgDir } of packageDirs) {
+    if (!isAdapter(pkgDir)) continue
+
+    const pkgPath = join(pkgDir, "package.json")
+    const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as Record<string, unknown>
+    const pkgName = pkg["name"] as string
+
+    // Derive capability from adapter name pattern
+    const adapterName = name.replace("adapter-", "")
+    let capability = "unknown@1"
+
+    if (adapterName.includes("positioning")) {
+      capability = "positioning@1"
+    } else if (adapterName.includes("date")) {
+      capability = "date-math@1"
+    } else if (adapterName.includes("carousel")) {
+      capability = "carousel-physics@1"
+    } else if (adapterName.includes("virtualization")) {
+      capability = "virtualization@1"
+    } else if (adapterName.includes("table")) {
+      capability = "table@1"
+    }
+
+    adapterEntries.push({ name: adapterName, package: pkgName, capability })
+  }
+
+  // Process primitives
+  for (const { name, path: pkgDir } of packageDirs) {
+    if (!isPublicPrimitive(pkgDir)) continue
+
+    // Skip meta-packages (like "primitives" which re-exports everything)
+    const sourceDir = join(pkgDir, "source")
+    if (!existsSync(sourceDir)) continue
+
+    const sourceFiles = collectSourceFiles(sourceDir)
+    if (sourceFiles.length === 0) continue
+
+    const pkgPath = join(pkgDir, "package.json")
+    const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as Record<string, unknown>
+    const pkgName = (pkg["name"] as string) ?? `@solidiom/${name}`
+    const version = (pkg["version"] as string) ?? "0.0.1-next.0"
+
+    // Extract dependencies (only @solidiom/* workspace deps)
+    const deps = pkg["dependencies"] as Record<string, string> | undefined
+    const solidiomDeps = deps ? Object.keys(deps).filter((d) => d.startsWith("@solidiom/")) : []
+
+    // Detect capabilities from port interfaces
+    const capabilities = detectCapabilities(sourceDir)
+
+    // Extract runtime modules used
+    const runtimeModules = extractRuntimeModules(sourceDir)
+
+    // Find entry file
+    const entry = sourceFiles.includes("index.tsx")
+      ? "src/index.tsx"
+      : sourceFiles.includes("index.ts")
+        ? "src/index.ts"
+        : `src/${sourceFiles[0]}`
+
+    // Map source files to src/ paths (as they'd appear in the consumer project)
+    const srcFiles = sourceFiles.map((f) => `src/${f}`)
+
+    const manifest: PrimitiveManifest = {
+      name,
+      version,
+      package: pkgName,
+      capabilities,
+      dependencies: solidiomDeps,
+      source: { entry, files: srcFiles },
+      runtime: runtimeModules,
+    }
+
+    primitives.push(manifest)
+  }
+
+  const primitiveNames = new Set(primitives.map((primitive) => primitive.name))
+  for (const registryFile of readdirSync(REGISTRY_DIR)) {
+    if (
+      registryFile === "index.json" ||
+      !registryFile.endsWith(".json") ||
+      primitiveNames.has(registryFile.slice(0, -".json".length))
+    ) {
+      continue
+    }
+    unlinkSync(join(REGISTRY_DIR, registryFile))
+  }
+
+  for (const primitive of primitives) {
+    const manifestPath = join(REGISTRY_DIR, `${primitive.name}.json`)
+    writeFileSync(manifestPath, JSON.stringify(primitive, null, 2) + "\n")
+  }
+
+  // Write index.json
+  const index: IndexManifest = {
+    version: 1,
+    generatedAt: new Date().toISOString(),
+    primitives: primitives
+      .map((p) => {
+        const pkgPath = join(PACKAGES_DIR, p.name, "package.json")
+        const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as Record<string, unknown>
+        const nx = pkg["nx"] as Record<string, unknown> | undefined
+        const metadata = nx?.["metadata"] as Record<string, string> | undefined
+        return {
+          name: p.name,
+          version: p.version,
+          package: p.package,
+          ...(metadata?.label && { label: metadata.label }),
+          ...(metadata?.description && { description: metadata.description }),
+          ...(metadata?.category && { category: metadata.category }),
+        }
+      })
+      .sort((a, b) => a.name.localeCompare(b.name)),
+    adapters: adapterEntries.sort((a, b) => a.name.localeCompare(b.name)),
+  }
+
+  writeFileSync(join(REGISTRY_DIR, "index.json"), JSON.stringify(index, null, 2) + "\n")
+
+  // Summary
+  console.log(`registry-build: generated ${primitives.length} primitive manifests`)
+  console.log(`registry-build: ${adapterEntries.length} adapters cataloged`)
+  console.log(`registry-build: wrote registry/index.json`)
+
+  for (const p of primitives.sort((a, b) => a.name.localeCompare(b.name))) {
+    const caps =
+      p.capabilities.length > 0 ? ` [${p.capabilities.map((c) => c.name).join(", ")}]` : ""
+    console.log(`  ✓ ${p.name}${caps}`)
+  }
+}
+
+buildRegistry()

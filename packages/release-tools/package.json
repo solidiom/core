@@ -1,0 +1,31 @@
+{
+  "name": "@solidiom/release-tools",
+  "version": "0.0.1-next.0",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "description": "CI-only signing pipeline for Solidiom artifacts. Never bundled into @solidiom/cli.",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "nx": {
+    "tags": [
+      "layer:tooling"
+    ]
+  },
+  "devDependencies": {
+    "@sigstore/sign": "^5.0.0",
+    "@sigstore/verify": "4.1.0"
+  }
+}

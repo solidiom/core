@@ -1,0 +1,195 @@
+/**
+ * Phase 3 acceptance-criteria gate — BETA release gate.
+ *
+ * Verifies Phase 3 exit criteria for a public beta release on Solid 2.
+ * This gate validates beta-readiness: accessibility evidence (not full
+ * external audit), Solid 2 beta compatibility, compile-time transforms,
+ * cross-browser coverage, primitive library coverage, and prerelease
+ * metadata.
+ *
+ * Run via: pnpm exec tsx tools/phase3-gate.ts
+ */
+
+import { readdirSync, readFileSync } from "node:fs"
+import { join } from "node:path"
+import {
+  check,
+  summarize,
+  run,
+  runBuild,
+  fileExists,
+  fileContains,
+  readJSON,
+  ROOT,
+} from "./gate-helpers"
+
+console.log("Phase 3 Acceptance Gate (Beta Release)\n")
+
+// ─── §0 Lower gates must pass first ────────────────────────────────────
+console.log("§0 Lower-phase gates:")
+const p0 = run("pnpm exec tsx tools/phase0-gate.ts")
+check("Phase 0 gate passes", p0.ok, "Phase 0 must pass before Phase 3")
+
+const p1 = run("pnpm exec tsx tools/phase1-gate.ts")
+check("Phase 1 gate passes", p1.ok, "Phase 1 must pass before Phase 3")
+
+const p2 = run("pnpm exec tsx tools/phase2-gate.ts")
+check("Phase 2 gate passes", p2.ok, "Phase 2 must pass before Phase 3")
+
+// ─── §1 Beta accessibility evidence ────────────────────────────────────
+console.log("\n§1 Beta accessibility evidence:")
+check("AT verification template exists", fileExists("docs/at-verification-template.md"))
+check(
+  "AT audit results directory exists",
+  fileExists("docs/at-audit-results"),
+  "Create docs/at-audit-results/ for AT records per primitive",
+)
+check(
+  "axe-scan-results.md exists",
+  fileExists("docs/axe-scan-results.md"),
+  "Run axe scans and record results",
+)
+check(
+  "keyboard-audit-results.md exists",
+  fileExists("docs/keyboard-audit-results.md"),
+  "Keyboard navigation audit must be documented",
+)
+
+// ─── §2 Solid 2 beta compatibility ─────────────────────────────────────
+console.log("\n§2 Solid 2 beta compatibility:")
+const rootPkg = readJSON<Record<string, any>>("package.json")
+const solidVersion =
+  rootPkg?.devDependencies?.["solid-js"] ?? rootPkg?.dependencies?.["solid-js"] ?? ""
+check(
+  "solid-js is on a beta version",
+  solidVersion.includes("beta"),
+  `Current: ${solidVersion}. Phase 3 targets Solid 2 beta.`,
+)
+check(
+  "solid matrix file exists",
+  fileExists("tools/solid-matrix.json"),
+  "Solid version compatibility matrix must be defined",
+)
+
+// ─── §3 Compile-time transforms ────────────────────────────────────────
+console.log("\n§3 Compile-time transforms:")
+check("vite plugin source exists", fileExists("packages/vite-plugin-solidiom/src/index.ts"))
+check(
+  "vite plugin implements recipe extraction",
+  fileContains("packages/vite-plugin-solidiom/src/index.ts", "recipeExtraction") ||
+    fileContains("packages/vite-plugin-solidiom/src/index.ts", "extractRecipes"),
+  "Plugin must implement static recipe extraction",
+)
+check(
+  "vite plugin implements dead-part elimination",
+  fileContains("packages/vite-plugin-solidiom/src/index.ts", "deadPart") ||
+    fileContains("packages/vite-plugin-solidiom/src/index.ts", "eliminateDeadParts"),
+  "Plugin must implement dead-part elimination",
+)
+
+// ─── §4 Cross-browser ──────────────────────────────────────────────────
+console.log("\n§4 Cross-browser:")
+check("cross-browser vitest config exists", fileExists("tools/test/vitest.cross-browser.config.ts"))
+check(
+  "cross-browser results exist",
+  fileExists("docs/cross-browser-results.md") ||
+    fileExists("tools/test/cross-browser-results.json"),
+  "Tri-browser test results must be recorded",
+)
+
+// ─── §5 Public primitive coverage ──────────────────────────────────────
+console.log("\n§5 Public primitive coverage:")
+const registry = readJSON<{ primitives?: unknown[] }>("registry/index.json")
+const registryCount = Array.isArray(registry?.primitives) ? registry.primitives.length : 0
+check(
+  `registry has >= 30 primitives (found ${registryCount})`,
+  registryCount >= 30,
+  "registry/index.json must list at least 30 primitives",
+)
+check("@solidiom/primitives builds", runBuild("@solidiom/primitives"))
+
+const demosIndex = "apps/docs/src/demos/index.ts"
+let demoCount = 0
+if (fileExists(demosIndex)) {
+  try {
+    const raw = readFileSync(join(ROOT, demosIndex), "utf8")
+    // Count entries in the demos record by matching "key: {" patterns
+    demoCount = (raw.match(/^\s+[\w-]+:\s*\{/gm) ?? []).length
+    // Fallback: count component: patterns
+    if (demoCount === 0) {
+      demoCount = (raw.match(/component:/g) ?? []).length
+    }
+  } catch {
+    /* counted as 0 */
+  }
+}
+check(
+  `demos index exists with >= 25 entries (found ${demoCount})`,
+  fileExists(demosIndex) && demoCount >= 25,
+  "apps/docs/src/demos/index.ts must export at least 25 demo entries",
+)
+
+// Primitive completion gate (structural audit — no build/test execution)
+check(
+  "primitive completion policy exists",
+  fileExists("tools/primitive-completion-policy.json"),
+  "Add tools/primitive-completion-policy.json classifying each primitive as recipe or headless-only",
+)
+const completionGate = run("pnpm exec tsx tools/primitive-completion-gate.ts --audit-only")
+if (!completionGate.ok) {
+  console.log("  ⚠ primitive completion gate has failures (non-blocking for beta)")
+  console.log("    Run `pnpm primitive:audit` to see specific issues")
+} else {
+  check("primitive completion gate passes (audit-only)", true)
+}
+
+// ─── §6 Package/source parity ──────────────────────────────────────────
+console.log("\n§6 Package/source parity:")
+check(
+  "package-source-parity test directory exists",
+  fileExists("tests/package-source-parity"),
+  "Create tests/package-source-parity/ with parity checks",
+)
+
+// ─── §7 Prerelease metadata ────────────────────────────────────────────
+console.log("\n§7 Prerelease metadata:")
+const packagesDir = join(ROOT, "packages")
+const pkgDirs = readdirSync(packagesDir, { withFileTypes: true })
+  .filter((d) => d.isDirectory())
+  .map((d) => d.name)
+
+let prereleaseOk = true
+const violations: string[] = []
+
+for (const dir of pkgDirs) {
+  const pkgJson = readJSON<Record<string, any>>(`packages/${dir}/package.json`)
+  if (!pkgJson) continue
+  if (pkgJson.private) continue
+
+  const version: string = pkgJson.version ?? ""
+  const isPrerelease =
+    version.includes("next") || version.includes("beta") || version.startsWith("0.0.")
+  if (!isPrerelease) {
+    prereleaseOk = false
+    violations.push(`${pkgJson.name}@${version}`)
+  }
+}
+
+check(
+  "all public packages have prerelease versions",
+  prereleaseOk,
+  violations.length > 0 ? `Stable versions found: ${violations.slice(0, 5).join(", ")}` : undefined,
+)
+
+// ─── §8 Legacy and migration ───────────────────────────────────────────
+console.log("\n§8 Legacy and migration:")
+check("legacy facade exists", fileExists("legacy/shadcn-solid-dialog/package.json"))
+const legacyPkg = readJSON<Record<string, any>>("legacy/shadcn-solid-dialog/package.json")
+check(
+  "legacy has sunset metadata",
+  !!legacyPkg?.solidiom?.sunset,
+  "Sunset metadata must exist in legacy package.json",
+)
+
+// ─── Summary ────────────────────────────────────────────────────────────
+summarize("Phase 3 Gate (Beta)")

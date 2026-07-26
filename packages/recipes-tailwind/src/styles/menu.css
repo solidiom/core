@@ -1,0 +1,22 @@
+/* @solidiom/recipes-tailwind — Menu */
+@layer components {
+  [data-scope="menu"][data-part="content"] {
+    @apply z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md;
+  }
+
+  [data-scope="menu"][data-part="item"] {
+    @apply relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none;
+  }
+
+  [data-scope="menu"][data-part="item"][data-highlighted] {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  [data-scope="menu"][data-part="item"][data-disabled] {
+    @apply pointer-events-none opacity-50;
+  }
+
+  [data-scope="menu"][data-part="separator"] {
+    @apply -mx-1 my-1 h-px bg-muted;
+  }
+}

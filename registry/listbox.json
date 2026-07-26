@@ -1,0 +1,19 @@
+{
+  "name": "listbox",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/listbox",
+  "capabilities": [],
+  "dependencies": ["@solidiom/runtime"],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": ["src/index.tsx", "src/listbox-context.ts", "src/listbox.tsx"]
+  },
+  "runtime": [
+    "collection/collection",
+    "collection/roving-focus",
+    "collection/typeahead",
+    "dom/stable-id",
+    "events/change-details",
+    "state/controllable-value"
+  ]
+}

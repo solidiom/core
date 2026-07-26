@@ -1,0 +1,48 @@
+/* @solidiom/recipes-css — Badge */
+[data-scope="badge"][data-part="root"] {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border: 1px solid transparent;
+  border-radius: var(--ui-radius, 0.375rem);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+
+[data-scope="badge"][data-part="root"].solidiom-badge--default {
+  background: var(--ui-primary, hsl(222 47% 11%));
+  color: var(--ui-primary-fg, hsl(0 0% 100%));
+}
+
+[data-scope="badge"][data-part="root"].solidiom-badge--default:hover {
+  background: var(--ui-primary-hover, hsl(222 47% 20%));
+}
+
+[data-scope="badge"][data-part="root"].solidiom-badge--secondary {
+  background: var(--ui-secondary, hsl(210 40% 96%));
+  color: var(--ui-secondary-fg, hsl(222 47% 11%));
+}
+
+[data-scope="badge"][data-part="root"].solidiom-badge--secondary:hover {
+  background: var(--ui-secondary-hover, hsl(210 40% 90%));
+}
+
+[data-scope="badge"][data-part="root"].solidiom-badge--destructive {
+  background: var(--ui-destructive, hsl(0 84% 60%));
+  color: var(--ui-destructive-fg, hsl(0 0% 100%));
+}
+
+[data-scope="badge"][data-part="root"].solidiom-badge--destructive:hover {
+  background: var(--ui-destructive-hover, hsl(0 84% 50%));
+}
+
+[data-scope="badge"][data-part="root"].solidiom-badge--outline {
+  color: var(--ui-foreground, hsl(222 47% 11%));
+  border-color: var(--ui-border, hsl(214 32% 91%));
+  background: transparent;
+}

@@ -1,0 +1,18 @@
+{
+  "name": "tabs",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/tabs",
+  "capabilities": [],
+  "dependencies": ["@solidiom/runtime"],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": ["src/index.tsx", "src/tabs-context.ts", "src/tabs.tsx"]
+  },
+  "runtime": [
+    "collection/collection",
+    "collection/roving-focus",
+    "dom/stable-id",
+    "events/change-details",
+    "state/controllable-value"
+  ]
+}

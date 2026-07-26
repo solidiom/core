@@ -1,0 +1,86 @@
+/**
+ * Throughput harness — mitata-compatible microbenchmark runner.
+ *
+ * Wraps mitata's bench/run API with Solidiom-specific reporting format.
+ * Measures ops/sec for pure logic (state transitions, collection ops, etc.).
+ */
+
+/** A throughput benchmark definition. */
+export interface ThroughputBenchmark {
+  /** Name of the benchmark. */
+  name: string
+  /** The function to benchmark. */
+  fn: () => void | Promise<void>
+  /** Optional setup function called once before iterations. */
+  setup?: () => void | Promise<void>
+  /** Optional teardown function called once after all iterations. */
+  teardown?: () => void | Promise<void>
+}
+
+/** Result of a throughput benchmark run. */
+export interface ThroughputResult {
+  name: string
+  opsPerSecond: number
+  avgNs: number
+  samples: number
+  timestamp: string
+}
+
+/** Configuration for the throughput harness. */
+export interface ThroughputHarnessConfig {
+  /** Minimum sample time in ms. Default: 500. */
+  minTime: number
+  /** Maximum iterations. Default: 1_000_000. */
+  maxIterations: number
+}
+
+/**
+ * Creates a throughput harness configuration with defaults.
+ */
+export function createThroughputHarness(
+  overrides: Partial<ThroughputHarnessConfig> = {},
+): ThroughputHarnessConfig {
+  return {
+    minTime: 500,
+    maxIterations: 1_000_000,
+    ...overrides,
+  }
+}
+
+/**
+ * Runs a simple synchronous benchmark and returns the result.
+ *
+ * This is a minimal built-in runner. For production benchmarks,
+ * use mitata directly with this harness providing the config/reporting layer.
+ */
+export function runSimpleBench(
+  benchmark: ThroughputBenchmark,
+  config: ThroughputHarnessConfig = createThroughputHarness(),
+): ThroughputResult {
+  const { minTime, maxIterations } = config
+
+  // Warmup
+  for (let i = 0; i < 10; i++) benchmark.fn()
+
+  // Measure
+  let iterations = 0
+  const startTime = performance.now()
+  const deadline = startTime + minTime
+
+  while (performance.now() < deadline && iterations < maxIterations) {
+    benchmark.fn()
+    iterations++
+  }
+
+  const elapsed = performance.now() - startTime
+  const avgNs = (elapsed * 1_000_000) / iterations
+  const opsPerSecond = Math.round((iterations / elapsed) * 1000)
+
+  return {
+    name: benchmark.name,
+    opsPerSecond,
+    avgNs: Math.round(avgNs * 100) / 100,
+    samples: iterations,
+    timestamp: new Date().toISOString(),
+  }
+}

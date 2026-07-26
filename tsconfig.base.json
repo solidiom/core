@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": false,
+    "jsx": "preserve",
+    "jsxImportSource": "@solidjs/web",
+    "paths": {
+      "@solidiom/runtime": ["./packages/runtime/src/index.ts"],
+      "@solidiom/runtime/*": ["./packages/runtime/src/*"],
+      "@solidiom/test-doubles": ["./packages/test-doubles/src/index.ts"],
+      "@solidiom/bench": ["./packages/bench/src/index.ts"],
+      "@solidiom/eslint-plugin-solidiom": ["./packages/eslint-plugin-solidiom/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "source"]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "calendar",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/calendar",
+  "capabilities": [
+    {
+      "name": "date-math",
+      "version": 1,
+      "default": "@solidiom/adapter-date-internationalized"
+    }
+  ],
+  "dependencies": ["@solidiom/runtime"],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": ["src/calendar-context.ts", "src/calendar.tsx", "src/index.tsx"]
+  },
+  "runtime": ["state/controllable-value"]
+}

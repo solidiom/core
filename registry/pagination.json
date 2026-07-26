@@ -1,0 +1,12 @@
+{
+  "name": "pagination",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/pagination",
+  "capabilities": [],
+  "dependencies": ["@solidiom/runtime"],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": ["src/index.tsx"]
+  },
+  "runtime": []
+}

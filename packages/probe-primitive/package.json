@@ -1,0 +1,36 @@
+{
+  "name": "@solidiom/probe-primitive",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "solid": "./source/index.tsx",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "source"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@solidiom/runtime": "workspace:*"
+  },
+  "peerDependencies": {
+    "solid-js": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "layer:primitive"
+    ]
+  }
+}

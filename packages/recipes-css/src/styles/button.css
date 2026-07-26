@@ -1,0 +1,27 @@
+/* @solidiom/recipes-css — Button */
+[data-scope="button"][data-part="root"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--ui-radius, 0.375rem);
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  background: var(--ui-primary, hsl(222 47% 11%));
+  color: var(--ui-primary-fg, hsl(0 0% 100%));
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+[data-scope="button"][data-part="root"]:hover {
+  opacity: 0.9;
+}
+
+[data-scope="button"][data-part="root"][data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

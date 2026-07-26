@@ -1,0 +1,23 @@
+{
+  "name": "popover",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/popover",
+  "capabilities": [
+    {
+      "name": "positioning",
+      "version": 1,
+      "default": "@solidiom/adapter-positioning-floating-ui"
+    }
+  ],
+  "dependencies": ["@solidiom/runtime"],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": ["src/index.tsx", "src/popover-context.ts", "src/popover.tsx"]
+  },
+  "runtime": [
+    "dom/stable-id",
+    "events/change-details",
+    "presence/presence",
+    "state/disclosure-state"
+  ]
+}

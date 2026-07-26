@@ -1,0 +1,19 @@
+/* @solidiom/recipes-tailwind — Checkbox */
+@layer components {
+  [data-scope="checkbox"][data-part="root"] {
+    @apply inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border border-primary transition-colors;
+  }
+
+  [data-scope="checkbox"][data-part="root"][data-state="checked"],
+  [data-scope="checkbox"][data-part="root"][data-state="indeterminate"] {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  [data-scope="checkbox"][data-part="root"][data-disabled] {
+    @apply pointer-events-none opacity-50;
+  }
+
+  [data-scope="checkbox"][data-part="indicator"] {
+    @apply flex items-center justify-center text-current;
+  }
+}

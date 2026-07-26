@@ -1,0 +1,16 @@
+/* @solidiom/recipes-tailwind — All primitives combined stylesheet */
+@import "./button.css";
+@import "./checkbox.css";
+@import "./switch.css";
+@import "./dialog.css";
+@import "./select.css";
+@import "./tabs.css";
+@import "./accordion.css";
+@import "./popover.css";
+@import "./tooltip.css";
+@import "./menu.css";
+@import "./toast.css";
+@import "./badge.css";
+@import "./alert.css";
+@import "./typeset.css";
+@import "./prose.css";

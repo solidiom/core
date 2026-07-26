@@ -1,0 +1,50 @@
+/* @solidiom/recipes-css — Alert */
+[data-scope="alert"][data-part="root"] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  border: 1px solid var(--ui-border, hsl(214 32% 91%));
+  border-radius: var(--ui-radius, 0.5rem);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+[data-scope="alert"][data-part="root"].solidiom-alert--info {
+  background: var(--ui-info-bg, hsl(214 95% 97%));
+  border-color: var(--ui-info-border, hsl(214 80% 80%));
+  color: var(--ui-info-fg, hsl(214 80% 30%));
+}
+
+[data-scope="alert"][data-part="root"].solidiom-alert--success {
+  background: var(--ui-success-bg, hsl(142 76% 96%));
+  border-color: var(--ui-success-border, hsl(142 60% 70%));
+  color: var(--ui-success-fg, hsl(142 60% 25%));
+}
+
+[data-scope="alert"][data-part="root"].solidiom-alert--warning {
+  background: var(--ui-warning-bg, hsl(48 96% 96%));
+  border-color: var(--ui-warning-border, hsl(48 80% 68%));
+  color: var(--ui-warning-fg, hsl(48 80% 25%));
+}
+
+[data-scope="alert"][data-part="root"].solidiom-alert--error {
+  background: var(--ui-error-bg, hsl(0 86% 97%));
+  border-color: var(--ui-error-border, hsl(0 70% 75%));
+  color: var(--ui-error-fg, hsl(0 70% 30%));
+}
+
+[data-scope="alert"][data-part="title"] {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+[data-scope="alert"][data-part="description"] {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
