@@ -9,10 +9,16 @@
       "default": "@solidiom/adapter-positioning-floating-ui"
     }
   ],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
-    "files": ["src/index.tsx", "src/tooltip-context.ts", "src/tooltip.tsx"]
+    "files": [
+      "src/index.tsx",
+      "src/tooltip-context.ts",
+      "src/tooltip.tsx"
+    ]
   },
   "runtime": [
     "dom/stable-id",

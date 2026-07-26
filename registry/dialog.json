@@ -3,10 +3,16 @@
   "version": "0.0.1-next.0",
   "package": "@solidiom/dialog",
   "capabilities": [],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
-    "files": ["src/dialog-context.ts", "src/dialog.tsx", "src/index.tsx"]
+    "files": [
+      "src/dialog-context.ts",
+      "src/dialog.tsx",
+      "src/index.tsx"
+    ]
   },
   "runtime": [
     "dom/stable-id",

@@ -1,7 +1,7 @@
 {
-  "name": "field",
+  "name": "skeleton",
   "version": "0.0.1-next.0",
-  "package": "@solidiom/field",
+  "package": "@solidiom/skeleton",
   "capabilities": [],
   "dependencies": [
     "@solidiom/runtime"
@@ -12,7 +12,5 @@
       "src/index.tsx"
     ]
   },
-  "runtime": [
-    "form/form-control"
-  ]
+  "runtime": []
 }

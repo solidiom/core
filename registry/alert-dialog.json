@@ -1,7 +1,7 @@
 {
-  "name": "field",
+  "name": "alert-dialog",
   "version": "0.0.1-next.0",
-  "package": "@solidiom/field",
+  "package": "@solidiom/alert-dialog",
   "capabilities": [],
   "dependencies": [
     "@solidiom/runtime"
@@ -13,6 +13,8 @@
     ]
   },
   "runtime": [
-    "form/form-control"
+    "dom/stable-id",
+    "presence/presence",
+    "state/disclosure-state"
   ]
 }

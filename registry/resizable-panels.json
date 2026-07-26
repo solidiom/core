@@ -3,10 +3,20 @@
   "version": "0.0.1-next.0",
   "package": "@solidiom/resizable-panels",
   "capabilities": [],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
-    "files": ["src/index.tsx", "src/panels-context.ts", "src/panels.tsx"]
+    "files": [
+      "src/index.tsx",
+      "src/panels-context.ts",
+      "src/panels.tsx"
+    ]
   },
-  "runtime": ["dom/stable-id", "events/change-details", "state/controllable-value"]
+  "runtime": [
+    "dom/stable-id",
+    "events/change-details",
+    "state/controllable-value"
+  ]
 }

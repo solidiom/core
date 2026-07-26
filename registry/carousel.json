@@ -9,10 +9,18 @@
       "default": "@solidiom/adapter-carousel-embla"
     }
   ],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
-    "files": ["src/carousel-context.ts", "src/carousel.tsx", "src/index.tsx"]
+    "files": [
+      "src/carousel-context.ts",
+      "src/carousel.tsx",
+      "src/index.tsx"
+    ]
   },
-  "runtime": ["state/controllable-value"]
+  "runtime": [
+    "state/controllable-value"
+  ]
 }

@@ -3,10 +3,16 @@
   "version": "0.0.1-next.0",
   "package": "@solidiom/menu",
   "capabilities": [],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
-    "files": ["src/index.tsx", "src/menu-context.ts", "src/menu.tsx"]
+    "files": [
+      "src/index.tsx",
+      "src/menu-context.ts",
+      "src/menu.tsx"
+    ]
   },
   "runtime": [
     "collection/collection",

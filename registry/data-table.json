@@ -3,10 +3,20 @@
   "version": "0.0.1-next.0",
   "package": "@solidiom/data-table",
   "capabilities": [],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
-    "files": ["src/data-table-context.ts", "src/data-table.tsx", "src/index.tsx"]
+    "files": [
+      "src/data-table-context.ts",
+      "src/data-table.tsx",
+      "src/index.tsx"
+    ]
   },
-  "runtime": ["dom/stable-id", "events/change-details", "state/controllable-value"]
+  "runtime": [
+    "dom/stable-id",
+    "events/change-details",
+    "state/controllable-value"
+  ]
 }

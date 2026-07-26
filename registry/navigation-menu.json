@@ -9,10 +9,15 @@
       "default": "@solidiom/adapter-positioning-floating-ui"
     }
   ],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
-    "files": ["src/index.tsx", "src/navigation-menu-context.ts"]
+    "files": [
+      "src/index.tsx",
+      "src/navigation-menu-context.ts"
+    ]
   },
   "runtime": [
     "collection/collection",
