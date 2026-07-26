@@ -8,9 +8,7 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
-  "devDependencies": {
-    "typescript": "catalog:"
-  },
+  "devDependencies": {},
   "nx": {
     "tags": ["layer:migration"]
   }

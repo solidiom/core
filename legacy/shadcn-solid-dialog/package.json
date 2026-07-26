@@ -1,0 +1,39 @@
+{
+  "name": "@solidiom/legacy-shadcn-solid-dialog",
+  "version": "0.0.1-next.0",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "description": "Legacy facade: re-exports @solidiom/dialog using shadcn-solid naming conventions. Deprecated — migrate to @solidiom/dialog directly.",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@solidiom/dialog": "workspace:*"
+  },
+  "peerDependencies": {
+    "solid-js": "catalog:"
+  },
+  "nx": {
+    "tags": ["layer:legacy"]
+  },
+  "solidiom": {
+    "sunset": {
+      "replacementPackage": "@solidiom/dialog",
+      "deprecationIntent": "This package exists only as a migration bridge from shadcn-solid Dialog. New code should use @solidiom/dialog directly.",
+      "removalPolicy": "Will be removed in the first stable release after the GA migration window closes. No fixed date before the release policy permits one.",
+      "migrationCommand": "npx tsx migrations/shadcn-solid-dialog/transform.ts"
+    }
+  }
+}
