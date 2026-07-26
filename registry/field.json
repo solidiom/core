@@ -1,0 +1,12 @@
+{
+  "name": "field",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/field",
+  "capabilities": [],
+  "dependencies": ["@solidiom/runtime"],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": ["src/index.tsx"]
+  },
+  "runtime": ["form/form-control"]
+}

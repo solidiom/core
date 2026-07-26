@@ -1,0 +1,36 @@
+/* @solidiom/recipes-css — Switch */
+[data-scope="switch"][data-part="root"] {
+  display: inline-flex;
+  align-items: center;
+  width: 2.75rem;
+  height: 1.5rem;
+  padding: 0.125rem;
+  border-radius: 9999px;
+  border: none;
+  background: var(--ui-muted, hsl(0 0% 90%));
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+[data-scope="switch"][data-part="root"][data-state="on"] {
+  background: var(--ui-primary, hsl(222 47% 11%));
+}
+
+[data-scope="switch"][data-part="root"][data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[data-scope="switch"][data-part="thumb"] {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background: var(--ui-surface, hsl(0 0% 100%));
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  transition: transform 0.2s;
+}
+
+[data-scope="switch"][data-part="root"][data-state="on"] [data-scope="switch"][data-part="thumb"] {
+  transform: translateX(1.25rem);
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@solidiom/astrojs-solid-next",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client.js": "./src/client.ts",
+    "./server.js": "./src/server.ts",
+    "./container-renderer": "./src/container-renderer.ts"
+  },
+  "dependencies": {
+    "vite-plugin-solid": "3.0.0-next.15"
+  },
+  "peerDependencies": {
+    "solid-js": "2.0.0-beta.22",
+    "@solidjs/web": "2.0.0-beta.22"
+  },
+  "devDependencies": {
+    "astro": "^7.1.0",
+    "solid-js": "2.0.0-beta.22",
+    "@solidjs/web": "2.0.0-beta.22",
+    "vite": "^8.1.5",
+    "typescript": "~6.0.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

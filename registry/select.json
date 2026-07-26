@@ -1,0 +1,20 @@
+{
+  "name": "select",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/select",
+  "capabilities": [],
+  "dependencies": ["@solidiom/runtime"],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": ["src/index.tsx", "src/select-context.ts", "src/select.tsx"]
+  },
+  "runtime": [
+    "collection/collection",
+    "collection/roving-focus",
+    "collection/typeahead",
+    "dom/stable-id",
+    "events/change-details",
+    "state/controllable-value",
+    "state/disclosure-state"
+  ]
+}

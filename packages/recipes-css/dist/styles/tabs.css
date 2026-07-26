@@ -1,0 +1,38 @@
+/* @solidiom/recipes-css — Tabs */
+[data-scope="tabs"][data-part="list"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid var(--ui-border, hsl(0 0% 90%));
+}
+
+[data-scope="tabs"][data-part="trigger"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  color: var(--ui-muted-fg, hsl(0 0% 45%));
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+
+[data-scope="tabs"][data-part="trigger"][data-state="active"] {
+  color: var(--ui-fg, hsl(0 0% 4%));
+  border-bottom-color: var(--ui-primary, hsl(222 47% 11%));
+}
+
+[data-scope="tabs"][data-part="trigger"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[data-scope="tabs"][data-part="content"] {
+  padding: 1rem 0;
+}

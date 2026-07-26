@@ -1,0 +1,101 @@
+/* @solidiom/recipes-css — Typeset (granular scale) */
+
+[data-scope="typeset"][data-part="heading-1"] {
+  scroll-margin-top: 5rem;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--ui-fg, hsl(222 47% 11%));
+  font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
+}
+
+[data-scope="typeset"][data-part="heading-2"] {
+  scroll-margin-top: 5rem;
+  font-size: 1.875rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  border-bottom: 1px solid var(--ui-border, hsl(214 32% 91%));
+  padding-bottom: 0.5rem;
+  color: var(--ui-fg, hsl(222 47% 11%));
+  font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
+}
+
+[data-scope="typeset"][data-part="heading-3"] {
+  scroll-margin-top: 5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.3;
+  color: var(--ui-fg, hsl(222 47% 11%));
+  font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
+}
+
+[data-scope="typeset"][data-part="heading-4"] {
+  scroll-margin-top: 5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+  color: var(--ui-fg, hsl(222 47% 11%));
+  font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
+}
+
+[data-scope="typeset"][data-part="paragraph"] {
+  line-height: 1.75;
+  color: var(--ui-fg, hsl(222 47% 11%));
+  font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
+}
+
+[data-scope="typeset"][data-part="paragraph"]:not(:first-child) {
+  margin-top: 1.5rem;
+}
+
+[data-scope="typeset"][data-part="lead"] {
+  font-size: 1.25rem;
+  line-height: 1.75;
+  color: var(--ui-muted-fg, hsl(215 16% 47%));
+  font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
+}
+
+[data-scope="typeset"][data-part="large"] {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ui-fg, hsl(222 47% 11%));
+  font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
+}
+
+[data-scope="typeset"][data-part="small"] {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--ui-fg, hsl(222 47% 11%));
+  font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
+}
+
+[data-scope="typeset"][data-part="muted"] {
+  font-size: 0.875rem;
+  color: var(--ui-muted-fg, hsl(215 16% 47%));
+  font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
+}
+
+[data-scope="typeset"][data-part="blockquote"] {
+  margin-top: 1.5rem;
+  border-left: 2px solid var(--ui-border, hsl(214 32% 91%));
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: var(--ui-fg, hsl(222 47% 11%));
+  font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
+}
+
+[data-scope="typeset"][data-part="inline-code"] {
+  position: relative;
+  border-radius: 0.25rem;
+  background: var(--ui-muted, hsl(210 40% 96%));
+  padding: 0.2rem 0.3rem;
+  font-family: var(--ui-font-mono, ui-monospace, SFMono-Regular, monospace);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ui-fg, hsl(222 47% 11%));
+}

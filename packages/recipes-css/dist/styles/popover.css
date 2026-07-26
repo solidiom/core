@@ -1,0 +1,37 @@
+/* @solidiom/recipes-css — Popover */
+[data-scope="popover"][data-part="trigger"] {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+[data-scope="popover"][data-part="content"] {
+  z-index: 50;
+  width: 18rem;
+  border-radius: var(--ui-radius, 0.5rem);
+  border: 1px solid var(--ui-border, hsl(0 0% 90%));
+  background: var(--ui-surface, hsl(0 0% 100%));
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+[data-scope="popover"][data-part="close"] {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+[data-scope="popover"][data-part="close"]:hover {
+  background: var(--ui-accent, hsl(0 0% 95%));
+}

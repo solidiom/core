@@ -1,0 +1,44 @@
+{
+  "name": "@solidiom/visually-hidden",
+  "version": "0.0.1-next.0",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "solid": "./source/index.tsx",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "source",
+    "src",
+    "!src/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@solidjs/web": ">=2.0.0-beta",
+    "solid-js": "catalog:"
+  },
+  "dependencies": {
+    "@solidiom/runtime": "workspace:*"
+  },
+  "nx": {
+    "tags": [
+      "layer:primitive"
+    ],
+    "metadata": {
+      "label": "Visually Hidden",
+      "description": "Hides content visually while keeping it accessible to screen readers.",
+      "category": "layout"
+    }
+  }
+}

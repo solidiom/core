@@ -1,0 +1,69 @@
+{
+  "name": "@solidiom/recipes-tailwind",
+  "version": "0.0.1-next.0",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "solid": "./source/index.ts",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/styles/index.css",
+    "./styles/dialog.css": "./dist/styles/dialog.css",
+    "./styles/button.css": "./dist/styles/button.css",
+    "./styles/checkbox.css": "./dist/styles/checkbox.css",
+    "./styles/switch.css": "./dist/styles/switch.css",
+    "./styles/tabs.css": "./dist/styles/tabs.css",
+    "./styles/accordion.css": "./dist/styles/accordion.css",
+    "./styles/popover.css": "./dist/styles/popover.css",
+    "./styles/tooltip.css": "./dist/styles/tooltip.css",
+    "./styles/menu.css": "./dist/styles/menu.css",
+    "./styles/toast.css": "./dist/styles/toast.css",
+    "./styles/select.css": "./dist/styles/select.css",
+    "./styles/badge.css": "./dist/styles/badge.css",
+    "./styles/alert.css": "./dist/styles/alert.css",
+    "./styles/typeset.css": "./dist/styles/typeset.css",
+    "./styles/prose.css": "./dist/styles/prose.css"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "source",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@solidjs/web": ">=2.0.0-beta",
+    "solid-js": "catalog:",
+    "tailwindcss": ">=3.0.0"
+  },
+  "dependencies": {
+    "@solidiom/accordion": "workspace:*",
+    "@solidiom/badge": "workspace:*",
+    "@solidiom/alert": "workspace:*",
+    "@solidiom/button": "workspace:*",
+    "@solidiom/checkbox": "workspace:*",
+    "@solidiom/dialog": "workspace:*",
+    "@solidiom/menu": "workspace:*",
+    "@solidiom/popover": "workspace:*",
+    "@solidiom/runtime": "workspace:*",
+    "@solidiom/select": "workspace:*",
+    "@solidiom/switch": "workspace:*",
+    "@solidiom/tabs": "workspace:*",
+    "@solidiom/toast": "workspace:*",
+    "@solidiom/tooltip": "workspace:*",
+    "class-variance-authority": "^0.7.1"
+  },
+  "nx": {
+    "tags": [
+      "layer:recipe"
+    ]
+  }
+}

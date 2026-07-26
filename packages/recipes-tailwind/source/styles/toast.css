@@ -1,0 +1,22 @@
+/* @solidiom/recipes-tailwind — Toast */
+@layer components {
+  [data-scope="toast"][data-part="region"] {
+    @apply fixed bottom-4 right-4 z-[100] flex max-w-[24rem] flex-col gap-2;
+  }
+
+  [data-scope="toast"][data-part="root"] {
+    @apply flex items-start gap-3 rounded-lg border bg-background p-4 shadow-lg;
+  }
+
+  [data-scope="toast"][data-part="title"] {
+    @apply text-sm font-semibold;
+  }
+
+  [data-scope="toast"][data-part="description"] {
+    @apply text-sm text-muted-foreground;
+  }
+
+  [data-scope="toast"][data-part="close"] {
+    @apply ml-auto inline-flex h-5 w-5 items-center justify-center rounded-sm border-none bg-transparent text-foreground/50 hover:text-foreground;
+  }
+}

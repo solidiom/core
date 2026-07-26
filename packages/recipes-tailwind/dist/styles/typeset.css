@@ -1,0 +1,50 @@
+/* @solidiom/recipes-tailwind — Typeset (granular scale, data-attribute form) */
+@layer components {
+  [data-scope="typeset"][data-part="heading-1"] {
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+  }
+
+  [data-scope="typeset"][data-part="heading-2"] {
+    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight;
+  }
+
+  [data-scope="typeset"][data-part="heading-3"] {
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+  }
+
+  [data-scope="typeset"][data-part="heading-4"] {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+  }
+
+  [data-scope="typeset"][data-part="paragraph"] {
+    @apply leading-7;
+  }
+
+  [data-scope="typeset"][data-part="paragraph"]:not(:first-child) {
+    @apply mt-6;
+  }
+
+  [data-scope="typeset"][data-part="lead"] {
+    @apply text-xl text-muted-foreground;
+  }
+
+  [data-scope="typeset"][data-part="large"] {
+    @apply text-lg font-semibold;
+  }
+
+  [data-scope="typeset"][data-part="small"] {
+    @apply text-sm font-medium leading-none;
+  }
+
+  [data-scope="typeset"][data-part="muted"] {
+    @apply text-sm text-muted-foreground;
+  }
+
+  [data-scope="typeset"][data-part="blockquote"] {
+    @apply mt-6 border-l-2 pl-6 italic;
+  }
+
+  [data-scope="typeset"][data-part="inline-code"] {
+    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+  }
+}

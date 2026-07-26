@@ -1,0 +1,70 @@
+{
+  "name": "@solidiom/docs",
+  "version": "0.0.1-next.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@solidiom/accordion": "workspace:*",
+    "@solidiom/alert": "workspace:*",
+    "@solidiom/badge": "workspace:*",
+    "@solidiom/bench": "workspace:*",
+    "@solidiom/button": "workspace:*",
+    "@solidiom/calendar": "workspace:*",
+    "@solidiom/carousel": "workspace:*",
+    "@solidiom/checkbox": "workspace:*",
+    "@solidiom/collapsible": "workspace:*",
+    "@solidiom/combobox": "workspace:*",
+    "@solidiom/command-palette": "workspace:*",
+    "@solidiom/data-table": "workspace:*",
+    "@solidiom/date-picker": "workspace:*",
+    "@solidiom/dialog": "workspace:*",
+    "@solidiom/drawer": "workspace:*",
+    "@solidiom/field": "workspace:*",
+    "@solidiom/input-otp": "workspace:*",
+    "@solidiom/label": "workspace:*",
+    "@solidiom/listbox": "workspace:*",
+    "@solidiom/menu": "workspace:*",
+    "@solidiom/navigation-menu": "workspace:*",
+    "@solidiom/meter": "workspace:*",
+    "@solidiom/pagination": "workspace:*",
+    "@solidiom/popover": "workspace:*",
+    "@solidiom/progress": "workspace:*",
+    "@solidiom/radio-group": "workspace:*",
+    "@solidiom/recipes-tailwind": "workspace:*",
+    "@solidiom/resizable-panels": "workspace:*",
+    "@solidiom/runtime": "workspace:*",
+    "@solidiom/scroll-area": "workspace:*",
+    "@solidiom/select": "workspace:*",
+    "@solidiom/separator": "workspace:*",
+    "@solidiom/slider": "workspace:*",
+    "@solidiom/switch": "workspace:*",
+    "@solidiom/tabs": "workspace:*",
+    "@solidiom/toast": "workspace:*",
+    "@solidiom/toggle": "workspace:*",
+    "@solidiom/toggle-group": "workspace:*",
+    "@solidiom/tooltip": "workspace:*",
+    "@solidiom/tree": "workspace:*",
+    "@solidiom/virtual-list": "workspace:*",
+    "@solidiom/visually-hidden": "workspace:*",
+    "@solidjs/router": "0.17.0-next.5",
+    "@solidjs/web": "2.0.0-beta.21",
+    "shiki": "^1.29.2",
+    "solid-js": "2.0.0-beta.21"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.1.5",
+    "vite-plugin-solid": "3.0.0-next.14"
+  },
+  "nx": {
+    "tags": [
+      "layer:app"
+    ]
+  }
+}

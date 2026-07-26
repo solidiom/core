@@ -1,0 +1,18 @@
+{
+  "name": "combobox",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/combobox",
+  "capabilities": [],
+  "dependencies": ["@solidiom/runtime"],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": ["src/combobox-context.ts", "src/combobox.tsx", "src/index.tsx"]
+  },
+  "runtime": [
+    "collection/collection",
+    "dom/stable-id",
+    "events/change-details",
+    "state/controllable-value",
+    "state/disclosure-state"
+  ]
+}

@@ -1,0 +1,27 @@
+packages:
+  - "packages/*"
+  - "apps/*"
+  - "registry/*"
+  - "migrations/*"
+  - "legacy/*"
+  - "tests/*"
+  - "tools/*"
+
+catalog:
+  solid-js: "^2.0.0-beta.21"
+  "@solidjs/web": "^2.0.0-beta.21"
+  babel-preset-solid: "^2.0.0-beta.21"
+
+overrides:
+  solid-js: "2.0.0-beta.21"
+  babel-preset-solid: "2.0.0-beta.21"
+
+peerDependencyRules:
+  allowAny:
+    - "solid-js"
+    - "@solidjs/web"
+    - "babel-preset-solid"
+
+onlyBuiltDependencies:
+  - "esbuild"
+  - "nx"

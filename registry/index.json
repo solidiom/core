@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-24T04:18:27.257Z",
+  "primitives": [
+    {
+      "name": "accordion",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/accordion",
+      "label": "Accordion",
+      "description": "Vertically stacked set of collapsible sections.",
+      "category": "layout"
+    },
+    {
+      "name": "alert",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/alert",
+      "label": "Alert",
+      "description": "Inline, non-modal alert for status messages with live region semantics.",
+      "category": "feedback"
+    },
+    {
+      "name": "badge",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/badge",
+      "label": "Badge",
+      "description": "Inline status or label indicator.",
+      "category": "feedback"
+    },
+    {
+      "name": "button",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/button",
+      "label": "Button",
+      "description": "Clickable trigger for actions.",
+      "category": "input"
+    },
+    {
+      "name": "calendar",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/calendar",
+      "label": "Calendar",
+      "description": "Date selection with day/month/year views.",
+      "category": "input"
+    },
+    {
+      "name": "carousel",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/carousel",
+      "label": "Carousel",
+      "description": "Horizontal slide-based content viewer.",
+      "category": "layout"
+    },
+    {
+      "name": "checkbox",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/checkbox",
+      "label": "Checkbox",
+      "description": "Binary or indeterminate toggle control.",
+      "category": "input"
+    },
+    {
+      "name": "collapsible",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/collapsible",
+      "label": "Collapsible",
+      "description": "Single expandable/collapsible section.",
+      "category": "layout"
+    },
+    {
+      "name": "combobox",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/combobox",
+      "label": "Combobox",
+      "description": "Text input with autocomplete dropdown.",
+      "category": "input"
+    },
+    {
+      "name": "command-palette",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/command-palette",
+      "label": "Command Palette",
+      "description": "Modal search and action launcher.",
+      "category": "navigation"
+    },
+    {
+      "name": "data-table",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/data-table",
+      "label": "Data Table",
+      "description": "Sortable, selectable table with column control.",
+      "category": "layout"
+    },
+    {
+      "name": "date-picker",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/date-picker",
+      "label": "Date Picker",
+      "description": "Calendar popup for selecting dates.",
+      "category": "input"
+    },
+    {
+      "name": "dialog",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/dialog",
+      "label": "Dialog",
+      "description": "Modal or non-modal overlay window.",
+      "category": "overlay"
+    },
+    {
+      "name": "drawer",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/drawer",
+      "label": "Drawer",
+      "description": "Slide-in panel from any screen edge.",
+      "category": "overlay"
+    },
+    {
+      "name": "field",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/field",
+      "label": "Field",
+      "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
+      "category": "input"
+    },
+    {
+      "name": "input-otp",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/input-otp",
+      "label": "Input OTP",
+      "description": "A one-time password input with individual character slots.",
+      "category": "input"
+    },
+    {
+      "name": "label",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/label",
+      "label": "Label",
+      "description": "Accessible label element linked to form controls via htmlFor.",
+      "category": "input"
+    },
+    {
+      "name": "listbox",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/listbox",
+      "label": "Listbox",
+      "description": "Single or multi-select list of options.",
+      "category": "input"
+    },
+    {
+      "name": "menu",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/menu",
+      "label": "Menu",
+      "description": "Action list triggered by a button.",
+      "category": "navigation"
+    },
+    {
+      "name": "meter",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/meter",
+      "label": "Meter",
+      "description": "Scalar measurement within a known range (e.g. disk usage, signal strength).",
+      "category": "feedback"
+    },
+    {
+      "name": "navigation-menu",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/navigation-menu",
+      "label": "Navigation Menu",
+      "description": "A top-level navigation component with accessible dropdown sub-menus.",
+      "category": "navigation"
+    },
+    {
+      "name": "pagination",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/pagination",
+      "label": "Pagination",
+      "description": "Page navigation with prev/next and page numbers.",
+      "category": "navigation"
+    },
+    {
+      "name": "popover",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/popover",
+      "label": "Popover",
+      "description": "Non-modal floating content panel.",
+      "category": "overlay"
+    },
+    {
+      "name": "progress",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/progress",
+      "label": "Progress",
+      "description": "Determinate and indeterminate progress indicator.",
+      "category": "feedback"
+    },
+    {
+      "name": "radio-group",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/radio-group",
+      "label": "Radio Group",
+      "description": "Single-select radio button set with keyboard navigation.",
+      "category": "input"
+    },
+    {
+      "name": "resizable-panels",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/resizable-panels",
+      "label": "Resizable Panels",
+      "description": "Drag-to-resize panel layout.",
+      "category": "layout"
+    },
+    {
+      "name": "scroll-area",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/scroll-area",
+      "label": "Scroll Area",
+      "description": "Custom-styled scrollbar with native scrolling performance.",
+      "category": "layout"
+    },
+    {
+      "name": "select",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/select",
+      "label": "Select",
+      "description": "Dropdown selection from a list of options.",
+      "category": "input"
+    },
+    {
+      "name": "separator",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/separator",
+      "label": "Separator",
+      "description": "Horizontal or vertical visual divider.",
+      "category": "layout"
+    },
+    {
+      "name": "slider",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/slider",
+      "label": "Slider",
+      "description": "Numeric range input with thumb control.",
+      "category": "input"
+    },
+    {
+      "name": "switch",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/switch",
+      "label": "Switch",
+      "description": "Binary toggle with on/off semantics.",
+      "category": "input"
+    },
+    {
+      "name": "tabs",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/tabs",
+      "label": "Tabs",
+      "description": "Tabbed content switcher.",
+      "category": "navigation"
+    },
+    {
+      "name": "toast",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/toast",
+      "label": "Toast",
+      "description": "Temporary non-blocking notification.",
+      "category": "feedback"
+    },
+    {
+      "name": "toggle",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/toggle",
+      "label": "Toggle",
+      "description": "A two-state button that can be toggled on or off.",
+      "category": "input"
+    },
+    {
+      "name": "toggle-group",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/toggle-group",
+      "label": "Toggle Group",
+      "description": "Group of mutually-exclusive or multi-select toggle buttons.",
+      "category": "input"
+    },
+    {
+      "name": "tooltip",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/tooltip",
+      "label": "Tooltip",
+      "description": "Contextual hint shown on hover/focus.",
+      "category": "overlay"
+    },
+    {
+      "name": "tree",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/tree",
+      "label": "Tree",
+      "description": "Hierarchical tree view with expand/collapse.",
+      "category": "navigation"
+    },
+    {
+      "name": "virtual-list",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/virtual-list",
+      "label": "Virtual List",
+      "description": "Viewport-windowed list for large datasets.",
+      "category": "layout"
+    },
+    {
+      "name": "visually-hidden",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/visually-hidden",
+      "label": "Visually Hidden",
+      "description": "Hides content visually while keeping it accessible to screen readers.",
+      "category": "layout"
+    }
+  ],
+  "adapters": [
+    {
+      "name": "carousel-embla",
+      "package": "@solidiom/adapter-carousel-embla",
+      "capability": "carousel-physics@1"
+    },
+    {
+      "name": "date-internationalized",
+      "package": "@solidiom/adapter-date-internationalized",
+      "capability": "date-math@1"
+    },
+    {
+      "name": "positioning-floating-ui",
+      "package": "@solidiom/adapter-positioning-floating-ui",
+      "capability": "positioning@1"
+    },
+    {
+      "name": "positioning-minimal",
+      "package": "@solidiom/adapter-positioning-minimal",
+      "capability": "positioning@1"
+    },
+    {
+      "name": "table-tanstack",
+      "package": "@solidiom/adapter-table-tanstack",
+      "capability": "table@1"
+    },
+    {
+      "name": "virtualization-tanstack",
+      "package": "@solidiom/adapter-virtualization-tanstack",
+      "capability": "virtualization@1"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+/* @solidiom/recipes-css — Dialog */
+[data-scope="dialog"][data-part="backdrop"] {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgb(0 0 0 / 0.8);
+}
+
+[data-scope="dialog"][data-part="content"] {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 50;
+  width: 100%;
+  max-width: 28rem;
+  transform: translate(-50%, -50%);
+  border-radius: var(--ui-radius, 0.5rem);
+  border: 1px solid var(--ui-border, hsl(0 0% 90%));
+  background: var(--ui-surface, hsl(0 0% 100%));
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+[data-scope="dialog"][data-part="title"] {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+[data-scope="dialog"][data-part="description"] {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--ui-muted-fg, hsl(0 0% 45%));
+}
+
+[data-scope="dialog"][data-part="close"] {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+[data-scope="dialog"][data-part="close"]:hover {
+  background: var(--ui-accent, hsl(0 0% 95%));
+}

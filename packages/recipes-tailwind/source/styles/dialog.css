@@ -1,0 +1,22 @@
+/* @solidiom/recipes-tailwind — Dialog */
+@layer components {
+  [data-scope="dialog"][data-part="backdrop"] {
+    @apply fixed inset-0 z-50 bg-black/80;
+  }
+
+  [data-scope="dialog"][data-part="content"] {
+    @apply fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background p-6 shadow-lg;
+  }
+
+  [data-scope="dialog"][data-part="title"] {
+    @apply text-lg font-semibold leading-none tracking-tight;
+  }
+
+  [data-scope="dialog"][data-part="description"] {
+    @apply mt-2 text-sm text-muted-foreground;
+  }
+
+  [data-scope="dialog"][data-part="close"] {
+    @apply absolute right-4 top-4 inline-flex h-6 w-6 items-center justify-center rounded-sm border-none bg-transparent opacity-70 transition-opacity hover:opacity-100;
+  }
+}

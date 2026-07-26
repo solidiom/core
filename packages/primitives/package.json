@@ -1,0 +1,71 @@
+{
+  "name": "@solidiom/primitives",
+  "version": "0.0.1-next.0",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@solidiom/dialog": "workspace:*",
+    "@solidiom/select": "workspace:*",
+    "@solidiom/calendar": "workspace:*",
+    "@solidiom/carousel": "workspace:*",
+    "@solidiom/button": "workspace:*",
+    "@solidiom/badge": "workspace:*",
+    "@solidiom/checkbox": "workspace:*",
+    "@solidiom/switch": "workspace:*",
+    "@solidiom/slider": "workspace:*",
+    "@solidiom/collapsible": "workspace:*",
+    "@solidiom/accordion": "workspace:*",
+    "@solidiom/tabs": "workspace:*",
+    "@solidiom/popover": "workspace:*",
+    "@solidiom/tooltip": "workspace:*",
+    "@solidiom/menu": "workspace:*",
+    "@solidiom/listbox": "workspace:*",
+    "@solidiom/combobox": "workspace:*",
+    "@solidiom/toast": "workspace:*",
+    "@solidiom/alert": "workspace:*",
+    "@solidiom/meter": "workspace:*",
+    "@solidiom/navigation-menu": "workspace:*",
+    "@solidiom/visually-hidden": "workspace:*",
+    "@solidiom/label": "workspace:*",
+    "@solidiom/separator": "workspace:*",
+    "@solidiom/progress": "workspace:*",
+    "@solidiom/toggle": "workspace:*",
+    "@solidiom/toggle-group": "workspace:*",
+    "@solidiom/drawer": "workspace:*",
+    "@solidiom/date-picker": "workspace:*",
+    "@solidiom/virtual-list": "workspace:*",
+    "@solidiom/data-table": "workspace:*",
+    "@solidiom/tree": "workspace:*",
+    "@solidiom/resizable-panels": "workspace:*",
+    "@solidiom/command-palette": "workspace:*",
+    "@solidiom/pagination": "workspace:*",
+    "@solidiom/radio-group": "workspace:*",
+    "@solidiom/field": "workspace:*",
+    "@solidiom/input-otp": "workspace:*",
+    "@solidiom/scroll-area": "workspace:*"
+  },
+  "peerDependencies": {
+    "solid-js": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "layer:primitive"
+    ]
+  }
+}
