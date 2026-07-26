@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-24T04:18:27.257Z",
+  "generatedAt": "2026-07-26T19:49:07.935Z",
   "primitives": [
     {
       "name": "accordion",
@@ -19,12 +19,36 @@
       "category": "feedback"
     },
     {
+      "name": "alert-dialog",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/alert-dialog",
+      "label": "Alert Dialog",
+      "description": "Modal confirmation dialog requiring explicit user action.",
+      "category": "overlay"
+    },
+    {
+      "name": "avatar",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/avatar",
+      "label": "Avatar",
+      "description": "User avatar with image and fallback.",
+      "category": "display"
+    },
+    {
       "name": "badge",
       "version": "0.0.1-next.0",
       "package": "@solidiom/badge",
       "label": "Badge",
       "description": "Inline status or label indicator.",
       "category": "feedback"
+    },
+    {
+      "name": "breadcrumb",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/breadcrumb",
+      "label": "Breadcrumb",
+      "description": "Hierarchical location indicator with links.",
+      "category": "navigation"
     },
     {
       "name": "button",
@@ -41,6 +65,14 @@
       "label": "Calendar",
       "description": "Date selection with day/month/year views.",
       "category": "input"
+    },
+    {
+      "name": "card",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/card",
+      "label": "Card",
+      "description": "Content container with header, body, and footer.",
+      "category": "layout"
     },
     {
       "name": "carousel",
@@ -83,6 +115,14 @@
       "category": "navigation"
     },
     {
+      "name": "context-menu",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/context-menu",
+      "label": "Context Menu",
+      "description": "Right-click triggered menu.",
+      "category": "overlay"
+    },
+    {
       "name": "data-table",
       "version": "0.0.1-next.0",
       "package": "@solidiom/data-table",
@@ -115,11 +155,35 @@
       "category": "overlay"
     },
     {
+      "name": "empty-state",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/empty-state",
+      "label": "Empty State",
+      "description": "Placeholder for empty content areas.",
+      "category": "feedback"
+    },
+    {
       "name": "field",
       "version": "0.0.1-next.0",
       "package": "@solidiom/field",
       "label": "Field",
       "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
+      "category": "input"
+    },
+    {
+      "name": "hover-card",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/hover-card",
+      "label": "Hover Card",
+      "description": "Content preview on hover with open delay.",
+      "category": "overlay"
+    },
+    {
+      "name": "input",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/input",
+      "label": "Input",
+      "description": "Text input and textarea with validation states and Field integration.",
       "category": "input"
     },
     {
@@ -129,6 +193,14 @@
       "label": "Input OTP",
       "description": "A one-time password input with individual character slots.",
       "category": "input"
+    },
+    {
+      "name": "kbd",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/kbd",
+      "label": "Kbd",
+      "description": "Keyboard shortcut display element.",
+      "category": "display"
     },
     {
       "name": "label",
@@ -235,12 +307,36 @@
       "category": "layout"
     },
     {
+      "name": "sheet",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/sheet",
+      "label": "Sheet",
+      "description": "Side-panel dialog with slide animation.",
+      "category": "overlay"
+    },
+    {
+      "name": "skeleton",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/skeleton",
+      "label": "Skeleton",
+      "description": "Loading placeholder with pulse animation.",
+      "category": "feedback"
+    },
+    {
       "name": "slider",
       "version": "0.0.1-next.0",
       "package": "@solidiom/slider",
       "label": "Slider",
       "description": "Numeric range input with thumb control.",
       "category": "input"
+    },
+    {
+      "name": "spinner",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/spinner",
+      "label": "Spinner",
+      "description": "Loading spinner indicator.",
+      "category": "feedback"
     },
     {
       "name": "switch",
@@ -281,6 +377,14 @@
       "label": "Toggle Group",
       "description": "Group of mutually-exclusive or multi-select toggle buttons.",
       "category": "input"
+    },
+    {
+      "name": "toolbar",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/toolbar",
+      "label": "Toolbar",
+      "description": "Grouped actions and controls in a horizontal bar.",
+      "category": "layout"
     },
     {
       "name": "tooltip",

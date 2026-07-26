@@ -3,10 +3,16 @@
   "version": "0.0.1-next.0",
   "package": "@solidiom/listbox",
   "capabilities": [],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
-    "files": ["src/index.tsx", "src/listbox-context.ts", "src/listbox.tsx"]
+    "files": [
+      "src/index.tsx",
+      "src/listbox-context.ts",
+      "src/listbox.tsx"
+    ]
   },
   "runtime": [
     "collection/collection",

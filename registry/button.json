@@ -3,7 +3,9 @@
   "version": "0.0.1-next.0",
   "package": "@solidiom/button",
   "capabilities": [],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
     "files": [

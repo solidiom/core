@@ -3,10 +3,16 @@
   "version": "0.0.1-next.0",
   "package": "@solidiom/command-palette",
   "capabilities": [],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
-    "files": ["src/command-palette-context.ts", "src/command-palette.tsx", "src/index.tsx"]
+    "files": [
+      "src/command-palette-context.ts",
+      "src/command-palette.tsx",
+      "src/index.tsx"
+    ]
   },
   "runtime": [
     "collection/collection",

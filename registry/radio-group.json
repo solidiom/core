@@ -3,10 +3,17 @@
   "version": "0.0.1-next.0",
   "package": "@solidiom/radio-group",
   "capabilities": [],
-  "dependencies": ["@solidiom/runtime"],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
   "source": {
     "entry": "src/index.tsx",
-    "files": ["src/index.tsx"]
+    "files": [
+      "src/index.tsx"
+    ]
   },
-  "runtime": ["dom/stable-id", "state/controllable-value"]
+  "runtime": [
+    "dom/stable-id",
+    "state/controllable-value"
+  ]
 }
