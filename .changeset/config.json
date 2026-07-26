@@ -1,0 +1,22 @@
+{
+  "changelog": ["@changesets/changelog-github", { "repo": "openCenter-cloud/solidiom" }],
+  "commit": false,
+  "fixed": [],
+  "linked": [
+    ["@solidiom/runtime", "@solidiom/dialog", "@solidiom/select", "@solidiom/calendar", "@solidiom/carousel"]
+  ],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": [
+    "@solidiom/docs",
+    "@solidiom/docs-astro-poc",
+    "@solidiom/bench",
+    "@solidiom/eslint-plugin-solidiom",
+    "@solidiom/cli"
+  ],
+  "privatePackages": {
+    "version": false,
+    "tag": false
+  }
+}

@@ -24,7 +24,8 @@
     "registry:build": "tsx tools/registry-build.ts",
     "audit:primitives": "tsx tools/audit-primitives.ts",
     "primitive:gate": "tsx tools/primitive-completion-gate.ts",
-    "primitive:audit": "tsx tools/primitive-completion-gate.ts --audit-only"
+    "primitive:audit": "tsx tools/primitive-completion-gate.ts --audit-only",
+    "gate:phase0": "tsx tools/phase0-gate.ts"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",
