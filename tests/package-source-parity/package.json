@@ -1,0 +1,19 @@
+{
+  "name": "@solidiom/tests-package-source-parity",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@solidiom/dialog": "workspace:*",
+    "@solidiom/select": "workspace:*",
+    "@solidiom/calendar": "workspace:*",
+    "@solidiom/carousel": "workspace:*",
+    "@solidiom/runtime": "workspace:*"
+  },
+  "nx": {
+    "tags": ["layer:test"]
+  }
+}
