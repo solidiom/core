@@ -4,7 +4,8 @@
  * Verifies Phase 0 exit criteria by executing tests and verifying behavior,
  * not just checking file existence.
  *
- * Run via: pnpm exec tsx tools/phase0-gate.ts
+ * Run via: pnpm run gate:phase0
+ * Or:     pnpm exec tsx tools/phase0-gate.ts
  */
 
 import {
@@ -17,6 +18,7 @@ import {
   fileContains,
   noDepsMatching,
   readJSON,
+  run,
 } from "./gate-helpers"
 
 console.log("Phase 0 Acceptance Gate\n")
@@ -41,7 +43,7 @@ for (const dir of phase0Packages) {
 // ─── 2. Runtime kernel tests pass ───────────────────────────────────────
 console.log("\n§2 Runtime kernel behavior:")
 check(
-  "runtime tests pass (≥100 tests)",
+  "runtime tests pass (≥100)",
   runTests("@solidiom/runtime", 100),
   "Runtime must have ≥100 passing tests covering state, events, DOM, collection, overlay, presence, form, i18n",
 )
@@ -50,7 +52,7 @@ check("runtime typechecks", runTypecheck("@solidiom/runtime"))
 // ─── 3. Dialog primitive behavior ───────────────────────────────────────
 console.log("\n§3 Dialog primitive:")
 check(
-  "dialog tests pass (≥9 tests)",
+  "dialog tests pass (≥6)",
   runTests("@solidiom/dialog", 6),
   "Dialog must test state, dismiss, layer stack, focus, modal isolation",
 )
@@ -60,7 +62,7 @@ check("dialog has source/ emission", fileExists("packages/dialog/source/index.ts
 // ─── 4. Select primitive behavior ───────────────────────────────────────
 console.log("\n§4 Select primitive:")
 check(
-  "select tests pass (≥9 tests)",
+  "select tests pass (≥4)",
   runTests("@solidiom/select", 4),
   "Select must test collection, roving focus, typeahead, hidden input, state",
 )
@@ -125,6 +127,22 @@ check(
 )
 check("legacy tagged layer:legacy", legacyPkg?.nx?.tags?.includes("layer:legacy") ?? false)
 
+// ─── 10b. Migration fixture tests pass ──────────────────────────────────
+console.log("\n§10b Migration fixture suite:")
+check(
+  "migration transform tests pass (≥8)",
+  runTests("@solidiom/migration-shadcn-solid-dialog", 8),
+  "Migration must test positive fixtures, idempotence, negative fixtures, and no-op cases",
+)
+
+// ─── 10c. Legacy conformance tests pass ─────────────────────────────────
+console.log("\n§10c Legacy conformance suite:")
+check(
+  "legacy facade conformance tests pass (≥6)",
+  runTests("@solidiom/legacy-shadcn-solid-dialog", 6),
+  "Legacy must prove API surface preservation, Overlay→Backdrop mapping, sunset metadata, and boundary rule",
+)
+
 // ─── 11. Registry catalog ───────────────────────────────────────────────
 console.log("\n§11 Registry:")
 const registry = readJSON<{ primitives?: unknown[]; adapters?: unknown[] }>("registry/index.json")
@@ -140,6 +158,71 @@ check(
   "dialog dist does not include test declarations",
   !fileExists("packages/dialog/dist/dialog.test.d.ts"),
   "dist/ must not contain test declarations",
+)
+
+// ─── 13. Behavioral package/source parity ───────────────────────────────
+console.log("\n§13 Package/source parity:")
+check(
+  "parity tests pass (≥18)",
+  runTests("@solidiom/tests-package-source-parity", 18),
+  "Parity suite must verify export surface and type consistency for dialog, select, calendar, carousel",
+)
+
+// ─── 14. Browser harness configuration ──────────────────────────────────
+console.log("\n§14 Browser harness:")
+check(
+  "vitest.browser.config.ts uses Playwright factory",
+  fileContains("vitest.browser.config.ts", "@vitest/browser-playwright"),
+  "Browser config must import playwright from @vitest/browser-playwright (v4 API)",
+)
+check(
+  "vitest.browser.config.ts has chromium instance",
+  fileContains("vitest.browser.config.ts", "chromium"),
+)
+check(
+  "cross-browser config uses Playwright factory",
+  fileContains("tools/test/vitest.cross-browser.config.ts", "@vitest/browser-playwright"),
+)
+
+// ─── 15. Solid matrix configuration ─────────────────────────────────────
+console.log("\n§15 Solid matrix:")
+const matrix = readJSON<{ window?: { low: string; mid: string; high: string } }>(
+  "tools/solid-matrix.json",
+)
+check("solid-matrix.json exists", matrix !== null)
+check(
+  "matrix has 3-beta window",
+  !!(matrix?.window?.low && matrix?.window?.mid && matrix?.window?.high),
+  "Must have low/mid/high versions",
+)
+check(
+  "matrix high matches installed override",
+  fileContains("pnpm-workspace.yaml", matrix?.window?.high ?? "__MISSING__"),
+  "pnpm-workspace.yaml override must match matrix high",
+)
+check(
+  "update-solid-window script exists",
+  fileExists("scripts/update-solid-window.mts"),
+  "Deterministic window update script required",
+)
+
+// ─── 16. CI and Changesets ──────────────────────────────────────────────
+console.log("\n§16 CI and Changesets:")
+check("CI workflow exists", fileExists(".github/workflows/ci.yml"))
+check("release workflow exists", fileExists(".github/workflows/release.yml"))
+check("changeset config exists", fileExists(".changeset/config.json"))
+check(
+  "CI has phase0-gate job",
+  fileContains(".github/workflows/ci.yml", "phase0-gate"),
+  "CI must run the phase0 gate",
+)
+check(
+  "CI has browser test job",
+  fileContains(".github/workflows/ci.yml", "test-browser"),
+)
+check(
+  "CI has solid matrix job",
+  fileContains(".github/workflows/ci.yml", "test-solid-matrix"),
 )
 
 // ─── Summary ────────────────────────────────────────────────────────────
