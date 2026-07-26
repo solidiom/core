@@ -70,15 +70,26 @@ export function run(
 }
 
 /**
- * Run tests for a package and verify they pass with a minimum count.
- * Returns true if the test output reports >= minTests passing.
- * Tolerates non-zero exit (partial test failures) as long as the pass count is met.
+ * Run tests for a package and verify they pass with a minimum count AND zero failures.
+ * Returns true only if the test output reports >= minTests passing and 0 failed.
  */
 export function runTests(pkg: string, minTests: number): boolean {
   const result = run(`pnpm --filter ${pkg} test`, { cwd: ROOT })
 
   // Strip ANSI escape codes before matching
   const combined = (result.stdout + result.stderr).replace(/\x1B\[[0-9;]*m/g, "")
+
+  // Check for failures first — any failure count > 0 means the gate fails
+  const failMatch = combined.match(/(\d+)\s+failed/)
+  if (failMatch && parseInt(failMatch[1], 10) > 0) {
+    return false
+  }
+
+  // Non-zero exit without parseable output is also a failure
+  if (!result.ok && !combined.match(/\d+\s+passed/)) {
+    return false
+  }
+
   // Parse vitest output: "N passed" in the Tests summary line
   // Format: "Tests  X failed | Y passed (Z)" or "Tests  Y passed (Z)"
   const testsLine = combined.match(/Tests\s+.*?(\d+)\s+passed/)
