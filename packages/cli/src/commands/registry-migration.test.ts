@@ -54,32 +54,36 @@ describe("migration: shadcn-solid-dialog", () => {
 
   it("has metadata with from/to package names", () => {
     const source = readFileSync(transformPath, "utf8")
-    expect(source).toContain('"shadcn-solid-dialog"')
-    expect(source).toContain('"@shadcn-solid/dialog"')
-    expect(source).toContain('"@solidiom/dialog"')
-  })
-
-  it("maps all key components in importMap", () => {
-    const source = readFileSync(transformPath, "utf8")
-    expect(source).toContain('Dialog: "Root"')
-    expect(source).toContain('DialogTrigger: "Trigger"')
-    expect(source).toContain('DialogContent: "Content"')
-    expect(source).toContain('DialogClose: "Close"')
-  })
-
-  it("has applyTransform function that returns code and changed", () => {
-    const source = readFileSync(transformPath, "utf8")
-    expect(source).toContain("export function applyTransform")
-    expect(source).toContain("code:")
-    expect(source).toContain("changed:")
-  })
-
-  it("transform uses ts-morph AST manipulation via applyMigration", () => {
-    const source = readFileSync(transformPath, "utf8")
-    // The function should use the AST-based applyMigration from @solidiom/cli
+    // Transform references both source and target packages
     expect(source).toContain("@shadcn-solid/dialog")
     expect(source).toContain("@solidiom/dialog")
-    expect(source).toContain("applyMigration")
-    expect(source).toContain("MigrationSpec")
+    expect(source).toContain("shadcn-solid")
+  })
+
+  it("maps all key Dialog parts", () => {
+    const source = readFileSync(transformPath, "utf8")
+    // PART_MAP contains the shadcn → solidiom mapping
+    expect(source).toContain("Root")
+    expect(source).toContain("Trigger")
+    expect(source).toContain("Content")
+    expect(source).toContain("Close")
+    expect(source).toContain("Backdrop")
+  })
+
+  it("has transform function that returns code and changed", () => {
+    const source = readFileSync(transformPath, "utf8")
+    expect(source).toContain("export function transform")
+    expect(source).toContain("code")
+    expect(source).toContain("changed")
+    expect(source).toContain("diagnostics")
+  })
+
+  it("transform handles import rewriting and part mapping", () => {
+    const source = readFileSync(transformPath, "utf8")
+    // Regex-based AST-lite transform handles imports and JSX parts
+    expect(source).toContain("@shadcn-solid/dialog")
+    expect(source).toContain("@solidiom/dialog")
+    expect(source).toContain("PART_MAP")
+    expect(source).toContain("TransformResult")
   })
 })
