@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Vitest cache inside node_modules (pnpm symlinks may track these)
+**/.vite/
+
 # Build outputs
 dist/
 build/
