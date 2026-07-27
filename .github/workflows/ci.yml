@@ -51,8 +51,8 @@ jobs:
             packages/*/node_modules
             apps/*/node_modules
             tests/*/node_modules
-            tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
 
   build:
@@ -72,8 +72,8 @@ jobs:
             packages/*/node_modules
             apps/*/node_modules
             tests/*/node_modules
-            tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
   test-node:
@@ -97,6 +97,7 @@ jobs:
             apps/*/node_modules
             tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm test
 
@@ -118,6 +119,7 @@ jobs:
             apps/*/node_modules
             tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: pnpm exec vitest run --config vitest.browser.config.ts
@@ -167,6 +169,7 @@ jobs:
             apps/*/node_modules
             tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: npx playwright install --with-deps chromium
       - name: Run executable axe accessibility scans
@@ -199,6 +202,7 @@ jobs:
             apps/*/node_modules
             tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
       - run: npx playwright install --with-deps chromium
       - run: pnpm run gate:phase1
 
@@ -221,6 +225,7 @@ jobs:
             apps/*/node_modules
             tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm run gate:phase0
       - uses: actions/upload-artifact@v6
