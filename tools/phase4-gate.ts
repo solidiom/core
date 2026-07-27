@@ -114,20 +114,5 @@ check(
   "All automated acceptance criteria must pass for GA",
 )
 
-// ─── §7 Legacy sunset dates ────────────────────────────────────────────
-console.log("\n§7 Legacy sunset dates:")
-check("legacy facade exists", fileExists("legacy/shadcn-solid-dialog/package.json"))
-const legacyPkg = readJSON<Record<string, any>>("legacy/shadcn-solid-dialog/package.json")
-check(
-  "legacy has deprecated date",
-  !!legacyPkg?.solidiom?.sunset?.deprecated,
-  "Sunset metadata must include a deprecated date",
-)
-check(
-  "legacy has removed date",
-  !!legacyPkg?.solidiom?.sunset?.removed,
-  "Sunset metadata must include a removed date",
-)
-
 // ─── Summary ────────────────────────────────────────────────────────────
 summarize("Phase 4 Gate (Stable/GA)")

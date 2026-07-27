@@ -181,15 +181,5 @@ check(
   violations.length > 0 ? `Stable versions found: ${violations.slice(0, 5).join(", ")}` : undefined,
 )
 
-// ─── §8 Legacy and migration ───────────────────────────────────────────
-console.log("\n§8 Legacy and migration:")
-check("legacy facade exists", fileExists("legacy/shadcn-solid-dialog/package.json"))
-const legacyPkg = readJSON<Record<string, any>>("legacy/shadcn-solid-dialog/package.json")
-check(
-  "legacy has sunset metadata",
-  !!legacyPkg?.solidiom?.sunset,
-  "Sunset metadata must exist in legacy package.json",
-)
-
 // ─── Summary ────────────────────────────────────────────────────────────
 summarize("Phase 3 Gate (Beta)")

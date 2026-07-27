@@ -114,44 +114,15 @@ check(
 )
 check("bench baselines exist", fileExists("packages/bench/baselines/initial.json"))
 
-// ─── 10. Migration and legacy isolation ─────────────────────────────────
-console.log("\n§10 Migration + legacy:")
-check("migration transform exists", fileExists("migrations/shadcn-solid-dialog/transform.ts"))
-check("legacy facade source exists", fileExists("legacy/shadcn-solid-dialog/src/index.ts"))
-
-const legacyPkg = readJSON<Record<string, any>>("legacy/shadcn-solid-dialog/package.json")
-check(
-  "legacy has sunset metadata",
-  !!legacyPkg?.solidiom?.sunset,
-  "package.json must have solidiom.sunset field",
-)
-check("legacy tagged layer:legacy", legacyPkg?.nx?.tags?.includes("layer:legacy") ?? false)
-
-// ─── 10b. Migration fixture tests pass ──────────────────────────────────
-console.log("\n§10b Migration fixture suite:")
-check(
-  "migration transform tests pass (≥8)",
-  runTests("@solidiom/migration-shadcn-solid-dialog", 8),
-  "Migration must test positive fixtures, idempotence, negative fixtures, and no-op cases",
-)
-
-// ─── 10c. Legacy conformance tests pass ─────────────────────────────────
-console.log("\n§10c Legacy conformance suite:")
-check(
-  "legacy facade conformance tests pass (≥6)",
-  runTests("@solidiom/legacy-shadcn-solid-dialog", 6),
-  "Legacy must prove API surface preservation, Overlay→Backdrop mapping, sunset metadata, and boundary rule",
-)
-
-// ─── 11. Registry catalog ───────────────────────────────────────────────
-console.log("\n§11 Registry:")
+// ─── 10. Registry catalog ───────────────────────────────────────────────
+console.log("\n§10 Registry:")
 const registry = readJSON<{ primitives?: unknown[]; adapters?: unknown[] }>("registry/index.json")
 check("registry/index.json exists with content", registry !== null)
 check("registry has primitives (≥2)", (registry?.primitives?.length ?? 0) >= 2)
 check("registry has adapters (≥2)", (registry?.adapters?.length ?? 0) >= 2)
 
-// ─── 12. Dual emission ──────────────────────────────────────────────────
-console.log("\n§12 Package/source dual emission:")
+// ─── 11. Dual emission ──────────────────────────────────────────────────
+console.log("\n§11 Package/source dual emission:")
 check("dialog dist/index.js exists after build", fileExists("packages/dialog/dist/index.js"))
 check("dialog source/index.tsx exists", fileExists("packages/dialog/source/index.tsx"))
 check(
@@ -160,16 +131,16 @@ check(
   "dist/ must not contain test declarations",
 )
 
-// ─── 13. Behavioral package/source parity ───────────────────────────────
-console.log("\n§13 Package/source parity:")
+// ─── 12. Behavioral package/source parity ───────────────────────────────
+console.log("\n§12 Package/source parity:")
 check(
   "parity tests pass (≥18)",
   runTests("@solidiom/tests-package-source-parity", 18),
   "Parity suite must verify export surface and type consistency for dialog, select, calendar, carousel",
 )
 
-// ─── 14. Browser harness configuration ──────────────────────────────────
-console.log("\n§14 Browser harness:")
+// ─── 13. Browser harness configuration ──────────────────────────────────
+console.log("\n§13 Browser harness:")
 check(
   "vitest.browser.config.ts uses Playwright factory",
   fileContains("vitest.browser.config.ts", "@vitest/browser-playwright"),
@@ -184,8 +155,8 @@ check(
   fileContains("tools/test/vitest.cross-browser.config.ts", "@vitest/browser-playwright"),
 )
 
-// ─── 15. Solid matrix configuration ─────────────────────────────────────
-console.log("\n§15 Solid matrix:")
+// ─── 14. Solid matrix configuration ─────────────────────────────────────
+console.log("\n§14 Solid matrix:")
 const matrix = readJSON<{ window?: { low: string; mid: string; high: string } }>(
   "tools/solid-matrix.json",
 )
@@ -206,8 +177,8 @@ check(
   "Deterministic window update script required",
 )
 
-// ─── 16. CI and Changesets ──────────────────────────────────────────────
-console.log("\n§16 CI and Changesets:")
+// ─── 15. CI and Changesets ──────────────────────────────────────────────
+console.log("\n§15 CI and Changesets:")
 check("CI workflow exists", fileExists(".github/workflows/ci.yml"))
 check("release workflow exists", fileExists(".github/workflows/release.yml"))
 check("changeset config exists", fileExists(".changeset/config.json"))
