@@ -31,6 +31,7 @@ jobs:
             node_modules
             packages/*/node_modules
             apps/*/node_modules
+            tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
   typecheck:
@@ -49,6 +50,8 @@ jobs:
             node_modules
             packages/*/node_modules
             apps/*/node_modules
+            tests/*/node_modules
+            tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
       - run: pnpm typecheck
 
@@ -68,6 +71,8 @@ jobs:
             node_modules
             packages/*/node_modules
             apps/*/node_modules
+            tests/*/node_modules
+            tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
       - run: pnpm build
 
@@ -90,6 +95,7 @@ jobs:
             node_modules
             packages/*/node_modules
             apps/*/node_modules
+            tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
       - run: pnpm build
       - run: pnpm test
@@ -110,6 +116,7 @@ jobs:
             node_modules
             packages/*/node_modules
             apps/*/node_modules
+            tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
       - run: pnpm build
       - run: npx playwright install --with-deps chromium firefox webkit
@@ -138,7 +145,7 @@ jobs:
       - run: node scripts/set-solid-version.mjs ${{ matrix.solid-tier }}
       - run: pnpm install --no-frozen-lockfile
       - run: pnpm exec nx run-many -t build --exclude=@solidiom/docs,@solidiom/docs-astro-poc
-      - run: pnpm test
+      - run: pnpm exec nx run-many -t test --exclude=@solidiom/tests-package-source-parity
       - run: npx playwright install --with-deps chromium
       - run: pnpm exec vitest run --config vitest.browser.config.ts
 
@@ -158,6 +165,7 @@ jobs:
             node_modules
             packages/*/node_modules
             apps/*/node_modules
+            tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
       - run: pnpm build
       - run: npx playwright install --with-deps chromium
@@ -189,6 +197,7 @@ jobs:
             node_modules
             packages/*/node_modules
             apps/*/node_modules
+            tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
       - run: npx playwright install --with-deps chromium
       - run: pnpm run gate:phase1
@@ -210,6 +219,7 @@ jobs:
             node_modules
             packages/*/node_modules
             apps/*/node_modules
+            tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
       - run: pnpm build
       - run: pnpm run gate:phase0
