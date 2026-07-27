@@ -1,0 +1,38 @@
+{
+  "name": "@solidiom/adapter-kit",
+  "version": "0.0.1-next.0",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "description": "Adapter authoring kit — scaffold template and conformance harness for building Solidiom adapters backed by framework-neutral engines.",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./conformance": {
+      "import": "./dist/conformance.js",
+      "types": "./dist/conformance.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vitest": "^4.1.10"
+  },
+  "nx": {
+    "tags": [
+      "layer:tooling"
+    ]
+  }
+}

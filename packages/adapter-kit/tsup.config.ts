@@ -1,0 +1,10 @@
+import { defineConfig } from "tsup"
+
+export default defineConfig({
+  entry: ["src/index.ts", "src/conformance.ts"],
+  format: ["esm"],
+  dts: false,
+  clean: true,
+  target: "es2022",
+  sourcemap: true,
+})

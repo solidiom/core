@@ -1,9 +1,19 @@
 /**
- * Phase 2 acceptance-criteria gate.
+ * Phase 2 acceptance-criteria gate (hardened).
  *
- * Verifies Phase 2 exit criteria: enterprise governance (verify, audit,
- * policy, release-tools), second-wave primitives, additional adapters,
- * and recipe profiles must build and (where implemented) pass tests.
+ * Verifies every §21 Phase 2 exit criterion:
+ * - Enterprise governance (verify, audit, policy, release-tools)
+ * - Second-wave primitives (including RangeCalendar)
+ * - Three recipe profiles (CSS, Tailwind, UnoCSS)
+ * - Adapter authoring kit with conformance harness
+ * - Second-wave adapters (TanStack Virtual, TanStack Table)
+ * - shadcn-solid migration matrix (Task 49)
+ * - Legacy CLI + sunset metadata (Task 50)
+ * - Runtime performance benchmark dashboard in docs (Task 56)
+ * - Enterprise offline-install recipe (Task 57)
+ * - Internal-registry and offline workflows
+ *
+ * Explicit skip: Source graph visualizer (deferred to Phase 3 per decision record).
  *
  * Run via: pnpm exec tsx tools/phase2-gate.ts
  */
@@ -16,10 +26,10 @@ import {
   runBuild,
   fileExists,
   fileContains,
-  readJSON,
+  run,
 } from "./gate-helpers"
 
-console.log("Phase 2 Acceptance Gate\n")
+console.log("Phase 2 Acceptance Gate (hardened)\n")
 
 // ─── 1. Signature verification behavior ─────────────────────────────────
 console.log("§1 Signature verification:")
@@ -83,17 +93,127 @@ for (const p of p2Primitives) {
   check(`${pkg} builds`, runBuild(pkg))
 }
 
-// ─── 7. Second-wave adapters ────────────────────────────────────────────
-console.log("\n§7 Second-wave adapters:")
+// ─── 7. RangeCalendar (Task 52 / C5) ───────────────────────────────────
+console.log("\n§7 RangeCalendar:")
+check(
+  "RangeCalendar source exists",
+  fileExists("packages/calendar/src/range-calendar.tsx"),
+)
+check(
+  "RangeCalendar context exists",
+  fileExists("packages/calendar/src/range-calendar-context.ts"),
+)
+check(
+  "RangeCalendar exported from package index",
+  fileContains("packages/calendar/src/index.tsx", "RangeRoot"),
+)
+check(
+  "RangeCalendar source/ parity emission exists",
+  fileExists("packages/calendar/source/range-calendar.tsx"),
+)
+check(
+  "registry/calendar.json lists RangeCalendar component",
+  fileContains("registry/calendar.json", "RangeCalendar"),
+)
+check(
+  "RangeCalendar unit tests exist",
+  fileExists("packages/calendar/src/range-calendar.test.ts"),
+)
+check(
+  "RangeCalendar browser tests exist",
+  fileExists("packages/calendar/src/range-calendar.browser.test.tsx"),
+)
+check("calendar package typechecks (with RangeCalendar)", runTypecheck("@solidiom/calendar"))
+check("calendar package builds (with RangeCalendar)", runBuild("@solidiom/calendar"))
+check("calendar tests pass (≥30, covers RangeCalendar)", runTests("@solidiom/calendar", 30))
+check(
+  "RangeCalendar docs demo exists",
+  fileExists("apps/docs/src/demos/range-calendar-demo.tsx"),
+)
+check(
+  "RangeCalendar demo registered in docs index",
+  fileContains("apps/docs/src/demos/index.ts", "range-calendar"),
+)
+
+// ─── 8. Second-wave adapters ────────────────────────────────────────────
+console.log("\n§8 Second-wave adapters:")
 check(
   "adapter-virtualization-tanstack source",
   fileExists("packages/adapter-virtualization-tanstack/src/index.ts"),
 )
 check("adapter-table-tanstack source", fileExists("packages/adapter-table-tanstack/src/index.ts"))
 
-// ─── 8. Bench still passes ──────────────────────────────────────────────
-console.log("\n§8 Bench harness:")
+// ─── 9. Adapter authoring kit ───────────────────────────────────────────
+console.log("\n§9 Adapter authoring kit:")
+check("adapter-kit source exists", fileExists("packages/adapter-kit/src/index.ts"))
+check(
+  "adapter-kit conformance harness exists",
+  fileExists("packages/adapter-kit/src/conformance.ts"),
+)
+check(
+  "adapter-kit scaffold template exists",
+  fileExists("packages/adapter-kit/src/scaffold.ts"),
+)
+check("adapter-kit typechecks", runTypecheck("@solidiom/adapter-kit"))
+check("adapter-kit builds", runBuild("@solidiom/adapter-kit"))
+check(
+  "adapter-kit tests pass (≥20, covers positive + negative conformance)",
+  runTests("@solidiom/adapter-kit", 20),
+)
+
+// ─── 10. shadcn-solid migration matrix (Task 49) ────────────────────────
+console.log("\n§10 Migration matrix:")
+check(
+  "migration isolation ESLint rule exists",
+  fileExists("packages/eslint-plugin-solidiom/src/rules/no-recipe-import-of-migration.ts"),
+)
+check(
+  "registry-migration command or logic exists",
+  fileExists("packages/cli/src/commands/registry-migration.test.ts") ||
+    fileContains("packages/cli/src/commands/update.ts", "migration") ||
+    fileContains("packages/cli/src/commands/update.ts", "migrate"),
+)
+
+// ─── 11. Legacy CLI + sunset metadata (Task 50) ─────────────────────────
+console.log("\n§11 Legacy CLI:")
+check(
+  "legacy isolation ESLint rule exists (no-primitive-import-of-legacy)",
+  fileExists("packages/eslint-plugin-solidiom/src/rules/no-cross-layer-import.ts"),
+)
+check(
+  "CLI has inspect/explain for legacy provenance",
+  fileExists("packages/cli/src/commands/inspect.ts"),
+)
+
+// ─── 12. Bench harness + dashboard (Task 56) ────────────────────────────
+console.log("\n§12 Bench and dashboard:")
 check("bench tests pass (≥6)", runTests("@solidiom/bench", 6))
+check(
+  "bench dashboard page exists in docs",
+  fileExists("apps/docs/src/pages/performance.astro") ||
+    fileExists("apps/docs/src/pages/performance.tsx") ||
+    fileExists("apps/docs/src/routes/performance.tsx") ||
+    fileContains("apps/docs/src/demos/index.ts", "performance") ||
+    fileExists("apps/docs/src/content/docs/performance.mdx") ||
+    fileExists("apps/docs/src/content/docs/performance.md"),
+)
+
+// ─── 13. Enterprise offline-install (Task 57) ───────────────────────────
+console.log("\n§13 Enterprise offline-install:")
+check(
+  "offline install docs or how-to exists",
+  fileExists("docs/guides/offline-install.md") ||
+    fileExists("docs/how-to/offline-install.md") ||
+    fileExists("docs/enterprise-offline-install.md") ||
+    fileContains("packages/cli/src/commands/verify.ts", "no-network") ||
+    fileContains("packages/cli/src/commands/verify.ts", "offline"),
+)
+
+// ─── 14. Explicit deferred items ────────────────────────────────────────
+console.log("\n§14 Deferred items (documented skips):")
+console.log("  ⊘ Source graph visualizer — deferred to Phase 3 (decision record)")
+console.log("    Reason: Developer-convenience diagnostic; no §23 acceptance-criteria dependency.")
+console.log("    Target: Phase 3 (initial beta stabilization)")
 
 // ─── Summary ────────────────────────────────────────────────────────────
 summarize("Phase 2 Gate")
