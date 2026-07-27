@@ -8,7 +8,11 @@ import { runDetach } from "../commands/detach"
 import type { Plan } from "../commands/plan"
 
 function createTmpDir(): string {
-  const dir = join(tmpdir(), `solidiom-test-${Date.now()}-${Math.random().toString(36).slice(2)}`)
+  // Nest cwd two levels deep so the production monorepo-resolution heuristic
+  // (join(cwd, "..", "..", "packages", ...)) stays inside the writable temp tree
+  // rather than escaping to the filesystem root on CI's shallow tmpdir.
+  const root = join(tmpdir(), `solidiom-test-${Date.now()}-${Math.random().toString(36).slice(2)}`)
+  const dir = join(root, "consumer", "app")
   mkdirSync(dir, { recursive: true })
   return dir
 }
@@ -31,7 +35,9 @@ describe("source/install", () => {
   })
 
   afterEach(() => {
-    rmSync(cwd, { recursive: true, force: true })
+    // Clean up the entire temp root (two levels above cwd)
+    const root = join(cwd, "..", "..")
+    rmSync(root, { recursive: true, force: true })
   })
 
   describe("rewriteImports", () => {

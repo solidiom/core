@@ -31,7 +31,7 @@ mise run build        # or: pnpm nx run-many -t build
 mise run test         # or: pnpm nx run-many -t test
 ```
 
-Requires Node >= 20 and pnpm 10. If you use [mise](https://mise.jdx.dev), tool versions are pinned in `.mise.toml`.
+Requires Node >= 24 and pnpm 10. If you use [mise](https://mise.jdx.dev), tool versions are pinned in `.mise.toml`.
 
 ## Workspace layout
 

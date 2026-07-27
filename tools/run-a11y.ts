@@ -74,6 +74,11 @@ function main(): void {
 
   if (run.error) throw run.error;
   if (run.status !== 0) {
+    console.error(
+      `✗ axe browser suite exited with code ${run.status}. ` +
+        `The tests themselves may have passed — check the output above for environment ` +
+        `errors such as a missing dependency (e.g. jsdom) before assuming a real regression.`,
+    );
     process.exitCode = run.status ?? 1;
     return;
   }
