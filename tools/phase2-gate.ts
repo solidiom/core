@@ -7,13 +7,14 @@
  * - Three recipe profiles (CSS, Tailwind, UnoCSS)
  * - Adapter authoring kit with conformance harness
  * - Second-wave adapters (TanStack Virtual, TanStack Table)
- * - shadcn-solid migration matrix (Task 49)
- * - Legacy CLI + sunset metadata (Task 50)
+ * - Layer isolation (no-cross-layer-import ESLint rule)
  * - Runtime performance benchmark dashboard in docs (Task 56)
- * - Enterprise offline-install recipe (Task 57)
- * - Internal-registry and offline workflows
+ * - Enterprise offline-install recipe + Verdaccio fixture (Task 57)
  *
- * Explicit skip: Source graph visualizer (deferred to Phase 3 per decision record).
+ * Explicit skips:
+ * - Source graph visualizer (deferred to Phase 3 per decision record)
+ * - Migration matrix / Task 49 (descoped — greenfield, no prior release)
+ * - Legacy CLI / Task 50 (descoped — greenfield, no prior release)
  *
  * Run via: pnpm exec tsx tools/phase2-gate.ts
  */
@@ -161,32 +162,26 @@ check(
   runTests("@solidiom/adapter-kit", 20),
 )
 
-// ─── 10. shadcn-solid migration matrix (Task 49) ────────────────────────
-console.log("\n§10 Migration matrix:")
+// ─── 10. Layer isolation (architectural enforcement) ────────────────────
+console.log("\n§10 Layer isolation:")
 check(
-  "migration isolation ESLint rule exists",
-  fileExists("packages/eslint-plugin-solidiom/src/rules/no-recipe-import-of-migration.ts"),
-)
-check(
-  "registry-migration command or logic exists",
-  fileExists("packages/cli/src/commands/registry-migration.test.ts") ||
-    fileContains("packages/cli/src/commands/update.ts", "migration") ||
-    fileContains("packages/cli/src/commands/update.ts", "migrate"),
-)
-
-// ─── 11. Legacy CLI + sunset metadata (Task 50) ─────────────────────────
-console.log("\n§11 Legacy CLI:")
-check(
-  "legacy isolation ESLint rule exists (no-primitive-import-of-legacy)",
+  "no-cross-layer-import ESLint rule exists",
   fileExists("packages/eslint-plugin-solidiom/src/rules/no-cross-layer-import.ts"),
 )
 check(
-  "CLI has inspect/explain for legacy provenance",
+  "layer restrictions enforced (runtime cannot import primitive)",
+  fileContains(
+    "packages/eslint-plugin-solidiom/src/utils.ts",
+    "layer:runtime",
+  ),
+)
+check(
+  "inspect command exists (source-mode governance)",
   fileExists("packages/cli/src/commands/inspect.ts"),
 )
 
-// ─── 12. Bench harness + dashboard (Task 56) ────────────────────────────
-console.log("\n§12 Bench and dashboard:")
+// ─── 11. Bench harness + dashboard (Task 56) ────────────────────────────
+console.log("\n§11 Bench and dashboard:")
 check("bench tests pass (≥6)", runTests("@solidiom/bench", 6))
 check(
   "bench dashboard page exists in docs",
@@ -198,22 +193,47 @@ check(
     fileExists("apps/docs/src/content/docs/performance.md"),
 )
 
-// ─── 13. Enterprise offline-install (Task 57) ───────────────────────────
-console.log("\n§13 Enterprise offline-install:")
+// ─── 12. Enterprise offline-install (Task 57) ───────────────────────────
+console.log("\n§12 Enterprise offline-install:")
 check(
-  "offline install docs or how-to exists",
-  fileExists("docs/guides/offline-install.md") ||
-    fileExists("docs/how-to/offline-install.md") ||
-    fileExists("docs/enterprise-offline-install.md") ||
-    fileContains("packages/cli/src/commands/verify.ts", "no-network") ||
-    fileContains("packages/cli/src/commands/verify.ts", "offline"),
+  "offline-install how-to guide exists",
+  fileExists("docs/how-to/offline-install.md"),
+)
+check(
+  "offline-install guide references Verdaccio",
+  fileContains("docs/how-to/offline-install.md", "verdaccio") ||
+    fileContains("docs/how-to/offline-install.md", "Verdaccio"),
+)
+check(
+  "Verdaccio fixture config exists",
+  fileExists("tools/offline-fixture/verdaccio-config.yaml"),
+)
+check(
+  "offline test script exists",
+  fileExists("tools/offline-fixture/run-offline-test.sh"),
+)
+check(
+  "add command supports --registry flag",
+  fileContains("packages/cli/src/commands/add.ts", "--registry"),
+)
+check(
+  "add command supports --no-network flag",
+  fileContains("packages/cli/src/commands/add.ts", "--no-network"),
 )
 
-// ─── 14. Explicit deferred items ────────────────────────────────────────
-console.log("\n§14 Deferred items (documented skips):")
+// ─── 13. Explicit deferred/descoped items ───────────────────────────────
+console.log("\n§13 Deferred and descoped items (documented skips):")
 console.log("  ⊘ Source graph visualizer — deferred to Phase 3 (decision record)")
 console.log("    Reason: Developer-convenience diagnostic; no §23 acceptance-criteria dependency.")
 console.log("    Target: Phase 3 (initial beta stabilization)")
+console.log("")
+console.log("  ⊘ Migration matrix (Task 49) — descoped")
+console.log("    Reason: Greenfield product with no prior release; no migration source exists.")
+console.log("    Reference: docs/decisions/descope-migration-legacy.md")
+console.log("")
+console.log("  ⊘ Legacy CLI + sunset metadata (Task 50) — descoped")
+console.log("    Reason: No backwards-compatibility contract; no legacy surface to track.")
+console.log("    Reference: docs/decisions/descope-migration-legacy.md")
 
 // ─── Summary ────────────────────────────────────────────────────────────
 summarize("Phase 2 Gate")

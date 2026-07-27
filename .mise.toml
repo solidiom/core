@@ -1,0 +1,284 @@
+[tools]
+node = "latest"
+pnpm = "latest"
+
+# ---------------------------------------------------------------------------
+# Build
+# ---------------------------------------------------------------------------
+
+[tasks.build]
+description = "Build all packages (respects nx dep graph)"
+run = "pnpm nx run-many -t build"
+
+[tasks."build:package"]
+description = "Build a single package  →  mise run build:package -- @solidiom/button"
+run = "pnpm nx build {{arg(name='package')}}"
+
+[tasks."build:recipes"]
+description = "Build both recipe packages"
+run = "pnpm nx run-many -t build --projects=@solidiom/recipes-css,@solidiom/recipes-tailwind"
+
+[tasks."build:docs"]
+description = "Build the docs app"
+run = "pnpm nx build @solidiom/docs"
+
+[tasks."build:registry"]
+description = "Generate registry manifests (registry/*.json)"
+run = "pnpm tsx tools/registry-build.ts"
+
+# ---------------------------------------------------------------------------
+# Dev
+# ---------------------------------------------------------------------------
+
+[tasks.dev]
+description = "Start the docs dev server"
+run = "pnpm nx dev @solidiom/docs"
+
+# ---------------------------------------------------------------------------
+# Test
+# ---------------------------------------------------------------------------
+
+[tasks.test]
+description = "Run all unit tests (node mode)"
+run = "pnpm nx run-many -t test"
+
+[tasks."test:unit"]
+description = "Run vitest unit tests directly (no nx)"
+run = "pnpm vitest run --config vitest.config.ts"
+
+[tasks."test:browser"]
+description = "Run browser-mode component tests via Playwright"
+run = "pnpm vitest run --config vitest.browser.config.ts"
+
+[tasks."test:e2e"]
+description = "Run Playwright end-to-end tests"
+run = "pnpm playwright test --config tests/e2e/playwright.config.ts"
+
+[tasks."test:package"]
+description = "Test a single package  →  mise run test:package -- @solidiom/button"
+run = "pnpm nx test {{arg(name='package')}}"
+
+[tasks."test:primitives"]
+description = "Run tests for all primitive-layer packages"
+run = "pnpm nx run-many -t test --projects='tag:layer:primitive'"
+
+[tasks."typecheck:primitives"]
+description = "Type-check all primitive-layer packages"
+run = "pnpm nx run-many -t typecheck --projects='tag:layer:primitive'"
+
+# ---------------------------------------------------------------------------
+# Type-check & Lint
+# ---------------------------------------------------------------------------
+
+[tasks.typecheck]
+description = "Type-check all packages"
+run = "pnpm nx run-many -t typecheck"
+
+[tasks.lint]
+description = "Lint all packages"
+run = "pnpm nx run-many -t lint"
+
+[tasks."lint:fix"]
+description = "Lint all packages and auto-fix"
+run = "pnpm nx run-many -t lint -- --fix"
+
+[tasks.format]
+description = "Format all files with Prettier"
+run = "pnpm prettier --write ."
+
+[tasks."format:check"]
+description = "Check formatting without writing"
+run = "pnpm prettier --check ."
+
+# ---------------------------------------------------------------------------
+# Packaging / Release
+# ---------------------------------------------------------------------------
+
+[tasks.changeset]
+description = "Create a new changeset"
+run = "pnpm changeset"
+
+[tasks.version]
+description = "Apply pending changesets (bump versions + update changelogs)"
+run = "pnpm changeset version"
+
+[tasks.release]
+description = "Build all packages then publish to npm"
+depends = ["build"]
+run = "pnpm changeset publish"
+
+# ---------------------------------------------------------------------------
+# Dependency graph
+# ---------------------------------------------------------------------------
+
+[tasks.graph]
+description = "Open the nx project dependency graph in a browser"
+run = "pnpm nx graph"
+
+# ---------------------------------------------------------------------------
+# Audit
+# ---------------------------------------------------------------------------
+
+[tasks.audit]
+description = "Run the primitive normalization audit (JSX imports, JSDoc, tests)"
+run = "pnpm tsx tools/audit-primitives.ts"
+
+[tasks."audit:recipes"]
+description = "Verify recipe CSS uses only semantic attribute selectors (no .class or #id)"
+run = "pnpm tsx tools/audit-recipe-contract.ts"
+
+# ---------------------------------------------------------------------------
+# Acceptance gates (each runnable on its own)
+# ---------------------------------------------------------------------------
+
+[tasks."gate:phase0"]
+description = "Run the Phase 0 acceptance gate"
+run = "pnpm tsx tools/phase0-gate.ts"
+
+[tasks."gate:phase1"]
+description = "Run the Phase 1 acceptance gate"
+run = "pnpm tsx tools/phase1-gate.ts"
+
+[tasks."gate:phase2"]
+description = "Run the Phase 2 acceptance gate"
+run = "pnpm tsx tools/phase2-gate.ts"
+
+# ---------------------------------------------------------------------------
+# Accessibility
+# ---------------------------------------------------------------------------
+
+[tasks."a11y:scan"]
+description = "Run executable axe accessibility scans"
+run = "pnpm tsx tools/run-a11y.ts"
+
+[tasks."a11y:report"]
+description = "Generate the axe report from the executed result artifact"
+run = "pnpm tsx tools/generate-axe-report.ts"
+
+# ---------------------------------------------------------------------------
+# CI workflow — atomic steps (mirror .github/workflows/ci.yml jobs)
+# ---------------------------------------------------------------------------
+
+[tasks."ci:install"]
+description = "CI: install workspace deps from the frozen lockfile"
+run = "pnpm install --frozen-lockfile"
+
+[tasks."ci:playwright-install"]
+description = "CI: install Playwright browsers (chromium, firefox, webkit)"
+run = "pnpm exec playwright install chromium firefox webkit"
+
+[tasks."ci:solid-matrix"]
+description = "CI: Solid 2 compatibility matrix (Node 24/26 × low/mid/high tiers)"
+run = '''#!/usr/bin/env bash
+set -euo pipefail
+
+# This job mutates package.json/pnpm-lock.yaml per tier; restore them on exit
+# so the task is self-contained and leaves the working tree unchanged.
+tmp_dir="$(mktemp -d)"
+cp package.json "$tmp_dir/package.json"
+cp pnpm-lock.yaml "$tmp_dir/pnpm-lock.yaml"
+trap 'cp "$tmp_dir/package.json" package.json; cp "$tmp_dir/pnpm-lock.yaml" pnpm-lock.yaml; rm -rf "$tmp_dir"' EXIT
+
+for node_version in 24 26; do
+  for solid_tier in low mid high; do
+    echo "==> Solid matrix: Node ${node_version}, Solid ${solid_tier}"
+    mise exec "node@${node_version}" -- node scripts/set-solid-version.mjs "$solid_tier"
+    mise exec "node@${node_version}" -- pnpm install --no-frozen-lockfile
+    mise exec "node@${node_version}" -- pnpm exec nx run-many -t build --exclude=@solidiom/docs,@solidiom/docs-astro-poc
+    mise exec "node@${node_version}" -- pnpm exec nx run-many -t test --exclude=@solidiom/tests-package-source-parity
+    mise exec "node@${node_version}" -- pnpm exec vitest run --config vitest.browser.config.ts
+  done
+done
+'''
+
+# ---------------------------------------------------------------------------
+# Release workflow — atomic steps (mirror .github/workflows/release.yml)
+# ---------------------------------------------------------------------------
+
+[tasks."release:changeset-status"]
+description = "Release: report changeset status"
+run = "pnpm changeset status"
+
+[tasks."release:version-check"]
+description = "Release: validate the version plan without publishing (dry run)"
+run = 'pnpm changeset version --dry-run 2>&1 || echo "No changesets to version"'
+
+# ---------------------------------------------------------------------------
+# Workflow orchestrator — calls the independent tasks above in CI order.
+# Runs sequentially and stops on the first failure (fail-fast).
+# ---------------------------------------------------------------------------
+
+[tasks.github-workflows]
+description = "Run all CI and release workflow checks locally by calling each task in order"
+run = [
+  "mise run ci:install",
+  "mise run typecheck",
+  "mise run build",
+  "mise run test",
+  "mise run ci:playwright-install",
+  "mise run test:browser",
+  "mise run ci:solid-matrix",
+  "mise run build",
+  "mise run a11y:scan",
+  "mise run a11y:report",
+  "mise run gate:phase1",
+  "mise run gate:phase2",
+  "mise run gate:phase0",
+  "mise run release:changeset-status",
+  "mise run release:version-check",
+]
+
+# ---------------------------------------------------------------------------
+# Maintenance
+# ---------------------------------------------------------------------------
+
+[tasks.install]
+description = "Install all workspace dependencies"
+run = "pnpm install"
+
+[tasks.clean]
+description = "Remove all dist/ output directories"
+run = "find packages apps -name dist -type d -prune -exec rm -rf {} +"
+
+[tasks."clean:nx"]
+description = "Clear the nx build cache"
+run = "pnpm nx reset"
+
+# ---------------------------------------------------------------------------
+# Pre-commit
+# ---------------------------------------------------------------------------
+
+[tasks."precommit:format"]
+description = "Pre-commit: check formatting"
+depends = ["format:check"]
+run = 'echo "✓ format"'
+
+[tasks."precommit:lint"]
+description = "Pre-commit: lint"
+depends = ["precommit:format"]
+run = "mise run lint"
+
+[tasks."precommit:typecheck"]
+description = "Pre-commit: typecheck"
+depends = ["precommit:lint"]
+run = "mise run typecheck"
+
+[tasks."precommit:build"]
+description = "Pre-commit: build"
+depends = ["precommit:typecheck"]
+run = "mise run build"
+
+[tasks."precommit:test"]
+description = "Pre-commit: test"
+depends = ["precommit:build"]
+run = "mise run test"
+
+[tasks."precommit:audit"]
+description = "Pre-commit: run all audits"
+depends = ["precommit:test"]
+run = "mise run audit && mise run audit:recipes"
+
+[tasks.precommit]
+description = "Run all checks required before committing (format, lint, typecheck, build, test, audits)"
+depends = ["precommit:audit"]
+run = 'echo "✓ All pre-commit checks passed."'
