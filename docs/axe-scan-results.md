@@ -13,8 +13,8 @@ tags: [accessibility, axe, automated-testing]
 - Tool: axe-core 4.10.2 via Vitest browser mode
 - Browser: chromium (Playwright)
 - Scope: Each public primitive rendered in isolation with minimal valid props
-- Executed: 2026-07-27T05:02:35.056Z
-- Commit: `e10c698555759c1a052d0873924c1da27c5eea00`
+- Executed: 2026-07-27T12:56:36.697Z
+- Commit: `63ae965839b00e78f6bcc3b94a9a96265b4f1992`
 - CI run: Local execution (not CI evidence)
 - Test file: `tests/a11y/primitives-axe-scan.browser.test.tsx`
 - Results artifact: `artifacts/axe-results.json`
@@ -27,7 +27,7 @@ tags: [accessibility, axe, automated-testing]
 | alert            | 0          | 1          | 9      | ✅ Pass |
 | badge            | 0          | 0          | 1      | ✅ Pass |
 | button           | 0          | 0          | 3      | ✅ Pass |
-| calendar         | 0          | 0          | 9      | ✅ Pass |
+| calendar         | 0          | 1          | 20     | ✅ Pass |
 | carousel         | 0          | 0          | 13     | ✅ Pass |
 | checkbox         | 0          | 0          | 12     | ✅ Pass |
 | collapsible      | 0          | 0          | 8      | ✅ Pass |
@@ -67,8 +67,8 @@ tags: [accessibility, axe, automated-testing]
 
 - Total primitives scanned: 39/39
 - Violations found: 0
-- Incomplete checks: 5
-- Passing checks: 337
+- Incomplete checks: 6
+- Passing checks: 348
 - All primitives passing: Yes ✅
 
 ## Known Beta Gaps

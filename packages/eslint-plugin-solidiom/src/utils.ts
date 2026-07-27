@@ -8,7 +8,6 @@ export type LayerTag =
   | "layer:primitive"
   | "layer:adapter"
   | "layer:recipe"
-  | "layer:migration"
   | "layer:tooling"
 
 /** Layer import restrictions: key cannot import from values. */
@@ -17,12 +16,10 @@ export const LAYER_RESTRICTIONS: Record<string, string[]> = {
     "layer:primitive",
     "layer:adapter",
     "layer:recipe",
-    "layer:migration",
   ],
-  "layer:primitive": ["layer:recipe", "layer:migration"],
-  "layer:adapter": ["layer:primitive", "layer:recipe", "layer:migration"],
-  "layer:recipe": ["layer:migration"],
-  "layer:migration": [],
+  "layer:primitive": ["layer:recipe"],
+  "layer:adapter": ["layer:primitive", "layer:recipe"],
+  "layer:recipe": [],
 }
 
 /** Known external engine packages that only adapters may import. */
@@ -44,7 +41,6 @@ export function inferLayerFromPath(filePath: string): LayerTag | undefined {
   if (filePath.includes("/packages/cli/")) return "layer:tooling"
   if (filePath.includes("/packages/bench/")) return "layer:tooling"
   if (filePath.includes("/packages/test-doubles/")) return "layer:tooling"
-  if (filePath.includes("/migrations/")) return "layer:migration"
   // Default: primitives (packages/dialog, packages/select, etc.)
   if (filePath.includes("/packages/")) return "layer:primitive"
   return undefined

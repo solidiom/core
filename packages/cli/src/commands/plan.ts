@@ -31,6 +31,8 @@ export interface PlanOptions {
   primitive: string
   cwd: string
   mode?: "package" | "source"
+  registry?: string
+  noNetwork?: boolean
 }
 
 /** Registry entry for a primitive. */
@@ -43,14 +45,17 @@ interface RegistryPrimitive {
 
 /**
  * Loads the registry catalog. Resolves from:
- * 1. SOLIDIOM_REGISTRY_PATH environment variable
- * 2. Monorepo-relative registry/index.json
- * 3. Local .solidiom/registry-cache.json
+ * 1. Custom registry URL/path (from --registry flag)
+ * 2. SOLIDIOM_REGISTRY_PATH environment variable
+ * 3. Monorepo-relative registry/index.json
+ * 4. Local .solidiom/registry-cache.json
  *
  * Returns null if no registry is found (caller should scan node_modules).
  */
-function loadRegistry(cwd: string): Map<string, RegistryPrimitive> | null {
+function loadRegistry(cwd: string, registryOverride?: string): Map<string, RegistryPrimitive> | null {
   const candidates = [
+    // Custom registry path takes highest priority
+    registryOverride ? join(registryOverride, "index.json") : null,
     process.env["SOLIDIOM_REGISTRY_PATH"]
       ? join(process.env["SOLIDIOM_REGISTRY_PATH"], "index.json")
       : null,
@@ -229,7 +234,7 @@ const BUILTIN_PRIMITIVES = new Map<string, RegistryPrimitive>([
  * Core plan logic — usable from CLI and programmatic API.
  */
 export function runPlan(options: PlanOptions): Plan {
-  const { primitive, cwd, mode: modeOverride } = options
+  const { primitive, cwd, mode: modeOverride, registry: registryOverride, noNetwork: _noNetwork } = options
 
   const configPath = join(cwd, ".solidiom", "config.json")
   const config: Config = existsSync(configPath)
@@ -243,8 +248,12 @@ export function runPlan(options: PlanOptions): Plan {
 
   const mode = modeOverride ?? config.defaultMode
 
-  // Resolve primitive from registry or node_modules
-  const registry = loadRegistry(cwd)
+  // Resolve primitive from registry or node_modules.
+  // When _noNetwork (--no-network) is true, we rely entirely on local file-based resolution
+  // (registry catalog, node_modules, or builtin primitives). No remote fetches occur.
+  // Currently all resolution is file-based, so this flag is a no-op but documents intent
+  // and will guard any future network-based resolution paths.
+  const registry = loadRegistry(cwd, registryOverride)
   let entry: RegistryPrimitive | null = null
 
   if (registry) {
@@ -326,12 +335,18 @@ export class PlanCommand extends Command {
   primitive = Option.String({ required: true })
   json = Option.Boolean("--json", false, { description: "Output as JSON" })
   mode = Option.String("--mode", { description: "Install mode (package or source)" })
+  registry = Option.String("--registry", { description: "Custom registry URL for package resolution" })
+  noNetwork = Option.Boolean("--no-network", false, {
+    description: "Use only cached/local registry data (no network fetch)",
+  })
 
   async execute(): Promise<number> {
     const plan = runPlan({
       primitive: this.primitive,
       cwd: process.cwd(),
       mode: this.mode as "package" | "source" | undefined,
+      registry: this.registry,
+      noNetwork: this.noNetwork,
     })
 
     if (this.json) {

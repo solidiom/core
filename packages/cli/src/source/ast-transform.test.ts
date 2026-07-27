@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { rewriteImportsAst, applyMigration, type MigrationSpec } from "../source/ast-transform"
+import { rewriteImportsAst } from "../source/ast-transform"
 
 describe("source/ast-transform", () => {
   describe("rewriteImportsAst", () => {
@@ -90,66 +90,5 @@ describe("source/ast-transform", () => {
     })
   })
 
-  describe("applyMigration", () => {
-    const dialogMigration: MigrationSpec = {
-      fromModule: "@shadcn-solid/dialog",
-      toModule: "@solidiom/dialog",
-      importMap: {
-        Dialog: "Root",
-        DialogTrigger: "Trigger",
-        DialogContent: "Content",
-        DialogClose: "Close",
-      },
-      propMap: {
-        forceMount: null,
-        open: "open",
-      },
-    }
 
-    it("rewrites module specifier", () => {
-      const content = `import { Dialog, DialogTrigger } from "@shadcn-solid/dialog"`
-      const result = applyMigration(content, dialogMigration)
-      expect(result.changed).toBe(true)
-      expect(result.code).toContain("@solidiom/dialog")
-      expect(result.code).not.toContain("@shadcn-solid/dialog")
-      expect(result.importsRewritten).toBe(1)
-    })
-
-    it("renames imported identifiers", () => {
-      const content = `import { Dialog, DialogTrigger } from "@shadcn-solid/dialog"\nconst x = Dialog`
-      const result = applyMigration(content, dialogMigration)
-      expect(result.changed).toBe(true)
-      expect(result.code).toContain("Root")
-      expect(result.code).toContain("Trigger")
-      expect(result.identifiersRenamed).toBeGreaterThan(0)
-    })
-
-    it("removes props marked as null", () => {
-      const content = [
-        `import { DialogContent } from "@shadcn-solid/dialog"`,
-        `const x = <DialogContent forceMount={true} open={true}>hello</DialogContent>`,
-      ].join("\n")
-      const result = applyMigration(content, dialogMigration)
-      expect(result.changed).toBe(true)
-      expect(result.code).not.toContain("forceMount")
-      expect(result.propsRemapped).toBeGreaterThan(0)
-    })
-
-    it("preserves non-matching imports", () => {
-      const content = [
-        `import { createSignal } from "solid-js"`,
-        `import { Dialog } from "@shadcn-solid/dialog"`,
-      ].join("\n")
-      const result = applyMigration(content, dialogMigration)
-      expect(result.code).toContain(`from "solid-js"`)
-      expect(result.code).toContain("createSignal")
-    })
-
-    it("handles no matching imports gracefully", () => {
-      const content = `import { Button } from "./button"`
-      const result = applyMigration(content, dialogMigration)
-      expect(result.changed).toBe(false)
-      expect(result.code).toBe(content)
-    })
-  })
 })
