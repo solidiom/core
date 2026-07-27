@@ -77,4 +77,46 @@ describe("no-cross-layer-import", () => {
     )
     expect(errors).toHaveLength(0)
   })
+
+  it("blocks adapter importing from a recipe package", () => {
+    const errors = runRule(
+      noCrossLayerImport,
+      `import { buttonVariants } from "@solidiom/recipes-css"`,
+      "/project/packages/adapter-positioning-floating-ui/src/index.ts",
+    )
+    expect(errors).toHaveLength(1)
+    expect(errors[0].data.sourceLayer).toBe("layer:adapter")
+    expect(errors[0].data.targetLayer).toBe("layer:recipe")
+  })
+
+  it("blocks runtime importing from a recipe package", () => {
+    const errors = runRule(
+      noCrossLayerImport,
+      `import { buttonVariants } from "@solidiom/recipes-tailwind"`,
+      "/project/packages/runtime/src/state/something.ts",
+    )
+    expect(errors).toHaveLength(1)
+    expect(errors[0].data.sourceLayer).toBe("layer:runtime")
+    expect(errors[0].data.targetLayer).toBe("layer:recipe")
+  })
+
+  it("blocks primitive importing from a recipe package", () => {
+    const errors = runRule(
+      noCrossLayerImport,
+      `import { switchVariants } from "@solidiom/recipes-css"`,
+      "/project/packages/switch/src/index.ts",
+    )
+    expect(errors).toHaveLength(1)
+    expect(errors[0].data.sourceLayer).toBe("layer:primitive")
+    expect(errors[0].data.targetLayer).toBe("layer:recipe")
+  })
+
+  it("allows recipe importing from a primitive package", () => {
+    const errors = runRule(
+      noCrossLayerImport,
+      `import { Dialog } from "@solidiom/dialog"`,
+      "/project/packages/recipes-css/src/recipes/dialog.tsx",
+    )
+    expect(errors).toHaveLength(0)
+  })
 })

@@ -55,3 +55,12 @@ demand exists.
 This decision mirrors the existing documented skip for the source graph visualizer
 (deferred to Phase 3 per §14 of the gate), using the same justification framework:
 the deliverable has no acceptance-criteria dependency for the current milestone.
+
+
+
+## Addendum: Task 66 (Phase 3)
+
+Task 66 ("Legacy and migration beta readiness") is also descoped under the same
+rationale. It requires legacy facades and migration transforms to work against
+beta registry versions — but since Tasks 49 and 50 are descoped, Task 66 has
+no deliverable to verify.
