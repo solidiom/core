@@ -28,6 +28,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@types/node": "^20.19.0",
     "vitest": "^4.1.10"
   },
   "nx": {
