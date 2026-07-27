@@ -113,6 +113,85 @@ All tasks are defined in `.mise.toml`. Run `mise tasks` to list them.
 | `mise run clean`                         | Remove all dist/ directories              |
 | `mise run graph`                         | Open nx dependency graph                  |
 
+## Testing GitHub Actions locally
+
+CI (`.github/workflows/ci.yml`, `.github/workflows/release.yml`) can be run locally with [`act`](https://github.com/nektos/act) before pushing, using a clean-checkout build/typecheck rather than relying on cached local state.
+
+### Why this matters
+
+Local `nx` runs reuse the nx cache and an already-hoisted `node_modules`, which can mask real failures — a stale `pnpm-lock.yaml`, a missing `@types/node` dependency, or a workspace link that only exists because it was created by a previous install. These failures only surface on a genuinely clean checkout, which is what hosted CI does on every run. Running `act` locally reproduces that clean-checkout behavior without needing to push a commit and wait on hosted CI to find out.
+
+### Setup
+
+```sh
+brew install act
+```
+
+`act` needs a container runtime. This workspace uses [Podman](https://podman.io) instead of Docker Desktop:
+
+```sh
+brew install podman
+podman machine init
+podman machine start
+```
+
+Point `act` (and any Docker-API-speaking tool) at the Podman socket:
+
+```sh
+export DOCKER_HOST="unix://$(podman machine inspect podman-machine-default --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
+```
+
+Add this `export` to your shell profile so it persists across sessions.
+
+### Running a workflow or job
+
+```sh
+# List all jobs in a workflow without running them
+act push -W .github/workflows/ci.yml -l
+
+# Run a single job (fast iteration)
+act push -W .github/workflows/ci.yml -j build
+act push -W .github/workflows/ci.yml -j typecheck
+act push -W .github/workflows/ci.yml -j phase1-gate
+
+# Run the full workflow graph
+act push -W .github/workflows/ci.yml
+```
+
+Use a fuller runner image than act's default — the default image is a slimmed-down subset that can miss tools the real `ubuntu-latest` runner has:
+
+```sh
+act push -W .github/workflows/ci.yml -j build \
+  -P ubuntu-latest=catthehacker/ubuntu:act-22.04
+```
+
+### Apple Silicon caveat
+
+GitHub-hosted runners are `amd64`. On Apple Silicon, `act` must emulate that architecture via qemu:
+
+```sh
+act push -W .github/workflows/ci.yml -j build \
+  -P ubuntu-latest=catthehacker/ubuntu:act-22.04 \
+  --container-architecture linux/amd64
+```
+
+This emulation is not fully reliable for tasks that invoke native binaries. `vite build` (via esbuild/rolldown) has been observed to segfault under qemu emulation (`qemu: uncaught target signal 11`) for `@solidiom/docs`, `@solidiom/docs-astro-poc`, and `@solidiom/probe-primitive` even though each builds successfully both natively (`pnpm --filter <pkg> build`) and on real hosted CI. Pure `tsup`/`tsc` build tasks (no native binary invocation) do not exhibit this issue and are reliable signal under local `act` runs. If a `vite build` task fails only under local `act` with a segfault, treat it as an emulation artifact and confirm with a native `pnpm --filter <pkg> build` before treating it as a real regression.
+
+**Workaround:** for local iteration, omit `--container-architecture linux/amd64` and let `act` run job containers natively as `arm64`:
+
+```sh
+act push -W .github/workflows/ci.yml -j build \
+  -P ubuntu-latest=catthehacker/ubuntu:act-22.04
+```
+
+This avoids the qemu segfaults entirely, at the cost of no longer testing the exact `amd64` architecture the real GitHub runners use. That tradeoff is acceptable for catching logic, config, and dependency-resolution bugs (which is what this pipeline has caught so far) but would miss an `amd64`-specific native-binary bug. Re-add `--container-architecture linux/amd64` only when you specifically need to validate `amd64` behavior.
+
+### Known caveats
+
+- `actions/cache/restore` and `actions/cache/save` have no real backend under `act` and typically no-op; this is not a problem in practice since it forces every local run to be a genuine clean build.
+- Secrets referenced by workflows (none currently active — `release.yml`'s publish step is commented out) need to be supplied with `-s KEY=value` or a `.secrets` file.
+- Full-workflow runs (`test-solid-matrix`'s 6-way matrix, Playwright browser installs) are slow under emulation; prefer targeting individual jobs with `-j` while iterating.
+
 ## Key technologies
 
 | Layer           | Stack                                            |
