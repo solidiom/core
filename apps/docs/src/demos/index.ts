@@ -46,6 +46,19 @@ import { RadioGroupDemo, radioGroupDemoCode } from "./radio-group-demo"
 import { FieldDemo, fieldDemoCode } from "./field-demo"
 import { InputOTPDemo, inputOTPDemoCode } from "./input-otp-demo"
 import { ScrollAreaDemo, scrollAreaDemoCode } from "./scroll-area-demo"
+import { AlertDialogDemo, alertDialogDemoCode } from "./alert-dialog-demo"
+import { AvatarDemo, avatarDemoCode } from "./avatar-demo"
+import { BreadcrumbDemo, breadcrumbDemoCode } from "./breadcrumb-demo"
+import { CardDemo, cardDemoCode } from "./card-demo"
+import { ContextMenuDemo, contextMenuDemoCode } from "./context-menu-demo"
+import { EmptyStateDemo, emptyStateDemoCode } from "./empty-state-demo"
+import { HoverCardDemo, hoverCardDemoCode } from "./hover-card-demo"
+import { InputDemo, inputDemoCode } from "./input-demo"
+import { KbdDemo, kbdDemoCode } from "./kbd-demo"
+import { SheetDemo, sheetDemoCode } from "./sheet-demo"
+import { SkeletonDemo, skeletonDemoCode } from "./skeleton-demo"
+import { SpinnerDemo, spinnerDemoCode } from "./spinner-demo"
+import { ToolbarDemo, toolbarDemoCode } from "./toolbar-demo"
 
 export const demos: Record<string, DemoEntry> = {
   dialog: { component: () => DialogDemo(), code: dialogDemoCode },
@@ -88,4 +101,17 @@ export const demos: Record<string, DemoEntry> = {
   field: { component: () => FieldDemo(), code: fieldDemoCode },
   "input-otp": { component: () => InputOTPDemo(), code: inputOTPDemoCode },
   "scroll-area": { component: () => ScrollAreaDemo(), code: scrollAreaDemoCode },
+  "alert-dialog": { component: () => AlertDialogDemo(), code: alertDialogDemoCode },
+  avatar: { component: () => AvatarDemo(), code: avatarDemoCode },
+  breadcrumb: { component: () => BreadcrumbDemo(), code: breadcrumbDemoCode },
+  card: { component: () => CardDemo(), code: cardDemoCode },
+  "context-menu": { component: () => ContextMenuDemo(), code: contextMenuDemoCode },
+  "empty-state": { component: () => EmptyStateDemo(), code: emptyStateDemoCode },
+  "hover-card": { component: () => HoverCardDemo(), code: hoverCardDemoCode },
+  input: { component: () => InputDemo(), code: inputDemoCode },
+  kbd: { component: () => KbdDemo(), code: kbdDemoCode },
+  sheet: { component: () => SheetDemo(), code: sheetDemoCode },
+  skeleton: { component: () => SkeletonDemo(), code: skeletonDemoCode },
+  spinner: { component: () => SpinnerDemo(), code: spinnerDemoCode },
+  toolbar: { component: () => ToolbarDemo(), code: toolbarDemoCode },
 }

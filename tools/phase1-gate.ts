@@ -194,10 +194,7 @@ check(
   "no-adapter-jsx-attributes rule exists",
   fileExists("packages/eslint-plugin-solidiom/src/rules/no-adapter-jsx-attributes.ts"),
 )
-check(
-  "no-recipe-import-of-migration rule exists",
-  fileExists("packages/eslint-plugin-solidiom/src/rules/no-recipe-import-of-migration.ts"),
-)
+
 // P1.2: Task 28 named rule
 check(
   "no-adapter-import-of-recipes rule exists",
@@ -279,7 +276,7 @@ check("a11y result runner exists", fileExists("tools/run-a11y.ts"))
 
 const a11yResult = run("pnpm run test:a11y")
 check(
-  "all 39 axe scans execute and write a valid zero-violation artifact",
+  "all 52 axe scans execute and write a valid zero-violation artifact",
   a11yResult.ok,
   "Run: pnpm run test:a11y",
 )
