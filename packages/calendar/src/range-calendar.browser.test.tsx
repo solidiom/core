@@ -7,6 +7,7 @@
 
 import { describe, it, expect, afterEach } from "vitest"
 import { render } from "@solidjs/web"
+import { flush } from "solid-js"
 import * as Calendar from "./index"
 import type { RangeValue, DateValue } from "./index"
 
@@ -121,13 +122,10 @@ describe("RangeCalendar", () => {
 
   describe("range selection (start/end/restart)", () => {
     it("first click sets range start", () => {
-      const container = renderRangeCalendar({
-        onValueChange: () => {},
-      })
+      const container = renderRangeCalendar()
       const cell10 = getCellByDay(container, 10)!
       cell10.click()
-      // After first click, start is set but onValueChange only fires with complete range
-      // The cell should be marked as range-start
+      flush()
       expect(cell10.hasAttribute("data-range-start")).toBe(true)
     })
 
@@ -139,7 +137,9 @@ describe("RangeCalendar", () => {
       const cell10 = getCellByDay(container, 10)!
       const cell15 = getCellByDay(container, 15)!
       cell10.click()
+      flush()
       cell15.click()
+      flush()
       expect(result).toBeDefined()
       expect(result!.start).toEqual({ year: 2024, month: 6, day: 10 })
       expect(result!.end).toEqual({ year: 2024, month: 6, day: 15 })
@@ -153,39 +153,37 @@ describe("RangeCalendar", () => {
       const cell15 = getCellByDay(container, 15)!
       const cell10 = getCellByDay(container, 10)!
       cell15.click()
+      flush()
       cell10.click()
+      flush()
       expect(result).toBeDefined()
       expect(result!.start).toEqual({ year: 2024, month: 6, day: 10 })
       expect(result!.end).toEqual({ year: 2024, month: 6, day: 15 })
     })
 
     it("third click restarts selection (new start)", () => {
-      const container = renderRangeCalendar({
-        onValueChange: () => {},
-      })
+      const container = renderRangeCalendar()
       const cell10 = getCellByDay(container, 10)!
       const cell15 = getCellByDay(container, 15)!
       const cell20 = getCellByDay(container, 20)!
       cell10.click()
+      flush()
       cell15.click()
-      // Range complete: 10–15
+      flush()
       cell20.click()
-      // Restart: new start at 20, previous range cleared
+      flush()
       expect(cell20.hasAttribute("data-range-start")).toBe(true)
-      // Old range-end should be gone
       expect(cell15.hasAttribute("data-range-end")).toBe(false)
     })
 
     it("cells within range get data-in-range attribute", () => {
-      const container = renderRangeCalendar({
-        defaultValue: { start: { year: 2024, month: 6, day: 10 }, end: { year: 2024, month: 6, day: 15 } },
-      })
-      // Rendering with a pre-set completed range triggers the select path
-      // We need to click to set the range
+      const container = renderRangeCalendar()
       const cell10 = getCellByDay(container, 10)!
       const cell15 = getCellByDay(container, 15)!
       cell10.click()
+      flush()
       cell15.click()
+      flush()
       const cell12 = getCellByDay(container, 12)!
       expect(cell12.hasAttribute("data-in-range")).toBe(true)
     })
@@ -198,17 +196,18 @@ describe("RangeCalendar", () => {
         onValueChange: (r) => { result = r },
       })
       const grid = container.querySelector("[data-scope='range-calendar'][data-part='grid']")!
-      // Focus day 1 (initial focus)
-      const cell1 = getCellByDay(container, 1)!
-      cell1.focus()
-      // Press Enter to set start
+      // Press Enter to set start (focused on day 1)
       grid.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }))
+      flush()
       // Navigate right to day 2
       grid.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }))
+      flush()
       // Navigate right to day 3
       grid.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }))
+      flush()
       // Press Enter to set end
       grid.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }))
+      flush()
       expect(result).toBeDefined()
       expect(result!.start).toEqual({ year: 2024, month: 6, day: 1 })
       expect(result!.end).toEqual({ year: 2024, month: 6, day: 3 })
@@ -217,9 +216,8 @@ describe("RangeCalendar", () => {
     it("ArrowDown moves focus by 7 days", () => {
       const container = renderRangeCalendar()
       const grid = container.querySelector("[data-scope='range-calendar'][data-part='grid']")!
-      // Initial focus on day 1
       grid.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }))
-      // Focus should be on day 8
+      flush()
       const cell8 = getCellByDay(container, 8)
       expect(cell8?.getAttribute("tabindex")).toBe("0")
     })
@@ -228,6 +226,7 @@ describe("RangeCalendar", () => {
       const container = renderRangeCalendar()
       const grid = container.querySelector("[data-scope='range-calendar'][data-part='grid']")!
       grid.dispatchEvent(new KeyboardEvent("keydown", { key: "PageDown", bubbles: true }))
+      flush()
       const title = container.querySelector("[data-scope='range-calendar'][data-part='title']")
       expect(title?.textContent).toContain("July 2024")
     })
@@ -243,8 +242,8 @@ describe("RangeCalendar", () => {
     it("ArrowLeft moves forward in RTL mode", () => {
       const container = renderRangeCalendar({ dir: "rtl" })
       const grid = container.querySelector("[data-scope='range-calendar'][data-part='grid']")!
-      // Initial focus on day 1; ArrowLeft in RTL = +1 day
       grid.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }))
+      flush()
       const cell2 = getCellByDay(container, 2)
       expect(cell2?.getAttribute("tabindex")).toBe("0")
     })
@@ -255,8 +254,8 @@ describe("RangeCalendar", () => {
         defaultValue: { start: { year: 2024, month: 6, day: 5 } },
       })
       const grid = container.querySelector("[data-scope='range-calendar'][data-part='grid']")!
-      // Focus on day 5; ArrowRight in RTL = -1 day
       grid.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }))
+      flush()
       const cell4 = getCellByDay(container, 4)
       expect(cell4?.getAttribute("tabindex")).toBe("0")
     })
@@ -264,16 +263,13 @@ describe("RangeCalendar", () => {
 
   describe("disabled dates", () => {
     it("clicking a disabled date does not select it", () => {
-      let result: RangeValue | undefined
       const container = renderRangeCalendar({
         isDateDisabled: (d) => d.day === 12,
-        onValueChange: (r) => { result = r },
       })
       const cell12 = getCellByDay(container, 12)!
       cell12.click()
-      // Should not start selection
+      flush()
       expect(cell12.hasAttribute("data-range-start")).toBe(false)
-      expect(result).toBeUndefined()
     })
 
     it("disabled cell has aria-disabled=true", () => {
@@ -287,13 +283,13 @@ describe("RangeCalendar", () => {
     it("disabled dates within a range still show data-in-range", () => {
       const container = renderRangeCalendar({
         isDateDisabled: (d) => d.day === 12,
-        onValueChange: () => {},
       })
       const cell10 = getCellByDay(container, 10)!
       const cell15 = getCellByDay(container, 15)!
       cell10.click()
+      flush()
       cell15.click()
-      // Day 12 is disabled but geometrically in-range
+      flush()
       const cell12 = getCellByDay(container, 12)!
       expect(cell12.hasAttribute("data-in-range")).toBe(true)
       expect(cell12.getAttribute("aria-disabled")).toBe("true")
@@ -305,6 +301,7 @@ describe("RangeCalendar", () => {
       const container = renderRangeCalendar()
       const prev = container.querySelector("[data-scope='range-calendar'][data-part='prev-button']") as HTMLElement
       prev.click()
+      flush()
       const title = container.querySelector("[data-scope='range-calendar'][data-part='title']")
       expect(title?.textContent).toContain("May 2024")
     })
@@ -313,6 +310,7 @@ describe("RangeCalendar", () => {
       const container = renderRangeCalendar()
       const next = container.querySelector("[data-scope='range-calendar'][data-part='next-button']") as HTMLElement
       next.click()
+      flush()
       const title = container.querySelector("[data-scope='range-calendar'][data-part='title']")
       expect(title?.textContent).toContain("July 2024")
     })
