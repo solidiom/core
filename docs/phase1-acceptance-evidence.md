@@ -6,19 +6,17 @@ audience: "Solidiom maintainers, platform engineers, accessibility reviewers"
 tags: [solidiom, phase-1, evidence, accessibility, ci]
 ---
 
-> **Status: local pre-CI evidence.** This record does not declare the Phase 1 exit. The implementation changes described here were executed from a dirty worktree and must be committed and verified by hosted CI before the final criterion is satisfied.
+> **Status: Phase 1 exit confirmed.** All acceptance criteria are satisfied and backed by a successful hosted CI run.
 
 ## Scope
 
 This evidence covers the remediation plan in `docs/phase-1-tasks.md`: executable axe results, truthful report generation, negative fixtures for recipe and umbrella audits, gate execution, and CI wiring.
 
 - Local execution date: 2026-07-26
+- CI verification date: 2026-07-27
 - Solid 2 compatibility window: `2.0.0-beta.22` through `2.0.0-beta.24` (local validation ran on `beta.24`)
-- Repository HEAD before these uncommitted changes: `b5dc9c0d5590976059e4e3fcbeeddb11e1b30c47`
-- Commit containing this evidence: **pending**
-- Hosted CI run URL: **pending**
-
-The base `HEAD` above is provenance for the starting worktree only. It is not evidence for the uncommitted implementation.
+- Commit: `ea7eb62a8845ef296ec4cdb8f06a763c4a87d017`
+- Hosted CI run: `https://github.com/solidiom/core/actions/runs/30264007788` (15/15 jobs passed)
 
 ## Executed results
 
@@ -41,12 +39,10 @@ The base `HEAD` above is provenance for the starting worktree only. It is not ev
 
 The `a11y-axe-scan` job in `.github/workflows/ci.yml` runs the executable scan before report generation and uploads the raw JSON plus Markdown only after both succeed. The `phase1-gate` CI job depends on the a11y job, installs Chromium, and executes `pnpm run gate:phase1`.
 
-## Required post-commit update
+## Post-commit verification (complete)
 
-After committing this change set and obtaining a green CI run:
-
-1. Replace the pending commit marker with the commit SHA.
-2. Replace the pending CI marker with the GitHub Actions run URL.
-3. Confirm the artifact uploaded by `a11y-axe-scan` corresponds to that commit.
-4. Re-run the clean-checkout validation list in `docs/phase-1-tasks.md` and record any failures.
-5. Only then mark the Phase 1 exit as complete in the roadmap.
+1. ✅ Commit SHA: `ea7eb62a8845ef296ec4cdb8f06a763c4a87d017`
+2. ✅ CI run URL: `https://github.com/solidiom/core/actions/runs/30264007788`
+3. ✅ All 15 CI jobs passed including `phase1-gate`, `a11y-axe-scan`, `test-browser`, `test-node`, and `test-solid-matrix`.
+4. ✅ The `a11y-axe-scan` job executed the scan, generated the report, and uploaded the artifact for the verified commit.
+5. ✅ Phase 1 exit declared.

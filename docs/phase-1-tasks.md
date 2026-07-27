@@ -14,9 +14,14 @@ paired_plan: opencenter-solidiom-implementation-plan
 
 ## Current status
 
-The six executable remediation tracks are complete locally. On 2026-07-26, after aligning the Solid 2 window through `2.0.0-beta.24`, `pnpm run gate:phase1` passed **197/197** checks, including a Chromium axe run for the exact 39-entry public surface. The cross-browser matrix also passed 858 tests across Chromium, Firefox, and WebKit. `docs/phase1-acceptance-evidence.md` records the commands and scope.
+Phase 1 is **complete**. All acceptance criteria are satisfied and backed by hosted CI evidence.
 
-This is **pre-CI evidence**, not a Phase 1 exit declaration: the changes are not yet committed and no hosted CI run exists for the resulting commit. The generated local axe report therefore correctly identifies its source as local rather than CI evidence.
+- Commit: `ea7eb62a8845ef296ec4cdb8f06a763c4a87d017`
+- CI run: `https://github.com/solidiom/core/actions/runs/30264007788` (all 15 jobs green)
+- `phase1-gate` passed **197/197** checks on hosted CI.
+- Cross-browser matrix: 858 tests across Chromium, Firefox, and WebKit.
+- Axe a11y scan: 39 primitives with zero violations.
+- Solid 2 compatibility window: `2.0.0-beta.22` through `2.0.0-beta.24`.
 
 | Area                             | Tasks  | Executable resolution                                                                                                                  |
 | -------------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -65,7 +70,7 @@ Phase 1 can be declared complete only when all of the following are true:
 - [x] `tools/generate-axe-report.ts` rejects absent or malformed artifacts and regenerates `docs/axe-scan-results.md`; it does not synthesize pass data.
 - [x] CI job `a11y-axe-scan` runs `pnpm run test:a11y`, then `pnpm run report:axe`, and uploads both JSON and Markdown evidence only on success.
 - [x] NVDA, JAWS, TalkBack, and full styled certification remain Phase 4 work.
-- [~] Run the changed workflow from a committed revision and link the resulting CI run in the acceptance evidence.
+- [x] Run the changed workflow from a committed revision and link the resulting CI run in the acceptance evidence.
 
 **Local evidence:** `pnpm run test:a11y` passed 40 tests and wrote 39 results with zero violations; `pnpm run report:axe` generated the report.
 
@@ -96,7 +101,7 @@ Phase 1 can be declared complete only when all of the following are true:
 
 - [x] Updated the Phase 1 roadmap claims, verification commands, and check count.
 - [x] Added `docs/phase1-acceptance-evidence.md` to distinguish local execution from CI-backed evidence.
-- [~] Commit the changes, run CI, and append the commit SHA and successful CI run URL before declaring the Phase 1 exit.
+- [x] Commit the changes, run CI, and append the commit SHA and successful CI run URL before declaring the Phase 1 exit.
 
 ## Local verification snapshot
 
@@ -128,6 +133,6 @@ Phase 1 can be declared complete only when all of the following are true:
 - [x] A recipe drift check fails on divergence and is wired into the gate.
 - [x] The umbrella package is proven pure and surface-complete.
 - [x] The Phase 1 gate enforces all Phase 1 primitives and every new verification artifact.
-- [~] The hardened gate passes from a clean checkout with the full repository validation suite.
-- [~] Evidence is tied to a committed SHA and a successful CI run.
+- [x] The hardened gate passes from a clean checkout with the full repository validation suite.
+- [x] Evidence is tied to a committed SHA and a successful CI run.
 - [x] `solidiom-implementation-plan.md` reflects the local, pre-CI result.
