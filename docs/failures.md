@@ -152,35 +152,60 @@ This is a genuine policy conflict: the repo root declares `engines.node: ">=20.0
 
 ## Sequenced resolution plan
 
-1. **F1 — add `jsdom` + refresh lockfile + harden `run-a11y.ts`.** Unblocks `a11y-axe-scan` and `test-browser` (and the browser step of the matrix). Highest impact, lowest risk.
-2. **F2 — fix `source-install.test.ts` fixture paths.** Unblocks `test-node` and the `pnpm test` step of the matrix.
-3. **F3 — decide and apply the `docs-astro-poc` / Node 20 remediation** (Option A or B recommended). Unblocks the `test-solid-matrix` Node 20 tiers.
-4. **Full local verification** (clean, no nx cache) mirroring the CI job set:
-   ```sh
-   rm -rf node_modules packages/*/node_modules apps/*/node_modules
-   pnpm install --frozen-lockfile
-   pnpm exec nx reset
-   pnpm build
-   pnpm typecheck
-   pnpm test
-   pnpm test:browser
-   pnpm run test:a11y && pnpm run report:axe
-   pnpm run gate:phase0
-   pnpm run gate:phase1
-   ```
-   Also reproduce the Node-20 tier locally if feasible (`node scripts/set-solid-version.mjs low` on a Node 20 runtime) to confirm F3.
-5. **Local `act` dry run** of the affected jobs (native arm64, per `README.md`), then commit and push and confirm the full hosted CI run goes green through `phase1-gate` / `phase0-gate`.
+F1, F2, F3 resolved in commit `d678a76`. F4 resolved in the follow-up commit (cache-path fix). F5 remains open.
 
 ## Verification checklist
 
-- [ ] `pnpm install --frozen-lockfile` succeeds from a fully clean `node_modules` (proves F1 lockfile fix and no other missing deps).
-- [ ] `pnpm test:browser` exits 0 (F1).
-- [ ] `pnpm run test:a11y` exits 0 and writes `artifacts/axe-results.json` (F1).
-- [ ] `pnpm --filter @solidiom/cli test` passes, including under a shallow `TMPDIR=/tmp` (F2).
-- [ ] Workspace `pnpm build` succeeds on Node 20 **or** `docs-astro-poc` is removed/excluded from the Node 20 path (F3).
-- [ ] Hosted CI run on `solidiom/core` reaches and passes `phase1-gate` and `phase0-gate`.
+- [x] `pnpm install --frozen-lockfile` succeeds from a fully clean `node_modules` (F1).
+- [x] `pnpm test:browser` exits 0 (F1).
+- [x] `pnpm run test:a11y` exits 0 and writes `artifacts/axe-results.json` (F1).
+- [x] `pnpm --filter @solidiom/cli test` passes, including under a shallow `TMPDIR=/tmp` (F2).
+- [x] Workspace `pnpm build` succeeds with new Node floor (F3).
+- [x] Hosted CI: `a11y-axe-scan` ✅, `test-browser` ✅ (confirmed run `30238710110`).
+- [ ] Hosted CI: `test-node` passes (blocked by F4 cache-path gap — now fixed, pending push).
+- [ ] Hosted CI: `test-solid-matrix` all tiers pass (blocked by F5 — open).
+- [ ] Hosted CI: `phase1-gate` and `phase0-gate` pass.
 
-## Notes / open decisions
+---
 
-- **F3 requires a product decision** (keep vs. remove `docs-astro-poc`; keep vs. drop Node 20 support). This is the only item that is not a purely mechanical fix.
+## F4 — CI cache does not include `tests/*/node_modules` (RESOLVED)
+
+**Affected jobs:** `test-node` (all tiers).
+
+**Symptom:**
+```
+Error: Cannot find package '@solidiom/dialog' imported from tests/package-source-parity/parity.test.ts
+```
+Build succeeds (74 projects, `dist/` exists), but the parity test's dynamic `import("@solidiom/dialog")` fails because the workspace symlinks in `tests/package-source-parity/node_modules/@solidiom/` were never restored from cache.
+
+**Root cause:** `actions/cache/save` and all `cache/restore` blocks specified `node_modules`, `packages/*/node_modules`, `apps/*/node_modules` — missing `tests/*/node_modules`. Workspace packages in `tests/` had no symlinks after cache restore.
+
+**Fix applied:** Added `tests/*/node_modules` to all 10 cache path blocks (1 save + 9 restore) in `ci.yml`.
+
+---
+
+## F5 — Parity test fails under non-high Solid matrix tiers (OPEN)
+
+**Affected jobs:** `test-solid-matrix` (non-high tiers, e.g. `mid, 26`).
+
+**Symptom:**
+```
+Error: Cannot find package 'react/jsx-dev-runtime' imported from packages/dialog/source/dialog.tsx
+```
+
+**Root cause:** The `source/` canonical TSX files are pre-compiled with the `high` Solid beta's `babel-preset-solid` transform. When the solid-matrix job switches to a different beta tier (`low`/`mid`) via `set-solid-version.mjs` and re-installs, the parity test imports from `source/` directly — but those files contain JSX compiled for a different babel-preset-solid version, which emits `react/jsx-dev-runtime` instead of the expected Solid JSX calls.
+
+This is a **design gap** in how the parity test interacts with the solid-matrix: the `source/` emission is tier-specific, but only one tier's output exists on disk at a time. The parity test assumes all tiers can import the same pre-built `source/` files, which isn't true across Solid beta API boundaries.
+
+**Remediation options (not yet decided):**
+- **A.** Exclude `@solidiom/tests-package-source-parity` from the solid-matrix `pnpm test` (only run it in the primary `test-node` job which uses the `high` tier). The matrix's purpose is primitive/adapter compat, not source-parity.
+- **B.** Have the matrix job rebuild `source/` emissions for its active tier before running parity tests.
+- **C.** Skip the parity test's dynamic-import cases when the active Solid version doesn't match the pre-built source tier.
+
+**Recommended:** A (exclude from matrix, run only in primary test-node).
+
+---
+
+## Notes
+
 - The `@solidiom/docs:build` and `@solidiom/probe-primitive:build` segfaults seen earlier were **local `act`/qemu emulation artifacts only** and do **not** reproduce on hosted CI (both built fine in this run). They are not tracked here as failures.
