@@ -2,7 +2,7 @@
 import { Show, createContext, useContext } from "solid-js";
 import { createControllableValue, createChangeDetails, applySemanticAttrs } from "@solidiom/runtime";
 var CheckboxContext = createContext();
-var CheckboxGroupContext = createContext();
+var CheckboxGroupContext = createContext(null);
 function Group(props) {
   const { value, requestChange } = createControllableValue({
     value: props.value,

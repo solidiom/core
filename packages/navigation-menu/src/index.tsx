@@ -4,7 +4,7 @@
  * Parts: Root, List, Item, Trigger, Content, Link.
  */
 
-import { createSignal, type Accessor } from "solid-js"
+import { createSignal, onCleanup, type Accessor } from "solid-js"
 import { type JSX, Show } from "@solidjs/web"
 import {
   createCollection,
@@ -245,7 +245,7 @@ export function Trigger(props: NavigationMenuTriggerProps) {
   const itemId = itemCtx.value
 
   // Register item with collection
-  ctx.collection.registerItem({
+  const unregister = ctx.collection.registerItem({
     id: itemId,
     get ref() {
       return ref
@@ -253,6 +253,7 @@ export function Trigger(props: NavigationMenuTriggerProps) {
     disabled: () => false,
     textValue: () => itemId,
   })
+  onCleanup(unregister)
 
   const handleClick = () => {
     if (itemCtx.isOpen()) {

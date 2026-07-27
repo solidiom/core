@@ -64,6 +64,7 @@ const PART_MAP: Record<string, string> = {
 const UNSUPPORTED_PARTS = ["Header", "Footer"] as const
 
 export function transform(source: string, options: TransformOptions = {}): TransformResult {
+  void options
   const diagnostics: TransformDiagnostic[] = []
   let code = source
   let changed = false
@@ -176,7 +177,7 @@ export function transform(source: string, options: TransformOptions = {}): Trans
   // ─── Step 3: Rewrite Overlay → Backdrop ──────────────────────────────────
 
   // <DialogOverlay> → <Backdrop>
-  code = code.replace(/<(\/?)DialogOverlay(\s|>|\/)/g, (match, slash, rest) => {
+  code = code.replace(/<(\/?)DialogOverlay(\s|>|\/)/g, (_match, slash, rest) => {
     changed = true
     return `<${slash}Backdrop${rest}`
   })

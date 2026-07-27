@@ -154,8 +154,64 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: pnpm exec vitest run --config vitest.browser.config.ts
 
+  a11y-axe-scan:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm build
+      - run: npx playwright install --with-deps chromium
+      - name: Run executable axe accessibility scans
+        run: pnpm run test:a11y
+      - name: Generate axe report from the executed result artifact
+        run: pnpm run report:axe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: axe-scan-results
+          path: |
+            artifacts/axe-results.json
+            docs/axe-scan-results.md
+          retention-days: 30
+
+  phase1-gate:
+    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: npx playwright install --with-deps chromium
+      - run: pnpm run gate:phase1
+
   phase0-gate:
-    needs: [typecheck, build, test-node, test-browser]
+    needs:
+      [typecheck, build, test-node, test-browser, a11y-axe-scan, phase1-gate]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

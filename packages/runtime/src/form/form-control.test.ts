@@ -30,7 +30,7 @@ describe("createFormControl", () => {
     const fc = createFormControl({ id: "f1", invalid: () => true })
     const props = fc.controlProps()
     expect(props["aria-describedby"]).toBe("f1-error")
-    expect(props["aria-invalid"]).toBe(true)
+    expect(props["aria-invalid"]).toBe("true")
   })
 
   it("controlProps reflects required/disabled/readOnly", () => {
@@ -41,9 +41,9 @@ describe("createFormControl", () => {
       readOnly: () => true,
     })
     const props = fc.controlProps()
-    expect(props["aria-required"]).toBe(true)
-    expect(props["aria-disabled"]).toBe(true)
-    expect(props["aria-readonly"]).toBe(true)
+    expect(props["aria-required"]).toBe("true")
+    expect(props["aria-disabled"]).toBe("true")
+    expect(props["aria-readonly"]).toBe("true")
   })
 
   it("controlProps omits false aria attributes", () => {

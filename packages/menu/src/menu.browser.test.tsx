@@ -6,6 +6,7 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest"
 import { render } from "@solidjs/web"
+import { flush } from "solid-js"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as Menu from "./index"
 
@@ -66,6 +67,7 @@ describe("Menu", () => {
 
     const trigger = container.querySelector("[data-part='trigger']") as HTMLElement
     trigger.click()
+    flush()
 
     const content = container.querySelector("[role='menu']")
     expect(content).not.toBeNull()
@@ -154,6 +156,7 @@ describe("Menu.CheckboxItem", () => {
 
     const item = container.querySelector("[role='menuitemcheckbox']") as HTMLElement
     item.click()
+    flush()
     expect(onChange).toHaveBeenCalledWith(true)
   })
 
@@ -222,6 +225,7 @@ describe("Menu.RadioGroup + Menu.RadioItem", () => {
 
     const items = container.querySelectorAll<HTMLElement>("[role='menuitemradio']")
     items[1]!.click()
+    flush()
     expect(onChange).toHaveBeenCalledWith("b")
   })
 

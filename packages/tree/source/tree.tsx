@@ -72,7 +72,7 @@ export function Root(props: TreeRootProps) {
     equals: (a, b) => a.size === b.size && [...a].every((id) => b.has(id)),
   })
 
-  const [items, setItems] = createSignal<TreeItemEntry[]>([])
+  const [items, setItems] = createSignal<TreeItemEntry[]>([], { ownedWrite: true })
   const [focusedId, setFocusedId] = createSignal<string | null>(null)
 
   const registerItem = (entry: TreeItemEntry): (() => void) => {

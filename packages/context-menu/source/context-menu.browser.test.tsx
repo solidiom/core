@@ -4,6 +4,7 @@
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { render } from "@solidjs/web"
+import { flush } from "solid-js"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as ContextMenu from "./index"
 
@@ -87,6 +88,7 @@ describe("ContextMenu", () => {
     const trigger = container.querySelector("[data-part='trigger']") as HTMLElement
     const event = new MouseEvent("contextmenu", { bubbles: true, cancelable: true })
     trigger.dispatchEvent(event)
+    flush()
 
     const items = container.querySelectorAll("[role='menuitem']")
     expect(items.length).toBe(3)

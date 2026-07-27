@@ -43,7 +43,7 @@ interface RegistryPrimitive {
 
 /**
  * Loads the registry catalog. Resolves from:
- * 1. Solidiom_REGISTRY_PATH environment variable
+ * 1. SOLIDIOM_REGISTRY_PATH environment variable
  * 2. Monorepo-relative registry/index.json
  * 3. Local .solidiom/registry-cache.json
  *
@@ -51,8 +51,8 @@ interface RegistryPrimitive {
  */
 function loadRegistry(cwd: string): Map<string, RegistryPrimitive> | null {
   const candidates = [
-    process.env["Solidiom_REGISTRY_PATH"]
-      ? join(process.env["Solidiom_REGISTRY_PATH"], "index.json")
+    process.env["SOLIDIOM_REGISTRY_PATH"]
+      ? join(process.env["SOLIDIOM_REGISTRY_PATH"], "index.json")
       : null,
     join(cwd, "..", "..", "registry", "index.json"),
     join(cwd, "node_modules", "@solidiom", "registry", "index.json"),

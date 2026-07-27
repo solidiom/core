@@ -6,6 +6,7 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest"
 import { render } from "@solidjs/web"
+import { flush } from "solid-js"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as ToggleGroup from "./index"
 
@@ -90,6 +91,7 @@ describe("ToggleGroup", () => {
     expect(items[0]!.getAttribute("aria-pressed")).toBe("true")
 
     items[1]!.click()
+    flush()
 
     expect(items[0]!.getAttribute("aria-pressed")).toBe("false")
     expect(items[1]!.getAttribute("aria-pressed")).toBe("true")
@@ -109,6 +111,7 @@ describe("ToggleGroup", () => {
 
     const items = container.querySelectorAll<HTMLElement>("button")
     items[0]!.click()
+    flush()
 
     expect(items[0]!.getAttribute("aria-pressed")).toBe("false")
     expect(items[1]!.getAttribute("aria-pressed")).toBe("false")
@@ -129,7 +132,9 @@ describe("ToggleGroup", () => {
 
     const items = container.querySelectorAll<HTMLElement>("button")
     items[0]!.click()
+    flush()
     items[2]!.click()
+    flush()
 
     expect(items[0]!.getAttribute("aria-pressed")).toBe("true")
     expect(items[1]!.getAttribute("aria-pressed")).toBe("false")
@@ -171,6 +176,7 @@ describe("ToggleGroup", () => {
     expect(items[0]!.hasAttribute("data-disabled")).toBe(true)
 
     items[0]!.click()
+    flush()
     expect(onChange).not.toHaveBeenCalled()
   })
 
@@ -189,6 +195,7 @@ describe("ToggleGroup", () => {
 
     const items = container.querySelectorAll<HTMLElement>("button")
     items[0]!.click()
+    flush()
 
     expect(onChange).toHaveBeenCalledWith(["a"])
   })

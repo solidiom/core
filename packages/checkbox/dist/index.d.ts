@@ -30,7 +30,7 @@ export interface CheckboxGroupProps {
  */
 export declare function Group(props: CheckboxGroupProps): JSX.Element;
 /** Hook to access the CheckboxGroup context (if present). */
-export declare function useCheckboxGroup(): CheckboxGroupContextValue;
+export declare function useCheckboxGroup(): CheckboxGroupContextValue | null;
 export interface CheckboxRootProps {
     checked?: Accessor<CheckedState | undefined>;
     defaultChecked?: CheckedState;
