@@ -2,6 +2,11 @@
 node = "latest"
 pnpm = "latest"
 
+[env]
+# Prevent global mise npm tools from auto-installing in this workspace.
+# They conflict with workspace-local deps managed by pnpm (EEXIST link errors).
+MISE_DISABLE_TOOLS = "npm:opencode-ai,npm:opencode-codebase-index,npm:playwright,npm:slides-grab,npm:@openai/codex,npm:@playwright/cli,npm:@storybook/addon-mcp,npm:@bitbonsai/mcpvault,npm:@swarmvaultai/cli,npm:corepack,npm:typescript,npm:tsx,npm:rimraf"
+
 # ---------------------------------------------------------------------------
 # Build
 # ---------------------------------------------------------------------------
@@ -53,6 +58,14 @@ run = "pnpm vitest run --config vitest.browser.config.ts"
 [tasks."test:e2e"]
 description = "Run Playwright end-to-end tests"
 run = "pnpm playwright test --config tests/e2e/playwright.config.ts"
+
+[tasks."test:all"]
+description = "Run all test surfaces (unit + browser + e2e)"
+run = [
+  "mise run test",
+  "mise run test:browser",
+  "mise run test:e2e",
+]
 
 [tasks."test:package"]
 description = "Test a single package  →  mise run test:package -- @solidiom/button"
