@@ -6,6 +6,7 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest"
 import { render } from "@solidjs/web"
+import { flush } from "solid-js"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as NavigationMenu from "./index"
 
@@ -124,6 +125,7 @@ describe("NavigationMenu", () => {
 
     const trigger = container.querySelector("button[role='menuitem']")! as HTMLButtonElement
     trigger.click()
+    flush()
 
     expect(trigger.getAttribute("aria-expanded")).toBe("true")
     expect(trigger.getAttribute("data-state")).toBe("open")
@@ -151,7 +153,9 @@ describe("NavigationMenu", () => {
 
     const trigger = container.querySelector("button[role='menuitem']")! as HTMLButtonElement
     trigger.click()
+    flush()
     trigger.click()
+    flush()
 
     expect(trigger.getAttribute("aria-expanded")).toBeNull()
     const content = container.querySelector("[role='menu']")
@@ -182,6 +186,7 @@ describe("NavigationMenu", () => {
     // Open the menu
     const trigger = container.querySelector("button[role='menuitem']")! as HTMLButtonElement
     trigger.click()
+    flush()
 
     const link = container.querySelector("a[role='menuitem']")!
     expect(link.getAttribute("aria-current")).toBe("page")

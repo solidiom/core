@@ -7,6 +7,7 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest"
 import { render } from "@solidjs/web"
+import { flush } from "solid-js"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as Select from "./index"
 
@@ -100,6 +101,7 @@ describe("Select", () => {
 
     const trigger = container.querySelector("[role='combobox']") as HTMLElement
     trigger.click()
+    flush()
 
     const listbox = container.querySelector("[role='listbox']")
     expect(listbox).not.toBeNull()
@@ -147,6 +149,7 @@ describe("Select", () => {
 
     const items = container.querySelectorAll<HTMLElement>("[role='option']")
     items[1]!.click()
+    flush()
 
     expect(onChange).toHaveBeenCalled()
   })
@@ -191,6 +194,7 @@ describe("Select", () => {
 
     const trigger = container.querySelector("[role='combobox']") as HTMLElement
     trigger.click()
+    flush()
 
     const listbox = container.querySelector("[role='listbox']")
     expect(listbox).toBeNull()

@@ -7,6 +7,7 @@
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { render } from "@solidjs/web"
+import { flush } from "solid-js"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as Sheet from "./index"
 
@@ -122,6 +123,7 @@ describe("Sheet", () => {
 
     const trigger = container.querySelector("[data-part='trigger']") as HTMLElement
     trigger.click()
+    flush()
 
     const content = container.querySelector("[role='dialog']")
     expect(content).not.toBeNull()
@@ -148,6 +150,7 @@ describe("Sheet", () => {
     const closeBtn = container.querySelector("[data-part='close']") as HTMLElement
     expect(closeBtn).not.toBeNull()
     closeBtn.click()
+    flush()
 
     const content = container.querySelector("[role='dialog']")
     expect(content).toBeNull()
@@ -199,6 +202,6 @@ describe("Sheet", () => {
       container,
     )
 
-    guard.expectNoErrors()
+    guard.assertNoErrors()
   })
 })

@@ -71,10 +71,10 @@ export function createFormControl(options: FormControlOptions = {}): FormControl
     id: controlId,
     "aria-labelledby": labelId,
     "aria-describedby": state.invalid() ? errorId : descriptionId,
-    "aria-invalid": state.invalid() || undefined,
-    "aria-required": state.required() || undefined,
-    "aria-disabled": state.disabled() || undefined,
-    "aria-readonly": state.readOnly() || undefined,
+    "aria-invalid": state.invalid() ? "true" : undefined,
+    "aria-required": state.required() ? "true" : undefined,
+    "aria-disabled": state.disabled() ? "true" : undefined,
+    "aria-readonly": state.readOnly() ? "true" : undefined,
   })
 
   const labelProps = () => ({

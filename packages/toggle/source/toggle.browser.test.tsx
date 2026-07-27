@@ -6,7 +6,7 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest"
 import { render } from "@solidjs/web"
-import { createSignal } from "solid-js"
+import { createSignal, flush } from "solid-js"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as Toggle from "./index"
 
@@ -66,10 +66,12 @@ describe("Toggle", () => {
     expect(btn.getAttribute("aria-pressed")).toBe("false")
 
     btn.click()
+    flush()
     expect(btn.getAttribute("aria-pressed")).toBe("true")
     expect(btn.getAttribute("data-state")).toBe("on")
 
     btn.click()
+    flush()
     expect(btn.getAttribute("aria-pressed")).toBe("false")
     expect(btn.getAttribute("data-state")).toBe("off")
   })

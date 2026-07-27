@@ -42,7 +42,7 @@ function Root(props) {
     onChange: props.onSelectedChange,
     equals: (a, b) => a.size === b.size && [...a].every((id) => b.has(id))
   });
-  const [items, setItems] = createSignal([]);
+  const [items, setItems] = createSignal([], { ownedWrite: true });
   const [focusedId, setFocusedId] = createSignal(null);
   const registerItem = (entry) => {
     setItems((prev) => [...prev, entry]);

@@ -27,10 +27,13 @@ if (!version) {
 const pkgPath = resolve(import.meta.dirname, "../package.json")
 const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"))
 
-// Add pnpm overrides to force a specific solid-js version
+// Force the entire Solid toolchain to the selected matrix tier. Updating only
+// solid-js leaves @solidjs/web and babel-preset-solid on an incompatible beta.
 pkg.pnpm = pkg.pnpm || {}
 pkg.pnpm.overrides = pkg.pnpm.overrides || {}
 pkg.pnpm.overrides["solid-js"] = version
+pkg.pnpm.overrides["@solidjs/web"] = version
+pkg.pnpm.overrides["babel-preset-solid"] = version
 
 writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n")
-console.log(`Set solid-js override to ${version} (tier: ${tier})`)
+console.log(`Set Solid toolchain override to ${version} (tier: ${tier})`)

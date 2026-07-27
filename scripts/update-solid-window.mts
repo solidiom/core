@@ -71,15 +71,15 @@ function main() {
   const workspacePath = join(ROOT, "pnpm-workspace.yaml")
   let workspace = readFileSync(workspacePath, "utf8")
   workspace = workspace.replace(
-    /solid-js: "\^[^"]+"/,
+    /solid-js: "[^"]+"/,
     `solid-js: "${newPeerRange}"`,
   )
   workspace = workspace.replace(
-    /"@solidjs\/web": "\^[^"]+"/,
+    /"@solidjs\/web": "[^"]+"/,
     `"@solidjs/web": "${newPeerRange}"`,
   )
   workspace = workspace.replace(
-    /babel-preset-solid: "\^[^"]+"/,
+    /babel-preset-solid: "[^"]+"/,
     `babel-preset-solid: "${newPeerRange}"`,
   )
   // Update overrides to pin the high version
@@ -94,7 +94,7 @@ function main() {
   const pkgPath = join(ROOT, "package.json")
   const pkg = JSON.parse(readFileSync(pkgPath, "utf8"))
   if (pkg.devDependencies?.["solid-js"]) {
-    pkg.devDependencies["solid-js"] = `^${newHigh}`
+    pkg.devDependencies["solid-js"] = newHigh
   }
   if (pkg.devDependencies?.["@solidjs/web"]) {
     pkg.devDependencies["@solidjs/web"] = newHigh

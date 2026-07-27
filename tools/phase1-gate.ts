@@ -1,13 +1,18 @@
 /**
- * Phase 1 acceptance-criteria gate.
+ * Phase 1 acceptance-criteria gate (hardened).
  *
  * Verifies Phase 1 exit criteria:
  * - Every Phase 1 primitive must exist, typecheck, and build.
  * - Primitives with browser test files must have them present and well-formed.
  * - Build output (dist/) must be produced for each primitive.
  * - Recipe packages must build successfully.
- * - ESLint rules must pass their test suite.
+ * - ESLint rules must pass their test suite (≥60 tests, covering anatomy rules).
  * - CLI doctor command must exist and CLI tests must pass.
+ * - Anatomy/semantics ESLint rules exist and are registered.
+ * - no-adapter-import-of-recipes rule exists.
+ * - Recipe dual-emission drift check passes.
+ * - Umbrella re-export purity check passes.
+ * - Axe a11y scan test file covers the full public surface.
  *
  * Run via: pnpm exec tsx tools/phase1-gate.ts
  */
@@ -23,7 +28,7 @@ import {
   run,
 } from "./gate-helpers"
 
-console.log("Phase 1 Acceptance Gate\n")
+console.log("Phase 1 Acceptance Gate (hardened)\n")
 
 // ─── 1. All Phase 1 primitives typecheck and build ──────────────────────
 console.log("§1 Phase 1 primitives typecheck + build:")
@@ -47,6 +52,12 @@ const p1Primitives = [
   "progress",
   "meter",
   "alert",
+  // Previously missing — added per P1.6
+  "field",
+  "toggle",
+  "toggle-group",
+  "radio-group",
+  "pagination",
 ]
 
 for (const p of p1Primitives) {
@@ -66,8 +77,6 @@ for (const p of p1Primitives) {
 console.log("\n§2 Primitive behavior tests:")
 
 // Primitives that MUST have browser test files.
-// This list is enforced: if a primitive is here, it must have tests.
-// Adding a new primitive without tests will fail the gate.
 const primitivesRequiringBrowserTests = [
   "button",
   "checkbox",
@@ -81,6 +90,11 @@ const primitivesRequiringBrowserTests = [
   "progress",
   "meter",
   "alert",
+  "field",
+  "toggle",
+  "toggle-group",
+  "radio-group",
+  "pagination",
 ]
 
 for (const name of primitivesRequiringBrowserTests) {
@@ -90,7 +104,6 @@ for (const name of primitivesRequiringBrowserTests) {
     fileExists(testFile),
     `Expected ${testFile} to exist`,
   )
-  // Verify test file has actual test cases (not empty/scaffold)
   if (fileExists(testFile)) {
     check(
       `@solidiom/${name} browser tests have assertions`,
@@ -114,7 +127,6 @@ for (const p of p1Primitives) {
     )
   }
 }
-// If all discovered tests are tracked, pass the coverage check
 const untrackedTests = p1Primitives.filter(
   (p) =>
     fileExists(`packages/${p}/src/${p}.browser.test.tsx`) &&
@@ -133,7 +145,6 @@ check("recipes-tailwind builds", runBuild("@solidiom/recipes-tailwind"))
 check("recipes-css dist output", fileExists("packages/recipes-css/dist/index.js"))
 check("recipes-tailwind dist output", fileExists("packages/recipes-tailwind/dist/index.js"))
 
-// Verify recipes actually export buttonVariants (key contract)
 check(
   "recipes-css exports buttonVariants",
   fileContains(
@@ -154,7 +165,6 @@ console.log("\n§4 Umbrella package:")
 check("@solidiom/primitives source exists", fileExists("packages/primitives/src/index.ts"))
 check("@solidiom/primitives builds", runBuild("@solidiom/primitives"))
 
-// Verify umbrella re-exports ALL Phase 1 primitives (not just dialog)
 for (const p of p1Primitives) {
   check(
     `umbrella exports @solidiom/${p}`,
@@ -163,12 +173,26 @@ for (const p of p1Primitives) {
   )
 }
 
-// ─── 5. ESLint rules have tests ────────────────────────────────────────
-console.log("\n§5 ESLint boundary rules:")
+// ─── 5. ESLint boundary + anatomy rules ─────────────────────────────────
+console.log("\n§5 ESLint rules (boundary + anatomy):")
 check(
-  "eslint-plugin tests pass (≥15)",
-  runTests("@solidiom/eslint-plugin-solidiom", 15),
-  "ESLint rules must prove boundary enforcement via test cases",
+  "eslint-plugin tests pass (≥60)",
+  runTests("@solidiom/eslint-plugin-solidiom", 60),
+  "ESLint rules must prove boundary and anatomy enforcement via ≥60 test cases",
+)
+
+// Boundary rules
+check(
+  "no-cross-layer-import rule exists",
+  fileExists("packages/eslint-plugin-solidiom/src/rules/no-cross-layer-import.ts"),
+)
+check(
+  "no-engine-import-outside-adapters rule exists",
+  fileExists("packages/eslint-plugin-solidiom/src/rules/no-engine-import-outside-adapters.ts"),
+)
+check(
+  "no-adapter-jsx-attributes rule exists",
+  fileExists("packages/eslint-plugin-solidiom/src/rules/no-adapter-jsx-attributes.ts"),
 )
 check(
   "no-primitive-import-of-legacy rule exists",
@@ -178,21 +202,141 @@ check(
   "no-recipe-import-of-migration rule exists",
   fileExists("packages/eslint-plugin-solidiom/src/rules/no-recipe-import-of-migration.ts"),
 )
+// P1.2: Task 28 named rule
+check(
+  "no-adapter-import-of-recipes rule exists",
+  fileExists("packages/eslint-plugin-solidiom/src/rules/no-adapter-import-of-recipes.ts"),
+)
+
+// P1.1: Anatomy/semantics rules (Task 41)
+check(
+  "anatomy-registry exists",
+  fileExists("packages/eslint-plugin-solidiom/src/anatomy-registry.ts"),
+)
+check(
+  "require-primitive-parts rule exists",
+  fileExists("packages/eslint-plugin-solidiom/src/rules/require-primitive-parts.ts"),
+)
+check(
+  "require-accessible-name rule exists",
+  fileExists("packages/eslint-plugin-solidiom/src/rules/require-accessible-name.ts"),
+)
+check(
+  "no-forbidden-primitive-props rule exists",
+  fileExists("packages/eslint-plugin-solidiom/src/rules/no-forbidden-primitive-props.ts"),
+)
+
+// Verify all rules are registered in the plugin index
+check(
+  "plugin registers no-adapter-import-of-recipes",
+  fileContains(
+    "packages/eslint-plugin-solidiom/src/index.ts",
+    '"no-adapter-import-of-recipes"',
+  ),
+)
+check(
+  "plugin registers require-primitive-parts",
+  fileContains(
+    "packages/eslint-plugin-solidiom/src/index.ts",
+    '"require-primitive-parts"',
+  ),
+)
+check(
+  "plugin registers require-accessible-name",
+  fileContains(
+    "packages/eslint-plugin-solidiom/src/index.ts",
+    '"require-accessible-name"',
+  ),
+)
+check(
+  "plugin registers no-forbidden-primitive-props",
+  fileContains(
+    "packages/eslint-plugin-solidiom/src/index.ts",
+    '"no-forbidden-primitive-props"',
+  ),
+)
 
 // ─── 6. CLI doctor command ──────────────────────────────────────────────
 console.log("\n§6 CLI doctor:")
 check("doctor command source exists", fileExists("packages/cli/src/commands/doctor.ts"))
 check("CLI tests still pass (≥8)", runTests("@solidiom/cli", 8))
 
-// ─── 7. Vite plugin builds (compile-time features must be real) ─────────
+// ─── 7. Vite plugin builds ──────────────────────────────────────────────
 console.log("\n§7 Vite plugin:")
 check("vite-plugin source exists", fileExists("packages/vite-plugin-solidiom/src/index.ts"))
 check("vite-plugin builds", runBuild("@solidiom/vite-plugin"))
 check(
-  "vite-plugin has recipe extraction impl (not just comments)",
+  "vite-plugin has recipe extraction impl",
   fileContains("packages/vite-plugin-solidiom/src/index.ts", "CVA_PATTERN") ||
     fileContains("packages/vite-plugin-solidiom/src/index.ts", "extractStaticRecipes"),
   "Plugin must have real implementation, not just comment stubs",
+)
+
+// ─── 8. P1.3: Execute axe scans and generate real evidence ──────────────
+console.log("\n§8 Accessibility (executed axe scans):")
+check(
+  "axe scan test file exists",
+  fileExists("tests/a11y/primitives-axe-scan.browser.test.tsx"),
+)
+check("axe helper exists", fileExists("tests/a11y/axe-helper.ts"))
+check("a11y result runner exists", fileExists("tools/run-a11y.ts"))
+
+const a11yResult = run("pnpm run test:a11y")
+check(
+  "all 39 axe scans execute and write a valid zero-violation artifact",
+  a11yResult.ok,
+  "Run: pnpm run test:a11y",
+)
+const axeReportResult = a11yResult.ok
+  ? run("pnpm run report:axe")
+  : { ok: false, stdout: "", stderr: "a11y scan did not complete" }
+check(
+  "axe report is generated from the executed result artifact",
+  axeReportResult.ok,
+  "Run: pnpm run report:axe",
+)
+check(
+  "executed axe result artifact exists",
+  fileExists("artifacts/axe-results.json"),
+)
+check(
+  "CI a11y job runs the executable scan and report commands",
+  fileContains(".github/workflows/ci.yml", "run: pnpm run test:a11y") &&
+    fileContains(".github/workflows/ci.yml", "run: pnpm run report:axe"),
+)
+
+// ─── 9. P1.4: Recipe dual-emission drift check ─────────────────────────
+console.log("\n§9 Recipe dual-emission drift check:")
+const auditFixtureResult = run(
+  "pnpm exec vitest run tools/audit-recipe-dual-emission.test.ts tools/audit-umbrella-purity.test.ts tools/axe-results.test.ts",
+)
+check(
+  "audit and result-validation negative fixtures pass",
+  auditFixtureResult.ok,
+  "Run: pnpm exec vitest run tools/audit-recipe-dual-emission.test.ts tools/audit-umbrella-purity.test.ts tools/axe-results.test.ts",
+)
+check(
+  "audit-recipe-dual-emission.ts exists",
+  fileExists("tools/audit-recipe-dual-emission.ts"),
+)
+const driftResult = run("pnpm exec tsx tools/audit-recipe-dual-emission.ts")
+check(
+  "recipe drift check passes",
+  driftResult.ok,
+  "Recipe CSS/TSX drift detected — run: pnpm run audit:recipe-drift",
+)
+
+// ─── 10. P1.5: Umbrella re-export purity check ─────────────────────────
+console.log("\n§10 Umbrella re-export purity check:")
+check(
+  "audit-umbrella-purity.ts exists",
+  fileExists("tools/audit-umbrella-purity.ts"),
+)
+const purityResult = run("pnpm exec tsx tools/audit-umbrella-purity.ts")
+check(
+  "umbrella purity check passes",
+  purityResult.ok,
+  "Umbrella has implementation lines or surface mismatch — run: pnpm run audit:umbrella-purity",
 )
 
 // ─── Summary ────────────────────────────────────────────────────────────

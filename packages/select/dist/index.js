@@ -89,7 +89,8 @@ function Trigger(props) {
       "aria-expanded": ctx.open() ? "true" : "false",
       "aria-haspopup": "listbox",
       "aria-controls": ctx.listboxId,
-      "aria-labelledby": ctx.labelId,
+      "aria-label": props["aria-label"],
+      "aria-labelledby": props["aria-labelledby"],
       disabled: ctx.disabled(),
       onClick: handleClick,
       onKeyDown: handleKeyDown,
@@ -162,7 +163,7 @@ function Content(props) {
       id: ctx.listboxId,
       role: "listbox",
       "aria-multiselectable": ctx.multiple ? "true" : void 0,
-      "aria-labelledby": ctx.labelId,
+      "aria-labelledby": ctx.triggerId,
       tabindex: 0,
       onKeyDown: handleKeyDown,
       ref: (el) => {

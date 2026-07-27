@@ -677,10 +677,10 @@ function createFormControl(options = {}) {
     id: controlId,
     "aria-labelledby": labelId,
     "aria-describedby": state.invalid() ? errorId : descriptionId,
-    "aria-invalid": state.invalid() || void 0,
-    "aria-required": state.required() || void 0,
-    "aria-disabled": state.disabled() || void 0,
-    "aria-readonly": state.readOnly() || void 0
+    "aria-invalid": state.invalid() ? "true" : void 0,
+    "aria-required": state.required() ? "true" : void 0,
+    "aria-disabled": state.disabled() ? "true" : void 0,
+    "aria-readonly": state.readOnly() ? "true" : void 0
   });
   const labelProps = () => ({
     id: labelId,

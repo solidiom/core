@@ -20,6 +20,8 @@ export interface ListboxRootProps {
     selectionMode?: ListboxSelectionMode;
     /** Disabled state. */
     disabled?: Accessor<boolean>;
+    /** Accessible name for the listbox. */
+    "aria-label"?: string;
     /** Orientation for keyboard navigation. Default: "vertical". */
     orientation?: "horizontal" | "vertical";
     /** Whether navigation loops. Default: true. */

@@ -1,7 +1,7 @@
 // src/index.tsx
 import { createSignal, createContext, useContext, onSettled } from "solid-js";
 import { Show } from "@solidjs/web";
-import { applySemanticAttrs, observeElementSize } from "@solidiom/runtime";
+import { applySemanticAttrs } from "@solidiom/runtime";
 var ScrollAreaContext = createContext();
 function useScrollAreaContext() {
   const ctx = useContext(ScrollAreaContext);
@@ -92,12 +92,12 @@ function Viewport(props) {
     if (!ref) return;
     ctx.setViewportRef(ref);
     ctx.updateMeasurements();
-    observeElementSize(
-      () => ref,
-      () => {
-        ctx.updateMeasurements();
-      }
-    );
+    const observer = new ResizeObserver(() => ctx.updateMeasurements());
+    observer.observe(ref);
+    return () => {
+      observer.disconnect();
+      ctx.setViewportRef(void 0);
+    };
   });
   const handleScroll = () => {
     ctx.updateScrollPosition();

@@ -8,13 +8,14 @@ packages:
   - "tools/*"
 
 catalog:
-  solid-js: "^2.0.0-beta.19"
-  "@solidjs/web": "^2.0.0-beta.19"
-  babel-preset-solid: "^2.0.0-beta.19"
+  solid-js: "^2.0.0-beta.22"
+  "@solidjs/web": "^2.0.0-beta.22"
+  babel-preset-solid: "^2.0.0-beta.22"
 
 overrides:
-  solid-js: "2.0.0-beta.21"
-  babel-preset-solid: "2.0.0-beta.21"
+  solid-js: "2.0.0-beta.24"
+  "@solidjs/web": "2.0.0-beta.24"
+  babel-preset-solid: "2.0.0-beta.24"
 
 peerDependencyRules:
   allowAny:

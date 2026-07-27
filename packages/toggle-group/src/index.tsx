@@ -89,7 +89,6 @@ export function Root(props: ToggleGroupRootProps) {
     >
       <div
         role="group"
-        aria-orientation={orientation()}
         aria-disabled={props.disabled ? "true" : undefined}
         class={props.class}
         style={props.style}

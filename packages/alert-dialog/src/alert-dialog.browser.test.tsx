@@ -7,6 +7,7 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest"
 import { render } from "@solidjs/web"
+import { flush } from "solid-js"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as AlertDialog from "./index"
 
@@ -127,6 +128,7 @@ describe("AlertDialog", () => {
 
     const trigger = container.querySelector("[data-part='trigger']") as HTMLElement
     trigger.click()
+    flush()
 
     const content = container.querySelector("[role='alertdialog']")
     expect(content).not.toBeNull()
@@ -178,6 +180,7 @@ describe("AlertDialog", () => {
     const cancelBtn = container.querySelector("[data-part='cancel']") as HTMLElement
     expect(cancelBtn).not.toBeNull()
     cancelBtn.click()
+    flush()
 
     const content = container.querySelector("[role='alertdialog']")
     expect(content).toBeNull()
@@ -205,6 +208,7 @@ describe("AlertDialog", () => {
     const actionBtn = container.querySelector("[data-part='action']") as HTMLElement
     expect(actionBtn).not.toBeNull()
     actionBtn.click()
+    flush()
 
     expect(onAction).toHaveBeenCalledOnce()
     const content = container.querySelector("[role='alertdialog']")

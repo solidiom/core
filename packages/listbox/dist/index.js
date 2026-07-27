@@ -90,6 +90,7 @@ function Root(props) {
     {
       id: ctx.listboxId,
       role: "listbox",
+      "aria-label": props["aria-label"],
       "aria-multiselectable": selectionMode === "multiple" ? "true" : void 0,
       "aria-disabled": ctx.disabled() ? "true" : void 0,
       "aria-orientation": orientation,

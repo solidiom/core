@@ -102,6 +102,10 @@ export function Root(props: SelectRootProps) {
 // ─── Trigger ───────────────────────────────────────────────────────────────────
 
 export interface SelectTriggerProps {
+  /** Accessible name for the trigger when no visible label is present. */
+  "aria-label"?: string
+  /** ID reference to an external visible label. */
+  "aria-labelledby"?: string
   children: JSX.Element
   ref?: (el: HTMLButtonElement) => void
 }
@@ -131,7 +135,8 @@ export function Trigger(props: SelectTriggerProps) {
       aria-expanded={ctx.open() ? "true" : "false"}
       aria-haspopup="listbox"
       aria-controls={ctx.listboxId}
-      aria-labelledby={ctx.labelId}
+      aria-label={props["aria-label"]}
+      aria-labelledby={props["aria-labelledby"]}
       disabled={ctx.disabled()}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -223,7 +228,7 @@ export function Content(props: SelectContentProps) {
         id={ctx.listboxId}
         role="listbox"
         aria-multiselectable={ctx.multiple ? "true" : undefined}
-        aria-labelledby={ctx.labelId}
+        aria-labelledby={ctx.triggerId}
         tabindex={0}
         onKeyDown={handleKeyDown}
         ref={(el: HTMLDivElement) => {

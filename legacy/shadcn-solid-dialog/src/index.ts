@@ -39,7 +39,8 @@ function emitDeprecationWarning() {
   if (_warned) return
   _warned = true
 
-  if (typeof process !== "undefined" && process.env?.NODE_ENV !== "production") {
+  const processEnv = (globalThis as { process?: { env?: { NODE_ENV?: string } } }).process?.env
+  if (processEnv && processEnv.NODE_ENV !== "production") {
     console.warn(
       "[@solidiom/legacy-shadcn-solid-dialog] DEPRECATED: This package is a migration bridge. " +
         "Use @solidiom/dialog directly. Run the migration with:\n" +

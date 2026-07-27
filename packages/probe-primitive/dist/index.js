@@ -1,14 +1,14 @@
 import { createRenderEffect as e, flatten as t, sharedConfig as n } from "solid-js";
-//#region ../../node_modules/.pnpm/@solidjs+web@2.0.0-beta.21_solid-js@2.0.0-beta.21/node_modules/@solidjs/web/dist/web.js
-var r = /*#__PURE__*/ Symbol("slot"), i = /*#__PURE__*/ Symbol("host"), a = {
+//#region ../../node_modules/.pnpm/@solidjs+web@2.0.0-beta.24_solid-js@2.0.0-beta.24/node_modules/@solidjs/web/dist/web.js
+var r = /*#__PURE__*/ Symbol("slot"), i = /*#__PURE__*/ Symbol("host"), a = /*#__PURE__*/ Symbol.for("dom-expressions.frame"), o = {
 	transparent: !0,
 	sync: !0
-}, o = (t, n, r) => e(t, n, r ? {
+}, s = (t, n, r) => e(t, n, r ? {
 	sync: !0,
 	...r,
 	transparent: !r.scope
-} : a);
-function s(e, t, n, i) {
+} : o);
+function c(e, t, n, i) {
 	let a = n.length, o = t.length, s = a, c = 0, l = 0, u = t[o - 1], d = u[r], f = u.parentNode === e && (!d || d === i) ? u.nextSibling : i || null, p = null, m, h;
 	for (; c < o || l < s;) {
 		if (t[c] === n[l]) {
@@ -69,84 +69,85 @@ function s(e, t, n, i) {
 		}
 	}
 }
-var c = {};
-function l(e, t, n) {
+var l = {};
+function u(e, t, n) {
 	let r = document.createElement("template");
 	return r.innerHTML = e, n === 2 ? r.content.firstChild.firstChild : r.content.firstChild;
 }
-function u(e, t) {
+function d(e, t) {
 	let n;
-	return t === 1 ? (r) => document.importNode(n ||= l(e, r, t), !0) : (r) => (n ||= l(e, r, t)).cloneNode(!0);
+	return t === 1 ? (r) => document.importNode(n ||= u(e, r, t), !0) : (r) => (n ||= u(e, r, t)).cloneNode(!0);
 }
-var d = { scope: !0 }, f = null;
-function p(e, t, n, r, i) {
-	let a = n !== void 0, s = i && i.host;
-	if (a && !r && (r = []), f !== null && (r = f.claimInitial(e, a, r)), typeof t != "function" && (t = g(t, r, a, !0), typeof t != "function")) {
-		h(e, t, r, n), s && _(t, s);
+var f = { scope: !0 }, p = null;
+function m(e, t, n, r, i) {
+	let a = n !== void 0, o = i && i.host;
+	if (a && !r && (r = []), p !== null && (r = p.claimInitial(e, a, r)), typeof t != "function" && (t = _(t, r, a, !0), typeof t != "function")) {
+		g(e, t, r, n), o && v(t, o);
 		return;
 	}
 	if (a && r.length === 0) {
 		let t = document.createTextNode("");
 		e.insertBefore(t, n), r = [t];
 	}
-	let l = r;
-	o((r) => {
-		f !== null && (l = f.reclaimRegion(l, e, n));
-		let u = g(t(), l, a, !0);
-		return typeof u == "function" ? (o(() => (f !== null && (l = f.reclaimRegion(l, e, n)), g(u, l, a)), (t) => {
-			h(e, t, l, n), l = t, s && _(l, s);
+	let c = r;
+	s((r) => {
+		p !== null && (c = p.reclaimRegion(c, e, n));
+		let u = _(t(), c, a, !0);
+		return typeof u == "function" ? (s(() => (p !== null && (c = p.reclaimRegion(c, e, n)), _(u, c, a)), (t) => {
+			g(e, t, c, n), c = t, o && v(c, o);
 		}, r !== void 0 && !(i && i.schedule) ? {
 			...i,
 			schedule: !0
-		} : i), c) : u;
+		} : i), l) : u;
 	}, (t) => {
-		t !== c && (h(e, t, l, n), l = t, s && _(l, s));
+		t !== l && (g(e, t, c, n), c = t, o && v(c, o));
 	}, t.$s ? i ? {
 		...i,
 		scope: !0
-	} : d : i);
+	} : f : i);
 }
-function m(e) {
+function h(e) {
 	return n.hydrating && (!e || e.isConnected);
 }
-function h(e, t, n, i) {
-	if (f !== null && m(e) || t === n) return;
-	let a = typeof t, o = i !== void 0;
-	if (a === "string" || a === "number") {
+function g(e, t, n, i) {
+	if (p !== null && h(e) || t === n) return;
+	let o = typeof t, s = i !== void 0;
+	if (o === "string" || o === "number") {
 		let r = typeof n;
-		r === "string" || r === "number" ? e.firstChild.data = t : y(e, n) ? e.textContent = t : (b(e, n), e.insertBefore(document.createTextNode(t), e.firstChild));
-	} else if (t === void 0) x(e, n, i);
-	else if (t.nodeType) Array.isArray(n) ? x(e, n, o ? i : null, t) : n && n.nodeType ? n.parentNode === e ? e.replaceChild(t, n) : e.appendChild(t) : n && e.firstChild ? e.replaceChild(t, e.firstChild) : e.appendChild(t), i && (t[r] = i);
+		r === "string" || r === "number" ? e.firstChild.data = t : b(e, n) ? e.textContent = t : (x(e, n), e.insertBefore(document.createTextNode(t), e.firstChild));
+	} else if (t === void 0) S(e, n, i);
+	else if (t.nodeType) Array.isArray(n) ? S(e, n, s ? i : null, t) : n && n.nodeType ? n.parentNode === e ? e.replaceChild(t, n) : e.appendChild(t) : n && e.firstChild ? e.replaceChild(t, e.firstChild) : e.appendChild(t), i && (t[r] = i);
+	else if (t[a]) n && S(e, Array.isArray(n) ? n : [n], s ? i : null), t[a](e, s ? i : null);
 	else if (Array.isArray(t)) {
 		let r = n && Array.isArray(n);
-		t.length === 0 ? x(e, n, i) : r ? n.length === 0 ? v(e, t, i) : s(e, n, t, i) : (n && x(e, n), v(e, t));
+		t.length === 0 ? S(e, n, i) : r ? n.length === 0 ? y(e, t, i) : c(e, n, t, i) : (n && S(e, n), y(e, t));
 	}
 }
-function g(e, r, i, a) {
+function _(e, r, i, o) {
 	if (e = t(e, {
 		skipNonRendered: !0,
-		doNotUnwrap: a
-	}), a && typeof e == "function") return e;
+		doNotUnwrap: o
+	}), o && typeof e == "function" || e != null && e[a]) return e;
 	if (i && !Array.isArray(e) && (e = [e ?? ""]), Array.isArray(e)) for (let t = 0, i = e.length; t < i; t++) {
 		let i = e[t], a = r && r[t], o = typeof i;
 		(o === "string" || o === "number") && (e[t] = a && a.nodeType === 3 && (n.hydrating || a.data === "" + i) ? a : document.createTextNode(i));
 	}
 	return e;
 }
-function _(e, t) {
-	if (Array.isArray(e)) for (let n = 0, r = e.length; n < r; n++) _(e[n], t);
+function v(e, t) {
+	if (Array.isArray(e)) for (let n = 0, r = e.length; n < r; n++) v(e[n], t);
 	else e && e.nodeType && e[i] !== t && (e[i] = t, Object.defineProperty(e, "_$host", {
 		get: t,
 		configurable: !0
 	}));
 }
-function v(e, t, n = null) {
+function y(e, t, n = null) {
 	for (let i = 0, a = t.length; i < a; i++) {
 		let a = t[i];
 		e.insertBefore(a, n), n && (a[r] = n);
 	}
 }
-function y(e, t) {
+function b(e, t) {
 	if (t == null) return !0;
 	if (Array.isArray(t)) return t.length ? e.firstChild === t[0] && e.lastChild === t[t.length - 1] : e.firstChild === null;
 	if (t === "") return e.firstChild === null;
@@ -154,7 +155,7 @@ function y(e, t) {
 	let n = e.firstChild;
 	return n !== null && n.nodeType === 3 && e.lastChild === n;
 }
-function b(e, t) {
+function x(e, t) {
 	if (Array.isArray(t)) for (let n = 0; n < t.length; n++) {
 		let r = t[n];
 		r.parentNode === e && r.remove();
@@ -165,8 +166,8 @@ function b(e, t) {
 		t && t.nodeType === 3 && t.remove();
 	}
 }
-function x(e, t, n, i) {
-	if (n === void 0) return y(e, t) ? e.textContent = "" : b(e, t);
+function S(e, t, n, i) {
+	if (n === void 0) return b(e, t) ? e.textContent = "" : x(e, t);
 	if (t.length) {
 		let a = !1;
 		for (let o = t.length - 1; o >= 0; o--) {
@@ -179,19 +180,19 @@ function x(e, t, n, i) {
 	} else i && e.insertBefore(i, n);
 	i && n && (i[r] = n);
 }
-var S = Symbol.for("solid.ResponseEnvelope"), C = class {
+var C = Symbol.for("solid.ResponseEnvelope"), w = class {
 	constructor(e, t) {
 		this.response = e, this.value = t;
 	}
 };
-C.prototype[S] = !0;
+w.prototype[C] = !0;
 //#endregion
 //#region src/index.tsx
-var w = /* @__PURE__ */ u("<div data-scope=probe data-part=root>"), T = (e) => {
-	var t = w();
-	return p(t, () => e.label ?? "probe"), t;
+var T = /* @__PURE__ */ d("<div data-scope=probe data-part=root>"), E = (e) => {
+	var t = T();
+	return m(t, () => e.label ?? "probe"), t;
 };
 //#endregion
-export { T as Probe };
+export { E as Probe };
 
 //# sourceMappingURL=index.js.map
