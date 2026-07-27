@@ -4,6 +4,8 @@
  * Parts: Root, Header, PrevButton, Title, NextButton, Grid, Cell.
  * Supports month navigation, keyboard nav, date selection, disabled dates, today highlighting.
  *
+ * Also exports RangeCalendar — a range-selection variant with start/end/restart semantics.
+ *
  * @example
  * ```tsx
  * import * as Calendar from "@solidiom/calendar"
@@ -48,3 +50,29 @@ export {
   type DateValue,
   type CalendarDateMathPort,
 } from "./calendar-context"
+
+// ─── RangeCalendar ─────────────────────────────────────────────────────────────
+
+export {
+  RangeRoot,
+  RangeHeader,
+  RangePrevButton,
+  RangeTitle,
+  RangeNextButton,
+  RangeGrid,
+  RangeCell,
+} from "./range-calendar"
+export type {
+  RangeCalendarRootProps,
+  RangeCalendarHeaderProps,
+  RangeCalendarPrevButtonProps,
+  RangeCalendarTitleProps,
+  RangeCalendarNextButtonProps,
+  RangeCalendarGridProps,
+  RangeCalendarCellProps,
+} from "./range-calendar"
+export {
+  useRangeCalendarContext,
+  type RangeCalendarContextValue,
+  type RangeValue,
+} from "./range-calendar-context"

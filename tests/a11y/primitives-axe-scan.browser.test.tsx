@@ -51,7 +51,7 @@ const PRIMITIVE_FIXTURES: Record<PublicPrimitive, () => JSX.Element> = {
   alert: () => <Alert.Root>This is an alert message</Alert.Root>,
   badge: () => <Badge.Root>New</Badge.Root>,
   button: () => <Button.Root>Click me</Button.Root>,
-  calendar: () => <Calendar.Root aria-label="Date picker" />,
+  calendar: () => <><Calendar.Root aria-label="Date picker" /><Calendar.RangeRoot aria-label="Range date picker"><Calendar.RangeHeader><Calendar.RangePrevButton /><Calendar.RangeTitle /><Calendar.RangeNextButton /></Calendar.RangeHeader><Calendar.RangeGrid>{(weeks) => weeks.map((week) => <tr>{week.map((day) => day > 0 ? <Calendar.RangeCell day={day} /> : <td />)}</tr>)}</Calendar.RangeGrid></Calendar.RangeRoot></>,
   carousel: () => <Carousel.Root geometry={{ slideCount: 1, slideWidth: 100, gap: 0 }}><Carousel.Viewport><Carousel.Slide index={0}>Slide 1</Carousel.Slide></Carousel.Viewport></Carousel.Root>,
   checkbox: () => <Checkbox.Root aria-label="Accept terms">Accept terms</Checkbox.Root>,
   collapsible: () => <Collapsible.Root><Collapsible.Trigger>Toggle</Collapsible.Trigger><Collapsible.Content>Hidden content</Collapsible.Content></Collapsible.Root>,

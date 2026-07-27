@@ -22,6 +22,7 @@ import { PopoverDemo, popoverDemoCode } from "./popover-demo"
 import { TooltipDemo, tooltipDemoCode } from "./tooltip-demo"
 import { SliderDemo, sliderDemoCode } from "./slider-demo"
 import { CalendarDemo, calendarDemoCode } from "./calendar-demo"
+import { RangeCalendarDemo, rangeCalendarDemoCode } from "./range-calendar-demo"
 import { CarouselDemo, carouselDemoCode } from "./carousel-demo"
 import { ToastDemo, toastDemoCode } from "./toast-demo"
 import { DrawerDemo, drawerDemoCode } from "./drawer-demo"
@@ -59,6 +60,7 @@ export const demos: Record<string, DemoEntry> = {
   menu: { component: () => MenuDemo(), code: menuDemoCode },
   "navigation-menu": { component: () => NavigationMenuDemo(), code: navigationMenuDemoCode },
   calendar: { component: () => CalendarDemo(), code: calendarDemoCode },
+  "range-calendar": { component: () => RangeCalendarDemo(), code: rangeCalendarDemoCode },
   carousel: { component: () => CarouselDemo(), code: carouselDemoCode },
   toast: { component: () => ToastDemo(), code: toastDemoCode },
   button: { component: () => ButtonDemo(), code: buttonDemoCode },
