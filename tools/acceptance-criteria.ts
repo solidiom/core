@@ -99,11 +99,6 @@ checkN(
     fileExists("packages/cli/src/commands/audit.ts") &&
     fileContains("packages/cli/src/commands/audit.ts", "class AuditCommand"),
 )
-checkN(
-  8,
-  "Legacy has removal path (sunset metadata)",
-  fileContains("legacy/shadcn-solid-dialog/package.json", "sunset"),
-)
 manualCheck(9, "No adapter emits public styling", "docs/adapter-styling-audit.md")
 manualCheck(10, "SSR/hydration works for all primitives", "docs/ssr-hydration-test-results.md")
 
@@ -219,12 +214,6 @@ checkN(
   "CLI doctor command (diagnostic checks)",
   fileExists("packages/cli/src/commands/doctor.ts") &&
     fileContains("packages/cli/src/commands/doctor.ts", "class DoctorCommand"),
-)
-checkN(
-  27,
-  "CLI legacy command (facade management)",
-  fileExists("packages/cli/src/commands/legacy.ts") &&
-    fileContains("packages/cli/src/commands/legacy.ts", "class LegacyCommand"),
 )
 checkN(
   28,
@@ -351,12 +340,6 @@ checkN(
 )
 manualCheck(56, "No secrets in source", "docs/security-audit.md")
 manualCheck(57, "Dependencies pinned", "docs/dependency-audit.md")
-checkN(
-  58,
-  "Sunset metadata in legacy",
-  fileContains("legacy/shadcn-solid-dialog/package.json", "sunset") &&
-    fileContains("legacy/shadcn-solid-dialog/package.json", "deprecated"),
-)
 manualCheck(59, "CSRF/XSS prevention in docs", "docs/security-audit.md")
 manualCheck(60, "Rate limiting on registry CDN", "docs/infrastructure-audit.md")
 
@@ -390,12 +373,6 @@ checkN(
   !fileContains("packages/calendar/src/index.tsx", /export\s+(type\s+)?CalendarDate[^M]/),
 )
 checkN(65, "Solid 2 transition script", fileExists("scripts/solid2-stable-transition.mts"))
-checkN(
-  66,
-  "Legacy sunset dates in metadata",
-  fileContains("legacy/shadcn-solid-dialog/package.json", "deprecated") &&
-    fileContains("legacy/shadcn-solid-dialog/package.json", "removed"),
-)
 checkN(
   67,
   "Unused-capability detection (implemented)",

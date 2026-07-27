@@ -17,7 +17,6 @@ export {
 export { runDoctor, type DoctorResult, type DoctorCheck } from "./commands/doctor"
 export { runVerify, type VerifyOptions, type VerifyResult } from "./commands/verify"
 export { runAudit, type AuditResult, type AuditComponent } from "./commands/audit"
-export { runLegacyStatus, type LegacyStatusResult, type LegacyFacade } from "./commands/legacy"
 export {
   installSource,
   type SourceInstallOptions,

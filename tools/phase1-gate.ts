@@ -195,10 +195,6 @@ check(
   fileExists("packages/eslint-plugin-solidiom/src/rules/no-adapter-jsx-attributes.ts"),
 )
 check(
-  "no-primitive-import-of-legacy rule exists",
-  fileExists("packages/eslint-plugin-solidiom/src/rules/no-primitive-import-of-legacy.ts"),
-)
-check(
   "no-recipe-import-of-migration rule exists",
   fileExists("packages/eslint-plugin-solidiom/src/rules/no-recipe-import-of-migration.ts"),
 )

@@ -14,12 +14,6 @@ import { UpdateCommand } from "./commands/update"
 import { DoctorCommand } from "./commands/doctor"
 import { VerifyCommand } from "./commands/verify"
 import { AuditCommand } from "./commands/audit"
-import {
-  LegacyCommand,
-  LegacyStatusCommand,
-  LegacyAddCommand,
-  LegacyRemoveCommand,
-} from "./commands/legacy"
 
 const cli = new Cli({
   binaryLabel: "solidiom",
@@ -37,9 +31,5 @@ cli.register(UpdateCommand)
 cli.register(DoctorCommand)
 cli.register(VerifyCommand)
 cli.register(AuditCommand)
-cli.register(LegacyCommand)
-cli.register(LegacyStatusCommand)
-cli.register(LegacyAddCommand)
-cli.register(LegacyRemoveCommand)
 
 cli.runExit(process.argv.slice(2))

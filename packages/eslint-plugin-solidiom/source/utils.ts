@@ -9,7 +9,6 @@ export type LayerTag =
   | "layer:adapter"
   | "layer:recipe"
   | "layer:migration"
-  | "layer:legacy"
   | "layer:tooling"
 
 /** Layer import restrictions: key cannot import from values. */
@@ -19,12 +18,11 @@ export const LAYER_RESTRICTIONS: Record<string, string[]> = {
     "layer:adapter",
     "layer:recipe",
     "layer:migration",
-    "layer:legacy",
   ],
-  "layer:primitive": ["layer:recipe", "layer:migration", "layer:legacy"],
-  "layer:adapter": ["layer:primitive", "layer:recipe", "layer:migration", "layer:legacy"],
-  "layer:recipe": ["layer:migration", "layer:legacy"],
-  "layer:migration": ["layer:legacy"],
+  "layer:primitive": ["layer:recipe", "layer:migration"],
+  "layer:adapter": ["layer:primitive", "layer:recipe", "layer:migration"],
+  "layer:recipe": ["layer:migration"],
+  "layer:migration": [],
 }
 
 /** Known external engine packages that only adapters may import. */
@@ -47,7 +45,6 @@ export function inferLayerFromPath(filePath: string): LayerTag | undefined {
   if (filePath.includes("/packages/bench/")) return "layer:tooling"
   if (filePath.includes("/packages/test-doubles/")) return "layer:tooling"
   if (filePath.includes("/migrations/")) return "layer:migration"
-  if (filePath.includes("/legacy/")) return "layer:legacy"
   // Default: primitives (packages/dialog, packages/select, etc.)
   if (filePath.includes("/packages/")) return "layer:primitive"
   return undefined
@@ -60,7 +57,6 @@ export function inferLayerFromImport(specifier: string): LayerTag | undefined {
   if (specifier.startsWith("@solidiom/recipes-")) return "layer:recipe"
   if (specifier.startsWith("@solidiom/eslint-plugin")) return "layer:tooling"
   if (specifier.startsWith("@solidiom/cli")) return "layer:tooling"
-  if (specifier.startsWith("@solidiom/legacy-")) return "layer:legacy"
   if (specifier.startsWith("@solidiom/")) return "layer:primitive"
   return undefined
 }

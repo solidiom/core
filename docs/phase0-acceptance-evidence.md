@@ -24,7 +24,7 @@ pnpm install --frozen-lockfile
 ### 2. Phase 0 Gate
 ```
 pnpm run gate:phase0
-→ Phase 0 Gate: 52 passed, 0 failed ✓
+→ Phase 0 Gate: 46 passed, 0 failed ✓
 ```
 
 ### 3. Browser Tests (chromium/firefox/webkit)
@@ -39,7 +39,7 @@ Note: The 87 browser test failures are pre-existing component-level behavioral i
 in non-Phase-0 primitives (toggle-group, slider, etc.) — not infrastructure failures.
 The browser harness, Playwright provider, and cross-browser execution are fully functional.
 These packages are NOT covered by the Phase 0 gate (it only tests runtime, dialog, select,
-adapters, test-doubles, eslint-plugin, cli, bench, migration, legacy, and parity).
+adapters, test-doubles, eslint-plugin, cli, bench, and parity).
 
 ### 4. Cross-Browser Config
 ```
@@ -63,7 +63,7 @@ git status --short
 
 | Suite | Passing | Failed | Total |
 |-------|---------|--------|-------|
-| Phase 0 Gate checks | 52 | 0 | 52 |
+| Phase 0 Gate checks | 46 | 0 | 46 |
 | Runtime unit tests | 176 | 0 | 176 |
 | Dialog unit tests | ≥6 | 0 | ≥6 |
 | Select unit tests | ≥4 | 0 | ≥4 |
@@ -73,8 +73,6 @@ git status --short
 | ESLint boundary tests | 23 | 0 | 23 |
 | CLI tests | 40 | 0 | 40 |
 | Bench tests | ≥6 | 0 | ≥6 |
-| Migration fixture tests | 10 | 0 | 10 |
-| Legacy facade conformance | 8 | 0 | 8 |
 | Package/source parity | 22 | 0 | 22 |
 | Consumer proof tests | 8 | 0 | 8 |
 | Browser tests (3×33 files) | 717 | 87 | 804 |

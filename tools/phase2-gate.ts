@@ -56,7 +56,6 @@ check(
   "policy schema covers signatureMode",
   fileContains("packages/cli/src/schemas.ts", "signatureMode"),
 )
-check("legacy command source exists", fileExists("packages/cli/src/commands/legacy.ts"))
 check("CLI typechecks (covers policy)", runTypecheck("@solidiom/cli"))
 
 // ─── 5. Three recipe profiles build ────────────────────────────────────

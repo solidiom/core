@@ -283,17 +283,6 @@ importers:
         specifier: ~6.0.3
         version: 6.0.3
 
-  legacy/shadcn-solid-dialog:
-    dependencies:
-      '@solidiom/dialog':
-        specifier: workspace:*
-        version: link:../../packages/dialog
-      solid-js:
-        specifier: 2.0.0-beta.24
-        version: 2.0.0-beta.24
-
-  migrations/shadcn-solid-dialog: {}
-
   packages/accordion:
     dependencies:
       '@solidiom/runtime':

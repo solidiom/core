@@ -60,15 +60,6 @@ describe("no-cross-layer-import", () => {
     expect(errors).toHaveLength(0)
   })
 
-  it("blocks primitive importing from legacy", () => {
-    const errors = runRule(
-      noCrossLayerImport,
-      `import { old } from "@solidiom/legacy-shadcn-solid"`,
-      "/project/packages/dialog/src/index.ts",
-    )
-    expect(errors).toHaveLength(1)
-  })
-
   it("blocks adapter importing from primitives", () => {
     const errors = runRule(
       noCrossLayerImport,

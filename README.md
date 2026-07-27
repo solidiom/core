@@ -77,8 +77,6 @@ packages/
   release-tools/      Changeset + publish helpers
   test-doubles/       Shared test utilities
 
-legacy/             Temporary compatibility facades (deprecated, removal-tracked)
-migrations/         Source-transform codemods (AST-based)
 registry/           Generated discovery manifests (via tools/registry-build.ts)
 tools/              Build scripts, gate checks, acceptance criteria
 tests/              Workspace-level E2E and integration tests
