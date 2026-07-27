@@ -24,10 +24,7 @@ export {
 } from "./source/install"
 export {
   rewriteImportsAst,
-  applyMigration,
   type RewriteImportsOptions,
   type RewriteImportsResult,
-  type MigrationSpec,
-  type MigrationResult,
 } from "./source/ast-transform"
 export { ConfigSchema, PolicySchema, type Config, type Policy } from "./schemas"
