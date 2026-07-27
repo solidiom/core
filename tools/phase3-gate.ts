@@ -136,12 +136,11 @@ check(
   "Add tools/primitive-completion-policy.json classifying each primitive as recipe or headless-only",
 )
 const completionGate = run("pnpm exec tsx tools/primitive-completion-gate.ts --audit-only")
-if (!completionGate.ok) {
-  console.log("  ⚠ primitive completion gate has failures (non-blocking for beta)")
-  console.log("    Run `pnpm primitive:audit` to see specific issues")
-} else {
-  check("primitive completion gate passes (audit-only)", true)
-}
+check(
+  "primitive completion gate passes (audit-only)",
+  completionGate.ok,
+  "Run `pnpm primitive:audit` to see specific issues",
+)
 
 // ─── §6 Package/source parity ──────────────────────────────────────────
 console.log("\n§6 Package/source parity:")

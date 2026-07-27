@@ -143,6 +143,14 @@ run = "pnpm tsx tools/phase1-gate.ts"
 description = "Run the Phase 2 acceptance gate"
 run = "pnpm tsx tools/phase2-gate.ts"
 
+[tasks."gate:phase3"]
+description = "Run the Phase 3 acceptance gate (beta release)"
+run = "pnpm tsx tools/phase3-gate.ts"
+
+[tasks."gate:phase3-preflight"]
+description = "Run the Phase 3 preflight (Solid 2 beta baseline)"
+run = "pnpm tsx tools/phase3-preflight.ts"
+
 # ---------------------------------------------------------------------------
 # Accessibility
 # ---------------------------------------------------------------------------

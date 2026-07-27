@@ -2,20 +2,29 @@ import { describe, expect, it } from "vitest"
 import type { JSX } from "@solidjs/web"
 import * as Accordion from "@solidiom/accordion"
 import * as Alert from "@solidiom/alert"
+import * as AlertDialog from "@solidiom/alert-dialog"
+import * as Avatar from "@solidiom/avatar"
 import * as Badge from "@solidiom/badge"
+import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Button from "@solidiom/button"
 import * as Calendar from "@solidiom/calendar"
+import * as Card from "@solidiom/card"
 import * as Carousel from "@solidiom/carousel"
 import * as Checkbox from "@solidiom/checkbox"
 import * as Collapsible from "@solidiom/collapsible"
 import * as Combobox from "@solidiom/combobox"
 import * as CommandPalette from "@solidiom/command-palette"
+import * as ContextMenu from "@solidiom/context-menu"
 import * as DataTable from "@solidiom/data-table"
 import * as DatePicker from "@solidiom/date-picker"
 import * as Dialog from "@solidiom/dialog"
 import * as Drawer from "@solidiom/drawer"
+import * as EmptyState from "@solidiom/empty-state"
 import * as Field from "@solidiom/field"
+import * as HoverCard from "@solidiom/hover-card"
+import * as Input from "@solidiom/input"
 import * as InputOTP from "@solidiom/input-otp"
+import * as Kbd from "@solidiom/kbd"
 import * as Label from "@solidiom/label"
 import * as Listbox from "@solidiom/listbox"
 import * as Menu from "@solidiom/menu"
@@ -29,12 +38,16 @@ import * as ResizablePanels from "@solidiom/resizable-panels"
 import * as ScrollArea from "@solidiom/scroll-area"
 import * as Select from "@solidiom/select"
 import * as Separator from "@solidiom/separator"
+import * as Sheet from "@solidiom/sheet"
+import * as Skeleton from "@solidiom/skeleton"
 import * as Slider from "@solidiom/slider"
+import * as Spinner from "@solidiom/spinner"
 import * as Switch from "@solidiom/switch"
 import * as Tabs from "@solidiom/tabs"
 import * as Toast from "@solidiom/toast"
 import * as Toggle from "@solidiom/toggle"
 import * as ToggleGroup from "@solidiom/toggle-group"
+import * as Toolbar from "@solidiom/toolbar"
 import * as Tooltip from "@solidiom/tooltip"
 import * as Tree from "@solidiom/tree"
 import * as VirtualList from "@solidiom/virtual-list"
@@ -86,12 +99,25 @@ const PRIMITIVE_FIXTURES: Record<PublicPrimitive, () => JSX.Element> = {
   tree: () => <Tree.Root><Tree.Item id="file-1">File 1</Tree.Item><Tree.Item id="file-2">File 2</Tree.Item></Tree.Root>,
   "virtual-list": () => <VirtualList.Root totalCount={1} itemSize={40} height="40px">{(items) => items().map((item) => <VirtualList.Item item={item}>Item {item.index}</VirtualList.Item>)}</VirtualList.Root>,
   "visually-hidden": () => <VisuallyHidden.Root>Screen reader only text</VisuallyHidden.Root>,
+  "alert-dialog": () => <AlertDialog.Root><AlertDialog.Trigger>Delete</AlertDialog.Trigger><AlertDialog.Content><AlertDialog.Title>Confirm</AlertDialog.Title><AlertDialog.Description>Are you sure?</AlertDialog.Description><AlertDialog.Cancel>Cancel</AlertDialog.Cancel><AlertDialog.Action>Confirm</AlertDialog.Action></AlertDialog.Content></AlertDialog.Root>,
+  avatar: () => <Avatar.Root><Avatar.Image src="https://example.com/avatar.png" alt="User avatar" /><Avatar.Fallback>U</Avatar.Fallback></Avatar.Root>,
+  breadcrumb: () => <Breadcrumb.Root><Breadcrumb.List><Breadcrumb.Item><Breadcrumb.Link href="/">Home</Breadcrumb.Link></Breadcrumb.Item><Breadcrumb.Separator /><Breadcrumb.Item><Breadcrumb.Link href="/docs">Docs</Breadcrumb.Link></Breadcrumb.Item></Breadcrumb.List></Breadcrumb.Root>,
+  card: () => <Card.Root><Card.Header><Card.Title>Title</Card.Title><Card.Description>Description</Card.Description></Card.Header><Card.Content>Content</Card.Content><Card.Footer>Footer</Card.Footer></Card.Root>,
+  "context-menu": () => <ContextMenu.Root><ContextMenu.Trigger>Right-click me</ContextMenu.Trigger><ContextMenu.Content><ContextMenu.Item>Action</ContextMenu.Item></ContextMenu.Content></ContextMenu.Root>,
+  "empty-state": () => <EmptyState.Root><EmptyState.Title>No items</EmptyState.Title><EmptyState.Description>Create your first item.</EmptyState.Description></EmptyState.Root>,
+  "hover-card": () => <HoverCard.Root><HoverCard.Trigger>Hover me</HoverCard.Trigger><HoverCard.Content>Card content</HoverCard.Content></HoverCard.Root>,
+  input: () => <><Label.Root htmlFor="test-input">Name</Label.Root><Input.Root id="test-input" /></>,
+  kbd: () => <Kbd.Root>Ctrl+K</Kbd.Root>,
+  sheet: () => <Sheet.Root><Sheet.Trigger>Open sheet</Sheet.Trigger><Sheet.Content><Sheet.Title>Sheet title</Sheet.Title><Sheet.Description>Sheet content</Sheet.Description><Sheet.Close>Close</Sheet.Close></Sheet.Content></Sheet.Root>,
+  skeleton: () => <Skeleton.Root aria-label="Loading" />,
+  spinner: () => <Spinner.Root aria-label="Loading" />,
+  toolbar: () => <Toolbar.Root aria-label="Formatting"><Toolbar.Button>Bold</Toolbar.Button><Toolbar.Separator /><Toolbar.Button>Italic</Toolbar.Button></Toolbar.Root>,
 }
 
 describe("Primitive axe-core accessibility scans", () => {
   const primitiveNames = Object.keys(PRIMITIVE_FIXTURES).sort()
 
-  it("covers exactly the authoritative 39-entry public surface", () => {
+  it("covers exactly the authoritative 52-entry public surface", () => {
     expect(primitiveNames).toEqual([...PUBLIC_PRIMITIVES].sort())
   })
 
