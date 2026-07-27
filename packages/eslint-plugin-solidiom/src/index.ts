@@ -6,7 +6,6 @@
  * - no-cross-layer-import: prevents imports violating layer hierarchy
  * - no-engine-import-outside-adapters: restricts engine packages to adapters
  * - no-adapter-jsx-attributes: prevents adapters from emitting semantic attrs
- * - no-primitive-import-of-legacy: prevents primitives from importing legacy facades
  * - no-recipe-import-of-migration: prevents recipes from importing migrations
  * - no-adapter-import-of-recipes: prevents adapters from importing recipe packages
  *
@@ -19,7 +18,6 @@
 import noCrossLayerImport from "./rules/no-cross-layer-import"
 import noEngineImportOutsideAdapters from "./rules/no-engine-import-outside-adapters"
 import noAdapterJsxAttributes from "./rules/no-adapter-jsx-attributes"
-import noPrimitiveImportOfLegacy from "./rules/no-primitive-import-of-legacy"
 import noRecipeImportOfMigration from "./rules/no-recipe-import-of-migration"
 import noAdapterImportOfRecipes from "./rules/no-adapter-import-of-recipes"
 import requirePrimitiveParts from "./rules/require-primitive-parts"
@@ -35,7 +33,6 @@ const plugin = {
     "no-cross-layer-import": noCrossLayerImport,
     "no-engine-import-outside-adapters": noEngineImportOutsideAdapters,
     "no-adapter-jsx-attributes": noAdapterJsxAttributes,
-    "no-primitive-import-of-legacy": noPrimitiveImportOfLegacy,
     "no-recipe-import-of-migration": noRecipeImportOfMigration,
     "no-adapter-import-of-recipes": noAdapterImportOfRecipes,
     "require-primitive-parts": requirePrimitiveParts,
@@ -49,7 +46,6 @@ export {
   noCrossLayerImport,
   noEngineImportOutsideAdapters,
   noAdapterJsxAttributes,
-  noPrimitiveImportOfLegacy,
   noRecipeImportOfMigration,
   noAdapterImportOfRecipes,
   requirePrimitiveParts,

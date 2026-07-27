@@ -5,7 +5,5 @@
 export default [
   "packages/*/vitest.config.ts",
   "tests/*/vitest.config.ts",
-  "migrations/*/vitest.config.ts",
-  "legacy/*/vitest.config.ts",
   "tools/test/vitest.browser.config.ts",
 ]

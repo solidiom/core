@@ -11,7 +11,6 @@ export { runUpdate, type UpdateResult, type UpdateEntry, type UpdateOptions, } f
 export { runDoctor, type DoctorResult, type DoctorCheck } from "./commands/doctor";
 export { runVerify, type VerifyOptions, type VerifyResult } from "./commands/verify";
 export { runAudit, type AuditResult, type AuditComponent } from "./commands/audit";
-export { runLegacyStatus, type LegacyStatusResult, type LegacyFacade } from "./commands/legacy";
 export { installSource, type SourceInstallOptions, type SourceInstallResult, } from "./source/install";
 export { rewriteImportsAst, applyMigration, type RewriteImportsOptions, type RewriteImportsResult, type MigrationSpec, type MigrationResult, } from "./source/ast-transform";
 export { ConfigSchema, PolicySchema, type Config, type Policy } from "./schemas";
