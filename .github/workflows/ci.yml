@@ -145,7 +145,7 @@ jobs:
       - run: pnpm install --no-frozen-lockfile
       - run: pnpm exec nx run-many -t build --exclude=@solidiom/docs,@solidiom/docs-astro-poc
       - run: pnpm exec nx run-many -t test --exclude=@solidiom/tests-package-source-parity
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium firefox webkit
       - run: pnpm exec vitest run --config vitest.browser.config.ts
 
   a11y-axe-scan:
