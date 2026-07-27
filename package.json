@@ -30,7 +30,8 @@
     "report:axe": "tsx tools/generate-axe-report.ts",
     "audit:recipe-drift": "tsx tools/audit-recipe-dual-emission.ts",
     "audit:umbrella-purity": "tsx tools/audit-umbrella-purity.ts",
-    "gate:phase1": "tsx tools/phase1-gate.ts"
+    "gate:phase1": "tsx tools/phase1-gate.ts",
+    "gate:phase2": "tsx tools/phase2-gate.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",

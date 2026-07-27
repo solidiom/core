@@ -2,6 +2,7 @@
   "name": "calendar",
   "version": "0.0.1-next.0",
   "package": "@solidiom/calendar",
+  "components": ["Calendar", "RangeCalendar"],
   "capabilities": [
     {
       "name": "date-math",
@@ -17,6 +18,8 @@
     "files": [
       "src/calendar-context.ts",
       "src/calendar.tsx",
+      "src/range-calendar-context.ts",
+      "src/range-calendar.tsx",
       "src/index.tsx"
     ]
   },
