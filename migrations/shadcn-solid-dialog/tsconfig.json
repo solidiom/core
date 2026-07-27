@@ -5,5 +5,5 @@
     "rootDir": ".",
     "noEmit": true
   },
-  "include": ["transform.ts", "transform.test.ts", "fixtures"]
+  "include": ["transform.ts"]
 }

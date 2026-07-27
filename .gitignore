@@ -28,8 +28,9 @@ Thumbs.db
 .env.local
 .env.*.local
 
-# Test coverage
+# Test coverage and generated verification artifacts
 coverage/
+artifacts/
 
 # Logs
 *.log

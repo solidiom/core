@@ -81,7 +81,7 @@ import { join as join2 } from "path";
 import pc2 from "picocolors";
 function loadRegistry(cwd) {
   const candidates = [
-    process.env["Solidiom_REGISTRY_PATH"] ? join2(process.env["Solidiom_REGISTRY_PATH"], "index.json") : null,
+    process.env["SOLIDIOM_REGISTRY_PATH"] ? join2(process.env["SOLIDIOM_REGISTRY_PATH"], "index.json") : null,
     join2(cwd, "..", "..", "registry", "index.json"),
     join2(cwd, "node_modules", "@solidiom", "registry", "index.json"),
     join2(cwd, ".solidiom", "registry-cache.json")

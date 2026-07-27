@@ -1,5 +1,5 @@
 // src/index.tsx
-import { createSignal } from "solid-js";
+import { createSignal, onCleanup } from "solid-js";
 import { Show } from "@solidjs/web";
 import {
   createCollection,
@@ -164,7 +164,7 @@ function Trigger(props) {
   const itemCtx = useNavigationMenuItemContext();
   let ref;
   const itemId = itemCtx.value;
-  ctx.collection.registerItem({
+  const unregister = ctx.collection.registerItem({
     id: itemId,
     get ref() {
       return ref;
@@ -172,6 +172,7 @@ function Trigger(props) {
     disabled: () => false,
     textValue: () => itemId
   });
+  onCleanup(unregister);
   const handleClick = () => {
     if (itemCtx.isOpen()) {
       ctx.close();

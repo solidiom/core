@@ -42,7 +42,6 @@ function Root(props) {
       "div",
       {
         role: "group",
-        "aria-orientation": orientation(),
         "aria-disabled": props.disabled ? "true" : void 0,
         class: props.class,
         style: props.style,

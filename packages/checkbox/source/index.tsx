@@ -20,7 +20,7 @@ interface CheckboxGroupContextValue {
   disabled: boolean | undefined
 }
 
-const CheckboxGroupContext = createContext<CheckboxGroupContextValue>()
+const CheckboxGroupContext = createContext<CheckboxGroupContextValue | null>(null)
 
 export interface CheckboxGroupProps {
   /** Controlled value — array of checked item values. */

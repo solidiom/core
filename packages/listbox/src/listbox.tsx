@@ -42,6 +42,8 @@ export interface ListboxRootProps {
   selectionMode?: ListboxSelectionMode
   /** Disabled state. */
   disabled?: Accessor<boolean>
+  /** Accessible name for the listbox. */
+  "aria-label"?: string
   /** Orientation for keyboard navigation. Default: "vertical". */
   orientation?: "horizontal" | "vertical"
   /** Whether navigation loops. Default: true. */
@@ -135,6 +137,7 @@ export function Root(props: ListboxRootProps) {
       <div
         id={ctx.listboxId}
         role="listbox"
+        aria-label={props["aria-label"]}
         aria-multiselectable={selectionMode === "multiple" ? "true" : undefined}
         aria-disabled={ctx.disabled() ? "true" : undefined}
         aria-orientation={orientation}

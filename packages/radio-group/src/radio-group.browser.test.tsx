@@ -6,6 +6,7 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest"
 import { render } from "@solidjs/web"
+import { flush } from "solid-js"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as RadioGroup from "./index"
 
@@ -86,6 +87,7 @@ describe("RadioGroup", () => {
 
     const items = container.querySelectorAll<HTMLElement>("[role='radio']")
     items[1]!.click()
+    flush()
 
     expect(onChange).toHaveBeenCalledWith("b")
     expect(items[1]!.getAttribute("aria-checked")).toBe("true")

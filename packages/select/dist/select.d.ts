@@ -27,6 +27,10 @@ export interface SelectRootProps {
 }
 export declare function Root(props: SelectRootProps): JSX.Element;
 export interface SelectTriggerProps {
+    /** Accessible name for the trigger when no visible label is present. */
+    "aria-label"?: string;
+    /** ID reference to an external visible label. */
+    "aria-labelledby"?: string;
     children: JSX.Element;
     ref?: (el: HTMLButtonElement) => void;
 }
