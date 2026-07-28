@@ -1,0 +1,97 @@
+---
+/**
+ * Base document/layout for every static route on the Solidiom site.
+ *
+ * Responsibilities (SITE-004):
+ *   - Base HTML shell with correct lang/dir per route locale.
+ *   - Metadata defaults (title template, description, canonical link).
+ *   - Font preload links (placeholder targets pending BRAND-003).
+ *   - No-flash locale/theme bootstrap (data-theme set before first paint).
+ *   - Skip link and a single focus-root landmark for main content.
+ *
+ * Explicitly out of scope here (see docs/website-tasks.md §5.1):
+ *   - Header/nav (SITE-005), footer (SITE-006), docs shell (SITE-007).
+ *   - Full typography/prose/Shiki pairing (SITE-008).
+ *   - Theme toggle UI + change persistence (SITE-009).
+ *   - 404/robots/sitemap/manifest/social helpers (SITE-010).
+ */
+import "../assets/global.css"
+import { bootstrapThemeScript } from "../lib/bootstrap-theme"
+import { resolveLocale, localeDirection, DEFAULT_LOCALE } from "../lib/locale"
+import { resolvePageMetadata } from "../lib/metadata"
+
+interface Props {
+  title?: string
+  description?: string
+  /** Id of the element the skip link and focus root should target. Defaults to "main-content". */
+  mainId?: string
+}
+
+const { title, description, mainId = "main-content" } = Astro.props
+
+const locale = resolveLocale(Astro.url.pathname)
+const dir = localeDirection(locale)
+const metadata = resolvePageMetadata({
+  title,
+  description,
+  pathname: Astro.url.pathname,
+  locale,
+})
+
+const alternatePathname =
+  locale === DEFAULT_LOCALE
+    ? `/es${Astro.url.pathname}`
+    : Astro.url.pathname.replace(/^\/es/, "") || "/"
+---
+
+<!doctype html>
+<html lang={locale} dir={dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{metadata.title}</title>
+    <meta name="description" content={metadata.description} />
+    <link rel="canonical" href={metadata.canonicalUrl} />
+    <link
+      rel="alternate"
+      hreflang={locale === "en" ? "es" : "en"}
+      href={new URL(alternatePathname, "https://solidiom.org").toString()}
+    />
+    <link rel="alternate" hreflang="x-default" href={metadata.canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Solidiom" />
+    <meta property="og:title" content={metadata.title} />
+    <meta property="og:description" content={metadata.description} />
+    <meta property="og:url" content={metadata.canonicalUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!--
+      Font preloads: placeholder pending BRAND-003 (self-hosted Inter Tight,
+      Inter Variable, IBM Plex Mono). No font binaries exist in the repo yet,
+      so there is nothing to preload without generating 404s. Re-enable these
+      once BRAND-003 lands and update the hrefs to the real self-hosted paths.
+    -->
+    <!--
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-tight-variable.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-variable.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-mono-variable.woff2" crossorigin />
+    -->
+
+    <!--
+      No-flash theme bootstrap: must be a blocking, synchronous script
+      placed before any stylesheet/content so `data-theme` is set on <html>
+      before first paint. Locale is already resolved server-side above and
+      needs no client script.
+    -->
+    <script is:inline set:html={bootstrapThemeScript()} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href={`#${mainId}`}>Skip to main content</a>
+    <div id={mainId} class="focus-root" tabindex="-1">
+      <slot />
+    </div>
+  </body>
+</html>
