@@ -110,9 +110,9 @@ const alternatePathname =
   <body>
     <a class="skip-link" href={`#${mainId}`}>Skip to main content</a>
     {showHeader && <SiteHeader links={primaryLinks} resourceLinks={resourceLinks} homeHref="/" />}
-    <div id={mainId} class="focus-root" tabindex="-1">
+    <main id={mainId} class="focus-root" tabindex="-1">
       <slot />
-    </div>
+    </main>
     {showFooter && <SiteFooter />}
   </body>
 </html>
