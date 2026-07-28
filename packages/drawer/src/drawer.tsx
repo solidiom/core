@@ -92,6 +92,10 @@ export function Root(props: DrawerRootProps) {
 
 export interface DrawerTriggerProps {
   children: JSX.Element
+  class?: string
+  style?: JSX.CSSProperties | string
+  /** Accessible label. Required when children are icon-only/non-text. */
+  "aria-label"?: string
   ref?: (el: HTMLButtonElement) => void
 }
 
@@ -106,11 +110,15 @@ export function Trigger(props: DrawerTriggerProps) {
   return (
     <button
       id={ctx.triggerId}
+      type="button"
       aria-haspopup="dialog"
       aria-expanded={ctx.open() ? "true" : undefined}
       aria-controls={ctx.open() ? ctx.contentId : undefined}
+      aria-label={props["aria-label"]}
       onClick={handleClick}
       ref={props.ref}
+      class={props.class}
+      style={props.style}
       {...applySemanticAttrs({
         scope: "drawer",
         part: "trigger",
@@ -245,6 +253,10 @@ export function Content(props: DrawerContentProps) {
 
 export interface DrawerCloseProps {
   children: JSX.Element
+  class?: string
+  style?: JSX.CSSProperties | string
+  /** Accessible label. Required when children are icon-only/non-text. */
+  "aria-label"?: string
   ref?: (el: HTMLButtonElement) => void
 }
 
@@ -258,8 +270,12 @@ export function Close(props: DrawerCloseProps) {
 
   return (
     <button
+      type="button"
+      aria-label={props["aria-label"]}
       onClick={handleClick}
       ref={props.ref}
+      class={props.class}
+      style={props.style}
       {...applySemanticAttrs({ scope: "drawer", part: "close" })}
     >
       {props.children}
