@@ -96,14 +96,8 @@ for (const p of p2Primitives) {
 
 // ─── 7. RangeCalendar (Task 52 / C5) ───────────────────────────────────
 console.log("\n§7 RangeCalendar:")
-check(
-  "RangeCalendar source exists",
-  fileExists("packages/calendar/src/range-calendar.tsx"),
-)
-check(
-  "RangeCalendar context exists",
-  fileExists("packages/calendar/src/range-calendar-context.ts"),
-)
+check("RangeCalendar source exists", fileExists("packages/calendar/src/range-calendar.tsx"))
+check("RangeCalendar context exists", fileExists("packages/calendar/src/range-calendar-context.ts"))
 check(
   "RangeCalendar exported from package index",
   fileContains("packages/calendar/src/index.tsx", "RangeRoot"),
@@ -116,10 +110,7 @@ check(
   "registry/calendar.json lists RangeCalendar component",
   fileContains("registry/calendar.json", "RangeCalendar"),
 )
-check(
-  "RangeCalendar unit tests exist",
-  fileExists("packages/calendar/src/range-calendar.test.ts"),
-)
+check("RangeCalendar unit tests exist", fileExists("packages/calendar/src/range-calendar.test.ts"))
 check(
   "RangeCalendar browser tests exist",
   fileExists("packages/calendar/src/range-calendar.browser.test.tsx"),
@@ -127,10 +118,7 @@ check(
 check("calendar package typechecks (with RangeCalendar)", runTypecheck("@solidiom/calendar"))
 check("calendar package builds (with RangeCalendar)", runBuild("@solidiom/calendar"))
 check("calendar tests pass (≥30, covers RangeCalendar)", runTests("@solidiom/calendar", 30))
-check(
-  "RangeCalendar docs demo exists",
-  fileExists("apps/docs/src/demos/range-calendar-demo.tsx"),
-)
+check("RangeCalendar docs demo exists", fileExists("apps/docs/src/demos/range-calendar-demo.tsx"))
 check(
   "RangeCalendar demo registered in docs index",
   fileContains("apps/docs/src/demos/index.ts", "range-calendar"),
@@ -151,10 +139,7 @@ check(
   "adapter-kit conformance harness exists",
   fileExists("packages/adapter-kit/src/conformance.ts"),
 )
-check(
-  "adapter-kit scaffold template exists",
-  fileExists("packages/adapter-kit/src/scaffold.ts"),
-)
+check("adapter-kit scaffold template exists", fileExists("packages/adapter-kit/src/scaffold.ts"))
 check("adapter-kit typechecks", runTypecheck("@solidiom/adapter-kit"))
 check("adapter-kit builds", runBuild("@solidiom/adapter-kit"))
 check(
@@ -170,10 +155,7 @@ check(
 )
 check(
   "layer restrictions enforced (runtime cannot import primitive)",
-  fileContains(
-    "packages/eslint-plugin-solidiom/src/utils.ts",
-    "layer:runtime",
-  ),
+  fileContains("packages/eslint-plugin-solidiom/src/utils.ts", "layer:runtime"),
 )
 check(
   "inspect command exists (source-mode governance)",
@@ -195,23 +177,14 @@ check(
 
 // ─── 12. Enterprise offline-install (Task 57) ───────────────────────────
 console.log("\n§12 Enterprise offline-install:")
-check(
-  "offline-install how-to guide exists",
-  fileExists("docs/how-to/offline-install.md"),
-)
+check("offline-install how-to guide exists", fileExists("docs/how-to/offline-install.md"))
 check(
   "offline-install guide references Verdaccio",
   fileContains("docs/how-to/offline-install.md", "verdaccio") ||
     fileContains("docs/how-to/offline-install.md", "Verdaccio"),
 )
-check(
-  "Verdaccio fixture config exists",
-  fileExists("tools/offline-fixture/verdaccio-config.yaml"),
-)
-check(
-  "offline test script exists",
-  fileExists("tools/offline-fixture/run-offline-test.sh"),
-)
+check("Verdaccio fixture config exists", fileExists("tools/offline-fixture/verdaccio-config.yaml"))
+check("offline test script exists", fileExists("tools/offline-fixture/run-offline-test.sh"))
 check(
   "add command supports --registry flag",
   fileContains("packages/cli/src/commands/add.ts", "--registry"),

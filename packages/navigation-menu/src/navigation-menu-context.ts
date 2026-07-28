@@ -61,7 +61,9 @@ export const NavigationMenuItemContext = createContext<NavigationMenuItemContext
 export function useNavigationMenuItemContext(): NavigationMenuItemContextValue {
   const ctx = useContext(NavigationMenuItemContext)
   if (!ctx) {
-    throw new Error("[solidiom] NavigationMenu.Trigger/Content must be used within NavigationMenu.Item")
+    throw new Error(
+      "[solidiom] NavigationMenu.Trigger/Content must be used within NavigationMenu.Item",
+    )
   }
   return ctx
 }

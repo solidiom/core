@@ -14,7 +14,15 @@ import { fileURLToPath } from "node:url"
 
 const TOOL_DIR = dirname(fileURLToPath(import.meta.url))
 const DEFAULT_ROOT = join(TOOL_DIR, "..")
-const VALID_CATEGORIES = new Set(["a11y", "display", "feedback", "input", "layout", "navigation", "overlay"])
+const VALID_CATEGORIES = new Set([
+  "a11y",
+  "display",
+  "feedback",
+  "input",
+  "layout",
+  "navigation",
+  "overlay",
+])
 const RECIPE_PROFILES = ["css", "tailwind"] as const
 const FORBIDDEN_SOLID_PATTERNS: Array<[RegExp, string]> = [
   [/from\s+["']solid-js\/web["']/, "must import DOM runtime types from @solidjs/web"],

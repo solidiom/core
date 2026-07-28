@@ -70,14 +70,8 @@ function main() {
   // 2. Update pnpm-workspace.yaml
   const workspacePath = join(ROOT, "pnpm-workspace.yaml")
   let workspace = readFileSync(workspacePath, "utf8")
-  workspace = workspace.replace(
-    /solid-js: "[^"]+"/,
-    `solid-js: "${newPeerRange}"`,
-  )
-  workspace = workspace.replace(
-    /"@solidjs\/web": "[^"]+"/,
-    `"@solidjs/web": "${newPeerRange}"`,
-  )
+  workspace = workspace.replace(/solid-js: "[^"]+"/, `solid-js: "${newPeerRange}"`)
+  workspace = workspace.replace(/"@solidjs\/web": "[^"]+"/, `"@solidjs/web": "${newPeerRange}"`)
   workspace = workspace.replace(
     /babel-preset-solid: "[^"]+"/,
     `babel-preset-solid: "${newPeerRange}"`,

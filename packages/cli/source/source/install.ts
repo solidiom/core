@@ -183,7 +183,8 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
         path: relFromCwd,
         digest: computeDigest(content),
         primitive: "_runtime",
-        version: plan.entries.find((e) => e.package === "@solidiom/runtime")?.version ?? "0.0.1-next.0",
+        version:
+          plan.entries.find((e) => e.package === "@solidiom/runtime")?.version ?? "0.0.1-next.0",
       }
     }
   }

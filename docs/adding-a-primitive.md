@@ -63,7 +63,7 @@ Solidiom targets Solid 2 beta exclusively. These rules are **enforced by the pri
 | `splitProps(props, [...])`               | Renamed in Solid 2                                        | `omit(props, ...)`                       |
 | `<MyContext.Provider value={v}>`         | Context IS the provider in Solid 2                        | `<MyContext value={v}>`                  |
 | `asChild?: boolean` prop                 | Breaks static analysis, adds TS overhead                  | Composition via recipes + semantic attrs |
-| `isLoading?: boolean` prop               | Non-standard; Solidiom uses `loading`                         | `loading?: boolean`                      |
+| `isLoading?: boolean` prop               | Non-standard; Solidiom uses `loading`                     | `loading?: boolean`                      |
 | Destructuring props                      | Breaks fine-grained reactivity tracking                   | `props.x` access                         |
 | `true`/`false` for aria attributes       | Solid 2 strict JSX typing                                 | `"true"` / `undefined`                   |
 | `<Index>` component                      | Removed in Solid 2                                        | `<For keyed={false}>`                    |
@@ -290,11 +290,11 @@ export function Styled<Name>(props: <Name>Variant & { children?: JSX.Element }) 
 
 For each recipe package (`recipes-tailwind`, `recipes-css`):
 
-| File                   | Change                                                                                                                     |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `src/index.ts`         | Add `export { Styled<Name>, <name>Variants } from "./recipes/<name>"`                                                      |
-| `src/meta.ts`          | Add `"<name>"` to `supportedPrimitives` array                                                                              |
-| `src/styles/index.css` | Add `@import "./<name>.css";`                                                                                              |
+| File                   | Change                                                                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `src/index.ts`         | Add `export { Styled<Name>, <name>Variants } from "./recipes/<name>"`                                                          |
+| `src/meta.ts`          | Add `"<name>"` to `supportedPrimitives` array                                                                                  |
+| `src/styles/index.css` | Add `@import "./<name>.css";`                                                                                                  |
 | `package.json`         | Add `"@solidiom/<name>": "workspace:*"` to `dependencies` and `"./styles/<name>.css": "./dist/styles/<name>.css"` to `exports` |
 | `tsup.config.ts`       | Add `"@solidiom/<name>"` to `external` array                                                                                   |
 
@@ -338,7 +338,7 @@ function <Name>Example() {
 | File                           | Change                                                        |
 | ------------------------------ | ------------------------------------------------------------- |
 | `apps/docs/src/demos/index.ts` | Import `<Name>Demo` + `<name>DemoCode`, add to `demos` record |
-| `apps/docs/package.json`       | Add `"@solidiom/<name>": "workspace:*"` to `dependencies`         |
+| `apps/docs/package.json`       | Add `"@solidiom/<name>": "workspace:*"` to `dependencies`     |
 
 Note: `apps/docs/src/lib/primitives.ts` reads from `registry/index.json` automatically — no manual edit needed there.
 

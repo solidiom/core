@@ -1,0 +1,20 @@
+# Prettier 3 already honours .gitignore, so build outputs, coverage,
+# artifacts, and test reports do not need to be repeated here.
+
+# Package manager lockfile
+pnpm-lock.yaml
+
+# Generated registry manifests — tools/registry-build.ts owns this output and
+# must stay byte-stable for the registry determinism checks.
+registry/*.json
+
+# Nx local metadata
+.nx/
+
+# Frozen proof-of-concept baseline. SITE-001 requires apps/docs-astro-poc to
+# stay byte-identical until CUT-002 archives and removes it, so it is excluded
+# from the repository formatting gate rather than reformatted.
+apps/docs-astro-poc/
+
+# Generated changeset entries are authored by the changesets CLI
+.changeset/*.md

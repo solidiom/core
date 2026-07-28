@@ -17,15 +17,7 @@
     {
       "id": "build",
       "title": "Build & type tooling",
-      "packages": [
-        "vite",
-        "tsup",
-        "typescript",
-        "tsx",
-        "nx",
-        "@nx/js",
-        "@nx/eslint-plugin"
-      ]
+      "packages": ["vite", "tsup", "typescript", "tsx", "nx", "@nx/js", "@nx/eslint-plugin"]
     },
     {
       "id": "test",

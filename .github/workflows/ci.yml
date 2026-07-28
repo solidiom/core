@@ -31,6 +31,27 @@ jobs:
             tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
+  format:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run format:check
+
   typecheck:
     needs: install
     runs-on: ubuntu-latest
@@ -226,8 +247,7 @@ jobs:
       - run: pnpm run gate:phase2
 
   phase0-gate:
-    needs:
-      [typecheck, build, test-node, test-browser, a11y-axe-scan, phase1-gate, phase2-gate]
+    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, phase1-gate, phase2-gate]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

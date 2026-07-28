@@ -1,32 +1,26 @@
-import { existsSync } from "node:fs";
-import { join } from "node:path";
-import { defineConfig } from "vitest/config";
-import solidPlugin from "vite-plugin-solid";
-import { playwright } from "@vitest/browser-playwright";
+import { existsSync } from "node:fs"
+import { join } from "node:path"
+import { defineConfig } from "vitest/config"
+import solidPlugin from "vite-plugin-solid"
+import { playwright } from "@vitest/browser-playwright"
 
-const ROOT = import.meta.dirname ?? __dirname;
+const ROOT = import.meta.dirname ?? __dirname
 
 /** Resolve workspace packages for root-level browser tests without publishing them first. */
 function workspacePackageResolver() {
   return {
     name: "solidiom-workspace-package-resolver",
     resolveId(id: string) {
-      if (!id.startsWith("@solidiom/")) return undefined;
+      if (!id.startsWith("@solidiom/")) return undefined
 
-      const packageName = id.slice("@solidiom/".length);
+      const packageName = id.slice("@solidiom/".length)
       for (const extension of [".tsx", ".ts"]) {
-        const candidate = join(
-          ROOT,
-          "packages",
-          packageName,
-          "src",
-          `index${extension}`,
-        );
-        if (existsSync(candidate)) return candidate;
+        const candidate = join(ROOT, "packages", packageName, "src", `index${extension}`)
+        if (existsSync(candidate)) return candidate
       }
-      return undefined;
+      return undefined
     },
-  };
+  }
 }
 
 /**
@@ -48,4 +42,4 @@ export default defineConfig({
       instances: [{ browser: "chromium" }],
     },
   },
-});
+})

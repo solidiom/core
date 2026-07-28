@@ -46,7 +46,7 @@ function Trigger(props) {
     "button",
     {
       id: ctx.triggerId,
-      "aria-haspopup": "alertdialog",
+      "aria-haspopup": "dialog",
       "aria-expanded": ctx.open() ? "true" : void 0,
       "aria-controls": ctx.open() ? ctx.contentId : void 0,
       onClick: handleClick,

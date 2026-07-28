@@ -16,8 +16,8 @@ export function AccordionDemo() {
           </Accordion.Trigger>
           <Accordion.Content>
             <div class="border-b border-[hsl(var(--border))] bg-[hsl(var(--card))] px-4 py-3 text-sm text-[hsl(var(--muted-foreground))]">
-              Solidiom is a headless, accessible UI primitive library for Solid 2. It provides unstyled
-              components that you compose with your own design system.
+              Solidiom is a headless, accessible UI primitive library for Solid 2. It provides
+              unstyled components that you compose with your own design system.
             </div>
           </Accordion.Content>
         </Accordion.Item>

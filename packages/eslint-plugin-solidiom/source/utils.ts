@@ -4,19 +4,11 @@
 
 /** Known layer tags from Nx configuration. */
 export type LayerTag =
-  | "layer:runtime"
-  | "layer:primitive"
-  | "layer:adapter"
-  | "layer:recipe"
-  | "layer:tooling"
+  "layer:runtime" | "layer:primitive" | "layer:adapter" | "layer:recipe" | "layer:tooling"
 
 /** Layer import restrictions: key cannot import from values. */
 export const LAYER_RESTRICTIONS: Record<string, string[]> = {
-  "layer:runtime": [
-    "layer:primitive",
-    "layer:adapter",
-    "layer:recipe",
-  ],
+  "layer:runtime": ["layer:primitive", "layer:adapter", "layer:recipe"],
   "layer:primitive": ["layer:recipe"],
   "layer:adapter": ["layer:primitive", "layer:recipe"],
   "layer:recipe": [],

@@ -45,6 +45,8 @@ describe("axe result validation", () => {
   it("rejects violations", () => {
     const artifact = validArtifact()
     artifact.results[0].violations = 1
-    expect(validateAxeResultsArtifact(artifact)).toContainEqual(expect.stringContaining("axe violation"))
+    expect(validateAxeResultsArtifact(artifact)).toContainEqual(
+      expect.stringContaining("axe violation"),
+    )
   })
 })

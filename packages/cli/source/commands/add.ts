@@ -12,6 +12,8 @@ import pc from "picocolors"
 
 export interface AddOptions extends PlanOptions {
   dryRun?: boolean
+  registry?: string
+  noNetwork?: boolean
 }
 
 export interface AddResult {
@@ -25,7 +27,13 @@ export interface AddResult {
  * Core add logic.
  */
 export function runAdd(options: AddOptions): AddResult {
-  const plan = runPlan(options)
+  const plan = runPlan({
+    primitive: options.primitive,
+    cwd: options.cwd,
+    mode: options.mode,
+    registry: options.registry,
+    noNetwork: options.noNetwork,
+  })
 
   if (plan.violations.length > 0) {
     return { plan, installCommand: null, blocked: true }
@@ -63,6 +71,12 @@ export class AddCommand extends Command {
 
   primitive = Option.String({ required: true })
   mode = Option.String("--mode", { description: "Install mode (package or source)" })
+  registry = Option.String("--registry", {
+    description: "Custom registry URL for package resolution",
+  })
+  noNetwork = Option.Boolean("--no-network", false, {
+    description: "Use only cached/local registry data (no network fetch)",
+  })
   dryRun = Option.Boolean("--dry-run", false, {
     description: "Show what would be done without writing",
   })
@@ -73,6 +87,8 @@ export class AddCommand extends Command {
       primitive: this.primitive,
       cwd: process.cwd(),
       mode: this.mode as "package" | "source" | undefined,
+      registry: this.registry,
+      noNetwork: this.noNetwork,
       dryRun: this.dryRun,
     })
 
