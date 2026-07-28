@@ -1,0 +1,141 @@
+---
+/**
+ * Documentation shell layout (SITE-007).
+ *
+ * Wraps BaseLayout with the three-region structure every docs/catalog
+ * route will share: a left sidebar (generated section/group navigation),
+ * a center article column (the actual page content, via the default
+ * slot), and a right-side "on this page" table of contents.
+ *
+ * STATUS: structural shell only. There is no generated sidebar or TOC data
+ * yet — `sidebarGroups` and `toc` are optional props that default to empty
+ * arrays so this layout renders sensibly with zero content today. DOCS-001
+ * (registry-driven routes) and DOCS-003 ("Generate sidebar groups, active
+ * state, mobile navigation, previous/next links, and right-side TOC from
+ * metadata/headings") will populate these props from real data without
+ * needing to change this layout's contract. See docs/website-tasks.md §6.4.
+ *
+ * Regions, by breakpoint (single 768px/1024px split, matching the rest of
+ * the shell's breakpoint convention):
+ *   - < 768px: sidebar is hidden and only reachable via the mobile nav
+ *     drawer (DocsMobileNav); TOC is hidden entirely (no room, and "on
+ *     this page" is a supplementary aid, not primary navigation).
+ *   - 768px–1023px: sidebar visible as a static column; TOC still hidden.
+ *   - >= 1024px: sidebar, article, and TOC all visible as three columns.
+ *
+ * Scroll/focus behavior:
+ *   - Sidebar and TOC are `position: sticky` below the sticky header and
+ *     independently scrollable when their content exceeds the viewport,
+ *     so long link lists never push the article column down.
+ *   - Headings inside the article get `scroll-margin-top` (see
+ *     docs-layout.css) so anchor/TOC-link navigation doesn't hide the
+ *     target under the sticky header.
+ *   - The existing skip-link + `mainId` focus-root behavior from
+ *     BaseLayout is unchanged: it still targets the whole docs region,
+ *     not just the article, since the sidebar is also main-content
+ *     navigation on this route type.
+ */
+import BaseLayout from "./BaseLayout.astro"
+import DocsMobileNav from "../components/DocsMobileNav.astro"
+import type { DocsSidebarGroup, DocsTocEntry, DocsAdjacentLink } from "../lib/docs-nav"
+
+interface Props {
+  title?: string
+  description?: string
+  sidebarGroups?: DocsSidebarGroup[]
+  toc?: DocsTocEntry[]
+  previous?: DocsAdjacentLink
+  next?: DocsAdjacentLink
+}
+
+const { title, description, sidebarGroups = [], toc = [], previous, next } = Astro.props
+
+const pathname = Astro.url.pathname
+const isActive = (href: string) => pathname === href
+---
+
+<BaseLayout title={title} description={description} mainId="docs-content">
+  <div class="docs-shell">
+    <div class="docs-shell__mobile-bar">
+      <DocsMobileNav groups={sidebarGroups} />
+      <span class="docs-shell__mobile-label">Documentation</span>
+    </div>
+
+    <div class="docs-shell__grid">
+      <aside class="docs-shell__sidebar" aria-label="Documentation sections">
+        {
+          sidebarGroups.length > 0 ? (
+            <nav>
+              {sidebarGroups.map((group) => (
+                <div class="docs-shell__sidebar-group">
+                  <p class="docs-shell__sidebar-group-label">{group.label}</p>
+                  <ul>
+                    {group.links.map((link) => (
+                      <li>
+                        <a href={link.href} aria-current={isActive(link.href) ? "page" : undefined}>
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </nav>
+          ) : (
+            <p class="docs-shell__sidebar-empty">No documentation sections yet.</p>
+          )
+        }
+      </aside>
+
+      <article id="docs-content" class="docs-shell__article" data-pagefind-body>
+        <slot />
+
+        {
+          (previous || next) && (
+            <nav class="docs-shell__adjacent" aria-label="Adjacent pages">
+              {previous ? (
+                <a
+                  class="docs-shell__adjacent-link docs-shell__adjacent-link--previous"
+                  href={previous.href}
+                >
+                  <span class="docs-shell__adjacent-direction">Previous</span>
+                  <span class="docs-shell__adjacent-label">{previous.label}</span>
+                </a>
+              ) : (
+                <span />
+              )}
+              {next ? (
+                <a
+                  class="docs-shell__adjacent-link docs-shell__adjacent-link--next"
+                  href={next.href}
+                >
+                  <span class="docs-shell__adjacent-direction">Next</span>
+                  <span class="docs-shell__adjacent-label">{next.label}</span>
+                </a>
+              ) : (
+                <span />
+              )}
+            </nav>
+          )
+        }
+      </article>
+
+      <aside class="docs-shell__toc" aria-label="On this page">
+        {
+          toc.length > 0 && (
+            <nav>
+              <p class="docs-shell__toc-label">On this page</p>
+              <ul>
+                {toc.map((entry) => (
+                  <li class={`docs-shell__toc-item docs-shell__toc-item--depth-${entry.depth}`}>
+                    <a href={`#${entry.id}`}>{entry.text}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )
+        }
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

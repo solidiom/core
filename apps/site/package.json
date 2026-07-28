@@ -13,7 +13,6 @@
     "@astrojs/check": "0.9.9",
     "@astrojs/mdx": "7.0.3",
     "@solidiom/astrojs-solid-next": "workspace:*",
-    "@solidiom/button": "workspace:*",
     "@solidiom/drawer": "workspace:*",
     "@solidiom/navigation-menu": "workspace:*",
     "@solidjs/web": "catalog:",

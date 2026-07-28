@@ -3,6 +3,7 @@
 @import "./fonts.css";
 @import "./site-header.css";
 @import "./site-footer.css";
+@import "./docs-layout.css";
 
 :root {
   color-scheme: light dark;
