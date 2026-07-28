@@ -27,6 +27,13 @@ run = "pnpm nx run-many -t build --projects=@solidiom/recipes-css,@solidiom/reci
 description = "Build the docs app"
 run = "pnpm nx build @solidiom/docs"
 
+[tasks."validate:site"]
+description = "Validate the website (Astro check + production build)"
+run = [
+  "pnpm exec nx run @solidiom/site:check",
+  "pnpm exec nx run @solidiom/site:build",
+]
+
 [tasks."build:registry"]
 description = "Generate registry manifests (registry/*.json)"
 run = "pnpm tsx tools/registry-build.ts"
