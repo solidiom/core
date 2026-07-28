@@ -1,0 +1,49 @@
+/**
+ * Solidiom site — semantic design tokens.
+ *
+ * STATUS: placeholder pending BRAND-002.
+ *
+ * BRAND-002 ("Define site-local semantic tokens in
+ * apps/site/src/assets/tokens.css, including independent light/dark surface
+ * hierarchies") has not landed yet. SITE-004 needs a token layer to drive the
+ * no-flash theme bootstrap and base layout, so this file defines a minimal,
+ * clearly-scoped placeholder set: background/foreground/border/focus-ring
+ * roles for the `light` and `dark` color-scheme values written by the
+ * bootstrap script (see src/layouts/BaseLayout.astro).
+ *
+ * When BRAND-002 lands, replace the values below with the approved semantic
+ * scale (independent light/dark surface hierarchies, full role set) without
+ * changing the token *names* consumed here unless BRAND-002 explicitly
+ * renames them — the bootstrap script and base layout only depend on the
+ * `--color-*` and `--focus-ring` custom properties, not on how they resolve.
+ */
+
+:root,
+:root[data-theme="light"] {
+  --color-surface: #ffffff;
+  --color-surface-raised: #f7f7f8;
+  --color-foreground: #14141a;
+  --color-foreground-muted: #52525b;
+  --color-border: #e2e2e6;
+  --focus-ring: #0f62fe;
+}
+
+:root[data-theme="dark"] {
+  --color-surface: #0b0b0e;
+  --color-surface-raised: #16161b;
+  --color-foreground: #f4f4f5;
+  --color-foreground-muted: #a1a1aa;
+  --color-border: #2a2a31;
+  --focus-ring: #6ea8fe;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --color-surface: #0b0b0e;
+    --color-surface-raised: #16161b;
+    --color-foreground: #f4f4f5;
+    --color-foreground-muted: #a1a1aa;
+    --color-border: #2a2a31;
+    --focus-ring: #6ea8fe;
+  }
+}

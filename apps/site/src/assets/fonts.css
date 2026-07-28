@@ -1,0 +1,28 @@
+/**
+ * Solidiom site — font faces.
+ *
+ * STATUS: placeholder pending BRAND-003.
+ *
+ * BRAND-003 ("Select, pin, self-host, and preload Inter Tight, Inter
+ * Variable, and IBM Plex Mono assets with documented licenses") has not
+ * landed yet — no font binaries or licenses exist in the repository. Until
+ * then this file declares the three semantic font roles the base layout and
+ * bootstrap already assume (display / body-ui / mono) and points them at
+ * system font stacks so the site renders correctly with no missing-asset
+ * requests and no layout dependency on files that don't exist yet.
+ *
+ * When BRAND-003 lands:
+ *   1. Add the licensed .woff2 files under this directory (or an adjacent
+ *      `fonts/` directory) and add `@font-face` rules for
+ *      "Inter Tight", "Inter Variable", and "IBM Plex Mono".
+ *   2. Update the `<link rel="preload" as="font">` tags in
+ *      src/layouts/BaseLayout.astro to point at the real files.
+ *   3. Keep the `--font-display`, `--font-body`, `--font-mono` custom
+ *      property names stable so no other file needs to change.
+ */
+
+:root {
+  --font-display: "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
