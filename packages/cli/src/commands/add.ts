@@ -71,7 +71,9 @@ export class AddCommand extends Command {
 
   primitive = Option.String({ required: true })
   mode = Option.String("--mode", { description: "Install mode (package or source)" })
-  registry = Option.String("--registry", { description: "Custom registry URL for package resolution" })
+  registry = Option.String("--registry", {
+    description: "Custom registry URL for package resolution",
+  })
   noNetwork = Option.Boolean("--no-network", false, {
     description: "Use only cached/local registry data (no network fetch)",
   })

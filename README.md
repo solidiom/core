@@ -91,25 +91,25 @@ The interactive docs live in `apps/docs/`. See [`apps/docs/README.md`](apps/docs
 
 All tasks are defined in `.mise.toml`. Run `mise tasks` to list them.
 
-| Task                                     | Description                               |
-| ---------------------------------------- | ----------------------------------------- |
-| `mise run build`                         | Build all packages (nx dependency graph)  |
+| Task                                         | Description                               |
+| -------------------------------------------- | ----------------------------------------- |
+| `mise run build`                             | Build all packages (nx dependency graph)  |
 | `mise run build:package -- @solidiom/button` | Build a single package                    |
-| `mise run build:recipes`                 | Build CSS + Tailwind recipe packages      |
-| `mise run build:docs`                    | Build the docs app                        |
-| `mise run build:registry`                | Generate registry manifests               |
-| `mise run dev`                           | Start docs dev server                     |
-| `mise run test`                          | Run all unit tests                        |
-| `mise run test:browser`                  | Browser-mode component tests (Playwright) |
-| `mise run test:e2e`                      | End-to-end tests                          |
-| `mise run typecheck`                     | Type-check all packages                   |
-| `mise run lint`                          | Lint all packages                         |
-| `mise run format`                        | Format with Prettier                      |
-| `mise run changeset`                     | Create a changeset                        |
-| `mise run version`                       | Bump versions from changesets             |
-| `mise run release`                       | Build + publish to npm                    |
-| `mise run clean`                         | Remove all dist/ directories              |
-| `mise run graph`                         | Open nx dependency graph                  |
+| `mise run build:recipes`                     | Build CSS + Tailwind recipe packages      |
+| `mise run build:docs`                        | Build the docs app                        |
+| `mise run build:registry`                    | Generate registry manifests               |
+| `mise run dev`                               | Start docs dev server                     |
+| `mise run test`                              | Run all unit tests                        |
+| `mise run test:browser`                      | Browser-mode component tests (Playwright) |
+| `mise run test:e2e`                          | End-to-end tests                          |
+| `mise run typecheck`                         | Type-check all packages                   |
+| `mise run lint`                              | Lint all packages                         |
+| `mise run format`                            | Format with Prettier                      |
+| `mise run changeset`                         | Create a changeset                        |
+| `mise run version`                           | Bump versions from changesets             |
+| `mise run release`                           | Build + publish to npm                    |
+| `mise run clean`                             | Remove all dist/ directories              |
+| `mise run graph`                             | Open nx dependency graph                  |
 
 ## Testing GitHub Actions locally
 

@@ -94,10 +94,7 @@ describe("no-forbidden-primitive-props", () => {
   })
 
   it("reports when setting role on Tabs.List", () => {
-    const errors = runRule(
-      noForbiddenPrimitiveProps,
-      `<Tabs.List role="tablist" />`,
-    )
+    const errors = runRule(noForbiddenPrimitiveProps, `<Tabs.List role="tablist" />`)
     expect(errors).toHaveLength(1)
     expect(errors[0].data.prop).toBe("role")
     expect(errors[0].data.part).toBe("List")
@@ -129,18 +126,12 @@ describe("no-forbidden-primitive-props", () => {
   })
 
   it("does not report for parts without forbidden props (Menu.Item only has role)", () => {
-    const errors = runRule(
-      noForbiddenPrimitiveProps,
-      `<Menu.Item class="item">Action</Menu.Item>`,
-    )
+    const errors = runRule(noForbiddenPrimitiveProps, `<Menu.Item class="item">Action</Menu.Item>`)
     expect(errors).toHaveLength(0)
   })
 
   it("reports role on Combobox.Input", () => {
-    const errors = runRule(
-      noForbiddenPrimitiveProps,
-      `<Combobox.Input role="textbox" />`,
-    )
+    const errors = runRule(noForbiddenPrimitiveProps, `<Combobox.Input role="textbox" />`)
     expect(errors).toHaveLength(1)
     expect(errors[0].data.prop).toBe("role")
     expect(errors[0].data.primitive).toBe("Combobox")

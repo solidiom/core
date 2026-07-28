@@ -51,8 +51,14 @@ export const FORBIDDEN_OUTPUT_PATTERNS = [
   // ARIA attributes — §23 #10
   { pattern: /["']aria-/, reason: "Adapter must not output ARIA attributes (§23 #10)" },
   // data-* semantic attributes — §23 #10
-  { pattern: /["']data-scope["']/, reason: "Adapter must not output data-scope attributes (§23 #10)" },
-  { pattern: /["']data-part["']/, reason: "Adapter must not output data-part attributes (§23 #10)" },
+  {
+    pattern: /["']data-scope["']/,
+    reason: "Adapter must not output data-scope attributes (§23 #10)",
+  },
+  {
+    pattern: /["']data-part["']/,
+    reason: "Adapter must not output data-part attributes (§23 #10)",
+  },
   // Role attributes — §23 #10
   { pattern: /["']role["']\s*:/, reason: "Adapter must not output role attributes (§23 #10)" },
 ] as const

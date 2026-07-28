@@ -9,6 +9,8 @@ import { type Plan, type PlanOptions } from "./plan";
 import { type SourceInstallResult } from "../source/install";
 export interface AddOptions extends PlanOptions {
     dryRun?: boolean;
+    registry?: string;
+    noNetwork?: boolean;
 }
 export interface AddResult {
     plan: Plan;
@@ -28,6 +30,8 @@ export declare class AddCommand extends Command {
     static usage: import("clipanion").Usage;
     primitive: string;
     mode: string | undefined;
+    registry: string | undefined;
+    noNetwork: boolean;
     dryRun: boolean;
     json: boolean;
     execute(): Promise<number>;

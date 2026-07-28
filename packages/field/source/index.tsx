@@ -39,7 +39,8 @@ const FieldContext = createContext<FieldContextValue>()
 
 function useField(): FieldContextValue {
   const ctx = useContext(FieldContext)
-  if (!ctx) throw new globalThis.Error("[solidiom] Field sub-parts must be used within <Field.Root>")
+  if (!ctx)
+    throw new globalThis.Error("[solidiom] Field sub-parts must be used within <Field.Root>")
   return ctx
 }
 

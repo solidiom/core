@@ -72,9 +72,7 @@ describe("RangeCalendar", () => {
     it("single-day range (start == end) contains only that day", () => {
       const day = { year: 2024, month: 6, day: 10 }
       expect(gregorianDateMath.isInRange(day, day, day)).toBe(true)
-      expect(
-        gregorianDateMath.isInRange({ year: 2024, month: 6, day: 11 }, day, day),
-      ).toBe(false)
+      expect(gregorianDateMath.isInRange({ year: 2024, month: 6, day: 11 }, day, day)).toBe(false)
     })
   })
 

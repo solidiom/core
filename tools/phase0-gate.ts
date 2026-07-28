@@ -187,14 +187,8 @@ check(
   fileContains(".github/workflows/ci.yml", "phase0-gate"),
   "CI must run the phase0 gate",
 )
-check(
-  "CI has browser test job",
-  fileContains(".github/workflows/ci.yml", "test-browser"),
-)
-check(
-  "CI has solid matrix job",
-  fileContains(".github/workflows/ci.yml", "test-solid-matrix"),
-)
+check("CI has browser test job", fileContains(".github/workflows/ci.yml", "test-browser"))
+check("CI has solid matrix job", fileContains(".github/workflows/ci.yml", "test-solid-matrix"))
 
 // ─── Summary ────────────────────────────────────────────────────────────
 summarize("Phase 0 Gate")

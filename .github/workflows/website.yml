@@ -1,0 +1,88 @@
+name: Website
+
+# Separately invokable pipeline for the @solidiom/site application (SITE-002 /
+# SITE-003 baseline: Astro check, production build, Pagefind index).
+# Repository-wide triggers stay in ci.yml; PR/main triggers for this workflow
+# are owned by CI-001.
+on:
+  workflow_dispatch:
+    inputs:
+      run_search_index:
+        description: "Run the Pagefind search-index target"
+        type: boolean
+        default: true
+      upload_site_artifact:
+        description: "Upload the built dist/ directory as an artifact"
+        type: boolean
+        default: false
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "24"
+  PNPM_VERSION: "10.34.5"
+
+jobs:
+  format:
+    name: Format check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run format:check
+
+  check:
+    name: Astro check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec nx run @solidiom/site:check
+
+  build:
+    name: Build and index
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Production build
+        run: pnpm exec nx run @solidiom/site:build
+      - name: Pagefind search index
+        if: ${{ inputs.run_search_index }}
+        run: pnpm exec nx run @solidiom/site:search-index
+      - name: Verify static output
+        run: |
+          test -f apps/site/dist/index.html
+          if [ "${{ inputs.run_search_index }}" = "true" ]; then
+            test -f apps/site/dist/pagefind/pagefind.js
+          fi
+      - uses: actions/upload-artifact@v6
+        if: ${{ inputs.upload_site_artifact }}
+        with:
+          name: site-dist
+          path: apps/site/dist
+          retention-days: 7
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: site-build-logs
+          path: apps/site/.astro
+          retention-days: 7

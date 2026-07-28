@@ -53,9 +53,7 @@ describe("package/source parity", () => {
   describe("behavioral export parity", () => {
     it("dialog: package and source export the same named functions", async () => {
       const pkg = await import("@solidiom/dialog")
-      const source = await import(
-        join(PACKAGES_DIR, "dialog/source/index.tsx")
-      )
+      const source = await import(join(PACKAGES_DIR, "dialog/source/index.tsx"))
 
       const pkgExports = Object.keys(pkg).filter((k) => !k.startsWith("__"))
       const sourceExports = Object.keys(source).filter((k) => !k.startsWith("__"))
@@ -73,9 +71,7 @@ describe("package/source parity", () => {
 
     it("select: package and source export the same named functions", async () => {
       const pkg = await import("@solidiom/select")
-      const source = await import(
-        join(PACKAGES_DIR, "select/source/index.tsx")
-      )
+      const source = await import(join(PACKAGES_DIR, "select/source/index.tsx"))
 
       const pkgExports = Object.keys(pkg).filter((k) => !k.startsWith("__"))
       const sourceExports = Object.keys(source).filter((k) => !k.startsWith("__"))
@@ -91,9 +87,7 @@ describe("package/source parity", () => {
 
     it("calendar: package and source export the same named functions", async () => {
       const pkg = await import("@solidiom/calendar")
-      const source = await import(
-        join(PACKAGES_DIR, "calendar/source/index.tsx")
-      )
+      const source = await import(join(PACKAGES_DIR, "calendar/source/index.tsx"))
 
       const pkgExports = Object.keys(pkg).filter((k) => !k.startsWith("__"))
       const sourceExports = Object.keys(source).filter((k) => !k.startsWith("__"))
@@ -109,9 +103,7 @@ describe("package/source parity", () => {
 
     it("carousel: package and source export the same named functions", async () => {
       const pkg = await import("@solidiom/carousel")
-      const source = await import(
-        join(PACKAGES_DIR, "carousel/source/index.tsx")
-      )
+      const source = await import(join(PACKAGES_DIR, "carousel/source/index.tsx"))
 
       const pkgExports = Object.keys(pkg).filter((k) => !k.startsWith("__"))
       const sourceExports = Object.keys(source).filter((k) => !k.startsWith("__"))
@@ -132,9 +124,7 @@ describe("package/source parity", () => {
 
       it(`${name}: dist/ does not contain test files`, () => {
         const distFiles = getAllFiles(join(pkgDir, "dist"))
-        const testFiles = distFiles.filter(
-          (f) => f.includes(".test.") || f.includes(".spec."),
-        )
+        const testFiles = distFiles.filter((f) => f.includes(".test.") || f.includes(".spec."))
         // Only .d.ts test declarations are tolerable (not ideal but not shipped)
         const nonDeclarationTests = testFiles.filter(
           (f) => !f.endsWith(".d.ts") && !f.endsWith(".d.ts.map"),

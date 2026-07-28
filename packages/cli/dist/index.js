@@ -79,8 +79,10 @@ import { Command as Command2, Option as Option2 } from "clipanion";
 import { readFileSync as readFileSync2, existsSync as existsSync2 } from "fs";
 import { join as join2 } from "path";
 import pc2 from "picocolors";
-function loadRegistry(cwd) {
+function loadRegistry(cwd, registryOverride) {
   const candidates = [
+    // Custom registry path takes highest priority
+    registryOverride ? join2(registryOverride, "index.json") : null,
     process.env["SOLIDIOM_REGISTRY_PATH"] ? join2(process.env["SOLIDIOM_REGISTRY_PATH"], "index.json") : null,
     join2(cwd, "..", "..", "registry", "index.json"),
     join2(cwd, "node_modules", "@solidiom", "registry", "index.json"),
@@ -171,7 +173,11 @@ var BUILTIN_PRIMITIVES = /* @__PURE__ */ new Map([
   ],
   [
     "carousel",
-    { name: "carousel", deps: ["@solidiom/runtime"], adapters: ["@solidiom/adapter-carousel-embla"] }
+    {
+      name: "carousel",
+      deps: ["@solidiom/runtime"],
+      adapters: ["@solidiom/adapter-carousel-embla"]
+    }
   ],
   [
     "popover",
@@ -191,7 +197,11 @@ var BUILTIN_PRIMITIVES = /* @__PURE__ */ new Map([
   ],
   [
     "menu",
-    { name: "menu", deps: ["@solidiom/runtime"], adapters: ["@solidiom/adapter-positioning-floating-ui"] }
+    {
+      name: "menu",
+      deps: ["@solidiom/runtime"],
+      adapters: ["@solidiom/adapter-positioning-floating-ui"]
+    }
   ],
   [
     "combobox",
@@ -220,13 +230,19 @@ var BUILTIN_PRIMITIVES = /* @__PURE__ */ new Map([
   ["listbox", { name: "listbox", deps: ["@solidiom/runtime"], adapters: [] }]
 ]);
 function runPlan(options) {
-  const { primitive, cwd, mode: modeOverride } = options;
+  const {
+    primitive,
+    cwd,
+    mode: modeOverride,
+    registry: registryOverride,
+    noNetwork: _noNetwork
+  } = options;
   const configPath = join2(cwd, ".solidiom", "config.json");
   const config = existsSync2(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync2(configPath, "utf8"))) : ConfigSchema.parse({});
   const policyPath = join2(cwd, ".solidiom", "policy.json");
   const policy = existsSync2(policyPath) ? PolicySchema.parse(JSON.parse(readFileSync2(policyPath, "utf8"))) : PolicySchema.parse({});
   const mode = modeOverride ?? config.defaultMode;
-  const registry = loadRegistry(cwd);
+  const registry = loadRegistry(cwd, registryOverride);
   let entry = null;
   if (registry) {
     entry = registry.get(primitive) ?? null;
@@ -291,11 +307,19 @@ var PlanCommand = class extends Command2 {
   primitive = Option2.String({ required: true });
   json = Option2.Boolean("--json", false, { description: "Output as JSON" });
   mode = Option2.String("--mode", { description: "Install mode (package or source)" });
+  registry = Option2.String("--registry", {
+    description: "Custom registry URL for package resolution"
+  });
+  noNetwork = Option2.Boolean("--no-network", false, {
+    description: "Use only cached/local registry data (no network fetch)"
+  });
   async execute() {
     const plan = runPlan({
       primitive: this.primitive,
       cwd: process.cwd(),
-      mode: this.mode
+      mode: this.mode,
+      registry: this.registry,
+      noNetwork: this.noNetwork
     });
     if (this.json) {
       this.context.stdout.write(JSON.stringify(plan, null, 2) + "\n");
@@ -468,7 +492,13 @@ function resolveRuntimeSource(cwd) {
 // src/commands/add.ts
 import pc3 from "picocolors";
 function runAdd(options) {
-  const plan = runPlan(options);
+  const plan = runPlan({
+    primitive: options.primitive,
+    cwd: options.cwd,
+    mode: options.mode,
+    registry: options.registry,
+    noNetwork: options.noNetwork
+  });
   if (plan.violations.length > 0) {
     return { plan, installCommand: null, blocked: true };
   }
@@ -497,6 +527,12 @@ var AddCommand = class extends Command3 {
   });
   primitive = Option3.String({ required: true });
   mode = Option3.String("--mode", { description: "Install mode (package or source)" });
+  registry = Option3.String("--registry", {
+    description: "Custom registry URL for package resolution"
+  });
+  noNetwork = Option3.Boolean("--no-network", false, {
+    description: "Use only cached/local registry data (no network fetch)"
+  });
   dryRun = Option3.Boolean("--dry-run", false, {
     description: "Show what would be done without writing"
   });
@@ -506,6 +542,8 @@ var AddCommand = class extends Command3 {
       primitive: this.primitive,
       cwd: process.cwd(),
       mode: this.mode,
+      registry: this.registry,
+      noNetwork: this.noNetwork,
       dryRun: this.dryRun
     });
     if (this.json) {
@@ -766,7 +804,7 @@ import { existsSync as existsSync6, readFileSync as readFileSync6, writeFileSync
 import { join as join6, dirname as dirname2, extname } from "path";
 
 // src/source/ast-transform.ts
-import { Project, SyntaxKind } from "ts-morph";
+import { Project } from "ts-morph";
 function rewriteImportsAst(options) {
   const { content, filePath, runtimeDir, fileName = "source.tsx" } = options;
   const project = createInMemoryProject();
@@ -807,70 +845,6 @@ function computeRelativeRuntimePath(specifier, filePath, runtimeDir) {
   const subpath = specifier.replace("@solidiom/runtime", "");
   const target = subpath ? `${relToRuntime}${subpath}` : `${relToRuntime}/index`;
   return target;
-}
-function applyMigration(content, spec) {
-  const project = createInMemoryProject();
-  const sourceFile = project.createSourceFile("migration-target.tsx", content, { overwrite: true });
-  let importsRewritten = 0;
-  let identifiersRenamed = 0;
-  let propsRemapped = 0;
-  const imports = sourceFile.getImportDeclarations();
-  for (const imp of imports) {
-    const moduleSpec = imp.getModuleSpecifierValue();
-    if (!matchesModuleSpecifier(moduleSpec, spec.fromModule)) continue;
-    imp.setModuleSpecifier(spec.toModule);
-    importsRewritten++;
-    const namedImports = imp.getNamedImports();
-    for (const named of namedImports) {
-      const oldName = named.getName();
-      const newName = spec.importMap[oldName];
-      if (newName && newName !== oldName) {
-        const alias = named.getAliasNode();
-        if (alias) {
-          named.setName(newName);
-        } else {
-          named.setName(newName);
-          renameIdentifierInFile(sourceFile, oldName, newName);
-          identifiersRenamed++;
-        }
-      }
-    }
-  }
-  const jsxElements = sourceFile.getDescendantsOfKind(SyntaxKind.JsxOpeningElement);
-  const selfClosing = sourceFile.getDescendantsOfKind(SyntaxKind.JsxSelfClosingElement);
-  const allJsxElements = [...jsxElements, ...selfClosing];
-  for (const jsx of allJsxElements) {
-    const attrs = jsx.getAttributes();
-    for (const attr of attrs) {
-      if (attr.getKind() !== SyntaxKind.JsxAttribute) continue;
-      const jsxAttr = attr.asKindOrThrow(SyntaxKind.JsxAttribute);
-      const attrName = jsxAttr.getNameNode().getText();
-      if (attrName in spec.propMap) {
-        const newPropName = spec.propMap[attrName];
-        if (newPropName === null || newPropName === void 0) {
-          jsxAttr.remove();
-          propsRemapped++;
-        } else if (newPropName !== attrName) {
-          jsxAttr.getNameNode().replaceWithText(newPropName);
-          propsRemapped++;
-        }
-      }
-    }
-  }
-  const code = sourceFile.getFullText();
-  const changed = importsRewritten > 0 || identifiersRenamed > 0 || propsRemapped > 0;
-  return { code, changed, importsRewritten, identifiersRenamed, propsRemapped };
-}
-function matchesModuleSpecifier(actual, target) {
-  return actual === target || actual.startsWith(`${target}/`);
-}
-function renameIdentifierInFile(sourceFile, oldName, newName) {
-  const identifiers = sourceFile.getDescendantsOfKind(SyntaxKind.Identifier);
-  for (const id of identifiers) {
-    if (id.getText() === oldName) {
-      id.replaceWithText(newName);
-    }
-  }
 }
 function createInMemoryProject() {
   return new Project({
@@ -1136,7 +1110,11 @@ function runDoctor(cwd) {
       checks.push({ name: "config.json valid", status: "fail", detail: String(e) });
     }
   } else {
-    checks.push({ name: "config.json exists", status: "warn", detail: "Run 'solidiom init' to create" });
+    checks.push({
+      name: "config.json exists",
+      status: "warn",
+      detail: "Run 'solidiom init' to create"
+    });
   }
   const policyPath = join7(cwd, ".solidiom", "policy.json");
   if (existsSync7(policyPath)) {
@@ -1378,7 +1356,10 @@ var VerifyCommand = class extends Command9 {
     description: "Verify artifact signatures against policy",
     examples: [
       ["Verify a package tarball", "solidiom verify @solidiom/dialog"],
-      ["Offline verification (use cached TUF root)", "solidiom verify ./dist/dialog.tgz --no-network"],
+      [
+        "Offline verification (use cached TUF root)",
+        "solidiom verify ./dist/dialog.tgz --no-network"
+      ],
       ["Output as JSON", "solidiom verify ./dist/dialog.tgz --json"]
     ]
   });
@@ -1597,7 +1578,6 @@ Run ${pc10.cyan("solidiom audit --sbom")} for full JSON or ${pc10.cyan("solidiom
 export {
   ConfigSchema,
   PolicySchema,
-  applyMigration,
   installSource,
   rewriteImportsAst,
   runAdd,

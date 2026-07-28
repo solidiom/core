@@ -57,7 +57,9 @@ export const COMPOSED_PART_ALLOWLIST: Record<string, Record<string, string>> = {
 }
 
 function extractDataScopes(cssContent: string): string[] {
-  return [...new Set([...cssContent.matchAll(/\[data-scope="([^"]+)"\]/g)].map((match) => match[1]))]
+  return [
+    ...new Set([...cssContent.matchAll(/\[data-scope="([^"]+)"\]/g)].map((match) => match[1])),
+  ]
 }
 
 function extractDataParts(cssContent: string): string[] {
@@ -78,7 +80,10 @@ function extractUsedParts(tsxContent: string): string[] {
   ]
 }
 
-export function auditRecipeProfile({ profileName, profileDir }: RecipeAuditOptions): RecipeDriftError[] {
+export function auditRecipeProfile({
+  profileName,
+  profileDir,
+}: RecipeAuditOptions): RecipeDriftError[] {
   const errors: RecipeDriftError[] = []
   const stylesDir = join(profileDir, "styles")
   const recipesDir = join(profileDir, "recipes")
@@ -124,7 +129,10 @@ export function auditRecipeProfile({ profileName, profileDir }: RecipeAuditOptio
   }
 
   for (const tsxName of tsxFiles) {
-    if (!cssFiles.includes(tsxName) && extractPrimitiveImport(readFileSync(join(recipesDir, `${tsxName}.tsx`), "utf8"))) {
+    if (
+      !cssFiles.includes(tsxName) &&
+      extractPrimitiveImport(readFileSync(join(recipesDir, `${tsxName}.tsx`), "utf8"))
+    ) {
       errors.push({
         profile: profileName,
         file: `recipes/${tsxName}.tsx`,

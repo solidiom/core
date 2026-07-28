@@ -222,31 +222,19 @@ check(
 // Verify all rules are registered in the plugin index
 check(
   "plugin registers no-adapter-import-of-recipes",
-  fileContains(
-    "packages/eslint-plugin-solidiom/src/index.ts",
-    '"no-adapter-import-of-recipes"',
-  ),
+  fileContains("packages/eslint-plugin-solidiom/src/index.ts", '"no-adapter-import-of-recipes"'),
 )
 check(
   "plugin registers require-primitive-parts",
-  fileContains(
-    "packages/eslint-plugin-solidiom/src/index.ts",
-    '"require-primitive-parts"',
-  ),
+  fileContains("packages/eslint-plugin-solidiom/src/index.ts", '"require-primitive-parts"'),
 )
 check(
   "plugin registers require-accessible-name",
-  fileContains(
-    "packages/eslint-plugin-solidiom/src/index.ts",
-    '"require-accessible-name"',
-  ),
+  fileContains("packages/eslint-plugin-solidiom/src/index.ts", '"require-accessible-name"'),
 )
 check(
   "plugin registers no-forbidden-primitive-props",
-  fileContains(
-    "packages/eslint-plugin-solidiom/src/index.ts",
-    '"no-forbidden-primitive-props"',
-  ),
+  fileContains("packages/eslint-plugin-solidiom/src/index.ts", '"no-forbidden-primitive-props"'),
 )
 
 // ─── 6. CLI doctor command ──────────────────────────────────────────────
@@ -267,10 +255,7 @@ check(
 
 // ─── 8. P1.3: Execute axe scans and generate real evidence ──────────────
 console.log("\n§8 Accessibility (executed axe scans):")
-check(
-  "axe scan test file exists",
-  fileExists("tests/a11y/primitives-axe-scan.browser.test.tsx"),
-)
+check("axe scan test file exists", fileExists("tests/a11y/primitives-axe-scan.browser.test.tsx"))
 check("axe helper exists", fileExists("tests/a11y/axe-helper.ts"))
 check("a11y result runner exists", fileExists("tools/run-a11y.ts"))
 
@@ -288,10 +273,7 @@ check(
   axeReportResult.ok,
   "Run: pnpm run report:axe",
 )
-check(
-  "executed axe result artifact exists",
-  fileExists("artifacts/axe-results.json"),
-)
+check("executed axe result artifact exists", fileExists("artifacts/axe-results.json"))
 check(
   "CI a11y job runs the executable scan and report commands",
   fileContains(".github/workflows/ci.yml", "run: pnpm run test:a11y") &&
@@ -308,10 +290,7 @@ check(
   auditFixtureResult.ok,
   "Run: pnpm exec vitest run tools/audit-recipe-dual-emission.test.ts tools/audit-umbrella-purity.test.ts tools/axe-results.test.ts",
 )
-check(
-  "audit-recipe-dual-emission.ts exists",
-  fileExists("tools/audit-recipe-dual-emission.ts"),
-)
+check("audit-recipe-dual-emission.ts exists", fileExists("tools/audit-recipe-dual-emission.ts"))
 const driftResult = run("pnpm exec tsx tools/audit-recipe-dual-emission.ts")
 check(
   "recipe drift check passes",
@@ -321,10 +300,7 @@ check(
 
 // ─── 10. P1.5: Umbrella re-export purity check ─────────────────────────
 console.log("\n§10 Umbrella re-export purity check:")
-check(
-  "audit-umbrella-purity.ts exists",
-  fileExists("tools/audit-umbrella-purity.ts"),
-)
+check("audit-umbrella-purity.ts exists", fileExists("tools/audit-umbrella-purity.ts"))
 const purityResult = run("pnpm exec tsx tools/audit-umbrella-purity.ts")
 check(
   "umbrella purity check passes",

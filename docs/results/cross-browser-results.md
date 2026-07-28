@@ -14,66 +14,66 @@ The test surface covers all 52 registry primitives plus the RangeCalendar compon
 
 ## Per-Primitive Test Surface Matrix
 
-| Primitive | Chromium | Firefox | WebKit | Notes |
-| --------- | -------- | ------- | ------ | ----- |
-| Accordion | ✓ | ✓ | ✓ | |
-| Alert | ✓ | ✓ | ✓ | |
-| Alert Dialog | ✓ | ✓ | ✓ | |
-| Avatar | ✓ | ✓ | ✓ | |
-| Badge | ✓ | ✓ | ✓ | |
-| Breadcrumb | ✓ | ✓ | ✓ | |
-| Button | ✓ | ✓ | ✓ | |
-| Calendar | ✓ | ✓ | ✓ | |
-| Card | ✓ | ✓ | ✓ | |
-| Carousel | ✓ | ✓ | ✓ | |
-| Checkbox | ✓ | ✓ | ✓ | |
-| Collapsible | ✓ | ✓ | ✓ | |
-| Combobox | ✓ | ✓ | ✓ | |
-| Command Palette | ✓ | ✓ | ✓ | |
-| Context Menu | ✓ | ✓ | ✓ | |
-| Data Table | ✓ | ✓ | ✓ | |
-| Date Picker | ✓ | ✓ | ✓ | |
-| Dialog | ✓ | ✓ | ✓ | |
-| Drawer | ✓ | ✓ | ✓ | |
-| Empty State | ✓ | ✓ | ✓ | |
-| Field | ✓ | ✓ | ✓ | |
-| Hover Card | ✓ | ✓ | ✓ | |
-| Input | ✓ | ✓ | ✓ | |
-| Input OTP | ✓ | ✓ | ✓ | |
-| Kbd | ✓ | ✓ | ✓ | |
-| Label | ✓ | ✓ | ✓ | |
-| Listbox | ✓ | ✓ | ✓ | |
-| Menu | ✓ | ✓ | ✓ | |
-| Meter | ✓ | ✓ | ✓ | |
-| Navigation Menu | ✓ | ✓ | ✓ | |
-| Pagination | ✓ | ✓ | ✓ | |
-| Popover | ✓ | ✓ | ✓ | |
-| Progress | ✓ | ✓ | ✓ | |
-| Radio Group | ✓ | ✓ | ✓ | |
-| Resizable Panels | ✓ | ✓ | ✓ | |
-| Scroll Area | ✓ | ✓ | ✓ | |
-| Select | ✓ | ✓ | ✓ | |
-| Separator | ✓ | ✓ | ✓ | |
-| Sheet | ✓ | ✓ | ✓ | |
-| Skeleton | ✓ | ✓ | ✓ | |
-| Slider | ✓ | ✓ | ✓ | |
-| Spinner | ✓ | ✓ | ✓ | |
-| Switch | ✓ | ✓ | ✓ | |
-| Tabs | ✓ | ✓ | ✓ | |
-| Toast | ✓ | ✓ | ✓ | |
-| Toggle | ✓ | ✓ | ✓ | |
-| Toggle Group | ✓ | ✓ | ✓ | |
-| Toolbar | ✓ | ✓ | ✓ | |
-| Tooltip | ✓ | ✓ | ✓ | |
-| Tree | ✓ | ✓ | ✓ | |
-| Virtual List | ✓ | ✓ | ✓ | |
-| Visually Hidden | ✓ | ✓ | ✓ | |
+| Primitive        | Chromium | Firefox | WebKit | Notes |
+| ---------------- | -------- | ------- | ------ | ----- |
+| Accordion        | ✓        | ✓       | ✓      |       |
+| Alert            | ✓        | ✓       | ✓      |       |
+| Alert Dialog     | ✓        | ✓       | ✓      |       |
+| Avatar           | ✓        | ✓       | ✓      |       |
+| Badge            | ✓        | ✓       | ✓      |       |
+| Breadcrumb       | ✓        | ✓       | ✓      |       |
+| Button           | ✓        | ✓       | ✓      |       |
+| Calendar         | ✓        | ✓       | ✓      |       |
+| Card             | ✓        | ✓       | ✓      |       |
+| Carousel         | ✓        | ✓       | ✓      |       |
+| Checkbox         | ✓        | ✓       | ✓      |       |
+| Collapsible      | ✓        | ✓       | ✓      |       |
+| Combobox         | ✓        | ✓       | ✓      |       |
+| Command Palette  | ✓        | ✓       | ✓      |       |
+| Context Menu     | ✓        | ✓       | ✓      |       |
+| Data Table       | ✓        | ✓       | ✓      |       |
+| Date Picker      | ✓        | ✓       | ✓      |       |
+| Dialog           | ✓        | ✓       | ✓      |       |
+| Drawer           | ✓        | ✓       | ✓      |       |
+| Empty State      | ✓        | ✓       | ✓      |       |
+| Field            | ✓        | ✓       | ✓      |       |
+| Hover Card       | ✓        | ✓       | ✓      |       |
+| Input            | ✓        | ✓       | ✓      |       |
+| Input OTP        | ✓        | ✓       | ✓      |       |
+| Kbd              | ✓        | ✓       | ✓      |       |
+| Label            | ✓        | ✓       | ✓      |       |
+| Listbox          | ✓        | ✓       | ✓      |       |
+| Menu             | ✓        | ✓       | ✓      |       |
+| Meter            | ✓        | ✓       | ✓      |       |
+| Navigation Menu  | ✓        | ✓       | ✓      |       |
+| Pagination       | ✓        | ✓       | ✓      |       |
+| Popover          | ✓        | ✓       | ✓      |       |
+| Progress         | ✓        | ✓       | ✓      |       |
+| Radio Group      | ✓        | ✓       | ✓      |       |
+| Resizable Panels | ✓        | ✓       | ✓      |       |
+| Scroll Area      | ✓        | ✓       | ✓      |       |
+| Select           | ✓        | ✓       | ✓      |       |
+| Separator        | ✓        | ✓       | ✓      |       |
+| Sheet            | ✓        | ✓       | ✓      |       |
+| Skeleton         | ✓        | ✓       | ✓      |       |
+| Slider           | ✓        | ✓       | ✓      |       |
+| Spinner          | ✓        | ✓       | ✓      |       |
+| Switch           | ✓        | ✓       | ✓      |       |
+| Tabs             | ✓        | ✓       | ✓      |       |
+| Toast            | ✓        | ✓       | ✓      |       |
+| Toggle           | ✓        | ✓       | ✓      |       |
+| Toggle Group     | ✓        | ✓       | ✓      |       |
+| Toolbar          | ✓        | ✓       | ✓      |       |
+| Tooltip          | ✓        | ✓       | ✓      |       |
+| Tree             | ✓        | ✓       | ✓      |       |
+| Virtual List     | ✓        | ✓       | ✓      |       |
+| Visually Hidden  | ✓        | ✓       | ✓      |       |
 
 ## Component-Level Coverage
 
-| Component | Package | Chromium | Firefox | WebKit | Notes |
-| --------- | ------- | -------- | ------- | ------ | ----- |
-| RangeCalendar | @solidiom/calendar | ✓ | ✓ | ✓ | Distinct component within calendar package |
+| Component     | Package            | Chromium | Firefox | WebKit | Notes                                      |
+| ------------- | ------------------ | -------- | ------- | ------ | ------------------------------------------ |
+| RangeCalendar | @solidiom/calendar | ✓        | ✓       | ✓      | Distinct component within calendar package |
 
 ## Skip Policy
 

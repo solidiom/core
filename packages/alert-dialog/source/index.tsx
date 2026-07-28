@@ -99,7 +99,7 @@ export function Trigger(props: AlertDialogTriggerProps) {
   return (
     <button
       id={ctx.triggerId}
-      aria-haspopup={"alertdialog" as "dialog"}
+      aria-haspopup="dialog"
       aria-expanded={ctx.open() ? "true" : undefined}
       aria-controls={ctx.open() ? ctx.contentId : undefined}
       onClick={handleClick}

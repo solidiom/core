@@ -23,6 +23,8 @@ export interface PlanOptions {
     primitive: string;
     cwd: string;
     mode?: "package" | "source";
+    registry?: string;
+    noNetwork?: boolean;
 }
 /**
  * Core plan logic — usable from CLI and programmatic API.
@@ -37,6 +39,8 @@ export declare class PlanCommand extends Command {
     primitive: string;
     json: boolean;
     mode: string | undefined;
+    registry: string | undefined;
+    noNetwork: boolean;
     execute(): Promise<number>;
 }
 //# sourceMappingURL=plan.d.ts.map

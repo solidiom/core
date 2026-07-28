@@ -119,10 +119,7 @@ describe("require-primitive-parts", () => {
   })
 
   it("does not report for leaf primitives (Button)", () => {
-    const errors = runRule(
-      requirePrimitiveParts,
-      `<Button.Root>Click</Button.Root>`,
-    )
+    const errors = runRule(requirePrimitiveParts, `<Button.Root>Click</Button.Root>`)
     expect(errors).toHaveLength(0)
   })
 
@@ -135,10 +132,7 @@ describe("require-primitive-parts", () => {
   })
 
   it("fails when Combobox.Root is missing Input and Content", () => {
-    const errors = runRule(
-      requirePrimitiveParts,
-      `<Combobox.Root></Combobox.Root>`,
-    )
+    const errors = runRule(requirePrimitiveParts, `<Combobox.Root></Combobox.Root>`)
     expect(errors).toHaveLength(2)
     const parts = errors.map((e: any) => e.data.part).sort()
     expect(parts).toEqual(["Content", "Input"])

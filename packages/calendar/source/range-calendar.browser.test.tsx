@@ -52,11 +52,7 @@ function renderRangeCalendar(opts?: {
         <Calendar.RangeGrid>
           {(weeks) =>
             weeks.map((week) => (
-              <tr>
-                {week.map((day) =>
-                  day > 0 ? <Calendar.RangeCell day={day} /> : <td />,
-                )}
-              </tr>
+              <tr>{week.map((day) => (day > 0 ? <Calendar.RangeCell day={day} /> : <td />))}</tr>
             ))
           }
         </Calendar.RangeGrid>
@@ -72,9 +68,7 @@ function getCells(container: HTMLElement): HTMLElement[] {
 }
 
 function getCellByDay(container: HTMLElement, day: number): HTMLElement | null {
-  return (
-    getCells(container).find((el) => el.textContent?.trim() === String(day)) ?? null
-  )
+  return getCells(container).find((el) => el.textContent?.trim() === String(day)) ?? null
 }
 
 // ─── Tests ─────────────────────────────────────────────────────────────────────
@@ -132,7 +126,9 @@ describe("RangeCalendar", () => {
     it("second click completes the range and fires onValueChange", () => {
       let result: RangeValue | undefined
       const container = renderRangeCalendar({
-        onValueChange: (r) => { result = r },
+        onValueChange: (r) => {
+          result = r
+        },
       })
       const cell10 = getCellByDay(container, 10)!
       const cell15 = getCellByDay(container, 15)!
@@ -148,7 +144,9 @@ describe("RangeCalendar", () => {
     it("normalizes range when end is before start", () => {
       let result: RangeValue | undefined
       const container = renderRangeCalendar({
-        onValueChange: (r) => { result = r },
+        onValueChange: (r) => {
+          result = r
+        },
       })
       const cell15 = getCellByDay(container, 15)!
       const cell10 = getCellByDay(container, 10)!
@@ -193,7 +191,9 @@ describe("RangeCalendar", () => {
     it("Enter/Space selects range boundary from focused cell", () => {
       let result: RangeValue | undefined
       const container = renderRangeCalendar({
-        onValueChange: (r) => { result = r },
+        onValueChange: (r) => {
+          result = r
+        },
       })
       const grid = container.querySelector("[data-scope='range-calendar'][data-part='grid']")!
       // Press Enter to set start (focused on day 1)
@@ -299,7 +299,9 @@ describe("RangeCalendar", () => {
   describe("month navigation", () => {
     it("prev button navigates to previous month", () => {
       const container = renderRangeCalendar()
-      const prev = container.querySelector("[data-scope='range-calendar'][data-part='prev-button']") as HTMLElement
+      const prev = container.querySelector(
+        "[data-scope='range-calendar'][data-part='prev-button']",
+      ) as HTMLElement
       prev.click()
       flush()
       const title = container.querySelector("[data-scope='range-calendar'][data-part='title']")
@@ -308,7 +310,9 @@ describe("RangeCalendar", () => {
 
     it("next button navigates to next month", () => {
       const container = renderRangeCalendar()
-      const next = container.querySelector("[data-scope='range-calendar'][data-part='next-button']") as HTMLElement
+      const next = container.querySelector(
+        "[data-scope='range-calendar'][data-part='next-button']",
+      ) as HTMLElement
       next.click()
       flush()
       const title = container.querySelector("[data-scope='range-calendar'][data-part='title']")

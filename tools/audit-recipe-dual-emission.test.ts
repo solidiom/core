@@ -38,14 +38,18 @@ describe("recipe dual-emission audit", () => {
 
   it("rejects a stylesheet without a matching recipe", () => {
     const errors = audit({ "styles/button.css": '[data-scope="button"] {}' })
-    expect(errors).toContainEqual(expect.objectContaining({ message: expect.stringContaining("matching recipes") }))
+    expect(errors).toContainEqual(
+      expect.objectContaining({ message: expect.stringContaining("matching recipes") }),
+    )
   })
 
   it("rejects a recipe without a matching stylesheet", () => {
     const errors = audit({
       "recipes/button.tsx": 'import * as Button from "@solidiom/button"\n<Button.Root />',
     })
-    expect(errors).toContainEqual(expect.objectContaining({ message: expect.stringContaining("matching styles") }))
+    expect(errors).toContainEqual(
+      expect.objectContaining({ message: expect.stringContaining("matching styles") }),
+    )
   })
 
   it("rejects a CSS scope that differs from the imported primitive", () => {
@@ -53,7 +57,9 @@ describe("recipe dual-emission audit", () => {
       "styles/button.css": '[data-scope="dialog"][data-part="root"] {}',
       "recipes/button.tsx": 'import * as Button from "@solidiom/button"\n<Button.Root />',
     })
-    expect(errors).toContainEqual(expect.objectContaining({ message: expect.stringContaining("does not match") }))
+    expect(errors).toContainEqual(
+      expect.objectContaining({ message: expect.stringContaining("does not match") }),
+    )
   })
 
   it("rejects a CSS part not rendered by its recipe or documented as composed", () => {
@@ -61,7 +67,11 @@ describe("recipe dual-emission audit", () => {
       "styles/button.css": '[data-scope="button"][data-part="icon"] {}',
       "recipes/button.tsx": 'import * as Button from "@solidiom/button"\n<Button.Root />',
     })
-    expect(errors).toContainEqual(expect.objectContaining({ message: expect.stringContaining("no documented composition exception") }))
+    expect(errors).toContainEqual(
+      expect.objectContaining({
+        message: expect.stringContaining("no documented composition exception"),
+      }),
+    )
   })
 
   it("permits an explicitly documented composed part", () => {

@@ -28,10 +28,11 @@ description = "Build the docs app"
 run = "pnpm nx build @solidiom/docs"
 
 [tasks."validate:site"]
-description = "Validate the website (Astro check + production build)"
+description = "Validate the website (Astro check, production build, and Pagefind index)"
 run = [
   "pnpm exec nx run @solidiom/site:check",
   "pnpm exec nx run @solidiom/site:build",
+  "pnpm exec nx run @solidiom/site:search-index",
 ]
 
 [tasks."build:registry"]

@@ -5,14 +5,17 @@ import { PUBLIC_PRIMITIVES } from "./axe-results"
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 const UMBRELLA_PATH = join(ROOT, "packages/primitives/src/index.ts")
 
-export const INTENDED_PUBLIC_SURFACE = PUBLIC_PRIMITIVES.map((primitive) => `@solidiom/${primitive}`).sort()
+export const INTENDED_PUBLIC_SURFACE = PUBLIC_PRIMITIVES.map(
+  (primitive) => `@solidiom/${primitive}`,
+).sort()
 
 export interface PurityError {
   line: number
   message: string
 }
 
-const REEXPORT_RE = /^export\s+\*\s+as\s+[A-Z][a-zA-Z]*\s+from\s+["'](@solidiom\/[a-z][a-z0-9-]*)["']\s*$/
+const REEXPORT_RE =
+  /^export\s+\*\s+as\s+[A-Z][a-zA-Z]*\s+from\s+["'](@solidiom\/[a-z][a-z0-9-]*)["']\s*$/
 const ALLOWED_NON_EXPORT_RE = /^\s*$|^\s*\/\/.*$|^\s*\/\*.*$|^\s*\*.*$/
 
 export function auditUmbrellaSource(
@@ -38,12 +41,18 @@ export function auditUmbrellaSource(
   const found = [...foundExports].sort()
   for (const exportName of expected) {
     if (!found.includes(exportName)) {
-      errors.push({ line: 0, message: `Missing re-export: ${exportName} is in the intended public surface but not in the umbrella` })
+      errors.push({
+        line: 0,
+        message: `Missing re-export: ${exportName} is in the intended public surface but not in the umbrella`,
+      })
     }
   }
   for (const exportName of found) {
     if (!expected.includes(exportName)) {
-      errors.push({ line: 0, message: `Extra re-export: ${exportName} is in the umbrella but not in the intended public surface` })
+      errors.push({
+        line: 0,
+        message: `Extra re-export: ${exportName} is in the umbrella but not in the intended public surface`,
+      })
     }
   }
   for (const exportName of new Set(found)) {

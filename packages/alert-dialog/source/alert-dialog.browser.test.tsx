@@ -39,7 +39,7 @@ function getContainer(): HTMLElement {
 // ─── Tests ─────────────────────────────────────────────────────────────────────
 
 describe("AlertDialog", () => {
-  it("renders trigger with aria-haspopup=alertdialog", () => {
+  it("renders trigger with aria-haspopup=dialog", () => {
     const container = getContainer()
     render(
       () => (
@@ -60,7 +60,7 @@ describe("AlertDialog", () => {
 
     const trigger = container.querySelector("[data-scope='alert-dialog'][data-part='trigger']")
     expect(trigger).not.toBeNull()
-    expect(trigger!.getAttribute("aria-haspopup")).toBe("alertdialog")
+    expect(trigger!.getAttribute("aria-haspopup")).toBe("dialog")
     expect(trigger!.getAttribute("data-state")).toBe("closed")
   })
 

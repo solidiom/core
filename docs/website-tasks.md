@@ -155,7 +155,7 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | ------ | -------- | ---- | ------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | [x]    | SITE-001 | S    | —                              | Platform      | Create `apps/site` using only POC configuration/integration wiring; package name `@solidiom/site`; retain POC unchanged.             |
 | [x]    | SITE-002 | S    | SITE-001                       | Platform      | Add package scripts and Nx metadata for `dev`, `check`, `build`, `preview`, and `search-index`; declare outputs/cache inputs.        |
-| [ ]    | SITE-003 | S    | SITE-002                       | Platform/QA   | Establish one static route, Astro check, production build, and Pagefind generation as the green baseline.                            |
+| [x]    | SITE-003 | S    | SITE-002                       | Platform/QA   | Establish one static route, Astro check, production build, and Pagefind generation as the green baseline.                            |
 | [ ]    | SITE-004 | M    | SITE-003, BRAND-002, BRAND-003 | Frontend      | Implement base HTML/layout, metadata defaults, font preloads, no-flash locale/theme bootstrap, skip link, and focus root.            |
 | [ ]    | SITE-005 | M    | SITE-004                       | Frontend      | Implement responsive header/global nav with Solidiom Button, Navigation Menu/Menu, and Dialog/Drawer primitives.                     |
 | [ ]    | SITE-006 | S    | SITE-004                       | Frontend      | Implement footer, legal/community links, newsletter slot, and responsive behavior; GitHub only.                                      |
@@ -650,14 +650,14 @@ Complete `TPL-000` first to assign stack, required blocks, deployment target, au
 
 Update this table when tasks move; do not infer completion from generated files alone.
 
-| Milestone                 | Status      | Gate | Completion evidence                              |
-| ------------------------- | ----------- | ---- | ------------------------------------------------ |
-| M0 Governance/inputs      | Not started | G0   | Policies, baseline, inventory, accounts          |
-| M1 Foundation/alpha shell | In progress | G1   | SITE-001 scaffold and SITE-002 targets validated; static baseline pending |
-| M2 Content vertical slice | Not started | G2   | Three complex primitives pass end to end         |
-| M3 Public beta platform   | Not started | G3   | Beta acceptance matrix and deployment            |
-| M4 Catalog completion     | Not started | G4   | Exact catalog counts and item DoDs               |
-| M5 GA/cutover             | Not started | G5   | Full acceptance matrix and production deployment |
+| Milestone                 | Status      | Gate | Completion evidence                                                                                       |
+| ------------------------- | ----------- | ---- | --------------------------------------------------------------------------------------------------------- |
+| M0 Governance/inputs      | Not started | G0   | Policies, baseline, inventory, accounts                                                                   |
+| M1 Foundation/alpha shell | In progress | G1   | SITE-001 scaffold, SITE-002 targets, and SITE-003 static baseline validated; remaining shell work pending |
+| M2 Content vertical slice | Not started | G2   | Three complex primitives pass end to end                                                                  |
+| M3 Public beta platform   | Not started | G3   | Beta acceptance matrix and deployment                                                                     |
+| M4 Catalog completion     | Not started | G4   | Exact catalog counts and item DoDs                                                                        |
+| M5 GA/cutover             | Not started | G5   | Full acceptance matrix and production deployment                                                          |
 
 ### Scope counters
 
