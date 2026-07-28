@@ -1,0 +1,188 @@
+/**
+ * SiteHeader styles.
+ *
+ * Breakpoint: 768px matches Tailwind's default `md` and is the single
+ * source of truth for the desktop-nav / mobile-drawer split below.
+ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+.site-header__brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--color-foreground);
+  text-decoration: none;
+}
+
+/* Desktop nav: hidden below 768px, flex row at/above it. */
+.site-header__desktop-nav {
+  display: none;
+}
+
+.site-header__desktop-nav [data-scope="navigation-menu"][data-part="list"] {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-header__desktop-nav [data-scope="navigation-menu"][data-part="link"],
+.site-header__desktop-nav [data-scope="navigation-menu"][data-part="trigger"] {
+  background: none;
+  border: none;
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.site-header__desktop-nav [data-scope="navigation-menu"][data-part="link"][data-active],
+.site-header__desktop-nav [data-scope="navigation-menu"][data-part="trigger"][data-state="open"] {
+  color: var(--focus-ring);
+}
+
+.site-header__dropdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.75rem;
+  min-width: 12rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background-color: var(--color-surface-raised);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
+}
+
+.site-header__mobile-trigger {
+  display: block;
+}
+
+@media (width >= 768px) {
+  .site-header__desktop-nav {
+    display: block;
+  }
+
+  .site-header__mobile-trigger {
+    display: none;
+  }
+}
+
+/* Hamburger icon, built from three plain <span> bars (no icon asset needed). */
+.site-header__hamburger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.site-header__hamburger span {
+  display: block;
+  height: 2px;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+
+/* Drawer (mobile nav) */
+.site-header__drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgb(0 0 0 / 0.4);
+}
+
+.site-header__drawer-content {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: 51;
+  width: min(20rem, 85vw);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--color-surface);
+  border-inline-end: 1px solid var(--color-border);
+  overflow-y: auto;
+}
+
+.site-header__drawer-content[data-state="closed"] {
+  display: none;
+}
+
+.site-header__drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-header__drawer-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.site-header__drawer-description {
+  /* Present for aria-describedby; not usually meaningful to sighted users. */
+  color: var(--color-foreground-muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.site-header__drawer-nav ul {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.site-header__drawer-nav a {
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.site-header__drawer-nav a[aria-current="page"] {
+  color: var(--focus-ring);
+}
+
+.site-header__drawer-group-label {
+  color: var(--color-foreground-muted);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-header__drawer-content {
+    transition: transform 0.2s ease-out;
+  }
+}

@@ -1,0 +1,30 @@
+---
+/**
+ * Astro wrapper for the SiteHeader Solid island.
+ *
+ * Hydrated with `client:load`: the hamburger trigger and dropdown must be
+ * interactive as soon as possible, and there is no non-interactive
+ * fallback for a mobile menu — the header still renders its full link
+ * markup server-side (the primitives render real anchor/button elements on
+ * first paint), so this only adds interactivity on top of static content
+ * rather than gating the content itself.
+ */
+import { SiteHeader, type NavLink } from "./SiteHeader"
+
+interface Props {
+  links: NavLink[]
+  resourceLinks: NavLink[]
+  homeHref?: string
+}
+
+const { links, resourceLinks, homeHref } = Astro.props
+const pathname = Astro.url.pathname
+---
+
+<SiteHeader
+  links={links}
+  resourceLinks={resourceLinks}
+  pathname={pathname}
+  homeHref={homeHref}
+  client:load
+/>

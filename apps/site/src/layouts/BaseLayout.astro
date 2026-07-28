@@ -10,7 +10,7 @@
  *   - Skip link and a single focus-root landmark for main content.
  *
  * Explicitly out of scope here (see docs/website-tasks.md §5.1):
- *   - Header/nav (SITE-005), footer (SITE-006), docs shell (SITE-007).
+ *   - Footer (SITE-006), docs shell (SITE-007).
  *   - Full typography/prose/Shiki pairing (SITE-008).
  *   - Theme toggle UI + change persistence (SITE-009).
  *   - 404/robots/sitemap/manifest/social helpers (SITE-010).
@@ -19,15 +19,23 @@ import "../assets/global.css"
 import { bootstrapThemeScript } from "../lib/bootstrap-theme"
 import { resolveLocale, localeDirection, DEFAULT_LOCALE } from "../lib/locale"
 import { resolvePageMetadata } from "../lib/metadata"
+import { primaryLinks, resourceLinks } from "../lib/nav-links"
+import SiteHeader from "../components/SiteHeader.astro"
 
 interface Props {
   title?: string
   description?: string
   /** Id of the element the skip link and focus root should target. Defaults to "main-content". */
   mainId?: string
+  /**
+   * Whether to render the global header/nav. Default true. Routes that must
+   * not import interactive shell chrome (e.g. a future playground/theme
+   * builder, per SITE-012's import-boundary rules) can opt out.
+   */
+  showHeader?: boolean
 }
 
-const { title, description, mainId = "main-content" } = Astro.props
+const { title, description, mainId = "main-content", showHeader = true } = Astro.props
 
 const locale = resolveLocale(Astro.url.pathname)
 const dir = localeDirection(locale)
@@ -90,6 +98,7 @@ const alternatePathname =
   </head>
   <body>
     <a class="skip-link" href={`#${mainId}`}>Skip to main content</a>
+    {showHeader && <SiteHeader links={primaryLinks} resourceLinks={resourceLinks} homeHref="/" />}
     <div id={mainId} class="focus-root" tabindex="-1">
       <slot />
     </div>
