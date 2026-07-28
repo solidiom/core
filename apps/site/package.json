@@ -2,6 +2,13 @@
   "name": "@solidiom/site",
   "private": true,
   "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "astro preview",
+    "search-index": "pagefind --site dist"
+  },
   "dependencies": {
     "@astrojs/check": "0.9.9",
     "@astrojs/mdx": "7.0.3",
@@ -14,9 +21,56 @@
     "tailwindcss": "4.3.3"
   },
   "devDependencies": {
+    "pagefind": "1.5.2",
     "typescript": "6.0.3"
   },
   "engines": {
     "node": ">=24.0.0"
+  },
+  "nx": {
+    "tags": [
+      "layer:app"
+    ],
+    "targets": {
+      "dev": {
+        "cache": false
+      },
+      "check": {
+        "inputs": [
+          "default",
+          "^default"
+        ],
+        "cache": true
+      },
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [
+          "production",
+          "^production"
+        ],
+        "outputs": [
+          "{projectRoot}/dist"
+        ],
+        "cache": true
+      },
+      "preview": {
+        "cache": false
+      },
+      "search-index": {
+        "dependsOn": [
+          "build"
+        ],
+        "inputs": [
+          "production",
+          "^production"
+        ],
+        "outputs": [
+          "{projectRoot}/dist/pagefind"
+        ],
+        "cache": true
+      }
+    }
   }
 }
