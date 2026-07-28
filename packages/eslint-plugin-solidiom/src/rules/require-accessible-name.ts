@@ -140,7 +140,10 @@ function getJSXElementName(node: any): string | undefined {
 }
 
 /** Parse "Namespace.Member" from a dot-separated name. */
-function parseMemberExpression(name: string): { namespace: string | undefined; member: string | undefined } {
+function parseMemberExpression(name: string): {
+  namespace: string | undefined
+  member: string | undefined
+} {
   const parts = name.split(".")
   if (parts.length === 2) {
     return { namespace: parts[0], member: parts[1] }

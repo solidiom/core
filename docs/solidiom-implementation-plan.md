@@ -22,37 +22,37 @@ Progress convention: `[ ]` open, `[~]` in progress, `[x]` complete, `[!]` blocke
 
 The core architectural decisions made during plan creation and subsequent roadmap reviews are summarized below. Full original rationale is in §27 of `opencenter-solidiom.md`.
 
-| #   | Area            | Choice                                                                                                                |
-| --- | --------------- | --------------------------------------------------------------------------------------------------------------------- |
+| #   | Area            | Choice                                                                                                                                                                          |
+| --- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | Scope           | Phases 0–3 through initial beta; Phase 3A for compile-time beta incubation; independent Phase 3B authoring tooling; Phase 4 for Solid 2 GA/stable v1.0; Phase 5 for strict v2.0 |
-| 2   | Monorepo        | Nx (integrated) + pnpm workspaces + Changesets                                                                        |
-| 3   | Build tools     | `tsup` for pure-TS; Vite lib mode + `vite-plugin-solid` for JSX. Dual-emit `dist/` compiled + `source/` canonical TSX |
-| 4   | Testing         | Vitest with `@vitest/browser` (Playwright provider); `expect-type` for type tests                                     |
-| 5   | CLI             | Public CLI: `clipanion` + `@clack/prompts` + `picocolors` + `zod`; contributor scaffolding remains workspace-internal |
-| 6   | Registry        | npm-hosted tarballs + signed immutable catalogs in Cloudflare R2, with signed mutable `next`/`beta`/`latest` channel pointers |
-| 7   | AST toolchain   | `ts-morph` + TSESTree + `oxc-parser`, ast-grep authoring layer for pattern migrations                                 |
-| 8   | Three-way merge | `node-diff3` + ts-morph AST validation + postcss for CSS; patch fallback on validation failure                        |
-| 9   | Signatures      | `@sigstore/verify` in CLI; `@sigstore/sign` in `@solidiom/release-tools` (CI only); Node `crypto` for Mode B          |
-| 10  | Solid 2 matrix  | 3-beta rolling window; matrix `{low, mid, high} × {node 24, node 26} × chromium`                                      |
-| 11  | Recipes         | Both stylesheet + component-shaped TSX from canonical source; CSS + Tailwind Phase 1, UnoCSS Phase 2                  |
-| 12  | Test doubles    | Deterministic doubles for every capability + second production positioning adapter                                    |
-| 13  | Docs            | SolidStart + `@mdx-js/solid` + custom Diátaxis-aware sidebar/routing                                                  |
-| 14  | Benchmarks      | Playwright + `mitata` + `size-limit` under `@solidiom/bench`                                                         |
+| 2   | Monorepo        | Nx (integrated) + pnpm workspaces + Changesets                                                                                                                                  |
+| 3   | Build tools     | `tsup` for pure-TS; Vite lib mode + `vite-plugin-solid` for JSX. Dual-emit `dist/` compiled + `source/` canonical TSX                                                           |
+| 4   | Testing         | Vitest with `@vitest/browser` (Playwright provider); `expect-type` for type tests                                                                                               |
+| 5   | CLI             | Public CLI: `clipanion` + `@clack/prompts` + `picocolors` + `zod`; contributor scaffolding remains workspace-internal                                                           |
+| 6   | Registry        | npm-hosted tarballs + signed immutable catalogs in Cloudflare R2, with signed mutable `next`/`beta`/`latest` channel pointers                                                   |
+| 7   | AST toolchain   | `ts-morph` + TSESTree + `oxc-parser`, ast-grep authoring layer for pattern migrations                                                                                           |
+| 8   | Three-way merge | `node-diff3` + ts-morph AST validation + postcss for CSS; patch fallback on validation failure                                                                                  |
+| 9   | Signatures      | `@sigstore/verify` in CLI; `@sigstore/sign` in `@solidiom/release-tools` (CI only); Node `crypto` for Mode B                                                                    |
+| 10  | Solid 2 matrix  | 3-beta rolling window; matrix `{low, mid, high} × {node 24, node 26} × chromium`                                                                                                |
+| 11  | Recipes         | Both stylesheet + component-shaped TSX from canonical source; CSS + Tailwind Phase 1, UnoCSS Phase 2                                                                            |
+| 12  | Test doubles    | Deterministic doubles for every capability + second production positioning adapter                                                                                              |
+| 13  | Docs            | SolidStart + `@mdx-js/solid` + custom Diátaxis-aware sidebar/routing                                                                                                            |
+| 14  | Benchmarks      | Playwright + `mitata` + `size-limit` under `@solidiom/bench`                                                                                                                    |
 
 Policy defaults (pushback-able): MIT license · GitHub Actions CI · Changesets-per-PR (`next` for continuous prereleases, `beta` only after the Phase 3 release gate, `latest` for stable tags) · CycloneDX 1.5 JSON SBOM · legacy sunset default deprecated 2 minors + removed next major · playground routes embedded in `apps/docs`.
 
 ## Phase → version map
 
-| Phase                                         | Solidiom versions        | Exit gate                                                        |
-| --------------------------------------------- | ------------------------ | ---------------------------------------------------------------- |
-| Phase 0 — Architectural proof                 | v0.6.x                   | Task 27 (§21 P0 criteria)                                        |
-| Phase 1 — Primitive & package alpha           | v0.7.x → v0.8.x          | Task 42 (§21 P1 criteria)                                        |
-| Phase 2 — Distribution & enterprise beta      | v0.9.x → v0.10.x         | Task 58 (§21 P2 criteria)                                        |
-| Phase 3 — Initial beta stabilization/release  | v1.0.0-beta.x            | Gate: Task 60 (`phase3-gate.ts`); release: Task 68 (Solid 2 remains beta) |
-| Phase 3A — Compile-time beta incubation       | later v1.0.0-beta.x      | Task 67 (`phase3a:gate`; required before first RC)               |
-| Phase 3B — Generative authoring tooling       | unversioned repo milestone | Task 3B.8 (`phase3b:gate`; independent of public release gates) |
-| Phase 4 — Solid 2 GA and stable v1.0          | v1.0.x                   | Gate: Task 70 (`phase4-gate.ts`); release: Task 73 (§23 v1 stable criteria) |
-| Phase 5 — Strict enforcement and stable v2.0  | v2.0.x                   | Task 78 (§23 v2 strict criteria)                                 |
+| Phase                                        | Solidiom versions          | Exit gate                                                                   |
+| -------------------------------------------- | -------------------------- | --------------------------------------------------------------------------- |
+| Phase 0 — Architectural proof                | v0.6.x                     | Task 27 (§21 P0 criteria)                                                   |
+| Phase 1 — Primitive & package alpha          | v0.7.x → v0.8.x            | Task 42 (§21 P1 criteria)                                                   |
+| Phase 2 — Distribution & enterprise beta     | v0.9.x → v0.10.x           | Task 58 (§21 P2 criteria)                                                   |
+| Phase 3 — Initial beta stabilization/release | v1.0.0-beta.x              | Gate: Task 60 (`phase3-gate.ts`); release: Task 68 (Solid 2 remains beta)   |
+| Phase 3A — Compile-time beta incubation      | later v1.0.0-beta.x        | Task 67 (`phase3a:gate`; required before first RC)                          |
+| Phase 3B — Generative authoring tooling      | unversioned repo milestone | Task 3B.8 (`phase3b:gate`; independent of public release gates)             |
+| Phase 4 — Solid 2 GA and stable v1.0         | v1.0.x                     | Gate: Task 70 (`phase4-gate.ts`); release: Task 73 (§23 v1 stable criteria) |
+| Phase 5 — Strict enforcement and stable v2.0 | v2.0.x                     | Task 78 (§23 v2 strict criteria)                                            |
 
 ## Current completion task set for initial beta
 
@@ -76,26 +76,26 @@ Several C-items shadow numbered tasks (C5 ↔ Task 52, C8 ↔ Task 39/71 scope, 
 
 No `CODEOWNERS` file exists in the repository. Functional teams are inferred from task scope; named DRIs remain `TBD` until explicitly assigned. The initial-beta rows (C5, C8, C9/Task 60, C10/Task 68, and C11) must have named accountable owners before `tools/phase3-gate.ts` can be treated as passable — a release gate with no signatory cannot actually be signed off. Evidence links should point to durable, tamper-evident artifacts (a CI run ID, a published package version, or an artifact/commit hash) rather than status-snapshot markdown alone; where a `docs/*-results.md` file is cited as evidence, pair it with the CI run that produced it.
 
-| Work | DRI | Team | Depends on | Target | Required evidence |
-| ---- | --- | ---- | ---------- | ------ | ----------------- |
-| C5 / Task 52 — RangeCalendar | TBD | Primitives | Calendar/date adapter | Initial beta | Calendar tests, parity, demo, a11y and browser result rows |
-| C8 — beta accessibility | TBD | Accessibility | C5, Task 39 | Initial beta | `docs/axe-scan-results.md`, `docs/keyboard-audit-results.md`, `docs/at-audit-results/` |
-| C9 / Task 60 — Phase 3 gates | TBD | Release engineering | Gate criteria and fixtures | Initial beta | `phase3-preflight.ts` and failing-then-green `phase3-gate.ts` fixtures |
-| C10 / Task 68 — beta artifacts | TBD | Release engineering | C5, C8, C9, Tasks 61/65/66 | Initial beta | signed `next` candidate, consumer fixtures, green gate, promoted beta pointer, docs release |
-| C11 — unpublished primitive backlog | TBD | Primitives | Publish-set decision | Initial beta | per-package promote/defer decision; registry+umbrella+demo+evidence for promoted, `private:true` or exclusion for deferred |
-| Task 61 — beta docs/notes | TBD | Docs | Public beta scope frozen | Initial beta | Docs home/install/accessibility/release-note links |
-| Task 65 — cross-browser beta | TBD | Quality | C5 | Initial beta | `docs/cross-browser-results.md` with issue-linked skips only |
-| Task 66 — migration/legacy beta | TBD | Migration | Beta registry candidate | Initial beta | Migration fixtures and `legacy status` output |
-| Tasks 62–64, 67 — compile-time beta | TBD | Build tooling | Task 68 | Before first RC | `docs/compile-time-results.md`, parity fixtures, `phase3a:gate` |
-| Tasks 3B.1–3B.2 — contract/core | TBD | Developer experience | Package-local manifest schema | Independent | Contract diagnostics, manifest migration, package audit fixtures |
-| Tasks 3B.3–3B.5 — generated integrations | TBD | Developer experience | Tasks 3B.1–3B.2 | Independent | Zero-diff generation, recipe audit, docs route smoke |
-| Tasks 3B.6–3B.8 — sync/CI/docs | TBD | Developer experience | Tasks 3B.3–3B.5 | Independent | Temp-workspace round trip, `phase3b:gate`, contributor walkthrough |
-| Tasks 69–71 — Solid 2 GA/audit | TBD | Platform + Accessibility | Solid 2 GA, Task 68 | v1.0 RC | GA matrix, stable gate evidence, external audit/AT records |
-| Tasks 74–76 — stable features/policy | TBD | Build + Release | Phase 3A, Task 71 | Before v1.0 RC | Stable feature docs, sunset schedule, v1.x maintenance policy |
-| Task 72 — release candidate | TBD | Release engineering | Tasks 69–71, 74–76 | v1.0 RC | RC checklist and consumer verification |
-| Task 73 — v1.0 stable | TBD | Release engineering | Task 72 | v1.0 | npm/R2/docs release and fresh stable consumer fixture |
-| Task 77 — v2 strict enforcement | TBD | Platform | v1.x sunset criteria | v2.0 | Strict fixtures and migration guidance |
-| Task 78 — v2.0 stable | TBD | Release engineering | Task 77 | v2.0 | v2 criteria gate, signed release, announcement |
+| Work                                     | DRI | Team                     | Depends on                    | Target          | Required evidence                                                                                                          |
+| ---------------------------------------- | --- | ------------------------ | ----------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| C5 / Task 52 — RangeCalendar             | TBD | Primitives               | Calendar/date adapter         | Initial beta    | Calendar tests, parity, demo, a11y and browser result rows                                                                 |
+| C8 — beta accessibility                  | TBD | Accessibility            | C5, Task 39                   | Initial beta    | `docs/axe-scan-results.md`, `docs/keyboard-audit-results.md`, `docs/at-audit-results/`                                     |
+| C9 / Task 60 — Phase 3 gates             | TBD | Release engineering      | Gate criteria and fixtures    | Initial beta    | `phase3-preflight.ts` and failing-then-green `phase3-gate.ts` fixtures                                                     |
+| C10 / Task 68 — beta artifacts           | TBD | Release engineering      | C5, C8, C9, Tasks 61/65/66    | Initial beta    | signed `next` candidate, consumer fixtures, green gate, promoted beta pointer, docs release                                |
+| C11 — unpublished primitive backlog      | TBD | Primitives               | Publish-set decision          | Initial beta    | per-package promote/defer decision; registry+umbrella+demo+evidence for promoted, `private:true` or exclusion for deferred |
+| Task 61 — beta docs/notes                | TBD | Docs                     | Public beta scope frozen      | Initial beta    | Docs home/install/accessibility/release-note links                                                                         |
+| Task 65 — cross-browser beta             | TBD | Quality                  | C5                            | Initial beta    | `docs/cross-browser-results.md` with issue-linked skips only                                                               |
+| Task 66 — migration/legacy beta          | TBD | Migration                | Beta registry candidate       | Initial beta    | Migration fixtures and `legacy status` output                                                                              |
+| Tasks 62–64, 67 — compile-time beta      | TBD | Build tooling            | Task 68                       | Before first RC | `docs/compile-time-results.md`, parity fixtures, `phase3a:gate`                                                            |
+| Tasks 3B.1–3B.2 — contract/core          | TBD | Developer experience     | Package-local manifest schema | Independent     | Contract diagnostics, manifest migration, package audit fixtures                                                           |
+| Tasks 3B.3–3B.5 — generated integrations | TBD | Developer experience     | Tasks 3B.1–3B.2               | Independent     | Zero-diff generation, recipe audit, docs route smoke                                                                       |
+| Tasks 3B.6–3B.8 — sync/CI/docs           | TBD | Developer experience     | Tasks 3B.3–3B.5               | Independent     | Temp-workspace round trip, `phase3b:gate`, contributor walkthrough                                                         |
+| Tasks 69–71 — Solid 2 GA/audit           | TBD | Platform + Accessibility | Solid 2 GA, Task 68           | v1.0 RC         | GA matrix, stable gate evidence, external audit/AT records                                                                 |
+| Tasks 74–76 — stable features/policy     | TBD | Build + Release          | Phase 3A, Task 71             | Before v1.0 RC  | Stable feature docs, sunset schedule, v1.x maintenance policy                                                              |
+| Task 72 — release candidate              | TBD | Release engineering      | Tasks 69–71, 74–76            | v1.0 RC         | RC checklist and consumer verification                                                                                     |
+| Task 73 — v1.0 stable                    | TBD | Release engineering      | Task 72                       | v1.0            | npm/R2/docs release and fresh stable consumer fixture                                                                      |
+| Task 77 — v2 strict enforcement          | TBD | Platform                 | v1.x sunset criteria          | v2.0            | Strict fixtures and migration guidance                                                                                     |
+| Task 78 — v2.0 stable                    | TBD | Release engineering      | Task 77                       | v2.0            | v2 criteria gate, signed release, announcement                                                                             |
 
 ## Task list
 
@@ -103,7 +103,7 @@ No `CODEOWNERS` file exists in the repository. Functional teams are inferred fro
 
 - [x] **Task 1: Bootstrap Nx workspace + pnpm + Changesets + CI skeleton.** Initialize repo, `pnpm-workspace.yaml` covering `packages/*`, `apps/*`, `registry/*`, `migrations/*`, `legacy/*`, `tests/*`. Nx `tags` map to §18.1 layers. GitHub Actions `ci.yml` (typecheck, build, node tests, browser tests, solid matrix, phase0-gate) + `release.yml` (gate dependency, non-publishing validation). `.changeset/config.json` with linked primitives. MIT license. Canonical gate command: `pnpm run gate:phase0`. **Verify:** `pnpm nx graph` shows layered tags; ESLint boundary tests (23 passing) reject wrong-layer imports; Changesets status works. **Demo:** Nx graph rendered.
 - [x] **Task 2: Shared build presets.** `tools/build/tsup.config.base.ts` for pure-TS; `tools/build/vite.lib.config.ts` for JSX with `vite-plugin-solid`. Dual emission: `dist/` compiled ESM + `source/` canonical TSX. `package.json` exports include `"solid"` condition. **Verify:** `packages/probe-primitive` + `packages/probe-runtime` both build and consume via each export condition. **Demo:** probe imports work in a scratch consumer app under Solid 2 beta.
-- [x] **Task 3: Vitest browser mode + Playwright provider.** `vitest.browser.config.ts` (JSX packages, real Chromium/Firefox/WebKit via `@vitest/browser-playwright` factory — Vitest v4 API), `tools/test/vitest.node.config.ts` (logic). `@solidjs/testing-library` under browser mode. `expect-type` for types. `vitest.workspace.ts` at root discovering packages/*, tests/*, migrations/*, legacy/*. Trace + screenshot on failure to CI artifacts. **Verify:** 858 browser tests execute and pass across Chromium, Firefox, and WebKit; node-mode logic tests pass. **Demo:** `pnpm exec vitest run --config vitest.browser.config.ts` runs cross-browser matrix.
+- [x] **Task 3: Vitest browser mode + Playwright provider.** `vitest.browser.config.ts` (JSX packages, real Chromium/Firefox/WebKit via `@vitest/browser-playwright` factory — Vitest v4 API), `tools/test/vitest.node.config.ts` (logic). `@solidjs/testing-library` under browser mode. `expect-type` for types. `vitest.workspace.ts` at root discovering packages/_, tests/_, migrations/_, legacy/_. Trace + screenshot on failure to CI artifacts. **Verify:** 858 browser tests execute and pass across Chromium, Firefox, and WebKit; node-mode logic tests pass. **Demo:** `pnpm exec vitest run --config vitest.browser.config.ts` runs cross-browser matrix.
 - [x] **Task 4: Solid 2 beta pin with rolling 3-beta window + matrix.** `tools/solid-matrix.json` lists `{low: beta.22, mid: beta.23, high: beta.24}`. pnpm catalogs enforce a single source for `solid-js`, `@solidjs/web`, and `babel-preset-solid`; local validation runs the high `beta.24` tier. GitHub Actions matrix covers `{low, mid, high} × {node 24, node 26} × chromium`. `scripts/update-solid-window.mts` drives deterministic window rolls. `scripts/set-solid-version.mjs` sets all three per-tier overrides for CI. **Verify:** matrix configuration validated by phase0-gate §15; dry-run of window update succeeds. **Demo:** CI matrix badge shows tri-beta green.
 - [x] **Task 5: Runtime kernel — state, events, DOM.** `packages/runtime` with `state/controllable-value.ts` (§9.1 signature exactly), `state/disclosure-state.ts`, `events/change-details.ts`, `events/compose-event-handlers.ts`, `dom/compose-ref.ts` (§8.3 semantics), `dom/stable-id.ts`, `dom/owner-cleanup.ts`, `dom/observe-element.ts`. §8 scheduling rules enforced. Modules under 200 lines each. **Verify:** unit tests for controlled/uncontrolled transitions, equality comparisons, change-reason propagation, ref composition with cleanup, SSR-deterministic stable-id. **Demo:** probe primitive uses `createControllableValue` for boolean; controlled + uncontrolled paths match contract.
 - [x] **Task 6: Runtime kernel — collections, roving focus, typeahead.** `collection/collection.ts`, `collection/composite-navigation.ts`, `collection/roving-focus.ts`, `collection/typeahead.ts` per §9.2. Home/End/PageUp/PageDown, RTL, orientation, IME. **Verify:** browser-mode tests for keyboard nav, RTL flip, typeahead timeout, IME composition, dynamic insert/remove. **Demo:** `RovingList` demo route.
@@ -230,28 +230,28 @@ Phase 5 is a distinct breaking-release program. It reruns shared v1 regression s
 
 Every task is anchored to the design doc or identified as a plan-introduced tooling task. Reverse lookup table:
 
-| Design section | Tasks that satisfy it |
-| -------------- | --------------------- |
-| §9 Runtime kernel | 5, 6, 7, 8 |
-| §11.1 Initial primitives | 12, 15, 16, 17, 29–35, 55A |
-| §11.2 Second wave | 51, 52, 53, 54, 55, 55A |
-| §12 Adapter architecture | 10, 14, 16, 17, 18, 53, 54 |
-| §13.1–13.6 Distribution | 13, 19, 20, 21, 22, 68, 73 |
-| §13.9 CLI | 19, 23, 24, 25, 38, 43, 44, 46, 47, 50 |
-| §13.10–13.11 Lockfile + update | 21, 23, 24, 25 |
-| §13.12–13.13 Security + policy | 43, 44, 45, 46, 47, 68, 73 |
-| §14 Styling | 9, 36, 37, 48 |
-| §16.4–16.7 Conformance | 14, 22, 26, 39, 52, 59, 65, 70, 71, 72, 78 |
-| §17.4 Compile-time roadmap | 28, 41, 62, 63, 64, 67, 74, 77 |
-| §17.5 Benchmarks | 11, 17, 56, 62–64 |
-| §18 Repo structure | 1, 2, 9 |
-| §19.3 Solid 2 policy | 4, 60, 69 |
-| §20 Migration + legacy | 26, 49, 50, 66, 75, 77 |
-| §21 Phase gates | 27, 42, 58, 60 (beta gate), 67 (Phase 3A gate), 3B.7 (Phase 3B gate), 68 (beta release), 70 (v1 gate), 73 (v1 release), 78 |
-| §23 beta criteria | 27, 42, 58, 60, 68 |
-| §23 v1 stable criteria | 69–76, with Task 70 as gate and Task 73 as release exit |
-| §23 v2 strict criteria | 77, 78; shared v1 regression suites rerun |
-| Authoring tooling (plan-introduced; extends §13.1–13.6 and §18) | 3B.1–3B.8 |
+| Design section                                                  | Tasks that satisfy it                                                                                                      |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| §9 Runtime kernel                                               | 5, 6, 7, 8                                                                                                                 |
+| §11.1 Initial primitives                                        | 12, 15, 16, 17, 29–35, 55A                                                                                                 |
+| §11.2 Second wave                                               | 51, 52, 53, 54, 55, 55A                                                                                                    |
+| §12 Adapter architecture                                        | 10, 14, 16, 17, 18, 53, 54                                                                                                 |
+| §13.1–13.6 Distribution                                         | 13, 19, 20, 21, 22, 68, 73                                                                                                 |
+| §13.9 CLI                                                       | 19, 23, 24, 25, 38, 43, 44, 46, 47, 50                                                                                     |
+| §13.10–13.11 Lockfile + update                                  | 21, 23, 24, 25                                                                                                             |
+| §13.12–13.13 Security + policy                                  | 43, 44, 45, 46, 47, 68, 73                                                                                                 |
+| §14 Styling                                                     | 9, 36, 37, 48                                                                                                              |
+| §16.4–16.7 Conformance                                          | 14, 22, 26, 39, 52, 59, 65, 70, 71, 72, 78                                                                                 |
+| §17.4 Compile-time roadmap                                      | 28, 41, 62, 63, 64, 67, 74, 77                                                                                             |
+| §17.5 Benchmarks                                                | 11, 17, 56, 62–64                                                                                                          |
+| §18 Repo structure                                              | 1, 2, 9                                                                                                                    |
+| §19.3 Solid 2 policy                                            | 4, 60, 69                                                                                                                  |
+| §20 Migration + legacy                                          | 26, 49, 50, 66, 75, 77                                                                                                     |
+| §21 Phase gates                                                 | 27, 42, 58, 60 (beta gate), 67 (Phase 3A gate), 3B.7 (Phase 3B gate), 68 (beta release), 70 (v1 gate), 73 (v1 release), 78 |
+| §23 beta criteria                                               | 27, 42, 58, 60, 68                                                                                                         |
+| §23 v1 stable criteria                                          | 69–76, with Task 70 as gate and Task 73 as release exit                                                                    |
+| §23 v2 strict criteria                                          | 77, 78; shared v1 regression suites rerun                                                                                  |
+| Authoring tooling (plan-introduced; extends §13.1–13.6 and §18) | 3B.1–3B.8                                                                                                                  |
 
 ## Operational notes and remaining decisions
 
@@ -292,8 +292,6 @@ Every task is anchored to the design doc or identified as a plan-introduced tool
 
 - **v7.5 (2026-07-26):** POST-BETA.24 LOCAL REVALIDATION. Updated the rolling Solid 2 window to `{beta.22, beta.23, beta.24}` and validated the high tier locally. Solid 2’s queued writes required explicit `flush()` calls after programmatic DOM interactions in affected browser tests; form-control ARIA values are now serialized as strings. The full browser matrix passed **858/858** tests across Chromium, Firefox, and WebKit; workspace typecheck passed for 74 projects and 40 dependent tasks; the executable axe suite passed **40/40** with 39 exact zero-violation results; and the hardened Phase 1 gate passed **197/197**. Axe dependency prebundling is configured to prevent a fresh optimizer reload from invalidating scans. These remain local pre-CI results: Phase 1 exit still requires a committed change set, clean-checkout evidence, and a matching green hosted CI run.
 
-
 - **v7.6 (2026-07-27):** PHASE 1 EXIT — CI VERIFIED. Fixed two remaining CI failures: (1) parity test's dynamic `.tsx` source imports needed `vite-plugin-solid` for JSX compilation (was emitting `react/jsx-dev-runtime` instead of Solid calls), and (2) `test-solid-matrix` only installed Chromium but `vitest.browser.config.ts` requires all three browsers. After commit `ea7eb62`, the CI run `30264007788` passed all 15 jobs: install, build, typecheck, test-node (24, 26), test-browser, test-solid-matrix (6 combinations), a11y-axe-scan, phase1-gate (197/197), and phase0-gate. Phase 1 is now fully exited with CI-backed evidence.
-
 
 - **v7.7 (2026-07-27):** PHASE 2 GAP CLOSURE. Closed all identified Phase 2 gaps after a repository-grounded audit revealed: (1) RangeCalendar (Task 52/C5) was not implemented, (2) no adapter authoring kit existed despite being a §21 deliverable, (3) source graph visualizer had no task and no code, (4) `phase2-gate.ts` was a partial proxy (39/39 passed but missed real criteria), (5) no CI job enforced the gate. Decisions and resolution: **(a) RangeCalendar — full Task 52 scope implemented.** `packages/calendar/src/range-calendar.tsx` + `range-calendar-context.ts`: RangeRoot/Header/PrevButton/Title/NextButton/Grid/Cell with `{start, end?}` value contract, start/end/restart cycle, RTL keyboard reversal, disabled-date handling, highlight preview, semantic attrs (`data-in-range`, `data-range-start`, `data-range-end`). 25 unit tests + 20 browser tests + axe scan + parity. **(b) Adapter authoring kit — built.** `packages/adapter-kit/`: scaffold template (generates conformant adapter structure), conformance harness (validates boundary rules §23 #6–#14: no primitive-system deps, no Solid deps, no ARIA/class/style output, no JSX, layer:adapter tag). 23 tests covering 3 real adapters + positive/negative fixtures. Backs the "adapter authoring kit restricted to framework-neutral engines" §21 deliverable. **(c) Source graph visualizer — deferred to Phase 3.** Documented decision: it is a developer-convenience diagnostic with no §23 acceptance-criteria dependency; deferring keeps the Phase 2 exit honest without blocking on tooling polish. **(d) Gate hardened.** `tools/phase2-gate.ts` now asserts 63 checks mapping 1:1 to §21 P2 criteria, with an explicit visible skip for the visualizer. **(e) CI job added.** `phase2-gate` CI job depends on `phase1-gate`, runs `pnpm run gate:phase2`. Phase 0 gate now depends on phase2-gate. **(f) Task 58 corrected.** Its prior `[x] PHASE 2 EXIT` was premature (Task 52 was `[~]`, gate was incomplete). Status is now conditional on the CI run.

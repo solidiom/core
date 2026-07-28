@@ -9,7 +9,9 @@ export function BreadcrumbDemo() {
           <Breadcrumb.Separator />
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          <Breadcrumb.Link href="/docs" current>Docs</Breadcrumb.Link>
+          <Breadcrumb.Link href="/docs" current>
+            Docs
+          </Breadcrumb.Link>
         </Breadcrumb.Item>
       </Breadcrumb.List>
     </Breadcrumb.Root>

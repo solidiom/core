@@ -33,13 +33,13 @@ The main competitive idea is:
 
 The brand should occupy the space between:
 
-* Low-level accessibility libraries
-* Headless primitive systems
-* Source-distributed component registries
-* Internal design-system infrastructure
-* Application-building tools
+- Low-level accessibility libraries
+- Headless primitive systems
+- Source-distributed component registries
+- Internal design-system infrastructure
+- Application-building tools
 
-The shadcn model proves the value of emphasizing open code, customization, components, and blocks rather than positioning the product as a conventional installed component dependency.  Astryx extends that model across components, templates, themes, a playground, and agent-ready design-system positioning.
+The shadcn model proves the value of emphasizing open code, customization, components, and blocks rather than positioning the product as a conventional installed component dependency. Astryx extends that model across components, templates, themes, a playground, and agent-ready design-system positioning.
 
 Solidiom should adopt those useful product patterns while establishing a distinct point of view:
 
@@ -85,11 +85,11 @@ Use:
 
 Avoid reducing the brand to:
 
-* Component library
-* Headless UI kit
-* CSS framework
-* Design system
-* Solid port of a React project
+- Component library
+- Headless UI kit
+- CSS framework
+- Design system
+- Solid port of a React project
 
 Those may describe parts of the system, but not its strategic scope.
 
@@ -127,26 +127,26 @@ Accessibility should be documented per primitive and composition, not presented 
 
 A team should be able to adopt:
 
-* One utility
-* One primitive
-* One composed component
-* One application block
-* One theme
-* A complete product foundation
+- One utility
+- One primitive
+- One composed component
+- One application block
+- One theme
+- A complete product foundation
 
 ## 3.8 Design-system neutrality
 
 Solidiom should integrate with:
 
-* Plain CSS
-* CSS modules
-* Tailwind
-* UnoCSS
-* Panda CSS
-* Vanilla Extract
-* StyleX
-* Custom token systems
-* Enterprise design-system infrastructure
+- Plain CSS
+- CSS modules
+- Tailwind
+- UnoCSS
+- Panda CSS
+- Vanilla Extract
+- StyleX
+- Custom token systems
+- Enterprise design-system infrastructure
 
 No single styling approach should define the architecture.
 
@@ -269,51 +269,51 @@ npx solidiom doctor
 
 Solidiom should sound:
 
-* Precise
-* Direct
-* Technical
-* Transparent
-* Calm
-* Builder-oriented
-* Independent
+- Precise
+- Direct
+- Technical
+- Transparent
+- Calm
+- Builder-oriented
+- Independent
 
 It should not sound:
 
-* Trend-driven
-* Mystical
-* Aggressively promotional
-* React-centric
-* Visually prescriptive
-* Overconfident about accessibility
+- Trend-driven
+- Mystical
+- Aggressively promotional
+- React-centric
+- Visually prescriptive
+- Overconfident about accessibility
 
 ## Core vocabulary
 
 Prefer:
 
-* Solid-native
-* Behavior-first
-* Runtime-first
-* Source-owned
-* Accessible interaction contract
-* Unstyled by default
-* Composable
-* Inspectable
-* Adaptable
-* Production-oriented
-* Design-system compatible
-* Open code
-* Explicit ownership
+- Solid-native
+- Behavior-first
+- Runtime-first
+- Source-owned
+- Accessible interaction contract
+- Unstyled by default
+- Composable
+- Inspectable
+- Adaptable
+- Production-oriented
+- Design-system compatible
+- Open code
+- Explicit ownership
 
 Avoid:
 
-* Magic
-* Effortless
-* Pixel-perfect
-* Beautiful by default
-* Drop-in replacement
-* Zero work
-* Fully accessible
-* Framework agnostic, when the product is intentionally Solid-native
+- Magic
+- Effortless
+- Pixel-perfect
+- Beautiful by default
+- Drop-in replacement
+- Zero work
+- Fully accessible
+- Framework agnostic, when the product is intentionally Solid-native
 
 ## Headline patterns
 
@@ -382,11 +382,11 @@ Two opposing bracket forms create an abstract `S` through negative space.
 
 The brackets represent:
 
-* Component boundaries
-* Behavioral contracts
-* Composable primitives
-* Source ownership
-* Interface structure
+- Component boundaries
+- Behavioral contracts
+- Composable primitives
+- Source ownership
+- Interface structure
 
 The central negative space represents the design freedom left to the consumer.
 
@@ -400,13 +400,13 @@ solidiom
 
 Characteristics:
 
-* Geometric grotesk foundation
-* Open counters
-* Slightly customized `s`
-* Distinctive `di` or `io` relationship
-* Moderate width
-* No excessive futurism
-* High legibility at documentation-navigation sizes
+- Geometric grotesk foundation
+- Open counters
+- Slightly customized `s`
+- Distinctive `di` or `io` relationship
+- Moderate width
+- No excessive futurism
+- High legibility at documentation-navigation sizes
 
 ## Logo versions
 
@@ -431,14 +431,14 @@ The symbol should remain flat and geometric.
 
 Avoid:
 
-* 3D extrusion
-* Gloss
-* Permanent gradients
-* Cubes
-* Gemstones
-* Literal code brackets with no distinguishing structure
-* A permanent version number
-* Embedding “UI” in the core mark
+- 3D extrusion
+- Gloss
+- Permanent gradients
+- Cubes
+- Gemstones
+- Literal code brackets with no distinguishing structure
+- A permanent version number
+- Embedding “UI” in the core mark
 
 ---
 
@@ -501,20 +501,20 @@ The website should support light and dark modes.
 
 ### Light
 
-* Canvas-based
-* White elevated panels
-* Dark ink text
-* Violet actions
-* Cyan and mint data accents
+- Canvas-based
+- White elevated panels
+- Dark ink text
+- Violet actions
+- Cyan and mint data accents
 
 ### Dark
 
-* Ink 950 background
-* Ink 900 surfaces
-* Soft slate borders
-* White primary text
-* Cyan and mint diagrams
-* Violet interactive states
+- Ink 950 background
+- Ink 900 surfaces
+- Soft slate borders
+- White primary text
+- Cyan and mint diagrams
+- Violet interactive states
 
 Dark mode should not simply invert the light palette. It should have its own surface hierarchy.
 
@@ -526,11 +526,11 @@ Dark mode should not simply invert the light palette. It should have its own sur
 
 Use for:
 
-* Navigation
-* Headings
-* Body copy
-* Controls
-* Documentation
+- Navigation
+- Headings
+- Body copy
+- Controls
+- Documentation
 
 ### Technical typeface
 
@@ -538,13 +538,13 @@ Use for:
 
 Use for:
 
-* Code
-* Commands
-* API names
-* Attributes
-* Package names
-* Version labels
-* Diagrams
+- Code
+- Commands
+- API names
+- Attributes
+- Package names
+- Version labels
+- Diagrams
 
 ### Display style
 
@@ -612,10 +612,10 @@ Use a consistent 1.75-pixel or 2-pixel stroke family.
 
 Icons should be:
 
-* Geometric
-* Neutral
-* Recognizable
-* Consistent with interface semantics
+- Geometric
+- Neutral
+- Recognizable
+- Consistent with interface semantics
 
 Do not create a custom icon for every concept at launch. Prioritize product clarity.
 
@@ -623,12 +623,12 @@ Do not create a custom icon for every concept at launch. Prioritize product clar
 
 Architecture diagrams should use:
 
-* Rectangular boundaries
-* State nodes
-* Directed reactive paths
-* Explicit ownership labels
-* Package/source distinctions
-* Accessible color and shape redundancy
+- Rectangular boundaries
+- State nodes
+- Directed reactive paths
+- Explicit ownership labels
+- Package/source distinctions
+- Accessible color and shape redundancy
 
 ---
 
@@ -671,14 +671,14 @@ status.solidiomui.com
 
 A unified origin provides:
 
-* One search experience
-* One design system
-* Shared navigation
-* Stronger conceptual continuity
-* Easier cross-linking
-* Reduced product fragmentation
-* Simpler search-engine authority
-* Clearer migration from primitives to components
+- One search experience
+- One design system
+- Shared navigation
+- Stronger conceptual continuity
+- Easier cross-linking
+- Reduced product fragmentation
+- Simpler search-engine authority
+- Clearer migration from primitives to components
 
 The primitives documentation may be deployed as an independent application, but it should appear to users under the same domain and navigation system.
 
@@ -711,35 +711,35 @@ Version selector
 
 ### Build
 
-* Primitives
-* Components
-* Blocks
-* Templates
-* Themes
+- Primitives
+- Components
+- Blocks
+- Templates
+- Themes
 
 ### Develop
 
-* Documentation
-* CLI
-* Registry
-* MCP
-* Playground
+- Documentation
+- CLI
+- Registry
+- MCP
+- Playground
 
 ### Learn
 
-* Architecture
-* Accessibility
-* Guides
-* Examples
-* Changelog
+- Architecture
+- Accessibility
+- Guides
+- Examples
+- Changelog
 
 ### Community
 
-* GitHub
-* Discussions
-* Roadmap
-* Contributing
-* Code of conduct
+- GitHub
+- Discussions
+- Roadmap
+- Contributing
+- Code of conduct
 
 ---
 
@@ -755,13 +755,13 @@ Explain the product in under 20 seconds and move users into the right adoption l
 
 #### 1. Hero
 
-* Category label
-* Strong headline
-* Concise proposition
-* Primary CTA
-* Secondary CTA
-* Installation command
-* Interactive UI preview
+- Category label
+- Strong headline
+- Concise proposition
+- Primary CTA
+- Secondary CTA
+- Installation command
+- Interactive UI preview
 
 #### 2. Layer selector
 
@@ -807,12 +807,12 @@ This section should explicitly distinguish installed behavior from copied source
 
 Show a real primitive contract:
 
-* Keyboard behavior
-* Focus behavior
-* Semantics
-* Screen-reader expectations
-* Automated tests
-* Manual validation status
+- Keyboard behavior
+- Focus behavior
+- Semantics
+- Screen-reader expectations
+- Automated tests
+- Manual validation status
 
 #### 6. Open-code workflow
 
@@ -824,11 +824,11 @@ npx solidiom add command-menu
 
 Then display:
 
-* Files added
-* Dependencies introduced
-* Primitive foundations used
-* Diff/update options
-* Ownership status
+- Files added
+- Dependencies introduced
+- Primitive foundations used
+- Diff/update options
+- Ownership status
 
 #### 7. Component gallery
 
@@ -838,41 +838,41 @@ Display a curated set of high-value components, not an exhaustive directory.
 
 Show product-oriented patterns:
 
-* Settings
-* Resource list
-* Dashboard
-* Authentication
-* Command center
-* Administration
+- Settings
+- Resource list
+- Dashboard
+- Authentication
+- Command center
+- Administration
 
 #### 9. Design-system integration
 
 Show examples using:
 
-* Plain CSS
-* Tailwind
-* CSS modules
-* Enterprise tokens
+- Plain CSS
+- Tailwind
+- CSS modules
+- Enterprise tokens
 
 #### 10. Agent and registry section
 
 Explain:
 
-* Machine-readable component metadata
-* Registry discovery
-* MCP access
-* Private registries
-* Organizational components
+- Machine-readable component metadata
+- Registry discovery
+- MCP access
+- Private registries
+- Organizational components
 
 #### 11. Community and roadmap
 
 Include:
 
-* GitHub activity
-* Current release
-* Roadmap link
-* Contribution entry points
-* Accessibility review process
+- GitHub activity
+- Current release
+- Roadmap link
+- Contribution entry points
+- Accessibility review process
 
 #### 12. Final CTA
 
@@ -880,8 +880,8 @@ Include:
 
 Buttons:
 
-* Install primitives
-* Browse components
+- Install primitives
+- Browse components
 
 ---
 
@@ -901,9 +901,9 @@ Explicit runtime primitives for focus, selection, disclosure, overlays, navigati
 
 ### Primary actions
 
-* Install primitives
-* Browse primitive index
-* Review accessibility model
+- Install primitives
+- Browse primitive index
+- Review accessibility model
 
 ### Content sections
 
@@ -949,13 +949,13 @@ Focus management
 
 Each card should show:
 
-* Name
-* One-sentence purpose
-* Release stage
-* Package
-* Accessibility review status
-* Relevant interaction type
-* Link to preview and API
+- Name
+- One-sentence purpose
+- Release stage
+- Package
+- Accessibility review status
+- Relevant interaction type
+- Link to preview and API
 
 Do not show visual thumbnails for every primitive. The behavior matters more than decorative variation.
 
@@ -1003,10 +1003,10 @@ Include a persistent, first-class section.
 
 #### Semantics
 
-* Roles
-* States
-* Properties
-* Relationships
+- Roles
+- States
+- Properties
+- Relationships
 
 #### Keyboard interaction
 
@@ -1022,12 +1022,12 @@ Use a table:
 
 Document:
 
-* Initial focus
-* Focus containment
-* Focus restoration
-* Disabled items
-* Roving focus
-* Virtual focus, when applicable
+- Initial focus
+- Focus containment
+- Focus restoration
+- Disabled items
+- Roving focus
+- Virtual focus, when applicable
 
 #### Screen-reader behavior
 
@@ -1052,52 +1052,56 @@ Clearly identify what remains the application team’s responsibility.
 
 Document:
 
-* Data attributes
-* CSS variables
-* State selectors
-* Parts
-* Portals
-* Positioning variables
-* Animation lifecycle
-* Reduced-motion behavior
+- Data attributes
+- CSS variables
+- State selectors
+- Parts
+- Portals
+- Positioning variables
+- Animation lifecycle
+- Reduced-motion behavior
 
 Example:
 
 ```css
-[data-state="open"] {}
-[data-disabled] {}
-[data-highlighted] {}
-[data-orientation="vertical"] {}
+[data-state="open"] {
+}
+[data-disabled] {
+}
+[data-highlighted] {
+}
+[data-orientation="vertical"] {
+}
 ```
 
 ### API reference
 
 Use a split layout:
 
-* Left: API navigation
-* Center: detailed definitions
-* Right: current section and related APIs
+- Left: API navigation
+- Center: detailed definitions
+- Right: current section and related APIs
 
 Each API item should include:
 
-* Type
-* Default
-* Controlled behavior
-* SSR notes
-* Accessibility implications
-* Usage example
+- Type
+- Default
+- Controlled behavior
+- SSR notes
+- Accessibility implications
+- Usage example
 
 ### Testing page
 
 Provide ready-to-use patterns for:
 
-* Vitest
-* Testing Library
-* Playwright
-* Keyboard interaction tests
-* Focus assertions
-* Portal testing
-* Hydration tests
+- Vitest
+- Testing Library
+- Playwright
+- Keyboard interaction tests
+- Focus assertions
+- Portal testing
+- Hydration tests
 
 ---
 
@@ -1111,12 +1115,12 @@ The components directory should feel visual and practical.
 
 Support search by:
 
-* Component name
-* Use case
-* Primitive
-* Interaction
-* Visual category
-* Registry tag
+- Component name
+- Use case
+- Primitive
+- Interaction
+- Visual category
+- Registry tag
 
 ### Filters
 
@@ -1135,31 +1139,31 @@ Layout
 
 ### View options
 
-* Gallery
-* Compact list
-* Dependency map
+- Gallery
+- Compact list
+- Dependency map
 
 ### Card content
 
-* Live preview
-* Component name
-* Short use case
-* Primitive dependencies
-* Files added
-* Theme compatibility
-* CLI command
-* Source preview
+- Live preview
+- Component name
+- Short use case
+- Primitive dependencies
+- Files added
+- Theme compatibility
+- CLI command
+- Source preview
 
 ## 13.2 Component detail page
 
 ### Header
 
-* Live preview
-* Component name
-* Description
-* Add command
-* Copy command
-* Open in playground
+- Live preview
+- Component name
+- Description
+- Add command
+- Copy command
+- Open in playground
 
 ### Tabs
 
@@ -1194,12 +1198,12 @@ Clearly communicate:
 
 Include:
 
-* File path preview
-* License
-* Update model
-* Diff behavior
-* Registry origin
-* Integrity metadata
+- File path preview
+- License
+- Update model
+- Diff behavior
+- Registry origin
+- Integrity metadata
 
 ---
 
@@ -1230,17 +1234,17 @@ Application shells
 
 Show:
 
-* Full-page preview
-* Responsive states
-* Loading state
-* Empty state
-* Error state
-* Permission-restricted state
-* Mobile behavior
-* Primitive dependency map
-* Component dependency map
-* Files and routes added
-* Data boundary assumptions
+- Full-page preview
+- Responsive states
+- Loading state
+- Empty state
+- Error state
+- Permission-restricted state
+- Mobile behavior
+- Primitive dependency map
+- Component dependency map
+- Files and routes added
+- Data boundary assumptions
 
 ## Templates
 
@@ -1248,15 +1252,15 @@ Templates should be explicitly opinionated.
 
 Each template must state:
 
-* Router assumptions
-* Data-fetching assumptions
-* Authentication model
-* Styling system
-* Theme
-* Package manager
-* Deployment target
-* Included blocks
-* Replaceable boundaries
+- Router assumptions
+- Data-fetching assumptions
+- Authentication model
+- Styling system
+- Theme
+- Package manager
+- Deployment target
+- Included blocks
+- Replaceable boundaries
 
 Do not present templates as universal application architecture.
 
@@ -1272,15 +1276,15 @@ Themes should be optional source-owned starting points, not runtime requirements
 
 Each theme includes:
 
-* Full component preview
-* Light and dark modes
-* Color tokens
-* Typography
-* Radius
-* Density
-* Motion
-* Code export
-* Compatibility matrix
+- Full component preview
+- Light and dark modes
+- Color tokens
+- Typography
+- Radius
+- Density
+- Motion
+- Code export
+- Compatibility matrix
 
 ## Theme builder
 
@@ -1299,10 +1303,10 @@ Motion
 
 Export options:
 
-* CSS custom properties
-* Tailwind tokens
-* JSON token file
-* Theme registry item
+- CSS custom properties
+- Tailwind tokens
+- JSON token file
+- Theme registry item
 
 ---
 
@@ -1312,15 +1316,15 @@ Export options:
 
 Search must cover:
 
-* Primitives
-* Components
-* Blocks
-* Templates
-* Documentation
-* API symbols
-* Guides
-* Changelog
-* Registry items
+- Primitives
+- Components
+- Blocks
+- Templates
+- Documentation
+- API symbols
+- Guides
+- Changelog
+- Registry items
 
 ## Search result design
 
@@ -1342,13 +1346,13 @@ Use `⌘K` or `Ctrl+K`.
 
 Commands should include:
 
-* Navigate
-* Copy install command
-* Open playground
-* Change version
-* Change theme
-* Search API
-* View source
+- Navigate
+- Copy install command
+- Open playground
+- Change version
+- Change theme
+- Search API
+- View source
 
 ---
 
@@ -1370,11 +1374,11 @@ Documentation version
 
 The version selector should:
 
-* Persist across documentation
-* Warn when viewing outdated versions
-* Link migration guides
-* Distinguish stable, preview, and canary releases
-* Show API availability by version
+- Persist across documentation
+- Warn when viewing outdated versions
+- Link migration guides
+- Distinguish stable, preview, and canary releases
+- Show API availability by version
 
 ## Status terminology
 
@@ -1398,19 +1402,19 @@ The website itself must demonstrate the product’s standards.
 
 ## Required behaviors
 
-* Fully keyboard-operable navigation
-* Visible focus
-* Skip links
-* Reduced-motion support
-* High-contrast compatibility
-* Semantic heading structure
-* Accessible live previews
-* Preview reset controls
-* Screen-reader labels for code actions
-* No hover-only information
-* No color-only status indication
-* User-controlled animation
-* Responsive text without clipping
+- Fully keyboard-operable navigation
+- Visible focus
+- Skip links
+- Reduced-motion support
+- High-contrast compatibility
+- Semantic heading structure
+- Accessible live previews
+- Preview reset controls
+- Screen-reader labels for code actions
+- No hover-only information
+- No color-only status indication
+- User-controlled animation
+- Responsive text without clipping
 
 ## Preview isolation
 
@@ -1418,12 +1422,12 @@ Interactive examples should be isolated without making them inaccessible.
 
 Provide:
 
-* Preview title
-* Instructions when interaction is complex
-* Reset button
-* Open in separate playground
-* Keyboard instructions
-* Source link
+- Preview title
+- Instructions when interaction is complex
+- Reset button
+- Open in separate playground
+- Keyboard instructions
+- Source link
 
 ---
 
@@ -1441,12 +1445,12 @@ Collapse right-side table of contents before collapsing primary documentation na
 
 Use:
 
-* Compact top navigation
-* Drawer-based documentation tree
-* Sticky page title and version
-* Full-width previews
-* Horizontally scrollable code only when unavoidable
-* Bottom action bar for install/copy/playground actions on component pages
+- Compact top navigation
+- Drawer-based documentation tree
+- Sticky page title and version
+- Full-width previews
+- Horizontally scrollable code only when unavoidable
+- Bottom action bar for install/copy/playground actions on component pages
 
 Do not hide important API information on mobile.
 
@@ -1525,16 +1529,16 @@ Use a Solid-based meta-framework compatible with the project’s Solid 2 directi
 
 The architecture should support:
 
-* Static generation
-* Server rendering
-* Search indexing
-* MDX or structured content
-* Executable examples
-* Versioned documentation
-* Registry-backed previews
-* Code extraction
-* API generation
-* Visual regression testing
+- Static generation
+- Server rendering
+- Search indexing
+- MDX or structured content
+- Executable examples
+- Versioned documentation
+- Registry-backed previews
+- Code extraction
+- API generation
+- Visual regression testing
 
 ## Content sources
 
@@ -1551,14 +1555,14 @@ The architecture should support:
 
 Use structured front matter for:
 
-* Status
-* Version
-* Package
-* Primitive dependencies
-* Accessibility review
-* Last updated
-* Registry identifier
-* Search keywords
+- Status
+- Version
+- Package
+- Primitive dependencies
+- Accessibility review
+- Last updated
+- Registry identifier
+- Search keywords
 
 ## Registry integration
 
@@ -1566,33 +1570,33 @@ The website should consume the same registry metadata exposed to the CLI.
 
 Do not maintain separate handwritten metadata for:
 
-* Component dependencies
-* Files added
-* Versions
-* Registry commands
-* Theme compatibility
+- Component dependencies
+- Files added
+- Versions
+- Registry commands
+- Theme compatibility
 
 ## Search indexing
 
 Create separate indexes for:
 
-* Documentation prose
-* API symbols
-* Registry metadata
-* Component use cases
-* Changelog and migrations
+- Documentation prose
+- API symbols
+- Registry metadata
+- Component use cases
+- Changelog and migrations
 
 ## Performance objectives
 
 Prioritize:
 
-* Static content delivery
-* Minimal hydration
-* Lazy preview execution
-* Deferred code editors
-* Optimized search payloads
-* No unnecessary animation libraries
-* Route-level code splitting
+- Static content delivery
+- Minimal hydration
+- Lazy preview execution
+- Deferred code editors
+- Optimized search payloads
+- No unnecessary animation libraries
+- Route-level code splitting
 
 ---
 
@@ -1602,64 +1606,64 @@ Prioritize:
 
 ### Learn
 
-* Why Solidiom
-* Architecture
-* Solid-native model
-* Behavior-first design
-* Accessibility contract model
-* Source ownership model
+- Why Solidiom
+- Architecture
+- Solid-native model
+- Behavior-first design
+- Accessibility contract model
+- Source ownership model
 
 ### Build
 
-* Installation
-* Primitive guides
-* Components
-* Blocks
-* Themes
-* Testing
+- Installation
+- Primitive guides
+- Components
+- Blocks
+- Themes
+- Testing
 
 ### Operate
 
-* Versioning
-* Migrations
-* Registry governance
-* Private registries
-* Security
-* Release policy
+- Versioning
+- Migrations
+- Registry governance
+- Private registries
+- Security
+- Release policy
 
 ### Contribute
 
-* Development environment
-* Primitive proposal process
-* Accessibility review
-* Component submissions
-* Theme submissions
-* Governance
+- Development environment
+- Primitive proposal process
+- Accessibility review
+- Component submissions
+- Theme submissions
+- Governance
 
 ## Editorial cadence
 
 Recommended recurring content:
 
-* Monthly release notes
-* Primitive architecture deep dives
-* Accessibility review reports
-* Migration guides
-* Design-system integration examples
-* Community component spotlights
-* Roadmap updates
+- Monthly release notes
+- Primitive architecture deep dives
+- Accessibility review reports
+- Migration guides
+- Design-system integration examples
+- Community component spotlights
+- Roadmap updates
 
 ## Documentation quality bar
 
 Every public API should include:
 
-* Purpose
-* Example
-* Types
-* Default behavior
-* Accessibility impact
-* SSR impact
-* Testing guidance
-* Migration history
+- Purpose
+- Example
+- Types
+- Default behavior
+- Accessibility impact
+- SSR impact
+- Testing guidance
+- Migration history
 
 ---
 
@@ -1694,12 +1698,12 @@ Accessibility architecture — Solidiom Docs
 
 Use structured data for:
 
-* Software application
-* Documentation
-* Breadcrumbs
-* Articles
-* Releases
-* Source code repositories
+- Software application
+- Documentation
+- Breadcrumbs
+- Articles
+- Releases
+- Source code repositories
 
 ## Landing pages
 
@@ -1721,14 +1725,14 @@ These should be substantive architectural pages, not thin SEO pages.
 
 ## Community entry points
 
-* GitHub discussions
-* Public roadmap
-* Contribution guide
-* Primitive proposal process
-* Accessibility reviews
-* Community registries
-* Office hours or review sessions
-* Showcase directory
+- GitHub discussions
+- Public roadmap
+- Contribution guide
+- Primitive proposal process
+- Accessibility reviews
+- Community registries
+- Office hours or review sessions
+- Showcase directory
 
 ## Contributor pathways
 
@@ -1749,14 +1753,14 @@ Translations
 
 Display:
 
-* Release cadence
-* Maintainers
-* Governance
-* Security policy
-* Browser support
-* Accessibility review status
-* API stability
-* Support policy
+- Release cadence
+- Maintainers
+- Governance
+- Security policy
+- Browser support
+- Accessibility review status
+- API stability
+- Support policy
 
 ---
 
@@ -1766,17 +1770,17 @@ The open-source site should remain useful without forcing commercial conversion.
 
 Potential enterprise capabilities:
 
-* Private registries
-* Signed registry artifacts
-* Organization policies
-* Approved component catalogs
-* Internal themes
-* Component provenance
-* Support agreements
-* Migration assistance
-* Accessibility review services
-* Long-term support channels
-* Governance dashboards
+- Private registries
+- Signed registry artifacts
+- Organization policies
+- Approved component catalogs
+- Internal themes
+- Component provenance
+- Support agreements
+- Migration assistance
+- Accessibility review services
+- Long-term support channels
+- Governance dashboards
 
 ## Enterprise page message
 
@@ -1784,13 +1788,13 @@ Potential enterprise capabilities:
 
 Explain how platform and design-system teams can govern:
 
-* Approved primitives
-* Component origins
-* Version ranges
-* Themes
-* Accessibility review
-* Source provenance
-* Update policies
+- Approved primitives
+- Component origins
+- Version ranges
+- Themes
+- Accessibility review
+- Source provenance
+- Update policies
 
 ---
 
@@ -1860,52 +1864,52 @@ Review governance architecture
 
 ## Acquisition
 
-* Organic search traffic
-* Documentation entry pages
-* GitHub referrals
-* Community referrals
-* Direct branded traffic
+- Organic search traffic
+- Documentation entry pages
+- GitHub referrals
+- Community referrals
+- Direct branded traffic
 
 ## Activation
 
-* Install-command copies
-* CLI initialization
-* Component additions
-* Playground sessions
-* Primitive example interactions
+- Install-command copies
+- CLI initialization
+- Component additions
+- Playground sessions
+- Primitive example interactions
 
 ## Adoption
 
-* Package downloads
-* Registry requests
-* Active installations
-* Number of components added per project
-* Repeat documentation usage
+- Package downloads
+- Registry requests
+- Active installations
+- Number of components added per project
+- Repeat documentation usage
 
 ## Quality
 
-* Documentation search success
-* Search abandonment
-* Accessibility issue rate
-* API support questions
-* Migration failure rate
-* Broken-example rate
+- Documentation search success
+- Search abandonment
+- Accessibility issue rate
+- API support questions
+- Migration failure rate
+- Broken-example rate
 
 ## Community
 
-* Contributors
-* Issue response time
-* Pull-request review time
-* Registry submissions
-* Discussions resolved
-* Showcase projects
+- Contributors
+- Issue response time
+- Pull-request review time
+- Registry submissions
+- Discussions resolved
+- Showcase projects
 
 ## Enterprise
 
-* Private registry inquiries
-* Proof-of-concept starts
-* Governance documentation engagement
-* Support conversion
+- Private registry inquiries
+- Proof-of-concept starts
+- Governance documentation engagement
+- Support conversion
 
 Avoid optimizing primarily for page views. The meaningful outcome is successful adoption.
 
@@ -1917,46 +1921,46 @@ Avoid optimizing primarily for page views. The meaningful outcome is successful 
 
 Deliver:
 
-* Final identity
-* Main site
-* Primitive documentation
-* Architecture pages
-* Accessibility contract format
-* Solidiom-to-Solidiom migration
-* GitHub and package namespace transition
+- Final identity
+- Main site
+- Primitive documentation
+- Architecture pages
+- Accessibility contract format
+- Solidiom-to-Solidiom migration
+- GitHub and package namespace transition
 
 ## Phase 2: Solidiom UI
 
 Deliver:
 
-* Registry schema
-* CLI
-* Initial component catalog
-* Component detail pages
-* Source ownership documentation
-* Diff and update model
+- Registry schema
+- CLI
+- Initial component catalog
+- Component detail pages
+- Source ownership documentation
+- Diff and update model
 
 ## Phase 3: Blocks, themes, and playground
 
 Deliver:
 
-* Block catalog
-* Theme system
-* Theme builder
-* Interactive playground
-* Responsive preview system
-* Registry authoring tools
+- Block catalog
+- Theme system
+- Theme builder
+- Interactive playground
+- Responsive preview system
+- Registry authoring tools
 
 ## Phase 4: Agent and enterprise capabilities
 
 Deliver:
 
-* MCP server
-* Agent-readable registry metadata
-* Private registries
-* Signing and provenance
-* Governance controls
-* Enterprise support model
+- MCP server
+- Agent-readable registry metadata
+- Private registries
+- Signing and provenance
+- Governance controls
+- Enterprise support model
 
 ---
 
@@ -2075,20 +2079,20 @@ Deliver:
 
 ## Solidiom should feel like
 
-* A serious open-source infrastructure project
-* A refined developer product
-* A trustworthy accessibility foundation
-* A flexible design-system partner
-* A native part of the Solid ecosystem
+- A serious open-source infrastructure project
+- A refined developer product
+- A trustworthy accessibility foundation
+- A flexible design-system partner
+- A native part of the Solid ecosystem
 
 ## Solidiom should not feel like
 
-* A clone of shadcn
-* A gallery of pretty components
-* A generic SaaS landing page
-* A framework wrapper
-* A design system with hidden visual opinions
-* A research project without production discipline
+- A clone of shadcn
+- A gallery of pretty components
+- A generic SaaS landing page
+- A framework wrapper
+- A design system with hidden visual opinions
+- A research project without production discipline
 
 ## Final brand statement
 

@@ -35,7 +35,11 @@ export function runDoctor(cwd: string): DoctorResult {
       checks.push({ name: "config.json valid", status: "fail", detail: String(e) })
     }
   } else {
-    checks.push({ name: "config.json exists", status: "warn", detail: "Run 'solidiom init' to create" })
+    checks.push({
+      name: "config.json exists",
+      status: "warn",
+      detail: "Run 'solidiom init' to create",
+    })
   }
 
   // Check .solidiom/policy.json

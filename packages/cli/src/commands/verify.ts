@@ -259,7 +259,10 @@ export class VerifyCommand extends Command {
     description: "Verify artifact signatures against policy",
     examples: [
       ["Verify a package tarball", "solidiom verify @solidiom/dialog"],
-      ["Offline verification (use cached TUF root)", "solidiom verify ./dist/dialog.tgz --no-network"],
+      [
+        "Offline verification (use cached TUF root)",
+        "solidiom verify ./dist/dialog.tgz --no-network",
+      ],
       ["Output as JSON", "solidiom verify ./dist/dialog.tgz --json"],
     ],
   })

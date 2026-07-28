@@ -56,8 +56,6 @@ This decision mirrors the existing documented skip for the source graph visualiz
 (deferred to Phase 3 per §14 of the gate), using the same justification framework:
 the deliverable has no acceptance-criteria dependency for the current milestone.
 
-
-
 ## Addendum: Task 66 (Phase 3)
 
 Task 66 ("Legacy and migration beta readiness") is also descoped under the same

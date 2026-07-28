@@ -226,9 +226,7 @@ export interface RangeCalendarHeaderProps {
 /** RangeCalendar Header — container for navigation controls. */
 export function RangeHeader(props: RangeCalendarHeaderProps) {
   return (
-    <div {...applySemanticAttrs({ scope: "range-calendar", part: "header" })}>
-      {props.children}
-    </div>
+    <div {...applySemanticAttrs({ scope: "range-calendar", part: "header" })}>{props.children}</div>
   )
 }
 
@@ -265,8 +263,18 @@ export interface RangeCalendarTitleProps {
 export function RangeTitle(props: RangeCalendarTitleProps) {
   const ctx = useRangeCalendarContext()
   const MONTHS = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ]
   const label = createMemo(() => {
     const m = ctx.focusedMonth()

@@ -5,7 +5,8 @@ import { Show } from "solid-js";
 var FieldContext = createContext();
 function useField() {
   const ctx = useContext(FieldContext);
-  if (!ctx) throw new globalThis.Error("[solidiom] Field sub-parts must be used within <Field.Root>");
+  if (!ctx)
+    throw new globalThis.Error("[solidiom] Field sub-parts must be used within <Field.Root>");
   return ctx;
 }
 function Root(props) {

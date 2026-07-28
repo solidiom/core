@@ -35,7 +35,9 @@ describe("umbrella purity audit", () => {
   })
 
   it("rejects malformed exports", () => {
-    expect(auditUmbrellaSource('export { Button } from "@solidiom/button"\n', SURFACE)).toContainEqual(
+    expect(
+      auditUmbrellaSource('export { Button } from "@solidiom/button"\n', SURFACE),
+    ).toContainEqual(
       expect.objectContaining({ message: expect.stringContaining("Implementation line") }),
     )
   })

@@ -125,10 +125,7 @@ export function runConformance(options: ConformanceOptions): ConformanceResult {
     for (const pattern of FORBIDDEN_ADAPTER_DEPS) {
       // Strip anchors from the pattern source for use inside a larger regex
       const patternSrc = pattern.source.replace(/^\^/, "").replace(/\$$/, "")
-      const importRe = new RegExp(
-        `(?:from|import)\\s+["'](${patternSrc}[^"']*)["']`,
-        "g",
-      )
+      const importRe = new RegExp(`(?:from|import)\\s+["'](${patternSrc}[^"']*)["']`, "g")
       const importMatch = content.match(importRe)
       if (importMatch) {
         for (const match of importMatch) {
@@ -163,7 +160,8 @@ export function runConformance(options: ConformanceOptions): ConformanceResult {
           violations.push({
             rule: "no-jsx-output",
             file: relPath,
-            message: "Adapter source files must not contain JSX — adapters return data, not components",
+            message:
+              "Adapter source files must not contain JSX — adapters return data, not components",
           })
         }
       }

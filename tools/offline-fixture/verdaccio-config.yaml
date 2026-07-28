@@ -3,11 +3,11 @@ uplinks:
   npmjs:
     url: https://registry.npmjs.org/
 packages:
-  '@solidiom/*':
+  "@solidiom/*":
     access: $all
     publish: $authenticated
     proxy: npmjs
-  '**':
+  "**":
     access: $all
     proxy: npmjs
 server:

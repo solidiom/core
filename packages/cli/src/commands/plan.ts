@@ -52,7 +52,10 @@ interface RegistryPrimitive {
  *
  * Returns null if no registry is found (caller should scan node_modules).
  */
-function loadRegistry(cwd: string, registryOverride?: string): Map<string, RegistryPrimitive> | null {
+function loadRegistry(
+  cwd: string,
+  registryOverride?: string,
+): Map<string, RegistryPrimitive> | null {
   const candidates = [
     // Custom registry path takes highest priority
     registryOverride ? join(registryOverride, "index.json") : null,
@@ -181,7 +184,11 @@ const BUILTIN_PRIMITIVES = new Map<string, RegistryPrimitive>([
   ],
   [
     "carousel",
-    { name: "carousel", deps: ["@solidiom/runtime"], adapters: ["@solidiom/adapter-carousel-embla"] },
+    {
+      name: "carousel",
+      deps: ["@solidiom/runtime"],
+      adapters: ["@solidiom/adapter-carousel-embla"],
+    },
   ],
   [
     "popover",
@@ -201,7 +208,11 @@ const BUILTIN_PRIMITIVES = new Map<string, RegistryPrimitive>([
   ],
   [
     "menu",
-    { name: "menu", deps: ["@solidiom/runtime"], adapters: ["@solidiom/adapter-positioning-floating-ui"] },
+    {
+      name: "menu",
+      deps: ["@solidiom/runtime"],
+      adapters: ["@solidiom/adapter-positioning-floating-ui"],
+    },
   ],
   [
     "combobox",
@@ -234,7 +245,13 @@ const BUILTIN_PRIMITIVES = new Map<string, RegistryPrimitive>([
  * Core plan logic — usable from CLI and programmatic API.
  */
 export function runPlan(options: PlanOptions): Plan {
-  const { primitive, cwd, mode: modeOverride, registry: registryOverride, noNetwork: _noNetwork } = options
+  const {
+    primitive,
+    cwd,
+    mode: modeOverride,
+    registry: registryOverride,
+    noNetwork: _noNetwork,
+  } = options
 
   const configPath = join(cwd, ".solidiom", "config.json")
   const config: Config = existsSync(configPath)
@@ -335,7 +352,9 @@ export class PlanCommand extends Command {
   primitive = Option.String({ required: true })
   json = Option.Boolean("--json", false, { description: "Output as JSON" })
   mode = Option.String("--mode", { description: "Install mode (package or source)" })
-  registry = Option.String("--registry", { description: "Custom registry URL for package resolution" })
+  registry = Option.String("--registry", {
+    description: "Custom registry URL for package resolution",
+  })
   noNetwork = Option.Boolean("--no-network", false, {
     description: "Use only cached/local registry data (no network fetch)",
   })

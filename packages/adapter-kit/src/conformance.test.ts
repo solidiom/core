@@ -16,7 +16,10 @@ const __dirname = resolve(fileURLToPath(import.meta.url), "..")
 const REPO_ROOT = resolve(__dirname, "../../..")
 
 function createTmpDir(): string {
-  const dir = join(tmpdir(), `adapter-kit-test-${Date.now()}-${Math.random().toString(36).slice(2)}`)
+  const dir = join(
+    tmpdir(),
+    `adapter-kit-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+  )
   mkdirSync(dir, { recursive: true })
   return dir
 }
@@ -56,12 +59,16 @@ describe("adapter-kit conformance harness", () => {
   describe("conformant adapters pass", () => {
     it("minimal conformant adapter passes", () => {
       writePackageJson(tmpDir)
-      writeSrc(tmpDir, "index.ts", `
+      writeSrc(
+        tmpDir,
+        "index.ts",
+        `
         export interface FooCapability { compute(): void; destroy(): void }
         export function createFooAdapter(): FooCapability {
           return { compute() {}, destroy() {} }
         }
-      `)
+      `,
+      )
       const result = runConformance({ packageDir: tmpDir })
       expect(result.pass).toBe(true)
       expect(result.violations).toHaveLength(0)
@@ -72,10 +79,14 @@ describe("adapter-kit conformance harness", () => {
       writePackageJson(tmpDir, {
         dependencies: { "@tanstack/virtual-core": "3.17.5" },
       })
-      writeSrc(tmpDir, "index.ts", `
+      writeSrc(
+        tmpDir,
+        "index.ts",
+        `
         import { Virtualizer } from "@tanstack/virtual-core"
         export function createAdapter() { return {} }
-      `)
+      `,
+      )
       const result = runConformance({ packageDir: tmpDir })
       expect(result.pass).toBe(true)
     })
@@ -84,11 +95,15 @@ describe("adapter-kit conformance harness", () => {
       writePackageJson(tmpDir)
       writeSrc(tmpDir, "index.ts", `export function createAdapter() { return {} }`)
       // Test file with patterns that would be forbidden in source
-      writeSrc(tmpDir, "index.test.ts", `
+      writeSrc(
+        tmpDir,
+        "index.test.ts",
+        `
         import { createAdapter } from "./index"
         const attrs = { "aria-label": "test", role: "button" }
         expect(attrs).toBeDefined()
-      `)
+      `,
+      )
       const result = runConformance({ packageDir: tmpDir })
       expect(result.pass).toBe(true)
     })
@@ -172,10 +187,14 @@ describe("adapter-kit conformance harness", () => {
 
     it("rejects solid-js import in source", () => {
       writePackageJson(tmpDir)
-      writeSrc(tmpDir, "index.ts", `
+      writeSrc(
+        tmpDir,
+        "index.ts",
+        `
         import { createSignal } from "solid-js"
         export function createAdapter() { return {} }
-      `)
+      `,
+      )
       const result = runConformance({ packageDir: tmpDir })
       expect(result.pass).toBe(false)
       expect(result.violations.some((v) => v.rule === "forbidden-import")).toBe(true)
@@ -183,11 +202,15 @@ describe("adapter-kit conformance harness", () => {
 
     it("rejects ARIA attribute output in source", () => {
       writePackageJson(tmpDir)
-      writeSrc(tmpDir, "index.ts", `
+      writeSrc(
+        tmpDir,
+        "index.ts",
+        `
         export function createAdapter() {
           return { attrs: { "aria-label": "hello" } }
         }
-      `)
+      `,
+      )
       const result = runConformance({ packageDir: tmpDir })
       expect(result.pass).toBe(false)
       expect(result.violations.some((v) => v.rule === "forbidden-output")).toBe(true)
@@ -196,11 +219,15 @@ describe("adapter-kit conformance harness", () => {
 
     it("rejects className output in source", () => {
       writePackageJson(tmpDir)
-      writeSrc(tmpDir, "index.ts", `
+      writeSrc(
+        tmpDir,
+        "index.ts",
+        `
         export function createAdapter() {
           return { className: "btn-primary" }
         }
-      `)
+      `,
+      )
       const result = runConformance({ packageDir: tmpDir })
       expect(result.pass).toBe(false)
       expect(result.violations.some((v) => v.message.includes("class names"))).toBe(true)
@@ -208,11 +235,15 @@ describe("adapter-kit conformance harness", () => {
 
     it("rejects data-scope output in source", () => {
       writePackageJson(tmpDir)
-      writeSrc(tmpDir, "index.ts", `
+      writeSrc(
+        tmpDir,
+        "index.ts",
+        `
         export function createAdapter() {
           return { "data-scope": "dialog" }
         }
-      `)
+      `,
+      )
       const result = runConformance({ packageDir: tmpDir })
       expect(result.pass).toBe(false)
       expect(result.violations.some((v) => v.message.includes("data-scope"))).toBe(true)
@@ -220,11 +251,15 @@ describe("adapter-kit conformance harness", () => {
 
     it("rejects JSX in .tsx source files", () => {
       writePackageJson(tmpDir)
-      writeSrc(tmpDir, "index.tsx", `
+      writeSrc(
+        tmpDir,
+        "index.tsx",
+        `
         export function AdapterComponent() {
           return <div>Not allowed</div>
         }
-      `)
+      `,
+      )
       const result = runConformance({ packageDir: tmpDir })
       expect(result.pass).toBe(false)
       expect(result.violations.some((v) => v.rule === "no-jsx-output")).toBe(true)

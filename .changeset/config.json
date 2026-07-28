@@ -3,7 +3,13 @@
   "commit": false,
   "fixed": [],
   "linked": [
-    ["@solidiom/runtime", "@solidiom/dialog", "@solidiom/select", "@solidiom/calendar", "@solidiom/carousel"]
+    [
+      "@solidiom/runtime",
+      "@solidiom/dialog",
+      "@solidiom/select",
+      "@solidiom/calendar",
+      "@solidiom/carousel"
+    ]
   ],
   "access": "public",
   "baseBranch": "main",

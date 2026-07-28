@@ -26,7 +26,9 @@ var NavigationMenuItemContext = createContext();
 function useNavigationMenuItemContext() {
   const ctx = useContext(NavigationMenuItemContext);
   if (!ctx) {
-    throw new Error("[solidiom] NavigationMenu.Trigger/Content must be used within NavigationMenu.Item");
+    throw new Error(
+      "[solidiom] NavigationMenu.Trigger/Content must be used within NavigationMenu.Item"
+    );
   }
   return ctx;
 }

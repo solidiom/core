@@ -12,6 +12,6 @@ export { runDoctor, type DoctorResult, type DoctorCheck } from "./commands/docto
 export { runVerify, type VerifyOptions, type VerifyResult } from "./commands/verify";
 export { runAudit, type AuditResult, type AuditComponent } from "./commands/audit";
 export { installSource, type SourceInstallOptions, type SourceInstallResult, } from "./source/install";
-export { rewriteImportsAst, applyMigration, type RewriteImportsOptions, type RewriteImportsResult, type MigrationSpec, type MigrationResult, } from "./source/ast-transform";
+export { rewriteImportsAst, type RewriteImportsOptions, type RewriteImportsResult, } from "./source/ast-transform";
 export { ConfigSchema, PolicySchema, type Config, type Policy } from "./schemas";
 //# sourceMappingURL=index.d.ts.map

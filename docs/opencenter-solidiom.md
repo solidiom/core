@@ -34,8 +34,8 @@ Version 0.6 preserves every normative decision from v0.5 and adds refinements pr
 | Every adapter passes a runtime side-effect suite that asserts no `<style>` appends, no adopted-stylesheet writes, no undeclared attribute mutation, and complete `destroy()` cleanup  | §16.5.1        |
 | Signature verification specifies two supported modes — Sigstore keyless with OIDC identity binding, or explicit trusted keys committed to source control — with rotation semantics    | §13.12.1       |
 | Policy accepts `allowedPrimitiveVersions` semver ranges evaluated against the full resolved install graph                                                                             | §13.13         |
-| Package-mode-only projects require no `.solidiom/` files; the CLI treats absence of `.solidiom/config.json` as valid pure-package-mode                                                        | §13.2, §13.6   |
-| CLI inspection commands consolidate under `solidiom inspect <source\|manifest\|explain\|files\|provenance>`; the pre-v0.6 top-level aliases remain during 0.6 and are removed in 1.0      | §13.9          |
+| Package-mode-only projects require no `.solidiom/` files; the CLI treats absence of `.solidiom/config.json` as valid pure-package-mode                                                | §13.2, §13.6   |
+| CLI inspection commands consolidate under `solidiom inspect <source\|manifest\|explain\|files\|provenance>`; the pre-v0.6 top-level aliases remain during 0.6 and are removed in 1.0  | §13.9          |
 | §17.4 replaces "later, optional" compile-time gestures with a version-anchored roadmap (0.6.x through 2.0) that ties each compile-time deliverable to a release and enforcement level | §17.4          |
 | Clarified that semantic data attributes act strictly as stable boundaries and require structural typing to prevent CSS injection                                                      | §14.2, §14.4   |
 
@@ -69,7 +69,7 @@ The architecture has five product layers and one distribution plane:
 | **Adapters**           | Narrow Solid integration over framework-neutral specialized algorithm engines only                                                              |
 | **Recipes**            | Optional classes, CSS, tokens, variants, animation styling, and visual defaults                                                                 |
 | **Migrations**         | Build-time analysis, source transformation, diagnostics, and upgrade plans                                                                      |
-| **Legacy**             | Temporary deprecated facades that preserve selected old imports or props while delegating to first-party Solidiom primitives                        |
+| **Legacy**             | Temporary deprecated facades that preserve selected old imports or props while delegating to first-party Solidiom primitives                    |
 | **Distribution plane** | Packages, source manifests, registry discovery, CLI resolution, provenance, policy, verification, updates, and release metadata                 |
 
 The runtime stack is:
@@ -300,9 +300,9 @@ The package-backed hybrid model addresses this by making package tarballs the im
 | Goal                              | Required outcome                                                                                                                          |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | Solid 2-native runtime behavior   | Primitives follow Solid 2 scheduling, lifecycle, refs, owner cleanup, SSR, hydration, and direct DOM semantics.                           |
-| First-party primitive ownership   | Solidiom owns UI behavior instead of wrapping another primitive system.                                                                       |
+| First-party primitive ownership   | Solidiom owns UI behavior instead of wrapping another primitive system.                                                                   |
 | One coherent contract             | State, events, parts, semantic attributes, refs, polymorphism, forms, focus, and composition are consistent across components.            |
-| Strict algorithm adapter boundary | `adapters/` imports only framework-neutral specialized engines and exposes Solidiom capability snapshots.                                     |
+| Strict algorithm adapter boundary | `adapters/` imports only framework-neutral specialized engines and exposes Solidiom capability snapshots.                                 |
 | Hybrid package/source consumption | Package mode and source mode are generated from the same canonical source and pass the same conformance suites.                           |
 | Package-backed reproducibility    | Package tarballs include compiled output, canonical source, manifests, tests or fixtures, migrations, licenses, and integrity metadata.   |
 | Safe source ownership             | Source-installed files retain provenance and update through explicit three-way merge without silent overwrite.                            |
@@ -580,7 +580,7 @@ The registry index points to these artifacts; it is not a second source of imple
 
 Solidiom should organize behavior by semantic family instead of mechanically reproducing shadcn/ui names as unrelated components.
 
-| Familiar component names                 | Solidiom model                                                                                               |
+| Familiar component names                 | Solidiom model                                                                                           |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | Dialog, Alert Dialog, Sheet              | One dialog/overlay foundation. Alert Dialog is policy. Sheet is a recipe.                                |
 | Dialog, Drawer                           | Shared modal, focus, dismissal, presence, and layer services. Drawer adds first-party gesture semantics. |
@@ -1496,7 +1496,7 @@ Per-component packages are the primary publication unit. The umbrella package pr
 
 | Benefit                            | Architectural value                                                                                  |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Enterprise-compatible distribution | Existing npm mirrors, artifact scanners, and allowlists can handle Solidiom artifacts.                   |
+| Enterprise-compatible distribution | Existing npm mirrors, artifact scanners, and allowlists can handle Solidiom artifacts.               |
 | Reproducibility                    | Compiled output, canonical source, manifests, migrations, tests, and licenses version together.      |
 | Dual adoption path                 | Teams can begin with packages and source-own only the components that require customization.         |
 | Reviewability                      | Security and platform teams can inspect the exact source shipped in the package tarball.             |
@@ -2061,7 +2061,7 @@ A project selects a profile:
 
 ## 14.6 UnoCSS relationship
 
-| Dimension         | Solidiom                                                      | UnoCSS                                       |
+| Dimension         | Solidiom                                                  | UnoCSS                                       |
 | ----------------- | --------------------------------------------------------- | -------------------------------------------- |
 | Primary purpose   | Solid 2-native UI behavior and distribution               | On-demand atomic CSS generation              |
 | Main output       | Primitive packages or editable TS/TSX/CSS with provenance | Generated CSS                                |
@@ -2162,7 +2162,7 @@ Solidiom should reject:
 
 ## 15.4 Mapping examples
 
-| shadcn/ui name | Solidiom interpretation                                               |
+| shadcn/ui name | Solidiom interpretation                                           |
 | -------------- | ----------------------------------------------------------------- |
 | Dialog         | First-party Dialog primitive                                      |
 | Alert Dialog   | Dialog with alert policy and recipe                               |
@@ -2189,11 +2189,11 @@ Solidiom should reject:
 
 Compatibility support is split deliberately:
 
-| Location      | Purpose                                                                    | Runtime status                         |
-| ------------- | -------------------------------------------------------------------------- | -------------------------------------- |
-| `migrations/` | Analyze and transform old application source                               | Build-time only                        |
+| Location      | Purpose                                                                        | Runtime status                         |
+| ------------- | ------------------------------------------------------------------------------ | -------------------------------------- |
+| `migrations/` | Analyze and transform old application source                                   | Build-time only                        |
 | `legacy/`     | Preserve selected old imports or props while delegating to Solidiom primitives | Temporary, explicit runtime dependency |
-| `adapters/`   | Bridge framework-neutral algorithms                                        | Normal runtime capability layer        |
+| `adapters/`   | Bridge framework-neutral algorithms                                            | Normal runtime capability layer        |
 
 There are no compatibility adapters.
 
@@ -2480,15 +2480,15 @@ A compiler transform does not automatically remove these costs.
 Compile-time optimization is deferred behind the runtime contract, not abandoned. The staged plan is version-anchored so adopters can compare bundle projections against compile-time competitors.
 
 | Solidiom version | Compile-time deliverable             | Scope                                                                                                                                | Enforcement                                  |
-| ------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| 0.6.x        | Runtime contract stabilization       | Primitive, adapter, styling, and distribution contracts frozen                                                                       | Contract tests                               |
-| 0.7.x        | ESLint plugin: import boundaries     | Rules block engine imports outside `adapters/`, primitive imports of legacy, adapter imports of recipes                              | Lint fails CI                                |
-| 0.8.x        | ESLint plugin: anatomy and semantics | Rules verify required part relationships (Dialog.Root wraps Dialog.Content, etc.), missing accessible name warnings, forbidden props | Lint fails CI                                |
-| 1.0          | Runtime-first stable release         | No compile-time features required for correctness; behavior guaranteed at runtime                                                    | Stable release gate                          |
-| 1.1          | Static recipe extraction plugin      | Vite and Rollup plugin extracts static recipe classes at build time; source unchanged when plugin absent                             | Opt-in; produces measurable bundle reduction |
-| 1.2          | Static variant expansion             | Compile-time variant tables replace runtime `defineRecipe` lookups for statically knowable variants                                  | Opt-in                                       |
-| 1.3          | Dead-part elimination                | Unreachable optional parts pruned when consumer never renders them                                                                   | Opt-in                                       |
-| 2.0          | Unused-capability detection          | Build fails if a resolved capability adapter is never invoked in the primitive graph; recipe-only paths shrink dep cone accordingly  | Enforced when enabled                        |
+| ---------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| 0.6.x            | Runtime contract stabilization       | Primitive, adapter, styling, and distribution contracts frozen                                                                       | Contract tests                               |
+| 0.7.x            | ESLint plugin: import boundaries     | Rules block engine imports outside `adapters/`, primitive imports of legacy, adapter imports of recipes                              | Lint fails CI                                |
+| 0.8.x            | ESLint plugin: anatomy and semantics | Rules verify required part relationships (Dialog.Root wraps Dialog.Content, etc.), missing accessible name warnings, forbidden props | Lint fails CI                                |
+| 1.0              | Runtime-first stable release         | No compile-time features required for correctness; behavior guaranteed at runtime                                                    | Stable release gate                          |
+| 1.1              | Static recipe extraction plugin      | Vite and Rollup plugin extracts static recipe classes at build time; source unchanged when plugin absent                             | Opt-in; produces measurable bundle reduction |
+| 1.2              | Static variant expansion             | Compile-time variant tables replace runtime `defineRecipe` lookups for statically knowable variants                                  | Opt-in                                       |
+| 1.3              | Dead-part elimination                | Unreachable optional parts pruned when consumer never renders them                                                                   | Opt-in                                       |
+| 2.0              | Unused-capability detection          | Build fails if a resolved capability adapter is never invoked in the primitive graph; recipe-only paths shrink dep cone accordingly  | Enforced when enabled                        |
 
 Rules that apply across the roadmap:
 
@@ -2805,7 +2805,7 @@ Stable release requires:
 
 | Risk                                                  | Consequence                                                       | Mitigation                                                                                                             |
 | ----------------------------------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| First-party accessibility burden                      | Solidiom owns regressions directly                                    | Constrained primitive scope, shared conformance, external audits, release blockers                                     |
+| First-party accessibility burden                      | Solidiom owns regressions directly                                | Constrained primitive scope, shared conformance, external audits, release blockers                                     |
 | Solid 2 beta churn                                    | Lifecycle and scheduling assumptions change                       | `next` channel, exact tested versions, isolated runtime modules, no Solid 1 branches                                   |
 | Hybrid-mode confusion                                 | Developers do not know whether to import or source-own components | Package mode default for app teams, source mode default for platform teams, explicit CLI mode, three onboarding tracks |
 | Package/source drift                                  | Two consumption paths behave differently                          | Generate both from one canonical source and require parity tests before publish                                        |
@@ -2995,7 +2995,7 @@ Create Solidiom as a new repository and product identity with this permanent men
 
 Treat related systems as follows:
 
-| System                      | Solidiom relationship                                                                    |
+| System                      | Solidiom relationship                                                                |
 | --------------------------- | ------------------------------------------------------------------------------------ |
 | shadcn/ui                   | Source-ownership precedent, registry UX reference, visual vocabulary, and demand map |
 | shadcn-solid                | Migration source, example inventory, and dependency-leakage map                      |
@@ -3204,19 +3204,19 @@ These are pushback-able but recorded for reference. Any of them can be revisited
 
 The implementation-plan tasks reference these decisions:
 
-| Decision               | Primary tasks                                                          |
-| ---------------------- | ---------------------------------------------------------------------- |
-| §27.1 Monorepo         | Task 1                                                                 |
-| §27.2 Build tools      | Task 2                                                                 |
-| §27.3 Testing          | Task 3                                                                 |
-| §27.4 CLI              | Task 19                                                                |
-| §27.5 Registry         | Task 20                                                                |
-| §27.6 AST              | Tasks 21, 25, 26, 28, 41                                               |
-| §27.7 Three-way merge  | Task 25                                                                |
-| §27.8 Signatures       | Tasks 43, 44, 45                                                       |
-| §27.9 Solid 2 matrix   | Tasks 4, 60                                                            |
-| §27.10 Recipes         | Tasks 36, 37, 48                                                       |
-| §27.11 Test doubles    | Tasks 10, 14, 18                                                       |
-| §27.12 Docs            | Task 13 (docs playground first-use), continuous thereafter             |
-| §27.13 Benchmarks      | Tasks 11, 17, 56                                                       |
+| Decision               | Primary tasks                                                              |
+| ---------------------- | -------------------------------------------------------------------------- |
+| §27.1 Monorepo         | Task 1                                                                     |
+| §27.2 Build tools      | Task 2                                                                     |
+| §27.3 Testing          | Task 3                                                                     |
+| §27.4 CLI              | Task 19                                                                    |
+| §27.5 Registry         | Task 20                                                                    |
+| §27.6 AST              | Tasks 21, 25, 26, 28, 41                                                   |
+| §27.7 Three-way merge  | Task 25                                                                    |
+| §27.8 Signatures       | Tasks 43, 44, 45                                                           |
+| §27.9 Solid 2 matrix   | Tasks 4, 60                                                                |
+| §27.10 Recipes         | Tasks 36, 37, 48                                                           |
+| §27.11 Test doubles    | Tasks 10, 14, 18                                                           |
+| §27.12 Docs            | Task 13 (docs playground first-use), continuous thereafter                 |
+| §27.13 Benchmarks      | Tasks 11, 17, 56                                                           |
 | §27.14 Policy defaults | Various; called out in `solidiom-implementation-plan.md` §Locked decisions |
