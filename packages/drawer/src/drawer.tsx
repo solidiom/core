@@ -9,7 +9,7 @@
  * Parts: Root, Trigger, Backdrop, Content, Close, Title, Description.
  */
 
-import { type Accessor, onSettled, Show } from "solid-js"
+import { type Accessor, createEffect, createSignal, Show } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -161,54 +161,57 @@ export interface DrawerContentProps {
 /** Slide-in content panel with overlay behaviors based on modal mode. */
 export function Content(props: DrawerContentProps) {
   const ctx = useDrawerContext()
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement>()
 
-  onSettled(() => {
-    if (!contentEl) return
-    const doc = contentEl.ownerDocument
+  createEffect(
+    () => (ctx.present() ? contentEl() : undefined),
+    (el) => {
+      if (!el) return
+      const doc = el.ownerDocument
 
-    // Register layer
-    const stack = getLayerStack(doc)
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: ctx.modal,
-    })
+      // Register layer
+      const stack = getLayerStack(doc)
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: ctx.modal,
+      })
 
-    // Dismissable layer (both modal and non-modal, only if dismissible)
-    const removeDismissable = ctx.dismissible
-      ? setupDismissableLayer({
-          document: doc,
-          layerId: ctx.contentId,
-          element: () => contentEl,
-          onDismiss: (reason) => {
-            ctx.requestOpenChange(false, createChangeDetails(reason))
-          },
-        })
-      : () => {}
+      // Dismissable layer (both modal and non-modal, only if dismissible)
+      const removeDismissable = ctx.dismissible
+        ? setupDismissableLayer({
+            document: doc,
+            layerId: ctx.contentId,
+            element: () => el,
+            onDismiss: (reason) => {
+              ctx.requestOpenChange(false, createChangeDetails(reason))
+            },
+          })
+        : () => {}
 
-    // Focus scope (modal only)
-    const deactivateFocus = ctx.modal
-      ? activateFocusScope({
-          element: () => contentEl,
-          restoreTarget: () => doc.getElementById(ctx.triggerId),
-        })
-      : () => {}
+      // Focus scope (modal only)
+      const deactivateFocus = ctx.modal
+        ? activateFocusScope({
+            element: () => el,
+            restoreTarget: () => doc.getElementById(ctx.triggerId),
+          })
+        : () => {}
 
-    // Modal isolation (modal only)
-    const deactivateIsolation = ctx.modal ? activateModalIsolation(contentEl) : () => {}
+      // Modal isolation (modal only)
+      const deactivateIsolation = ctx.modal ? activateModalIsolation(el) : () => {}
 
-    // Scroll lock (modal only)
-    const releaseScroll = ctx.modal ? activateScrollLock(doc) : () => {}
+      // Scroll lock (modal only)
+      const releaseScroll = ctx.modal ? activateScrollLock(doc) : () => {}
 
-    return () => {
-      releaseScroll()
-      deactivateIsolation()
-      deactivateFocus()
-      removeDismissable()
-      removeLayer()
-    }
-  })
+      return () => {
+        releaseScroll()
+        deactivateIsolation()
+        deactivateFocus()
+        removeDismissable()
+        removeLayer()
+      }
+    },
+  )
 
   return (
     <Show when={ctx.present()}>
@@ -219,7 +222,7 @@ export function Content(props: DrawerContentProps) {
         aria-labelledby={ctx.titleId}
         aria-describedby={ctx.descriptionId}
         ref={(el: HTMLDivElement) => {
-          contentEl = el
+          setContentEl(el)
           props.ref?.(el)
         }}
         class={props.class}

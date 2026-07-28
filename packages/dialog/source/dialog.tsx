@@ -5,7 +5,7 @@
  * Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.
  */
 
-import { type Accessor, onSettled, Show } from "solid-js"
+import { type Accessor, createEffect, createSignal, Show } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -153,52 +153,55 @@ export function Content(props: DialogContentProps) {
   const ctx = useDialogContext()
   const shouldTrapFocus = () => props.trapFocus ?? true
 
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement>()
 
-  onSettled(() => {
-    if (!contentEl) return
-    const doc = contentEl.ownerDocument
+  createEffect(
+    () => (ctx.present() ? contentEl() : undefined),
+    (el) => {
+      if (!el) return
+      const doc = el.ownerDocument
 
-    // Register layer
-    const stack = getLayerStack(doc)
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: ctx.modal,
-    })
+      // Register layer
+      const stack = getLayerStack(doc)
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: ctx.modal,
+      })
 
-    // Dismissable layer
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason))
-      },
-    })
+      // Dismissable layer
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason))
+        },
+      })
 
-    // Focus scope
-    const deactivateFocus = shouldTrapFocus()
-      ? activateFocusScope({
-          element: () => contentEl,
-          restoreTarget: () => doc.getElementById(ctx.triggerId),
-        })
-      : () => {}
+      // Focus scope
+      const deactivateFocus = shouldTrapFocus()
+        ? activateFocusScope({
+            element: () => el,
+            restoreTarget: () => doc.getElementById(ctx.triggerId),
+          })
+        : () => {}
 
-    // Modal isolation
-    const deactivateIsolation = ctx.modal ? activateModalIsolation(contentEl) : () => {}
+      // Modal isolation
+      const deactivateIsolation = ctx.modal ? activateModalIsolation(el) : () => {}
 
-    // Scroll lock
-    const releaseScroll = ctx.modal ? activateScrollLock(doc) : () => {}
+      // Scroll lock
+      const releaseScroll = ctx.modal ? activateScrollLock(doc) : () => {}
 
-    return () => {
-      releaseScroll()
-      deactivateIsolation()
-      deactivateFocus()
-      removeDismissable()
-      removeLayer()
-    }
-  })
+      return () => {
+        releaseScroll()
+        deactivateIsolation()
+        deactivateFocus()
+        removeDismissable()
+        removeLayer()
+      }
+    },
+  )
 
   return (
     <div
@@ -208,7 +211,7 @@ export function Content(props: DialogContentProps) {
       aria-labelledby={ctx.titleId}
       aria-describedby={ctx.descriptionId}
       ref={(el: HTMLDivElement) => {
-        contentEl = el
+        setContentEl(el)
         props.ref?.(el)
       }}
       class={props.class}
