@@ -33,7 +33,9 @@
     "gate:phase1": "tsx tools/phase1-gate.ts",
     "gate:phase2": "tsx tools/phase2-gate.ts",
     "gate:phase3": "tsx tools/phase3-gate.ts",
-    "gate:phase3-preflight": "tsx tools/phase3-preflight.ts"
+    "gate:phase3-preflight": "tsx tools/phase3-preflight.ts",
+    "deps:check": "tsx scripts/check-library-updates.mts",
+    "deps:check:ci": "tsx scripts/check-library-updates.mts --fail-on-outdated"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",
@@ -43,7 +45,7 @@
     "@nx/js": "^23.1.0",
     "@playwright/test": "1.61.1",
     "@solidjs/testing-library": "^0.8.10",
-    "@solidjs/web": "2.0.0-beta.24",
+    "@solidjs/web": "2.0.0-beta.26",
     "@vitest/browser": "^4.1.10",
     "@vitest/browser-playwright": "^4.1.10",
     "axe-core": "4.10.2",
@@ -53,7 +55,7 @@
     "nx": "^23.1.0",
     "playwright": "^1.61.1",
     "prettier": "^3.9.6",
-    "solid-js": "2.0.0-beta.24",
+    "solid-js": "2.0.0-beta.26",
     "tsup": "^8.5.1",
     "tsx": "^4.19.0",
     "typescript": "~6.0.3",
