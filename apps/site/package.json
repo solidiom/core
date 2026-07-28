@@ -7,7 +7,8 @@
     "check": "astro check",
     "build": "astro build",
     "preview": "astro preview",
-    "search-index": "pagefind --site dist"
+    "search-index": "pagefind --site dist",
+    "test:e2e": "playwright test --config playwright.config.ts"
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
@@ -24,6 +25,7 @@
     "tailwindcss": "4.3.3"
   },
   "devDependencies": {
+    "@playwright/test": "1.61.1",
     "pagefind": "1.5.2",
     "typescript": "6.0.3"
   },
@@ -73,6 +75,9 @@
           "{projectRoot}/dist/pagefind"
         ],
         "cache": true
+      },
+      "test:e2e": {
+        "cache": false
       }
     }
   }
