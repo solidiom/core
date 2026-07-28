@@ -34,6 +34,10 @@ export interface DrawerRootProps {
 export declare function Root(props: DrawerRootProps): JSX.Element;
 export interface DrawerTriggerProps {
     children: JSX.Element;
+    class?: string;
+    style?: JSX.CSSProperties | string;
+    /** Accessible label. Required when children are icon-only/non-text. */
+    "aria-label"?: string;
     ref?: (el: HTMLButtonElement) => void;
 }
 /** Button that toggles the drawer open/closed. */
@@ -54,6 +58,10 @@ export interface DrawerContentProps {
 export declare function Content(props: DrawerContentProps): JSX.Element;
 export interface DrawerCloseProps {
     children: JSX.Element;
+    class?: string;
+    style?: JSX.CSSProperties | string;
+    /** Accessible label. Required when children are icon-only/non-text. */
+    "aria-label"?: string;
     ref?: (el: HTMLButtonElement) => void;
 }
 /** Button that closes the drawer. */
