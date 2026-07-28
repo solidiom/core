@@ -14,6 +14,7 @@ export interface ButtonProps {
   onClick?: () => void
   class?: string
   type?: "button" | "submit" | "reset"
+  "aria-label"?: string
 }
 
 export function Root(props: ButtonProps) {
@@ -32,6 +33,7 @@ export function Root(props: ButtonProps) {
       type={props.type ?? "button"}
       disabled={isDisabled()}
       aria-busy={props.loading ? "true" : undefined}
+      aria-label={props["aria-label"]}
       onClick={props.onClick}
       class={props.class}
       {...semanticAttrs()}
