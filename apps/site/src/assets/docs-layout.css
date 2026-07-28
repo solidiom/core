@@ -1,0 +1,299 @@
+/**
+ * DocsLayout / DocsMobileNav styles.
+ *
+ * Breakpoints:
+ *   - 768px: matches site-header.css's desktop/mobile split. Sidebar
+ *     becomes a static column; the mobile nav bar (hamburger) hides.
+ *   - 1024px: introduces the third column (right-side TOC). Below this,
+ *     the TOC is not rendered at all rather than pushed below the
+ *     article, since "on this page" is a supplementary aid.
+ */
+
+.docs-shell {
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.docs-shell__mobile-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.docs-shell__mobile-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+
+.docs-shell__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  padding-block: 1.5rem;
+}
+
+/* Sidebar: hidden below 768px (reachable only via DocsMobileNav's drawer). */
+.docs-shell__sidebar {
+  display: none;
+}
+
+.docs-shell__sidebar-group {
+  margin-bottom: 1.5rem;
+}
+
+.docs-shell__sidebar-group-label,
+.docs-shell__toc-label {
+  color: var(--color-foreground-muted);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.75rem;
+}
+
+.docs-shell__sidebar-group ul,
+.docs-shell__toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.docs-shell__sidebar-group a,
+.docs-shell__toc a {
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.docs-shell__sidebar-group a:hover,
+.docs-shell__toc a:hover {
+  color: var(--focus-ring);
+  text-decoration: underline;
+}
+
+.docs-shell__sidebar-group a[aria-current="page"] {
+  color: var(--focus-ring);
+  font-weight: 600;
+}
+
+.docs-shell__sidebar-empty,
+.docs-mobile-nav__empty {
+  color: var(--color-foreground-muted);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+}
+
+/* Article column */
+.docs-shell__article {
+  min-width: 0;
+}
+
+/* Headings need clearance under the sticky header for anchor/TOC-link jumps. */
+.docs-shell__article h2,
+.docs-shell__article h3,
+.docs-shell__article h4 {
+  scroll-margin-top: 5rem;
+}
+
+.docs-shell__adjacent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.docs-shell__adjacent-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: var(--color-foreground);
+}
+
+.docs-shell__adjacent-link:hover {
+  border-color: var(--focus-ring);
+}
+
+.docs-shell__adjacent-link--next {
+  text-align: end;
+  align-items: flex-end;
+}
+
+.docs-shell__adjacent-direction {
+  color: var(--color-foreground-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.docs-shell__adjacent-label {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+}
+
+/* TOC column: hidden below 1024px. */
+.docs-shell__toc {
+  display: none;
+}
+
+@media (width >= 768px) {
+  .docs-shell__mobile-bar {
+    display: none;
+  }
+
+  .docs-shell__grid {
+    grid-template-columns: 16rem minmax(0, 1fr);
+  }
+
+  .docs-shell__sidebar {
+    display: block;
+    position: sticky;
+    top: 4.5rem;
+    align-self: start;
+    max-height: calc(100vh - 5.5rem);
+    overflow-y: auto;
+  }
+}
+
+@media (width >= 1024px) {
+  .docs-shell__grid {
+    grid-template-columns: 16rem minmax(0, 1fr) 14rem;
+  }
+
+  .docs-shell__toc {
+    display: block;
+    position: sticky;
+    top: 4.5rem;
+    align-self: start;
+    max-height: calc(100vh - 5.5rem);
+    overflow-y: auto;
+  }
+}
+
+/* DocsMobileNav (drawer contents) */
+.docs-mobile-nav__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: none;
+  color: var(--color-foreground);
+  cursor: pointer;
+}
+
+.docs-mobile-nav__trigger:hover {
+  background-color: var(--color-surface-raised);
+}
+
+.docs-mobile-nav__hamburger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.docs-mobile-nav__hamburger span {
+  display: block;
+  height: 2px;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+
+.docs-mobile-nav__drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgb(0 0 0 / 0.4);
+}
+
+.docs-mobile-nav__drawer-content {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: 51;
+  width: min(20rem, 85vw);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--color-surface);
+  border-inline-end: 1px solid var(--color-border);
+  overflow-y: auto;
+}
+
+.docs-mobile-nav__drawer-content[data-state="closed"] {
+  display: none;
+}
+
+.docs-mobile-nav__drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.docs-mobile-nav__drawer-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.docs-mobile-nav__drawer-description {
+  color: var(--color-foreground-muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.docs-mobile-nav__group {
+  margin-bottom: 1.25rem;
+}
+
+.docs-mobile-nav__group-label {
+  color: var(--color-foreground-muted);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+}
+
+.docs-mobile-nav__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.docs-mobile-nav__nav a {
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.docs-mobile-nav__nav a[aria-current="page"] {
+  color: var(--focus-ring);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .docs-mobile-nav__drawer-content {
+    transition: transform 0.2s ease-out;
+  }
+}

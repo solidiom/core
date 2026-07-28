@@ -5,10 +5,12 @@
  * `@solidiom/navigation-menu` bar with plain links and one dropdown
  * ("Resources") built from Item/Trigger/Content.
  *
- * Mobile: a hamburger `@solidiom/button` IconButton opens a
- * `@solidiom/drawer` sliding in from the left containing the same link set
- * as a simple, flat list (no nested dropdown — flattened for a small
- * viewport per usual responsive-nav practice).
+ * Mobile: a hamburger button (styled via `Drawer.Trigger`'s own `class`
+ * prop, not a nested `@solidiom/button` — a `<button>` cannot contain
+ * another `<button>`, so the trigger's built-in button element is styled
+ * directly) opens a `@solidiom/drawer` sliding in from the left containing
+ * the same link set as a simple, flat list (no nested dropdown —
+ * flattened for a small viewport per usual responsive-nav practice).
  *
  * This is a single Solid island (see SiteHeader.astro), hydrated with
  * `client:load` because the mobile drawer trigger must be interactive
@@ -16,7 +18,6 @@
  * hamburger menu.
  */
 import { createSignal, For } from "solid-js"
-import * as Button from "@solidiom/button"
 import * as NavigationMenu from "@solidiom/navigation-menu"
 import * as Drawer from "@solidiom/drawer"
 
@@ -82,23 +83,19 @@ export function SiteHeader(props: SiteHeaderProps) {
 
         <div class="site-header__mobile-trigger">
           <Drawer.Root open={mobileOpen} onOpenChange={setMobileOpen} side="left">
-            <Drawer.Trigger>
-              <Button.IconButton aria-label="Open menu">
-                <span class="site-header__hamburger" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </span>
-              </Button.IconButton>
+            <Drawer.Trigger class="site-header__hamburger-button" aria-label="Open menu">
+              <span class="site-header__hamburger" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
             </Drawer.Trigger>
             <Drawer.Backdrop class="site-header__drawer-backdrop" />
             <Drawer.Content class="site-header__drawer-content">
               <div class="site-header__drawer-header">
                 <Drawer.Title class="site-header__drawer-title">Menu</Drawer.Title>
-                <Drawer.Close>
-                  <Button.IconButton aria-label="Close menu">
-                    <span aria-hidden="true">×</span>
-                  </Button.IconButton>
+                <Drawer.Close class="site-header__hamburger-button" aria-label="Close menu">
+                  <span aria-hidden="true">×</span>
                 </Drawer.Close>
               </div>
               <Drawer.Description class="site-header__drawer-description">

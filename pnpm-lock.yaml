@@ -339,9 +339,6 @@ importers:
       '@solidiom/astrojs-solid-next':
         specifier: workspace:*
         version: link:../../packages/astrojs-solid-next
-      '@solidiom/button':
-        specifier: workspace:*
-        version: link:../../packages/button
       '@solidiom/drawer':
         specifier: workspace:*
         version: link:../../packages/drawer

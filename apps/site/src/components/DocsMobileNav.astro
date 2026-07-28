@@ -1,0 +1,23 @@
+---
+/**
+ * Astro wrapper for the DocsMobileNav Solid island.
+ *
+ * Hydrated with `client:load`, matching SiteHeader.astro's rationale: the
+ * hamburger trigger and drawer must be interactive immediately and there
+ * is no meaningful non-interactive fallback for a mobile menu. The link
+ * list itself is plain server-rendered markup inside the (initially
+ * closed) drawer, so there is real navigable content even before
+ * hydration completes.
+ */
+import { DocsMobileNav } from "./DocsMobileNav"
+import type { DocsSidebarGroup } from "../lib/docs-nav"
+
+interface Props {
+  groups: DocsSidebarGroup[]
+}
+
+const { groups } = Astro.props
+const pathname = Astro.url.pathname
+---
+
+<DocsMobileNav groups={groups} pathname={pathname} client:load />
