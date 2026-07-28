@@ -250,6 +250,29 @@ run = [
 ]
 
 # ---------------------------------------------------------------------------
+# Dependency freshness
+# ---------------------------------------------------------------------------
+
+[tasks."deps:check"]
+description = "Check the key third-party libraries for new versions"
+run = "pnpm tsx scripts/check-library-updates.mts"
+
+[tasks."deps:check:group"]
+description = "Check one library group  →  mise run deps:check:group -- solid"
+run = "pnpm tsx scripts/check-library-updates.mts --group {{arg(name='group')}}"
+
+[tasks."deps:check:json"]
+description = "Write the library freshness report to artifacts/library-updates.json"
+run = [
+  "mkdir -p artifacts",
+  "pnpm tsx scripts/check-library-updates.mts --json > artifacts/library-updates.json",
+]
+
+[tasks."deps:solid"]
+description = "Check only the Solid toolchain for new betas"
+run = "pnpm tsx scripts/check-library-updates.mts --group solid"
+
+# ---------------------------------------------------------------------------
 # Maintenance
 # ---------------------------------------------------------------------------
 

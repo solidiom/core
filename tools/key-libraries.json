@@ -1,0 +1,97 @@
+{
+  "description": "Key third-party libraries tracked by scripts/check-library-updates.mts. Grouped by role. Only names listed here are queried against the npm registry; declared versions are discovered automatically from the workspace manifests, so no version numbers live in this file.",
+  "groups": [
+    {
+      "id": "solid",
+      "title": "Solid toolchain",
+      "note": "Rolling prerelease window — see tools/solid-matrix.json",
+      "packages": [
+        "solid-js",
+        "@solidjs/web",
+        "babel-preset-solid",
+        "vite-plugin-solid",
+        "@solidjs/router",
+        "@solidjs/testing-library"
+      ]
+    },
+    {
+      "id": "build",
+      "title": "Build & type tooling",
+      "packages": [
+        "vite",
+        "tsup",
+        "typescript",
+        "tsx",
+        "nx",
+        "@nx/js",
+        "@nx/eslint-plugin"
+      ]
+    },
+    {
+      "id": "test",
+      "title": "Test & a11y tooling",
+      "packages": [
+        "vitest",
+        "@vitest/browser",
+        "@vitest/browser-playwright",
+        "playwright",
+        "@playwright/test",
+        "axe-core",
+        "@axe-core/playwright",
+        "jsdom",
+        "expect-type"
+      ]
+    },
+    {
+      "id": "lint",
+      "title": "Lint & format",
+      "packages": ["eslint", "prettier"]
+    },
+    {
+      "id": "release",
+      "title": "Release tooling",
+      "packages": ["@changesets/cli", "@changesets/changelog-github"]
+    },
+    {
+      "id": "adapters",
+      "title": "Adapter upstreams",
+      "note": "Each is the sole external dependency of one adapter package",
+      "packages": [
+        "@floating-ui/dom",
+        "@tanstack/table-core",
+        "@tanstack/virtual-core",
+        "embla-carousel",
+        "@internationalized/date"
+      ]
+    },
+    {
+      "id": "cli",
+      "title": "CLI dependencies",
+      "packages": [
+        "@clack/prompts",
+        "clipanion",
+        "zod",
+        "ts-morph",
+        "picocolors",
+        "@sigstore/bundle",
+        "@sigstore/sign",
+        "@sigstore/tuf",
+        "@sigstore/verify"
+      ]
+    },
+    {
+      "id": "docs",
+      "title": "Docs site",
+      "packages": [
+        "astro",
+        "@astrojs/mdx",
+        "@astrojs/check",
+        "tailwindcss",
+        "@tailwindcss/vite",
+        "shiki",
+        "pagefind",
+        "@pagefind/default-ui"
+      ]
+    }
+  ]
+}
