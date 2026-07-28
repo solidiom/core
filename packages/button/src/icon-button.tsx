@@ -21,6 +21,7 @@ export function IconButton(props: IconButtonProps) {
       onClick={props.onClick}
       type={props.type}
       class={props.class}
+      aria-label={props["aria-label"]}
     >
       <span aria-hidden="true">{props.children}</span>
     </Root>
