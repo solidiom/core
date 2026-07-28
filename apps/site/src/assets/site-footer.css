@@ -1,0 +1,145 @@
+/**
+ * SiteFooter styles.
+ *
+ * Breakpoint: 768px matches site-header.css's single source of truth for
+ * the desktop/mobile split — the footer stacks to one column below it and
+ * lays out as three columns at/above it.
+ */
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.site-footer__bar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+.site-footer__brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--color-foreground);
+  margin: 0 0 0.25rem;
+}
+
+.site-footer__copy {
+  color: var(--color-foreground-muted);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.site-footer__group-label {
+  color: var(--color-foreground-muted);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.75rem;
+}
+
+.site-footer__links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.site-footer__links a {
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.site-footer__links a:hover {
+  color: var(--focus-ring);
+  text-decoration: underline;
+}
+
+.site-footer__newsletter-copy {
+  color: var(--color-foreground-muted);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  margin: 0 0 0.75rem;
+}
+
+.site-footer__newsletter-label {
+  display: block;
+  color: var(--color-foreground-muted);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  margin-bottom: 0.375rem;
+}
+
+.site-footer__newsletter-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.site-footer__newsletter-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+  background-color: var(--color-surface-raised);
+  color: var(--color-foreground-muted);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+}
+
+.site-footer__newsletter-submit {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+  background-color: var(--color-surface-raised);
+  color: var(--color-foreground-muted);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+}
+
+/*
+ * Disabled state only, for now: the newsletter form is a static slot (see
+ * SiteFooter.astro) until NEWS-001 implements real submission. `cursor` is
+ * set explicitly since some UAs don't style disabled form controls this
+ * way by default.
+ */
+.site-footer__newsletter-input:disabled,
+.site-footer__newsletter-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (width >= 768px) {
+  .site-footer__bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .site-footer__brand-col {
+    flex: 1 1 16rem;
+  }
+
+  .site-footer__links {
+    flex: 0 0 auto;
+  }
+
+  .site-footer__newsletter {
+    flex: 1 1 16rem;
+    max-width: 20rem;
+  }
+
+  .site-footer__newsletter-row {
+    max-width: 20rem;
+  }
+}

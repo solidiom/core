@@ -1,0 +1,83 @@
+---
+/**
+ * SiteFooter — global footer (SITE-006).
+ *
+ * Renders:
+ *   - Community links (GitHub only — see docs/lib/footer-links.ts for why).
+ *   - Legal links, only when at least one exists (none today; see
+ *     footer-links.ts for the blocking governance tasks).
+ *   - A newsletter *slot*: static, non-functional placeholder markup for
+ *     the eventual Buttondown form. NEWS-001 (depends on this task plus
+ *     GOV-005) implements the real consent/validation/submit behavior;
+ *     wiring a real <form action> or client script here would be out of
+ *     scope and premature.
+ *
+ * Unlike SiteHeader, this is plain Astro with no Solid island: nothing in
+ * the footer is interactive yet (the newsletter input is disabled), so
+ * there is no hydration to gate.
+ */
+import { communityLinks, legalLinks } from "../lib/footer-links"
+
+const year = new Date().getFullYear()
+---
+
+<footer class="site-footer">
+  <div class="site-footer__bar">
+    <div class="site-footer__brand-col">
+      <p class="site-footer__brand">Solidiom</p>
+      <p class="site-footer__copy">© {year} Solidiom. Source-owned Solid primitives.</p>
+    </div>
+
+    <nav class="site-footer__links" aria-label="Community">
+      <p class="site-footer__group-label">Community</p>
+      <ul>
+        {
+          communityLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    {
+      legalLinks.length > 0 && (
+        <nav class="site-footer__links" aria-label="Legal">
+          <p class="site-footer__group-label">Legal</p>
+          <ul>
+            {legalLinks.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
+    <div class="site-footer__newsletter">
+      <p class="site-footer__group-label">Newsletter</p>
+      <p class="site-footer__newsletter-copy">
+        Occasional updates on releases and the catalog. Coming soon.
+      </p>
+      <form class="site-footer__newsletter-form" aria-disabled="true">
+        <label class="site-footer__newsletter-label" for="footer-newsletter-email">
+          Email address
+        </label>
+        <div class="site-footer__newsletter-row">
+          <input
+            id="footer-newsletter-email"
+            class="site-footer__newsletter-input"
+            type="email"
+            name="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            disabled
+          />
+          <button class="site-footer__newsletter-submit" type="submit" disabled> Subscribe </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</footer>

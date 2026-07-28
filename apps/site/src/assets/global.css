@@ -2,6 +2,7 @@
 @import "./tokens.css";
 @import "./fonts.css";
 @import "./site-header.css";
+@import "./site-footer.css";
 
 :root {
   color-scheme: light dark;
@@ -16,6 +17,12 @@ body {
   background-color: var(--color-surface);
   color: var(--color-foreground);
   font-family: var(--font-body);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 code,
@@ -57,10 +64,13 @@ samp {
  * Focus root: the target of the skip link and the layout's single top-level
  * landmark boundary for main content. `tabindex="-1"` keeps it out of the
  * normal tab order while still being a valid focus target when the skip
- * link (or route-level logic) moves focus to it.
+ * link (or route-level logic) moves focus to it. `flex: 1` makes it grow to
+ * fill available height so SiteFooter sticks to the bottom of the viewport
+ * on short pages instead of leaving a gap below it.
  */
 .focus-root {
   outline: none;
+  flex: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

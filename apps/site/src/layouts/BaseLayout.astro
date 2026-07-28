@@ -10,10 +10,12 @@
  *   - Skip link and a single focus-root landmark for main content.
  *
  * Explicitly out of scope here (see docs/website-tasks.md §5.1):
- *   - Footer (SITE-006), docs shell (SITE-007).
+ *   - Docs shell (SITE-007).
  *   - Full typography/prose/Shiki pairing (SITE-008).
  *   - Theme toggle UI + change persistence (SITE-009).
  *   - 404/robots/sitemap/manifest/social helpers (SITE-010).
+ *
+ * Footer (SITE-006) is implemented via SiteFooter below.
  */
 import "../assets/global.css"
 import { bootstrapThemeScript } from "../lib/bootstrap-theme"
@@ -21,6 +23,7 @@ import { resolveLocale, localeDirection, DEFAULT_LOCALE } from "../lib/locale"
 import { resolvePageMetadata } from "../lib/metadata"
 import { primaryLinks, resourceLinks } from "../lib/nav-links"
 import SiteHeader from "../components/SiteHeader.astro"
+import SiteFooter from "../components/SiteFooter.astro"
 
 interface Props {
   title?: string
@@ -33,9 +36,17 @@ interface Props {
    * builder, per SITE-012's import-boundary rules) can opt out.
    */
   showHeader?: boolean
+  /** Whether to render the global footer. Default true. */
+  showFooter?: boolean
 }
 
-const { title, description, mainId = "main-content", showHeader = true } = Astro.props
+const {
+  title,
+  description,
+  mainId = "main-content",
+  showHeader = true,
+  showFooter = true,
+} = Astro.props
 
 const locale = resolveLocale(Astro.url.pathname)
 const dir = localeDirection(locale)
@@ -102,5 +113,6 @@ const alternatePathname =
     <div id={mainId} class="focus-root" tabindex="-1">
       <slot />
     </div>
+    {showFooter && <SiteFooter />}
   </body>
 </html>
