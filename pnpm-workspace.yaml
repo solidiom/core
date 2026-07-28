@@ -6,9 +6,9 @@ packages:
   - "tools/*"
 
 catalog:
-  solid-js: "^2.0.0-beta.22"
-  "@solidjs/web": "^2.0.0-beta.22"
-  babel-preset-solid: "^2.0.0-beta.22"
+  solid-js: "^2.0.0-beta.23"
+  "@solidjs/web": "^2.0.0-beta.23"
+  babel-preset-solid: "^2.0.0-beta.23"
 
 overrides:
   solid-js: "2.0.0-beta.24"
