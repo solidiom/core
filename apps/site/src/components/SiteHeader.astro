@@ -1,26 +1,20 @@
 ---
-/**
- * Astro wrapper for the SiteHeader Solid island.
- *
- * Hydrated with `client:load`: the hamburger trigger and dropdown must be
- * interactive as soon as possible, and there is no non-interactive
- * fallback for a mobile menu — the header still renders its full link
- * markup server-side (the primitives render real anchor/button elements on
- * first paint), so this only adds interactivity on top of static content
- * rather than gating the content itself.
- */
+/** Hydrated Astro wrapper for the global SiteHeader Solid island. */
 import { SiteHeader, type NavLink } from "./SiteHeader"
-import { resolveLocale } from "../lib/locale"
+import { resolveEquivalentLocalePath, resolveLocale, type Locale } from "../lib/locale"
 
 interface Props {
   links: NavLink[]
   resourceLinks: NavLink[]
   homeHref?: string
+  /** Explicit server-resolved locale context from the containing layout. */
+  locale?: Locale
 }
 
-const { links, resourceLinks, homeHref } = Astro.props
+const { links, resourceLinks, homeHref, locale: providedLocale } = Astro.props
 const pathname = Astro.url.pathname
-const locale = resolveLocale(pathname)
+const locale = providedLocale ?? resolveLocale(pathname)
+const targetLocalePath = resolveEquivalentLocalePath(pathname, locale === "en" ? "es" : "en")
 ---
 
 <SiteHeader
@@ -29,5 +23,6 @@ const locale = resolveLocale(pathname)
   pathname={pathname}
   homeHref={homeHref}
   locale={locale}
+  alternatePath={targetLocalePath}
   client:load
 />

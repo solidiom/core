@@ -268,3 +268,12 @@
     transition: none;
   }
 }
+
+
+/* A missing registered counterpart remains discoverable to assistive technology
+   through the switcher's description, while the disabled control prevents a
+   navigation to a guessed or nonexistent locale route. */
+.language-switcher:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

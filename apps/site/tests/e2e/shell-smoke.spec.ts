@@ -56,7 +56,8 @@ test.describe("TEST-002: Shell Smoke Tests", () => {
       const drawerContent = page.locator(".site-header__drawer-content")
       await expect(drawerContent).toBeVisible()
 
-      await trigger.click()
+      const close = page.getByRole("button", { name: "Close menu" })
+      await close.click()
       await expect(drawerContent).toBeHidden()
     })
 
@@ -97,13 +98,17 @@ test.describe("TEST-002: Shell Smoke Tests", () => {
     test("navigates from English to Spanish and back", async ({ page }) => {
       await page.goto("/")
 
-      const esLink = page.locator('a[hreflang="es"]')
-      await esLink.click()
-      await expect(page).toHaveURL(/\/es\//)
+      const spanishSwitcher = page.getByRole("button", { name: "Switch language to Español" })
+      await expect(spanishSwitcher).toBeVisible()
+      await spanishSwitcher.focus()
+      await page.keyboard.press("Enter")
+      await expect(page).toHaveURL(/\/es\/$/)
 
-      const enLink = page.locator('a[hreflang="en"]')
-      await enLink.click()
-      await expect(page).toHaveURL(/^\/$|\/(?!es)/)
+      const englishSwitcher = page.getByRole("button", { name: "Switch language to English" })
+      await expect(englishSwitcher).toBeVisible()
+      await englishSwitcher.focus()
+      await page.keyboard.press("Enter")
+      await expect(page).toHaveURL(/\/$/)
     })
   })
 

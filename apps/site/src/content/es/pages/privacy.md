@@ -2,6 +2,8 @@
 title: Divulgaciones de Privacidad
 description: Cómo Solidiom maneja tus datos — qué recopilamos, qué no, y tus derechos.
 locale: es
+translationSourceHash: d420b432cd4fe23856b4c3268a5270ea5e02e5513d8efeea9a07dce551e65cbc
+translationStatus: draft
 ---
 
 # Divulgaciones de Privacidad
@@ -16,14 +18,14 @@ Solidiom es un proyecto de código abierto. Creemos que la privacidad es un dere
 
 ## Resumen
 
-| Servicio | Propósito | Datos personales enviados | Opción de exclusión |
-|----------|-----------|--------------------------|---------------------|
-| Cloudflare | CDN, DNS, analítica básica | Dirección IP (efímera) | No (infraestructura) |
-| PostHog | Analítica de producto | Vistas de página anonimizadas | Sí |
-| Buttondown | Newsletter | Email (solo si te suscribes) | Sí |
-| Pagefind | Búsqueda del sitio | Ninguno | N/A |
-| Playground | Sandbox de código | Ninguno | N/A |
-| Theme Builder | Herramienta de temas visuales | Ninguno | N/A |
+| Servicio      | Propósito                     | Datos personales enviados     | Opción de exclusión  |
+| ------------- | ----------------------------- | ----------------------------- | -------------------- |
+| Cloudflare    | CDN, DNS, analítica básica    | Dirección IP (efímera)        | No (infraestructura) |
+| PostHog       | Analítica de producto         | Vistas de página anonimizadas | Sí                   |
+| Buttondown    | Newsletter                    | Email (solo si te suscribes)  | Sí                   |
+| Pagefind      | Búsqueda del sitio            | Ninguno                       | N/A                  |
+| Playground    | Sandbox de código             | Ninguno                       | N/A                  |
+| Theme Builder | Herramienta de temas visuales | Ninguno                       | N/A                  |
 
 ---
 
@@ -245,11 +247,11 @@ El theme builder no tiene backend. No hay endpoint de API, no hay base de datos 
 
 Solidiom utiliza las siguientes cookies:
 
-| Cookie | Propósito | Tipo | Duración |
-|--------|-----------|------|----------|
-| PostHog distinct_id | Identificador anónimo de analítica | Primera parte | 365 días |
-| Preferencia de tema | Recuerda tu elección claro/oscuro | Primera parte | 365 días |
-| Preferencia de idioma | Recuerda tu elección de idioma | Primera parte | 365 días |
+| Cookie                | Propósito                          | Tipo          | Duración |
+| --------------------- | ---------------------------------- | ------------- | -------- |
+| PostHog distinct_id   | Identificador anónimo de analítica | Primera parte | 365 días |
+| Preferencia de tema   | Recuerda tu elección claro/oscuro  | Primera parte | 365 días |
+| Preferencia de idioma | Recuerda tu elección de idioma     | Primera parte | 365 días |
 
 No se establecen cookies de terceros. No existen cookies de publicidad en este sitio.
 

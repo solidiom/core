@@ -229,7 +229,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @solidiom/site check
       - run: pnpm --filter @solidiom/site run boundaries
-      - run: pnpm --filter @solidiom/site run route-parity
+      - run: pnpm --filter @solidiom/site run i18n:validate
 
   site-build:
     needs: [install, site-check]
