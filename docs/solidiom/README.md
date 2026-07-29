@@ -458,27 +458,27 @@ The brand should look technical and refined, not decorative.
 
 ### Core neutrals
 
-| Token         |     Value | Use                 |
-| ------------- | --------: | ------------------- |
-| **Ink 950**   | `#090D18` | Dark backgrounds    |
-| **Ink 900**   | `#111827` | Primary text        |
-| **Slate 700** | `#334155` | Secondary dark text |
-| **Slate 500** | `#64748B` | Supporting text     |
-| **Slate 300** | `#CBD5E1` | Borders             |
-| **Slate 100** | `#F1F5F9` | Secondary surfaces  |
-| **Canvas**    | `#F8FAFC` | Page background     |
-| **White**     | `#FFFFFF` | Elevated surfaces   |
+| Token          |     Value | Use                 |
+| -------------- | --------: | ------------------- |
+| **Slate 950**  | `#0F172A` | Dark backgrounds    |
+| **Slate 900**  | `#111827` | Primary text        |
+| **Slate 700**  | `#334155` | Secondary dark text |
+| **Slate 500**  | `#94A3B8` | Supporting text     |
+| **Slate 300**  | `#CBD5E1` | Borders             |
+| **Slate 100**  | `#F1F5F9` | Secondary surfaces  |
+| **Canvas**     | `#F8FAFC` | Page background     |
+| **White**      | `#FFFFFF` | Elevated surfaces   |
 
 ### Brand colors
 
-| Token              |     Value | Use                                    |
-| ------------------ | --------: | -------------------------------------- |
-| **Runtime Violet** | `#625BF6` | Primary action and identity            |
-| **Reactive Cyan**  | `#22B8F0` | Active states and diagrams             |
-| **Signal Mint**    | `#2DD4A8` | Success and composition                |
-| **Focus Lime**     | `#B7F34D` | Limited focus accents on dark surfaces |
-| **Warning Amber**  | `#F59E0B` | Warnings                               |
-| **Critical Red**   | `#E5484D` | Destructive states                     |
+| Token              |     Value | Use                                             |
+| ------------------ | --------: | ----------------------------------------------- |
+| **Indigo**         | `#6D66F1` | Primary action and identity                     |
+| **Blue**           | `#3B82F6` | Links, secondary actions, and informational states |
+| **Cyan**           | `#06B6D4` | Active states and diagrams                      |
+| **Green**          | `#22C55E` | Success and composition                         |
+| **Warning Amber**  | `#F59E0B` | Warnings                                        |
+| **Critical Red**   | `#E5484D` | Destructive states                              |
 
 ### Gradient
 
@@ -487,9 +487,9 @@ Use gradients only in large brand fields or diagrams:
 ```css
 linear-gradient(
   135deg,
-  #625BF6 0%,
-  #22B8F0 52%,
-  #2DD4A8 100%
+  #6D66F1 0%,
+  #06B6D4 52%,
+  #22C55E 100%
 )
 ```
 
@@ -520,17 +520,30 @@ Dark mode should not simply invert the light palette. It should have its own sur
 
 ## 8.4 Typography
 
+### Display typeface
+
+**Inter Tight**
+
+Use for:
+
+- Display XL headings
+- Display L headings
+- H1 headings
+
+Characteristics: tight tracking, high contrast at large sizes, used exclusively for large display headings.
+
 ### Primary interface typeface
 
 **Inter Variable**
 
 Use for:
 
+- H2–H4 headings
 - Navigation
-- Headings
 - Body copy
 - Controls
 - Documentation
+- Labels
 
 ### Technical typeface
 
@@ -551,17 +564,17 @@ Use for:
 Large headings should use tight tracking and moderate line height.
 
 ```text
-Display XL  72/76
-Display L   60/64
-H1          48/54
-H2          38/44
-H3          30/38
-H4          24/32
-Body L      18/30
-Body        16/26
-Small       14/22
-Label       13/18
-Code        14/22
+Display XL  72/76   Inter Tight
+Display L   60/64   Inter Tight
+H1          48/54   Inter Tight
+H2          38/44   Inter Variable
+H3          30/38   Inter Variable
+H4          24/32   Inter Variable
+Body L      18/30   Inter Variable
+Body        16/26   Inter Variable
+Small       14/22   Inter Variable
+Label       13/18   Inter Variable
+Code        14/22   IBM Plex Mono
 ```
 
 ## 8.5 Spacing

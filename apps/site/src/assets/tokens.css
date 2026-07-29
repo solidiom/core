@@ -1,49 +1,228 @@
 /**
- * Solidiom site — semantic design tokens.
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Solidiom Site — Semantic Design Tokens
+ * ═══════════════════════════════════════════════════════════════════════════
  *
- * STATUS: placeholder pending BRAND-002.
+ * References: BRAND-001 (palette & typography), BRAND-002 (this file).
  *
- * BRAND-002 ("Define site-local semantic tokens in
- * apps/site/src/assets/tokens.css, including independent light/dark surface
- * hierarchies") has not landed yet. SITE-004 needs a token layer to drive the
- * no-flash theme bootstrap and base layout, so this file defines a minimal,
- * clearly-scoped placeholder set: background/foreground/border/focus-ring
- * roles for the `light` and `dark` color-scheme values written by the
- * bootstrap script (see src/layouts/BaseLayout.astro).
+ * Architecture
+ * ────────────
+ * 1. All tokens use the --sol- prefix for extraction safety — they can be
+ *    published as a package without collision with host-app tokens.
  *
- * When BRAND-002 lands, replace the values below with the approved semantic
- * scale (independent light/dark surface hierarchies, full role set) without
- * changing the token *names* consumed here unless BRAND-002 explicitly
- * renames them — the bootstrap script and base layout only depend on the
- * `--color-*` and `--focus-ring` custom properties, not on how they resolve.
+ * 2. Light and dark modes have INDEPENDENT surface hierarchies; dark mode is
+ *    not merely an inversion of light. Light uses a cool slate canvas with
+ *    white elevation; dark uses a deep slate base with lighter-slate lift.
+ *
+ * 3. Theme selection:
+ *    - data-theme="light" → light tokens (explicit opt-in)
+ *    - data-theme="dark"  → dark tokens (explicit opt-in)
+ *    - No attribute + system preference → prefers-color-scheme media query
+ *    - Default (no attribute, no system pref) → light tokens (:root)
+ *
+ * 4. Legacy compatibility: the old --color-* and --focus-ring names used by
+ *    the bootstrap script and base layout are aliased to --sol- counterparts
+ *    so existing consumers continue to work without changes.
+ *
+ * Spacing Scale (4px base, use directly — not tokenized as custom properties)
+ * ──────────────────────────────────────────────────────────────────────────
+ *   0.5 → 2px   |  1 → 4px   |  1.5 → 6px   |  2 → 8px    |  3 → 12px
+ *   4   → 16px  |  5 → 20px  |  6   → 24px   |  8 → 32px   | 10 → 40px
+ *  12   → 48px  | 16 → 64px  | 20   → 80px   | 24 → 96px   | 32 → 128px
+ *
+ * Typography (set in global.css via --font-* vars)
+ * ──────────────────────────────────────────────────────────────────────────
+ *   Display : Inter Tight
+ *   UI/Body : Inter Variable
+ *   Code    : IBM Plex Mono
  */
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   LIGHT THEME
+   ═══════════════════════════════════════════════════════════════════════════ */
 :root,
 :root[data-theme="light"] {
-  --color-surface: #ffffff;
-  --color-surface-raised: #f7f7f8;
-  --color-foreground: #14141a;
-  --color-foreground-muted: #52525b;
-  --color-border: #e2e2e6;
-  --focus-ring: #0f62fe;
+  /* ── Surfaces ── */
+  --sol-surface-base: #F8FAFC;        /* Canvas — page background */
+  --sol-surface-raised: #FFFFFF;       /* Elevated cards, panels */
+  --sol-surface-overlay: #FFFFFF;      /* Modals, popovers, dropdowns */
+  --sol-surface-sunken: #F1F5F9;      /* Inset areas, code blocks, wells */
+  --sol-surface-inverse: #0F172A;     /* Inverse containers (Slate 950) */
+
+  /* ── Foreground / Text ── */
+  --sol-foreground: #111827;           /* Primary text (Slate 900) */
+  --sol-foreground-muted: #334155;     /* Secondary text (Slate 700) */
+  --sol-foreground-subtle: #64748B;    /* Tertiary/placeholder (Slate 500) */
+  --sol-foreground-inverse: #F8FAFC;   /* Text on inverse surfaces */
+  --sol-foreground-on-primary: #FFFFFF; /* Text on primary-colored bg */
+
+  /* ── Borders ── */
+  --sol-border: #CBD5E1;              /* Default borders (Slate 300) */
+  --sol-border-muted: #E2E8F0;       /* Subtle dividers (Slate 200) */
+  --sol-border-active: #6D66F1;      /* Focused/active borders (Indigo) */
+
+  /* ── Brand Colors (Semantic Roles) ── */
+  --sol-primary: #6D66F1;            /* Primary action/identity (Indigo) */
+  --sol-primary-hover: #5B54E0;      /* Primary hover state */
+  --sol-primary-foreground: #FFFFFF; /* Text on primary backgrounds */
+  --sol-secondary: #3B82F6;          /* Links, secondary actions (Blue) */
+  --sol-accent: #06B6D4;             /* Highlights, active states (Cyan) */
+  --sol-success: #22C55E;            /* Success feedback (Green) */
+  --sol-warning: #F59E0B;            /* Warning feedback (Amber) */
+  --sol-destructive: #E5484D;        /* Critical/error (Red) */
+
+  /* ── Interactive States ── */
+  --sol-focus-ring: #6D66F1;         /* Focus outline color */
+  --sol-focus-ring-width: 2px;       /* Focus outline width */
+  --sol-interactive-hover: rgba(109, 102, 241, 0.06); /* Subtle hover bg */
+  --sol-interactive-active: rgba(109, 102, 241, 0.10); /* Pressed state bg */
+
+  /* ── Radius ── */
+  --sol-radius-sm: 8px;
+  --sol-radius-md: 12px;
+  --sol-radius-lg: 16px;
+  --sol-radius-xl: 20px;
+  --sol-radius-full: 999px;
+
+  /* ── Shadows (restrained, border-first philosophy) ── */
+  --sol-shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --sol-shadow-md: 0 2px 6px -1px rgba(15, 23, 42, 0.06),
+                   0 1px 4px -2px rgba(15, 23, 42, 0.04);
+  --sol-shadow-lg: 0 8px 24px -4px rgba(15, 23, 42, 0.08),
+                   0 2px 8px -4px rgba(15, 23, 42, 0.04);
+
+  /* ── Legacy Aliases (consumed by bootstrap, global.css, prose) ── */
+  --color-surface: var(--sol-surface-base);
+  --color-surface-raised: var(--sol-surface-raised);
+  --color-foreground: var(--sol-foreground);
+  --color-foreground-muted: var(--sol-foreground-muted);
+  --color-border: var(--sol-border);
+  --focus-ring: var(--sol-focus-ring);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   DARK THEME — independently designed, not an inversion of light
+   ═══════════════════════════════════════════════════════════════════════════ */
 :root[data-theme="dark"] {
-  --color-surface: #0b0b0e;
-  --color-surface-raised: #16161b;
-  --color-foreground: #f4f4f5;
-  --color-foreground-muted: #a1a1aa;
-  --color-border: #2a2a31;
-  --focus-ring: #6ea8fe;
+  /* ── Surfaces ── */
+  --sol-surface-base: #0F172A;        /* Deep slate base (Slate 950) */
+  --sol-surface-raised: #1E293B;      /* Elevated cards (Slate 800) */
+  --sol-surface-overlay: #1E293B;     /* Modals, popovers */
+  --sol-surface-sunken: #020617;      /* Deeper than base — true depth */
+  --sol-surface-inverse: #F8FAFC;     /* Inverse containers (Canvas) */
+
+  /* ── Foreground / Text ── */
+  --sol-foreground: #F1F5F9;           /* Primary text (Slate 100) */
+  --sol-foreground-muted: #94A3B8;     /* Secondary text (Slate 400) */
+  --sol-foreground-subtle: #64748B;    /* Tertiary/placeholder (Slate 500) */
+  --sol-foreground-inverse: #0F172A;   /* Text on inverse surfaces */
+  --sol-foreground-on-primary: #FFFFFF; /* Text on primary-colored bg */
+
+  /* ── Borders ── */
+  --sol-border: #334155;              /* Default borders (Slate 700) */
+  --sol-border-muted: #1E293B;       /* Subtle dividers (Slate 800) */
+  --sol-border-active: #8B83F8;      /* Focused/active — lighter indigo for contrast */
+
+  /* ── Brand Colors (adjusted for dark context) ── */
+  --sol-primary: #8B83F8;            /* Slightly lifted indigo for readability */
+  --sol-primary-hover: #A19BFA;      /* Lighter on hover */
+  --sol-primary-foreground: #0F172A; /* Dark text on light primary bg */
+  --sol-secondary: #60A5FA;          /* Blue 400 for dark-mode links */
+  --sol-accent: #22D3EE;             /* Cyan 400 */
+  --sol-success: #4ADE80;            /* Green 400 */
+  --sol-warning: #FBBF24;            /* Amber 400 */
+  --sol-destructive: #F87171;        /* Red 400 */
+
+  /* ── Interactive States ── */
+  --sol-focus-ring: #8B83F8;
+  --sol-focus-ring-width: 2px;
+  --sol-interactive-hover: rgba(139, 131, 248, 0.10);
+  --sol-interactive-active: rgba(139, 131, 248, 0.16);
+
+  /* ── Radius (same across themes) ── */
+  --sol-radius-sm: 8px;
+  --sol-radius-md: 12px;
+  --sol-radius-lg: 16px;
+  --sol-radius-xl: 20px;
+  --sol-radius-full: 999px;
+
+  /* ── Shadows (deeper in dark mode for perceptibility) ── */
+  --sol-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.20);
+  --sol-shadow-md: 0 3px 8px -1px rgba(0, 0, 0, 0.30),
+                   0 1px 4px -2px rgba(0, 0, 0, 0.20);
+  --sol-shadow-lg: 0 10px 30px -4px rgba(0, 0, 0, 0.40),
+                   0 4px 10px -4px rgba(0, 0, 0, 0.25);
+
+  /* ── Legacy Aliases ── */
+  --color-surface: var(--sol-surface-base);
+  --color-surface-raised: var(--sol-surface-raised);
+  --color-foreground: var(--sol-foreground);
+  --color-foreground-muted: var(--sol-foreground-muted);
+  --color-border: var(--sol-border);
+  --focus-ring: var(--sol-focus-ring);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   SYSTEM PREFERENCE FALLBACK
+   When no explicit data-theme is set, respect OS-level dark mode preference.
+   ═══════════════════════════════════════════════════════════════════════════ */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]):not([data-theme="dark"]) {
-    --color-surface: #0b0b0e;
-    --color-surface-raised: #16161b;
-    --color-foreground: #f4f4f5;
-    --color-foreground-muted: #a1a1aa;
-    --color-border: #2a2a31;
-    --focus-ring: #6ea8fe;
+    /* ── Surfaces ── */
+    --sol-surface-base: #0F172A;
+    --sol-surface-raised: #1E293B;
+    --sol-surface-overlay: #1E293B;
+    --sol-surface-sunken: #020617;
+    --sol-surface-inverse: #F8FAFC;
+
+    /* ── Foreground / Text ── */
+    --sol-foreground: #F1F5F9;
+    --sol-foreground-muted: #94A3B8;
+    --sol-foreground-subtle: #64748B;
+    --sol-foreground-inverse: #0F172A;
+    --sol-foreground-on-primary: #FFFFFF;
+
+    /* ── Borders ── */
+    --sol-border: #334155;
+    --sol-border-muted: #1E293B;
+    --sol-border-active: #8B83F8;
+
+    /* ── Brand Colors ── */
+    --sol-primary: #8B83F8;
+    --sol-primary-hover: #A19BFA;
+    --sol-primary-foreground: #0F172A;
+    --sol-secondary: #60A5FA;
+    --sol-accent: #22D3EE;
+    --sol-success: #4ADE80;
+    --sol-warning: #FBBF24;
+    --sol-destructive: #F87171;
+
+    /* ── Interactive States ── */
+    --sol-focus-ring: #8B83F8;
+    --sol-focus-ring-width: 2px;
+    --sol-interactive-hover: rgba(139, 131, 248, 0.10);
+    --sol-interactive-active: rgba(139, 131, 248, 0.16);
+
+    /* ── Radius ── */
+    --sol-radius-sm: 8px;
+    --sol-radius-md: 12px;
+    --sol-radius-lg: 16px;
+    --sol-radius-xl: 20px;
+    --sol-radius-full: 999px;
+
+    /* ── Shadows ── */
+    --sol-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.20);
+    --sol-shadow-md: 0 3px 8px -1px rgba(0, 0, 0, 0.30),
+                     0 1px 4px -2px rgba(0, 0, 0, 0.20);
+    --sol-shadow-lg: 0 10px 30px -4px rgba(0, 0, 0, 0.40),
+                     0 4px 10px -4px rgba(0, 0, 0, 0.25);
+
+    /* ── Legacy Aliases ── */
+    --color-surface: var(--sol-surface-base);
+    --color-surface-raised: var(--sol-surface-raised);
+    --color-foreground: var(--sol-foreground);
+    --color-foreground-muted: var(--sol-foreground-muted);
+    --color-border: var(--sol-border);
+    --focus-ring: var(--sol-focus-ring);
   }
 }
