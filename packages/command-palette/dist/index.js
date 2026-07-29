@@ -1,5 +1,5 @@
 // src/command-palette.tsx
-import { Show, createSignal, onCleanup, onSettled } from "solid-js";
+import { Show, createSignal, createEffect, onCleanup } from "solid-js";
 import {
   createDisclosureState,
   createControllableValue,
@@ -57,29 +57,32 @@ function Root(props) {
     listId: `${baseId}-list`,
     contentId: `${baseId}-content`
   };
-  let contentEl;
-  onSettled(() => {
-    if (!contentEl || !open()) return;
-    const doc = contentEl.ownerDocument;
-    const stack = getLayerStack(doc);
-    const removeLayer = stack.push({ id: ctx.contentId, element: contentEl, modal: true });
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      onDismiss: (reason) => {
-        requestOpenChange(false, createChangeDetails(reason));
-      }
-    });
-    const deactivateFocus = activateFocusScope({
-      element: () => contentEl
-    });
-    return () => {
-      deactivateFocus();
-      removeDismissable();
-      removeLayer();
-    };
-  });
+  const [contentEl, setContentEl] = createSignal(void 0);
+  createEffect(
+    () => open() ? contentEl() : void 0,
+    (el) => {
+      if (!el) return;
+      const doc = el.ownerDocument;
+      const stack = getLayerStack(doc);
+      const removeLayer = stack.push({ id: ctx.contentId, element: el, modal: true });
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        onDismiss: (reason) => {
+          requestOpenChange(false, createChangeDetails(reason));
+        }
+      });
+      const deactivateFocus = activateFocusScope({
+        element: () => el
+      });
+      return () => {
+        deactivateFocus();
+        removeDismissable();
+        removeLayer();
+      };
+    }
+  );
   return /* @__PURE__ */ React.createElement(CommandPaletteContext, { value: ctx }, /* @__PURE__ */ React.createElement(Show, { when: presence.present() }, /* @__PURE__ */ React.createElement(
     "div",
     {
@@ -90,7 +93,7 @@ function Root(props) {
       class: props.class,
       style: props.style,
       ref: (el) => {
-        contentEl = el;
+        setContentEl(el);
       },
       ...applySemanticAttrs({
         scope: "command-palette",

@@ -1,5 +1,5 @@
 // src/index.tsx
-import { Show, onSettled, createContext, useContext } from "solid-js";
+import { Show, createEffect, createSignal, createContext, useContext } from "solid-js";
 import {
   createDisclosureState,
   createStableId,
@@ -66,29 +66,32 @@ function Portal(props) {
 }
 function Content(props) {
   const ctx = useAlertDialogContext();
-  let contentEl;
-  onSettled(() => {
-    if (!contentEl) return;
-    const doc = contentEl.ownerDocument;
-    const stack = getLayerStack(doc);
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: true
-    });
-    const deactivateFocus = activateFocusScope({
-      element: () => contentEl,
-      restoreTarget: () => doc.getElementById(ctx.triggerId)
-    });
-    const deactivateIsolation = activateModalIsolation(contentEl);
-    const releaseScroll = activateScrollLock(doc);
-    return () => {
-      releaseScroll();
-      deactivateIsolation();
-      deactivateFocus();
-      removeLayer();
-    };
-  });
+  const [contentEl, setContentEl] = createSignal();
+  createEffect(
+    () => ctx.present() ? contentEl() : void 0,
+    (el) => {
+      if (!el) return;
+      const doc = el.ownerDocument;
+      const stack = getLayerStack(doc);
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: true
+      });
+      const deactivateFocus = activateFocusScope({
+        element: () => el,
+        restoreTarget: () => doc.getElementById(ctx.triggerId)
+      });
+      const deactivateIsolation = activateModalIsolation(el);
+      const releaseScroll = activateScrollLock(doc);
+      return () => {
+        releaseScroll();
+        deactivateIsolation();
+        deactivateFocus();
+        removeLayer();
+      };
+    }
+  );
   return /* @__PURE__ */ React.createElement(
     "div",
     {
@@ -98,7 +101,7 @@ function Content(props) {
       "aria-labelledby": ctx.titleId,
       "aria-describedby": ctx.descriptionId,
       ref: (el) => {
-        contentEl = el;
+        setContentEl(el);
         props.ref?.(el);
       },
       class: props.class,

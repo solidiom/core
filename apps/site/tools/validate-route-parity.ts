@@ -9,7 +9,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs"
 import { dirname, extname, join, relative, resolve, sep } from "node:path"
 import { fileURLToPath } from "node:url"
-import { LOCALIZED_ROUTE_PATHS, normalizePathname } from "../src/lib/locale"
+import { isLocalizedRoute, LOCALIZED_ROUTE_PATHS, normalizePathname } from "../src/lib/locale"
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const pagesRoot = join(projectRoot, "src", "pages")
@@ -61,7 +61,10 @@ const registeredRoutes = new Set<string>(LOCALIZED_ROUTE_PATHS)
 const allRoutes = new Set([...enRoutes.keys(), ...esRoutes.keys()])
 const missingSpanish = missingValues(enRoutes.keys(), esRoutes)
 const missingEnglish = missingValues(esRoutes.keys(), enRoutes)
-const unregisteredRoutes = [...allRoutes].filter((route) => !registeredRoutes.has(route)).sort()
+const generatedRouteTemplate = /^\/primitives\/\[name\]\/\[view\]\/$/
+const unregisteredRoutes = [...allRoutes]
+  .filter((route) => !isLocalizedRoute(route) && !generatedRouteTemplate.test(route))
+  .sort()
 const unimplementedRegistryRoutes = [...registeredRoutes]
   .filter((route) => !enRoutes.has(route) || !esRoutes.has(route))
   .sort()
@@ -69,7 +72,13 @@ const unimplementedRegistryRoutes = [...registeredRoutes]
 const translatedMetadataErrors = [...esRoutes.entries()].flatMap(([pathname, routeFile]) => {
   const source = readFileSync(join(esPagesRoot, routeFile), "utf8")
   const layoutInvocation = source.match(/<BaseLayout\b[\s\S]*?>/)
-  if (!layoutInvocation) return [`${pathname}: does not render BaseLayout`]
+  const generatedCatalogRoute = /<(PrimitiveRoute|PrimitiveDirectory)\b[\s\S]*?locale=["']es["']/.test(
+    source,
+  )
+  if (generatedCatalogRoute) return []
+  if (!layoutInvocation) {
+    return [`${pathname}: does not render BaseLayout or a localized catalog layout`]
+  }
 
   const missing = ["title", "description"].filter(
     (attribute) => !new RegExp(`\\b${attribute}=`).test(layoutInvocation[0]),

@@ -15,6 +15,7 @@
     "i18n:validate": "pnpm run route-parity && pnpm run translation:check",
     "lighthouse": "tsx ./tools/lighthouse-report.ts",
     "lighthouse:json": "tsx ./tools/lighthouse-report.ts --json",
+    "api": "pnpm --dir ../.. exec nx run-many -t build --projects=tag:layer:primitive && pnpm --dir ../.. api:generate",
     "build": "pnpm run i18n:validate && pnpm run boundaries && astro build",
     "preview": "astro preview",
     "search-index": "pagefind --site dist",
@@ -28,6 +29,7 @@
     "@astrojs/mdx": "7.0.3",
     "@astrojs/sitemap": "3.7.3",
     "@solidiom/astrojs-solid-next": "workspace:*",
+    "@solidiom/dialog": "workspace:*",
     "@solidiom/drawer": "workspace:*",
     "@solidiom/navigation-menu": "workspace:*",
     "@solidjs/web": "catalog:",
@@ -84,6 +86,22 @@
       "test:boundaries": {
         "cache": false
       },
+      "api": {
+        "inputs": [
+          "{projectRoot}/package.json",
+          "{workspaceRoot}/package.json",
+          "{workspaceRoot}/pnpm-lock.yaml",
+          "{workspaceRoot}/tsconfig.base.json",
+          "{workspaceRoot}/tools/generate-api-docs.ts",
+          "{workspaceRoot}/tools/api-schema.ts",
+          "{workspaceRoot}/packages/*/package.json",
+          "{workspaceRoot}/packages/*/src/**/*"
+        ],
+        "outputs": [
+          "{workspaceRoot}/artifacts/api"
+        ],
+        "cache": true
+      },
       "budget-report": {
         "dependsOn": [
           "build"
@@ -109,6 +127,7 @@
       },
       "build": {
         "dependsOn": [
+          "api",
           "^build"
         ],
         "inputs": [

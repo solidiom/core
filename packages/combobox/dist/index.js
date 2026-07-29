@@ -1,5 +1,5 @@
 // src/combobox.tsx
-import { Show, createSignal, onCleanup, onSettled } from "solid-js";
+import { Show, createSignal, createEffect, onCleanup } from "solid-js";
 import {
   createDisclosureState,
   createControllableValue,
@@ -149,36 +149,39 @@ function Input(props) {
 }
 function Content(props) {
   const ctx = useComboboxContext();
-  let contentEl;
-  onSettled(() => {
-    if (!contentEl) return;
-    const doc = contentEl.ownerDocument;
-    const stack = getLayerStack(doc);
-    const removeLayer = stack.push({ id: ctx.listboxId, element: contentEl, modal: false });
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.listboxId,
-      element: () => contentEl,
-      excludeElements: () => {
-        const input = doc.getElementById(ctx.inputId);
-        return input ? [input] : [];
-      },
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason));
-      }
-    });
-    return () => {
-      removeDismissable();
-      removeLayer();
-    };
-  });
+  const [contentEl, setContentEl] = createSignal(void 0);
+  createEffect(
+    () => ctx.open() ? contentEl() : void 0,
+    (el) => {
+      if (!el) return;
+      const doc = el.ownerDocument;
+      const stack = getLayerStack(doc);
+      const removeLayer = stack.push({ id: ctx.listboxId, element: el, modal: false });
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.listboxId,
+        element: () => el,
+        excludeElements: () => {
+          const input = doc.getElementById(ctx.inputId);
+          return input ? [input] : [];
+        },
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason));
+        }
+      });
+      return () => {
+        removeDismissable();
+        removeLayer();
+      };
+    }
+  );
   return /* @__PURE__ */ React.createElement(Show, { when: ctx.open() }, /* @__PURE__ */ React.createElement(
     "div",
     {
       id: ctx.listboxId,
       role: "listbox",
       ref: (el) => {
-        contentEl = el;
+        setContentEl(el);
         props.ref?.(el);
       },
       class: props.class,

@@ -1,0 +1,16 @@
+---
+import PrimitiveRoute from "../../../components/PrimitiveRoute.astro"
+import { getPrimitiveStaticPaths, type RegistryPrimitive } from "../../../lib/catalog"
+
+export function getStaticPaths() {
+  return getPrimitiveStaticPaths()
+}
+
+interface Props {
+  primitive: RegistryPrimitive
+}
+
+const { primitive } = Astro.props
+---
+
+<PrimitiveRoute primitive={primitive} locale="en" view="overview" />

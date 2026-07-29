@@ -1,0 +1,86 @@
+---
+import type { NormalizedApiDocument } from "../../../../tools/api-schema"
+import { getCatalogCopy } from "../lib/catalog"
+import type { Locale } from "../lib/locale"
+
+interface Props {
+  document?: NormalizedApiDocument
+  locale: Locale
+}
+
+const { document, locale } = Astro.props
+const copy = getCatalogCopy(locale)
+
+function signatureLabel(
+  name: string,
+  parameters: Array<{ name: string; type: string; optional: boolean }>,
+): string {
+  return `${name}(${parameters.map((parameter) => `${parameter.name}${parameter.optional ? "?" : ""}: ${parameter.type}`).join(", ")})`
+}
+---
+
+{
+  document ? (
+    <section class="api-reference" aria-labelledby="api-reference-heading">
+      <p class="api-reference__eyebrow">{copy.generatedFrom}</p>
+      <h2 id="api-reference-heading">{copy.api}</h2>
+      {document.exports.length > 0 ? (
+        <div class="api-reference__exports">
+          {document.exports.map((entry) => (
+            <section class="api-reference__export" aria-labelledby={`api-${entry.name}`}>
+              <h3 id={`api-${entry.name}`}>
+                <code>{entry.name}</code>
+                <span>{entry.kind}</span>
+              </h3>
+              {entry.comment?.summary && <p>{entry.comment.summary}</p>}
+              {entry.signatures.map((signature) => (
+                <div class="api-reference__signature">
+                  <code>
+                    {signatureLabel(entry.name, signature.parameters)}: {signature.returns}
+                  </code>
+                </div>
+              ))}
+              {entry.props.length > 0 && (
+                <div class="api-reference__members">
+                  <h4>{copy.props}</h4>
+                  <dl>
+                    {entry.props.map((prop) => (
+                      <div>
+                        <dt>
+                          <code>
+                            {prop.name}
+                            {prop.optional ? "?" : ""}
+                          </code>
+                        </dt>
+                        <dd>
+                          <code>{prop.type}</code>
+                          {prop.comment?.summary ? ` — ${prop.comment.summary}` : ""}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              )}
+              {entry.children && (
+                <p>
+                  <strong>children:</strong> <code>{entry.children.type}</code>
+                </p>
+              )}
+              {entry.source && (
+                <p class="api-reference__source">
+                  <a href={entry.source.url}>{copy.viewSource}</a>
+                </p>
+              )}
+            </section>
+          ))}
+        </div>
+      ) : (
+        <p role="status">{copy.apiUnavailable}</p>
+      )}
+    </section>
+  ) : (
+    <p class="catalog-notice" role="status">
+      {copy.apiUnavailable}
+    </p>
+  )
+}

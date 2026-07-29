@@ -28,6 +28,70 @@ const ROOT = join(__dirname, "..")
 const PACKAGES_DIR = join(ROOT, "packages")
 const REGISTRY_DIR = join(ROOT, "registry")
 
+interface A11yEvidenceRecord {
+  schemaVersion?: unknown
+  primitive?: unknown
+  evidenceIds?: unknown
+  summary?: {
+    passes?: unknown
+    violations?: unknown
+    incomplete?: unknown
+  }
+  lastRun?: unknown
+}
+
+function readA11yEvidence(name: string): { evidenceIds: string[]; lastReviewed?: string } {
+  const evidencePath = join(PACKAGES_DIR, name, "docs", "accessibility", "evidence.json")
+  if (!existsSync(evidencePath)) return { evidenceIds: [] }
+
+  try {
+    const evidence = JSON.parse(readFileSync(evidencePath, "utf8")) as A11yEvidenceRecord
+    const hasPassingSummary =
+      evidence.schemaVersion === 1 &&
+      evidence.primitive === name &&
+      evidence.summary?.violations === 0 &&
+      typeof evidence.summary.passes === "number" &&
+      evidence.summary.passes > 0
+    const evidenceIds = Array.isArray(evidence.evidenceIds)
+      ? evidence.evidenceIds.filter((id): id is string => typeof id === "string")
+      : []
+    return hasPassingSummary && evidenceIds.length > 0
+      ? {
+          evidenceIds,
+          lastReviewed: typeof evidence.lastRun === "string" ? evidence.lastRun : undefined,
+        }
+      : { evidenceIds: [] }
+  } catch {
+    return { evidenceIds: [] }
+  }
+}
+
+function documentationMetadata(name: string): PrimitiveManifestV2["documentation"] {
+  const docsDir = join(PACKAGES_DIR, name, "docs")
+  const localeStatus = (locale: string): "missing" | "draft" =>
+    existsSync(locale === "en" ? docsDir : join(docsDir, locale)) ? "draft" : "missing"
+  const hasCompleteLocale = (locale: string): boolean => {
+    const root = locale === "en" ? docsDir : join(docsDir, locale)
+    const examplesDir = join(root, "examples")
+    return (
+      existsSync(join(root, "overview.md")) &&
+      existsSync(join(root, "accessibility", "contract.md")) &&
+      existsSync(examplesDir) &&
+      readdirSync(examplesDir).some((entry) => entry.endsWith(".md") || entry.endsWith(".mdx"))
+    )
+  }
+  const enComplete = hasCompleteLocale("en")
+  const esComplete = hasCompleteLocale("es")
+
+  return {
+    status: enComplete && esComplete ? "complete" : existsSync(docsDir) ? "draft" : "stub",
+    locales: {
+      en: { status: localeStatus("en") },
+      ...(existsSync(join(docsDir, "es")) ? { es: { status: localeStatus("es") } } : {}),
+    },
+  }
+}
+
 // ─── Capability Detection ────────────────────────────────────────────────────
 
 interface Capability {
@@ -105,11 +169,14 @@ interface PrimitiveManifestV2 extends PrimitiveManifest {
   }
   documentation: {
     status: "stub" | "draft" | "review" | "complete"
-    locales: Record<string, {
-      status: "missing" | "draft" | "stale" | "reviewed"
-      sourceHash?: string
-      lastUpdated?: string
-    }>
+    locales: Record<
+      string,
+      {
+        status: "missing" | "draft" | "stale" | "reviewed"
+        sourceHash?: string
+        lastUpdated?: string
+      }
+    >
   }
   styling: {
     outputs: ("css" | "tailwind" | "unocss")[]
@@ -378,7 +445,10 @@ const SPECIFIER_TO_MODULE: Record<string, string> = {
  *
  * Also returns per-file digests mapping each file path to its individual hash.
  */
-function computeFilesHash(sourceDir: string, files: string[]): { hash: string; fileDigests: Record<string, string> } {
+function computeFilesHash(
+  sourceDir: string,
+  files: string[],
+): { hash: string; fileDigests: Record<string, string> } {
   const sorted = [...files].sort()
   const hashes: string[] = []
   const fileDigests: Record<string, string> = {}
@@ -424,7 +494,9 @@ function generateKeywords(
   const text = `${label} ${description} ${category}`.toLowerCase()
   const words = text.split(/[\s,.\-_/]+/).filter((w) => w.length > 2)
   // Preserve capability and dependency names intact (they may contain hyphens)
-  const preservedTerms = [...capNames, ...depNames].map((t) => t.toLowerCase()).filter((t) => t.length > 2)
+  const preservedTerms = [...capNames, ...depNames]
+    .map((t) => t.toLowerCase())
+    .filter((t) => t.length > 2)
   return [...new Set([...words, ...preservedTerms])].sort()
 }
 
@@ -437,7 +509,13 @@ function detectStylingOutputs(name: string): ("css" | "tailwind" | "unocss")[] {
   const cssRecipePath = join(PACKAGES_DIR, "recipes-css", "source", "recipes", `${name}.tsx`)
   if (existsSync(cssRecipePath)) outputs.push("css")
 
-  const tailwindRecipePath = join(PACKAGES_DIR, "recipes-tailwind", "source", "recipes", `${name}.tsx`)
+  const tailwindRecipePath = join(
+    PACKAGES_DIR,
+    "recipes-tailwind",
+    "source",
+    "recipes",
+    `${name}.tsx`,
+  )
   if (existsSync(tailwindRecipePath)) outputs.push("tailwind")
 
   const unocssRecipePath = join(PACKAGES_DIR, "recipes-unocss", "source", "recipes", `${name}.tsx`)
@@ -517,7 +595,11 @@ function buildRegistry(): void {
 
     // Extract dependencies (only @solidiom/* workspace deps)
     const deps = pkg["dependencies"] as Record<string, string> | undefined
-    const solidiomDeps = deps ? Object.keys(deps).filter((d) => d.startsWith("@solidiom/")).sort() : []
+    const solidiomDeps = deps
+      ? Object.keys(deps)
+          .filter((d) => d.startsWith("@solidiom/"))
+          .sort()
+      : []
 
     // Detect capabilities from port interfaces
     const capabilities = detectCapabilities(sourceDir).sort((a, b) => a.name.localeCompare(b.name))
@@ -574,23 +656,26 @@ function buildRegistry(): void {
     const category = metadata?.["category"] ?? "uncategorized"
 
     const sourceDir = join(PACKAGES_DIR, primitive.name, "source")
-    const docsDir = join(PACKAGES_DIR, primitive.name, "docs")
     const { hash: filesHash, fileDigests } = computeFilesHash(sourceDir, primitive.source.files)
 
     // Detect styling recipe outputs
     const stylingOutputs = detectStylingOutputs(primitive.name)
 
-    // Detect locale documentation
-    const locales: Record<string, { status: "missing" | "draft" | "stale" | "reviewed"; sourceHash?: string; lastUpdated?: string }> = {
-      en: { status: existsSync(docsDir) ? "draft" : "missing" },
-    }
-    const esDocsDir = join(PACKAGES_DIR, primitive.name, "docs", "es")
-    if (existsSync(esDocsDir)) {
-      locales["es"] = { status: "draft" }
-    }
+    // Derive documentation and accessibility state from canonical authored
+    // documents and the generated axe-evidence artifact. Neither state is
+    // hand-authored in the registry output.
+    const documentation = documentationMetadata(primitive.name)
+    const a11yEvidence: { evidenceIds: string[]; lastReviewed?: string } =
+      documentation.status === "complete" ? readA11yEvidence(primitive.name) : { evidenceIds: [] }
 
     // Generate enhanced keywords
-    const keywords = generateKeywords(label, description, category, primitive.capabilities, primitive.dependencies)
+    const keywords = generateKeywords(
+      label,
+      description,
+      category,
+      primitive.capabilities,
+      primitive.dependencies,
+    )
 
     const v2: PrimitiveManifestV2 = {
       ...primitive,
@@ -605,13 +690,11 @@ function buildRegistry(): void {
         installDeps: [...primitive.capabilities.map((c) => c.default)].sort(),
       },
       accessibility: {
-        reviewStatus: "none",
-        evidenceIds: [],
+        reviewStatus: a11yEvidence.evidenceIds.length > 0 ? "automated" : "none",
+        evidenceIds: a11yEvidence.evidenceIds,
+        ...(a11yEvidence.lastReviewed ? { lastReviewed: a11yEvidence.lastReviewed } : {}),
       },
-      documentation: {
-        status: existsSync(docsDir) ? "draft" : "stub",
-        locales,
-      },
+      documentation,
       styling: {
         outputs: stylingOutputs,
         themeCompatible: [],
@@ -675,7 +758,10 @@ function buildRegistry(): void {
         const adapterPkgPath = join(PACKAGES_DIR, `adapter-${a.name}`, "package.json")
         let adapterVersion = "0.0.1-next.0"
         if (existsSync(adapterPkgPath)) {
-          const adapterPkg = JSON.parse(readFileSync(adapterPkgPath, "utf8")) as Record<string, unknown>
+          const adapterPkg = JSON.parse(readFileSync(adapterPkgPath, "utf8")) as Record<
+            string,
+            unknown
+          >
           adapterVersion = (adapterPkg["version"] as string) ?? adapterVersion
         }
         return { ...a, version: adapterVersion }
@@ -690,7 +776,10 @@ function buildRegistry(): void {
     const signature = createHmac("sha256", signKey).update(indexContent).digest("hex")
     indexV2.integrity.signature = signature
     indexV2.integrity.signedAt = now
-    indexV2.integrity.signatureKeyId = createHash("sha256").update(signKey).digest("hex").slice(0, 16)
+    indexV2.integrity.signatureKeyId = createHash("sha256")
+      .update(signKey)
+      .digest("hex")
+      .slice(0, 16)
   }
 
   writeFileSync(join(REGISTRY_DIR, "index.json"), JSON.stringify(indexV2, null, 2) + "\n")
@@ -724,8 +813,8 @@ export {
 export type { PrimitiveManifestV2, IndexManifestV2, Capability }
 
 // Run the build when executed directly
-const isMainModule = process.argv[1]?.endsWith("registry-build.ts") ||
-  process.argv[1]?.endsWith("registry-build")
+const isMainModule =
+  process.argv[1]?.endsWith("registry-build.ts") || process.argv[1]?.endsWith("registry-build")
 
 if (isMainModule) {
   buildRegistry()

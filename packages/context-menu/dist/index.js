@@ -2,10 +2,11 @@
 import {
   Show,
   createSignal,
+  createEffect,
   createContext,
   useContext,
   onCleanup,
-  onSettled
+  untrack
 } from "solid-js";
 import {
   createCollection,
@@ -68,37 +69,40 @@ function Trigger(props) {
 }
 function Content(props) {
   const ctx = useContextMenuContext();
-  let contentEl;
-  onSettled(() => {
-    if (!contentEl) return;
-    const doc = contentEl.ownerDocument;
-    const stack = getLayerStack(doc);
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: true
-    });
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      excludeElements: () => {
-        const trigger = doc.getElementById(ctx.triggerId);
-        return trigger ? [trigger] : [];
-      },
-      onDismiss: () => {
-        ctx.setOpen(false);
+  const [contentEl, setContentEl] = createSignal(void 0);
+  createEffect(
+    () => ctx.open() ? contentEl() : void 0,
+    (el) => {
+      if (!el) return;
+      const doc = el.ownerDocument;
+      const stack = getLayerStack(doc);
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: true
+      });
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        excludeElements: () => {
+          const trigger = doc.getElementById(ctx.triggerId);
+          return trigger ? [trigger] : [];
+        },
+        onDismiss: () => {
+          ctx.setOpen(false);
+        }
+      });
+      const items = untrack(() => ctx.collection.enabledItems());
+      if (items.length > 0) {
+        ctx.rovingFocus.setActiveId(items[0].id);
       }
-    });
-    const items = ctx.collection.enabledItems();
-    if (items.length > 0) {
-      ctx.rovingFocus.setActiveId(items[0].id);
+      return () => {
+        removeDismissable();
+        removeLayer();
+      };
     }
-    return () => {
-      removeDismissable();
-      removeLayer();
-    };
-  });
+  );
   const handleKeyDown = (e) => {
     const intent = resolveNavigationIntent(e.key, {
       orientation: "vertical",
@@ -154,7 +158,7 @@ function Content(props) {
       tabindex: 0,
       onKeyDown: handleKeyDown,
       ref: (el) => {
-        contentEl = el;
+        setContentEl(el);
       },
       class: props.class,
       style: props.style,

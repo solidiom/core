@@ -7,7 +7,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
   "generatedAt": "2025-01-01T00:00:00.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "5e64b5eff1a01916a9d2a5ff4fbbc7b23c95a0758f4207f91730929e8742c08d"
+    "entriesHash": "becffb704b9b2264770da5ff06ca05a51770dad1dba4568de39928d98369dc6d"
   },
   "primitives": [
     {
@@ -471,8 +471,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": true,
+      "documentationStatus": "complete",
       "stylingOutputs": [
         "css",
         "tailwind"
