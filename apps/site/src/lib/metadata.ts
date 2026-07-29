@@ -55,7 +55,13 @@ export function resolvePageMetadata(input: PageMetadataInput): PageMetadata {
  * Always uses the production origin regardless of the current environment.
  */
 export function resolveCanonicalUrl(pathname: string): string {
-  return new URL(pathname, CANONICAL_ORIGIN).toString()
+  const resolved = new URL(pathname, CANONICAL_ORIGIN)
+  // Canonicals must always identify the production route, not a preview host,
+  // query variant, fragment, or externally supplied absolute origin.
+  const canonical = new URL(resolved.pathname, CANONICAL_ORIGIN)
+  canonical.search = ""
+  canonical.hash = ""
+  return canonical.toString()
 }
 
 // ---------------------------------------------------------------------------

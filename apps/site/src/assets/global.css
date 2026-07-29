@@ -10,7 +10,15 @@
 @import "./print.css";
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 * {

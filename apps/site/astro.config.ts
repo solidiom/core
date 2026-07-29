@@ -13,7 +13,16 @@ const processor = unified({
 
 export default defineConfig({
   site: "https://solidiom.org",
-  integrations: [mdx(), sitemap(), solid()],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => {
+        const pathname = new URL(page).pathname
+        return pathname !== "/404/" && pathname !== "/500/"
+      },
+    }),
+    solid(),
+  ],
   markdown: {
     processor,
     syntaxHighlight: "shiki",

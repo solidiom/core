@@ -1,29 +1,18 @@
 /**
  * ThemeToggle — persistent system/light/dark theme switcher (SITE-009).
  *
- * Three-state toggle button that cycles: system → light → dark → system.
- * Reads the initial preference from the `data-theme-preference` attribute
- * set by the blocking bootstrap script so there is never a hydration
- * mismatch — the component initializes from the same synchronous source.
- *
- * On change:
- *   1. Persists the new preference to localStorage.
- *   2. Updates `data-theme` (effective) and `data-theme-preference` on <html>.
- *   3. When preference is "system", listens for live OS changes.
- *
- * Accessibility:
- *   - Renders a single `<button>` with aria-label describing the current
- *     state (e.g. "Theme: system (dark). Click to switch to light.").
- *   - Icons are aria-hidden decorative elements.
- *   - Focus-visible ring via the existing :focus-visible global rule.
+ * The blocking BaseLayout bootstrap owns the before-paint root attributes.
+ * This hydrated controller reads that already-resolved state from `<html>`;
+ * it deliberately does not derive its initial state from SSR signals, which
+ * Solid 2 can preserve during hydration. That prevents the client from
+ * replacing a persisted/system preference with an SSR default.
  */
-import { createSignal, createEffect } from "solid-js"
 import {
   THEME_STORAGE_KEY,
   THEME_PREFERENCES,
   resolveEffectiveTheme,
-  type ThemePreference,
   type EffectiveTheme,
+  type ThemePreference,
 } from "../lib/bootstrap-theme"
 
 function getInitialPreference(): ThemePreference {
@@ -34,83 +23,96 @@ function getInitialPreference(): ThemePreference {
 }
 
 function getSystemIsDark(): boolean {
-  if (typeof window === "undefined") return false
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false
-}
-
-const LABELS: Record<ThemePreference, string> = {
-  system: "System",
-  light: "Light",
-  dark: "Dark",
+  if (typeof document === "undefined") return false
+  return document.documentElement.getAttribute("data-theme") === "dark"
 }
 
 function nextPreference(current: ThemePreference): ThemePreference {
-  const idx = THEME_PREFERENCES.indexOf(current)
-  return THEME_PREFERENCES[(idx + 1) % THEME_PREFERENCES.length]
+  const index = THEME_PREFERENCES.indexOf(current)
+  return THEME_PREFERENCES[(index + 1) % THEME_PREFERENCES.length]
+}
+
+function labelFor(preference: ThemePreference, theme: EffectiveTheme): string {
+  const next = nextPreference(preference)
+  if (preference === "system") {
+    return `Theme: system (${theme}). Click to switch to ${next}.`
+  }
+  return `Theme: ${preference}. Click to switch to ${next}.`
+}
+
+function applyButtonState(
+  button: HTMLButtonElement,
+  preference: ThemePreference,
+  theme: EffectiveTheme,
+): void {
+  button.dataset.themePreference = preference
+  button.setAttribute("aria-label", labelFor(preference, theme))
+}
+
+function applyTheme(button: HTMLButtonElement, preference: ThemePreference): void {
+  const root = document.documentElement
+  const theme = resolveEffectiveTheme(
+    preference,
+    window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false,
+  )
+
+  root.setAttribute("data-theme", theme)
+  root.setAttribute("data-theme-preference", preference)
+  root.style.colorScheme = theme
+  applyButtonState(button, preference, theme)
+
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, preference)
+  } catch {
+    // Storage can be unavailable in privacy-restricted environments.
+  }
 }
 
 export function ThemeToggle() {
-  const [preference, setPreference] = createSignal<ThemePreference>(getInitialPreference())
-  const [systemDark, setSystemDark] = createSignal(getSystemIsDark())
+  let button: HTMLButtonElement | undefined
 
-  const effectiveTheme = (): EffectiveTheme => resolveEffectiveTheme(preference(), systemDark())
+  function initialize(element: HTMLButtonElement) {
+    button = element
+    if (typeof window === "undefined") return
 
-  // Listen for system preference changes when in "system" mode.
-  createEffect(
-    () => preference(),
-    (pref) => {
-      if (pref !== "system") return
-      if (typeof window === "undefined") return
+    const preference = getInitialPreference()
+    const theme: EffectiveTheme = getSystemIsDark() ? "dark" : "light"
+    applyButtonState(element, preference, theme)
 
-      const mql = window.matchMedia("(prefers-color-scheme: dark)")
-      const handler = (e: MediaQueryListEvent) => {
-        setSystemDark(e.matches)
-      }
-      mql.addEventListener("change", handler)
-      return () => mql.removeEventListener("change", handler)
-    },
-  )
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
+    const handleSystemChange = () => {
+      if (document.documentElement.getAttribute("data-theme-preference") !== "system") return
+      const resolvedTheme: EffectiveTheme = mediaQuery.matches ? "dark" : "light"
+      document.documentElement.setAttribute("data-theme", resolvedTheme)
+      document.documentElement.style.colorScheme = resolvedTheme
+      applyButtonState(element, "system", resolvedTheme)
+    }
 
-  // Sync attributes and localStorage whenever preference or system changes.
-  createEffect(
-    () => ({ pref: preference(), theme: effectiveTheme() }),
-    ({ pref, theme }) => {
-      document.documentElement.setAttribute("data-theme", theme)
-      document.documentElement.setAttribute("data-theme-preference", pref)
-
-      try {
-        localStorage.setItem(THEME_STORAGE_KEY, pref)
-      } catch {
-        // localStorage may be unavailable (private browsing, quota).
-      }
-    },
-  )
-
-  function handleClick() {
-    setPreference(nextPreference(preference()))
+    mediaQuery.addEventListener("change", handleSystemChange)
   }
 
-  const ariaLabel = () => {
-    const pref = preference()
-    const eff = effectiveTheme()
-    const next = nextPreference(pref)
-    if (pref === "system") {
-      return `Theme: system (${eff}). Click to switch to ${LABELS[next].toLowerCase()}.`
-    }
-    return `Theme: ${pref}. Click to switch to ${LABELS[next].toLowerCase()}.`
+  function handleClick() {
+    if (!button || typeof document === "undefined") return
+    applyTheme(button, nextPreference(getInitialPreference()))
   }
 
   return (
     <button
       type="button"
+      ref={initialize}
       class="theme-toggle"
-      aria-label={ariaLabel()}
+      data-theme-preference="system"
+      aria-label="Theme: system (light). Click to switch to light."
       onClick={handleClick}
     >
-      <span class="theme-toggle__icon" aria-hidden="true">
-        {preference() === "system" && <SystemIcon />}
-        {preference() === "light" && <SunIcon />}
-        {preference() === "dark" && <MoonIcon />}
+      <span class="theme-toggle__icon" data-theme-icon="system" aria-hidden="true">
+        <SystemIcon />
+      </span>
+      <span class="theme-toggle__icon" data-theme-icon="light" aria-hidden="true">
+        <SunIcon />
+      </span>
+      <span class="theme-toggle__icon" data-theme-icon="dark" aria-hidden="true">
+        <MoonIcon />
       </span>
     </button>
   )
