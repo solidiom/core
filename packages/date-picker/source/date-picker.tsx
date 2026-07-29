@@ -7,7 +7,7 @@
  * Parts: Root, Input, Trigger, Content, Calendar, Header, Grid, Cell.
  */
 
-import { type Accessor, createSignal, createMemo, onSettled, Show, untrack } from "solid-js"
+import { type Accessor, createSignal, createEffect, createMemo, Show, untrack } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -183,29 +183,32 @@ export interface DatePickerContentProps {
 /** Popup container with dismissable layer and focus trapping. */
 export function Content(props: DatePickerContentProps) {
   const ctx = useDatePickerContext()
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement | undefined>(undefined)
 
-  onSettled(() => {
-    if (!contentEl) return
-    const doc = contentEl.ownerDocument
-    const stack = getLayerStack(doc)
-    const removeLayer = stack.push({ id: ctx.contentId, element: contentEl, modal: false })
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      onDismiss: (reason) => ctx.requestOpenChange(false, createChangeDetails(reason)),
-    })
-    const deactivateFocus = activateFocusScope({
-      element: () => contentEl,
-      restoreTarget: () => doc.getElementById(ctx.triggerId),
-    })
-    return () => {
-      deactivateFocus()
-      removeDismissable()
-      removeLayer()
-    }
-  })
+  createEffect(
+    () => (ctx.present() ? contentEl() : undefined),
+    (el) => {
+      if (!el) return
+      const doc = el.ownerDocument
+      const stack = getLayerStack(doc)
+      const removeLayer = stack.push({ id: ctx.contentId, element: el, modal: false })
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        onDismiss: (reason) => ctx.requestOpenChange(false, createChangeDetails(reason)),
+      })
+      const deactivateFocus = activateFocusScope({
+        element: () => el,
+        restoreTarget: () => doc.getElementById(ctx.triggerId),
+      })
+      return () => {
+        deactivateFocus()
+        removeDismissable()
+        removeLayer()
+      }
+    },
+  )
 
   return (
     <Show when={ctx.present()}>
@@ -214,7 +217,7 @@ export function Content(props: DatePickerContentProps) {
         role="dialog"
         aria-modal="true"
         ref={(el: HTMLDivElement) => {
-          contentEl = el
+          setContentEl(el)
           props.ref?.(el)
         }}
         class={props.class}

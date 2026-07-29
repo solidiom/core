@@ -5,7 +5,7 @@
  * Parts: Root, Trigger, Content (listbox), Item, ItemText, ItemIndicator, Value, HiddenInput.
  */
 
-import { type Accessor, Show, onCleanup, onSettled } from "solid-js"
+import { type Accessor, Show, createSignal, createEffect, onCleanup } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -162,32 +162,35 @@ export interface SelectContentProps {
 
 export function Content(props: SelectContentProps) {
   const ctx = useSelectContext()
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement | undefined>(undefined)
 
-  onSettled(() => {
-    if (!contentEl) return
-    const doc = contentEl.ownerDocument
-    const stack = getLayerStack(doc)
-    const removeLayer = stack.push({ id: ctx.listboxId, element: contentEl, modal: false })
+  createEffect(
+    () => (ctx.open() ? contentEl() : undefined),
+    (el) => {
+      if (!el) return
+      const doc = el.ownerDocument
+      const stack = getLayerStack(doc)
+      const removeLayer = stack.push({ id: ctx.listboxId, element: el, modal: false })
 
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.listboxId,
-      element: () => contentEl,
-      excludeElements: () => {
-        const trigger = doc.getElementById(ctx.triggerId)
-        return trigger ? [trigger] : []
-      },
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason))
-      },
-    })
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.listboxId,
+        element: () => el,
+        excludeElements: () => {
+          const trigger = doc.getElementById(ctx.triggerId)
+          return trigger ? [trigger] : []
+        },
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason))
+        },
+      })
 
-    return () => {
-      removeDismissable()
-      removeLayer()
-    }
-  })
+      return () => {
+        removeDismissable()
+        removeLayer()
+      }
+    },
+  )
 
   const handleKeyDown = (e: KeyboardEvent) => {
     const intent = resolveNavigationIntent(e.key, {
@@ -232,7 +235,7 @@ export function Content(props: SelectContentProps) {
         tabindex={0}
         onKeyDown={handleKeyDown}
         ref={(el: HTMLDivElement) => {
-          contentEl = el
+          setContentEl(el)
           props.ref?.(el)
         }}
         {...applySemanticAttrs({

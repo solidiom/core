@@ -9,10 +9,10 @@ import {
   type Accessor,
   Show,
   createSignal,
+  createEffect,
   createContext,
   useContext,
   onCleanup,
-  onSettled,
 } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
@@ -165,52 +165,55 @@ export interface MenuContentProps {
 /** Menu content panel with dismiss behavior, focus trapping, and keyboard navigation. */
 export function Content(props: MenuContentProps) {
   const ctx = useMenuContext()
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement | undefined>(undefined)
 
-  onSettled(() => {
-    if (!contentEl) return
-    const doc = contentEl.ownerDocument
+  createEffect(
+    () => (ctx.open() ? contentEl() : undefined),
+    (el) => {
+      if (!el) return
+      const doc = el.ownerDocument
 
-    // Register layer
-    const stack = getLayerStack(doc)
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: true,
-    })
+      // Register layer
+      const stack = getLayerStack(doc)
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: true,
+      })
 
-    // Dismissable layer
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      excludeElements: () => {
-        const trigger = doc.getElementById(ctx.triggerId)
-        return trigger ? [trigger] : []
-      },
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason))
-      },
-    })
+      // Dismissable layer
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        excludeElements: () => {
+          const trigger = doc.getElementById(ctx.triggerId)
+          return trigger ? [trigger] : []
+        },
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason))
+        },
+      })
 
-    // Focus trapping
-    const deactivateFocus = activateFocusScope({
-      element: () => contentEl,
-      restoreTarget: () => ctx.triggerRef() as HTMLElement | undefined,
-    })
+      // Focus trapping
+      const deactivateFocus = activateFocusScope({
+        element: () => el,
+        restoreTarget: () => ctx.triggerRef() as HTMLElement | undefined,
+      })
 
-    // Focus first enabled item
-    const items = ctx.collection.enabledItems()
-    if (items.length > 0) {
-      ctx.rovingFocus.setActiveId(items[0]!.id)
-    }
+      // Focus first enabled item
+      const items = ctx.collection.enabledItems()
+      if (items.length > 0) {
+        ctx.rovingFocus.setActiveId(items[0]!.id)
+      }
 
-    return () => {
-      deactivateFocus()
-      removeDismissable()
-      removeLayer()
-    }
-  })
+      return () => {
+        deactivateFocus()
+        removeDismissable()
+        removeLayer()
+      }
+    },
+  )
 
   const handleKeyDown = (e: KeyboardEvent) => {
     const intent = resolveNavigationIntent(e.key, {
@@ -265,7 +268,7 @@ export function Content(props: MenuContentProps) {
         tabindex={0}
         onKeyDown={handleKeyDown}
         ref={(el: HTMLDivElement) => {
-          contentEl = el
+          setContentEl(el)
           props.ref?.(el)
         }}
         class={props.class}

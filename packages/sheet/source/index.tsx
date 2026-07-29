@@ -1,6 +1,6 @@
 /** @solidiom/sheet — Side-panel dialog. Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close. */
 
-import { type Accessor, Show, onSettled, createContext, useContext } from "solid-js"
+import { type Accessor, Show, createEffect, createSignal, createContext, useContext } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -174,52 +174,55 @@ export function Content(props: SheetContentProps) {
   const ctx = useSheetContext()
   const shouldTrapFocus = () => props.trapFocus ?? true
 
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement>()
 
-  onSettled(() => {
-    if (!contentEl) return
-    const doc = contentEl.ownerDocument
+  createEffect(
+    () => (ctx.present() ? contentEl() : undefined),
+    (el) => {
+      if (!el) return
+      const doc = el.ownerDocument
 
-    // Register layer
-    const stack = getLayerStack(doc)
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: true,
-    })
+      // Register layer
+      const stack = getLayerStack(doc)
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: true,
+      })
 
-    // Dismissable layer
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason))
-      },
-    })
+      // Dismissable layer
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason))
+        },
+      })
 
-    // Focus scope
-    const deactivateFocus = shouldTrapFocus()
-      ? activateFocusScope({
-          element: () => contentEl,
-          restoreTarget: () => doc.getElementById(ctx.triggerId),
-        })
-      : () => {}
+      // Focus scope
+      const deactivateFocus = shouldTrapFocus()
+        ? activateFocusScope({
+            element: () => el,
+            restoreTarget: () => doc.getElementById(ctx.triggerId),
+          })
+        : () => {}
 
-    // Modal isolation
-    const deactivateIsolation = activateModalIsolation(contentEl)
+      // Modal isolation
+      const deactivateIsolation = activateModalIsolation(el)
 
-    // Scroll lock
-    const releaseScroll = activateScrollLock(doc)
+      // Scroll lock
+      const releaseScroll = activateScrollLock(doc)
 
-    return () => {
-      releaseScroll()
-      deactivateIsolation()
-      deactivateFocus()
-      removeDismissable()
-      removeLayer()
-    }
-  })
+      return () => {
+        releaseScroll()
+        deactivateIsolation()
+        deactivateFocus()
+        removeDismissable()
+        removeLayer()
+      }
+    },
+  )
 
   return (
     <div
@@ -230,7 +233,7 @@ export function Content(props: SheetContentProps) {
       aria-describedby={ctx.descriptionId}
       data-side={ctx.side}
       ref={(el: HTMLDivElement) => {
-        contentEl = el
+        setContentEl(el)
         props.ref?.(el)
       }}
       class={props.class}
