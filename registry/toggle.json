@@ -35,7 +35,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -49,6 +49,7 @@
       "can",
       "input",
       "off",
+      "runtime",
       "state",
       "that",
       "toggle",
@@ -57,8 +58,16 @@
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "57e9909a47444ed4ab8652d3779363739af9bc4f46ea1dbeae6c1f090dd2b350",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "a7b310d0565fe836bd33e2ed5090746f98c9f08f77bcf30d1462898b6245bc77"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/toggle"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

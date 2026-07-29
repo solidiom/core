@@ -41,26 +41,40 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
   "styling": {
-    "outputs": [],
+    "outputs": [
+      "css",
+      "tailwind"
+    ],
     "themeCompatible": []
   },
   "search": {
     "keywords": [
       "content",
       "navigation",
+      "runtime",
       "switcher",
       "tabbed",
       "tabs"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "be1a6bf15fb0fd4e0da4f861a4a5f82810918481e0ea5107bdf57be9c7467ceb",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "6d47cad4f11cf63e683e5444a9a3ac6fb9474e32d7d3199e89083e234af15c3a",
+      "src/tabs-context.ts": "bcc9b7924560f2bbb04a6535cc2e435fef8818b37cd955f1957e83a379b7532c",
+      "src/tabs.tsx": "9b1e8eb3290082742b85353cc70b6e7486d61e8b00c1f894d570cf08870949de"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/tabs"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

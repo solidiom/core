@@ -36,12 +36,15 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
   "styling": {
-    "outputs": [],
+    "outputs": [
+      "css",
+      "tailwind"
+    ],
     "themeCompatible": []
   },
   "search": {
@@ -51,12 +54,24 @@
       "clickable",
       "for",
       "input",
+      "runtime",
       "trigger"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "bd11e2235e49056434128b8f40cfeb541e444af85af069a1f3817678e8462bbc",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/button-group.tsx": "0657233624aaa9616b34e10a1c2941cc9cf8d2677952fd61891615aaf8d84128",
+      "src/icon-button.tsx": "7a0925d5dddd30e0ba2ee660843807bd81ba7413fef095d9ab83fb33271488ac",
+      "src/index.tsx": "afbf08de5a4fd3fd5cc54accfc155f04df05e5894a64914fc4903e69452a3855",
+      "src/toggle-button.tsx": "a5ca880d302fddc1c78b5f7c609fbaf3c228fadddcbfa7e563ccb1d56748013e"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/button"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

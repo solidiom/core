@@ -206,8 +206,162 @@ jobs:
             docs/axe-scan-results.md
           retention-days: 30
 
+  # ─── CI-002: Site Check/Build/E2E ───────────────────────────────────────────
+
+  site-check:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @solidiom/site check
+      - run: pnpm --filter @solidiom/site run boundaries
+      - run: pnpm --filter @solidiom/site run route-parity
+
+  site-build:
+    needs: [install, site-check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @solidiom/site build
+      - uses: actions/upload-artifact@v6
+        with:
+          name: site-dist
+          path: apps/site/dist
+
+  site-e2e:
+    needs: site-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: apps/site/dist
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: pnpm --filter @solidiom/site run test:e2e
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: site-e2e-results
+          path: test-results/site-e2e
+          retention-days: 7
+
+  # ─── CI-003: Visual/Lighthouse CI (Advisory Mode) ──────────────────────────────
+
+  site-visual:
+    needs: site-build
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: apps/site/dist
+      - run: npx playwright install --with-deps chromium
+      - run: pnpm --filter @solidiom/site run test:visual
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: site-visual-diffs
+          path: test-results/site-visual
+          retention-days: 7
+
+  site-lighthouse:
+    needs: site-build
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: apps/site/dist
+      - name: Install Chrome for Lighthouse
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      - run: pnpm --filter @solidiom/site run lighthouse:json
+      - uses: actions/upload-artifact@v6
+        with:
+          name: site-lighthouse-report
+          path: apps/site/lighthouse-report
+          retention-days: 30
+
+  # ─── Gate Jobs ─────────────────────────────────────────────────────────────────
+
   phase1-gate:
-    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan]
+    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

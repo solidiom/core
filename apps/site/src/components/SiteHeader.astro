@@ -10,6 +10,7 @@
  * rather than gating the content itself.
  */
 import { SiteHeader, type NavLink } from "./SiteHeader"
+import { resolveLocale } from "../lib/locale"
 
 interface Props {
   links: NavLink[]
@@ -19,6 +20,7 @@ interface Props {
 
 const { links, resourceLinks, homeHref } = Astro.props
 const pathname = Astro.url.pathname
+const locale = resolveLocale(pathname)
 ---
 
 <SiteHeader
@@ -26,5 +28,6 @@ const pathname = Astro.url.pathname
   resourceLinks={resourceLinks}
   pathname={pathname}
   homeHref={homeHref}
+  locale={locale}
   client:load
 />

@@ -36,7 +36,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -49,13 +49,22 @@
       "collapsible",
       "expandable",
       "layout",
+      "runtime",
       "section",
       "single"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "f02b4727361bbb68e11079770e83c5c7a7788a2fe39153de016d891c73915a74",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "e87667e7585ea9c4fd43c0fb9cfeb46905b93487972c5728e299c49395c2e068"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/collapsible"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

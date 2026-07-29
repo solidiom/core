@@ -34,7 +34,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -50,6 +50,7 @@
       "measurement",
       "meter",
       "range",
+      "runtime",
       "scalar",
       "signal",
       "strength)",
@@ -58,8 +59,17 @@
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "21c275b9a0f251d9aa82399a44c4bbc0e58a8e79db7443a1488e1b0b741d665b",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/derive-status.ts": "b9a04deecaea3ae75023eb756629cdf2b26a2de0f573e25d3b63bda5b09ddb5c",
+      "src/index.tsx": "1ba74338778b5b554a0fd18cdb7afda7ec0609d199e2ef677ef88b11de456642"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/meter"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

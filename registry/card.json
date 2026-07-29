@@ -33,7 +33,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -51,12 +51,21 @@
       "footer",
       "header",
       "layout",
+      "runtime",
       "with"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "5740b25414e7264a95b2cfba96319764634a7c695a2c7921af8cb601d9a9b220",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "05c962b66181d38c43b80c8d8d446b9326cc88bb8069949cf54eb121b738fba2"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/card"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

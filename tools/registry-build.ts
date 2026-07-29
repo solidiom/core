@@ -19,7 +19,8 @@
 import { readdirSync, readFileSync, writeFileSync, existsSync, statSync, unlinkSync } from "node:fs"
 import { join, relative, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { createHash } from "node:crypto"
+import { createHash, createHmac } from "node:crypto"
+import { execSync } from "node:child_process"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -118,29 +119,18 @@ interface PrimitiveManifestV2 extends PrimitiveManifest {
     keywords: string[]
   }
   integrity: {
+    algorithm: "sha256"
     filesHash: string
+    fileDigests: Record<string, string>
     manifestSignature?: string
     lastGenerated: string
   }
+  provenance: {
+    repository: string
+    directory: string
+    sourceCommit?: string
+  }
   lastUpdated: string
-}
-
-interface IndexManifest {
-  version: number
-  generatedAt: string
-  primitives: Array<{
-    name: string
-    version: string
-    package: string
-    label?: string
-    description?: string
-    category?: string
-  }>
-  adapters: Array<{
-    name: string
-    package: string
-    capability: string
-  }>
 }
 
 interface IndexManifestV2 {
@@ -148,8 +138,11 @@ interface IndexManifestV2 {
   version: 2
   generatedAt: string
   integrity: {
+    algorithm: "sha256"
     entriesHash: string
     signature?: string
+    signedAt?: string
+    signatureKeyId?: string
   }
   primitives: Array<{
     name: string
@@ -162,6 +155,8 @@ interface IndexManifestV2 {
     deliverables: string[]
     hasAccessibilityEvidence: boolean
     documentationStatus: string
+    stylingOutputs: string[]
+    searchKeywords: string[]
   }>
   adapters: Array<{
     name: string
@@ -231,7 +226,7 @@ function collectSourceFiles(dir: string): string[] {
     }
   }
   walk(dir)
-  return files
+  return files.sort()
 }
 
 /** Extract runtime module paths from source imports of @solidiom/runtime. */
@@ -380,10 +375,13 @@ const SPECIFIER_TO_MODULE: Record<string, string> = {
  * 2. SHA-256 each file's raw content.
  * 3. Concatenate hex hashes (no separator).
  * 4. SHA-256 the concatenation.
+ *
+ * Also returns per-file digests mapping each file path to its individual hash.
  */
-function computeFilesHash(sourceDir: string, files: string[]): string {
+function computeFilesHash(sourceDir: string, files: string[]): { hash: string; fileDigests: Record<string, string> } {
   const sorted = [...files].sort()
   const hashes: string[] = []
+  const fileDigests: Record<string, string> = {}
 
   for (const file of sorted) {
     // Files are stored as "src/foo.ts" but live in "source/foo.ts"
@@ -391,11 +389,14 @@ function computeFilesHash(sourceDir: string, files: string[]): string {
     const fullPath = join(sourceDir, relativePath)
     if (!existsSync(fullPath)) continue
     const content = readFileSync(fullPath)
-    hashes.push(createHash("sha256").update(content).digest("hex"))
+    const digest = createHash("sha256").update(content).digest("hex")
+    hashes.push(digest)
+    fileDigests[file] = digest
   }
 
   const concatenated = hashes.join("")
-  return createHash("sha256").update(concatenated).digest("hex")
+  const hash = createHash("sha256").update(concatenated).digest("hex")
+  return { hash, fileDigests }
 }
 
 /**
@@ -409,12 +410,56 @@ function computeEntriesHash(entries: Array<{ name: string; filesHash: string }>)
 }
 
 /**
- * Generate search keywords from label, description, and category.
+ * Generate search keywords from label, description, category, capabilities, and dependencies.
  */
-function generateKeywords(label: string, description: string, category: string): string[] {
+function generateKeywords(
+  label: string,
+  description: string,
+  category: string,
+  capabilities: Capability[],
+  dependencies: string[],
+): string[] {
+  const capNames = capabilities.map((c) => c.name)
+  const depNames = dependencies.map((d) => d.replace("@solidiom/", ""))
   const text = `${label} ${description} ${category}`.toLowerCase()
   const words = text.split(/[\s,.\-_/]+/).filter((w) => w.length > 2)
-  return [...new Set(words)].sort()
+  // Preserve capability and dependency names intact (they may contain hyphens)
+  const preservedTerms = [...capNames, ...depNames].map((t) => t.toLowerCase()).filter((t) => t.length > 2)
+  return [...new Set([...words, ...preservedTerms])].sort()
+}
+
+// ─── Recipe Detection ────────────────────────────────────────────────────────
+
+/** Detect which styling recipe outputs exist for a given primitive name. */
+function detectStylingOutputs(name: string): ("css" | "tailwind" | "unocss")[] {
+  const outputs: ("css" | "tailwind" | "unocss")[] = []
+
+  const cssRecipePath = join(PACKAGES_DIR, "recipes-css", "source", "recipes", `${name}.tsx`)
+  if (existsSync(cssRecipePath)) outputs.push("css")
+
+  const tailwindRecipePath = join(PACKAGES_DIR, "recipes-tailwind", "source", "recipes", `${name}.tsx`)
+  if (existsSync(tailwindRecipePath)) outputs.push("tailwind")
+
+  const unocssRecipePath = join(PACKAGES_DIR, "recipes-unocss", "source", "recipes", `${name}.tsx`)
+  if (existsSync(unocssRecipePath)) outputs.push("unocss")
+
+  return outputs.sort()
+}
+
+// ─── Deterministic Timestamp ─────────────────────────────────────────────────
+
+/** Get a deterministic timestamp: env override > git HEAD commit date > current time. */
+function getDeterministicTimestamp(): string {
+  if (process.env.REGISTRY_TIMESTAMP) {
+    return process.env.REGISTRY_TIMESTAMP
+  }
+  try {
+    const gitDate = execSync("git log -1 --format=%cI", { cwd: ROOT, encoding: "utf8" }).trim()
+    if (gitDate) return new Date(gitDate).toISOString()
+  } catch {
+    // git not available, fall through
+  }
+  return new Date().toISOString()
 }
 
 // ─── Main Build Logic ────────────────────────────────────────────────────────
@@ -472,10 +517,10 @@ function buildRegistry(): void {
 
     // Extract dependencies (only @solidiom/* workspace deps)
     const deps = pkg["dependencies"] as Record<string, string> | undefined
-    const solidiomDeps = deps ? Object.keys(deps).filter((d) => d.startsWith("@solidiom/")) : []
+    const solidiomDeps = deps ? Object.keys(deps).filter((d) => d.startsWith("@solidiom/")).sort() : []
 
     // Detect capabilities from port interfaces
-    const capabilities = detectCapabilities(sourceDir)
+    const capabilities = detectCapabilities(sourceDir).sort((a, b) => a.name.localeCompare(b.name))
 
     // Extract runtime modules used
     const runtimeModules = extractRuntimeModules(sourceDir)
@@ -488,7 +533,7 @@ function buildRegistry(): void {
         : `src/${sourceFiles[0]}`
 
     // Map source files to src/ paths (as they'd appear in the consumer project)
-    const srcFiles = sourceFiles.map((f) => `src/${f}`)
+    const srcFiles = sourceFiles.map((f) => `src/${f}`).sort()
 
     const manifest: PrimitiveManifest = {
       name,
@@ -516,7 +561,7 @@ function buildRegistry(): void {
   }
 
   // Generate V2 manifests with integrity and metadata
-  const now = new Date().toISOString()
+  const now = getDeterministicTimestamp()
   const v2Manifests: PrimitiveManifestV2[] = []
 
   for (const primitive of primitives) {
@@ -530,7 +575,22 @@ function buildRegistry(): void {
 
     const sourceDir = join(PACKAGES_DIR, primitive.name, "source")
     const docsDir = join(PACKAGES_DIR, primitive.name, "docs")
-    const filesHash = computeFilesHash(sourceDir, primitive.source.files)
+    const { hash: filesHash, fileDigests } = computeFilesHash(sourceDir, primitive.source.files)
+
+    // Detect styling recipe outputs
+    const stylingOutputs = detectStylingOutputs(primitive.name)
+
+    // Detect locale documentation
+    const locales: Record<string, { status: "missing" | "draft" | "stale" | "reviewed"; sourceHash?: string; lastUpdated?: string }> = {
+      en: { status: existsSync(docsDir) ? "draft" : "missing" },
+    }
+    const esDocsDir = join(PACKAGES_DIR, primitive.name, "docs", "es")
+    if (existsSync(esDocsDir)) {
+      locales["es"] = { status: "draft" }
+    }
+
+    // Generate enhanced keywords
+    const keywords = generateKeywords(label, description, category, primitive.capabilities, primitive.dependencies)
 
     const v2: PrimitiveManifestV2 = {
       ...primitive,
@@ -542,7 +602,7 @@ function buildRegistry(): void {
       deliverables: { primitive: true },
       cli: {
         addCommand: `solidiom add ${primitive.name}`,
-        installDeps: primitive.capabilities.map((c) => c.default),
+        installDeps: [...primitive.capabilities.map((c) => c.default)].sort(),
       },
       accessibility: {
         reviewStatus: "none",
@@ -550,18 +610,24 @@ function buildRegistry(): void {
       },
       documentation: {
         status: existsSync(docsDir) ? "draft" : "stub",
-        locales: { en: { status: "stub" } },
+        locales,
       },
       styling: {
-        outputs: [],
+        outputs: stylingOutputs,
         themeCompatible: [],
       },
       search: {
-        keywords: generateKeywords(label, description, category),
+        keywords,
       },
       integrity: {
+        algorithm: "sha256",
         filesHash,
+        fileDigests,
         lastGenerated: now,
+      },
+      provenance: {
+        repository: "https://github.com/solidiom/solidiom",
+        directory: `packages/${primitive.name}`,
       },
       lastUpdated: now,
     }
@@ -584,7 +650,7 @@ function buildRegistry(): void {
     $schema: "https://solidiom.dev/schemas/registry-index/v2.json",
     version: 2,
     generatedAt: now,
-    integrity: { entriesHash },
+    integrity: { algorithm: "sha256", entriesHash },
     primitives: v2Manifests
       .map((m) => ({
         name: m.name,
@@ -596,9 +662,12 @@ function buildRegistry(): void {
         status: m.status,
         deliverables: Object.entries(m.deliverables)
           .filter(([, v]) => v === true)
-          .map(([k]) => k),
+          .map(([k]) => k)
+          .sort(),
         hasAccessibilityEvidence: m.accessibility.evidenceIds.length > 0,
         documentationStatus: m.documentation.status,
+        stylingOutputs: [...m.styling.outputs].sort(),
+        searchKeywords: [...m.search.keywords].sort(),
       }))
       .sort((a, b) => a.name.localeCompare(b.name)),
     adapters: adapterEntries
@@ -612,6 +681,16 @@ function buildRegistry(): void {
         return { ...a, version: adapterVersion }
       })
       .sort((a, b) => a.name.localeCompare(b.name)),
+  }
+
+  // REG-005: Sign the index if REGISTRY_SIGN_KEY is set
+  const signKey = process.env.REGISTRY_SIGN_KEY
+  if (signKey) {
+    const indexContent = JSON.stringify(indexV2, null, 2)
+    const signature = createHmac("sha256", signKey).update(indexContent).digest("hex")
+    indexV2.integrity.signature = signature
+    indexV2.integrity.signedAt = now
+    indexV2.integrity.signatureKeyId = createHash("sha256").update(signKey).digest("hex").slice(0, 16)
   }
 
   writeFileSync(join(REGISTRY_DIR, "index.json"), JSON.stringify(indexV2, null, 2) + "\n")
@@ -628,4 +707,26 @@ function buildRegistry(): void {
   }
 }
 
-buildRegistry()
+// ─── Exports for Testing ─────────────────────────────────────────────────────
+
+export {
+  computeFilesHash,
+  computeEntriesHash,
+  generateKeywords,
+  detectStylingOutputs,
+  getDeterministicTimestamp,
+  buildRegistry,
+  collectSourceFiles,
+  detectCapabilities,
+  extractRuntimeModules,
+}
+
+export type { PrimitiveManifestV2, IndexManifestV2, Capability }
+
+// Run the build when executed directly
+const isMainModule = process.argv[1]?.endsWith("registry-build.ts") ||
+  process.argv[1]?.endsWith("registry-build")
+
+if (isMainModule) {
+  buildRegistry()
+}
