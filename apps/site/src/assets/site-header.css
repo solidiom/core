@@ -62,6 +62,26 @@
   color: var(--focus-ring);
 }
 
+/* The Item wrapper needs relative positioning so the Content dropdown
+   can be absolutely positioned without affecting the menubar layout. */
+.site-header__desktop-nav [data-scope="navigation-menu"][data-part="item"] {
+  position: relative;
+}
+
+.site-header__desktop-nav [data-scope="navigation-menu"][data-part="content"] {
+  position: absolute;
+  top: 100%;
+  /* Logical inline-axis inset: the rest of the shell uses logical properties
+     (see the drawer rules below and docs-layout.css) and BaseLayout sets `dir`
+     per locale, so physical `right` would misplace the panel under RTL. */
+  inset-inline-end: 0;
+  z-index: 50;
+  /* Padding, not margin: it keeps the pointer inside Content while crossing
+     the gap from the trigger, so pointer-intent doesn't cancel and close the
+     panel mid-hover. */
+  padding-top: 0.5rem;
+}
+
 .site-header__dropdown-list {
   display: flex;
   flex-direction: column;

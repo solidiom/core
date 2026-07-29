@@ -1,0 +1,133 @@
+/**
+ * Code block styling (SITE-008): Shiki light/dark theme pairing and the
+ * copy-to-clipboard control.
+ *
+ * Shiki is configured with `themes: { light, dark }` and
+ * `defaultColor: false` (see astro.config.ts), which makes every
+ * highlighted token carry both palettes as CSS variables
+ * (`--shiki-light`, `--shiki-dark`, `--shiki-light-bg`,
+ * `--shiki-dark-bg`, plus per-token `--shiki-light-*`/`--shiki-dark-*`
+ * font-style variables) instead of hard-coding one theme's colors into
+ * the HTML. The two rules below select between them using the same
+ * `data-theme` attribute the rest of the shell already uses (see
+ * tokens.css / bootstrap-theme.ts) — no client JS re-render on theme
+ * change, and no duplicated highlighted markup per theme.
+ */
+
+:root[data-theme="light"] pre.astro-code,
+:root[data-theme="light"] pre.astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+:root[data-theme="dark"] pre.astro-code,
+:root[data-theme="dark"] pre.astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* No explicit choice yet (before the no-flash bootstrap script runs, or in
+   a context with no data-theme) — fall back to the system preference,
+   matching tokens.css's equivalent fallback block. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) pre.astro-code,
+  :root:not([data-theme="light"]):not([data-theme="dark"]) pre.astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
+/* Code block chrome: wraps every Shiki `<pre>` (see shiki-copy-button.ts). */
+.code-block {
+  position: relative;
+  margin: 0 0 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.code-block pre.astro-code {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.code-block pre.astro-code code {
+  font-family: inherit;
+  counter-reset: line;
+}
+
+.code-block__copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+  background-color: var(--color-surface);
+  color: var(--color-foreground-muted);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.code-block:hover .code-block__copy,
+.code-block:focus-within .code-block__copy,
+.code-block__copy:focus-visible {
+  opacity: 1;
+}
+
+.code-block__copy:hover {
+  border-color: var(--focus-ring);
+  color: var(--color-foreground);
+}
+
+.code-block__copy[data-copy-state="copied"] {
+  color: var(--focus-ring);
+  border-color: var(--focus-ring);
+  opacity: 1;
+}
+
+.code-block__copy[data-copy-state="error"] {
+  color: #b42318;
+  border-color: currentColor;
+  opacity: 1;
+}
+
+:root[data-theme="dark"] .code-block__copy[data-copy-state="error"] {
+  color: #ff746a;
+}
+
+@media (width < 768px) {
+  /* No hover on touch — keep the control reachable without a hover state
+     touch input can't produce, matching the heading-anchor approach. */
+  .code-block__copy {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .code-block__copy {
+    transition:
+      opacity 0.15s ease-in-out,
+      border-color 0.15s ease-in-out,
+      color 0.15s ease-in-out;
+  }
+}

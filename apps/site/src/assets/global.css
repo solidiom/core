@@ -4,6 +4,10 @@
 @import "./site-header.css";
 @import "./site-footer.css";
 @import "./docs-layout.css";
+@import "./prose.css";
+@import "./code.css";
+@import "./callouts.css";
+@import "./print.css";
 
 :root {
   color-scheme: light dark;

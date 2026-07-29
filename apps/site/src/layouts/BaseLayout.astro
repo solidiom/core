@@ -11,9 +11,12 @@
  *
  * Explicitly out of scope here (see docs/website-tasks.md §5.1):
  *   - Docs shell (SITE-007).
- *   - Full typography/prose/Shiki pairing (SITE-008).
  *   - Theme toggle UI + change persistence (SITE-009).
  *   - 404/robots/sitemap/manifest/social helpers (SITE-010).
+ *
+ * Typography/prose/code styling (SITE-008) is global CSS imported via
+ * global.css (prose.css/code.css/callouts.css/print.css) and applies
+ * wherever routes opt in via the `.prose` class — no changes needed here.
  *
  * Footer (SITE-006) is implemented via SiteFooter below.
  */
