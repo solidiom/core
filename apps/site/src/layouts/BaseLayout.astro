@@ -1,33 +1,20 @@
 ---
 /**
- * Base document/layout for every static route on the Solidiom site.
- *
- * Responsibilities (SITE-004 + SITE-009 + SITE-010):
- *   - Base HTML shell with correct lang/dir per route locale.
- *   - Metadata defaults (title template, description, canonical link).
- *   - Social/Open Graph metadata via resolveSocialMetadata helper.
- *   - hreflang alternates via resolveHreflangAlternates helper.
- *   - Font preload links (placeholder targets pending BRAND-003).
- *   - Web app manifest link.
- *   - No-flash locale/theme bootstrap (data-theme set before first paint).
- *   - Skip link and a single focus-root landmark for main content.
- *
- * Explicitly out of scope here (see docs/website-tasks.md §5.1):
- *   - Docs shell (SITE-007 — see DocsLayout).
- *
- * Typography/prose/code styling (SITE-008) is global CSS imported via
- * global.css (prose.css/code.css/callouts.css/print.css) and applies
- * wherever routes opt in via the `.prose` class — no changes needed here.
- *
- * Footer (SITE-006) is implemented via SiteFooter below.
+ * Shared static document shell. Locale is resolved from the requested path;
+ * a stored choice is exposed to controls but never changes the route.
  */
 import "../assets/global.css"
 import { bootstrapThemeScript } from "../lib/bootstrap-theme"
-import { resolveLocale, localeDirection } from "../lib/locale"
 import {
+  bootstrapLocalePreferenceScript,
+  localeDirection,
+  resolveEquivalentLocalePath,
+  resolveLocale,
+} from "../lib/locale"
+import {
+  resolveHreflangAlternates,
   resolvePageMetadata,
   resolveSocialMetadata,
-  resolveHreflangAlternates,
 } from "../lib/metadata"
 import { primaryLinks, resourceLinks } from "../lib/nav-links"
 import SiteHeader from "../components/SiteHeader.astro"
@@ -36,23 +23,12 @@ import SiteFooter from "../components/SiteFooter.astro"
 interface Props {
   title?: string
   description?: string
-  /** Path to social card image, relative to site root. */
   image?: string
-  /** Alt text for social card image. */
   imageAlt?: string
-  /** Open Graph type override (default "website"). */
   ogType?: string
-  /** Article publish date (ISO 8601). */
   publishedTime?: string
-  /** Id of the element the skip link and focus root should target. Defaults to "main-content". */
   mainId?: string
-  /**
-   * Whether to render the global header/nav. Default true. Routes that must
-   * not import interactive shell chrome (e.g. a future playground/theme
-   * builder, per SITE-012's import-boundary rules) can opt out.
-   */
   showHeader?: boolean
-  /** Whether to render the global footer. Default true. */
   showFooter?: boolean
 }
 
@@ -76,7 +52,6 @@ const metadata = resolvePageMetadata({
   pathname: Astro.url.pathname,
   locale,
 })
-
 const social = resolveSocialMetadata({
   title: metadata.title,
   description: metadata.description,
@@ -86,8 +61,8 @@ const social = resolveSocialMetadata({
   type: ogType,
   publishedTime,
 })
-
 const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
+const homeHref = resolveEquivalentLocalePath("/", locale) ?? "/"
 ---
 
 <!doctype html>
@@ -99,9 +74,7 @@ const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
     <meta name="description" content={metadata.description} />
     <link rel="canonical" href={metadata.canonicalUrl} />
 
-    {alternates.map((alt) => (
-      <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
-    ))}
+    {alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
 
     <meta property="og:type" content={social["og:type"]} />
     <meta property="og:site_name" content={social["og:site_name"]} />
@@ -110,51 +83,76 @@ const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
     <meta property="og:url" content={social["og:url"]} />
     {social["og:image"] && <meta property="og:image" content={social["og:image"]} />}
     {social["og:image:alt"] && <meta property="og:image:alt" content={social["og:image:alt"]} />}
-    {social["article:published_time"] && <meta property="article:published_time" content={social["article:published_time"]} />}
+    {
+      social["article:published_time"] && (
+        <meta property="article:published_time" content={social["article:published_time"]} />
+      )
+    }
     <meta name="twitter:card" content={social["twitter:card"]} />
     <meta name="twitter:title" content={social["twitter:title"]} />
     <meta name="twitter:description" content={social["twitter:description"]} />
     {social["twitter:image"] && <meta name="twitter:image" content={social["twitter:image"]} />}
-    {social["twitter:image:alt"] && <meta name="twitter:image:alt" content={social["twitter:image:alt"]} />}
+    {
+      social["twitter:image:alt"] && (
+        <meta name="twitter:image:alt" content={social["twitter:image:alt"]} />
+      )
+    }
 
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/inter-tight-variable.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/inter-variable.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/ibm-plex-mono-variable.woff2"
+      crossorigin
+    />
 
-    <!--
-      Font preloads: self-hosted Inter Tight, Inter Variable, and IBM Plex
-      Mono per BRAND-003. Variable font files under src/assets/fonts/.
-      Licenses documented in src/assets/fonts/LICENSES.md (all OFL 1.1).
-    -->
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-tight-variable.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-variable.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-mono-variable.woff2" crossorigin />
-
-    <!--
-      No-flash theme bootstrap: must be a blocking, synchronous script
-      placed before any stylesheet/content so `data-theme` is set on <html>
-      before first paint. Locale is already resolved server-side above and
-      needs no client script.
-    -->
     <script is:inline set:html={bootstrapThemeScript()} />
-
+    <script is:inline set:html={bootstrapLocalePreferenceScript()} />
     <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href={`#${mainId}`}>Skip to main content</a>
-    {showHeader && <SiteHeader links={primaryLinks} resourceLinks={resourceLinks} homeHref="/" />}
+    {
+      showHeader && (
+        <SiteHeader
+          links={primaryLinks}
+          resourceLinks={resourceLinks}
+          homeHref={homeHref}
+          locale={locale}
+        />
+      )
+    }
     <main id={mainId} class="focus-root" tabindex="-1">
       <slot />
     </main>
     {showFooter && <SiteFooter />}
     <script is:inline>
-      {`document.addEventListener("click", (event) => {
+      {
+        ;`document.addEventListener("click", (event) => {
         const target = event.target;
         if (!(target instanceof Element)) return;
         const skipLink = target.closest(".skip-link");
         if (!(skipLink instanceof HTMLAnchorElement)) return;
         const focusTarget = document.getElementById(skipLink.hash.slice(1));
         if (focusTarget instanceof HTMLElement) focusTarget.focus();
-      });`}
+      });`
+      }
     </script>
   </body>
 </html>
