@@ -1,5 +1,5 @@
 // src/tooltip.tsx
-import { Show, createSignal, onCleanup, onSettled } from "solid-js";
+import { Show, createSignal, createEffect, onCleanup } from "solid-js";
 import {
   createDisclosureState,
   createStableId,
@@ -122,7 +122,7 @@ function Trigger(props) {
 function Content(props) {
   const ctx = useTooltipContext();
   const delays = useDelayContext();
-  let contentEl;
+  const [contentEl, setContentEl] = createSignal(void 0);
   let closeTimer;
   const handleMouseEnter = () => {
     if (closeTimer !== void 0) {
@@ -135,21 +135,17 @@ function Content(props) {
       ctx.requestOpenChange(false, createChangeDetails("trigger"));
     }, delays.close);
   };
-  onSettled(() => {
-    if (!contentEl) return;
-    let cleanupPositioning;
-    const reference = ctx.triggerRef();
-    if (ctx.positioning && reference && contentEl) {
-      const result = ctx.positioning.update(reference, contentEl);
-      if (typeof result === "function") {
-        cleanupPositioning = result;
-      }
-    }
-    return () => {
-      cleanupPositioning?.();
-      if (closeTimer !== void 0) clearTimeout(closeTimer);
-    };
+  onCleanup(() => {
+    if (closeTimer !== void 0) clearTimeout(closeTimer);
   });
+  createEffect(
+    () => ctx.present() ? [contentEl(), ctx.triggerRef()] : [void 0, void 0],
+    ([el, reference]) => {
+      if (!ctx.positioning || !el || !reference) return;
+      const result = ctx.positioning.update(reference, el);
+      return typeof result === "function" ? result : void 0;
+    }
+  );
   return /* @__PURE__ */ React.createElement(Show, { when: ctx.present() }, /* @__PURE__ */ React.createElement(
     "div",
     {
@@ -158,7 +154,7 @@ function Content(props) {
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
       ref: (el) => {
-        contentEl = el;
+        setContentEl(el);
         props.ref?.(el);
       },
       class: props.class,
