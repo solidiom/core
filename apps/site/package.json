@@ -14,6 +14,7 @@
     "@astrojs/check": "0.9.9",
     "@astrojs/markdown-remark": "7.2.1",
     "@astrojs/mdx": "7.0.3",
+    "@astrojs/sitemap": "3.7.3",
     "@solidiom/astrojs-solid-next": "workspace:*",
     "@solidiom/drawer": "workspace:*",
     "@solidiom/navigation-menu": "workspace:*",

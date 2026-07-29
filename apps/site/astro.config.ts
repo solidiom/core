@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config"
 import { unified } from "@astrojs/markdown-remark"
 import mdx from "@astrojs/mdx"
+import sitemap from "@astrojs/sitemap"
 import solid from "@solidiom/astrojs-solid-next"
 import tailwind from "@tailwindcss/vite"
 import { rehypeHeadingAnchors, rehypeTableWrappers } from "./src/lib/rehype-prose"
@@ -11,7 +12,8 @@ const processor = unified({
 })
 
 export default defineConfig({
-  integrations: [mdx(), solid()],
+  site: "https://solidiom.org",
+  integrations: [mdx(), sitemap(), solid()],
   markdown: {
     processor,
     syntaxHighlight: "shiki",
