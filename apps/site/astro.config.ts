@@ -23,6 +23,14 @@ export default defineConfig({
     }),
     solid(),
   ],
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "es"],
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
+    },
+  },
   markdown: {
     processor,
     syntaxHighlight: "shiki",

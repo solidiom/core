@@ -22,5 +22,49 @@
     "events/change-details",
     "state/controllable-value",
     "state/disclosure-state"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Select",
+  "description": "Dropdown selection from a list of options.",
+  "category": "input",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add select",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "dropdown",
+      "from",
+      "input",
+      "list",
+      "options",
+      "select",
+      "selection"
+    ]
+  },
+  "integrity": {
+    "filesHash": "069d62de1ed5ec429384819998fd5fcc845e79a0179c853e7e043f54b375ad1c",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

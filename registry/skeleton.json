@@ -12,5 +12,49 @@
       "src/index.tsx"
     ]
   },
-  "runtime": []
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Skeleton",
+  "description": "Loading placeholder with pulse animation.",
+  "category": "feedback",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add skeleton",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "animation",
+      "feedback",
+      "loading",
+      "placeholder",
+      "pulse",
+      "skeleton",
+      "with"
+    ]
+  },
+  "integrity": {
+    "filesHash": "30723256b83c226fff5d3b898c1120be23027cbffd7e0885bd70b02afcc9c88f",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

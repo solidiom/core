@@ -10,6 +10,8 @@
     "test:boundaries": "pnpm run boundaries -- --self-test",
     "budget-report": "tsx ./tools/report-route-budgets.ts",
     "budget-report:enforce": "tsx ./tools/report-route-budgets.ts --enforce",
+    "lighthouse": "tsx ./tools/lighthouse-report.ts",
+    "lighthouse:json": "tsx ./tools/lighthouse-report.ts --json",
     "build": "pnpm run boundaries && astro build",
     "preview": "astro preview",
     "search-index": "pagefind --site dist",

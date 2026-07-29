@@ -25,5 +25,52 @@
     "events/change-details",
     "presence/presence",
     "state/disclosure-state"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Date Picker",
+  "description": "Calendar popup for selecting dates.",
+  "category": "input",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add date-picker",
+    "installDeps": [
+      "@solidiom/adapter-date-internationalized"
+    ]
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "calendar",
+      "date",
+      "dates",
+      "for",
+      "input",
+      "picker",
+      "popup",
+      "selecting"
+    ]
+  },
+  "integrity": {
+    "filesHash": "401ceda8b63ba680af7913a6236519f0915282cc1e0a7aaae8ab4cd6d53ac48a",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

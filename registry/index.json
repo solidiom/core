@@ -1,6 +1,10 @@
 {
-  "version": 1,
-  "generatedAt": "2026-07-26T19:49:07.935Z",
+  "$schema": "https://solidiom.dev/schemas/registry-index/v2.json",
+  "version": 2,
+  "generatedAt": "2026-07-29T19:05:16.855Z",
+  "integrity": {
+    "entriesHash": "5e64b5eff1a01916a9d2a5ff4fbbc7b23c95a0758f4207f91730929e8742c08d"
+  },
   "primitives": [
     {
       "name": "accordion",
@@ -8,7 +12,13 @@
       "package": "@solidiom/accordion",
       "label": "Accordion",
       "description": "Vertically stacked set of collapsible sections.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "alert",
@@ -16,7 +26,13 @@
       "package": "@solidiom/alert",
       "label": "Alert",
       "description": "Inline, non-modal alert for status messages with live region semantics.",
-      "category": "feedback"
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "alert-dialog",
@@ -24,7 +40,13 @@
       "package": "@solidiom/alert-dialog",
       "label": "Alert Dialog",
       "description": "Modal confirmation dialog requiring explicit user action.",
-      "category": "overlay"
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "avatar",
@@ -32,7 +54,13 @@
       "package": "@solidiom/avatar",
       "label": "Avatar",
       "description": "User avatar with image and fallback.",
-      "category": "display"
+      "category": "display",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "badge",
@@ -40,7 +68,13 @@
       "package": "@solidiom/badge",
       "label": "Badge",
       "description": "Inline status or label indicator.",
-      "category": "feedback"
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "breadcrumb",
@@ -48,7 +82,13 @@
       "package": "@solidiom/breadcrumb",
       "label": "Breadcrumb",
       "description": "Hierarchical location indicator with links.",
-      "category": "navigation"
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "button",
@@ -56,7 +96,13 @@
       "package": "@solidiom/button",
       "label": "Button",
       "description": "Clickable trigger for actions.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "calendar",
@@ -64,7 +110,13 @@
       "package": "@solidiom/calendar",
       "label": "Calendar",
       "description": "Date selection with day/month/year views.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "card",
@@ -72,7 +124,13 @@
       "package": "@solidiom/card",
       "label": "Card",
       "description": "Content container with header, body, and footer.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "carousel",
@@ -80,7 +138,13 @@
       "package": "@solidiom/carousel",
       "label": "Carousel",
       "description": "Horizontal slide-based content viewer.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "checkbox",
@@ -88,7 +152,13 @@
       "package": "@solidiom/checkbox",
       "label": "Checkbox",
       "description": "Binary or indeterminate toggle control.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "collapsible",
@@ -96,7 +166,13 @@
       "package": "@solidiom/collapsible",
       "label": "Collapsible",
       "description": "Single expandable/collapsible section.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "combobox",
@@ -104,7 +180,13 @@
       "package": "@solidiom/combobox",
       "label": "Combobox",
       "description": "Text input with autocomplete dropdown.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "command-palette",
@@ -112,7 +194,13 @@
       "package": "@solidiom/command-palette",
       "label": "Command Palette",
       "description": "Modal search and action launcher.",
-      "category": "navigation"
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "context-menu",
@@ -120,7 +208,13 @@
       "package": "@solidiom/context-menu",
       "label": "Context Menu",
       "description": "Right-click triggered menu.",
-      "category": "overlay"
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "data-table",
@@ -128,7 +222,13 @@
       "package": "@solidiom/data-table",
       "label": "Data Table",
       "description": "Sortable, selectable table with column control.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "date-picker",
@@ -136,7 +236,13 @@
       "package": "@solidiom/date-picker",
       "label": "Date Picker",
       "description": "Calendar popup for selecting dates.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "dialog",
@@ -144,7 +250,13 @@
       "package": "@solidiom/dialog",
       "label": "Dialog",
       "description": "Modal or non-modal overlay window.",
-      "category": "overlay"
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "drawer",
@@ -152,7 +264,13 @@
       "package": "@solidiom/drawer",
       "label": "Drawer",
       "description": "Slide-in panel from any screen edge.",
-      "category": "overlay"
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "empty-state",
@@ -160,7 +278,13 @@
       "package": "@solidiom/empty-state",
       "label": "Empty State",
       "description": "Placeholder for empty content areas.",
-      "category": "feedback"
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "field",
@@ -168,15 +292,27 @@
       "package": "@solidiom/field",
       "label": "Field",
       "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "hover-card",
       "version": "0.0.1-next.0",
       "package": "@solidiom/hover-card",
       "label": "Hover Card",
-      "description": "Content preview on hover with open delay.",
-      "category": "overlay"
+      "description": "Content preview on hover with open delay and anchored positioning.",
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "input",
@@ -184,7 +320,13 @@
       "package": "@solidiom/input",
       "label": "Input",
       "description": "Text input and textarea with validation states and Field integration.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "input-otp",
@@ -192,7 +334,13 @@
       "package": "@solidiom/input-otp",
       "label": "Input OTP",
       "description": "A one-time password input with individual character slots.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "kbd",
@@ -200,7 +348,13 @@
       "package": "@solidiom/kbd",
       "label": "Kbd",
       "description": "Keyboard shortcut display element.",
-      "category": "display"
+      "category": "display",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "label",
@@ -208,7 +362,13 @@
       "package": "@solidiom/label",
       "label": "Label",
       "description": "Accessible label element linked to form controls via htmlFor.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "listbox",
@@ -216,7 +376,13 @@
       "package": "@solidiom/listbox",
       "label": "Listbox",
       "description": "Single or multi-select list of options.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "menu",
@@ -224,7 +390,13 @@
       "package": "@solidiom/menu",
       "label": "Menu",
       "description": "Action list triggered by a button.",
-      "category": "navigation"
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "meter",
@@ -232,7 +404,13 @@
       "package": "@solidiom/meter",
       "label": "Meter",
       "description": "Scalar measurement within a known range (e.g. disk usage, signal strength).",
-      "category": "feedback"
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "navigation-menu",
@@ -240,7 +418,13 @@
       "package": "@solidiom/navigation-menu",
       "label": "Navigation Menu",
       "description": "A top-level navigation component with accessible dropdown sub-menus.",
-      "category": "navigation"
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "pagination",
@@ -248,7 +432,13 @@
       "package": "@solidiom/pagination",
       "label": "Pagination",
       "description": "Page navigation with prev/next and page numbers.",
-      "category": "navigation"
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "popover",
@@ -256,7 +446,13 @@
       "package": "@solidiom/popover",
       "label": "Popover",
       "description": "Non-modal floating content panel.",
-      "category": "overlay"
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "progress",
@@ -264,7 +460,13 @@
       "package": "@solidiom/progress",
       "label": "Progress",
       "description": "Determinate and indeterminate progress indicator.",
-      "category": "feedback"
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "radio-group",
@@ -272,7 +474,13 @@
       "package": "@solidiom/radio-group",
       "label": "Radio Group",
       "description": "Single-select radio button set with keyboard navigation.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "resizable-panels",
@@ -280,7 +488,13 @@
       "package": "@solidiom/resizable-panels",
       "label": "Resizable Panels",
       "description": "Drag-to-resize panel layout.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "scroll-area",
@@ -288,7 +502,13 @@
       "package": "@solidiom/scroll-area",
       "label": "Scroll Area",
       "description": "Custom-styled scrollbar with native scrolling performance.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "select",
@@ -296,7 +516,13 @@
       "package": "@solidiom/select",
       "label": "Select",
       "description": "Dropdown selection from a list of options.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "separator",
@@ -304,7 +530,13 @@
       "package": "@solidiom/separator",
       "label": "Separator",
       "description": "Horizontal or vertical visual divider.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "sheet",
@@ -312,7 +544,13 @@
       "package": "@solidiom/sheet",
       "label": "Sheet",
       "description": "Side-panel dialog with slide animation.",
-      "category": "overlay"
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "skeleton",
@@ -320,7 +558,13 @@
       "package": "@solidiom/skeleton",
       "label": "Skeleton",
       "description": "Loading placeholder with pulse animation.",
-      "category": "feedback"
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "slider",
@@ -328,7 +572,13 @@
       "package": "@solidiom/slider",
       "label": "Slider",
       "description": "Numeric range input with thumb control.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "spinner",
@@ -336,7 +586,13 @@
       "package": "@solidiom/spinner",
       "label": "Spinner",
       "description": "Loading spinner indicator.",
-      "category": "feedback"
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "switch",
@@ -344,7 +600,13 @@
       "package": "@solidiom/switch",
       "label": "Switch",
       "description": "Binary toggle with on/off semantics.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "tabs",
@@ -352,7 +614,13 @@
       "package": "@solidiom/tabs",
       "label": "Tabs",
       "description": "Tabbed content switcher.",
-      "category": "navigation"
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "toast",
@@ -360,7 +628,13 @@
       "package": "@solidiom/toast",
       "label": "Toast",
       "description": "Temporary non-blocking notification.",
-      "category": "feedback"
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "toggle",
@@ -368,7 +642,13 @@
       "package": "@solidiom/toggle",
       "label": "Toggle",
       "description": "A two-state button that can be toggled on or off.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "toggle-group",
@@ -376,7 +656,13 @@
       "package": "@solidiom/toggle-group",
       "label": "Toggle Group",
       "description": "Group of mutually-exclusive or multi-select toggle buttons.",
-      "category": "input"
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "toolbar",
@@ -384,7 +670,13 @@
       "package": "@solidiom/toolbar",
       "label": "Toolbar",
       "description": "Grouped actions and controls in a horizontal bar.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "tooltip",
@@ -392,7 +684,13 @@
       "package": "@solidiom/tooltip",
       "label": "Tooltip",
       "description": "Contextual hint shown on hover/focus.",
-      "category": "overlay"
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "tree",
@@ -400,7 +698,13 @@
       "package": "@solidiom/tree",
       "label": "Tree",
       "description": "Hierarchical tree view with expand/collapse.",
-      "category": "navigation"
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "virtual-list",
@@ -408,7 +712,13 @@
       "package": "@solidiom/virtual-list",
       "label": "Virtual List",
       "description": "Viewport-windowed list for large datasets.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     },
     {
       "name": "visually-hidden",
@@ -416,39 +726,51 @@
       "package": "@solidiom/visually-hidden",
       "label": "Visually Hidden",
       "description": "Hides content visually while keeping it accessible to screen readers.",
-      "category": "layout"
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub"
     }
   ],
   "adapters": [
     {
       "name": "carousel-embla",
       "package": "@solidiom/adapter-carousel-embla",
-      "capability": "carousel-physics@1"
+      "capability": "carousel-physics@1",
+      "version": "0.0.1-next.0"
     },
     {
       "name": "date-internationalized",
       "package": "@solidiom/adapter-date-internationalized",
-      "capability": "date-math@1"
+      "capability": "date-math@1",
+      "version": "0.0.1-next.0"
     },
     {
       "name": "positioning-floating-ui",
       "package": "@solidiom/adapter-positioning-floating-ui",
-      "capability": "positioning@1"
+      "capability": "positioning@1",
+      "version": "0.0.1-next.0"
     },
     {
       "name": "positioning-minimal",
       "package": "@solidiom/adapter-positioning-minimal",
-      "capability": "positioning@1"
+      "capability": "positioning@1",
+      "version": "0.0.1-next.0"
     },
     {
       "name": "table-tanstack",
       "package": "@solidiom/adapter-table-tanstack",
-      "capability": "table@1"
+      "capability": "table@1",
+      "version": "0.0.1-next.0"
     },
     {
       "name": "virtualization-tanstack",
       "package": "@solidiom/adapter-virtualization-tanstack",
-      "capability": "virtualization@1"
+      "capability": "virtualization@1",
+      "version": "0.0.1-next.0"
     }
   ]
 }

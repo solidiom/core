@@ -15,5 +15,52 @@
   "runtime": [
     "dom/stable-id",
     "state/controllable-value"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Radio Group",
+  "description": "Single-select radio button set with keyboard navigation.",
+  "category": "input",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add radio-group",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "button",
+      "group",
+      "input",
+      "keyboard",
+      "navigation",
+      "radio",
+      "select",
+      "set",
+      "single",
+      "with"
+    ]
+  },
+  "integrity": {
+    "filesHash": "ebe72e8391d5ae6789c7334d1bc80ee5fc20507a63387ab80caa6ac24148f7e4",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

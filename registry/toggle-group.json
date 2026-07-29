@@ -14,5 +14,50 @@
   },
   "runtime": [
     "state/controllable-value"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Toggle Group",
+  "description": "Group of mutually-exclusive or multi-select toggle buttons.",
+  "category": "input",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add toggle-group",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "buttons",
+      "exclusive",
+      "group",
+      "input",
+      "multi",
+      "mutually",
+      "select",
+      "toggle"
+    ]
+  },
+  "integrity": {
+    "filesHash": "68b5f8141716724129308751306ca833e037725abb1182a6a37b9a263b5904aa",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

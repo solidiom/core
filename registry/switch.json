@@ -15,5 +15,49 @@
   "runtime": [
     "dom/stable-id",
     "state/controllable-value"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Switch",
+  "description": "Binary toggle with on/off semantics.",
+  "category": "input",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add switch",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "binary",
+      "input",
+      "off",
+      "semantics",
+      "switch",
+      "toggle",
+      "with"
+    ]
+  },
+  "integrity": {
+    "filesHash": "5b60a8a8bca392ed3eeab3dcf03581d59e72b8b5daa995b190bbad0280441bfa",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

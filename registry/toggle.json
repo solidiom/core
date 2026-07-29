@@ -14,5 +14,51 @@
   },
   "runtime": [
     "state/controllable-value"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Toggle",
+  "description": "A two-state button that can be toggled on or off.",
+  "category": "input",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add toggle",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "button",
+      "can",
+      "input",
+      "off",
+      "state",
+      "that",
+      "toggle",
+      "toggled",
+      "two"
+    ]
+  },
+  "integrity": {
+    "filesHash": "57e9909a47444ed4ab8652d3779363739af9bc4f46ea1dbeae6c1f090dd2b350",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

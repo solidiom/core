@@ -15,5 +15,48 @@
       "src/toggle-button.tsx"
     ]
   },
-  "runtime": []
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Button",
+  "description": "Clickable trigger for actions.",
+  "category": "input",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add button",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "actions",
+      "button",
+      "clickable",
+      "for",
+      "input",
+      "trigger"
+    ]
+  },
+  "integrity": {
+    "filesHash": "bd11e2235e49056434128b8f40cfeb541e444af85af069a1f3817678e8462bbc",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

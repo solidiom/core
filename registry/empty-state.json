@@ -12,5 +12,49 @@
       "src/index.tsx"
     ]
   },
-  "runtime": []
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Empty State",
+  "description": "Placeholder for empty content areas.",
+  "category": "feedback",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add empty-state",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "areas",
+      "content",
+      "empty",
+      "feedback",
+      "for",
+      "placeholder",
+      "state"
+    ]
+  },
+  "integrity": {
+    "filesHash": "0352ee5424a3737d6c002184332888a6b108247622a8feeeff428f74af670765",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

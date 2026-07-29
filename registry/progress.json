@@ -12,5 +12,48 @@
       "src/index.tsx"
     ]
   },
-  "runtime": []
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Progress",
+  "description": "Determinate and indeterminate progress indicator.",
+  "category": "feedback",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add progress",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "determinate",
+      "feedback",
+      "indeterminate",
+      "indicator",
+      "progress"
+    ]
+  },
+  "integrity": {
+    "filesHash": "d1b8a582a57cab8b6c83f2b035f2c8337efc1f3bd1edc39907da317e23359698",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

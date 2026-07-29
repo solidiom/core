@@ -19,6 +19,7 @@
 import { readdirSync, readFileSync, writeFileSync, existsSync, statSync, unlinkSync } from "node:fs"
 import { join, relative, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import { createHash } from "node:crypto"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -78,6 +79,52 @@ interface PrimitiveManifest {
   runtime: string[]
 }
 
+/** V2 manifest extends V1 with product-layer, integrity, and metadata fields. */
+interface PrimitiveManifestV2 extends PrimitiveManifest {
+  $schema: string
+  label: string
+  description: string
+  category: string
+  status: "experimental" | "preview" | "stable" | "deprecated"
+  deliverables: {
+    primitive: true
+    component?: boolean
+    block?: boolean
+    template?: boolean
+    theme?: boolean
+  }
+  cli: {
+    addCommand: string
+    installDeps: string[]
+  }
+  accessibility: {
+    reviewStatus: "none" | "automated" | "manual" | "complete"
+    evidenceIds: string[]
+    lastReviewed?: string
+  }
+  documentation: {
+    status: "stub" | "draft" | "review" | "complete"
+    locales: Record<string, {
+      status: "missing" | "draft" | "stale" | "reviewed"
+      sourceHash?: string
+      lastUpdated?: string
+    }>
+  }
+  styling: {
+    outputs: ("css" | "tailwind" | "unocss")[]
+    themeCompatible: string[]
+  }
+  search: {
+    keywords: string[]
+  }
+  integrity: {
+    filesHash: string
+    manifestSignature?: string
+    lastGenerated: string
+  }
+  lastUpdated: string
+}
+
 interface IndexManifest {
   version: number
   generatedAt: string
@@ -93,6 +140,34 @@ interface IndexManifest {
     name: string
     package: string
     capability: string
+  }>
+}
+
+interface IndexManifestV2 {
+  $schema: string
+  version: 2
+  generatedAt: string
+  integrity: {
+    entriesHash: string
+    signature?: string
+  }
+  primitives: Array<{
+    name: string
+    version: string
+    package: string
+    label: string
+    description: string
+    category: string
+    status: string
+    deliverables: string[]
+    hasAccessibilityEvidence: boolean
+    documentationStatus: string
+  }>
+  adapters: Array<{
+    name: string
+    package: string
+    capability: string
+    version: string
   }>
 }
 
@@ -297,6 +372,51 @@ const SPECIFIER_TO_MODULE: Record<string, string> = {
   getLocale: "i18n/locale",
 }
 
+// ─── V2 Integrity Computation ────────────────────────────────────────────────
+
+/**
+ * Compute deterministic filesHash per the algorithm in docs/registry-schema-v2.md §7:
+ * 1. Sort source files lexicographically.
+ * 2. SHA-256 each file's raw content.
+ * 3. Concatenate hex hashes (no separator).
+ * 4. SHA-256 the concatenation.
+ */
+function computeFilesHash(sourceDir: string, files: string[]): string {
+  const sorted = [...files].sort()
+  const hashes: string[] = []
+
+  for (const file of sorted) {
+    // Files are stored as "src/foo.ts" but live in "source/foo.ts"
+    const relativePath = file.replace(/^src\//, "")
+    const fullPath = join(sourceDir, relativePath)
+    if (!existsSync(fullPath)) continue
+    const content = readFileSync(fullPath)
+    hashes.push(createHash("sha256").update(content).digest("hex"))
+  }
+
+  const concatenated = hashes.join("")
+  return createHash("sha256").update(concatenated).digest("hex")
+}
+
+/**
+ * Compute entriesHash for the index: SHA-256 of all per-entry filesHash values
+ * sorted alphabetically by entry name.
+ */
+function computeEntriesHash(entries: Array<{ name: string; filesHash: string }>): string {
+  const sorted = [...entries].sort((a, b) => a.name.localeCompare(b.name))
+  const concatenated = sorted.map((e) => e.filesHash).join("")
+  return createHash("sha256").update(concatenated).digest("hex")
+}
+
+/**
+ * Generate search keywords from label, description, and category.
+ */
+function generateKeywords(label: string, description: string, category: string): string[] {
+  const text = `${label} ${description} ${category}`.toLowerCase()
+  const words = text.split(/[\s,.\-_/]+/).filter((w) => w.length > 2)
+  return [...new Set(words)].sort()
+}
+
 // ─── Main Build Logic ────────────────────────────────────────────────────────
 
 function buildRegistry(): void {
@@ -395,35 +515,106 @@ function buildRegistry(): void {
     unlinkSync(join(REGISTRY_DIR, registryFile))
   }
 
+  // Generate V2 manifests with integrity and metadata
+  const now = new Date().toISOString()
+  const v2Manifests: PrimitiveManifestV2[] = []
+
   for (const primitive of primitives) {
-    const manifestPath = join(REGISTRY_DIR, `${primitive.name}.json`)
-    writeFileSync(manifestPath, JSON.stringify(primitive, null, 2) + "\n")
+    const pkgPath = join(PACKAGES_DIR, primitive.name, "package.json")
+    const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as Record<string, unknown>
+    const nx = pkg["nx"] as Record<string, unknown> | undefined
+    const metadata = nx?.["metadata"] as Record<string, string> | undefined
+    const label = metadata?.["label"] ?? primitive.name
+    const description = metadata?.["description"] ?? ""
+    const category = metadata?.["category"] ?? "uncategorized"
+
+    const sourceDir = join(PACKAGES_DIR, primitive.name, "source")
+    const docsDir = join(PACKAGES_DIR, primitive.name, "docs")
+    const filesHash = computeFilesHash(sourceDir, primitive.source.files)
+
+    const v2: PrimitiveManifestV2 = {
+      ...primitive,
+      $schema: "https://solidiom.dev/schemas/registry-manifest/v2.json",
+      label,
+      description,
+      category,
+      status: "preview",
+      deliverables: { primitive: true },
+      cli: {
+        addCommand: `solidiom add ${primitive.name}`,
+        installDeps: primitive.capabilities.map((c) => c.default),
+      },
+      accessibility: {
+        reviewStatus: "none",
+        evidenceIds: [],
+      },
+      documentation: {
+        status: existsSync(docsDir) ? "draft" : "stub",
+        locales: { en: { status: "stub" } },
+      },
+      styling: {
+        outputs: [],
+        themeCompatible: [],
+      },
+      search: {
+        keywords: generateKeywords(label, description, category),
+      },
+      integrity: {
+        filesHash,
+        lastGenerated: now,
+      },
+      lastUpdated: now,
+    }
+
+    v2Manifests.push(v2)
   }
 
-  // Write index.json
-  const index: IndexManifest = {
-    version: 1,
-    generatedAt: new Date().toISOString(),
-    primitives: primitives
-      .map((p) => {
-        const pkgPath = join(PACKAGES_DIR, p.name, "package.json")
-        const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as Record<string, unknown>
-        const nx = pkg["nx"] as Record<string, unknown> | undefined
-        const metadata = nx?.["metadata"] as Record<string, string> | undefined
-        return {
-          name: p.name,
-          version: p.version,
-          package: p.package,
-          ...(metadata?.label && { label: metadata.label }),
-          ...(metadata?.description && { description: metadata.description }),
-          ...(metadata?.category && { category: metadata.category }),
+  for (const manifest of v2Manifests) {
+    const manifestPath = join(REGISTRY_DIR, `${manifest.name}.json`)
+    writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n")
+  }
+
+  // Compute entries hash for the index
+  const entriesHash = computeEntriesHash(
+    v2Manifests.map((m) => ({ name: m.name, filesHash: m.integrity.filesHash })),
+  )
+
+  // Write V2 index.json
+  const indexV2: IndexManifestV2 = {
+    $schema: "https://solidiom.dev/schemas/registry-index/v2.json",
+    version: 2,
+    generatedAt: now,
+    integrity: { entriesHash },
+    primitives: v2Manifests
+      .map((m) => ({
+        name: m.name,
+        version: m.version,
+        package: m.package,
+        label: m.label,
+        description: m.description,
+        category: m.category,
+        status: m.status,
+        deliverables: Object.entries(m.deliverables)
+          .filter(([, v]) => v === true)
+          .map(([k]) => k),
+        hasAccessibilityEvidence: m.accessibility.evidenceIds.length > 0,
+        documentationStatus: m.documentation.status,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
+    adapters: adapterEntries
+      .map((a) => {
+        const adapterPkgPath = join(PACKAGES_DIR, `adapter-${a.name}`, "package.json")
+        let adapterVersion = "0.0.1-next.0"
+        if (existsSync(adapterPkgPath)) {
+          const adapterPkg = JSON.parse(readFileSync(adapterPkgPath, "utf8")) as Record<string, unknown>
+          adapterVersion = (adapterPkg["version"] as string) ?? adapterVersion
         }
+        return { ...a, version: adapterVersion }
       })
       .sort((a, b) => a.name.localeCompare(b.name)),
-    adapters: adapterEntries.sort((a, b) => a.name.localeCompare(b.name)),
   }
 
-  writeFileSync(join(REGISTRY_DIR, "index.json"), JSON.stringify(index, null, 2) + "\n")
+  writeFileSync(join(REGISTRY_DIR, "index.json"), JSON.stringify(indexV2, null, 2) + "\n")
 
   // Summary
   console.log(`registry-build: generated ${primitives.length} primitive manifests`)

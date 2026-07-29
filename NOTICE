@@ -1,0 +1,42 @@
+Solidiom
+Copyright 2026 Solidiom Contributors
+
+This product includes software developed by the Solidiom project
+(https://solidiom.org).
+
+────────────────────────────────────────────────────────────────────────────────
+
+Licensing Summary
+─────────────────
+
+Code, recipes, blocks, templates, and website source:
+  Apache License, Version 2.0
+  See LICENSE
+
+Documentation, prose, guides, articles, and non-brand media:
+  Creative Commons Attribution 4.0 International (CC BY 4.0)
+  See LICENSE-DOCS
+
+Brand marks (name "Solidiom", logos, wordmarks, and visual identity assets):
+  Reserved. See docs/solidiom/README.md §6 for usage guidelines.
+  The Solidiom name and brand marks may not be used to endorse or promote
+  derivative products without prior written permission.
+
+────────────────────────────────────────────────────────────────────────────────
+
+Third-Party Notices
+───────────────────
+
+This project depends on open-source software. A full list of dependencies
+and their licenses is available in the lockfile (pnpm-lock.yaml) and can
+be audited via `pnpm licenses list`.
+
+Notable runtime dependencies:
+  - solid-js (MIT) — https://github.com/solidjs/solid
+  - @solidjs/web (MIT) — https://github.com/solidjs/solid
+  - Floating UI (MIT) — https://floating-ui.com
+  - Astro (MIT) — https://astro.build
+
+Font assets (pending BRAND-003):
+  - Inter (OFL 1.1) — https://rsms.me/inter/
+  - IBM Plex Mono (OFL 1.1) — https://github.com/IBM/plex

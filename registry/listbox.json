@@ -21,5 +21,49 @@
     "dom/stable-id",
     "events/change-details",
     "state/controllable-value"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Listbox",
+  "description": "Single or multi-select list of options.",
+  "category": "input",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add listbox",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "input",
+      "list",
+      "listbox",
+      "multi",
+      "options",
+      "select",
+      "single"
+    ]
+  },
+  "integrity": {
+    "filesHash": "ec89ceb87c5a16a6cbdc2dc0efb9b19dddfe67e730d92f036f1271a0af09e6c0",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

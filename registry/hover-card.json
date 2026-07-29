@@ -15,12 +15,62 @@
   "source": {
     "entry": "src/index.tsx",
     "files": [
-      "src/index.tsx",
       "src/hover-card-context.ts",
-      "src/hover-card.tsx"
+      "src/hover-card.tsx",
+      "src/index.tsx"
     ]
   },
   "runtime": [
     "dom/stable-id"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Hover Card",
+  "description": "Content preview on hover with open delay and anchored positioning.",
+  "category": "overlay",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add hover-card",
+    "installDeps": [
+      "@solidiom/adapter-positioning-floating-ui"
+    ]
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "anchored",
+      "and",
+      "card",
+      "content",
+      "delay",
+      "hover",
+      "open",
+      "overlay",
+      "positioning",
+      "preview",
+      "with"
+    ]
+  },
+  "integrity": {
+    "filesHash": "3cc33e426d66dacaef248f2b26141e1f3f4b4201ac9bf1035bb3688c18338709",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }
