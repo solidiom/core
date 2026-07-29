@@ -1,0 +1,44 @@
+---
+/**
+ * Callout / admonition block for prose content (SITE-008).
+ *
+ * Plain static markup — no primitive/Solid island needed. This is display
+ * chrome around author-written content, not an interactive live region
+ * (that's `@solidiom/alert`'s job for runtime UI state). Usable directly
+ * in `.mdx` content as `<Callout type="warning">...</Callout>`.
+ */
+export type CalloutType = "note" | "tip" | "warning" | "danger"
+
+interface Props {
+  type?: CalloutType
+  /** Optional heading override. Defaults to a label derived from `type`. */
+  title?: string
+}
+
+const { type = "note", title } = Astro.props
+
+const defaultTitles = {
+  en: {
+    note: "Note",
+    tip: "Tip",
+    warning: "Warning",
+    danger: "Danger",
+  },
+  es: {
+    note: "Nota",
+    tip: "Consejo",
+    warning: "Advertencia",
+    danger: "Peligro",
+  },
+} satisfies Record<"en" | "es", Record<CalloutType, string>>
+
+const locale = Astro.url.pathname === "/es" || Astro.url.pathname.startsWith("/es/") ? "es" : "en"
+const resolvedTitle = title ?? defaultTitles[locale][type]
+---
+
+<div class="callout" data-callout={type} role="note">
+  <p class="callout__title">{resolvedTitle}</p>
+  <div class="callout__body">
+    <slot />
+  </div>
+</div>

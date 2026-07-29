@@ -47,6 +47,10 @@ run = "pnpm tsx tools/registry-build.ts"
 description = "Start the docs dev server"
 run = "pnpm nx dev @solidiom/docs"
 
+[tasks."dev:site"]
+description = "Start the Solidiom website (apps/site) in dev mode"
+run = "pnpm --filter @solidiom/site exec astro dev --force"
+
 # ---------------------------------------------------------------------------
 # Test
 # ---------------------------------------------------------------------------
