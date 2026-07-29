@@ -25,5 +25,51 @@
     "events/change-details",
     "presence/presence",
     "state/disclosure-state"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Popover",
+  "description": "Non-modal floating content panel.",
+  "category": "overlay",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add popover",
+    "installDeps": [
+      "@solidiom/adapter-positioning-floating-ui"
+    ]
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "content",
+      "floating",
+      "modal",
+      "non",
+      "overlay",
+      "panel",
+      "popover"
+    ]
+  },
+  "integrity": {
+    "filesHash": "19b8d856d707bb3eb02d36a9998f22f2fbd134e51f637101320277f54efd6b84",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

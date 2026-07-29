@@ -16,5 +16,48 @@
   },
   "runtime": [
     "dom/stable-id"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Toast",
+  "description": "Temporary non-blocking notification.",
+  "category": "feedback",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add toast",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "blocking",
+      "feedback",
+      "non",
+      "notification",
+      "temporary",
+      "toast"
+    ]
+  },
+  "integrity": {
+    "filesHash": "349d9d89d3e2b8e3bf4295a37b8232a760d63697dd106e9370dfb7228e8d9dd2",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

@@ -1,26 +1,89 @@
 /**
- * Solidiom site — font faces.
+ * Solidiom site — self-hosted font faces.
  *
- * STATUS: placeholder pending BRAND-003.
+ * BRAND-003: Inter Tight, Inter Variable, and IBM Plex Mono.
  *
- * BRAND-003 ("Select, pin, self-host, and preload Inter Tight, Inter
- * Variable, and IBM Plex Mono assets with documented licenses") has not
- * landed yet — no font binaries or licenses exist in the repository. Until
- * then this file declares the three semantic font roles the base layout and
- * bootstrap already assume (display / body-ui / mono) and points them at
- * system font stacks so the site renders correctly with no missing-asset
- * requests and no layout dependency on files that don't exist yet.
+ * All fonts are self-hosted as variable WOFF2 files under src/assets/fonts/.
+ * Licenses documented in src/assets/fonts/LICENSES.md (all OFL 1.1).
  *
- * When BRAND-003 lands:
- *   1. Add the licensed .woff2 files under this directory (or an adjacent
- *      `fonts/` directory) and add `@font-face` rules for
- *      "Inter Tight", "Inter Variable", and "IBM Plex Mono".
- *   2. Update the `<link rel="preload" as="font">` tags in
- *      src/layouts/BaseLayout.astro to point at the real files.
- *   3. Keep the `--font-display`, `--font-body`, `--font-mono` custom
- *      property names stable so no other file needs to change.
+ * Preload links are configured in BaseLayout.astro to avoid FOUT on the
+ * critical rendering path. Only the variable font files are loaded — no
+ * separate weight files needed.
+ *
+ * The --font-display, --font-body, and --font-mono custom properties are
+ * consumed by tokens.css, global.css, prose.css, and code.css.
  */
 
+/* ─── Inter Tight (Display headings: XL, L, H1) ─── */
+@font-face {
+  font-family: "Inter Tight";
+  src: url("./fonts/inter-tight-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter Tight";
+  src: url("./fonts/inter-tight-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ─── Inter Variable (UI, body, navigation, docs: H2–H4, body, small) ─── */
+@font-face {
+  font-family: "Inter Variable";
+  src: url("./fonts/inter-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter Variable";
+  src: url("./fonts/inter-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ─── IBM Plex Mono (Code, commands, API names, versions) ─── */
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("./fonts/ibm-plex-mono-variable.woff2") format("woff2");
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("./fonts/ibm-plex-mono-variable.woff2") format("woff2");
+  font-weight: 100 700;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ─── Semantic Font Custom Properties ─── */
 :root {
   --font-display: "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;

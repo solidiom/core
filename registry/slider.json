@@ -17,5 +17,49 @@
   "runtime": [
     "events/compose-event-handlers",
     "state/controllable-value"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Slider",
+  "description": "Numeric range input with thumb control.",
+  "category": "input",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add slider",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "control",
+      "input",
+      "numeric",
+      "range",
+      "slider",
+      "thumb",
+      "with"
+    ]
+  },
+  "integrity": {
+    "filesHash": "3e9be7acd06472bc81751e44a25d9d1467ad6d15b34d05fecab6d4f7e0617661",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

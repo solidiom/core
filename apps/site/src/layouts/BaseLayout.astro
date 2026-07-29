@@ -121,16 +121,13 @@ const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
     <link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml" />
 
     <!--
-      Font preloads: placeholder pending BRAND-003 (self-hosted Inter Tight,
-      Inter Variable, IBM Plex Mono). No font binaries exist in the repo yet,
-      so there is nothing to preload without generating 404s. Re-enable these
-      once BRAND-003 lands and update the hrefs to the real self-hosted paths.
+      Font preloads: self-hosted Inter Tight, Inter Variable, and IBM Plex
+      Mono per BRAND-003. Variable font files under src/assets/fonts/.
+      Licenses documented in src/assets/fonts/LICENSES.md (all OFL 1.1).
     -->
-    <!--
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-tight-variable.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-variable.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-mono-variable.woff2" crossorigin />
-    -->
 
     <!--
       No-flash theme bootstrap: must be a blocking, synchronous script

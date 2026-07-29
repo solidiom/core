@@ -120,28 +120,28 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 
 | Status | ID        | Size | Depends on | Owner area       | Task and acceptance boundary                                                                                                                               |
 | ------ | --------- | ---- | ---------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [ ]    | GOV-001   | S    | —          | Governance       | Define Apache 2.0 code/output, CC BY 4.0 documentation, and reserved-brand boundaries; identify required notices.                                                 |
-| [ ]    | GOV-002   | S    | —          | Security         | Publish the private vulnerability-reporting process in `SECURITY.md`.                                                                                      |
-| [ ]    | GOV-003   | S    | GOV-001    | Governance       | Add DCO signoff instructions and contribution provenance requirements to contributing guidance.                                                            |
-| [ ]    | GOV-004   | M    | —          | Privacy/product  | Define the PostHog allowlist and prohibited payloads in a typed event-schema proposal; autocapture/session replay remain disabled.                         |
+| [x]    | GOV-001   | S    | —          | Governance       | Define Apache 2.0 code/output, CC BY 4.0 documentation, and reserved-brand boundaries; identify required notices.                                                 |
+| [x]    | GOV-002   | S    | —          | Security         | Publish the private vulnerability-reporting process in `SECURITY.md`.                                                                                      |
+| [x]    | GOV-003   | S    | GOV-001    | Governance       | Add DCO signoff instructions and contribution provenance requirements to contributing guidance.                                                            |
+| [x]    | GOV-004   | M    | —          | Privacy/product  | Define the PostHog allowlist and prohibited payloads in a typed event-schema proposal; autocapture/session replay remain disabled.                         |
 | [ ]    | GOV-005   | S    | GOV-004    | Privacy/product  | Draft privacy disclosures for Cloudflare, PostHog, Buttondown, Pagefind, playground, and theme-builder behavior.                                           |
 | [ ]    | GOV-006   | S    | GOV-001    | Brand/governance | Draft the Solidiom trademark and brand-use policy; document ecosystem-logo criteria.                                                                       |
 | [x]    | BRAND-001 | S    | —          | Design systems   | Update the written brand specification to exactly match the board palette and typography roles.                                                            |
 | [x]    | BRAND-002 | M    | BRAND-001  | Design systems   | Define site-local semantic tokens in `apps/site/src/assets/tokens.css`, including independent light/dark surface hierarchies.                              |
-| [ ]    | BRAND-003 | S    | BRAND-001  | Design systems   | Select, pin, self-host, and preload Inter Tight, Inter Variable, and IBM Plex Mono assets with documented licenses.                                        |
+| [x]    | BRAND-003 | S    | BRAND-001  | Design systems   | Select, pin, self-host, and preload Inter Tight, Inter Variable, and IBM Plex Mono assets with documented licenses.                                        |
 | [ ]    | BRAND-004 | M    | BRAND-001  | Brand/design     | Create vector icon, wordmark, monochrome/light/dark variants, favicon set, and social-card source assets.                                                  |
-| [ ]    | MIG-001   | M    | —          | Platform/content | Create `docs/website-migration-inventory.md` covering all `apps/docs` routes, demos, reports, and behavior.                                                |
-| [ ]    | MIG-002   | XS   | MIG-001    | Repository       | Mark `apps/docs` read-only for new features in its package documentation/ownership guidance.                                                               |
+| [x]    | MIG-001   | M    | —          | Platform/content | Create `docs/website-migration-inventory.md` covering all `apps/docs` routes, demos, reports, and behavior.                                                |
+| [x]    | MIG-002   | XS   | MIG-001    | Repository       | Mark `apps/docs` read-only for new features in its package documentation/ownership guidance.                                                               |
 | [x]    | BASE-001  | S    | —          | QA/platform      | Capture the reproducible `apps/docs-astro-poc` validation baseline.                                                                                        |
-| [ ]    | BASE-002  | S    | —          | Platform         | Reconcile workspace Solid 2 catalog/override versions with direct versions in `apps/docs`; record migration constraints without changing the POC baseline. |
+| [x]    | BASE-002  | S    | —          | Platform         | Reconcile workspace Solid 2 catalog/override versions with direct versions in `apps/docs`; record migration constraints without changing the POC baseline. |
 | [x]    | OPS-001   | XS   | —          | Operations       | Confirm `solidiom.org` and Cloudflare access ownership.                                                                                                    |
-| [ ]    | OPS-002   | S    | OPS-001    | Operations       | Define preview, production, DNS, redirect, header, CSP, rollback, and secret-management responsibilities.                                                  |
+| [x]    | OPS-002   | S    | OPS-001    | Operations       | Define preview, production, DNS, redirect, header, CSP, rollback, and secret-management responsibilities.                                                  |
 
 ### G0 exit checklist
 
-- [ ] Palette, type, licensing, trademark, privacy, security, and DCO policies have owners.
+- [x] Palette, type, licensing, trademark, privacy, security, and DCO policies have owners.
 - [x] POC baseline is reproducible.
-- [ ] Legacy-app parity inventory is complete.
+- [x] Legacy-app parity inventory is complete.
 - [x] Domain/Cloudflare prerequisites are assigned.
 - [ ] No production secret or provider key is stored in the repository.
 
@@ -172,7 +172,7 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 
 | Status | ID       | Size | Depends on         | Owner area       | Task and acceptance boundary                                                                                                    |
 | ------ | -------- | ---- | ------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| [ ]    | I18N-001 | M    | SITE-003           | Platform/content | Implement locale configuration: English unprefixed, Spanish `/es/`, explicit locale context, no automatic redirect.             |
+| [x]    | I18N-001 | M    | SITE-003           | Platform/content | Implement locale configuration: English unprefixed, Spanish `/es/`, explicit locale context, no automatic redirect.             |
 | [ ]    | I18N-002 | S    | I18N-001, SITE-005 | Frontend         | Implement accessible language switcher with equivalent-route mapping and persisted explicit choice.                             |
 | [ ]    | I18N-003 | M    | I18N-001           | Content platform | Add canonical/`hreflang` helpers, translated metadata requirements, fallback diagnostics, and route-parity validation.          |
 | [ ]    | I18N-004 | M    | I18N-001           | Content platform | Define translation source hashes, statuses (`draft`, `human-reviewed`, `stale`), terminology glossary, and GA freshness policy. |
@@ -181,14 +181,14 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 
 | Status | ID       | Size | Depends on         | Owner area  | Task and acceptance boundary                                                                                                      |
 | ------ | -------- | ---- | ------------------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| [ ]    | TEST-001 | S    | SITE-003           | QA          | Add site unit/browser test configuration without coupling it to the legacy Vite docs app.                                         |
+| [x]    | TEST-001 | S    | SITE-003           | QA          | Add site unit/browser test configuration without coupling it to the legacy Vite docs app.                                         |
 | [ ]    | TEST-002 | M    | SITE-005, SITE-007 | QA          | Update Playwright config to start `@solidiom/site` on a dedicated port and cover Chromium, Firefox, and WebKit shell smoke tests. |
 | [ ]    | TEST-003 | M    | SITE-004           | QA/design   | Add visual baseline harness for desktop/tablet/mobile × light/dark × English/Spanish; store only intentional reference images.    |
-| [ ]    | TEST-004 | S    | SITE-013           | Performance | Add Lighthouse and bundle-report scripts with report artifacts; thresholds remain advisory until G2.                              |
-| [ ]    | CI-001   | S    | SITE-002           | CI          | Add pull-request and main-branch triggers to `.github/workflows/ci.yml` while retaining manual dispatch.                          |
+| [x]    | TEST-004 | S    | SITE-013           | Performance | Add Lighthouse and bundle-report scripts with report artifacts; thresholds remain advisory until G2.                              |
+| [x]    | CI-001   | S    | SITE-002           | CI          | Add pull-request and main-branch triggers to `.github/workflows/ci.yml` while retaining manual dispatch.                          |
 | [ ]    | CI-002   | M    | TEST-001, TEST-002 | CI          | Add site check/build/e2e jobs with cached dependencies and failure artifacts.                                                     |
 | [ ]    | CI-003   | S    | TEST-003, TEST-004 | CI          | Add visual/Lighthouse report jobs in advisory mode.                                                                               |
-| [ ]    | CI-004   | S    | SITE-003           | CI          | Ensure Solid-matrix jobs explicitly include/exclude `@solidiom/site` according to supported integration behavior.                 |
+| [x]    | CI-004   | S    | SITE-003           | CI          | Ensure Solid-matrix jobs explicitly include/exclude `@solidiom/site` according to supported integration behavior.                 |
 | [ ]    | OPS-003  | M    | OPS-002, SITE-003  | Operations  | Configure Cloudflare Pages preview deployment and verify headers, redirects, asset caching, and preview access policy.            |
 
 ### G1 exit checklist
@@ -209,7 +209,7 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | Status | ID      | Size | Depends on | Owner area        | Task and acceptance boundary                                                                                                                           |
 | ------ | ------- | ---- | ---------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [x]    | REG-001 | M    | —          | Registry/platform | Design registry schema v2 and migration rules.                                                                                                         |
-| [ ]    | REG-002 | M    | REG-001    | Registry/platform | Implement versioned schema/types/validation in `tools/registry-build.ts`; preserve current 52 primitives and 6 adapters.                               |
+| [x]    | REG-002 | M    | REG-001    | Registry/platform | Implement versioned schema/types/validation in `tools/registry-build.ts`; preserve current 52 primitives and 6 adapters.                               |
 | [ ]    | REG-003 | M    | REG-002    | Registry/platform | Add deliverables, documentation status, locale status, search, evidence, theme, and provenance fields sourced from package metadata/content manifests. |
 | [ ]    | REG-004 | S    | REG-002    | Registry/platform | Add deterministic output, stable sorting, schema version checks, and fixture/snapshot tests.                                                           |
 | [ ]    | REG-005 | M    | REG-002    | Security/CLI      | Generate per-file digests and signed versioned index metadata compatible with existing CLI verify/Sigstore dependencies.                               |
@@ -652,9 +652,9 @@ Update this table when tasks move; do not infer completion from generated files 
 
 | Milestone                 | Status      | Gate | Completion evidence                                                                                                                                                                                                                                                                                                                |
 | ------------------------- | ----------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| M0 Governance/inputs      | In progress | G0   | BRAND-001, BRAND-002, BASE-001, OPS-001 complete. Remaining: GOV-001..006, BRAND-003..004, MIG-001..002, BASE-002, OPS-002.                                                                                                                                                                                                       |
-| M1 Foundation/alpha shell | In progress | G1   | SITE-001 through SITE-014 complete: scaffold, targets, static baseline, base layout/bootstrap, responsive header/nav, footer, docs shell, typography/prose/code styles, persistent system/light/dark theme (no flash/hydration mismatch), 404/robots/sitemap/manifest/canonical/social helpers, shell a11y verification (landmarks/keyboard/zoom/reduced-motion/contrast/mobile/browser-matrix), import-boundary rules, route bundle/hydration budgets captured, and migration audit of reusable apps/docs components. Remaining: I18N-001..004 (locale foundation), TEST-001..004 / CI-001..004 / OPS-003 (test/CI/preview). Legal links pending GOV-001/GOV-005/QA-010; sidebar/TOC data pending DOCS-001/DOCS-003. |
-| M2 Content vertical slice | Not started | G2   | Three complex primitives pass end to end                                                                                                                                                                                                                                                                                           |
+| M0 Governance/inputs      | In progress | G0   | GOV-001..004, BRAND-001..003, BASE-001..002, OPS-001..002, MIG-001..002 complete. Remaining: GOV-005..006, BRAND-004.                                                                                                                                                                                                             |
+| M1 Foundation/alpha shell | In progress | G1   | SITE-001 through SITE-014, I18N-001, TEST-001, TEST-004, CI-001, CI-004 complete. Remaining: I18N-002..004, TEST-002..003, CI-002..003, OPS-003.                                                                                                                                                                                  |
+| M2 Content vertical slice | In progress | G2   | REG-001..002 complete. Remaining: REG-003..007, CONTENT-002..005, API-001..005, A11Y-001..006, DOCS-001..006, SEARCH-001..005, VS-001..004.                                                                                                                                                                                       |
 | M3 Public beta platform   | Not started | G3   | Beta acceptance matrix and deployment                                                                                                                                                                                                                                                                                              |
 | M4 Catalog completion     | Not started | G4   | Exact catalog counts and item DoDs                                                                                                                                                                                                                                                                                                 |
 | M5 GA/cutover             | Not started | G5   | Full acceptance matrix and production deployment                                                                                                                                                                                                                                                                                   |

@@ -15,5 +15,47 @@
   "runtime": [
     "dom/stable-id",
     "state/disclosure-state"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Collapsible",
+  "description": "Single expandable/collapsible section.",
+  "category": "layout",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add collapsible",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "collapsible",
+      "expandable",
+      "layout",
+      "section",
+      "single"
+    ]
+  },
+  "integrity": {
+    "filesHash": "f02b4727361bbb68e11079770e83c5c7a7788a2fe39153de016d891c73915a74",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

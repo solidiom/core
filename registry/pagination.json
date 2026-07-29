@@ -12,5 +12,50 @@
       "src/index.tsx"
     ]
   },
-  "runtime": []
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Pagination",
+  "description": "Page navigation with prev/next and page numbers.",
+  "category": "navigation",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add pagination",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "navigation",
+      "next",
+      "numbers",
+      "page",
+      "pagination",
+      "prev",
+      "with"
+    ]
+  },
+  "integrity": {
+    "filesHash": "14daa904db66d0547ce0b8e900d9cbcc7adf89ee7ec6fb05f0a06b6aecc01d26",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }
