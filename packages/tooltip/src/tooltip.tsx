@@ -5,7 +5,7 @@
  * Parts: Root, Trigger, Content.
  */
 
-import { type Accessor, Show, createSignal, onCleanup, onSettled } from "solid-js"
+import { type Accessor, Show, createSignal, createEffect, onCleanup } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -196,7 +196,7 @@ export interface TooltipContentProps {
 export function Content(props: TooltipContentProps) {
   const ctx = useTooltipContext()
   const delays = useDelayContext()
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement | undefined>(undefined)
   let closeTimer: ReturnType<typeof setTimeout> | undefined
 
   const handleMouseEnter = () => {
@@ -212,24 +212,19 @@ export function Content(props: TooltipContentProps) {
     }, delays.close)
   }
 
-  onSettled(() => {
-    if (!contentEl) return
-
-    // Positioning
-    let cleanupPositioning: (() => void) | undefined
-    const reference = ctx.triggerRef()
-    if (ctx.positioning && reference && contentEl) {
-      const result = ctx.positioning.update(reference, contentEl)
-      if (typeof result === "function") {
-        cleanupPositioning = result
-      }
-    }
-
-    return () => {
-      cleanupPositioning?.()
-      if (closeTimer !== undefined) clearTimeout(closeTimer)
-    }
+  onCleanup(() => {
+    if (closeTimer !== undefined) clearTimeout(closeTimer)
   })
+
+  createEffect(
+    () => (ctx.present() ? [contentEl(), ctx.triggerRef()] : [undefined, undefined]),
+    ([el, reference]) => {
+      if (!ctx.positioning || !el || !reference) return
+
+      const result = ctx.positioning.update(reference, el)
+      return typeof result === "function" ? result : undefined
+    },
+  )
 
   return (
     <Show when={ctx.present()}>
@@ -239,7 +234,7 @@ export function Content(props: TooltipContentProps) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={(el: HTMLDivElement) => {
-          contentEl = el
+          setContentEl(el)
           props.ref?.(el)
         }}
         class={props.class}

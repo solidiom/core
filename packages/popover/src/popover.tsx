@@ -5,7 +5,7 @@
  * Parts: Root, Trigger, Content, Close, Anchor.
  */
 
-import { type Accessor, createSignal, onSettled, Show } from "solid-js"
+import { type Accessor, createSignal, createEffect, Show } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -164,59 +164,62 @@ export function Content(props: PopoverContentProps) {
   const ctx = usePopoverContext()
   const shouldTrapFocus = () => props.trapFocus ?? ctx.modal
 
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement | undefined>(undefined)
 
-  onSettled(() => {
-    if (!contentEl) return
-    const doc = contentEl.ownerDocument
+  createEffect(
+    () => (ctx.present() ? contentEl() : undefined),
+    (el) => {
+      if (!el) return
+      const doc = el.ownerDocument
 
-    // Register layer
-    const stack = getLayerStack(doc)
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: ctx.modal,
-    })
+      // Register layer
+      const stack = getLayerStack(doc)
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: ctx.modal,
+      })
 
-    // Dismissable layer
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      excludeElements: () => {
-        const trigger = doc.getElementById(ctx.triggerId)
-        return trigger ? [trigger] : []
-      },
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason))
-      },
-    })
+      // Dismissable layer
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        excludeElements: () => {
+          const trigger = doc.getElementById(ctx.triggerId)
+          return trigger ? [trigger] : []
+        },
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason))
+        },
+      })
 
-    // Focus scope (only when trapping)
-    const deactivateFocus = shouldTrapFocus()
-      ? activateFocusScope({
-          element: () => contentEl,
-          restoreTarget: () => ctx.triggerRef() as HTMLElement | undefined,
-        })
-      : () => {}
+      // Focus scope (only when trapping)
+      const deactivateFocus = shouldTrapFocus()
+        ? activateFocusScope({
+            element: () => el,
+            restoreTarget: () => ctx.triggerRef() as HTMLElement | undefined,
+          })
+        : () => {}
 
-    // Positioning
-    let cleanupPositioning: (() => void) | undefined
-    const reference = ctx.anchorRef()
-    if (ctx.positioning && reference && contentEl) {
-      const result = ctx.positioning.update(reference, contentEl)
-      if (typeof result === "function") {
-        cleanupPositioning = result
+      // Positioning
+      let cleanupPositioning: (() => void) | undefined
+      const reference = ctx.anchorRef()
+      if (ctx.positioning && reference && el) {
+        const result = ctx.positioning.update(reference, el)
+        if (typeof result === "function") {
+          cleanupPositioning = result
+        }
       }
-    }
 
-    return () => {
-      cleanupPositioning?.()
-      deactivateFocus()
-      removeDismissable()
-      removeLayer()
-    }
-  })
+      return () => {
+        cleanupPositioning?.()
+        deactivateFocus()
+        removeDismissable()
+        removeLayer()
+      }
+    },
+  )
 
   return (
     <Show when={ctx.present()}>
@@ -225,7 +228,7 @@ export function Content(props: PopoverContentProps) {
         role="dialog"
         aria-modal={ctx.modal ? "true" : undefined}
         ref={(el: HTMLDivElement) => {
-          contentEl = el
+          setContentEl(el)
           props.ref?.(el)
         }}
         class={props.class}

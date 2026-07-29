@@ -5,7 +5,7 @@
  * Parts: Root, Input, Content (listbox), Item, ItemText.
  */
 
-import { type Accessor, Show, createSignal, onCleanup, onSettled } from "solid-js"
+import { type Accessor, Show, createSignal, createEffect, onCleanup } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -220,32 +220,35 @@ export interface ComboboxContentProps {
 /** Listbox container — registers dismissable layer for outside click/escape. */
 export function Content(props: ComboboxContentProps) {
   const ctx = useComboboxContext()
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement | undefined>(undefined)
 
-  onSettled(() => {
-    if (!contentEl) return
-    const doc = contentEl.ownerDocument
-    const stack = getLayerStack(doc)
-    const removeLayer = stack.push({ id: ctx.listboxId, element: contentEl, modal: false })
+  createEffect(
+    () => (ctx.open() ? contentEl() : undefined),
+    (el) => {
+      if (!el) return
+      const doc = el.ownerDocument
+      const stack = getLayerStack(doc)
+      const removeLayer = stack.push({ id: ctx.listboxId, element: el, modal: false })
 
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.listboxId,
-      element: () => contentEl,
-      excludeElements: () => {
-        const input = doc.getElementById(ctx.inputId)
-        return input ? [input] : []
-      },
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason))
-      },
-    })
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.listboxId,
+        element: () => el,
+        excludeElements: () => {
+          const input = doc.getElementById(ctx.inputId)
+          return input ? [input] : []
+        },
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason))
+        },
+      })
 
-    return () => {
-      removeDismissable()
-      removeLayer()
-    }
-  })
+      return () => {
+        removeDismissable()
+        removeLayer()
+      }
+    },
+  )
 
   return (
     <Show when={ctx.open()}>
@@ -253,7 +256,7 @@ export function Content(props: ComboboxContentProps) {
         id={ctx.listboxId}
         role="listbox"
         ref={(el: HTMLDivElement) => {
-          contentEl = el
+          setContentEl(el)
           props.ref?.(el)
         }}
         class={props.class}
