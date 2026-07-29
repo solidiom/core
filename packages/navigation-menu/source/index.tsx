@@ -4,7 +4,7 @@
  * Parts: Root, List, Item, Trigger, Content, Link.
  */
 
-import { createSignal, onCleanup, type Accessor } from "solid-js"
+import { createEffect, createSignal, onCleanup, type Accessor } from "solid-js"
 import { type JSX, Show } from "@solidjs/web"
 import {
   createCollection,
@@ -198,6 +198,8 @@ export function Item(props: NavigationMenuItemProps) {
   const triggerId = createStableId("nav-trigger")
   const contentId = createStableId("nav-content")
 
+  const [triggerRef, setTriggerRef] = createSignal<HTMLElement | undefined>(undefined)
+
   const isOpen = () => ctx.activeValue() === props.value
 
   return (
@@ -207,6 +209,8 @@ export function Item(props: NavigationMenuItemProps) {
         isOpen,
         triggerId,
         contentId,
+        triggerRef,
+        setTriggerRef,
       }}
     >
       <li
@@ -240,20 +244,25 @@ export interface NavigationMenuTriggerProps {
 export function Trigger(props: NavigationMenuTriggerProps) {
   const ctx = useNavigationMenuContext()
   const itemCtx = useNavigationMenuItemContext()
-  let ref: HTMLButtonElement | undefined
 
   const itemId = itemCtx.value
 
-  // Register item with collection
+  // Register item with collection. `ref` reads the item-level trigger signal
+  // so roving focus and Content's positioning resolve the same element.
   const unregister = ctx.collection.registerItem({
     id: itemId,
     get ref() {
-      return ref
+      return itemCtx.triggerRef()
     },
     disabled: () => false,
     textValue: () => itemId,
   })
-  onCleanup(unregister)
+  onCleanup(() => {
+    unregister()
+    // Drop the element so a detached node can never be used as a
+    // positioning reference or focus target after unmount.
+    itemCtx.setTriggerRef(undefined)
+  })
 
   const handleClick = () => {
     if (itemCtx.isOpen()) {
@@ -281,7 +290,7 @@ export function Trigger(props: NavigationMenuTriggerProps) {
 
   return (
     <button
-      ref={ref}
+      ref={(element: HTMLButtonElement) => itemCtx.setTriggerRef(element)}
       id={itemCtx.triggerId}
       type="button"
       role="menuitem"
@@ -325,6 +334,23 @@ export function Content(props: NavigationMenuContentProps) {
 
   const presence = createPresence({ open: itemCtx.isOpen })
 
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement | undefined>(undefined)
+
+  // Positioning. Both the panel element and the trigger reference are read in
+  // the tracked compute function so the effect re-runs whenever either lands —
+  // the panel only mounts once `present()` is true, and the trigger ref may
+  // resolve on a later tick. Reading either inside the effect body instead
+  // would silently skip positioning on first open.
+  createEffect(
+    () => (presence.present() ? [contentEl(), itemCtx.triggerRef()] : [undefined, undefined]),
+    ([element, reference]) => {
+      if (!ctx.positioning || !element || !reference) return
+
+      const result = ctx.positioning.update(reference, element)
+      return typeof result === "function" ? result : undefined
+    },
+  )
+
   const handlePointerEnter = () => {
     ctx.pointerIntent.handleContentEnter()
   }
@@ -337,15 +363,17 @@ export function Content(props: NavigationMenuContentProps) {
     if (e.key === "Escape") {
       e.preventDefault()
       ctx.close()
-      // Restore focus to trigger
-      const triggerEl = document.getElementById(itemCtx.triggerId)
-      triggerEl?.focus()
+      // Restore focus to the trigger via the tracked ref rather than a
+      // document-wide id lookup, which would miss a trigger rendered into a
+      // different document or shadow root.
+      itemCtx.triggerRef()?.focus()
     }
   }
 
   return (
     <Show when={presence.present()}>
       <div
+        ref={(element: HTMLDivElement) => setContentEl(element)}
         id={itemCtx.contentId}
         role="menu"
         aria-labelledby={itemCtx.triggerId}

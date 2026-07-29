@@ -9,6 +9,7 @@ import { render } from "@solidjs/web"
 import { flush } from "solid-js"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as NavigationMenu from "./index"
+import type { PositioningPort } from "./navigation-menu-context"
 
 // ─── Setup ─────────────────────────────────────────────────────────────────────
 
@@ -214,6 +215,36 @@ describe("NavigationMenu", () => {
     expect(container.querySelector("button")!.classList.contains("trigger-cls")).toBe(true)
   })
 
+  it("restores focus to the trigger on Escape", () => {
+    const container = getContainer()
+    render(
+      () => (
+        <NavigationMenu.Root>
+          <NavigationMenu.List>
+            <NavigationMenu.Item value="products">
+              <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
+              <NavigationMenu.Content>
+                <NavigationMenu.Link href="/a">Link A</NavigationMenu.Link>
+              </NavigationMenu.Content>
+            </NavigationMenu.Item>
+          </NavigationMenu.List>
+        </NavigationMenu.Root>
+      ),
+      container,
+    )
+
+    const trigger = container.querySelector("button[role='menuitem']")! as HTMLButtonElement
+    trigger.click()
+    flush()
+
+    const content = container.querySelector("[role='menu']")!
+    content.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }))
+    flush()
+
+    expect(container.querySelector("[role='menu']")).toBeNull()
+    expect(document.activeElement).toBe(trigger)
+  })
+
   it("produces no console errors", () => {
     const container = getContainer()
     render(
@@ -229,5 +260,157 @@ describe("NavigationMenu", () => {
       container,
     )
     guard.assertNoErrors()
+  })
+
+  it("produces no console errors with an open content panel", () => {
+    const container = getContainer()
+    render(
+      () => (
+        <NavigationMenu.Root>
+          <NavigationMenu.List>
+            <NavigationMenu.Item value="a">
+              <NavigationMenu.Trigger>A</NavigationMenu.Trigger>
+              <NavigationMenu.Content>
+                <NavigationMenu.Link href="/a">Link A</NavigationMenu.Link>
+              </NavigationMenu.Content>
+            </NavigationMenu.Item>
+          </NavigationMenu.List>
+        </NavigationMenu.Root>
+      ),
+      container,
+    )
+
+    // The clean-console assertion has to run against a render that actually
+    // reaches Content's effect body, not just a closed menubar.
+    const trigger = container.querySelector("button[role='menuitem']")! as HTMLButtonElement
+    trigger.click()
+    flush()
+
+    expect(container.querySelector("[role='menu']")).not.toBeNull()
+    guard.assertNoErrors()
+  })
+
+  describe("positioning port", () => {
+    it("calls the positioning port with the trigger and content elements on open", () => {
+      const container = getContainer()
+      const update = vi.fn()
+      const positioning: PositioningPort = { update }
+
+      render(
+        () => (
+          <NavigationMenu.Root positioning={positioning}>
+            <NavigationMenu.List>
+              <NavigationMenu.Item value="products">
+                <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
+                <NavigationMenu.Content>
+                  <NavigationMenu.Link href="/a">Link A</NavigationMenu.Link>
+                </NavigationMenu.Content>
+              </NavigationMenu.Item>
+            </NavigationMenu.List>
+          </NavigationMenu.Root>
+        ),
+        container,
+      )
+
+      // Closed by default: nothing to position yet.
+      expect(update).not.toHaveBeenCalled()
+
+      const trigger = container.querySelector("button[role='menuitem']")! as HTMLButtonElement
+      trigger.click()
+      flush()
+
+      const content = container.querySelector("[role='menu']")
+      expect(content).not.toBeNull()
+      expect(update).toHaveBeenCalledTimes(1)
+      expect(update).toHaveBeenCalledWith(trigger, content)
+    })
+
+    it("runs the positioning cleanup when the panel closes", () => {
+      const container = getContainer()
+      const cleanup = vi.fn()
+      const positioning: PositioningPort = { update: () => cleanup }
+
+      render(
+        () => (
+          <NavigationMenu.Root positioning={positioning}>
+            <NavigationMenu.List>
+              <NavigationMenu.Item value="products">
+                <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
+                <NavigationMenu.Content>Content</NavigationMenu.Content>
+              </NavigationMenu.Item>
+            </NavigationMenu.List>
+          </NavigationMenu.Root>
+        ),
+        container,
+      )
+
+      const trigger = container.querySelector("button[role='menuitem']")! as HTMLButtonElement
+      trigger.click()
+      flush()
+      expect(cleanup).not.toHaveBeenCalled()
+
+      trigger.click()
+      flush()
+      expect(cleanup).toHaveBeenCalledTimes(1)
+    })
+
+    it("positions each item's panel against its own trigger", () => {
+      const container = getContainer()
+      const update = vi.fn()
+      const positioning: PositioningPort = { update }
+
+      render(
+        () => (
+          <NavigationMenu.Root positioning={positioning}>
+            <NavigationMenu.List>
+              <NavigationMenu.Item value="first">
+                <NavigationMenu.Trigger>First</NavigationMenu.Trigger>
+                <NavigationMenu.Content>First panel</NavigationMenu.Content>
+              </NavigationMenu.Item>
+              <NavigationMenu.Item value="second">
+                <NavigationMenu.Trigger>Second</NavigationMenu.Trigger>
+                <NavigationMenu.Content>Second panel</NavigationMenu.Content>
+              </NavigationMenu.Item>
+            </NavigationMenu.List>
+          </NavigationMenu.Root>
+        ),
+        container,
+      )
+
+      const triggers = Array.from(
+        container.querySelectorAll("button[role='menuitem']"),
+      ) as HTMLButtonElement[]
+
+      triggers[1]!.click()
+      flush()
+
+      const content = container.querySelector("[role='menu']")
+      expect(update).toHaveBeenCalledTimes(1)
+      expect(update).toHaveBeenCalledWith(triggers[1], content)
+    })
+
+    it("does not throw when no positioning port is provided", () => {
+      const container = getContainer()
+      render(
+        () => (
+          <NavigationMenu.Root>
+            <NavigationMenu.List>
+              <NavigationMenu.Item value="products">
+                <NavigationMenu.Trigger>Products</NavigationMenu.Trigger>
+                <NavigationMenu.Content>Content</NavigationMenu.Content>
+              </NavigationMenu.Item>
+            </NavigationMenu.List>
+          </NavigationMenu.Root>
+        ),
+        container,
+      )
+
+      const trigger = container.querySelector("button[role='menuitem']")! as HTMLButtonElement
+      trigger.click()
+      flush()
+
+      expect(container.querySelector("[role='menu']")).not.toBeNull()
+      guard.assertNoErrors()
+    })
   })
 })
