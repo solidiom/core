@@ -167,8 +167,8 @@ export function Content(props: PopoverContentProps) {
   const [contentEl, setContentEl] = createSignal<HTMLDivElement | undefined>(undefined)
 
   createEffect(
-    () => (ctx.present() ? contentEl() : undefined),
-    (el) => {
+    () => (ctx.present() ? [contentEl(), ctx.anchorRef()] : [undefined, undefined]),
+    ([el, reference]) => {
       if (!el) return
       const doc = el.ownerDocument
 
@@ -204,7 +204,6 @@ export function Content(props: PopoverContentProps) {
 
       // Positioning
       let cleanupPositioning: (() => void) | undefined
-      const reference = ctx.anchorRef()
       if (ctx.positioning && reference && el) {
         const result = ctx.positioning.update(reference, el)
         if (typeof result === "function") {

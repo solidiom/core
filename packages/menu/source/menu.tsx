@@ -13,6 +13,7 @@ import {
   createContext,
   useContext,
   onCleanup,
+  untrack,
 } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
@@ -202,7 +203,7 @@ export function Content(props: MenuContentProps) {
       })
 
       // Focus first enabled item
-      const items = ctx.collection.enabledItems()
+      const items = untrack(() => ctx.collection.enabledItems())
       if (items.length > 0) {
         ctx.rovingFocus.setActiveId(items[0]!.id)
       }
