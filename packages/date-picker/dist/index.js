@@ -1,5 +1,5 @@
 // src/date-picker.tsx
-import { createSignal, createMemo, onSettled, Show, untrack } from "solid-js";
+import { createSignal, createEffect, createMemo, Show, untrack } from "solid-js";
 import {
   createDisclosureState,
   createStableId,
@@ -168,28 +168,31 @@ function Trigger(props) {
 }
 function Content(props) {
   const ctx = useDatePickerContext();
-  let contentEl;
-  onSettled(() => {
-    if (!contentEl) return;
-    const doc = contentEl.ownerDocument;
-    const stack = getLayerStack(doc);
-    const removeLayer = stack.push({ id: ctx.contentId, element: contentEl, modal: false });
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      onDismiss: (reason) => ctx.requestOpenChange(false, createChangeDetails(reason))
-    });
-    const deactivateFocus = activateFocusScope({
-      element: () => contentEl,
-      restoreTarget: () => doc.getElementById(ctx.triggerId)
-    });
-    return () => {
-      deactivateFocus();
-      removeDismissable();
-      removeLayer();
-    };
-  });
+  const [contentEl, setContentEl] = createSignal(void 0);
+  createEffect(
+    () => ctx.present() ? contentEl() : void 0,
+    (el) => {
+      if (!el) return;
+      const doc = el.ownerDocument;
+      const stack = getLayerStack(doc);
+      const removeLayer = stack.push({ id: ctx.contentId, element: el, modal: false });
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        onDismiss: (reason) => ctx.requestOpenChange(false, createChangeDetails(reason))
+      });
+      const deactivateFocus = activateFocusScope({
+        element: () => el,
+        restoreTarget: () => doc.getElementById(ctx.triggerId)
+      });
+      return () => {
+        deactivateFocus();
+        removeDismissable();
+        removeLayer();
+      };
+    }
+  );
   return /* @__PURE__ */ React.createElement(Show, { when: ctx.present() }, /* @__PURE__ */ React.createElement(
     "div",
     {
@@ -197,7 +200,7 @@ function Content(props) {
       role: "dialog",
       "aria-modal": "true",
       ref: (el) => {
-        contentEl = el;
+        setContentEl(el);
         props.ref?.(el);
       },
       class: props.class,

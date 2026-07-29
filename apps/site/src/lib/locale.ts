@@ -28,7 +28,17 @@ const LOCALE_PREFIXES: Record<Locale, string> = {
  * pages. Add a base pathname here with its paired page routes in `src/pages`.
  * This is the single source for language switching and alternate metadata.
  */
-export const LOCALIZED_ROUTE_PATHS = ["/", "/privacy/", "/trademark/"] as const
+export const LOCALIZED_ROUTE_PATHS = ["/", "/privacy/", "/trademark/", "/primitives/"] as const
+
+/** Registry-generated primitive routes have a locale counterpart for every entry. */
+const LOCALIZED_PRIMITIVE_ROUTE = /^\/primitives\/[^/]+\/(?:api\/|examples\/|accessibility\/)?$/
+
+export function isLocalizedRoute(pathname: string): boolean {
+  return (
+    LOCALIZED_ROUTE_PATHS.includes(pathname as (typeof LOCALIZED_ROUTE_PATHS)[number]) ||
+    LOCALIZED_PRIMITIVE_ROUTE.test(pathname)
+  )
+}
 
 export function normalizePathname(pathname: string): string {
   const path = pathname.split(/[?#]/, 1)[0] || "/"
@@ -68,7 +78,7 @@ export function resolveEquivalentLocalePath(
   targetLocale: Locale,
 ): string | undefined {
   const basePathname = localeAgnosticPathname(pathname)
-  if (!LOCALIZED_ROUTE_PATHS.includes(basePathname as (typeof LOCALIZED_ROUTE_PATHS)[number])) {
+  if (!isLocalizedRoute(basePathname)) {
     return undefined
   }
 

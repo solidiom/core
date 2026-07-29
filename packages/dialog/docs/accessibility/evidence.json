@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "primitive": "dialog",
+  "evidenceIds": ["axe-dialog-pass-summary-0c991009"],
+  "summary": {
+    "passes": 15,
+    "violations": 0,
+    "incomplete": 0
+  },
+  "lastRun": "2026-07-27T21:12:15.664Z",
+  "provenance": {
+    "browser": "chromium",
+    "commitSha": "04c0eb80ae74d55d005f410389efb1885f35f565",
+    "ciRunUrl": null
+  }
+}

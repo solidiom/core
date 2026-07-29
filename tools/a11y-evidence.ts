@@ -14,11 +14,16 @@
 import { createHash } from "node:crypto"
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
-import { type AxeResultsArtifact, type AxeScanResult, validateAxeResultsArtifact } from "./axe-results"
+import {
+  type AxeResultsArtifact,
+  type AxeScanResult,
+  validateAxeResultsArtifact,
+} from "./axe-results"
 
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 const INPUT = join(ROOT, "artifacts/axe-results.json")
 const OUTPUT = join(ROOT, "artifacts/a11y-evidence.json")
+const PUBLISHED_EVIDENCE_SCHEMA_VERSION = 1
 
 interface EvidencePrimitive {
   evidenceIds: string[]
@@ -33,6 +38,16 @@ interface EvidencePrimitive {
 interface EvidenceOutput {
   generatedAt: string
   primitives: Record<string, EvidencePrimitive>
+}
+
+interface PublishedEvidence extends EvidencePrimitive {
+  schemaVersion: typeof PUBLISHED_EVIDENCE_SCHEMA_VERSION
+  primitive: string
+  provenance: {
+    browser: AxeResultsArtifact["browser"]
+    commitSha: string | null
+    ciRunUrl: string | null
+  }
 }
 
 function computeEvidenceId(primitive: string, ruleId: string, target: string): string {
@@ -69,6 +84,27 @@ function generateEvidenceForPrimitive(
     },
     lastRun: generatedAt,
   }
+}
+
+function serializePublishedEvidence(evidence: PublishedEvidence): string {
+  return `${[
+    "{",
+    `  \"schemaVersion\": ${evidence.schemaVersion},`,
+    `  \"primitive\": ${JSON.stringify(evidence.primitive)},`,
+    `  \"evidenceIds\": ${JSON.stringify(evidence.evidenceIds)},`,
+    '  "summary": {',
+    `    \"passes\": ${evidence.summary.passes},`,
+    `    \"violations\": ${evidence.summary.violations},`,
+    `    \"incomplete\": ${evidence.summary.incomplete}`,
+    "  },",
+    `  \"lastRun\": ${JSON.stringify(evidence.lastRun)},`,
+    '  "provenance": {',
+    `    \"browser\": ${JSON.stringify(evidence.provenance.browser)},`,
+    `    \"commitSha\": ${JSON.stringify(evidence.provenance.commitSha)},`,
+    `    \"ciRunUrl\": ${JSON.stringify(evidence.provenance.ciRunUrl)}`,
+    "  }",
+    "}",
+  ].join("\n")}\n`
 }
 
 function main(): void {
@@ -109,13 +145,31 @@ function main(): void {
   mkdirSync(dirname(OUTPUT), { recursive: true })
   writeFileSync(OUTPUT, `${JSON.stringify(output, null, 2)}\n`, "utf8")
 
+  const published = Object.entries(primitives).flatMap(([primitive, evidence]) => {
+    const outputPath = join(ROOT, "packages", primitive, "docs", "accessibility", "evidence.json")
+    if (!existsSync(dirname(outputPath))) return []
+
+    const publishedEvidence: PublishedEvidence = {
+      schemaVersion: PUBLISHED_EVIDENCE_SCHEMA_VERSION,
+      primitive,
+      evidenceIds: evidence.evidenceIds,
+      summary: evidence.summary,
+      lastRun: evidence.lastRun,
+      provenance: {
+        browser: artifact.browser,
+        commitSha: artifact.commitSha,
+        ciRunUrl: artifact.ciRunUrl,
+      },
+    }
+    writeFileSync(outputPath, serializePublishedEvidence(publishedEvidence), "utf8")
+    return [outputPath]
+  })
+
   const totalPrimitives = Object.keys(primitives).length
-  const totalEvidence = Object.values(primitives).reduce(
-    (sum, p) => sum + p.evidenceIds.length,
-    0,
-  )
+  const totalEvidence = Object.values(primitives).reduce((sum, p) => sum + p.evidenceIds.length, 0)
   console.log(`✓ Generated ${OUTPUT}`)
   console.log(`  ${totalPrimitives} primitives, ${totalEvidence} evidence IDs`)
+  for (const outputPath of published) console.log(`  ✓ Published ${outputPath}`)
 }
 
 try {

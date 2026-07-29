@@ -11,6 +11,7 @@ export interface ButtonProps {
     onClick?: () => void;
     class?: string;
     type?: "button" | "submit" | "reset";
+    "aria-label"?: string;
 }
 export declare function Root(props: ButtonProps): JSX.Element;
 export { IconButton, type IconButtonProps } from "./icon-button";
