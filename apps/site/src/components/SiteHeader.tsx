@@ -20,6 +20,7 @@
 import { createSignal, For } from "solid-js"
 import * as NavigationMenu from "@solidiom/navigation-menu"
 import * as Drawer from "@solidiom/drawer"
+import { ThemeToggle } from "./ThemeToggle"
 
 export interface NavLink {
   label: string
@@ -80,6 +81,10 @@ export function SiteHeader(props: SiteHeaderProps) {
             </NavigationMenu.List>
           </NavigationMenu.Root>
         </nav>
+
+        <div class="site-header__actions">
+          <ThemeToggle />
+        </div>
 
         <div class="site-header__mobile-trigger">
           <Drawer.Root open={mobileOpen} onOpenChange={setMobileOpen} side="left">
