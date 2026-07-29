@@ -1,0 +1,62 @@
+{
+  "_comment": "SITE-013: Initial route performance budgets. Thresholds are advisory until G2 gate. Values represent gzipped sizes in bytes.",
+  "_baseline": {
+    "_captured": "2026-07-29",
+    "_note": "Measured from the initial shell build (SITE-004 complete). These are the actual values at baseline capture time.",
+    "content_homepage": {
+      "htmlGzipSize": 4685,
+      "jsGzipSize": 0,
+      "cssGzipSize": 5726,
+      "islands": 1,
+      "transferSize": 10411
+    },
+    "content_404": {
+      "htmlGzipSize": 1528,
+      "jsGzipSize": 0,
+      "cssGzipSize": 5726,
+      "islands": 0,
+      "transferSize": 7254
+    },
+    "content_500": {
+      "htmlGzipSize": 1433,
+      "jsGzipSize": 0,
+      "cssGzipSize": 5726,
+      "islands": 0,
+      "transferSize": 7159
+    },
+    "summary": {
+      "totalRoutes": 3,
+      "uniqueJsAssets": 0,
+      "uniqueCssAssets": 1,
+      "sharedCssSize": 28423
+    }
+  },
+  "categories": {
+    "content": {
+      "_comment": "Static content pages: homepage, guides, articles, legal. Minimal or no JS expected. Budget set at ~5x current baseline to allow growth through M2.",
+      "maxHtmlGzipSize": 51200,
+      "maxJsGzipSize": 51200,
+      "maxIslands": 5,
+      "maxTransferSize": 153600
+    },
+    "catalog": {
+      "_comment": "Primitive/component/block/template documentation pages. May have interactive examples. Budget allows for live demos and code blocks.",
+      "maxHtmlGzipSize": 76800,
+      "maxJsGzipSize": 102400,
+      "maxIslands": 10,
+      "maxTransferSize": 256000
+    },
+    "tool": {
+      "_comment": "Playground and theme-builder routes. Heavy client-side tools with larger JS budgets. Isolated via SITE-012 import boundaries.",
+      "maxHtmlGzipSize": 25600,
+      "maxJsGzipSize": 512000,
+      "maxIslands": 3,
+      "maxTransferSize": 614400
+    }
+  },
+  "global": {
+    "_comment": "Cross-route global limits. maxTotalJsGzipSize counts each unique asset once regardless of how many routes reference it.",
+    "maxUniqueJsAssets": 50,
+    "maxTotalJsGzipSize": 1048576
+  }
+}
