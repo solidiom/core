@@ -2,16 +2,18 @@
 /**
  * Base document/layout for every static route on the Solidiom site.
  *
- * Responsibilities (SITE-004):
+ * Responsibilities (SITE-004 + SITE-009 + SITE-010):
  *   - Base HTML shell with correct lang/dir per route locale.
  *   - Metadata defaults (title template, description, canonical link).
+ *   - Social/Open Graph metadata via resolveSocialMetadata helper.
+ *   - hreflang alternates via resolveHreflangAlternates helper.
  *   - Font preload links (placeholder targets pending BRAND-003).
+ *   - Web app manifest link.
  *   - No-flash locale/theme bootstrap (data-theme set before first paint).
  *   - Skip link and a single focus-root landmark for main content.
  *
  * Explicitly out of scope here (see docs/website-tasks.md §5.1):
- *   - Docs shell (SITE-007).
- *   - 404/robots/sitemap/manifest/social helpers (SITE-010).
+ *   - Docs shell (SITE-007 — see DocsLayout).
  *
  * Typography/prose/code styling (SITE-008) is global CSS imported via
  * global.css (prose.css/code.css/callouts.css/print.css) and applies
@@ -21,8 +23,12 @@
  */
 import "../assets/global.css"
 import { bootstrapThemeScript } from "../lib/bootstrap-theme"
-import { resolveLocale, localeDirection, DEFAULT_LOCALE } from "../lib/locale"
-import { resolvePageMetadata } from "../lib/metadata"
+import { resolveLocale, localeDirection } from "../lib/locale"
+import {
+  resolvePageMetadata,
+  resolveSocialMetadata,
+  resolveHreflangAlternates,
+} from "../lib/metadata"
 import { primaryLinks, resourceLinks } from "../lib/nav-links"
 import SiteHeader from "../components/SiteHeader.astro"
 import SiteFooter from "../components/SiteFooter.astro"
@@ -30,6 +36,14 @@ import SiteFooter from "../components/SiteFooter.astro"
 interface Props {
   title?: string
   description?: string
+  /** Path to social card image, relative to site root. */
+  image?: string
+  /** Alt text for social card image. */
+  imageAlt?: string
+  /** Open Graph type override (default "website"). */
+  ogType?: string
+  /** Article publish date (ISO 8601). */
+  publishedTime?: string
   /** Id of the element the skip link and focus root should target. Defaults to "main-content". */
   mainId?: string
   /**
@@ -45,6 +59,10 @@ interface Props {
 const {
   title,
   description,
+  image,
+  imageAlt,
+  ogType,
+  publishedTime,
   mainId = "main-content",
   showHeader = true,
   showFooter = true,
@@ -59,10 +77,17 @@ const metadata = resolvePageMetadata({
   locale,
 })
 
-const alternatePathname =
-  locale === DEFAULT_LOCALE
-    ? `/es${Astro.url.pathname}`
-    : Astro.url.pathname.replace(/^\/es/, "") || "/"
+const social = resolveSocialMetadata({
+  title: metadata.title,
+  description: metadata.description,
+  canonicalUrl: metadata.canonicalUrl,
+  image,
+  imageAlt,
+  type: ogType,
+  publishedTime,
+})
+
+const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
 ---
 
 <!doctype html>
@@ -73,19 +98,26 @@ const alternatePathname =
     <title>{metadata.title}</title>
     <meta name="description" content={metadata.description} />
     <link rel="canonical" href={metadata.canonicalUrl} />
-    <link
-      rel="alternate"
-      hreflang={locale === "en" ? "es" : "en"}
-      href={new URL(alternatePathname, "https://solidiom.org").toString()}
-    />
-    <link rel="alternate" hreflang="x-default" href={metadata.canonicalUrl} />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Solidiom" />
-    <meta property="og:title" content={metadata.title} />
-    <meta property="og:description" content={metadata.description} />
-    <meta property="og:url" content={metadata.canonicalUrl} />
-    <meta name="twitter:card" content="summary_large_image" />
+    {alternates.map((alt) => (
+      <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+    ))}
+
+    <meta property="og:type" content={social["og:type"]} />
+    <meta property="og:site_name" content={social["og:site_name"]} />
+    <meta property="og:title" content={social["og:title"]} />
+    <meta property="og:description" content={social["og:description"]} />
+    <meta property="og:url" content={social["og:url"]} />
+    {social["og:image"] && <meta property="og:image" content={social["og:image"]} />}
+    {social["og:image:alt"] && <meta property="og:image:alt" content={social["og:image:alt"]} />}
+    {social["article:published_time"] && <meta property="article:published_time" content={social["article:published_time"]} />}
+    <meta name="twitter:card" content={social["twitter:card"]} />
+    <meta name="twitter:title" content={social["twitter:title"]} />
+    <meta name="twitter:description" content={social["twitter:description"]} />
+    {social["twitter:image"] && <meta name="twitter:image" content={social["twitter:image"]} />}
+    {social["twitter:image:alt"] && <meta name="twitter:image:alt" content={social["twitter:image:alt"]} />}
+
+    <link rel="manifest" href="/manifest.webmanifest" />
 
     <!--
       Font preloads: placeholder pending BRAND-003 (self-hosted Inter Tight,
