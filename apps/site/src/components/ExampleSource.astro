@@ -1,0 +1,40 @@
+---
+import { existsSync, readFileSync } from "node:fs"
+import { relative, resolve } from "node:path"
+import { getCatalogCopy } from "../lib/catalog"
+import type { Locale } from "../lib/locale"
+
+interface Props {
+  source?: {
+    path: string
+    export?: string
+    language?: string
+  }
+  locale: Locale
+}
+
+const { source, locale } = Astro.props
+const copy = getCatalogCopy(locale)
+const workspaceCandidate = resolve(process.cwd(), "../..")
+const workspaceRoot = existsSync(resolve(workspaceCandidate, "package.json"))
+  ? workspaceCandidate
+  : process.cwd()
+const sourcePath = source ? resolve(workspaceRoot, source.path) : undefined
+const pathIsInsideWorkspace =
+  sourcePath !== undefined && !relative(workspaceRoot, sourcePath).startsWith("..")
+const sourceCode =
+  sourcePath && pathIsInsideWorkspace && existsSync(sourcePath)
+    ? readFileSync(sourcePath, "utf8")
+    : undefined
+---
+
+{
+  source && sourceCode && (
+    <details class="example-source">
+      <summary>{copy.viewSource}</summary>
+      <pre>
+        <code data-language={source.language}>{sourceCode}</code>
+      </pre>
+    </details>
+  )
+}

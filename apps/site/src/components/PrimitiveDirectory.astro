@@ -1,0 +1,53 @@
+---
+/**
+ * DOCS-001 primitive directory — lists every registry primitive with a link
+ * to its localized overview route. Filtering/status UI is DOCS-004's scope;
+ * this is the static, always-available link inventory every locale needs.
+ */
+import DocsLayout from "../layouts/DocsLayout.astro"
+import {
+  getCatalogCopy,
+  getRegistryPrimitives,
+  primitiveHref,
+  type RegistryPrimitive,
+} from "../lib/catalog"
+import type { Locale } from "../lib/locale"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const copy = getCatalogCopy(locale)
+const primitives = getRegistryPrimitives()
+const countLabel = copy.directoryCount.replace("{count}", String(primitives.length))
+
+function categoryLabel(primitive: RegistryPrimitive): string {
+  return primitive.category
+}
+---
+
+<DocsLayout title={copy.directoryTitle} description={copy.directoryDescription}>
+  <header class="primitive-directory__header">
+    <h1>{copy.directoryTitle}</h1>
+    <p>{copy.directoryDescription}</p>
+    <p class="primitive-directory__count">{countLabel}</p>
+  </header>
+
+  <ul class="primitive-directory__grid" data-pagefind-ignore="index">
+    {
+      primitives.map((primitive) => (
+        <li class="primitive-directory__item">
+          <a href={primitiveHref(primitive.name, locale)} class="primitive-directory__link">
+            <span class="primitive-directory__name">{primitive.label}</span>
+            <span class="primitive-directory__description">{primitive.description}</span>
+            <span class="primitive-directory__meta">
+              <span class="primitive-directory__category">{categoryLabel(primitive)}</span>
+              <span class="primitive-directory__status">{primitive.status}</span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</DocsLayout>

@@ -1,5 +1,5 @@
 // src/index.tsx
-import { Show, onSettled, createContext, useContext } from "solid-js";
+import { Show, createEffect, createSignal, createContext, useContext } from "solid-js";
 import {
   createDisclosureState,
   createStableId,
@@ -88,39 +88,42 @@ function Backdrop(props) {
 function Content(props) {
   const ctx = useSheetContext();
   const shouldTrapFocus = () => props.trapFocus ?? true;
-  let contentEl;
-  onSettled(() => {
-    if (!contentEl) return;
-    const doc = contentEl.ownerDocument;
-    const stack = getLayerStack(doc);
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: true
-    });
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason));
-      }
-    });
-    const deactivateFocus = shouldTrapFocus() ? activateFocusScope({
-      element: () => contentEl,
-      restoreTarget: () => doc.getElementById(ctx.triggerId)
-    }) : () => {
-    };
-    const deactivateIsolation = activateModalIsolation(contentEl);
-    const releaseScroll = activateScrollLock(doc);
-    return () => {
-      releaseScroll();
-      deactivateIsolation();
-      deactivateFocus();
-      removeDismissable();
-      removeLayer();
-    };
-  });
+  const [contentEl, setContentEl] = createSignal();
+  createEffect(
+    () => ctx.present() ? contentEl() : void 0,
+    (el) => {
+      if (!el) return;
+      const doc = el.ownerDocument;
+      const stack = getLayerStack(doc);
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: true
+      });
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason));
+        }
+      });
+      const deactivateFocus = shouldTrapFocus() ? activateFocusScope({
+        element: () => el,
+        restoreTarget: () => doc.getElementById(ctx.triggerId)
+      }) : () => {
+      };
+      const deactivateIsolation = activateModalIsolation(el);
+      const releaseScroll = activateScrollLock(doc);
+      return () => {
+        releaseScroll();
+        deactivateIsolation();
+        deactivateFocus();
+        removeDismissable();
+        removeLayer();
+      };
+    }
+  );
   return /* @__PURE__ */ React.createElement(
     "div",
     {
@@ -131,7 +134,7 @@ function Content(props) {
       "aria-describedby": ctx.descriptionId,
       "data-side": ctx.side,
       ref: (el) => {
-        contentEl = el;
+        setContentEl(el);
         props.ref?.(el);
       },
       class: props.class,

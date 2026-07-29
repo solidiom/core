@@ -48,6 +48,7 @@ export function Root(props: DialogRootProps) {
   })
 
   const presence = createPresence({ open })
+  const [triggerEl, setTriggerEl] = createSignal<HTMLElement>()
 
   const ctx: DialogContextValue = {
     open,
@@ -56,6 +57,8 @@ export function Root(props: DialogRootProps) {
     titleId: `${baseId}-title`,
     descriptionId: `${baseId}-description`,
     triggerId: `${baseId}-trigger`,
+    triggerEl,
+    setTriggerEl,
     phase: presence.phase,
     present: presence.present,
     modal,
@@ -85,7 +88,10 @@ export function Trigger(props: DialogTriggerProps) {
       aria-expanded={ctx.open() ? "true" : undefined}
       aria-controls={ctx.open() ? ctx.contentId : undefined}
       onClick={handleClick}
-      ref={props.ref}
+      ref={(el: HTMLButtonElement) => {
+        ctx.setTriggerEl(el)
+        props.ref?.(el)
+      }}
       {...applySemanticAttrs({
         scope: "dialog",
         part: "trigger",
@@ -183,7 +189,7 @@ export function Content(props: DialogContentProps) {
       const deactivateFocus = shouldTrapFocus()
         ? activateFocusScope({
             element: () => el,
-            restoreTarget: () => doc.getElementById(ctx.triggerId),
+            restoreTarget: () => ctx.triggerEl() ?? doc.getElementById(ctx.triggerId),
           })
         : () => {}
 

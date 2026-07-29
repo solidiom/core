@@ -1,0 +1,116 @@
+---
+import { getCollection, render } from "astro:content"
+import type { RegistryPrimitive, PrimitiveView } from "../lib/catalog"
+import { getAccessibilityEvidence, getApiDocument, getCatalogCopy } from "../lib/catalog"
+import type { Locale } from "../lib/locale"
+import DocsLayout from "../layouts/DocsLayout.astro"
+import AccessibilityEvidence from "./AccessibilityEvidence.astro"
+import ApiReference from "./ApiReference.astro"
+import { DialogExample } from "./DialogExample"
+import ExampleSource from "./ExampleSource.astro"
+import PrimitiveTabs from "./PrimitiveTabs.astro"
+
+interface Props {
+  primitive: RegistryPrimitive
+  locale: Locale
+  view: PrimitiveView
+}
+
+const { primitive, locale, view } = Astro.props
+const copy = getCatalogCopy(locale)
+const sectionTitle: Record<PrimitiveView, string> = {
+  overview: copy.preview,
+  api: copy.api,
+  examples: copy.examples,
+  accessibility: copy.accessibility,
+}
+const section = view === "overview" ? "overview" : view
+const documents = await getCollection(
+  "primitives",
+  (entry) =>
+    entry.data.primitive === primitive.name &&
+    entry.data.locale === locale &&
+    entry.data.section === section,
+)
+const document = documents.at(0)
+const exampleDocuments =
+  view === "examples"
+    ? await getCollection(
+        "examples",
+        (entry) => entry.data.product === primitive.label && entry.data.locale === locale,
+      )
+    : []
+const exampleSource = exampleDocuments.at(0)?.data.source
+const renderedDocument = document ? await render(document) : undefined
+const DocumentContent = renderedDocument?.Content
+const pageDescription = document?.data.description ?? primitive.description
+const title = `${primitive.label} ${sectionTitle[view]}`
+const apiDocument = view === "api" ? getApiDocument(primitive.name) : undefined
+const accessibilityEvidence =
+  view === "accessibility" ? getAccessibilityEvidence(primitive.name) : undefined
+const isDialog = primitive.name === "dialog"
+---
+
+<DocsLayout title={title} description={pageDescription}>
+  <header class="primitive-header">
+    <h1>{primitive.label}</h1>
+    <p>{pageDescription}</p>
+    <dl class="primitive-header__meta">
+      <div><dt>{copy.package}</dt><dd><code>{primitive.package}</code></dd></div>
+      <div><dt>{copy.version}</dt><dd><code>{primitive.version}</code></dd></div>
+      <div><dt>{copy.status}</dt><dd>{primitive.status}</dd></div>
+    </dl>
+  </header>
+
+  <PrimitiveTabs name={primitive.name} label={primitive.label} locale={locale} current={view} />
+
+  {
+    view === "overview" && (
+      <section>
+        <h2>{copy.preview}</h2>
+        {DocumentContent ? <DocumentContent /> : <p>{primitive.description}</p>}
+        <div class="primitive-install">
+          <h3>{copy.install}</h3>
+          <pre>
+            <code>{`pnpm add ${primitive.package}`}</code>
+          </pre>
+        </div>
+      </section>
+    )
+  }
+
+  {view === "api" && <ApiReference document={apiDocument} locale={locale} />}
+
+  {
+    view === "examples" && (
+      <section>
+        <h2>{copy.examples}</h2>
+        {DocumentContent ? (
+          <DocumentContent />
+        ) : (
+          <p class="catalog-notice" role="status">
+            {copy.examplesUnavailable}
+          </p>
+        )}
+        {isDialog && <DialogExample locale={locale} client:load />}
+        {isDialog && <ExampleSource source={exampleSource} locale={locale} />}
+      </section>
+    )
+  }
+
+  {
+    view === "accessibility" && (
+      <section>
+        <h2>{copy.accessibility}</h2>
+        {DocumentContent ? (
+          <DocumentContent />
+        ) : (
+          <p class="catalog-notice" role="status">
+            {copy.accessibilityUnavailable}
+          </p>
+        )}
+        {isDialog && <AccessibilityEvidence evidence={accessibilityEvidence} locale={locale} />}
+      </section>
+    )
+  }
+</DocsLayout>

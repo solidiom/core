@@ -1,5 +1,5 @@
 // src/dialog.tsx
-import { onSettled, Show } from "solid-js";
+import { createEffect, createSignal, Show } from "solid-js";
 import {
   createDisclosureState,
   createStableId,
@@ -34,6 +34,7 @@ function Root(props) {
     onOpenChange: props.onOpenChange
   });
   const presence = createPresence({ open });
+  const [triggerEl, setTriggerEl] = createSignal();
   const ctx = {
     open,
     requestOpenChange,
@@ -41,6 +42,8 @@ function Root(props) {
     titleId: `${baseId}-title`,
     descriptionId: `${baseId}-description`,
     triggerId: `${baseId}-trigger`,
+    triggerEl,
+    setTriggerEl,
     phase: presence.phase,
     present: presence.present,
     modal
@@ -60,7 +63,10 @@ function Trigger(props) {
       "aria-expanded": ctx.open() ? "true" : void 0,
       "aria-controls": ctx.open() ? ctx.contentId : void 0,
       onClick: handleClick,
-      ref: props.ref,
+      ref: (el) => {
+        ctx.setTriggerEl(el);
+        props.ref?.(el);
+      },
       ...applySemanticAttrs({
         scope: "dialog",
         part: "trigger",
@@ -93,41 +99,44 @@ function Backdrop(props) {
 function Content(props) {
   const ctx = useDialogContext();
   const shouldTrapFocus = () => props.trapFocus ?? true;
-  let contentEl;
-  onSettled(() => {
-    if (!contentEl) return;
-    const doc = contentEl.ownerDocument;
-    const stack = getLayerStack(doc);
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: ctx.modal
-    });
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason));
-      }
-    });
-    const deactivateFocus = shouldTrapFocus() ? activateFocusScope({
-      element: () => contentEl,
-      restoreTarget: () => doc.getElementById(ctx.triggerId)
-    }) : () => {
-    };
-    const deactivateIsolation = ctx.modal ? activateModalIsolation(contentEl) : () => {
-    };
-    const releaseScroll = ctx.modal ? activateScrollLock(doc) : () => {
-    };
-    return () => {
-      releaseScroll();
-      deactivateIsolation();
-      deactivateFocus();
-      removeDismissable();
-      removeLayer();
-    };
-  });
+  const [contentEl, setContentEl] = createSignal();
+  createEffect(
+    () => ctx.present() ? contentEl() : void 0,
+    (el) => {
+      if (!el) return;
+      const doc = el.ownerDocument;
+      const stack = getLayerStack(doc);
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: ctx.modal
+      });
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason));
+        }
+      });
+      const deactivateFocus = shouldTrapFocus() ? activateFocusScope({
+        element: () => el,
+        restoreTarget: () => ctx.triggerEl() ?? doc.getElementById(ctx.triggerId)
+      }) : () => {
+      };
+      const deactivateIsolation = ctx.modal ? activateModalIsolation(el) : () => {
+      };
+      const releaseScroll = ctx.modal ? activateScrollLock(doc) : () => {
+      };
+      return () => {
+        releaseScroll();
+        deactivateIsolation();
+        deactivateFocus();
+        removeDismissable();
+        removeLayer();
+      };
+    }
+  );
   return /* @__PURE__ */ React.createElement(
     "div",
     {
@@ -137,7 +146,7 @@ function Content(props) {
       "aria-labelledby": ctx.titleId,
       "aria-describedby": ctx.descriptionId,
       ref: (el) => {
-        contentEl = el;
+        setContentEl(el);
         props.ref?.(el);
       },
       class: props.class,

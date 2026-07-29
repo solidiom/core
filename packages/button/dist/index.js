@@ -10,7 +10,8 @@ function IconButton(props) {
       loading: props.loading,
       onClick: props.onClick,
       type: props.type,
-      class: props.class
+      class: props.class,
+      "aria-label": props["aria-label"]
     },
     /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true" }, props.children)
   );
@@ -78,6 +79,7 @@ function Root(props) {
       type: props.type ?? "button",
       disabled: isDisabled(),
       "aria-busy": props.loading ? "true" : void 0,
+      "aria-label": props["aria-label"],
       onClick: props.onClick,
       class: props.class,
       ...semanticAttrs()

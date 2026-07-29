@@ -16,7 +16,7 @@ import {
   resolvePageMetadata,
   resolveSocialMetadata,
 } from "../lib/metadata"
-import { primaryLinks, resourceLinks } from "../lib/nav-links"
+import { getPrimaryLinks, resourceLinks } from "../lib/nav-links"
 import SiteHeader from "../components/SiteHeader.astro"
 import SiteFooter from "../components/SiteFooter.astro"
 
@@ -131,7 +131,7 @@ const homeHref = resolveEquivalentLocalePath("/", locale) ?? "/"
     {
       showHeader && (
         <SiteHeader
-          links={primaryLinks}
+          links={getPrimaryLinks(locale)}
           resourceLinks={resourceLinks}
           homeHref={homeHref}
           locale={locale}

@@ -1,15 +1,24 @@
 /**
  * Primary navigation link config for SiteHeader.
  *
- * Placeholder route set: only "/" exists as a real route today (SITE-007
- * docs shell, DOCS-001 catalog routes, and MKT-* marketing pages have not
- * landed). Kept as a single small source of truth so header links can be
- * updated in one place as real routes are added, rather than hardcoded
- * inside the component.
+ * Locale-aware: DOCS-001 added the registry-driven `/primitives/` directory,
+ * so navigation now needs a localized label and prefixed href rather than
+ * the single unprefixed placeholder link that existed before any catalog
+ * route did.
  */
 
 import type { NavLink } from "../components/SiteHeader"
+import { localePrefix, type Locale } from "./locale"
 
-export const primaryLinks: NavLink[] = [{ label: "Home", href: "/" }]
+const HOME_LABEL: Record<Locale, string> = { en: "Home", es: "Inicio" }
+const PRIMITIVES_LABEL: Record<Locale, string> = { en: "Primitives", es: "Primitivas" }
+
+export function getPrimaryLinks(locale: Locale): NavLink[] {
+  const prefix = localePrefix(locale)
+  return [
+    { label: HOME_LABEL[locale], href: `${prefix}/` },
+    { label: PRIMITIVES_LABEL[locale], href: `${prefix}/primitives/` },
+  ]
+}
 
 export const resourceLinks: NavLink[] = [{ label: "GitHub", href: "https://github.com/solidiom" }]

@@ -1,0 +1,37 @@
+---
+import { getCatalogCopy, primitiveHref, type PrimitiveView } from "../lib/catalog"
+import type { Locale } from "../lib/locale"
+
+interface Props {
+  name: string
+  label: string
+  locale: Locale
+  current: PrimitiveView
+}
+
+const { name, label, locale, current } = Astro.props
+const copy = getCatalogCopy(locale)
+const tabs: Array<{ view: PrimitiveView; label: string }> = [
+  { view: "overview", label: copy.preview },
+  { view: "api", label: copy.api },
+  { view: "examples", label: copy.examples },
+  { view: "accessibility", label: copy.accessibility },
+]
+---
+
+<nav class="primitive-tabs" aria-label={copy.tabsLabel.replace("{name}", label)}>
+  <ul>
+    {
+      tabs.map((tab) => (
+        <li>
+          <a
+            href={primitiveHref(name, locale, tab.view)}
+            aria-current={current === tab.view ? "page" : undefined}
+          >
+            {tab.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

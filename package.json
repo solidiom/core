@@ -61,6 +61,7 @@
     "solid-js": "2.0.0-beta.26",
     "tsup": "^8.5.1",
     "tsx": "^4.19.0",
+    "typedoc": "0.28.20",
     "typescript": "~6.0.3",
     "vite": "^8.1.5",
     "vite-plugin-solid": "3.0.0-next.15",

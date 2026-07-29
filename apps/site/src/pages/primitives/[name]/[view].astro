@@ -1,0 +1,21 @@
+---
+import PrimitiveRoute from "../../../components/PrimitiveRoute.astro"
+import {
+  getPrimitiveViewStaticPaths,
+  type PrimitiveView,
+  type RegistryPrimitive,
+} from "../../../lib/catalog"
+
+export function getStaticPaths() {
+  return getPrimitiveViewStaticPaths()
+}
+
+interface Props {
+  primitive: RegistryPrimitive
+}
+
+const { primitive } = Astro.props
+const view = Astro.params.view as Exclude<PrimitiveView, "overview">
+---
+
+<PrimitiveRoute primitive={primitive} locale="en" view={view} />

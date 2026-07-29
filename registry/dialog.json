@@ -33,14 +33,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-dialog-pass-summary-0c991009"
+    ],
+    "lastReviewed": "2026-07-27T21:12:15.664Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -63,10 +69,10 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "70dba500c62e36cb043afcd8779497efcca14d9c7e018645c288208d642524e6",
+    "filesHash": "9c5a54d31056a1f9b8af3a33b9431788bb0374107839ae98d98f0c16eef1c2ea",
     "fileDigests": {
-      "src/dialog-context.ts": "6a4d36f79ce44d6a882e4ebf9448c7239a6c6812ee9cba253d20db17a78d6276",
-      "src/dialog.tsx": "8794003efae3e97e28cd1b23c0838f6edb8191c831ad2b7755bb67fc9292dff1",
+      "src/dialog-context.ts": "fe5dd5cd7ec569a452631de115a0666952944631d37d5c7e801fa9f10fd43928",
+      "src/dialog.tsx": "8c01e0531e61fcb5d77cf7040d9548ef5da6cdbec3c7cf0ed526e3a7b34119a6",
       "src/index.tsx": "12a64978fe94873ab58c3da5219a6e75780eae19a1bb8de728143d8e1affcb01"
     },
     "lastGenerated": "2025-01-01T00:00:00.000Z"

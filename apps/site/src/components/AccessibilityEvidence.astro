@@ -1,0 +1,53 @@
+---
+import type { AccessibilityEvidence } from "../lib/catalog"
+import { getCatalogCopy } from "../lib/catalog"
+import type { Locale } from "../lib/locale"
+
+interface Props {
+  evidence?: AccessibilityEvidence
+  locale: Locale
+}
+
+const { evidence, locale } = Astro.props
+const copy = getCatalogCopy(locale)
+const date = evidence
+  ? new Intl.DateTimeFormat(locale === "es" ? "es" : "en", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    }).format(new Date(evidence.lastRun))
+  : undefined
+---
+
+{
+  evidence ? (
+    <section class="accessibility-evidence" aria-labelledby="automated-evidence-heading">
+      <p class="accessibility-evidence__eyebrow">{copy.automatedEvidence}</p>
+      <h3 id="automated-evidence-heading">{copy.evidenceSummary}</h3>
+      <dl class="accessibility-evidence__summary">
+        <div>
+          <dt>{copy.passes}</dt>
+          <dd>{evidence.summary.passes}</dd>
+        </div>
+        <div>
+          <dt>{copy.violations}</dt>
+          <dd>{evidence.summary.violations}</dd>
+        </div>
+        <div>
+          <dt>{copy.incomplete}</dt>
+          <dd>{evidence.summary.incomplete}</dd>
+        </div>
+      </dl>
+      <p>{copy.evidenceLastRun.replace("{date}", date ?? "")}</p>
+      {evidence.evidenceIds.length > 0 && (
+        <p class="accessibility-evidence__ids">
+          {copy.evidenceIds}: <code>{evidence.evidenceIds.join(", ")}</code>
+        </p>
+      )}
+      <p class="accessibility-evidence__notice">{copy.evidenceNotice}</p>
+    </section>
+  ) : (
+    <p class="catalog-notice" role="status">
+      {copy.evidenceUnavailable}
+    </p>
+  )
+}
