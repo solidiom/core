@@ -7,7 +7,7 @@
  * Parts: Root, Trigger, Portal, Content, Title, Description, Cancel, Action.
  */
 
-import { type Accessor, Show, onSettled, createContext, useContext } from "solid-js"
+import { type Accessor, Show, createEffect, createSignal, createContext, useContext } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -143,40 +143,43 @@ export interface AlertDialogContentProps {
 export function Content(props: AlertDialogContentProps) {
   const ctx = useAlertDialogContext()
 
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement>()
 
-  onSettled(() => {
-    if (!contentEl) return
-    const doc = contentEl.ownerDocument
+  createEffect(
+    () => (ctx.present() ? contentEl() : undefined),
+    (el) => {
+      if (!el) return
+      const doc = el.ownerDocument
 
-    // Register layer
-    const stack = getLayerStack(doc)
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: true,
-    })
+      // Register layer
+      const stack = getLayerStack(doc)
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: true,
+      })
 
-    // Focus scope (trap focus within the dialog)
-    const deactivateFocus = activateFocusScope({
-      element: () => contentEl,
-      restoreTarget: () => doc.getElementById(ctx.triggerId),
-    })
+      // Focus scope (trap focus within the dialog)
+      const deactivateFocus = activateFocusScope({
+        element: () => el,
+        restoreTarget: () => doc.getElementById(ctx.triggerId),
+      })
 
-    // Modal isolation (aria-hidden on siblings)
-    const deactivateIsolation = activateModalIsolation(contentEl)
+      // Modal isolation (aria-hidden on siblings)
+      const deactivateIsolation = activateModalIsolation(el)
 
-    // Scroll lock
-    const releaseScroll = activateScrollLock(doc)
+      // Scroll lock
+      const releaseScroll = activateScrollLock(doc)
 
-    // No dismissable layer — alert dialog requires explicit Cancel/Action
-    return () => {
-      releaseScroll()
-      deactivateIsolation()
-      deactivateFocus()
-      removeLayer()
-    }
-  })
+      // No dismissable layer — alert dialog requires explicit Cancel/Action
+      return () => {
+        releaseScroll()
+        deactivateIsolation()
+        deactivateFocus()
+        removeLayer()
+      }
+    },
+  )
 
   return (
     <div
@@ -186,7 +189,7 @@ export function Content(props: AlertDialogContentProps) {
       aria-labelledby={ctx.titleId}
       aria-describedby={ctx.descriptionId}
       ref={(el: HTMLDivElement) => {
-        contentEl = el
+        setContentEl(el)
         props.ref?.(el)
       }}
       class={props.class}

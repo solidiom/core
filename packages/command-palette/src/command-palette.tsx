@@ -6,7 +6,7 @@
  * Parts: Root, Input, List (listbox), Group, Item, Empty.
  */
 
-import { type Accessor, Show, createSignal, onCleanup, onSettled } from "solid-js"
+import { type Accessor, Show, createSignal, createEffect, onCleanup } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -90,34 +90,37 @@ export function Root(props: CommandPaletteRootProps) {
     contentId: `${baseId}-content`,
   }
 
-  let contentEl: HTMLDivElement | undefined
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement | undefined>(undefined)
 
-  onSettled(() => {
-    if (!contentEl || !open()) return
-    const doc = contentEl.ownerDocument
+  createEffect(
+    () => (open() ? contentEl() : undefined),
+    (el) => {
+      if (!el) return
+      const doc = el.ownerDocument
 
-    const stack = getLayerStack(doc)
-    const removeLayer = stack.push({ id: ctx.contentId, element: contentEl, modal: true })
+      const stack = getLayerStack(doc)
+      const removeLayer = stack.push({ id: ctx.contentId, element: el, modal: true })
 
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      onDismiss: (reason) => {
-        requestOpenChange(false, createChangeDetails(reason))
-      },
-    })
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        onDismiss: (reason) => {
+          requestOpenChange(false, createChangeDetails(reason))
+        },
+      })
 
-    const deactivateFocus = activateFocusScope({
-      element: () => contentEl,
-    })
+      const deactivateFocus = activateFocusScope({
+        element: () => el,
+      })
 
-    return () => {
-      deactivateFocus()
-      removeDismissable()
-      removeLayer()
-    }
-  })
+      return () => {
+        deactivateFocus()
+        removeDismissable()
+        removeLayer()
+      }
+    },
+  )
 
   return (
     <CommandPaletteContext value={ctx}>
@@ -130,7 +133,7 @@ export function Root(props: CommandPaletteRootProps) {
           class={props.class}
           style={props.style}
           ref={(el: HTMLDivElement) => {
-            contentEl = el
+            setContentEl(el)
           }}
           {...applySemanticAttrs({
             scope: "command-palette",

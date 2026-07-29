@@ -2,10 +2,11 @@
  * Browser-mode component tests for HoverCard primitive.
  */
 
-import { describe, it, expect, beforeEach, afterEach } from "vitest"
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest"
 import { render } from "@solidjs/web"
 import { createConsoleGuard, type ConsoleGuard } from "@solidiom/runtime/testing/console-guard"
 import * as HoverCard from "./index"
+import type { PositioningPort } from "./hover-card-context"
 
 let guard: ConsoleGuard
 
@@ -91,5 +92,61 @@ describe("HoverCard", () => {
       container,
     )
     guard.assertClean()
+  })
+
+  it("applies role=dialog and aria-describedby on the trigger when open", () => {
+    const container = getContainer()
+    let contentEl: HTMLElement | null = null
+
+    render(
+      () => (
+        <HoverCard.Root openDelay={0} closeDelay={0}>
+          <HoverCard.Trigger>Hover me</HoverCard.Trigger>
+          <HoverCard.Content>Preview</HoverCard.Content>
+        </HoverCard.Root>
+      ),
+      container,
+    )
+
+    const trigger = container.querySelector("[data-part='trigger']")!
+    trigger.dispatchEvent(new Event("pointerenter"))
+
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        contentEl = container.querySelector("[data-part='content']")
+        expect(contentEl).not.toBeNull()
+        expect(contentEl!.getAttribute("role")).toBe("dialog")
+        expect(trigger.getAttribute("aria-describedby")).toBe(contentEl!.id)
+        resolve()
+      }, 10)
+    })
+  })
+
+  it("calls the positioning port with the trigger and content elements", () => {
+    const container = getContainer()
+    const update = vi.fn()
+    const positioning: PositioningPort = { update }
+
+    render(
+      () => (
+        <HoverCard.Root openDelay={0} closeDelay={0} positioning={positioning}>
+          <HoverCard.Trigger>Hover me</HoverCard.Trigger>
+          <HoverCard.Content>Preview</HoverCard.Content>
+        </HoverCard.Root>
+      ),
+      container,
+    )
+
+    const trigger = container.querySelector("[data-part='trigger']")!
+    trigger.dispatchEvent(new Event("pointerenter"))
+
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        const content = container.querySelector("[data-part='content']")
+        expect(update).toHaveBeenCalledTimes(1)
+        expect(update).toHaveBeenCalledWith(trigger, content)
+        resolve()
+      }, 10)
+    })
   })
 })

@@ -1009,6 +1009,8 @@ const onContentLeave = () => {
 
 The content's pointer events must also participate in the timer dance — otherwise the card closes when the user moves from trigger to content.
 
+**Positioning caveat (see `onSettled` does not re-fire on `<Show>` toggle below):** the dual-timer pattern above only covers open/close timing. HoverCard's `Content` also needs trigger-relative positioning (via a `PositioningPort`, same shape as `tooltip`/`popover`) so opening it doesn't shift surrounding layout. Do not wire that positioning call with `onSettled` — see the dedicated section below for why that silently never fires.
+
 ## `vitest.config.ts` — include pattern for sub-package test runs
 
 When running `pnpm --filter @solidiom/<pkg> test`, vitest resolves the root config but runs from the package's CWD. The include pattern `packages/**/src/**/*.{test,spec}.ts` doesn't match from within a sub-package because there's no `packages/` subdirectory relative to CWD.
@@ -1065,3 +1067,114 @@ The acceptance criteria script (`tools/acceptance-criteria.ts`) has two types of
 Manual checks look for files like `docs/ssr-hydration-test-results.md`. The file's existence is the assertion — the script doesn't parse its content. These files serve as attestation that the check was performed, with the results documented inside.
 
 When adding new acceptance criteria, prefer automated checks (grep, test execution) over manual ones. Manual checks should only be used for genuinely manual processes (AT testing, visual inspection).
+
+---
+
+## Lessons Learned — HoverCard Positioning Fix (2026-07-28)
+
+Discovered while adding trigger-relative positioning to `@solidiom/hover-card` (previously had no positioning at all — `Content` rendered in normal flow, shifting layout on open).
+
+## `onSettled` does NOT re-fire when `<Show>` toggles — silent no-op bug
+
+`onSettled` (Solid 2's replacement for `onMount`) runs once, at the point where the enclosing component function's initial render settles. It does **not** re-run every time a `<Show when={...}>` inside that same component later flips from `false` to `true`. `<Show>`'s children execute in their own nested reactive scope — toggling `when` does not re-invoke the parent component function, so `onSettled` registered in that parent scope only ever sees the DOM state from the very first render.
+
+This is a trap specifically for the common overlay pattern:
+
+```tsx
+// BROKEN — looks correct, but positioning.update() never runs on open:
+export function Content(props: ContentProps) {
+  const ctx = useContext()
+  let contentEl: HTMLDivElement | undefined
+
+  onSettled(() => {
+    if (!contentEl) return  // <-- always true on first run, when Show is closed
+    const result = ctx.positioning.update(ctx.triggerRef()!, contentEl)
+    return typeof result === "function" ? result : undefined
+  })
+
+  return (
+    <Show when={ctx.open()}>
+      <div ref={(el) => (contentEl = el)}>{props.children}</div>
+    </Show>
+  )
+}
+```
+
+On first render, `ctx.open()` is `false`, so `<Show>` renders nothing, `contentEl` stays `undefined`, and `onSettled`'s guard clause bails out. When `open()` later becomes `true` and the `<div>` actually mounts, `onSettled` has already run and will never run again for this component instance — the positioning call silently never happens.
+
+**This pattern was already present, unfixed, in `tooltip.tsx` and `popover.tsx`** (`Content` uses the exact same `onSettled` + `let contentEl` shape to wire `positioning.update`). Neither package's test suite exercises this path (no test asserts the positioning port is actually called), so the bug shipped silently. **All affected primitives have now been fixed** (2026-07-28): hover-card, tooltip, popover, combobox, context-menu, menu, select, date-picker, command-palette, sheet, alert-dialog. Dialog and drawer were already using `createEffect` correctly.
+
+**Correct fix — two-argument `createEffect`, tracking the ref via a signal:**
+
+```tsx
+export function Content(props: ContentProps) {
+  const ctx = useContext()
+  const [contentEl, setContentEl] = createSignal<HTMLDivElement | undefined>(undefined)
+
+  createEffect(
+    // Compute function: ALL reactive reads happen here, gated by ctx.open()
+    () => (ctx.open() ? [contentEl(), ctx.triggerRef()] : [undefined, undefined]),
+    // Effect function: receives the computed tuple, does the actual work
+    ([el, reference]) => {
+      if (!ctx.positioning || !el || !reference) return
+      const result = ctx.positioning.update(reference, el)
+      return typeof result === "function" ? result : undefined
+    },
+  )
+
+  return (
+    <Show when={ctx.open()}>
+      <div ref={setContentEl}>{props.children}</div>
+    </Show>
+  )
+}
+```
+
+Using a signal (`createSignal`) for the element ref — rather than a plain `let` — makes it a reactive dependency, so the effect's compute function re-runs every time the ref changes (mount/unmount) or `ctx.open()` flips. This is what makes the effect actually fire when `<Show>` mounts the content.
+
+**Second pitfall in the fix — `STRICT_READ_UNTRACKED` if reads are split across the two functions:**
+
+```tsx
+// WRONG — ctx.triggerRef() is read in the effect function, which is untracked:
+createEffect(
+  () => (ctx.open() ? contentEl() : undefined),
+  (el) => {
+    const reference = ctx.triggerRef()  // triggers STRICT_READ_UNTRACKED warning
+    if (!ctx.positioning || !el || !reference) return
+    ctx.positioning.update(reference, el)
+  },
+)
+```
+
+The two-argument `createEffect` only tracks reads inside the **first** (compute) function. Any signal read inside the second (effect) function is untracked by design — reading one there to gate logic still works functionally, but Solid 2's dev-mode strict-read checker flags it as a mistake, because it looks like a missed reactive dependency. Move every signal read that needs to participate into the compute function's return value (as a tuple/array), and destructure it in the effect function:
+
+```tsx
+createEffect(
+  () => (ctx.open() ? [contentEl(), ctx.triggerRef()] : [undefined, undefined]),
+  ([el, reference]) => { /* el and reference are plain values here, no warning */ },
+)
+```
+
+**Verification note:** this bug only surfaces when you actually exercise the codepath with a positioning port double and assert it was called (`expect(update).toHaveBeenCalledWith(...)`) — a test that merely renders the component and checks presence/absence of the content element (the existing test style in tooltip/popover/hover-card) will pass regardless of whether positioning wiring works. Any primitive using `positioning`/`PositioningPort` should have at least one test that provides a fake port and asserts `update` was called with the trigger and content elements.
+
+## Full list of primitives affected by the `onSettled` + `<Show>` bug
+
+All primitives below used the broken `onSettled` + `let contentEl` + `<Show>` pattern where layer registration, dismiss behavior, focus trapping, and/or positioning never activated on first open:
+
+| Primitive | What was broken | Fix status |
+|-----------|----------------|------------|
+| `dialog` | Layer, dismiss, focus scope | Already correct (used `createEffect`) |
+| `drawer` | Layer, dismiss, focus scope | Already correct (used `createEffect`) |
+| `hover-card` | Positioning | Fixed 2026-07-28 |
+| `tooltip` | Positioning | Fixed 2026-07-28 |
+| `popover` | Layer, dismiss, focus scope, positioning | Fixed 2026-07-28 |
+| `combobox` | Layer, dismiss | Fixed 2026-07-28 |
+| `context-menu` | Layer, dismiss | Fixed 2026-07-28 |
+| `menu` | Layer, dismiss | Fixed 2026-07-28 |
+| `select` | Layer, dismiss | Fixed 2026-07-28 |
+| `date-picker` | Layer, dismiss, focus scope | Fixed 2026-07-28 |
+| `command-palette` | Layer, dismiss, focus scope | Fixed 2026-07-28 |
+| `sheet` | Layer, dismiss, focus scope, scroll lock | Fixed 2026-07-28 |
+| `alert-dialog` | Layer, focus scope, modal isolation, scroll lock | Fixed 2026-07-28 |
+
+**Not affected:** `scroll-area` (uses `onSettled` but content is always mounted, no `<Show>` gating), `virtual-list` (same — always mounted).
