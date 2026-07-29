@@ -1,5 +1,5 @@
 // src/index.tsx
-import { createSignal, onCleanup } from "solid-js";
+import { createEffect, createSignal, onCleanup } from "solid-js";
 import { Show } from "@solidjs/web";
 import {
   createCollection,
@@ -135,6 +135,7 @@ function Item(props) {
   const ctx = useNavigationMenuContext();
   const triggerId = createStableId("nav-trigger");
   const contentId = createStableId("nav-content");
+  const [triggerRef, setTriggerRef] = createSignal(void 0);
   const isOpen = () => ctx.activeValue() === props.value;
   return /* @__PURE__ */ React.createElement(
     NavigationMenuItemContext,
@@ -143,7 +144,9 @@ function Item(props) {
         value: props.value,
         isOpen,
         triggerId,
-        contentId
+        contentId,
+        triggerRef,
+        setTriggerRef
       }
     },
     /* @__PURE__ */ React.createElement(
@@ -164,17 +167,19 @@ function Item(props) {
 function Trigger(props) {
   const ctx = useNavigationMenuContext();
   const itemCtx = useNavigationMenuItemContext();
-  let ref;
   const itemId = itemCtx.value;
   const unregister = ctx.collection.registerItem({
     id: itemId,
     get ref() {
-      return ref;
+      return itemCtx.triggerRef();
     },
     disabled: () => false,
     textValue: () => itemId
   });
-  onCleanup(unregister);
+  onCleanup(() => {
+    unregister();
+    itemCtx.setTriggerRef(void 0);
+  });
   const handleClick = () => {
     if (itemCtx.isOpen()) {
       ctx.close();
@@ -198,7 +203,7 @@ function Trigger(props) {
   return /* @__PURE__ */ React.createElement(
     "button",
     {
-      ref,
+      ref: (element) => itemCtx.setTriggerRef(element),
       id: itemCtx.triggerId,
       type: "button",
       role: "menuitem",
@@ -225,6 +230,15 @@ function Content(props) {
   const ctx = useNavigationMenuContext();
   const itemCtx = useNavigationMenuItemContext();
   const presence = createPresence({ open: itemCtx.isOpen });
+  const [contentEl, setContentEl] = createSignal(void 0);
+  createEffect(
+    () => presence.present() ? [contentEl(), itemCtx.triggerRef()] : [void 0, void 0],
+    ([element, reference]) => {
+      if (!ctx.positioning || !element || !reference) return;
+      const result = ctx.positioning.update(reference, element);
+      return typeof result === "function" ? result : void 0;
+    }
+  );
   const handlePointerEnter = () => {
     ctx.pointerIntent.handleContentEnter();
   };
@@ -235,13 +249,13 @@ function Content(props) {
     if (e.key === "Escape") {
       e.preventDefault();
       ctx.close();
-      const triggerEl = document.getElementById(itemCtx.triggerId);
-      triggerEl?.focus();
+      itemCtx.triggerRef()?.focus();
     }
   };
   return /* @__PURE__ */ React.createElement(Show, { when: presence.present() }, /* @__PURE__ */ React.createElement(
     "div",
     {
+      ref: (element) => setContentEl(element),
       id: itemCtx.contentId,
       role: "menu",
       "aria-labelledby": itemCtx.triggerId,

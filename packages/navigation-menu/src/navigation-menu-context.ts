@@ -53,6 +53,17 @@ export interface NavigationMenuItemContextValue {
   triggerId: string
   /** Generated content ID. */
   contentId: string
+  /**
+   * This item's trigger element, used as the positioning reference for its
+   * Content panel and as the roving-focus target in the parent collection.
+   *
+   * Lives on item context rather than root context because a navigation bar
+   * has one trigger/content pair per Item, unlike single-anchor primitives
+   * (tooltip, hover-card, popover) which keep one trigger ref on the root.
+   */
+  triggerRef: Accessor<HTMLElement | undefined>
+  /** Registers this item's trigger element. Called by Trigger. */
+  setTriggerRef: (element: HTMLElement | undefined) => void
 }
 
 export const NavigationMenuItemContext = createContext<NavigationMenuItemContextValue>()
