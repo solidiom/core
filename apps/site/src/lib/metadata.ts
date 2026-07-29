@@ -11,7 +11,7 @@
  * Robots is an API endpoint at /robots.txt.
  */
 
-import { DEFAULT_LOCALE, LOCALES, localePrefix, type Locale } from "./locale"
+import { DEFAULT_LOCALE, LOCALES, resolveEquivalentLocalePath, type Locale } from "./locale"
 
 export const SITE_NAME = "Solidiom"
 export const CANONICAL_ORIGIN = "https://solidiom.org"
@@ -25,7 +25,7 @@ export const DEFAULT_DESCRIPTION =
 export interface PageMetadataInput {
   /** Page-specific title. Combined with the site name via a fixed template. */
   title?: string
-  /** Page-specific description. Falls back to DEFAULT_DESCRIPTION. */
+  /** Page-specific description. Required for translated routes. */
   description?: string
   /** Absolute pathname of the current route, e.g. "/" or "/es/getting-started/". */
   pathname: string
@@ -38,7 +38,17 @@ export interface PageMetadata {
   canonicalUrl: string
 }
 
+/**
+ * Resolves metadata and rejects a translated route that would silently fall
+ * back to English metadata. English retains its site-wide defaults only.
+ */
 export function resolvePageMetadata(input: PageMetadataInput): PageMetadata {
+  if (input.locale !== DEFAULT_LOCALE && (!input.title || !input.description)) {
+    throw new Error(
+      `I18N-003: ${input.pathname} requires localized title and description metadata.`,
+    )
+  }
+
   const title = input.title ? `${input.title} — ${SITE_NAME}` : SITE_NAME
   const description = input.description ?? DEFAULT_DESCRIPTION
   const canonicalUrl = resolveCanonicalUrl(input.pathname)
@@ -69,51 +79,37 @@ export function resolveCanonicalUrl(pathname: string): string {
 // ---------------------------------------------------------------------------
 
 /**
- * Computes the equivalent pathname for a different locale.
- * English is unprefixed (canonical); Spanish is under /es/.
+ * Returns a registered equivalent locale pathname. Undefined means the route
+ * is intentionally unpaired and must not be advertised as an alternate.
  */
 export function resolveAlternatePathname(
   pathname: string,
-  fromLocale: Locale,
+  _fromLocale: Locale,
   toLocale: Locale,
-): string {
-  if (fromLocale === toLocale) return pathname
-
-  // Strip current locale prefix to get the base path.
-  const prefix = localePrefix(fromLocale)
-  const basePath = prefix && pathname.startsWith(prefix)
-    ? pathname.slice(prefix.length) || "/"
-    : pathname
-
-  // Apply target locale prefix.
-  const targetPrefix = localePrefix(toLocale)
-  return targetPrefix ? `${targetPrefix}${basePath}` : basePath
+): string | undefined {
+  return resolveEquivalentLocalePath(pathname, toLocale)
 }
 
 /**
- * Generates the full set of hreflang alternate URLs for a page.
- * Includes x-default pointing to the English (unprefixed) variant.
+ * Generates alternates only for registered, rendered locale counterparts.
+ * `x-default` points to the canonical unprefixed English route.
  */
 export function resolveHreflangAlternates(
   pathname: string,
   currentLocale: Locale,
 ): Array<{ hreflang: string; href: string }> {
-  const alternates: Array<{ hreflang: string; href: string }> = []
-
-  for (const locale of LOCALES) {
+  const alternates: Array<{ hreflang: string; href: string }> = LOCALES.flatMap((locale) => {
     const altPathname = resolveAlternatePathname(pathname, currentLocale, locale)
+    return altPathname ? [{ hreflang: locale, href: resolveCanonicalUrl(altPathname) }] : []
+  })
+
+  const defaultPathname = resolveAlternatePathname(pathname, currentLocale, DEFAULT_LOCALE)
+  if (defaultPathname) {
     alternates.push({
-      hreflang: locale,
-      href: resolveCanonicalUrl(altPathname),
+      hreflang: "x-default",
+      href: resolveCanonicalUrl(defaultPathname),
     })
   }
-
-  // x-default points to the default (English) version.
-  const defaultPathname = resolveAlternatePathname(pathname, currentLocale, DEFAULT_LOCALE)
-  alternates.push({
-    hreflang: "x-default",
-    href: resolveCanonicalUrl(defaultPathname),
-  })
 
   return alternates
 }

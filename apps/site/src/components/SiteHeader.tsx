@@ -1,22 +1,4 @@
-/**
- * SiteHeader — responsive global header and primary navigation.
- *
- * Desktop (≥ the "md" breakpoint, driven by CSS): a horizontal
- * `@solidiom/navigation-menu` bar with plain links and one dropdown
- * ("Resources") built from Item/Trigger/Content.
- *
- * Mobile: a hamburger button (styled via `Drawer.Trigger`'s own `class`
- * prop, not a nested `@solidiom/button` — a `<button>` cannot contain
- * another `<button>`, so the trigger's built-in button element is styled
- * directly) opens a `@solidiom/drawer` sliding in from the left containing
- * the same link set as a simple, flat list (no nested dropdown —
- * flattened for a small viewport per usual responsive-nav practice).
- *
- * This is a single Solid island (see SiteHeader.astro), hydrated with
- * `client:load` because the mobile drawer trigger must be interactive
- * immediately; there is no meaningful non-interactive fallback for a
- * hamburger menu.
- */
+/** Responsive global header and explicit locale-aware primary navigation. */
 import { createSignal, For } from "solid-js"
 import * as NavigationMenu from "@solidiom/navigation-menu"
 import * as Drawer from "@solidiom/drawer"
@@ -30,16 +12,13 @@ export interface NavLink {
 }
 
 export interface SiteHeaderProps {
-  /** Primary flat links, rendered before the "Resources" dropdown. */
   links: NavLink[]
-  /** Links shown inside the desktop "Resources" dropdown / mobile sublist. */
   resourceLinks: NavLink[]
-  /** Current pathname, used to mark the active link. */
   pathname: string
-  /** Home/logo href. Defaults to "/". */
   homeHref?: string
-  /** Current page locale for the language switcher. Defaults to "en". */
   locale?: Locale
+  /** Verified equivalent route for the opposite locale. */
+  alternatePath?: string
 }
 
 export function SiteHeader(props: SiteHeaderProps) {
@@ -88,7 +67,7 @@ export function SiteHeader(props: SiteHeaderProps) {
         </nav>
 
         <div class="site-header__actions">
-          <LanguageSwitcher pathname={props.pathname} locale={locale()} />
+          <LanguageSwitcher locale={locale()} targetPath={props.alternatePath} />
           <ThemeToggle />
         </div>
 

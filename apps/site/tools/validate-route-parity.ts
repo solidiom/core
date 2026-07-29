@@ -1,122 +1,108 @@
 #!/usr/bin/env tsx
 /**
- * I18N-003 route-parity validation.
+ * I18N-003 route and metadata parity validation.
  *
- * Scans src/pages/ for all English (.astro) routes and verifies each has a
- * corresponding /es/ counterpart. Reports mismatches and exits with code 1
- * if any mandatory route is missing its locale pair.
- *
- * Routes that are intentionally locale-agnostic (error pages, API endpoints,
- * sitemap artifacts) are excluded from parity checks.
+ * Verifies both directions of the English/Spanish route inventory, requires
+ * every public pair to be registered in the canonical locale route set, and
+ * rejects translated route files that omit title or description metadata.
  */
-import { existsSync, readdirSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync } from "node:fs"
 import { dirname, extname, join, relative, resolve, sep } from "node:path"
 import { fileURLToPath } from "node:url"
+import { LOCALIZED_ROUTE_PATHS, normalizePathname } from "../src/lib/locale"
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const pagesRoot = join(projectRoot, "src", "pages")
 const esPagesRoot = join(pagesRoot, "es")
-
-/** Routes excluded from parity checks (locale-agnostic). */
-const EXCLUDED_ROUTES = new Set([
-  "404.astro",
-  "500.astro",
-  "robots.txt.ts",
-])
-
-/** File extensions considered as page routes. */
+const EXCLUDED_ROUTES = new Set(["404.astro", "500.astro", "robots.txt.ts"])
 const ROUTE_EXTENSIONS = new Set([".astro", ".md", ".mdx"])
 
-/**
- * Recursively collects all route files from a directory.
- * Returns paths relative to the given root.
- */
 function collectRoutes(dir: string, root: string): string[] {
-  const results: string[] = []
+  if (!existsSync(dir)) return []
 
-  if (!existsSync(dir)) return results
-
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const fullPath = join(dir, entry.name)
-    if (entry.isDirectory()) {
-      results.push(...collectRoutes(fullPath, root))
-    } else if (ROUTE_EXTENSIONS.has(extname(entry.name))) {
-      results.push(relative(root, fullPath).split(sep).join("/"))
-    }
-  }
-
-  return results.sort()
+  return readdirSync(dir, { withFileTypes: true })
+    .flatMap((entry) => {
+      const fullPath = join(dir, entry.name)
+      return entry.isDirectory()
+        ? collectRoutes(fullPath, root)
+        : ROUTE_EXTENSIONS.has(extname(entry.name))
+          ? [relative(root, fullPath).split(sep).join("/")]
+          : []
+    })
+    .sort()
 }
 
-/**
- * Collects English (unprefixed) routes, excluding the /es/ subtree and
- * locale-agnostic files.
- */
-function collectEnglishRoutes(): string[] {
-  const allRoutes = collectRoutes(pagesRoot, pagesRoot)
-  return allRoutes.filter((route) => {
-    // Exclude the /es/ subtree (those are Spanish routes)
-    if (route.startsWith("es/")) return false
-    // Exclude locale-agnostic routes
-    if (EXCLUDED_ROUTES.has(route)) return false
-    return true
-  })
+function publicRouteFiles(root: string, excludeSpanishTree = false): string[] {
+  return collectRoutes(root, root).filter(
+    (route) => !EXCLUDED_ROUTES.has(route) && !(excludeSpanishTree && route.startsWith("es/")),
+  )
 }
 
-/**
- * Collects Spanish routes (under /es/), returned relative to the es/ root.
- */
-function collectSpanishRoutes(): string[] {
-  return collectRoutes(esPagesRoot, esPagesRoot)
+function routePathname(routeFile: string): string {
+  const withoutExtension = routeFile.slice(0, -extname(routeFile).length)
+  const segments = withoutExtension.split("/")
+  if (segments.at(-1) === "index") segments.pop()
+  return normalizePathname(`/${segments.join("/")}`)
 }
 
-interface ParityResult {
-  route: string
-  status: "ok" | "missing"
+function sourceMap(root: string, excludeSpanishTree = false): Map<string, string> {
+  return new Map(
+    publicRouteFiles(root, excludeSpanishTree).map((route) => [routePathname(route), route]),
+  )
 }
 
-function validateParity(): ParityResult[] {
-  const enRoutes = collectEnglishRoutes()
-  const esRoutes = new Set(collectSpanishRoutes())
-
-  return enRoutes.map((route) => ({
-    route,
-    status: esRoutes.has(route) ? "ok" : "missing",
-  }))
+function missingValues(expected: Iterable<string>, actual: Map<string, string>): string[] {
+  return [...expected].filter((pathname) => !actual.has(pathname)).sort()
 }
 
-// ---------------------------------------------------------------------------
-// CLI execution
-// ---------------------------------------------------------------------------
+const enRoutes = sourceMap(pagesRoot, true)
+const esRoutes = sourceMap(esPagesRoot)
+const registeredRoutes = new Set<string>(LOCALIZED_ROUTE_PATHS)
+const allRoutes = new Set([...enRoutes.keys(), ...esRoutes.keys()])
+const missingSpanish = missingValues(enRoutes.keys(), esRoutes)
+const missingEnglish = missingValues(esRoutes.keys(), enRoutes)
+const unregisteredRoutes = [...allRoutes].filter((route) => !registeredRoutes.has(route)).sort()
+const unimplementedRegistryRoutes = [...registeredRoutes]
+  .filter((route) => !enRoutes.has(route) || !esRoutes.has(route))
+  .sort()
 
-const results = validateParity()
-const missing = results.filter((r) => r.status === "missing")
-const ok = results.filter((r) => r.status === "ok")
+const translatedMetadataErrors = [...esRoutes.entries()].flatMap(([pathname, routeFile]) => {
+  const source = readFileSync(join(esPagesRoot, routeFile), "utf8")
+  const layoutInvocation = source.match(/<BaseLayout\b[\s\S]*?>/)
+  if (!layoutInvocation) return [`${pathname}: does not render BaseLayout`]
+
+  const missing = ["title", "description"].filter(
+    (attribute) => !new RegExp(`\\b${attribute}=`).test(layoutInvocation[0]),
+  )
+  return missing.map((attribute) => `${pathname}: missing localized ${attribute} metadata`)
+})
 
 console.log("I18N-003 Route Parity Report")
 console.log("=".repeat(50))
 console.log()
-
-if (ok.length > 0) {
-  console.log(`Matched (${ok.length}):`)
-  for (const r of ok) {
-    console.log(`  ✓ ${r.route}`)
-  }
-  console.log()
+console.log(
+  `Matched localized routes (${[...enRoutes.keys()].filter((route) => esRoutes.has(route)).length}):`,
+)
+for (const route of [...enRoutes.keys()].filter((route) => esRoutes.has(route)).sort()) {
+  console.log(`  ✓ ${route}`)
 }
 
-if (missing.length > 0) {
-  console.log(`Missing Spanish routes (${missing.length}):`)
-  for (const r of missing) {
-    console.log(`  ✗ es/${r.route}`)
-  }
+const failures = [
+  ...missingSpanish.map((route) => `Missing Spanish route: /es${route === "/" ? "/" : route}`),
+  ...missingEnglish.map((route) => `Missing English route: ${route}`),
+  ...unregisteredRoutes.map((route) => `Unregistered localized route: ${route}`),
+  ...unimplementedRegistryRoutes.map((route) => `Route registry has no complete pair: ${route}`),
+  ...translatedMetadataErrors,
+]
+
+if (failures.length > 0) {
+  console.log()
+  console.log(`Failures (${failures.length}):`)
+  for (const failure of failures) console.log(`  ✗ ${failure}`)
+  process.exitCode = 1
+} else {
   console.log()
   console.log(
-    `${missing.length} English route(s) have no Spanish counterpart.`,
+    `All ${registeredRoutes.size} registered routes have bidirectional parity and localized metadata.`,
   )
-  process.exit(1)
 }
-
-console.log(
-  `All ${results.length} English route(s) have matching Spanish routes.`,
-)

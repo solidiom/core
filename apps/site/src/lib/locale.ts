@@ -1,25 +1,21 @@
 /**
- * Locale resolution and routing utilities.
+ * Explicit locale context and registered bilingual routing.
  *
- * I18N-001: Implements locale configuration:
- *   - English is unprefixed and canonical (e.g. /primitives/dialog/)
- *   - Spanish lives under /es/ (e.g. /es/primitives/dialog/)
- *   - No automatic redirect based on Accept-Language or geolocation
- *   - Explicit locale context available to all components
- *
- * The strategy uses Astro's built-in i18n routing (configured in
- * astro.config.ts) with `prefixDefaultLocale: false` so English routes
- * have no /en/ prefix.
+ * English is unprefixed, Spanish is prefixed with `/es`, and the URL is the
+ * only authority for the active locale. A stored preference is intentionally
+ * presentation state only: it is exposed to client code but never redirects a
+ * direct visit or overrides a route.
  */
 
 export type Locale = "en" | "es"
 
 export const DEFAULT_LOCALE: Locale = "en"
 export const LOCALES: readonly Locale[] = ["en", "es"] as const
+export const LOCALE_STORAGE_KEY = "solidiom-locale-preference"
 
 export const LOCALE_LABELS: Record<Locale, string> = {
   en: "English",
-  es: "Espanol",
+  es: "Español",
 }
 
 const LOCALE_PREFIXES: Record<Locale, string> = {
@@ -28,42 +24,78 @@ const LOCALE_PREFIXES: Record<Locale, string> = {
 }
 
 /**
- * Resolves the active locale from an Astro-provided pathname.
- * English is unprefixed and canonical; Spanish routes live under `/es/`.
+ * The canonical inventory of public routes that have equivalent localized
+ * pages. Add a base pathname here with its paired page routes in `src/pages`.
+ * This is the single source for language switching and alternate metadata.
  */
-export function resolveLocale(pathname: string): Locale {
-  return pathname.startsWith("/es/") || pathname === "/es" ? "es" : DEFAULT_LOCALE
+export const LOCALIZED_ROUTE_PATHS = ["/", "/privacy/", "/trademark/"] as const
+
+export function normalizePathname(pathname: string): string {
+  const path = pathname.split(/[?#]/, 1)[0] || "/"
+  if (path === "/") return "/"
+  return `${path.replace(/\/+$/, "")}/`
 }
 
-/** All locales currently read left-to-right; kept explicit for future RTL locales. */
+/** Resolves the active locale from a pathname; no browser-language detection is used. */
+export function resolveLocale(pathname: string): Locale {
+  const normalized = normalizePathname(pathname)
+  return normalized === "/es/" || normalized.startsWith("/es/") ? "es" : DEFAULT_LOCALE
+}
+
+/** All current locales are left-to-right; explicit for future RTL support. */
 export function localeDirection(_locale: Locale): "ltr" | "rtl" {
   return "ltr"
 }
 
-/** Returns the URL prefix for a given locale (empty string for English). */
+/** Returns the URL prefix for a given locale (empty for canonical English). */
 export function localePrefix(locale: Locale): string {
   return LOCALE_PREFIXES[locale]
 }
 
-/**
- * Given a pathname in one locale, returns the equivalent path in the target locale.
- * Strips the source locale prefix (if any) and prepends the target prefix.
- */
-export function switchLocalePath(pathname: string, targetLocale: Locale): string {
-  // Strip existing locale prefix
-  const stripped = pathname.startsWith("/es/")
-    ? pathname.slice(3) // remove "/es"
-    : pathname === "/es"
-      ? "/"
-      : pathname
+/** Removes a recognized locale prefix to obtain the registered base pathname. */
+export function localeAgnosticPathname(pathname: string): string {
+  const normalized = normalizePathname(pathname)
+  return normalized === "/es/"
+    ? "/"
+    : normalized.startsWith("/es/")
+      ? normalizePathname(normalized.slice(3))
+      : normalized
+}
 
-  const prefix = LOCALE_PREFIXES[targetLocale]
-  return `${prefix}${stripped}`
+/** Returns the registered equivalent path, or undefined when no equivalent exists. */
+export function resolveEquivalentLocalePath(
+  pathname: string,
+  targetLocale: Locale,
+): string | undefined {
+  const basePathname = localeAgnosticPathname(pathname)
+  if (!LOCALIZED_ROUTE_PATHS.includes(basePathname as (typeof LOCALIZED_ROUTE_PATHS)[number])) {
+    return undefined
+  }
+
+  return normalizePathname(`${localePrefix(targetLocale)}${basePathname}`)
+}
+
+/** Returns the other locale in the current two-locale configuration. */
+export function alternateLocale(current: Locale): Locale {
+  return current === "en" ? "es" : "en"
 }
 
 /**
- * Returns the "other" locale (for a two-locale system).
+ * Reads the explicit locale preference before paint without changing the URL.
+ * The data attribute lets hydrated controls observe persisted intent while
+ * preserving a direct visitor's requested locale and preventing auto-redirects.
  */
-export function alternateLocale(current: Locale): Locale {
-  return current === "en" ? "es" : "en"
+export function bootstrapLocalePreferenceScript(): string {
+  return `
+(function () {
+  try {
+    var stored = localStorage.getItem(${JSON.stringify(LOCALE_STORAGE_KEY)});
+    if (stored === "en" || stored === "es") {
+      document.documentElement.setAttribute("data-locale-preference", stored);
+    }
+  } catch (e) {
+    // Storage may be unavailable in privacy-restricted environments.
+  }
+})();
+`.trim()
 }

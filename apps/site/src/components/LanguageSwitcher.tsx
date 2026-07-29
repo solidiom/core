@@ -1,59 +1,55 @@
 /**
- * LanguageSwitcher — locale toggle for two-locale system (I18N-002).
+ * LanguageSwitcher — explicit locale navigation for the registered route set.
  *
- * Displays the OTHER locale's label (e.g. on an English page, shows
- * "Espanol") with a globe icon. When clicked, persists the user's
- * explicit choice in localStorage and navigates to the equivalent route
- * in the target locale.
- *
- * Follows the same imperative-DOM pattern as ThemeToggle: no SSR signals,
- * ref-based initialization to read client state after hydration.
+ * The URL remains the active-locale authority. The control persists the user's
+ * explicit choice for future UI state but never uses it to redirect a visit.
  */
-import {
-  alternateLocale,
-  LOCALE_LABELS,
-  switchLocalePath,
-  type Locale,
-} from "../lib/locale"
-
-const LOCALE_STORAGE_KEY = "solidiom-locale-preference"
+import { alternateLocale, LOCALE_LABELS, LOCALE_STORAGE_KEY, type Locale } from "../lib/locale"
 
 export interface LanguageSwitcherProps {
-  /** Current page pathname (e.g. "/primitives/dialog/" or "/es/primitives/dialog/"). */
-  pathname: string
   /** Current page locale. */
   locale: Locale
+  /** Verified equivalent route for the destination locale, when one exists. */
+  targetPath?: string
 }
 
 export function LanguageSwitcher(props: LanguageSwitcherProps) {
   const target = () => alternateLocale(props.locale)
   const targetLabel = () => LOCALE_LABELS[target()]
-  const targetPath = () => switchLocalePath(props.pathname, target())
+  const isAvailable = () => Boolean(props.targetPath)
 
   function handleClick() {
-    if (typeof window === "undefined") return
-    const locale = target()
-    const path = targetPath()
+    if (typeof window === "undefined" || !props.targetPath) return
 
     try {
-      localStorage.setItem(LOCALE_STORAGE_KEY, locale)
+      localStorage.setItem(LOCALE_STORAGE_KEY, target())
     } catch {
       // Storage can be unavailable in privacy-restricted environments.
     }
 
-    window.location.assign(path)
+    window.location.assign(props.targetPath)
   }
 
   return (
-    <button
-      type="button"
-      class="language-switcher"
-      aria-label={`Switch language to ${targetLabel()}`}
-      onClick={handleClick}
-    >
-      <GlobeIcon />
-      <span class="language-switcher__label">{targetLabel()}</span>
-    </button>
+    <div class="language-switcher__wrapper">
+      <button
+        type="button"
+        class="language-switcher"
+        data-locale-switcher
+        aria-label={`Switch language to ${targetLabel()}`}
+        aria-describedby={isAvailable() ? undefined : "language-switcher-unavailable"}
+        disabled={!isAvailable()}
+        onClick={handleClick}
+      >
+        <GlobeIcon />
+        <span class="language-switcher__label">{targetLabel()}</span>
+      </button>
+      {!isAvailable() && (
+        <span id="language-switcher-unavailable" class="sr-only">
+          This page is not available in {targetLabel()}.
+        </span>
+      )}
+    </div>
   )
 }
 

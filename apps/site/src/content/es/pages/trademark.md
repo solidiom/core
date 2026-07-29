@@ -2,6 +2,8 @@
 title: Política de Marcas y Uso de Marca
 description: Directrices para el uso del nombre, logo y activos de marca de Solidiom.
 locale: es
+translationSourceHash: b96d977211955c606d7949c797977515c30232133272f07168f8a296b17e3545
+translationStatus: draft
 ---
 
 # Política de Marcas y Uso de Marca
@@ -108,7 +110,7 @@ Para calificar para el uso del logo/insignia del ecosistema, tu proyecto debe:
 3. **Usar nomenclatura clara** — el nombre del proyecto debe dejar claro que es un proyecto comunitario/de terceros. Patrones aceptables:
    - `[tu-nombre]-solidiom` (ej., "acme-solidiom-adapter")
    - `solidiom-[categoría]-[tu-nombre]` (ej., "solidiom-adapter-acme")
-   - `[nombre-descriptivo] para Solidiom` (ej., "Tema Oscuro para Solidiom")
+   - `[descriptive-name] for Solidiom` (ej., "Tema Oscuro para Solidiom")
 4. **Incluir atribución** — el README o documentación de tu proyecto debe incluir una declaración como: "Este es un proyecto comunitario y no está oficialmente afiliado con ni respaldado por Solidiom."
 5. **No engañar** — el proyecto no debe usar el logo oficial de Solidiom como su propio logo principal, y no debe implicar estatus oficial.
 6. **Respetar la licencia** — el proyecto debe cumplir con los términos de la licencia Apache 2.0 para cualquier código de Solidiom que utilice.
