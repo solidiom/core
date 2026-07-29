@@ -1,5 +1,5 @@
 // src/select.tsx
-import { Show, onCleanup, onSettled } from "solid-js";
+import { Show, createSignal, createEffect, onCleanup } from "solid-js";
 import {
   createDisclosureState,
   createControllableValue,
@@ -107,29 +107,32 @@ function Trigger(props) {
 }
 function Content(props) {
   const ctx = useSelectContext();
-  let contentEl;
-  onSettled(() => {
-    if (!contentEl) return;
-    const doc = contentEl.ownerDocument;
-    const stack = getLayerStack(doc);
-    const removeLayer = stack.push({ id: ctx.listboxId, element: contentEl, modal: false });
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.listboxId,
-      element: () => contentEl,
-      excludeElements: () => {
-        const trigger = doc.getElementById(ctx.triggerId);
-        return trigger ? [trigger] : [];
-      },
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason));
-      }
-    });
-    return () => {
-      removeDismissable();
-      removeLayer();
-    };
-  });
+  const [contentEl, setContentEl] = createSignal(void 0);
+  createEffect(
+    () => ctx.open() ? contentEl() : void 0,
+    (el) => {
+      if (!el) return;
+      const doc = el.ownerDocument;
+      const stack = getLayerStack(doc);
+      const removeLayer = stack.push({ id: ctx.listboxId, element: el, modal: false });
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.listboxId,
+        element: () => el,
+        excludeElements: () => {
+          const trigger = doc.getElementById(ctx.triggerId);
+          return trigger ? [trigger] : [];
+        },
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason));
+        }
+      });
+      return () => {
+        removeDismissable();
+        removeLayer();
+      };
+    }
+  );
   const handleKeyDown = (e) => {
     const intent = resolveNavigationIntent(e.key, {
       orientation: ctx.collection.orientation(),
@@ -167,7 +170,7 @@ function Content(props) {
       tabindex: 0,
       onKeyDown: handleKeyDown,
       ref: (el) => {
-        contentEl = el;
+        setContentEl(el);
         props.ref?.(el);
       },
       ...applySemanticAttrs({

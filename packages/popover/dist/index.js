@@ -1,5 +1,5 @@
 // src/popover.tsx
-import { createSignal, onSettled, Show } from "solid-js";
+import { createSignal, createEffect, Show } from "solid-js";
 import {
   createDisclosureState,
   createStableId,
@@ -98,48 +98,50 @@ function Trigger(props) {
 function Content(props) {
   const ctx = usePopoverContext();
   const shouldTrapFocus = () => props.trapFocus ?? ctx.modal;
-  let contentEl;
-  onSettled(() => {
-    if (!contentEl) return;
-    const doc = contentEl.ownerDocument;
-    const stack = getLayerStack(doc);
-    const removeLayer = stack.push({
-      id: ctx.contentId,
-      element: contentEl,
-      modal: ctx.modal
-    });
-    const removeDismissable = setupDismissableLayer({
-      document: doc,
-      layerId: ctx.contentId,
-      element: () => contentEl,
-      excludeElements: () => {
-        const trigger = doc.getElementById(ctx.triggerId);
-        return trigger ? [trigger] : [];
-      },
-      onDismiss: (reason) => {
-        ctx.requestOpenChange(false, createChangeDetails(reason));
+  const [contentEl, setContentEl] = createSignal(void 0);
+  createEffect(
+    () => ctx.present() ? [contentEl(), ctx.anchorRef()] : [void 0, void 0],
+    ([el, reference]) => {
+      if (!el) return;
+      const doc = el.ownerDocument;
+      const stack = getLayerStack(doc);
+      const removeLayer = stack.push({
+        id: ctx.contentId,
+        element: el,
+        modal: ctx.modal
+      });
+      const removeDismissable = setupDismissableLayer({
+        document: doc,
+        layerId: ctx.contentId,
+        element: () => el,
+        excludeElements: () => {
+          const trigger = doc.getElementById(ctx.triggerId);
+          return trigger ? [trigger] : [];
+        },
+        onDismiss: (reason) => {
+          ctx.requestOpenChange(false, createChangeDetails(reason));
+        }
+      });
+      const deactivateFocus = shouldTrapFocus() ? activateFocusScope({
+        element: () => el,
+        restoreTarget: () => ctx.triggerRef()
+      }) : () => {
+      };
+      let cleanupPositioning;
+      if (ctx.positioning && reference && el) {
+        const result = ctx.positioning.update(reference, el);
+        if (typeof result === "function") {
+          cleanupPositioning = result;
+        }
       }
-    });
-    const deactivateFocus = shouldTrapFocus() ? activateFocusScope({
-      element: () => contentEl,
-      restoreTarget: () => ctx.triggerRef()
-    }) : () => {
-    };
-    let cleanupPositioning;
-    const reference = ctx.anchorRef();
-    if (ctx.positioning && reference && contentEl) {
-      const result = ctx.positioning.update(reference, contentEl);
-      if (typeof result === "function") {
-        cleanupPositioning = result;
-      }
+      return () => {
+        cleanupPositioning?.();
+        deactivateFocus();
+        removeDismissable();
+        removeLayer();
+      };
     }
-    return () => {
-      cleanupPositioning?.();
-      deactivateFocus();
-      removeDismissable();
-      removeLayer();
-    };
-  });
+  );
   return /* @__PURE__ */ React.createElement(Show, { when: ctx.present() }, /* @__PURE__ */ React.createElement(
     "div",
     {
@@ -147,7 +149,7 @@ function Content(props) {
       role: "dialog",
       "aria-modal": ctx.modal ? "true" : void 0,
       ref: (el) => {
-        contentEl = el;
+        setContentEl(el);
         props.ref?.(el);
       },
       class: props.class,
