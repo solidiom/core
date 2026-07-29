@@ -18,5 +18,48 @@
     "dom/stable-id",
     "events/change-details",
     "state/controllable-value"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Resizable Panels",
+  "description": "Drag-to-resize panel layout.",
+  "category": "layout",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add resizable-panels",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "drag",
+      "layout",
+      "panel",
+      "panels",
+      "resizable",
+      "resize"
+    ]
+  },
+  "integrity": {
+    "filesHash": "8d55ab678fb3a69b09c77dece1194e3a12db0f1602e086dc7a50f2f44d15b2f4",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

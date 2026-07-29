@@ -1,6 +1,10 @@
 name: CI
 
 on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -164,8 +168,8 @@ jobs:
           cache: pnpm
       - run: node scripts/set-solid-version.mjs ${{ matrix.solid-tier }}
       - run: pnpm install --no-frozen-lockfile
-      - run: pnpm exec nx run-many -t build --exclude=@solidiom/docs,@solidiom/docs-astro-poc
-      - run: pnpm exec nx run-many -t test --exclude=@solidiom/tests-package-source-parity
+      - run: pnpm exec nx run-many -t build --exclude=@solidiom/docs,@solidiom/docs-astro-poc,@solidiom/site
+      - run: pnpm exec nx run-many -t test --exclude=@solidiom/tests-package-source-parity,@solidiom/site
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: pnpm exec vitest run --config vitest.browser.config.ts
 

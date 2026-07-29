@@ -21,5 +21,50 @@
     "presence/presence",
     "state/controllable-value",
     "state/disclosure-state"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Command Palette",
+  "description": "Modal search and action launcher.",
+  "category": "navigation",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add command-palette",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "action",
+      "and",
+      "command",
+      "launcher",
+      "modal",
+      "navigation",
+      "palette",
+      "search"
+    ]
+  },
+  "integrity": {
+    "filesHash": "5e76f4e18af61839a32f36d69b83bf3ac17c431ffdff1b7e797cf7b63643b57f",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

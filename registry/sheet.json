@@ -16,5 +16,50 @@
     "dom/stable-id",
     "presence/presence",
     "state/disclosure-state"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Sheet",
+  "description": "Side-panel dialog with slide animation.",
+  "category": "overlay",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add sheet",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "animation",
+      "dialog",
+      "overlay",
+      "panel",
+      "sheet",
+      "side",
+      "slide",
+      "with"
+    ]
+  },
+  "integrity": {
+    "filesHash": "37d762ca8df304c8e8723520e2ad8ea5dc78d71c44123ac4286768f2f759fac5",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

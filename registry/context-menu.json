@@ -17,5 +17,48 @@
     "collection/roving-focus",
     "collection/typeahead",
     "dom/stable-id"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Context Menu",
+  "description": "Right-click triggered menu.",
+  "category": "overlay",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add context-menu",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "click",
+      "context",
+      "menu",
+      "overlay",
+      "right",
+      "triggered"
+    ]
+  },
+  "integrity": {
+    "filesHash": "7b68a949dd8feeab0dfdda1fa9e26819d3f98256eddd692aec9b245cb261cfea",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

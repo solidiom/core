@@ -19,5 +19,49 @@
     "dom/stable-id",
     "events/change-details",
     "state/controllable-value"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Accordion",
+  "description": "Vertically stacked set of collapsible sections.",
+  "category": "layout",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add accordion",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "accordion",
+      "collapsible",
+      "layout",
+      "sections",
+      "set",
+      "stacked",
+      "vertically"
+    ]
+  },
+  "integrity": {
+    "filesHash": "e43f5dbc88d52f1991b7b60f3ef7dec6596eb22beb353a7b992aa93e82b77e9f",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }

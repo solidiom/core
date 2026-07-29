@@ -3,6 +3,7 @@
   "version": "0.0.1-next.0",
   "private": true,
   "type": "module",
+  "description": "LEGACY — read-only. No new features. See apps/site/ for the active website. This app will be removed at CUT-003.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

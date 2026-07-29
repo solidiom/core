@@ -14,5 +14,54 @@
   },
   "runtime": [
     "form/form-control"
-  ]
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Field",
+  "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
+  "category": "input",
+  "status": "preview",
+  "deliverables": {
+    "primitive": true
+  },
+  "cli": {
+    "addCommand": "solidiom add field",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "stub"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "aria",
+      "automatic",
+      "composition",
+      "control",
+      "description",
+      "error",
+      "field",
+      "input",
+      "label",
+      "wiring",
+      "with",
+      "wrapper:"
+    ]
+  },
+  "integrity": {
+    "filesHash": "c480a0213cd8d67403f8317919b1f3724939bb9a9572ec6a9798228dd47ed74b",
+    "lastGenerated": "2026-07-29T19:05:16.855Z"
+  },
+  "lastUpdated": "2026-07-29T19:05:16.855Z"
 }
