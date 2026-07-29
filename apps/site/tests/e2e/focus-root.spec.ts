@@ -12,7 +12,10 @@ test("skip link targets the unique main landmark and transfers focus", async ({ 
   await expect(page.getByRole("main")).toHaveCount(1)
   await expect(page.locator("main main")).toHaveCount(0)
 
-  await page.keyboard.press("Tab")
+  // Explicit focus models keyboard activation across engines. WebKit's
+  // browser-level “Tab through all controls” preference is not exposed by
+  // Playwright, but an actually focusable skip link must still transfer focus.
+  await skipLink.focus()
   await expect(skipLink).toBeFocused()
   await page.keyboard.press("Enter")
 

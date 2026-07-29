@@ -3,7 +3,7 @@
  *
  * Generated as a static endpoint so it can reference the canonical origin
  * for the sitemap URL. Allows all user agents by default. The Disallow
- * rules will be refined as tool routes (playground, theme-builder) land
+ * rules will be refined as tool routes (playground, themes/builder) land
  * per SITE-012 / PLAY-001 / BUILDER-001.
  */
 import type { APIRoute } from "astro"
@@ -16,7 +16,7 @@ export const GET: APIRoute = () => {
     "",
     "# Disallow tool routes (no indexable content)",
     "Disallow: /playground/",
-    "Disallow: /theme-builder/",
+    "Disallow: /themes/builder/",
     "",
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap-index.xml`,
   ].join("\n")

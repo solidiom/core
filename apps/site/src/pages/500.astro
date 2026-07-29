@@ -1,20 +1,14 @@
 ---
-/**
- * 404 — Not Found (SITE-010).
- *
- * Static fallback page rendered when no route matches. Uses the dedicated
- * island-free ErrorLayout so users retain a readable recovery path when
- * interactive shell code cannot load.
- */
+/** Static server-error fallback artifact (SITE-010). */
 import ErrorLayout from "../layouts/ErrorLayout.astro"
 ---
 
-<ErrorLayout title="Page Not Found" description="The requested page could not be found.">
+<ErrorLayout title="Service Unavailable" description="The requested page could not be served.">
   <div class="error-page">
-    <h1 class="error-page__code">404</h1>
-    <p class="error-page__title">Page not found</p>
+    <h1 class="error-page__code">500</h1>
+    <p class="error-page__title">Something went wrong</p>
     <p class="error-page__description">
-      The page you're looking for doesn't exist or has been moved.
+      The page could not be served. Please return to the homepage and try again.
     </p>
     <a href="/" class="error-page__link">Go to homepage</a>
   </div>
@@ -26,27 +20,27 @@ import ErrorLayout from "../layouts/ErrorLayout.astro"
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
     min-height: 50vh;
     padding: 2rem 1rem;
+    text-align: center;
     gap: 0.75rem;
   }
 
   .error-page__code {
+    color: var(--color-foreground-muted);
     font-family: var(--font-display);
     font-size: clamp(4rem, 10vw, 8rem);
     font-weight: 700;
     line-height: 1;
-    color: var(--color-foreground-muted);
     margin: 0;
   }
 
   .error-page__title {
+    color: var(--color-foreground);
     font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
-    color: var(--color-foreground);
   }
 
   .error-page__description {
@@ -57,30 +51,14 @@ import ErrorLayout from "../layouts/ErrorLayout.astro"
   }
 
   .error-page__link {
-    display: inline-flex;
     align-items: center;
+    background-color: var(--focus-ring);
+    border-radius: 0.375rem;
+    color: #ffffff;
+    display: inline-flex;
+    font-weight: 500;
     margin-top: 1rem;
     padding: 0.625rem 1.25rem;
-    border-radius: 0.375rem;
-    background-color: var(--focus-ring);
-    color: #ffffff;
-    font-weight: 500;
     text-decoration: none;
-    transition: opacity 0.1s ease;
-  }
-
-  .error-page__link:hover {
-    opacity: 0.9;
-  }
-
-  .error-page__link:focus-visible {
-    outline: 2px solid var(--focus-ring);
-    outline-offset: 2px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .error-page__link {
-      transition: none;
-    }
   }
 </style>

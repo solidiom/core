@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "check": "astro check",
     "lint": "eslint .",
-    "build": "astro build",
+    "boundaries": "tsx ./tools/validate-site-import-boundaries.ts",
+    "test:boundaries": "pnpm run boundaries -- --self-test",
+    "build": "pnpm run boundaries && astro build",
     "preview": "astro preview",
     "search-index": "pagefind --site dist",
     "test:e2e": "playwright test --config playwright.config.ts"
@@ -31,9 +33,12 @@
     "unist-util-visit": "5.1.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.10.0",
     "@playwright/test": "1.61.1",
     "@types/hast": "3.0.5",
     "@typescript-eslint/parser": "^8.65.0",
+    "astro-eslint-parser": "3.0.0",
+    "eslint-plugin-astro": "3.0.1",
     "pagefind": "1.5.2",
     "typescript": "6.0.3"
   },
@@ -60,6 +65,15 @@
           "default"
         ],
         "cache": true
+      },
+      "boundaries": {
+        "inputs": [
+          "default"
+        ],
+        "cache": true
+      },
+      "test:boundaries": {
+        "cache": false
       },
       "build": {
         "dependsOn": [

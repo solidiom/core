@@ -1,0 +1,81 @@
+---
+/**
+ * Static, island-free document shell for 404/500 fallbacks (SITE-010).
+ *
+ * It intentionally does not import BaseLayout, SiteHeader, SiteFooter, or
+ * any hydrated component. Error responses remain navigable when client
+ * bundles fail to load and cannot pull tool or shell islands into their
+ * static output.
+ */
+import "../assets/global.css"
+import { bootstrapThemeScript } from "../lib/bootstrap-theme"
+import { localeDirection, resolveLocale } from "../lib/locale"
+import {
+  resolveHreflangAlternates,
+  resolvePageMetadata,
+  resolveSocialMetadata,
+} from "../lib/metadata"
+
+interface Props {
+  title: string
+  description: string
+  mainId?: string
+}
+
+const { title, description, mainId = "main-content" } = Astro.props
+const locale = resolveLocale(Astro.url.pathname)
+const metadata = resolvePageMetadata({
+  title,
+  description,
+  pathname: Astro.url.pathname,
+  locale,
+})
+const social = resolveSocialMetadata({
+  title: metadata.title,
+  description: metadata.description,
+  canonicalUrl: metadata.canonicalUrl,
+})
+const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
+---
+
+<!doctype html>
+<html lang={locale} dir={localeDirection(locale)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{metadata.title}</title>
+    <meta name="description" content={metadata.description} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={metadata.canonicalUrl} />
+    {alternates.map((alternate) => (
+      <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+    ))}
+    <meta property="og:type" content={social["og:type"]} />
+    <meta property="og:site_name" content={social["og:site_name"]} />
+    <meta property="og:title" content={social["og:title"]} />
+    <meta property="og:description" content={social["og:description"]} />
+    <meta property="og:url" content={social["og:url"]} />
+    <meta name="twitter:card" content={social["twitter:card"]} />
+    <meta name="twitter:title" content={social["twitter:title"]} />
+    <meta name="twitter:description" content={social["twitter:description"]} />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml" />
+    <script is:inline set:html={bootstrapThemeScript()} />
+  </head>
+  <body>
+    <a class="skip-link" href={`#${mainId}`}>Skip to main content</a>
+    <main id={mainId} class="focus-root" tabindex="-1">
+      <slot />
+    </main>
+    <script is:inline>
+      {`document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const skipLink = target.closest(".skip-link");
+        if (!(skipLink instanceof HTMLAnchorElement)) return;
+        const focusTarget = document.getElementById(skipLink.hash.slice(1));
+        if (focusTarget instanceof HTMLElement) focusTarget.focus();
+      });`}
+    </script>
+  </body>
+</html>

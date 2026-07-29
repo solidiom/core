@@ -1,25 +1,64 @@
 /**
  * ESLint configuration for @solidiom/site (SITE-012).
  *
- * Enforces import-boundary rules: static routes cannot import modules
- * from playground, theme-builder, editor, or compiler namespaces. These
- * tool routes are lazy-loaded via their own route-level entry points and
- * must never leak into the static content bundle.
- *
- * The boundaries are enforced via no-restricted-imports with custom
- * patterns. This ensures:
- *   - Static pages (pages/, layouts/, components/) cannot pull in heavy
- *     tool dependencies that would bloat the static bundle.
- *   - Tool routes can import from shared lib/ but not vice versa for
- *     tool-specific modules.
+ * Every production source module, including Astro frontmatter, is subject to
+ * static-route import restrictions. The companion `boundaries` target follows
+ * transitive local imports from each static route, which prevents Astro files
+ * or shared modules from bypassing this direct-import policy.
  */
 import tsParser from "@typescript-eslint/parser"
+import * as astroParser from "astro-eslint-parser"
+import astroPlugin from "eslint-plugin-astro"
+
+const staticRouteBoundaryRules = {
+  "no-restricted-imports": [
+    "error",
+    {
+      patterns: [
+        {
+          group: ["**/playground/**", "**/playground"],
+          message:
+            "Static routes cannot import playground modules. Playground is a route-local lazy boundary (SITE-012).",
+        },
+        {
+          group: ["**/theme-builder/**", "**/theme-builder", "**/themes/builder/**"],
+          message:
+            "Static routes cannot import theme-builder modules. Theme builder is a route-local lazy boundary (SITE-012).",
+        },
+        {
+          group: ["**/editor/**", "**/editor"],
+          message:
+            "Static routes cannot import editor modules. Editor belongs in a route-local lazy boundary (SITE-012).",
+        },
+        {
+          group: ["**/compiler/**", "**/compiler"],
+          message:
+            "Static routes cannot import compiler modules. Compiler transforms belong in a tool route boundary (SITE-012).",
+        },
+        {
+          group: ["@babel/**", "babel-*"],
+          message:
+            "Static routes cannot import Babel. Compiler transforms belong in a tool route boundary (SITE-012).",
+        },
+        {
+          group: ["monaco-editor", "monaco-editor/**"],
+          message:
+            "Static routes cannot import Monaco Editor. Editor belongs in a route-local lazy boundary (SITE-012).",
+        },
+        {
+          group: ["@codemirror/**", "codemirror"],
+          message:
+            "Static routes cannot import CodeMirror. Editor belongs in a route-local lazy boundary (SITE-012).",
+        },
+      ],
+    },
+  ],
+}
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [
   {
-    // Global ignores — Astro files need a dedicated parser not yet configured.
-    ignores: ["**/*.astro", "dist/**", "node_modules/**", ".astro/**"],
+    ignores: ["dist/**", "node_modules/**", ".astro/**"],
   },
   {
     files: ["src/**/*.{ts,tsx}"],
@@ -31,56 +70,30 @@ export default [
         ecmaFeatures: { jsx: true },
       },
     },
-    rules: {
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            {
-              group: ["**/playground/**", "**/playground"],
-              message:
-                "Static routes cannot import playground modules. Playground is a route-local lazy boundary (SITE-012).",
-            },
-            {
-              group: ["**/theme-builder/**", "**/theme-builder"],
-              message:
-                "Static routes cannot import theme-builder modules. Theme builder is a route-local lazy boundary (SITE-012).",
-            },
-            {
-              group: ["**/editor/**", "**/editor"],
-              message:
-                "Static routes cannot import editor modules. Editor is a route-local lazy boundary (SITE-012).",
-            },
-            {
-              group: ["**/compiler/**", "**/compiler"],
-              message:
-                "Static routes cannot import compiler modules. Compiler is a route-local lazy boundary (SITE-012).",
-            },
-            {
-              group: ["@babel/**", "babel-*"],
-              message:
-                "Static routes cannot import Babel. Compiler transforms belong in the playground/editor route boundary (SITE-012).",
-            },
-            {
-              group: ["monaco-editor", "monaco-editor/**"],
-              message:
-                "Static routes cannot import Monaco Editor. Editor belongs in the playground route boundary (SITE-012).",
-            },
-            {
-              group: ["@codemirror/**", "codemirror"],
-              message:
-                "Static routes cannot import CodeMirror. Editor belongs in the playground route boundary (SITE-012).",
-            },
-          ],
-        },
-      ],
-    },
+    rules: staticRouteBoundaryRules,
   },
-  // Tool route directories are exempt — they can import their own modules.
+  {
+    files: ["src/**/*.astro"],
+    languageOptions: {
+      parser: astroParser,
+      parserOptions: {
+        parser: tsParser,
+        extraFileExtensions: [".astro"],
+        ecmaVersion: "latest",
+        sourceType: "module",
+      },
+    },
+    plugins: {
+      astro: astroPlugin,
+    },
+    rules: staticRouteBoundaryRules,
+  },
+  // Tool route directories own their lazy tool dependencies. The transitive
+  // graph validator has matching exemptions for these exact route boundaries.
   {
     files: [
-      "src/pages/playground/**/*.{ts,tsx}",
-      "src/pages/theme-builder/**/*.{ts,tsx}",
+      "src/pages/playground/**/*.{astro,ts,tsx}",
+      "src/pages/themes/builder/**/*.{astro,ts,tsx}",
     ],
     rules: {
       "no-restricted-imports": "off",
