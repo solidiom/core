@@ -36,7 +36,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -52,6 +52,7 @@
       "keyboard",
       "navigation",
       "radio",
+      "runtime",
       "select",
       "set",
       "single",
@@ -59,8 +60,16 @@
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "ebe72e8391d5ae6789c7334d1bc80ee5fc20507a63387ab80caa6ac24148f7e4",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "70b45d82a29ef0eb536603bbbdd660c9cc5bd9c31c070967120d5ee62a9401f6"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/radio-group"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

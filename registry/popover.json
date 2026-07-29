@@ -48,12 +48,15 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
   "styling": {
-    "outputs": [],
+    "outputs": [
+      "css",
+      "tailwind"
+    ],
     "themeCompatible": []
   },
   "search": {
@@ -64,12 +67,24 @@
       "non",
       "overlay",
       "panel",
-      "popover"
+      "popover",
+      "positioning",
+      "runtime"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "19b8d856d707bb3eb02d36a9998f22f2fbd134e51f637101320277f54efd6b84",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "797db880e64ed3727ee8d5072daf9e04897ed1687d9a7b5fd1d382458b078e68",
+      "src/popover-context.ts": "7b17e66b755402db611051c3cc8844df5d4dca3424614d50b150318ddbfd8143",
+      "src/popover.tsx": "f211e57c179ad3a363930e4952af7e515103fef9763ebd989d4228c62d8547b7"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/popover"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

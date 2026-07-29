@@ -33,7 +33,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -47,6 +47,7 @@
       "field",
       "input",
       "integration",
+      "runtime",
       "states",
       "text",
       "textarea",
@@ -55,8 +56,16 @@
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "1ae38ebb9acf16175706e000a8f5ab6623568b7149574caa2ac3b53f36f2c5ea",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "89b2003e9cbf8b7b20cd7ec3aec3a6baafd385186865e5b0b5a4f4bd4ce09ec2"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/input"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

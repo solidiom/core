@@ -10,12 +10,16 @@
     "test:boundaries": "pnpm run boundaries -- --self-test",
     "budget-report": "tsx ./tools/report-route-budgets.ts",
     "budget-report:enforce": "tsx ./tools/report-route-budgets.ts --enforce",
+    "route-parity": "tsx ./tools/validate-route-parity.ts",
+    "translation:check": "tsx ./tools/validate-translation-freshness.ts",
     "lighthouse": "tsx ./tools/lighthouse-report.ts",
     "lighthouse:json": "tsx ./tools/lighthouse-report.ts --json",
     "build": "pnpm run boundaries && astro build",
     "preview": "astro preview",
     "search-index": "pagefind --site dist",
-    "test:e2e": "playwright test --config playwright.config.ts"
+    "test:e2e": "playwright test --config playwright.config.ts",
+    "test:visual": "playwright test --config playwright.visual.config.ts",
+    "test:visual:update": "playwright test --config playwright.visual.config.ts --update-snapshots"
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",

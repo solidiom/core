@@ -33,7 +33,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -48,6 +48,7 @@
       "layout",
       "native",
       "performance",
+      "runtime",
       "scroll",
       "scrollbar",
       "scrolling",
@@ -56,8 +57,16 @@
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "3db3b9167390bad82a1f58d936e450fcd9396e0b039be40d37a83bddf044f8e3",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "4b1e201660eb255ec50dc92e6563a337b39fa1c4a4b7f5c08b1d99aad191f813"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/scroll-area"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

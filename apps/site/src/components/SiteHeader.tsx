@@ -21,6 +21,8 @@ import { createSignal, For } from "solid-js"
 import * as NavigationMenu from "@solidiom/navigation-menu"
 import * as Drawer from "@solidiom/drawer"
 import { ThemeToggle } from "./ThemeToggle"
+import { LanguageSwitcher } from "./LanguageSwitcher"
+import type { Locale } from "../lib/locale"
 
 export interface NavLink {
   label: string
@@ -36,11 +38,14 @@ export interface SiteHeaderProps {
   pathname: string
   /** Home/logo href. Defaults to "/". */
   homeHref?: string
+  /** Current page locale for the language switcher. Defaults to "en". */
+  locale?: Locale
 }
 
 export function SiteHeader(props: SiteHeaderProps) {
   const [mobileOpen, setMobileOpen] = createSignal(false)
   const homeHref = () => props.homeHref ?? "/"
+  const locale = () => props.locale ?? "en"
   const isActive = (href: string) => props.pathname === href
 
   return (
@@ -83,6 +88,7 @@ export function SiteHeader(props: SiteHeaderProps) {
         </nav>
 
         <div class="site-header__actions">
+          <LanguageSwitcher pathname={props.pathname} locale={locale()} />
           <ThemeToggle />
         </div>
 
