@@ -223,3 +223,42 @@
     transition: transform 0.2s ease-out;
   }
 }
+
+
+/* Theme toggle button (SITE-009) */
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-inline-start: auto;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+  background: none;
+  color: var(--color-foreground);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-surface-raised);
+}
+
+.theme-toggle__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle {
+    transition: none;
+  }
+}
