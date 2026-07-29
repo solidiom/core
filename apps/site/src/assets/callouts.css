@@ -1,0 +1,79 @@
+/**
+ * Callout / admonition styles (SITE-008). See Callout.astro.
+ *
+ * Each variant maps to a semantic accent color. These are declared as
+ * local custom properties (`--callout-accent`) per `data-callout` value
+ * rather than a new global token set, since callouts are the only
+ * consumer and the accents are derived from existing surface/border
+ * tokens plus a small hard-coded per-type hue — consistent with how
+ * tokens.css/BRAND-002 scope "independent light/dark surface
+ * hierarchies" to the roles that actually need them.
+ */
+
+.callout {
+  --callout-accent: var(--focus-ring);
+
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-inline-start: 3px solid var(--callout-accent);
+  background-color: var(--color-surface-raised);
+}
+
+.callout[data-callout="tip"] {
+  --callout-accent: #0f6f4a;
+}
+
+.callout[data-callout="warning"] {
+  --callout-accent: #7a5700;
+}
+
+.callout[data-callout="danger"] {
+  --callout-accent: #c4453a;
+}
+
+:root[data-theme="dark"] .callout[data-callout="tip"] {
+  --callout-accent: #3fbf8f;
+}
+
+:root[data-theme="dark"] .callout[data-callout="warning"] {
+  --callout-accent: #d6a72a;
+}
+
+:root[data-theme="dark"] .callout[data-callout="danger"] {
+  --callout-accent: #ff746a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .callout[data-callout="tip"] {
+    --callout-accent: #3fbf8f;
+  }
+
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .callout[data-callout="warning"] {
+    --callout-accent: #d6a72a;
+  }
+
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .callout[data-callout="danger"] {
+    --callout-accent: #ff746a;
+  }
+}
+
+.callout__title {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--callout-accent);
+}
+
+.callout__body {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--color-foreground);
+}
+
+.callout__body > :last-child {
+  margin-bottom: 0;
+}
