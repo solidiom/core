@@ -42,7 +42,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -59,12 +59,23 @@
       "modal",
       "navigation",
       "palette",
+      "runtime",
       "search"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "5e76f4e18af61839a32f36d69b83bf3ac17c431ffdff1b7e797cf7b63643b57f",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/command-palette-context.ts": "2ea078fb0f8d65f282f653c18aede207441edfe61cbce413bc810806da6d3947",
+      "src/command-palette.tsx": "f7637e6d1eb9182a4f07272da85820ae8afdda672923023eeb03ac45fa28c8c1",
+      "src/index.tsx": "b889c5210bac3669eb6832d02c84314f97cae48b6ee2f6fa50898d2c6cc66539"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/command-palette"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

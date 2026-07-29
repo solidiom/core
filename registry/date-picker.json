@@ -48,7 +48,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -60,17 +60,29 @@
     "keywords": [
       "calendar",
       "date",
+      "date-math",
       "dates",
       "for",
       "input",
       "picker",
       "popup",
+      "runtime",
       "selecting"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "401ceda8b63ba680af7913a6236519f0915282cc1e0a7aaae8ab4cd6d53ac48a",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/date-picker-context.ts": "bfff0cb1850772ce1d205c2ef4313194808b62233c590d542e422fd9acef0b9a",
+      "src/date-picker.tsx": "c4b891a5a3105c669e4ccac993454b6e84c5ac21c75add57c97034678fa72034",
+      "src/index.tsx": "2256bd96c34e431823cae2f2d663a347dd96e96707a40a43539b3595bf48a20e"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/date-picker"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

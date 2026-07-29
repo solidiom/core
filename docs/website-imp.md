@@ -71,7 +71,7 @@ There are no open product or architecture decisions in this plan.
 | Analytics     | PostHog Cloud with autocapture disabled. Only allowlisted, privacy-limited events; no session replay or free-form user payloads.                                                          |
 | Community     | GitHub Issues and Discussions only. Do not advertise Discord or other unmaintained channels.                                                                                              |
 | Contributions | Curated GitHub pull requests with schemas, provenance, tests, accessibility evidence, screenshots, bilingual checks, maintainer review, and DCO signoff. Nothing publishes automatically. |
-| Licensing     | MIT for code, recipes, blocks, templates, and website source; CC BY 4.0 for prose and non-brand documentation media; brand marks reserved under a separate policy.                        |
+| Licensing     | Apache 2.0 for code, recipes, blocks, templates, and website source; CC BY 4.0 for prose and non-brand documentation media; brand marks reserved under a separate policy.                        |
 | Security      | GitHub private vulnerability reporting plus `SECURITY.md`; signed registry manifests, per-file checksums, pinned dependency metadata, and fail-closed CLI verification.                   |
 | Accessibility | WCAG 2.2 AA plus applicable WAI-ARIA Authoring Practices, backed by automated and manual evidence.                                                                                        |
 | Browsers      | Current and previous major Chrome, Edge, Firefox, and Safari, including current iOS Safari. Static content remains readable when an interactive tool is unsupported.                      |
@@ -527,7 +527,7 @@ Set numeric budgets during the foundation milestone after measuring the validate
 
 ## 12. Licensing and contribution policy
 
-- MIT: primitives, components, blocks, templates, themes, CLI output, and website source.
+- Apache 2.0: primitives, components, blocks, templates, themes, CLI output, and website source.
 - CC BY 4.0: prose and non-brand documentation media.
 - Reserved: Solidiom name, logo, and distinctive brand assets under a published brand-use policy.
 - Require DCO `Signed-off-by` for contributions.

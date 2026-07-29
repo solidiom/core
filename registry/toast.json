@@ -37,12 +37,15 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
   "styling": {
-    "outputs": [],
+    "outputs": [
+      "css",
+      "tailwind"
+    ],
     "themeCompatible": []
   },
   "search": {
@@ -51,13 +54,24 @@
       "feedback",
       "non",
       "notification",
+      "runtime",
       "temporary",
       "toast"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "349d9d89d3e2b8e3bf4295a37b8232a760d63697dd106e9370dfb7228e8d9dd2",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "1175b2e3575471ffc707fdc7b8495eeb8f512c8760a53fe8eb4c7c4b688f81e0",
+      "src/toast-context.ts": "9773f77293a7b980e249649944f023c06afd098b6788d2c4f510665fd4578353",
+      "src/toast.tsx": "3488bd66dba6c8580f8b12b9d38fd90e6e7455afb1f7fd5b641eb60f7ed4b55a"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/toast"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

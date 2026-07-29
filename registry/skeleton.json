@@ -33,7 +33,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -48,13 +48,22 @@
       "loading",
       "placeholder",
       "pulse",
+      "runtime",
       "skeleton",
       "with"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "30723256b83c226fff5d3b898c1120be23027cbffd7e0885bd70b02afcc9c88f",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "0b088d8443d2f846fea69bf7c96b161290b6e91788e786a8c91201d2818999ff"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/skeleton"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

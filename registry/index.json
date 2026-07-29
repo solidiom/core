@@ -1,8 +1,9 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v2.json",
   "version": 2,
-  "generatedAt": "2026-07-29T19:05:16.855Z",
+  "generatedAt": "2025-01-01T00:00:00.000Z",
   "integrity": {
+    "algorithm": "sha256",
     "entriesHash": "5e64b5eff1a01916a9d2a5ff4fbbc7b23c95a0758f4207f91730929e8742c08d"
   },
   "primitives": [
@@ -18,7 +19,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "accordion",
+        "collapsible",
+        "layout",
+        "runtime",
+        "sections",
+        "set",
+        "stacked",
+        "vertically"
+      ]
     },
     {
       "name": "alert",
@@ -32,7 +47,26 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "alert",
+        "feedback",
+        "for",
+        "inline",
+        "live",
+        "messages",
+        "modal",
+        "non",
+        "region",
+        "runtime",
+        "semantics",
+        "status",
+        "with"
+      ]
     },
     {
       "name": "alert-dialog",
@@ -46,7 +80,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "action",
+        "alert",
+        "confirmation",
+        "dialog",
+        "explicit",
+        "modal",
+        "overlay",
+        "requiring",
+        "runtime",
+        "user"
+      ]
     },
     {
       "name": "avatar",
@@ -60,7 +107,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "and",
+        "avatar",
+        "display",
+        "fallback",
+        "image",
+        "runtime",
+        "user",
+        "with"
+      ]
     },
     {
       "name": "badge",
@@ -74,7 +132,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "badge",
+        "feedback",
+        "indicator",
+        "inline",
+        "label",
+        "runtime",
+        "status"
+      ]
     },
     {
       "name": "breadcrumb",
@@ -88,7 +159,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "breadcrumb",
+        "hierarchical",
+        "indicator",
+        "links",
+        "location",
+        "navigation",
+        "runtime",
+        "with"
+      ]
     },
     {
       "name": "button",
@@ -102,7 +184,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "actions",
+        "button",
+        "clickable",
+        "for",
+        "input",
+        "runtime",
+        "trigger"
+      ]
     },
     {
       "name": "calendar",
@@ -116,7 +211,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "calendar",
+        "date",
+        "date-math",
+        "day",
+        "input",
+        "month",
+        "runtime",
+        "selection",
+        "views",
+        "with",
+        "year"
+      ]
     },
     {
       "name": "card",
@@ -130,7 +239,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "and",
+        "body",
+        "card",
+        "container",
+        "content",
+        "footer",
+        "header",
+        "layout",
+        "runtime",
+        "with"
+      ]
     },
     {
       "name": "carousel",
@@ -144,7 +266,19 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "based",
+        "carousel",
+        "carousel-physics",
+        "content",
+        "horizontal",
+        "layout",
+        "runtime",
+        "slide",
+        "viewer"
+      ]
     },
     {
       "name": "checkbox",
@@ -158,7 +292,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "binary",
+        "checkbox",
+        "control",
+        "indeterminate",
+        "input",
+        "runtime",
+        "toggle"
+      ]
     },
     {
       "name": "collapsible",
@@ -172,7 +319,16 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "collapsible",
+        "expandable",
+        "layout",
+        "runtime",
+        "section",
+        "single"
+      ]
     },
     {
       "name": "combobox",
@@ -186,7 +342,17 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "autocomplete",
+        "combobox",
+        "dropdown",
+        "input",
+        "runtime",
+        "text",
+        "with"
+      ]
     },
     {
       "name": "command-palette",
@@ -200,7 +366,19 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "action",
+        "and",
+        "command",
+        "launcher",
+        "modal",
+        "navigation",
+        "palette",
+        "runtime",
+        "search"
+      ]
     },
     {
       "name": "context-menu",
@@ -214,7 +392,17 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "click",
+        "context",
+        "menu",
+        "overlay",
+        "right",
+        "runtime",
+        "triggered"
+      ]
     },
     {
       "name": "data-table",
@@ -228,7 +416,19 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "column",
+        "control",
+        "data",
+        "layout",
+        "runtime",
+        "selectable",
+        "sortable",
+        "table",
+        "with"
+      ]
     },
     {
       "name": "date-picker",
@@ -242,7 +442,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "calendar",
+        "date",
+        "date-math",
+        "dates",
+        "for",
+        "input",
+        "picker",
+        "popup",
+        "runtime",
+        "selecting"
+      ]
     },
     {
       "name": "dialog",
@@ -256,7 +469,19 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "dialog",
+        "modal",
+        "non",
+        "overlay",
+        "runtime",
+        "window"
+      ]
     },
     {
       "name": "drawer",
@@ -270,7 +495,19 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "any",
+        "drawer",
+        "edge",
+        "from",
+        "overlay",
+        "panel",
+        "runtime",
+        "screen",
+        "slide"
+      ]
     },
     {
       "name": "empty-state",
@@ -284,7 +521,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "areas",
+        "content",
+        "empty",
+        "feedback",
+        "for",
+        "placeholder",
+        "runtime",
+        "state"
+      ]
     },
     {
       "name": "field",
@@ -298,7 +546,23 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "aria",
+        "automatic",
+        "composition",
+        "control",
+        "description",
+        "error",
+        "field",
+        "input",
+        "label",
+        "runtime",
+        "wiring",
+        "with",
+        "wrapper:"
+      ]
     },
     {
       "name": "hover-card",
@@ -312,7 +576,22 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "anchored",
+        "and",
+        "card",
+        "content",
+        "delay",
+        "hover",
+        "open",
+        "overlay",
+        "positioning",
+        "preview",
+        "runtime",
+        "with"
+      ]
     },
     {
       "name": "input",
@@ -326,7 +605,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "and",
+        "field",
+        "input",
+        "integration",
+        "runtime",
+        "states",
+        "text",
+        "textarea",
+        "validation",
+        "with"
+      ]
     },
     {
       "name": "input-otp",
@@ -340,7 +632,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "character",
+        "individual",
+        "input",
+        "one",
+        "otp",
+        "password",
+        "runtime",
+        "slots",
+        "time",
+        "with"
+      ]
     },
     {
       "name": "kbd",
@@ -354,7 +659,16 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "display",
+        "element",
+        "kbd",
+        "keyboard",
+        "runtime",
+        "shortcut"
+      ]
     },
     {
       "name": "label",
@@ -368,7 +682,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "accessible",
+        "controls",
+        "element",
+        "form",
+        "htmlfor",
+        "input",
+        "label",
+        "linked",
+        "runtime",
+        "via"
+      ]
     },
     {
       "name": "listbox",
@@ -382,7 +709,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "input",
+        "list",
+        "listbox",
+        "multi",
+        "options",
+        "runtime",
+        "select",
+        "single"
+      ]
     },
     {
       "name": "menu",
@@ -396,7 +734,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "action",
+        "button",
+        "list",
+        "menu",
+        "navigation",
+        "runtime",
+        "triggered"
+      ]
     },
     {
       "name": "meter",
@@ -410,7 +761,22 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "disk",
+        "feedback",
+        "known",
+        "measurement",
+        "meter",
+        "range",
+        "runtime",
+        "scalar",
+        "signal",
+        "strength)",
+        "usage",
+        "within"
+      ]
     },
     {
       "name": "navigation-menu",
@@ -424,7 +790,22 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "accessible",
+        "component",
+        "dropdown",
+        "level",
+        "menu",
+        "menus",
+        "navigation",
+        "positioning",
+        "runtime",
+        "sub",
+        "top",
+        "with"
+      ]
     },
     {
       "name": "pagination",
@@ -438,7 +819,19 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "and",
+        "navigation",
+        "next",
+        "numbers",
+        "page",
+        "pagination",
+        "prev",
+        "runtime",
+        "with"
+      ]
     },
     {
       "name": "popover",
@@ -452,7 +845,22 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "content",
+        "floating",
+        "modal",
+        "non",
+        "overlay",
+        "panel",
+        "popover",
+        "positioning",
+        "runtime"
+      ]
     },
     {
       "name": "progress",
@@ -466,7 +874,17 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "and",
+        "determinate",
+        "feedback",
+        "indeterminate",
+        "indicator",
+        "progress",
+        "runtime"
+      ]
     },
     {
       "name": "radio-group",
@@ -480,7 +898,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "button",
+        "group",
+        "input",
+        "keyboard",
+        "navigation",
+        "radio",
+        "runtime",
+        "select",
+        "set",
+        "single",
+        "with"
+      ]
     },
     {
       "name": "resizable-panels",
@@ -494,7 +926,17 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "drag",
+        "layout",
+        "panel",
+        "panels",
+        "resizable",
+        "resize",
+        "runtime"
+      ]
     },
     {
       "name": "scroll-area",
@@ -508,7 +950,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "area",
+        "custom",
+        "layout",
+        "native",
+        "performance",
+        "runtime",
+        "scroll",
+        "scrollbar",
+        "scrolling",
+        "styled",
+        "with"
+      ]
     },
     {
       "name": "select",
@@ -522,7 +978,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "dropdown",
+        "from",
+        "input",
+        "list",
+        "options",
+        "runtime",
+        "select",
+        "selection"
+      ]
     },
     {
       "name": "separator",
@@ -536,7 +1006,17 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "divider",
+        "horizontal",
+        "layout",
+        "runtime",
+        "separator",
+        "vertical",
+        "visual"
+      ]
     },
     {
       "name": "sheet",
@@ -550,7 +1030,19 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "animation",
+        "dialog",
+        "overlay",
+        "panel",
+        "runtime",
+        "sheet",
+        "side",
+        "slide",
+        "with"
+      ]
     },
     {
       "name": "skeleton",
@@ -564,7 +1056,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "animation",
+        "feedback",
+        "loading",
+        "placeholder",
+        "pulse",
+        "runtime",
+        "skeleton",
+        "with"
+      ]
     },
     {
       "name": "slider",
@@ -578,7 +1081,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "control",
+        "input",
+        "numeric",
+        "range",
+        "runtime",
+        "slider",
+        "thumb",
+        "with"
+      ]
     },
     {
       "name": "spinner",
@@ -592,7 +1106,15 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "feedback",
+        "indicator",
+        "loading",
+        "runtime",
+        "spinner"
+      ]
     },
     {
       "name": "switch",
@@ -606,7 +1128,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "binary",
+        "input",
+        "off",
+        "runtime",
+        "semantics",
+        "switch",
+        "toggle",
+        "with"
+      ]
     },
     {
       "name": "tabs",
@@ -620,7 +1156,19 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "content",
+        "navigation",
+        "runtime",
+        "switcher",
+        "tabbed",
+        "tabs"
+      ]
     },
     {
       "name": "toast",
@@ -634,7 +1182,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "blocking",
+        "feedback",
+        "non",
+        "notification",
+        "runtime",
+        "temporary",
+        "toast"
+      ]
     },
     {
       "name": "toggle",
@@ -648,7 +1209,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "button",
+        "can",
+        "input",
+        "off",
+        "runtime",
+        "state",
+        "that",
+        "toggle",
+        "toggled",
+        "two"
+      ]
     },
     {
       "name": "toggle-group",
@@ -662,7 +1236,19 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "buttons",
+        "exclusive",
+        "group",
+        "input",
+        "multi",
+        "mutually",
+        "runtime",
+        "select",
+        "toggle"
+      ]
     },
     {
       "name": "toolbar",
@@ -676,7 +1262,19 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "actions",
+        "and",
+        "bar",
+        "controls",
+        "grouped",
+        "horizontal",
+        "layout",
+        "runtime",
+        "toolbar"
+      ]
     },
     {
       "name": "tooltip",
@@ -690,7 +1288,22 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "contextual",
+        "focus",
+        "hint",
+        "hover",
+        "overlay",
+        "positioning",
+        "runtime",
+        "shown",
+        "tooltip"
+      ]
     },
     {
       "name": "tree",
@@ -704,7 +1317,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "collapse",
+        "expand",
+        "hierarchical",
+        "navigation",
+        "runtime",
+        "tree",
+        "view",
+        "with"
+      ]
     },
     {
       "name": "virtual-list",
@@ -718,7 +1342,20 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "datasets",
+        "for",
+        "large",
+        "layout",
+        "list",
+        "runtime",
+        "viewport",
+        "virtual",
+        "virtualization",
+        "windowed"
+      ]
     },
     {
       "name": "visually-hidden",
@@ -732,7 +1369,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
-      "documentationStatus": "stub"
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "accessible",
+        "content",
+        "hidden",
+        "hides",
+        "keeping",
+        "layout",
+        "readers",
+        "runtime",
+        "screen",
+        "visually",
+        "while"
+      ]
     }
   ],
   "adapters": [

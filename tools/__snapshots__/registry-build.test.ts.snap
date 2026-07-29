@@ -1,0 +1,1432 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`registry build determinism (REG-004) > snapshot: registry/index.json matches expected structure 1`] = `
+"{
+  "$schema": "https://solidiom.dev/schemas/registry-index/v2.json",
+  "version": 2,
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "integrity": {
+    "algorithm": "sha256",
+    "entriesHash": "5e64b5eff1a01916a9d2a5ff4fbbc7b23c95a0758f4207f91730929e8742c08d"
+  },
+  "primitives": [
+    {
+      "name": "accordion",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/accordion",
+      "label": "Accordion",
+      "description": "Vertically stacked set of collapsible sections.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "accordion",
+        "collapsible",
+        "layout",
+        "runtime",
+        "sections",
+        "set",
+        "stacked",
+        "vertically"
+      ]
+    },
+    {
+      "name": "alert",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/alert",
+      "label": "Alert",
+      "description": "Inline, non-modal alert for status messages with live region semantics.",
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "alert",
+        "feedback",
+        "for",
+        "inline",
+        "live",
+        "messages",
+        "modal",
+        "non",
+        "region",
+        "runtime",
+        "semantics",
+        "status",
+        "with"
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/alert-dialog",
+      "label": "Alert Dialog",
+      "description": "Modal confirmation dialog requiring explicit user action.",
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "action",
+        "alert",
+        "confirmation",
+        "dialog",
+        "explicit",
+        "modal",
+        "overlay",
+        "requiring",
+        "runtime",
+        "user"
+      ]
+    },
+    {
+      "name": "avatar",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/avatar",
+      "label": "Avatar",
+      "description": "User avatar with image and fallback.",
+      "category": "display",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "and",
+        "avatar",
+        "display",
+        "fallback",
+        "image",
+        "runtime",
+        "user",
+        "with"
+      ]
+    },
+    {
+      "name": "badge",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/badge",
+      "label": "Badge",
+      "description": "Inline status or label indicator.",
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "badge",
+        "feedback",
+        "indicator",
+        "inline",
+        "label",
+        "runtime",
+        "status"
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/breadcrumb",
+      "label": "Breadcrumb",
+      "description": "Hierarchical location indicator with links.",
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "breadcrumb",
+        "hierarchical",
+        "indicator",
+        "links",
+        "location",
+        "navigation",
+        "runtime",
+        "with"
+      ]
+    },
+    {
+      "name": "button",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/button",
+      "label": "Button",
+      "description": "Clickable trigger for actions.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "actions",
+        "button",
+        "clickable",
+        "for",
+        "input",
+        "runtime",
+        "trigger"
+      ]
+    },
+    {
+      "name": "calendar",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/calendar",
+      "label": "Calendar",
+      "description": "Date selection with day/month/year views.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "calendar",
+        "date",
+        "date-math",
+        "day",
+        "input",
+        "month",
+        "runtime",
+        "selection",
+        "views",
+        "with",
+        "year"
+      ]
+    },
+    {
+      "name": "card",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/card",
+      "label": "Card",
+      "description": "Content container with header, body, and footer.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "and",
+        "body",
+        "card",
+        "container",
+        "content",
+        "footer",
+        "header",
+        "layout",
+        "runtime",
+        "with"
+      ]
+    },
+    {
+      "name": "carousel",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/carousel",
+      "label": "Carousel",
+      "description": "Horizontal slide-based content viewer.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "based",
+        "carousel",
+        "carousel-physics",
+        "content",
+        "horizontal",
+        "layout",
+        "runtime",
+        "slide",
+        "viewer"
+      ]
+    },
+    {
+      "name": "checkbox",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/checkbox",
+      "label": "Checkbox",
+      "description": "Binary or indeterminate toggle control.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "binary",
+        "checkbox",
+        "control",
+        "indeterminate",
+        "input",
+        "runtime",
+        "toggle"
+      ]
+    },
+    {
+      "name": "collapsible",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/collapsible",
+      "label": "Collapsible",
+      "description": "Single expandable/collapsible section.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "collapsible",
+        "expandable",
+        "layout",
+        "runtime",
+        "section",
+        "single"
+      ]
+    },
+    {
+      "name": "combobox",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/combobox",
+      "label": "Combobox",
+      "description": "Text input with autocomplete dropdown.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "autocomplete",
+        "combobox",
+        "dropdown",
+        "input",
+        "runtime",
+        "text",
+        "with"
+      ]
+    },
+    {
+      "name": "command-palette",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/command-palette",
+      "label": "Command Palette",
+      "description": "Modal search and action launcher.",
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "action",
+        "and",
+        "command",
+        "launcher",
+        "modal",
+        "navigation",
+        "palette",
+        "runtime",
+        "search"
+      ]
+    },
+    {
+      "name": "context-menu",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/context-menu",
+      "label": "Context Menu",
+      "description": "Right-click triggered menu.",
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "click",
+        "context",
+        "menu",
+        "overlay",
+        "right",
+        "runtime",
+        "triggered"
+      ]
+    },
+    {
+      "name": "data-table",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/data-table",
+      "label": "Data Table",
+      "description": "Sortable, selectable table with column control.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "column",
+        "control",
+        "data",
+        "layout",
+        "runtime",
+        "selectable",
+        "sortable",
+        "table",
+        "with"
+      ]
+    },
+    {
+      "name": "date-picker",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/date-picker",
+      "label": "Date Picker",
+      "description": "Calendar popup for selecting dates.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "calendar",
+        "date",
+        "date-math",
+        "dates",
+        "for",
+        "input",
+        "picker",
+        "popup",
+        "runtime",
+        "selecting"
+      ]
+    },
+    {
+      "name": "dialog",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/dialog",
+      "label": "Dialog",
+      "description": "Modal or non-modal overlay window.",
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "dialog",
+        "modal",
+        "non",
+        "overlay",
+        "runtime",
+        "window"
+      ]
+    },
+    {
+      "name": "drawer",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/drawer",
+      "label": "Drawer",
+      "description": "Slide-in panel from any screen edge.",
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "any",
+        "drawer",
+        "edge",
+        "from",
+        "overlay",
+        "panel",
+        "runtime",
+        "screen",
+        "slide"
+      ]
+    },
+    {
+      "name": "empty-state",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/empty-state",
+      "label": "Empty State",
+      "description": "Placeholder for empty content areas.",
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "areas",
+        "content",
+        "empty",
+        "feedback",
+        "for",
+        "placeholder",
+        "runtime",
+        "state"
+      ]
+    },
+    {
+      "name": "field",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/field",
+      "label": "Field",
+      "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "aria",
+        "automatic",
+        "composition",
+        "control",
+        "description",
+        "error",
+        "field",
+        "input",
+        "label",
+        "runtime",
+        "wiring",
+        "with",
+        "wrapper:"
+      ]
+    },
+    {
+      "name": "hover-card",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/hover-card",
+      "label": "Hover Card",
+      "description": "Content preview on hover with open delay and anchored positioning.",
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "anchored",
+        "and",
+        "card",
+        "content",
+        "delay",
+        "hover",
+        "open",
+        "overlay",
+        "positioning",
+        "preview",
+        "runtime",
+        "with"
+      ]
+    },
+    {
+      "name": "input",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/input",
+      "label": "Input",
+      "description": "Text input and textarea with validation states and Field integration.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "and",
+        "field",
+        "input",
+        "integration",
+        "runtime",
+        "states",
+        "text",
+        "textarea",
+        "validation",
+        "with"
+      ]
+    },
+    {
+      "name": "input-otp",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/input-otp",
+      "label": "Input OTP",
+      "description": "A one-time password input with individual character slots.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "character",
+        "individual",
+        "input",
+        "one",
+        "otp",
+        "password",
+        "runtime",
+        "slots",
+        "time",
+        "with"
+      ]
+    },
+    {
+      "name": "kbd",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/kbd",
+      "label": "Kbd",
+      "description": "Keyboard shortcut display element.",
+      "category": "display",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "display",
+        "element",
+        "kbd",
+        "keyboard",
+        "runtime",
+        "shortcut"
+      ]
+    },
+    {
+      "name": "label",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/label",
+      "label": "Label",
+      "description": "Accessible label element linked to form controls via htmlFor.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "accessible",
+        "controls",
+        "element",
+        "form",
+        "htmlfor",
+        "input",
+        "label",
+        "linked",
+        "runtime",
+        "via"
+      ]
+    },
+    {
+      "name": "listbox",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/listbox",
+      "label": "Listbox",
+      "description": "Single or multi-select list of options.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "input",
+        "list",
+        "listbox",
+        "multi",
+        "options",
+        "runtime",
+        "select",
+        "single"
+      ]
+    },
+    {
+      "name": "menu",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/menu",
+      "label": "Menu",
+      "description": "Action list triggered by a button.",
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "action",
+        "button",
+        "list",
+        "menu",
+        "navigation",
+        "runtime",
+        "triggered"
+      ]
+    },
+    {
+      "name": "meter",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/meter",
+      "label": "Meter",
+      "description": "Scalar measurement within a known range (e.g. disk usage, signal strength).",
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "disk",
+        "feedback",
+        "known",
+        "measurement",
+        "meter",
+        "range",
+        "runtime",
+        "scalar",
+        "signal",
+        "strength)",
+        "usage",
+        "within"
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/navigation-menu",
+      "label": "Navigation Menu",
+      "description": "A top-level navigation component with accessible dropdown sub-menus.",
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "accessible",
+        "component",
+        "dropdown",
+        "level",
+        "menu",
+        "menus",
+        "navigation",
+        "positioning",
+        "runtime",
+        "sub",
+        "top",
+        "with"
+      ]
+    },
+    {
+      "name": "pagination",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/pagination",
+      "label": "Pagination",
+      "description": "Page navigation with prev/next and page numbers.",
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "and",
+        "navigation",
+        "next",
+        "numbers",
+        "page",
+        "pagination",
+        "prev",
+        "runtime",
+        "with"
+      ]
+    },
+    {
+      "name": "popover",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/popover",
+      "label": "Popover",
+      "description": "Non-modal floating content panel.",
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "content",
+        "floating",
+        "modal",
+        "non",
+        "overlay",
+        "panel",
+        "popover",
+        "positioning",
+        "runtime"
+      ]
+    },
+    {
+      "name": "progress",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/progress",
+      "label": "Progress",
+      "description": "Determinate and indeterminate progress indicator.",
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "and",
+        "determinate",
+        "feedback",
+        "indeterminate",
+        "indicator",
+        "progress",
+        "runtime"
+      ]
+    },
+    {
+      "name": "radio-group",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/radio-group",
+      "label": "Radio Group",
+      "description": "Single-select radio button set with keyboard navigation.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "button",
+        "group",
+        "input",
+        "keyboard",
+        "navigation",
+        "radio",
+        "runtime",
+        "select",
+        "set",
+        "single",
+        "with"
+      ]
+    },
+    {
+      "name": "resizable-panels",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/resizable-panels",
+      "label": "Resizable Panels",
+      "description": "Drag-to-resize panel layout.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "drag",
+        "layout",
+        "panel",
+        "panels",
+        "resizable",
+        "resize",
+        "runtime"
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/scroll-area",
+      "label": "Scroll Area",
+      "description": "Custom-styled scrollbar with native scrolling performance.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "area",
+        "custom",
+        "layout",
+        "native",
+        "performance",
+        "runtime",
+        "scroll",
+        "scrollbar",
+        "scrolling",
+        "styled",
+        "with"
+      ]
+    },
+    {
+      "name": "select",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/select",
+      "label": "Select",
+      "description": "Dropdown selection from a list of options.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "dropdown",
+        "from",
+        "input",
+        "list",
+        "options",
+        "runtime",
+        "select",
+        "selection"
+      ]
+    },
+    {
+      "name": "separator",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/separator",
+      "label": "Separator",
+      "description": "Horizontal or vertical visual divider.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "divider",
+        "horizontal",
+        "layout",
+        "runtime",
+        "separator",
+        "vertical",
+        "visual"
+      ]
+    },
+    {
+      "name": "sheet",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/sheet",
+      "label": "Sheet",
+      "description": "Side-panel dialog with slide animation.",
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "animation",
+        "dialog",
+        "overlay",
+        "panel",
+        "runtime",
+        "sheet",
+        "side",
+        "slide",
+        "with"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/skeleton",
+      "label": "Skeleton",
+      "description": "Loading placeholder with pulse animation.",
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "animation",
+        "feedback",
+        "loading",
+        "placeholder",
+        "pulse",
+        "runtime",
+        "skeleton",
+        "with"
+      ]
+    },
+    {
+      "name": "slider",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/slider",
+      "label": "Slider",
+      "description": "Numeric range input with thumb control.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "control",
+        "input",
+        "numeric",
+        "range",
+        "runtime",
+        "slider",
+        "thumb",
+        "with"
+      ]
+    },
+    {
+      "name": "spinner",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/spinner",
+      "label": "Spinner",
+      "description": "Loading spinner indicator.",
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "feedback",
+        "indicator",
+        "loading",
+        "runtime",
+        "spinner"
+      ]
+    },
+    {
+      "name": "switch",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/switch",
+      "label": "Switch",
+      "description": "Binary toggle with on/off semantics.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "binary",
+        "input",
+        "off",
+        "runtime",
+        "semantics",
+        "switch",
+        "toggle",
+        "with"
+      ]
+    },
+    {
+      "name": "tabs",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/tabs",
+      "label": "Tabs",
+      "description": "Tabbed content switcher.",
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "content",
+        "navigation",
+        "runtime",
+        "switcher",
+        "tabbed",
+        "tabs"
+      ]
+    },
+    {
+      "name": "toast",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/toast",
+      "label": "Toast",
+      "description": "Temporary non-blocking notification.",
+      "category": "feedback",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "blocking",
+        "feedback",
+        "non",
+        "notification",
+        "runtime",
+        "temporary",
+        "toast"
+      ]
+    },
+    {
+      "name": "toggle",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/toggle",
+      "label": "Toggle",
+      "description": "A two-state button that can be toggled on or off.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "button",
+        "can",
+        "input",
+        "off",
+        "runtime",
+        "state",
+        "that",
+        "toggle",
+        "toggled",
+        "two"
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/toggle-group",
+      "label": "Toggle Group",
+      "description": "Group of mutually-exclusive or multi-select toggle buttons.",
+      "category": "input",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "buttons",
+        "exclusive",
+        "group",
+        "input",
+        "multi",
+        "mutually",
+        "runtime",
+        "select",
+        "toggle"
+      ]
+    },
+    {
+      "name": "toolbar",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/toolbar",
+      "label": "Toolbar",
+      "description": "Grouped actions and controls in a horizontal bar.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "actions",
+        "and",
+        "bar",
+        "controls",
+        "grouped",
+        "horizontal",
+        "layout",
+        "runtime",
+        "toolbar"
+      ]
+    },
+    {
+      "name": "tooltip",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/tooltip",
+      "label": "Tooltip",
+      "description": "Contextual hint shown on hover/focus.",
+      "category": "overlay",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [
+        "css",
+        "tailwind"
+      ],
+      "searchKeywords": [
+        "contextual",
+        "focus",
+        "hint",
+        "hover",
+        "overlay",
+        "positioning",
+        "runtime",
+        "shown",
+        "tooltip"
+      ]
+    },
+    {
+      "name": "tree",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/tree",
+      "label": "Tree",
+      "description": "Hierarchical tree view with expand/collapse.",
+      "category": "navigation",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "collapse",
+        "expand",
+        "hierarchical",
+        "navigation",
+        "runtime",
+        "tree",
+        "view",
+        "with"
+      ]
+    },
+    {
+      "name": "virtual-list",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/virtual-list",
+      "label": "Virtual List",
+      "description": "Viewport-windowed list for large datasets.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "datasets",
+        "for",
+        "large",
+        "layout",
+        "list",
+        "runtime",
+        "viewport",
+        "virtual",
+        "virtualization",
+        "windowed"
+      ]
+    },
+    {
+      "name": "visually-hidden",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/visually-hidden",
+      "label": "Visually Hidden",
+      "description": "Hides content visually while keeping it accessible to screen readers.",
+      "category": "layout",
+      "status": "preview",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "documentationStatus": "stub",
+      "stylingOutputs": [],
+      "searchKeywords": [
+        "accessible",
+        "content",
+        "hidden",
+        "hides",
+        "keeping",
+        "layout",
+        "readers",
+        "runtime",
+        "screen",
+        "visually",
+        "while"
+      ]
+    }
+  ],
+  "adapters": [
+    {
+      "name": "carousel-embla",
+      "package": "@solidiom/adapter-carousel-embla",
+      "capability": "carousel-physics@1",
+      "version": "0.0.1-next.0"
+    },
+    {
+      "name": "date-internationalized",
+      "package": "@solidiom/adapter-date-internationalized",
+      "capability": "date-math@1",
+      "version": "0.0.1-next.0"
+    },
+    {
+      "name": "positioning-floating-ui",
+      "package": "@solidiom/adapter-positioning-floating-ui",
+      "capability": "positioning@1",
+      "version": "0.0.1-next.0"
+    },
+    {
+      "name": "positioning-minimal",
+      "package": "@solidiom/adapter-positioning-minimal",
+      "capability": "positioning@1",
+      "version": "0.0.1-next.0"
+    },
+    {
+      "name": "table-tanstack",
+      "package": "@solidiom/adapter-table-tanstack",
+      "capability": "table@1",
+      "version": "0.0.1-next.0"
+    },
+    {
+      "name": "virtualization-tanstack",
+      "package": "@solidiom/adapter-virtualization-tanstack",
+      "capability": "virtualization@1",
+      "version": "0.0.1-next.0"
+    }
+  ]
+}
+"
+`;

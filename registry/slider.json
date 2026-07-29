@@ -38,7 +38,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -52,14 +52,25 @@
       "input",
       "numeric",
       "range",
+      "runtime",
       "slider",
       "thumb",
       "with"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "3e9be7acd06472bc81751e44a25d9d1467ad6d15b34d05fecab6d4f7e0617661",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "68c9b76a8a09a526dd283d7c9635b938a02bf591fb84d0b2f6aa593565e2eaf8",
+      "src/slider-context.ts": "8e25de30ce30d7c6457d79a3e5571ec8e3b625ebe782c9123021a57056bba217",
+      "src/slider.tsx": "9078729ce923206e402d477d681869b28f0662a38da832253493a3e676a033f5"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/slider"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

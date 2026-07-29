@@ -35,7 +35,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -51,13 +51,22 @@
       "input",
       "multi",
       "mutually",
+      "runtime",
       "select",
       "toggle"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "68b5f8141716724129308751306ca833e037725abb1182a6a37b9a263b5904aa",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "1e7c7292ec1b9221f7e82fdb3cf68f2d61ba681d7d8c9e5334dc886ee40bccc9"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/toggle-group"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

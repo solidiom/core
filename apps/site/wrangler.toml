@@ -1,0 +1,4 @@
+# OPS-003: Cloudflare Pages configuration for the Solidiom site.
+name = "solidiom-site"
+compatibility_date = "2024-12-01"
+pages_build_output_dir = "dist"

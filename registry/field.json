@@ -35,7 +35,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -54,14 +54,23 @@
       "field",
       "input",
       "label",
+      "runtime",
       "wiring",
       "with",
       "wrapper:"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "c480a0213cd8d67403f8317919b1f3724939bb9a9572ec6a9798228dd47ed74b",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "ac4930e21ef9845a3e984176c165a8fcd9120c6144857d82e372521d267b7f2e"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/field"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

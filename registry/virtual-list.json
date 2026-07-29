@@ -43,7 +43,7 @@
     "status": "stub",
     "locales": {
       "en": {
-        "status": "stub"
+        "status": "missing"
       }
     }
   },
@@ -58,14 +58,26 @@
       "large",
       "layout",
       "list",
+      "runtime",
       "viewport",
       "virtual",
+      "virtualization",
       "windowed"
     ]
   },
   "integrity": {
+    "algorithm": "sha256",
     "filesHash": "8d2645bddf9b1db56fd4554567144200f113b3e03f0bbc14ba44aeacdc7f9df1",
-    "lastGenerated": "2026-07-29T19:05:16.855Z"
+    "fileDigests": {
+      "src/index.tsx": "a790ae7dc1c71f6aaf98a53845f8ab2ba6355128373296b9d9c052ed283531b3",
+      "src/virtual-list-context.ts": "9cc38eb71a5c2dba32dbeea5c6a420d812c51fe729096aa9aa8f1afbf8bf32c6",
+      "src/virtual-list.tsx": "926f02eca17c8299b5dd9ae4bf09d745d19eaf0f1bd8d715e79c62575a53f40d"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
-  "lastUpdated": "2026-07-29T19:05:16.855Z"
+  "provenance": {
+    "repository": "https://github.com/solidiom/solidiom",
+    "directory": "packages/virtual-list"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }
