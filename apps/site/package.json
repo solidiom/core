@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
+    "lint": "eslint .",
     "build": "astro build",
     "preview": "astro preview",
     "search-index": "pagefind --site dist",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@playwright/test": "1.61.1",
     "@types/hast": "3.0.5",
+    "@typescript-eslint/parser": "^8.65.0",
     "pagefind": "1.5.2",
     "typescript": "6.0.3"
   },
@@ -50,6 +52,12 @@
         "inputs": [
           "default",
           "^default"
+        ],
+        "cache": true
+      },
+      "lint": {
+        "inputs": [
+          "default"
         ],
         "cache": true
       },
