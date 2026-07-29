@@ -1,5 +1,12 @@
 import { defineConfig, devices } from "@playwright/test"
 
+/**
+ * Playwright configuration for @solidiom/site.
+ *
+ * SITE-011: covers Chromium, Firefox, and WebKit (Safari) for desktop,
+ * plus a mobile viewport project for touch/responsive verification.
+ * This satisfies the "current/previous browser support" requirement.
+ */
 export default defineConfig({
   testDir: "./tests/e2e",
   outputDir: "../../test-results/site-e2e",
@@ -16,6 +23,22 @@ export default defineConfig({
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
+    },
+    {
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
+    },
+    {
+      name: "mobile-chrome",
+      use: { ...devices["Pixel 7"] },
+    },
+    {
+      name: "mobile-safari",
+      use: { ...devices["iPhone 14"] },
     },
   ],
   webServer: {
