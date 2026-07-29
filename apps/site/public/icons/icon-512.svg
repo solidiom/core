@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Solidiom</title>
+  <rect width="512" height="512" rx="108" fill="#0f62fe"/>
+  <path fill="#fff" d="M128 128h256v64H192v64h160v64H192v64h192v64H128z"/>
+</svg>

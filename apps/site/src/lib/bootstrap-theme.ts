@@ -60,9 +60,11 @@ export function bootstrapThemeScript(): string {
       : (systemDark ? "dark" : "light");
     document.documentElement.setAttribute("data-theme", theme);
     document.documentElement.setAttribute("data-theme-preference", preference);
+    document.documentElement.style.colorScheme = theme;
   } catch (e) {
     document.documentElement.setAttribute("data-theme", "light");
     document.documentElement.setAttribute("data-theme-preference", "system");
+    document.documentElement.style.colorScheme = "light";
   }
 })();
 `.trim()

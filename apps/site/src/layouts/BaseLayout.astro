@@ -118,6 +118,7 @@ const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
     {social["twitter:image:alt"] && <meta name="twitter:image:alt" content={social["twitter:image:alt"]} />}
 
     <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml" />
 
     <!--
       Font preloads: placeholder pending BRAND-003 (self-hosted Inter Tight,
@@ -148,5 +149,15 @@ const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
       <slot />
     </main>
     {showFooter && <SiteFooter />}
+    <script is:inline>
+      {`document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const skipLink = target.closest(".skip-link");
+        if (!(skipLink instanceof HTMLAnchorElement)) return;
+        const focusTarget = document.getElementById(skipLink.hash.slice(1));
+        if (focusTarget instanceof HTMLElement) focusTarget.focus();
+      });`}
+    </script>
   </body>
 </html>
