@@ -458,27 +458,27 @@ The brand should look technical and refined, not decorative.
 
 ### Core neutrals
 
-| Token          |     Value | Use                 |
-| -------------- | --------: | ------------------- |
-| **Slate 950**  | `#0F172A` | Dark backgrounds    |
-| **Slate 900**  | `#111827` | Primary text        |
-| **Slate 700**  | `#334155` | Secondary dark text |
-| **Slate 500**  | `#94A3B8` | Supporting text     |
-| **Slate 300**  | `#CBD5E1` | Borders             |
-| **Slate 100**  | `#F1F5F9` | Secondary surfaces  |
-| **Canvas**     | `#F8FAFC` | Page background     |
-| **White**      | `#FFFFFF` | Elevated surfaces   |
+| Token         |     Value | Use                 |
+| ------------- | --------: | ------------------- |
+| **Slate 950** | `#0F172A` | Dark backgrounds    |
+| **Slate 900** | `#111827` | Primary text        |
+| **Slate 700** | `#334155` | Secondary dark text |
+| **Slate 500** | `#94A3B8` | Supporting text     |
+| **Slate 300** | `#CBD5E1` | Borders             |
+| **Slate 100** | `#F1F5F9` | Secondary surfaces  |
+| **Canvas**    | `#F8FAFC` | Page background     |
+| **White**     | `#FFFFFF` | Elevated surfaces   |
 
 ### Brand colors
 
-| Token              |     Value | Use                                             |
-| ------------------ | --------: | ----------------------------------------------- |
-| **Indigo**         | `#6D66F1` | Primary action and identity                     |
-| **Blue**           | `#3B82F6` | Links, secondary actions, and informational states |
-| **Cyan**           | `#06B6D4` | Active states and diagrams                      |
-| **Green**          | `#22C55E` | Success and composition                         |
-| **Warning Amber**  | `#F59E0B` | Warnings                                        |
-| **Critical Red**   | `#E5484D` | Destructive states                              |
+| Token             |     Value | Use                                                |
+| ----------------- | --------: | -------------------------------------------------- |
+| **Indigo**        | `#6D66F1` | Primary action and identity                        |
+| **Blue**          | `#3B82F6` | Links, secondary actions, and informational states |
+| **Cyan**          | `#06B6D4` | Active states and diagrams                         |
+| **Green**         | `#22C55E` | Success and composition                            |
+| **Warning Amber** | `#F59E0B` | Warnings                                           |
+| **Critical Red**  | `#E5484D` | Destructive states                                 |
 
 ### Gradient
 

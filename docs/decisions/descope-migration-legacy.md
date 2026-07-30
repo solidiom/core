@@ -1,3 +1,13 @@
+---
+id: descope-migration-legacy
+title: "Decision: Descope Migration Matrix and Legacy CLI"
+doc_type: decision
+audience: "Solidiom project leads"
+tags: [decisions, migration, legacy, phase2]
+lifecycle: archived
+date: 2026-07-27
+---
+
 # Decision: Descope Migration Matrix (Task 49) and Legacy CLI (Task 50)
 
 **Date:** 2026-07-27

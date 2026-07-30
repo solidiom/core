@@ -1,3 +1,12 @@
+---
+id: infrastructure-audit
+title: "Infrastructure Audit — Generated Report"
+doc_type: generated
+audience: "Solidiom operations engineers"
+tags: [infrastructure, registry, audit, generated]
+lifecycle: current
+---
+
 # Infrastructure Audit
 
 Generated: 2026-07-22

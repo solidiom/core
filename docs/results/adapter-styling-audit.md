@@ -1,3 +1,12 @@
+---
+id: adapter-styling-audit
+title: "Adapter Styling Audit — Generated Report"
+doc_type: generated
+audience: "Solidiom contributors"
+tags: [adapters, audit, generated]
+lifecycle: current
+---
+
 # Adapter Styling Audit
 
 Generated: 2026-07-22

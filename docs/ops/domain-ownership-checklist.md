@@ -1,3 +1,12 @@
+---
+id: domain-ownership-checklist
+title: "Domain and Infrastructure Access Confirmation"
+doc_type: reference
+audience: "Solidiom operations engineers"
+tags: [ops, domain, cloudflare, access, OPS-001]
+lifecycle: archived
+---
+
 # Domain and Infrastructure Access Confirmation
 
 **Task:** OPS-001

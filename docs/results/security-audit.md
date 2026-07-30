@@ -1,3 +1,12 @@
+---
+id: security-audit
+title: "Security Audit — Generated Report"
+doc_type: generated
+audience: "Solidiom contributors, security reviewers"
+tags: [security, audit, secrets, generated]
+lifecycle: current
+---
+
 # Security Audit
 
 Generated: 2026-07-22

@@ -6,6 +6,7 @@ description: How to author recipes in the Solidiom recipe packages so they survi
 doc_type: how-to
 audience: "Solidiom contributors, recipe authors"
 tags: [recipes, css, tailwind, unocss, authoring, styling]
+lifecycle: current
 ---
 
 > **Purpose:** For Solidiom contributors, shows how to author, wire, and verify recipes in `recipes-css`, `recipes-tailwind`, and `recipes-unocss` — under rules that keep the result migratable to the canonical recipe contract.

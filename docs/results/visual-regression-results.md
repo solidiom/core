@@ -1,3 +1,12 @@
+---
+id: visual-regression-results
+title: "Visual Regression Test Results — Generated Report"
+doc_type: generated
+audience: "Solidiom QA engineers"
+tags: [visual, regression, testing, generated]
+lifecycle: current
+---
+
 # Visual Regression Test Results
 
 Generated: 2026-07-22

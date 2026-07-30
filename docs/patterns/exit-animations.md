@@ -6,6 +6,7 @@ description: How overlay and disclosure primitives animate out before DOM remova
 doc_type: how-to
 audience: "component authors, consumers styling overlays"
 tags: [animation, presence, overlay, disclosure]
+lifecycle: current
 ---
 
 > **Purpose:** For component authors and consumers styling overlays, explains how Solidiom keeps elements mounted during exit animations using `createPresence` + `data-state`, covering all overlay/disclosure primitives.

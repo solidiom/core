@@ -1,3 +1,13 @@
+---
+id: registry-schema-v2
+title: "Registry Schema v2 — Design Document"
+doc_type: reference
+audience: "Solidiom platform engineers, CLI authors"
+tags: [registry, schema, REG-001, REG-002]
+lifecycle: archived
+date: 2026-07-27
+---
+
 # Registry Schema v2 — Design Document
 
 > REG-001 · Status: Draft  

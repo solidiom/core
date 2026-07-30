@@ -1,3 +1,13 @@
+---
+id: deployment-spec
+title: "Deployment and Infrastructure Specification"
+doc_type: reference
+audience: "Solidiom operations engineers"
+tags: [ops, deployment, cloudflare, infrastructure, OPS-002, OPS-003]
+lifecycle: current
+date: 2026-07-29
+---
+
 # Deployment and Infrastructure Specification
 
 **Tasks:** OPS-002, OPS-003

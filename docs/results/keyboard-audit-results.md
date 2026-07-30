@@ -4,6 +4,7 @@ title: "Keyboard Navigation Audit Results"
 doc_type: reference
 audience: "Solidiom contributors, accessibility reviewers"
 tags: [accessibility, keyboard, audit]
+lifecycle: current
 ---
 
 > **Purpose:** Records keyboard navigation audit results for every public Solidiom primitive.

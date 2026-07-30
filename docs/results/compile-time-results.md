@@ -1,3 +1,12 @@
+---
+id: compile-time-results
+title: "Compile-Time Optimization Results — Generated Report"
+doc_type: generated
+audience: "Solidiom contributors"
+tags: [build, compile-time, performance, generated]
+lifecycle: current
+---
+
 # Compile-Time Optimization Results
 
 Generated: 2026-07-22

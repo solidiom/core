@@ -1,3 +1,12 @@
+---
+id: recipe-contract-audit
+title: "Recipe Contract Audit — Generated Report"
+doc_type: generated
+audience: "Solidiom contributors"
+tags: [recipes, audit, generated]
+lifecycle: current
+---
+
 # Recipe Contract Audit
 
 Generated: 2026-07-30T14:10:57.426Z

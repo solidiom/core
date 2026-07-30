@@ -1,3 +1,12 @@
+---
+id: offline-install
+title: "Enterprise Offline Installation"
+doc_type: how-to
+audience: "Enterprise platform teams"
+tags: [enterprise, offline, installation, registry]
+lifecycle: current
+---
+
 # Enterprise Offline Installation
 
 This guide walks through setting up Solidiom in an air-gapped (no internet) environment using a private npm registry.
