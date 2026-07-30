@@ -1,2 +1,5 @@
-# Legacy redirect patterns
+# Canonical production host (Cloudflare Pages applies this after the custom domain is attached).
+https://www.solidiom.org/* https://solidiom.org/:splat 301
+
+# Legacy documentation paths retained while the legacy app is read-only.
 /docs/* /primitives/:splat 301
