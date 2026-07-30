@@ -60,11 +60,11 @@
     "fileDigests": {
       "src/index.tsx": "b7845f543a4a13205b3467cdf782a39c0a3594718647afd021a6bb44bd8575b1"
     },
-    "lastGenerated": "2026-07-30T01:44:24.000Z"
+    "lastGenerated": "2026-07-30T05:13:42.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/pagination"
   },
-  "lastUpdated": "2026-07-30T01:44:24.000Z"
+  "lastUpdated": "2026-07-30T05:13:42.000Z"
 }

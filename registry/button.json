@@ -67,11 +67,11 @@
       "src/index.tsx": "afbf08de5a4fd3fd5cc54accfc155f04df05e5894a64914fc4903e69452a3855",
       "src/toggle-button.tsx": "a5ca880d302fddc1c78b5f7c609fbaf3c228fadddcbfa7e563ccb1d56748013e"
     },
-    "lastGenerated": "2026-07-30T01:44:24.000Z"
+    "lastGenerated": "2026-07-30T05:13:42.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/button"
   },
-  "lastUpdated": "2026-07-30T01:44:24.000Z"
+  "lastUpdated": "2026-07-30T05:13:42.000Z"
 }
