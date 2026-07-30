@@ -8,6 +8,7 @@ audience: "Solidiom project leads, platform engineers, contributors"
 tags: [solidiom, implementation, roadmap, phases, tasks]
 version: "7.5"
 paired_design: opencenter-solidiom-v0.6
+lifecycle: active
 ---
 
 > **Purpose:** For Solidiom project leads and contributors, tracks the phased implementation of Solidiom v0.6 → beta release → Solid 2 GA and stable v1.0 → strict v2.0 against the design in `opencenter-solidiom.md`, records the tooling and process decisions made during plan creation, and provides a checklist for progress.

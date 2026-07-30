@@ -6,6 +6,7 @@ description: Practical pitfalls and workarounds discovered while implementing ag
 doc_type: reference
 audience: "Solidiom contributors, Solid 2 library authors"
 tags: [solid2, migration, typescript, signals]
+lifecycle: current
 ---
 
 > **Purpose:** For Solidiom contributors, documents Solid 2 beta API differences and workarounds discovered during runtime kernel implementation.

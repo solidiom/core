@@ -7,6 +7,7 @@ version: "0.6"
 date: 2026-07-19
 generated: true
 source_project: opencenter-solidiom
+lifecycle: current
 ---
 
 # openCenter Solidiom Design — Combined Documentation

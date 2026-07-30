@@ -6,6 +6,7 @@ description: Design and phased plan for shipping solidiom typography as recipes,
 doc_type: explanation
 audience: "solidiom maintainers, recipe authors"
 tags: [typeset, recipes, typography, architecture]
+lifecycle: current
 ---
 
 > **Purpose:** For solidiom maintainers, explains why typography ships in the recipe layer (not as a primitive) and how to implement it across the existing `recipes-css` and `recipes-tailwind` profiles without violating the recipe-contract audit.

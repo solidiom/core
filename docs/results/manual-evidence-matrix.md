@@ -4,6 +4,7 @@ title: "Manual Accessibility Evidence Matrix"
 doc_type: reference
 audience: "Solidiom contributors, accessibility reviewers"
 tags: [accessibility, manual-verification, evidence]
+lifecycle: current
 ---
 
 > **Purpose (A11Y-005):** Defines the seven manual verification dimensions that automated tooling (`docs/results/axe-scan-results.md`) cannot establish, and records completed manual passes per primitive. A primitive's authored accessibility contract (`packages/<name>/docs/{accessibility,es/accessibility}/contract.md`, rendered by `AccessibilityEvidence.astro`) states what it guarantees; this matrix is the evidence that each dimension of that guarantee was actually exercised by a human reviewer.
@@ -13,21 +14,21 @@ tags: [accessibility, manual-verification, evidence]
 Automated axe-core scans (A11Y-001) reliably catch missing names, roles, and states, but cannot verify:
 
 - Whether keyboard interaction actually matches the documented pattern end-to-end (axe checks static markup, not interaction sequences).
-- Visual outcomes: zoom/reflow layout, color contrast in *styled* consuming products (the isolated scan fixture has no recipe styling), and reduced-motion behavior.
+- Visual outcomes: zoom/reflow layout, color contrast in _styled_ consuming products (the isolated scan fixture has no recipe styling), and reduced-motion behavior.
 - Real screen reader announcements (axe approximates the accessibility tree; it does not run VoiceOver/NVDA/JAWS/TalkBack).
 - Touch target sizing and gesture behavior on real touch hardware.
 
 ## Dimensions
 
-| Dimension           | What is verified                                                                            | How                                                                    |
-| -------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| **Keyboard**         | Every documented key/behavior pair in the contract's `keyboard` field actually occurs        | Manual keyboard-only pass; see `docs/results/keyboard-audit-results.md` |
-| **Focus**            | Focus moves, traps, and restores exactly as the contract's `focus` field states               | Manual keyboard-only pass, tab order and focus-visible inspection       |
-| **Zoom**             | Content reflows without loss of function or content up to 400% (WCAG 1.4.10)                 | Browser zoom to 400% at 1280px viewport width, no horizontal scroll     |
-| **Contrast**         | Text and non-text contrast meet WCAG 1.4.3 / 1.4.11 in the primitive's default recipe styling | Automated contrast checker against rendered, styled output              |
-| **Reduced motion**   | Animations respect `prefers-reduced-motion: reduce`                                          | OS/browser reduced-motion emulation, manual visual pass                 |
-| **Screen readers**   | Real AT announces role, name, state, and state changes as documented in `semantics`/`aria`   | VoiceOver (macOS/Safari) minimum; NVDA/JAWS/TalkBack tracked separately  |
-| **Touch**            | Touch targets meet 24×24 CSS px minimum (WCAG 2.5.8) and gestures have a non-gesture alternative | Manual pass on a touch device or touch emulation                     |
+| Dimension          | What is verified                                                                                 | How                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| **Keyboard**       | Every documented key/behavior pair in the contract's `keyboard` field actually occurs            | Manual keyboard-only pass; see `docs/results/keyboard-audit-results.md` |
+| **Focus**          | Focus moves, traps, and restores exactly as the contract's `focus` field states                  | Manual keyboard-only pass, tab order and focus-visible inspection       |
+| **Zoom**           | Content reflows without loss of function or content up to 400% (WCAG 1.4.10)                     | Browser zoom to 400% at 1280px viewport width, no horizontal scroll     |
+| **Contrast**       | Text and non-text contrast meet WCAG 1.4.3 / 1.4.11 in the primitive's default recipe styling    | Automated contrast checker against rendered, styled output              |
+| **Reduced motion** | Animations respect `prefers-reduced-motion: reduce`                                              | OS/browser reduced-motion emulation, manual visual pass                 |
+| **Screen readers** | Real AT announces role, name, state, and state changes as documented in `semantics`/`aria`       | VoiceOver (macOS/Safari) minimum; NVDA/JAWS/TalkBack tracked separately |
+| **Touch**          | Touch targets meet 24×24 CSS px minimum (WCAG 2.5.8) and gestures have a non-gesture alternative | Manual pass on a touch device or touch emulation                        |
 
 Screen reader coverage beyond VoiceOver (NVDA, JAWS, TalkBack) and formal external audit sign-off remain Phase 4 work, consistent with `docs/results/axe-scan-results.md`'s "Out of scope" section and `docs/at-verification-template.md`. Recording a VoiceOver pass here is a manual-evidence baseline, not a substitute for that later certification.
 
@@ -40,10 +41,10 @@ Screen reader coverage beyond VoiceOver (NVDA, JAWS, TalkBack) and formal extern
 The G2 vertical slice requires Dialog, Combobox, and Data Table to satisfy the Primitive DoD, so these three are the first to carry a completed manual pass. Remaining primitives are populated incrementally as their contracts (A11Y-002) are authored; an empty row is `—` in every column, not a failing one.
 
 | Primitive  | Keyboard | Focus | Zoom | Contrast | Reduced motion | Screen readers | Touch |
-| ---------- | -------- | ----- | ---- | -------- | --------------- | --------------- | ----- |
-| Dialog     | ✅       | ✅    | ✅   | ⚠️       | ✅               | ✅ VoiceOver     | ✅    |
-| Combobox   | —        | —     | —    | —        | —                | —                | —     |
-| Data Table | —        | —     | —    | —        | —                | —                | —     |
+| ---------- | -------- | ----- | ---- | -------- | -------------- | -------------- | ----- |
+| Dialog     | ✅       | ✅    | ✅   | ⚠️       | ✅             | ✅ VoiceOver   | ✅    |
+| Combobox   | —        | —     | —    | —        | —              | —              | —     |
+| Data Table | —        | —     | —    | —        | —              | —              | —     |
 
 ### Dialog — evidence detail
 

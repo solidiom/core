@@ -1,3 +1,12 @@
+---
+id: ssr-hydration-test-results
+title: "SSR / Hydration Test Results — Generated Report"
+doc_type: generated
+audience: "Solidiom contributors"
+tags: [ssr, hydration, testing, generated]
+lifecycle: current
+---
+
 # SSR / Hydration Test Results
 
 Generated: 2026-07-22
