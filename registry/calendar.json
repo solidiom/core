@@ -80,11 +80,11 @@
       "src/range-calendar-context.ts": "aa0a042cb7eb03a86716ac46b99c7a9b0b7c5f0281cd206f94f256cb63f592d1",
       "src/range-calendar.tsx": "a2e11784aa50c97706e029d73d9018f2bbfdcb0e747eba0e6e729d67a197b34c"
     },
-    "lastGenerated": "2026-07-30T01:44:24.000Z"
+    "lastGenerated": "2026-07-30T05:13:42.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/calendar"
   },
-  "lastUpdated": "2026-07-30T01:44:24.000Z"
+  "lastUpdated": "2026-07-30T05:13:42.000Z"
 }

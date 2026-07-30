@@ -62,11 +62,11 @@
     "fileDigests": {
       "src/index.tsx": "4b1e201660eb255ec50dc92e6563a337b39fa1c4a4b7f5c08b1d99aad191f813"
     },
-    "lastGenerated": "2026-07-30T01:44:24.000Z"
+    "lastGenerated": "2026-07-30T05:13:42.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/scroll-area"
   },
-  "lastUpdated": "2026-07-30T01:44:24.000Z"
+  "lastUpdated": "2026-07-30T05:13:42.000Z"
 }

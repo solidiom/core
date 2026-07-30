@@ -61,11 +61,11 @@
     "fileDigests": {
       "src/index.tsx": "0c24f4abfa5784f6f3207fc2ce074adcc8475bd25dfd533a78985aa986b5e45e"
     },
-    "lastGenerated": "2026-07-30T01:44:24.000Z"
+    "lastGenerated": "2026-07-30T05:13:42.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/badge"
   },
-  "lastUpdated": "2026-07-30T01:44:24.000Z"
+  "lastUpdated": "2026-07-30T05:13:42.000Z"
 }

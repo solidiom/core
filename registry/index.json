@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v2.json",
   "version": 2,
-  "generatedAt": "2026-07-30T01:44:24.000Z",
+  "generatedAt": "2026-07-30T05:13:42.000Z",
   "integrity": {
     "algorithm": "sha256",
     "entriesHash": "401783a148c14a247bf9af75978bd6b82ecadbd61d5de6206b824e4e24c5bc07"
@@ -509,24 +509,33 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "combobox-axe-closed",
+          "combobox-axe-open"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
       "themeCompatible": [],
       "searchKeywords": [
+        "autocompletado",
         "autocomplete",
         "combobox",
+        "desplegable",
         "dropdown",
         "input",
+        "listbox",
         "runtime",
         "text",
         "with"
@@ -625,27 +634,43 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "data-table-axe-default",
+          "data-table-axe-sorted"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
       "themeCompatible": [],
       "searchKeywords": [
         "column",
+        "columnas",
+        "columns",
         "control",
         "data",
+        "datos",
+        "filas",
         "layout",
+        "ordenar",
+        "rows",
         "runtime",
+        "selección",
         "selectable",
+        "selection",
+        "sort",
         "sortable",
+        "tabla",
         "table",
         "with"
       ],
