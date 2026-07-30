@@ -32,6 +32,7 @@
     "@astrojs/mdx": "7.0.3",
     "@astrojs/sitemap": "3.7.3",
     "@solidiom/astrojs-solid-next": "workspace:*",
+    "@solidiom/data-table": "workspace:*",
     "@solidiom/dialog": "workspace:*",
     "@solidiom/drawer": "workspace:*",
     "@solidiom/navigation-menu": "workspace:*",
