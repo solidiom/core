@@ -240,7 +240,7 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | [x]    | A11Y-003 | M    | A11Y-002, SITE-008    | Frontend/a11y | Build static accessibility renderer combining authored contract and generated evidence without overstating conformance.                                         |
 | [x]    | A11Y-004 | S    | A11Y-001              | CI            | Make missing/stale evidence fail for GA-status entries; retain artifact provenance and CI run links.                                                            |
 | [x]    | A11Y-005 | M    | A11Y-003              | Accessibility | Define manual evidence matrix for keyboard, focus, zoom, contrast, reduced motion, screen readers, and touch.                                                   |
-| [ ]    | A11Y-006 | S    | A11Y-002, I18N-004    | Content       | Add bilingual accessibility terminology and human-review checklist.                                                                                             |
+| [x]    | A11Y-006 | S    | A11Y-002, I18N-004    | Content       | Add bilingual accessibility terminology and human-review checklist.                                                                                             |
 
 ### 6.4 Catalog routes, navigation, and search
 
