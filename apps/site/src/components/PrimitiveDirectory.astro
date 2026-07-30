@@ -5,6 +5,7 @@
  * this is the static, always-available link inventory every locale needs.
  */
 import DocsLayout from "../layouts/DocsLayout.astro"
+import { categoryLabel } from "../lib/docs-nav"
 import {
   getCatalogCopy,
   getRegistryPrimitives,
@@ -12,6 +13,7 @@ import {
   type RegistryPrimitive,
 } from "../lib/catalog"
 import type { Locale } from "../lib/locale"
+import { PrimitiveDirectoryFilters } from "./PrimitiveDirectoryFilters"
 
 interface Props {
   locale: Locale
@@ -21,9 +23,17 @@ const { locale } = Astro.props
 const copy = getCatalogCopy(locale)
 const primitives = getRegistryPrimitives()
 const countLabel = copy.directoryCount.replace("{count}", String(primitives.length))
+const directoryPrimitives = primitives.map((primitive) => ({
+  name: primitive.name,
+  label: primitive.label,
+  description: primitive.description,
+  category: primitive.category,
+  status: primitive.status,
+  href: primitiveHref(primitive.name, locale),
+}))
 
-function categoryLabel(primitive: RegistryPrimitive): string {
-  return primitive.category
+function categoryLabelFor(primitive: RegistryPrimitive): string {
+  return categoryLabel(primitive.category, locale)
 }
 ---
 
@@ -34,20 +44,24 @@ function categoryLabel(primitive: RegistryPrimitive): string {
     <p class="primitive-directory__count">{countLabel}</p>
   </header>
 
-  <ul class="primitive-directory__grid" data-pagefind-ignore="index">
-    {
-      primitives.map((primitive) => (
-        <li class="primitive-directory__item">
-          <a href={primitiveHref(primitive.name, locale)} class="primitive-directory__link">
-            <span class="primitive-directory__name">{primitive.label}</span>
-            <span class="primitive-directory__description">{primitive.description}</span>
-            <span class="primitive-directory__meta">
-              <span class="primitive-directory__category">{categoryLabel(primitive)}</span>
-              <span class="primitive-directory__status">{primitive.status}</span>
-            </span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <PrimitiveDirectoryFilters primitives={directoryPrimitives} locale={locale} client:load />
+
+  <div id="primitive-directory-fallback" class="primitive-directory__fallback">
+    <ul class="primitive-directory__grid" data-pagefind-ignore="index">
+      {
+        primitives.map((primitive) => (
+          <li class="primitive-directory__item">
+            <a href={primitiveHref(primitive.name, locale)} class="primitive-directory__link">
+              <span class="primitive-directory__name">{primitive.label}</span>
+              <span class="primitive-directory__description">{primitive.description}</span>
+              <span class="primitive-directory__meta">
+                <span class="primitive-directory__category">{categoryLabelFor(primitive)}</span>
+                <span class="primitive-directory__status">{primitive.status}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </DocsLayout>
