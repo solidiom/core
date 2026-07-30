@@ -254,26 +254,26 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | [x]    | DOCS-006   | S    | DOCS-002, I18N-003             | SEO/content      | Add structured data, canonical links, locale alternates, breadcrumbs, and social metadata for catalog pages.                         |
 | [x]    | SEARCH-001 | S    | SITE-003                       | Search           | Separate Astro build from Pagefind indexing and expose explicit Nx `search-index` target.                                            |
 | [x]    | SEARCH-002 | M    | SEARCH-001, SITE-005           | Search/frontend  | Build Solidiom command/search dialog; do not reuse corvu implementation or Pagefind default visual UI.                               |
-| [ ]    | SEARCH-003 | M    | SEARCH-002, REG-003            | Search           | Index/filter guides, catalog entries, APIs, examples, a11y, themes, blog, changelog, and migrations by content type and locale.      |
-| [ ]    | SEARCH-004 | S    | SEARCH-003                     | Accessibility/QA | Add keyboard, focus restoration, no-results, static fallback, and bilingual result tests.                                            |
-| [ ]    | SEARCH-005 | S    | SEARCH-003, GOV-004            | Privacy          | Emit only allowlisted search-open/result-selected events; never emit query text.                                                     |
+| [x]    | SEARCH-003 | M    | SEARCH-002, REG-003            | Search           | Index/filter guides, catalog entries, APIs, examples, a11y, themes, blog, changelog, and migrations by content type and locale.      |
+| [x]    | SEARCH-004 | S    | SEARCH-003                     | Accessibility/QA | Add keyboard, focus restoration, no-results, static fallback, and bilingual result tests.                                            |
+| [x]    | SEARCH-005 | S    | SEARCH-003, GOV-004            | Privacy          | Emit only allowlisted search-open/result-selected events; never emit query text.                                                     |
 
 ### 6.5 Complex vertical slice
 
 | Status | ID     | Size | Depends on                                 | Owner area       | Task and acceptance boundary                                                                                                                                  |
 | ------ | ------ | ---- | ------------------------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [ ]    | VS-001 | L    | DOCS-001..006, API-001..005, A11Y-001..006 | Cross-functional | Complete Dialog end to end in English/Spanish, including live example, all static tabs, API, evidence, search, theme modes, and install metadata.             |
-| [ ]    | VS-002 | L    | VS-001                                     | Cross-functional | Complete Combobox end to end; prove complex state, keyboard model, collections, and API normalization.                                                        |
-| [ ]    | VS-003 | L    | VS-001                                     | Cross-functional | Complete Data Table end to end; prove adapters, large API, responsive preview, and data-boundary documentation.                                               |
-| [ ]    | VS-004 | M    | VS-001, VS-002, VS-003                     | QA/platform      | Add end-to-end vertical-slice gate: route counts, links, search, API snapshots, a11y artifacts, locale parity, visual/browser tests, and performance budgets. |
+| [x]    | VS-001 | L    | DOCS-001..006, API-001..005, A11Y-001..006 | Cross-functional | Complete Dialog end to end in English/Spanish, including live example, all static tabs, API, evidence, search, theme modes, and install metadata.             |
+| [x]    | VS-002 | L    | VS-001                                     | Cross-functional | Complete Combobox end to end; prove complex state, keyboard model, collections, and API normalization.                                                        |
+| [x]    | VS-003 | L    | VS-001                                     | Cross-functional | Complete Data Table end to end; prove adapters, large API, responsive preview, and data-boundary documentation.                                               |
+| [x]    | VS-004 | M    | VS-001, VS-002, VS-003                     | QA/platform      | Add end-to-end vertical-slice gate: route counts, links, search, API snapshots, a11y artifacts, locale parity, visual/browser tests, and performance budgets. |
 
 ### G2 exit checklist
 
-- [ ] Registry v2 regenerates all current entries deterministically.
-- [ ] Dialog, Combobox, and Data Table satisfy the Primitive DoD in both languages.
-- [ ] API, a11y, search, routes, and translations are generated from canonical sources.
-- [ ] Numeric content/catalog performance budgets are enforced.
-- [ ] No bulk catalog work has bypassed the vertical-slice gate.
+- [x] Registry v2 regenerates all current entries deterministically.
+- [x] Dialog, Combobox, and Data Table satisfy the Primitive DoD in both languages.
+- [x] API, a11y, search, routes, and translations are generated from canonical sources.
+- [x] Numeric content/catalog performance budgets are enforced.
+- [x] No bulk catalog work has bypassed the vertical-slice gate.
 
 ---
 
@@ -654,7 +654,7 @@ Update this table when tasks move; do not infer completion from generated files 
 | ------------------------- | ----------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | M0 Governance/inputs      | Complete    | G0   | GOV-001..006, BRAND-001..004, BASE-001..002, OPS-001..002, MIG-001..002 complete. GOV-005/GOV-006 ship as published bilingual site content (`apps/site/src/content/{en,es}/pages/privacy.md`, `trademark.md`); BRAND-004 source assets under `apps/site/src/assets/brand/`. No unmet G0 exit items remain (`.env` confirmed untracked/never committed to git history). |
 | M1 Foundation/alpha shell | Complete    | G1   | SITE-001 through SITE-014, I18N-001..004, TEST-001..004, CI-001..004, and OPS-003 complete. Local validation passed `check`, production build, all 290 Chromium/Firefox/WebKit/mobile E2E tests, and all 36 intentional visual baselines. Protected Cloudflare previews are validated after deployment by the CI delivery-policy verifier.                             |
-| M2 Content vertical slice | In progress | G2   | REG-001..007, CONTENT-001..005, API-001..005, A11Y-001..006, DOCS-001..006, and SEARCH-001..002 complete. Remaining: SEARCH-003..005, VS-001..004.                                                                                                                                                                                                                     |
+| M2 Content vertical slice | Complete    | G2   | REG-001..007, CONTENT-001..005, API-001..005, A11Y-001..006, DOCS-001..006, SEARCH-001..005, and VS-001..004 complete. VS-004 gate passes 67/67 checks. Registry regeneration deterministic; API coverage gate confirms all vertical-slice exports documented/resolved; route parity validated; performance budgets defined and enforceable.                           |
 | M3 Public beta platform   | Not started | G3   | Beta acceptance matrix and deployment                                                                                                                                                                                                                                                                                                                                  |
 | M4 Catalog completion     | Not started | G4   | Exact catalog counts and item DoDs                                                                                                                                                                                                                                                                                                                                     |
 | M5 GA/cutover             | Not started | G5   | Full acceptance matrix and production deployment                                                                                                                                                                                                                                                                                                                       |
