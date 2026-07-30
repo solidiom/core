@@ -348,6 +348,9 @@ importers:
       '@solidiom/astrojs-solid-next':
         specifier: workspace:*
         version: link:../../packages/astrojs-solid-next
+      '@solidiom/combobox':
+        specifier: workspace:*
+        version: link:../../packages/combobox
       '@solidiom/data-table':
         specifier: workspace:*
         version: link:../../packages/data-table
