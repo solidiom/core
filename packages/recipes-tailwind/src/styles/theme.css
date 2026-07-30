@@ -1,0 +1,52 @@
+/**
+ * @solidiom/recipes-tailwind — theme contract.
+ *
+ * Every Tailwind theme colour name this profile's recipes reference, registered as a
+ * Tailwind v4 `@theme` token and resolved from the `--ui-*` runtime namespace shared
+ * with @solidiom/recipes-css.
+ *
+ * WHY THIS FILE EXISTS
+ * Until now these names were defined only in apps/docs/src/styles.css, which CUT-003
+ * deletes. Nothing inside packages/ defined them, so after cutover every Tailwind
+ * recipe would reference undefined theme names and render unstyled. This file makes
+ * the profile self-sufficient.
+ *
+ * TOKEN MODEL (docs/recipe-authoring-guide.md §3.5)
+ * Identity is canonical and shared; mechanism is profile-local. Both profiles read the
+ * same `--ui-*` custom properties at runtime, so a consumer sets a value once and both
+ * the CSS and Tailwind profiles follow. Fallbacks match packages/recipes-css so the
+ * two profiles agree visually with no theme installed.
+ *
+ * REQUIRES Tailwind v4. On v3 there is no `@theme`; map these names in
+ * `tailwind.config.js` `theme.extend.colors` instead.
+ *
+ * THEME-003 generates this file from canonical theme JSON. Until then it is
+ * hand-maintained and must stay in sync with tools/recipe-contract-tokens.ts.
+ */
+
+@theme {
+  /* Surface */
+  --color-background: var(--ui-surface, hsl(0 0% 100%));
+  --color-popover: var(--ui-surface, hsl(0 0% 100%));
+  --color-muted: var(--ui-muted, hsl(210 40% 96%));
+  --color-accent: var(--ui-accent, hsl(210 40% 96%));
+  --color-input: var(--ui-border, hsl(214 32% 91%));
+
+  /* Foreground */
+  --color-foreground: var(--ui-fg, hsl(222 47% 11%));
+  --color-muted-foreground: var(--ui-muted-fg, hsl(215 16% 47%));
+  --color-accent-foreground: var(--ui-fg, hsl(222 47% 11%));
+  --color-popover-foreground: var(--ui-fg, hsl(222 47% 11%));
+
+  /* Intent */
+  --color-primary: var(--ui-primary, hsl(222 47% 11%));
+  --color-primary-foreground: var(--ui-primary-fg, hsl(0 0% 100%));
+  --color-secondary: var(--ui-secondary, hsl(210 40% 96%));
+  --color-secondary-foreground: var(--ui-secondary-fg, hsl(222 47% 11%));
+  --color-destructive: var(--ui-destructive, hsl(0 84% 60%));
+  --color-destructive-foreground: var(--ui-destructive-fg, hsl(0 0% 100%));
+
+  /* Border and focus */
+  --color-border: var(--ui-border, hsl(214 32% 91%));
+  --color-ring: var(--ui-primary, hsl(222 47% 11%));
+}

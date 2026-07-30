@@ -11,6 +11,8 @@
  * - Anatomy/semantics ESLint rules exist and are registered.
  * - no-adapter-import-of-recipes rule exists.
  * - Recipe dual-emission drift check passes.
+ * - Recipe selector contract audit passes (no raw class/ID selectors in recipe CSS).
+ * - Canonical recipe contract validation passes (RECIPE-001).
  * - Umbrella re-export purity check passes.
  * - Axe a11y scan test file covers the full public surface.
  *
@@ -306,6 +308,28 @@ check(
   "recipe drift check passes",
   driftResult.ok,
   "Recipe CSS/TSX drift detected — run: pnpm run audit:recipe-drift",
+)
+check("audit-recipe-contract.ts exists", fileExists("tools/audit-recipe-contract.ts"))
+const selectorResult = run("pnpm exec tsx tools/audit-recipe-contract.ts")
+check(
+  "recipe selector contract passes",
+  selectorResult.ok,
+  "Recipe CSS uses a non-semantic selector — run: pnpm run audit:recipe-contract",
+)
+check("recipe-contract.ts exists", fileExists("tools/recipe-contract.ts"))
+const contractResult = run("pnpm exec tsx tools/recipe-contract.ts")
+check(
+  "canonical recipe contract validation passes",
+  contractResult.ok,
+  "A recipe definition violates the canonical contract — run: pnpm run recipe:contract",
+)
+const contractFixtureResult = run(
+  "pnpm exec vitest run tools/recipe-contract-validate.test.ts tools/recipe-contract-vocabulary.test.ts tools/recipe-contract-tokens.test.ts tools/audit-recipe-contract.test.ts",
+)
+check(
+  "contract, vocabulary, and token fixtures pass",
+  contractFixtureResult.ok,
+  "Run: pnpm exec vitest run tools/recipe-contract-validate.test.ts tools/recipe-contract-vocabulary.test.ts tools/recipe-contract-tokens.test.ts tools/audit-recipe-contract.test.ts",
 )
 
 // ─── 10. P1.5: Umbrella re-export purity check ─────────────────────────

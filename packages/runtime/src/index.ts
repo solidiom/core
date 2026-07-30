@@ -33,6 +33,23 @@ export {
   type SemanticAttrsResult,
   type SemanticFlags,
 } from "./dom/semantic-attrs"
+export {
+  SEMANTIC_FLAGS,
+  SEMANTIC_ORIENTATIONS,
+  SEMANTIC_SIDES,
+  SEMANTIC_SIZES,
+  SEMANTIC_ATTRIBUTES,
+  SCOPE_STATES,
+  COMPOSITE_SCOPES,
+  VOCABULARY_EXCEPTIONS,
+  isSemanticAttribute,
+  isKnownScope,
+  isKnownState,
+  statesForScope,
+  vocabularyException,
+  allStateValues,
+  type SemanticFlagName,
+} from "./dom/semantic-vocabulary"
 
 // Collection
 export {

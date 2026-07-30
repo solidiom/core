@@ -63,11 +63,11 @@
     "fileDigests": {
       "src/index.tsx": "d1b10d68be834eeae05f5754bdc770777c278e10182a4f66651f6f172cd4c10c"
     },
-    "lastGenerated": "2026-07-30T05:13:42.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/checkbox"
   },
-  "lastUpdated": "2026-07-30T05:13:42.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }
