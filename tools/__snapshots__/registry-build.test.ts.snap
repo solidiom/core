@@ -7,7 +7,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
   "generatedAt": "2025-01-01T00:00:00.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "becffb704b9b2264770da5ff06ca05a51770dad1dba4568de39928d98369dc6d"
+    "entriesHash": "401783a148c14a247bf9af75978bd6b82ecadbd61d5de6206b824e4e24c5bc07"
   },
   "primitives": [
     {
