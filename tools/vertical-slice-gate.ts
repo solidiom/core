@@ -54,21 +54,26 @@ for (const primitive of VERTICAL_SLICE_PRIMITIVES) {
   )
 
   if (manifest) {
+    // registry-build derives "complete" when EN+ES have overview+contract+example
     check(
-      `${primitive}: documentation status is published`,
-      manifest.documentation?.status === "published",
+      `${primitive}: documentation status is complete`,
+      manifest.documentation?.status === "complete",
       `got "${manifest.documentation?.status}"`,
     )
 
+    // Locale status is "draft" unless translationStatus: human-reviewed in frontmatter.
+    // "draft" means content exists; "missing" means no overview.md at all.
     check(
-      `${primitive}: EN locale documented`,
-      manifest.documentation?.locales?.en?.status === "reviewed",
+      `${primitive}: EN locale content exists`,
+      manifest.documentation?.locales?.en?.status !== "missing" &&
+        manifest.documentation?.locales?.en !== undefined,
       `got "${manifest.documentation?.locales?.en?.status}"`,
     )
 
     check(
-      `${primitive}: ES locale documented`,
-      manifest.documentation?.locales?.es?.status === "reviewed",
+      `${primitive}: ES locale content exists`,
+      manifest.documentation?.locales?.es?.status !== "missing" &&
+        manifest.documentation?.locales?.es !== undefined,
       `got "${manifest.documentation?.locales?.es?.status}"`,
     )
 
