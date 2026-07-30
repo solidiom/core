@@ -211,10 +211,10 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | [x]    | REG-001 | M    | —          | Registry/platform | Design registry schema v2 and migration rules.                                                                                                         |
 | [x]    | REG-002 | M    | REG-001    | Registry/platform | Implement versioned schema/types/validation in `tools/registry-build.ts`; preserve current 52 primitives and 6 adapters.                               |
 | [x]    | REG-003 | M    | REG-002    | Registry/platform | Add deliverables, documentation status, locale status, search, evidence, theme, and provenance fields sourced from package metadata/content manifests. |
-| [ ]    | REG-004 | S    | REG-002    | Registry/platform | Add deterministic output, stable sorting, schema version checks, and fixture/snapshot tests.                                                           |
-| [ ]    | REG-005 | M    | REG-002    | Security/CLI      | Generate per-file digests and signed versioned index metadata compatible with existing CLI verify/Sigstore dependencies.                               |
-| [ ]    | REG-006 | M    | REG-005    | CLI/security      | Extend `packages/cli` verification to fail closed on missing/invalid signatures, hashes, or pinned metadata; add tamper tests.                         |
-| [ ]    | REG-007 | S    | REG-003    | CI                | Add invariant: each public deliverable generates exactly one valid route; missing/duplicate routes fail CI.                                            |
+| [x]    | REG-004 | S    | REG-002    | Registry/platform | Add deterministic output, stable sorting, schema version checks, and fixture/snapshot tests.                                                           |
+| [x]    | REG-005 | M    | REG-002    | Security/CLI      | Generate per-file digests and signed versioned index metadata compatible with existing CLI verify/Sigstore dependencies.                               |
+| [x]    | REG-006 | M    | REG-005    | CLI/security      | Extend `packages/cli` verification to fail closed on missing/invalid signatures, hashes, or pinned metadata; add tamper tests.                         |
+| [x]    | REG-007 | S    | REG-003    | CI                | Add invariant: each public deliverable generates exactly one valid route; missing/duplicate routes fail CI.                                            |
 
 ### 6.2 Content collections and route generation
 
@@ -222,9 +222,9 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | ------ | ----------- | ---- | --------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [x]    | CONTENT-001 | M    | SITE-003, REG-002     | Content platform | Configure Astro loaders for site-wide content and `packages/*/docs/**` without copying package docs into the app.                                                    |
 | [x]    | CONTENT-002 | M    | CONTENT-001, I18N-004 | Content platform | Define versioned frontmatter schemas for guides, primitive prose, examples, accessibility contracts, components, blocks, templates, themes, articles, and changelog. |
-| [ ]    | CONTENT-003 | S    | CONTENT-002           | Content platform | Add content validation for required metadata, unique slugs, product identity, status, dates, and locale parity.                                                      |
-| [ ]    | CONTENT-004 | S    | CONTENT-002           | Content platform | Add source-hash and translation-freshness generator; stale/missing GA translations fail validation.                                                                  |
-| [ ]    | CONTENT-005 | S    | CONTENT-002           | Content platform | Define code/example source extraction so displayed code and executable examples share a canonical source.                                                            |
+| [x]    | CONTENT-003 | S    | CONTENT-002           | Content platform | Add content validation for required metadata, unique slugs, product identity, status, dates, and locale parity.                                                      |
+| [x]    | CONTENT-004 | S    | CONTENT-002           | Content platform | Add source-hash and translation-freshness generator; stale/missing GA translations fail validation.                                                                  |
+| [x]    | CONTENT-005 | S    | CONTENT-002           | Content platform | Define code/example source extraction so displayed code and executable examples share a canonical source.                                                            |
 
 ### 6.3 API and accessibility evidence
 
@@ -232,14 +232,14 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | ------ | -------- | ---- | --------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [x]    | API-001  | M    | SITE-002              | API platform  | Select and pin TypeDoc; add Nx `api` target with declared inputs/outputs and package-build dependencies.                                                        |
 | [x]    | API-002  | L    | API-001               | API platform  | Define and implement versioned Solidiom API schema normalization for components, contexts, functions, props, children, inheritance, comments, and source links. |
-| [ ]    | API-003  | M    | API-002, SITE-008     | Frontend/API  | Build static Astro API renderers, heading extraction, deep links, copy actions, and empty/error diagnostics.                                                    |
-| [ ]    | API-004  | S    | API-002               | CI            | Fail on undocumented/unresolved public exports; snapshot normalized Dialog, Combobox, and Data Table outputs.                                                   |
-| [ ]    | API-005  | S    | API-003, I18N-001     | Content       | Translate API explanatory UI while preserving identifiers, signatures, attributes, and source literals.                                                         |
+| [x]    | API-003  | M    | API-002, SITE-008     | Frontend/API  | Build static Astro API renderers, heading extraction, deep links, copy actions, and empty/error diagnostics.                                                    |
+| [x]    | API-004  | S    | API-002               | CI            | Fail on undocumented/unresolved public exports; snapshot normalized Dialog, Combobox, and Data Table outputs.                                                   |
+| [x]    | API-005  | S    | API-003, I18N-001     | Content       | Translate API explanatory UI while preserving identifiers, signatures, attributes, and source literals.                                                         |
 | [x]    | A11Y-001 | M    | SITE-002              | Accessibility | Extend existing axe artifacts to emit stable per-primitive evidence IDs and machine-readable result summaries.                                                  |
 | [x]    | A11Y-002 | M    | A11Y-001, CONTENT-002 | Accessibility | Define authored contract schema: keyboard, focus, semantics, ARIA, consumer duties, non-applicable criteria, and review status.                                 |
-| [ ]    | A11Y-003 | M    | A11Y-002, SITE-008    | Frontend/a11y | Build static accessibility renderer combining authored contract and generated evidence without overstating conformance.                                         |
-| [ ]    | A11Y-004 | S    | A11Y-001              | CI            | Make missing/stale evidence fail for GA-status entries; retain artifact provenance and CI run links.                                                            |
-| [ ]    | A11Y-005 | M    | A11Y-003              | Accessibility | Define manual evidence matrix for keyboard, focus, zoom, contrast, reduced motion, screen readers, and touch.                                                   |
+| [x]    | A11Y-003 | M    | A11Y-002, SITE-008    | Frontend/a11y | Build static accessibility renderer combining authored contract and generated evidence without overstating conformance.                                         |
+| [x]    | A11Y-004 | S    | A11Y-001              | CI            | Make missing/stale evidence fail for GA-status entries; retain artifact provenance and CI run links.                                                            |
+| [x]    | A11Y-005 | M    | A11Y-003              | Accessibility | Define manual evidence matrix for keyboard, focus, zoom, contrast, reduced motion, screen readers, and touch.                                                   |
 | [ ]    | A11Y-006 | S    | A11Y-002, I18N-004    | Content       | Add bilingual accessibility terminology and human-review checklist.                                                                                             |
 
 ### 6.4 Catalog routes, navigation, and search
