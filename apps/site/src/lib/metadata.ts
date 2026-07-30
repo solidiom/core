@@ -181,3 +181,127 @@ export function resolveSocialMetadata(input: SocialMetadataInput): SocialMetadat
 
   return meta
 }
+
+// ---------------------------------------------------------------------------
+// Catalog structured data (DOCS-006)
+// ---------------------------------------------------------------------------
+
+export type JsonLdValue = string | number | boolean | null | JsonLd | JsonLdValue[]
+
+export interface JsonLd {
+  "@context"?: "https://schema.org"
+  "@type": string
+  [property: string]: JsonLdValue | undefined
+}
+
+export interface CatalogBreadcrumbItem {
+  name: string
+  pathname: string
+}
+
+export interface CatalogStructuredDataItem {
+  name: string
+  pathname: string
+}
+
+interface CatalogSeoCopy {
+  home: string
+  breadcrumbs: string
+}
+
+const CATALOG_SEO_COPY: Record<Locale, CatalogSeoCopy> = {
+  en: { home: "Home", breadcrumbs: "Breadcrumb" },
+  es: { home: "Inicio", breadcrumbs: "Ruta de navegación" },
+}
+
+/** Returns localized labels shared by visible catalog breadcrumbs and JSON-LD. */
+export function getCatalogSeoCopy(locale: Locale): CatalogSeoCopy {
+  return CATALOG_SEO_COPY[locale]
+}
+
+/** Serializes JSON-LD safely for an inline application/ld+json script element. */
+export function serializeJsonLd(data: JsonLd): string {
+  return JSON.stringify(data)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029")
+}
+
+export function catalogBreadcrumbStructuredData(items: CatalogBreadcrumbItem[]): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: resolveCanonicalUrl(item.pathname),
+    })),
+  }
+}
+
+export interface CatalogPageStructuredDataInput {
+  title: string
+  description: string
+  pathname: string
+  locale: Locale
+  breadcrumbs: CatalogBreadcrumbItem[]
+}
+
+/** Returns structured data for a localized primitive overview or tab page. */
+export function catalogPageStructuredData(input: CatalogPageStructuredDataInput): JsonLd[] {
+  return [
+    catalogBreadcrumbStructuredData(input.breadcrumbs),
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: input.title,
+      description: input.description,
+      url: resolveCanonicalUrl(input.pathname),
+      inLanguage: input.locale,
+      isPartOf: {
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: resolveCanonicalUrl("/"),
+      },
+    },
+  ]
+}
+
+export interface CatalogDirectoryStructuredDataInput extends CatalogPageStructuredDataInput {
+  items: CatalogStructuredDataItem[]
+}
+
+/** Returns structured data for a localized primitive collection page. */
+export function catalogDirectoryStructuredData(
+  input: CatalogDirectoryStructuredDataInput,
+): JsonLd[] {
+  return [
+    catalogBreadcrumbStructuredData(input.breadcrumbs),
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: input.title,
+      description: input.description,
+      url: resolveCanonicalUrl(input.pathname),
+      inLanguage: input.locale,
+      isPartOf: {
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: resolveCanonicalUrl("/"),
+      },
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: input.items.length,
+        itemListElement: input.items.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: item.name,
+          url: resolveCanonicalUrl(item.pathname),
+        })),
+      },
+    },
+  ]
+}
