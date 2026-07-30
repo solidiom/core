@@ -17,10 +17,11 @@
  */
 import { createSignal, For, Show } from "solid-js"
 import * as Drawer from "@solidiom/drawer"
-import type { DocsSidebarGroup } from "../lib/docs-nav"
+import type { DocsNavigationCopy, DocsSidebarGroup } from "../lib/docs-nav"
 
 export interface DocsMobileNavProps {
   groups: DocsSidebarGroup[]
+  copy: DocsNavigationCopy
   pathname: string
 }
 
@@ -30,7 +31,7 @@ export function DocsMobileNav(props: DocsMobileNavProps) {
 
   return (
     <Drawer.Root open={open} onOpenChange={setOpen} side="left">
-      <Drawer.Trigger class="docs-mobile-nav__trigger" aria-label="Open documentation navigation">
+      <Drawer.Trigger class="docs-mobile-nav__trigger" aria-label={props.copy.openNavigation}>
         <span class="docs-mobile-nav__hamburger" aria-hidden="true">
           <span />
           <span />
@@ -40,18 +41,15 @@ export function DocsMobileNav(props: DocsMobileNavProps) {
       <Drawer.Backdrop class="docs-mobile-nav__drawer-backdrop" />
       <Drawer.Content class="docs-mobile-nav__drawer-content">
         <div class="docs-mobile-nav__drawer-header">
-          <Drawer.Title class="docs-mobile-nav__drawer-title">Documentation</Drawer.Title>
-          <Drawer.Close
-            class="docs-mobile-nav__trigger"
-            aria-label="Close documentation navigation"
-          >
+          <Drawer.Title class="docs-mobile-nav__drawer-title">{props.copy.title}</Drawer.Title>
+          <Drawer.Close class="docs-mobile-nav__trigger" aria-label={props.copy.closeNavigation}>
             <span aria-hidden="true">×</span>
           </Drawer.Close>
         </div>
         <Drawer.Description class="docs-mobile-nav__drawer-description">
-          Browse documentation sections
+          {props.copy.browseSections}
         </Drawer.Description>
-        <nav aria-label="Documentation" class="docs-mobile-nav__nav">
+        <nav aria-label={props.copy.navigationLabel} class="docs-mobile-nav__nav">
           <For each={props.groups}>
             {(group) => (
               <div class="docs-mobile-nav__group">
@@ -75,7 +73,7 @@ export function DocsMobileNav(props: DocsMobileNavProps) {
             )}
           </For>
           <Show when={props.groups.length === 0}>
-            <p class="docs-mobile-nav__empty">No documentation sections yet.</p>
+            <p class="docs-mobile-nav__empty">{props.copy.noSections}</p>
           </Show>
         </nav>
       </Drawer.Content>
