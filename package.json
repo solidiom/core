@@ -31,6 +31,8 @@
     "report:a11y-evidence": "tsx tools/a11y-evidence.ts",
     "a11y:coverage-gate": "tsx tools/a11y-coverage-gate.ts",
     "audit:recipe-drift": "tsx tools/audit-recipe-dual-emission.ts",
+    "audit:recipe-contract": "tsx tools/audit-recipe-contract.ts",
+    "recipe:contract": "tsx tools/recipe-contract.ts",
     "audit:umbrella-purity": "tsx tools/audit-umbrella-purity.ts",
     "gate:phase1": "tsx tools/phase1-gate.ts",
     "gate:phase2": "tsx tools/phase2-gate.ts",

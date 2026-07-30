@@ -1,20 +1,28 @@
 /**
  * tools/audit-recipe-contract — verifies recipe CSS targets only semantic selectors.
  *
- * Greps recipe CSS/TSX for selectors that reference anything other than:
- *   - [data-scope=…][data-part=…] attribute selectors
- *   - :hover, :focus, :focus-visible, :active, :disabled state pseudos
- *   - [data-state=…], [data-disabled], [data-loading] etc. variants
+ * Rejects:
+ *   - raw class selectors (`.my-class`) without a `[data-*]` qualifier
+ *   - ID selectors (`#id`)
+ *   - `data-*` attributes outside the semantic vocabulary exported by @solidiom/runtime
  *
- * Fails on any raw class selector (e.g. `.my-class`) or ID selector (`#id`).
+ * Permits `[data-scope]`/`[data-part]` attribute selectors, the vocabulary's state,
+ * orientation, side, size, and boolean-flag attributes, state pseudo-classes,
+ * structural pseudos, pseudo-elements, and element descendant selectors (used by
+ * composite scopes such as `prose`).
+ *
  * Writes results to docs/recipe-contract-audit.md.
  *
- * Usage: pnpm exec tsx tools/audit-recipe-contract.ts
+ * Usage: pnpm run audit:recipe-contract
  */
 
 import { readdirSync, readFileSync, existsSync, mkdirSync, writeFileSync } from "node:fs"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import {
+  SEMANTIC_ATTRIBUTES,
+  isSemanticAttribute,
+} from "../packages/runtime/src/dom/semantic-vocabulary"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -34,36 +42,22 @@ interface Violation {
   reason: string
 }
 
-/** Allowed selector patterns in recipe files. */
-const ALLOWED_PATTERNS = [
-  /\[data-scope/, // data-scope attribute selector
-  /\[data-part/, // data-part attribute selector
-  /\[data-state/, // data-state variant
-  /\[data-disabled/, // boolean flag
-  /\[data-loading/, // boolean flag
-  /\[data-readonly/, // boolean flag
-  /\[data-invalid/, // boolean flag
-  /\[data-required/, // boolean flag
-  /\[data-highlighted/, // boolean flag
-  /\[data-selected/, // boolean flag
-  /\[data-placeholder/, // boolean flag
-  /\[data-orientation/, // orientation attr
-  /\[data-side/, // side attr
-  /\[data-value/, // value attr
-  /:hover/, // pseudo state
-  /:focus/, // pseudo state
-  /:focus-visible/, // pseudo state
-  /:focus-within/, // pseudo state
-  /:active/, // pseudo state
-  /:disabled/, // pseudo state
-  /:first-child/, // structural pseudo
-  /:last-child/, // structural pseudo
-  /::before/, // pseudo element
-  /::after/, // pseudo element
-]
+/**
+ * Attributes a recipe selector may target, derived from the semantic vocabulary in
+ * `@solidiom/runtime` (RECIPE-001b).
+ *
+ * This replaces a hand-maintained pattern list that was declared but never referenced
+ * by the checker, and which allowed attributes `applySemanticAttrs` cannot emit.
+ */
+const ALLOWED_ATTRIBUTES: readonly string[] = SEMANTIC_ATTRIBUTES
 
-/** Check if a CSS selector line is allowed. */
-function isAllowed(line: string): boolean {
+/** Extracts `data-*` attribute names from a selector line. */
+function dataAttributesIn(line: string): string[] {
+  return [...line.matchAll(/\[(data-[a-z-]+)/g)].map((match) => match[1]!)
+}
+
+/** Check if a CSS selector line is allowed. Returns a reason when it is not. */
+export function violationReason(line: string): string | undefined {
   // Skip empty lines, imports, comments
   if (
     !line.trim() ||
@@ -71,7 +65,7 @@ function isAllowed(line: string): boolean {
     line.trim().startsWith("/*") ||
     line.trim().startsWith("*")
   )
-    return true
+    return
   // Skip lines that are clearly not selectors (properties, values)
   if (
     line.includes(":") &&
@@ -80,12 +74,17 @@ function isAllowed(line: string): boolean {
     !line.startsWith(".") &&
     !line.startsWith("#")
   )
-    return true
-  // Check for raw class selectors
-  if (/^\s*\.[a-zA-Z]/.test(line) && !line.includes("[data-")) return false
-  // Check for ID selectors
-  if (/^\s*#[a-zA-Z]/.test(line)) return false
-  return true
+    return
+  // Raw class selectors
+  if (/^\s*\.[a-zA-Z]/.test(line) && !line.includes("[data-"))
+    return "Class selector without data-* qualifier"
+  // ID selectors
+  if (/^\s*#[a-zA-Z]/.test(line)) return "ID selector"
+  // Attributes outside the semantic vocabulary
+  const unknown = dataAttributesIn(line).filter((attribute) => !isSemanticAttribute(attribute))
+  if (unknown.length > 0)
+    return `Attribute outside the semantic vocabulary: ${unknown.join(", ")} (allowed: ${ALLOWED_ATTRIBUTES.join(", ")})`
+  return
 }
 
 function scanFile(filePath: string): Violation[] {
@@ -97,14 +96,13 @@ function scanFile(filePath: string): Violation[] {
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]!
-    if (!isAllowed(line)) {
+    const reason = violationReason(line)
+    if (reason) {
       violations.push({
         file: filePath.replace(ROOT + "/", ""),
         line: i + 1,
         selector: line.trim(),
-        reason: line.trim().startsWith("#")
-          ? "ID selector"
-          : "Class selector without data-* qualifier",
+        reason,
       })
     }
   }
@@ -169,4 +167,6 @@ function main() {
   if (allViolations.length > 0) process.exit(1)
 }
 
-main()
+if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
+  main()
+}

@@ -18,6 +18,9 @@
     "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "@solidiom/runtime": "workspace:*"
+  },
   "nx": {
     "tags": [
       "layer:recipe"

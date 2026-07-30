@@ -11,6 +11,7 @@
       "types": "./dist/index.d.ts"
     },
     "./styles": "./dist/styles/index.css",
+    "./styles/theme.css": "./dist/styles/theme.css",
     "./styles/dialog.css": "./dist/styles/dialog.css",
     "./styles/button.css": "./dist/styles/button.css",
     "./styles/checkbox.css": "./dist/styles/checkbox.css",

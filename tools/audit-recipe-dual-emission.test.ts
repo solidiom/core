@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from "vitest"
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
-import { auditRecipeProfile } from "./audit-recipe-dual-emission"
+import { auditRecipeProfile, pendingRecipeProfile } from "./audit-recipe-dual-emission"
 
 const temporaryRoots: string[] = []
 
@@ -80,5 +80,47 @@ describe("recipe dual-emission audit", () => {
       "recipes/dialog.tsx": 'import * as Dialog from "@solidiom/dialog"\n<Dialog.Root />',
     })
     expect(errors).toEqual([])
+  })
+
+  it("rejects an empty profile that does not declare itself unimplemented", () => {
+    const errors = audit({ "index.ts": 'export const recipeProfile = "fixture"' })
+    expect(errors).toContainEqual(
+      expect.objectContaining({
+        message: expect.stringContaining("must state that it is unimplemented"),
+      }),
+    )
+  })
+
+  it("permits an empty profile that declares itself unimplemented", () => {
+    const errors = audit({
+      "index.ts": 'export const profileStatus = "declared"\nexport const implementedBy = "TASK-1"',
+    })
+    expect(errors).toEqual([])
+  })
+})
+
+describe("pending recipe profiles", () => {
+  it("reports a declared but unimplemented profile with its owning task", () => {
+    const profileDir = createProfile({
+      "index.ts": 'export const profileStatus = "declared"\nexport const implementedBy = "TASK-1"',
+    })
+    expect(pendingRecipeProfile({ profileName: "fixture", profileDir })).toEqual({
+      profile: "fixture",
+      implementedBy: "TASK-1",
+    })
+  })
+
+  it("does not report a profile that ships recipes", () => {
+    const profileDir = createProfile({
+      "styles/button.css": '[data-scope="button"][data-part="root"] {}',
+      "recipes/button.tsx": 'import * as Button from "@solidiom/button"\n<Button.Root />',
+      "index.ts": 'export const profileStatus = "declared"',
+    })
+    expect(pendingRecipeProfile({ profileName: "fixture", profileDir })).toBeUndefined()
+  })
+
+  it("does not report an empty profile that omits the marker — that is an error, not pending", () => {
+    const profileDir = createProfile({ "index.ts": "export const recipeProfile = 1" })
+    expect(pendingRecipeProfile({ profileName: "fixture", profileDir })).toBeUndefined()
   })
 })

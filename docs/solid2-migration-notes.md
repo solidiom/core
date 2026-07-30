@@ -187,7 +187,7 @@ This split is intentional: `solid-js` is the reactive core (framework-agnostic),
 
 **Common mistake:** older primitives that imported everything from `solid-js` appeared to typecheck because the JSX import error masked deeper type issues. Once the import is fixed, previously-hidden errors (aria-disabled typing, noUncheckedIndexedAccess) surface.
 
-**Enforcement:** The `@solidiom/eslint-plugin-solidiom` rule `no-jsx-from-solid-js` flags this import. All 27 primitives were fixed in the normalization pass (2026-07-22).
+**Enforcement:** the compiler, not a lint rule. Because `solid-js` genuinely has no `JSX` export in Solid 2, importing it fails typecheck with TS2305 — so `pnpm typecheck` is the gate, and no primitive currently violates it. There is **no** `no-jsx-from-solid-js` ESLint rule; `packages/eslint-plugin-solidiom/src/rules/` ships `no-adapter-import-of-recipes`, `no-adapter-jsx-attributes`, `no-cross-layer-import`, `no-engine-import-outside-adapters`, `no-forbidden-primitive-props`, `require-accessible-name`, and `require-primitive-parts` only. All 27 primitives were fixed in the normalization pass (2026-07-22); the fix was verified by typecheck.
 
 ## `DisclosureReason` — exact string literals required
 
