@@ -32,14 +32,17 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": ["data-table-axe-default", "data-table-axe-sorted"]
   },
   "documentation": {
-    "status": "stub",
+    "status": "published",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "reviewed"
+      },
+      "es": {
+        "status": "reviewed"
       }
     }
   },
