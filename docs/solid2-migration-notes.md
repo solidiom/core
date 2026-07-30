@@ -298,6 +298,23 @@ onSettled(() => {
 })
 ```
 
+### Progressive enhancement — retain the static fallback until settlement
+
+For a progressively enhanced island, do not hide server-rendered links or other fallback content while the island initializes. Instead, set the island's ready state from `onSettled` and use it to hide the fallback only after the client component has settled:
+
+```tsx
+let root: HTMLElement | undefined
+
+onSettled(() => {
+  root?.setAttribute("data-ready", "true")
+  document.getElementById("primitive-directory-fallback")?.setAttribute("hidden", "")
+})
+
+return <section ref={(element) => (root = element)}>{/* enhanced controls */}</section>
+```
+
+This keeps the static catalog usable when JavaScript is unavailable or hydration fails. `onSettled` runs once, so it is appropriate for hydration readiness, not for work that must re-run when a signal or `<Show>` branch changes.
+
 ## `splitProps` removed — use `omit`
 
 Solid 2 replaces `splitProps` with `omit`. Do not destructure props (breaks reactivity):
@@ -1087,7 +1104,7 @@ export function Content(props: ContentProps) {
   let contentEl: HTMLDivElement | undefined
 
   onSettled(() => {
-    if (!contentEl) return  // <-- always true on first run, when Show is closed
+    if (!contentEl) return // <-- always true on first run, when Show is closed
     const result = ctx.positioning.update(ctx.triggerRef()!, contentEl)
     return typeof result === "function" ? result : undefined
   })
@@ -1139,7 +1156,7 @@ Using a signal (`createSignal`) for the element ref — rather than a plain `let
 createEffect(
   () => (ctx.open() ? contentEl() : undefined),
   (el) => {
-    const reference = ctx.triggerRef()  // triggers STRICT_READ_UNTRACKED warning
+    const reference = ctx.triggerRef() // triggers STRICT_READ_UNTRACKED warning
     if (!ctx.positioning || !el || !reference) return
     ctx.positioning.update(reference, el)
   },
@@ -1151,7 +1168,9 @@ The two-argument `createEffect` only tracks reads inside the **first** (compute)
 ```tsx
 createEffect(
   () => (ctx.open() ? [contentEl(), ctx.triggerRef()] : [undefined, undefined]),
-  ([el, reference]) => { /* el and reference are plain values here, no warning */ },
+  ([el, reference]) => {
+    /* el and reference are plain values here, no warning */
+  },
 )
 ```
 
@@ -1161,20 +1180,20 @@ createEffect(
 
 All primitives below used the broken `onSettled` + `let contentEl` + `<Show>` pattern where layer registration, dismiss behavior, focus trapping, and/or positioning never activated on first open:
 
-| Primitive | What was broken | Fix status |
-|-----------|----------------|------------|
-| `dialog` | Layer, dismiss, focus scope | Already correct (used `createEffect`) |
-| `drawer` | Layer, dismiss, focus scope | Already correct (used `createEffect`) |
-| `hover-card` | Positioning | Fixed 2026-07-28 |
-| `tooltip` | Positioning | Fixed 2026-07-28 |
-| `popover` | Layer, dismiss, focus scope, positioning | Fixed 2026-07-28 |
-| `combobox` | Layer, dismiss | Fixed 2026-07-28 |
-| `context-menu` | Layer, dismiss | Fixed 2026-07-28 |
-| `menu` | Layer, dismiss | Fixed 2026-07-28 |
-| `select` | Layer, dismiss | Fixed 2026-07-28 |
-| `date-picker` | Layer, dismiss, focus scope | Fixed 2026-07-28 |
-| `command-palette` | Layer, dismiss, focus scope | Fixed 2026-07-28 |
-| `sheet` | Layer, dismiss, focus scope, scroll lock | Fixed 2026-07-28 |
-| `alert-dialog` | Layer, focus scope, modal isolation, scroll lock | Fixed 2026-07-28 |
+| Primitive         | What was broken                                  | Fix status                            |
+| ----------------- | ------------------------------------------------ | ------------------------------------- |
+| `dialog`          | Layer, dismiss, focus scope                      | Already correct (used `createEffect`) |
+| `drawer`          | Layer, dismiss, focus scope                      | Already correct (used `createEffect`) |
+| `hover-card`      | Positioning                                      | Fixed 2026-07-28                      |
+| `tooltip`         | Positioning                                      | Fixed 2026-07-28                      |
+| `popover`         | Layer, dismiss, focus scope, positioning         | Fixed 2026-07-28                      |
+| `combobox`        | Layer, dismiss                                   | Fixed 2026-07-28                      |
+| `context-menu`    | Layer, dismiss                                   | Fixed 2026-07-28                      |
+| `menu`            | Layer, dismiss                                   | Fixed 2026-07-28                      |
+| `select`          | Layer, dismiss                                   | Fixed 2026-07-28                      |
+| `date-picker`     | Layer, dismiss, focus scope                      | Fixed 2026-07-28                      |
+| `command-palette` | Layer, dismiss, focus scope                      | Fixed 2026-07-28                      |
+| `sheet`           | Layer, dismiss, focus scope, scroll lock         | Fixed 2026-07-28                      |
+| `alert-dialog`    | Layer, focus scope, modal isolation, scroll lock | Fixed 2026-07-28                      |
 
 **Not affected:** `scroll-area` (uses `onSettled` but content is always mounted, no `<Show>` gating), `virtual-list` (same — always mounted).
