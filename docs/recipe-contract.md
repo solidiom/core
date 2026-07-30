@@ -14,7 +14,7 @@ lifecycle: current
 **Contract version:** 1
 **Status:** contract and validator shipped (RECIPE-001). Emitters pending (RECIPE-002/003/004).
 **Task:** `docs/website-tasks.md` §7.1 RECIPE-001
-**Breakdown:** `docs/recipe-001-canonical-recipe-contract.md`
+**Breakdown:** (delivered; task breakdown archived — see git history for `docs/recipe-001-canonical-recipe-contract.md`)
 **Authoring workflow:** `docs/recipe-authoring-guide.md`
 
 ---
