@@ -94,9 +94,9 @@ Do not begin bulk catalog production before `VS-004` proves the complete vertica
 | G0   | Governance and canonical inputs | Brand, licensing, security, privacy, migration, and account prerequisites are explicit.                                                    | External policy review and domain/account access |
 | G1   | Foundation/private alpha shell  | `apps/site` builds, deploys to preview, supports both locales/themes, and dogfoods Solidiom.                                               | Site scaffold, tokens, shell, CI                 |
 | G2   | Content-platform vertical slice | Dialog, Combobox, and Data Table prove registry → routes → API → examples → a11y → i18n → search.                                          | Registry v2, TypeDoc, a11y, content loaders      |
-| G3   | Public beta platform            | Useful catalog subset, CLI flows, themes, playground/theme-builder betas, marketing, privacy, and analytics are live with maturity labels. | G2 plus recipe/CLI/tool foundations              |
+| G3   | Public beta platform            | Useful catalog subset, CLI flows, themes, and theme-builder beta are live with maturity labels.                                    | G2 plus recipe/CLI/tool foundations              |
 | G4   | Catalog completion              | 52 primitives, 21 components, 36+ blocks, 29 templates/32 placements, four themes, and both languages meet item DoDs.                      | Catalog work queues and smoke matrices           |
-| G5   | GA and cutover                  | Full quality, security, browser, performance, legal, SEO, and migration gates pass; legacy apps are removed.                               | G4 plus hardening and production readiness       |
+| G5   | GA and cutover                  | Full quality, security, browser, performance, legal, SEO, playground, marketing, analytics, and migration gates pass; legacy apps are removed. | G4 plus playground, marketing, hardening, and production readiness |
 
 ### Critical path
 
@@ -316,49 +316,13 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | [ ]    | BUILDER-005 | M    | BUILDER-002                  | Tools/security       | Implement versioned URL-encoded share state with size limits, validation, malformed-input handling, and no server persistence. |
 | [ ]    | BUILDER-006 | M    | BUILDER-001..005             | QA                   | Add accessibility, browser, privacy, visual, and route-bundle tests.                                                           |
 
-### 7.3 Curated playground
+### 7.3 Beta gate
 
-| Status | ID       | Size | Depends on            | Owner area     | Task and acceptance boundary                                                                                                |
-| ------ | -------- | ---- | --------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [ ]    | PLAY-001 | M    | SITE-012              | Security/tools | Write threat model and define iframe sandbox, CSP, message protocol, allowed APIs, resource limits, and prohibited imports. |
-| [ ]    | PLAY-002 | L    | PLAY-001              | Tools          | Build Worker-based TSX/CSS compilation proof using pinned local dependencies; no arbitrary remote import support.           |
-| [ ]    | PLAY-003 | L    | PLAY-001, PLAY-002    | Tools          | Implement sandboxed iframe runtime, deterministic reset, console/error serialization, timeout/recovery, and teardown.       |
-| [ ]    | PLAY-004 | M    | PLAY-002, SITE-004    | Tools/frontend | Build accessible editor tabs, preview, output, reset, copy, and open controls as a route-local Solid application.           |
-| [ ]    | PLAY-005 | M    | CONTENT-005, PLAY-004 | Content/tools  | Define curated example manifest and canonical source loading; initial examples cover state, form, overlay, and composition. |
-| [ ]    | PLAY-006 | S    | PLAY-003, GOV-004     | Privacy        | Emit only categorical allowlisted events; ensure source/error payloads cannot reach PostHog.                                |
-| [ ]    | PLAY-007 | M    | PLAY-001..006         | QA             | Add browser, keyboard, screen-reader, reduced-motion, mobile, CSP, isolation, leak, and bundle-boundary tests.              |
-| [ ]    | PLAY-008 | S    | PLAY-004              | Frontend       | Provide static unsupported-browser fallback and preserve access to source examples without execution.                       |
-
-### 7.4 Marketing, editorial, analytics, and newsletter
-
-| Status | ID            | Size | Depends on        | Owner area            | Task and acceptance boundary                                                                                                                               |
-| ------ | ------------- | ---- | ----------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [ ]    | MKT-001       | L    | G1, BRAND-004     | Marketing/frontend    | Implement responsive homepage faithful to the board: hero, proof, starting layers, compatibility, ownership, catalog/theme/tool previews, CTA, and footer. |
-| [ ]    | MKT-002       | M    | REG-003, SITE-004 | Marketing/frontend    | Implement Primitives, Components, Blocks, Templates, and Themes landing/directory shells with accurate status/counts.                                      |
-| [ ]    | MKT-003       | M    | CONTENT-002       | Content               | Implement Getting Started, Architecture, Styling, Composition, SSR, Testing, and Migration guide skeletons.                                                |
-| [ ]    | MKT-004       | M    | A11Y-003          | Content/accessibility | Implement accessibility landing page using real evidence and documented consumer responsibilities.                                                         |
-| [ ]    | MKT-005       | S    | REG-003           | Content               | Implement registry/CLI explanation and signed-source ownership flow.                                                                                       |
-| [ ]    | MKT-006       | M    | GOV-002, REG-003  | Content               | Implement technical Enterprise page: architecture, security, versioning, governance, migration, and accessibility; no sales/SLA claims.                    |
-| [ ]    | MKT-007       | S    | GOV-003           | Community             | Implement GitHub-only Community and Contributing pages; remove Discord/inactive social placeholders.                                                       |
-| [ ]    | MKT-008       | M    | CONTENT-002       | Editorial             | Publish foundational article: Solid 2 architecture.                                                                                                        |
-| [ ]    | MKT-009       | M    | CONTENT-002       | Editorial             | Publish foundational article: accessible interaction contracts.                                                                                            |
-| [ ]    | MKT-010       | M    | CONTENT-002       | Editorial             | Publish foundational article: source ownership.                                                                                                            |
-| [ ]    | MKT-011       | M    | CONTENT-002       | Editorial             | Publish foundational article: styling-system neutrality.                                                                                                   |
-| [ ]    | MKT-012       | M    | CONTENT-002       | Editorial             | Publish foundational article: building with Solidiom.                                                                                                      |
-| [ ]    | MKT-013       | S    | CONTENT-002       | Editorial             | Implement changelog and migration content types, feeds, archive pages, and structured metadata.                                                            |
-| [ ]    | ANALYTICS-001 | M    | GOV-004, SITE-004 | Privacy/platform      | Implement typed PostHog adapter with autocapture/session replay disabled and environment-safe no-op behavior.                                              |
-| [ ]    | ANALYTICS-002 | S    | ANALYTICS-001     | QA/privacy            | Add payload tests proving prohibited fields cannot be emitted.                                                                                             |
-| [ ]    | ANALYTICS-003 | S    | ANALYTICS-001     | Operations            | Configure production key/domain through Cloudflare environment settings; no key in source.                                                                 |
-| [ ]    | NEWS-001      | M    | GOV-005, SITE-006 | Frontend/privacy      | Implement Buttondown form, explicit consent, validation, loading/success/error/confirmation behavior, and no analytics leakage.                            |
-| [ ]    | NEWS-002      | S    | NEWS-001          | QA                    | Add keyboard, error, localization, privacy, and external-endpoint integration tests/mocks.                                                                 |
-
-### 7.5 Beta gate
-
-| Status | ID       | Size | Depends on                                                     | Owner area | Task and acceptance boundary                                                                                 |
-| ------ | -------- | ---- | -------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| [ ]    | BETA-001 | M    | G2, representative COMP/BLOCK/TPL tasks, PLAY-007, BUILDER-006 | Product/QA | Define beta minimum coverage and publish maturity labels; no dead CTA or implied GA completeness.            |
-| [ ]    | BETA-002 | M    | BETA-001, MKT-001..013                                         | QA         | Run beta acceptance matrix across locales, themes, browsers, search, CLI, tools, privacy, and accessibility. |
-| [ ]    | BETA-003 | S    | BETA-002, OPS-003                                              | Operations | Publish public beta with rollback, incident contact, feedback path, and release notes.                       |
+| Status | ID       | Size | Depends on                                          | Owner area | Task and acceptance boundary                                                                                 |
+| ------ | -------- | ---- | --------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
+| [ ]    | BETA-001 | M    | G2, representative COMP/BLOCK/TPL tasks, BUILDER-006 | Product/QA | Define beta minimum coverage and publish maturity labels; no dead CTA or implied GA completeness.            |
+| [ ]    | BETA-002 | M    | BETA-001                                             | QA         | Run beta acceptance matrix across locales, themes, browsers, search, CLI, tools, and accessibility.          |
+| [ ]    | BETA-003 | S    | BETA-002, OPS-003                                    | Operations | Publish public beta with rollback, incident contact, feedback path, and release notes.                       |
 
 ---
 
@@ -615,6 +579,44 @@ Complete `TPL-000` first to assign stack, required blocks, deployment target, au
 
 ## 10. M5 — GA hardening and cutover
 
+### 10.1 Curated playground
+
+| Status | ID       | Size | Depends on            | Owner area     | Task and acceptance boundary                                                                                                |
+| ------ | -------- | ---- | --------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [ ]    | PLAY-001 | M    | SITE-012              | Security/tools | Write threat model and define iframe sandbox, CSP, message protocol, allowed APIs, resource limits, and prohibited imports. |
+| [ ]    | PLAY-002 | L    | PLAY-001              | Tools          | Build Worker-based TSX/CSS compilation proof using pinned local dependencies; no arbitrary remote import support.           |
+| [ ]    | PLAY-003 | L    | PLAY-001, PLAY-002    | Tools          | Implement sandboxed iframe runtime, deterministic reset, console/error serialization, timeout/recovery, and teardown.       |
+| [ ]    | PLAY-004 | M    | PLAY-002, SITE-004    | Tools/frontend | Build accessible editor tabs, preview, output, reset, copy, and open controls as a route-local Solid application.           |
+| [ ]    | PLAY-005 | M    | CONTENT-005, PLAY-004 | Content/tools  | Define curated example manifest and canonical source loading; initial examples cover state, form, overlay, and composition. |
+| [ ]    | PLAY-006 | S    | PLAY-003, GOV-004     | Privacy        | Emit only categorical allowlisted events; ensure source/error payloads cannot reach PostHog.                                |
+| [ ]    | PLAY-007 | M    | PLAY-001..006         | QA             | Add browser, keyboard, screen-reader, reduced-motion, mobile, CSP, isolation, leak, and bundle-boundary tests.              |
+| [ ]    | PLAY-008 | S    | PLAY-004              | Frontend       | Provide static unsupported-browser fallback and preserve access to source examples without execution.                       |
+
+### 10.2 Marketing, editorial, analytics, and newsletter
+
+| Status | ID            | Size | Depends on        | Owner area            | Task and acceptance boundary                                                                                                                               |
+| ------ | ------------- | ---- | ----------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [ ]    | MKT-001       | L    | G1, BRAND-004     | Marketing/frontend    | Implement responsive homepage faithful to the board: hero, proof, starting layers, compatibility, ownership, catalog/theme/tool previews, CTA, and footer. |
+| [ ]    | MKT-002       | M    | REG-003, SITE-004 | Marketing/frontend    | Implement Primitives, Components, Blocks, Templates, and Themes landing/directory shells with accurate status/counts.                                      |
+| [ ]    | MKT-003       | M    | CONTENT-002       | Content               | Implement Getting Started, Architecture, Styling, Composition, SSR, Testing, and Migration guide skeletons.                                                |
+| [ ]    | MKT-004       | M    | A11Y-003          | Content/accessibility | Implement accessibility landing page using real evidence and documented consumer responsibilities.                                                         |
+| [ ]    | MKT-005       | S    | REG-003           | Content               | Implement registry/CLI explanation and signed-source ownership flow.                                                                                       |
+| [ ]    | MKT-006       | M    | GOV-002, REG-003  | Content               | Implement technical Enterprise page: architecture, security, versioning, governance, migration, and accessibility; no sales/SLA claims.                    |
+| [ ]    | MKT-007       | S    | GOV-003           | Community             | Implement GitHub-only Community and Contributing pages; remove Discord/inactive social placeholders.                                                       |
+| [ ]    | MKT-008       | M    | CONTENT-002       | Editorial             | Publish foundational article: Solid 2 architecture.                                                                                                        |
+| [ ]    | MKT-009       | M    | CONTENT-002       | Editorial             | Publish foundational article: accessible interaction contracts.                                                                                            |
+| [ ]    | MKT-010       | M    | CONTENT-002       | Editorial             | Publish foundational article: source ownership.                                                                                                            |
+| [ ]    | MKT-011       | M    | CONTENT-002       | Editorial             | Publish foundational article: styling-system neutrality.                                                                                                   |
+| [ ]    | MKT-012       | M    | CONTENT-002       | Editorial             | Publish foundational article: building with Solidiom.                                                                                                      |
+| [ ]    | MKT-013       | S    | CONTENT-002       | Editorial             | Implement changelog and migration content types, feeds, archive pages, and structured metadata.                                                            |
+| [ ]    | ANALYTICS-001 | M    | GOV-004, SITE-004 | Privacy/platform      | Implement typed PostHog adapter with autocapture/session replay disabled and environment-safe no-op behavior.                                              |
+| [ ]    | ANALYTICS-002 | S    | ANALYTICS-001     | QA/privacy            | Add payload tests proving prohibited fields cannot be emitted.                                                                                             |
+| [ ]    | ANALYTICS-003 | S    | ANALYTICS-001     | Operations            | Configure production key/domain through Cloudflare environment settings; no key in source.                                                                 |
+| [ ]    | NEWS-001      | M    | GOV-005, SITE-006 | Frontend/privacy      | Implement Buttondown form, explicit consent, validation, loading/success/error/confirmation behavior, and no analytics leakage.                            |
+| [ ]    | NEWS-002      | S    | NEWS-001          | QA                    | Add keyboard, error, localization, privacy, and external-endpoint integration tests/mocks.                                                                 |
+
+### 10.3 Quality, security, and hardening
+
 | Status | ID      | Size | Depends on           | Owner area    | Task and acceptance boundary                                                                                                         |
 | ------ | ------- | ---- | -------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | [ ]    | QA-001  | L    | G4                   | Accessibility | Complete WCAG 2.2 AA/APG audit across marketing, docs, catalogs, tools, and generated applications; resolve critical/serious issues. |
@@ -639,6 +641,7 @@ Complete `TPL-000` first to assign stack, required blocks, deployment target, au
 ### G5 exit checklist
 
 - [ ] Every acceptance criterion in `docs/website-imp.md` §14 passes.
+- [ ] Playground, marketing pages, analytics, and newsletter are live and tested.
 - [ ] No temporary dogfooding, maturity, translation, security, accessibility, or performance exception remains.
 - [ ] Production deployment and rollback are rehearsed.
 - [ ] Legacy docs and POC are removed only after parity verification.
@@ -657,7 +660,7 @@ Update this table when tasks move; do not infer completion from generated files 
 | M2 Content vertical slice | Complete    | G2   | REG-001..007, CONTENT-001..005, API-001..005, A11Y-001..006, DOCS-001..006, SEARCH-001..005, and VS-001..004 complete. VS-004 gate passes 67/67 checks. Registry regeneration deterministic; API coverage gate confirms all vertical-slice exports documented/resolved; route parity validated; performance budgets defined and enforceable.                           |
 | M3 Public beta platform   | Not started | G3   | Beta acceptance matrix and deployment                                                                                                                                                                                                                                                                                                                                  |
 | M4 Catalog completion     | Not started | G4   | Exact catalog counts and item DoDs                                                                                                                                                                                                                                                                                                                                     |
-| M5 GA/cutover             | Not started | G5   | Full acceptance matrix and production deployment                                                                                                                                                                                                                                                                                                                       |
+| M5 GA/cutover             | Not started | G5   | Playground, marketing, analytics, newsletter, full acceptance matrix, and production deployment                                                                                                                                                                                                                                                                        |
 
 ### Scope counters
 
