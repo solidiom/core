@@ -24,6 +24,10 @@ export const PolicySchema = z.object({
   allowedPrimitiveVersions: z.record(z.string()).optional().default({}),
   /** Trusted identities for sigstore verification. */
   trustedIdentities: z.array(z.string()).optional().default([]),
+  /** When true, `solidiom verify --registry` fails closed if the registry index is unsigned. */
+  registrySignatureRequired: z.boolean().optional().default(false),
+  /** HMAC keys accepted when verifying the registry index signature. */
+  registryTrustedKeys: z.array(z.string()).optional().default([]),
 })
 
 export type Policy = z.infer<typeof PolicySchema>
