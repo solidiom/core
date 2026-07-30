@@ -99,7 +99,7 @@ checkN(
     fileExists("packages/cli/src/commands/audit.ts") &&
     fileContains("packages/cli/src/commands/audit.ts", "class AuditCommand"),
 )
-manualCheck(9, "No adapter emits public styling", "docs/adapter-styling-audit.md")
+manualCheck(9, "No adapter emits public styling", "docs/evidence/adapter-styling-audit.md")
 manualCheck(10, "SSR/hydration works for all primitives", "docs/ssr-hydration-test-results.md")
 
 // ─── Primitives (11-20) ────────────────────────────────────────────────
@@ -275,8 +275,8 @@ checkN(
     fileExists("packages/runtime/src/dom/semantic-attrs.test.ts"),
 )
 manualCheck(38, "Visual regression tests pass", "docs/visual-regression-results.md")
-manualCheck(39, "No adapter-owned classes in DOM", "docs/adapter-styling-audit.md")
-manualCheck(40, "Recipes target data-* attributes only", "docs/recipe-contract-audit.md")
+manualCheck(39, "No adapter-owned classes in DOM", "docs/evidence/adapter-styling-audit.md")
+manualCheck(40, "Recipes target data-* attributes only", "docs/evidence/recipe-contract-audit.md")
 
 // ─── Testing (41-50) ───────────────────────────────────────────────────
 console.log("\nTesting:")

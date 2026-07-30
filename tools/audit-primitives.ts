@@ -11,7 +11,7 @@
  *
  * Outputs:
  *   - Markdown table to stdout
- *   - JSON report to docs/audit/primitives-baseline.json
+ *   - JSON report to docs/assets/primitives-baseline.json
  *
  * Usage: pnpm exec tsx tools/audit-primitives.ts
  */
@@ -24,7 +24,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const ROOT = join(__dirname, "..")
 const PACKAGES_DIR = join(ROOT, "packages")
-const OUTPUT_DIR = join(ROOT, "docs", "audit")
+const OUTPUT_DIR = join(ROOT, "docs", "assets")
 const OUTPUT_FILE = join(OUTPUT_DIR, "primitives-baseline.json")
 
 /** Overlay/disclosure primitives that must use createPresence for exit animations. */

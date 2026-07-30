@@ -13,9 +13,9 @@ lifecycle: current
 
 **Contract version:** 1
 **Status:** contract and validator shipped (RECIPE-001). Emitters pending (RECIPE-002/003/004).
-**Task:** `docs/website-tasks.md` §7.1 RECIPE-001
+**Task:** `docs/plans/website-tasks.md` §7.1 RECIPE-001
 **Breakdown:** (delivered; task breakdown archived — see git history for `docs/recipe-001-canonical-recipe-contract.md`)
-**Authoring workflow:** `docs/recipe-authoring-guide.md`
+**Authoring workflow:** `docs/contracts/recipe-authoring-guide.md`
 
 ---
 
@@ -200,7 +200,7 @@ The cross-part row is why §3.2 of the authoring guide forbids ancestor-state st
 5. Give every variant value real declarations on at least one slot, and give every axis a default.
 6. Run `pnpm run recipe:contract`.
 
-Until the emitters land, hand-authored recipes must follow the same rules — see `docs/recipe-authoring-guide.md` §3. That is what makes RECIPE-002/003/004 a migration rather than a rewrite.
+Until the emitters land, hand-authored recipes must follow the same rules — see `docs/contracts/recipe-authoring-guide.md` §3. That is what makes RECIPE-002/003/004 a migration rather than a rewrite.
 
 ## 9. Versioning
 

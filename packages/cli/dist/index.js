@@ -28,7 +28,11 @@ var PolicySchema = z.object({
   /** Allowed primitive version ranges. */
   allowedPrimitiveVersions: z.record(z.string()).optional().default({}),
   /** Trusted identities for sigstore verification. */
-  trustedIdentities: z.array(z.string()).optional().default([])
+  trustedIdentities: z.array(z.string()).optional().default([]),
+  /** When true, `solidiom verify --registry` fails closed if the registry index is unsigned. */
+  registrySignatureRequired: z.boolean().optional().default(false),
+  /** HMAC keys accepted when verifying the registry index signature. */
+  registryTrustedKeys: z.array(z.string()).optional().default([])
 });
 
 // src/commands/init.ts
@@ -76,8 +80,147 @@ var InitCommand = class extends Command {
 
 // src/commands/plan.ts
 import { Command as Command2, Option as Option2 } from "clipanion";
-import { readFileSync as readFileSync2, existsSync as existsSync2 } from "fs";
+import { readFileSync as readFileSync3, existsSync as existsSync2 } from "fs";
 import { join as join2 } from "path";
+
+// src/registry-schema.ts
+import { readFileSync as readFileSync2 } from "fs";
+import { z as z2 } from "zod";
+var SUPPORTED_REGISTRY_INDEX_VERSION = 2;
+var SUPPORTED_MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v2.json";
+var SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v2.json";
+var integritySchema = z2.object({
+  algorithm: z2.literal("sha256"),
+  entriesHash: z2.string().regex(/^[0-9a-f]{64}$/),
+  signature: z2.string().regex(/^[0-9a-f]{64}$/).optional(),
+  signedAt: z2.string().optional(),
+  signatureKeyId: z2.string().regex(/^[0-9a-f]{16}$/).optional()
+});
+var registryPrimitiveSummarySchema = z2.object({
+  name: z2.string().min(1),
+  version: z2.string().min(1),
+  package: z2.string().regex(/^@solidiom\//),
+  label: z2.string().min(1),
+  description: z2.string(),
+  category: z2.string().min(1),
+  status: z2.enum(["experimental", "preview", "stable", "deprecated"]),
+  deliverables: z2.array(z2.string()),
+  hasAccessibilityEvidence: z2.boolean(),
+  accessibility: z2.object({
+    reviewStatus: z2.enum(["none", "automated", "manual", "complete"]),
+    evidenceIds: z2.array(z2.string())
+  }),
+  documentationStatus: z2.enum(["stub", "draft", "review", "complete"]),
+  documentationLocales: z2.record(
+    z2.object({
+      status: z2.enum(["missing", "draft", "stale", "reviewed"]),
+      sourceHash: z2.string().optional(),
+      lastUpdated: z2.string().optional()
+    })
+  ),
+  stylingOutputs: z2.array(z2.enum(["css", "tailwind", "unocss"])),
+  themeCompatible: z2.array(z2.string()),
+  searchKeywords: z2.array(z2.string()),
+  provenance: z2.object({
+    repository: z2.string(),
+    directory: z2.string(),
+    sourceCommit: z2.string().optional()
+  })
+});
+var registryAdapterSchema = z2.object({
+  name: z2.string().min(1),
+  package: z2.string().regex(/^@solidiom\//),
+  capability: z2.string().regex(/.+@\d+/),
+  version: z2.string().min(1)
+});
+var registryIndexSchema = z2.object({
+  $schema: z2.literal(SUPPORTED_INDEX_SCHEMA_URL),
+  version: z2.literal(SUPPORTED_REGISTRY_INDEX_VERSION),
+  generatedAt: z2.string(),
+  integrity: integritySchema,
+  primitives: z2.array(registryPrimitiveSummarySchema),
+  adapters: z2.array(registryAdapterSchema)
+});
+var manifestIntegritySchema = z2.object({
+  algorithm: z2.literal("sha256"),
+  filesHash: z2.string().regex(/^[0-9a-f]{64}$/),
+  fileDigests: z2.record(z2.string().regex(/^[0-9a-f]{64}$/)),
+  manifestSignature: z2.string().optional(),
+  lastGenerated: z2.string()
+});
+var registryManifestSchema = z2.object({
+  $schema: z2.literal(SUPPORTED_MANIFEST_SCHEMA_URL),
+  name: z2.string().min(1),
+  version: z2.string().min(1),
+  package: z2.string().regex(/^@solidiom\//),
+  label: z2.string().min(1),
+  description: z2.string(),
+  category: z2.string().min(1),
+  status: z2.enum(["experimental", "preview", "stable", "deprecated"]),
+  source: z2.object({
+    entry: z2.string().min(1),
+    files: z2.array(z2.string())
+  }),
+  dependencies: z2.array(z2.string()),
+  integrity: manifestIntegritySchema
+});
+var RegistrySchemaError = class extends Error {
+  constructor(message, path) {
+    super(message);
+    this.path = path;
+    this.name = "RegistrySchemaError";
+  }
+  path;
+};
+function readRegistryIndex(path) {
+  let raw;
+  try {
+    raw = JSON.parse(readFileSync2(path, "utf8"));
+  } catch (err) {
+    throw new RegistrySchemaError(`Failed to read/parse registry index: ${String(err)}`, path);
+  }
+  if (isRecord(raw) && raw.version !== void 0 && raw.version !== SUPPORTED_REGISTRY_INDEX_VERSION) {
+    throw new RegistrySchemaError(
+      `Unsupported registry index schema version ${JSON.stringify(raw.version)}; this CLI build only supports version ${SUPPORTED_REGISTRY_INDEX_VERSION}`,
+      path
+    );
+  }
+  const result = registryIndexSchema.safeParse(raw);
+  if (!result.success) {
+    throw new RegistrySchemaError(
+      `registry index failed schema validation: ${result.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")}`,
+      path
+    );
+  }
+  return result.data;
+}
+function readRegistryManifest(path) {
+  let raw;
+  try {
+    raw = JSON.parse(readFileSync2(path, "utf8"));
+  } catch (err) {
+    throw new RegistrySchemaError(`Failed to read/parse registry manifest: ${String(err)}`, path);
+  }
+  if (isRecord(raw) && raw.$schema !== void 0 && raw.$schema !== SUPPORTED_MANIFEST_SCHEMA_URL) {
+    throw new RegistrySchemaError(
+      `Unsupported registry manifest schema ${JSON.stringify(raw.$schema)}; this CLI build only supports ${SUPPORTED_MANIFEST_SCHEMA_URL}`,
+      path
+    );
+  }
+  const result = registryManifestSchema.safeParse(raw);
+  if (!result.success) {
+    throw new RegistrySchemaError(
+      `registry manifest failed schema validation: ${result.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")}`,
+      path
+    );
+  }
+  return result.data;
+}
+function isRecord(value) {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+// src/commands/plan.ts
 import pc2 from "picocolors";
 function loadRegistry(cwd, registryOverride) {
   const candidates = [
@@ -90,20 +233,17 @@ function loadRegistry(cwd, registryOverride) {
   ].filter(Boolean);
   for (const path of candidates) {
     if (!existsSync2(path)) continue;
-    try {
-      const data = JSON.parse(readFileSync2(path, "utf8"));
-      const registry = /* @__PURE__ */ new Map();
-      for (const p of data.primitives ?? []) {
-        registry.set(p.name, {
-          name: p.name,
-          deps: p.deps ?? ["@solidiom/runtime"],
-          adapters: p.adapters ?? [],
-          version: p.version
-        });
-      }
-      return registry;
-    } catch {
+    const index = readRegistryIndex(path);
+    const registry = /* @__PURE__ */ new Map();
+    for (const p of index.primitives) {
+      registry.set(p.name, {
+        name: p.name,
+        deps: ["@solidiom/runtime"],
+        adapters: [],
+        version: p.version
+      });
     }
+    return registry;
   }
   return null;
 }
@@ -112,7 +252,7 @@ function resolveVersion(pkg, cwd, registryVersion) {
   const nmPkgJson = join2(cwd, "node_modules", ...pkg.split("/"), "package.json");
   if (existsSync2(nmPkgJson)) {
     try {
-      const data = JSON.parse(readFileSync2(nmPkgJson, "utf8"));
+      const data = JSON.parse(readFileSync3(nmPkgJson, "utf8"));
       if (data.version) return data.version;
     } catch {
     }
@@ -121,7 +261,7 @@ function resolveVersion(pkg, cwd, registryVersion) {
   const monoRepoPkgJson = join2(cwd, "..", "..", "packages", shortName, "package.json");
   if (existsSync2(monoRepoPkgJson)) {
     try {
-      const data = JSON.parse(readFileSync2(monoRepoPkgJson, "utf8"));
+      const data = JSON.parse(readFileSync3(monoRepoPkgJson, "utf8"));
       if (data.version) return data.version;
     } catch {
     }
@@ -132,7 +272,7 @@ function discoverFromNodeModules(primitive, cwd) {
   const pkgJsonPath = join2(cwd, "node_modules", "@solidiom", primitive, "package.json");
   if (!existsSync2(pkgJsonPath)) return null;
   try {
-    const data = JSON.parse(readFileSync2(pkgJsonPath, "utf8"));
+    const data = JSON.parse(readFileSync3(pkgJsonPath, "utf8"));
     const deps = [];
     const adapters = [];
     for (const dep of Object.keys(data.dependencies ?? {})) {
@@ -238,9 +378,9 @@ function runPlan(options) {
     noNetwork: _noNetwork
   } = options;
   const configPath = join2(cwd, ".solidiom", "config.json");
-  const config = existsSync2(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync2(configPath, "utf8"))) : ConfigSchema.parse({});
+  const config = existsSync2(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync3(configPath, "utf8"))) : ConfigSchema.parse({});
   const policyPath = join2(cwd, ".solidiom", "policy.json");
-  const policy = existsSync2(policyPath) ? PolicySchema.parse(JSON.parse(readFileSync2(policyPath, "utf8"))) : PolicySchema.parse({});
+  const policy = existsSync2(policyPath) ? PolicySchema.parse(JSON.parse(readFileSync3(policyPath, "utf8"))) : PolicySchema.parse({});
   const mode = modeOverride ?? config.defaultMode;
   const registry = loadRegistry(cwd, registryOverride);
   let entry = null;
@@ -353,7 +493,7 @@ ${pc2.dim(`${plan.entries.length} packages resolved.`)}
 import { Command as Command3, Option as Option3 } from "clipanion";
 
 // src/source/install.ts
-import { existsSync as existsSync3, mkdirSync as mkdirSync2, readFileSync as readFileSync3, writeFileSync as writeFileSync2, readdirSync, statSync } from "fs";
+import { existsSync as existsSync3, mkdirSync as mkdirSync2, readFileSync as readFileSync4, writeFileSync as writeFileSync2, readdirSync, statSync } from "fs";
 import { join as join3, relative, dirname } from "path";
 import { createHash } from "crypto";
 function computeDigest(content) {
@@ -362,7 +502,7 @@ function computeDigest(content) {
 function readLock(cwd) {
   const lockPath = join3(cwd, ".solidiom", "lock.json");
   if (existsSync3(lockPath)) {
-    return JSON.parse(readFileSync3(lockPath, "utf8"));
+    return JSON.parse(readFileSync4(lockPath, "utf8"));
   }
   return { version: 1, installed: {} };
 }
@@ -390,7 +530,7 @@ function collectRuntimeFiles(runtimeSourceDir) {
       if (statSync(full).isDirectory()) {
         walk(full, rel);
       } else if (entry.endsWith(".ts") && !entry.includes(".test.")) {
-        files.set(rel, readFileSync3(full, "utf8"));
+        files.set(rel, readFileSync4(full, "utf8"));
       }
     }
   }
@@ -400,7 +540,7 @@ function collectRuntimeFiles(runtimeSourceDir) {
 function installSource(options) {
   const { primitive, cwd, plan, dryRun = false } = options;
   const configPath = join3(cwd, ".solidiom", "config.json");
-  const config = existsSync3(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync3(configPath, "utf8"))) : ConfigSchema.parse({});
+  const config = existsSync3(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync4(configPath, "utf8"))) : ConfigSchema.parse({});
   const sourceDir = join3(cwd, config.sourceDir);
   const runtimeDir = join3(cwd, config.runtimeDir);
   const filesWritten = [];
@@ -467,7 +607,7 @@ function collectSourceFiles(dir) {
       if (statSync(full).isDirectory()) {
         walk(full, rel);
       } else if ((entry.endsWith(".ts") || entry.endsWith(".tsx")) && !entry.includes(".test.")) {
-        files.set(rel, readFileSync3(full, "utf8"));
+        files.set(rel, readFileSync4(full, "utf8"));
       }
     }
   }
@@ -575,7 +715,7 @@ var AddCommand = class extends Command3 {
 
 // src/commands/inspect.ts
 import { Command as Command4, Option as Option4 } from "clipanion";
-import { existsSync as existsSync4, readFileSync as readFileSync4 } from "fs";
+import { existsSync as existsSync4, readFileSync as readFileSync5 } from "fs";
 import { join as join4 } from "path";
 import pc4 from "picocolors";
 function runInspect(options) {
@@ -586,7 +726,7 @@ function runInspect(options) {
   );
   if (subcommand === "manifest") {
     const registryPath = join4(cwd, "..", "..", "registry", `${primitive}.json`);
-    const manifest = existsSync4(registryPath) ? JSON.parse(readFileSync4(registryPath, "utf8")) : null;
+    const manifest = existsSync4(registryPath) ? JSON.parse(readFileSync5(registryPath, "utf8")) : null;
     return { primitive, mode: "manifest", entries, manifest };
   }
   return { primitive, mode: subcommand, entries };
@@ -674,7 +814,7 @@ var InspectCommand = class extends Command4 {
 
 // src/commands/diff.ts
 import { Command as Command5, Option as Option5 } from "clipanion";
-import { existsSync as existsSync5, readFileSync as readFileSync5 } from "fs";
+import { existsSync as existsSync5, readFileSync as readFileSync6 } from "fs";
 import { join as join5 } from "path";
 import pc5 from "picocolors";
 function runDiff(options) {
@@ -687,7 +827,7 @@ function runDiff(options) {
     if (!existsSync5(fullPath)) {
       entries.push({ path, primitive: lockEntry.primitive, status: "deleted" });
     } else {
-      const currentContent = readFileSync5(fullPath, "utf8");
+      const currentContent = readFileSync6(fullPath, "utf8");
       const currentDigest = computeDigest(currentContent);
       const status = currentDigest === lockEntry.digest ? "unchanged" : "modified";
       entries.push({ path, primitive: lockEntry.primitive, status });
@@ -800,7 +940,7 @@ ${result.detached.length} files detached. They will be skipped by 'solidiom upda
 
 // src/commands/update.ts
 import { Command as Command7, Option as Option7 } from "clipanion";
-import { existsSync as existsSync6, readFileSync as readFileSync6, writeFileSync as writeFileSync3, mkdirSync as mkdirSync3 } from "fs";
+import { existsSync as existsSync6, readFileSync as readFileSync7, writeFileSync as writeFileSync3, mkdirSync as mkdirSync3 } from "fs";
 import { join as join6, dirname as dirname2, extname } from "path";
 
 // src/source/ast-transform.ts
@@ -868,7 +1008,7 @@ function runUpdate(options) {
   const { cwd, primitive, dryRun = false } = options;
   const lock = readLock(cwd);
   const configPath = join6(cwd, ".solidiom", "config.json");
-  const config = existsSync6(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync6(configPath, "utf8"))) : ConfigSchema.parse({});
+  const config = existsSync6(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync7(configPath, "utf8"))) : ConfigSchema.parse({});
   const runtimeDir = join6(cwd, config.runtimeDir);
   const upstreamDir = resolvePrimitiveSource2(primitive, cwd);
   if (!upstreamDir) {
@@ -895,14 +1035,14 @@ function runUpdate(options) {
       entries.push({ path, status: "skipped-unchanged" });
       continue;
     }
-    const upstreamRaw = readFileSync6(upstreamPath, "utf8");
+    const upstreamRaw = readFileSync7(upstreamPath, "utf8");
     const upstreamDigest = computeDigest(upstreamRaw);
     if (upstreamDigest === lockEntry.digest) {
       entries.push({ path, status: "skipped-unchanged" });
       continue;
     }
     const upstreamRewritten = isComplexFile(fullPath) ? rewriteWithAst(upstreamRaw, fullPath, runtimeDir) : rewriteImports(upstreamRaw, fullPath, runtimeDir);
-    const localContent = readFileSync6(fullPath, "utf8");
+    const localContent = readFileSync7(fullPath, "utf8");
     const localDigest = computeDigest(localContent);
     const localUnmodified = localDigest === lockEntry.digest;
     if (localUnmodified) {
@@ -1096,7 +1236,7 @@ var UpdateCommand = class extends Command7 {
 
 // src/commands/doctor.ts
 import { Command as Command8, Option as Option8 } from "clipanion";
-import { existsSync as existsSync7, readFileSync as readFileSync7 } from "fs";
+import { existsSync as existsSync7, readFileSync as readFileSync8 } from "fs";
 import { join as join7 } from "path";
 import pc8 from "picocolors";
 function runDoctor(cwd) {
@@ -1104,7 +1244,7 @@ function runDoctor(cwd) {
   const configPath = join7(cwd, ".solidiom", "config.json");
   if (existsSync7(configPath)) {
     try {
-      ConfigSchema.parse(JSON.parse(readFileSync7(configPath, "utf8")));
+      ConfigSchema.parse(JSON.parse(readFileSync8(configPath, "utf8")));
       checks.push({ name: "config.json valid", status: "pass" });
     } catch (e) {
       checks.push({ name: "config.json valid", status: "fail", detail: String(e) });
@@ -1119,7 +1259,7 @@ function runDoctor(cwd) {
   const policyPath = join7(cwd, ".solidiom", "policy.json");
   if (existsSync7(policyPath)) {
     try {
-      PolicySchema.parse(JSON.parse(readFileSync7(policyPath, "utf8")));
+      PolicySchema.parse(JSON.parse(readFileSync8(policyPath, "utf8")));
       checks.push({ name: "policy.json valid", status: "pass" });
     } catch (e) {
       checks.push({ name: "policy.json valid", status: "fail", detail: String(e) });
@@ -1129,7 +1269,7 @@ function runDoctor(cwd) {
   }
   const pkgPath = join7(cwd, "package.json");
   if (existsSync7(pkgPath)) {
-    const pkg = JSON.parse(readFileSync7(pkgPath, "utf8"));
+    const pkg = JSON.parse(readFileSync8(pkgPath, "utf8"));
     const solidDep = pkg.dependencies?.["solid-js"] ?? pkg.devDependencies?.["solid-js"];
     if (solidDep) {
       checks.push({ name: "solid-js dependency", status: "pass", detail: solidDep });
@@ -1144,7 +1284,7 @@ function runDoctor(cwd) {
   const lockPath = join7(cwd, ".solidiom", "lock.json");
   if (existsSync7(lockPath)) {
     try {
-      const lock = JSON.parse(readFileSync7(lockPath, "utf8"));
+      const lock = JSON.parse(readFileSync8(lockPath, "utf8"));
       if (lock.version === 1) {
         checks.push({ name: "lock.json valid", status: "pass" });
       } else {
@@ -1189,9 +1329,9 @@ var DoctorCommand = class extends Command8 {
 
 // src/commands/verify.ts
 import { Command as Command9, Option as Option9 } from "clipanion";
-import { readFileSync as readFileSync8, existsSync as existsSync8 } from "fs";
+import { readFileSync as readFileSync9, existsSync as existsSync8 } from "fs";
 import { join as join8, dirname as dirname3, basename } from "path";
-import { createVerify } from "crypto";
+import { createVerify, createHmac, createHash as createHash2 } from "crypto";
 import pc9 from "picocolors";
 async function verifySigstore(artifact, trustedIdentities, noNetwork) {
   let bundleFromJSON;
@@ -1223,7 +1363,7 @@ async function verifySigstore(artifact, trustedIdentities, noNetwork) {
   }
   let bundle;
   try {
-    const raw = JSON.parse(readFileSync8(bundlePath, "utf8"));
+    const raw = JSON.parse(readFileSync9(bundlePath, "utf8"));
     bundle = bundleFromJSON(raw);
   } catch (err) {
     return { verified: false, mode: "sigstore", reason: `Failed to parse bundle: ${String(err)}` };
@@ -1268,7 +1408,7 @@ function verifyTrustedKeys(artifact, cwd) {
   }
   let keys;
   try {
-    keys = JSON.parse(readFileSync8(keysPath, "utf8"));
+    keys = JSON.parse(readFileSync9(keysPath, "utf8"));
     if (!Array.isArray(keys)) throw new Error("expected array");
   } catch (err) {
     return {
@@ -1288,8 +1428,8 @@ function verifyTrustedKeys(artifact, cwd) {
   let artifactBytes;
   let sigBytes;
   try {
-    artifactBytes = readFileSync8(artifact);
-    sigBytes = Buffer.from(readFileSync8(sigPath, "utf8").trim(), "base64");
+    artifactBytes = readFileSync9(artifact);
+    sigBytes = Buffer.from(readFileSync9(sigPath, "utf8").trim(), "base64");
   } catch (err) {
     return {
       verified: false,
@@ -1334,13 +1474,97 @@ function resolveAlgo(algorithm) {
       return "RSA-SHA512";
   }
 }
+function verifyRegistry(options) {
+  const { cwd, verifyKeys = [], requireSignature = false } = options;
+  const registryDir = options.registryDir ?? join8(cwd, "registry");
+  const indexPath = join8(registryDir, "index.json");
+  const violations = [];
+  if (!existsSync8(indexPath)) {
+    return {
+      verified: false,
+      reason: `Registry index not found at ${indexPath}`,
+      primitivesChecked: 0,
+      violations: [`missing ${indexPath}`]
+    };
+  }
+  let index;
+  try {
+    index = readRegistryIndex(indexPath);
+  } catch (err) {
+    const reason = err instanceof RegistrySchemaError ? err.message : String(err);
+    return {
+      verified: false,
+      reason: `Registry index failed schema verification: ${reason}`,
+      primitivesChecked: 0,
+      violations: [reason]
+    };
+  }
+  if (requireSignature || index.integrity.signature) {
+    if (!index.integrity.signature) {
+      violations.push("registry index is not signed but signing is required by policy");
+    } else if (verifyKeys.length === 0) {
+      violations.push(
+        "registry index is signed but no verification key was provided (set REGISTRY_VERIFY_KEY or policy.registryTrustedKeys)"
+      );
+    } else {
+      const { signature, signedAt, signatureKeyId, ...restIntegrity } = index.integrity;
+      const preSigIndex = { ...index, integrity: restIntegrity };
+      const preSigContent = JSON.stringify(preSigIndex, null, 2);
+      const matchedKey = verifyKeys.find((key) => {
+        const expected = createHmac("sha256", key).update(preSigContent).digest("hex");
+        return expected === signature;
+      });
+      if (!matchedKey) {
+        violations.push("registry index signature does not verify against any trusted key");
+      } else if (signatureKeyId) {
+        const expectedKeyId = createHash2("sha256").update(matchedKey).digest("hex").slice(0, 16);
+        if (expectedKeyId !== signatureKeyId) {
+          violations.push("registry index signatureKeyId does not match the verifying key");
+        }
+      }
+    }
+  }
+  let primitivesChecked = 0;
+  for (const summary of index.primitives) {
+    const manifestPath = join8(registryDir, `${summary.name}.json`);
+    if (!existsSync8(manifestPath)) {
+      violations.push(`${summary.name}: manifest file missing at ${manifestPath}`);
+      continue;
+    }
+    let manifest;
+    try {
+      manifest = readRegistryManifest(manifestPath);
+    } catch (err) {
+      const reason = err instanceof RegistrySchemaError ? err.message : String(err);
+      violations.push(`${summary.name}: manifest schema verification failed \u2014 ${reason}`);
+      continue;
+    }
+    const sortedDigests = Object.entries(manifest.integrity.fileDigests).sort(
+      ([a], [b]) => a.localeCompare(b)
+    );
+    const recomputed = createHash2("sha256").update(sortedDigests.map(([, digest]) => digest).join("")).digest("hex");
+    if (recomputed !== manifest.integrity.filesHash) {
+      violations.push(
+        `${summary.name}: filesHash mismatch \u2014 recorded ${manifest.integrity.filesHash}, recomputed ${recomputed} from fileDigests`
+      );
+      continue;
+    }
+    primitivesChecked += 1;
+  }
+  return {
+    verified: violations.length === 0,
+    reason: violations.length === 0 ? "Registry integrity verified" : "Registry integrity failed",
+    primitivesChecked,
+    violations
+  };
+}
 async function runVerify(options) {
   const { cwd, artifact, noNetwork = false } = options;
   const policyPath = join8(cwd, ".solidiom", "policy.json");
   if (!existsSync8(policyPath)) {
     return { verified: true, mode: "none", reason: "No policy \u2014 verification skipped" };
   }
-  const policy = PolicySchema.parse(JSON.parse(readFileSync8(policyPath, "utf8")));
+  const policy = PolicySchema.parse(JSON.parse(readFileSync9(policyPath, "utf8")));
   switch (policy.signatureMode) {
     case "none":
       return { verified: true, mode: "none", reason: "Signature verification disabled by policy" };
@@ -1360,15 +1584,53 @@ var VerifyCommand = class extends Command9 {
         "Offline verification (use cached TUF root)",
         "solidiom verify ./dist/dialog.tgz --no-network"
       ],
-      ["Output as JSON", "solidiom verify ./dist/dialog.tgz --json"]
+      ["Output as JSON", "solidiom verify ./dist/dialog.tgz --json"],
+      ["Verify the registry catalog", "solidiom verify --registry"]
     ]
   });
-  artifact = Option9.String({ required: true });
+  artifact = Option9.String({ required: false });
   noNetwork = Option9.Boolean("--no-network", false, {
     description: "Skip TUF network fetch; use cached trust root"
   });
   json = Option9.Boolean("--json", false, { description: "Output result as JSON" });
+  registry = Option9.Boolean("--registry", false, {
+    description: "Verify registry/index.json and per-primitive manifest integrity instead of an artifact"
+  });
   async execute() {
+    if (this.registry) {
+      const cwd = process.cwd();
+      const policyPath = join8(cwd, ".solidiom", "policy.json");
+      const policy = existsSync8(policyPath) ? PolicySchema.parse(JSON.parse(readFileSync9(policyPath, "utf8"))) : PolicySchema.parse({});
+      const envKey = process.env["REGISTRY_VERIFY_KEY"];
+      const verifyKeys = [...envKey ? [envKey] : [], ...policy.registryTrustedKeys];
+      const result2 = verifyRegistry({
+        cwd,
+        verifyKeys,
+        requireSignature: policy.registrySignatureRequired
+      });
+      if (this.json) {
+        this.context.stdout.write(JSON.stringify(result2, null, 2) + "\n");
+        return result2.verified ? 0 : 1;
+      }
+      if (result2.verified) {
+        this.context.stdout.write(
+          pc9.green(`\u2713 Registry verified: ${result2.primitivesChecked} manifest(s) checked
+`)
+        );
+        return 0;
+      }
+      this.context.stderr.write(pc9.red(`\u2717 Registry verification failed:
+`));
+      for (const violation of result2.violations) {
+        this.context.stderr.write(pc9.red(`  \u2717 ${violation}
+`));
+      }
+      return 1;
+    }
+    if (!this.artifact) {
+      this.context.stderr.write(pc9.red("\u2717 An artifact path is required unless --registry is set\n"));
+      return 1;
+    }
     const result = await runVerify({
       cwd: process.cwd(),
       artifact: this.artifact,
@@ -1392,13 +1654,13 @@ var VerifyCommand = class extends Command9 {
 
 // src/commands/audit.ts
 import { Command as Command10, Option as Option10 } from "clipanion";
-import { readdirSync as readdirSync2, readFileSync as readFileSync9, existsSync as existsSync9 } from "fs";
+import { readdirSync as readdirSync2, readFileSync as readFileSync10, existsSync as existsSync9 } from "fs";
 import { join as join9 } from "path";
 import { randomUUID } from "crypto";
 import pc10 from "picocolors";
 function readPkg(pkgPath) {
   try {
-    return JSON.parse(readFileSync9(pkgPath, "utf8"));
+    return JSON.parse(readFileSync10(pkgPath, "utf8"));
   } catch {
     return null;
   }
@@ -1589,6 +1851,7 @@ export {
   runInspect,
   runPlan,
   runUpdate,
-  runVerify
+  runVerify,
+  verifyRegistry
 };
 //# sourceMappingURL=index.js.map

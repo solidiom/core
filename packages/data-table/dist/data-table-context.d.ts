@@ -33,6 +33,7 @@ export interface TableModelPort<T = unknown> {
     /** Sort rows by column and direction. Return sorted rows. */
     sort(rows: T[], columnId: string, direction: SortDirection): T[];
 }
+/** Shared reactive state and mutation requests for every DataTable part. */
 export interface DataTableContextValue<T = unknown> {
     /** Column definitions. */
     columns: Accessor<ColumnDef<T>[]>;

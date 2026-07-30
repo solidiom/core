@@ -1,7 +1,7 @@
 # Solidiom Brand Source Assets (BRAND-004)
 
 Vector source assets for the Solidiom identity, implementing the logo
-system defined in `docs/solidiom/README.md` §6 and the canonical palette
+system defined in `docs/assets/brand-README.md` §6 and the canonical palette
 in §8.2. Usage of these assets is governed by the published Trademark &
 Brand-Use Policy (`apps/site/src/content/en/pages/trademark.md`, live at
 `/trademark/`; Spanish counterpart at `/es/trademark/`).
@@ -29,7 +29,7 @@ large-format use, and reduces cleanly to a single flat color.
 | `lockup-stacked.svg`       | Symbol above wordmark, for square/vertical placements          | Full color                            |
 | `social-card-template.svg` | 1200×630 Open Graph/Twitter card template                      | Full color, dark background           |
 
-This covers the required variant set from `docs/website-tasks.md` §5.1
+This covers the required variant set from `docs/plans/website-tasks.md` §5.1
 (BRAND-004): vector icon, wordmark, monochrome light/dark variants,
 favicon set, and social-card source assets.
 

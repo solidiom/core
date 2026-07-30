@@ -2,7 +2,7 @@
  * tools/recipe-contract-tokens — canonical semantic token identities.
  *
  * RECIPE-001b. This is the artifact the authoring rule in
- * docs/recipe-authoring-guide.md §3.5 references: token *identity* is canonical and
+ * docs/contracts/recipe-authoring-guide.md §3.5 references: token *identity* is canonical and
  * shared across profiles, token *mechanism* stays profile-local.
  *
  * Scope of this file: identities and their per-namespace spellings only. Values,

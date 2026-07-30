@@ -11,8 +11,8 @@ date: 2026-07-30
 # Solidiom Website — Implementation Tasks
 
 **Status:** ready to execute
-**Source plan:** `docs/website-imp.md`
-**Visual reference:** `docs/solidiom/solidiom-site.png`
+**Source plan:** `docs/plans/website-plan.md`
+**Visual reference:** `docs/assets/solidiom-site.png`
 **Target application:** `apps/site/`
 **Canonical origin:** `https://solidiom.org`
 
@@ -140,7 +140,7 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | [x]    | BRAND-002 | M    | BRAND-001  | Design systems   | Define site-local semantic tokens in `apps/site/src/assets/tokens.css`, including independent light/dark surface hierarchies.                              |
 | [x]    | BRAND-003 | S    | BRAND-001  | Design systems   | Select, pin, self-host, and preload Inter Tight, Inter Variable, and IBM Plex Mono assets with documented licenses.                                        |
 | [x]    | BRAND-004 | M    | BRAND-001  | Brand/design     | Create vector icon, wordmark, monochrome/light/dark variants, favicon set, and social-card source assets.                                                  |
-| [x]    | MIG-001   | M    | —          | Platform/content | Create website migration inventory covering all `apps/docs` routes, demos, reports, and behavior.                                                |
+| [x]    | MIG-001   | M    | —          | Platform/content | Create website migration inventory covering all `apps/docs` routes, demos, reports, and behavior.                                                          |
 | [x]    | MIG-002   | XS   | MIG-001    | Repository       | Mark `apps/docs` read-only for new features in its package documentation/ownership guidance.                                                               |
 | [x]    | BASE-001  | S    | —          | QA/platform      | Capture the reproducible `apps/docs-astro-poc` validation baseline.                                                                                        |
 | [x]    | BASE-002  | S    | —          | Platform         | Reconcile workspace Solid 2 catalog/override versions with direct versions in `apps/docs`; record migration constraints without changing the POC baseline. |
@@ -650,7 +650,7 @@ Complete `TPL-000` first to assign stack, required blocks, deployment target, au
 
 ### G5 exit checklist
 
-- [ ] Every acceptance criterion in `docs/website-imp.md` §14 passes.
+- [ ] Every acceptance criterion in `docs/plans/website-plan.md` §14 passes.
 - [ ] Playground, marketing pages, analytics, and newsletter are live and tested.
 - [ ] No temporary dogfooding, maturity, translation, security, accessibility, or performance exception remains.
 - [ ] Production deployment and rollback are rehearsed.

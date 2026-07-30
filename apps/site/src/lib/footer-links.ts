@@ -2,7 +2,7 @@
  * Footer link config for SiteFooter.
  *
  * Community is GitHub-only by explicit product decision (see
- * docs/website-imp.md: "Community | GitHub Issues and Discussions only. Do
+ * docs/plans/website-plan.md: "Community | GitHub Issues and Discussions only. Do
  * not advertise Discord or other unmaintained channels."). Legal links have
  * no real destination yet: GOV-001 (licensing/brand boundaries), GOV-005
  * (privacy disclosures), and QA-010 (legal/policy review) have not landed,
@@ -20,7 +20,7 @@ export const communityLinks: NavLink[] = [
 
 /**
  * Legal/policy links. Empty until GOV-001/GOV-005/QA-010 publish real pages
- * (see docs/website-tasks.md §4, §10). SiteFooter omits this section
+ * (see docs/plans/website-tasks.md §4, §10). SiteFooter omits this section
  * entirely when the list is empty rather than rendering dead links.
  */
 export const legalLinks: NavLink[] = []

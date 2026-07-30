@@ -2,7 +2,7 @@
  * SEARCH-005: Typed analytics event definitions for the Solidiom site.
  *
  * These types enforce the privacy allowlist defined in
- * docs/governance/posthog-event-schema.md §4.2 (Search).
+ * docs/contracts/posthog-event-schema.md §4.2 (Search).
  *
  * Strict types — extra properties cause TypeScript errors.
  */

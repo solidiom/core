@@ -2,7 +2,7 @@
  * tools/recipe-contract-validate — validates recipe definitions against the contract.
  *
  * RECIPE-001f. This is the check that makes the authoring rules in
- * docs/recipe-authoring-guide.md §3 enforceable rather than review-time conventions.
+ * docs/contracts/recipe-authoring-guide.md §3 enforceable rather than review-time conventions.
  *
  * Rules, each mapping to a guide section:
  *   §3.1 every emitted class is backed  → no variant value produces empty declarations
