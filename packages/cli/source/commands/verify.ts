@@ -16,8 +16,9 @@
 import { Command, Option } from "clipanion"
 import { readFileSync, existsSync } from "node:fs"
 import { join, dirname, basename } from "node:path"
-import { createVerify } from "node:crypto"
+import { createVerify, createHmac, createHash } from "node:crypto"
 import { PolicySchema } from "../schemas"
+import { readRegistryIndex, readRegistryManifest, RegistrySchemaError } from "../registry-schema"
 import pc from "picocolors"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -229,6 +230,136 @@ function resolveAlgo(algorithm: TrustedKey["algorithm"]): string {
   }
 }
 
+// ─── Mode C: Registry integrity (REG-006) ────────────────────────────────────
+
+export interface RegistryVerifyResult {
+  verified: boolean
+  reason: string
+  primitivesChecked: number
+  violations: string[]
+}
+
+/**
+ * Fail-closed verification of the registry catalog:
+ *   1. registry/index.json must parse against the supported schema version
+ *      (readRegistryIndex throws RegistrySchemaError otherwise).
+ *   2. Every per-primitive manifest referenced by the index must exist, parse
+ *      against the supported manifest schema, and its recorded `filesHash`
+ *      must match a fresh SHA-256 recomputation of its `fileDigests`.
+ *   3. If `.solidiom/policy.json` requires a signed registry
+ *      (`policy.registrySignatureRequired`), `index.integrity.signature` must
+ *      be present and verify against `REGISTRY_VERIFY_KEY` (or
+ *      `policy.registryTrustedKeys`, tried in order) via HMAC-SHA256 over the
+ *      canonical pre-signature JSON. Any failure — missing file, schema
+ *      mismatch, digest mismatch, missing/invalid signature — is reported as
+ *      a violation and `verified` is false. No partial trust is extended.
+ */
+export function verifyRegistry(options: {
+  cwd: string
+  registryDir?: string
+  verifyKeys?: string[]
+  requireSignature?: boolean
+}): RegistryVerifyResult {
+  const { cwd, verifyKeys = [], requireSignature = false } = options
+  const registryDir = options.registryDir ?? join(cwd, "registry")
+  const indexPath = join(registryDir, "index.json")
+  const violations: string[] = []
+
+  if (!existsSync(indexPath)) {
+    return {
+      verified: false,
+      reason: `Registry index not found at ${indexPath}`,
+      primitivesChecked: 0,
+      violations: [`missing ${indexPath}`],
+    }
+  }
+
+  let index: ReturnType<typeof readRegistryIndex>
+  try {
+    index = readRegistryIndex(indexPath)
+  } catch (err) {
+    const reason = err instanceof RegistrySchemaError ? err.message : String(err)
+    return {
+      verified: false,
+      reason: `Registry index failed schema verification: ${reason}`,
+      primitivesChecked: 0,
+      violations: [reason],
+    }
+  }
+
+  // Signature check (only enforced when the policy demands it).
+  if (requireSignature || index.integrity.signature) {
+    if (!index.integrity.signature) {
+      violations.push("registry index is not signed but signing is required by policy")
+    } else if (verifyKeys.length === 0) {
+      violations.push(
+        "registry index is signed but no verification key was provided (set REGISTRY_VERIFY_KEY or policy.registryTrustedKeys)",
+      )
+    } else {
+      const { signature, signedAt, signatureKeyId, ...restIntegrity } = index.integrity
+      const preSigIndex = { ...index, integrity: restIntegrity }
+      const preSigContent = JSON.stringify(preSigIndex, null, 2)
+
+      const matchedKey = verifyKeys.find((key) => {
+        const expected = createHmac("sha256", key).update(preSigContent).digest("hex")
+        return expected === signature
+      })
+
+      if (!matchedKey) {
+        violations.push("registry index signature does not verify against any trusted key")
+      } else if (signatureKeyId) {
+        const expectedKeyId = createHash("sha256").update(matchedKey).digest("hex").slice(0, 16)
+        if (expectedKeyId !== signatureKeyId) {
+          violations.push("registry index signatureKeyId does not match the verifying key")
+        }
+      }
+    }
+  }
+
+  // Per-manifest integrity check: fail closed on missing file, schema
+  // mismatch, or a filesHash that disagrees with recomputed fileDigests.
+  let primitivesChecked = 0
+  for (const summary of index.primitives) {
+    const manifestPath = join(registryDir, `${summary.name}.json`)
+    if (!existsSync(manifestPath)) {
+      violations.push(`${summary.name}: manifest file missing at ${manifestPath}`)
+      continue
+    }
+
+    let manifest: ReturnType<typeof readRegistryManifest>
+    try {
+      manifest = readRegistryManifest(manifestPath)
+    } catch (err) {
+      const reason = err instanceof RegistrySchemaError ? err.message : String(err)
+      violations.push(`${summary.name}: manifest schema verification failed — ${reason}`)
+      continue
+    }
+
+    const sortedDigests = Object.entries(manifest.integrity.fileDigests).sort(([a], [b]) =>
+      a.localeCompare(b),
+    )
+    const recomputed = createHash("sha256")
+      .update(sortedDigests.map(([, digest]) => digest).join(""))
+      .digest("hex")
+
+    if (recomputed !== manifest.integrity.filesHash) {
+      violations.push(
+        `${summary.name}: filesHash mismatch — recorded ${manifest.integrity.filesHash}, recomputed ${recomputed} from fileDigests`,
+      )
+      continue
+    }
+
+    primitivesChecked += 1
+  }
+
+  return {
+    verified: violations.length === 0,
+    reason: violations.length === 0 ? "Registry integrity verified" : "Registry integrity failed",
+    primitivesChecked,
+    violations,
+  }
+}
+
 // ─── Core orchestration ───────────────────────────────────────────────────────
 
 export async function runVerify(options: VerifyOptions): Promise<VerifyResult> {
@@ -264,16 +395,60 @@ export class VerifyCommand extends Command {
         "solidiom verify ./dist/dialog.tgz --no-network",
       ],
       ["Output as JSON", "solidiom verify ./dist/dialog.tgz --json"],
+      ["Verify the registry catalog", "solidiom verify --registry"],
     ],
   })
 
-  artifact = Option.String({ required: true })
+  artifact = Option.String({ required: false })
   noNetwork = Option.Boolean("--no-network", false, {
     description: "Skip TUF network fetch; use cached trust root",
   })
   json = Option.Boolean("--json", false, { description: "Output result as JSON" })
+  registry = Option.Boolean("--registry", false, {
+    description: "Verify registry/index.json and per-primitive manifest integrity instead of an artifact",
+  })
 
   async execute(): Promise<number> {
+    if (this.registry) {
+      const cwd = process.cwd()
+      const policyPath = join(cwd, ".solidiom", "policy.json")
+      const policy = existsSync(policyPath)
+        ? PolicySchema.parse(JSON.parse(readFileSync(policyPath, "utf8")))
+        : PolicySchema.parse({})
+
+      const envKey = process.env["REGISTRY_VERIFY_KEY"]
+      const verifyKeys = [...(envKey ? [envKey] : []), ...policy.registryTrustedKeys]
+
+      const result = verifyRegistry({
+        cwd,
+        verifyKeys,
+        requireSignature: policy.registrySignatureRequired,
+      })
+
+      if (this.json) {
+        this.context.stdout.write(JSON.stringify(result, null, 2) + "\n")
+        return result.verified ? 0 : 1
+      }
+
+      if (result.verified) {
+        this.context.stdout.write(
+          pc.green(`✓ Registry verified: ${result.primitivesChecked} manifest(s) checked\n`),
+        )
+        return 0
+      }
+
+      this.context.stderr.write(pc.red(`✗ Registry verification failed:\n`))
+      for (const violation of result.violations) {
+        this.context.stderr.write(pc.red(`  ✗ ${violation}\n`))
+      }
+      return 1
+    }
+
+    if (!this.artifact) {
+      this.context.stderr.write(pc.red("✗ An artifact path is required unless --registry is set\n"))
+      return 1
+    }
+
     const result = await runVerify({
       cwd: process.cwd(),
       artifact: this.artifact,

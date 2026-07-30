@@ -9,6 +9,7 @@ import { Command, Option } from "clipanion"
 import { readFileSync, existsSync } from "node:fs"
 import { join } from "node:path"
 import { ConfigSchema, PolicySchema, type Config, type Policy } from "../schemas"
+import { readRegistryIndex } from "../registry-schema"
 import pc from "picocolors"
 
 /** A resolved plan entry. */
@@ -50,7 +51,11 @@ interface RegistryPrimitive {
  * 3. Monorepo-relative registry/index.json
  * 4. Local .solidiom/registry-cache.json
  *
- * Returns null if no registry is found (caller should scan node_modules).
+ * Returns null if no registry file exists at any candidate path (caller should
+ * scan node_modules). If a candidate file exists but fails schema validation
+ * (wrong version, malformed shape), this throws `RegistrySchemaError` instead
+ * of silently falling through to the next candidate — an untrusted or
+ * corrupted registry must not be treated as "absent" (REG-004).
  */
 function loadRegistry(
   cwd: string,
@@ -69,21 +74,18 @@ function loadRegistry(
 
   for (const path of candidates) {
     if (!existsSync(path)) continue
-    try {
-      const data = JSON.parse(readFileSync(path, "utf8"))
-      const registry = new Map<string, RegistryPrimitive>()
-      for (const p of data.primitives ?? []) {
-        registry.set(p.name, {
-          name: p.name,
-          deps: p.deps ?? ["@solidiom/runtime"],
-          adapters: p.adapters ?? [],
-          version: p.version,
-        })
-      }
-      return registry
-    } catch {
-      /* try next */
+
+    const index = readRegistryIndex(path)
+    const registry = new Map<string, RegistryPrimitive>()
+    for (const p of index.primitives) {
+      registry.set(p.name, {
+        name: p.name,
+        deps: ["@solidiom/runtime"],
+        adapters: [],
+        version: p.version,
+      })
     }
+    return registry
   }
 
   return null

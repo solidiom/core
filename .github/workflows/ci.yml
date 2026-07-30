@@ -97,6 +97,10 @@ jobs:
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - name: REG-006 — verify registry catalog integrity
+        run: node packages/cli/dist/bin.js verify --registry
+      - name: API-004 — verify vertical-slice primitive API coverage
+        run: pnpm run api:coverage-gate
 
   test-node:
     needs: build
@@ -255,6 +259,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Build and index static site
         run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
+      - name: REG-007 — verify every registry deliverable has exactly one valid route
+        run: pnpm --filter @solidiom/site run registry-route-check
       - uses: actions/upload-artifact@v6
         with:
           name: site-dist

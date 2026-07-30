@@ -63,11 +63,11 @@
     "fileDigests": {
       "src/index.tsx": "a7b310d0565fe836bd33e2ed5090746f98c9f08f77bcf30d1462898b6245bc77"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-30T01:44:24.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/toggle"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-30T01:44:24.000Z"
 }

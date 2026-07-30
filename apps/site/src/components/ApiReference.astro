@@ -1,21 +1,63 @@
 ---
-import type { NormalizedApiDocument } from "../../../../tools/api-schema"
+/**
+ * API-003 static API reference renderer.
+ *
+ * Renders the normalized API schema (tools/api-schema.ts) as static HTML:
+ *   - Every export gets a stable, slugged heading id and a `#`-prefixed deep
+ *     link anchor, matching the same `github-slugger` convention prose
+ *     headings use (see ../lib/rehype-prose.ts) so API and prose anchors
+ *     never collide and both remain permalink-stable across regenerations.
+ *   - Signatures and prop type declarations get a copy-to-clipboard control
+ *     reusing the existing `data-copy-code`/`data-code`/`data-copy-label`
+ *     markup contract from shiki-copy-button.ts, so the single delegated
+ *     click listener already wired by DocsLayout (initCopyCodeButtons)
+ *     handles these buttons with no additional script.
+ *   - `result.diagnostic` distinguishes *why* an API reference is
+ *     unavailable — missing artifact, malformed JSON, a schema/shape
+ *     mismatch, or a validly-generated-but-empty export list — rather than
+ *     collapsing every failure into one generic message.
+ */
+import GithubSlugger from "github-slugger"
+import type { ApiDocumentResult } from "../lib/catalog"
 import { getCatalogCopy } from "../lib/catalog"
 import type { Locale } from "../lib/locale"
 
 interface Props {
-  document?: NormalizedApiDocument
+  result?: ApiDocumentResult
   locale: Locale
 }
 
-const { document, locale } = Astro.props
+const { result, locale } = Astro.props
 const copy = getCatalogCopy(locale)
+const document = result?.document
+const diagnostic = result?.diagnostic ?? "missing"
+
+const diagnosticMessage: Record<"missing" | "malformed" | "invalid-shape", string> = {
+  missing: copy.apiUnavailable,
+  malformed: copy.apiMalformed,
+  "invalid-shape": copy.apiInvalidShape,
+}
+
+function unavailableMessage(value: typeof diagnostic): string {
+  return value === "malformed" || value === "invalid-shape"
+    ? diagnosticMessage[value]
+    : diagnosticMessage.missing
+}
 
 function signatureLabel(
   name: string,
   parameters: Array<{ name: string; type: string; optional: boolean }>,
 ): string {
   return `${name}(${parameters.map((parameter) => `${parameter.name}${parameter.optional ? "?" : ""}: ${parameter.type}`).join(", ")})`
+}
+
+// Slugged, collision-free heading ids for every export — used for both the
+// visible deep-link anchor and (indirectly, via matching ids) any future
+// generated table of contents for the API route.
+const slugger = new GithubSlugger()
+const exportIds = new Map<string, string>()
+for (const entry of document?.exports ?? []) {
+  exportIds.set(entry.name, slugger.slug(entry.name))
 }
 ---
 
@@ -24,63 +66,121 @@ function signatureLabel(
     <section class="api-reference" aria-labelledby="api-reference-heading">
       <p class="api-reference__eyebrow">{copy.generatedFrom}</p>
       <h2 id="api-reference-heading">{copy.api}</h2>
-      {document.exports.length > 0 ? (
+      {diagnostic === "empty" && (
+        <p class="catalog-notice" role="status">
+          {copy.apiEmpty}
+        </p>
+      )}
+      {document.exports.length > 0 && (
         <div class="api-reference__exports">
-          {document.exports.map((entry) => (
-            <section class="api-reference__export" aria-labelledby={`api-${entry.name}`}>
-              <h3 id={`api-${entry.name}`}>
-                <code>{entry.name}</code>
-                <span>{entry.kind}</span>
-              </h3>
-              {entry.comment?.summary && <p>{entry.comment.summary}</p>}
-              {entry.signatures.map((signature) => (
-                <div class="api-reference__signature">
-                  <code>
-                    {signatureLabel(entry.name, signature.parameters)}: {signature.returns}
-                  </code>
-                </div>
-              ))}
-              {entry.props.length > 0 && (
-                <div class="api-reference__members">
-                  <h4>{copy.props}</h4>
-                  <dl>
-                    {entry.props.map((prop) => (
-                      <div>
-                        <dt>
-                          <code>
-                            {prop.name}
-                            {prop.optional ? "?" : ""}
-                          </code>
-                        </dt>
-                        <dd>
-                          <code>{prop.type}</code>
-                          {prop.comment?.summary ? ` — ${prop.comment.summary}` : ""}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-              )}
-              {entry.children && (
-                <p>
-                  <strong>children:</strong> <code>{entry.children.type}</code>
-                </p>
-              )}
-              {entry.source && (
-                <p class="api-reference__source">
-                  <a href={entry.source.url}>{copy.viewSource}</a>
-                </p>
-              )}
-            </section>
-          ))}
+          {document.exports.map((entry) => {
+            const headingId = exportIds.get(entry.name) ?? entry.name
+            return (
+              <section class="api-reference__export" aria-labelledby={`api-${headingId}`}>
+                <h3 id={`api-${headingId}`} class="api-reference__export-heading">
+                  <a
+                    href={`#api-${headingId}`}
+                    class="heading-anchor"
+                    aria-label={copy.linkToSection}
+                    data-heading-anchor
+                  >
+                    <span aria-hidden="true">#</span>
+                  </a>
+                  <span class="heading-anchor-text">
+                    <code>{entry.name}</code>
+                    <span>{copy.apiKindLabels[entry.kind]}</span>
+                  </span>
+                </h3>
+                {entry.comment?.summary && <p>{entry.comment.summary}</p>}
+                {entry.signatures.map((signature) => {
+                  const signatureCode = `${signatureLabel(entry.name, signature.parameters)}: ${signature.returns}`
+                  return (
+                    <div class="api-reference__signature code-block" data-code-block>
+                      <pre class="api-reference__signature-pre">
+                        <code>{signatureCode}</code>
+                      </pre>
+                      <button
+                        type="button"
+                        class="code-block__copy"
+                        data-copy-code
+                        data-code={signatureCode}
+                        aria-label={copy.copyCode}
+                      >
+                        <span class="code-block__copy-label" data-copy-label>
+                          {copy.copyCode}
+                        </span>
+                      </button>
+                    </div>
+                  )
+                })}
+                {entry.props.length > 0 && (
+                  <div class="api-reference__members">
+                    <h4>{copy.props}</h4>
+                    <dl>
+                      {entry.props.map((prop) => (
+                        <div>
+                          <dt>
+                            <code>
+                              {prop.name}
+                              {prop.optional ? "?" : ""}
+                            </code>
+                          </dt>
+                          <dd>
+                            <code>{prop.type}</code>
+                            {prop.comment?.summary ? ` — ${prop.comment.summary}` : ""}
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+                )}
+                {entry.children && (
+                  <p>
+                    <strong>{copy.children}:</strong> <code>{entry.children.type}</code>
+                  </p>
+                )}
+                {entry.source && (
+                  <p class="api-reference__source">
+                    <a href={entry.source.url}>{copy.viewSource}</a>
+                  </p>
+                )}
+              </section>
+            )
+          })}
         </div>
-      ) : (
-        <p role="status">{copy.apiUnavailable}</p>
       )}
     </section>
   ) : (
     <p class="catalog-notice" role="status">
-      {copy.apiUnavailable}
+      {unavailableMessage(diagnostic)}
     </p>
   )
 }
+
+<style>
+  /* This component renders outside the `.prose` article column (it is
+     composed directly into PrimitiveRoute), so the shared heading-anchor
+     hover/focus visibility rules scoped to `.prose h2:hover .heading-anchor`
+     etc. (see prose.css) do not apply here. Reproduce the same
+     hover/focus-visible/touch behavior locally instead of loosening the
+     shared prose selector's scope. */
+  .api-reference__export-heading:hover .heading-anchor,
+  .heading-anchor:focus-visible {
+    opacity: 1;
+  }
+
+  .api-reference__signature-pre {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  @media (width < 768px) {
+    .heading-anchor {
+      opacity: 1;
+    }
+  }
+</style>
