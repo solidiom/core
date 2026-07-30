@@ -4,7 +4,7 @@
  *
  * Fails when a normalized API artifact for a vertical-slice primitive
  * (Dialog, Combobox, Data Table — the three primitives G2's vertical slice
- * requires to be complete per docs/website-tasks.md §6.5) contains an
+ * requires to be complete per docs/plans/website-tasks.md §6.5) contains an
  * "unresolved" export (its type could not be normalized to anything more
  * specific than "unknown") or an "undocumented" export (no `comment.summary`
  * — every public export needs at least a one-line description).
@@ -12,7 +12,7 @@
  * Scope is intentionally limited to the vertical-slice set. Applying this
  * gate to the full 52-primitive catalog today would fail on pre-existing
  * documentation gaps that are explicit G4 catalog-completion work
- * (docs/website-tasks.md §9.1), not part of G2's vertical-slice gate.
+ * (docs/plans/website-tasks.md §9.1), not part of G2's vertical-slice gate.
  * VS-004 (or a future catalog-wide task) should widen this list as each
  * primitive's Primitive DoD is completed.
  *

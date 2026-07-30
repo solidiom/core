@@ -89,7 +89,7 @@ function discoverPrimitivePackages(): PackageInfo[] {
       try {
         const pkg = JSON.parse(readFileSync(packagePath, "utf8")) as PackageJson
         // probe-primitive is a private dual-emission verification fixture from
-        // the workspace bootstrap (see docs/solidiom-implementation-plan.md
+        // the workspace bootstrap (see docs/plans/implementation-plan.md
         // Task 2), not a catalog entry. It carries layer:primitive only to
         // exercise the same build/tag wiring as real primitives, so it must
         // stay out of the public API artifacts this generator produces.

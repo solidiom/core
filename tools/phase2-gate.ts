@@ -177,11 +177,11 @@ check(
 
 // ─── 12. Enterprise offline-install (Task 57) ───────────────────────────
 console.log("\n§12 Enterprise offline-install:")
-check("offline-install how-to guide exists", fileExists("docs/how-to/offline-install.md"))
+check("offline-install how-to guide exists", fileExists("docs/guides/offline-install.md"))
 check(
   "offline-install guide references Verdaccio",
-  fileContains("docs/how-to/offline-install.md", "verdaccio") ||
-    fileContains("docs/how-to/offline-install.md", "Verdaccio"),
+  fileContains("docs/guides/offline-install.md", "verdaccio") ||
+    fileContains("docs/guides/offline-install.md", "Verdaccio"),
 )
 check("Verdaccio fixture config exists", fileExists("tools/offline-fixture/verdaccio-config.yaml"))
 check("offline test script exists", fileExists("tools/offline-fixture/run-offline-test.sh"))

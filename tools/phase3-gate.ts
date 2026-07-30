@@ -38,7 +38,7 @@ check("Phase 2 gate passes", p2.ok, "Phase 2 must pass before Phase 3")
 
 // ─── §1 Beta accessibility evidence ────────────────────────────────────
 console.log("\n§1 Beta accessibility evidence:")
-check("AT verification template exists", fileExists("docs/at-verification-template.md"))
+check("AT verification template exists", fileExists("docs/templates/at-verification-template.md"))
 check(
   "AT audit results directory exists",
   fileExists("docs/at-audit-results"),

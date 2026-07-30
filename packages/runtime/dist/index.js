@@ -173,6 +173,123 @@ function applySemanticAttrs(options) {
   return result;
 }
 
+// src/dom/semantic-vocabulary.ts
+var SEMANTIC_FLAGS = [
+  "disabled",
+  "loading",
+  "readonly",
+  "required",
+  "invalid",
+  "placeholder",
+  "highlighted",
+  "selected"
+];
+var SEMANTIC_ORIENTATIONS = ["horizontal", "vertical"];
+var SEMANTIC_SIDES = ["top", "right", "bottom", "left"];
+var SEMANTIC_SIZES = ["sm", "base", "lg"];
+var SCOPE_STATES = {
+  accordion: ["open", "closed"],
+  alert: ["info", "success", "warning", "error"],
+  "alert-dialog": ["open", "closed"],
+  button: ["on", "off"],
+  carousel: ["active", "inactive"],
+  checkbox: ["checked", "unchecked", "indeterminate"],
+  collapsible: ["open", "closed"],
+  combobox: ["open", "closed", "checked", "unchecked"],
+  "command-palette": ["open", "closed"],
+  "context-menu": ["open", "closed", "checked", "unchecked"],
+  "data-table": ["sorted-asc", "sorted-desc", "unsorted", "selected", "unselected"],
+  "date-picker": ["open", "closed", "selected", "disabled"],
+  dialog: ["open", "closed"],
+  drawer: ["open", "closed"],
+  "hover-card": ["open", "closed"],
+  "input-otp": ["active", "inactive"],
+  listbox: ["checked", "unchecked"],
+  menu: ["open", "closed", "checked", "unchecked"],
+  meter: ["safe", "caution", "danger"],
+  "navigation-menu": ["open", "closed", "active"],
+  popover: ["open", "closed"],
+  progress: ["loading", "complete"],
+  "radio-group": ["checked", "unchecked"],
+  "resizable-panels": ["collapsed", "expanded"],
+  select: ["open", "closed", "checked", "unchecked"],
+  sheet: ["open", "closed"],
+  switch: ["on", "off"],
+  tabs: ["active", "inactive"],
+  toggle: ["on", "off"],
+  "toggle-group": ["on", "off"],
+  toolbar: ["on", "off"],
+  tooltip: ["open", "closed"],
+  tree: ["open", "closed", "selected", "unselected"]
+};
+var COMPOSITE_SCOPES = ["prose", "typeset"];
+var VOCABULARY_EXCEPTIONS = {
+  "date-picker/disabled": {
+    reason: 'Emits state="disabled" where disabled is a boolean flag (data-disabled). A state and a flag encode the same condition on the same element.',
+    resolvedBy: "PRIM-017"
+  },
+  "date-picker/selected": {
+    reason: 'Emits state="selected" alongside the data-selected boolean flag, so day selection is expressed twice on the same element.',
+    resolvedBy: "PRIM-017"
+  },
+  "data-table/selected": {
+    reason: 'Emits state="selected" alongside the data-selected boolean flag, so row selection is expressed twice.',
+    resolvedBy: "PRIM-016"
+  },
+  "data-table/unselected": {
+    reason: 'Negative form of state="selected"; absence of the flag already means unselected.',
+    resolvedBy: "PRIM-016"
+  },
+  "data-table/sorted-asc": {
+    reason: "Compound state value encoding direction. A dedicated data-sort-direction attribute would be cleaner but is not yet in the vocabulary.",
+    resolvedBy: "PRIM-016"
+  },
+  "data-table/sorted-desc": {
+    reason: "See data-table/sorted-asc.",
+    resolvedBy: "PRIM-016"
+  },
+  "progress/loading": {
+    reason: 'Emits state="loading" where loading is also a boolean flag (data-loading). Here it means "in progress" rather than "awaiting data", so the collision is semantic as well as syntactic.',
+    resolvedBy: "PRIM-033"
+  },
+  "tree/selected": {
+    reason: 'Emits state="selected" alongside the data-selected boolean flag.',
+    resolvedBy: "PRIM-050"
+  },
+  "tree/unselected": {
+    reason: 'Negative form of state="selected".',
+    resolvedBy: "PRIM-050"
+  }
+};
+var SEMANTIC_ATTRIBUTES = [
+  "data-scope",
+  "data-part",
+  "data-state",
+  "data-orientation",
+  "data-side",
+  "data-size",
+  ...SEMANTIC_FLAGS.map((flag) => `data-${flag}`)
+];
+var ATTRIBUTE_SET = new Set(SEMANTIC_ATTRIBUTES);
+function isSemanticAttribute(attribute) {
+  return ATTRIBUTE_SET.has(attribute);
+}
+function isKnownScope(scope) {
+  return scope in SCOPE_STATES || COMPOSITE_SCOPES.includes(scope);
+}
+function statesForScope(scope) {
+  return SCOPE_STATES[scope] ?? [];
+}
+function isKnownState(scope, state) {
+  return statesForScope(scope).includes(state);
+}
+function vocabularyException(scope, state) {
+  return VOCABULARY_EXCEPTIONS[`${scope}/${state}`];
+}
+function allStateValues() {
+  return [...new Set(Object.values(SCOPE_STATES).flat())].sort();
+}
+
 // src/collection/collection.ts
 import { createSignal as createSignal2 } from "solid-js";
 function createCollection(options = {}) {
@@ -864,10 +981,19 @@ function createPointerIntent(options) {
   };
 }
 export {
+  COMPOSITE_SCOPES,
   DirectionContext,
+  SCOPE_STATES,
+  SEMANTIC_ATTRIBUTES,
+  SEMANTIC_FLAGS,
+  SEMANTIC_ORIENTATIONS,
+  SEMANTIC_SIDES,
+  SEMANTIC_SIZES,
+  VOCABULARY_EXCEPTIONS,
   activateFocusScope,
   activateModalIsolation,
   activateScrollLock,
+  allStateValues,
   applySemanticAttrs,
   clearLayerStack,
   composeEventHandlers,
@@ -886,6 +1012,9 @@ export {
   createValidation,
   getHiddenInputProps,
   getLayerStack,
+  isKnownScope,
+  isKnownState,
+  isSemanticAttribute,
   observeElementMutations,
   observeElementSize,
   onOwnerCleanup,
@@ -898,6 +1027,8 @@ export {
   resolveNextItem,
   resolvePortalTarget,
   setupDismissableLayer,
-  useDirection
+  statesForScope,
+  useDirection,
+  vocabularyException
 };
 //# sourceMappingURL=index.js.map

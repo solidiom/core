@@ -12,7 +12,7 @@ lifecycle: current
 > **Purpose:** For Solidiom contributors, shows how to author, wire, and verify recipes in `recipes-css`, `recipes-tailwind`, and `recipes-unocss` — under rules that keep the result migratable to the canonical recipe contract.
 
 **Revised:** 2026-07-30
-**Contract reference:** `docs/recipe-contract.md`
+**Contract reference:** `docs/contracts/recipe-contract.md`
 **Breakdown:** (delivered; task breakdown archived — see git history for `docs/recipe-001-canonical-recipe-contract.md`)
 **Status:** interim workflow. The canonical contract, its vocabulary, its token identities, and its validator have shipped (RECIPE-001) and are enforced in CI. Recipes themselves are still hand-authored per profile until the emitters land (RECIPE-002/003/004). §3 exists so that work is a mechanical migration rather than a rewrite.
 
@@ -32,7 +32,7 @@ RECIPE-001 defines one canonical recipe definition — slots, variants, states, 
 
 ### Superseded guidance
 
-A previous revision of this guide instructed authors to let profiles diverge in token strategy and not to introduce cross-profile contracts. **That guidance is withdrawn.** The canonical contract _is_ the cross-profile contract: `tools/recipe-contract-tokens.ts` defines 50 token identities with their per-namespace spellings, and the validator rejects a reference to anything else. See §3.5 for the replacement rule and `docs/recipe-contract.md` §4 for the model.
+A previous revision of this guide instructed authors to let profiles diverge in token strategy and not to introduce cross-profile contracts. **That guidance is withdrawn.** The canonical contract _is_ the cross-profile contract: `tools/recipe-contract-tokens.ts` defines 50 token identities with their per-namespace spellings, and the validator rejects a reference to anything else. See §3.5 for the replacement rule and `docs/contracts/recipe-contract.md` §4 for the model.
 
 ---
 
@@ -75,7 +75,7 @@ Know which of these blocks a pull request, because they are not equivalent:
 | Profile build + dist output | via `gate:phase1` §3, `gate:phase2` §5 | Yes (css and tailwind only)                                      |
 | `src`/`source` parity       | `tests/package-source-parity`          | Yes, but its list covers **primitives only** — no recipe package |
 
-One gap remains: nothing compares a profile's two emission forms for _coverage_, only for existence. That is how the defects in §6 shipped. RECIPE-005 closes it against the capability matrix in `docs/recipe-contract.md` §6.
+One gap remains: nothing compares a profile's two emission forms for _coverage_, only for existence. That is how the defects in §6 shipped. RECIPE-005 closes it against the capability matrix in `docs/contracts/recipe-contract.md` §6.
 
 #### What the selector audit actually rejects
 
@@ -117,7 +117,7 @@ If root state changes how a child part looks, the child part must carry its own 
 }
 ```
 
-The forbidden form is valid CSS and passes both audits, which is why it exists in `switch.css` in both profiles today. It is still forbidden, because the class-string form cannot express it: Tailwind would need `group` plus `group-data-[state=on]:`, and each `presetSolidiom` variant appends its selector to the same element, so UnoCSS cannot reach an ancestor at all. Requiring per-part state keeps all six artifacts expressible and matches the headless-styling rule in `docs/solid2-migration-notes.md`.
+The forbidden form is valid CSS and passes both audits, which is why it exists in `switch.css` in both profiles today. It is still forbidden, because the class-string form cannot express it: Tailwind would need `group` plus `group-data-[state=on]:`, and each `presetSolidiom` variant appends its selector to the same element, so UnoCSS cannot reach an ancestor at all. Requiring per-part state keeps all six artifacts expressible and matches the headless-styling rule in `docs/architecture/solid2-migration-notes.md`.
 
 This may require the primitive to emit `data-state` on the part. That is the correct fix — add it to the primitive, do not work around it in the recipe.
 
@@ -162,13 +162,13 @@ When a stylesheet styles a part the TSX wrapper does not render — repeatable i
 
 In a canonical definition the same thing is expressed as `ownership: "consumer"` plus `ownershipReason` on the slot, and the validator rejects a missing reason. A test in `tools/recipe-contract-validate.test.ts` proves every current allowlist entry is expressible that way, so the allowlist retires when RECIPE-002/003 migrate each recipe. Keep your reasons meaningful now — they carry over verbatim.
 
-Adapter-owned geometry is a separate exception: `ownership: "adapter"` plus `adapterPort` and `adapterOwnedProperties`. See `docs/recipe-contract.md` §5.
+Adapter-owned geometry is a separate exception: `ownership: "adapter"` plus `adapterPort` and `adapterOwnedProperties`. See `docs/contracts/recipe-contract.md` §5.
 
 ### 3.8 Solid 2 requirements for TSX wrappers
 
-Wrappers are Solid 2 components and follow the same rules as primitives (see `docs/solid2-migration-notes.md`):
+Wrappers are Solid 2 components and follow the same rules as primitives (see `docs/architecture/solid2-migration-notes.md`):
 
-- Import `type JSX` from `@solidjs/web`, never from `solid-js` — `solid-js` has no `JSX` export in Solid 2. Nothing enforces this: `docs/solid2-migration-notes.md` claims a `no-jsx-from-solid-js` rule exists, but `packages/eslint-plugin-solidiom/src/rules/` contains no such rule. Check the import by hand.
+- Import `type JSX` from `@solidjs/web`, never from `solid-js` — `solid-js` has no `JSX` export in Solid 2. Nothing enforces this: `docs/architecture/solid2-migration-notes.md` claims a `no-jsx-from-solid-js` rule exists, but `packages/eslint-plugin-solidiom/src/rules/` contains no such rule. Check the import by hand.
 - Accept and forward `class`, and accept `style` and `ref` where the part renders a DOM element. A wrapper that does not accept `class` forces consumers into invalid nesting.
 - Use bare boolean prop names: `loading`, `disabled`, `pressed` — never `isLoading`.
 - No `asChild`. Solid has no `cloneElement`. Export a variants function for composition instead.
@@ -377,7 +377,7 @@ Each is real, present in `main`, and slated for repair by the RECIPE task line. 
 
 ## 8. Related documents
 
-- `docs/recipe-contract.md` — the canonical contract: schema, vocabulary, token model, exception model, capability matrix, validation rules
-- `docs/solid2-migration-notes.md` — Solid 2 API rules for TSX wrappers, including headless `data-state` propagation
-- `docs/website-tasks.md` §7.1 — the RECIPE task line and its acceptance boundaries
-- `docs/typeset-plan.md` — composite-recipe precedent
+- `docs/contracts/recipe-contract.md` — the canonical contract: schema, vocabulary, token model, exception model, capability matrix, validation rules
+- `docs/architecture/solid2-migration-notes.md` — Solid 2 API rules for TSX wrappers, including headless `data-state` propagation
+- `docs/plans/website-tasks.md` §7.1 — the RECIPE task line and its acceptance boundaries
+- `docs/plans/typeset-plan.md` — composite-recipe precedent

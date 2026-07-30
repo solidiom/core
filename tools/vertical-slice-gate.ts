@@ -9,7 +9,7 @@
  *
  * Usage: pnpm exec tsx tools/vertical-slice-gate.ts
  *
- * See: docs/website-tasks.md §6.5 (VS-004)
+ * See: docs/plans/website-tasks.md §6.5 (VS-004)
  */
 
 import { existsSync, readFileSync, readdirSync } from "node:fs"
@@ -282,14 +282,14 @@ console.log("\n§9 Manual evidence (A11Y-005):")
 
 check(
   "manual evidence matrix exists",
-  fileExists("docs/results/manual-evidence-matrix.md"),
+  fileExists("docs/evidence/manual-evidence-matrix.md"),
 )
 
 // Dialog must have manual evidence
 check(
   "Dialog manual evidence recorded",
-  fileContains("docs/results/manual-evidence-matrix.md", "| Dialog") &&
-    fileContains("docs/results/manual-evidence-matrix.md", "✅"),
+  fileContains("docs/evidence/manual-evidence-matrix.md", "| Dialog") &&
+    fileContains("docs/evidence/manual-evidence-matrix.md", "✅"),
 )
 
 // ─── 10. Typecheck gate ─────────────────────────────────────────────────
@@ -306,7 +306,7 @@ check(
 console.log("\n§11 No bulk catalog bypass:")
 
 // Verify no PRIM-* tasks are marked complete in the tracker without VS-004
-const tracker = readJSON<string>("docs/website-tasks.md")
+const tracker = readJSON<string>("docs/plans/website-tasks.md")
 // Read as text instead
 const trackerPath = join(ROOT, "docs", "website-tasks.md")
 if (existsSync(trackerPath)) {
@@ -319,7 +319,7 @@ if (existsSync(trackerPath)) {
     completedPrims ? `found ${completedPrims.length} completed PRIM-* rows` : undefined,
   )
 } else {
-  check("tracker document exists", false, "docs/website-tasks.md not found")
+  check("tracker document exists", false, "docs/plans/website-tasks.md not found")
 }
 
 // ─── Summary ────────────────────────────────────────────────────────────

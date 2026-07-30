@@ -35,7 +35,7 @@ Accessibility contracts (`packages/*/docs/{accessibility,es/accessibility}/contr
 - [ ] `consumerDuties` translations preserve the obligation as a "must" statement — a softened translation (e.g. turning a requirement into a suggestion) is a defect, not a stylistic choice.
 - [ ] `nonApplicableCriteria` rationale is translated in full; a truncated or summarized rationale is rejected even if grammatically correct.
 - [ ] Accessibility terminology (`accessibility`, `keyboard`, `focus`, `screen reader`, `reduced motion`, `contrast`, `touch target`, etc.) matches `TERMINOLOGY_GLOSSARY` in `apps/site/src/lib/translation.ts`; assistive-technology product names (VoiceOver, NVDA, JAWS, TalkBack) and standard names (WCAG, ARIA, axe-core) remain untranslated.
-- [ ] The reviewer has read both the English and Spanish `AccessibilityEvidence.astro` rendering (contract fields plus generated evidence) for the primitive and confirms neither locale overstates conformance beyond what the automated evidence and manual matrix (`docs/results/manual-evidence-matrix.md`) support.
+- [ ] The reviewer has read both the English and Spanish `AccessibilityEvidence.astro` rendering (contract fields plus generated evidence) for the primitive and confirms neither locale overstates conformance beyond what the automated evidence and manual matrix (`docs/evidence/manual-evidence-matrix.md`) support.
 - [ ] `reviewedBy`/`reviewedAt` on the Spanish contract identify the person who performed this checklist, separately from whoever wrote the English contract.
 
 A GA primitive's Spanish accessibility contract is not `human-reviewed` until every box above is checked, in addition to passing `pnpm --filter @solidiom/site run translation:check`.

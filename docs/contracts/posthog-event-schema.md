@@ -11,7 +11,7 @@ date: 2026-07-27
 # PostHog Event Schema — Privacy Allowlist
 
 > GOV-004 · Status: Approved
-> Implements: docs/website-imp.md §2.3 (Privacy)
+> Implements: docs/plans/website-plan.md §2.3 (Privacy)
 
 ## 1. Overview
 

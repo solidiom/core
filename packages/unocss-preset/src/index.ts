@@ -13,7 +13,7 @@
  *
  * Every variant matches on the element itself. UnoCSS cannot express an ancestor's
  * state, which is why the recipe contract requires each part to carry its own
- * `data-state` (docs/recipe-authoring-guide.md §3.2).
+ * `data-state` (docs/contracts/recipe-authoring-guide.md §3.2).
  */
 import {
   SEMANTIC_FLAGS,

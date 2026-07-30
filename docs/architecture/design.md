@@ -3076,7 +3076,7 @@ External references retained from v0.3 include:
 
 The design in §§1–26 is normative for architecture. This section records the operational choices made during implementation planning. Each decision names the mechanism, the alternatives that were considered and rejected, and the design sections it satisfies. These choices are pushback-able before implementation begins but become normative for the implementation once ratified.
 
-Companion file: `docs/solidiom-implementation-plan.md` breaks these decisions into 68 sequenced tasks across the four phases in §21.
+Companion file: `docs/plans/implementation-plan.md` breaks these decisions into 68 sequenced tasks across the four phases in §21.
 
 ## 27.1 Monorepo tooling
 
