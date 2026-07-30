@@ -33,20 +33,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "automated",
+    "reviewStatus": "manual",
     "evidenceIds": [
       "axe-dialog-scan-v1"
     ],
     "lastReviewed": "2026-07-30T01:21:49.767Z"
   },
   "documentation": {
-    "status": "complete",
+    "status": "published",
     "locales": {
       "en": {
-        "status": "draft"
+        "status": "reviewed"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed"
       }
     }
   },
