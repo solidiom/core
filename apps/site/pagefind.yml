@@ -1,0 +1,21 @@
+# Pagefind configuration for the Solidiom documentation site (SEARCH-003).
+# This file is consumed by 'pagefind --site dist' via the search-index Nx target.
+
+site: dist
+
+# Only index elements explicitly marked with data-pagefind-body.
+# This excludes navigation, sidebar, TOC, header, and footer by default.
+root_selector: "[data-pagefind-body]"
+
+# Exclude interactive/navigation elements that may appear inside the body region.
+exclude_selectors:
+  - "[data-pagefind-ignore]"
+  - "nav"
+  - ".docs-shell__sidebar"
+  - ".docs-shell__toc"
+  - ".docs-shell__adjacent"
+  - ".docs-shell__mobile-bar"
+  - ".site-header"
+  - ".site-footer"
+  - ".primitive-directory__grid"
+  - ".catalog-breadcrumbs"
