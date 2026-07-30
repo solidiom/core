@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest"
 import {
   AXE_RESULTS_SCHEMA_VERSION,
   PUBLIC_PRIMITIVES,
+  axeEvidenceId,
+  createAxeScanResult,
   validateAxeResultsArtifact,
 } from "./axe-results"
 
@@ -11,19 +13,20 @@ function validArtifact() {
     generatedAt: "2026-07-26T00:00:00.000Z",
     commitSha: "a".repeat(40),
     ciRunUrl: null,
-    browser: "chromium",
-    results: PUBLIC_PRIMITIVES.map((primitive) => ({
-      primitive,
-      violations: 0,
-      incomplete: 0,
-      passes: 1,
-    })),
+    browser: "chromium" as const,
+    results: PUBLIC_PRIMITIVES.map((primitive) =>
+      createAxeScanResult({ primitive, violations: 0, incomplete: 0, passes: 1 }),
+    ),
   }
 }
 
 describe("axe result validation", () => {
-  it("accepts a complete all-pass result set", () => {
-    expect(validateAxeResultsArtifact(validArtifact())).toEqual([])
+  it("accepts a complete all-pass result set with stable evidence IDs", () => {
+    const artifact = validArtifact()
+    expect(validateAxeResultsArtifact(artifact)).toEqual([])
+    expect(artifact.results.map((result) => result.evidence.id)).toEqual(
+      PUBLIC_PRIMITIVES.map(axeEvidenceId),
+    )
   })
 
   it("rejects a missing public primitive", () => {
@@ -42,9 +45,26 @@ describe("axe result validation", () => {
     )
   })
 
+  it("rejects an evidence ID that is not stable for its primitive", () => {
+    const artifact = validArtifact()
+    artifact.results[0].evidence.id = "axe-dialog-scan-v1"
+    expect(validateAxeResultsArtifact(artifact)).toContainEqual(
+      expect.stringContaining("unstable or invalid evidence ID"),
+    )
+  })
+
+  it("rejects a summary with an outcome that disagrees with its violations", () => {
+    const artifact = validArtifact()
+    artifact.results[0].evidence.summary.outcome = "fail"
+    expect(validateAxeResultsArtifact(artifact)).toContainEqual(
+      expect.stringContaining("invalid evidence outcome"),
+    )
+  })
+
   it("rejects violations", () => {
     const artifact = validArtifact()
-    artifact.results[0].violations = 1
+    artifact.results[0].evidence.summary.violations = 1
+    artifact.results[0].evidence.summary.outcome = "fail"
     expect(validateAxeResultsArtifact(artifact)).toContainEqual(
       expect.stringContaining("axe violation"),
     )

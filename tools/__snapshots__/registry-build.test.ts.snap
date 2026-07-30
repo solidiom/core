@@ -22,11 +22,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "accordion",
         "collapsible",
@@ -36,7 +46,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "set",
         "stacked",
         "vertically"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/accordion"
+      }
     },
     {
       "name": "alert",
@@ -50,11 +64,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "alert",
         "feedback",
@@ -69,7 +93,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "semantics",
         "status",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/alert"
+      }
     },
     {
       "name": "alert-dialog",
@@ -83,8 +111,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "action",
         "alert",
@@ -96,7 +134,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "requiring",
         "runtime",
         "user"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/alert-dialog"
+      }
     },
     {
       "name": "avatar",
@@ -110,8 +152,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "and",
         "avatar",
@@ -121,7 +173,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "user",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/avatar"
+      }
     },
     {
       "name": "badge",
@@ -135,11 +191,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "badge",
         "feedback",
@@ -148,7 +214,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "label",
         "runtime",
         "status"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/badge"
+      }
     },
     {
       "name": "breadcrumb",
@@ -162,8 +232,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "breadcrumb",
         "hierarchical",
@@ -173,7 +253,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "navigation",
         "runtime",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/breadcrumb"
+      }
     },
     {
       "name": "button",
@@ -187,11 +271,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "actions",
         "button",
@@ -200,7 +294,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "input",
         "runtime",
         "trigger"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/button"
+      }
     },
     {
       "name": "calendar",
@@ -214,8 +312,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "calendar",
         "date",
@@ -228,7 +336,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "views",
         "with",
         "year"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/calendar"
+      }
     },
     {
       "name": "card",
@@ -242,8 +354,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "and",
         "body",
@@ -255,7 +377,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "layout",
         "runtime",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/card"
+      }
     },
     {
       "name": "carousel",
@@ -269,8 +395,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "based",
         "carousel",
@@ -281,7 +417,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "slide",
         "viewer"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/carousel"
+      }
     },
     {
       "name": "checkbox",
@@ -295,11 +435,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "binary",
         "checkbox",
@@ -308,7 +458,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "input",
         "runtime",
         "toggle"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/checkbox"
+      }
     },
     {
       "name": "collapsible",
@@ -322,8 +476,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "collapsible",
         "expandable",
@@ -331,7 +495,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "section",
         "single"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/collapsible"
+      }
     },
     {
       "name": "combobox",
@@ -345,8 +513,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "autocomplete",
         "combobox",
@@ -355,7 +533,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "text",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/combobox"
+      }
     },
     {
       "name": "command-palette",
@@ -369,8 +551,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "action",
         "and",
@@ -381,7 +573,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "palette",
         "runtime",
         "search"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/command-palette"
+      }
     },
     {
       "name": "context-menu",
@@ -395,8 +591,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "click",
         "context",
@@ -405,7 +611,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "right",
         "runtime",
         "triggered"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/context-menu"
+      }
     },
     {
       "name": "data-table",
@@ -419,8 +629,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "column",
         "control",
@@ -431,7 +651,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "sortable",
         "table",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/data-table"
+      }
     },
     {
       "name": "date-picker",
@@ -445,8 +669,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "calendar",
         "date",
@@ -458,7 +692,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "popup",
         "runtime",
         "selecting"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/date-picker"
+      }
     },
     {
       "name": "dialog",
@@ -472,19 +710,43 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": true,
+      "accessibility": {
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-dialog-scan-v1"
+        ]
+      },
       "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [
+        "site"
+      ],
       "searchKeywords": [
         "dialog",
+        "foco",
+        "focus",
         "modal",
         "non",
         "overlay",
         "runtime",
+        "superposición",
         "window"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/dialog"
+      }
     },
     {
       "name": "drawer",
@@ -498,8 +760,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "any",
         "drawer",
@@ -510,7 +782,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "screen",
         "slide"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/drawer"
+      }
     },
     {
       "name": "empty-state",
@@ -524,8 +800,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "areas",
         "content",
@@ -535,7 +821,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "placeholder",
         "runtime",
         "state"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/empty-state"
+      }
     },
     {
       "name": "field",
@@ -549,8 +839,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "aria",
         "automatic",
@@ -565,7 +865,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "wiring",
         "with",
         "wrapper:"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/field"
+      }
     },
     {
       "name": "hover-card",
@@ -579,8 +883,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "anchored",
         "and",
@@ -594,7 +908,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "preview",
         "runtime",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/hover-card"
+      }
     },
     {
       "name": "input",
@@ -608,8 +926,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "and",
         "field",
@@ -621,7 +949,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "textarea",
         "validation",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/input"
+      }
     },
     {
       "name": "input-otp",
@@ -635,8 +967,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "character",
         "individual",
@@ -648,7 +990,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "slots",
         "time",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/input-otp"
+      }
     },
     {
       "name": "kbd",
@@ -662,8 +1008,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "display",
         "element",
@@ -671,7 +1027,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "keyboard",
         "runtime",
         "shortcut"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/kbd"
+      }
     },
     {
       "name": "label",
@@ -685,8 +1045,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "accessible",
         "controls",
@@ -698,7 +1068,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "linked",
         "runtime",
         "via"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/label"
+      }
     },
     {
       "name": "listbox",
@@ -712,8 +1086,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "input",
         "list",
@@ -723,7 +1107,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "select",
         "single"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/listbox"
+      }
     },
     {
       "name": "menu",
@@ -737,11 +1125,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "action",
         "button",
@@ -750,7 +1148,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "navigation",
         "runtime",
         "triggered"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/menu"
+      }
     },
     {
       "name": "meter",
@@ -764,8 +1166,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "disk",
         "feedback",
@@ -779,7 +1191,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "strength)",
         "usage",
         "within"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/meter"
+      }
     },
     {
       "name": "navigation-menu",
@@ -793,8 +1209,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "accessible",
         "component",
@@ -808,7 +1234,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "sub",
         "top",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/navigation-menu"
+      }
     },
     {
       "name": "pagination",
@@ -822,8 +1252,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "and",
         "navigation",
@@ -834,7 +1274,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "prev",
         "runtime",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/pagination"
+      }
     },
     {
       "name": "popover",
@@ -848,11 +1292,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "content",
         "floating",
@@ -863,7 +1317,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "popover",
         "positioning",
         "runtime"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/popover"
+      }
     },
     {
       "name": "progress",
@@ -877,8 +1335,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "and",
         "determinate",
@@ -887,7 +1355,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "indicator",
         "progress",
         "runtime"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/progress"
+      }
     },
     {
       "name": "radio-group",
@@ -901,8 +1373,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "button",
         "group",
@@ -915,7 +1397,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "set",
         "single",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/radio-group"
+      }
     },
     {
       "name": "resizable-panels",
@@ -929,8 +1415,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "drag",
         "layout",
@@ -939,7 +1435,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "resizable",
         "resize",
         "runtime"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/resizable-panels"
+      }
     },
     {
       "name": "scroll-area",
@@ -953,8 +1453,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "area",
         "custom",
@@ -967,7 +1477,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "scrolling",
         "styled",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/scroll-area"
+      }
     },
     {
       "name": "select",
@@ -981,11 +1495,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "dropdown",
         "from",
@@ -995,7 +1519,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "select",
         "selection"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/select"
+      }
     },
     {
       "name": "separator",
@@ -1009,8 +1537,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "divider",
         "horizontal",
@@ -1019,7 +1557,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "separator",
         "vertical",
         "visual"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/separator"
+      }
     },
     {
       "name": "sheet",
@@ -1033,8 +1575,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "animation",
         "dialog",
@@ -1045,7 +1597,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "side",
         "slide",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/sheet"
+      }
     },
     {
       "name": "skeleton",
@@ -1059,8 +1615,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "animation",
         "feedback",
@@ -1070,7 +1636,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "skeleton",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/skeleton"
+      }
     },
     {
       "name": "slider",
@@ -1084,8 +1654,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "control",
         "input",
@@ -1095,7 +1675,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "slider",
         "thumb",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/slider"
+      }
     },
     {
       "name": "spinner",
@@ -1109,15 +1693,29 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "feedback",
         "indicator",
         "loading",
         "runtime",
         "spinner"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/spinner"
+      }
     },
     {
       "name": "switch",
@@ -1131,11 +1729,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "binary",
         "input",
@@ -1145,7 +1753,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "switch",
         "toggle",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/switch"
+      }
     },
     {
       "name": "tabs",
@@ -1159,11 +1771,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "content",
         "navigation",
@@ -1171,7 +1793,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "switcher",
         "tabbed",
         "tabs"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/tabs"
+      }
     },
     {
       "name": "toast",
@@ -1185,11 +1811,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "blocking",
         "feedback",
@@ -1198,7 +1834,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "temporary",
         "toast"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/toast"
+      }
     },
     {
       "name": "toggle",
@@ -1212,8 +1852,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "button",
         "can",
@@ -1225,7 +1875,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "toggle",
         "toggled",
         "two"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/toggle"
+      }
     },
     {
       "name": "toggle-group",
@@ -1239,8 +1893,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "buttons",
         "exclusive",
@@ -1251,7 +1915,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "select",
         "toggle"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/toggle-group"
+      }
     },
     {
       "name": "toolbar",
@@ -1265,8 +1933,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "actions",
         "and",
@@ -1277,7 +1955,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "layout",
         "runtime",
         "toolbar"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/toolbar"
+      }
     },
     {
       "name": "tooltip",
@@ -1291,11 +1973,21 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "contextual",
         "focus",
@@ -1306,7 +1998,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "shown",
         "tooltip"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/tooltip"
+      }
     },
     {
       "name": "tree",
@@ -1320,8 +2016,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "collapse",
         "expand",
@@ -1331,7 +2037,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tree",
         "view",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/tree"
+      }
     },
     {
       "name": "virtual-list",
@@ -1345,8 +2055,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "datasets",
         "for",
@@ -1358,7 +2078,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "virtual",
         "virtualization",
         "windowed"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/virtual-list"
+      }
     },
     {
       "name": "visually-hidden",
@@ -1372,8 +2096,18 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "accessible",
         "content",
@@ -1386,7 +2120,11 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "screen",
         "visually",
         "while"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/visually-hidden"
+      }
     }
   ],
   "adapters": [

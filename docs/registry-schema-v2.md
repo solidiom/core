@@ -14,14 +14,14 @@ and all 52 primitives + 6 adapters regenerate without data loss.
 
 ## 2. Migration Principles
 
-| # | Principle |
-|---|-----------|
-| 1 | v2 is a strict superset of v1. No field is removed or renamed. |
-| 2 | All 52 primitives and 6 adapters must regenerate identically for v1-mapped fields. |
-| 3 | New fields start as **optional** during migration and become required at GA. |
-| 4 | `index.json` version changes from `1` to `2`. |
-| 5 | Migration is automated in `tools/registry-build.ts`—no manual editing. |
-| 6 | Existing consumers of `registry/*.json` must not break; new fields are additive. |
+| #   | Principle                                                                          |
+| --- | ---------------------------------------------------------------------------------- |
+| 1   | v2 is a strict superset of v1. No field is removed or renamed.                     |
+| 2   | All 52 primitives and 6 adapters must regenerate identically for v1-mapped fields. |
+| 3   | New fields start as **optional** during migration and become required at GA.       |
+| 4   | `index.json` version changes from `1` to `2`.                                      |
+| 5   | Migration is automated in `tools/registry-build.ts`—no manual editing.             |
+| 6   | Existing consumers of `registry/*.json` must not break; new fields are additive.   |
 
 ---
 
@@ -70,7 +70,7 @@ interface RegistryManifestV2 {
   category: string
 
   /** Maturity status. */
-  status: 'experimental' | 'preview' | 'stable' | 'deprecated'
+  status: "experimental" | "preview" | "stable" | "deprecated"
 
   /** Product-layer availability. */
   deliverables: {
@@ -97,7 +97,7 @@ interface RegistryManifestV2 {
   /** Accessibility review status and evidence. */
   accessibility: {
     /** Current review tier. */
-    reviewStatus: 'none' | 'automated' | 'manual' | 'complete'
+    reviewStatus: "none" | "automated" | "manual" | "complete"
     /** References to axe/test artifact identifiers. */
     evidenceIds: string[]
     /** ISO 8601 date of last accessibility review. */
@@ -107,21 +107,24 @@ interface RegistryManifestV2 {
   /** Documentation maturity and translation freshness. */
   documentation: {
     /** Overall documentation status. */
-    status: 'stub' | 'draft' | 'review' | 'complete'
+    status: "stub" | "draft" | "review" | "complete"
     /** Per-locale freshness tracking. */
-    locales: Record<string, {
-      status: 'missing' | 'draft' | 'stale' | 'reviewed'
-      /** SHA-256 hash of the English source at time of translation. */
-      sourceHash?: string
-      /** ISO 8601 date of last locale update. */
-      lastUpdated?: string
-    }>
+    locales: Record<
+      string,
+      {
+        status: "missing" | "draft" | "stale" | "reviewed"
+        /** SHA-256 hash of the English source at time of translation. */
+        sourceHash?: string
+        /** ISO 8601 date of last locale update. */
+        lastUpdated?: string
+      }
+    >
   }
 
   /** Styling output formats and theme compatibility. */
   styling: {
     /** Which CSS output targets are available. */
-    outputs: ('css' | 'tailwind' | 'unocss')[]
+    outputs: ("css" | "tailwind" | "unocss")[]
     /** Compatible theme preset names. */
     themeCompatible: string[]
   }
@@ -193,8 +196,32 @@ interface IndexManifestV2 {
     deliverables: string[]
     /** Whether the entry has any accessibility evidence on file. */
     hasAccessibilityEvidence: boolean
+    /** Review tier and stable evidence identifiers. */
+    accessibility: {
+      reviewStatus: "none" | "automated" | "manual" | "complete"
+      evidenceIds: string[]
+    }
     /** Overall documentation status. */
     documentationStatus: string
+    /** Locale freshness records from the authored package documentation. */
+    documentationLocales: Record<
+      string,
+      {
+        status: "missing" | "draft" | "stale" | "reviewed"
+        sourceHash?: string
+        lastUpdated?: string
+      }
+    >
+    /** Recipe-derived outputs and package-declared compatible themes. */
+    stylingOutputs: string[]
+    themeCompatible: string[]
+    /** Package/documentation discovery terms and source ownership. */
+    searchKeywords: string[]
+    provenance: {
+      repository: string
+      directory: string
+      sourceCommit?: string
+    }
   }>
 
   /** Catalog of all adapters. */
@@ -217,64 +244,64 @@ migration in `registry-build.ts`.
 
 ### 5.1 Direct mappings (no transformation)
 
-| v1 field | v2 field | Notes |
-|----------|----------|-------|
-| `name` | `name` | Unchanged |
-| `version` | `version` | Unchanged |
-| `package` | `package` | Unchanged |
+| v1 field       | v2 field       | Notes     |
+| -------------- | -------------- | --------- |
+| `name`         | `name`         | Unchanged |
+| `version`      | `version`      | Unchanged |
+| `package`      | `package`      | Unchanged |
 | `capabilities` | `capabilities` | Unchanged |
 | `dependencies` | `dependencies` | Unchanged |
-| `source` | `source` | Unchanged |
-| `runtime` | `runtime` | Unchanged |
+| `source`       | `source`       | Unchanged |
+| `runtime`      | `runtime`      | Unchanged |
 
 ### 5.2 Promoted from IndexManifest / nx.metadata
 
-| Source | v2 per-entry field | Notes |
-|--------|-------------------|-------|
-| `nx.metadata.label` | `label` | Already read during index generation |
-| `nx.metadata.description` | `description` | Already read during index generation |
-| `nx.metadata.category` | `category` | Already read during index generation |
+| Source                    | v2 per-entry field | Notes                                |
+| ------------------------- | ------------------ | ------------------------------------ |
+| `nx.metadata.label`       | `label`            | Already read during index generation |
+| `nx.metadata.description` | `description`      | Already read during index generation |
+| `nx.metadata.category`    | `category`         | Already read during index generation |
 
 ### 5.3 New fields — default values during migration
 
-| Field | Default | Rationale |
-|-------|---------|-----------|
-| `$schema` | `"https://solidiom.dev/schemas/registry-manifest/v2.json"` | Fixed URI |
-| `status` | `'preview'` | All current entries are pre-1.0 |
-| `deliverables.primitive` | `true` | All entries are primitives |
-| `deliverables.component` | `undefined` | No component layer exists yet |
-| `deliverables.block` | `undefined` | No block layer exists yet |
-| `deliverables.template` | `undefined` | No template layer exists yet |
-| `deliverables.theme` | `undefined` | No theme layer exists yet |
-| `cli.addCommand` | `"solidiom add <name>"` | Derived from entry name |
-| `cli.installDeps` | Dependencies from `capabilities[].default` | Adapter packages |
-| `accessibility.reviewStatus` | `'none'` | No evidence exists yet |
-| `accessibility.evidenceIds` | `[]` | Empty until reviews run |
-| `documentation.status` | `'stub'` if no `docs/` dir, else `'draft'` | Heuristic |
-| `documentation.locales` | `{ "en": { status: "stub" } }` | English only |
-| `styling.outputs` | `[]` | No styling outputs configured yet |
-| `styling.themeCompatible` | `[]` | No theme presets exist yet |
-| `search.keywords` | Derived from `label + description + category` | Tokenized, lowercased, deduplicated |
-| `integrity.filesHash` | SHA-256 of sorted source file contents | Computed at build time |
-| `integrity.manifestSignature` | `undefined` | Optional; populated by CI signing step |
-| `integrity.lastGenerated` | Current ISO timestamp | Generation time |
-| `lastUpdated` | Current ISO timestamp | Set to generation time during initial migration; future builds preserve if files unchanged |
+| Field                         | Default                                                    | Rationale                                                                                  |
+| ----------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `$schema`                     | `"https://solidiom.dev/schemas/registry-manifest/v2.json"` | Fixed URI                                                                                  |
+| `status`                      | `'preview'`                                                | All current entries are pre-1.0                                                            |
+| `deliverables.primitive`      | `true`                                                     | All entries are primitives                                                                 |
+| `deliverables.component`      | `undefined`                                                | No component layer exists yet                                                              |
+| `deliverables.block`          | `undefined`                                                | No block layer exists yet                                                                  |
+| `deliverables.template`       | `undefined`                                                | No template layer exists yet                                                               |
+| `deliverables.theme`          | `undefined`                                                | No theme layer exists yet                                                                  |
+| `cli.addCommand`              | `"solidiom add <name>"`                                    | Derived from entry name                                                                    |
+| `cli.installDeps`             | Dependencies from `capabilities[].default`                 | Adapter packages                                                                           |
+| `accessibility.reviewStatus`  | `'none'`                                                   | No evidence exists yet                                                                     |
+| `accessibility.evidenceIds`   | `[]`                                                       | Empty until reviews run                                                                    |
+| `documentation.status`        | `'stub'` if no `docs/` dir, else `'draft'`                 | Heuristic                                                                                  |
+| `documentation.locales`       | `{ "en": { status: "stub" } }`                             | English only                                                                               |
+| `styling.outputs`             | `[]`                                                       | No styling outputs configured yet                                                          |
+| `styling.themeCompatible`     | `[]`                                                       | No theme presets exist yet                                                                 |
+| `search.keywords`             | Derived from `label + description + category`              | Tokenized, lowercased, deduplicated                                                        |
+| `integrity.filesHash`         | SHA-256 of sorted source file contents                     | Computed at build time                                                                     |
+| `integrity.manifestSignature` | `undefined`                                                | Optional; populated by CI signing step                                                     |
+| `integrity.lastGenerated`     | Current ISO timestamp                                      | Generation time                                                                            |
+| `lastUpdated`                 | Current ISO timestamp                                      | Set to generation time during initial migration; future builds preserve if files unchanged |
 
 ### 5.4 Index-level migration
 
-| Change | Details |
-|--------|---------|
-| `version` | `1` → `2` |
-| `$schema` | Added: `"https://solidiom.dev/schemas/registry-index/v2.json"` |
-| `integrity` | Added: `{ entriesHash, signature? }` |
-| `primitives[].label` | Now required (was optional in v1) |
-| `primitives[].description` | Now required (was optional in v1) |
-| `primitives[].category` | Now required (was optional in v1) |
-| `primitives[].status` | Added |
-| `primitives[].deliverables` | Added as string array |
-| `primitives[].hasAccessibilityEvidence` | Added (false during migration) |
-| `primitives[].documentationStatus` | Added |
-| `adapters[].version` | Added: read from adapter package.json |
+| Change                                  | Details                                                        |
+| --------------------------------------- | -------------------------------------------------------------- |
+| `version`                               | `1` → `2`                                                      |
+| `$schema`                               | Added: `"https://solidiom.dev/schemas/registry-index/v2.json"` |
+| `integrity`                             | Added: `{ entriesHash, signature? }`                           |
+| `primitives[].label`                    | Now required (was optional in v1)                              |
+| `primitives[].description`              | Now required (was optional in v1)                              |
+| `primitives[].category`                 | Now required (was optional in v1)                              |
+| `primitives[].status`                   | Added                                                          |
+| `primitives[].deliverables`             | Added as string array                                          |
+| `primitives[].hasAccessibilityEvidence` | Added (false during migration)                                 |
+| `primitives[].documentationStatus`      | Added                                                          |
+| `adapters[].version`                    | Added: read from adapter package.json                          |
 
 ---
 
@@ -324,15 +351,15 @@ The `entriesHash` in `index.json` follows the same pattern over per-entry `files
 
 ## 8. Implementation Notes
 
-| Concern | Detail |
-|---------|--------|
-| **Code location** | All changes to `tools/registry-build.ts` |
-| **Task boundary** | REG-002 implements the code; this document is the design |
-| **Backward compat** | Existing consumers read known fields; unknown fields are ignored per JSON convention |
-| **Output files** | `registry/<name>.json` (per-entry) and `registry/index.json` (catalog) |
-| **Schema files** | Publish JSON Schema at `$schema` URIs for external validation |
-| **CI integration** | `registry-build` runs in CI; validation failures block merge |
-| **Signing** | `integrity.manifestSignature` / `integrity.signature` populated by an optional post-build signing step (out of scope for REG-002) |
+| Concern             | Detail                                                                                                                            |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Code location**   | All changes to `tools/registry-build.ts`                                                                                          |
+| **Task boundary**   | REG-002 implements the code; this document is the design                                                                          |
+| **Backward compat** | Existing consumers read known fields; unknown fields are ignored per JSON convention                                              |
+| **Output files**    | `registry/<name>.json` (per-entry) and `registry/index.json` (catalog)                                                            |
+| **Schema files**    | Publish JSON Schema at `$schema` URIs for external validation                                                                     |
+| **CI integration**  | `registry-build` runs in CI; validation failures block merge                                                                      |
+| **Signing**         | `integrity.manifestSignature` / `integrity.signature` populated by an optional post-build signing step (out of scope for REG-002) |
 
 ---
 
@@ -352,7 +379,12 @@ The `entriesHash` in `index.json` follows the same pattern over per-entry `files
     "entry": "src/index.tsx",
     "files": ["src/index.tsx", "src/dialog.tsx", "src/dialog-content.tsx"]
   },
-  "runtime": ["overlay/dismissable-layer", "overlay/focus-scope", "overlay/layer-stack", "presence/presence"],
+  "runtime": [
+    "overlay/dismissable-layer",
+    "overlay/focus-scope",
+    "overlay/layer-stack",
+    "presence/presence"
+  ],
   "label": "Dialog",
   "description": "Modal or non-modal overlay window.",
   "category": "overlay",
@@ -393,8 +425,8 @@ The `entriesHash` in `index.json` follows the same pattern over per-entry `files
 
 ## 10. Open Questions
 
-| # | Question | Resolution |
-|---|----------|------------|
-| 1 | Should `search.keywords` be manually curated or fully automated? | Start automated; allow manual override via `nx.metadata.keywords`. |
-| 2 | When does `lastUpdated` get a real value vs generation timestamp? | After initial migration, compare `filesHash` to previous build. If unchanged, preserve previous `lastUpdated`. |
-| 3 | Should adapter entries get the full v2 treatment? | Deferred to REG-003. Adapters keep minimal schema for now. |
+| #   | Question                                                          | Resolution                                                                                                     |
+| --- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 1   | Should `search.keywords` be manually curated or fully automated?  | Start automated; allow manual override via `nx.metadata.keywords`.                                             |
+| 2   | When does `lastUpdated` get a real value vs generation timestamp? | After initial migration, compare `filesHash` to previous build. If unchanged, preserve previous `lastUpdated`. |
+| 3   | Should adapter entries get the full v2 treatment?                 | Deferred to REG-003. Adapters keep minimal schema for now.                                                     |

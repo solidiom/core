@@ -1,6 +1,10 @@
 import { existsSync, readFileSync } from "node:fs"
 import { resolve } from "node:path"
-import type { NormalizedApiDocument } from "../../../../tools/api-schema"
+import {
+  API_SCHEMA_URL,
+  API_SCHEMA_VERSION,
+  type NormalizedApiDocument,
+} from "../../../../tools/api-schema"
 import type { Locale } from "./locale"
 
 // Astro bundles this module into dist/.prerender, so import.meta.url would no
@@ -22,9 +26,27 @@ export interface RegistryPrimitive {
   status: string
   deliverables: string[]
   hasAccessibilityEvidence: boolean
+  accessibility: {
+    reviewStatus: "none" | "automated" | "manual" | "complete"
+    evidenceIds: string[]
+  }
   documentationStatus: string
+  documentationLocales: Record<
+    string,
+    {
+      status: "missing" | "draft" | "stale" | "reviewed"
+      sourceHash?: string
+      lastUpdated?: string
+    }
+  >
   stylingOutputs: string[]
+  themeCompatible: string[]
   searchKeywords: string[]
+  provenance: {
+    repository: string
+    directory: string
+    sourceCommit?: string
+  }
 }
 
 interface RegistryIndex {
@@ -40,6 +62,7 @@ export interface AccessibilityEvidence {
     passes: number
     violations: number
     incomplete: number
+    outcome: "pass" | "fail"
   }
   lastRun: string
 }
@@ -48,11 +71,7 @@ interface AccessibilityEvidenceArtifact {
   schemaVersion?: number
   primitive?: string
   evidenceIds: string[]
-  summary: {
-    passes: number
-    violations: number
-    incomplete: number
-  }
+  summary: AccessibilityEvidence["summary"]
   lastRun: string
 }
 
@@ -217,7 +236,15 @@ export function getApiDocument(name: string): NormalizedApiDocument | undefined 
   const raw = readJson(artifactPath)
   if (!raw || typeof raw !== "object") return undefined
   const document = raw as Partial<NormalizedApiDocument>
-  if (document.schemaVersion !== 1 || !Array.isArray(document.exports)) return undefined
+  if (
+    document.$schema !== API_SCHEMA_URL ||
+    document.schemaVersion !== API_SCHEMA_VERSION ||
+    typeof document.packageName !== "string" ||
+    !Array.isArray(document.entryPoints) ||
+    !Array.isArray(document.exports)
+  ) {
+    return undefined
+  }
 
   return document as NormalizedApiDocument
 }
@@ -231,7 +258,8 @@ function isAccessibilityEvidence(value: unknown): value is AccessibilityEvidence
     !!evidence.summary &&
     Number.isInteger(evidence.summary.passes) &&
     Number.isInteger(evidence.summary.violations) &&
-    Number.isInteger(evidence.summary.incomplete)
+    Number.isInteger(evidence.summary.incomplete) &&
+    (evidence.summary.outcome === "pass" || evidence.summary.outcome === "fail")
   )
 }
 
@@ -253,7 +281,7 @@ export function getAccessibilityEvidence(name: string): AccessibilityEvidence | 
   const raw = readJson(evidencePath)
   if (!raw || typeof raw !== "object") return undefined
   const artifact = raw as Partial<AccessibilityEvidenceArtifact>
-  return artifact.schemaVersion === 1 &&
+  return artifact.schemaVersion === 2 &&
     artifact.primitive === name &&
     isAccessibilityEvidence(artifact)
     ? artifact

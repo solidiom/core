@@ -52,7 +52,12 @@ import * as Tooltip from "@solidiom/tooltip"
 import * as Tree from "@solidiom/tree"
 import * as VirtualList from "@solidiom/virtual-list"
 import * as VisuallyHidden from "@solidiom/visually-hidden"
-import { AXE_RESULT_PREFIX, PUBLIC_PRIMITIVES, type PublicPrimitive } from "../../tools/axe-results"
+import {
+  AXE_RESULT_PREFIX,
+  createAxeScanResult,
+  PUBLIC_PRIMITIVES,
+  type PublicPrimitive,
+} from "../../tools/axe-results"
 import { formatViolations, runAxeScan } from "./axe-helper"
 
 const PRIMITIVE_FIXTURES: Record<PublicPrimitive, () => JSX.Element> = {
@@ -373,12 +378,14 @@ describe("Primitive axe-core accessibility scans", () => {
     it(`@solidiom/${name} has zero axe violations`, async () => {
       const result = await runAxeScan(PRIMITIVE_FIXTURES[name])
       console.info(
-        `${AXE_RESULT_PREFIX}${JSON.stringify({
-          primitive: name,
-          violations: result.violations.length,
-          incomplete: result.incomplete.length,
-          passes: result.passes,
-        })}`,
+        `${AXE_RESULT_PREFIX}${JSON.stringify(
+          createAxeScanResult({
+            primitive: name,
+            violations: result.violations.length,
+            incomplete: result.incomplete.length,
+            passes: result.passes,
+          }),
+        )}`,
       )
       expect(result.violations, formatViolations(result.violations)).toHaveLength(0)
     })

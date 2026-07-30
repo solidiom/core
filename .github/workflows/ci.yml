@@ -196,6 +196,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Run executable axe accessibility scans
         run: pnpm run test:a11y
+      - name: Publish stable per-primitive accessibility evidence
+        run: pnpm run report:a11y-evidence
       - name: Generate axe report from the executed result artifact
         run: pnpm run report:axe
       - uses: actions/upload-artifact@v6
@@ -203,6 +205,7 @@ jobs:
           name: axe-scan-results
           path: |
             artifacts/axe-results.json
+            artifacts/a11y-evidence.json
             docs/axe-scan-results.md
           retention-days: 30
 

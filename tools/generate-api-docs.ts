@@ -367,7 +367,15 @@ function normalizeKind(
 ): ApiDeclarationKind {
   const name = stringValue(reflection.name) ?? ""
   const typedocKind = reflectionKind(reflection)
-  if (name.endsWith("Context") || typedocKind === "context") return "context"
+  const type = reflection.type ? renderType(reflection.type) : ""
+  if (
+    name.endsWith("Context") ||
+    typedocKind === "context" ||
+    type === "Context" ||
+    type.startsWith("Context<")
+  ) {
+    return "context"
+  }
   if (typedocKind === "class") return "class"
   if (typedocKind === "enum") return "enum"
   if (typedocKind === "interface") return "interface"
@@ -375,7 +383,10 @@ function normalizeKind(
   if (typedocKind === "type alias") return "type"
   if (typedocKind === "variable") return "variable"
   if (typedocKind === "function") {
-    return signatures.length > 0 && props.length > 0 && /^[A-Z]/.test(name)
+    const returnsElement = signatures.some((signature) =>
+      /\b(?:JSX\.)?Element\b/.test(signature.returns),
+    )
+    return signatures.length > 0 && /^[A-Z]/.test(name) && (props.length > 0 || returnsElement)
       ? "component"
       : "function"
   }

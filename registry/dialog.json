@@ -35,9 +35,9 @@
   "accessibility": {
     "reviewStatus": "automated",
     "evidenceIds": [
-      "axe-dialog-pass-summary-0c991009"
+      "axe-dialog-scan-v1"
     ],
-    "lastReviewed": "2026-07-27T21:12:15.664Z"
+    "lastReviewed": "2026-07-30T01:21:49.767Z"
   },
   "documentation": {
     "status": "complete",
@@ -55,15 +55,20 @@
       "css",
       "tailwind"
     ],
-    "themeCompatible": []
+    "themeCompatible": [
+      "site"
+    ]
   },
   "search": {
     "keywords": [
       "dialog",
+      "foco",
+      "focus",
       "modal",
       "non",
       "overlay",
       "runtime",
+      "superposición",
       "window"
     ]
   },

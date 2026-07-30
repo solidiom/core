@@ -1,46 +1,43 @@
 /**
- * A11Y-001: Generate stable accessibility evidence IDs from axe scan results.
+ * A11Y-001: Publish stable, per-primitive axe evidence from executed scans.
  *
- * Reads artifacts/axe-results.json and produces artifacts/a11y-evidence.json
- * with deterministic evidence identifiers for traceability.
- *
- * Evidence ID format: axe-<primitive-name>-<rule-id>-<hash>
- * where hash is first 8 chars of SHA-256 of (primitive + rule + target).
- *
- * Usage:
- *   tsx tools/a11y-evidence.ts
+ * The source artifact already contains the stable evidence ID and
+ * machine-readable summary. This script republishes that executed evidence in
+ * the aggregate artifact and alongside authored primitive documentation.
  */
 
-import { createHash } from "node:crypto"
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import {
+  type AxePrimitiveEvidence,
   type AxeResultsArtifact,
-  type AxeScanResult,
   validateAxeResultsArtifact,
 } from "./axe-results"
 
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 const INPUT = join(ROOT, "artifacts/axe-results.json")
 const OUTPUT = join(ROOT, "artifacts/a11y-evidence.json")
-const PUBLISHED_EVIDENCE_SCHEMA_VERSION = 1
+export const A11Y_EVIDENCE_SCHEMA_VERSION = 1
+export const PUBLISHED_EVIDENCE_SCHEMA_VERSION = 2
 
-interface EvidencePrimitive {
+export interface EvidencePrimitive {
   evidenceIds: string[]
-  summary: {
-    passes: number
-    violations: number
-    incomplete: number
-  }
+  summary: AxePrimitiveEvidence["summary"]
   lastRun: string
 }
 
-interface EvidenceOutput {
+export interface EvidenceOutput {
+  schemaVersion: typeof A11Y_EVIDENCE_SCHEMA_VERSION
   generatedAt: string
+  source: {
+    artifactSchemaVersion: AxeResultsArtifact["schemaVersion"]
+    commitSha: string | null
+    ciRunUrl: string | null
+  }
   primitives: Record<string, EvidencePrimitive>
 }
 
-interface PublishedEvidence extends EvidencePrimitive {
+export interface PublishedEvidence extends EvidencePrimitive {
   schemaVersion: typeof PUBLISHED_EVIDENCE_SCHEMA_VERSION
   primitive: string
   provenance: {
@@ -50,39 +47,45 @@ interface PublishedEvidence extends EvidencePrimitive {
   }
 }
 
-function computeEvidenceId(primitive: string, ruleId: string, target: string): string {
-  const input = `${primitive}:${ruleId}:${target}`
-  const hash = createHash("sha256").update(input).digest("hex").slice(0, 8)
-  return `axe-${primitive}-${ruleId}-${hash}`
-}
+export function evidenceForArtifact(artifact: AxeResultsArtifact): EvidenceOutput {
+  const primitives: Record<string, EvidencePrimitive> = {}
 
-function generateEvidenceForPrimitive(
-  result: AxeScanResult,
-  generatedAt: string,
-): EvidencePrimitive {
-  const evidenceIds: string[] = []
-
-  // Generate evidence IDs from passes (since the existing schema only has counts,
-  // we generate synthetic IDs based on the primitive name and pass count to ensure
-  // stable identification)
-  if (result.passes > 0) {
-    evidenceIds.push(computeEvidenceId(result.primitive, "pass-summary", result.primitive))
-  }
-  if (result.violations > 0) {
-    evidenceIds.push(computeEvidenceId(result.primitive, "violation-summary", result.primitive))
-  }
-  if (result.incomplete > 0) {
-    evidenceIds.push(computeEvidenceId(result.primitive, "incomplete-summary", result.primitive))
+  for (const result of artifact.results) {
+    primitives[result.primitive] = {
+      evidenceIds: [result.evidence.id],
+      summary: result.evidence.summary,
+      lastRun: artifact.generatedAt,
+    }
   }
 
   return {
-    evidenceIds,
-    summary: {
-      passes: result.passes,
-      violations: result.violations,
-      incomplete: result.incomplete,
+    schemaVersion: A11Y_EVIDENCE_SCHEMA_VERSION,
+    generatedAt: new Date().toISOString(),
+    source: {
+      artifactSchemaVersion: artifact.schemaVersion,
+      commitSha: artifact.commitSha,
+      ciRunUrl: artifact.ciRunUrl,
     },
-    lastRun: generatedAt,
+    primitives,
+  }
+}
+
+export function publishedEvidence(
+  primitive: string,
+  evidence: EvidencePrimitive,
+  artifact: AxeResultsArtifact,
+): PublishedEvidence {
+  return {
+    schemaVersion: PUBLISHED_EVIDENCE_SCHEMA_VERSION,
+    primitive,
+    evidenceIds: evidence.evidenceIds,
+    summary: evidence.summary,
+    lastRun: evidence.lastRun,
+    provenance: {
+      browser: artifact.browser,
+      commitSha: artifact.commitSha,
+      ciRunUrl: artifact.ciRunUrl,
+    },
   }
 }
 
@@ -95,7 +98,8 @@ function serializePublishedEvidence(evidence: PublishedEvidence): string {
     '  "summary": {',
     `    \"passes\": ${evidence.summary.passes},`,
     `    \"violations\": ${evidence.summary.violations},`,
-    `    \"incomplete\": ${evidence.summary.incomplete}`,
+    `    \"incomplete\": ${evidence.summary.incomplete},`,
+    `    \"outcome\": ${JSON.stringify(evidence.summary.outcome)}`,
     "  },",
     `  \"lastRun\": ${JSON.stringify(evidence.lastRun)},`,
     '  "provenance": {',
@@ -109,72 +113,55 @@ function serializePublishedEvidence(evidence: PublishedEvidence): string {
 
 function main(): void {
   if (!existsSync(INPUT)) {
-    console.error(`✗ Axe results artifact not found: ${INPUT}`)
-    console.error("  Run 'pnpm run test:a11y' first to generate axe scan results.")
-    process.exit(1)
+    throw new Error(`Axe results artifact not found: ${INPUT}. Run 'pnpm run test:a11y' first.`)
   }
 
   let parsed: unknown
   try {
     parsed = JSON.parse(readFileSync(INPUT, "utf8"))
   } catch (error) {
-    console.error(`✗ Unable to parse axe results: ${String(error)}`)
-    process.exit(1)
+    throw new Error(`Unable to parse axe results: ${String(error)}`)
   }
 
   const errors = validateAxeResultsArtifact(parsed)
   if (errors.length > 0) {
-    console.error(`✗ Invalid axe results artifact:\n- ${errors.join("\n- ")}`)
-    process.exit(1)
+    throw new Error(`Invalid axe results artifact:\n- ${errors.join("\n- ")}`)
   }
 
   const artifact = parsed as AxeResultsArtifact
-  const generatedAt = new Date().toISOString()
-
-  const primitives: Record<string, EvidencePrimitive> = {}
-
-  for (const result of artifact.results) {
-    primitives[result.primitive] = generateEvidenceForPrimitive(result, artifact.generatedAt)
-  }
-
-  const output: EvidenceOutput = {
-    generatedAt,
-    primitives,
-  }
-
+  const output = evidenceForArtifact(artifact)
   mkdirSync(dirname(OUTPUT), { recursive: true })
   writeFileSync(OUTPUT, `${JSON.stringify(output, null, 2)}\n`, "utf8")
 
-  const published = Object.entries(primitives).flatMap(([primitive, evidence]) => {
+  const published = Object.entries(output.primitives).flatMap(([primitive, evidence]) => {
     const outputPath = join(ROOT, "packages", primitive, "docs", "accessibility", "evidence.json")
     if (!existsSync(dirname(outputPath))) return []
 
-    const publishedEvidence: PublishedEvidence = {
-      schemaVersion: PUBLISHED_EVIDENCE_SCHEMA_VERSION,
-      primitive,
-      evidenceIds: evidence.evidenceIds,
-      summary: evidence.summary,
-      lastRun: evidence.lastRun,
-      provenance: {
-        browser: artifact.browser,
-        commitSha: artifact.commitSha,
-        ciRunUrl: artifact.ciRunUrl,
-      },
-    }
-    writeFileSync(outputPath, serializePublishedEvidence(publishedEvidence), "utf8")
+    writeFileSync(
+      outputPath,
+      serializePublishedEvidence(publishedEvidence(primitive, evidence, artifact)),
+      "utf8",
+    )
     return [outputPath]
   })
 
-  const totalPrimitives = Object.keys(primitives).length
-  const totalEvidence = Object.values(primitives).reduce((sum, p) => sum + p.evidenceIds.length, 0)
+  const totalEvidence = Object.values(output.primitives).reduce(
+    (sum, primitive) => sum + primitive.evidenceIds.length,
+    0,
+  )
   console.log(`✓ Generated ${OUTPUT}`)
-  console.log(`  ${totalPrimitives} primitives, ${totalEvidence} evidence IDs`)
+  console.log(`  ${artifact.results.length} primitives, ${totalEvidence} stable evidence IDs`)
   for (const outputPath of published) console.log(`  ✓ Published ${outputPath}`)
 }
 
-try {
-  main()
-} catch (error) {
-  console.error(`✗ Unexpected error: ${String(error)}`)
-  process.exit(1)
+const isMainModule =
+  process.argv[1]?.endsWith("a11y-evidence.ts") || process.argv[1]?.endsWith("a11y-evidence")
+
+if (isMainModule) {
+  try {
+    main()
+  } catch (error) {
+    console.error(`✗ Unable to publish accessibility evidence: ${String(error)}`)
+    process.exit(1)
+  }
 }

@@ -23,13 +23,17 @@ function resultsPathFromArgs(): string {
 }
 
 function formatRow(result: AxeScanResult): string {
-  return `| ${result.primitive.padEnd(16)} | ${String(result.violations).padEnd(10)} | ${String(result.incomplete).padEnd(10)} | ${String(result.passes).padEnd(6)} | ✅ Pass |`
+  const { incomplete, passes, violations } = result.evidence.summary
+  return `| ${result.primitive.padEnd(16)} | ${result.evidence.id.padEnd(29)} | ${String(violations).padEnd(10)} | ${String(incomplete).padEnd(10)} | ${String(passes).padEnd(6)} | ✅ Pass |`
 }
 
 function generateReport(artifact: AxeResultsArtifact, resultsPath: string): string {
   const results = [...artifact.results].sort((a, b) => a.primitive.localeCompare(b.primitive))
-  const incomplete = results.reduce((total, result) => total + result.incomplete, 0)
-  const passes = results.reduce((total, result) => total + result.passes, 0)
+  const incomplete = results.reduce(
+    (total, result) => total + result.evidence.summary.incomplete,
+    0,
+  )
+  const passes = results.reduce((total, result) => total + result.evidence.summary.passes, 0)
   const ciRun = artifact.ciRunUrl
     ? `[${artifact.ciRunUrl}](${artifact.ciRunUrl})`
     : "Local execution (not CI evidence)"
@@ -57,8 +61,8 @@ tags: [accessibility, axe, automated-testing]
 
 ## Results
 
-| Primitive        | Violations | Incomplete | Passes | Status  |
-| ---------------- | ---------- | ---------- | ------ | ------- |
+| Primitive        | Evidence ID                   | Violations | Incomplete | Passes | Status  |
+| ---------------- | ----------------------------- | ---------- | ---------- | ------ | ------- |
 ${results.map(formatRow).join("\n")}
 
 ## Coverage

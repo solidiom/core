@@ -2,6 +2,7 @@
 contentSchemaVersion: 1
 title: Dialog
 description: Present modal or non-modal content that requires a focused interaction.
+keywords: [modal, overlay, focus]
 locale: en
 maturity: beta
 product: Dialog

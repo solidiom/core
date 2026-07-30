@@ -14,6 +14,7 @@ export default defineConfig({
       "packages/**/src/**/*.{test,spec}.ts",
       "src/**/*.{test,spec}.ts",
       "tools/**/*.{test,spec}.ts",
+      "apps/site/src/**/*.{test,spec}.ts",
     ],
     exclude: ["**/*.browser.{test,spec}.*", "packages/*/source/**", "**/node_modules/**"],
     environment: "node",

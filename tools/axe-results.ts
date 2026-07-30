@@ -56,13 +56,36 @@ export const PUBLIC_PRIMITIVES = [
 export type PublicPrimitive = (typeof PUBLIC_PRIMITIVES)[number]
 
 export const AXE_RESULT_PREFIX = "__SOLIDIOM_AXE_RESULT__:"
-export const AXE_RESULTS_SCHEMA_VERSION = 1
+export const AXE_RESULTS_SCHEMA_VERSION = 2
+export const AXE_EVIDENCE_ID_VERSION = 1
+
+export type AxeScanOutcome = "pass" | "fail"
+
+/** Machine-readable result counts for one isolated primitive scan. */
+export interface AxeScanSummary {
+  passes: number
+  violations: number
+  incomplete: number
+  outcome: AxeScanOutcome
+}
+
+/** Stable evidence reference and its scan summary for one public primitive. */
+export interface AxePrimitiveEvidence {
+  id: string
+  kind: "axe-core-isolated-scan"
+  summary: AxeScanSummary
+}
 
 export interface AxeScanResult {
   primitive: PublicPrimitive
+  evidence: AxePrimitiveEvidence
+}
+
+export interface AxeScanResultInput {
+  primitive: PublicPrimitive
+  passes: number
   violations: number
   incomplete: number
-  passes: number
 }
 
 export interface AxeResultsArtifact {
@@ -72,6 +95,34 @@ export interface AxeResultsArtifact {
   ciRunUrl: string | null
   browser: "chromium"
   results: AxeScanResult[]
+}
+
+/**
+ * Stable across runs: it identifies the primitive and evidence format, not a
+ * mutable count, timestamp, commit, or axe-core implementation detail.
+ */
+export function axeEvidenceId(primitive: PublicPrimitive): string {
+  return `axe-${primitive}-scan-v${AXE_EVIDENCE_ID_VERSION}`
+}
+
+export function createAxeScanResult(input: AxeScanResultInput): AxeScanResult {
+  return {
+    primitive: input.primitive,
+    evidence: {
+      id: axeEvidenceId(input.primitive),
+      kind: "axe-core-isolated-scan",
+      summary: {
+        passes: input.passes,
+        violations: input.violations,
+        incomplete: input.incomplete,
+        outcome: input.violations === 0 ? "pass" : "fail",
+      },
+    },
+  }
+}
+
+function isNonNegativeInteger(value: unknown): boolean {
+  return Number.isInteger(value) && (value as number) >= 0
 }
 
 export function validateAxeResultsArtifact(artifact: unknown): string[] {
@@ -100,20 +151,42 @@ export function validateAxeResultsArtifact(artifact: unknown): string[] {
     const scan = result as Partial<AxeScanResult>
     if (!PUBLIC_PRIMITIVES.includes(scan.primitive as PublicPrimitive)) {
       errors.push(`Unexpected primitive result: ${String(scan.primitive)}`)
+      continue
     }
-    if (typeof scan.primitive === "string") {
-      if (seen.has(scan.primitive)) {
-        errors.push(`Duplicate primitive result: ${scan.primitive}`)
+    if (seen.has(scan.primitive)) {
+      errors.push(`Duplicate primitive result: ${scan.primitive}`)
+      continue
+    }
+    seen.add(scan.primitive)
+
+    const evidence = scan.evidence
+    if (!evidence || typeof evidence !== "object") {
+      errors.push(`${scan.primitive} is missing machine-readable evidence`)
+      continue
+    }
+    if (evidence.id !== axeEvidenceId(scan.primitive)) {
+      errors.push(`${scan.primitive} has an unstable or invalid evidence ID`)
+    }
+    if (evidence.kind !== "axe-core-isolated-scan") {
+      errors.push(`${scan.primitive} has an invalid evidence kind`)
+    }
+
+    const summary = evidence.summary
+    if (!summary || typeof summary !== "object") {
+      errors.push(`${scan.primitive} is missing an evidence summary`)
+      continue
+    }
+    for (const key of ["passes", "violations", "incomplete"] as const) {
+      if (!isNonNegativeInteger(summary[key])) {
+        errors.push(`${scan.primitive} has invalid ${key} count`)
       }
-      seen.add(scan.primitive)
     }
-    for (const key of ["violations", "incomplete", "passes"] as const) {
-      if (!Number.isInteger(scan[key]) || (scan[key] ?? -1) < 0) {
-        errors.push(`${String(scan.primitive)} has invalid ${key} count`)
-      }
+    const expectedOutcome = summary.violations === 0 ? "pass" : "fail"
+    if (summary.outcome !== expectedOutcome) {
+      errors.push(`${scan.primitive} has an invalid evidence outcome`)
     }
-    if ((scan.violations ?? 0) > 0) {
-      errors.push(`${String(scan.primitive)} has ${scan.violations} axe violation(s)`)
+    if (summary.violations > 0) {
+      errors.push(`${scan.primitive} has ${summary.violations} axe violation(s)`)
     }
   }
 

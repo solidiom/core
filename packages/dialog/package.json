@@ -39,7 +39,25 @@
     "metadata": {
       "label": "Dialog",
       "description": "Modal or non-modal overlay window.",
-      "category": "overlay"
+      "category": "overlay",
+      "registry": {
+        "status": "preview",
+        "deliverables": [
+          "primitive"
+        ],
+        "themeCompatible": [
+          "site"
+        ],
+        "searchKeywords": [
+          "modal",
+          "overlay",
+          "focus"
+        ],
+        "provenance": {
+          "repository": "https://github.com/solidiom/solidiom",
+          "directory": "packages/dialog"
+        }
+      }
     }
   }
 }
