@@ -13,7 +13,7 @@ lifecycle: current
 
 **Revised:** 2026-07-30
 **Contract reference:** `docs/recipe-contract.md`
-**Breakdown:** `docs/recipe-001-canonical-recipe-contract.md`
+**Breakdown:** (delivered; task breakdown archived — see git history for `docs/recipe-001-canonical-recipe-contract.md`)
 **Status:** interim workflow. The canonical contract, its vocabulary, its token identities, and its validator have shipped (RECIPE-001) and are enforced in CI. Recipes themselves are still hand-authored per profile until the emitters land (RECIPE-002/003/004). §3 exists so that work is a mechanical migration rather than a rewrite.
 
 ---
@@ -378,7 +378,6 @@ Each is real, present in `main`, and slated for repair by the RECIPE task line. 
 ## 8. Related documents
 
 - `docs/recipe-contract.md` — the canonical contract: schema, vocabulary, token model, exception model, capability matrix, validation rules
-- `docs/recipe-001-canonical-recipe-contract.md` — the task breakdown that produced it
 - `docs/solid2-migration-notes.md` — Solid 2 API rules for TSX wrappers, including headless `data-state` propagation
 - `docs/website-tasks.md` §7.1 — the RECIPE task line and its acceptance boundaries
 - `docs/typeset-plan.md` — composite-recipe precedent

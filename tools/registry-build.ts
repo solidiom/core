@@ -597,7 +597,7 @@ const SPECIFIER_TO_MODULE: Record<string, string> = {
 // ─── V2 Integrity Computation ────────────────────────────────────────────────
 
 /**
- * Compute deterministic filesHash per the algorithm in docs/registry-schema-v2.md §7:
+ * Compute deterministic filesHash per the registry schema v2 algorithm:
  * 1. Sort source files lexicographically.
  * 2. SHA-256 each file's raw content.
  * 3. Concatenate hex hashes (no separator).
