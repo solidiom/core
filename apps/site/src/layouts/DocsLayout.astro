@@ -7,13 +7,11 @@
  * a center article column (the actual page content, via the default
  * slot), and a right-side "on this page" table of contents.
  *
- * STATUS: structural shell only. There is no generated sidebar or TOC data
- * yet — `sidebarGroups` and `toc` are optional props that default to empty
- * arrays so this layout renders sensibly with zero content today. DOCS-001
- * (registry-driven routes) and DOCS-003 ("Generate sidebar groups, active
- * state, mobile navigation, previous/next links, and right-side TOC from
- * metadata/headings") will populate these props from real data without
- * needing to change this layout's contract. See docs/website-tasks.md §6.4.
+ * STATUS: sidebarGroups and toc are populated by callers from real
+ * registry/content data (DOCS-003) via ../lib/docs-nav.ts helpers
+ * (`primitiveSidebarGroups`, `tocFromHeadings`, `adjacentPrimitiveLinks`).
+ * They remain optional props defaulting to empty arrays so any route that
+ * doesn't need docs-style navigation can still use this layout.
  *
  * Regions, by breakpoint (single 768px/1024px split, matching the rest of
  * the shell's breakpoint convention):
@@ -37,7 +35,13 @@
  */
 import BaseLayout from "./BaseLayout.astro"
 import DocsMobileNav from "../components/DocsMobileNav.astro"
-import type { DocsSidebarGroup, DocsTocEntry, DocsAdjacentLink } from "../lib/docs-nav"
+import {
+  getDocsNavigationCopy,
+  type DocsSidebarGroup,
+  type DocsTocEntry,
+  type DocsAdjacentLink,
+} from "../lib/docs-nav"
+import { resolveLocale } from "../lib/locale"
 
 interface Props {
   title?: string
@@ -51,18 +55,19 @@ interface Props {
 const { title, description, sidebarGroups = [], toc = [], previous, next } = Astro.props
 
 const pathname = Astro.url.pathname
+const copy = getDocsNavigationCopy(resolveLocale(pathname))
 const isActive = (href: string) => pathname === href
 ---
 
 <BaseLayout title={title} description={description} mainId="docs-content">
   <div class="docs-shell">
     <div class="docs-shell__mobile-bar">
-      <DocsMobileNav groups={sidebarGroups} />
-      <span class="docs-shell__mobile-label">Documentation</span>
+      <DocsMobileNav groups={sidebarGroups} copy={copy} />
+      <span class="docs-shell__mobile-label">{copy.title}</span>
     </div>
 
     <div class="docs-shell__grid">
-      <aside class="docs-shell__sidebar" aria-label="Documentation sections">
+      <aside class="docs-shell__sidebar" aria-label={copy.navigationLabel}>
         {
           sidebarGroups.length > 0 ? (
             <nav>
@@ -82,7 +87,7 @@ const isActive = (href: string) => pathname === href
               ))}
             </nav>
           ) : (
-            <p class="docs-shell__sidebar-empty">No documentation sections yet.</p>
+            <p class="docs-shell__sidebar-empty">{copy.noSections}</p>
           )
         }
       </aside>
@@ -92,13 +97,13 @@ const isActive = (href: string) => pathname === href
 
         {
           (previous || next) && (
-            <nav class="docs-shell__adjacent" aria-label="Adjacent pages">
+            <nav class="docs-shell__adjacent" aria-label={copy.adjacentPages}>
               {previous ? (
                 <a
                   class="docs-shell__adjacent-link docs-shell__adjacent-link--previous"
                   href={previous.href}
                 >
-                  <span class="docs-shell__adjacent-direction">Previous</span>
+                  <span class="docs-shell__adjacent-direction">{copy.previous}</span>
                   <span class="docs-shell__adjacent-label">{previous.label}</span>
                 </a>
               ) : (
@@ -109,7 +114,7 @@ const isActive = (href: string) => pathname === href
                   class="docs-shell__adjacent-link docs-shell__adjacent-link--next"
                   href={next.href}
                 >
-                  <span class="docs-shell__adjacent-direction">Next</span>
+                  <span class="docs-shell__adjacent-direction">{copy.next}</span>
                   <span class="docs-shell__adjacent-label">{next.label}</span>
                 </a>
               ) : (
@@ -120,11 +125,11 @@ const isActive = (href: string) => pathname === href
         }
       </article>
 
-      <aside class="docs-shell__toc" aria-label="On this page">
+      <aside class="docs-shell__toc" aria-label={copy.onThisPage}>
         {
           toc.length > 0 && (
             <nav>
-              <p class="docs-shell__toc-label">On this page</p>
+              <p class="docs-shell__toc-label">{copy.onThisPage}</p>
               <ul>
                 {toc.map((entry) => (
                   <li class={`docs-shell__toc-item docs-shell__toc-item--depth-${entry.depth}`}>
