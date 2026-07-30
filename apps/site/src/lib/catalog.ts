@@ -114,6 +114,18 @@ export interface CatalogCopy {
   directoryDescription: string
   directoryCount: string
   tabsLabel: string
+  contractHeading: string
+  contractKeyboard: string
+  contractFocus: string
+  contractSemantics: string
+  contractAria: string
+  contractConsumerDuties: string
+  contractNonApplicable: string
+  contractReviewStatus: string
+  contractReviewStatusLabels: Record<"draft" | "reviewed" | "complete", string>
+  contractReviewedBy: string
+  contractUnavailable: string
+  contractNotice: string
 }
 
 const CATALOG_COPY: Record<Locale, CatalogCopy> = {
@@ -166,6 +178,23 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
       "Headless, accessible building blocks generated from the Solidiom registry. Each primitive ships its own overview, generated API reference, examples, and accessibility evidence.",
     directoryCount: "{count} primitives",
     tabsLabel: "{name} documentation",
+    contractHeading: "Accessibility contract",
+    contractKeyboard: "Keyboard",
+    contractFocus: "Focus",
+    contractSemantics: "Semantics",
+    contractAria: "ARIA",
+    contractConsumerDuties: "Consumer responsibilities",
+    contractNonApplicable: "Not applicable",
+    contractReviewStatus: "Review status",
+    contractReviewStatusLabels: {
+      draft: "Draft — not yet reviewed",
+      reviewed: "Reviewed",
+      complete: "Complete",
+    },
+    contractReviewedBy: "Reviewed by {name} on {date}",
+    contractUnavailable: "An authored accessibility contract has not been published for this primitive yet.",
+    contractNotice:
+      "This contract describes what the primitive guarantees. Consuming products remain responsible for labels, layout, and workflow decisions that affect the final accessibility result.",
   },
   es: {
     api: "API",
@@ -220,6 +249,23 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
       "Bloques de construcción headless y accesibles generados a partir del registro de Solidiom. Cada primitiva incluye su propio resumen, referencia de API generada, ejemplos y evidencia de accesibilidad.",
     directoryCount: "{count} primitivas",
     tabsLabel: "Documentación de {name}",
+    contractHeading: "Contrato de accesibilidad",
+    contractKeyboard: "Teclado",
+    contractFocus: "Foco",
+    contractSemantics: "Semántica",
+    contractAria: "ARIA",
+    contractConsumerDuties: "Responsabilidades del consumidor",
+    contractNonApplicable: "No aplicable",
+    contractReviewStatus: "Estado de revisión",
+    contractReviewStatusLabels: {
+      draft: "Borrador — aún no revisado",
+      reviewed: "Revisado",
+      complete: "Completo",
+    },
+    contractReviewedBy: "Revisado por {name} el {date}",
+    contractUnavailable: "Aún no se ha publicado un contrato de accesibilidad redactado para esta primitiva.",
+    contractNotice:
+      "Este contrato describe lo que garantiza la primitiva. Los productos que la consumen siguen siendo responsables de las etiquetas, el diseño y las decisiones de flujo que afectan el resultado final de accesibilidad.",
   },
 }
 

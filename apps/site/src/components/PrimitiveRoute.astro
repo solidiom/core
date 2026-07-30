@@ -49,6 +49,14 @@ const apiDocumentResult =
   view === "api" ? getApiDocumentResult(primitive.name) : undefined
 const accessibilityEvidence =
   view === "accessibility" ? getAccessibilityEvidence(primitive.name) : undefined
+const accessibilityContractEntries =
+  view === "accessibility"
+    ? await getCollection(
+        "accessibilityContracts",
+        (entry) => entry.data.primitive === primitive.name && entry.data.locale === locale,
+      )
+    : []
+const accessibilityContract = accessibilityContractEntries.at(0)?.data
 const isDialog = primitive.name === "dialog"
 ---
 
@@ -110,7 +118,11 @@ const isDialog = primitive.name === "dialog"
             {copy.accessibilityUnavailable}
           </p>
         )}
-        {isDialog && <AccessibilityEvidence evidence={accessibilityEvidence} locale={locale} />}
+        <AccessibilityEvidence
+          contract={accessibilityContract}
+          evidence={accessibilityEvidence}
+          locale={locale}
+        />
       </section>
     )
   }

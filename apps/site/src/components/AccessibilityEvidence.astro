@@ -1,14 +1,16 @@
 ---
 import type { AccessibilityEvidence } from "../lib/catalog"
 import { getCatalogCopy } from "../lib/catalog"
+import type { AccessibilityContract } from "../lib/accessibility-contract"
 import type { Locale } from "../lib/locale"
 
 interface Props {
   evidence?: AccessibilityEvidence
+  contract?: AccessibilityContract
   locale: Locale
 }
 
-const { evidence, locale } = Astro.props
+const { evidence, contract, locale } = Astro.props
 const copy = getCatalogCopy(locale)
 const date = evidence
   ? new Intl.DateTimeFormat(locale === "es" ? "es" : "en", {
@@ -16,7 +18,94 @@ const date = evidence
       timeStyle: "short",
     }).format(new Date(evidence.lastRun))
   : undefined
+const reviewedAt =
+  contract?.reviewedAt &&
+  new Intl.DateTimeFormat(locale === "es" ? "es" : "en", { dateStyle: "medium" }).format(
+    new Date(contract.reviewedAt),
+  )
 ---
+
+{
+  contract ? (
+    <section class="accessibility-contract" aria-labelledby="accessibility-contract-heading">
+      <h3 id="accessibility-contract-heading">{copy.contractHeading}</h3>
+      {contract.keyboard.length > 0 && (
+        <div class="accessibility-contract__group">
+          <h4>{copy.contractKeyboard}</h4>
+          <dl class="accessibility-contract__keyboard">
+            {contract.keyboard.map((interaction) => (
+              <>
+                <dt><kbd>{interaction.key}</kbd></dt>
+                <dd>{interaction.behavior}</dd>
+              </>
+            ))}
+          </dl>
+        </div>
+      )}
+      {contract.focus.length > 0 && (
+        <div class="accessibility-contract__group">
+          <h4>{copy.contractFocus}</h4>
+          <ul>
+            {contract.focus.map((statement) => <li>{statement}</li>)}
+          </ul>
+        </div>
+      )}
+      {contract.semantics.length > 0 && (
+        <div class="accessibility-contract__group">
+          <h4>{copy.contractSemantics}</h4>
+          <ul>
+            {contract.semantics.map((statement) => <li>{statement}</li>)}
+          </ul>
+        </div>
+      )}
+      {contract.aria.length > 0 && (
+        <div class="accessibility-contract__group">
+          <h4>{copy.contractAria}</h4>
+          <ul>
+            {contract.aria.map((statement) => <li>{statement}</li>)}
+          </ul>
+        </div>
+      )}
+      <div class="accessibility-contract__group">
+        <h4>{copy.contractConsumerDuties}</h4>
+        <ul>
+          {contract.consumerDuties.map((duty) => <li>{duty}</li>)}
+        </ul>
+      </div>
+      {contract.nonApplicableCriteria.length > 0 && (
+        <div class="accessibility-contract__group">
+          <h4>{copy.contractNonApplicable}</h4>
+          <dl class="accessibility-contract__non-applicable">
+            {contract.nonApplicableCriteria.map((entry) => (
+              <>
+                <dt>{entry.criterion}</dt>
+                <dd>{entry.rationale}</dd>
+              </>
+            ))}
+          </dl>
+        </div>
+      )}
+      <p class="accessibility-contract__review-status">
+        {copy.contractReviewStatus}: {copy.contractReviewStatusLabels[contract.reviewStatus]}
+        {contract.reviewedBy && reviewedAt && (
+          <>
+            {" "}
+            (
+            {copy.contractReviewedBy
+              .replace("{name}", contract.reviewedBy)
+              .replace("{date}", reviewedAt)}
+            )
+          </>
+        )}
+      </p>
+      <p class="accessibility-contract__notice">{copy.contractNotice}</p>
+    </section>
+  ) : (
+    <p class="catalog-notice" role="status">
+      {copy.contractUnavailable}
+    </p>
+  )
+}
 
 {
   evidence ? (
