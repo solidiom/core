@@ -1,3 +1,13 @@
+---
+id: recipe-001-canonical-recipe-contract
+title: "RECIPE-001: Canonical Recipe Contract — Task Breakdown"
+doc_type: reference
+audience: "Solidiom contributors, recipe emitter authors"
+tags: [recipes, contract, task-breakdown, RECIPE-001]
+lifecycle: archived
+date: 2026-07-30
+---
+
 # RECIPE-001: Canonical Recipe Contract — Task Breakdown
 
 **Status:** subtasks 001a–001h delivered 2026-07-30 except 001a (inventory), which was folded into the defect tables in `docs/recipe-authoring-guide.md` §6 and `docs/recipe-contract.md` §3.1 rather than published separately

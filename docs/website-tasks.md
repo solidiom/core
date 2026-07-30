@@ -1,3 +1,13 @@
+---
+id: website-tasks
+title: "Solidiom Website — Implementation Tasks"
+doc_type: reference
+audience: "Solidiom project leads, contributors"
+tags: [website, tasks, backlog, milestones]
+lifecycle: active
+date: 2026-07-30
+---
+
 # Solidiom Website — Implementation Tasks
 
 **Status:** ready to execute
@@ -89,13 +99,13 @@ Do not begin bulk catalog production before `VS-004` proves the complete vertica
 
 ## 3. Milestone map and critical path
 
-| Gate | Milestone                       | Exit condition                                                                                                                             | Primary blockers                                 |
-| ---- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
-| G0   | Governance and canonical inputs | Brand, licensing, security, privacy, migration, and account prerequisites are explicit.                                                    | External policy review and domain/account access |
-| G1   | Foundation/private alpha shell  | `apps/site` builds, deploys to preview, supports both locales/themes, and dogfoods Solidiom.                                               | Site scaffold, tokens, shell, CI                 |
-| G2   | Content-platform vertical slice | Dialog, Combobox, and Data Table prove registry → routes → API → examples → a11y → i18n → search.                                          | Registry v2, TypeDoc, a11y, content loaders      |
-| G3   | Public beta platform            | Useful catalog subset, CLI flows, themes, and theme-builder beta are live with maturity labels.                                    | G2 plus recipe/CLI/tool foundations              |
-| G4   | Catalog completion              | 52 primitives, 21 components, 36+ blocks, 29 templates/32 placements, four themes, and both languages meet item DoDs.                      | Catalog work queues and smoke matrices           |
+| Gate | Milestone                       | Exit condition                                                                                                                                 | Primary blockers                                                   |
+| ---- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| G0   | Governance and canonical inputs | Brand, licensing, security, privacy, migration, and account prerequisites are explicit.                                                        | External policy review and domain/account access                   |
+| G1   | Foundation/private alpha shell  | `apps/site` builds, deploys to preview, supports both locales/themes, and dogfoods Solidiom.                                                   | Site scaffold, tokens, shell, CI                                   |
+| G2   | Content-platform vertical slice | Dialog, Combobox, and Data Table prove registry → routes → API → examples → a11y → i18n → search.                                              | Registry v2, TypeDoc, a11y, content loaders                        |
+| G3   | Public beta platform            | Useful catalog subset, CLI flows, themes, and theme-builder beta are live with maturity labels.                                                | G2 plus recipe/CLI/tool foundations                                |
+| G4   | Catalog completion              | 52 primitives, 21 components, 36+ blocks, 29 templates/32 placements, four themes, and both languages meet item DoDs.                          | Catalog work queues and smoke matrices                             |
 | G5   | GA and cutover                  | Full quality, security, browser, performance, legal, SEO, playground, marketing, analytics, and migration gates pass; legacy apps are removed. | G4 plus playground, marketing, hardening, and production readiness |
 
 ### Critical path
@@ -318,11 +328,11 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 
 ### 7.3 Beta gate
 
-| Status | ID       | Size | Depends on                                          | Owner area | Task and acceptance boundary                                                                                 |
-| ------ | -------- | ---- | --------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| [ ]    | BETA-001 | M    | G2, representative COMP/BLOCK/TPL tasks, BUILDER-006 | Product/QA | Define beta minimum coverage and publish maturity labels; no dead CTA or implied GA completeness.            |
-| [ ]    | BETA-002 | M    | BETA-001                                             | QA         | Run beta acceptance matrix across locales, themes, browsers, search, CLI, tools, and accessibility.          |
-| [ ]    | BETA-003 | S    | BETA-002, OPS-003                                    | Operations | Publish public beta with rollback, incident contact, feedback path, and release notes.                       |
+| Status | ID       | Size | Depends on                                           | Owner area | Task and acceptance boundary                                                                        |
+| ------ | -------- | ---- | ---------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------- |
+| [ ]    | BETA-001 | M    | G2, representative COMP/BLOCK/TPL tasks, BUILDER-006 | Product/QA | Define beta minimum coverage and publish maturity labels; no dead CTA or implied GA completeness.   |
+| [ ]    | BETA-002 | M    | BETA-001                                             | QA         | Run beta acceptance matrix across locales, themes, browsers, search, CLI, tools, and accessibility. |
+| [ ]    | BETA-003 | S    | BETA-002, OPS-003                                    | Operations | Publish public beta with rollback, incident contact, feedback path, and release notes.              |
 
 ---
 

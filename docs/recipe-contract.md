@@ -6,6 +6,7 @@ description: The canonical recipe definition schema, semantic vocabulary, token 
 doc_type: reference
 audience: "Solidiom contributors, recipe emitter authors"
 tags: [recipes, contract, tokens, styling, css, tailwind, unocss]
+lifecycle: current
 ---
 
 > **Purpose:** the normative reference for the canonical recipe contract. One definition per recipe; the CSS, Tailwind, and UnoCSS emitters generate every output from it.

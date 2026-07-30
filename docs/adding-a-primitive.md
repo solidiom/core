@@ -6,6 +6,7 @@ description: Step-by-step guide to scaffold, implement, style, test, and registe
 doc_type: how-to
 audience: "Solidiom contributors"
 tags: [primitives, contributing, guide]
+lifecycle: current
 ---
 
 > **Purpose:** For Solidiom contributors, shows how to add a new headless primitive from scratch — following the exact conventions every existing primitive uses and verified by the automated completion gate.

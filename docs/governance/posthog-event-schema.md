@@ -1,3 +1,13 @@
+---
+id: posthog-event-schema
+title: "PostHog Event Schema — Privacy Allowlist"
+doc_type: reference
+audience: "Solidiom platform engineers, privacy reviewers"
+tags: [governance, posthog, privacy, analytics, GOV-004]
+lifecycle: current
+date: 2026-07-27
+---
+
 # PostHog Event Schema — Privacy Allowlist
 
 > GOV-004 · Status: Approved
@@ -12,14 +22,14 @@ may be emitted. Any event, property, or payload not explicitly listed is
 
 ## 2. Global Constraints
 
-| Constraint | Rule |
-|---|---|
-| Autocapture | **Disabled** — no automatic click/input/pageview events |
-| Session replay | **Disabled** — no DOM recording or session capture |
-| Heatmaps | **Disabled** — no cursor or scroll tracking |
-| Feature flags | Allowed for A/B testing tool/builder behavior only |
-| Group analytics | Disabled |
-| User identification | Anonymous only — no email, name, or account linkage |
+| Constraint          | Rule                                                    |
+| ------------------- | ------------------------------------------------------- |
+| Autocapture         | **Disabled** — no automatic click/input/pageview events |
+| Session replay      | **Disabled** — no DOM recording or session capture      |
+| Heatmaps            | **Disabled** — no cursor or scroll tracking             |
+| Feature flags       | Allowed for A/B testing tool/builder behavior only      |
+| Group analytics     | Disabled                                                |
+| User identification | Anonymous only — no email, name, or account linkage     |
 
 ## 3. Prohibited Payloads
 
@@ -38,50 +48,50 @@ The following data types **must never** appear in any event property:
 
 ### 4.1 Navigation
 
-| Event | Properties | Notes |
-|---|---|---|
+| Event       | Properties                                                                                                                    | Notes                                                             |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | `page_view` | `path` (pathname only, no query), `locale` (`en`\|`es`), `theme` (`light`\|`dark`\|`system`), `referrer_domain` (domain only) | Emitted once per navigation. Path must not contain search params. |
 
 ### 4.2 Search
 
-| Event | Properties | Notes |
-|---|---|---|
-| `search_opened` | `trigger` (`keyboard`\|`click`\|`command`) | User opened the search dialog. **No query text.** |
+| Event                    | Properties                                                                                | Notes                                                      |
+| ------------------------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `search_opened`          | `trigger` (`keyboard`\|`click`\|`command`)                                                | User opened the search dialog. **No query text.**          |
 | `search_result_selected` | `result_type` (`primitive`\|`component`\|`guide`\|`blog`\|`api`\|`a11y`), `result_locale` | User clicked a result. **No query text, no result title.** |
 
 ### 4.3 Theme
 
-| Event | Properties | Notes |
-|---|---|---|
+| Event           | Properties                                                           | Notes                      |
+| --------------- | -------------------------------------------------------------------- | -------------------------- |
 | `theme_changed` | `from` (`light`\|`dark`\|`system`), `to` (`light`\|`dark`\|`system`) | Explicit user action only. |
 
 ### 4.4 Locale
 
-| Event | Properties | Notes |
-|---|---|---|
+| Event            | Properties                             | Notes                      |
+| ---------------- | -------------------------------------- | -------------------------- |
 | `locale_changed` | `from` (`en`\|`es`), `to` (`en`\|`es`) | Explicit user switch only. |
 
 ### 4.5 CLI / Install
 
-| Event | Properties | Notes |
-|---|---|---|
+| Event            | Properties                                                         | Notes                           |
+| ---------------- | ------------------------------------------------------------------ | ------------------------------- |
 | `install_copied` | `primitive` (name), `method` (`cli`\|`npm`\|`pnpm`\|`yarn`\|`bun`) | User copied an install command. |
 
 ### 4.6 Tools (playground and theme builder)
 
-| Event | Properties | Notes |
-|---|---|---|
-| `playground_opened` | `example_id` (canonical example name) | User opened a playground example. **No source code.** |
-| `playground_run` | `example_id` | User executed the playground. **No source or output.** |
-| `builder_opened` | — | User opened the theme builder. |
-| `builder_exported` | `format` (`json`\|`css`\|`tailwind`\|`unocss`) | User exported a theme. **No token values.** |
-| `builder_shared` | — | User generated a share URL. **No state data.** |
+| Event               | Properties                                     | Notes                                                  |
+| ------------------- | ---------------------------------------------- | ------------------------------------------------------ |
+| `playground_opened` | `example_id` (canonical example name)          | User opened a playground example. **No source code.**  |
+| `playground_run`    | `example_id`                                   | User executed the playground. **No source or output.** |
+| `builder_opened`    | —                                              | User opened the theme builder.                         |
+| `builder_exported`  | `format` (`json`\|`css`\|`tailwind`\|`unocss`) | User exported a theme. **No token values.**            |
+| `builder_shared`    | —                                              | User generated a share URL. **No state data.**         |
 
 ### 4.7 Newsletter
 
-| Event | Properties | Notes |
-|---|---|---|
-| `newsletter_subscribed` | `locale` | Form submitted successfully. **No email address.** |
+| Event                   | Properties | Notes                                              |
+| ----------------------- | ---------- | -------------------------------------------------- |
+| `newsletter_subscribed` | `locale`   | Form submitted successfully. **No email address.** |
 
 ## 5. Implementation Requirements
 

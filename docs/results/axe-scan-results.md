@@ -4,6 +4,7 @@ title: "Automated Accessibility Scan Results"
 doc_type: reference
 audience: "Solidiom contributors, accessibility reviewers"
 tags: [accessibility, axe, automated-testing]
+lifecycle: current
 ---
 
 > **Purpose:** Records axe-core results emitted by the executable browser suite. This report is rejected when the underlying result artifact is incomplete, duplicated, malformed, or contains violations.

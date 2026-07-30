@@ -1,3 +1,12 @@
+---
+id: no-transform-build-results
+title: "No-Transform Build Results — Generated Report"
+doc_type: generated
+audience: "Solidiom contributors"
+tags: [build, tsup, no-transform, generated]
+lifecycle: current
+---
+
 # No-Transform Build Results
 
 Generated: 2026-07-22

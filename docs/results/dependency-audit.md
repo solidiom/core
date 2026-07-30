@@ -1,3 +1,12 @@
+---
+id: dependency-audit
+title: "Dependency Audit — Generated Report"
+doc_type: generated
+audience: "Solidiom contributors, security reviewers"
+tags: [dependencies, security, audit, generated]
+lifecycle: current
+---
+
 # Dependency Audit
 
 Generated: 2026-07-22

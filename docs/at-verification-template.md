@@ -4,6 +4,7 @@ title: "AT Verification Record Template"
 doc_type: reference
 audience: "QA engineers, accessibility specialists"
 tags: [accessibility, AT, verification]
+lifecycle: current
 ---
 
 # Assistive Technology Verification Record

@@ -1,3 +1,12 @@
+---
+id: cross-browser-results
+title: "Cross-Browser Test Results — Generated Report"
+doc_type: generated
+audience: "Solidiom QA engineers"
+tags: [testing, browser, cross-browser, generated]
+lifecycle: current
+---
+
 # Cross-Browser Test Results
 
 Generated: 2026-07-27

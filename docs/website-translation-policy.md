@@ -1,3 +1,13 @@
+---
+id: website-translation-policy
+title: "Website Translation Lifecycle Policy"
+doc_type: reference
+audience: "Solidiom content authors, translators"
+tags: [website, i18n, translation, policy]
+lifecycle: current
+date: 2026-07-29
+---
+
 # Website translation lifecycle policy
 
 This policy implements I18N-004 for content under `apps/site/src/content`.
