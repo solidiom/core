@@ -184,6 +184,10 @@ run = "pnpm tsx tools/phase3-preflight.ts"
 description = "Run executable axe accessibility scans"
 run = "pnpm tsx tools/run-a11y.ts"
 
+[tasks."a11y:evidence"]
+description = "Publish stable per-primitive accessibility evidence from the executed axe artifact"
+run = "pnpm tsx tools/a11y-evidence.ts"
+
 [tasks."a11y:report"]
 description = "Generate the axe report from the executed result artifact"
 run = "pnpm tsx tools/generate-axe-report.ts"
@@ -253,6 +257,7 @@ run = [
   "mise run ci:solid-matrix",
   "mise run build",
   "mise run a11y:scan",
+  "mise run a11y:evidence",
   "mise run a11y:report",
   "mise run gate:phase1",
   "mise run gate:phase2",

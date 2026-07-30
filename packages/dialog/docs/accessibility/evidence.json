@@ -1,16 +1,17 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "primitive": "dialog",
-  "evidenceIds": ["axe-dialog-pass-summary-0c991009"],
+  "evidenceIds": ["axe-dialog-scan-v1"],
   "summary": {
     "passes": 15,
     "violations": 0,
-    "incomplete": 0
+    "incomplete": 0,
+    "outcome": "pass"
   },
-  "lastRun": "2026-07-27T21:12:15.664Z",
+  "lastRun": "2026-07-30T01:21:49.767Z",
   "provenance": {
     "browser": "chromium",
-    "commitSha": "04c0eb80ae74d55d005f410389efb1885f35f565",
+    "commitSha": "7fc52f30fa7eaf18d17e8049dc70bb7c38bc677f",
     "ciRunUrl": null
   }
 }

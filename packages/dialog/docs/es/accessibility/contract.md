@@ -1,5 +1,6 @@
 ---
 contentSchemaVersion: 1
+accessibilityContractSchemaVersion: 1
 title: Contrato de accesibilidad de Dialog
 description: Responsabilidades de teclado, foco, semántica y consumidores para Dialog.
 locale: es
@@ -33,8 +34,11 @@ consumerDuties:
   - Mantén una acción de cierre visible y operable por teclado, salvo que el flujo tenga una excepción documentada.
   - Usa un alert dialog para confirmaciones que requieren una decisión explícita sobre una acción destructiva.
 nonApplicableCriteria:
-  - El portalling nativo queda aplazado mientras las API Portal de Solid 2 sean inestables; el contrato de API no depende de la reubicación del DOM.
+  - criterion: portalling
+    rationale: El portalling nativo queda aplazado mientras las API Portal de Solid 2 sean inestables; el contrato de API no depende de la reubicación del DOM.
 reviewStatus: reviewed
+reviewedBy: Revisión de accesibilidad de Solidiom
+reviewedAt: 2026-07-27T00:00:00.000Z
 ---
 
 ## Evidencia automatizada

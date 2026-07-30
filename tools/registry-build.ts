@@ -36,41 +36,155 @@ interface A11yEvidenceRecord {
     passes?: unknown
     violations?: unknown
     incomplete?: unknown
+    outcome?: unknown
   }
   lastRun?: unknown
 }
 
-function readA11yEvidence(name: string): { evidenceIds: string[]; lastReviewed?: string } {
-  const evidencePath = join(PACKAGES_DIR, name, "docs", "accessibility", "evidence.json")
-  if (!existsSync(evidencePath)) return { evidenceIds: [] }
+type RegistryStatus = "experimental" | "preview" | "stable" | "deprecated"
+type Deliverable = "primitive" | "component" | "block" | "template" | "theme"
+type DocumentationLocaleStatus = "missing" | "draft" | "stale" | "reviewed"
 
-  try {
-    const evidence = JSON.parse(readFileSync(evidencePath, "utf8")) as A11yEvidenceRecord
-    const hasPassingSummary =
-      evidence.schemaVersion === 1 &&
-      evidence.primitive === name &&
-      evidence.summary?.violations === 0 &&
-      typeof evidence.summary.passes === "number" &&
-      evidence.summary.passes > 0
-    const evidenceIds = Array.isArray(evidence.evidenceIds)
-      ? evidence.evidenceIds.filter((id): id is string => typeof id === "string")
-      : []
-    return hasPassingSummary && evidenceIds.length > 0
-      ? {
-          evidenceIds,
-          lastReviewed: typeof evidence.lastRun === "string" ? evidence.lastRun : undefined,
-        }
-      : { evidenceIds: [] }
-  } catch {
-    return { evidenceIds: [] }
+const REGISTRY_STATUSES = new Set<RegistryStatus>([
+  "experimental",
+  "preview",
+  "stable",
+  "deprecated",
+])
+const DELIVERABLES = new Set<Deliverable>(["primitive", "component", "block", "template", "theme"])
+
+interface RegistryPackageMetadata {
+  status?: RegistryStatus
+  deliverables: Deliverable[]
+  themeCompatible: string[]
+  searchKeywords: string[]
+  provenance: {
+    repository?: string
+    directory?: string
+    sourceCommit?: string
   }
+}
+
+interface DocumentationFrontmatter {
+  keywords: string[]
+  translationStatus?: "draft" | "human-reviewed" | "stale"
+  translationSourceHash?: string
+  translationReviewedAt?: string
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value)
+}
+
+function nonEmptyString(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim().length > 0 ? value.trim() : undefined
+}
+
+function stringArray(value: unknown): string[] {
+  return Array.isArray(value)
+    ? [...new Set(value.map(nonEmptyString).filter((entry): entry is string => !!entry))].sort()
+    : []
+}
+
+/** Reads optional product metadata without coupling registry output to a site-only schema. */
+function registryPackageMetadata(pkg: Record<string, unknown>): RegistryPackageMetadata {
+  const nx = isRecord(pkg.nx) ? pkg.nx : undefined
+  const metadata = nx && isRecord(nx.metadata) ? nx.metadata : undefined
+  const registry = metadata && isRecord(metadata.registry) ? metadata.registry : undefined
+  const provenance = registry && isRecord(registry.provenance) ? registry.provenance : undefined
+  const status = registry && nonEmptyString(registry.status)
+
+  return {
+    status:
+      status && REGISTRY_STATUSES.has(status as RegistryStatus)
+        ? (status as RegistryStatus)
+        : undefined,
+    deliverables: stringArray(registry?.deliverables).filter((value): value is Deliverable =>
+      DELIVERABLES.has(value as Deliverable),
+    ),
+    themeCompatible: stringArray(registry?.themeCompatible),
+    searchKeywords: stringArray(registry?.searchKeywords),
+    provenance: {
+      repository: nonEmptyString(provenance?.repository),
+      directory: nonEmptyString(provenance?.directory),
+      sourceCommit: nonEmptyString(provenance?.sourceCommit),
+    },
+  }
+}
+
+/** Read the small, flat frontmatter subset registry discovery needs from authored package docs. */
+function documentationFrontmatter(path: string): DocumentationFrontmatter {
+  if (!existsSync(path)) return { keywords: [] }
+
+  const source = readFileSync(path, "utf8")
+  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  if (!match) return { keywords: [] }
+
+  const fields = new Map<string, string>()
+  for (const line of match[1].split(/\r?\n/)) {
+    const field = line.match(/^([A-Za-z][A-Za-z0-9_-]*):\s*(.*?)\s*$/)
+    if (field) fields.set(field[1], field[2])
+  }
+
+  const rawKeywords = fields.get("keywords")
+  const keywords = rawKeywords
+    ? stringArray(
+        rawKeywords
+          .replace(/^\[|\]$/g, "")
+          .split(",")
+          .map((value) => value.trim().replace(/^['\"]|['\"]$/g, "")),
+      )
+    : []
+  const translationStatus = fields.get("translationStatus")
+  const translationSourceHash = fields.get("translationSourceHash")
+  const translationReviewedAt = fields.get("translationReviewedAt")
+
+  return {
+    keywords,
+    ...(translationStatus === "draft" ||
+    translationStatus === "human-reviewed" ||
+    translationStatus === "stale"
+      ? { translationStatus }
+      : {}),
+    ...(translationSourceHash && /^[a-f0-9]{64}$/.test(translationSourceHash)
+      ? { translationSourceHash }
+      : {}),
+    ...(translationReviewedAt && !Number.isNaN(Date.parse(translationReviewedAt))
+      ? { translationReviewedAt: new Date(translationReviewedAt).toISOString() }
+      : {}),
+  }
+}
+
+function overviewFrontmatter(name: string, locale: "en" | "es"): DocumentationFrontmatter {
+  const file = locale === "en" ? "overview.md" : join("es", "overview.md")
+  return documentationFrontmatter(join(PACKAGES_DIR, name, "docs", file))
 }
 
 function documentationMetadata(name: string): PrimitiveManifestV2["documentation"] {
   const docsDir = join(PACKAGES_DIR, name, "docs")
-  const localeStatus = (locale: string): "missing" | "draft" =>
-    existsSync(locale === "en" ? docsDir : join(docsDir, locale)) ? "draft" : "missing"
-  const hasCompleteLocale = (locale: string): boolean => {
+  const localeMetadata = (locale: "en" | "es") => {
+    const root = locale === "en" ? docsDir : join(docsDir, locale)
+    const overview = join(root, "overview.md")
+    if (!existsSync(overview)) return { status: "missing" as const }
+
+    const frontmatter = overviewFrontmatter(name, locale)
+    const status: DocumentationLocaleStatus =
+      frontmatter.translationStatus === "human-reviewed"
+        ? "reviewed"
+        : frontmatter.translationStatus === "stale"
+          ? "stale"
+          : "draft"
+    return {
+      status,
+      ...(frontmatter.translationSourceHash
+        ? { sourceHash: frontmatter.translationSourceHash }
+        : {}),
+      ...(frontmatter.translationReviewedAt
+        ? { lastUpdated: frontmatter.translationReviewedAt }
+        : {}),
+    }
+  }
+  const hasCompleteLocale = (locale: "en" | "es"): boolean => {
     const root = locale === "en" ? docsDir : join(docsDir, locale)
     const examplesDir = join(root, "examples")
     return (
@@ -84,11 +198,53 @@ function documentationMetadata(name: string): PrimitiveManifestV2["documentation
   const esComplete = hasCompleteLocale("es")
 
   return {
-    status: enComplete && esComplete ? "complete" : existsSync(docsDir) ? "draft" : "stub",
+    status:
+      enComplete && esComplete
+        ? "complete"
+        : enComplete
+          ? "review"
+          : existsSync(docsDir)
+            ? "draft"
+            : "stub",
     locales: {
-      en: { status: localeStatus("en") },
-      ...(existsSync(join(docsDir, "es")) ? { es: { status: localeStatus("es") } } : {}),
+      en: localeMetadata("en"),
+      ...(existsSync(join(docsDir, "es")) ? { es: localeMetadata("es") } : {}),
     },
+  }
+}
+
+function documentationKeywords(name: string): string[] {
+  return [
+    ...new Set(
+      ["en", "es"].flatMap((locale) => overviewFrontmatter(name, locale as "en" | "es").keywords),
+    ),
+  ].sort()
+}
+
+function readA11yEvidence(name: string): { evidenceIds: string[]; lastReviewed?: string } {
+  const evidencePath = join(PACKAGES_DIR, name, "docs", "accessibility", "evidence.json")
+  if (!existsSync(evidencePath)) return { evidenceIds: [] }
+
+  try {
+    const evidence = JSON.parse(readFileSync(evidencePath, "utf8")) as A11yEvidenceRecord
+    const hasPassingSummary =
+      evidence.schemaVersion === 2 &&
+      evidence.primitive === name &&
+      evidence.summary?.violations === 0 &&
+      evidence.summary?.outcome === "pass" &&
+      typeof evidence.summary.passes === "number" &&
+      evidence.summary.passes > 0
+    const evidenceIds = Array.isArray(evidence.evidenceIds)
+      ? evidence.evidenceIds.filter((id): id is string => typeof id === "string")
+      : []
+    return hasPassingSummary && evidenceIds.length > 0
+      ? {
+          evidenceIds,
+          lastReviewed: typeof evidence.lastRun === "string" ? evidence.lastRun : undefined,
+        }
+      : { evidenceIds: [] }
+  } catch {
+    return { evidenceIds: [] }
   }
 }
 
@@ -220,10 +376,14 @@ interface IndexManifestV2 {
     category: string
     status: string
     deliverables: string[]
+    accessibility: Pick<PrimitiveManifestV2["accessibility"], "reviewStatus" | "evidenceIds">
     hasAccessibilityEvidence: boolean
     documentationStatus: string
+    documentationLocales: PrimitiveManifestV2["documentation"]["locales"]
     stylingOutputs: string[]
+    themeCompatible: string[]
     searchKeywords: string[]
+    provenance: PrimitiveManifestV2["provenance"]
   }>
   adapters: Array<{
     name: string
@@ -651,6 +811,7 @@ function buildRegistry(): void {
     const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as Record<string, unknown>
     const nx = pkg["nx"] as Record<string, unknown> | undefined
     const metadata = nx?.["metadata"] as Record<string, string> | undefined
+    const registryMetadata = registryPackageMetadata(pkg)
     const label = metadata?.["label"] ?? primitive.name
     const description = metadata?.["description"] ?? ""
     const category = metadata?.["category"] ?? "uncategorized"
@@ -658,24 +819,28 @@ function buildRegistry(): void {
     const sourceDir = join(PACKAGES_DIR, primitive.name, "source")
     const { hash: filesHash, fileDigests } = computeFilesHash(sourceDir, primitive.source.files)
 
-    // Detect styling recipe outputs
+    // Package recipe sources define output availability; package registry metadata
+    // declares theme compatibility and optional product-layer deliverables.
     const stylingOutputs = detectStylingOutputs(primitive.name)
-
-    // Derive documentation and accessibility state from canonical authored
-    // documents and the generated axe-evidence artifact. Neither state is
-    // hand-authored in the registry output.
     const documentation = documentationMetadata(primitive.name)
     const a11yEvidence: { evidenceIds: string[]; lastReviewed?: string } =
       documentation.status === "complete" ? readA11yEvidence(primitive.name) : { evidenceIds: [] }
 
-    // Generate enhanced keywords
-    const keywords = generateKeywords(
-      label,
-      description,
-      category,
-      primitive.capabilities,
-      primitive.dependencies,
-    )
+    // Package metadata and authored documentation frontmatter extend the stable,
+    // generated search terms without introducing a separate registry-only list.
+    const keywords = [
+      ...new Set([
+        ...generateKeywords(
+          label,
+          description,
+          category,
+          primitive.capabilities,
+          primitive.dependencies,
+        ),
+        ...registryMetadata.searchKeywords.map((keyword) => keyword.toLowerCase()),
+        ...documentationKeywords(primitive.name).map((keyword) => keyword.toLowerCase()),
+      ]),
+    ].sort()
 
     const v2: PrimitiveManifestV2 = {
       ...primitive,
@@ -683,8 +848,14 @@ function buildRegistry(): void {
       label,
       description,
       category,
-      status: "preview",
-      deliverables: { primitive: true },
+      status: registryMetadata.status ?? "preview",
+      deliverables: {
+        primitive: true,
+        ...(registryMetadata.deliverables.includes("component") ? { component: true } : {}),
+        ...(registryMetadata.deliverables.includes("block") ? { block: true } : {}),
+        ...(registryMetadata.deliverables.includes("template") ? { template: true } : {}),
+        ...(registryMetadata.deliverables.includes("theme") ? { theme: true } : {}),
+      },
       cli: {
         addCommand: `solidiom add ${primitive.name}`,
         installDeps: [...primitive.capabilities.map((c) => c.default)].sort(),
@@ -697,7 +868,7 @@ function buildRegistry(): void {
       documentation,
       styling: {
         outputs: stylingOutputs,
-        themeCompatible: [],
+        themeCompatible: registryMetadata.themeCompatible,
       },
       search: {
         keywords,
@@ -709,8 +880,12 @@ function buildRegistry(): void {
         lastGenerated: now,
       },
       provenance: {
-        repository: "https://github.com/solidiom/solidiom",
-        directory: `packages/${primitive.name}`,
+        repository:
+          registryMetadata.provenance.repository ?? "https://github.com/solidiom/solidiom",
+        directory: registryMetadata.provenance.directory ?? `packages/${primitive.name}`,
+        ...(registryMetadata.provenance.sourceCommit
+          ? { sourceCommit: registryMetadata.provenance.sourceCommit }
+          : {}),
       },
       lastUpdated: now,
     }
@@ -748,9 +923,16 @@ function buildRegistry(): void {
           .map(([k]) => k)
           .sort(),
         hasAccessibilityEvidence: m.accessibility.evidenceIds.length > 0,
+        accessibility: {
+          reviewStatus: m.accessibility.reviewStatus,
+          evidenceIds: [...m.accessibility.evidenceIds].sort(),
+        },
         documentationStatus: m.documentation.status,
+        documentationLocales: m.documentation.locales,
         stylingOutputs: [...m.styling.outputs].sort(),
+        themeCompatible: [...m.styling.themeCompatible].sort(),
         searchKeywords: [...m.search.keywords].sort(),
+        provenance: m.provenance,
       }))
       .sort((a, b) => a.name.localeCompare(b.name)),
     adapters: adapterEntries

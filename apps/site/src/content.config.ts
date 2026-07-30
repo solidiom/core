@@ -1,6 +1,10 @@
 import { defineCollection } from "astro:content"
 import { z } from "astro/zod"
 import { glob } from "astro/loaders"
+import {
+  accessibilityContractFields,
+  validateAccessibilityContractCoverage,
+} from "./lib/accessibility-contract"
 
 /**
  * CONTENT-002: every content entry declares this versioned frontmatter
@@ -17,6 +21,8 @@ const localizedContentFields = {
   contentSchemaVersion: z.literal(CONTENT_SCHEMA_VERSION).default(CONTENT_SCHEMA_VERSION),
   title: z.string().min(1),
   description: z.string().min(1),
+  /** Discovery terms are authored with the content they describe. */
+  keywords: z.array(z.string().trim().min(1)).default([]),
   locale: localeSchema.default("en"),
   /** GA entries must have a fresh human-reviewed translation. */
   maturity: maturitySchema.default("beta"),
@@ -106,19 +112,17 @@ const accessibilityContracts = defineCollection({
     pattern: "*/docs/{accessibility,es/accessibility}/**/*.{md,mdx}",
     base: "../../packages",
   }),
-  schema: z.object({
-    ...localizedContentFields,
-    ...productFields,
-    keyboard: z
-      .array(z.object({ key: z.string().min(1), behavior: z.string().min(1) }))
-      .default([]),
-    focus: z.array(z.string().min(1)).default([]),
-    semantics: z.array(z.string().min(1)).default([]),
-    aria: z.array(z.string().min(1)).default([]),
-    consumerDuties: z.array(z.string().min(1)).default([]),
-    nonApplicableCriteria: z.array(z.string().min(1)).default([]),
-    reviewStatus: z.enum(["draft", "reviewed", "complete"]).default("draft"),
-  }),
+  schema: z
+    .object({
+      ...localizedContentFields,
+      ...productFields,
+      ...accessibilityContractFields,
+    })
+    .superRefine((contract, context) => {
+      for (const message of validateAccessibilityContractCoverage(contract)) {
+        context.addIssue({ code: "custom", message })
+      }
+    }),
 })
 
 const components = defineCollection({

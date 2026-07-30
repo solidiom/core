@@ -41,7 +41,7 @@ test.describe("VS-001 Dialog vertical slice", () => {
       await expect(
         page.getByText(locale === "en" ? "Axe scan summary" : "Resumen del análisis axe"),
       ).toBeVisible()
-      await expect(page.getByText("axe-dialog-pass-summary-0c991009")).toBeVisible()
+      await expect(page.getByText("axe-dialog-scan-v1")).toBeVisible()
     }
   })
 
