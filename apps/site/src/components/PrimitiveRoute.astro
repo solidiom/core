@@ -5,6 +5,7 @@ import {
   getAccessibilityEvidence,
   getApiDocumentResult,
   getCatalogCopy,
+  getRegistryManifest,
   getRegistryPrimitives,
   primitiveHref,
 } from "../lib/catalog"
@@ -15,6 +16,7 @@ import AccessibilityEvidence from "./AccessibilityEvidence.astro"
 import ApiReference from "./ApiReference.astro"
 import { DialogExample } from "./DialogExample"
 import ExampleSource from "./ExampleSource.astro"
+import PrimitiveMetadata from "./PrimitiveMetadata.astro"
 import PrimitiveTabs from "./PrimitiveTabs.astro"
 
 interface Props {
@@ -64,6 +66,7 @@ const accessibilityContractEntries =
     : []
 const accessibilityContract = accessibilityContractEntries.at(0)?.data
 const isDialog = primitive.name === "dialog"
+const registryManifest = getRegistryManifest(primitive.name)
 
 const allPrimitives = getRegistryPrimitives()
 const sidebarGroups = primitiveSidebarGroups(allPrimitives, locale, (name, loc) =>
@@ -100,12 +103,7 @@ const { previous, next } = adjacentPrimitiveLinks(allPrimitives, primitive.name,
       <section>
         <h2>{copy.preview}</h2>
         {DocumentContent ? <DocumentContent /> : <p>{primitive.description}</p>}
-        <div class="primitive-install">
-          <h3>{copy.install}</h3>
-          <pre>
-            <code>{`pnpm add ${primitive.package}`}</code>
-          </pre>
-        </div>
+        <PrimitiveMetadata manifest={registryManifest} copy={copy} />
       </section>
     )
   }

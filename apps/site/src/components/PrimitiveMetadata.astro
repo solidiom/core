@@ -1,0 +1,98 @@
+---
+import type { CatalogCopy, RegistryManifest } from "../lib/catalog"
+
+interface Props {
+  manifest: RegistryManifest
+  copy: CatalogCopy
+}
+
+const { manifest, copy } = Astro.props
+const capabilityLabels = manifest.capabilities.map(
+  (capability) => `${capability.name}@${capability.version}`,
+)
+---
+
+<section class="primitive-metadata" aria-labelledby="package-metadata">
+  <h2 id="package-metadata">{copy.packageMetadata}</h2>
+  <dl class="primitive-metadata__summary">
+    <div><dt>{copy.package}</dt><dd><code>{manifest.package}</code></dd></div>
+    <div><dt>{copy.version}</dt><dd><code>{manifest.version}</code></dd></div>
+    <div><dt>{copy.status}</dt><dd>{manifest.status}</dd></div>
+  </dl>
+
+  <div class="primitive-metadata__sections">
+    <section>
+      <h3>{copy.install}</h3>
+      <pre><code>{manifest.cli.addCommand}</code></pre>
+    </section>
+    <section>
+      <h3>{copy.sourceEntry}</h3>
+      <code>{manifest.source.entry}</code>
+    </section>
+    <section>
+      <h3>{copy.sourceFiles}</h3>
+      <ul>
+        {
+          manifest.source.files.map((file) => (
+            <li>
+              <code>{file}</code>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+    <section>
+      <h3>{copy.dependencies}</h3>
+      {
+        manifest.dependencies.length > 0 ? (
+          <ul>
+            {manifest.dependencies.map((dependency) => (
+              <li>
+                <code>{dependency}</code>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>{copy.none}</p>
+        )
+      }
+    </section>
+    <section>
+      <h3>{copy.capabilities}</h3>
+      {
+        capabilityLabels.length > 0 ? (
+          <ul>
+            {capabilityLabels.map((label, index) => (
+              <li>
+                <code>{label}</code>
+                <span>
+                  {" "}
+                  — <code>{manifest.capabilities[index]!.default}</code>
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>{copy.none}</p>
+        )
+      }
+    </section>
+    <section>
+      <h3>{copy.integrity}</h3>
+      <dl class="primitive-metadata__integrity">
+        <div>
+          <dt>{copy.fileHash}</dt><dd>
+            <code>{manifest.integrity.algorithm}:{manifest.integrity.filesHash}</code>
+          </dd>
+        </div>
+        <div>
+          <dt>{copy.generated}</dt><dd>
+            <time datetime={manifest.integrity.lastGenerated}
+              >{manifest.integrity.lastGenerated}</time
+            >
+          </dd>
+        </div>
+      </dl>
+    </section>
+  </div>
+</section>

@@ -136,7 +136,70 @@
   font-size: 0.875rem;
 }
 
-/* VS-001: Dialog's executable example and generated automated-evidence summary. */
+.primitive-metadata {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface-raised);
+}
+
+.primitive-metadata h2,
+.primitive-metadata h3,
+.primitive-metadata p {
+  margin: 0;
+}
+
+.primitive-metadata__summary,
+.primitive-metadata__integrity {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.primitive-metadata__summary div,
+.primitive-metadata__integrity div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.primitive-metadata__summary dt,
+.primitive-metadata__integrity dt {
+  color: var(--color-foreground-muted);
+  font-size: 0.8125rem;
+}
+
+.primitive-metadata__summary dd,
+.primitive-metadata__integrity dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.primitive-metadata__sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.25rem;
+}
+
+.primitive-metadata__sections section {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+}
+
+.primitive-metadata__sections pre,
+.primitive-metadata__sections ul {
+  margin: 0;
+}
+
+.primitive-metadata__sections ul {
+  padding-inline-start: 1.25rem;
+}
+
 .dialog-example {
   display: grid;
   place-items: start;
