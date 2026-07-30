@@ -250,7 +250,8 @@ jobs:
             tests/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter @solidiom/site build
+      - name: Build and index static site
+        run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
       - uses: actions/upload-artifact@v6
         with:
           name: site-dist
@@ -280,7 +281,9 @@ jobs:
           name: site-dist
           path: apps/site/dist
       - run: npx playwright install --with-deps chromium firefox webkit
-      - run: pnpm --filter @solidiom/site run test:e2e
+      - env:
+          PLAYWRIGHT_USE_EXISTING_BUILD: "1"
+        run: pnpm --filter @solidiom/site run test:e2e
       - uses: actions/upload-artifact@v6
         if: failure()
         with:
@@ -315,7 +318,9 @@ jobs:
           name: site-dist
           path: apps/site/dist
       - run: npx playwright install --with-deps chromium
-      - run: pnpm --filter @solidiom/site run test:visual
+      - env:
+          PLAYWRIGHT_USE_EXISTING_BUILD: "1"
+        run: pnpm --filter @solidiom/site run test:visual
       - uses: actions/upload-artifact@v6
         if: failure()
         with:
@@ -351,11 +356,13 @@ jobs:
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable
+      - name: Start static-site preview for Lighthouse
+        run: pnpm --filter @solidiom/site preview --host 127.0.0.1 --port 4322 > /dev/null 2>&1 & for attempt in {1..30}; do curl --fail --silent http://127.0.0.1:4322/ > /dev/null && exit 0; sleep 1; done; exit 1
       - run: pnpm --filter @solidiom/site run lighthouse:json
       - uses: actions/upload-artifact@v6
         with:
           name: site-lighthouse-report
-          path: apps/site/lighthouse-report
+          path: apps/site/dist/reports
           retention-days: 30
 
   # ─── Gate Jobs ─────────────────────────────────────────────────────────────────
