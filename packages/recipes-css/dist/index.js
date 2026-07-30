@@ -33,8 +33,10 @@ function StyledDialog(props) {
 }
 
 // src/recipes/button.tsx
-import { cva } from "class-variance-authority";
 import * as Button from "@solidiom/button";
+
+// src/recipes/button.variants.ts
+import { cva } from "class-variance-authority";
 var buttonVariants = cva("solidiom-btn", {
   variants: {
     variant: {
@@ -46,17 +48,31 @@ var buttonVariants = cva("solidiom-btn", {
       link: "solidiom-btn--link"
     },
     size: {
-      default: "solidiom-btn--md",
       sm: "solidiom-btn--sm",
+      md: "solidiom-btn--md",
       lg: "solidiom-btn--lg",
       icon: "solidiom-btn--icon"
     }
   },
   defaultVariants: {
     variant: "default",
-    size: "default"
-  }
+    size: "md"
+  },
+  compoundVariants: [
+    {
+      variant: "ghost",
+      size: "icon",
+      class: "solidiom-btn--ghost-icon"
+    },
+    {
+      variant: "link",
+      size: "md",
+      class: "solidiom-btn--link-md"
+    }
+  ]
 });
+
+// src/recipes/button.tsx
 function StyledButton(props) {
   const className = () => [buttonVariants({ variant: props.variant, size: props.size }), props.class].filter(Boolean).join(" ");
   return <Button.Root
@@ -169,20 +185,32 @@ function StyledSelect(props) {
 
 // src/recipes/badge.tsx
 import * as Badge from "@solidiom/badge";
+
+// src/recipes/badge.variants.ts
+import { cva as cva2 } from "class-variance-authority";
+var badgeVariants = cva2("solidiom-badge", {
+  variants: {
+    variant: {
+      default: "solidiom-badge--default",
+      secondary: "solidiom-badge--secondary",
+      destructive: "solidiom-badge--destructive",
+      outline: "solidiom-badge--outline"
+    }
+  },
+  defaultVariants: {
+    variant: "default"
+  }
+});
+
+// src/recipes/badge.tsx
 function StyledBadge(props) {
-  const variant = () => props.variant ?? "default";
-  return <Badge.Root class={`solidiom-badge--${variant()}`}>{props.children}</Badge.Root>;
+  return <Badge.Root class={badgeVariants({ variant: props.variant })}>{props.children}</Badge.Root>;
 }
 
 // src/recipes/alert.tsx
 import * as Alert from "@solidiom/alert";
 function StyledAlert(props) {
-  const variant = () => props.variant ?? "info";
-  return <Alert.Root
-    type={variant()}
-    assertiveness={props.assertiveness}
-    class={`solidiom-alert--${variant()}`}
-  >
+  return <Alert.Root type={props.variant ?? "info"} assertiveness={props.assertiveness}>
       {props.children}
     </Alert.Root>;
 }

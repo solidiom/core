@@ -1,5 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs"
 import { basename, join } from "node:path"
+import { REFERENCE_DEFINITIONS } from "./recipe-contract-definitions"
 
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 
@@ -58,42 +59,30 @@ const UTILITY_STYLESHEETS = new Set(["prose", "typeset", "theme"])
 
 /**
  * Styled parts that a recipe intentionally leaves to consumer composition.
- * Each exception has a reason so it cannot silently disguise recipe drift.
+ *
+ * This is a fallback for a scope with no canonical definition in
+ * `tools/recipe-contract-definitions.ts` yet. Every scope that has one instead
+ * declares composition exceptions as `ownership: "consumer"` slots (checked by
+ * `isDocumentedException` below) — the canonical contract's exception model
+ * (docs/contracts/recipe-contract.md §5) replaces this table one scope at a time as
+ * RECIPE-002/003/004 migrate a profile onto generated output. All 13 scopes shipped by
+ * `recipes-css` now have a canonical definition, so this table is empty for it.
  */
-export const COMPOSED_PART_ALLOWLIST: Record<string, Record<string, string>> = {
-  accordion: {
-    item: "The wrapper exposes only Root; consumers supply repeatable items.",
-    trigger: "The wrapper exposes only Root; consumers supply repeatable triggers.",
-    content: "The wrapper exposes only Root; consumers supply repeatable content.",
-  },
-  alert: {
-    title: "Alert title is optional consumer composition.",
-    description: "Alert description is optional consumer composition.",
-  },
-  dialog: {
-    close: "Close is optional consumer composition.",
-  },
-  menu: {
-    item: "Menu items are consumer-provided collection content.",
-    separator: "Menu separators are consumer-provided collection content.",
-  },
-  popover: {
-    close: "Close is optional consumer composition.",
-  },
-  select: {
-    item: "Select items are consumer-provided collection content.",
-  },
-  tabs: {
-    list: "Tabs are consumer-provided repeatable content.",
-    trigger: "Tabs are consumer-provided repeatable content.",
-    content: "Tabs are consumer-provided repeatable content.",
-  },
-  toast: {
-    region: "The toast region is owned by the provider, not this wrapper.",
-    title: "Toast title is optional consumer composition.",
-    description: "Toast description is optional consumer composition.",
-    close: "Close is optional consumer composition.",
-  },
+export const COMPOSED_PART_ALLOWLIST: Record<string, Record<string, string>> = {}
+
+/**
+ * True when `part` is documented as non-recipe-owned, either in the canonical
+ * definition for `scope` (`ownership !== "recipe"`, with a mandatory reason enforced
+ * by `tools/recipe-contract-validate.ts` §3.7) or in the legacy `COMPOSED_PART_ALLOWLIST`
+ * fallback for a scope that has no definition yet.
+ */
+function isDocumentedException(scope: string, part: string): boolean {
+  const definition = REFERENCE_DEFINITIONS[scope]
+  if (definition) {
+    const slot = definition.slots.find((candidate) => candidate.part === part)
+    return !!slot && slot.ownership !== "recipe"
+  }
+  return !!COMPOSED_PART_ALLOWLIST[scope]?.[part]
 }
 
 function extractDataScopes(cssContent: string): string[] {
@@ -207,7 +196,7 @@ export function auditRecipeProfile({
 
     const usedParts = new Set(extractUsedParts(tsxContent))
     for (const part of extractDataParts(cssContent)) {
-      if (!usedParts.has(part) && !COMPOSED_PART_ALLOWLIST[name]?.[part]) {
+      if (!usedParts.has(part) && !isDocumentedException(name, part)) {
         errors.push({
           profile: profileName,
           file: `styles/${name}.css`,

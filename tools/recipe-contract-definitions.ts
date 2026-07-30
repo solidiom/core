@@ -304,7 +304,8 @@ export const accordionRecipe: RecipeDefinition = {
     {
       part: "item",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "The wrapper exposes only Root; consumers supply repeatable items.",
       base: {
         "border-bottom-style": "solid",
         "border-bottom-width": "1px",
@@ -314,7 +315,8 @@ export const accordionRecipe: RecipeDefinition = {
     {
       part: "trigger",
       element: "button",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "The wrapper exposes only Root; consumers supply repeatable triggers.",
       base: {
         display: "flex",
         width: "100%",
@@ -334,7 +336,8 @@ export const accordionRecipe: RecipeDefinition = {
     {
       part: "content",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "The wrapper exposes only Root; consumers supply repeatable content.",
       base: {
         overflow: "hidden",
         "padding-bottom": "1rem",
@@ -394,7 +397,8 @@ export const alertRecipe: RecipeDefinition = {
     {
       part: "title",
       element: "h5",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Alert title is optional consumer composition.",
       base: {
         margin: "0",
         "font-size": "0.875rem",
@@ -406,7 +410,8 @@ export const alertRecipe: RecipeDefinition = {
     {
       part: "description",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Alert description is optional consumer composition.",
       base: { "font-size": "0.875rem", "line-height": "1.4", opacity: "0.9" },
     },
   ],
@@ -567,7 +572,8 @@ export const menuRecipe: RecipeDefinition = {
     {
       part: "item",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Menu items are consumer-provided collection content.",
       base: {
         display: "flex",
         "align-items": "center",
@@ -585,7 +591,8 @@ export const menuRecipe: RecipeDefinition = {
     {
       part: "separator",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Menu separators are consumer-provided collection content.",
       base: { height: "1px", margin: "0.25rem -0.25rem", "background-color": { token: "border" } },
     },
   ],
@@ -635,7 +642,8 @@ export const popoverRecipe: RecipeDefinition = {
     {
       part: "close",
       element: "button",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Close is optional consumer composition.",
       base: {
         position: "absolute",
         top: "0.5rem",
@@ -703,7 +711,8 @@ export const selectRecipe: RecipeDefinition = {
     {
       part: "item",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Select items are consumer-provided collection content.",
       base: {
         display: "flex",
         "align-items": "center",
@@ -731,7 +740,8 @@ export const tabsRecipe: RecipeDefinition = {
     {
       part: "list",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Tabs are consumer-provided repeatable content.",
       base: {
         display: "inline-flex",
         "align-items": "center",
@@ -744,7 +754,8 @@ export const tabsRecipe: RecipeDefinition = {
     {
       part: "trigger",
       element: "button",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Tabs are consumer-provided repeatable content.",
       base: {
         display: "inline-flex",
         "align-items": "center",
@@ -770,7 +781,8 @@ export const tabsRecipe: RecipeDefinition = {
     {
       part: "content",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Tabs are consumer-provided repeatable content.",
       base: { padding: "1rem 0" },
     },
   ],
@@ -785,7 +797,8 @@ export const toastRecipe: RecipeDefinition = {
     {
       part: "region",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "The toast region is owned by the provider, not this wrapper.",
       base: {
         position: "fixed",
         bottom: "1rem",
@@ -817,19 +830,22 @@ export const toastRecipe: RecipeDefinition = {
     {
       part: "title",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Toast title is optional consumer composition.",
       base: { "font-size": "0.875rem", "font-weight": "500" },
     },
     {
       part: "description",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Toast description is optional consumer composition.",
       base: { "font-size": "0.8125rem", color: { token: "foreground-muted" } },
     },
     {
       part: "close",
       element: "button",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Close is optional consumer composition.",
       base: {
         "margin-left": "auto",
         display: "inline-flex",

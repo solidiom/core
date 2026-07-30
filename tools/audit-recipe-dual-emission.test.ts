@@ -2,7 +2,11 @@ import { afterEach, describe, expect, it } from "vitest"
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
-import { auditRecipeProfile, pendingRecipeProfile } from "./audit-recipe-dual-emission"
+import {
+  auditRecipeProfile,
+  pendingRecipeProfile,
+  COMPOSED_PART_ALLOWLIST,
+} from "./audit-recipe-dual-emission"
 
 const temporaryRoots: string[] = []
 
@@ -80,6 +84,30 @@ describe("recipe dual-emission audit", () => {
       "recipes/dialog.tsx": 'import * as Dialog from "@solidiom/dialog"\n<Dialog.Root />',
     })
     expect(errors).toEqual([])
+  })
+
+  it("derives the composition exception from the canonical definition, not a hardcoded table", () => {
+    // dialog's "close" slot is ownership: "consumer" in
+    // tools/recipe-contract-definitions.ts — COMPOSED_PART_ALLOWLIST no longer lists it.
+    expect(COMPOSED_PART_ALLOWLIST.dialog).toBeUndefined()
+    const errors = audit({
+      "styles/dialog.css": '[data-scope="dialog"][data-part="close"] {}',
+      "recipes/dialog.tsx": 'import * as Dialog from "@solidiom/dialog"\n<Dialog.Root />',
+    })
+    expect(errors).toEqual([])
+  })
+
+  it("still rejects an undocumented part for a scope with a canonical definition", () => {
+    // "footer" is not a slot in dialogRecipe at all, documented or otherwise.
+    const errors = audit({
+      "styles/dialog.css": '[data-scope="dialog"][data-part="footer"] {}',
+      "recipes/dialog.tsx": 'import * as Dialog from "@solidiom/dialog"\n<Dialog.Root />',
+    })
+    expect(errors).toContainEqual(
+      expect.objectContaining({
+        message: expect.stringContaining("no documented composition exception"),
+      }),
+    )
   })
 
   it("rejects an empty profile that does not declare itself unimplemented", () => {

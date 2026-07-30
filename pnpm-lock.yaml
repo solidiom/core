@@ -1220,7 +1220,62 @@ importers:
         specifier: '>=3.0.0'
         version: 4.3.3
 
-  packages/recipes-unocss: {}
+  packages/recipes-unocss:
+    dependencies:
+      '@solidiom/accordion':
+        specifier: workspace:*
+        version: link:../accordion
+      '@solidiom/alert':
+        specifier: workspace:*
+        version: link:../alert
+      '@solidiom/badge':
+        specifier: workspace:*
+        version: link:../badge
+      '@solidiom/button':
+        specifier: workspace:*
+        version: link:../button
+      '@solidiom/checkbox':
+        specifier: workspace:*
+        version: link:../checkbox
+      '@solidiom/dialog':
+        specifier: workspace:*
+        version: link:../dialog
+      '@solidiom/menu':
+        specifier: workspace:*
+        version: link:../menu
+      '@solidiom/popover':
+        specifier: workspace:*
+        version: link:../popover
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidiom/select':
+        specifier: workspace:*
+        version: link:../select
+      '@solidiom/switch':
+        specifier: workspace:*
+        version: link:../switch
+      '@solidiom/tabs':
+        specifier: workspace:*
+        version: link:../tabs
+      '@solidiom/toast':
+        specifier: workspace:*
+        version: link:../toast
+      '@solidiom/tooltip':
+        specifier: workspace:*
+        version: link:../tooltip
+      '@solidiom/unocss-preset':
+        specifier: workspace:*
+        version: link:../unocss-preset
+      '@solidjs/web':
+        specifier: 2.0.0-beta.24
+        version: 2.0.0-beta.24(solid-js@2.0.0-beta.24)
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      solid-js:
+        specifier: 2.0.0-beta.24
+        version: 2.0.0-beta.24
 
   packages/release-tools:
     devDependencies:

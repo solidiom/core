@@ -11,7 +11,7 @@ import { referencedTokens, styledStates } from "./recipe-contract-schema"
 import { formatViolations, validateRecipeDefinition } from "./recipe-contract-validate"
 import { tokenSpelling, type TokenNamespace } from "./recipe-contract-tokens"
 
-const NAMESPACES: readonly TokenNamespace[] = ["css", "tailwind", "site"]
+const NAMESPACES: readonly TokenNamespace[] = ["css", "tailwind", "unocss", "site"]
 
 function main(): void {
   console.log("Recipe contract validation\n")

@@ -10,19 +10,22 @@
  * definition references an identity from `SEMANTIC_TOKENS`; the emitters translate
  * that identity into the namespace spelling for their profile.
  *
- * Derived from what the three namespaces actually contain today:
- *   - `css`      — 31 `--ui-*` custom properties used by packages/recipes-css
- *   - `tailwind` — theme colour names used by packages/recipes-tailwind, defined only
- *                  in apps/docs/src/styles.css (deleted by CUT-003 — see UNRESOLVED below)
+ * Derived from what the four namespaces actually contain today:
+ *   - `css`      — `--ui-*` custom properties used by packages/recipes-css
+ *   - `tailwind` — theme colour names used by packages/recipes-tailwind, registered as
+ *                  Tailwind v4 `@theme` tokens in packages/recipes-tailwind/src/styles/theme.css
+ *   - `unocss`   — `--ui-*` custom properties, same runtime namespace as `css` (RECIPE-004).
+ *                  UnoCSS has no theme layer of its own; its stylesheet form reuses the CSS
+ *                  profile's spellings so setting `--ui-primary` once themes all three profiles.
  *   - `site`     — `--sol-*` semantic tokens from apps/site/src/assets/tokens.css (BRAND-002)
  *
- * UNRESOLVED (recorded, not fixed here): the `tailwind` namespace has no definition
- * inside packages/. After CUT-003 removes apps/docs, every Tailwind recipe references
- * undefined theme names. RECIPE-003 must ship the theme contract as a package artifact.
+ * RECIPE-002/003 closed the `css`/`tailwind` gaps that existed while the emitters were
+ * pending. Remaining `null` entries in either namespace are genuine, recorded gaps —
+ * mostly `site`, which is BRAND-002/THEME-002's namespace to complete, not this file's.
  */
 
 /** Namespaces a canonical identity can be spelled in. */
-export type TokenNamespace = "css" | "tailwind" | "site"
+export type TokenNamespace = "css" | "tailwind" | "unocss" | "site"
 
 /** Grouping used for documentation and theme-editor organisation. */
 export type TokenCategory =
@@ -38,6 +41,17 @@ export interface SemanticToken {
    * gap that RECIPE-002/003/004 or THEME-002/003/004 must close, not an omission.
    */
   namespaces: Record<TokenNamespace, string | null>
+  /**
+   * Fallback literal for the `css`/`unocss` namespaces' `var(--x, fallback)` form.
+   *
+   * Values, not identities, are THEME-001's scope — this is not a themeable default,
+   * it is the value every shipped `recipes-css` stylesheet already hardcoded as its
+   * `var()` fallback before the emitter existed. The CSS/UnoCSS emitters use it so a
+   * consumer who has not installed any theme still gets the same visual result as
+   * the hand-written stylesheets did. Omit it only for tokens no current stylesheet
+   * referenced with a literal fallback.
+   */
+  cssFallback?: string
 }
 
 /**
@@ -51,43 +65,78 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     id: "surface",
     category: "surface",
     description: "Default page or component background.",
-    namespaces: { css: "--ui-surface", tailwind: "background", site: "--sol-surface-base" },
+    namespaces: {
+      css: "--ui-surface",
+      tailwind: "background",
+      unocss: "--ui-surface",
+      site: "--sol-surface-base",
+    },
+    cssFallback: "hsl(0 0% 100%)",
   },
   {
     id: "surface-raised",
     category: "surface",
     description: "Background for elevated containers: cards, popovers, menus.",
-    namespaces: { css: null, tailwind: "popover", site: "--sol-surface-raised" },
+    namespaces: {
+      css: "--ui-surface",
+      tailwind: "popover",
+      unocss: "--ui-surface",
+      site: "--sol-surface-raised",
+    },
+    cssFallback: "hsl(0 0% 100%)",
   },
   {
     id: "surface-sunken",
     category: "surface",
     description: "Background for recessed areas: wells, inset panels.",
-    namespaces: { css: null, tailwind: null, site: "--sol-surface-sunken" },
+    namespaces: { css: null, tailwind: null, unocss: null, site: "--sol-surface-sunken" },
   },
   {
     id: "surface-overlay",
     category: "surface",
     description: "Scrim behind modal content.",
-    namespaces: { css: null, tailwind: null, site: "--sol-surface-overlay" },
+    namespaces: {
+      // Matches the literal scrim colour packages/recipes-css/src/styles/dialog.css
+      // already used before this identity existed.
+      css: "--ui-surface-overlay",
+      tailwind: "overlay",
+      unocss: "--ui-surface-overlay",
+      site: "--sol-surface-overlay",
+    },
+    cssFallback: "rgb(0 0 0 / 0.8)",
   },
   {
     id: "surface-muted",
     category: "surface",
     description: "Low-emphasis background: disabled fills, code blocks, table stripes.",
-    namespaces: { css: "--ui-muted", tailwind: "muted", site: null },
+    namespaces: { css: "--ui-muted", tailwind: "muted", unocss: "--ui-muted", site: null },
+    cssFallback: "hsl(210 40% 96%)",
   },
   {
     id: "surface-accent",
     category: "surface",
     description: "Hover or highlight background for interactive list rows.",
-    namespaces: { css: "--ui-accent", tailwind: "accent", site: "--sol-interactive-hover" },
+    namespaces: {
+      css: "--ui-accent",
+      tailwind: "accent",
+      unocss: "--ui-accent",
+      site: "--sol-interactive-hover",
+    },
+    cssFallback: "hsl(0 0% 95%)",
   },
   {
     id: "surface-input",
     category: "surface",
     description: "Background for form control tracks and unfilled inputs.",
-    namespaces: { css: null, tailwind: "input", site: null },
+    namespaces: {
+      // Matches the literal track colour packages/recipes-css/src/styles/switch.css
+      // already used before this identity existed.
+      css: "--ui-surface-input",
+      tailwind: "input",
+      unocss: "--ui-surface-input",
+      site: null,
+    },
+    cssFallback: "hsl(0 0% 90%)",
   },
 
   // ── Foreground ─────────────────────────────────────────────────────────────
@@ -95,7 +144,13 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     id: "foreground",
     category: "foreground",
     description: "Default body text colour.",
-    namespaces: { css: "--ui-fg", tailwind: "foreground", site: "--sol-foreground" },
+    namespaces: {
+      css: "--ui-fg",
+      tailwind: "foreground",
+      unocss: "--ui-fg",
+      site: "--sol-foreground",
+    },
+    cssFallback: "hsl(222 47% 11%)",
   },
   {
     id: "foreground-muted",
@@ -104,32 +159,44 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     namespaces: {
       css: "--ui-muted-fg",
       tailwind: "muted-foreground",
+      unocss: "--ui-muted-fg",
       site: "--sol-foreground-muted",
     },
+    cssFallback: "hsl(215 16% 47%)",
   },
   {
     id: "foreground-subtle",
     category: "foreground",
     description: "Lowest-emphasis text: metadata, timestamps.",
-    namespaces: { css: null, tailwind: null, site: "--sol-foreground-subtle" },
+    namespaces: { css: null, tailwind: null, unocss: null, site: "--sol-foreground-subtle" },
   },
   {
     id: "foreground-inverse",
     category: "foreground",
     description: "Text on an inverted surface.",
-    namespaces: { css: null, tailwind: null, site: "--sol-foreground-inverse" },
+    namespaces: { css: null, tailwind: null, unocss: null, site: "--sol-foreground-inverse" },
   },
   {
     id: "foreground-on-surface-accent",
     category: "foreground",
     description: "Text on `surface-accent`.",
-    namespaces: { css: null, tailwind: "accent-foreground", site: null },
+    namespaces: {
+      css: null,
+      tailwind: "accent-foreground",
+      unocss: null,
+      site: null,
+    },
   },
   {
     id: "foreground-on-surface-raised",
     category: "foreground",
     description: "Text on `surface-raised`.",
-    namespaces: { css: null, tailwind: "popover-foreground", site: null },
+    namespaces: {
+      css: null,
+      tailwind: "popover-foreground",
+      unocss: null,
+      site: null,
+    },
   },
 
   // ── Intent ─────────────────────────────────────────────────────────────────
@@ -137,7 +204,13 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     id: "primary",
     category: "intent",
     description: "Primary action fill and active-state accent.",
-    namespaces: { css: "--ui-primary", tailwind: "primary", site: "--sol-primary" },
+    namespaces: {
+      css: "--ui-primary",
+      tailwind: "primary",
+      unocss: "--ui-primary",
+      site: "--sol-primary",
+    },
+    cssFallback: "hsl(222 47% 11%)",
   },
   {
     id: "primary-foreground",
@@ -146,122 +219,239 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     namespaces: {
       css: "--ui-primary-fg",
       tailwind: "primary-foreground",
+      unocss: "--ui-primary-fg",
       site: "--sol-primary-foreground",
     },
+    cssFallback: "hsl(0 0% 100%)",
   },
   {
     id: "primary-hover",
     category: "intent",
     description: "Primary fill under pointer hover.",
-    namespaces: { css: "--ui-primary-hover", tailwind: null, site: "--sol-primary-hover" },
+    namespaces: {
+      css: "--ui-primary-hover",
+      tailwind: "primary-hover",
+      unocss: "--ui-primary-hover",
+      site: "--sol-primary-hover",
+    },
+    cssFallback: "hsl(222 47% 20%)",
   },
   {
     id: "secondary",
     category: "intent",
     description: "Secondary action fill.",
-    namespaces: { css: "--ui-secondary", tailwind: "secondary", site: "--sol-secondary" },
+    namespaces: {
+      css: "--ui-secondary",
+      tailwind: "secondary",
+      unocss: "--ui-secondary",
+      site: "--sol-secondary",
+    },
+    cssFallback: "hsl(210 40% 96%)",
   },
   {
     id: "secondary-foreground",
     category: "intent",
     description: "Text and icons on `secondary`.",
-    namespaces: { css: "--ui-secondary-fg", tailwind: "secondary-foreground", site: null },
+    namespaces: {
+      css: "--ui-secondary-fg",
+      tailwind: "secondary-foreground",
+      unocss: "--ui-secondary-fg",
+      site: null,
+    },
+    cssFallback: "hsl(222 47% 11%)",
   },
   {
     id: "secondary-hover",
     category: "intent",
     description: "Secondary fill under pointer hover.",
-    namespaces: { css: "--ui-secondary-hover", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-secondary-hover",
+      tailwind: "secondary-hover",
+      unocss: "--ui-secondary-hover",
+      site: null,
+    },
+    cssFallback: "hsl(210 40% 90%)",
   },
   {
     id: "destructive",
     category: "intent",
     description: "Destructive action fill and error accent.",
-    namespaces: { css: "--ui-destructive", tailwind: "destructive", site: "--sol-destructive" },
+    namespaces: {
+      css: "--ui-destructive",
+      tailwind: "destructive",
+      unocss: "--ui-destructive",
+      site: "--sol-destructive",
+    },
+    cssFallback: "hsl(0 84% 60%)",
   },
   {
     id: "destructive-foreground",
     category: "intent",
     description: "Text and icons on `destructive`.",
-    namespaces: { css: "--ui-destructive-fg", tailwind: "destructive-foreground", site: null },
+    namespaces: {
+      css: "--ui-destructive-fg",
+      tailwind: "destructive-foreground",
+      unocss: "--ui-destructive-fg",
+      site: null,
+    },
+    cssFallback: "hsl(0 0% 100%)",
   },
   {
     id: "destructive-hover",
     category: "intent",
     description: "Destructive fill under pointer hover.",
-    namespaces: { css: "--ui-destructive-hover", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-destructive-hover",
+      tailwind: "destructive-hover",
+      unocss: "--ui-destructive-hover",
+      site: null,
+    },
+    cssFallback: "hsl(0 84% 52%)",
   },
   {
     id: "success",
     category: "intent",
     description: "Success status accent.",
-    namespaces: { css: "--ui-success-fg", tailwind: null, site: "--sol-success" },
+    namespaces: {
+      css: "--ui-success-fg",
+      tailwind: "success",
+      unocss: "--ui-success-fg",
+      site: "--sol-success",
+    },
+    cssFallback: "hsl(142 71% 35%)",
   },
   {
     id: "success-surface",
     category: "intent",
     description: "Success status background.",
-    namespaces: { css: "--ui-success-bg", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-success-bg",
+      tailwind: "success-surface",
+      unocss: "--ui-success-bg",
+      site: null,
+    },
+    cssFallback: "hsl(142 71% 96%)",
   },
   {
     id: "success-border",
     category: "intent",
     description: "Success status border.",
-    namespaces: { css: "--ui-success-border", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-success-border",
+      tailwind: "success-border",
+      unocss: "--ui-success-border",
+      site: null,
+    },
+    cssFallback: "hsl(142 71% 80%)",
   },
   {
     id: "warning",
     category: "intent",
     description: "Warning status accent.",
-    namespaces: { css: "--ui-warning-fg", tailwind: null, site: "--sol-warning" },
+    namespaces: {
+      css: "--ui-warning-fg",
+      tailwind: "warning",
+      unocss: "--ui-warning-fg",
+      site: "--sol-warning",
+    },
+    cssFallback: "hsl(38 92% 40%)",
   },
   {
     id: "warning-surface",
     category: "intent",
     description: "Warning status background.",
-    namespaces: { css: "--ui-warning-bg", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-warning-bg",
+      tailwind: "warning-surface",
+      unocss: "--ui-warning-bg",
+      site: null,
+    },
+    cssFallback: "hsl(38 92% 95%)",
   },
   {
     id: "warning-border",
     category: "intent",
     description: "Warning status border.",
-    namespaces: { css: "--ui-warning-border", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-warning-border",
+      tailwind: "warning-border",
+      unocss: "--ui-warning-border",
+      site: null,
+    },
+    cssFallback: "hsl(38 92% 75%)",
   },
   {
     id: "danger",
     category: "intent",
     description: "Error status accent, distinct from the destructive action fill.",
-    namespaces: { css: "--ui-error-fg", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-error-fg",
+      tailwind: "danger",
+      unocss: "--ui-error-fg",
+      site: null,
+    },
+    // Matches the literal used by alert's error state before this identity existed.
+    cssFallback: "hsl(214 80% 30%)",
   },
   {
     id: "danger-surface",
     category: "intent",
     description: "Error status background.",
-    namespaces: { css: "--ui-error-bg", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-error-bg",
+      tailwind: "danger-surface",
+      unocss: "--ui-error-bg",
+      site: null,
+    },
+    cssFallback: "hsl(214 95% 97%)",
   },
   {
     id: "danger-border",
     category: "intent",
     description: "Error status border.",
-    namespaces: { css: "--ui-error-border", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-error-border",
+      tailwind: "danger-border",
+      unocss: "--ui-error-border",
+      site: null,
+    },
+    cssFallback: "hsl(214 80% 80%)",
   },
   {
     id: "info",
     category: "intent",
     description: "Informational status accent.",
-    namespaces: { css: "--ui-info-fg", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-info-fg",
+      tailwind: "info",
+      unocss: "--ui-info-fg",
+      site: null,
+    },
+    cssFallback: "hsl(214 80% 30%)",
   },
   {
     id: "info-surface",
     category: "intent",
     description: "Informational status background.",
-    namespaces: { css: "--ui-info-bg", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-info-bg",
+      tailwind: "info-surface",
+      unocss: "--ui-info-bg",
+      site: null,
+    },
+    cssFallback: "hsl(214 95% 97%)",
   },
   {
     id: "info-border",
     category: "intent",
     description: "Informational status border.",
-    namespaces: { css: "--ui-info-border", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-info-border",
+      tailwind: "info-border",
+      unocss: "--ui-info-border",
+      site: null,
+    },
+    cssFallback: "hsl(214 80% 80%)",
   },
 
   // ── Border ─────────────────────────────────────────────────────────────────
@@ -269,19 +459,25 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     id: "border",
     category: "border",
     description: "Default separator and control border.",
-    namespaces: { css: "--ui-border", tailwind: "border", site: "--sol-border" },
+    namespaces: {
+      css: "--ui-border",
+      tailwind: "border",
+      unocss: "--ui-border",
+      site: "--sol-border",
+    },
+    cssFallback: "hsl(214 32% 91%)",
   },
   {
     id: "border-muted",
     category: "border",
     description: "Low-emphasis divider.",
-    namespaces: { css: null, tailwind: null, site: "--sol-border-muted" },
+    namespaces: { css: null, tailwind: null, unocss: null, site: "--sol-border-muted" },
   },
   {
     id: "border-active",
     category: "border",
     description: "Border of a selected or active control.",
-    namespaces: { css: null, tailwind: null, site: "--sol-border-active" },
+    namespaces: { css: null, tailwind: null, unocss: null, site: "--sol-border-active" },
   },
 
   // ── Focus ──────────────────────────────────────────────────────────────────
@@ -289,13 +485,22 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     id: "focus-ring",
     category: "focus",
     description: "Focus-visible ring colour.",
-    namespaces: { css: null, tailwind: "ring", site: "--sol-focus-ring" },
+    namespaces: {
+      // No shipped stylesheet declared a literal focus-ring colour before this
+      // identity existed — every profile used the primary intent colour, which
+      // this spelling now makes explicit and overridable independently.
+      css: "--ui-focus-ring",
+      tailwind: "ring",
+      unocss: "--ui-focus-ring",
+      site: "--sol-focus-ring",
+    },
+    cssFallback: "hsl(222 47% 11%)",
   },
   {
     id: "focus-ring-width",
     category: "focus",
     description: "Focus-visible ring width.",
-    namespaces: { css: null, tailwind: null, site: "--sol-focus-ring-width" },
+    namespaces: { css: null, tailwind: null, unocss: null, site: "--sol-focus-ring-width" },
   },
 
   // ── Radius ─────────────────────────────────────────────────────────────────
@@ -303,25 +508,52 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     id: "radius",
     category: "radius",
     description: "Default corner radius for controls and containers.",
-    namespaces: { css: "--ui-radius", tailwind: null, site: "--sol-radius-md" },
+    namespaces: {
+      css: "--ui-radius",
+      tailwind: "radius",
+      unocss: "--ui-radius",
+      site: "--sol-radius-md",
+    },
+    cssFallback: "0.375rem",
   },
   {
     id: "radius-sm",
     category: "radius",
     description: "Small corner radius.",
-    namespaces: { css: null, tailwind: null, site: "--sol-radius-sm" },
+    namespaces: {
+      // Matches the literal 0.25rem radius used throughout checkbox/menu/popover/
+      // select/toast/tooltip/prose before this identity existed.
+      css: "--ui-radius-sm",
+      tailwind: "radius-sm",
+      unocss: "--ui-radius-sm",
+      site: "--sol-radius-sm",
+    },
+    cssFallback: "0.25rem",
   },
   {
     id: "radius-lg",
     category: "radius",
     description: "Large corner radius.",
-    namespaces: { css: null, tailwind: null, site: "--sol-radius-lg" },
+    namespaces: {
+      css: "--ui-radius-lg",
+      tailwind: "radius-lg",
+      unocss: "--ui-radius-lg",
+      site: "--sol-radius-lg",
+    },
+    cssFallback: "0.5rem",
   },
   {
     id: "radius-full",
     category: "radius",
     description: "Fully rounded, for pills and thumbs.",
-    namespaces: { css: null, tailwind: null, site: "--sol-radius-full" },
+    namespaces: {
+      // Matches the literal 9999px radius used by switch before this identity existed.
+      css: "--ui-radius-full",
+      tailwind: "radius-full",
+      unocss: "--ui-radius-full",
+      site: "--sol-radius-full",
+    },
+    cssFallback: "9999px",
   },
 
   // ── Shadow ─────────────────────────────────────────────────────────────────
@@ -329,19 +561,41 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     id: "shadow-sm",
     category: "shadow",
     description: "Subtle elevation.",
-    namespaces: { css: null, tailwind: null, site: "--sol-shadow-sm" },
+    namespaces: {
+      // Matches the literal shadow used by switch/tooltip before this identity existed.
+      css: "--ui-shadow-sm",
+      tailwind: "shadow-sm",
+      unocss: "--ui-shadow-sm",
+      site: "--sol-shadow-sm",
+    },
+    cssFallback: "0 1px 3px rgb(0 0 0 / 0.1)",
   },
   {
     id: "shadow-md",
     category: "shadow",
     description: "Standard elevation for popovers and cards.",
-    namespaces: { css: null, tailwind: null, site: "--sol-shadow-md" },
+    namespaces: {
+      // Matches the literal shadow used by menu/popover/select/toast before this
+      // identity existed.
+      css: "--ui-shadow-md",
+      tailwind: "shadow-md",
+      unocss: "--ui-shadow-md",
+      site: "--sol-shadow-md",
+    },
+    cssFallback: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
   },
   {
     id: "shadow-lg",
     category: "shadow",
     description: "High elevation for modals and drawers.",
-    namespaces: { css: null, tailwind: null, site: "--sol-shadow-lg" },
+    namespaces: {
+      // Matches the literal shadow used by dialog before this identity existed.
+      css: "--ui-shadow-lg",
+      tailwind: "shadow-lg",
+      unocss: "--ui-shadow-lg",
+      site: "--sol-shadow-lg",
+    },
+    cssFallback: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
   },
 
   // ── Typography ─────────────────────────────────────────────────────────────
@@ -349,13 +603,26 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     id: "font-sans",
     category: "typography",
     description: "UI and body typeface stack.",
-    namespaces: { css: "--ui-font-sans", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-font-sans",
+      tailwind: null,
+      unocss: "--ui-font-sans",
+      site: null,
+    },
+    cssFallback: "system-ui, -apple-system, sans-serif",
   },
   {
     id: "font-mono",
     category: "typography",
     description: "Code, command, and API-symbol typeface stack.",
-    namespaces: { css: "--ui-font-mono", tailwind: null, site: null },
+    namespaces: {
+      css: "--ui-font-mono",
+      tailwind: null,
+      unocss: "--ui-font-mono",
+      site: null,
+    },
+    cssFallback:
+      "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 ]
 
@@ -377,6 +644,11 @@ export function tokenSpelling(id: string, namespace: TokenNamespace): string | u
   return TOKEN_INDEX.get(id)?.namespaces[namespace] ?? undefined
 }
 
+/** The `css`/`unocss` var() fallback literal for an identity, if one is recorded. */
+export function tokenCssFallback(id: string): string | undefined {
+  return TOKEN_INDEX.get(id)?.cssFallback
+}
+
 /**
  * Identities a namespace cannot express.
  *
@@ -390,8 +662,10 @@ export function unmappedTokens(namespace: TokenNamespace): SemanticToken[] {
 /**
  * Legacy `--ui-*` spellings with no canonical identity.
  *
- * `--ui-foreground` is used once (packages/recipes-css/src/styles/badge.css) where every
- * other stylesheet uses `--ui-fg`. It is a typo-level duplicate, not a distinct token.
+ * `--ui-foreground` was used once (packages/recipes-css/src/styles/badge.css) where
+ * every other stylesheet used `--ui-fg`. RECIPE-002 replaced that literal with the
+ * `foreground` identity's canonical spelling; the alias stays so any external
+ * reference to the old name keeps resolving.
  */
 export const LEGACY_TOKEN_ALIASES: Readonly<Record<string, string>> = {
   "--ui-foreground": "--ui-fg",

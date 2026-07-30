@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run --passWithNoTests",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

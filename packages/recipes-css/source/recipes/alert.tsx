@@ -1,6 +1,8 @@
 /**
  * Styled Alert — CSS recipe wrapper.
- * Import the stylesheet separately: `import "@solidiom/recipes-css/styles/alert.css"`
+ * The stylesheet keys entirely off the primitive's own `data-state`, so no wrapper
+ * class is needed. Import the stylesheet separately:
+ * `import "@solidiom/recipes-css/styles/alert.css"`
  */
 import { type JSX } from "@solidjs/web"
 import * as Alert from "@solidiom/alert"
@@ -13,13 +15,8 @@ export function StyledAlert(props: {
   variant?: AlertVariant
   assertiveness?: "assertive" | "polite"
 }) {
-  const variant = () => props.variant ?? "info"
   return (
-    <Alert.Root
-      type={variant()}
-      assertiveness={props.assertiveness}
-      class={`solidiom-alert--${variant()}`}
-    >
+    <Alert.Root type={props.variant ?? "info"} assertiveness={props.assertiveness}>
       {props.children}
     </Alert.Root>
   )

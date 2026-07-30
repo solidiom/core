@@ -1,6 +1,8 @@
 /**
  * Styled Alert — CSS recipe wrapper.
- * Import the stylesheet separately: `import "@solidiom/recipes-css/styles/alert.css"`
+ * The stylesheet keys entirely off the primitive's own `data-state`, so no wrapper
+ * class is needed. Import the stylesheet separately:
+ * `import "@solidiom/recipes-css/styles/alert.css"`
  */
 import { type JSX } from "@solidjs/web";
 import * as Alert from "@solidiom/alert";
