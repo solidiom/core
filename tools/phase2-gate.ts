@@ -202,11 +202,11 @@ console.log("    Target: Phase 3 (initial beta stabilization)")
 console.log("")
 console.log("  ⊘ Migration matrix (Task 49) — descoped")
 console.log("    Reason: Greenfield product with no prior release; no migration source exists.")
-console.log("    Reference: docs/decisions/descope-migration-legacy.md")
+console.log("    Reference: descope decision (archived — see git history)")
 console.log("")
 console.log("  ⊘ Legacy CLI + sunset metadata (Task 50) — descoped")
 console.log("    Reason: No backwards-compatibility contract; no legacy surface to track.")
-console.log("    Reference: docs/decisions/descope-migration-legacy.md")
+console.log("    Reference: descope decision (archived — see git history)")
 
 // ─── Summary ────────────────────────────────────────────────────────────
 summarize("Phase 2 Gate")
