@@ -1,12 +1,17 @@
 {
   "schemaVersion": 2,
   "primitive": "data-table",
-  "evidenceIds": ["data-table-axe-default", "data-table-axe-sorted"],
+  "evidenceIds": ["axe-data-table-scan-v1"],
   "summary": {
-    "passes": 10,
+    "passes": 5,
     "violations": 0,
     "incomplete": 0,
     "outcome": "pass"
   },
-  "lastRun": "2026-07-29T00:00:00.000Z"
+  "lastRun": "2026-07-30T23:06:58.020Z",
+  "provenance": {
+    "browser": "chromium",
+    "commitSha": "63a4a37f636f6ff9cd0b0c4f62d8afceb7776487",
+    "ciRunUrl": null
+  }
 }

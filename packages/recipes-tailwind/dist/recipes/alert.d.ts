@@ -1,8 +1,7 @@
 /**
  * Styled Alert — Tailwind recipe wrapper.
- * Import stylesheet: `import "@solidiom/recipes-tailwind/styles/alert.css"`
- *
- * Variant classes (`solidiom-alert--<variant>`) key CSS selectors in alert.css.
+ * The stylesheet keys entirely off the primitive's own `data-state`, so no wrapper
+ * class is needed. Import stylesheet: `import "@solidiom/recipes-tailwind/styles/alert.css"`
  */
 import { type JSX } from "@solidjs/web";
 import * as Alert from "@solidiom/alert";

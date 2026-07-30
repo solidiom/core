@@ -211,7 +211,15 @@ function extractStaticRecipes(code: string, _id: string): string | null {
  * inline the result directly. Eliminates the lookup at runtime.
  *
  * Before: buttonVariants({ variant: "destructive", size: "sm" })
- * After:  "solidiom-btn solidiom-btn--destructive solidiom-btn--sm"
+ * After:  "solidiom-btn solidiom-btn--destructive solidiom-btn--sm solidiom-btn--destructive-icon"
+ *
+ * Compound variants (RECIPE-002/003 generated cva() calls include a `compoundVariants`
+ * array) are appended after the single-axis classes, in declaration order, whenever
+ * every one of a compound's conditions matches the static call arguments — the same
+ * "declaration order, last match can still add classes" semantics the canonical
+ * contract requires (docs/contracts/recipe-contract.md §2.4). A definition with
+ * compound variants that this function cannot statically resolve is left untouched
+ * rather than silently expanded with the compound classes missing.
  */
 function expandStaticVariants(code: string, _id: string): string | null {
   // Match calls like: variantFn({ key: "literal", key2: "literal" })
@@ -234,11 +242,21 @@ function expandStaticVariants(code: string, _id: string): string | null {
 
     // Compute the result class string
     const classes = [def.base]
+    const resolved: Record<string, string | undefined> = {}
     for (const [key, variants] of Object.entries(def.variants)) {
       const value = args[key] ?? def.defaults[key]
+      resolved[key] = value
       if (value && variants[value]) {
         classes.push(variants[value])
       }
+    }
+
+    // Compound variants apply, in declaration order, whenever every axis in `when`
+    // matches the resolved value for that axis — mirrors the contract's cascade.
+    for (const compound of def.compoundVariants ?? []) {
+      const whenEntries = Object.entries(compound.when)
+      const allMatch = whenEntries.every(([axis, value]) => resolved[axis] === value)
+      if (allMatch) classes.push(compound.class)
     }
 
     matched = true
@@ -407,6 +425,7 @@ function extractVariantDefs(code: string): Map<
     base: string
     variants: Record<string, Record<string, string>>
     defaults: Record<string, string>
+    compoundVariants: Array<{ when: Record<string, string>; class: string }>
   }
 > {
   const defs = new Map<
@@ -415,6 +434,7 @@ function extractVariantDefs(code: string): Map<
       base: string
       variants: Record<string, Record<string, string>>
       defaults: Record<string, string>
+      compoundVariants: Array<{ when: Record<string, string>; class: string }>
     }
   >()
 
@@ -428,10 +448,24 @@ function extractVariantDefs(code: string): Map<
     const configStr = match[3]!
     const config = parseStaticObject(configStr)
     if (config?.variants) {
+      // cva's compoundVariants entries look like { variant: "ghost", size: "icon", class: "..." }
+      // (or `className` — support both, matching class-variance-authority's own API).
+      const compoundVariants = Array.isArray(config.compoundVariants)
+        ? config.compoundVariants.flatMap(
+            (
+              entry: Record<string, string>,
+            ): Array<{ when: Record<string, string>; class: string }> => {
+              const { class: cls, className, ...when } = entry
+              const resolvedClass = cls ?? className
+              return resolvedClass ? [{ when, class: resolvedClass }] : []
+            },
+          )
+        : []
       defs.set(name, {
         base,
         variants: config.variants,
         defaults: config.defaultVariants ?? {},
+        compoundVariants,
       })
     }
   }

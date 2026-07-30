@@ -33,33 +33,49 @@ function StyledDialog(props) {
 }
 
 // src/recipes/button.tsx
-import { cva } from "class-variance-authority";
 import * as Button from "@solidiom/button";
+
+// src/recipes/button.variants.ts
+import { cva } from "class-variance-authority";
 var buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap border-none font-medium cursor-pointer rounded-radius transition-all",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline"
+        default: "bg-primary text-primary-foreground",
+        destructive: "bg-destructive text-destructive-foreground",
+        outline: "bg-transparent text-foreground border-solid border-border",
+        secondary: "bg-secondary text-secondary-foreground",
+        ghost: "bg-transparent text-foreground",
+        link: "bg-transparent text-primary underline underline-offset-4"
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10"
+        sm: "h-9 py-0 px-3 text-sm",
+        md: "h-10 py-2 px-4 text-sm",
+        lg: "h-11 py-0 px-8 text-base",
+        icon: "h-10 w-10 p-0"
       }
     },
     defaultVariants: {
       variant: "default",
-      size: "default"
-    }
+      size: "md"
+    },
+    compoundVariants: [
+      {
+        variant: "ghost",
+        size: "icon",
+        class: "rounded-radius-full"
+      },
+      {
+        variant: "link",
+        size: "md",
+        class: "h-auto p-0"
+      }
+    ]
   }
 );
+
+// src/recipes/button.tsx
 function StyledButton(props) {
   const className = () => [buttonVariants({ variant: props.variant, size: props.size }), props.class].filter(Boolean).join(" ");
   return <Button.Root
@@ -172,20 +188,35 @@ function StyledSelect(props) {
 
 // src/recipes/badge.tsx
 import * as Badge from "@solidiom/badge";
+
+// src/recipes/badge.variants.ts
+import { cva as cva2 } from "class-variance-authority";
+var badgeVariants = cva2(
+  "inline-flex items-center py-0.5 px-2.5 border-solid border-transparent rounded-radius text-xs leading-4 font-semibold transition-colors",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary-hover",
+        secondary: "bg-secondary-hover",
+        destructive: "bg-destructive-hover",
+        outline: "text-foreground border-border bg-transparent"
+      }
+    },
+    defaultVariants: {
+      variant: "default"
+    }
+  }
+);
+
+// src/recipes/badge.tsx
 function StyledBadge(props) {
-  const variant = () => props.variant ?? "default";
-  return <Badge.Root class={`solidiom-badge--${variant()}`}>{props.children}</Badge.Root>;
+  return <Badge.Root class={badgeVariants({ variant: props.variant })}>{props.children}</Badge.Root>;
 }
 
 // src/recipes/alert.tsx
 import * as Alert from "@solidiom/alert";
 function StyledAlert(props) {
-  const variant = () => props.variant ?? "info";
-  return <Alert.Root
-    type={variant()}
-    assertiveness={props.assertiveness}
-    class={`solidiom-alert--${variant()}`}
-  >
+  return <Alert.Root type={props.variant ?? "info"} assertiveness={props.assertiveness}>
       {props.children}
     </Alert.Root>;
 }
