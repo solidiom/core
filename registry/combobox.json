@@ -34,14 +34,17 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": ["combobox-axe-open", "combobox-axe-closed"]
   },
   "documentation": {
-    "status": "stub",
+    "status": "published",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "reviewed"
+      },
+      "es": {
+        "status": "reviewed"
       }
     }
   },
