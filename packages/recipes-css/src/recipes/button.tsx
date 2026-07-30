@@ -1,35 +1,12 @@
 /**
- * Styled Button — CSS recipe wrapper with CVA variants.
+ * Styled Button — CSS recipe wrapper, using generated variant classes.
  * Import the stylesheet separately: `import "@solidiom/recipes-css/styles/button.css"`
  */
 import { type JSX } from "@solidjs/web"
-import { cva, type VariantProps } from "class-variance-authority"
 import * as Button from "@solidiom/button"
+import { buttonVariants, type ButtonVariantProps } from "./button.variants"
 
-export const buttonVariants = cva("solidiom-btn", {
-  variants: {
-    variant: {
-      default: "solidiom-btn--default",
-      destructive: "solidiom-btn--destructive",
-      outline: "solidiom-btn--outline",
-      secondary: "solidiom-btn--secondary",
-      ghost: "solidiom-btn--ghost",
-      link: "solidiom-btn--link",
-    },
-    size: {
-      default: "solidiom-btn--md",
-      sm: "solidiom-btn--sm",
-      lg: "solidiom-btn--lg",
-      icon: "solidiom-btn--icon",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-    size: "default",
-  },
-})
-
-export type ButtonVariantProps = VariantProps<typeof buttonVariants>
+export { buttonVariants, type ButtonVariantProps }
 
 export interface StyledButtonProps extends ButtonVariantProps {
   children: JSX.Element

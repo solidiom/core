@@ -12,7 +12,7 @@ lifecycle: current
 > **Purpose:** the normative reference for the canonical recipe contract. One definition per recipe; the CSS, Tailwind, and UnoCSS emitters generate every output from it.
 
 **Contract version:** 1
-**Status:** contract and validator shipped (RECIPE-001). Emitters pending (RECIPE-002/003/004).
+**Status:** contract, validator, and all three emitters shipped (RECIPE-001/002/003/004).
 **Task:** `docs/plans/website-tasks.md` §7.1 RECIPE-001
 **Breakdown:** (delivered; task breakdown archived — see git history for `docs/recipe-001-canonical-recipe-contract.md`)
 **Authoring workflow:** `docs/contracts/recipe-authoring-guide.md`
@@ -21,15 +21,20 @@ lifecycle: current
 
 ## 1. Artifacts
 
-| Artifact                                          | Purpose                                                               |
-| ------------------------------------------------- | --------------------------------------------------------------------- |
-| `tools/recipe-contract-schema.ts`                 | Definition types, `CONTRACT_VERSION`, traversal helpers               |
-| `tools/recipe-contract-tokens.ts`                 | 48 canonical token identities and their per-namespace spellings       |
-| `tools/recipe-contract-validate.ts`               | `validateRecipeDefinition()` — the rule checker                       |
-| `tools/recipe-contract-definitions.ts`            | Button, Switch, Dialog reference definitions                          |
-| `tools/recipe-contract.ts`                        | CLI: `pnpm run recipe:contract`                                       |
-| `packages/runtime/src/dom/semantic-vocabulary.ts` | The attribute and state vocabulary, exported from `@solidiom/runtime` |
-| `packages/recipes-tailwind/src/styles/theme.css`  | The Tailwind profile's theme contract                                 |
+| Artifact                                          | Purpose                                                                                                                                    |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tools/recipe-contract-schema.ts`                 | Definition types, `CONTRACT_VERSION`, traversal helpers                                                                                    |
+| `tools/recipe-contract-tokens.ts`                 | 48 canonical token identities and their per-namespace spellings                                                                            |
+| `tools/recipe-contract-validate.ts`               | `validateRecipeDefinition()` — the rule checker                                                                                            |
+| `tools/recipe-contract-definitions.ts`            | Canonical definitions for all 13 shipped recipe scopes                                                                                     |
+| `tools/recipe-contract.ts`                        | CLI: `pnpm run recipe:contract`                                                                                                            |
+| `tools/recipe-emit-core.ts`                       | Profile-agnostic cascade resolution and token substitution shared by all three emitters                                                    |
+| `tools/recipe-emit-css.ts`                        | CSS emitter (RECIPE-002): `pnpm run recipe:emit:css[:check]`                                                                               |
+| `tools/recipe-emit-tailwind.ts`                   | Tailwind emitter (RECIPE-003): `pnpm run recipe:emit:tailwind[:check]`                                                                     |
+| `tools/recipe-emit-tailwind-utilities.ts`         | Declaration → Tailwind utility mapping table, with arbitrary-value fallback                                                                |
+| `tools/recipe-emit-unocss.ts`                     | UnoCSS emitter (RECIPE-004): `pnpm run recipe:emit:unocss[:check]`, also generates `packages/unocss-preset/src/generated-variant-rules.ts` |
+| `packages/runtime/src/dom/semantic-vocabulary.ts` | The attribute and state vocabulary, exported from `@solidiom/runtime`                                                                      |
+| `packages/recipes-tailwind/src/styles/theme.css`  | The Tailwind profile's theme contract                                                                                                      |
 
 All are enforced by `gate:phase1` §9, which `ci.yml` runs on every pull request.
 
@@ -140,19 +145,20 @@ The UnoCSS preset resolves the flag collisions by keeping the bare variant on th
 
 Token **identity** is canonical and shared; token **mechanism** is profile-local.
 
-| Namespace  | Mechanism                       | Defined in                                       |
-| ---------- | ------------------------------- | ------------------------------------------------ |
-| `css`      | `var(--ui-<token>, <fallback>)` | `packages/recipes-css` stylesheets               |
-| `tailwind` | Theme colour names              | `packages/recipes-tailwind/src/styles/theme.css` |
-| `site`     | `--sol-*`                       | `apps/site/src/assets/tokens.css` (BRAND-002)    |
+| Namespace  | Mechanism                                                         | Defined in                                                                         |
+| ---------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `css`      | `var(--ui-<token>, <fallback>)`                                   | `packages/recipes-css` stylesheets, generated by `tools/recipe-emit-css.ts`        |
+| `tailwind` | Theme colour/radius/shadow names                                  | `packages/recipes-tailwind/src/styles/theme.css` (hand-maintained until THEME-003) |
+| `unocss`   | `var(--ui-<token>, <fallback>)` — same runtime namespace as `css` | `packages/recipes-unocss` stylesheets, generated by `tools/recipe-emit-unocss.ts`  |
+| `site`     | `--sol-*`                                                         | `apps/site/src/assets/tokens.css` (BRAND-002)                                      |
 
-A recipe references an identity; the emitter substitutes the spelling. `null` in a token's `namespaces` map means that namespace genuinely cannot express the identity — a gap RECIPE-002/003/004 or THEME-002/003/004 must close, not an oversight. `pnpm run recipe:contract` reports which identities each namespace cannot express for every definition.
+A recipe references an identity; the emitter substitutes the spelling. `null` in a token's `namespaces` map means that namespace genuinely cannot express the identity — a gap RECIPE-002/003/004 or THEME-002/003/004 must close, not an oversight. `pnpm run recipe:contract` reports which identities each namespace cannot express for every definition. RECIPE-002/003/004 closed every `css`/`tailwind`/`unocss` gap that existed while the emitters were pending; only `site` gaps remain, owned by BRAND-002/THEME-002.
 
 Values, light/dark pairs, contrast validation, and migration remain THEME-001..005. This contract owns identities only.
 
 ### 4.1 The Tailwind theme contract
 
-Before RECIPE-001 the Tailwind recipes referenced theme names defined **only** in `apps/docs/src/styles.css`, which `CUT-003` deletes. `packages/recipes-tailwind/src/styles/theme.css` now registers all 17 names as Tailwind v4 `@theme` tokens resolving from the shared `--ui-*` namespace, with fallbacks matching `recipes-css`. `tools/recipe-contract-tokens.test.ts` sweeps every `.css` and `.tsx` source in the package and fails if a referenced theme colour is not registered, so the set stays complete without the count being asserted. Consequences:
+Before RECIPE-001 the Tailwind recipes referenced theme names defined **only** in `apps/docs/src/styles.css`, which `CUT-003` deletes. `packages/recipes-tailwind/src/styles/theme.css` registers every Tailwind v4 `@theme` token the Tailwind emitter's output references — colours, corner radii, and shadows — resolving from the shared `--ui-*` namespace, with fallbacks matching `recipes-css`. `tools/recipe-contract-tokens.test.ts` sweeps every `.css` and `.tsx` source in the package and fails if a referenced theme colour is not registered, so the set stays complete without the count being asserted. Consequences:
 
 - setting `--ui-primary` once themes both profiles;
 - the two profiles agree visually with no theme installed;
@@ -164,7 +170,7 @@ Tailwind v3 consumers have no `@theme`; they must map the same names in `theme.e
 
 Two unrelated kinds, separated:
 
-**Composition exceptions.** A slot with `ownership: "consumer"` is styled but not rendered by the recipe wrapper — repeatable items, optional titles, consumer-supplied collection content. A reason is mandatory. This replaces `COMPOSED_PART_ALLOWLIST` in `tools/audit-recipe-dual-emission.ts`; a test proves every current entry there is expressible as per-slot ownership.
+**Composition exceptions.** A slot with `ownership: "consumer"` is styled but not rendered by the recipe wrapper — repeatable items, optional titles, consumer-supplied collection content. A reason is mandatory. This replaced `COMPOSED_PART_ALLOWLIST` in `tools/audit-recipe-dual-emission.ts` for every scope with a canonical definition; the audit now consults `ownership` first and falls back to the (now-empty) allowlist only for a scope with no definition yet.
 
 **Adapter exceptions.** Adapters must never emit `class` or `style` (`tools/audit-adapter-styling.ts`). The genuine cases are adapter-owned inline geometry: computed coordinates from `adapter-positioning-floating-ui`, transforms from `adapter-virtualization-tanstack`. A slot with `ownership: "adapter"` names the capability port and lists `adapterOwnedProperties`, which are exempt from cross-profile parity assertions.
 
@@ -216,7 +222,7 @@ The cross-part row is why §3.2 of the authoring guide forbids ancestor-state st
 5. Give every variant value real declarations on at least one slot, and give every axis a default.
 6. Run `pnpm run recipe:contract`.
 
-Until the emitters land, hand-authored recipes must follow the same rules — see `docs/contracts/recipe-authoring-guide.md` §3. That is what makes RECIPE-002/003/004 a migration rather than a rewrite.
+All three profiles' recipes are now generated by their emitters (RECIPE-002/003/004) from these definitions — see `docs/contracts/recipe-authoring-guide.md` §4 for the authoring workflow of editing a definition and re-running `pnpm run recipe:emit:css|tailwind|unocss`.
 
 ## 9. Versioning
 
@@ -224,11 +230,10 @@ Until the emitters land, hand-authored recipes must follow the same rules — se
 
 ## 10. Not yet done
 
-| Gap                                                                        | Owner                                                                             |
-| -------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| CSS, Tailwind, UnoCSS emitters                                             | RECIPE-002/003/004                                                                |
-| Coverage and computed-style parity assertions across six artifacts         | RECIPE-005                                                                        |
-| `src`/`source` parity checks for recipe packages                           | RECIPE-006                                                                        |
-| Token values, light/dark pairs, contrast validation                        | THEME-001..005                                                                    |
-| `SemanticAttrsOptions["state"]` narrowed from `string` to per-scope unions | needs a sweep across 52 primitives; the vocabulary guard test covers it meanwhile |
-| Definitions for the remaining 10 recipe-covered primitives                 | RECIPE-002/003                                                                    |
+| Gap                                                                                            | Owner                                                                             |
+| ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Coverage and computed-style parity assertions across six artifacts                             | RECIPE-005                                                                        |
+| `src`/`source` parity checks for recipe packages                                               | RECIPE-006                                                                        |
+| Token values, light/dark pairs, contrast validation                                            | THEME-001..005                                                                    |
+| `SemanticAttrsOptions["state"]` narrowed from `string` to per-scope unions                     | needs a sweep across 52 primitives; the vocabulary guard test covers it meanwhile |
+| `site` namespace token gaps (BRAND-002's `--sol-*` set is not yet complete for every identity) | BRAND-002/THEME-002                                                               |

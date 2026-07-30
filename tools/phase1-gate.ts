@@ -142,23 +142,33 @@ if (untrackedTests.length === 0) {
 console.log("\n§3 Recipe profiles:")
 check("recipes-css source exists", fileExists("packages/recipes-css/src/index.ts"))
 check("recipes-tailwind source exists", fileExists("packages/recipes-tailwind/src/index.ts"))
+check("recipes-unocss source exists", fileExists("packages/recipes-unocss/src/index.ts"))
 check("recipes-css builds", runBuild("@solidiom/recipes-css"))
 check("recipes-tailwind builds", runBuild("@solidiom/recipes-tailwind"))
+check("recipes-unocss builds", runBuild("@solidiom/recipes-unocss"))
 check("recipes-css dist output", fileExists("packages/recipes-css/dist/index.js"))
 check("recipes-tailwind dist output", fileExists("packages/recipes-tailwind/dist/index.js"))
+check("recipes-unocss dist output", fileExists("packages/recipes-unocss/dist/index.js"))
 
 check(
   "recipes-css exports buttonVariants",
   fileContains(
     "packages/recipes-css/src/recipes/button.tsx",
-    /export\s+(const|function)\s+buttonVariants/,
+    /export\s+(const|function)\s+buttonVariants|export\s*\{[^}]*\bbuttonVariants\b/,
   ),
 )
 check(
   "recipes-tailwind exports buttonVariants",
   fileContains(
     "packages/recipes-tailwind/src/recipes/button.tsx",
-    /export\s+(const|function)\s+buttonVariants/,
+    /export\s+(const|function)\s+buttonVariants|export\s*\{[^}]*\bbuttonVariants\b/,
+  ),
+)
+check(
+  "recipes-unocss exports buttonVariants",
+  fileContains(
+    "packages/recipes-unocss/src/recipes/button.tsx",
+    /export\s+(const|function)\s+buttonVariants|export\s*\{[^}]*\bbuttonVariants\b/,
   ),
 )
 
@@ -323,13 +333,39 @@ check(
   contractResult.ok,
   "A recipe definition violates the canonical contract — run: pnpm run recipe:contract",
 )
+check("recipe-emit-css.ts exists", fileExists("tools/recipe-emit-css.ts"))
+const cssEmitResult = run("pnpm exec tsx tools/recipe-emit-css.ts --check")
+check(
+  "generated CSS recipe output matches the canonical definitions",
+  cssEmitResult.ok,
+  "packages/recipes-css is stale relative to tools/recipe-contract-definitions.ts — run: pnpm run recipe:emit:css",
+)
+check("recipe-emit-tailwind.ts exists", fileExists("tools/recipe-emit-tailwind.ts"))
+const tailwindEmitResult = run("pnpm exec tsx tools/recipe-emit-tailwind.ts --check")
+check(
+  "generated Tailwind recipe output matches the canonical definitions",
+  tailwindEmitResult.ok,
+  "packages/recipes-tailwind is stale relative to tools/recipe-contract-definitions.ts — run: pnpm run recipe:emit:tailwind",
+)
+check("recipe-emit-unocss.ts exists", fileExists("tools/recipe-emit-unocss.ts"))
+const unocssEmitResult = run("pnpm exec tsx tools/recipe-emit-unocss.ts --check")
+check(
+  "generated UnoCSS recipe output matches the canonical definitions",
+  unocssEmitResult.ok,
+  "packages/recipes-unocss and packages/unocss-preset are stale relative to tools/recipe-contract-definitions.ts — run: pnpm run recipe:emit:unocss",
+)
 const contractFixtureResult = run(
-  "pnpm exec vitest run tools/recipe-contract-validate.test.ts tools/recipe-contract-vocabulary.test.ts tools/recipe-contract-tokens.test.ts tools/recipe-contract-definitions.test.ts tools/audit-recipe-contract.test.ts",
+  "pnpm exec vitest run tools/recipe-contract-validate.test.ts tools/recipe-contract-vocabulary.test.ts tools/recipe-contract-tokens.test.ts tools/recipe-contract-definitions.test.ts tools/audit-recipe-contract.test.ts tools/recipe-emit-core.test.ts tools/recipe-emit-css.test.ts tools/recipe-emit-tailwind-utilities.test.ts tools/recipe-emit-tailwind.test.ts tools/recipe-emit-unocss.test.ts",
 )
 check(
-  "contract, vocabulary, and token fixtures pass",
+  "contract, vocabulary, token, and emitter fixtures pass",
   contractFixtureResult.ok,
-  "Run: pnpm exec vitest run tools/recipe-contract-validate.test.ts tools/recipe-contract-vocabulary.test.ts tools/recipe-contract-tokens.test.ts tools/recipe-contract-definitions.test.ts tools/audit-recipe-contract.test.ts",
+  "Run: pnpm exec vitest run tools/recipe-contract-validate.test.ts tools/recipe-contract-vocabulary.test.ts tools/recipe-contract-tokens.test.ts tools/recipe-contract-definitions.test.ts tools/audit-recipe-contract.test.ts tools/recipe-emit-core.test.ts tools/recipe-emit-css.test.ts tools/recipe-emit-tailwind-utilities.test.ts tools/recipe-emit-tailwind.test.ts tools/recipe-emit-unocss.test.ts",
+)
+check(
+  "unocss preset fixtures pass",
+  runTests("@solidiom/unocss-preset", 9),
+  "Run: pnpm --filter @solidiom/unocss-preset test",
 )
 
 // ─── 10. P1.5: Umbrella re-export purity check ─────────────────────────

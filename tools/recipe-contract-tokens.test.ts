@@ -20,9 +20,13 @@ const TAILWIND_THEME = join(TAILWIND_SRC, "styles/theme.css")
  *
  * Longest alternatives first: `ring-offset` must precede `ring`, otherwise
  * `ring-offset-background` tokenises as the colour name `offset-background`.
+ *
+ * `border` additionally allows a side infix (`-t`, `-b`, `-l`, `-r`) before the colour
+ * name, e.g. `border-b-primary`, which RECIPE-003's generated per-part border colours
+ * use for cross-part-state-free styling (docs/contracts/recipe-authoring-guide.md §3.2).
  */
 const COLOUR_UTILITIES =
-  /\b(?:bg|text|border|ring-offset|ring|divide|outline|fill|stroke|placeholder|caret|from|via|to)-([a-z][a-z0-9-]*)/g
+  /\b(?:bg|text|border(?:-[tblr])?|ring-offset|ring|divide|outline|fill|stroke|placeholder|caret|from|via|to)-([a-z][a-z0-9-]*)/g
 
 /** Tailwind built-ins and non-colour utility suffixes that need no theme registration. */
 const NOT_A_THEME_COLOUR = new Set([
@@ -34,6 +38,8 @@ const NOT_A_THEME_COLOUR = new Set([
   "b-2",
   "l-2",
   "none",
+  "solid",
+  "dashed",
   "collapse",
   "current",
   "transparent",
@@ -131,6 +137,12 @@ describe("Tailwind profile theme contract", () => {
   const registered = new Set(
     [...theme.matchAll(/--color-([a-z][a-z0-9-]*)\s*:/g)].map((match) => match[1]),
   )
+  const registeredRadii = new Set(
+    [...theme.matchAll(/--radius-([a-z][a-z0-9-]*)\s*:/g)].map((match) => match[1]),
+  )
+  const registeredShadows = new Set(
+    [...theme.matchAll(/--shadow-([a-z][a-z0-9-]*)\s*:/g)].map((match) => match[1]),
+  )
   const referenced = new Set(
     [...readAll(TAILWIND_SRC, ".css").matchAll(COLOUR_UTILITIES)]
       .concat([...readAll(TAILWIND_SRC, ".tsx").matchAll(COLOUR_UTILITIES)])
@@ -147,17 +159,27 @@ describe("Tailwind profile theme contract", () => {
   })
 
   it("resolves every registered name from the shared --ui-* namespace", () => {
-    for (const [, value] of theme.matchAll(/--color-[a-z0-9-]+:\s*([^;]+);/g)) {
+    for (const [, value] of theme.matchAll(/--(?:color|radius|shadow)-[a-z0-9-]+:\s*([^;]+);/g)) {
       expect(value, "theme tokens must read the shared runtime namespace").toContain("var(--ui-")
     }
   })
 
   it("keeps the theme contract consistent with the canonical token spellings", () => {
-    // Every canonical identity with a tailwind spelling must be registered.
+    // Every canonical identity with a tailwind spelling must be registered under the
+    // theme namespace that matches its category — colours under --color-*, radii under
+    // --radius-*, shadows under --shadow-*.
     for (const token of SEMANTIC_TOKENS) {
       const spelling = tokenSpelling(token.id, "tailwind")
       if (!spelling) continue
-      expect(registered.has(spelling), `${token.id} → ${spelling} is not in theme.css`).toBe(true)
+      const registeredSet =
+        token.category === "radius"
+          ? registeredRadii
+          : token.category === "shadow"
+            ? registeredShadows
+            : registered
+      expect(registeredSet.has(spelling), `${token.id} → ${spelling} is not in theme.css`).toBe(
+        true,
+      )
     }
   })
 })
@@ -169,7 +191,8 @@ describe("token lookup helpers", () => {
   })
 
   it("returns undefined for a namespace with no equivalent", () => {
-    expect(tokenSpelling("shadow-lg", "css")).toBeUndefined()
+    expect(tokenSpelling("shadow-lg", "css")).toBe("--ui-shadow-lg")
+    expect(tokenSpelling("surface-sunken", "css")).toBeUndefined()
     expect(tokenSpelling("primary", "css")).toBe("--ui-primary")
   })
 })

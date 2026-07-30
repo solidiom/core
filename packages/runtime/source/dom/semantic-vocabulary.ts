@@ -44,12 +44,14 @@ export const SEMANTIC_SIZES = ["sm", "base", "lg"] as const
  * Legal `data-state` values per scope.
  *
  * Read from the `applySemanticAttrs({ state })` call sites in each primitive.
- * Scopes absent from this map emit no state at all.
+ * Scopes with no state declare an empty list. A scope absent from this map is unknown to
+ * the recipe contract, so adding a primitive or state requires updating this vocabulary.
  */
 export const SCOPE_STATES: Readonly<Record<string, readonly string[]>> = {
   accordion: ["open", "closed"],
   alert: ["info", "success", "warning", "error"],
   "alert-dialog": ["open", "closed"],
+  badge: [],
   button: ["on", "off"],
   carousel: ["active", "inactive"],
   checkbox: ["checked", "unchecked", "indeterminate"],
@@ -75,6 +77,7 @@ export const SCOPE_STATES: Readonly<Record<string, readonly string[]>> = {
   sheet: ["open", "closed"],
   switch: ["on", "off"],
   tabs: ["active", "inactive"],
+  toast: [],
   toggle: ["on", "off"],
   "toggle-group": ["on", "off"],
   toolbar: ["on", "off"],
