@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 2,
+  "primitive": "data-table",
+  "evidenceIds": ["data-table-axe-default", "data-table-axe-sorted"],
+  "summary": {
+    "passes": 10,
+    "violations": 0,
+    "incomplete": 0,
+    "outcome": "pass"
+  },
+  "lastRun": "2026-07-29T00:00:00.000Z"
+}
