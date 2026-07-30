@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 100 100" role="img" aria-labelledby="solidiom-favicon-title">
+  <title id="solidiom-favicon-title">Solidiom</title>
+  <!--
+    Favicon source (SVG favicon, modern browsers). Built from
+    symbol-small.svg's simplified geometry so the mark stays legible at
+    16x16-32x32 in a browser tab. Raster favicon.ico / apple-touch-icon
+    variants must be generated from this file (see BRAND-004 asset
+    manifest below) rather than hand-drawn separately.
+  -->
+  <path
+    d="M 70 20
+       C 50 20, 34 30, 34 44
+       C 34 55, 44 59, 58 61"
+    fill="none"
+    stroke="#6D66F1"
+    stroke-width="15"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 30 80
+       C 50 80, 66 70, 66 56
+       C 66 45, 56 41, 42 39"
+    fill="none"
+    stroke="#6D66F1"
+    stroke-width="15"
+    stroke-linecap="round"
+  />
+</svg>

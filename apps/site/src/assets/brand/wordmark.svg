@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="100" viewBox="0 0 560 100" role="img" aria-labelledby="solidiom-wordmark-title">
+  <title id="solidiom-wordmark-title">Solidiom</title>
+  <!--
+    Primary horizontal lockup: symbol + lowercase wordmark, per
+    docs/solidiom/README.md section 6 ("lowercase wordmark: solidiom").
+    Source asset — set in Inter Tight (display face, BRAND-003). This
+    file references the font by family name for design-tool editing;
+    production rendering should convert text to outlines before export
+    to any raster/print artifact so the mark does not depend on font
+    availability.
+  -->
+  <g transform="translate(0, 0)">
+    <path
+      d="M 68 18
+         C 50 18, 36 28, 36 42
+         C 36 54, 46 58, 58 60"
+      fill="none"
+      stroke="#6D66F1"
+      stroke-width="11"
+      stroke-linecap="round"
+    />
+    <path
+      d="M 32 82
+         C 50 82, 64 72, 64 58
+         C 64 46, 54 42, 42 40"
+      fill="none"
+      stroke="#6D66F1"
+      stroke-width="11"
+      stroke-linecap="round"
+    />
+  </g>
+  <text
+    x="118"
+    y="68"
+    font-family="Inter Tight, Inter, sans-serif"
+    font-size="52"
+    font-weight="600"
+    letter-spacing="-0.5"
+    fill="#111827"
+  >solidiom</text>
+</svg>
