@@ -265,6 +265,14 @@ check(
   a11yResult.ok,
   "Run: pnpm run test:a11y",
 )
+const a11yEvidenceResult = a11yResult.ok
+  ? run("pnpm run report:a11y-evidence")
+  : { ok: false, stdout: "", stderr: "a11y scan did not complete" }
+check(
+  "stable per-primitive accessibility evidence is published from the executed result artifact",
+  a11yEvidenceResult.ok,
+  "Run: pnpm run report:a11y-evidence",
+)
 const axeReportResult = a11yResult.ok
   ? run("pnpm run report:axe")
   : { ok: false, stdout: "", stderr: "a11y scan did not complete" }
@@ -274,21 +282,23 @@ check(
   "Run: pnpm run report:axe",
 )
 check("executed axe result artifact exists", fileExists("artifacts/axe-results.json"))
+check("published a11y evidence artifact exists", fileExists("artifacts/a11y-evidence.json"))
 check(
   "CI a11y job runs the executable scan and report commands",
   fileContains(".github/workflows/ci.yml", "run: pnpm run test:a11y") &&
+    fileContains(".github/workflows/ci.yml", "run: pnpm run report:a11y-evidence") &&
     fileContains(".github/workflows/ci.yml", "run: pnpm run report:axe"),
 )
 
 // ─── 9. P1.4: Recipe dual-emission drift check ─────────────────────────
 console.log("\n§9 Recipe dual-emission drift check:")
 const auditFixtureResult = run(
-  "pnpm exec vitest run tools/audit-recipe-dual-emission.test.ts tools/audit-umbrella-purity.test.ts tools/axe-results.test.ts",
+  "pnpm exec vitest run tools/audit-recipe-dual-emission.test.ts tools/audit-umbrella-purity.test.ts tools/axe-results.test.ts tools/a11y-evidence.test.ts",
 )
 check(
   "audit and result-validation negative fixtures pass",
   auditFixtureResult.ok,
-  "Run: pnpm exec vitest run tools/audit-recipe-dual-emission.test.ts tools/audit-umbrella-purity.test.ts tools/axe-results.test.ts",
+  "Run: pnpm exec vitest run tools/audit-recipe-dual-emission.test.ts tools/audit-umbrella-purity.test.ts tools/axe-results.test.ts tools/a11y-evidence.test.ts",
 )
 check("audit-recipe-dual-emission.ts exists", fileExists("tools/audit-recipe-dual-emission.ts"))
 const driftResult = run("pnpm exec tsx tools/audit-recipe-dual-emission.ts")

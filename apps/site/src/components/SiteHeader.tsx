@@ -4,6 +4,7 @@ import * as NavigationMenu from "@solidiom/navigation-menu"
 import * as Drawer from "@solidiom/drawer"
 import { ThemeToggle } from "./ThemeToggle"
 import { LanguageSwitcher } from "./LanguageSwitcher"
+import { SiteSearch } from "./SiteSearch"
 import type { Locale } from "../lib/locale"
 
 export interface NavLink {
@@ -67,6 +68,7 @@ export function SiteHeader(props: SiteHeaderProps) {
         </nav>
 
         <div class="site-header__actions">
+          <SiteSearch locale={locale()} />
           <LanguageSwitcher locale={locale()} targetPath={props.alternatePath} />
           <ThemeToggle />
         </div>

@@ -1,5 +1,6 @@
 ---
 contentSchemaVersion: 1
+accessibilityContractSchemaVersion: 1
 title: Dialog accessibility contract
 description: Keyboard, focus, semantic, and consumer responsibilities for Dialog.
 locale: en
@@ -33,8 +34,11 @@ consumerDuties:
   - Keep a visible, keyboard-operable dismissal action unless the workflow has a documented exception.
   - Use an alert dialog for confirmations that require an explicit destructive-action decision.
 nonApplicableCriteria:
-  - Native portalling is deferred while Solid 2 Portal APIs are unstable; the API contract does not depend on DOM relocation.
+  - criterion: portalling
+    rationale: Native portalling is deferred while Solid 2 Portal APIs are unstable; the API contract does not depend on DOM relocation.
 reviewStatus: reviewed
+reviewedBy: Solidiom accessibility review
+reviewedAt: 2026-07-27T00:00:00.000Z
 ---
 
 ## Automated evidence

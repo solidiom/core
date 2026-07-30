@@ -2,6 +2,7 @@
 contentSchemaVersion: 1
 title: Dialog
 description: Presenta contenido modal o no modal que requiere una interacción enfocada.
+keywords: [modal, superposición, foco]
 locale: es
 maturity: beta
 product: Dialog

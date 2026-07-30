@@ -5,11 +5,7 @@ import { tmpdir } from "node:os"
 import { execSync } from "node:child_process"
 import { createHash, createHmac } from "node:crypto"
 
-import {
-  computeFilesHash,
-  computeEntriesHash,
-  generateKeywords,
-} from "./registry-build"
+import { computeFilesHash, computeEntriesHash, generateKeywords } from "./registry-build"
 
 // ─── Unit Tests ──────────────────────────────────────────────────────────────
 
@@ -112,13 +108,21 @@ describe("generateKeywords", () => {
   })
 
   it("includes capability names", () => {
-    const capabilities = [{ name: "positioning", version: 1, default: "@solidiom/adapter-positioning-floating-ui" }]
+    const capabilities = [
+      { name: "positioning", version: 1, default: "@solidiom/adapter-positioning-floating-ui" },
+    ]
     const keywords = generateKeywords("Popover", "overlay component", "overlay", capabilities, [])
     expect(keywords).toContain("positioning")
   })
 
   it("includes dependency names without @solidiom/ prefix", () => {
-    const keywords = generateKeywords("Dialog", "modal dialog", "overlay", [], ["@solidiom/runtime"])
+    const keywords = generateKeywords(
+      "Dialog",
+      "modal dialog",
+      "overlay",
+      [],
+      ["@solidiom/runtime"],
+    )
     expect(keywords).toContain("runtime")
   })
 
@@ -330,6 +334,35 @@ describe("REG-003 manifest fields", () => {
       const sorted = [...primitive.searchKeywords].sort()
       expect(primitive.searchKeywords).toEqual(sorted)
     }
+  })
+
+  it("sources registry fields from package metadata and authored documentation", () => {
+    const dialog = JSON.parse(readFileSync(join(REGISTRY_DIR, "dialog.json"), "utf8"))
+    const index = JSON.parse(readFileSync(join(REGISTRY_DIR, "index.json"), "utf8"))
+    const dialogIndex = index.primitives.find(
+      (primitive: { name: string }) => primitive.name === "dialog",
+    )
+
+    expect(dialog.status).toBe("preview")
+    expect(dialog.deliverables).toEqual({ primitive: true })
+    expect(dialog.styling.themeCompatible).toEqual(["site"])
+    expect(dialog.search.keywords).toEqual(
+      expect.arrayContaining(["modal", "overlay", "focus", "superposición"]),
+    )
+    expect(dialog.documentation.locales).toEqual({
+      en: { status: "draft" },
+      es: { status: "draft" },
+    })
+    expect(dialog.provenance).toEqual({
+      repository: "https://github.com/solidiom/solidiom",
+      directory: "packages/dialog",
+    })
+    expect(dialogIndex).toMatchObject({
+      accessibility: { reviewStatus: "automated", evidenceIds: ["axe-dialog-scan-v1"] },
+      documentationLocales: dialog.documentation.locales,
+      themeCompatible: ["site"],
+      provenance: dialog.provenance,
+    })
   })
 
   it("search keywords include capability names when present", () => {

@@ -19,11 +19,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "accordion",
         "collapsible",
@@ -33,7 +43,11 @@
         "set",
         "stacked",
         "vertically"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/accordion"
+      }
     },
     {
       "name": "alert",
@@ -47,11 +61,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "alert",
         "feedback",
@@ -66,7 +90,11 @@
         "semantics",
         "status",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/alert"
+      }
     },
     {
       "name": "alert-dialog",
@@ -80,8 +108,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "action",
         "alert",
@@ -93,7 +131,11 @@
         "requiring",
         "runtime",
         "user"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/alert-dialog"
+      }
     },
     {
       "name": "avatar",
@@ -107,8 +149,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "and",
         "avatar",
@@ -118,7 +170,11 @@
         "runtime",
         "user",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/avatar"
+      }
     },
     {
       "name": "badge",
@@ -132,11 +188,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "badge",
         "feedback",
@@ -145,7 +211,11 @@
         "label",
         "runtime",
         "status"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/badge"
+      }
     },
     {
       "name": "breadcrumb",
@@ -159,8 +229,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "breadcrumb",
         "hierarchical",
@@ -170,7 +250,11 @@
         "navigation",
         "runtime",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/breadcrumb"
+      }
     },
     {
       "name": "button",
@@ -184,11 +268,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "actions",
         "button",
@@ -197,7 +291,11 @@
         "input",
         "runtime",
         "trigger"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/button"
+      }
     },
     {
       "name": "calendar",
@@ -211,8 +309,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "calendar",
         "date",
@@ -225,7 +333,11 @@
         "views",
         "with",
         "year"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/calendar"
+      }
     },
     {
       "name": "card",
@@ -239,8 +351,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "and",
         "body",
@@ -252,7 +374,11 @@
         "layout",
         "runtime",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/card"
+      }
     },
     {
       "name": "carousel",
@@ -266,8 +392,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "based",
         "carousel",
@@ -278,7 +414,11 @@
         "runtime",
         "slide",
         "viewer"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/carousel"
+      }
     },
     {
       "name": "checkbox",
@@ -292,11 +432,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "binary",
         "checkbox",
@@ -305,7 +455,11 @@
         "input",
         "runtime",
         "toggle"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/checkbox"
+      }
     },
     {
       "name": "collapsible",
@@ -319,8 +473,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "collapsible",
         "expandable",
@@ -328,7 +492,11 @@
         "runtime",
         "section",
         "single"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/collapsible"
+      }
     },
     {
       "name": "combobox",
@@ -342,8 +510,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "autocomplete",
         "combobox",
@@ -352,7 +530,11 @@
         "runtime",
         "text",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/combobox"
+      }
     },
     {
       "name": "command-palette",
@@ -366,8 +548,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "action",
         "and",
@@ -378,7 +570,11 @@
         "palette",
         "runtime",
         "search"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/command-palette"
+      }
     },
     {
       "name": "context-menu",
@@ -392,8 +588,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "click",
         "context",
@@ -402,7 +608,11 @@
         "right",
         "runtime",
         "triggered"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/context-menu"
+      }
     },
     {
       "name": "data-table",
@@ -416,8 +626,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "column",
         "control",
@@ -428,7 +648,11 @@
         "sortable",
         "table",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/data-table"
+      }
     },
     {
       "name": "date-picker",
@@ -442,8 +666,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "calendar",
         "date",
@@ -455,7 +689,11 @@
         "popup",
         "runtime",
         "selecting"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/date-picker"
+      }
     },
     {
       "name": "dialog",
@@ -469,19 +707,43 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": true,
+      "accessibility": {
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-dialog-scan-v1"
+        ]
+      },
       "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [
+        "site"
+      ],
       "searchKeywords": [
         "dialog",
+        "foco",
+        "focus",
         "modal",
         "non",
         "overlay",
         "runtime",
+        "superposición",
         "window"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/dialog"
+      }
     },
     {
       "name": "drawer",
@@ -495,8 +757,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "any",
         "drawer",
@@ -507,7 +779,11 @@
         "runtime",
         "screen",
         "slide"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/drawer"
+      }
     },
     {
       "name": "empty-state",
@@ -521,8 +797,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "areas",
         "content",
@@ -532,7 +818,11 @@
         "placeholder",
         "runtime",
         "state"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/empty-state"
+      }
     },
     {
       "name": "field",
@@ -546,8 +836,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "aria",
         "automatic",
@@ -562,7 +862,11 @@
         "wiring",
         "with",
         "wrapper:"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/field"
+      }
     },
     {
       "name": "hover-card",
@@ -576,8 +880,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "anchored",
         "and",
@@ -591,7 +905,11 @@
         "preview",
         "runtime",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/hover-card"
+      }
     },
     {
       "name": "input",
@@ -605,8 +923,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "and",
         "field",
@@ -618,7 +946,11 @@
         "textarea",
         "validation",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/input"
+      }
     },
     {
       "name": "input-otp",
@@ -632,8 +964,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "character",
         "individual",
@@ -645,7 +987,11 @@
         "slots",
         "time",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/input-otp"
+      }
     },
     {
       "name": "kbd",
@@ -659,8 +1005,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "display",
         "element",
@@ -668,7 +1024,11 @@
         "keyboard",
         "runtime",
         "shortcut"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/kbd"
+      }
     },
     {
       "name": "label",
@@ -682,8 +1042,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "accessible",
         "controls",
@@ -695,7 +1065,11 @@
         "linked",
         "runtime",
         "via"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/label"
+      }
     },
     {
       "name": "listbox",
@@ -709,8 +1083,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "input",
         "list",
@@ -720,7 +1104,11 @@
         "runtime",
         "select",
         "single"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/listbox"
+      }
     },
     {
       "name": "menu",
@@ -734,11 +1122,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "action",
         "button",
@@ -747,7 +1145,11 @@
         "navigation",
         "runtime",
         "triggered"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/menu"
+      }
     },
     {
       "name": "meter",
@@ -761,8 +1163,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "disk",
         "feedback",
@@ -776,7 +1188,11 @@
         "strength)",
         "usage",
         "within"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/meter"
+      }
     },
     {
       "name": "navigation-menu",
@@ -790,8 +1206,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "accessible",
         "component",
@@ -805,7 +1231,11 @@
         "sub",
         "top",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/navigation-menu"
+      }
     },
     {
       "name": "pagination",
@@ -819,8 +1249,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "and",
         "navigation",
@@ -831,7 +1271,11 @@
         "prev",
         "runtime",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/pagination"
+      }
     },
     {
       "name": "popover",
@@ -845,11 +1289,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "content",
         "floating",
@@ -860,7 +1314,11 @@
         "popover",
         "positioning",
         "runtime"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/popover"
+      }
     },
     {
       "name": "progress",
@@ -874,8 +1332,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "and",
         "determinate",
@@ -884,7 +1352,11 @@
         "indicator",
         "progress",
         "runtime"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/progress"
+      }
     },
     {
       "name": "radio-group",
@@ -898,8 +1370,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "button",
         "group",
@@ -912,7 +1394,11 @@
         "set",
         "single",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/radio-group"
+      }
     },
     {
       "name": "resizable-panels",
@@ -926,8 +1412,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "drag",
         "layout",
@@ -936,7 +1432,11 @@
         "resizable",
         "resize",
         "runtime"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/resizable-panels"
+      }
     },
     {
       "name": "scroll-area",
@@ -950,8 +1450,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "area",
         "custom",
@@ -964,7 +1474,11 @@
         "scrolling",
         "styled",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/scroll-area"
+      }
     },
     {
       "name": "select",
@@ -978,11 +1492,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "dropdown",
         "from",
@@ -992,7 +1516,11 @@
         "runtime",
         "select",
         "selection"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/select"
+      }
     },
     {
       "name": "separator",
@@ -1006,8 +1534,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "divider",
         "horizontal",
@@ -1016,7 +1554,11 @@
         "separator",
         "vertical",
         "visual"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/separator"
+      }
     },
     {
       "name": "sheet",
@@ -1030,8 +1572,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "animation",
         "dialog",
@@ -1042,7 +1594,11 @@
         "side",
         "slide",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/sheet"
+      }
     },
     {
       "name": "skeleton",
@@ -1056,8 +1612,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "animation",
         "feedback",
@@ -1067,7 +1633,11 @@
         "runtime",
         "skeleton",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/skeleton"
+      }
     },
     {
       "name": "slider",
@@ -1081,8 +1651,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "control",
         "input",
@@ -1092,7 +1672,11 @@
         "slider",
         "thumb",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/slider"
+      }
     },
     {
       "name": "spinner",
@@ -1106,15 +1690,29 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "feedback",
         "indicator",
         "loading",
         "runtime",
         "spinner"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/spinner"
+      }
     },
     {
       "name": "switch",
@@ -1128,11 +1726,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "binary",
         "input",
@@ -1142,7 +1750,11 @@
         "switch",
         "toggle",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/switch"
+      }
     },
     {
       "name": "tabs",
@@ -1156,11 +1768,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "content",
         "navigation",
@@ -1168,7 +1790,11 @@
         "switcher",
         "tabbed",
         "tabs"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/tabs"
+      }
     },
     {
       "name": "toast",
@@ -1182,11 +1808,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "blocking",
         "feedback",
@@ -1195,7 +1831,11 @@
         "runtime",
         "temporary",
         "toast"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/toast"
+      }
     },
     {
       "name": "toggle",
@@ -1209,8 +1849,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "button",
         "can",
@@ -1222,7 +1872,11 @@
         "toggle",
         "toggled",
         "two"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/toggle"
+      }
     },
     {
       "name": "toggle-group",
@@ -1236,8 +1890,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "buttons",
         "exclusive",
@@ -1248,7 +1912,11 @@
         "runtime",
         "select",
         "toggle"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/toggle-group"
+      }
     },
     {
       "name": "toolbar",
@@ -1262,8 +1930,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "actions",
         "and",
@@ -1274,7 +1952,11 @@
         "layout",
         "runtime",
         "toolbar"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/toolbar"
+      }
     },
     {
       "name": "tooltip",
@@ -1288,11 +1970,21 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [
         "css",
         "tailwind"
       ],
+      "themeCompatible": [],
       "searchKeywords": [
         "contextual",
         "focus",
@@ -1303,7 +1995,11 @@
         "runtime",
         "shown",
         "tooltip"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/tooltip"
+      }
     },
     {
       "name": "tree",
@@ -1317,8 +2013,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "collapse",
         "expand",
@@ -1328,7 +2034,11 @@
         "tree",
         "view",
         "with"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/tree"
+      }
     },
     {
       "name": "virtual-list",
@@ -1342,8 +2052,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "datasets",
         "for",
@@ -1355,7 +2075,11 @@
         "virtual",
         "virtualization",
         "windowed"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/virtual-list"
+      }
     },
     {
       "name": "visually-hidden",
@@ -1369,8 +2093,18 @@
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
       "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
       "stylingOutputs": [],
+      "themeCompatible": [],
       "searchKeywords": [
         "accessible",
         "content",
@@ -1383,7 +2117,11 @@
         "screen",
         "visually",
         "while"
-      ]
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/solidiom",
+        "directory": "packages/visually-hidden"
+      }
     }
   ],
   "adapters": [
