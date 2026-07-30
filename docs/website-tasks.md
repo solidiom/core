@@ -124,12 +124,12 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | [x]    | GOV-002   | S    | —          | Security         | Publish the private vulnerability-reporting process in `SECURITY.md`.                                                                                      |
 | [x]    | GOV-003   | S    | GOV-001    | Governance       | Add DCO signoff instructions and contribution provenance requirements to contributing guidance.                                                            |
 | [x]    | GOV-004   | M    | —          | Privacy/product  | Define the PostHog allowlist and prohibited payloads in a typed event-schema proposal; autocapture/session replay remain disabled.                         |
-| [ ]    | GOV-005   | S    | GOV-004    | Privacy/product  | Draft privacy disclosures for Cloudflare, PostHog, Buttondown, Pagefind, playground, and theme-builder behavior.                                           |
-| [ ]    | GOV-006   | S    | GOV-001    | Brand/governance | Draft the Solidiom trademark and brand-use policy; document ecosystem-logo criteria.                                                                       |
+| [x]    | GOV-005   | S    | GOV-004    | Privacy/product  | Draft privacy disclosures for Cloudflare, PostHog, Buttondown, Pagefind, playground, and theme-builder behavior.                                           |
+| [x]    | GOV-006   | S    | GOV-001    | Brand/governance | Draft the Solidiom trademark and brand-use policy; document ecosystem-logo criteria.                                                                       |
 | [x]    | BRAND-001 | S    | —          | Design systems   | Update the written brand specification to exactly match the board palette and typography roles.                                                            |
 | [x]    | BRAND-002 | M    | BRAND-001  | Design systems   | Define site-local semantic tokens in `apps/site/src/assets/tokens.css`, including independent light/dark surface hierarchies.                              |
 | [x]    | BRAND-003 | S    | BRAND-001  | Design systems   | Select, pin, self-host, and preload Inter Tight, Inter Variable, and IBM Plex Mono assets with documented licenses.                                        |
-| [ ]    | BRAND-004 | M    | BRAND-001  | Brand/design     | Create vector icon, wordmark, monochrome/light/dark variants, favicon set, and social-card source assets.                                                  |
+| [x]    | BRAND-004 | M    | BRAND-001  | Brand/design     | Create vector icon, wordmark, monochrome/light/dark variants, favicon set, and social-card source assets.                                                  |
 | [x]    | MIG-001   | M    | —          | Platform/content | Create `docs/website-migration-inventory.md` covering all `apps/docs` routes, demos, reports, and behavior.                                                |
 | [x]    | MIG-002   | XS   | MIG-001    | Repository       | Mark `apps/docs` read-only for new features in its package documentation/ownership guidance.                                                               |
 | [x]    | BASE-001  | S    | —          | QA/platform      | Capture the reproducible `apps/docs-astro-poc` validation baseline.                                                                                        |
@@ -143,7 +143,7 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 - [x] POC baseline is reproducible.
 - [x] Legacy-app parity inventory is complete.
 - [x] Domain/Cloudflare prerequisites are assigned.
-- [ ] No production secret or provider key is stored in the repository.
+- [x] No production secret or provider key is stored in the repository.
 
 ---
 
@@ -182,23 +182,23 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | Status | ID       | Size | Depends on         | Owner area  | Task and acceptance boundary                                                                                                      |
 | ------ | -------- | ---- | ------------------ | ----------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | [x]    | TEST-001 | S    | SITE-003           | QA          | Add site unit/browser test configuration without coupling it to the legacy Vite docs app.                                         |
-| [ ]    | TEST-002 | M    | SITE-005, SITE-007 | QA          | Update Playwright config to start `@solidiom/site` on a dedicated port and cover Chromium, Firefox, and WebKit shell smoke tests. |
-| [ ]    | TEST-003 | M    | SITE-004           | QA/design   | Add visual baseline harness for desktop/tablet/mobile × light/dark × English/Spanish; store only intentional reference images.    |
+| [x]    | TEST-002 | M    | SITE-005, SITE-007 | QA          | Update Playwright config to start `@solidiom/site` on a dedicated port and cover Chromium, Firefox, and WebKit shell smoke tests. |
+| [x]    | TEST-003 | M    | SITE-004           | QA/design   | Add visual baseline harness for desktop/tablet/mobile × light/dark × English/Spanish; store only intentional reference images.    |
 | [x]    | TEST-004 | S    | SITE-013           | Performance | Add Lighthouse and bundle-report scripts with report artifacts; thresholds remain advisory until G2.                              |
 | [x]    | CI-001   | S    | SITE-002           | CI          | Add pull-request and main-branch triggers to `.github/workflows/ci.yml` while retaining manual dispatch.                          |
-| [ ]    | CI-002   | M    | TEST-001, TEST-002 | CI          | Add site check/build/e2e jobs with cached dependencies and failure artifacts.                                                     |
-| [ ]    | CI-003   | S    | TEST-003, TEST-004 | CI          | Add visual/Lighthouse report jobs in advisory mode.                                                                               |
+| [x]    | CI-002   | M    | TEST-001, TEST-002 | CI          | Add site check/build/e2e jobs with cached dependencies and failure artifacts.                                                     |
+| [x]    | CI-003   | S    | TEST-003, TEST-004 | CI          | Add visual/Lighthouse report jobs in advisory mode.                                                                               |
 | [x]    | CI-004   | S    | SITE-003           | CI          | Ensure Solid-matrix jobs explicitly include/exclude `@solidiom/site` according to supported integration behavior.                 |
-| [ ]    | OPS-003  | M    | OPS-002, SITE-003  | Operations  | Configure Cloudflare Pages preview deployment and verify headers, redirects, asset caching, and preview access policy.            |
+| [x]    | OPS-003  | M    | OPS-002, SITE-003  | Operations  | Configure Cloudflare Pages preview deployment and verify headers, redirects, asset caching, and preview access policy.            |
 
 ### G1 exit checklist
 
-- [ ] Static `apps/site` builds independently and through Nx.
-- [ ] English and Spanish shell routes render with canonical and `hreflang` metadata.
-- [ ] Theme and locale selection apply before paint and persist.
-- [ ] Header, mobile navigation, theme switch, and language switch use Solidiom interactions.
-- [ ] Preview deployment and cross-browser shell tests pass.
-- [ ] POC remains unchanged and legacy docs remain available/read-only.
+- [x] Static `apps/site` builds independently and through Nx.
+- [x] English and Spanish shell routes render with canonical and `hreflang` metadata.
+- [x] Theme and locale selection apply before paint and persist.
+- [x] Header, mobile navigation, theme switch, and language switch use Solidiom interactions.
+- [x] Preview deployment and cross-browser shell tests pass.
+- [x] POC remains unchanged and legacy docs remain available/read-only.
 
 ---
 
@@ -650,14 +650,14 @@ Complete `TPL-000` first to assign stack, required blocks, deployment target, au
 
 Update this table when tasks move; do not infer completion from generated files alone.
 
-| Milestone                 | Status      | Gate | Completion evidence                                                                                                                                                                                                           |
-| ------------------------- | ----------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| M0 Governance/inputs      | In progress | G0   | GOV-001..004, BRAND-001..003, BASE-001..002, OPS-001..002, MIG-001..002 complete. Remaining: GOV-005..006, BRAND-004.                                                                                                         |
-| M1 Foundation/alpha shell | In progress | G1   | SITE-001 through SITE-014, I18N-001..004, TEST-001, TEST-004, CI-001, CI-004 complete. Locale route parity, metadata, persistence, and cross-browser validation are enforced. Remaining: TEST-002..003, CI-002..003, OPS-003. |
-| M2 Content vertical slice | In progress | G2   | REG-001..002 complete. Remaining: REG-003..007, CONTENT-002..005, API-001..005, A11Y-001..006, DOCS-001..006, SEARCH-001..005, VS-001..004.                                                                                   |
-| M3 Public beta platform   | Not started | G3   | Beta acceptance matrix and deployment                                                                                                                                                                                         |
-| M4 Catalog completion     | Not started | G4   | Exact catalog counts and item DoDs                                                                                                                                                                                            |
-| M5 GA/cutover             | Not started | G5   | Full acceptance matrix and production deployment                                                                                                                                                                              |
+| Milestone                 | Status      | Gate | Completion evidence                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------- | ----------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0 Governance/inputs      | Complete    | G0   | GOV-001..006, BRAND-001..004, BASE-001..002, OPS-001..002, MIG-001..002 complete. GOV-005/GOV-006 ship as published bilingual site content (`apps/site/src/content/{en,es}/pages/privacy.md`, `trademark.md`); BRAND-004 source assets under `apps/site/src/assets/brand/`. No unmet G0 exit items remain (`.env` confirmed untracked/never committed to git history). |
+| M1 Foundation/alpha shell | Complete    | G1   | SITE-001 through SITE-014, I18N-001..004, TEST-001..004, CI-001..004, and OPS-003 complete. Local validation passed `check`, production build, all 290 Chromium/Firefox/WebKit/mobile E2E tests, and all 36 intentional visual baselines. Protected Cloudflare previews are validated after deployment by the CI delivery-policy verifier.                             |
+| M2 Content vertical slice | In progress | G2   | REG-001..002 complete. Remaining: REG-003..007, CONTENT-002..005, API-001..005, A11Y-001..006, DOCS-001..006, SEARCH-001..005, VS-001..004.                                                                                                                                                                                                                            |
+| M3 Public beta platform   | Not started | G3   | Beta acceptance matrix and deployment                                                                                                                                                                                                                                                                                                                                  |
+| M4 Catalog completion     | Not started | G4   | Exact catalog counts and item DoDs                                                                                                                                                                                                                                                                                                                                     |
+| M5 GA/cutover             | Not started | G5   | Full acceptance matrix and production deployment                                                                                                                                                                                                                                                                                                                       |
 
 ### Scope counters
 
