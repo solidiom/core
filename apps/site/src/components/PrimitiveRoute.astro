@@ -1,7 +1,14 @@
 ---
 import { getCollection, render } from "astro:content"
 import type { RegistryPrimitive, PrimitiveView } from "../lib/catalog"
-import { getAccessibilityEvidence, getApiDocumentResult, getCatalogCopy } from "../lib/catalog"
+import {
+  getAccessibilityEvidence,
+  getApiDocumentResult,
+  getCatalogCopy,
+  getRegistryPrimitives,
+  primitiveHref,
+} from "../lib/catalog"
+import { adjacentPrimitiveLinks, primitiveSidebarGroups, tocFromHeadings } from "../lib/docs-nav"
 import type { Locale } from "../lib/locale"
 import DocsLayout from "../layouts/DocsLayout.astro"
 import AccessibilityEvidence from "./AccessibilityEvidence.astro"
@@ -45,8 +52,7 @@ const renderedDocument = document ? await render(document) : undefined
 const DocumentContent = renderedDocument?.Content
 const pageDescription = document?.data.description ?? primitive.description
 const title = `${primitive.label} ${sectionTitle[view]}`
-const apiDocumentResult =
-  view === "api" ? getApiDocumentResult(primitive.name) : undefined
+const apiDocumentResult = view === "api" ? getApiDocumentResult(primitive.name) : undefined
 const accessibilityEvidence =
   view === "accessibility" ? getAccessibilityEvidence(primitive.name) : undefined
 const accessibilityContractEntries =
@@ -58,9 +64,25 @@ const accessibilityContractEntries =
     : []
 const accessibilityContract = accessibilityContractEntries.at(0)?.data
 const isDialog = primitive.name === "dialog"
+
+const allPrimitives = getRegistryPrimitives()
+const sidebarGroups = primitiveSidebarGroups(allPrimitives, locale, (name, loc) =>
+  primitiveHref(name, loc),
+)
+const toc = tocFromHeadings(renderedDocument?.headings ?? [])
+const { previous, next } = adjacentPrimitiveLinks(allPrimitives, primitive.name, (name) =>
+  primitiveHref(name, locale, view),
+)
 ---
 
-<DocsLayout title={title} description={pageDescription}>
+<DocsLayout
+  title={title}
+  description={pageDescription}
+  sidebarGroups={sidebarGroups}
+  toc={toc}
+  previous={previous}
+  next={next}
+>
   <header class="primitive-header">
     <h1>{primitive.label}</h1>
     <p>{pageDescription}</p>

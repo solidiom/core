@@ -10,14 +10,15 @@
  * hydration completes.
  */
 import { DocsMobileNav } from "./DocsMobileNav"
-import type { DocsSidebarGroup } from "../lib/docs-nav"
+import type { DocsNavigationCopy, DocsSidebarGroup } from "../lib/docs-nav"
 
 interface Props {
   groups: DocsSidebarGroup[]
+  copy: DocsNavigationCopy
 }
 
-const { groups } = Astro.props
+const { groups, copy } = Astro.props
 const pathname = Astro.url.pathname
 ---
 
-<DocsMobileNav groups={groups} pathname={pathname} client:load />
+<DocsMobileNav groups={groups} copy={copy} pathname={pathname} client:load />
