@@ -5,6 +5,7 @@
  * this is the static, always-available link inventory every locale needs.
  */
 import DocsLayout from "../layouts/DocsLayout.astro"
+import { catalogDirectoryStructuredData, getCatalogSeoCopy } from "../lib/metadata"
 import { categoryLabel } from "../lib/docs-nav"
 import {
   getCatalogCopy,
@@ -14,6 +15,7 @@ import {
 } from "../lib/catalog"
 import type { Locale } from "../lib/locale"
 import { PrimitiveDirectoryFilters } from "./PrimitiveDirectoryFilters"
+import CatalogBreadcrumbs from "./CatalogBreadcrumbs.astro"
 
 interface Props {
   locale: Locale
@@ -31,13 +33,42 @@ const directoryPrimitives = primitives.map((primitive) => ({
   status: primitive.status,
   href: primitiveHref(primitive.name, locale),
 }))
+const seoCopy = getCatalogSeoCopy(locale)
+const homePath = locale === "es" ? "/es/" : "/"
+const directoryPath = locale === "es" ? "/es/primitives/" : "/primitives/"
+const breadcrumbItems = [
+  { name: seoCopy.home, pathname: homePath },
+  { name: copy.directoryTitle, pathname: directoryPath },
+]
+const structuredData = catalogDirectoryStructuredData({
+  title: copy.directoryTitle,
+  description: copy.directoryDescription,
+  pathname: directoryPath,
+  locale,
+  breadcrumbs: breadcrumbItems,
+  items: directoryPrimitives.map((primitive) => ({
+    name: primitive.label,
+    pathname: primitive.href,
+  })),
+})
 
 function categoryLabelFor(primitive: RegistryPrimitive): string {
   return categoryLabel(primitive.category, locale)
 }
 ---
 
-<DocsLayout title={copy.directoryTitle} description={copy.directoryDescription}>
+<DocsLayout
+  title={copy.directoryTitle}
+  description={copy.directoryDescription}
+  structuredData={structuredData}
+>
+  <CatalogBreadcrumbs
+    label={seoCopy.breadcrumbs}
+    items={breadcrumbItems.map((item, index) => ({
+      label: item.name,
+      href: index === breadcrumbItems.length - 1 ? undefined : item.pathname,
+    }))}
+  />
   <header class="primitive-directory__header">
     <h1>{copy.directoryTitle}</h1>
     <p>{copy.directoryDescription}</p>
