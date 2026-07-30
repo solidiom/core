@@ -2,6 +2,7 @@
 import { existsSync, readFileSync } from "node:fs"
 import { relative, resolve } from "node:path"
 import { getCatalogCopy } from "../lib/catalog"
+import { extractNamedExport } from "../lib/example-source"
 import type { Locale } from "../lib/locale"
 
 interface Props {
@@ -22,10 +23,18 @@ const workspaceRoot = existsSync(resolve(workspaceCandidate, "package.json"))
 const sourcePath = source ? resolve(workspaceRoot, source.path) : undefined
 const pathIsInsideWorkspace =
   sourcePath !== undefined && !relative(workspaceRoot, sourcePath).startsWith("..")
-const sourceCode =
+const fileContents =
   sourcePath && pathIsInsideWorkspace && existsSync(sourcePath)
     ? readFileSync(sourcePath, "utf8")
     : undefined
+// CONTENT-005: when the content declares a specific export, show only that
+// export's source — the same declaration the live island imports and
+// renders — instead of the entire file (imports, unrelated helpers, other
+// exports). Falls back to the full file if the export cannot be isolated.
+const sourceCode =
+  fileContents && source?.export
+    ? extractNamedExport(fileContents, source.export).code
+    : fileContents
 ---
 
 {

@@ -36,6 +36,7 @@
     "gate:phase3": "tsx tools/phase3-gate.ts",
     "gate:phase3-preflight": "tsx tools/phase3-preflight.ts",
     "api:generate": "tsx tools/generate-api-docs.ts",
+    "api:coverage-gate": "tsx tools/api-coverage-gate.ts",
     "deps:check": "tsx scripts/check-library-updates.mts",
     "deps:check:ci": "tsx scripts/check-library-updates.mts --fail-on-outdated"
   },

@@ -65,11 +65,11 @@
     "fileDigests": {
       "src/index.tsx": "70b45d82a29ef0eb536603bbbdd660c9cc5bd9c31c070967120d5ee62a9401f6"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-30T01:44:24.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/radio-group"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-30T01:44:24.000Z"
 }

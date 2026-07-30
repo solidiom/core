@@ -71,11 +71,11 @@
       "src/command-palette.tsx": "f7637e6d1eb9182a4f07272da85820ae8afdda672923023eeb03ac45fa28c8c1",
       "src/index.tsx": "b889c5210bac3669eb6832d02c84314f97cae48b6ee2f6fa50898d2c6cc66539"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-30T01:44:24.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/command-palette"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-30T01:44:24.000Z"
 }

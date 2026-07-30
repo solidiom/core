@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content"
 import type { RegistryPrimitive, PrimitiveView } from "../lib/catalog"
-import { getAccessibilityEvidence, getApiDocument, getCatalogCopy } from "../lib/catalog"
+import { getAccessibilityEvidence, getApiDocumentResult, getCatalogCopy } from "../lib/catalog"
 import type { Locale } from "../lib/locale"
 import DocsLayout from "../layouts/DocsLayout.astro"
 import AccessibilityEvidence from "./AccessibilityEvidence.astro"
@@ -45,7 +45,8 @@ const renderedDocument = document ? await render(document) : undefined
 const DocumentContent = renderedDocument?.Content
 const pageDescription = document?.data.description ?? primitive.description
 const title = `${primitive.label} ${sectionTitle[view]}`
-const apiDocument = view === "api" ? getApiDocument(primitive.name) : undefined
+const apiDocumentResult =
+  view === "api" ? getApiDocumentResult(primitive.name) : undefined
 const accessibilityEvidence =
   view === "accessibility" ? getAccessibilityEvidence(primitive.name) : undefined
 const isDialog = primitive.name === "dialog"
@@ -79,7 +80,7 @@ const isDialog = primitive.name === "dialog"
     )
   }
 
-  {view === "api" && <ApiReference document={apiDocument} locale={locale} />}
+  {view === "api" && <ApiReference result={apiDocumentResult} locale={locale} />}
 
   {
     view === "examples" && (

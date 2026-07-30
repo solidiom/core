@@ -41,6 +41,7 @@ export interface TableModelPort<T = unknown> {
   sort(rows: T[], columnId: string, direction: SortDirection): T[]
 }
 
+/** Shared reactive state and mutation requests for every DataTable part. */
 export interface DataTableContextValue<T = unknown> {
   /** Column definitions. */
   columns: Accessor<ColumnDef<T>[]>

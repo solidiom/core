@@ -1,0 +1,3517 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`vertical-slice normalized API snapshots (API-004) > combobox: normalized API document matches snapshot 1`] = `
+{
+  "$schema": "https://solidiom.org/schemas/api/v1.json",
+  "entryPoints": [
+    "packages/combobox/src/index.tsx",
+  ],
+  "exports": [
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 214,
+          "path": "packages/combobox/src/combobox.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L214",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/combobox — Headless autocomplete combobox primitive.
+
+Parts: Root, Input, Content, Item, ItemText.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "ComboboxContentProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 216,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L216",
+          },
+          "type": "string",
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 215,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L215",
+          },
+          "type": "(el: HTMLDivElement) => void",
+        },
+        {
+          "name": "style",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 217,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L217",
+          },
+          "type": "string | CSSProperties",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 213,
+        "path": "packages/combobox/src/combobox.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L213",
+      },
+    },
+    {
+      "comment": {
+        "summary": "@solidiom/combobox — Headless autocomplete combobox primitive.
+
+Parts: Root, Input, Content, Item, ItemText.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "ComboboxInputProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 123,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L123",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Called on each input change to trigger filtering.",
+            "tags": [],
+          },
+          "name": "onFilter",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 121,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L121",
+          },
+          "type": "(value: string) => void",
+        },
+        {
+          "comment": {
+            "summary": "Placeholder text when empty.",
+            "tags": [],
+          },
+          "name": "placeholder",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 119,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L119",
+          },
+          "type": "string",
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 122,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L122",
+          },
+          "type": "(el: HTMLInputElement) => void",
+        },
+        {
+          "name": "style",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 124,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L124",
+          },
+          "type": "string | CSSProperties",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 117,
+        "path": "packages/combobox/src/combobox.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L117",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 281,
+          "path": "packages/combobox/src/combobox.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L281",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/combobox — Headless autocomplete combobox primitive.
+
+Parts: Root, Input, Content, Item, ItemText.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "ComboboxItemProps",
+      "props": [
+        {
+          "comment": {
+            "summary": "Disabled state.",
+            "tags": [],
+          },
+          "name": "disabled",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 280,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L280",
+          },
+          "type": "boolean",
+        },
+        {
+          "comment": {
+            "summary": "Text value for matching. Defaults to value.",
+            "tags": [],
+          },
+          "name": "textValue",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 278,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L278",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Unique value for this item.",
+            "tags": [],
+          },
+          "name": "value",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 276,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L276",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 274,
+        "path": "packages/combobox/src/combobox.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L274",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 339,
+          "path": "packages/combobox/src/combobox.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L339",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/combobox — Headless autocomplete combobox primitive.
+
+Parts: Root, Input, Content, Item, ItemText.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "ComboboxItemTextProps",
+      "props": [],
+      "signatures": [],
+      "source": {
+        "line": 338,
+        "path": "packages/combobox/src/combobox.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L338",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 47,
+          "path": "packages/combobox/src/combobox.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L47",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/combobox — Headless autocomplete combobox primitive.
+
+Parts: Root, Input, Content, Item, ItemText.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "ComboboxRootProps",
+      "props": [
+        {
+          "name": "defaultInputValue",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 41,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L41",
+          },
+          "type": "string",
+        },
+        {
+          "name": "defaultOpen",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 37,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L37",
+          },
+          "type": "boolean",
+        },
+        {
+          "name": "defaultSelectedValue",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 45,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L45",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Controlled input text value.",
+            "tags": [],
+          },
+          "name": "inputValue",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 40,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L40",
+          },
+          "type": "Accessor<string>",
+        },
+        {
+          "name": "onInputValueChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 42,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L42",
+          },
+          "type": "(value: string) => void",
+        },
+        {
+          "name": "onOpenChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 38,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L38",
+          },
+          "type": "(open: boolean, details: ChangeDetails<DisclosureReason>) => void",
+        },
+        {
+          "name": "onSelectedValueChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 46,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L46",
+          },
+          "type": "(value: string, details: ChangeDetails<ComboboxReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Controlled open state.",
+            "tags": [],
+          },
+          "name": "open",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 36,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L36",
+          },
+          "type": "Accessor<boolean>",
+        },
+        {
+          "comment": {
+            "summary": "Controlled selected value.",
+            "tags": [],
+          },
+          "name": "selectedValue",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 44,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L44",
+          },
+          "type": "Accessor<string | undefined>",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 34,
+        "path": "packages/combobox/src/combobox.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L34",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 214,
+          "path": "packages/combobox/src/combobox.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L214",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/combobox — Headless autocomplete combobox primitive.
+
+Parts: Root, Input, Content, Item, ItemText.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Content",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 216,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L216",
+          },
+          "type": "string",
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 215,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L215",
+          },
+          "type": "(el: HTMLDivElement) => void",
+        },
+        {
+          "name": "style",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 217,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L217",
+          },
+          "type": "string | CSSProperties",
+        },
+      ],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Listbox container — registers dismissable layer for outside click/escape.",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "ComboboxContentProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 221,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L221",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 221,
+        "path": "packages/combobox/src/combobox.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L221",
+      },
+    },
+    {
+      "comment": {
+        "summary": "@solidiom/combobox — Headless autocomplete combobox primitive.
+
+Parts: Root, Input, Content, Item, ItemText.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Input",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 123,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L123",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Called on each input change to trigger filtering.",
+            "tags": [],
+          },
+          "name": "onFilter",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 121,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L121",
+          },
+          "type": "(value: string) => void",
+        },
+        {
+          "comment": {
+            "summary": "Placeholder text when empty.",
+            "tags": [],
+          },
+          "name": "placeholder",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 119,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L119",
+          },
+          "type": "string",
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 122,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L122",
+          },
+          "type": "(el: HTMLInputElement) => void",
+        },
+        {
+          "name": "style",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 124,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L124",
+          },
+          "type": "string | CSSProperties",
+        },
+      ],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Text input with aria-autocomplete, triggers open on focus/type.",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "ComboboxInputProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 128,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L128",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 128,
+        "path": "packages/combobox/src/combobox.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L128",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 281,
+          "path": "packages/combobox/src/combobox.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L281",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/combobox — Headless autocomplete combobox primitive.
+
+Parts: Root, Input, Content, Item, ItemText.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Item",
+      "props": [
+        {
+          "comment": {
+            "summary": "Disabled state.",
+            "tags": [],
+          },
+          "name": "disabled",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 280,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L280",
+          },
+          "type": "boolean",
+        },
+        {
+          "comment": {
+            "summary": "Text value for matching. Defaults to value.",
+            "tags": [],
+          },
+          "name": "textValue",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 278,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L278",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Unique value for this item.",
+            "tags": [],
+          },
+          "name": "value",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 276,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L276",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Individual option — registers in collection, highlights on hover.",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "ComboboxItemProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 285,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L285",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 285,
+        "path": "packages/combobox/src/combobox.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L285",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 339,
+          "path": "packages/combobox/src/combobox.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L339",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/combobox — Headless autocomplete combobox primitive.
+
+Parts: Root, Input, Content, Item, ItemText.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "ItemText",
+      "props": [],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Display text within an item.",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "ComboboxItemTextProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 343,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L343",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 343,
+        "path": "packages/combobox/src/combobox.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L343",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 47,
+          "path": "packages/combobox/src/combobox.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L47",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/combobox — Headless autocomplete combobox primitive.
+
+Parts: Root, Input, Content, Item, ItemText.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Root",
+      "props": [
+        {
+          "name": "defaultInputValue",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 41,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L41",
+          },
+          "type": "string",
+        },
+        {
+          "name": "defaultOpen",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 37,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L37",
+          },
+          "type": "boolean",
+        },
+        {
+          "name": "defaultSelectedValue",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 45,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L45",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Controlled input text value.",
+            "tags": [],
+          },
+          "name": "inputValue",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 40,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L40",
+          },
+          "type": "Accessor<string>",
+        },
+        {
+          "name": "onInputValueChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 42,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L42",
+          },
+          "type": "(value: string) => void",
+        },
+        {
+          "name": "onOpenChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 38,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L38",
+          },
+          "type": "(open: boolean, details: ChangeDetails<DisclosureReason>) => void",
+        },
+        {
+          "name": "onSelectedValueChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 46,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L46",
+          },
+          "type": "(value: string, details: ChangeDetails<ComboboxReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Controlled open state.",
+            "tags": [],
+          },
+          "name": "open",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 36,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L36",
+          },
+          "type": "Accessor<boolean>",
+        },
+        {
+          "comment": {
+            "summary": "Controlled selected value.",
+            "tags": [],
+          },
+          "name": "selectedValue",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 44,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L44",
+          },
+          "type": "Accessor<string | undefined>",
+        },
+      ],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Root provider — composes disclosure state, input value, and collection.",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "ComboboxRootProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 51,
+            "path": "packages/combobox/src/combobox.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L51",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 51,
+        "path": "packages/combobox/src/combobox.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/combobox/src/combobox.tsx#L51",
+      },
+    },
+  ],
+  "packageName": "@solidiom/combobox",
+  "schemaVersion": 1,
+}
+`;
+
+exports[`vertical-slice normalized API snapshots (API-004) > data-table: normalized API document matches snapshot 1`] = `
+{
+  "$schema": "https://solidiom.org/schemas/api/v1.json",
+  "entryPoints": [
+    "packages/data-table/src/index.tsx",
+  ],
+  "exports": [
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 236,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L236",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/data-table — Headless sortable data table primitive.
+
+Parts: Root (table), Header (thead), HeaderCell (th), Body (tbody), Row (tr), Cell (td).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Body",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 237,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L237",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Table body section (tbody).",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DataTableBodyProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 241,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L241",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 241,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L241",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 300,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L300",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/data-table — Headless sortable data table primitive.
+
+Parts: Root (table), Header (thead), HeaderCell (th), Body (tbody), Row (tr), Cell (td).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Cell",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 301,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L301",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Table cell (td).",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DataTableCellProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 305,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L305",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 305,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L305",
+      },
+    },
+    {
+      "comment": {
+        "summary": "Column definition model.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "ColumnDef",
+      "props": [
+        {
+          "comment": {
+            "summary": "Key to access the row data value.",
+            "tags": [],
+          },
+          "name": "accessorKey",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 27,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L27",
+          },
+          "type": "keyof T & string",
+        },
+        {
+          "comment": {
+            "summary": "Header label or render function.",
+            "tags": [],
+          },
+          "name": "header",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 25,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L25",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Unique column identifier.",
+            "tags": [],
+          },
+          "name": "id",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 23,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L23",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Whether this column is sortable. Default: false.",
+            "tags": [],
+          },
+          "name": "sortable",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 29,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L29",
+          },
+          "type": "boolean",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 21,
+        "path": "packages/data-table/src/data-table-context.ts",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L21",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 236,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L236",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "Props for the table body (tbody).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DataTableBodyProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 237,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L237",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 235,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L235",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 300,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L300",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "Props for a table cell (td).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DataTableCellProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 301,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L301",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 299,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L299",
+      },
+    },
+    {
+      "comment": {
+        "summary": "Shared reactive state and mutation requests for every DataTable part.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DataTableContextValue",
+      "props": [
+        {
+          "comment": {
+            "summary": "Generated base ID.",
+            "tags": [],
+          },
+          "name": "baseId",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 69,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L69",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Column definitions.",
+            "tags": [],
+          },
+          "name": "columns",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 47,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L47",
+          },
+          "type": "Accessor<ColumnDef<T>[]>",
+        },
+        {
+          "comment": {
+            "summary": "Table model port for sorting delegation.",
+            "tags": [],
+          },
+          "name": "modelPort",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 63,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L63",
+          },
+          "type": "TableModelPort<T> | undefined",
+        },
+        {
+          "comment": {
+            "summary": "Request row selection change.",
+            "tags": [],
+          },
+          "name": "requestSelectionChange",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 61,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L61",
+          },
+          "type": "(ids: Set<string>, details: ChangeDetails<DataTableReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Request sort state change.",
+            "tags": [],
+          },
+          "name": "requestSortChange",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 55,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L55",
+          },
+          "type": "(state: SortState, details: ChangeDetails<DataTableReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Request column visibility change.",
+            "tags": [],
+          },
+          "name": "requestVisibilityChange",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 51,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L51",
+          },
+          "type": "(ids: Set<string>, details: ChangeDetails<DataTableReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Row ID accessor key.",
+            "tags": [],
+          },
+          "name": "rowIdKey",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 67,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L67",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Sorted/processed rows.",
+            "tags": [],
+          },
+          "name": "rows",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 65,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L65",
+          },
+          "type": "Accessor<T[]>",
+        },
+        {
+          "comment": {
+            "summary": "Selected row IDs.",
+            "tags": [],
+          },
+          "name": "selectedRowIds",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 59,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L59",
+          },
+          "type": "Accessor<Set<string>>",
+        },
+        {
+          "comment": {
+            "summary": "Row selection mode.",
+            "tags": [],
+          },
+          "name": "selectionMode",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 57,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L57",
+          },
+          "type": "RowSelectionMode",
+        },
+        {
+          "comment": {
+            "summary": "Current sort state.",
+            "tags": [],
+          },
+          "name": "sortState",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 53,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L53",
+          },
+          "type": "Accessor<SortState>",
+        },
+        {
+          "comment": {
+            "summary": "Visible column IDs.",
+            "tags": [],
+          },
+          "name": "visibleColumnIds",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 49,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L49",
+          },
+          "type": "Accessor<Set<string>>",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 45,
+        "path": "packages/data-table/src/data-table-context.ts",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L45",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 173,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L173",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "Props for a sortable table header cell (th).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DataTableHeaderCellProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 174,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L174",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Column ID this header cell corresponds to.",
+            "tags": [],
+          },
+          "name": "columnId",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 172,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L172",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 170,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L170",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 154,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L154",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "Props for the table header (thead).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DataTableHeaderProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 155,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L155",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 153,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L153",
+      },
+    },
+    {
+      "comment": {
+        "summary": "Reason for a table state change.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "type",
+      "name": "DataTableReason",
+      "props": [],
+      "signatures": [],
+      "source": {
+        "line": 12,
+        "path": "packages/data-table/src/data-table-context.ts",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L12",
+      },
+      "type": ""header-click" | "keyboard" | "programmatic"",
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 61,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L61",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "Props for the data table root.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DataTableRootProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 62,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L62",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Column definitions.",
+            "tags": [],
+          },
+          "name": "columns",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 34,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L34",
+          },
+          "type": "ColumnDef<T>[]",
+        },
+        {
+          "comment": {
+            "summary": "Row data.",
+            "tags": [],
+          },
+          "name": "data",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 36,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L36",
+          },
+          "type": "T[]",
+        },
+        {
+          "comment": {
+            "summary": "Default selected row IDs.",
+            "tags": [],
+          },
+          "name": "defaultSelectedRowIds",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 56,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L56",
+          },
+          "type": "Set<string>",
+        },
+        {
+          "comment": {
+            "summary": "Default sort state for uncontrolled mode.",
+            "tags": [],
+          },
+          "name": "defaultSortState",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 42,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L42",
+          },
+          "type": "SortState",
+        },
+        {
+          "comment": {
+            "summary": "Default visible column IDs. Defaults to all columns.",
+            "tags": [],
+          },
+          "name": "defaultVisibleColumnIds",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 48,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L48",
+          },
+          "type": "Set<string>",
+        },
+        {
+          "comment": {
+            "summary": "Table model port for sort delegation.",
+            "tags": [],
+          },
+          "name": "modelPort",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 60,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L60",
+          },
+          "type": "TableModelPort<T>",
+        },
+        {
+          "comment": {
+            "summary": "Called when row selection changes.",
+            "tags": [],
+          },
+          "name": "onSelectionChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 58,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L58",
+          },
+          "type": "(ids: Set<string>, details: ChangeDetails<DataTableReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Called when sort state changes.",
+            "tags": [],
+          },
+          "name": "onSortChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 44,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L44",
+          },
+          "type": "(state: SortState, details: ChangeDetails<DataTableReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Called when column visibility changes.",
+            "tags": [],
+          },
+          "name": "onVisibilityChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 50,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L50",
+          },
+          "type": "(ids: Set<string>, details: ChangeDetails<DataTableReason>) => void",
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 63,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L63",
+          },
+          "type": "(el: HTMLTableElement) => void",
+        },
+        {
+          "comment": {
+            "summary": "Key in each row used as unique row ID.",
+            "tags": [],
+          },
+          "name": "rowIdKey",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 38,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L38",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Controlled selected row IDs.",
+            "tags": [],
+          },
+          "name": "selectedRowIds",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 54,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L54",
+          },
+          "type": "Accessor<Set<string>>",
+        },
+        {
+          "comment": {
+            "summary": "Row selection mode. Default: "none".",
+            "tags": [],
+          },
+          "name": "selectionMode",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 52,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L52",
+          },
+          "type": "RowSelectionMode",
+        },
+        {
+          "comment": {
+            "summary": "Controlled sort state.",
+            "tags": [],
+          },
+          "name": "sortState",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 40,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L40",
+          },
+          "type": "Accessor<SortState>",
+        },
+        {
+          "comment": {
+            "summary": "Controlled visible column IDs.",
+            "tags": [],
+          },
+          "name": "visibleColumnIds",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 46,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L46",
+          },
+          "type": "Accessor<Set<string>>",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 32,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L32",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 255,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L255",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "Props for a table row (tr).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DataTableRowProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 256,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L256",
+          },
+          "type": "string",
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 257,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L257",
+          },
+          "type": "(el: HTMLTableRowElement) => void",
+        },
+        {
+          "comment": {
+            "summary": "Unique row ID. Used for selection tracking.",
+            "tags": [],
+          },
+          "name": "rowId",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 254,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L254",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 252,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L252",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 154,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L154",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/data-table — Headless sortable data table primitive.
+
+Parts: Root (table), Header (thead), HeaderCell (th), Body (tbody), Row (tr), Cell (td).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Header",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 155,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L155",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Table header section (thead).",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DataTableHeaderProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 159,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L159",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 159,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L159",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 173,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L173",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/data-table — Headless sortable data table primitive.
+
+Parts: Root (table), Header (thead), HeaderCell (th), Body (tbody), Row (tr), Cell (td).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "HeaderCell",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 174,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L174",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Column ID this header cell corresponds to.",
+            "tags": [],
+          },
+          "name": "columnId",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 172,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L172",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Table header cell with sort toggle via click or keyboard.",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DataTableHeaderCellProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 178,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L178",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 178,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L178",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 61,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L61",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/data-table — Headless sortable data table primitive.
+
+Parts: Root (table), Header (thead), HeaderCell (th), Body (tbody), Row (tr), Cell (td).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Root",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 62,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L62",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Column definitions.",
+            "tags": [],
+          },
+          "name": "columns",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 34,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L34",
+          },
+          "type": "ColumnDef<T>[]",
+        },
+        {
+          "comment": {
+            "summary": "Row data.",
+            "tags": [],
+          },
+          "name": "data",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 36,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L36",
+          },
+          "type": "T[]",
+        },
+        {
+          "comment": {
+            "summary": "Default selected row IDs.",
+            "tags": [],
+          },
+          "name": "defaultSelectedRowIds",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 56,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L56",
+          },
+          "type": "Set<string>",
+        },
+        {
+          "comment": {
+            "summary": "Default sort state for uncontrolled mode.",
+            "tags": [],
+          },
+          "name": "defaultSortState",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 42,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L42",
+          },
+          "type": "SortState",
+        },
+        {
+          "comment": {
+            "summary": "Default visible column IDs. Defaults to all columns.",
+            "tags": [],
+          },
+          "name": "defaultVisibleColumnIds",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 48,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L48",
+          },
+          "type": "Set<string>",
+        },
+        {
+          "comment": {
+            "summary": "Table model port for sort delegation.",
+            "tags": [],
+          },
+          "name": "modelPort",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 60,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L60",
+          },
+          "type": "TableModelPort<T>",
+        },
+        {
+          "comment": {
+            "summary": "Called when row selection changes.",
+            "tags": [],
+          },
+          "name": "onSelectionChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 58,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L58",
+          },
+          "type": "(ids: Set<string>, details: ChangeDetails<DataTableReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Called when sort state changes.",
+            "tags": [],
+          },
+          "name": "onSortChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 44,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L44",
+          },
+          "type": "(state: SortState, details: ChangeDetails<DataTableReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Called when column visibility changes.",
+            "tags": [],
+          },
+          "name": "onVisibilityChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 50,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L50",
+          },
+          "type": "(ids: Set<string>, details: ChangeDetails<DataTableReason>) => void",
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 63,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L63",
+          },
+          "type": "(el: HTMLTableElement) => void",
+        },
+        {
+          "comment": {
+            "summary": "Key in each row used as unique row ID.",
+            "tags": [],
+          },
+          "name": "rowIdKey",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 38,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L38",
+          },
+          "type": "string",
+        },
+        {
+          "comment": {
+            "summary": "Controlled selected row IDs.",
+            "tags": [],
+          },
+          "name": "selectedRowIds",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 54,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L54",
+          },
+          "type": "Accessor<Set<string>>",
+        },
+        {
+          "comment": {
+            "summary": "Row selection mode. Default: "none".",
+            "tags": [],
+          },
+          "name": "selectionMode",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 52,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L52",
+          },
+          "type": "RowSelectionMode",
+        },
+        {
+          "comment": {
+            "summary": "Controlled sort state.",
+            "tags": [],
+          },
+          "name": "sortState",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 40,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L40",
+          },
+          "type": "Accessor<SortState>",
+        },
+        {
+          "comment": {
+            "summary": "Controlled visible column IDs.",
+            "tags": [],
+          },
+          "name": "visibleColumnIds",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 46,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L46",
+          },
+          "type": "Accessor<Set<string>>",
+        },
+      ],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Root table container managing sort, visibility, and selection state.",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DataTableRootProps<T>",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 67,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L67",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 67,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L67",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 255,
+          "path": "packages/data-table/src/data-table.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L255",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/data-table — Headless sortable data table primitive.
+
+Parts: Root (table), Header (thead), HeaderCell (th), Body (tbody), Row (tr), Cell (td).",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Row",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 256,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L256",
+          },
+          "type": "string",
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 257,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L257",
+          },
+          "type": "(el: HTMLTableRowElement) => void",
+        },
+        {
+          "comment": {
+            "summary": "Unique row ID. Used for selection tracking.",
+            "tags": [],
+          },
+          "name": "rowId",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 254,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L254",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Table row with selection support.",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DataTableRowProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 261,
+            "path": "packages/data-table/src/data-table.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L261",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 261,
+        "path": "packages/data-table/src/data-table.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table.tsx#L261",
+      },
+    },
+    {
+      "comment": {
+        "summary": "Selection mode for rows.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "type",
+      "name": "RowSelectionMode",
+      "props": [],
+      "signatures": [],
+      "source": {
+        "line": 33,
+        "path": "packages/data-table/src/data-table-context.ts",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L33",
+      },
+      "type": ""single" | "multiple" | "none"",
+    },
+    {
+      "comment": {
+        "summary": "Sort direction for a column.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "type",
+      "name": "SortDirection",
+      "props": [],
+      "signatures": [],
+      "source": {
+        "line": 9,
+        "path": "packages/data-table/src/data-table-context.ts",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L9",
+      },
+      "type": ""asc" | "desc" | "none"",
+    },
+    {
+      "comment": {
+        "summary": "Current sort state.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "SortState",
+      "props": [
+        {
+          "name": "columnId",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 16,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L16",
+          },
+          "type": "string | null",
+        },
+        {
+          "name": "direction",
+          "optional": false,
+          "readonly": false,
+          "source": {
+            "line": 17,
+            "path": "packages/data-table/src/data-table-context.ts",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L17",
+          },
+          "type": "SortDirection",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 15,
+        "path": "packages/data-table/src/data-table-context.ts",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L15",
+      },
+    },
+    {
+      "comment": {
+        "summary": "Port interface for delegating sort computation to an adapter.
+Following the adapter pattern used by calendar/carousel.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "TableModelPort",
+      "props": [],
+      "signatures": [],
+      "source": {
+        "line": 39,
+        "path": "packages/data-table/src/data-table-context.ts",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/data-table/src/data-table-context.ts#L39",
+      },
+    },
+  ],
+  "packageName": "@solidiom/data-table",
+  "schemaVersion": 1,
+}
+`;
+
+exports[`vertical-slice normalized API snapshots (API-004) > dialog: normalized API document matches snapshot 1`] = `
+{
+  "$schema": "https://solidiom.org/schemas/api/v1.json",
+  "entryPoints": [
+    "packages/dialog/src/index.tsx",
+  ],
+  "exports": [
+    {
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Backdrop",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 126,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L126",
+          },
+          "type": "string",
+        },
+        {
+          "name": "style",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 127,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L127",
+          },
+          "type": "string | CSSProperties",
+        },
+      ],
+      "signatures": [
+        {
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DialogBackdropProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 130,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L130",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 130,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L130",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 281,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L281",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Close",
+      "props": [
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 282,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L282",
+          },
+          "type": "(el: HTMLButtonElement) => void",
+        },
+      ],
+      "signatures": [
+        {
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DialogCloseProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 285,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L285",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 285,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L285",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 150,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L150",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Content",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 151,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L151",
+          },
+          "type": "string",
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 153,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L153",
+          },
+          "type": "(el: HTMLDivElement) => void",
+        },
+        {
+          "name": "style",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 152,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L152",
+          },
+          "type": "string | CSSProperties",
+        },
+        {
+          "comment": {
+            "summary": "Disable focus trapping. Default: true (trapping enabled).",
+            "tags": [],
+          },
+          "name": "trapFocus",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 155,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L155",
+          },
+          "type": "boolean",
+        },
+      ],
+      "signatures": [
+        {
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DialogContentProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 158,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L158",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 158,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L158",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 260,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L260",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Description",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 261,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L261",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [
+        {
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DialogDescriptionProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 264,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L264",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 264,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L264",
+      },
+    },
+    {
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DialogBackdropProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 126,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L126",
+          },
+          "type": "string",
+        },
+        {
+          "name": "style",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 127,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L127",
+          },
+          "type": "string | CSSProperties",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 125,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L125",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 281,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L281",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DialogCloseProps",
+      "props": [
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 282,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L282",
+          },
+          "type": "(el: HTMLButtonElement) => void",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 280,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L280",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 150,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L150",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DialogContentProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 151,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L151",
+          },
+          "type": "string",
+        },
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 153,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L153",
+          },
+          "type": "(el: HTMLDivElement) => void",
+        },
+        {
+          "name": "style",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 152,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L152",
+          },
+          "type": "string | CSSProperties",
+        },
+        {
+          "comment": {
+            "summary": "Disable focus trapping. Default: true (trapping enabled).",
+            "tags": [],
+          },
+          "name": "trapFocus",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 155,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L155",
+          },
+          "type": "boolean",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 149,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L149",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 260,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L260",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DialogDescriptionProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 261,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L261",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 259,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L259",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 109,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L109",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DialogPortalProps",
+      "props": [],
+      "signatures": [],
+      "source": {
+        "line": 108,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L108",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 37,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L37",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DialogRootProps",
+      "props": [
+        {
+          "comment": {
+            "summary": "Default open state (uncontrolled).",
+            "tags": [],
+          },
+          "name": "defaultOpen",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 32,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L32",
+          },
+          "type": "boolean",
+        },
+        {
+          "comment": {
+            "summary": "Whether the dialog is modal. Default: true.",
+            "tags": [],
+          },
+          "name": "modal",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 36,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L36",
+          },
+          "type": "boolean",
+        },
+        {
+          "comment": {
+            "summary": "Called when open state change is requested.",
+            "tags": [],
+          },
+          "name": "onOpenChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 34,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L34",
+          },
+          "type": "(open: boolean, details: ChangeDetails<DisclosureReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Controlled open state.",
+            "tags": [],
+          },
+          "name": "open",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 30,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L30",
+          },
+          "type": "Accessor<boolean>",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 28,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L28",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 239,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L239",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DialogTitleProps",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 240,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L240",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 238,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L238",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 73,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L73",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "interface",
+      "name": "DialogTriggerProps",
+      "props": [
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 74,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L74",
+          },
+          "type": "(el: HTMLButtonElement) => void",
+        },
+      ],
+      "signatures": [],
+      "source": {
+        "line": 72,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L72",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 109,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L109",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Portal",
+      "props": [],
+      "signatures": [
+        {
+          "comment": {
+            "summary": "Portal wrapper — renders children only when present.
+In Solid 2 beta, native Portal API is not yet stable.
+This renders inline with Show; actual DOM portalling deferred.",
+            "tags": [],
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DialogPortalProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 117,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L117",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 117,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L117",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 37,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L37",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Root",
+      "props": [
+        {
+          "comment": {
+            "summary": "Default open state (uncontrolled).",
+            "tags": [],
+          },
+          "name": "defaultOpen",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 32,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L32",
+          },
+          "type": "boolean",
+        },
+        {
+          "comment": {
+            "summary": "Whether the dialog is modal. Default: true.",
+            "tags": [],
+          },
+          "name": "modal",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 36,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L36",
+          },
+          "type": "boolean",
+        },
+        {
+          "comment": {
+            "summary": "Called when open state change is requested.",
+            "tags": [],
+          },
+          "name": "onOpenChange",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 34,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L34",
+          },
+          "type": "(open: boolean, details: ChangeDetails<DisclosureReason>) => void",
+        },
+        {
+          "comment": {
+            "summary": "Controlled open state.",
+            "tags": [],
+          },
+          "name": "open",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 30,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L30",
+          },
+          "type": "Accessor<boolean>",
+        },
+      ],
+      "signatures": [
+        {
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DialogRootProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 40,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L40",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 40,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L40",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 239,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L239",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Title",
+      "props": [
+        {
+          "name": "class",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 240,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L240",
+          },
+          "type": "string",
+        },
+      ],
+      "signatures": [
+        {
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DialogTitleProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 243,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L243",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 243,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L243",
+      },
+    },
+    {
+      "children": {
+        "name": "children",
+        "optional": false,
+        "readonly": false,
+        "source": {
+          "line": 73,
+          "path": "packages/dialog/src/dialog.tsx",
+          "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L73",
+        },
+        "type": "Element",
+      },
+      "comment": {
+        "summary": "@solidiom/dialog — Headless modal dialog primitive.
+
+Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
+        "tags": [],
+      },
+      "inheritance": {
+        "extends": [],
+        "implements": [],
+      },
+      "kind": "component",
+      "name": "Trigger",
+      "props": [
+        {
+          "name": "ref",
+          "optional": true,
+          "readonly": false,
+          "source": {
+            "line": 74,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L74",
+          },
+          "type": "(el: HTMLButtonElement) => void",
+        },
+      ],
+      "signatures": [
+        {
+          "parameters": [
+            {
+              "name": "props",
+              "optional": false,
+              "type": "DialogTriggerProps",
+            },
+          ],
+          "returns": "Element",
+          "source": {
+            "line": 77,
+            "path": "packages/dialog/src/dialog.tsx",
+            "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L77",
+          },
+          "typeParameters": [],
+        },
+      ],
+      "source": {
+        "line": 77,
+        "path": "packages/dialog/src/dialog.tsx",
+        "url": "https://github.com/solidiom/solidiom/blob/main/packages/dialog/src/dialog.tsx#L77",
+      },
+    },
+  ],
+  "packageName": "@solidiom/dialog",
+  "schemaVersion": 1,
+}
+`;

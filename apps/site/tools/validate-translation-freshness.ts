@@ -1,11 +1,19 @@
 #!/usr/bin/env tsx
 /**
- * I18N-004 translation freshness and terminology validation.
+ * I18N-004 / CONTENT-004 translation freshness and terminology validation.
  *
  * Translation metadata records the English source hash, lifecycle status, and
  * reviewer provenance. GA content fails closed unless its translation is both
  * fresh and human-reviewed; beta/draft content remains report-only until its
  * release maturity is raised.
+ *
+ * Covers two content graphs:
+ *   1. Site-wide content: apps/site/src/content/{en,es}/** (guides, articles,
+ *      changelog, pages, components, blocks, templates, themes), gated by the
+ *      authored `maturity` frontmatter field (draft/beta/ga).
+ *   2. Package-colocated content: packages/*\/docs/** (primitive overview,
+ *      accessibility contracts, examples), gated by the primitive's registry
+ *      `status` (a primitive at registry status "stable" is GA — CONTENT-004).
  */
 import { existsSync, readdirSync, readFileSync } from "node:fs"
 import { dirname, extname, join, relative, resolve, sep } from "node:path"
@@ -17,8 +25,7 @@ import {
 } from "../src/lib/translation"
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
-const contentEnRoot = join(projectRoot, "src", "content", "en")
-const contentEsRoot = join(projectRoot, "src", "content", "es")
+const workspaceRoot = resolve(projectRoot, "..", "..")
 const CONTENT_EXTENSIONS = new Set([".md", ".mdx"])
 type Maturity = "draft" | "beta" | "ga"
 
@@ -117,11 +124,16 @@ function resolveMaturity(value: string | undefined): Maturity {
   return value === "ga" || value === "draft" ? value : "beta"
 }
 
-function resolveFileStatus(relativePath: string): FileStatus {
+function resolveFileStatus(
+  contentEnRoot: string,
+  contentEsRoot: string,
+  relativePath: string,
+  maturityOf: (frontmatter: Record<string, string>) => Maturity,
+): FileStatus {
   const enPath = join(contentEnRoot, relativePath)
   const esPath = join(contentEsRoot, relativePath)
   const english = readFileSync(enPath, "utf8")
-  const maturity = resolveMaturity(extractFrontmatter(english).maturity)
+  const maturity = maturityOf(extractFrontmatter(english))
 
   if (!existsSync(esPath)) {
     return { file: relativePath, maturity, status: "missing", detail: ["no Spanish counterpart"] }
@@ -175,13 +187,71 @@ function resolveFileStatus(relativePath: string): FileStatus {
   }
 }
 
-const englishFiles = collectContentFiles(contentEnRoot, contentEnRoot)
-if (englishFiles.length === 0) {
-  console.log("No English content files found in src/content/en/.")
-  process.exit(0)
+// ─── Source A: site-wide content (apps/site/src/content/{en,es}) ──────────
+
+const siteContentEnRoot = join(projectRoot, "src", "content", "en")
+const siteContentEsRoot = join(projectRoot, "src", "content", "es")
+const siteMaturityOf = (frontmatter: Record<string, string>): Maturity =>
+  resolveMaturity(frontmatter.maturity)
+
+const siteFiles = collectContentFiles(siteContentEnRoot, siteContentEnRoot)
+const siteResults = siteFiles.map((file) =>
+  resolveFileStatus(siteContentEnRoot, siteContentEsRoot, file, siteMaturityOf),
+)
+
+// ─── Source B: package-colocated content (packages/*/docs/**) — CONTENT-004 ─
+//
+// A package doc's GA-blocking maturity is derived from the primitive's
+// registry status (registry/index.json), not a separate frontmatter field:
+// a "stable" registry entry is GA and its translations must be fresh and
+// human-reviewed; "preview"/"experimental"/"deprecated" remain report-only.
+
+interface RegistryIndexSummary {
+  version: number
+  primitives: Array<{ name: string; status: string }>
 }
 
-const results = englishFiles.map(resolveFileStatus)
+function loadPrimitiveStatuses(): Map<string, string> {
+  const indexPath = join(workspaceRoot, "registry", "index.json")
+  if (!existsSync(indexPath)) return new Map()
+  const index = JSON.parse(readFileSync(indexPath, "utf8")) as RegistryIndexSummary
+  return new Map(index.primitives.map((p) => [p.name, p.status]))
+}
+
+function packageDocMaturityOf(primitiveName: string, primitiveStatuses: Map<string, string>): Maturity {
+  const status = primitiveStatuses.get(primitiveName)
+  return status === "stable" ? "ga" : "beta"
+}
+
+const packagesRoot = join(workspaceRoot, "packages")
+const primitiveStatuses = loadPrimitiveStatuses()
+const packageResults: FileStatus[] = []
+
+if (existsSync(packagesRoot)) {
+  for (const packageName of readdirSync(packagesRoot)) {
+    const docsDir = join(packagesRoot, packageName, "docs")
+    if (!existsSync(docsDir)) continue
+
+    // Package docs pair english at docs/<rel> with spanish at docs/es/<rel>,
+    // for every english-side file except the es/ subtree itself.
+    const englishRelativeFiles = collectContentFiles(docsDir, docsDir).filter(
+      (file) => !file.startsWith("es/"),
+    )
+    if (englishRelativeFiles.length === 0) continue
+
+    const maturity = packageDocMaturityOf(packageName, primitiveStatuses)
+    for (const relativeFile of englishRelativeFiles) {
+      const result = resolveFileStatus(docsDir, join(docsDir, "es"), relativeFile, () => maturity)
+      packageResults.push({ ...result, file: `packages/${packageName}/docs/${relativeFile}` })
+    }
+  }
+}
+
+const results = [...siteResults, ...packageResults]
+if (results.length === 0) {
+  console.log("No content files found to validate.")
+  process.exit(0)
+}
 const counts: Record<TranslationStatus, number> = {
   "human-reviewed": 0,
   draft: 0,

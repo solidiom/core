@@ -86,11 +86,21 @@ export interface CatalogCopy {
   status: string
   install: string
   apiUnavailable: string
+  apiMalformed: string
+  apiInvalidShape: string
+  apiEmpty: string
   examplesUnavailable: string
   accessibilityUnavailable: string
   generatedFrom: string
   props: string
   viewSource: string
+  copyCode: string
+  linkToSection: string
+  children: string
+  apiKindLabels: Record<
+    "class" | "component" | "context" | "enum" | "function" | "interface" | "namespace" | "type" | "variable" | "unknown",
+    string
+  >
   automatedEvidence: string
   evidenceSummary: string
   passes: string
@@ -118,11 +128,29 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
     status: "Status",
     install: "Install",
     apiUnavailable: "Generated API reference is not available yet.",
+    apiMalformed: "The generated API artifact for this primitive could not be read.",
+    apiInvalidShape: "The generated API artifact for this primitive does not match the expected schema.",
+    apiEmpty: "The generated API artifact exists but declares no public exports.",
     examplesUnavailable: "Examples will be published with the primitive's reviewed documentation.",
     accessibilityUnavailable: "Accessibility guidance and evidence will be published after review.",
     generatedFrom: "Generated from the package's public source.",
     props: "Props",
     viewSource: "View source",
+    copyCode: "Copy",
+    linkToSection: "Link to this section",
+    children: "children",
+    apiKindLabels: {
+      class: "class",
+      component: "component",
+      context: "context",
+      enum: "enum",
+      function: "function",
+      interface: "interface",
+      namespace: "namespace",
+      type: "type",
+      variable: "variable",
+      unknown: "unknown",
+    },
     automatedEvidence: "Automated evidence",
     evidenceSummary: "Axe scan summary",
     passes: "Passes",
@@ -150,6 +178,10 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
     status: "Estado",
     install: "Instalar",
     apiUnavailable: "La referencia de API generada aún no está disponible.",
+    apiMalformed: "No se pudo leer el artefacto de API generado para esta primitiva.",
+    apiInvalidShape:
+      "El artefacto de API generado para esta primitiva no coincide con el esquema esperado.",
+    apiEmpty: "El artefacto de API generado existe pero no declara exportaciones públicas.",
     examplesUnavailable:
       "Los ejemplos se publicarán con la documentación revisada de la primitiva.",
     accessibilityUnavailable:
@@ -157,6 +189,21 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
     generatedFrom: "Generado a partir del código fuente público del paquete.",
     props: "Propiedades",
     viewSource: "Ver código fuente",
+    copyCode: "Copiar",
+    linkToSection: "Enlace a esta sección",
+    children: "hijos",
+    apiKindLabels: {
+      class: "clase",
+      component: "componente",
+      context: "contexto",
+      enum: "enumeración",
+      function: "función",
+      interface: "interfaz",
+      namespace: "espacio de nombres",
+      type: "tipo",
+      variable: "variable",
+      unknown: "desconocido",
+    },
     automatedEvidence: "Evidencia automatizada",
     evidenceSummary: "Resumen del análisis axe",
     passes: "Comprobaciones superadas",
@@ -229,12 +276,36 @@ export function primitiveHref(
   return `${prefix}/primitives/${name}${suffix}/`
 }
 
-export function getApiDocument(name: string): NormalizedApiDocument | undefined {
-  const artifactPath = resolve(API_ARTIFACTS_DIR, `${name}.json`)
-  if (!existsSync(artifactPath)) return undefined
+export type ApiDocumentDiagnostic = "missing" | "malformed" | "invalid-shape" | "empty" | "ok"
 
-  const raw = readJson(artifactPath)
-  if (!raw || typeof raw !== "object") return undefined
+export interface ApiDocumentResult {
+  document?: NormalizedApiDocument
+  diagnostic: ApiDocumentDiagnostic
+}
+
+/**
+ * Reads a generated API artifact at build time, distinguishing *why* it is
+ * unavailable rather than collapsing every failure into a single generic
+ * "unavailable" state (API-003):
+ *   - "missing": no artifact file exists yet for this primitive.
+ *   - "malformed": the artifact file exists but is not valid JSON.
+ *   - "invalid-shape": the artifact parses but fails the normalized API
+ *     schema check (wrong `$schema`/`schemaVersion`, or missing fields).
+ *   - "empty": the artifact is valid but declares zero public exports.
+ *   - "ok": the artifact is valid and has at least one export.
+ */
+export function getApiDocumentResult(name: string): ApiDocumentResult {
+  const artifactPath = resolve(API_ARTIFACTS_DIR, `${name}.json`)
+  if (!existsSync(artifactPath)) return { diagnostic: "missing" }
+
+  let raw: unknown
+  try {
+    raw = readJson(artifactPath)
+  } catch {
+    return { diagnostic: "malformed" }
+  }
+
+  if (!raw || typeof raw !== "object") return { diagnostic: "invalid-shape" }
   const document = raw as Partial<NormalizedApiDocument>
   if (
     document.$schema !== API_SCHEMA_URL ||
@@ -243,10 +314,18 @@ export function getApiDocument(name: string): NormalizedApiDocument | undefined 
     !Array.isArray(document.entryPoints) ||
     !Array.isArray(document.exports)
   ) {
-    return undefined
+    return { diagnostic: "invalid-shape" }
   }
 
-  return document as NormalizedApiDocument
+  const normalized = document as NormalizedApiDocument
+  return {
+    document: normalized,
+    diagnostic: normalized.exports.length === 0 ? "empty" : "ok",
+  }
+}
+
+export function getApiDocument(name: string): NormalizedApiDocument | undefined {
+  return getApiDocumentResult(name).document
 }
 
 function isAccessibilityEvidence(value: unknown): value is AccessibilityEvidence {
