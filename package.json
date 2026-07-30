@@ -29,6 +29,7 @@
     "test:a11y": "tsx tools/run-a11y.ts",
     "report:axe": "tsx tools/generate-axe-report.ts",
     "report:a11y-evidence": "tsx tools/a11y-evidence.ts",
+    "a11y:coverage-gate": "tsx tools/a11y-coverage-gate.ts",
     "audit:recipe-drift": "tsx tools/audit-recipe-dual-emission.ts",
     "audit:umbrella-purity": "tsx tools/audit-umbrella-purity.ts",
     "gate:phase1": "tsx tools/phase1-gate.ts",
