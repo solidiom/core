@@ -82,6 +82,22 @@ An axis maps each value to **per-slot** declarations, so a root-level variant ca
 { name: "size", values: { icon: { root: { width: "2.5rem" }, thumb: { width: "1rem" } } } }
 ```
 
+When a pseudo declaration differs by variant, use the long form on that part. `base` applies whenever the variant matches; `pseudos` stays on the same part, so all output forms can emit the interaction without an ancestor selector:
+
+```ts
+{
+  name: "variant",
+  values: {
+    default: {
+      root: {
+        base: { "background-color": { token: "primary" } },
+        pseudos: { ":hover": { "background-color": { token: "primary-hover" } } },
+      },
+    },
+  },
+}
+```
+
 `defaultVariants` must name a declared value on every declared axis, or emitters cannot resolve an unspecified value.
 
 ### 2.4 Compound variants
@@ -92,15 +108,15 @@ Constrain two or more axes. Applied after single-axis variants, in declaration o
 
 Exported from `@solidiom/runtime`. Fourteen attributes:
 
-| Attribute                         | Values                                                                 |
-| --------------------------------- | ---------------------------------------------------------------------- |
-| `data-scope`                      | Primitive package name                                                 |
-| `data-part`                       | Part name                                                              |
-| `data-state`                      | Per-scope; 33 scopes declared in `SCOPE_STATES`                        |
-| `data-orientation`                | `horizontal`, `vertical`                                               |
-| `data-side`                       | `top`, `right`, `bottom`, `left` — set directly by positioned overlays |
-| `data-size`                       | `sm`, `base`, `lg` — composite scopes only                             |
-| `data-disabled` … `data-selected` | The 8 boolean flags; present or absent, never `="false"`               |
+| Attribute                         | Values                                                                            |
+| --------------------------------- | --------------------------------------------------------------------------------- |
+| `data-scope`                      | Primitive package name                                                            |
+| `data-part`                       | Part name                                                                         |
+| `data-state`                      | Per-scope; 35 known scopes (33 stateful, Badge/Toast stateless) in `SCOPE_STATES` |
+| `data-orientation`                | `horizontal`, `vertical`                                                          |
+| `data-side`                       | `top`, `right`, `bottom`, `left` — set directly by positioned overlays            |
+| `data-size`                       | `sm`, `base`, `lg` — composite scopes only                                        |
+| `data-disabled` … `data-selected` | The 8 boolean flags; present or absent, never `="false"`                          |
 
 `SCOPE_STATES` is descriptive: every entry was read from the primitive that emits it. Adding a state to a primitive without declaring it here fails `tools/recipe-contract-vocabulary.test.ts`.
 
@@ -183,7 +199,7 @@ The cross-part row is why §3.2 of the authoring guide forbids ancestor-state st
 | §3.1 backed declarations   | A variant value or declaration group with no declarations; a slot with no styling                                                                                                                           |
 | §3.2 no ancestor state     | A part name containing a selector combinator                                                                                                                                                                |
 | §3.3 matched coverage      | A variant or compound styling an undeclared slot                                                                                                                                                            |
-| §3.4 presence states       | An open/closed scope where no slot styles `open` or `closed`                                                                                                                                                |
+| §3.4 presence states       | A `createPresence` scope where no slot styles `open` or `closed`                                                                                                                                            |
 | §3.5 canonical tokens      | A token reference that is not a canonical identity                                                                                                                                                          |
 | §3.6 closed vocabulary     | An unknown scope, a state not declared for the scope, a flag outside the vocabulary                                                                                                                         |
 | §3.7 documented exceptions | A consumer slot with no reason; an adapter slot with no port; `adapterPort` on a recipe-owned slot                                                                                                          |

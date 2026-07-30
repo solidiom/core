@@ -19,10 +19,14 @@
  *    because the class-string emission forms cannot express one: Tailwind needs
  *    `group-data-*` and the UnoCSS preset appends selectors to the same element only.
  *    A root state that affects a child requires the primitive to emit `data-state` on
- *    that child, which every current primitive already does.
+ *    the child, which every current primitive already supports.
  *
  * 4. Compound variants resolve by declaration order, last match winning. All emitters
  *    must apply the same order or the three outputs diverge on conflicting axes.
+ *
+ * 5. Variant and compound-variant styles may include per-part pseudo declarations.
+ *    This keeps existing variant-specific interaction styling (for example Badge's
+ *    distinct hover fills) canonical instead of forcing an emitter-time exception.
  *
  * Everything is JSON-representable so definitions can be serialised, snapshotted, and
  * eventually authored outside TypeScript.
@@ -56,8 +60,48 @@ export type DeclarationValue = string | { token: string; fallback?: string }
 /** CSS property → value. Property names are kebab-case CSS, not camelCase. */
 export type Declarations = Readonly<Record<string, DeclarationValue>>
 
-/** Per-part declaration groups, used by variants and compound variants. */
-export type PartDeclarations = Readonly<Record<string, Declarations>>
+/**
+ * A part's conditional style contribution in a variant or compound variant.
+ * `base` applies whenever that variant matches; `pseudos` is evaluated on the same part.
+ */
+export interface VariantPartStyling {
+  base?: Declarations
+  pseudos?: Readonly<Record<string, Declarations>>
+}
+
+/**
+ * Per-part styling used by variants and compound variants.
+ *
+ * The shorthand `part: { ...declarations }` remains valid for a base-only contribution.
+ * Use `{ base, pseudos }` when an interaction style varies by variant.
+ */
+export type PartDeclarations = Readonly<Record<string, Declarations | VariantPartStyling>>
+
+/** True when a part contribution uses the long-form conditional shape. */
+export function isVariantPartStyling(
+  styling: Declarations | VariantPartStyling,
+): styling is VariantPartStyling {
+  return "base" in styling || "pseudos" in styling
+}
+
+/**
+ * Every declaration group in a variant/compound contribution, with a path describing
+ * whether it is a base or pseudo declaration. Shared by traversal and validation.
+ */
+export function declarationGroupsForPartStyling(
+  path: string,
+  part: string,
+  styling: Declarations | VariantPartStyling,
+): Array<{ path: string; part: string; declarations: Declarations }> {
+  if (!isVariantPartStyling(styling)) return [{ path, part, declarations: styling }]
+
+  const groups: Array<{ path: string; part: string; declarations: Declarations }> = []
+  if (styling.base) groups.push({ path: `${path}.base`, part, declarations: styling.base })
+  for (const [pseudo, declarations] of Object.entries(styling.pseudos ?? {})) {
+    groups.push({ path: `${path}.pseudos.${pseudo}`, part, declarations })
+  }
+  return groups
+}
 
 export interface RecipeSlot {
   /** `data-part` value. Unique within the definition. */
@@ -118,28 +162,41 @@ export function eachDeclarationGroup(
 
   for (const slot of definition.slots) {
     groups.push({ path: `slots.${slot.part}.base`, part: slot.part, declarations: slot.base })
-    for (const [state, declarations] of Object.entries(slot.states ?? {}))
+    for (const [state, declarations] of Object.entries(slot.states ?? {})) {
       groups.push({ path: `slots.${slot.part}.states.${state}`, part: slot.part, declarations })
-    for (const [flag, declarations] of Object.entries(slot.flags ?? {}))
+    }
+    for (const [flag, declarations] of Object.entries(slot.flags ?? {})) {
       groups.push({
         path: `slots.${slot.part}.flags.${flag}`,
         part: slot.part,
         declarations: declarations as Declarations,
       })
-    for (const [pseudo, declarations] of Object.entries(slot.pseudos ?? {}))
+    }
+    for (const [pseudo, declarations] of Object.entries(slot.pseudos ?? {})) {
       groups.push({ path: `slots.${slot.part}.pseudos.${pseudo}`, part: slot.part, declarations })
+    }
   }
 
   for (const axis of definition.variants ?? []) {
     for (const [value, parts] of Object.entries(axis.values)) {
-      for (const [part, declarations] of Object.entries(parts))
-        groups.push({ path: `variants.${axis.name}.${value}.${part}`, part, declarations })
+      for (const [part, styling] of Object.entries(parts)) {
+        groups.push(
+          ...declarationGroupsForPartStyling(
+            `variants.${axis.name}.${value}.${part}`,
+            part,
+            styling,
+          ),
+        )
+      }
     }
   }
 
   for (const [index, compound] of (definition.compoundVariants ?? []).entries()) {
-    for (const [part, declarations] of Object.entries(compound.declarations))
-      groups.push({ path: `compoundVariants[${index}].${part}`, part, declarations })
+    for (const [part, styling] of Object.entries(compound.declarations)) {
+      groups.push(
+        ...declarationGroupsForPartStyling(`compoundVariants[${index}].${part}`, part, styling),
+      )
+    }
   }
 
   return groups

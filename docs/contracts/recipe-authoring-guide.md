@@ -129,7 +129,7 @@ Both `button.css` files currently style only the default variant while `buttonVa
 
 ### 3.4 Overlay recipes must style their presence states
 
-Any recipe for a primitive with an open/closed lifecycle — dialog, popover, tooltip, menu, toast, sheet, drawer, hover-card — must style `data-state="open"` and `data-state="closed"` on the parts that appear and disappear. None of the current overlay stylesheets do, so overlays get no enter/exit treatment from the recipe layer at all.
+Any recipe for a primitive that retains its DOM through `createPresence` while closing — currently Alert Dialog, Command Palette, Date Picker, Dialog, Drawer, Navigation Menu, Popover, Sheet, and Tooltip — must style `data-state="open"` and `data-state="closed"` on the parts that appear and disappear. `SCOPE_STATES` alone is not enough to identify this set: Accordion, Menu, and Select also emit open/closed state, but unmount their content immediately, while Toast has no open/closed state. Presence styling would be meaningless for those primitives. The current Dialog, Popover, and Tooltip stylesheets do not yet supply this enter/exit treatment; RECIPE-002/003 address that gap.
 
 ### 3.5 Token identity is shared; token mechanism is profile-local
 
@@ -219,7 +219,7 @@ Tailwind profile — same selectors, `@apply` inside `@layer components`:
 }
 ```
 
-Cover every part, every state from §3.4, and every variant you expose in §4.3.
+Cover every part, every state from §3.4, and every variant you expose in §4.3. When an interaction declaration varies by variant, keep it in that variant's long-form `pseudos` block; do not encode it as a wrapper class or an ancestor selector.
 
 ### 4.3 Class string — `src/recipes/<name>.tsx`
 
