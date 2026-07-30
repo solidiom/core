@@ -14,7 +14,47 @@ export interface RecipeAuditOptions {
   profileDir: string
 }
 
-const UTILITY_STYLESHEETS = new Set(["prose", "typeset"])
+/**
+ * A profile that ships neither emission form.
+ *
+ * Reported so an unimplemented profile is visibly pending rather than
+ * indistinguishable from a clean one, which is how `recipes-unocss` previously
+ * passed this check while advertising 13 primitives.
+ */
+export interface RecipePendingProfile {
+  profile: string
+  implementedBy: string
+}
+
+export interface RecipeAuditResult {
+  errors: RecipeDriftError[]
+  pending: RecipePendingProfile[]
+}
+
+/**
+ * Reads the `profileStatus` / `implementedBy` markers from a profile entry point.
+ *
+ * A profile with no emission directories is tolerated only when it declares
+ * itself unimplemented. Absent or contradictory markers are an error, so a
+ * profile cannot silently regress to empty.
+ */
+function readProfileStatus(profileDir: string): { declared: boolean; implementedBy: string } {
+  const entry = join(profileDir, "index.ts")
+  if (!existsSync(entry)) return { declared: false, implementedBy: "" }
+
+  const source = readFileSync(entry, "utf8")
+  const declared = /profileStatus\s*=\s*["']declared["']/.test(source)
+  const implementedBy = source.match(/implementedBy\s*=\s*["']([^"']+)["']/)?.[1] ?? ""
+  return { declared, implementedBy }
+}
+
+/**
+ * Stylesheets that are not recipes and therefore need no paired class-string form.
+ *
+ * - `prose`, `typeset` — composite typography scopes with no primitive behind them.
+ * - `theme` — the profile's token contract (`@theme` registrations), not a recipe.
+ */
+const UTILITY_STYLESHEETS = new Set(["prose", "typeset", "theme"])
 
 /**
  * Styled parts that a recipe intentionally leaves to consumer composition.
@@ -105,6 +145,15 @@ export function auditRecipeProfile({
         message: "TSX recipes directory has no matching styles/ directory",
       })
     }
+    // Neither form present: tolerated only when the profile declares itself unimplemented.
+    if (!hasStyles && !hasRecipes && !readProfileStatus(profileDir).declared) {
+      errors.push({
+        profile: profileName,
+        file: "src/",
+        message:
+          'profile ships neither styles/ nor recipes/ and does not declare profileStatus = "declared" — an empty profile must state that it is unimplemented and name the task that closes it',
+      })
+    }
     return errors
   }
 
@@ -171,17 +220,38 @@ export function auditRecipeProfile({
   return errors
 }
 
-export function auditRecipeProfiles(root = ROOT): RecipeDriftError[] {
+/** Reports a profile that ships neither emission form while declaring itself unimplemented. */
+export function pendingRecipeProfile({
+  profileName,
+  profileDir,
+}: RecipeAuditOptions): RecipePendingProfile | undefined {
+  if (existsSync(join(profileDir, "styles")) || existsSync(join(profileDir, "recipes"))) return
+  const { declared, implementedBy } = readProfileStatus(profileDir)
+  if (!declared) return
+  return { profile: profileName, implementedBy: implementedBy || "unassigned" }
+}
+
+export function auditRecipeProfiles(root = ROOT): RecipeAuditResult {
   const profiles = ["recipes-css", "recipes-tailwind", "recipes-unocss"]
     .map((profileName) => ({ profileName, profileDir: join(root, "packages", profileName, "src") }))
     .filter(({ profileDir }) => existsSync(profileDir))
 
-  return profiles.flatMap(auditRecipeProfile)
+  return {
+    errors: profiles.flatMap(auditRecipeProfile),
+    pending: profiles
+      .map(pendingRecipeProfile)
+      .filter((entry): entry is RecipePendingProfile => !!entry),
+  }
 }
 
 function main(): void {
   console.log("Recipe dual-emission drift check\n")
-  const errors = auditRecipeProfiles()
+  const { errors, pending } = auditRecipeProfiles()
+
+  for (const { profile, implementedBy } of pending) {
+    console.log(`  ⧗ ${profile}: declared but unimplemented — ships no recipes (${implementedBy})`)
+  }
+  if (pending.length > 0) console.log("")
 
   if (errors.length === 0) {
     console.log("✓ Recipe dual-emission drift check PASSED")

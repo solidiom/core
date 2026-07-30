@@ -1434,7 +1434,11 @@ importers:
         specifier: 2.0.0-beta.24
         version: 2.0.0-beta.24
 
-  packages/unocss-preset: {}
+  packages/unocss-preset:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
 
   packages/virtual-list:
     dependencies:

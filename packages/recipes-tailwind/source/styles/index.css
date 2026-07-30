@@ -1,4 +1,6 @@
 /* @solidiom/recipes-tailwind — All primitives combined stylesheet */
+/* Theme contract first: registers the theme names every recipe below references. */
+@import "./theme.css";
 @import "./button.css";
 @import "./checkbox.css";
 @import "./switch.css";
