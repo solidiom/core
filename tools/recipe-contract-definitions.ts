@@ -295,9 +295,603 @@ export const dialogRecipe: RecipeDefinition = {
   ],
 }
 
-/** Every reference definition, keyed by scope. */
+/** Accordion — disclosure rows with a non-presence content panel. */
+export const accordionRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "accordion",
+  description: "Vertical disclosure rows with a keyboard-accessible trigger and panel content.",
+  slots: [
+    {
+      part: "item",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        "border-bottom-style": "solid",
+        "border-bottom-width": "1px",
+        "border-bottom-color": { token: "border" },
+      },
+    },
+    {
+      part: "trigger",
+      element: "button",
+      ownership: "recipe",
+      base: {
+        display: "flex",
+        width: "100%",
+        "align-items": "center",
+        "justify-content": "space-between",
+        padding: "1rem 0",
+        "font-size": "0.875rem",
+        "font-weight": "500",
+        "border-style": "none",
+        "background-color": "transparent",
+        cursor: "pointer",
+        transition: "color 0.15s",
+      },
+      flags: { disabled: { opacity: "0.5", cursor: "not-allowed" } },
+      pseudos: { ":hover": { "text-decoration-line": "underline" } },
+    },
+    {
+      part: "content",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        overflow: "hidden",
+        "padding-bottom": "1rem",
+        "font-size": "0.875rem",
+        color: { token: "foreground-muted" },
+      },
+    },
+  ],
+}
+
+/** Alert — semantic status messages rendered from the primitive's data-state. */
+export const alertRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "alert",
+  description: "Live-region status message with informational, success, warning, and error states.",
+  slots: [
+    {
+      part: "root",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        position: "relative",
+        display: "flex",
+        "flex-direction": "column",
+        gap: "0.25rem",
+        padding: "1rem",
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "border-radius": { token: "radius" },
+        "font-size": "0.875rem",
+        "line-height": "1.25rem",
+      },
+      states: {
+        info: {
+          "background-color": { token: "info-surface" },
+          "border-color": { token: "info-border" },
+          color: { token: "info" },
+        },
+        success: {
+          "background-color": { token: "success-surface" },
+          "border-color": { token: "success-border" },
+          color: { token: "success" },
+        },
+        warning: {
+          "background-color": { token: "warning-surface" },
+          "border-color": { token: "warning-border" },
+          color: { token: "warning" },
+        },
+        error: {
+          "background-color": { token: "danger-surface" },
+          "border-color": { token: "danger-border" },
+          color: { token: "danger" },
+        },
+      },
+    },
+    {
+      part: "title",
+      element: "h5",
+      ownership: "recipe",
+      base: {
+        margin: "0",
+        "font-size": "0.875rem",
+        "font-weight": "600",
+        "line-height": "1.25rem",
+        "letter-spacing": "-0.01em",
+      },
+    },
+    {
+      part: "description",
+      element: "div",
+      ownership: "recipe",
+      base: { "font-size": "0.875rem", "line-height": "1.4", opacity: "0.9" },
+    },
+  ],
+}
+
+/** Badge — compact labels with generated intent variants and variant-specific hover fills. */
+export const badgeRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "badge",
+  description: "Compact inline label with intent and outline variants.",
+  slots: [
+    {
+      part: "root",
+      element: "span",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        padding: "0.125rem 0.625rem",
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": "transparent",
+        "border-radius": { token: "radius" },
+        "font-size": "0.75rem",
+        "line-height": "1rem",
+        "font-weight": "600",
+        transition: "background-color 0.15s, color 0.15s, border-color 0.15s",
+      },
+    },
+  ],
+  variants: [
+    {
+      name: "variant",
+      values: {
+        default: {
+          root: {
+            base: {
+              "background-color": { token: "primary" },
+              color: { token: "primary-foreground" },
+            },
+            pseudos: { ":hover": { "background-color": { token: "primary-hover" } } },
+          },
+        },
+        secondary: {
+          root: {
+            base: {
+              "background-color": { token: "secondary" },
+              color: { token: "secondary-foreground" },
+            },
+            pseudos: { ":hover": { "background-color": { token: "secondary-hover" } } },
+          },
+        },
+        destructive: {
+          root: {
+            base: {
+              "background-color": { token: "destructive" },
+              color: { token: "destructive-foreground" },
+            },
+            pseudos: { ":hover": { "background-color": { token: "destructive-hover" } } },
+          },
+        },
+        outline: {
+          root: {
+            color: { token: "foreground" },
+            "border-color": { token: "border" },
+            "background-color": "transparent",
+          },
+        },
+      },
+    },
+  ],
+  defaultVariants: { variant: "default" },
+}
+
+/** Checkbox — tri-state control with an indicator rendered only for visible states. */
+export const checkboxRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "checkbox",
+  description: "Tri-state checkbox with checked, unchecked, and indeterminate visual states.",
+  slots: [
+    {
+      part: "root",
+      element: "button",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        width: "1rem",
+        height: "1rem",
+        "border-radius": "0.25rem",
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": "transparent",
+        cursor: "pointer",
+        transition: "background-color 0.15s, border-color 0.15s",
+      },
+      states: {
+        checked: {
+          "background-color": { token: "primary" },
+          "border-color": { token: "primary" },
+          color: { token: "primary-foreground" },
+        },
+        unchecked: { "background-color": "transparent", "border-color": { token: "border" } },
+        indeterminate: {
+          "background-color": { token: "primary" },
+          "border-color": { token: "primary" },
+          color: { token: "primary-foreground" },
+        },
+      },
+      flags: { disabled: { opacity: "0.5", cursor: "not-allowed" } },
+    },
+    {
+      part: "indicator",
+      element: "span",
+      ownership: "recipe",
+      base: { display: "flex", "align-items": "center", "justify-content": "center" },
+    },
+  ],
+}
+
+/** Menu — trigger, menu panel, items, and separators; optional item variants remain consumer composition. */
+export const menuRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "menu",
+  description: "Keyboard-navigable menu with trigger, panel, actionable rows, and separators.",
+  slots: [
+    {
+      part: "trigger",
+      element: "button",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "border-style": "none",
+        "background-color": "transparent",
+        cursor: "pointer",
+      },
+    },
+    {
+      part: "content",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        "z-index": "50",
+        "min-width": "8rem",
+        overflow: "hidden",
+        "border-radius": { token: "radius" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": { token: "surface" },
+        padding: "0.25rem",
+        "box-shadow": { token: "shadow-md" },
+      },
+    },
+    {
+      part: "item",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        padding: "0.375rem 0.5rem",
+        "border-radius": "0.25rem",
+        "font-size": "0.875rem",
+        cursor: "pointer",
+        outline: "none",
+      },
+      flags: {
+        highlighted: { "background-color": { token: "surface-accent" } },
+        disabled: { opacity: "0.5", cursor: "not-allowed" },
+      },
+    },
+    {
+      part: "separator",
+      element: "div",
+      ownership: "recipe",
+      base: { height: "1px", margin: "0.25rem -0.25rem", "background-color": { token: "border" } },
+    },
+  ],
+}
+
+/** Popover — positioned dialog panel with recipe-owned surfaces and adapter-owned geometry. */
+export const popoverRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "popover",
+  description:
+    "Dismissable floating dialog panel with a trigger, close control, and positioned content.",
+  slots: [
+    {
+      part: "trigger",
+      element: "button",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "border-style": "none",
+        "background-color": "transparent",
+        cursor: "pointer",
+      },
+    },
+    {
+      part: "content",
+      element: "div",
+      ownership: "adapter",
+      ownershipReason:
+        "The primitive renders the panel, while an optional PositioningPort supplies its inline placement geometry.",
+      adapterPort: "PositioningPort",
+      adapterOwnedProperties: ["position", "top", "right", "bottom", "left", "transform"],
+      base: {
+        "z-index": "50",
+        width: "18rem",
+        "border-radius": { token: "radius" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": { token: "surface" },
+        padding: "1rem",
+        "box-shadow": { token: "shadow-md" },
+        transition: "opacity 0.15s",
+      },
+      states: { open: { opacity: "1" }, closed: { opacity: "0" } },
+    },
+    {
+      part: "close",
+      element: "button",
+      ownership: "recipe",
+      base: {
+        position: "absolute",
+        top: "0.5rem",
+        right: "0.5rem",
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        width: "1.5rem",
+        height: "1.5rem",
+        "border-radius": "0.25rem",
+        "border-style": "none",
+        "background-color": "transparent",
+        cursor: "pointer",
+      },
+      pseudos: { ":hover": { "background-color": { token: "surface-accent" } } },
+    },
+  ],
+}
+
+/** Select — listbox control with stateful trigger, panel, and selectable items. */
+export const selectRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "select",
+  description:
+    "Listbox selection control with an accessible trigger, options, and highlighted or selected rows.",
+  slots: [
+    {
+      part: "trigger",
+      element: "button",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "space-between",
+        width: "100%",
+        height: "2.5rem",
+        padding: "0.5rem 0.75rem",
+        "border-radius": { token: "radius" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": "transparent",
+        "font-size": "0.875rem",
+        cursor: "pointer",
+      },
+      flags: { disabled: { opacity: "0.5", cursor: "not-allowed" } },
+    },
+    {
+      part: "content",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        "z-index": "50",
+        "min-width": "8rem",
+        overflow: "hidden",
+        "border-radius": { token: "radius" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": { token: "surface" },
+        padding: "0.25rem",
+        "box-shadow": { token: "shadow-md" },
+      },
+    },
+    {
+      part: "item",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        padding: "0.375rem 0.5rem 0.375rem 2rem",
+        "border-radius": "0.25rem",
+        "font-size": "0.875rem",
+        cursor: "pointer",
+        outline: "none",
+      },
+      states: { checked: { "font-weight": "500" }, unchecked: { "font-weight": "400" } },
+      flags: {
+        highlighted: { "background-color": { token: "surface-accent" } },
+        disabled: { opacity: "0.5", cursor: "not-allowed" },
+      },
+    },
+  ],
+}
+
+/** Tabs — tablist, stateful triggers, and the active panel. */
+export const tabsRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "tabs",
+  description: "Tabbed interface with an underline tablist and active or inactive trigger states.",
+  slots: [
+    {
+      part: "list",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        gap: "0",
+        "border-bottom-style": "solid",
+        "border-bottom-width": "1px",
+        "border-bottom-color": { token: "border" },
+      },
+    },
+    {
+      part: "trigger",
+      element: "button",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        padding: "0.5rem 1rem",
+        "font-size": "0.875rem",
+        "font-weight": "500",
+        "border-style": "none",
+        "background-color": "transparent",
+        color: { token: "foreground-muted" },
+        "border-bottom-style": "solid",
+        "border-bottom-width": "2px",
+        "border-bottom-color": "transparent",
+        cursor: "pointer",
+        transition: "color 0.15s, border-color 0.15s",
+      },
+      states: {
+        active: { color: { token: "foreground" }, "border-bottom-color": { token: "primary" } },
+        inactive: { color: { token: "foreground-muted" }, "border-bottom-color": "transparent" },
+      },
+      flags: { disabled: { opacity: "0.5", cursor: "not-allowed" } },
+    },
+    {
+      part: "content",
+      element: "div",
+      ownership: "recipe",
+      base: { padding: "1rem 0" },
+    },
+  ],
+}
+
+/** Toast — notification region, message content, and a dismiss affordance. */
+export const toastRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "toast",
+  description: "Polite notification queue with message title, description, and dismiss action.",
+  slots: [
+    {
+      part: "region",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        position: "fixed",
+        bottom: "1rem",
+        right: "1rem",
+        "z-index": "100",
+        display: "flex",
+        "flex-direction": "column",
+        gap: "0.5rem",
+        "max-width": "24rem",
+      },
+    },
+    {
+      part: "root",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        display: "flex",
+        "align-items": "flex-start",
+        gap: "0.75rem",
+        "border-radius": { token: "radius" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": { token: "surface" },
+        padding: "1rem",
+        "box-shadow": { token: "shadow-md" },
+      },
+    },
+    {
+      part: "title",
+      element: "div",
+      ownership: "recipe",
+      base: { "font-size": "0.875rem", "font-weight": "500" },
+    },
+    {
+      part: "description",
+      element: "div",
+      ownership: "recipe",
+      base: { "font-size": "0.8125rem", color: { token: "foreground-muted" } },
+    },
+    {
+      part: "close",
+      element: "button",
+      ownership: "recipe",
+      base: {
+        "margin-left": "auto",
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        width: "1.25rem",
+        height: "1.25rem",
+        "border-radius": "0.25rem",
+        "border-style": "none",
+        "background-color": "transparent",
+        cursor: "pointer",
+        "font-size": "0.875rem",
+      },
+      pseudos: { ":hover": { "background-color": { token: "surface-accent" } } },
+    },
+  ],
+}
+
+/** Tooltip — positioned, presence-aware explanatory content. */
+export const tooltipRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "tooltip",
+  description: "Delayed explanatory overlay with adapter-owned placement and presence states.",
+  slots: [
+    {
+      part: "content",
+      element: "div",
+      ownership: "adapter",
+      ownershipReason:
+        "The primitive renders tooltip content, while an optional PositioningPort owns its inline placement geometry.",
+      adapterPort: "PositioningPort",
+      adapterOwnedProperties: ["position", "top", "right", "bottom", "left", "transform"],
+      base: {
+        "z-index": "50",
+        overflow: "hidden",
+        "border-radius": { token: "radius" },
+        "background-color": { token: "foreground" },
+        color: { token: "surface" },
+        padding: "0.375rem 0.75rem",
+        "font-size": "0.75rem",
+        "line-height": "1rem",
+        "box-shadow": { token: "shadow-sm" },
+        transition: "opacity 0.15s",
+      },
+      states: { open: { opacity: "1" }, closed: { opacity: "0" } },
+    },
+  ],
+}
+
+/** Every recipe definition, keyed by scope. */
 export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> = {
+  accordion: accordionRecipe,
+  alert: alertRecipe,
+  badge: badgeRecipe,
   button: buttonRecipe,
-  switch: switchRecipe,
+  checkbox: checkboxRecipe,
   dialog: dialogRecipe,
+  menu: menuRecipe,
+  popover: popoverRecipe,
+  select: selectRecipe,
+  switch: switchRecipe,
+  tabs: tabsRecipe,
+  toast: toastRecipe,
+  tooltip: tooltipRecipe,
 }

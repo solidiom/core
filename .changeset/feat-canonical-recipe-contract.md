@@ -7,7 +7,7 @@
 
 Add the canonical recipe contract's semantic vocabulary and the Tailwind theme contract.
 
-`@solidiom/runtime` now exports the semantic attribute vocabulary that was previously implicit in `applySemanticAttrs` and duplicated as hand-maintained allowlists in the audit tooling: `SEMANTIC_ATTRIBUTES` (14 attributes), `SEMANTIC_FLAGS` (8 boolean flags), `SEMANTIC_ORIENTATIONS`, `SEMANTIC_SIDES`, `SEMANTIC_SIZES`, `SCOPE_STATES` (33 scopes and the `data-state` values each one emits), `COMPOSITE_SCOPES`, `VOCABULARY_EXCEPTIONS`, the `isSemanticAttribute` / `isKnownScope` / `isKnownState` / `statesForScope` / `vocabularyException` / `allStateValues` guards, and the `SemanticFlagName` type. These are additive; no existing export changed shape.
+`@solidiom/runtime` now exports the semantic attribute vocabulary that was previously implicit in `applySemanticAttrs` and duplicated as hand-maintained allowlists in the audit tooling: `SEMANTIC_ATTRIBUTES` (14 attributes), `SEMANTIC_FLAGS` (8 boolean flags), `SEMANTIC_ORIENTATIONS`, `SEMANTIC_SIDES`, `SEMANTIC_SIZES`, `SCOPE_STATES` (35 known scopes: 33 stateful plus stateless Badge and Toast), `COMPOSITE_SCOPES`, `VOCABULARY_EXCEPTIONS`, the `isSemanticAttribute` / `isKnownScope` / `isKnownState` / `statesForScope` / `vocabularyException` / `allStateValues` guards, and the `SemanticFlagName` type. These are additive; no existing export changed shape.
 
 Two consequences for consumers who style against Solidiom's data attributes:
 

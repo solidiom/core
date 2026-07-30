@@ -35,7 +35,24 @@ export interface ContractViolation {
   message: string
 }
 
-/** Scopes whose recipes must style presence states, per guide §3.4. */
+/**
+ * Scopes that retain their content while closing through `createPresence` and therefore
+ * need recipe-owned enter/exit treatment. `SCOPE_STATES` describes every value a
+ * primitive emits; it must not be used as the presence list because controls such as
+ * accordion, menu, and select unmount their content immediately when closed.
+ */
+const PRESENCE_SCOPES: ReadonlySet<string> = new Set([
+  "alert-dialog",
+  "command-palette",
+  "date-picker",
+  "dialog",
+  "drawer",
+  "navigation-menu",
+  "popover",
+  "sheet",
+  "tooltip",
+])
+
 const PRESENCE_STATES = ["open", "closed"] as const
 
 /** A selector combinator appearing in a part name means someone hand-wrote a selector. */
@@ -143,9 +160,7 @@ export function validateRecipeDefinition(definition: RecipeDefinition): Contract
   }
 
   // ── Presence states ────────────────────────────────────────────────────────
-  const scopeStates = statesForScope(definition.scope)
-  const hasPresence = PRESENCE_STATES.every((state) => scopeStates.includes(state))
-  if (hasPresence) {
+  if (PRESENCE_SCOPES.has(definition.scope)) {
     const styled = new Set(definition.slots.flatMap((slot) => Object.keys(slot.states ?? {})))
     const missing = PRESENCE_STATES.filter((state) => !styled.has(state))
     if (missing.length > 0) {
