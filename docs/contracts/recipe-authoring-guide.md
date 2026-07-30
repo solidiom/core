@@ -32,7 +32,7 @@ RECIPE-001 defines one canonical recipe definition — slots, variants, states, 
 
 ### Superseded guidance
 
-A previous revision of this guide instructed authors to let profiles diverge in token strategy and not to introduce cross-profile contracts. **That guidance is withdrawn.** The canonical contract _is_ the cross-profile contract: `tools/recipe-contract-tokens.ts` defines 50 token identities with their per-namespace spellings, and the validator rejects a reference to anything else. See §3.5 for the replacement rule and `docs/contracts/recipe-contract.md` §4 for the model.
+A previous revision of this guide instructed authors to let profiles diverge in token strategy and not to introduce cross-profile contracts. **That guidance is withdrawn.** The canonical contract _is_ the cross-profile contract: `tools/recipe-contract-tokens.ts` defines 48 token identities with their per-namespace spellings, and the validator rejects a reference to anything else. See §3.5 for the replacement rule and `docs/contracts/recipe-contract.md` §4 for the model.
 
 ---
 
