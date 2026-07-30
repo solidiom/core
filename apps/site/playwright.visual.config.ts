@@ -17,10 +17,14 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? "github" : "list",
-  updateSnapshots: process.env.UPDATE_SNAPSHOTS === "1" ? "all" : "missing",
+  // A visual run must never create a baseline implicitly. Reference images
+  // change only through the explicit `test:visual:update` command or an
+  // intentional UPDATE_SNAPSHOTS=1 invocation.
+  updateSnapshots: process.env.UPDATE_SNAPSHOTS === "1" ? "all" : "none",
   use: {
     baseURL: "http://127.0.0.1:4322",
-    trace: "on-first-retry",
+    screenshot: "only-on-failure",
+    trace: "retain-on-failure",
   },
   projects: [
     {
@@ -29,7 +33,10 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "pnpm build && pnpm preview --host 127.0.0.1 --port 4322",
+    command:
+      process.env.PLAYWRIGHT_USE_EXISTING_BUILD === "1"
+        ? "pnpm preview --host 127.0.0.1 --port 4322"
+        : "pnpm build && pnpm search-index && pnpm preview --host 127.0.0.1 --port 4322",
     url: "http://127.0.0.1:4322",
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,

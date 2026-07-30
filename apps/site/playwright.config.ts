@@ -17,7 +17,9 @@ export default defineConfig({
   reporter: process.env.CI ? "github" : "list",
   use: {
     baseURL: "http://127.0.0.1:4322",
-    trace: "on-first-retry",
+    screenshot: "only-on-failure",
+    trace: "retain-on-failure",
+    video: "retain-on-failure",
   },
   projects: [
     {
@@ -42,7 +44,10 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "pnpm build && pnpm search-index && pnpm preview --host 127.0.0.1 --port 4322",
+    command:
+      process.env.PLAYWRIGHT_USE_EXISTING_BUILD === "1"
+        ? "pnpm preview --host 127.0.0.1 --port 4322"
+        : "pnpm build && pnpm search-index && pnpm preview --host 127.0.0.1 --port 4322",
     url: "http://127.0.0.1:4322",
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,

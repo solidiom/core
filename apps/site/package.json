@@ -21,7 +21,8 @@
     "search-index": "pagefind --site dist",
     "test:e2e": "playwright test --config playwright.config.ts",
     "test:visual": "playwright test --config playwright.visual.config.ts",
-    "test:visual:update": "playwright test --config playwright.visual.config.ts --update-snapshots"
+    "test:visual:update": "UPDATE_SNAPSHOTS=1 playwright test --config playwright.visual.config.ts",
+    "verify:preview": "tsx ./tools/verify-preview-deployment.ts"
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
