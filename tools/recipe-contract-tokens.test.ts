@@ -76,6 +76,14 @@ describe("canonical semantic tokens", () => {
     expect(SEMANTIC_TOKENS).toHaveLength(SEMANTIC_TOKEN_IDS.size)
   })
 
+  it("matches the count published in the contract document", () => {
+    // docs/contracts/recipe-contract.md §1 and docs/contracts/recipe-authoring-guide.md
+    // "Superseded guidance" both state this number. A doc reader treats it as the size of
+    // the closed vocabulary, so drift here is a correctness bug, not a typo. Update the
+    // two documents in the same change that adds or removes an identity.
+    expect(SEMANTIC_TOKENS).toHaveLength(48)
+  })
+
   it("gives every identity a description and a category", () => {
     for (const token of SEMANTIC_TOKENS) {
       expect(token.description.length, `${token.id} needs a description`).toBeGreaterThan(0)

@@ -24,7 +24,7 @@ lifecycle: current
 | Artifact                                          | Purpose                                                               |
 | ------------------------------------------------- | --------------------------------------------------------------------- |
 | `tools/recipe-contract-schema.ts`                 | Definition types, `CONTRACT_VERSION`, traversal helpers               |
-| `tools/recipe-contract-tokens.ts`                 | 50 canonical token identities and their per-namespace spellings       |
+| `tools/recipe-contract-tokens.ts`                 | 48 canonical token identities and their per-namespace spellings       |
 | `tools/recipe-contract-validate.ts`               | `validateRecipeDefinition()` — the rule checker                       |
 | `tools/recipe-contract-definitions.ts`            | Button, Switch, Dialog reference definitions                          |
 | `tools/recipe-contract.ts`                        | CLI: `pnpm run recipe:contract`                                       |
@@ -136,7 +136,7 @@ Values, light/dark pairs, contrast validation, and migration remain THEME-001..0
 
 ### 4.1 The Tailwind theme contract
 
-Before RECIPE-001 the Tailwind recipes referenced theme names defined **only** in `apps/docs/src/styles.css`, which `CUT-003` deletes. `packages/recipes-tailwind/src/styles/theme.css` now registers all 18 names as Tailwind v4 `@theme` tokens resolving from the shared `--ui-*` namespace, with fallbacks matching `recipes-css`. Consequences:
+Before RECIPE-001 the Tailwind recipes referenced theme names defined **only** in `apps/docs/src/styles.css`, which `CUT-003` deletes. `packages/recipes-tailwind/src/styles/theme.css` now registers all 17 names as Tailwind v4 `@theme` tokens resolving from the shared `--ui-*` namespace, with fallbacks matching `recipes-css`. `tools/recipe-contract-tokens.test.ts` sweeps every `.css` and `.tsx` source in the package and fails if a referenced theme colour is not registered, so the set stays complete without the count being asserted. Consequences:
 
 - setting `--ui-primary` once themes both profiles;
 - the two profiles agree visually with no theme installed;
