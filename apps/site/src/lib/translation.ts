@@ -67,4 +67,31 @@ export const TERMINOLOGY_GLOSSARY: Record<
   npm: { en: "npm", es: "npm", doNotTranslate: true },
   pnpm: { en: "pnpm", es: "pnpm", doNotTranslate: true },
   typescript: { en: "TypeScript", es: "TypeScript", doNotTranslate: true },
+
+  // Accessibility terminology (A11Y-006). Kept consistent with the
+  // authored accessibility contract vocabulary in
+  // apps/site/src/lib/accessibility-contract.ts and its rendering in
+  // AccessibilityEvidence.astro, so translated contract prose and UI
+  // copy use the same Spanish terms.
+  accessibility: { en: "accessibility", es: "accesibilidad" },
+  "assistive-technology": { en: "assistive technology", es: "tecnología de asistencia" },
+  keyboard: { en: "keyboard", es: "teclado" },
+  focus: { en: "focus", es: "foco" },
+  "focus-trap": { en: "focus trap", es: "trampa de foco" },
+  semantics: { en: "semantics", es: "semántica" },
+  aria: { en: "ARIA", es: "ARIA", doNotTranslate: true },
+  "screen-reader": { en: "screen reader", es: "lector de pantalla" },
+  "reduced-motion": { en: "reduced motion", es: "movimiento reducido" },
+  contrast: { en: "contrast", es: "contraste" },
+  "touch-target": { en: "touch target", es: "objetivo táctil" },
+  conformance: { en: "conformance", es: "conformidad" },
+  "consumer-duty": { en: "consumer responsibility", es: "responsabilidad del consumidor" },
+  "non-applicable": { en: "not applicable", es: "no aplicable" },
+  "review-status": { en: "review status", es: "estado de revisión" },
+  wcag: { en: "WCAG", es: "WCAG", doNotTranslate: true },
+  "axe-core": { en: "axe-core", es: "axe-core", doNotTranslate: true },
+  voiceover: { en: "VoiceOver", es: "VoiceOver", doNotTranslate: true },
+  nvda: { en: "NVDA", es: "NVDA", doNotTranslate: true },
+  jaws: { en: "JAWS", es: "JAWS", doNotTranslate: true },
+  talkback: { en: "TalkBack", es: "TalkBack", doNotTranslate: true },
 }
