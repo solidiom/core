@@ -324,12 +324,12 @@ check(
   "A recipe definition violates the canonical contract — run: pnpm run recipe:contract",
 )
 const contractFixtureResult = run(
-  "pnpm exec vitest run tools/recipe-contract-validate.test.ts tools/recipe-contract-vocabulary.test.ts tools/recipe-contract-tokens.test.ts tools/audit-recipe-contract.test.ts",
+  "pnpm exec vitest run tools/recipe-contract-validate.test.ts tools/recipe-contract-vocabulary.test.ts tools/recipe-contract-tokens.test.ts tools/recipe-contract-definitions.test.ts tools/audit-recipe-contract.test.ts",
 )
 check(
   "contract, vocabulary, and token fixtures pass",
   contractFixtureResult.ok,
-  "Run: pnpm exec vitest run tools/recipe-contract-validate.test.ts tools/recipe-contract-vocabulary.test.ts tools/recipe-contract-tokens.test.ts tools/audit-recipe-contract.test.ts",
+  "Run: pnpm exec vitest run tools/recipe-contract-validate.test.ts tools/recipe-contract-vocabulary.test.ts tools/recipe-contract-tokens.test.ts tools/recipe-contract-definitions.test.ts tools/audit-recipe-contract.test.ts",
 )
 
 // ─── 10. P1.5: Umbrella re-export purity check ─────────────────────────
