@@ -42,6 +42,7 @@ import {
   type DocsAdjacentLink,
 } from "../lib/docs-nav"
 import { resolveLocale } from "../lib/locale"
+import type { JsonLd } from "../lib/metadata"
 
 interface Props {
   title?: string
@@ -50,16 +51,30 @@ interface Props {
   toc?: DocsTocEntry[]
   previous?: DocsAdjacentLink
   next?: DocsAdjacentLink
+  structuredData?: JsonLd | JsonLd[]
 }
 
-const { title, description, sidebarGroups = [], toc = [], previous, next } = Astro.props
+const {
+  title,
+  description,
+  sidebarGroups = [],
+  toc = [],
+  previous,
+  next,
+  structuredData,
+} = Astro.props
 
 const pathname = Astro.url.pathname
 const copy = getDocsNavigationCopy(resolveLocale(pathname))
 const isActive = (href: string) => pathname === href
 ---
 
-<BaseLayout title={title} description={description} mainId="docs-content">
+<BaseLayout
+  title={title}
+  description={description}
+  structuredData={structuredData}
+  mainId="docs-content"
+>
   <div class="docs-shell">
     <div class="docs-shell__mobile-bar">
       <DocsMobileNav groups={sidebarGroups} copy={copy} />

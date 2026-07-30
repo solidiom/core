@@ -512,3 +512,36 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
+
+/* DOCS-006: localized, static breadcrumb navigation for catalog pages. */
+.catalog-breadcrumbs {
+  margin-bottom: 1rem;
+  color: var(--color-foreground-muted);
+  font-size: 0.875rem;
+}
+
+.catalog-breadcrumbs ol,
+.catalog-breadcrumbs li {
+  display: flex;
+  align-items: center;
+}
+
+.catalog-breadcrumbs ol {
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.catalog-breadcrumbs li {
+  gap: 0.375rem;
+}
+
+.catalog-breadcrumbs a {
+  color: inherit;
+}
+
+.catalog-breadcrumbs [aria-current="page"] {
+  color: var(--color-foreground);
+}

@@ -15,6 +15,8 @@ import {
   resolveHreflangAlternates,
   resolvePageMetadata,
   resolveSocialMetadata,
+  serializeJsonLd,
+  type JsonLd,
 } from "../lib/metadata"
 import { getPrimaryLinks, resourceLinks } from "../lib/nav-links"
 import SiteHeader from "../components/SiteHeader.astro"
@@ -27,6 +29,7 @@ interface Props {
   imageAlt?: string
   ogType?: string
   publishedTime?: string
+  structuredData?: JsonLd | JsonLd[]
   mainId?: string
   showHeader?: boolean
   showFooter?: boolean
@@ -39,6 +42,7 @@ const {
   imageAlt,
   ogType,
   publishedTime,
+  structuredData,
   mainId = "main-content",
   showHeader = true,
   showFooter = true,
@@ -62,6 +66,11 @@ const social = resolveSocialMetadata({
   publishedTime,
 })
 const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
+const structuredDataEntries = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : []
 const homeHref = resolveEquivalentLocalePath("/", locale) ?? "/"
 ---
 
@@ -75,6 +84,11 @@ const homeHref = resolveEquivalentLocalePath("/", locale) ?? "/"
     <link rel="canonical" href={metadata.canonicalUrl} />
 
     {alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+    {
+      structuredDataEntries.map((entry) => (
+        <script is:inline type="application/ld+json" set:html={serializeJsonLd(entry)} />
+      ))
+    }
 
     <meta property="og:type" content={social["og:type"]} />
     <meta property="og:site_name" content={social["og:site_name"]} />

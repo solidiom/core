@@ -11,9 +11,11 @@ import {
 } from "../lib/catalog"
 import { adjacentPrimitiveLinks, primitiveSidebarGroups, tocFromHeadings } from "../lib/docs-nav"
 import type { Locale } from "../lib/locale"
+import { catalogPageStructuredData, getCatalogSeoCopy } from "../lib/metadata"
 import DocsLayout from "../layouts/DocsLayout.astro"
 import AccessibilityEvidence from "./AccessibilityEvidence.astro"
 import ApiReference from "./ApiReference.astro"
+import CatalogBreadcrumbs from "./CatalogBreadcrumbs.astro"
 import { DialogExample } from "./DialogExample"
 import ExampleSource from "./ExampleSource.astro"
 import PrimitiveMetadata from "./PrimitiveMetadata.astro"
@@ -27,8 +29,9 @@ interface Props {
 
 const { primitive, locale, view } = Astro.props
 const copy = getCatalogCopy(locale)
+const seoCopy = getCatalogSeoCopy(locale)
 const sectionTitle: Record<PrimitiveView, string> = {
-  overview: copy.preview,
+  overview: copy.overview,
   api: copy.api,
   examples: copy.examples,
   accessibility: copy.accessibility,
@@ -53,7 +56,7 @@ const exampleSource = exampleDocuments.at(0)?.data.source
 const renderedDocument = document ? await render(document) : undefined
 const DocumentContent = renderedDocument?.Content
 const pageDescription = document?.data.description ?? primitive.description
-const title = `${primitive.label} ${sectionTitle[view]}`
+const title = view === "overview" ? primitive.label : `${primitive.label} ${sectionTitle[view]}`
 const apiDocumentResult = view === "api" ? getApiDocumentResult(primitive.name) : undefined
 const accessibilityEvidence =
   view === "accessibility" ? getAccessibilityEvidence(primitive.name) : undefined
@@ -67,6 +70,24 @@ const accessibilityContractEntries =
 const accessibilityContract = accessibilityContractEntries.at(0)?.data
 const isDialog = primitive.name === "dialog"
 const registryManifest = getRegistryManifest(primitive.name)
+const homePath = locale === "es" ? "/es/" : "/"
+const directoryPath = locale === "es" ? "/es/primitives/" : "/primitives/"
+const currentPath = primitiveHref(primitive.name, locale, view)
+const breadcrumbItems = [
+  { name: seoCopy.home, pathname: homePath },
+  { name: copy.directoryTitle, pathname: directoryPath },
+  ...(view === "overview"
+    ? []
+    : [{ name: primitive.label, pathname: primitiveHref(primitive.name, locale) }]),
+  { name: view === "overview" ? primitive.label : sectionTitle[view], pathname: currentPath },
+]
+const structuredData = catalogPageStructuredData({
+  title,
+  description: pageDescription,
+  pathname: currentPath,
+  locale,
+  breadcrumbs: breadcrumbItems,
+})
 
 const allPrimitives = getRegistryPrimitives()
 const sidebarGroups = primitiveSidebarGroups(allPrimitives, locale, (name, loc) =>
@@ -85,7 +106,15 @@ const { previous, next } = adjacentPrimitiveLinks(allPrimitives, primitive.name,
   toc={toc}
   previous={previous}
   next={next}
+  structuredData={structuredData}
 >
+  <CatalogBreadcrumbs
+    label={seoCopy.breadcrumbs}
+    items={breadcrumbItems.map((item, index) => ({
+      label: item.name,
+      href: index === breadcrumbItems.length - 1 ? undefined : item.pathname,
+    }))}
+  />
   <header class="primitive-header">
     <h1>{primitive.label}</h1>
     <p>{pageDescription}</p>
