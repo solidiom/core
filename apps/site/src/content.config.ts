@@ -116,6 +116,7 @@ const accessibilityContracts = defineCollection({
     .object({
       ...localizedContentFields,
       ...productFields,
+      primitive: z.string().min(1),
       ...accessibilityContractFields,
     })
     .superRefine((contract, context) => {
