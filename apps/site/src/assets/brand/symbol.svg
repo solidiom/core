@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" role="img" aria-labelledby="solidiom-symbol-title">
+  <title id="solidiom-symbol-title">Solidiom</title>
+  <!--
+    Bracket S concept (docs/solidiom/README.md, section 6):
+    Two opposing brackets, offset on a diagonal axis, whose facing open
+    ends imply the negative space curve of an S without drawing a
+    literal S or a literal bracket pair. Stroke based, not filled shapes,
+    so the mark reads correctly at small sizes and in monochrome.
+    Canonical color: sol primary token, hex 6D66F1.
+  -->
+  <path
+    d="M 68 18
+       C 50 18, 36 28, 36 42
+       C 36 54, 46 58, 58 60"
+    fill="none"
+    stroke="#6D66F1"
+    stroke-width="11"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 32 82
+       C 50 82, 64 72, 64 58
+       C 64 46, 54 42, 42 40"
+    fill="none"
+    stroke="#6D66F1"
+    stroke-width="11"
+    stroke-linecap="round"
+  />
+</svg>

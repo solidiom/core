@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="solidiom-social-card-title">
+  <title id="solidiom-social-card-title">Solidiom</title>
+  <!--
+    Social-card (Open Graph / Twitter card) source template, 1200x630.
+    Default state shown here: masterbrand card with symbol, wordmark, and
+    a one-line descriptor. Per-page cards (guides, blog, catalog entries)
+    should reuse this background/lockup composition and swap only the
+    title/descriptor text region below the lockup — do not redesign the
+    layout per page. The diagonal brand gradient follows the canonical
+    palette (Indigo -> Blue -> Cyan) defined in
+    docs/solidiom/README.md section 8.2.
+  -->
+  <defs>
+    <linearGradient id="sol-social-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+    <linearGradient id="sol-social-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6D66F1" />
+      <stop offset="50%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#sol-social-bg)" />
+
+  <!-- Diagonal accent band, restrained per the "no gloss/no gradient abuse" rule: used once, structurally, not as decoration on the mark itself. -->
+  <rect x="0" y="600" width="1200" height="30" fill="url(#sol-social-accent)" />
+
+  <!-- Symbol, monochrome-light variant scaled up, left-aligned lockup. -->
+  <g transform="translate(120, 180) scale(2.2)">
+    <path
+      d="M 68 18
+         C 50 18, 36 28, 36 42
+         C 36 54, 46 58, 58 60"
+      fill="none"
+      stroke="#F8FAFC"
+      stroke-width="11"
+      stroke-linecap="round"
+    />
+    <path
+      d="M 32 82
+         C 50 82, 64 72, 64 58
+         C 64 46, 54 42, 42 40"
+      fill="none"
+      stroke="#F8FAFC"
+      stroke-width="11"
+      stroke-linecap="round"
+    />
+  </g>
+
+  <text
+    x="380"
+    y="330"
+    font-family="Inter Tight, Inter, sans-serif"
+    font-size="72"
+    font-weight="600"
+    letter-spacing="-1"
+    fill="#F8FAFC"
+  >solidiom</text>
+
+  <text
+    x="120"
+    y="420"
+    font-family="Inter Variable, Inter, sans-serif"
+    font-size="30"
+    font-weight="400"
+    fill="#94A3B8"
+  >Accessible, source-owned components for Solid</text>
+</svg>

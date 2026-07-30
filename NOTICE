@@ -18,7 +18,11 @@ Documentation, prose, guides, articles, and non-brand media:
   See LICENSE-DOCS
 
 Brand marks (name "Solidiom", logos, wordmarks, and visual identity assets):
-  Reserved. See docs/solidiom/README.md §6 for usage guidelines.
+  Reserved. See https://solidiom.org/trademark/ (source:
+  apps/site/src/content/en/pages/trademark.md) for the published
+  trademark and brand-use policy, and docs/solidiom/README.md §6 for the
+  logo system definition. Source assets live under
+  apps/site/src/assets/brand/.
   The Solidiom name and brand marks may not be used to endorse or promote
   derivative products without prior written permission.
 
@@ -37,6 +41,7 @@ Notable runtime dependencies:
   - Floating UI (MIT) — https://floating-ui.com
   - Astro (MIT) — https://astro.build
 
-Font assets (pending BRAND-003):
-  - Inter (OFL 1.1) — https://rsms.me/inter/
+Font assets (BRAND-003, self-hosted):
+  - Inter Tight (OFL 1.1) — https://rsms.me/inter/
+  - Inter Variable (OFL 1.1) — https://rsms.me/inter/
   - IBM Plex Mono (OFL 1.1) — https://github.com/IBM/plex

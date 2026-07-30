@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" role="img" aria-labelledby="solidiom-symbol-small-title">
+  <title id="solidiom-symbol-small-title">Solidiom</title>
+  <!--
+    Small-size simplified mark: thicker strokes and a slightly more open
+    curve than symbol.svg so the negative-space S remains legible at
+    16-24px (favicon, browser tab, small UI badges). Do not use this
+    variant above ~32px; use symbol.svg instead.
+  -->
+  <path
+    d="M 70 20
+       C 50 20, 34 30, 34 44
+       C 34 55, 44 59, 58 61"
+    fill="none"
+    stroke="#6D66F1"
+    stroke-width="15"
+    stroke-linecap="round"
+  />
+  <path
+    d="M 30 80
+       C 50 80, 66 70, 66 56
+       C 66 45, 56 41, 42 39"
+    fill="none"
+    stroke="#6D66F1"
+    stroke-width="15"
+    stroke-linecap="round"
+  />
+</svg>

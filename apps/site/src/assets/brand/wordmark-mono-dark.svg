@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="100" viewBox="0 0 560 100" role="img" aria-labelledby="solidiom-wordmark-mono-dark-title">
+  <title id="solidiom-wordmark-mono-dark-title">Solidiom</title>
+  <!-- Monochrome dark lockup, for light backgrounds without brand color. -->
+  <g transform="translate(0, 0)">
+    <path
+      d="M 68 18
+         C 50 18, 36 28, 36 42
+         C 36 54, 46 58, 58 60"
+      fill="none"
+      stroke="#0F172A"
+      stroke-width="11"
+      stroke-linecap="round"
+    />
+    <path
+      d="M 32 82
+         C 50 82, 64 72, 64 58
+         C 64 46, 54 42, 42 40"
+      fill="none"
+      stroke="#0F172A"
+      stroke-width="11"
+      stroke-linecap="round"
+    />
+  </g>
+  <text
+    x="118"
+    y="68"
+    font-family="Inter Tight, Inter, sans-serif"
+    font-size="52"
+    font-weight="600"
+    letter-spacing="-0.5"
+    fill="#0F172A"
+  >solidiom</text>
+</svg>
