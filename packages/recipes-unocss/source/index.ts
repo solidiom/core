@@ -10,7 +10,7 @@
  *
  * Read `supportedPrimitives` as declared intent and `implementedRecipes` as shipped
  * reality. They are deliberately separate so no consumer or audit can infer coverage
- * from the declaration alone. See docs/recipe-authoring-guide.md §2.2.
+ * from the declaration alone. See docs/contracts/recipe-authoring-guide.md §2.2.
  */
 
 /** Recipe profile identifier. */

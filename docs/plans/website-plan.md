@@ -14,7 +14,7 @@ date: 2026-07-27
 **Last updated:** 2026-07-27
 **Canonical origin:** `https://solidiom.org`
 **Architecture:** static Astro 7 site with isolated Solid 2 islands
-**Visual reference:** `docs/solidiom/solidiom-site.png`
+**Visual reference:** `docs/assets/solidiom-site.png`
 
 ---
 
@@ -45,15 +45,15 @@ There are no open product or architecture decisions in this plan.
 
 ### 2.2 Brand and presentation
 
-| Area              | Decision                                                                                                                                                                                                                                              |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Visual fidelity   | System-faithful responsive interpretation of the brand board, not fixed desktop pixel matching.                                                                                                                                                       |
-| Palette           | Keep semantic token names, but use the brand board's canonical core values: Indigo `#6D66F1`, Blue `#3B82F6`, Cyan `#06B6D4`, Green `#22C55E`, Slate `#0F172A`, Gray `#94A3B8`. Update `docs/solidiom/README.md` and eliminate near-duplicate values. |
-| Token location    | Begin at `apps/site/src/assets/tokens.css`, with extraction-safe names and no site-only selectors. Publish `@solidiom/tokens` only when a second real consumer exists.                                                                                |
-| Typography        | Inter Tight for display headings; Inter Variable for UI, body, and documentation; IBM Plex Mono for code, commands, packages, versions, and API symbols.                                                                                              |
-| Color mode        | Respect `prefers-color-scheme` before first paint and persist explicit user choice. Every route supports light and dark modes.                                                                                                                        |
-| Styling outputs   | Define one canonical recipe contract and generate CSS, Tailwind, and UnoCSS outputs. Adapter-specific exceptions must be explicit and tested.                                                                                                         |
-| Third-party logos | Use compatibility language such as “Built for the Solid ecosystem,” never implied endorsement. Show only tested integrations and follow trademark rules.                                                                                              |
+| Area              | Decision                                                                                                                                                                                                                                                  |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Visual fidelity   | System-faithful responsive interpretation of the brand board, not fixed desktop pixel matching.                                                                                                                                                           |
+| Palette           | Keep semantic token names, but use the brand board's canonical core values: Indigo `#6D66F1`, Blue `#3B82F6`, Cyan `#06B6D4`, Green `#22C55E`, Slate `#0F172A`, Gray `#94A3B8`. Update `docs/assets/brand-README.md` and eliminate near-duplicate values. |
+| Token location    | Begin at `apps/site/src/assets/tokens.css`, with extraction-safe names and no site-only selectors. Publish `@solidiom/tokens` only when a second real consumer exists.                                                                                    |
+| Typography        | Inter Tight for display headings; Inter Variable for UI, body, and documentation; IBM Plex Mono for code, commands, packages, versions, and API symbols.                                                                                                  |
+| Color mode        | Respect `prefers-color-scheme` before first paint and persist explicit user choice. Every route supports light and dark modes.                                                                                                                            |
+| Styling outputs   | Define one canonical recipe contract and generate CSS, Tailwind, and UnoCSS outputs. Adapter-specific exceptions must be explicit and tested.                                                                                                             |
+| Third-party logos | Use compatibility language such as “Built for the Solid ecosystem,” never implied endorsement. Show only tested integrations and follow trademark rules.                                                                                                  |
 
 ### 2.3 Content and product scope
 
@@ -436,7 +436,7 @@ Deferred: arbitrary npm dependencies, package installation, accounts, server per
 
 ### 8.1 Token work
 
-1. Update `docs/solidiom/README.md` so the written palette exactly matches the board.
+1. Update `docs/assets/brand-README.md` so the written palette exactly matches the board.
 2. Define semantic aliases in `apps/site/src/assets/tokens.css`; do not expose raw palette names as the only API.
 3. Validate contrast pairings in both modes before components depend on them.
 4. Preserve the 4px spacing system, 8/12/16/20px radii, border-first layering, and restrained shadows.

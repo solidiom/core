@@ -11,7 +11,7 @@
  * structural pseudos, pseudo-elements, and element descendant selectors (used by
  * composite scopes such as `prose`).
  *
- * Writes results to docs/recipe-contract-audit.md.
+ * Writes results to docs/evidence/recipe-contract-audit.md.
  *
  * Usage: pnpm run audit:recipe-contract
  */
@@ -32,7 +32,7 @@ const RECIPES_DIRS = [
   join(ROOT, "packages/recipes-tailwind/src"),
   join(ROOT, "packages/recipes-unocss/src"),
 ]
-const OUTPUT_DIR = join(ROOT, "docs")
+const OUTPUT_DIR = join(ROOT, "docs", "evidence")
 const OUTPUT_FILE = join(OUTPUT_DIR, "recipe-contract-audit.md")
 
 interface Violation {

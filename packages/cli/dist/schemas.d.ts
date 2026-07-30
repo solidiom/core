@@ -30,14 +30,22 @@ export declare const PolicySchema: z.ZodObject<{
     allowedPrimitiveVersions: z.ZodDefault<z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodString>>>;
     /** Trusted identities for sigstore verification. */
     trustedIdentities: z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodString, "many">>>;
+    /** When true, `solidiom verify --registry` fails closed if the registry index is unsigned. */
+    registrySignatureRequired: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
+    /** HMAC keys accepted when verifying the registry index signature. */
+    registryTrustedKeys: z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodString, "many">>>;
 }, "strip", z.ZodTypeAny, {
     signatureMode: "sigstore" | "trusted-keys" | "none";
     allowedPrimitiveVersions: Record<string, string>;
     trustedIdentities: string[];
+    registrySignatureRequired: boolean;
+    registryTrustedKeys: string[];
 }, {
     signatureMode?: "sigstore" | "trusted-keys" | "none" | undefined;
     allowedPrimitiveVersions?: Record<string, string> | undefined;
     trustedIdentities?: string[] | undefined;
+    registrySignatureRequired?: boolean | undefined;
+    registryTrustedKeys?: string[] | undefined;
 }>;
 export type Policy = z.infer<typeof PolicySchema>;
 //# sourceMappingURL=schemas.d.ts.map

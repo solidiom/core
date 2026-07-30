@@ -13,6 +13,7 @@ export { createStableId, resetIdCounter } from "./dom/stable-id";
 export { onOwnerCleanup, createDisposable } from "./dom/owner-cleanup";
 export { observeElementSize, observeElementMutations } from "./dom/observe-element";
 export { applySemanticAttrs, type SemanticAttrsOptions, type SemanticAttrsResult, type SemanticFlags, } from "./dom/semantic-attrs";
+export { SEMANTIC_FLAGS, SEMANTIC_ORIENTATIONS, SEMANTIC_SIDES, SEMANTIC_SIZES, SEMANTIC_ATTRIBUTES, SCOPE_STATES, COMPOSITE_SCOPES, VOCABULARY_EXCEPTIONS, isSemanticAttribute, isKnownScope, isKnownState, statesForScope, vocabularyException, allStateValues, type SemanticFlagName, } from "./dom/semantic-vocabulary";
 export { createCollection, type Collection, type CollectionItem, type CollectionOptions, } from "./collection/collection";
 export { resolveNavigationIntent, resolveNextItem, type NavigationIntent, type NavigationOptions, } from "./collection/composite-navigation";
 export { createRovingFocus, type RovingFocus, type RovingFocusOptions, } from "./collection/roving-focus";

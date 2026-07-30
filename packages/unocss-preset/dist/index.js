@@ -1,19 +1,33 @@
 // src/index.ts
+import {
+  SEMANTIC_FLAGS,
+  SEMANTIC_ORIENTATIONS,
+  SEMANTIC_SIDES,
+  allStateValues
+} from "@solidiom/runtime";
+var FLAG_NAMES = new Set(SEMANTIC_FLAGS);
+function pascalCase(value) {
+  return value.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join("");
+}
 function getSolidiomVariants(options = {}) {
   const p = options.prefix ?? "ui";
-  return [
-    { name: `${p}Open`, selector: "[data-state='open']" },
-    { name: `${p}Closed`, selector: "[data-state='closed']" },
-    { name: `${p}Checked`, selector: "[data-state='checked']" },
-    { name: `${p}Unchecked`, selector: "[data-state='unchecked']" },
-    { name: `${p}Active`, selector: "[data-state='active']" },
-    { name: `${p}Disabled`, selector: "[data-disabled]" },
-    { name: `${p}Highlighted`, selector: "[data-highlighted]" },
-    { name: `${p}Selected`, selector: "[data-selected]" },
-    { name: `${p}Required`, selector: "[data-required]" },
-    { name: `${p}Invalid`, selector: "[data-invalid]" },
-    { name: `${p}Placeholder`, selector: "[data-placeholder]" }
-  ];
+  const flagVariants = SEMANTIC_FLAGS.map((flag) => ({
+    name: `${p}${pascalCase(flag)}`,
+    selector: `[data-${flag}]`
+  }));
+  const stateVariants = allStateValues().map((state) => ({
+    name: FLAG_NAMES.has(state) ? `${p}State${pascalCase(state)}` : `${p}${pascalCase(state)}`,
+    selector: `[data-state='${state}']`
+  }));
+  const orientationVariants = SEMANTIC_ORIENTATIONS.map((orientation) => ({
+    name: `${p}${pascalCase(orientation)}`,
+    selector: `[data-orientation='${orientation}']`
+  }));
+  const sideVariants = SEMANTIC_SIDES.map((side) => ({
+    name: `${p}Side${pascalCase(side)}`,
+    selector: `[data-side='${side}']`
+  }));
+  return [...flagVariants, ...stateVariants, ...orientationVariants, ...sideVariants];
 }
 function presetSolidiom(options = {}) {
   const variants = getSolidiomVariants(options);

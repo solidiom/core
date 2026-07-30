@@ -1,9 +1,3 @@
-/**
- * @solidiom/unocss-preset — UnoCSS preset providing semantic attribute variants.
- *
- * Variants: uiOpen, uiClosed, uiDisabled, uiHighlighted, uiSelected, uiChecked.
- * Targets data-state and boolean data-* attributes from Solidiom primitives (§14.6).
- */
 export interface SolidiomPresetOptions {
     /** Prefix for variant names. Default: "ui". */
     prefix?: string;
@@ -15,6 +9,12 @@ export interface VariantDefinition {
 }
 /**
  * Returns the Solidiom UnoCSS preset variant definitions.
+ *
+ * A state value that collides with a boolean flag (`disabled`, `loading`, `selected`)
+ * is namespaced as `uiStateSelected` so the bare `uiSelected` keeps targeting the
+ * flag. Those collisions are the vocabulary exceptions recorded in
+ * `VOCABULARY_EXCEPTIONS`; when the owning primitives stop emitting a flag as a
+ * state, the namespaced variants disappear on their own.
  */
 export declare function getSolidiomVariants(options?: SolidiomPresetOptions): VariantDefinition[];
 /**
