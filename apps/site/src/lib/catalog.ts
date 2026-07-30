@@ -49,6 +49,35 @@ export interface RegistryPrimitive {
   }
 }
 
+export interface RegistryCapability {
+  name: string
+  version: number
+  default: string
+}
+
+export interface RegistryManifest {
+  $schema: string
+  name: string
+  version: string
+  package: string
+  status: string
+  capabilities: RegistryCapability[]
+  dependencies: string[]
+  source: {
+    entry: string
+    files: string[]
+  }
+  cli: {
+    addCommand: string
+    installDeps: string[]
+  }
+  integrity: {
+    algorithm: string
+    filesHash: string
+    lastGenerated: string
+  }
+}
+
 interface RegistryIndex {
   version: number
   primitives: RegistryPrimitive[]
@@ -85,6 +114,15 @@ export interface CatalogCopy {
   version: string
   status: string
   install: string
+  packageMetadata: string
+  sourceEntry: string
+  sourceFiles: string
+  dependencies: string
+  capabilities: string
+  integrity: string
+  fileHash: string
+  generated: string
+  none: string
   apiUnavailable: string
   apiMalformed: string
   apiInvalidShape: string
@@ -98,7 +136,16 @@ export interface CatalogCopy {
   linkToSection: string
   children: string
   apiKindLabels: Record<
-    "class" | "component" | "context" | "enum" | "function" | "interface" | "namespace" | "type" | "variable" | "unknown",
+    | "class"
+    | "component"
+    | "context"
+    | "enum"
+    | "function"
+    | "interface"
+    | "namespace"
+    | "type"
+    | "variable"
+    | "unknown",
     string
   >
   automatedEvidence: string
@@ -139,9 +186,19 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
     version: "Version",
     status: "Status",
     install: "Install",
+    packageMetadata: "Package metadata",
+    sourceEntry: "Entry file",
+    sourceFiles: "Source files",
+    dependencies: "Dependencies",
+    capabilities: "Capabilities",
+    integrity: "Integrity",
+    fileHash: "File hash",
+    generated: "Generated",
+    none: "None",
     apiUnavailable: "Generated API reference is not available yet.",
     apiMalformed: "The generated API artifact for this primitive could not be read.",
-    apiInvalidShape: "The generated API artifact for this primitive does not match the expected schema.",
+    apiInvalidShape:
+      "The generated API artifact for this primitive does not match the expected schema.",
     apiEmpty: "The generated API artifact exists but declares no public exports.",
     examplesUnavailable: "Examples will be published with the primitive's reviewed documentation.",
     accessibilityUnavailable: "Accessibility guidance and evidence will be published after review.",
@@ -192,7 +249,8 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
       complete: "Complete",
     },
     contractReviewedBy: "Reviewed by {name} on {date}",
-    contractUnavailable: "An authored accessibility contract has not been published for this primitive yet.",
+    contractUnavailable:
+      "An authored accessibility contract has not been published for this primitive yet.",
     contractNotice:
       "This contract describes what the primitive guarantees. Consuming products remain responsible for labels, layout, and workflow decisions that affect the final accessibility result.",
   },
@@ -206,6 +264,15 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
     version: "Versión",
     status: "Estado",
     install: "Instalar",
+    packageMetadata: "Metadatos del paquete",
+    sourceEntry: "Archivo de entrada",
+    sourceFiles: "Archivos de origen",
+    dependencies: "Dependencias",
+    capabilities: "Capacidades",
+    integrity: "Integridad",
+    fileHash: "Hash de archivos",
+    generated: "Generado",
+    none: "Ninguna",
     apiUnavailable: "La referencia de API generada aún no está disponible.",
     apiMalformed: "No se pudo leer el artefacto de API generado para esta primitiva.",
     apiInvalidShape:
@@ -263,7 +330,8 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
       complete: "Completo",
     },
     contractReviewedBy: "Revisado por {name} el {date}",
-    contractUnavailable: "Aún no se ha publicado un contrato de accesibilidad redactado para esta primitiva.",
+    contractUnavailable:
+      "Aún no se ha publicado un contrato de accesibilidad redactado para esta primitiva.",
     contractNotice:
       "Este contrato describe lo que garantiza la primitiva. Los productos que la consumen siguen siendo responsables de las etiquetas, el diseño y las decisiones de flujo que afectan el resultado final de accesibilidad.",
   },
@@ -279,6 +347,40 @@ function isRegistryIndex(value: unknown): value is RegistryIndex {
   return index.version === 2 && Array.isArray(index.primitives)
 }
 
+function isRegistryManifest(value: unknown): value is RegistryManifest {
+  if (!value || typeof value !== "object") return false
+  const manifest = value as Partial<RegistryManifest>
+  return (
+    manifest.$schema === "https://solidiom.dev/schemas/registry-manifest/v2.json" &&
+    typeof manifest.name === "string" &&
+    typeof manifest.version === "string" &&
+    typeof manifest.package === "string" &&
+    typeof manifest.status === "string" &&
+    Array.isArray(manifest.capabilities) &&
+    manifest.capabilities.every(
+      (capability) =>
+        !!capability &&
+        typeof capability.name === "string" &&
+        typeof capability.version === "number" &&
+        typeof capability.default === "string",
+    ) &&
+    Array.isArray(manifest.dependencies) &&
+    manifest.dependencies.every((dependency) => typeof dependency === "string") &&
+    !!manifest.source &&
+    typeof manifest.source.entry === "string" &&
+    Array.isArray(manifest.source.files) &&
+    manifest.source.files.every((file) => typeof file === "string") &&
+    !!manifest.cli &&
+    typeof manifest.cli.addCommand === "string" &&
+    Array.isArray(manifest.cli.installDeps) &&
+    manifest.cli.installDeps.every((dependency) => typeof dependency === "string") &&
+    !!manifest.integrity &&
+    typeof manifest.integrity.algorithm === "string" &&
+    typeof manifest.integrity.filesHash === "string" &&
+    typeof manifest.integrity.lastGenerated === "string"
+  )
+}
+
 export function getRegistryPrimitives(): RegistryPrimitive[] {
   const raw = readJson(REGISTRY_INDEX_PATH)
   if (!isRegistryIndex(raw)) {
@@ -286,6 +388,20 @@ export function getRegistryPrimitives(): RegistryPrimitive[] {
   }
 
   return [...raw.primitives].sort((a, b) => a.name.localeCompare(b.name))
+}
+
+/** Returns validated, canonical Registry v2 metadata for one primitive (DOCS-005). */
+export function getRegistryManifest(name: string): RegistryManifest {
+  if (!/^[a-z][a-z0-9-]*$/.test(name)) {
+    throw new Error(`DOCS-005: invalid registry primitive name: ${name}`)
+  }
+
+  const raw = readJson(resolve(WORKSPACE_ROOT, "registry", `${name}.json`))
+  if (!isRegistryManifest(raw) || raw.name !== name) {
+    throw new Error(`DOCS-005: registry/${name}.json is not a valid Registry v2 manifest.`)
+  }
+
+  return raw
 }
 
 export function getPrimitiveStaticPaths(): Array<{
