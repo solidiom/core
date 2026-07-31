@@ -61,7 +61,7 @@
   }
 
   [data-scope="button"][data-part="root"].solidiom-btn--icon {
-    @apply h-10 w-10 p-0;
+    @apply h-10 w-10 py-0 px-0;
   }
 
   [data-scope="button"][data-part="root"].solidiom-btn--ghost-icon {
@@ -69,6 +69,6 @@
   }
 
   [data-scope="button"][data-part="root"].solidiom-btn--link-md {
-    @apply h-auto p-0;
+    @apply h-auto py-0 px-0;
   }
 }

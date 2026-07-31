@@ -101,6 +101,8 @@ jobs:
         run: node packages/cli/dist/bin.js verify --registry
       - name: API-004 — verify vertical-slice primitive API coverage
         run: pnpm run api:coverage-gate
+      - name: RECIPE-006 — verify recipe package src/source parity and exports
+        run: pnpm run audit:recipe-source-parity
 
   test-node:
     needs: build
@@ -149,6 +151,8 @@ jobs:
       - run: pnpm build
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: pnpm exec vitest run --config vitest.browser.config.ts
+      - name: RECIPE-005 — computed-style parity across css/tailwind/unocss profiles
+        run: pnpm run test:recipe-parity
       - uses: actions/upload-artifact@v6
         if: failure()
         with:

@@ -145,35 +145,54 @@ function renderVariantsModule(scope: string, definition: RecipeDefinition): stri
       Object.entries(rule.declarations).flatMap(([p, v]) => declarationToUtilities(p, v)),
     )
 
-  const variantsByAxis = new Map<string, Map<string, string>>()
+  const variantsByAxis = new Map<string, Map<string, string[]>>()
   for (const rule of rules) {
     if (rule.condition.kind !== "variant") continue
     const utilities = Object.entries(rule.declarations).flatMap(([p, v]) =>
       declarationToUtilities(p, v),
     )
     if (utilities.length === 0) continue
-    const byValue = variantsByAxis.get(rule.condition.axis) ?? new Map<string, string>()
-    byValue.set(rule.condition.value, utilities.join(" "))
+    // A variant value can produce more than one rule here: one for its base
+    // declarations (no `pseudo`) and one per pseudo state (e.g. `:hover`). Both share
+    // the same `value`, so they must accumulate into the same class list rather than
+    // overwrite each other — this is the bug that silently dropped every variant's
+    // base utilities in favor of whichever pseudo rule resolved last (RECIPE-005
+    // caught it via computed-style parity: recipes-tailwind's badge/button variants
+    // rendered only their :hover fill, never their base background/text color).
+    const prefixedUtilities = rule.condition.pseudo
+      ? utilities.map((utility) => withPseudoVariant(utility, { kind: "pseudo", pseudo: rule.condition.pseudo }))
+      : utilities
+    const byValue = variantsByAxis.get(rule.condition.axis) ?? new Map<string, string[]>()
+    const existing = byValue.get(rule.condition.value) ?? []
+    byValue.set(rule.condition.value, [...existing, ...prefixedUtilities])
     variantsByAxis.set(rule.condition.axis, byValue)
   }
 
-  const compoundEntries: Array<{ when: Record<string, string>; utilities: string }> = []
+  const compoundEntries: Array<{ when: Record<string, string>; utilities: string[] }> = []
   for (const rule of rules) {
     if (rule.condition.kind !== "compound") continue
     const utilities = Object.entries(rule.declarations).flatMap(([p, v]) =>
       declarationToUtilities(p, v),
     )
     if (utilities.length === 0) continue
+    // Same accumulation as the variant loop above: a compound condition can produce a
+    // base rule and a separate pseudo rule for the same `when`, and both must merge
+    // into one class list rather than the second silently replacing the first.
+    const prefixedUtilities = rule.condition.pseudo
+      ? utilities.map((utility) => withPseudoVariant(utility, { kind: "pseudo", pseudo: rule.condition.pseudo }))
+      : utilities
     const key = JSON.stringify(rule.condition.when)
-    if (compoundEntries.some((entry) => JSON.stringify(entry.when) === key)) continue
-    compoundEntries.push({ when: { ...rule.condition.when }, utilities: utilities.join(" ") })
+    const existingEntry = compoundEntries.find((entry) => JSON.stringify(entry.when) === key)
+    if (existingEntry) existingEntry.utilities.push(...prefixedUtilities)
+    else compoundEntries.push({ when: { ...rule.condition.when }, utilities: [...prefixedUtilities] })
   }
 
   const variantsLiteral = [...variantsByAxis.entries()]
     .map(([axis, values]) => {
       const valuesLiteral = [...values.entries()]
         .map(
-          ([value, utilities]) => `      ${JSON.stringify(value)}: ${JSON.stringify(utilities)},`,
+          ([value, utilities]) =>
+            `      ${JSON.stringify(value)}: ${JSON.stringify(utilities.join(" "))},`,
         )
         .join("\n")
       return `    ${JSON.stringify(axis)}: {\n${valuesLiteral}\n    },`
@@ -189,7 +208,7 @@ function renderVariantsModule(scope: string, definition: RecipeDefinition): stri
       const whenLiteral = Object.entries(when)
         .map(([axis, value]) => `      ${JSON.stringify(axis)}: ${JSON.stringify(value)},`)
         .join("\n")
-      return `    {\n${whenLiteral}\n      class: ${JSON.stringify(utilities)},\n    },`
+      return `    {\n${whenLiteral}\n      class: ${JSON.stringify(utilities.join(" "))},\n    },`
     })
     .join("\n")
 

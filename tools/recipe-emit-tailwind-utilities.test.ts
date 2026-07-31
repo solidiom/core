@@ -16,8 +16,16 @@ describe("declarationToUtilities — colours", () => {
 })
 
 describe("declarationToUtilities — box spacing shorthand", () => {
-  it("maps a uniform padding to a single p- utility", () => {
-    expect(declarationToUtilities("padding", "1rem")).toEqual(["p-4"])
+  it("maps a uniform padding to the axis form (py-/px-), not the p- shorthand", () => {
+    // Always prefers py-/px- over p-, even when every side is equal — see
+    // boxUtility's doc comment in recipe-emit-tailwind-utilities.ts: Tailwind v4
+    // orders padding-shorthand and padding-inline/padding-block utilities as
+    // separate groups in the compiled stylesheet, with the axis group always
+    // textually after the shorthand group regardless of class-list order. A `p-*`
+    // compound meant to override a `py-*`/`px-*` size class therefore always loses
+    // the cascade; emitting axis form unconditionally keeps every padding/margin
+    // value in the same group instead.
+    expect(declarationToUtilities("padding", "1rem")).toEqual(["py-4", "px-4"])
   })
 
   it("maps symmetric vertical/horizontal padding to py-/px-", () => {
@@ -33,8 +41,8 @@ describe("declarationToUtilities — box spacing shorthand", () => {
     ])
   })
 
-  it("maps zero padding", () => {
-    expect(declarationToUtilities("padding", "0")).toEqual(["p-0"])
+  it("maps zero padding to the axis form, not p-0", () => {
+    expect(declarationToUtilities("padding", "0")).toEqual(["py-0", "px-0"])
   })
 
   it("falls back to an arbitrary value for a margin side outside the spacing scale", () => {

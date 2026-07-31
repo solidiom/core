@@ -5,7 +5,7 @@
 
 @layer components {
   [data-scope="switch"][data-part="root"] {
-    @apply inline-flex items-center w-11 h-6 p-[2px] rounded-radius-full border-none cursor-pointer bg-input transition-all focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2;
+    @apply inline-flex items-center w-11 h-6 py-[2px] px-[2px] rounded-radius-full border-none cursor-pointer bg-input transition-all focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2;
   }
 
   [data-scope="switch"][data-part="root"][data-state="on"] {

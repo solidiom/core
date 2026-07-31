@@ -17,7 +17,7 @@
   }
 
   [data-scope="dialog"][data-part="content"] {
-    @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-128 w-full p-6 bg-popover text-foreground rounded-radius-lg shadow-lg transition-all;
+    @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-128 w-full py-6 px-6 bg-popover text-foreground rounded-radius-lg shadow-lg transition-all;
   }
 
   [data-scope="dialog"][data-part="content"][data-state="open"] {
@@ -29,7 +29,7 @@
   }
 
   [data-scope="dialog"][data-part="title"] {
-    @apply m-0 text-lg font-semibold text-foreground;
+    @apply my-0 mx-0 text-lg font-semibold text-foreground;
   }
 
   [data-scope="dialog"][data-part="description"] {

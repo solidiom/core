@@ -46,7 +46,7 @@
   /* Intent */
   --color-primary: var(--ui-primary, hsl(222 47% 11%));
   --color-primary-foreground: var(--ui-primary-fg, hsl(0 0% 100%));
-  --color-primary-hover: var(--ui-primary-hover, hsl(222 47% 18%));
+  --color-primary-hover: var(--ui-primary-hover, hsl(222 47% 20%));
   --color-secondary: var(--ui-secondary, hsl(210 40% 96%));
   --color-secondary-foreground: var(--ui-secondary-fg, hsl(222 47% 11%));
   --color-secondary-hover: var(--ui-secondary-hover, hsl(210 40% 90%));

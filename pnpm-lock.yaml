@@ -1532,12 +1532,54 @@ importers:
       '@solidiom/dialog':
         specifier: workspace:*
         version: link:../../packages/dialog
+      '@solidiom/recipes-css':
+        specifier: workspace:*
+        version: link:../../packages/recipes-css
+      '@solidiom/recipes-tailwind':
+        specifier: workspace:*
+        version: link:../../packages/recipes-tailwind
+      '@solidiom/recipes-unocss':
+        specifier: workspace:*
+        version: link:../../packages/recipes-unocss
       '@solidiom/runtime':
         specifier: workspace:*
         version: link:../../packages/runtime
       '@solidiom/select':
         specifier: workspace:*
         version: link:../../packages/select
+
+  tests/recipe-parity:
+    dependencies:
+      '@solidiom/badge':
+        specifier: workspace:*
+        version: link:../../packages/badge
+      '@solidiom/button':
+        specifier: workspace:*
+        version: link:../../packages/button
+      '@solidiom/dialog':
+        specifier: workspace:*
+        version: link:../../packages/dialog
+      '@solidiom/recipes-css':
+        specifier: workspace:*
+        version: link:../../packages/recipes-css
+      '@solidiom/recipes-tailwind':
+        specifier: workspace:*
+        version: link:../../packages/recipes-tailwind
+      '@solidiom/recipes-unocss':
+        specifier: workspace:*
+        version: link:../../packages/recipes-unocss
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../../packages/runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.24
+        version: 2.0.0-beta.24(solid-js@2.0.0-beta.24)
+      '@tailwindcss/node':
+        specifier: 4.3.3
+        version: 4.3.3
+      solid-js:
+        specifier: 2.0.0-beta.24
+        version: 2.0.0-beta.24
 
 packages:
 
