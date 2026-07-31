@@ -50,3 +50,6 @@ playwright-report/
 
 # RECIPE-005 computed-style parity harness — generated per test run
 tests/recipe-parity/.generated/
+
+# TanStack Router/Start — generated route tree (rebuilt by dev/build)
+routeTree.gen.ts
