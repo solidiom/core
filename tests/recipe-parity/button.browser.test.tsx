@@ -168,38 +168,47 @@ describe("button computed-style parity", () => {
     ).toBe(1)
   })
 
-  it('compound variant "link" + "md" resolves the same border-radius across all profiles', async () => {
-    // border-radius is unaffected by the height/padding cascade-order gap below, so
-    // this still asserts genuine parity for the properties the compound shares with
-    // every other variant/size combination.
-    const computed: Record<ProfileName, string> = {} as never
+  it('compound variant "link" + "md" resolves the same padding and border-radius across all profiles', async () => {
+    // Previously a KNOWN GAP: recipes-tailwind's compound `padding: 0` override lost
+    // to size "md"'s `py-2 px-4` because Tailwind's compiled stylesheet orders
+    // utilities within a group by scale value, not by cva()'s compoundVariants
+    // array order (docs/contracts/recipe-contract.md §6). Fixed by wrapping the
+    // generated class-string form in tailwind-merge's twMerge() (see
+    // tools/recipe-emit-tailwind.ts's renderVariantsModule) — padding now asserts
+    // real parity rather than documenting the gap.
+    const properties = ["padding", "border-radius"]
+    const computed: Record<ProfileName, Record<string, string>> = {} as never
 
     for (const profile of ["recipes-css", "recipes-tailwind", "recipes-unocss"] as const) {
       const element = await renderButton(profile, "link", "md")
-      computed[profile] = computedProperty(element, "border-radius")
+      computed[profile] = Object.fromEntries(
+        properties.map((property) => [property, computedProperty(element, property)]),
+      )
       cleanupStylesheet?.()
       disposeRender?.()
     }
 
-    const values = new Set(Object.values(computed))
-    expect(
-      values.size,
-      `compound "link"+"md" border-radius disagrees across profiles: ${JSON.stringify(computed)}`,
-    ).toBe(1)
+    for (const property of properties) {
+      const values = new Set(Object.values(computed).map((byProfile) => byProfile[property]))
+      expect(
+        values.size,
+        `compound "link"+"md" property "${property}" disagrees across profiles: ${JSON.stringify(computed)}`,
+      ).toBe(1)
+    }
 
-    // KNOWN GAP, not asserted here: the compound's `height: auto` override wins
-    // correctly in every profile (verified manually — height has no shorthand form
-    // to conflict with), but its `padding: 0` override does not survive in
-    // recipes-tailwind. Tailwind v4's compiled stylesheet orders utilities within a
-    // group by scale value, not by class-list order, so `size: "md"`'s `py-2 px-4`
-    // (value 2, 4) is textually after this compound's `py-0 px-0` (value 0) in the
-    // generated CSS regardless of cva()'s compoundVariants array order, and wins the
-    // cascade on the shared padding-block/padding-inline properties. Fixing this
-    // properly needs either `tailwind-merge` (a new dependency, wrapping every
-    // emitted variant function's return value) or per-value custom-property
-    // indirection in the emitter — both are scoped changes affecting every recipe
-    // with a compound variant, not a one-line fix, and are tracked as a follow-up
-    // rather than folded into this task silently.
+    // NEW KNOWN GAP, not asserted here (unrelated to the twMerge fix above): `height`
+    // still disagrees — recipes-css/recipes-unocss compute 16px, recipes-tailwind
+    // computes 20px. The compound's `height: auto` correctly wins the cascade in
+    // every profile now; the discrepancy is that "md"'s `font-size: 0.875rem` (no
+    // explicit line-height in the canonical definition) maps to Tailwind's `text-sm`
+    // utility, which bundles line-height: calc(1.25 / 0.875) — a line-height the
+    // definition never declared. tools/recipe-emit-tailwind-utilities.ts's font-size
+    // mapping (`FONT_SIZE_SCALE`) needs to emit only `text-[<size>]` (an arbitrary
+    // value with no bundled line-height) when the declaration has no matching
+    // line-height, or every scope that sets font-size without line-height inherits
+    // Tailwind's opinionated pairing instead of the browser default the other two
+    // profiles get. Affects at least: accordion, button ("sm"/"md"), dialog, menu,
+    // select, tabs, toast — tracked as a follow-up, not folded into this fix.
   })
 
   it("on/off state resolves the same background-color across all profiles", async () => {

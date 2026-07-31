@@ -9,7 +9,7 @@
   }
 
   [data-scope="toast"][data-part="root"] {
-    @apply flex items-start gap-3 rounded-radius border-solid border-border bg-background py-4 px-4 shadow-md;
+    @apply flex items-start gap-3 rounded-radius border-solid border-border bg-background p-4 shadow-md;
   }
 
   [data-scope="toast"][data-part="title"] {
