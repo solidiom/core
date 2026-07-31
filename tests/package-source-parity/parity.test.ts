@@ -25,6 +25,16 @@ const PACKAGES_DIR = join(import.meta.dirname ?? __dirname, "../../packages")
 /** Primitives that must have both dist/ and source/ emissions. */
 const PARITY_PRIMITIVES = ["dialog", "select", "calendar", "carousel"] as const
 
+/**
+ * Recipe packages that must have both dist/ and source/ emissions (RECIPE-006).
+ *
+ * Unlike PARITY_PRIMITIVES, these ship no per-package hardcoded export list here —
+ * recipes-css, recipes-tailwind, and recipes-unocss have deliberately different
+ * export surfaces (e.g. recipes-unocss ships no prose/typeset), so assertions
+ * below are driven by each package's own dist/ exports rather than a shared list.
+ */
+const PARITY_RECIPE_PACKAGES = ["recipes-css", "recipes-tailwind", "recipes-unocss"] as const
+
 describe("package/source parity", () => {
   describe("structural prerequisites", () => {
     for (const name of PARITY_PRIMITIVES) {
@@ -46,6 +56,49 @@ describe("package/source parity", () => {
         const exports = pkg.exports?.["."]
         expect(exports?.import).toBeDefined()
         expect(exports?.solid).toBeDefined()
+      })
+    }
+  })
+
+  describe("recipe package structural prerequisites (RECIPE-006)", () => {
+    for (const name of PARITY_RECIPE_PACKAGES) {
+      const pkgDir = join(PACKAGES_DIR, name)
+
+      it(`${name}: has dist/ output`, () => {
+        expect(existsSync(join(pkgDir, "dist/index.js"))).toBe(true)
+      })
+
+      it(`${name}: has source/ emission`, () => {
+        expect(
+          existsSync(join(pkgDir, "source/index.tsx")) ||
+            existsSync(join(pkgDir, "source/index.ts")),
+        ).toBe(true)
+      })
+
+      it(`${name}: package.json exports both conditions`, () => {
+        const pkg = JSON.parse(readFileSync(join(pkgDir, "package.json"), "utf8"))
+        const exports = pkg.exports?.["."]
+        expect(exports?.import).toBeDefined()
+        expect(exports?.solid).toBeDefined()
+      })
+    }
+  })
+
+  describe("recipe package export parity (RECIPE-006)", () => {
+    for (const name of PARITY_RECIPE_PACKAGES) {
+      it(`${name}: package and source export the same named bindings`, async () => {
+        const pkg = await import(`@solidiom/${name}`)
+        const source = await import(join(PACKAGES_DIR, `${name}/source/index.ts`))
+
+        const pkgExports = Object.keys(pkg).filter((k) => !k.startsWith("__"))
+        const sourceExports = Object.keys(source).filter((k) => !k.startsWith("__"))
+
+        for (const exp of pkgExports) {
+          expect(sourceExports).toContain(exp)
+        }
+        for (const exp of pkgExports) {
+          expect(typeof pkg[exp]).toBe(typeof source[exp])
+        }
       })
     }
   })
@@ -126,6 +179,19 @@ describe("package/source parity", () => {
         const distFiles = getAllFiles(join(pkgDir, "dist"))
         const testFiles = distFiles.filter((f) => f.includes(".test.") || f.includes(".spec."))
         // Only .d.ts test declarations are tolerable (not ideal but not shipped)
+        const nonDeclarationTests = testFiles.filter(
+          (f) => !f.endsWith(".d.ts") && !f.endsWith(".d.ts.map"),
+        )
+        expect(nonDeclarationTests).toHaveLength(0)
+      })
+    }
+
+    for (const name of PARITY_RECIPE_PACKAGES) {
+      const pkgDir = join(PACKAGES_DIR, name)
+
+      it(`${name}: dist/ does not contain test files`, () => {
+        const distFiles = getAllFiles(join(pkgDir, "dist"))
+        const testFiles = distFiles.filter((f) => f.includes(".test.") || f.includes(".spec."))
         const nonDeclarationTests = testFiles.filter(
           (f) => !f.endsWith(".d.ts") && !f.endsWith(".d.ts.map"),
         )

@@ -1,5 +1,5 @@
 import { defineConfig } from "tsup"
-import { copyFileSync, mkdirSync, readdirSync, statSync } from "node:fs"
+import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync, statSync } from "node:fs"
 import { join } from "node:path"
 
 /**
@@ -45,22 +45,26 @@ export default defineConfig({
   },
 })
 
+/**
+ * Copies `src` to `dest`, first removing any existing `dest` so files deleted
+ * from `src` do not linger in `dest` (source/ must reflect src/ exactly, not
+ * accumulate stale copies). Errors are not swallowed — a failed copy must fail
+ * the build, since RECIPE-006's parity audit depends on source/ being a
+ * faithful, build-verified copy rather than a best-effort side effect.
+ */
 function copyDir(src: string, dest: string) {
-  try {
-    mkdirSync(dest, { recursive: true })
-    const entries = readdirSync(src)
-    for (const entry of entries) {
-      if (entry.endsWith(".test.ts") || entry.endsWith(".spec.ts")) continue
-      const srcPath = join(src, entry)
-      const destPath = join(dest, entry)
-      const stat = statSync(srcPath)
-      if (stat.isDirectory()) {
-        copyDir(srcPath, destPath)
-      } else {
-        copyFileSync(srcPath, destPath)
-      }
+  if (existsSync(dest)) rmSync(dest, { recursive: true, force: true })
+  mkdirSync(dest, { recursive: true })
+  const entries = readdirSync(src)
+  for (const entry of entries) {
+    if (entry.endsWith(".test.ts") || entry.endsWith(".spec.ts")) continue
+    const srcPath = join(src, entry)
+    const destPath = join(dest, entry)
+    const stat = statSync(srcPath)
+    if (stat.isDirectory()) {
+      copyDir(srcPath, destPath)
+    } else {
+      copyFileSync(srcPath, destPath)
     }
-  } catch {
-    // Non-fatal
   }
 }

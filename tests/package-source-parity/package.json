@@ -11,6 +11,9 @@
     "@solidiom/select": "workspace:*",
     "@solidiom/calendar": "workspace:*",
     "@solidiom/carousel": "workspace:*",
+    "@solidiom/recipes-css": "workspace:*",
+    "@solidiom/recipes-tailwind": "workspace:*",
+    "@solidiom/recipes-unocss": "workspace:*",
     "@solidiom/runtime": "workspace:*"
   },
   "nx": {
