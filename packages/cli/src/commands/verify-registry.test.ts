@@ -25,14 +25,36 @@ function buttonManifest() {
     description: "A button",
     category: "input",
     status: "preview" as const,
+    deliverables: ["primitive"] as const,
+    capabilities: [] as { name: string; version: number; default: string }[],
+    cli: { addCommand: "solidiom add button", installDeps: [] as string[] },
+    accessibility: {
+      reviewStatus: "none" as const,
+      evidenceIds: [] as string[],
+    },
+    documentation: {
+      status: "stub" as const,
+      locales: { en: { status: "missing" as const } },
+    },
+    styling: {
+      outputs: [] as ("css" | "tailwind" | "unocss")[],
+      themeCompatible: [] as string[],
+    },
+    search: { keywords: ["button"] },
     source: { entry: "src/index.tsx", files: ["src/index.tsx"] },
     dependencies: ["@solidiom/runtime"],
+    runtime: [] as string[],
     integrity: {
       algorithm: "sha256" as const,
       filesHash,
       fileDigests,
       lastGenerated: "2025-01-01T00:00:00.000Z",
     },
+    provenance: {
+      repository: "https://github.com/solidiom/solidiom",
+      directory: "packages/button",
+    },
+    lastUpdated: "2025-01-01T00:00:00.000Z",
   }
 }
 
