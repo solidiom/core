@@ -6,6 +6,7 @@ import { Command, Option } from "clipanion"
 import { existsSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import { ConfigSchema, PolicySchema } from "../schemas"
+import { detectPackageManager } from "../package-manager/detect"
 import pc from "picocolors"
 
 export interface DoctorCheck {
@@ -89,6 +90,14 @@ export function runDoctor(cwd: string): DoctorResult {
       checks.push({ name: "lock.json valid", status: "fail", detail: "Parse error" })
     }
   }
+
+  // Report the detected package manager and how it was determined (CLI-005).
+  const pm = detectPackageManager({ cwd })
+  checks.push({
+    name: "package manager",
+    status: "pass",
+    detail: `${pm.name}${pm.majorVersion ? `@${pm.majorVersion}` : ""} (via ${pm.source})`,
+  })
 
   const healthy = checks.every((c) => c.status !== "fail")
   return { checks, healthy }
