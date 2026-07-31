@@ -86,6 +86,20 @@ export function runDoctor(cwd: string): DoctorResult {
           detail: `Unknown version: ${lock.version}`,
         })
       }
+
+      // CLI-003: surface unverified source installs as a warning — this is
+      // an explicit escape hatch (--allow-unverified), not an error state.
+      const entries: Array<{ provenance?: string }> = Object.values(lock.installed ?? {})
+      const unverifiedCount = entries.filter((e) => e.provenance === "unverified").length
+      if (unverifiedCount > 0) {
+        checks.push({
+          name: "source-install provenance",
+          status: "warn",
+          detail: `${unverifiedCount} unverified entr${unverifiedCount === 1 ? "y" : "ies"} in lock.json`,
+        })
+      } else {
+        checks.push({ name: "source-install provenance", status: "pass" })
+      }
     } catch {
       checks.push({ name: "lock.json valid", status: "fail", detail: "Parse error" })
     }
