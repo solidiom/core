@@ -12,7 +12,7 @@ date: 2026-07-31
 
 > **Purpose:** Decomposes `docs/plans/website-tasks.md` §7.1 tasks `CLI-002` through `CLI-010` into ordered, reviewable work with concrete file paths, closed design decisions, and per-task acceptance criteria. The task backlog remains the authority for scope; this document controls how the CLI work is built and in what order.
 
-**Status:** CLI-002 and CLI-005 implemented and verified; CLI-003/004/006-010 not started
+**Status:** CLI-002, CLI-003 (in-repo portion), CLI-004, CLI-005, CLI-006, and CLI-007 PR1 implemented and verified; CLI-003 Part B (CI signing) blocked on OPS-002; CLI-007 PR2 gated on the §6 spike; CLI-008/009/010 not started
 **Source backlog:** `docs/plans/website-tasks.md` §7.1
 **Milestone:** M3 — Public beta platform (gate G3)
 **Target package:** `packages/cli` (`@solidiom/cli`)
@@ -158,7 +158,7 @@ Acceptance:
 
 ### CLI-003 — Verified manifests and hashes gate source installation
 
-**Status:** `[ ]` **Size:** M **Area:** CLI + Security
+**Status:** `[~]` **Size:** M **Area:** CLI + Security
 
 Changes:
 
@@ -176,9 +176,18 @@ Acceptance:
 - `--allow-unverified` installs and is visible in both `doctor` and `inspect provenance`.
 - No write occurs on any verification failure (assert the tree is byte-identical).
 
+**Delivered (in-repo portion only):** every change above landed except the CI item, which remains explicitly blocked.
+
+- `lock.ts` extracted verbatim from `install.ts`; every existing `LockEntry`-construction site (both in `install.ts` and any file mutating lock entries via `detach.ts`/`update.ts`/`diff.ts`) updated for the new required fields.
+- `install.ts` verifies before every write via `verifySourceIntegrity`; on failure with `requireVerifiedSource: true` (the default) it writes nothing — not even a partial file. `allowUnverified?: boolean` on `SourceInstallOptions` is the bypass, recording `provenance: "unverified"` on every affected `LockEntry`.
+- `add.ts` gained `--allow-unverified` with a red (`pc.red`) warning printed on actual unverified installs; `inspect provenance <primitive>` and a new `doctor` check (warning, not failure) surface unverified entries.
+- Tamper coverage: 12 new tests in `verify-source.test.ts` covering a mutated source file, a mutated `fileDigests` entry, a missing manifest, a missing primitive-specific manifest, extra/missing file entries, an unsigned index under `requireSignature`, a wrong signing key, and the correct-key success path.
+- **Not delivered, by design:** CI signing of `registry/index.json` and the CI assertion against `provenance: "unverified"` lock entries. Both require a CI signing key provisioned as a repo secret, which is Decision 1's explicit OPS-002 coordination point and was out of scope for this pass. No `.github/workflows/` file was touched.
+- Verified: `pnpm --filter @solidiom/cli test` and `typecheck` clean; `pnpm run gate:phase1` passes.
+
 ### CLI-004 — Source-owned component, block, and theme install flow
 
-**Status:** `[ ]` **Size:** M **Area:** CLI
+**Status:** `[x]` **Size:** M **Area:** CLI
 
 Changes:
 
@@ -194,6 +203,16 @@ Acceptance:
 - A user-modified file blocks the install, prints a diff, and gives a remediation hint.
 - A forced mid-install failure leaves the tree byte-identical to before.
 - `--dry-run` output matches the actual writes exactly.
+
+**Delivered:** all changes above landed as scoped, with one intentional narrowing called out by the plan itself.
+
+- `destinations.ts`'s `resolveDestinationRoot` throws a clear, typed error (`UnsupportedDeliverableError`) for the `"template"` deliverable — installing a template through `add`/`install.ts` is not a supported flow; templates are materialized separately (CLI-007).
+- `conflict.ts` implements all four classifications, including the no-lock-entry-but-differs-from-disk edge case (treated conservatively as `modified-by-user`), plus `renderUnifiedDiff`, a minimal line-based diff renderer with no new dependency.
+- `rollback.ts`'s journal wraps the entire write loop (primitive/component/block/theme files, runtime dedup, and the lockfile write) in try/catch; any thrown error restores the pre-install tree byte-for-byte, proven by a dedicated forced-mid-loop-failure test.
+- `theme-install.ts`'s `planThemeInstall` models `copy-stylesheet` (css/tailwind) and `patch-preset-config` (unocss) as a discriminated union. The unocss action does **not** include a real codemod against a consumer's `uno.config.ts` — per the plan's own framing, this returns clear manual-wiring instructions in the action's `description` field rather than attempting an AST rewrite, since no real theme-deliverable registry manifest exists yet to test against either.
+- `add.ts` gained `--force`/`--diff` with the exact remediation hint the plan calls for: "Use --force to overwrite locally modified files, or run `solidiom diff <primitive>` to review changes first."
+- Test coverage: `destinations.test.ts` (7), `conflict.test.ts` (10), `rollback.test.ts` (6), `theme-install.test.ts` (6), plus extensions to `source-install.test.ts` and `add.test.ts` for the component/block/theme-to-own-directory, conflict-blocks-with-no-write, `--force`, and `--diff`-matches-real-content cases.
+- Verified: `pnpm --filter @solidiom/cli test` and `typecheck` clean; `pnpm run gate:phase1` passes.
 
 ### CLI-005 — Package-manager detection and normalized execution
 
@@ -222,7 +241,7 @@ Acceptance:
 
 ### CLI-006 — `solidiom create --template <name>` skeleton
 
-**Status:** `[ ]` **Size:** M **Area:** CLI
+**Status:** `[x]` **Size:** M **Area:** CLI
 
 Changes:
 
@@ -237,9 +256,17 @@ Acceptance:
 - Ctrl-C mid-run leaves no partial directory.
 - Every refusal path has a test.
 
+**Delivered:** all changes above landed as scoped, with one narrowed and later-completed piece.
+
+- This task's own scope boundary explicitly deferred real template materialization to CLI-007: the initial `create.ts` wrote a clearly-marked placeholder scaffold (package.json + `.solidiom/config.json`) standing in for it. CLI-007 PR1 (below) replaced that placeholder with the real `materialize()`/`generateProjectConfig()` calls, without touching this task's destination-safety, validation, or cancellation code.
+- `isValidPackageName` is a small local regex-based validator (no new dependency). Destination-safety violations (path traversal, home/root/monorepo-root, non-empty-dir) and package-name violations are computed and returned together rather than short-circuiting, so neither masks the other.
+- `createCleanupJournal()` is exported and independently testable; both a `SIGINT` listener and clack's `isCancel` route to the same `journal.cleanup()`.
+- Test coverage: `create.test.ts`, 29 tests at delivery (grew further under CLI-007). A real OS `SIGINT` delivered mid-write is not practically simulable in a single-process vitest run; the cleanup journal itself is unit-tested in isolation instead, and this gap is called out rather than silently skipped.
+- Verified: `pnpm --filter @solidiom/cli test` and `typecheck` clean.
+
 ### CLI-007 — Template materialization
 
-**Status:** `[ ]` **Size:** L (two stacked PRs) **Area:** CLI + Templates
+**Status:** `[~]` **Size:** L (two stacked PRs) **Area:** CLI + Templates
 
 PR 1 — engine plus `templates/vite-solid-router/` (acceptance boundary):
 
@@ -257,6 +284,16 @@ Acceptance:
 - Each template generates a project that installs, typechecks, builds, and starts under all four managers with only its own lockfile present.
 - Each template typechecks in place in the workspace.
 - EN+ES entries exist in the `templates` content collection.
+
+**Delivered (PR 1 only — PR 2 remains blocked on the §6 spike):**
+
+- `templates/vite-solid-router/` is a real workspace project (added `templates/*` to `pnpm-workspace.yaml`); a client-only Vite + Solid Router app with one Solidiom primitive (`@solidiom/button`) styled via the Tailwind recipe, `private: true`, `workspace:*`/`catalog:` deps. Confirmed via `pnpm install` + `pnpm --filter @solidiom/template-vite-solid-router typecheck`/`build` that the in-workspace form is sound — per Decision 4's own stated limit, this is weaker than a materialized-and-installed-standalone check, which is CLI-008's job.
+- `materialize.ts` resolves template source two ways: a published-CLI layout relative to the module's own install location (for once the prepack copy step exists — not implemented in this PR), falling back to a monorepo-relative path for local dev. `workspace:*` rewriting only succeeds when a monorepo `packages/<name>/package.json` is discoverable; otherwise it leaves the specifier as-is and appends a warning rather than resolving against a real registry — an explicit, plan-acknowledged scope narrowing, not a silent gap.
+- Foreign-lockfile rule implemented as refuse-and-error, enforced inside `materialize()`'s own copy loop (not only in tests), covering all five common lockfile names.
+- `create.ts`'s placeholder scaffold (CLI-006) is now replaced by real `materialize()` + `generateProjectConfig()` calls, wired to CLI-005's `runPackageManager` for the install step and CLI-006's existing cleanup journal on install failure — no second cleanup mechanism was added.
+- EN+ES content entries added under `apps/site/src/content/{en,es}/templates/`, validated against the real `templates` collection schema via `astro check` (0 errors) and the real translation-freshness tool; the ES entry's `translationSourceHash` is a real sha256 of the EN source, not a placeholder.
+- **Not delivered:** the prepack copy step that populates the published CLI's own `templates/` directory, a `lint` Nx target for the template (no package in the repo has one to mirror, and there's no root flat-ESLint config to inherit), and PR 2 (SolidStart), which stays gated on the §6 spike as planned.
+- Verified: `pnpm --filter @solidiom/cli test` and `typecheck` clean; template package builds/typechecks in-workspace; `apps/site` content validates.
 
 ### CLI-008 — Offline fixtures and four-manager smoke harness
 
@@ -344,7 +381,7 @@ Additionally:
 
 - `pnpm run registry:build` whenever a `nx.metadata.registry` field or the generator changes (CLI-002).
 - `pnpm run smoke:create` for CLI-007 and CLI-008 changes.
-- A changeset in `.changeset/` for every public-contract change: the `LockEntry` field additions, `ConfigSchema`/`PolicySchema` additions, the `deliverables` shape change, and the new `create` command. No lock-format migration note is needed (Decision 2).
+- A changeset in `.changeset/` for every public-contract change: the `LockEntry` field additions, `ConfigSchema`/`PolicySchema` additions, the `deliverables` shape change, and the new `create` command. No lock-format migration note is needed (Decision 2). **Delivered:** `.changeset/feat-cli-verified-installs-conflict-rollback-create.md` covers the CLI-003/004/006/007 contract changes; `@solidiom/cli` was removed from `.changeset/config.json`'s `ignore` list so the changeset actually versions the package (it had previously been ignored from a time before the CLI carried real public-contract surface).
 
 ---
 
@@ -353,11 +390,11 @@ Additionally:
 | Status | Task    | Notes                                                                       |
 | ------ | ------- | --------------------------------------------------------------------------- |
 | [x]    | CLI-002 | Complete. Registry regenerated; button carries a real component deliverable |
-| [ ]    | CLI-003 | Needs the CI signing key provisioned first (Decision 1, coordinate OPS-002) |
-| [ ]    | CLI-004 | Theme installs are multi-artifact                                           |
+| [~]    | CLI-003 | In-repo verification/lock/CLI work complete; CI signing (Decision 1, OPS-002) still blocked |
+| [x]    | CLI-004 | Complete. Theme installs are multi-artifact; UnoCSS profile documents manual wiring, no codemod |
 | [x]    | CLI-005 | Complete. `runAdd` is now async; `--install`/`--package-manager` added      |
-| [ ]    | CLI-006 | `@clack/prompts` already installed and unused                               |
-| [ ]    | CLI-007 | Two stacked PRs; PR 2 gated on the §6 spike                                 |
+| [x]    | CLI-006 | Complete. Placeholder scaffold later replaced by CLI-007's real materializer |
+| [~]    | CLI-007 | PR 1 (engine + `vite-solid-router`) complete; PR 2 (SolidStart) still gated on the §6 spike |
 | [ ]    | CLI-008 | Extends `tools/offline-fixture/`, does not replace it                       |
 | [ ]    | CLI-009 | First entries in `en/guides/` and `es/guides/`                              |
 | [ ]    | CLI-010 | Must raise the phase1-gate §6 CLI test count                                |
