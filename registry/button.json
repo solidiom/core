@@ -21,9 +21,10 @@
   "description": "Clickable trigger for actions.",
   "category": "input",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "component",
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add button",
     "installDeps": []
@@ -43,7 +44,8 @@
   "styling": {
     "outputs": [
       "css",
-      "tailwind"
+      "tailwind",
+      "unocss"
     ],
     "themeCompatible": []
   },
@@ -67,11 +69,11 @@
       "src/index.tsx": "afbf08de5a4fd3fd5cc54accfc155f04df05e5894a64914fc4903e69452a3855",
       "src/toggle-button.tsx": "a5ca880d302fddc1c78b5f7c609fbaf3c228fadddcbfa7e563ccb1d56748013e"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/button"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

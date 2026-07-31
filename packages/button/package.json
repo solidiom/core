@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Button",
       "description": "Clickable trigger for actions.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "deliverables": ["component"]
+      }
     }
   }
 }
