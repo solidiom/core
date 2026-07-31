@@ -387,6 +387,118 @@ jobs:
           path: apps/site/dist/reports
           retention-days: 30
 
+  # ─── CLI-008: Offline create/install/typecheck/build/test smoke matrix ────
+  #
+  # Split into a prep job and an offline matrix. The prep job is the only part
+  # with network access to a registry: it warms a Verdaccio storage snapshot by
+  # running the full matrix once through an npmjs uplink. The matrix jobs then
+  # restore that snapshot and run with no uplink at all, so a package missing
+  # from the snapshot 404s instead of silently resolving from npmjs.
+  #
+  # The snapshot must be built on the same runner OS that consumes it: it holds
+  # the platform-native optionalDependencies (@tailwindcss/oxide-*,
+  # lightningcss-*) that Yarn Classic insists on resolving, and those differ per
+  # platform. Hence runner.os in the cache key.
+
+  cli-smoke-create-prep:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Enable corepack (yarn)
+        run: corepack enable
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.14"
+      # Skip the warm-up entirely when a valid snapshot is already cached.
+      - uses: actions/cache/restore@v5
+        id: snapshot-probe
+        with:
+          path: tools/offline-fixture/.registry-snapshot
+          key: offline-registry-snapshot-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml') }}
+          lookup-only: true
+      - name: CLI-008 — warm the offline registry snapshot (network required)
+        if: steps.snapshot-probe.outputs.cache-hit != 'true'
+        run: tools/offline-fixture/run-offline-test.sh --prep
+      - uses: actions/cache/save@v5
+        if: steps.snapshot-probe.outputs.cache-hit != 'true'
+        with:
+          path: tools/offline-fixture/.registry-snapshot
+          key: offline-registry-snapshot-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml') }}
+
+  cli-smoke-create:
+    needs: [build, cli-smoke-create-prep]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        manager: [npm, pnpm, yarn, bun]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      # Yarn: corepack ships with actions/setup-node's bundled Node and is
+      # already on PATH; `corepack enable` activates the yarn/pnpm shims the
+      # same way this repo's local mise-managed dev environment does (see
+      # tools/smoke-create.ts's own header comment on cwd-based shim
+      # activation — the CI runner's cwd is the checkout root throughout the
+      # job, so this is sufficient here without any of the local
+      # packageManager-field workaround smoke-create.ts needs for its
+      # isolated temp dirs).
+      - name: Enable corepack (yarn)
+        run: corepack enable
+      # Bun: no existing step in this file sets up bun. oven-sh/setup-bun is
+      # the current maintained action for this, pinned to an exact major
+      # version to match this file's existing actions/*@vN convention.
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.14"
+      - uses: actions/cache/restore@v5
+        with:
+          path: tools/offline-fixture/.registry-snapshot
+          key: offline-registry-snapshot-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml') }}
+          fail-on-cache-miss: true
+      - name: CLI-008 — cold-cache offline create/install/typecheck/build/test (${{ matrix.manager }})
+        run: |
+          mkdir -p artifacts
+          tools/offline-fixture/run-offline-test.sh \
+            --manager ${{ matrix.manager }} \
+            --smoke-json-out artifacts/smoke-create-${{ matrix.manager }}.json
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: smoke-create-${{ matrix.manager }}-results
+          path: artifacts/smoke-create-${{ matrix.manager }}.json
+          retention-days: 7
+
   # ─── Gate Jobs ─────────────────────────────────────────────────────────────────
 
   phase1-gate:

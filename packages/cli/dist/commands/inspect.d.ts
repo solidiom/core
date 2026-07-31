@@ -4,7 +4,7 @@
  * Subcommands: source, manifest, explain, files, provenance.
  */
 import { Command } from "clipanion";
-import { type LockEntry } from "../source-install/install";
+import { type LockEntry } from "../source-install/lock";
 import { type RegistryManifest } from "../registry-schema";
 export interface InspectResult {
     primitive?: string;

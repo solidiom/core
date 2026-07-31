@@ -1,15 +1,31 @@
+# Local registry for CLI-008's cold-cache offline fixture.
+#
+# Deliberately declares NO uplinks and NO per-package proxy: a package this
+# registry does not already hold returns 404 rather than falling through to
+# registry.npmjs.org. That is the property the acceptance criterion depends on,
+# and it is verified behaviour, not an assumption — a package absent from
+# storage 404s under exactly this config even when the same storage directory
+# was originally warmed through an uplink.
+#
+# Contents come from two places:
+#   - Third-party packages: a snapshot of Verdaccio storage warmed once by
+#     `run-offline-test.sh --prep` (see verdaccio-prep-config.yaml). Cached
+#     packuments and tarballs keep serving after the uplink is removed.
+#   - `@solidiom/*`: packed from the checkout and republished on every run by
+#     tools/smoke-create.ts, since those versions do not exist on npmjs.
+#
+# "Cold cache" refers to the package MANAGERS, not this registry: every manager
+# gets a fresh cache directory per combination, so nothing is resolved from a
+# warm npm/pnpm/yarn/bun cache left over from the repo's own install.
+#
+# `storage:` is rewritten at runtime by run-offline-test.sh to point at a
+# throwaway copy of the snapshot, so a run never mutates the canonical one.
 storage: ./storage
-uplinks:
-  npmjs:
-    url: https://registry.npmjs.org/
 packages:
-  "@solidiom/*":
-    access: $all
-    publish: $authenticated
-    proxy: npmjs
   "**":
     access: $all
-    proxy: npmjs
+    publish: $anonymous
+    unpublish: $anonymous
 server:
   keepAliveTimeout: 60
 listen: 0.0.0.0:4873
