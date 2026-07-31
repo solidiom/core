@@ -7,7 +7,7 @@
 import { Command, Option } from "clipanion"
 import { existsSync } from "node:fs"
 import { join } from "node:path"
-import { readLock, type LockEntry } from "../source-install/install"
+import { readLock, type LockEntry } from "../source-install/lock"
 import {
   readRegistryManifest,
   RegistrySchemaError,
@@ -91,6 +91,7 @@ export class InspectCommand extends Command {
       ["Show installed source files", "solidiom inspect source"],
       ["Show primitive manifest", "solidiom inspect manifest dialog"],
       ["Show file provenance", "solidiom inspect provenance"],
+      ["Show provenance for one primitive", "solidiom inspect provenance dialog"],
       ["List all installed files", "solidiom inspect files"],
     ],
   })
@@ -174,12 +175,36 @@ export class InspectCommand extends Command {
         break
 
       case "provenance":
+        if (result.entries.length === 0) {
+          this.context.stdout.write(
+            this.primitive
+              ? `No installed files found for primitive "${this.primitive}".\n`
+              : "No source-installed primitives found.\n",
+          )
+          break
+        }
         for (const e of result.entries) {
+          const provenanceLabel =
+            e.provenance === "unverified" ? pc.yellow(e.provenance) : pc.green(e.provenance)
           this.context.stdout.write(`${e.path}\n`)
           this.context.stdout.write(`  primitive: ${e.primitive}\n`)
           this.context.stdout.write(`  version: ${e.version}\n`)
           this.context.stdout.write(`  digest: ${e.digest.slice(0, 12)}…\n`)
+          this.context.stdout.write(`  manifestFilesHash: ${e.manifestFilesHash || "(none)"}\n`)
+          if (e.signatureKeyId) {
+            this.context.stdout.write(`  signatureKeyId: ${e.signatureKeyId}\n`)
+          }
+          this.context.stdout.write(`  verifiedAt: ${e.verifiedAt || "(unknown)"}\n`)
+          this.context.stdout.write(`  provenance: ${provenanceLabel}\n`)
           this.context.stdout.write(`  detached: ${e.detached ?? false}\n`)
+        }
+        {
+          const unverifiedCount = result.entries.filter((e) => e.provenance === "unverified").length
+          if (unverifiedCount > 0) {
+            this.context.stdout.write(
+              pc.yellow(`\n⚠ ${unverifiedCount} entr${unverifiedCount === 1 ? "y" : "ies"} recorded as unverified\n`),
+            )
+          }
         }
         break
 

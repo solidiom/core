@@ -22,6 +22,12 @@ export interface AddOptions extends PlanOptions {
   packageManager?: PackageManagerName
   /** When true, actually run the install command instead of only printing it (CLI-005). */
   install?: boolean
+  /** When true, a source install proceeds even if byte-level verification fails (CLI-003). */
+  allowUnverified?: boolean
+  /** When true, a source install overwrites files modified by the user since their last install (CLI-004). */
+  force?: boolean
+  /** When true, a source install prints a unified diff of pending changes and exits without writing (CLI-004). */
+  diff?: boolean
 }
 
 export interface AddResult {
@@ -57,6 +63,9 @@ export async function runAdd(options: AddOptions): Promise<AddResult> {
       cwd: options.cwd,
       plan,
       dryRun: options.dryRun,
+      allowUnverified: options.allowUnverified,
+      force: options.force,
+      diff: options.diff,
     })
     return { plan, installCommand: null, blocked: false, sourceResult }
   }
@@ -88,6 +97,9 @@ export class AddCommand extends Command {
       ["Add a component deliverable", "solidiom add button --deliverable component"],
       ["Add with a specific styling profile", "solidiom add button --styling tailwind"],
       ["Actually run the install with a specific package manager", "solidiom add dialog --install --package-manager yarn"],
+      ["Proceed with an unverified source install", "solidiom add dialog --mode source --allow-unverified"],
+      ["Force-overwrite locally modified files", "solidiom add button --deliverable component --force"],
+      ["Preview pending source-install changes", "solidiom add button --deliverable component --diff"],
     ],
   })
 
@@ -111,6 +123,15 @@ export class AddCommand extends Command {
   install = Option.Boolean("--install", false, {
     description: "Actually run the install command instead of only printing it",
   })
+  allowUnverified = Option.Boolean("--allow-unverified", false, {
+    description: "Proceed with a source install even if byte-level verification against the registry manifest fails",
+  })
+  force = Option.Boolean("--force", false, {
+    description: "Overwrite files that were locally modified since their last source install",
+  })
+  diff = Option.Boolean("--diff", false, {
+    description: "Print a unified diff of pending source-install changes and exit without writing",
+  })
   dryRun = Option.Boolean("--dry-run", false, {
     description: "Show what would be done without writing",
   })
@@ -128,6 +149,9 @@ export class AddCommand extends Command {
       packageManager: this.packageManager as PackageManagerName | undefined,
       install: this.install,
       dryRun: this.dryRun,
+      allowUnverified: this.allowUnverified,
+      force: this.force,
+      diff: this.diff,
     })
 
     if (this.json) {
@@ -155,6 +179,42 @@ export class AddCommand extends Command {
       this.context.stdout.write(pc.green(result.installCommand) + "\n")
     } else if (result.sourceResult) {
       const sr = result.sourceResult
+
+      if (sr.conflicts) {
+        const diffEntries = sr.conflicts.entries.filter(
+          (e) => e.classification === "modified-by-user" || e.classification === "overwrite",
+        )
+
+        if (this.diff) {
+          this.context.stdout.write(pc.bold("Pending source-install changes:\n\n"))
+          for (const entry of diffEntries) {
+            this.context.stdout.write(pc.dim(`  ${entry.path} (${entry.classification})\n`))
+            if (entry.diff) this.context.stdout.write(entry.diff + "\n")
+          }
+          return 0
+        }
+
+        if (sr.conflicts.hasBlockingConflicts) {
+          this.context.stderr.write(pc.red("Blocked — locally modified files would be overwritten:\n"))
+          for (const entry of sr.conflicts.entries) {
+            if (entry.classification !== "modified-by-user") continue
+            this.context.stderr.write(pc.red(`  ✗ ${entry.path}\n`))
+            if (entry.diff) this.context.stderr.write(pc.dim(entry.diff))
+          }
+          this.context.stderr.write(
+            pc.yellow(
+              `\nUse --force to overwrite locally modified files, or run \`solidiom diff ${this.primitive}\` to review changes first.\n`,
+            ),
+          )
+          return 1
+        }
+      }
+
+      if (this.allowUnverified && !sr.verified && sr.filesWritten.length > 0) {
+        this.context.stdout.write(
+          pc.red("⚠ Installed without verification — provenance recorded as 'unverified'\n"),
+        )
+      }
       this.context.stdout.write(pc.green(`Installed ${sr.filesWritten.length} source files\n`))
       for (const f of sr.filesWritten) {
         this.context.stdout.write(`  ${f}\n`)

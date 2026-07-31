@@ -1,0 +1,17 @@
+{
+  "name": "vite-solid-router",
+  "stack": "vite-solid-router",
+  "description": "Client-only Solid app scaffolded with Vite and Solid Router. No SSR.",
+  "variables": ["projectName"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config (positioning adapter, source/runtime dirs, install mode) so the generated project is immediately `solidiom add`-able."
+    }
+  ],
+  "notes": [
+    "This file is documentation/metadata only — materialize.ts's actual copy-and-substitute behavior is the source of truth for what gets written into a generated project.",
+    "`{{projectName}}` is the only substitution token used in this template's source files (package.json name, index.html title)."
+  ]
+}

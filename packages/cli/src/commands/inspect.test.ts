@@ -135,6 +135,66 @@ describe("runInspect", () => {
       expect(result.manifest?.documentation.status).toBe("stub")
     })
   })
+
+  describe("provenance subcommand (CLI-003)", () => {
+    function writeLockWithProvenance(cwd: string) {
+      mkdirSync(join(cwd, ".solidiom"), { recursive: true })
+      writeFileSync(
+        join(cwd, ".solidiom", "lock.json"),
+        JSON.stringify({
+          version: 1,
+          installed: {
+            "src/ui/primitives/dialog/index.tsx": {
+              path: "src/ui/primitives/dialog/index.tsx",
+              digest: "a".repeat(64),
+              primitive: "dialog",
+              version: "0.0.1-next.0",
+              manifestFilesHash: "b".repeat(64),
+              signatureKeyId: "c".repeat(16),
+              verifiedAt: "2025-01-01T00:00:00.000Z",
+              provenance: "verified",
+            },
+            "src/ui/primitives/button/index.tsx": {
+              path: "src/ui/primitives/button/index.tsx",
+              digest: "d".repeat(64),
+              primitive: "button",
+              version: "0.0.1-next.0",
+              manifestFilesHash: "e".repeat(64),
+              verifiedAt: "2025-01-01T00:01:00.000Z",
+              provenance: "unverified",
+            },
+          },
+        }),
+      )
+    }
+
+    it("returns lock entries filtered by primitive with provenance metadata", () => {
+      writeLockWithProvenance(cwd)
+
+      const result = runInspect({ cwd, subcommand: "provenance", primitive: "dialog" })
+      expect(result.entries).toHaveLength(1)
+      const entry = result.entries[0]!
+      expect(entry.provenance).toBe("verified")
+      expect(entry.manifestFilesHash).toBe("b".repeat(64))
+      expect(entry.signatureKeyId).toBe("c".repeat(16))
+      expect(entry.verifiedAt).toBe("2025-01-01T00:00:00.000Z")
+    })
+
+    it("returns all provenance entries when no primitive filter is given", () => {
+      writeLockWithProvenance(cwd)
+
+      const result = runInspect({ cwd, subcommand: "provenance" })
+      expect(result.entries).toHaveLength(2)
+      const unverified = result.entries.find((e) => e.primitive === "button")!
+      expect(unverified.provenance).toBe("unverified")
+      expect(unverified.signatureKeyId).toBeUndefined()
+    })
+
+    it("returns an empty entries list when no lockfile exists", () => {
+      const result = runInspect({ cwd, subcommand: "provenance", primitive: "dialog" })
+      expect(result.entries).toHaveLength(0)
+    })
+  })
 })
 
 /** A minimal but schema-valid registry manifest fixture (CLI-002). */
