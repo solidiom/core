@@ -44,8 +44,20 @@ export interface MaterializeResult {
   errors?: string[]
 }
 
-/** Files that are template metadata, not payload — never copied into the destination. */
-const EXCLUDED_FILES = new Set(["template.json", ".DS_Store"])
+/**
+ * Files that are template metadata or build-generated artifacts, not
+ * payload — never copied into the destination.
+ *
+ * `routeTree.gen.ts` is TanStack Router's own generated route-registration
+ * file (see templates/tanstack-start-solid/, CLI-007 PR2): it is written by
+ * running `vite dev`/`vite build` inside the template's own workspace
+ * checkout (for the in-place typecheck/build verification Decision 4
+ * requires) and is explicitly marked "will be overwritten" by the tool that
+ * generates it. If materialize() copied it, every scaffolded project would
+ * ship a stale, monorepo-specific route registration instead of letting
+ * TanStack Router regenerate its own on first build.
+ */
+const EXCLUDED_FILES = new Set(["template.json", ".DS_Store", "routeTree.gen.ts"])
 
 /** Directories that are never copied into the destination. */
 const EXCLUDED_DIRS = new Set(["node_modules", "dist", ".git", ".turbo", ".nx"])

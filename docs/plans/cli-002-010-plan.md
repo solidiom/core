@@ -12,7 +12,7 @@ date: 2026-07-31
 
 > **Purpose:** Decomposes `docs/plans/website-tasks.md` §7.1 tasks `CLI-002` through `CLI-010` into ordered, reviewable work with concrete file paths, closed design decisions, and per-task acceptance criteria. The task backlog remains the authority for scope; this document controls how the CLI work is built and in what order.
 
-**Status:** CLI-002, CLI-003 (in-repo portion), CLI-004, CLI-005, CLI-006, and CLI-007 PR1 implemented and verified; CLI-003 Part B (CI signing) blocked on OPS-002; CLI-007 PR2 gated on the §6 spike; CLI-008/009/010 not started
+**Status:** CLI-002, CLI-003 (in-repo portion), CLI-004, CLI-005, CLI-006, and CLI-007 (both PRs) implemented and verified; CLI-003 Part B (CI signing) blocked on OPS-002; CLI-008/009/010 not started
 **Source backlog:** `docs/plans/website-tasks.md` §7.1
 **Milestone:** M3 — Public beta platform (gate G3)
 **Target package:** `packages/cli` (`@solidiom/cli`)
@@ -110,7 +110,7 @@ _To verify before implementing:_ `pnpm-workspace.yaml` globs and the prettier/es
 
 _Rationale:_ the engine is the deliverable and the templates prove it generalizes. The axis that breaks config generation is server vs. no server — SSR forces `app.config.ts`, a server entry, and a pre-hydration theme bootstrap that a SPA never exercises. Sharing Solid Router between both templates isolates SSR as the only changing variable. `tanstack-start-solid` is architecturally close to SolidStart, so adding it later is incremental; all three would push CLI-007 to XL, which §1.2 requires be split into a work package first.
 
-_Open risk — see §6:_ SolidStart's stable line is 1.x and its Solid 2 support is still landing, so the SSR template choice is gated on a spike.
+_Open risk — see §6:_ SolidStart's stable line is 1.x and its Solid 2 support is still landing, so the SSR template choice is gated on a spike. **Resolved:** the spike ran, SolidStart failed, and TanStack Start (Solid) was substituted per this decision's own pre-agreed fallback — see §6.
 
 ---
 
@@ -266,7 +266,7 @@ Acceptance:
 
 ### CLI-007 — Template materialization
 
-**Status:** `[~]` **Size:** L (two stacked PRs) **Area:** CLI + Templates
+**Status:** `[x]` **Size:** L (two stacked PRs) **Area:** CLI + Templates
 
 PR 1 — engine plus `templates/vite-solid-router/` (acceptance boundary):
 
@@ -277,7 +277,7 @@ PR 1 — engine plus `templates/vite-solid-router/` (acceptance boundary):
 - Foreign-lockfile rule (§8.4): the payload contains no lockfile, and after install only the chosen manager's lockfile exists. Assert in the materializer, not only in tests.
 - Dependency install is opt-in via CLI-005's exec helper; failure triggers CLI-006's rollback journal.
 
-PR 2 — SSR template (`templates/solidstart/`), gated on the §6 spike.
+PR 2 — SSR template (`templates/tanstack-start-solid/`), gated on the §6 spike. Named `templates/solidstart/` at the time this plan was written; the spike (§6) found SolidStart could not build against this workspace's `solid-js@2.0.0-beta.24` pin, so per Decision 5's own pre-agreed fallback the SSR template shipped as TanStack Start (Solid) instead, at `templates/tanstack-start-solid/`.
 
 Acceptance:
 
@@ -285,15 +285,29 @@ Acceptance:
 - Each template typechecks in place in the workspace.
 - EN+ES entries exist in the `templates` content collection.
 
-**Delivered (PR 1 only — PR 2 remains blocked on the §6 spike):**
+**Delivered (PR 1):**
 
 - `templates/vite-solid-router/` is a real workspace project (added `templates/*` to `pnpm-workspace.yaml`); a client-only Vite + Solid Router app with one Solidiom primitive (`@solidiom/button`) styled via the Tailwind recipe, `private: true`, `workspace:*`/`catalog:` deps. Confirmed via `pnpm install` + `pnpm --filter @solidiom/template-vite-solid-router typecheck`/`build` that the in-workspace form is sound — per Decision 4's own stated limit, this is weaker than a materialized-and-installed-standalone check, which is CLI-008's job.
 - `materialize.ts` resolves template source two ways: a published-CLI layout relative to the module's own install location (for once the prepack copy step exists — not implemented in this PR), falling back to a monorepo-relative path for local dev. `workspace:*` rewriting only succeeds when a monorepo `packages/<name>/package.json` is discoverable; otherwise it leaves the specifier as-is and appends a warning rather than resolving against a real registry — an explicit, plan-acknowledged scope narrowing, not a silent gap.
 - Foreign-lockfile rule implemented as refuse-and-error, enforced inside `materialize()`'s own copy loop (not only in tests), covering all five common lockfile names.
 - `create.ts`'s placeholder scaffold (CLI-006) is now replaced by real `materialize()` + `generateProjectConfig()` calls, wired to CLI-005's `runPackageManager` for the install step and CLI-006's existing cleanup journal on install failure — no second cleanup mechanism was added.
 - EN+ES content entries added under `apps/site/src/content/{en,es}/templates/`, validated against the real `templates` collection schema via `astro check` (0 errors) and the real translation-freshness tool; the ES entry's `translationSourceHash` is a real sha256 of the EN source, not a placeholder.
-- **Not delivered:** the prepack copy step that populates the published CLI's own `templates/` directory, a `lint` Nx target for the template (no package in the repo has one to mirror, and there's no root flat-ESLint config to inherit), and PR 2 (SolidStart), which stays gated on the §6 spike as planned.
+- **Not delivered:** the prepack copy step that populates the published CLI's own `templates/` directory, a `lint` Nx target for the template (no package in the repo has one to mirror, and there's no root flat-ESLint config to inherit), and PR 2 (SolidStart), which stayed gated on the §6 spike as planned.
 - Verified: `pnpm --filter @solidiom/cli test` and `typecheck` clean; template package builds/typechecks in-workspace; `apps/site` content validates.
+
+**Delivered (PR 2 — SSR template, spike outcome and substitution):**
+
+- The §6 spike ran: a published SolidStart release still nests `solid-js@1.9.14` internally at the tested rc, and its config API did not export `defineConfig` at that rc — it cannot build against this workspace's `solid-js@2.0.0-beta.24` pin. Per Decision 5's own pre-agreed fallback, `tanstack-start-solid` (TanStack Start on Solid, plus `@tanstack/solid-router`) was spiked instead and confirmed working: `@tanstack/solid-start@2.0.0-beta.29`'s `peerDependencies` declare `solid-js: ">=2.0.0-0 <3.0.0"` and `@solidjs/web: ">=2.0.0-0 <3.0.0"` — built for Solid 2 natively, not retrofitted. A minimal fixture built successfully for both client and SSR targets.
+- `templates/tanstack-start-solid/` ships as a real workspace project, same shape as `vite-solid-router/`: `package.json` exact-pins `@tanstack/solid-start@2.0.0-beta.29` and `@tanstack/solid-router@2.0.0-beta.28` (no `^`/`~` ranges), `solid-js` via `catalog:`, and the same `@solidiom/button` + `@solidiom/recipes-tailwind` `workspace:*` deps `vite-solid-router` uses so the two templates are directly comparable.
+- `vite.config.ts` composes `tanstackStart()` (from `@tanstack/solid-start/plugin/vite`), `vite-plugin-solid`, and the Tailwind Vite plugin, with the same `resolve.dedupe: ["solid-js", "@solidjs/web"]` `vite-solid-router` uses.
+- The router setup file (`src/router.tsx`) exports its router-creation function as `getRouter` — TanStack Start's internal hydration code does a named `{ getRouter }` import from this file, and any other export name fails the build with a `MISSING_EXPORT` error. This was the one hard gotcha the spike surfaced and is called out explicitly in `template.json`'s notes so it isn't rediscovered the hard way in `TPL-000`.
+- `src/routes/__root.tsx` renders the document shell (`<html>`/`<HeadContent/>`/`<Scripts/>`) and an `<Outlet/>` — there is no `index.html` in this template, since TanStack Start generates its own HTML shell from the root route; this differs from `vite-solid-router`'s static `index.html` by necessity, not by choice. `src/routes/index.tsx` and `src/routes/about.tsx` mirror `vite-solid-router`'s `Home.tsx`/`About.tsx` pair, including the same `@solidiom/button` + Tailwind-recipe demo, for parity between the two templates.
+- No `materialize.ts` core-logic changes were needed — `resolveTemplateSource`'s existing monorepo-relative walk-up found `templates/tanstack-start-solid/` unchanged, confirmed by a manual materialize-into-a-temp-dir check (cleaned up after) and by a new `create.test.ts` case exercising `--template tanstack-start-solid` end to end.
+- `pnpm install` at the repo root required no `pnpm-workspace.yaml` `overrides`/`peerDependencyRules` addition: only one `solid-js@2.0.0-beta.24` instance exists in the resolved dependency tree, with every `@tanstack/*` package peer-resolving against it (confirmed by inspecting `node_modules/.pnpm`). This matches the spike's npm-based finding even though this install went through pnpm's stricter peer resolution — the existing `peerDependencyRules.allowAny` for `solid-js`/`@solidjs/web`/`babel-preset-solid` was already sufficient.
+- Confirmed via `pnpm --filter @solidiom/template-tanstack-start-solid build`: both the client and SSR Vite environments build successfully, producing `dist/client/` and `dist/server/server.js`, matching the spike's fixture-level result at the real template's actual file layout.
+- `routeTree.gen.ts` (TanStack Router's generated route registration file, produced by `dev`/`build`) is not part of the template's committed payload and is now covered by a new root `.gitignore` entry (`routeTree.gen.ts`), mirroring how every other generated-file class in this repo (`dist/`, `.astro/`, etc.) is handled.
+- EN+ES content entries added under `apps/site/src/content/{en,es}/templates/tanstack-start-solid.md`, `stack: tanstack-start-solid` (already in the `apps/site` collection enum from before this task). Validated via `astro check` (0 errors) and the real translation-freshness tool (reports `draft`, zero glossary/technical-literal issues — same status as `vite-solid-router.md`); the ES entry's `translationSourceHash` is a real sha256 of the EN file's actual content.
+- Verified: `pnpm --filter @solidiom/cli test` (242 passed) and `typecheck` clean; `pnpm install` + `pnpm --filter @solidiom/template-tanstack-start-solid typecheck`/`build` clean in-workspace — per Decision 4's own stated limit, this remains weaker than a materialized-and-installed-standalone check, which is CLI-008's job.
 
 ### CLI-008 — Offline fixtures and four-manager smoke harness
 
@@ -347,7 +361,9 @@ Acceptance:
 
 ---
 
-## 6. Open risk — SolidStart on Solid 2 beta
+## 6. Open risk — SolidStart on Solid 2 beta (RESOLVED)
+
+> **Resolution (this task):** the spike below was run. SolidStart failed — a published release still nested `solid-js@1.9.14` internally and its config API did not export `defineConfig` at the tested rc, so it could not build against this workspace's `solid-js@2.0.0-beta.24` pin. Per Decision 5's own pre-agreed fallback, `tanstack-start-solid` was substituted as CLI-007 PR 2's SSR template and confirmed working — see CLI-007's "Delivered (PR 2)" note above. This section is kept for the historical record of the decision process; it is no longer an open question.
 
 Decision 5 names SolidStart as CLI-007's SSR template, but its readiness is unconfirmed against this workspace's `solid-js@2.0.0-beta.24` pin.
 
@@ -360,7 +376,11 @@ Current external state, as of July 2026: [SolidStart's README states the maintai
 
 CLI-007 PR 1 and all of Track A are unaffected, so this can wait several weeks at no cost.
 
+**Spike outcome:** the "No" branch above is what happened. SolidStart's tested rc still nested `solid-js@1.9.14` and did not export `defineConfig` from its config API, confirming it cannot build against this workspace's pin. `tanstack-start-solid` was spiked in its place and confirmed working — `@tanstack/solid-start@2.0.0-beta.29`'s `peerDependencies` declare `solid-js: ">=2.0.0-0 <3.0.0"` and `@solidjs/web: ">=2.0.0-0 <3.0.0"`, and a minimal fixture built successfully for both client and SSR targets. SolidStart itself remains deferred to `TPL-000` once its v2 line stabilizes, as the "No" branch anticipated.
+
 Related note: [`@tanstack/solid-start` was compromised through an npm account takeover in May 2026](https://advisories.gitlab.com/npm/@tanstack/solid-start/GMS-2026-434/), which TanStack [addressed in a published hardening followup](https://tanstack.com/blog/incident-followup). Not disqualifying — a registry-account compromise, since remediated — but it argues for exact-pinning every template dependency and routing them through CLI-003's verification, which this plan already requires.
+
+**Verified during CLI-007 PR 2:** the May 2026 compromise was actually two separate incidents — a May 11 CI-cache-poisoning attack affecting exactly two ephemeral versions (`1.167.65`, `1.167.68`) published in a six-minute window, fully remediated by 2026-05-15 per TanStack's own postmortem, and a separate, more generic May 19 advisory tied to a broader campaign. The version this template pins, `2.0.0-beta.29` (published 2026-07-28, verified via GitHub Actions OIDC provenance), postdates both by months and is not in either affected range. Every TanStack dependency in the template's `package.json` is exact-pinned (no `^`/`~` ranges), and the template's install is routed through CLI-003's verification like any other install — no special-casing was added.
 
 ---
 
@@ -394,7 +414,7 @@ Additionally:
 | [x]    | CLI-004 | Complete. Theme installs are multi-artifact; UnoCSS profile documents manual wiring, no codemod |
 | [x]    | CLI-005 | Complete. `runAdd` is now async; `--install`/`--package-manager` added      |
 | [x]    | CLI-006 | Complete. Placeholder scaffold later replaced by CLI-007's real materializer |
-| [~]    | CLI-007 | PR 1 (engine + `vite-solid-router`) complete; PR 2 (SolidStart) still gated on the §6 spike |
+| [x]    | CLI-007 | Complete. PR 1 (engine + `vite-solid-router`) and PR 2 (`tanstack-start-solid`, substituted for SolidStart per the §6 spike) both delivered |
 | [ ]    | CLI-008 | Extends `tools/offline-fixture/`, does not replace it                       |
 | [ ]    | CLI-009 | First entries in `en/guides/` and `es/guides/`                              |
 | [ ]    | CLI-010 | Must raise the phase1-gate §6 CLI test count                                |
