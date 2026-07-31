@@ -13,7 +13,7 @@
   }
 
   [data-scope="select"][data-part="content"] {
-    @apply z-50 min-w-32 overflow-hidden rounded-radius border-solid border-border bg-background py-1 px-1 shadow-md;
+    @apply z-50 min-w-32 overflow-hidden rounded-radius border-solid border-border bg-background p-1 shadow-md;
   }
 
   [data-scope="select"][data-part="item"] {

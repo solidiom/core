@@ -4,8 +4,9 @@
  */
 
 import { cva, type VariantProps } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 
-export const badgeVariants = cva(
+const badgeVariantsCva = cva(
   "inline-flex items-center py-0.5 px-2.5 border-solid border-transparent rounded-radius text-xs leading-4 font-semibold transition-colors",
   {
     variants: {
@@ -22,4 +23,18 @@ export const badgeVariants = cva(
   },
 )
 
-export type BadgeVariantProps = VariantProps<typeof badgeVariants>
+export type BadgeVariantProps = VariantProps<typeof badgeVariantsCva>
+
+/**
+ * badgeVariantsCva() concatenates each matched variant/compound's utilities in
+ * declaration order; it does not resolve a later utility overriding an earlier
+ * one on the same CSS property, because Tailwind's compiled stylesheet orders
+ * utilities by its own internal grouping and scale value, not by the order
+ * classes appear in a class string (docs/contracts/recipe-contract.md §6).
+ * twMerge() reconciles that: it understands Tailwind's utility groups and
+ * keeps only the last conflicting class for a given property, matching what
+ * this scope's cascade-based css/unocss stylesheets already produce.
+ */
+export function badgeVariants(props?: BadgeVariantProps): string {
+  return twMerge(badgeVariantsCva(props))
+}
