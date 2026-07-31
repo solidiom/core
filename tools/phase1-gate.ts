@@ -280,11 +280,13 @@ check("axe scan test file exists", fileExists("tests/a11y/primitives-axe-scan.br
 check("axe helper exists", fileExists("tests/a11y/axe-helper.ts"))
 check("a11y result runner exists", fileExists("tools/run-a11y.ts"))
 
-const a11yResult = run("pnpm run test:a11y")
+const a11yResult = run("pnpm run test:a11y", { timeout: 600_000 })
 check(
   "all 52 axe scans execute and write a valid zero-violation artifact",
   a11yResult.ok,
-  "Run: pnpm run test:a11y",
+  a11yResult.timedOut
+    ? "pnpm run test:a11y exceeded its timeout — re-run directly and consider increasing the timeout in phase1-gate.ts"
+    : "Run: pnpm run test:a11y",
 )
 const a11yEvidenceResult = a11yResult.ok
   ? run("pnpm run report:a11y-evidence")
@@ -346,11 +348,15 @@ check(
   runBuild("@solidiom/recipes-tailwind"),
   "computed-style parity resolves @solidiom/recipes-tailwind through its package export; a stale dist/ produces false failures — run: pnpm --filter @solidiom/recipes-tailwind build",
 )
-const computedStyleParityResult = run("pnpm --filter @solidiom/tests-recipe-parity test")
+const computedStyleParityResult = run("pnpm --filter @solidiom/tests-recipe-parity test", {
+  timeout: 300_000,
+})
 check(
   "recipe computed-style parity passes across css/tailwind/unocss (RECIPE-005 phase 3)",
   computedStyleParityResult.ok,
-  "A rendered fixture disagrees on computed style across profiles — run: pnpm run test:recipe-parity",
+  computedStyleParityResult.timedOut
+    ? "pnpm run test:recipe-parity exceeded its timeout — re-run directly; this spins up a real browser and can be slow under load"
+    : "A rendered fixture disagrees on computed style across profiles — run: pnpm run test:recipe-parity",
 )
 check("audit-recipe-contract.ts exists", fileExists("tools/audit-recipe-contract.ts"))
 const selectorResult = run("pnpm exec tsx tools/audit-recipe-contract.ts")
@@ -401,25 +407,28 @@ check(
   "Run: pnpm --filter @solidiom/unocss-preset test",
 )
 
-// ─── 9b. RECIPE-006: src/source parity and export-map completeness ─────
-console.log("\n§9b Recipe package src/source parity and exports:")
-check(
-  "audit-recipe-source-parity.ts exists",
-  fileExists("tools/audit-recipe-source-parity.ts"),
-)
+// ─── 9b. RECIPE-006 + CLI-001: src/source parity and export-map completeness ──
+console.log("\n§9b Package src/source parity and exports:")
+check("audit-package-source-parity.ts exists", fileExists("tools/audit-package-source-parity.ts"))
 const sourceParityFixtureResult = run(
-  "pnpm exec vitest run tools/audit-recipe-source-parity.test.ts",
+  "pnpm exec vitest run tools/audit-package-source-parity.test.ts",
 )
 check(
   "source parity negative fixtures pass",
   sourceParityFixtureResult.ok,
-  "Run: pnpm exec vitest run tools/audit-recipe-source-parity.test.ts",
+  "Run: pnpm exec vitest run tools/audit-package-source-parity.test.ts",
 )
-const sourceParityResult = run("pnpm exec tsx tools/audit-recipe-source-parity.ts")
+const sourceParityResult = run("pnpm exec tsx tools/audit-package-source-parity.ts")
 check(
-  "recipe src/source parity and export-map check passes",
+  "package src/source parity and export-map check passes",
   sourceParityResult.ok,
-  "packages/recipes-* source/ is stale or an export entry is missing — run: pnpm run audit:recipe-source-parity (rebuild the package first)",
+  "packages/recipes-*/source or packages/cli/source is stale, or an export entry is missing — run: pnpm run audit:package-source-parity (rebuild the package first, or run pnpm run source:emit)",
+)
+check(
+  "CLI src/source-install/ does not collide with source/ emission root",
+  fileExists("packages/cli/src/source-install/install.ts") &&
+    !fileExists("packages/cli/src/source/install.ts"),
+  "packages/cli/src/source/ must stay renamed to src/source-install/ (CLI-001) — it collides with the source/ emission root at the package's top level",
 )
 
 // ─── 10. P1.5: Umbrella re-export purity check ─────────────────────────

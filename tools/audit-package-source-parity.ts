@@ -3,8 +3,26 @@ import { join } from "node:path"
 
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 
-/** Recipe packages that ship a dual-emission `src/` + build-copied `source/` tree. */
-const RECIPE_PACKAGES = ["recipes-css", "recipes-tailwind", "recipes-unocss"] as const
+/**
+ * Recipe packages that ship a dual-emission `src/` + build-copied `source/` tree
+ * AND publish it as a consumer-facing `"solid"` export condition.
+ *
+ * These get the full audit: byte-for-byte parity plus export-map completeness
+ * (`auditExportCompleteness`), because a missing/incomplete export map makes an
+ * otherwise-correct `source/` emission unimportable by consumers.
+ */
+const SOURCE_OWNED_PACKAGES = ["recipes-css", "recipes-tailwind", "recipes-unocss"] as const
+
+/**
+ * Tooling packages (`layer:tooling`) that ship a dual-emission `src/` + build-copied
+ * `source/` tree for convention consistency, but have no `"solid"` export condition
+ * and no consumer-facing styles/export map — nobody bundles a CLI binary from source.
+ *
+ * These get byte-for-byte parity only (`auditSourceParity`); `auditExportCompleteness`
+ * does not apply and would produce false failures (it requires a `"solid"` root
+ * export condition that these packages intentionally do not have).
+ */
+const TOOLING_PACKAGES = ["cli"] as const
 
 export interface SourceParityError {
   package: string
@@ -71,7 +89,8 @@ export function auditSourceParity(packageName: string, packageDir: string): Sour
       errors.push({
         package: packageName,
         file: `source/${file}`,
-        message: "missing from source/ — src/ has this file but source/ does not; rebuild the package",
+        message:
+          "missing from source/ — src/ has this file but source/ does not; rebuild the package",
       })
       continue
     }
@@ -153,8 +172,7 @@ export function auditExportCompleteness(
   }
 
   const rootExport = exportsMap["."] as
-    | { solid?: string; import?: string; types?: string }
-    | undefined
+    { solid?: string; import?: string; types?: string } | undefined
   if (!rootExport) {
     errors.push({
       package: packageName,
@@ -177,23 +195,39 @@ export function auditExportCompleteness(
 }
 
 export function auditRecipeSourceParity(root = ROOT): SourceParityError[] {
-  return RECIPE_PACKAGES.flatMap((name) => {
+  return SOURCE_OWNED_PACKAGES.flatMap((name) => {
     const packageDir = join(root, "packages", name)
     return [...auditSourceParity(name, packageDir), ...auditExportCompleteness(name, packageDir)]
   })
 }
 
+/**
+ * Audits tooling packages (CLI-001): byte-for-byte `src/`/`source/` parity only.
+ * No export-map check — tooling packages have no `"solid"` export condition.
+ */
+export function auditToolingSourceParity(root = ROOT): SourceParityError[] {
+  return TOOLING_PACKAGES.flatMap((name) => {
+    const packageDir = join(root, "packages", name)
+    return auditSourceParity(name, packageDir)
+  })
+}
+
+/** Runs every tier of the package src/source parity audit. */
+export function auditAllPackageSourceParity(root = ROOT): SourceParityError[] {
+  return [...auditRecipeSourceParity(root), ...auditToolingSourceParity(root)]
+}
+
 function main(): void {
-  console.log("Recipe package src/source parity and export-map check\n")
-  const errors = auditRecipeSourceParity()
+  console.log("Package src/source parity and export-map check\n")
+  const errors = auditAllPackageSourceParity()
 
   if (errors.length === 0) {
-    console.log("✓ Recipe source parity check PASSED")
+    console.log("✓ Package source parity check PASSED")
     console.log("  source/ mirrors src/ byte-for-byte and every stylesheet is exported.")
     return
   }
 
-  console.error(`✗ Recipe source parity check FAILED — ${errors.length} issue(s):\n`)
+  console.error(`✗ Package source parity check FAILED — ${errors.length} issue(s):\n`)
   for (const error of errors) {
     console.error(`  [${error.package}] ${error.file}: ${error.message}`)
   }

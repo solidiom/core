@@ -496,7 +496,7 @@ ${pc2.dim(`${plan.entries.length} packages resolved.`)}
 // src/commands/add.ts
 import { Command as Command3, Option as Option3 } from "clipanion";
 
-// src/source/install.ts
+// src/source-install/install.ts
 import { existsSync as existsSync3, mkdirSync as mkdirSync2, readFileSync as readFileSync4, writeFileSync as writeFileSync2, readdirSync, statSync } from "fs";
 import { join as join3, relative, dirname } from "path";
 import { createHash } from "crypto";
@@ -947,7 +947,7 @@ import { Command as Command7, Option as Option7 } from "clipanion";
 import { existsSync as existsSync6, readFileSync as readFileSync7, writeFileSync as writeFileSync3, mkdirSync as mkdirSync3 } from "fs";
 import { join as join6, dirname as dirname2, extname } from "path";
 
-// src/source/ast-transform.ts
+// src/source-install/ast-transform.ts
 import { Project } from "ts-morph";
 function rewriteImportsAst(options) {
   const { content, filePath, runtimeDir, fileName = "source.tsx" } = options;

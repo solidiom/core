@@ -6,7 +6,7 @@
  */
 import { Command } from "clipanion";
 import { type Plan, type PlanOptions } from "./plan";
-import { type SourceInstallResult } from "../source/install";
+import { type SourceInstallResult } from "../source-install/install";
 export interface AddOptions extends PlanOptions {
     dryRun?: boolean;
     registry?: string;
