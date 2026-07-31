@@ -5,7 +5,7 @@
 
 @layer components {
   [data-scope="alert"][data-part="root"] {
-    @apply relative flex flex-col gap-1 p-4 border-solid border-border rounded-radius text-sm leading-5;
+    @apply relative flex flex-col gap-1 py-4 px-4 border-solid border-border rounded-radius text-sm leading-5;
   }
 
   [data-scope="alert"][data-part="root"][data-state="info"] {
@@ -25,7 +25,7 @@
   }
 
   [data-scope="alert"][data-part="title"] {
-    @apply m-0 text-sm font-semibold leading-5 tracking-[-0.01em];
+    @apply my-0 mx-0 text-sm font-semibold leading-5 tracking-[-0.01em];
   }
 
   [data-scope="alert"][data-part="description"] {

@@ -12,7 +12,7 @@ lifecycle: current
 > **Purpose:** the normative reference for the canonical recipe contract. One definition per recipe; the CSS, Tailwind, and UnoCSS emitters generate every output from it.
 
 **Contract version:** 1
-**Status:** contract, validator, and all three emitters shipped (RECIPE-001/002/003/004).
+**Status:** contract, validator, and all three emitters shipped (RECIPE-001/002/003/004). RECIPE-005 (audit extension) and RECIPE-006 (src/source parity) are also shipped.
 **Task:** `docs/plans/website-tasks.md` §7.1 RECIPE-001
 **Breakdown:** (delivered; task breakdown archived — see git history for `docs/recipe-001-canonical-recipe-contract.md`)
 **Authoring workflow:** `docs/contracts/recipe-authoring-guide.md`
@@ -33,6 +33,9 @@ lifecycle: current
 | `tools/recipe-emit-tailwind.ts`                   | Tailwind emitter (RECIPE-003): `pnpm run recipe:emit:tailwind[:check]`                                                                     |
 | `tools/recipe-emit-tailwind-utilities.ts`         | Declaration → Tailwind utility mapping table, with arbitrary-value fallback                                                                |
 | `tools/recipe-emit-unocss.ts`                     | UnoCSS emitter (RECIPE-004): `pnpm run recipe:emit:unocss[:check]`, also generates `packages/unocss-preset/src/generated-variant-rules.ts` |
+| `tools/audit-recipe-parity.ts`                    | Cross-profile coverage/state/exception audit (RECIPE-005): `pnpm run audit:recipe-parity`                                                 |
+| `tools/audit-recipe-source-parity.ts`             | `src`/`source` byte parity and export-map completeness for recipe packages (RECIPE-006): `pnpm run audit:recipe-source-parity`            |
+| `tests/recipe-parity/`                            | Computed-style parity harness (RECIPE-005 phase 3): `pnpm run test:recipe-parity`                                                          |
 | `packages/runtime/src/dom/semantic-vocabulary.ts` | The attribute and state vocabulary, exported from `@solidiom/runtime`                                                                      |
 | `packages/recipes-tailwind/src/styles/theme.css`  | The Tailwind profile's theme contract                                                                                                      |
 
@@ -57,7 +60,7 @@ interface RecipeDefinition {
 A slot is one `data-part`.
 
 | Field                    | Meaning                                                              |
-| ------------------------ | -------------------------------------------------------------------- |
+| ------------------------ | ---------------------------------------------------------------------- |
 | `part`                   | The `data-part` value. Unique per definition. No selector characters |
 | `element`                | Element the slot renders, for emitter checks and docs                |
 | `ownership`              | `recipe`, `consumer`, or `adapter` — see §5                          |
@@ -114,7 +117,7 @@ Constrain two or more axes. Applied after single-axis variants, in declaration o
 Exported from `@solidiom/runtime`. Fourteen attributes:
 
 | Attribute                         | Values                                                                            |
-| --------------------------------- | --------------------------------------------------------------------------------- |
+| ---------------------------------- | ------------------------------------------------------------------------------- |
 | `data-scope`                      | Primitive package name                                                            |
 | `data-part`                       | Part name                                                                         |
 | `data-state`                      | Per-scope; 35 known scopes (33 stateful, Badge/Toast stateless) in `SCOPE_STATES` |
@@ -132,7 +135,7 @@ Exported from `@solidiom/runtime`. Fourteen attributes:
 Nine scope/state pairs conflate a state with a boolean flag or encode a compound value. They stay legal so current primitives validate, and each names the primitive task that resolves it — see `VOCABULARY_EXCEPTIONS`.
 
 | Scope                               | State                       | Problem                                                            |
-| ----------------------------------- | --------------------------- | ------------------------------------------------------------------ |
+| ------------------------------------ | --------------------------- | ------------------------------------------------------------------- |
 | `date-picker`                       | `disabled`                  | Duplicates the `data-disabled` flag                                |
 | `date-picker`, `data-table`, `tree` | `selected`                  | Duplicates the `data-selected` flag                                |
 | `data-table`, `tree`                | `unselected`                | Negative form of a flag                                            |
@@ -146,7 +149,7 @@ The UnoCSS preset resolves the flag collisions by keeping the bare variant on th
 Token **identity** is canonical and shared; token **mechanism** is profile-local.
 
 | Namespace  | Mechanism                                                         | Defined in                                                                         |
-| ---------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| ---------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `css`      | `var(--ui-<token>, <fallback>)`                                   | `packages/recipes-css` stylesheets, generated by `tools/recipe-emit-css.ts`        |
 | `tailwind` | Theme colour/radius/shadow names                                  | `packages/recipes-tailwind/src/styles/theme.css` (hand-maintained until THEME-003) |
 | `unocss`   | `var(--ui-<token>, <fallback>)` — same runtime namespace as `css` | `packages/recipes-unocss` stylesheets, generated by `tools/recipe-emit-unocss.ts`  |
@@ -174,18 +177,20 @@ Two unrelated kinds, separated:
 
 **Adapter exceptions.** Adapters must never emit `class` or `style` (`tools/audit-adapter-styling.ts`). The genuine cases are adapter-owned inline geometry: computed coordinates from `adapter-positioning-floating-ui`, transforms from `adapter-virtualization-tanstack`. A slot with `ownership: "adapter"` names the capability port and lists `adapterOwnedProperties`, which are exempt from cross-profile parity assertions.
 
+`tools/audit-recipe-parity.ts` (RECIPE-005) verifies both kinds of exception are genuinely honored, not merely tolerated: a `consumer`-owned slot must still be styled in every profile (the coverage rule in §6 applies to it the same as a recipe-owned slot — the exception only excuses the TSX wrapper from rendering it), and an `adapter`-owned slot's `adapterOwnedProperties` must not appear in any profile's own stylesheet ruleset for that slot.
+
 ## 6. Emitter capability matrix
 
-Six artifacts: each profile ships a stylesheet form and a class-string form.
+The class-string form exists only for a scope with a `variants` axis (currently badge and button); every scope ships a stylesheet form. "Six artifacts" below describes the capability matrix for a scope that has both forms, not a universal per-scope count.
 
 | Feature                     | css sheet | css class | tw sheet | tw class | uno sheet | uno class |
-| --------------------------- | --------- | --------- | -------- | -------- | --------- | --------- |
+| ----------------------------- | --------- | --------- | -------- | -------- | --------- | --------- |
 | Base declarations           | ✓         | ✓         | ✓        | ✓        | ✓         | ✓         |
 | Per-slot state              | ✓         | ✓         | ✓        | ✓        | ✓         | ✓         |
 | Boolean flags               | ✓         | ✓         | ✓        | ✓        | ✓         | ✓         |
 | Pseudo-classes              | ✓         | ✓         | ✓        | ✓        | ✓         | ✓         |
-| Variant axes                | ✓         | ✓         | ✓        | ✓        | ✓         | ✓         |
-| Compound variants           | ✓         | ✓         | ✓        | ✓        | ✓         | ✓         |
+| Variant axes                 | ✓         | ✓         | ✓        | ✓        | ✓         | ✓         |
+| Compound variants           | ✓         | ✓         | ✓        | shim     | ✓         | ✓         |
 | Cross-part state (ancestor) | ✓         | ✗         | ✓        | shim     | ✗         | ✗         |
 | Opacity-modified tokens     | shim      | shim      | ✓        | ✓        | ✓         | ✓         |
 | Adapter-owned geometry      | n/a       | n/a       | n/a      | n/a      | n/a       | n/a       |
@@ -194,14 +199,16 @@ Legend: ✓ supported, `shim` expressible with extra machinery, ✗ not expressi
 
 The cross-part row is why §3.2 of the authoring guide forbids ancestor-state styling: the Tailwind class-string form needs `group` plus `group-data-*`, and the UnoCSS preset appends selectors to the same element only. The contract therefore requires state on the slot that carries it, which every current primitive already supports.
 
-**Parity is asserted on computed style over a rendered fixture, not on generated strings.** Three emitters cannot produce matching output text, so a string-diff parity rule would be permanently red or permanently disabled. RECIPE-005 implements the assertion against this matrix.
+**Tailwind's compound-variant row is `shim`, not ✓.** `tools/recipe-emit-tailwind.ts`'s class-string form has a known ordering hazard: a compound variant's utilities and the size/variant class they are meant to override can share a CSS property (e.g. `padding`) expressed through different Tailwind utility groups (`p-*` shorthand vs. `py-*`/`px-*` axis form). Tailwind v4's compiled stylesheet orders utilities by internal group and scale value, not by the order classes appear in the `class` attribute, so a later-applied compound class does not reliably win the cascade over an earlier-registered utility on the same property. `boxUtility` in `tools/recipe-emit-tailwind-utilities.ts` closes the shorthand-vs-axis-form instance of this (always emits `py-*`/`px-*`, never `p-*`/`m-*`), but a same-group, different-value conflict (e.g. two `py-*` values) is not resolved — see the "KNOWN GAP" comment in `tests/recipe-parity/button.browser.test.tsx`'s compound-variant test. Resolving this fully needs either `tailwind-merge` (wrapping every emitted variant function's return value) or per-value custom-property indirection; neither is implemented, and both are scoped changes affecting every recipe with a compound variant, tracked as a follow-up rather than folded into RECIPE-005.
+
+**Parity is asserted on computed style over a rendered fixture, not on generated strings.** Three emitters cannot produce matching output text, so a string-diff parity rule would be permanently red or permanently disabled. RECIPE-005 implements this: `tests/recipe-parity/` renders each profile's hand-written wrapper with its own resolved stylesheet injected and compares `getComputedStyle` across profiles, covering badge and button (the two scopes with a `variants` axis) — base declarations, every variant value, every size, both compound variants, on/off and hover states. It found and fixed three real defects during implementation (a variant-accumulation bug in `renderVariantsModule` that dropped every variant's base declarations in favor of its `:hover` rule, the padding shorthand/axis-form cascade-ordering hazard above, and a one-value drift in `theme.css`'s `--color-primary-hover` fallback), and documents the one known gap the fix above does not close.
 
 ## 7. Validation rules
 
 `pnpm run recipe:contract`. Each rule is tagged with the authoring-guide section it enforces.
 
 | Rule                       | Rejects                                                                                                                                                                                                     |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | §3.1 backed declarations   | A variant value or declaration group with no declarations; a slot with no styling                                                                                                                           |
 | §3.2 no ancestor state     | A part name containing a selector combinator                                                                                                                                                                |
 | §3.3 matched coverage      | A variant or compound styling an undeclared slot                                                                                                                                                            |
@@ -230,10 +237,11 @@ All three profiles' recipes are now generated by their emitters (RECIPE-002/003/
 
 ## 10. Not yet done
 
-| Gap                                                                                            | Owner                                                                             |
-| ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Coverage and computed-style parity assertions across six artifacts                             | RECIPE-005                                                                        |
-| `src`/`source` parity checks for recipe packages                                               | RECIPE-006                                                                        |
-| Token values, light/dark pairs, contrast validation                                            | THEME-001..005                                                                    |
-| `SemanticAttrsOptions["state"]` narrowed from `string` to per-scope unions                     | needs a sweep across 52 primitives; the vocabulary guard test covers it meanwhile |
-| `site` namespace token gaps (BRAND-002's `--sol-*` set is not yet complete for every identity) | BRAND-002/THEME-002                                                               |
+| Gap                                                                                             | Owner                                                                             |
+| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| Tailwind compound-variant ordering hazard (same-property, different-value utility conflicts)   | Follow-up to RECIPE-005; needs `tailwind-merge` or per-value custom-property indirection — see §6 |
+| Token values, light/dark pairs, contrast validation                                             | THEME-001..005                                                                    |
+| `SemanticAttrsOptions["state"]` narrowed from `string` to per-scope unions                      | needs a sweep across 52 primitives; the vocabulary guard test covers it meanwhile |
+| `site` namespace token gaps (BRAND-002's `--sol-*` set is not yet complete for every identity)  | BRAND-002/THEME-002                                                               |
+
+RECIPE-005 and RECIPE-006 are shipped; their scopes are described in §1 and §6 rather than listed here as gaps.

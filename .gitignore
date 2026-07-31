@@ -46,3 +46,7 @@ playwright-report/
 
 # Misc
 *.tgz
+
+
+# RECIPE-005 computed-style parity harness — generated per test run
+tests/recipe-parity/.generated/

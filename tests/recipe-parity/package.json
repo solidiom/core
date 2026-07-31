@@ -1,0 +1,26 @@
+{
+  "name": "@solidiom/tests-recipe-parity",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "cd ../.. && vitest run --config vitest.recipe-parity.config.ts"
+  },
+  "dependencies": {
+    "@solidiom/badge": "workspace:*",
+    "@solidiom/button": "workspace:*",
+    "@solidiom/dialog": "workspace:*",
+    "@solidiom/recipes-css": "workspace:*",
+    "@solidiom/recipes-tailwind": "workspace:*",
+    "@solidiom/recipes-unocss": "workspace:*",
+    "@solidiom/runtime": "workspace:*",
+    "@solidjs/web": "catalog:",
+    "@tailwindcss/node": "4.3.3",
+    "solid-js": "catalog:"
+  },
+  "nx": {
+    "tags": [
+      "layer:test"
+    ]
+  }
+}
