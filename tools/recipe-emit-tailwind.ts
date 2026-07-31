@@ -6,8 +6,10 @@
  *     `@layer components`, targeting the same `[data-scope][data-part]` selectors as
  *     the CSS profile, with utilities from tools/recipe-emit-tailwind-utilities.ts
  *   - packages/recipes-tailwind/src/recipes/<scope>.variants.ts   — only for scopes with
- *     a `variants` axis; a generated `cva()` call using real Tailwind utility classes
- *     instead of the CSS profile's data-qualified `solidiom-*` classes.
+ *     a `variants` axis; a generated `cva()` call, wrapped in `tailwind-merge`'s
+ *     `twMerge()` to resolve same-property utility conflicts across axes, using real
+ *     Tailwind utility classes instead of the CSS profile's data-qualified
+ *     `solidiom-*` classes.
  *   - packages/recipes-tailwind/src/styles/index.css     — @import list, regenerated
  *
  * `styles/theme.css` is not generated here — it is the profile's token contract
@@ -133,6 +135,16 @@ function renderStylesheet(scope: string, definition: RecipeDefinition): string {
  * Renders a `cva()` module for a scope with a `variants` axis, using real Tailwind
  * utilities per value rather than the CSS profile's `solidiom-*` class names — the
  * Tailwind class-string form is meant to be self-describing without its stylesheet.
+ *
+ * The exported function wraps the internal `cva()` call in `tailwind-merge`'s
+ * `twMerge()`. `cva()` only concatenates matched classes in declaration order; it does
+ * not know that two of them set the same CSS property through different Tailwind
+ * utility groups (e.g. a compound's `py-0`/`px-0` and a size's `py-2`/`px-4`), and
+ * Tailwind's compiled stylesheet orders utilities by its own internal grouping and
+ * scale value rather than by class-list order, so the "last one wins" assumption
+ * `cva()` relies on does not hold. `twMerge()` understands Tailwind's utility groups
+ * and resolves the conflict the way this scope's cascade-based css/unocss stylesheets
+ * already do. See docs/contracts/recipe-contract.md §6.
  */
 function renderVariantsModule(scope: string, definition: RecipeDefinition): string | null {
   const axes = definition.variants
@@ -213,13 +225,15 @@ function renderVariantsModule(scope: string, definition: RecipeDefinition): stri
     .join("\n")
 
   const exportName = `${scope}Variants`
+  const cvaName = `${scope}VariantsCva`
   const propsTypeName = `${capitalize(scope)}VariantProps`
 
   return [
     generatedFileHeader("tools/recipe-emit-tailwind.ts", scope, "ts"),
     `import { cva, type VariantProps } from "class-variance-authority"`,
+    `import { twMerge } from "tailwind-merge"`,
     ``,
-    `export const ${exportName} = cva(${JSON.stringify(baseUtilities.join(" "))}, {`,
+    `const ${cvaName} = cva(${JSON.stringify(baseUtilities.join(" "))}, {`,
     `  variants: {`,
     variantsLiteral,
     `  },`,
@@ -227,7 +241,21 @@ function renderVariantsModule(scope: string, definition: RecipeDefinition): stri
     ...(compoundLiteral ? [`  compoundVariants: [`, compoundLiteral, `  ],`] : []),
     `})`,
     ``,
-    `export type ${propsTypeName} = VariantProps<typeof ${exportName}>`,
+    `export type ${propsTypeName} = VariantProps<typeof ${cvaName}>`,
+    ``,
+    `/**`,
+    ` * ${cvaName}() concatenates each matched variant/compound's utilities in`,
+    ` * declaration order; it does not resolve a later utility overriding an earlier`,
+    ` * one on the same CSS property, because Tailwind's compiled stylesheet orders`,
+    ` * utilities by its own internal grouping and scale value, not by the order`,
+    ` * classes appear in a class string (docs/contracts/recipe-contract.md §6).`,
+    ` * twMerge() reconciles that: it understands Tailwind's utility groups and`,
+    ` * keeps only the last conflicting class for a given property, matching what`,
+    ` * this scope's cascade-based css/unocss stylesheets already produce.`,
+    ` */`,
+    `export function ${exportName}(props?: ${propsTypeName}): string {`,
+    `  return twMerge(${cvaName}(props))`,
+    `}`,
     ``,
   ].join("\n")
 }

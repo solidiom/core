@@ -179,27 +179,21 @@ function spacingToken(value: string): string {
  * when sides differ), spelling any value outside the spacing scale as an arbitrary value
  * rather than silently approximating it.
  *
- * Always prefers the axis form (`py-*`/`px-*`) over the all-sides shorthand
- * (`p-*`/`m-*`), even when every side is equal. Tailwind v4's generated stylesheet
- * registers `padding`-shorthand utilities and `padding-inline`/`padding-block` utilities
- * as separate groups, with the axis group always emitted after the shorthand group in
- * the compiled `@layer utilities` — independent of the order classes appear in the
- * `class` attribute. A `p-0` compound meant to override a `py-2 px-4` size class
- * therefore loses regardless of cva()'s compoundVariants ordering, because `py-2`/`px-4`
- * are textually later in the stylesheet and win the cascade on the properties they
- * share. Emitting axis form consistently for every value (not just non-uniform ones)
- * keeps every padding/margin override in the same utility group, where declaration
- * order in the generated stylesheet (alphabetical within the group, so `p{x,y}-0` sorts
- * before `p{x,y}-2`/`p{x,y}-4` — see the spacing scale's numeric-then-string tie in
- * `SPACING_SCALE`) still does not guarantee override order by value, so this alone does
- * not fully solve arbitrary compound/size conflicts — but it removes the specific
- * shorthand-vs-longhand class of conflict RECIPE-005's computed-style parity caught on
- * button's "link"+"md" compound (`p-0` losing to `py-2 px-4`, while `h-auto` correctly
- * won over `h-10` in the same compound, because `height` has no such shorthand/longhand
- * split to begin with).
+ * Emits the all-sides shorthand (`p-*`/`m-*`) when every side is equal. This module
+ * feeds two consumers: `applyRuleFor`'s stylesheet/`@apply` path (real CSS selectors —
+ * Tailwind's own utility-group ordering is irrelevant there because a compound's
+ * selector is already more specific than the base size selector it overrides) and
+ * `renderVariantsModule`'s class-string path (multiple utility classes on one element,
+ * where Tailwind's compiled stylesheet order — not class-list order — decides which
+ * wins a shared property, which used to make a `p-0` compound lose to a `py-2 px-4`
+ * size class regardless of cva()'s declaration order). The class-string path now wraps
+ * its output in `tailwind-merge`'s `twMerge()` (see `renderVariantsModule` in
+ * `tools/recipe-emit-tailwind.ts`), which resolves that conflict directly — so this
+ * function is free to emit whichever form reads most naturally.
  */
 function boxUtility(base: "p" | "m", value: string): string[] {
   const { top, right, bottom, left } = boxSides(value)
+  if (top === right && right === bottom && bottom === left) return [`${base}-${spacingToken(top)}`]
   if (top === bottom && right === left) {
     return [`${base}y-${spacingToken(top)}`, `${base}x-${spacingToken(right)}`]
   }

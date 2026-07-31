@@ -4,8 +4,9 @@
  */
 
 import { cva, type VariantProps } from "class-variance-authority"
+import { twMerge } from "tailwind-merge"
 
-export const buttonVariants = cva(
+const buttonVariantsCva = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap border-none font-medium cursor-pointer rounded-radius transition-all",
   {
     variants: {
@@ -21,7 +22,7 @@ export const buttonVariants = cva(
         sm: "h-9 py-0 px-3 text-sm",
         md: "h-10 py-2 px-4 text-sm",
         lg: "h-11 py-0 px-8 text-base",
-        icon: "h-10 w-10 py-0 px-0",
+        icon: "h-10 w-10 p-0",
       },
     },
     defaultVariants: {
@@ -37,10 +38,24 @@ export const buttonVariants = cva(
       {
         variant: "link",
         size: "md",
-        class: "h-auto py-0 px-0",
+        class: "h-auto p-0",
       },
     ],
   },
 )
 
-export type ButtonVariantProps = VariantProps<typeof buttonVariants>
+export type ButtonVariantProps = VariantProps<typeof buttonVariantsCva>
+
+/**
+ * buttonVariantsCva() concatenates each matched variant/compound's utilities in
+ * declaration order; it does not resolve a later utility overriding an earlier
+ * one on the same CSS property, because Tailwind's compiled stylesheet orders
+ * utilities by its own internal grouping and scale value, not by the order
+ * classes appear in a class string (docs/contracts/recipe-contract.md §6).
+ * twMerge() reconciles that: it understands Tailwind's utility groups and
+ * keeps only the last conflicting class for a given property, matching what
+ * this scope's cascade-based css/unocss stylesheets already produce.
+ */
+export function buttonVariants(props?: ButtonVariantProps): string {
+  return twMerge(buttonVariantsCva(props))
+}
