@@ -1,0 +1,20 @@
+{
+  "name": "tanstack-start-solid",
+  "stack": "tanstack-start-solid",
+  "description": "SSR Solid app scaffolded with TanStack Start (Solid) and TanStack Router.",
+  "variables": ["projectName"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config (positioning adapter, source/runtime dirs, install mode) so the generated project is immediately `solidiom add`-able."
+    }
+  ],
+  "notes": [
+    "This file is documentation/metadata only — materialize.ts's actual copy-and-substitute behavior is the source of truth for what gets written into a generated project.",
+    "`{{projectName}}` is the only substitution token used in this template's source files (the page title rendered by src/routes/__root.tsx).",
+    "SSR-specific structure: src/router.tsx is the router setup file. Its router-creation function MUST be exported as `getRouter` (not `createRouter`) — TanStack Start's internal hydration code does a named `{ getRouter }` import from this file, and any other export name fails the build with a MISSING_EXPORT error.",
+    "src/routes/__root.tsx is the root route, rendering the document shell and an <Outlet/> — there is no index.html in the client-only-template sense, since TanStack Start generates its own HTML shell from the root route.",
+    "Routes are file-based under src/routes/ (index.tsx, about.tsx) and are compiled into src/routeTree.gen.ts by the tanstackStart() Vite plugin — that generated file is not part of this template's payload."
+  ]
+}

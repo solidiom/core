@@ -29,6 +29,30 @@ function makeFixtureTemplatesDir(): string {
       JSON.stringify({ name: "{{projectName}}", version: "0.0.0", private: true }, null, 2) + "\n",
     )
   }
+  // Tiny "tanstack-start-solid" fixture (SSR template stand-in), independent
+  // of the real templates/tanstack-start-solid/ tree — mirrors the shape of
+  // the "vite-solid-router" fixture above, plus a nested src/routes file so
+  // the SSR-specific {{projectName}} substitution surface (the root route's
+  // page title) is exercised too.
+  const ssrDir = join(templatesDir, "tanstack-start-solid")
+  mkdirSync(join(ssrDir, "src", "routes"), { recursive: true })
+  writeFileSync(
+    join(ssrDir, "template.json"),
+    JSON.stringify(
+      { name: "tanstack-start-solid", stack: "tanstack-start-solid", variables: ["projectName"] },
+      null,
+      2,
+    ),
+  )
+  writeFileSync(
+    join(ssrDir, "package.json"),
+    JSON.stringify({ name: "@solidiom/template-tanstack-start-solid", version: "0.0.0", private: true }, null, 2) +
+      "\n",
+  )
+  writeFileSync(
+    join(ssrDir, "src", "routes", "__root.tsx"),
+    'export const title = "{{projectName}}"\n',
+  )
   return templatesDir
 }
 
@@ -494,6 +518,31 @@ describe("create", () => {
       expect(result.created).toBe(true)
       const config = JSON.parse(readFileSync(join(result.destination, ".solidiom", "config.json"), "utf8"))
       expect(config.stylingProfile).toBe("tailwind")
+    })
+
+    it("materializes the tanstack-start-solid (SSR) template with {{projectName}} substitution", async () => {
+      const result = await runCreate({
+        cwd,
+        template: "tanstack-start-solid",
+        name: "acme-ssr-app",
+        yes: true,
+        install: false,
+        templatesDir,
+      })
+
+      expect(result.errors).toBeUndefined()
+      expect(result.created).toBe(true)
+      expect(result.destination).toBe(join(cwd, "acme-ssr-app"))
+
+      const pkg = JSON.parse(readFileSync(join(result.destination, "package.json"), "utf8"))
+      expect(pkg.name).toBe("@solidiom/template-tanstack-start-solid")
+
+      expect(existsSync(join(result.destination, ".solidiom", "config.json"))).toBe(true)
+      expect(existsSync(join(result.destination, "src", "routes", "__root.tsx"))).toBe(true)
+
+      const rootRoute = readFileSync(join(result.destination, "src", "routes", "__root.tsx"), "utf8")
+      expect(rootRoute).toContain('export const title = "acme-ssr-app"')
+      expect(rootRoute).not.toContain("{{projectName}}")
     })
 
     it("fails and cleans up when the template source cannot be resolved", async () => {
