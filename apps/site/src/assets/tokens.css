@@ -59,10 +59,10 @@
   /* ── Borders ── */
   --sol-border: #CBD5E1;              /* Default borders (Slate 300) */
   --sol-border-muted: #E2E8F0;       /* Subtle dividers (Slate 200) */
-  --sol-border-active: #6D66F1;      /* Focused/active borders (Indigo) */
+  --sol-border-active: #6961F1;      /* Focused/active borders (Indigo) */
 
   /* ── Brand Colors (Semantic Roles) ── */
-  --sol-primary: #6D66F1;            /* Primary action/identity (Indigo) */
+  --sol-primary: #6961F1;            /* Primary action/identity (Indigo) */
   --sol-primary-hover: #5B54E0;      /* Primary hover state */
   --sol-primary-foreground: #FFFFFF; /* Text on primary backgrounds */
   --sol-secondary: #3B82F6;          /* Links, secondary actions (Blue) */
@@ -72,10 +72,10 @@
   --sol-destructive: #E5484D;        /* Critical/error (Red) */
 
   /* ── Interactive States ── */
-  --sol-focus-ring: #6D66F1;         /* Focus outline color */
+  --sol-focus-ring: #6961F1;         /* Focus outline color */
   --sol-focus-ring-width: 2px;       /* Focus outline width */
-  --sol-interactive-hover: rgba(109, 102, 241, 0.06); /* Subtle hover bg */
-  --sol-interactive-active: rgba(109, 102, 241, 0.10); /* Pressed state bg */
+  --sol-interactive-hover: rgba(105, 97, 241, 0.06); /* Subtle hover bg */
+  --sol-interactive-active: rgba(105, 97, 241, 0.10); /* Pressed state bg */
 
   /* ── Radius ── */
   --sol-radius-sm: 8px;
