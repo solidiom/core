@@ -5,7 +5,7 @@
 import { Command, Option } from "clipanion"
 import { existsSync, readFileSync } from "node:fs"
 import { join } from "node:path"
-import { readLock, computeDigest } from "../source/install"
+import { readLock, computeDigest } from "../source-install/install"
 import pc from "picocolors"
 
 export interface DiffEntry {

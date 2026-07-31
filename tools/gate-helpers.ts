@@ -52,20 +52,25 @@ export function summarize(phase: string): never {
 /** Run a shell command and return { ok, stdout, stderr }. */
 export function run(
   cmd: string,
-  opts?: { cwd?: string },
-): { ok: boolean; stdout: string; stderr: string } {
+  opts?: { cwd?: string; timeout?: number },
+): { ok: boolean; stdout: string; stderr: string; timedOut?: boolean } {
   const cwd = opts?.cwd ?? ROOT
+  const timeout = opts?.timeout ?? 300_000
   try {
     const stdout = execSync(cmd, {
       cwd,
       encoding: "utf8",
       stdio: ["pipe", "pipe", "pipe"],
-      timeout: 120_000,
+      timeout,
+      maxBuffer: 64 * 1024 * 1024,
     })
     return { ok: true, stdout, stderr: "" }
   } catch (err: unknown) {
-    const e = err as { stdout?: string; stderr?: string; status?: number }
-    return { ok: false, stdout: e.stdout ?? "", stderr: e.stderr ?? "" }
+    const e = err as { stdout?: string; stderr?: string; status?: number; signal?: string }
+    // execSync kills the process with SIGTERM and sets `signal` (not `status`) on timeout —
+    // surface that distinctly so a slow-but-fine command isn't indistinguishable from a real failure.
+    const timedOut = e.signal === "SIGTERM" || e.signal === "SIGKILL"
+    return { ok: false, stdout: e.stdout ?? "", stderr: e.stderr ?? "", timedOut }
   }
 }
 
@@ -73,8 +78,8 @@ export function run(
  * Run tests for a package and verify they pass with a minimum count AND zero failures.
  * Returns true only if the test output reports >= minTests passing and 0 failed.
  */
-export function runTests(pkg: string, minTests: number): boolean {
-  const result = run(`pnpm --filter ${pkg} test`, { cwd: ROOT })
+export function runTests(pkg: string, minTests: number, opts?: { timeout?: number }): boolean {
+  const result = run(`pnpm --filter ${pkg} test`, { cwd: ROOT, timeout: opts?.timeout })
 
   // Strip ANSI escape codes before matching
   const combined = (result.stdout + result.stderr).replace(/\x1B\[[0-9;]*m/g, "")
@@ -107,16 +112,16 @@ export function runTests(pkg: string, minTests: number): boolean {
 /**
  * Run typecheck for a package and verify it passes (exit 0).
  */
-export function runTypecheck(pkg: string): boolean {
-  const result = run(`pnpm --filter ${pkg} typecheck`, { cwd: ROOT })
+export function runTypecheck(pkg: string, opts?: { timeout?: number }): boolean {
+  const result = run(`pnpm --filter ${pkg} typecheck`, { cwd: ROOT, timeout: opts?.timeout })
   return result.ok
 }
 
 /**
  * Run build for a package and verify it passes (exit 0).
  */
-export function runBuild(pkg: string): boolean {
-  const result = run(`pnpm --filter ${pkg} build`, { cwd: ROOT })
+export function runBuild(pkg: string, opts?: { timeout?: number }): boolean {
+  const result = run(`pnpm --filter ${pkg} build`, { cwd: ROOT, timeout: opts?.timeout })
   return result.ok
 }
 

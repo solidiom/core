@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { rewriteImportsAst } from "../source/ast-transform"
+import { rewriteImportsAst } from "./ast-transform"
 
 describe("source/ast-transform", () => {
   describe("rewriteImportsAst", () => {

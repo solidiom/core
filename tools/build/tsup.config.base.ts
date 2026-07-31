@@ -1,5 +1,5 @@
 import { defineConfig, type Options } from "tsup"
-import { copyFileSync, mkdirSync, readdirSync, statSync } from "node:fs"
+import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync, statSync } from "node:fs"
 import { join } from "node:path"
 
 /**
@@ -27,24 +27,30 @@ export function createTsupConfig(
   })
 }
 
-function copySourceDir(srcDir: string, destDir: string) {
-  try {
-    mkdirSync(destDir, { recursive: true })
-    const entries = readdirSync(srcDir)
-    for (const entry of entries) {
-      // Skip test files from source/ emission
-      if (entry.endsWith(".test.ts") || entry.endsWith(".spec.ts")) continue
-      const srcPath = join(srcDir, entry)
-      const destPath = join(destDir, entry)
-      const stat = statSync(srcPath)
-      if (stat.isDirectory()) {
-        copySourceDir(srcPath, destPath)
-      } else {
-        copyFileSync(srcPath, destPath)
-      }
+/**
+ * Copies `srcDir` into `destDir`, clearing `destDir` first so a file removed from
+ * `srcDir` cannot linger as an orphan, and excluding test files. Failures are not
+ * swallowed — a broken `source/` emission must fail the build, not report success
+ * with stale or missing output (see `tools/audit-package-source-parity.ts`, CLI-001).
+ */
+function copySourceDir(srcDir: string, destDir: string): void {
+  if (existsSync(destDir)) {
+    rmSync(destDir, { recursive: true, force: true })
+  }
+  mkdirSync(destDir, { recursive: true })
+
+  const entries = readdirSync(srcDir)
+  for (const entry of entries) {
+    // Skip test files from source/ emission
+    if (entry.endsWith(".test.ts") || entry.endsWith(".spec.ts")) continue
+    const srcPath = join(srcDir, entry)
+    const destPath = join(destDir, entry)
+    const stat = statSync(srcPath)
+    if (stat.isDirectory()) {
+      copySourceDir(srcPath, destPath)
+    } else {
+      copyFileSync(srcPath, destPath)
     }
-  } catch {
-    // Non-fatal: source/ emission is best-effort during dev
   }
 }
 

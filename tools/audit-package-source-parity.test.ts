@@ -2,7 +2,13 @@ import { afterEach, describe, expect, it } from "vitest"
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
-import { auditSourceParity, auditExportCompleteness } from "./audit-recipe-source-parity"
+import {
+  auditSourceParity,
+  auditExportCompleteness,
+  auditRecipeSourceParity,
+  auditToolingSourceParity,
+  auditAllPackageSourceParity,
+} from "./audit-package-source-parity"
 
 const temporaryRoots: string[] = []
 
@@ -103,7 +109,11 @@ describe("auditExportCompleteness", () => {
       "src/styles/button.css": "[data-scope='button'] {}",
       "package.json": JSON.stringify({
         exports: {
-          ".": { solid: "./source/index.ts", import: "./dist/index.js", types: "./dist/index.d.ts" },
+          ".": {
+            solid: "./source/index.ts",
+            import: "./dist/index.js",
+            types: "./dist/index.d.ts",
+          },
           "./styles/button.css": "./dist/styles/button.css",
         },
       }),
@@ -116,7 +126,11 @@ describe("auditExportCompleteness", () => {
       "src/styles/button.css": "[data-scope='button'] {}",
       "package.json": JSON.stringify({
         exports: {
-          ".": { solid: "./source/index.ts", import: "./dist/index.js", types: "./dist/index.d.ts" },
+          ".": {
+            solid: "./source/index.ts",
+            import: "./dist/index.js",
+            types: "./dist/index.d.ts",
+          },
         },
       }),
     })
@@ -130,7 +144,11 @@ describe("auditExportCompleteness", () => {
       "src/styles/button.css": "[data-scope='button'] {}",
       "package.json": JSON.stringify({
         exports: {
-          ".": { solid: "./source/index.ts", import: "./dist/index.js", types: "./dist/index.d.ts" },
+          ".": {
+            solid: "./source/index.ts",
+            import: "./dist/index.js",
+            types: "./dist/index.d.ts",
+          },
           "./styles/button.css": "./dist/styles/button.css",
           "./styles/removed.css": "./dist/styles/removed.css",
         },
@@ -144,7 +162,9 @@ describe("auditExportCompleteness", () => {
   it("rejects a missing root export", () => {
     const pkgDir = createPackage({
       "src/styles/button.css": "[data-scope='button'] {}",
-      "package.json": JSON.stringify({ exports: { "./styles/button.css": "./dist/styles/button.css" } }),
+      "package.json": JSON.stringify({
+        exports: { "./styles/button.css": "./dist/styles/button.css" },
+      }),
     })
     expect(auditExportCompleteness("fixture", pkgDir)).toContainEqual(
       expect.objectContaining({ message: expect.stringContaining('missing the "." root entry') }),
@@ -164,5 +184,65 @@ describe("auditExportCompleteness", () => {
     expect(auditExportCompleteness("fixture", pkgDir)).toContainEqual(
       expect.objectContaining({ message: expect.stringContaining('"solid" condition') }),
     )
+  })
+})
+
+describe("tooling packages (CLI-001)", () => {
+  it("auditExportCompleteness no-ops on a CLI-shaped package with no src/styles/ directory", () => {
+    // This is what actually makes the tooling tier safe: a package with no styles to
+    // export short-circuits auditExportCompleteness before it ever inspects the root
+    // export, so the tier split isn't strictly load-bearing for the CLI's current
+    // shape — but the split still documents intent and protects a package that later
+    // grows a styles/ directory without also growing a "solid" condition.
+    const pkgDir = createPackage({
+      "src/index.ts": "export const x = 1\n",
+      "package.json": JSON.stringify({
+        exports: { ".": { import: "./dist/index.js", types: "./dist/index.d.ts" } },
+      }),
+    })
+    expect(auditExportCompleteness("fixture", pkgDir)).toEqual([])
+  })
+
+  it("auditExportCompleteness would reject that same shape once it grows a styles/ export", () => {
+    const pkgDir = createPackage({
+      "src/styles/example.css": "[data-scope='example'] {}",
+      "package.json": JSON.stringify({
+        exports: {
+          ".": { import: "./dist/index.js", types: "./dist/index.d.ts" },
+          "./styles/example.css": "./dist/styles/example.css",
+        },
+      }),
+    })
+    expect(auditExportCompleteness("fixture", pkgDir)).toContainEqual(
+      expect.objectContaining({ message: expect.stringContaining('"solid" condition') }),
+    )
+  })
+
+  it("auditSourceParity alone passes for a CLI-shaped package with no solid condition", () => {
+    // The tooling tier only runs auditSourceParity, which has no export-map opinion —
+    // this is what makes it safe to apply to a package without a "solid" condition.
+    const pkgDir = createPackage({
+      "src/index.ts": "export const x = 1\n",
+      "source/index.ts": "export const x = 1\n",
+      "package.json": JSON.stringify({
+        exports: { ".": { import: "./dist/index.js", types: "./dist/index.d.ts" } },
+      }),
+    })
+    expect(auditSourceParity("fixture", pkgDir)).toEqual([])
+  })
+
+  it("auditToolingSourceParity checks the real packages/cli tree and finds it in parity", () => {
+    expect(auditToolingSourceParity()).toEqual([])
+  })
+
+  it("auditRecipeSourceParity checks the real recipe packages and finds them in parity", () => {
+    expect(auditRecipeSourceParity()).toEqual([])
+  })
+
+  it("auditAllPackageSourceParity combines both tiers with no duplicate package names", () => {
+    const errors = auditAllPackageSourceParity()
+    expect(errors).toEqual([])
+    const combined = [...auditRecipeSourceParity(), ...auditToolingSourceParity()]
+    expect(errors).toEqual(combined)
   })
 })
