@@ -67,4 +67,22 @@ describe("presetSolidiom", () => {
     })
     expect(disabled.match("uiLoading:opacity-70")).toBeUndefined()
   })
+
+  it("has no preflights when no theme option is given", () => {
+    const preset = presetSolidiom()
+    expect(preset.preflights).toEqual([])
+  })
+
+  it("includes a preflight with the theme's --ui-* assignments when a shipped slug is given (THEME-004)", () => {
+    const preset = presetSolidiom({ theme: "solidiom-default" })
+    expect(preset.preflights).toHaveLength(1)
+    const css = preset.preflights[0]!.getCSS()
+    expect(css).toContain("--ui-primary:")
+    expect(css).toContain('[data-theme="dark"]')
+  })
+
+  it("has no preflights for an unknown theme slug", () => {
+    const preset = presetSolidiom({ theme: "not-a-real-theme" })
+    expect(preset.preflights).toEqual([])
+  })
 })
