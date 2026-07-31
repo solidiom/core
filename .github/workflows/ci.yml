@@ -101,8 +101,8 @@ jobs:
         run: node packages/cli/dist/bin.js verify --registry
       - name: API-004 — verify vertical-slice primitive API coverage
         run: pnpm run api:coverage-gate
-      - name: RECIPE-006 — verify recipe package src/source parity and exports
-        run: pnpm run audit:recipe-source-parity
+      - name: RECIPE-006 / CLI-001 — verify package src/source parity and exports
+        run: pnpm run audit:package-source-parity
 
   test-node:
     needs: build

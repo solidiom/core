@@ -7,7 +7,7 @@
 
 import { Command, Option } from "clipanion"
 import { runPlan, type Plan, type PlanOptions } from "./plan"
-import { installSource, type SourceInstallResult } from "../source/install"
+import { installSource, type SourceInstallResult } from "../source-install/install"
 import pc from "picocolors"
 
 export interface AddOptions extends PlanOptions {

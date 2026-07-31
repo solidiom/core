@@ -7,7 +7,7 @@
 import { Command, Option } from "clipanion"
 import { existsSync, readFileSync } from "node:fs"
 import { join } from "node:path"
-import { readLock, type LockEntry } from "../source/install"
+import { readLock, type LockEntry } from "../source-install/install"
 import pc from "picocolors"
 
 export interface InspectResult {
