@@ -18,9 +18,9 @@
   "description": "Accessible label element linked to form controls via htmlFor.",
   "category": "input",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add label",
     "installDeps": []
@@ -61,11 +61,11 @@
     "fileDigests": {
       "src/index.tsx": "03052f8acac318fb4997cae2d479c21a487d870700c683c83331c130419bcc14"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/label"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

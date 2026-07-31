@@ -31,9 +31,9 @@
   "description": "Contextual hint shown on hover/focus.",
   "category": "overlay",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add tooltip",
     "installDeps": [
@@ -55,7 +55,8 @@
   "styling": {
     "outputs": [
       "css",
-      "tailwind"
+      "tailwind",
+      "unocss"
     ],
     "themeCompatible": []
   },
@@ -80,11 +81,11 @@
       "src/tooltip-context.ts": "55e178d78e98cb4ee9bb9111f683edae1a2a2896b20dd64d7a3af9acdff34dce",
       "src/tooltip.tsx": "aacfec3901f8a4ec21fd7529d2ed41657ee93285a3716134281e52909aa7aff8"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/tooltip"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

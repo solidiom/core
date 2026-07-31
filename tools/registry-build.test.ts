@@ -344,7 +344,7 @@ describe("REG-003 manifest fields", () => {
     )
 
     expect(dialog.status).toBe("preview")
-    expect(dialog.deliverables).toEqual({ primitive: true })
+    expect(dialog.deliverables).toEqual(["primitive"])
     expect(dialog.styling.themeCompatible).toEqual(["site"])
     expect(dialog.search.keywords).toEqual(
       expect.arrayContaining(["modal", "overlay", "focus", "superposición"]),

@@ -27,9 +27,9 @@
   "description": "Action list triggered by a button.",
   "category": "navigation",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add menu",
     "installDeps": []
@@ -49,7 +49,8 @@
   "styling": {
     "outputs": [
       "css",
-      "tailwind"
+      "tailwind",
+      "unocss"
     ],
     "themeCompatible": []
   },
@@ -72,11 +73,11 @@
       "src/menu-context.ts": "fba8e19b5e9db0519af2c5a12f00e18470b69cad93ea04618fcf9ad0cb72c58e",
       "src/menu.tsx": "b2b375bf7e3d91b4bb5493bad7a773347d522fb23d2d8984e1cd3a023b2f0a05"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/menu"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

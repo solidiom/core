@@ -307,13 +307,16 @@ interface PrimitiveManifestV2 extends PrimitiveManifest {
   description: string
   category: string
   status: "experimental" | "preview" | "stable" | "deprecated"
-  deliverables: {
-    primitive: true
-    component?: boolean
-    block?: boolean
-    template?: boolean
-    theme?: boolean
-  }
+  /**
+   * Sorted, deduplicated set of product-layer deliverables this package
+   * provides. Always includes "primitive"; additional entries (component,
+   * block, template, theme) come from package.json's
+   * nx.metadata.registry.deliverables. A single flat array — rather than an
+   * object with optional boolean keys — keeps this shape identical to
+   * IndexManifestV2.primitives[].deliverables and lets a package be
+   * component-only, theme-only, etc. without lying about "primitive".
+   */
+  deliverables: Deliverable[]
   cli: {
     addCommand: string
     installDeps: string[]
@@ -849,13 +852,7 @@ function buildRegistry(): void {
       description,
       category,
       status: registryMetadata.status ?? "preview",
-      deliverables: {
-        primitive: true,
-        ...(registryMetadata.deliverables.includes("component") ? { component: true } : {}),
-        ...(registryMetadata.deliverables.includes("block") ? { block: true } : {}),
-        ...(registryMetadata.deliverables.includes("template") ? { template: true } : {}),
-        ...(registryMetadata.deliverables.includes("theme") ? { theme: true } : {}),
-      },
+      deliverables: [...new Set<Deliverable>(["primitive", ...registryMetadata.deliverables])].sort(),
       cli: {
         addCommand: `solidiom add ${primitive.name}`,
         installDeps: [...primitive.capabilities.map((c) => c.default)].sort(),
@@ -918,10 +915,7 @@ function buildRegistry(): void {
         description: m.description,
         category: m.category,
         status: m.status,
-        deliverables: Object.entries(m.deliverables)
-          .filter(([, v]) => v === true)
-          .map(([k]) => k)
-          .sort(),
+        deliverables: m.deliverables,
         hasAccessibilityEvidence: m.accessibility.evidenceIds.length > 0,
         accessibility: {
           reviewStatus: m.accessibility.reviewStatus,

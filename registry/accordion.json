@@ -25,9 +25,9 @@
   "description": "Vertically stacked set of collapsible sections.",
   "category": "layout",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add accordion",
     "installDeps": []
@@ -47,7 +47,8 @@
   "styling": {
     "outputs": [
       "css",
-      "tailwind"
+      "tailwind",
+      "unocss"
     ],
     "themeCompatible": []
   },
@@ -71,11 +72,11 @@
       "src/accordion.tsx": "01ad14883152d9b6c8c7a154782c0c540ecbd50aee20366ecb6023d7247c1025",
       "src/index.tsx": "e158ccfb3700ecd1551fcc07c206badfb4b41cfdcff915f78bcea532e4397a5e"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/accordion"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

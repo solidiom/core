@@ -22,9 +22,9 @@
   "description": "Modal confirmation dialog requiring explicit user action.",
   "category": "overlay",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add alert-dialog",
     "installDeps": []
@@ -65,11 +65,11 @@
     "fileDigests": {
       "src/index.tsx": "d7526dbcd3bb660a6b50fa985b928e3619aa98accc47385800b30f58beb77d36"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/alert-dialog"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }
