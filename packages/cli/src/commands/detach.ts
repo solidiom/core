@@ -6,7 +6,7 @@
  */
 
 import { Command, Option } from "clipanion"
-import { readLock, writeLock } from "../source-install/install"
+import { readLock, writeLock } from "../source-install/lock"
 import pc from "picocolors"
 
 export interface DetachResult {

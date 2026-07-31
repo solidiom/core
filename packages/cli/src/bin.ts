@@ -7,6 +7,7 @@ import { Cli } from "clipanion"
 import { InitCommand } from "./commands/init"
 import { PlanCommand } from "./commands/plan"
 import { AddCommand } from "./commands/add"
+import { CreateCommand } from "./commands/create"
 import { InspectCommand } from "./commands/inspect"
 import { DiffCommand } from "./commands/diff"
 import { DetachCommand } from "./commands/detach"
@@ -24,6 +25,7 @@ const cli = new Cli({
 cli.register(InitCommand)
 cli.register(PlanCommand)
 cli.register(AddCommand)
+cli.register(CreateCommand)
 cli.register(InspectCommand)
 cli.register(DiffCommand)
 cli.register(DetachCommand)

@@ -1,0 +1,296 @@
+import { describe, it, expect, beforeEach, afterEach } from "vitest"
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from "node:fs"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
+import { materialize } from "./materialize"
+
+/** Writes a minimal inline fixture template into `dir`. Keeps unit tests fast and isolated. */
+function writeFixtureTemplate(
+  dir: string,
+  files: Record<string, string>,
+  templateJson: Record<string, unknown> = { name: "fixture" },
+): void {
+  mkdirSync(dir, { recursive: true })
+  writeFileSync(join(dir, "template.json"), JSON.stringify(templateJson, null, 2))
+  for (const [relPath, content] of Object.entries(files)) {
+    const target = join(dir, relPath)
+    mkdirSync(join(target, ".."), { recursive: true })
+    writeFileSync(target, content)
+  }
+}
+
+describe("materialize", () => {
+  let sourceDir: string
+  let destination: string
+
+  beforeEach(() => {
+    sourceDir = mkdtempSync(join(tmpdir(), "solidiom-template-fixture-"))
+    destination = mkdtempSync(join(tmpdir(), "solidiom-materialize-dest-"))
+  })
+
+  afterEach(() => {
+    rmSync(sourceDir, { recursive: true, force: true })
+    rmSync(destination, { recursive: true, force: true })
+  })
+
+  describe("{{var}} substitution", () => {
+    it("substitutes {{projectName}} against the allowlist", () => {
+      writeFixtureTemplate(sourceDir, {
+        "package.json": JSON.stringify({ name: "{{projectName}}", version: "0.0.0" }),
+        "index.html": "<title>{{projectName}}</title>",
+      })
+
+      const result = materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-cool-app",
+        templateSourceDir: sourceDir,
+      })
+
+      expect(result.errors).toBeUndefined()
+      const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
+      expect(pkg.name).toBe("my-cool-app")
+      expect(readFileSync(join(destination, "index.html"), "utf8")).toBe("<title>my-cool-app</title>")
+    })
+
+    it("does not silently blank an unknown {{var}} token", () => {
+      writeFixtureTemplate(sourceDir, {
+        "README.md": "Hello {{projectName}}, your {{unknownToken}} stays put.",
+      })
+
+      const result = materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-app",
+        templateSourceDir: sourceDir,
+      })
+
+      expect(result.errors).toBeUndefined()
+      const content = readFileSync(join(destination, "README.md"), "utf8")
+      expect(content).toBe("Hello my-app, your {{unknownToken}} stays put.")
+    })
+
+    it("does not substitute an allowlisted variable with no value supplied", () => {
+      writeFixtureTemplate(sourceDir, {
+        "README.md": "{{projectName}} / {{projectName}}",
+      })
+
+      const result = materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "solo",
+        templateSourceDir: sourceDir,
+      })
+
+      expect(result.errors).toBeUndefined()
+      expect(readFileSync(join(destination, "README.md"), "utf8")).toBe("solo / solo")
+    })
+  })
+
+  describe("template.json exclusion", () => {
+    it("does not copy template.json into the destination", () => {
+      writeFixtureTemplate(sourceDir, { "package.json": "{}" })
+
+      materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-app",
+        templateSourceDir: sourceDir,
+      })
+
+      expect(existsSync(join(destination, "template.json"))).toBe(false)
+    })
+  })
+
+  describe("workspace:* rewriting", () => {
+    it("rewrites workspace:* to the real version when a monorepo packages/ dir is present", () => {
+      // Build a fake monorepo: <root>/packages/button/package.json with a
+      // real version, and the template source living under <root>/templates/fixture
+      // so rewriteWorkspaceVersions's upward walk from the template source
+      // finds <root>/packages/button/package.json.
+      const fakeRoot = mkdtempSync(join(tmpdir(), "solidiom-fakemono-"))
+      const templateSrc = join(fakeRoot, "templates", "fixture")
+      mkdirSync(join(fakeRoot, "packages", "button"), { recursive: true })
+      writeFileSync(
+        join(fakeRoot, "packages", "button", "package.json"),
+        JSON.stringify({ name: "@solidiom/button", version: "0.0.1-next.0" }),
+      )
+      writeFixtureTemplate(templateSrc, {
+        "package.json": JSON.stringify({
+          name: "{{projectName}}",
+          dependencies: { "@solidiom/button": "workspace:*" },
+        }),
+      })
+
+      try {
+        const result = materialize({
+          templateName: "fixture",
+          destination,
+          projectName: "my-app",
+          templateSourceDir: templateSrc,
+        })
+
+        expect(result.errors).toBeUndefined()
+        const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
+        expect(pkg.dependencies["@solidiom/button"]).toBe("0.0.1-next.0")
+      } finally {
+        rmSync(fakeRoot, { recursive: true, force: true })
+      }
+    })
+
+    it("leaves workspace:* untouched and reports a warning when no monorepo packages/ dir is found", () => {
+      // templateSrc has no packages/ ancestor at all (it's a bare tmpdir),
+      // so resolution must fail gracefully rather than throw.
+      writeFixtureTemplate(sourceDir, {
+        "package.json": JSON.stringify({
+          name: "{{projectName}}",
+          dependencies: { "@solidiom/button": "workspace:*" },
+        }),
+      })
+
+      const result = materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-app",
+        templateSourceDir: sourceDir,
+      })
+
+      const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
+      expect(pkg.dependencies["@solidiom/button"]).toBe("workspace:*")
+      expect(result.errors?.some((e) => /Could not resolve a real version/.test(e))).toBe(true)
+    })
+  })
+
+  describe("tsconfig extends-stripping", () => {
+    it("strips a monorepo-relative extends and replaces it with a self-contained compilerOptions block", () => {
+      writeFixtureTemplate(sourceDir, {
+        "tsconfig.json": JSON.stringify({
+          extends: "../../tsconfig.base.json",
+          compilerOptions: { outDir: "./dist" },
+          include: ["src"],
+        }),
+      })
+
+      const result = materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-app",
+        templateSourceDir: sourceDir,
+      })
+
+      expect(result.errors).toBeUndefined()
+      const tsconfig = JSON.parse(readFileSync(join(destination, "tsconfig.json"), "utf8"))
+      expect(tsconfig.extends).toBeUndefined()
+      expect(tsconfig.compilerOptions.outDir).toBe("./dist")
+      expect(tsconfig.compilerOptions.strict).toBe(true)
+      expect(tsconfig.include).toEqual(["src"])
+    })
+
+    it("leaves a tsconfig with no monorepo-relative extends untouched", () => {
+      writeFixtureTemplate(sourceDir, {
+        "tsconfig.json": JSON.stringify({ compilerOptions: { strict: true } }),
+      })
+
+      materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-app",
+        templateSourceDir: sourceDir,
+      })
+
+      const tsconfig = JSON.parse(readFileSync(join(destination, "tsconfig.json"), "utf8"))
+      expect(tsconfig).toEqual({ compilerOptions: { strict: true } })
+    })
+
+    it("strips monorepo-relative references entries", () => {
+      writeFixtureTemplate(sourceDir, {
+        "tsconfig.json": JSON.stringify({
+          extends: "../../tsconfig.base.json",
+          references: [{ path: "../../packages/runtime" }],
+        }),
+      })
+
+      materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-app",
+        templateSourceDir: sourceDir,
+      })
+
+      const tsconfig = JSON.parse(readFileSync(join(destination, "tsconfig.json"), "utf8"))
+      expect(tsconfig.references).toBeUndefined()
+    })
+  })
+
+  describe("foreign-lockfile rule (§8.4)", () => {
+    it.each(["pnpm-lock.yaml", "package-lock.json", "yarn.lock", "bun.lockb", "bun.lock"])(
+      "refuses to copy a %s found in the template payload and reports an error",
+      (lockfileName) => {
+        writeFixtureTemplate(sourceDir, {
+          "package.json": "{}",
+          [lockfileName]: "not-a-real-lockfile",
+        })
+
+        const result = materialize({
+          templateName: "fixture",
+          destination,
+          projectName: "my-app",
+          templateSourceDir: sourceDir,
+        })
+
+        expect(result.errors?.some((e) => /foreign lockfile/.test(e))).toBe(true)
+        expect(existsSync(join(destination, lockfileName))).toBe(false)
+      },
+    )
+
+    it("still copies the rest of the payload when a lockfile is refused", () => {
+      writeFixtureTemplate(sourceDir, {
+        "package.json": "{}",
+        "pnpm-lock.yaml": "lockfileVersion: '9.0'",
+      })
+
+      const result = materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-app",
+        templateSourceDir: sourceDir,
+      })
+
+      expect(existsSync(join(destination, "package.json"))).toBe(true)
+      expect(result.filesWritten).toContain("package.json")
+      expect(result.filesWritten).not.toContain("pnpm-lock.yaml")
+    })
+  })
+
+  describe("template source resolution failure", () => {
+    it("returns an error and writes nothing when the template cannot be found", () => {
+      const result = materialize({
+        templateName: "totally-unknown-template-xyz",
+        destination,
+        projectName: "my-app",
+      })
+
+      expect(result.filesWritten).toEqual([])
+      expect(result.errors?.some((e) => /Could not resolve source directory/.test(e))).toBe(true)
+    })
+  })
+
+  describe("binary passthrough", () => {
+    it("copies non-text files byte-for-byte without attempting substitution", () => {
+      writeFixtureTemplate(sourceDir, {})
+      const binaryPath = join(sourceDir, "icon.png")
+      const bytes = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])
+      writeFileSync(binaryPath, bytes)
+
+      materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-app",
+        templateSourceDir: sourceDir,
+      })
+
+      const copied = readFileSync(join(destination, "icon.png"))
+      expect(Buffer.compare(copied, bytes)).toBe(0)
+    })
+  })
+})

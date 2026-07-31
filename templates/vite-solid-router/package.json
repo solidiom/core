@@ -1,0 +1,31 @@
+{
+  "name": "@solidiom/template-vite-solid-router",
+  "version": "0.0.1-next.0",
+  "private": true,
+  "type": "module",
+  "description": "Solidiom starter template: client-only Vite + Solid Router. Materialized into new projects by `solidiom create` (CLI-007); not published standalone.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@solidiom/button": "workspace:*",
+    "@solidiom/recipes-tailwind": "workspace:*",
+    "@solidjs/router": "0.17.0-next.5",
+    "solid-js": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.7.0",
+    "vite": "^8.1.5",
+    "vite-plugin-solid": "3.0.0-next.14"
+  },
+  "nx": {
+    "tags": [
+      "layer:template"
+    ]
+  }
+}
