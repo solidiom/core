@@ -12,7 +12,7 @@ lifecycle: current
 > **Purpose:** the normative reference for the canonical theme definition schema and its generated output. `PRESET-001..004`'s shipped presets and `BUILDER-004/005`'s import/export/share-link mechanisms consume this shape; the CSS, Tailwind, and UnoCSS emitters here produce every installable theme artifact from it.
 
 **Contract version:** 1
-**Status:** schema, validator, migration mechanism, one reference definition (THEME-001), CSS/Tailwind/UnoCSS generation (THEME-002/003/004), and the cross-output parity/contrast/round-trip audit (THEME-005) are all shipped.
+**Status:** schema, validator, migration mechanism, one reference definition (THEME-001), CSS/Tailwind/UnoCSS generation (THEME-002/003/004), and the cross-output parity/contrast/round-trip audit (THEME-005) are all shipped. `audit:theme-parity` passes cleanly with no exceptions.
 **Task:** `docs/plans/website-tasks.md` §7.2 THEME-001..005
 **Depends on:** BRAND-002 (`apps/site/src/assets/tokens.css`), RECIPE-001 (`docs/contracts/recipe-contract.md` §4 token model)
 
@@ -195,15 +195,30 @@ order.
 4. **Round-trip** — `JSON.parse(JSON.stringify(definition))` deep-equals the source
    `ThemeDefinition`, which `BUILDER-004`/`BUILDER-005`'s persistence depends on.
 
-### 5.1 Known finding: `solidiom-default`'s light-mode primary/primary-foreground pair
+All four checks pass cleanly for every shipped theme; `.github/workflows/ci.yml` runs
+`pnpm run audit:theme-parity` as a blocking step.
 
-`primary-foreground` (`#FFFFFF`) on `primary` (`#6D66F1`) resolves to **4.36:1** in light
-mode, just under the 4.5:1 body-text minimum above. This is a genuine, tracked finding —
-not a bug in the audit — inherited from BRAND-002's shipped brand colour. `tools/audit-theme-parity.test.ts` documents that the audit surfaces it. `.github/workflows/ci.yml` runs
-`audit:theme-parity` with `continue-on-error: true` until this is resolved by a BRAND-002
-change to the primary colour (a design decision outside THEME-005's scope); generated
-freshness, cross-output parity, and round-trip are not exempted by this and already pass
-cleanly.
+### 5.1 Resolved finding: `solidiom-default`'s light-mode primary/primary-foreground pair
+
+`primary-foreground` (`#FFFFFF`) on `primary` previously resolved to **4.36:1** in light
+mode, just under the 4.5:1 body-text minimum above (BRAND-002's original `#6D66F1`). The
+light-mode primary was darkened by roughly one point of HSL lightness, at the same hue
+and saturation, to **`#6961F1`** — resolving to 4.58:1 — in
+`apps/site/src/assets/tokens.css` (`--sol-primary`, `--sol-border-active`,
+`--sol-focus-ring`, and the derived `--sol-interactive-hover`/`--sol-interactive-active`
+rgba values) and `tools/theme-contract-definitions.ts` (`primary`, `border-active`;
+`focus-ring` already referenced `primary` via `{ ref }` and updated automatically). The
+shift is visually negligible and does not change the brand's hue or saturation identity.
+Dark mode's `#8B83F8` and the light-mode hover state `#5B54E0` already passed and were
+left unchanged.
+
+The literal brand mark (`apps/site/src/assets/brand/*.svg`, the PWA icons, and
+`manifest.webmanifest`'s `theme_color`) intentionally keeps the original `#6D66F1` — a
+logo is not held to text-contrast rules, and diverging the _UI token_ from the _brand
+mark_ was a deliberate choice, not an oversight.
+
+`tools/audit-theme-parity.test.ts` carries a regression guard asserting the full contrast
+matrix passes with zero violations.
 
 ## 6. Migration
 
@@ -250,7 +265,6 @@ so existing share links, exported JSON files, and installed presets keep resolvi
 
 | Gap                                                       | Owner                          |
 | --------------------------------------------------------- | ------------------------------ |
-| The known light-mode contrast finding in §5.1             | BRAND-002 (colour adjustment)  |
 | Additional shipped presets (Ocean, Forest, Slate, Aurora) | PRESET-001..004                |
 | Theme-builder UI consuming this schema                    | BUILDER-001..006               |
 | Tailwind v3 `theme.extend.colors` mapping (v4-only today) | Future task, not yet scheduled |

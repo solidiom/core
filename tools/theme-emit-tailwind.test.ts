@@ -37,7 +37,7 @@ describe("emitThemeTailwind", () => {
 
   it("uses this theme's resolved light-mode value as the var() fallback", () => {
     const css = readFileSync(TAILWIND_PATH, "utf8")
-    // solidiom-default's light primary is #6D66F1 (see theme-contract-definitions.ts)
-    expect(css).toMatch(/--color-primary:\s*var\(--ui-primary,\s*#6d66f1\)/i)
+    // solidiom-default's light primary is #6961F1 (see theme-contract-definitions.ts)
+    expect(css).toMatch(/--color-primary:\s*var\(--ui-primary,\s*#6961f1\)/i)
   })
 })
