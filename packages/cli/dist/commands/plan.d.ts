@@ -5,6 +5,7 @@
  * real version numbers. Validates against policy constraints.
  */
 import { Command } from "clipanion";
+import { type Deliverable, type StylingProfile } from "../registry-schema";
 /** A resolved plan entry. */
 export interface PlanEntry {
     package: string;
@@ -17,6 +18,12 @@ export interface Plan {
     primitive: string;
     mode: "package" | "source";
     entries: PlanEntry[];
+    /** Product-layer deliverable this plan resolves, if requested via --deliverable. */
+    deliverable?: Deliverable;
+    /** Styling profile this plan resolves, if requested via --styling. */
+    stylingProfile?: StylingProfile;
+    /** Styling outputs the resolved primitive actually has recipes for. */
+    stylingOutputs: StylingProfile[];
     violations: string[];
 }
 export interface PlanOptions {
@@ -25,6 +32,10 @@ export interface PlanOptions {
     mode?: "package" | "source";
     registry?: string;
     noNetwork?: boolean;
+    /** Request a specific product-layer deliverable (primitive, component, block, template, theme). */
+    deliverable?: Deliverable;
+    /** Request a specific styling profile (css, tailwind, unocss). */
+    styling?: StylingProfile;
 }
 /**
  * Core plan logic — usable from CLI and programmatic API.
@@ -41,6 +52,8 @@ export declare class PlanCommand extends Command {
     mode: string | undefined;
     registry: string | undefined;
     noNetwork: boolean;
+    deliverable: string | undefined;
+    styling: string | undefined;
     execute(): Promise<number>;
 }
 //# sourceMappingURL=plan.d.ts.map
