@@ -99,6 +99,7 @@ describe("source/install", () => {
             reason: "requested",
           },
         ],
+        stylingOutputs: [],
         violations: [],
       }
 
@@ -134,6 +135,7 @@ describe("source/install", () => {
             reason: "dependency",
           },
         ],
+        stylingOutputs: [],
         violations: [],
       }
 
