@@ -17,6 +17,59 @@ export const SUPPORTED_REGISTRY_INDEX_VERSION = 2 as const
 export const SUPPORTED_MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v2.json"
 export const SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v2.json"
 
+/** Product-layer deliverable kinds a package/manifest may declare (CLI-002). */
+export const DELIVERABLES = ["primitive", "component", "block", "template", "theme"] as const
+export const deliverableSchema = z.enum(DELIVERABLES)
+export type Deliverable = z.infer<typeof deliverableSchema>
+
+/** Styling recipe outputs a manifest may ship (CLI-002). */
+export const STYLING_PROFILES = ["css", "tailwind", "unocss"] as const
+export const stylingProfileSchema = z.enum(STYLING_PROFILES)
+export type StylingProfile = z.infer<typeof stylingProfileSchema>
+
+const capabilitySchema = z.object({
+  name: z.string().min(1),
+  version: z.number().int().positive(),
+  default: z.string().regex(/^@solidiom\//),
+})
+
+const documentationLocaleSchema = z.object({
+  status: z.enum(["missing", "draft", "stale", "reviewed"]),
+  sourceHash: z.string().optional(),
+  lastUpdated: z.string().optional(),
+})
+
+const manifestDocumentationSchema = z.object({
+  status: z.enum(["stub", "draft", "review", "complete"]),
+  locales: z.record(documentationLocaleSchema),
+})
+
+const manifestStylingSchema = z.object({
+  outputs: z.array(stylingProfileSchema),
+  themeCompatible: z.array(z.string()),
+})
+
+const manifestSearchSchema = z.object({
+  keywords: z.array(z.string()),
+})
+
+const manifestProvenanceSchema = z.object({
+  repository: z.string(),
+  directory: z.string(),
+  sourceCommit: z.string().optional(),
+})
+
+const manifestCliSchema = z.object({
+  addCommand: z.string().min(1),
+  installDeps: z.array(z.string()),
+})
+
+const manifestAccessibilitySchema = z.object({
+  reviewStatus: z.enum(["none", "automated", "manual", "complete"]),
+  evidenceIds: z.array(z.string()),
+  lastReviewed: z.string().optional(),
+})
+
 const integritySchema = z.object({
   algorithm: z.literal("sha256"),
   entriesHash: z.string().regex(/^[0-9a-f]{64}$/),
@@ -33,28 +86,18 @@ const registryPrimitiveSummarySchema = z.object({
   description: z.string(),
   category: z.string().min(1),
   status: z.enum(["experimental", "preview", "stable", "deprecated"]),
-  deliverables: z.array(z.string()),
+  deliverables: z.array(deliverableSchema),
   hasAccessibilityEvidence: z.boolean(),
   accessibility: z.object({
     reviewStatus: z.enum(["none", "automated", "manual", "complete"]),
     evidenceIds: z.array(z.string()),
   }),
   documentationStatus: z.enum(["stub", "draft", "review", "complete"]),
-  documentationLocales: z.record(
-    z.object({
-      status: z.enum(["missing", "draft", "stale", "reviewed"]),
-      sourceHash: z.string().optional(),
-      lastUpdated: z.string().optional(),
-    }),
-  ),
-  stylingOutputs: z.array(z.enum(["css", "tailwind", "unocss"])),
+  documentationLocales: z.record(documentationLocaleSchema),
+  stylingOutputs: z.array(stylingProfileSchema),
   themeCompatible: z.array(z.string()),
   searchKeywords: z.array(z.string()),
-  provenance: z.object({
-    repository: z.string(),
-    directory: z.string(),
-    sourceCommit: z.string().optional(),
-  }),
+  provenance: manifestProvenanceSchema,
 })
 
 const registryAdapterSchema = z.object({
@@ -93,12 +136,22 @@ export const registryManifestSchema = z.object({
   description: z.string(),
   category: z.string().min(1),
   status: z.enum(["experimental", "preview", "stable", "deprecated"]),
+  deliverables: z.array(deliverableSchema),
+  capabilities: z.array(capabilitySchema),
+  cli: manifestCliSchema,
+  accessibility: manifestAccessibilitySchema,
+  documentation: manifestDocumentationSchema,
+  styling: manifestStylingSchema,
+  search: manifestSearchSchema,
   source: z.object({
     entry: z.string().min(1),
     files: z.array(z.string()),
   }),
   dependencies: z.array(z.string()),
+  runtime: z.array(z.string()),
   integrity: manifestIntegritySchema,
+  provenance: manifestProvenanceSchema,
+  lastUpdated: z.string(),
 })
 
 export type RegistryManifest = z.infer<typeof registryManifestSchema>

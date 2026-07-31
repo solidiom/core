@@ -5,16 +5,41 @@
  */
 
 import { Command, Option } from "clipanion"
-import { existsSync, readFileSync } from "node:fs"
+import { existsSync } from "node:fs"
 import { join } from "node:path"
 import { readLock, type LockEntry } from "../source-install/install"
+import {
+  readRegistryManifest,
+  RegistrySchemaError,
+  type RegistryManifest,
+} from "../registry-schema"
 import pc from "picocolors"
 
 export interface InspectResult {
   primitive?: string
   mode: string
   entries: LockEntry[]
-  manifest?: Record<string, unknown>
+  manifest?: RegistryManifest
+  /** Set when `manifest` subcommand finds a file that fails schema validation (fail closed). */
+  manifestError?: string
+}
+
+/**
+ * Resolve the registry manifest path for a primitive the same way `plan.ts`'s
+ * `loadRegistry` does: custom registry path/env override, then
+ * monorepo-relative, then node_modules.
+ */
+function resolveManifestPath(primitive: string, cwd: string, registryOverride?: string): string | null {
+  const candidates = [
+    registryOverride ? join(registryOverride, `${primitive}.json`) : null,
+    process.env["SOLIDIOM_REGISTRY_PATH"]
+      ? join(process.env["SOLIDIOM_REGISTRY_PATH"], `${primitive}.json`)
+      : null,
+    join(cwd, "..", "..", "registry", `${primitive}.json`),
+    join(cwd, "node_modules", "@solidiom", "registry", `${primitive}.json`),
+  ].filter(Boolean) as string[]
+
+  return candidates.find((path) => existsSync(path)) ?? null
 }
 
 /**
@@ -24,20 +49,35 @@ export function runInspect(options: {
   cwd: string
   subcommand: string
   primitive?: string
+  registry?: string
 }): InspectResult {
-  const { cwd, subcommand, primitive } = options
+  const { cwd, subcommand, primitive, registry: registryOverride } = options
   const lock = readLock(cwd)
 
   const entries = Object.values(lock.installed).filter(
     (e) => !primitive || e.primitive === primitive,
   )
 
-  if (subcommand === "manifest") {
-    const registryPath = join(cwd, "..", "..", "registry", `${primitive}.json`)
-    const manifest = existsSync(registryPath)
-      ? JSON.parse(readFileSync(registryPath, "utf8"))
-      : null
-    return { primitive, mode: "manifest", entries, manifest }
+  if (subcommand === "manifest" || subcommand === "explain") {
+    if (!primitive) {
+      return { primitive, mode: subcommand, entries }
+    }
+
+    const manifestPath = resolveManifestPath(primitive, cwd, registryOverride)
+    if (!manifestPath) {
+      return { primitive, mode: subcommand, entries }
+    }
+
+    try {
+      // Fail closed on a malformed/unsupported-version manifest — the same
+      // guarantee `plan`/`add` already get via readRegistryManifest — rather
+      // than trusting whatever raw JSON happens to be on disk.
+      const manifest = readRegistryManifest(manifestPath)
+      return { primitive, mode: subcommand, entries, manifest }
+    } catch (err) {
+      const reason = err instanceof RegistrySchemaError ? err.message : String(err)
+      return { primitive, mode: subcommand, entries, manifestError: reason }
+    }
   }
 
   return { primitive, mode: subcommand, entries }
@@ -57,6 +97,9 @@ export class InspectCommand extends Command {
 
   subcommand = Option.String({ required: true })
   primitive = Option.String({ required: false })
+  registry = Option.String("--registry", {
+    description: "Custom registry URL for manifest resolution",
+  })
   json = Option.Boolean("--json", false, { description: "Output as JSON" })
 
   async execute(): Promise<number> {
@@ -64,11 +107,12 @@ export class InspectCommand extends Command {
       cwd: process.cwd(),
       subcommand: this.subcommand,
       primitive: this.primitive,
+      registry: this.registry,
     })
 
     if (this.json) {
       this.context.stdout.write(JSON.stringify(result, null, 2) + "\n")
-      return 0
+      return result.manifestError ? 1 : 0
     }
 
     switch (this.subcommand) {
@@ -86,6 +130,13 @@ export class InspectCommand extends Command {
         break
 
       case "manifest":
+        if (result.manifestError) {
+          this.context.stderr.write(
+            pc.red(`Manifest for ${this.primitive} failed schema verification:\n`),
+          )
+          this.context.stderr.write(pc.red(`  ✗ ${result.manifestError}\n`))
+          return 1
+        }
         if (result.manifest) {
           this.context.stdout.write(JSON.stringify(result.manifest, null, 2) + "\n")
         } else {
@@ -99,6 +150,27 @@ export class InspectCommand extends Command {
         this.context.stdout.write(`Mode: source\n`)
         this.context.stdout.write(`Files: ${result.entries.length}\n`)
         this.context.stdout.write(`Detached: ${result.entries.filter((e) => e.detached).length}\n`)
+
+        if (result.manifestError) {
+          this.context.stderr.write(
+            pc.red(`\nManifest failed schema verification: ${result.manifestError}\n`),
+          )
+        } else if (result.manifest) {
+          const m = result.manifest
+          this.context.stdout.write(`\nDeliverables: ${m.deliverables.join(", ")}\n`)
+          this.context.stdout.write(
+            `Styling outputs: ${m.styling.outputs.length > 0 ? m.styling.outputs.join(", ") : "none"}\n`,
+          )
+          this.context.stdout.write(
+            `Theme compatible: ${
+              m.styling.themeCompatible.length > 0 ? m.styling.themeCompatible.join(", ") : "none"
+            }\n`,
+          )
+          this.context.stdout.write(`Documentation: ${m.documentation.status}\n`)
+          for (const [locale, info] of Object.entries(m.documentation.locales)) {
+            this.context.stdout.write(`  ${locale}: ${info.status}\n`)
+          }
+        }
         break
 
       case "provenance":

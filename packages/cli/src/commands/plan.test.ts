@@ -60,4 +60,91 @@ describe("runPlan", () => {
     const plan = runPlan({ primitive: "dialog", cwd, mode: "source" })
     expect(plan.mode).toBe("source")
   })
+
+  describe("deliverable and styling awareness (CLI-002)", () => {
+    it("BUILTIN_PRIMITIVES fallback never claims styling or product-layer support it hasn't verified", () => {
+      // This cwd has no registry and no node_modules, so dialog resolves via
+      // BUILTIN_PRIMITIVES. That fallback must never assert deliverables
+      // beyond "primitive" or any styling output — those facts are only
+      // knowable from the real registry.
+      const plan = runPlan({ primitive: "dialog", cwd })
+      expect(plan.stylingOutputs).toEqual([])
+    })
+
+    it("blocks a deliverable the offline fallback cannot confirm", () => {
+      const plan = runPlan({ primitive: "dialog", cwd, deliverable: "component" })
+      expect(plan.violations.length).toBeGreaterThan(0)
+      expect(plan.violations[0]).toContain('does not declare the "component" deliverable')
+      expect(plan.violations[0]).toContain("available: primitive")
+    })
+
+    it("blocks a styling profile the offline fallback cannot confirm", () => {
+      const plan = runPlan({ primitive: "dialog", cwd, styling: "tailwind" })
+      expect(plan.violations.length).toBeGreaterThan(0)
+      expect(plan.violations[0]).toContain('has no "tailwind" styling output')
+      expect(plan.violations[0]).toContain("available: none")
+    })
+
+    it("does not add a violation when no deliverable/styling is requested", () => {
+      const plan = runPlan({ primitive: "dialog", cwd })
+      expect(plan.violations).toHaveLength(0)
+      expect(plan.deliverable).toBeUndefined()
+      expect(plan.stylingProfile).toBeUndefined()
+    })
+
+    it("echoes the requested deliverable and styling profile on the plan even when it violates", () => {
+      const plan = runPlan({ primitive: "dialog", cwd, deliverable: "theme", styling: "unocss" })
+      expect(plan.deliverable).toBe("theme")
+      expect(plan.stylingProfile).toBe("unocss")
+    })
+  })
+
+  describe("deliverable and styling awareness against the real registry (CLI-002)", () => {
+    // button declares nx.metadata.registry.deliverables: ["component"] and has
+    // css/tailwind/unocss recipes, so it is the one real product-layer/styling
+    // data point in the committed registry (see packages/button/package.json).
+    // loadRegistry's monorepo-relative candidate is join(cwd, "..", "..", "registry",
+    // "index.json"), so cwd must sit exactly two levels under the actual repo
+    // root — an arbitrary tmpdir does not qualify, so the fixture nests inside
+    // the repo checkout itself (mirroring source-install.test.ts's convention).
+    const REPO_ROOT = join(import.meta.dirname, "..", "..", "..", "..")
+    let repoNestedCwd: string
+
+    beforeEach(() => {
+      repoNestedCwd = join(
+        REPO_ROOT,
+        `tmp-plan-registry-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        "app",
+      )
+      mkdirSync(repoNestedCwd, { recursive: true })
+    })
+
+    afterEach(() => {
+      rmSync(join(repoNestedCwd, ".."), { recursive: true, force: true })
+    })
+
+    it("resolves button's real deliverables and styling outputs from the registry", () => {
+      const plan = runPlan({ primitive: "button", cwd: repoNestedCwd })
+      expect(plan.stylingOutputs).toEqual(["css", "tailwind", "unocss"])
+    })
+
+    it("succeeds when --deliverable and --styling match the real manifest", () => {
+      const plan = runPlan({
+        primitive: "button",
+        cwd: repoNestedCwd,
+        deliverable: "component",
+        styling: "css",
+      })
+      expect(plan.violations).toHaveLength(0)
+      expect(plan.deliverable).toBe("component")
+      expect(plan.stylingProfile).toBe("css")
+    })
+
+    it("blocks a deliverable the real manifest does not declare", () => {
+      const plan = runPlan({ primitive: "button", cwd: repoNestedCwd, deliverable: "theme" })
+      expect(plan.violations.length).toBeGreaterThan(0)
+      expect(plan.violations[0]).toContain('does not declare the "theme" deliverable')
+      expect(plan.violations[0]).toContain("available: component, primitive")
+    })
+  })
 })

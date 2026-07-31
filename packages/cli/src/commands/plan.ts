@@ -9,7 +9,7 @@ import { Command, Option } from "clipanion"
 import { readFileSync, existsSync } from "node:fs"
 import { join } from "node:path"
 import { ConfigSchema, PolicySchema, type Config, type Policy } from "../schemas"
-import { readRegistryIndex } from "../registry-schema"
+import { readRegistryIndex, type Deliverable, type StylingProfile } from "../registry-schema"
 import pc from "picocolors"
 
 /** A resolved plan entry. */
@@ -25,6 +25,12 @@ export interface Plan {
   primitive: string
   mode: "package" | "source"
   entries: PlanEntry[]
+  /** Product-layer deliverable this plan resolves, if requested via --deliverable. */
+  deliverable?: Deliverable
+  /** Styling profile this plan resolves, if requested via --styling. */
+  stylingProfile?: StylingProfile
+  /** Styling outputs the resolved primitive actually has recipes for. */
+  stylingOutputs: StylingProfile[]
   violations: string[]
 }
 
@@ -34,14 +40,24 @@ export interface PlanOptions {
   mode?: "package" | "source"
   registry?: string
   noNetwork?: boolean
+  /** Request a specific product-layer deliverable (primitive, component, block, template, theme). */
+  deliverable?: Deliverable
+  /** Request a specific styling profile (css, tailwind, unocss). */
+  styling?: StylingProfile
 }
 
-/** Registry entry for a primitive. */
+/** Registry entry for a primitive, carrying the product-layer and styling metadata CLI-002 needs. */
 interface RegistryPrimitive {
   name: string
   deps: string[]
   adapters: string[]
   version?: string
+  /** Product-layer deliverables this entry provides. Always includes "primitive" for real registry/BUILTIN entries. */
+  deliverables: Deliverable[]
+  /** Styling recipe outputs confirmed to exist for this entry. Empty means no confirmed styling support. */
+  stylingOutputs: StylingProfile[]
+  /** Theme slugs this entry is confirmed compatible with. */
+  themeCompatible: string[]
 }
 
 /**
@@ -83,6 +99,9 @@ function loadRegistry(
         deps: ["@solidiom/runtime"],
         adapters: [],
         version: p.version,
+        deliverables: p.deliverables,
+        stylingOutputs: p.stylingOutputs,
+        themeCompatible: p.themeCompatible,
       })
     }
     return registry
@@ -129,6 +148,10 @@ function resolveVersion(pkg: string, cwd: string, registryVersion?: string): str
 
 /**
  * Scan node_modules to discover a primitive's dependency graph when no registry exists.
+ *
+ * node_modules package.json carries no product-layer or styling metadata, so
+ * this fallback can only ever confirm "primitive" — it must not claim
+ * component/block/template/theme support or styling outputs it hasn't verified.
  */
 function discoverFromNodeModules(primitive: string, cwd: string): RegistryPrimitive | null {
   const pkgJsonPath = join(cwd, "node_modules", "@solidiom", primitive, "package.json")
@@ -156,7 +179,15 @@ function discoverFromNodeModules(primitive: string, cwd: string): RegistryPrimit
 
     if (!deps.includes("@solidiom/runtime")) deps.unshift("@solidiom/runtime")
 
-    return { name: primitive, deps, adapters, version: data.version }
+    return {
+      name: primitive,
+      deps,
+      adapters,
+      version: data.version,
+      deliverables: ["primitive"],
+      stylingOutputs: [],
+      themeCompatible: [],
+    }
   } catch {
     return null
   }
@@ -164,84 +195,46 @@ function discoverFromNodeModules(primitive: string, cwd: string): RegistryPrimit
 
 /**
  * Built-in knowledge of core primitives for offline/bootstrapping scenarios.
- * Used when neither registry nor node_modules are available.
+ * Used when neither registry nor node_modules are available. These entries
+ * carry no confirmed product-layer or styling metadata: deliverables is
+ * always exactly ["primitive"] and stylingOutputs is always empty, so an
+ * offline-fallback plan can never claim styling or product-layer support it
+ * hasn't verified against the real registry.
  */
-const BUILTIN_PRIMITIVES = new Map<string, RegistryPrimitive>([
-  ["dialog", { name: "dialog", deps: ["@solidiom/runtime"], adapters: [] }],
-  [
-    "select",
+const BUILTIN_PRIMITIVES = new Map<string, RegistryPrimitive>(
+  (
+    [
+      ["dialog", [], []],
+      ["select", [], ["@solidiom/adapter-positioning-floating-ui"]],
+      ["calendar", [], ["@solidiom/adapter-date-internationalized"]],
+      ["carousel", [], ["@solidiom/adapter-carousel-embla"]],
+      ["popover", [], ["@solidiom/adapter-positioning-floating-ui"]],
+      ["tooltip", [], ["@solidiom/adapter-positioning-floating-ui"]],
+      ["menu", [], ["@solidiom/adapter-positioning-floating-ui"]],
+      ["combobox", [], ["@solidiom/adapter-positioning-floating-ui"]],
+      ["date-picker", [], ["@solidiom/adapter-date-internationalized"]],
+      ["button", [], []],
+      ["checkbox", [], []],
+      ["switch", [], []],
+      ["slider", [], []],
+      ["accordion", [], []],
+      ["tabs", [], []],
+      ["collapsible", [], []],
+      ["toast", [], []],
+      ["listbox", [], []],
+    ] as const
+  ).map(([name, deps, adapters]) => [
+    name,
     {
-      name: "select",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-positioning-floating-ui"],
+      name,
+      deps: ["@solidiom/runtime", ...deps],
+      adapters: [...adapters],
+      deliverables: ["primitive"] as Deliverable[],
+      stylingOutputs: [] as StylingProfile[],
+      themeCompatible: [] as string[],
     },
-  ],
-  [
-    "calendar",
-    {
-      name: "calendar",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-date-internationalized"],
-    },
-  ],
-  [
-    "carousel",
-    {
-      name: "carousel",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-carousel-embla"],
-    },
-  ],
-  [
-    "popover",
-    {
-      name: "popover",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-positioning-floating-ui"],
-    },
-  ],
-  [
-    "tooltip",
-    {
-      name: "tooltip",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-positioning-floating-ui"],
-    },
-  ],
-  [
-    "menu",
-    {
-      name: "menu",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-positioning-floating-ui"],
-    },
-  ],
-  [
-    "combobox",
-    {
-      name: "combobox",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-positioning-floating-ui"],
-    },
-  ],
-  [
-    "date-picker",
-    {
-      name: "date-picker",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-date-internationalized"],
-    },
-  ],
-  ["button", { name: "button", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["checkbox", { name: "checkbox", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["switch", { name: "switch", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["slider", { name: "slider", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["accordion", { name: "accordion", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["tabs", { name: "tabs", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["collapsible", { name: "collapsible", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["toast", { name: "toast", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["listbox", { name: "listbox", deps: ["@solidiom/runtime"], adapters: [] }],
-])
+  ]),
+)
 
 /**
  * Core plan logic — usable from CLI and programmatic API.
@@ -253,6 +246,8 @@ export function runPlan(options: PlanOptions): Plan {
     mode: modeOverride,
     registry: registryOverride,
     noNetwork: _noNetwork,
+    deliverable: requestedDeliverable,
+    styling: requestedStyling,
   } = options
 
   const configPath = join(cwd, ".solidiom", "config.json")
@@ -294,6 +289,7 @@ export function runPlan(options: PlanOptions): Plan {
       primitive,
       mode,
       entries: [],
+      stylingOutputs: [],
       violations: [`Unknown primitive: "${primitive}" — not found in registry or node_modules`],
     }
   }
@@ -334,7 +330,46 @@ export function runPlan(options: PlanOptions): Plan {
     }
   }
 
-  return { primitive, mode, entries, violations }
+  // Validate the requested product-layer deliverable, if any (CLI-002).
+  // Entries resolved from node_modules or BUILTIN_PRIMITIVES only ever confirm
+  // "primitive" — requesting a richer deliverable against an unconfirmed
+  // source is a violation, not a silent pass.
+  if (requestedDeliverable && !entry.deliverables.includes(requestedDeliverable)) {
+    violations.push(
+      `"${primitive}" does not declare the "${requestedDeliverable}" deliverable (available: ${
+        entry.deliverables.length > 0 ? entry.deliverables.join(", ") : "none"
+      })`,
+    )
+  }
+
+  // Validate the requested styling profile, if any (CLI-002).
+  if (requestedStyling && !entry.stylingOutputs.includes(requestedStyling)) {
+    violations.push(
+      `"${primitive}" has no "${requestedStyling}" styling output (available: ${
+        entry.stylingOutputs.length > 0 ? entry.stylingOutputs.join(", ") : "none"
+      })`,
+    )
+  }
+
+  // Requesting the "theme" deliverable only makes sense against an entry
+  // that has confirmed theme compatibility.
+  if (
+    requestedDeliverable === "theme" &&
+    entry.deliverables.includes("theme") &&
+    entry.themeCompatible.length === 0
+  ) {
+    violations.push(`"${primitive}" declares the "theme" deliverable but has no themeCompatible entries`)
+  }
+
+  return {
+    primitive,
+    mode,
+    entries,
+    ...(requestedDeliverable ? { deliverable: requestedDeliverable } : {}),
+    ...(requestedStyling ? { stylingProfile: requestedStyling } : {}),
+    stylingOutputs: entry.stylingOutputs,
+    violations,
+  }
 }
 
 /**
@@ -348,6 +383,8 @@ export class PlanCommand extends Command {
       ["Plan dialog installation", "solidiom plan dialog"],
       ["Plan as JSON", "solidiom plan select --json"],
       ["Plan in source mode", "solidiom plan dialog --mode source"],
+      ["Plan a component deliverable", "solidiom plan button --deliverable component"],
+      ["Plan with a specific styling profile", "solidiom plan button --styling tailwind"],
     ],
   })
 
@@ -360,6 +397,12 @@ export class PlanCommand extends Command {
   noNetwork = Option.Boolean("--no-network", false, {
     description: "Use only cached/local registry data (no network fetch)",
   })
+  deliverable = Option.String("--deliverable", {
+    description: "Product-layer deliverable to resolve (primitive, component, block, template, theme)",
+  })
+  styling = Option.String("--styling", {
+    description: "Styling profile to resolve (css, tailwind, unocss)",
+  })
 
   async execute(): Promise<number> {
     const plan = runPlan({
@@ -368,6 +411,8 @@ export class PlanCommand extends Command {
       mode: this.mode as "package" | "source" | undefined,
       registry: this.registry,
       noNetwork: this.noNetwork,
+      deliverable: this.deliverable as Deliverable | undefined,
+      styling: this.styling as StylingProfile | undefined,
     })
 
     if (this.json) {
@@ -376,6 +421,12 @@ export class PlanCommand extends Command {
     }
 
     this.context.stdout.write(`\nPlan for ${pc.bold(plan.primitive)} (${plan.mode} mode):\n\n`)
+    if (plan.deliverable) {
+      this.context.stdout.write(`  deliverable: ${pc.cyan(plan.deliverable)}\n`)
+    }
+    if (plan.stylingProfile) {
+      this.context.stdout.write(`  styling: ${pc.cyan(plan.stylingProfile)}\n`)
+    }
     for (const entry of plan.entries) {
       const tag = entry.isAdapter ? pc.cyan("[adapter]") : pc.dim(`[${entry.reason}]`)
       this.context.stdout.write(`  ${entry.package}@${pc.green(entry.version)} ${tag}\n`)
