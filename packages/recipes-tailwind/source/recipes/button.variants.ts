@@ -21,7 +21,7 @@ export const buttonVariants = cva(
         sm: "h-9 py-0 px-3 text-sm",
         md: "h-10 py-2 px-4 text-sm",
         lg: "h-11 py-0 px-8 text-base",
-        icon: "h-10 w-10 p-0",
+        icon: "h-10 w-10 py-0 px-0",
       },
     },
     defaultVariants: {
@@ -37,7 +37,7 @@ export const buttonVariants = cva(
       {
         variant: "link",
         size: "md",
-        class: "h-auto p-0",
+        class: "h-auto py-0 px-0",
       },
     ],
   },

@@ -149,6 +149,15 @@ check("recipes-unocss builds", runBuild("@solidiom/recipes-unocss"))
 check("recipes-css dist output", fileExists("packages/recipes-css/dist/index.js"))
 check("recipes-tailwind dist output", fileExists("packages/recipes-tailwind/dist/index.js"))
 check("recipes-unocss dist output", fileExists("packages/recipes-unocss/dist/index.js"))
+check("recipes-css source/ emission exists", fileExists("packages/recipes-css/source/index.ts"))
+check(
+  "recipes-tailwind source/ emission exists",
+  fileExists("packages/recipes-tailwind/source/index.ts"),
+)
+check(
+  "recipes-unocss source/ emission exists",
+  fileExists("packages/recipes-unocss/source/index.ts"),
+)
 
 check(
   "recipes-css exports buttonVariants",
@@ -319,6 +328,30 @@ check(
   driftResult.ok,
   "Recipe CSS/TSX drift detected — run: pnpm run audit:recipe-drift",
 )
+check("audit-recipe-parity.ts exists", fileExists("tools/audit-recipe-parity.ts"))
+const parityFixtureResult = run("pnpm exec vitest run tools/audit-recipe-parity.test.ts")
+check(
+  "recipe parity negative fixtures pass",
+  parityFixtureResult.ok,
+  "Run: pnpm exec vitest run tools/audit-recipe-parity.test.ts",
+)
+const parityResult = run("pnpm exec tsx tools/audit-recipe-parity.ts")
+check(
+  "recipe cross-profile coverage, state, and exception parity passes (RECIPE-005)",
+  parityResult.ok,
+  "A profile is missing coverage for a declared slot/state, or an exception is not honored — run: pnpm run audit:recipe-parity",
+)
+check(
+  "recipes-tailwind builds before computed-style parity check",
+  runBuild("@solidiom/recipes-tailwind"),
+  "computed-style parity resolves @solidiom/recipes-tailwind through its package export; a stale dist/ produces false failures — run: pnpm --filter @solidiom/recipes-tailwind build",
+)
+const computedStyleParityResult = run("pnpm --filter @solidiom/tests-recipe-parity test")
+check(
+  "recipe computed-style parity passes across css/tailwind/unocss (RECIPE-005 phase 3)",
+  computedStyleParityResult.ok,
+  "A rendered fixture disagrees on computed style across profiles — run: pnpm run test:recipe-parity",
+)
 check("audit-recipe-contract.ts exists", fileExists("tools/audit-recipe-contract.ts"))
 const selectorResult = run("pnpm exec tsx tools/audit-recipe-contract.ts")
 check(
@@ -366,6 +399,27 @@ check(
   "unocss preset fixtures pass",
   runTests("@solidiom/unocss-preset", 9),
   "Run: pnpm --filter @solidiom/unocss-preset test",
+)
+
+// ─── 9b. RECIPE-006: src/source parity and export-map completeness ─────
+console.log("\n§9b Recipe package src/source parity and exports:")
+check(
+  "audit-recipe-source-parity.ts exists",
+  fileExists("tools/audit-recipe-source-parity.ts"),
+)
+const sourceParityFixtureResult = run(
+  "pnpm exec vitest run tools/audit-recipe-source-parity.test.ts",
+)
+check(
+  "source parity negative fixtures pass",
+  sourceParityFixtureResult.ok,
+  "Run: pnpm exec vitest run tools/audit-recipe-source-parity.test.ts",
+)
+const sourceParityResult = run("pnpm exec tsx tools/audit-recipe-source-parity.ts")
+check(
+  "recipe src/source parity and export-map check passes",
+  sourceParityResult.ok,
+  "packages/recipes-* source/ is stale or an export entry is missing — run: pnpm run audit:recipe-source-parity (rebuild the package first)",
 )
 
 // ─── 10. P1.5: Umbrella re-export purity check ─────────────────────────
