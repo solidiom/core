@@ -53,3 +53,10 @@ tests/recipe-parity/.generated/
 
 # TanStack Router/Start — generated route tree (rebuilt by dev/build)
 routeTree.gen.ts
+
+
+# CLI-008 offline fixture — Verdaccio storage snapshot (regenerate with
+# `tools/offline-fixture/run-offline-test.sh --prep`). Tens of MB of
+# third-party tarballs, and platform-specific, so it is never committed.
+tools/offline-fixture/.registry-snapshot/
+tools/offline-fixture/storage/

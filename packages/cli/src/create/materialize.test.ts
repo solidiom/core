@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
-import { materialize } from "./materialize"
+import { materialize, resolveTemplateSource } from "./materialize"
 
 /** Writes a minimal inline fixture template into `dir`. Keeps unit tests fast and isolated. */
 function writeFixtureTemplate(
@@ -50,7 +50,9 @@ describe("materialize", () => {
       expect(result.errors).toBeUndefined()
       const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
       expect(pkg.name).toBe("my-cool-app")
-      expect(readFileSync(join(destination, "index.html"), "utf8")).toBe("<title>my-cool-app</title>")
+      expect(readFileSync(join(destination, "index.html"), "utf8")).toBe(
+        "<title>my-cool-app</title>",
+      )
     })
 
     it("does not silently blank an unknown {{var}} token", () => {
@@ -132,7 +134,7 @@ describe("materialize", () => {
     it("rewrites workspace:* to the real version when a monorepo packages/ dir is present", () => {
       // Build a fake monorepo: <root>/packages/button/package.json with a
       // real version, and the template source living under <root>/templates/fixture
-      // so rewriteWorkspaceVersions's upward walk from the template source
+      // so rewritePackageJsonForStandalone's upward walk from the template source
       // finds <root>/packages/button/package.json.
       const fakeRoot = mkdtempSync(join(tmpdir(), "solidiom-fakemono-"))
       const templateSrc = join(fakeRoot, "templates", "fixture")
@@ -184,6 +186,203 @@ describe("materialize", () => {
       const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
       expect(pkg.dependencies["@solidiom/button"]).toBe("workspace:*")
       expect(result.errors?.some((e) => /Could not resolve a real version/.test(e))).toBe(true)
+    })
+  })
+
+  describe("catalog: rewriting", () => {
+    // Regression coverage for a bug found while wiring tools/smoke-create.ts
+    // (CLI-008): `catalog:` is a pnpm-workspace-only dependency specifier —
+    // npm/yarn/bun cannot resolve it at all, so a template's package.json
+    // copied byte-for-byte with a `catalog:` entry (both real templates use
+    // `"solid-js": "catalog:"`) failed install unconditionally under every
+    // manager except pnpm, defeating the "installs under all four managers"
+    // acceptance criterion.
+    it("prefers pnpm-workspace.yaml's overrides: over its catalog: when both exist for the same package", () => {
+      // Regression coverage for a SECOND bug found in the same session:
+      // resolving only against `catalog:`'s semver RANGE
+      // (`"solid-js": "^2.0.0-beta.23"`) against the real npm registry
+      // picked an unrelated, incompatible prerelease line
+      // (`2.0.0-experimental.0`) because npm's prerelease range matching
+      // does not stay within the same prerelease tag. `overrides:` holds
+      // this repo's real exact pin and must win.
+      const fakeRoot = mkdtempSync(join(tmpdir(), "solidiom-fakemono-catalog-override-"))
+      const templateSrc = join(fakeRoot, "templates", "fixture")
+      writeFileSync(
+        join(fakeRoot, "pnpm-workspace.yaml"),
+        'packages:\n  - "packages/*"\n\ncatalog:\n  solid-js: "^2.0.0-beta.23"\n\noverrides:\n  solid-js: "2.0.0-beta.24"\n',
+      )
+      writeFixtureTemplate(templateSrc, {
+        "package.json": JSON.stringify({
+          name: "{{projectName}}",
+          dependencies: { "solid-js": "catalog:" },
+        }),
+      })
+
+      try {
+        const result = materialize({
+          templateName: "fixture",
+          destination,
+          projectName: "my-app",
+          templateSourceDir: templateSrc,
+        })
+
+        expect(result.errors).toBeUndefined()
+        const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
+        expect(pkg.dependencies["solid-js"]).toBe("2.0.0-beta.24")
+      } finally {
+        rmSync(fakeRoot, { recursive: true, force: true })
+      }
+    })
+
+    it("rewrites catalog: to the real pinned version when a monorepo pnpm-workspace.yaml is present", () => {
+      const fakeRoot = mkdtempSync(join(tmpdir(), "solidiom-fakemono-catalog-"))
+      const templateSrc = join(fakeRoot, "templates", "fixture")
+      writeFileSync(
+        join(fakeRoot, "pnpm-workspace.yaml"),
+        'packages:\n  - "packages/*"\n\ncatalog:\n  solid-js: "^2.0.0-beta.23"\n  "@solidjs/web": "^2.0.0-beta.23"\n',
+      )
+      writeFixtureTemplate(templateSrc, {
+        "package.json": JSON.stringify({
+          name: "{{projectName}}",
+          dependencies: { "solid-js": "catalog:", "@solidjs/web": "catalog:" },
+        }),
+      })
+
+      try {
+        const result = materialize({
+          templateName: "fixture",
+          destination,
+          projectName: "my-app",
+          templateSourceDir: templateSrc,
+        })
+
+        expect(result.errors).toBeUndefined()
+        const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
+        expect(pkg.dependencies["solid-js"]).toBe("^2.0.0-beta.23")
+        expect(pkg.dependencies["@solidjs/web"]).toBe("^2.0.0-beta.23")
+      } finally {
+        rmSync(fakeRoot, { recursive: true, force: true })
+      }
+    })
+
+    it("leaves catalog: untouched and reports a warning when no pnpm-workspace.yaml is found", () => {
+      writeFixtureTemplate(sourceDir, {
+        "package.json": JSON.stringify({
+          name: "{{projectName}}",
+          dependencies: { "solid-js": "catalog:" },
+        }),
+      })
+
+      const result = materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-app",
+        templateSourceDir: sourceDir,
+      })
+
+      const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
+      expect(pkg.dependencies["solid-js"]).toBe("catalog:")
+      expect(result.errors?.some((e) => /not understood by npm\/yarn\/bun/.test(e))).toBe(true)
+    })
+  })
+
+  describe("dependency overrides for the generated project", () => {
+    // Rewriting `catalog:` on the direct dependencies is only half of what a
+    // standalone project needs. In the monorepo, pnpm-workspace.yaml's
+    // `overrides:` map is what actually guarantees ONE resolved solid-js; a
+    // materialized project has no workspace file, so without an equivalent
+    // field nothing constrains the transitive graph. Observed consequences
+    // while building CLI-008's smoke matrix: a duplicated Solid reactive
+    // runtime, and npm spending minutes backtracking across the Solid 2
+    // prerelease space.
+    function fakeMonorepoTemplate(templatePackageJson: Record<string, unknown>): {
+      root: string
+      templateSrc: string
+    } {
+      const root = mkdtempSync(join(tmpdir(), "solidiom-fakemono-overrides-"))
+      const templateSrc = join(root, "templates", "fixture")
+      writeFileSync(
+        join(root, "pnpm-workspace.yaml"),
+        'packages:\n  - "packages/*"\n\ncatalog:\n  solid-js: "^2.0.0-beta.23"\n\noverrides:\n  solid-js: "2.0.0-beta.24"\n  "@solidjs/web": "2.0.0-beta.24"\n',
+      )
+      writeFixtureTemplate(templateSrc, {
+        "package.json": JSON.stringify(templatePackageJson),
+      })
+      return { root, templateSrc }
+    }
+
+    it("emits overrides, resolutions, and pnpm.overrides so all four managers pin the same version", () => {
+      const { root, templateSrc } = fakeMonorepoTemplate({
+        name: "{{projectName}}",
+        dependencies: { "solid-js": "catalog:" },
+      })
+
+      try {
+        const result = materialize({
+          templateName: "fixture",
+          destination,
+          projectName: "my-app",
+          templateSourceDir: templateSrc,
+        })
+
+        expect(result.errors).toBeUndefined()
+        const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
+
+        // npm and bun read top-level `overrides`.
+        expect(pkg.overrides["solid-js"]).toBe("2.0.0-beta.24")
+        expect(pkg.overrides["@solidjs/web"]).toBe("2.0.0-beta.24")
+        // yarn (and bun) read top-level `resolutions`.
+        expect(pkg.resolutions["solid-js"]).toBe("2.0.0-beta.24")
+        // pnpm reads `pnpm.overrides`.
+        expect(pkg.pnpm.overrides["solid-js"]).toBe("2.0.0-beta.24")
+      } finally {
+        rmSync(root, { recursive: true, force: true })
+      }
+    })
+
+    it("does not clobber an override the template itself declares", () => {
+      const { root, templateSrc } = fakeMonorepoTemplate({
+        name: "{{projectName}}",
+        dependencies: { "solid-js": "catalog:" },
+        overrides: { "solid-js": "2.0.0-beta.99" },
+      })
+
+      try {
+        materialize({
+          templateName: "fixture",
+          destination,
+          projectName: "my-app",
+          templateSourceDir: templateSrc,
+        })
+
+        const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
+        // The template's deliberate pin wins.
+        expect(pkg.overrides["solid-js"]).toBe("2.0.0-beta.99")
+        // Gaps are still filled from the workspace map.
+        expect(pkg.overrides["@solidjs/web"]).toBe("2.0.0-beta.24")
+      } finally {
+        rmSync(root, { recursive: true, force: true })
+      }
+    })
+
+    it("emits no override fields when no pnpm-workspace.yaml is discoverable", () => {
+      // The published-CLI-with-no-checkout case: there is no overrides map to
+      // read, so nothing is invented.
+      writeFixtureTemplate(sourceDir, {
+        "package.json": JSON.stringify({ name: "{{projectName}}", dependencies: {} }),
+      })
+
+      materialize({
+        templateName: "fixture",
+        destination,
+        projectName: "my-app",
+        templateSourceDir: sourceDir,
+      })
+
+      const pkg = JSON.parse(readFileSync(join(destination, "package.json"), "utf8"))
+      expect(pkg.overrides).toBeUndefined()
+      expect(pkg.resolutions).toBeUndefined()
+      expect(pkg.pnpm).toBeUndefined()
     })
   })
 
@@ -299,6 +498,26 @@ describe("materialize", () => {
       expect(result.filesWritten).toEqual([])
       expect(result.errors?.some((e) => /Could not resolve source directory/.test(e))).toBe(true)
     })
+  })
+
+  describe("resolveTemplateSource against the real monorepo templates/ tree", () => {
+    // Regression test for a bug found while wiring tools/smoke-create.ts
+    // (CLI-008) through the BUILT `packages/cli/dist/index.js`: the
+    // monorepo-relative fallback candidate only tried a 4-level walk-up
+    // (correct for the unbundled src/create/materialize.ts depth), which
+    // resolves one directory too high once this file's logic is bundled
+    // into dist/index.js sitting directly under packages/cli/dist/ — only
+    // 3 levels below the monorepo root. Both real templates must resolve
+    // when this module actually runs from its real, unbundled location
+    // (which is what running this test file directly exercises).
+    it.each(["vite-solid-router", "tanstack-start-solid"])(
+      "resolves the real %s template from this module's actual on-disk location",
+      (templateName) => {
+        const resolved = resolveTemplateSource(templateName)
+        expect(resolved).not.toBeNull()
+        expect(existsSync(join(resolved!, "template.json"))).toBe(true)
+      },
+    )
   })
 
   describe("binary passthrough", () => {

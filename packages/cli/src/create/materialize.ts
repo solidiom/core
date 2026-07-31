@@ -13,14 +13,7 @@
  * materialize() succeeds.
  */
 
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  readdirSync,
-  statSync,
-  writeFileSync,
-} from "node:fs"
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs"
 import { dirname, join, relative } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -100,13 +93,25 @@ const ALLOWED_VARIABLES = new Set(["projectName"])
  *    dist layout, in case the prepack step places templates one level up
  *    instead). Both are checked since the exact prepack layout is not
  *    fixed yet.
- * 2. Monorepo-relative dev/test fallback: mirrors install.ts's
- *    `resolvePrimitiveSource` pattern — walk from this module's own
+ * 2. Monorepo-relative dev/test fallback: walk from this module's own
  *    directory up to the monorepo root and check `templates/<name>`. This
  *    is what makes `solidiom create` work when run from inside this
  *    monorepo during development, and is also what the test suite exercises
  *    indirectly (though unit tests for materialize() itself pass an
  *    explicit `templateSourceDir` fixture instead of relying on this).
+ *
+ *    Two depths are checked because tsup bundles this file's logic
+ *    (originally `src/create/materialize.ts`, 4 levels below the monorepo
+ *    root: create -> src -> cli -> packages -> root) directly into a single
+ *    `dist/index.js` sitting at `packages/cli/dist/`, only 3 levels below
+ *    root (dist -> cli -> packages -> root). A caller running against the
+ *    unbundled source (e.g. via a test importing this file directly) needs
+ *    the 4-level walk; a caller importing the built `dist/index.js` (e.g.
+ *    tools/smoke-create.ts) needs the 3-level walk. This was never
+ *    exercised by materialize.test.ts/create.test.ts before CLI-008, since
+ *    both always inject an explicit `templateSourceDir`/`templatesDir`
+ *    fixture — discovered and fixed as part of wiring the real smoke
+ *    harness through the built package for the first time.
  *
  * Returns null if neither strategy finds a directory containing
  * `template.json`.
@@ -119,7 +124,11 @@ export function resolveTemplateSource(templateName: string): string | null {
     join(moduleDir, "templates", templateName),
     // Published layout variant: templates copied as a sibling of dist/.
     join(moduleDir, "..", "templates", templateName),
-    // Monorepo-relative dev/test fallback: packages/cli/src/create -> ../../../../templates/<name>
+    // Monorepo-relative dev/test fallback, bundled-dist depth:
+    // packages/cli/dist/index.js -> ../../../templates/<name>
+    join(moduleDir, "..", "..", "..", "templates", templateName),
+    // Monorepo-relative dev/test fallback, unbundled-src depth:
+    // packages/cli/src/create/materialize.ts -> ../../../../templates/<name>
     join(moduleDir, "..", "..", "..", "..", "templates", templateName),
   ]
 
@@ -207,8 +216,148 @@ function resolveMonorepoPackageVersion(packageName: string, searchFrom: string):
  * npm registry is out of scope for this PR (see the plan's acceptance
  * note). In that case this function leaves the specifier as `workspace:*`
  * and appends a warning to `warnings` rather than crashing or guessing.
+ *
+ * Also rewrites pnpm's `catalog:` protocol (e.g. `"solid-js":
+ * "catalog:"`), discovered as a gap during CLI-008: `catalog:` is a
+ * pnpm-workspace-only specifier — npm, yarn, and bun cannot resolve it at
+ * all, so a template's package.json copied byte-for-byte with a `catalog:`
+ * entry fails install unconditionally under every manager except pnpm,
+ * silently defeating the "installs under all four managers" acceptance
+ * criterion CLI-007 already claims. Resolution source:
+ * `pnpm-workspace.yaml`'s `overrides:` map FIRST, falling back to its
+ * `catalog:` map — the same file the specifier itself refers to, read from
+ * wherever the monorepo root is discoverable relative to the template
+ * source (mirroring how `resolveMonorepoPackageVersion` above walks up
+ * looking for `packages/<name>/package.json`).
+ *
+ * `overrides:` is checked first and preferred over `catalog:` because this
+ * monorepo's own `catalog:` entries are semver RANGES against a Solid 2
+ * prerelease line (`"solid-js": "^2.0.0-beta.23"`), and — discovered while
+ * testing this exact rewrite against a real registry during CLI-008 — npm's
+ * own range-matching for prerelease versions does not stay within the same
+ * prerelease tag: resolving `^2.0.0-beta.23` against the real npm registry
+ * picked `2.0.0-experimental.0` (a newer, incompatible prerelease line with
+ * a different tag), not the intended `2.0.0-beta.x` line. `overrides:`
+ * holds this repo's actual EXACT pin (`"solid-js": "2.0.0-beta.24"`) for
+ * exactly this reason — pnpm's `overrides:` exists specifically to force a
+ * single resolved version workspace-wide despite what `catalog:`'s range
+ * would otherwise allow — so it is the correct, safe source to materialize
+ * into a standalone project.
  */
-function rewriteWorkspaceVersions(
+function readPnpmWorkspaceMaps(
+  searchFrom: string,
+): { overrides: Record<string, string>; catalog: Record<string, string> } | null {
+  let dir = searchFrom
+  for (let i = 0; i < 10; i++) {
+    const candidate = join(dir, "pnpm-workspace.yaml")
+    if (existsSync(candidate)) {
+      try {
+        const content = readFileSync(candidate, "utf8")
+        return {
+          overrides: readYamlFlatMap(content, "overrides"),
+          catalog: readYamlFlatMap(content, "catalog"),
+        }
+      } catch {
+        return null
+      }
+    }
+    const parent = dirname(dir)
+    if (parent === dir) break
+    dir = parent
+  }
+  return null
+}
+
+/**
+ * Minimal line-based read of a single flat top-level YAML map (no new
+ * dependency) — good enough for this monorepo's own single flat
+ * `overrides:`/`catalog:` maps; a real multi-level pnpm-workspace.yaml
+ * would need a real YAML parser.
+ */
+function readYamlFlatMap(content: string, key: string): Record<string, string> {
+  const lines = content.split("\n")
+  const map: Record<string, string> = {}
+  const start = lines.findIndex((l) => new RegExp(`^${key}:\\s*$`).test(l))
+  if (start === -1) return map
+  for (let i = start + 1; i < lines.length; i++) {
+    const line = lines[i]!
+    if (/^\S/.test(line)) break // dedented past this block
+    const match = line.match(/^\s*["']?([\w@/.-]+)["']?:\s*["']?([^"'\s]+)["']?\s*$/)
+    if (match) map[match[1]!] = match[2]!
+  }
+  return map
+}
+
+function resolveCatalogVersion(packageName: string, searchFrom: string): string | null {
+  const maps = readPnpmWorkspaceMaps(searchFrom)
+  if (!maps) return null
+  return maps.overrides[packageName] ?? maps.catalog[packageName] ?? null
+}
+
+/**
+ * Fills in the package-manager fields that force a single resolved version for
+ * a dependency across the entire graph.
+ *
+ * Rewriting `catalog:`/`workspace:*` on the DIRECT dependencies (above) is only
+ * half the job. In the monorepo, `pnpm-workspace.yaml`'s `overrides:` map is
+ * what actually guarantees one `solid-js` instance workspace-wide, pinning the
+ * Solid 2 prerelease line to an exact version. A materialized standalone
+ * project has no workspace file, so nothing constrains the TRANSITIVE graph:
+ * every package that peer-depends on `solid-js`/`@solidjs/web` is free to pull
+ * its own range, which produces either a duplicated Solid runtime (two copies
+ * of the reactive graph — broken at runtime, and silently so) or, under npm, a
+ * multi-minute resolver backtrack across the whole prerelease space. Both were
+ * observed while building CLI-008's smoke matrix.
+ *
+ * Each manager reads a different field, so all three are emitted; every manager
+ * ignores the ones it does not recognize:
+ *   - `overrides`       npm, bun
+ *   - `resolutions`     yarn, bun
+ *   - `pnpm.overrides`  pnpm
+ *
+ * Entries the template itself declares always win — this only fills gaps, so a
+ * template can still deliberately override a pin.
+ *
+ * Known limit, shared with `workspace:*` rewriting: the source of truth is the
+ * monorepo's `pnpm-workspace.yaml`. Running from a published CLI with no
+ * checkout present, there is no overrides map to read and none is emitted.
+ */
+function applyDependencyOverrides(
+  data: Record<string, unknown>,
+  overrides: Record<string, string>,
+): boolean {
+  if (Object.keys(overrides).length === 0) return false
+
+  let changed = false
+
+  const fillGaps = (existing: unknown): Record<string, string> => {
+    const declared =
+      existing && typeof existing === "object" ? (existing as Record<string, string>) : {}
+    return { ...overrides, ...declared }
+  }
+
+  const setIfChanged = (target: Record<string, unknown>, key: string): void => {
+    const next = fillGaps(target[key])
+    if (JSON.stringify(target[key]) !== JSON.stringify(next)) {
+      target[key] = next
+      changed = true
+    }
+  }
+
+  setIfChanged(data, "overrides")
+  setIfChanged(data, "resolutions")
+
+  const pnpmSection =
+    data["pnpm"] && typeof data["pnpm"] === "object"
+      ? (data["pnpm"] as Record<string, unknown>)
+      : {}
+  setIfChanged(pnpmSection, "overrides")
+  data["pnpm"] = pnpmSection
+
+  return changed
+}
+
+function rewritePackageJsonForStandalone(
   packageJsonContent: string,
   searchFrom: string,
   warnings: string[],
@@ -228,17 +377,36 @@ function rewriteWorkspaceVersions(
     const deps = data[field] as Record<string, string> | undefined
     if (!deps) continue
     for (const [name, spec] of Object.entries(deps)) {
-      if (!spec.startsWith("workspace:")) continue
-      const resolved = resolveMonorepoPackageVersion(name, searchFrom)
-      if (resolved) {
-        deps[name] = resolved
-        changed = true
-      } else {
-        warnings.push(
-          `Could not resolve a real version for "${name}" (${spec}) — no monorepo packages/ directory found from the template source. Left as "${spec}"; this must be resolved before the generated project can install cleanly outside this monorepo.`,
-        )
+      if (spec.startsWith("workspace:")) {
+        const resolved = resolveMonorepoPackageVersion(name, searchFrom)
+        if (resolved) {
+          deps[name] = resolved
+          changed = true
+        } else {
+          warnings.push(
+            `Could not resolve a real version for "${name}" (${spec}) — no monorepo packages/ directory found from the template source. Left as "${spec}"; this must be resolved before the generated project can install cleanly outside this monorepo.`,
+          )
+        }
+        continue
+      }
+
+      if (spec.startsWith("catalog:")) {
+        const resolved = resolveCatalogVersion(name, searchFrom)
+        if (resolved) {
+          deps[name] = resolved
+          changed = true
+        } else {
+          warnings.push(
+            `Could not resolve a real version for "${name}" (${spec}) — no pnpm-workspace.yaml catalog entry found from the template source. Left as "${spec}"; this specifier is not understood by npm/yarn/bun and must be resolved before the generated project can install under any manager other than pnpm.`,
+          )
+        }
       }
     }
+  }
+
+  const workspaceMaps = readPnpmWorkspaceMaps(searchFrom)
+  if (workspaceMaps && applyDependencyOverrides(data, workspaceMaps.overrides)) {
+    changed = true
   }
 
   return changed ? JSON.stringify(data, null, 2) + "\n" : packageJsonContent
@@ -261,7 +429,8 @@ function stripMonorepoTsconfig(tsconfigContent: string): string {
 
   const extendsValue = data["extends"]
   const isMonorepoRelativeExtends =
-    typeof extendsValue === "string" && (extendsValue.startsWith("../") || extendsValue.startsWith("..\\"))
+    typeof extendsValue === "string" &&
+    (extendsValue.startsWith("../") || extendsValue.startsWith("..\\"))
 
   if (isMonorepoRelativeExtends) {
     delete data["extends"]
@@ -309,6 +478,10 @@ function stripMonorepoTsconfig(tsconfigContent: string): string {
  *  - Applies `{{var}}` substitution against the allowlist to every text
  *    file's content.
  *  - Rewrites `workspace:*` specifiers in package.json.
+ *  - Emits `overrides`/`resolutions`/`pnpm.overrides` into package.json from
+ *    the monorepo's `pnpm-workspace.yaml` `overrides:` map, so the generated
+ *    project resolves a single version of the pinned Solid packages under
+ *    every manager rather than duplicating them transitively.
  *  - Strips repo-local tsconfig extends/references in tsconfig.json.
  *
  * NOTE on the foreign-lockfile rule's other half: "after install only the
@@ -364,7 +537,7 @@ export function materialize(options: MaterializeOptions): MaterializeResult {
       text = substitute(text, allVariables)
 
       if (baseName === "package.json") {
-        text = rewriteWorkspaceVersions(text, sourceDir, warnings)
+        text = rewritePackageJsonForStandalone(text, sourceDir, warnings)
       }
       if (baseName === "tsconfig.json") {
         text = stripMonorepoTsconfig(text)

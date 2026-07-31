@@ -19,8 +19,20 @@ var ConfigSchema = z.object({
   sourceDir: z.string().optional().default("src/ui/primitives"),
   /** Runtime target directory for source installs. */
   runtimeDir: z.string().optional().default("src/ui/_runtime"),
+  /** Source install target directory for "component" deliverables (CLI-004). */
+  componentDir: z.string().optional().default("src/ui/components"),
+  /** Source install target directory for "block" deliverables (CLI-004). */
+  blockDir: z.string().optional().default("src/ui/blocks"),
+  /** Source install target directory for "theme" deliverables (CLI-004). */
+  themeDir: z.string().optional().default("src/ui/themes"),
   /** Package install mode: "package" or "source". */
-  defaultMode: z.enum(["package", "source"]).optional().default("package")
+  defaultMode: z.enum(["package", "source"]).optional().default("package"),
+  /**
+   * Styling profile chosen at `init` time. No default — a project has no
+   * styling profile until one is explicitly chosen (CLI-004). Left optional
+   * here; wiring an init-time prompt for this is out of scope for CLI-004.
+   */
+  stylingProfile: z.enum(["css", "tailwind", "unocss"]).optional()
 });
 var PolicySchema = z.object({
   /** Signature verification mode. */
@@ -32,7 +44,11 @@ var PolicySchema = z.object({
   /** When true, `solidiom verify --registry` fails closed if the registry index is unsigned. */
   registrySignatureRequired: z.boolean().optional().default(false),
   /** HMAC keys accepted when verifying the registry index signature. */
-  registryTrustedKeys: z.array(z.string()).optional().default([])
+  registryTrustedKeys: z.array(z.string()).optional().default([]),
+  /** When true (the default), source installs must pass byte-level verification against the registry manifest before any file is written (CLI-003). */
+  requireVerifiedSource: z.boolean().optional().default(true),
+  /** HMAC keys accepted when verifying source-install byte-level integrity (CLI-003). */
+  sourceInstallTrustedKeys: z.array(z.string()).optional().default([])
 });
 
 // src/commands/init.ts
@@ -538,11 +554,15 @@ ${pc2.dim(`${plan.entries.length} packages resolved.`)}
 };
 
 // src/commands/add.ts
-import { Command as Command3, Option as Option3 } from "clipanion";
+import { Command as Command4, Option as Option4 } from "clipanion";
 
 // src/source-install/install.ts
-import { existsSync as existsSync3, mkdirSync as mkdirSync2, readFileSync as readFileSync4, writeFileSync as writeFileSync2, readdirSync, statSync } from "fs";
-import { join as join3, relative, dirname } from "path";
+import { existsSync as existsSync8, mkdirSync as mkdirSync4, readFileSync as readFileSync8, writeFileSync as writeFileSync4, readdirSync, statSync } from "fs";
+import { join as join7, relative, dirname as dirname4 } from "path";
+
+// src/source-install/lock.ts
+import { existsSync as existsSync3, mkdirSync as mkdirSync2, readFileSync as readFileSync4, writeFileSync as writeFileSync2 } from "fs";
+import { join as join3, dirname } from "path";
 import { createHash } from "crypto";
 function computeDigest(content) {
   return createHash("sha256").update(content, "utf8").digest("hex");
@@ -559,8 +579,598 @@ function writeLock(cwd, lock) {
   mkdirSync2(dirname(lockPath), { recursive: true });
   writeFileSync2(lockPath, JSON.stringify(lock, null, 2) + "\n");
 }
+
+// src/source-install/verify-source.ts
+import { existsSync as existsSync5 } from "fs";
+import { join as join5 } from "path";
+
+// src/commands/verify.ts
+import { Command as Command3, Option as Option3 } from "clipanion";
+import { readFileSync as readFileSync5, existsSync as existsSync4 } from "fs";
+import { join as join4, dirname as dirname2, basename } from "path";
+import { createVerify, createHmac, createHash as createHash2 } from "crypto";
+import pc3 from "picocolors";
+async function verifySigstore(artifact, trustedIdentities, noNetwork) {
+  let bundleFromJSON;
+  let Verifier;
+  let toSignedEntity;
+  let toTrustMaterial;
+  let getTrustedRoot;
+  let VerificationError;
+  try {
+    const bundleMod = await import("@sigstore/bundle");
+    const verifyMod = await import("@sigstore/verify");
+    const tufMod = await import("@sigstore/tuf");
+    bundleFromJSON = bundleMod.bundleFromJSON;
+    Verifier = verifyMod.Verifier;
+    toSignedEntity = verifyMod.toSignedEntity;
+    toTrustMaterial = verifyMod.toTrustMaterial;
+    getTrustedRoot = tufMod.getTrustedRoot;
+    VerificationError = verifyMod.VerificationError;
+  } catch (err) {
+    return { verified: false, mode: "sigstore", reason: `Missing dependency: ${String(err)}` };
+  }
+  const bundlePath = findBundlePath(artifact);
+  if (!bundlePath) {
+    return {
+      verified: false,
+      mode: "sigstore",
+      reason: `No Sigstore bundle found alongside artifact. Expected ${artifact}.sigstore.json`
+    };
+  }
+  let bundle;
+  try {
+    const raw = JSON.parse(readFileSync5(bundlePath, "utf8"));
+    bundle = bundleFromJSON(raw);
+  } catch (err) {
+    return { verified: false, mode: "sigstore", reason: `Failed to parse bundle: ${String(err)}` };
+  }
+  let trustedRoot;
+  try {
+    trustedRoot = await getTrustedRoot({ forceCache: noNetwork });
+  } catch (err) {
+    return {
+      verified: false,
+      mode: "sigstore",
+      reason: `Failed to fetch TUF trusted root: ${String(err)}`
+    };
+  }
+  const trust = toTrustMaterial(trustedRoot);
+  const verifier = new Verifier(trust);
+  const entity = toSignedEntity(bundle);
+  const policy = trustedIdentities.length > 0 ? { subjectAlternativeName: { type: "email", value: trustedIdentities[0] } } : void 0;
+  try {
+    const signer = verifier.verify(entity, policy);
+    const identity = signer?.identity?.subjectAlternativeName ?? "unknown";
+    return { verified: true, mode: "sigstore", reason: "Sigstore bundle verified", identity };
+  } catch (err) {
+    const reason = err instanceof Error ? err.message : String(err);
+    return { verified: false, mode: "sigstore", reason };
+  }
+}
+function findBundlePath(artifact) {
+  const candidates = [`${artifact}.sigstore.json`, `${artifact}.sigstore`];
+  const dir = dirname2(artifact);
+  const base = basename(artifact);
+  candidates.push(join4(dir, `${base}.sigstore.json`), join4(dir, `${base}.sigstore`));
+  for (const p of candidates) {
+    if (existsSync4(p)) return p;
+  }
+  return null;
+}
+function verifyTrustedKeys(artifact, cwd) {
+  const keysPath = join4(cwd, ".solidiom", "trusted-keys.json");
+  if (!existsSync4(keysPath)) {
+    return { verified: false, mode: "trusted-keys", reason: "No .solidiom/trusted-keys.json found" };
+  }
+  let keys;
+  try {
+    keys = JSON.parse(readFileSync5(keysPath, "utf8"));
+    if (!Array.isArray(keys)) throw new Error("expected array");
+  } catch (err) {
+    return {
+      verified: false,
+      mode: "trusted-keys",
+      reason: `Invalid trusted-keys.json: ${String(err)}`
+    };
+  }
+  const sigPath = `${artifact}.sig`;
+  if (!existsSync4(sigPath)) {
+    return {
+      verified: false,
+      mode: "trusted-keys",
+      reason: `No signature file found at ${sigPath}`
+    };
+  }
+  let artifactBytes;
+  let sigBytes;
+  try {
+    artifactBytes = readFileSync5(artifact);
+    sigBytes = Buffer.from(readFileSync5(sigPath, "utf8").trim(), "base64");
+  } catch (err) {
+    return {
+      verified: false,
+      mode: "trusted-keys",
+      reason: `Failed to read artifact or signature: ${String(err)}`
+    };
+  }
+  const sortedKeys = [...keys].sort((a, b) => {
+    if (a.status === b.status) return 0;
+    return a.status === "active" ? -1 : 1;
+  });
+  for (const key of sortedKeys) {
+    try {
+      const algo = resolveAlgo(key.algorithm);
+      const verify = createVerify(algo);
+      verify.update(artifactBytes);
+      const ok = verify.verify(key.publicKey, sigBytes);
+      if (ok) {
+        return {
+          verified: true,
+          mode: "trusted-keys",
+          reason: `Signature verified against key ${key.id} (${key.status})`,
+          identity: key.id
+        };
+      }
+    } catch {
+    }
+  }
+  return {
+    verified: false,
+    mode: "trusted-keys",
+    reason: "Signature did not verify against any trusted key"
+  };
+}
+function resolveAlgo(algorithm) {
+  switch (algorithm) {
+    case "ed25519":
+      return "Ed25519";
+    case "rsa-sha256":
+      return "RSA-SHA256";
+    case "rsa-sha512":
+      return "RSA-SHA512";
+  }
+}
+function verifyRegistry(options) {
+  const { cwd, verifyKeys = [], requireSignature = false } = options;
+  const registryDir = options.registryDir ?? join4(cwd, "registry");
+  const indexPath = join4(registryDir, "index.json");
+  const violations = [];
+  if (!existsSync4(indexPath)) {
+    return {
+      verified: false,
+      reason: `Registry index not found at ${indexPath}`,
+      primitivesChecked: 0,
+      violations: [`missing ${indexPath}`]
+    };
+  }
+  let index;
+  try {
+    index = readRegistryIndex(indexPath);
+  } catch (err) {
+    const reason = err instanceof RegistrySchemaError ? err.message : String(err);
+    return {
+      verified: false,
+      reason: `Registry index failed schema verification: ${reason}`,
+      primitivesChecked: 0,
+      violations: [reason]
+    };
+  }
+  if (requireSignature || index.integrity.signature) {
+    if (!index.integrity.signature) {
+      violations.push("registry index is not signed but signing is required by policy");
+    } else if (verifyKeys.length === 0) {
+      violations.push(
+        "registry index is signed but no verification key was provided (set REGISTRY_VERIFY_KEY or policy.registryTrustedKeys)"
+      );
+    } else {
+      const { signature, signedAt, signatureKeyId, ...restIntegrity } = index.integrity;
+      const preSigIndex = { ...index, integrity: restIntegrity };
+      const preSigContent = JSON.stringify(preSigIndex, null, 2);
+      const matchedKey = verifyKeys.find((key) => {
+        const expected = createHmac("sha256", key).update(preSigContent).digest("hex");
+        return expected === signature;
+      });
+      if (!matchedKey) {
+        violations.push("registry index signature does not verify against any trusted key");
+      } else if (signatureKeyId) {
+        const expectedKeyId = createHash2("sha256").update(matchedKey).digest("hex").slice(0, 16);
+        if (expectedKeyId !== signatureKeyId) {
+          violations.push("registry index signatureKeyId does not match the verifying key");
+        }
+      }
+    }
+  }
+  let primitivesChecked = 0;
+  for (const summary of index.primitives) {
+    const manifestPath = join4(registryDir, `${summary.name}.json`);
+    if (!existsSync4(manifestPath)) {
+      violations.push(`${summary.name}: manifest file missing at ${manifestPath}`);
+      continue;
+    }
+    let manifest;
+    try {
+      manifest = readRegistryManifest(manifestPath);
+    } catch (err) {
+      const reason = err instanceof RegistrySchemaError ? err.message : String(err);
+      violations.push(`${summary.name}: manifest schema verification failed \u2014 ${reason}`);
+      continue;
+    }
+    const sortedDigests = Object.entries(manifest.integrity.fileDigests).sort(
+      ([a], [b]) => a.localeCompare(b)
+    );
+    const recomputed = createHash2("sha256").update(sortedDigests.map(([, digest]) => digest).join("")).digest("hex");
+    if (recomputed !== manifest.integrity.filesHash) {
+      violations.push(
+        `${summary.name}: filesHash mismatch \u2014 recorded ${manifest.integrity.filesHash}, recomputed ${recomputed} from fileDigests`
+      );
+      continue;
+    }
+    primitivesChecked += 1;
+  }
+  return {
+    verified: violations.length === 0,
+    reason: violations.length === 0 ? "Registry integrity verified" : "Registry integrity failed",
+    primitivesChecked,
+    violations
+  };
+}
+async function runVerify(options) {
+  const { cwd, artifact, noNetwork = false } = options;
+  const policyPath = join4(cwd, ".solidiom", "policy.json");
+  if (!existsSync4(policyPath)) {
+    return { verified: true, mode: "none", reason: "No policy \u2014 verification skipped" };
+  }
+  const policy = PolicySchema.parse(JSON.parse(readFileSync5(policyPath, "utf8")));
+  switch (policy.signatureMode) {
+    case "none":
+      return { verified: true, mode: "none", reason: "Signature verification disabled by policy" };
+    case "sigstore":
+      return verifySigstore(artifact, policy.trustedIdentities, noNetwork);
+    case "trusted-keys":
+      return verifyTrustedKeys(artifact, cwd);
+  }
+}
+var VerifyCommand = class extends Command3 {
+  static paths = [["verify"]];
+  static usage = Command3.Usage({
+    description: "Verify artifact signatures against policy",
+    examples: [
+      ["Verify a package tarball", "solidiom verify @solidiom/dialog"],
+      [
+        "Offline verification (use cached TUF root)",
+        "solidiom verify ./dist/dialog.tgz --no-network"
+      ],
+      ["Output as JSON", "solidiom verify ./dist/dialog.tgz --json"],
+      ["Verify the registry catalog", "solidiom verify --registry"]
+    ]
+  });
+  artifact = Option3.String({ required: false });
+  noNetwork = Option3.Boolean("--no-network", false, {
+    description: "Skip TUF network fetch; use cached trust root"
+  });
+  json = Option3.Boolean("--json", false, { description: "Output result as JSON" });
+  registry = Option3.Boolean("--registry", false, {
+    description: "Verify registry/index.json and per-primitive manifest integrity instead of an artifact"
+  });
+  async execute() {
+    if (this.registry) {
+      const cwd = process.cwd();
+      const policyPath = join4(cwd, ".solidiom", "policy.json");
+      const policy = existsSync4(policyPath) ? PolicySchema.parse(JSON.parse(readFileSync5(policyPath, "utf8"))) : PolicySchema.parse({});
+      const envKey = process.env["REGISTRY_VERIFY_KEY"];
+      const verifyKeys = [...envKey ? [envKey] : [], ...policy.registryTrustedKeys];
+      const result2 = verifyRegistry({
+        cwd,
+        verifyKeys,
+        requireSignature: policy.registrySignatureRequired
+      });
+      if (this.json) {
+        this.context.stdout.write(JSON.stringify(result2, null, 2) + "\n");
+        return result2.verified ? 0 : 1;
+      }
+      if (result2.verified) {
+        this.context.stdout.write(
+          pc3.green(`\u2713 Registry verified: ${result2.primitivesChecked} manifest(s) checked
+`)
+        );
+        return 0;
+      }
+      this.context.stderr.write(pc3.red(`\u2717 Registry verification failed:
+`));
+      for (const violation of result2.violations) {
+        this.context.stderr.write(pc3.red(`  \u2717 ${violation}
+`));
+      }
+      return 1;
+    }
+    if (!this.artifact) {
+      this.context.stderr.write(pc3.red("\u2717 An artifact path is required unless --registry is set\n"));
+      return 1;
+    }
+    const result = await runVerify({
+      cwd: process.cwd(),
+      artifact: this.artifact,
+      noNetwork: this.noNetwork
+    });
+    if (this.json) {
+      this.context.stdout.write(JSON.stringify(result, null, 2) + "\n");
+      return result.verified ? 0 : 1;
+    }
+    if (result.verified) {
+      const id = result.identity ? ` [${result.identity}]` : "";
+      this.context.stdout.write(pc3.green(`\u2713 Verified (${result.mode})${id}: ${result.reason}
+`));
+      return 0;
+    }
+    this.context.stderr.write(pc3.red(`\u2717 Verification failed (${result.mode}): ${result.reason}
+`));
+    return 1;
+  }
+};
+
+// src/source-install/verify-source.ts
+function resolveRegistryDir(cwd, registryDirOverride) {
+  const candidates = [
+    registryDirOverride ?? null,
+    process.env["SOLIDIOM_REGISTRY_PATH"] ?? null,
+    join5(cwd, "..", "..", "registry"),
+    join5(cwd, "node_modules", "@solidiom", "registry")
+  ].filter(Boolean);
+  for (const dir of candidates) {
+    if (existsSync5(join5(dir, "index.json"))) return dir;
+  }
+  return null;
+}
+function resolveManifestPath(primitive, cwd, registryDirOverride) {
+  const registryDir = resolveRegistryDir(cwd, registryDirOverride);
+  const candidates = [
+    registryDirOverride ? join5(registryDirOverride, `${primitive}.json`) : null,
+    process.env["SOLIDIOM_REGISTRY_PATH"] ? join5(process.env["SOLIDIOM_REGISTRY_PATH"], `${primitive}.json`) : null,
+    registryDir ? join5(registryDir, `${primitive}.json`) : null,
+    join5(cwd, "..", "..", "registry", `${primitive}.json`),
+    join5(cwd, "node_modules", "@solidiom", "registry", `${primitive}.json`),
+    join5(cwd, ".solidiom", "registry-cache", `${primitive}.json`)
+  ].filter(Boolean);
+  return candidates.find((path) => existsSync5(path)) ?? null;
+}
+function toFileMap(files) {
+  if (files instanceof Map) return files;
+  const map = /* @__PURE__ */ new Map();
+  for (const { relPath, content } of files) map.set(relPath, content);
+  return map;
+}
+function verifySourceIntegrity(options) {
+  const {
+    cwd,
+    registryDir: registryDirOverride,
+    primitive,
+    files: filesInput,
+    verifyKeys = [],
+    requireSignature = false
+  } = options;
+  const verifiedAt = (/* @__PURE__ */ new Date()).toISOString();
+  const files = toFileMap(filesInput);
+  const registryDir = resolveRegistryDir(cwd, registryDirOverride) ?? void 0;
+  const registryResult = verifyRegistry({
+    cwd,
+    registryDir,
+    verifyKeys,
+    requireSignature
+  });
+  if (!registryResult.verified) {
+    return {
+      verified: false,
+      violations: registryResult.violations.length > 0 ? registryResult.violations : [registryResult.reason],
+      verifiedAt
+    };
+  }
+  const manifestPath = resolveManifestPath(primitive, cwd, registryDirOverride);
+  if (!manifestPath) {
+    return {
+      verified: false,
+      violations: [`No registry manifest found for primitive "${primitive}"`],
+      verifiedAt
+    };
+  }
+  let manifest;
+  try {
+    manifest = readRegistryManifest(manifestPath);
+  } catch (err) {
+    const reason = err instanceof RegistrySchemaError ? err.message : String(err);
+    return {
+      verified: false,
+      violations: [`Manifest for "${primitive}" failed schema verification: ${reason}`],
+      verifiedAt
+    };
+  }
+  const violations = [];
+  const fileDigests = manifest.integrity.fileDigests;
+  for (const [relPath, content] of files) {
+    const expected = fileDigests[relPath];
+    if (expected === void 0) {
+      violations.push(`${relPath}: present in source files but has no entry in manifest fileDigests`);
+      continue;
+    }
+    const actual = computeDigest(content);
+    if (actual !== expected) {
+      violations.push(`${relPath}: content digest mismatch \u2014 expected ${expected}, got ${actual}`);
+    }
+  }
+  for (const relPath of Object.keys(fileDigests)) {
+    if (!files.has(relPath)) {
+      violations.push(`${relPath}: present in manifest fileDigests but missing from source files`);
+    }
+  }
+  let signatureKeyId;
+  if (registryDir) {
+    try {
+      const index = readRegistryIndex(join5(registryDir, "index.json"));
+      signatureKeyId = index.integrity.signatureKeyId;
+    } catch {
+    }
+  }
+  return {
+    verified: violations.length === 0,
+    violations,
+    manifestFilesHash: manifest.integrity.filesHash,
+    ...signatureKeyId ? { signatureKeyId } : {},
+    verifiedAt
+  };
+}
+
+// src/source-install/destinations.ts
+var UnsupportedDeliverableError = class extends Error {
+  constructor(deliverable) {
+    super(
+      `Deliverable "${deliverable}" is not installable via \`add\`/source-install \u2014 "template" deliverables are materialized via \`solidiom create\` (CLI-007), not this flow.`
+    );
+    this.deliverable = deliverable;
+    this.name = "UnsupportedDeliverableError";
+  }
+  deliverable;
+};
+function resolveDestinationRoot(deliverable, config) {
+  switch (deliverable) {
+    case "primitive":
+      return config.sourceDir;
+    case "component":
+      return config.componentDir;
+    case "block":
+      return config.blockDir;
+    case "theme":
+      return config.themeDir;
+    case "template":
+      throw new UnsupportedDeliverableError(deliverable);
+    default: {
+      const _never = deliverable;
+      throw new Error(`Unhandled deliverable kind: ${String(_never)}`);
+    }
+  }
+}
+
+// src/source-install/conflict.ts
+import { existsSync as existsSync6, readFileSync as readFileSync6 } from "fs";
+import { join as join6 } from "path";
+function classifyConflicts(options) {
+  const { cwd, plannedFiles, force = false } = options;
+  const lock = options.lock ?? readLock(cwd);
+  const entries = [];
+  let hasBlockingConflicts = false;
+  for (const [relPath, newContent] of plannedFiles) {
+    const fullPath = join6(cwd, relPath);
+    const lockEntry = lock.installed[relPath];
+    const existsOnDisk = existsSync6(fullPath);
+    if (!existsOnDisk) {
+      entries.push({ path: relPath, classification: "create" });
+      continue;
+    }
+    const onDiskContent = readFileSync6(fullPath, "utf8");
+    const onDiskDigest = computeDigest(onDiskContent);
+    const plannedDigest = computeDigest(newContent);
+    const contentIdentical = onDiskDigest === plannedDigest;
+    if (contentIdentical) {
+      entries.push({ path: relPath, classification: "unchanged" });
+      continue;
+    }
+    if (!lockEntry) {
+      const classification = "modified-by-user";
+      const diff2 = renderUnifiedDiff(onDiskContent, newContent, relPath);
+      entries.push({ path: relPath, classification, diff: diff2 });
+      if (!force) hasBlockingConflicts = true;
+      continue;
+    }
+    if (onDiskDigest === lockEntry.digest) {
+      const diff2 = renderUnifiedDiff(onDiskContent, newContent, relPath);
+      entries.push({ path: relPath, classification: "overwrite", diff: diff2 });
+      continue;
+    }
+    const diff = renderUnifiedDiff(onDiskContent, newContent, relPath);
+    entries.push({ path: relPath, classification: "modified-by-user", diff });
+    if (!force) hasBlockingConflicts = true;
+  }
+  return { entries, hasBlockingConflicts };
+}
+function renderUnifiedDiff(oldContent, newContent, label) {
+  const oldLines = oldContent.split("\n");
+  const newLines = newContent.split("\n");
+  const contextSize = 3;
+  if (oldContent === newContent) {
+    return `--- ${label}
++++ ${label}
+(no differences)
+`;
+  }
+  const maxLen = Math.max(oldLines.length, newLines.length);
+  let firstDiff = 0;
+  while (firstDiff < maxLen && oldLines[firstDiff] !== void 0 && newLines[firstDiff] !== void 0 && oldLines[firstDiff] === newLines[firstDiff]) {
+    firstDiff++;
+  }
+  let oldEnd = oldLines.length - 1;
+  let newEnd = newLines.length - 1;
+  while (oldEnd > firstDiff - 1 && newEnd > firstDiff - 1 && oldLines[oldEnd] !== void 0 && newLines[newEnd] !== void 0 && oldLines[oldEnd] === newLines[newEnd]) {
+    oldEnd--;
+    newEnd--;
+  }
+  const contextStart = Math.max(0, firstDiff - contextSize);
+  const oldHunkEnd = Math.min(oldLines.length - 1, oldEnd + contextSize);
+  const newHunkEnd = Math.min(newLines.length - 1, newEnd + contextSize);
+  const oldHunkLen = oldHunkEnd - contextStart + 1;
+  const newHunkLen = newHunkEnd - contextStart + 1;
+  const lines = [`--- ${label}`, `+++ ${label}`];
+  lines.push(
+    `@@ -${contextStart + 1},${Math.max(oldHunkLen, 0)} +${contextStart + 1},${Math.max(newHunkLen, 0)} @@`
+  );
+  for (let i = contextStart; i < firstDiff; i++) {
+    lines.push(` ${oldLines[i] ?? ""}`);
+  }
+  for (let i = firstDiff; i <= oldEnd; i++) {
+    lines.push(`-${oldLines[i]}`);
+  }
+  for (let i = firstDiff; i <= newEnd; i++) {
+    lines.push(`+${newLines[i]}`);
+  }
+  for (let i = oldEnd + 1; i <= oldHunkEnd; i++) {
+    lines.push(` ${oldLines[i] ?? ""}`);
+  }
+  return lines.join("\n") + "\n";
+}
+
+// src/source-install/rollback.ts
+import { existsSync as existsSync7, mkdirSync as mkdirSync3, readFileSync as readFileSync7, rmSync, writeFileSync as writeFileSync3 } from "fs";
+import { dirname as dirname3 } from "path";
+function createRollbackJournal() {
+  const recorded = [];
+  const previous = /* @__PURE__ */ new Map();
+  return {
+    recordBeforeWrite(path) {
+      if (previous.has(path)) return;
+      previous.set(path, existsSync7(path) ? readFileSync7(path, "utf8") : null);
+      recorded.push(path);
+    },
+    entries() {
+      return [...recorded];
+    },
+    apply() {
+      for (let i = recorded.length - 1; i >= 0; i--) {
+        const path = recorded[i];
+        const content = previous.get(path) ?? null;
+        if (content === null) {
+          rmSync(path, { force: true });
+        } else {
+          mkdirSync3(dirname3(path), { recursive: true });
+          writeFileSync3(path, content);
+        }
+      }
+      recorded.length = 0;
+      previous.clear();
+    }
+  };
+}
+
+// src/source-install/install.ts
 function rewriteImports(content, filePath, runtimeDir) {
-  const fileDir = dirname(filePath);
+  const fileDir = dirname4(filePath);
   const relToRuntime = relative(fileDir, runtimeDir).replace(/\\/g, "/") || ".";
   const prefix = relToRuntime.startsWith(".") ? relToRuntime : `./${relToRuntime}`;
   return content.replace(/from\s+["']@solidiom\/runtime(\/[^"']*)?["']/g, (_match, subpath) => {
@@ -570,15 +1180,15 @@ function rewriteImports(content, filePath, runtimeDir) {
 }
 function collectRuntimeFiles(runtimeSourceDir) {
   const files = /* @__PURE__ */ new Map();
-  if (!existsSync3(runtimeSourceDir)) return files;
+  if (!existsSync8(runtimeSourceDir)) return files;
   function walk(dir, prefix) {
     for (const entry of readdirSync(dir)) {
-      const full = join3(dir, entry);
+      const full = join7(dir, entry);
       const rel = prefix ? `${prefix}/${entry}` : entry;
       if (statSync(full).isDirectory()) {
         walk(full, rel);
       } else if (entry.endsWith(".ts") && !entry.includes(".test.")) {
-        files.set(rel, readFileSync4(full, "utf8"));
+        files.set(rel, readFileSync8(full, "utf8"));
       }
     }
   }
@@ -586,76 +1196,179 @@ function collectRuntimeFiles(runtimeSourceDir) {
   return files;
 }
 function installSource(options) {
-  const { primitive, cwd, plan, dryRun = false } = options;
-  const configPath = join3(cwd, ".solidiom", "config.json");
-  const config = existsSync3(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync4(configPath, "utf8"))) : ConfigSchema.parse({});
-  const sourceDir = join3(cwd, config.sourceDir);
-  const runtimeDir = join3(cwd, config.runtimeDir);
+  const {
+    primitive,
+    cwd,
+    plan,
+    dryRun = false,
+    allowUnverified = false,
+    force = false,
+    diff = false
+  } = options;
+  const configPath = join7(cwd, ".solidiom", "config.json");
+  const config = existsSync8(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync8(configPath, "utf8"))) : ConfigSchema.parse({});
+  const policyPath = join7(cwd, ".solidiom", "policy.json");
+  const policy = existsSync8(policyPath) ? PolicySchema.parse(JSON.parse(readFileSync8(policyPath, "utf8"))) : PolicySchema.parse({});
+  const deliverable = plan.deliverable ?? "primitive";
+  const sourceDir = join7(cwd, resolveDestinationRoot(deliverable, config));
+  const runtimeDir = join7(cwd, config.runtimeDir);
   const filesWritten = [];
   const runtimeDeduped = [];
   const primitiveSourceDir = resolvePrimitiveSource(primitive, cwd);
   if (!primitiveSourceDir) {
-    return { filesWritten: [], runtimeDeduped: [], lockUpdated: false };
-  }
-  const lock = readLock(cwd);
-  const primitiveTarget = join3(sourceDir, primitive);
-  if (!dryRun) mkdirSync2(primitiveTarget, { recursive: true });
-  const sourceFiles = collectSourceFiles(primitiveSourceDir);
-  for (const [relPath, content] of sourceFiles) {
-    const targetPath = join3(primitiveTarget, relPath);
-    const rewritten = rewriteImports(content, targetPath, runtimeDir);
-    if (!dryRun) {
-      mkdirSync2(dirname(targetPath), { recursive: true });
-      writeFileSync2(targetPath, rewritten);
-    }
-    const relFromCwd = relative(cwd, targetPath);
-    filesWritten.push(relFromCwd);
-    lock.installed[relFromCwd] = {
-      path: relFromCwd,
-      digest: computeDigest(content),
-      primitive,
-      version: plan.entries[0]?.version ?? "0.0.1-next.0"
+    return {
+      filesWritten: [],
+      runtimeDeduped: [],
+      lockUpdated: false,
+      verified: false,
+      violations: [`Could not resolve source directory for primitive "${primitive}"`]
     };
   }
+  const primitiveTarget = join7(sourceDir, primitive);
+  const sourceFiles = collectSourceFiles(primitiveSourceDir);
+  const envKey = process.env["REGISTRY_VERIFY_KEY"];
+  const verifyKeys = [...envKey ? [envKey] : [], ...policy.registryTrustedKeys, ...policy.sourceInstallTrustedKeys];
+  const verifyResult = verifySourceIntegrity({
+    cwd,
+    primitive,
+    files: sourceFiles,
+    verifyKeys,
+    requireSignature: policy.registrySignatureRequired
+  });
+  if (!verifyResult.verified && policy.requireVerifiedSource && !allowUnverified) {
+    return {
+      filesWritten: [],
+      runtimeDeduped: [],
+      lockUpdated: false,
+      verified: false,
+      violations: verifyResult.violations
+    };
+  }
+  const provenance = verifyResult.verified ? "verified" : "unverified";
+  const lock = readLock(cwd);
+  const plannedFiles = /* @__PURE__ */ new Map();
+  for (const [relPath, content] of sourceFiles) {
+    const targetPath = join7(primitiveTarget, relPath);
+    const relFromCwd = relative(cwd, targetPath);
+    const rewritten = rewriteImports(content, targetPath, runtimeDir);
+    plannedFiles.set(relFromCwd, rewritten);
+  }
   const runtimePkgSource = resolveRuntimeSource(cwd);
-  if (runtimePkgSource) {
-    const runtimeFiles = collectRuntimeFiles(runtimePkgSource);
-    if (!dryRun) mkdirSync2(runtimeDir, { recursive: true });
-    for (const [relPath, content] of runtimeFiles) {
-      const targetPath = join3(runtimeDir, relPath);
-      const relFromCwd = relative(cwd, targetPath);
-      if (!existsSync3(targetPath)) {
-        if (!dryRun) {
-          mkdirSync2(dirname(targetPath), { recursive: true });
-          writeFileSync2(targetPath, content);
-        }
-        filesWritten.push(relFromCwd);
-        runtimeDeduped.push(relFromCwd);
+  const runtimeFiles = runtimePkgSource ? collectRuntimeFiles(runtimePkgSource) : /* @__PURE__ */ new Map();
+  for (const [relPath, content] of runtimeFiles) {
+    const targetPath = join7(runtimeDir, relPath);
+    const relFromCwd = relative(cwd, targetPath);
+    if (!existsSync8(targetPath)) {
+      plannedFiles.set(relFromCwd, content);
+    }
+  }
+  const conflictReport = classifyConflicts({ cwd, plannedFiles, force, lock });
+  if (diff) {
+    return {
+      filesWritten: [],
+      runtimeDeduped: [],
+      lockUpdated: false,
+      verified: verifyResult.verified,
+      violations: verifyResult.verified ? [] : verifyResult.violations,
+      conflicts: conflictReport
+    };
+  }
+  if (conflictReport.hasBlockingConflicts && !force) {
+    return {
+      filesWritten: [],
+      runtimeDeduped: [],
+      lockUpdated: false,
+      verified: verifyResult.verified,
+      violations: verifyResult.verified ? [] : verifyResult.violations,
+      conflicts: conflictReport
+    };
+  }
+  const journal = createRollbackJournal();
+  try {
+    if (!dryRun) mkdirSync4(primitiveTarget, { recursive: true });
+    for (const [relPath, content] of sourceFiles) {
+      const targetPath = join7(primitiveTarget, relPath);
+      const rewritten = rewriteImports(content, targetPath, runtimeDir);
+      if (!dryRun) {
+        journal.recordBeforeWrite(targetPath);
+        mkdirSync4(dirname4(targetPath), { recursive: true });
+        writeFileSync4(targetPath, rewritten);
       }
+      const relFromCwd = relative(cwd, targetPath);
+      filesWritten.push(relFromCwd);
       lock.installed[relFromCwd] = {
         path: relFromCwd,
         digest: computeDigest(content),
-        primitive: "_runtime",
-        version: plan.entries.find((e) => e.package === "@solidiom/runtime")?.version ?? "0.0.1-next.0"
+        primitive,
+        version: plan.entries[0]?.version ?? "0.0.1-next.0",
+        manifestFilesHash: verifyResult.manifestFilesHash ?? "",
+        ...verifyResult.signatureKeyId ? { signatureKeyId: verifyResult.signatureKeyId } : {},
+        verifiedAt: verifyResult.verifiedAt,
+        provenance
       };
     }
+    if (runtimePkgSource) {
+      if (!dryRun) mkdirSync4(runtimeDir, { recursive: true });
+      for (const [relPath, content] of runtimeFiles) {
+        const targetPath = join7(runtimeDir, relPath);
+        const relFromCwd = relative(cwd, targetPath);
+        if (!existsSync8(targetPath)) {
+          if (!dryRun) {
+            journal.recordBeforeWrite(targetPath);
+            mkdirSync4(dirname4(targetPath), { recursive: true });
+            writeFileSync4(targetPath, content);
+          }
+          filesWritten.push(relFromCwd);
+          runtimeDeduped.push(relFromCwd);
+        }
+        lock.installed[relFromCwd] = {
+          path: relFromCwd,
+          digest: computeDigest(content),
+          primitive: "_runtime",
+          version: plan.entries.find((e) => e.package === "@solidiom/runtime")?.version ?? "0.0.1-next.0",
+          manifestFilesHash: verifyResult.manifestFilesHash ?? "",
+          ...verifyResult.signatureKeyId ? { signatureKeyId: verifyResult.signatureKeyId } : {},
+          verifiedAt: verifyResult.verifiedAt,
+          provenance
+        };
+      }
+    }
+    if (!dryRun) {
+      journal.recordBeforeWrite(join7(cwd, ".solidiom", "lock.json"));
+      writeLock(cwd, lock);
+    }
+  } catch (err) {
+    journal.apply();
+    return {
+      filesWritten: [],
+      runtimeDeduped: [],
+      lockUpdated: false,
+      verified: verifyResult.verified,
+      violations: [
+        ...verifyResult.verified ? [] : verifyResult.violations,
+        `Install failed and was rolled back: ${err instanceof Error ? err.message : String(err)}`
+      ]
+    };
   }
-  if (!dryRun) {
-    writeLock(cwd, lock);
-  }
-  return { filesWritten, runtimeDeduped, lockUpdated: !dryRun };
+  return {
+    filesWritten,
+    runtimeDeduped,
+    lockUpdated: !dryRun,
+    verified: verifyResult.verified,
+    violations: verifyResult.verified ? [] : verifyResult.violations
+  };
 }
 function collectSourceFiles(dir) {
   const files = /* @__PURE__ */ new Map();
-  if (!existsSync3(dir)) return files;
+  if (!existsSync8(dir)) return files;
   function walk(d, prefix) {
     for (const entry of readdirSync(d)) {
-      const full = join3(d, entry);
+      const full = join7(d, entry);
       const rel = prefix ? `${prefix}/${entry}` : entry;
       if (statSync(full).isDirectory()) {
         walk(full, rel);
       } else if ((entry.endsWith(".ts") || entry.endsWith(".tsx")) && !entry.includes(".test.")) {
-        files.set(rel, readFileSync4(full, "utf8"));
+        files.set(rel, readFileSync8(full, "utf8"));
       }
     }
   }
@@ -663,23 +1376,23 @@ function collectSourceFiles(dir) {
   return files;
 }
 function resolvePrimitiveSource(primitive, cwd) {
-  const monoPath = join3(cwd, "..", "..", "packages", primitive, "source");
-  if (existsSync3(monoPath)) return monoPath;
-  const nmPath = join3(cwd, "node_modules", "@solidiom", primitive, "source");
-  if (existsSync3(nmPath)) return nmPath;
+  const monoPath = join7(cwd, "..", "..", "packages", primitive, "source");
+  if (existsSync8(monoPath)) return monoPath;
+  const nmPath = join7(cwd, "node_modules", "@solidiom", primitive, "source");
+  if (existsSync8(nmPath)) return nmPath;
   return null;
 }
 function resolveRuntimeSource(cwd) {
-  const monoPath = join3(cwd, "..", "..", "packages", "runtime", "src");
-  if (existsSync3(monoPath)) return monoPath;
-  const nmPath = join3(cwd, "node_modules", "@solidiom", "runtime", "src");
-  if (existsSync3(nmPath)) return nmPath;
+  const monoPath = join7(cwd, "..", "..", "packages", "runtime", "src");
+  if (existsSync8(monoPath)) return monoPath;
+  const nmPath = join7(cwd, "node_modules", "@solidiom", "runtime", "src");
+  if (existsSync8(nmPath)) return nmPath;
   return null;
 }
 
 // src/package-manager/detect.ts
-import { existsSync as existsSync4, readFileSync as readFileSync5 } from "fs";
-import { dirname as dirname2, join as join4 } from "path";
+import { existsSync as existsSync9, readFileSync as readFileSync9 } from "fs";
+import { dirname as dirname5, join as join8 } from "path";
 var LOCKFILE_TO_MANAGER = {
   "pnpm-lock.yaml": "pnpm",
   "package-lock.json": "npm",
@@ -703,11 +1416,11 @@ function findLockfile(from, maxDepth = 10) {
   let dir = from;
   for (let i = 0; i < maxDepth; i++) {
     for (const [file, manager] of Object.entries(LOCKFILE_TO_MANAGER)) {
-      if (existsSync4(join4(dir, file))) {
+      if (existsSync9(join8(dir, file))) {
         return { manager, dir };
       }
     }
-    const parent = dirname2(dir);
+    const parent = dirname5(dir);
     if (parent === dir) break;
     dir = parent;
   }
@@ -716,10 +1429,10 @@ function findLockfile(from, maxDepth = 10) {
 function findPackageManagerField(from, maxDepth = 10) {
   let dir = from;
   for (let i = 0; i < maxDepth; i++) {
-    const pkgPath = join4(dir, "package.json");
-    if (existsSync4(pkgPath)) {
+    const pkgPath = join8(dir, "package.json");
+    if (existsSync9(pkgPath)) {
       try {
-        const pkg = JSON.parse(readFileSync5(pkgPath, "utf8"));
+        const pkg = JSON.parse(readFileSync9(pkgPath, "utf8"));
         const field = pkg["packageManager"];
         if (typeof field === "string") {
           const match = field.match(/^(npm|pnpm|yarn|bun)@(\d+)/);
@@ -730,7 +1443,7 @@ function findPackageManagerField(from, maxDepth = 10) {
       } catch {
       }
     }
-    const parent = dirname2(dir);
+    const parent = dirname5(dir);
     if (parent === dir) break;
     dir = parent;
   }
@@ -844,25 +1557,25 @@ function runPackageManager(options) {
   if (dryRun) {
     return Promise.resolve({ code: 0, stdout: "", stderr: "", skipped: true });
   }
-  return new Promise((resolve) => {
+  return new Promise((resolve2) => {
     execFile(
       command.bin,
       command.args,
       { cwd, env, timeout: timeoutMs, maxBuffer: 10 * 1024 * 1024 },
       (error, stdout, stderr) => {
         if (error && typeof error.code === "string") {
-          resolve({ code: 127, stdout, stderr: stderr || String(error), skipped: false });
+          resolve2({ code: 127, stdout, stderr: stderr || String(error), skipped: false });
           return;
         }
         const code = error && typeof error.code === "number" ? error.code : error ? 1 : 0;
-        resolve({ code, stdout, stderr, skipped: false });
+        resolve2({ code, stdout, stderr, skipped: false });
       }
     );
   });
 }
 
 // src/commands/add.ts
-import pc3 from "picocolors";
+import pc4 from "picocolors";
 async function runAdd(options) {
   const plan = runPlan({
     primitive: options.primitive,
@@ -881,7 +1594,10 @@ async function runAdd(options) {
       primitive: options.primitive,
       cwd: options.cwd,
       plan,
-      dryRun: options.dryRun
+      dryRun: options.dryRun,
+      allowUnverified: options.allowUnverified,
+      force: options.force,
+      diff: options.diff
     });
     return { plan, installCommand: null, blocked: false, sourceResult };
   }
@@ -895,9 +1611,9 @@ async function runAdd(options) {
   }
   return { plan, installCommand, blocked: false };
 }
-var AddCommand = class extends Command3 {
+var AddCommand = class extends Command4 {
   static paths = [["add"]];
-  static usage = Command3.Usage({
+  static usage = Command4.Usage({
     description: "Add a primitive (package or source mode)",
     examples: [
       ["Add dialog as package", "solidiom add dialog"],
@@ -905,33 +1621,45 @@ var AddCommand = class extends Command3 {
       ["Dry run", "solidiom add select --dry-run"],
       ["Add a component deliverable", "solidiom add button --deliverable component"],
       ["Add with a specific styling profile", "solidiom add button --styling tailwind"],
-      ["Actually run the install with a specific package manager", "solidiom add dialog --install --package-manager yarn"]
+      ["Actually run the install with a specific package manager", "solidiom add dialog --install --package-manager yarn"],
+      ["Proceed with an unverified source install", "solidiom add dialog --mode source --allow-unverified"],
+      ["Force-overwrite locally modified files", "solidiom add button --deliverable component --force"],
+      ["Preview pending source-install changes", "solidiom add button --deliverable component --diff"]
     ]
   });
-  primitive = Option3.String({ required: true });
-  mode = Option3.String("--mode", { description: "Install mode (package or source)" });
-  registry = Option3.String("--registry", {
+  primitive = Option4.String({ required: true });
+  mode = Option4.String("--mode", { description: "Install mode (package or source)" });
+  registry = Option4.String("--registry", {
     description: "Custom registry URL for package resolution"
   });
-  noNetwork = Option3.Boolean("--no-network", false, {
+  noNetwork = Option4.Boolean("--no-network", false, {
     description: "Use only cached/local registry data (no network fetch)"
   });
-  deliverable = Option3.String("--deliverable", {
+  deliverable = Option4.String("--deliverable", {
     description: "Product-layer deliverable to add (primitive, component, block, template, theme)"
   });
-  styling = Option3.String("--styling", {
+  styling = Option4.String("--styling", {
     description: "Styling profile to add (css, tailwind, unocss)"
   });
-  packageManager = Option3.String("--package-manager", {
+  packageManager = Option4.String("--package-manager", {
     description: "Package manager to use (npm, pnpm, yarn, bun) \u2014 auto-detected if omitted"
   });
-  install = Option3.Boolean("--install", false, {
+  install = Option4.Boolean("--install", false, {
     description: "Actually run the install command instead of only printing it"
   });
-  dryRun = Option3.Boolean("--dry-run", false, {
+  allowUnverified = Option4.Boolean("--allow-unverified", false, {
+    description: "Proceed with a source install even if byte-level verification against the registry manifest fails"
+  });
+  force = Option4.Boolean("--force", false, {
+    description: "Overwrite files that were locally modified since their last source install"
+  });
+  diff = Option4.Boolean("--diff", false, {
+    description: "Print a unified diff of pending source-install changes and exit without writing"
+  });
+  dryRun = Option4.Boolean("--dry-run", false, {
     description: "Show what would be done without writing"
   });
-  json = Option3.Boolean("--json", false, { description: "Output as JSON" });
+  json = Option4.Boolean("--json", false, { description: "Output as JSON" });
   async execute() {
     const result = await runAdd({
       primitive: this.primitive,
@@ -943,16 +1671,19 @@ var AddCommand = class extends Command3 {
       styling: this.styling,
       packageManager: this.packageManager,
       install: this.install,
-      dryRun: this.dryRun
+      dryRun: this.dryRun,
+      allowUnverified: this.allowUnverified,
+      force: this.force,
+      diff: this.diff
     });
     if (this.json) {
       this.context.stdout.write(JSON.stringify(result, null, 2) + "\n");
       return result.installRun && result.installRun.code !== 0 ? result.installRun.code : 0;
     }
     if (result.blocked) {
-      this.context.stderr.write(pc3.red("Blocked by policy violations:\n"));
+      this.context.stderr.write(pc4.red("Blocked by policy violations:\n"));
       for (const v of result.plan.violations) {
-        this.context.stderr.write(pc3.red(`  \u2717 ${v}
+        this.context.stderr.write(pc4.red(`  \u2717 ${v}
 `));
       }
       return 1;
@@ -961,19 +1692,55 @@ var AddCommand = class extends Command3 {
       if (result.installRun.stdout) this.context.stdout.write(result.installRun.stdout);
       if (result.installRun.stderr) this.context.stderr.write(result.installRun.stderr);
       if (result.installRun.code !== 0) {
-        this.context.stderr.write(pc3.red(`
+        this.context.stderr.write(pc4.red(`
 \u2717 ${result.installCommand} exited with code ${result.installRun.code}
 `));
         return result.installRun.code;
       }
-      this.context.stdout.write(pc3.green(`
+      this.context.stdout.write(pc4.green(`
 \u2713 ${result.installCommand}
 `));
     } else if (result.installCommand) {
-      this.context.stdout.write(pc3.green(result.installCommand) + "\n");
+      this.context.stdout.write(pc4.green(result.installCommand) + "\n");
     } else if (result.sourceResult) {
       const sr = result.sourceResult;
-      this.context.stdout.write(pc3.green(`Installed ${sr.filesWritten.length} source files
+      if (sr.conflicts) {
+        const diffEntries = sr.conflicts.entries.filter(
+          (e) => e.classification === "modified-by-user" || e.classification === "overwrite"
+        );
+        if (this.diff) {
+          this.context.stdout.write(pc4.bold("Pending source-install changes:\n\n"));
+          for (const entry of diffEntries) {
+            this.context.stdout.write(pc4.dim(`  ${entry.path} (${entry.classification})
+`));
+            if (entry.diff) this.context.stdout.write(entry.diff + "\n");
+          }
+          return 0;
+        }
+        if (sr.conflicts.hasBlockingConflicts) {
+          this.context.stderr.write(pc4.red("Blocked \u2014 locally modified files would be overwritten:\n"));
+          for (const entry of sr.conflicts.entries) {
+            if (entry.classification !== "modified-by-user") continue;
+            this.context.stderr.write(pc4.red(`  \u2717 ${entry.path}
+`));
+            if (entry.diff) this.context.stderr.write(pc4.dim(entry.diff));
+          }
+          this.context.stderr.write(
+            pc4.yellow(
+              `
+Use --force to overwrite locally modified files, or run \`solidiom diff ${this.primitive}\` to review changes first.
+`
+            )
+          );
+          return 1;
+        }
+      }
+      if (this.allowUnverified && !sr.verified && sr.filesWritten.length > 0) {
+        this.context.stdout.write(
+          pc4.red("\u26A0 Installed without verification \u2014 provenance recorded as 'unverified'\n")
+        );
+      }
+      this.context.stdout.write(pc4.green(`Installed ${sr.filesWritten.length} source files
 `));
       for (const f of sr.filesWritten) {
         this.context.stdout.write(`  ${f}
@@ -984,19 +1751,624 @@ var AddCommand = class extends Command3 {
   }
 };
 
-// src/commands/inspect.ts
-import { Command as Command4, Option as Option4 } from "clipanion";
-import { existsSync as existsSync5 } from "fs";
-import { join as join5 } from "path";
-import pc4 from "picocolors";
-function resolveManifestPath(primitive, cwd, registryOverride) {
+// src/commands/create.ts
+import { Command as Command5, Option as Option5 } from "clipanion";
+import { existsSync as existsSync11, mkdirSync as mkdirSync7, readdirSync as readdirSync3, rmSync as rmSync2 } from "fs";
+import { homedir } from "os";
+import { dirname as dirname7, join as join11, resolve, sep } from "path";
+import * as clack from "@clack/prompts";
+
+// src/create/materialize.ts
+import { existsSync as existsSync10, mkdirSync as mkdirSync5, readFileSync as readFileSync10, readdirSync as readdirSync2, statSync as statSync2, writeFileSync as writeFileSync5 } from "fs";
+import { dirname as dirname6, join as join9, relative as relative2 } from "path";
+import { fileURLToPath } from "url";
+var EXCLUDED_FILES = /* @__PURE__ */ new Set(["template.json", ".DS_Store", "routeTree.gen.ts"]);
+var EXCLUDED_DIRS = /* @__PURE__ */ new Set(["node_modules", "dist", ".git", ".turbo", ".nx"]);
+var LOCKFILE_NAMES = /* @__PURE__ */ new Set([
+  "pnpm-lock.yaml",
+  "package-lock.json",
+  "yarn.lock",
+  "bun.lockb",
+  "bun.lock"
+]);
+var ALLOWED_VARIABLES = /* @__PURE__ */ new Set(["projectName"]);
+function resolveTemplateSource(templateName) {
+  const moduleDir = dirname6(fileURLToPath(import.meta.url));
   const candidates = [
-    registryOverride ? join5(registryOverride, `${primitive}.json`) : null,
-    process.env["SOLIDIOM_REGISTRY_PATH"] ? join5(process.env["SOLIDIOM_REGISTRY_PATH"], `${primitive}.json`) : null,
-    join5(cwd, "..", "..", "registry", `${primitive}.json`),
-    join5(cwd, "node_modules", "@solidiom", "registry", `${primitive}.json`)
+    // Published layout: templates copied alongside this file by prepack.
+    join9(moduleDir, "templates", templateName),
+    // Published layout variant: templates copied as a sibling of dist/.
+    join9(moduleDir, "..", "templates", templateName),
+    // Monorepo-relative dev/test fallback, bundled-dist depth:
+    // packages/cli/dist/index.js -> ../../../templates/<name>
+    join9(moduleDir, "..", "..", "..", "templates", templateName),
+    // Monorepo-relative dev/test fallback, unbundled-src depth:
+    // packages/cli/src/create/materialize.ts -> ../../../../templates/<name>
+    join9(moduleDir, "..", "..", "..", "..", "templates", templateName)
+  ];
+  for (const candidate of candidates) {
+    if (existsSync10(join9(candidate, "template.json"))) {
+      return candidate;
+    }
+  }
+  return null;
+}
+function collectFiles(dir) {
+  const results = [];
+  function walk(current) {
+    for (const entry of readdirSync2(current)) {
+      const full = join9(current, entry);
+      if (statSync2(full).isDirectory()) {
+        if (EXCLUDED_DIRS.has(entry)) continue;
+        walk(full);
+      } else {
+        results.push(relative2(dir, full).split("\\").join("/"));
+      }
+    }
+  }
+  if (existsSync10(dir)) walk(dir);
+  return results;
+}
+function substitute(content, variables) {
+  return content.replace(/\{\{(\w+)\}\}/g, (full, name) => {
+    if (ALLOWED_VARIABLES.has(name) && Object.prototype.hasOwnProperty.call(variables, name)) {
+      return variables[name];
+    }
+    return full;
+  });
+}
+function resolveMonorepoPackageVersion(packageName, searchFrom) {
+  const shortName = packageName.replace(/^@solidiom\//, "");
+  let dir = searchFrom;
+  for (let i = 0; i < 10; i++) {
+    const candidate = join9(dir, "packages", shortName, "package.json");
+    if (existsSync10(candidate)) {
+      try {
+        const data = JSON.parse(readFileSync10(candidate, "utf8"));
+        if (data.version) return data.version;
+      } catch {
+      }
+    }
+    const parent = dirname6(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return null;
+}
+function readPnpmWorkspaceMaps(searchFrom) {
+  let dir = searchFrom;
+  for (let i = 0; i < 10; i++) {
+    const candidate = join9(dir, "pnpm-workspace.yaml");
+    if (existsSync10(candidate)) {
+      try {
+        const content = readFileSync10(candidate, "utf8");
+        return {
+          overrides: readYamlFlatMap(content, "overrides"),
+          catalog: readYamlFlatMap(content, "catalog")
+        };
+      } catch {
+        return null;
+      }
+    }
+    const parent = dirname6(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return null;
+}
+function readYamlFlatMap(content, key) {
+  const lines = content.split("\n");
+  const map = {};
+  const start = lines.findIndex((l) => new RegExp(`^${key}:\\s*$`).test(l));
+  if (start === -1) return map;
+  for (let i = start + 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (/^\S/.test(line)) break;
+    const match = line.match(/^\s*["']?([\w@/.-]+)["']?:\s*["']?([^"'\s]+)["']?\s*$/);
+    if (match) map[match[1]] = match[2];
+  }
+  return map;
+}
+function resolveCatalogVersion(packageName, searchFrom) {
+  const maps = readPnpmWorkspaceMaps(searchFrom);
+  if (!maps) return null;
+  return maps.overrides[packageName] ?? maps.catalog[packageName] ?? null;
+}
+function applyDependencyOverrides(data, overrides) {
+  if (Object.keys(overrides).length === 0) return false;
+  let changed = false;
+  const fillGaps = (existing) => {
+    const declared = existing && typeof existing === "object" ? existing : {};
+    return { ...overrides, ...declared };
+  };
+  const setIfChanged = (target, key) => {
+    const next = fillGaps(target[key]);
+    if (JSON.stringify(target[key]) !== JSON.stringify(next)) {
+      target[key] = next;
+      changed = true;
+    }
+  };
+  setIfChanged(data, "overrides");
+  setIfChanged(data, "resolutions");
+  const pnpmSection = data["pnpm"] && typeof data["pnpm"] === "object" ? data["pnpm"] : {};
+  setIfChanged(pnpmSection, "overrides");
+  data["pnpm"] = pnpmSection;
+  return changed;
+}
+function rewritePackageJsonForStandalone(packageJsonContent, searchFrom, warnings) {
+  let data;
+  try {
+    data = JSON.parse(packageJsonContent);
+  } catch {
+    return packageJsonContent;
+  }
+  const depFields = ["dependencies", "devDependencies", "peerDependencies"];
+  let changed = false;
+  for (const field of depFields) {
+    const deps = data[field];
+    if (!deps) continue;
+    for (const [name, spec] of Object.entries(deps)) {
+      if (spec.startsWith("workspace:")) {
+        const resolved = resolveMonorepoPackageVersion(name, searchFrom);
+        if (resolved) {
+          deps[name] = resolved;
+          changed = true;
+        } else {
+          warnings.push(
+            `Could not resolve a real version for "${name}" (${spec}) \u2014 no monorepo packages/ directory found from the template source. Left as "${spec}"; this must be resolved before the generated project can install cleanly outside this monorepo.`
+          );
+        }
+        continue;
+      }
+      if (spec.startsWith("catalog:")) {
+        const resolved = resolveCatalogVersion(name, searchFrom);
+        if (resolved) {
+          deps[name] = resolved;
+          changed = true;
+        } else {
+          warnings.push(
+            `Could not resolve a real version for "${name}" (${spec}) \u2014 no pnpm-workspace.yaml catalog entry found from the template source. Left as "${spec}"; this specifier is not understood by npm/yarn/bun and must be resolved before the generated project can install under any manager other than pnpm.`
+          );
+        }
+      }
+    }
+  }
+  const workspaceMaps = readPnpmWorkspaceMaps(searchFrom);
+  if (workspaceMaps && applyDependencyOverrides(data, workspaceMaps.overrides)) {
+    changed = true;
+  }
+  return changed ? JSON.stringify(data, null, 2) + "\n" : packageJsonContent;
+}
+function stripMonorepoTsconfig(tsconfigContent) {
+  let data;
+  try {
+    data = JSON.parse(tsconfigContent);
+  } catch {
+    return tsconfigContent;
+  }
+  const extendsValue = data["extends"];
+  const isMonorepoRelativeExtends = typeof extendsValue === "string" && (extendsValue.startsWith("../") || extendsValue.startsWith("..\\"));
+  if (isMonorepoRelativeExtends) {
+    delete data["extends"];
+    const existingOptions = data["compilerOptions"] ?? {};
+    data["compilerOptions"] = {
+      target: "ES2022",
+      module: "ESNext",
+      moduleResolution: "bundler",
+      lib: ["ES2022", "DOM", "DOM.Iterable"],
+      strict: true,
+      esModuleInterop: true,
+      skipLibCheck: true,
+      forceConsistentCasingInFileNames: true,
+      resolveJsonModule: true,
+      isolatedModules: true,
+      noEmit: true,
+      ...existingOptions
+    };
+  }
+  if (Array.isArray(data["references"])) {
+    data["references"] = data["references"].filter(
+      (ref) => typeof ref.path !== "string" || !ref.path.startsWith("..")
+    );
+    if (data["references"].length === 0) {
+      delete data["references"];
+    }
+  }
+  return JSON.stringify(data, null, 2) + "\n";
+}
+function materialize(options) {
+  const { templateName, destination, projectName, variables = {}, templateSourceDir } = options;
+  const sourceDir = templateSourceDir ?? resolveTemplateSource(templateName);
+  if (!sourceDir || !existsSync10(join9(sourceDir, "template.json"))) {
+    return {
+      filesWritten: [],
+      errors: [
+        `Could not resolve source directory for template "${templateName}" \u2014 checked the published-CLI layout and the monorepo-relative dev fallback.`
+      ]
+    };
+  }
+  const allVariables = { projectName, ...variables };
+  const relativeFiles = collectFiles(sourceDir);
+  const filesWritten = [];
+  const errors = [];
+  const warnings = [];
+  for (const relPath of relativeFiles) {
+    const baseName = relPath.split("/").pop() ?? relPath;
+    if (EXCLUDED_FILES.has(baseName)) continue;
+    if (LOCKFILE_NAMES.has(baseName)) {
+      errors.push(
+        `Template "${templateName}" contains a foreign lockfile ("${relPath}") \u2014 refusing to copy it. Templates must not ship a lockfile; the install step produces the correct one for the chosen package manager.`
+      );
+      continue;
+    }
+    const sourcePath = join9(sourceDir, relPath);
+    const targetPath = join9(destination, relPath);
+    const rawContent = readFileSync10(sourcePath);
+    const isLikelyText = /\.(json|ts|tsx|js|jsx|html|css|md|mdx|txt|yaml|yml)$/.test(baseName);
+    let outputBuffer = rawContent;
+    if (isLikelyText) {
+      let text2 = rawContent.toString("utf8");
+      text2 = substitute(text2, allVariables);
+      if (baseName === "package.json") {
+        text2 = rewritePackageJsonForStandalone(text2, sourceDir, warnings);
+      }
+      if (baseName === "tsconfig.json") {
+        text2 = stripMonorepoTsconfig(text2);
+      }
+      outputBuffer = text2;
+    }
+    mkdirSync5(dirname6(targetPath), { recursive: true });
+    writeFileSync5(targetPath, outputBuffer);
+    filesWritten.push(relative2(destination, targetPath).split("\\").join("/"));
+  }
+  const allErrors = [...errors, ...warnings];
+  return {
+    filesWritten,
+    ...allErrors.length > 0 ? { errors: allErrors } : {}
+  };
+}
+
+// src/create/config-gen.ts
+import { mkdirSync as mkdirSync6, writeFileSync as writeFileSync6 } from "fs";
+import { join as join10 } from "path";
+function generateProjectConfig(options) {
+  const { destination, styling } = options;
+  const solidiomDir = join10(destination, ".solidiom");
+  const configPath = join10(solidiomDir, "config.json");
+  const config = {
+    ...ConfigSchema.parse({}),
+    ...styling ? { stylingProfile: styling } : {}
+  };
+  mkdirSync6(solidiomDir, { recursive: true });
+  writeFileSync6(configPath, JSON.stringify(config, null, 2) + "\n");
+  return { filesWritten: [join10(".solidiom", "config.json")] };
+}
+
+// src/commands/create.ts
+import pc5 from "picocolors";
+var STYLING_PROFILES2 = ["css", "tailwind", "unocss"];
+function createCleanupJournal() {
+  const created = [];
+  return {
+    /** Records a directory this run created, in creation order. */
+    record(path) {
+      created.push(path);
+    },
+    /** Returns a snapshot of recorded paths (for inspection/testing). */
+    entries() {
+      return [...created];
+    },
+    /** Removes every recorded path in reverse (most-recently-created-first) order. */
+    cleanup() {
+      for (let i = created.length - 1; i >= 0; i--) {
+        const path = created[i];
+        rmSync2(path, { recursive: true, force: true });
+      }
+      created.length = 0;
+    }
+  };
+}
+function isValidPackageName(name) {
+  if (typeof name !== "string" || name.length === 0) return false;
+  if (name.length > 214) return false;
+  if (name !== name.toLowerCase()) return false;
+  let unscoped = name;
+  if (name.startsWith("@")) {
+    const slashIndex = name.indexOf("/");
+    if (slashIndex === -1) return false;
+    const scope = name.slice(1, slashIndex);
+    unscoped = name.slice(slashIndex + 1);
+    if (scope.length === 0) return false;
+    if (!/^[a-z0-9-._~]+$/.test(scope)) return false;
+    if (scope.startsWith(".") || scope.startsWith("_")) return false;
+  }
+  if (unscoped.length === 0) return false;
+  if (!/^[a-z0-9-._~]+$/.test(unscoped)) return false;
+  if (unscoped.startsWith(".") || unscoped.startsWith("_")) return false;
+  return true;
+}
+function findMonorepoRoot(from, maxDepth = 20) {
+  let dir = from;
+  for (let i = 0; i < maxDepth; i++) {
+    if (existsSync11(join11(dir, "pnpm-workspace.yaml")) || existsSync11(join11(dir, ".git"))) {
+      return dir;
+    }
+    const parent = dirname7(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return null;
+}
+function isInside(parent, child) {
+  if (child === parent) return true;
+  const parentWithSep = parent.endsWith(sep) ? parent : parent + sep;
+  return child.startsWith(parentWithSep);
+}
+function validateDestination(cwd, name, force) {
+  const errors = [];
+  const destination = resolve(cwd, name);
+  const resolvedCwd = resolve(cwd);
+  const home = resolve(homedir());
+  const root = resolve("/");
+  const monorepoRoot = findMonorepoRoot(cwd);
+  if (!isInside(resolvedCwd, destination)) {
+    errors.push(
+      `Destination "${destination}" escapes the current working directory "${resolvedCwd}" \u2014 refusing to write outside cwd.`
+    );
+  }
+  if (destination === home) {
+    errors.push(`Destination "${destination}" is the user's home directory \u2014 refusing to scaffold there.`);
+  }
+  if (destination === root) {
+    errors.push(`Destination "${destination}" is the filesystem root \u2014 refusing to scaffold there.`);
+  }
+  if (monorepoRoot && destination === resolve(monorepoRoot)) {
+    errors.push(`Destination "${destination}" is the monorepo root \u2014 refusing to scaffold there.`);
+  }
+  if (existsSync11(destination)) {
+    try {
+      const entries = readdirSync3(destination);
+      if (entries.length > 0 && !force) {
+        errors.push(
+          `Destination "${destination}" already exists and is not empty \u2014 pass --force to scaffold into it anyway.`
+        );
+      }
+    } catch {
+      errors.push(`Destination "${destination}" exists but could not be read.`);
+    }
+  }
+  return { destination, errors };
+}
+async function promptForMissing(options) {
+  const isTTY = options.isTTY ?? process.stdin.isTTY ?? false;
+  let template = options.template;
+  let name = options.name;
+  let styling = options.styling;
+  if (options.yes || !isTTY) {
+    if (!template || !name) return null;
+    return { template, name, styling };
+  }
+  clack.intro(pc5.bold("solidiom create"));
+  if (!template) {
+    const result = await clack.text({
+      message: "Which template would you like to use?"
+    });
+    if (clack.isCancel(result)) return "cancelled";
+    template = result;
+  }
+  if (!name) {
+    const result = await clack.text({
+      message: "What is the name of your project?"
+    });
+    if (clack.isCancel(result)) return "cancelled";
+    name = result;
+  }
+  if (!styling) {
+    const result = await clack.select({
+      message: "Which styling profile would you like?",
+      options: STYLING_PROFILES2.map((value) => ({ value, label: value }))
+    });
+    if (clack.isCancel(result)) return "cancelled";
+    styling = result;
+  }
+  clack.outro(pc5.green("Configuration collected."));
+  return { template, name, styling };
+}
+async function runCreate(options) {
+  const { cwd, yes = false, force = false, install: install2 = true } = options;
+  const journal = createCleanupJournal();
+  if (yes) {
+    const missing = [];
+    if (!options.template) missing.push("--template");
+    if (!options.name) missing.push("--name");
+    if (missing.length > 0) {
+      return {
+        destination: resolve(cwd, options.name ?? ""),
+        created: false,
+        errors: [`--yes was passed but required flag(s) missing: ${missing.join(", ")}`]
+      };
+    }
+  }
+  if (options.packageManager && !isPackageManagerName(options.packageManager)) {
+    return {
+      destination: resolve(cwd, options.name ?? ""),
+      created: false,
+      errors: [
+        `Unknown package manager "${options.packageManager}" \u2014 expected one of: npm, pnpm, yarn, bun`
+      ]
+    };
+  }
+  if (options.styling && !STYLING_PROFILES2.includes(options.styling)) {
+    return {
+      destination: resolve(cwd, options.name ?? ""),
+      created: false,
+      errors: [`Unknown styling profile "${options.styling}" \u2014 expected one of: ${STYLING_PROFILES2.join(", ")}`]
+    };
+  }
+  const prompted = await promptForMissing(options);
+  if (prompted === "cancelled") {
+    journal.cleanup();
+    return { destination: resolve(cwd, options.name ?? ""), created: false, cancelled: true };
+  }
+  if (!prompted) {
+    return {
+      destination: options.name ? resolve(cwd, options.name) : cwd,
+      created: false,
+      errors: ["Missing required value(s): --template and/or --name (no TTY available to prompt)."]
+    };
+  }
+  const { template, name } = prompted;
+  const nameErrors = [];
+  if (!isValidPackageName(name)) {
+    nameErrors.push(
+      `"${name}" is not a valid npm package name \u2014 must be lowercase, may be scoped (@scope/name), use only [a-z0-9-._~], not start with "." or "_", and be at most 214 characters.`
+    );
+  }
+  const { destination, errors: destinationErrors } = validateDestination(cwd, name, force);
+  const errors = [...destinationErrors, ...nameErrors];
+  if (errors.length > 0) {
+    return { destination, created: false, errors };
+  }
+  let sigintReceived = false;
+  const onSigint = () => {
+    sigintReceived = true;
+    journal.cleanup();
+  };
+  process.once("SIGINT", onSigint);
+  try {
+    const destinationExisted = existsSync11(destination);
+    if (!destinationExisted) {
+      mkdirSync7(destination, { recursive: true });
+      journal.record(destination);
+    }
+    if (sigintReceived) {
+      return { destination, created: false, cancelled: true };
+    }
+    const materializeResult = materialize({
+      templateName: template,
+      destination,
+      projectName: name,
+      ...options.templatesDir ? { templateSourceDir: join11(options.templatesDir, template) } : {}
+    });
+    if (materializeResult.errors && materializeResult.errors.length > 0) {
+      journal.cleanup();
+      return { destination, created: false, errors: materializeResult.errors };
+    }
+    if (sigintReceived) {
+      journal.cleanup();
+      return { destination, created: false, cancelled: true };
+    }
+    generateProjectConfig({
+      destination,
+      projectName: name,
+      ...prompted.styling ? { styling: prompted.styling } : {},
+      ...options.packageManager ? { packageManager: options.packageManager } : {}
+    });
+    if (sigintReceived) {
+      journal.cleanup();
+      return { destination, created: false, cancelled: true };
+    }
+    if (install2) {
+      const detected = detectPackageManager({
+        cwd: destination,
+        ...options.packageManager ? { override: options.packageManager } : {}
+      });
+      const installResult = await runPackageManager({
+        command: install(detected),
+        cwd: destination
+      });
+      if (installResult.code !== 0) {
+        journal.cleanup();
+        return {
+          destination,
+          created: false,
+          errors: [
+            `Dependency install failed (exit code ${installResult.code}) \u2014 rolled back scaffolded files.`,
+            ...installResult.stderr ? [installResult.stderr.trim()] : []
+          ]
+        };
+      }
+    }
+    return { destination, created: true };
+  } finally {
+    process.removeListener("SIGINT", onSigint);
+  }
+}
+var CreateCommand = class extends Command5 {
+  static paths = [["create"]];
+  static usage = Command5.Usage({
+    description: "Scaffold a new project from a template",
+    examples: [
+      ["Create a project non-interactively", "solidiom create my-app --template vite-solid-router --yes"],
+      ["Create with a specific styling profile", "solidiom create my-app --template vite-solid-router --styling tailwind --yes"],
+      ["Create without running the install step", "solidiom create my-app --template vite-solid-router --yes --no-install"],
+      ["Force scaffolding into a non-empty directory", "solidiom create my-app --template vite-solid-router --yes --force"]
+    ]
+  });
+  name = Option5.String({ required: true });
+  template = Option5.String("--template", { description: "Template to scaffold from" });
+  packageManager = Option5.String("--package-manager", {
+    description: "Package manager to use (npm, pnpm, yarn, bun) \u2014 auto-detected if omitted"
+  });
+  styling = Option5.String("--styling", {
+    description: "Styling profile to use (css, tailwind, unocss)"
+  });
+  noInstall = Option5.Boolean("--no-install", false, {
+    description: "Skip running the package manager install step"
+  });
+  yes = Option5.Boolean("--yes", false, {
+    description: "Skip all prompts; fail explicitly if a required value is missing"
+  });
+  force = Option5.Boolean("--force", false, {
+    description: "Allow scaffolding into a non-empty destination directory"
+  });
+  json = Option5.Boolean("--json", false, { description: "Output as JSON" });
+  async execute() {
+    const result = await runCreate({
+      cwd: process.cwd(),
+      template: this.template,
+      name: this.name,
+      packageManager: this.packageManager,
+      styling: this.styling,
+      install: !this.noInstall,
+      yes: this.yes,
+      force: this.force
+    });
+    if (this.json) {
+      this.context.stdout.write(JSON.stringify(result, null, 2) + "\n");
+      return result.created ? 0 : 1;
+    }
+    if (result.cancelled) {
+      this.context.stdout.write(pc5.yellow("Create cancelled \u2014 no files left behind.\n"));
+      return 1;
+    }
+    if (result.errors && result.errors.length > 0) {
+      this.context.stderr.write(pc5.red("Cannot create project:\n"));
+      for (const e of result.errors) {
+        this.context.stderr.write(pc5.red(`  \u2717 ${e}
+`));
+      }
+      return 1;
+    }
+    this.context.stdout.write(pc5.green(`Created ${result.destination}
+`));
+    return 0;
+  }
+};
+
+// src/commands/inspect.ts
+import { Command as Command6, Option as Option6 } from "clipanion";
+import { existsSync as existsSync12 } from "fs";
+import { join as join12 } from "path";
+import pc6 from "picocolors";
+function resolveManifestPath2(primitive, cwd, registryOverride) {
+  const candidates = [
+    registryOverride ? join12(registryOverride, `${primitive}.json`) : null,
+    process.env["SOLIDIOM_REGISTRY_PATH"] ? join12(process.env["SOLIDIOM_REGISTRY_PATH"], `${primitive}.json`) : null,
+    join12(cwd, "..", "..", "registry", `${primitive}.json`),
+    join12(cwd, "node_modules", "@solidiom", "registry", `${primitive}.json`)
   ].filter(Boolean);
-  return candidates.find((path) => existsSync5(path)) ?? null;
+  return candidates.find((path) => existsSync12(path)) ?? null;
 }
 function runInspect(options) {
   const { cwd, subcommand, primitive, registry: registryOverride } = options;
@@ -1008,7 +2380,7 @@ function runInspect(options) {
     if (!primitive) {
       return { primitive, mode: subcommand, entries };
     }
-    const manifestPath = resolveManifestPath(primitive, cwd, registryOverride);
+    const manifestPath = resolveManifestPath2(primitive, cwd, registryOverride);
     if (!manifestPath) {
       return { primitive, mode: subcommand, entries };
     }
@@ -1022,23 +2394,24 @@ function runInspect(options) {
   }
   return { primitive, mode: subcommand, entries };
 }
-var InspectCommand = class extends Command4 {
+var InspectCommand = class extends Command6 {
   static paths = [["inspect"]];
-  static usage = Command4.Usage({
+  static usage = Command6.Usage({
     description: "Inspect installed primitive source, manifest, or provenance",
     examples: [
       ["Show installed source files", "solidiom inspect source"],
       ["Show primitive manifest", "solidiom inspect manifest dialog"],
       ["Show file provenance", "solidiom inspect provenance"],
+      ["Show provenance for one primitive", "solidiom inspect provenance dialog"],
       ["List all installed files", "solidiom inspect files"]
     ]
   });
-  subcommand = Option4.String({ required: true });
-  primitive = Option4.String({ required: false });
-  registry = Option4.String("--registry", {
+  subcommand = Option6.String({ required: true });
+  primitive = Option6.String({ required: false });
+  registry = Option6.String("--registry", {
     description: "Custom registry URL for manifest resolution"
   });
-  json = Option4.Boolean("--json", false, { description: "Output as JSON" });
+  json = Option6.Boolean("--json", false, { description: "Output as JSON" });
   async execute() {
     const result = runInspect({
       cwd: process.cwd(),
@@ -1056,9 +2429,9 @@ var InspectCommand = class extends Command4 {
         if (result.entries.length === 0) {
           this.context.stdout.write("No source-installed primitives found.\n");
         } else {
-          this.context.stdout.write(pc4.bold("Installed source files:\n"));
+          this.context.stdout.write(pc6.bold("Installed source files:\n"));
           for (const e of result.entries) {
-            const status = e.detached ? pc4.yellow(" [detached]") : "";
+            const status = e.detached ? pc6.yellow(" [detached]") : "";
             this.context.stdout.write(`  ${e.path} (${e.primitive}@${e.version})${status}
 `);
           }
@@ -1067,23 +2440,23 @@ var InspectCommand = class extends Command4 {
       case "manifest":
         if (result.manifestError) {
           this.context.stderr.write(
-            pc4.red(`Manifest for ${this.primitive} failed schema verification:
+            pc6.red(`Manifest for ${this.primitive} failed schema verification:
 `)
           );
-          this.context.stderr.write(pc4.red(`  \u2717 ${result.manifestError}
+          this.context.stderr.write(pc6.red(`  \u2717 ${result.manifestError}
 `));
           return 1;
         }
         if (result.manifest) {
           this.context.stdout.write(JSON.stringify(result.manifest, null, 2) + "\n");
         } else {
-          this.context.stderr.write(pc4.red(`No manifest found for ${this.primitive}
+          this.context.stderr.write(pc6.red(`No manifest found for ${this.primitive}
 `));
           return 1;
         }
         break;
       case "explain":
-        this.context.stdout.write(pc4.bold(`Primitive: ${this.primitive ?? "(all)"}
+        this.context.stdout.write(pc6.bold(`Primitive: ${this.primitive ?? "(all)"}
 `));
         this.context.stdout.write(`Mode: source
 `);
@@ -1093,7 +2466,7 @@ var InspectCommand = class extends Command4 {
 `);
         if (result.manifestError) {
           this.context.stderr.write(
-            pc4.red(`
+            pc6.red(`
 Manifest failed schema verification: ${result.manifestError}
 `)
           );
@@ -1119,7 +2492,15 @@ Deliverables: ${m.deliverables.join(", ")}
         }
         break;
       case "provenance":
+        if (result.entries.length === 0) {
+          this.context.stdout.write(
+            this.primitive ? `No installed files found for primitive "${this.primitive}".
+` : "No source-installed primitives found.\n"
+          );
+          break;
+        }
         for (const e of result.entries) {
+          const provenanceLabel = e.provenance === "unverified" ? pc6.yellow(e.provenance) : pc6.green(e.provenance);
           this.context.stdout.write(`${e.path}
 `);
           this.context.stdout.write(`  primitive: ${e.primitive}
@@ -1128,8 +2509,28 @@ Deliverables: ${m.deliverables.join(", ")}
 `);
           this.context.stdout.write(`  digest: ${e.digest.slice(0, 12)}\u2026
 `);
+          this.context.stdout.write(`  manifestFilesHash: ${e.manifestFilesHash || "(none)"}
+`);
+          if (e.signatureKeyId) {
+            this.context.stdout.write(`  signatureKeyId: ${e.signatureKeyId}
+`);
+          }
+          this.context.stdout.write(`  verifiedAt: ${e.verifiedAt || "(unknown)"}
+`);
+          this.context.stdout.write(`  provenance: ${provenanceLabel}
+`);
           this.context.stdout.write(`  detached: ${e.detached ?? false}
 `);
+        }
+        {
+          const unverifiedCount = result.entries.filter((e) => e.provenance === "unverified").length;
+          if (unverifiedCount > 0) {
+            this.context.stdout.write(
+              pc6.yellow(`
+\u26A0 ${unverifiedCount} entr${unverifiedCount === 1 ? "y" : "ies"} recorded as unverified
+`)
+            );
+          }
         }
         break;
       default:
@@ -1143,21 +2544,21 @@ Deliverables: ${m.deliverables.join(", ")}
 };
 
 // src/commands/diff.ts
-import { Command as Command5, Option as Option5 } from "clipanion";
-import { existsSync as existsSync6, readFileSync as readFileSync6 } from "fs";
-import { join as join6 } from "path";
-import pc5 from "picocolors";
+import { Command as Command7, Option as Option7 } from "clipanion";
+import { existsSync as existsSync13, readFileSync as readFileSync11 } from "fs";
+import { join as join13 } from "path";
+import pc7 from "picocolors";
 function runDiff(options) {
   const { cwd, primitive } = options;
   const lock = readLock(cwd);
   const entries = [];
   for (const [path, lockEntry] of Object.entries(lock.installed)) {
     if (primitive && lockEntry.primitive !== primitive) continue;
-    const fullPath = join6(cwd, path);
-    if (!existsSync6(fullPath)) {
+    const fullPath = join13(cwd, path);
+    if (!existsSync13(fullPath)) {
       entries.push({ path, primitive: lockEntry.primitive, status: "deleted" });
     } else {
-      const currentContent = readFileSync6(fullPath, "utf8");
+      const currentContent = readFileSync11(fullPath, "utf8");
       const currentDigest = computeDigest(currentContent);
       const status = currentDigest === lockEntry.digest ? "unchanged" : "modified";
       entries.push({ path, primitive: lockEntry.primitive, status });
@@ -1165,17 +2566,17 @@ function runDiff(options) {
   }
   return { entries, hasChanges: entries.some((e) => e.status !== "unchanged") };
 }
-var DiffCommand = class extends Command5 {
+var DiffCommand = class extends Command7 {
   static paths = [["diff"]];
-  static usage = Command5.Usage({
+  static usage = Command7.Usage({
     description: "Show changes between installed source and lockfile digests",
     examples: [
       ["Diff all installed primitives", "solidiom diff"],
       ["Diff specific primitive", "solidiom diff --primitive dialog"]
     ]
   });
-  primitive = Option5.String("--primitive", { description: "Filter by primitive name" });
-  json = Option5.Boolean("--json", false, { description: "Output as JSON" });
+  primitive = Option7.String("--primitive", { description: "Filter by primitive name" });
+  json = Option7.Boolean("--json", false, { description: "Output as JSON" });
   async execute() {
     const result = runDiff({ cwd: process.cwd(), primitive: this.primitive });
     if (this.json) {
@@ -1183,21 +2584,21 @@ var DiffCommand = class extends Command5 {
       return 0;
     }
     if (!result.hasChanges) {
-      this.context.stdout.write(pc5.green("No local modifications.\n"));
+      this.context.stdout.write(pc7.green("No local modifications.\n"));
       return 0;
     }
     for (const entry of result.entries) {
       switch (entry.status) {
         case "modified":
-          this.context.stdout.write(pc5.yellow(`  M ${entry.path}
+          this.context.stdout.write(pc7.yellow(`  M ${entry.path}
 `));
           break;
         case "deleted":
-          this.context.stdout.write(pc5.red(`  D ${entry.path}
+          this.context.stdout.write(pc7.red(`  D ${entry.path}
 `));
           break;
         case "new":
-          this.context.stdout.write(pc5.green(`  A ${entry.path}
+          this.context.stdout.write(pc7.green(`  A ${entry.path}
 `));
           break;
       }
@@ -1207,8 +2608,8 @@ var DiffCommand = class extends Command5 {
 };
 
 // src/commands/detach.ts
-import { Command as Command6, Option as Option6 } from "clipanion";
-import pc6 from "picocolors";
+import { Command as Command8, Option as Option8 } from "clipanion";
+import pc8 from "picocolors";
 function runDetach(options) {
   const { cwd, primitive } = options;
   const lock = readLock(cwd);
@@ -1228,14 +2629,14 @@ function runDetach(options) {
   }
   return { detached, alreadyDetached };
 }
-var DetachCommand = class extends Command6 {
+var DetachCommand = class extends Command8 {
   static paths = [["detach"]];
-  static usage = Command6.Usage({
+  static usage = Command8.Usage({
     description: "Detach a source-installed primitive from upstream updates",
     examples: [["Detach dialog", "solidiom detach dialog"]]
   });
-  primitive = Option6.String({ required: true });
-  json = Option6.Boolean("--json", false, { description: "Output as JSON" });
+  primitive = Option8.String({ required: true });
+  json = Option8.Boolean("--json", false, { description: "Output as JSON" });
   async execute() {
     const result = runDetach({ cwd: process.cwd(), primitive: this.primitive });
     if (this.json) {
@@ -1244,13 +2645,13 @@ var DetachCommand = class extends Command6 {
     }
     if (result.detached.length === 0 && result.alreadyDetached.length === 0) {
       this.context.stderr.write(
-        pc6.yellow(`No source-installed files found for ${this.primitive}
+        pc8.yellow(`No source-installed files found for ${this.primitive}
 `)
       );
       return 1;
     }
     for (const path of result.detached) {
-      this.context.stdout.write(pc6.green(`  Detached: ${path}
+      this.context.stdout.write(pc8.green(`  Detached: ${path}
 `));
     }
     for (const path of result.alreadyDetached) {
@@ -1258,7 +2659,7 @@ var DetachCommand = class extends Command6 {
 `);
     }
     this.context.stdout.write(
-      pc6.bold(
+      pc8.bold(
         `
 ${result.detached.length} files detached. They will be skipped by 'solidiom update'.
 `
@@ -1269,9 +2670,9 @@ ${result.detached.length} files detached. They will be skipped by 'solidiom upda
 };
 
 // src/commands/update.ts
-import { Command as Command7, Option as Option7 } from "clipanion";
-import { existsSync as existsSync7, readFileSync as readFileSync7, writeFileSync as writeFileSync3, mkdirSync as mkdirSync3 } from "fs";
-import { join as join7, dirname as dirname3, extname } from "path";
+import { Command as Command9, Option as Option9 } from "clipanion";
+import { existsSync as existsSync14, readFileSync as readFileSync12, writeFileSync as writeFileSync7, mkdirSync as mkdirSync8 } from "fs";
+import { join as join14, dirname as dirname8, extname } from "path";
 
 // src/source-install/ast-transform.ts
 import { Project } from "ts-morph";
@@ -1308,9 +2709,9 @@ function rewriteSingleImport(imp, filePath, runtimeDir) {
   return moduleSpecifier;
 }
 function computeRelativeRuntimePath(specifier, filePath, runtimeDir) {
-  const { relative: relative2, dirname: dirname5 } = __require("path");
-  const fileDir = dirname5(filePath);
-  let relToRuntime = relative2(fileDir, runtimeDir).replace(/\\/g, "/");
+  const { relative: relative3, dirname: dirname9 } = __require("path");
+  const fileDir = dirname9(filePath);
+  let relToRuntime = relative3(fileDir, runtimeDir).replace(/\\/g, "/");
   if (!relToRuntime.startsWith(".")) relToRuntime = `./${relToRuntime}`;
   const subpath = specifier.replace("@solidiom/runtime", "");
   const target = subpath ? `${relToRuntime}${subpath}` : `${relToRuntime}/index`;
@@ -1333,13 +2734,13 @@ function createInMemoryProject() {
 }
 
 // src/commands/update.ts
-import pc7 from "picocolors";
+import pc9 from "picocolors";
 function runUpdate(options) {
   const { cwd, primitive, dryRun = false } = options;
   const lock = readLock(cwd);
-  const configPath = join7(cwd, ".solidiom", "config.json");
-  const config = existsSync7(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync7(configPath, "utf8"))) : ConfigSchema.parse({});
-  const runtimeDir = join7(cwd, config.runtimeDir);
+  const configPath = join14(cwd, ".solidiom", "config.json");
+  const config = existsSync14(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync12(configPath, "utf8"))) : ConfigSchema.parse({});
+  const runtimeDir = join14(cwd, config.runtimeDir);
   const upstreamDir = resolvePrimitiveSource2(primitive, cwd);
   if (!upstreamDir) {
     return { entries: [], conflicts: [], updated: 0, merged: 0 };
@@ -1354,31 +2755,31 @@ function runUpdate(options) {
       entries.push({ path, status: "skipped-detached" });
       continue;
     }
-    const fullPath = join7(cwd, path);
-    if (!existsSync7(fullPath)) {
+    const fullPath = join14(cwd, path);
+    if (!existsSync14(fullPath)) {
       entries.push({ path, status: "skipped-deleted" });
       continue;
     }
     const relInPrimitive = path.replace(new RegExp(`.*${escapeRegex(primitive)}/`), "");
-    const upstreamPath = join7(upstreamDir, relInPrimitive);
-    if (!existsSync7(upstreamPath)) {
+    const upstreamPath = join14(upstreamDir, relInPrimitive);
+    if (!existsSync14(upstreamPath)) {
       entries.push({ path, status: "skipped-unchanged" });
       continue;
     }
-    const upstreamRaw = readFileSync7(upstreamPath, "utf8");
+    const upstreamRaw = readFileSync12(upstreamPath, "utf8");
     const upstreamDigest = computeDigest(upstreamRaw);
     if (upstreamDigest === lockEntry.digest) {
       entries.push({ path, status: "skipped-unchanged" });
       continue;
     }
     const upstreamRewritten = isComplexFile(fullPath) ? rewriteWithAst(upstreamRaw, fullPath, runtimeDir) : rewriteImports(upstreamRaw, fullPath, runtimeDir);
-    const localContent = readFileSync7(fullPath, "utf8");
+    const localContent = readFileSync12(fullPath, "utf8");
     const localDigest = computeDigest(localContent);
     const localUnmodified = localDigest === lockEntry.digest;
     if (localUnmodified) {
       if (!dryRun) {
-        mkdirSync3(dirname3(fullPath), { recursive: true });
-        writeFileSync3(fullPath, upstreamRewritten);
+        mkdirSync8(dirname8(fullPath), { recursive: true });
+        writeFileSync7(fullPath, upstreamRewritten);
         lockEntry.digest = upstreamDigest;
       }
       entries.push({ path, status: "updated" });
@@ -1388,16 +2789,16 @@ function runUpdate(options) {
       const mergeResult = threeWayMerge(baseContent, localContent, upstreamRewritten);
       if (mergeResult.hasConflicts) {
         if (!dryRun) {
-          writeFileSync3(fullPath, mergeResult.content);
-          writeFileSync3(`${fullPath}.upstream`, upstreamRewritten);
-          writeFileSync3(`${fullPath}.local`, localContent);
+          writeFileSync7(fullPath, mergeResult.content);
+          writeFileSync7(`${fullPath}.upstream`, upstreamRewritten);
+          writeFileSync7(`${fullPath}.local`, localContent);
         }
         entries.push({ path, status: "conflict" });
         conflicts.push(path);
       } else {
         if (!dryRun) {
-          mkdirSync3(dirname3(fullPath), { recursive: true });
-          writeFileSync3(fullPath, mergeResult.content);
+          mkdirSync8(dirname8(fullPath), { recursive: true });
+          writeFileSync7(fullPath, mergeResult.content);
           lockEntry.digest = upstreamDigest;
         }
         entries.push({ path, status: "merged" });
@@ -1477,18 +2878,18 @@ function rewriteWithAst(content, filePath, runtimeDir) {
   }
 }
 function resolvePrimitiveSource2(primitive, cwd) {
-  const nmPath = join7(cwd, "node_modules", "@solidiom", primitive, "source");
-  if (existsSync7(nmPath)) return nmPath;
-  const monoPath = join7(cwd, "..", "..", "packages", primitive, "source");
-  if (existsSync7(monoPath)) return monoPath;
+  const nmPath = join14(cwd, "node_modules", "@solidiom", primitive, "source");
+  if (existsSync14(nmPath)) return nmPath;
+  const monoPath = join14(cwd, "..", "..", "packages", primitive, "source");
+  if (existsSync14(monoPath)) return monoPath;
   return null;
 }
 function escapeRegex(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
-var UpdateCommand = class extends Command7 {
+var UpdateCommand = class extends Command9 {
   static paths = [["update"]];
-  static usage = Command7.Usage({
+  static usage = Command9.Usage({
     description: "Update source-installed primitives to latest upstream",
     examples: [
       ["Update dialog", "solidiom update dialog"],
@@ -1496,11 +2897,11 @@ var UpdateCommand = class extends Command7 {
       ["JSON output", "solidiom update dialog --json"]
     ]
   });
-  primitive = Option7.String({ required: true });
-  dryRun = Option7.Boolean("--dry-run", false, {
+  primitive = Option9.String({ required: true });
+  dryRun = Option9.Boolean("--dry-run", false, {
     description: "Show what would change without writing"
   });
-  json = Option7.Boolean("--json", false, { description: "Output as JSON" });
+  json = Option9.Boolean("--json", false, { description: "Output as JSON" });
   async execute() {
     const result = runUpdate({
       cwd: process.cwd(),
@@ -1512,28 +2913,28 @@ var UpdateCommand = class extends Command7 {
       return 0;
     }
     if (this.dryRun) {
-      this.context.stdout.write(pc7.bold("[dry-run] Would apply:\n\n"));
+      this.context.stdout.write(pc9.bold("[dry-run] Would apply:\n\n"));
     }
     for (const entry of result.entries) {
       switch (entry.status) {
         case "updated":
-          this.context.stdout.write(pc7.green(`  \u2191 ${entry.path}
+          this.context.stdout.write(pc9.green(`  \u2191 ${entry.path}
 `));
           break;
         case "merged":
-          this.context.stdout.write(pc7.yellow(`  \u21C4 ${entry.path} (auto-merged)
+          this.context.stdout.write(pc9.yellow(`  \u21C4 ${entry.path} (auto-merged)
 `));
           break;
         case "conflict":
-          this.context.stdout.write(pc7.red(`  \u26A1 ${entry.path} (CONFLICT)
+          this.context.stdout.write(pc9.red(`  \u26A1 ${entry.path} (CONFLICT)
 `));
           break;
         case "skipped-detached":
-          this.context.stdout.write(pc7.dim(`  \u25CB ${entry.path} (detached)
+          this.context.stdout.write(pc9.dim(`  \u25CB ${entry.path} (detached)
 `));
           break;
         case "skipped-deleted":
-          this.context.stdout.write(pc7.dim(`  \u2717 ${entry.path} (deleted locally)
+          this.context.stdout.write(pc9.dim(`  \u2717 ${entry.path} (deleted locally)
 `));
           break;
       }
@@ -1541,40 +2942,40 @@ var UpdateCommand = class extends Command7 {
     this.context.stdout.write("\n");
     if (result.merged > 0) {
       this.context.stdout.write(
-        pc7.yellow(`${result.merged} files auto-merged (review recommended).
+        pc9.yellow(`${result.merged} files auto-merged (review recommended).
 `)
       );
     }
     if (result.conflicts.length > 0) {
       this.context.stderr.write(
-        pc7.red(`${result.conflicts.length} conflicts \u2014 resolve manually:
+        pc9.red(`${result.conflicts.length} conflicts \u2014 resolve manually:
 `)
       );
       for (const c of result.conflicts) {
-        this.context.stderr.write(pc7.red(`  \u2022 ${c}
+        this.context.stderr.write(pc9.red(`  \u2022 ${c}
 `));
-        this.context.stderr.write(pc7.dim(`    Compare: ${c}.local vs ${c}.upstream
+        this.context.stderr.write(pc9.dim(`    Compare: ${c}.local vs ${c}.upstream
 `));
       }
       return 1;
     }
-    this.context.stdout.write(pc7.bold(`${result.updated} files updated.
+    this.context.stdout.write(pc9.bold(`${result.updated} files updated.
 `));
     return 0;
   }
 };
 
 // src/commands/doctor.ts
-import { Command as Command8, Option as Option8 } from "clipanion";
-import { existsSync as existsSync8, readFileSync as readFileSync8 } from "fs";
-import { join as join8 } from "path";
-import pc8 from "picocolors";
+import { Command as Command10, Option as Option10 } from "clipanion";
+import { existsSync as existsSync15, readFileSync as readFileSync13 } from "fs";
+import { join as join15 } from "path";
+import pc10 from "picocolors";
 function runDoctor(cwd) {
   const checks = [];
-  const configPath = join8(cwd, ".solidiom", "config.json");
-  if (existsSync8(configPath)) {
+  const configPath = join15(cwd, ".solidiom", "config.json");
+  if (existsSync15(configPath)) {
     try {
-      ConfigSchema.parse(JSON.parse(readFileSync8(configPath, "utf8")));
+      ConfigSchema.parse(JSON.parse(readFileSync13(configPath, "utf8")));
       checks.push({ name: "config.json valid", status: "pass" });
     } catch (e) {
       checks.push({ name: "config.json valid", status: "fail", detail: String(e) });
@@ -1586,10 +2987,10 @@ function runDoctor(cwd) {
       detail: "Run 'solidiom init' to create"
     });
   }
-  const policyPath = join8(cwd, ".solidiom", "policy.json");
-  if (existsSync8(policyPath)) {
+  const policyPath = join15(cwd, ".solidiom", "policy.json");
+  if (existsSync15(policyPath)) {
     try {
-      PolicySchema.parse(JSON.parse(readFileSync8(policyPath, "utf8")));
+      PolicySchema.parse(JSON.parse(readFileSync13(policyPath, "utf8")));
       checks.push({ name: "policy.json valid", status: "pass" });
     } catch (e) {
       checks.push({ name: "policy.json valid", status: "fail", detail: String(e) });
@@ -1597,9 +2998,9 @@ function runDoctor(cwd) {
   } else {
     checks.push({ name: "policy.json exists", status: "pass", detail: "Optional \u2014 using defaults" });
   }
-  const pkgPath = join8(cwd, "package.json");
-  if (existsSync8(pkgPath)) {
-    const pkg = JSON.parse(readFileSync8(pkgPath, "utf8"));
+  const pkgPath = join15(cwd, "package.json");
+  if (existsSync15(pkgPath)) {
+    const pkg = JSON.parse(readFileSync13(pkgPath, "utf8"));
     const solidDep = pkg.dependencies?.["solid-js"] ?? pkg.devDependencies?.["solid-js"];
     if (solidDep) {
       checks.push({ name: "solid-js dependency", status: "pass", detail: solidDep });
@@ -1611,10 +3012,10 @@ function runDoctor(cwd) {
       });
     }
   }
-  const lockPath = join8(cwd, ".solidiom", "lock.json");
-  if (existsSync8(lockPath)) {
+  const lockPath = join15(cwd, ".solidiom", "lock.json");
+  if (existsSync15(lockPath)) {
     try {
-      const lock = JSON.parse(readFileSync8(lockPath, "utf8"));
+      const lock = JSON.parse(readFileSync13(lockPath, "utf8"));
       if (lock.version === 1) {
         checks.push({ name: "lock.json valid", status: "pass" });
       } else {
@@ -1623,6 +3024,17 @@ function runDoctor(cwd) {
           status: "warn",
           detail: `Unknown version: ${lock.version}`
         });
+      }
+      const entries = Object.values(lock.installed ?? {});
+      const unverifiedCount = entries.filter((e) => e.provenance === "unverified").length;
+      if (unverifiedCount > 0) {
+        checks.push({
+          name: "source-install provenance",
+          status: "warn",
+          detail: `${unverifiedCount} unverified entr${unverifiedCount === 1 ? "y" : "ies"} in lock.json`
+        });
+      } else {
+        checks.push({ name: "source-install provenance", status: "pass" });
       }
     } catch {
       checks.push({ name: "lock.json valid", status: "fail", detail: "Parse error" });
@@ -1637,366 +3049,41 @@ function runDoctor(cwd) {
   const healthy = checks.every((c) => c.status !== "fail");
   return { checks, healthy };
 }
-var DoctorCommand = class extends Command8 {
+var DoctorCommand = class extends Command10 {
   static paths = [["doctor"]];
-  static usage = Command8.Usage({
+  static usage = Command10.Usage({
     description: "Check project configuration health"
   });
-  json = Option8.Boolean("--json", false, { description: "Output as JSON" });
+  json = Option10.Boolean("--json", false, { description: "Output as JSON" });
   async execute() {
     const result = runDoctor(process.cwd());
     if (this.json) {
       this.context.stdout.write(JSON.stringify(result, null, 2) + "\n");
       return result.healthy ? 0 : 1;
     }
-    this.context.stdout.write(pc8.bold("solidiom doctor\n\n"));
+    this.context.stdout.write(pc10.bold("solidiom doctor\n\n"));
     for (const check of result.checks) {
-      const icon = check.status === "pass" ? pc8.green("\u2713") : check.status === "warn" ? pc8.yellow("\u26A0") : pc8.red("\u2717");
-      const detail = check.detail ? pc8.dim(` (${check.detail})`) : "";
+      const icon = check.status === "pass" ? pc10.green("\u2713") : check.status === "warn" ? pc10.yellow("\u26A0") : pc10.red("\u2717");
+      const detail = check.detail ? pc10.dim(` (${check.detail})`) : "";
       this.context.stdout.write(`  ${icon} ${check.name}${detail}
 `);
     }
     this.context.stdout.write(
-      result.healthy ? pc8.green("\nHealthy.\n") : pc8.red("\nIssues found.\n")
+      result.healthy ? pc10.green("\nHealthy.\n") : pc10.red("\nIssues found.\n")
     );
     return result.healthy ? 0 : 1;
   }
 };
 
-// src/commands/verify.ts
-import { Command as Command9, Option as Option9 } from "clipanion";
-import { readFileSync as readFileSync9, existsSync as existsSync9 } from "fs";
-import { join as join9, dirname as dirname4, basename } from "path";
-import { createVerify, createHmac, createHash as createHash2 } from "crypto";
-import pc9 from "picocolors";
-async function verifySigstore(artifact, trustedIdentities, noNetwork) {
-  let bundleFromJSON;
-  let Verifier;
-  let toSignedEntity;
-  let toTrustMaterial;
-  let getTrustedRoot;
-  let VerificationError;
-  try {
-    const bundleMod = await import("@sigstore/bundle");
-    const verifyMod = await import("@sigstore/verify");
-    const tufMod = await import("@sigstore/tuf");
-    bundleFromJSON = bundleMod.bundleFromJSON;
-    Verifier = verifyMod.Verifier;
-    toSignedEntity = verifyMod.toSignedEntity;
-    toTrustMaterial = verifyMod.toTrustMaterial;
-    getTrustedRoot = tufMod.getTrustedRoot;
-    VerificationError = verifyMod.VerificationError;
-  } catch (err) {
-    return { verified: false, mode: "sigstore", reason: `Missing dependency: ${String(err)}` };
-  }
-  const bundlePath = findBundlePath(artifact);
-  if (!bundlePath) {
-    return {
-      verified: false,
-      mode: "sigstore",
-      reason: `No Sigstore bundle found alongside artifact. Expected ${artifact}.sigstore.json`
-    };
-  }
-  let bundle;
-  try {
-    const raw = JSON.parse(readFileSync9(bundlePath, "utf8"));
-    bundle = bundleFromJSON(raw);
-  } catch (err) {
-    return { verified: false, mode: "sigstore", reason: `Failed to parse bundle: ${String(err)}` };
-  }
-  let trustedRoot;
-  try {
-    trustedRoot = await getTrustedRoot({ forceCache: noNetwork });
-  } catch (err) {
-    return {
-      verified: false,
-      mode: "sigstore",
-      reason: `Failed to fetch TUF trusted root: ${String(err)}`
-    };
-  }
-  const trust = toTrustMaterial(trustedRoot);
-  const verifier = new Verifier(trust);
-  const entity = toSignedEntity(bundle);
-  const policy = trustedIdentities.length > 0 ? { subjectAlternativeName: { type: "email", value: trustedIdentities[0] } } : void 0;
-  try {
-    const signer = verifier.verify(entity, policy);
-    const identity = signer?.identity?.subjectAlternativeName ?? "unknown";
-    return { verified: true, mode: "sigstore", reason: "Sigstore bundle verified", identity };
-  } catch (err) {
-    const reason = err instanceof Error ? err.message : String(err);
-    return { verified: false, mode: "sigstore", reason };
-  }
-}
-function findBundlePath(artifact) {
-  const candidates = [`${artifact}.sigstore.json`, `${artifact}.sigstore`];
-  const dir = dirname4(artifact);
-  const base = basename(artifact);
-  candidates.push(join9(dir, `${base}.sigstore.json`), join9(dir, `${base}.sigstore`));
-  for (const p of candidates) {
-    if (existsSync9(p)) return p;
-  }
-  return null;
-}
-function verifyTrustedKeys(artifact, cwd) {
-  const keysPath = join9(cwd, ".solidiom", "trusted-keys.json");
-  if (!existsSync9(keysPath)) {
-    return { verified: false, mode: "trusted-keys", reason: "No .solidiom/trusted-keys.json found" };
-  }
-  let keys;
-  try {
-    keys = JSON.parse(readFileSync9(keysPath, "utf8"));
-    if (!Array.isArray(keys)) throw new Error("expected array");
-  } catch (err) {
-    return {
-      verified: false,
-      mode: "trusted-keys",
-      reason: `Invalid trusted-keys.json: ${String(err)}`
-    };
-  }
-  const sigPath = `${artifact}.sig`;
-  if (!existsSync9(sigPath)) {
-    return {
-      verified: false,
-      mode: "trusted-keys",
-      reason: `No signature file found at ${sigPath}`
-    };
-  }
-  let artifactBytes;
-  let sigBytes;
-  try {
-    artifactBytes = readFileSync9(artifact);
-    sigBytes = Buffer.from(readFileSync9(sigPath, "utf8").trim(), "base64");
-  } catch (err) {
-    return {
-      verified: false,
-      mode: "trusted-keys",
-      reason: `Failed to read artifact or signature: ${String(err)}`
-    };
-  }
-  const sortedKeys = [...keys].sort((a, b) => {
-    if (a.status === b.status) return 0;
-    return a.status === "active" ? -1 : 1;
-  });
-  for (const key of sortedKeys) {
-    try {
-      const algo = resolveAlgo(key.algorithm);
-      const verify = createVerify(algo);
-      verify.update(artifactBytes);
-      const ok = verify.verify(key.publicKey, sigBytes);
-      if (ok) {
-        return {
-          verified: true,
-          mode: "trusted-keys",
-          reason: `Signature verified against key ${key.id} (${key.status})`,
-          identity: key.id
-        };
-      }
-    } catch {
-    }
-  }
-  return {
-    verified: false,
-    mode: "trusted-keys",
-    reason: "Signature did not verify against any trusted key"
-  };
-}
-function resolveAlgo(algorithm) {
-  switch (algorithm) {
-    case "ed25519":
-      return "Ed25519";
-    case "rsa-sha256":
-      return "RSA-SHA256";
-    case "rsa-sha512":
-      return "RSA-SHA512";
-  }
-}
-function verifyRegistry(options) {
-  const { cwd, verifyKeys = [], requireSignature = false } = options;
-  const registryDir = options.registryDir ?? join9(cwd, "registry");
-  const indexPath = join9(registryDir, "index.json");
-  const violations = [];
-  if (!existsSync9(indexPath)) {
-    return {
-      verified: false,
-      reason: `Registry index not found at ${indexPath}`,
-      primitivesChecked: 0,
-      violations: [`missing ${indexPath}`]
-    };
-  }
-  let index;
-  try {
-    index = readRegistryIndex(indexPath);
-  } catch (err) {
-    const reason = err instanceof RegistrySchemaError ? err.message : String(err);
-    return {
-      verified: false,
-      reason: `Registry index failed schema verification: ${reason}`,
-      primitivesChecked: 0,
-      violations: [reason]
-    };
-  }
-  if (requireSignature || index.integrity.signature) {
-    if (!index.integrity.signature) {
-      violations.push("registry index is not signed but signing is required by policy");
-    } else if (verifyKeys.length === 0) {
-      violations.push(
-        "registry index is signed but no verification key was provided (set REGISTRY_VERIFY_KEY or policy.registryTrustedKeys)"
-      );
-    } else {
-      const { signature, signedAt, signatureKeyId, ...restIntegrity } = index.integrity;
-      const preSigIndex = { ...index, integrity: restIntegrity };
-      const preSigContent = JSON.stringify(preSigIndex, null, 2);
-      const matchedKey = verifyKeys.find((key) => {
-        const expected = createHmac("sha256", key).update(preSigContent).digest("hex");
-        return expected === signature;
-      });
-      if (!matchedKey) {
-        violations.push("registry index signature does not verify against any trusted key");
-      } else if (signatureKeyId) {
-        const expectedKeyId = createHash2("sha256").update(matchedKey).digest("hex").slice(0, 16);
-        if (expectedKeyId !== signatureKeyId) {
-          violations.push("registry index signatureKeyId does not match the verifying key");
-        }
-      }
-    }
-  }
-  let primitivesChecked = 0;
-  for (const summary of index.primitives) {
-    const manifestPath = join9(registryDir, `${summary.name}.json`);
-    if (!existsSync9(manifestPath)) {
-      violations.push(`${summary.name}: manifest file missing at ${manifestPath}`);
-      continue;
-    }
-    let manifest;
-    try {
-      manifest = readRegistryManifest(manifestPath);
-    } catch (err) {
-      const reason = err instanceof RegistrySchemaError ? err.message : String(err);
-      violations.push(`${summary.name}: manifest schema verification failed \u2014 ${reason}`);
-      continue;
-    }
-    const sortedDigests = Object.entries(manifest.integrity.fileDigests).sort(
-      ([a], [b]) => a.localeCompare(b)
-    );
-    const recomputed = createHash2("sha256").update(sortedDigests.map(([, digest]) => digest).join("")).digest("hex");
-    if (recomputed !== manifest.integrity.filesHash) {
-      violations.push(
-        `${summary.name}: filesHash mismatch \u2014 recorded ${manifest.integrity.filesHash}, recomputed ${recomputed} from fileDigests`
-      );
-      continue;
-    }
-    primitivesChecked += 1;
-  }
-  return {
-    verified: violations.length === 0,
-    reason: violations.length === 0 ? "Registry integrity verified" : "Registry integrity failed",
-    primitivesChecked,
-    violations
-  };
-}
-async function runVerify(options) {
-  const { cwd, artifact, noNetwork = false } = options;
-  const policyPath = join9(cwd, ".solidiom", "policy.json");
-  if (!existsSync9(policyPath)) {
-    return { verified: true, mode: "none", reason: "No policy \u2014 verification skipped" };
-  }
-  const policy = PolicySchema.parse(JSON.parse(readFileSync9(policyPath, "utf8")));
-  switch (policy.signatureMode) {
-    case "none":
-      return { verified: true, mode: "none", reason: "Signature verification disabled by policy" };
-    case "sigstore":
-      return verifySigstore(artifact, policy.trustedIdentities, noNetwork);
-    case "trusted-keys":
-      return verifyTrustedKeys(artifact, cwd);
-  }
-}
-var VerifyCommand = class extends Command9 {
-  static paths = [["verify"]];
-  static usage = Command9.Usage({
-    description: "Verify artifact signatures against policy",
-    examples: [
-      ["Verify a package tarball", "solidiom verify @solidiom/dialog"],
-      [
-        "Offline verification (use cached TUF root)",
-        "solidiom verify ./dist/dialog.tgz --no-network"
-      ],
-      ["Output as JSON", "solidiom verify ./dist/dialog.tgz --json"],
-      ["Verify the registry catalog", "solidiom verify --registry"]
-    ]
-  });
-  artifact = Option9.String({ required: false });
-  noNetwork = Option9.Boolean("--no-network", false, {
-    description: "Skip TUF network fetch; use cached trust root"
-  });
-  json = Option9.Boolean("--json", false, { description: "Output result as JSON" });
-  registry = Option9.Boolean("--registry", false, {
-    description: "Verify registry/index.json and per-primitive manifest integrity instead of an artifact"
-  });
-  async execute() {
-    if (this.registry) {
-      const cwd = process.cwd();
-      const policyPath = join9(cwd, ".solidiom", "policy.json");
-      const policy = existsSync9(policyPath) ? PolicySchema.parse(JSON.parse(readFileSync9(policyPath, "utf8"))) : PolicySchema.parse({});
-      const envKey = process.env["REGISTRY_VERIFY_KEY"];
-      const verifyKeys = [...envKey ? [envKey] : [], ...policy.registryTrustedKeys];
-      const result2 = verifyRegistry({
-        cwd,
-        verifyKeys,
-        requireSignature: policy.registrySignatureRequired
-      });
-      if (this.json) {
-        this.context.stdout.write(JSON.stringify(result2, null, 2) + "\n");
-        return result2.verified ? 0 : 1;
-      }
-      if (result2.verified) {
-        this.context.stdout.write(
-          pc9.green(`\u2713 Registry verified: ${result2.primitivesChecked} manifest(s) checked
-`)
-        );
-        return 0;
-      }
-      this.context.stderr.write(pc9.red(`\u2717 Registry verification failed:
-`));
-      for (const violation of result2.violations) {
-        this.context.stderr.write(pc9.red(`  \u2717 ${violation}
-`));
-      }
-      return 1;
-    }
-    if (!this.artifact) {
-      this.context.stderr.write(pc9.red("\u2717 An artifact path is required unless --registry is set\n"));
-      return 1;
-    }
-    const result = await runVerify({
-      cwd: process.cwd(),
-      artifact: this.artifact,
-      noNetwork: this.noNetwork
-    });
-    if (this.json) {
-      this.context.stdout.write(JSON.stringify(result, null, 2) + "\n");
-      return result.verified ? 0 : 1;
-    }
-    if (result.verified) {
-      const id = result.identity ? ` [${result.identity}]` : "";
-      this.context.stdout.write(pc9.green(`\u2713 Verified (${result.mode})${id}: ${result.reason}
-`));
-      return 0;
-    }
-    this.context.stderr.write(pc9.red(`\u2717 Verification failed (${result.mode}): ${result.reason}
-`));
-    return 1;
-  }
-};
-
 // src/commands/audit.ts
-import { Command as Command10, Option as Option10 } from "clipanion";
-import { readdirSync as readdirSync2, readFileSync as readFileSync10, existsSync as existsSync10 } from "fs";
-import { join as join10 } from "path";
+import { Command as Command11, Option as Option11 } from "clipanion";
+import { readdirSync as readdirSync4, readFileSync as readFileSync14, existsSync as existsSync16 } from "fs";
+import { join as join16 } from "path";
 import { randomUUID } from "crypto";
-import pc10 from "picocolors";
+import pc11 from "picocolors";
 function readPkg(pkgPath) {
   try {
-    return JSON.parse(readFileSync10(pkgPath, "utf8"));
+    return JSON.parse(readFileSync14(pkgPath, "utf8"));
   } catch {
     return null;
   }
@@ -2027,25 +3114,25 @@ function isSpdxId(expr) {
   return expr.length > 0 && !expr.includes(" ");
 }
 function scanNodeModules(nodeModulesPath, seen, components) {
-  if (!existsSync10(nodeModulesPath)) return;
+  if (!existsSync16(nodeModulesPath)) return;
   let entries;
   try {
-    entries = readdirSync2(nodeModulesPath);
+    entries = readdirSync4(nodeModulesPath);
   } catch {
     return;
   }
   for (const entry of entries) {
     if (entry.startsWith(".")) continue;
     if (entry.startsWith("@")) {
-      const scopeDir = join10(nodeModulesPath, entry);
+      const scopeDir = join16(nodeModulesPath, entry);
       let scopedEntries;
       try {
-        scopedEntries = readdirSync2(scopeDir);
+        scopedEntries = readdirSync4(scopeDir);
       } catch {
         continue;
       }
       for (const scoped of scopedEntries) {
-        const pkgPath = join10(scopeDir, scoped, "package.json");
+        const pkgPath = join16(scopeDir, scoped, "package.json");
         const pkg = readPkg(pkgPath);
         if (!pkg?.name || !pkg.version) continue;
         const ref = `${pkg.name}@${pkg.version}`;
@@ -2054,7 +3141,7 @@ function scanNodeModules(nodeModulesPath, seen, components) {
         components.push(toCdxComponent(pkg.name, pkg.version, resolveLicenseId(pkg)));
       }
     } else {
-      const pkgPath = join10(nodeModulesPath, entry, "package.json");
+      const pkgPath = join16(nodeModulesPath, entry, "package.json");
       const pkg = readPkg(pkgPath);
       if (!pkg?.name || !pkg.version) continue;
       const ref = `${pkg.name}@${pkg.version}`;
@@ -2067,16 +3154,16 @@ function scanNodeModules(nodeModulesPath, seen, components) {
 function runAudit(cwd) {
   const seen = /* @__PURE__ */ new Set();
   const components = [];
-  const monoPackagesDir = join10(cwd, "..", "..", "packages");
-  if (existsSync10(monoPackagesDir)) {
+  const monoPackagesDir = join16(cwd, "..", "..", "packages");
+  if (existsSync16(monoPackagesDir)) {
     let entries;
     try {
-      entries = readdirSync2(monoPackagesDir);
+      entries = readdirSync4(monoPackagesDir);
     } catch {
       entries = [];
     }
     for (const entry of entries) {
-      const pkgPath = join10(monoPackagesDir, entry, "package.json");
+      const pkgPath = join16(monoPackagesDir, entry, "package.json");
       const pkg = readPkg(pkgPath);
       if (!pkg?.name?.startsWith("@solidiom/") || !pkg.version) continue;
       const ref = `${pkg.name}@${pkg.version}`;
@@ -2087,9 +3174,9 @@ function runAudit(cwd) {
   }
   const workspaceRoot = findWorkspaceRoot(cwd);
   if (workspaceRoot) {
-    scanNodeModules(join10(workspaceRoot, "node_modules"), seen, components);
+    scanNodeModules(join16(workspaceRoot, "node_modules"), seen, components);
   }
-  scanNodeModules(join10(cwd, "node_modules"), seen, components);
+  scanNodeModules(join16(cwd, "node_modules"), seen, components);
   return {
     bomFormat: "CycloneDX",
     specVersion: "1.5",
@@ -2105,18 +3192,18 @@ function runAudit(cwd) {
 function findWorkspaceRoot(from) {
   let dir = from;
   for (let i = 0; i < 10; i++) {
-    if (existsSync10(join10(dir, "pnpm-workspace.yaml")) || existsSync10(join10(dir, "pnpm-lock.yaml"))) {
+    if (existsSync16(join16(dir, "pnpm-workspace.yaml")) || existsSync16(join16(dir, "pnpm-lock.yaml"))) {
       return dir;
     }
-    const parent = join10(dir, "..");
+    const parent = join16(dir, "..");
     if (parent === dir) break;
     dir = parent;
   }
   return null;
 }
-var AuditCommand = class extends Command10 {
+var AuditCommand = class extends Command11 {
   static paths = [["audit"]];
-  static usage = Command10.Usage({
+  static usage = Command11.Usage({
     description: "Generate CycloneDX 1.5 SBOM and license inventory",
     examples: [
       ["Full CycloneDX 1.5 SBOM", "solidiom audit --sbom"],
@@ -2124,9 +3211,9 @@ var AuditCommand = class extends Command10 {
       ["SBOM as JSON (for piping)", "solidiom audit --sbom --json"]
     ]
   });
-  sbom = Option10.Boolean("--sbom", false, { description: "Emit full CycloneDX 1.5 JSON SBOM" });
-  json = Option10.Boolean("--json", false, { description: "Alias for --sbom" });
-  licenses = Option10.Boolean("--licenses", false, {
+  sbom = Option11.Boolean("--sbom", false, { description: "Emit full CycloneDX 1.5 JSON SBOM" });
+  json = Option11.Boolean("--json", false, { description: "Alias for --sbom" });
+  licenses = Option11.Boolean("--licenses", false, {
     description: "Emit license inventory table only"
   });
   async execute() {
@@ -2139,12 +3226,12 @@ var AuditCommand = class extends Command10 {
       return this.printLicenses(result);
     }
     this.context.stdout.write(
-      pc10.bold(`SBOM Summary \u2014 CycloneDX ${result.specVersion}
+      pc11.bold(`SBOM Summary \u2014 CycloneDX ${result.specVersion}
 `) + `  Components: ${result.components.length}
   Generated:  ${result.metadata.timestamp}
   Serial:     ${result.serialNumber}
 
-Run ${pc10.cyan("solidiom audit --sbom")} for full JSON or ${pc10.cyan("solidiom audit --licenses")} for license table.
+Run ${pc11.cyan("solidiom audit --sbom")} for full JSON or ${pc11.cyan("solidiom audit --licenses")} for license table.
 `
     );
     return 0;
@@ -2158,12 +3245,12 @@ Run ${pc10.cyan("solidiom audit --sbom")} for full JSON or ${pc10.cyan("solidiom
       grouped.set(licenseId, list);
     }
     this.context.stdout.write(
-      pc10.bold(`License Inventory (${result.components.length} components)
+      pc11.bold(`License Inventory (${result.components.length} components)
 
 `)
     );
     for (const [license, packages] of [...grouped.entries()].sort()) {
-      this.context.stdout.write(pc10.bold(`${license}:
+      this.context.stdout.write(pc11.bold(`${license}:
 `));
       for (const pkg of packages.sort()) {
         this.context.stdout.write(`  ${pkg}
@@ -2173,6 +3260,46 @@ Run ${pc10.cyan("solidiom audit --sbom")} for full JSON or ${pc10.cyan("solidiom
     return 0;
   }
 };
+
+// src/source-install/theme-install.ts
+var ThemeNotCompatibleError = class extends Error {
+  constructor(themeSlug, themeCompatible) {
+    super(
+      `Theme "${themeSlug}" is not in this deliverable's themeCompatible list (available: ${themeCompatible.length > 0 ? themeCompatible.join(", ") : "none"})`
+    );
+    this.themeSlug = themeSlug;
+    this.themeCompatible = themeCompatible;
+    this.name = "ThemeNotCompatibleError";
+  }
+  themeSlug;
+  themeCompatible;
+};
+function planThemeInstall(options) {
+  const { themeSlug, profile, themeCompatible } = options;
+  if (!themeCompatible.includes(themeSlug)) {
+    throw new ThemeNotCompatibleError(themeSlug, themeCompatible);
+  }
+  if (profile === "css" || profile === "tailwind") {
+    const from = options.stylesheetSource ?? `@solidiom/themes/${profile}/${themeSlug}.css`;
+    const to = options.stylesheetDestination ?? `src/ui/themes/${themeSlug}.css`;
+    return {
+      profile,
+      actions: [{ kind: "copy-stylesheet", from, to }]
+    };
+  }
+  const presetImportPath = options.presetImportPath ?? "@solidiom/unocss-preset";
+  return {
+    profile,
+    actions: [
+      {
+        kind: "patch-preset-config",
+        themeSlug,
+        presetImportPath,
+        description: `No automated codemod exists yet for UnoCSS theme installs. Manually wire this theme into your uno.config.ts: import the preset from "${presetImportPath}" and pass presetSolidiom({ theme: "${themeSlug}" }) among your UnoCSS presets.`
+      }
+    ]
+  };
+}
 export {
   ConfigSchema,
   DELIVERABLES,
@@ -2182,20 +3309,35 @@ export {
   SUPPORTED_INDEX_SCHEMA_URL,
   SUPPORTED_MANIFEST_SCHEMA_URL,
   SUPPORTED_REGISTRY_INDEX_VERSION,
+  ThemeNotCompatibleError,
+  UnsupportedDeliverableError,
   addDev as addDevPackageManagerCommand,
   add as addPackageManagerCommand,
+  classifyConflicts,
+  computeDigest,
+  createCleanupJournal,
+  createRollbackJournal,
   detectPackageManager,
   dlx as dlxPackageManagerCommand,
   exec as execPackageManagerCommand,
   formatCommand,
+  generateProjectConfig,
   install as installPackageManagerCommand,
   installSource,
   isPackageManagerName,
+  isValidPackageName,
+  materialize,
+  planThemeInstall,
+  readLock,
   readRegistryIndex,
   readRegistryManifest,
+  renderUnifiedDiff,
+  resolveDestinationRoot,
+  resolveTemplateSource,
   rewriteImportsAst,
   runAdd,
   runAudit,
+  runCreate,
   runDetach,
   runDiff,
   runDoctor,
@@ -2206,6 +3348,8 @@ export {
   runPlan,
   runUpdate,
   runVerify,
-  verifyRegistry
+  verifyRegistry,
+  verifySourceIntegrity,
+  writeLock
 };
 //# sourceMappingURL=index.js.map
