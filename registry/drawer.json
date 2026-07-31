@@ -25,9 +25,9 @@
   "description": "Slide-in panel from any screen edge.",
   "category": "overlay",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add drawer",
     "installDeps": []
@@ -69,11 +69,11 @@
       "src/drawer.tsx": "1fefafde0b912e0a9260c86a42261d94c93b52a0c76a973e018d0d8dcdfbca7a",
       "src/index.tsx": "d73bd947145a4c6b215eec138ea4da63602602798781e51aee003fdfee842e80"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/drawer"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

@@ -18,9 +18,9 @@
   "description": "Keyboard shortcut display element.",
   "category": "display",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add kbd",
     "installDeps": []
@@ -57,11 +57,11 @@
     "fileDigests": {
       "src/index.tsx": "726922c768549e03a4820a47c9ae747cd092add393838f6acc33dfcaee19e42d"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/kbd"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

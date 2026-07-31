@@ -20,9 +20,9 @@
   "description": "A one-time password input with individual character slots.",
   "category": "input",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add input-otp",
     "installDeps": []
@@ -63,11 +63,11 @@
     "fileDigests": {
       "src/index.tsx": "d730605b557106a71506fcf48ed6b2a7f4c01b20149a3e2874b93ea895d6a57b"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/input-otp"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

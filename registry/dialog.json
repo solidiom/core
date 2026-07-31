@@ -25,9 +25,9 @@
   "description": "Modal or non-modal overlay window.",
   "category": "overlay",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add dialog",
     "installDeps": []
@@ -37,7 +37,7 @@
     "evidenceIds": [
       "axe-dialog-scan-v1"
     ],
-    "lastReviewed": "2026-07-30T01:21:49.767Z"
+    "lastReviewed": "2026-07-31T04:12:24.364Z"
   },
   "documentation": {
     "status": "complete",
@@ -53,7 +53,8 @@
   "styling": {
     "outputs": [
       "css",
-      "tailwind"
+      "tailwind",
+      "unocss"
     ],
     "themeCompatible": [
       "site"
@@ -80,11 +81,11 @@
       "src/dialog.tsx": "8c01e0531e61fcb5d77cf7040d9548ef5da6cdbec3c7cf0ed526e3a7b34119a6",
       "src/index.tsx": "12a64978fe94873ab58c3da5219a6e75780eae19a1bb8de728143d8e1affcb01"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/dialog"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

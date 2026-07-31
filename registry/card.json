@@ -18,9 +18,9 @@
   "description": "Content container with header, body, and footer.",
   "category": "layout",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add card",
     "installDeps": []
@@ -61,11 +61,11 @@
     "fileDigests": {
       "src/index.tsx": "05c962b66181d38c43b80c8d8d446b9326cc88bb8069949cf54eb121b738fba2"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/card"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

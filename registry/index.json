@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v2.json",
   "version": 2,
-  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "generatedAt": "2026-07-31T05:34:08.000Z",
   "integrity": {
     "algorithm": "sha256",
     "entriesHash": "401783a148c14a247bf9af75978bd6b82ecadbd61d5de6206b824e4e24c5bc07"
@@ -31,7 +31,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -73,7 +74,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -200,7 +202,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -265,6 +268,7 @@
       "category": "input",
       "status": "preview",
       "deliverables": [
+        "component",
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
@@ -280,7 +284,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -444,7 +449,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -513,8 +519,7 @@
       "accessibility": {
         "reviewStatus": "automated",
         "evidenceIds": [
-          "combobox-axe-closed",
-          "combobox-axe-open"
+          "axe-combobox-scan-v1"
         ]
       },
       "documentationStatus": "complete",
@@ -638,8 +643,7 @@
       "accessibility": {
         "reviewStatus": "automated",
         "evidenceIds": [
-          "data-table-axe-default",
-          "data-table-axe-sorted"
+          "axe-data-table-scan-v1"
         ]
       },
       "documentationStatus": "complete",
@@ -749,7 +753,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [
         "site"
@@ -1159,7 +1164,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1326,7 +1332,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1529,7 +1536,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1763,7 +1771,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1805,7 +1814,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1845,7 +1855,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -2007,7 +2018,8 @@
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [

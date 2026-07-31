@@ -18,9 +18,9 @@
   "description": "Custom-styled scrollbar with native scrolling performance.",
   "category": "layout",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add scroll-area",
     "installDeps": []
@@ -62,11 +62,11 @@
     "fileDigests": {
       "src/index.tsx": "4b1e201660eb255ec50dc92e6563a337b39fa1c4a4b7f5c08b1d99aad191f813"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/scroll-area"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

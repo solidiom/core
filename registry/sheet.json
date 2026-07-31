@@ -22,9 +22,9 @@
   "description": "Side-panel dialog with slide animation.",
   "category": "overlay",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add sheet",
     "installDeps": []
@@ -64,11 +64,11 @@
     "fileDigests": {
       "src/index.tsx": "d4d23f65825f21176b46fff75b3654ed0b0be6628b29c4279f8b8422ac076a7b"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/sheet"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

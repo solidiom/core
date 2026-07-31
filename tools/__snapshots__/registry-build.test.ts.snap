@@ -34,7 +34,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -76,7 +77,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -203,7 +205,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -268,6 +271,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "category": "input",
       "status": "preview",
       "deliverables": [
+        "component",
         "primitive"
       ],
       "hasAccessibilityEvidence": false,
@@ -283,7 +287,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -447,7 +452,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -512,24 +518,32 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-combobox-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
       "themeCompatible": [],
       "searchKeywords": [
+        "autocompletado",
         "autocomplete",
         "combobox",
+        "desplegable",
         "dropdown",
         "input",
+        "listbox",
         "runtime",
         "text",
         "with"
@@ -628,27 +642,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-data-table-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
       "themeCompatible": [],
       "searchKeywords": [
         "column",
+        "columnas",
+        "columns",
         "control",
         "data",
+        "datos",
+        "filas",
         "layout",
+        "ordenar",
+        "rows",
         "runtime",
+        "selección",
         "selectable",
+        "selection",
+        "sort",
         "sortable",
+        "tabla",
         "table",
         "with"
       ],
@@ -727,7 +756,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [
         "site"
@@ -1137,7 +1167,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1304,7 +1335,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1507,7 +1539,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1741,7 +1774,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1783,7 +1817,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1823,7 +1858,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -1985,7 +2021,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       },
       "stylingOutputs": [
         "css",
-        "tailwind"
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [

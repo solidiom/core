@@ -18,9 +18,9 @@
   "description": "User avatar with image and fallback.",
   "category": "display",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add avatar",
     "installDeps": []
@@ -59,11 +59,11 @@
     "fileDigests": {
       "src/index.tsx": "0e08e24447beb45b5d01a0c72c4d11e260ef46a9adf95156364624558463225e"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/avatar"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }

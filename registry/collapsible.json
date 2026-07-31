@@ -21,9 +21,9 @@
   "description": "Single expandable/collapsible section.",
   "category": "layout",
   "status": "preview",
-  "deliverables": {
-    "primitive": true
-  },
+  "deliverables": [
+    "primitive"
+  ],
   "cli": {
     "addCommand": "solidiom add collapsible",
     "installDeps": []
@@ -60,11 +60,11 @@
     "fileDigests": {
       "src/index.tsx": "e87667e7585ea9c4fd43c0fb9cfeb46905b93487972c5728e299c49395c2e068"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-07-31T05:34:08.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/collapsible"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-07-31T05:34:08.000Z"
 }
