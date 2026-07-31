@@ -12,25 +12,8 @@
  * to cover ships both emission forms.
  */
 
-/** Recipe profile identifier. */
-export const recipeProfile = "unocss" as const
-
-/** All primitives with recipe support in this profile. */
-export const supportedPrimitives = [
-  "dialog",
-  "select",
-  "button",
-  "checkbox",
-  "switch",
-  "tabs",
-  "accordion",
-  "popover",
-  "tooltip",
-  "menu",
-  "toast",
-  "badge",
-  "alert",
-] as const
+export { recipeProfile, supportedPrimitives } from "./meta"
+import { supportedPrimitives } from "./meta"
 
 /**
  * Primitives with a shipped UnoCSS recipe in this package.

@@ -1,3 +1,21 @@
+// src/meta.ts
+var recipeProfile = "unocss";
+var supportedPrimitives = [
+  "dialog",
+  "select",
+  "button",
+  "checkbox",
+  "switch",
+  "tabs",
+  "accordion",
+  "popover",
+  "tooltip",
+  "menu",
+  "toast",
+  "badge",
+  "alert"
+];
+
 // src/recipes/dialog.tsx
 import * as Dialog from "@solidiom/dialog";
 function StyledDialog(props) {
@@ -198,22 +216,6 @@ function StyledAlert(props) {
 }
 
 // src/index.ts
-var recipeProfile = "unocss";
-var supportedPrimitives = [
-  "dialog",
-  "select",
-  "button",
-  "checkbox",
-  "switch",
-  "tabs",
-  "accordion",
-  "popover",
-  "tooltip",
-  "menu",
-  "toast",
-  "badge",
-  "alert"
-];
 var implementedRecipes = supportedPrimitives;
 export {
   Alert,

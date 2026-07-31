@@ -134,9 +134,9 @@ check(
 // ─── 12. Behavioral package/source parity ───────────────────────────────
 console.log("\n§12 Package/source parity:")
 check(
-  "parity tests pass (≥18)",
-  runTests("@solidiom/tests-package-source-parity", 18),
-  "Parity suite must verify export surface and type consistency for dialog, select, calendar, carousel",
+  "parity tests pass (≥37)",
+  runTests("@solidiom/tests-package-source-parity", 37),
+  "Parity suite must verify export surface and type consistency for dialog, select, calendar, carousel, and the three recipe packages",
 )
 
 // ─── 13. Browser harness configuration ──────────────────────────────────
