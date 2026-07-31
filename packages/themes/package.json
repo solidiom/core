@@ -1,0 +1,34 @@
+{
+  "name": "@solidiom/themes",
+  "version": "0.0.1-next.0",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "solid": "./source/index.ts",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./css/solidiom-default.css": "./dist/css/solidiom-default.css",
+    "./tailwind/solidiom-default.css": "./dist/tailwind/solidiom-default.css"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "source",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "nx": {
+    "tags": [
+      "layer:theme"
+    ]
+  }
+}

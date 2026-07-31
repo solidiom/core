@@ -4,14 +4,24 @@ import { join } from "node:path"
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 
 /**
- * Recipe packages that ship a dual-emission `src/` + build-copied `source/` tree
- * AND publish it as a consumer-facing `"solid"` export condition.
+ * Recipe and theme-output packages that ship a dual-emission `src/` + build-copied
+ * `source/` tree AND publish it as a consumer-facing `"solid"` export condition.
  *
  * These get the full audit: byte-for-byte parity plus export-map completeness
  * (`auditExportCompleteness`), because a missing/incomplete export map makes an
  * otherwise-correct `source/` emission unimportable by consumers.
+ *
+ * `themes` (THEME-002/003) has no `src/styles/` directory — its generated stylesheets
+ * live under `src/css/` and `src/tailwind/` instead — so `auditExportCompleteness`'s
+ * styles-specific check is a no-op for it (guarded by `existsSync(stylesDir)`); it
+ * still gets real byte-for-byte `src/`/`source/` parity coverage from this list.
  */
-const SOURCE_OWNED_PACKAGES = ["recipes-css", "recipes-tailwind", "recipes-unocss"] as const
+const SOURCE_OWNED_PACKAGES = [
+  "recipes-css",
+  "recipes-tailwind",
+  "recipes-unocss",
+  "themes",
+] as const
 
 /**
  * Tooling packages (`layer:tooling`) that ship a dual-emission `src/` + build-copied
