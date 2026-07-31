@@ -1,0 +1,33 @@
+# PREP-ONLY config for CLI-008's offline fixture. NOT used by the smoke matrix.
+#
+# This is the one place in the fixture that is allowed to reach the network. It
+# runs via `run-offline-test.sh --prep`, which warms a persistent snapshot of
+# Verdaccio's storage by running the full matrix once through this proxying
+# instance. The snapshot then feeds the real, offline runs, which use
+# verdaccio-config.yaml (no uplinks) instead.
+#
+# Why a network prep phase is necessary rather than seeding from the local pnpm
+# store: a store only ever contains the CURRENT platform's slice of the graph.
+# `@tailwindcss/oxide` declares 12 platform-native optionalDependencies and a
+# macOS checkout holds exactly one of them. npm, pnpm, and bun skip
+# platform-incompatible optional deps without resolving them, but Yarn Classic
+# resolves metadata for every variant and hard-fails on any the registry lacks,
+# so a store-derived registry can never satisfy Yarn. Only real packuments do.
+#
+# `storage:` is rewritten at runtime by run-offline-test.sh to point at the
+# snapshot directory.
+storage: ./storage
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+    cache: true
+    maxage: 60m
+packages:
+  "**":
+    access: $all
+    publish: $anonymous
+    unpublish: $anonymous
+    proxy: npmjs
+server:
+  keepAliveTimeout: 60
+listen: 0.0.0.0:4873

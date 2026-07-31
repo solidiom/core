@@ -1534,6 +1534,9 @@ importers:
       '@solidiom/recipes-tailwind':
         specifier: workspace:*
         version: link:../../packages/recipes-tailwind
+      '@solidjs/web':
+        specifier: 2.0.0-beta.24
+        version: 2.0.0-beta.24(solid-js@2.0.0-beta.24)
       '@tanstack/solid-router':
         specifier: 2.0.0-beta.28
         version: 2.0.0-beta.28(@solidjs/web@2.0.0-beta.24(solid-js@2.0.0-beta.24))(solid-js@2.0.0-beta.24)
@@ -1571,6 +1574,9 @@ importers:
       '@solidjs/router':
         specifier: 0.17.0-next.5
         version: 0.17.0-next.5(@solidjs/web@2.0.0-beta.24(solid-js@2.0.0-beta.24))(solid-js@2.0.0-beta.24)
+      '@solidjs/web':
+        specifier: 2.0.0-beta.24
+        version: 2.0.0-beta.24(solid-js@2.0.0-beta.24)
       solid-js:
         specifier: 2.0.0-beta.24
         version: 2.0.0-beta.24

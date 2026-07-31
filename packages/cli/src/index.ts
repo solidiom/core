@@ -13,6 +13,18 @@ export {
   type CreateResult,
   type CleanupJournal,
 } from "./commands/create"
+export {
+  materialize,
+  resolveTemplateSource,
+  type MaterializeOptions,
+  type MaterializeResult,
+} from "./create/materialize"
+export {
+  generateProjectConfig,
+  type GenerateProjectConfigOptions,
+  type GenerateProjectConfigResult,
+  type StylingProfile as CreateStylingProfile,
+} from "./create/config-gen"
 export { runInspect, type InspectResult } from "./commands/inspect"
 export { runDiff, type DiffResult, type DiffEntry } from "./commands/diff"
 export { runDetach, type DetachResult } from "./commands/detach"
