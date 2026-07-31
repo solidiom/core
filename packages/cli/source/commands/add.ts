@@ -8,12 +8,20 @@
 import { Command, Option } from "clipanion"
 import { runPlan, type Plan, type PlanOptions } from "./plan"
 import { installSource, type SourceInstallResult } from "../source-install/install"
+import type { Deliverable, StylingProfile } from "../registry-schema"
+import { detectPackageManager, type PackageManagerName } from "../package-manager/detect"
+import { add as pmAdd, formatCommand } from "../package-manager/commands"
+import { runPackageManager, type RunPackageManagerResult } from "../package-manager/exec"
 import pc from "picocolors"
 
 export interface AddOptions extends PlanOptions {
   dryRun?: boolean
   registry?: string
   noNetwork?: boolean
+  /** Explicit package-manager override; otherwise detected from the project (CLI-005). */
+  packageManager?: PackageManagerName
+  /** When true, actually run the install command instead of only printing it (CLI-005). */
+  install?: boolean
 }
 
 export interface AddResult {
@@ -21,18 +29,22 @@ export interface AddResult {
   installCommand: string | null
   blocked: boolean
   sourceResult?: SourceInstallResult
+  /** Present when --install actually ran the package-manager command. */
+  installRun?: RunPackageManagerResult
 }
 
 /**
  * Core add logic.
  */
-export function runAdd(options: AddOptions): AddResult {
+export async function runAdd(options: AddOptions): Promise<AddResult> {
   const plan = runPlan({
     primitive: options.primitive,
     cwd: options.cwd,
     mode: options.mode,
     registry: options.registry,
     noNetwork: options.noNetwork,
+    deliverable: options.deliverable,
+    styling: options.styling,
   })
 
   if (plan.violations.length > 0) {
@@ -50,7 +62,14 @@ export function runAdd(options: AddOptions): AddResult {
   }
 
   const packages = plan.entries.map((e) => `${e.package}@${e.version}`)
-  const installCommand = `pnpm add ${packages.join(" ")}`
+  const pm = detectPackageManager({ cwd: options.cwd, override: options.packageManager })
+  const command = pmAdd(pm, packages)
+  const installCommand = formatCommand(command)
+
+  if (options.install && !options.dryRun) {
+    const installRun = await runPackageManager({ command, cwd: options.cwd })
+    return { plan, installCommand, blocked: false, installRun }
+  }
 
   return { plan, installCommand, blocked: false }
 }
@@ -66,6 +85,9 @@ export class AddCommand extends Command {
       ["Add dialog as package", "solidiom add dialog"],
       ["Add dialog as source", "solidiom add dialog --mode source"],
       ["Dry run", "solidiom add select --dry-run"],
+      ["Add a component deliverable", "solidiom add button --deliverable component"],
+      ["Add with a specific styling profile", "solidiom add button --styling tailwind"],
+      ["Actually run the install with a specific package manager", "solidiom add dialog --install --package-manager yarn"],
     ],
   })
 
@@ -77,24 +99,40 @@ export class AddCommand extends Command {
   noNetwork = Option.Boolean("--no-network", false, {
     description: "Use only cached/local registry data (no network fetch)",
   })
+  deliverable = Option.String("--deliverable", {
+    description: "Product-layer deliverable to add (primitive, component, block, template, theme)",
+  })
+  styling = Option.String("--styling", {
+    description: "Styling profile to add (css, tailwind, unocss)",
+  })
+  packageManager = Option.String("--package-manager", {
+    description: "Package manager to use (npm, pnpm, yarn, bun) — auto-detected if omitted",
+  })
+  install = Option.Boolean("--install", false, {
+    description: "Actually run the install command instead of only printing it",
+  })
   dryRun = Option.Boolean("--dry-run", false, {
     description: "Show what would be done without writing",
   })
   json = Option.Boolean("--json", false, { description: "Output as JSON" })
 
   async execute(): Promise<number> {
-    const result = runAdd({
+    const result = await runAdd({
       primitive: this.primitive,
       cwd: process.cwd(),
       mode: this.mode as "package" | "source" | undefined,
       registry: this.registry,
       noNetwork: this.noNetwork,
+      deliverable: this.deliverable as Deliverable | undefined,
+      styling: this.styling as StylingProfile | undefined,
+      packageManager: this.packageManager as PackageManagerName | undefined,
+      install: this.install,
       dryRun: this.dryRun,
     })
 
     if (this.json) {
       this.context.stdout.write(JSON.stringify(result, null, 2) + "\n")
-      return 0
+      return result.installRun && result.installRun.code !== 0 ? result.installRun.code : 0
     }
 
     if (result.blocked) {
@@ -105,7 +143,15 @@ export class AddCommand extends Command {
       return 1
     }
 
-    if (result.installCommand) {
+    if (result.installRun) {
+      if (result.installRun.stdout) this.context.stdout.write(result.installRun.stdout)
+      if (result.installRun.stderr) this.context.stderr.write(result.installRun.stderr)
+      if (result.installRun.code !== 0) {
+        this.context.stderr.write(pc.red(`\n✗ ${result.installCommand} exited with code ${result.installRun.code}\n`))
+        return result.installRun.code
+      }
+      this.context.stdout.write(pc.green(`\n✓ ${result.installCommand}\n`))
+    } else if (result.installCommand) {
       this.context.stdout.write(pc.green(result.installCommand) + "\n")
     } else if (result.sourceResult) {
       const sr = result.sourceResult

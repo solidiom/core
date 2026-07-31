@@ -7,21 +7,29 @@
 import { Command } from "clipanion";
 import { type Plan, type PlanOptions } from "./plan";
 import { type SourceInstallResult } from "../source-install/install";
+import { type PackageManagerName } from "../package-manager/detect";
+import { type RunPackageManagerResult } from "../package-manager/exec";
 export interface AddOptions extends PlanOptions {
     dryRun?: boolean;
     registry?: string;
     noNetwork?: boolean;
+    /** Explicit package-manager override; otherwise detected from the project (CLI-005). */
+    packageManager?: PackageManagerName;
+    /** When true, actually run the install command instead of only printing it (CLI-005). */
+    install?: boolean;
 }
 export interface AddResult {
     plan: Plan;
     installCommand: string | null;
     blocked: boolean;
     sourceResult?: SourceInstallResult;
+    /** Present when --install actually ran the package-manager command. */
+    installRun?: RunPackageManagerResult;
 }
 /**
  * Core add logic.
  */
-export declare function runAdd(options: AddOptions): AddResult;
+export declare function runAdd(options: AddOptions): Promise<AddResult>;
 /**
  * Clipanion command wrapper.
  */
@@ -32,6 +40,10 @@ export declare class AddCommand extends Command {
     mode: string | undefined;
     registry: string | undefined;
     noNetwork: boolean;
+    deliverable: string | undefined;
+    styling: string | undefined;
+    packageManager: string | undefined;
+    install: boolean;
     dryRun: boolean;
     json: boolean;
     execute(): Promise<number>;

@@ -89,6 +89,45 @@ import { z as z2 } from "zod";
 var SUPPORTED_REGISTRY_INDEX_VERSION = 2;
 var SUPPORTED_MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v2.json";
 var SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v2.json";
+var DELIVERABLES = ["primitive", "component", "block", "template", "theme"];
+var deliverableSchema = z2.enum(DELIVERABLES);
+var STYLING_PROFILES = ["css", "tailwind", "unocss"];
+var stylingProfileSchema = z2.enum(STYLING_PROFILES);
+var capabilitySchema = z2.object({
+  name: z2.string().min(1),
+  version: z2.number().int().positive(),
+  default: z2.string().regex(/^@solidiom\//)
+});
+var documentationLocaleSchema = z2.object({
+  status: z2.enum(["missing", "draft", "stale", "reviewed"]),
+  sourceHash: z2.string().optional(),
+  lastUpdated: z2.string().optional()
+});
+var manifestDocumentationSchema = z2.object({
+  status: z2.enum(["stub", "draft", "review", "complete"]),
+  locales: z2.record(documentationLocaleSchema)
+});
+var manifestStylingSchema = z2.object({
+  outputs: z2.array(stylingProfileSchema),
+  themeCompatible: z2.array(z2.string())
+});
+var manifestSearchSchema = z2.object({
+  keywords: z2.array(z2.string())
+});
+var manifestProvenanceSchema = z2.object({
+  repository: z2.string(),
+  directory: z2.string(),
+  sourceCommit: z2.string().optional()
+});
+var manifestCliSchema = z2.object({
+  addCommand: z2.string().min(1),
+  installDeps: z2.array(z2.string())
+});
+var manifestAccessibilitySchema = z2.object({
+  reviewStatus: z2.enum(["none", "automated", "manual", "complete"]),
+  evidenceIds: z2.array(z2.string()),
+  lastReviewed: z2.string().optional()
+});
 var integritySchema = z2.object({
   algorithm: z2.literal("sha256"),
   entriesHash: z2.string().regex(/^[0-9a-f]{64}$/),
@@ -104,28 +143,18 @@ var registryPrimitiveSummarySchema = z2.object({
   description: z2.string(),
   category: z2.string().min(1),
   status: z2.enum(["experimental", "preview", "stable", "deprecated"]),
-  deliverables: z2.array(z2.string()),
+  deliverables: z2.array(deliverableSchema),
   hasAccessibilityEvidence: z2.boolean(),
   accessibility: z2.object({
     reviewStatus: z2.enum(["none", "automated", "manual", "complete"]),
     evidenceIds: z2.array(z2.string())
   }),
   documentationStatus: z2.enum(["stub", "draft", "review", "complete"]),
-  documentationLocales: z2.record(
-    z2.object({
-      status: z2.enum(["missing", "draft", "stale", "reviewed"]),
-      sourceHash: z2.string().optional(),
-      lastUpdated: z2.string().optional()
-    })
-  ),
-  stylingOutputs: z2.array(z2.enum(["css", "tailwind", "unocss"])),
+  documentationLocales: z2.record(documentationLocaleSchema),
+  stylingOutputs: z2.array(stylingProfileSchema),
   themeCompatible: z2.array(z2.string()),
   searchKeywords: z2.array(z2.string()),
-  provenance: z2.object({
-    repository: z2.string(),
-    directory: z2.string(),
-    sourceCommit: z2.string().optional()
-  })
+  provenance: manifestProvenanceSchema
 });
 var registryAdapterSchema = z2.object({
   name: z2.string().min(1),
@@ -157,12 +186,22 @@ var registryManifestSchema = z2.object({
   description: z2.string(),
   category: z2.string().min(1),
   status: z2.enum(["experimental", "preview", "stable", "deprecated"]),
+  deliverables: z2.array(deliverableSchema),
+  capabilities: z2.array(capabilitySchema),
+  cli: manifestCliSchema,
+  accessibility: manifestAccessibilitySchema,
+  documentation: manifestDocumentationSchema,
+  styling: manifestStylingSchema,
+  search: manifestSearchSchema,
   source: z2.object({
     entry: z2.string().min(1),
     files: z2.array(z2.string())
   }),
   dependencies: z2.array(z2.string()),
-  integrity: manifestIntegritySchema
+  runtime: z2.array(z2.string()),
+  integrity: manifestIntegritySchema,
+  provenance: manifestProvenanceSchema,
+  lastUpdated: z2.string()
 });
 var RegistrySchemaError = class extends Error {
   constructor(message, path) {
@@ -240,7 +279,10 @@ function loadRegistry(cwd, registryOverride) {
         name: p.name,
         deps: ["@solidiom/runtime"],
         adapters: [],
-        version: p.version
+        version: p.version,
+        deliverables: p.deliverables,
+        stylingOutputs: p.stylingOutputs,
+        themeCompatible: p.themeCompatible
       });
     }
     return registry;
@@ -288,94 +330,60 @@ function discoverFromNodeModules(primitive, cwd) {
       }
     }
     if (!deps.includes("@solidiom/runtime")) deps.unshift("@solidiom/runtime");
-    return { name: primitive, deps, adapters, version: data.version };
+    return {
+      name: primitive,
+      deps,
+      adapters,
+      version: data.version,
+      deliverables: ["primitive"],
+      stylingOutputs: [],
+      themeCompatible: []
+    };
   } catch {
     return null;
   }
 }
-var BUILTIN_PRIMITIVES = /* @__PURE__ */ new Map([
-  ["dialog", { name: "dialog", deps: ["@solidiom/runtime"], adapters: [] }],
+var BUILTIN_PRIMITIVES = new Map(
   [
-    "select",
+    ["dialog", [], []],
+    ["select", [], ["@solidiom/adapter-positioning-floating-ui"]],
+    ["calendar", [], ["@solidiom/adapter-date-internationalized"]],
+    ["carousel", [], ["@solidiom/adapter-carousel-embla"]],
+    ["popover", [], ["@solidiom/adapter-positioning-floating-ui"]],
+    ["tooltip", [], ["@solidiom/adapter-positioning-floating-ui"]],
+    ["menu", [], ["@solidiom/adapter-positioning-floating-ui"]],
+    ["combobox", [], ["@solidiom/adapter-positioning-floating-ui"]],
+    ["date-picker", [], ["@solidiom/adapter-date-internationalized"]],
+    ["button", [], []],
+    ["checkbox", [], []],
+    ["switch", [], []],
+    ["slider", [], []],
+    ["accordion", [], []],
+    ["tabs", [], []],
+    ["collapsible", [], []],
+    ["toast", [], []],
+    ["listbox", [], []]
+  ].map(([name, deps, adapters]) => [
+    name,
     {
-      name: "select",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-positioning-floating-ui"]
+      name,
+      deps: ["@solidiom/runtime", ...deps],
+      adapters: [...adapters],
+      deliverables: ["primitive"],
+      stylingOutputs: [],
+      themeCompatible: []
     }
-  ],
-  [
-    "calendar",
-    {
-      name: "calendar",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-date-internationalized"]
-    }
-  ],
-  [
-    "carousel",
-    {
-      name: "carousel",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-carousel-embla"]
-    }
-  ],
-  [
-    "popover",
-    {
-      name: "popover",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-positioning-floating-ui"]
-    }
-  ],
-  [
-    "tooltip",
-    {
-      name: "tooltip",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-positioning-floating-ui"]
-    }
-  ],
-  [
-    "menu",
-    {
-      name: "menu",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-positioning-floating-ui"]
-    }
-  ],
-  [
-    "combobox",
-    {
-      name: "combobox",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-positioning-floating-ui"]
-    }
-  ],
-  [
-    "date-picker",
-    {
-      name: "date-picker",
-      deps: ["@solidiom/runtime"],
-      adapters: ["@solidiom/adapter-date-internationalized"]
-    }
-  ],
-  ["button", { name: "button", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["checkbox", { name: "checkbox", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["switch", { name: "switch", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["slider", { name: "slider", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["accordion", { name: "accordion", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["tabs", { name: "tabs", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["collapsible", { name: "collapsible", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["toast", { name: "toast", deps: ["@solidiom/runtime"], adapters: [] }],
-  ["listbox", { name: "listbox", deps: ["@solidiom/runtime"], adapters: [] }]
-]);
+  ])
+);
 function runPlan(options) {
   const {
     primitive,
     cwd,
     mode: modeOverride,
     registry: registryOverride,
-    noNetwork: _noNetwork
+    noNetwork: _noNetwork,
+    deliverable: requestedDeliverable,
+    styling: requestedStyling
   } = options;
   const configPath = join2(cwd, ".solidiom", "config.json");
   const config = existsSync2(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync3(configPath, "utf8"))) : ConfigSchema.parse({});
@@ -398,6 +406,7 @@ function runPlan(options) {
       primitive,
       mode,
       entries: [],
+      stylingOutputs: [],
       violations: [`Unknown primitive: "${primitive}" \u2014 not found in registry or node_modules`]
     };
   }
@@ -432,7 +441,28 @@ function runPlan(options) {
       }
     }
   }
-  return { primitive, mode, entries, violations };
+  if (requestedDeliverable && !entry.deliverables.includes(requestedDeliverable)) {
+    violations.push(
+      `"${primitive}" does not declare the "${requestedDeliverable}" deliverable (available: ${entry.deliverables.length > 0 ? entry.deliverables.join(", ") : "none"})`
+    );
+  }
+  if (requestedStyling && !entry.stylingOutputs.includes(requestedStyling)) {
+    violations.push(
+      `"${primitive}" has no "${requestedStyling}" styling output (available: ${entry.stylingOutputs.length > 0 ? entry.stylingOutputs.join(", ") : "none"})`
+    );
+  }
+  if (requestedDeliverable === "theme" && entry.deliverables.includes("theme") && entry.themeCompatible.length === 0) {
+    violations.push(`"${primitive}" declares the "theme" deliverable but has no themeCompatible entries`);
+  }
+  return {
+    primitive,
+    mode,
+    entries,
+    ...requestedDeliverable ? { deliverable: requestedDeliverable } : {},
+    ...requestedStyling ? { stylingProfile: requestedStyling } : {},
+    stylingOutputs: entry.stylingOutputs,
+    violations
+  };
 }
 var PlanCommand = class extends Command2 {
   static paths = [["plan"]];
@@ -441,7 +471,9 @@ var PlanCommand = class extends Command2 {
     examples: [
       ["Plan dialog installation", "solidiom plan dialog"],
       ["Plan as JSON", "solidiom plan select --json"],
-      ["Plan in source mode", "solidiom plan dialog --mode source"]
+      ["Plan in source mode", "solidiom plan dialog --mode source"],
+      ["Plan a component deliverable", "solidiom plan button --deliverable component"],
+      ["Plan with a specific styling profile", "solidiom plan button --styling tailwind"]
     ]
   });
   primitive = Option2.String({ required: true });
@@ -453,13 +485,21 @@ var PlanCommand = class extends Command2 {
   noNetwork = Option2.Boolean("--no-network", false, {
     description: "Use only cached/local registry data (no network fetch)"
   });
+  deliverable = Option2.String("--deliverable", {
+    description: "Product-layer deliverable to resolve (primitive, component, block, template, theme)"
+  });
+  styling = Option2.String("--styling", {
+    description: "Styling profile to resolve (css, tailwind, unocss)"
+  });
   async execute() {
     const plan = runPlan({
       primitive: this.primitive,
       cwd: process.cwd(),
       mode: this.mode,
       registry: this.registry,
-      noNetwork: this.noNetwork
+      noNetwork: this.noNetwork,
+      deliverable: this.deliverable,
+      styling: this.styling
     });
     if (this.json) {
       this.context.stdout.write(JSON.stringify(plan, null, 2) + "\n");
@@ -469,6 +509,14 @@ var PlanCommand = class extends Command2 {
 Plan for ${pc2.bold(plan.primitive)} (${plan.mode} mode):
 
 `);
+    if (plan.deliverable) {
+      this.context.stdout.write(`  deliverable: ${pc2.cyan(plan.deliverable)}
+`);
+    }
+    if (plan.stylingProfile) {
+      this.context.stdout.write(`  styling: ${pc2.cyan(plan.stylingProfile)}
+`);
+    }
     for (const entry of plan.entries) {
       const tag = entry.isAdapter ? pc2.cyan("[adapter]") : pc2.dim(`[${entry.reason}]`);
       this.context.stdout.write(`  ${entry.package}@${pc2.green(entry.version)} ${tag}
@@ -629,15 +677,201 @@ function resolveRuntimeSource(cwd) {
   return null;
 }
 
+// src/package-manager/detect.ts
+import { existsSync as existsSync4, readFileSync as readFileSync5 } from "fs";
+import { dirname as dirname2, join as join4 } from "path";
+var LOCKFILE_TO_MANAGER = {
+  "pnpm-lock.yaml": "pnpm",
+  "package-lock.json": "npm",
+  "yarn.lock": "yarn",
+  "bun.lockb": "bun",
+  "bun.lock": "bun"
+};
+var VALID_NAMES = /* @__PURE__ */ new Set(["npm", "pnpm", "yarn", "bun"]);
+function isPackageManagerName(value) {
+  return VALID_NAMES.has(value);
+}
+function parseUserAgent(userAgent) {
+  if (!userAgent) return null;
+  const match = userAgent.match(/^(npm|pnpm|yarn|bun)\/(\d+)/);
+  if (!match) return null;
+  const [, name, major] = match;
+  if (!isPackageManagerName(name)) return null;
+  return { name, majorVersion: Number(major), source: "npm_config_user_agent" };
+}
+function findLockfile(from, maxDepth = 10) {
+  let dir = from;
+  for (let i = 0; i < maxDepth; i++) {
+    for (const [file, manager] of Object.entries(LOCKFILE_TO_MANAGER)) {
+      if (existsSync4(join4(dir, file))) {
+        return { manager, dir };
+      }
+    }
+    const parent = dirname2(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return null;
+}
+function findPackageManagerField(from, maxDepth = 10) {
+  let dir = from;
+  for (let i = 0; i < maxDepth; i++) {
+    const pkgPath = join4(dir, "package.json");
+    if (existsSync4(pkgPath)) {
+      try {
+        const pkg = JSON.parse(readFileSync5(pkgPath, "utf8"));
+        const field = pkg["packageManager"];
+        if (typeof field === "string") {
+          const match = field.match(/^(npm|pnpm|yarn|bun)@(\d+)/);
+          if (match && isPackageManagerName(match[1])) {
+            return { name: match[1], majorVersion: Number(match[2]) };
+          }
+        }
+      } catch {
+      }
+    }
+    const parent = dirname2(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return null;
+}
+function detectPackageManager(options) {
+  const { cwd, override, env = process.env } = options;
+  if (override) {
+    if (!isPackageManagerName(override)) {
+      throw new Error(
+        `Unknown package manager "${override}" \u2014 expected one of: npm, pnpm, yarn, bun`
+      );
+    }
+    return { name: override, source: "flag" };
+  }
+  const fromUserAgent = parseUserAgent(env["npm_config_user_agent"]);
+  if (fromUserAgent) return fromUserAgent;
+  const lockfile = findLockfile(cwd);
+  if (lockfile) {
+    return { name: lockfile.manager, source: "lockfile" };
+  }
+  const packageManagerField = findPackageManagerField(cwd);
+  if (packageManagerField) {
+    return {
+      name: packageManagerField.name,
+      majorVersion: packageManagerField.majorVersion,
+      source: "packageManager-field"
+    };
+  }
+  return { name: "npm", source: "default" };
+}
+
+// src/package-manager/commands.ts
+function isYarnClassic(pm) {
+  return pm.name === "yarn" && pm.majorVersion !== void 0 && pm.majorVersion < 2;
+}
+function add(pm, packages) {
+  return { bin: pm.name, args: ["add", ...packages] };
+}
+function addDev(pm, packages) {
+  switch (pm.name) {
+    case "npm":
+      return { bin: "npm", args: ["install", "--save-dev", ...packages] };
+    case "pnpm":
+      return { bin: "pnpm", args: ["add", "-D", ...packages] };
+    case "yarn":
+      return { bin: "yarn", args: ["add", "-D", ...packages] };
+    case "bun":
+      return { bin: "bun", args: ["add", "-d", ...packages] };
+  }
+}
+function install(pm) {
+  switch (pm.name) {
+    case "npm":
+      return { bin: "npm", args: ["install"] };
+    case "pnpm":
+      return { bin: "pnpm", args: ["install"] };
+    case "yarn":
+      return { bin: "yarn", args: ["install"] };
+    case "bun":
+      return { bin: "bun", args: ["install"] };
+  }
+}
+function exec(pm, bin, args = []) {
+  switch (pm.name) {
+    case "npm":
+      return { bin: "npm", args: ["exec", "--", bin, ...args] };
+    case "pnpm":
+      return { bin: "pnpm", args: ["exec", bin, ...args] };
+    case "yarn":
+      return { bin: "yarn", args: [bin, ...args] };
+    case "bun":
+      return { bin: "bun", args: ["exec", bin, ...args] };
+  }
+}
+function run(pm, script, args = []) {
+  switch (pm.name) {
+    case "npm":
+      return { bin: "npm", args: ["run", script, ...args.length > 0 ? ["--", ...args] : []] };
+    case "pnpm":
+      return { bin: "pnpm", args: ["run", script, ...args] };
+    case "yarn":
+      return { bin: "yarn", args: ["run", script, ...args] };
+    case "bun":
+      return { bin: "bun", args: ["run", script, ...args] };
+  }
+}
+function dlx(pm, pkg, args = []) {
+  switch (pm.name) {
+    case "npm":
+      return { bin: "npm", args: ["exec", "--yes", "--", pkg, ...args] };
+    case "pnpm":
+      return { bin: "pnpm", args: ["dlx", pkg, ...args] };
+    case "yarn":
+      if (isYarnClassic(pm)) {
+        return { bin: "yarn", args: ["create", pkg, ...args] };
+      }
+      return { bin: "yarn", args: ["dlx", pkg, ...args] };
+    case "bun":
+      return { bin: "bun", args: ["x", pkg, ...args] };
+  }
+}
+function formatCommand(command) {
+  return [command.bin, ...command.args].join(" ");
+}
+
+// src/package-manager/exec.ts
+import { execFile } from "child_process";
+function runPackageManager(options) {
+  const { command, cwd, env = process.env, dryRun = false, timeoutMs = 5 * 60 * 1e3 } = options;
+  if (dryRun) {
+    return Promise.resolve({ code: 0, stdout: "", stderr: "", skipped: true });
+  }
+  return new Promise((resolve) => {
+    execFile(
+      command.bin,
+      command.args,
+      { cwd, env, timeout: timeoutMs, maxBuffer: 10 * 1024 * 1024 },
+      (error, stdout, stderr) => {
+        if (error && typeof error.code === "string") {
+          resolve({ code: 127, stdout, stderr: stderr || String(error), skipped: false });
+          return;
+        }
+        const code = error && typeof error.code === "number" ? error.code : error ? 1 : 0;
+        resolve({ code, stdout, stderr, skipped: false });
+      }
+    );
+  });
+}
+
 // src/commands/add.ts
 import pc3 from "picocolors";
-function runAdd(options) {
+async function runAdd(options) {
   const plan = runPlan({
     primitive: options.primitive,
     cwd: options.cwd,
     mode: options.mode,
     registry: options.registry,
-    noNetwork: options.noNetwork
+    noNetwork: options.noNetwork,
+    deliverable: options.deliverable,
+    styling: options.styling
   });
   if (plan.violations.length > 0) {
     return { plan, installCommand: null, blocked: true };
@@ -652,7 +886,13 @@ function runAdd(options) {
     return { plan, installCommand: null, blocked: false, sourceResult };
   }
   const packages = plan.entries.map((e) => `${e.package}@${e.version}`);
-  const installCommand = `pnpm add ${packages.join(" ")}`;
+  const pm = detectPackageManager({ cwd: options.cwd, override: options.packageManager });
+  const command = add(pm, packages);
+  const installCommand = formatCommand(command);
+  if (options.install && !options.dryRun) {
+    const installRun = await runPackageManager({ command, cwd: options.cwd });
+    return { plan, installCommand, blocked: false, installRun };
+  }
   return { plan, installCommand, blocked: false };
 }
 var AddCommand = class extends Command3 {
@@ -662,7 +902,10 @@ var AddCommand = class extends Command3 {
     examples: [
       ["Add dialog as package", "solidiom add dialog"],
       ["Add dialog as source", "solidiom add dialog --mode source"],
-      ["Dry run", "solidiom add select --dry-run"]
+      ["Dry run", "solidiom add select --dry-run"],
+      ["Add a component deliverable", "solidiom add button --deliverable component"],
+      ["Add with a specific styling profile", "solidiom add button --styling tailwind"],
+      ["Actually run the install with a specific package manager", "solidiom add dialog --install --package-manager yarn"]
     ]
   });
   primitive = Option3.String({ required: true });
@@ -673,22 +916,38 @@ var AddCommand = class extends Command3 {
   noNetwork = Option3.Boolean("--no-network", false, {
     description: "Use only cached/local registry data (no network fetch)"
   });
+  deliverable = Option3.String("--deliverable", {
+    description: "Product-layer deliverable to add (primitive, component, block, template, theme)"
+  });
+  styling = Option3.String("--styling", {
+    description: "Styling profile to add (css, tailwind, unocss)"
+  });
+  packageManager = Option3.String("--package-manager", {
+    description: "Package manager to use (npm, pnpm, yarn, bun) \u2014 auto-detected if omitted"
+  });
+  install = Option3.Boolean("--install", false, {
+    description: "Actually run the install command instead of only printing it"
+  });
   dryRun = Option3.Boolean("--dry-run", false, {
     description: "Show what would be done without writing"
   });
   json = Option3.Boolean("--json", false, { description: "Output as JSON" });
   async execute() {
-    const result = runAdd({
+    const result = await runAdd({
       primitive: this.primitive,
       cwd: process.cwd(),
       mode: this.mode,
       registry: this.registry,
       noNetwork: this.noNetwork,
+      deliverable: this.deliverable,
+      styling: this.styling,
+      packageManager: this.packageManager,
+      install: this.install,
       dryRun: this.dryRun
     });
     if (this.json) {
       this.context.stdout.write(JSON.stringify(result, null, 2) + "\n");
-      return 0;
+      return result.installRun && result.installRun.code !== 0 ? result.installRun.code : 0;
     }
     if (result.blocked) {
       this.context.stderr.write(pc3.red("Blocked by policy violations:\n"));
@@ -698,7 +957,19 @@ var AddCommand = class extends Command3 {
       }
       return 1;
     }
-    if (result.installCommand) {
+    if (result.installRun) {
+      if (result.installRun.stdout) this.context.stdout.write(result.installRun.stdout);
+      if (result.installRun.stderr) this.context.stderr.write(result.installRun.stderr);
+      if (result.installRun.code !== 0) {
+        this.context.stderr.write(pc3.red(`
+\u2717 ${result.installCommand} exited with code ${result.installRun.code}
+`));
+        return result.installRun.code;
+      }
+      this.context.stdout.write(pc3.green(`
+\u2713 ${result.installCommand}
+`));
+    } else if (result.installCommand) {
       this.context.stdout.write(pc3.green(result.installCommand) + "\n");
     } else if (result.sourceResult) {
       const sr = result.sourceResult;
@@ -715,19 +986,39 @@ var AddCommand = class extends Command3 {
 
 // src/commands/inspect.ts
 import { Command as Command4, Option as Option4 } from "clipanion";
-import { existsSync as existsSync4, readFileSync as readFileSync5 } from "fs";
-import { join as join4 } from "path";
+import { existsSync as existsSync5 } from "fs";
+import { join as join5 } from "path";
 import pc4 from "picocolors";
+function resolveManifestPath(primitive, cwd, registryOverride) {
+  const candidates = [
+    registryOverride ? join5(registryOverride, `${primitive}.json`) : null,
+    process.env["SOLIDIOM_REGISTRY_PATH"] ? join5(process.env["SOLIDIOM_REGISTRY_PATH"], `${primitive}.json`) : null,
+    join5(cwd, "..", "..", "registry", `${primitive}.json`),
+    join5(cwd, "node_modules", "@solidiom", "registry", `${primitive}.json`)
+  ].filter(Boolean);
+  return candidates.find((path) => existsSync5(path)) ?? null;
+}
 function runInspect(options) {
-  const { cwd, subcommand, primitive } = options;
+  const { cwd, subcommand, primitive, registry: registryOverride } = options;
   const lock = readLock(cwd);
   const entries = Object.values(lock.installed).filter(
     (e) => !primitive || e.primitive === primitive
   );
-  if (subcommand === "manifest") {
-    const registryPath = join4(cwd, "..", "..", "registry", `${primitive}.json`);
-    const manifest = existsSync4(registryPath) ? JSON.parse(readFileSync5(registryPath, "utf8")) : null;
-    return { primitive, mode: "manifest", entries, manifest };
+  if (subcommand === "manifest" || subcommand === "explain") {
+    if (!primitive) {
+      return { primitive, mode: subcommand, entries };
+    }
+    const manifestPath = resolveManifestPath(primitive, cwd, registryOverride);
+    if (!manifestPath) {
+      return { primitive, mode: subcommand, entries };
+    }
+    try {
+      const manifest = readRegistryManifest(manifestPath);
+      return { primitive, mode: subcommand, entries, manifest };
+    } catch (err) {
+      const reason = err instanceof RegistrySchemaError ? err.message : String(err);
+      return { primitive, mode: subcommand, entries, manifestError: reason };
+    }
   }
   return { primitive, mode: subcommand, entries };
 }
@@ -744,16 +1035,20 @@ var InspectCommand = class extends Command4 {
   });
   subcommand = Option4.String({ required: true });
   primitive = Option4.String({ required: false });
+  registry = Option4.String("--registry", {
+    description: "Custom registry URL for manifest resolution"
+  });
   json = Option4.Boolean("--json", false, { description: "Output as JSON" });
   async execute() {
     const result = runInspect({
       cwd: process.cwd(),
       subcommand: this.subcommand,
-      primitive: this.primitive
+      primitive: this.primitive,
+      registry: this.registry
     });
     if (this.json) {
       this.context.stdout.write(JSON.stringify(result, null, 2) + "\n");
-      return 0;
+      return result.manifestError ? 1 : 0;
     }
     switch (this.subcommand) {
       case "source":
@@ -770,6 +1065,15 @@ var InspectCommand = class extends Command4 {
         }
         break;
       case "manifest":
+        if (result.manifestError) {
+          this.context.stderr.write(
+            pc4.red(`Manifest for ${this.primitive} failed schema verification:
+`)
+          );
+          this.context.stderr.write(pc4.red(`  \u2717 ${result.manifestError}
+`));
+          return 1;
+        }
         if (result.manifest) {
           this.context.stdout.write(JSON.stringify(result.manifest, null, 2) + "\n");
         } else {
@@ -787,6 +1091,32 @@ var InspectCommand = class extends Command4 {
 `);
         this.context.stdout.write(`Detached: ${result.entries.filter((e) => e.detached).length}
 `);
+        if (result.manifestError) {
+          this.context.stderr.write(
+            pc4.red(`
+Manifest failed schema verification: ${result.manifestError}
+`)
+          );
+        } else if (result.manifest) {
+          const m = result.manifest;
+          this.context.stdout.write(`
+Deliverables: ${m.deliverables.join(", ")}
+`);
+          this.context.stdout.write(
+            `Styling outputs: ${m.styling.outputs.length > 0 ? m.styling.outputs.join(", ") : "none"}
+`
+          );
+          this.context.stdout.write(
+            `Theme compatible: ${m.styling.themeCompatible.length > 0 ? m.styling.themeCompatible.join(", ") : "none"}
+`
+          );
+          this.context.stdout.write(`Documentation: ${m.documentation.status}
+`);
+          for (const [locale, info] of Object.entries(m.documentation.locales)) {
+            this.context.stdout.write(`  ${locale}: ${info.status}
+`);
+          }
+        }
         break;
       case "provenance":
         for (const e of result.entries) {
@@ -814,8 +1144,8 @@ var InspectCommand = class extends Command4 {
 
 // src/commands/diff.ts
 import { Command as Command5, Option as Option5 } from "clipanion";
-import { existsSync as existsSync5, readFileSync as readFileSync6 } from "fs";
-import { join as join5 } from "path";
+import { existsSync as existsSync6, readFileSync as readFileSync6 } from "fs";
+import { join as join6 } from "path";
 import pc5 from "picocolors";
 function runDiff(options) {
   const { cwd, primitive } = options;
@@ -823,8 +1153,8 @@ function runDiff(options) {
   const entries = [];
   for (const [path, lockEntry] of Object.entries(lock.installed)) {
     if (primitive && lockEntry.primitive !== primitive) continue;
-    const fullPath = join5(cwd, path);
-    if (!existsSync5(fullPath)) {
+    const fullPath = join6(cwd, path);
+    if (!existsSync6(fullPath)) {
       entries.push({ path, primitive: lockEntry.primitive, status: "deleted" });
     } else {
       const currentContent = readFileSync6(fullPath, "utf8");
@@ -940,8 +1270,8 @@ ${result.detached.length} files detached. They will be skipped by 'solidiom upda
 
 // src/commands/update.ts
 import { Command as Command7, Option as Option7 } from "clipanion";
-import { existsSync as existsSync6, readFileSync as readFileSync7, writeFileSync as writeFileSync3, mkdirSync as mkdirSync3 } from "fs";
-import { join as join6, dirname as dirname2, extname } from "path";
+import { existsSync as existsSync7, readFileSync as readFileSync7, writeFileSync as writeFileSync3, mkdirSync as mkdirSync3 } from "fs";
+import { join as join7, dirname as dirname3, extname } from "path";
 
 // src/source-install/ast-transform.ts
 import { Project } from "ts-morph";
@@ -978,8 +1308,8 @@ function rewriteSingleImport(imp, filePath, runtimeDir) {
   return moduleSpecifier;
 }
 function computeRelativeRuntimePath(specifier, filePath, runtimeDir) {
-  const { relative: relative2, dirname: dirname4 } = __require("path");
-  const fileDir = dirname4(filePath);
+  const { relative: relative2, dirname: dirname5 } = __require("path");
+  const fileDir = dirname5(filePath);
   let relToRuntime = relative2(fileDir, runtimeDir).replace(/\\/g, "/");
   if (!relToRuntime.startsWith(".")) relToRuntime = `./${relToRuntime}`;
   const subpath = specifier.replace("@solidiom/runtime", "");
@@ -1007,9 +1337,9 @@ import pc7 from "picocolors";
 function runUpdate(options) {
   const { cwd, primitive, dryRun = false } = options;
   const lock = readLock(cwd);
-  const configPath = join6(cwd, ".solidiom", "config.json");
-  const config = existsSync6(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync7(configPath, "utf8"))) : ConfigSchema.parse({});
-  const runtimeDir = join6(cwd, config.runtimeDir);
+  const configPath = join7(cwd, ".solidiom", "config.json");
+  const config = existsSync7(configPath) ? ConfigSchema.parse(JSON.parse(readFileSync7(configPath, "utf8"))) : ConfigSchema.parse({});
+  const runtimeDir = join7(cwd, config.runtimeDir);
   const upstreamDir = resolvePrimitiveSource2(primitive, cwd);
   if (!upstreamDir) {
     return { entries: [], conflicts: [], updated: 0, merged: 0 };
@@ -1024,14 +1354,14 @@ function runUpdate(options) {
       entries.push({ path, status: "skipped-detached" });
       continue;
     }
-    const fullPath = join6(cwd, path);
-    if (!existsSync6(fullPath)) {
+    const fullPath = join7(cwd, path);
+    if (!existsSync7(fullPath)) {
       entries.push({ path, status: "skipped-deleted" });
       continue;
     }
     const relInPrimitive = path.replace(new RegExp(`.*${escapeRegex(primitive)}/`), "");
-    const upstreamPath = join6(upstreamDir, relInPrimitive);
-    if (!existsSync6(upstreamPath)) {
+    const upstreamPath = join7(upstreamDir, relInPrimitive);
+    if (!existsSync7(upstreamPath)) {
       entries.push({ path, status: "skipped-unchanged" });
       continue;
     }
@@ -1047,7 +1377,7 @@ function runUpdate(options) {
     const localUnmodified = localDigest === lockEntry.digest;
     if (localUnmodified) {
       if (!dryRun) {
-        mkdirSync3(dirname2(fullPath), { recursive: true });
+        mkdirSync3(dirname3(fullPath), { recursive: true });
         writeFileSync3(fullPath, upstreamRewritten);
         lockEntry.digest = upstreamDigest;
       }
@@ -1066,7 +1396,7 @@ function runUpdate(options) {
         conflicts.push(path);
       } else {
         if (!dryRun) {
-          mkdirSync3(dirname2(fullPath), { recursive: true });
+          mkdirSync3(dirname3(fullPath), { recursive: true });
           writeFileSync3(fullPath, mergeResult.content);
           lockEntry.digest = upstreamDigest;
         }
@@ -1147,10 +1477,10 @@ function rewriteWithAst(content, filePath, runtimeDir) {
   }
 }
 function resolvePrimitiveSource2(primitive, cwd) {
-  const nmPath = join6(cwd, "node_modules", "@solidiom", primitive, "source");
-  if (existsSync6(nmPath)) return nmPath;
-  const monoPath = join6(cwd, "..", "..", "packages", primitive, "source");
-  if (existsSync6(monoPath)) return monoPath;
+  const nmPath = join7(cwd, "node_modules", "@solidiom", primitive, "source");
+  if (existsSync7(nmPath)) return nmPath;
+  const monoPath = join7(cwd, "..", "..", "packages", primitive, "source");
+  if (existsSync7(monoPath)) return monoPath;
   return null;
 }
 function escapeRegex(str) {
@@ -1236,13 +1566,13 @@ var UpdateCommand = class extends Command7 {
 
 // src/commands/doctor.ts
 import { Command as Command8, Option as Option8 } from "clipanion";
-import { existsSync as existsSync7, readFileSync as readFileSync8 } from "fs";
-import { join as join7 } from "path";
+import { existsSync as existsSync8, readFileSync as readFileSync8 } from "fs";
+import { join as join8 } from "path";
 import pc8 from "picocolors";
 function runDoctor(cwd) {
   const checks = [];
-  const configPath = join7(cwd, ".solidiom", "config.json");
-  if (existsSync7(configPath)) {
+  const configPath = join8(cwd, ".solidiom", "config.json");
+  if (existsSync8(configPath)) {
     try {
       ConfigSchema.parse(JSON.parse(readFileSync8(configPath, "utf8")));
       checks.push({ name: "config.json valid", status: "pass" });
@@ -1256,8 +1586,8 @@ function runDoctor(cwd) {
       detail: "Run 'solidiom init' to create"
     });
   }
-  const policyPath = join7(cwd, ".solidiom", "policy.json");
-  if (existsSync7(policyPath)) {
+  const policyPath = join8(cwd, ".solidiom", "policy.json");
+  if (existsSync8(policyPath)) {
     try {
       PolicySchema.parse(JSON.parse(readFileSync8(policyPath, "utf8")));
       checks.push({ name: "policy.json valid", status: "pass" });
@@ -1267,8 +1597,8 @@ function runDoctor(cwd) {
   } else {
     checks.push({ name: "policy.json exists", status: "pass", detail: "Optional \u2014 using defaults" });
   }
-  const pkgPath = join7(cwd, "package.json");
-  if (existsSync7(pkgPath)) {
+  const pkgPath = join8(cwd, "package.json");
+  if (existsSync8(pkgPath)) {
     const pkg = JSON.parse(readFileSync8(pkgPath, "utf8"));
     const solidDep = pkg.dependencies?.["solid-js"] ?? pkg.devDependencies?.["solid-js"];
     if (solidDep) {
@@ -1281,8 +1611,8 @@ function runDoctor(cwd) {
       });
     }
   }
-  const lockPath = join7(cwd, ".solidiom", "lock.json");
-  if (existsSync7(lockPath)) {
+  const lockPath = join8(cwd, ".solidiom", "lock.json");
+  if (existsSync8(lockPath)) {
     try {
       const lock = JSON.parse(readFileSync8(lockPath, "utf8"));
       if (lock.version === 1) {
@@ -1298,6 +1628,12 @@ function runDoctor(cwd) {
       checks.push({ name: "lock.json valid", status: "fail", detail: "Parse error" });
     }
   }
+  const pm = detectPackageManager({ cwd });
+  checks.push({
+    name: "package manager",
+    status: "pass",
+    detail: `${pm.name}${pm.majorVersion ? `@${pm.majorVersion}` : ""} (via ${pm.source})`
+  });
   const healthy = checks.every((c) => c.status !== "fail");
   return { checks, healthy };
 }
@@ -1329,8 +1665,8 @@ var DoctorCommand = class extends Command8 {
 
 // src/commands/verify.ts
 import { Command as Command9, Option as Option9 } from "clipanion";
-import { readFileSync as readFileSync9, existsSync as existsSync8 } from "fs";
-import { join as join8, dirname as dirname3, basename } from "path";
+import { readFileSync as readFileSync9, existsSync as existsSync9 } from "fs";
+import { join as join9, dirname as dirname4, basename } from "path";
 import { createVerify, createHmac, createHash as createHash2 } from "crypto";
 import pc9 from "picocolors";
 async function verifySigstore(artifact, trustedIdentities, noNetwork) {
@@ -1393,17 +1729,17 @@ async function verifySigstore(artifact, trustedIdentities, noNetwork) {
 }
 function findBundlePath(artifact) {
   const candidates = [`${artifact}.sigstore.json`, `${artifact}.sigstore`];
-  const dir = dirname3(artifact);
+  const dir = dirname4(artifact);
   const base = basename(artifact);
-  candidates.push(join8(dir, `${base}.sigstore.json`), join8(dir, `${base}.sigstore`));
+  candidates.push(join9(dir, `${base}.sigstore.json`), join9(dir, `${base}.sigstore`));
   for (const p of candidates) {
-    if (existsSync8(p)) return p;
+    if (existsSync9(p)) return p;
   }
   return null;
 }
 function verifyTrustedKeys(artifact, cwd) {
-  const keysPath = join8(cwd, ".solidiom", "trusted-keys.json");
-  if (!existsSync8(keysPath)) {
+  const keysPath = join9(cwd, ".solidiom", "trusted-keys.json");
+  if (!existsSync9(keysPath)) {
     return { verified: false, mode: "trusted-keys", reason: "No .solidiom/trusted-keys.json found" };
   }
   let keys;
@@ -1418,7 +1754,7 @@ function verifyTrustedKeys(artifact, cwd) {
     };
   }
   const sigPath = `${artifact}.sig`;
-  if (!existsSync8(sigPath)) {
+  if (!existsSync9(sigPath)) {
     return {
       verified: false,
       mode: "trusted-keys",
@@ -1476,10 +1812,10 @@ function resolveAlgo(algorithm) {
 }
 function verifyRegistry(options) {
   const { cwd, verifyKeys = [], requireSignature = false } = options;
-  const registryDir = options.registryDir ?? join8(cwd, "registry");
-  const indexPath = join8(registryDir, "index.json");
+  const registryDir = options.registryDir ?? join9(cwd, "registry");
+  const indexPath = join9(registryDir, "index.json");
   const violations = [];
-  if (!existsSync8(indexPath)) {
+  if (!existsSync9(indexPath)) {
     return {
       verified: false,
       reason: `Registry index not found at ${indexPath}`,
@@ -1526,8 +1862,8 @@ function verifyRegistry(options) {
   }
   let primitivesChecked = 0;
   for (const summary of index.primitives) {
-    const manifestPath = join8(registryDir, `${summary.name}.json`);
-    if (!existsSync8(manifestPath)) {
+    const manifestPath = join9(registryDir, `${summary.name}.json`);
+    if (!existsSync9(manifestPath)) {
       violations.push(`${summary.name}: manifest file missing at ${manifestPath}`);
       continue;
     }
@@ -1560,8 +1896,8 @@ function verifyRegistry(options) {
 }
 async function runVerify(options) {
   const { cwd, artifact, noNetwork = false } = options;
-  const policyPath = join8(cwd, ".solidiom", "policy.json");
-  if (!existsSync8(policyPath)) {
+  const policyPath = join9(cwd, ".solidiom", "policy.json");
+  if (!existsSync9(policyPath)) {
     return { verified: true, mode: "none", reason: "No policy \u2014 verification skipped" };
   }
   const policy = PolicySchema.parse(JSON.parse(readFileSync9(policyPath, "utf8")));
@@ -1599,8 +1935,8 @@ var VerifyCommand = class extends Command9 {
   async execute() {
     if (this.registry) {
       const cwd = process.cwd();
-      const policyPath = join8(cwd, ".solidiom", "policy.json");
-      const policy = existsSync8(policyPath) ? PolicySchema.parse(JSON.parse(readFileSync9(policyPath, "utf8"))) : PolicySchema.parse({});
+      const policyPath = join9(cwd, ".solidiom", "policy.json");
+      const policy = existsSync9(policyPath) ? PolicySchema.parse(JSON.parse(readFileSync9(policyPath, "utf8"))) : PolicySchema.parse({});
       const envKey = process.env["REGISTRY_VERIFY_KEY"];
       const verifyKeys = [...envKey ? [envKey] : [], ...policy.registryTrustedKeys];
       const result2 = verifyRegistry({
@@ -1654,8 +1990,8 @@ var VerifyCommand = class extends Command9 {
 
 // src/commands/audit.ts
 import { Command as Command10, Option as Option10 } from "clipanion";
-import { readdirSync as readdirSync2, readFileSync as readFileSync10, existsSync as existsSync9 } from "fs";
-import { join as join9 } from "path";
+import { readdirSync as readdirSync2, readFileSync as readFileSync10, existsSync as existsSync10 } from "fs";
+import { join as join10 } from "path";
 import { randomUUID } from "crypto";
 import pc10 from "picocolors";
 function readPkg(pkgPath) {
@@ -1691,7 +2027,7 @@ function isSpdxId(expr) {
   return expr.length > 0 && !expr.includes(" ");
 }
 function scanNodeModules(nodeModulesPath, seen, components) {
-  if (!existsSync9(nodeModulesPath)) return;
+  if (!existsSync10(nodeModulesPath)) return;
   let entries;
   try {
     entries = readdirSync2(nodeModulesPath);
@@ -1701,7 +2037,7 @@ function scanNodeModules(nodeModulesPath, seen, components) {
   for (const entry of entries) {
     if (entry.startsWith(".")) continue;
     if (entry.startsWith("@")) {
-      const scopeDir = join9(nodeModulesPath, entry);
+      const scopeDir = join10(nodeModulesPath, entry);
       let scopedEntries;
       try {
         scopedEntries = readdirSync2(scopeDir);
@@ -1709,7 +2045,7 @@ function scanNodeModules(nodeModulesPath, seen, components) {
         continue;
       }
       for (const scoped of scopedEntries) {
-        const pkgPath = join9(scopeDir, scoped, "package.json");
+        const pkgPath = join10(scopeDir, scoped, "package.json");
         const pkg = readPkg(pkgPath);
         if (!pkg?.name || !pkg.version) continue;
         const ref = `${pkg.name}@${pkg.version}`;
@@ -1718,7 +2054,7 @@ function scanNodeModules(nodeModulesPath, seen, components) {
         components.push(toCdxComponent(pkg.name, pkg.version, resolveLicenseId(pkg)));
       }
     } else {
-      const pkgPath = join9(nodeModulesPath, entry, "package.json");
+      const pkgPath = join10(nodeModulesPath, entry, "package.json");
       const pkg = readPkg(pkgPath);
       if (!pkg?.name || !pkg.version) continue;
       const ref = `${pkg.name}@${pkg.version}`;
@@ -1731,8 +2067,8 @@ function scanNodeModules(nodeModulesPath, seen, components) {
 function runAudit(cwd) {
   const seen = /* @__PURE__ */ new Set();
   const components = [];
-  const monoPackagesDir = join9(cwd, "..", "..", "packages");
-  if (existsSync9(monoPackagesDir)) {
+  const monoPackagesDir = join10(cwd, "..", "..", "packages");
+  if (existsSync10(monoPackagesDir)) {
     let entries;
     try {
       entries = readdirSync2(monoPackagesDir);
@@ -1740,7 +2076,7 @@ function runAudit(cwd) {
       entries = [];
     }
     for (const entry of entries) {
-      const pkgPath = join9(monoPackagesDir, entry, "package.json");
+      const pkgPath = join10(monoPackagesDir, entry, "package.json");
       const pkg = readPkg(pkgPath);
       if (!pkg?.name?.startsWith("@solidiom/") || !pkg.version) continue;
       const ref = `${pkg.name}@${pkg.version}`;
@@ -1751,9 +2087,9 @@ function runAudit(cwd) {
   }
   const workspaceRoot = findWorkspaceRoot(cwd);
   if (workspaceRoot) {
-    scanNodeModules(join9(workspaceRoot, "node_modules"), seen, components);
+    scanNodeModules(join10(workspaceRoot, "node_modules"), seen, components);
   }
-  scanNodeModules(join9(cwd, "node_modules"), seen, components);
+  scanNodeModules(join10(cwd, "node_modules"), seen, components);
   return {
     bomFormat: "CycloneDX",
     specVersion: "1.5",
@@ -1769,10 +2105,10 @@ function runAudit(cwd) {
 function findWorkspaceRoot(from) {
   let dir = from;
   for (let i = 0; i < 10; i++) {
-    if (existsSync9(join9(dir, "pnpm-workspace.yaml")) || existsSync9(join9(dir, "pnpm-lock.yaml"))) {
+    if (existsSync10(join10(dir, "pnpm-workspace.yaml")) || existsSync10(join10(dir, "pnpm-lock.yaml"))) {
       return dir;
     }
-    const parent = join9(dir, "..");
+    const parent = join10(dir, "..");
     if (parent === dir) break;
     dir = parent;
   }
@@ -1839,8 +2175,24 @@ Run ${pc10.cyan("solidiom audit --sbom")} for full JSON or ${pc10.cyan("solidiom
 };
 export {
   ConfigSchema,
+  DELIVERABLES,
   PolicySchema,
+  RegistrySchemaError,
+  STYLING_PROFILES,
+  SUPPORTED_INDEX_SCHEMA_URL,
+  SUPPORTED_MANIFEST_SCHEMA_URL,
+  SUPPORTED_REGISTRY_INDEX_VERSION,
+  addDev as addDevPackageManagerCommand,
+  add as addPackageManagerCommand,
+  detectPackageManager,
+  dlx as dlxPackageManagerCommand,
+  exec as execPackageManagerCommand,
+  formatCommand,
+  install as installPackageManagerCommand,
   installSource,
+  isPackageManagerName,
+  readRegistryIndex,
+  readRegistryManifest,
   rewriteImportsAst,
   runAdd,
   runAudit,
@@ -1849,6 +2201,8 @@ export {
   runDoctor,
   runInit,
   runInspect,
+  runPackageManager,
+  run as runPackageManagerCommand,
   runPlan,
   runUpdate,
   runVerify,
