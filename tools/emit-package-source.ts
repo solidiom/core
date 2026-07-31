@@ -25,7 +25,13 @@ import { auditSourceParity, type SourceParityError } from "./audit-package-sourc
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 
 /** Every package with a dual-emission `src/` + build-copied `source/` tree. */
-const DUAL_EMISSION_PACKAGES = ["recipes-css", "recipes-tailwind", "recipes-unocss", "cli"] as const
+const DUAL_EMISSION_PACKAGES = [
+  "recipes-css",
+  "recipes-tailwind",
+  "recipes-unocss",
+  "themes",
+  "cli",
+] as const
 
 /** Files the copy step deliberately excludes from `source/` (mirrors tsup.config.base.ts). */
 function isExcludedFromCopy(fileName: string): boolean {

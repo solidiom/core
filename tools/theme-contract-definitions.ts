@@ -87,9 +87,9 @@ export const SOLIDIOM_DEFAULT_THEME: ThemeDefinition = {
       radius: "12px",
       "radius-lg": "16px",
       "radius-full": "999px",
-      "shadow-sm": "0 1px 3px 0 rgba(0, 0, 0, 0.20)",
-      "shadow-md": "0 3px 8px -1px rgba(0, 0, 0, 0.30), 0 1px 4px -2px rgba(0, 0, 0, 0.20)",
-      "shadow-lg": "0 10px 30px -4px rgba(0, 0, 0, 0.40), 0 4px 10px -4px rgba(0, 0, 0, 0.25)",
+      "shadow-sm": "0 1px 3px 0 rgba(0, 0, 0, 0.2)",
+      "shadow-md": "0 3px 8px -1px rgba(0, 0, 0, 0.3), 0 1px 4px -2px rgba(0, 0, 0, 0.2)",
+      "shadow-lg": "0 10px 30px -4px rgba(0, 0, 0, 0.4), 0 4px 10px -4px rgba(0, 0, 0, 0.25)",
     },
   },
 }

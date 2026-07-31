@@ -1,7 +1,15 @@
 import { type UnocssStaticRule } from "./generated-variant-rules";
+import { SOLIDIOM_THEME_PREFLIGHTS, themePreflight, type UnocssThemePreflight } from "./generated-theme-preflights";
 export interface SolidiomPresetOptions {
     /** Prefix for variant names. Default: "ui". */
     prefix?: string;
+    /**
+     * Shipped theme slug (THEME-004) whose `--ui-*` variable assignments should be
+     * injected as a UnoCSS preflight. Omit to install no theme — recipes then fall back
+     * to their own hardcoded `var(--ui-x, fallback)` literal, matching the CSS profile's
+     * unthemed baseline (RECIPE-002 §4).
+     */
+    theme?: string;
 }
 /** Variant definitions mapping variant name to CSS selector. */
 export interface VariantDefinition {
@@ -9,6 +17,7 @@ export interface VariantDefinition {
     selector: string;
 }
 export type { UnocssStaticRule };
+export { SOLIDIOM_THEME_PREFLIGHTS, themePreflight, type UnocssThemePreflight };
 /**
  * Returns the Solidiom UnoCSS preset variant definitions.
  *
@@ -23,6 +32,10 @@ export declare function getSolidiomVariants(options?: SolidiomPresetOptions): Va
 export declare function getSolidiomVariantRules(): UnocssStaticRule[];
 /**
  * Creates the UnoCSS preset object (compatible with UnoCSS defineConfig).
+ *
+ * When `options.theme` names a shipped slug, its `--ui-*` preflight CSS (THEME-004) is
+ * included in the returned `preflights` array so a consumer does not need a separate
+ * stylesheet import to theme every profile that reads the shared runtime namespace.
  */
 export declare function presetSolidiom(options?: SolidiomPresetOptions): {
     name: string;
@@ -34,5 +47,8 @@ export declare function presetSolidiom(options?: SolidiomPresetOptions): {
         } | undefined;
     }[];
     rules: UnocssStaticRule[];
+    preflights: {
+        getCSS: () => string;
+    }[];
 };
 //# sourceMappingURL=index.d.ts.map
