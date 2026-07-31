@@ -18,8 +18,7 @@
     "@solidiom/docs",
     "@solidiom/docs-astro-poc",
     "@solidiom/bench",
-    "@solidiom/eslint-plugin-solidiom",
-    "@solidiom/cli"
+    "@solidiom/eslint-plugin-solidiom"
   ],
   "privatePackages": {
     "version": false,
