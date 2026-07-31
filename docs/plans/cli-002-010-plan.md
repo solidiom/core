@@ -12,7 +12,7 @@ date: 2026-07-31
 
 > **Purpose:** Decomposes `docs/plans/website-tasks.md` §7.1 tasks `CLI-002` through `CLI-010` into ordered, reviewable work with concrete file paths, closed design decisions, and per-task acceptance criteria. The task backlog remains the authority for scope; this document controls how the CLI work is built and in what order.
 
-**Status:** CLI-002, CLI-003 (in-repo portion), CLI-004, CLI-005, CLI-006, and CLI-007 (both PRs) implemented and verified; CLI-003 Part B (CI signing) blocked on OPS-002; CLI-008/009/010 not started
+**Status:** CLI-002, CLI-003 (in-repo portion), CLI-004, CLI-005, CLI-006, CLI-007 (both PRs), and CLI-008 implemented and verified; CLI-003 Part B (CI signing) blocked on OPS-002; CLI-009/010 not started
 **Source backlog:** `docs/plans/website-tasks.md` §7.1
 **Milestone:** M3 — Public beta platform (gate G3)
 **Target package:** `packages/cli` (`@solidiom/cli`)
@@ -311,7 +311,7 @@ Acceptance:
 
 ### CLI-008 — Offline fixtures and four-manager smoke harness
 
-**Status:** `[ ]` **Size:** M **Area:** QA + CLI
+**Status:** `[x]` **Size:** M **Area:** QA + CLI
 
 Changes:
 
@@ -323,6 +323,29 @@ Acceptance:
 
 - The matrix passes offline with a cold cache: two templates × four managers = eight combinations.
 - A deliberately injected `yarn.lock` in a template payload fails the harness.
+
+**Delivered:** both acceptance criteria met and measured — 8/8 combinations pass with zero contact with `registry.npmjs.org` on every leg. The shape of the fixture changed substantially from what this task anticipated, for reasons that only surfaced by running it.
+
+**The fixture is now two-phase, because a cold cache cannot be built from the local pnpm store.** The first approach resolved the templates' full dependency closure from the checkout's own store and published it to Verdaccio. That works for npm, pnpm, and Bun, and it fails for Yarn Classic by construction: a store only ever holds the _current platform's_ slice of the graph (`@tailwindcss/oxide` declares 12 platform-native `optionalDependencies`; a macOS checkout holds exactly one), and where npm/pnpm/Bun skip platform-incompatible optional deps without resolving them, Yarn Classic resolves metadata for every variant and hard-fails on any the registry lacks. No amount of resolver work fixes that — the other 11 tarballs were never downloaded. So:
+
+- `run-offline-test.sh --prep` (`pnpm run smoke:create:prep`) warms a persistent snapshot of Verdaccio's storage against a new `verdaccio-prep-config.yaml` that _does_ have an npmjs uplink. This is the only step that touches the network. It deliberately runs all four managers, because Yarn's insistence on resolving every platform variant is what makes the snapshot complete.
+- The default mode (`pnpm run smoke:create`) serves a throwaway _copy_ of that snapshot through the uplink-free `verdaccio-config.yaml`, so a cache miss 404s. Every manager still gets a fresh cache directory per combination — "cold cache" refers to the managers, which is the property that matters, not to the registry.
+- Verified rather than assumed before building on it: cached packuments and tarballs keep serving intact after the uplink is removed from config, and a never-cached package returns 404 under that config.
+- `@solidiom/*` is the one exception to the snapshot — those versions do not exist on npmjs, so they are packed from the checkout and republished on every run, which also keeps the fixture in step with local source changes.
+
+This deleted the entire hand-rolled resolver (`smoke-create.ts` went 1118 → 792 lines): `collectLocalPackages`, `satisfiesSpecifier`, `selectLocalPackage`, `collectTemplateDependencyClosure`, `packLocalPackage`, `normalizeSpecifier`, `compareVersions`, and the rest. Reimplementing semver matching cost six separate bug fixes before being abandoned (`--ignore-scripts` for lifecycle hooks, `--provenance=false` for local publishes, template `devDependencies` as closure roots, `=`-prefixed ranges, `npm:` aliases, comparator whitespace). The remaining workspace closure needs no semver at all — `workspace:*` is a directory lookup.
+
+**Two silent network leaks found and fixed. Both had produced a passing matrix that was not actually offline.**
+
+- _Invocation-dependent registry override._ Yarn and Bun isolation originally consisted of a config file plus an empty env. `pnpm run <script>` injects `npm_config_registry=https://registry.npmjs.org/` into the script environment (`pnpm exec` does not), and Bun honours that in preference to its own `bunfig.toml`. Invoked directly the Bun leg passed with zero npmjs references; invoked through `pnpm run` it resolved 314 packages straight from npmjs and only failed because `@solidiom/*` is not published there. `baseIsolationEnv()` now sets `npm_config_registry` explicitly for all four managers alongside manager-native variables (`BUN_CONFIG_REGISTRY`, `YARN_REGISTRY`, `YARN_CACHE_FOLDER`, `npm_config_store_dir`), and points outbound HTTP at a closed port with `127.0.0.1` exempted so an external fetch fails loudly. The same block was added to the shell script's per-manager legs.
+- _Verdaccio's own outbound fetch._ Removing `uplinks:` stops metadata proxying, but packuments cached during prep record absolute `dist.tarball` URLs at npmjs, and Verdaccio fetches from those when it holds the metadata but not the file — observed serving `solid-js@2.0.0-experimental.16` that way. The root cause was resolution drift, not Verdaccio: the per-manager `add` matrix projects were bare manifests with no pinning, so npm resolved the `@solidiom/*` peer range `solid-js@^2.0.0-beta.23` onto a different prerelease line whose tarballs the snapshot never captured. Those manifests now carry the same pinning `materialize.ts` emits. Forcing the Verdaccio process itself through a closed proxy was tried and rejected — it prevented Verdaccio's own startup — and is documented in the script so it is not retried.
+
+**One product defect fixed, not worked around (see `.changeset/fix-create-dependency-overrides.md`).** `materialize.ts` rewrote `catalog:`/`workspace:*` on a template's _direct_ dependencies but emitted nothing constraining the transitive graph, which in the monorepo is what `pnpm-workspace.yaml`'s `overrides:` map does. A generated project therefore let every transitive `solid-js`/`@solidjs/web` peer range resolve independently. Consequences: a duplicated Solid reactive runtime (broken silently at runtime), and under npm a resolver backtrack across the whole Solid 2 prerelease space — installing `tanstack-start-solid` exceeded a five-minute timeout, and completes in 3.9s with overrides emitted. `materialize()` now fills in `overrides` (npm, Bun), `resolutions` (Yarn, Bun), and `pnpm.overrides` (pnpm), with any entry the template declares itself taking precedence. This is correct behaviour for real consumers on all four managers, not a harness accommodation.
+
+- Foreign-lockfile coverage: `tools/smoke-create.test.ts` proves the harness's own `runCombination` reports an injected `yarn.lock` as a `create`-phase failure with the real error text, emits only that one phase row, and leaves no directory behind.
+- CI: a new `cli-smoke-create-prep` job warms and caches the snapshot (cache key includes `runner.os`, since the snapshot holds platform-native optional deps), and the four-manager matrix restores it with `fail-on-cache-miss: true` so it can never silently fall back to the network. Failure artifacts unchanged.
+- **Known limit:** the `test` phase is reported as `skipped` ("no test script") for both templates, since neither defines one. The harness drives all five phases and records the skip with its reason, so the chain is honest, but four of five are actually exercised. Giving the templates real test scripts is a template-contract decision affecting all 29 planned templates (`TPL-000`) and was left out of scope rather than decided here.
+- Verified: 8/8 combinations pass with `npmjs_refs=0` on all four legs and the full fixture (create matrix + `add` + isolation matrix) green; 251 `@solidiom/cli` tests; `typecheck`, `source:emit:check`, and `audit:package-source-parity` clean. `pnpm run gate:phase1` reports 224 passed / 1 failed, and that failure (RECIPE-005 computed-style parity, `recipes-unocss` badge hover) is identical with this work stashed — pre-existing and unrelated. It is also order-dependent: it passes 3/3 standalone and fails reliably inside the gate, which is worth its own investigation.
 
 ### CLI-009 — Bilingual CLI documentation
 
@@ -400,21 +423,21 @@ pnpm run gate:phase1
 Additionally:
 
 - `pnpm run registry:build` whenever a `nx.metadata.registry` field or the generator changes (CLI-002).
-- `pnpm run smoke:create` for CLI-007 and CLI-008 changes.
+- `pnpm run smoke:create` for CLI-007 and CLI-008 changes. This runs the offline fixture end to end and requires a registry snapshot; build one first with `pnpm run smoke:create:prep` (the only step needing network). Add `-- --manager <npm|pnpm|yarn|bun>` to run a single leg, `-- --smoke-json-out <path>` for the machine-readable results.
 - A changeset in `.changeset/` for every public-contract change: the `LockEntry` field additions, `ConfigSchema`/`PolicySchema` additions, the `deliverables` shape change, and the new `create` command. No lock-format migration note is needed (Decision 2). **Delivered:** `.changeset/feat-cli-verified-installs-conflict-rollback-create.md` covers the CLI-003/004/006/007 contract changes; `@solidiom/cli` was removed from `.changeset/config.json`'s `ignore` list so the changeset actually versions the package (it had previously been ignored from a time before the CLI carried real public-contract surface).
 
 ---
 
 ## 8. Progress
 
-| Status | Task    | Notes                                                                       |
-| ------ | ------- | --------------------------------------------------------------------------- |
-| [x]    | CLI-002 | Complete. Registry regenerated; button carries a real component deliverable |
-| [~]    | CLI-003 | In-repo verification/lock/CLI work complete; CI signing (Decision 1, OPS-002) still blocked |
-| [x]    | CLI-004 | Complete. Theme installs are multi-artifact; UnoCSS profile documents manual wiring, no codemod |
-| [x]    | CLI-005 | Complete. `runAdd` is now async; `--install`/`--package-manager` added      |
-| [x]    | CLI-006 | Complete. Placeholder scaffold later replaced by CLI-007's real materializer |
-| [x]    | CLI-007 | Complete. PR 1 (engine + `vite-solid-router`) and PR 2 (`tanstack-start-solid`, substituted for SolidStart per the §6 spike) both delivered |
-| [ ]    | CLI-008 | Extends `tools/offline-fixture/`, does not replace it                       |
-| [ ]    | CLI-009 | First entries in `en/guides/` and `es/guides/`                              |
-| [ ]    | CLI-010 | Must raise the phase1-gate §6 CLI test count                                |
+| Status | Task    | Notes                                                                                                                                                           |
+| ------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [x]    | CLI-002 | Complete. Registry regenerated; button carries a real component deliverable                                                                                     |
+| [~]    | CLI-003 | In-repo verification/lock/CLI work complete; CI signing (Decision 1, OPS-002) still blocked                                                                     |
+| [x]    | CLI-004 | Complete. Theme installs are multi-artifact; UnoCSS profile documents manual wiring, no codemod                                                                 |
+| [x]    | CLI-005 | Complete. `runAdd` is now async; `--install`/`--package-manager` added                                                                                          |
+| [x]    | CLI-006 | Complete. Placeholder scaffold later replaced by CLI-007's real materializer                                                                                    |
+| [x]    | CLI-007 | Complete. PR 1 (engine + `vite-solid-router`) and PR 2 (`tanstack-start-solid`, substituted for SolidStart per the §6 spike) both delivered                     |
+| [x]    | CLI-008 | Complete. Two-phase fixture: `--prep` warms a Verdaccio snapshot with network, the matrix runs uplink-free against a copy. 8/8 offline, two network leaks fixed |
+| [ ]    | CLI-009 | First entries in `en/guides/` and `es/guides/`                                                                                                                  |
+| [ ]    | CLI-010 | Must raise the phase1-gate §6 CLI test count                                                                                                                    |
