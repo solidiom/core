@@ -109,13 +109,6 @@ jobs:
           pnpm run theme:emit:tailwind:check
           pnpm run theme:emit:unocss:check
       - name: THEME-005 — theme cross-output parity, contrast, and round-trip audit
-        # Advisory until the known finding below is resolved: solidiom-default's light-mode
-        # primary-foreground/primary pair is ~4.36:1, just under the 4.5:1 WCAG AA body-text
-        # minimum (docs/contracts/theme-contract.md §7). Generated-output freshness,
-        # cross-output parity, and round-trip all already pass and are not exempted by this —
-        # only the contrast finding is. Remove continue-on-error once BRAND-002's primary
-        # colour is adjusted to clear the minimum.
-        continue-on-error: true
         run: pnpm run audit:theme-parity
 
   test-node:
