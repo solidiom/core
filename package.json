@@ -63,7 +63,9 @@
     "deps:check:ci": "tsx scripts/check-library-updates.mts --fail-on-outdated",
     "smoke:create:prep": "tools/offline-fixture/run-offline-test.sh --prep",
     "smoke:create": "tools/offline-fixture/run-offline-test.sh",
-    "assert:no-unverified": "tsx tools/assert-no-unverified.ts"
+    "assert:no-unverified": "tsx tools/assert-no-unverified.ts",
+    "beta:acceptance:report": "tsx tests/beta-acceptance/report.ts",
+    "beta:acceptance:e2e": "playwright test --config tests/beta-acceptance/playwright.config.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",
