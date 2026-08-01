@@ -21,6 +21,7 @@ import {
 import { getPrimaryLinks, resourceLinks } from "../lib/nav-links"
 import SiteHeader from "../components/SiteHeader.astro"
 import SiteFooter from "../components/SiteFooter.astro"
+import { BetaBanner } from "../components/BetaBanner"
 
 interface Props {
   title?: string
@@ -144,12 +145,15 @@ const homeHref = resolveEquivalentLocalePath("/", locale) ?? "/"
     <a class="skip-link" href={`#${mainId}`}>Skip to main content</a>
     {
       showHeader && (
-        <SiteHeader
-          links={getPrimaryLinks(locale)}
-          resourceLinks={resourceLinks}
-          homeHref={homeHref}
-          locale={locale}
-        />
+        <>
+          <BetaBanner locale={locale} client:load />
+          <SiteHeader
+            links={getPrimaryLinks(locale)}
+            resourceLinks={resourceLinks}
+            homeHref={homeHref}
+            locale={locale}
+          />
+        </>
       )
     }
     <main id={mainId} class="focus-root" tabindex="-1">
