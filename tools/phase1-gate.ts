@@ -261,7 +261,7 @@ check(
 // ─── 6. CLI doctor command ──────────────────────────────────────────────
 console.log("\n§6 CLI doctor:")
 check("doctor command source exists", fileExists("packages/cli/src/commands/doctor.ts"))
-check("CLI tests still pass (≥8)", runTests("@solidiom/cli", 8))
+check("CLI tests still pass (≥25)", runTests("@solidiom/cli", 25))
 
 // ─── 7. Vite plugin builds ──────────────────────────────────────────────
 console.log("\n§7 Vite plugin:")
@@ -439,6 +439,30 @@ check(
   "umbrella purity check passes",
   purityResult.ok,
   "Umbrella has implementation lines or surface mismatch — run: pnpm run audit:umbrella-purity",
+)
+
+// ─── 11. CLI command surface (CLI-010) ──────────────────────────────────
+console.log("\n§11 CLI command surface:")
+check("create.ts exists", fileExists("packages/cli/src/commands/create.ts"))
+check("diff.ts exists", fileExists("packages/cli/src/commands/diff.ts"))
+check("detach.ts exists", fileExists("packages/cli/src/commands/detach.ts"))
+check("update.ts exists", fileExists("packages/cli/src/commands/update.ts"))
+check("doctor.ts exists", fileExists("packages/cli/src/commands/doctor.ts"))
+check("verify.ts exists", fileExists("packages/cli/src/commands/verify.ts"))
+check("audit.ts exists", fileExists("packages/cli/src/commands/audit.ts"))
+check("package-manager/detect.ts exists", fileExists("packages/cli/src/package-manager/detect.ts"))
+check("package-manager/commands.ts exists", fileExists("packages/cli/src/package-manager/commands.ts"))
+check("package-manager/exec.ts exists", fileExists("packages/cli/src/package-manager/exec.ts"))
+check("source-install/verify-source.ts exists", fileExists("packages/cli/src/source-install/verify-source.ts"))
+check("source-install/lock.ts exists", fileExists("packages/cli/src/source-install/lock.ts"))
+check("source-install/destinations.ts exists", fileExists("packages/cli/src/source-install/destinations.ts"))
+check("source-install/conflict.ts exists", fileExists("packages/cli/src/source-install/conflict.ts"))
+check("source-install/rollback.ts exists", fileExists("packages/cli/src/source-install/rollback.ts"))
+check("create/materialize.ts exists", fileExists("packages/cli/src/create/materialize.ts"))
+check("create/config-gen.ts exists", fileExists("packages/cli/src/create/config-gen.ts"))
+check(
+  "requireVerifiedSource is wired in PolicySchema",
+  fileContains("packages/cli/src/schemas.ts", "requireVerifiedSource"),
 )
 
 // ─── Summary ────────────────────────────────────────────────────────────
