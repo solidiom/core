@@ -12,7 +12,7 @@ date: 2026-07-31
 
 > **Purpose:** Decomposes `docs/plans/website-tasks.md` §7.1 tasks `CLI-002` through `CLI-010` into ordered, reviewable work with concrete file paths, closed design decisions, and per-task acceptance criteria. The task backlog remains the authority for scope; this document controls how the CLI work is built and in what order.
 
-**Status:** CLI-002, CLI-003 (in-repo portion), CLI-004, CLI-005, CLI-006, CLI-007 (both PRs), and CLI-008 implemented and verified; CLI-003 Part B (CI signing) blocked on OPS-002; CLI-009/010 not started
+**Status:** CLI-002, CLI-003 (in-repo portion), CLI-004, CLI-005, CLI-006, CLI-007 (both PRs), CLI-008, CLI-009, and CLI-010 implemented and verified; CLI-003 Part B (CI signing) blocked on OPS-002
 **Source backlog:** `docs/plans/website-tasks.md` §7.1
 **Milestone:** M3 — Public beta platform (gate G3)
 **Target package:** `packages/cli` (`@solidiom/cli`)
@@ -349,7 +349,7 @@ This deleted the entire hand-rolled resolver (`smoke-create.ts` went 1118 → 79
 
 ### CLI-009 — Bilingual CLI documentation
 
-**Status:** `[ ]` **Size:** S **Area:** Documentation
+**Status:** `[x]` **Size:** S **Area:** Documentation
 
 Changes:
 
@@ -363,9 +363,17 @@ Acceptance:
 - Route parity, canonical/`hreflang`, and search inclusion pass for all eight pages in both locales.
 - Failure-recovery coverage for: blocked policy, failed verification, install conflict, and cancelled `create`.
 
+**Delivered:** all eight guide pairs created with real `translationSourceHash` values computed via SHA-256 of the EN source content.
+
+- All commands, flags, package names, and config keys remain untranslated per Translation DoD §8.5.
+- `astro check` reports 0 errors; the translation freshness tool reports all 8 guides as `draft` with no hash mismatches — glossary/technical-literal suggestions are informational for `beta` maturity content, not blockers.
+- The `docs/guides/offline-install.md` content is folded into `cli-recovery.md` (both EN and ES), covering Verdaccio mirroring, registry catalog mirroring, offline `.solidiom/config.json` setup, `--no-network`/`--registry` flags, and verification.
+- Failure-recovery coverage includes: blocked policy (version constraints, missing deliverables), failed verification (`--allow-unverified` bypass), install conflicts (`--diff` preview, `--force` overwrite, rollback), and cancelled `create` (cleanup journal, manual cleanup).
+- Verified: `astro check` 0 errors; translation freshness clean (no stale hashes, no GA blockers).
+
 ### CLI-010 — Test and gate coverage
 
-**Status:** `[ ]` **Size:** M **Area:** QA
+**Status:** `[x]` **Size:** M **Area:** QA
 
 Changes:
 
@@ -381,6 +389,15 @@ Acceptance:
 - Every command has at least one integration test exercising its `runX` core.
 - The CLI test count in §6 matches reality and rises with the suite.
 - `pnpm run gate:phase1` passes with the new section.
+
+**Delivered:** every remaining command now has dedicated test coverage; the gate is tightened.
+
+- New test files: `diff.test.ts` (8 tests), `detach.test.ts` (7), `update.test.ts` (8), `doctor.test.ts` (10), `audit.test.ts` (8) — 41 new tests.
+- Extended `ast-transform.test.ts` with 8 new cases: default imports, mixed named/namespace, side-effect imports, deeply nested runtime subpaths, mixed solidiom/non-solidiom, dynamic imports, comment-only files, and malformed JSX error handling.
+- `§6` test threshold raised from 8 to 25 (current suite: 25 files / 300 tests).
+- `§11 CLI command surface` added to `phase1-gate.ts`: asserts existence of all 17 command and infrastructure modules (create, diff, detach, update, doctor, verify, audit, package-manager/detect, package-manager/commands, package-manager/exec, source-install/verify-source, source-install/lock, source-install/destinations, source-install/conflict, source-install/rollback, create/materialize, create/config-gen) and that `requireVerifiedSource` is wired in `PolicySchema`.
+- `smoke:create` and `smoke:create:prep` already exist in root `package.json` (delivered by CLI-008). `audit:cli-surface` was not added — the `§11` gate section in `phase1-gate.ts` already covers the command-surface assertion more effectively than a standalone audit script would.
+- Verified: 300 tests pass, typecheck clean, `source:emit:check` clean, `audit:package-source-parity` clean.
 
 ---
 
