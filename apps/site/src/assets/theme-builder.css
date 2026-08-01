@@ -519,4 +519,249 @@
   .theme-builder__color-inputs {
     flex-wrap: wrap;
   }
+
+  .theme-builder__export-output-wrapper {
+    max-height: 300px;
+  }
+
+  .theme-builder__export-dialog {
+    max-width: 95vw;
+    max-height: 90vh;
+  }
+
+  .theme-builder__export-format-options {
+    flex-wrap: wrap;
+  }
+}
+
+/* ─── BUILDER-004: Export dialog ─────────────────────────────────────────── */
+
+.theme-builder__btn-export {
+  padding: 0.375rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.theme-builder__btn-export:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.theme-builder__export-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 0.6);
+  animation: theme-builder-fade-in 0.15s ease;
+}
+
+.theme-builder__export-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 720px;
+  max-height: 85vh;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sol-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: theme-builder-scale-in 0.2s ease;
+}
+
+.theme-builder__export-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 0.75rem;
+}
+
+.theme-builder__export-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-foreground);
+}
+
+.theme-builder__export-description {
+  font-size: 0.8125rem;
+  color: var(--color-foreground-muted);
+  margin: 0.25rem 0 0;
+}
+
+.theme-builder__export-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background: transparent;
+  font-size: 1.125rem;
+  color: var(--color-foreground-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.theme-builder__export-close:hover {
+  background: var(--color-surface-overlay);
+  color: var(--color-foreground);
+}
+
+.theme-builder__export-format {
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.theme-builder__export-format-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-foreground-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.theme-builder__export-format-options {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.theme-builder__export-format-option {
+  padding: 0.375rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-foreground-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.theme-builder__export-format-option input[type="radio"] {
+  display: none;
+}
+
+.theme-builder__export-format-option:hover {
+  background: var(--color-surface-raised);
+  color: var(--color-foreground);
+  border-color: var(--color-border-active);
+}
+
+.theme-builder__export-format-option--active {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-color: var(--color-primary);
+}
+
+.theme-builder__export-format-option--active:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.theme-builder__export-output-wrapper {
+  margin: 0 1.5rem;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  min-height: 0;
+  max-height: 360px;
+}
+
+.theme-builder__export-output {
+  flex: 1;
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  background: var(--color-surface-sunken);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  color: var(--color-foreground);
+  tab-size: 2;
+  min-height: 0;
+}
+
+.theme-builder__export-output code {
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.theme-builder__export-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem 1.25rem;
+}
+
+.theme-builder__export-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.theme-builder__export-btn--copy {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-foreground);
+}
+
+.theme-builder__export-btn--copy:hover {
+  background: var(--color-surface-raised);
+  border-color: var(--color-border-active);
+}
+
+.theme-builder__export-btn--download {
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
+
+.theme-builder__export-btn--download:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+@keyframes theme-builder-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes theme-builder-scale-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
