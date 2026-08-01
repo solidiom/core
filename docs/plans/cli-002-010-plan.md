@@ -456,5 +456,5 @@ Additionally:
 | [x]    | CLI-006 | Complete. Placeholder scaffold later replaced by CLI-007's real materializer                                                                                    |
 | [x]    | CLI-007 | Complete. PR 1 (engine + `vite-solid-router`) and PR 2 (`tanstack-start-solid`, substituted for SolidStart per the §6 spike) both delivered                     |
 | [x]    | CLI-008 | Complete. Two-phase fixture: `--prep` warms a Verdaccio snapshot with network, the matrix runs uplink-free against a copy. 8/8 offline, two network leaks fixed |
-| [ ]    | CLI-009 | First entries in `en/guides/` and `es/guides/`                                                                                                                  |
-| [ ]    | CLI-010 | Must raise the phase1-gate §6 CLI test count                                                                                                                    |
+| [x]    | CLI-009 | Complete. 8 EN + 8 ES guides with real translationSourceHash, offline-install.md folded into cli-recovery.md             |
+| [x]    | CLI-010 | Complete. 5 new test files (41 tests), ast-transform extended (+8), §6 threshold 8→25, §11 CLI command surface added    |
