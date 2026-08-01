@@ -1,0 +1,963 @@
+{
+  "schemaVersion": 1,
+  "id": "block-catalog-manifest",
+  "title": "Block Catalog Manifest",
+  "description": "Concrete names, outcomes, required states, component dependencies, and data boundaries for all 36 block slots in the Solidiom catalog.",
+  "status": "approved",
+  "taskRef": "docs/plans/website-tasks.md §9.3 BLOCK-000",
+  "blocks": [
+    {
+      "id": "BLOCK-AUTH-01",
+      "category": "AUTH",
+      "name": "Sign In",
+      "outcome": "User can authenticate with email/password or OAuth and reach the authenticated application shell.",
+      "states": [
+        "Loading (credentials submit)",
+        "Empty (no provider selected)",
+        "Error (invalid credentials, network failure)",
+        "Permission-restricted (account locked, MFA required)",
+        "Success (redirect to post-auth destination)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-005",
+        "COMP-042"
+      ],
+      "dataBoundary": "Authentication service via OAuth 2.0 / OIDC or credential endpoint. No persistent data at rest within the block; session token passed to application shell."
+    },
+    {
+      "id": "BLOCK-AUTH-02",
+      "category": "AUTH",
+      "name": "Sign Up",
+      "outcome": "New user can register an account with email, password, and optional OAuth, then complete email verification.",
+      "states": [
+        "Loading (form submit, verification email send)",
+        "Empty (no registration method chosen)",
+        "Error (email already taken, weak password, verification failed, network failure)",
+        "Verification-pending (awaiting email confirmation)",
+        "Success (redirect to onboarding)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-005",
+        "COMP-010",
+        "COMP-042"
+      ],
+      "dataBoundary": "User creation service and email delivery service. Temporary verification token; no PII stored within the block."
+    },
+    {
+      "id": "BLOCK-AUTH-03",
+      "category": "AUTH",
+      "name": "Reset Password",
+      "outcome": "User who has forgotten their password can request a reset link and set a new password.",
+      "states": [
+        "Loading (request submit, password update)",
+        "Empty (initial email input)",
+        "Error (email not found — generic message, expired token, network failure)",
+        "Token-expired (reset link expired)",
+        "Success (password updated, redirect to sign in)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-005",
+        "COMP-010",
+        "COMP-042"
+      ],
+      "dataBoundary": "Password reset service; time-limited tokens. Block never exposes whether an email exists in the system."
+    },
+    {
+      "id": "BLOCK-ONBOARD-01",
+      "category": "ONBOARD",
+      "name": "Welcome Wizard",
+      "outcome": "New user completes a guided multi-step introduction to the platform's core features and preferences.",
+      "states": [
+        "Loading (step transitions)",
+        "Empty (wizard not started)",
+        "Error (step save failure, network failure)",
+        "In-progress (current step with progress indicator)",
+        "Completed (all steps finished, redirect to dashboard)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-004",
+        "COMP-005",
+        "COMP-009",
+        "COMP-012",
+        "COMP-013",
+        "COMP-015",
+        "COMP-020",
+        "COMP-042"
+      ],
+      "dataBoundary": "User preferences service. Skippable steps; partial progress persisted to resume later."
+    },
+    {
+      "id": "BLOCK-ONBOARD-02",
+      "category": "ONBOARD",
+      "name": "Profile Setup",
+      "outcome": "User configures display name, avatar, bio, and organizational affiliation.",
+      "states": [
+        "Loading (profile save, avatar upload)",
+        "Empty (no profile data)",
+        "Error (upload failure, validation failure, network failure)",
+        "Success (profile saved)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-005",
+        "COMP-007",
+        "COMP-010",
+        "COMP-012",
+        "COMP-042"
+      ],
+      "dataBoundary": "User profile service and file storage for avatar. Block reads current user context; writes profile updates."
+    },
+    {
+      "id": "BLOCK-ONBOARD-03",
+      "category": "ONBOARD",
+      "name": "Project Starter",
+      "outcome": "User creates their first project by selecting a template, naming the project, and configuring initial settings.",
+      "states": [
+        "Loading (template fetch, project creation)",
+        "Empty (no templates selected)",
+        "Error (template unavailable, name conflict, network failure)",
+        "In-progress (project provisioning)",
+        "Success (redirect to project)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-007",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Template catalog service and project creation service. Block reads available templates; creates project resource."
+    },
+    {
+      "id": "BLOCK-SETTINGS-01",
+      "category": "SETTINGS",
+      "name": "Account Settings",
+      "outcome": "User manages profile information, email address, and password from a single settings panel.",
+      "states": [
+        "Loading (form loads, save in progress)",
+        "Empty (no changes made)",
+        "Error (save failure, validation error, network failure)",
+        "Unsaved-changes (dirty form state)",
+        "Success (changes persisted)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-005",
+        "COMP-006",
+        "COMP-009",
+        "COMP-010",
+        "COMP-012",
+        "COMP-042"
+      ],
+      "dataBoundary": "User profile and authentication services. Block reads current user data; writes profile and password updates. Email change requires re-verification."
+    },
+    {
+      "id": "BLOCK-SETTINGS-02",
+      "category": "SETTINGS",
+      "name": "Notification Preferences",
+      "outcome": "User configures which notifications they receive via email, push, and in-app channels, organized by category.",
+      "states": [
+        "Loading (preferences load)",
+        "Empty (no notification categories)",
+        "Error (save failure, network failure)",
+        "Unsaved-changes (dirty form)",
+        "Success (preferences saved)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-003",
+        "COMP-004",
+        "COMP-009",
+        "COMP-013",
+        "COMP-014",
+        "COMP-015",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Notification preferences service. Block reads per-user notification settings; writes updated preferences."
+    },
+    {
+      "id": "BLOCK-SETTINGS-03",
+      "category": "SETTINGS",
+      "name": "Danger Zone",
+      "outcome": "User can deactivate account, request data export, or permanently delete account with explicit confirmation.",
+      "states": [
+        "Loading (deactivation, export request, deletion)",
+        "Empty (no pending actions)",
+        "Error (operation failed, insufficient permissions, network failure)",
+        "Confirmation-required (destructive action modal)",
+        "Processing (async export in progress)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-010",
+        "COMP-033",
+        "COMP-042"
+      ],
+      "dataBoundary": "Account lifecycle service and data export service. Block requires re-authentication for destructive actions. Data export is async with status polling."
+    },
+    {
+      "id": "BLOCK-BILLING-01",
+      "category": "BILLING",
+      "name": "Subscription Plans",
+      "outcome": "User can compare available subscription plans, select a plan, and upgrade or downgrade their subscription.",
+      "states": [
+        "Loading (plans fetch, billing transition)",
+        "Empty (no plans available)",
+        "Error (billing service unavailable, payment required, network failure)",
+        "Current-plan-highlighted (active plan visually distinguished)",
+        "Confirmation-required (plan change)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-009",
+        "COMP-010",
+        "COMP-013",
+        "COMP-042"
+      ],
+      "dataBoundary": "Billing service for plan catalog and current subscription. Block reads plan metadata and user's active subscription; writes plan changes."
+    },
+    {
+      "id": "BLOCK-BILLING-02",
+      "category": "BILLING",
+      "name": "Payment Method",
+      "outcome": "User can add, manage, and remove payment methods for their account.",
+      "states": [
+        "Loading (payment form, method fetch)",
+        "Empty (no payment methods on file)",
+        "Error (payment declined, service error, network failure)",
+        "Processing (payment tokenization)",
+        "Success (method added/removed)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-007",
+        "COMP-008",
+        "COMP-010",
+        "COMP-042"
+      ],
+      "dataBoundary": "Payment processor via tokenization API. Block never stores raw card numbers; relies on payment provider's hosted fields or tokens."
+    },
+    {
+      "id": "BLOCK-BILLING-03",
+      "category": "BILLING",
+      "name": "Invoice History",
+      "outcome": "User can view, filter, and download past invoices and payment receipts.",
+      "states": [
+        "Loading (invoices fetch)",
+        "Empty (no invoice history)",
+        "Error (fetch failure, network failure)",
+        "Filtering-active (applied date/amount filters)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-004",
+        "COMP-007",
+        "COMP-016",
+        "COMP-017",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Billing service invoice endpoint. Read-only block; invoice PDFs served via pre-signed URLs from the billing provider."
+    },
+    {
+      "id": "BLOCK-ADMIN-01",
+      "category": "ADMIN",
+      "name": "Team Management",
+      "outcome": "Admin can invite new team members, manage existing members, assign roles, and remove access.",
+      "states": [
+        "Loading (members fetch, invite send)",
+        "Empty (no team members)",
+        "Error (invite failed, permission denied, network failure)",
+        "Pending-invite (invitation sent, awaiting acceptance)",
+        "Success (member added/removed)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-007",
+        "COMP-012",
+        "COMP-016",
+        "COMP-017",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Team management and invitation services. Block requires admin role; reads team roster; writes invites and membership changes."
+    },
+    {
+      "id": "BLOCK-ADMIN-02",
+      "category": "ADMIN",
+      "name": "Audit Log",
+      "outcome": "Admin can review a filterable log of system and user activities with timestamps, actors, and action details.",
+      "states": [
+        "Loading (log fetch)",
+        "Empty (no events in range)",
+        "Error (fetch failure, permission denied, network failure)",
+        "Filtering-active (applied filters)",
+        "Pagination-loading (next page)"
+      ],
+      "componentDependencies": [
+        "COMP-002",
+        "COMP-004",
+        "COMP-007",
+        "COMP-013",
+        "COMP-016",
+        "COMP-017",
+        "COMP-020",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Audit event store. Read-only block; requires admin role. Events are immutable append-only records."
+    },
+    {
+      "id": "BLOCK-ADMIN-03",
+      "category": "ADMIN",
+      "name": "Role Permissions",
+      "outcome": "Admin can view and edit role-permission mappings in a matrix interface to control access granularity.",
+      "states": [
+        "Loading (roles/permissions fetch)",
+        "Empty (no custom roles)",
+        "Error (save failure, permission conflict, network failure)",
+        "Unsaved-changes (dirty matrix)",
+        "Confirmation-required (permission revocation)",
+        "Success (matrix saved)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-009",
+        "COMP-013",
+        "COMP-015",
+        "COMP-016",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Role and permission services. Block reads role definitions and permission schema; writes role-permission mappings. Changes take effect on next authentication cycle."
+    },
+    {
+      "id": "BLOCK-OBS-01",
+      "category": "OBS",
+      "name": "Dashboard Overview",
+      "outcome": "User sees a high-level metrics dashboard with charts, key indicators, and trend summaries.",
+      "states": [
+        "Loading (metrics fetch, chart render)",
+        "Empty (no data for period)",
+        "Error (data source unavailable, network failure)",
+        "Stale-data (metrics not recently updated)",
+        "Auto-refresh-active (periodic data refresh)"
+      ],
+      "componentDependencies": [
+        "COMP-004",
+        "COMP-007",
+        "COMP-009",
+        "COMP-011",
+        "COMP-016",
+        "COMP-029",
+        "COMP-033",
+        "COMP-042"
+      ],
+      "dataBoundary": "Metrics aggregation service. Read-only block; data refreshes on a configurable interval. Time-range selector controls query window."
+    },
+    {
+      "id": "BLOCK-OBS-02",
+      "category": "OBS",
+      "name": "Real-time Events",
+      "outcome": "User monitors a live stream of system events with filtering, search, and pause/resume controls.",
+      "states": [
+        "Loading (initial events, connection)",
+        "Empty (no events, stream disconnected)",
+        "Error (connection lost, filter error, network failure)",
+        "Paused (stream halted by user)",
+        "Filtering-active (applied event filters)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-007",
+        "COMP-013",
+        "COMP-016",
+        "COMP-042",
+        "COMP-043"
+      ],
+      "dataBoundary": "Events streaming service via WebSocket or SSE. Read-only block; events are ephemeral unless explicitly saved."
+    },
+    {
+      "id": "BLOCK-OBS-03",
+      "category": "OBS",
+      "name": "Alert Configuration",
+      "outcome": "User creates, edits, and manages alert rules with thresholds, channels, and notification targets.",
+      "states": [
+        "Loading (rules fetch, channels fetch)",
+        "Empty (no alert rules)",
+        "Error (save failure, invalid threshold, network failure)",
+        "Unsaved-changes (dirty rule form)",
+        "Testing (alert test firing)",
+        "Success (rule saved)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-007",
+        "COMP-009",
+        "COMP-010",
+        "COMP-013",
+        "COMP-015",
+        "COMP-016",
+        "COMP-042"
+      ],
+      "dataBoundary": "Alert rules service and notification channel registry. Block reads existing rules; creates/updates/deletes alert configurations."
+    },
+    {
+      "id": "BLOCK-RESOURCE-01",
+      "category": "RESOURCE",
+      "name": "Resource List",
+      "outcome": "User can browse, search, filter, and sort a comprehensive list of resources with status indicators.",
+      "states": [
+        "Loading (resources fetch)",
+        "Empty (no resources match)",
+        "Error (fetch failure, network failure)",
+        "Filtering-active (applied filters/sorts)",
+        "Selection-active (one or more resources selected)"
+      ],
+      "componentDependencies": [
+        "COMP-002",
+        "COMP-004",
+        "COMP-005",
+        "COMP-007",
+        "COMP-008",
+        "COMP-012",
+        "COMP-013",
+        "COMP-016",
+        "COMP-017",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Resource catalog service. Read-only block with bulk selection for downstream actions. Supports server-side pagination and filtering."
+    },
+    {
+      "id": "BLOCK-RESOURCE-02",
+      "category": "RESOURCE",
+      "name": "Resource Detail",
+      "outcome": "User views a single resource's full details, metadata, activity history, and available actions.",
+      "states": [
+        "Loading (resource fetch)",
+        "Empty (resource not found)",
+        "Error (fetch failure, access denied, network failure)",
+        "Action-in-progress (operation on resource)",
+        "History-visible (activity timeline expanded)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-008",
+        "COMP-009",
+        "COMP-010",
+        "COMP-012",
+        "COMP-016",
+        "COMP-020",
+        "COMP-042"
+      ],
+      "dataBoundary": "Resource detail service and activity log. Block reads resource data; performs scoped actions (start/stop/delete) with confirmation."
+    },
+    {
+      "id": "BLOCK-RESOURCE-03",
+      "category": "RESOURCE",
+      "name": "Resource Creator",
+      "outcome": "User creates a new resource through a guided multi-step wizard with template selection, configuration, and validation.",
+      "states": [
+        "Loading (templates fetch, resource provisioning)",
+        "Empty (step not started)",
+        "Error (validation failure, quota exceeded, network failure)",
+        "Step-in-progress (wizard navigation)",
+        "Provisioning (async creation)",
+        "Success (resource created)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-007",
+        "COMP-009",
+        "COMP-010",
+        "COMP-013",
+        "COMP-015",
+        "COMP-020",
+        "COMP-033",
+        "COMP-042"
+      ],
+      "dataBoundary": "Resource creation service and template catalog. Block reads templates and quota; creates resource asynchronously."
+    },
+    {
+      "id": "BLOCK-AI-01",
+      "category": "AI",
+      "name": "Chat Interface",
+      "outcome": "User engages in a conversational AI chat with message history, streaming responses, and attachment support.",
+      "states": [
+        "Loading (model response streaming, history fetch)",
+        "Empty (no conversation started)",
+        "Error (model unavailable, rate limited, network failure)",
+        "Streaming (partial response rendering)",
+        "Typing (user composing)",
+        "Context-full (conversation history loaded)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-008",
+        "COMP-010",
+        "COMP-017",
+        "COMP-036",
+        "COMP-042"
+      ],
+      "dataBoundary": "AI chat service with streaming responses. Block manages conversation state locally; persists messages to chat history service."
+    },
+    {
+      "id": "BLOCK-AI-02",
+      "category": "AI",
+      "name": "Prompt Studio",
+      "outcome": "User builds, tests, saves, and organizes AI prompts with variables, templates, and versioning.",
+      "states": [
+        "Loading (prompts fetch, test execution)",
+        "Empty (no saved prompts)",
+        "Error (save failure, test failed, network failure)",
+        "Unsaved-changes (dirty prompt editor)",
+        "Testing (prompt execution in progress)",
+        "Success (prompt saved)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-007",
+        "COMP-008",
+        "COMP-009",
+        "COMP-010",
+        "COMP-013",
+        "COMP-016",
+        "COMP-017",
+        "COMP-042"
+      ],
+      "dataBoundary": "Prompt storage service and AI execution endpoint. Block reads/writes prompt definitions; executes test prompts against AI service."
+    },
+    {
+      "id": "BLOCK-AI-03",
+      "category": "AI",
+      "name": "Workflow Builder",
+      "outcome": "User orchestrates multi-step AI workflows with chained prompts, conditional logic, and external tool integrations.",
+      "states": [
+        "Loading (workflow fetch, step execution)",
+        "Empty (no workflow steps)",
+        "Error (step failure, connection error, network failure)",
+        "Editing (workflow canvas active)",
+        "Running (workflow execution)",
+        "Success (workflow completed)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-007",
+        "COMP-008",
+        "COMP-009",
+        "COMP-010",
+        "COMP-013",
+        "COMP-015",
+        "COMP-016",
+        "COMP-033",
+        "COMP-042"
+      ],
+      "dataBoundary": "Workflow definition service and execution engine. Block reads/writes workflow definitions; triggers async execution with status polling."
+    },
+    {
+      "id": "BLOCK-SEARCH-01",
+      "category": "SEARCH",
+      "name": "Search Results",
+      "outcome": "User performs full-text search across content with faceted filters, result highlighting, and pagination.",
+      "states": [
+        "Loading (query execution)",
+        "Empty (no query entered, no results match)",
+        "Error (search unavailable, network failure)",
+        "Filtering-active (applied facets)",
+        "Highlighting-active (matched terms highlighted)"
+      ],
+      "componentDependencies": [
+        "COMP-002",
+        "COMP-004",
+        "COMP-005",
+        "COMP-007",
+        "COMP-013",
+        "COMP-016",
+        "COMP-020",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Search index service. Read-only block; query and filter parameters passed to search API. Results include snippet and metadata."
+    },
+    {
+      "id": "BLOCK-SEARCH-02",
+      "category": "SEARCH",
+      "name": "Saved Searches",
+      "outcome": "User saves frequent search queries, sets up alert notifications for new matches, and manages saved search collections.",
+      "states": [
+        "Loading (saved searches fetch)",
+        "Empty (no saved searches)",
+        "Error (save failure, network failure)",
+        "Alert-active (monitoring for new matches)",
+        "Success (search saved)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-008",
+        "COMP-010",
+        "COMP-013",
+        "COMP-015",
+        "COMP-016",
+        "COMP-042"
+      ],
+      "dataBoundary": "Saved search storage and alert notification service. Block reads/writes saved queries; manages alert subscriptions."
+    },
+    {
+      "id": "BLOCK-SEARCH-03",
+      "category": "SEARCH",
+      "name": "Search Analytics",
+      "outcome": "User views search usage statistics including popular queries, zero-result rates, and search behavior trends.",
+      "states": [
+        "Loading (analytics fetch)",
+        "Empty (no search data for period)",
+        "Error (data unavailable, network failure)",
+        "Date-range-selected (custom period active)"
+      ],
+      "componentDependencies": [
+        "COMP-004",
+        "COMP-007",
+        "COMP-009",
+        "COMP-011",
+        "COMP-016",
+        "COMP-029",
+        "COMP-033",
+        "COMP-042"
+      ],
+      "dataBoundary": "Search analytics aggregation service. Read-only block; aggregates anonymized search metrics. No individual query content exposed."
+    },
+    {
+      "id": "BLOCK-COMMERCE-01",
+      "category": "COMMERCE",
+      "name": "Product Catalog",
+      "outcome": "User browses a product catalog with grid/list views, category filtering, sorting, and product detail previews.",
+      "states": [
+        "Loading (products fetch)",
+        "Empty (no products in category)",
+        "Error (catalog unavailable, network failure)",
+        "Filtering-active (applied filters/sorts)",
+        "Loading-more (infinite scroll pagination)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-004",
+        "COMP-005",
+        "COMP-007",
+        "COMP-012",
+        "COMP-013",
+        "COMP-017",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Product catalog service. Read-only block; product images served via CDN. Price and availability cached with TTL."
+    },
+    {
+      "id": "BLOCK-COMMERCE-02",
+      "category": "COMMERCE",
+      "name": "Shopping Cart",
+      "outcome": "User manages cart items with quantity adjustments, coupon application, and checkout initiation.",
+      "states": [
+        "Loading (cart fetch, totals calculation)",
+        "Empty (no items in cart)",
+        "Error (item unavailable, coupon invalid, network failure)",
+        "Updating (quantity change in progress)",
+        "Checkout-ready (cart validated)",
+        "Success (item added/removed)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-008",
+        "COMP-010",
+        "COMP-015",
+        "COMP-016",
+        "COMP-042"
+      ],
+      "dataBoundary": "Cart service and pricing service. Block reads cart state; updates quantities and coupons. Checkout transitions to billing flow."
+    },
+    {
+      "id": "BLOCK-COMMERCE-03",
+      "category": "COMMERCE",
+      "name": "Order Tracking",
+      "outcome": "User views order status, tracking information, delivery timeline, and order history.",
+      "states": [
+        "Loading (orders fetch, tracking update)",
+        "Empty (no orders placed)",
+        "Error (tracking unavailable, network failure)",
+        "Order-in-transit (tracking timeline active)",
+        "Order-completed (fulfillment confirmed)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-004",
+        "COMP-005",
+        "COMP-009",
+        "COMP-011",
+        "COMP-016",
+        "COMP-020",
+        "COMP-021",
+        "COMP-033",
+        "COMP-042"
+      ],
+      "dataBoundary": "Order management and shipping tracking services. Read-only block; tracking data polled from carrier APIs."
+    },
+    {
+      "id": "BLOCK-CONTENT-01",
+      "category": "CONTENT",
+      "name": "Content Editor",
+      "outcome": "User creates and edits rich content with a WYSIWYG or markdown editor, formatting toolbar, and preview.",
+      "states": [
+        "Loading (document fetch, editor init)",
+        "Empty (blank document)",
+        "Error (save failure, conflict detected, network failure)",
+        "Unsaved-changes (dirty editor)",
+        "Preview-active (split preview mode)",
+        "Autosaved (background save confirmation)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-007",
+        "COMP-008",
+        "COMP-009",
+        "COMP-010",
+        "COMP-015",
+        "COMP-017",
+        "COMP-042",
+        "COMP-048"
+      ],
+      "dataBoundary": "Content storage service. Block reads document content; writes incremental saves with conflict detection."
+    },
+    {
+      "id": "BLOCK-CONTENT-02",
+      "category": "CONTENT",
+      "name": "Content Library",
+      "outcome": "User manages a library of content assets including documents, images, and files with search, folders, and metadata.",
+      "states": [
+        "Loading (assets fetch)",
+        "Empty (library empty, no matches)",
+        "Error (fetch failure, upload failed, network failure)",
+        "Upload-in-progress (file transfer)",
+        "Selection-active (assets selected for action)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-007",
+        "COMP-008",
+        "COMP-012",
+        "COMP-013",
+        "COMP-016",
+        "COMP-017",
+        "COMP-021",
+        "COMP-033",
+        "COMP-042"
+      ],
+      "dataBoundary": "Asset storage and metadata service. Block reads asset listing; supports upload and deletion with confirmation."
+    },
+    {
+      "id": "BLOCK-CONTENT-03",
+      "category": "CONTENT",
+      "name": "Content Workflow",
+      "outcome": "User manages content through a draft-review-publish pipeline with status tracking, assignments, and approval gates.",
+      "states": [
+        "Loading (pipeline fetch)",
+        "Empty (no items in stage)",
+        "Error (transition failed, permission denied, network failure)",
+        "Draft (unsubmitted content)",
+        "Review (awaiting approval)",
+        "Published (live content)",
+        "Archived (deprecated content)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-007",
+        "COMP-008",
+        "COMP-009",
+        "COMP-010",
+        "COMP-012",
+        "COMP-013",
+        "COMP-016",
+        "COMP-017",
+        "COMP-020",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Content workflow and approval services. Block reads pipeline state; transitions items between stages with permission checks."
+    },
+    {
+      "id": "BLOCK-SHELL-01",
+      "category": "SHELL",
+      "name": "Navigation Layout",
+      "outcome": "User navigates the application via a responsive sidebar with collapsible menu sections, breadcrumbs, and current-route highlighting.",
+      "states": [
+        "Loading (nav items fetch)",
+        "Empty (no navigation items)",
+        "Error (nav service unavailable)",
+        "Collapsed (minimized sidebar)",
+        "Expanded (full sidebar)",
+        "Mobile-overlay (sidebar as overlay on small screens)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-005",
+        "COMP-008",
+        "COMP-009",
+        "COMP-012",
+        "COMP-013",
+        "COMP-017",
+        "COMP-019",
+        "COMP-020",
+        "COMP-035",
+        "COMP-042"
+      ],
+      "dataBoundary": "Navigation configuration service and user permissions. Block reads menu structure; highlights active route. Sidebar state persisted in local storage."
+    },
+    {
+      "id": "BLOCK-SHELL-02",
+      "category": "SHELL",
+      "name": "Command Palette",
+      "outcome": "User accesses a global keyboard-driven command menu for quick navigation, search, and action execution.",
+      "states": [
+        "Loading (commands fetch, search execute)",
+        "Empty (no matching commands)",
+        "Error (search unavailable, network failure)",
+        "Open (palette visible)",
+        "Filtering-active (search narrowed results)",
+        "Category-selected (results scoped to section)"
+      ],
+      "componentDependencies": [
+        "COMP-002",
+        "COMP-004",
+        "COMP-007",
+        "COMP-008",
+        "COMP-014",
+        "COMP-016",
+        "COMP-025",
+        "COMP-042"
+      ],
+      "dataBoundary": "Command registry service. Block reads available commands scoped to user permissions; executes actions via command handlers."
+    },
+    {
+      "id": "BLOCK-SHELL-03",
+      "category": "SHELL",
+      "name": "Notifications Center",
+      "outcome": "User views, manages, and dismisses notifications from a unified panel with categorization, read/unread states, and mark-all-read.",
+      "states": [
+        "Loading (notifications fetch)",
+        "Empty (no notifications)",
+        "Error (fetch failure, network failure)",
+        "Unread-count (badge with count)",
+        "Filtering-active (scoped by type)",
+        "Marking-read (bulk action in progress)"
+      ],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-004",
+        "COMP-005",
+        "COMP-007",
+        "COMP-008",
+        "COMP-010",
+        "COMP-012",
+        "COMP-013",
+        "COMP-015",
+        "COMP-017",
+        "COMP-021",
+        "COMP-042"
+      ],
+      "dataBoundary": "Notification service with real-time updates. Block reads notification feed; writes read/dismiss states. Supports WebSocket push for new notifications."
+    }
+  ]
+}
