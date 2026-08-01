@@ -5,6 +5,7 @@ interface BuilderHeaderProps {
   previewMode: "light" | "dark"
   onModeToggle: () => void
   onExport: () => void
+  onShare: () => void
 }
 
 const COPY: Record<
@@ -15,6 +16,7 @@ const COPY: Record<
     modeLabel: string
     toggleAriaLabel: string
     exportLabel: string
+    shareLabel: string
   }
 > = {
   en: {
@@ -23,6 +25,7 @@ const COPY: Record<
     modeLabel: "Preview mode",
     toggleAriaLabel: "Toggle preview between light and dark mode",
     exportLabel: "Export",
+    shareLabel: "Share",
   },
   es: {
     title: "Editor de Temas",
@@ -30,6 +33,7 @@ const COPY: Record<
     modeLabel: "Modo de vista previa",
     toggleAriaLabel: "Cambiar vista previa entre modo claro y oscuro",
     exportLabel: "Exportar",
+    shareLabel: "Compartir",
   },
 }
 
@@ -43,6 +47,13 @@ export function BuilderHeader(props: BuilderHeaderProps) {
         <span class="theme-builder__badge">{copy().badge}</span>
       </div>
       <div class="theme-builder__header-right">
+        <button
+          type="button"
+          class="theme-builder__btn-share"
+          onClick={props.onShare}
+        >
+          {copy().shareLabel}
+        </button>
         <button
           type="button"
           class="theme-builder__btn-export"
