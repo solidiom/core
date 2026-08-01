@@ -33,7 +33,12 @@ export function ThemeBuilderShell(props: ThemeBuilderShellProps) {
           />
         }
       >
-        <BuilderEditorPanel locale={props.locale} />
+        <BuilderEditorPanel
+          locale={props.locale}
+          theme={state.theme}
+          setTheme={state.setTheme}
+          previewMode={state.previewMode}
+        />
         <BuilderPreviewPanel
           locale={props.locale}
           theme={state.theme()}
