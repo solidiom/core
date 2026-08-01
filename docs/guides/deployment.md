@@ -140,6 +140,10 @@ https://www.solidiom.org/* https://solidiom.org/:splat 301
 
 ## 7. Rollback Procedure
 
+See `docs/operations/rollback-procedure.md` for the full, up-to-date rollback procedure.
+
+### Quick Reference
+
 1. Cloudflare Pages retains all previous deployments.
 2. To rollback: navigate to Cloudflare Dashboard → Pages → Deployments → select previous production deployment → "Rollback to this deploy".
 3. Rollback is instant (DNS already points to Pages, deployment switch is atomic).
