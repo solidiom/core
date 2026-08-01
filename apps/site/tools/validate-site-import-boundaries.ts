@@ -76,7 +76,9 @@ function importSpecifiers(source: string): string[] {
 
 function isToolRoute(pathname: string, root = pagesRoot): boolean {
   const routePath = relative(root, pathname).split(sep).join("/")
-  return routePath.startsWith("playground/") || routePath.startsWith("themes/builder/")
+  return routePath.startsWith("playground/") ||
+    routePath.startsWith("themes/builder/") ||
+    routePath.startsWith("es/themes/builder/")
 }
 
 function routeFiles(root = pagesRoot): string[] {

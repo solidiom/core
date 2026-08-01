@@ -15,7 +15,7 @@ import {
   subscribe,
   __TEST_ONLY__,
 } from "./analytics"
-import type { SearchAnalyticsEvent } from "./analytics-types"
+import type { SiteAnalyticsEvent } from "./analytics-types"
 
 beforeEach(() => {
   __TEST_ONLY__.clearEmittedEvents()
@@ -156,7 +156,7 @@ describe("graceful no-op", () => {
 
 describe("subscribe", () => {
   it("notifies listeners when events are force-emitted", () => {
-    const received: SearchAnalyticsEvent[] = []
+    const received: SiteAnalyticsEvent[] = []
     const unsubscribe = subscribe((event) => received.push(event))
     __TEST_ONLY__.forceEmit({ event: "search_opened", trigger: "command" })
     expect(received).toHaveLength(1)

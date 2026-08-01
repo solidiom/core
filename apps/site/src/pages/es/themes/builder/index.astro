@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro"
+import { ThemeBuilderShell } from "../../../../components/theme-builder"
+---
+
+<BaseLayout
+  title="Editor de Temas"
+  description="Crea, visualiza y exporta temas personalizados de Solidiom."
+>
+  <ThemeBuilderShell locale="es" client:load />
+</BaseLayout>
