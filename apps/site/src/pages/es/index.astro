@@ -1,12 +1,119 @@
 ---
+/**
+ * Homepage ES (BETA-001).
+ *
+ * Honest about what is available: shows maturity labels for each area
+ * and never implies GA completeness.
+ */
 import BaseLayout from "../../layouts/BaseLayout.astro"
+import { getMaturityInfo, isAreaAvailable } from "../../lib/maturity"
+
+const SECTIONS = [
+  {
+    area: "cli",
+    title: "CLI",
+    description: "Crea proyectos, agrega primitivas, y gestiona tu espacio de trabajo de Solidiom desde la línea de comandos.",
+    href: "/es/primitives/",
+  },
+  {
+    area: "primitives",
+    title: "Primitivas",
+    description: "Bloques de construcción headless y accesibles. 3 primitivas con evidencia completa de accesibilidad; 49 más en vista previa.",
+    href: "/es/primitives/",
+  },
+  {
+    area: "recipes",
+    title: "Recetas",
+    description: "Recetas de estilo para CSS, Tailwind, y UnoCSS — probadas con primitivas reales.",
+    href: "/es/primitives/",
+  },
+  {
+    area: "themes",
+    title: "Temas",
+    description: "Temas instalables con soporte claro/oscuro y parity entre herramientas.",
+    href: "/es/themes/builder/",
+  },
+  {
+    area: "builder",
+    title: "Constructor de Temas",
+    description: "Editor visual de temas con importación, exportación, y enlaces compartibles.",
+    href: "/es/themes/builder/",
+  },
+  {
+    area: "components",
+    title: "Componentes",
+    description: "Componentes compuestos y con opinión construidos sobre primitivas. Próximamente en M4.",
+  },
+  {
+    area: "blocks",
+    title: "Bloques",
+    description: "Composables a nivel de página — hero, footer, patrones de sidebar. Próximamente en M4.",
+  },
+  {
+    area: "templates",
+    title: "Plantillas",
+    description: "Plantillas completas de aplicación con enrutamiento, estado, y temas. Próximamente en M4.",
+  },
+]
 ---
 
 <BaseLayout
   title="Solidiom"
   description="Solidiom es un ecosistema de componentes accesibles y de código fuente propio para Solid."
 >
-  <div data-pagefind-body data-pagefind-filter-locale="es" data-pagefind-filter-content_type="page" data-pagefind-meta="title:Solidiom">
-    <h1>Solidiom</h1>
+  <div
+    class="home-page"
+    data-pagefind-body
+    data-pagefind-filter-locale="es"
+    data-pagefind-filter-content_type="page"
+    data-pagefind-meta="title:Solidiom"
+  >
+    <header class="home-page__header">
+      <h1>Solidiom</h1>
+      <p class="home-page__tagline">Ecosistema accesible y de fuente abierta de componentes para Solid.</p>
+      <p class="home-page__status">
+        Beta pública
+        <span
+          class="maturity-badge__label"
+          data-maturity="beta"
+          title="Funcional y probado. La API puede cambiar."
+        >
+          Beta
+        </span>
+      </p>
+    </header>
+
+    <nav class="home-page__areas" aria-label="Áreas de la plataforma">
+      {
+        SECTIONS.map((section) => {
+          const maturity = getMaturityInfo(section.area, "es")
+          const available = isAreaAvailable(section.area)
+          return (
+            <article class="home-page__area">
+              <header class="home-page__area-header">
+                <div class="home-page__area-title">
+                  <h2>{section.title}</h2>
+                  <span
+                    class="maturity-badge__label"
+                    data-maturity={maturity.level}
+                    title={maturity.tooltip}
+                  >
+                    {maturity.label}
+                  </span>
+                </div>
+              </header>
+              <p class="home-page__area-description">{section.description}</p>
+              {
+                available && section.href ? (
+                  <a href={section.href} class="home-page__area-link">Explorar →</a>
+                ) : (
+                  <span class="home-page__area-unavailable" aria-hidden="true">Próximamente en M4</span>
+                )
+              }
+            </article>
+          )
+        })
+      }
+    </nav>
   </div>
 </BaseLayout>

@@ -13,6 +13,7 @@ import {
   primitiveHref,
   type RegistryPrimitive,
 } from "../lib/catalog"
+import { getMaturityInfo } from "../lib/maturity"
 import type { Locale } from "../lib/locale"
 import { PrimitiveDirectoryFilters } from "./PrimitiveDirectoryFilters"
 import CatalogBreadcrumbs from "./CatalogBreadcrumbs.astro"
@@ -25,6 +26,7 @@ const { locale } = Astro.props
 const copy = getCatalogCopy(locale)
 const primitives = getRegistryPrimitives()
 const countLabel = copy.directoryCount.replace("{count}", String(primitives.length))
+const maturity = getMaturityInfo("primitives", locale)
 const directoryPrimitives = primitives.map((primitive) => ({
   name: primitive.name,
   label: primitive.label,
@@ -70,7 +72,16 @@ function categoryLabelFor(primitive: RegistryPrimitive): string {
     }))}
   />
   <header class="primitive-directory__header">
-    <h1>{copy.directoryTitle}</h1>
+    <h1>
+      {copy.directoryTitle}
+      <span
+        class="maturity-badge__label"
+        data-maturity={maturity.level}
+        title={maturity.tooltip}
+      >
+        {maturity.label}
+      </span>
+    </h1>
     <p>{copy.directoryDescription}</p>
     <p class="primitive-directory__count">{countLabel}</p>
   </header>

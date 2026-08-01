@@ -1,0 +1,48 @@
+/**
+ * MaturityBadge styles (BETA-001).
+ *
+ * BEM: .maturity-badge (Block), .maturity-badge__label (Element).
+ * Semantic coloring via data-maturity attribute — no JS required for styling.
+ */
+
+.maturity-badge {
+  display: inline-flex;
+  align-items: center;
+}
+
+.maturity-badge__label {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--sol-radius-full);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: default;
+}
+
+/* Stable — green */
+.maturity-badge__label[data-maturity="stable"] {
+  color: var(--sol-surface-base);
+  background-color: var(--sol-success);
+}
+
+/* Beta — blue */
+.maturity-badge__label[data-maturity="beta"] {
+  color: var(--sol-foreground-on-primary);
+  background-color: var(--sol-secondary);
+}
+
+/* Alpha — amber */
+.maturity-badge__label[data-maturity="alpha"] {
+  color: var(--sol-surface-base);
+  background-color: var(--sol-warning);
+}
+
+/* Upcoming — gray */
+.maturity-badge__label[data-maturity="upcoming"],
+.maturity-badge__label[data-maturity="dynamic"] {
+  color: var(--sol-foreground-muted);
+  background-color: var(--sol-border);
+}
