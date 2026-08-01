@@ -1,6 +1,8 @@
+import { createSignal } from "solid-js"
 import { BuilderHeader } from "./BuilderHeader"
 import { BuilderEditorPanel } from "./BuilderEditorPanel"
 import { BuilderPreviewPanel } from "./BuilderPreviewPanel"
+import { BuilderExportDialog } from "./BuilderExportDialog"
 import { BuilderLayout } from "./BuilderLayout"
 import { createThemeState } from "../../lib/theme-builder/theme-state"
 import type { Locale } from "../../lib/locale"
@@ -12,6 +14,7 @@ export interface ThemeBuilderShellProps {
 
 export function ThemeBuilderShell(props: ThemeBuilderShellProps) {
   const state = createThemeState()
+  const [exportOpen, setExportOpen] = createSignal(false)
   trackBuilderOpened()
 
   const handleModeToggle = () => {
@@ -30,6 +33,7 @@ export function ThemeBuilderShell(props: ThemeBuilderShellProps) {
             locale={props.locale}
             previewMode={state.previewMode()}
             onModeToggle={handleModeToggle}
+            onExport={() => setExportOpen(true)}
           />
         }
       >
@@ -45,6 +49,12 @@ export function ThemeBuilderShell(props: ThemeBuilderShellProps) {
           mode={state.previewMode}
         />
       </BuilderLayout>
+      <BuilderExportDialog
+        locale={props.locale}
+        theme={state.theme}
+        open={exportOpen()}
+        onOpenChange={setExportOpen}
+      />
     </div>
   )
 }
