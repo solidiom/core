@@ -31,3 +31,28 @@ export type SearchResultSelectedEvent = {
 
 /** Union of all search analytics events. */
 export type SearchAnalyticsEvent = SearchOpenedEvent | SearchResultSelectedEvent
+
+// ─── Builder analytics (BUILDER-001) ───────────────────────────────────────
+
+export type BuilderExportFormat = "json" | "css" | "tailwind" | "unocss"
+
+export type BuilderOpenedEvent = {
+  readonly event: "builder_opened"
+}
+
+export type BuilderExportedEvent = {
+  readonly event: "builder_exported"
+  readonly format: BuilderExportFormat
+}
+
+export type BuilderSharedEvent = {
+  readonly event: "builder_shared"
+}
+
+export type BuilderAnalyticsEvent =
+  | BuilderOpenedEvent
+  | BuilderExportedEvent
+  | BuilderSharedEvent
+
+/** Union of all analytics events tracked by the site. */
+export type SiteAnalyticsEvent = SearchAnalyticsEvent | BuilderAnalyticsEvent

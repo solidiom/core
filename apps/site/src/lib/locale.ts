@@ -28,7 +28,7 @@ const LOCALE_PREFIXES: Record<Locale, string> = {
  * pages. Add a base pathname here with its paired page routes in `src/pages`.
  * This is the single source for language switching and alternate metadata.
  */
-export const LOCALIZED_ROUTE_PATHS = ["/", "/privacy/", "/trademark/", "/primitives/"] as const
+export const LOCALIZED_ROUTE_PATHS = ["/", "/privacy/", "/trademark/", "/primitives/", "/themes/builder/"] as const
 
 /** Registry-generated primitive routes have a locale counterpart for every entry. */
 const LOCALIZED_PRIMITIVE_ROUTE = /^\/primitives\/[^/]+\/(?:api\/|examples\/|accessibility\/)?$/

@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro"
+import { ThemeBuilderShell } from "../../../components/theme-builder"
+import { resolveLocale, type Locale } from "../../../lib/locale"
+
+const locale = resolveLocale(Astro.url.pathname)
+---
+
+<BaseLayout
+  title="Theme Builder"
+  description="Create, preview, and export custom Solidiom themes."
+>
+  <ThemeBuilderShell locale={locale as Locale} client:load />
+</BaseLayout>
