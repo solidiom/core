@@ -110,6 +110,12 @@ jobs:
           pnpm run theme:emit:unocss:check
       - name: THEME-005 — theme cross-output parity, contrast, and round-trip audit
         run: pnpm run audit:theme-parity
+      - name: CLI-003 — assert no unverified provenance lock entries
+        run: pnpm run assert:no-unverified
+      - name: CLI-003 — sign registry index (when REGISTRY_SIGN_KEY secret is set)
+        env:
+          REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
+        run: pnpm run registry:build
 
   test-node:
     needs: build
