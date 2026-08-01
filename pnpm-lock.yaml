@@ -345,9 +345,30 @@ importers:
       '@astrojs/sitemap':
         specifier: 3.7.3
         version: 3.7.3
+      '@solidiom/accordion':
+        specifier: workspace:*
+        version: link:../../packages/accordion
+      '@solidiom/alert':
+        specifier: workspace:*
+        version: link:../../packages/alert
       '@solidiom/astrojs-solid-next':
         specifier: workspace:*
         version: link:../../packages/astrojs-solid-next
+      '@solidiom/avatar':
+        specifier: workspace:*
+        version: link:../../packages/avatar
+      '@solidiom/badge':
+        specifier: workspace:*
+        version: link:../../packages/badge
+      '@solidiom/button':
+        specifier: workspace:*
+        version: link:../../packages/button
+      '@solidiom/card':
+        specifier: workspace:*
+        version: link:../../packages/card
+      '@solidiom/checkbox':
+        specifier: workspace:*
+        version: link:../../packages/checkbox
       '@solidiom/combobox':
         specifier: workspace:*
         version: link:../../packages/combobox
@@ -360,9 +381,42 @@ importers:
       '@solidiom/drawer':
         specifier: workspace:*
         version: link:../../packages/drawer
+      '@solidiom/input':
+        specifier: workspace:*
+        version: link:../../packages/input
+      '@solidiom/label':
+        specifier: workspace:*
+        version: link:../../packages/label
       '@solidiom/navigation-menu':
         specifier: workspace:*
         version: link:../../packages/navigation-menu
+      '@solidiom/progress':
+        specifier: workspace:*
+        version: link:../../packages/progress
+      '@solidiom/select':
+        specifier: workspace:*
+        version: link:../../packages/select
+      '@solidiom/separator':
+        specifier: workspace:*
+        version: link:../../packages/separator
+      '@solidiom/slider':
+        specifier: workspace:*
+        version: link:../../packages/slider
+      '@solidiom/spinner':
+        specifier: workspace:*
+        version: link:../../packages/spinner
+      '@solidiom/switch':
+        specifier: workspace:*
+        version: link:../../packages/switch
+      '@solidiom/tabs':
+        specifier: workspace:*
+        version: link:../../packages/tabs
+      '@solidiom/toggle':
+        specifier: workspace:*
+        version: link:../../packages/toggle
+      '@solidiom/tooltip':
+        specifier: workspace:*
+        version: link:../../packages/tooltip
       '@solidjs/web':
         specifier: 2.0.0-beta.24
         version: 2.0.0-beta.24(solid-js@2.0.0-beta.24)

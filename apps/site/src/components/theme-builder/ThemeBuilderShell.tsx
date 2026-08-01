@@ -41,8 +41,8 @@ export function ThemeBuilderShell(props: ThemeBuilderShellProps) {
         />
         <BuilderPreviewPanel
           locale={props.locale}
-          theme={state.theme()}
-          mode={state.previewMode()}
+          theme={state.theme}
+          mode={state.previewMode}
         />
       </BuilderLayout>
     </div>
