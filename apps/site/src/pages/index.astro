@@ -1,9 +1,159 @@
 ---
+/**
+ * Homepage (BETA-001).
+ *
+ * Honest about what is available: shows maturity labels for each area
+ * and never implies GA completeness.
+ */
 import BaseLayout from "../layouts/BaseLayout.astro"
+import { getMaturityInfo, isAreaAvailable } from "../lib/maturity"
+import type { Locale } from "../lib/locale"
+import { resolveLocale } from "../lib/locale"
+
+const locale: Locale = resolveLocale(Astro.url.pathname)
+
+interface HomeSection {
+  area: string
+  title: Record<"en" | "es", string>
+  description: Record<"en" | "es", string>
+  href?: string
+}
+
+const SECTIONS: HomeSection[] = [
+  {
+    area: "cli",
+    title: { en: "CLI", es: "CLI" },
+    description: {
+      en: "Create projects, add primitives, and manage your Solidiom workspace from the command line.",
+      es: "Crea proyectos, agrega primitivas, y gestiona tu espacio de trabajo de Solidiom desde la línea de comandos.",
+    },
+    href: "/primitives/",
+  },
+  {
+    area: "primitives",
+    title: { en: "Primitives", es: "Primitivas" },
+    description: {
+      en: "Headless, accessible building blocks. 3 primitives with full accessibility evidence; 49 more in preview.",
+      es: "Bloques de construcción headless y accesibles. 3 primitivas con evidencia completa de accesibilidad; 49 más en vista previa.",
+    },
+    href: "/primitives/",
+  },
+  {
+    area: "recipes",
+    title: { en: "Recipes", es: "Recetas" },
+    description: {
+      en: "Styling recipes for CSS, Tailwind, and UnoCSS — tested against real primitives.",
+      es: "Recetas de estilo para CSS, Tailwind, y UnoCSS — probadas con primitivas reales.",
+    },
+    href: "/primitives/",
+  },
+  {
+    area: "themes",
+    title: { en: "Themes", es: "Temas" },
+    description: {
+      en: "Installable theme presets with light/dark support and cross-tool parity.",
+      es: "Temas instalables con soporte claro/oscuro y parity entre herramientas.",
+    },
+    href: "/themes/builder/",
+  },
+  {
+    area: "builder",
+    title: { en: "Theme Builder", es: "Constructor de Temas" },
+    description: {
+      en: "Visual theme editor with import, export, and shareable links.",
+      es: "Editor visual de temas con importación, exportación, y enlaces compartibles.",
+    },
+    href: "/themes/builder/",
+  },
+  {
+    area: "components",
+    title: { en: "Components", es: "Componentes" },
+    description: {
+      en: "Composed, opinionated components built on primitives. Coming in M4.",
+      es: "Componentes compuestos y con opinión construidos sobre primitivas. Próximamente en M4.",
+    },
+  },
+  {
+    area: "blocks",
+    title: { en: "Blocks", es: "Bloques" },
+    description: {
+      en: "Page-level composables — hero, footer, sidebar patterns. Coming in M4.",
+      es: "Composables a nivel de página — hero, footer, patrones de sidebar. Próximamente en M4.",
+    },
+  },
+  {
+    area: "templates",
+    title: { en: "Templates", es: "Plantillas" },
+    description: {
+      en: "Full application templates with routing, state, and theming. Coming in M4.",
+      es: "Plantillas completas de aplicación con enrutamiento, estado, y temas. Próximamente en M4.",
+    },
+  },
+]
 ---
 
 <BaseLayout description="Solidiom is an accessible, source-owned component ecosystem for Solid.">
-  <div data-pagefind-body data-pagefind-filter-locale="en" data-pagefind-filter-content_type="page" data-pagefind-meta="title:Solidiom">
-    <h1>Solidiom</h1>
+  <div
+    class="home-page"
+    data-pagefind-body
+    data-pagefind-filter-locale="en"
+    data-pagefind-filter-content_type="page"
+    data-pagefind-meta="title:Solidiom"
+  >
+    <header class="home-page__header">
+      <h1>Solidiom</h1>
+      <p class="home-page__tagline">
+        {locale === "en"
+          ? "Accessible, source-owned component ecosystem for Solid."
+          : "Ecosistema accesible y de fuente abierta de componentes para Solid."}
+      </p>
+      <p class="home-page__status">
+        {locale === "en" ? "Public beta" : "Beta pública"}
+        <span
+          class="maturity-badge__label"
+          data-maturity="beta"
+          title={locale === "en" ? "Functional and tested. API may change." : "Funcional y probado. La API puede cambiar."}
+        >
+          Beta
+        </span>
+      </p>
+    </header>
+
+    <nav class="home-page__areas" aria-label={locale === "en" ? "Platform areas" : "Áreas de la plataforma"}>
+      {
+        SECTIONS.map((section) => {
+          const maturity = getMaturityInfo(section.area, locale)
+          const available = isAreaAvailable(section.area)
+          return (
+            <article class="home-page__area">
+              <header class="home-page__area-header">
+                <div class="home-page__area-title">
+                  <h2>{section.title[locale]}</h2>
+                  <span
+                    class="maturity-badge__label"
+                    data-maturity={maturity.level}
+                    title={maturity.tooltip}
+                  >
+                    {maturity.label}
+                  </span>
+                </div>
+              </header>
+              <p class="home-page__area-description">{section.description[locale]}</p>
+              {
+                available && section.href ? (
+                  <a href={section.href} class="home-page__area-link">
+                    {locale === "en" ? "Explore" : "Explorar"} →
+                  </a>
+                ) : (
+                  <span class="home-page__area-unavailable" aria-hidden="true">
+                    {locale === "en" ? "Coming in M4" : "Próximamente en M4"}
+                  </span>
+                )
+              }
+            </article>
+          )
+        })
+      }
+    </nav>
   </div>
 </BaseLayout>
