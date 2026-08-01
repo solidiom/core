@@ -62,7 +62,8 @@
     "deps:check": "tsx scripts/check-library-updates.mts",
     "deps:check:ci": "tsx scripts/check-library-updates.mts --fail-on-outdated",
     "smoke:create:prep": "tools/offline-fixture/run-offline-test.sh --prep",
-    "smoke:create": "tools/offline-fixture/run-offline-test.sh"
+    "smoke:create": "tools/offline-fixture/run-offline-test.sh",
+    "assert:no-unverified": "tsx tools/assert-no-unverified.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",
