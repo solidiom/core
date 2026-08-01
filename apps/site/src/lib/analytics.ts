@@ -11,16 +11,17 @@
  */
 
 import type {
-  SearchAnalyticsEvent,
+  BuilderExportFormat,
   SearchOpenedTrigger,
   SearchResultLocale,
   SearchResultType,
+  SiteAnalyticsEvent,
 } from "./analytics-types"
 
-type AnalyticsListener = (event: SearchAnalyticsEvent) => void
+type AnalyticsListener = (event: SiteAnalyticsEvent) => void
 
 const listeners: AnalyticsListener[] = []
-const emittedEvents: SearchAnalyticsEvent[] = []
+const emittedEvents: SiteAnalyticsEvent[] = []
 
 function isEnabled(): boolean {
   if (typeof window === "undefined") return false
@@ -33,7 +34,7 @@ function isEnabled(): boolean {
   }
 }
 
-function emit(event: SearchAnalyticsEvent): void {
+function emit(event: SiteAnalyticsEvent): void {
   if (!isEnabled()) return
   emittedEvents.push(event)
   for (const listener of listeners) {
@@ -42,7 +43,7 @@ function emit(event: SearchAnalyticsEvent): void {
 }
 
 /** Unconditionally emit — bypasses environment check. Used only in tests. */
-function emitForce(event: SearchAnalyticsEvent): void {
+function emitForce(event: SiteAnalyticsEvent): void {
   emittedEvents.push(event)
   for (const listener of listeners) {
     listener(event)
@@ -74,19 +75,36 @@ export function trackSearchResultSelected(
   emit({ event: "search_result_selected", result_type: resultType, result_locale: resultLocale })
 }
 
+// ─── Builder tracking (BUILDER-001) ───────────────────────────────────────
+
+/** Track that the theme builder was opened. */
+export function trackBuilderOpened(): void {
+  emit({ event: "builder_opened" })
+}
+
+/** Track that a theme was exported from the builder. */
+export function trackBuilderExported(format: BuilderExportFormat): void {
+  emit({ event: "builder_exported", format })
+}
+
+/** Track that a theme was shared from the builder. */
+export function trackBuilderShared(): void {
+  emit({ event: "builder_shared" })
+}
+
 /**
  * TEST-ONLY utilities — not for production use.
  * Provides access to emitted events for unit testing.
  */
 export const __TEST_ONLY__ = {
-  getEmittedEvents(): readonly SearchAnalyticsEvent[] {
+  getEmittedEvents(): readonly SiteAnalyticsEvent[] {
     return emittedEvents
   },
   clearEmittedEvents(): void {
     emittedEvents.length = 0
   },
   /** Emit bypassing the environment guard — for testing event shape only. */
-  forceEmit(event: SearchAnalyticsEvent): void {
+  forceEmit(event: SiteAnalyticsEvent): void {
     emitForce(event)
   },
   /** Expose isEnabled for testing the guard itself. */
