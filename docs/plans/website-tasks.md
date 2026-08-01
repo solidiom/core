@@ -321,20 +321,20 @@ I18N-001 → I18N-003 ─────┘                recipes + CLI + beta (G3
 | [x]    | THEME-003   | M    | THEME-001                    | Design systems       | Generate Tailwind mapping from canonical theme JSON.                                                                           |
 | [x]    | THEME-004   | M    | THEME-001                    | Design systems       | Generate UnoCSS preset/configuration from canonical theme JSON.                                                                |
 | [x]    | THEME-005   | M    | THEME-002..004               | QA/design systems    | Add cross-output parity, contrast, required-token, and round-trip validation.                                                  |
-| [ ]    | BUILDER-001 | M    | SITE-012, THEME-001          | Tools/frontend       | Create route-local Solid theme-builder shell with no imports in static route chunks.                                           |
-| [ ]    | BUILDER-002 | L    | BUILDER-001                  | Tools/frontend       | Implement grouped token editor, validation messages, reset/undo, keyboard flow, and responsive UI.                             |
-| [ ]    | BUILDER-003 | M    | BUILDER-001, required COMP-* | Tools/design systems | Implement representative component preview grid across light/dark and interaction states.                                      |
-| [ ]    | BUILDER-004 | M    | THEME-002..004, BUILDER-002  | Tools                | Implement import/export for JSON, CSS, Tailwind, and UnoCSS with deterministic output.                                         |
-| [ ]    | BUILDER-005 | M    | BUILDER-002                  | Tools/security       | Implement versioned URL-encoded share state with size limits, validation, malformed-input handling, and no server persistence. |
-| [ ]    | BUILDER-006 | M    | BUILDER-001..005             | QA                   | Add accessibility, browser, privacy, visual, and route-bundle tests.                                                           |
+| [x]    | BUILDER-001 | M    | SITE-012, THEME-001          | Tools/frontend       | Create route-local Solid theme-builder shell with no imports in static route chunks.                                           |
+| [x]    | BUILDER-002 | L    | BUILDER-001                  | Tools/frontend       | Implement grouped token editor, validation messages, reset/undo, keyboard flow, and responsive UI.                             |
+| [x]    | BUILDER-003 | M    | BUILDER-001, required COMP-* | Tools/design systems | Implement representative component preview grid across light/dark and interaction states.                                      |
+| [x]    | BUILDER-004 | M    | THEME-002..004, BUILDER-002  | Tools                | Implement import/export for JSON, CSS, Tailwind, and UnoCSS with deterministic output.                                         |
+| [x]    | BUILDER-005 | M    | BUILDER-002                  | Tools/security       | Implement versioned URL-encoded share state with size limits, validation, malformed-input handling, and no server persistence. |
+| [x]    | BUILDER-006 | M    | BUILDER-001..005             | QA                   | Add accessibility, browser, privacy, visual, and route-bundle tests.                                                           |
 
 ### 7.3 Beta gate
 
 | Status | ID       | Size | Depends on                                           | Owner area | Task and acceptance boundary                                                                        |
 | ------ | -------- | ---- | ---------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------- |
-| [ ]    | BETA-001 | M    | G2, representative COMP/BLOCK/TPL tasks, BUILDER-006 | Product/QA | Define beta minimum coverage and publish maturity labels; no dead CTA or implied GA completeness.   |
-| [ ]    | BETA-002 | M    | BETA-001                                             | QA         | Run beta acceptance matrix across locales, themes, browsers, search, CLI, tools, and accessibility. |
-| [ ]    | BETA-003 | S    | BETA-002, OPS-003                                    | Operations | Publish public beta with rollback, incident contact, feedback path, and release notes.              |
+| [x]    | BETA-001 | M    | G2, representative COMP/BLOCK/TPL tasks, BUILDER-006 | Product/QA | Define beta minimum coverage and publish maturity labels; no dead CTA or implied GA completeness.   |
+| [x]    | BETA-002 | M    | BETA-001                                             | QA         | Run beta acceptance matrix across locales, themes, browsers, search, CLI, tools, and accessibility. |
+| [x]    | BETA-003 | S    | BETA-002, OPS-003                                    | Operations | Publish public beta with rollback, incident contact, feedback path, and release notes.              |
 
 ---
 
@@ -490,7 +490,7 @@ First complete `BLOCK-000`. It assigns a concrete name, outcome, required states
 
 | Status | ID                | Category / slot                        | Size | Depends on                     |
 | ------ | ----------------- | -------------------------------------- | ---- | ------------------------------ |
-| [ ]    | BLOCK-000         | Approve 36-item block catalog manifest | L    | representative COMP-* complete |
+| [x]    | BLOCK-000         | Approve 36-item block catalog manifest | L    | representative COMP-* complete |
 | [ ]    | BLOCK-AUTH-01     | Authentication 1                       | WP   | BLOCK-000, required COMP-*     |
 | [ ]    | BLOCK-AUTH-02     | Authentication 2                       | WP   | BLOCK-000, required COMP-*     |
 | [ ]    | BLOCK-AUTH-03     | Authentication 3                       | WP   | BLOCK-000, required COMP-*     |
