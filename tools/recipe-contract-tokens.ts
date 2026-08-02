@@ -624,6 +624,152 @@ export const SEMANTIC_TOKENS: readonly SemanticToken[] = [
     cssFallback:
       "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
+
+  // ── Type Scale (THEME-006) ─────────────────────────────────────────────
+  {
+    id: "font-size-xs",
+    category: "typography",
+    description: "Smallest text: captions, metadata, fine print.",
+    namespaces: {
+      css: "--ui-font-size-xs",
+      tailwind: "fontSize-xs",
+      unocss: "--ui-font-size-xs",
+      site: "--sol-font-size-xs",
+    },
+    cssFallback: "0.75rem",
+  },
+  {
+    id: "line-height-xs",
+    category: "typography",
+    description: "Line height for `font-size-xs`.",
+    namespaces: {
+      css: "--ui-line-height-xs",
+      tailwind: null,
+      unocss: "--ui-line-height-xs",
+      site: "--sol-line-height-xs",
+    },
+    cssFallback: "1rem",
+  },
+  {
+    id: "font-size-sm",
+    category: "typography",
+    description: "Small text: helper text, fine labels.",
+    namespaces: {
+      css: "--ui-font-size-sm",
+      tailwind: "fontSize-sm",
+      unocss: "--ui-font-size-sm",
+      site: "--sol-font-size-sm",
+    },
+    cssFallback: "0.875rem",
+  },
+  {
+    id: "line-height-sm",
+    category: "typography",
+    description: "Line height for `font-size-sm`.",
+    namespaces: {
+      css: "--ui-line-height-sm",
+      tailwind: null,
+      unocss: "--ui-line-height-sm",
+      site: "--sol-line-height-sm",
+    },
+    cssFallback: "1.25rem",
+  },
+  {
+    id: "font-size-base",
+    category: "typography",
+    description: "Default body text for UI and controls.",
+    namespaces: {
+      css: "--ui-font-size-base",
+      tailwind: "fontSize-base",
+      unocss: "--ui-font-size-base",
+      site: "--sol-font-size-base",
+    },
+    cssFallback: "0.875rem",
+  },
+  {
+    id: "line-height-base",
+    category: "typography",
+    description: "Line height for `font-size-base`.",
+    namespaces: {
+      css: "--ui-line-height-base",
+      tailwind: null,
+      unocss: "--ui-line-height-base",
+      site: "--sol-line-height-base",
+    },
+    cssFallback: "1.25rem",
+  },
+  {
+    id: "font-size-md",
+    category: "typography",
+    description: "Medium text: section subtitles, prominent labels.",
+    namespaces: {
+      css: "--ui-font-size-md",
+      tailwind: "fontSize-md",
+      unocss: "--ui-font-size-md",
+      site: "--sol-font-size-md",
+    },
+    cssFallback: "1.125rem",
+  },
+  {
+    id: "line-height-md",
+    category: "typography",
+    description: "Line height for `font-size-md`.",
+    namespaces: {
+      css: "--ui-line-height-md",
+      tailwind: null,
+      unocss: "--ui-line-height-md",
+      site: "--sol-line-height-md",
+    },
+    cssFallback: "1.5rem",
+  },
+  {
+    id: "font-size-lg",
+    category: "typography",
+    description: "Large headings: page titles, card headings.",
+    namespaces: {
+      css: "--ui-font-size-lg",
+      tailwind: "fontSize-lg",
+      unocss: "--ui-font-size-lg",
+      site: "--sol-font-size-lg",
+    },
+    cssFallback: "1.25rem",
+  },
+  {
+    id: "line-height-lg",
+    category: "typography",
+    description: "Line height for `font-size-lg`.",
+    namespaces: {
+      css: "--ui-line-height-lg",
+      tailwind: null,
+      unocss: "--ui-line-height-lg",
+      site: "--sol-line-height-lg",
+    },
+    cssFallback: "1.5rem",
+  },
+  {
+    id: "font-size-xl",
+    category: "typography",
+    description: "Hero and page-heading text.",
+    namespaces: {
+      css: "--ui-font-size-xl",
+      tailwind: "fontSize-xl",
+      unocss: "--ui-font-size-xl",
+      site: "--sol-font-size-xl",
+    },
+    cssFallback: "1.875rem",
+  },
+  {
+    id: "line-height-xl",
+    category: "typography",
+    description: "Line height for `font-size-xl`.",
+    namespaces: {
+      css: "--ui-line-height-xl",
+      tailwind: null,
+      unocss: "--ui-line-height-xl",
+      site: "--sol-line-height-xl",
+    },
+    cssFallback: "2.25rem",
+  },
 ]
 
 const TOKEN_INDEX = new Map(SEMANTIC_TOKENS.map((token) => [token.id, token]))
