@@ -19,9 +19,9 @@ const buttonVariantsCva = cva(
         link: "bg-transparent text-primary underline underline-offset-4",
       },
       size: {
-        sm: "h-9 py-0 px-3 text-sm",
-        md: "h-10 py-2 px-4 text-sm",
-        lg: "h-11 py-0 px-8 text-base",
+        sm: "h-9 py-0 px-3 text-[0.875rem]",
+        md: "h-10 py-2 px-4 text-[0.875rem]",
+        lg: "h-11 py-0 px-8 text-[1rem]",
         icon: "h-10 w-10 p-0",
       },
     },

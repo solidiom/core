@@ -62,7 +62,7 @@ function applyRuleFor(
   prefix: string | undefined,
 ): ApplyRule | null {
   const utilities = Object.entries(rule.declarations).flatMap(([property, value]) =>
-    declarationToUtilities(property, value),
+    declarationToUtilities(property, value, rule.declarations),
   )
   if (utilities.length === 0) return null
 
@@ -154,14 +154,16 @@ function renderVariantsModule(scope: string, definition: RecipeDefinition): stri
   const baseUtilities = rules
     .filter((rule) => rule.condition.kind === "base")
     .flatMap((rule) =>
-      Object.entries(rule.declarations).flatMap(([p, v]) => declarationToUtilities(p, v)),
+      Object.entries(rule.declarations).flatMap(([p, v]) =>
+        declarationToUtilities(p, v, rule.declarations),
+      ),
     )
 
   const variantsByAxis = new Map<string, Map<string, string[]>>()
   for (const rule of rules) {
     if (rule.condition.kind !== "variant") continue
     const utilities = Object.entries(rule.declarations).flatMap(([p, v]) =>
-      declarationToUtilities(p, v),
+      declarationToUtilities(p, v, rule.declarations),
     )
     if (utilities.length === 0) continue
     // A variant value can produce more than one rule here: one for its base
@@ -186,7 +188,7 @@ function renderVariantsModule(scope: string, definition: RecipeDefinition): stri
   for (const rule of rules) {
     if (rule.condition.kind !== "compound") continue
     const utilities = Object.entries(rule.declarations).flatMap(([p, v]) =>
-      declarationToUtilities(p, v),
+      declarationToUtilities(p, v, rule.declarations),
     )
     if (utilities.length === 0) continue
     // Same accumulation as the variant loop above: a compound condition can produce a

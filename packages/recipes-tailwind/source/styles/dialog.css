@@ -29,11 +29,11 @@
   }
 
   [data-scope="dialog"][data-part="title"] {
-    @apply m-0 text-lg font-semibold text-foreground;
+    @apply m-0 text-[1.125rem] font-semibold text-foreground;
   }
 
   [data-scope="dialog"][data-part="description"] {
-    @apply mt-2 mr-0 mb-0 ml-0 text-sm text-muted-foreground;
+    @apply mt-2 mr-0 mb-0 ml-0 text-[0.875rem] text-muted-foreground;
   }
 
   [data-scope="dialog"][data-part="close"] {
