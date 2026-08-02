@@ -46,7 +46,10 @@ export const BETA_ACCEPTANCE_MATRIX: AcceptanceArea[] = [
     checks: [
       { id: "light_mode", description: "Light theme renders correctly" },
       { id: "dark_mode", description: "Dark theme renders correctly" },
-      { id: "no_flash", description: "No theme preference flash (bootstrap sets data-theme before paint)" },
+      {
+        id: "no_flash",
+        description: "No theme preference flash (bootstrap sets data-theme before paint)",
+      },
     ],
   },
   {

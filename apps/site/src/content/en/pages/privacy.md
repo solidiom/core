@@ -16,14 +16,14 @@ Solidiom is an open-source project. We believe privacy is a right, not a feature
 
 ## Summary
 
-| Service | Purpose | Personal data sent | Opt-out available |
-|---------|---------|-------------------|-------------------|
-| Cloudflare | CDN, DNS, basic analytics | IP address (ephemeral) | No (infrastructure) |
-| PostHog | Product analytics | Anonymized page views | Yes |
-| Buttondown | Newsletter | Email (only if you subscribe) | Yes |
-| Pagefind | Site search | None | N/A |
-| Playground | Code sandbox | None | N/A |
-| Theme Builder | Visual theming tool | None | N/A |
+| Service       | Purpose                   | Personal data sent            | Opt-out available   |
+| ------------- | ------------------------- | ----------------------------- | ------------------- |
+| Cloudflare    | CDN, DNS, basic analytics | IP address (ephemeral)        | No (infrastructure) |
+| PostHog       | Product analytics         | Anonymized page views         | Yes                 |
+| Buttondown    | Newsletter                | Email (only if you subscribe) | Yes                 |
+| Pagefind      | Site search               | None                          | N/A                 |
+| Playground    | Code sandbox              | None                          | N/A                 |
+| Theme Builder | Visual theming tool       | None                          | N/A                 |
 
 ---
 
@@ -245,11 +245,11 @@ The theme builder has no backend. There is no API endpoint, no database, and no 
 
 Solidiom uses the following cookies:
 
-| Cookie | Purpose | Type | Duration |
-|--------|---------|------|----------|
-| PostHog distinct_id | Anonymous analytics identifier | First-party | 365 days |
-| Theme preference | Remembers your light/dark choice | First-party | 365 days |
-| Locale preference | Remembers your language choice | First-party | 365 days |
+| Cookie              | Purpose                          | Type        | Duration |
+| ------------------- | -------------------------------- | ----------- | -------- |
+| PostHog distinct_id | Anonymous analytics identifier   | First-party | 365 days |
+| Theme preference    | Remembers your light/dark choice | First-party | 365 days |
+| Locale preference   | Remembers your language choice   | First-party | 365 days |
 
 No third-party cookies are set. No advertising cookies exist on this site.
 

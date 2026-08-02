@@ -2,11 +2,11 @@
 
 ## Supported Versions
 
-| Version | Supported |
-| ------- | --------- |
-| Latest `next` prerelease | Yes |
-| Previous `next` prerelease | Best effort |
-| Stable releases (when available) | Yes |
+| Version                          | Supported   |
+| -------------------------------- | ----------- |
+| Latest `next` prerelease         | Yes         |
+| Previous `next` prerelease       | Best effort |
+| Stable releases (when available) | Yes         |
 
 Only the latest published prerelease receives security patches. Once stable
 releases begin, the current major version will be actively supported.

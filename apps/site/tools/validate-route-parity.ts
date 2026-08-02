@@ -72,9 +72,8 @@ const unimplementedRegistryRoutes = [...registeredRoutes]
 const translatedMetadataErrors = [...esRoutes.entries()].flatMap(([pathname, routeFile]) => {
   const source = readFileSync(join(esPagesRoot, routeFile), "utf8")
   const layoutInvocation = source.match(/<BaseLayout\b[\s\S]*?>/)
-  const generatedCatalogRoute = /<(PrimitiveRoute|PrimitiveDirectory)\b[\s\S]*?locale=["']es["']/.test(
-    source,
-  )
+  const generatedCatalogRoute =
+    /<(PrimitiveRoute|PrimitiveDirectory)\b[\s\S]*?locale=["']es["']/.test(source)
   if (generatedCatalogRoute) return []
   if (!layoutInvocation) {
     return [`${pathname}: does not render BaseLayout or a localized catalog layout`]

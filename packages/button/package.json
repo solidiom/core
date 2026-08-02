@@ -40,7 +40,9 @@
       "description": "Clickable trigger for actions.",
       "category": "input",
       "registry": {
-        "deliverables": ["component"]
+        "deliverables": [
+          "component"
+        ]
       }
     }
   }

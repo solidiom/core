@@ -234,7 +234,7 @@ function main(): void {
 
   const gaCount = registry.primitives.filter((primitive) => primitive.status === GA_STATUS).length
   if (gaCount === 0) {
-    console.log("No GA-status (\"stable\") primitives yet; nothing to gate.")
+    console.log('No GA-status ("stable") primitives yet; nothing to gate.')
     return
   }
 

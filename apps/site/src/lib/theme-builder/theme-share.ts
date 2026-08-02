@@ -20,7 +20,9 @@ function toBase64Url(bytes: Uint8Array): string {
 }
 
 function fromBase64Url(base64: string): Uint8Array {
-  const binary = atob(base64.replace(/-/g, "+").replace(/_/g, "/") + "==".slice(base64.length % 4 || 4))
+  const binary = atob(
+    base64.replace(/-/g, "+").replace(/_/g, "/") + "==".slice(base64.length % 4 || 4),
+  )
   const bytes = new Uint8Array(binary.length)
   for (let i = 0; i < binary.length; i++) {
     bytes[i] = binary.charCodeAt(i)
@@ -98,9 +100,8 @@ export function hashToTheme(hash: string): { theme?: ThemeDefinition; error?: st
 
 export function getShareUrl(theme: ThemeDefinition): string {
   const hash = themeToHash(theme)
-  const base = typeof window !== "undefined"
-    ? window.location.origin + window.location.pathname
-    : "/"
+  const base =
+    typeof window !== "undefined" ? window.location.origin + window.location.pathname : "/"
   return base + hash
 }
 

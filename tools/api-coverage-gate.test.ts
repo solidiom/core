@@ -33,9 +33,7 @@ function document(exports: NormalizedApiExport[]): NormalizedApiDocument {
 
 describe("checkCoverage (API-004)", () => {
   it("reports no violations for a fully documented, resolved export", () => {
-    const doc = document([
-      baseExport({ comment: { tags: [], summary: "Renders the example." } }),
-    ])
+    const doc = document([baseExport({ comment: { tags: [], summary: "Renders the example." } })])
     expect(checkCoverage(doc, "fixture")).toHaveLength(0)
   })
 

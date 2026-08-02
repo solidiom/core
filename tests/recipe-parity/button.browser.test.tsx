@@ -74,7 +74,14 @@ async function renderButton(
 }
 
 describe("button computed-style parity", () => {
-  for (const variant of ["default", "destructive", "outline", "secondary", "ghost", "link"] as const) {
+  for (const variant of [
+    "default",
+    "destructive",
+    "outline",
+    "secondary",
+    "ghost",
+    "link",
+  ] as const) {
     it(`variant "${variant}" resolves the same computed style across all profiles`, async () => {
       const computed: Record<ProfileName, Record<string, string>> = {} as never
 
@@ -230,8 +237,13 @@ describe("button computed-style parity", () => {
 
     const onValues = new Set(Object.values(computed).map((c) => c.on))
     const offValues = new Set(Object.values(computed).map((c) => c.off))
-    expect(onValues.size, `state "on" disagrees across profiles: ${JSON.stringify(computed)}`).toBe(1)
-    expect(offValues.size, `state "off" disagrees across profiles: ${JSON.stringify(computed)}`).toBe(1)
+    expect(onValues.size, `state "on" disagrees across profiles: ${JSON.stringify(computed)}`).toBe(
+      1,
+    )
+    expect(
+      offValues.size,
+      `state "off" disagrees across profiles: ${JSON.stringify(computed)}`,
+    ).toBe(1)
   })
 
   it("hover state (:focus-visible outline) resolves the same across all profiles", async () => {

@@ -97,7 +97,11 @@ function auditProfileCoverage(
   const css = readStylesheet(profileDir, scope)
 
   if (!css) {
-    errors.push({ profile, scope, message: `no styles/${scope}.css — scope is undeclared in this profile` })
+    errors.push({
+      profile,
+      scope,
+      message: `no styles/${scope}.css — scope is undeclared in this profile`,
+    })
     return errors
   }
 
@@ -117,7 +121,8 @@ function auditProfileCoverage(
           message: `slot "${slot.part}" declares state "${state}" but styles/${scope}.css has no [data-state="${state}"] rule for it`,
         })
       }
-    }  }
+    }
+  }
 
   return errors
 }
@@ -295,7 +300,9 @@ function main(): void {
 
   if (errors.length === 0) {
     console.log("✓ Recipe parity check PASSED")
-    console.log("  All profiles cover the same slots/states and every documented exception is honored.")
+    console.log(
+      "  All profiles cover the same slots/states and every documented exception is honored.",
+    )
     return
   }
 

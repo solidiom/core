@@ -25,9 +25,12 @@ const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const sourceRoot = join(projectRoot, "src")
 const pagesRoot = join(sourceRoot, "pages")
 const extensions = [".astro", ".ts", ".tsx", ".js", ".jsx", ".mts", ".mjs"]
-const importPattern = /(?:import\s+(?:[\s\S]*?\s+from\s+)?|export\s+(?:[\s\S]*?\s+from\s+)?|import\s*\()\s*["']([^"']+)["']/g
-const forbiddenPackagePattern = /^(?:@babel\/|babel-|monaco-editor(?:\/|$)|@codemirror(?:\/|$)|codemirror$)/
-const forbiddenPathPattern = /(?:^|\/)(?:playground|theme-builder|themes\/builder|editor|compiler)(?:\/|$)/
+const importPattern =
+  /(?:import\s+(?:[\s\S]*?\s+from\s+)?|export\s+(?:[\s\S]*?\s+from\s+)?|import\s*\()\s*["']([^"']+)["']/g
+const forbiddenPackagePattern =
+  /^(?:@babel\/|babel-|monaco-editor(?:\/|$)|@codemirror(?:\/|$)|codemirror$)/
+const forbiddenPathPattern =
+  /(?:^|\/)(?:playground|theme-builder|themes\/builder|editor|compiler)(?:\/|$)/
 
 interface Violation {
   chain: string[]
@@ -39,7 +42,11 @@ function isFile(pathname: string): boolean {
   return existsSync(pathname) && extname(pathname) !== ""
 }
 
-function resolveLocalImport(fromFile: string, specifier: string, root = sourceRoot): string | undefined {
+function resolveLocalImport(
+  fromFile: string,
+  specifier: string,
+  root = sourceRoot,
+): string | undefined {
   const aliases: Record<string, string> = {
     "@components/": join(root, "components") + sep,
     "@layouts/": join(root, "layouts") + sep,
@@ -76,9 +83,11 @@ function importSpecifiers(source: string): string[] {
 
 function isToolRoute(pathname: string, root = pagesRoot): boolean {
   const routePath = relative(root, pathname).split(sep).join("/")
-  return routePath.startsWith("playground/") ||
+  return (
+    routePath.startsWith("playground/") ||
     routePath.startsWith("themes/builder/") ||
     routePath.startsWith("es/themes/builder/")
+  )
 }
 
 function routeFiles(root = pagesRoot): string[] {
@@ -117,7 +126,10 @@ function findViolationsForRoute(route: string, sourceRootForRoute = sourceRoot):
 
       const importedFile = resolveLocalImport(normalizedPath, specifier, sourceRootForRoute)
       const normalizedSpecifier = specifier.replaceAll("\\", "/")
-      if (forbiddenPathPattern.test(normalizedSpecifier) || (importedFile && forbiddenPathPattern.test(importedFile.replaceAll("\\", "/")))) {
+      if (
+        forbiddenPathPattern.test(normalizedSpecifier) ||
+        (importedFile && forbiddenPathPattern.test(importedFile.replaceAll("\\", "/")))
+      ) {
         violations.push({ chain, specifier, reason: "forbidden tool module" })
         continue
       }

@@ -2,7 +2,8 @@
 contentSchemaVersion: 1
 title: "Recuperación de fallos y operaciones sin conexión"
 description: "Cómo gestionar fallos de instalación, recuperación con rollback, operación sin conexión, y configuración de registro privado para entornos air-gapped."
-keywords: [recuperación, rollback, sin conexión, offline, air-gapped, registro privado, fallos, integridad]
+keywords:
+  [recuperación, rollback, sin conexión, offline, air-gapped, registro privado, fallos, integridad]
 locale: es
 maturity: beta
 order: 8

@@ -14,7 +14,11 @@ import { existsSync, mkdirSync, readdirSync, rmSync } from "node:fs"
 import { homedir } from "node:os"
 import { dirname, join, resolve, sep } from "node:path"
 import * as clack from "@clack/prompts"
-import { isPackageManagerName, detectPackageManager, type PackageManagerName } from "../package-manager/detect"
+import {
+  isPackageManagerName,
+  detectPackageManager,
+  type PackageManagerName,
+} from "../package-manager/detect"
 import { install as installCommand } from "../package-manager/commands"
 import { runPackageManager } from "../package-manager/exec"
 import { materialize } from "../create/materialize"
@@ -145,7 +149,11 @@ function isInside(parent: string, child: string): boolean {
  * Validates destination safety per CLI-006's plan. Returns a list of
  * violation strings — empty means the destination is safe to use.
  */
-function validateDestination(cwd: string, name: string, force: boolean): { destination: string; errors: string[] } {
+function validateDestination(
+  cwd: string,
+  name: string,
+  force: boolean,
+): { destination: string; errors: string[] } {
   const errors: string[] = []
   const destination = resolve(cwd, name)
   const resolvedCwd = resolve(cwd)
@@ -160,7 +168,9 @@ function validateDestination(cwd: string, name: string, force: boolean): { desti
   }
 
   if (destination === home) {
-    errors.push(`Destination "${destination}" is the user's home directory — refusing to scaffold there.`)
+    errors.push(
+      `Destination "${destination}" is the user's home directory — refusing to scaffold there.`,
+    )
   }
 
   if (destination === root) {
@@ -197,9 +207,7 @@ function validateDestination(cwd: string, name: string, force: boolean): { desti
 async function promptForMissing(
   options: CreateOptions,
 ): Promise<
-  | { template: string; name: string; styling?: "css" | "tailwind" | "unocss" }
-  | null
-  | "cancelled"
+  { template: string; name: string; styling?: "css" | "tailwind" | "unocss" } | null | "cancelled"
 > {
   const isTTY = options.isTTY ?? process.stdin.isTTY ?? false
 
@@ -292,7 +300,9 @@ export async function runCreate(options: CreateOptions): Promise<CreateResult> {
     return {
       destination: resolve(cwd, options.name ?? ""),
       created: false,
-      errors: [`Unknown styling profile "${options.styling}" — expected one of: ${STYLING_PROFILES.join(", ")}`],
+      errors: [
+        `Unknown styling profile "${options.styling}" — expected one of: ${STYLING_PROFILES.join(", ")}`,
+      ],
     }
   }
 
@@ -420,10 +430,22 @@ export class CreateCommand extends Command {
   static override usage = Command.Usage({
     description: "Scaffold a new project from a template",
     examples: [
-      ["Create a project non-interactively", "solidiom create my-app --template vite-solid-router --yes"],
-      ["Create with a specific styling profile", "solidiom create my-app --template vite-solid-router --styling tailwind --yes"],
-      ["Create without running the install step", "solidiom create my-app --template vite-solid-router --yes --no-install"],
-      ["Force scaffolding into a non-empty directory", "solidiom create my-app --template vite-solid-router --yes --force"],
+      [
+        "Create a project non-interactively",
+        "solidiom create my-app --template vite-solid-router --yes",
+      ],
+      [
+        "Create with a specific styling profile",
+        "solidiom create my-app --template vite-solid-router --styling tailwind --yes",
+      ],
+      [
+        "Create without running the install step",
+        "solidiom create my-app --template vite-solid-router --yes --no-install",
+      ],
+      [
+        "Force scaffolding into a non-empty directory",
+        "solidiom create my-app --template vite-solid-router --yes --force",
+      ],
     ],
   })
 

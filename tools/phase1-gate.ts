@@ -451,13 +451,28 @@ check("doctor.ts exists", fileExists("packages/cli/src/commands/doctor.ts"))
 check("verify.ts exists", fileExists("packages/cli/src/commands/verify.ts"))
 check("audit.ts exists", fileExists("packages/cli/src/commands/audit.ts"))
 check("package-manager/detect.ts exists", fileExists("packages/cli/src/package-manager/detect.ts"))
-check("package-manager/commands.ts exists", fileExists("packages/cli/src/package-manager/commands.ts"))
+check(
+  "package-manager/commands.ts exists",
+  fileExists("packages/cli/src/package-manager/commands.ts"),
+)
 check("package-manager/exec.ts exists", fileExists("packages/cli/src/package-manager/exec.ts"))
-check("source-install/verify-source.ts exists", fileExists("packages/cli/src/source-install/verify-source.ts"))
+check(
+  "source-install/verify-source.ts exists",
+  fileExists("packages/cli/src/source-install/verify-source.ts"),
+)
 check("source-install/lock.ts exists", fileExists("packages/cli/src/source-install/lock.ts"))
-check("source-install/destinations.ts exists", fileExists("packages/cli/src/source-install/destinations.ts"))
-check("source-install/conflict.ts exists", fileExists("packages/cli/src/source-install/conflict.ts"))
-check("source-install/rollback.ts exists", fileExists("packages/cli/src/source-install/rollback.ts"))
+check(
+  "source-install/destinations.ts exists",
+  fileExists("packages/cli/src/source-install/destinations.ts"),
+)
+check(
+  "source-install/conflict.ts exists",
+  fileExists("packages/cli/src/source-install/conflict.ts"),
+)
+check(
+  "source-install/rollback.ts exists",
+  fileExists("packages/cli/src/source-install/rollback.ts"),
+)
 check("create/materialize.ts exists", fileExists("packages/cli/src/create/materialize.ts"))
 check("create/config-gen.ts exists", fileExists("packages/cli/src/create/config-gen.ts"))
 check(

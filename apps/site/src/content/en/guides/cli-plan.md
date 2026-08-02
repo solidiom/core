@@ -38,14 +38,14 @@ Plan for dialog (package mode):
 
 ## Flags
 
-| Flag | Description |
-|------|-------------|
-| `--json` | Output as JSON |
-| `--mode` | Install mode: `package` or `source` |
-| `--registry` | Custom registry URL for resolution |
-| `--no-network` | Use only cached or local registry data |
-| `--deliverable` | Product-layer deliverable to resolve |
-| `--styling` | Styling profile to resolve |
+| Flag            | Description                            |
+| --------------- | -------------------------------------- |
+| `--json`        | Output as JSON                         |
+| `--mode`        | Install mode: `package` or `source`    |
+| `--registry`    | Custom registry URL for resolution     |
+| `--no-network`  | Use only cached or local registry data |
+| `--deliverable` | Product-layer deliverable to resolve   |
+| `--styling`     | Styling profile to resolve             |
 
 ## Resolution Order
 
@@ -93,6 +93,7 @@ solidiom plan select --json
 ```
 
 Each entry includes:
+
 - `package` — npm package name
 - `version` — resolved version
 - `isAdapter` — whether this is a positioning or date adapter

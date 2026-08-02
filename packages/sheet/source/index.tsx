@@ -1,6 +1,13 @@
 /** @solidiom/sheet — Side-panel dialog. Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close. */
 
-import { type Accessor, Show, createEffect, createSignal, createContext, useContext } from "solid-js"
+import {
+  type Accessor,
+  Show,
+  createEffect,
+  createSignal,
+  createContext,
+  useContext,
+} from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,

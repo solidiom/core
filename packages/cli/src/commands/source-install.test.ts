@@ -237,7 +237,12 @@ describe("source/install", () => {
         primitive: "dialog",
         mode: "source",
         entries: [
-          { package: "@solidiom/dialog", version: "0.0.1-next.0", isAdapter: false, reason: "requested" },
+          {
+            package: "@solidiom/dialog",
+            version: "0.0.1-next.0",
+            isAdapter: false,
+            reason: "requested",
+          },
         ],
         stylingOutputs: [],
         violations: [],
@@ -345,7 +350,12 @@ describe("source/install", () => {
         primitive: "button",
         mode: "source",
         entries: [
-          { package: "@solidiom/button", version: "0.0.1-next.0", isAdapter: false, reason: "requested" },
+          {
+            package: "@solidiom/button",
+            version: "0.0.1-next.0",
+            isAdapter: false,
+            reason: "requested",
+          },
         ],
         stylingOutputs: [],
         violations: [],
@@ -357,7 +367,12 @@ describe("source/install", () => {
       const primitiveSource = join(cwd, "..", "..", "packages", "button", "source")
       mkdirSync(primitiveSource, { recursive: true })
       writeFileSync(join(primitiveSource, "index.tsx"), content)
-      writeMatchingRegistry(cwd, "button", { "index.tsx": content }, { deliverables: ["component"] })
+      writeMatchingRegistry(
+        cwd,
+        "button",
+        { "index.tsx": content },
+        { deliverables: ["component"] },
+      )
     }
 
     it("installs a 'component' deliverable under config.componentDir, not sourceDir", () => {
@@ -425,7 +440,12 @@ describe("source/install", () => {
         primitive: "button",
         mode: "source",
         entries: [
-          { package: "@solidiom/button", version: "0.0.1-next.0", isAdapter: false, reason: "requested" },
+          {
+            package: "@solidiom/button",
+            version: "0.0.1-next.0",
+            isAdapter: false,
+            reason: "requested",
+          },
         ],
         stylingOutputs: [],
         violations: [],
@@ -438,7 +458,12 @@ describe("source/install", () => {
       const primitiveSource = join(cwd, "..", "..", "packages", "button", "source")
       mkdirSync(primitiveSource, { recursive: true })
       writeFileSync(join(primitiveSource, "index.tsx"), content)
-      writeMatchingRegistry(cwd, "button", { "index.tsx": content }, { deliverables: ["component"] })
+      writeMatchingRegistry(
+        cwd,
+        "button",
+        { "index.tsx": content },
+        { deliverables: ["component"] },
+      )
     }
 
     it("blocks the install and returns a ConflictReport when a user-modified file would be overwritten, writing nothing", () => {
@@ -462,7 +487,12 @@ describe("source/install", () => {
       // Upstream changes; re-running install should now conflict.
       const primitiveSource = join(cwd, "..", "..", "packages", "button", "source")
       writeFileSync(join(primitiveSource, "index.tsx"), upstreamContent)
-      writeMatchingRegistry(cwd, "button", { "index.tsx": upstreamContent }, { deliverables: ["component"] })
+      writeMatchingRegistry(
+        cwd,
+        "button",
+        { "index.tsx": upstreamContent },
+        { deliverables: ["component"] },
+      )
 
       const second = installSource({ primitive: "button", cwd, plan: makePlan(), dryRun: false })
 
@@ -488,9 +518,20 @@ describe("source/install", () => {
 
       const primitiveSource = join(cwd, "..", "..", "packages", "button", "source")
       writeFileSync(join(primitiveSource, "index.tsx"), upstreamContent)
-      writeMatchingRegistry(cwd, "button", { "index.tsx": upstreamContent }, { deliverables: ["component"] })
+      writeMatchingRegistry(
+        cwd,
+        "button",
+        { "index.tsx": upstreamContent },
+        { deliverables: ["component"] },
+      )
 
-      const result = installSource({ primitive: "button", cwd, plan: makePlan(), dryRun: false, force: true })
+      const result = installSource({
+        primitive: "button",
+        cwd,
+        plan: makePlan(),
+        dryRun: false,
+        force: true,
+      })
 
       expect(result.filesWritten.length).toBeGreaterThan(0)
       expect(result.lockUpdated).toBe(true)
@@ -511,15 +552,28 @@ describe("source/install", () => {
 
       const primitiveSource = join(cwd, "..", "..", "packages", "button", "source")
       writeFileSync(join(primitiveSource, "index.tsx"), upstreamContent)
-      writeMatchingRegistry(cwd, "button", { "index.tsx": upstreamContent }, { deliverables: ["component"] })
+      writeMatchingRegistry(
+        cwd,
+        "button",
+        { "index.tsx": upstreamContent },
+        { deliverables: ["component"] },
+      )
 
-      const result = installSource({ primitive: "button", cwd, plan: makePlan(), dryRun: false, diff: true })
+      const result = installSource({
+        primitive: "button",
+        cwd,
+        plan: makePlan(),
+        dryRun: false,
+        diff: true,
+      })
 
       expect(result.filesWritten).toEqual([])
       expect(result.lockUpdated).toBe(false)
       expect(result.conflicts).toBeDefined()
 
-      const entry = result.conflicts!.entries.find((e) => e.path === "src/ui/components/button/index.tsx")
+      const entry = result.conflicts!.entries.find(
+        (e) => e.path === "src/ui/components/button/index.tsx",
+      )
       expect(entry).toBeDefined()
       expect(entry!.classification).toBe("overwrite")
       expect(entry!.diff).toBeDefined()

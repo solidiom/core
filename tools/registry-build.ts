@@ -852,7 +852,9 @@ function buildRegistry(): void {
       description,
       category,
       status: registryMetadata.status ?? "preview",
-      deliverables: [...new Set<Deliverable>(["primitive", ...registryMetadata.deliverables])].sort(),
+      deliverables: [
+        ...new Set<Deliverable>(["primitive", ...registryMetadata.deliverables]),
+      ].sort(),
       cli: {
         addCommand: `solidiom add ${primitive.name}`,
         installDeps: [...primitive.capabilities.map((c) => c.default)].sort(),

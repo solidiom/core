@@ -29,8 +29,6 @@ export function ThemeBuilderShell(props: ThemeBuilderShellProps) {
   const [loadError, setLoadError] = createSignal<string | undefined>(urlError)
   trackBuilderOpened()
 
-  
-
   const handleModeToggle = () => {
     const next = state.previewMode() === "light" ? "dark" : "light"
     state.setPreviewMode(next)
@@ -42,10 +40,7 @@ export function ThemeBuilderShell(props: ThemeBuilderShellProps) {
   }
 
   return (
-    <div
-      ref={(el) => el.setAttribute("data-hydrated", "true")}
-      class="theme-builder-shell"
-    >
+    <div ref={(el) => el.setAttribute("data-hydrated", "true")} class="theme-builder-shell">
       {loadError() && (
         <div class="theme-builder__error-banner" role="alert">
           <span class="theme-builder__error-message">{loadError()}</span>
@@ -76,11 +71,7 @@ export function ThemeBuilderShell(props: ThemeBuilderShellProps) {
           setTheme={state.setTheme}
           previewMode={state.previewMode}
         />
-        <BuilderPreviewPanel
-          locale={props.locale}
-          theme={state.theme}
-          mode={state.previewMode}
-        />
+        <BuilderPreviewPanel locale={props.locale} theme={state.theme} mode={state.previewMode} />
       </BuilderLayout>
       <BuilderExportDialog
         locale={props.locale}

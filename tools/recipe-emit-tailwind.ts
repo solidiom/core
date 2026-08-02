@@ -172,7 +172,9 @@ function renderVariantsModule(scope: string, definition: RecipeDefinition): stri
     // caught it via computed-style parity: recipes-tailwind's badge/button variants
     // rendered only their :hover fill, never their base background/text color).
     const prefixedUtilities = rule.condition.pseudo
-      ? utilities.map((utility) => withPseudoVariant(utility, { kind: "pseudo", pseudo: rule.condition.pseudo }))
+      ? utilities.map((utility) =>
+          withPseudoVariant(utility, { kind: "pseudo", pseudo: rule.condition.pseudo }),
+        )
       : utilities
     const byValue = variantsByAxis.get(rule.condition.axis) ?? new Map<string, string[]>()
     const existing = byValue.get(rule.condition.value) ?? []
@@ -191,12 +193,15 @@ function renderVariantsModule(scope: string, definition: RecipeDefinition): stri
     // base rule and a separate pseudo rule for the same `when`, and both must merge
     // into one class list rather than the second silently replacing the first.
     const prefixedUtilities = rule.condition.pseudo
-      ? utilities.map((utility) => withPseudoVariant(utility, { kind: "pseudo", pseudo: rule.condition.pseudo }))
+      ? utilities.map((utility) =>
+          withPseudoVariant(utility, { kind: "pseudo", pseudo: rule.condition.pseudo }),
+        )
       : utilities
     const key = JSON.stringify(rule.condition.when)
     const existingEntry = compoundEntries.find((entry) => JSON.stringify(entry.when) === key)
     if (existingEntry) existingEntry.utilities.push(...prefixedUtilities)
-    else compoundEntries.push({ when: { ...rule.condition.when }, utilities: [...prefixedUtilities] })
+    else
+      compoundEntries.push({ when: { ...rule.condition.when }, utilities: [...prefixedUtilities] })
   }
 
   const variantsLiteral = [...variantsByAxis.entries()]
