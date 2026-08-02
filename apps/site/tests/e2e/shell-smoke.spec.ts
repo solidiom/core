@@ -27,7 +27,7 @@ test.describe("TEST-002: Shell Smoke Tests", () => {
       test(`${locale.name}: header is visible with brand link and navigation`, async ({ page }) => {
         await page.goto(locale.prefix)
 
-        const header = page.getByRole("banner")
+        const header = page.locator(".site-header")
         await expect(header).toBeVisible()
 
         const brand = page.locator(".site-header__brand")
