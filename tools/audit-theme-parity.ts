@@ -8,7 +8,7 @@
  * the source JSON and with each other, that the full contrast matrix — not just the
  * floor — is sound, and that a theme document survives a JSON round-trip unchanged.
  *
- * Four independent checks, each returning its own violations:
+ * Five independent checks, each returning its own violations:
  *   1. auditGeneratedFreshness — every emitter's output matches what regenerating it
  *      now would produce (delegates to each emitter's own `--check` mode).
  *   2. auditCrossOutputParity — the CSS and UnoCSS profiles assign the same value to
@@ -18,7 +18,11 @@
  *      surface/foreground pair meets the WCAG AA text minimum (4.5:1) or non-text
  *      minimum (3:1), in both modes — the exhaustive check THEME-001's validator
  *      explicitly deferred to this file.
- *   4. auditRoundTrip — serialising a reference theme to JSON and parsing it back
+ *   4. auditSiteTokenContrast — the site's hand-written `tokens.css` (--sol-* tokens)
+ *      meets the same WCAG AA minimums as the theme contract (A11Y-008). This closes
+ *      the gap where the site's `--sol-secondary` could drift below 4.5:1 without the
+ *      theme-contract audit catching it.
+ *   5. auditRoundTrip — serialising a reference theme to JSON and parsing it back
  *      produces a value-equal `ThemeDefinition` (BUILDER-004/005's persistence
  *      depends on this holding).
  *
@@ -287,7 +291,158 @@ export function auditContrastMatrix(): ThemeParityError[] {
   return errors
 }
 
-// ─── 4. Round-trip ───────────────────────────────────────────────────────────
+// ─── 4. Site-token contrast (A11Y-008) ───────────────────────────────────
+
+/**
+ * Extract `--sol-*` declarations from a CSS block matching the given selector pattern.
+ * Returns a map of token name (without `--sol-` prefix) to value.
+ */
+function parseSolTokens(css: string, selectorPattern: RegExp): Map<string, string> {
+  const tokens = new Map<string, string>()
+  const blockMatch = css.match(new RegExp(selectorPattern.source + "\\s*\\{([\\s\\S]*?)\\n\\}"))
+  if (!blockMatch) return tokens
+
+  for (const match of blockMatch[1].matchAll(/--sol-([a-z0-9-]+)\s*:\s*([^;]+);/g)) {
+    tokens.set(match[1]!, match[2]!.trim())
+  }
+  return tokens
+}
+
+/**
+ * Pairs the site uses for body text or interactive elements that must meet WCAG AA.
+ * These mirror the theme-contract contrast matrix but target --sol-* tokens directly.
+ */
+const SITE_CONTRAST_PAIRS: readonly ContrastPair[] = [
+  {
+    foreground: "foreground",
+    background: "surface-base",
+    minimum: TEXT_CONTRAST_MINIMUM,
+    label: "body text on page background",
+  },
+  {
+    foreground: "foreground",
+    background: "surface-raised",
+    minimum: TEXT_CONTRAST_MINIMUM,
+    label: "body text on raised surfaces",
+  },
+  {
+    foreground: "foreground-muted",
+    background: "surface-base",
+    minimum: TEXT_CONTRAST_MINIMUM,
+    label: "muted text on page background",
+  },
+  {
+    foreground: "primary-foreground",
+    background: "primary",
+    minimum: TEXT_CONTRAST_MINIMUM,
+    label: "text on primary fills",
+  },
+  {
+    foreground: "primary",
+    background: "surface-raised",
+    minimum: NON_TEXT_CONTRAST_MINIMUM,
+    label: "primary accents against raised surfaces",
+  },
+  {
+    foreground: "secondary",
+    background: "surface-raised",
+    minimum: TEXT_CONTRAST_MINIMUM,
+    label: "secondary/links against raised surfaces",
+  },
+  {
+    foreground: "focus-ring",
+    background: "surface-base",
+    minimum: NON_TEXT_CONTRAST_MINIMUM,
+    label: "the focus indicator",
+  },
+]
+
+/**
+ * Verifies the site's hand-written tokens.css meets WCAG AA minimums for both
+ * light and dark mode. This is A11Y-008's closing check: the theme contract
+ * validates `ThemeDefinition` instances, but the site's tokens sit in a separate
+ * namespace (`--sol-*`) and could drift without this check.
+ */
+export function auditSiteTokenContrast(): ThemeParityError[] {
+  const errors: ThemeParityError[] = []
+  const tokensPath = join(
+    ROOT,
+    "apps/site/src/assets/tokens.css",
+  )
+
+  if (!existsSync(tokensPath)) {
+    return [
+      {
+        check: "site-token contrast",
+        theme: "*",
+        message: "apps/site/src/assets/tokens.css not found",
+      },
+    ]
+  }
+
+  const cssText = readFileSync(tokensPath, "utf8")
+
+  // Parse light mode from :root, :root[data-theme="light"]
+  const lightTokens = parseSolTokens(
+    cssText,
+    /:root,\s*\n:root\[data-theme="light"\]/,
+  )
+  // Parse dark mode from :root[data-theme="dark"]
+  const darkTokens = parseSolTokens(
+    cssText,
+    /:root\[data-theme="dark"\]/,
+  )
+
+  const modes: Array<{ name: string; tokens: Map<string, string> }> = [
+    { name: "light", tokens: lightTokens },
+    { name: "dark", tokens: darkTokens },
+  ]
+
+  for (const { name, tokens } of modes) {
+    for (const pair of SITE_CONTRAST_PAIRS) {
+      const fg = tokens.get(pair.foreground)
+      const bg = tokens.get(pair.background)
+      if (fg === undefined) {
+        errors.push({
+          check: "site-token contrast",
+          theme: name,
+          message: `missing --sol-${pair.foreground} in ${name} mode`,
+        })
+        continue
+      }
+      if (bg === undefined) {
+        errors.push({
+          check: "site-token contrast",
+          theme: name,
+          message: `missing --sol-${pair.background} in ${name} mode`,
+        })
+        continue
+      }
+
+      const ratio = contrastBetween(fg, bg)
+      if (ratio === undefined) {
+        errors.push({
+          check: "site-token contrast",
+          theme: name,
+          message: `cannot parse color for ${pair.label}: "${fg}" on "${bg}"`,
+        })
+        continue
+      }
+
+      if (ratio < pair.minimum) {
+        errors.push({
+          check: "site-token contrast",
+          theme: name,
+          message: `${pair.label} (--sol-${pair.foreground} on --sol-${pair.background}) is ${ratio.toFixed(2)}:1, below the ${pair.minimum}:1 WCAG AA minimum`,
+        })
+      }
+    }
+  }
+
+  return errors
+}
+
+// ─── 5. Round-trip ───────────────────────────────────────────────────────────
 
 /** Deep-equality check without a dependency — themes are plain JSON-shaped objects. */
 function deepEqual(a: unknown, b: unknown): boolean {
@@ -324,14 +479,16 @@ async function main(): Promise<void> {
   const freshness = await auditGeneratedFreshness()
   const crossOutput = await auditCrossOutputParity()
   const contrast = auditContrastMatrix()
+  const siteContrast = auditSiteTokenContrast()
   const roundTrip = auditRoundTrip()
 
-  const all = [...freshness, ...crossOutput, ...contrast, ...roundTrip]
+  const all = [...freshness, ...crossOutput, ...contrast, ...siteContrast, ...roundTrip]
 
   if (all.length === 0) {
     console.log("✓ Generated freshness: all emitters up to date")
     console.log("✓ Cross-output parity: css and unocss agree on every --ui-* value")
     console.log("✓ Contrast matrix: every required pair meets its WCAG AA minimum")
+    console.log("✓ Site-token contrast: every --sol-* pair meets its WCAG AA minimum (A11Y-008)")
     console.log("✓ Round-trip: every reference theme survives JSON.stringify/JSON.parse")
     console.log("\n✓ Theme parity audit PASSED")
     return
