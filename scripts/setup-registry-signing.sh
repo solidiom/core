@@ -16,12 +16,12 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # ─── Defaults ────────────────────────────────────────────────────────────────
 
-# Detect the GitHub repo from the remote URL, or fall back to interactive prompt
+# Detect the GitHub repo from the remote URL, or fall back to GITHUB_REPO env
 detect_repo() {
   local remote
   remote="$(git -C "$REPO_ROOT" remote get-url origin 2>/dev/null || true)"
 
-  # Normalize: github.com:owner/repo.git → owner/repo
+  # Normalize: github.com:owner/repo.git or github.com/owner/repo.git → owner/repo
   if [[ "$remote" =~ github\.com[:/](.+)\.git ]]; then
     echo "${BASH_REMATCH[1]}"
     return
@@ -39,21 +39,38 @@ DEFAULT_REPO="$(detect_repo)"
 
 # ─── Arguments ───────────────────────────────────────────────────────────────
 
-SIGNING_KEY="${1:-}"
+SIGNING_KEY=""
 TARGET_REPO="${DEFAULT_REPO}"
 
-# Support --repo flag anywhere in arguments
+# Parse arguments: handle --repo flag before positional
 for arg in "$@"; do
   case "$arg" in
     --repo=*)
       TARGET_REPO="${arg#--repo=}"
       ;;
+    --repo)
+      # next arg is the repo
+      ;;
+    *)
+      if [[ -z "$SIGNING_KEY" ]]; then
+        SIGNING_KEY="$arg"
+      fi
+      ;;
   esac
 done
 
-if [[ "${2:-}" == "--repo" && -n "${3:-}" ]]; then
-  TARGET_REPO="$3"
-fi
+# Handle --repo followed by value (second pass)
+prev_was_repo=false
+for arg in "$@"; do
+  if $prev_was_repo; then
+    TARGET_REPO="$arg"
+    prev_was_repo=false
+    continue
+  fi
+  if [[ "$arg" == "--repo" ]]; then
+    prev_was_repo=true
+  fi
+done
 
 # ─── Validation ──────────────────────────────────────────────────────────────
 
@@ -90,9 +107,8 @@ fi
 if ! gh auth status &>/dev/null; then
   # Load .env if it exists at repo root
   if [[ -f "$REPO_ROOT/.env" ]]; then
-    set -a
-    # Source only GITHUB_TOKEN, skip other secrets
-    GTOKEN="$(grep -oP '^GITHUB_TOKEN\s*=\s*\K.+' "$REPO_ROOT/.env" | head -1 || true)"
+    # Extract only GITHUB_TOKEN, skip other secrets (no set -a, no sourcing)
+    GTOKEN="$(sed -n 's/^GITHUB_TOKEN\s*=\s*//p' "$REPO_ROOT/.env" | head -1 || true)"
     if [[ -n "$GTOKEN" ]]; then
       export GITHUB_TOKEN="$GTOKEN"
     fi
@@ -123,12 +139,10 @@ echo ""
 
 echo "Provisioning REGISTRY_SIGN_KEY as a GitHub Actions secret..."
 
-# Use printf to avoid trailing newline that gh secret set sometimes adds
-printf '%s' "$SIGNING_KEY" | \
-  gh secret set REGISTRY_SIGN_KEY \
-    --repo "$TARGET_REPO" \
-    --body-file - \
-    --env-name ''   # apply to all environments
+# Use --body to pass the key value directly (avoids stdin issues)
+gh secret set REGISTRY_SIGN_KEY \
+  --repo "$TARGET_REPO" \
+  --body "$SIGNING_KEY"
 
 echo ""
 echo "Secret provisioned successfully."
