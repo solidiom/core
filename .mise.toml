@@ -1,6 +1,7 @@
 [tools]
 node = "latest"
 pnpm = "latest"
+gh = "latest"
 
 [env]
 # Prevent global mise npm tools from auto-installing in this workspace.
