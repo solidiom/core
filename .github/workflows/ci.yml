@@ -695,3 +695,32 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Phase 3 (library beta) gate — advisory, see A11Y-007
         run: pnpm run gate:phase3
+
+  # VS-004's gate, the executable half of the G2 exit checklist. It existed as
+  # tools/vertical-slice-gate.ts but was referenced by no script, workflow, or phase
+  # gate, so the "67/67 passing" figure recorded in docs/plans/website-tasks.md §11
+  # was unverifiable — and its §11 bulk-catalog-bypass check had silently stopped
+  # running entirely after the tracker moved to docs/plans/. Blocking, because it
+  # passes 67/67.
+  vertical-slice-gate:
+    needs: [build, site-check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: VS-004 — vertical-slice gate (G2)
+        run: pnpm run gate:vertical-slice
