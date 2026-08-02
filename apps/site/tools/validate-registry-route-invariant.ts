@@ -83,11 +83,15 @@ function main(): void {
   const routeUsage = new Map<string, number>()
 
   for (const name of primitiveNames) {
-    for (const [locale, prefix] of Object.entries(LOCALE_PREFIXES) as Array<
-      [string, string]
-    >) {
+    for (const [locale, prefix] of Object.entries(LOCALE_PREFIXES) as Array<[string, string]>) {
       const overviewPath = `${prefix}/primitives/${name}/`
-      checkExactlyOne(overviewPath, `${name} (${locale} overview)`, builtRoutes, failures, routeUsage)
+      checkExactlyOne(
+        overviewPath,
+        `${name} (${locale} overview)`,
+        builtRoutes,
+        failures,
+        routeUsage,
+      )
 
       for (const view of VIEWS) {
         const viewPath = `${prefix}/primitives/${name}/${view}/`

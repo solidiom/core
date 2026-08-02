@@ -29,7 +29,11 @@ export interface InspectResult {
  * `loadRegistry` does: custom registry path/env override, then
  * monorepo-relative, then node_modules.
  */
-function resolveManifestPath(primitive: string, cwd: string, registryOverride?: string): string | null {
+function resolveManifestPath(
+  primitive: string,
+  cwd: string,
+  registryOverride?: string,
+): string | null {
   const candidates = [
     registryOverride ? join(registryOverride, `${primitive}.json`) : null,
     process.env["SOLIDIOM_REGISTRY_PATH"]
@@ -202,7 +206,9 @@ export class InspectCommand extends Command {
           const unverifiedCount = result.entries.filter((e) => e.provenance === "unverified").length
           if (unverifiedCount > 0) {
             this.context.stdout.write(
-              pc.yellow(`\n⚠ ${unverifiedCount} entr${unverifiedCount === 1 ? "y" : "ies"} recorded as unverified\n`),
+              pc.yellow(
+                `\n⚠ ${unverifiedCount} entr${unverifiedCount === 1 ? "y" : "ies"} recorded as unverified\n`,
+              ),
             )
           }
         }

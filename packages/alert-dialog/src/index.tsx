@@ -7,7 +7,14 @@
  * Parts: Root, Trigger, Portal, Content, Title, Description, Cancel, Action.
  */
 
-import { type Accessor, Show, createEffect, createSignal, createContext, useContext } from "solid-js"
+import {
+  type Accessor,
+  Show,
+  createEffect,
+  createSignal,
+  createContext,
+  useContext,
+} from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,

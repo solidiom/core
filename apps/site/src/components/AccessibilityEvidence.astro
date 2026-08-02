@@ -35,7 +35,9 @@ const reviewedAt =
           <dl class="accessibility-contract__keyboard">
             {contract.keyboard.map((interaction) => (
               <>
-                <dt><kbd>{interaction.key}</kbd></dt>
+                <dt>
+                  <kbd>{interaction.key}</kbd>
+                </dt>
                 <dd>{interaction.behavior}</dd>
               </>
             ))}
@@ -46,7 +48,9 @@ const reviewedAt =
         <div class="accessibility-contract__group">
           <h4>{copy.contractFocus}</h4>
           <ul>
-            {contract.focus.map((statement) => <li>{statement}</li>)}
+            {contract.focus.map((statement) => (
+              <li>{statement}</li>
+            ))}
           </ul>
         </div>
       )}
@@ -54,7 +58,9 @@ const reviewedAt =
         <div class="accessibility-contract__group">
           <h4>{copy.contractSemantics}</h4>
           <ul>
-            {contract.semantics.map((statement) => <li>{statement}</li>)}
+            {contract.semantics.map((statement) => (
+              <li>{statement}</li>
+            ))}
           </ul>
         </div>
       )}
@@ -62,14 +68,18 @@ const reviewedAt =
         <div class="accessibility-contract__group">
           <h4>{copy.contractAria}</h4>
           <ul>
-            {contract.aria.map((statement) => <li>{statement}</li>)}
+            {contract.aria.map((statement) => (
+              <li>{statement}</li>
+            ))}
           </ul>
         </div>
       )}
       <div class="accessibility-contract__group">
         <h4>{copy.contractConsumerDuties}</h4>
         <ul>
-          {contract.consumerDuties.map((duty) => <li>{duty}</li>)}
+          {contract.consumerDuties.map((duty) => (
+            <li>{duty}</li>
+          ))}
         </ul>
       </div>
       {contract.nonApplicableCriteria.length > 0 && (

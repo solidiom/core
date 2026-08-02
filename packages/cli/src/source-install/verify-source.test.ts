@@ -12,7 +12,10 @@ function createTmpDir(): string {
   // Nest cwd two levels deep so verifySourceIntegrity's monorepo-relative
   // resolution (join(cwd, "..", "..", "registry")) stays inside the writable
   // temp tree, matching source-install.test.ts's createTmpDir convention.
-  const root = join(tmpdir(), `solidiom-verify-source-${Date.now()}-${Math.random().toString(36).slice(2)}`)
+  const root = join(
+    tmpdir(),
+    `solidiom-verify-source-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+  )
   const dir = join(root, "consumer", "app")
   mkdirSync(dir, { recursive: true })
   return dir
@@ -138,9 +141,9 @@ describe("verifySourceIntegrity (CLI-003)", () => {
     const result = verifySourceIntegrity({ cwd, primitive: "widget", files: tamperedFiles })
 
     expect(result.verified).toBe(false)
-    expect(result.violations.some((v) => v.includes("index.tsx") && v.includes("digest mismatch"))).toBe(
-      true,
-    )
+    expect(
+      result.violations.some((v) => v.includes("index.tsx") && v.includes("digest mismatch")),
+    ).toBe(true)
   })
 
   it("fails when the manifest's fileDigests entry itself has been tampered (corrupted manifest)", () => {
@@ -172,9 +175,9 @@ describe("verifySourceIntegrity (CLI-003)", () => {
     })
 
     expect(result.verified).toBe(false)
-    expect(result.violations.some((v) => v.includes("index.tsx") && v.includes("digest mismatch"))).toBe(
-      true,
-    )
+    expect(
+      result.violations.some((v) => v.includes("index.tsx") && v.includes("digest mismatch")),
+    ).toBe(true)
   })
 
   it("fails with a clear violation, without throwing, when no manifest exists for the primitive", () => {
@@ -223,7 +226,9 @@ describe("verifySourceIntegrity (CLI-003)", () => {
     const result = verifySourceIntegrity({ cwd, primitive: "widget", files: filesWithExtra })
 
     expect(result.verified).toBe(false)
-    expect(result.violations.some((v) => v.includes("extra.tsx") && v.includes("no entry"))).toBe(true)
+    expect(result.violations.some((v) => v.includes("extra.tsx") && v.includes("no entry"))).toBe(
+      true,
+    )
   })
 
   it("fails when a manifest fileDigests entry has no corresponding file in source", () => {
@@ -236,9 +241,9 @@ describe("verifySourceIntegrity (CLI-003)", () => {
     const result = verifySourceIntegrity({ cwd, primitive: "widget", files: partialFiles })
 
     expect(result.verified).toBe(false)
-    expect(result.violations.some((v) => v.includes("extra.tsx") && v.includes("missing from source"))).toBe(
-      true,
-    )
+    expect(
+      result.violations.some((v) => v.includes("extra.tsx") && v.includes("missing from source")),
+    ).toBe(true)
   })
 
   it("fails when the registry index is unsigned but requireSignature (requireVerifiedSource policy) is true", () => {
@@ -288,7 +293,12 @@ describe("verifySourceIntegrity (CLI-003)", () => {
     const signatureKeyId = createHash("sha256").update(key).digest("hex").slice(0, 16)
     const signed = {
       ...index,
-      integrity: { ...index.integrity, signature, signedAt: "2025-01-01T00:00:00.000Z", signatureKeyId },
+      integrity: {
+        ...index.integrity,
+        signature,
+        signedAt: "2025-01-01T00:00:00.000Z",
+        signatureKeyId,
+      },
     }
     write(signed, manifest)
 

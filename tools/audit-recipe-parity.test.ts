@@ -228,7 +228,9 @@ describe("auditRecipeParity", () => {
     )
     // content's own "closed" coverage must remain unaffected.
     expect(errors).not.toContainEqual(
-      expect.objectContaining({ message: expect.stringContaining('slot "content" declares state "closed"') }),
+      expect.objectContaining({
+        message: expect.stringContaining('slot "content" declares state "closed"'),
+      }),
     )
   })
 

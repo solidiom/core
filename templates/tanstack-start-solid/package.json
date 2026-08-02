@@ -27,6 +27,14 @@
   "nx": {
     "tags": [
       "layer:template"
-    ]
+    ],
+    "targets": {
+      "typecheck": {
+        "dependsOn": [
+          "build",
+          "^build"
+        ]
+      }
+    }
   }
 }

@@ -183,16 +183,16 @@ solidiom doctor
 
 It reports on:
 
-| Check | Status | Meaning |
-|-------|--------|---------|
-| `config.json valid` | pass/fail | `.solidiom/config.json` exists and parses against the schema |
-| `config.json exists` | warn | Config file missing — run `solidiom init` |
-| `policy.json valid` | pass/fail | `.solidiom/policy.json` exists and parses against the schema |
-| `policy.json exists` | pass | Optional — using defaults |
-| `solid-js dependency` | pass/fail | `solid-js` is listed in `package.json` dependencies |
-| `lock.json valid` | pass/warn/fail | `.solidiom/lock.json` exists and has a supported version |
-| `source-install provenance` | pass/warn | Warning if unverified entries exist in the lockfile |
-| `package manager` | pass | Detected package manager and its source |
+| Check                       | Status         | Meaning                                                      |
+| --------------------------- | -------------- | ------------------------------------------------------------ |
+| `config.json valid`         | pass/fail      | `.solidiom/config.json` exists and parses against the schema |
+| `config.json exists`        | warn           | Config file missing — run `solidiom init`                    |
+| `policy.json valid`         | pass/fail      | `.solidiom/policy.json` exists and parses against the schema |
+| `policy.json exists`        | pass           | Optional — using defaults                                    |
+| `solid-js dependency`       | pass/fail      | `solid-js` is listed in `package.json` dependencies          |
+| `lock.json valid`           | pass/warn/fail | `.solidiom/lock.json` exists and has a supported version     |
+| `source-install provenance` | pass/warn      | Warning if unverified entries exist in the lockfile          |
+| `package manager`           | pass           | Detected package manager and its source                      |
 
 A `warn` status does not indicate a failure — only `fail` indicates a problem that needs attention.
 

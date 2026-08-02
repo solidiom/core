@@ -37,7 +37,12 @@ export function DataTableExample(props: DataTableExampleProps) {
   const columns = () => [
     { id: "name", header: headers().name, accessorKey: "name" as const, sortable: true },
     { id: "year", header: headers().year, accessorKey: "year" as const, sortable: true },
-    { id: "paradigm", header: headers().paradigm, accessorKey: "paradigm" as const, sortable: true },
+    {
+      id: "paradigm",
+      header: headers().paradigm,
+      accessorKey: "paradigm" as const,
+      sortable: true,
+    },
   ]
 
   return (

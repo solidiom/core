@@ -19,7 +19,10 @@ describe("runDiff", () => {
   })
 
   it("empty lockfile produces no entries, no changes", () => {
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({ version: 1, installed: {} }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({ version: 1, installed: {} }),
+    )
     const result = runDiff({ cwd })
     expect(result.entries).toHaveLength(0)
     expect(result.hasChanges).toBe(false)
@@ -29,12 +32,23 @@ describe("runDiff", () => {
     const content = "console.log('hello')"
     const digest = computeDigest(content)
     const filePath = "src/ui/primitives/dialog.tsx"
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        [filePath]: { path: filePath, digest, primitive: "dialog", version: "1.0.0", manifestFilesHash: "abc", verifiedAt: "2024-01-01T00:00:00Z", provenance: "verified" },
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          [filePath]: {
+            path: filePath,
+            digest,
+            primitive: "dialog",
+            version: "1.0.0",
+            manifestFilesHash: "abc",
+            verifiedAt: "2024-01-01T00:00:00Z",
+            provenance: "verified",
+          },
+        },
+      }),
+    )
     mkdirSync(join(cwd, "src", "ui", "primitives"), { recursive: true })
     writeFileSync(join(cwd, filePath), content)
     const result = runDiff({ cwd })
@@ -45,12 +59,23 @@ describe("runDiff", () => {
     const original = "console.log('hello')"
     const digest = computeDigest(original)
     const filePath = "src/ui/primitives/dialog.tsx"
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        [filePath]: { path: filePath, digest, primitive: "dialog", version: "1.0.0", manifestFilesHash: "abc", verifiedAt: "2024-01-01T00:00:00Z", provenance: "verified" },
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          [filePath]: {
+            path: filePath,
+            digest,
+            primitive: "dialog",
+            version: "1.0.0",
+            manifestFilesHash: "abc",
+            verifiedAt: "2024-01-01T00:00:00Z",
+            provenance: "verified",
+          },
+        },
+      }),
+    )
     mkdirSync(join(cwd, "src", "ui", "primitives"), { recursive: true })
     writeFileSync(join(cwd, filePath), "console.log('modified')")
     const result = runDiff({ cwd })
@@ -61,12 +86,23 @@ describe("runDiff", () => {
     const content = "console.log('hello')"
     const digest = computeDigest(content)
     const filePath = "src/ui/primitives/dialog.tsx"
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        [filePath]: { path: filePath, digest, primitive: "dialog", version: "1.0.0", manifestFilesHash: "abc", verifiedAt: "2024-01-01T00:00:00Z", provenance: "verified" },
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          [filePath]: {
+            path: filePath,
+            digest,
+            primitive: "dialog",
+            version: "1.0.0",
+            manifestFilesHash: "abc",
+            verifiedAt: "2024-01-01T00:00:00Z",
+            provenance: "verified",
+          },
+        },
+      }),
+    )
     const result = runDiff({ cwd })
     expect(result.entries).toEqual([{ path: filePath, primitive: "dialog", status: "deleted" }])
   })
@@ -75,12 +111,23 @@ describe("runDiff", () => {
     const content = "const x = 1"
     const digest = computeDigest(content)
     const filePath = "src/ui/primitives/dialog.tsx"
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        [filePath]: { path: filePath, digest, primitive: "dialog", version: "1.0.0", manifestFilesHash: "abc", verifiedAt: "2024-01-01T00:00:00Z", provenance: "verified" },
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          [filePath]: {
+            path: filePath,
+            digest,
+            primitive: "dialog",
+            version: "1.0.0",
+            manifestFilesHash: "abc",
+            verifiedAt: "2024-01-01T00:00:00Z",
+            provenance: "verified",
+          },
+        },
+      }),
+    )
     mkdirSync(join(cwd, "src", "ui", "primitives"), { recursive: true })
     writeFileSync(join(cwd, filePath), content)
     const result = runDiff({ cwd })
@@ -91,12 +138,23 @@ describe("runDiff", () => {
     const content = "const x = 1"
     const digest = computeDigest(content)
     const filePath = "src/ui/primitives/dialog.tsx"
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        [filePath]: { path: filePath, digest, primitive: "dialog", version: "1.0.0", manifestFilesHash: "abc", verifiedAt: "2024-01-01T00:00:00Z", provenance: "verified" },
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          [filePath]: {
+            path: filePath,
+            digest,
+            primitive: "dialog",
+            version: "1.0.0",
+            manifestFilesHash: "abc",
+            verifiedAt: "2024-01-01T00:00:00Z",
+            provenance: "verified",
+          },
+        },
+      }),
+    )
     mkdirSync(join(cwd, "src", "ui", "primitives"), { recursive: true })
     writeFileSync(join(cwd, filePath), "const x = 2")
     const result = runDiff({ cwd })
@@ -108,13 +166,32 @@ describe("runDiff", () => {
     const digest = computeDigest(content)
     const dialogPath = "src/ui/primitives/dialog.tsx"
     const tooltipPath = "src/ui/primitives/tooltip.tsx"
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        [dialogPath]: { path: dialogPath, digest, primitive: "dialog", version: "1.0.0", manifestFilesHash: "abc", verifiedAt: "2024-01-01T00:00:00Z", provenance: "verified" },
-        [tooltipPath]: { path: tooltipPath, digest, primitive: "tooltip", version: "1.0.0", manifestFilesHash: "def", verifiedAt: "2024-01-01T00:00:00Z", provenance: "verified" },
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          [dialogPath]: {
+            path: dialogPath,
+            digest,
+            primitive: "dialog",
+            version: "1.0.0",
+            manifestFilesHash: "abc",
+            verifiedAt: "2024-01-01T00:00:00Z",
+            provenance: "verified",
+          },
+          [tooltipPath]: {
+            path: tooltipPath,
+            digest,
+            primitive: "tooltip",
+            version: "1.0.0",
+            manifestFilesHash: "def",
+            verifiedAt: "2024-01-01T00:00:00Z",
+            provenance: "verified",
+          },
+        },
+      }),
+    )
     mkdirSync(join(cwd, "src", "ui", "primitives"), { recursive: true })
     writeFileSync(join(cwd, dialogPath), content)
     writeFileSync(join(cwd, tooltipPath), content)
@@ -130,13 +207,32 @@ describe("runDiff", () => {
     const digestB = computeDigest(contentB)
     const dialogPath = "src/ui/primitives/dialog.tsx"
     const tooltipPath = "src/ui/primitives/tooltip.tsx"
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        [dialogPath]: { path: dialogPath, digest: digestA, primitive: "dialog", version: "1.0.0", manifestFilesHash: "abc", verifiedAt: "2024-01-01T00:00:00Z", provenance: "verified" },
-        [tooltipPath]: { path: tooltipPath, digest: digestB, primitive: "tooltip", version: "1.0.0", manifestFilesHash: "def", verifiedAt: "2024-01-01T00:00:00Z", provenance: "verified" },
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          [dialogPath]: {
+            path: dialogPath,
+            digest: digestA,
+            primitive: "dialog",
+            version: "1.0.0",
+            manifestFilesHash: "abc",
+            verifiedAt: "2024-01-01T00:00:00Z",
+            provenance: "verified",
+          },
+          [tooltipPath]: {
+            path: tooltipPath,
+            digest: digestB,
+            primitive: "tooltip",
+            version: "1.0.0",
+            manifestFilesHash: "def",
+            verifiedAt: "2024-01-01T00:00:00Z",
+            provenance: "verified",
+          },
+        },
+      }),
+    )
     mkdirSync(join(cwd, "src", "ui", "primitives"), { recursive: true })
     writeFileSync(join(cwd, dialogPath), contentA)
     const result = runDiff({ cwd })

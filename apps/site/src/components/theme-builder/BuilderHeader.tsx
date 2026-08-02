@@ -47,18 +47,10 @@ export function BuilderHeader(props: BuilderHeaderProps) {
         <span class="theme-builder__badge">{copy().badge}</span>
       </div>
       <div class="theme-builder__header-right">
-        <button
-          type="button"
-          class="theme-builder__btn-share"
-          onClick={props.onShare}
-        >
+        <button type="button" class="theme-builder__btn-share" onClick={props.onShare}>
           {copy().shareLabel}
         </button>
-        <button
-          type="button"
-          class="theme-builder__btn-export"
-          onClick={props.onExport}
-        >
+        <button type="button" class="theme-builder__btn-export" onClick={props.onExport}>
           {copy().exportLabel}
         </button>
         <label class="theme-builder__mode-toggle">

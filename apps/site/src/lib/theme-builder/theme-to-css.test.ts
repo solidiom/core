@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest"
-import { THEME_SCHEMA_VERSION, type ThemeDefinition } from "../../../../../tools/theme-contract-schema"
+import {
+  THEME_SCHEMA_VERSION,
+  type ThemeDefinition,
+} from "../../../../../tools/theme-contract-schema"
 import { SOLIDIOM_DEFAULT_THEME } from "../../../../../tools/theme-contract-definitions"
 import { themeToCssVariables } from "./theme-to-css"
 

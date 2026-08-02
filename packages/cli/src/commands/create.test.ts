@@ -2,11 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from "node:fs"
 import { tmpdir, homedir } from "node:os"
 import { join, resolve, dirname } from "node:path"
-import {
-  runCreate,
-  isValidPackageName,
-  createCleanupJournal,
-} from "./create"
+import { runCreate, isValidPackageName, createCleanupJournal } from "./create"
 
 /**
  * Builds a tiny fixture templates/ directory (containing both "t" and
@@ -22,7 +18,11 @@ function makeFixtureTemplatesDir(): string {
     mkdirSync(dir, { recursive: true })
     writeFileSync(
       join(dir, "template.json"),
-      JSON.stringify({ name: templateName, stack: "vite-solid-router", variables: ["projectName"] }, null, 2),
+      JSON.stringify(
+        { name: templateName, stack: "vite-solid-router", variables: ["projectName"] },
+        null,
+        2,
+      ),
     )
     writeFileSync(
       join(dir, "package.json"),
@@ -46,8 +46,11 @@ function makeFixtureTemplatesDir(): string {
   )
   writeFileSync(
     join(ssrDir, "package.json"),
-    JSON.stringify({ name: "@solidiom/template-tanstack-start-solid", version: "0.0.0", private: true }, null, 2) +
-      "\n",
+    JSON.stringify(
+      { name: "@solidiom/template-tanstack-start-solid", version: "0.0.0", private: true },
+      null,
+      2,
+    ) + "\n",
   )
   writeFileSync(
     join(ssrDir, "src", "routes", "__root.tsx"),
@@ -90,7 +93,9 @@ describe("create", () => {
       const pkg = JSON.parse(readFileSync(join(result.destination, "package.json"), "utf8"))
       expect(pkg).toEqual({ name: "my-app", version: "0.0.0", private: true })
 
-      const config = JSON.parse(readFileSync(join(result.destination, ".solidiom", "config.json"), "utf8"))
+      const config = JSON.parse(
+        readFileSync(join(result.destination, ".solidiom", "config.json"), "utf8"),
+      )
       expect(config.defaultMode).toBe("package")
     })
 
@@ -223,9 +228,9 @@ describe("create", () => {
       })
 
       expect(result.created).toBe(false)
-      expect(result.errors?.some((e) => /escapes the current working directory|filesystem root/.test(e))).toBe(
-        true,
-      )
+      expect(
+        result.errors?.some((e) => /escapes the current working directory|filesystem root/.test(e)),
+      ).toBe(true)
     })
 
     it("refuses a destination equal to the monorepo root", async () => {
@@ -248,7 +253,9 @@ describe("create", () => {
         // "../.." from nestedCwd both escapes cwd AND lands on the monorepo
         // root — both violations should be reported, not just one masking
         // the other.
-        expect(result.errors?.some((e) => /escapes the current working directory/.test(e))).toBe(true)
+        expect(result.errors?.some((e) => /escapes the current working directory/.test(e))).toBe(
+          true,
+        )
         expect(result.errors?.some((e) => /monorepo root/.test(e))).toBe(true)
       } finally {
         rmSync(fakeRoot, { recursive: true, force: true })
@@ -516,7 +523,9 @@ describe("create", () => {
       })
 
       expect(result.created).toBe(true)
-      const config = JSON.parse(readFileSync(join(result.destination, ".solidiom", "config.json"), "utf8"))
+      const config = JSON.parse(
+        readFileSync(join(result.destination, ".solidiom", "config.json"), "utf8"),
+      )
       expect(config.stylingProfile).toBe("tailwind")
     })
 
@@ -540,7 +549,10 @@ describe("create", () => {
       expect(existsSync(join(result.destination, ".solidiom", "config.json"))).toBe(true)
       expect(existsSync(join(result.destination, "src", "routes", "__root.tsx"))).toBe(true)
 
-      const rootRoute = readFileSync(join(result.destination, "src", "routes", "__root.tsx"), "utf8")
+      const rootRoute = readFileSync(
+        join(result.destination, "src", "routes", "__root.tsx"),
+        "utf8",
+      )
       expect(rootRoute).toContain('export const title = "acme-ssr-app"')
       expect(rootRoute).not.toContain("{{projectName}}")
     })
@@ -567,7 +579,10 @@ describe("create", () => {
       const badTemplateDir = join(templatesDir, "has-lockfile")
       mkdirSync(badTemplateDir, { recursive: true })
       writeFileSync(join(badTemplateDir, "template.json"), JSON.stringify({ name: "has-lockfile" }))
-      writeFileSync(join(badTemplateDir, "package.json"), JSON.stringify({ name: "{{projectName}}" }))
+      writeFileSync(
+        join(badTemplateDir, "package.json"),
+        JSON.stringify({ name: "{{projectName}}" }),
+      )
       writeFileSync(join(badTemplateDir, "pnpm-lock.yaml"), "lockfileVersion: '9.0'\n")
 
       const result = await runCreate({

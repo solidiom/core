@@ -49,16 +49,16 @@ Running `solidiom init` with no arguments produces `.solidiom/config.json` with 
 
 ## Config File Settings
 
-| Setting | Type | Default | Description |
-|---------|------|---------|-------------|
-| `sourceDir` | string | `src/ui/primitives` | Target directory for source-installed primitives |
-| `runtimeDir` | string | `src/ui/_runtime` | Runtime target directory for source installs |
-| `componentDir` | string | `src/ui/components` | Target directory for component deliverables |
-| `blockDir` | string | `src/ui/blocks` | Target directory for block deliverables |
-| `themeDir` | string | `src/ui/themes` | Target directory for theme deliverables |
-| `stylingProfile` | `css` \| `tailwind` \| `unocss` | (none) | Project-wide styling profile |
-| `defaultMode` | `package` \| `source` | `package` | Default install mode for `solidiom add` |
-| `positioningAdapter` | string | `@solidiom/adapter-positioning-floating-ui` | Positioning adapter package |
+| Setting              | Type                            | Default                                     | Description                                      |
+| -------------------- | ------------------------------- | ------------------------------------------- | ------------------------------------------------ |
+| `sourceDir`          | string                          | `src/ui/primitives`                         | Target directory for source-installed primitives |
+| `runtimeDir`         | string                          | `src/ui/_runtime`                           | Runtime target directory for source installs     |
+| `componentDir`       | string                          | `src/ui/components`                         | Target directory for component deliverables      |
+| `blockDir`           | string                          | `src/ui/blocks`                             | Target directory for block deliverables          |
+| `themeDir`           | string                          | `src/ui/themes`                             | Target directory for theme deliverables          |
+| `stylingProfile`     | `css` \| `tailwind` \| `unocss` | (none)                                      | Project-wide styling profile                     |
+| `defaultMode`        | `package` \| `source`           | `package`                                   | Default install mode for `solidiom add`          |
+| `positioningAdapter` | string                          | `@solidiom/adapter-positioning-floating-ui` | Positioning adapter package                      |
 
 ## Policy File
 
@@ -76,15 +76,15 @@ Running `solidiom init` with no arguments produces `.solidiom/config.json` with 
 }
 ```
 
-| Setting | Type | Default | Description |
-|---------|------|---------|-------------|
-| `signatureMode` | `sigstore` \| `trusted-keys` \| `none` | `none` | Artifact signature verification mode |
-| `trustedIdentities` | string[] | `[]` | Identities allowed for sigstore verification |
-| `allowedPrimitiveVersions` | record | `{}` | Version constraints per package name |
-| `registrySignatureRequired` | boolean | `false` | Require signed registry index |
-| `registryTrustedKeys` | string[] | `[]` | HMAC keys for registry index verification |
-| `requireVerifiedSource` | boolean | `true` | Require byte-level verification for source installs |
-| `sourceInstallTrustedKeys` | string[] | `[]` | HMAC keys for source-install integrity checks |
+| Setting                     | Type                                   | Default | Description                                         |
+| --------------------------- | -------------------------------------- | ------- | --------------------------------------------------- |
+| `signatureMode`             | `sigstore` \| `trusted-keys` \| `none` | `none`  | Artifact signature verification mode                |
+| `trustedIdentities`         | string[]                               | `[]`    | Identities allowed for sigstore verification        |
+| `allowedPrimitiveVersions`  | record                                 | `{}`    | Version constraints per package name                |
+| `registrySignatureRequired` | boolean                                | `false` | Require signed registry index                       |
+| `registryTrustedKeys`       | string[]                               | `[]`    | HMAC keys for registry index verification           |
+| `requireVerifiedSource`     | boolean                                | `true`  | Require byte-level verification for source installs |
+| `sourceInstallTrustedKeys`  | string[]                               | `[]`    | HMAC keys for source-install integrity checks       |
 
 ## Next Steps
 

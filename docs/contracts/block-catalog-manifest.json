@@ -18,13 +18,7 @@
         "Permission-restricted (account locked, MFA required)",
         "Success (redirect to post-auth destination)"
       ],
-      "componentDependencies": [
-        "COMP-001",
-        "COMP-002",
-        "COMP-003",
-        "COMP-005",
-        "COMP-042"
-      ],
+      "componentDependencies": ["COMP-001", "COMP-002", "COMP-003", "COMP-005", "COMP-042"],
       "dataBoundary": "Authentication service via OAuth 2.0 / OIDC or credential endpoint. No persistent data at rest within the block; session token passed to application shell."
     },
     {

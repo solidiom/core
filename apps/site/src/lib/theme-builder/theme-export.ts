@@ -17,9 +17,8 @@ export function exportToCss(theme: ThemeDefinition): string {
   ]
 
   for (const mode of ["light", "dark"] as const) {
-    const selector = mode === "light"
-      ? ":root,\n:root[data-theme=\"light\"]"
-      : ":root[data-theme=\"dark\"]"
+    const selector =
+      mode === "light" ? ':root,\n:root[data-theme="light"]' : ':root[data-theme="dark"]'
 
     parts.push(`${selector} {`)
 
@@ -88,7 +87,9 @@ export function exportToTailwind(theme: ThemeDefinition): string {
     if (ns === "color") {
       parts.push(`  --color-${tokenId}: var(--sol-${tokenId}, ${resolvedLight});`)
     } else if (ns === "radius") {
-      parts.push(`  --radius-${tokenId === "radius" ? "" : tokenId}: var(--sol-${tokenId}, ${resolvedLight});`)
+      parts.push(
+        `  --radius-${tokenId === "radius" ? "" : tokenId}: var(--sol-${tokenId}, ${resolvedLight});`,
+      )
     } else if (ns === "shadow") {
       parts.push(`  --shadow-${tokenId}: var(--sol-${tokenId}, ${resolvedLight});`)
     } else {

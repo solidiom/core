@@ -49,10 +49,7 @@ export type BuilderSharedEvent = {
   readonly event: "builder_shared"
 }
 
-export type BuilderAnalyticsEvent =
-  | BuilderOpenedEvent
-  | BuilderExportedEvent
-  | BuilderSharedEvent
+export type BuilderAnalyticsEvent = BuilderOpenedEvent | BuilderExportedEvent | BuilderSharedEvent
 
 /** Union of all analytics events tracked by the site. */
 export type SiteAnalyticsEvent = SearchAnalyticsEvent | BuilderAnalyticsEvent

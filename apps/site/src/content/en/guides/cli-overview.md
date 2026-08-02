@@ -34,19 +34,19 @@ npx @solidiom/cli --help
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `solidiom init` | Initialize `.solidiom/config.json` in the current project |
-| `solidiom plan <primitive>` | Resolve the capability graph for a primitive |
-| `solidiom add <primitive>` | Add a primitive in package or source mode |
-| `solidiom create <name>` | Scaffold a new project from a template |
+| Command                                     | Description                                                                 |
+| ------------------------------------------- | --------------------------------------------------------------------------- |
+| `solidiom init`                             | Initialize `.solidiom/config.json` in the current project                   |
+| `solidiom plan <primitive>`                 | Resolve the capability graph for a primitive                                |
+| `solidiom add <primitive>`                  | Add a primitive in package or source mode                                   |
+| `solidiom create <name>`                    | Scaffold a new project from a template                                      |
 | `solidiom inspect <subcommand> [primitive]` | Inspect installed primitives (source, manifest, explain, files, provenance) |
-| `solidiom diff` | Show changes between installed source and lockfile digests |
-| `solidiom detach <primitive>` | Detach a source-installed primitive from upstream updates |
-| `solidiom update <primitive>` | Update source-installed primitives to latest upstream |
-| `solidiom doctor` | Check project configuration health |
-| `solidiom verify [artifact]` | Verify artifact or registry signatures |
-| `solidiom audit` | Generate CycloneDX 1.5 SBOM and license inventory |
+| `solidiom diff`                             | Show changes between installed source and lockfile digests                  |
+| `solidiom detach <primitive>`               | Detach a source-installed primitive from upstream updates                   |
+| `solidiom update <primitive>`               | Update source-installed primitives to latest upstream                       |
+| `solidiom doctor`                           | Check project configuration health                                          |
+| `solidiom verify [artifact]`                | Verify artifact or registry signatures                                      |
+| `solidiom audit`                            | Generate CycloneDX 1.5 SBOM and license inventory                           |
 
 ## Common Flags
 

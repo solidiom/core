@@ -47,9 +47,11 @@ const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
     <meta name="description" content={metadata.description} />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href={metadata.canonicalUrl} />
-    {alternates.map((alternate) => (
-      <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
-    ))}
+    {
+      alternates.map((alternate) => (
+        <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+      ))
+    }
     <meta property="og:type" content={social["og:type"]} />
     <meta property="og:site_name" content={social["og:site_name"]} />
     <meta property="og:title" content={social["og:title"]} />
@@ -68,14 +70,16 @@ const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
       <slot />
     </main>
     <script is:inline>
-      {`document.addEventListener("click", (event) => {
+      {
+        ;`document.addEventListener("click", (event) => {
         const target = event.target;
         if (!(target instanceof Element)) return;
         const skipLink = target.closest(".skip-link");
         if (!(skipLink instanceof HTMLAnchorElement)) return;
         const focusTarget = document.getElementById(skipLink.hash.slice(1));
         if (focusTarget instanceof HTMLElement) focusTarget.focus();
-      });`}
+      });`
+      }
     </script>
   </body>
 </html>

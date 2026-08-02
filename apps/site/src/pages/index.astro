@@ -103,23 +103,30 @@ const SECTIONS: HomeSection[] = [
     <header class="home-page__header">
       <h1>Solidiom</h1>
       <p class="home-page__tagline">
-        {locale === "en"
-          ? "Accessible, source-owned component ecosystem for Solid."
-          : "Ecosistema accesible y de fuente abierta de componentes para Solid."}
+        {
+          locale === "en"
+            ? "Accessible, source-owned component ecosystem for Solid."
+            : "Ecosistema accesible y de fuente abierta de componentes para Solid."
+        }
       </p>
       <p class="home-page__status">
         {locale === "en" ? "Public beta" : "Beta pública"}
         <span
           class="maturity-badge__label"
           data-maturity="beta"
-          title={locale === "en" ? "Functional and tested. API may change." : "Funcional y probado. La API puede cambiar."}
+          title={locale === "en"
+            ? "Functional and tested. API may change."
+            : "Funcional y probado. La API puede cambiar."}
         >
           Beta
         </span>
       </p>
     </header>
 
-    <nav class="home-page__areas" aria-label={locale === "en" ? "Platform areas" : "Áreas de la plataforma"}>
+    <nav
+      class="home-page__areas"
+      aria-label={locale === "en" ? "Platform areas" : "Áreas de la plataforma"}
+    >
       {
         SECTIONS.map((section) => {
           const maturity = getMaturityInfo(section.area, locale)
@@ -139,17 +146,15 @@ const SECTIONS: HomeSection[] = [
                 </div>
               </header>
               <p class="home-page__area-description">{section.description[locale]}</p>
-              {
-                available && section.href ? (
-                  <a href={section.href} class="home-page__area-link">
-                    {locale === "en" ? "Explore" : "Explorar"} →
-                  </a>
-                ) : (
-                  <span class="home-page__area-unavailable" aria-hidden="true">
-                    {locale === "en" ? "Coming in M4" : "Próximamente en M4"}
-                  </span>
-                )
-              }
+              {available && section.href ? (
+                <a href={section.href} class="home-page__area-link">
+                  {locale === "en" ? "Explore" : "Explorar"} →
+                </a>
+              ) : (
+                <span class="home-page__area-unavailable" aria-hidden="true">
+                  {locale === "en" ? "Coming in M4" : "Próximamente en M4"}
+                </span>
+              )}
             </article>
           )
         })

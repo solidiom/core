@@ -5,7 +5,11 @@ describe("planThemeInstall", () => {
   const themeCompatible = ["solidiom-default"]
 
   it("plans a copy-stylesheet action for the css profile", () => {
-    const plan = planThemeInstall({ themeSlug: "solidiom-default", profile: "css", themeCompatible })
+    const plan = planThemeInstall({
+      themeSlug: "solidiom-default",
+      profile: "css",
+      themeCompatible,
+    })
     expect(plan.profile).toBe("css")
     expect(plan.actions).toHaveLength(1)
     expect(plan.actions[0]!.kind).toBe("copy-stylesheet")
@@ -16,13 +20,21 @@ describe("planThemeInstall", () => {
   })
 
   it("plans a copy-stylesheet action for the tailwind profile", () => {
-    const plan = planThemeInstall({ themeSlug: "solidiom-default", profile: "tailwind", themeCompatible })
+    const plan = planThemeInstall({
+      themeSlug: "solidiom-default",
+      profile: "tailwind",
+      themeCompatible,
+    })
     expect(plan.profile).toBe("tailwind")
     expect(plan.actions[0]!.kind).toBe("copy-stylesheet")
   })
 
   it("plans a patch-preset-config action for the unocss profile", () => {
-    const plan = planThemeInstall({ themeSlug: "solidiom-default", profile: "unocss", themeCompatible })
+    const plan = planThemeInstall({
+      themeSlug: "solidiom-default",
+      profile: "unocss",
+      themeCompatible,
+    })
     expect(plan.profile).toBe("unocss")
     expect(plan.actions).toHaveLength(1)
     expect(plan.actions[0]!.kind).toBe("patch-preset-config")
@@ -34,8 +46,16 @@ describe("planThemeInstall", () => {
   })
 
   it("--dry-run-style consumers can tell which kind of action will occur without inspecting description text", () => {
-    const cssPlan = planThemeInstall({ themeSlug: "solidiom-default", profile: "css", themeCompatible })
-    const unoPlan = planThemeInstall({ themeSlug: "solidiom-default", profile: "unocss", themeCompatible })
+    const cssPlan = planThemeInstall({
+      themeSlug: "solidiom-default",
+      profile: "css",
+      themeCompatible,
+    })
+    const unoPlan = planThemeInstall({
+      themeSlug: "solidiom-default",
+      profile: "unocss",
+      themeCompatible,
+    })
     expect(cssPlan.actions[0]!.kind).toBe("copy-stylesheet")
     expect(unoPlan.actions[0]!.kind).toBe("patch-preset-config")
   })

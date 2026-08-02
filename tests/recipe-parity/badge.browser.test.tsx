@@ -56,7 +56,8 @@ async function renderBadge(
   disposeRender = render(() => WRAPPERS[profile]({ variant }), container)
 
   const root = container.querySelector('[data-scope="badge"][data-part="root"]')
-  if (!root) throw new Error(`${profile}: badge did not render [data-scope="badge"][data-part="root"]`)
+  if (!root)
+    throw new Error(`${profile}: badge did not render [data-scope="badge"][data-part="root"]`)
   return root as HTMLElement
 }
 

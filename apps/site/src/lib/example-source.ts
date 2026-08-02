@@ -83,6 +83,9 @@ export function extractNamedExport(sourceCode: string, exportName: string): Extr
     endLine = startLine
   }
 
-  const extracted = lines.slice(startLine, endLine + 1).join("\n").replace(/\s+$/, "")
+  const extracted = lines
+    .slice(startLine, endLine + 1)
+    .join("\n")
+    .replace(/\s+$/, "")
   return { code: extracted, fallback: false }
 }

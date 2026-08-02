@@ -9,12 +9,7 @@
  */
 
 import { describe, it, expect, beforeEach } from "vitest"
-import {
-  trackSearchOpened,
-  trackSearchResultSelected,
-  subscribe,
-  __TEST_ONLY__,
-} from "./analytics"
+import { trackSearchOpened, trackSearchResultSelected, subscribe, __TEST_ONLY__ } from "./analytics"
 import type { SiteAnalyticsEvent } from "./analytics-types"
 
 beforeEach(() => {

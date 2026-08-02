@@ -149,7 +149,11 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
 
   // Byte-level verification MUST happen before any write to disk.
   const envKey = process.env["REGISTRY_VERIFY_KEY"]
-  const verifyKeys = [...(envKey ? [envKey] : []), ...policy.registryTrustedKeys, ...policy.sourceInstallTrustedKeys]
+  const verifyKeys = [
+    ...(envKey ? [envKey] : []),
+    ...policy.registryTrustedKeys,
+    ...policy.sourceInstallTrustedKeys,
+  ]
   const verifyResult: SourceVerifyResult = verifySourceIntegrity({
     cwd,
     primitive,
@@ -187,7 +191,9 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
   }
 
   const runtimePkgSource = resolveRuntimeSource(cwd)
-  const runtimeFiles = runtimePkgSource ? collectRuntimeFiles(runtimePkgSource) : new Map<string, string>()
+  const runtimeFiles = runtimePkgSource
+    ? collectRuntimeFiles(runtimePkgSource)
+    : new Map<string, string>()
   for (const [relPath, content] of runtimeFiles) {
     const targetPath = join(runtimeDir, relPath)
     const relFromCwd = relative(cwd, targetPath)

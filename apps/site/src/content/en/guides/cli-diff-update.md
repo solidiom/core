@@ -30,23 +30,24 @@ solidiom diff --primitive dialog
 
 ### Flags
 
-| Flag | Description |
-|------|-------------|
+| Flag          | Description              |
+| ------------- | ------------------------ |
 | `--primitive` | Filter by primitive name |
-| `--json` | Output as JSON |
+| `--json`      | Output as JSON           |
 
 ### Statuses
 
 Each file receives one of four statuses:
 
-| Status | Symbol | Meaning |
-|--------|--------|---------|
-| `unchanged` | — | Local digest matches lockfile (not shown in output) |
-| `modified` | M | Local file content differs from lockfile digest |
-| `deleted` | D | File tracked in lockfile no longer exists |
-| `new` | A | File exists locally but is not in the lockfile |
+| Status      | Symbol | Meaning                                             |
+| ----------- | ------ | --------------------------------------------------- |
+| `unchanged` | —      | Local digest matches lockfile (not shown in output) |
+| `modified`  | M      | Local file content differs from lockfile digest     |
+| `deleted`   | D      | File tracked in lockfile no longer exists           |
+| `new`       | A      | File exists locally but is not in the lockfile      |
 
 If no files have changed, the output is:
+
 ```
 No local modifications.
 ```
@@ -61,10 +62,10 @@ solidiom update dialog
 
 ### Flags
 
-| Flag | Description |
-|------|-------------|
+| Flag        | Description                            |
+| ----------- | -------------------------------------- |
 | `--dry-run` | Show what would change without writing |
-| `--json` | Output as JSON |
+| `--json`    | Output as JSON                         |
 
 ### How It Works
 
@@ -76,12 +77,12 @@ For each file tracked in `.solidiom/lock.json`:
 
 ### Decision Matrix
 
-| Local | Upstream | Action |
-|-------|----------|--------|
-| Unchanged | Changed | Overwrite with upstream (safe update) |
-| Changed | Unchanged | Keep local |
-| Changed | Changed | Attempt line-level merge |
-| Unchanged | Unchanged | Skip |
+| Local     | Upstream  | Action                                |
+| --------- | --------- | ------------------------------------- |
+| Unchanged | Changed   | Overwrite with upstream (safe update) |
+| Changed   | Unchanged | Keep local                            |
+| Changed   | Changed   | Attempt line-level merge              |
+| Unchanged | Unchanged | Skip                                  |
 
 ### Conflict Resolution
 
@@ -96,6 +97,7 @@ When both local and upstream have changed the same lines, the update produces di
 ```
 
 Alongside the conflicted file, two sidecar files are written:
+
 - `<file>.local` — Your local version
 - `<file>.upstream` — The upstream version
 
@@ -107,13 +109,13 @@ For `.tsx` and `.jsx` files with structural changes, the update uses ts-morph AS
 
 ### Output Symbols
 
-| Symbol | Status |
-|--------|--------|
-| Up arrow | Updated (safe overwrite) |
-| Double arrow | Auto-merged |
-| Bolt | Conflict |
-| Circle | Skipped (detached) |
-| Cross | Skipped (deleted locally) |
+| Symbol       | Status                    |
+| ------------ | ------------------------- |
+| Up arrow     | Updated (safe overwrite)  |
+| Double arrow | Auto-merged               |
+| Bolt         | Conflict                  |
+| Circle       | Skipped (detached)        |
+| Cross        | Skipped (deleted locally) |
 
 ## Detach
 

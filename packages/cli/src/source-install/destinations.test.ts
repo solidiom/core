@@ -28,7 +28,9 @@ describe("resolveDestinationRoot", () => {
 
   it("resolves each deliverable to a DIFFERENT directory by default", () => {
     const dirs = new Set(
-      (["primitive", "component", "block", "theme"] as const).map((d) => resolveDestinationRoot(d, config)),
+      (["primitive", "component", "block", "theme"] as const).map((d) =>
+        resolveDestinationRoot(d, config),
+      ),
     )
     expect(dirs.size).toBe(4)
   })

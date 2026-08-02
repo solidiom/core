@@ -131,7 +131,8 @@ export function verifySourceIntegrity(options: VerifySourceIntegrityOptions): So
   if (!registryResult.verified) {
     return {
       verified: false,
-      violations: registryResult.violations.length > 0 ? registryResult.violations : [registryResult.reason],
+      violations:
+        registryResult.violations.length > 0 ? registryResult.violations : [registryResult.reason],
       verifiedAt,
     }
   }
@@ -166,7 +167,9 @@ export function verifySourceIntegrity(options: VerifySourceIntegrityOptions): So
   for (const [relPath, content] of files) {
     const expected = fileDigests[relPath]
     if (expected === undefined) {
-      violations.push(`${relPath}: present in source files but has no entry in manifest fileDigests`)
+      violations.push(
+        `${relPath}: present in source files but has no entry in manifest fileDigests`,
+      )
       continue
     }
     const actual = computeDigest(content)

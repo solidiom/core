@@ -8,7 +8,11 @@ import {
   type RegistryPrimitiveSummary,
 } from "./a11y-coverage-gate"
 import { PUBLISHED_EVIDENCE_SCHEMA_VERSION, type PublishedEvidence } from "./a11y-evidence"
-import { AXE_RESULTS_SCHEMA_VERSION, type AxeResultsArtifact, createAxeScanResult } from "./axe-results"
+import {
+  AXE_RESULTS_SCHEMA_VERSION,
+  type AxeResultsArtifact,
+  createAxeScanResult,
+} from "./axe-results"
 
 let tmpDir: string
 
@@ -47,7 +51,9 @@ function scanArtifact(overrides: Partial<AxeResultsArtifact> = {}): AxeResultsAr
     commitSha: "abc123",
     ciRunUrl: null,
     browser: "chromium",
-    results: [createAxeScanResult({ primitive: "dialog", passes: 15, violations: 0, incomplete: 0 })],
+    results: [
+      createAxeScanResult({ primitive: "dialog", passes: 15, violations: 0, incomplete: 0 }),
+    ],
     ...overrides,
   }
 }
@@ -129,11 +135,7 @@ describe("checkPrimitiveEvidence (A11Y-004)", () => {
 
   it("fails when the latest scan has no result for this primitive", () => {
     const path = writeEvidenceFile(publishedEvidence())
-    const result = checkPrimitiveEvidence(
-      primitiveSummary(),
-      path,
-      scanArtifact({ results: [] }),
-    )
+    const result = checkPrimitiveEvidence(primitiveSummary(), path, scanArtifact({ results: [] }))
     expect(result).toMatchObject({ primitive: "dialog", reason: "no-executed-scan" })
   })
 
@@ -149,7 +151,9 @@ describe("checkPrimitiveEvidence (A11Y-004)", () => {
       primitiveSummary(),
       path,
       scanArtifact({
-        results: [createAxeScanResult({ primitive: "dialog", passes: 10, violations: 2, incomplete: 0 })],
+        results: [
+          createAxeScanResult({ primitive: "dialog", passes: 10, violations: 2, incomplete: 0 }),
+        ],
       }),
     )
     expect(result).toMatchObject({ primitive: "dialog", reason: "scan-has-violations" })
@@ -165,7 +169,7 @@ describe("checkPrimitiveEvidence (A11Y-004)", () => {
 })
 
 describe("runGate (A11Y-004)", () => {
-  it("only gates GA (\"stable\") status primitives", () => {
+  it('only gates GA ("stable") status primitives', () => {
     const report = runGate(
       [
         primitiveSummary({ name: "dialog", status: "preview" }),

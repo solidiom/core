@@ -358,7 +358,9 @@ export function runPlan(options: PlanOptions): Plan {
     entry.deliverables.includes("theme") &&
     entry.themeCompatible.length === 0
   ) {
-    violations.push(`"${primitive}" declares the "theme" deliverable but has no themeCompatible entries`)
+    violations.push(
+      `"${primitive}" declares the "theme" deliverable but has no themeCompatible entries`,
+    )
   }
 
   return {
@@ -398,7 +400,8 @@ export class PlanCommand extends Command {
     description: "Use only cached/local registry data (no network fetch)",
   })
   deliverable = Option.String("--deliverable", {
-    description: "Product-layer deliverable to resolve (primitive, component, block, template, theme)",
+    description:
+      "Product-layer deliverable to resolve (primitive, component, block, template, theme)",
   })
   styling = Option.String("--styling", {
     description: "Styling profile to resolve (css, tailwind, unocss)",

@@ -59,10 +59,10 @@ In the unlikely event that DNS changes need to be reverted:
 
 ### Current DNS Records
 
-| Record | Type | Value | Proxy |
-|--------|-------|-------|-------|
-| `solidiom.org` | CNAME | `solidiom.pages.dev` | Yes |
-| `www.solidiom.org` | CNAME | `solidiom.pages.dev` | Yes |
+| Record             | Type  | Value                | Proxy |
+| ------------------ | ----- | -------------------- | ----- |
+| `solidiom.org`     | CNAME | `solidiom.pages.dev` | Yes   |
+| `www.solidiom.org` | CNAME | `solidiom.pages.dev` | Yes   |
 
 ## Contact Procedures
 

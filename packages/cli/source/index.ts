@@ -65,10 +65,7 @@ export {
   type RewriteImportsOptions,
   type RewriteImportsResult,
 } from "./source-install/ast-transform"
-export {
-  resolveDestinationRoot,
-  UnsupportedDeliverableError,
-} from "./source-install/destinations"
+export { resolveDestinationRoot, UnsupportedDeliverableError } from "./source-install/destinations"
 export {
   classifyConflicts,
   renderUnifiedDiff,
@@ -77,10 +74,7 @@ export {
   type ConflictClassification,
   type ClassifyConflictsOptions,
 } from "./source-install/conflict"
-export {
-  createRollbackJournal,
-  type RollbackJournal,
-} from "./source-install/rollback"
+export { createRollbackJournal, type RollbackJournal } from "./source-install/rollback"
 export {
   planThemeInstall,
   ThemeNotCompatibleError,

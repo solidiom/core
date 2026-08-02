@@ -31,7 +31,9 @@ describe("runUpdate", () => {
     mkdirSync(dirname(fullPath), { recursive: true })
     writeFileSync(fullPath, content)
     const lockPath = join(cwd, ".solidiom", "lock.json")
-    const lock = existsSync(lockPath) ? JSON.parse(readFileSync(lockPath, "utf8")) : { version: 1, installed: {} }
+    const lock = existsSync(lockPath)
+      ? JSON.parse(readFileSync(lockPath, "utf8"))
+      : { version: 1, installed: {} }
     lock.installed[relPath] = {
       path: relPath,
       digest: computeDigest(content),

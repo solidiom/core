@@ -15,7 +15,10 @@ function parseColor(value: string): Rgb {
     ]
   }
 
-  const channels = normalized.match(/\d+(?:\.\d+)?/g)?.slice(0, 3).map(Number)
+  const channels = normalized
+    .match(/\d+(?:\.\d+)?/g)
+    ?.slice(0, 3)
+    .map(Number)
   if (!channels || channels.length !== 3) throw new Error(`Unsupported CSS color: ${value}`)
   return channels as Rgb
 }
@@ -23,9 +26,7 @@ function parseColor(value: string): Rgb {
 function relativeLuminance([red, green, blue]: Rgb): number {
   const channels = [red, green, blue].map((channel) => {
     const normalized = channel / 255
-    return normalized <= 0.03928
-      ? normalized / 12.92
-      : ((normalized + 0.055) / 1.055) ** 2.4
+    return normalized <= 0.03928 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4
   })
   return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2]
 }
@@ -46,7 +47,8 @@ async function setTheme(page: Page, theme: "light" | "dark"): Promise<void> {
 
 async function visibleFocusableOrder(page: Page): Promise<string[]> {
   return page.evaluate(() => {
-    const selector = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    const selector =
+      'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
     return Array.from(document.querySelectorAll<HTMLElement>(selector))
       .filter((element) => element.getClientRects().length > 0)
       .map((element) => {
@@ -74,9 +76,13 @@ test.describe("Shell landmarks", () => {
       const header = document.querySelector("header")
       const main = document.querySelector("main")
       const footer = document.querySelector("footer")
-      return !!header && !!main && !!footer &&
+      return (
+        !!header &&
+        !!main &&
+        !!footer &&
         header.compareDocumentPosition(main) === Node.DOCUMENT_POSITION_FOLLOWING &&
         main.compareDocumentPosition(footer) === Node.DOCUMENT_POSITION_FOLLOWING
+      )
     })
     expect(order).toBe(true)
   })
@@ -88,10 +94,12 @@ test.describe("Shell landmarks", () => {
     const community = page.locator('footer nav[aria-label="Community"]')
 
     if (await hamburger.isVisible()) {
-      await expect.poll(async () => {
-        if (await hamburger.getAttribute("data-state") !== "open") await hamburger.click()
-        return hamburger.getAttribute("data-state")
-      }).toBe("open")
+      await expect
+        .poll(async () => {
+          if ((await hamburger.getAttribute("data-state")) !== "open") await hamburger.click()
+          return hamburger.getAttribute("data-state")
+        })
+        .toBe("open")
       await expect(drawerPrimary).toBeVisible()
       await expect(drawerPrimary.locator("a").first()).toBeVisible()
     } else {
@@ -116,15 +124,26 @@ test.describe("Keyboard and focus", () => {
     expect(order.indexOf("brand")).toBeGreaterThan(order.indexOf("skip"))
     expect(order.indexOf("theme")).toBeGreaterThan(order.indexOf("brand"))
     expect(order.indexOf("footer")).toBeGreaterThan(order.indexOf("theme"))
-    expect(order.indexOf("navigation") === -1 || order.indexOf("navigation") < order.indexOf("theme")).toBe(true)
-    expect(order.indexOf("menu") === -1 || order.indexOf("menu") > order.indexOf("theme")).toBe(true)
+    expect(
+      order.indexOf("navigation") === -1 || order.indexOf("navigation") < order.indexOf("theme"),
+    ).toBe(true)
+    expect(order.indexOf("menu") === -1 || order.indexOf("menu") > order.indexOf("theme")).toBe(
+      true,
+    )
   })
 
-  test("has no positive tabindex and can reach the footer without a focus trap", async ({ page }, testInfo) => {
+  test("has no positive tabindex and can reach the footer without a focus trap", async ({
+    page,
+  }, testInfo) => {
     await page.goto("/")
-    const positiveTabindex = await page.locator('[tabindex]:not([tabindex="-1"])').evaluateAll((elements) =>
-      elements.filter((element) => Number.parseInt(element.getAttribute("tabindex") ?? "0", 10) > 0).length,
-    )
+    const positiveTabindex = await page
+      .locator('[tabindex]:not([tabindex="-1"])')
+      .evaluateAll(
+        (elements) =>
+          elements.filter(
+            (element) => Number.parseInt(element.getAttribute("tabindex") ?? "0", 10) > 0,
+          ).length,
+      )
     expect(positiveTabindex).toBe(0)
 
     const footerLink = page.locator("footer a").first()
@@ -217,8 +236,8 @@ test.describe("Computed contrast and automated accessibility", () => {
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
         .analyze()
-      const blocking = results.violations.filter((violation) =>
-        violation.impact === "serious" || violation.impact === "critical",
+      const blocking = results.violations.filter(
+        (violation) => violation.impact === "serious" || violation.impact === "critical",
       )
       expect(blocking).toEqual([])
     })
@@ -235,10 +254,13 @@ test.describe("Mobile, touch, and forced colors", () => {
     await expect(page.locator(".site-header__desktop-nav")).toHaveCSS("display", "none")
 
     for (const selector of [".site-header__hamburger-button", ".theme-toggle"]) {
-      const size = await page.locator(selector).first().evaluate((element) => {
-        const rect = element.getBoundingClientRect()
-        return { width: rect.width, height: rect.height }
-      })
+      const size = await page
+        .locator(selector)
+        .first()
+        .evaluate((element) => {
+          const rect = element.getBoundingClientRect()
+          return { width: rect.width, height: rect.height }
+        })
       expect(size.width).toBeGreaterThanOrEqual(44)
       expect(size.height).toBeGreaterThanOrEqual(44)
     }
@@ -248,7 +270,9 @@ test.describe("Mobile, touch, and forced colors", () => {
     await page.emulateMedia({ forcedColors: "active" })
     await page.goto("/")
     await page.locator(".skip-link").focus()
-    const outline = await page.locator(".skip-link").evaluate((element) => getComputedStyle(element).outlineStyle)
+    const outline = await page
+      .locator(".skip-link")
+      .evaluate((element) => getComputedStyle(element).outlineStyle)
     expect(outline).not.toBe("none")
   })
 })

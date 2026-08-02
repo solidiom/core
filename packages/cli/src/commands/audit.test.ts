@@ -25,16 +25,16 @@ describe("runAudit", () => {
     )
   }
 
-  const createNodeModule = (scope: string | null, name: string, version: string, license: string) => {
-    const nmDir = scope
-      ? join(cwd, "node_modules", scope, name)
-      : join(cwd, "node_modules", name)
+  const createNodeModule = (
+    scope: string | null,
+    name: string,
+    version: string,
+    license: string,
+  ) => {
+    const nmDir = scope ? join(cwd, "node_modules", scope, name) : join(cwd, "node_modules", name)
     mkdirSync(nmDir, { recursive: true })
     const pkgName = scope ? `${scope}/${name}` : name
-    writeFileSync(
-      join(nmDir, "package.json"),
-      JSON.stringify({ name: pkgName, version, license }),
-    )
+    writeFileSync(join(nmDir, "package.json"), JSON.stringify({ name: pkgName, version, license }))
   }
 
   it("returns empty components when no packages exist", () => {
@@ -108,8 +108,6 @@ describe("runAudit", () => {
     const result = runAudit(cwd)
     expect(result.serialNumber).toMatch(/^urn:uuid:/)
     expect(() => new Date(result.metadata.timestamp)).not.toThrow()
-    expect(result.metadata.timestamp).toMatch(
-      /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/,
-    )
+    expect(result.metadata.timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/)
   })
 })

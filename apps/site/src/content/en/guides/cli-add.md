@@ -44,20 +44,20 @@ solidiom add dialog --mode source
 
 ## Flags
 
-| Flag | Description |
-|------|-------------|
-| `--mode` | Install mode: `package` or `source` |
-| `--registry` | Custom registry URL for package resolution |
-| `--no-network` | Use only cached or local registry data |
-| `--deliverable` | Product-layer deliverable: `primitive`, `component`, `block`, `template`, `theme` |
-| `--styling` | Styling profile: `css`, `tailwind`, `unocss` |
-| `--package-manager` | Override package manager detection (`npm`, `pnpm`, `yarn`, `bun`) |
-| `--install` | Run the install command instead of only printing it |
-| `--allow-unverified` | Proceed with source install even if byte-level verification fails |
-| `--force` | Overwrite files modified locally since last source install |
-| `--diff` | Print a unified diff of pending source-install changes without writing |
-| `--dry-run` | Show what would be done without writing |
-| `--json` | Output as JSON |
+| Flag                 | Description                                                                       |
+| -------------------- | --------------------------------------------------------------------------------- |
+| `--mode`             | Install mode: `package` or `source`                                               |
+| `--registry`         | Custom registry URL for package resolution                                        |
+| `--no-network`       | Use only cached or local registry data                                            |
+| `--deliverable`      | Product-layer deliverable: `primitive`, `component`, `block`, `template`, `theme` |
+| `--styling`          | Styling profile: `css`, `tailwind`, `unocss`                                      |
+| `--package-manager`  | Override package manager detection (`npm`, `pnpm`, `yarn`, `bun`)                 |
+| `--install`          | Run the install command instead of only printing it                               |
+| `--allow-unverified` | Proceed with source install even if byte-level verification fails                 |
+| `--force`            | Overwrite files modified locally since last source install                        |
+| `--diff`             | Print a unified diff of pending source-install changes without writing            |
+| `--dry-run`          | Show what would be done without writing                                           |
+| `--json`             | Output as JSON                                                                    |
 
 ## Deliverable Kinds
 

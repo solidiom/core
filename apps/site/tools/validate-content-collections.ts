@@ -107,14 +107,62 @@ const SITE_COLLECTIONS: Array<{
   requiresProductIdentity: boolean
   requiresLocaleParity: boolean
 }> = [
-  { name: "guides", dir: "guides", requiresDate: false, requiresProductIdentity: false, requiresLocaleParity: true },
-  { name: "articles", dir: "blog", requiresDate: true, requiresProductIdentity: false, requiresLocaleParity: true },
-  { name: "changelog", dir: "changelog", requiresDate: true, requiresProductIdentity: false, requiresLocaleParity: true },
-  { name: "pages", dir: "pages", requiresDate: false, requiresProductIdentity: false, requiresLocaleParity: true },
-  { name: "components", dir: "components", requiresDate: false, requiresProductIdentity: true, requiresLocaleParity: true },
-  { name: "blocks", dir: "blocks", requiresDate: false, requiresProductIdentity: true, requiresLocaleParity: true },
-  { name: "templates", dir: "templates", requiresDate: false, requiresProductIdentity: true, requiresLocaleParity: true },
-  { name: "themes", dir: "themes", requiresDate: false, requiresProductIdentity: true, requiresLocaleParity: true },
+  {
+    name: "guides",
+    dir: "guides",
+    requiresDate: false,
+    requiresProductIdentity: false,
+    requiresLocaleParity: true,
+  },
+  {
+    name: "articles",
+    dir: "blog",
+    requiresDate: true,
+    requiresProductIdentity: false,
+    requiresLocaleParity: true,
+  },
+  {
+    name: "changelog",
+    dir: "changelog",
+    requiresDate: true,
+    requiresProductIdentity: false,
+    requiresLocaleParity: true,
+  },
+  {
+    name: "pages",
+    dir: "pages",
+    requiresDate: false,
+    requiresProductIdentity: false,
+    requiresLocaleParity: true,
+  },
+  {
+    name: "components",
+    dir: "components",
+    requiresDate: false,
+    requiresProductIdentity: true,
+    requiresLocaleParity: true,
+  },
+  {
+    name: "blocks",
+    dir: "blocks",
+    requiresDate: false,
+    requiresProductIdentity: true,
+    requiresLocaleParity: true,
+  },
+  {
+    name: "templates",
+    dir: "templates",
+    requiresDate: false,
+    requiresProductIdentity: true,
+    requiresLocaleParity: true,
+  },
+  {
+    name: "themes",
+    dir: "themes",
+    requiresDate: false,
+    requiresProductIdentity: true,
+    requiresLocaleParity: true,
+  },
 ]
 
 function slugFromFile(root: string, file: string): string {
@@ -182,7 +230,8 @@ function loadPackageCollectionEntries(): ContentEntry[] {
 
     // accessibilityContracts: accessibility/*.md (en) / es/accessibility/*.md (es)
     for (const locale of LOCALES) {
-      const dir = locale === "en" ? join(docsDir, "accessibility") : join(docsDir, "es", "accessibility")
+      const dir =
+        locale === "en" ? join(docsDir, "accessibility") : join(docsDir, "es", "accessibility")
       for (const file of collectFiles(dir)) {
         const slug = `${packageName}/${slugFromFile(dir, file)}`
         entries.push({
@@ -296,9 +345,13 @@ function main(): void {
       const es = localeMap.get("es")
 
       if (!en) {
-        failures.push(`${collectionName}: slug "${slug}" has an "es" entry but no "en" source (${es!.file})`)
+        failures.push(
+          `${collectionName}: slug "${slug}" has an "es" entry but no "en" source (${es!.file})`,
+        )
       } else if (!es) {
-        failures.push(`${collectionName}: slug "${slug}" is missing its Spanish translation (source: ${en.file})`)
+        failures.push(
+          `${collectionName}: slug "${slug}" is missing its Spanish translation (source: ${en.file})`,
+        )
       } else if (en.requiresProductIdentity) {
         for (const field of PRODUCT_IDENTITY_FIELDS) {
           const enValue = en.frontmatter[field]
@@ -326,7 +379,9 @@ function main(): void {
     return
   }
 
-  console.log("All content entries have required metadata, unique slugs, consistent product identity, and locale parity.")
+  console.log(
+    "All content entries have required metadata, unique slugs, consistent product identity, and locale parity.",
+  )
 }
 
 main()

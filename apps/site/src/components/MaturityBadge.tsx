@@ -7,11 +7,7 @@
  */
 import { type Accessor, createMemo } from "solid-js"
 import { Root as Badge } from "@solidiom/badge"
-import {
-  getMaturityLevelCopy,
-  type MaturityInfo,
-  type MaturityLevel,
-} from "../lib/maturity"
+import { getMaturityLevelCopy, type MaturityInfo, type MaturityLevel } from "../lib/maturity"
 
 export interface MaturityBadgeProps {
   /** Maturity level to display. */

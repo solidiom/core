@@ -14,7 +14,8 @@ import { z } from "zod"
 export const SUPPORTED_REGISTRY_INDEX_VERSION = 2 as const
 
 /** The only per-primitive manifest schema this CLI build understands. */
-export const SUPPORTED_MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v2.json"
+export const SUPPORTED_MANIFEST_SCHEMA_URL =
+  "https://solidiom.dev/schemas/registry-manifest/v2.json"
 export const SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v2.json"
 
 /** Product-layer deliverable kinds a package/manifest may declare (CLI-002). */
@@ -73,9 +74,15 @@ const manifestAccessibilitySchema = z.object({
 const integritySchema = z.object({
   algorithm: z.literal("sha256"),
   entriesHash: z.string().regex(/^[0-9a-f]{64}$/),
-  signature: z.string().regex(/^[0-9a-f]{64}$/).optional(),
+  signature: z
+    .string()
+    .regex(/^[0-9a-f]{64}$/)
+    .optional(),
   signedAt: z.string().optional(),
-  signatureKeyId: z.string().regex(/^[0-9a-f]{16}$/).optional(),
+  signatureKeyId: z
+    .string()
+    .regex(/^[0-9a-f]{16}$/)
+    .optional(),
 })
 
 const registryPrimitiveSummarySchema = z.object({
@@ -180,7 +187,11 @@ export function readRegistryIndex(path: string): RegistryIndex {
     throw new RegistrySchemaError(`Failed to read/parse registry index: ${String(err)}`, path)
   }
 
-  if (isRecord(raw) && raw.version !== undefined && raw.version !== SUPPORTED_REGISTRY_INDEX_VERSION) {
+  if (
+    isRecord(raw) &&
+    raw.version !== undefined &&
+    raw.version !== SUPPORTED_REGISTRY_INDEX_VERSION
+  ) {
     throw new RegistrySchemaError(
       `Unsupported registry index schema version ${JSON.stringify(raw.version)}; this CLI build only supports version ${SUPPORTED_REGISTRY_INDEX_VERSION}`,
       path,

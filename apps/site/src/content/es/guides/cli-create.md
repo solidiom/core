@@ -128,12 +128,12 @@ solidiom create my-app --template vite-solid-router --yes --json
 
 ## Opciones
 
-| Bandera | Descripción |
-|---------|-------------|
-| `--template <nombre>` | Plantilla para generar |
-| `--styling <css\|tailwind\|unocss>` | Perfil de estilo |
-| `--package-manager <npm\|pnpm\|yarn\|bun>` | Gestor de paquetes |
-| `--no-install` | Saltar la instalación de dependencias |
-| `--yes` | Saltar todos los prompts; fallar si falta un valor requerido |
-| `--force` | Permitir generar en un directorio de destino no vacío |
-| `--json` | Salida en formato JSON |
+| Bandera                                    | Descripción                                                  |
+| ------------------------------------------ | ------------------------------------------------------------ |
+| `--template <nombre>`                      | Plantilla para generar                                       |
+| `--styling <css\|tailwind\|unocss>`        | Perfil de estilo                                             |
+| `--package-manager <npm\|pnpm\|yarn\|bun>` | Gestor de paquetes                                           |
+| `--no-install`                             | Saltar la instalación de dependencias                        |
+| `--yes`                                    | Saltar todos los prompts; fallar si falta un valor requerido |
+| `--force`                                  | Permitir generar en un directorio de destino no vacío        |
+| `--json`                                   | Salida en formato JSON                                       |

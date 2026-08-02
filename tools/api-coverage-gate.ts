@@ -54,7 +54,10 @@ export interface CoverageViolation {
   reason: "unresolved" | "undocumented"
 }
 
-export function checkCoverage(document: NormalizedApiDocument, primitive: string): CoverageViolation[] {
+export function checkCoverage(
+  document: NormalizedApiDocument,
+  primitive: string,
+): CoverageViolation[] {
   const violations: CoverageViolation[] = []
   for (const entry of document.exports) {
     if (isUnresolved(entry)) {
@@ -89,7 +92,9 @@ function main(): void {
     const document = JSON.parse(readFileSync(artifactPath, "utf8")) as NormalizedApiDocument
     const violations = checkCoverage(document, primitive)
     if (violations.length === 0) {
-      console.log(`  ✓ ${primitive}: ${document.exports.length} exports, fully documented and resolved`)
+      console.log(
+        `  ✓ ${primitive}: ${document.exports.length} exports, fully documented and resolved`,
+      )
     } else {
       console.log(`  ✗ ${primitive}: ${violations.length} violation(s)`)
       for (const violation of violations) {

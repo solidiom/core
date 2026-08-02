@@ -46,7 +46,7 @@ describe("extractNamedExport", () => {
     const result = extractNamedExport(source, "Example")
     expect(result.fallback).toBe(false)
     expect(result.code).toContain("export const Example")
-    expect(result.code).toContain('return <span>open</span>')
+    expect(result.code).toContain("return <span>open</span>")
     expect(result.code).not.toContain("AnotherExample")
   })
 

@@ -12,9 +12,7 @@ function buttonManifest() {
   const fileDigests = {
     "src/index.tsx": createHash("sha256").update("export const Button = 1").digest("hex"),
   }
-  const filesHash = createHash("sha256")
-    .update(Object.values(fileDigests).join(""))
-    .digest("hex")
+  const filesHash = createHash("sha256").update(Object.values(fileDigests).join("")).digest("hex")
 
   return {
     $schema: MANIFEST_SCHEMA_URL,
@@ -84,7 +82,10 @@ function baseIndex(manifest: ReturnType<typeof buttonManifest>) {
         stylingOutputs: [] as ("css" | "tailwind" | "unocss")[],
         themeCompatible: [] as string[],
         searchKeywords: ["button"],
-        provenance: { repository: "https://github.com/solidiom/solidiom", directory: "packages/button" },
+        provenance: {
+          repository: "https://github.com/solidiom/solidiom",
+          directory: "packages/button",
+        },
       },
     ],
     adapters: [],
@@ -207,7 +208,12 @@ describe("verifyRegistry (REG-006)", () => {
     const signatureKeyId = createHash("sha256").update(key).digest("hex").slice(0, 16)
     const signed = {
       ...index,
-      integrity: { ...index.integrity, signature, signedAt: "2025-01-01T00:00:00.000Z", signatureKeyId },
+      integrity: {
+        ...index.integrity,
+        signature,
+        signedAt: "2025-01-01T00:00:00.000Z",
+        signatureKeyId,
+      },
     }
     write(signed, manifest)
 

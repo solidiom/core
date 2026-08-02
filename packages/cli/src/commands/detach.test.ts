@@ -29,62 +29,77 @@ describe("runDetach", () => {
   })
 
   it("detach marks installed files as detached", () => {
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog"),
-        "src/ui/primitives/dialog.css": lockEntry("src/ui/primitives/dialog.css", "dialog"),
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog"),
+          "src/ui/primitives/dialog.css": lockEntry("src/ui/primitives/dialog.css", "dialog"),
+        },
+      }),
+    )
     const result = runDetach({ cwd, primitive: "dialog" })
     expect(result.detached).toHaveLength(2)
     expect(result.alreadyDetached).toHaveLength(0)
   })
 
   it("lock file is updated with detached: true", () => {
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog"),
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog"),
+        },
+      }),
+    )
     runDetach({ cwd, primitive: "dialog" })
     const lock = JSON.parse(readFileSync(join(cwd, ".solidiom", "lock.json"), "utf8"))
     expect(lock.installed["src/ui/primitives/dialog.tsx"].detached).toBe(true)
   })
 
   it("already detached files are reported separately", () => {
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog", true),
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog", true),
+        },
+      }),
+    )
     const result = runDetach({ cwd, primitive: "dialog" })
     expect(result.detached).toHaveLength(0)
     expect(result.alreadyDetached).toEqual(["src/ui/primitives/dialog.tsx"])
   })
 
   it("nonexistent primitive produces empty arrays", () => {
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog"),
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog"),
+        },
+      }),
+    )
     const result = runDetach({ cwd, primitive: "tooltip" })
     expect(result.detached).toHaveLength(0)
     expect(result.alreadyDetached).toHaveLength(0)
   })
 
   it("only target primitive is detached", () => {
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog"),
-        "src/ui/primitives/tooltip.tsx": lockEntry("src/ui/primitives/tooltip.tsx", "tooltip"),
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog"),
+          "src/ui/primitives/tooltip.tsx": lockEntry("src/ui/primitives/tooltip.tsx", "tooltip"),
+        },
+      }),
+    )
     const result = runDetach({ cwd, primitive: "dialog" })
     expect(result.detached).toEqual(["src/ui/primitives/dialog.tsx"])
     const lock = JSON.parse(readFileSync(join(cwd, ".solidiom", "lock.json"), "utf8"))
@@ -106,13 +121,16 @@ describe("runDetach", () => {
   })
 
   it("mixed state: some already detached, some new", () => {
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog", true),
-        "src/ui/primitives/dialog.css": lockEntry("src/ui/primitives/dialog.css", "dialog"),
-      },
-    }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          "src/ui/primitives/dialog.tsx": lockEntry("src/ui/primitives/dialog.tsx", "dialog", true),
+          "src/ui/primitives/dialog.css": lockEntry("src/ui/primitives/dialog.css", "dialog"),
+        },
+      }),
+    )
     const result = runDetach({ cwd, primitive: "dialog" })
     expect(result.detached).toEqual(["src/ui/primitives/dialog.css"])
     expect(result.alreadyDetached).toEqual(["src/ui/primitives/dialog.tsx"])

@@ -83,10 +83,10 @@ Devuelve un objeto con la ruta del archivo de configuración, si fue creado, y e
 
 ## Opciones
 
-| Bandera | Descripción |
-|---------|-------------|
+| Bandera   | Descripción                          |
+| --------- | ------------------------------------ |
 | `--force` | Reescribe la configuración existente |
-| `--json` | Salida en formato JSON |
+| `--json`  | Salida en formato JSON               |
 
 ## Personalizar la configuración
 

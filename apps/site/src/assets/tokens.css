@@ -43,39 +43,39 @@
 :root,
 :root[data-theme="light"] {
   /* ── Surfaces ── */
-  --sol-surface-base: #F8FAFC;        /* Canvas — page background */
-  --sol-surface-raised: #FFFFFF;       /* Elevated cards, panels */
-  --sol-surface-overlay: #FFFFFF;      /* Modals, popovers, dropdowns */
-  --sol-surface-sunken: #F1F5F9;      /* Inset areas, code blocks, wells */
-  --sol-surface-inverse: #0F172A;     /* Inverse containers (Slate 950) */
+  --sol-surface-base: #f8fafc; /* Canvas — page background */
+  --sol-surface-raised: #ffffff; /* Elevated cards, panels */
+  --sol-surface-overlay: #ffffff; /* Modals, popovers, dropdowns */
+  --sol-surface-sunken: #f1f5f9; /* Inset areas, code blocks, wells */
+  --sol-surface-inverse: #0f172a; /* Inverse containers (Slate 950) */
 
   /* ── Foreground / Text ── */
-  --sol-foreground: #111827;           /* Primary text (Slate 900) */
-  --sol-foreground-muted: #334155;     /* Secondary text (Slate 700) */
-  --sol-foreground-subtle: #64748B;    /* Tertiary/placeholder (Slate 500) */
-  --sol-foreground-inverse: #F8FAFC;   /* Text on inverse surfaces */
-  --sol-foreground-on-primary: #FFFFFF; /* Text on primary-colored bg */
+  --sol-foreground: #111827; /* Primary text (Slate 900) */
+  --sol-foreground-muted: #334155; /* Secondary text (Slate 700) */
+  --sol-foreground-subtle: #64748b; /* Tertiary/placeholder (Slate 500) */
+  --sol-foreground-inverse: #f8fafc; /* Text on inverse surfaces */
+  --sol-foreground-on-primary: #ffffff; /* Text on primary-colored bg */
 
   /* ── Borders ── */
-  --sol-border: #CBD5E1;              /* Default borders (Slate 300) */
-  --sol-border-muted: #E2E8F0;       /* Subtle dividers (Slate 200) */
-  --sol-border-active: #6961F1;      /* Focused/active borders (Indigo) */
+  --sol-border: #cbd5e1; /* Default borders (Slate 300) */
+  --sol-border-muted: #e2e8f0; /* Subtle dividers (Slate 200) */
+  --sol-border-active: #6961f1; /* Focused/active borders (Indigo) */
 
   /* ── Brand Colors (Semantic Roles) ── */
-  --sol-primary: #6961F1;            /* Primary action/identity (Indigo) */
-  --sol-primary-hover: #5B54E0;      /* Primary hover state */
-  --sol-primary-foreground: #FFFFFF; /* Text on primary backgrounds */
-  --sol-secondary: #3B82F6;          /* Links, secondary actions (Blue) */
-  --sol-accent: #06B6D4;             /* Highlights, active states (Cyan) */
-  --sol-success: #22C55E;            /* Success feedback (Green) */
-  --sol-warning: #F59E0B;            /* Warning feedback (Amber) */
-  --sol-destructive: #E5484D;        /* Critical/error (Red) */
+  --sol-primary: #6961f1; /* Primary action/identity (Indigo) */
+  --sol-primary-hover: #5b54e0; /* Primary hover state */
+  --sol-primary-foreground: #ffffff; /* Text on primary backgrounds */
+  --sol-secondary: #3b82f6; /* Links, secondary actions (Blue) */
+  --sol-accent: #06b6d4; /* Highlights, active states (Cyan) */
+  --sol-success: #22c55e; /* Success feedback (Green) */
+  --sol-warning: #f59e0b; /* Warning feedback (Amber) */
+  --sol-destructive: #e5484d; /* Critical/error (Red) */
 
   /* ── Interactive States ── */
-  --sol-focus-ring: #6961F1;         /* Focus outline color */
-  --sol-focus-ring-width: 2px;       /* Focus outline width */
+  --sol-focus-ring: #6961f1; /* Focus outline color */
+  --sol-focus-ring-width: 2px; /* Focus outline width */
   --sol-interactive-hover: rgba(105, 97, 241, 0.06); /* Subtle hover bg */
-  --sol-interactive-active: rgba(105, 97, 241, 0.10); /* Pressed state bg */
+  --sol-interactive-active: rgba(105, 97, 241, 0.1); /* Pressed state bg */
 
   /* ── Radius ── */
   --sol-radius-sm: 8px;
@@ -86,10 +86,8 @@
 
   /* ── Shadows (restrained, border-first philosophy) ── */
   --sol-shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
-  --sol-shadow-md: 0 2px 6px -1px rgba(15, 23, 42, 0.06),
-                   0 1px 4px -2px rgba(15, 23, 42, 0.04);
-  --sol-shadow-lg: 0 8px 24px -4px rgba(15, 23, 42, 0.08),
-                   0 2px 8px -4px rgba(15, 23, 42, 0.04);
+  --sol-shadow-md: 0 2px 6px -1px rgba(15, 23, 42, 0.06), 0 1px 4px -2px rgba(15, 23, 42, 0.04);
+  --sol-shadow-lg: 0 8px 24px -4px rgba(15, 23, 42, 0.08), 0 2px 8px -4px rgba(15, 23, 42, 0.04);
 
   /* ── Legacy Aliases (consumed by bootstrap, global.css, prose) ── */
   --color-surface: var(--sol-surface-base);
@@ -105,38 +103,38 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 :root[data-theme="dark"] {
   /* ── Surfaces ── */
-  --sol-surface-base: #0F172A;        /* Deep slate base (Slate 950) */
-  --sol-surface-raised: #1E293B;      /* Elevated cards (Slate 800) */
-  --sol-surface-overlay: #1E293B;     /* Modals, popovers */
-  --sol-surface-sunken: #020617;      /* Deeper than base — true depth */
-  --sol-surface-inverse: #F8FAFC;     /* Inverse containers (Canvas) */
+  --sol-surface-base: #0f172a; /* Deep slate base (Slate 950) */
+  --sol-surface-raised: #1e293b; /* Elevated cards (Slate 800) */
+  --sol-surface-overlay: #1e293b; /* Modals, popovers */
+  --sol-surface-sunken: #020617; /* Deeper than base — true depth */
+  --sol-surface-inverse: #f8fafc; /* Inverse containers (Canvas) */
 
   /* ── Foreground / Text ── */
-  --sol-foreground: #F1F5F9;           /* Primary text (Slate 100) */
-  --sol-foreground-muted: #94A3B8;     /* Secondary text (Slate 400) */
-  --sol-foreground-subtle: #64748B;    /* Tertiary/placeholder (Slate 500) */
-  --sol-foreground-inverse: #0F172A;   /* Text on inverse surfaces */
-  --sol-foreground-on-primary: #FFFFFF; /* Text on primary-colored bg */
+  --sol-foreground: #f1f5f9; /* Primary text (Slate 100) */
+  --sol-foreground-muted: #94a3b8; /* Secondary text (Slate 400) */
+  --sol-foreground-subtle: #64748b; /* Tertiary/placeholder (Slate 500) */
+  --sol-foreground-inverse: #0f172a; /* Text on inverse surfaces */
+  --sol-foreground-on-primary: #ffffff; /* Text on primary-colored bg */
 
   /* ── Borders ── */
-  --sol-border: #334155;              /* Default borders (Slate 700) */
-  --sol-border-muted: #1E293B;       /* Subtle dividers (Slate 800) */
-  --sol-border-active: #8B83F8;      /* Focused/active — lighter indigo for contrast */
+  --sol-border: #334155; /* Default borders (Slate 700) */
+  --sol-border-muted: #1e293b; /* Subtle dividers (Slate 800) */
+  --sol-border-active: #8b83f8; /* Focused/active — lighter indigo for contrast */
 
   /* ── Brand Colors (adjusted for dark context) ── */
-  --sol-primary: #8B83F8;            /* Slightly lifted indigo for readability */
-  --sol-primary-hover: #A19BFA;      /* Lighter on hover */
-  --sol-primary-foreground: #0F172A; /* Dark text on light primary bg */
-  --sol-secondary: #60A5FA;          /* Blue 400 for dark-mode links */
-  --sol-accent: #22D3EE;             /* Cyan 400 */
-  --sol-success: #4ADE80;            /* Green 400 */
-  --sol-warning: #FBBF24;            /* Amber 400 */
-  --sol-destructive: #F87171;        /* Red 400 */
+  --sol-primary: #8b83f8; /* Slightly lifted indigo for readability */
+  --sol-primary-hover: #a19bfa; /* Lighter on hover */
+  --sol-primary-foreground: #0f172a; /* Dark text on light primary bg */
+  --sol-secondary: #60a5fa; /* Blue 400 for dark-mode links */
+  --sol-accent: #22d3ee; /* Cyan 400 */
+  --sol-success: #4ade80; /* Green 400 */
+  --sol-warning: #fbbf24; /* Amber 400 */
+  --sol-destructive: #f87171; /* Red 400 */
 
   /* ── Interactive States ── */
-  --sol-focus-ring: #8B83F8;
+  --sol-focus-ring: #8b83f8;
   --sol-focus-ring-width: 2px;
-  --sol-interactive-hover: rgba(139, 131, 248, 0.10);
+  --sol-interactive-hover: rgba(139, 131, 248, 0.1);
   --sol-interactive-active: rgba(139, 131, 248, 0.16);
 
   /* ── Radius (same across themes) ── */
@@ -147,11 +145,9 @@
   --sol-radius-full: 999px;
 
   /* ── Shadows (deeper in dark mode for perceptibility) ── */
-  --sol-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.20);
-  --sol-shadow-md: 0 3px 8px -1px rgba(0, 0, 0, 0.30),
-                   0 1px 4px -2px rgba(0, 0, 0, 0.20);
-  --sol-shadow-lg: 0 10px 30px -4px rgba(0, 0, 0, 0.40),
-                   0 4px 10px -4px rgba(0, 0, 0, 0.25);
+  --sol-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  --sol-shadow-md: 0 3px 8px -1px rgba(0, 0, 0, 0.3), 0 1px 4px -2px rgba(0, 0, 0, 0.2);
+  --sol-shadow-lg: 0 10px 30px -4px rgba(0, 0, 0, 0.4), 0 4px 10px -4px rgba(0, 0, 0, 0.25);
 
   /* ── Legacy Aliases ── */
   --color-surface: var(--sol-surface-base);
@@ -169,38 +165,38 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]):not([data-theme="dark"]) {
     /* ── Surfaces ── */
-    --sol-surface-base: #0F172A;
-    --sol-surface-raised: #1E293B;
-    --sol-surface-overlay: #1E293B;
+    --sol-surface-base: #0f172a;
+    --sol-surface-raised: #1e293b;
+    --sol-surface-overlay: #1e293b;
     --sol-surface-sunken: #020617;
-    --sol-surface-inverse: #F8FAFC;
+    --sol-surface-inverse: #f8fafc;
 
     /* ── Foreground / Text ── */
-    --sol-foreground: #F1F5F9;
-    --sol-foreground-muted: #94A3B8;
-    --sol-foreground-subtle: #64748B;
-    --sol-foreground-inverse: #0F172A;
-    --sol-foreground-on-primary: #FFFFFF;
+    --sol-foreground: #f1f5f9;
+    --sol-foreground-muted: #94a3b8;
+    --sol-foreground-subtle: #64748b;
+    --sol-foreground-inverse: #0f172a;
+    --sol-foreground-on-primary: #ffffff;
 
     /* ── Borders ── */
     --sol-border: #334155;
-    --sol-border-muted: #1E293B;
-    --sol-border-active: #8B83F8;
+    --sol-border-muted: #1e293b;
+    --sol-border-active: #8b83f8;
 
     /* ── Brand Colors ── */
-    --sol-primary: #8B83F8;
-    --sol-primary-hover: #A19BFA;
-    --sol-primary-foreground: #0F172A;
-    --sol-secondary: #60A5FA;
-    --sol-accent: #22D3EE;
-    --sol-success: #4ADE80;
-    --sol-warning: #FBBF24;
-    --sol-destructive: #F87171;
+    --sol-primary: #8b83f8;
+    --sol-primary-hover: #a19bfa;
+    --sol-primary-foreground: #0f172a;
+    --sol-secondary: #60a5fa;
+    --sol-accent: #22d3ee;
+    --sol-success: #4ade80;
+    --sol-warning: #fbbf24;
+    --sol-destructive: #f87171;
 
     /* ── Interactive States ── */
-    --sol-focus-ring: #8B83F8;
+    --sol-focus-ring: #8b83f8;
     --sol-focus-ring-width: 2px;
-    --sol-interactive-hover: rgba(139, 131, 248, 0.10);
+    --sol-interactive-hover: rgba(139, 131, 248, 0.1);
     --sol-interactive-active: rgba(139, 131, 248, 0.16);
 
     /* ── Radius ── */
@@ -211,11 +207,9 @@
     --sol-radius-full: 999px;
 
     /* ── Shadows ── */
-    --sol-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.20);
-    --sol-shadow-md: 0 3px 8px -1px rgba(0, 0, 0, 0.30),
-                     0 1px 4px -2px rgba(0, 0, 0, 0.20);
-    --sol-shadow-lg: 0 10px 30px -4px rgba(0, 0, 0, 0.40),
-                     0 4px 10px -4px rgba(0, 0, 0, 0.25);
+    --sol-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+    --sol-shadow-md: 0 3px 8px -1px rgba(0, 0, 0, 0.3), 0 1px 4px -2px rgba(0, 0, 0, 0.2);
+    --sol-shadow-lg: 0 10px 30px -4px rgba(0, 0, 0, 0.4), 0 4px 10px -4px rgba(0, 0, 0, 0.25);
 
     /* ── Legacy Aliases ── */
     --color-surface: var(--sol-surface-base);

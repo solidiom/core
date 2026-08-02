@@ -9,9 +9,7 @@ export function BuilderLayout(props: BuilderLayoutProps) {
   return (
     <div class="theme-builder">
       {props.header}
-      <div class="theme-builder__body">
-        {props.children}
-      </div>
+      <div class="theme-builder__body">{props.children}</div>
     </div>
   )
 }

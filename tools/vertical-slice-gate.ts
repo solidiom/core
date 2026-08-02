@@ -48,10 +48,7 @@ console.log("§1 Registry manifests:")
 for (const primitive of VERTICAL_SLICE_PRIMITIVES) {
   const manifest = readJSON<RegistryManifest>(join(REGISTRY_DIR, `${primitive}.json`))
 
-  check(
-    `${primitive}: registry manifest exists`,
-    manifest !== null,
-  )
+  check(`${primitive}: registry manifest exists`, manifest !== null)
 
   if (manifest) {
     // registry-build derives "complete" when EN+ES have overview+contract+example
@@ -133,27 +130,21 @@ for (const primitive of VERTICAL_SLICE_PRIMITIVES) {
   const docsDir = join(PACKAGES_DIR, primitive, "docs")
 
   // EN overview
-  check(
-    `${primitive}: EN overview exists`,
-    fileExists(join(docsDir, "overview.md")),
-  )
+  check(`${primitive}: EN overview exists`, fileExists(join(docsDir, "overview.md")))
 
   // ES overview
-  check(
-    `${primitive}: ES overview exists`,
-    fileExists(join(docsDir, "es", "overview.md")),
-  )
+  check(`${primitive}: ES overview exists`, fileExists(join(docsDir, "es", "overview.md")))
 
   // EN example
   const examplesDir = join(docsDir, "examples")
-  const hasEnExample = existsSync(examplesDir) &&
-    readdirSync(examplesDir).some((f) => f.endsWith(".md"))
+  const hasEnExample =
+    existsSync(examplesDir) && readdirSync(examplesDir).some((f) => f.endsWith(".md"))
   check(`${primitive}: EN example exists`, hasEnExample)
 
   // ES example
   const esExamplesDir = join(docsDir, "es", "examples")
-  const hasEsExample = existsSync(esExamplesDir) &&
-    readdirSync(esExamplesDir).some((f) => f.endsWith(".md"))
+  const hasEsExample =
+    existsSync(esExamplesDir) && readdirSync(esExamplesDir).some((f) => f.endsWith(".md"))
   check(`${primitive}: ES example exists`, hasEsExample)
 
   // EN accessibility contract
@@ -199,10 +190,7 @@ check(
 // ─── 5. Search indexing attributes ──────────────────────────────────────
 console.log("\n§5 Search indexing (SEARCH-003):")
 
-check(
-  "pagefind.yml configuration exists",
-  fileExists("apps/site/pagefind.yml"),
-)
+check("pagefind.yml configuration exists", fileExists("apps/site/pagefind.yml"))
 check(
   "DocsLayout has data-pagefind-body",
   fileContains("apps/site/src/layouts/DocsLayout.astro", "data-pagefind-body"),
@@ -220,14 +208,8 @@ check(
 // ─── 6. Search analytics (SEARCH-005) ──────────────────────────────────
 console.log("\n§6 Search analytics privacy:")
 
-check(
-  "analytics types module exists",
-  fileExists("apps/site/src/lib/analytics-types.ts"),
-)
-check(
-  "analytics module exists",
-  fileExists("apps/site/src/lib/analytics.ts"),
-)
+check("analytics types module exists", fileExists("apps/site/src/lib/analytics-types.ts"))
+check("analytics module exists", fileExists("apps/site/src/lib/analytics.ts"))
 check(
   "SiteSearch imports analytics",
   fileContains("apps/site/src/components/SiteSearch.tsx", "analytics"),
@@ -259,31 +241,27 @@ if (existsSync(ROUTE_BUDGETS_PATH)) {
   const budgets = readJSON<Record<string, unknown>>(ROUTE_BUDGETS_PATH)
   check(
     "budgets define catalog category",
-    budgets !== null && "categories" in budgets! &&
+    budgets !== null &&
+      "categories" in budgets! &&
       typeof (budgets as any).categories === "object" &&
       "catalog" in (budgets as any).categories,
   )
   check(
     "budgets define content category",
-    budgets !== null && "categories" in budgets! &&
+    budgets !== null &&
+      "categories" in budgets! &&
       typeof (budgets as any).categories === "object" &&
       "content" in (budgets as any).categories,
   )
 
   // Verify the budget enforcement script exists
-  check(
-    "budget enforcement script exists",
-    fileExists("apps/site/tools/report-route-budgets.ts"),
-  )
+  check("budget enforcement script exists", fileExists("apps/site/tools/report-route-budgets.ts"))
 }
 
 // ─── 9. Manual evidence matrix ──────────────────────────────────────────
 console.log("\n§9 Manual evidence (A11Y-005):")
 
-check(
-  "manual evidence matrix exists",
-  fileExists("docs/evidence/manual-evidence-matrix.md"),
-)
+check("manual evidence matrix exists", fileExists("docs/evidence/manual-evidence-matrix.md"))
 
 // Dialog must have manual evidence
 check(
@@ -296,11 +274,7 @@ check(
 console.log("\n§10 Typecheck and build:")
 
 const siteCheck = run("pnpm exec nx run @solidiom/site:check", { cwd: ROOT })
-check(
-  "apps/site passes astro check",
-  siteCheck.ok,
-  siteCheck.ok ? undefined : "astro check failed",
-)
+check("apps/site passes astro check", siteCheck.ok, siteCheck.ok ? undefined : "astro check failed")
 
 // ─── 11. No bulk catalog bypass ─────────────────────────────────────────
 console.log("\n§11 No bulk catalog bypass:")

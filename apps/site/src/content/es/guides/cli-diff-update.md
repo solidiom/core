@@ -65,23 +65,23 @@ La fusión compara tres estados:
 
 La matriz de decisiones:
 
-| Local | Upstream | Acción |
-|-------|----------|--------|
-| Sin cambios | Cambiado | Sobrescribir con upstream (actualización segura) |
-| Cambiado | Sin cambios | Mantener local (la versión del usuario es más reciente) |
-| Cambiado | Cambiado | Intentar fusión línea por línea, o escribir archivo de conflicto |
-| Sin cambios | Sin cambios | Omitir |
+| Local       | Upstream    | Acción                                                           |
+| ----------- | ----------- | ---------------------------------------------------------------- |
+| Sin cambios | Cambiado    | Sobrescribir con upstream (actualización segura)                 |
+| Cambiado    | Sin cambios | Mantener local (la versión del usuario es más reciente)          |
+| Cambiado    | Cambiado    | Intentar fusión línea por línea, o escribir archivo de conflicto |
+| Sin cambios | Sin cambios | Omitir                                                           |
 
 ### Estados de actualización
 
-| Estado | Descripción |
-|--------|-------------|
-| `updated` | Archivo sobrescrito con versión upstream |
-| `merged` | Fusión limpia sin conflictos |
-| `conflict` | Ambos lados cambiaron lo mismo; requiere resolución manual |
-| `skipped-detached` | Archivo desvinculado; se omite |
-| `skipped-unchanged` | Sin cambios en upstream |
-| `skipped-deleted` | Archivo eliminado localmente |
+| Estado              | Descripción                                                |
+| ------------------- | ---------------------------------------------------------- |
+| `updated`           | Archivo sobrescrito con versión upstream                   |
+| `merged`            | Fusión limpia sin conflictos                               |
+| `conflict`          | Ambos lados cambiaron lo mismo; requiere resolución manual |
+| `skipped-detached`  | Archivo desvinculado; se omite                             |
+| `skipped-unchanged` | Sin cambios en upstream                                    |
+| `skipped-deleted`   | Archivo eliminado localmente                               |
 
 Salida:
 
@@ -162,14 +162,14 @@ solidiom update dialog --json
 
 ## Opciones de diff
 
-| Bandera | Descripción |
-|---------|-------------|
+| Bandera                | Descripción                     |
+| ---------------------- | ------------------------------- |
 | `--primitive <nombre>` | Filtrar por nombre de primitivo |
-| `--json` | Salida en formato JSON |
+| `--json`               | Salida en formato JSON          |
 
 ## Opciones de update
 
-| Bandera | Descripción |
-|---------|-------------|
+| Bandera     | Descripción                  |
+| ----------- | ---------------------------- |
 | `--dry-run` | Mostrar cambios sin escribir |
-| `--json` | Salida en formato JSON |
+| `--json`    | Salida en formato JSON       |

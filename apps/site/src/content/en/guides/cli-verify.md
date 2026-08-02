@@ -37,11 +37,11 @@ This verifies the entire registry catalog: schema validity, manifest integrity, 
 
 ## Flags
 
-| Flag | Description |
-|------|-------------|
-| `--registry` | Verify registry catalog integrity instead of an artifact |
-| `--no-network` | Skip TUF network fetch; use cached trust root |
-| `--json` | Output result as JSON |
+| Flag           | Description                                              |
+| -------------- | -------------------------------------------------------- |
+| `--registry`   | Verify registry catalog integrity instead of an artifact |
+| `--no-network` | Skip TUF network fetch; use cached trust root            |
+| `--json`       | Output result as JSON                                    |
 
 ## Verification Modes
 
@@ -96,14 +96,14 @@ Verification is skipped. This is the default.
 ]
 ```
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | Key identifier |
-| `algorithm` | `ed25519` \| `rsa-sha256` \| `rsa-sha512` | Signature algorithm |
-| `publicKey` | string | PEM-encoded public key |
-| `status` | `active` \| `retired` | Key lifecycle status |
-| `addedAt` | string | ISO-8601 timestamp when key was added |
-| `retiredAt` | string | ISO-8601 timestamp when key was retired (optional) |
+| Field       | Type                                      | Description                                        |
+| ----------- | ----------------------------------------- | -------------------------------------------------- |
+| `id`        | string                                    | Key identifier                                     |
+| `algorithm` | `ed25519` \| `rsa-sha256` \| `rsa-sha512` | Signature algorithm                                |
+| `publicKey` | string                                    | PEM-encoded public key                             |
+| `status`    | `active` \| `retired`                     | Key lifecycle status                               |
+| `addedAt`   | string                                    | ISO-8601 timestamp when key was added              |
+| `retiredAt` | string                                    | ISO-8601 timestamp when key was retired (optional) |
 
 ## Registry Catalog Verification
 
@@ -114,17 +114,20 @@ Verification is skipped. This is the default.
 3. **Signature verification** — If `policy.registrySignatureRequired` is true, the index must carry a valid HMAC-SHA256 signature
 
 Verification keys are gathered from:
+
 - `REGISTRY_VERIFY_KEY` environment variable
 - `policy.registryTrustedKeys` array (tried in order)
 
 ## Output
 
 On success:
+
 ```
 Registry verified: 19 manifest(s) checked
 ```
 
 On failure:
+
 ```
 Registry verification failed:
   ✗ dialog: filesHash mismatch

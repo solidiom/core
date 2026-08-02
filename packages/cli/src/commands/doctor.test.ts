@@ -19,7 +19,10 @@ describe("runDoctor", () => {
   it("no config.json produces warning", () => {
     const result = runDoctor(cwd)
     const check = result.checks.find((c) => c.name === "config.json exists")
-    expect(check).toMatchObject({ status: "warn", detail: expect.stringContaining("solidiom init") })
+    expect(check).toMatchObject({
+      status: "warn",
+      detail: expect.stringContaining("solidiom init"),
+    })
   })
 
   it("valid config.json produces pass", () => {
@@ -61,7 +64,10 @@ describe("runDoctor", () => {
   })
 
   it("present solid-js in package.json passes", () => {
-    writeFileSync(join(cwd, "package.json"), JSON.stringify({ dependencies: { "solid-js": "^1.8" } }))
+    writeFileSync(
+      join(cwd, "package.json"),
+      JSON.stringify({ dependencies: { "solid-js": "^1.8" } }),
+    )
     const result = runDoctor(cwd)
     const check = result.checks.find((c) => c.name === "solid-js dependency")
     expect(check).toMatchObject({ status: "pass", detail: "^1.8" })
@@ -69,7 +75,10 @@ describe("runDoctor", () => {
 
   it("valid lock.json with version 1 passes", () => {
     mkdirSync(join(cwd, ".solidiom"), { recursive: true })
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({ version: 1, installed: {} }))
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({ version: 1, installed: {} }),
+    )
     const result = runDoctor(cwd)
     const check = result.checks.find((c) => c.name === "lock.json valid")
     expect(check).toMatchObject({ status: "pass" })
@@ -77,20 +86,23 @@ describe("runDoctor", () => {
 
   it("lock.json with unverified entries produces warning", () => {
     mkdirSync(join(cwd, ".solidiom"), { recursive: true })
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({
-      version: 1,
-      installed: {
-        "src/ui/primitives/dialog.tsx": {
-          path: "src/ui/primitives/dialog.tsx",
-          digest: "abc",
-          primitive: "dialog",
-          version: "1.0.0",
-          manifestFilesHash: "h1",
-          verifiedAt: "2024-01-01T00:00:00Z",
-          provenance: "unverified",
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({
+        version: 1,
+        installed: {
+          "src/ui/primitives/dialog.tsx": {
+            path: "src/ui/primitives/dialog.tsx",
+            digest: "abc",
+            primitive: "dialog",
+            version: "1.0.0",
+            manifestFilesHash: "h1",
+            verifiedAt: "2024-01-01T00:00:00Z",
+            provenance: "unverified",
+          },
         },
-      },
-    }))
+      }),
+    )
     const result = runDoctor(cwd)
     const check = result.checks.find((c) => c.name === "source-install provenance")
     expect(check).toMatchObject({ status: "warn" })
@@ -99,8 +111,14 @@ describe("runDoctor", () => {
   it("healthy when all checks pass, unhealthy when any fails", () => {
     mkdirSync(join(cwd, ".solidiom"), { recursive: true })
     writeFileSync(join(cwd, ".solidiom", "config.json"), JSON.stringify({ defaultMode: "package" }))
-    writeFileSync(join(cwd, "package.json"), JSON.stringify({ dependencies: { "solid-js": "^1.8" } }))
-    writeFileSync(join(cwd, ".solidiom", "lock.json"), JSON.stringify({ version: 1, installed: {} }))
+    writeFileSync(
+      join(cwd, "package.json"),
+      JSON.stringify({ dependencies: { "solid-js": "^1.8" } }),
+    )
+    writeFileSync(
+      join(cwd, ".solidiom", "lock.json"),
+      JSON.stringify({ version: 1, installed: {} }),
+    )
     const result = runDoctor(cwd)
     expect(result.healthy).toBe(true)
   })

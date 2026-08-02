@@ -166,7 +166,8 @@ function htmlPathToRoute(htmlPath: string, root: string): string {
   // primitives/dialog/index.html → /primitives/dialog/
   if (rel === "index.html") return "/"
   const dir = dirname(rel)
-  const base = rel.endsWith("/index.html") || rel.endsWith("index.html") ? dir : rel.replace(/\.html$/, "")
+  const base =
+    rel.endsWith("/index.html") || rel.endsWith("index.html") ? dir : rel.replace(/\.html$/, "")
   return `/${base}/`.replace(/\/+/g, "/")
 }
 
@@ -490,7 +491,9 @@ if (jsonOnly) {
 if (enforce) {
   const budgets = loadBudgets()
   if (!budgets) {
-    console.log("\nNo budget configuration found at tools/route-budgets.json — skipping enforcement.")
+    console.log(
+      "\nNo budget configuration found at tools/route-budgets.json — skipping enforcement.",
+    )
     console.log("Create the file to enable CI budget checks.\n")
   } else {
     const violations = checkBudgets(report, budgets)

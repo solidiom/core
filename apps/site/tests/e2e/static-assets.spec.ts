@@ -71,17 +71,26 @@ test.describe("SITE-010: Static assets and error pages", () => {
     }
   })
 
-  test("canonical, social, manifest, and favicon metadata use valid URLs", async ({ page, request }) => {
+  test("canonical, social, manifest, and favicon metadata use valid URLs", async ({
+    page,
+    request,
+  }) => {
     await page.goto("/?utm_source=test#fragment")
 
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://solidiom.org/")
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      "https://solidiom.org/",
+    )
     await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
       "content",
       "https://solidiom.org/",
     )
     await expect(page.locator('meta[property="og:type"]')).toHaveAttribute("content", "website")
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary")
-    await expect(page.locator('link[rel="manifest"]')).toHaveAttribute("href", "/manifest.webmanifest")
+    await expect(page.locator('link[rel="manifest"]')).toHaveAttribute(
+      "href",
+      "/manifest.webmanifest",
+    )
 
     const favicon = page.locator('link[rel="icon"]')
     await expect(favicon).toHaveAttribute("href", "/icons/icon-192.svg")
@@ -91,7 +100,9 @@ test.describe("SITE-010: Static assets and error pages", () => {
 
     const socialImages = await page
       .locator('meta[property="og:image"], meta[name="twitter:image"]')
-      .evaluateAll((elements) => elements.map((element) => element.getAttribute("content")).filter(Boolean))
+      .evaluateAll((elements) =>
+        elements.map((element) => element.getAttribute("content")).filter(Boolean),
+      )
     for (const image of socialImages) {
       const url = new URL(image!)
       expect(url.origin).toBe("https://solidiom.org")

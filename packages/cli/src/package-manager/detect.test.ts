@@ -22,7 +22,10 @@ describe("detectPackageManager", () => {
   let cwd: string
 
   beforeEach(() => {
-    cwd = join(tmpdir(), `solidiom-detect-test-${Date.now()}-${Math.random().toString(36).slice(2)}`)
+    cwd = join(
+      tmpdir(),
+      `solidiom-detect-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    )
     mkdirSync(cwd, { recursive: true })
   })
 
@@ -58,7 +61,10 @@ describe("detectPackageManager", () => {
 
     it("falls through an unparseable user agent to the lockfile", () => {
       writeFileSync(join(cwd, "yarn.lock"), "")
-      const result = detectPackageManager({ cwd, env: { npm_config_user_agent: "not-a-pm-string" } })
+      const result = detectPackageManager({
+        cwd,
+        env: { npm_config_user_agent: "not-a-pm-string" },
+      })
       expect(result).toEqual({ name: "yarn", source: "lockfile" })
     })
 

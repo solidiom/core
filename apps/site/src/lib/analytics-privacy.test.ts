@@ -36,10 +36,9 @@ const PROHIBITED_KEYS = new Set([
 function eventHasNoProhibitedKeys(event: Record<string, unknown>): void {
   const keys = Object.keys(event)
   for (const key of keys) {
-    expect(
-      PROHIBITED_KEYS.has(key),
-      `Analytics event contains prohibited key: "${key}"`,
-    ).toBe(false)
+    expect(PROHIBITED_KEYS.has(key), `Analytics event contains prohibited key: "${key}"`).toBe(
+      false,
+    )
   }
 }
 

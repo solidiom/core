@@ -59,9 +59,7 @@ describe("Route bundle isolation", () => {
     }
   }
 
-  const BUILDER_ONLY_ISLANDS = builderIslands.filter(
-    (url) => !STATIC_ISLANDS.has(url),
-  )
+  const BUILDER_ONLY_ISLANDS = builderIslands.filter((url) => !STATIC_ISLANDS.has(url))
 
   for (const route of STATIC_ROUTES) {
     if (!htmlExists(route.path)) continue
