@@ -183,6 +183,19 @@ describe("button computed-style parity", () => {
     // generated class-string form in tailwind-merge's twMerge() (see
     // tools/recipe-emit-tailwind.ts's renderVariantsModule) — padding now asserts
     // real parity rather than documenting the gap.
+    //
+    // `height` is deliberately NOT asserted across profiles here, and this is not a
+    // recipe defect. This compound sets `height: auto`, so the computed height comes
+    // from the content line box, which depends on the *base reset* rather than on the
+    // recipe: this harness compiles the Tailwind profile with `@import "tailwindcss"`
+    // (globalSetupTailwind.ts), which includes Preflight and its `line-height: 1.5`,
+    // while the css/unocss profiles inject only their own recipe stylesheet and so
+    // inherit `line-height: normal`. No recipe change can reconcile that difference.
+    // The recipe-owned half of the old gap — Tailwind injecting a line-height the
+    // definition never declared — is fixed and guarded by the test below plus the
+    // exhaustive emitter invariant in tools/recipe-emit-tailwind-utilities.test.ts.
+    // The `sm`/`md`/`lg` size assertions above do compare `height`, because those
+    // declare an explicit height and never depend on the line box.
     const properties = ["padding", "border-radius"]
     const computed: Record<ProfileName, Record<string, string>> = {} as never
 
@@ -202,20 +215,33 @@ describe("button computed-style parity", () => {
         `compound "link"+"md" property "${property}" disagrees across profiles: ${JSON.stringify(computed)}`,
       ).toBe(1)
     }
+  })
 
-    // NEW KNOWN GAP, not asserted here (unrelated to the twMerge fix above): `height`
-    // still disagrees — recipes-css/recipes-unocss compute 16px, recipes-tailwind
-    // computes 20px. The compound's `height: auto` correctly wins the cascade in
-    // every profile now; the discrepancy is that "md"'s `font-size: 0.875rem` (no
-    // explicit line-height in the canonical definition) maps to Tailwind's `text-sm`
-    // utility, which bundles line-height: calc(1.25 / 0.875) — a line-height the
-    // definition never declared. tools/recipe-emit-tailwind-utilities.ts's font-size
-    // mapping (`FONT_SIZE_SCALE`) needs to emit only `text-[<size>]` (an arbitrary
-    // value with no bundled line-height) when the declaration has no matching
-    // line-height, or every scope that sets font-size without line-height inherits
-    // Tailwind's opinionated pairing instead of the browser default the other two
-    // profiles get. Affects at least: accordion, button ("sm"/"md"), dialog, menu,
-    // select, tabs, toast — tracked as a follow-up, not folded into this fix.
+  it("adds no recipe line-height to a font-size declared without one (contract §10)", async () => {
+    // The recipe-owned half of the §10 gap, asserted on computed style.
+    //
+    // Size "md" declares `font-size: 0.875rem` and no line-height. Before the fix that
+    // mapped to Tailwind's named `text-sm`, which also sets
+    // `line-height: calc(1.25 / 0.875)` (~1.43 → 20px) — a property the canonical
+    // definition never declared, and one neither the css nor unocss profile sets.
+    //
+    // Comparing against Preflight's own inherited line-height, rather than hardcoding a
+    // pixel value, keeps this robust if Tailwind changes that default: the assertion is
+    // "the recipe contributes nothing", not "the value is 21px". A regression to the
+    // bundled form makes the recipe'd button disagree with the bare control.
+    const element = await renderButton("recipes-tailwind", "link", "md")
+
+    const control = document.createElement("button")
+    control.textContent = "Button"
+    control.style.fontSize = computedProperty(element, "font-size")
+    container!.appendChild(control)
+
+    expect(computedProperty(element, "font-size")).toBe("14px")
+    expect(
+      computedProperty(element, "line-height"),
+      "recipes-tailwind button has a line-height its canonical definition never declared — " +
+        "the font-size mapping has regressed to a named text-* step that bundles one",
+    ).toBe(computedProperty(control, "line-height"))
   })
 
   it("on/off state resolves the same background-color across all profiles", async () => {

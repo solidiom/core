@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { declarationToUtilities } from "./recipe-emit-tailwind-utilities"
+import { REFERENCE_DEFINITIONS } from "./recipe-contract-definitions"
+import { resolveRules } from "./recipe-emit-core"
 
 describe("declarationToUtilities — colours", () => {
   it("maps a resolved theme colour name to bg-/text-/border- utilities", () => {
@@ -121,10 +123,40 @@ describe("declarationToUtilities — keyword properties", () => {
 })
 
 describe("declarationToUtilities — typography scale", () => {
-  it("maps font-size, font-weight, and line-height onto Tailwind's named scale", () => {
-    expect(declarationToUtilities("font-size", "0.875rem")).toEqual(["text-sm"])
+  it("maps font-weight and line-height onto Tailwind's named scale", () => {
     expect(declarationToUtilities("font-weight", "600")).toEqual(["font-semibold"])
     expect(declarationToUtilities("line-height", "1.25rem")).toEqual(["leading-5"])
+  })
+
+  it("uses the named font-size step when the group declares a line-height to override it", () => {
+    // Tailwind's `text-sm` also sets line-height. That is only safe when the definition
+    // declared a line-height of its own, whose `leading-*` utility overrides the bundled
+    // value — the shape `alert`, `badge`, and `tooltip` already use.
+    expect(
+      declarationToUtilities("font-size", "0.875rem", {
+        "font-size": "0.875rem",
+        "line-height": "1.25rem",
+      }),
+    ).toEqual(["text-sm"])
+  })
+
+  it("uses the arbitrary font-size form when no line-height is declared", () => {
+    // Regression guard for docs/contracts/recipe-contract.md §10: the named step would
+    // inject a line-height the definition never declared, desynchronizing this profile
+    // from recipes-css and recipes-unocss, which emit a bare font-size.
+    expect(declarationToUtilities("font-size", "0.875rem", { "font-size": "0.875rem" })).toEqual([
+      "text-[0.875rem]",
+    ])
+    expect(declarationToUtilities("font-size", "1rem", { "font-size": "1rem" })).toEqual([
+      "text-[1rem]",
+    ])
+    expect(declarationToUtilities("font-size", "1.125rem", { "font-size": "1.125rem" })).toEqual([
+      "text-[1.125rem]",
+    ])
+  })
+
+  it("defaults to the arbitrary form when called with no sibling group", () => {
+    expect(declarationToUtilities("font-size", "0.875rem")).toEqual(["text-[0.875rem]"])
   })
 
   it("falls back to an arbitrary value for a size outside the named scale", () => {
@@ -161,5 +193,58 @@ describe("declarationToUtilities — border width/style co-occurrence", () => {
 describe("declarationToUtilities — properties with no mapping table entry", () => {
   it("falls back to a bracketed arbitrary property:value pair", () => {
     expect(declarationToUtilities("scroll-margin-top", "4px")).toEqual(["[scroll-margin-top:4px]"])
+  })
+})
+
+/**
+ * Contract-wide invariant, not a per-scope sample.
+ *
+ * The emitter must never spell a declaration as a utility that sets a CSS property the
+ * declaration group did not declare. Asserting that here — over every shipped definition
+ * rather than over the two scopes the browser parity harness renders — is what makes the
+ * §10 line-height fix durable: a definition added later that sets `font-size` without a
+ * `line-height` fails this test without anyone having to remember why it exists.
+ */
+describe("declarationToUtilities — no utility may set an undeclared property", () => {
+  /** Named Tailwind font-size steps, each of which also sets `line-height`. */
+  const LINE_HEIGHT_BUNDLING = new Set(["text-xs", "text-sm", "text-base", "text-lg"])
+
+  it("emits no line-height-bundling font-size utility for a group without a line-height", () => {
+    const violations: string[] = []
+
+    for (const [scope, definition] of Object.entries(REFERENCE_DEFINITIONS)) {
+      for (const rule of resolveRules(definition, "tailwind")) {
+        const declarations = rule.declarations
+        if (!Object.hasOwn(declarations, "font-size")) continue
+        if (Object.hasOwn(declarations, "line-height")) continue
+
+        const utilities = Object.entries(declarations).flatMap(([property, value]) =>
+          declarationToUtilities(property, value, declarations),
+        )
+        for (const utility of utilities) {
+          if (LINE_HEIGHT_BUNDLING.has(utility)) {
+            violations.push(
+              `${scope}/${rule.part} (${rule.condition.kind}): "${utility}" injects a line-height ` +
+                `not declared by ${JSON.stringify(declarations)}`,
+            )
+          }
+        }
+      }
+    }
+
+    expect(violations, violations.join("\n")).toEqual([])
+  })
+
+  it("covers a meaningful number of font-size declarations, so the sweep cannot silently empty", () => {
+    // Guards the assertion above against becoming vacuous if resolveRules or the
+    // definitions module changes shape: 19 font-size declarations exist today across
+    // 10 scopes, so the sweep must observe a comparable number of groups.
+    let fontSizeGroups = 0
+    for (const definition of Object.values(REFERENCE_DEFINITIONS)) {
+      for (const rule of resolveRules(definition, "tailwind")) {
+        if (Object.hasOwn(rule.declarations, "font-size")) fontSizeGroups += 1
+      }
+    }
+    expect(fontSizeGroups).toBeGreaterThanOrEqual(15)
   })
 })

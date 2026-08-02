@@ -111,12 +111,51 @@ const SPACING_SCALE: Readonly<Record<string, string>> = {
   "32rem": "128",
 }
 
+/**
+ * Named Tailwind font-size steps.
+ *
+ * **Every named step here also sets `line-height`.** Tailwind's `text-sm` compiles to
+ * `font-size: 0.875rem; line-height: calc(1.25 / 0.875)`, so emitting the named form for
+ * a declaration that did not declare a line-height injects a property the canonical
+ * definition never asked for — see `fontSizeUtility` below, which is why this table is
+ * consulted only when a paired `line-height` is present.
+ *
+ * `0.8125rem` has no named Tailwind step, so it is spelled as an arbitrary value; that
+ * entry is the precedent `fontSizeUtility` generalizes.
+ */
 const FONT_SIZE_SCALE: Readonly<Record<string, string>> = {
   "0.75rem": "xs",
   "0.8125rem": "[0.8125rem]",
   "0.875rem": "sm",
   "1rem": "base",
   "1.125rem": "lg",
+}
+
+/**
+ * Maps a `font-size` declaration, honouring the contract's rule that an emitter must not
+ * set a property the declaration did not declare.
+ *
+ * Tailwind's named `text-*` utilities bundle an opinionated `line-height`. The `css` and
+ * `unocss` profiles emit a bare `font-size` and inherit the browser default, so a named
+ * utility silently desynchronizes the Tailwind profile from the other two — the gap
+ * recorded in docs/contracts/recipe-contract.md §10, observed as button "link"+"md"
+ * computing `height: 20px` under Tailwind against `16px` elsewhere.
+ *
+ * Resolution depends on whether the same declaration group also declares `line-height`:
+ *
+ *   - **Paired** — the bundled line-height is a property the definition *did* declare, and
+ *     the group's own `line-height` entry emits a `leading-*` utility that overrides it
+ *     with the declared value. The named step is safe and stays, so `alert`, `badge`, and
+ *     `tooltip` (the three scopes that already pair the two) emit byte-identical output.
+ *   - **Unpaired** — the named step would introduce an undeclared `line-height`. Emit the
+ *     arbitrary form, which sets `font-size` alone and leaves line-height inherited,
+ *     matching the `css` and `unocss` profiles exactly.
+ */
+function fontSizeUtility(value: string, siblings: Readonly<Record<string, string>>): string[] {
+  const named = FONT_SIZE_SCALE[value]
+  const hasPairedLineHeight = Object.hasOwn(siblings, "line-height")
+  if (named !== undefined && hasPairedLineHeight) return [`text-${named}`]
+  return [`text-${arbitraryValue(value)}`]
 }
 
 const FONT_WEIGHT_SCALE: Readonly<Record<string, string>> = {
@@ -247,8 +286,18 @@ function transitionUtility(value: string): string[] {
  * `value` has already passed through `resolveValue(..., "tailwind", ...)`: a token
  * reference is a bare theme colour name (`"primary"`) by the time it reaches here, not
  * `{ token: "primary" }`. This function therefore only ever sees strings.
+ *
+ * `siblings` is the full declaration group `property` belongs to. Most properties map in
+ * isolation, but `font-size` cannot: whether Tailwind's named `text-*` step is safe
+ * depends on whether the same group declares a `line-height` for it to override. See
+ * `fontSizeUtility`. Defaults to an empty group so a caller mapping a lone declaration
+ * gets the conservative (arbitrary-value) spelling rather than an injected line-height.
  */
-export function declarationToUtilities(property: string, value: string): string[] {
+export function declarationToUtilities(
+  property: string,
+  value: string,
+  siblings: Readonly<Record<string, string>> = {},
+): string[] {
   if (property === "padding") return boxUtility("p", value)
   if (property === "margin") return boxUtility("m", value)
   if (property === "transform") return transformUtility(value)
@@ -258,7 +307,7 @@ export function declarationToUtilities(property: string, value: string): string[
   const keywordMap = KEYWORD_UTILITIES[property]
   if (keywordMap?.[value]) return [keywordMap[value]]
 
-  if (property === "font-size") return [`text-${FONT_SIZE_SCALE[value] ?? arbitraryValue(value)}`]
+  if (property === "font-size") return fontSizeUtility(value, siblings)
   if (property === "font-weight") {
     return [`font-${FONT_WEIGHT_SCALE[value] ?? arbitraryValue(value)}`]
   }
