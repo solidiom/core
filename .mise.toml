@@ -447,6 +447,46 @@ run = "pnpm run gate:phase2"
 description = "CI job `phase0-gate`: run the Phase 0 acceptance gate (needs a prior build)"
 run = "pnpm run gate:phase0"
 
+[tasks."ci:beta-acceptance-report"]
+description = "CI job `beta-acceptance-report`: BETA-002 static-build acceptance report (run ci:site-build first; reads apps/site/dist, no server needed)"
+run = "pnpm run beta:acceptance:report"
+
+[tasks."ci:beta-acceptance-e2e"]
+description = "CI job `beta-acceptance-e2e`: BETA-002 cross-browser acceptance matrix — ADVISORY, mirrors continue-on-error (run ci:site-build first)"
+run = '''#!/usr/bin/env bash
+set -uo pipefail
+
+pnpm exec playwright install chromium firefox webkit || exit 1
+
+# ci.yml marks this job `continue-on-error: true`, so a failure must not fail the
+# overall run. 13 checks currently fail on A11Y-008 (--sol-secondary is 3.678:1
+# against white, below the 4.5:1 WCAG AA floor, and it is the site's link colour,
+# so every audited route reports color-contrast). Report loudly and exit 0.
+if ! PLAYWRIGHT_USE_EXISTING_BUILD=1 pnpm run beta:acceptance:e2e; then
+  echo "" >&2
+  echo "ADVISORY: beta-acceptance-e2e failed (continue-on-error: true in ci.yml)." >&2
+  echo "          Expected until A11Y-008 lands; see docs/plans/website-tasks.md §7.3." >&2
+  echo "          Results: test-results/beta-acceptance" >&2
+fi
+'''
+
+[tasks."ci:gate-phase3"]
+description = "CI job `phase3-gate`: Phase 3 (library beta) gate — ADVISORY, mirrors continue-on-error (needs a prior build). NOT the website's G3 gate; see docs/plans/website-tasks.md §3.1"
+run = '''#!/usr/bin/env bash
+set -uo pipefail
+
+pnpm exec playwright install chromium || exit 1
+
+# ci.yml marks this job `continue-on-error: true`. Three genuinely-absent
+# artifacts still fail it, tracked as A11Y-007: docs/at-audit-results/,
+# docs/keyboard-audit-results.md, and recorded cross-browser results.
+if ! pnpm run gate:phase3; then
+  echo "" >&2
+  echo "ADVISORY: phase3-gate failed (continue-on-error: true in ci.yml)." >&2
+  echo "          Expected until A11Y-007 lands; see docs/plans/website-tasks.md §7.3." >&2
+fi
+'''
+
 # ---------------------------------------------------------------------------
 # Release workflow — atomic steps (mirror .github/workflows/release.yml)
 # ---------------------------------------------------------------------------
@@ -493,12 +533,16 @@ run = [
   "mise run ci:site-e2e",
   "mise run ci:site-visual",
   "mise run ci:site-lighthouse",
+  "mise run ci:beta-acceptance-report",
+  "mise run ci:beta-acceptance-e2e",
   # needs: typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e
   "mise run ci:gate-phase1",
   # needs: phase1-gate
   "mise run ci:gate-phase2",
   # needs: ..., phase1-gate, phase2-gate
   "mise run ci:gate-phase0",
+  # needs: phase1-gate, phase2-gate
+  "mise run ci:gate-phase3",
 ]
 
 [tasks."ci:prepush"]
@@ -516,9 +560,12 @@ run = [
   "mise run ci:a11y-axe-scan",
   "mise run ci:site-e2e",
   "mise run ci:site-visual",
+  "mise run ci:beta-acceptance-report",
+  "mise run ci:beta-acceptance-e2e",
   "mise run ci:gate-phase1",
   "mise run ci:gate-phase2",
   "mise run ci:gate-phase0",
+  "mise run ci:gate-phase3",
 ]
 
 [tasks.github-workflows]

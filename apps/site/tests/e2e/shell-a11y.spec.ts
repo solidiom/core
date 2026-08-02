@@ -66,9 +66,15 @@ async function visibleFocusableOrder(page: Page): Promise<string[]> {
 
 /** SITE-011: shell accessibility verification across the configured engines. */
 test.describe("Shell landmarks", () => {
-  test("has banner, main, and contentinfo landmarks in correct order", async ({ page }) => {
+  test("has one ordered banner, main, and contentinfo landmark", async ({ page }) => {
     await page.goto("/")
-    await expect(page.getByRole("banner")).toHaveCount(2)
+    // Exactly one banner: the shell <header>. ARIA allows a single banner landmark per
+    // document, and BETA-002's `landmarks_present` acceptance check asserts the same.
+    // This briefly expected 2 to accommodate BetaBanner's stray role="banner" (see
+    // 1930bfc, "resolve remaining CI failures") — the role has since been removed from
+    // the component, which is the correct fix, so this is back to asserting the SITE-011
+    // requirement it was written for.
+    await expect(page.getByRole("banner")).toHaveCount(1)
     await expect(page.getByRole("main")).toHaveCount(1)
     await expect(page.getByRole("contentinfo")).toHaveCount(1)
 
