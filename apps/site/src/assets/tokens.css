@@ -59,23 +59,23 @@
   /* ── Borders ── */
   --sol-border: #cbd5e1; /* Default borders (Slate 300) */
   --sol-border-muted: #e2e8f0; /* Subtle dividers (Slate 200) */
-  --sol-border-active: #6961f1; /* Focused/active borders (Indigo) */
+  --sol-border-active: #5750d6; /* Focused/active borders (Indigo) */
 
   /* ── Brand Colors (Semantic Roles) ── */
-  --sol-primary: #6961f1; /* Primary action/identity (Indigo) */
-  --sol-primary-hover: #5b54e0; /* Primary hover state */
+  --sol-primary: #5750d6; /* Primary action/identity (AA on light surfaces) */
+  --sol-primary-hover: #4c46c5; /* Primary hover state */
   --sol-primary-foreground: #ffffff; /* Text on primary backgrounds */
-  --sol-secondary: #3b82f6; /* Links, secondary actions (Blue) */
+  --sol-secondary: #2563eb; /* Links, secondary actions (Blue 600; 5.17:1 on white) */
   --sol-accent: #06b6d4; /* Highlights, active states (Cyan) */
   --sol-success: #22c55e; /* Success feedback (Green) */
   --sol-warning: #f59e0b; /* Warning feedback (Amber) */
   --sol-destructive: #e5484d; /* Critical/error (Red) */
 
   /* ── Interactive States ── */
-  --sol-focus-ring: #6961f1; /* Focus outline color */
+  --sol-focus-ring: #5750d6; /* Focus outline color */
   --sol-focus-ring-width: 2px; /* Focus outline width */
-  --sol-interactive-hover: rgba(105, 97, 241, 0.06); /* Subtle hover bg */
-  --sol-interactive-active: rgba(105, 97, 241, 0.1); /* Pressed state bg */
+  --sol-interactive-hover: rgba(87, 80, 214, 0.06); /* Subtle hover bg */
+  --sol-interactive-active: rgba(87, 80, 214, 0.1); /* Pressed state bg */
 
   /* ── Radius ── */
   --sol-radius-sm: 8px;

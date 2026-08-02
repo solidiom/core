@@ -24,7 +24,7 @@
 
 /* Stable — green */
 .maturity-badge__label[data-maturity="stable"] {
-  color: var(--sol-surface-base);
+  color: #111827; /* AA against the stable surface in light and dark themes */
   background-color: var(--sol-success);
 }
 
@@ -36,7 +36,7 @@
 
 /* Alpha — amber */
 .maturity-badge__label[data-maturity="alpha"] {
-  color: var(--sol-surface-base);
+  color: #111827; /* AA against the alpha surface in light and dark themes */
   background-color: var(--sol-warning);
 }
 

@@ -37,6 +37,57 @@
   color: var(--sio-foreground, #f1f5f9);
 }
 
+/* Dark-preview defaults prevent light fallback tokens before client hydration applies the chosen theme. */
+.theme-builder__preview-pane--dark {
+  --sio-surface: #0f172a;
+  --sio-surface-raised: #1e293b;
+  --sio-foreground: #f1f5f9;
+  --sio-foreground-muted: #94a3b8;
+  --sio-foreground-subtle: #94a3b8;
+  --sio-border: #334155;
+  --sio-border-muted: #1e293b;
+  --sio-border-active: #8b83f8;
+  --sio-primary: #8b83f8;
+  --sio-primary-hover: #a19bfa;
+  --sio-primary-foreground: #0f172a;
+  --sio-success: #4ade80;
+  --sio-warning: #fbbf24;
+  --sio-destructive: #f87171;
+  --sio-interactive-hover: rgba(139, 131, 248, 0.1);
+}
+
+/* Light-preview defaults prevent recipe fallbacks before client hydration applies the chosen theme. */
+.theme-builder__preview-pane--light {
+  --sio-surface: #f8fafc;
+  --sio-surface-raised: #ffffff;
+  --sio-foreground: #111827;
+  --sio-foreground-muted: #334155;
+  --sio-foreground-subtle: #64748b;
+  --sio-border: #cbd5e1;
+  --sio-border-muted: #e2e8f0;
+  --sio-border-active: #5750d6;
+  --sio-primary: #5750d6;
+  --sio-primary-hover: #4c46c5;
+  --sio-primary-foreground: #ffffff;
+  --sio-success: #22c55e;
+  --sio-warning: #f59e0b;
+  --sio-destructive: #e5484d;
+  --sio-interactive-hover: rgba(87, 80, 214, 0.06);
+}
+
+/* Light semantic badge text needs a darker foreground than its 10%-tinted surface. */
+.theme-builder__preview-pane--light .theme-builder__preview-badge--success {
+  color: #166534;
+}
+
+.theme-builder__preview-pane--light .theme-builder__preview-badge--warning {
+  color: #92400e;
+}
+
+.theme-builder__preview-pane--light .theme-builder__preview-badge--destructive {
+  color: #b91c1c;
+}
+
 .theme-builder__preview-dot {
   width: 8px;
   height: 8px;
@@ -85,6 +136,11 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--sio-foreground-subtle, var(--sol-foreground-subtle, #64748b));
+}
+
+.theme-builder__preview-pane--dark .theme-builder__preview-section-title,
+.theme-builder__preview-pane--dark .theme-builder__preview-progress-label {
+  color: #94a3b8;
 }
 
 /* ─── Buttons ─────────────────────────────────────────────────────────── */
@@ -137,6 +193,11 @@
 .theme-builder__preview-btn--destructive {
   background: var(--sio-destructive, #e5484d);
   color: var(--sio-primary-foreground, #ffffff);
+}
+
+/* White does not meet AA on the default light destructive surface. */
+.theme-builder__preview-pane--light .theme-builder__preview-btn--destructive {
+  color: #111827;
 }
 
 .theme-builder__preview-btn--ghost {

@@ -77,7 +77,9 @@ describe("drift against apps/site/src/assets/tokens.css (BRAND-002)", () => {
     for (const [id, cssName] of CHECKED) {
       const cssValue = readSolValue(css, LIGHT_START, LIGHT_END, cssName)
       const themeValue = resolveTokenValue(SOLIDIOM_DEFAULT_THEME, "light", id)
-      expect(themeValue, `light "${id}" should match --sol-${cssName}`).toBe(cssValue)
+      expect(themeValue.toLowerCase(), `light "${id}" should match --sol-${cssName}`).toBe(
+        cssValue.toLowerCase(),
+      )
     }
   })
 
@@ -85,7 +87,9 @@ describe("drift against apps/site/src/assets/tokens.css (BRAND-002)", () => {
     for (const [id, cssName] of CHECKED) {
       const cssValue = readSolValue(css, DARK_START, DARK_END, cssName)
       const themeValue = resolveTokenValue(SOLIDIOM_DEFAULT_THEME, "dark", id)
-      expect(themeValue, `dark "${id}" should match --sol-${cssName}`).toBe(cssValue)
+      expect(themeValue.toLowerCase(), `dark "${id}" should match --sol-${cssName}`).toBe(
+        cssValue.toLowerCase(),
+      )
     }
   })
 })
