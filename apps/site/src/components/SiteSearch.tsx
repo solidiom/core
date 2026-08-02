@@ -194,7 +194,9 @@ export function SiteSearch(props: SiteSearchProps) {
         if (props.locale === "en" && path.startsWith("/es/")) return false
         const selected = contentFilter()
         if (selected === "all") return true
-        return path.includes(`/${selected === "primitive" ? "primitives" : selected === "guide" ? "guides" : selected === "api" ? "api" : selected === "example" ? "examples" : "blog"}/`)
+        return path.includes(
+          `/${selected === "primitive" ? "primitives" : selected === "guide" ? "guides" : selected === "api" ? "api" : selected === "example" ? "examples" : "blog"}/`,
+        )
       })
       if (currentRequest !== requestId) return
       setResults(filtered)

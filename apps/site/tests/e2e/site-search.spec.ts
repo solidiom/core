@@ -17,7 +17,9 @@ test.describe("SEARCH-002 Site search", () => {
     const input = dialog.getByRole("searchbox", { name: "Search documentation" })
     await expect(input).toBeFocused()
     await input.pressSequentially("solidiom")
-    await expect(dialog.locator("[data-site-search-result]")).toBeVisible({ timeout: 10000 })
+    await expect(dialog.locator("[data-site-search-result]").first()).toBeVisible({
+      timeout: 10000,
+    })
     const resultLink = dialog.locator("[data-site-search-result] a").first()
     await expect(resultLink).toBeVisible()
 
@@ -116,7 +118,9 @@ test.describe("SEARCH-004 Search accessibility", () => {
 
       const input = dialog.getByRole("searchbox", { name: "Search documentation" })
       await input.pressSequentially("solidiom")
-      await expect(dialog.locator("[data-site-search-result]")).toBeVisible({ timeout: 10000 })
+      await expect(dialog.locator("[data-site-search-result]").first()).toBeVisible({
+        timeout: 10000,
+      })
 
       // Wait for results to appear
       const resultLink = dialog.locator("[data-site-search-result] a").first()
@@ -188,7 +192,9 @@ test.describe("SEARCH-004 Search accessibility", () => {
 
       const input = dialog.getByRole("searchbox", { name: "Search documentation" })
       await input.pressSequentially("solidiom")
-      await expect(dialog.locator("[data-site-search-result]")).toBeVisible({ timeout: 10000 })
+      await expect(dialog.locator("[data-site-search-result]").first()).toBeVisible({
+        timeout: 10000,
+      })
 
       // Wait for results and click one (clicking navigates, which closes dialog)
       const resultLink = dialog.locator("[data-site-search-result] a").first()
@@ -339,7 +345,9 @@ test.describe("SEARCH-004 Search accessibility", () => {
 
       const input = dialog.getByRole("searchbox", { name: "Search documentation" })
       await input.pressSequentially("solidiom")
-      await expect(dialog.locator("[data-site-search-result]")).toBeVisible({ timeout: 10000 })
+      await expect(dialog.locator("[data-site-search-result]").first()).toBeVisible({
+        timeout: 10000,
+      })
 
       const resultLinks = dialog.locator("[data-site-search-result] a")
       await expect(resultLinks.first()).toBeVisible()
@@ -363,7 +371,9 @@ test.describe("SEARCH-004 Search accessibility", () => {
 
       const input = dialog.getByRole("searchbox", { name: "Buscar en la documentación" })
       await input.pressSequentially("solidiom")
-      await expect(dialog.locator("[data-site-search-result]")).toBeVisible({ timeout: 10000 })
+      await expect(dialog.locator("[data-site-search-result]").first()).toBeVisible({
+        timeout: 10000,
+      })
 
       const resultLinks = dialog.locator("[data-site-search-result] a")
       await expect(resultLinks.first()).toBeVisible()
@@ -387,7 +397,9 @@ test.describe("SEARCH-004 Search accessibility", () => {
 
       const input = dialog.getByRole("searchbox", { name: "Search documentation" })
       await input.pressSequentially("solidiom")
-      await expect(dialog.locator("[data-site-search-result]")).toBeVisible({ timeout: 10000 })
+      await expect(dialog.locator("[data-site-search-result]").first()).toBeVisible({
+        timeout: 10000,
+      })
 
       const resultLinks = dialog.locator("[data-site-search-result] a")
       await expect(resultLinks.first()).toBeVisible()

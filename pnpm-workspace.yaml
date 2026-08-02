@@ -12,9 +12,9 @@ catalog:
   babel-preset-solid: "^2.0.0-beta.23"
 
 overrides:
-  solid-js: "2.0.0-beta.24"
-  "@solidjs/web": "2.0.0-beta.24"
-  babel-preset-solid: "2.0.0-beta.24"
+  solid-js: "2.0.0-beta.26"
+  "@solidjs/web": "2.0.0-beta.26"
+  babel-preset-solid: "2.0.0-beta.26"
 
 peerDependencyRules:
   allowAny:
