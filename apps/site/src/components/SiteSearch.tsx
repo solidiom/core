@@ -145,6 +145,7 @@ export function SiteSearch(props: SiteSearchProps) {
   const [status, setStatus] = createSignal<SearchStatus>("idle")
   const [contentFilter, setContentFilter] = createSignal<ContentFilter>("all")
   let input: HTMLInputElement | undefined
+  let firstFilter: HTMLButtonElement | undefined
   let requestId = 0
   /** Tracks how the dialog was opened so the analytics event can report the trigger. */
   let pendingTrigger: "keyboard" | "click" | "command" = "click"
@@ -274,6 +275,12 @@ export function SiteSearch(props: SiteSearchProps) {
                 value={query()}
                 placeholder={copy().placeholder}
                 autocomplete="off"
+                onKeyDown={(event) => {
+                  if (event.key === "Tab" && !event.shiftKey) {
+                    event.preventDefault()
+                    firstFilter?.focus()
+                  }
+                }}
                 onInput={(event) => void search(event.currentTarget.value)}
               />
             </form>
@@ -283,6 +290,9 @@ export function SiteSearch(props: SiteSearchProps) {
                   <button
                     type="button"
                     class="site-search__filter-pill"
+                    ref={(element) => {
+                      if (filter === CONTENT_FILTERS[0]) firstFilter = element
+                    }}
                     aria-pressed={contentFilter() === filter ? "true" : "false"}
                     onClick={() => handleFilterChange(filter)}
                   >

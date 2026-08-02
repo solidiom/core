@@ -141,6 +141,7 @@ test.describe("BETA-002: Search", () => {
 
   test("keyboard_accessible — Tab moves focus within search", async ({ page }) => {
     await page.goto("/primitives/dialog/examples/")
+    await expect(page.locator('[data-site-search-hydrated="true"]')).toBeVisible()
     await page.keyboard.press("Control+k")
     const dialog = page.getByRole("dialog", { name: "Search Solidiom" })
     await expect(dialog).toBeVisible()
