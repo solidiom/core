@@ -665,16 +665,12 @@ jobs:
   # website's G3 milestone gate, despite the numeric coincidence. See
   # docs/plans/website-tasks.md §3.1 for the two numbering schemes.
   #
-  # Advisory, because three genuinely-absent artifacts still fail it, tracked as
-  # A11Y-007: docs/at-audit-results/, docs/keyboard-audit-results.md, and recorded
-  # cross-browser results. Those need real assistive-technology and keyboard audit
-  # work, so this runs to keep the deficit visible and measured rather than
-  # invisible; it becomes blocking when A11Y-007 lands. Its §0 re-runs the phase
-  # 0/1/2 gates, hence the dependency on them here.
+  # Blocking since A11Y-007: all §1 artifacts (AT template, AT results directory,
+  # axe-scan-results, keyboard-audit-results) and §4 cross-browser results are
+  # recorded. Its §0 re-runs the phase 0/1/2 gates, hence the dependency on them.
   phase3-gate:
     needs: [phase1-gate, phase2-gate]
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v6
@@ -693,8 +689,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: npx playwright install --with-deps chromium
-      - name: Phase 3 (library beta) gate — advisory, see A11Y-007
-        run: pnpm run gate:phase3
+- name: Phase 3 (library beta) gate
+          run: pnpm run gate:phase3
 
   # VS-004's gate, the executable half of the G2 exit checklist. It existed as
   # tools/vertical-slice-gate.ts but was referenced by no script, workflow, or phase
