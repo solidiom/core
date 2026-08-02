@@ -117,15 +117,27 @@ function hasDemoEntry(demosIndex: string, name: string): boolean {
   )
 }
 
+/**
+ * Whether `name` is listed as a supported primitive by a recipe profile.
+ *
+ * Every profile declares its coverage the same way — a quoted entry in
+ * `supportedPrimitives` in `packages/recipes-<profile>/src/meta.ts` — so all three are
+ * read identically.
+ *
+ * This previously special-cased `unocss` to read `src/index.ts` instead, dating from when
+ * that file held a `profileStatus = "declared"` stub and the package shipped no recipes.
+ * RECIPE-004 replaced the stub with a real `src/meta.ts` catalogue, but the special case
+ * survived and turned into a false negative: in `index.ts` the scope names appear only
+ * inside module paths (`"./recipes/button"`), which `["']${name}["']` cannot match, so all
+ * 13 shipped scopes reported as missing UnoCSS support and the §5 primitive-completion
+ * check in `gate:phase3` failed for work that was genuinely complete.
+ */
 function hasRecipeSupport(
   root: string,
   profile: "css" | "tailwind" | "unocss",
   name: string,
 ): boolean {
-  const path =
-    profile === "unocss"
-      ? join(root, "packages/recipes-unocss/src/index.ts")
-      : join(root, `packages/recipes-${profile}/src/meta.ts`)
+  const path = join(root, `packages/recipes-${profile}/src/meta.ts`)
   const source = readText(path)
   return new RegExp(`["']${name}["']`).test(source)
 }
