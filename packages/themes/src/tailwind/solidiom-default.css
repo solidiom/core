@@ -33,4 +33,10 @@
     0 8px 24px -4px rgba(15, 23, 42, 0.08),
     0 2px 8px -4px rgba(15, 23, 42, 0.04)
   );
+  --color-fontSize-xs: var(--ui-font-size-xs, 0.75rem);
+  --color-fontSize-sm: var(--ui-font-size-sm, 0.875rem);
+  --color-fontSize-base: var(--ui-font-size-base, 0.875rem);
+  --color-fontSize-md: var(--ui-font-size-md, 1.125rem);
+  --color-fontSize-lg: var(--ui-font-size-lg, 1.25rem);
+  --color-fontSize-xl: var(--ui-font-size-xl, 1.875rem);
 }
