@@ -633,10 +633,10 @@ Complete `TPL-000` first to assign stack, required blocks, deployment target, au
 
 | Status | ID          | Theme/tool                                                                               | Size | Depends on                 |
 | ------ | ----------- | ---------------------------------------------------------------------------------------- | ---- | -------------------------- |
-| [ ]    | PRESET-001  | Ocean preset, docs, previews, outputs                                                    | M    | THEME-005, THEME-006       |
-| [ ]    | PRESET-002  | Forest preset, docs, previews, outputs                                                   | M    | THEME-005                  |
-| [ ]    | PRESET-003  | Slate preset, docs, previews, outputs                                                    | M    | THEME-005                  |
-| [ ]    | PRESET-004  | Aurora preset, docs, previews, outputs                                                   | M    | THEME-005                  |
+| [x]    | PRESET-001  | Ocean preset, docs, previews, outputs                                                    | M    | THEME-005, THEME-006       |
+| [x]    | PRESET-002  | Forest preset, docs, previews, outputs                                                   | M    | THEME-005                  |
+| [x]    | PRESET-003  | Slate preset, docs, previews, outputs                                                    | M    | THEME-005                  |
+| [x]    | PRESET-004  | Aurora preset, docs, previews, outputs                                                   | M    | THEME-005                  |
 | [ ]    | PRESET-005  | Cross-preset contrast/coverage/translation gate                                          | M    | PRESET-001..004            |
 | [ ]    | BUILDER-007 | Complete representative preview coverage for all 21 components                           | L    | BUILDER-003, COMP-001..021 |
 | [ ]    | BUILDER-008 | Publish bilingual builder docs, privacy model, limitations, and migration/version policy | M    | BUILDER-004..007           |
