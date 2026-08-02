@@ -280,9 +280,13 @@ check("apps/site passes astro check", siteCheck.ok, siteCheck.ok ? undefined : "
 console.log("\n§11 No bulk catalog bypass:")
 
 // Verify no PRIM-* tasks are marked complete in the tracker without VS-004
-const tracker = readJSON<string>("docs/plans/website-tasks.md")
-// Read as text instead
-const trackerPath = join(ROOT, "docs", "website-tasks.md")
+//
+// The path here previously omitted the `plans` segment, so `existsSync` was always
+// false, the `else` branch reported the document missing, and the actual
+// bulk-bypass assertion below never executed — this gate is wired into no
+// workflow, so nothing surfaced that. It also carried a dead `readJSON` call on a
+// markdown file, whose own trailing comment admitted it was superseded.
+const trackerPath = join(ROOT, "docs", "plans", "website-tasks.md")
 if (existsSync(trackerPath)) {
   const trackerContent = readFileSync(trackerPath, "utf8")
   // Look for completed PRIM-* rows (pattern: | [x] | PRIM-...)
@@ -293,7 +297,7 @@ if (existsSync(trackerPath)) {
     completedPrims ? `found ${completedPrims.length} completed PRIM-* rows` : undefined,
   )
 } else {
-  check("tracker document exists", false, "docs/plans/website-tasks.md not found")
+  check("tracker document exists", false, `${trackerPath} not found`)
 }
 
 // ─── Summary ────────────────────────────────────────────────────────────

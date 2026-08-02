@@ -447,6 +447,10 @@ run = "pnpm run gate:phase2"
 description = "CI job `phase0-gate`: run the Phase 0 acceptance gate (needs a prior build)"
 run = "pnpm run gate:phase0"
 
+[tasks."ci:vertical-slice-gate"]
+description = "CI job `vertical-slice-gate`: VS-004 gate, the executable half of the G2 exit checklist (needs a prior build)"
+run = "pnpm run gate:vertical-slice"
+
 [tasks."ci:beta-acceptance-report"]
 description = "CI job `beta-acceptance-report`: BETA-002 static-build acceptance report (run ci:site-build first; reads apps/site/dist, no server needed)"
 run = "pnpm run beta:acceptance:report"
@@ -535,6 +539,8 @@ run = [
   "mise run ci:site-lighthouse",
   "mise run ci:beta-acceptance-report",
   "mise run ci:beta-acceptance-e2e",
+  # needs: build, site-check
+  "mise run ci:vertical-slice-gate",
   # needs: typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e
   "mise run ci:gate-phase1",
   # needs: phase1-gate
@@ -562,6 +568,7 @@ run = [
   "mise run ci:site-visual",
   "mise run ci:beta-acceptance-report",
   "mise run ci:beta-acceptance-e2e",
+  "mise run ci:vertical-slice-gate",
   "mise run ci:gate-phase1",
   "mise run ci:gate-phase2",
   "mise run ci:gate-phase0",
