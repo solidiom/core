@@ -108,7 +108,7 @@ check(
 )
 check(
   "registry/calendar.json lists RangeCalendar component",
-  fileContains("registry/calendar.json", "RangeCalendar"),
+  fileContains("registry/calendar.json", "src/range-calendar.tsx"),
 )
 check("RangeCalendar unit tests exist", fileExists("packages/calendar/src/range-calendar.test.ts"))
 check(
