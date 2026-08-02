@@ -80,20 +80,36 @@ fi
 
 # ─── Pre-flight ──────────────────────────────────────────────────────────────
 
-# Check gh CLI is available and authenticated
+# Check gh CLI is available
 if ! command -v gh &>/dev/null; then
   echo "Error: gh CLI not found. Install with: mise install"
   exit 1
 fi
 
+# Use GITHUB_TOKEN from .env if not already authenticated
 if ! gh auth status &>/dev/null; then
-  echo "Error: Not authenticated with GitHub. Run: gh auth login"
-  exit 1
+  # Load .env if it exists at repo root
+  if [[ -f "$REPO_ROOT/.env" ]]; then
+    set -a
+    # Source only GITHUB_TOKEN, skip other secrets
+    GTOKEN="$(grep -oP '^GITHUB_TOKEN\s*=\s*\K.+' "$REPO_ROOT/.env" | head -1 || true)"
+    if [[ -n "$GTOKEN" ]]; then
+      export GITHUB_TOKEN="$GTOKEN"
+    fi
+  fi
+
+  if [[ -z "${GITHUB_TOKEN:-}" ]]; then
+    echo "Error: Not authenticated with GitHub and no GITHUB_TOKEN in .env."
+    echo "Set GITHUB_TOKEN in .env or run: gh auth login"
+    exit 1
+  fi
+
+  echo "Using GITHUB_TOKEN from .env for gh auth..."
 fi
 
 # Check the repo is accessible
 if ! gh repo view "$TARGET_REPO" &>/dev/null; then
-  echo "Error: Cannot access repo '$TARGET_REPO'. Check gh auth and repo name."
+  echo "Error: Cannot access repo '$TARGET_REPO'. Check GITHUB_TOKEN permissions and repo name."
   exit 1
 fi
 
