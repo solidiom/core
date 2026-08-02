@@ -218,7 +218,10 @@ function loadPrimitiveStatuses(): Map<string, string> {
   return new Map(index.primitives.map((p) => [p.name, p.status]))
 }
 
-function packageDocMaturityOf(primitiveName: string, primitiveStatuses: Map<string, string>): Maturity {
+function packageDocMaturityOf(
+  primitiveName: string,
+  primitiveStatuses: Map<string, string>,
+): Maturity {
   const status = primitiveStatuses.get(primitiveName)
   return status === "stable" ? "ga" : "beta"
 }

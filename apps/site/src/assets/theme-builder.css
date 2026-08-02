@@ -114,7 +114,9 @@
   flex: 1;
   padding: 1.5rem;
   overflow-y: auto;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .theme-builder__preview-container--light {
@@ -212,7 +214,9 @@
   background: var(--color-surface);
   color: var(--color-foreground-muted);
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .theme-builder__mode-btn + .theme-builder__mode-btn {

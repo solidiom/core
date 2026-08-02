@@ -190,11 +190,11 @@ La CLI conoce los siguientes primitivos principales para resoluci처n sin conexi�
 
 ## Opciones
 
-| Bandera | Descripci처n |
-|---------|-------------|
-| `--mode <package\|source>` | Modo de instalaci처n |
-| `--deliverable <tipo>` | Entregable del nivel de producto |
-| `--styling <css\|tailwind\|unocss>` | Perfil de estilo |
-| `--registry <url>` | URL del registro personalizado |
-| `--no-network` | Usar solo datos locales del registro |
-| `--json` | Salida en formato JSON |
+| Bandera                             | Descripci처n                          |
+| ----------------------------------- | ------------------------------------ |
+| `--mode <package\|source>`          | Modo de instalaci처n                  |
+| `--deliverable <tipo>`              | Entregable del nivel de producto     |
+| `--styling <css\|tailwind\|unocss>` | Perfil de estilo                     |
+| `--registry <url>`                  | URL del registro personalizado       |
+| `--no-network`                      | Usar solo datos locales del registro |
+| `--json`                            | Salida en formato JSON               |

@@ -43,31 +43,31 @@ Esto crea el directorio `.solidiom/` y el archivo `.solidiom/config.json` con lo
 
 `config.json` incluye las siguientes claves con sus valores por defecto:
 
-| Clave | Valor predeterminado | Descripción |
-|-------|---------------------|-------------|
-| `positioningAdapter` | `@solidiom/adapter-positioning-floating-ui` | Adaptador de posicionamiento |
-| `sourceDir` | `src/ui/primitives` | Directorio destino para instalaciones de código fuente |
-| `runtimeDir` | `src/ui/_runtime` | Directorio de runtime para instalaciones de código fuente |
-| `componentDir` | `src/ui/components` | Directorio destino para entregables "component" |
-| `blockDir` | `src/ui/blocks` | Directorio destino para entregables "block" |
-| `themeDir` | `src/ui/themes` | Directorio destino para entregables "theme" |
-| `defaultMode` | `package` | Modo de instalación: "package" o "source" |
+| Clave                | Valor predeterminado                        | Descripción                                               |
+| -------------------- | ------------------------------------------- | --------------------------------------------------------- |
+| `positioningAdapter` | `@solidiom/adapter-positioning-floating-ui` | Adaptador de posicionamiento                              |
+| `sourceDir`          | `src/ui/primitives`                         | Directorio destino para instalaciones de código fuente    |
+| `runtimeDir`         | `src/ui/_runtime`                           | Directorio de runtime para instalaciones de código fuente |
+| `componentDir`       | `src/ui/components`                         | Directorio destino para entregables "component"           |
+| `blockDir`           | `src/ui/blocks`                             | Directorio destino para entregables "block"               |
+| `themeDir`           | `src/ui/themes`                             | Directorio destino para entregables "theme"               |
+| `defaultMode`        | `package`                                   | Modo de instalación: "package" o "source"                 |
 
 ## Comandos principales
 
-| Comando | Descripción |
-|---------|-------------|
-| `solidiom init` | Inicializa `.solidiom/config.json` en el proyecto actual |
-| `solidiom add <primitivo>` | Agrega un primitivo en modo paquete o código fuente |
-| `solidiom create <nombre>` | Genera un nuevo proyecto desde una plantilla |
-| `solidiom plan <primitivo>` | Resuelve el grafo de capacidades y emite un plan JSON |
-| `solidiom verify <artefacto>` | Verifica firmas de artefactos según la política |
-| `solidiom diff` | Muestra cambios entre el código fuente instalado y el registro |
-| `solidiom update <primitivo>` | Actualiza primitivos instalados como código fuente |
-| `solidiom detach <primitivo>` | Desvincula un primitivo de actualizaciones upstream |
-| `solidiom doctor` | Verifica la salud de la configuración del proyecto |
-| `solidiom inspect` | Inspecciona primitivos instalados (código fuente, manifiesto, procedencia) |
-| `solidiom audit` | Genera SBOM CycloneDX 1.5 e inventario de licencias |
+| Comando                       | Descripción                                                                |
+| ----------------------------- | -------------------------------------------------------------------------- |
+| `solidiom init`               | Inicializa `.solidiom/config.json` en el proyecto actual                   |
+| `solidiom add <primitivo>`    | Agrega un primitivo en modo paquete o código fuente                        |
+| `solidiom create <nombre>`    | Genera un nuevo proyecto desde una plantilla                               |
+| `solidiom plan <primitivo>`   | Resuelve el grafo de capacidades y emite un plan JSON                      |
+| `solidiom verify <artefacto>` | Verifica firmas de artefactos según la política                            |
+| `solidiom diff`               | Muestra cambios entre el código fuente instalado y el registro             |
+| `solidiom update <primitivo>` | Actualiza primitivos instalados como código fuente                         |
+| `solidiom detach <primitivo>` | Desvincula un primitivo de actualizaciones upstream                        |
+| `solidiom doctor`             | Verifica la salud de la configuración del proyecto                         |
+| `solidiom inspect`            | Inspecciona primitivos instalados (código fuente, manifiesto, procedencia) |
+| `solidiom audit`              | Genera SBOM CycloneDX 1.5 e inventario de licencias                        |
 
 ## Modos de instalación
 
@@ -91,13 +91,13 @@ solidiom add dialog --mode source
 
 El archivo opcional `.solidiom/policy.json` controla la verificación de firmas y las restricciones de versiones:
 
-| Clave | Valor predeterminado | Descripción |
-|-------|---------------------|-------------|
-| `signatureMode` | `none` | Modo de verificación: "sigstore", "trusted-keys", "none" |
-| `allowedPrimitiveVersions` | `{}` | Restricciones de versiones permitidas por paquete |
-| `trustedIdentities` | `[]` | Identidades confiables para verificación sigstore |
-| `registrySignatureRequired` | `false` | Si el registro requiere firma |
-| `requireVerifiedSource` | `true` | Si las instalaciones de código fuente requieren verificación |
+| Clave                       | Valor predeterminado | Descripción                                                  |
+| --------------------------- | -------------------- | ------------------------------------------------------------ |
+| `signatureMode`             | `none`               | Modo de verificación: "sigstore", "trusted-keys", "none"     |
+| `allowedPrimitiveVersions`  | `{}`                 | Restricciones de versiones permitidas por paquete            |
+| `trustedIdentities`         | `[]`                 | Identidades confiables para verificación sigstore            |
+| `registrySignatureRequired` | `false`              | Si el registro requiere firma                                |
+| `requireVerifiedSource`     | `true`               | Si las instalaciones de código fuente requieren verificación |
 
 ## Salida JSON
 
@@ -111,7 +111,7 @@ solidiom doctor --json
 
 ## Variables de entorno
 
-| Variable | Descripción |
-|----------|-------------|
+| Variable                 | Descripción                                 |
+| ------------------------ | ------------------------------------------- |
 | `SOLIDIOM_REGISTRY_PATH` | Ruta personalizada al catálogo del registro |
-| `REGISTRY_VERIFY_KEY` | Clave HMAC para verificación del registro |
+| `REGISTRY_VERIFY_KEY`    | Clave HMAC para verificación del registro   |

@@ -43,16 +43,21 @@ async function installSystemThemeMediaQuery(page: Page): Promise<void> {
       },
     } as MediaQueryList
 
-    window.matchMedia = (value: string) => (value === query ? mediaQuery : {
-      matches: false,
-      media: value,
-      onchange: null,
-      addEventListener() {},
-      removeEventListener() {},
-      addListener() {},
-      removeListener() {},
-      dispatchEvent() { return true },
-    } as MediaQueryList)
+    window.matchMedia = (value: string) =>
+      value === query
+        ? mediaQuery
+        : ({
+            matches: false,
+            media: value,
+            onchange: null,
+            addEventListener() {},
+            removeEventListener() {},
+            addListener() {},
+            removeListener() {},
+            dispatchEvent() {
+              return true
+            },
+          } as MediaQueryList)
 
     Object.assign(window, {
       __getSystemThemeListenerCountForTest() {
@@ -158,9 +163,9 @@ test.describe("SITE-009: Theme toggle", () => {
   test("tracks operating-system changes only while preference is system", async ({ page }) => {
     await installSystemThemeMediaQuery(page)
     await navigateWithBootstrap(page, "system", "light")
-    await expect.poll(async () => page.evaluate(() =>
-      window.__getSystemThemeListenerCountForTest(),
-    )).toBe(1)
+    await expect
+      .poll(async () => page.evaluate(() => window.__getSystemThemeListenerCountForTest()))
+      .toBe(1)
     const html = page.locator("html")
 
     await page.evaluate(() => {

@@ -24,11 +24,7 @@ import { dirname, join } from "node:path"
 export type PackageManagerName = "npm" | "pnpm" | "yarn" | "bun"
 
 export type DetectionSource =
-  | "flag"
-  | "npm_config_user_agent"
-  | "lockfile"
-  | "packageManager-field"
-  | "default"
+  "flag" | "npm_config_user_agent" | "lockfile" | "packageManager-field" | "default"
 
 export interface DetectedPackageManager {
   name: PackageManagerName
@@ -71,7 +67,10 @@ function parseUserAgent(userAgent: string | undefined): DetectedPackageManager |
  * or after `maxDepth` levels, whichever comes first — mirrors the walk-up
  * bound already used by `findWorkspaceRoot` in commands/audit.ts.
  */
-function findLockfile(from: string, maxDepth = 10): { manager: PackageManagerName; dir: string } | null {
+function findLockfile(
+  from: string,
+  maxDepth = 10,
+): { manager: PackageManagerName; dir: string } | null {
   let dir = from
   for (let i = 0; i < maxDepth; i++) {
     for (const [file, manager] of Object.entries(LOCKFILE_TO_MANAGER)) {

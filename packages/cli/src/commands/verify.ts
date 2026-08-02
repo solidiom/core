@@ -405,7 +405,8 @@ export class VerifyCommand extends Command {
   })
   json = Option.Boolean("--json", false, { description: "Output result as JSON" })
   registry = Option.Boolean("--registry", false, {
-    description: "Verify registry/index.json and per-primitive manifest integrity instead of an artifact",
+    description:
+      "Verify registry/index.json and per-primitive manifest integrity instead of an artifact",
   })
 
   async execute(): Promise<number> {

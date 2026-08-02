@@ -32,7 +32,11 @@ import unocssButton from "../../packages/recipes-unocss/src/styles/button.css?ra
 import tailwindResolved from "./.generated/tailwind-resolved.css?raw"
 
 export type ProfileName = "recipes-css" | "recipes-tailwind" | "recipes-unocss"
-export const PROFILES: readonly ProfileName[] = ["recipes-css", "recipes-tailwind", "recipes-unocss"]
+export const PROFILES: readonly ProfileName[] = [
+  "recipes-css",
+  "recipes-tailwind",
+  "recipes-unocss",
+]
 
 /**
  * Stylesheet text per profile, for the scopes this harness currently covers.

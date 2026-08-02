@@ -49,9 +49,9 @@ describe("runAdd", () => {
   })
 
   it("rejects an unknown --package-manager override", async () => {
-    await expect(runAdd({ primitive: "dialog", cwd, packageManager: "cargo" as never })).rejects.toThrow(
-      /Unknown package manager/,
-    )
+    await expect(
+      runAdd({ primitive: "dialog", cwd, packageManager: "cargo" as never }),
+    ).rejects.toThrow(/Unknown package manager/)
   })
 
   it("does not execute the install command unless --install is set", async () => {
@@ -123,7 +123,11 @@ describe("runAdd", () => {
         },
       })
 
-      const cli = new Cli({ binaryLabel: "solidiom", binaryName: "solidiom", binaryVersion: "test" })
+      const cli = new Cli({
+        binaryLabel: "solidiom",
+        binaryName: "solidiom",
+        binaryVersion: "test",
+      })
       cli.register(AddCommand)
 
       const originalCwd = process.cwd()
@@ -262,7 +266,10 @@ describe("runAdd", () => {
           fileDigests: { "index.tsx": digest },
           lastGenerated: "2025-01-01T00:00:00.000Z",
         },
-        provenance: { repository: "https://github.com/solidiom/solidiom", directory: `packages/${primitive}` },
+        provenance: {
+          repository: "https://github.com/solidiom/solidiom",
+          directory: `packages/${primitive}`,
+        },
         lastUpdated: "2025-01-01T00:00:00.000Z",
       }
       writeFileSync(join(registryDir, `${primitive}.json`), JSON.stringify(manifest))
@@ -275,7 +282,10 @@ describe("runAdd", () => {
         $schema: "https://solidiom.dev/schemas/registry-index/v2.json",
         version: 2,
         generatedAt: "2025-01-01T00:00:00.000Z",
-        integrity: { algorithm: "sha256", entriesHash: createHash("sha256").update("").digest("hex") },
+        integrity: {
+          algorithm: "sha256",
+          entriesHash: createHash("sha256").update("").digest("hex"),
+        },
         primitives: [
           {
             name: primitive,
@@ -293,7 +303,10 @@ describe("runAdd", () => {
             stylingOutputs: [],
             themeCompatible: [],
             searchKeywords: [primitive],
-            provenance: { repository: "https://github.com/solidiom/solidiom", directory: `packages/${primitive}` },
+            provenance: {
+              repository: "https://github.com/solidiom/solidiom",
+              directory: `packages/${primitive}`,
+            },
           },
         ],
         adapters: [],
@@ -315,7 +328,12 @@ describe("runAdd", () => {
       const { installedPath } = setUpButtonWithConflict()
       const primitiveSource = join(nestedCwd, "..", "..", "packages", "button", "source")
 
-      await runAdd({ primitive: "button", cwd: nestedCwd, mode: "source", deliverable: "component" })
+      await runAdd({
+        primitive: "button",
+        cwd: nestedCwd,
+        mode: "source",
+        deliverable: "component",
+      })
 
       writeFileSync(installedPath, "export function Button() { /* user edit */ }")
 
@@ -323,7 +341,12 @@ describe("runAdd", () => {
       writeFileSync(join(primitiveSource, "index.tsx"), upstreamContent)
       writeMatchingRegistryFor(nestedCwd, "button", upstreamContent)
 
-      const result = await runAdd({ primitive: "button", cwd: nestedCwd, mode: "source", deliverable: "component" })
+      const result = await runAdd({
+        primitive: "button",
+        cwd: nestedCwd,
+        mode: "source",
+        deliverable: "component",
+      })
       expect(result.sourceResult!.conflicts?.hasBlockingConflicts).toBe(true)
       expect(result.sourceResult!.filesWritten).toEqual([])
 
@@ -342,18 +365,25 @@ describe("runAdd", () => {
         },
       })
 
-      const cli = new Cli({ binaryLabel: "solidiom", binaryName: "solidiom", binaryVersion: "test" })
+      const cli = new Cli({
+        binaryLabel: "solidiom",
+        binaryName: "solidiom",
+        binaryVersion: "test",
+      })
       cli.register(AddCommand)
 
       const originalCwd = process.cwd()
       process.chdir(nestedCwd)
       let exitCode: number
       try {
-        exitCode = await cli.run(["add", "button", "--mode", "source", "--deliverable", "component"], {
-          stdout,
-          stderr,
-          env: process.env,
-        })
+        exitCode = await cli.run(
+          ["add", "button", "--mode", "source", "--deliverable", "component"],
+          {
+            stdout,
+            stderr,
+            env: process.env,
+          },
+        )
       } finally {
         process.chdir(originalCwd)
       }
@@ -373,7 +403,12 @@ describe("runAdd", () => {
       writeFileSync(join(primitiveSource, "index.tsx"), originalContent)
       writeMatchingRegistryFor(nestedCwd, "button", originalContent)
 
-      await runAdd({ primitive: "button", cwd: nestedCwd, mode: "source", deliverable: "component" })
+      await runAdd({
+        primitive: "button",
+        cwd: nestedCwd,
+        mode: "source",
+        deliverable: "component",
+      })
 
       const installedPath = join(nestedCwd, "src/ui/components/button/index.tsx")
       writeFileSync(installedPath, "export function Button() { /* user edit */ }")
@@ -401,7 +436,12 @@ describe("runAdd", () => {
       writeFileSync(join(primitiveSource, "index.tsx"), originalContent)
       writeMatchingRegistryFor(nestedCwd, "button", originalContent)
 
-      await runAdd({ primitive: "button", cwd: nestedCwd, mode: "source", deliverable: "component" })
+      await runAdd({
+        primitive: "button",
+        cwd: nestedCwd,
+        mode: "source",
+        deliverable: "component",
+      })
 
       const installedPath = join(nestedCwd, "src/ui/components/button/index.tsx")
       const treeBefore = readFileSync(installedPath, "utf8")

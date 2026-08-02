@@ -12,13 +12,15 @@ const SECTIONS = [
   {
     area: "cli",
     title: "CLI",
-    description: "Crea proyectos, agrega primitivas, y gestiona tu espacio de trabajo de Solidiom desde la línea de comandos.",
+    description:
+      "Crea proyectos, agrega primitivas, y gestiona tu espacio de trabajo de Solidiom desde la línea de comandos.",
     href: "/es/primitives/",
   },
   {
     area: "primitives",
     title: "Primitivas",
-    description: "Bloques de construcción headless y accesibles. 3 primitivas con evidencia completa de accesibilidad; 49 más en vista previa.",
+    description:
+      "Bloques de construcción headless y accesibles. 3 primitivas con evidencia completa de accesibilidad; 49 más en vista previa.",
     href: "/es/primitives/",
   },
   {
@@ -42,17 +44,20 @@ const SECTIONS = [
   {
     area: "components",
     title: "Componentes",
-    description: "Componentes compuestos y con opinión construidos sobre primitivas. Próximamente en M4.",
+    description:
+      "Componentes compuestos y con opinión construidos sobre primitivas. Próximamente en M4.",
   },
   {
     area: "blocks",
     title: "Bloques",
-    description: "Composables a nivel de página — hero, footer, patrones de sidebar. Próximamente en M4.",
+    description:
+      "Composables a nivel de página — hero, footer, patrones de sidebar. Próximamente en M4.",
   },
   {
     area: "templates",
     title: "Plantillas",
-    description: "Plantillas completas de aplicación con enrutamiento, estado, y temas. Próximamente en M4.",
+    description:
+      "Plantillas completas de aplicación con enrutamiento, estado, y temas. Próximamente en M4.",
   },
 ]
 ---
@@ -70,7 +75,9 @@ const SECTIONS = [
   >
     <header class="home-page__header">
       <h1>Solidiom</h1>
-      <p class="home-page__tagline">Ecosistema accesible y de fuente abierta de componentes para Solid.</p>
+      <p class="home-page__tagline">
+        Ecosistema accesible y de fuente abierta de componentes para Solid.
+      </p>
       <p class="home-page__status">
         Beta pública
         <span
@@ -103,13 +110,15 @@ const SECTIONS = [
                 </div>
               </header>
               <p class="home-page__area-description">{section.description}</p>
-              {
-                available && section.href ? (
-                  <a href={section.href} class="home-page__area-link">Explorar →</a>
-                ) : (
-                  <span class="home-page__area-unavailable" aria-hidden="true">Próximamente en M4</span>
-                )
-              }
+              {available && section.href ? (
+                <a href={section.href} class="home-page__area-link">
+                  Explorar →
+                </a>
+              ) : (
+                <span class="home-page__area-unavailable" aria-hidden="true">
+                  Próximamente en M4
+                </span>
+              )}
             </article>
           )
         })

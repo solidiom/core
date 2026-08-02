@@ -29,23 +29,23 @@ This starts an interactive prompt flow to select a template, project name, and s
 
 ## Flags
 
-| Flag | Description |
-|------|-------------|
-| `--template` | Template to scaffold from |
-| `--name` | Project name (also the destination directory) |
-| `--package-manager` | Package manager: `npm`, `pnpm`, `yarn`, `bun` |
-| `--styling` | Styling profile: `css`, `tailwind`, `unocss` |
-| `--no-install` | Skip running the package manager install step |
-| `--yes` | Skip all prompts; fail if required flags are missing |
-| `--force` | Scaffold into a non-empty destination directory |
-| `--json` | Output as JSON |
+| Flag                | Description                                          |
+| ------------------- | ---------------------------------------------------- |
+| `--template`        | Template to scaffold from                            |
+| `--name`            | Project name (also the destination directory)        |
+| `--package-manager` | Package manager: `npm`, `pnpm`, `yarn`, `bun`        |
+| `--styling`         | Styling profile: `css`, `tailwind`, `unocss`         |
+| `--no-install`      | Skip running the package manager install step        |
+| `--yes`             | Skip all prompts; fail if required flags are missing |
+| `--force`           | Scaffold into a non-empty destination directory      |
+| `--json`            | Output as JSON                                       |
 
 ## Available Templates
 
-| Template | Package | Description |
-|----------|---------|-------------|
-| `vite-solid-router` | `@solidiom/template-vite-solid-router` | Client-only Solid starter with Vite and Solid Router |
-| `tanstack-start-solid` | `@solidiom/template-tanstack-start-solid` | Full-stack starter with TanStack Start and SSR |
+| Template               | Package                                   | Description                                          |
+| ---------------------- | ----------------------------------------- | ---------------------------------------------------- |
+| `vite-solid-router`    | `@solidiom/template-vite-solid-router`    | Client-only Solid starter with Vite and Solid Router |
+| `tanstack-start-solid` | `@solidiom/template-tanstack-start-solid` | Full-stack starter with TanStack Start and SSR       |
 
 ### Vite + Solid Router
 

@@ -1,11 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { SOLIDIOM_DEFAULT_THEME } from "../../../../../tools/theme-contract-definitions"
-import {
-  decodeTheme,
-  encodeTheme,
-  hashToTheme,
-  themeToHash,
-} from "./theme-share"
+import { decodeTheme, encodeTheme, hashToTheme, themeToHash } from "./theme-share"
 
 describe("encode/decode roundtrip", () => {
   it("preserves theme through encode/decode", () => {

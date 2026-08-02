@@ -109,12 +109,8 @@ describe("exportToUnoCss", () => {
 
 describe("exportTheme", () => {
   it("delegates to correct export for each format", () => {
-    expect(exportTheme(SOLIDIOM_DEFAULT_THEME, "json")).toBe(
-      exportToJson(SOLIDIOM_DEFAULT_THEME),
-    )
-    expect(exportTheme(SOLIDIOM_DEFAULT_THEME, "css")).toBe(
-      exportToCss(SOLIDIOM_DEFAULT_THEME),
-    )
+    expect(exportTheme(SOLIDIOM_DEFAULT_THEME, "json")).toBe(exportToJson(SOLIDIOM_DEFAULT_THEME))
+    expect(exportTheme(SOLIDIOM_DEFAULT_THEME, "css")).toBe(exportToCss(SOLIDIOM_DEFAULT_THEME))
     expect(exportTheme(SOLIDIOM_DEFAULT_THEME, "tailwind")).toBe(
       exportToTailwind(SOLIDIOM_DEFAULT_THEME),
     )

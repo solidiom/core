@@ -30,7 +30,8 @@ const COPY: Record<
   },
   es: {
     title: "Compartir Tema",
-    description: "Comparte tu tema mediante una URL que cualquiera puede usar para cargar la misma configuración.",
+    description:
+      "Comparte tu tema mediante una URL que cualquiera puede usar para cargar la misma configuración.",
     copyUrl: "Copiar URL",
     copied: "¡Copiado!",
     openNewTab: "Abrir en nueva pestaña",
@@ -86,7 +87,9 @@ export function BuilderShareDialog(props: BuilderShareDialogProps) {
               </Dialog.Description>
             </div>
             <Dialog.Close>
-              <span class="theme-builder__share-close" aria-hidden="true">&times;</span>
+              <span class="theme-builder__share-close" aria-hidden="true">
+                &times;
+              </span>
             </Dialog.Close>
           </div>
 
@@ -101,7 +104,9 @@ export function BuilderShareDialog(props: BuilderShareDialogProps) {
           </div>
 
           <div class="theme-builder__share-meta">
-            <span class="theme-builder__share-size">{copy().sizeLabel}: {formatBytes(shareSize())}</span>
+            <span class="theme-builder__share-size">
+              {copy().sizeLabel}: {formatBytes(shareSize())}
+            </span>
           </div>
 
           <div class="theme-builder__share-actions">

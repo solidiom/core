@@ -6,7 +6,10 @@ import { classifyConflicts, renderUnifiedDiff } from "./conflict"
 import { computeDigest, type LockFile } from "./lock"
 
 function createTmpDir(): string {
-  const dir = join(tmpdir(), `solidiom-conflict-test-${Date.now()}-${Math.random().toString(36).slice(2)}`)
+  const dir = join(
+    tmpdir(),
+    `solidiom-conflict-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+  )
   mkdirSync(dir, { recursive: true })
   return dir
 }
@@ -27,7 +30,9 @@ describe("classifyConflicts", () => {
   })
 
   it("classifies a path with no on-disk file and no lock entry as 'create'", () => {
-    const plannedFiles = new Map([["src/ui/components/button/index.tsx", "export function Button() {}"]])
+    const plannedFiles = new Map([
+      ["src/ui/components/button/index.tsx", "export function Button() {}"],
+    ])
     const report = classifyConflicts({ cwd, plannedFiles, lock: emptyLock() })
 
     expect(report.entries).toHaveLength(1)

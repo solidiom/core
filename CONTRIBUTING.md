@@ -13,6 +13,7 @@ disruptive behavior are not tolerated.
 ### Reporting bugs
 
 Open a GitHub Issue with:
+
 - A clear title and description.
 - Steps to reproduce.
 - Expected vs. actual behavior.

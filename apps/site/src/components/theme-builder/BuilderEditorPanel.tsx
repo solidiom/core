@@ -1,6 +1,14 @@
 import { createSignal, createMemo, For } from "solid-js"
-import { isTokenReference, type ThemeDefinition, type ThemeMode, type ThemeTokenValue } from "../../../../../tools/theme-contract-schema"
-import { validateThemeDefinition, type ThemeContractViolation } from "../../../../../tools/theme-contract-validate"
+import {
+  isTokenReference,
+  type ThemeDefinition,
+  type ThemeMode,
+  type ThemeTokenValue,
+} from "../../../../../tools/theme-contract-schema"
+import {
+  validateThemeDefinition,
+  type ThemeContractViolation,
+} from "../../../../../tools/theme-contract-validate"
 import { SOLIDIOM_DEFAULT_THEME } from "../../../../../tools/theme-contract-definitions"
 import type { Locale } from "../../lib/locale"
 
@@ -92,12 +100,7 @@ const TOKEN_CATEGORIES: { category: string; tokens: string[] }[] = [
   },
   {
     category: "foreground",
-    tokens: [
-      "foreground",
-      "foreground-muted",
-      "foreground-subtle",
-      "foreground-inverse",
-    ],
+    tokens: ["foreground", "foreground-muted", "foreground-subtle", "foreground-inverse"],
   },
   {
     category: "border",
@@ -155,12 +158,12 @@ export function BuilderEditorPanel(props: BuilderEditorPanelProps) {
 
   const [editMode, setEditMode] = createSignal<ThemeMode>("light")
   const [undoStack, setUndoStack] = createSignal<UndoEntry[]>([])
-  const [collapsedGroups, setCollapsedGroups] = createSignal<Set<string>>(
-    new Set(),
-  )
+  const [collapsedGroups, setCollapsedGroups] = createSignal<Set<string>>(new Set())
 
   // Focus tracking for keyboard navigation
-  const [focusedToken, setFocusedToken] = createSignal<{ mode: ThemeMode; token: string } | null>(null)
+  const [focusedToken, setFocusedToken] = createSignal<{ mode: ThemeMode; token: string } | null>(
+    null,
+  )
 
   // Validation
   const [violations, setViolations] = createSignal<Map<string, ThemeContractViolation[]>>(new Map())
@@ -181,21 +184,17 @@ export function BuilderEditorPanel(props: BuilderEditorPanelProps) {
     setViolations(grouped)
   }
 
-  const updateToken = (
-    mode: ThemeMode,
-    token: string,
-    value: ThemeTokenValue,
-  ) => {
+  const updateToken = (mode: ThemeMode, token: string, value: ThemeTokenValue) => {
     const current = props.theme().modes[mode][token]
     if (current === value) return
 
-    setUndoStack(prev => {
+    setUndoStack((prev) => {
       const entry: UndoEntry = { mode, token, oldValue: current }
       const stack = [entry, ...prev].slice(0, MAX_UNDO)
       return stack
     })
 
-    props.setTheme(prev => ({
+    props.setTheme((prev) => ({
       ...prev,
       modes: {
         ...prev.modes,
@@ -240,7 +239,7 @@ export function BuilderEditorPanel(props: BuilderEditorPanelProps) {
   const isColorToken = (token: string): boolean => COLOR_TOKENS.has(token)
 
   const toggleGroup = (category: string) => {
-    setCollapsedGroups(prev => {
+    setCollapsedGroups((prev) => {
       const next = new Set(prev)
       if (next.has(category)) next.delete(category)
       else next.add(category)
@@ -273,21 +272,16 @@ export function BuilderEditorPanel(props: BuilderEditorPanelProps) {
     const current = focusedToken()
     if (!current) return
     const list = allTokens()
-    const idx = list.findIndex(t => t.token === current.token && t.mode === current.mode)
+    const idx = list.findIndex((t) => t.token === current.token && t.mode === current.mode)
     if (idx === -1) return
     const next = direction === "next" ? Math.min(idx + 1, list.length - 1) : Math.max(idx - 1, 0)
     const target = list[next]
-    const el = document.querySelector(
-      `[data-token-focus-id="${target.token}"]`,
-    ) as HTMLElement
+    const el = document.querySelector(`[data-token-focus-id="${target.token}"]`) as HTMLElement
     el?.focus()
   }
 
   return (
-    <aside
-      class="theme-builder__panel-editor"
-      aria-label={copy().title}
-    >
+    <aside class="theme-builder__panel-editor" aria-label={copy().title}>
       {/* Mode toggle */}
       <div class="theme-builder__editor-mode-toggle">
         <span class="theme-builder__mode-label">{copy().modeLabel}</span>
@@ -319,10 +313,7 @@ export function BuilderEditorPanel(props: BuilderEditorPanelProps) {
         >
           {copy().undo}
         </button>
-        <button
-          class="theme-builder__btn-reset"
-          onClick={resetAll}
-        >
+        <button class="theme-builder__btn-reset" onClick={resetAll}>
           {copy().resetAll}
         </button>
       </div>
@@ -341,9 +332,7 @@ export function BuilderEditorPanel(props: BuilderEditorPanelProps) {
                   {collapsedGroups().has(category.category) ? "▶" : "▼"}
                 </span>
                 <span>{copy().groups[category.category]}</span>
-                <span class="theme-builder__group-count">
-                  {category.tokens.length}
-                </span>
+                <span class="theme-builder__group-count">{category.tokens.length}</span>
               </button>
               {!collapsedGroups().has(category.category) && (
                 <div class="theme-builder__token-group-body">
@@ -526,7 +515,9 @@ function TokenRow(props: TokenRowProps) {
                 <button
                   type="button"
                   class="theme-builder__color-swatch"
-                  style={{"background-color": props.getLiteralValue(currentValue) || "transparent"}}
+                  style={{
+                    "background-color": props.getLiteralValue(currentValue) || "transparent",
+                  }}
                   onClick={() => setShowColorPicker(!showColorPicker())}
                   aria-label={props.copy().colorLabel}
                 />

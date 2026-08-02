@@ -278,11 +278,7 @@ export function SiteSearch(props: SiteSearchProps) {
                 onInput={(event) => void search(event.currentTarget.value)}
               />
             </form>
-            <div
-              class="site-search__filters"
-              role="group"
-              aria-label={copy().filterLabel}
-            >
+            <div class="site-search__filters" role="group" aria-label={copy().filterLabel}>
               <For each={CONTENT_FILTERS}>
                 {(filter) => (
                   <button
@@ -314,13 +310,16 @@ export function SiteSearch(props: SiteSearchProps) {
                     <For each={results()}>
                       {(result) => (
                         <li data-site-search-result>
-                          <a href={result.url} onClick={() => {
-                            trackSearchResultSelected(
-                              inferResultType(result.url),
-                              inferResultLocale(result.url),
-                            )
-                            setOpen(false)
-                          }}>
+                          <a
+                            href={result.url}
+                            onClick={() => {
+                              trackSearchResultSelected(
+                                inferResultType(result.url),
+                                inferResultLocale(result.url),
+                              )
+                              setOpen(false)
+                            }}
+                          >
                             <span class="site-search__result-title">
                               {result.meta.title ?? result.url}
                             </span>

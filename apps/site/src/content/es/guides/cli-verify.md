@@ -2,7 +2,8 @@
 contentSchemaVersion: 1
 title: "Verificar artefactos y registro"
 description: "Cómo verificar la integridad de artefactos y del catálogo del registro con solidiom verify, incluyendo modos sigstore, trusted-keys, y verificación del registro."
-keywords: [verify, verificar, firmas, integridad, sigstore, trusted-keys, registro, seguridad, policy]
+keywords:
+  [verify, verificar, firmas, integridad, sigstore, trusted-keys, registro, seguridad, policy]
 locale: es
 maturity: beta
 order: 6
@@ -135,11 +136,11 @@ solidiom verify --registry --json
 
 ## Opciones
 
-| Bandera | Descripción |
-|---------|-------------|
-| `--no-network` | Saltar obtención de TUF; usar raíz de confianza en caché |
-| `--registry` | Verificar integridad del catálogo del registro en lugar de un artefacto |
-| `--json` | Salida en formato JSON |
+| Bandera        | Descripción                                                             |
+| -------------- | ----------------------------------------------------------------------- |
+| `--no-network` | Saltar obtención de TUF; usar raíz de confianza en caché                |
+| `--registry`   | Verificar integridad del catálogo del registro en lugar de un artefacto |
+| `--json`       | Salida en formato JSON                                                  |
 
 ## Códigos de salida
 

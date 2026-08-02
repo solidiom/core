@@ -6,9 +6,6 @@ import { resolveLocale, type Locale } from "../../../lib/locale"
 const locale = resolveLocale(Astro.url.pathname)
 ---
 
-<BaseLayout
-  title="Theme Builder"
-  description="Create, preview, and export custom Solidiom themes."
->
+<BaseLayout title="Theme Builder" description="Create, preview, and export custom Solidiom themes.">
   <ThemeBuilderShell locale={locale as Locale} client:load />
 </BaseLayout>

@@ -96,10 +96,22 @@ export class AddCommand extends Command {
       ["Dry run", "solidiom add select --dry-run"],
       ["Add a component deliverable", "solidiom add button --deliverable component"],
       ["Add with a specific styling profile", "solidiom add button --styling tailwind"],
-      ["Actually run the install with a specific package manager", "solidiom add dialog --install --package-manager yarn"],
-      ["Proceed with an unverified source install", "solidiom add dialog --mode source --allow-unverified"],
-      ["Force-overwrite locally modified files", "solidiom add button --deliverable component --force"],
-      ["Preview pending source-install changes", "solidiom add button --deliverable component --diff"],
+      [
+        "Actually run the install with a specific package manager",
+        "solidiom add dialog --install --package-manager yarn",
+      ],
+      [
+        "Proceed with an unverified source install",
+        "solidiom add dialog --mode source --allow-unverified",
+      ],
+      [
+        "Force-overwrite locally modified files",
+        "solidiom add button --deliverable component --force",
+      ],
+      [
+        "Preview pending source-install changes",
+        "solidiom add button --deliverable component --diff",
+      ],
     ],
   })
 
@@ -124,7 +136,8 @@ export class AddCommand extends Command {
     description: "Actually run the install command instead of only printing it",
   })
   allowUnverified = Option.Boolean("--allow-unverified", false, {
-    description: "Proceed with a source install even if byte-level verification against the registry manifest fails",
+    description:
+      "Proceed with a source install even if byte-level verification against the registry manifest fails",
   })
   force = Option.Boolean("--force", false, {
     description: "Overwrite files that were locally modified since their last source install",
@@ -171,7 +184,9 @@ export class AddCommand extends Command {
       if (result.installRun.stdout) this.context.stdout.write(result.installRun.stdout)
       if (result.installRun.stderr) this.context.stderr.write(result.installRun.stderr)
       if (result.installRun.code !== 0) {
-        this.context.stderr.write(pc.red(`\n✗ ${result.installCommand} exited with code ${result.installRun.code}\n`))
+        this.context.stderr.write(
+          pc.red(`\n✗ ${result.installCommand} exited with code ${result.installRun.code}\n`),
+        )
         return result.installRun.code
       }
       this.context.stdout.write(pc.green(`\n✓ ${result.installCommand}\n`))
@@ -195,7 +210,9 @@ export class AddCommand extends Command {
         }
 
         if (sr.conflicts.hasBlockingConflicts) {
-          this.context.stderr.write(pc.red("Blocked — locally modified files would be overwritten:\n"))
+          this.context.stderr.write(
+            pc.red("Blocked — locally modified files would be overwritten:\n"),
+          )
           for (const entry of sr.conflicts.entries) {
             if (entry.classification !== "modified-by-user") continue
             this.context.stderr.write(pc.red(`  ✗ ${entry.path}\n`))

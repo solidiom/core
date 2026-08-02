@@ -1,11 +1,11 @@
 import AxeBuilder from "@axe-core/playwright"
 import { expect, test } from "@playwright/test"
-import {
-  BETA_ACCEPTANCE_MATRIX,
-  type AcceptanceArea,
-} from "./matrix.js"
+import { BETA_ACCEPTANCE_MATRIX, type AcceptanceArea } from "./matrix.js"
 
-async function setTheme(page: import("@playwright/test").Page, theme: "light" | "dark"): Promise<void> {
+async function setTheme(
+  page: import("@playwright/test").Page,
+  theme: "light" | "dark",
+): Promise<void> {
   await page.evaluate((value) => {
     document.documentElement.dataset.theme = value
     document.documentElement.style.colorScheme = value

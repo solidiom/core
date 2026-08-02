@@ -181,10 +181,7 @@ function PreviewContent(props: { c: CopyShape }) {
         <div class="theme-builder__preview-form-row">
           <div class="theme-builder__preview-field">
             <Label.Root class="theme-builder__preview-label">{c().inputLabel}</Label.Root>
-            <Input.Root
-              class="theme-builder__preview-input"
-              placeholder={c().inputPlaceholder}
-            />
+            <Input.Root class="theme-builder__preview-input" placeholder={c().inputPlaceholder} />
           </div>
 
           <label class="theme-builder__preview-checkbox-label">
@@ -211,9 +208,7 @@ function PreviewContent(props: { c: CopyShape }) {
         <div class="theme-builder__preview-grid">
           <Card.Root class="theme-builder__preview-card">
             <Card.Header class="theme-builder__preview-card-header">
-              <Card.Title class="theme-builder__preview-card-title">
-                {c().cardTitle}
-              </Card.Title>
+              <Card.Title class="theme-builder__preview-card-title">{c().cardTitle}</Card.Title>
               <Card.Description class="theme-builder__preview-card-description">
                 {c().cardDescription}
               </Card.Description>
@@ -257,15 +252,9 @@ function PreviewContent(props: { c: CopyShape }) {
         <div class="theme-builder__preview-tabs">
           <Tabs.Root defaultValue="overview">
             <Tabs.List class="theme-builder__preview-tablist">
-              <Tabs.Trigger value="overview">
-                {c().tab1}
-              </Tabs.Trigger>
-              <Tabs.Trigger value="settings">
-                {c().tab2}
-              </Tabs.Trigger>
-              <Tabs.Trigger value="history">
-                {c().tab3}
-              </Tabs.Trigger>
+              <Tabs.Trigger value="overview">{c().tab1}</Tabs.Trigger>
+              <Tabs.Trigger value="settings">{c().tab2}</Tabs.Trigger>
+              <Tabs.Trigger value="history">{c().tab3}</Tabs.Trigger>
             </Tabs.List>
             <Tabs.Content value="overview" class="theme-builder__preview-tabpanel">
               {c().tabContent1}
@@ -282,9 +271,16 @@ function PreviewContent(props: { c: CopyShape }) {
 
       {/* Progress */}
       <div class="theme-builder__preview-section">
-        <Progress.Root value={60} aria-label={c().progressLabel} class="theme-builder__preview-progress">
+        <Progress.Root
+          value={60}
+          aria-label={c().progressLabel}
+          class="theme-builder__preview-progress"
+        >
           <div class="theme-builder__preview-progress-track">
-            <Progress.Indicator class="theme-builder__preview-progress-fill" style={{ width: "60%" }} />
+            <Progress.Indicator
+              class="theme-builder__preview-progress-fill"
+              style={{ width: "60%" }}
+            />
           </div>
           <span class="theme-builder__preview-progress-label">60%</span>
         </Progress.Root>
@@ -372,18 +368,8 @@ export function BuilderPreviewPanel(props: BuilderPreviewPanelProps) {
         <span>{copy().title}</span>
       </div>
       <div class="theme-builder__preview-dual">
-        <PreviewPane
-          mode="light"
-          label={copy().lightLabel}
-          cssVars={lightVars}
-          copy={copy()}
-        />
-        <PreviewPane
-          mode="dark"
-          label={copy().darkLabel}
-          cssVars={darkVars}
-          copy={copy()}
-        />
+        <PreviewPane mode="light" label={copy().lightLabel} cssVars={lightVars} copy={copy()} />
+        <PreviewPane mode="dark" label={copy().darkLabel} cssVars={darkVars} copy={copy()} />
       </div>
     </section>
   )

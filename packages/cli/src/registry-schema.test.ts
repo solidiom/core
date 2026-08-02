@@ -30,9 +30,7 @@ describe("registryManifestSchema round-trip (CLI-002)", () => {
   })
 
   it("validates all 52 committed primitive manifests", () => {
-    const files = readdirSync(REGISTRY_DIR).filter(
-      (f) => f.endsWith(".json") && f !== "index.json",
-    )
+    const files = readdirSync(REGISTRY_DIR).filter((f) => f.endsWith(".json") && f !== "index.json")
     expect(files.length).toBeGreaterThan(0)
 
     for (const file of files) {

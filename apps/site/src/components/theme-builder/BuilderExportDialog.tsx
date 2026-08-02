@@ -116,13 +116,19 @@ export function BuilderExportDialog(props: BuilderExportDialogProps) {
               </Dialog.Description>
             </div>
             <Dialog.Close>
-              <span class="theme-builder__export-close" aria-hidden="true">&times;</span>
+              <span class="theme-builder__export-close" aria-hidden="true">
+                &times;
+              </span>
             </Dialog.Close>
           </div>
 
           <div class="theme-builder__export-format">
             <span class="theme-builder__export-format-label">{copy().formatLabel}</span>
-            <div class="theme-builder__export-format-options" role="radiogroup" aria-label={copy().formatLabel}>
+            <div
+              class="theme-builder__export-format-options"
+              role="radiogroup"
+              aria-label={copy().formatLabel}
+            >
               {FORMAT_OPTIONS.map((opt) => {
                 const label = copy()[opt.key]
                 const isActive = format() === opt.value

@@ -63,7 +63,11 @@ export function install(pm: DetectedPackageManager): PackageManagerCommand {
 }
 
 /** `<pm> exec <bin> [args...]` — run a binary already present in node_modules/.bin. */
-export function exec(pm: DetectedPackageManager, bin: string, args: string[] = []): PackageManagerCommand {
+export function exec(
+  pm: DetectedPackageManager,
+  bin: string,
+  args: string[] = [],
+): PackageManagerCommand {
   switch (pm.name) {
     case "npm":
       return { bin: "npm", args: ["exec", "--", bin, ...args] }
@@ -80,7 +84,11 @@ export function exec(pm: DetectedPackageManager, bin: string, args: string[] = [
 }
 
 /** `<pm> run <script> [args...]` — run a package.json script. */
-export function run(pm: DetectedPackageManager, script: string, args: string[] = []): PackageManagerCommand {
+export function run(
+  pm: DetectedPackageManager,
+  script: string,
+  args: string[] = [],
+): PackageManagerCommand {
   switch (pm.name) {
     case "npm":
       return { bin: "npm", args: ["run", script, ...(args.length > 0 ? ["--", ...args] : [])] }

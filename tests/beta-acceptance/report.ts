@@ -14,10 +14,7 @@
 
 import { existsSync, readFileSync, readdirSync } from "node:fs"
 import { join, relative } from "node:path"
-import {
-  EXPECTED_STATIC_ROUTES,
-  LOCALE_PAIRS,
-} from "./matrix.js"
+import { EXPECTED_STATIC_ROUTES, LOCALE_PAIRS } from "./matrix.js"
 
 const SITE_ROOT = join(import.meta.dirname, "../../apps/site")
 const DIST_ROOT = join(SITE_ROOT, "dist")
@@ -98,7 +95,8 @@ function hasHreflang(route: string): { passed: boolean; detail?: string } {
   if (!existsSync(path)) return { passed: false, detail: "Route file does not exist" }
   const html = readFileSync(path, "utf8")
 
-  const hasHreflang = /<link[^>]*\brel="alternate"[^>]*\bhreflang=/i.test(html) ||
+  const hasHreflang =
+    /<link[^>]*\brel="alternate"[^>]*\bhreflang=/i.test(html) ||
     /<link[^>]*\bhreflang=[^>]*\brel="alternate"/i.test(html)
   if (!hasHreflang) return { passed: false, detail: "No hreflang alternate links found" }
 
@@ -106,7 +104,8 @@ function hasHreflang(route: string): { passed: boolean; detail?: string } {
     const isSpanish = route.startsWith("/es/")
     const expectedAlt = isSpanish ? 'hreflang="en"' : 'hreflang="es"'
     const hasAlt = html.includes(expectedAlt)
-    if (!hasAlt) return { passed: false, detail: `Missing alternate hreflang for ${isSpanish ? "en" : "es"}` }
+    if (!hasAlt)
+      return { passed: false, detail: `Missing alternate hreflang for ${isSpanish ? "en" : "es"}` }
   }
   return { passed: true }
 }
@@ -120,10 +119,7 @@ function hasCanonical(route: string): { passed: boolean; detail?: string } {
   return { passed: true }
 }
 
-function runRouteChecks(
-  route: string,
-  checkIds: string[],
-): CheckResult[] {
+function runRouteChecks(route: string, checkIds: string[]): CheckResult[] {
   const checkers: Record<string, () => { passed: boolean; detail?: string }> = {
     route_exists: () => routeExists(route),
     renders_html: () => renderHtml(route),
@@ -225,7 +221,9 @@ function main(): void {
         route: `${pair.en} <-> ${pair.es}`,
         check: "locale_parity",
         passed: false,
-        detail: !enExists ? `English route missing: ${pair.en}` : `Spanish route missing: ${pair.es}`,
+        detail: !enExists
+          ? `English route missing: ${pair.en}`
+          : `Spanish route missing: ${pair.es}`,
       })
     } else {
       localeChecks.push({
@@ -236,8 +234,18 @@ function main(): void {
     }
 
     // Check HTML structure on both routes
-    const enChecks = runRouteChecks(pair.en, ["renders_html", "has_locale_attr", "has_hreflang", "has_canonical"])
-    const esChecks = runRouteChecks(pair.es, ["renders_html", "has_locale_attr", "has_hreflang", "has_canonical"])
+    const enChecks = runRouteChecks(pair.en, [
+      "renders_html",
+      "has_locale_attr",
+      "has_hreflang",
+      "has_canonical",
+    ])
+    const esChecks = runRouteChecks(pair.es, [
+      "renders_html",
+      "has_locale_attr",
+      "has_hreflang",
+      "has_canonical",
+    ])
     localeChecks.push(...enChecks, ...esChecks)
   }
 

@@ -143,17 +143,17 @@ solidiom add dialog --json
 
 ## Opciones
 
-| Bandera | Descripción |
-|---------|-------------|
-| `--mode <package\|source>` | Modo de instalación |
-| `--deliverable <tipo>` | Entregable del nivel de producto (primitive, component, block, template, theme) |
-| `--styling <css\|tailwind\|unocss>` | Perfil de estilo |
-| `--package-manager <npm\|pnpm\|yarn\|bun>` | Gestor de paquetes (detectado automáticamente si se omite) |
-| `--install` | Ejecutar la instalación automáticamente en lugar de solo imprimir el comando |
-| `--allow-unverified` | Proceder con instalación de código fuente sin verificación |
-| `--force` | Sobrescribir archivos modificados localmente |
-| `--diff` | Mostrar diff unificado de cambios pendientes sin escribir |
-| `--dry-run` | Mostrar acciones sin escribir archivos |
-| `--registry <url>` | URL del registro personalizado |
-| `--no-network` | Usar solo datos locales del registro |
-| `--json` | Salida en formato JSON |
+| Bandera                                    | Descripción                                                                     |
+| ------------------------------------------ | ------------------------------------------------------------------------------- |
+| `--mode <package\|source>`                 | Modo de instalación                                                             |
+| `--deliverable <tipo>`                     | Entregable del nivel de producto (primitive, component, block, template, theme) |
+| `--styling <css\|tailwind\|unocss>`        | Perfil de estilo                                                                |
+| `--package-manager <npm\|pnpm\|yarn\|bun>` | Gestor de paquetes (detectado automáticamente si se omite)                      |
+| `--install`                                | Ejecutar la instalación automáticamente en lugar de solo imprimir el comando    |
+| `--allow-unverified`                       | Proceder con instalación de código fuente sin verificación                      |
+| `--force`                                  | Sobrescribir archivos modificados localmente                                    |
+| `--diff`                                   | Mostrar diff unificado de cambios pendientes sin escribir                       |
+| `--dry-run`                                | Mostrar acciones sin escribir archivos                                          |
+| `--registry <url>`                         | URL del registro personalizado                                                  |
+| `--no-network`                             | Usar solo datos locales del registro                                            |
+| `--json`                                   | Salida en formato JSON                                                          |
