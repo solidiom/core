@@ -507,6 +507,86 @@ jobs:
           path: artifacts/smoke-create-${{ matrix.manager }}.json
           retention-days: 7
 
+  # ─── BETA-002 / G3: public-beta acceptance evidence ────────────────────────────
+  #
+  # BETA-002's acceptance matrix. Until now these existed only as package.json
+  # scripts that no workflow invoked, so nothing ever re-checked G3's central
+  # claim — which is how the M3 rollup in docs/plans/website-tasks.md drifted out
+  # of sync with the repository for several commits while every task row read [x].
+  #
+  # Wired by verified state rather than uniformly:
+  #
+  #   * beta-acceptance-report is blocking. It passes 60/60 and reads
+  #     apps/site/dist directly, so it needs no preview server.
+  #   * beta-acceptance-e2e is advisory, mirroring site-visual/site-lighthouse's
+  #     continue-on-error. 13 of its checks fail on a real, tracked defect
+  #     (A11Y-008: --sol-secondary is 3.678:1 against white, under the 4.5:1
+  #     WCAG AA floor, and it is the site's link colour, so every audited route
+  #     reports color-contrast). Advisory keeps that failure visible and
+  #     attributable rather than unrun; it becomes blocking when A11Y-008 lands.
+
+  beta-acceptance-report:
+    needs: site-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: apps/site/dist
+      - name: BETA-002 — static-build acceptance report
+        run: pnpm run beta:acceptance:report
+
+  beta-acceptance-e2e:
+    needs: site-build
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: apps/site/dist
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - name: BETA-002 — cross-browser acceptance matrix (advisory, see A11Y-008)
+        env:
+          PLAYWRIGHT_USE_EXISTING_BUILD: "1"
+        run: pnpm run beta:acceptance:e2e
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: beta-acceptance-e2e-results
+          path: test-results/beta-acceptance
+          retention-days: 7
+
   # ─── Gate Jobs ─────────────────────────────────────────────────────────────────
 
   phase1-gate:
@@ -579,3 +659,39 @@ jobs:
           name: phase0-gate-output
           path: docs/phase0-gate-result.txt
           retention-days: 30
+
+  # tools/phase3-gate.ts gates the *library's* beta release (Solid 2 beta
+  # compatibility, compile-time transforms, prerelease metadata) — it is NOT the
+  # website's G3 milestone gate, despite the numeric coincidence. See
+  # docs/plans/website-tasks.md §3.1 for the two numbering schemes.
+  #
+  # Advisory, because three genuinely-absent artifacts still fail it, tracked as
+  # A11Y-007: docs/at-audit-results/, docs/keyboard-audit-results.md, and recorded
+  # cross-browser results. Those need real assistive-technology and keyboard audit
+  # work, so this runs to keep the deficit visible and measured rather than
+  # invisible; it becomes blocking when A11Y-007 lands. Its §0 re-runs the phase
+  # 0/1/2 gates, hence the dependency on them here.
+  phase3-gate:
+    needs: [phase1-gate, phase2-gate]
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: npx playwright install --with-deps chromium
+      - name: Phase 3 (library beta) gate — advisory, see A11Y-007
+        run: pnpm run gate:phase3
