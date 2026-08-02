@@ -56,6 +56,7 @@
     "gate:phase1": "tsx tools/phase1-gate.ts",
     "gate:phase2": "tsx tools/phase2-gate.ts",
     "gate:phase3": "tsx tools/phase3-gate.ts",
+    "gate:vertical-slice": "tsx tools/vertical-slice-gate.ts",
     "gate:phase3-preflight": "tsx tools/phase3-preflight.ts",
     "api:generate": "tsx tools/generate-api-docs.ts",
     "api:coverage-gate": "tsx tools/api-coverage-gate.ts",
