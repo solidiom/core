@@ -173,17 +173,6 @@ export function SiteSearch(props: SiteSearchProps) {
     onCleanup(() => window.removeEventListener("keydown", handleShortcut))
   }
 
-  function buildFilters(): Record<string, string[]> {
-    const filters: Record<string, string[]> = {
-      locale: [props.locale],
-    }
-    const selected = contentFilter()
-    if (selected !== "all") {
-      filters.content_type = [selected]
-    }
-    return filters
-  }
-
   async function search(nextQuery: string): Promise<void> {
     const currentRequest = ++requestId
     setQuery(nextQuery)
@@ -197,10 +186,18 @@ export function SiteSearch(props: SiteSearchProps) {
     setStatus("loading")
     try {
       const pagefind = await loadPagefind()
-      const searchResult = await pagefind.search(nextQuery, { filters: buildFilters() })
+      const searchResult = await pagefind.search(nextQuery)
       const data = await Promise.all(searchResult.results.map((result) => result.data()))
+      const filtered = data.filter((item) => {
+        const path = item.url.split(/[?#]/)[0] ?? ""
+        if (props.locale === "es" && !path.startsWith("/es/")) return false
+        if (props.locale === "en" && path.startsWith("/es/")) return false
+        const selected = contentFilter()
+        if (selected === "all") return true
+        return path.includes(`/${selected === "primitive" ? "primitives" : selected === "guide" ? "guides" : selected === "api" ? "api" : selected === "example" ? "examples" : "blog"}/`)
+      })
       if (currentRequest !== requestId) return
-      setResults(data)
+      setResults(filtered)
       setStatus("ready")
     } catch {
       if (currentRequest !== requestId) return

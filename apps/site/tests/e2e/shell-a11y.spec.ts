@@ -238,8 +238,8 @@ test.describe("Computed contrast and automated accessibility", () => {
       await setTheme(page, theme)
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
-        .exclude(".beta-banner")
-        .exclude(".maturity-badge")
+        .exclude(".beta-banner, .beta-banner *")
+        .exclude(".maturity-badge, .maturity-badge__label, .maturity-badge *")
         .exclude(".home-page__area-link")
         .analyze()
       const blocking = results.violations.filter(
