@@ -16,7 +16,7 @@ name: Visual Baselines
 #   5. Commit.
 #
 # Contributors who do have Docker can skip this and run
-# `pnpm run visual:update:docker`, which uses the identical image.
+# `pnpm run visual:update:container`, which uses the identical image.
 
 on:
   workflow_dispatch:

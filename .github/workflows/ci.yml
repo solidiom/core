@@ -362,7 +362,7 @@ jobs:
   # against a fixed environment. The image tag MUST track the @playwright/test
   # version in package.json, or the bundled browser build will not match.
   #
-  # Regenerate baselines with `pnpm run visual:update:docker` locally, or by
+  # Regenerate baselines with `pnpm run visual:update:container` locally, or by
   # dispatching .github/workflows/visual-baselines.yml if Docker is unavailable.
   site-visual:
     needs: site-build
