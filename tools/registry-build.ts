@@ -703,6 +703,113 @@ function getDeterministicTimestamp(): string {
   return new Date().toISOString()
 }
 
+// ─── Timestamp Stability (BUILD-001) ─────────────────────────────────────────
+//
+// `getDeterministicTimestamp()` is deterministic for a given HEAD, but the
+// registry is a committed artifact, which makes a HEAD-derived stamp
+// self-referentially unstable: the commit that lands a regenerated manifest
+// becomes the new HEAD, so the next build stamps a later date and BUILD-001's
+// `git diff --exit-code` reports the artifact as stale. Regenerating and
+// committing can never reach a fixed point.
+//
+// The stamps are not inputs to `computeFilesHash` or `computeEntriesHash`, so
+// they carry no integrity meaning. Preserving the committed value whenever
+// everything else in the artifact is byte-identical makes each file a pure
+// function of its inputs — the stamp then moves exactly when real content
+// moves, and the staleness comparison converges after one regeneration.
+
+/** Serialize with sorted keys so comparison is insensitive to construction order. */
+function canonicalJson(value: unknown): string {
+  return JSON.stringify(value, (_key, val: unknown) =>
+    val && typeof val === "object" && !Array.isArray(val)
+      ? Object.fromEntries(
+          Object.entries(val as Record<string, unknown>).sort(([a], [b]) => a.localeCompare(b)),
+        )
+      : val,
+  )
+}
+
+function readCommittedJson<T>(fileName: string): T | undefined {
+  const path = join(REGISTRY_DIR, fileName)
+  if (!existsSync(path)) return undefined
+  try {
+    return JSON.parse(readFileSync(path, "utf8")) as T
+  } catch {
+    return undefined
+  }
+}
+
+/** Manifest body with the two generation stamps removed. */
+function manifestWithoutStamps(manifest: PrimitiveManifestV2): unknown {
+  const { lastUpdated: _lastUpdated, integrity, ...rest } = manifest
+  const { lastGenerated: _lastGenerated, ...integrityRest } = integrity
+  return { ...rest, integrity: integrityRest }
+}
+
+/**
+ * Reuse the committed manifest's stamps when nothing else about the manifest
+ * changed. Returns the candidate untouched when the file is absent, unreadable,
+ * substantively different, or missing usable stamps.
+ */
+function withStableManifestStamps(candidate: PrimitiveManifestV2): PrimitiveManifestV2 {
+  const committed = readCommittedJson<PrimitiveManifestV2>(`${candidate.name}.json`)
+  if (!committed) return candidate
+  if (typeof committed.lastUpdated !== "string") return candidate
+  if (typeof committed.integrity?.lastGenerated !== "string") return candidate
+  if (
+    canonicalJson(manifestWithoutStamps(candidate)) !==
+    canonicalJson(manifestWithoutStamps(committed))
+  ) {
+    return candidate
+  }
+  return {
+    ...candidate,
+    integrity: { ...candidate.integrity, lastGenerated: committed.integrity.lastGenerated },
+    lastUpdated: committed.lastUpdated,
+  }
+}
+
+/**
+ * Reuse the committed index stamp when nothing else about the index changed.
+ *
+ * Signing fields are excluded from the comparison: they are injected after this
+ * runs, so the committed file may carry them while the candidate does not.
+ */
+function withStableIndexStamp(candidate: IndexManifestV2): IndexManifestV2 {
+  const committed = readCommittedJson<IndexManifestV2>("index.json")
+  if (!committed || typeof committed.generatedAt !== "string") return candidate
+  if (
+    canonicalJson(indexWithoutStamps(candidate)) !== canonicalJson(indexWithoutStamps(committed))
+  ) {
+    return candidate
+  }
+  return { ...candidate, generatedAt: committed.generatedAt }
+}
+
+/** Index body with the generation stamp and all signing fields removed. */
+function indexWithoutStamps(index: IndexManifestV2): unknown {
+  const { generatedAt: _generatedAt, integrity, ...rest } = index
+  const {
+    signature: _signature,
+    signedAt: _signedAt,
+    signatureKeyId: _signatureKeyId,
+    ...integrityRest
+  } = integrity as Record<string, unknown>
+  return { ...rest, integrity: integrityRest }
+}
+
+/** The signature already recorded in the committed index, if any. */
+function committedIndexSignature(): { signature?: string; signedAt?: string } {
+  const committed = readCommittedJson<IndexManifestV2>("index.json")
+  const integrity = committed?.integrity as Record<string, unknown> | undefined
+  return {
+    signature:
+      typeof integrity?.["signature"] === "string" ? (integrity["signature"] as string) : undefined,
+    signedAt:
+      typeof integrity?.["signedAt"] === "string" ? (integrity["signedAt"] as string) : undefined,
+  }
+}
+
 // ─── Main Build Logic ────────────────────────────────────────────────────────
 
 function buildRegistry(): void {
@@ -889,7 +996,8 @@ function buildRegistry(): void {
       lastUpdated: now,
     }
 
-    v2Manifests.push(v2)
+    // BUILD-001: keep the committed stamps when nothing else changed.
+    v2Manifests.push(withStableManifestStamps(v2))
   }
 
   for (const manifest of v2Manifests) {
@@ -947,20 +1055,31 @@ function buildRegistry(): void {
       .sort((a, b) => a.name.localeCompare(b.name)),
   }
 
+  // BUILD-001: keep the committed stamp when nothing else changed, before
+  // signing, so the signature is computed over stabilized content.
+  const stableIndex = withStableIndexStamp(indexV2)
+
   // REG-005: Sign the index if REGISTRY_SIGN_KEY is set
   const signKey = process.env.REGISTRY_SIGN_KEY
   if (signKey) {
-    const indexContent = JSON.stringify(indexV2, null, 2)
+    const indexContent = JSON.stringify(stableIndex, null, 2)
     const signature = createHmac("sha256", signKey).update(indexContent).digest("hex")
-    indexV2.integrity.signature = signature
-    indexV2.integrity.signedAt = now
-    indexV2.integrity.signatureKeyId = createHash("sha256")
+    const committedSignature = committedIndexSignature()
+    stableIndex.integrity.signature = signature
+    // The signature covers stabilized content, so an unchanged index yields an
+    // unchanged signature — in which case keep the committed signing stamp too,
+    // or BUILD-001 sees churn for the same reason it saw it in `generatedAt`.
+    stableIndex.integrity.signedAt =
+      committedSignature.signature === signature && committedSignature.signedAt
+        ? committedSignature.signedAt
+        : now
+    stableIndex.integrity.signatureKeyId = createHash("sha256")
       .update(signKey)
       .digest("hex")
       .slice(0, 16)
   }
 
-  writeFileSync(join(REGISTRY_DIR, "index.json"), JSON.stringify(indexV2, null, 2) + "\n")
+  writeFileSync(join(REGISTRY_DIR, "index.json"), JSON.stringify(stableIndex, null, 2) + "\n")
 
   // Summary
   console.log(`registry-build: generated ${primitives.length} primitive manifests`)

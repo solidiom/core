@@ -6,6 +6,13 @@ import { defineConfig, devices } from "@playwright/test"
  * Uses chromium-only for pixel-consistent baselines.
  * Snapshots are stored in tests/visual/__screenshots__/.
  * Set UPDATE_SNAPSHOTS=1 to update baseline images.
+ *
+ * TEST-005: baselines are environment-sensitive — font rasterisation differs
+ * between macOS and Linux, so the same commit renders differently per platform.
+ * Capture and verify them only through the pinned Playwright image, via
+ * `pnpm run visual:docker` / `pnpm run visual:update:docker`, or by dispatching
+ * .github/workflows/visual-baselines.yml. Running `test:visual:update` directly
+ * on a non-Linux host will produce baselines that CI cannot reproduce.
  */
 export default defineConfig({
   testDir: "./tests/visual",
