@@ -13,7 +13,7 @@
   }
 
   [data-scope="menu"][data-part="item"] {
-    @apply flex items-center py-1.5 px-2 rounded-sm text-sm cursor-pointer outline-none;
+    @apply flex items-center py-1.5 px-2 rounded-sm text-[0.875rem] cursor-pointer outline-none;
   }
 
   [data-scope="menu"][data-part="item"][data-highlighted] {
