@@ -1,6 +1,6 @@
 # Recipe Contract Audit
 
-Generated: 2026-08-03T01:38:35.984Z
+Generated: 2026-08-03T01:50:17.849Z
 
 ## Summary
 

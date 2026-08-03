@@ -441,7 +441,17 @@ check(
   "Umbrella has implementation lines or surface mismatch — run: pnpm run audit:umbrella-purity",
 )
 
-// ─── 11. CLI command surface (CLI-010) ──────────────────────────────────
+// ─── 11. PRESET-005: Cross-preset contrast, coverage, translation gate ──
+console.log("\n§11 PRESET-005 cross-preset gate:")
+check("audit-preset-themes.ts exists", fileExists("tools/audit-preset-themes.ts"))
+const presetAuditResult = run("pnpm exec tsx tools/audit-preset-themes.ts")
+check(
+  "preset contrast, coverage, and translation gate passes",
+  presetAuditResult.ok,
+  "A preset fails contrast, missing tokens, or incomplete translation — run: pnpm run audit:preset-themes",
+)
+
+// ─── 12. CLI command surface (CLI-010) ──────────────────────────────────
 console.log("\n§11 CLI command surface:")
 check("create.ts exists", fileExists("packages/cli/src/commands/create.ts"))
 check("diff.ts exists", fileExists("packages/cli/src/commands/diff.ts"))

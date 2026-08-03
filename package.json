@@ -52,6 +52,7 @@
     "theme:emit:unocss": "tsx tools/theme-emit-unocss.ts",
     "theme:emit:unocss:check": "tsx tools/theme-emit-unocss.ts --check",
     "audit:theme-parity": "tsx tools/audit-theme-parity.ts",
+    "audit:preset-themes": "tsx tools/audit-preset-themes.ts",
     "audit:umbrella-purity": "tsx tools/audit-umbrella-purity.ts",
     "gate:phase1": "tsx tools/phase1-gate.ts",
     "gate:phase2": "tsx tools/phase2-gate.ts",
