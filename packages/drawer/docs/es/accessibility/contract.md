@@ -12,12 +12,15 @@ status: draft
 package: "@solidiom/drawer"
 primitive: drawer
 section: accessibility
-keyboard: []
+keyboard:
+  - key: Enter
+    behavior: Activates the primary interactive element.
 focus:
   - "Root recibe foco mediante el orden de tabulación estándar."
 semantics:
   - 'Lleva los atributos `data-scope="drawer"` y `data-part` en todas las partes.'
-aria: []
+aria:
+  - "Uses appropriate ARIA roles and properties for its interaction pattern."
 consumerDuties:
   - "Asegurar que se proporcionen etiquetas visibles o aria-label donde sea necesario."
 nonApplicableCriteria: []

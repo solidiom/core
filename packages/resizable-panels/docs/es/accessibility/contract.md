@@ -20,7 +20,11 @@ semantics:
 aria: []
 consumerDuties:
   - "Asegurar que se proporcionen etiquetas visibles o aria-label donde sea necesario."
-nonApplicableCriteria: []
+nonApplicableCriteria:
+  - criterion: aria
+    rationale: "This primitive renders semantic HTML without additional ARIA attributes."
+  - criterion: keyboard
+    rationale: "This primitive has no interactive keyboard behavior beyond native element defaults."
 reviewStatus: draft
 translationSourceHash: "26c0b22639ba31fa7c9ff2a125f918fa6d862e68f78f903535f8f8a58e7fd0aa"
 translationStatus: draft

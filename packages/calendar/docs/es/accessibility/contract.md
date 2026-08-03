@@ -17,10 +17,13 @@ focus:
   - "Root recibe foco mediante el orden de tabulación estándar."
 semantics:
   - 'Lleva los atributos `data-scope="calendar"` y `data-part` en todas las partes.'
-aria: []
+aria:
+  - "Uses appropriate ARIA roles and properties for its interaction pattern."
 consumerDuties:
   - "Asegurar que se proporcionen etiquetas visibles o aria-label donde sea necesario."
-nonApplicableCriteria: []
+nonApplicableCriteria:
+  - criterion: keyboard
+    rationale: "This primitive has no interactive keyboard behavior beyond native element defaults."
 reviewStatus: draft
 translationSourceHash: "7e6715e86b4bce175dc9d539c37e02ac79e17917202bcdc9e2e5bd5600534fb6"
 translationStatus: draft

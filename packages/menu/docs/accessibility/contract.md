@@ -29,7 +29,8 @@ focus:
   - "Root receives focus via standard tab order."
 semantics:
   - 'Carries `data-scope="menu"` and `data-part` attributes on all parts.'
-aria: []
+aria:
+  - "Uses appropriate ARIA roles and properties for its interaction pattern."
 consumerDuties:
   - "Ensure visible labels or aria-label are provided where required."
 nonApplicableCriteria: []
