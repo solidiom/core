@@ -38,6 +38,7 @@ export default defineConfig({
     include: ["tests/a11y/**/*.browser.{test,spec}.{ts,tsx}"],
     browser: {
       enabled: true,
+      headless: true,
       provider: playwright(),
       instances: [{ browser: "chromium" }],
     },
