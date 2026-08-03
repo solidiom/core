@@ -71,8 +71,8 @@
     "assert:no-unverified": "tsx tools/assert-no-unverified.ts",
     "beta:acceptance:report": "tsx tests/beta-acceptance/report.ts",
     "beta:acceptance:e2e": "playwright test --config tests/beta-acceptance/playwright.config.ts",
-    "visual:docker": "bash tools/visual-docker.sh",
-    "visual:update:docker": "bash tools/visual-docker.sh --update"
+    "visual:container": "bash tools/visual-container.sh",
+    "visual:update:container": "bash tools/visual-container.sh --update"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",
