@@ -119,6 +119,12 @@ jobs:
         env:
           REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
         run: pnpm run registry:build
+      - name: BUILD-001 — verify no generated artifacts are stale
+        run: |
+          git diff --exit-code -- registry/ 'packages/*/source/' 'packages/*/docs/accessibility/evidence.json' || {
+            echo "::error::Generated artifacts are stale. Run 'pnpm build && pnpm run report:a11y-evidence && pnpm run registry:build' and commit the changes."
+            exit 1
+          }
 
   test-node:
     needs: build

@@ -18,9 +18,9 @@ export { installSource, type SourceInstallOptions, type SourceInstallResult, } f
 export { readLock, writeLock, computeDigest, type LockEntry, type LockFile, } from "./source-install/lock";
 export { verifySourceIntegrity, type SourceVerifyResult, type VerifySourceIntegrityOptions, } from "./source-install/verify-source";
 export { rewriteImportsAst, type RewriteImportsOptions, type RewriteImportsResult, } from "./source-install/ast-transform";
-export { resolveDestinationRoot, UnsupportedDeliverableError, } from "./source-install/destinations";
+export { resolveDestinationRoot, UnsupportedDeliverableError } from "./source-install/destinations";
 export { classifyConflicts, renderUnifiedDiff, type ConflictReport, type ConflictEntry, type ConflictClassification, type ClassifyConflictsOptions, } from "./source-install/conflict";
-export { createRollbackJournal, type RollbackJournal, } from "./source-install/rollback";
+export { createRollbackJournal, type RollbackJournal } from "./source-install/rollback";
 export { planThemeInstall, ThemeNotCompatibleError, type ThemeInstallPlan, type ThemeInstallAction, type PlanThemeInstallOptions, } from "./source-install/theme-install";
 export { ConfigSchema, PolicySchema, type Config, type Policy } from "./schemas";
 export { readRegistryIndex, readRegistryManifest, RegistrySchemaError, DELIVERABLES, STYLING_PROFILES, SUPPORTED_REGISTRY_INDEX_VERSION, SUPPORTED_MANIFEST_SCHEMA_URL, SUPPORTED_INDEX_SCHEMA_URL, type Deliverable, type StylingProfile, type RegistryIndex, type RegistryManifest, type RegistryPrimitiveSummary, } from "./registry-schema";
