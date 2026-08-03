@@ -7,7 +7,7 @@ locale: es
 maturity: beta
 order: 3
 audience: intermediate
-translationSourceHash: "5573c4e633971e8ef485b9d59b447d7ffa3f5ba5b0746c385251c5803a323715"
+translationSourceHash: "3bf1065cdc03b61940aa3b5d27a5528b4937be8bfdce395dc1771c81d28ee8f5"
 translationStatus: draft
 ---
 
@@ -17,7 +17,7 @@ El comando `solidiom add` es la principal forma de incorporar primitivos de Soli
 
 ## Modo paquete
 
-Por defecto, `solidiom add` opera en modo `package`. Resuelve las dependencias del primitivo y genera el comando de instalación del gestor de paquetes:
+Por defecto, `solidiom add` opera en modo `package`. Resuelve las dependencias del primitivo y genera el comando de instalación del gestor de paquetes (`npm install`, `pnpm add`, o `yarn add`):
 
 ```bash
 solidiom add dialog
@@ -30,7 +30,7 @@ Para ejecutar automáticamente la instalación:
 solidiom add dialog --install
 ```
 
-Puedes forzar un gestor de paquetes específico:
+La CLI detecta automáticamente el gestor de paquetes buscando archivos de bloqueo (`pnpm-lock.yaml`, `yarn.lock`, `bun.lockb`) o archivos de configuración. Puedes forzar un gestor de paquetes específico:
 
 ```bash
 solidiom add dialog --install --package-manager yarn
@@ -60,7 +60,7 @@ El modo de instalación también se puede definir globalmente en `config.json` m
 
 ## Entregables del nivel de producto
 
-Algunos primitivos ofrecen múltiples niveles de entregable: `primitive`, `component`, `block`, `template`, `theme`. Usa `--deliverable` para seleccionar uno específico:
+Algunos primitivos ofrecen múltiples niveles de entregable (componente, bloque, template, theme). Usa `--deliverable` para seleccionar uno específico:
 
 ```bash
 solidiom add button --deliverable component
@@ -93,7 +93,7 @@ Por defecto, las instalaciones de código fuente requieren verificación a nivel
 solidiom add dialog --mode source --allow-unverified
 ```
 
-Cuando se usa `--allow-unverified`, la procedencia se registra como `unverified` en `.solidiom/lock.json`.
+Cuando se usa `--allow-unverified`, la procedencia se registra como `provenance: "unverified"` en `.solidiom/lock.json`.
 
 ## Conflictos de archivos locales
 
@@ -107,8 +107,8 @@ solidiom add button --deliverable component
 
 Opciones para manejar el conflicto:
 
-- `--force`: sobrescribe los archivos modificados localmente
-- `--diff`: muestra un diff unificado de los cambios pendientes sin escribir
+1. `solidiom add dialog --mode source --diff` — Muestra un diff unificado de los cambios pendientes
+2. `solidiom add dialog --mode source --force` — Sobrescribe los archivos modificados localmente
 
 ```bash
 solidiom add button --deliverable component --force

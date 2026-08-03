@@ -12,7 +12,7 @@ status: draft
 package: "@solidiom/alert"
 primitive: alert
 section: overview
-translationSourceHash: "f0ab6aa69126d2797f635d3829b387814803bc586c7338acc6d0ec26048fac50"
+translationSourceHash: "670555b2a7b5b783a4c63bcf445fbfab6086a709ff0227529d002183874fa58e"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -25,7 +25,7 @@ notApplicable:
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 ---
 
-Alert renderiza un área de notificación en línea, no modal, con semántica de región en vivo de ARIA. Soporta cuatro variantes visuales (info, success, warning, error) y dos niveles de asertividad (assertive, polite) para controlar cómo los lectores de pantalla anuncian el mensaje. Las partes Title y Description se conectan automáticamente mediante `aria-labelledby` y `aria-describedby` usando IDs estables compatibles con SSR.
+Alert renderiza un área de notificación en línea, no modal, con semántica de región en vivo de ARIA. Soporta cuatro variantes visuales (info, success, warning, error) y dos niveles de asertividad (assertive, polite) para controlar cómo los lector de pantalla anuncian el mensaje. Las partes Title y Description se conectan automáticamente mediante `aria-labelledby` y `aria-describedby` usando IDs estables compatibles con SSR.
 
 ## Uso
 
@@ -79,7 +79,7 @@ Aplica tu receta visual usando los atributos data para seleccionar. Root se rend
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe foco ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 

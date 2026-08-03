@@ -33,6 +33,6 @@ nonApplicableCriteria:
   - criterion: aria
     rationale: Card se basa en elementos HTML semánticos (h3, p) para accesibilidad y no requiere atributos ARIA adicionales.
 reviewStatus: draft
-translationSourceHash: "26f002200d2ad844b223df752c0068b4563ed40b4947119768c9f72ca98c129d"
+translationSourceHash: "48834d3f5c6dfb423999d58280ff967053dbc742044592ce68353897302dfe38"
 translationStatus: draft
 ---

@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/date-picker"
 primitive: date-picker
 section: overview
-translationSourceHash: "f0906e00a353f662c6e2b9623539ac8b75759bd3f92c1566a477cc0873efd092"
+translationSourceHash: "7ad483091a44552b6b106fed00f5226baaff9999c3373da7861aff4ed41366cf"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -57,7 +57,7 @@ Date Picker lleva los atributos `data-scope="date-picker"` y `data-part` en cada
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

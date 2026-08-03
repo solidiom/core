@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/collapsible"
 primitive: collapsible
 section: overview
-translationSourceHash: "f2aaa2ebe248fa06e772868f9bed28cae16bd291d495cfe6a12d6cd66af40f27"
+translationSourceHash: "178e7b358b651daffff4c8c3a5fc94b8f8117ca0ac7543796c60d6040c09b0ff"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -52,7 +52,7 @@ Collapsible lleva los atributos `data-scope="collapsible"` y `data-part` en cada
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

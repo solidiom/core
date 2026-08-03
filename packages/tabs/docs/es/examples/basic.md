@@ -17,7 +17,7 @@ source:
   export: TabsExample
   language: tsx
 runnable: true
-translationSourceHash: "e69dfe7cccf5cd25114a6371a668dc69a05bc5362e4db85798f86348d5c44a63"
+translationSourceHash: "90bbfae55021f34558ab06812b43a6d887ef608da3c8f37db8ab6963a840fadb"
 translationStatus: draft
 ---
 

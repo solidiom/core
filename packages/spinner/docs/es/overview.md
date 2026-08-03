@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/spinner"
 primitive: spinner
 section: overview
-translationSourceHash: "53cb576ee41d9ffaeb6297f8185f33094f420662ffd5499361d0a87d7ff6669b"
+translationSourceHash: "fd27b43ecda287a6376a4d27a61647968c748246fa67b8ea3eaa413dc66c92cd"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -52,7 +52,7 @@ Spinner lleva los atributos `data-scope="spinner"` y `data-part` en cada parte p
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Renderizado SSR e hidratación
 

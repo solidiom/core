@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/toggle-group"
 primitive: toggle-group
 section: overview
-translationSourceHash: "6c5db2ee3906efc61cd91ed2913e086a779a1151bd90d16e863707ab9eea1e10"
+translationSourceHash: "03f1a40761ca4010a6549cf8d609b39422710b83600efa3dd2b4582d4297ace5"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -53,7 +53,7 @@ Toggle Group lleva los atributos `data-scope="toggle-group"` y `data-part` en ca
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Renderizado SSR e hidratación
 

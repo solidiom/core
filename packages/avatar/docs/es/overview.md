@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/avatar"
 primitive: avatar
 section: overview
-translationSourceHash: "178bdbefa0bb2a37f87302849ed409cd46701a58c7cb108a15081deeab6bf266"
+translationSourceHash: "a4d705d861b821f7ce738376b8d1bd5184c718b0a6a59d06b0e81fa0e16942dd"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -84,7 +84,7 @@ Estila el contenedor raíz como un contenedor flex para superponer la imagen y e
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe foco ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 

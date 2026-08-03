@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/context-menu"
 primitive: context-menu
 section: overview
-translationSourceHash: "dd994175987cf4ad74b3603e6df91dd4180f7ac358bcd1d22d5412ba305cd063"
+translationSourceHash: "7dcf4036af0f531b73929b0a7944fd5c40821f7ff6cb5e909412f873decd9f09"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -58,7 +58,7 @@ Context Menu lleva los atributos `data-scope="context-menu"` y `data-part` en ca
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

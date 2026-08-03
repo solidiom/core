@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/checkbox"
 primitive: checkbox
 section: overview
-translationSourceHash: "17a67fba42916a0c4cead791a420ae2731864b7bedf48943ee79ab5c1504402c"
+translationSourceHash: "f3a82c5e77f6597d31046770d5a7b4afd94c825a5168d8546747ebcbc2e80734"
 translationStatus: draft
 notApplicable:
   - section: relationships

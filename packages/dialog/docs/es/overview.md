@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/dialog"
 primitive: dialog
 section: overview
-translationSourceHash: "4c6d0f916cf120ab8f12be1efffe244052842f21983af6ab8e05d385c404d17e"
+translationSourceHash: "e3c7ee165ff13f34caecab9e2eef73aa4cef8351681b48da58b4f8464c6402b9"
 translationStatus: draft
 notApplicable:
   - section: relationships

@@ -31,6 +31,6 @@ nonApplicableCriteria:
   - criterion: focus
     rationale: Badge es un elemento de presentación no interactivo y no recibe enfoque.
 reviewStatus: draft
-translationSourceHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+translationSourceHash: "2c276dcbc7f6cad9d1b5f649ace1512ad13d012a617dd773a315853578287c79"
 translationStatus: draft
 ---

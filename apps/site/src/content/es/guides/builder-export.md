@@ -16,7 +16,7 @@ locale: es
 maturity: beta
 order: 10
 audience: intermediate
-translationSourceHash: "c6195b22da5267195ff4ff57d6d166bcae6839559b549b50e18e31850147e27e"
+translationSourceHash: "9e9ee739b9a04107c78e29edc84fd9030218882ac9093b51cd67b20b7a4fd4ec"
 translationStatus: draft
 ---
 

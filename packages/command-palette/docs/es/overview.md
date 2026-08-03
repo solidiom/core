@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/command-palette"
 primitive: command-palette
 section: overview
-translationSourceHash: "bfa776f412e2ac85fced86dad6ccc39d9240a1be36dd69896012af067d055076"
+translationSourceHash: "fb4da8a2ce82413b79f538e5027e6268711f2bad733586077dfe01ca13166b4d"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -55,7 +55,7 @@ Command Palette lleva los atributos `data-scope="command-palette"` y `data-part`
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

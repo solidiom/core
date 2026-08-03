@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/tooltip"
 primitive: tooltip
 section: overview
-translationSourceHash: "31fdd5bc54e3575d360d248ceb637b380fdd9f0a4a66a6d08a9cdfc4a4e3a23a"
+translationSourceHash: "23f216510b48ec20d6cf3235dd82d0f1a4e1df87f970e044206a1717569feb1f"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -52,7 +52,7 @@ Tooltip lleva los atributos `data-scope="tooltip"` y `data-part` en cada parte p
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

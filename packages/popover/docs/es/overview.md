@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/popover"
 primitive: popover
 section: overview
-translationSourceHash: "ea61e57b4b0735d0203b2daf4e4eeb30cfc423a76d643f164ceef2915dff8ec4"
+translationSourceHash: "b4ed1fa7fe2bba1b97c2cc22c000327f4509cc0cd22e62c221cafeb62b8c6609"
 translationStatus: draft
 notApplicable:
   - section: relationships

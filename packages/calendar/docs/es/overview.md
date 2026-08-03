@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/calendar"
 primitive: calendar
 section: overview
-translationSourceHash: "170cbfe7604a7e20ebcd2f88b97d0322eb78bf2c4c33edb1d83968af17922633"
+translationSourceHash: "585e20fa5fb10146347044b7768feb7d3885c4f2a89557db4dc6be8bba495875"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -56,7 +56,7 @@ Calendar lleva los atributos `data-scope="calendar"` y `data-part` en cada parte
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

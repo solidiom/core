@@ -39,6 +39,6 @@ consumerDuties:
   - "Usar `ButtonGroup` para agrupar botones lógicamente relacionados con un contexto visual compartido."
 nonApplicableCriteria: []
 reviewStatus: draft
-translationSourceHash: "ca776d721613fa457c6a23236093d4127b7ff6e21851a6beca67ee04d0c1c264"
+translationSourceHash: "9e9c81ccc95d07e75c20d3a9437b47774138cfd969208745557e311acabf9233"
 translationStatus: draft
 ---

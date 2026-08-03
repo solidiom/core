@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/toolbar"
 primitive: toolbar
 section: overview
-translationSourceHash: "fdf51104785aa3c4c43e4b3242981203978a9de4f468fad7dc5f2829e3442f09"
+translationSourceHash: "e9b363ea4a0913ebb269c518fb4c3abee3a1245dcd5c22b4179254b2d42b3982"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -54,7 +54,7 @@ Toolbar lleva los atributos `data-scope="toolbar"` y `data-part` en cada parte p
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

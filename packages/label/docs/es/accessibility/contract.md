@@ -30,4 +30,6 @@ nonApplicableCriteria:
   - criterion: portalling
     rationale: Label no tiene requisitos de reubicación en el DOM.
 reviewStatus: draft
+translationSourceHash: "51c8d4279f3c2055df0de2bda8c6b7effc30630a06ad540419faac6929d15811"
+translationStatus: draft
 ---

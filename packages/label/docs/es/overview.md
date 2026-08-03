@@ -22,7 +22,7 @@ notApplicable:
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 
 translationStatus: draft
-translationSourceHash: "c0e1fa30c988d0c445afb33a0b15ef0e36495292c24f44226f78bb6ac96ee121"
+translationSourceHash: "2bf275a4442dd0d69e93a5e20fe4d13e9b4f049bcbb4c4df1e49e43e6096d566"
 ---
 
 Label renderiza un elemento nativo `<label>` con atributos de datos semánticos. Úsalo para asociar texto con controles de formulario, proporcionando la conexión de accesibilidad requerida por las tecnologías de asistencia.
@@ -45,7 +45,7 @@ Label está diseñado para componerse con el primitivo `Field`. Cuando se usa de
 
 ### Indicadores de estado
 
-Usa las propiedades `disabled`, `required`, e `invalid` para reflejar el estado del control asociado. Estas emiten atributos `data-disabled`, `data-required`, y `data-invalid` para propósitos de estilo. No afectan el control de formulario en sí; el control es dueño de su propio estado.
+Usa las props `disabled`, `required`, e `invalid` para reflejar el estado del control asociado. Estas emiten atributos `data-disabled`, `data-required`, y `data-invalid` para propósitos de estilo. No afectan el control de formulario en sí; el control es dueño de su propio estado.
 
 ## Instalación
 
@@ -61,4 +61,4 @@ Label es un elemento estático de presentación sin estado interactivo. Se rende
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe foco ni responde a eventos de teclado.

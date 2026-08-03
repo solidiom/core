@@ -17,6 +17,8 @@ source:
   export: Root
   language: tsx
 runnable: false
+translationSourceHash: "3ff880afa2996ef8b67ee3917f4c316b01c51c02142e41645409e46eb0742f8c"
+translationStatus: draft
 ---
 
 ```tsx

@@ -39,6 +39,8 @@ nonApplicableCriteria:
 reviewStatus: reviewed
 reviewedBy: Revisión de accesibilidad de Solidiom
 reviewedAt: 2026-07-27T00:00:00.000Z
+translationSourceHash: "b758c7d0d172415f0a3eabcf03bd0955ac6ba88c4c7afb68befdd77653506041"
+translationStatus: draft
 ---
 
 ## Evidencia automatizada
@@ -47,4 +49,4 @@ El resumen de evidencias siguiente se genera a partir del análisis axe ejecutab
 
 ## Verificación manual
 
-Revisa el cierre por teclado, la restauración del foco, el zoom/reflujo, los objetivos táctiles, el movimiento reducido, el contraste y los anuncios de lectores de pantalla en el producto que lo consume. El diseño, las etiquetas y el flujo de un consumidor pueden cambiar el resultado de accesibilidad.
+Revisa el cierre por teclado, la restauración del foco, el zoom/reflujo, los objetivos táctiles, el movimiento reducido, el contraste y los anuncios de lector de pantalla en el producto que lo consume. El diseño, las etiquetas y el flujo de un consumidor pueden cambiar el resultado de accesibilidad.

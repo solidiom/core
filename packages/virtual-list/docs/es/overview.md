@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/virtual-list"
 primitive: virtual-list
 section: overview
-translationSourceHash: "cbdc882c94f86f9d871f8158bb8b4640efd733fbeb7d61d907f4a180361db82e"
+translationSourceHash: "f5fbaa2b0bdeb8d4771f7063123360095c571540441c00755377b92d5c5f3292"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -53,7 +53,7 @@ Virtual List lleva los atributos `data-scope="virtual-list"` y `data-part` en ca
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Renderizado SSR e hidratación
 

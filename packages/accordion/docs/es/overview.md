@@ -26,7 +26,7 @@ Accordion presenta un conjunto apilado verticalmente de secciones colapsables. L
 
 ## Uso
 
-Compón `Root`, `Item`, `Trigger` y `Content`. Cada `Item` contiene un botón `Trigger` y una región `Content`. La primitiva gestiona los atributos ARIA, la navegación por teclado y el estado de expansión/colapso.
+Compón `Root`, `Item`, `Trigger` y `Content`. Cada `Item` contiene un botón `Trigger` y una región `Content`. El primitivo gestiona los atributos ARIA, la navegación por teclado y el estado de expansión/colapso.
 
 ```tsx
 import * as Accordion from "@solidiom/accordion"
@@ -76,8 +76,8 @@ Accordion incluye recetas CSS, Tailwind y UnoCSS. Las partes `Root`, `Item`, `Tr
 
 ## Renderizado SSR e hidratación
 
-Accordion se renderiza como HTML estático. Los elementos expandidos se determinan por `defaultValue` o `value` durante el renderizado en servidor. La primitiva se hidrata sin efectos secundarios; la navegación por teclado y los controladores de clic se activan en el cliente.
+Accordion se renderiza como HTML estático. Los elementos expandidos se determinan por `defaultValue` o `value` durante el renderizado en servidor. El primitivo se hidrata sin efectos secundarios; la navegación por teclado y los controladores de clic se activan en el cliente.
 
 ## Composición
 
-Accordion está diseñado para componerse con otras primitivas. Puedes anidar un `Field` dentro del contenido de un elemento, usar `Kbd` dentro de las etiquetas del disparador para mostrar atajos, o colocar un `Button` dentro de la región de contenido para acciones secundarias.
+Accordion está diseñado para componerse con otros primitivos. Puedes anidar un `Field` dentro del contenido de un elemento, usar `Kbd` dentro de las etiquetas del disparador para mostrar atajos, o colocar un `Button` dentro de la región de contenido para acciones secundarias.

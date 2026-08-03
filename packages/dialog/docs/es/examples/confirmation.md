@@ -16,6 +16,8 @@ source:
   export: DialogExample
   language: tsx
 runnable: true
+translationSourceHash: "9e530ec98cc0dc29628998c8a32f024a39c016a78c62de4ae79fe68103c0a536"
+translationStatus: draft
 ---
 
 El ejemplo en vivo usa una acción de confirmación porque necesita un título claro, una explicación de la consecuencia y una forma explícita de cerrarlo. Presiona <kbd>Escape</kbd>, selecciona **Cancelar** o selecciona **Eliminar espacio de trabajo** para cerrarlo. No se modifica ningún dato.

@@ -17,13 +17,15 @@ locale: es
 maturity: beta
 order: 11
 audience: intermediate
-translationSourceHash: "a8cd539cb1f2a38c071f2bb2e76a9832e4c4f5b451da55b3e2d1fa88de5dda77"
+translationSourceHash: "abafa5b1117a1ba0c65917717e2ffb86869cc807e1c6a89b28dd3336d2da8ad7"
 translationStatus: draft
 ---
 
 # Registro y Propiedad del Código Fuente Firmado
 
 El registro de Solidiom es la fuente de verdad para cada primitivo, componente, bloque y plantilla. Impulsa el catálogo de este sitio y alimenta las instalaciones verificadas de código fuente del CLI.
+
+El concepto de propiedad del codigo fuente es central: cuando instalas código fuente, tú eres el dueño; el registro solo provee el origen verificado.
 
 ## Qué es el Registro
 

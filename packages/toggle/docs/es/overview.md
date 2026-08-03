@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/toggle"
 primitive: toggle
 section: overview
-translationSourceHash: "7155612fe30a2b9a2282ef58d5d3720f54bd83e5ace024e21f18249419ea743c"
+translationSourceHash: "4b9decb6b9740616a87d9870c42da5f2e49b6c9e34e421aba6878242699b4f4d"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -52,7 +52,7 @@ Toggle lleva los atributos `data-scope="toggle"` y `data-part` en cada parte par
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Renderizado SSR e hidratación
 

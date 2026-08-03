@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/scroll-area"
 primitive: scroll-area
 section: overview
-translationSourceHash: "1cd10189e7e6b5ad15111f307d896ef1fbf2f953f46604541523da65426d4692"
+translationSourceHash: "b66bffcfbf3e8d82228f1e42d67f71b333fc8c7f8dfc65735c525e5b25b381dd"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -53,7 +53,7 @@ Scroll Area lleva los atributos `data-scope="scroll-area"` y `data-part` en cada
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

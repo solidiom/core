@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/card"
 primitive: card
 section: overview
-translationSourceHash: "efb119d7203dc0f8119bc5d2f855dde72d09dd7a30cd35098f45b58893a17fac"
+translationSourceHash: "05fee18fab25b0726e8ac4b7616d4317dee930773b128056ad2b8f996a38abcd"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -64,7 +64,7 @@ Card lleva los atributos `data-scope="card"` y `data-part` en cada parte. Estili
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe foco ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 

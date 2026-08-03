@@ -32,6 +32,6 @@ nonApplicableCriteria:
   - criterion: focus
     rationale: Separator es un elemento de presentación no interactivo y no recibe enfoque.
 reviewStatus: draft
-translationSourceHash: "cfd5c972b61428c0498c548e0d239d3fac258ab011ff9e26973b68413ee24210"
+translationSourceHash: "a253649248ff85c4feeff3ac985829b838edc63b398c94c49ac3dbbc4d712c83"
 translationStatus: draft
 ---

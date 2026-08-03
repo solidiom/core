@@ -37,6 +37,6 @@ nonApplicableCriteria:
   - criterion: focus
     rationale: Breadcrumb se basa en la gestión de enfoque estándar de los elementos de ancla; no se requiere manejo de enfoque personalizado.
 reviewStatus: draft
-translationSourceHash: "70bab8c21e5b65661269a5eacd4bea15cb9aeb16e6dbf18a8d7d1138e4c8d7e0"
+translationSourceHash: "78f470b6ac5f41765460c5618a4473504bc23c7299542d95f0cd7ff25aafcaa7"
 translationStatus: draft
 ---

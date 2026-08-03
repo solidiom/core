@@ -87,7 +87,7 @@ function glossaryIssues(english: string, spanish: string): string[] {
 
   for (const entry of Object.values(TERMINOLOGY_GLOSSARY)) {
     if (!includesTerm(englishProse, entry.en)) continue
-    if (entry.doNotTranslate && !spanish.includes(entry.es)) {
+    if (entry.doNotTranslate && !includesTerm(spanish, entry.es)) {
       issues.push(`protected term \"${entry.en}\" is missing`)
     }
     if (!entry.doNotTranslate && !includesPreferredTranslation(spanishProse, entry.es)) {

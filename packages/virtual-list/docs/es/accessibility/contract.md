@@ -25,6 +25,6 @@ nonApplicableCriteria:
   - criterion: keyboard
     rationale: "This primitive has no keyboard interaction beyond native element defaults."
 reviewStatus: draft
-translationSourceHash: "ab6489014ba56a7e2207d879b4b210cc718b0d4cc8ad9b0e8f6218e0dad6b8b6"
+translationSourceHash: "9a5d851e384b4891839565c2b47306804c27c28b31286d91d7ebd680d671e89b"
 translationStatus: draft
 ---

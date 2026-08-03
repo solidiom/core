@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/skeleton"
 primitive: skeleton
 section: overview
-translationSourceHash: "ce7cc79f113f84212cd2dc4960c10f5678b66ca930e964eef4fb46b6e6722bd7"
+translationSourceHash: "178617113da88e5bfc705b39ee501903933a8b2a8b758e7619d0a5f4bcc2ae30"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -52,7 +52,7 @@ Skeleton lleva los atributos `data-scope="skeleton"` y `data-part` en cada parte
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Renderizado SSR e hidratación
 

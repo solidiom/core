@@ -7,7 +7,7 @@ locale: es
 maturity: beta
 order: 5
 audience: intermediate
-translationSourceHash: "e33ba424429e4d2a27865cb25b01fd43977fe306da8ed2ecf4f81ab28b6eb567"
+translationSourceHash: "4a00ece415cd0a032aad4ea454768c56837c48ac317be9139a2dee5de0966cb2"
 translationStatus: draft
 ---
 
@@ -130,10 +130,12 @@ Los perfiles válidos son: `css`, `tailwind`, `unocss`.
 
 La CLI resuelve las versiones reales siguiendo esta prioridad:
 
-1. Catálogo del registro (`registry/index.json`)
-2. Paquetes en `node_modules`
+1. **Catálogo del registro** — Lee `registry/index.json` desde una ruta personalizada, `SOLIDIOM_REGISTRY_PATH`, el directorio `registry/` del monorepo, `node_modules/@solidiom/registry/`, o `.solidiom/registry-cache.json`
+2. **node_modules** — Escanea `node_modules/@solidiom/<primitive>/package.json` para dependencias y adaptadores
 3. Paquetes del monorepo (en desarrollo)
 4. Conocimiento incorporado de primitivos principales para escenarios sin conexión
+
+El plan genera la lista de paquetes npm que deben instalarse, incluyendo cada componente y sus dependencias.
 
 ## Verificación contra política
 

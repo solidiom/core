@@ -27,6 +27,6 @@ consumerDuties:
   - "Asegurar que se proporcionen etiquetas visibles o aria-label donde sea necesario."
 nonApplicableCriteria: []
 reviewStatus: draft
-translationSourceHash: "e7db21f030b39068bbc4557e69bd4b049ec5c63cd277ce60c77e6487907cf606"
+translationSourceHash: "6c74340a3aeeb811008562f2341a9444b300b1097595d8e710299f623e7c15d1"
 translationStatus: draft
 ---

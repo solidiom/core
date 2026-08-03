@@ -17,7 +17,7 @@ source:
   export: SelectExample
   language: tsx
 runnable: true
-translationSourceHash: "5767b88ebdb636409fa50f69f5ca76f0dafdfb47da8ffee2508e694db99cc5e8"
+translationSourceHash: "43c1e92c922694727a21e8e9a7eece73b9d6de91268263a8cd8f73d5e4cf3170"
 translationStatus: draft
 ---
 

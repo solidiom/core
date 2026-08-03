@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/input-otp"
 primitive: input-otp
 section: overview
-translationSourceHash: "f190aa4af541386f8c711a874fc0ec0ba83e8db357bea873fec058ac2b4eeff5"
+translationSourceHash: "215d4676ae436fbf9b6d3070faeaa0a8843d8510c0180efc7db91cb9df811d14"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -52,7 +52,7 @@ Input OTP lleva los atributos `data-scope="input-otp"` y `data-part` en cada par
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

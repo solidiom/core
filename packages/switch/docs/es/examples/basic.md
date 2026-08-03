@@ -17,7 +17,7 @@ source:
   export: SwitchExample
   language: tsx
 runnable: true
-translationSourceHash: "4b5e3d1ca49ac8c4c81038bf0a1c51b7bbc7442e1b1c121ec0c5785ba0f1bb36"
+translationSourceHash: "a4131c29fa5ad12d15ecb5ae59ce210be65881eb29632cf8f3d5085c28f8b7f7"
 translationStatus: draft
 ---
 

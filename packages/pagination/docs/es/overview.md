@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/pagination"
 primitive: pagination
 section: overview
-translationSourceHash: "320d9c76046a2bb3aa078059c49430b993f4f20b3f2a9e6a686184221ef24d8f"
+translationSourceHash: "b47627c26aa53fae4b19bda270faefc73ef1bf6912847c4dca9c0b1a5d09b71f"
 translationStatus: draft
 notApplicable:
   - section: relationships

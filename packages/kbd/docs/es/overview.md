@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/kbd"
 primitive: kbd
 section: overview
-translationSourceHash: "f9d3066cd3598e63110416dcf962f238e132a672a2724d4126d73fef2d6bed36"
+translationSourceHash: "bb9ea6df7f21fe27f5e0326b8914f31bd86e18c40d84629b09dcadd6b983f92c"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -48,7 +48,7 @@ Kbd lleva los atributos `data-scope="kbd"` y `data-part="root"`. Estílalo con u
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe foco ni responde a eventos de teclado.
 
 ## Partes
 
