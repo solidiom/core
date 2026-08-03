@@ -10,9 +10,10 @@
  * Usage: pnpm exec tsx tools/audit-adapter-styling.ts
  */
 
-import { readdirSync, readFileSync, existsSync, statSync, mkdirSync, writeFileSync } from "node:fs"
+import { readdirSync, readFileSync, existsSync, statSync } from "node:fs"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import { writeReportWithStableStamp } from "./report-stamp"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -109,8 +110,7 @@ function main() {
     allViolations.push(...violations)
   }
 
-  // Write report
-  mkdirSync(OUTPUT_DIR, { recursive: true })
+  // Write report (the writer creates the directory)
   const lines = [
     "# Adapter Styling Audit",
     "",
@@ -137,7 +137,7 @@ function main() {
     lines.push("positioning/virtualization data only — no visual output.")
   }
 
-  writeFileSync(OUTPUT_FILE, lines.join("\n") + "\n")
+  writeReportWithStableStamp(OUTPUT_FILE, lines)
   console.log(`${allViolations.length} violations found`)
   console.log(`Scanned: ${adapters.join(", ")}`)
   console.log(`Report: ${OUTPUT_FILE}`)
