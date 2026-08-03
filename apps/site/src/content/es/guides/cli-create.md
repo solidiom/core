@@ -41,10 +41,10 @@ La bandera `--yes` exige que todos los valores requeridos estén presentes. Si f
 
 Las plantillas incluyen configuraciones predefinidas con frameworks específicos:
 
-| Alias                    | Paquete                                     | Descripción                                             |
-| ------------------------ | ------------------------------------------- | ------------------------------------------------------- |
-| `vite-solid-router`      | `@solidiom/template-vite-solid-router`      | Proyecto con Vite y Solid Router (solo cliente)         |
-| `tanstack-start-solid`   | `@solidiom/template-tanstack-start-solid`   | Proyecto full-stack con TanStack Start y SSR            |
+| Alias                  | Paquete                                   | Descripción                                     |
+| ---------------------- | ----------------------------------------- | ----------------------------------------------- |
+| `vite-solid-router`    | `@solidiom/template-vite-solid-router`    | Proyecto con Vite y Solid Router (solo cliente) |
+| `tanstack-start-solid` | `@solidiom/template-tanstack-start-solid` | Proyecto full-stack con TanStack Start y SSR    |
 
 Para usar una plantilla específica:
 
