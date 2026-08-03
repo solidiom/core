@@ -37,7 +37,7 @@
     "evidenceIds": [
       "axe-dialog-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T13:53:22.015Z"
+    "lastReviewed": "2026-08-03T16:32:53.812Z"
   },
   "documentation": {
     "status": "complete",
@@ -81,11 +81,11 @@
       "src/dialog.tsx": "8c01e0531e61fcb5d77cf7040d9548ef5da6cdbec3c7cf0ed526e3a7b34119a6",
       "src/index.tsx": "12a64978fe94873ab58c3da5219a6e75780eae19a1bb8de728143d8e1affcb01"
     },
-    "lastGenerated": "2026-08-03T13:51:36.000Z"
+    "lastGenerated": "2026-08-03T16:56:54.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/dialog"
   },
-  "lastUpdated": "2026-08-03T13:51:36.000Z"
+  "lastUpdated": "2026-08-03T16:56:54.000Z"
 }

@@ -16,8 +16,7 @@ source:
   path: packages/alert-dialog/src/index.tsx
   export: Root
   language: tsx
-runnable: false
-runnableReason: "Se creará un island interactivo cuando este primitivo se retrofit completamente."
+runnable: true
 translationSourceHash: "5bfa6da30020d8b3dd33574209f06cb9fe9240d8108b026e604f86d7d422ed16"
 translationStatus: draft
 ---

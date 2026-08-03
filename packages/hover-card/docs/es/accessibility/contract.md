@@ -12,9 +12,7 @@ status: draft
 package: "@solidiom/hover-card"
 primitive: hover-card
 section: accessibility
-keyboard:
-  - key: Enter
-    behavior: Activates the primary interactive element.
+keyboard: []
 focus:
   - "Root recibe foco mediante el orden de tabulación estándar."
 semantics:
@@ -23,7 +21,9 @@ aria:
   - "Uses appropriate ARIA roles and properties for its interaction pattern."
 consumerDuties:
   - "Asegurar que se proporcionen etiquetas visibles o aria-label donde sea necesario."
-nonApplicableCriteria: []
+nonApplicableCriteria:
+  - criterion: keyboard
+    rationale: "This primitive has no keyboard interaction beyond native element defaults."
 reviewStatus: draft
 translationSourceHash: "fcf76c324c123fffb2605a193fb2d60af4285693a1e55f00d251ca46c11a3873"
 translationStatus: draft

@@ -16,8 +16,7 @@ source:
   path: packages/date-picker/src/index.tsx
   export: Root
   language: tsx
-runnable: false
-runnableReason: "Se creará un island interactivo cuando este primitivo se retrofit completamente."
+runnable: true
 translationSourceHash: "2fb249b9e2f386e0f8a16969404b52667600629b05ffad591863a485edcf5e51"
 translationStatus: draft
 ---

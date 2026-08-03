@@ -16,8 +16,7 @@ source:
   path: packages/context-menu/src/index.tsx
   export: Root
   language: tsx
-runnable: false
-runnableReason: "Se creará un island interactivo cuando este primitivo se retrofit completamente."
+runnable: true
 translationSourceHash: "b0ed44dff4805538c5ce2bf461bcb8a42e075f92dc41a2e405be47de54b99bc4"
 translationStatus: draft
 ---

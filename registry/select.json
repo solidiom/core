@@ -40,7 +40,7 @@
     "evidenceIds": [
       "axe-select-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T13:53:22.015Z"
+    "lastReviewed": "2026-08-03T16:32:53.812Z"
   },
   "documentation": {
     "status": "complete",
@@ -81,11 +81,11 @@
       "src/select-context.ts": "bf10233859db06b551a8a0aeee2039aeb75212be33b6995766035fde6ed9c0d5",
       "src/select.tsx": "f14453d83edd73198be4d35ac759f0b0da6b4db9217e87336bf401236a86e1c5"
     },
-    "lastGenerated": "2026-08-03T13:51:36.000Z"
+    "lastGenerated": "2026-08-03T16:56:54.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/select"
   },
-  "lastUpdated": "2026-08-03T13:51:36.000Z"
+  "lastUpdated": "2026-08-03T16:56:54.000Z"
 }

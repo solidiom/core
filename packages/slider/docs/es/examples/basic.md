@@ -16,8 +16,7 @@ source:
   path: packages/slider/src/index.tsx
   export: Root
   language: tsx
-runnable: false
-runnableReason: "Se creará un island interactivo cuando este primitivo se retrofit completamente."
+runnable: true
 translationSourceHash: "a91e39b720a2b44dc24b134dfb6517dbd6079bbda721d5026f95f02f213545cc"
 translationStatus: draft
 ---

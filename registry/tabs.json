@@ -38,7 +38,7 @@
     "evidenceIds": [
       "axe-tabs-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T13:53:22.015Z"
+    "lastReviewed": "2026-08-03T16:32:53.812Z"
   },
   "documentation": {
     "status": "complete",
@@ -77,11 +77,11 @@
       "src/tabs-context.ts": "bcc9b7924560f2bbb04a6535cc2e435fef8818b37cd955f1957e83a379b7532c",
       "src/tabs.tsx": "9b1e8eb3290082742b85353cc70b6e7486d61e8b00c1f894d570cf08870949de"
     },
-    "lastGenerated": "2026-08-03T13:51:36.000Z"
+    "lastGenerated": "2026-08-03T16:56:54.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/tabs"
   },
-  "lastUpdated": "2026-08-03T13:51:36.000Z"
+  "lastUpdated": "2026-08-03T16:56:54.000Z"
 }

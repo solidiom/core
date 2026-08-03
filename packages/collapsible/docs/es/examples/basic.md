@@ -16,8 +16,7 @@ source:
   path: packages/collapsible/src/index.tsx
   export: Root
   language: tsx
-runnable: false
-runnableReason: "Se creará un island interactivo cuando este primitivo se retrofit completamente."
+runnable: true
 translationSourceHash: "53bb6dcb66de0deeccf0fa06ad4e67065c72f33fcb50126edb2a935f4141b449"
 translationStatus: draft
 ---

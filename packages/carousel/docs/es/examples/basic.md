@@ -16,8 +16,7 @@ source:
   path: packages/carousel/src/index.tsx
   export: Root
   language: tsx
-runnable: false
-runnableReason: "Se creará un island interactivo cuando este primitivo se retrofit completamente."
+runnable: true
 translationSourceHash: "7971cff6b2435284fcb094a5f8f4ca92a683d2da7e39ca4ec226e45262dc2924"
 translationStatus: draft
 ---
