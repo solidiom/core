@@ -276,29 +276,21 @@ console.log("\n§10 Typecheck and build:")
 const siteCheck = run("pnpm exec nx run @solidiom/site:check", { cwd: ROOT })
 check("apps/site passes astro check", siteCheck.ok, siteCheck.ok ? undefined : "astro check failed")
 
-// ─── 11. No bulk catalog bypass ─────────────────────────────────────────
-console.log("\n§11 No bulk catalog bypass:")
+// ─── 11. Catalog gate delegation (VS-005) ───────────────────────────────
+console.log("\n§11 Catalog gate delegation (PRIM-000):")
 
-// Verify no PRIM-* tasks are marked complete in the tracker without VS-004
-//
-// The path here previously omitted the `plans` segment, so `existsSync` was always
-// false, the `else` branch reported the document missing, and the actual
-// bulk-bypass assertion below never executed — this gate is wired into no
-// workflow, so nothing surfaced that. It also carried a dead `readJSON` call on a
-// markdown file, whose own trailing comment admitted it was superseded.
-const trackerPath = join(ROOT, "docs", "plans", "website-tasks.md")
-if (existsSync(trackerPath)) {
-  const trackerContent = readFileSync(trackerPath, "utf8")
-  // Look for completed PRIM-* rows (pattern: | [x] | PRIM-...)
-  const completedPrims = trackerContent.match(/\|\s*\[x\]\s*\|\s*PRIM-/g)
-  check(
-    "no PRIM-* tasks completed before VS-004",
-    !completedPrims || completedPrims.length === 0,
-    completedPrims ? `found ${completedPrims.length} completed PRIM-* rows` : undefined,
-  )
-} else {
-  check("tracker document exists", false, `${trackerPath} not found`)
-}
+// VS-005: The previous implementation grepped this document's raw text for
+// completed primitive rows, which was equivalent to "no bypass" only while
+// VS-004 was open — it failed on correct progress and matched prose as
+// readily as table rows. Replaced with a delegation to PRIM-000's ratcheting
+// count, which is the authoritative source for how many primitives meet the
+// M4 bar and whether that count matches the tracker's declaration.
+const catalogGate = run("pnpm exec tsx tools/primitive-catalog-gate.ts", { cwd: ROOT })
+check(
+  "PRIM-000 catalog gate passes (count matches tracker)",
+  catalogGate.ok,
+  catalogGate.ok ? undefined : "primitive:catalog-gate failed — run with --audit-only for details",
+)
 
 // ─── Summary ────────────────────────────────────────────────────────────
 summarize("VS-004 Vertical-Slice Gate (G2)")
