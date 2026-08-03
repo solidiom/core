@@ -16,9 +16,10 @@
  * Usage: pnpm run audit:recipe-contract
  */
 
-import { readdirSync, readFileSync, existsSync, mkdirSync, writeFileSync } from "node:fs"
+import { readdirSync, readFileSync, existsSync } from "node:fs"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import { writeReportWithStableStamp } from "./report-stamp"
 import {
   SEMANTIC_ATTRIBUTES,
   isSemanticAttribute,
@@ -134,8 +135,7 @@ function main() {
     allViolations.push(...scanDir(dir))
   }
 
-  // Write report
-  mkdirSync(OUTPUT_DIR, { recursive: true })
+  // Write report (the writer creates the directory)
   const lines = [
     "# Recipe Contract Audit",
     "",
@@ -160,7 +160,7 @@ function main() {
     lines.push("state pseudo-classes, and `[data-state]` variants only.")
   }
 
-  writeFileSync(OUTPUT_FILE, lines.join("\n") + "\n")
+  writeReportWithStableStamp(OUTPUT_FILE, lines)
   console.log(`${allViolations.length} violations found`)
   console.log(`Report: ${OUTPUT_FILE}`)
 
