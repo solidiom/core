@@ -38,14 +38,20 @@
     ]
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-hover-card-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:53:22.015Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -77,11 +83,11 @@
       "src/hover-card.tsx": "5e8d0af140f413b7564f8a242266d7184a9d1f065d565c7ac511f05bcb87308c",
       "src/index.tsx": "e2bdc40d2040fdbabf8c43e66c47cfebd965f353de2f27e310f38ad6dc227571"
     },
-    "lastGenerated": "2026-08-03T13:40:44.000Z"
+    "lastGenerated": "2026-08-03T13:51:36.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/hover-card"
   },
-  "lastUpdated": "2026-08-03T13:40:44.000Z"
+  "lastUpdated": "2026-08-03T13:51:36.000Z"
 }

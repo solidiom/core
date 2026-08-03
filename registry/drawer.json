@@ -33,14 +33,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-drawer-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:53:22.015Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -69,11 +75,11 @@
       "src/drawer.tsx": "1fefafde0b912e0a9260c86a42261d94c93b52a0c76a973e018d0d8dcdfbca7a",
       "src/index.tsx": "d73bd947145a4c6b215eec138ea4da63602602798781e51aee003fdfee842e80"
     },
-    "lastGenerated": "2026-08-03T13:40:44.000Z"
+    "lastGenerated": "2026-08-03T13:51:36.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/drawer"
   },
-  "lastUpdated": "2026-08-03T13:40:44.000Z"
+  "lastUpdated": "2026-08-03T13:51:36.000Z"
 }

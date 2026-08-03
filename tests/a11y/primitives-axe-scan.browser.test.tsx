@@ -114,12 +114,15 @@ const PRIMITIVE_FIXTURES: Record<PublicPrimitive, () => JSX.Element> = {
     </Combobox.Root>
   ),
   "command-palette": () => (
-    <CommandPalette.Root aria-label="Command palette">
-      <CommandPalette.Input placeholder="Type a command..." />
-      <CommandPalette.List>
-        <CommandPalette.Item value="action">Action</CommandPalette.Item>
-      </CommandPalette.List>
-    </CommandPalette.Root>
+    <div>
+      <button type="button">Open</button>
+      <CommandPalette.Root aria-label="Command palette">
+        <CommandPalette.Input placeholder="Type a command..." />
+        <CommandPalette.List>
+          <CommandPalette.Item value="action">Action</CommandPalette.Item>
+        </CommandPalette.List>
+      </CommandPalette.Root>
+    </div>
   ),
   "data-table": () => (
     <DataTable.Root
@@ -138,7 +141,12 @@ const PRIMITIVE_FIXTURES: Record<PublicPrimitive, () => JSX.Element> = {
       </DataTable.Body>
     </DataTable.Root>
   ),
-  "date-picker": () => <DatePicker.Root aria-label="Select a date" />,
+  "date-picker": () => (
+    <div>
+      <label for="dp">Date</label>
+      <DatePicker.Root aria-label="Select a date" />
+    </div>
+  ),
   dialog: () => (
     <Dialog.Root defaultOpen>
       <Dialog.Content aria-label="Example dialog">

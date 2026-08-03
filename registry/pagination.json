@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-pagination-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T13:13:29.976Z"
+    "lastReviewed": "2026-08-03T13:53:22.015Z"
   },
   "documentation": {
     "status": "complete",
@@ -66,11 +66,11 @@
     "fileDigests": {
       "src/index.tsx": "b7845f543a4a13205b3467cdf782a39c0a3594718647afd021a6bb44bd8575b1"
     },
-    "lastGenerated": "2026-08-03T13:40:44.000Z"
+    "lastGenerated": "2026-08-03T13:51:36.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/pagination"
   },
-  "lastUpdated": "2026-08-03T13:40:44.000Z"
+  "lastUpdated": "2026-08-03T13:51:36.000Z"
 }

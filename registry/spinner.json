@@ -26,14 +26,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-spinner-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:53:22.015Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -56,11 +62,11 @@
     "fileDigests": {
       "src/index.tsx": "2968639fe2154e691355807f2f992cd92ea13ec686124585827ad45a19443ca0"
     },
-    "lastGenerated": "2026-08-03T13:40:44.000Z"
+    "lastGenerated": "2026-08-03T13:51:36.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/spinner"
   },
-  "lastUpdated": "2026-08-03T13:40:44.000Z"
+  "lastUpdated": "2026-08-03T13:51:36.000Z"
 }

@@ -32,14 +32,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-resizable-panels-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:53:22.015Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -66,11 +72,11 @@
       "src/panels-context.ts": "9ab5d1c128be258daf202afc585eaa4745e8805ae9af4a4773620815007347ba",
       "src/panels.tsx": "1c89cb15f72a01eb713b3936fc05b607fc34546ed1b8eb6668e714a0b2eedbd3"
     },
-    "lastGenerated": "2026-08-03T13:40:44.000Z"
+    "lastGenerated": "2026-08-03T13:51:36.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/resizable-panels"
   },
-  "lastUpdated": "2026-08-03T13:40:44.000Z"
+  "lastUpdated": "2026-08-03T13:51:36.000Z"
 }

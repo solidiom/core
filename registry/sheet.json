@@ -34,7 +34,7 @@
     "evidenceIds": [
       "axe-sheet-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T13:13:29.976Z"
+    "lastReviewed": "2026-08-03T13:53:22.015Z"
   },
   "documentation": {
     "status": "complete",
@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "e95998ab640f33d2307125454fb8bcb48e63cd4f759b176cf4ed100a57cf05b1"
     },
-    "lastGenerated": "2026-08-03T13:40:44.000Z"
+    "lastGenerated": "2026-08-03T13:51:36.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/sheet"
   },
-  "lastUpdated": "2026-08-03T13:40:44.000Z"
+  "lastUpdated": "2026-08-03T13:51:36.000Z"
 }
