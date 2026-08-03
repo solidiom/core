@@ -15,17 +15,17 @@ section: accessibility
 keyboard: []
 focus: []
 semantics:
-  - "Renderiza la raíz como un elemento `<nav>` con `aria-label=\"Breadcrumb\"`."
+  - 'Renderiza la raíz como un elemento `<nav>` con `aria-label="Breadcrumb"`.'
   - "Renderiza los elementos dentro de una estructura de lista `<ol>` para un ordenamiento semántico adecuado."
   - "Cada entrada del breadcrumb es un `<li>` que contiene un enlace de navegación."
-  - "El enlace de la página actual lleva `aria-current=\"page\"` para indicar la ubicación activa."
-  - "Separator y Ellipsis se renderizan con `role=\"presentation\"` y `aria-hidden=\"true\"` (Separator) para ocultar el contenido decorativo del árbol de accesibilidad."
-  - "Lleva los atributos `data-scope=\"breadcrumb\"` y `data-part` en todas las partes."
+  - 'El enlace de la página actual lleva `aria-current="page"` para indicar la ubicación activa.'
+  - 'Separator y Ellipsis se renderizan con `role="presentation"` y `aria-hidden="true"` (Separator) para ocultar el contenido decorativo del árbol de accesibilidad.'
+  - 'Lleva los atributos `data-scope="breadcrumb"` y `data-part` en todas las partes.'
 aria:
-  - "`aria-label=\"Breadcrumb\"` en el `<nav>` identifica la región de navegación para los lectores de pantalla."
-  - "`aria-current=\"page\"` en el enlace de la página actual indica la ubicación presente del usuario en la jerarquía."
-  - "`role=\"presentation\"` en Separator y Ellipsis elimina los elementos decorativos del árbol de accesibilidad."
-  - "`aria-hidden=\"true\"` en Separator asegura que el divisor visual no sea anunciado."
+  - '`aria-label="Breadcrumb"` en el `<nav>` identifica la región de navegación para los lectores de pantalla.'
+  - '`aria-current="page"` en el enlace de la página actual indica la ubicación presente del usuario en la jerarquía.'
+  - '`role="presentation"` en Separator y Ellipsis elimina los elementos decorativos del árbol de accesibilidad.'
+  - '`aria-hidden="true"` en Separator asegura que el divisor visual no sea anunciado.'
 consumerDuties:
   - Usar Breadcrumb para representar la ubicación actual del usuario dentro de una jerarquía de navegación.
   - "Establecer `current` en el `Link` que corresponde a la página actual."

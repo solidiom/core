@@ -22,7 +22,9 @@ Kbd has a single `Root` part. Pass the key name or combination as children.
 ```tsx
 import * as Kbd from "@solidiom/kbd"
 
-;<p>Press <Kbd.Root>Ctrl</Kbd.Root> + <Kbd.Root>S</Kbd.Root> to save.</p>
+;<p>
+  Press <Kbd.Root>Ctrl</Kbd.Root> + <Kbd.Root>S</Kbd.Root> to save.
+</p>
 ```
 
 ## Installation

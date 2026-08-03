@@ -17,7 +17,7 @@ focus: []
 semantics:
   - "Se renderiza como un `<span>` con estilos en línea de recorte para ocultar contenido visualmente."
   - "El contenido permanece en el DOM y en el árbol de accesibilidad, accesible para lectores de pantalla."
-  - "Lleva los atributos `data-scope=\"visually-hidden\"` y `data-part=\"root\"`."
+  - 'Lleva los atributos `data-scope="visually-hidden"` y `data-part="root"`.'
 aria:
   - "No añade roles ni atributos ARIA; se basa en la semántica natural del contenido envuelto."
   - "La técnica de clip/overflow asegura que el contenido sea invisible para usuarios videntes mientras permanece anunciado por lectores de pantalla."

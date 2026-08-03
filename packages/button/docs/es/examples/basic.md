@@ -32,9 +32,7 @@ import * as Button from "@solidiom/button"
 Usa el prop `loading` para indicar una acción en proceso. El botón se deshabilita automáticamente y se marca con `aria-busy="true"`.
 
 ```tsx
-;<Button.Root loading>
-  Guardando...
-</Button.Root>
+;<Button.Root loading>Guardando...</Button.Root>
 ```
 
 ## IconButton

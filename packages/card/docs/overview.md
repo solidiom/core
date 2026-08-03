@@ -38,14 +38,14 @@ Install the package with `pnpm add @solidiom/card`. The package requires compati
 
 ## Parts
 
-| Part | Element | Props | Description |
-|------|---------|-------|-------------|
-| `Root` | `<div>` | `class`, `style`, `children` | Outer container for the card. |
-| `Header` | `<div>` | `class`, `style`, `children` | Header section of the card. |
-| `Title` | `<h3>` | `class`, `children` | Title heading within the card header. |
-| `Description` | `<p>` | `class`, `children` | Descriptive text within the card header. |
-| `Content` | `<div>` | `class`, `style`, `children` | Main content body of the card. |
-| `Footer` | `<div>` | `class`, `style`, `children` | Footer section of the card. |
+| Part          | Element | Props                        | Description                              |
+| ------------- | ------- | ---------------------------- | ---------------------------------------- |
+| `Root`        | `<div>` | `class`, `style`, `children` | Outer container for the card.            |
+| `Header`      | `<div>` | `class`, `style`, `children` | Header section of the card.              |
+| `Title`       | `<h3>`  | `class`, `children`          | Title heading within the card header.    |
+| `Description` | `<p>`   | `class`, `children`          | Descriptive text within the card header. |
+| `Content`     | `<div>` | `class`, `style`, `children` | Main content body of the card.           |
+| `Footer`      | `<div>` | `class`, `style`, `children` | Footer section of the card.              |
 
 ## Styling
 

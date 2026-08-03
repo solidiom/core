@@ -31,10 +31,10 @@ Install the package with `pnpm add @solidiom/separator`. The package requires co
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Orientation of the separator. |
-| `decorative` | `boolean` | `false` | When true, the separator is purely decorative and hidden from the accessibility tree. |
+| Prop          | Type                         | Default        | Description                                                                           |
+| ------------- | ---------------------------- | -------------- | ------------------------------------------------------------------------------------- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Orientation of the separator.                                                         |
+| `decorative`  | `boolean`                    | `false`        | When true, the separator is purely decorative and hidden from the accessibility tree. |
 
 ## Styling
 

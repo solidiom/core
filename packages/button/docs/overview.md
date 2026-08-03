@@ -35,14 +35,14 @@ Install the package with `pnpm add @solidiom/button`. The package requires compa
 
 The standard button. Accepts `disabled`, `loading`, `type`, `onClick`, and `aria-label` props.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Button content. |
-| `disabled` | `boolean` | — | Whether the button is disabled. |
-| `loading` | `boolean` | — | Whether the button is in a loading state. Sets `aria-busy="true"`. |
-| `type` | `"button" \| "submit" \| "reset"` | `"button"` | Native button type. |
-| `onClick` | `() => void` | — | Click handler. |
-| `aria-label` | `string` | — | Accessible label for the button. |
+| Prop         | Type                              | Default    | Description                                                        |
+| ------------ | --------------------------------- | ---------- | ------------------------------------------------------------------ |
+| `children`   | `JSX.Element`                     | —          | Button content.                                                    |
+| `disabled`   | `boolean`                         | —          | Whether the button is disabled.                                    |
+| `loading`    | `boolean`                         | —          | Whether the button is in a loading state. Sets `aria-busy="true"`. |
+| `type`       | `"button" \| "submit" \| "reset"` | `"button"` | Native button type.                                                |
+| `onClick`    | `() => void`                      | —          | Click handler.                                                     |
+| `aria-label` | `string`                          | —          | Accessible label for the button.                                   |
 
 ### IconButton
 

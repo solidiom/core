@@ -31,10 +31,10 @@ Install the package with `pnpm add @solidiom/badge`. The package requires compat
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Content to display inside the badge. |
-| `class` | `string` | — | Additional CSS class for styling. |
+| Prop       | Type          | Default | Description                          |
+| ---------- | ------------- | ------- | ------------------------------------ |
+| `children` | `JSX.Element` | —       | Content to display inside the badge. |
+| `class`    | `string`      | —       | Additional CSS class for styling.    |
 
 ## Styling
 
