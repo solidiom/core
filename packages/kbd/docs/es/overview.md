@@ -11,8 +11,17 @@ status: draft
 package: "@solidiom/kbd"
 primitive: kbd
 section: overview
-translationSourceHash: "0000000000000000000000000000000000000000000000000000000000000000"
+translationSourceHash: "f9d3066cd3598e63110416dcf962f238e132a672a2724d4126d73fef2d6bed36"
 translationStatus: draft
+notApplicable:
+  - section: composition
+    reason: Primitivo autónomo sin sub-primitivos compuestos.
+  - section: relationships
+    reason: Sin primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
+  - section: migration
+    reason: Sin API previa; esta es la primera versión publicada.
+  - section: testing
+    reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 ---
 
 Kbd renderiza un elemento `<kbd>` semántico para mostrar atajos de teclado y combinaciones de teclas. Úsalo para documentar interacciones por teclado dentro de instrucciones, texto de ayuda o etiquetas de interfaz.
@@ -36,6 +45,14 @@ Instala el paquete con `pnpm add @solidiom/kbd`. El paquete requiere dependencia
 ## Estilos
 
 Kbd lleva los atributos `data-scope="kbd"` y `data-part="root"`. Estílalo con una fuente monoespaciada, un fondo sutil y un borde para diferenciarlo del texto circundante. El elemento hereda el estilo por defecto del navegador para `<kbd>`; sobrescríbelo con tu receta para una apariencia coherente.
+
+## Interacción con teclado
+
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
+
+## Partes
+
+Kbd expone una única parte `Root`. Renderiza un elemento `<kbd>` en línea con los atributos `data-scope="kbd"` y `data-part="root"`.
 
 ## Renderizado SSR e hidratación
 

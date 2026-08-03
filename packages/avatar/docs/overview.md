@@ -11,6 +11,15 @@ status: draft
 package: "@solidiom/avatar"
 primitive: avatar
 section: overview
+notApplicable:
+  - section: composition
+    reason: Self-contained primitive with no compound sub-primitives to compose.
+  - section: relationships
+    reason: No sibling primitives; used within other compositions but owns no inter-primitive contract.
+  - section: migration
+    reason: No prior API; this is the first shipped version.
+  - section: testing
+    reason: Standard testing guidance covers this primitive. No primitive-specific non-obvious behavior exists.
 ---
 
 Avatar renders a user profile image with automatic fallback to text content (such as initials or a name) when the image fails to load. It manages image loading state internally and coordinates visibility between the image and fallback parts.
@@ -70,6 +79,10 @@ Avatar carries `data-scope="avatar"` and `data-part` attributes for targeting ea
 - `Fallback`: `data-scope="avatar"`, `data-part="fallback"` — renders as a `<span>`
 
 Style the root as a flex container to overlay the image and fallback. Use the `data-part` attributes to target individual parts.
+
+## Keyboard & behavior
+
+This primitive has no keyboard interaction. It renders static content that does not receive focus or respond to key events.
 
 ## SSR and hydration
 

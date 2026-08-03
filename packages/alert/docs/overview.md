@@ -11,6 +11,15 @@ status: draft
 package: "@solidiom/alert"
 primitive: alert
 section: overview
+notApplicable:
+  - section: composition
+    reason: Self-contained primitive with no compound sub-primitives to compose.
+  - section: relationships
+    reason: No sibling primitives; used within other compositions but owns no inter-primitive contract.
+  - section: migration
+    reason: No prior API; this is the first shipped version.
+  - section: testing
+    reason: Standard testing guidance covers this primitive. No primitive-specific non-obvious behavior exists.
 ---
 
 Alert renders an inline, non-modal notification area with ARIA live region semantics. It supports four visual variants (info, success, warning, error) and two assertiveness levels (assertive, polite) to control how screen readers announce the message. Title and Description parts are automatically wired via `aria-labelledby` and `aria-describedby` using SSR-safe stable IDs.
@@ -64,6 +73,10 @@ Alert carries `data-scope="alert"`, `data-part`, and `data-state` attributes for
 | Description | `description` | —                                               |
 
 Apply your visual recipe using the data attributes for targeting. Root renders as a `<div>`, Title as an `<h5>`, and Description as a `<div>`.
+
+## Keyboard & behavior
+
+This primitive has no keyboard interaction. It renders static content that does not receive focus or respond to key events.
 
 ## SSR and hydration
 

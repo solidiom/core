@@ -11,6 +11,15 @@ status: draft
 package: "@solidiom/label"
 primitive: label
 section: overview
+notApplicable:
+  - section: composition
+    reason: Self-contained primitive with no compound sub-primitives to compose.
+  - section: relationships
+    reason: No sibling primitives; used within other compositions but owns no inter-primitive contract.
+  - section: migration
+    reason: No prior API; this is the first shipped version.
+  - section: testing
+    reason: Standard testing guidance covers this primitive. No primitive-specific non-obvious behavior exists.
 ---
 
 Label renders a native `<label>` element with semantic data attributes. Use it to associate text with form controls, providing the accessibility connection required by assistive technologies.
@@ -42,6 +51,14 @@ Install the package with `pnpm add @solidiom/label`. The package requires compat
 ## Styling
 
 Label carries `data-scope="label"` and `data-part="root"` attributes. State flags (`data-disabled`, `data-required`, `data-invalid`) are available for conditional styling. The element inherits browser default `<label>` styling; override with your recipe for a consistent appearance.
+
+## Parts
+
+Label exposes a single `Root` part. It renders a `<label>` element with `data-scope="label"` and `data-part="root"` attributes. State flags (`data-disabled`, `data-required`, `data-invalid`) are available for conditional styling.
+
+## Keyboard & behavior
+
+This primitive has no keyboard interaction. It renders static content that does not receive focus or respond to key events.
 
 ## SSR and hydration
 

@@ -13,11 +13,13 @@ primitive: accordion
 section: examples
 exampleId: accordion-basic
 source:
-  path: packages/accordion/src/accordion.tsx
-  export: Root
+  path: apps/site/src/components/AccordionExample.tsx
+  export: AccordionExample
   language: tsx
-runnable: false
+runnable: true
 ---
+
+The live example demonstrates a single-expand collapsible accordion. Press **ArrowDown**/**ArrowUp** to move focus between triggers, **Home**/**End** to jump to the first or last trigger, and **Enter** or **Space** to toggle the focused section.
 
 ```tsx
 import * as Accordion from "@solidiom/accordion"

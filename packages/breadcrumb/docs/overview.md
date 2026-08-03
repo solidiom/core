@@ -11,6 +11,15 @@ status: draft
 package: "@solidiom/breadcrumb"
 primitive: breadcrumb
 section: overview
+notApplicable:
+  - section: composition
+    reason: Self-contained primitive with no compound sub-primitives to compose.
+  - section: relationships
+    reason: No sibling primitives; used within other compositions but owns no inter-primitive contract.
+  - section: migration
+    reason: No prior API; this is the first shipped version.
+  - section: testing
+    reason: Standard testing guidance covers this primitive. No primitive-specific non-obvious behavior exists.
 ---
 
 Breadcrumb renders a hierarchical navigation indicator that communicates the current page's location within a navigational hierarchy. It uses semantic list structure with proper ARIA markup for screen reader compatibility.
@@ -100,6 +109,10 @@ Indicates skipped breadcrumb items in a truncated trail. Renders as a `<span>` w
 ## Styling
 
 Breadcrumb carries `data-scope="breadcrumb"` and `data-part` attributes on each part (`root`, `list`, `item`, `link`, `separator`, `ellipsis`). Style with appropriate spacing, typography, or colors for your design system. Target elements using the data attributes for robust styling.
+
+## Keyboard & behavior
+
+This primitive has no keyboard interaction. It renders static content that does not receive focus or respond to key events.
 
 ## SSR and hydration
 

@@ -11,6 +11,13 @@ status: draft
 package: "@solidiom/accordion"
 primitive: accordion
 section: overview
+notApplicable:
+  - section: relationships
+    reason: Accordion has no sibling primitives; it composes with others but owns no inter-primitive contract.
+  - section: migration
+    reason: No prior API; this is the first shipped version.
+  - section: testing
+    reason: Standard testing guidance covers this primitive. Keyboard behavior is fully documented in the Keyboard interaction section above.
 ---
 
 Accordion presents a vertically stacked set of collapsible sections. Users expand one or more items to reveal associated content. Use it to organize large amounts of information into manageable, scannable groups.
@@ -51,6 +58,15 @@ Use `value` and `onValueChange` for controlled state. The uncontrolled variant m
 ## Installation
 
 Install the package with `pnpm add @solidiom/accordion`. The package requires compatible `solid-js` and `@solidjs/web` peer dependencies.
+
+## Parts
+
+Accordion exposes four parts:
+
+- **Root** — the container that manages expand state and keyboard navigation. Accepts `type` (`"single"` | `"multiple"`), `collapsible`, `value`/`defaultValue`, and `onValueChange`.
+- **Item** — a collapsible section wrapper identified by its `value` prop.
+- **Trigger** — the button that toggles its parent Item. Carries `aria-expanded` and `aria-controls`.
+- **Content** — the collapsible region associated with its sibling Trigger. Hidden when the item is closed.
 
 ## Styling
 

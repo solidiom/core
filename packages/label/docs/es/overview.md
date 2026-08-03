@@ -11,6 +11,18 @@ status: draft
 package: "@solidiom/label"
 primitive: label
 section: overview
+notApplicable:
+  - section: composition
+    reason: Primitivo autónomo sin sub-primitivos compuestos.
+  - section: relationships
+    reason: Sin primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
+  - section: migration
+    reason: Sin API previa; esta es la primera versión publicada.
+  - section: testing
+    reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
+
+translationStatus: draft
+translationSourceHash: "c0e1fa30c988d0c445afb33a0b15ef0e36495292c24f44226f78bb6ac96ee121"
 ---
 
 Label renderiza un elemento nativo `<label>` con atributos de datos semánticos. Úsalo para asociar texto con controles de formulario, proporcionando la conexión de accesibilidad requerida por las tecnologías de asistencia.
@@ -46,3 +58,7 @@ Label carries `data-scope="label"` y `data-part="root"` atributos. Las banderas 
 ## SSR e hidratación
 
 Label es un elemento estático de presentación sin estado interactivo. Se renderiza como HTML estático y no requiere hidratación del lado del cliente.
+
+## Interacción con teclado
+
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.

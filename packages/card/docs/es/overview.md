@@ -11,8 +11,17 @@ status: draft
 package: "@solidiom/card"
 primitive: card
 section: overview
-translationSourceHash: "e3c450e61ea3422353cb708e31efc84ebb57491ea3936bccd3bfaf66053b6ada"
+translationSourceHash: "efb119d7203dc0f8119bc5d2f855dde72d09dd7a30cd35098f45b58893a17fac"
 translationStatus: draft
+notApplicable:
+  - section: composition
+    reason: Primitivo autónomo sin sub-primitivos compuestos.
+  - section: relationships
+    reason: Sin primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
+  - section: migration
+    reason: Sin API previa; esta es la primera versión publicada.
+  - section: testing
+    reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 ---
 
 Card renderiza un contenedor de contenido con partes componibles para encabezado, titulo, descripcion, cuerpo de contenido y pie. Proporciona una estructura semántica para agrupar contenido y acciones relacionadas.
@@ -52,6 +61,10 @@ Instala el paquete con `pnpm add @solidiom/card`. El paquete requiere dependenci
 ## Estilos
 
 Card lleva los atributos `data-scope="card"` y `data-part` en cada parte. Estiliza las partes individuales usando los atributos data para seleccionar. Las partes se renderizan como elementos HTML semánticos; aplica tu receta visual usando los atributos data para la selección.
+
+## Interacción con teclado
+
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 
