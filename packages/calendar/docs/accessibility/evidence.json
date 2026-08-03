@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "primitive": "calendar",
+  "evidenceIds": ["axe-calendar-scan-v1"],
+  "summary": {
+    "passes": 20,
+    "violations": 0,
+    "incomplete": 1,
+    "outcome": "pass"
+  },
+  "lastRun": "2026-08-03T13:53:22.015Z",
+  "provenance": {
+    "browser": "chromium",
+    "commitSha": "79403f10f9b4544162b3918e40f966ede39e8dd4",
+    "ciRunUrl": null
+  }
+}

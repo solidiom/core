@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v2.json",
   "version": 2,
-  "generatedAt": "2026-08-03T13:40:44.000Z",
+  "generatedAt": "2026-08-03T13:51:36.000Z",
   "integrity": {
     "algorithm": "sha256",
     "entriesHash": "4fc19a5151c57b74208cabfd631d39fa72ed7d29a95edb020fa40ef2072b66d4"
@@ -133,15 +133,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-alert-dialog-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -382,15 +387,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-calendar-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -478,15 +488,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-carousel-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -565,15 +580,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-collapsible-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -648,15 +668,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-command-palette-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -688,15 +713,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-context-menu-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -781,15 +811,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-date-picker-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -873,15 +908,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-drawer-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -913,15 +953,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-empty-state-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1001,15 +1046,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-hover-card-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1090,15 +1140,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-input-otp-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1226,15 +1281,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-listbox-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1312,15 +1372,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-meter-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1497,15 +1562,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-progress-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1582,15 +1652,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-resizable-panels-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1620,15 +1695,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-scroll-area-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1801,15 +1881,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-skeleton-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1840,15 +1925,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-slider-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1879,15 +1969,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-spinner-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2056,15 +2151,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-toggle-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2097,15 +2197,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-toggle-group-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2137,15 +2242,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-toolbar-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2226,15 +2336,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-tree-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2265,15 +2380,20 @@
       "deliverables": [
         "primitive"
       ],
-      "hasAccessibilityEvidence": false,
+      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-virtual-list-scan-v1"
+        ]
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [],

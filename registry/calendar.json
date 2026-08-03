@@ -40,14 +40,20 @@
     ]
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-calendar-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:53:22.015Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -80,11 +86,11 @@
       "src/range-calendar-context.ts": "aa0a042cb7eb03a86716ac46b99c7a9b0b7c5f0281cd206f94f256cb63f592d1",
       "src/range-calendar.tsx": "a2e11784aa50c97706e029d73d9018f2bbfdcb0e747eba0e6e729d67a197b34c"
     },
-    "lastGenerated": "2026-08-03T13:40:44.000Z"
+    "lastGenerated": "2026-08-03T13:51:36.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/calendar"
   },
-  "lastUpdated": "2026-08-03T13:40:44.000Z"
+  "lastUpdated": "2026-08-03T13:51:36.000Z"
 }
