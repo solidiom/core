@@ -61,15 +61,15 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "2f242ea00fdd398ac9160390af36fc77dc706cb9f58c5430d4bd6b3d82799eec",
+    "filesHash": "e96447c9a766b660323d340b4dcf1fd1a6cd4fc5a0d660ff3a141df6baa996ff",
     "fileDigests": {
-      "src/index.tsx": "d7526dbcd3bb660a6b50fa985b928e3619aa98accc47385800b30f58beb77d36"
+      "src/index.tsx": "5ccc605a6374420855195af4b1743447eb2e613745497acfbcc357ad32d2b346"
     },
-    "lastGenerated": "2026-07-31T05:34:08.000Z"
+    "lastGenerated": "2026-08-03T11:49:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/alert-dialog"
   },
-  "lastUpdated": "2026-07-31T05:34:08.000Z"
+  "lastUpdated": "2026-08-03T11:49:56.000Z"
 }

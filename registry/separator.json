@@ -26,14 +26,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-separator-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:13:29.976Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -43,7 +49,10 @@
   },
   "search": {
     "keywords": [
+      "decorative",
+      "decorativo",
       "divider",
+      "divisor",
       "horizontal",
       "layout",
       "runtime",
@@ -58,11 +67,11 @@
     "fileDigests": {
       "src/index.tsx": "fde93aafb616eb5bb8f0a8204d6e8b01236f9761a70966802c07cb0fbfc1e583"
     },
-    "lastGenerated": "2026-07-31T05:34:08.000Z"
+    "lastGenerated": "2026-08-03T11:49:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/separator"
   },
-  "lastUpdated": "2026-07-31T05:34:08.000Z"
+  "lastUpdated": "2026-08-03T11:49:56.000Z"
 }

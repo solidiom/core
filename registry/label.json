@@ -26,11 +26,14 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-label-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:13:29.976Z"
   },
   "documentation": {
-    "status": "draft",
+    "status": "complete",
     "locales": {
       "en": {
         "status": "draft"
@@ -46,10 +49,12 @@
   },
   "search": {
     "keywords": [
+      "accesible",
       "accessible",
       "controls",
       "element",
       "form",
+      "formulario",
       "htmlfor",
       "input",
       "label",
@@ -64,11 +69,11 @@
     "fileDigests": {
       "src/index.tsx": "03052f8acac318fb4997cae2d479c21a487d870700c683c83331c130419bcc14"
     },
-    "lastGenerated": "2026-07-31T05:34:08.000Z"
+    "lastGenerated": "2026-08-03T11:49:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/label"
   },
-  "lastUpdated": "2026-07-31T05:34:08.000Z"
+  "lastUpdated": "2026-08-03T11:49:56.000Z"
 }

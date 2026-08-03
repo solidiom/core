@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
-  "primitive": "data-table",
-  "evidenceIds": ["axe-data-table-scan-v1"],
+  "primitive": "badge",
+  "evidenceIds": ["axe-badge-scan-v1"],
   "summary": {
-    "passes": 5,
+    "passes": 1,
     "violations": 0,
     "incomplete": 0,
     "outcome": "pass"

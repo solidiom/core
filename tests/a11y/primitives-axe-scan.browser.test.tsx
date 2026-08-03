@@ -278,7 +278,12 @@ const PRIMITIVE_FIXTURES: Record<PublicPrimitive, () => JSX.Element> = {
       }
     </VirtualList.Root>
   ),
-  "visually-hidden": () => <VisuallyHidden.Root>Screen reader only text</VisuallyHidden.Root>,
+  "visually-hidden": () => (
+    <button type="button">
+      <VisuallyHidden.Root>Close dialog</VisuallyHidden.Root>
+      <span aria-hidden="true">×</span>
+    </button>
+  ),
   "alert-dialog": () => (
     <AlertDialog.Root>
       <AlertDialog.Trigger>Delete</AlertDialog.Trigger>

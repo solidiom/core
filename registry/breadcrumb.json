@@ -26,14 +26,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-breadcrumb-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:13:29.976Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -44,12 +50,18 @@
   "search": {
     "keywords": [
       "breadcrumb",
+      "breadcrumb-list",
+      "enlaces",
       "hierarchical",
+      "hierarchy",
       "indicator",
+      "jerarquía",
       "links",
       "location",
+      "navegación",
       "navigation",
       "runtime",
+      "ruta-de-migas",
       "with"
     ]
   },
@@ -59,11 +71,11 @@
     "fileDigests": {
       "src/index.tsx": "7c6d2fabb0c065fce76e20ce71df3ac5b0456819b6e4f65f0ed2764371edee75"
     },
-    "lastGenerated": "2026-07-31T05:34:08.000Z"
+    "lastGenerated": "2026-08-03T11:49:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/breadcrumb"
   },
-  "lastUpdated": "2026-07-31T05:34:08.000Z"
+  "lastUpdated": "2026-08-03T11:49:56.000Z"
 }

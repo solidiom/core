@@ -30,14 +30,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-button-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:13:29.976Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -51,12 +57,23 @@
   },
   "search": {
     "keywords": [
+      "acción",
+      "action",
       "actions",
+      "alternar",
       "button",
+      "carga",
       "clickable",
+      "clickeable",
+      "deshabilitado",
+      "disabled",
+      "enviar",
       "for",
       "input",
+      "loading",
       "runtime",
+      "submit",
+      "toggle",
       "trigger"
     ]
   },
@@ -69,11 +86,11 @@
       "src/index.tsx": "afbf08de5a4fd3fd5cc54accfc155f04df05e5894a64914fc4903e69452a3855",
       "src/toggle-button.tsx": "a5ca880d302fddc1c78b5f7c609fbaf3c228fadddcbfa7e563ccb1d56748013e"
     },
-    "lastGenerated": "2026-07-31T05:34:08.000Z"
+    "lastGenerated": "2026-08-03T11:49:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/button"
   },
-  "lastUpdated": "2026-07-31T05:34:08.000Z"
+  "lastUpdated": "2026-08-03T11:49:56.000Z"
 }
