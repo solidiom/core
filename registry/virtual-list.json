@@ -79,11 +79,11 @@
       "src/virtual-list-context.ts": "9cc38eb71a5c2dba32dbeea5c6a420d812c51fe729096aa9aa8f1afbf8bf32c6",
       "src/virtual-list.tsx": "926f02eca17c8299b5dd9ae4bf09d745d19eaf0f1bd8d715e79c62575a53f40d"
     },
-    "lastGenerated": "2026-08-03T16:56:54.000Z"
+    "lastGenerated": "2026-08-03T17:02:33.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/virtual-list"
   },
-  "lastUpdated": "2026-08-03T16:56:54.000Z"
+  "lastUpdated": "2026-08-03T17:02:33.000Z"
 }

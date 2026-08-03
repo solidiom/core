@@ -68,11 +68,11 @@
     "fileDigests": {
       "src/index.tsx": "726922c768549e03a4820a47c9ae747cd092add393838f6acc33dfcaee19e42d"
     },
-    "lastGenerated": "2026-08-03T16:56:54.000Z"
+    "lastGenerated": "2026-08-03T17:02:33.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/kbd"
   },
-  "lastUpdated": "2026-08-03T16:56:54.000Z"
+  "lastUpdated": "2026-08-03T17:02:33.000Z"
 }

@@ -64,11 +64,11 @@
     "fileDigests": {
       "src/index.tsx": "1130ef7e1c908ed8835f4c775e3aa7faf134775d4263957b57577a83fcb0be70"
     },
-    "lastGenerated": "2026-08-03T16:56:54.000Z"
+    "lastGenerated": "2026-08-03T17:02:33.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/progress"
   },
-  "lastUpdated": "2026-08-03T16:56:54.000Z"
+  "lastUpdated": "2026-08-03T17:02:33.000Z"
 }
