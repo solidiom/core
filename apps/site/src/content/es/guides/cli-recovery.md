@@ -8,7 +8,7 @@ locale: es
 maturity: beta
 order: 8
 audience: intermediate
-translationSourceHash: "284dbe616657eef8e44e62a0383e0d85860efc3bcf96708b61ce07a991201179"
+translationSourceHash: "afd97254da709b98cd792db911527d59e5c57daa8609c48e203661b625942c0c"
 translationStatus: draft
 ---
 
@@ -28,6 +28,17 @@ El journal de rollback funciona así:
 4. Los archivos existentes recuperan su contenido original
 
 Esto asegura que un fallo parcial nunca deje el proyecto en un estado inconsistente.
+
+### Resolución de conflictos
+
+Si un archivo fue modificado localmente, puedes usar estas opciones:
+
+```bash
+solidiom add dialog --mode source --diff    # ver los cambios pendientes
+solidiom add dialog --mode source --force   # sobrescribir archivos locales
+```
+
+El rollback actúa como un signal de seguridad: si algo falla, el estado anterior se restaura completamente sin intervención manual.
 
 ## Creación de proyectos y limpieza
 
@@ -152,13 +163,20 @@ pnpm build
 El lockfile `.solidiom/lock.json` registra la procedencia de cada instalación:
 
 - `verified` — la instalación pasó la verificación contra el manifiesto del registro
-- `unverified` — la instalación se realizó con `--allow-unverified`
+- `provenance: "unverified"` — la instalación se realizó con `--allow-unverified`
 
 Puedes verificar la procedencia con:
 
 ```bash
 solidiom inspect provenance
+solidiom verify --registry
 solidiom doctor
+```
+
+Para inspeccionar el plan de resolución de dependencias:
+
+```bash
+solidiom plan --json
 ```
 
 `solidiom doctor` reporta entradas no verificadas como advertencias:
@@ -171,6 +189,8 @@ solidiom doctor
 ## Registro dañado o no confiable
 
 Si un archivo de registro existe pero no pasa la validación del esquema, la CLI no lo ignora silenciosamente. En lugar de caer al siguiente candidato, reporta un error. Un registro no confiable o corrupto no se trata como "ausente".
+
+La configuración de `.solidiom/policy.json` determina qué nivel de verificación es requerido para cada entorno.
 
 ## Referencia
 

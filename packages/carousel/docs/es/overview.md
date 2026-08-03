@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/carousel"
 primitive: carousel
 section: overview
-translationSourceHash: "4ae002ed58c6fc82b6b31e1cb609c4a775817ca810016ea4d46bf5f2743fbad8"
+translationSourceHash: "b417ee075140caf346aa44c9f0d2f6a7269d407fcbb92fc1c2abfdba2523c7ef"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -54,7 +54,7 @@ Carousel lleva los atributos `data-scope="carousel"` y `data-part` en cada parte
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

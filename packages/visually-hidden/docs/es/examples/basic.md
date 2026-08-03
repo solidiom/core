@@ -17,7 +17,7 @@ source:
   export: Root
   language: tsx
 runnable: false
-translationSourceHash: "1993ac7e64336006d76c3bac2dbacf6f9580d57e19644b537f63fafcebd2c96d"
+translationSourceHash: "f31d42464b2fe550da3c35be4049a9ef3ddc9cdc1a38e1904f53b5d9cb78e4d0"
 translationStatus: draft
 ---
 
@@ -32,7 +32,7 @@ import * as VisuallyHidden from "@solidiom/visually-hidden"
 
 ## Encabezado oculto
 
-Usa Visually Hidden para proporcionar encabezados a los lectores de pantalla que den estructura sin desorden visual.
+Usa Visually Hidden para proporcionar encabezados a los lector de pantalla que den estructura sin desorden visual.
 
 ```tsx
 ;<article>
@@ -48,7 +48,7 @@ Usa Visually Hidden para proporcionar encabezados a los lectores de pantalla que
 
 ## Instrucciones de campos de formulario
 
-Oculta instrucciones verbosas de campos de formulario visualmente mientras las mantienes accesibles para lectores de pantalla.
+Oculta instrucciones verbosas de campos de formulario visualmente mientras las mantienes accesibles para lector de pantalla.
 
 ```tsx
 ;<label>

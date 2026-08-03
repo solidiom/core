@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/progress"
 primitive: progress
 section: overview
-translationSourceHash: "550160d95f46dc01ebd7f12e2685f75d318d8ea0b4599ae597272698f17f1696"
+translationSourceHash: "87292d0c1a3889924f816f95639d7dad74e480c8c11e140953954966f06349a7"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -53,7 +53,7 @@ Progress lleva los atributos `data-scope="progress"` y `data-part` en cada parte
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Renderizado SSR e hidratación
 

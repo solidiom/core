@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/select"
 primitive: select
 section: overview
-translationSourceHash: "51de1cd7c46561bccbb23fa4edfcd7458f346d493275c83756be07ce6005b276"
+translationSourceHash: "4b3163a2ea8751bf0d2595a1f2bfe60e059e71ce9a23901d70da207e2aebe8eb"
 translationStatus: draft
 notApplicable:
   - section: relationships

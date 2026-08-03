@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/empty-state"
 primitive: empty-state
 section: overview
-translationSourceHash: "4c70d4f20042a4113061e6372ecef0986b59d64f91b6575644b3dcfcd18688fe"
+translationSourceHash: "ac1c7cd2ba31a4ef8a096e37501b470b7de0cc611e5af861548e52357299c5ef"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -54,7 +54,7 @@ Empty State lleva los atributos `data-scope="empty-state"` y `data-part` en cada
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

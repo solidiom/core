@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/hover-card"
 primitive: hover-card
 section: overview
-translationSourceHash: "aff99ea253a42329b6b1934a1055dd195dce38269eca95b4fff1ddbd5f9f6c60"
+translationSourceHash: "fc79c03b1bf6cfe69dca9860d23b61462539a08361b4b974822557d9c0acee0c"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -52,7 +52,7 @@ Hover Card lleva los atributos `data-scope="hover-card"` y `data-part` en cada p
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

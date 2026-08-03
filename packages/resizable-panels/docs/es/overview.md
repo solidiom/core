@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/resizable-panels"
 primitive: resizable-panels
 section: overview
-translationSourceHash: "5a9eaad753e5e18211fdca3a429306648ce822a28b6d8a9eb03a16d8e4f2d8db"
+translationSourceHash: "341b84aba5b2db799af46d26b3fbee6bbbbc9ee81f4c4c278bba47e4af33996b"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -52,7 +52,7 @@ Resizable Panels lleva los atributos `data-scope="resizable-panels"` y `data-par
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

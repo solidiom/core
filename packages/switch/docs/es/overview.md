@@ -1,7 +1,7 @@
 ---
 contentSchemaVersion: 1
 title: Switch
-description: Binary toggle with on/off semantics.
+description: Interruptor binario con semántica de encendido/apagado.
 keywords: [binary, input, off, runtime, semantics, switch, toggle]
 locale: es
 maturity: draft
@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/switch"
 primitive: switch
 section: overview
-translationSourceHash: "ef80e64fc7f37ac27f11aea009482b7315fd89a1dda60f647ea8601383442ad8"
+translationSourceHash: "feffd8fe06554379839ad5b5ce8d452ea72a971502f25854e1803ed9cd6b00da"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -24,7 +24,7 @@ notApplicable:
     reason: La guía estándar de pruebas cubre este primitivo.
 ---
 
-Binary toggle with on/off semantics.
+Interruptor binario con semántica de encendido/apagado.
 
 ## Uso
 

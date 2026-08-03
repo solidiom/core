@@ -17,7 +17,7 @@ source:
   export: CheckboxExample
   language: tsx
 runnable: true
-translationSourceHash: "a3c283efdb659a2bc1da254fcb8ae7b3b3f5f12ff3db003fd8da9008bf27a4a3"
+translationSourceHash: "eef4fe01b31ef48bc3c945143d59169209d608c322e4817f3a64caf68f89e67c"
 translationStatus: draft
 ---
 

@@ -28,4 +28,6 @@ nonApplicableCriteria:
   - criterion: focus
     rationale: Kbd es un elemento de presentación no interactivo y no recibe enfoque.
 reviewStatus: draft
+translationSourceHash: "506bf5e38f7c0b68c6f1cc58d64d8f353c87b84308158b897f3ac504ecd96819"
+translationStatus: draft
 ---

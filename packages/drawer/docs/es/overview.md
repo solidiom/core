@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/drawer"
 primitive: drawer
 section: overview
-translationSourceHash: "9bef2f401373ab2be3ef2fd55753f28a6d666ecbac9f4c2294c555e43a2857f7"
+translationSourceHash: "77cf13de16b810e396cc7df462c84afbd801b633670b3d2a64095f39737167e5"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -56,7 +56,7 @@ Drawer lleva los atributos `data-scope="drawer"` y `data-part` en cada parte par
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/listbox"
 primitive: listbox
 section: overview
-translationSourceHash: "d6ad971136c82cac1c79578178c29334464e6a0cde88438bdb53c5cecbc0b3c8"
+translationSourceHash: "d7ddf8dd81bbf90965deb3758e6c66005559e6bf4c62a36d285334aebe95a8ac"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -53,7 +53,7 @@ Listbox lleva los atributos `data-scope="listbox"` y `data-part` en cada parte p
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Renderizado SSR e hidratación
 

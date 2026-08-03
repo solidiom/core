@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/sheet"
 primitive: sheet
 section: overview
-translationSourceHash: "4394b68124a43e5f3031acd12ecd16f67f248a309b85f3dddd35f5b8edc2cca5"
+translationSourceHash: "7dfa8e95ebe3bbb4fdb1a36873ac2fac2cf32f4256aab24fd36d29ee526bc32a"
 translationStatus: draft
 notApplicable:
   - section: relationships

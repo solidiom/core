@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/tabs"
 primitive: tabs
 section: overview
-translationSourceHash: "924f569ed83bcd00112772b7dafd3229c8a351c8a37a902f8fbbb6644222ad06"
+translationSourceHash: "2617a73648c639709b657e59ff466ded740a8020ba3c37d1f6ef621af9154eaf"
 translationStatus: draft
 notApplicable:
   - section: relationships

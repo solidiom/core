@@ -32,6 +32,6 @@ nonApplicableCriteria:
   - criterion: focus
     rationale: Avatar es un elemento de presentación no interactivo y no recibe enfoque.
 reviewStatus: draft
-translationSourceHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+translationSourceHash: "2f24c866ebf892ec31b5b9b74ae06f90a1e4a5a56825d54194d0f7e77d09c857"
 translationStatus: draft
 ---

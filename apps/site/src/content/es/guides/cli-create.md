@@ -7,13 +7,13 @@ locale: es
 maturity: beta
 order: 4
 audience: beginner
-translationSourceHash: "8c72f83c6f76013984ff35139bac3982062ff93aec41b0c150a141d5333aca29"
+translationSourceHash: "1c416ecf8ecb74b0bc142ec150494518adea1a4ed5d40c5649a6f5bb41e25d4e"
 translationStatus: draft
 ---
 
 # Crear un proyecto desde una plantilla
 
-El comando `solidiom create` genera un nuevo proyecto desde una plantilla, con configuraciones de Solidiom ya integradas. Es la forma más rápida de comenzar con Solidiom.
+El comando `solidiom create` genera un nuevo proyecto desde una plantilla, con configuraciones de Solidiom ya integradas. Es la forma más rápida de comenzar a usar primitivos de Solidiom en un nuevo proyecto.
 
 ## Uso interactivo
 
@@ -41,13 +41,18 @@ La bandera `--yes` exige que todos los valores requeridos estén presentes. Si f
 
 Las plantillas incluyen configuraciones predefinidas con frameworks específicos:
 
-- `vite-solid-router` — proyecto con Vite y solid-router
+| Alias                    | Paquete                                     | Descripción                                             |
+| ------------------------ | ------------------------------------------- | ------------------------------------------------------- |
+| `vite-solid-router`      | `@solidiom/template-vite-solid-router`      | Proyecto con Vite y Solid Router (solo cliente)         |
+| `tanstack-start-solid`   | `@solidiom/template-tanstack-start-solid`   | Proyecto full-stack con TanStack Start y SSR            |
 
 Para usar una plantilla específica:
 
 ```bash
 solidiom create my-app --template vite-solid-router --yes
 ```
+
+Cada plantilla incluye primitivos base preconfigurados y un perfil de estilo predeterminado.
 
 ## Perfil de estilo
 
@@ -100,13 +105,13 @@ Estas protecciones son intencionales y no se pueden desactivar con `--force`.
 
 ## Nombre del proyecto
 
-El nombre del proyecto debe cumplir con las reglas de nomenclatura de paquetes npm:
+El nombre del proyecto (pasado con `--name` o como argumento posicional) debe cumplir con las reglas de nomenclatura de paquetes npm:
 
 - Minúsculas
 - Solo caracteres `[a-z0-9-._~]`
 - No puede comenzar con "." o "_"
 - Máximo 214 caracteres
-- Soporta nombres con ámbito: `@mi-org/mi-app`
+- Soporta nombres con ámbito (`@scope/name`): `@mi-org/mi-app`
 
 ## Limpieza tras cancelación
 

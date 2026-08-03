@@ -17,7 +17,7 @@ source:
   export: Root
   language: tsx
 runnable: false
-translationSourceHash: "7576166283cdf25739936df6b4ddbee6613c99cddd556c27dde3c4e31c48b535"
+translationSourceHash: "1461b9dad4f13d90cf14fe425d53c3a404090b6fc12b51e659bbd5891353dbdd"
 translationStatus: draft
 ---
 
@@ -53,7 +53,7 @@ Alert soporta cuatro variantes visuales controladas por el prop `type`.
 
 ## Asertividad
 
-Controla cómo se anuncia el alert a los lectores de pantalla con el prop `assertiveness`. Usa `polite` para actualizaciones no urgentes que no deberían interrumpir al usuario.
+Controla cómo se anuncia el alert a los lector de pantalla con el prop `assertiveness`. Usa `polite` para actualizaciones no urgentes que no deberían interrumpir al usuario.
 
 ```tsx
 ;<Alert.Root type="info" assertiveness="polite">

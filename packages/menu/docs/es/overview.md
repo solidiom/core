@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/menu"
 primitive: menu
 section: overview
-translationSourceHash: "6d70dfb71ab68f7d94d0a4b8235044c846f8f6150b0103fc7d22c331e6e7b2ef"
+translationSourceHash: "c678824796683d373f854718663ed084da140d0e3391057048e89f909b9c2adf"
 translationStatus: draft
 notApplicable:
   - section: relationships

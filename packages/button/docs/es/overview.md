@@ -82,7 +82,7 @@ Aplica tu receta visual — variantes (default, destructive, outline, secondary,
 
 Button soporta la activación estándar de botones:
 
-- **Enter** o **Space** activa el botón cuando tiene enfoque.
+- **Enter** o **Space** activa el botón cuando tiene foco.
 - Los estados deshabilitado y de carga previenen la activación.
 
 ## Renderizado SSR e hidratación

@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/badge"
 primitive: badge
 section: overview
-translationSourceHash: "6a391e13fd94d4d2808f7450b2374db928f4958ba4fa95dd67619a048f94551a"
+translationSourceHash: "d748e3c83d93e56490a8f65902f210809c7ac0be68dee8c4b63125c76dcd3866"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -53,7 +53,7 @@ Badge lleva los atributos `data-scope="badge"` y `data-part="root"`. Estílalo c
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe foco ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 

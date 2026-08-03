@@ -42,6 +42,8 @@ consumerDuties:
   - Asegura que los valores de texto de los elementos sean únicos y descriptivos.
 nonApplicableCriteria: []
 reviewStatus: draft
+translationSourceHash: "de89b67f6581c613ccbcc449b6e41ea365fbd5d4d81eb25a29323c8709d0ad17"
+translationStatus: draft
 ---
 
 ## Evidencia automatizada
@@ -50,4 +52,4 @@ El resumen de evidencias siguiente se genera a partir del análisis axe ejecutab
 
 ## Verificación manual
 
-Revisa la navegación por teclado, el resaltado por descendiente activo, la retención del foco en la entrada, el zoom/reflujo, los objetivos táctiles, el movimiento reducido, el contraste y los anuncios de lectores de pantalla en el producto que lo consume. El diseño, las etiquetas y la lógica de filtrado de un consumidor pueden cambiar el resultado de accesibilidad.
+Revisa la navegación por teclado, el resaltado por descendiente activo, la retención del foco en la entrada, el zoom/reflujo, los objetivos táctiles, el movimiento reducido, el contraste y los anuncios de lector de pantalla en el producto que lo consume. El diseño, las etiquetas y la lógica de filtrado de un consumidor pueden cambiar el resultado de accesibilidad.

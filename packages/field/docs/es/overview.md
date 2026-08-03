@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/field"
 primitive: field
 section: overview
-translationSourceHash: "89d9dc72550cda0b90f8810e50a498378567f8b5cc2931eb172de1ab85ff9ea5"
+translationSourceHash: "c1c7ebecdf7a3c79663fe551a5b4536b8c71584cac52716173fb9bf7261f4a71"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -54,7 +54,7 @@ Field lleva los atributos `data-scope="field"` y `data-part` en cada parte para 
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

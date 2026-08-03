@@ -12,7 +12,7 @@ status: draft
 package: "@solidiom/visually-hidden"
 primitive: visually-hidden
 section: overview
-translationSourceHash: "19db14fd65d305502a81e4ac58a1db4361cc5882cb50cfd460d7ce6b9ade7a8c"
+translationSourceHash: "c59df02bee085e7c42125494eba9e293b18ae52a0c4116e5ec5d3f3d94683195"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -25,7 +25,7 @@ notApplicable:
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 ---
 
-Visually Hidden oculta contenido visualmente manteniéndolo accesible para lectores de pantalla. Utiliza la técnica estándar de clip/overflow para eliminar contenido del diseño visual sin retirarlo del árbol de accesibilidad.
+Visually Hidden oculta contenido visualmente manteniéndolo accesible para lector de pantalla. Utiliza la técnica estándar de clip/overflow para eliminar contenido del diseño visual sin retirarlo del árbol de accesibilidad.
 
 ## Uso
 
@@ -56,7 +56,7 @@ Visually Hidden lleva los atributos `data-scope="visually-hidden"` y `data-part=
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe foco ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 

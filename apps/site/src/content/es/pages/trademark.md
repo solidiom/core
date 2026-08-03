@@ -2,7 +2,7 @@
 title: Política de Marcas y Uso de Marca
 description: Directrices para el uso del nombre, logo y activos de marca de Solidiom.
 locale: es
-translationSourceHash: b96d977211955c606d7949c797977515c30232133272f07168f8a296b17e3545
+translationSourceHash: "b96d977211955c606d7949c797977515c30232133272f07168f8a296b17e3545"
 translationStatus: draft
 ---
 

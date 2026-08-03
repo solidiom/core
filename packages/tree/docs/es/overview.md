@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/tree"
 primitive: tree
 section: overview
-translationSourceHash: "57cd293f2e94fc83a6bcc8af994a8300fb0a06f64faba2d6bb22c60005c6ee63"
+translationSourceHash: "5acf49b4879d866bc941e26bb08b9efcb40e13f07400cd248040a185cbf29f93"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -53,7 +53,7 @@ Tree lleva los atributos `data-scope="tree"` y `data-part` en cada parte para la
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

@@ -32,6 +32,8 @@ consumerDuties:
   - Manejar estados vacíos y de carga con mensajes apropiados para tecnología de asistencia.
 nonApplicableCriteria: []
 reviewStatus: draft
+translationSourceHash: "cbfa39ea9964cc1fdf9f4a9ff88ae8c3569738204a96c05221885e941436582b"
+translationStatus: draft
 ---
 
 ## Evidencia automatizada
@@ -40,4 +42,4 @@ El resumen de evidencias siguiente se genera a partir del análisis axe ejecutab
 
 ## Verificación manual
 
-Revisa la alternancia de ordenamiento por teclado, el movimiento del foco entre encabezados, el zoom/reflujo, los objetivos táctiles, el movimiento reducido, el contraste y los anuncios de lectores de pantalla en el producto que lo consume. El diseño, las etiquetas y el flujo de un consumidor pueden cambiar el resultado de accesibilidad.
+Revisa la alternancia de ordenamiento por teclado, el movimiento del foco entre encabezados, el zoom/reflujo, los objetivos táctiles, el movimiento reducido, el contraste y los anuncios de lector de pantalla en el producto que lo consume. El diseño, las etiquetas y el flujo de un consumidor pueden cambiar el resultado de accesibilidad.

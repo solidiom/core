@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/meter"
 primitive: meter
 section: overview
-translationSourceHash: "eba0cbbe4c3d179da2a154c31bff9c946e87aa29419c38bdbb77a2adb884c081"
+translationSourceHash: "31f6e0e5cde4afbcc07a0314605703d65ea4a976aff5a47f3e4202fc0a54e531"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -52,7 +52,7 @@ Meter lleva los atributos `data-scope="meter"` y `data-part` en cada parte para 
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Renderizado SSR e hidratación
 

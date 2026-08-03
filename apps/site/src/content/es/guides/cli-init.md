@@ -7,7 +7,7 @@ locale: es
 maturity: beta
 order: 2
 audience: beginner
-translationSourceHash: "e108ab7b383044c92b0bb9004e3fd4945e58cf4c5d2d53480fbe9adc67f7d2d1"
+translationSourceHash: "5648be89ffad3aac51fc8440a8aa97376a18bca9a623b008c4f639f6068f6921"
 translationStatus: draft
 ---
 
@@ -41,6 +41,14 @@ El contenido de `.solidiom/config.json` después de una inicialización:
   "defaultMode": "package"
 }
 ```
+
+Las claves principales incluyen:
+
+- `positioningAdapter`: adaptador de posicionamiento para primitivos como popover y tooltip
+- `componentDir`: directorio de destino para componente entregables
+- `defaultMode`: modo de instalación predeterminado (package o source)
+
+El registro se configura como fuente de verdad para la resolución de primitivos.
 
 ## Reescribir configuración existente
 
@@ -87,6 +95,18 @@ Devuelve un objeto con la ruta del archivo de configuración, si fue creado, y e
 | --------- | ------------------------------------ |
 | `--force` | Reescribe la configuración existente |
 | `--json`  | Salida en formato JSON               |
+
+## Archivo de política
+
+`.solidiom/policy.json` es opcional. Si existe, controla las restricciones de verificación y versiones del registro:
+
+```json
+{
+  "allowedVersions": {},
+  "registrySignatureRequired": false,
+  "registryTrustedKeys": []
+}
+```
 
 ## Personalizar la configuración
 

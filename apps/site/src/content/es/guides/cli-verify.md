@@ -8,7 +8,7 @@ locale: es
 maturity: beta
 order: 6
 audience: advanced
-translationSourceHash: "d7c4800ed1dab31969463f638b4f519430eb09b6e3dc6e2a2f493d499f095de4"
+translationSourceHash: "c1f6547f0d07695f57c4b31a0b91f63d6127fa0052abb80d9aeeb36338c7ad7c"
 translationStatus: draft
 ---
 
@@ -42,7 +42,7 @@ El comando consulta `.solidiom/policy.json` para determinar el modo de verificac
 
 ### Modos sin claves (sigstore)
 
-En el modo `sigstore`, la CLI:
+En el modo `sigstore`, la CLI usa `@sigstore/verify` y `@sigstore/tuf` para verificación sin claves:
 
 1. Busca un bundle Sigstore junto al artefacto (`<artefacto>.sigstore.json`)
 2. Obtiene la raíz de confianza de TUF (o usa la caché con `--no-network`)

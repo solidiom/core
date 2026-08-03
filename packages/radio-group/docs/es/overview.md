@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/radio-group"
 primitive: radio-group
 section: overview
-translationSourceHash: "3902e28c238bf918bacc3365243214a33b139365e48b014c03e43acbdf8360c1"
+translationSourceHash: "09b9475e9bc53e8debc3cdc7cb716dcfd9d2d40445d780387bae596e4e762e7f"
 translationStatus: draft
 notApplicable:
   - section: relationships

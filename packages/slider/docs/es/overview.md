@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/slider"
 primitive: slider
 section: overview
-translationSourceHash: "540bbf7d7d77c653851813b5fdb5a8841631f2422d8ae1131820f5cfa0a9cca2"
+translationSourceHash: "de11da99e94211d66d1279cf5174cec220f902cf211caaa03dde5a0d9fcc3184"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -53,7 +53,7 @@ Slider lleva los atributos `data-scope="slider"` y `data-part` en cada parte par
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

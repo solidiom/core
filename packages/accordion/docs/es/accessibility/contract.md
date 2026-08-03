@@ -42,6 +42,8 @@ consumerDuties:
   - Usar collapsible para acordeones donde ningún elemento necesita permanecer permanentemente abierto.
 nonApplicableCriteria: []
 reviewStatus: draft
+translationSourceHash: "61750e4a2508d6f40051318ba0590edf9c03f19218c6f1143d4420686fc4626a"
+translationStatus: draft
 ---
 
 ## Atributos de datos

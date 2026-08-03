@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/input"
 primitive: input
 section: overview
-translationSourceHash: "55c04edd870bcf0688ea187b24579ee7734cb8fb745aad36452a2d041b5890fe"
+translationSourceHash: "e5eddd465a8e6562094083476addf2f38c18ce786337483bb0e48a1705f390f7"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -53,7 +53,7 @@ Input lleva los atributos `data-scope="input"` y `data-part` en cada parte para 
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Renderizado SSR e hidratación
 

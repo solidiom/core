@@ -17,7 +17,11 @@ source:
   export: Root
   language: tsx
 runnable: false
+translationSourceHash: "6a10253f025e4194d5f871fa553cf940c9f8aa22b55fa97b61c655e3610ac247"
+translationStatus: draft
 ---
+
+El ejemplo interactivo demuestra un acordeón colapsable de expansión individual. Presiona **ArrowDown**/**ArrowUp** para mover el foco entre los triggers, **Home**/**End** para saltar al primer o último trigger, y **Enter** o **Space** para alternar la sección con foco.
 
 ```tsx
 import * as Accordion from "@solidiom/accordion"

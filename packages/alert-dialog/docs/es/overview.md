@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/alert-dialog"
 primitive: alert-dialog
 section: overview
-translationSourceHash: "4d13300543207be8e0b66f5d02980eb0e43534ecb27133db8035415a9d471a53"
+translationSourceHash: "892f6ba826e46b57fc6259423a1aef5fa58b3a63d4073a80e25b36daed7509a1"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -57,7 +57,7 @@ Alert Dialog lleva los atributos `data-scope="alert-dialog"` y `data-part` en ca
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

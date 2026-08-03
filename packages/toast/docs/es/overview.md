@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/toast"
 primitive: toast
 section: overview
-translationSourceHash: "8915be60855a9a3c81225de5f1acabe55e32c61f657565f54425d06712063dda"
+translationSourceHash: "3ae1421b54700da5437afd3c9eab89d425e192c7846a5c4ab222d1bdf785b70c"
 translationStatus: draft
 notApplicable:
   - section: relationships
@@ -54,7 +54,7 @@ Toast lleva los atributos `data-scope="toast"` y `data-part` en cada parte para 
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe enfoque ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
 
 ## Composición
 

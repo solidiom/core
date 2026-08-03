@@ -37,6 +37,6 @@ nonApplicableCriteria:
   - criterion: focus
     rationale: Alert es un elemento de presentación no interactivo y no recibe enfoque. Anuncia contenido a las tecnologías de asistencia sin robar el enfoque.
 reviewStatus: draft
-translationSourceHash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+translationSourceHash: "cc1300313105dfc71b69aed921d661136cd07954e39746c76401d6d857e83b7e"
 translationStatus: draft
 ---

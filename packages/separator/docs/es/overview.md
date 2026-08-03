@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/separator"
 primitive: separator
 section: overview
-translationSourceHash: "6a7585c17f122e239a56531ab9236aca23911ee027b94b6f34ac16caa8044cdb"
+translationSourceHash: "3155f6cb40429d70ca6633761fa0b7a90a509030e42c29e4a85171abe1cbf3d0"
 translationStatus: draft
 notApplicable:
   - section: composition
@@ -53,7 +53,7 @@ Separator lleva los atributos `data-scope="separator"`, `data-part="root"` y `da
 
 ## Interacción con teclado
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe foco ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 

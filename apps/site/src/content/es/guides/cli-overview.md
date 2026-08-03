@@ -7,7 +7,7 @@ locale: es
 maturity: beta
 order: 1
 audience: beginner
-translationSourceHash: "3345ef0517faed5364c7bf01b2e15687c9cd54c97dfa118ac130f5cd0334a5b6"
+translationSourceHash: "ac72b42dea7c9603acc6a24b98be1869838de0cadb9bddf230183cf71839c25e"
 translationStatus: draft
 ---
 
@@ -85,6 +85,18 @@ En el modo `source`, la CLI materializa los archivos fuente del primitivo direct
 
 ```bash
 solidiom add dialog --mode source
+```
+
+### Niveles de entregable
+
+Los primitivos pueden entregarse como primitivo base, componente con estilos, bloque, template, o theme según la capa de producto.
+
+## Registro y modo sin conexión
+
+La CLI resuelve primitivos contra el registro. Puedes usar un registro personalizado con `--registry` o trabajar en modo sin conexión con `--no-network`:
+
+```bash
+solidiom add dialog --registry http://localhost:4873 --no-network
 ```
 
 ## Política de seguridad

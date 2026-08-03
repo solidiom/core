@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/combobox"
 primitive: combobox
 section: overview
-translationSourceHash: "3dfb8bd98b2fbe49b40f4098b200301a0ffc32cacc063d6ef993ad39584cf664"
+translationSourceHash: "b3bb2ab058919524b06c2d8ec8ac8f3bd2d24517faebbfd1c5cc1553f82b4e1d"
 translationStatus: draft
 notApplicable:
   - section: relationships
