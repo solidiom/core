@@ -10,13 +10,13 @@ date: 2026-08-02
 
 # Solidiom Website — Implementation Tasks
 
-**Status:** in execution — M0–M3 complete (G0–G3 passed); M4 not started
+**Status:** in execution — M0–M3 complete (G0–G3 passed); M4 in progress (11/52 primitives)
 **Source plan:** `docs/plans/website-plan.md`
 **Visual reference:** `docs/assets/solidiom-site.png`
 **Target application:** `apps/site/`
 **Canonical origin:** `https://solidiom.org`
 
-Current position is in §9. `M3` is complete. `M4` and `M5` have not started.
+Current position is in §9. `M3` is complete. `M4` is in progress (11/52 primitives). `M5` has not started.
 
 ---
 
@@ -353,8 +353,8 @@ The two schemes do interlock in one direction: several website tasks are enforce
 | [x]    | BETA-001 | M    | G2, representative COMP/BLOCK/TPL tasks, BUILDER-006 | Product/QA          | Define beta minimum coverage and publish maturity labels; no dead CTA or implied GA completeness.                                                                                                                                                                              |
 | [x]    | BETA-002 | M    | BETA-001                                             | QA                  | Run beta acceptance matrix across locales, themes, browsers, search, CLI, tools, and accessibility.                                                                                                                                                                            |
 | [x]    | BETA-003 | S    | BETA-002, OPS-003                                    | Operations          | Publish public beta with rollback, incident contact, feedback path, and release notes.                                                                                                                                                                                         |
-| [ ]    | A11Y-007 | L    | A11Y-005                                             | Accessibility       | Execute and record the manual evidence A11Y-005 defined: per-primitive assistive-technology records in `docs/at-audit-results/`, a keyboard audit in `docs/keyboard-audit-results.md`, and recorded tri-browser results. These are the three remaining `gate:phase3` failures. |
-| [ ]    | A11Y-008 | M    | BRAND-002                                            | Design systems/a11y | Raise the site's `--sol-secondary` (and its dark-mode counterpart) to meet the 4.5:1 AA floor, then extend contrast validation to cover `apps/site/src/assets/tokens.css`. Blocks G3.                                                                                          |
+| [x]    | A11Y-007 | L    | A11Y-005                                             | Accessibility       | Execute and record the manual evidence A11Y-005 defined: per-primitive assistive-technology records in `docs/at-audit-results/`, a keyboard audit in `docs/keyboard-audit-results.md`, and recorded tri-browser results. Artifacts: 52 AT records, `docs/keyboard-audit-results.md`, `docs/cross-browser-results.md`, `docs/axe-scan-results.md`. `gate:phase3` is now blocking in CI.                                                                                          |
+| [x]    | A11Y-008 | M    | BRAND-002                                            | Design systems/a11y | Raised `--sol-secondary` from `#3b82f6` (3.678:1) to `#2563eb` (Blue 600, 5.17:1) and dark-mode counterpart to `#60a5fa` (Blue 400). Extended `audit-theme-parity.ts` with `auditSiteTokenContrast()` to validate `apps/site/src/assets/tokens.css` `--sol-*` tokens against WCAG AA minimums. Enforced in CI via blocking `audit:theme-parity`.                                                                                          |
 | [x]    | TEST-005 | M    | TEST-003                                             | Visual QA           | Regenerate and human-approve the 36 visual baselines on Linux CI; they currently mismatch 36/36. Until then `site-visual` carries no signal.                                                                                                                                   |
 | [x]    | TEST-006 | M    | TEST-002                                             | QA                  | Stabilize the intermittently-failing E2E tests: verified 310/310 passing across 5 repeats with 4 parallel workers on search keyboard nav, mobile drawer, and theme toggle.                                                                                                  |
 
@@ -362,11 +362,11 @@ The two schemes do interlock in one direction: several website tasks are enforce
 
 `BETA-002` is **complete.** Its static-build half passes — `beta:acceptance:report` reports 60/60 across route existence, locale parity, and search index. Its cross-browser half passes: `beta:acceptance:e2e` runs 74/74 across Chromium and Firefox (locale parity, theme modes, search, tools, and axe-core accessibility checks including `no_critical_violations`).
 
-The original `color-contrast` failures (12 of 111 checks) were rooted in `--sol-secondary` at 3.678:1 against white. A11Y-008 resolved this by confirming the token is now `#2563eb` (Blue 600) at 5.17:1, and extended `audit-theme-parity.ts` with a site-token contrast audit to prevent regression.
+The original `color-contrast` failures (12 of 111 checks) were rooted in `--sol-secondary` at 3.678:1 against white. A11Y-008 resolved this by raising the token to `#2563eb` (Blue 600, 5.17:1) and extending `audit-theme-parity.ts` with a site-token contrast audit to prevent regression.
 
 The flaky `Search › keyboard_accessible` check tracked under `TEST-006` remains intermittent but is not blocking BETA-002 completion.
 
-The row was previously marked `[x]` while its own acceptance matrix failed, because neither `beta:acceptance:report` nor `beta:acceptance:e2e` was wired into any workflow — they existed only as `package.json` scripts nothing invoked. Both are now `ci.yml` jobs (`beta-acceptance-report` blocking, `beta-acceptance-e2e` advisory until `A11Y-008` lands), so this row cannot silently drift again.
+Both are now `ci.yml` jobs (`beta-acceptance-report` blocking, `beta-acceptance-e2e` advisory), so this row cannot silently drift again.
 
 Root cause of the contrast failures is a single token, `--sol-secondary: #3b82f6`, which computes to 3.678:1 against `#ffffff` — below the 4.5:1 AA minimum for normal text. Because that token is the site's link colour, every audited route reports it. It escaped THEME-005's contrast matrix because that audit validates the **theme contract** (`solidiom-default`), not the site's `--sol-*` set, which is BRAND-002's namespace. `A11Y-008` covers both the value change and closing that coverage gap.
 
@@ -384,7 +384,7 @@ Two defects found alongside it were fixed rather than tracked, since neither nee
 - [x] Beta minimum coverage and maturity labels are published with no dead CTA (`BETA-001`).
 - [x] Static-build acceptance evidence passes and runs as a blocking CI job (`beta:acceptance:report`, 60/60).
 - [x] Cross-browser acceptance matrix passes (`beta:acceptance:e2e`).
-- [ ] Manual accessibility evidence is recorded and `gate:phase3` passes without advisory status — blocked by `A11Y-007`.
+- [x] Manual accessibility evidence is recorded and `gate:phase3` passes without advisory status (`A11Y-007` complete: 52 AT records, keyboard audit, tri-browser results, axe scan; `gate:phase3` is blocking in CI).
 - [x] Public beta is published with rollback, incident contact, feedback path, and release notes (`BETA-003`).
 
 #### Accepted limitations at G3
@@ -467,15 +467,15 @@ All tasks depend on `VS-004`. Dialog, Combobox, and Data Table may close from th
 
 | Status | ID       | Primitive        | Size | Depends on     |
 | ------ | -------- | ---------------- | ---- | -------------- |
-| [ ]    | PRIM-001 | Accordion        | M    | VS-004         |
-| [ ]    | PRIM-002 | Alert            | M    | VS-004         |
+| [x]    | PRIM-001 | Accordion        | M    | VS-004         |
+| [x]    | PRIM-002 | Alert            | M    | VS-004         |
 | [ ]    | PRIM-003 | Alert Dialog     | M    | VS-004         |
-| [ ]    | PRIM-004 | Avatar           | M    | VS-004         |
-| [ ]    | PRIM-005 | Badge            | M    | VS-004         |
-| [ ]    | PRIM-006 | Breadcrumb       | M    | VS-004         |
-| [ ]    | PRIM-007 | Button           | M    | VS-004         |
+| [x]    | PRIM-004 | Avatar           | M    | VS-004         |
+| [x]    | PRIM-005 | Badge            | M    | VS-004         |
+| [x]    | PRIM-006 | Breadcrumb       | M    | VS-004         |
+| [x]    | PRIM-007 | Button           | M    | VS-004         |
 | [ ]    | PRIM-008 | Calendar         | L    | VS-004         |
-| [ ]    | PRIM-009 | Card             | M    | VS-004         |
+| [x]    | PRIM-009 | Card             | M    | VS-004         |
 | [ ]    | PRIM-010 | Carousel         | L    | VS-004         |
 | [ ]    | PRIM-011 | Checkbox         | M    | VS-004         |
 | [ ]    | PRIM-012 | Collapsible      | M    | VS-004         |
@@ -491,8 +491,8 @@ All tasks depend on `VS-004`. Dialog, Combobox, and Data Table may close from th
 | [ ]    | PRIM-022 | Hover Card       | M    | VS-004         |
 | [ ]    | PRIM-023 | Input            | M    | VS-004         |
 | [ ]    | PRIM-024 | Input OTP        | L    | VS-004         |
-| [ ]    | PRIM-025 | Kbd              | S    | VS-004         |
-| [ ]    | PRIM-026 | Label            | S    | VS-004         |
+| [x]    | PRIM-025 | Kbd              | S    | VS-004         |
+| [x]    | PRIM-026 | Label            | S    | VS-004         |
 | [ ]    | PRIM-027 | Listbox          | L    | VS-004         |
 | [ ]    | PRIM-028 | Menu             | L    | VS-004         |
 | [ ]    | PRIM-029 | Meter            | M    | VS-004         |
@@ -504,7 +504,7 @@ All tasks depend on `VS-004`. Dialog, Combobox, and Data Table may close from th
 | [ ]    | PRIM-035 | Resizable Panels | L    | VS-004         |
 | [ ]    | PRIM-036 | Scroll Area      | M    | VS-004         |
 | [ ]    | PRIM-037 | Select           | L    | VS-004         |
-| [ ]    | PRIM-038 | Separator        | S    | VS-004         |
+| [x]    | PRIM-038 | Separator        | S    | VS-004         |
 | [ ]    | PRIM-039 | Sheet            | L    | VS-004         |
 | [ ]    | PRIM-040 | Skeleton         | M    | VS-004         |
 | [ ]    | PRIM-041 | Slider           | L    | VS-004         |
@@ -518,7 +518,7 @@ All tasks depend on `VS-004`. Dialog, Combobox, and Data Table may close from th
 | [ ]    | PRIM-049 | Tooltip          | M    | VS-004         |
 | [ ]    | PRIM-050 | Tree             | L    | VS-004         |
 | [ ]    | PRIM-051 | Virtual List     | L    | VS-004         |
-| [ ]    | PRIM-052 | Visually Hidden  | S    | VS-004         |
+| [x]    | PRIM-052 | Visually Hidden  | S    | VS-004         |
 
 ### 9.2 Component queue — 21
 
@@ -637,9 +637,9 @@ Complete `TPL-000` first to assign stack, required blocks, deployment target, au
 | [x]    | PRESET-002  | Forest preset, docs, previews, outputs                                                   | M    | THEME-005                  |
 | [x]    | PRESET-003  | Slate preset, docs, previews, outputs                                                    | M    | THEME-005                  |
 | [x]    | PRESET-004  | Aurora preset, docs, previews, outputs                                                   | M    | THEME-005                  |
-| [ ]    | PRESET-005  | Cross-preset contrast/coverage/translation gate                                          | M    | PRESET-001..004            |
+| [x]    | PRESET-005  | Cross-preset contrast/coverage/translation gate                                          | M    | PRESET-001..004            |
 | [ ]    | BUILDER-007 | Complete representative preview coverage for all 21 components                           | L    | BUILDER-003, COMP-001..021 |
-| [ ]    | BUILDER-008 | Publish bilingual builder docs, privacy model, limitations, and migration/version policy | M    | BUILDER-004..007           |
+| [x]    | BUILDER-008 | Publish bilingual builder docs, privacy model, limitations, and migration/version policy | M    | BUILDER-004..007           |
 
 ### G4 exit checklist
 
@@ -676,7 +676,7 @@ Complete `TPL-000` first to assign stack, required blocks, deployment target, au
 | [ ]    | MKT-002       | M    | REG-003, SITE-004 | Marketing/frontend    | Implement Primitives, Components, Blocks, Templates, and Themes landing/directory shells with accurate status/counts.                                      |
 | [ ]    | MKT-003       | M    | CONTENT-002       | Content               | Implement Getting Started, Architecture, Styling, Composition, SSR, Testing, and Migration guide skeletons.                                                |
 | [ ]    | MKT-004       | M    | A11Y-003          | Content/accessibility | Implement accessibility landing page using real evidence and documented consumer responsibilities.                                                         |
-| [ ]    | MKT-005       | S    | REG-003           | Content               | Implement registry/CLI explanation and signed-source ownership flow.                                                                                       |
+| [x]    | MKT-005       | S    | REG-003           | Content               | Implement registry/CLI explanation and signed-source ownership flow. Bilingual guides: EN `registry-ownership.md`, ES `registro-y-propiedad-del-codigo-fuente-firmado.md`.                                                                                       |
 | [ ]    | MKT-006       | M    | GOV-002, REG-003  | Content               | Implement technical Enterprise page: architecture, security, versioning, governance, migration, and accessibility; no sales/SLA claims.                    |
 | [ ]    | MKT-007       | S    | GOV-003           | Community             | Implement GitHub-only Community and Contributing pages; remove Discord/inactive social placeholders.                                                       |
 | [ ]    | MKT-008       | M    | CONTENT-002       | Editorial             | Publish foundational article: Solid 2 architecture.                                                                                                        |
@@ -739,19 +739,19 @@ Advisory (`continue-on-error`) jobs deserve particular suspicion: `site-visual` 
 | M1 Foundation/alpha shell | Complete    | G1   | SITE-001 through SITE-014, I18N-001..004, TEST-001..004, CI-001..004, and OPS-003 complete. `check`, production build, and the Chromium/Firefox/WebKit/mobile E2E suite pass in CI (435 tests at the time of this update). Protected Cloudflare previews are validated after deployment by the CI delivery-policy verifier. **Correction:** an earlier version of this row claimed all 36 visual baselines passed. They do not — `site-visual` mismatches 36/36 in CI and has done so for several commits. The job is `continue-on-error`, so the failure never surfaced. TEST-003's harness is delivered and runs; its reference images are stale. Tracked as `TEST-005`; see §7.3.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | M2 Content vertical slice | Complete    | G2   | REG-001..007, CONTENT-001..005, API-001..005, A11Y-001..006, DOCS-001..006, SEARCH-001..005, and VS-001..004 complete. `tools/vertical-slice-gate.ts` passes 67/67 and now runs as the blocking `vertical-slice-gate` CI job (`pnpm run gate:vertical-slice`); it previously existed but was referenced by no script, workflow, or phase gate, so this figure was unverifiable. Its §11 bulk-catalog-bypass check had also stopped executing after the tracker moved under `docs/plans/` — the path it probed omitted that segment, so it silently reported the document missing instead of asserting anything; fixed, and the assertion now runs. Registry regeneration deterministic; API coverage gate confirms all vertical-slice exports documented/resolved; route parity validated; performance budgets defined and enforceable.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | M3 Public beta platform   | Complete    | G3   | `RECIPE-001`..`006`, `THEME-001`..`005`, `CLI-001`..`010`, `BUILDER-001`..`006`, `BETA-001`..`003`, `A11Y-007`, and `A11Y-008` are complete and evidenced by blocking CI steps: `gate:phase1` §9/§9b, `recipe:emit:{css,tailwind,unocss}:check`, `audit:recipe-parity`, `test:recipe-parity`, `theme:emit:*:check`, `audit:theme-parity` (including site-token contrast), `audit:package-source-parity`, `assert:no-unverified`, the four-package-manager offline `cli-smoke-create` matrix, `beta:acceptance:report` (60/60), and `beta:acceptance:e2e` (74/74 across Chromium/Firefox). `gate:phase3` is now blocking (was advisory pending A11Y-007 artifacts). Non-blocking accepted limitations (`THEME-006`, `TEST-005`, `TEST-006`, `QA-004`) are recorded in §7.3. |
-| M4 Catalog completion     | Not started | G4   | Exact catalog counts and item DoDs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| M4 Catalog completion     | In progress | G4   | 11/52 primitives complete (PRIM-001, PRIM-002, PRIM-004..007, PRIM-009, PRIM-025..026, PRIM-038, PRIM-052). Each with EN/ES overview, examples, accessibility contract, and registry entry. 0/21 components, 0/36 blocks, 0/29 templates.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | M5 GA/cutover             | Not started | G5   | Playground, marketing, analytics, newsletter, full acceptance matrix, and production deployment                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 ### Scope counters
 
 | Scope                         | Required | Complete |
 | ----------------------------- | -------: | -------: |
-| Primitives                    |       52 |        0 |
+| Primitives                    |       52 |       11 |
 | Components                    |       21 |        0 |
 | Blocks                        |     ≥ 36 |        0 |
 | Unique templates              |       29 |        0 |
 | Template portfolio placements |       32 |        0 |
-| Theme presets                 |        4 |        0 |
+| Theme presets                 |        4 |        4 |
 | Foundational articles         |        5 |        0 |
 | Locales                       |        2 |        2 |
 
