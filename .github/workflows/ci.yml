@@ -115,10 +115,16 @@ jobs:
         run: pnpm run audit:preset-themes
       - name: CLI-003 — assert no unverified provenance lock entries
         run: pnpm run assert:no-unverified
-      - name: CLI-003 — sign registry index (when REGISTRY_SIGN_KEY secret is set)
-        env:
-          REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
-        run: pnpm run registry:build
+      # Registry index signing deliberately does NOT run here. It rewrote the
+      # committed registry/index.json with signature/signedAt/signatureKeyId,
+      # which BUILD-001 then reported as stale — and it cannot be satisfied by
+      # committing the signed copy, because any build without the secret strips
+      # it again. The committed registry is a deterministic build output; a
+      # secret-derived signature belongs to the published copy. Nothing consumes
+      # the signature today (there is no packages/registry and nothing publishes
+      # registry/), so signing here produced a value that was discarded at job
+      # end. Tracked as REG-008: sign in the release workflow, over the published
+      # artifact, and move the index off HMAC to asymmetric signing.
       - name: BUILD-001 — verify no generated artifacts are stale
         run: |
           PATHSPEC=(registry/ 'packages/*/source/' 'packages/*/docs/accessibility/evidence.json')
