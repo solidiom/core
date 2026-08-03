@@ -13,8 +13,8 @@ tags: [accessibility, axe, automated-testing]
 - Tool: axe-core 4.10.2 via Vitest browser mode
 - Browser: chromium (Playwright)
 - Scope: Each public primitive rendered in isolation with minimal valid props
-- Executed: 2026-08-03T01:38:27.833Z
-- Commit: `91502032e6d025dfca0ffa771cf4b95f53c2a58e`
+- Executed: 2026-08-03T01:50:09.670Z
+- Commit: `e3fff5da2c8a26fb4c243c15e0c3db04f06e11e7`
 - CI run: Local execution (not CI evidence)
 - Test file: `tests/a11y/primitives-axe-scan.browser.test.tsx`
 - Results artifact: `artifacts/axe-results.json`
