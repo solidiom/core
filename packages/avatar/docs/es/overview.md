@@ -40,28 +40,28 @@ Instala el paquete con `pnpm add @solidiom/avatar`. El paquete requiere dependen
 
 Contenedor que gestiona el estado de carga de la imagen para sus partes hijas `Image` y `Fallback`.
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `class` | `string` | — | Clase CSS para el elemento raíz. |
+| Prop    | Tipo     | Default | Descripción                      |
+| ------- | -------- | ------- | -------------------------------- |
+| `class` | `string` | —       | Clase CSS para el elemento raíz. |
 
 ### Image
 
 Renderiza un elemento `<img>` que permanece oculto hasta que la imagen se carga correctamente. Informa el estado de carga al `Root`.
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `src` | `string` | — | URL de la imagen del avatar. |
-| `alt` | `string` | — | Texto alternativo para la imagen. |
-| `class` | `string` | — | Clase CSS para el elemento de imagen. |
+| Prop    | Tipo     | Default | Descripción                           |
+| ------- | -------- | ------- | ------------------------------------- |
+| `src`   | `string` | —       | URL de la imagen del avatar.          |
+| `alt`   | `string` | —       | Texto alternativo para la imagen.     |
+| `class` | `string` | —       | Clase CSS para el elemento de imagen. |
 
 ### Fallback
 
 Renderiza contenido de reemplazo (por ejemplo, iniciales, icono) cuando la imagen no se ha cargado o ha fallado. Se oculta cuando la imagen se carga correctamente.
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Contenido para mostrar cuando la imagen no está disponible. |
-| `class` | `string` | — | Clase CSS para el elemento de reemplazo. |
+| Prop       | Tipo          | Default | Descripción                                                 |
+| ---------- | ------------- | ------- | ----------------------------------------------------------- |
+| `children` | `JSX.Element` | —       | Contenido para mostrar cuando la imagen no está disponible. |
+| `class`    | `string`      | —       | Clase CSS para el elemento de reemplazo.                    |
 
 ## Estilos
 

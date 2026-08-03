@@ -2,7 +2,8 @@
 contentSchemaVersion: 1
 title: Visually Hidden
 description: Oculta contenido visualmente manteniéndolo accesible para lectores de pantalla.
-keywords: [visually-hidden, lector-de-pantalla, accesibilidad, etiqueta, encabezado, tecnologia-asistiva]
+keywords:
+  [visually-hidden, lector-de-pantalla, accesibilidad, etiqueta, encabezado, tecnologia-asistiva]
 locale: es
 maturity: draft
 product: Visually Hidden
@@ -35,10 +36,10 @@ Instala el paquete con `pnpm add @solidiom/visually-hidden`. El paquete requiere
 
 ## Props
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Contenido a ocultar visualmente. |
-| `class` | `string` | — | Clase CSS adicional para sobrescribir estilos. |
+| Prop       | Tipo          | Default | Descripción                                    |
+| ---------- | ------------- | ------- | ---------------------------------------------- |
+| `children` | `JSX.Element` | —       | Contenido a ocultar visualmente.               |
+| `class`    | `string`      | —       | Clase CSS adicional para sobrescribir estilos. |
 
 ## Estilos
 

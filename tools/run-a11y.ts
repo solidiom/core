@@ -61,10 +61,22 @@ function main(): void {
   rmSync(OUTPUT, { force: true })
 
   const pnpm = process.platform === "win32" ? "pnpm.cmd" : "pnpm"
-  const run = spawnSync(pnpm, ["exec", "vitest", "run", "--config", "vitest.a11y.config.ts", "--reporter=default", "--reporter=verbose"], {
-    cwd: ROOT,
-    encoding: "utf8",
-  })
+  const run = spawnSync(
+    pnpm,
+    [
+      "exec",
+      "vitest",
+      "run",
+      "--config",
+      "vitest.a11y.config.ts",
+      "--reporter=default",
+      "--reporter=verbose",
+    ],
+    {
+      cwd: ROOT,
+      encoding: "utf8",
+    },
+  )
   const output = `${run.stdout ?? ""}\n${run.stderr ?? ""}`
 
   process.stdout.write(run.stdout ?? "")

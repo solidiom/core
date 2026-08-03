@@ -228,7 +228,8 @@ function auditTranslation(): PresetAuditError[] {
       errors.push({
         preset: slug,
         check: "translation",
-        message: "packages/themes/src/tailwind/*.css output is missing — run: pnpm run theme:emit:tailwind",
+        message:
+          "packages/themes/src/tailwind/*.css output is missing — run: pnpm run theme:emit:tailwind",
       })
     }
 
@@ -240,7 +241,8 @@ function auditTranslation(): PresetAuditError[] {
         errors.push({
           preset: slug,
           check: "translation",
-          message: "preset not found in generated-theme-preflights.ts — run: pnpm run theme:emit:unocss",
+          message:
+            "preset not found in generated-theme-preflights.ts — run: pnpm run theme:emit:unocss",
         })
       }
     } else {

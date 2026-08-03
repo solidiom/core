@@ -37,14 +37,14 @@ Instala el paquete con `pnpm add @solidiom/button`. El paquete requiere dependen
 
 El botón estándar. Acepta props `disabled`, `loading`, `type`, `onClick` y `aria-label`.
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Contenido del botón. |
-| `disabled` | `boolean` | — | Si el botón está deshabilitado. |
-| `loading` | `boolean` | — | Si el botón está en estado de carga. Establece `aria-busy="true"`. |
-| `type` | `"button" \| "submit" \| "reset"` | `"button"` | Tipo nativo del botón. |
-| `onClick` | `() => void` | — | Manejador de clic. |
-| `aria-label` | `string` | — | Etiqueta accesible para el botón. |
+| Prop         | Tipo                              | Default    | Descripción                                                        |
+| ------------ | --------------------------------- | ---------- | ------------------------------------------------------------------ |
+| `children`   | `JSX.Element`                     | —          | Contenido del botón.                                               |
+| `disabled`   | `boolean`                         | —          | Si el botón está deshabilitado.                                    |
+| `loading`    | `boolean`                         | —          | Si el botón está en estado de carga. Establece `aria-busy="true"`. |
+| `type`       | `"button" \| "submit" \| "reset"` | `"button"` | Tipo nativo del botón.                                             |
+| `onClick`    | `() => void`                      | —          | Manejador de clic.                                                 |
+| `aria-label` | `string`                          | —          | Etiqueta accesible para el botón.                                  |
 
 ### IconButton
 

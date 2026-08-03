@@ -77,16 +77,16 @@ Las instalaciones de fuente siguen una cadena estricta:
 
 Después de una instalación exitosa, `.solidiom/lock.json` registra:
 
-| Campo | Propósito |
-| ----- | --------- |
-| `path` | Ruta relativa del archivo instalado |
-| `digest` | SHA-256 del contenido fuente al momento de la instalación |
-| `primitive` | Nombre del primitivo fuente |
-| `version` | Versión del registro al momento de la instalación |
-| `manifestFilesHash` | Integridad del registro al momento de la instalación |
-| `signatureKeyId` | Qué clave verificó el registro |
-| `verifiedAt` | Marca de tiempo ISO-8601 de verificación |
-| `provenance` | `"verified"` o `"unverified"` |
+| Campo               | Propósito                                                 |
+| ------------------- | --------------------------------------------------------- |
+| `path`              | Ruta relativa del archivo instalado                       |
+| `digest`            | SHA-256 del contenido fuente al momento de la instalación |
+| `primitive`         | Nombre del primitivo fuente                               |
+| `version`           | Versión del registro al momento de la instalación         |
+| `manifestFilesHash` | Integridad del registro al momento de la instalación      |
+| `signatureKeyId`    | Qué clave verificó el registro                            |
+| `verifiedAt`        | Marca de tiempo ISO-8601 de verificación                  |
+| `provenance`        | `"verified"` o `"unverified"`                             |
 
 El campo `provenance` es el rastro de auditoría. Un valor de `"unverified"` significa que se usó `--allow-unverified`. En CI, `assert-no-unverified` falla la construcción si alguna entrada del lockfile tiene procedencia no verificada.
 

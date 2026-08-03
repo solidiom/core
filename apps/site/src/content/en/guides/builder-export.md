@@ -35,8 +35,8 @@ JSON export produces a versioned `ThemeDefinition` compatible with the `@solidio
     "version": "1.0.0"
   },
   "modes": {
-    "light": { /* tokens */ },
-    "dark": { /* tokens */ }
+    "light": {/* tokens */},
+    "dark": {/* tokens */}
   }
 }
 ```

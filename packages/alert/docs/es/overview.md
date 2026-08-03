@@ -2,7 +2,8 @@
 contentSchemaVersion: 1
 title: Alert
 description: Alerta en línea, no modal, para mensajes de estado con semántica de región en vivo.
-keywords: [alert, notificación, estado, región-en-vivo, accesibilidad, info, éxito, advertencia, error]
+keywords:
+  [alert, notificación, estado, región-en-vivo, accesibilidad, info, éxito, advertencia, error]
 locale: es
 maturity: draft
 product: Alert
@@ -38,32 +39,32 @@ Instala el paquete con `pnpm add @solidiom/alert`. El paquete requiere dependenc
 
 ### Root
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `type` | `"info" \| "success" \| "warning" \| "error"` | `"info"` | Variante del alert que controla la apariencia visual. |
-| `assertiveness` | `"assertive" \| "polite"` | `"assertive"` | Asertividad de la región en vivo. Assertive usa `role="alert"` e interrumpe al usuario. Polite usa `role="status"` y anuncia en la siguiente oportunidad. |
+| Prop            | Tipo                                          | Default       | Descripción                                                                                                                                               |
+| --------------- | --------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`          | `"info" \| "success" \| "warning" \| "error"` | `"info"`      | Variante del alert que controla la apariencia visual.                                                                                                     |
+| `assertiveness` | `"assertive" \| "polite"`                     | `"assertive"` | Asertividad de la región en vivo. Assertive usa `role="alert"` e interrumpe al usuario. Polite usa `role="status"` y anuncia en la siguiente oportunidad. |
 
 ### Title
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Texto del título. Requerido para accesibilidad. |
+| Prop       | Tipo          | Default | Descripción                                     |
+| ---------- | ------------- | ------- | ----------------------------------------------- |
+| `children` | `JSX.Element` | —       | Texto del título. Requerido para accesibilidad. |
 
 ### Description
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Texto del cuerpo para el mensaje del alert. |
+| Prop       | Tipo          | Default | Descripción                                 |
+| ---------- | ------------- | ------- | ------------------------------------------- |
+| `children` | `JSX.Element` | —       | Texto del cuerpo para el mensaje del alert. |
 
 ## Estilos
 
 Alert lleva los atributos `data-scope="alert"`, `data-part` y `data-state` para hooks de estilizado.
 
-| Parte | `data-part` | `data-state` |
-|-------|-------------|--------------|
-| Root | `root` | Variante (`info`, `success`, `warning`, `error`) |
-| Title | `title` | — |
-| Description | `description` | — |
+| Parte       | `data-part`   | `data-state`                                     |
+| ----------- | ------------- | ------------------------------------------------ |
+| Root        | `root`        | Variante (`info`, `success`, `warning`, `error`) |
+| Title       | `title`       | —                                                |
+| Description | `description` | —                                                |
 
 Aplica tu receta visual usando los atributos data para seleccionar. Root se renderiza como un `<div>`, Title como un `<h5>`, y Description como un `<div>`.
 

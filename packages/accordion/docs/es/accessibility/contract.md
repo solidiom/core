@@ -48,10 +48,10 @@ reviewStatus: draft
 
 Acordeón emite atributos de datos para estilo y decisiones basadas en estado:
 
-| Atributo | Valores | Descripción |
-|----------|---------|-------------|
-| `data-scope` | `"accordion"` | Identifica el elemento como perteneciente al primitivo Acordeón |
-| `data-part` | `"root"`, `"item"`, `"trigger"`, `"content"` | Identifica la parte específica |
-| `data-state` | `"open"`, `"closed"` | Presente en Item; refleja estado expandido |
-| `data-expanded` | `"true"`, `"false"` | Presente en Trigger; espejo del estado expandido |
-| `data-disabled` | `""` o ausente | Presente cuando el elemento está deshabilitado |
+| Atributo        | Valores                                      | Descripción                                                     |
+| --------------- | -------------------------------------------- | --------------------------------------------------------------- |
+| `data-scope`    | `"accordion"`                                | Identifica el elemento como perteneciente al primitivo Acordeón |
+| `data-part`     | `"root"`, `"item"`, `"trigger"`, `"content"` | Identifica la parte específica                                  |
+| `data-state`    | `"open"`, `"closed"`                         | Presente en Item; refleja estado expandido                      |
+| `data-expanded` | `"true"`, `"false"`                          | Presente en Trigger; espejo del estado expandido                |
+| `data-disabled` | `""` o ausente                               | Presente cuando el elemento está deshabilitado                  |

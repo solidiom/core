@@ -40,13 +40,13 @@ Use `value` and `onValueChange` for controlled state. The uncontrolled variant m
 
 ## Keyboard interaction
 
-| Key | Behavior |
-| --- | -------- |
-| Arrow Down | Move focus to the next trigger |
-| Arrow Up | Move focus to the previous trigger |
-| Home | Move focus to the first trigger |
-| End | Move focus to the last trigger |
-| Enter / Space | Toggle the focused item |
+| Key           | Behavior                           |
+| ------------- | ---------------------------------- |
+| Arrow Down    | Move focus to the next trigger     |
+| Arrow Up      | Move focus to the previous trigger |
+| Home          | Move focus to the first trigger    |
+| End           | Move focus to the last trigger     |
+| Enter / Space | Toggle the focused item            |
 
 ## Installation
 

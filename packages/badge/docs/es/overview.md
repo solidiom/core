@@ -33,10 +33,10 @@ Instala el paquete con `pnpm add @solidiom/badge`. El paquete requiere dependenc
 
 ## Props
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Contenido para mostrar dentro del badge. |
-| `class` | `string` | — | Clase CSS adicional para estilos. |
+| Prop       | Tipo          | Default | Descripción                              |
+| ---------- | ------------- | ------- | ---------------------------------------- |
+| `children` | `JSX.Element` | —       | Contenido para mostrar dentro del badge. |
+| `class`    | `string`      | —       | Clase CSS adicional para estilos.        |
 
 ## Estilos
 

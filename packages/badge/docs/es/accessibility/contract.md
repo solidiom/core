@@ -16,11 +16,11 @@ keyboard: []
 focus: []
 semantics:
   - "Se renderiza como un elemento `<span>`."
-  - "Lleva los atributos `data-scope=\"badge\"` y `data-part=\"root\"`."
+  - 'Lleva los atributos `data-scope="badge"` y `data-part="root"`.'
   - "Contiene contenido de texto presentacional proporcionado a través de `children`."
 aria:
   - "El badge no añade roles o propiedades ARIA por defecto; se basa en su presentación visual como una etiqueta en línea."
-  - "Los consumidores pueden añadir roles semánticos como `role=\"status\"` o `aria-label` dependiendo del contexto y el significado del contenido del badge."
+  - 'Los consumidores pueden añadir roles semánticos como `role="status"` o `aria-label` dependiendo del contexto y el significado del contenido del badge.'
 consumerDuties:
   - "Proporcionar contenido de texto significativo a través de `children` que comunique el propósito del badge."
   - "Añadir `aria-label` o rol ARIA cuando el badge comunica información de estado en vivo o dinámica."

@@ -73,16 +73,16 @@ Source installs follow a strict verification chain:
 
 After a successful install, `.solidiom/lock.json` records:
 
-| Field | Purpose |
-| ----- | ------- |
-| `path` | Relative path of the installed file |
-| `digest` | SHA-256 of the source content at install time |
-| `primitive` | Source primitive name |
-| `version` | Version from the registry at install time |
-| `manifestFilesHash` | Registry integrity at install time |
-| `signatureKeyId` | Which key verified the registry |
-| `verifiedAt` | ISO-8601 verification timestamp |
-| `provenance` | `"verified"` or `"unverified"` |
+| Field               | Purpose                                       |
+| ------------------- | --------------------------------------------- |
+| `path`              | Relative path of the installed file           |
+| `digest`            | SHA-256 of the source content at install time |
+| `primitive`         | Source primitive name                         |
+| `version`           | Version from the registry at install time     |
+| `manifestFilesHash` | Registry integrity at install time            |
+| `signatureKeyId`    | Which key verified the registry               |
+| `verifiedAt`        | ISO-8601 verification timestamp               |
+| `provenance`        | `"verified"` or `"unverified"`                |
 
 The `provenance` field is the audit trail. A value of `"unverified"` means `--allow-unverified` was used. In CI, `assert-no-unverified` fails the build if any lockfile entry has unverified provenance.
 

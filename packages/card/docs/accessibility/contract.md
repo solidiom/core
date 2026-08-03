@@ -15,10 +15,10 @@ section: accessibility
 keyboard: []
 focus: []
 semantics:
-  - "Renders `Root`, `Header`, `Content`, and `Footer` as `<div>` elements with `data-scope=\"card\"` and corresponding `data-part` attributes."
+  - 'Renders `Root`, `Header`, `Content`, and `Footer` as `<div>` elements with `data-scope="card"` and corresponding `data-part` attributes.'
   - "Renders `Title` as an `<h3>` heading element, providing document outline structure."
   - "Renders `Description` as a `<p>` paragraph element."
-  - "All parts carry `data-scope=\"card\"` and `data-part=\"*\"` attributes for identification."
+  - 'All parts carry `data-scope="card"` and `data-part="*"` attributes for identification.'
 aria: []
 consumerDuties:
   - "Use Card to group logically related content and actions."

@@ -40,14 +40,14 @@ Instala el paquete con `pnpm add @solidiom/card`. El paquete requiere dependenci
 
 ## Partes
 
-| Parte | Elemento | Props | Descripción |
-|-------|----------|-------|-------------|
-| `Root` | `<div>` | `class`, `style`, `children` | Contenedor externo de la tarjeta. |
-| `Header` | `<div>` | `class`, `style`, `children` | Sección de encabezado de la tarjeta. |
-| `Title` | `<h3>` | `class`, `children` | Titulo del encabezado de la tarjeta. |
-| `Description` | `<p>` | `class`, `children` | Texto descriptivo del encabezado de la tarjeta. |
-| `Content` | `<div>` | `class`, `style`, `children` | Cuerpo principal de contenido de la tarjeta. |
-| `Footer` | `<div>` | `class`, `style`, `children` | Sección de pie de la tarjeta. |
+| Parte         | Elemento | Props                        | Descripción                                     |
+| ------------- | -------- | ---------------------------- | ----------------------------------------------- |
+| `Root`        | `<div>`  | `class`, `style`, `children` | Contenedor externo de la tarjeta.               |
+| `Header`      | `<div>`  | `class`, `style`, `children` | Sección de encabezado de la tarjeta.            |
+| `Title`       | `<h3>`   | `class`, `children`          | Titulo del encabezado de la tarjeta.            |
+| `Description` | `<p>`    | `class`, `children`          | Texto descriptivo del encabezado de la tarjeta. |
+| `Content`     | `<div>`  | `class`, `style`, `children` | Cuerpo principal de contenido de la tarjeta.    |
+| `Footer`      | `<div>`  | `class`, `style`, `children` | Sección de pie de la tarjeta.                   |
 
 ## Estilos
 

@@ -39,8 +39,8 @@ La exportación JSON produce un `ThemeDefinition` versionado compatible con el e
     "version": "1.0.0"
   },
   "modes": {
-    "light": { /* tokens */ },
-    "dark": { /* tokens */ }
+    "light": {/* tokens */},
+    "dark": {/* tokens */}
   }
 }
 ```

@@ -15,20 +15,20 @@ section: accessibility
 keyboard: []
 focus: []
 semantics:
-  - "Renders Root as a `<div>` with `role=\"alert\"` (assertive) or `role=\"status\"` (polite)."
+  - 'Renders Root as a `<div>` with `role="alert"` (assertive) or `role="status"` (polite).'
   - "Title renders as an `<h5>` and is wired to `aria-labelledby` on the Root."
   - "Description renders as a `<div>` and is wired to `aria-describedby` on the Root."
   - "IDs are generated with `createStableId` for SSR-safe consistency."
-  - "Carries `data-scope=\"alert\"`, `data-part`, and `data-state` attributes on all parts."
+  - 'Carries `data-scope="alert"`, `data-part`, and `data-state` attributes on all parts.'
 aria:
-  - "`role=\"alert\"` indicates an assertive live region that interrupts the user to announce the message immediately."
-  - "`role=\"status\"` indicates a polite live region that announces the message at the next opportunity without interruption."
+  - '`role="alert"` indicates an assertive live region that interrupts the user to announce the message immediately.'
+  - '`role="status"` indicates a polite live region that announces the message at the next opportunity without interruption.'
   - "`aria-labelledby` on Root references the Title's stable ID to provide a name for the alert."
   - "`aria-describedby` on Root references the Description's stable ID to provide a description for the alert."
 consumerDuties:
   - Always include a Title so screen readers can announce a meaningful alert name.
-  - "Use `assertiveness=\"polite\"` for non-urgent updates like status changes or notifications."
-  - "Use `assertiveness=\"assertive\"` (default) for critical information that requires immediate attention."
+  - 'Use `assertiveness="polite"` for non-urgent updates like status changes or notifications.'
+  - 'Use `assertiveness="assertive"` (default) for critical information that requires immediate attention.'
   - "Do not programmatically remove and re-create the alert to trigger re-announcements; use a polite role or manage `aria-live` changes instead."
 nonApplicableCriteria:
   - criterion: keyboard

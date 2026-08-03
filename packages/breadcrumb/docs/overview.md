@@ -51,50 +51,50 @@ Install the package with `pnpm add @solidiom/breadcrumb`. The package requires c
 
 Wraps the entire breadcrumb navigation. Renders as a `<nav>` element with `aria-label="Breadcrumb"`.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Breadcrumb content. |
+| Prop       | Type          | Default | Description         |
+| ---------- | ------------- | ------- | ------------------- |
+| `children` | `JSX.Element` | —       | Breadcrumb content. |
 
 ### List
 
 Wraps breadcrumb items. Renders as an `<ol>` element.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | List of breadcrumb items. |
+| Prop       | Type          | Default | Description               |
+| ---------- | ------------- | ------- | ------------------------- |
+| `children` | `JSX.Element` | —       | List of breadcrumb items. |
 
 ### Item
 
 Wraps a single breadcrumb entry. Renders as an `<li>` element.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Item content (typically a Link). |
+| Prop       | Type          | Default | Description                      |
+| ---------- | ------------- | ------- | -------------------------------- |
+| `children` | `JSX.Element` | —       | Item content (typically a Link). |
 
 ### Link
 
 Navigation link within a breadcrumb item. Renders as an `<a>` element.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Link text or content. |
-| `href` | `string` | — | Navigation target URL. |
-| `current` | `boolean` | `false` | When true, marks the link as the current page with `aria-current="page"`. |
+| Prop       | Type          | Default | Description                                                               |
+| ---------- | ------------- | ------- | ------------------------------------------------------------------------- |
+| `children` | `JSX.Element` | —       | Link text or content.                                                     |
+| `href`     | `string`      | —       | Navigation target URL.                                                    |
+| `current`  | `boolean`     | `false` | When true, marks the link as the current page with `aria-current="page"`. |
 
 ### Separator
 
 Visual separator between breadcrumb items. Renders as a `<span>` with `role="presentation"` and `aria-hidden="true"`.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | `"/"` | Custom separator content. |
+| Prop       | Type          | Default | Description               |
+| ---------- | ------------- | ------- | ------------------------- |
+| `children` | `JSX.Element` | `"/"`   | Custom separator content. |
 
 ### Ellipsis
 
 Indicates skipped breadcrumb items in a truncated trail. Renders as a `<span>` with `role="presentation"`.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
+| Prop       | Type          | Default | Description              |
+| ---------- | ------------- | ------- | ------------------------ |
 | `children` | `JSX.Element` | `"..."` | Custom ellipsis content. |
 
 ## Styling

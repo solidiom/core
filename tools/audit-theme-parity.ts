@@ -365,10 +365,7 @@ const SITE_CONTRAST_PAIRS: readonly ContrastPair[] = [
  */
 export function auditSiteTokenContrast(): ThemeParityError[] {
   const errors: ThemeParityError[] = []
-  const tokensPath = join(
-    ROOT,
-    "apps/site/src/assets/tokens.css",
-  )
+  const tokensPath = join(ROOT, "apps/site/src/assets/tokens.css")
 
   if (!existsSync(tokensPath)) {
     return [
@@ -383,15 +380,9 @@ export function auditSiteTokenContrast(): ThemeParityError[] {
   const cssText = readFileSync(tokensPath, "utf8")
 
   // Parse light mode from :root, :root[data-theme="light"]
-  const lightTokens = parseSolTokens(
-    cssText,
-    /:root,\s*\n:root\[data-theme="light"\]/,
-  )
+  const lightTokens = parseSolTokens(cssText, /:root,\s*\n:root\[data-theme="light"\]/)
   // Parse dark mode from :root[data-theme="dark"]
-  const darkTokens = parseSolTokens(
-    cssText,
-    /:root\[data-theme="dark"\]/,
-  )
+  const darkTokens = parseSolTokens(cssText, /:root\[data-theme="dark"\]/)
 
   const modes: Array<{ name: string; tokens: Map<string, string> }> = [
     { name: "light", tokens: lightTokens },

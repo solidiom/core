@@ -24,7 +24,9 @@ Kbd tiene una sola parte `Root`. Pasa el nombre de la tecla o la combinación co
 ```tsx
 import * as Kbd from "@solidiom/kbd"
 
-;<p>Presiona <Kbd.Root>Ctrl</Kbd.Root> + <Kbd.Root>S</Kbd.Root> para guardar.</p>
+;<p>
+  Presiona <Kbd.Root>Ctrl</Kbd.Root> + <Kbd.Root>S</Kbd.Root> para guardar.
+</p>
 ```
 
 ## Instalación

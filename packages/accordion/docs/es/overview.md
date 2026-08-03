@@ -42,13 +42,13 @@ Usa `value` y `onValueChange` para un estado controlado. La variante no controla
 
 ## Interacción por teclado
 
-| Tecla | Comportamiento |
-| ----- | -------------- |
-| Flecha abajo | Mover el foco al siguiente disparador |
-| Flecha arriba | Mover el foco al disparador anterior |
-| Inicio | Mover el foco al primer disparador |
-| Fin | Mover el foco al último disparador |
-| Enter / Espacio | Alternar el elemento enfocado |
+| Tecla           | Comportamiento                        |
+| --------------- | ------------------------------------- |
+| Flecha abajo    | Mover el foco al siguiente disparador |
+| Flecha arriba   | Mover el foco al disparador anterior  |
+| Inicio          | Mover el foco al primer disparador    |
+| Fin             | Mover el foco al último disparador    |
+| Enter / Espacio | Alternar el elemento enfocado         |
 
 ## Instalación
 

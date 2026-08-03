@@ -38,28 +38,28 @@ Install the package with `pnpm add @solidiom/avatar`. The package requires compa
 
 Container that manages image loading state for its child `Image` and `Fallback` parts.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `class` | `string` | — | CSS class for the root element. |
+| Prop    | Type     | Default | Description                     |
+| ------- | -------- | ------- | ------------------------------- |
+| `class` | `string` | —       | CSS class for the root element. |
 
 ### Image
 
 Renders an `<img>` element that is hidden until the image loads successfully. Reports loading state to the `Root`.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `src` | `string` | — | URL of the avatar image. |
-| `alt` | `string` | — | Alternative text for the image. |
-| `class` | `string` | — | CSS class for the image element. |
+| Prop    | Type     | Default | Description                      |
+| ------- | -------- | ------- | -------------------------------- |
+| `src`   | `string` | —       | URL of the avatar image.         |
+| `alt`   | `string` | —       | Alternative text for the image.  |
+| `class` | `string` | —       | CSS class for the image element. |
 
 ### Fallback
 
 Renders fallback content (e.g., initials, icon) when the image has not loaded or has errored. Hidden when the image is successfully loaded.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Content to display when the image is not available. |
-| `class` | `string` | — | CSS class for the fallback element. |
+| Prop       | Type          | Default | Description                                         |
+| ---------- | ------------- | ------- | --------------------------------------------------- |
+| `children` | `JSX.Element` | —       | Content to display when the image is not available. |
+| `class`    | `string`      | —       | CSS class for the fallback element.                 |
 
 ## Styling
 

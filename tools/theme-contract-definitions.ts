@@ -112,7 +112,7 @@ export const SOLIDIOM_DEFAULT_THEME: ThemeDefinition = {
       "line-height-md": "1.5rem",
       "font-size-lg": "1.25rem",
       "line-height-lg": "1.5rem",
-"font-size-xl": "1.875rem",
+      "font-size-xl": "1.875rem",
       "line-height-xl": "2.25rem",
     },
   },
