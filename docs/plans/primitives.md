@@ -110,7 +110,51 @@ Fifty-two commits, one primitive each, each individually reviewed.
 - Regenerated registry entry.
 - The declared count in `docs/plans/website-tasks.md` incremented **in the same commit**. A ratchet updated separately is a ratchet that drifts.
 
-### 6.2 Per-commit verification
+### 6.2 Concrete pattern (derived from Button, the first completed primitive)
+
+Button established the template. Every subsequent primitive follows this shape:
+
+#### EN overview frontmatter additions
+
+```yaml
+notApplicable:
+  - section: composition
+    reason: <Why this primitive has no compound sub-primitives to compose.>
+  - section: relationships
+    reason: <Why this primitive has no sibling primitives or inter-primitive contract.>
+  - section: migration
+    reason: <Why there is no prior API to migrate from, OR a real migration section.>
+  - section: testing
+    reason: <Why standard testing guidance covers this primitive, OR a real testing section.>
+```
+
+Omit any entry where the section is genuinely present — e.g. Accordion has a Composition section, so it should not declare `notApplicable` for it.
+
+#### Required sections in the overview (heading prefixes accepted by `PRIM-000`)
+
+| #   | Required heading    | Prefix match               | Notes                                                                                                                   |
+| --- | ------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| 1   | Usage               | `usage`                    | —                                                                                                                       |
+| 2   | Installation        | `installation`             | —                                                                                                                       |
+| 3   | Parts & Props       | `parts` or contains `prop` | Use "Parts" for multi-part primitives, "Props" for single-export primitives                                             |
+| 4   | Styling             | `styling`                  | `data-scope`/`data-part` targeting and recipe integration                                                               |
+| 5   | SSR and hydration   | `ssr and hydration`        | —                                                                                                                       |
+| 6   | Keyboard & behavior | `keyboard`                 | For primitives with `keyboard: []` (no entries), include the section with "This primitive has no keyboard interaction." |
+
+#### Runnable discriminator
+
+- If `packages/<name>/docs/accessibility/contract.md` has `keyboard:` followed by `- key:` entries → the example **must** be `runnable: true` with a live Solid island at `apps/site/src/components/<Name>Example.tsx`.
+- If `keyboard: []` (empty array) → the example stays `runnable: false` and the frontmatter carries a `runnableReason` or the existing static code block suffices.
+
+#### ES `translationSourceHash`
+
+Compute from the **current** EN overview after all edits: `shasum -a 256 packages/<name>/docs/overview.md | cut -d' ' -f1`. Place this value in the ES overview's `translationSourceHash` field.
+
+#### Tracker count increment
+
+In `docs/plans/website-tasks.md`, update the scope-counters table's `DoD` column for `Primitives` from N to N+1 **in the same commit**.
+
+### 6.3 Per-commit verification
 
 ```sh
 pnpm run primitive:catalog-gate                       # PRIM-000: bar + reconciliation + count
@@ -134,7 +178,7 @@ pnpm --filter @solidiom/site build
 
 ## 9. Known risks
 
-**Visually Hidden's accessibility evidence asserts nothing.** Its axe scan records `passes: 0, violations: 0, outcome: "pass"`, which `registry-build.ts` correctly refuses as evidence while every other consumer reads as a pass. Requirement 7 fails for it until the scan is given something to check. Likely the only primitive needing a bespoke fix.
+**~~Visually Hidden's accessibility evidence asserts nothing.~~** Resolved: the axe fixture was updated to render Visually Hidden inside a `<button>` context, giving axe visible nodes to evaluate (`passes: 4`). `registry-build.ts` now grants `automated` status.
 
 **`dist` determinism on Linux is unproven.** Repeated builds are byte-stable here, but CI runs Node 24 and 26 on Linux and `tsup` output can vary by toolchain. Decision 12 scoped the guard away from `dist` for that reason; tightening it once a few runs show stability is cheap.
 
