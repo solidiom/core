@@ -12,8 +12,17 @@ status: draft
 package: "@solidiom/visually-hidden"
 primitive: visually-hidden
 section: overview
-translationSourceHash: "dd09d5a4b2f71a9051eb93b8ed7e5c9bde1e7b7143ec0d5c04a6f4b1c536160a"
+translationSourceHash: "19db14fd65d305502a81e4ac58a1db4361cc5882cb50cfd460d7ce6b9ade7a8c"
 translationStatus: draft
+notApplicable:
+  - section: composition
+    reason: Primitivo autónomo sin sub-primitivos compuestos.
+  - section: relationships
+    reason: Sin primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
+  - section: migration
+    reason: Sin API previa; esta es la primera versión publicada.
+  - section: testing
+    reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 ---
 
 Visually Hidden oculta contenido visualmente manteniéndolo accesible para lectores de pantalla. Utiliza la técnica estándar de clip/overflow para eliminar contenido del diseño visual sin retirarlo del árbol de accesibilidad.
@@ -44,6 +53,10 @@ Instala el paquete con `pnpm add @solidiom/visually-hidden`. El paquete requiere
 ## Estilos
 
 Visually Hidden lleva los atributos `data-scope="visually-hidden"` y `data-part="root"`. Se renderiza como un elemento `<span>` con estilos en línea para la técnica de recorte. Los estilos usan `position: absolute`, `clip: rect(0, 0, 0, 0)`, `white-space: nowrap`, `width: 1px`, `height: 1px` y `overflow: hidden` para asegurar que el contenido sea completamente invisible mientras permanece en el flujo del documento para las tecnologías de asistencia.
+
+## Interacción con teclado
+
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 

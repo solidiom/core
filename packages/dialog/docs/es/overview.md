@@ -11,6 +11,15 @@ status: published
 package: "@solidiom/dialog"
 primitive: dialog
 section: overview
+translationSourceHash: "4c6d0f916cf120ab8f12be1efffe244052842f21983af6ab8e05d385c404d17e"
+translationStatus: draft
+notApplicable:
+  - section: relationships
+    reason: Dialog no tiene primitivos hermanos. Se compone internamente con Portal y Backdrop pero no posee un contrato inter-primitivo.
+  - section: migration
+    reason: Sin API previa; esta es la primera versión publicada.
+  - section: testing
+    reason: La guía estándar de pruebas cubre este primitivo. El atrapamiento de foco y el comportamiento del teclado están documentados en la sección Teclado.
 ---
 
 Dialog presenta contenido contextual sobre la página actual. Úsalo cuando una decisión enfocada o un flujo breve deba interrumpir la tarea actual.
@@ -40,3 +49,38 @@ Usa `modal={false}` solo cuando sea apropiado mantener la interacción con el fo
 ## Instalación
 
 Instala el paquete con `pnpm add @solidiom/dialog`. El paquete requiere dependencias pares compatibles de `solid-js` y `@solidjs/web`.
+
+## Partes
+
+Dialog expone siete partes:
+
+- **Root** — contenedor de estado que gestiona abierto/cerrado, modal/no modal y modos controlado/no controlado.
+- **Trigger** — el botón que abre el diálogo. Lleva `aria-haspopup="dialog"` y `aria-expanded`.
+- **Portal** — renderiza hijos en `document.body` para escapar restricciones de overflow/z-index.
+- **Backdrop** — superposición a pantalla completa detrás del contenido. Hacer clic en ella cierra el diálogo en modo modal.
+- **Content** — el panel del diálogo. Recibe `role="dialog"`, `aria-modal`, `aria-labelledby` y `aria-describedby`.
+- **Title** — el encabezado visible, conectado a Content mediante `aria-labelledby`.
+- **Description** — texto explicativo opcional, conectado mediante `aria-describedby`.
+- **Close** — un botón que cierra el diálogo.
+
+## Estilos
+
+Dialog incluye recetas CSS, Tailwind y UnoCSS. Las partes llevan los atributos `data-scope="dialog"` y `data-part`. La parte Content expone `data-state="open"` o `data-state="closed"` para animaciones de entrada/salida. El Backdrop usa `data-part="backdrop"` con el mismo atributo de estado.
+
+## Interacción con teclado
+
+| Tecla     | Comportamiento                                                                             |
+| --------- | ------------------------------------------------------------------------------------------ |
+| Escape    | Cierra el diálogo y restaura el foco al disparador.                                        |
+| Tab       | Mueve el foco al siguiente elemento enfocable dentro del diálogo (atrapado en modo modal). |
+| Shift+Tab | Mueve el foco hacia atrás dentro del contenido del diálogo.                                |
+
+El foco queda atrapado dentro del diálogo cuando `modal` es true. Al abrir, el foco se mueve al primer elemento enfocable dentro de Content. Al cerrar, el foco regresa a Trigger.
+
+## Composición
+
+Dialog está diseñado para componerse con otras primitivas. Usa un `Field` dentro de Content para flujos de formulario, `Button` para acciones de confirmar/cancelar, o anida un `Alert` para advertencias en línea dentro del cuerpo del diálogo.
+
+## Renderizado SSR e hidratación
+
+Dialog se renderiza como HTML oculto durante SSR — Content no está presente en el DOM inicial a menos que se establezca `defaultOpen`. La hidratación adjunta los manejadores de eventos y la lógica de atrapamiento de foco. El `Portal` se renderiza solo en el cliente para evitar desajustes de marcado servidor/cliente.

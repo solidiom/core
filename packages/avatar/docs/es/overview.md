@@ -11,8 +11,17 @@ status: draft
 package: "@solidiom/avatar"
 primitive: avatar
 section: overview
-translationSourceHash: "c85f1c17a4acb7831d343278e5cc1e2357e43310c87b7a0c067066f1e2549f61"
+translationSourceHash: "178bdbefa0bb2a37f87302849ed409cd46701a58c7cb108a15081deeab6bf266"
 translationStatus: draft
+notApplicable:
+  - section: composition
+    reason: Primitivo autónomo sin sub-primitivos compuestos.
+  - section: relationships
+    reason: Sin primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
+  - section: migration
+    reason: Sin API previa; esta es la primera versión publicada.
+  - section: testing
+    reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 ---
 
 Avatar renderiza una imagen de perfil de usuario con reemplazo automático a contenido de texto (como iniciales o un nombre) cuando la imagen no se carga correctamente. Gestiona el estado de carga de la imagen internamente y coordina la visibilidad entre las partes de imagen y reemplazo.
@@ -72,6 +81,10 @@ Avatar lleva los atributos `data-scope="avatar"` y `data-part` para seleccionar 
 - `Fallback`: `data-scope="avatar"`, `data-part="fallback"` — se renderiza como un `<span>`
 
 Estila el contenedor raíz como un contenedor flex para superponer la imagen y el reemplazo. Usa los atributos `data-part` para seleccionar partes individuales.
+
+## Interacción con teclado
+
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 

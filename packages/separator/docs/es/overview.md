@@ -11,8 +11,17 @@ status: draft
 package: "@solidiom/separator"
 primitive: separator
 section: overview
-translationSourceHash: "8921cf801e455519dc6dfbe16f01d7953304e4de8d023969cc2e2318a06aa7bf"
+translationSourceHash: "6a7585c17f122e239a56531ab9236aca23911ee027b94b6f34ac16caa8044cdb"
 translationStatus: draft
+notApplicable:
+  - section: composition
+    reason: Primitivo autónomo sin sub-primitivos compuestos.
+  - section: relationships
+    reason: Sin primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
+  - section: migration
+    reason: Sin API previa; esta es la primera versión publicada.
+  - section: testing
+    reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 ---
 
 Separator renderiza un divisor visual entre secciones de contenido con semántica accesible. Soporta orientaciones horizontal y vertical y puede marcarse como puramente decorativo para ocultarlo del árbol de accesibilidad.
@@ -41,6 +50,10 @@ Instala el paquete con `pnpm add @solidiom/separator`. El paquete requiere depen
 ## Estilos
 
 Separator lleva los atributos `data-scope="separator"`, `data-part="root"` y `data-orientation`. Estílalo con bordes, márgenes o colores de fondo apropiados para tu sistema de diseño. El elemento se renderiza como un `<div>`; aplica tu receta visual usando los atributos data para seleccionar.
+
+## Interacción con teclado
+
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 

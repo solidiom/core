@@ -11,8 +11,17 @@ status: draft
 package: "@solidiom/breadcrumb"
 primitive: breadcrumb
 section: overview
-translationSourceHash: "1b65f66ec777e87c8e6abd1756041ef52bd3528f893a6b5b8790035805a0749c"
+translationSourceHash: "c07d2e25c2a3cfc102aed80f2f01da895fc88b0d1525852c43f0220e46f48648"
 translationStatus: draft
+notApplicable:
+  - section: composition
+    reason: Primitivo autónomo sin sub-primitivos compuestos.
+  - section: relationships
+    reason: Sin primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
+  - section: migration
+    reason: Sin API previa; esta es la primera versión publicada.
+  - section: testing
+    reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 ---
 
 Breadcrumb renderiza un indicador de navegación jerárquica que comunica la ubicación de la página actual dentro de una jerarquía de navegación. Utiliza estructura de lista semántica con marcado ARIA adecuado para compatibilidad con lectores de pantalla.
@@ -102,6 +111,10 @@ Indica elementos del breadcrumb omitidos en una ruta truncada. Se renderiza como
 ## Estilos
 
 Breadcrumb lleva los atributos `data-scope="breadcrumb"` y `data-part` en cada parte (`root`, `list`, `item`, `link`, `separator`, `ellipsis`). Estílalo con espaciado, tipografía o colores apropiados para tu sistema de diseño. Apunta a los elementos usando los atributos data para un estilizado robusto.
+
+## Interacción con teclado
+
+Este primitivo no tiene interacción con teclado. Renderiza contenido estático que no recibe enfoque ni responde a eventos de teclado.
 
 ## Renderizado SSR e hidratación
 

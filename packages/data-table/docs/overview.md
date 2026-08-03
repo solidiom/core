@@ -11,6 +11,13 @@ status: published
 package: "@solidiom/data-table"
 primitive: data-table
 section: overview
+notApplicable:
+  - section: relationships
+    reason: Data Table has no sibling primitives. It composes with Checkbox, Pagination, and adapter engines but owns no inter-primitive contract.
+  - section: migration
+    reason: No prior API; this is the first shipped version.
+  - section: testing
+    reason: Standard testing guidance covers this primitive. Sort and adapter behavior are documented above.
 ---
 
 Data Table provides a headless, composable table primitive with built-in sorting, column visibility control, and row selection. It delegates sort computation through the adapter pattern so consumers can plug in external engines without coupling to a specific implementation.
@@ -70,3 +77,33 @@ Each `ColumnDef` declares:
 ## Installation
 
 Install the package with `pnpm add @solidiom/data-table`. The package requires compatible `solid-js` and `@solidjs/web` peer dependencies.
+
+## Parts
+
+Data Table exposes six parts:
+
+- **Root** — the container that manages sort state, column visibility, and row selection. Accepts `columns`, `data`, `modelPort`, and selection props.
+- **Header** — the `<thead>` container for header rows.
+- **HeaderCell** — a sortable column header (`<th>`). Carries `aria-sort` and toggle behavior.
+- **Body** — the `<tbody>` container for data rows.
+- **Row** — a `<tr>` representing a data record. Carries `data-selected` when row selection is active.
+- **Cell** — a `<td>` data cell.
+
+## Styling
+
+Data Table ships with CSS, Tailwind, and UnoCSS recipe outputs. Parts carry `data-scope="data-table"` and `data-part` attributes. HeaderCell exposes `data-sort-direction="asc"` or `"desc"` when sorted. Rows expose `data-selected` when selected.
+
+## Keyboard & behavior
+
+| Key         | Behavior                                                                       |
+| ----------- | ------------------------------------------------------------------------------ |
+| Enter/Space | On a sortable HeaderCell: toggles sort direction (none → asc → desc → none).   |
+| Tab         | Moves focus between interactive elements (headers, row checkboxes if enabled). |
+
+## Composition
+
+Data Table is designed to compose with other primitives. Use `Checkbox` for row selection, `Pagination` below the table for paging, or `Combobox` in a toolbar for column filtering. The adapter pattern allows composition with external sort engines like TanStack Table.
+
+## SSR and hydration
+
+Data Table renders as a standard HTML `<table>` during SSR with all visible data inline. Sort state and column visibility are determined by props during server rendering. Hydration attaches click/keyboard handlers to sortable headers and selection checkboxes without re-rendering the table body.

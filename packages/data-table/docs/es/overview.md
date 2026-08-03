@@ -1,7 +1,7 @@
 ---
 contentSchemaVersion: 1
 title: Data Table
-description: Tabla headless ordenable con visibilidad de columnas, selección de filas y delegación de ordenamiento mediante adaptador.
+description: Tabla ordenable sin estilos con visibilidad de columnas, selección de filas y delegación de orden basada en adaptador.
 keywords: [tabla, datos, ordenar, columnas, filas, selección]
 locale: es
 maturity: beta
@@ -11,13 +11,22 @@ status: published
 package: "@solidiom/data-table"
 primitive: data-table
 section: overview
+translationSourceHash: "33b29388b7cd2e801b3e0c70b1efdaf1f6e5e238b0f0419f50e00308153ec530"
+translationStatus: draft
+notApplicable:
+  - section: relationships
+    reason: Data Table no tiene primitivos hermanos. Se compone con Checkbox, Pagination y motores adaptadores pero no posee un contrato inter-primitivo.
+  - section: migration
+    reason: Sin API previa; esta es la primera versión publicada.
+  - section: testing
+    reason: La guía estándar de pruebas cubre este primitivo. El comportamiento de orden y adaptador está documentado arriba.
 ---
 
-Data Table proporciona un primitivo de tabla headless y composable con ordenamiento integrado, control de visibilidad de columnas y selección de filas. Delega el cálculo de ordenamiento a través del patrón adaptador para que los consumidores puedan conectar motores externos sin acoplarse a una implementación específica.
+Data Table proporciona un primitivo de tabla componible y sin estilos con ordenamiento incorporado, control de visibilidad de columnas y selección de filas. Delega el cómputo de orden a través del patrón adaptador para que los consumidores puedan conectar motores externos sin acoplarse a una implementación específica.
 
 ## Uso
 
-Compón `Root`, `Header`, `HeaderCell`, `Body`, `Row` y `Cell`. Define las columnas con objetos `ColumnDef` que declaran el identificador de cada columna, la etiqueta de encabezado, la clave de acceso y si es ordenable.
+Compón `Root`, `Header`, `HeaderCell`, `Body`, `Row` y `Cell`. Define las columnas con objetos `ColumnDef` que declaran el identificador, la etiqueta del encabezado, la clave de acceso y si es ordenable.
 
 ```tsx
 import * as DataTable from "@solidiom/data-table"
@@ -56,17 +65,47 @@ const data = [
 
 ## Patrón adaptador
 
-La interfaz `TableModelPort` permite delegar el cálculo de ordenamiento a un motor externo. Pasa una prop `modelPort` a `Root` con un método `sort(rows, columnId, direction)`. Cuando no se proporciona un port, el ordenamiento integrado usa comparación de cadenas mediante `localeCompare`.
+La interfaz `TableModelPort` permite delegar el cómputo de orden a un motor externo. Pasa un prop `modelPort` a `Root` con un método `sort(rows, columnId, direction)`. Cuando no se proporciona un port, el orden incorporado usa comparación de cadenas mediante `localeCompare`.
 
 ## Definiciones de columna
 
 Cada `ColumnDef` declara:
 
-- **id** — identificador único de columna usado para el estado de ordenamiento y seguimiento de visibilidad.
+- **id** — identificador único de columna para seguimiento de estado de orden y visibilidad.
 - **header** — etiqueta visible para el encabezado de la columna.
 - **accessorKey** — clave en el objeto de datos de la fila para extraer el valor de la celda.
-- **sortable** — indica si al hacer clic o presionar Enter/Espacio en el encabezado se alterna la dirección de ordenamiento.
+- **sortable** — si hacer clic o presionar Enter/Space en el encabezado alterna la dirección de orden.
 
 ## Instalación
 
 Instala el paquete con `pnpm add @solidiom/data-table`. El paquete requiere dependencias pares compatibles de `solid-js` y `@solidjs/web`.
+
+## Partes
+
+Data Table expone seis partes:
+
+- **Root** — el contenedor que gestiona el estado de orden, visibilidad de columnas y selección de filas. Acepta `columns`, `data`, `modelPort` y props de selección.
+- **Header** — el contenedor `<thead>` para filas de encabezado.
+- **HeaderCell** — un encabezado de columna ordenable (`<th>`). Lleva `aria-sort` y comportamiento de alternancia.
+- **Body** — el contenedor `<tbody>` para filas de datos.
+- **Row** — un `<tr>` que representa un registro de datos. Lleva `data-selected` cuando la selección de filas está activa.
+- **Cell** — una celda de datos `<td>`.
+
+## Estilos
+
+Data Table incluye recetas CSS, Tailwind y UnoCSS. Las partes llevan los atributos `data-scope="data-table"` y `data-part`. HeaderCell expone `data-sort-direction="asc"` o `"desc"` cuando está ordenado. Las filas exponen `data-selected` cuando están seleccionadas.
+
+## Interacción con teclado
+
+| Tecla       | Comportamiento                                                                                     |
+| ----------- | -------------------------------------------------------------------------------------------------- |
+| Enter/Space | En un HeaderCell ordenable: alterna la dirección de orden (none → asc → desc → none).              |
+| Tab         | Mueve el foco entre elementos interactivos (encabezados, checkboxes de fila si están habilitados). |
+
+## Composición
+
+Data Table está diseñado para componerse con otras primitivas. Usa `Checkbox` para selección de filas, `Pagination` debajo de la tabla para paginación, o `Combobox` en una barra de herramientas para filtrado de columnas. El patrón adaptador permite composición con motores de orden externos como TanStack Table.
+
+## Renderizado SSR e hidratación
+
+Data Table se renderiza como una tabla HTML estándar `<table>` durante SSR con todos los datos visibles en línea. El estado de orden y la visibilidad de columnas se determinan por props durante el renderizado en servidor. La hidratación adjunta manejadores de clic/teclado a los encabezados ordenables y checkboxes de selección sin re-renderizar el cuerpo de la tabla.
