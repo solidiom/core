@@ -30,9 +30,7 @@ import * as Button from "@solidiom/button"
 Use the `loading` prop to indicate an in-progress action. The button is automatically disabled and marked with `aria-busy="true"`.
 
 ```tsx
-;<Button.Root loading>
-  Saving...
-</Button.Root>
+;<Button.Root loading>Saving...</Button.Root>
 ```
 
 ## IconButton

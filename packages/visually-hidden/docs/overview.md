@@ -33,10 +33,10 @@ Install the package with `pnpm add @solidiom/visually-hidden`. The package requi
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Content to hide visually. |
-| `class` | `string` | — | Additional CSS class for styling overrides. |
+| Prop       | Type          | Default | Description                                 |
+| ---------- | ------------- | ------- | ------------------------------------------- |
+| `children` | `JSX.Element` | —       | Content to hide visually.                   |
+| `class`    | `string`      | —       | Additional CSS class for styling overrides. |
 
 ## Styling
 

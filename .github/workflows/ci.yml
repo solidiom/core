@@ -691,8 +691,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: npx playwright install --with-deps chromium
-- name: Phase 3 (library beta) gate
-          run: pnpm run gate:phase3
+      - name: Phase 3 (library beta) gate
+        run: pnpm run gate:phase3
 
   # VS-004's gate, the executable half of the G2 exit checklist. It existed as
   # tools/vertical-slice-gate.ts but was referenced by no script, workflow, or phase

@@ -48,10 +48,10 @@ reviewStatus: draft
 
 Accordion emits data attributes for styling and state-based decisions:
 
-| Attribute | Values | Description |
-|-----------|--------|-------------|
-| `data-scope` | `"accordion"` | Identifies the element as belonging to the Accordion primitive |
-| `data-part` | `"root"`, `"item"`, `"trigger"`, `"content"` | Identifies the specific part |
-| `data-state` | `"open"`, `"closed"` | Present on Item; reflects expanded state |
-| `data-expanded` | `"true"`, `"false"` | Present on Trigger; mirrors expanded state |
-| `data-disabled` | `""` or absent | Present when the item is disabled |
+| Attribute       | Values                                       | Description                                                    |
+| --------------- | -------------------------------------------- | -------------------------------------------------------------- |
+| `data-scope`    | `"accordion"`                                | Identifies the element as belonging to the Accordion primitive |
+| `data-part`     | `"root"`, `"item"`, `"trigger"`, `"content"` | Identifies the specific part                                   |
+| `data-state`    | `"open"`, `"closed"`                         | Present on Item; reflects expanded state                       |
+| `data-expanded` | `"true"`, `"false"`                          | Present on Trigger; mirrors expanded state                     |
+| `data-disabled` | `""` or absent                               | Present when the item is disabled                              |

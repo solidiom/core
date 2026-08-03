@@ -4,15 +4,15 @@ Internal documentation for Solidiom contributors and maintainers.
 
 ## Directory structure
 
-| Directory       | Purpose                       | Contents                                                               |
-| --------------- | ----------------------------- | ---------------------------------------------------------------------- |
-| `architecture/` | How the system works          | Design documents, Solid 2 migration notes, runtime patterns            |
-| `contracts/`    | Binding rules and policies    | Recipe contract, authoring guide, translation policy, analytics schema |
-| `plans/`        | What we are building and when | Implementation plan, website plan, website tasks, typeset plan         |
-| `guides/`       | How to do X                   | Adding a primitive, offline install, deployment                        |
-| `evidence/`     | What we proved (generated)    | Axe scans, keyboard audits, browser results, build reports             |
-| `templates/`    | Fill-in-the-blank records     | AT verification template                                               |
-| `assets/`       | Non-markdown support files    | Brand screenshot, baseline JSON                                        |
+| Directory       | Purpose                       | Contents                                                                                  |
+| --------------- | ----------------------------- | ----------------------------------------------------------------------------------------- |
+| `architecture/` | How the system works          | Design documents, Solid 2 migration notes, runtime patterns                               |
+| `contracts/`    | Binding rules and policies    | Recipe contract, authoring guide, translation policy, analytics schema                    |
+| `plans/`        | What we are building and when | Implementation plan, website plan, website tasks, primitives plan, CLI plan, typeset plan |
+| `guides/`       | How to do X                   | Adding a primitive, offline install, deployment                                           |
+| `evidence/`     | What we proved (generated)    | Axe scans, keyboard audits, browser results, build reports                                |
+| `templates/`    | Fill-in-the-blank records     | AT verification template                                                                  |
+| `assets/`       | Non-markdown support files    | Brand screenshot, baseline JSON                                                           |
 
 ## Lifecycle
 
@@ -51,7 +51,9 @@ docs/
 │   ├── recipe-contract.md             (current)
 │   └── translation-policy.md          (current)
 ├── plans/
+│   ├── cli-002-010-plan.md            (active)
 │   ├── implementation-plan.md         (active)
+│   ├── primitives.md                  (active)
 │   ├── typeset-plan.md                (current)
 │   ├── website-plan.md                (active)
 │   └── website-tasks.md               (active)

@@ -21,17 +21,17 @@ focus:
   - "Button.Root se renderiza como un elemento nativo `<button>` y recibe enfoque por defecto."
   - "Los botones deshabilitados y en carga se eliminan del orden de tabulación a través del atributo nativo `disabled`."
 semantics:
-  - "Se renderiza como un elemento nativo `<button>` con `data-scope=\"button\"` y `data-part=\"root\"`."
-  - "Cuando `loading` es true, establece `aria-busy=\"true\"` y deshabilita el botón."
-  - "ToggleButton se renderiza como un `<button>` con `aria-pressed` que refleja el estado presionado y `data-part=\"toggle\"`."
-  - "IconButton envuelve los hijos en `aria-hidden=\"true\"` y requiere `aria-label` para el nombre accesible."
-  - "ButtonGroup se renderiza como un `<div>` con `role=\"group\"` y `data-part=\"group\"`."
+  - 'Se renderiza como un elemento nativo `<button>` con `data-scope="button"` y `data-part="root"`.'
+  - 'Cuando `loading` es true, establece `aria-busy="true"` y deshabilita el botón.'
+  - 'ToggleButton se renderiza como un `<button>` con `aria-pressed` que refleja el estado presionado y `data-part="toggle"`.'
+  - 'IconButton envuelve los hijos en `aria-hidden="true"` y requiere `aria-label` para el nombre accesible.'
+  - 'ButtonGroup se renderiza como un `<div>` con `role="group"` y `data-part="group"`.'
   - "Lleva los atributos `data-disabled` y `data-loading` cuando los estados respectivos están activos."
 aria:
-  - "`aria-busy=\"true\"` indica que el botón está en estado de carga."
+  - '`aria-busy="true"` indica que el botón está en estado de carga.'
   - "`aria-pressed` en ToggleButton indica el estado actual de alternancia."
   - "`aria-label` en IconButton proporciona el nombre accesible para botones solo con icono."
-  - "`role=\"group\"` en ButtonGroup asocia botones relacionados."
+  - '`role="group"` en ButtonGroup asocia botones relacionados.'
 consumerDuties:
   - Asegurar que el texto del botón o `aria-label` comunique claramente la acción.
   - "Usar `IconButton` con un `aria-label` significativo cuando el botón no contiene texto visible."

@@ -36,32 +36,32 @@ Install the package with `pnpm add @solidiom/alert`. The package requires compat
 
 ### Root
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `type` | `"info" \| "success" \| "warning" \| "error"` | `"info"` | Alert variant that controls visual appearance. |
-| `assertiveness` | `"assertive" \| "polite"` | `"assertive"` | Live region assertiveness. Assertive uses `role="alert"` and interrupts the user. Polite uses `role="status"` and announces at the next opportunity. |
+| Prop            | Type                                          | Default       | Description                                                                                                                                          |
+| --------------- | --------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`          | `"info" \| "success" \| "warning" \| "error"` | `"info"`      | Alert variant that controls visual appearance.                                                                                                       |
+| `assertiveness` | `"assertive" \| "polite"`                     | `"assertive"` | Live region assertiveness. Assertive uses `role="alert"` and interrupts the user. Polite uses `role="status"` and announces at the next opportunity. |
 
 ### Title
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Title text. Required for accessibility. |
+| Prop       | Type          | Default | Description                             |
+| ---------- | ------------- | ------- | --------------------------------------- |
+| `children` | `JSX.Element` | —       | Title text. Required for accessibility. |
 
 ### Description
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Body text for the alert message. |
+| Prop       | Type          | Default | Description                      |
+| ---------- | ------------- | ------- | -------------------------------- |
+| `children` | `JSX.Element` | —       | Body text for the alert message. |
 
 ## Styling
 
 Alert carries `data-scope="alert"`, `data-part`, and `data-state` attributes for styling hooks.
 
-| Part | `data-part` | `data-state` |
-|------|-------------|--------------|
-| Root | `root` | Variant (`info`, `success`, `warning`, `error`) |
-| Title | `title` | — |
-| Description | `description` | — |
+| Part        | `data-part`   | `data-state`                                    |
+| ----------- | ------------- | ----------------------------------------------- |
+| Root        | `root`        | Variant (`info`, `success`, `warning`, `error`) |
+| Title       | `title`       | —                                               |
+| Description | `description` | —                                               |
 
 Apply your visual recipe using the data attributes for targeting. Root renders as a `<div>`, Title as an `<h5>`, and Description as a `<div>`.
 

@@ -53,50 +53,50 @@ Instala el paquete con `pnpm add @solidiom/breadcrumb`. El paquete requiere depe
 
 Envuelve toda la navegación de migas de pan. Se renderiza como un elemento `<nav>` con `aria-label="Breadcrumb"`.
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Contenido del breadcrumb. |
+| Prop       | Tipo          | Default | Descripción               |
+| ---------- | ------------- | ------- | ------------------------- |
+| `children` | `JSX.Element` | —       | Contenido del breadcrumb. |
 
 ### List
 
 Envuelve los elementos del breadcrumb. Se renderiza como un elemento `<ol>`.
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Lista de elementos del breadcrumb. |
+| Prop       | Tipo          | Default | Descripción                        |
+| ---------- | ------------- | ------- | ---------------------------------- |
+| `children` | `JSX.Element` | —       | Lista de elementos del breadcrumb. |
 
 ### Item
 
 Envuelve una entrada individual del breadcrumb. Se renderiza como un elemento `<li>`.
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Contenido del elemento (típicamente un Link). |
+| Prop       | Tipo          | Default | Descripción                                   |
+| ---------- | ------------- | ------- | --------------------------------------------- |
+| `children` | `JSX.Element` | —       | Contenido del elemento (típicamente un Link). |
 
 ### Link
 
 Enlace de navegación dentro de un elemento del breadcrumb. Se renderiza como un elemento `<a>`.
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | — | Texto o contenido del enlace. |
-| `href` | `string` | — | URL de destino de la navegación. |
-| `current` | `boolean` | `false` | Cuando es true, marca el enlace como la página actual con `aria-current="page"`. |
+| Prop       | Tipo          | Default | Descripción                                                                      |
+| ---------- | ------------- | ------- | -------------------------------------------------------------------------------- |
+| `children` | `JSX.Element` | —       | Texto o contenido del enlace.                                                    |
+| `href`     | `string`      | —       | URL de destino de la navegación.                                                 |
+| `current`  | `boolean`     | `false` | Cuando es true, marca el enlace como la página actual con `aria-current="page"`. |
 
 ### Separator
 
 Separador visual entre elementos del breadcrumb. Se renderiza como un `<span>` con `role="presentation"` y `aria-hidden="true"`.
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `children` | `JSX.Element` | `"/"` | Contenido personalizado del separador. |
+| Prop       | Tipo          | Default | Descripción                            |
+| ---------- | ------------- | ------- | -------------------------------------- |
+| `children` | `JSX.Element` | `"/"`   | Contenido personalizado del separador. |
 
 ### Ellipsis
 
 Indica elementos del breadcrumb omitidos en una ruta truncada. Se renderiza como un `<span>` con `role="presentation"`.
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
+| Prop       | Tipo          | Default | Descripción                       |
+| ---------- | ------------- | ------- | --------------------------------- |
 | `children` | `JSX.Element` | `"..."` | Contenido personalizado delipsis. |
 
 ## Estilos

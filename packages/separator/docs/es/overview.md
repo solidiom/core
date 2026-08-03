@@ -33,10 +33,10 @@ Instala el paquete con `pnpm add @solidiom/separator`. El paquete requiere depen
 
 ## Props
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Orientación del separator. |
-| `decorative` | `boolean` | `false` | Cuando es true, el separator es puramente decorativo y se oculta del árbol de accesibilidad. |
+| Prop          | Tipo                         | Default        | Descripción                                                                                  |
+| ------------- | ---------------------------- | -------------- | -------------------------------------------------------------------------------------------- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Orientación del separator.                                                                   |
+| `decorative`  | `boolean`                    | `false`        | Cuando es true, el separator es puramente decorativo y se oculta del árbol de accesibilidad. |
 
 ## Estilos
 

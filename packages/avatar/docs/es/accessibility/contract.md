@@ -15,9 +15,9 @@ section: accessibility
 keyboard: []
 focus: []
 semantics:
-  - "Renderiza `Root` como un `<span>` con `data-scope=\"avatar\"` y `data-part=\"root\"`."
-  - "Renderiza `Image` como un `<img>` con `data-scope=\"avatar\"` y `data-part=\"image\"`. El atributo `alt` se pasa directamente para lectores de pantalla."
-  - "Renderiza `Fallback` como un `<span>` con `data-scope=\"avatar\"` y `data-part=\"fallback\"`. Se oculta cuando la imagen se carga correctamente."
+  - 'Renderiza `Root` como un `<span>` con `data-scope="avatar"` y `data-part="root"`.'
+  - 'Renderiza `Image` como un `<img>` con `data-scope="avatar"` y `data-part="image"`. El atributo `alt` se pasa directamente para lectores de pantalla.'
+  - 'Renderiza `Fallback` como un `<span>` con `data-scope="avatar"` y `data-part="fallback"`. Se oculta cuando la imagen se carga correctamente.'
 aria:
   - "El prop `alt` en `Image` proporciona el nombre accesible para la imagen del avatar."
   - "Cuando la imagen está oculta durante la carga, el contenido de `Fallback` es visible para los lectores de pantalla."
