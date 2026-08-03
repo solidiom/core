@@ -13,7 +13,7 @@
   }
 
   [data-scope="toast"][data-part="title"] {
-    @apply text-sm font-medium;
+    @apply text-[0.875rem] font-medium;
   }
 
   [data-scope="toast"][data-part="description"] {
@@ -21,6 +21,6 @@
   }
 
   [data-scope="toast"][data-part="close"] {
-    @apply ml-auto inline-flex items-center justify-center w-5 h-5 rounded-sm border-none bg-transparent cursor-pointer text-sm hover:bg-accent;
+    @apply ml-auto inline-flex items-center justify-center w-5 h-5 rounded-sm border-none bg-transparent cursor-pointer text-[0.875rem] hover:bg-accent;
   }
 }

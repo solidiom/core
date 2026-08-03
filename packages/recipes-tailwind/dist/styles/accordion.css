@@ -9,7 +9,7 @@
   }
 
   [data-scope="accordion"][data-part="trigger"] {
-    @apply flex w-full items-center justify-between py-4 px-0 text-sm font-medium border-none bg-transparent cursor-pointer transition-colors hover:underline;
+    @apply flex w-full items-center justify-between py-4 px-0 text-[0.875rem] font-medium border-none bg-transparent cursor-pointer transition-colors hover:underline;
   }
 
   [data-scope="accordion"][data-part="trigger"][data-disabled] {
@@ -17,6 +17,6 @@
   }
 
   [data-scope="accordion"][data-part="content"] {
-    @apply overflow-hidden pb-4 text-sm text-muted-foreground;
+    @apply overflow-hidden pb-4 text-[0.875rem] text-muted-foreground;
   }
 }

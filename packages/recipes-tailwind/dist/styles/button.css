@@ -49,15 +49,15 @@
   }
 
   [data-scope="button"][data-part="root"].solidiom-btn--sm {
-    @apply h-9 py-0 px-3 text-sm;
+    @apply h-9 py-0 px-3 text-[0.875rem];
   }
 
   [data-scope="button"][data-part="root"].solidiom-btn--md {
-    @apply h-10 py-2 px-4 text-sm;
+    @apply h-10 py-2 px-4 text-[0.875rem];
   }
 
   [data-scope="button"][data-part="root"].solidiom-btn--lg {
-    @apply h-11 py-0 px-8 text-base;
+    @apply h-11 py-0 px-8 text-[1rem];
   }
 
   [data-scope="button"][data-part="root"].solidiom-btn--icon {
