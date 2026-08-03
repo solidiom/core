@@ -75,6 +75,7 @@ function main(): void {
     {
       cwd: ROOT,
       encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
     },
   )
   const output = `${run.stdout ?? ""}\n${run.stderr ?? ""}`

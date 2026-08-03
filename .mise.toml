@@ -262,6 +262,7 @@ run = [
 description = "CI job `test-node`: unit tests across the Node 24/26 matrix (rebuilds per version; restores the default toolchain on exit)"
 run = '''#!/usr/bin/env bash
 set -euo pipefail
+export CI=true
 
 # CI runs this as a two-entry matrix on isolated runners. Locally the installs
 # below mutate node_modules for a specific Node version, so restore the
@@ -274,15 +275,16 @@ for node_version in 24 26; do
   echo "==> test-node: Node ${node_version}"
   mise exec "node@${node_version}" -- pnpm install --frozen-lockfile
   mise exec "node@${node_version}" -- pnpm build
-  mise exec "node@${node_version}" -- pnpm test
+  mise exec "node@${node_version}" -- pnpm test < /dev/null
 done
 '''
 
 [tasks."ci:test-browser"]
 description = "CI job `test-browser`: browser-mode component tests plus RECIPE-005 computed-style parity (needs a prior build)"
+env = { CI = "true" }
 run = [
   "pnpm exec playwright install chromium firefox webkit",
-  "pnpm exec vitest run --config vitest.browser.config.ts",
+  "pnpm exec vitest run --config vitest.browser.config.ts < /dev/null",
   # RECIPE-005 — computed-style parity across css/tailwind/unocss profiles
   "pnpm run test:recipe-parity",
 ]
@@ -291,6 +293,7 @@ run = [
 description = "CI job `test-solid-matrix`: Solid 2 compatibility matrix (Node 24/26 × low/mid/high tiers)"
 run = '''#!/usr/bin/env bash
 set -euo pipefail
+export CI=true
 
 # This job mutates package.json/pnpm-lock.yaml per tier; restore them on exit
 # so the task is self-contained and leaves the working tree unchanged. The
@@ -308,14 +311,15 @@ for node_version in 24 26; do
     mise exec "node@${node_version}" -- pnpm install --no-frozen-lockfile
     mise exec "node@${node_version}" -- pnpm exec playwright install chromium firefox webkit
     mise exec "node@${node_version}" -- pnpm exec nx run-many -t build --exclude=@solidiom/docs,@solidiom/docs-astro-poc,@solidiom/site
-    mise exec "node@${node_version}" -- pnpm exec nx run-many -t test --exclude=@solidiom/tests-package-source-parity,@solidiom/site
-    mise exec "node@${node_version}" -- pnpm exec vitest run --config vitest.browser.config.ts
+    mise exec "node@${node_version}" -- pnpm exec nx run-many -t test --exclude=@solidiom/tests-package-source-parity,@solidiom/site < /dev/null
+    mise exec "node@${node_version}" -- pnpm exec vitest run --config vitest.browser.config.ts < /dev/null
   done
 done
 '''
 
 [tasks."ci:a11y-axe-scan"]
 description = "CI job `a11y-axe-scan`: axe scans, evidence, A11Y-004 coverage gate, and report (needs a prior build)"
+env = { CI = "true" }
 run = [
   "pnpm exec playwright install chromium",
   "pnpm run test:a11y",
@@ -344,7 +348,7 @@ run = [
 
 [tasks."ci:site-e2e"]
 description = "CI job `site-e2e`: site Playwright E2E against the built dist (run ci:site-build first)"
-env = { PLAYWRIGHT_USE_EXISTING_BUILD = "1" }
+env = { PLAYWRIGHT_USE_EXISTING_BUILD = "1", CI = "true" }
 run = [
   "pnpm exec playwright install chromium firefox webkit",
   "pnpm --filter @solidiom/site run test:e2e",
@@ -354,6 +358,7 @@ run = [
 description = "CI job `site-visual`: visual baselines against the built dist — ADVISORY, mirrors continue-on-error (run ci:site-build first; baselines are Linux-generated, so expect font-rendering diffs on macOS)"
 run = '''#!/usr/bin/env bash
 set -uo pipefail
+export CI=true
 
 pnpm exec playwright install chromium || exit 1
 
@@ -434,6 +439,7 @@ fi
 
 [tasks."ci:gate-phase1"]
 description = "CI job `phase1-gate`: run the Phase 1 acceptance gate"
+env = { CI = "true" }
 run = [
   "pnpm exec playwright install chromium",
   "pnpm run gate:phase1",
@@ -459,6 +465,7 @@ run = "pnpm run beta:acceptance:report"
 description = "CI job `beta-acceptance-e2e`: BETA-002 cross-browser acceptance matrix — ADVISORY, mirrors continue-on-error (run ci:site-build first)"
 run = '''#!/usr/bin/env bash
 set -uo pipefail
+export CI=true
 
 pnpm exec playwright install chromium firefox webkit || exit 1
 
@@ -478,6 +485,7 @@ fi
 description = "CI job `phase3-gate`: Phase 3 (library beta) gate — ADVISORY, mirrors continue-on-error (needs a prior build). NOT the website's G3 gate; see docs/plans/website-tasks.md §3.1"
 run = '''#!/usr/bin/env bash
 set -uo pipefail
+export CI=true
 
 pnpm exec playwright install chromium || exit 1
 
