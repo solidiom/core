@@ -895,6 +895,190 @@ export const tooltipRecipe: RecipeDefinition = {
   ],
 }
 
+/**
+ * Typeset — granular typography scale (RECIPE-007).
+ *
+ * Each part is an element identity (heading-1..4, paragraph, lead, large, small,
+ * muted, blockquote, inline-code). No variants, no states.
+ */
+export const typesetRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "typeset",
+  description: "Granular typography scale: heading, paragraph, and utility text identities.",
+  slots: [
+    {
+      part: "lead",
+      element: "p",
+      ownership: "consumer",
+      ownershipReason: "Consumer applies for emphasis text.",
+      base: { "font-size": { token: "font-size-lg" }, color: { token: "foreground-muted" } },
+    },
+    {
+      part: "large",
+      element: "span",
+      ownership: "consumer",
+      ownershipReason: "Consumer applies for larger text.",
+      base: { "font-size": { token: "font-size-md" }, "font-weight": "600" },
+    },
+    {
+      part: "muted",
+      element: "span",
+      ownership: "consumer",
+      ownershipReason: "Consumer applies for de-emphasized text.",
+      base: { "font-size": { token: "font-size-sm" }, color: { token: "foreground-muted" } },
+    },
+    {
+      part: "blockquote",
+      element: "blockquote",
+      ownership: "consumer",
+      ownershipReason: "Consumer applies to their own blockquote.",
+      base: { "border-left-width": "2px", "padding-left": "1.5rem", "font-style": "italic" },
+    },
+    {
+      part: "inline-code",
+      element: "code",
+      ownership: "consumer",
+      ownershipReason: "Consumer applies to inline code.",
+      base: {
+        "font-family": "monospace",
+        "font-size": { token: "font-size-sm" },
+        "font-weight": "600",
+      },
+    },
+  ],
+  axes: [],
+  tokens: [
+    {
+      id: "font-size-xs",
+      mappings: {
+        css: "--ui-font-size-xs",
+        tailwind: "fontSize-xs",
+        unocss: "--ui-font-size-xs",
+        site: "--sol-font-size-xs",
+      },
+    },
+    {
+      id: "font-size-sm",
+      mappings: {
+        css: "--ui-font-size-sm",
+        tailwind: "fontSize-sm",
+        unocss: "--ui-font-size-sm",
+        site: "--sol-font-size-sm",
+      },
+    },
+    {
+      id: "font-size-base",
+      mappings: {
+        css: "--ui-font-size-base",
+        tailwind: "fontSize-base",
+        unocss: "--ui-font-size-base",
+        site: "--sol-font-size-base",
+      },
+    },
+    {
+      id: "font-size-md",
+      mappings: {
+        css: "--ui-font-size-md",
+        tailwind: "fontSize-md",
+        unocss: "--ui-font-size-md",
+        site: "--sol-font-size-md",
+      },
+    },
+    {
+      id: "font-size-lg",
+      mappings: {
+        css: "--ui-font-size-lg",
+        tailwind: "fontSize-lg",
+        unocss: "--ui-font-size-lg",
+        site: "--sol-font-size-lg",
+      },
+    },
+    {
+      id: "font-size-xl",
+      mappings: {
+        css: "--ui-font-size-xl",
+        tailwind: "fontSize-xl",
+        unocss: "--ui-font-size-xl",
+        site: "--sol-font-size-xl",
+      },
+    },
+
+    {
+      id: "foreground-muted",
+      mappings: {
+        css: "--ui-muted-fg",
+        tailwind: "muted-fg",
+        unocss: "--ui-muted-fg",
+        site: "--sol-muted-fg",
+      },
+    },
+  ],
+}
+
+/**
+ * Prose — rich-text wrapper that styles descendant elements (RECIPE-007).
+ *
+ * A single "root" slot with a size axis. The CSS uses descendant element selectors
+ * (which the recipe contract audit permits per docs/plans/typeset-plan.md).
+ */
+export const proseRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "prose",
+  description: "Rich-text wrapper: styles descendant headings, paragraphs, lists, and code blocks.",
+  slots: [
+    {
+      part: "root",
+      element: "div",
+      ownership: "primitive",
+      ownershipReason: "The prose wrapper owns the root container.",
+      base: {
+        "font-size": { token: "font-size-base" },
+        color: { token: "foreground" },
+      },
+    },
+  ],
+  axes: [
+    {
+      name: "size",
+      values: ["sm", "base", "lg"],
+      defaultValue: "base",
+    },
+  ],
+  tokens: [
+    {
+      id: "font-size-sm",
+      mappings: {
+        css: "--ui-font-size-sm",
+        tailwind: "fontSize-sm",
+        unocss: "--ui-font-size-sm",
+        site: "--sol-font-size-sm",
+      },
+    },
+    {
+      id: "font-size-base",
+      mappings: {
+        css: "--ui-font-size-base",
+        tailwind: "fontSize-base",
+        unocss: "--ui-font-size-base",
+        site: "--sol-font-size-base",
+      },
+    },
+    {
+      id: "font-size-lg",
+      mappings: {
+        css: "--ui-font-size-lg",
+        tailwind: "fontSize-lg",
+        unocss: "--ui-font-size-lg",
+        site: "--sol-font-size-lg",
+      },
+    },
+    {
+      id: "foreground",
+      mappings: { css: "--ui-fg", tailwind: "fg", unocss: "--ui-fg", site: "--sol-fg" },
+    },
+  ],
+}
+
 /** Every recipe definition, keyed by scope. */
 export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> = {
   accordion: accordionRecipe,
@@ -910,4 +1094,6 @@ export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> =
   tabs: tabsRecipe,
   toast: toastRecipe,
   tooltip: tooltipRecipe,
+  typeset: typesetRecipe,
+  prose: proseRecipe,
 }
