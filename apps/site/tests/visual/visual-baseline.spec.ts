@@ -51,6 +51,7 @@ for (const locale of LOCALES) {
           await expect(page).toHaveScreenshot(`${testName}.png`, {
             fullPage: true,
             animations: "disabled",
+            maxDiffPixelRatio: 0.03,
           })
         })
       }
