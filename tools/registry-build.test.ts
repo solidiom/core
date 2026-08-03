@@ -163,11 +163,25 @@ describe("registry build determinism (REG-004)", () => {
       ...process.env,
       REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
     }
+    delete env.REGISTRY_SIGN_KEY
 
     execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
-    const index = readFileSync(join(REGISTRY_DIR, "index.json"), "utf8")
+    const index = JSON.parse(readFileSync(join(REGISTRY_DIR, "index.json"), "utf8"))
 
-    expect(index).toMatchSnapshot()
+    // generatedAt and the signing fields are build-time provenance, not part of
+    // the catalog structure being snapshotted. Excluding them keeps the snapshot
+    // stable across regenerations that do not change the catalog — the same
+    // reasoning api-coverage-gate.test.ts applies to its own artifacts.
+    //
+    // This matters more than it used to: generation stamps are now preserved
+    // from the committed file whenever content is unchanged, so REGISTRY_TIMESTAMP
+    // above no longer determines the value. Snapshotting it would pin this test to
+    // whatever stamp the committed registry happens to carry, and break it on the
+    // next legitimate content change for an unrelated reason.
+    const { generatedAt, integrity, ...stable } = index
+    const { signature, signedAt, signatureKeyId, ...stableIntegrity } = integrity
+
+    expect({ ...stable, integrity: stableIntegrity }).toMatchSnapshot()
   })
 
   // BUILD-001 regression guard.

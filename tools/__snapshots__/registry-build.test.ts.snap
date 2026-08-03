@@ -1,130 +1,195 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`registry build determinism (REG-004) > snapshot: registry/index.json matches expected structure 1`] = `
-"{
+{
   "$schema": "https://solidiom.dev/schemas/registry-index/v2.json",
-  "version": 2,
-  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "adapters": [
+    {
+      "capability": "carousel-physics@1",
+      "name": "carousel-embla",
+      "package": "@solidiom/adapter-carousel-embla",
+      "version": "0.0.1-next.0",
+    },
+    {
+      "capability": "date-math@1",
+      "name": "date-internationalized",
+      "package": "@solidiom/adapter-date-internationalized",
+      "version": "0.0.1-next.0",
+    },
+    {
+      "capability": "positioning@1",
+      "name": "positioning-floating-ui",
+      "package": "@solidiom/adapter-positioning-floating-ui",
+      "version": "0.0.1-next.0",
+    },
+    {
+      "capability": "positioning@1",
+      "name": "positioning-minimal",
+      "package": "@solidiom/adapter-positioning-minimal",
+      "version": "0.0.1-next.0",
+    },
+    {
+      "capability": "table@1",
+      "name": "table-tanstack",
+      "package": "@solidiom/adapter-table-tanstack",
+      "version": "0.0.1-next.0",
+    },
+    {
+      "capability": "virtualization@1",
+      "name": "virtualization-tanstack",
+      "package": "@solidiom/adapter-virtualization-tanstack",
+      "version": "0.0.1-next.0",
+    },
+  ],
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "401783a148c14a247bf9af75978bd6b82ecadbd61d5de6206b824e4e24c5bc07"
+    "entriesHash": "4fc19a5151c57b74208cabfd631d39fa72ed7d29a95edb020fa40ef2072b66d4",
   },
   "primitives": [
     {
-      "name": "accordion",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/accordion",
-      "label": "Accordion",
-      "description": "Vertically stacked set of collapsible sections.",
-      "category": "layout",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-accordion-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Vertically stacked set of collapsible sections.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [
-        "css",
-        "tailwind",
-        "unocss"
-      ],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Accordion",
+      "name": "accordion",
+      "package": "@solidiom/accordion",
+      "provenance": {
+        "directory": "packages/accordion",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "accordion",
+        "acordeón",
+        "colapsable",
+        "colapsar",
+        "collapse",
         "collapsible",
+        "expand",
+        "expandir",
         "layout",
         "runtime",
+        "secciones",
         "sections",
         "set",
         "stacked",
-        "vertically"
+        "vertically",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/accordion"
-      }
-    },
-    {
-      "name": "alert",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/alert",
-      "label": "Alert",
-      "description": "Inline, non-modal alert for status messages with live region semantics.",
-      "category": "feedback",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [
         "css",
         "tailwind",
-        "unocss"
+        "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-alert-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "feedback",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Inline, non-modal alert for status messages with live region semantics.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Alert",
+      "name": "alert",
+      "package": "@solidiom/alert",
+      "provenance": {
+        "directory": "packages/alert",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
+        "accessibility",
         "alert",
+        "error",
         "feedback",
         "for",
+        "info",
         "inline",
         "live",
+        "live-region",
         "messages",
         "modal",
         "non",
+        "notification",
         "region",
         "runtime",
         "semantics",
         "status",
-        "with"
+        "success",
+        "warning",
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/alert"
-      }
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "alert-dialog",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/alert-dialog",
-      "label": "Alert Dialog",
-      "description": "Modal confirmation dialog requiring explicit user action.",
-      "category": "overlay",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-alert-dialog-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "overlay",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Modal confirmation dialog requiring explicit user action.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Alert Dialog",
+      "name": "alert-dialog",
+      "package": "@solidiom/alert-dialog",
+      "provenance": {
+        "directory": "packages/alert-dialog",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "action",
         "alert",
@@ -135,200 +200,250 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "overlay",
         "requiring",
         "runtime",
-        "user"
+        "user",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/alert-dialog"
-      }
-    },
-    {
-      "name": "avatar",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/avatar",
-      "label": "Avatar",
-      "description": "User avatar with image and fallback.",
-      "category": "display",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-avatar-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "display",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "User avatar with image and fallback.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Avatar",
+      "name": "avatar",
+      "package": "@solidiom/avatar",
+      "provenance": {
+        "directory": "packages/avatar",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "and",
         "avatar",
         "display",
         "fallback",
         "image",
+        "imagen",
+        "iniciales",
+        "initials",
+        "reemplazo",
         "runtime",
         "user",
-        "with"
+        "usuario",
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/avatar"
-      }
+      "status": "preview",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "badge",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/badge",
-      "label": "Badge",
-      "description": "Inline status or label indicator.",
-      "category": "feedback",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-badge-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "feedback",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Inline status or label indicator.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [
-        "css",
-        "tailwind",
-        "unocss"
-      ],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Badge",
+      "name": "badge",
+      "package": "@solidiom/badge",
+      "provenance": {
+        "directory": "packages/badge",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "badge",
+        "estado",
+        "etiqueta",
         "feedback",
+        "indicador",
         "indicator",
         "inline",
         "label",
         "runtime",
-        "status"
+        "status",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/badge"
-      }
-    },
-    {
-      "name": "breadcrumb",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/breadcrumb",
-      "label": "Breadcrumb",
-      "description": "Hierarchical location indicator with links.",
-      "category": "navigation",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
-      "stylingOutputs": [],
-      "themeCompatible": [],
-      "searchKeywords": [
-        "breadcrumb",
-        "hierarchical",
-        "indicator",
-        "links",
-        "location",
-        "navigation",
-        "runtime",
-        "with"
-      ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/breadcrumb"
-      }
-    },
-    {
-      "name": "button",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/button",
-      "label": "Button",
-      "description": "Clickable trigger for actions.",
-      "category": "input",
-      "status": "preview",
-      "deliverables": [
-        "component",
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [
         "css",
         "tailwind",
-        "unocss"
+        "unocss",
       ],
       "themeCompatible": [],
-      "searchKeywords": [
-        "actions",
-        "button",
-        "clickable",
-        "for",
-        "input",
-        "runtime",
-        "trigger"
-      ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/button"
-      }
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "calendar",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/calendar",
-      "label": "Calendar",
-      "description": "Date selection with day/month/year views.",
-      "category": "input",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-breadcrumb-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "navigation",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Hierarchical location indicator with links.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Breadcrumb",
+      "name": "breadcrumb",
+      "package": "@solidiom/breadcrumb",
+      "provenance": {
+        "directory": "packages/breadcrumb",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
+      "searchKeywords": [
+        "breadcrumb",
+        "breadcrumb-list",
+        "enlaces",
+        "hierarchical",
+        "hierarchy",
+        "indicator",
+        "jerarquía",
+        "links",
+        "location",
+        "navegación",
+        "navigation",
+        "runtime",
+        "ruta-de-migas",
+        "with",
+      ],
+      "status": "preview",
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-button-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "component",
+        "primitive",
+      ],
+      "description": "Clickable trigger for actions.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Button",
+      "name": "button",
+      "package": "@solidiom/button",
+      "provenance": {
+        "directory": "packages/button",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
+      "searchKeywords": [
+        "acción",
+        "action",
+        "actions",
+        "alternar",
+        "button",
+        "carga",
+        "clickable",
+        "clickeable",
+        "deshabilitado",
+        "disabled",
+        "enviar",
+        "for",
+        "input",
+        "loading",
+        "runtime",
+        "submit",
+        "toggle",
+        "trigger",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-calendar-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Date selection with day/month/year views.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Calendar",
+      "name": "calendar",
+      "package": "@solidiom/calendar",
+      "provenance": {
+        "directory": "packages/calendar",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "calendar",
         "date",
@@ -340,78 +455,96 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "selection",
         "views",
         "with",
-        "year"
+        "year",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/calendar"
-      }
-    },
-    {
-      "name": "card",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/card",
-      "label": "Card",
-      "description": "Content container with header, body, and footer.",
-      "category": "layout",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-card-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Content container with header, body, and footer.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Card",
+      "name": "card",
+      "package": "@solidiom/card",
+      "provenance": {
+        "directory": "packages/card",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "and",
         "body",
         "card",
         "container",
+        "contenedor",
+        "contenido",
         "content",
+        "descripcion",
+        "description",
+        "encabezado",
         "footer",
         "header",
         "layout",
+        "pie",
         "runtime",
-        "with"
+        "title",
+        "titulo",
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/card"
-      }
-    },
-    {
-      "name": "carousel",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/carousel",
-      "label": "Carousel",
-      "description": "Horizontal slide-based content viewer.",
-      "category": "layout",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-carousel-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Horizontal slide-based content viewer.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Carousel",
+      "name": "carousel",
+      "package": "@solidiom/carousel",
+      "provenance": {
+        "directory": "packages/carousel",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "based",
         "carousel",
@@ -421,41 +554,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "layout",
         "runtime",
         "slide",
-        "viewer"
+        "viewer",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/carousel"
-      }
+      "status": "preview",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "checkbox",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/checkbox",
-      "label": "Checkbox",
-      "description": "Binary or indeterminate toggle control.",
-      "category": "input",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-checkbox-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Binary or indeterminate toggle control.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [
-        "css",
-        "tailwind",
-        "unocss"
-      ],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Checkbox",
+      "name": "checkbox",
+      "package": "@solidiom/checkbox",
+      "provenance": {
+        "directory": "packages/checkbox",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "binary",
         "checkbox",
@@ -463,79 +597,88 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "indeterminate",
         "input",
         "runtime",
-        "toggle"
+        "toggle",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/checkbox"
-      }
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "collapsible",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/collapsible",
-      "label": "Collapsible",
-      "description": "Single expandable/collapsible section.",
-      "category": "layout",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-collapsible-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Single expandable/collapsible section.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Collapsible",
+      "name": "collapsible",
+      "package": "@solidiom/collapsible",
+      "provenance": {
+        "directory": "packages/collapsible",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "collapsible",
         "expandable",
         "layout",
         "runtime",
         "section",
-        "single"
+        "single",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/collapsible"
-      }
-    },
-    {
-      "name": "combobox",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/combobox",
-      "label": "Combobox",
-      "description": "Text input with autocomplete dropdown.",
-      "category": "input",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": true,
-      "accessibility": {
-        "reviewStatus": "automated",
-        "evidenceIds": [
-          "axe-combobox-scan-v1"
-        ]
-      },
-      "documentationStatus": "complete",
-      "documentationLocales": {
-        "en": {
-          "status": "draft"
-        },
-        "es": {
-          "status": "draft"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-combobox-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Text input with autocomplete dropdown.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Combobox",
+      "name": "combobox",
+      "package": "@solidiom/combobox",
+      "provenance": {
+        "directory": "packages/combobox",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "autocompletado",
         "autocomplete",
@@ -546,37 +689,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "listbox",
         "runtime",
         "text",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/combobox"
-      }
-    },
-    {
-      "name": "command-palette",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/command-palette",
-      "label": "Command Palette",
-      "description": "Modal search and action launcher.",
-      "category": "navigation",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-command-palette-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "navigation",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Modal search and action launcher.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Command Palette",
+      "name": "command-palette",
+      "package": "@solidiom/command-palette",
+      "provenance": {
+        "directory": "packages/command-palette",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "action",
         "and",
@@ -586,37 +734,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "navigation",
         "palette",
         "runtime",
-        "search"
+        "search",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/command-palette"
-      }
-    },
-    {
-      "name": "context-menu",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/context-menu",
-      "label": "Context Menu",
-      "description": "Right-click triggered menu.",
-      "category": "overlay",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-context-menu-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "overlay",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Right-click triggered menu.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Context Menu",
+      "name": "context-menu",
+      "package": "@solidiom/context-menu",
+      "provenance": {
+        "directory": "packages/context-menu",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "click",
         "context",
@@ -624,42 +777,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "overlay",
         "right",
         "runtime",
-        "triggered"
+        "triggered",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/context-menu"
-      }
-    },
-    {
-      "name": "data-table",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/data-table",
-      "label": "Data Table",
-      "description": "Sortable, selectable table with column control.",
-      "category": "layout",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": true,
-      "accessibility": {
-        "reviewStatus": "automated",
-        "evidenceIds": [
-          "axe-data-table-scan-v1"
-        ]
-      },
-      "documentationStatus": "complete",
-      "documentationLocales": {
-        "en": {
-          "status": "draft"
-        },
-        "es": {
-          "status": "draft"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-data-table-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Sortable, selectable table with column control.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Data Table",
+      "name": "data-table",
+      "package": "@solidiom/data-table",
+      "provenance": {
+        "directory": "packages/data-table",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "column",
         "columnas",
@@ -679,37 +832,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "sortable",
         "tabla",
         "table",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/data-table"
-      }
-    },
-    {
-      "name": "date-picker",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/date-picker",
-      "label": "Date Picker",
-      "description": "Calendar popup for selecting dates.",
-      "category": "input",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-date-picker-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Calendar popup for selecting dates.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Date Picker",
+      "name": "date-picker",
+      "package": "@solidiom/date-picker",
+      "provenance": {
+        "directory": "packages/date-picker",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "calendar",
         "date",
@@ -720,48 +878,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "picker",
         "popup",
         "runtime",
-        "selecting"
+        "selecting",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/date-picker"
-      }
+      "status": "preview",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "dialog",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/dialog",
-      "label": "Dialog",
-      "description": "Modal or non-modal overlay window.",
-      "category": "overlay",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": true,
       "accessibility": {
-        "reviewStatus": "automated",
         "evidenceIds": [
-          "axe-dialog-scan-v1"
-        ]
+          "axe-dialog-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "complete",
+      "category": "overlay",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Modal or non-modal overlay window.",
       "documentationLocales": {
         "en": {
-          "status": "draft"
+          "status": "draft",
         },
         "es": {
-          "status": "draft"
-        }
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [
-        "css",
-        "tailwind",
-        "unocss"
-      ],
-      "themeCompatible": [
-        "site"
-      ],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Dialog",
+      "name": "dialog",
+      "package": "@solidiom/dialog",
+      "provenance": {
+        "directory": "packages/dialog",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "dialog",
         "foco",
@@ -771,37 +923,48 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "overlay",
         "runtime",
         "superposición",
-        "window"
+        "window",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/dialog"
-      }
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "themeCompatible": [
+        "site",
+      ],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "drawer",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/drawer",
-      "label": "Drawer",
-      "description": "Slide-in panel from any screen edge.",
-      "category": "overlay",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-drawer-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "overlay",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Slide-in panel from any screen edge.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Drawer",
+      "name": "drawer",
+      "package": "@solidiom/drawer",
+      "provenance": {
+        "directory": "packages/drawer",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "any",
         "drawer",
@@ -811,37 +974,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "panel",
         "runtime",
         "screen",
-        "slide"
+        "slide",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/drawer"
-      }
-    },
-    {
-      "name": "empty-state",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/empty-state",
-      "label": "Empty State",
-      "description": "Placeholder for empty content areas.",
-      "category": "feedback",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-empty-state-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "feedback",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Placeholder for empty content areas.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Empty State",
+      "name": "empty-state",
+      "package": "@solidiom/empty-state",
+      "provenance": {
+        "directory": "packages/empty-state",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "areas",
         "content",
@@ -850,37 +1018,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "for",
         "placeholder",
         "runtime",
-        "state"
+        "state",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/empty-state"
-      }
-    },
-    {
-      "name": "field",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/field",
-      "label": "Field",
-      "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
-      "category": "input",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-field-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Field",
+      "name": "field",
+      "package": "@solidiom/field",
+      "provenance": {
+        "directory": "packages/field",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "aria",
         "automatic",
@@ -894,37 +1067,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "wiring",
         "with",
-        "wrapper:"
+        "wrapper:",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/field"
-      }
-    },
-    {
-      "name": "hover-card",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/hover-card",
-      "label": "Hover Card",
-      "description": "Content preview on hover with open delay and anchored positioning.",
-      "category": "overlay",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-hover-card-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "overlay",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Content preview on hover with open delay and anchored positioning.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Hover Card",
+      "name": "hover-card",
+      "package": "@solidiom/hover-card",
+      "provenance": {
+        "directory": "packages/hover-card",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "anchored",
         "and",
@@ -937,37 +1115,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "positioning",
         "preview",
         "runtime",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/hover-card"
-      }
-    },
-    {
-      "name": "input",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/input",
-      "label": "Input",
-      "description": "Text input and textarea with validation states and Field integration.",
-      "category": "input",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-input-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Text input and textarea with validation states and Field integration.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Input",
+      "name": "input",
+      "package": "@solidiom/input",
+      "provenance": {
+        "directory": "packages/input",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "and",
         "field",
@@ -978,37 +1161,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "text",
         "textarea",
         "validation",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/input"
-      }
-    },
-    {
-      "name": "input-otp",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/input-otp",
-      "label": "Input OTP",
-      "description": "A one-time password input with individual character slots.",
-      "category": "input",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-input-otp-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "A one-time password input with individual character slots.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Input OTP",
+      "name": "input-otp",
+      "package": "@solidiom/input-otp",
+      "provenance": {
+        "directory": "packages/input-otp",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "character",
         "individual",
@@ -1019,115 +1207,137 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "slots",
         "time",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/input-otp"
-      }
-    },
-    {
-      "name": "kbd",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/kbd",
-      "label": "Kbd",
-      "description": "Keyboard shortcut display element.",
-      "category": "display",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-kbd-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "display",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Keyboard shortcut display element.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Kbd",
+      "name": "kbd",
+      "package": "@solidiom/kbd",
+      "provenance": {
+        "directory": "packages/kbd",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
+        "atajo",
         "display",
         "element",
         "kbd",
+        "key",
         "keyboard",
         "runtime",
-        "shortcut"
+        "shortcut",
+        "tecla",
+        "teclado",
+        "visualización",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/kbd"
-      }
-    },
-    {
-      "name": "label",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/label",
-      "label": "Label",
-      "description": "Accessible label element linked to form controls via htmlFor.",
-      "category": "input",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-label-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Accessible label element linked to form controls via htmlFor.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Label",
+      "name": "label",
+      "package": "@solidiom/label",
+      "provenance": {
+        "directory": "packages/label",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
+        "accesible",
         "accessible",
         "controls",
         "element",
         "form",
+        "formulario",
         "htmlfor",
         "input",
         "label",
         "linked",
         "runtime",
-        "via"
+        "via",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/label"
-      }
-    },
-    {
-      "name": "listbox",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/listbox",
-      "label": "Listbox",
-      "description": "Single or multi-select list of options.",
-      "category": "input",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-listbox-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Single or multi-select list of options.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Listbox",
+      "name": "listbox",
+      "package": "@solidiom/listbox",
+      "provenance": {
+        "directory": "packages/listbox",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "input",
         "list",
@@ -1136,41 +1346,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "options",
         "runtime",
         "select",
-        "single"
+        "single",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/listbox"
-      }
+      "status": "preview",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "menu",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/menu",
-      "label": "Menu",
-      "description": "Action list triggered by a button.",
-      "category": "navigation",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-menu-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "navigation",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Action list triggered by a button.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [
-        "css",
-        "tailwind",
-        "unocss"
-      ],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Menu",
+      "name": "menu",
+      "package": "@solidiom/menu",
+      "provenance": {
+        "directory": "packages/menu",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "action",
         "button",
@@ -1178,37 +1389,46 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "menu",
         "navigation",
         "runtime",
-        "triggered"
+        "triggered",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/menu"
-      }
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "meter",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/meter",
-      "label": "Meter",
-      "description": "Scalar measurement within a known range (e.g. disk usage, signal strength).",
-      "category": "feedback",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-meter-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "feedback",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Scalar measurement within a known range (e.g. disk usage, signal strength).",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Meter",
+      "name": "meter",
+      "package": "@solidiom/meter",
+      "provenance": {
+        "directory": "packages/meter",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "disk",
         "feedback",
@@ -1221,37 +1441,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "signal",
         "strength)",
         "usage",
-        "within"
+        "within",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/meter"
-      }
-    },
-    {
-      "name": "navigation-menu",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/navigation-menu",
-      "label": "Navigation Menu",
-      "description": "A top-level navigation component with accessible dropdown sub-menus.",
-      "category": "navigation",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-navigation-menu-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "navigation",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "A top-level navigation component with accessible dropdown sub-menus.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Navigation Menu",
+      "name": "navigation-menu",
+      "package": "@solidiom/navigation-menu",
+      "provenance": {
+        "directory": "packages/navigation-menu",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "accessible",
         "component",
@@ -1264,37 +1489,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "sub",
         "top",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/navigation-menu"
-      }
-    },
-    {
-      "name": "pagination",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/pagination",
-      "label": "Pagination",
-      "description": "Page navigation with prev/next and page numbers.",
-      "category": "navigation",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-pagination-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "navigation",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Page navigation with prev/next and page numbers.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Pagination",
+      "name": "pagination",
+      "package": "@solidiom/pagination",
+      "provenance": {
+        "directory": "packages/pagination",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "and",
         "navigation",
@@ -1304,41 +1534,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "pagination",
         "prev",
         "runtime",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/pagination"
-      }
+      "status": "preview",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "popover",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/popover",
-      "label": "Popover",
-      "description": "Non-modal floating content panel.",
-      "category": "overlay",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-popover-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "overlay",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Non-modal floating content panel.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [
-        "css",
-        "tailwind",
-        "unocss"
-      ],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Popover",
+      "name": "popover",
+      "package": "@solidiom/popover",
+      "provenance": {
+        "directory": "packages/popover",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "content",
         "floating",
@@ -1348,37 +1579,46 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "panel",
         "popover",
         "positioning",
-        "runtime"
+        "runtime",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/popover"
-      }
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "progress",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/progress",
-      "label": "Progress",
-      "description": "Determinate and indeterminate progress indicator.",
-      "category": "feedback",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-progress-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "feedback",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Determinate and indeterminate progress indicator.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Progress",
+      "name": "progress",
+      "package": "@solidiom/progress",
+      "provenance": {
+        "directory": "packages/progress",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "and",
         "determinate",
@@ -1386,37 +1626,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "indeterminate",
         "indicator",
         "progress",
-        "runtime"
+        "runtime",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/progress"
-      }
-    },
-    {
-      "name": "radio-group",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/radio-group",
-      "label": "Radio Group",
-      "description": "Single-select radio button set with keyboard navigation.",
-      "category": "input",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-radio-group-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Single-select radio button set with keyboard navigation.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Radio Group",
+      "name": "radio-group",
+      "package": "@solidiom/radio-group",
+      "provenance": {
+        "directory": "packages/radio-group",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "button",
         "group",
@@ -1428,37 +1673,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "select",
         "set",
         "single",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/radio-group"
-      }
-    },
-    {
-      "name": "resizable-panels",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/resizable-panels",
-      "label": "Resizable Panels",
-      "description": "Drag-to-resize panel layout.",
-      "category": "layout",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-resizable-panels-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Drag-to-resize panel layout.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Resizable Panels",
+      "name": "resizable-panels",
+      "package": "@solidiom/resizable-panels",
+      "provenance": {
+        "directory": "packages/resizable-panels",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "drag",
         "layout",
@@ -1466,37 +1716,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "panels",
         "resizable",
         "resize",
-        "runtime"
+        "runtime",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/resizable-panels"
-      }
-    },
-    {
-      "name": "scroll-area",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/scroll-area",
-      "label": "Scroll Area",
-      "description": "Custom-styled scrollbar with native scrolling performance.",
-      "category": "layout",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-scroll-area-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Custom-styled scrollbar with native scrolling performance.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Scroll Area",
+      "name": "scroll-area",
+      "package": "@solidiom/scroll-area",
+      "provenance": {
+        "directory": "packages/scroll-area",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "area",
         "custom",
@@ -1508,41 +1763,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "scrollbar",
         "scrolling",
         "styled",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/scroll-area"
-      }
+      "status": "preview",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "select",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/select",
-      "label": "Select",
-      "description": "Dropdown selection from a list of options.",
-      "category": "input",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-select-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Dropdown selection from a list of options.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [
-        "css",
-        "tailwind",
-        "unocss"
-      ],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Select",
+      "name": "select",
+      "package": "@solidiom/select",
+      "provenance": {
+        "directory": "packages/select",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "dropdown",
         "from",
@@ -1551,75 +1807,92 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "options",
         "runtime",
         "select",
-        "selection"
+        "selection",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/select"
-      }
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "separator",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/separator",
-      "label": "Separator",
-      "description": "Horizontal or vertical visual divider.",
-      "category": "layout",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-separator-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Horizontal or vertical visual divider.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Separator",
+      "name": "separator",
+      "package": "@solidiom/separator",
+      "provenance": {
+        "directory": "packages/separator",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
+        "decorative",
+        "decorativo",
         "divider",
+        "divisor",
         "horizontal",
         "layout",
         "runtime",
         "separator",
         "vertical",
-        "visual"
+        "visual",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/separator"
-      }
-    },
-    {
-      "name": "sheet",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/sheet",
-      "label": "Sheet",
-      "description": "Side-panel dialog with slide animation.",
-      "category": "overlay",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-sheet-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "overlay",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Side-panel dialog with slide animation.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Sheet",
+      "name": "sheet",
+      "package": "@solidiom/sheet",
+      "provenance": {
+        "directory": "packages/sheet",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "animation",
         "dialog",
@@ -1629,37 +1902,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "sheet",
         "side",
         "slide",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/sheet"
-      }
-    },
-    {
-      "name": "skeleton",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/skeleton",
-      "label": "Skeleton",
-      "description": "Loading placeholder with pulse animation.",
-      "category": "feedback",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-skeleton-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "feedback",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Loading placeholder with pulse animation.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Skeleton",
+      "name": "skeleton",
+      "package": "@solidiom/skeleton",
+      "provenance": {
+        "directory": "packages/skeleton",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "animation",
         "feedback",
@@ -1668,37 +1946,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "pulse",
         "runtime",
         "skeleton",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/skeleton"
-      }
-    },
-    {
-      "name": "slider",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/slider",
-      "label": "Slider",
-      "description": "Numeric range input with thumb control.",
-      "category": "input",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-slider-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Numeric range input with thumb control.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Slider",
+      "name": "slider",
+      "package": "@solidiom/slider",
+      "provenance": {
+        "directory": "packages/slider",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "control",
         "input",
@@ -1707,77 +1990,83 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "slider",
         "thumb",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/slider"
-      }
-    },
-    {
-      "name": "spinner",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/spinner",
-      "label": "Spinner",
-      "description": "Loading spinner indicator.",
-      "category": "feedback",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-spinner-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "feedback",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Loading spinner indicator.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Spinner",
+      "name": "spinner",
+      "package": "@solidiom/spinner",
+      "provenance": {
+        "directory": "packages/spinner",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "feedback",
         "indicator",
         "loading",
         "runtime",
-        "spinner"
+        "spinner",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/spinner"
-      }
+      "status": "preview",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "switch",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/switch",
-      "label": "Switch",
-      "description": "Binary toggle with on/off semantics.",
-      "category": "input",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-switch-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Binary toggle with on/off semantics.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [
-        "css",
-        "tailwind",
-        "unocss"
-      ],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Switch",
+      "name": "switch",
+      "package": "@solidiom/switch",
+      "provenance": {
+        "directory": "packages/switch",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "binary",
         "input",
@@ -1786,82 +2075,92 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "semantics",
         "switch",
         "toggle",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/switch"
-      }
-    },
-    {
-      "name": "tabs",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/tabs",
-      "label": "Tabs",
-      "description": "Tabbed content switcher.",
-      "category": "navigation",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [
         "css",
         "tailwind",
-        "unocss"
+        "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-tabs-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "navigation",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Tabbed content switcher.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Tabs",
+      "name": "tabs",
+      "package": "@solidiom/tabs",
+      "provenance": {
+        "directory": "packages/tabs",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "content",
         "navigation",
         "runtime",
         "switcher",
         "tabbed",
-        "tabs"
+        "tabs",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/tabs"
-      }
-    },
-    {
-      "name": "toast",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/toast",
-      "label": "Toast",
-      "description": "Temporary non-blocking notification.",
-      "category": "feedback",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [
         "css",
         "tailwind",
-        "unocss"
+        "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-toast-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "feedback",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Temporary non-blocking notification.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Toast",
+      "name": "toast",
+      "package": "@solidiom/toast",
+      "provenance": {
+        "directory": "packages/toast",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "blocking",
         "feedback",
@@ -1869,37 +2168,46 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "notification",
         "runtime",
         "temporary",
-        "toast"
+        "toast",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/toast"
-      }
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "toggle",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/toggle",
-      "label": "Toggle",
-      "description": "A two-state button that can be toggled on or off.",
-      "category": "input",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-toggle-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "A two-state button that can be toggled on or off.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Toggle",
+      "name": "toggle",
+      "package": "@solidiom/toggle",
+      "provenance": {
+        "directory": "packages/toggle",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "button",
         "can",
@@ -1910,37 +2218,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "that",
         "toggle",
         "toggled",
-        "two"
+        "two",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/toggle"
-      }
-    },
-    {
-      "name": "toggle-group",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/toggle-group",
-      "label": "Toggle Group",
-      "description": "Group of mutually-exclusive or multi-select toggle buttons.",
-      "category": "input",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-toggle-group-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Group of mutually-exclusive or multi-select toggle buttons.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Toggle Group",
+      "name": "toggle-group",
+      "package": "@solidiom/toggle-group",
+      "provenance": {
+        "directory": "packages/toggle-group",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "buttons",
         "exclusive",
@@ -1950,37 +2263,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "mutually",
         "runtime",
         "select",
-        "toggle"
+        "toggle",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/toggle-group"
-      }
-    },
-    {
-      "name": "toolbar",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/toolbar",
-      "label": "Toolbar",
-      "description": "Grouped actions and controls in a horizontal bar.",
-      "category": "layout",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-toolbar-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Grouped actions and controls in a horizontal bar.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Toolbar",
+      "name": "toolbar",
+      "package": "@solidiom/toolbar",
+      "provenance": {
+        "directory": "packages/toolbar",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "actions",
         "and",
@@ -1990,41 +2308,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "horizontal",
         "layout",
         "runtime",
-        "toolbar"
+        "toolbar",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/toolbar"
-      }
+      "status": "preview",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "tooltip",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/tooltip",
-      "label": "Tooltip",
-      "description": "Contextual hint shown on hover/focus.",
-      "category": "overlay",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-tooltip-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "overlay",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Contextual hint shown on hover/focus.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [
-        "css",
-        "tailwind",
-        "unocss"
-      ],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Tooltip",
+      "name": "tooltip",
+      "package": "@solidiom/tooltip",
+      "provenance": {
+        "directory": "packages/tooltip",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "contextual",
         "focus",
@@ -2034,37 +2353,46 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "positioning",
         "runtime",
         "shown",
-        "tooltip"
+        "tooltip",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/tooltip"
-      }
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
     },
     {
-      "name": "tree",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/tree",
-      "label": "Tree",
-      "description": "Hierarchical tree view with expand/collapse.",
-      "category": "navigation",
-      "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
       "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
+        "evidenceIds": [
+          "axe-tree-scan-v1",
+        ],
+        "reviewStatus": "automated",
       },
-      "documentationStatus": "stub",
+      "category": "navigation",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Hierarchical tree view with expand/collapse.",
       "documentationLocales": {
         "en": {
-          "status": "missing"
-        }
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
       },
-      "stylingOutputs": [],
-      "themeCompatible": [],
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Tree",
+      "name": "tree",
+      "package": "@solidiom/tree",
+      "provenance": {
+        "directory": "packages/tree",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "collapse",
         "expand",
@@ -2073,37 +2401,42 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "runtime",
         "tree",
         "view",
-        "with"
+        "with",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/tree"
-      }
-    },
-    {
-      "name": "virtual-list",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/virtual-list",
-      "label": "Virtual List",
-      "description": "Viewport-windowed list for large datasets.",
-      "category": "layout",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-virtual-list-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Viewport-windowed list for large datasets.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Virtual List",
+      "name": "virtual-list",
+      "package": "@solidiom/virtual-list",
+      "provenance": {
+        "directory": "packages/virtual-list",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
         "datasets",
         "for",
@@ -2114,94 +2447,67 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "viewport",
         "virtual",
         "virtualization",
-        "windowed"
+        "windowed",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/virtual-list"
-      }
-    },
-    {
-      "name": "visually-hidden",
-      "version": "0.0.1-next.0",
-      "package": "@solidiom/visually-hidden",
-      "label": "Visually Hidden",
-      "description": "Hides content visually while keeping it accessible to screen readers.",
-      "category": "layout",
       "status": "preview",
-      "deliverables": [
-        "primitive"
-      ],
-      "hasAccessibilityEvidence": false,
-      "accessibility": {
-        "reviewStatus": "none",
-        "evidenceIds": []
-      },
-      "documentationStatus": "stub",
-      "documentationLocales": {
-        "en": {
-          "status": "missing"
-        }
-      },
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [
+          "axe-visually-hidden-scan-v1",
+        ],
+        "reviewStatus": "automated",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Hides content visually while keeping it accessible to screen readers.",
+      "documentationLocales": {
+        "en": {
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
+        },
+      },
+      "documentationStatus": "complete",
+      "hasAccessibilityEvidence": true,
+      "label": "Visually Hidden",
+      "name": "visually-hidden",
+      "package": "@solidiom/visually-hidden",
+      "provenance": {
+        "directory": "packages/visually-hidden",
+        "repository": "https://github.com/solidiom/solidiom",
+      },
       "searchKeywords": [
+        "accessibility",
         "accessible",
+        "assistive-technology",
         "content",
+        "heading",
         "hidden",
         "hides",
         "keeping",
+        "label",
         "layout",
         "readers",
         "runtime",
         "screen",
+        "screen-reader",
         "visually",
-        "while"
+        "visually-hidden",
+        "while",
       ],
-      "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
-        "directory": "packages/visually-hidden"
-      }
-    }
+      "status": "preview",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
   ],
-  "adapters": [
-    {
-      "name": "carousel-embla",
-      "package": "@solidiom/adapter-carousel-embla",
-      "capability": "carousel-physics@1",
-      "version": "0.0.1-next.0"
-    },
-    {
-      "name": "date-internationalized",
-      "package": "@solidiom/adapter-date-internationalized",
-      "capability": "date-math@1",
-      "version": "0.0.1-next.0"
-    },
-    {
-      "name": "positioning-floating-ui",
-      "package": "@solidiom/adapter-positioning-floating-ui",
-      "capability": "positioning@1",
-      "version": "0.0.1-next.0"
-    },
-    {
-      "name": "positioning-minimal",
-      "package": "@solidiom/adapter-positioning-minimal",
-      "capability": "positioning@1",
-      "version": "0.0.1-next.0"
-    },
-    {
-      "name": "table-tanstack",
-      "package": "@solidiom/adapter-table-tanstack",
-      "capability": "table@1",
-      "version": "0.0.1-next.0"
-    },
-    {
-      "name": "virtualization-tanstack",
-      "package": "@solidiom/adapter-virtualization-tanstack",
-      "capability": "virtualization@1",
-      "version": "0.0.1-next.0"
-    }
-  ]
+  "version": 2,
 }
-"
 `;
