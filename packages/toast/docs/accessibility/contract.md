@@ -12,12 +12,15 @@ status: draft
 package: "@solidiom/toast"
 primitive: toast
 section: accessibility
-keyboard: []
+keyboard:
+  - key: Enter
+    behavior: Activates the primary interactive element.
 focus:
   - "Region receives focus via standard tab order."
 semantics:
   - 'Carries `data-scope="toast"` and `data-part` attributes on all parts.'
-aria: []
+aria:
+  - "Uses appropriate ARIA roles and properties for its interaction pattern."
 consumerDuties:
   - "Ensure visible labels or aria-label are provided where required."
 nonApplicableCriteria: []
