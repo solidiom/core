@@ -526,12 +526,11 @@ jobs:
   #
   #   * beta-acceptance-report is blocking. It passes 60/60 and reads
   #     apps/site/dist directly, so it needs no preview server.
-  #   * beta-acceptance-e2e is advisory, mirroring site-visual/site-lighthouse's
-  #     continue-on-error. 13 of its checks fail on a real, tracked defect
-  #     (A11Y-008: --sol-secondary is 3.678:1 against white, under the 4.5:1
-  #     WCAG AA floor, and it is the site's link colour, so every audited route
-  #     reports color-contrast). Advisory keeps that failure visible and
-  #     attributable rather than unrun; it becomes blocking when A11Y-008 lands.
+  #   * beta-acceptance-e2e is blocking. It passes 111/111 across Chromium,
+  #     Firefox, and WebKit (locale parity, theme modes, search, tools, and
+  #     axe-core no_critical_violations). Previously advisory while A11Y-008's
+  #     color-contrast defect was open; promoted to blocking after A11Y-008
+  #     fixed --sol-secondary to 5.17:1 (CI-007).
 
   beta-acceptance-report:
     needs: site-build
@@ -562,7 +561,6 @@ jobs:
   beta-acceptance-e2e:
     needs: site-build
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v6
