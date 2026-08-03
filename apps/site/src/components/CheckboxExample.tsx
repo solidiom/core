@@ -18,7 +18,7 @@ export function CheckboxExample(props: CheckboxExampleProps) {
 
   return (
     <div ref={(el) => el.setAttribute("data-hydrated", "true")} class="checkbox-example">
-      <Checkbox.Root checked={checked()} onCheckedChange={setChecked} aria-label={copy().label}>
+      <Checkbox.Root checked={checked} onCheckedChange={setChecked} aria-label={copy().label}>
         <Checkbox.Indicator>{checked() ? "✓" : ""}</Checkbox.Indicator>
       </Checkbox.Root>
       <span>{copy().description}</span>

@@ -2,9 +2,9 @@ import { createSignal } from "solid-js"
 import * as Pagination from "@solidiom/pagination"
 import type { Locale } from "../lib/locale"
 
-const COPY: Record<Locale, { label: string }> = {
-  en: { label: "Page navigation" },
-  es: { label: "Navegación de páginas" },
+const COPY: Record<Locale, { label: string; prev: string; next: string }> = {
+  en: { label: "Page navigation", prev: "Previous", next: "Next" },
+  es: { label: "Navegación de páginas", prev: "Anterior", next: "Siguiente" },
 }
 
 export interface PaginationExampleProps {
@@ -18,19 +18,32 @@ export function PaginationExample(props: PaginationExampleProps) {
 
   return (
     <div ref={(el) => el.setAttribute("data-hydrated", "true")} class="pagination-example">
-      <Pagination.Root
-        totalPages={5}
-        currentPage={page()}
-        onPageChange={setPage}
-        aria-label={copy().label}
-      >
-        <Pagination.PreviousButton>←</Pagination.PreviousButton>
+      <Pagination.Root>
+        <Pagination.PreviousButton
+          onClick={() => setPage((p) => Math.max(1, p - 1))}
+          disabled={page() <= 1}
+        >
+          {copy().prev}
+        </Pagination.PreviousButton>
         <Pagination.Content>
           {[1, 2, 3, 4, 5].map((n) => (
-            <Pagination.Item page={n}>{n}</Pagination.Item>
+            <Pagination.Item>
+              <button
+                type="button"
+                onClick={() => setPage(n)}
+                aria-current={page() === n ? "page" : undefined}
+              >
+                {n}
+              </button>
+            </Pagination.Item>
           ))}
         </Pagination.Content>
-        <Pagination.NextButton>→</Pagination.NextButton>
+        <Pagination.NextButton
+          onClick={() => setPage((p) => Math.min(5, p + 1))}
+          disabled={page() >= 5}
+        >
+          {copy().next}
+        </Pagination.NextButton>
       </Pagination.Root>
     </div>
   )

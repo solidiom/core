@@ -55,7 +55,7 @@ export function AccordionExample(props: AccordionExampleProps) {
       class="accordion-example"
       data-accordion-example
     >
-      <Accordion.Root type="single" collapsible defaultValue="item-0">
+      <Accordion.Root type="single" collapsible defaultValue={["item-0"]}>
         {copy().items.map((item, index) => (
           <Accordion.Item value={`item-${index}`}>
             <Accordion.Trigger>{item.trigger}</Accordion.Trigger>

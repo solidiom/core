@@ -387,18 +387,33 @@ importers:
       '@solidiom/label':
         specifier: workspace:*
         version: link:../../packages/label
+      '@solidiom/menu':
+        specifier: workspace:*
+        version: link:../../packages/menu
       '@solidiom/navigation-menu':
         specifier: workspace:*
         version: link:../../packages/navigation-menu
+      '@solidiom/pagination':
+        specifier: workspace:*
+        version: link:../../packages/pagination
+      '@solidiom/popover':
+        specifier: workspace:*
+        version: link:../../packages/popover
       '@solidiom/progress':
         specifier: workspace:*
         version: link:../../packages/progress
+      '@solidiom/radio-group':
+        specifier: workspace:*
+        version: link:../../packages/radio-group
       '@solidiom/select':
         specifier: workspace:*
         version: link:../../packages/select
       '@solidiom/separator':
         specifier: workspace:*
         version: link:../../packages/separator
+      '@solidiom/sheet':
+        specifier: workspace:*
+        version: link:../../packages/sheet
       '@solidiom/slider':
         specifier: workspace:*
         version: link:../../packages/slider

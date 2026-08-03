@@ -18,7 +18,7 @@ export function SwitchExample(props: SwitchExampleProps) {
 
   return (
     <div ref={(el) => el.setAttribute("data-hydrated", "true")} class="switch-example">
-      <Switch.Root checked={on()} onCheckedChange={setOn}>
+      <Switch.Root checked={on} onCheckedChange={setOn}>
         {copy().label}
         <Switch.Thumb />
       </Switch.Root>
