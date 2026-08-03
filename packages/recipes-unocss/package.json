@@ -23,7 +23,9 @@
     "./styles/toast.css": "./dist/styles/toast.css",
     "./styles/select.css": "./dist/styles/select.css",
     "./styles/badge.css": "./dist/styles/badge.css",
-    "./styles/alert.css": "./dist/styles/alert.css"
+    "./styles/alert.css": "./dist/styles/alert.css",
+    "./styles/prose.css": "./dist/styles/prose.css",
+    "./styles/typeset.css": "./dist/styles/typeset.css"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
