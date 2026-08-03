@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "primitive": "field",
+  "evidenceIds": ["axe-field-scan-v1"],
+  "summary": {
+    "passes": 9,
+    "violations": 0,
+    "incomplete": 1,
+    "outcome": "pass"
+  },
+  "lastRun": "2026-08-03T13:13:29.976Z",
+  "provenance": {
+    "browser": "chromium",
+    "commitSha": "1cacc0992651e5daeec9e3908928783cc148ad25",
+    "ciRunUrl": null
+  }
+}

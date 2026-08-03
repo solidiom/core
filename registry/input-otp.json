@@ -63,11 +63,11 @@
     "fileDigests": {
       "src/index.tsx": "d730605b557106a71506fcf48ed6b2a7f4c01b20149a3e2874b93ea895d6a57b"
     },
-    "lastGenerated": "2026-08-03T13:22:41.000Z"
+    "lastGenerated": "2026-08-03T13:40:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/input-otp"
   },
-  "lastUpdated": "2026-08-03T13:22:41.000Z"
+  "lastUpdated": "2026-08-03T13:40:44.000Z"
 }
