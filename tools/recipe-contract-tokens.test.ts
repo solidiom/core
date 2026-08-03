@@ -87,7 +87,7 @@ describe("canonical semantic tokens", () => {
     // "Superseded guidance" both state this number. A doc reader treats it as the size of
     // the closed vocabulary, so drift here is a correctness bug, not a typo. Update the
     // two documents in the same change that adds or removes an identity.
-    expect(SEMANTIC_TOKENS).toHaveLength(48)
+    expect(SEMANTIC_TOKENS).toHaveLength(60)
   })
 
   it("gives every identity a description and a category", () => {
@@ -171,6 +171,9 @@ describe("Tailwind profile theme contract", () => {
     for (const token of SEMANTIC_TOKENS) {
       const spelling = tokenSpelling(token.id, "tailwind")
       if (!spelling) continue
+      // Typography tokens (fontSize-*) are not registered in theme.css — the
+      // Tailwind profile uses literal values (text-xs, text-sm, …) for the type scale.
+      if (token.category === "typography") continue
       const registeredSet =
         token.category === "radius"
           ? registeredRadii

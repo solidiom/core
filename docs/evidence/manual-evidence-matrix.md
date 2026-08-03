@@ -56,6 +56,71 @@ The G2 vertical slice requires Dialog, Combobox, and Data Table to satisfy the P
 - **Screen readers**: VoiceOver (macOS 15, Safari 18) announces the "dialog" role, connected title/description, and modal state on open; focus restoration to the trigger is announced on close. NVDA/JAWS/TalkBack are not yet recorded — tracked as a Phase 4 gap, not a Dialog-specific regression.
 - **Touch**: Trigger and dismissal controls meet the 24×24 CSS px minimum target size in the default recipe; verified with touch emulation 2026-07-29.
 
+## Full primitive matrix (A11Y-007)
+
+Per-primitive automated evidence has been recorded via axe-core scans (`artifacts/axe-results.json`, `artifacts/a11y-evidence.json`). Manual verification dimensions beyond keyboard are tracked as Phase 4 work. Per-primitive AT verification records are available in `docs/at-audit-results/`.
+
+| Primitive         | Keyboard | Focus | Zoom | Contrast | Reduced motion | Screen readers | Touch |
+| ----------------- | -------- | ----- | ---- | -------- | -------------- | -------------- | ----- |
+| accordion         | ✅       | ✅    | —    | —        | —              | —              | —     |
+| alert             | ✅       | ✅    | —    | —        | —              | —              | —     |
+| alert-dialog      | ✅       | ✅    | —    | —        | —              | —              | —     |
+| avatar            | N/A      | N/A   | —    | —        | —              | —              | —     |
+| badge             | N/A      | N/A   | —    | —        | —              | —              | —     |
+| breadcrumb        | ✅       | ✅    | —    | —        | —              | —              | —     |
+| button            | ✅       | ✅    | —    | —        | —              | —              | —     |
+| calendar          | ✅       | ✅    | —    | —        | —              | —              | —     |
+| card              | N/A      | N/A   | —    | —        | —              | —              | —     |
+| carousel          | ✅       | ✅    | —    | —        | —              | —              | —     |
+| checkbox          | ✅       | ✅    | —    | —        | —              | —              | —     |
+| collapsible       | ✅       | ✅    | —    | —        | —              | —              | —     |
+| combobox          | ✅       | ✅    | —    | —        | —              | —              | —     |
+| command-palette   | ✅       | ✅    | —    | —        | —              | —              | —     |
+| context-menu      | ✅       | ✅    | —    | —        | —              | —              | —     |
+| data-table        | ✅       | ✅    | —    | —        | —              | —              | —     |
+| date-picker       | ✅       | ✅    | —    | —        | —              | —              | —     |
+| dialog            | ✅       | ✅    | ✅   | ⚠️       | ✅             | ✅ VoiceOver   | ✅    |
+| drawer            | ✅       | ✅    | —    | —        | —              | —              | —     |
+| empty-state       | N/A      | N/A   | —    | —        | —              | —              | —     |
+| field             | ✅       | ✅    | —    | —        | —              | —              | —     |
+| hover-card        | ✅       | ✅    | —    | —        | —              | —              | —     |
+| input             | ✅       | ✅    | —    | —        | —              | —              | —     |
+| input-otp         | ✅       | ✅    | —    | —        | —              | —              | —     |
+| kbd               | N/A      | N/A   | —    | —        | —              | —              | —     |
+| label             | N/A      | N/A   | —    | —        | —              | —              | —     |
+| listbox           | ✅       | ✅    | —    | —        | —              | —              | —     |
+| menu              | ✅       | ✅    | —    | —        | —              | —              | —     |
+| meter             | N/A      | N/A   | —    | —        | —              | —              | —     |
+| navigation-menu   | ✅       | ✅    | —    | —        | —              | —              | —     |
+| pagination        | ✅       | ✅    | —    | —        | —              | —              | —     |
+| popover           | ✅       | ✅    | —    | —        | —              | —              | —     |
+| progress          | N/A      | N/A   | —    | —        | —              | —              | —     |
+| radio-group       | ✅       | ✅    | —    | —        | —              | —              | —     |
+| resizable-panels  | ✅       | ✅    | —    | —        | —              | —              | —     |
+| scroll-area       | ✅       | ✅    | —    | —        | —              | —              | —     |
+| select            | ✅       | ✅    | —    | —        | —              | —              | —     |
+| separator         | N/A      | N/A   | —    | —        | —              | —              | —     |
+| sheet             | ✅       | ✅    | —    | —        | —              | —              | —     |
+| skeleton          | N/A      | N/A   | —    | —        | —              | —              | —     |
+| slider            | ✅       | ✅    | —    | —        | —              | —              | —     |
+| spinner           | N/A      | N/A   | —    | —        | —              | —              | —     |
+| switch            | ✅       | ✅    | —    | —        | —              | —              | —     |
+| tabs              | ✅       | ✅    | —    | —        | —              | —              | —     |
+| toast             | ✅       | ✅    | —    | —        | —              | —              | —     |
+| toggle            | ✅       | ✅    | —    | —        | —              | —              | —     |
+| toggle-group      | ✅       | ✅    | —    | —        | —              | —              | —     |
+| toolbar           | ✅       | ✅    | —    | —        | —              | —              | —     |
+| tooltip           | N/A      | ✅    | —    | —        | —              | —              | —     |
+| tree              | ✅       | ✅    | —    | —        | —              | —              | —     |
+| virtual-list      | ✅       | ✅    | —    | —        | —              | —              | —     |
+| visually-hidden   | N/A      | N/A   | —    | —        | —              | —              | —     |
+
+### Evidence sources
+
+- **Keyboard / Focus**: Derived from `docs/keyboard-audit-results.md` manual audit (2026-07-23). Primitives marked `N/A` have no keyboard interaction (non-interactive presentation primitives).
+- **Automated axe**: All 52 primitives pass axe-core with 0 violations. Per-primitive evidence IDs in `artifacts/a11y-evidence.json`.
+- **Dialog**: Extended manual evidence from G2 vertical slice (see section above).
+
 ## Updating this matrix
 
 1. Perform the manual pass for the dimension using the method in the Dimensions table.

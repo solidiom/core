@@ -13,6 +13,7 @@ export default defineConfig({
     include: ["src/**/*.browser.{test,spec}.{ts,tsx}"],
     browser: {
       enabled: true,
+      headless: true,
       provider: playwright(),
       instances: [{ browser: "chromium" }, { browser: "firefox" }, { browser: "webkit" }],
     },

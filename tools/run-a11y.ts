@@ -32,6 +32,7 @@ function currentCiRunUrl(): string | null {
 }
 
 function collectResults(output: string): AxeScanResult[] {
+  const seen = new Set<string>()
   const results: AxeScanResult[] = []
 
   for (const line of output.split(/\r?\n/)) {
@@ -39,11 +40,16 @@ function collectResults(output: string): AxeScanResult[] {
     if (markerIndex === -1) continue
 
     const serialized = line.slice(markerIndex + AXE_RESULT_PREFIX.length).trim()
+    let parsed: AxeScanResult
     try {
-      results.push(JSON.parse(serialized) as AxeScanResult)
+      parsed = JSON.parse(serialized) as AxeScanResult
     } catch (error) {
       throw new Error(`Unable to parse axe result emitted by the browser suite: ${String(error)}`)
     }
+
+    if (seen.has(parsed.primitive)) continue
+    seen.add(parsed.primitive)
+    results.push(parsed)
   }
 
   return results
@@ -55,7 +61,7 @@ function main(): void {
   rmSync(OUTPUT, { force: true })
 
   const pnpm = process.platform === "win32" ? "pnpm.cmd" : "pnpm"
-  const run = spawnSync(pnpm, ["exec", "vitest", "run", "--config", "vitest.a11y.config.ts"], {
+  const run = spawnSync(pnpm, ["exec", "vitest", "run", "--config", "vitest.a11y.config.ts", "--reporter=default", "--reporter=verbose"], {
     cwd: ROOT,
     encoding: "utf8",
   })

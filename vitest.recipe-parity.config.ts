@@ -38,6 +38,7 @@ export default defineConfig({
     globalSetup: ["tests/recipe-parity/globalSetupTailwind.ts"],
     browser: {
       enabled: true,
+      headless: true,
       provider: playwright(),
       instances: [{ browser: "chromium" }],
     },
