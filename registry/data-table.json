@@ -84,11 +84,11 @@
       "src/data-table.tsx": "8aa83ebf5d8de898261d95afc98c9b24d7ee7b1461f92da64bd08bbfd105f67a",
       "src/index.tsx": "f7f5937850a28dbb5cd26d7ff7f375c690cb45aa5e4d6be554d5bc662af5c345"
     },
-    "lastGenerated": "2026-08-03T13:22:41.000Z"
+    "lastGenerated": "2026-08-03T13:40:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/data-table"
   },
-  "lastUpdated": "2026-08-03T13:22:41.000Z"
+  "lastUpdated": "2026-08-03T13:40:44.000Z"
 }

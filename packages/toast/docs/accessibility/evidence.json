@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "primitive": "toast",
+  "evidenceIds": ["axe-toast-scan-v1"],
+  "summary": {
+    "passes": 10,
+    "violations": 0,
+    "incomplete": 0,
+    "outcome": "pass"
+  },
+  "lastRun": "2026-08-03T13:13:29.976Z",
+  "provenance": {
+    "browser": "chromium",
+    "commitSha": "1cacc0992651e5daeec9e3908928783cc148ad25",
+    "ciRunUrl": null
+  }
+}

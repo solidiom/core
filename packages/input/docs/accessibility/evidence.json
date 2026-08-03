@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "primitive": "input",
+  "evidenceIds": ["axe-input-scan-v1"],
+  "summary": {
+    "passes": 5,
+    "violations": 0,
+    "incomplete": 0,
+    "outcome": "pass"
+  },
+  "lastRun": "2026-08-03T13:13:29.976Z",
+  "provenance": {
+    "browser": "chromium",
+    "commitSha": "1cacc0992651e5daeec9e3908928783cc148ad25",
+    "ciRunUrl": null
+  }
+}

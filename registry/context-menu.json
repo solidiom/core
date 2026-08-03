@@ -63,11 +63,11 @@
     "fileDigests": {
       "src/index.tsx": "88fe81b9a89abdf65ed36f0c806ae5f3bc35ae17b42a98d4bb1e335d6d4055b9"
     },
-    "lastGenerated": "2026-08-03T13:22:41.000Z"
+    "lastGenerated": "2026-08-03T13:40:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/context-menu"
   },
-  "lastUpdated": "2026-08-03T13:22:41.000Z"
+  "lastUpdated": "2026-08-03T13:40:44.000Z"
 }

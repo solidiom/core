@@ -28,14 +28,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-checkbox-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:13:29.976Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -64,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "d1b10d68be834eeae05f5754bdc770777c278e10182a4f66651f6f172cd4c10c"
     },
-    "lastGenerated": "2026-08-03T13:22:41.000Z"
+    "lastGenerated": "2026-08-03T13:40:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/checkbox"
   },
-  "lastUpdated": "2026-08-03T13:22:41.000Z"
+  "lastUpdated": "2026-08-03T13:40:44.000Z"
 }

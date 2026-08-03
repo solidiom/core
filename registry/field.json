@@ -28,14 +28,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-field-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:13:29.976Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -66,11 +72,11 @@
     "fileDigests": {
       "src/index.tsx": "ac4930e21ef9845a3e984176c165a8fcd9120c6144857d82e372521d267b7f2e"
     },
-    "lastGenerated": "2026-08-03T13:22:41.000Z"
+    "lastGenerated": "2026-08-03T13:40:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/field"
   },
-  "lastUpdated": "2026-08-03T13:22:41.000Z"
+  "lastUpdated": "2026-08-03T13:40:44.000Z"
 }

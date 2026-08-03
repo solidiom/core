@@ -36,14 +36,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-select-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:13:29.976Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -75,11 +81,11 @@
       "src/select-context.ts": "bf10233859db06b551a8a0aeee2039aeb75212be33b6995766035fde6ed9c0d5",
       "src/select.tsx": "f14453d83edd73198be4d35ac759f0b0da6b4db9217e87336bf401236a86e1c5"
     },
-    "lastGenerated": "2026-08-03T13:22:41.000Z"
+    "lastGenerated": "2026-08-03T13:40:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/select"
   },
-  "lastUpdated": "2026-08-03T13:22:41.000Z"
+  "lastUpdated": "2026-08-03T13:40:44.000Z"
 }

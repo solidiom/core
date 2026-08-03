@@ -66,11 +66,11 @@
       "src/slider-context.ts": "8e25de30ce30d7c6457d79a3e5571ec8e3b625ebe782c9123021a57056bba217",
       "src/slider.tsx": "9078729ce923206e402d477d681869b28f0662a38da832253493a3e676a033f5"
     },
-    "lastGenerated": "2026-08-03T13:22:41.000Z"
+    "lastGenerated": "2026-08-03T13:40:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/slider"
   },
-  "lastUpdated": "2026-08-03T13:22:41.000Z"
+  "lastUpdated": "2026-08-03T13:40:44.000Z"
 }
