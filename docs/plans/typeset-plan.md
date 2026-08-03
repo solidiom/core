@@ -6,8 +6,28 @@ description: Design and phased plan for shipping solidiom typography as recipes,
 doc_type: explanation
 audience: "solidiom maintainers, recipe authors"
 tags: [typeset, recipes, typography, architecture]
-lifecycle: current
+lifecycle: superseded
 ---
+
+> **Status: implemented, two residual gaps.** Verified against the tree on 2026-08-03.
+> Four of the six [acceptance criteria](#acceptance-criteria) are met, and the plan was
+> exceeded in one respect: `recipes-unocss` ships typeset and prose too, which §Scope
+> deferred. `RECIPE-007` additionally promoted both into the canonical recipe contract
+> (`tools/recipe-contract-definitions.ts`), so they are now generated scopes rather than
+> the hand-authored stylesheets this plan describes — read Phases 1–3 as history.
+>
+> The two open gaps are tracked as **`RECIPE-008`** in `docs/plans/website-tasks.md` §11.1
+> and must close before GA:
+>
+> 1. `recipes-css` and `recipes-tailwind` `src/styles/index.css` import `typeset.css` and
+>    `prose.css` twice, because both emitters still append them as "hand-authored" after
+>    `RECIPE-007` made them ordinary scopes. `recipe:emit:*:check` cannot detect it.
+> 2. The typeset and prose demos live only in `apps/docs`, which `CUT-003` deletes.
+>    `apps/site` has no typeset or prose usage.
+>
+> Retire this document when `RECIPE-008` closes. The design rationale in
+> [Philosophy](#philosophy-typeset--recipes) and [Key decisions](#key-decisions) is the
+> part worth keeping until then.
 
 > **Purpose:** For solidiom maintainers, explains why typography ships in the recipe layer (not as a primitive) and how to implement it across the existing `recipes-css` and `recipes-tailwind` profiles without violating the recipe-contract audit.
 
