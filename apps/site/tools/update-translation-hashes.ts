@@ -58,10 +58,7 @@ function updateHashInFile(esPath: string, newHash: string): boolean {
   // Add translationSourceHash before translationStatus if present, else at end
   let updatedBody: string
   if (/^translationStatus:/m.test(body)) {
-    updatedBody = body.replace(
-      /^(translationStatus:)/m,
-      `translationSourceHash: "${newHash}"\n$1`,
-    )
+    updatedBody = body.replace(/^(translationStatus:)/m, `translationSourceHash: "${newHash}"\n$1`)
   } else {
     updatedBody = `${body}\ntranslationSourceHash: "${newHash}"\ntranslationStatus: draft`
   }
@@ -99,9 +96,7 @@ if (existsSync(packagesRoot)) {
     const docsDir = join(packagesRoot, packageName, "docs")
     if (!existsSync(docsDir)) continue
 
-    const englishFiles = collectContentFiles(docsDir, docsDir).filter(
-      (f) => !f.startsWith("es/"),
-    )
+    const englishFiles = collectContentFiles(docsDir, docsDir).filter((f) => !f.startsWith("es/"))
     for (const file of englishFiles) {
       const enPath = join(docsDir, file)
       const esPath = join(docsDir, "es", file)
