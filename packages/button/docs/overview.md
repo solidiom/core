@@ -11,6 +11,15 @@ status: draft
 package: "@solidiom/button"
 primitive: button
 section: overview
+notApplicable:
+  - section: composition
+    reason: Button is a self-contained primitive with no compound sub-primitives to compose.
+  - section: relationships
+    reason: Button has no sibling primitives; it is used within other compositions but owns no inter-primitive contract.
+  - section: migration
+    reason: Button has no prior API; this is the first shipped version.
+  - section: testing
+    reason: Standard button testing guidance is covered in the shared testing guide. No primitive-specific non-obvious behavior exists beyond keyboard activation documented above.
 ---
 
 Button renders a clickable trigger for actions with accessible semantics. It supports a loading state, disabled state, and multiple component parts: `Root`, `IconButton`, `ToggleButton`, and `ButtonGroup`.

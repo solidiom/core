@@ -13,13 +13,15 @@ primitive: button
 section: examples
 exampleId: button-basic
 source:
-  path: packages/button/src/index.tsx
-  export: Root
+  path: apps/site/src/components/ButtonExample.tsx
+  export: ButtonExample
   language: tsx
-runnable: false
-translationSourceHash: "48dc5167d8a3b8ba9ab52613041300c363d3cfeebd28041f5190906f9467c623"
+runnable: true
+translationSourceHash: "2c9474453b4c00c26b55bbf6cc0a21ada4b8fa71c35b9166c3558f2e3cf3430d"
 translationStatus: draft
 ---
+
+El ejemplo interactivo demuestra las cuatro partes de Button: un botón de acción estándar con estado de carga al hacer clic, un ToggleButton que mantiene estado presionado y un ButtonGroup. Presiona **Enter** o **Space** con el enfoque en cualquier botón para activarlo. El estado de carga deshabilita el botón y establece `aria-busy="true"` durante 1.2 segundos.
 
 ```tsx
 import * as Button from "@solidiom/button"

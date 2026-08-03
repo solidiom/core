@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "0e08e24447beb45b5d01a0c72c4d11e260ef46a9adf95156364624558463225e"
     },
-    "lastGenerated": "2026-08-03T11:49:56.000Z"
+    "lastGenerated": "2026-08-03T13:22:41.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/avatar"
   },
-  "lastUpdated": "2026-08-03T11:49:56.000Z"
+  "lastUpdated": "2026-08-03T13:22:41.000Z"
 }
