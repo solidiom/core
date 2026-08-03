@@ -125,15 +125,31 @@ function hasRequiredSections(sections: string[]): string[] {
 
 function checkConditionalSections(
   sections: string[],
-  frontmatter: Record<string, unknown>,
+  _frontmatter: Record<string, unknown>,
+  filePath: string,
 ): string[] {
   const missing: string[] = []
-  const notApplicable = (frontmatter.notApplicable as string[] | string | undefined) || []
-  const naList = Array.isArray(notApplicable)
-    ? notApplicable.map((s) => String(s).toLowerCase())
-    : String(notApplicable)
-        .split(",")
-        .map((s) => s.trim().toLowerCase())
+
+  // Read the raw frontmatter text to find notApplicable section declarations.
+  // The YAML is structured as:
+  //   notApplicable:
+  //     - section: <name>
+  //       reason: <text>
+  // We parse section names from the raw text rather than relying on the simple
+  // key-value parser, which cannot handle nested arrays.
+  let naList: string[] = []
+  try {
+    const content = readFileSync(filePath, "utf8")
+    const fmMatch = content.match(/^---\n([\s\S]*?)\n---/)
+    if (fmMatch) {
+      const sectionMatches = fmMatch[1].matchAll(/- section:\s*(.+)/g)
+      for (const m of sectionMatches) {
+        naList.push(m[1].trim().toLowerCase())
+      }
+    }
+  } catch {
+    /* file already validated elsewhere */
+  }
 
   for (const cond of CONDITIONAL_SECTIONS) {
     const present = sections.some((s) => s.startsWith(cond))
@@ -182,7 +198,7 @@ function verifyPrimitive(name: string): PrimitiveResult {
 
     // §8.1.1 req 3: conditional sections
     const fm = readFrontmatter(enOverview) || {}
-    const condMissing = checkConditionalSections(sections, fm)
+    const condMissing = checkConditionalSections(sections, fm, enOverview)
     if (condMissing.length > 0) {
       failures.push(
         `EN overview: conditional sections neither present nor declared notApplicable: ${condMissing.join(", ")}`,

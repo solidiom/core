@@ -74,11 +74,11 @@
       "src/carousel.tsx": "53ba31f214b799620a055d56df5eb30782eb60b6366337f4e71634c3b3d3c6b5",
       "src/index.tsx": "caa11d7ef6a9caf4341da76158ba6d7a88683470da22686dc3594529707c3753"
     },
-    "lastGenerated": "2026-08-03T11:49:56.000Z"
+    "lastGenerated": "2026-08-03T13:22:41.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/carousel"
   },
-  "lastUpdated": "2026-08-03T11:49:56.000Z"
+  "lastUpdated": "2026-08-03T13:22:41.000Z"
 }

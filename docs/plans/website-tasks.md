@@ -834,7 +834,7 @@ Two columns, because collapsing them is how the previous "11/52 primitives" read
 
 | Scope                         | Required | DoD | Landed |
 | ----------------------------- | -------: | --: | -----: |
-| Primitives                    |       52 |   0 |     14 |
+| Primitives                    |       52 |   1 |     14 |
 | Components                    |       21 |   0 |      0 |
 | Blocks                        |     ≥ 36 |   0 |      0 |
 | Unique templates              |       29 |   0 |      0 |

@@ -11,8 +11,17 @@ status: draft
 package: "@solidiom/button"
 primitive: button
 section: overview
-translationSourceHash: "d569473747ccd7b538f1f3e0bd035e1891bcbd442d6964168802d7ab8821bdc2"
+translationSourceHash: "dffb0d176fb4de32fe8662a5cef0890ff20010ae35de068b196b4d341117f00f"
 translationStatus: draft
+notApplicable:
+  - section: composition
+    reason: Button es un primitivo autónomo sin sub-primitivos compuestos.
+  - section: relationships
+    reason: Button no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
+  - section: migration
+    reason: Button no tiene una API previa; esta es la primera versión publicada.
+  - section: testing
+    reason: La guía estándar de pruebas de botones se cubre en la guía compartida de pruebas. No existe comportamiento no obvio específico del primitivo más allá de la activación por teclado documentada arriba.
 ---
 
 Button renderiza un control clickeable para acciones con semántica accesible. Soporta un estado de carga, estado deshabilitado y múltiples partes de componente: `Root`, `IconButton`, `ToggleButton` y `ButtonGroup`.
