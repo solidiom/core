@@ -472,7 +472,9 @@ function runPlan(options) {
     );
   }
   if (requestedDeliverable === "theme" && entry.deliverables.includes("theme") && entry.themeCompatible.length === 0) {
-    violations.push(`"${primitive}" declares the "theme" deliverable but has no themeCompatible entries`);
+    violations.push(
+      `"${primitive}" declares the "theme" deliverable but has no themeCompatible entries`
+    );
   }
   return {
     primitive,
@@ -993,7 +995,9 @@ function verifySourceIntegrity(options) {
   for (const [relPath, content] of files) {
     const expected = fileDigests[relPath];
     if (expected === void 0) {
-      violations.push(`${relPath}: present in source files but has no entry in manifest fileDigests`);
+      violations.push(
+        `${relPath}: present in source files but has no entry in manifest fileDigests`
+      );
       continue;
     }
     const actual = computeDigest(content);
@@ -1231,7 +1235,11 @@ function installSource(options) {
   const primitiveTarget = join7(sourceDir, primitive);
   const sourceFiles = collectSourceFiles(primitiveSourceDir);
   const envKey = process.env["REGISTRY_VERIFY_KEY"];
-  const verifyKeys = [...envKey ? [envKey] : [], ...policy.registryTrustedKeys, ...policy.sourceInstallTrustedKeys];
+  const verifyKeys = [
+    ...envKey ? [envKey] : [],
+    ...policy.registryTrustedKeys,
+    ...policy.sourceInstallTrustedKeys
+  ];
   const verifyResult = verifySourceIntegrity({
     cwd,
     primitive,
@@ -1571,10 +1579,22 @@ var AddCommand = class extends Command4 {
       ["Dry run", "solidiom add select --dry-run"],
       ["Add a component deliverable", "solidiom add button --deliverable component"],
       ["Add with a specific styling profile", "solidiom add button --styling tailwind"],
-      ["Actually run the install with a specific package manager", "solidiom add dialog --install --package-manager yarn"],
-      ["Proceed with an unverified source install", "solidiom add dialog --mode source --allow-unverified"],
-      ["Force-overwrite locally modified files", "solidiom add button --deliverable component --force"],
-      ["Preview pending source-install changes", "solidiom add button --deliverable component --diff"]
+      [
+        "Actually run the install with a specific package manager",
+        "solidiom add dialog --install --package-manager yarn"
+      ],
+      [
+        "Proceed with an unverified source install",
+        "solidiom add dialog --mode source --allow-unverified"
+      ],
+      [
+        "Force-overwrite locally modified files",
+        "solidiom add button --deliverable component --force"
+      ],
+      [
+        "Preview pending source-install changes",
+        "solidiom add button --deliverable component --diff"
+      ]
     ]
   });
   primitive = Option4.String({ required: true });
@@ -1642,9 +1662,11 @@ var AddCommand = class extends Command4 {
       if (result.installRun.stdout) this.context.stdout.write(result.installRun.stdout);
       if (result.installRun.stderr) this.context.stderr.write(result.installRun.stderr);
       if (result.installRun.code !== 0) {
-        this.context.stderr.write(pc4.red(`
+        this.context.stderr.write(
+          pc4.red(`
 \u2717 ${result.installCommand} exited with code ${result.installRun.code}
-`));
+`)
+        );
         return result.installRun.code;
       }
       this.context.stdout.write(pc4.green(`
@@ -1668,7 +1690,9 @@ var AddCommand = class extends Command4 {
           return 0;
         }
         if (sr.conflicts.hasBlockingConflicts) {
-          this.context.stderr.write(pc4.red("Blocked \u2014 locally modified files would be overwritten:\n"));
+          this.context.stderr.write(
+            pc4.red("Blocked \u2014 locally modified files would be overwritten:\n")
+          );
           for (const entry of sr.conflicts.entries) {
             if (entry.classification !== "modified-by-user") continue;
             this.context.stderr.write(pc4.red(`  \u2717 ${entry.path}
@@ -2067,7 +2091,9 @@ function validateDestination(cwd, name, force) {
     );
   }
   if (destination === home) {
-    errors.push(`Destination "${destination}" is the user's home directory \u2014 refusing to scaffold there.`);
+    errors.push(
+      `Destination "${destination}" is the user's home directory \u2014 refusing to scaffold there.`
+    );
   }
   if (destination === root) {
     errors.push(`Destination "${destination}" is the filesystem root \u2014 refusing to scaffold there.`);
@@ -2152,7 +2178,9 @@ async function runCreate(options) {
     return {
       destination: resolve(cwd, options.name ?? ""),
       created: false,
-      errors: [`Unknown styling profile "${options.styling}" \u2014 expected one of: ${STYLING_PROFILES2.join(", ")}`]
+      errors: [
+        `Unknown styling profile "${options.styling}" \u2014 expected one of: ${STYLING_PROFILES2.join(", ")}`
+      ]
     };
   }
   const prompted = await promptForMissing(options);
@@ -2249,10 +2277,22 @@ var CreateCommand = class extends Command5 {
   static usage = Command5.Usage({
     description: "Scaffold a new project from a template",
     examples: [
-      ["Create a project non-interactively", "solidiom create my-app --template vite-solid-router --yes"],
-      ["Create with a specific styling profile", "solidiom create my-app --template vite-solid-router --styling tailwind --yes"],
-      ["Create without running the install step", "solidiom create my-app --template vite-solid-router --yes --no-install"],
-      ["Force scaffolding into a non-empty directory", "solidiom create my-app --template vite-solid-router --yes --force"]
+      [
+        "Create a project non-interactively",
+        "solidiom create my-app --template vite-solid-router --yes"
+      ],
+      [
+        "Create with a specific styling profile",
+        "solidiom create my-app --template vite-solid-router --styling tailwind --yes"
+      ],
+      [
+        "Create without running the install step",
+        "solidiom create my-app --template vite-solid-router --yes --no-install"
+      ],
+      [
+        "Force scaffolding into a non-empty directory",
+        "solidiom create my-app --template vite-solid-router --yes --force"
+      ]
     ]
   });
   name = Option5.String({ required: true });
@@ -2476,9 +2516,11 @@ Deliverables: ${m.deliverables.join(", ")}
           const unverifiedCount = result.entries.filter((e) => e.provenance === "unverified").length;
           if (unverifiedCount > 0) {
             this.context.stdout.write(
-              pc6.yellow(`
+              pc6.yellow(
+                `
 \u26A0 ${unverifiedCount} entr${unverifiedCount === 1 ? "y" : "ies"} recorded as unverified
-`)
+`
+              )
             );
           }
         }

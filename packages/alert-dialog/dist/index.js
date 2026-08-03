@@ -1,5 +1,11 @@
 // src/index.tsx
-import { Show, createEffect, createSignal, createContext, useContext } from "solid-js";
+import {
+  Show,
+  createEffect,
+  createSignal,
+  createContext,
+  useContext
+} from "solid-js";
 import {
   createDisclosureState,
   createStableId,
