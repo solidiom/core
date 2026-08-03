@@ -121,10 +121,35 @@ jobs:
         run: pnpm run registry:build
       - name: BUILD-001 — verify no generated artifacts are stale
         run: |
-          git diff --exit-code -- registry/ 'packages/*/source/' 'packages/*/docs/accessibility/evidence.json' || {
-            echo "::error::Generated artifacts are stale. Run 'pnpm build && pnpm run report:a11y-evidence && pnpm run registry:build' and commit the changes."
-            exit 1
-          }
+          PATHSPEC=(registry/ 'packages/*/source/' 'packages/*/docs/accessibility/evidence.json')
+
+          if git diff --quiet -- "${PATHSPEC[@]}"; then
+            echo "Generated artifacts are current."
+            exit 0
+          fi
+
+          echo "::group::Stale paths"
+          git diff --stat -- "${PATHSPEC[@]}"
+          echo "::endgroup::"
+
+          echo "::group::Diff (first 200 lines)"
+          git diff -- "${PATHSPEC[@]}" | head -200
+          echo "::endgroup::"
+
+          # Distinguish real staleness from a determinism regression. Generation
+          # stamps are preserved whenever content is unchanged, so a
+          # timestamp-only diff points at that logic rather than at stale content.
+          SUBSTANTIVE=$(git diff -U0 -- "${PATHSPEC[@]}" \
+            | grep -E '^[+-]' \
+            | grep -vE '^(\+\+\+|---)' \
+            | grep -cvE '"(lastGenerated|lastUpdated|generatedAt|signedAt)":' || true)
+
+          if [ "$SUBSTANTIVE" -eq 0 ]; then
+            echo "::error::Generated artifacts differ only in generation timestamps. That is a determinism regression in tools/registry-build.ts (withStableManifestStamps / withStableIndexStamp), not stale content — the stamps must be preserved when content is unchanged."
+          else
+            echo "::error::Generated artifacts are stale ($SUBSTANTIVE substantive changed lines). Run 'pnpm build && pnpm run report:a11y-evidence && pnpm run registry:build' and commit the changes."
+          fi
+          exit 1
 
   test-node:
     needs: build
@@ -331,9 +356,20 @@ jobs:
 
   # ─── CI-003: Visual/Lighthouse CI (Advisory Mode) ──────────────────────────────
 
+  # TEST-005: runs inside the pinned Playwright image so screenshot rendering is
+  # reproducible. Baselines are environment-sensitive — font rasterisation
+  # differs between macOS and Linux — so they can only be verified or approved
+  # against a fixed environment. The image tag MUST track the @playwright/test
+  # version in package.json, or the bundled browser build will not match.
+  #
+  # Regenerate baselines with `pnpm run visual:update:docker` locally, or by
+  # dispatching .github/workflows/visual-baselines.yml if Docker is unavailable.
   site-visual:
     needs: site-build
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.1-noble
+      options: --ipc=host
     continue-on-error: true
     steps:
       - uses: actions/checkout@v5
@@ -355,7 +391,8 @@ jobs:
         with:
           name: site-dist
           path: apps/site/dist
-      - run: npx playwright install --with-deps chromium
+      # Browsers ship with the image at PLAYWRIGHT_BROWSERS_PATH; installing
+      # again would fetch a second copy and can shadow the bundled build.
       - env:
           PLAYWRIGHT_USE_EXISTING_BUILD: "1"
         run: pnpm --filter @solidiom/site run test:visual

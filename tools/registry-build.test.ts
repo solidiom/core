@@ -169,6 +169,45 @@ describe("registry build determinism (REG-004)", () => {
 
     expect(index).toMatchSnapshot()
   })
+
+  // BUILD-001 regression guard.
+  //
+  // Generation stamps used to be derived from the HEAD commit date and written
+  // unconditionally, which made the committed registry unreachable: the commit
+  // that landed a regenerated manifest became the new HEAD, so the next build
+  // stamped a later date and the staleness check reported the artifact as stale
+  // forever. Output must therefore not depend on the timestamp source at all
+  // while the underlying content is unchanged.
+  it("output does not depend on the generation timestamp when content is unchanged", () => {
+    const build = (timestamp: string): string => {
+      const env = { ...process.env, REGISTRY_TIMESTAMP: timestamp }
+      delete env.REGISTRY_SIGN_KEY
+      execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
+      return readFileSync(join(REGISTRY_DIR, "index.json"), "utf8")
+    }
+
+    const early = build("2020-06-01T00:00:00.000Z")
+    const late = build("2099-12-31T23:59:59.000Z")
+
+    expect(late).toBe(early)
+  })
+
+  it("preserves committed manifest stamps across differing timestamps", () => {
+    const manifestPath = join(REGISTRY_DIR, "button.json")
+    const build = (timestamp: string): { lastUpdated: string; lastGenerated: string } => {
+      const env = { ...process.env, REGISTRY_TIMESTAMP: timestamp }
+      delete env.REGISTRY_SIGN_KEY
+      execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
+      const manifest = JSON.parse(readFileSync(manifestPath, "utf8"))
+      return { lastUpdated: manifest.lastUpdated, lastGenerated: manifest.integrity.lastGenerated }
+    }
+
+    const first = build("2021-03-04T05:06:07.000Z")
+    const second = build("2098-11-12T13:14:15.000Z")
+
+    expect(second.lastUpdated).toBe(first.lastUpdated)
+    expect(second.lastGenerated).toBe(first.lastGenerated)
+  })
 })
 
 // ─── REG-005: Signing Tests ──────────────────────────────────────────────────
