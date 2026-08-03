@@ -37,7 +37,7 @@
     "evidenceIds": [
       "axe-tree-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T13:53:22.015Z"
+    "lastReviewed": "2026-08-03T16:32:53.812Z"
   },
   "documentation": {
     "status": "complete",
@@ -74,11 +74,11 @@
       "src/tree-context.ts": "bcb4a2ba80835f48585ee21da6c7ed7d065b0a36683bc03bd761fd918d642b28",
       "src/tree.tsx": "68fa7871341b9db35124747fedbb46b6c3fb6ca251a622c21c4ca0bfe4ed8e3b"
     },
-    "lastGenerated": "2026-08-03T13:51:36.000Z"
+    "lastGenerated": "2026-08-03T16:56:54.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/tree"
   },
-  "lastUpdated": "2026-08-03T13:51:36.000Z"
+  "lastUpdated": "2026-08-03T16:56:54.000Z"
 }

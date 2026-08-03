@@ -12,9 +12,7 @@ status: draft
 package: "@solidiom/virtual-list"
 primitive: virtual-list
 section: accessibility
-keyboard:
-  - key: Enter
-    behavior: Activates the primary interactive element.
+keyboard: []
 focus:
   - "Root recibe foco mediante el orden de tabulación estándar."
 semantics:
@@ -23,7 +21,9 @@ aria:
   - "Uses appropriate ARIA roles and properties for its interaction pattern."
 consumerDuties:
   - "Asegurar que se proporcionen etiquetas visibles o aria-label donde sea necesario."
-nonApplicableCriteria: []
+nonApplicableCriteria:
+  - criterion: keyboard
+    rationale: "This primitive has no keyboard interaction beyond native element defaults."
 reviewStatus: draft
 translationSourceHash: "ab6489014ba56a7e2207d879b4b210cc718b0d4cc8ad9b0e8f6218e0dad6b8b6"
 translationStatus: draft

@@ -35,7 +35,7 @@
     "evidenceIds": [
       "axe-slider-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T13:53:22.015Z"
+    "lastReviewed": "2026-08-03T16:32:53.812Z"
   },
   "documentation": {
     "status": "complete",
@@ -72,11 +72,11 @@
       "src/slider-context.ts": "8e25de30ce30d7c6457d79a3e5571ec8e3b625ebe782c9123021a57056bba217",
       "src/slider.tsx": "9078729ce923206e402d477d681869b28f0662a38da832253493a3e676a033f5"
     },
-    "lastGenerated": "2026-08-03T13:51:36.000Z"
+    "lastGenerated": "2026-08-03T16:56:54.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/slider"
   },
-  "lastUpdated": "2026-08-03T13:51:36.000Z"
+  "lastUpdated": "2026-08-03T16:56:54.000Z"
 }

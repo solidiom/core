@@ -16,8 +16,7 @@ source:
   path: packages/date-picker/src/index.tsx
   export: Root
   language: tsx
-runnable: false
-runnableReason: "Runnable island to be created when this primitive is fully retrofitted."
+runnable: true
 ---
 
 ```tsx

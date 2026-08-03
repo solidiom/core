@@ -12,9 +12,7 @@ status: draft
 package: "@solidiom/tooltip"
 primitive: tooltip
 section: accessibility
-keyboard:
-  - key: Enter
-    behavior: Activates the primary interactive element.
+keyboard: []
 focus:
   - "Root recibe foco mediante el orden de tabulación estándar."
 semantics:
@@ -23,7 +21,9 @@ aria:
   - "Uses appropriate ARIA roles and properties for its interaction pattern."
 consumerDuties:
   - "Asegurar que se proporcionen etiquetas visibles o aria-label donde sea necesario."
-nonApplicableCriteria: []
+nonApplicableCriteria:
+  - criterion: keyboard
+    rationale: "This primitive has no keyboard interaction beyond native element defaults."
 reviewStatus: draft
 translationSourceHash: "e604fbf578d67a016e2f0ebf271e82f446d432af26730e1a5f813596f1cab4b8"
 translationStatus: draft

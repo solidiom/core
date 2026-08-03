@@ -12,9 +12,7 @@ status: draft
 package: "@solidiom/toast"
 primitive: toast
 section: accessibility
-keyboard:
-  - key: Enter
-    behavior: Activates the primary interactive element.
+keyboard: []
 focus:
   - "Region recibe foco mediante el orden de tabulación estándar."
 semantics:
@@ -23,7 +21,9 @@ aria:
   - "Uses appropriate ARIA roles and properties for its interaction pattern."
 consumerDuties:
   - "Asegurar que se proporcionen etiquetas visibles o aria-label donde sea necesario."
-nonApplicableCriteria: []
+nonApplicableCriteria:
+  - criterion: keyboard
+    rationale: "This primitive has no keyboard interaction beyond native element defaults."
 reviewStatus: draft
 translationSourceHash: "73287f01e02b73842081109c4885809ed284e5800739ef25a0bcd5f324cf4afe"
 translationStatus: draft
