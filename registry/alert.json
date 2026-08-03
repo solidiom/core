@@ -28,14 +28,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-alert-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:13:29.976Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -49,18 +55,25 @@
   },
   "search": {
     "keywords": [
+      "accessibility",
       "alert",
+      "error",
       "feedback",
       "for",
+      "info",
       "inline",
       "live",
+      "live-region",
       "messages",
       "modal",
       "non",
+      "notification",
       "region",
       "runtime",
       "semantics",
       "status",
+      "success",
+      "warning",
       "with"
     ]
   },
@@ -70,11 +83,11 @@
     "fileDigests": {
       "src/index.tsx": "8bbc6a02e623e3e4016e86ed6e33ddedf593af27ea5cb96d97c95c4ece4e4cee"
     },
-    "lastGenerated": "2026-07-31T05:34:08.000Z"
+    "lastGenerated": "2026-08-03T11:49:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/alert"
   },
-  "lastUpdated": "2026-07-31T05:34:08.000Z"
+  "lastUpdated": "2026-08-03T11:49:56.000Z"
 }

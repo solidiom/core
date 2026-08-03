@@ -26,11 +26,14 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-kbd-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:13:29.976Z"
   },
   "documentation": {
-    "status": "draft",
+    "status": "complete",
     "locales": {
       "en": {
         "status": "draft"
@@ -46,12 +49,17 @@
   },
   "search": {
     "keywords": [
+      "atajo",
       "display",
       "element",
       "kbd",
+      "key",
       "keyboard",
       "runtime",
-      "shortcut"
+      "shortcut",
+      "tecla",
+      "teclado",
+      "visualización"
     ]
   },
   "integrity": {
@@ -60,11 +68,11 @@
     "fileDigests": {
       "src/index.tsx": "726922c768549e03a4820a47c9ae747cd092add393838f6acc33dfcaee19e42d"
     },
-    "lastGenerated": "2026-07-31T05:34:08.000Z"
+    "lastGenerated": "2026-08-03T11:49:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/kbd"
   },
-  "lastUpdated": "2026-07-31T05:34:08.000Z"
+  "lastUpdated": "2026-08-03T11:49:56.000Z"
 }

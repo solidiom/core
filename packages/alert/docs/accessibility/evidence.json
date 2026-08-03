@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
-  "primitive": "data-table",
-  "evidenceIds": ["axe-data-table-scan-v1"],
+  "primitive": "alert",
+  "evidenceIds": ["axe-alert-scan-v1"],
   "summary": {
-    "passes": 5,
+    "passes": 9,
     "violations": 0,
-    "incomplete": 0,
+    "incomplete": 1,
     "outcome": "pass"
   },
   "lastRun": "2026-08-03T13:13:29.976Z",

@@ -26,14 +26,20 @@
     "installDeps": []
   },
   "accessibility": {
-    "reviewStatus": "none",
-    "evidenceIds": []
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-visually-hidden-scan-v1"
+    ],
+    "lastReviewed": "2026-08-03T13:13:29.976Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "complete",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -43,16 +49,22 @@
   },
   "search": {
     "keywords": [
+      "accessibility",
       "accessible",
+      "assistive-technology",
       "content",
+      "heading",
       "hidden",
       "hides",
       "keeping",
+      "label",
       "layout",
       "readers",
       "runtime",
       "screen",
+      "screen-reader",
       "visually",
+      "visually-hidden",
       "while"
     ]
   },
@@ -62,11 +74,11 @@
     "fileDigests": {
       "src/index.tsx": "3512263f13f19208cb38dd9f3c8a74243dc595b849da5fbb31b581a03e10ff4b"
     },
-    "lastGenerated": "2026-07-31T05:34:08.000Z"
+    "lastGenerated": "2026-08-03T11:49:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/visually-hidden"
   },
-  "lastUpdated": "2026-07-31T05:34:08.000Z"
+  "lastUpdated": "2026-08-03T11:49:56.000Z"
 }

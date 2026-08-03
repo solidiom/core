@@ -60,15 +60,15 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "37d762ca8df304c8e8723520e2ad8ea5dc78d71c44123ac4286768f2f759fac5",
+    "filesHash": "293933c5aba2ef9c7e9f74877f3e2acf33bcfd6abca031c0b497765f36d1e8ef",
     "fileDigests": {
-      "src/index.tsx": "d4d23f65825f21176b46fff75b3654ed0b0be6628b29c4279f8b8422ac076a7b"
+      "src/index.tsx": "e95998ab640f33d2307125454fb8bcb48e63cd4f759b176cf4ed100a57cf05b1"
     },
-    "lastGenerated": "2026-07-31T05:34:08.000Z"
+    "lastGenerated": "2026-08-03T11:49:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/sheet"
   },
-  "lastUpdated": "2026-07-31T05:34:08.000Z"
+  "lastUpdated": "2026-08-03T11:49:56.000Z"
 }

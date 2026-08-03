@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
-  "primitive": "data-table",
-  "evidenceIds": ["axe-data-table-scan-v1"],
+  "primitive": "accordion",
+  "evidenceIds": ["axe-accordion-scan-v1"],
   "summary": {
-    "passes": 5,
+    "passes": 8,
     "violations": 0,
     "incomplete": 0,
     "outcome": "pass"

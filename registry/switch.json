@@ -66,11 +66,11 @@
     "fileDigests": {
       "src/index.tsx": "806c7b01cadb5f4571af470ebee752fa040d57e10e8573872c9027439527fa03"
     },
-    "lastGenerated": "2026-07-31T05:34:08.000Z"
+    "lastGenerated": "2026-08-03T11:49:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/switch"
   },
-  "lastUpdated": "2026-07-31T05:34:08.000Z"
+  "lastUpdated": "2026-08-03T11:49:56.000Z"
 }
