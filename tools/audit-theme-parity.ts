@@ -487,7 +487,9 @@ async function main(): Promise<void> {
   if (all.length === 0) {
     console.log("✓ Generated freshness: all emitters up to date")
     console.log("✓ Cross-output parity: css and unocss agree on every --ui-* value")
-    console.log("✓ Contrast matrix: every required pair meets its WCAG AA minimum")
+    console.log(
+      `✓ Contrast matrix: every required pair meets its WCAG AA minimum (${Object.keys(REFERENCE_THEMES).length} themes checked)`,
+    )
     console.log("✓ Site-token contrast: every --sol-* pair meets its WCAG AA minimum (A11Y-008)")
     console.log("✓ Round-trip: every reference theme survives JSON.stringify/JSON.parse")
     console.log("\n✓ Theme parity audit PASSED")

@@ -20,4 +20,8 @@ export interface ShippedTheme {
  * emitter run regenerates the corresponding stylesheet for every entry here. */
 export const SHIPPED_THEMES: readonly ShippedTheme[] = [
   { slug: "solidiom-default", name: "Solidiom Default", outputs: ["css", "tailwind"] },
+  { slug: "ocean", name: "Ocean", outputs: ["css", "tailwind"] },
+  { slug: "forest", name: "Forest", outputs: ["css", "tailwind"] },
+  { slug: "slate", name: "Slate", outputs: ["css", "tailwind"] },
+  { slug: "aurora", name: "Aurora", outputs: ["css", "tailwind"] },
 ]
