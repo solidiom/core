@@ -1,10 +1,10 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "block-catalog-manifest",
   "title": "Block Catalog Manifest",
   "description": "Concrete names, outcomes, required states, component dependencies, and data boundaries for all 36 block slots in the Solidiom catalog.",
   "status": "approved",
-  "taskRef": "docs/plans/website-tasks.md \u00a79.3 BLOCK-000",
+  "taskRef": "docs/plans/website-tasks.md §9.3 BLOCK-000",
   "blocks": [
     {
       "id": "BLOCK-AUTH-01",
@@ -18,9 +18,9 @@
         "Permission-restricted (account locked, MFA required)",
         "Success (redirect to post-auth destination)"
       ],
-      "componentDependencies": ["COMP-001", "COMP-002", "COMP-003", "COMP-005"],
+      "componentDependencies": ["COMP-001", "COMP-002", "COMP-003", "COMP-005", "COMP-029"],
       "dataBoundary": "Authentication service via OAuth 2.0 / OIDC or credential endpoint. No persistent data at rest within the block; session token passed to application shell.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-AUTH-02",
@@ -34,9 +34,16 @@
         "Verification-pending (awaiting email confirmation)",
         "Success (redirect to onboarding)"
       ],
-      "componentDependencies": ["COMP-001", "COMP-002", "COMP-003", "COMP-005", "COMP-010"],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-005",
+        "COMP-010",
+        "COMP-029"
+      ],
       "dataBoundary": "User creation service and email delivery service. Temporary verification token; no PII stored within the block.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-AUTH-03",
@@ -46,13 +53,20 @@
       "states": [
         "Loading (request submit, password update)",
         "Empty (initial email input)",
-        "Error (email not found \u2014 generic message, expired token, network failure)",
+        "Error (email not found — generic message, expired token, network failure)",
         "Token-expired (reset link expired)",
         "Success (password updated, redirect to sign in)"
       ],
-      "componentDependencies": ["COMP-001", "COMP-002", "COMP-003", "COMP-005", "COMP-010"],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-005",
+        "COMP-010",
+        "COMP-029"
+      ],
       "dataBoundary": "Password reset service; time-limited tokens. Block never exposes whether an email exists in the system.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-ONBOARD-01",
@@ -74,10 +88,11 @@
         "COMP-012",
         "COMP-013",
         "COMP-015",
-        "COMP-020"
+        "COMP-020",
+        "COMP-029"
       ],
       "dataBoundary": "User preferences service. Skippable steps; partial progress persisted to resume later.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-ONBOARD-02",
@@ -97,10 +112,11 @@
         "COMP-005",
         "COMP-007",
         "COMP-010",
-        "COMP-012"
+        "COMP-012",
+        "COMP-029"
       ],
       "dataBoundary": "User profile service and file storage for avatar. Block reads current user context; writes profile updates.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-ONBOARD-03",
@@ -121,10 +137,11 @@
         "COMP-004",
         "COMP-005",
         "COMP-007",
-        "COMP-021"
+        "COMP-021",
+        "COMP-029"
       ],
       "dataBoundary": "Template catalog service and project creation service. Block reads available templates; creates project resource.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-SETTINGS-01",
@@ -146,10 +163,11 @@
         "COMP-006",
         "COMP-009",
         "COMP-010",
-        "COMP-012"
+        "COMP-012",
+        "COMP-029"
       ],
       "dataBoundary": "User profile and authentication services. Block reads current user data; writes profile and password updates. Email change requires re-verification.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-SETTINGS-02",
@@ -171,10 +189,11 @@
         "COMP-013",
         "COMP-014",
         "COMP-015",
-        "COMP-021"
+        "COMP-021",
+        "COMP-029"
       ],
       "dataBoundary": "Notification preferences service. Block reads per-user notification settings; writes updated preferences.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-SETTINGS-03",
@@ -188,9 +207,17 @@
         "Confirmation-required (destructive action modal)",
         "Processing (async export in progress)"
       ],
-      "componentDependencies": ["COMP-001", "COMP-004", "COMP-005", "COMP-006", "COMP-010"],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-004",
+        "COMP-005",
+        "COMP-006",
+        "COMP-010",
+        "COMP-026",
+        "COMP-029"
+      ],
       "dataBoundary": "Account lifecycle service and data export service. Block requires re-authentication for destructive actions. Data export is async with status polling.",
-      "proposedComponents": ["COMP-033", "COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-BILLING-01",
@@ -211,10 +238,11 @@
         "COMP-006",
         "COMP-009",
         "COMP-010",
-        "COMP-013"
+        "COMP-013",
+        "COMP-029"
       ],
       "dataBoundary": "Billing service for plan catalog and current subscription. Block reads plan metadata and user's active subscription; writes plan changes.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-BILLING-02",
@@ -237,10 +265,11 @@
         "COMP-006",
         "COMP-007",
         "COMP-008",
-        "COMP-010"
+        "COMP-010",
+        "COMP-029"
       ],
       "dataBoundary": "Payment processor via tokenization API. Block never stores raw card numbers; relies on payment provider's hosted fields or tokens.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-BILLING-03",
@@ -258,12 +287,13 @@
         "COMP-002",
         "COMP-004",
         "COMP-007",
-        "COMP-016",
         "COMP-017",
-        "COMP-021"
+        "COMP-021",
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Billing service invoice endpoint. Read-only block; invoice PDFs served via pre-signed URLs from the billing provider.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-ADMIN-01",
@@ -286,12 +316,13 @@
         "COMP-006",
         "COMP-007",
         "COMP-012",
-        "COMP-016",
         "COMP-017",
-        "COMP-021"
+        "COMP-021",
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Team management and invitation services. Block requires admin role; reads team roster; writes invites and membership changes.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-ADMIN-02",
@@ -310,13 +341,14 @@
         "COMP-004",
         "COMP-007",
         "COMP-013",
-        "COMP-016",
         "COMP-017",
         "COMP-020",
-        "COMP-021"
+        "COMP-021",
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Audit event store. Read-only block; requires admin role. Events are immutable append-only records.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-ADMIN-03",
@@ -340,11 +372,12 @@
         "COMP-009",
         "COMP-013",
         "COMP-015",
-        "COMP-016",
-        "COMP-021"
+        "COMP-021",
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Role and permission services. Block reads role definitions and permission schema; writes role-permission mappings. Changes take effect on next authentication cycle.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-OBS-01",
@@ -358,9 +391,18 @@
         "Stale-data (metrics not recently updated)",
         "Auto-refresh-active (periodic data refresh)"
       ],
-      "componentDependencies": ["COMP-004", "COMP-007", "COMP-009", "COMP-011", "COMP-016"],
+      "componentDependencies": [
+        "COMP-004",
+        "COMP-007",
+        "COMP-009",
+        "COMP-011",
+        "COMP-023",
+        "COMP-025",
+        "COMP-026",
+        "COMP-029"
+      ],
       "dataBoundary": "Metrics aggregation service. Read-only block; data refreshes on a configurable interval. Time-range selector controls query window.",
-      "proposedComponents": ["COMP-029", "COMP-033", "COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-OBS-02",
@@ -382,10 +424,12 @@
         "COMP-005",
         "COMP-007",
         "COMP-013",
-        "COMP-016"
+        "COMP-015",
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Events streaming service via WebSocket or SSE. Read-only block; events are ephemeral unless explicitly saved.",
-      "proposedComponents": ["COMP-042", "COMP-043"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-OBS-03",
@@ -412,10 +456,11 @@
         "COMP-010",
         "COMP-013",
         "COMP-015",
-        "COMP-016"
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Alert rules service and notification channel registry. Block reads existing rules; creates/updates/deletes alert configurations.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-RESOURCE-01",
@@ -437,12 +482,13 @@
         "COMP-008",
         "COMP-012",
         "COMP-013",
-        "COMP-016",
         "COMP-017",
-        "COMP-021"
+        "COMP-021",
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Resource catalog service. Read-only block with bulk selection for downstream actions. Supports server-side pagination and filtering.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-RESOURCE-02",
@@ -465,11 +511,12 @@
         "COMP-009",
         "COMP-010",
         "COMP-012",
-        "COMP-016",
-        "COMP-020"
+        "COMP-020",
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Resource detail service and activity log. Block reads resource data; performs scoped actions (start/stop/delete) with confirmation.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-RESOURCE-03",
@@ -496,10 +543,12 @@
         "COMP-010",
         "COMP-013",
         "COMP-015",
-        "COMP-020"
+        "COMP-020",
+        "COMP-026",
+        "COMP-029"
       ],
       "dataBoundary": "Resource creation service and template catalog. Block reads templates and quota; creates resource asynchronously.",
-      "proposedComponents": ["COMP-033", "COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-AI-01",
@@ -522,10 +571,12 @@
         "COMP-005",
         "COMP-008",
         "COMP-010",
-        "COMP-017"
+        "COMP-017",
+        "COMP-028",
+        "COMP-029"
       ],
       "dataBoundary": "AI chat service with streaming responses. Block manages conversation state locally; persists messages to chat history service.",
-      "proposedComponents": ["COMP-036", "COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-AI-02",
@@ -552,11 +603,12 @@
         "COMP-009",
         "COMP-010",
         "COMP-013",
-        "COMP-016",
-        "COMP-017"
+        "COMP-017",
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Prompt storage service and AI execution endpoint. Block reads/writes prompt definitions; executes test prompts against AI service.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-AI-03",
@@ -584,10 +636,12 @@
         "COMP-010",
         "COMP-013",
         "COMP-015",
-        "COMP-016"
+        "COMP-023",
+        "COMP-026",
+        "COMP-029"
       ],
       "dataBoundary": "Workflow definition service and execution engine. Block reads/writes workflow definitions; triggers async execution with status polling.",
-      "proposedComponents": ["COMP-033", "COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-SEARCH-01",
@@ -607,12 +661,13 @@
         "COMP-005",
         "COMP-007",
         "COMP-013",
-        "COMP-016",
         "COMP-020",
-        "COMP-021"
+        "COMP-021",
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Search index service. Read-only block; query and filter parameters passed to search API. Results include snippet and metadata.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-SEARCH-02",
@@ -637,10 +692,11 @@
         "COMP-010",
         "COMP-013",
         "COMP-015",
-        "COMP-016"
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Saved search storage and alert notification service. Block reads/writes saved queries; manages alert subscriptions.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-SEARCH-03",
@@ -653,9 +709,18 @@
         "Error (data unavailable, network failure)",
         "Date-range-selected (custom period active)"
       ],
-      "componentDependencies": ["COMP-004", "COMP-007", "COMP-009", "COMP-011", "COMP-016"],
+      "componentDependencies": [
+        "COMP-004",
+        "COMP-007",
+        "COMP-009",
+        "COMP-011",
+        "COMP-023",
+        "COMP-025",
+        "COMP-026",
+        "COMP-029"
+      ],
       "dataBoundary": "Search analytics aggregation service. Read-only block; aggregates anonymized search metrics. No individual query content exposed.",
-      "proposedComponents": ["COMP-029", "COMP-033", "COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-COMMERCE-01",
@@ -678,10 +743,11 @@
         "COMP-012",
         "COMP-013",
         "COMP-017",
-        "COMP-021"
+        "COMP-021",
+        "COMP-029"
       ],
       "dataBoundary": "Product catalog service. Read-only block; product images served via CDN. Price and availability cached with TTL.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-COMMERCE-02",
@@ -706,10 +772,11 @@
         "COMP-008",
         "COMP-010",
         "COMP-015",
-        "COMP-016"
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Cart service and pricing service. Block reads cart state; updates quantities and coupons. Checkout transitions to billing flow.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-COMMERCE-03",
@@ -730,12 +797,14 @@
         "COMP-005",
         "COMP-009",
         "COMP-011",
-        "COMP-016",
         "COMP-020",
-        "COMP-021"
+        "COMP-021",
+        "COMP-023",
+        "COMP-026",
+        "COMP-029"
       ],
       "dataBoundary": "Order management and shipping tracking services. Read-only block; tracking data polled from carrier APIs.",
-      "proposedComponents": ["COMP-033", "COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-CONTENT-01",
@@ -761,10 +830,12 @@
         "COMP-009",
         "COMP-010",
         "COMP-015",
-        "COMP-017"
+        "COMP-017",
+        "COMP-029",
+        "COMP-030"
       ],
       "dataBoundary": "Content storage service. Block reads document content; writes incremental saves with conflict detection.",
-      "proposedComponents": ["COMP-042", "COMP-048"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-CONTENT-02",
@@ -788,12 +859,14 @@
         "COMP-008",
         "COMP-012",
         "COMP-013",
-        "COMP-016",
         "COMP-017",
-        "COMP-021"
+        "COMP-021",
+        "COMP-023",
+        "COMP-026",
+        "COMP-029"
       ],
       "dataBoundary": "Asset storage and metadata service. Block reads asset listing; supports upload and deletion with confirmation.",
-      "proposedComponents": ["COMP-033", "COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-CONTENT-03",
@@ -822,13 +895,14 @@
         "COMP-010",
         "COMP-012",
         "COMP-013",
-        "COMP-016",
         "COMP-017",
         "COMP-020",
-        "COMP-021"
+        "COMP-021",
+        "COMP-023",
+        "COMP-029"
       ],
       "dataBoundary": "Content workflow and approval services. Block reads pipeline state; transitions items between stages with permission checks.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-SHELL-01",
@@ -852,10 +926,12 @@
         "COMP-013",
         "COMP-017",
         "COMP-019",
-        "COMP-020"
+        "COMP-020",
+        "COMP-027",
+        "COMP-029"
       ],
       "dataBoundary": "Navigation configuration service and user permissions. Block reads menu structure; highlights active route. Sidebar state persisted in local storage.",
-      "proposedComponents": ["COMP-035", "COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-SHELL-02",
@@ -875,11 +951,13 @@
         "COMP-004",
         "COMP-007",
         "COMP-008",
-        "COMP-014",
-        "COMP-016"
+        "COMP-022",
+        "COMP-023",
+        "COMP-024",
+        "COMP-029"
       ],
       "dataBoundary": "Command registry service. Block reads available commands scoped to user permissions; executes actions via command handlers.",
-      "proposedComponents": ["COMP-025", "COMP-042"]
+      "proposedComponents": []
     },
     {
       "id": "BLOCK-SHELL-03",
@@ -905,24 +983,29 @@
         "COMP-013",
         "COMP-015",
         "COMP-017",
-        "COMP-021"
+        "COMP-021",
+        "COMP-029"
       ],
       "dataBoundary": "Notification service with real-time updates. Block reads notification feed; writes read/dismiss states. Supports WebSocket push for new notifications.",
-      "proposedComponents": ["COMP-042"]
+      "proposedComponents": []
     }
   ],
   "resolution": {
-    "note": "Out-of-range IDs (COMP-025..048) moved to proposedComponents per docs/plans/website-tasks.md \u00a79.3. Each is resolved at work-package split time: substitute an approved COMP-001..021 component, or propose a \u00a79.2 amendment.",
-    "movedIds": [
-      "COMP-025",
-      "COMP-029",
-      "COMP-033",
-      "COMP-035",
-      "COMP-036",
-      "COMP-042",
-      "COMP-043",
-      "COMP-048"
+    "note": "Ten citations used PRIM-* numbers with a COMP- prefix. Every one matched PRIM-<same number> exactly (COMP-042 Spinner = PRIM-042, COMP-016 Data Table = PRIM-016, and so on), so the names in block-catalog-manifest.md are the authored intent and the IDs were the defect. All ten are corrected against the component catalog, which docs/plans/website-tasks.md §9.2 extends from 21 to 30 to cover the nine components the block catalog depends on but never approved.",
+    "renumbered": [
+      "COMP-014 (Command Palette) -> COMP-022, in 1 block",
+      "COMP-016 (Data Table) -> COMP-023, in 19 blocks",
+      "COMP-025 (Kbd) -> COMP-024, in 1 block",
+      "COMP-029 (Meter) -> COMP-025, in 2 blocks",
+      "COMP-033 (Progress) -> COMP-026, in 7 blocks",
+      "COMP-035 (Resizable Panels) -> COMP-027, in 1 block",
+      "COMP-036 (Scroll Area) -> COMP-028, in 1 block",
+      "COMP-042 (Spinner) -> COMP-029, in all 36 blocks",
+      "COMP-043 (Switch) -> COMP-015, in 1 block (duplicate identity, not a new component)",
+      "COMP-048 (Toolbar) -> COMP-030, in 1 block"
     ],
-    "decision": "docs/plans/primitives.md \u00a72 decision 13"
+    "silentFailures": "COMP-016 and COMP-014 fell inside COMP-001..021, so they resolved cleanly to the wrong component rather than failing validation: 19 blocks meant Data Table and would have been built against Combobox. An ID-range check cannot catch this, which is why §8.3.1 req 2 resolves dependencies by name and FOUND-005 asserts that this file and block-catalog-manifest.md agree.",
+    "supersedes": "BLOCK-000A moved eight out-of-range IDs to a non-resolving proposedComponents field. That undercounted the defect (ten citations, not eight) and left the two in-range errors in place. proposedComponents is now empty for every block.",
+    "decision": "docs/plans/task-sequencing.md §3 (D6). Originally docs/plans/primitives.md §2 decision 13, deleted in e0fa091."
   }
 }
