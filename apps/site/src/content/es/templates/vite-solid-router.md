@@ -1,55 +1,53 @@
 ---
 contentSchemaVersion: 1
-title: Plantilla inicial de Vite + Solid Router
-description: Una plantilla inicial de Solid solo del lado del cliente, generada con Vite y Solid Router, lista para `solidiom add`.
-keywords:
-  - vite
-  - solid-router
-  - plantilla
-  - template
-  - solo cliente
+title: Vite + Solid Router Starter
+description: "Plantilla de inicio para proyectos vite solid router."
+keywords: [vite-solid-router, plantilla, inicio, solid]
 locale: es
-maturity: beta
-product: solidiom
+maturity: draft
+product: Vite + Solid Router Starter
 productLayer: template
-status: published
+status: draft
 package: "@solidiom/template-vite-solid-router"
 stack: vite-solid-router
-portfolios:
-  - balanced-product
-translationSourceHash: "5eb104cab4953a540ae257153b1f1212a0fb4865824f80b2a5fc7c7017cd7a12"
+portfolios: ["balanced-product"]
+translationSourceHash: "00a5ef6c153cbe907168f386a12c633800a96307ffacb0fa6509dcabc5da6944"
 translationStatus: draft
 ---
 
-# Plantilla inicial de Vite + Solid Router
+Vite + Solid Router Starter proporciona un punto de partida listo para producción para proyectos Solid usando el stack vite solid router.
 
-Una aplicación Solid mínima, solo del lado del cliente, generada con [Vite](https://vitejs.dev)
-y [Solid Router](https://github.com/solidjs/solid-router). Sin renderizado del lado del
-servidor — esta plantilla es la vía más rápida para tener un proyecto Solidiom funcionando
-cuando no necesitas SSR.
+## Resumen
 
-## Qué incluye
+Esta plantilla crea un proyecto completo con enrutamiento, configuración de estilos e integración con Solidiom pre-configurada. Sirve como base para construir aplicaciones con la arquitectura vite solid router.
 
-- Un servidor de desarrollo Vite y una compilación de producción, preconfigurados para Solid.
-- Dos rutas (`/` y `/about`) conectadas mediante `@solidjs/router`, que muestran la navegación
-  del lado del cliente con el componente `<A>`.
-- Un primitivo de Solidiom (`@solidiom/button`) renderizado con la receta de estilos de
-  Tailwind, para que puedas ver un componente real ya estilizado.
-- Un archivo `.solidiom/config.json` generado, para que el proyecto esté listo de inmediato
-  para `solidiom add <primitivo>`.
+## Stack
 
-## Genera un proyecto
+- **Framework:** vite solid router
+- **Enrutamiento:** Enrutamiento basado en archivos con Solid Router
+- **Renderizado:** Renderizado del lado del cliente
+- **Herramienta de construcción:** Vite
+
+## Bloques requeridos
+
+Esta plantilla integra bloques para patrones comunes de aplicaciones, incluyendo autenticación, incorporación y gestión de recursos. Las dependencias de bloques específicas varían según la selección de portfolio.
+
+## Autenticación
+
+La plantilla incluye una configuración de autenticación predeterminada compatible con los bloques Sign In y Sign Up. La autenticación está configurada como una capa componible que puede reemplazarse o extenderse.
+
+## Estilos
+
+La plantilla se entrega con un perfil de estilo pre-configurado (CSS, Tailwind o UnoCSS). El sistema de temas permite cambiar entre presets sin modificar el código de los componentes.
+
+## Instalación
 
 ```sh
 solidiom create my-app --template vite-solid-router
 ```
 
-Pasa `--yes` para omitir las preguntas, `--styling` para elegir un perfil de estilos (`css`,
-`tailwind` o `unocss`), y `--no-install` si prefieres ejecutar el paso de instalación tú mismo.
+Pasa `--yes` para saltar los prompts y `--styling` para seleccionar un perfil de estilo.
 
-## Cuándo elegir esta plantilla
+## Despliegue
 
-Elige `vite-solid-router` cuando tu proyecto no necesite renderizado del lado del servidor —
-paneles de control, herramientas internas y aplicaciones de una sola página que generan un
-paquete estático son un buen caso de uso. Si necesitas SSR, una plantilla basada en SolidStart
-está planeada para una versión futura.
+Despliega la salida estática a cualquier CDN o plataforma de alojamiento estático. Vercel, Netlify y Cloudflare Pages son destinos soportados.

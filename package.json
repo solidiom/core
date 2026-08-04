@@ -27,6 +27,8 @@
     "primitive:audit": "tsx tools/primitive-completion-gate.ts --audit-only",
     "primitive:catalog-gate": "tsx tools/primitive-catalog-gate.ts",
     "primitive:catalog-audit": "tsx tools/primitive-catalog-gate.ts --audit-only",
+    "component:catalog-gate": "tsx tools/component-catalog-gate.ts",
+    "component:catalog-audit": "tsx tools/component-catalog-gate.ts --audit-only",
     "primitive:scaffold-docs": "tsx tools/scaffold-primitive-docs.ts",
     "gate:phase0": "tsx tools/phase0-gate.ts",
     "test:a11y": "tsx tools/run-a11y.ts",
@@ -74,7 +76,10 @@
     "visual:container": "bash tools/visual-container.sh",
     "visual:update:container": "bash tools/visual-container.sh --update",
     "test:tools": "vitest run --config vitest.config.ts tools/",
-    "audit:adapter-styling": "tsx tools/audit-adapter-styling.ts"
+    "audit:adapter-styling": "tsx tools/audit-adapter-styling.ts",
+    "block:catalog-gate": "tsx tools/block-catalog-gate.ts",
+    "block:catalog-audit": "tsx tools/block-catalog-gate.ts --audit-only",
+    "catalog:scaffold-docs": "tsx tools/scaffold-catalog-docs.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",

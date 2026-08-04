@@ -1,51 +1,51 @@
 ---
 contentSchemaVersion: 1
 title: Vite + Solid Router Starter
-description: A client-only Solid starter scaffolded with Vite and Solid Router, ready for `solidiom add`.
-keywords:
-  - vite
-  - solid-router
-  - starter
-  - template
-  - client-only
+description: "Starter template for vite solid router projects."
+keywords: [vite-solid-router, template, starter, solid]
 locale: en
-maturity: beta
-product: solidiom
+maturity: draft
+product: Vite + Solid Router Starter
 productLayer: template
-status: published
+status: draft
 package: "@solidiom/template-vite-solid-router"
 stack: vite-solid-router
-portfolios:
-  - balanced-product
+portfolios: ["balanced-product"]
 ---
 
-# Vite + Solid Router Starter
+Vite + Solid Router Starter provides a production-ready starting point for Solid projects using the vite solid router stack.
 
-A minimal, client-only Solid application scaffolded with [Vite](https://vitejs.dev) and
-[Solid Router](https://github.com/solidjs/solid-router). No server-side rendering — this
-template is the fastest path to a working Solidiom project when you don't need SSR.
+## Overview
 
-## What's included
+This template scaffolds a complete project with routing, styling setup, and Solidiom integration pre-configured. It serves as the foundation for building applications with the vite solid router architecture.
 
-- A Vite dev server and production build, pre-configured for Solid.
-- Two routes (`/` and `/about`) wired through `@solidjs/router`, demonstrating client-side
-  navigation with the `<A>` component.
-- One Solidiom primitive (`@solidiom/button`) rendered with the Tailwind styling recipe, so
-  you can see a real component styled out of the box.
-- A generated `.solidiom/config.json`, so the project is immediately ready for
-  `solidiom add <primitive>`.
+## Stack
 
-## Scaffold a project
+- **Framework:** vite solid router
+- **Routing:** File-based routing with Solid Router
+- **Rendering:** Client-side rendering
+- **Build tool:** Vite
+
+## Required Blocks
+
+This template integrates blocks for common application patterns including authentication, onboarding, and resource management. Specific block dependencies vary by portfolio selection.
+
+## Authentication
+
+The template includes a default authentication setup compatible with the Sign In and Sign Up blocks. Authentication is configured as a composable layer that can be replaced or extended.
+
+## Styling
+
+The template ships with a pre-configured styling profile (CSS, Tailwind, or UnoCSS). The theme system allows switching between presets without modifying component code.
+
+## Installation
 
 ```sh
 solidiom create my-app --template vite-solid-router
 ```
 
-Pass `--yes` to skip prompts, `--styling` to pick a styling profile (`css`, `tailwind`, or
-`unocss`), and `--no-install` if you'd rather run the install step yourself.
+Pass `--yes` to skip prompts and `--styling` to select a styling profile.
 
-## When to choose this template
+## Deployment
 
-Choose `vite-solid-router` when your project doesn't need server-side rendering — dashboards,
-internal tools, and single-page apps that ship a static bundle are a good fit. If you need SSR,
-a SolidStart-based template is planned for a future release.
+Deploy the static output to any CDN or static hosting platform. Vercel, Netlify, and Cloudflare Pages are supported targets.

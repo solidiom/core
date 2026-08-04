@@ -62,8 +62,15 @@ const allRoutes = new Set([...enRoutes.keys(), ...esRoutes.keys()])
 const missingSpanish = missingValues(enRoutes.keys(), esRoutes)
 const missingEnglish = missingValues(esRoutes.keys(), enRoutes)
 const generatedRouteTemplate = /^\/primitives\/\[name\]\/\[view\]\/$/
+const generatedCatalogRouteTemplate =
+  /^\/(components|blocks|templates|themes)\/\[name\](\/\[view\])?\/?$/
 const unregisteredRoutes = [...allRoutes]
-  .filter((route) => !isLocalizedRoute(route) && !generatedRouteTemplate.test(route))
+  .filter(
+    (route) =>
+      !isLocalizedRoute(route) &&
+      !generatedRouteTemplate.test(route) &&
+      !generatedCatalogRouteTemplate.test(route),
+  )
   .sort()
 const unimplementedRegistryRoutes = [...registeredRoutes]
   .filter((route) => !enRoutes.has(route) || !esRoutes.has(route))
@@ -73,7 +80,8 @@ const translatedMetadataErrors = [...esRoutes.entries()].flatMap(([pathname, rou
   const source = readFileSync(join(esPagesRoot, routeFile), "utf8")
   const layoutInvocation = source.match(/<BaseLayout\b[\s\S]*?>/)
   const generatedCatalogRoute =
-    /<(PrimitiveRoute|PrimitiveDirectory)\b[\s\S]*?locale=["']es["']/.test(source)
+    /<(PrimitiveRoute|PrimitiveDirectory)\b[\s\S]*?locale=["']es["']/.test(source) ||
+    /<(CatalogRoute|CatalogDirectory)\b[\s\S]*?>/.test(source)
   if (generatedCatalogRoute) return []
   if (!layoutInvocation) {
     return [`${pathname}: does not render BaseLayout or a localized catalog layout`]
