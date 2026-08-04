@@ -45,6 +45,21 @@ const VIOLATION_PATTERNS = [
   { pattern: /\.setAttribute\(\s*["']style["']/, reason: "Sets style via setAttribute" },
 ]
 
+/**
+ * Source files whose styling this audit is about.
+ *
+ * Tests are excluded. The audit asserts that shipped adapter code emits no class
+ * or style attributes, and a conformance suite necessarily contains the opposite
+ * as fixture material: packages/adapter-kit/src/conformance.test.ts embeds
+ * `return { className: "btn-primary" }` inside a template literal as a
+ * deliberate negative case, which this scanner reported as a real violation.
+ * Scanning tests measures the test's inputs rather than the adapter's output.
+ */
+function isScannable(fileName: string): boolean {
+  if (!fileName.endsWith(".ts") && !fileName.endsWith(".tsx")) return false
+  return !/\.(test|spec)\.tsx?$/.test(fileName)
+}
+
 function scanFile(filePath: string, adapterName: string): Violation[] {
   const violations: Violation[] = []
   const content = readFileSync(filePath, "utf8")
@@ -86,7 +101,7 @@ function scanAdapter(dir: string, name: string): Violation[] {
     for (const entry of readdirSync(d, { withFileTypes: true })) {
       const full = join(d, entry.name)
       if (entry.isDirectory()) walk(full)
-      else if (entry.name.endsWith(".ts") || entry.name.endsWith(".tsx")) {
+      else if (isScannable(entry.name)) {
         violations.push(...scanFile(full, name))
       }
     }
@@ -112,6 +127,15 @@ function main() {
 
   // Write report (the writer creates the directory)
   const lines = [
+    "---",
+    "id: adapter-styling-audit",
+    'title: "Adapter Styling Audit — Generated Report"',
+    "doc_type: generated",
+    'audience: "Solidiom contributors"',
+    "tags: [adapters, audit, generated]",
+    "lifecycle: current",
+    "---",
+    "",
     "# Adapter Styling Audit",
     "",
     `Generated: ${new Date().toISOString()}`,
