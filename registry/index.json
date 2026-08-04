@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-04T20:18:39.000Z",
+  "generatedAt": "2025-01-01T00:00:00.000Z",
   "integrity": {
     "algorithm": "sha256",
     "entriesHash": "503067c6b2bb9e7e81286953d8080d2648a1a59e184ccc61c3bbf075df414897"
@@ -2518,10 +2518,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2548,10 +2551,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2578,10 +2584,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2608,10 +2617,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2638,10 +2650,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2668,10 +2683,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2698,10 +2716,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2728,10 +2749,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2758,10 +2782,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2788,10 +2815,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2818,10 +2848,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2848,10 +2881,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2878,10 +2914,13 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "documentationLocales": {
         "en": {
-          "status": "missing"
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
         }
       },
       "stylingOutputs": [
