@@ -30,18 +30,21 @@
         "src/recipes/toast.tsx": "c86956d011fe2ae9254887d55da3332e7ebabadfe016d29af6180303096e3032"
       }
     },
-    "lastGenerated": "2026-08-04T20:18:39.000Z"
+    "lastGenerated": "2026-08-04T22:19:05.000Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "review",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
   "dependencies": [
     "@solidiom/toast"
   ],
-  "lastUpdated": "2026-08-04T20:18:39.000Z"
+  "lastUpdated": "2026-08-04T22:19:05.000Z"
 }

@@ -50,10 +50,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled accordion component — the recipe wrapper for the css, tailwind, unocss profile(s) using the accordion primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Accordion",
       "name": "accordion",
       "package": "@solidiom/recipes-css",
@@ -80,10 +83,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled alert component — the recipe wrapper for the css, tailwind, unocss profile(s) using the alert primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Alert",
       "name": "alert",
       "package": "@solidiom/recipes-css",
@@ -110,10 +116,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled badge component — the recipe wrapper for the css, tailwind, unocss profile(s) using the badge primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Badge",
       "name": "badge",
       "package": "@solidiom/recipes-css",
@@ -140,10 +149,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled button component — the recipe wrapper for the css, tailwind, unocss profile(s) using the button primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Button",
       "name": "button",
       "package": "@solidiom/recipes-css",
@@ -170,10 +182,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled checkbox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the checkbox primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Checkbox",
       "name": "checkbox",
       "package": "@solidiom/recipes-css",
@@ -200,10 +215,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled dialog component — the recipe wrapper for the css, tailwind, unocss profile(s) using the dialog primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Dialog",
       "name": "dialog",
       "package": "@solidiom/recipes-css",
@@ -230,10 +248,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the menu primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Menu",
       "name": "menu",
       "package": "@solidiom/recipes-css",
@@ -260,10 +281,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled popover component — the recipe wrapper for the css, tailwind, unocss profile(s) using the popover primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Popover",
       "name": "popover",
       "package": "@solidiom/recipes-css",
@@ -290,10 +314,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled select component — the recipe wrapper for the css, tailwind, unocss profile(s) using the select primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Select",
       "name": "select",
       "package": "@solidiom/recipes-css",
@@ -320,10 +347,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled switch component — the recipe wrapper for the css, tailwind, unocss profile(s) using the switch primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Switch",
       "name": "switch",
       "package": "@solidiom/recipes-css",
@@ -350,10 +380,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled tabs component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tabs primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Tabs",
       "name": "tabs",
       "package": "@solidiom/recipes-css",
@@ -380,10 +413,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled toast component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toast primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Toast",
       "name": "toast",
       "package": "@solidiom/recipes-css",
@@ -410,10 +446,13 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "description": "Styled tooltip component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tooltip primitive.",
       "documentationLocales": {
         "en": {
-          "status": "missing",
+          "status": "draft",
+        },
+        "es": {
+          "status": "draft",
         },
       },
-      "documentationStatus": "stub",
+      "documentationStatus": "review",
       "label": "Tooltip",
       "name": "tooltip",
       "package": "@solidiom/recipes-css",

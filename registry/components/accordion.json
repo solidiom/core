@@ -30,18 +30,21 @@
         "src/recipes/accordion.tsx": "22b23e8056df11c32a0131bff3296b8a31e9b61ec0894ea5c6fd0e92d63460e6"
       }
     },
-    "lastGenerated": "2026-08-04T20:18:39.000Z"
+    "lastGenerated": "2026-08-04T22:19:05.000Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "review",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
   "dependencies": [
     "@solidiom/accordion"
   ],
-  "lastUpdated": "2026-08-04T20:18:39.000Z"
+  "lastUpdated": "2026-08-04T22:19:05.000Z"
 }

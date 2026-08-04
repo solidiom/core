@@ -30,18 +30,21 @@
         "src/recipes/checkbox.tsx": "cc7d17a3b9524fed5a57818b2569b663c2dda363e2009737455c70f5e0410410"
       }
     },
-    "lastGenerated": "2026-08-04T20:18:39.000Z"
+    "lastGenerated": "2026-08-04T22:19:05.000Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "review",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
   "dependencies": [
     "@solidiom/checkbox"
   ],
-  "lastUpdated": "2026-08-04T20:18:39.000Z"
+  "lastUpdated": "2026-08-04T22:19:05.000Z"
 }

@@ -30,18 +30,21 @@
         "src/recipes/button.tsx": "49db8c6a779d42418a736fb79d481fcd9e10b4fd60e4059edffd5edb50e5a66e"
       }
     },
-    "lastGenerated": "2026-08-04T20:18:39.000Z"
+    "lastGenerated": "2026-08-04T22:19:05.000Z"
   },
   "documentation": {
-    "status": "stub",
+    "status": "review",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
   "dependencies": [
     "@solidiom/button"
   ],
-  "lastUpdated": "2026-08-04T20:18:39.000Z"
+  "lastUpdated": "2026-08-04T22:19:05.000Z"
 }
