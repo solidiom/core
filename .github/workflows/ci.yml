@@ -377,13 +377,18 @@ jobs:
   #
   # Regenerate baselines with `pnpm run visual:update:container` locally, or by
   # dispatching .github/workflows/visual-baselines.yml if Docker is unavailable.
+  # Blocking as of run 30871761546, the first in which it executed and passed.
+  # It was advisory while the committed baselines were captured on macOS and
+  # could not reproduce here — and being advisory is how a 36-baseline mismatch
+  # went unnoticed for several commits, since an advisory failure reads much like
+  # an advisory pass in a run summary (§11). With the environment pinned there is
+  # no longer a platform excuse for a diff, so a diff should fail the build.
   site-visual:
     needs: site-build
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.61.1-noble
       options: --ipc=host
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v6
