@@ -18,5 +18,14 @@ export default defineConfig({
     ],
     exclude: ["**/*.browser.{test,spec}.*", "packages/*/source/**", "**/node_modules/**"],
     environment: "node",
+    // Several tools tests drive real generators against the real tree —
+    // registry-build.test.ts shells out to registry-build.ts, which hashes
+    // packages/*/source, while emit-package-source.test.ts rewrites exactly
+    // those files. Run in parallel they race, and the symptom is an
+    // intermittent failure in "produces byte-identical output on repeated
+    // runs" that looks like a determinism bug rather than a test-isolation
+    // one. Serial execution costs a few seconds here and removes a class of
+    // flake that is far more expensive to diagnose in CI.
+    fileParallelism: false,
   },
 })
