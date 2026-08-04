@@ -9,9 +9,9 @@ lifecycle: current
 
 # Adapter Styling Audit
 
-Generated: 2026-07-22
+Generated: 2026-08-04T04:41:39.958Z
 
-Scanned 5 adapter package(s): adapter-carousel-embla, adapter-date-internationalized, adapter-positioning-floating-ui, adapter-positioning-minimal, adapter-table-tanstack, adapter-virtualization-tanstack
+Scanned 7 adapter package(s): adapter-carousel-embla, adapter-date-internationalized, adapter-kit, adapter-positioning-floating-ui, adapter-positioning-minimal, adapter-table-tanstack, adapter-virtualization-tanstack
 
 ## Summary
 

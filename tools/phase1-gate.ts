@@ -524,5 +524,25 @@ check(
   `expected IMAGE_TAG="v${pinnedPlaywright}-noble" in tools/visual-container.sh`,
 )
 
+// ─── 14. A11Y-010: adapters emit no styling ─────────────────────────────
+//
+// The audit existed but nothing ran it: no package.json script, no workflow job,
+// and acceptance-criteria.ts §78 asserted only that the file exists. Six weeks of
+// drift accumulated unseen — the committed report claimed 5 adapters scanned and
+// zero violations while the generator found 7 and one violation.
+console.log("\n§13 Adapter styling audit (A11Y-010):")
+check("audit-adapter-styling.ts exists", fileExists("tools/audit-adapter-styling.ts"))
+const adapterStylingResult = run("pnpm exec tsx tools/audit-adapter-styling.ts")
+check(
+  "no adapter sets class or style attributes",
+  adapterStylingResult.ok,
+  "An adapter emits styling, or the committed report is stale — run: pnpm run audit:adapter-styling",
+)
+check(
+  "the committed adapter styling report is current",
+  run("git diff --quiet -- docs/evidence/adapter-styling-audit.md").ok,
+  "docs/evidence/adapter-styling-audit.md differs from generated output — regenerate and commit it",
+)
+
 // ─── Summary ────────────────────────────────────────────────────────────
 summarize("Phase 1 Gate")
