@@ -39,11 +39,7 @@ const breadcrumbItems = [
 ]
 ---
 
-<DocsLayout
-  title={copy.directoryTitle}
-  description={copy.directoryDescription}
-  contentType={layer}
->
+<DocsLayout title={copy.directoryTitle} description={copy.directoryDescription} contentType={layer}>
   <CatalogBreadcrumbs
     label={seoCopy.breadcrumbs}
     items={breadcrumbItems.map((item, index) => ({
@@ -54,15 +50,13 @@ const breadcrumbItems = [
   <header class="primitive-directory__header">
     <h1>{copy.directoryTitle}</h1>
     <p>{copy.directoryDescription}</p>
-    {sortedEntries.length > 0 && (
-      <p class="primitive-directory__count">{countLabel}</p>
-    )}
+    {sortedEntries.length > 0 && <p class="primitive-directory__count">{countLabel}</p>}
   </header>
 
-  {sortedEntries.length > 0 ? (
-    <ul class="primitive-directory__grid" data-pagefind-ignore="index">
-      {
-        sortedEntries.map((entry) => (
+  {
+    sortedEntries.length > 0 ? (
+      <ul class="primitive-directory__grid" data-pagefind-ignore="index">
+        {sortedEntries.map((entry) => (
           <li class="primitive-directory__item">
             <a href={entry.href} class="primitive-directory__link">
               <span class="primitive-directory__name">{entry.label}</span>
@@ -72,10 +66,12 @@ const breadcrumbItems = [
               </span>
             </a>
           </li>
-        ))
-      }
-    </ul>
-  ) : (
-    <p class="catalog-notice" role="status">No entries available yet.</p>
-  )}
+        ))}
+      </ul>
+    ) : (
+      <p class="catalog-notice" role="status">
+        No entries available yet.
+      </p>
+    )
+  }
 </DocsLayout>
