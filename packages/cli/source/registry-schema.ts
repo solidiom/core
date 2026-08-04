@@ -1,5 +1,5 @@
 /**
- * Registry v2 schema + versioned reader shared by CLI commands.
+ * Registry v3 schema + versioned reader shared by CLI commands.
  *
  * REG-004: centralizes the schema-version guard so every command that reads
  * registry/index.json or a per-primitive manifest fails closed on an
@@ -11,12 +11,12 @@ import { readFileSync } from "node:fs"
 import { z } from "zod"
 
 /** The only registry index schema version this CLI build understands. */
-export const SUPPORTED_REGISTRY_INDEX_VERSION = 2 as const
+export const SUPPORTED_REGISTRY_INDEX_VERSION = 3 as const
 
 /** The only per-primitive manifest schema this CLI build understands. */
 export const SUPPORTED_MANIFEST_SCHEMA_URL =
   "https://solidiom.dev/schemas/registry-manifest/v2.json"
-export const SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v2.json"
+export const SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v3.json"
 
 /** Product-layer deliverable kinds a package/manifest may declare (CLI-002). */
 export const DELIVERABLES = ["primitive", "component", "block", "template", "theme"] as const
@@ -114,6 +114,61 @@ const registryAdapterSchema = z.object({
   version: z.string().min(1),
 })
 
+const registryComponentSummarySchema = z.object({
+  name: z.string().min(1),
+  version: z.string().min(1),
+  package: z.string().regex(/^@solidiom\//),
+  label: z.string().min(1),
+  description: z.string(),
+  status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
+  deliverables: z.array(deliverableSchema),
+  documentationStatus: z.enum(["stub", "draft", "review", "complete"]),
+  documentationLocales: z.record(documentationLocaleSchema),
+  stylingOutputs: z.array(stylingProfileSchema),
+  primitiveDependency: z.string().min(1),
+  searchKeywords: z.array(z.string()),
+})
+
+const registryBlockSummarySchema = z.object({
+  name: z.string().min(1),
+  version: z.string().min(1),
+  package: z.string().regex(/^@solidiom\//),
+  label: z.string().min(1),
+  description: z.string(),
+  status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
+  deliverables: z.array(deliverableSchema),
+  documentationStatus: z.enum(["stub", "draft", "review", "complete"]),
+  documentationLocales: z.record(documentationLocaleSchema),
+  componentDependencies: z.array(z.string()),
+  searchKeywords: z.array(z.string()),
+})
+
+const registryTemplateSummarySchema = z.object({
+  name: z.string().min(1),
+  version: z.string().min(1),
+  package: z.string().regex(/^@solidiom\//),
+  label: z.string().min(1),
+  description: z.string(),
+  status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
+  deliverables: z.array(deliverableSchema),
+  documentationStatus: z.enum(["stub", "draft", "review", "complete"]),
+  documentationLocales: z.record(documentationLocaleSchema),
+  searchKeywords: z.array(z.string()),
+})
+
+const registryThemeSummarySchema = z.object({
+  name: z.string().min(1),
+  version: z.string().min(1),
+  package: z.string().regex(/^@solidiom\//),
+  label: z.string().min(1),
+  description: z.string(),
+  status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
+  deliverables: z.array(deliverableSchema),
+  documentationStatus: z.enum(["stub", "draft", "review", "complete"]),
+  documentationLocales: z.record(documentationLocaleSchema),
+  searchKeywords: z.array(z.string()),
+})
+
 export const registryIndexSchema = z.object({
   $schema: z.literal(SUPPORTED_INDEX_SCHEMA_URL),
   version: z.literal(SUPPORTED_REGISTRY_INDEX_VERSION),
@@ -121,6 +176,10 @@ export const registryIndexSchema = z.object({
   integrity: integritySchema,
   primitives: z.array(registryPrimitiveSummarySchema),
   adapters: z.array(registryAdapterSchema),
+  components: z.array(registryComponentSummarySchema),
+  blocks: z.array(registryBlockSummarySchema),
+  templates: z.array(registryTemplateSummarySchema),
+  themes: z.array(registryThemeSummarySchema),
 })
 
 export type RegistryIndex = z.infer<typeof registryIndexSchema>
