@@ -41,10 +41,16 @@ const PACKAGE_DIR = join(ROOT, "packages/recipes-tailwind")
 const STYLES_DIR = join(PACKAGE_DIR, "src/styles")
 const RECIPES_DIR = join(PACKAGE_DIR, "src/recipes")
 
-/** Class prefix used for this profile's variant/compound selectors — same names as CSS. */
-const CLASS_PREFIXES: Readonly<Record<string, string>> = {
+/**
+ * Class prefix exceptions (D5). The default is `solidiom-<scope>`. Only override
+ * for scopes where the prefix differs from the scope name.
+ */
+const CLASS_PREFIX_EXCEPTIONS: Readonly<Record<string, string>> = {
   button: "solidiom-btn",
-  badge: "solidiom-badge",
+}
+
+function getClassPrefix(scope: string): string {
+  return CLASS_PREFIX_EXCEPTIONS[scope] ?? `solidiom-${scope}`
 }
 
 /** Stylesheets that ship in this package but have no canonical definition or are hand-maintained. */
@@ -108,7 +114,7 @@ function withPseudoVariant(utility: string, condition: { kind: string; pseudo?: 
 
 function renderStylesheet(scope: string, definition: RecipeDefinition): string {
   const rules = resolveRules(definition, "tailwind")
-  const prefix = CLASS_PREFIXES[scope]
+  const prefix = getClassPrefix(scope)
 
   // Group by selector, in first-seen order, so a base rule and its :hover/:focus-visible
   // pseudo rules (which share the same selector — Tailwind expresses the pseudo as a

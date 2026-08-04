@@ -655,8 +655,30 @@ jobs:
 
   # ─── Gate Jobs ─────────────────────────────────────────────────────────────────
 
+  catalog-gates:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - uses: actions/cache/restore@v5
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+            tests/*/node_modules
+          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run component:catalog-gate
+      - run: pnpm run block:catalog-gate
+
   phase1-gate:
-    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e]
+    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e, catalog-gates]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

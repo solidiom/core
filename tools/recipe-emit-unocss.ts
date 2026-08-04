@@ -49,10 +49,16 @@ const STYLES_DIR = join(PACKAGE_DIR, "src/styles")
 const RECIPES_DIR = join(PACKAGE_DIR, "src/recipes")
 const PRESET_DIR = join(ROOT, "packages/unocss-preset/src")
 
-/** Class prefix used for this profile's variant/compound selectors — same names as CSS/Tailwind. */
-const CLASS_PREFIXES: Readonly<Record<string, string>> = {
+/**
+ * Class prefix exceptions (D5). The default is `solidiom-<scope>`. Only override
+ * for scopes where the prefix differs from the scope name.
+ */
+const CLASS_PREFIX_EXCEPTIONS: Readonly<Record<string, string>> = {
   button: "solidiom-btn",
-  badge: "solidiom-badge",
+}
+
+function getClassPrefix(scope: string): string {
+  return CLASS_PREFIX_EXCEPTIONS[scope] ?? `solidiom-${scope}`
 }
 
 function cssDeclarationBlock(declarations: Readonly<Record<string, string>>): string {
@@ -63,7 +69,7 @@ function cssDeclarationBlock(declarations: Readonly<Record<string, string>>): st
 
 function renderStylesheet(scope: string, definition: RecipeDefinition): string {
   const rules = resolveRules(definition, "unocss")
-  const prefix = CLASS_PREFIXES[scope]
+  const prefix = getClassPrefix(scope)
   const blocks: string[] = []
 
   for (const rule of rules) {
@@ -79,12 +85,7 @@ function renderStylesheet(scope: string, definition: RecipeDefinition): string {
 function renderVariantsModule(scope: string, definition: RecipeDefinition): string | null {
   const axes = definition.variants
   if (!axes || axes.length === 0) return null
-  const prefix = CLASS_PREFIXES[scope]
-  if (!prefix) {
-    throw new Error(
-      `scope "${scope}" declares variants but has no CLASS_PREFIXES entry in tools/recipe-emit-unocss.ts`,
-    )
-  }
+  const prefix = getClassPrefix(scope)
 
   const rules = resolveRules(definition, "unocss")
   const seenClasses = new Set<string>()
@@ -178,8 +179,8 @@ function renderPresetRules(): string {
   const seen = new Set<string>()
 
   for (const [scope, definition] of Object.entries(REFERENCE_DEFINITIONS)) {
-    const prefix = CLASS_PREFIXES[scope]
-    if (!prefix || !definition.variants || definition.variants.length === 0) continue
+    const prefix = getClassPrefix(scope)
+    if (!definition.variants || definition.variants.length === 0) continue
 
     for (const rule of resolveRules(definition, "unocss")) {
       if (rule.condition.kind !== "variant" && rule.condition.kind !== "compound") continue

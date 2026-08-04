@@ -33,10 +33,17 @@ const PACKAGE_DIR = join(ROOT, "packages/recipes-css")
 const STYLES_DIR = join(PACKAGE_DIR, "src/styles")
 const RECIPES_DIR = join(PACKAGE_DIR, "src/recipes")
 
-/** Class prefix used for this profile's variant/compound selectors, e.g. `solidiom-btn`. */
-const CLASS_PREFIXES: Readonly<Record<string, string>> = {
+/**
+ * Class prefix exceptions (D5). The default is `solidiom-<scope>`. Only override
+ * for scopes where the prefix differs from the scope name. `button` uses `btn`
+ * rather than `button` as its prefix class.
+ */
+const CLASS_PREFIX_EXCEPTIONS: Readonly<Record<string, string>> = {
   button: "solidiom-btn",
-  badge: "solidiom-badge",
+}
+
+function getClassPrefix(scope: string): string {
+  return CLASS_PREFIX_EXCEPTIONS[scope] ?? `solidiom-${scope}`
 }
 
 /** Stylesheets that ship in this package but have no canonical definition (composite scopes). */
@@ -58,7 +65,7 @@ function cssDeclarationBlock(declarations: Readonly<Record<string, string>>): st
  */
 function renderStylesheet(scope: string, definition: RecipeDefinition): string {
   const rules = resolveRules(definition, "css")
-  const prefix = CLASS_PREFIXES[scope]
+  const prefix = getClassPrefix(scope)
   const blocks: string[] = []
 
   for (const rule of rules) {
@@ -83,12 +90,7 @@ function renderStylesheet(scope: string, definition: RecipeDefinition): string {
 function renderVariantsModule(scope: string, definition: RecipeDefinition): string | null {
   const axes = definition.variants
   if (!axes || axes.length === 0) return null
-  const prefix = CLASS_PREFIXES[scope]
-  if (!prefix) {
-    throw new Error(
-      `scope "${scope}" declares variants but has no CLASS_PREFIXES entry in tools/recipe-emit-css.ts`,
-    )
-  }
+  const prefix = getClassPrefix(scope)
 
   const rules = resolveRules(definition, "css")
   const seenClasses = new Set<string>()
