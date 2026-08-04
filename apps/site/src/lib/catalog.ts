@@ -344,7 +344,7 @@ function readJson(path: string): unknown {
 function isRegistryIndex(value: unknown): value is RegistryIndex {
   if (!value || typeof value !== "object") return false
   const index = value as Partial<RegistryIndex>
-  return index.version === 2 && Array.isArray(index.primitives)
+  return (index.version === 2 || index.version === 3) && Array.isArray(index.primitives)
 }
 
 function isRegistryManifest(value: unknown): value is RegistryManifest {
@@ -527,4 +527,194 @@ export function getAccessibilityEvidence(name: string): AccessibilityEvidence | 
     isAccessibilityEvidence(artifact)
     ? artifact
     : undefined
+}
+
+// ─── Content-collection-based catalog helpers ────────────────────────────────
+
+/**
+ * Extracts the entry name (filename without extension) from a content
+ * collection entry id like "en/components/button" → "button".
+ */
+export function entryName(id: string): string {
+  const basename = id.split("/").pop() ?? id
+  return basename.replace(/\.(md|mdx)$/, "")
+}
+
+/** Catalog view labels shared by all content-collection layers. */
+export type CatalogView = "overview" | "api" | "examples" | "accessibility"
+
+export const CATALOG_VIEWS: ReadonlyArray<Exclude<CatalogView, "overview">> = [
+  "api",
+  "examples",
+  "accessibility",
+] as const
+
+export interface ContentCatalogEntry {
+  name: string
+  label: string
+  description: string
+  status: string
+}
+
+/**
+ * Catalog copy shared across components, blocks, templates, themes.
+ * Loaded per-locale at runtime.
+ */
+export interface LayerCatalogCopy {
+  directoryTitle: string
+  directoryDescription: string
+  directoryCount: string
+  overview: string
+  api: string
+  examples: string
+  accessibility: string
+  preview: string
+  package: string
+  status: string
+  none: string
+  apiUnavailable: string
+  examplesUnavailable: string
+  accessibilityUnavailable: string
+  generatedFrom: string
+  tabsLabel: string
+}
+
+const LAYER_COPY: Record<Locale, LayerCatalogCopy> = {
+  en: {
+    directoryTitle: "Components",
+    directoryDescription:
+      "Styled recipe wrappers that compose primitives with layout, semantic styling slots, and variant support.",
+    directoryCount: "{count} components",
+    overview: "Overview",
+    api: "API",
+    examples: "Examples",
+    accessibility: "Accessibility",
+    preview: "Preview",
+    package: "Package",
+    status: "Status",
+    none: "None",
+    apiUnavailable: "Generated API reference is not available yet.",
+    examplesUnavailable: "Examples will be published with reviewed documentation.",
+    accessibilityUnavailable: "Accessibility guidance will be published after review.",
+    generatedFrom: "Generated from the package's public source.",
+    tabsLabel: "{name} documentation",
+  },
+  es: {
+    directoryTitle: "Componentes",
+    directoryDescription:
+      "Envoltorios de receta con estilo que componen primitivas con diseño, ranuras semánticas y soporte de variantes.",
+    directoryCount: "{count} componentes",
+    overview: "Resumen",
+    api: "API",
+    examples: "Ejemplos",
+    accessibility: "Accesibilidad",
+    preview: "Vista previa",
+    package: "Paquete",
+    status: "Estado",
+    none: "Ninguna",
+    apiUnavailable: "La referencia de API generada aún no está disponible.",
+    examplesUnavailable:
+      "Los ejemplos se publicarán con la documentación revisada.",
+    accessibilityUnavailable:
+      "La guía de accesibilidad se publicará después de la revisión.",
+    generatedFrom: "Generado a partir del código fuente público del paquete.",
+    tabsLabel: "Documentación de {name}",
+  },
+}
+
+/**
+ * Returns layer-specific directory copy. "components" uses the default; other
+ * layers get their title/description overridden from LAYER_DIRECTORY_COPY.
+ */
+export function getLayerCopy(locale: Locale, layer: CatalogLayer): LayerCatalogCopy {
+  const base = { ...LAYER_COPY[locale] }
+  const override = LAYER_DIRECTORY_COPY[layer]?.[locale]
+  if (override) {
+    Object.assign(base, override)
+  }
+  return base
+}
+
+export type CatalogLayer = "components" | "blocks" | "templates" | "themes"
+
+const LAYER_DIRECTORY_COPY: Record<
+  CatalogLayer,
+  Partial<Record<Locale, Pick<LayerCatalogCopy, "directoryTitle" | "directoryDescription" | "directoryCount">>>
+> = {
+  components: {},
+  blocks: {
+    en: {
+      directoryTitle: "Blocks",
+      directoryDescription:
+        "Composable UI blocks that orchestrate multiple components into domain-specific workflows.",
+      directoryCount: "{count} blocks",
+    },
+    es: {
+      directoryTitle: "Bloques",
+      directoryDescription:
+        "Bloques de UI componibles que orquestan múltiples componentes en flujos de trabajo específicos del dominio.",
+      directoryCount: "{count} bloques",
+    },
+  },
+  templates: {
+    en: {
+      directoryTitle: "Templates",
+      directoryDescription:
+        "Production-ready starter templates that scaffold complete projects with Solidiom integration.",
+      directoryCount: "{count} templates",
+    },
+    es: {
+      directoryTitle: "Plantillas",
+      directoryDescription:
+        "Plantillas de inicio listas para producción que crean proyectos completos con integración de Solidiom.",
+      directoryCount: "{count} plantillas",
+    },
+  },
+  themes: {
+    en: {
+      directoryTitle: "Themes",
+      directoryDescription:
+        "Preset theme configurations with semantic color palettes, typography scales, and design tokens.",
+      directoryCount: "{count} themes",
+    },
+    es: {
+      directoryTitle: "Temas",
+      directoryDescription:
+        "Configuraciones de temas predefinidos con paletas semánticas, escalas tipográficas y tokens de diseño.",
+      directoryCount: "{count} temas",
+    },
+  },
+}
+
+/** Build-time static paths for a content-collection layer route. */
+export function getLayerStaticPaths(
+  _collectionName: "components" | "blocks" | "templates" | "themes",
+  _locale: Locale,
+): Array<{
+  params: { name: string }
+  props: { collectionName: string; entryId: string; name: string; locale: Locale }
+}> {
+  return []
+}
+
+/** Build-time static paths for a content-collection layer view route. */
+export function getLayerViewStaticPaths(
+  _collectionName: "components" | "blocks" | "templates" | "themes",
+  _locale: Locale,
+): Array<{
+  params: { name: string; view: Exclude<CatalogView, "overview"> }
+  props: { collectionName: string; entryId: string; name: string; locale: Locale }
+}> {
+  return []
+}
+
+export function layerHref(
+  layer: CatalogLayer,
+  name: string,
+  locale: Locale,
+  view: CatalogView = "overview",
+): string {
+  const prefix = locale === "es" ? "/es" : ""
+  const suffix = view === "overview" ? "" : `/${view}`
+  return `${prefix}/${layer}/${name}${suffix}/`
 }

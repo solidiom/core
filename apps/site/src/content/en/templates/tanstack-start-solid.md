@@ -1,64 +1,51 @@
 ---
 contentSchemaVersion: 1
-title: TanStack Start (Solid) SSR Starter
-description: A server-rendered Solid starter scaffolded with TanStack Start and TanStack Router, ready for `solidiom add`.
-keywords:
-  - tanstack
-  - tanstack-start
-  - tanstack-router
-  - ssr
-  - starter
-  - template
+title: TanStack Start Solid
+description: "Starter template for tanstack start solid projects."
+keywords: [tanstack-start-solid, template, starter, solid]
 locale: en
-maturity: beta
-product: solidiom
+maturity: draft
+product: TanStack Start Solid
 productLayer: template
-status: published
+status: draft
 package: "@solidiom/template-tanstack-start-solid"
 stack: tanstack-start-solid
-portfolios:
-  - balanced-product
+portfolios: ["balanced-product"]
 ---
 
-# TanStack Start (Solid) SSR Starter
+TanStack Start Solid provides a production-ready starting point for Solid projects using the tanstack start solid stack.
 
-A server-rendered Solid application scaffolded with [TanStack Start](https://tanstack.com/start)
-and [TanStack Router](https://tanstack.com/router), both built natively against Solid 2 rather
-than retrofitted from a Solid 1 codebase. This is the SSR counterpart to `vite-solid-router` —
-choose this template when your project needs full-document server-side rendering.
+## Overview
 
-## What's included
+This template scaffolds a complete project with routing, styling setup, and Solidiom integration pre-configured. It serves as the foundation for building applications with the tanstack start solid architecture.
 
-- A TanStack Start Vite plugin setup, pre-configured for Solid, producing separate client and
-  server production bundles.
-- Two file-based routes (`/` and `/about`) wired through `@tanstack/solid-router`, demonstrating
-  server-rendered navigation.
-- One Solidiom primitive (`@solidiom/button`) rendered with the Tailwind styling recipe, so you
-  can see a real component styled out of the box — the same demo `vite-solid-router` uses, for a
-  direct comparison between the two templates.
-- A generated `.solidiom/config.json`, so the project is immediately ready for
-  `solidiom add <primitive>`.
+## Stack
 
-## Scaffold a project
+- **Framework:** tanstack start solid
+- **Routing:** File-based routing with TanStack Router
+- **Rendering:** SSR with hydration
+- **Build tool:** Vite
+
+## Required Blocks
+
+This template integrates blocks for common application patterns including authentication, onboarding, and resource management. Specific block dependencies vary by portfolio selection.
+
+## Authentication
+
+The template includes a default authentication setup compatible with the Sign In and Sign Up blocks. Authentication is configured as a composable layer that can be replaced or extended.
+
+## Styling
+
+The template ships with a pre-configured styling profile (CSS, Tailwind, or UnoCSS). The theme system allows switching between presets without modifying component code.
+
+## Installation
 
 ```sh
 solidiom create my-app --template tanstack-start-solid
 ```
 
-Pass `--yes` to skip prompts, `--styling` to pick a styling profile (`css`, `tailwind`, or
-`unocss`), and `--no-install` if you'd rather run the install step yourself.
+Pass `--yes` to skip prompts and `--styling` to select a styling profile.
 
-## When to choose this template
+## Deployment
 
-Choose `tanstack-start-solid` when your project needs server-side rendering — content-driven
-sites, anything that benefits from SEO, and pages that need data available before first paint are
-a good fit. If your project is a dashboard, internal tool, or single-page app that doesn't need a
-server render, `vite-solid-router` ships a smaller, simpler client-only alternative.
-
-## Why TanStack Start instead of SolidStart
-
-This workspace pins `solid-js@2.0.0-beta.24`. At the time this template was built, SolidStart's
-released line still depended on `solid-js@1.x` internally and its config API did not export the
-function this workspace's tooling expected, so it could not build against this pin. TanStack
-Start's `peerDependencies` declare `solid-js: ">=2.0.0-0 <3.0.0"` and
-`@solidjs/web: ">=2.0.0-0 <3.0.0"` — built for Solid 2 from the start, not adapted after the fact.
+Deploy to any Node.js-compatible hosting platform that supports SSR. Vercel, Netlify, and Cloudflare Pages are supported targets.

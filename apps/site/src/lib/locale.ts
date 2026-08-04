@@ -34,15 +34,24 @@ export const LOCALIZED_ROUTE_PATHS = [
   "/trademark/",
   "/primitives/",
   "/themes/builder/",
+  "/components/",
+  "/blocks/",
+  "/templates/",
+  "/themes/",
 ] as const
 
 /** Registry-generated primitive routes have a locale counterpart for every entry. */
 const LOCALIZED_PRIMITIVE_ROUTE = /^\/primitives\/[^/]+\/(?:api\/|examples\/|accessibility\/)?$/
 
+/** Content-collection layer routes have a locale counterpart for every entry. */
+const LOCALIZED_CATALOG_ROUTE =
+  /^\/(components|blocks|templates|themes)\/[^/]+\/(?:api\/|examples\/|accessibility\/)?$/
+
 export function isLocalizedRoute(pathname: string): boolean {
   return (
     LOCALIZED_ROUTE_PATHS.includes(pathname as (typeof LOCALIZED_ROUTE_PATHS)[number]) ||
-    LOCALIZED_PRIMITIVE_ROUTE.test(pathname)
+    LOCALIZED_PRIMITIVE_ROUTE.test(pathname) ||
+    LOCALIZED_CATALOG_ROUTE.test(pathname)
   )
 }
 

@@ -1,0 +1,21 @@
+---
+import CatalogRoute from "../../../components/CatalogRoute.astro"
+import { getLayerViewPaths } from "../../../lib/content-catalog"
+
+export function getStaticPaths() {
+  return getLayerViewPaths("themes", "themes", "en")
+}
+
+interface Props {
+  collectionName: "themes"
+  layer: "themes"
+  entryId: string
+  name: string
+  locale: "en"
+  view: "api" | "examples" | "accessibility"
+}
+
+const props = Astro.props
+---
+
+<CatalogRoute {...props} />

@@ -1,70 +1,53 @@
 ---
 contentSchemaVersion: 1
-title: Plantilla inicial de TanStack Start (Solid) con SSR
-description: Una plantilla inicial de Solid renderizada en el servidor, generada con TanStack Start y TanStack Router, lista para `solidiom add`.
-keywords:
-  - tanstack
-  - tanstack-start
-  - tanstack-router
-  - ssr
-  - plantilla
-  - template
+title: TanStack Start Solid
+description: "Plantilla de inicio para proyectos tanstack start solid."
+keywords: [tanstack-start-solid, plantilla, inicio, solid]
 locale: es
-maturity: beta
-product: solidiom
+maturity: draft
+product: TanStack Start Solid
 productLayer: template
-status: published
+status: draft
 package: "@solidiom/template-tanstack-start-solid"
 stack: tanstack-start-solid
-portfolios:
-  - balanced-product
-translationSourceHash: "5a4a61ac1c4e8048a7c2eceedff43378665ebcabd064f9e920c83ae75586ec43"
+portfolios: ["balanced-product"]
+translationSourceHash: "a7d950478aabd5ee5298c77c4203b8bb8bf8a797cedfa169f636824112b6e523"
 translationStatus: draft
 ---
 
-# Plantilla inicial de TanStack Start (Solid) con SSR
+TanStack Start Solid proporciona un punto de partida listo para producción para proyectos Solid usando el stack tanstack start solid.
 
-Una aplicación Solid renderizada en el servidor, generada con [TanStack Start](https://tanstack.com/start)
-y [TanStack Router](https://tanstack.com/router), ambos construidos nativamente para Solid 2 en
-lugar de adaptados desde una base de código de Solid 1. Esta es la contraparte con SSR de
-`vite-solid-router` — elige esta plantilla cuando tu proyecto necesite renderizado completo del
-lado del servidor.
+## Resumen
 
-## Qué incluye
+Esta plantilla crea un proyecto completo con enrutamiento, configuración de estilos e integración con Solidiom pre-configurada. Sirve como base para construir aplicaciones con la arquitectura tanstack start solid.
 
-- Una configuración del plugin de Vite de TanStack Start, preconfigurada para Solid, que produce
-  paquetes de producción independientes para cliente y servidor.
-- Dos rutas basadas en archivos (`/` y `/about`) conectadas mediante `@tanstack/solid-router`,
-  que muestran navegación renderizada en el servidor.
-- Un primitivo de Solidiom (`@solidiom/button`) renderizado con la receta de estilos de Tailwind,
-  para que puedas ver un componente real ya estilizado — la misma demostración que usa
-  `vite-solid-router`, para comparar directamente ambas plantillas.
-- Un archivo `.solidiom/config.json` generado, para que el proyecto esté listo de inmediato para
-  `solidiom add <primitivo>`.
+## Stack
 
-## Genera un proyecto
+- **Framework:** tanstack start solid
+- **Enrutamiento:** Enrutamiento basado en archivos con TanStack Router
+- **Renderizado:** SSR con hidratación
+- **Herramienta de construcción:** Vite
+
+## Bloques requeridos
+
+Esta plantilla integra bloques para patrones comunes de aplicaciones, incluyendo autenticación, incorporación y gestión de recursos. Las dependencias de bloques específicas varían según la selección de portfolio.
+
+## Autenticación
+
+La plantilla incluye una configuración de autenticación predeterminada compatible con los bloques Sign In y Sign Up. La autenticación está configurada como una capa componible que puede reemplazarse o extenderse.
+
+## Estilos
+
+La plantilla se entrega con un perfil de estilo pre-configurado (CSS, Tailwind o UnoCSS). El sistema de temas permite cambiar entre presets sin modificar el código de los componentes.
+
+## Instalación
 
 ```sh
 solidiom create my-app --template tanstack-start-solid
 ```
 
-Pasa `--yes` para omitir las preguntas, `--styling` para elegir un perfil de estilos (`css`,
-`tailwind` o `unocss`), y `--no-install` si prefieres ejecutar el paso de instalación tú mismo.
+Pasa `--yes` para saltar los prompts y `--styling` para seleccionar un perfil de estilo.
 
-## Cuándo elegir esta plantilla
+## Despliegue
 
-Elige `tanstack-start-solid` cuando tu proyecto necesite renderizado del lado del servidor —
-sitios orientados a contenido, cualquier cosa que se beneficie del SEO, y páginas que necesitan
-datos disponibles antes del primer renderizado son un buen caso de uso. Si tu proyecto es un
-panel de control, una herramienta interna o una aplicación de una sola página que no necesita
-renderizado en el servidor, `vite-solid-router` ofrece una alternativa solo de cliente, más
-pequeña y simple.
-
-## Por qué TanStack Start en lugar de SolidStart
-
-Este workspace fija `solid-js@2.0.0-beta.24`. Al momento de construir esta plantilla, la línea
-publicada de SolidStart todavía dependía internamente de `solid-js@1.x` y su API de configuración
-no exportaba la función que las herramientas de este workspace esperaban, por lo que no podía
-compilar contra este fijado. Las `peerDependencies` de TanStack Start declaran
-`solid-js: ">=2.0.0-0 <3.0.0"` y `@solidjs/web: ">=2.0.0-0 <3.0.0"` — construido para Solid 2
-desde el inicio, no adaptado después.
+Despliega a cualquier plataforma de alojamiento compatible con Node.js que soporte SSR. Vercel, Netlify y Cloudflare Pages son destinos soportados.
