@@ -182,6 +182,13 @@ jobs:
       - run: pnpm build
       - run: npx playwright install --with-deps chromium
       - run: pnpm test
+      # `pnpm test` is `nx run-many -t test`, which runs each project's own
+      # suite. tools/ is not an nx project, so its 35 test files ran nowhere —
+      # 17 of them were invoked by nothing at all, and the 18 that were are
+      # hand-listed inside phase1-gate.ts, a list that had already drifted.
+      # This covers all of them from the glob in vitest.config.ts, so a new
+      # tools test is picked up without editing a list.
+      - run: pnpm run test:tools
 
   test-browser:
     needs: build

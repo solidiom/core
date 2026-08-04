@@ -15,6 +15,18 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const CSS_RECIPES = join(ROOT, "packages/recipes-css/src/recipes")
 const CSS_STYLES = join(ROOT, "packages/recipes-css/src/styles")
 
+/**
+ * Scopes that ship as a stylesheet with no `recipes/<scope>.tsx` wrapper.
+ *
+ * Typography is presentation applied to native tags, so there is no primitive to
+ * compose and nothing for a wrapper to render — see docs/plans/typeset-plan.md.
+ * RECIPE-007 promoted both into REFERENCE_DEFINITIONS, which is why this list is
+ * needed to keep the coverage assertion below strict in both directions rather
+ * than simply loosened. Mirrors UTILITY_STYLESHEETS in
+ * tools/audit-recipe-dual-emission.ts.
+ */
+const UTILITY_SCOPES = ["prose", "typeset"] as const
+
 function recipeScopes(): string[] {
   return readdirSync(CSS_RECIPES)
     .filter((entry) => entry.endsWith(".tsx"))
@@ -34,7 +46,9 @@ function styledParts(scope: string): string[] {
 
 describe("recipe definition coverage", () => {
   it("defines exactly one canonical definition for every shipped CSS recipe", () => {
-    expect(Object.keys(REFERENCE_DEFINITIONS).sort()).toEqual(recipeScopes())
+    expect(Object.keys(REFERENCE_DEFINITIONS).sort()).toEqual(
+      [...recipeScopes(), ...UTILITY_SCOPES].sort(),
+    )
   })
 
   it("covers every semantic slot styled by each shipped CSS recipe", () => {

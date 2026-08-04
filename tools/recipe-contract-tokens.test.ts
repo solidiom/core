@@ -28,6 +28,20 @@ const TAILWIND_THEME = join(TAILWIND_SRC, "styles/theme.css")
 const COLOUR_UTILITIES =
   /\b(?:bg|text|border(?:-[tblr])?|ring-offset|ring|divide|outline|fill|stroke|placeholder|caret|from|via|to)-([a-z][a-z0-9-]*)/g
 
+/**
+ * Removes Tailwind arbitrary-value segments before utility matching.
+ *
+ * Their contents are raw CSS, not utility names, so COLOUR_UTILITIES misreads
+ * them. The emitted `typeset.css` contains `@apply [border-left-width:2px]`,
+ * where `border` matches the utility prefix and the remainder is captured as the
+ * phantom theme colour `left-width` — a failure with no corresponding token to
+ * register. Genuine arbitrary colours such as `bg-[#fff]` need no registration
+ * either, so dropping the whole bracketed segment is correct in both cases.
+ */
+function withoutArbitraryValues(source: string): string {
+  return source.replace(/\[[^\]]*\]/g, "")
+}
+
 /** Tailwind built-ins and non-colour utility suffixes that need no theme registration. */
 const NOT_A_THEME_COLOUR = new Set([
   // structural / non-colour utility suffixes
@@ -144,8 +158,8 @@ describe("Tailwind profile theme contract", () => {
     [...theme.matchAll(/--shadow-([a-z][a-z0-9-]*)\s*:/g)].map((match) => match[1]),
   )
   const referenced = new Set(
-    [...readAll(TAILWIND_SRC, ".css").matchAll(COLOUR_UTILITIES)]
-      .concat([...readAll(TAILWIND_SRC, ".tsx").matchAll(COLOUR_UTILITIES)])
+    [...withoutArbitraryValues(readAll(TAILWIND_SRC, ".css")).matchAll(COLOUR_UTILITIES)]
+      .concat([...withoutArbitraryValues(readAll(TAILWIND_SRC, ".tsx")).matchAll(COLOUR_UTILITIES)])
       .map((match) => match[1])
       .filter((name) => !NOT_A_THEME_COLOUR.has(name) && !isDefaultPaletteShade(name)),
   )

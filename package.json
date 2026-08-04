@@ -72,7 +72,8 @@
     "beta:acceptance:report": "tsx tests/beta-acceptance/report.ts",
     "beta:acceptance:e2e": "playwright test --config tests/beta-acceptance/playwright.config.ts",
     "visual:container": "bash tools/visual-container.sh",
-    "visual:update:container": "bash tools/visual-container.sh --update"
+    "visual:update:container": "bash tools/visual-container.sh --update",
+    "test:tools": "vitest run --config vitest.config.ts tools/"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",

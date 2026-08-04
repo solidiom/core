@@ -60,3 +60,6 @@ routeTree.gen.ts
 # third-party tarballs, and platform-specific, so it is never committed.
 tools/offline-fixture/.registry-snapshot/
 tools/offline-fixture/storage/
+
+# Scratch directory created by tools/assert-no-unverified.test.ts
+.tmp/
