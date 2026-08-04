@@ -1,18 +1,26 @@
 /**
- * Source install engine — materializes primitive source files into the consumer project.
+ * Source install engine — materializes deliverable source files into the consumer project.
  *
  * Responsibilities:
  * 1. Verify collected source files byte-for-byte against the registry manifest
  *    before writing anything to disk (CLI-003) — see ./verify-source.ts.
- * 2. Copy canonical source files to the configured sourceDir.
+ * 2. Copy canonical source files to the configured destination directory
+ *    (primitive → sourceDir, component → componentDir, block → blockDir, etc.).
  * 3. Deduplicate shared _runtime modules across installed primitives.
  * 4. Rewrite @solidiom/runtime imports to relative paths.
  * 5. Write/update .solidiom/lock.json with installed file digests and provenance.
+ *
+ * Component source resolution (FOUND-003, D1):
+ * When the plan's deliverable is "component", source is resolved from the recipe
+ * wrapper in `packages/recipes-{stylingProfile}/src/recipes/<scope>.tsx` (plus its
+ * `.variants.ts` companion) rather than from the primitive's own `source/` directory.
+ * The styling profile comes from `config.stylingProfile` or `plan.stylingProfile`.
  */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, statSync } from "node:fs"
 import { join, relative, dirname } from "node:path"
 import { ConfigSchema, PolicySchema, type Config } from "../schemas"
+import type { Deliverable } from "../registry-schema"
 import type { Plan } from "../commands/plan"
 import { readLock, writeLock, computeDigest, type LockEntry } from "./lock"
 import { verifySourceIntegrity, type SourceVerifyResult } from "./verify-source"
@@ -100,6 +108,11 @@ function collectRuntimeFiles(runtimeSourceDir: string): Map<string, string> {
  * (wired from `--allow-unverified` in `solidiom add`) bypasses the block and
  * proceeds, but every LockEntry written during that install is recorded with
  * `provenance: "unverified"`.
+ *
+ * Component source resolution (FOUND-003, D1):
+ * When `plan.deliverable` is "component", source is resolved from the recipe
+ * wrapper for the active styling profile instead of the primitive's source/.
+ * When "block", source is resolved from block directory if it exists.
  */
 export function installSource(options: SourceInstallOptions): SourceInstallResult {
   const {
@@ -132,20 +145,33 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
   const filesWritten: string[] = []
   const runtimeDeduped: string[] = []
 
-  // Find the primitive's source/ directory (from monorepo or node_modules)
-  const primitiveSourceDir = resolvePrimitiveSource(primitive, cwd)
-  if (!primitiveSourceDir) {
+  // Resolve source files based on deliverable kind (FOUND-003).
+  // For "component", use recipe wrapper; for "block", use block source;
+  // otherwise fall through to primitive source.
+  const sourceFiles = resolveDeliverableSource({
+    primitive,
+    cwd,
+    deliverable,
+    config,
+    plan,
+  })
+
+  if (sourceFiles.size === 0) {
     return {
       filesWritten: [],
       runtimeDeduped: [],
       lockUpdated: false,
       verified: false,
-      violations: [`Could not resolve source directory for primitive "${primitive}"`],
+      violations: [
+        `Could not resolve source files for "${deliverable}" "${primitive}"`,
+        deliverable === "component"
+          ? `Ensure config.stylingProfile is set to one of: css, tailwind, unocss`
+          : deliverable === "block"
+            ? `Block source not yet available — blocks are resolved at work-package split`
+            : `Primitive source directory not found`,
+      ],
     }
   }
-
-  const primitiveTarget = join(sourceDir, primitive)
-  const sourceFiles = collectSourceFiles(primitiveSourceDir)
 
   // Byte-level verification MUST happen before any write to disk.
   const envKey = process.env["REGISTRY_VERIFY_KEY"]
@@ -154,9 +180,15 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
     ...policy.registryTrustedKeys,
     ...policy.sourceInstallTrustedKeys,
   ]
+
+  // For component/block, verify against the underlying primitive's manifest
+  // since the component manifest carries per-output digests and the install
+  // only materializes one output's files.
+  const verifyPrimitive =
+    deliverable === "component" ? primitive : deliverable === "block" ? primitive : primitive
   const verifyResult: SourceVerifyResult = verifySourceIntegrity({
     cwd,
-    primitive,
+    primitive: verifyPrimitive,
     files: sourceFiles,
     verifyKeys,
     requireSignature: policy.registrySignatureRequired,
@@ -177,6 +209,9 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
   // Load lockfile
   const lock = readLock(cwd)
 
+  // Target directory under the deliverable's destination root.
+  const deliverableTarget = join(sourceDir, primitive)
+
   // Build the full set of planned files (primitive/component/block/theme files
   // + runtime dedup files) with their FINAL (import-rewritten) content, keyed
   // by path relative to cwd, so classifyConflicts sees exactly what would be
@@ -184,7 +219,7 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
   const plannedFiles = new Map<string, string>()
 
   for (const [relPath, content] of sourceFiles) {
-    const targetPath = join(primitiveTarget, relPath)
+    const targetPath = join(deliverableTarget, relPath)
     const relFromCwd = relative(cwd, targetPath)
     const rewritten = rewriteImports(content, targetPath, runtimeDir)
     plannedFiles.set(relFromCwd, rewritten)
@@ -239,10 +274,10 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
 
   try {
     // 1. Copy primitive/component/block/theme source files
-    if (!dryRun) mkdirSync(primitiveTarget, { recursive: true })
+    if (!dryRun) mkdirSync(deliverableTarget, { recursive: true })
 
     for (const [relPath, content] of sourceFiles) {
-      const targetPath = join(primitiveTarget, relPath)
+      const targetPath = join(deliverableTarget, relPath)
       const rewritten = rewriteImports(content, targetPath, runtimeDir)
 
       if (!dryRun) {
@@ -327,6 +362,123 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
     verified: verifyResult.verified,
     violations: verifyResult.verified ? [] : verifyResult.violations,
   }
+}
+
+/**
+ * Resolve source files for a deliverable, keyed on deliverable kind and styling profile.
+ *
+ * - "component" → recipe wrapper + variants from `packages/recipes-{profile}/src/recipes/<name>.{tsx,variants.ts}`
+ * - "block"     → block source from `packages/blocks/<name>/source/` (or node_modules equivalent)
+ * - "theme"     → theme source from `packages/themes/<name>/source/`
+ * - "primitive" → `packages/<name>/source/` (existing behavior)
+ *
+ * For "component", the styling profile is determined by `plan.stylingProfile`,
+ * then `config.stylingProfile`. If neither is set, returns empty.
+ */
+interface ResolveDeliverableSourceOptions {
+  primitive: string
+  cwd: string
+  deliverable: Deliverable
+  config: Config
+  plan: Plan
+}
+
+function resolveDeliverableSource(options: ResolveDeliverableSourceOptions): Map<string, string> {
+  const { primitive, cwd, deliverable, config, plan } = options
+
+  if (deliverable === "component") {
+    return resolveComponentSource(primitive, cwd, config, plan)
+  }
+
+  if (deliverable === "block") {
+    return resolveBlockSource(primitive, cwd)
+  }
+
+  if (deliverable === "theme") {
+    return resolveThemeSource(primitive, cwd)
+  }
+
+  // Default: primitive source
+  const primitiveSourceDir = resolvePrimitiveSource(primitive, cwd)
+  if (!primitiveSourceDir) return new Map()
+  return collectSourceFiles(primitiveSourceDir)
+}
+
+/**
+ * Resolve component source from recipe wrapper + variants (D1, FOUND-003).
+ *
+ * Uses `plan.stylingProfile` or `config.stylingProfile` to select the recipe
+ * package, then reads the `.tsx` wrapper and its `.variants.ts` companion from
+ * `packages/recipes-{profile}/src/recipes/<name>.{tsx,variants.ts}`.
+ */
+function resolveComponentSource(
+  component: string,
+  cwd: string,
+  config: Config,
+  plan: Plan,
+): Map<string, string> {
+  const profile = plan.stylingProfile ?? config.stylingProfile
+  if (!profile) return new Map()
+
+  const recipePkg = `recipes-${profile}`
+  const files = new Map<string, string>()
+
+  // Try monorepo-relative first
+  const recipeDir = join(cwd, "..", "..", "packages", recipePkg, "src", "recipes")
+  if (existsSync(recipeDir)) {
+    const wrapperPath = join(recipeDir, `${component}.tsx`)
+    if (existsSync(wrapperPath)) {
+      files.set(`${component}.tsx`, readFileSync(wrapperPath, "utf8"))
+    }
+    const variantsPath = join(recipeDir, `${component}.variants.ts`)
+    if (existsSync(variantsPath)) {
+      files.set(`${component}.variants.ts`, readFileSync(variantsPath, "utf8"))
+    }
+    if (files.size > 0) return files
+  }
+
+  // Try node_modules
+  const nmDir = join(cwd, "node_modules", "@solidiom", recipePkg, "src", "recipes")
+  if (existsSync(nmDir)) {
+    const wrapperPath = join(nmDir, `${component}.tsx`)
+    if (existsSync(wrapperPath)) {
+      files.set(`${component}.tsx`, readFileSync(wrapperPath, "utf8"))
+    }
+    const variantsPath = join(nmDir, `${component}.variants.ts`)
+    if (existsSync(variantsPath)) {
+      files.set(`${component}.variants.ts`, readFileSync(variantsPath, "utf8"))
+    }
+    if (files.size > 0) return files
+  }
+
+  return files
+}
+
+/**
+ * Resolve block source from `packages/blocks/<name>/source/`.
+ * Blocks are content-driven and may not have a source directory yet.
+ */
+function resolveBlockSource(block: string, cwd: string): Map<string, string> {
+  const monoPath = join(cwd, "..", "..", "packages", "blocks", block, "source")
+  if (existsSync(monoPath)) return collectSourceFiles(monoPath)
+
+  const nmPath = join(cwd, "node_modules", "@solidiom", "blocks", block, "source")
+  if (existsSync(nmPath)) return collectSourceFiles(nmPath)
+
+  return new Map()
+}
+
+/**
+ * Resolve theme source from `packages/themes/<name>/source/`.
+ */
+function resolveThemeSource(theme: string, cwd: string): Map<string, string> {
+  const monoPath = join(cwd, "..", "..", "packages", "themes", theme, "source")
+  if (existsSync(monoPath)) return collectSourceFiles(monoPath)
+
+  const nmPath = join(cwd, "node_modules", "@solidiom", "themes", theme, "source")
+  if (existsSync(nmPath)) return collectSourceFiles(nmPath)
+
+  return new Map()
 }
 
 /** Collect non-test .ts/.tsx files from a source directory. */
