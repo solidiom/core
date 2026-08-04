@@ -5,7 +5,7 @@ import { tmpdir } from "node:os"
 import { createHash, createHmac } from "node:crypto"
 import { verifySourceIntegrity } from "./verify-source"
 
-const INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v2.json"
+const INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v3.json"
 const MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v2.json"
 
 function createTmpDir(): string {
@@ -69,7 +69,7 @@ function buildManifest(primitive: string, files: Record<string, string>) {
 function buildIndex(manifest: ReturnType<typeof buildManifest>) {
   return {
     $schema: INDEX_SCHEMA_URL,
-    version: 2 as const,
+    version: 3 as const,
     generatedAt: "2025-01-01T00:00:00.000Z",
     integrity: { algorithm: "sha256" as const, entriesHash: "a".repeat(64) },
     primitives: [
@@ -93,6 +93,10 @@ function buildIndex(manifest: ReturnType<typeof buildManifest>) {
       },
     ],
     adapters: [] as unknown[],
+    components: [] as unknown[],
+    blocks: [] as unknown[],
+    templates: [] as unknown[],
+    themes: [] as unknown[],
   }
 }
 

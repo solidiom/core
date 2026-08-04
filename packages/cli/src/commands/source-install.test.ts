@@ -78,12 +78,16 @@ function writeMatchingRegistry(
 
   const entriesHash = createHash("sha256").update("").digest("hex")
   const index = {
-    $schema: "https://solidiom.dev/schemas/registry-index/v2.json",
-    version: 2,
+    $schema: "https://solidiom.dev/schemas/registry-index/v3.json",
+    version: 3,
     generatedAt: "2025-01-01T00:00:00.000Z",
     integrity: { algorithm: "sha256" as const, entriesHash },
     primitives: [],
     adapters: [],
+    components: [],
+    blocks: [],
+    templates: [],
+    themes: [],
   }
   writeFileSync(join(registryDir, "index.json"), JSON.stringify(index))
 }
@@ -375,25 +379,61 @@ describe("source/install", () => {
       )
     }
 
+    function setUpRecipeSource(content: string): void {
+      const recipeDir = join(cwd, "..", "..", "packages", "recipes-css", "src", "recipes")
+      mkdirSync(recipeDir, { recursive: true })
+      writeFileSync(join(recipeDir, "button.tsx"), content)
+      writeMatchingRegistry(
+        cwd,
+        "button",
+        { "button.tsx": content },
+        { deliverables: ["component"] },
+      )
+    }
+
+    function setUpBlockSource(content: string): void {
+      const blockSource = join(cwd, "..", "..", "packages", "blocks", "button", "source")
+      mkdirSync(blockSource, { recursive: true })
+      writeFileSync(join(blockSource, "index.tsx"), content)
+      writeMatchingRegistry(
+        cwd,
+        "button",
+        { "index.tsx": content },
+        { deliverables: ["block"] },
+      )
+    }
+
+    function setUpThemeSource(content: string): void {
+      const themeSource = join(cwd, "..", "..", "packages", "themes", "button", "source")
+      mkdirSync(themeSource, { recursive: true })
+      writeFileSync(join(themeSource, "index.tsx"), content)
+      writeMatchingRegistry(
+        cwd,
+        "button",
+        { "index.tsx": content },
+        { deliverables: ["theme"] },
+      )
+    }
+
     it("installs a 'component' deliverable under config.componentDir, not sourceDir", () => {
       const content = `export function Button() {}`
-      setUpButtonSource(content)
+      setUpRecipeSource(content)
 
       const result = installSource({
         primitive: "button",
         cwd,
-        plan: makePlan({ deliverable: "component" }),
+        plan: makePlan({ deliverable: "component", stylingProfile: "css" }),
         dryRun: false,
       })
 
       expect(result.verified).toBe(true)
-      expect(existsSync(join(cwd, "src/ui/components/button/index.tsx"))).toBe(true)
+      expect(existsSync(join(cwd, "src/ui/components/button/button.tsx"))).toBe(true)
       expect(existsSync(join(cwd, "src/ui/primitives/button/index.tsx"))).toBe(false)
     })
 
     it("installs a 'block' deliverable under config.blockDir, not sourceDir", () => {
       const content = `export function Button() {}`
-      setUpButtonSource(content)
+      setUpBlockSource(content)
 
       const result = installSource({
         primitive: "button",
@@ -409,7 +449,7 @@ describe("source/install", () => {
 
     it("installs a 'theme' deliverable under config.themeDir, not sourceDir", () => {
       const content = `export function Button() {}`
-      setUpButtonSource(content)
+      setUpThemeSource(content)
 
       const result = installSource({
         primitive: "button",
@@ -449,7 +489,7 @@ describe("source/install", () => {
         ],
         stylingOutputs: [],
         violations: [],
-        deliverable: "component",
+        deliverable: "primitive",
         ...overrides,
       }
     }
@@ -462,7 +502,7 @@ describe("source/install", () => {
         cwd,
         "button",
         { "index.tsx": content },
-        { deliverables: ["component"] },
+        { deliverables: ["primitive"] },
       )
     }
 
@@ -477,7 +517,7 @@ describe("source/install", () => {
       expect(first.filesWritten.length).toBeGreaterThan(0)
 
       // User hand-edits the installed file.
-      const installedPath = join(cwd, "src/ui/components/button/index.tsx")
+      const installedPath = join(cwd, "src/ui/primitives/button/index.tsx")
       writeFileSync(installedPath, "export function Button() { /* user hand-edit */ }")
 
       // Snapshot the full tree + lock before the second (conflicting) install attempt.
@@ -491,7 +531,7 @@ describe("source/install", () => {
         cwd,
         "button",
         { "index.tsx": upstreamContent },
-        { deliverables: ["component"] },
+        { deliverables: ["primitive"] },
       )
 
       const second = installSource({ primitive: "button", cwd, plan: makePlan(), dryRun: false })
@@ -513,7 +553,7 @@ describe("source/install", () => {
       setUpButtonSource(originalContent)
       installSource({ primitive: "button", cwd, plan: makePlan(), dryRun: false })
 
-      const installedPath = join(cwd, "src/ui/components/button/index.tsx")
+      const installedPath = join(cwd, "src/ui/primitives/button/index.tsx")
       writeFileSync(installedPath, "export function Button() { /* user hand-edit */ }")
 
       const primitiveSource = join(cwd, "..", "..", "packages", "button", "source")
@@ -522,7 +562,7 @@ describe("source/install", () => {
         cwd,
         "button",
         { "index.tsx": upstreamContent },
-        { deliverables: ["component"] },
+        { deliverables: ["primitive"] },
       )
 
       const result = installSource({
@@ -546,7 +586,7 @@ describe("source/install", () => {
       setUpButtonSource(originalContent)
       installSource({ primitive: "button", cwd, plan: makePlan(), dryRun: false })
 
-      const installedPath = join(cwd, "src/ui/components/button/index.tsx")
+      const installedPath = join(cwd, "src/ui/primitives/button/index.tsx")
       const treeBefore = readFileSync(installedPath, "utf8")
       const lockBefore = readFileSync(join(cwd, ".solidiom", "lock.json"), "utf8")
 
@@ -556,7 +596,7 @@ describe("source/install", () => {
         cwd,
         "button",
         { "index.tsx": upstreamContent },
-        { deliverables: ["component"] },
+        { deliverables: ["primitive"] },
       )
 
       const result = installSource({
@@ -572,7 +612,7 @@ describe("source/install", () => {
       expect(result.conflicts).toBeDefined()
 
       const entry = result.conflicts!.entries.find(
-        (e) => e.path === "src/ui/components/button/index.tsx",
+        (e) => e.path === "src/ui/primitives/button/index.tsx",
       )
       expect(entry).toBeDefined()
       expect(entry!.classification).toBe("overwrite")
