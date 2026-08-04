@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "tooltip",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/tooltip.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/tooltip.tsx"
+    ],
+    "unocss": [
+      "src/recipes/tooltip.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/tooltip.tsx": "7cd428faf5f74e508581f3ea3211518f55ef3557e40f49eb56b0bf47d21da196"
+      },
+      "tailwind": {
+        "src/recipes/tooltip.tsx": "98e695e96788c4b14b856dae1fa29c2471467323e8d4b5a4f0d05a9d76a06c05"
+      },
+      "unocss": {
+        "src/recipes/tooltip.tsx": "8c836d3d8bd3059572dcb51beda8cae21600051ce9fac7716f1f720672fcbcee"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/tooltip"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

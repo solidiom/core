@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "tabs",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/tabs.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/tabs.tsx"
+    ],
+    "unocss": [
+      "src/recipes/tabs.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/tabs.tsx": "9c398bd444714240af59e5c3f6926c33a72b690b32fad89cd0b4d570d03cf076"
+      },
+      "tailwind": {
+        "src/recipes/tabs.tsx": "7af283d37ee6281e3bddbdf8b0385cf9c0e6e9b009152fbe3eefb319cdfca93b"
+      },
+      "unocss": {
+        "src/recipes/tabs.tsx": "dadfe9f3a643dd3b448797e0143c42cdc1182e2000a9ab35f65f2f5cbfa201ad"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/tabs"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "dialog",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/dialog.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/dialog.tsx"
+    ],
+    "unocss": [
+      "src/recipes/dialog.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/dialog.tsx": "b9ca37f7dd878ed548f8cb4689fb43be29f668fed01a4d721327093937a73a23"
+      },
+      "tailwind": {
+        "src/recipes/dialog.tsx": "761dac8c273460d56a7099b5bdc3827671df8a75f2a5c101d387ad15c1a3dcde"
+      },
+      "unocss": {
+        "src/recipes/dialog.tsx": "2c95537037aeeaa9b3c95bd0ad8dc0672658b3693e37dde052913204edbeeb24"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/dialog"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

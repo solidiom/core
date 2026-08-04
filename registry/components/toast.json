@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "toast",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/toast.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/toast.tsx"
+    ],
+    "unocss": [
+      "src/recipes/toast.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/toast.tsx": "034ad5ae96f3fc125d50b85e65ae80cb2cc4e1d23080e250c8bf6abcb53817c0"
+      },
+      "tailwind": {
+        "src/recipes/toast.tsx": "7baf1cfccd3b723be507e35dd45476be27051f0d36cb8343e7571a6cde352e68"
+      },
+      "unocss": {
+        "src/recipes/toast.tsx": "c86956d011fe2ae9254887d55da3332e7ebabadfe016d29af6180303096e3032"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/toast"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

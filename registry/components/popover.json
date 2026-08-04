@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "popover",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/popover.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/popover.tsx"
+    ],
+    "unocss": [
+      "src/recipes/popover.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/popover.tsx": "300d117bba195eea5bd8ed378024c4f33ac53302b8321f418034c89938eea203"
+      },
+      "tailwind": {
+        "src/recipes/popover.tsx": "88aaae47335fdcffd294ed062bc6090aac33f6350f453d3cddd3dc5e1dc1bc4f"
+      },
+      "unocss": {
+        "src/recipes/popover.tsx": "5680c5101ab6407ee68f45c702928323cfc6af71c0651255f6a141a4cfd96ac0"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/popover"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

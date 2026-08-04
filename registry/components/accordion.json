@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "accordion",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/accordion.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/accordion.tsx"
+    ],
+    "unocss": [
+      "src/recipes/accordion.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/accordion.tsx": "c97d5a21630c444ecf19612e458b0d9383742890aa9b1b2b7cc70ffeadf2280e"
+      },
+      "tailwind": {
+        "src/recipes/accordion.tsx": "c4396ebafc1f4f0f9efc0f28a4eb1779f2b94403e1021c7725a4e70aed8c6b81"
+      },
+      "unocss": {
+        "src/recipes/accordion.tsx": "22b23e8056df11c32a0131bff3296b8a31e9b61ec0894ea5c6fd0e92d63460e6"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/accordion"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

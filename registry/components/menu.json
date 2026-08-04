@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "menu",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/menu.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/menu.tsx"
+    ],
+    "unocss": [
+      "src/recipes/menu.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/menu.tsx": "9934792c5ca5e46136c6bb9eff19384ea6cd31a97d97509da06e70d95cdb5ac0"
+      },
+      "tailwind": {
+        "src/recipes/menu.tsx": "368aea444d39c20120203cecab0e6cff8aa739c24e498d7153ab01f33c1a8d2e"
+      },
+      "unocss": {
+        "src/recipes/menu.tsx": "6c3c03c52536210745c4a517f8a81f049c735ca465adec6370cd4d8def93f8e2"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/menu"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

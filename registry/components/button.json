@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "button",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/button.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/button.tsx"
+    ],
+    "unocss": [
+      "src/recipes/button.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/button.tsx": "fb8304758e17eb18d92a6cc85c78ac02fdc3b3d0d36099eef49831f438b655e0"
+      },
+      "tailwind": {
+        "src/recipes/button.tsx": "0f1ed7af16a285896617b87506330259f257b0189f87d1e0636598adc061d7fb"
+      },
+      "unocss": {
+        "src/recipes/button.tsx": "49db8c6a779d42418a736fb79d481fcd9e10b4fd60e4059edffd5edb50e5a66e"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/button"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

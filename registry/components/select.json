@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "select",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/select.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/select.tsx"
+    ],
+    "unocss": [
+      "src/recipes/select.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/select.tsx": "e29c3991f7a7d79f86f5fe4e5d260f25a6f18ddc86922be33eb7468cfd05d9b5"
+      },
+      "tailwind": {
+        "src/recipes/select.tsx": "d9b85ba14536ce8102f1bbe7953497db19c839f8af1a45b69b1b995ce1a119b5"
+      },
+      "unocss": {
+        "src/recipes/select.tsx": "b6795b06201180faf6bf659e51135ebfab054685e8fd9ddc3c257519ad38c56d"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/select"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}
