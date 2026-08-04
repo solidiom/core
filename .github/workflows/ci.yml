@@ -1,10 +1,15 @@
 name: CI
 
+# Automatic triggers are disabled on request: this workflow runs only when
+# dispatched explicitly (Actions tab or `gh workflow run ci.yml`). Restore the
+# push/pull_request triggers below to re-arm CI-001.
+#
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:

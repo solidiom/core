@@ -1,8 +1,18 @@
 name: Preview Deploy
 
+# Automatic triggers are disabled on request: this workflow no longer runs on
+# pull requests. Restore the pull_request trigger below to re-arm OPS-003.
+#
+# Note the job body reads `github.event.pull_request.*` and comments on
+# `context.issue.number`, so a manual dispatch has no PR context: the guard on
+# `deploy-preview` evaluates false and the job is skipped. Dispatch is here to
+# keep the workflow valid, not as a working substitute for the PR run.
+#
+# on:
+#   pull_request:
+#     branches: [main]
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: preview-${{ github.ref }}
