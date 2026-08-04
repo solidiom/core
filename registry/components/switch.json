@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "switch",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/switch.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/switch.tsx"
+    ],
+    "unocss": [
+      "src/recipes/switch.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/switch.tsx": "9a5ab35819b1ef2fdda65ccb7d457063981bb29ab91d5c532514f10a292a758b"
+      },
+      "tailwind": {
+        "src/recipes/switch.tsx": "40268678a2d0b2108bbd91cdb2913f84556fe104b004ce74b79727e598b349aa"
+      },
+      "unocss": {
+        "src/recipes/switch.tsx": "22384d25357ba6bd2cd01332367494b175b8c0a0c8bf85be52c97d4a1c12da4a"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/switch"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

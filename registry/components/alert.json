@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "alert",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/alert.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/alert.tsx"
+    ],
+    "unocss": [
+      "src/recipes/alert.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/alert.tsx": "3c585ee25bff76a0ffe3b438ce9f4bfeecfe9c5f7f238d2c72ed83e2605ca50f"
+      },
+      "tailwind": {
+        "src/recipes/alert.tsx": "4c2ca16e7aa06884a92d4caf009a849c8949b013884c07151f4e143f36028ea1"
+      },
+      "unocss": {
+        "src/recipes/alert.tsx": "0b580e8b3dce2719d4954d35dc8bfcd8e232aa10ffe77067afb67a66230649ee"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/alert"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

@@ -6,7 +6,7 @@ pnpm-lock.yaml
 
 # Generated registry manifests — tools/registry-build.ts owns this output and
 # must stay byte-stable for the registry determinism checks.
-registry/*.json
+registry/**/*.json
 
 # Nx local metadata
 .nx/

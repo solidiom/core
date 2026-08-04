@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "checkbox",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/checkbox.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/checkbox.tsx"
+    ],
+    "unocss": [
+      "src/recipes/checkbox.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/checkbox.tsx": "4056fe0e07a29bfcfb9285b2e538f8d7f42c1bf8d964c95d2ca5c09cea3cc717"
+      },
+      "tailwind": {
+        "src/recipes/checkbox.tsx": "b610901d03d774d20c716a9975cc33e16de185d1874c38949f8c2c0f088140eb"
+      },
+      "unocss": {
+        "src/recipes/checkbox.tsx": "cc7d17a3b9524fed5a57818b2569b663c2dda363e2009737455c70f5e0410410"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/checkbox"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

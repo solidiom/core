@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "badge",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/badge.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/badge.tsx"
+    ],
+    "unocss": [
+      "src/recipes/badge.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/badge.tsx": "07a3315576445e8f46a8b1073435f03a98e9280e71e13c11c851afafcf69c1fd"
+      },
+      "tailwind": {
+        "src/recipes/badge.tsx": "3a93b563fb497e85400f8bbd801dd3783269abe21e2a084d9495acedeaa9dc6d"
+      },
+      "unocss": {
+        "src/recipes/badge.tsx": "be52ee51723282d816172b12b131fd7b0e477bd37bb067fc926df790e1e2a798"
+      }
+    },
+    "lastGenerated": "2026-08-04T20:18:39.000Z"
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/badge"
+  ],
+  "lastUpdated": "2026-08-04T20:18:39.000Z"
+}

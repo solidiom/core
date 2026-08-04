@@ -4,7 +4,11 @@
  * Scans packages/ for directories tagged "layer:primitive", reads their source/
  * files, and outputs:
  *   - registry/<name>.json (per-primitive manifest)
- *   - registry/index.json (catalog of all primitives and adapters)
+ *   - registry/components/<name>.json (per-component manifest)
+ *   - registry/blocks/<name>.json (per-block manifest)
+ *   - registry/templates/<name>.json (per-template manifest)
+ *   - registry/themes/<name>.json (per-theme manifest)
+ *   - registry/index.json (catalog of all layers)
  *
  * Detection logic:
  *   - Dependencies: extracted from package.json "dependencies" field.
@@ -16,7 +20,15 @@
  * Usage: pnpm exec tsx tools/registry-build.ts
  */
 
-import { readdirSync, readFileSync, writeFileSync, existsSync, statSync, unlinkSync } from "node:fs"
+import {
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+  existsSync,
+  statSync,
+  unlinkSync,
+  mkdirSync,
+} from "node:fs"
 import { join, relative, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 import { createHash, createHmac } from "node:crypto"
@@ -27,6 +39,7 @@ const __dirname = dirname(__filename)
 const ROOT = join(__dirname, "..")
 const PACKAGES_DIR = join(ROOT, "packages")
 const REGISTRY_DIR = join(ROOT, "registry")
+const SITE_CONTENT_DIR = join(ROOT, "apps", "site", "src", "content")
 
 interface A11yEvidenceRecord {
   schemaVersion?: unknown
@@ -44,6 +57,7 @@ interface A11yEvidenceRecord {
 type RegistryStatus = "experimental" | "preview" | "stable" | "deprecated"
 type Deliverable = "primitive" | "component" | "block" | "template" | "theme"
 type DocumentationLocaleStatus = "missing" | "draft" | "stale" | "reviewed"
+type StylingOutput = "css" | "tailwind" | "unocss"
 
 const REGISTRY_STATUSES = new Set<RegistryStatus>([
   "experimental",
@@ -52,6 +66,8 @@ const REGISTRY_STATUSES = new Set<RegistryStatus>([
   "deprecated",
 ])
 const DELIVERABLES = new Set<Deliverable>(["primitive", "component", "block", "template", "theme"])
+
+const STYLING_OUTPUTS = ["css", "tailwind", "unocss"] as const
 
 interface RegistryPackageMetadata {
   status?: RegistryStatus
@@ -132,7 +148,7 @@ function documentationFrontmatter(path: string): DocumentationFrontmatter {
         rawKeywords
           .replace(/^\[|\]$/g, "")
           .split(",")
-          .map((value) => value.trim().replace(/^['\"]|['\"]$/g, "")),
+          .map((value) => value.trim().replace(/^['"]|['"]$/g, "")),
       )
     : []
   const translationStatus = fields.get("translationStatus")
@@ -221,30 +237,65 @@ function documentationKeywords(name: string): string[] {
   ].sort()
 }
 
-function readA11yEvidence(name: string): { evidenceIds: string[]; lastReviewed?: string } {
-  const evidencePath = join(PACKAGES_DIR, name, "docs", "accessibility", "evidence.json")
-  if (!existsSync(evidencePath)) return { evidenceIds: [] }
+// ─── Layer-Aware Documentation (D3) ──────────────────────────────────────────
 
-  try {
-    const evidence = JSON.parse(readFileSync(evidencePath, "utf8")) as A11yEvidenceRecord
-    const hasPassingSummary =
-      evidence.schemaVersion === 2 &&
-      evidence.primitive === name &&
-      evidence.summary?.violations === 0 &&
-      evidence.summary?.outcome === "pass" &&
-      typeof evidence.summary.passes === "number" &&
-      evidence.summary.passes > 0
-    const evidenceIds = Array.isArray(evidence.evidenceIds)
-      ? evidence.evidenceIds.filter((id): id is string => typeof id === "string")
-      : []
-    return hasPassingSummary && evidenceIds.length > 0
-      ? {
-          evidenceIds,
-          lastReviewed: typeof evidence.lastRun === "string" ? evidence.lastRun : undefined,
-        }
-      : { evidenceIds: [] }
-  } catch {
-    return { evidenceIds: [] }
+/**
+ * Resolve documentation for a non-primitive layer (component, block, template, theme).
+ * Reads from apps/site/src/content/{en,es}/<layer>/<name>.md
+ */
+function layerDocumentationMetadata(
+  layer: "components" | "blocks" | "templates" | "themes",
+  name: string,
+): {
+  status: "stub" | "draft" | "review" | "complete"
+  locales: Record<
+    string,
+    {
+      status: "missing" | "draft" | "stale" | "reviewed"
+      sourceHash?: string
+      lastUpdated?: string
+    }
+  >
+} {
+  const layerDir = join(SITE_CONTENT_DIR, layer)
+  const localeMetadata = (locale: "en" | "es") => {
+    const contentDir = join(SITE_CONTENT_DIR, locale, layer)
+    const mdFile = join(contentDir, `${name}.md`)
+    if (!existsSync(mdFile)) return { status: "missing" as const }
+
+    const fm = documentationFrontmatter(mdFile)
+    const status: DocumentationLocaleStatus =
+      fm.translationStatus === "human-reviewed"
+        ? "reviewed"
+        : fm.translationStatus === "stale"
+          ? "stale"
+          : "draft"
+    return {
+      status,
+      ...(fm.translationSourceHash ? { sourceHash: fm.translationSourceHash } : {}),
+      ...(fm.translationReviewedAt ? { lastUpdated: fm.translationReviewedAt } : {}),
+    }
+  }
+
+  const enMeta = localeMetadata("en")
+  const esMeta = localeMetadata("es")
+
+  const enDir = join(SITE_CONTENT_DIR, "en", layer)
+  const esDir = join(SITE_CONTENT_DIR, "es", layer)
+
+  return {
+    status:
+      enMeta.status !== "missing" && esMeta.status !== "missing"
+        ? "review"
+        : enMeta.status !== "missing"
+          ? "draft"
+          : existsSync(layerDir)
+            ? "stub"
+            : "stub",
+    locales: {
+      en: enMeta,
+      ...(esMeta.status !== "missing" || existsSync(esDir) ? { es: esMeta } : {}),
+    },
   }
 }
 
@@ -338,7 +389,7 @@ interface PrimitiveManifestV2 extends PrimitiveManifest {
     >
   }
   styling: {
-    outputs: ("css" | "tailwind" | "unocss")[]
+    outputs: StylingOutput[]
     themeCompatible: string[]
   }
   search: {
@@ -359,9 +410,37 @@ interface PrimitiveManifestV2 extends PrimitiveManifest {
   lastUpdated: string
 }
 
-interface IndexManifestV2 {
+/** Component manifest — the recipe wrapper for the active styling profile. */
+interface ComponentManifest {
   $schema: string
-  version: 2
+  name: string
+  version: string
+  package: string
+  deliverables: Deliverable[]
+  source: Record<StylingOutput, string[]>
+  integrity: {
+    algorithm: "sha256"
+    fileDigests: Record<StylingOutput, Record<string, string>>
+    lastGenerated: string
+  }
+  documentation: {
+    status: "stub" | "draft" | "review" | "complete"
+    locales: Record<
+      string,
+      {
+        status: "missing" | "draft" | "stale" | "reviewed"
+        sourceHash?: string
+        lastUpdated?: string
+      }
+    >
+  }
+  dependencies: string[]
+  lastUpdated: string
+}
+
+interface IndexManifestV3 {
+  $schema: string
+  version: 3
   generatedAt: string
   integrity: {
     algorithm: "sha256"
@@ -394,7 +473,61 @@ interface IndexManifestV2 {
     capability: string
     version: string
   }>
+  components: Array<{
+    name: string
+    version: string
+    package: string
+    label: string
+    description: string
+    status: string
+    deliverables: string[]
+    documentationStatus: string
+    documentationLocales: ComponentManifest["documentation"]["locales"]
+    stylingOutputs: string[]
+    primitiveDependency: string
+    searchKeywords: string[]
+  }>
+  blocks: Array<{
+    name: string
+    package: string
+    version: string
+    label: string
+    description: string
+    status: string
+    deliverables: string[]
+    documentationStatus: string
+    documentationLocales: Record<string, { status: DocumentationLocaleStatus }>
+    componentDependencies: string[]
+    searchKeywords: string[]
+  }>
+  templates: Array<{
+    name: string
+    package: string
+    version: string
+    label: string
+    description: string
+    status: string
+    deliverables: string[]
+    documentationStatus: string
+    documentationLocales: Record<string, { status: DocumentationLocaleStatus }>
+    searchKeywords: string[]
+  }>
+  themes: Array<{
+    name: string
+    package: string
+    version: string
+    label: string
+    description: string
+    status: string
+    deliverables: string[]
+    documentationStatus: string
+    documentationLocales: Record<string, { status: DocumentationLocaleStatus }>
+    searchKeywords: string[]
+  }>
 }
+
+// Kept for backward-compatible type exports
+type IndexManifestV2 = IndexManifestV3
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -633,6 +766,20 @@ function computeFilesHash(
 }
 
 /**
+ * Compute per-file digests for a list of files.
+ */
+function computeFileDigests(baseDir: string, files: string[]): Record<string, string> {
+  const digests: Record<string, string> = {}
+  for (const file of files) {
+    const fullPath = join(baseDir, file)
+    if (!existsSync(fullPath)) continue
+    const content = readFileSync(fullPath)
+    digests[file] = createHash("sha256").update(content).digest("hex")
+  }
+  return digests
+}
+
+/**
  * Compute entriesHash for the index: SHA-256 of all per-entry filesHash values
  * sorted alphabetically by entry name.
  */
@@ -666,8 +813,8 @@ function generateKeywords(
 // ─── Recipe Detection ────────────────────────────────────────────────────────
 
 /** Detect which styling recipe outputs exist for a given primitive name. */
-function detectStylingOutputs(name: string): ("css" | "tailwind" | "unocss")[] {
-  const outputs: ("css" | "tailwind" | "unocss")[] = []
+function detectStylingOutputs(name: string): StylingOutput[] {
+  const outputs: StylingOutput[] = []
 
   const cssRecipePath = join(PACKAGES_DIR, "recipes-css", "source", "recipes", `${name}.tsx`)
   if (existsSync(cssRecipePath)) outputs.push("css")
@@ -685,6 +832,50 @@ function detectStylingOutputs(name: string): ("css" | "tailwind" | "unocss")[] {
   if (existsSync(unocssRecipePath)) outputs.push("unocss")
 
   return outputs.sort()
+}
+
+// ─── Recipe Contract Scopes ──────────────────────────────────────────────────
+
+/**
+ * Scopes from recipe-contract-definitions.ts that are utility stylesheets,
+ * not components. These are excluded from component discovery.
+ */
+const UTILITY_SCOPES = new Set(["typeset", "prose"])
+
+/**
+ * Discover which recipe contract scopes have a corresponding .tsx wrapper
+ * in at least one recipes package. A component exists for each such scope
+ * that is not a utility stylesheet.
+ */
+function discoverComponentScopes(): string[] {
+  // Read recipe-contract-definitions.ts to get the full scope list
+  const contractDefsPath = join(ROOT, "tools", "recipe-contract-definitions.ts")
+  if (!existsSync(contractDefsPath)) return []
+
+  const content = readFileSync(contractDefsPath, "utf8")
+  const scopeMatches = [...content.matchAll(/scope:\s*"([^"]+)"/g)]
+  const allScopes = scopeMatches.map((m) => m[1]!)
+
+  const components: string[] = []
+  for (const scope of allScopes) {
+    if (UTILITY_SCOPES.has(scope)) continue
+    // Check if at least one recipes package has a wrapper for this scope
+    const hasWrapper = STYLING_OUTPUTS.some((output) => {
+      const pkgName =
+        output === "css"
+          ? "recipes-css"
+          : output === "tailwind"
+            ? "recipes-tailwind"
+            : "recipes-unocss"
+      const wrapperPath = join(PACKAGES_DIR, pkgName, "source", "recipes", `${scope}.tsx`)
+      return existsSync(wrapperPath)
+    })
+    if (hasWrapper) {
+      components.push(scope)
+    }
+  }
+
+  return components.sort()
 }
 
 // ─── Deterministic Timestamp ─────────────────────────────────────────────────
@@ -775,8 +966,8 @@ function withStableManifestStamps(candidate: PrimitiveManifestV2): PrimitiveMani
  * Signing fields are excluded from the comparison: they are injected after this
  * runs, so the committed file may carry them while the candidate does not.
  */
-function withStableIndexStamp(candidate: IndexManifestV2): IndexManifestV2 {
-  const committed = readCommittedJson<IndexManifestV2>("index.json")
+function withStableIndexStamp(candidate: IndexManifestV3): IndexManifestV3 {
+  const committed = readCommittedJson<IndexManifestV3>("index.json")
   if (!committed || typeof committed.generatedAt !== "string") return candidate
   if (
     canonicalJson(indexWithoutStamps(candidate)) !== canonicalJson(indexWithoutStamps(committed))
@@ -787,7 +978,7 @@ function withStableIndexStamp(candidate: IndexManifestV2): IndexManifestV2 {
 }
 
 /** Index body with the generation stamp and all signing fields removed. */
-function indexWithoutStamps(index: IndexManifestV2): unknown {
+function indexWithoutStamps(index: IndexManifestV3): unknown {
   const { generatedAt: _generatedAt, integrity, ...rest } = index
   const {
     signature: _signature,
@@ -800,13 +991,56 @@ function indexWithoutStamps(index: IndexManifestV2): unknown {
 
 /** The signature already recorded in the committed index, if any. */
 function committedIndexSignature(): { signature?: string; signedAt?: string } {
-  const committed = readCommittedJson<IndexManifestV2>("index.json")
+  const committed = readCommittedJson<IndexManifestV3>("index.json")
   const integrity = committed?.integrity as Record<string, unknown> | undefined
   return {
     signature:
       typeof integrity?.["signature"] === "string" ? (integrity["signature"] as string) : undefined,
     signedAt:
       typeof integrity?.["signedAt"] === "string" ? (integrity["signedAt"] as string) : undefined,
+  }
+}
+
+// ─── Recursive Orphan Sweep ──────────────────────────────────────────────────
+
+/**
+ * Recursively remove stale manifests from the registry directory.
+ * Keeps files whose names are in the expected set.
+ */
+function sweepOrphanManifests(
+  dir: string,
+  expectedNames: Set<string>,
+  keepPrefixes: string[] = [],
+): void {
+  if (!existsSync(dir)) return
+
+  for (const entry of readdirSync(dir)) {
+    const fullPath = join(dir, entry)
+    if (statSync(fullPath).isDirectory()) {
+      sweepOrphanManifests(fullPath, expectedNames, keepPrefixes)
+      // Remove empty directories that were created for manifests
+      try {
+        const remaining = readdirSync(fullPath)
+        if (remaining.length === 0) {
+          // Don't remove if this is a recognized namespaced directory
+          const dirName = dirname(fullPath) === REGISTRY_DIR ? entry : ""
+          if (dirName && !keepPrefixes.includes(dirName)) {
+            // It's an empty subdirectory in registry, remove it
+          }
+        }
+      } catch {
+        // ignore
+      }
+      continue
+    }
+
+    if (!entry.endsWith(".json")) continue
+
+    const nameWithoutExt = entry.slice(0, -".json".length)
+    if (nameWithoutExt === "index") continue
+    if (expectedNames.has(nameWithoutExt)) continue
+
+    unlinkSync(fullPath)
   }
 }
 
@@ -901,15 +1135,38 @@ function buildRegistry(): void {
   }
 
   const primitiveNames = new Set(primitives.map((primitive) => primitive.name))
+  const primitiveNameMap = new Map(primitives.map((p) => [p.name, p]))
+
+  // Recursive orphan sweep — handles both flat registry/*.json and
+  // namespaced registry/<layer>/*.json (D2, part two).
+  // Keep known namespaced directories from being removed
+  const knownSubdirs = new Set(["components", "blocks", "templates", "themes"])
+
   for (const registryFile of readdirSync(REGISTRY_DIR)) {
-    if (
-      registryFile === "index.json" ||
-      !registryFile.endsWith(".json") ||
-      primitiveNames.has(registryFile.slice(0, -".json".length))
-    ) {
+    const fullPath = join(REGISTRY_DIR, registryFile)
+
+    if (registryFile === "index.json") continue
+
+    if (statSync(fullPath).isDirectory()) {
+      // It's a namespaced subdirectory — sweep its contents
+      if (knownSubdirs.has(registryFile)) {
+        const layerExpectedNames = getExpectedNamesForLayer(registryFile)
+        sweepOrphanManifests(fullPath, layerExpectedNames)
+      } else {
+        // Unknown subdirectory — remove it
+        for (const entry of readdirSync(fullPath)) {
+          unlinkSync(join(fullPath, entry))
+        }
+      }
       continue
     }
-    unlinkSync(join(REGISTRY_DIR, registryFile))
+
+    if (!registryFile.endsWith(".json")) continue
+
+    const nameWithoutExt = registryFile.slice(0, -".json".length)
+    if (primitiveNames.has(nameWithoutExt)) continue
+
+    unlinkSync(fullPath)
   }
 
   // Generate V2 manifests with integrity and metadata
@@ -1005,15 +1262,149 @@ function buildRegistry(): void {
     writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n")
   }
 
-  // Compute entries hash for the index
-  const entriesHash = computeEntriesHash(
-    v2Manifests.map((m) => ({ name: m.name, filesHash: m.integrity.filesHash })),
-  )
+  // ─── Component Discovery & Manifest Generation ────────────────────────────
+  const componentScopes = discoverComponentScopes()
+  const componentManifests: ComponentManifest[] = []
+  const componentIndexEntries: IndexManifestV3["components"] = []
 
-  // Write V2 index.json
-  const indexV2: IndexManifestV2 = {
-    $schema: "https://solidiom.dev/schemas/registry-index/v2.json",
-    version: 2,
+  for (const scope of componentScopes) {
+    const stylingOutputs = detectStylingOutputs(scope)
+    if (stylingOutputs.length === 0) continue
+
+    // The primitive this component wraps
+    const primitive = primitiveNameMap.get(scope)
+    if (!primitive) continue
+
+    // Source files per styling output
+    const sourceMap: Record<StylingOutput, string[]> = {} as Record<StylingOutput, string[]>
+    const integrityMap: Record<StylingOutput, Record<string, string>> = {} as Record<
+      StylingOutput,
+      Record<string, string>
+    >
+
+    for (const output of stylingOutputs) {
+      const pkgName =
+        output === "css"
+          ? "recipes-css"
+          : output === "tailwind"
+            ? "recipes-tailwind"
+            : "recipes-unocss"
+      const sourceDirPath = join(PACKAGES_DIR, pkgName, "source")
+      const relativeFile = `recipes/${scope}.tsx`
+      const sourceFile = `src/recipes/${scope}.tsx`
+      sourceMap[output] = [sourceFile]
+
+      // Compute digest: the source file lives in source/recipes/<scope>.tsx
+      const fullPath = join(sourceDirPath, relativeFile)
+      const digests: Record<string, string> = {}
+      if (existsSync(fullPath)) {
+        const content = readFileSync(fullPath)
+        digests[sourceFile] = createHash("sha256").update(content).digest("hex")
+      }
+      integrityMap[output] = digests
+    }
+
+    const docs = layerDocumentationMetadata("components", scope)
+
+    const manifest: ComponentManifest = {
+      $schema: "https://solidiom.dev/schemas/registry-manifest/v2.json",
+      name: scope,
+      version: primitive.version,
+      package: `@solidiom/recipes-${stylingOutputs[0]}`,
+      deliverables: ["component"],
+      source: sourceMap,
+      integrity: {
+        algorithm: "sha256",
+        fileDigests: integrityMap,
+        lastGenerated: now,
+      },
+      documentation: docs,
+      dependencies: [primitive.package],
+      lastUpdated: now,
+    }
+
+    componentManifests.push(manifest)
+
+    // Compute a combined hash for index entriesHash
+    const allDigests = Object.values(integrityMap).flatMap((d) => Object.values(d).sort())
+    const combinedHash = createHash("sha256").update(allDigests.join("")).digest("hex")
+
+    componentIndexEntries.push({
+      name: scope,
+      version: primitive.version,
+      package: `@solidiom/recipes-${stylingOutputs[0]}`,
+      label: scope
+        .split("-")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" "),
+      description: `Styled ${scope} component — the recipe wrapper for the ${stylingOutputs.join(", ")} profile(s) using the ${scope} primitive.`,
+      status: "preview",
+      deliverables: ["component"],
+      documentationStatus: docs.status,
+      documentationLocales: docs.locales,
+      stylingOutputs: stylingOutputs,
+      primitiveDependency: primitive.package,
+      searchKeywords: [scope.toLowerCase(), "component", ...stylingOutputs].sort(),
+    })
+  }
+
+  // Write component manifests
+  for (const manifest of componentManifests) {
+    const dir = join(REGISTRY_DIR, "components")
+    mkdirSync(dir, { recursive: true })
+    const manifestPath = join(dir, `${manifest.name}.json`)
+    writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n")
+  }
+
+  // ─── Block Discovery ──────────────────────────────────────────────────────
+  const blockIndexEntries: IndexManifestV3["blocks"] = []
+  const blockManifestDir = join(REGISTRY_DIR, "blocks")
+  mkdirSync(blockManifestDir, { recursive: true })
+
+  // Blocks are defined in docs/contracts/block-catalog-manifest.json
+  // For now, blocks are content-driven and not yet implemented — emit empty array
+  // The block manifest will be populated as blocks are implemented (FOUND-005)
+
+  // ─── Template Discovery ───────────────────────────────────────────────────
+  const templateIndexEntries: IndexManifestV3["templates"] = []
+  const templateManifestDir = join(REGISTRY_DIR, "templates")
+  mkdirSync(templateManifestDir, { recursive: true })
+
+  // Templates exist under templates/<name>/ with template.json
+  // For now, emit empty array — will be populated as templates are implemented
+
+  // ─── Theme Discovery ──────────────────────────────────────────────────────
+  const themeIndexEntries: IndexManifestV3["themes"] = []
+  const themeManifestDir = join(REGISTRY_DIR, "themes")
+  mkdirSync(themeManifestDir, { recursive: true })
+
+  // Themes exist in packages/themes/ with preset themes
+  // For now, emit empty array — will be populated as theme layer is implemented
+
+  // Sort all arrays deterministically
+  componentIndexEntries.sort((a, b) => a.name.localeCompare(b.name))
+  blockIndexEntries.sort((a, b) => a.name.localeCompare(b.name))
+  templateIndexEntries.sort((a, b) => a.name.localeCompare(b.name))
+  themeIndexEntries.sort((a, b) => a.name.localeCompare(b.name))
+
+  // Compute entries hash for the index (across all layers)
+  const allEntries = [
+    ...v2Manifests.map((m) => ({ name: m.name, filesHash: m.integrity.filesHash })),
+    ...componentManifests.map((m) => {
+      // Compute a hash from all per-output digests for components
+      const allDigests = Object.values(m.integrity.fileDigests).flatMap((d) =>
+        Object.values(d).sort(),
+      )
+      const hash = createHash("sha256").update(allDigests.join("")).digest("hex")
+      return { name: m.name, filesHash: hash }
+    }),
+  ]
+  const entriesHash = computeEntriesHash(allEntries)
+
+  // Write V3 index.json
+  const indexV3: IndexManifestV3 = {
+    $schema: "https://solidiom.dev/schemas/registry-index/v3.json",
+    version: 3,
     generatedAt: now,
     integrity: { algorithm: "sha256", entriesHash },
     primitives: v2Manifests
@@ -1053,11 +1444,15 @@ function buildRegistry(): void {
         return { ...a, version: adapterVersion }
       })
       .sort((a, b) => a.name.localeCompare(b.name)),
+    components: componentIndexEntries,
+    blocks: blockIndexEntries,
+    templates: templateIndexEntries,
+    themes: themeIndexEntries,
   }
 
   // BUILD-001: keep the committed stamp when nothing else changed, before
   // signing, so the signature is computed over stabilized content.
-  const stableIndex = withStableIndexStamp(indexV2)
+  const stableIndex = withStableIndexStamp(indexV3)
 
   // REG-005: Sign the index if REGISTRY_SIGN_KEY is set
   const signKey = process.env.REGISTRY_SIGN_KEY
@@ -1083,13 +1478,62 @@ function buildRegistry(): void {
 
   // Summary
   console.log(`registry-build: generated ${primitives.length} primitive manifests`)
+  console.log(`registry-build: ${componentManifests.length} component manifests`)
   console.log(`registry-build: ${adapterEntries.length} adapters cataloged`)
-  console.log(`registry-build: wrote registry/index.json`)
+  console.log(`registry-build: ${blockIndexEntries.length} blocks`)
+  console.log(`registry-build: ${templateIndexEntries.length} templates`)
+  console.log(`registry-build: ${themeIndexEntries.length} themes`)
+  console.log(`registry-build: wrote registry/index.json (v3)`)
 
   for (const p of primitives.sort((a, b) => a.name.localeCompare(b.name))) {
     const caps =
       p.capabilities.length > 0 ? ` [${p.capabilities.map((c) => c.name).join(", ")}]` : ""
     console.log(`  ✓ ${p.name}${caps}`)
+  }
+}
+
+/**
+ * Helper to compute expected names for a given layer during orphan sweep.
+ */
+function getExpectedNamesForLayer(layer: string): Set<string> {
+  switch (layer) {
+    case "components":
+      return new Set(discoverComponentScopes())
+    case "blocks":
+      return new Set()
+    case "templates":
+      return new Set()
+    case "themes":
+      return new Set()
+    default:
+      return new Set()
+  }
+}
+
+function readA11yEvidence(name: string): { evidenceIds: string[]; lastReviewed?: string } {
+  const evidencePath = join(PACKAGES_DIR, name, "docs", "accessibility", "evidence.json")
+  if (!existsSync(evidencePath)) return { evidenceIds: [] }
+
+  try {
+    const evidence = JSON.parse(readFileSync(evidencePath, "utf8")) as A11yEvidenceRecord
+    const hasPassingSummary =
+      evidence.schemaVersion === 2 &&
+      evidence.primitive === name &&
+      evidence.summary?.violations === 0 &&
+      evidence.summary?.outcome === "pass" &&
+      typeof evidence.summary.passes === "number" &&
+      evidence.summary.passes > 0
+    const evidenceIds = Array.isArray(evidence.evidenceIds)
+      ? evidence.evidenceIds.filter((id): id is string => typeof id === "string")
+      : []
+    return hasPassingSummary && evidenceIds.length > 0
+      ? {
+          evidenceIds,
+          lastReviewed: typeof evidence.lastRun === "string" ? evidence.lastRun : undefined,
+        }
+      : { evidenceIds: [] }
+  } catch {
+    return { evidenceIds: [] }
   }
 }
 
@@ -1105,9 +1549,11 @@ export {
   collectSourceFiles,
   detectCapabilities,
   extractRuntimeModules,
+  discoverComponentScopes,
+  layerDocumentationMetadata,
 }
 
-export type { PrimitiveManifestV2, IndexManifestV2, Capability }
+export type { PrimitiveManifestV2, IndexManifestV3, Capability, ComponentManifest }
 
 // Run the build when executed directly
 const isMainModule =

@@ -2,7 +2,7 @@
 
 exports[`registry build determinism (REG-004) > snapshot: registry/index.json matches expected structure 1`] = `
 {
-  "$schema": "https://solidiom.dev/schemas/registry-index/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "adapters": [
     {
       "capability": "carousel-physics@1",
@@ -41,9 +41,402 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "version": "0.0.1-next.0",
     },
   ],
+  "blocks": [],
+  "components": [
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled accordion component — the recipe wrapper for the css, tailwind, unocss profile(s) using the accordion primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Accordion",
+      "name": "accordion",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/accordion",
+      "searchKeywords": [
+        "accordion",
+        "component",
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled alert component — the recipe wrapper for the css, tailwind, unocss profile(s) using the alert primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Alert",
+      "name": "alert",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/alert",
+      "searchKeywords": [
+        "alert",
+        "component",
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled badge component — the recipe wrapper for the css, tailwind, unocss profile(s) using the badge primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Badge",
+      "name": "badge",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/badge",
+      "searchKeywords": [
+        "badge",
+        "component",
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled button component — the recipe wrapper for the css, tailwind, unocss profile(s) using the button primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Button",
+      "name": "button",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/button",
+      "searchKeywords": [
+        "button",
+        "component",
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled checkbox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the checkbox primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Checkbox",
+      "name": "checkbox",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/checkbox",
+      "searchKeywords": [
+        "checkbox",
+        "component",
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled dialog component — the recipe wrapper for the css, tailwind, unocss profile(s) using the dialog primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Dialog",
+      "name": "dialog",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/dialog",
+      "searchKeywords": [
+        "component",
+        "css",
+        "dialog",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the menu primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Menu",
+      "name": "menu",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/menu",
+      "searchKeywords": [
+        "component",
+        "css",
+        "menu",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled popover component — the recipe wrapper for the css, tailwind, unocss profile(s) using the popover primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Popover",
+      "name": "popover",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/popover",
+      "searchKeywords": [
+        "component",
+        "css",
+        "popover",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled select component — the recipe wrapper for the css, tailwind, unocss profile(s) using the select primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Select",
+      "name": "select",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/select",
+      "searchKeywords": [
+        "component",
+        "css",
+        "select",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled switch component — the recipe wrapper for the css, tailwind, unocss profile(s) using the switch primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Switch",
+      "name": "switch",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/switch",
+      "searchKeywords": [
+        "component",
+        "css",
+        "switch",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled tabs component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tabs primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Tabs",
+      "name": "tabs",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/tabs",
+      "searchKeywords": [
+        "component",
+        "css",
+        "tabs",
+        "tailwind",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled toast component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toast primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Toast",
+      "name": "toast",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/toast",
+      "searchKeywords": [
+        "component",
+        "css",
+        "tailwind",
+        "toast",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "deliverables": [
+        "component",
+      ],
+      "description": "Styled tooltip component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tooltip primitive.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "label": "Tooltip",
+      "name": "tooltip",
+      "package": "@solidiom/recipes-css",
+      "primitiveDependency": "@solidiom/tooltip",
+      "searchKeywords": [
+        "component",
+        "css",
+        "tailwind",
+        "tooltip",
+        "unocss",
+      ],
+      "status": "preview",
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss",
+      ],
+      "version": "0.0.1-next.0",
+    },
+  ],
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "4fc19a5151c57b74208cabfd631d39fa72ed7d29a95edb020fa40ef2072b66d4",
+    "entriesHash": "503067c6b2bb9e7e81286953d8080d2648a1a59e184ccc61c3bbf075df414897",
   },
   "primitives": [
     {
@@ -2508,6 +2901,8 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "version": "0.0.1-next.0",
     },
   ],
-  "version": 2,
+  "templates": [],
+  "themes": [],
+  "version": 3,
 }
 `;
