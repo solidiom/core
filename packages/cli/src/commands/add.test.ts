@@ -250,7 +250,7 @@ describe("runAdd", () => {
         description: primitive,
         category: "input",
         status: "preview",
-        deliverables: ["component"],
+        deliverables: ["primitive"],
         capabilities: [],
         cli: { addCommand: `solidiom add ${primitive}`, installDeps: [] },
         accessibility: { reviewStatus: "none", evidenceIds: [] },
@@ -273,14 +273,9 @@ describe("runAdd", () => {
         lastUpdated: "2025-01-01T00:00:00.000Z",
       }
       writeFileSync(join(registryDir, `${primitive}.json`), JSON.stringify(manifest))
-      // The index must also carry a matching primitive SUMMARY entry with the
-      // "component" deliverable — otherwise runPlan's loadRegistry finds an
-      // empty `primitives` array, falls through to BUILTIN_PRIMITIVES (which
-      // only ever confirms "primitive"), and blocks the --deliverable
-      // component request with a policy violation before install ever runs.
       const index = {
-        $schema: "https://solidiom.dev/schemas/registry-index/v2.json",
-        version: 2,
+        $schema: "https://solidiom.dev/schemas/registry-index/v3.json",
+        version: 3,
         generatedAt: "2025-01-01T00:00:00.000Z",
         integrity: {
           algorithm: "sha256",
@@ -295,7 +290,7 @@ describe("runAdd", () => {
             description: primitive,
             category: "input",
             status: "preview",
-            deliverables: ["component"],
+            deliverables: ["primitive"],
             hasAccessibilityEvidence: false,
             accessibility: { reviewStatus: "none", evidenceIds: [] },
             documentationStatus: "stub",
@@ -310,6 +305,10 @@ describe("runAdd", () => {
           },
         ],
         adapters: [],
+        components: [],
+        blocks: [],
+        templates: [],
+        themes: [],
       }
       writeFileSync(join(registryDir, "index.json"), JSON.stringify(index))
     }
@@ -321,7 +320,7 @@ describe("runAdd", () => {
       writeFileSync(join(primitiveSource, "index.tsx"), originalContent)
       writeMatchingRegistryFor(nestedCwd, "button", originalContent)
 
-      return { installedPath: join(nestedCwd, "src/ui/components/button/index.tsx") }
+      return { installedPath: join(nestedCwd, "src/ui/primitives/button/index.tsx") }
     }
 
     it("blocks with a red conflict list and remediation hint when a user-modified file would be overwritten", async () => {
@@ -332,7 +331,7 @@ describe("runAdd", () => {
         primitive: "button",
         cwd: nestedCwd,
         mode: "source",
-        deliverable: "component",
+        deliverable: "primitive",
       })
 
       writeFileSync(installedPath, "export function Button() { /* user edit */ }")
@@ -345,7 +344,7 @@ describe("runAdd", () => {
         primitive: "button",
         cwd: nestedCwd,
         mode: "source",
-        deliverable: "component",
+        deliverable: "primitive",
       })
       expect(result.sourceResult!.conflicts?.hasBlockingConflicts).toBe(true)
       expect(result.sourceResult!.filesWritten).toEqual([])
@@ -377,7 +376,7 @@ describe("runAdd", () => {
       let exitCode: number
       try {
         exitCode = await cli.run(
-          ["add", "button", "--mode", "source", "--deliverable", "component"],
+          ["add", "button", "--mode", "source", "--deliverable", "primitive"],
           {
             stdout,
             stderr,
@@ -407,10 +406,10 @@ describe("runAdd", () => {
         primitive: "button",
         cwd: nestedCwd,
         mode: "source",
-        deliverable: "component",
+        deliverable: "primitive",
       })
 
-      const installedPath = join(nestedCwd, "src/ui/components/button/index.tsx")
+      const installedPath = join(nestedCwd, "src/ui/primitives/button/index.tsx")
       writeFileSync(installedPath, "export function Button() { /* user edit */ }")
 
       const upstreamContent = `export function Button() { /* v2 */ }`
@@ -421,7 +420,7 @@ describe("runAdd", () => {
         primitive: "button",
         cwd: nestedCwd,
         mode: "source",
-        deliverable: "component",
+        deliverable: "primitive",
         force: true,
       })
 
@@ -440,10 +439,10 @@ describe("runAdd", () => {
         primitive: "button",
         cwd: nestedCwd,
         mode: "source",
-        deliverable: "component",
+        deliverable: "primitive",
       })
 
-      const installedPath = join(nestedCwd, "src/ui/components/button/index.tsx")
+      const installedPath = join(nestedCwd, "src/ui/primitives/button/index.tsx")
       const treeBefore = readFileSync(installedPath, "utf8")
 
       const upstreamContent = `export function Button() { /* v2 */ }`
@@ -454,7 +453,7 @@ describe("runAdd", () => {
         primitive: "button",
         cwd: nestedCwd,
         mode: "source",
-        deliverable: "component",
+        deliverable: "primitive",
         diff: true,
       })
 

@@ -5,7 +5,7 @@ import { tmpdir } from "node:os"
 import { createHash, createHmac } from "node:crypto"
 import { verifyRegistry } from "./verify"
 
-const SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v2.json"
+const SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v3.json"
 const MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v2.json"
 
 function buttonManifest() {
@@ -59,7 +59,7 @@ function buttonManifest() {
 function baseIndex(manifest: ReturnType<typeof buttonManifest>) {
   return {
     $schema: SCHEMA_URL,
-    version: 2 as const,
+    version: 3 as const,
     generatedAt: "2025-01-01T00:00:00.000Z",
     integrity: {
       algorithm: "sha256" as const,
@@ -89,6 +89,10 @@ function baseIndex(manifest: ReturnType<typeof buttonManifest>) {
       },
     ],
     adapters: [],
+    components: [],
+    blocks: [],
+    templates: [],
+    themes: [],
   }
 }
 
@@ -259,7 +263,7 @@ describe("verifyRegistry (REG-006)", () => {
     const ROOT = join(import.meta.dirname, "..", "..", "..", "..")
     const registryDir = join(ROOT, "registry")
     const raw = JSON.parse(readFileSync(join(registryDir, "index.json"), "utf8"))
-    expect(raw.version).toBe(2)
+    expect(raw.version).toBe(3)
 
     const result = verifyRegistry({ cwd: ROOT, registryDir })
     // The checked-in registry is unsigned in this workspace, so signature

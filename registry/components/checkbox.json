@@ -30,7 +30,7 @@
         "src/recipes/checkbox.tsx": "cc7d17a3b9524fed5a57818b2569b663c2dda363e2009737455c70f5e0410410"
       }
     },
-    "lastGenerated": "2026-08-04T22:57:46.000Z"
+    "lastGenerated": "2026-08-04T23:07:36.000Z"
   },
   "documentation": {
     "status": "review",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/checkbox"
   ],
-  "lastUpdated": "2026-08-04T22:57:46.000Z"
+  "lastUpdated": "2026-08-04T23:07:36.000Z"
 }
