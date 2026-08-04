@@ -613,10 +613,8 @@ const LAYER_COPY: Record<Locale, LayerCatalogCopy> = {
     status: "Estado",
     none: "Ninguna",
     apiUnavailable: "La referencia de API generada aún no está disponible.",
-    examplesUnavailable:
-      "Los ejemplos se publicarán con la documentación revisada.",
-    accessibilityUnavailable:
-      "La guía de accesibilidad se publicará después de la revisión.",
+    examplesUnavailable: "Los ejemplos se publicarán con la documentación revisada.",
+    accessibilityUnavailable: "La guía de accesibilidad se publicará después de la revisión.",
     generatedFrom: "Generado a partir del código fuente público del paquete.",
     tabsLabel: "Documentación de {name}",
   },
@@ -639,7 +637,12 @@ export type CatalogLayer = "components" | "blocks" | "templates" | "themes"
 
 const LAYER_DIRECTORY_COPY: Record<
   CatalogLayer,
-  Partial<Record<Locale, Pick<LayerCatalogCopy, "directoryTitle" | "directoryDescription" | "directoryCount">>>
+  Partial<
+    Record<
+      Locale,
+      Pick<LayerCatalogCopy, "directoryTitle" | "directoryDescription" | "directoryCount">
+    >
+  >
 > = {
   components: {},
   blocks: {

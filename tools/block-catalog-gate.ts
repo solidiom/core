@@ -175,9 +175,7 @@ function checkStates(block: BlockManifest): string[] {
     }
   }
   if (unmatched.length > 0) {
-    failures.push(
-      `requiredStates not covered by prose states: [${unmatched.join(", ")}]`,
-    )
+    failures.push(`requiredStates not covered by prose states: [${unmatched.join(", ")}]`)
   }
 
   return failures
@@ -209,9 +207,7 @@ function verifyBlock(
     // Check the .md names the same component for this ID
     const mdName = mdComponentNames.get(compId)
     if (!mdName) {
-      failures.push(
-        `${compId} has no name in block-catalog-manifest.md (block ${block.id})`,
-      )
+      failures.push(`${compId} has no name in block-catalog-manifest.md (block ${block.id})`)
       continue
     }
 
@@ -226,9 +222,7 @@ function verifyBlock(
 
   // §8.3.1 req 3: No unresolved proposals
   if (block.proposedComponents.length > 0) {
-    failures.push(
-      `proposedComponents not empty: [${block.proposedComponents.join(", ")}]`,
-    )
+    failures.push(`proposedComponents not empty: [${block.proposedComponents.join(", ")}]`)
   }
 
   // §8.3.1 req 4: Structured states

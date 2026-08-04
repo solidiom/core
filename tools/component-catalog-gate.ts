@@ -163,13 +163,7 @@ function verifyComponent(name: string): ComponentResult {
   // Check recipe wrapper exists for each styling profile and primitive package exists
   const profiles = ["css", "tailwind", "unocss"]
   for (const profile of profiles) {
-    const recipePath = join(
-      PACKAGES_DIR,
-      `recipes-${profile}`,
-      "src",
-      "recipes",
-      `${name}.tsx`,
-    )
+    const recipePath = join(PACKAGES_DIR, `recipes-${profile}`, "src", "recipes", `${name}.tsx`)
     if (!existsSync(recipePath)) {
       failures.push(`missing recipes-${profile}/src/recipes/${name}.tsx`)
     }
@@ -193,7 +187,8 @@ function verifyComponent(name: string): ComponentResult {
     failures.push("missing registry/components/<name>.json")
   } else {
     // Check source files per styling output
-    const hasSource = registry.source && (registry.source.css || registry.source.tailwind || registry.source.unocss)
+    const hasSource =
+      registry.source && (registry.source.css || registry.source.tailwind || registry.source.unocss)
     if (!hasSource) {
       failures.push("registry: no source files recorded per styling output")
     }
@@ -245,9 +240,7 @@ function verifyComponent(name: string): ComponentResult {
       failures.push("ES doc: cannot read frontmatter")
     } else {
       if (esFm.translationStatus !== "draft") {
-        failures.push(
-          `ES doc: translationStatus="${esFm.translationStatus}" (expected "draft")`,
-        )
+        failures.push(`ES doc: translationStatus="${esFm.translationStatus}" (expected "draft")`)
       }
       const hash = String(esFm.translationSourceHash || "")
       if (!hash || hash === "0".repeat(64)) {

@@ -117,13 +117,7 @@ function checkPrimitives(
 
       for (const view of VIEWS) {
         const viewPath = `${prefix}/primitives/${name}/${view}/`
-        checkExactlyOne(
-          viewPath,
-          `${name} (${locale} ${view})`,
-          builtRoutes,
-          failures,
-          routeUsage,
-        )
+        checkExactlyOne(viewPath, `${name} (${locale} ${view})`, builtRoutes, failures, routeUsage)
       }
     }
   }

@@ -76,57 +76,607 @@ const COMPONENTS: Record<string, { label: string; primitive: string }> = {
 
 /** §9.3 — 36 blocks from block-catalog-manifest.json */
 const BLOCKS = [
-  { name: "sign-in", label: "Sign In", category: "AUTH", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Label", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "sign-up", label: "Sign Up", category: "AUTH", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Toast", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "reset-password", label: "Reset Password", category: "AUTH", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Toast", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "welcome-wizard", label: "Welcome Wizard", category: "ONBOARD", compDeps: ["Button", "Input", "Field", "Card", "Tabs", "Progress", "Alert", "Navigation Menu", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "profile-setup", label: "Profile Setup", category: "ONBOARD", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Toast", "Avatar", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "project-starter", label: "Project Starter", category: "ONBOARD", compDeps: ["Button", "Input", "Field", "Card", "Select", "Alert", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "account-settings", label: "Account Settings", category: "SETTINGS", compDeps: ["Button", "Input", "Field", "Card", "Tabs", "Alert", "Toast", "Avatar", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "notification-preferences", label: "Notification Preferences", category: "SETTINGS", compDeps: ["Button", "Field", "Card", "Tabs", "Checkbox", "Radio Group", "Switch", "Select", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "danger-zone", label: "Danger Zone", category: "SETTINGS", compDeps: ["Button", "Card", "Alert", "Dialog", "Toast", "Progress", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "subscription-plans", label: "Subscription Plans", category: "BILLING", compDeps: ["Button", "Card", "Alert", "Dialog", "Tabs", "Toast", "Checkbox", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "payment-method", label: "Payment Method", category: "BILLING", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Dialog", "Avatar", "Select", "Toast", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "invoice-history", label: "Invoice History", category: "BILLING", compDeps: ["Button", "Input", "Card", "Select", "Data Table", "Select", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "team-management", label: "Team Management", category: "ADMIN", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Dialog", "Avatar", "Select", "Data Table", "Select", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "audit-log", label: "Audit Log", category: "ADMIN", compDeps: ["Input", "Card", "Select", "Checkbox", "Data Table", "Progress", "Select", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "role-permissions", label: "Role Permissions", category: "ADMIN", compDeps: ["Button", "Field", "Card", "Alert", "Dialog", "Tabs", "Checkbox", "Radio Group", "Switch", "Select", "Data Table", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "dashboard-overview", label: "Dashboard Overview", category: "OBS", compDeps: ["Card", "Tabs", "Alert", "Badge", "Data Table", "Meter", "Progress", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "real-time-events", label: "Real-time Events", category: "OBS", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Avatar", "Checkbox", "Radio Group", "Switch", "Data Table", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "alert-configuration", label: "Alert Configuration", category: "OBS", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Dialog", "Select", "Tabs", "Checkbox", "Radio Group", "Switch", "Data Table", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "resource-list", label: "Resource List", category: "RESOURCE", compDeps: ["Input", "Card", "Alert", "Avatar", "Badge", "Select", "Checkbox", "Data Table", "Select", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "resource-detail", label: "Resource Detail", category: "RESOURCE", compDeps: ["Button", "Card", "Alert", "Dialog", "Avatar", "Tabs", "Toast", "Breadcrumb", "Data Table", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "resource-creator", label: "Resource Creator", category: "RESOURCE", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Dialog", "Select", "Tabs", "Toast", "Checkbox", "Switch", "Breadcrumb", "Progress", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "chat-interface", label: "Chat Interface", category: "AI", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Avatar", "Toast", "Data Table", "Toolbar", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "prompt-studio", label: "Prompt Studio", category: "AI", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Dialog", "Select", "Tabs", "Data Table", "Toast", "Checkbox", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "workflow-builder", label: "Workflow Builder", category: "AI", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Dialog", "Select", "Tabs", "Data Table", "Toast", "Checkbox", "Switch", "Progress", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "search-results", label: "Search Results", category: "SEARCH", compDeps: ["Input", "Card", "Alert", "Select", "Checkbox", "Breadcrumb", "Select", "Data Table", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "saved-searches", label: "Saved Searches", category: "SEARCH", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Dialog", "Select", "Tabs", "Checkbox", "Switch", "Data Table", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "search-analytics", label: "Search Analytics", category: "SEARCH", compDeps: ["Card", "Select", "Tabs", "Badge", "Data Table", "Meter", "Progress", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "product-catalog", label: "Product Catalog", category: "COMMERCE", compDeps: ["Button", "Input", "Card", "Alert", "Select", "Avatar", "Checkbox", "Data Table", "Select", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "shopping-cart", label: "Shopping Cart", category: "COMMERCE", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Dialog", "Avatar", "Select", "Toast", "Switch", "Data Table", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "order-tracking", label: "Order Tracking", category: "COMMERCE", compDeps: ["Button", "Input", "Card", "Alert", "Tabs", "Badge", "Breadcrumb", "Select", "Data Table", "Progress", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "content-editor", label: "Content Editor", category: "CONTENT", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Select", "Tabs", "Toolbar", "Toast", "Data Table", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "content-library", label: "Content Library", category: "CONTENT", compDeps: ["Button", "Input", "Card", "Alert", "Dialog", "Avatar", "Badge", "Select", "Checkbox", "Data Table", "Select", "Progress", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "content-workflow", label: "Content Workflow", category: "CONTENT", compDeps: ["Button", "Input", "Field", "Card", "Alert", "Dialog", "Select", "Tabs", "Badge", "Toast", "Avatar", "Data Table", "Breadcrumb", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "navigation-layout", label: "Navigation Layout", category: "SHELL", compDeps: ["Button", "Alert", "Avatar", "Badge", "Breadcrumbs", "Checkbox", "Data Table", "Navigation Menu", "Breadcrumb", "Accordion", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "command-palette-shell", label: "Command Palette", category: "SHELL", compDeps: ["Input", "Card", "Alert", "Avatar", "Command Palette", "Data Table", "Kbd", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
-  { name: "notifications-center", label: "Notifications Center", category: "SHELL", compDeps: ["Button", "Card", "Alert", "Avatar", "Badge", "Toast", "Checkbox", "Data Table", "Select", "Spinner"], states: ["loading", "empty", "error", "restricted"] },
+  {
+    name: "sign-in",
+    label: "Sign In",
+    category: "AUTH",
+    compDeps: ["Button", "Input", "Field", "Card", "Alert", "Label", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "sign-up",
+    label: "Sign Up",
+    category: "AUTH",
+    compDeps: ["Button", "Input", "Field", "Card", "Alert", "Toast", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "reset-password",
+    label: "Reset Password",
+    category: "AUTH",
+    compDeps: ["Button", "Input", "Field", "Card", "Alert", "Toast", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "welcome-wizard",
+    label: "Welcome Wizard",
+    category: "ONBOARD",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Tabs",
+      "Progress",
+      "Alert",
+      "Navigation Menu",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "profile-setup",
+    label: "Profile Setup",
+    category: "ONBOARD",
+    compDeps: ["Button", "Input", "Field", "Card", "Alert", "Toast", "Avatar", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "project-starter",
+    label: "Project Starter",
+    category: "ONBOARD",
+    compDeps: ["Button", "Input", "Field", "Card", "Select", "Alert", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "account-settings",
+    label: "Account Settings",
+    category: "SETTINGS",
+    compDeps: ["Button", "Input", "Field", "Card", "Tabs", "Alert", "Toast", "Avatar", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "notification-preferences",
+    label: "Notification Preferences",
+    category: "SETTINGS",
+    compDeps: [
+      "Button",
+      "Field",
+      "Card",
+      "Tabs",
+      "Checkbox",
+      "Radio Group",
+      "Switch",
+      "Select",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "danger-zone",
+    label: "Danger Zone",
+    category: "SETTINGS",
+    compDeps: ["Button", "Card", "Alert", "Dialog", "Toast", "Progress", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "subscription-plans",
+    label: "Subscription Plans",
+    category: "BILLING",
+    compDeps: ["Button", "Card", "Alert", "Dialog", "Tabs", "Toast", "Checkbox", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "payment-method",
+    label: "Payment Method",
+    category: "BILLING",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Avatar",
+      "Select",
+      "Toast",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "invoice-history",
+    label: "Invoice History",
+    category: "BILLING",
+    compDeps: ["Button", "Input", "Card", "Select", "Data Table", "Select", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "team-management",
+    label: "Team Management",
+    category: "ADMIN",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Avatar",
+      "Select",
+      "Data Table",
+      "Select",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "audit-log",
+    label: "Audit Log",
+    category: "ADMIN",
+    compDeps: [
+      "Input",
+      "Card",
+      "Select",
+      "Checkbox",
+      "Data Table",
+      "Progress",
+      "Select",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "role-permissions",
+    label: "Role Permissions",
+    category: "ADMIN",
+    compDeps: [
+      "Button",
+      "Field",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Tabs",
+      "Checkbox",
+      "Radio Group",
+      "Switch",
+      "Select",
+      "Data Table",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "dashboard-overview",
+    label: "Dashboard Overview",
+    category: "OBS",
+    compDeps: ["Card", "Tabs", "Alert", "Badge", "Data Table", "Meter", "Progress", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "real-time-events",
+    label: "Real-time Events",
+    category: "OBS",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Avatar",
+      "Checkbox",
+      "Radio Group",
+      "Switch",
+      "Data Table",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "alert-configuration",
+    label: "Alert Configuration",
+    category: "OBS",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Select",
+      "Tabs",
+      "Checkbox",
+      "Radio Group",
+      "Switch",
+      "Data Table",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "resource-list",
+    label: "Resource List",
+    category: "RESOURCE",
+    compDeps: [
+      "Input",
+      "Card",
+      "Alert",
+      "Avatar",
+      "Badge",
+      "Select",
+      "Checkbox",
+      "Data Table",
+      "Select",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "resource-detail",
+    label: "Resource Detail",
+    category: "RESOURCE",
+    compDeps: [
+      "Button",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Avatar",
+      "Tabs",
+      "Toast",
+      "Breadcrumb",
+      "Data Table",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "resource-creator",
+    label: "Resource Creator",
+    category: "RESOURCE",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Select",
+      "Tabs",
+      "Toast",
+      "Checkbox",
+      "Switch",
+      "Breadcrumb",
+      "Progress",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "chat-interface",
+    label: "Chat Interface",
+    category: "AI",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Avatar",
+      "Toast",
+      "Data Table",
+      "Toolbar",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "prompt-studio",
+    label: "Prompt Studio",
+    category: "AI",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Select",
+      "Tabs",
+      "Data Table",
+      "Toast",
+      "Checkbox",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "workflow-builder",
+    label: "Workflow Builder",
+    category: "AI",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Select",
+      "Tabs",
+      "Data Table",
+      "Toast",
+      "Checkbox",
+      "Switch",
+      "Progress",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "search-results",
+    label: "Search Results",
+    category: "SEARCH",
+    compDeps: [
+      "Input",
+      "Card",
+      "Alert",
+      "Select",
+      "Checkbox",
+      "Breadcrumb",
+      "Select",
+      "Data Table",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "saved-searches",
+    label: "Saved Searches",
+    category: "SEARCH",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Select",
+      "Tabs",
+      "Checkbox",
+      "Switch",
+      "Data Table",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "search-analytics",
+    label: "Search Analytics",
+    category: "SEARCH",
+    compDeps: ["Card", "Select", "Tabs", "Badge", "Data Table", "Meter", "Progress", "Spinner"],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "product-catalog",
+    label: "Product Catalog",
+    category: "COMMERCE",
+    compDeps: [
+      "Button",
+      "Input",
+      "Card",
+      "Alert",
+      "Select",
+      "Avatar",
+      "Checkbox",
+      "Data Table",
+      "Select",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "shopping-cart",
+    label: "Shopping Cart",
+    category: "COMMERCE",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Avatar",
+      "Select",
+      "Toast",
+      "Switch",
+      "Data Table",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "order-tracking",
+    label: "Order Tracking",
+    category: "COMMERCE",
+    compDeps: [
+      "Button",
+      "Input",
+      "Card",
+      "Alert",
+      "Tabs",
+      "Badge",
+      "Breadcrumb",
+      "Select",
+      "Data Table",
+      "Progress",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "content-editor",
+    label: "Content Editor",
+    category: "CONTENT",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Select",
+      "Tabs",
+      "Toolbar",
+      "Toast",
+      "Data Table",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "content-library",
+    label: "Content Library",
+    category: "CONTENT",
+    compDeps: [
+      "Button",
+      "Input",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Avatar",
+      "Badge",
+      "Select",
+      "Checkbox",
+      "Data Table",
+      "Select",
+      "Progress",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "content-workflow",
+    label: "Content Workflow",
+    category: "CONTENT",
+    compDeps: [
+      "Button",
+      "Input",
+      "Field",
+      "Card",
+      "Alert",
+      "Dialog",
+      "Select",
+      "Tabs",
+      "Badge",
+      "Toast",
+      "Avatar",
+      "Data Table",
+      "Breadcrumb",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "navigation-layout",
+    label: "Navigation Layout",
+    category: "SHELL",
+    compDeps: [
+      "Button",
+      "Alert",
+      "Avatar",
+      "Badge",
+      "Breadcrumbs",
+      "Checkbox",
+      "Data Table",
+      "Navigation Menu",
+      "Breadcrumb",
+      "Accordion",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "command-palette-shell",
+    label: "Command Palette",
+    category: "SHELL",
+    compDeps: [
+      "Input",
+      "Card",
+      "Alert",
+      "Avatar",
+      "Command Palette",
+      "Data Table",
+      "Kbd",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
+  {
+    name: "notifications-center",
+    label: "Notifications Center",
+    category: "SHELL",
+    compDeps: [
+      "Button",
+      "Card",
+      "Alert",
+      "Avatar",
+      "Badge",
+      "Toast",
+      "Checkbox",
+      "Data Table",
+      "Select",
+      "Spinner",
+    ],
+    states: ["loading", "empty", "error", "restricted"],
+  },
 ]
 
 /** §9.4 — Templates from the templates/ directory */
 const TEMPLATES = [
-  { name: "vite-solid-router", label: "Vite + Solid Router Starter", stack: "vite-solid-router", portfolios: ["balanced-product"] },
-  { name: "tanstack-start-solid", label: "TanStack Start Solid", stack: "tanstack-start-solid", portfolios: ["balanced-product"] },
+  {
+    name: "vite-solid-router",
+    label: "Vite + Solid Router Starter",
+    stack: "vite-solid-router",
+    portfolios: ["balanced-product"],
+  },
+  {
+    name: "tanstack-start-solid",
+    label: "TanStack Start Solid",
+    stack: "tanstack-start-solid",
+    portfolios: ["balanced-product"],
+  },
 ]
 
 /** §9.5 — Theme presets from packages/themes/source/meta.ts and theme-contract-definitions.ts */
 const THEMES = [
-  { name: "solidiom-default", label: "Solidiom Default", outputs: ["css", "tailwind"], description: "The canonical Solidiom theme with a cool slate canvas and indigo primary." },
-  { name: "ocean", label: "Ocean", outputs: ["css", "tailwind"], description: "A deep teal and cyan palette inspired by ocean depths." },
-  { name: "forest", label: "Forest", outputs: ["css", "tailwind"], description: "An earthy green palette with warm undertones." },
-  { name: "slate", label: "Slate", outputs: ["css", "tailwind"], description: "A neutral monochrome palette with stone tones." },
-  { name: "aurora", label: "Aurora", outputs: ["css", "tailwind"], description: "A vibrant purple and pink gradient palette." },
+  {
+    name: "solidiom-default",
+    label: "Solidiom Default",
+    outputs: ["css", "tailwind"],
+    description: "The canonical Solidiom theme with a cool slate canvas and indigo primary.",
+  },
+  {
+    name: "ocean",
+    label: "Ocean",
+    outputs: ["css", "tailwind"],
+    description: "A deep teal and cyan palette inspired by ocean depths.",
+  },
+  {
+    name: "forest",
+    label: "Forest",
+    outputs: ["css", "tailwind"],
+    description: "An earthy green palette with warm undertones.",
+  },
+  {
+    name: "slate",
+    label: "Slate",
+    outputs: ["css", "tailwind"],
+    description: "A neutral monochrome palette with stone tones.",
+  },
+  {
+    name: "aurora",
+    label: "Aurora",
+    outputs: ["css", "tailwind"],
+    description: "A vibrant purple and pink gradient palette.",
+  },
 ]
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -159,7 +709,15 @@ function labelFromName(name: string): string {
 
 function readRegistryComponent(name: string) {
   const indexPath = join(ROOT, "registry", "index.json")
-  const index = readJSON<{ components?: Array<{ name: string; description: string; searchKeywords: string[]; stylingOutputs: string[]; primitiveDependency?: string }> }>(indexPath)
+  const index = readJSON<{
+    components?: Array<{
+      name: string
+      description: string
+      searchKeywords: string[]
+      stylingOutputs: string[]
+      primitiveDependency?: string
+    }>
+  }>(indexPath)
   if (!index?.components) return null
   const entry = index.components.find((c) => c.name === name)
   if (!entry) return null
@@ -254,7 +812,11 @@ ${label} delegates accessibility to \`${prim}\`. See the [${label} primitive acc
 `
 }
 
-function genComponentES(name: string, meta: ReturnType<typeof readRegistryComponent>, enHash: string): string {
+function genComponentES(
+  name: string,
+  meta: ReturnType<typeof readRegistryComponent>,
+  enHash: string,
+): string {
   const label = meta?.label || titleCase(name)
   const desc = meta?.description || `${label} component`
   const prim = meta?.primitiveDependency || `@solidiom/${name}`
@@ -576,10 +1138,17 @@ ${isTanstack ? "Despliega a cualquier plataforma de alojamiento compatible con N
 
 function genThemeEN(theme: (typeof THEMES)[0]): string {
   const { name, label, outputs, description } = theme
-  const outputsList = outputs.map((o) => {
-    const desc = o === "css" ? "CSS custom properties stylesheet" : o === "tailwind" ? "Tailwind CSS configuration mapping" : "UnoCSS preset extension"
-    return "- **" + o + "** — " + desc
-  }).join("\n")
+  const outputsList = outputs
+    .map((o) => {
+      const desc =
+        o === "css"
+          ? "CSS custom properties stylesheet"
+          : o === "tailwind"
+            ? "Tailwind CSS configuration mapping"
+            : "UnoCSS preset extension"
+      return "- **" + o + "** — " + desc
+    })
+    .join("\n")
 
   return `---
 contentSchemaVersion: 1
@@ -637,10 +1206,17 @@ Import the theme in your project's entry point and apply it through your chosen 
 
 function genThemeES(theme: (typeof THEMES)[0], enHash: string): string {
   const { name, label, outputs, description } = theme
-  const outputsList = outputs.map((o) => {
-    const desc = o === "css" ? "Hoja de estilo con propiedades CSS personalizadas" : o === "tailwind" ? "Mapeo de configuración Tailwind CSS" : "Extensión de preset UnoCSS"
-    return "- **" + o + "** — " + desc
-  }).join("\n")
+  const outputsList = outputs
+    .map((o) => {
+      const desc =
+        o === "css"
+          ? "Hoja de estilo con propiedades CSS personalizadas"
+          : o === "tailwind"
+            ? "Mapeo de configuración Tailwind CSS"
+            : "Extensión de preset UnoCSS"
+      return "- **" + o + "** — " + desc
+    })
+    .join("\n")
 
   return `---
 contentSchemaVersion: 1
@@ -749,10 +1325,7 @@ function scaffoldBlock(name: string, force: boolean): boolean {
     return false
   }
 
-  for (const dir of [
-    join(SITE_CONTENT, "en", "blocks"),
-    join(SITE_CONTENT, "es", "blocks"),
-  ]) {
+  for (const dir of [join(SITE_CONTENT, "en", "blocks"), join(SITE_CONTENT, "es", "blocks")]) {
     mkdirSync(dir, { recursive: true })
   }
 
@@ -817,10 +1390,7 @@ function scaffoldTheme(name: string, force: boolean): boolean {
     return false
   }
 
-  for (const dir of [
-    join(SITE_CONTENT, "en", "themes"),
-    join(SITE_CONTENT, "es", "themes"),
-  ]) {
+  for (const dir of [join(SITE_CONTENT, "en", "themes"), join(SITE_CONTENT, "es", "themes")]) {
     mkdirSync(dir, { recursive: true })
   }
 

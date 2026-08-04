@@ -33,7 +33,10 @@ const [document] = await getCollection(
 const renderedDocument = document ? await render(document) : undefined
 const DocumentContent = renderedDocument?.Content
 const pageDescription = document?.data.description ?? name
-const title = view === "overview" ? document?.data.title ?? name : `${document?.data.title ?? name} ${sectionTitle[view]}`
+const title =
+  view === "overview"
+    ? (document?.data.title ?? name)
+    : `${document?.data.title ?? name} ${sectionTitle[view]}`
 
 const homePath = locale === "es" ? "/es/" : "/"
 const directoryPath = locale === "es" ? `/es/${layer}/` : `/${layer}/`
@@ -44,7 +47,10 @@ const breadcrumbItems = [
   ...(view === "overview"
     ? []
     : [{ name: document?.data.title ?? name, pathname: layerHref(layer, name, locale) }]),
-  { name: view === "overview" ? (document?.data.title ?? name) : sectionTitle[view], pathname: currentPath },
+  {
+    name: view === "overview" ? (document?.data.title ?? name) : sectionTitle[view],
+    pathname: currentPath,
+  },
 ]
 ---
 
