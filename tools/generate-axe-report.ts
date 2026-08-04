@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { join, resolve } from "node:path"
+import { AXE_REPORT_STAMPS, stabilizeStamps } from "./report-stamp"
 import {
   type AxeResultsArtifact,
   type AxeScanResult,
@@ -87,6 +88,10 @@ NVDA, JAWS, TalkBack, and full styled accessibility certification are Phase 4 wo
 
 function main(): void {
   const resultsPath = resultsPathFromArgs()
+  // Captured before the removal below: the report is deleted up front so a failed
+  // validation cannot leave stale evidence in place, but the prior run stamps are
+  // still wanted if the regenerated report turns out identical.
+  const previous = existsSync(OUTPUT) ? readFileSync(OUTPUT, "utf8") : undefined
   rmSync(OUTPUT, { force: true })
 
   if (!existsSync(resultsPath)) {
@@ -110,7 +115,11 @@ function main(): void {
     throw new Error(`Invalid axe result artifact:\n- ${errors.join("\n- ")}`)
   }
 
-  writeFileSync(OUTPUT, generateReport(artifact, resultsPath), "utf8")
+  writeFileSync(
+    OUTPUT,
+    stabilizeStamps(generateReport(artifact, resultsPath), previous, AXE_REPORT_STAMPS),
+    "utf8",
+  )
   console.log(`✓ Generated ${OUTPUT}`)
   console.log(`  ${artifact.results.length} primitives scanned from executed browser-test results`)
 }

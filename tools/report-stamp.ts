@@ -1,75 +1,97 @@
 /**
- * tools/report-stamp — writes a generated evidence report without churning its
- * `Generated:` stamp.
+ * tools/report-stamp — writes generated evidence reports without churning their
+ * run-provenance stamps.
  *
  * Committed generated artifacts must be a pure function of their inputs. A
- * wall-clock stamp breaks that: every run rewrites the file even when nothing it
- * reports on has changed, so the working tree is dirtied by merely verifying,
- * and any staleness check comparing committed against freshly generated output
- * reports a difference that no amount of committing can resolve. That is the
- * same defect that made BUILD-001 unsatisfiable for the registry, where the
- * stamp was derived from the HEAD commit date.
+ * wall-clock timestamp or a HEAD-derived commit SHA breaks that: every run
+ * rewrites the file even when nothing it reports on has changed, so the working
+ * tree is dirtied by merely verifying, and any staleness check comparing
+ * committed against freshly generated output reports a difference that no amount
+ * of committing can resolve. A HEAD-derived value is worse still, because
+ * committing the file moves HEAD and so changes what the next run would write.
  *
- * The stamp is therefore preserved whenever the rest of the report is identical,
- * and advances only when the report's substance does.
+ * That is the defect that made BUILD-001 unsatisfiable for the registry. The same
+ * shape has now appeared in four places, which is why this lives in one module
+ * rather than being reimplemented per report.
+ *
+ * Stamps are preserved whenever the rest of the report is identical, and advance
+ * only when the report's substance does.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname } from "node:path"
 
-/** Matches the `Generated: <iso timestamp>` line these reports carry. */
-const STAMP_PATTERN = /^Generated:\s*\S+/
+/** `Generated: <iso timestamp>`, used by the audit reports. */
+export const GENERATED_STAMP = /^Generated:\s*\S+/
 
-function withoutStamp(contents: string): string {
+/** `- Executed: <iso>` and `- Commit: \`<sha>\``, used by the axe scan report. */
+export const AXE_REPORT_STAMPS = [/^- Executed:\s*\S+/, /^- Commit:\s*\S+/] as const
+
+function stampLines(contents: string, patterns: readonly RegExp[]): string[] {
+  return contents.split("\n").filter((line) => patterns.some((pattern) => pattern.test(line)))
+}
+
+function withoutStamps(contents: string, patterns: readonly RegExp[]): string {
   return contents
     .split("\n")
-    .filter((line) => !STAMP_PATTERN.test(line))
+    .filter((line) => !patterns.some((pattern) => pattern.test(line)))
     .join("\n")
 }
 
-function existingStampLine(contents: string): string | undefined {
-  return contents.split("\n").find((line) => STAMP_PATTERN.test(line))
+/**
+ * Returns `next`, with its stamp lines replaced by `previous`'s when everything
+ * else matches.
+ *
+ * `previous` is passed in rather than read here so callers that must delete the
+ * report before regenerating — `generate-axe-report.ts` removes it up front so a
+ * failed validation cannot leave stale evidence behind — can still reuse the
+ * prior stamps.
+ *
+ * Falls through to `next` unchanged when there is no previous report, when it
+ * carries no recognisable stamps, or when the stamp counts differ, since in that
+ * case the lines cannot be paired up safely.
+ */
+export function stabilizeStamps(
+  next: string,
+  previous: string | undefined,
+  patterns: readonly RegExp[] = [GENERATED_STAMP],
+): string {
+  if (previous === undefined) return next
+
+  const previousStamps = stampLines(previous, patterns)
+  const nextStamps = stampLines(next, patterns)
+  if (previousStamps.length === 0 || previousStamps.length !== nextStamps.length) return next
+
+  if (withoutStamps(previous, patterns) !== withoutStamps(next, patterns)) return next
+
+  // Substance unchanged — restore the recorded stamps, in order, so the file
+  // stays byte-identical to what is committed.
+  let index = 0
+  return next
+    .split("\n")
+    .map((line) => (patterns.some((p) => p.test(line)) ? previousStamps[index++]! : line))
+    .join("\n")
 }
 
 /**
- * Writes a report, reusing the committed `Generated:` line when every other line
- * is unchanged.
- *
- * `lines` is expected to already contain a freshly stamped `Generated:` line;
- * that value is used only when the report's substance has actually changed, or
- * when no readable previous report exists.
+ * Writes a report, reusing the committed stamps when every other line is
+ * unchanged. `lines` is expected to already contain freshly stamped values.
  */
-export function writeReportWithStableStamp(filePath: string, lines: readonly string[]): void {
+export function writeReportWithStableStamp(
+  filePath: string,
+  lines: readonly string[],
+  patterns: readonly RegExp[] = [GENERATED_STAMP],
+): void {
   const next = lines.join("\n") + "\n"
-
   mkdirSync(dirname(filePath), { recursive: true })
 
-  if (!existsSync(filePath)) {
-    writeFileSync(filePath, next)
-    return
+  let previous: string | undefined
+  if (existsSync(filePath)) {
+    try {
+      previous = readFileSync(filePath, "utf8")
+    } catch {
+      previous = undefined
+    }
   }
 
-  let previous: string
-  try {
-    previous = readFileSync(filePath, "utf8")
-  } catch {
-    writeFileSync(filePath, next)
-    return
-  }
-
-  const previousStamp = existingStampLine(previous)
-  if (previousStamp === undefined) {
-    writeFileSync(filePath, next)
-    return
-  }
-
-  if (withoutStamp(previous) !== withoutStamp(next)) {
-    writeFileSync(filePath, next)
-    return
-  }
-
-  // Substance unchanged — keep the recorded stamp so the file stays byte-identical.
-  writeFileSync(
-    filePath,
-    lines.map((line) => (STAMP_PATTERN.test(line) ? previousStamp : line)).join("\n") + "\n",
-  )
+  writeFileSync(filePath, stabilizeStamps(next, previous, patterns))
 }

@@ -89,6 +89,54 @@ export function publishedEvidence(
   }
 }
 
+/**
+ * Reuses the committed run provenance when the evidence itself is unchanged.
+ *
+ * `lastRun` is wall-clock and `provenance.commitSha` is HEAD-derived, so
+ * regenerating identical scan results rewrote all 52 files — and because
+ * `registry.accessibility.lastReviewed` is fed from `lastRun`, that cascaded
+ * into 52 registry manifests too: 105 dirty files produced by a verification
+ * run that changed nothing. `commitSha` is self-referential in exactly the way
+ * the registry stamp was, since committing the file moves HEAD and so changes
+ * what the next regeneration writes.
+ *
+ * These files sit inside BUILD-001's pathspec, which makes this the difference
+ * between a guard that can be satisfied and one that cannot. Provenance is still
+ * recorded; it advances when the scan result advances rather than on every
+ * invocation. `provenance.browser` is part of the compared substance, since
+ * results from a different engine are different evidence.
+ */
+export function withPreservedProvenance(
+  path: string,
+  candidate: PublishedEvidence,
+): PublishedEvidence {
+  if (!existsSync(path)) return candidate
+
+  let committed: PublishedEvidence
+  try {
+    committed = JSON.parse(readFileSync(path, "utf8")) as PublishedEvidence
+  } catch {
+    return candidate
+  }
+
+  if (typeof committed.lastRun !== "string") return candidate
+  if (typeof committed.provenance !== "object" || committed.provenance === null) return candidate
+  if (committed.provenance.browser !== candidate.provenance.browser) return candidate
+
+  const substance = (evidence: PublishedEvidence): string =>
+    JSON.stringify([
+      evidence.schemaVersion,
+      evidence.primitive,
+      evidence.evidenceIds,
+      evidence.summary,
+    ])
+
+  if (substance(committed) !== substance(candidate)) return candidate
+
+  // browser already matches, so the committed provenance block is reusable whole.
+  return { ...candidate, lastRun: committed.lastRun, provenance: committed.provenance }
+}
+
 function serializePublishedEvidence(evidence: PublishedEvidence): string {
   return `${[
     "{",
@@ -139,7 +187,9 @@ function main(): void {
 
     writeFileSync(
       outputPath,
-      serializePublishedEvidence(publishedEvidence(primitive, evidence, artifact)),
+      serializePublishedEvidence(
+        withPreservedProvenance(outputPath, publishedEvidence(primitive, evidence, artifact)),
+      ),
       "utf8",
     )
     return [outputPath]
