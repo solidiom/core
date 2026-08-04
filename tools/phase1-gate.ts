@@ -27,6 +27,7 @@ import {
   runBuild,
   fileExists,
   fileContains,
+  readJSON,
   run,
 } from "./gate-helpers"
 
@@ -488,6 +489,39 @@ check("create/config-gen.ts exists", fileExists("packages/cli/src/create/config-
 check(
   "requireVerifiedSource is wired in PolicySchema",
   fileContains("packages/cli/src/schemas.ts", "requireVerifiedSource"),
+)
+
+// ─── 13. TEST-005: visual harness image pinning ─────────────────────────
+//
+// The Playwright image tag must track the pinned @playwright/test, or the
+// browser bundled in the image will not match the client library driving it.
+// The failure mode is silently divergent screenshots, and since site-visual is
+// now blocking, that surfaces as a red build reporting pixel diffs rather than
+// a version mismatch — confusing debugging during unrelated dependency work.
+//
+// tools/visual-container.sh checks this at runtime for local use; these two
+// workflow tags had nothing enforcing them.
+console.log("\n§12 Visual harness image pinning:")
+const rootPkg = readJSON<{ devDependencies?: Record<string, string> }>("package.json")
+const pinnedPlaywright = rootPkg?.devDependencies?.["@playwright/test"]
+check(
+  "@playwright/test is pinned to an exact version",
+  typeof pinnedPlaywright === "string" && /^\d+\.\d+\.\d+$/.test(pinnedPlaywright),
+  `package.json devDependencies["@playwright/test"] is ${String(pinnedPlaywright)}; the image tag cannot be derived from a range`,
+)
+
+const expectedImageTag = `mcr.microsoft.com/playwright:v${pinnedPlaywright}-noble`
+for (const workflow of [".github/workflows/ci.yml", ".github/workflows/visual-baselines.yml"]) {
+  check(
+    `${workflow} pins the Playwright image to v${pinnedPlaywright}`,
+    fileContains(workflow, expectedImageTag),
+    `expected ${expectedImageTag}; update the container tag to match @playwright/test, or the bundled browser will not match the client library`,
+  )
+}
+check(
+  "visual-container.sh pins the same image tag",
+  fileContains("tools/visual-container.sh", `IMAGE_TAG="v${pinnedPlaywright}-noble"`),
+  `expected IMAGE_TAG="v${pinnedPlaywright}-noble" in tools/visual-container.sh`,
 )
 
 // ─── Summary ────────────────────────────────────────────────────────────
