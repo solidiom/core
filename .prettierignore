@@ -18,3 +18,12 @@ apps/docs-astro-poc/
 
 # Generated changeset entries are authored by the changesets CLI
 .changeset/*.md
+
+
+# Generated axe scan report — tools/generate-axe-report.ts owns this output. Its
+# markdown table padding differs from Prettier's, so the two rewrite each other
+# indefinitely: formatting it makes the next generator run dirty the tree, and
+# regenerating it fails format:check. Same rationale as registry/*.json above.
+# docs/evidence/recipe-contract-audit.md is deliberately not listed — its
+# generated output is already Prettier-clean.
+docs/axe-scan-results.md
