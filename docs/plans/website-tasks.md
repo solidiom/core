@@ -469,6 +469,13 @@ Tiered like §8.1. The **M4 bar** is machine-checkable by `FOUND-004` (`tools/co
 
 Decision rationale for requirements 1, 4, and 5 lives in `docs/plans/task-sequencing.md` §3 (D1, D2, D3). This section is normative; that one records why.
 
+**Utility stylesheets excluded.** `typeset` and `prose` are typography utility stylesheets, not
+components. They have no primitive dependency, no interactive behavior, and no slot composition.
+Their styling is emitted as `styles/typeset.css` and `styles/prose.css` in all three profiles.
+`recipes-tailwind` additionally exports a convenience class-string map as `recipes/typeset.tsx`,
+but this does not constitute a component wrapper under D1(b). Neither `typeset` nor `prose`
+appears in the component catalog or the `COMP-*` queue.
+
 #### 8.2.1 M4 bar (enforced by `FOUND-004`)
 
 A `COMP-*` row may go `[x]` when all ten hold:
