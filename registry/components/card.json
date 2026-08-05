@@ -1,6 +1,6 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
-  "name": "popover",
+  "name": "card",
   "version": "0.0.1-next.0",
   "package": "@solidiom/recipes-css",
   "deliverables": [
@@ -8,32 +8,32 @@
   ],
   "source": {
     "css": [
-      "src/recipes/popover.tsx"
+      "src/recipes/card.tsx"
     ],
     "tailwind": [
-      "src/recipes/popover.tsx"
+      "src/recipes/card.tsx"
     ],
     "unocss": [
-      "src/recipes/popover.tsx"
+      "src/recipes/card.tsx"
     ]
   },
   "integrity": {
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/popover.tsx": "300d117bba195eea5bd8ed378024c4f33ac53302b8321f418034c89938eea203"
+        "src/recipes/card.tsx": "26346ec449d6a7f233f1d4b63aeaac60d67218841608c47dbd3e54762568dd68"
       },
       "tailwind": {
-        "src/recipes/popover.tsx": "88aaae47335fdcffd294ed062bc6090aac33f6350f453d3cddd3dc5e1dc1bc4f"
+        "src/recipes/card.tsx": "2eae50f519dfe6ea97de83f01ecce98ecfa30a9c189880cc7a1ebf59d72611d7"
       },
       "unocss": {
-        "src/recipes/popover.tsx": "5680c5101ab6407ee68f45c702928323cfc6af71c0651255f6a141a4cfd96ac0"
+        "src/recipes/card.tsx": "3a985e55ef9ed7230aaacb0b4dae317b429e62f339287882bede1d97b63535c4"
       }
     },
     "lastGenerated": "2026-08-05T04:37:03.000Z"
   },
   "documentation": {
-    "status": "review",
+    "status": "complete",
     "locales": {
       "en": {
         "status": "draft"
@@ -44,7 +44,7 @@
     }
   },
   "dependencies": [
-    "@solidiom/popover"
+    "@solidiom/card"
   ],
   "lastUpdated": "2026-08-05T04:37:03.000Z"
 }

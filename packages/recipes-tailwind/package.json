@@ -24,6 +24,7 @@
     "./styles/toast.css": "./dist/styles/toast.css",
     "./styles/select.css": "./dist/styles/select.css",
     "./styles/badge.css": "./dist/styles/badge.css",
+    "./styles/card.css": "./dist/styles/card.css",
     "./styles/alert.css": "./dist/styles/alert.css",
     "./styles/input.css": "./dist/styles/input.css",
     "./styles/field.css": "./dist/styles/field.css",
@@ -50,6 +51,7 @@
   "dependencies": {
     "@solidiom/accordion": "workspace:*",
     "@solidiom/badge": "workspace:*",
+    "@solidiom/card": "workspace:*",
     "@solidiom/alert": "workspace:*",
     "@solidiom/button": "workspace:*",
     "@solidiom/checkbox": "workspace:*",

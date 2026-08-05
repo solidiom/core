@@ -1192,6 +1192,9 @@ importers:
       '@solidiom/button':
         specifier: workspace:*
         version: link:../button
+      '@solidiom/card':
+        specifier: workspace:*
+        version: link:../card
       '@solidiom/checkbox':
         specifier: workspace:*
         version: link:../checkbox
@@ -1252,6 +1255,9 @@ importers:
       '@solidiom/button':
         specifier: workspace:*
         version: link:../button
+      '@solidiom/card':
+        specifier: workspace:*
+        version: link:../card
       '@solidiom/checkbox':
         specifier: workspace:*
         version: link:../checkbox
@@ -1318,6 +1324,9 @@ importers:
       '@solidiom/button':
         specifier: workspace:*
         version: link:../button
+      '@solidiom/card':
+        specifier: workspace:*
+        version: link:../card
       '@solidiom/checkbox':
         specifier: workspace:*
         version: link:../checkbox

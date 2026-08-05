@@ -1195,6 +1195,89 @@ export const inputRecipe: RecipeDefinition = {
 }
 
 /**
+ * Card — container component with header, title, description, content, and footer areas.
+ *
+ * Six slots: root, header, title, description, content, footer. No states, no variants,
+ * no flags. Purely structural — a composition container.
+ */
+export const cardRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "card",
+  description:
+    "Container component with header, title, description, content, and footer areas.",
+  slots: [
+    {
+      part: "root",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "border-radius": { token: "radius" },
+        "background-color": { token: "surface-raised" },
+        padding: "1rem",
+      },
+    },
+    {
+      part: "header",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "The wrapper exposes only Root; consumers compose Header sub-parts within the card.",
+      base: {
+        display: "flex",
+        "flex-direction": "column",
+        gap: "0.25rem",
+      },
+    },
+    {
+      part: "title",
+      element: "h3",
+      ownership: "consumer",
+      ownershipReason: "Card title is optional consumer composition.",
+      base: {
+        margin: "0",
+        "font-size": { token: "font-size-lg" },
+        "font-weight": "600",
+        color: { token: "foreground" },
+      },
+    },
+    {
+      part: "description",
+      element: "p",
+      ownership: "consumer",
+      ownershipReason: "Card description is optional consumer composition.",
+      base: {
+        margin: "0",
+        "font-size": { token: "font-size-sm" },
+        color: { token: "foreground-muted" },
+        "line-height": { token: "line-height-sm", fallback: "1.25rem" },
+      },
+    },
+    {
+      part: "content",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "The wrapper exposes only Root; consumers compose Content sub-parts within the card.",
+      base: {
+        display: "block",
+      },
+    },
+    {
+      part: "footer",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "The wrapper exposes only Root; consumers compose Footer sub-parts within the card.",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        gap: "0.5rem",
+      },
+    },
+  ],
+}
+
+/**
  * Field — form field wrapper with label, control, description, and error message.
  *
  * Five slots: root, label, control, description, error. No states; uses flags
@@ -1280,6 +1363,7 @@ export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> =
   alert: alertRecipe,
   badge: badgeRecipe,
   button: buttonRecipe,
+  card: cardRecipe,
   checkbox: checkboxRecipe,
   dialog: dialogRecipe,
   field: fieldRecipe,
