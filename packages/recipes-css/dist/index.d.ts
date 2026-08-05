@@ -19,4 +19,5 @@ export { StyledToast } from "./recipes/toast";
 export { StyledSelect } from "./recipes/select";
 export { StyledBadge, type BadgeVariant } from "./recipes/badge";
 export { StyledAlert, type AlertVariant } from "./recipes/alert";
+export { StyledSpinner } from "./recipes/spinner";
 //# sourceMappingURL=index.d.ts.map

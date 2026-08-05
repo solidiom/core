@@ -1219,6 +1219,9 @@ importers:
       '@solidiom/select':
         specifier: workspace:*
         version: link:../select
+      '@solidiom/spinner':
+        specifier: workspace:*
+        version: link:../spinner
       '@solidiom/switch':
         specifier: workspace:*
         version: link:../switch
@@ -1282,6 +1285,9 @@ importers:
       '@solidiom/select':
         specifier: workspace:*
         version: link:../select
+      '@solidiom/spinner':
+        specifier: workspace:*
+        version: link:../spinner
       '@solidiom/switch':
         specifier: workspace:*
         version: link:../switch
@@ -1351,6 +1357,9 @@ importers:
       '@solidiom/select':
         specifier: workspace:*
         version: link:../select
+      '@solidiom/spinner':
+        specifier: workspace:*
+        version: link:../spinner
       '@solidiom/switch':
         specifier: workspace:*
         version: link:../switch

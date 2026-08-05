@@ -16,4 +16,5 @@ export const supportedPrimitives = [
   "toast",
   "badge",
   "alert",
+  "spinner",
 ] as const
