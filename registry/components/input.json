@@ -24,13 +24,13 @@
         "src/recipes/input.tsx": "f495346842acb368c482e91b2a985957b4e70e29d9aa7ef2978cb355292b68ad"
       },
       "tailwind": {
-        "src/recipes/input.tsx": "19152361b31d4fe88e55dde8be7abb0d2560bd494bca4f5aa5ef42a82fc8166f"
+        "src/recipes/input.tsx": "42c250cdc8f2c39e63d5db3a0eae529dec0621e61a77ecb48491d6cc04e221bc"
       },
       "unocss": {
         "src/recipes/input.tsx": "a585a9d552c5f1e8e4173abacac7d6eb5a8347e225f3472e1052a47a2b4d3d20"
       }
     },
-    "lastGenerated": "2026-08-05T00:02:42.000Z"
+    "lastGenerated": "2026-08-05T03:36:41.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/input"
   ],
-  "lastUpdated": "2026-08-05T00:02:42.000Z"
+  "lastUpdated": "2026-08-05T03:36:41.000Z"
 }
