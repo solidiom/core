@@ -30,7 +30,7 @@
         "src/recipes/dialog.tsx": "2c95537037aeeaa9b3c95bd0ad8dc0672658b3693e37dde052913204edbeeb24"
       }
     },
-    "lastGenerated": "2026-08-05T04:37:03.000Z"
+    "lastGenerated": "2026-08-05T04:57:36.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/dialog"
   ],
-  "lastUpdated": "2026-08-05T04:37:03.000Z"
+  "lastUpdated": "2026-08-05T04:57:36.000Z"
 }
