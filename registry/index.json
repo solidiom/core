@@ -1,10 +1,10 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-05T00:02:42.000Z",
+  "generatedAt": "2026-08-05T03:36:41.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "691c6a449e0723cdd699e8d69e30e564a10463eedfb44c54776faa5ac899fa27"
+    "entriesHash": "155a59d993a271db62bd6f3cfc23549e0bb7a54e4122ebd91a20dab07d152bf1"
   },
   "primitives": [
     {
@@ -2555,7 +2555,7 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "review",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
           "status": "draft"
