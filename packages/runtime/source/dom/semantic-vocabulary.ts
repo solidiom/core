@@ -53,6 +53,7 @@ export const SCOPE_STATES: Readonly<Record<string, readonly string[]>> = {
   "alert-dialog": ["open", "closed"],
   badge: [],
   button: ["on", "off"],
+  card: [],
   carousel: ["active", "inactive"],
   checkbox: ["checked", "unchecked", "indeterminate"],
   collapsible: ["open", "closed"],

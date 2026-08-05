@@ -193,6 +193,7 @@ var SCOPE_STATES = {
   "alert-dialog": ["open", "closed"],
   badge: [],
   button: ["on", "off"],
+  card: [],
   carousel: ["active", "inactive"],
   checkbox: ["checked", "unchecked", "indeterminate"],
   collapsible: ["open", "closed"],

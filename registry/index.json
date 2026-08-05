@@ -1,10 +1,10 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-05T04:11:32.000Z",
+  "generatedAt": "2026-08-05T04:37:03.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "01bef518da4e208906431652d50d7deb8dbd801aaf94f47b6f5221a08fd53356"
+    "entriesHash": "0d67b2c7da1019d0376a01a15632f39328f72c79e7ab2d2bf82f07273c9d161e"
   },
   "primitives": [
     {
@@ -450,7 +450,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "and",
@@ -2642,6 +2646,39 @@
       "primitiveDependency": "@solidiom/button",
       "searchKeywords": [
         "button",
+        "component",
+        "css",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "card",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Card",
+      "description": "Styled card component — the recipe wrapper for the css, tailwind, unocss profile(s) using the card primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/card",
+      "searchKeywords": [
+        "card",
         "component",
         "css",
         "tailwind",
