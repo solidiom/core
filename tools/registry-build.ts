@@ -283,15 +283,22 @@ function layerDocumentationMetadata(
   const enDir = join(SITE_CONTENT_DIR, "en", layer)
   const esDir = join(SITE_CONTENT_DIR, "es", layer)
 
+  // Promote to "complete" when both locales exist and examples are present
+  // (§8.2.1 req 8: at least one example is part of the M4 completion bar)
+  const exampleDir = join(SITE_CONTENT_DIR, "en", layer, name, "examples")
+  const hasExamples = existsSync(exampleDir) && readdirSync(exampleDir).length > 0
+
   return {
     status:
-      enMeta.status !== "missing" && esMeta.status !== "missing"
-        ? "review"
-        : enMeta.status !== "missing"
-          ? "draft"
-          : existsSync(layerDir)
-            ? "stub"
-            : "stub",
+      enMeta.status !== "missing" && esMeta.status !== "missing" && hasExamples
+        ? "complete"
+        : enMeta.status !== "missing" && esMeta.status !== "missing"
+          ? "review"
+          : enMeta.status !== "missing"
+            ? "draft"
+            : existsSync(layerDir)
+              ? "stub"
+              : "stub",
     locales: {
       en: enMeta,
       ...(esMeta.status !== "missing" || existsSync(esDir) ? { es: esMeta } : {}),
