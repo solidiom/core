@@ -678,13 +678,13 @@ Separately, per-primitive visual checks are not part of the M4 bar (§8.1.1). Th
 | [x]    | COMP-008 | Dropdown Menu    | Existing `menu` recipe | L    | RECIPE-005, PRIM-028            |
 | [x]    | COMP-009 | Tabs             | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-044            |
 | [x]    | COMP-010 | Toast            | CSS + Tailwind recipe  | L    | RECIPE-005, PRIM-045            |
-| [ ]    | COMP-011 | Tooltip          | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-049            |
+| [x]    | COMP-011 | Tooltip          | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-049            |
 | [ ]    | COMP-012 | Avatar           | New                    | M    | RECIPE-005, PRIM-004            |
-| [ ]    | COMP-013 | Checkbox         | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-011            |
+| [x]    | COMP-013 | Checkbox         | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-011            |
 | [ ]    | COMP-014 | Radio Group      | New                    | M    | RECIPE-005, PRIM-034            |
-| [ ]    | COMP-015 | Switch           | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-043            |
+| [x]    | COMP-015 | Switch           | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-043            |
 | [ ]    | COMP-016 | Combobox         | New                    | L    | RECIPE-005, PRIM-013            |
-| [ ]    | COMP-017 | Popover          | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-032            |
+| [x]    | COMP-017 | Popover          | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-032            |
 | [ ]    | COMP-018 | Sheet            | New                    | L    | RECIPE-005, PRIM-039            |
 | [ ]    | COMP-019 | Navigation Menu  | New                    | L    | RECIPE-005, PRIM-030            |
 | [ ]    | COMP-020 | Breadcrumb       | New                    | M    | RECIPE-005, PRIM-006            |
@@ -951,7 +951,7 @@ Two columns, because collapsing them is how the previous "11/52 primitives" read
 | Scope                         | Required | DoD | Landed |
 | ----------------------------- | -------: | --: | -----: |
 | Primitives                    |       52 |  52 |     52 |
-| Components                    |       30 |  10 |      0 |
+| Components                    |       30 |  16 |      0 |
 | Blocks                        |     ≥ 36 |   0 |      0 |
 | Unique templates              |       29 |   0 |      0 |
 | Template portfolio placements |       32 |   0 |      0 |

@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-05T05:50:42.000Z",
+  "generatedAt": "2026-08-05T05:52:23.000Z",
   "integrity": {
     "algorithm": "sha256",
     "entriesHash": "0d67b2c7da1019d0376a01a15632f39328f72c79e7ab2d2bf82f07273c9d161e"
@@ -2530,7 +2530,7 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "review",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
           "status": "draft"
@@ -2596,7 +2596,7 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "review",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
           "status": "draft"
@@ -2695,7 +2695,7 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "review",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
           "status": "draft"
@@ -2860,7 +2860,7 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "review",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
           "status": "draft"
@@ -2926,7 +2926,7 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "review",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
           "status": "draft"
@@ -3025,7 +3025,7 @@
       "deliverables": [
         "component"
       ],
-      "documentationStatus": "review",
+      "documentationStatus": "complete",
       "documentationLocales": {
         "en": {
           "status": "draft"
