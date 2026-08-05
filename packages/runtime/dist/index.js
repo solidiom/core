@@ -204,6 +204,7 @@ var SCOPE_STATES = {
   dialog: ["open", "closed"],
   drawer: ["open", "closed"],
   "hover-card": ["open", "closed"],
+  field: [],
   input: [],
   "input-otp": ["active", "inactive"],
   listbox: ["checked", "unchecked"],

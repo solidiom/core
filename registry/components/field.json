@@ -1,6 +1,6 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
-  "name": "alert",
+  "name": "field",
   "version": "0.0.1-next.0",
   "package": "@solidiom/recipes-css",
   "deliverables": [
@@ -8,26 +8,26 @@
   ],
   "source": {
     "css": [
-      "src/recipes/alert.tsx"
+      "src/recipes/field.tsx"
     ],
     "tailwind": [
-      "src/recipes/alert.tsx"
+      "src/recipes/field.tsx"
     ],
     "unocss": [
-      "src/recipes/alert.tsx"
+      "src/recipes/field.tsx"
     ]
   },
   "integrity": {
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/alert.tsx": "3c585ee25bff76a0ffe3b438ce9f4bfeecfe9c5f7f238d2c72ed83e2605ca50f"
+        "src/recipes/field.tsx": "f82d61a53b59b90c615aba74884ac7fb861dba5ed90459f136e8121d09f22598"
       },
       "tailwind": {
-        "src/recipes/alert.tsx": "4c2ca16e7aa06884a92d4caf009a849c8949b013884c07151f4e143f36028ea1"
+        "src/recipes/field.tsx": "f5df587d59da8712a352cc2f0a987beb6da607760cbc6428a64834bf7da8c1ac"
       },
       "unocss": {
-        "src/recipes/alert.tsx": "0b580e8b3dce2719d4954d35dc8bfcd8e232aa10ffe77067afb67a66230649ee"
+        "src/recipes/field.tsx": "fbf197d2d3e2c1ef518150535819a94879bc04ccf1e7db9b392e0876409c2921"
       }
     },
     "lastGenerated": "2026-08-05T04:11:32.000Z"
@@ -44,7 +44,7 @@
     }
   },
   "dependencies": [
-    "@solidiom/alert"
+    "@solidiom/field"
   ],
   "lastUpdated": "2026-08-05T04:11:32.000Z"
 }
