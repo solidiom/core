@@ -1,10 +1,10 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-05T04:05:27.000Z",
+  "generatedAt": "2026-08-05T04:11:32.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "155a59d993a271db62bd6f3cfc23549e0bb7a54e4122ebd91a20dab07d152bf1"
+    "entriesHash": "01bef518da4e208906431652d50d7deb8dbd801aaf94f47b6f5221a08fd53356"
   },
   "primitives": [
     {
@@ -1013,7 +1013,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "aria",
@@ -2706,6 +2710,39 @@
         "component",
         "css",
         "dialog",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "field",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Field",
+      "description": "Styled field component — the recipe wrapper for the css, tailwind, unocss profile(s) using the field primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/field",
+      "searchKeywords": [
+        "component",
+        "css",
+        "field",
         "tailwind",
         "unocss"
       ]

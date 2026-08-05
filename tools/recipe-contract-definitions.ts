@@ -1194,6 +1194,86 @@ export const inputRecipe: RecipeDefinition = {
   ],
 }
 
+/**
+ * Field — form field wrapper with label, control, description, and error message.
+ *
+ * Five slots: root, label, control, description, error. No states; uses flags
+ * for disabled, required, invalid, readonly. The control slot is consumer-owned
+ * and wraps the actual form control element provided by the consumer.
+ */
+export const fieldRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "field",
+  description:
+    "Form field wrapper with label, control, description, and error message.",
+  slots: [
+    {
+      part: "root",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        display: "flex",
+        "flex-direction": "column",
+        gap: "0.25rem",
+      },
+      flags: {
+        disabled: {
+          opacity: "0.5",
+        },
+        required: {},
+        invalid: {},
+        readonly: {},
+      },
+    },
+    {
+      part: "label",
+      element: "label",
+      ownership: "consumer",
+      ownershipReason: "The wrapper exposes only Root; consumers render Label/Control/Description/Error sub-parts via the primitive",
+      base: {
+        "font-size": { token: "font-size-sm" },
+        "line-height": { token: "line-height-sm", fallback: "1.25rem" },
+        "font-weight": "600",
+        color: { token: "foreground" },
+      },
+      flags: {
+        disabled: {
+          opacity: "0.5",
+        },
+      },
+    },
+    {
+      part: "control",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "wraps the actual form control element provided by the consumer",
+      base: {
+        display: "block",
+      },
+    },
+    {
+      part: "description",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "The wrapper exposes only Root; consumers render Description sub-parts via the primitive",
+      base: {
+        "font-size": { token: "font-size-sm" },
+        color: { token: "foreground-muted" },
+      },
+    },
+    {
+      part: "error",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "The wrapper exposes only Root; consumers render Error sub-parts via the primitive",
+      base: {
+        "font-size": { token: "font-size-sm" },
+        color: { token: "destructive" },
+      },
+    },
+  ],
+}
+
 /** Every recipe definition, keyed by scope. */
 export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> = {
   accordion: accordionRecipe,
@@ -1202,6 +1282,7 @@ export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> =
   button: buttonRecipe,
   checkbox: checkboxRecipe,
   dialog: dialogRecipe,
+  field: fieldRecipe,
   input: inputRecipe,
   menu: menuRecipe,
   popover: popoverRecipe,

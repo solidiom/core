@@ -30,7 +30,7 @@
         "src/recipes/tooltip.tsx": "8c836d3d8bd3059572dcb51beda8cae21600051ce9fac7716f1f720672fcbcee"
       }
     },
-    "lastGenerated": "2026-08-05T04:05:27.000Z"
+    "lastGenerated": "2026-08-05T04:11:32.000Z"
   },
   "documentation": {
     "status": "review",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/tooltip"
   ],
-  "lastUpdated": "2026-08-05T04:05:27.000Z"
+  "lastUpdated": "2026-08-05T04:11:32.000Z"
 }
