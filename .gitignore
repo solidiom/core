@@ -63,3 +63,4 @@ tools/offline-fixture/storage/
 
 # Scratch directory created by tools/assert-no-unverified.test.ts
 .tmp/
+.worktrees/
