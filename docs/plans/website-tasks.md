@@ -669,7 +669,7 @@ Separately, per-primitive visual checks are not part of the M4 bar (§8.1.1). Th
 | Status | ID       | Component        | Baseline               | Size | Depends on                      |
 | ------ | -------- | ---------------- | ---------------------- | ---- | ------------------------------- |
 | [x]    | COMP-001 | Button           | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-007, THEME-006 |
-| [ ]    | COMP-002 | Input            | New                    | M    | RECIPE-005, PRIM-023            |
+| [x]    | COMP-002 | Input            | New                    | M    | RECIPE-005, PRIM-023            |
 | [ ]    | COMP-003 | Field            | New                    | L    | RECIPE-005, PRIM-021, COMP-002  |
 | [ ]    | COMP-004 | Card             | New                    | M    | RECIPE-005, PRIM-009            |
 | [ ]    | COMP-005 | Alert            | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-002            |
@@ -951,7 +951,7 @@ Two columns, because collapsing them is how the previous "11/52 primitives" read
 | Scope                         | Required | DoD | Landed |
 | ----------------------------- | -------: | --: | -----: |
 | Primitives                    |       52 |  52 |     52 |
-| Components                    |       30 |   1 |      0 |
+| Components                    |       30 |   2 |      0 |
 | Blocks                        |     ≥ 36 |   0 |      0 |
 | Unique templates              |       29 |   0 |      0 |
 | Template portfolio placements |       32 |   0 |      0 |

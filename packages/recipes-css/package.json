@@ -24,6 +24,7 @@
     "./styles/select.css": "./dist/styles/select.css",
     "./styles/badge.css": "./dist/styles/badge.css",
     "./styles/alert.css": "./dist/styles/alert.css",
+    "./styles/input.css": "./dist/styles/input.css",
     "./styles/typeset.css": "./dist/styles/typeset.css",
     "./styles/prose.css": "./dist/styles/prose.css"
   },
@@ -50,6 +51,7 @@
     "@solidiom/button": "workspace:*",
     "@solidiom/checkbox": "workspace:*",
     "@solidiom/dialog": "workspace:*",
+    "@solidiom/input": "workspace:*",
     "@solidiom/menu": "workspace:*",
     "@solidiom/popover": "workspace:*",
     "@solidiom/runtime": "workspace:*",

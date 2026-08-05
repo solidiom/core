@@ -1198,6 +1198,9 @@ importers:
       '@solidiom/dialog':
         specifier: workspace:*
         version: link:../dialog
+      '@solidiom/input':
+        specifier: workspace:*
+        version: link:../input
       '@solidiom/menu':
         specifier: workspace:*
         version: link:../menu
@@ -1252,6 +1255,9 @@ importers:
       '@solidiom/dialog':
         specifier: workspace:*
         version: link:../dialog
+      '@solidiom/input':
+        specifier: workspace:*
+        version: link:../input
       '@solidiom/menu':
         specifier: workspace:*
         version: link:../menu
@@ -1312,6 +1318,9 @@ importers:
       '@solidiom/dialog':
         specifier: workspace:*
         version: link:../dialog
+      '@solidiom/input':
+        specifier: workspace:*
+        version: link:../input
       '@solidiom/menu':
         specifier: workspace:*
         version: link:../menu
