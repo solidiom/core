@@ -1,10 +1,10 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-04T23:44:49.000Z",
+  "generatedAt": "2026-08-05T00:02:42.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "503067c6b2bb9e7e81286953d8080d2648a1a59e184ccc61c3bbf075df414897"
+    "entriesHash": "691c6a449e0723cdd699e8d69e30e564a10463eedfb44c54776faa5ac899fa27"
   },
   "primitives": [
     {
@@ -1110,7 +1110,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "and",
@@ -2702,6 +2706,39 @@
         "component",
         "css",
         "dialog",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "input",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Input",
+      "description": "Styled input component — the recipe wrapper for the css, tailwind, unocss profile(s) using the input primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/input",
+      "searchKeywords": [
+        "component",
+        "css",
+        "input",
         "tailwind",
         "unocss"
       ]

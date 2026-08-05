@@ -1079,6 +1079,121 @@ export const proseRecipe: RecipeDefinition = {
   ],
 }
 
+/**
+ * Input — text input and textarea with validation states.
+ *
+ * Two slots (root for single-line, textarea for multi-line) with shared
+ * validation state flags. No variants — styling is driven by the Field
+ * component that wraps input.
+ */
+export const inputRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "input",
+  description:
+    "Single-line text input and multi-line textarea with validation state styling hooks.",
+  slots: [
+    {
+      part: "root",
+      element: "input",
+      ownership: "recipe",
+      base: {
+        display: "block",
+        width: "100%",
+        "min-height": "2.25rem",
+        padding: "0.375rem 0.75rem",
+        "font-size": "0.875rem",
+        "line-height": "1.25rem",
+        "font-family": { token: "font-sans", fallback: "system-ui, -apple-system, sans-serif" },
+        color: { token: "foreground" },
+        "background-color": { token: "surface" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "border-radius": { token: "radius" },
+        "outline": "none",
+        transition: "border-color 0.15s, box-shadow 0.15s",
+      },
+      states: {},
+      flags: {
+        invalid: {
+          "border-color": { token: "destructive" },
+        },
+        readonly: {
+          "background-color": { token: "surface-muted" },
+          "cursor": "not-allowed",
+        },
+        placeholder: {
+          opacity: "0.5",
+        },
+        disabled: {
+          "background-color": { token: "surface-muted" },
+          "cursor": "not-allowed",
+          opacity: "0.5",
+        },
+        required: {},
+      },
+      pseudos: {
+        ":focus-visible": {
+          "border-color": { token: "primary" },
+          outline: "2px solid",
+          "outline-color": { token: "focus-ring" },
+          "outline-offset": "2px",
+        },
+      },
+    },
+    {
+      part: "textarea",
+      element: "textarea",
+      ownership: "recipe",
+      base: {
+        display: "block",
+        width: "100%",
+        "min-height": "3rem",
+        padding: "0.375rem 0.75rem",
+        "font-size": "0.875rem",
+        "line-height": "1.25rem",
+        "font-family": { token: "font-sans", fallback: "system-ui, -apple-system, sans-serif" },
+        color: { token: "foreground" },
+        "background-color": { token: "surface" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "border-radius": { token: "radius" },
+        "outline": "none",
+        "resize": "vertical",
+        transition: "border-color 0.15s, box-shadow 0.15s",
+      },
+      states: {},
+      flags: {
+        invalid: {
+          "border-color": { token: "destructive" },
+        },
+        readonly: {
+          "background-color": { token: "surface-muted" },
+          "cursor": "not-allowed",
+        },
+        placeholder: {
+          opacity: "0.5",
+        },
+        disabled: {
+          "background-color": { token: "surface-muted" },
+          "cursor": "not-allowed",
+          opacity: "0.5",
+        },
+        required: {},
+      },
+      pseudos: {
+        ":focus-visible": {
+          "border-color": { token: "primary" },
+          outline: "2px solid",
+          "outline-color": { token: "focus-ring" },
+          "outline-offset": "2px",
+        },
+      },
+    },
+  ],
+}
+
 /** Every recipe definition, keyed by scope. */
 export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> = {
   accordion: accordionRecipe,
@@ -1087,6 +1202,7 @@ export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> =
   button: buttonRecipe,
   checkbox: checkboxRecipe,
   dialog: dialogRecipe,
+  input: inputRecipe,
   menu: menuRecipe,
   popover: popoverRecipe,
   select: selectRecipe,

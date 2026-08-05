@@ -1,6 +1,6 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
-  "name": "dialog",
+  "name": "input",
   "version": "0.0.1-next.0",
   "package": "@solidiom/recipes-css",
   "deliverables": [
@@ -8,32 +8,32 @@
   ],
   "source": {
     "css": [
-      "src/recipes/dialog.tsx"
+      "src/recipes/input.tsx"
     ],
     "tailwind": [
-      "src/recipes/dialog.tsx"
+      "src/recipes/input.tsx"
     ],
     "unocss": [
-      "src/recipes/dialog.tsx"
+      "src/recipes/input.tsx"
     ]
   },
   "integrity": {
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/dialog.tsx": "b9ca37f7dd878ed548f8cb4689fb43be29f668fed01a4d721327093937a73a23"
+        "src/recipes/input.tsx": "f495346842acb368c482e91b2a985957b4e70e29d9aa7ef2978cb355292b68ad"
       },
       "tailwind": {
-        "src/recipes/dialog.tsx": "761dac8c273460d56a7099b5bdc3827671df8a75f2a5c101d387ad15c1a3dcde"
+        "src/recipes/input.tsx": "19152361b31d4fe88e55dde8be7abb0d2560bd494bca4f5aa5ef42a82fc8166f"
       },
       "unocss": {
-        "src/recipes/dialog.tsx": "2c95537037aeeaa9b3c95bd0ad8dc0672658b3693e37dde052913204edbeeb24"
+        "src/recipes/input.tsx": "a585a9d552c5f1e8e4173abacac7d6eb5a8347e225f3472e1052a47a2b4d3d20"
       }
     },
     "lastGenerated": "2026-08-05T00:02:42.000Z"
   },
   "documentation": {
-    "status": "review",
+    "status": "complete",
     "locales": {
       "en": {
         "status": "draft"
@@ -44,7 +44,7 @@
     }
   },
   "dependencies": [
-    "@solidiom/dialog"
+    "@solidiom/input"
   ],
   "lastUpdated": "2026-08-05T00:02:42.000Z"
 }

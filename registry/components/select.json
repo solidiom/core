@@ -30,7 +30,7 @@
         "src/recipes/select.tsx": "b6795b06201180faf6bf659e51135ebfab054685e8fd9ddc3c257519ad38c56d"
       }
     },
-    "lastGenerated": "2026-08-04T23:44:49.000Z"
+    "lastGenerated": "2026-08-05T00:02:42.000Z"
   },
   "documentation": {
     "status": "review",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/select"
   ],
-  "lastUpdated": "2026-08-04T23:44:49.000Z"
+  "lastUpdated": "2026-08-05T00:02:42.000Z"
 }
