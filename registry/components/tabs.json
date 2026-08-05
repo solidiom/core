@@ -30,7 +30,7 @@
         "src/recipes/tabs.tsx": "dadfe9f3a643dd3b448797e0143c42cdc1182e2000a9ab35f65f2f5cbfa201ad"
       }
     },
-    "lastGenerated": "2026-08-05T05:50:42.000Z"
+    "lastGenerated": "2026-08-05T05:52:23.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/tabs"
   ],
-  "lastUpdated": "2026-08-05T05:50:42.000Z"
+  "lastUpdated": "2026-08-05T05:52:23.000Z"
 }

@@ -30,7 +30,7 @@
         "src/recipes/button.tsx": "49db8c6a779d42418a736fb79d481fcd9e10b4fd60e4059edffd5edb50e5a66e"
       }
     },
-    "lastGenerated": "2026-08-05T05:50:42.000Z"
+    "lastGenerated": "2026-08-05T05:52:23.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/button"
   ],
-  "lastUpdated": "2026-08-05T05:50:42.000Z"
+  "lastUpdated": "2026-08-05T05:52:23.000Z"
 }
