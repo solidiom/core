@@ -951,7 +951,7 @@ Two columns, because collapsing them is how the previous "11/52 primitives" read
 | Scope                         | Required | DoD | Landed |
 | ----------------------------- | -------: | --: | -----: |
 | Primitives                    |       52 |  52 |     52 |
-| Components                    |       30 |  16 |      0 |
+| Components                    |       30 |  17 |      0 |
 | Blocks                        |     ≥ 36 |   0 |      0 |
 | Unique templates              |       29 |   0 |      0 |
 | Template portfolio placements |       32 |   0 |      0 |

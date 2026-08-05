@@ -13,7 +13,8 @@ var supportedPrimitives = [
   "menu",
   "toast",
   "badge",
-  "alert"
+  "alert",
+  "spinner"
 ];
 
 // src/recipes/dialog.tsx
@@ -214,6 +215,14 @@ function StyledAlert(props) {
       {props.children}
     </Alert.Root>;
 }
+
+// src/recipes/spinner.tsx
+import * as Spinner from "@solidiom/spinner";
+function StyledSpinner(props) {
+  return <Spinner.Root label={props.label}>
+      {props.children}
+    </Spinner.Root>;
+}
 export {
   StyledAccordion,
   StyledAlert,
@@ -224,6 +233,7 @@ export {
   StyledMenu,
   StyledPopover,
   StyledSelect,
+  StyledSpinner,
   StyledSwitch,
   StyledTabs,
   StyledToast,

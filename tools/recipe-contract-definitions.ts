@@ -1080,6 +1080,29 @@ export const proseRecipe: RecipeDefinition = {
 }
 
 /**
+ * Spinner — loading indicator with role="status" for assistive technologies.
+ */
+export const spinnerRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "spinner",
+  description: "Loading indicator with role=status and configurable accessible label.",
+  slots: [
+    {
+      part: "root",
+      element: "span",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        "font-size": "0.875rem",
+        color: { token: "foreground-muted" },
+      },
+    },
+  ],
+}
+
+/**
  * Input — text input and textarea with validation states.
  *
  * Two slots (root for single-line, textarea for multi-line) with shared
@@ -1371,6 +1394,7 @@ export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> =
   menu: menuRecipe,
   popover: popoverRecipe,
   select: selectRecipe,
+  spinner: spinnerRecipe,
   switch: switchRecipe,
   tabs: tabsRecipe,
   toast: toastRecipe,

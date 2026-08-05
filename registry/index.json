@@ -1,10 +1,10 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-05T05:52:23.000Z",
+  "generatedAt": "2026-08-05T05:58:36.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "0d67b2c7da1019d0376a01a15632f39328f72c79e7ab2d2bf82f07273c9d161e"
+    "entriesHash": "7def7a4d13928a90ca70e453693d350c77f2bc0197464a0fa55ff712227f7bb4"
   },
   "primitives": [
     {
@@ -1997,7 +1997,9 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "feedback",
@@ -2914,6 +2916,35 @@
         "select",
         "tailwind",
         "unocss"
+      ]
+    },
+    {
+      "name": "spinner",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Spinner",
+      "description": "Styled spinner component — the recipe wrapper for the css profile(s) using the spinner primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css"
+      ],
+      "primitiveDependency": "@solidiom/spinner",
+      "searchKeywords": [
+        "component",
+        "css",
+        "spinner"
       ]
     },
     {

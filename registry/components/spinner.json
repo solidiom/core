@@ -1,6 +1,6 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
-  "name": "select",
+  "name": "spinner",
   "version": "0.0.1-next.0",
   "package": "@solidiom/recipes-css",
   "deliverables": [
@@ -8,26 +8,14 @@
   ],
   "source": {
     "css": [
-      "src/recipes/select.tsx"
-    ],
-    "tailwind": [
-      "src/recipes/select.tsx"
-    ],
-    "unocss": [
-      "src/recipes/select.tsx"
+      "src/recipes/spinner.tsx"
     ]
   },
   "integrity": {
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/select.tsx": "e29c3991f7a7d79f86f5fe4e5d260f25a6f18ddc86922be33eb7468cfd05d9b5"
-      },
-      "tailwind": {
-        "src/recipes/select.tsx": "d9b85ba14536ce8102f1bbe7953497db19c839f8af1a45b69b1b995ce1a119b5"
-      },
-      "unocss": {
-        "src/recipes/select.tsx": "b6795b06201180faf6bf659e51135ebfab054685e8fd9ddc3c257519ad38c56d"
+        "src/recipes/spinner.tsx": "64dd9662c30bed940cc0dadf831c5b98e0484d8d6f458379f20b93bafbdd2def"
       }
     },
     "lastGenerated": "2026-08-05T05:58:36.000Z"
@@ -44,7 +32,7 @@
     }
   },
   "dependencies": [
-    "@solidiom/select"
+    "@solidiom/spinner"
   ],
   "lastUpdated": "2026-08-05T05:58:36.000Z"
 }
