@@ -6,27 +6,28 @@
  */
 /** Boolean flags that can be set on a semantic element. */
 export interface SemanticFlags {
-  disabled?: boolean
-  readonly?: boolean
-  required?: boolean
-  invalid?: boolean
-  placeholder?: boolean
-  highlighted?: boolean
-  selected?: boolean
+    disabled?: boolean;
+    loading?: boolean;
+    readonly?: boolean;
+    required?: boolean;
+    invalid?: boolean;
+    placeholder?: boolean;
+    highlighted?: boolean;
+    selected?: boolean;
 }
 /** Options for applySemanticAttrs. */
 export interface SemanticAttrsOptions extends SemanticFlags {
-  /** The primitive scope (e.g. "dialog", "select"). */
-  scope: string
-  /** The part name (e.g. "trigger", "content"). */
-  part: string
-  /** Current state value (e.g. "open", "closed", "checked"). */
-  state?: string
-  /** Orientation value. */
-  orientation?: "horizontal" | "vertical"
+    /** The primitive scope (e.g. "dialog", "select"). */
+    scope: string;
+    /** The part name (e.g. "trigger", "content"). */
+    part: string;
+    /** Current state value (e.g. "open", "closed", "checked"). */
+    state?: string;
+    /** Orientation value. */
+    orientation?: "horizontal" | "vertical";
 }
 /** The returned attribute record to spread on a JSX element. */
-export type SemanticAttrsResult = Record<string, string | undefined>
+export type SemanticAttrsResult = Record<string, string | undefined>;
 /**
  * Generates semantic data-* attributes for a primitive element.
  *
@@ -38,5 +39,5 @@ export type SemanticAttrsResult = Record<string, string | undefined>
  * Boolean flags use empty string for presence (truthy in attribute checks).
  * Undefined values are omitted from the result.
  */
-export declare function applySemanticAttrs(options: SemanticAttrsOptions): SemanticAttrsResult
+export declare function applySemanticAttrs(options: SemanticAttrsOptions): SemanticAttrsResult;
 //# sourceMappingURL=semantic-attrs.d.ts.map

@@ -6,12 +6,12 @@
  */
 /** Options for resolving a portal target. */
 export interface PortalOptions {
-  /** Explicit portal target element. */
-  target?: Element | null
-  /** CSS selector to resolve the portal target. */
-  selector?: string
-  /** The document context (defaults to globalThis.document). */
-  document?: Document
+    /** Explicit portal target element. */
+    target?: Element | null;
+    /** CSS selector to resolve the portal target. */
+    selector?: string;
+    /** The document context (defaults to globalThis.document). */
+    document?: Document;
 }
 /**
  * Resolves the portal target element.
@@ -19,5 +19,5 @@ export interface PortalOptions {
  * Priority: explicit target > selector > document.body.
  * Returns undefined during SSR (no document available).
  */
-export declare function resolvePortalTarget(options?: PortalOptions): Element | undefined
+export declare function resolvePortalTarget(options?: PortalOptions): Element | undefined;
 //# sourceMappingURL=portal.d.ts.map

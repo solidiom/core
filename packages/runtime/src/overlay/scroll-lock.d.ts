@@ -13,10 +13,10 @@
  *
  * Returns a release function.
  */
-export declare function activateScrollLock(doc: Document): () => void
+export declare function activateScrollLock(doc: Document): () => void;
 /**
  * Resets all scroll lock state (for testing).
  * @internal
  */
-export declare function resetScrollLock(): void
+export declare function resetScrollLock(): void;
 //# sourceMappingURL=scroll-lock.d.ts.map
