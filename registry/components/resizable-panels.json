@@ -21,7 +21,7 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/resizable-panels.tsx": "15098c030dd844707f2cb2469fb82b5d586f0585d0fc60f44fc3e231b9034a2a"
+        "src/recipes/resizable-panels.tsx": "29614421c7faca23fc144eb837ef3dd5beedb793f25a6ab327dfc17d0a2a378d"
       },
       "tailwind": {
         "src/recipes/resizable-panels.tsx": "067b05bf3e11d278ddad4b5c48879716be46b65d466dea0c466cf605ffdbc089"
@@ -30,7 +30,7 @@
         "src/recipes/resizable-panels.tsx": "cbeaf8e4443b643e6ec3a835b41c3ba215340be6620bdf68211de742f5fdfec2"
       }
     },
-    "lastGenerated": "2026-08-06T00:15:56.000Z"
+    "lastGenerated": "2026-08-06T13:55:23.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/resizable-panels"
   ],
-  "lastUpdated": "2026-08-06T00:15:56.000Z"
+  "lastUpdated": "2026-08-06T13:55:23.000Z"
 }

@@ -96,17 +96,56 @@ function extractDataParts(cssContent: string): string[] {
 }
 
 function extractPrimitiveImport(tsxContent: string): string | undefined {
-  return tsxContent.match(/import\s+\*\s+as\s+\w+\s+from\s+["']@solidiom\/([^"']+)["']/)?.[1]
+  // Match namespace imports: import * as X from "@solidiom/..."
+  const namespace = tsxContent.match(/import\s+\*\s+as\s+\w+\s+from\s+["']@solidiom\/([^"']+)["']/)
+  if (namespace) return namespace[1]
+  // Match named imports: import { X } from "@solidiom/..."
+  const named = tsxContent.match(/import\s+\{[^}]+\}\s+from\s+["']@solidiom\/([^"']+)["']/)
+  if (named) return named[1]
+  return undefined
 }
 
 function extractUsedParts(tsxContent: string): string[] {
-  return [
-    ...new Set(
-      [...tsxContent.matchAll(/<\/?[A-Z][a-zA-Z]*\.([A-Z][a-zA-Z]*)/g)].map((match) =>
-        match[1].replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase(),
-      ),
-    ),
-  ]
+  const parts = new Set<string>()
+  // Namespace usage: <X.PartName> → "part-name"
+  for (const match of tsxContent.matchAll(/<\/?[A-Z][a-zA-Z]*\.([A-Z][a-zA-Z]*)/g)) {
+    parts.add(match[1].replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase())
+  }
+  // Named import usage: detect imported names and map to parts
+  // e.g. import { PanelGroup, Panel, Handle } → "group", "panel", "handle"
+  const namedImportMatch = tsxContent.match(/import\s+\{([^}]+)\}\s+from\s+["']@solidiom\/([^"']+)["']/)
+  if (namedImportMatch) {
+    const scope = namedImportMatch[2]
+    const scopePascal = scope
+      .split("-")
+      .map((seg) => seg.charAt(0).toUpperCase() + seg.slice(1))
+      .join("")
+    const names = namedImportMatch[1].split(",").map((n) => n.trim())
+    for (const name of names) {
+      // Check the name is used in JSX
+      if (new RegExp(`<${name}[\\s/>]`).test(tsxContent)) {
+        // Convert PascalCase to kebab-case part name, strip scope prefix
+        let partName = name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()
+        // Strip scope prefix (e.g. "panel-group" from "resizable-panels" → "group")
+        const scopePrefix = scope + "-"
+        if (partName.startsWith(scopePrefix)) {
+          partName = partName.slice(scopePrefix.length)
+        }
+        // Also try just removing the last segment of the scope as prefix
+        const lastSeg = scope.split("-").pop() || ""
+        if (partName.startsWith(lastSeg + "-")) {
+          // keep full name in this case
+        }
+        // Root component maps to "root"
+        if (name === "Root" || name === scopePascal) {
+          parts.add("root")
+        } else {
+          parts.add(partName)
+        }
+      }
+    }
+  }
+  return [...parts]
 }
 
 export function auditRecipeProfile({

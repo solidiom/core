@@ -1,31 +1,19 @@
 /**
  * FOUND-004: Component catalog completion gate.
  *
- * Source-derived gate that verifies each component against the M4 bar (§8.2.1),
- * reconciles against the committed registry, and asserts a ratcheting count
- * that must match the number declared in docs/plans/website-tasks.md §11
- * scope counters.
+ * Source-derived gate that verifies each **approved** component (§9.2 queue)
+ * against the M4 bar (§8.2.1), reconciles against the committed registry,
+ * flags untracked registry slugs, and asserts a ratcheting count that must
+ * match the number declared in docs/plans/website-tasks.md §11 scope counters.
  *
  * Run via: pnpm exec tsx tools/component-catalog-gate.ts
  *          pnpm exec tsx tools/component-catalog-gate.ts --audit-only
  *
  * --audit-only: report without enforcing the count assertion (for diagnostics)
  *
- * Checks enforceable from source/files (§8.2.1):
- *   1 — Physical form (recipe wrapper + primitive package)
- *   2 — Canonical contract (declared in recipe-contract-definitions.ts)
- *   4 — Registry (manifest, index entry, documentation status)
- *   6 — English docs (required sections)
- *   7 — Spanish mirror (translation status, source hash)
- *
- * Skipped (CI-enforced, not gate-enforced):
- *   3 — Three outputs, no fork (runtime checks)
- *   5 — Source install (handled by FOUND-003)
- *  10 — Routes (runtime render check)
- *
- * Also verifies:
- *   8 — At least one example
- *   9 — Accessibility by reference (cites primitive evidence)
+ * CATALOG-001: The gate uses the approved §9.2 queue as its source of truth
+ * rather than iterating registry index entries. Untracked slugs in the registry
+ * that have no approved COMP-* row are flagged but do not count.
  *
  * See: docs/plans/website-tasks.md §8.2.1 (the M4 bar)
  */
@@ -56,6 +44,7 @@ const REQUIRED_SECTIONS = [
 // ─── Types ──────────────────────────────────────────────────────────────────
 
 interface ComponentResult {
+  id: string
   name: string
   passed: boolean
   failures: string[]
@@ -73,6 +62,12 @@ interface IndexComponent {
   status: string
   documentationStatus: string
   stylingOutputs: string[]
+}
+
+interface ApprovedComponent {
+  id: string
+  name: string
+  status: string
 }
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -131,6 +126,39 @@ function hasRequiredSections(sections: string[]): string[] {
   return missing
 }
 
+// ─── Name normalization ─────────────────────────────────────────────────────
+// §9.2 uses human-readable names ("Dropdown Menu") that may differ from the
+// filesystem/registry slug ("menu"). This map handles those cases.
+const NAME_OVERRIDES: Record<string, string> = {
+  "dropdown-menu": "menu",
+}
+
+function normalizeComponentName(rawName: string): string {
+  const kebab = rawName.toLowerCase().replace(/\s+/g, "-")
+  return NAME_OVERRIDES[kebab] ?? kebab
+}
+
+// ─── Read approved component queue from §9.2 ────────────────────────────────
+
+function readApprovedComponents(): ApprovedComponent[] {
+  const content = readFileSync(TRACKER_PATH, "utf8")
+  const sectionMatch = content.match(/### 9\.2 Component queue[\s\S]*?(?=### 9\.3|$)/)
+  if (!sectionMatch) return []
+
+  const section = sectionMatch[0]
+  const components: ApprovedComponent[] = []
+  const compRegex = /\|\s*\[([ x~!])\]\s*\|\s*(COMP-\d{3})\s*\|\s*([^|]+)\|/g
+  let m
+  while ((m = compRegex.exec(section)) !== null) {
+    components.push({
+      id: m[2],
+      name: normalizeComponentName(m[3].trim()),
+      status: m[1],
+    })
+  }
+  return components
+}
+
 // ─── Read component list from registry index ────────────────────────────────
 
 function readIndexComponents(): IndexComponent[] {
@@ -145,7 +173,6 @@ function readIndexComponents(): IndexComponent[] {
 function readDeclaredCount(): number {
   try {
     const content = readFileSync(TRACKER_PATH, "utf8")
-    // Match "| Components | 30 | N |" — DoD column is third pipe-delimited value
     const match = content.match(/\|\s*Components\s*\|\s*\d+\s*\|\s*(\d+)\s*\|/)
     if (match) return parseInt(match[1], 10)
     return 0
@@ -156,11 +183,11 @@ function readDeclaredCount(): number {
 
 // ─── Per-component verification ─────────────────────────────────────────────
 
-function verifyComponent(name: string): ComponentResult {
+function verifyComponent(comp: ApprovedComponent, indexComponents: IndexComponent[]): ComponentResult {
   const failures: string[] = []
+  const name = comp.name
 
   // §8.2.1 req 1: Physical form
-  // Check recipe wrapper exists for each styling profile and primitive package exists
   const profiles = ["css", "tailwind", "unocss"]
   for (const profile of profiles) {
     const recipePath = join(PACKAGES_DIR, `recipes-${profile}`, "src", "recipes", `${name}.tsx`)
@@ -168,8 +195,6 @@ function verifyComponent(name: string): ComponentResult {
       failures.push(`missing recipes-${profile}/src/recipes/${name}.tsx`)
     }
   }
-
-  // Check primitive dependency package exists
   const primitivePkg = join(PACKAGES_DIR, name)
   if (!existsSync(primitivePkg)) {
     failures.push(`missing primitive package packages/${name}/`)
@@ -186,19 +211,14 @@ function verifyComponent(name: string): ComponentResult {
   if (!registry) {
     failures.push("missing registry/components/<name>.json")
   } else {
-    // Check source files per styling output
     const hasSource =
       registry.source && (registry.source.css || registry.source.tailwind || registry.source.unocss)
     if (!hasSource) {
       failures.push("registry: no source files recorded per styling output")
     }
-
-    // Check integrity digests
     if (!registry.integrity || !registry.integrity.fileDigests) {
       failures.push("registry: missing integrity digests")
     }
-
-    // Check documentation status
     if (registry.documentation.status !== "complete") {
       failures.push(
         `registry: documentation.status="${registry.documentation.status}" (expected "complete")`,
@@ -206,13 +226,11 @@ function verifyComponent(name: string): ComponentResult {
     }
   }
 
-  // Verify component appears in index's components[] and check status
-  const indexComponents = readIndexComponents()
+  // Verify component appears in index's components[]
   const indexEntry = indexComponents.find((c) => c.name === name)
   if (!indexEntry) {
     failures.push("not listed in registry index's components[]")
   } else {
-    // Check status remains preview (from index entry)
     if (indexEntry.status !== "preview") {
       failures.push(`index: status="${indexEntry.status}" (expected "preview")`)
     }
@@ -221,7 +239,7 @@ function verifyComponent(name: string): ComponentResult {
   // §8.2.1 req 6: English docs with required sections
   const enDocPath = join(SITE_CONTENT, "en", "components", `${name}.md`)
   if (!existsSync(enDocPath)) {
-    failures.push("missing English doc (apps/site/src/content/en/components/<name>.md)")
+    failures.push("missing English doc")
   } else {
     const sections = getSections(enDocPath)
     const missing = hasRequiredSections(sections)
@@ -233,7 +251,7 @@ function verifyComponent(name: string): ComponentResult {
   // §8.2.1 req 7: Spanish mirror
   const esDocPath = join(SITE_CONTENT, "es", "components", `${name}.md`)
   if (!existsSync(esDocPath)) {
-    failures.push("missing Spanish doc (apps/site/src/content/es/components/<name>.md)")
+    failures.push("missing Spanish doc")
   } else {
     const esFm = readFrontmatter(esDocPath)
     if (!esFm) {
@@ -255,78 +273,84 @@ function verifyComponent(name: string): ComponentResult {
     ? readdirSync(exampleDir).filter((f: string) => f.endsWith(".md") || f.endsWith(".tsx"))
     : []
   if (examples.length === 0) {
-    failures.push("missing examples (apps/site/src/content/en/components/<name>/examples/)")
+    failures.push("missing examples")
   }
 
   // §8.2.1 req 9: Accessibility by reference
-  // Docs should cite the primitive's evidence — check EN doc references evidence
   if (existsSync(enDocPath)) {
     try {
       const docContent = readFileSync(enDocPath, "utf8")
-      // Check for reference to primitive's evidence.json or accessibility contract
       const citesEvidence =
         /evidence\.json/.test(docContent) ||
         /accessibility.*contract/.test(docContent) ||
         /a11y.*contract/.test(docContent) ||
         /primitive.*accessibility/.test(docContent)
-      // Only fail if the doc exists but doesn't cite evidence (req 9)
       if (!citesEvidence) {
-        failures.push(
-          "EN doc does not cite primitive's accessibility contract or evidence.json (§8.2 req 9)",
-        )
+        failures.push("EN doc does not cite primitive's accessibility contract or evidence.json")
       }
-    } catch {
-      /* file already validated above */
-    }
+    } catch { /* validated above */ }
   }
 
-  return { name, passed: failures.length === 0, failures }
+  return { id: comp.id, name, passed: failures.length === 0, failures }
 }
 
 // ─── Main ───────────────────────────────────────────────────────────────────
 
 function main(): void {
   console.log("FOUND-004: Component Catalog Completion Gate (M4 bar)\n")
+  console.log("Source of truth: docs/plans/website-tasks.md §9.2 (approved queue)")
+  console.log("─".repeat(60))
 
-  const components = readIndexComponents()
-  if (components.length === 0) {
-    console.error("No components found in registry index — cannot proceed.")
+  const approvedComponents = readApprovedComponents()
+  if (approvedComponents.length === 0) {
+    console.error("No approved components found in §9.2 — cannot proceed.")
     process.exit(1)
+  }
+  console.log(`Approved component queue: ${approvedComponents.length} items`)
+
+  const indexComponents = readIndexComponents()
+  console.log(`Registry index components: ${indexComponents.length} items`)
+
+  // Detect untracked slugs
+  const approvedNames = new Set(approvedComponents.map((c) => c.name))
+  const untrackedSlugs = indexComponents.filter((c) => !approvedNames.has(c.name))
+  if (untrackedSlugs.length > 0) {
+    console.log(`\n⚠ Untracked registry slugs (not in §9.2 approved queue):`)
+    for (const slug of untrackedSlugs) {
+      console.log(`  ⚠ "${slug.name}" — in registry but has no COMP-* row`)
+    }
+    console.log(`  → Must be formally rejected or added to §9.2 before counting.\n`)
   }
 
   const results: ComponentResult[] = []
-
-  for (const comp of components) {
-    results.push(verifyComponent(comp.name))
+  for (const comp of approvedComponents) {
+    results.push(verifyComponent(comp, indexComponents))
   }
 
   const passing = results.filter((r) => r.passed)
   const failing = results.filter((r) => !r.passed)
 
-  // Report passing components
   if (passing.length > 0) {
-    console.log(`\n✓ Passing (${passing.length}/${components.length}):`)
+    console.log(`\n✓ Passing (${passing.length}/${approvedComponents.length}):`)
     for (const r of passing) {
-      console.log(`  ✓ ${r.name}`)
+      console.log(`  ✓ ${r.id} ${r.name}`)
     }
   }
 
-  // Report failing components (with first 3 failures each)
   if (failing.length > 0) {
-    console.log(`\n✗ Not yet complete (${failing.length}/${components.length}):`)
+    console.log(`\n✗ Not yet complete (${failing.length}/${approvedComponents.length}):`)
     for (const r of failing) {
       const detail = r.failures.slice(0, 3).join("; ")
       const more = r.failures.length > 3 ? ` (+${r.failures.length - 3} more)` : ""
-      console.log(`  ✗ ${r.name}: ${detail}${more}`)
+      console.log(`  ✗ ${r.id} ${r.name}: ${detail}${more}`)
     }
   }
 
-  // Ratcheting count assertion
   const declaredCount = readDeclaredCount()
   const actualCount = passing.length
 
   console.log(`\n${"═".repeat(60)}`)
-  console.log(`Components meeting M4 bar: ${actualCount}/${components.length}`)
+  console.log(`Components meeting M4 bar: ${actualCount}/${approvedComponents.length}`)
   console.log(`Tracker declared count (DoD column): ${declaredCount}`)
 
   if (auditOnly) {

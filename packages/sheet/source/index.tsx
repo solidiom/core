@@ -63,6 +63,7 @@ export interface SheetRootProps {
   /** Called when open state change is requested. */
   onOpenChange?: (open: boolean, details: ChangeDetails<DisclosureReason>) => void
   children: JSX.Element
+  class?: string
 }
 
 export function Root(props: SheetRootProps) {

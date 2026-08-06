@@ -75,17 +75,17 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "a6edcf7acc79b8b13432a33ebb20b4ea30ccaa41c156eb755878bf8aa6fc50f3",
+    "filesHash": "ba4e979c29a0bcc8fd3f5882e6a546c8ab753b5617a7729ff8357bc86138f91b",
     "fileDigests": {
       "src/combobox-context.ts": "d3cb59ec238dd90375b8ae34a1182561e1574f981171ba6d174fd77b15ed65fb",
-      "src/combobox.tsx": "e98197dea6119ea193d1fd2edab4d7ddf54950a3f7a426f9b75ecd6862234313",
+      "src/combobox.tsx": "a815a32fa87440d20dccd5a48c62d10bcf73ad4f0cd2166c80adb5e33a7d38dc",
       "src/index.tsx": "29894f64708d6022ada60f6167da86e259fac7d09bd578c1fa7df4bb071171e7"
     },
-    "lastGenerated": "2026-08-06T00:15:56.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/combobox"
   },
-  "lastUpdated": "2026-08-06T00:15:56.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

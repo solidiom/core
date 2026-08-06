@@ -22,6 +22,7 @@ export interface ComboboxRootProps {
     defaultSelectedValue?: string;
     onSelectedValueChange?: (value: string, details: ChangeDetails<ComboboxReason>) => void;
     children: JSX.Element;
+    class?: string;
 }
 /** Root provider — composes disclosure state, input value, and collection. */
 export declare function Root(props: ComboboxRootProps): JSX.Element;

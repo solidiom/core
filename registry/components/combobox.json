@@ -21,7 +21,7 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/combobox.tsx": "b5977eaa859e1727348880b2c6754ae2757140180652696a44018456191c3990"
+        "src/recipes/combobox.tsx": "48b42826cc77f0f729c9d756d9ccc52d1c2ac9603a169f61cd7a704aa77d6363"
       },
       "tailwind": {
         "src/recipes/combobox.tsx": "98cf5ad30998ad1dc473ea7ec0cc5e33011bfc8d8370044dfd3af90ed1230c2b"
@@ -30,7 +30,7 @@
         "src/recipes/combobox.tsx": "7be0889f0ff306251ec6a590a693d1816630e4cfd75023813986f6cf7eb7eb77"
       }
     },
-    "lastGenerated": "2026-08-06T00:15:56.000Z"
+    "lastGenerated": "2026-08-06T13:55:23.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/combobox"
   ],
-  "lastUpdated": "2026-08-06T00:15:56.000Z"
+  "lastUpdated": "2026-08-06T13:55:23.000Z"
 }

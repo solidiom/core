@@ -285,12 +285,12 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 
 | Status | ID       | Component        | Baseline               | Size | Depends on                      |
 | ------ | -------- | ---------------- | ---------------------- | ---- | ------------------------------- |
-| [~]    | COMP-001 | Button           | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-007, THEME-006 |
-| [~]    | COMP-002 | Input            | New                    | M    | RECIPE-005, PRIM-023            |
+| [x]    | COMP-001 | Button           | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-007, THEME-006 |
+| [x]    | COMP-002 | Input            | New                    | M    | RECIPE-005, PRIM-023            |
 | [~]    | COMP-003 | Field            | New                    | L    | RECIPE-005, PRIM-021, COMP-002  |
-| [~]    | COMP-004 | Card             | New                    | M    | RECIPE-005, PRIM-009            |
+| [x]    | COMP-004 | Card             | New                    | M    | RECIPE-005, PRIM-009            |
 | [~]    | COMP-005 | Alert            | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-002            |
-| [~]    | COMP-006 | Dialog           | CSS + Tailwind recipe  | L    | RECIPE-005, PRIM-018            |
+| [x]    | COMP-006 | Dialog           | CSS + Tailwind recipe  | L    | RECIPE-005, PRIM-018            |
 | [~]    | COMP-007 | Select           | CSS + Tailwind recipe  | L    | RECIPE-005, PRIM-037            |
 | [~]    | COMP-008 | Dropdown Menu    | Existing `menu` recipe | L    | RECIPE-005, PRIM-028            |
 | [~]    | COMP-009 | Tabs             | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-044            |
@@ -313,7 +313,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | [~]    | COMP-026 | Progress         | New                    | M    | RECIPE-005, PRIM-033            |
 | [~]    | COMP-027 | Resizable Panels | New                    | L    | RECIPE-005, PRIM-035            |
 | [~]    | COMP-028 | Scroll Area      | New                    | M    | RECIPE-005, PRIM-036            |
-| [~]    | COMP-029 | Spinner          | New                    | M    | RECIPE-005, PRIM-042            |
+| [x]    | COMP-029 | Spinner          | New                    | M    | RECIPE-005, PRIM-042            |
 | [~]    | COMP-030 | Toolbar          | New                    | L    | RECIPE-005, PRIM-048            |
 
 `COMP-016` Combobox and `COMP-018` Sheet have no block consumers. They remain approved and last in the sequence pending explicit pilot-informed rationale. Check names, not old numbers, when reading revisions predating `BLOCK-000B`.
@@ -517,7 +517,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | Scope                         | Required | DoD | Landed |
 | ----------------------------- | -------: | --: | -----: |
 | Primitives                    |       52 |  52 |     52 |
-| Components                    |       30 |   0 |     30 |
+| Components                    |       30 |  30 |     30 |
 | Blocks                        |     ≥ 36 |   0 |      0 |
 | Unique templates              |       29 |   0 |      0 |
 | Template portfolio placements |       32 |   0 |      0 |

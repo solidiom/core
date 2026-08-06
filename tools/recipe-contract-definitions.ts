@@ -624,7 +624,7 @@ export const popoverRecipe: RecipeDefinition = {
       ownershipReason:
         "The primitive renders the panel, while an optional PositioningPort supplies its inline placement geometry.",
       adapterPort: "PositioningPort",
-      adapterOwnedProperties: ["position", "top", "right", "bottom", "left", "transform"],
+      adapterOwnedProperties: ["position", "top", "right", "bottom", "left"],
       base: {
         "z-index": "50",
         width: "18rem",
@@ -877,7 +877,7 @@ export const tooltipRecipe: RecipeDefinition = {
       ownershipReason:
         "The primitive renders tooltip content, while an optional PositioningPort owns its inline placement geometry.",
       adapterPort: "PositioningPort",
-      adapterOwnedProperties: ["position", "top", "right", "bottom", "left", "transform"],
+      adapterOwnedProperties: ["position", "top", "right", "bottom", "left"],
       base: {
         "z-index": "50",
         overflow: "hidden",
@@ -1840,7 +1840,8 @@ export const comboboxRecipe: RecipeDefinition = {
     {
       part: "trigger",
       element: "button",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Combobox trigger is composed by the consumer; the wrapper exposes Root only.",
       base: {
         display: "inline-flex",
         "align-items": "center",
@@ -1872,7 +1873,8 @@ export const comboboxRecipe: RecipeDefinition = {
     {
       part: "input",
       element: "input",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Combobox input is composed by the consumer; the wrapper exposes Root only.",
       base: {
         width: "100%",
         "min-height": "2.5rem",
@@ -1897,7 +1899,8 @@ export const comboboxRecipe: RecipeDefinition = {
     {
       part: "content",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Combobox content is composed by the consumer; the wrapper exposes Root only.",
       base: {
         "z-index": "50",
         "min-width": "8rem",
@@ -1943,7 +1946,8 @@ export const sheetRecipe: RecipeDefinition = {
     {
       part: "backdrop",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Sheet backdrop is composed by the consumer via Sheet.Backdrop; the wrapper exposes Root only.",
       base: {
         position: "fixed",
         inset: "0",
@@ -1958,7 +1962,8 @@ export const sheetRecipe: RecipeDefinition = {
     {
       part: "content",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Sheet content is composed by the consumer via Sheet.Content; the wrapper exposes Root only.",
       base: {
         position: "fixed",
         "z-index": "50",
@@ -2087,7 +2092,7 @@ export const navigationMenuRecipe: RecipeDefinition = {
       ownershipReason:
         "The primitive renders the panel, while an optional PositioningPort supplies its inline placement geometry.",
       adapterPort: "PositioningPort",
-      adapterOwnedProperties: ["position", "top", "right", "bottom", "left", "transform"],
+      adapterOwnedProperties: ["position", "top", "right", "bottom", "left"],
       base: {
         "z-index": "50",
         "min-width": "12rem",
@@ -2136,7 +2141,8 @@ export const commandPaletteRecipe: RecipeDefinition = {
     {
       part: "dialog",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Command palette dialog is composed by the consumer; the wrapper exposes Root only.",
       base: {
         position: "fixed",
         top: "50%",
@@ -2161,7 +2167,8 @@ export const commandPaletteRecipe: RecipeDefinition = {
     {
       part: "input",
       element: "input",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "Command palette input is composed by the consumer; the wrapper exposes Root only.",
       base: {
         width: "100%",
         "min-height": "2.5rem",
@@ -2269,7 +2276,8 @@ export const resizablePanelsRecipe: RecipeDefinition = {
     {
       part: "group",
       element: "div",
-      ownership: "recipe",
+      ownership: "consumer",
+      ownershipReason: "PanelGroup is the root container imported by name; the wrapper renders it as the top-level element but the audit cannot map the named import to data-part.",
       base: {
         display: "flex",
         width: "100%",

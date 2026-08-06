@@ -79,6 +79,8 @@
     "audit:adapter-styling": "tsx tools/audit-adapter-styling.ts",
     "block:catalog-gate": "tsx tools/block-catalog-gate.ts",
     "block:catalog-audit": "tsx tools/block-catalog-gate.ts --audit-only",
+    "template:catalog-gate": "tsx tools/template-catalog-gate.ts",
+    "template:catalog-audit": "tsx tools/template-catalog-gate.ts --audit-only",
     "catalog:scaffold-docs": "tsx tools/scaffold-catalog-docs.ts"
   },
   "devDependencies": {

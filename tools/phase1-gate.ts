@@ -544,12 +544,13 @@ check(
   "docs/evidence/adapter-styling-audit.md differs from generated output — regenerate and commit it",
 )
 
-// ─── 15. FOUND-004/005: component and block catalog gates ────────────────
+// ─── 15. FOUND-004/005/TPL-000: component, block, and template catalog gates ─
 //
 // FOUND-004 asserts component count against §11 scope counters (component:catalog-gate).
 // FOUND-005 asserts block count and dependency resolution by name (block:catalog-gate).
+// TPL-000 asserts template manifest validity and count (template:catalog-gate).
 // Per website-tasks.md §3, cited by title, not number.
-console.log("\nCatalog gates (FOUND-004/005):")
+console.log("\nCatalog gates (FOUND-004/005, TPL-000):")
 check(
   "component catalog gate passes (FOUND-004)",
   run("pnpm exec tsx tools/component-catalog-gate.ts").ok,
@@ -559,6 +560,11 @@ check(
   "block catalog gate passes (FOUND-005)",
   run("pnpm exec tsx tools/block-catalog-gate.ts").ok,
   "Block catalog gate failed — run: pnpm run block:catalog-gate",
+)
+check(
+  "template catalog gate passes (TPL-000)",
+  run("pnpm exec tsx tools/template-catalog-gate.ts").ok,
+  "Template catalog gate failed — run: pnpm run template:catalog-gate",
 )
 
 // ─── Summary ────────────────────────────────────────────────────────────
