@@ -30,7 +30,7 @@
         "src/recipes/card.tsx": "3a985e55ef9ed7230aaacb0b4dae317b429e62f339287882bede1d97b63535c4"
       }
     },
-    "lastGenerated": "2026-08-05T05:58:36.000Z"
+    "lastGenerated": "2026-08-05T12:38:19.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/card"
   ],
-  "lastUpdated": "2026-08-05T05:58:36.000Z"
+  "lastUpdated": "2026-08-05T12:38:19.000Z"
 }

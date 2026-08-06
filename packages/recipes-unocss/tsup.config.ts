@@ -31,6 +31,7 @@ export default defineConfig({
     "@solidiom/button",
     "@solidiom/badge",
     "@solidiom/alert",
+    "@solidiom/breadcrumb",
     "@solidiom/checkbox",
     "@solidiom/switch",
     "@solidiom/tabs",

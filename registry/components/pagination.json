@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "pagination",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/pagination.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/pagination.tsx"
+    ],
+    "unocss": [
+      "src/recipes/pagination.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/pagination.tsx": "527a0dd7b7005b5c700aac7e021acbde46c40fcf25c595035a76da35df1a98c4"
+      },
+      "tailwind": {
+        "src/recipes/pagination.tsx": "fbf7160c5d21b970a4ae42670f60dd47092532b56ca35fa5214be80dd347fb1e"
+      },
+      "unocss": {
+        "src/recipes/pagination.tsx": "c598c5f563f4e59c2e65550f70e8509ab7c14296ddf7f80e1da42aa3768c5fba"
+      }
+    },
+    "lastGenerated": "2026-08-05T12:38:19.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/pagination"
+  ],
+  "lastUpdated": "2026-08-05T12:38:19.000Z"
+}

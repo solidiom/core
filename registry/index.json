@@ -1,10 +1,10 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-05T05:58:36.000Z",
+  "generatedAt": "2026-08-05T12:38:19.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "7def7a4d13928a90ca70e453693d350c77f2bc0197464a0fa55ff712227f7bb4"
+    "entriesHash": "f0a6bb2ccb4fce5a763a2322420c1fb7cc42503ff7de3e2b626eadff6f7837f5"
   },
   "primitives": [
     {
@@ -195,7 +195,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "and",
@@ -294,7 +298,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "breadcrumb",
@@ -776,7 +784,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "column",
@@ -1400,7 +1412,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "disk",
@@ -1496,7 +1512,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "and",
@@ -1590,7 +1610,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "and",
@@ -1998,7 +2022,9 @@
         }
       },
       "stylingOutputs": [
-        "css"
+        "css",
+        "tailwind",
+        "unocss"
       ],
       "themeCompatible": [],
       "searchKeywords": [
@@ -2589,6 +2615,39 @@
       ]
     },
     {
+      "name": "avatar",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Avatar",
+      "description": "Styled avatar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the avatar primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/avatar",
+      "searchKeywords": [
+        "avatar",
+        "component",
+        "css",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
       "name": "badge",
       "version": "0.0.1-next.0",
       "package": "@solidiom/recipes-css",
@@ -2615,6 +2674,39 @@
       "primitiveDependency": "@solidiom/badge",
       "searchKeywords": [
         "badge",
+        "component",
+        "css",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Breadcrumb",
+      "description": "Styled breadcrumb component — the recipe wrapper for the css, tailwind, unocss profile(s) using the breadcrumb primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/breadcrumb",
+      "searchKeywords": [
+        "breadcrumb",
         "component",
         "css",
         "tailwind",
@@ -2716,6 +2808,39 @@
         "checkbox",
         "component",
         "css",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "data-table",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Data Table",
+      "description": "Styled data-table component — the recipe wrapper for the css, tailwind, unocss profile(s) using the data-table primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/data-table",
+      "searchKeywords": [
+        "component",
+        "css",
+        "data-table",
         "tailwind",
         "unocss"
       ]
@@ -2853,6 +2978,72 @@
       ]
     },
     {
+      "name": "meter",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Meter",
+      "description": "Styled meter component — the recipe wrapper for the css, tailwind, unocss profile(s) using the meter primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/meter",
+      "searchKeywords": [
+        "component",
+        "css",
+        "meter",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "pagination",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Pagination",
+      "description": "Styled pagination component — the recipe wrapper for the css, tailwind, unocss profile(s) using the pagination primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/pagination",
+      "searchKeywords": [
+        "component",
+        "css",
+        "pagination",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
       "name": "popover",
       "version": "0.0.1-next.0",
       "package": "@solidiom/recipes-css",
@@ -2881,6 +3072,39 @@
         "component",
         "css",
         "popover",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "progress",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Progress",
+      "description": "Styled progress component — the recipe wrapper for the css, tailwind, unocss profile(s) using the progress primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/progress",
+      "searchKeywords": [
+        "component",
+        "css",
+        "progress",
         "tailwind",
         "unocss"
       ]
@@ -2923,7 +3147,7 @@
       "version": "0.0.1-next.0",
       "package": "@solidiom/recipes-css",
       "label": "Spinner",
-      "description": "Styled spinner component — the recipe wrapper for the css profile(s) using the spinner primitive.",
+      "description": "Styled spinner component — the recipe wrapper for the css, tailwind, unocss profile(s) using the spinner primitive.",
       "status": "preview",
       "deliverables": [
         "component"
@@ -2938,13 +3162,17 @@
         }
       },
       "stylingOutputs": [
-        "css"
+        "css",
+        "tailwind",
+        "unocss"
       ],
       "primitiveDependency": "@solidiom/spinner",
       "searchKeywords": [
         "component",
         "css",
-        "spinner"
+        "spinner",
+        "tailwind",
+        "unocss"
       ]
     },
     {

@@ -45,7 +45,11 @@
     }
   },
   "styling": {
-    "outputs": [],
+    "outputs": [
+      "css",
+      "tailwind",
+      "unocss"
+    ],
     "themeCompatible": []
   },
   "search": {
@@ -71,11 +75,11 @@
       "src/derive-status.ts": "b9a04deecaea3ae75023eb756629cdf2b26a2de0f573e25d3b63bda5b09ddb5c",
       "src/index.tsx": "1ba74338778b5b554a0fd18cdb7afda7ec0609d199e2ef677ef88b11de456642"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-05T06:07:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/meter"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-05T06:07:56.000Z"
 }

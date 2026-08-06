@@ -19,5 +19,11 @@ export { StyledToast } from "./recipes/toast";
 export { StyledSelect } from "./recipes/select";
 export { StyledBadge, type BadgeVariant } from "./recipes/badge";
 export { StyledAlert, type AlertVariant } from "./recipes/alert";
+export { StyledAvatar } from "./recipes/avatar";
 export { StyledSpinner } from "./recipes/spinner";
+export { StyledCard } from "./recipes/card";
+export { StyledBreadcrumb } from "./recipes/breadcrumb";
+export { StyledPagination } from "./recipes/pagination";
+export { StyledDataTable } from "./recipes/data-table";
+export { StyledProgress } from "./recipes/progress";
 //# sourceMappingURL=index.d.ts.map

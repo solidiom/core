@@ -15,6 +15,12 @@ export const supportedPrimitives = [
   "menu",
   "toast",
   "badge",
-  "alert",
+"alert",
+"avatar",
   "spinner",
+  "card",
+  "breadcrumb",
+  "pagination",
+  "meter",
+  "progress",
 ] as const

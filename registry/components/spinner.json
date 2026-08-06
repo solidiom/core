@@ -9,6 +9,12 @@
   "source": {
     "css": [
       "src/recipes/spinner.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/spinner.tsx"
+    ],
+    "unocss": [
+      "src/recipes/spinner.tsx"
     ]
   },
   "integrity": {
@@ -16,9 +22,15 @@
     "fileDigests": {
       "css": {
         "src/recipes/spinner.tsx": "64dd9662c30bed940cc0dadf831c5b98e0484d8d6f458379f20b93bafbdd2def"
+      },
+      "tailwind": {
+        "src/recipes/spinner.tsx": "c4009bc901053688e6d59770104d5404416030f556948aefb9511032aaac8daa"
+      },
+      "unocss": {
+        "src/recipes/spinner.tsx": "ace3bcb6acda3020393077fd2502234ca642856e5915844b9e335d30fe417eeb"
       }
     },
-    "lastGenerated": "2026-08-05T05:58:36.000Z"
+    "lastGenerated": "2026-08-05T12:38:19.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -34,5 +46,5 @@
   "dependencies": [
     "@solidiom/spinner"
   ],
-  "lastUpdated": "2026-08-05T05:58:36.000Z"
+  "lastUpdated": "2026-08-05T12:38:19.000Z"
 }

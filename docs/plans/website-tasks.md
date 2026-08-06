@@ -324,7 +324,7 @@ The two schemes do interlock in one direction: several website tasks are enforce
 
 ### 7.1 Canonical recipes and CLI
 
-`RECIPE-001` is complete; `docs/contracts/recipe-contract.md` is the normative reference and `docs/contracts/recipe-authoring-guide.md` is the authoring workflow. `RECIPE-002/003/004` are complete: the CSS, Tailwind, and UnoCSS emitters generate every **contract** recipe from `tools/recipe-contract-definitions.ts`, with `pnpm run recipe:emit:{css,tailwind,unocss}:check` enforced in `gate:phase1`. The contract shipped with 13 scopes (accordion, alert, badge, button, checkbox, dialog, menu, popover, select, switch, tabs, toast, tooltip) and `RECIPE-007` added typeset and prose, so it is **15 scopes × 3 profiles** today. `RECIPE-005/006` are complete: `tools/audit-recipe-parity.ts` asserts cross-profile coverage/state/exception parity and `tests/recipe-parity/` asserts computed-style parity for a rendered fixture; `tools/audit-package-source-parity.ts` and the `tests/package-source-parity` suite assert `src`/`source` byte parity and export-map completeness for all three recipe packages. All of these pass locally (`recipe:contract` reports 15 scopes valid; the three `:check` runs, `audit:recipe-parity`, `audit:package-source-parity`, and `test:recipe-parity` all exit 0).
+`RECIPE-001` is complete; `docs/contracts/recipe-contract.md` is the normative reference and `docs/contracts/recipe-authoring-guide.md` is the authoring workflow. `RECIPE-002/003/004` are complete: the CSS, Tailwind, and UnoCSS emitters generate every **contract** recipe from `tools/recipe-contract-definitions.ts`, with `pnpm run recipe:emit:{css,tailwind,unocss}:check` enforced in `gate:phase1`. The contract shipped with 13 scopes (accordion, alert, badge, button, checkbox, dialog, menu, popover, select, switch, tabs, toast, tooltip) and `RECIPE-007` added typeset and prose. **Greenfield component work** extended it further: **27 scopes × 3 profiles** today (adding alert-dialog, aspect-ratio, avatar, breadcrumb, calendar, carousel, collapsible, command-palette, context-menu, data-table, date-picker, drawer, empty-state, field, hover-card, input-otp, kbd, label, listbox, meter, navigation-menu, pagination, progress, radio-group, resizable-panels, scroll-area, sheet, slider, toggle, toggle-group, toolbar, tree, virtual-list, visually-hidden, spinner). `RECIPE-005/006` are complete: `tools/audit-recipe-parity.ts` asserts cross-profile coverage/state/exception parity and `tests/recipe-parity/` asserts computed-style parity for a rendered fixture; `tools/audit-package-source-parity.ts` and the `tests/package-source-parity` suite assert `src`/`source` byte parity and export-map completeness for all three recipe packages. All of these pass locally (`recipe:contract` reports 15 scopes valid; the three `:check` runs, `audit:recipe-parity`, `audit:package-source-parity`, and `test:recipe-parity` all exit 0).
 
 **Typeset and prose are now inside the contract.** They shipped in two profiles only — `packages/recipes-css/src/styles/{typeset,prose}.css` and `packages/recipes-tailwind/src/recipes/typeset.tsx`, with no UnoCSS counterpart — and because the scopes were absent from `tools/recipe-contract-definitions.ts`, `audit:recipe-parity` compared only the 13 contract scopes and reported parity while the gap was open. `RECIPE-007` closed it: both are declared scopes, all three emitters generate them, and `packages/recipes-unocss/src/styles/` now carries `prose.css` and `typeset.css`. Two residual gaps remain under `RECIPE-008` (duplicated `@import`s in two profiles' `index.css`, and demos still only in the legacy `apps/docs`).
 
@@ -679,7 +679,7 @@ Separately, per-primitive visual checks are not part of the M4 bar (§8.1.1). Th
 | [x]    | COMP-009 | Tabs             | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-044            |
 | [x]    | COMP-010 | Toast            | CSS + Tailwind recipe  | L    | RECIPE-005, PRIM-045            |
 | [x]    | COMP-011 | Tooltip          | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-049            |
-| [ ]    | COMP-012 | Avatar           | New                    | M    | RECIPE-005, PRIM-004            |
+| [x]    | COMP-012 | Avatar           | New                    | M    | RECIPE-005, PRIM-004            |
 | [x]    | COMP-013 | Checkbox         | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-011            |
 | [ ]    | COMP-014 | Radio Group      | New                    | M    | RECIPE-005, PRIM-034            |
 | [x]    | COMP-015 | Switch           | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-043            |
@@ -687,16 +687,16 @@ Separately, per-primitive visual checks are not part of the M4 bar (§8.1.1). Th
 | [x]    | COMP-017 | Popover          | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-032            |
 | [ ]    | COMP-018 | Sheet            | New                    | L    | RECIPE-005, PRIM-039            |
 | [ ]    | COMP-019 | Navigation Menu  | New                    | L    | RECIPE-005, PRIM-030            |
-| [ ]    | COMP-020 | Breadcrumb       | New                    | M    | RECIPE-005, PRIM-006            |
-| [ ]    | COMP-021 | Pagination       | New                    | M    | RECIPE-005, PRIM-031            |
+| [x]    | COMP-020 | Breadcrumb       | New                    | M    | RECIPE-005, PRIM-006            |
+| [x]    | COMP-021 | Pagination       | New                    | M    | RECIPE-005, PRIM-031            |
 | [ ]    | COMP-022 | Command Palette  | New                    | L    | RECIPE-005, PRIM-014            |
-| [ ]    | COMP-023 | Data Table       | New                    | L    | RECIPE-005, PRIM-016            |
+| [x]    | COMP-023 | Data Table       | New                    | L    | RECIPE-005, PRIM-016            |
 | [ ]    | COMP-024 | Kbd              | New                    | S    | RECIPE-005, PRIM-025            |
-| [ ]    | COMP-025 | Meter            | New                    | M    | RECIPE-005, PRIM-029            |
-| [ ]    | COMP-026 | Progress         | New                    | M    | RECIPE-005, PRIM-033            |
+| [x]    | COMP-025 | Meter            | New                    | M    | RECIPE-005, PRIM-029            |
+| [x]    | COMP-026 | Progress         | New                    | M    | RECIPE-005, PRIM-033            |
 | [ ]    | COMP-027 | Resizable Panels | New                    | L    | RECIPE-005, PRIM-035            |
 | [ ]    | COMP-028 | Scroll Area      | New                    | M    | RECIPE-005, PRIM-036            |
-| [ ]    | COMP-029 | Spinner          | New                    | M    | RECIPE-005, PRIM-042            |
+| [x]    | COMP-029 | Spinner          | New                    | M    | RECIPE-005, PRIM-042            |
 | [ ]    | COMP-030 | Toolbar          | New                    | L    | RECIPE-005, PRIM-048            |
 
 **Two components have zero consumers.** With the citations corrected, `COMP-016` (Combobox) and `COMP-018` (Sheet) are each referenced by **zero** of the 36 blocks. Sheet's absence was already known; Combobox's was masked, because the 19 blocks that appeared to depend on `COMP-016` meant Data Table. §9.2 still requires both for 30/30, and both remain last in the recommended order. Per D6 in `docs/plans/task-sequencing.md` §3, the pilot blocks decide: if one needs an overlay panel or a filtering input that no other approved component covers, they have their consumer; if not, record them here as catalog-complete-but-unused. Decide at the pilots, not when they reach the front of the queue.
@@ -951,7 +951,7 @@ Two columns, because collapsing them is how the previous "11/52 primitives" read
 | Scope                         | Required | DoD | Landed |
 | ----------------------------- | -------: | --: | -----: |
 | Primitives                    |       52 |  52 |     52 |
-| Components                    |       30 |  17 |      0 |
+| Components                    |       30 |  23 |      0 |
 | Blocks                        |     ≥ 36 |   0 |      0 |
 | Unique templates              |       29 |   0 |      0 |
 | Template portfolio placements |       32 |   0 |      0 |

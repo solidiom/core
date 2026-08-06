@@ -13,7 +13,14 @@ var supportedPrimitives = [
   "menu",
   "toast",
   "badge",
-  "alert"
+  "alert",
+  "avatar",
+  "spinner",
+  "card",
+  "breadcrumb",
+  "pagination",
+  "progress",
+  "meter"
 ];
 
 // src/recipes/dialog.tsx
@@ -215,19 +222,92 @@ function StyledAlert(props) {
     </Alert.Root>;
 }
 
+// src/recipes/avatar.tsx
+import * as Avatar from "@solidiom/avatar";
+function StyledAvatar(props) {
+  return <Avatar.Root>
+      {props.src && <Avatar.Image src={props.src} alt={props.alt} />}
+      {(props.fallback || props.children) && <Avatar.Fallback>{props.fallback || props.children}</Avatar.Fallback>}
+    </Avatar.Root>;
+}
+
+// src/recipes/spinner.tsx
+import * as Spinner from "@solidiom/spinner";
+function StyledSpinner(props) {
+  return <Spinner.Root label={props.label}>
+      {props.children}
+    </Spinner.Root>;
+}
+
+// src/recipes/card.tsx
+import * as Card from "@solidiom/card";
+var BASE_CLASS = "solidiom-card";
+function StyledCard(props) {
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ");
+  return <Card.Root {...props} class={className()} />;
+}
+
+// src/recipes/breadcrumb.tsx
+import * as Breadcrumb from "@solidiom/breadcrumb";
+var BASE_CLASS2 = "solidiom-breadcrumb";
+function StyledBreadcrumb(props) {
+  const className = () => [BASE_CLASS2, props.class].filter(Boolean).join(" ");
+  return <Breadcrumb.Root {...props} class={className()} />;
+}
+
+// src/recipes/pagination.tsx
+import * as Pagination from "@solidiom/pagination";
+var BASE_CLASS3 = "solidiom-pagination";
+function StyledPagination(props) {
+  const className = () => [BASE_CLASS3, props.class].filter(Boolean).join(" ");
+  return <Pagination.Root {...props} class={className()} />;
+}
+
+// src/recipes/meter.tsx
+import * as Meter from "@solidiom/meter";
+var BASE_CLASS4 = "solidiom-meter";
+function StyledMeter(props) {
+  const className = () => [BASE_CLASS4, props.class].filter(Boolean).join(" ");
+  return <Meter.Root {...props} class={className()} />;
+}
+
+// src/recipes/data-table.tsx
+import * as DataTable from "@solidiom/data-table";
+var BASE_CLASS5 = "solidiom-data-table";
+function StyledDataTable(props) {
+  const className = () => [BASE_CLASS5, props.class].filter(Boolean).join(" ");
+  return <DataTable.Root {...props} class={className()} />;
+}
+
+// src/recipes/progress.tsx
+import * as Progress from "@solidiom/progress";
+var BASE_CLASS6 = "solidiom-progress";
+function StyledProgress(props) {
+  const className = () => [BASE_CLASS6, props.class].filter(Boolean).join(" ");
+  return <Progress.Root {...props} class={className()} />;
+}
+
 // src/index.ts
 var implementedRecipes = supportedPrimitives;
 export {
   Alert,
   StyledAccordion,
   StyledAlert,
+  StyledAvatar,
   StyledBadge,
+  StyledBreadcrumb,
   StyledButton,
+  StyledCard,
   StyledCheckbox,
+  StyledDataTable,
   StyledDialog,
   StyledMenu,
+  StyledMeter,
+  StyledPagination,
   StyledPopover,
+  StyledProgress,
   StyledSelect,
+  StyledSpinner,
   StyledSwitch,
   StyledTabs,
   StyledToast,

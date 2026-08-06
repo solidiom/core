@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "avatar",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/avatar.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/avatar.tsx"
+    ],
+    "unocss": [
+      "src/recipes/avatar.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/avatar.tsx": "b78b5bb90f07c0624a682bafad52dac379899da3c7bdfa99e7e14abf43906cb5"
+      },
+      "tailwind": {
+        "src/recipes/avatar.tsx": "1e362095620bbbd5a94d54ce1bd2859baa88e9b2d3582a4640e6bce7129965df"
+      },
+      "unocss": {
+        "src/recipes/avatar.tsx": "673bafa4900892f5e95d714bdb224fea55854d872e3e8d384efb8b67e2d1fe53"
+      }
+    },
+    "lastGenerated": "2026-08-05T12:38:19.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/avatar"
+  ],
+  "lastUpdated": "2026-08-05T12:38:19.000Z"
+}

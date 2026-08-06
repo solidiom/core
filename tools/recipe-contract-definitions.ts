@@ -1080,6 +1080,59 @@ export const proseRecipe: RecipeDefinition = {
 }
 
 /**
+ * Avatar — image element with alternate text support for displaying user avatars with fallback.
+ */
+export const avatarRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "avatar",
+  description:
+    "Image element with alternate text support for displaying user avatars with fallback.",
+  slots: [
+    {
+      part: "root",
+      element: "span",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        "flex-shrink": "0",
+        "border-radius": "9999px",
+        overflow: "hidden",
+        width: "2.5rem",
+        height: "2.5rem",
+      },
+    },
+    {
+      part: "image",
+      element: "img",
+      ownership: "recipe",
+      base: {
+        "object-fit": "cover",
+        width: "100%",
+        height: "100%",
+      },
+    },
+    {
+      part: "fallback",
+      element: "span",
+      ownership: "recipe",
+      base: {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        "align-items": "center",
+        "justify-content": "center",
+        "background-color": { token: "surface-muted" },
+        "font-size": "0.875rem",
+        "font-weight": "500",
+        color: { token: "foreground-muted" },
+      },
+    },
+  ],
+}
+
+/**
  * Spinner — loading indicator with role="status" for assistive technologies.
  */
 export const spinnerRecipe: RecipeDefinition = {
@@ -1380,19 +1433,349 @@ export const fieldRecipe: RecipeDefinition = {
   ],
 }
 
+/**
+ * Data Table — sortable data table with header, body, rows, and cells.
+ */
+export const dataTableRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "data-table",
+  description: "Sortable data table with header, body, rows, and cells.",
+  slots: [
+    {
+      part: "root",
+      element: "table",
+      ownership: "recipe",
+      base: {
+        width: "100%",
+        "border-collapse": "collapse",
+      },
+    },
+    {
+      part: "header",
+      element: "thead",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply the table header.",
+      base: {
+        "border-bottom": "1px solid",
+        "border-color": { token: "border" },
+      },
+    },
+    {
+      part: "header-cell",
+      element: "th",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply header cells.",
+      base: {
+        padding: "0.75rem",
+        "text-align": "left",
+        "font-weight": "500",
+      },
+    },
+    {
+      part: "body",
+      element: "tbody",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply the table body.",
+      base: {
+        display: "block",
+      },
+    },
+    {
+      part: "row",
+      element: "tr",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply repeatable rows.",
+      base: {
+        "border-bottom": "1px solid",
+        "border-color": { token: "border" },
+      },
+    },
+    {
+      part: "cell",
+      element: "td",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply cells within rows.",
+      base: {
+        padding: "0.75rem",
+      },
+    },
+  ],
+}
+
+/**
+ * Meter — scalar measurement display using the native HTML meter element.
+ */
+export const meterRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "meter",
+  description:
+    "Scalar measurement display with status states derived from value thresholds.",
+  slots: [
+    {
+      part: "root",
+      element: "meter",
+      ownership: "recipe",
+      base: {
+        display: "block",
+        width: "100%",
+        height: "1rem",
+        "border-radius": { token: "radius" },
+        "background-color": { token: "surface-muted" },
+        overflow: "hidden",
+      },
+      states: {
+        safe: { "background-color": { token: "success-surface" } },
+        caution: { "background-color": { token: "warning-surface" } },
+        danger: { "background-color": { token: "danger-surface" } },
+      },
+    },
+  ],
+}
+
+/**
+ * Progress — linear progress indicator with determinate and indeterminate modes.
+ */
+export const progressRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "progress",
+  description:
+    "Linear progress indicator with determinate (value 0–100) and indeterminate modes.",
+  slots: [
+    {
+      part: "root",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        position: "relative",
+        display: "flex",
+        width: "100%",
+        height: "0.5rem",
+        overflow: "hidden",
+        "border-radius": { token: "radius-full" },
+        "background-color": { token: "surface-muted" },
+      },
+      states: {
+        loading: { opacity: "0.7" },
+        complete: { "background-color": { token: "success-surface" } },
+      },
+    },
+    {
+      part: "indicator",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply the progress indicator.",
+      base: {
+        height: "100%",
+        "background-color": { token: "primary" },
+        transition: "width 0.15s",
+      },
+    },
+  ],
+}
+
+/**
+ * Pagination — page navigation with previous, next, ellipsis, and content slots.
+ */
+export const paginationRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "pagination",
+  description:
+    "Page navigation with previous, next, ellipsis, and content slots.",
+  slots: [
+    {
+      part: "root",
+      element: "nav",
+      ownership: "recipe",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        gap: "0.25rem",
+      },
+    },
+    {
+      part: "content",
+      element: "ul",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply the page list.",
+      base: {
+        display: "flex",
+        "list-style": "none",
+        padding: "0",
+        margin: "0",
+        gap: "0.25rem",
+      },
+    },
+    {
+      part: "item",
+      element: "li",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply page items.",
+      base: {
+        display: "block",
+      },
+    },
+    {
+      part: "previous",
+      element: "button",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply the previous button.",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        padding: "0.375rem 0.75rem",
+        "border-radius": { token: "radius" },
+        "font-size": "0.875rem",
+      },
+    },
+    {
+      part: "next",
+      element: "button",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply the next button.",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        padding: "0.375rem 0.75rem",
+        "border-radius": { token: "radius" },
+        "font-size": "0.875rem",
+      },
+    },
+    {
+      part: "ellipsis",
+      element: "span",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply the ellipsis indicator.",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        padding: "0.375rem 0.75rem",
+        "font-size": "0.875rem",
+      },
+    },
+  ],
+}
+
+/**
+ * Breadcrumb — hierarchical navigation with list, item, link, separator, and ellipsis parts.
+ */
+export const breadcrumbRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "breadcrumb",
+  description:
+    "Hierarchical navigation breadcrumb with list, item, link, separator, and ellipsis parts.",
+  slots: [
+    {
+      part: "root",
+      element: "nav",
+      ownership: "recipe",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        gap: "0.5rem",
+        "font-size": "0.875rem",
+      },
+    },
+    {
+      part: "list",
+      element: "ol",
+      ownership: "consumer",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers supply the breadcrumb list.",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        gap: "0.5rem",
+        padding: "0",
+        margin: "0",
+        "list-style": "none",
+      },
+    },
+    {
+      part: "item",
+      element: "li",
+      ownership: "consumer",
+      ownershipReason: "Breadcrumb items are consumer-provided navigation entries.",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        gap: "0.5rem",
+      },
+    },
+    {
+      part: "link",
+      element: "a",
+      ownership: "consumer",
+      ownershipReason: "Breadcrumb links are consumer-provided with their own href.",
+      base: {
+        color: { token: "foreground-muted" },
+        "text-decoration": "none",
+      },
+      pseudos: {
+        ":hover": { color: { token: "foreground" } },
+        ":focus-visible": {
+          outline: "2px solid",
+          "outline-color": { token: "focus-ring" },
+          "outline-offset": "2px",
+        },
+      },
+    },
+    {
+      part: "separator",
+      element: "span",
+      ownership: "consumer",
+      ownershipReason: "Breadcrumb separators are consumer-provided between items.",
+      base: {
+        display: "inline-flex",
+        color: { token: "foreground-muted" },
+      },
+    },
+    {
+      part: "ellipsis",
+      element: "span",
+      ownership: "consumer",
+      ownershipReason: "Breadcrumb ellipsis is consumer-provided to indicate skipped items.",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        color: { token: "foreground-muted" },
+      },
+    },
+  ],
+}
+
 /** Every recipe definition, keyed by scope. */
 export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> = {
   accordion: accordionRecipe,
   alert: alertRecipe,
+  avatar: avatarRecipe,
   badge: badgeRecipe,
+  breadcrumb: breadcrumbRecipe,
   button: buttonRecipe,
   card: cardRecipe,
+  "data-table": dataTableRecipe,
   checkbox: checkboxRecipe,
   dialog: dialogRecipe,
   field: fieldRecipe,
   input: inputRecipe,
   menu: menuRecipe,
+  meter: meterRecipe,
+  pagination: paginationRecipe,
   popover: popoverRecipe,
+  progress: progressRecipe,
   select: selectRecipe,
   spinner: spinnerRecipe,
   switch: switchRecipe,

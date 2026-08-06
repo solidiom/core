@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "breadcrumb",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/breadcrumb.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/breadcrumb.tsx"
+    ],
+    "unocss": [
+      "src/recipes/breadcrumb.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/breadcrumb.tsx": "ab9a4a8d7330a7124db5cca83b9217b9652b626e16b1602ecab8a0a53677708a"
+      },
+      "tailwind": {
+        "src/recipes/breadcrumb.tsx": "d8bee62cef306540f3472303d6f6e761afac60ffcf77306e9ec689f1701665ad"
+      },
+      "unocss": {
+        "src/recipes/breadcrumb.tsx": "beaf36c7f65d904e5a39b1029073bdf867e81b039f329afc8e4d9052e8ef21a7"
+      }
+    },
+    "lastGenerated": "2026-08-05T12:38:19.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/breadcrumb"
+  ],
+  "lastUpdated": "2026-08-05T12:38:19.000Z"
+}

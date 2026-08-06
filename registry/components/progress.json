@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "progress",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/progress.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/progress.tsx"
+    ],
+    "unocss": [
+      "src/recipes/progress.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/progress.tsx": "5105b73c5979e03029b5d0c468a7dd8807d7846e4e4dbc2d62c73992d46cc1e0"
+      },
+      "tailwind": {
+        "src/recipes/progress.tsx": "cfee3ee3dd4eb7e2374a9002b987012c43a5dee7f03abd78dd0727c2be042db1"
+      },
+      "unocss": {
+        "src/recipes/progress.tsx": "a5e72b817d16244e49b869bacd6d0f55fe0a99129d8752a35646857ddb8b3105"
+      }
+    },
+    "lastGenerated": "2026-08-05T12:38:19.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/progress"
+  ],
+  "lastUpdated": "2026-08-05T12:38:19.000Z"
+}

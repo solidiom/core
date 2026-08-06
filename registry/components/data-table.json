@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "data-table",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/data-table.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/data-table.tsx"
+    ],
+    "unocss": [
+      "src/recipes/data-table.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/data-table.tsx": "6315d8c7b209c1286aed7d292bb6b8da56cc6f3f9a8ff0fd8288ffa2c4535ec9"
+      },
+      "tailwind": {
+        "src/recipes/data-table.tsx": "e61513d4f7c5f0efdd6a05a73d762fed365a28aedfb0c8e2d9175ec4d1b8b1ce"
+      },
+      "unocss": {
+        "src/recipes/data-table.tsx": "ca5c9625339423b143a316e6330ecb1de251280ee3a505450a18dbd030582500"
+      }
+    },
+    "lastGenerated": "2026-08-05T12:38:19.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/data-table"
+  ],
+  "lastUpdated": "2026-08-05T12:38:19.000Z"
+}
