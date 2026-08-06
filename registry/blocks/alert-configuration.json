@@ -1,0 +1,66 @@
+{
+  "name": "alert-configuration",
+  "version": "0.0.1-next.0",
+  "label": "Alert Configuration",
+  "description": "Alert rule management with threshold configuration and notification channels. Implements loading, empty, error, and restricted states.",
+  "category": "OBS",
+  "status": "preview",
+  "blockId": "BLOCK-OBS-03",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/input",
+    "@solidiom/field",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/dialog",
+    "@solidiom/select",
+    "@solidiom/switch",
+    "@solidiom/checkbox",
+    "@solidiom/toast",
+    "@solidiom/pagination",
+    "@solidiom/data-table",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/alert-configuration/source/alert-configuration.tsx",
+      "packages/blocks/alert-configuration/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/alert-configuration/source/alert-configuration.tsx": "aa438093f527c1c21766cbead2edd8e89aa9e9b7f848f74fa43b042c00a44ee1",
+      "packages/blocks/alert-configuration/source/index.ts": "89309f13d6d247866c8170ca3d76c35944a29d6c2965001a90d1b3813348a679"
+    },
+    "lastGenerated": "2026-08-06T14:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "alert",
+    "configuration",
+    "rules",
+    "thresholds",
+    "alertas",
+    "configuracion"
+  ]
+}

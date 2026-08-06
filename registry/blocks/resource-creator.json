@@ -1,0 +1,67 @@
+{
+  "name": "resource-creator",
+  "version": "0.0.1-next.0",
+  "label": "Resource Creator",
+  "description": "Multi-step resource creation form with validation and preview. Implements loading, empty, error, and restricted states.",
+  "category": "RESOURCE",
+  "status": "preview",
+  "blockId": "BLOCK-RESOURCE-03",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/input",
+    "@solidiom/field",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/dialog",
+    "@solidiom/select",
+    "@solidiom/menu",
+    "@solidiom/toast",
+    "@solidiom/checkbox",
+    "@solidiom/switch",
+    "@solidiom/tabs",
+    "@solidiom/pagination",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/resource-creator/source/resource-creator.tsx",
+      "packages/blocks/resource-creator/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/resource-creator/source/resource-creator.tsx": "19f4f856f8473d54a1833b8f799cae16023834dfa14474da493557c57b9a6199",
+      "packages/blocks/resource-creator/source/index.ts": "8f075f19e9fbe21deb417bdbf1dc4829766acf27f015e3deaaaad9c90117a471"
+    },
+    "lastGenerated": "2026-08-06T14:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "resource",
+    "creator",
+    "form",
+    "create",
+    "recurso",
+    "crear"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "prompt-studio",
+  "version": "0.0.1-next.0",
+  "label": "Prompt Studio",
+  "description": "Prompt engineering workspace with templates, variables, and testing. Implements loading, empty, error, and restricted states.",
+  "category": "AI",
+  "status": "preview",
+  "blockId": "BLOCK-AI-02",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/input",
+    "@solidiom/field",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/dialog",
+    "@solidiom/select",
+    "@solidiom/tabs",
+    "@solidiom/menu",
+    "@solidiom/toast",
+    "@solidiom/checkbox",
+    "@solidiom/data-table",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/prompt-studio/source/prompt-studio.tsx",
+      "packages/blocks/prompt-studio/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/prompt-studio/source/prompt-studio.tsx": "0f420682157ac0339dc775edce9455d26a5073c505213d6eea9ce67ba0e3e2e5",
+      "packages/blocks/prompt-studio/source/index.ts": "21460d6358b680d61deff438cdb549c9291beb48962b9d0275439063c225c165"
+    },
+    "lastGenerated": "2026-08-06T14:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "prompt",
+    "studio",
+    "templates",
+    "testing",
+    "prompts",
+    "plantillas"
+  ]
+}

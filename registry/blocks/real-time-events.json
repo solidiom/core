@@ -1,0 +1,64 @@
+{
+  "name": "real-time-events",
+  "version": "0.0.1-next.0",
+  "label": "Real-time Events",
+  "description": "Real-time event stream with filtering, pause, and detail expansion. Implements loading, empty, error, and restricted states.",
+  "category": "OBS",
+  "status": "preview",
+  "blockId": "BLOCK-OBS-02",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/input",
+    "@solidiom/field",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/select",
+    "@solidiom/switch",
+    "@solidiom/toast",
+    "@solidiom/pagination",
+    "@solidiom/data-table",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/real-time-events/source/real-time-events.tsx",
+      "packages/blocks/real-time-events/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/real-time-events/source/real-time-events.tsx": "09b861d100d0cd7aaaad7d0f767711829f5cb742929220c725479d9492c6c127",
+      "packages/blocks/real-time-events/source/index.ts": "13b82877afefb192d908d092d87e357bd1cee19b2604c3f737c9fd842ce7fbf8"
+    },
+    "lastGenerated": "2026-08-06T14:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "realtime",
+    "events",
+    "stream",
+    "live",
+    "eventos",
+    "tiempo real"
+  ]
+}
