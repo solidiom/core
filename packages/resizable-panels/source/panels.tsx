@@ -36,6 +36,7 @@ export interface PanelGroupProps {
   /** Called when panel sizes change. */
   onSizesChange?: (sizes: number[], details: ChangeDetails<PanelResizeReason>) => void
   children: JSX.Element
+  class?: string
 }
 
 /** Root container that manages panel layout and resize state. */

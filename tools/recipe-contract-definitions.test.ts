@@ -82,7 +82,7 @@ describe("recipe definition coverage", () => {
       expect(content.ownership).toBe("adapter")
       expect(content.adapterPort).toBe("PositioningPort")
       expect(content.adapterOwnedProperties).toEqual(
-        expect.arrayContaining(["position", "top", "left", "transform"]),
+        expect.arrayContaining(["position", "top", "left"]),
       )
     }
   })

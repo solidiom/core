@@ -20,7 +20,16 @@ var supportedPrimitives = [
   "breadcrumb",
   "pagination",
   "meter",
-  "progress"
+  "progress",
+  "radio-group",
+  "combobox",
+  "sheet",
+  "navigation-menu",
+  "command-palette",
+  "kbd",
+  "resizable-panels",
+  "scroll-area",
+  "toolbar"
 ];
 
 // src/recipes/dialog.tsx
@@ -278,6 +287,107 @@ function StyledProgress(props) {
   const className = () => [BASE_CLASS5, props.class].filter(Boolean).join(" ");
   return <Progress.Root {...props} class={className()} />;
 }
+
+// src/recipes/radio-group.tsx
+import * as RadioGroup from "@solidiom/radio-group";
+var BASE_CLASS6 = "solidiom-radio-group";
+function StyledRadioGroup(props) {
+  const className = () => [BASE_CLASS6, props.class].filter(Boolean).join(" ");
+  return <RadioGroup.Root {...props} class={className()} />;
+}
+
+// src/recipes/combobox.tsx
+import * as Combobox from "@solidiom/combobox";
+var BASE_CLASS7 = "solidiom-combobox";
+function StyledCombobox(props) {
+  const className = () => [BASE_CLASS7, props.class].filter(Boolean).join(" ");
+  return <Combobox.Root
+    open={props.open}
+    defaultOpen={props.defaultOpen}
+    onOpenChange={props.onOpenChange}
+    inputValue={props.inputValue}
+    defaultInputValue={props.defaultInputValue}
+    onInputValueChange={props.onInputValueChange}
+    selectedValue={props.selectedValue}
+    defaultSelectedValue={props.defaultSelectedValue}
+    onSelectedValueChange={props.onSelectedValueChange}
+    class={className()}
+  >
+      {props.children}
+    </Combobox.Root>;
+}
+
+// src/recipes/sheet.tsx
+import * as Sheet from "@solidiom/sheet";
+var BASE_CLASS8 = "solidiom-sheet";
+function StyledSheet(props) {
+  const className = () => [BASE_CLASS8, props.class].filter(Boolean).join(" ");
+  return <Sheet.Root
+    open={props.open}
+    defaultOpen={props.defaultOpen}
+    onOpenChange={props.onOpenChange}
+    side={props.side}
+    class={className()}
+  >
+      {props.children}
+    </Sheet.Root>;
+}
+
+// src/recipes/navigation-menu.tsx
+import * as NavigationMenu from "@solidiom/navigation-menu";
+var BASE_CLASS9 = "solidiom-navigation-menu";
+function StyledNavigationMenu(props) {
+  const className = () => [BASE_CLASS9, props.class].filter(Boolean).join(" ");
+  return <NavigationMenu.Root {...props} class={className()} />;
+}
+
+// src/recipes/command-palette.tsx
+import * as CommandPalette from "@solidiom/command-palette";
+var BASE_CLASS10 = "solidiom-command-palette";
+function StyledCommandPalette(props) {
+  const className = () => [BASE_CLASS10, props.class].filter(Boolean).join(" ");
+  return <CommandPalette.Root {...props} class={className()} />;
+}
+
+// src/recipes/kbd.tsx
+import * as Kbd from "@solidiom/kbd";
+var BASE_CLASS11 = "solidiom-kbd";
+function StyledKbd(props) {
+  const className = () => [BASE_CLASS11, props.class].filter(Boolean).join(" ");
+  return <Kbd.Root {...props} class={className()} />;
+}
+
+// src/recipes/resizable-panels.tsx
+import { PanelGroup } from "@solidiom/resizable-panels";
+var BASE_CLASS12 = "solidiom-resizable-panels";
+function StyledResizablePanels(props) {
+  const className = () => [BASE_CLASS12, props.class].filter(Boolean).join(" ");
+  return <PanelGroup
+    direction={props.direction}
+    sizes={props.sizes}
+    defaultSizes={props.defaultSizes}
+    onSizesChange={props.onSizesChange}
+    class={className()}
+  >
+      {props.children}
+    </PanelGroup>;
+}
+
+// src/recipes/scroll-area.tsx
+import * as ScrollArea from "@solidiom/scroll-area";
+var BASE_CLASS13 = "solidiom-scroll-area";
+function StyledScrollArea(props) {
+  const className = () => [BASE_CLASS13, props.class].filter(Boolean).join(" ");
+  return <ScrollArea.Root {...props} class={className()} />;
+}
+
+// src/recipes/toolbar.tsx
+import * as Toolbar from "@solidiom/toolbar";
+var BASE_CLASS14 = "solidiom-toolbar";
+function StyledToolbar(props) {
+  const className = () => [BASE_CLASS14, props.class].filter(Boolean).join(" ");
+  return <Toolbar.Root {...props} class={className()} />;
+}
 export {
   StyledAccordion,
   StyledAlert,
@@ -287,17 +397,26 @@ export {
   StyledButton,
   StyledCard,
   StyledCheckbox,
+  StyledCombobox,
+  StyledCommandPalette,
   StyledDataTable,
   StyledDialog,
+  StyledKbd,
   StyledMenu,
+  StyledNavigationMenu,
   StyledPagination,
   StyledPopover,
   StyledProgress,
+  StyledRadioGroup,
+  StyledResizablePanels,
+  StyledScrollArea,
   StyledSelect,
+  StyledSheet,
   StyledSpinner,
   StyledSwitch,
   StyledTabs,
   StyledToast,
+  StyledToolbar,
   StyledTooltip,
   buttonVariants,
   recipeProfile,

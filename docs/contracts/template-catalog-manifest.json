@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 1,
+  "id": "template-catalog-manifest",
+  "title": "Template Catalog Manifest",
+  "description": "Machine-readable template architecture: stacks, required blocks, deployment targets, auth models, portfolio placements, and the dependency graph that determines implementation order.",
+  "status": "approved",
+  "taskRef": "docs/plans/website-tasks.md section 9.4 TPL-000",
+  "stacks": [
+    { "id": "solid-start", "label": "SolidStart", "runtime": "ssr", "router": "file-based" },
+    { "id": "tanstack-start-solid", "label": "TanStack Start (Solid)", "runtime": "ssr", "router": "file-based" },
+    { "id": "vite-solid-router", "label": "Vite + Solid Router", "runtime": "spa", "router": "config-based" }
+  ],
+  "portfolios": [
+    { "id": "balanced", "label": "Balanced", "description": "Full-stack templates for common SaaS patterns." },
+    { "id": "enterprise", "label": "Enterprise", "description": "Templates for compliance, security, and multi-tenant operations." }
+  ],
+  "templates": [
+    {
+      "id": "TPL-001",
+      "name": "Authentication Starter",
+      "slug": "auth-starter",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "edge",
+      "authModel": "session",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AUTH-02", "BLOCK-AUTH-03", "BLOCK-SHELL-01"],
+      "tags": ["auth", "starter"]
+    },
+    {
+      "id": "TPL-002",
+      "name": "Onboarding App",
+      "slug": "onboarding",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "edge",
+      "authModel": "session",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ONBOARD-01", "BLOCK-ONBOARD-02", "BLOCK-ONBOARD-03", "BLOCK-SHELL-01"],
+      "tags": ["onboarding", "wizard"]
+    },
+    {
+      "id": "TPL-003",
+      "name": "SaaS Dashboard",
+      "slug": "saas-dashboard",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "edge",
+      "authModel": "session",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-SHELL-02", "BLOCK-OBS-01", "BLOCK-SETTINGS-01", "BLOCK-BILLING-01"],
+      "tags": ["dashboard", "saas"]
+    },
+    {
+      "id": "TPL-004",
+      "name": "Multi-tenant Admin",
+      "slug": "multi-tenant-admin",
+      "stack": "solid-start",
+      "portfolios": ["balanced", "enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ADMIN-01", "BLOCK-ADMIN-02", "BLOCK-ADMIN-03", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "tags": ["admin", "multi-tenant"]
+    },
+    {
+      "id": "TPL-005",
+      "name": "Settings Portal",
+      "slug": "settings-portal",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "edge",
+      "authModel": "session",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SETTINGS-01", "BLOCK-SETTINGS-02", "BLOCK-SETTINGS-03", "BLOCK-SHELL-01"],
+      "tags": ["settings", "account"]
+    },
+    {
+      "id": "TPL-006",
+      "name": "Billing Portal",
+      "slug": "billing-portal",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "edge",
+      "authModel": "session",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-BILLING-01", "BLOCK-BILLING-02", "BLOCK-BILLING-03", "BLOCK-SHELL-01"],
+      "tags": ["billing", "payments"]
+    },
+    {
+      "id": "TPL-007",
+      "name": "Resource Manager",
+      "slug": "resource-manager",
+      "stack": "solid-start",
+      "portfolios": ["balanced", "enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-RESOURCE-03", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "tags": ["crud", "resources"]
+    },
+    {
+      "id": "TPL-008",
+      "name": "Observability Console",
+      "slug": "observability",
+      "stack": "solid-start",
+      "portfolios": ["balanced", "enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-OBS-03", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "tags": ["monitoring", "observability"]
+    },
+    {
+      "id": "TPL-009",
+      "name": "AI Chat",
+      "slug": "ai-chat",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "edge",
+      "authModel": "session",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AI-01", "BLOCK-SHELL-01"],
+      "tags": ["ai", "chat"]
+    },
+    {
+      "id": "TPL-010",
+      "name": "AI Workflow",
+      "slug": "ai-workflow",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "node",
+      "authModel": "session",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AI-01", "BLOCK-AI-02", "BLOCK-AI-03", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "tags": ["ai", "workflow"]
+    },
+    {
+      "id": "TPL-011",
+      "name": "Search Application",
+      "slug": "search-app",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "edge",
+      "authModel": "session",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SEARCH-01", "BLOCK-SEARCH-02", "BLOCK-SEARCH-03", "BLOCK-SHELL-01"],
+      "tags": ["search"]
+    },
+    {
+      "id": "TPL-012",
+      "name": "Storefront",
+      "slug": "storefront",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "edge",
+      "authModel": "optional",
+      "requiredBlocks": ["BLOCK-COMMERCE-01", "BLOCK-COMMERCE-02", "BLOCK-COMMERCE-03", "BLOCK-SHELL-01"],
+      "tags": ["commerce", "storefront"]
+    },
+    {
+      "id": "TPL-013",
+      "name": "Marketplace",
+      "slug": "marketplace",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "edge",
+      "authModel": "session",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-COMMERCE-01", "BLOCK-COMMERCE-02", "BLOCK-COMMERCE-03", "BLOCK-SEARCH-01", "BLOCK-SHELL-01"],
+      "tags": ["commerce", "marketplace"]
+    },
+    {
+      "id": "TPL-014",
+      "name": "Content Studio",
+      "slug": "content-studio",
+      "stack": "solid-start",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "node",
+      "authModel": "session",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-CONTENT-01", "BLOCK-CONTENT-02", "BLOCK-CONTENT-03", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "tags": ["content", "cms"]
+    },
+    {
+      "id": "TPL-015",
+      "name": "Marketing Site",
+      "slug": "marketing-site",
+      "stack": "vite-solid-router",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "static",
+      "authModel": "none",
+      "requiredBlocks": ["BLOCK-CONTENT-01", "BLOCK-SHELL-01"],
+      "tags": ["marketing", "static"]
+    },
+    {
+      "id": "TPL-016",
+      "name": "Documentation/Product Site",
+      "slug": "docs-site",
+      "stack": "vite-solid-router",
+      "portfolios": ["balanced"],
+      "deploymentTarget": "static",
+      "authModel": "none",
+      "requiredBlocks": ["BLOCK-CONTENT-01", "BLOCK-SEARCH-01", "BLOCK-SHELL-01"],
+      "tags": ["docs", "documentation"]
+    },
+    {
+      "id": "TPL-017",
+      "name": "Identity and Access",
+      "slug": "identity-access",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AUTH-02", "BLOCK-AUTH-03", "BLOCK-ADMIN-01", "BLOCK-ADMIN-03", "BLOCK-SHELL-01"],
+      "tags": ["iam", "identity"]
+    },
+    {
+      "id": "TPL-018",
+      "name": "Audit Log",
+      "slug": "audit-log",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ADMIN-02", "BLOCK-OBS-02", "BLOCK-SHELL-01"],
+      "tags": ["audit", "compliance"]
+    },
+    {
+      "id": "TPL-019",
+      "name": "Billing Operations",
+      "slug": "billing-ops",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-BILLING-01", "BLOCK-BILLING-02", "BLOCK-BILLING-03", "BLOCK-ADMIN-01", "BLOCK-SHELL-01"],
+      "tags": ["billing", "operations"]
+    },
+    {
+      "id": "TPL-020",
+      "name": "Incident Response",
+      "slug": "incident-response",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-OBS-03", "BLOCK-SHELL-01", "BLOCK-SHELL-03"],
+      "tags": ["incidents", "sre"]
+    },
+    {
+      "id": "TPL-021",
+      "name": "AI Operations",
+      "slug": "ai-ops",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AI-01", "BLOCK-AI-02", "BLOCK-AI-03", "BLOCK-OBS-01", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "tags": ["ai", "operations"]
+    },
+    {
+      "id": "TPL-022",
+      "name": "API Management",
+      "slug": "api-management",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-ADMIN-01", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "tags": ["api", "gateway"]
+    },
+    {
+      "id": "TPL-023",
+      "name": "Developer Portal",
+      "slug": "developer-portal",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "edge",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-CONTENT-01", "BLOCK-SEARCH-01", "BLOCK-RESOURCE-01", "BLOCK-SHELL-01"],
+      "tags": ["devportal", "api"]
+    },
+    {
+      "id": "TPL-024",
+      "name": "Security Center",
+      "slug": "security-center",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ADMIN-01", "BLOCK-ADMIN-02", "BLOCK-OBS-01", "BLOCK-OBS-03", "BLOCK-SHELL-01"],
+      "tags": ["security", "soc"]
+    },
+    {
+      "id": "TPL-025",
+      "name": "Compliance Center",
+      "slug": "compliance-center",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ADMIN-02", "BLOCK-ADMIN-03", "BLOCK-RESOURCE-01", "BLOCK-SHELL-01"],
+      "tags": ["compliance", "grc"]
+    },
+    {
+      "id": "TPL-026",
+      "name": "Data Governance",
+      "slug": "data-governance",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-RESOURCE-03", "BLOCK-ADMIN-02", "BLOCK-SHELL-01"],
+      "tags": ["data", "governance"]
+    },
+    {
+      "id": "TPL-027",
+      "name": "Workflow Automation",
+      "slug": "workflow-automation",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AI-03", "BLOCK-RESOURCE-01", "BLOCK-OBS-01", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "tags": ["workflow", "automation"]
+    },
+    {
+      "id": "TPL-028",
+      "name": "Support Operations",
+      "slug": "support-ops",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AI-01", "BLOCK-SEARCH-01", "BLOCK-RESOURCE-01", "BLOCK-SHELL-01", "BLOCK-SHELL-03"],
+      "tags": ["support", "helpdesk"]
+    },
+    {
+      "id": "TPL-029",
+      "name": "Enterprise Settings",
+      "slug": "enterprise-settings",
+      "stack": "solid-start",
+      "portfolios": ["enterprise"],
+      "deploymentTarget": "node",
+      "authModel": "token",
+      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SETTINGS-01", "BLOCK-SETTINGS-02", "BLOCK-SETTINGS-03", "BLOCK-ADMIN-01", "BLOCK-ADMIN-03", "BLOCK-SHELL-01"],
+      "tags": ["settings", "enterprise"]
+    }
+  ],
+  "placements": [
+    { "templateId": "TPL-004", "portfolio": "balanced" },
+    { "templateId": "TPL-004", "portfolio": "enterprise" },
+    { "templateId": "TPL-007", "portfolio": "balanced" },
+    { "templateId": "TPL-007", "portfolio": "enterprise" },
+    { "templateId": "TPL-008", "portfolio": "balanced" },
+    { "templateId": "TPL-008", "portfolio": "enterprise" }
+  ]
+}

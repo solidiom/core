@@ -30,7 +30,7 @@
         "src/recipes/pagination.tsx": "c598c5f563f4e59c2e65550f70e8509ab7c14296ddf7f80e1da42aa3768c5fba"
       }
     },
-    "lastGenerated": "2026-08-06T00:15:56.000Z"
+    "lastGenerated": "2026-08-06T13:55:23.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/pagination"
   ],
-  "lastUpdated": "2026-08-06T00:15:56.000Z"
+  "lastUpdated": "2026-08-06T13:55:23.000Z"
 }
