@@ -1,0 +1,60 @@
+{
+  "name": "danger-zone",
+  "version": "0.0.1-next.0",
+  "label": "Danger Zone",
+  "description": "Destructive account actions with confirmation dialogs. Implements loading, empty, error, and restricted states.",
+  "category": "SETTINGS",
+  "status": "preview",
+  "blockId": "BLOCK-SETTINGS-03",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/dialog",
+    "@solidiom/toast",
+    "@solidiom/progress",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/danger-zone/source/danger-zone.tsx",
+      "packages/blocks/danger-zone/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/danger-zone/source/danger-zone.tsx": "222578a3a2dfa913f5e97124a421f1c08eee5b4baad79571c5c6d6e4320cc76e",
+      "packages/blocks/danger-zone/source/index.ts": "7a50face7aef670560597191686501c6f566cdbaf1c658ad775fc9ec703eb538"
+    },
+    "lastGenerated": "2026-08-06T12:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "danger",
+    "zone",
+    "delete",
+    "deactivate",
+    "zona peligrosa",
+    "eliminar"
+  ]
+}
