@@ -13,7 +13,14 @@ var supportedPrimitives = [
   "menu",
   "toast",
   "badge",
-  "alert"
+  "alert",
+  "avatar",
+  "spinner",
+  "card",
+  "breadcrumb",
+  "pagination",
+  "progress",
+  "meter"
 ];
 
 // src/recipes/dialog.tsx
@@ -229,6 +236,15 @@ function StyledAlert(props) {
     </Alert.Root>;
 }
 
+// src/recipes/avatar.tsx
+import * as Avatar from "@solidiom/avatar";
+function StyledAvatar(props) {
+  return <Avatar.Root>
+      {props.src && <Avatar.Image src={props.src} alt={props.alt} />}
+      {(props.fallback || props.children) && <Avatar.Fallback>{props.fallback || props.children}</Avatar.Fallback>}
+    </Avatar.Root>;
+}
+
 // src/recipes/typeset.tsx
 var typeset = {
   heading1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
@@ -243,16 +259,74 @@ var typeset = {
   blockquote: "mt-6 border-l-2 pl-6 italic",
   inlineCode: "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold"
 };
+
+// src/recipes/spinner.tsx
+import * as Spinner from "@solidiom/spinner";
+function StyledSpinner(props) {
+  return <Spinner.Root label={props.label}>
+      {props.children}
+    </Spinner.Root>;
+}
+
+// src/recipes/card.tsx
+import { twMerge as twMerge3 } from "tailwind-merge";
+import * as Card from "@solidiom/card";
+var ROOT_CLASSES = "border border-solid border-border rounded-radius bg-popover p-4";
+function StyledCard(props) {
+  const className = () => twMerge3(ROOT_CLASSES, props.class);
+  return <Card.Root {...props} class={className()} />;
+}
+
+// src/recipes/breadcrumb.tsx
+import { twMerge as twMerge4 } from "tailwind-merge";
+import * as Breadcrumb from "@solidiom/breadcrumb";
+var ROOT_CLASSES2 = "flex items-center gap-2 text-sm";
+function StyledBreadcrumb(props) {
+  const className = () => twMerge4(ROOT_CLASSES2, props.class);
+  return <Breadcrumb.Root {...props} class={className()} />;
+}
+
+// src/recipes/pagination.tsx
+import * as Pagination from "@solidiom/pagination";
+var BASE_CLASS = "solidiom-pagination";
+function StyledPagination(props) {
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ");
+  return <Pagination.Root {...props} class={className()} />;
+}
+
+// src/recipes/data-table.tsx
+import * as DataTable from "@solidiom/data-table";
+var BASE_CLASS2 = "solidiom-data-table";
+function StyledDataTable(props) {
+  const className = () => [BASE_CLASS2, props.class].filter(Boolean).join(" ");
+  return <DataTable.Root {...props} class={className()} />;
+}
+
+// src/recipes/progress.tsx
+import { twMerge as twMerge5 } from "tailwind-merge";
+import * as Progress from "@solidiom/progress";
+var ROOT_CLASSES3 = "relative flex w-full h-2 overflow-hidden rounded-full bg-secondary";
+function StyledProgress(props) {
+  const className = () => twMerge5(ROOT_CLASSES3, props.class);
+  return <Progress.Root {...props} class={className()} />;
+}
 export {
   StyledAccordion,
   StyledAlert,
+  StyledAvatar,
   StyledBadge,
+  StyledBreadcrumb,
   StyledButton,
+  StyledCard,
   StyledCheckbox,
+  StyledDataTable,
   StyledDialog,
   StyledMenu,
+  StyledPagination,
   StyledPopover,
+  StyledProgress,
   StyledSelect,
+  StyledSpinner,
   StyledSwitch,
   StyledTabs,
   StyledToast,

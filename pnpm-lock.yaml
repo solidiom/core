@@ -1186,9 +1186,15 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../alert
+      '@solidiom/avatar':
+        specifier: workspace:*
+        version: link:../avatar
       '@solidiom/badge':
         specifier: workspace:*
         version: link:../badge
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../button
@@ -1198,6 +1204,9 @@ importers:
       '@solidiom/checkbox':
         specifier: workspace:*
         version: link:../checkbox
+      '@solidiom/data-table':
+        specifier: workspace:*
+        version: link:../data-table
       '@solidiom/dialog':
         specifier: workspace:*
         version: link:../dialog
@@ -1210,9 +1219,18 @@ importers:
       '@solidiom/menu':
         specifier: workspace:*
         version: link:../menu
+      '@solidiom/meter':
+        specifier: workspace:*
+        version: link:../meter
+      '@solidiom/pagination':
+        specifier: workspace:*
+        version: link:../pagination
       '@solidiom/popover':
         specifier: workspace:*
         version: link:../popover
+      '@solidiom/progress':
+        specifier: workspace:*
+        version: link:../progress
       '@solidiom/runtime':
         specifier: workspace:*
         version: link:../runtime
@@ -1252,9 +1270,15 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../alert
+      '@solidiom/avatar':
+        specifier: workspace:*
+        version: link:../avatar
       '@solidiom/badge':
         specifier: workspace:*
         version: link:../badge
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../button
@@ -1264,6 +1288,9 @@ importers:
       '@solidiom/checkbox':
         specifier: workspace:*
         version: link:../checkbox
+      '@solidiom/data-table':
+        specifier: workspace:*
+        version: link:../data-table
       '@solidiom/dialog':
         specifier: workspace:*
         version: link:../dialog
@@ -1276,9 +1303,18 @@ importers:
       '@solidiom/menu':
         specifier: workspace:*
         version: link:../menu
+      '@solidiom/meter':
+        specifier: workspace:*
+        version: link:../meter
+      '@solidiom/pagination':
+        specifier: workspace:*
+        version: link:../pagination
       '@solidiom/popover':
         specifier: workspace:*
         version: link:../popover
+      '@solidiom/progress':
+        specifier: workspace:*
+        version: link:../progress
       '@solidiom/runtime':
         specifier: workspace:*
         version: link:../runtime
@@ -1324,9 +1360,15 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../alert
+      '@solidiom/avatar':
+        specifier: workspace:*
+        version: link:../avatar
       '@solidiom/badge':
         specifier: workspace:*
         version: link:../badge
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../button
@@ -1336,6 +1378,9 @@ importers:
       '@solidiom/checkbox':
         specifier: workspace:*
         version: link:../checkbox
+      '@solidiom/data-table':
+        specifier: workspace:*
+        version: link:../data-table
       '@solidiom/dialog':
         specifier: workspace:*
         version: link:../dialog
@@ -1348,9 +1393,18 @@ importers:
       '@solidiom/menu':
         specifier: workspace:*
         version: link:../menu
+      '@solidiom/meter':
+        specifier: workspace:*
+        version: link:../meter
+      '@solidiom/pagination':
+        specifier: workspace:*
+        version: link:../pagination
       '@solidiom/popover':
         specifier: workspace:*
         version: link:../popover
+      '@solidiom/progress':
+        specifier: workspace:*
+        version: link:../progress
       '@solidiom/runtime':
         specifier: workspace:*
         version: link:../runtime

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "meter",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/meter.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/meter.tsx"
+    ],
+    "unocss": [
+      "src/recipes/meter.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/meter.tsx": "9a0c0503e4edc1cf27480286e535614b9e3f0bb331c3c9072a9a3959af4b9a32"
+      },
+      "tailwind": {
+        "src/recipes/meter.tsx": "8fc90e9979ac7c377a11c4123ef044df2fcc4397253b46247bbc85b78f269abf"
+      },
+      "unocss": {
+        "src/recipes/meter.tsx": "ea73d30b3fc68efb9a371ed295301a50586755da2c4e0140f5e162bf1f4af458"
+      }
+    },
+    "lastGenerated": "2026-08-05T12:38:19.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/meter"
+  ],
+  "lastUpdated": "2026-08-05T12:38:19.000Z"
+}
