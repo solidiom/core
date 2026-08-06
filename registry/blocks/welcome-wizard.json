@@ -1,0 +1,62 @@
+{
+  "name": "welcome-wizard",
+  "version": "0.0.1-next.0",
+  "label": "Welcome Wizard",
+  "description": "Multi-step onboarding wizard with progress tracking. Implements loading, empty, error, and restricted states.",
+  "category": "ONBOARD",
+  "status": "preview",
+  "blockId": "BLOCK-ONBOARD-01",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/tabs",
+    "@solidiom/avatar",
+    "@solidiom/checkbox",
+    "@solidiom/switch",
+    "@solidiom/breadcrumb",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/welcome-wizard/source/welcome-wizard.tsx",
+      "packages/blocks/welcome-wizard/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/welcome-wizard/source/welcome-wizard.tsx": "2171b47a4225d43125ba597e7cf6dd58e8ae46c80a04b8f4602a86a87d967358",
+      "packages/blocks/welcome-wizard/source/index.ts": "4a590b5c67829bc6ae7e9a8b327971a73205267a7489ad9327443fa90b0b309c"
+    },
+    "lastGenerated": "2026-08-06T12:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "welcome",
+    "wizard",
+    "onboarding",
+    "steps",
+    "bienvenida",
+    "asistente"
+  ]
+}

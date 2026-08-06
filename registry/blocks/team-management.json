@@ -1,0 +1,65 @@
+{
+  "name": "team-management",
+  "version": "0.0.1-next.0",
+  "label": "Team Management",
+  "description": "Team member list with invite, role assignment, and removal. Implements loading, empty, error, and restricted states.",
+  "category": "ADMIN",
+  "status": "preview",
+  "blockId": "BLOCK-ADMIN-01",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/input",
+    "@solidiom/field",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/dialog",
+    "@solidiom/select",
+    "@solidiom/avatar",
+    "@solidiom/popover",
+    "@solidiom/pagination",
+    "@solidiom/data-table",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/team-management/source/team-management.tsx",
+      "packages/blocks/team-management/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/team-management/source/team-management.tsx": "16a55c1ceb25a05e4b4ca4e0fe5fe07b2d12b5d18e942f25c6a96b36a0654afb",
+      "packages/blocks/team-management/source/index.ts": "4f94e34ccdcfe947a2dee0244d7c6c11fcf5bd5bf68a4b373fec26d23f28e55c"
+    },
+    "lastGenerated": "2026-08-06T12:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "team",
+    "management",
+    "invite",
+    "roles",
+    "equipo",
+    "gestion"
+  ]
+}

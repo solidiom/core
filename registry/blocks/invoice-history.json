@@ -1,0 +1,61 @@
+{
+  "name": "invoice-history",
+  "version": "0.0.1-next.0",
+  "label": "Invoice History",
+  "description": "Paginated invoice list with filtering and download. Pilot 2. Implements loading, empty, error, and restricted states.",
+  "category": "BILLING",
+  "status": "preview",
+  "blockId": "BLOCK-BILLING-03",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/input",
+    "@solidiom/card",
+    "@solidiom/select",
+    "@solidiom/popover",
+    "@solidiom/pagination",
+    "@solidiom/data-table",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/invoice-history/source/invoice-history.tsx",
+      "packages/blocks/invoice-history/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/invoice-history/source/invoice-history.tsx": "968e0439e71137fe8bb4f9de2bfc41e649f1c288bba46c1c5d80d17f969032dc",
+      "packages/blocks/invoice-history/source/index.ts": "bd2723f9c5f20ba33638fc67a6ae55164607bba56b449951203dc1e2104bb408"
+    },
+    "lastGenerated": "2026-08-06T12:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "invoice",
+    "history",
+    "billing",
+    "download",
+    "factura",
+    "historial"
+  ]
+}
