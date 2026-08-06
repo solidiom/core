@@ -287,17 +287,17 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | ------ | -------- | ---------------- | ---------------------- | ---- | ------------------------------- |
 | [x]    | COMP-001 | Button           | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-007, THEME-006 |
 | [x]    | COMP-002 | Input            | New                    | M    | RECIPE-005, PRIM-023            |
-| [~]    | COMP-003 | Field            | New                    | L    | RECIPE-005, PRIM-021, COMP-002  |
+| [x]    | COMP-003 | Field            | New                    | L    | RECIPE-005, PRIM-021, COMP-002  |
 | [x]    | COMP-004 | Card             | New                    | M    | RECIPE-005, PRIM-009            |
-| [~]    | COMP-005 | Alert            | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-002            |
+| [x]    | COMP-005 | Alert            | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-002            |
 | [x]    | COMP-006 | Dialog           | CSS + Tailwind recipe  | L    | RECIPE-005, PRIM-018            |
-| [~]    | COMP-007 | Select           | CSS + Tailwind recipe  | L    | RECIPE-005, PRIM-037            |
-| [~]    | COMP-008 | Dropdown Menu    | Existing `menu` recipe | L    | RECIPE-005, PRIM-028            |
-| [~]    | COMP-009 | Tabs             | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-044            |
-| [~]    | COMP-010 | Toast            | CSS + Tailwind recipe  | L    | RECIPE-005, PRIM-045            |
+| [x]    | COMP-007 | Select           | CSS + Tailwind recipe  | L    | RECIPE-005, PRIM-037            |
+| [x]    | COMP-008 | Dropdown Menu    | Existing `menu` recipe | L    | RECIPE-005, PRIM-028            |
+| [x]    | COMP-009 | Tabs             | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-044            |
+| [x]    | COMP-010 | Toast            | CSS + Tailwind recipe  | L    | RECIPE-005, PRIM-045            |
 | [~]    | COMP-011 | Tooltip          | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-049            |
 | [~]    | COMP-012 | Avatar           | New                    | M    | RECIPE-005, PRIM-004            |
-| [~]    | COMP-013 | Checkbox         | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-011            |
+| [x]    | COMP-013 | Checkbox         | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-011            |
 | [~]    | COMP-014 | Radio Group      | New                    | M    | RECIPE-005, PRIM-034            |
 | [~]    | COMP-015 | Switch           | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-043            |
 | [~]    | COMP-016 | Combobox         | New                    | L    | RECIPE-005, PRIM-013            |
@@ -305,9 +305,9 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | [~]    | COMP-018 | Sheet            | New                    | L    | RECIPE-005, PRIM-039            |
 | [~]    | COMP-019 | Navigation Menu  | New                    | L    | RECIPE-005, PRIM-030            |
 | [~]    | COMP-020 | Breadcrumb       | New                    | M    | RECIPE-005, PRIM-006            |
-| [~]    | COMP-021 | Pagination       | New                    | M    | RECIPE-005, PRIM-031            |
+| [x]    | COMP-021 | Pagination       | New                    | M    | RECIPE-005, PRIM-031            |
 | [~]    | COMP-022 | Command Palette  | New                    | L    | RECIPE-005, PRIM-014            |
-| [~]    | COMP-023 | Data Table       | New                    | L    | RECIPE-005, PRIM-016            |
+| [x]    | COMP-023 | Data Table       | New                    | L    | RECIPE-005, PRIM-016            |
 | [~]    | COMP-024 | Kbd              | New                    | S    | RECIPE-005, PRIM-025            |
 | [~]    | COMP-025 | Meter            | New                    | M    | RECIPE-005, PRIM-029            |
 | [~]    | COMP-026 | Progress         | New                    | M    | RECIPE-005, PRIM-033            |
@@ -325,7 +325,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | Status | ID                | Category / slot                        | Size | Depends on                     |
 | ------ | ----------------- | -------------------------------------- | ---- | ------------------------------ |
 | [x]    | BLOCK-000         | Approve 36-item block catalog manifest | L    | representative COMP-* complete |
-| [~]    | BLOCK-AUTH-01     | Authentication 1                       | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-AUTH-01     | Authentication 1                       | WP   | BLOCK-000, required COMP-*     |
 | [~]    | BLOCK-AUTH-02     | Authentication 2                       | WP   | BLOCK-000, required COMP-*     |
 | [~]    | BLOCK-AUTH-03     | Authentication 3                       | WP   | BLOCK-000, required COMP-*     |
 | [~]    | BLOCK-ONBOARD-01  | Onboarding 1                           | WP   | BLOCK-000, required COMP-*     |
@@ -518,7 +518,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | ----------------------------- | -------: | --: | -----: |
 | Primitives                    |       52 |  52 |     52 |
 | Components                    |       30 |  30 |     30 |
-| Blocks                        |     ≥ 36 |   0 |      0 |
+| Blocks                        |     ≥ 36 |   1 |      1 |
 | Unique templates              |       29 |   0 |      0 |
 | Template portfolio placements |       32 |   0 |      0 |
 | Theme presets                 |        4 |   0 |      4 |
