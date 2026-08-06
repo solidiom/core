@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "resizable-panels",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/resizable-panels.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/resizable-panels.tsx"
+    ],
+    "unocss": [
+      "src/recipes/resizable-panels.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/resizable-panels.tsx": "15098c030dd844707f2cb2469fb82b5d586f0585d0fc60f44fc3e231b9034a2a"
+      },
+      "tailwind": {
+        "src/recipes/resizable-panels.tsx": "067b05bf3e11d278ddad4b5c48879716be46b65d466dea0c466cf605ffdbc089"
+      },
+      "unocss": {
+        "src/recipes/resizable-panels.tsx": "cbeaf8e4443b643e6ec3a835b41c3ba215340be6620bdf68211de742f5fdfec2"
+      }
+    },
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/resizable-panels"
+  ],
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
+}

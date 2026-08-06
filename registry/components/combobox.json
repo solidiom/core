@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "combobox",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/combobox.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/combobox.tsx"
+    ],
+    "unocss": [
+      "src/recipes/combobox.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/combobox.tsx": "b5977eaa859e1727348880b2c6754ae2757140180652696a44018456191c3990"
+      },
+      "tailwind": {
+        "src/recipes/combobox.tsx": "98cf5ad30998ad1dc473ea7ec0cc5e33011bfc8d8370044dfd3af90ed1230c2b"
+      },
+      "unocss": {
+        "src/recipes/combobox.tsx": "7be0889f0ff306251ec6a590a693d1816630e4cfd75023813986f6cf7eb7eb77"
+      }
+    },
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/combobox"
+  ],
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
+}

@@ -133,7 +133,7 @@ function readDeclaredCount(): number {
     const content = readFileSync(TRACKER_PATH, "utf8")
     // Match "| Blocks                        |     ≥ 36 |   0 |      0 |"
     // DoD column is the third pipe-delimited value
-    const match = content.match(/\|\s*Blocks\s*\|\s*[≥\d]+\s*\|\s*(\d+)\s*\|/)
+    const match = content.match(/\|\s*Blocks\s*\|\s*[≥\d ]+\s*\|\s*(\d+)\s*\|/)
     if (match) return parseInt(match[1], 10)
     return 0
   } catch {

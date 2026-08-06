@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "navigation-menu",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/navigation-menu.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/navigation-menu.tsx"
+    ],
+    "unocss": [
+      "src/recipes/navigation-menu.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/navigation-menu.tsx": "3487d2727fff78747d5ad68b13a8067b4b481811dc78ebc9c3a47b8e1b75a8d5"
+      },
+      "tailwind": {
+        "src/recipes/navigation-menu.tsx": "30beb174f3f175f8954333e021438c51c8a9dafcff8a50ac2b659ee9fbb5a396"
+      },
+      "unocss": {
+        "src/recipes/navigation-menu.tsx": "73e4e1223ef8c30bdabf64c76d192bc7949fec0145f9e691773483b634161fa8"
+      }
+    },
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/navigation-menu"
+  ],
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
+}

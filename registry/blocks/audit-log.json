@@ -1,0 +1,44 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "Audit Log",
+  "id": "BLOCK-ADMIN-02",
+  "category": "ADMIN",
+  "version": "0.0.1-next.0",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "COMP-002",
+    "COMP-004",
+    "COMP-007",
+    "COMP-013",
+    "COMP-017",
+    "COMP-020",
+    "COMP-021",
+    "COMP-023",
+    "COMP-029"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "contentDigest": "24e25f1e016e5c869cf89f16ad96578e5e365c37341bce16a472a7dc1fec8a11",
+    "lastGenerated": "2026-08-06T06:15:01.953Z"
+  },
+  "lastUpdated": "2026-08-06T06:15:01.953Z"
+}

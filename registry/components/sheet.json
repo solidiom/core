@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "sheet",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/sheet.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/sheet.tsx"
+    ],
+    "unocss": [
+      "src/recipes/sheet.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/sheet.tsx": "dc52f38f3f7ed101bed442a1be436d02b9cedfcba5790e7bb239249c318f21c0"
+      },
+      "tailwind": {
+        "src/recipes/sheet.tsx": "cc721b85330aa56f7892a0e8f98537acac8199cfa3bfa128040b289f23cd1a93"
+      },
+      "unocss": {
+        "src/recipes/sheet.tsx": "582d41bd768d1f3a6c1bccf4b15d1cd8ffd6c945e8017708cdf1513858b1fb65"
+      }
+    },
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/sheet"
+  ],
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
+}

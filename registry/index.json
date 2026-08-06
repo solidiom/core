@@ -1,10 +1,10 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-05T12:38:19.000Z",
+  "generatedAt": "2026-08-06T00:15:56.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "f0a6bb2ccb4fce5a763a2322420c1fb7cc42503ff7de3e2b626eadff6f7837f5"
+    "entriesHash": "b316e49010d7aa012646fc63a21533a01933571b48d4b3b3e89318be37fcebed"
   },
   "primitives": [
     {
@@ -650,7 +650,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "autocompletado",
@@ -696,7 +700,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "action",
@@ -1226,7 +1234,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "atajo",
@@ -1464,7 +1476,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "accessible",
@@ -1657,7 +1673,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "button",
@@ -1704,7 +1724,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "drag",
@@ -1747,7 +1771,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "area",
@@ -1888,7 +1916,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "animation",
@@ -2298,7 +2330,11 @@
           "status": "draft"
         }
       },
-      "stylingOutputs": [],
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
       "themeCompatible": [],
       "searchKeywords": [
         "actions",
@@ -2813,6 +2849,72 @@
       ]
     },
     {
+      "name": "combobox",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Combobox",
+      "description": "Styled combobox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the combobox primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/combobox",
+      "searchKeywords": [
+        "combobox",
+        "component",
+        "css",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "command-palette",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Command Palette",
+      "description": "Styled command-palette component — the recipe wrapper for the css, tailwind, unocss profile(s) using the command-palette primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/command-palette",
+      "searchKeywords": [
+        "command-palette",
+        "component",
+        "css",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
       "name": "data-table",
       "version": "0.0.1-next.0",
       "package": "@solidiom/recipes-css",
@@ -2945,6 +3047,39 @@
       ]
     },
     {
+      "name": "kbd",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Kbd",
+      "description": "Styled kbd component — the recipe wrapper for the css, tailwind, unocss profile(s) using the kbd primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/kbd",
+      "searchKeywords": [
+        "component",
+        "css",
+        "kbd",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
       "name": "menu",
       "version": "0.0.1-next.0",
       "package": "@solidiom/recipes-css",
@@ -3006,6 +3141,39 @@
         "component",
         "css",
         "meter",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Navigation Menu",
+      "description": "Styled navigation-menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the navigation-menu primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/navigation-menu",
+      "searchKeywords": [
+        "component",
+        "css",
+        "navigation-menu",
         "tailwind",
         "unocss"
       ]
@@ -3110,6 +3278,105 @@
       ]
     },
     {
+      "name": "radio-group",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Radio Group",
+      "description": "Styled radio-group component — the recipe wrapper for the css, tailwind, unocss profile(s) using the radio-group primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/radio-group",
+      "searchKeywords": [
+        "component",
+        "css",
+        "radio-group",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "resizable-panels",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Resizable Panels",
+      "description": "Styled resizable-panels component — the recipe wrapper for the css, tailwind, unocss profile(s) using the resizable-panels primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/resizable-panels",
+      "searchKeywords": [
+        "component",
+        "css",
+        "resizable-panels",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Scroll Area",
+      "description": "Styled scroll-area component — the recipe wrapper for the css, tailwind, unocss profile(s) using the scroll-area primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/scroll-area",
+      "searchKeywords": [
+        "component",
+        "css",
+        "scroll-area",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
       "name": "select",
       "version": "0.0.1-next.0",
       "package": "@solidiom/recipes-css",
@@ -3138,6 +3405,39 @@
         "component",
         "css",
         "select",
+        "tailwind",
+        "unocss"
+      ]
+    },
+    {
+      "name": "sheet",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Sheet",
+      "description": "Styled sheet component — the recipe wrapper for the css, tailwind, unocss profile(s) using the sheet primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/sheet",
+      "searchKeywords": [
+        "component",
+        "css",
+        "sheet",
         "tailwind",
         "unocss"
       ]
@@ -3271,6 +3571,39 @@
         "css",
         "tailwind",
         "toast",
+        "unocss"
+      ]
+    },
+    {
+      "name": "toolbar",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/recipes-css",
+      "label": "Toolbar",
+      "description": "Styled toolbar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toolbar primitive.",
+      "status": "preview",
+      "deliverables": [
+        "component"
+      ],
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [
+        "css",
+        "tailwind",
+        "unocss"
+      ],
+      "primitiveDependency": "@solidiom/toolbar",
+      "searchKeywords": [
+        "component",
+        "css",
+        "tailwind",
+        "toolbar",
         "unocss"
       ]
     },

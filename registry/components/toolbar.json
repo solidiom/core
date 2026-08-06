@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "toolbar",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/toolbar.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/toolbar.tsx"
+    ],
+    "unocss": [
+      "src/recipes/toolbar.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/toolbar.tsx": "1a4cc81988c753e99e9a9485c6ba5ba5a49ae6880d3428bf631ac7581bb7aa0f"
+      },
+      "tailwind": {
+        "src/recipes/toolbar.tsx": "ce945542e0f41ae4d2b36803dfcb9ea7d765a6a7b3d0cb0df790067508afb466"
+      },
+      "unocss": {
+        "src/recipes/toolbar.tsx": "9098e97ca11cd8ab878150724aabe3576c50b1857f1b1243a70a1713568432d2"
+      }
+    },
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/toolbar"
+  ],
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
+}

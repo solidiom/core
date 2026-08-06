@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "radio-group",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/radio-group.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/radio-group.tsx"
+    ],
+    "unocss": [
+      "src/recipes/radio-group.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/radio-group.tsx": "a22e2de7c6f66f17c2748c247ffde3eadc4dd85327d03a2268de0dcac8ccdae3"
+      },
+      "tailwind": {
+        "src/recipes/radio-group.tsx": "896f4bcb0c3c56f4dbbc591e44c049c0c619066fbeea6655abc864b9772986f6"
+      },
+      "unocss": {
+        "src/recipes/radio-group.tsx": "ab4fb3b972af041a766774b8086e19630d3a2a04e6399249a3bbb3249865049f"
+      }
+    },
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/radio-group"
+  ],
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
+}

@@ -18,9 +18,21 @@
         "Permission-restricted (account locked, MFA required)",
         "Success (redirect to post-auth destination)"
       ],
-      "componentDependencies": ["COMP-001", "COMP-002", "COMP-003", "COMP-005", "COMP-029"],
+      "componentDependencies": [
+        "COMP-001",
+        "COMP-002",
+        "COMP-003",
+        "COMP-005",
+        "COMP-029"
+      ],
       "dataBoundary": "Authentication service via OAuth 2.0 / OIDC or credential endpoint. No persistent data at rest within the block; session token passed to application shell.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-AUTH-02",
@@ -32,7 +44,8 @@
         "Empty (no registration method chosen)",
         "Error (email already taken, weak password, verification failed, network failure)",
         "Verification-pending (awaiting email confirmation)",
-        "Success (redirect to onboarding)"
+        "Success (redirect to onboarding)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -43,7 +56,13 @@
         "COMP-029"
       ],
       "dataBoundary": "User creation service and email delivery service. Temporary verification token; no PII stored within the block.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-AUTH-03",
@@ -55,7 +74,8 @@
         "Empty (initial email input)",
         "Error (email not found — generic message, expired token, network failure)",
         "Token-expired (reset link expired)",
-        "Success (password updated, redirect to sign in)"
+        "Success (password updated, redirect to sign in)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -66,7 +86,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Password reset service; time-limited tokens. Block never exposes whether an email exists in the system.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-ONBOARD-01",
@@ -78,7 +104,8 @@
         "Empty (wizard not started)",
         "Error (step save failure, network failure)",
         "In-progress (current step with progress indicator)",
-        "Completed (all steps finished, redirect to dashboard)"
+        "Completed (all steps finished, redirect to dashboard)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -92,7 +119,13 @@
         "COMP-029"
       ],
       "dataBoundary": "User preferences service. Skippable steps; partial progress persisted to resume later.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-ONBOARD-02",
@@ -103,7 +136,8 @@
         "Loading (profile save, avatar upload)",
         "Empty (no profile data)",
         "Error (upload failure, validation failure, network failure)",
-        "Success (profile saved)"
+        "Success (profile saved)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -116,7 +150,13 @@
         "COMP-029"
       ],
       "dataBoundary": "User profile service and file storage for avatar. Block reads current user context; writes profile updates.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-ONBOARD-03",
@@ -128,7 +168,8 @@
         "Empty (no templates selected)",
         "Error (template unavailable, name conflict, network failure)",
         "In-progress (project provisioning)",
-        "Success (redirect to project)"
+        "Success (redirect to project)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -141,7 +182,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Template catalog service and project creation service. Block reads available templates; creates project resource.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-SETTINGS-01",
@@ -153,7 +200,8 @@
         "Empty (no changes made)",
         "Error (save failure, validation error, network failure)",
         "Unsaved-changes (dirty form state)",
-        "Success (changes persisted)"
+        "Success (changes persisted)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -167,7 +215,13 @@
         "COMP-029"
       ],
       "dataBoundary": "User profile and authentication services. Block reads current user data; writes profile and password updates. Email change requires re-verification.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-SETTINGS-02",
@@ -179,7 +233,8 @@
         "Empty (no notification categories)",
         "Error (save failure, network failure)",
         "Unsaved-changes (dirty form)",
-        "Success (preferences saved)"
+        "Success (preferences saved)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -193,7 +248,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Notification preferences service. Block reads per-user notification settings; writes updated preferences.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-SETTINGS-03",
@@ -205,7 +266,8 @@
         "Empty (no pending actions)",
         "Error (operation failed, insufficient permissions, network failure)",
         "Confirmation-required (destructive action modal)",
-        "Processing (async export in progress)"
+        "Processing (async export in progress)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -217,7 +279,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Account lifecycle service and data export service. Block requires re-authentication for destructive actions. Data export is async with status polling.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-BILLING-01",
@@ -229,7 +297,8 @@
         "Empty (no plans available)",
         "Error (billing service unavailable, payment required, network failure)",
         "Current-plan-highlighted (active plan visually distinguished)",
-        "Confirmation-required (plan change)"
+        "Confirmation-required (plan change)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -242,7 +311,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Billing service for plan catalog and current subscription. Block reads plan metadata and user's active subscription; writes plan changes.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-BILLING-02",
@@ -254,7 +329,8 @@
         "Empty (no payment methods on file)",
         "Error (payment declined, service error, network failure)",
         "Processing (payment tokenization)",
-        "Success (method added/removed)"
+        "Success (method added/removed)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -269,7 +345,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Payment processor via tokenization API. Block never stores raw card numbers; relies on payment provider's hosted fields or tokens.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-BILLING-03",
@@ -280,7 +362,8 @@
         "Loading (invoices fetch)",
         "Empty (no invoice history)",
         "Error (fetch failure, network failure)",
-        "Filtering-active (applied date/amount filters)"
+        "Filtering-active (applied date/amount filters)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -293,7 +376,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Billing service invoice endpoint. Read-only block; invoice PDFs served via pre-signed URLs from the billing provider.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-ADMIN-01",
@@ -305,7 +394,8 @@
         "Empty (no team members)",
         "Error (invite failed, permission denied, network failure)",
         "Pending-invite (invitation sent, awaiting acceptance)",
-        "Success (member added/removed)"
+        "Success (member added/removed)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -322,7 +412,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Team management and invitation services. Block requires admin role; reads team roster; writes invites and membership changes.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-ADMIN-02",
@@ -334,7 +430,8 @@
         "Empty (no events in range)",
         "Error (fetch failure, permission denied, network failure)",
         "Filtering-active (applied filters)",
-        "Pagination-loading (next page)"
+        "Pagination-loading (next page)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-002",
@@ -348,7 +445,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Audit event store. Read-only block; requires admin role. Events are immutable append-only records.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-ADMIN-03",
@@ -361,7 +464,8 @@
         "Error (save failure, permission conflict, network failure)",
         "Unsaved-changes (dirty matrix)",
         "Confirmation-required (permission revocation)",
-        "Success (matrix saved)"
+        "Success (matrix saved)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -377,7 +481,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Role and permission services. Block reads role definitions and permission schema; writes role-permission mappings. Changes take effect on next authentication cycle.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-OBS-01",
@@ -389,7 +499,8 @@
         "Empty (no data for period)",
         "Error (data source unavailable, network failure)",
         "Stale-data (metrics not recently updated)",
-        "Auto-refresh-active (periodic data refresh)"
+        "Auto-refresh-active (periodic data refresh)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-004",
@@ -402,7 +513,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Metrics aggregation service. Read-only block; data refreshes on a configurable interval. Time-range selector controls query window.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-OBS-02",
@@ -414,7 +531,8 @@
         "Empty (no events, stream disconnected)",
         "Error (connection lost, filter error, network failure)",
         "Paused (stream halted by user)",
-        "Filtering-active (applied event filters)"
+        "Filtering-active (applied event filters)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -429,7 +547,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Events streaming service via WebSocket or SSE. Read-only block; events are ephemeral unless explicitly saved.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-OBS-03",
@@ -442,7 +566,8 @@
         "Error (save failure, invalid threshold, network failure)",
         "Unsaved-changes (dirty rule form)",
         "Testing (alert test firing)",
-        "Success (rule saved)"
+        "Success (rule saved)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -460,7 +585,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Alert rules service and notification channel registry. Block reads existing rules; creates/updates/deletes alert configurations.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-RESOURCE-01",
@@ -472,7 +603,8 @@
         "Empty (no resources match)",
         "Error (fetch failure, network failure)",
         "Filtering-active (applied filters/sorts)",
-        "Selection-active (one or more resources selected)"
+        "Selection-active (one or more resources selected)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-002",
@@ -488,7 +620,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Resource catalog service. Read-only block with bulk selection for downstream actions. Supports server-side pagination and filtering.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-RESOURCE-02",
@@ -500,7 +638,8 @@
         "Empty (resource not found)",
         "Error (fetch failure, access denied, network failure)",
         "Action-in-progress (operation on resource)",
-        "History-visible (activity timeline expanded)"
+        "History-visible (activity timeline expanded)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -516,7 +655,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Resource detail service and activity log. Block reads resource data; performs scoped actions (start/stop/delete) with confirmation.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-RESOURCE-03",
@@ -529,7 +674,8 @@
         "Error (validation failure, quota exceeded, network failure)",
         "Step-in-progress (wizard navigation)",
         "Provisioning (async creation)",
-        "Success (resource created)"
+        "Success (resource created)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -548,7 +694,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Resource creation service and template catalog. Block reads templates and quota; creates resource asynchronously.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-AI-01",
@@ -561,7 +713,8 @@
         "Error (model unavailable, rate limited, network failure)",
         "Streaming (partial response rendering)",
         "Typing (user composing)",
-        "Context-full (conversation history loaded)"
+        "Context-full (conversation history loaded)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -576,7 +729,13 @@
         "COMP-029"
       ],
       "dataBoundary": "AI chat service with streaming responses. Block manages conversation state locally; persists messages to chat history service.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-AI-02",
@@ -589,7 +748,8 @@
         "Error (save failure, test failed, network failure)",
         "Unsaved-changes (dirty prompt editor)",
         "Testing (prompt execution in progress)",
-        "Success (prompt saved)"
+        "Success (prompt saved)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -608,7 +768,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Prompt storage service and AI execution endpoint. Block reads/writes prompt definitions; executes test prompts against AI service.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-AI-03",
@@ -621,7 +787,8 @@
         "Error (step failure, connection error, network failure)",
         "Editing (workflow canvas active)",
         "Running (workflow execution)",
-        "Success (workflow completed)"
+        "Success (workflow completed)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -641,7 +808,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Workflow definition service and execution engine. Block reads/writes workflow definitions; triggers async execution with status polling.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-SEARCH-01",
@@ -653,7 +826,8 @@
         "Empty (no query entered, no results match)",
         "Error (search unavailable, network failure)",
         "Filtering-active (applied facets)",
-        "Highlighting-active (matched terms highlighted)"
+        "Highlighting-active (matched terms highlighted)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-002",
@@ -667,7 +841,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Search index service. Read-only block; query and filter parameters passed to search API. Results include snippet and metadata.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-SEARCH-02",
@@ -679,7 +859,8 @@
         "Empty (no saved searches)",
         "Error (save failure, network failure)",
         "Alert-active (monitoring for new matches)",
-        "Success (search saved)"
+        "Success (search saved)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -696,7 +877,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Saved search storage and alert notification service. Block reads/writes saved queries; manages alert subscriptions.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-SEARCH-03",
@@ -707,7 +894,8 @@
         "Loading (analytics fetch)",
         "Empty (no search data for period)",
         "Error (data unavailable, network failure)",
-        "Date-range-selected (custom period active)"
+        "Date-range-selected (custom period active)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-004",
@@ -720,7 +908,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Search analytics aggregation service. Read-only block; aggregates anonymized search metrics. No individual query content exposed.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-COMMERCE-01",
@@ -732,7 +926,8 @@
         "Empty (no products in category)",
         "Error (catalog unavailable, network failure)",
         "Filtering-active (applied filters/sorts)",
-        "Loading-more (infinite scroll pagination)"
+        "Loading-more (infinite scroll pagination)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -747,7 +942,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Product catalog service. Read-only block; product images served via CDN. Price and availability cached with TTL.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-COMMERCE-02",
@@ -760,7 +961,8 @@
         "Error (item unavailable, coupon invalid, network failure)",
         "Updating (quantity change in progress)",
         "Checkout-ready (cart validated)",
-        "Success (item added/removed)"
+        "Success (item added/removed)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -776,7 +978,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Cart service and pricing service. Block reads cart state; updates quantities and coupons. Checkout transitions to billing flow.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-COMMERCE-03",
@@ -788,7 +996,8 @@
         "Empty (no orders placed)",
         "Error (tracking unavailable, network failure)",
         "Order-in-transit (tracking timeline active)",
-        "Order-completed (fulfillment confirmed)"
+        "Order-completed (fulfillment confirmed)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -804,7 +1013,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Order management and shipping tracking services. Read-only block; tracking data polled from carrier APIs.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-CONTENT-01",
@@ -817,7 +1032,8 @@
         "Error (save failure, conflict detected, network failure)",
         "Unsaved-changes (dirty editor)",
         "Preview-active (split preview mode)",
-        "Autosaved (background save confirmation)"
+        "Autosaved (background save confirmation)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -835,7 +1051,13 @@
         "COMP-030"
       ],
       "dataBoundary": "Content storage service. Block reads document content; writes incremental saves with conflict detection.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-CONTENT-02",
@@ -847,7 +1069,8 @@
         "Empty (library empty, no matches)",
         "Error (fetch failure, upload failed, network failure)",
         "Upload-in-progress (file transfer)",
-        "Selection-active (assets selected for action)"
+        "Selection-active (assets selected for action)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -866,7 +1089,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Asset storage and metadata service. Block reads asset listing; supports upload and deletion with confirmation.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-CONTENT-03",
@@ -880,7 +1109,8 @@
         "Draft (unsubmitted content)",
         "Review (awaiting approval)",
         "Published (live content)",
-        "Archived (deprecated content)"
+        "Archived (deprecated content)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -902,7 +1132,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Content workflow and approval services. Block reads pipeline state; transitions items between stages with permission checks.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-SHELL-01",
@@ -915,7 +1151,8 @@
         "Error (nav service unavailable)",
         "Collapsed (minimized sidebar)",
         "Expanded (full sidebar)",
-        "Mobile-overlay (sidebar as overlay on small screens)"
+        "Mobile-overlay (sidebar as overlay on small screens)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -931,7 +1168,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Navigation configuration service and user permissions. Block reads menu structure; highlights active route. Sidebar state persisted in local storage.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-SHELL-02",
@@ -944,7 +1187,8 @@
         "Error (search unavailable, network failure)",
         "Open (palette visible)",
         "Filtering-active (search narrowed results)",
-        "Category-selected (results scoped to section)"
+        "Category-selected (results scoped to section)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-002",
@@ -957,7 +1201,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Command registry service. Block reads available commands scoped to user permissions; executes actions via command handlers.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     },
     {
       "id": "BLOCK-SHELL-03",
@@ -970,7 +1220,8 @@
         "Error (fetch failure, network failure)",
         "Unread-count (badge with count)",
         "Filtering-active (scoped by type)",
-        "Marking-read (bulk action in progress)"
+        "Marking-read (bulk action in progress)",
+        "Restricted (insufficient permissions)"
       ],
       "componentDependencies": [
         "COMP-001",
@@ -987,7 +1238,13 @@
         "COMP-029"
       ],
       "dataBoundary": "Notification service with real-time updates. Block reads notification feed; writes read/dismiss states. Supports WebSocket push for new notifications.",
-      "proposedComponents": []
+      "proposedComponents": [],
+      "requiredStates": [
+        "loading",
+        "empty",
+        "error",
+        "restricted"
+      ]
     }
   ],
   "resolution": {

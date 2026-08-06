@@ -1,0 +1,45 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "Product Catalog",
+  "id": "BLOCK-COMMERCE-01",
+  "category": "COMMERCE",
+  "version": "0.0.1-next.0",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "COMP-001",
+    "COMP-002",
+    "COMP-004",
+    "COMP-005",
+    "COMP-007",
+    "COMP-012",
+    "COMP-013",
+    "COMP-017",
+    "COMP-021",
+    "COMP-029"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "contentDigest": "314db355af6e8192e65549bb4fe7a723c1d9d5c1b1ff08dee97c5edeabe5cf57",
+    "lastGenerated": "2026-08-06T06:15:01.953Z"
+  },
+  "lastUpdated": "2026-08-06T06:15:01.953Z"
+}

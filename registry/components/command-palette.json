@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "command-palette",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/command-palette.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/command-palette.tsx"
+    ],
+    "unocss": [
+      "src/recipes/command-palette.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/command-palette.tsx": "0cfb07b918007ec0ffb4a17b2e3b26ab34953c8303897e79bac90293d621a7bb"
+      },
+      "tailwind": {
+        "src/recipes/command-palette.tsx": "1df1c6812eecb322944d542aaef42b12376252e50935d1c4ba22089d0ce270c3"
+      },
+      "unocss": {
+        "src/recipes/command-palette.tsx": "faa3d37cf398147120806eba4ede7653bb5fed294a1b2edd3b9b428b215fa850"
+      }
+    },
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/command-palette"
+  ],
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
+}
