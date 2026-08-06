@@ -1,0 +1,63 @@
+{
+  "name": "resource-detail",
+  "version": "0.0.1-next.0",
+  "label": "Resource Detail",
+  "description": "Resource detail view with metadata, actions, and related items. Implements loading, empty, error, and restricted states.",
+  "category": "RESOURCE",
+  "status": "preview",
+  "blockId": "BLOCK-RESOURCE-02",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/tabs",
+    "@solidiom/avatar",
+    "@solidiom/breadcrumb",
+    "@solidiom/popover",
+    "@solidiom/spinner",
+    "@solidiom/toast",
+    "@solidiom/data-table"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/resource-detail/source/resource-detail.tsx",
+      "packages/blocks/resource-detail/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/resource-detail/source/resource-detail.tsx": "023b173cb6315f18eaf11a954dad97c61f2d72a628c16c27a91a3c92d6b60a35",
+      "packages/blocks/resource-detail/source/index.ts": "34e7cf676d758d3bfe1c59249875537a5581a790dd37873e6ba5b717c65e39bd"
+    },
+    "lastGenerated": "2026-08-06T14:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "resource",
+    "detail",
+    "metadata",
+    "view",
+    "recurso",
+    "detalle"
+  ]
+}

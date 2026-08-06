@@ -340,12 +340,12 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | [x]    | BLOCK-ADMIN-01    | Administration 1                       | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-ADMIN-02    | Administration 2                       | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-ADMIN-03    | Administration 3                       | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-OBS-01      | Observability 1                        | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-OBS-02      | Observability 2                        | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-OBS-03      | Observability 3                        | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-RESOURCE-01 | Resource management 1                  | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-RESOURCE-02 | Resource management 2                  | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-RESOURCE-03 | Resource management 3                  | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-OBS-01      | Observability 1                        | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-OBS-02      | Observability 2                        | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-OBS-03      | Observability 3                        | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-RESOURCE-01 | Resource management 1                  | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-RESOURCE-02 | Resource management 2                  | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-RESOURCE-03 | Resource management 3                  | WP   | BLOCK-000, required COMP-*     |
 | [~]    | BLOCK-AI-01       | AI interfaces 1                        | WP   | BLOCK-000, required COMP-*     |
 | [~]    | BLOCK-AI-02       | AI interfaces 2                        | WP   | BLOCK-000, required COMP-*     |
 | [~]    | BLOCK-AI-03       | AI interfaces 3                        | WP   | BLOCK-000, required COMP-*     |
