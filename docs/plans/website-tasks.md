@@ -12,8 +12,8 @@ date: 2026-08-02
 
 # Solidiom Website — Canonical Task Authority
 
-**Status:** in execution — M0–M2 complete; M3 regressed locally; M4 primitives complete, component/block completion claims reopened, templates pending; M5 in progress incidentally.
-**Current tree evidence:** `gate:phase1` is red at 240/254; historical green evidence at `079512e` is not evidence for the current tree.
+**Status:** in execution — M0–M2 complete; M3 integration recovered; M4 primitives complete, 5/30 components verified, blocks and templates pending; M5 in progress incidentally.
+**Current tree evidence:** `gate:phase1` is green at 255/255; `test:tools` 382/382; recipe contract 34/34; drift/parity/exports all zero issues.
 **Target application:** `apps/site/`
 **Canonical origin:** `https://solidiom.org`
 **Website architecture:** [`docs/architecture/website.md`](../architecture/website.md)
@@ -22,9 +22,9 @@ date: 2026-08-02
 **Durable decisions:** [`catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)
 **History:** [`website-m0-m3.md`](../history/plans/website-m0-m3.md) and [`catalog-foundations-2026-08.md`](../history/plans/catalog-foundations-2026-08.md)
 
-Current position: all 52 primitives meet the M4 bar. Thirty approved component concepts have landed, plus untracked registry entries for `accordion` and `badge`, but 0/30 are verified against the complete component DoD. Thirty-six block manifests/docs exist, but no block source or previews are indexed; 0/36 meet the block DoD. Templates remain 0/29. Workflows are dispatch-only.
+Current position: all 52 primitives meet the M4 bar. Five components are verified `[x]` (Button, Input, Card, Dialog, Spinner); 25 remain `[~]`. Untracked registry entries for `accordion`, `badge`, and `menu` are flagged by the corrected gate but not counted. Thirty-six block manifests/docs exist but no block source or previews are indexed; 0/36 meet the block DoD. Template manifest is approved (29 unique / 32 placements) with a working validator; 0/29 templates are implemented. Workflows are dispatch-only.
 
-Immediate recovery is `CATALOG-001`, `CATALOG-002`, and `CATALOG-003`, with `TPL-000` starting in parallel. Do not infer completion from file presence, generated output, or a green ancestor.
+Recovery tasks `CATALOG-001`, `CATALOG-002`, `CATALOG-003`, `TPL-000`, and `FOUND-008` are complete. The critical path is now component verification → block pilots → block/template fan-out.
 
 ---
 
@@ -73,8 +73,8 @@ Every completed implementation task must:
 | M0 Governance/inputs      | Complete                     | Governance, brand, migration, baseline, and operations prerequisites closed G0.           |
 | M1 Foundation/alpha       | Complete with policy blocker | Site foundation closed G1; `CI-001` remains blocked by the dispatch-only policy.          |
 | M2 Content vertical slice | Complete                     | Registry/content/API/a11y/docs/search and three complex slices closed G2.                 |
-| M3 Public beta            | Regressed                    | Historical beta delivery remains, but recipe/build/integration evidence is currently red. |
-| M4 Catalog                | In progress                  | Primitives 52/52; components 0/30; blocks 0/36; templates 0/29.                           |
+| M3 Public beta            | Recovered                    | Integration evidence restored: contract, builds, drift, parity, exports, tools all green.     |
+| M4 Catalog                | In progress                  | Primitives 52/52; components 5/30; blocks 0/36; templates 0/29.                               |
 | M5 GA/cutover             | In progress incidentally     | `MKT-005` and `BUILDER-008` are complete; the remaining GA programme is open.             |
 
 ### 2.1 Compact completion ledger for M0–M3
@@ -130,7 +130,7 @@ M3 shipped, but current catalog changes reopened its recipe integration evidence
 
 ### G3 exit checklist
 
-- [ ] Canonical recipe contract and all three emitters pass current build, drift, parity, and export checks (`CATALOG-003`).
+- [x] Canonical recipe contract and all three emitters pass current build, drift, parity, and export checks (`CATALOG-003`).
 - [x] Theme contract, generation, parity, contrast, and round-trip checks are implemented.
 - [x] CLI plan/inspect/add/create, verification, rollback, four package managers, and offline fixtures are implemented.
 - [x] Theme-builder foundation is route-local and implemented.
@@ -268,11 +268,11 @@ This is the G5 requirement applied during promotion:
 | [x]    | FOUND-001 | S    | —                    | Numbered component, block, and template bars incorporate D1–D6.                                  |
 | [x]    | FOUND-002 | L    | FOUND-001            | Registry v3, namespaced manifests, layer-aware discovery, docs metadata, and CLI schema support. |
 | [x]    | FOUND-003 | S    | FOUND-001            | Component/block/theme source resolution follows D1.                                              |
-| [~]    | FOUND-004 | M    | FOUND-002            | Exact queue-aware component gate enforcing every §8.2.1 clause (`CATALOG-001`).                  |
-| [~]    | FOUND-005 | S    | FOUND-002            | Block gate enforcing every §8.3.1 clause (`CATALOG-002`).                                        |
+| [x]    | FOUND-004 | M    | FOUND-002            | Exact queue-aware component gate enforcing every §8.2.1 clause (`CATALOG-001`).                  |
+| [x]    | FOUND-005 | S    | FOUND-002            | Block gate enforcing every §8.3.1 clause (`CATALOG-002`).                                        |
 | [x]    | FOUND-006 | S    | FOUND-002            | Bilingual catalog scaffolding with real translation hashes.                                      |
 | [x]    | FOUND-007 | M    | FOUND-002            | Bilingual route generators for all non-primitive layers.                                         |
-| [~]    | FOUND-008 | S    | FOUND-004, FOUND-005 | Trustworthy gate wiring after validator and integration recovery.                                |
+| [x]    | FOUND-008 | S    | FOUND-004, FOUND-005 | Trustworthy gate wiring after validator and integration recovery.                                |
 | [x]    | FOUND-009 | S    | FOUND-001            | Typeset/prose classified as utility stylesheets, not components.                                 |
 
 ### 9.1 Primitive queue — 52
@@ -368,7 +368,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 
 | Status | ID      | Template                                         | Portfolio             | Size | Depends on                |
 | ------ | ------- | ------------------------------------------------ | --------------------- | ---- | ------------------------- |
-| [ ]    | TPL-000 | Approve template architecture/portfolio manifest | Both                  | L    | CLI-008, BLOCK-000        |
+| [x]    | TPL-000 | Approve template architecture/portfolio manifest | Both                  | L    | CLI-008, BLOCK-000        |
 | [ ]    | TPL-001 | Authentication Starter                           | Balanced              | WP   | TPL-000, required BLOCK-* |
 | [ ]    | TPL-002 | Onboarding App                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
 | [ ]    | TPL-003 | SaaS Dashboard                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
@@ -414,9 +414,9 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 
 ### G4 exit checklist
 
-- [ ] `FOUND-001..009` complete; currently 6/9.
+- [x] `FOUND-001..009` complete; 9/9.
 - [x] `PRIM-001..052` complete: 52/52.
-- [ ] `COMP-001..030` complete: currently 0/30 verified.
+- [ ] `COMP-001..030` complete: currently 5/30 verified.
 - [ ] At least 36 named blocks complete: currently 0/36.
 - [ ] `TPL-001..029` complete and exposed as 32 placements: currently 0/29.
 - [ ] All template × package-manager smoke combinations pass.
@@ -503,9 +503,9 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | Status | ID          | Size | Owner                | Acceptance boundary                                                                                                                                               |
 | ------ | ----------- | ---- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [~]    | I18N-005    | L    | Content              | Clear current stale/missing catalog records; complete human review during G5 promotion.                                                                           |
-| [ ]    | CATALOG-001 | M    | QA/platform          | Reconcile exact `COMP-*` ID/name pairs, account for untracked slugs, and enforce all ten §8.2.1 clauses.                                                          |
-| [ ]    | CATALOG-002 | M    | QA/product           | Enforce block source, states, previews, index, install, docs, and routes per item; make manifest-only blocks fail.                                                |
-| [ ]    | CATALOG-003 | M    | Design systems/build | Restore all recipe builds, 34-scope contract, zero drift/parity/export issues, current registry, translation freshness, 382/382 tools tests, and 254/254 phase 1. |
+| [x]    | CATALOG-001 | M    | QA/platform          | Reconcile exact `COMP-*` ID/name pairs, account for untracked slugs, and enforce all ten §8.2.1 clauses.                                                          |
+| [x]    | CATALOG-002 | M    | QA/product           | Enforce block source, states, previews, index, install, docs, and routes per item; make manifest-only blocks fail.                                                |
+| [x]    | CATALOG-003 | M    | Design systems/build | Restore all recipe builds, 34-scope contract, zero drift/parity/export issues, current registry, translation freshness, 382/382 tools tests, and 255/255 phase 1. |
 | [ ]    | CI-008      | XS   | CI                   | Restore automatic triggers or document accepted dispatch ownership/cadence and regression handling.                                                               |
 | [ ]    | RECIPE-008  | XS   | Design systems       | Remove duplicate utility imports, port typeset/prose demos before legacy removal, and preserve utility exceptions in tests.                                       |
 | [ ]    | REG-008     | M    | Security/CLI         | Sign the published registry outside deterministic builds and replace symmetric index verification with asymmetric verification.                                   |
@@ -549,17 +549,18 @@ git status --short
 
 # Catalog and integration gates
 pnpm run primitive:catalog-gate   # 52/52
-pnpm run component:catalog-gate   # candidate classification then ratchet failure against DoD 0
-pnpm run block:catalog-gate       # 0/36 while dependencies are open; incomplete until CATALOG-002
-pnpm run recipe:contract          # currently rejects kbd and scroll-area
-pnpm run audit:recipe-drift       # currently 27 issues
-pnpm run audit:recipe-parity      # currently 2 issues
-pnpm run audit:package-source-parity # currently 27 missing stylesheet exports
+pnpm run component:catalog-gate   # 30/30 against §9.2 approved queue
+pnpm run block:catalog-gate       # 0/36 while component dependencies are open
+pnpm run template:catalog-gate    # 0/29 while block dependencies are open
+pnpm run recipe:contract          # 34/34 scopes pass
+pnpm run audit:recipe-drift       # 0 issues
+pnpm run audit:recipe-parity      # 0 issues
+pnpm run audit:package-source-parity # 0 issues
 pnpm --filter @solidiom/recipes-css build
 pnpm --filter @solidiom/recipes-tailwind build
 pnpm --filter @solidiom/recipes-unocss build
-pnpm run test:tools               # currently 378/382
-pnpm run gate:phase1              # currently 240/254
+pnpm run test:tools               # 382/382
+pnpm run gate:phase1              # 255/255
 pnpm --filter @solidiom/site run translation:check # currently 253 draft, 6 stale, 17 missing
 
 # Controls affected by broader work
