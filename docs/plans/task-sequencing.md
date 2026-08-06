@@ -12,7 +12,7 @@ date: 2026-08-06
 
 # Solidiom Catalog — Recovery and Delivery Sequencing
 
-**Status:** recovery first; component and block completion cannot advance until the catalog gates and aggregate integration checks are trustworthy.
+**Status:** block fan-out in progress; all 30 components verified, 25/36 blocks complete, 11 blocks remaining (SEARCH-02/03, COMMERCE ×3, CONTENT ×3, SHELL ×3).
 **Status/DoD/queue authority:** [`docs/plans/website-tasks.md`](./website-tasks.md)
 **Decision authority:** [`docs/architecture/decisions/catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)
 
@@ -20,16 +20,16 @@ date: 2026-08-06
 
 This document owns only execution order, dependency unlocks, pilots, the critical path, and sequencing risks. `website-tasks.md` owns every task state, approved queue, Definition of Done, defect boundary, and counter. If the documents disagree on status or scope, `website-tasks.md` wins.
 
-## 2. Current recovery order
+## 2. Completed recovery order
 
-Treat the next catalog cycle as recovery and verification, not greenfield fan-out:
+Recovery is complete. All four recovery prerequisites are closed:
 
-1. **`CATALOG-001`: repair component identity and clause enforcement.** The component gate must reconcile exact approved IDs and names before any component receives credit.
-2. **`CATALOG-002`: repair block enforcement.** The block gate must reject manifest-only blocks and verify implementation evidence.
-3. **`CATALOG-003`: restore aggregate integration.** Contract, build, parity, drift, package-export, translation, tool, and phase-gate failures must be repaired before the component ratchet advances.
-4. **`TPL-000` in parallel:** define the template architecture manifest, required-block graph, portfolio placement, and template validator. Its prerequisites are complete and it does not need to wait for catalog recovery.
+1. **`CATALOG-001`: component identity and clause enforcement.** Complete — exact `COMP-*` ID/name pairs reconciled, untracked slugs flagged, all ten §8.2.1 clauses enforced.
+2. **`CATALOG-002`: block enforcement.** Complete — block gate rejects manifest-only blocks, verifies source, states, previews, index, install, docs, and routes.
+3. **`CATALOG-003`: aggregate integration.** Complete — contract (34/34), builds, drift, parity, exports, tools tests (382/382), and phase 1 gate (255/255) are all green.
+4. **`TPL-000` in parallel:** Complete — template architecture manifest (29 templates, 32 placements), required-block graph, portfolio placement, and §8.4.1 validator are approved.
 
-`CATALOG-001`, `CATALOG-002`, and `CATALOG-003` may be developed in parallel, but all three are re-entry conditions for component/block completion. Keep validation changes separate from changes that merely adjust expected counts.
+Component verification (30/30) and block pilots are also complete. The current position is block fan-out for the remaining 11 blocks, followed by template implementation.
 
 ## 3. Decision pointers D1–D6
 
@@ -59,23 +59,21 @@ Derive prefixes by default and keep explicit compatibility exceptions. See [D5](
 
 Resolve block dependencies by ID and name across the JSON manifest, Markdown companion, and approved queue; correct recoverable identities rather than deferring them. See [D6](../architecture/decisions/catalog-decisions.md#d6--correct-component-citations-instead-of-deferring-them).
 
-## 4. Three-item component slice
+## 4. Three-item component slice (complete)
 
-Before accepting fan-out completion, re-verify this slice against the corrected gate and aggregate integration checks:
+The initial slice is verified and complete:
 
-| Order | Item              | Shape proved                   | Sequencing reason                                        |
-| ----: | ----------------- | ------------------------------ | -------------------------------------------------------- |
-|     1 | `COMP-001` Button | Variants and compound variants | Highest fanout and the established prefix exception      |
-|     2 | `COMP-002` Input  | Greenfield wrapper/source path | Proves profile-aware source resolution and unlocks Field |
-|     3 | `COMP-006` Dialog | Compound multi-slot overlay    | Exercises slot ownership and behavior boundaries         |
+| Order | Item              | Shape proved                   | Status    |
+| ----: | ----------------- | ------------------------------ | --------- |
+|     1 | `COMP-001` Button | Variants and compound variants | Complete  |
+|     2 | `COMP-002` Input  | Greenfield wrapper/source path | Complete  |
+|     3 | `COMP-006` Dialog | Compound multi-slot overlay    | Complete  |
 
-Do not start block implementation from component file presence. A dependency unlocks only when its component row closes under the corrected authority in `website-tasks.md`.
+All three proved the corrected gate and aggregate integration checks. The full component sequence (§6.2) was then completed in order through step 30.
 
-## 5. Component ordering principle
+## 5. Component ordering principle (complete)
 
-After the slice, prioritize components by corrected block fanout. Preserve prerequisites such as Input before Field. Keep zero-consumer components last so their product rationale is reviewed explicitly rather than inferred from accidental graph edges.
-
-Parallel repair streams may address: contract/build failures; cross-profile parity and package exports; queue/registry identity; and per-item evidence. Within each stream, prefer the §6.2 order.
+All 30 components are verified in the §6.2 order. The corrected block fanout ordering was followed: prerequisites (e.g. Input before Field) were respected, and zero-consumer components (Combobox, Sheet) were completed last.
 
 ## 6. Component sequence
 
@@ -135,55 +133,55 @@ Parallel repair streams may address: contract/build failures; cross-profile pari
 |                   24 |                         32 |
 |                   28 |                         36 |
 
-### 7.2 Pilot sequence
+### 7.2 Pilot sequence (complete)
 
-Start pilots only after `CATALOG-002` makes a manifest-only block fail and each pilot's component dependencies are complete.
+All three pilots are complete:
 
-| Pilot | Block                                 | Dependencies | Unlock step | Shape proved                                  |
-| ----: | ------------------------------------- | -----------: | ----------: | --------------------------------------------- |
-|     1 | `BLOCK-AUTH-01` Sign In               |            5 |           8 | Form validation, error, and restricted states |
-|     2 | `BLOCK-BILLING-03` Invoice History    |            8 |          15 | Data display, empty, and loading states       |
-|     3 | `BLOCK-SHELL-03` Notifications Center |           12 |          17 | Application shell and embedded preview        |
+| Pilot | Block                                 | Dependencies | Unlock step | Shape proved                                  | Status   |
+| ----: | ------------------------------------- | -----------: | ----------: | --------------------------------------------- | -------- |
+|     1 | `BLOCK-AUTH-01` Sign In               |            5 |           8 | Form validation, error, and restricted states | Complete |
+|     2 | `BLOCK-BILLING-03` Invoice History    |            8 |          15 | Data display, empty, and loading states       | Complete |
+|     3 | `BLOCK-SHELL-03` Notifications Center |           12 |          17 | Application shell and embedded preview        | Complete |
 
-After the pilots, fan out the remaining blocks by category, keeping each category's three items together where practical. Keep the highest-dependency blocks last; Toolbar keeps Content Editor at component step 28. Re-estimate work after the pilots rather than applying historical greenfield estimates.
+Block fan-out proceeded after pilots. Currently 25/36 blocks are complete. The remaining 11 blocks (SEARCH-02/03, COMMERCE ×3, CONTENT ×3, SHELL ×3) should continue by category, keeping each category's three items together where practical.
 
 ## 8. Template dependency and order
 
-`TPL-000` starts now in parallel. It must create the machine-readable template-to-block dependency graph before template implementation order can be computed.
+`TPL-000` is complete. The machine-readable template-to-block dependency graph is approved. Two reference templates (`vite-solid-router`, `tanstack-start-solid`) exist under `templates/` as real workspace projects but are not approved `TPL-*` catalog rows.
 
-After that manifest is approved:
+Template implementation order:
 
-1. rank templates by required-block availability and portfolio reuse;
-2. prove one template for each supported stack before broad fan-out;
-3. run the package-manager matrix for each template rather than batching it at the end;
-4. implement shared portfolio concepts once and expose the approved placements;
-5. re-estimate after the first three catalog templates.
-
-The existing CLI materializer reference templates are not substitutes for approved `TPL-*` entries.
+1. Complete the remaining 11 blocks to satisfy all `requiredBlocks` entries.
+2. Rank templates by required-block availability and portfolio reuse.
+3. Prove one template for each supported stack (SolidStart/TanStack Start Solid/Vite + Solid Router) before broad fan-out.
+4. Run the package-manager matrix for each template rather than batching it at the end.
+5. Implement shared portfolio concepts once and expose the approved placements.
+6. Re-estimate after the first three catalog templates.
 
 ## 9. Critical path
 
 ```text
-TPL-000 (parallel) ───────────────────────────────────────────────┐
+TPL-000 (complete) ───────────────────────────────────────────────┐
                                                                  │
-CATALOG-001/002/003 ──> three-item slice ──> component order ──> block pilots ──> block fan-out
+CATALOG-001/002/003 (complete) ──> components 30/30 (complete) ──> block fan-out (25/36 done)
                                                                  │
                                      template manifest + complete blocks ──> template fan-out
 ```
 
-The catalog critical path is trustworthy enforcement → verified component dependencies → representative block pilots → block completion → dependency-derived templates. Theme preset and builder completion can proceed beside the path but cannot satisfy catalog item counts.
+The catalog critical path is now: **remaining 11 blocks** (SEARCH-02/03, COMMERCE ×3, CONTENT ×3, SHELL ×3) → **template fan-out** (0/29). Theme preset and builder completion can proceed beside the path but cannot satisfy catalog item counts.
 
 ## 10. Sequencing risks
 
-| ID  | Risk                                                     | Sequencing response                                                       |
-| --- | -------------------------------------------------------- | ------------------------------------------------------------------------- |
-| R1  | Gates count artifacts rather than approved identities.   | Finish `CATALOG-001/002` before advancing ratchets.                       |
-| R2  | Generated output matches a broken emitter.               | Require contract, build, drift, parity, export, and item checks together. |
-| R3  | Blocks begin against incomplete components.              | Unlock only from authoritative component status.                          |
-| R4  | Valid-looking IDs name the wrong component.              | Preserve D6 three-way name agreement.                                     |
-| R5  | Template order is guessed before dependencies exist.     | Require `TPL-000` to emit the block graph and fanout table.               |
-| R6  | Parallel repairs overwrite generated artifacts.          | Isolate streams and inspect targeted diffs after validation.              |
-| R7  | Translation scaffolds are mistaken for reviewed content. | Keep freshness repair and human review distinct.                          |
-| R8  | Zero-consumer components disappear from scope silently.  | Keep them last and require an explicit product rationale.                 |
-| R9  | Dispatch-only workflows delay regression detection.      | Require local evidence or an explicit dispatch before status changes.     |
-| R10 | Historical effort estimates drive false forecasts.       | Re-estimate from the slice, pilots, and first templates.                  |
+| ID  | Risk                                                     | Sequencing response                                                       | Status          |
+| --- | -------------------------------------------------------- | ------------------------------------------------------------------------- | --------------- |
+| R1  | Gates count artifacts rather than approved identities.   | Finish `CATALOG-001/002` before advancing ratchets.                       | Resolved        |
+| R2  | Generated output matches a broken emitter.               | Require contract, build, drift, parity, export, and item checks together. | Mitigated       |
+| R3  | Blocks begin against incomplete components.              | Unlock only from authoritative component status.                          | Resolved (30/30)|
+| R4  | Valid-looking IDs name the wrong component.              | Preserve D6 three-way name agreement.                                     | Mitigated       |
+| R5  | Template order is guessed before dependencies exist.     | Require `TPL-000` to emit the block graph and fanout table.               | Resolved        |
+| R6  | Parallel repairs overwrite generated artifacts.          | Isolate streams and inspect targeted diffs after validation.              | Active          |
+| R7  | Translation scaffolds are mistaken for reviewed content. | Keep freshness repair and human review distinct.                          | Active          |
+| R8  | Zero-consumer components disappear from scope silently.  | Keep them last and require an explicit product rationale.                  | Resolved        |
+| R9  | Dispatch-only workflows delay regression detection.      | Require local evidence or an explicit dispatch before status changes.     | Active          |
+| R10 | Historical effort estimates drive false forecasts.       | Re-estimate from the slice, pilots, and first templates.                  | Active          |
+| R11 | Remaining blocks lack registry entries despite docs.     | Require source + registry + previews per §8.3.1, not just docs.           | Active (11 blocks) |

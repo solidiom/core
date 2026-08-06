@@ -17,20 +17,22 @@ Read this page first. It summarizes the current website/catalog position and poi
 
 - M0–M2 are complete.
 - M3 integration is **recovered**: recipe contract (34/34), builds, drift, parity, exports, tools tests (382/382), and phase 1 gate (255/255) are all green.
-- M4 is in progress: primitives are 52/52; components are **5/30 verified** (`[x]`: Button, Input, Card, Dialog, Spinner) with 30 concepts landed; blocks are 0/36; templates are 0/29.
+- M4 is in progress: primitives are 52/52; components are **30/30 verified**; blocks are **25/36 complete** (AUTH ×3, ONBOARD ×3, SETTINGS ×3, BILLING ×3, ADMIN ×3, OBS ×3, RESOURCE ×3, AI ×3, SEARCH-01); templates are 0/29.
 - M5 has only incidental progress: `MKT-005` and `BUILDER-008` are complete.
 - `TPL-000` is complete: template manifest (29 templates, 32 placements), dependency graph, and §8.4.1 validator are approved and wired into the phase 1 gate.
+- Two reference templates (`vite-solid-router`, `tanstack-start-solid`) exist but are not approved `TPL-*` catalog rows.
 - Workflows are dispatch-only, so local or explicitly dispatched evidence is required.
 - Historical green evidence must not be treated as evidence for the current tree.
 
 ## Immediate priorities
 
-1. **Component fan-out (§6.2 order):** complete COMP-005 Alert, COMP-007 Select, COMP-003 Field (which unlocks BLOCK-AUTH-01 pilot), then continue through the fanout table.
-2. **Block pilots:** once component step 8 is reached, begin `BLOCK-AUTH-01` (Sign In), then `BLOCK-BILLING-03` and `BLOCK-SHELL-03` per §7.2.
+1. **Block fan-out (remaining 11):** complete SEARCH-02/03, COMMERCE ×3, CONTENT ×3, and SHELL ×3 — each requires source implementation, registry entries, previews, and bilingual docs per §8.3.1.
+2. **Template implementation:** once all 36 blocks are complete, begin `TPL-001` through `TPL-029` per the dependency-derived order from `TPL-000`'s manifest.
 3. **`CATALOG-001` untracked slugs:** formally reject or add `accordion`, `badge`, and `menu` registry entries that have no COMP-* row.
-4. **Translation freshness (`I18N-005`):** clear 6 stale and 17 missing catalog translation records.
+4. **Translation freshness (`I18N-005`):** clear stale and missing catalog translation records.
+5. **Theme preset registry (`PRESET-006`):** complete preview evidence and registry/catalog integration for all four presets.
 
-Recovery tasks `CATALOG-001`, `CATALOG-002`, `CATALOG-003`, `TPL-000`, and `FOUND-008` are complete. The critical path is now component verification → block pilots → block fan-out → template fan-out.
+Recovery tasks `CATALOG-001`, `CATALOG-002`, `CATALOG-003`, `TPL-000`, and `FOUND-008` are complete. Component verification is complete (30/30). The critical path is now block fan-out → template implementation → G4 exit.
 
 ## Authority map
 

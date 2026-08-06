@@ -1,0 +1,20 @@
+{
+  "name": "settings-portal",
+  "stack": "vite-solid-router",
+  "description": "Settings portal with account management, notification preferences, and danger zone operations.",
+  "variables": ["projectName"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SETTINGS-01", "BLOCK-SETTINGS-02", "BLOCK-SETTINGS-03"],
+  "deploymentTarget": "static",
+  "authModel": "email-password",
+  "portfolioTags": ["balanced-product"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config."
+    }
+  ],
+  "notes": [
+    "`{{projectName}}` is the only substitution token used in this template's source files."
+  ]
+}

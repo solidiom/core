@@ -1,0 +1,20 @@
+{
+  "name": "observability-console",
+  "version": "0.0.1-next.0",
+  "label": "Observability Console",
+  "description": "Observability console with dashboards, real-time events, and alert configuration.",
+  "status": "preview",
+  "templateId": "TPL-008",
+  "stack": "vite-solid-router",
+  "portfolioTags": ["balanced-product", "enterprise"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-OBS-03"],
+  "integrity": {
+    "algorithm": "sha256",
+    "manifestHash": "tpl-008-observability-console-manifest",
+    "lastGenerated": "2026-08-06T22:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "name": "content-editor",
+  "version": "0.0.1-next.0",
+  "label": "Content Editor",
+  "description": "User creates and edits rich content with a WYSIWYG or markdown editor, formatting toolbar, and preview. Implements loading, empty, error, and restricted states.",
+  "category": "CONTENT",
+  "status": "preview",
+  "blockId": "BLOCK-CONTENT-01",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/input",
+    "@solidiom/field",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/select",
+    "@solidiom/dropdown-menu",
+    "@solidiom/tabs",
+    "@solidiom/toast",
+    "@solidiom/switch",
+    "@solidiom/popover",
+    "@solidiom/spinner",
+    "@solidiom/toolbar"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/content-editor/source/content-editor.tsx",
+      "packages/blocks/content-editor/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/content-editor/source/content-editor.tsx": "5e239df2b2b3842d7e039db125273c38eccef29a27a7eb454a26c84efea0833c",
+      "packages/blocks/content-editor/source/index.ts": "1d9e7f3f65d8c26c4abe00c9039c1d393d97279fea3467fd319d0ad7babace70"
+    },
+    "lastGenerated": "2026-08-06T21:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "content",
+    "editor",
+    "wysiwyg",
+    "markdown",
+    "contenido",
+    "editor"
+  ]
+}

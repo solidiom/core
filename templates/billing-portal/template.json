@@ -1,0 +1,20 @@
+{
+  "name": "billing-portal",
+  "stack": "vite-solid-router",
+  "description": "Billing portal with subscription plans, payment methods, and invoice history.",
+  "variables": ["projectName"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-BILLING-01", "BLOCK-BILLING-02", "BLOCK-BILLING-03"],
+  "deploymentTarget": "static",
+  "authModel": "email-password",
+  "portfolioTags": ["balanced-product"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config."
+    }
+  ],
+  "notes": [
+    "`{{projectName}}` is the only substitution token used in this template's source files."
+  ]
+}

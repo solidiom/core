@@ -1,0 +1,61 @@
+{
+  "name": "command-palette-shell",
+  "version": "0.0.1-next.0",
+  "label": "Command Palette",
+  "description": "User accesses a global keyboard-driven command menu for quick navigation, search, and action execution. Implements loading, empty, error, and restricted states.",
+  "category": "SHELL",
+  "status": "preview",
+  "blockId": "BLOCK-SHELL-02",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/input",
+    "@solidiom/card",
+    "@solidiom/select",
+    "@solidiom/dropdown-menu",
+    "@solidiom/command-palette",
+    "@solidiom/data-table",
+    "@solidiom/kbd",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/command-palette-shell/source/command-palette-shell.tsx",
+      "packages/blocks/command-palette-shell/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/command-palette-shell/source/command-palette-shell.tsx": "691d1cc741e2ec52a1273f65dda586ccb73e4839d81921e4439454458082275b",
+      "packages/blocks/command-palette-shell/source/index.ts": "804ae4b7bcbb828f7810d6056a5fa52e7151ddb6adabcc76ef70b88b99e49aaf"
+    },
+    "lastGenerated": "2026-08-06T21:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "command",
+    "palette",
+    "keyboard",
+    "shortcut",
+    "comandos",
+    "paleta"
+  ]
+}

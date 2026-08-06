@@ -1,0 +1,37 @@
+{
+  "name": "@solidiom/template-settings-portal",
+  "version": "0.0.1-next.0",
+  "private": true,
+  "type": "module",
+  "description": "Solidiom starter template: Settings portal with account, notifications, and danger zone. Materialized by `solidiom create`.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@solidiom/button": "workspace:*",
+    "@solidiom/input": "workspace:*",
+    "@solidiom/field": "workspace:*",
+    "@solidiom/card": "workspace:*",
+    "@solidiom/alert": "workspace:*",
+    "@solidiom/switch": "workspace:*",
+    "@solidiom/dialog": "workspace:*",
+    "@solidiom/tabs": "workspace:*",
+    "@solidiom/recipes-tailwind": "workspace:*",
+    "@solidjs/router": "0.17.0-next.5",
+    "@solidjs/web": "catalog:",
+    "solid-js": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.7.0",
+    "vite": "^8.1.5",
+    "vite-plugin-solid": "3.0.0-next.14"
+  },
+  "nx": {
+    "tags": ["layer:template"]
+  }
+}

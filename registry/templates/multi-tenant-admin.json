@@ -1,0 +1,20 @@
+{
+  "name": "multi-tenant-admin",
+  "version": "0.0.1-next.0",
+  "label": "Multi-tenant Admin",
+  "description": "Multi-tenant administration panel with team management, role permissions, and audit logging.",
+  "status": "preview",
+  "templateId": "TPL-004",
+  "stack": "vite-solid-router",
+  "portfolioTags": ["balanced-product", "enterprise"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-ADMIN-01", "BLOCK-ADMIN-02", "BLOCK-ADMIN-03"],
+  "integrity": {
+    "algorithm": "sha256",
+    "manifestHash": "tpl-004-multi-tenant-admin-manifest",
+    "lastGenerated": "2026-08-06T22:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
+  }
+}

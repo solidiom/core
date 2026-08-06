@@ -1,0 +1,67 @@
+{
+  "name": "content-library",
+  "version": "0.0.1-next.0",
+  "label": "Content Library",
+  "description": "User manages a library of content assets including documents, images, and files with search, folders, and metadata. Implements loading, empty, error, and restricted states.",
+  "category": "CONTENT",
+  "status": "preview",
+  "blockId": "BLOCK-CONTENT-02",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/input",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/dialog",
+    "@solidiom/select",
+    "@solidiom/dropdown-menu",
+    "@solidiom/avatar",
+    "@solidiom/checkbox",
+    "@solidiom/popover",
+    "@solidiom/pagination",
+    "@solidiom/data-table",
+    "@solidiom/progress",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/content-library/source/content-library.tsx",
+      "packages/blocks/content-library/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/content-library/source/content-library.tsx": "3e680698357aba8fd2809696188cb575e8bdab762512b448a08bb146285f6950",
+      "packages/blocks/content-library/source/index.ts": "d698ae4219cb0b1a0a71af4678cfee4818820e5b124103b59ea39fe8e0a6e477"
+    },
+    "lastGenerated": "2026-08-06T21:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "content",
+    "library",
+    "assets",
+    "documents",
+    "biblioteca",
+    "contenido"
+  ]
+}

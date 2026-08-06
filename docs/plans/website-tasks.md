@@ -7,12 +7,12 @@ tags: [website, tasks, backlog, milestones, catalog]
 lifecycle: active
 authority: canonical status, definition-of-done, defects, queues, and counters
 volatility: high
-date: 2026-08-02
+date: 2026-08-06
 ---
 
 # Solidiom Website — Canonical Task Authority
 
-**Status:** in execution — M0–M2 complete; M3 integration recovered; M4 primitives complete, 5/30 components verified, blocks and templates pending; M5 in progress incidentally.
+**Status:** in execution — M0–M2 complete; M3 integration recovered; M4 primitives complete, 30/30 components verified, 36/36 blocks complete, 9/29 templates implemented; M5 in progress incidentally.
 **Current tree evidence:** `gate:phase1` is green at 255/255; `test:tools` 382/382; recipe contract 34/34; drift/parity/exports all zero issues.
 **Target application:** `apps/site/`
 **Canonical origin:** `https://solidiom.org`
@@ -22,9 +22,9 @@ date: 2026-08-02
 **Durable decisions:** [`catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)
 **History:** [`website-m0-m3.md`](../history/plans/website-m0-m3.md) and [`catalog-foundations-2026-08.md`](../history/plans/catalog-foundations-2026-08.md)
 
-Current position: all 52 primitives meet the M4 bar. Five components are verified `[x]` (Button, Input, Card, Dialog, Spinner); 25 remain `[~]`. Untracked registry entries for `accordion`, `badge`, and `menu` are flagged by the corrected gate but not counted. Thirty-six block manifests/docs exist but no block source or previews are indexed; 0/36 meet the block DoD. Template manifest is approved (29 unique / 32 placements) with a working validator; 0/29 templates are implemented. Workflows are dispatch-only.
+Current position: all 52 primitives meet the M4 bar. All 30 components are verified `[x]`. All 36 blocks are complete `[x]`. Nine templates are implemented `[x]` (TPL-001 through TPL-009); 20 remain `[ ]` (TPL-010 through TPL-029). Two reference templates (`vite-solid-router`, `tanstack-start-solid`) exist but are not approved catalog rows. Untracked registry entries for `accordion`, `badge`, and `menu` are flagged by the corrected gate but not counted. Workflows are dispatch-only.
 
-Recovery tasks `CATALOG-001`, `CATALOG-002`, `CATALOG-003`, `TPL-000`, and `FOUND-008` are complete. The critical path is now component verification → block pilots → block/template fan-out.
+Recovery tasks `CATALOG-001`, `CATALOG-002`, `CATALOG-003`, `TPL-000`, and `FOUND-008` are complete. All 30 components and all 36 blocks are verified. Nine templates are implemented. The critical path is now template fan-out (20 remaining) → G4 exit.
 
 ---
 
@@ -74,7 +74,7 @@ Every completed implementation task must:
 | M1 Foundation/alpha       | Complete with policy blocker | Site foundation closed G1; `CI-001` remains blocked by the dispatch-only policy.          |
 | M2 Content vertical slice | Complete                     | Registry/content/API/a11y/docs/search and three complex slices closed G2.                 |
 | M3 Public beta            | Recovered                    | Integration evidence restored: contract, builds, drift, parity, exports, tools all green.     |
-| M4 Catalog                | In progress                  | Primitives 52/52; components 5/30; blocks 0/36; templates 0/29.                               |
+| M4 Catalog                | In progress                  | Primitives 52/52; components 30/30; blocks 36/36; templates 9/29.                               |
 | M5 GA/cutover             | In progress incidentally     | `MKT-005` and `BUILDER-008` are complete; the remaining GA programme is open.             |
 
 ### 2.1 Compact completion ledger for M0–M3
@@ -346,21 +346,21 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | [x]    | BLOCK-RESOURCE-01 | Resource management 1                  | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-RESOURCE-02 | Resource management 2                  | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-RESOURCE-03 | Resource management 3                  | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-AI-01       | AI interfaces 1                        | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-AI-02       | AI interfaces 2                        | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-AI-03       | AI interfaces 3                        | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-SEARCH-01   | Search 1                               | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-SEARCH-02   | Search 2                               | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-SEARCH-03   | Search 3                               | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-COMMERCE-01 | Commerce 1                             | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-COMMERCE-02 | Commerce 2                             | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-COMMERCE-03 | Commerce 3                             | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-CONTENT-01  | Content 1                              | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-CONTENT-02  | Content 2                              | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-CONTENT-03  | Content 3                              | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-SHELL-01    | Application shell 1                    | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-SHELL-02    | Application shell 2                    | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-SHELL-03    | Application shell 3                    | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-AI-01       | AI interfaces 1                        | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-AI-02       | AI interfaces 2                        | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-AI-03       | AI interfaces 3                        | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-SEARCH-01   | Search 1                               | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-SEARCH-02   | Search 2                               | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-SEARCH-03   | Search 3                               | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-COMMERCE-01 | Commerce 1                             | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-COMMERCE-02 | Commerce 2                             | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-COMMERCE-03 | Commerce 3                             | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-CONTENT-01  | Content 1                              | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-CONTENT-02  | Content 2                              | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-CONTENT-03  | Content 3                              | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-SHELL-01    | Application shell 1                    | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-SHELL-02    | Application shell 2                    | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-SHELL-03    | Application shell 3                    | WP   | BLOCK-000, required COMP-*     |
 
 ### 9.4 Template queue — 29 unique / 32 placements
 
@@ -369,15 +369,15 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | Status | ID      | Template                                         | Portfolio             | Size | Depends on                |
 | ------ | ------- | ------------------------------------------------ | --------------------- | ---- | ------------------------- |
 | [x]    | TPL-000 | Approve template architecture/portfolio manifest | Both                  | L    | CLI-008, BLOCK-000        |
-| [ ]    | TPL-001 | Authentication Starter                           | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-002 | Onboarding App                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-003 | SaaS Dashboard                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-004 | Multi-tenant Admin                               | Balanced + Enterprise | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-005 | Settings Portal                                  | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-006 | Billing Portal                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-007 | Resource Manager                                 | Balanced + Enterprise | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-008 | Observability Console                            | Balanced + Enterprise | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-009 | AI Chat                                          | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-001 | Authentication Starter                           | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-002 | Onboarding App                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-003 | SaaS Dashboard                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-004 | Multi-tenant Admin                               | Balanced + Enterprise | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-005 | Settings Portal                                  | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-006 | Billing Portal                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-007 | Resource Manager                                 | Balanced + Enterprise | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-008 | Observability Console                            | Balanced + Enterprise | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-009 | AI Chat                                          | Balanced              | WP   | TPL-000, required BLOCK-* |
 | [ ]    | TPL-010 | AI Workflow                                      | Balanced              | WP   | TPL-000, required BLOCK-* |
 | [ ]    | TPL-011 | Search Application                               | Balanced              | WP   | TPL-000, required BLOCK-* |
 | [ ]    | TPL-012 | Storefront                                       | Balanced              | WP   | TPL-000, required BLOCK-* |
@@ -416,9 +416,9 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 
 - [x] `FOUND-001..009` complete; 9/9.
 - [x] `PRIM-001..052` complete: 52/52.
-- [ ] `COMP-001..030` complete: currently 5/30 verified.
-- [ ] At least 36 named blocks complete: currently 0/36.
-- [ ] `TPL-001..029` complete and exposed as 32 placements: currently 0/29.
+- [x] `COMP-001..030` complete: 30/30 verified.
+- [x] At least 36 named blocks complete: 36/36.
+- [ ] `TPL-001..029` complete and exposed as 32 placements: currently 9/29.
 - [ ] All template × package-manager smoke combinations pass.
 - [ ] Four presets and the full builder satisfy registry, preview, locale, accessibility, browser, and output gates.
 - [ ] No stale translation, unsigned manifest, placeholder, or maturity exception remains.
@@ -518,16 +518,17 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | ----------------------------- | -------: | --: | -----: |
 | Primitives                    |       52 |  52 |     52 |
 | Components                    |       30 |  30 |     30 |
-| Blocks                        |     ≥ 36 |  15 |     15 |
-| Unique templates              |       29 |   0 |      0 |
+| Blocks                        |     ≥ 36 |  36 |     36 |
+| Unique templates              |       29 |   9 |      9 |
 | Template portfolio placements |       32 |   0 |      0 |
 | Theme presets                 |        4 |   0 |      4 |
 | Foundational articles         |        5 |   0 |      0 |
 | Locales                       |        2 |   2 |      2 |
 
 - Primitives remain 52/52 at the M4 bar; G5 promotion is separate.
-- Component Landed 30 excludes unapproved `accordion` and `badge`; DoD remains 0 until exact gate reconciliation and aggregate recovery.
-- Block docs/manifests are scaffolding, not landed catalog deliverables without source, previews, and index membership.
+- All 30 components meet the M4 bar (§8.2.1); DoD 30/30. `accordion`, `badge`, and `menu` remain unapproved registry slugs.
+- All 36 blocks meet the M4 bar with source, registry, bilingual docs, and all four required states implemented.
+- Nine templates (TPL-001 through TPL-009) are implemented with template dir, template.json, source, registry, and bilingual docs.
 - Theme preset outputs/docs/routes exist, but DoD remains 0 until `PRESET-006` closes.
 - Locale count means two implemented locale systems, not complete per-item human review.
 
@@ -550,8 +551,8 @@ git status --short
 # Catalog and integration gates
 pnpm run primitive:catalog-gate   # 52/52
 pnpm run component:catalog-gate   # 30/30 against §9.2 approved queue
-pnpm run block:catalog-gate       # 0/36 while component dependencies are open
-pnpm run template:catalog-gate    # 0/29 while block dependencies are open
+pnpm run block:catalog-gate       # 36/36
+pnpm run template:catalog-gate    # 9/29 — 20 templates remain (TPL-010..TPL-029)
 pnpm run recipe:contract          # 34/34 scopes pass
 pnpm run audit:recipe-drift       # 0 issues
 pnpm run audit:recipe-parity      # 0 issues

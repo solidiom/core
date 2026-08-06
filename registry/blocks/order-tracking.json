@@ -1,0 +1,64 @@
+{
+  "name": "order-tracking",
+  "version": "0.0.1-next.0",
+  "label": "Order Tracking",
+  "description": "User views order status, tracking information, delivery timeline, and order history. Implements loading, empty, error, and restricted states.",
+  "category": "COMMERCE",
+  "status": "preview",
+  "blockId": "BLOCK-COMMERCE-03",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/input",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/tabs",
+    "@solidiom/tooltip",
+    "@solidiom/breadcrumb",
+    "@solidiom/pagination",
+    "@solidiom/data-table",
+    "@solidiom/progress",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/order-tracking/source/order-tracking.tsx",
+      "packages/blocks/order-tracking/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/order-tracking/source/order-tracking.tsx": "c9da154865136c5df13d7a884bd8e1b02affcdf9acfce761e94dc21e21306116",
+      "packages/blocks/order-tracking/source/index.ts": "e46663f1a239424fbfb9da05a27498234a31775f0e13184c3871c9d23f6e7e15"
+    },
+    "lastGenerated": "2026-08-06T21:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "order",
+    "tracking",
+    "delivery",
+    "status",
+    "pedido",
+    "seguimiento"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "auth-starter",
+  "stack": "vite-solid-router",
+  "description": "Authentication starter with sign-in, sign-up, and password reset flows built on Solidiom blocks.",
+  "variables": ["projectName"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AUTH-02", "BLOCK-AUTH-03"],
+  "deploymentTarget": "static",
+  "authModel": "email-password",
+  "portfolioTags": ["balanced-product"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config."
+    }
+  ],
+  "notes": [
+    "`{{projectName}}` is the only substitution token used in this template's source files."
+  ]
+}
