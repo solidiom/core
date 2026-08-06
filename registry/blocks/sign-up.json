@@ -1,0 +1,25 @@
+{
+  "name": "sign-up",
+  "version": "0.0.1-next.0",
+  "label": "Sign Up",
+  "description": "Registration form with email verification and OAuth support. Implements loading, empty, error, and restricted states.",
+  "category": "AUTH",
+  "status": "preview",
+  "blockId": "BLOCK-AUTH-02",
+  "deliverables": ["block"],
+  "componentDependencies": ["@solidiom/button", "@solidiom/input", "@solidiom/field", "@solidiom/alert", "@solidiom/toast", "@solidiom/spinner"],
+  "requiredStates": ["loading", "empty", "error", "restricted"],
+  "source": {
+    "files": ["packages/blocks/sign-up/source/sign-up.tsx", "packages/blocks/sign-up/source/index.ts"]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/sign-up/source/sign-up.tsx": "755ebf33171e44e571d593fe92a78faad49a9e99a7a6af261090aa274f76f249",
+      "packages/blocks/sign-up/source/index.ts": "d29aca9a4e99cb0973f50c2f0e09eb6764ccbf9eee8554324040a6bc735f7586"
+    },
+    "lastGenerated": "2026-08-06T11:00:00.000Z"
+  },
+  "documentation": { "status": "complete", "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } } },
+  "searchKeywords": ["sign-up", "register", "registration", "auth", "crear cuenta", "registro"]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "project-starter",
+  "version": "0.0.1-next.0",
+  "label": "Project Starter",
+  "description": "Guided project creation wizard with template selection. Implements loading, empty, error, and restricted states.",
+  "category": "ONBOARD",
+  "status": "preview",
+  "blockId": "BLOCK-ONBOARD-03",
+  "deliverables": ["block"],
+  "componentDependencies": ["@solidiom/button", "@solidiom/input", "@solidiom/field", "@solidiom/card", "@solidiom/alert", "@solidiom/select", "@solidiom/pagination", "@solidiom/spinner"],
+  "requiredStates": ["loading", "empty", "error", "restricted"],
+  "source": {
+    "files": ["packages/blocks/project-starter/source/project-starter.tsx", "packages/blocks/project-starter/source/index.ts"]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/project-starter/source/project-starter.tsx": "daf5bef51c11ed2f4e9aea2ecef47dd21f90516794f0f7cd3666d4ae2f6348a6",
+      "packages/blocks/project-starter/source/index.ts": "5618a0aac8e94354801cfbed48f8a6134dc4b2c607297b113f9937371861f6b9"
+    },
+    "lastGenerated": "2026-08-06T11:00:00.000Z"
+  },
+  "documentation": { "status": "complete", "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } } },
+  "searchKeywords": ["project-starter", "onboarding", "wizard", "crear proyecto", "inicio"]
+}

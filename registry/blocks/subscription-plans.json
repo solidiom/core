@@ -1,0 +1,25 @@
+{
+  "name": "subscription-plans",
+  "version": "0.0.1-next.0",
+  "label": "Subscription Plans",
+  "description": "Plan comparison and selection with upgrade/downgrade flow. Implements loading, empty, error, and restricted states.",
+  "category": "BILLING",
+  "status": "preview",
+  "blockId": "BLOCK-BILLING-01",
+  "deliverables": ["block"],
+  "componentDependencies": ["@solidiom/button", "@solidiom/card", "@solidiom/alert", "@solidiom/dialog", "@solidiom/tabs", "@solidiom/toast", "@solidiom/checkbox", "@solidiom/spinner"],
+  "requiredStates": ["loading", "empty", "error", "restricted"],
+  "source": {
+    "files": ["packages/blocks/subscription-plans/source/subscription-plans.tsx", "packages/blocks/subscription-plans/source/index.ts"]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/subscription-plans/source/subscription-plans.tsx": "9adac430aaaa686aad4b2c5d186966dea7c30af75f3602eb2cf418c50032813f",
+      "packages/blocks/subscription-plans/source/index.ts": "03107274fdeabf3d786ae73258ebbef386ea6b69d04b0594f8ca572505e16b8c"
+    },
+    "lastGenerated": "2026-08-06T11:00:00.000Z"
+  },
+  "documentation": { "status": "complete", "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } } },
+  "searchKeywords": ["subscription", "plans", "billing", "pricing", "suscripción", "planes"]
+}
