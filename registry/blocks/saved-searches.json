@@ -1,0 +1,65 @@
+{
+  "name": "saved-searches",
+  "version": "0.0.1-next.0",
+  "label": "Saved Searches",
+  "description": "User saves frequent search queries, sets up alert notifications for new matches, and manages saved search collections. Implements loading, empty, error, and restricted states.",
+  "category": "SEARCH",
+  "status": "preview",
+  "blockId": "BLOCK-SEARCH-02",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/input",
+    "@solidiom/field",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/dialog",
+    "@solidiom/dropdown-menu",
+    "@solidiom/toast",
+    "@solidiom/checkbox",
+    "@solidiom/switch",
+    "@solidiom/data-table",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/saved-searches/source/saved-searches.tsx",
+      "packages/blocks/saved-searches/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/saved-searches/source/saved-searches.tsx": "e290a933973ed5ee219cb162d39bd2c5001ec5db9b79104888652d3510f6bceb",
+      "packages/blocks/saved-searches/source/index.ts": "67fb935b2e3f1fa87330b246506225b4d62ece8b7e530b31b2b93b0fca227c90"
+    },
+    "lastGenerated": "2026-08-06T21:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "saved",
+    "searches",
+    "query",
+    "alerts",
+    "busquedas",
+    "guardadas"
+  ]
+}

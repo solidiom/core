@@ -1,0 +1,20 @@
+{
+  "name": "ai-chat",
+  "version": "0.0.1-next.0",
+  "label": "AI Chat",
+  "description": "AI chat application with conversational interface, prompt studio, and workflow builder.",
+  "status": "preview",
+  "templateId": "TPL-009",
+  "stack": "vite-solid-router",
+  "portfolioTags": ["balanced-product"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-AI-01", "BLOCK-AI-02", "BLOCK-AI-03"],
+  "integrity": {
+    "algorithm": "sha256",
+    "manifestHash": "tpl-009-ai-chat-manifest",
+    "lastGenerated": "2026-08-06T22:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
+  }
+}

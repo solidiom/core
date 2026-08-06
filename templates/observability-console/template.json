@@ -1,0 +1,20 @@
+{
+  "name": "observability-console",
+  "stack": "vite-solid-router",
+  "description": "Observability console with dashboards, real-time events, and alert configuration.",
+  "variables": ["projectName"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-OBS-03"],
+  "deploymentTarget": "static",
+  "authModel": "email-password",
+  "portfolioTags": ["balanced-product", "enterprise"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config."
+    }
+  ],
+  "notes": [
+    "`{{projectName}}` is the only substitution token used in this template's source files."
+  ]
+}

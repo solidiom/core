@@ -1,0 +1,20 @@
+{
+  "name": "saas-dashboard",
+  "stack": "vite-solid-router",
+  "description": "SaaS dashboard with navigation, observability metrics, resource management, and notifications.",
+  "variables": ["projectName"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-SHELL-03", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-RESOURCE-01"],
+  "deploymentTarget": "static",
+  "authModel": "email-password",
+  "portfolioTags": ["balanced-product"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config."
+    }
+  ],
+  "notes": [
+    "`{{projectName}}` is the only substitution token used in this template's source files."
+  ]
+}

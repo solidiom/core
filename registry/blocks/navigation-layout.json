@@ -1,0 +1,64 @@
+{
+  "name": "navigation-layout",
+  "version": "0.0.1-next.0",
+  "label": "Navigation Layout",
+  "description": "User navigates the application via a responsive sidebar with collapsible menu sections, breadcrumbs, and current-route highlighting. Implements loading, empty, error, and restricted states.",
+  "category": "SHELL",
+  "status": "preview",
+  "blockId": "BLOCK-SHELL-01",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/alert",
+    "@solidiom/dropdown-menu",
+    "@solidiom/tabs",
+    "@solidiom/avatar",
+    "@solidiom/checkbox",
+    "@solidiom/popover",
+    "@solidiom/navigation-menu",
+    "@solidiom/breadcrumb",
+    "@solidiom/resizable-panels",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/navigation-layout/source/navigation-layout.tsx",
+      "packages/blocks/navigation-layout/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/navigation-layout/source/navigation-layout.tsx": "f04e9fa03a92dd6cbac6b13f569716248c6947efb0608d4eaa6157b1309c1696",
+      "packages/blocks/navigation-layout/source/index.ts": "b512d8235ec7036237affa590fb101686e1870a571869bf8b4acb7c602ade395"
+    },
+    "lastGenerated": "2026-08-06T21:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "navigation",
+    "layout",
+    "sidebar",
+    "menu",
+    "navegacion",
+    "diseno"
+  ]
+}

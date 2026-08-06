@@ -1,0 +1,20 @@
+{
+  "name": "resource-manager",
+  "version": "0.0.1-next.0",
+  "label": "Resource Manager",
+  "description": "Resource management application with list, detail, and creation views for generic domain resources.",
+  "status": "preview",
+  "templateId": "TPL-007",
+  "stack": "vite-solid-router",
+  "portfolioTags": ["balanced-product", "enterprise"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-RESOURCE-03"],
+  "integrity": {
+    "algorithm": "sha256",
+    "manifestHash": "tpl-007-resource-manager-manifest",
+    "lastGenerated": "2026-08-06T22:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
+  }
+}

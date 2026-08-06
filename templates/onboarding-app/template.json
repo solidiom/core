@@ -1,0 +1,20 @@
+{
+  "name": "onboarding-app",
+  "stack": "vite-solid-router",
+  "description": "Onboarding application with multi-step wizards, profile setup, and guided project creation.",
+  "variables": ["projectName"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ONBOARD-01", "BLOCK-ONBOARD-02", "BLOCK-ONBOARD-03"],
+  "deploymentTarget": "static",
+  "authModel": "email-password",
+  "portfolioTags": ["balanced-product"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config."
+    }
+  ],
+  "notes": [
+    "`{{projectName}}` is the only substitution token used in this template's source files."
+  ]
+}
