@@ -10,18 +10,11 @@
  * Auto-cleans up when the reactive owner disposes.
  * No-op when called during SSR (no `ResizeObserver` global).
  */
-export declare function observeElementSize(
-  element: () => Element | undefined,
-  callback: (entry: ResizeObserverEntry) => void,
-): () => void
+export declare function observeElementSize(element: () => Element | undefined, callback: (entry: ResizeObserverEntry) => void): () => void;
 /**
  * Observes DOM mutations on an element via MutationObserver.
  * Auto-cleans up when the reactive owner disposes.
  * No-op when called during SSR (no `MutationObserver` global).
  */
-export declare function observeElementMutations(
-  element: () => Element | undefined,
-  callback: (mutations: MutationRecord[]) => void,
-  options?: MutationObserverInit,
-): () => void
+export declare function observeElementMutations(element: () => Element | undefined, callback: (mutations: MutationRecord[]) => void, options?: MutationObserverInit): () => void;
 //# sourceMappingURL=observe-element.d.ts.map

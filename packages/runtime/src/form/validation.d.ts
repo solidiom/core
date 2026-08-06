@@ -7,31 +7,31 @@
  */
 /** A validation message with severity. */
 export interface ValidationMessage {
-  /** The validation message text. */
-  message: string
-  /** Severity level. "error" blocks submission; "warning" is advisory. */
-  severity: "error" | "warning"
+    /** The validation message text. */
+    message: string;
+    /** Severity level. "error" blocks submission; "warning" is advisory. */
+    severity: "error" | "warning";
 }
 /** Options for creating a validation state. */
 export interface ValidationOptions {
-  /** The native input element to synchronize validity with. */
-  element?: () => HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | undefined
+    /** The native input element to synchronize validity with. */
+    element?: () => HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | undefined;
 }
 /** Validation state for a form control. */
 export interface ValidationState {
-  /** Current validation messages. */
-  messages: () => ValidationMessage[]
-  /** Whether the field has any error-level messages. */
-  invalid: () => boolean
-  /** Set custom validation messages (replaces previous). */
-  setMessages: (messages: ValidationMessage[]) => void
-  /** Clear all validation messages. */
-  clear: () => void
-  /** Sync the first error message to the native element's custom validity. */
-  syncToNative: () => void
+    /** Current validation messages. */
+    messages: () => ValidationMessage[];
+    /** Whether the field has any error-level messages. */
+    invalid: () => boolean;
+    /** Set custom validation messages (replaces previous). */
+    setMessages: (messages: ValidationMessage[]) => void;
+    /** Clear all validation messages. */
+    clear: () => void;
+    /** Sync the first error message to the native element's custom validity. */
+    syncToNative: () => void;
 }
 /**
  * Creates a validation state that can coordinate with native constraint validation.
  */
-export declare function createValidation(options?: ValidationOptions): ValidationState
+export declare function createValidation(options?: ValidationOptions): ValidationState;
 //# sourceMappingURL=validation.d.ts.map

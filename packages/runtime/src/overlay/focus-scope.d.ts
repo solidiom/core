@@ -6,12 +6,12 @@
  */
 /** Options for creating a focus scope. */
 export interface FocusScopeOptions {
-  /** The container element to trap focus within. */
-  element: () => Element | undefined
-  /** Whether focus trapping is active. */
-  enabled?: boolean
-  /** Element to restore focus to on deactivation. */
-  restoreTarget?: () => Element | null | undefined
+    /** The container element to trap focus within. */
+    element: () => Element | undefined;
+    /** Whether focus trapping is active. */
+    enabled?: boolean;
+    /** Element to restore focus to on deactivation. */
+    restoreTarget?: () => Element | null | undefined;
 }
 /**
  * Activates a focus scope that traps Tab/Shift+Tab within the container.
@@ -24,5 +24,5 @@ export interface FocusScopeOptions {
  * - Removes the Tab trap listener.
  * - Restores focus to the recorded element (or restoreTarget if provided).
  */
-export declare function activateFocusScope(options: FocusScopeOptions): () => void
+export declare function activateFocusScope(options: FocusScopeOptions): () => void;
 //# sourceMappingURL=focus-scope.d.ts.map

@@ -12,12 +12,12 @@
  * `false` if no owner is available (e.g. called outside a reactive context).
  * In the false case, the caller is responsible for manual cleanup.
  */
-export declare function onOwnerCleanup(cleanup: () => void): boolean
+export declare function onOwnerCleanup(cleanup: () => void): boolean;
 /**
  * Creates a disposable resource tied to the current owner.
  *
  * Calls `setup()` immediately and registers `teardown()` on the owner.
  * If no owner exists, still calls setup but returns a manual dispose function.
  */
-export declare function createDisposable(setup: () => void, teardown: () => void): () => void
+export declare function createDisposable(setup: () => void, teardown: () => void): () => void;
 //# sourceMappingURL=owner-cleanup.d.ts.map

@@ -7,14 +7,11 @@
  */
 /** Describes the cause and context of a state change request. */
 export interface ChangeDetails<Reason extends string = string> {
-  /** Why the transition was requested. */
-  reason: Reason
-  /** The originating DOM event, if any. */
-  originalEvent?: Event
+    /** Why the transition was requested. */
+    reason: Reason;
+    /** The originating DOM event, if any. */
+    originalEvent?: Event;
 }
 /** Creates a change-details object. */
-export declare function createChangeDetails<Reason extends string>(
-  reason: Reason,
-  originalEvent?: Event,
-): ChangeDetails<Reason>
+export declare function createChangeDetails<Reason extends string>(reason: Reason, originalEvent?: Event): ChangeDetails<Reason>;
 //# sourceMappingURL=change-details.d.ts.map
