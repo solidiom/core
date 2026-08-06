@@ -1,0 +1,64 @@
+{
+  "name": "role-permissions",
+  "version": "0.0.1-next.0",
+  "label": "Role Permissions",
+  "description": "Role-based permission matrix with assignment and audit. Implements loading, empty, error, and restricted states.",
+  "category": "ADMIN",
+  "status": "preview",
+  "blockId": "BLOCK-ADMIN-03",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "@solidiom/button",
+    "@solidiom/field",
+    "@solidiom/card",
+    "@solidiom/alert",
+    "@solidiom/dialog",
+    "@solidiom/tabs",
+    "@solidiom/checkbox",
+    "@solidiom/switch",
+    "@solidiom/pagination",
+    "@solidiom/data-table",
+    "@solidiom/spinner"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "source": {
+    "files": [
+      "packages/blocks/role-permissions/source/role-permissions.tsx",
+      "packages/blocks/role-permissions/source/index.ts"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "packages/blocks/role-permissions/source/role-permissions.tsx": "f6b28b1bd9849eb045aa868e39a443fd27615525b1525a818c6fad0b4a428750",
+      "packages/blocks/role-permissions/source/index.ts": "18e21950cf7e700e2582947cfcaf1ce7e6dbb98779be4737c7f3c8cfa3e6541c"
+    },
+    "lastGenerated": "2026-08-06T13:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "searchKeywords": [
+    "role",
+    "permissions",
+    "rbac",
+    "admin",
+    "permisos",
+    "roles"
+  ]
+}

@@ -300,21 +300,21 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | [x]    | COMP-013 | Checkbox         | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-011            |
 | [x]    | COMP-014 | Radio Group      | New                    | M    | RECIPE-005, PRIM-034            |
 | [x]    | COMP-015 | Switch           | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-043            |
-| [~]    | COMP-016 | Combobox         | New                    | L    | RECIPE-005, PRIM-013            |
+| [x]    | COMP-016 | Combobox         | New                    | L    | RECIPE-005, PRIM-013            |
 | [x]    | COMP-017 | Popover          | CSS + Tailwind recipe  | M    | RECIPE-005, PRIM-032            |
-| [~]    | COMP-018 | Sheet            | New                    | L    | RECIPE-005, PRIM-039            |
-| [~]    | COMP-019 | Navigation Menu  | New                    | L    | RECIPE-005, PRIM-030            |
+| [x]    | COMP-018 | Sheet            | New                    | L    | RECIPE-005, PRIM-039            |
+| [x]    | COMP-019 | Navigation Menu  | New                    | L    | RECIPE-005, PRIM-030            |
 | [x]    | COMP-020 | Breadcrumb       | New                    | M    | RECIPE-005, PRIM-006            |
 | [x]    | COMP-021 | Pagination       | New                    | M    | RECIPE-005, PRIM-031            |
-| [~]    | COMP-022 | Command Palette  | New                    | L    | RECIPE-005, PRIM-014            |
+| [x]    | COMP-022 | Command Palette  | New                    | L    | RECIPE-005, PRIM-014            |
 | [x]    | COMP-023 | Data Table       | New                    | L    | RECIPE-005, PRIM-016            |
-| [~]    | COMP-024 | Kbd              | New                    | S    | RECIPE-005, PRIM-025            |
+| [x]    | COMP-024 | Kbd              | New                    | S    | RECIPE-005, PRIM-025            |
 | [x]    | COMP-025 | Meter            | New                    | M    | RECIPE-005, PRIM-029            |
 | [x]    | COMP-026 | Progress         | New                    | M    | RECIPE-005, PRIM-033            |
-| [~]    | COMP-027 | Resizable Panels | New                    | L    | RECIPE-005, PRIM-035            |
-| [~]    | COMP-028 | Scroll Area      | New                    | M    | RECIPE-005, PRIM-036            |
+| [x]    | COMP-027 | Resizable Panels | New                    | L    | RECIPE-005, PRIM-035            |
+| [x]    | COMP-028 | Scroll Area      | New                    | M    | RECIPE-005, PRIM-036            |
 | [x]    | COMP-029 | Spinner          | New                    | M    | RECIPE-005, PRIM-042            |
-| [~]    | COMP-030 | Toolbar          | New                    | L    | RECIPE-005, PRIM-048            |
+| [x]    | COMP-030 | Toolbar          | New                    | L    | RECIPE-005, PRIM-048            |
 
 `COMP-016` Combobox and `COMP-018` Sheet have no block consumers. They remain approved and last in the sequence pending explicit pilot-informed rationale. Check names, not old numbers, when reading revisions predating `BLOCK-000B`.
 
@@ -332,14 +332,14 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | [x]    | BLOCK-ONBOARD-02  | Onboarding 2                           | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-ONBOARD-03  | Onboarding 3                           | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-SETTINGS-01 | Settings 1                             | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-SETTINGS-02 | Settings 2                             | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-SETTINGS-02 | Settings 2                             | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-SETTINGS-03 | Settings 3                             | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-BILLING-01  | Billing 1                              | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-BILLING-02  | Billing 2                              | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-BILLING-03  | Billing 3                              | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-ADMIN-01    | Administration 1                       | WP   | BLOCK-000, required COMP-*     |
 | [x]    | BLOCK-ADMIN-02    | Administration 2                       | WP   | BLOCK-000, required COMP-*     |
-| [~]    | BLOCK-ADMIN-03    | Administration 3                       | WP   | BLOCK-000, required COMP-*     |
+| [x]    | BLOCK-ADMIN-03    | Administration 3                       | WP   | BLOCK-000, required COMP-*     |
 | [~]    | BLOCK-OBS-01      | Observability 1                        | WP   | BLOCK-000, required COMP-*     |
 | [~]    | BLOCK-OBS-02      | Observability 2                        | WP   | BLOCK-000, required COMP-*     |
 | [~]    | BLOCK-OBS-03      | Observability 3                        | WP   | BLOCK-000, required COMP-*     |
@@ -518,7 +518,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | ----------------------------- | -------: | --: | -----: |
 | Primitives                    |       52 |  52 |     52 |
 | Components                    |       30 |  30 |     30 |
-| Blocks                        |     ≥ 36 |  13 |     13 |
+| Blocks                        |     ≥ 36 |  15 |     15 |
 | Unique templates              |       29 |   0 |      0 |
 | Template portfolio placements |       32 |   0 |      0 |
 | Theme presets                 |        4 |   0 |      4 |
