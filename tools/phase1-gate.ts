@@ -548,7 +548,7 @@ check(
 //
 // FOUND-004 asserts component count against §11 scope counters (component:catalog-gate).
 // FOUND-005 asserts block count and dependency resolution by name (block:catalog-gate).
-// Per website-tasks.md §3.1, cited by title, not number.
+// Per website-tasks.md §3, cited by title, not number.
 console.log("\nCatalog gates (FOUND-004/005):")
 check(
   "component catalog gate passes (FOUND-004)",

@@ -59,6 +59,11 @@ interface BlockManifest {
   proposedComponents: string[]
 }
 
+interface ComponentQueueEntry {
+  name: string
+  status: " " | "~" | "x" | "!"
+}
+
 interface BlockResult {
   id: string
   name: string
@@ -104,24 +109,26 @@ function parseManifestMDComponentNames(): Map<string, string> {
 }
 
 // ─── Parse §9.2 component queue from website-tasks.md ──────────────────────
-// Table rows: "| [ ]    | COMP-001 | Button | ..."
-// Returns a map of COMP-NNN -> componentName.
+// Table rows: "| [~]    | COMP-001 | Button | ..."
+// Status may be not started, in progress, complete, or blocked.
+// Returns a map of COMP-NNN -> component name and task status.
 
-function parseSection92Components(): Map<string, string> {
+function parseSection92Components(): Map<string, ComponentQueueEntry> {
   const content = readFileSync(TRACKER_PATH, "utf8")
-  const map = new Map<string, string>()
+  const map = new Map<string, ComponentQueueEntry>()
 
   // Extract the §9.2 section — from heading to the next ### 9.3
   const sectionMatch = content.match(/### 9\.2 Component queue[\s\S]*?(?=### 9\.3|$)/)
   if (!sectionMatch) return map
 
   const section = sectionMatch[0]
-  const compRegex = /\|\s*\[[ x]\]\s*\|\s*COMP-(\d{3})\s*\|\s*([^|]+)\|/g
+  const compRegex = /\|\s*\[([ x~!])\]\s*\|\s*COMP-(\d{3})\s*\|\s*([^|]+)\|/g
   let m
   while ((m = compRegex.exec(section)) !== null) {
-    const id = `COMP-${m[1]}`
-    const name = m[2].trim()
-    map.set(id, name)
+    const status = m[1] as ComponentQueueEntry["status"]
+    const id = `COMP-${m[2]}`
+    const name = m[3].trim()
+    map.set(id, { name, status })
   }
   return map
 }
@@ -186,7 +193,7 @@ function checkStates(block: BlockManifest): string[] {
 function verifyBlock(
   block: BlockManifest,
   mdComponentNames: Map<string, string>,
-  s92Components: Map<string, string>,
+  s92Components: Map<string, ComponentQueueEntry>,
 ): BlockResult {
   const failures: string[] = []
 
@@ -198,11 +205,13 @@ function verifyBlock(
   // §8.3.1 req 2: Dependencies resolve by name
   for (const compId of block.componentDependencies) {
     // Check the ID resolves to an approved component in §9.2
-    const s92Name = s92Components.get(compId)
-    if (!s92Name) {
+    const component = s92Components.get(compId)
+    if (!component) {
       failures.push(`${compId} does not resolve to an approved component in §9.2`)
       continue
     }
+
+    const s92Name = component.name
 
     // Check the .md names the same component for this ID
     const mdName = mdComponentNames.get(compId)
@@ -217,6 +226,11 @@ function verifyBlock(
       failures.push(
         `${compId}: block-catalog-manifest.md says "${mdName}" but §9.2 says "${s92Name}"`,
       )
+    }
+
+    // A block dependency is complete only when its approved component row is complete.
+    if (component.status !== "x") {
+      failures.push(`${compId} (${s92Name}) is not complete in §9.2`)
     }
   }
 

@@ -4,7 +4,7 @@
  *
  * Fails when a normalized API artifact for a vertical-slice primitive
  * (Dialog, Combobox, Data Table — the three primitives G2's vertical slice
- * requires to be complete per docs/plans/website-tasks.md §6.5) contains an
+ * requires to be complete per docs/plans/website-tasks.md §2.1 (VS-004) contains an
  * "unresolved" export (its type could not be normalized to anything more
  * specific than "unknown") or an "undocumented" export (no `comment.summary`
  * — every public export needs at least a one-line description).

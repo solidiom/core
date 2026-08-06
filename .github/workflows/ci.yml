@@ -751,7 +751,7 @@ jobs:
   # tools/phase3-gate.ts gates the *library's* beta release (Solid 2 beta
   # compatibility, compile-time transforms, prerelease metadata) — it is NOT the
   # website's G3 milestone gate, despite the numeric coincidence. See
-  # docs/plans/website-tasks.md §3.1 for the two numbering schemes.
+  # docs/plans/website-tasks.md §3 for the two numbering schemes.
   #
   # Blocking since A11Y-007: all §1 artifacts (AT template, AT results directory,
   # axe-scan-results, keyboard-audit-results) and §4 cross-browser results are

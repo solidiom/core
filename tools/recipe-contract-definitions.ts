@@ -1019,7 +1019,7 @@ export const typesetRecipe: RecipeDefinition = {
  * Prose — rich-text wrapper that styles descendant elements (RECIPE-007).
  *
  * A single "root" slot with a size axis. The CSS uses descendant element selectors
- * (which the recipe contract audit permits per docs/plans/typeset-plan.md).
+ * (per docs/architecture/decisions/typeset.md).
  */
 export const proseRecipe: RecipeDefinition = {
   contractVersion: CONTRACT_VERSION,
