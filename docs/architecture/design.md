@@ -3070,7 +3070,7 @@ External references retained from v0.3 include:
 
 ---
 
-> **Purpose:** For Solidiom project leads and implementers, records the tooling and process decisions made during creation of the implementation plan (`solidiom-implementation-plan.md`) and clarifies how each decision satisfies the normative design in §§1–26.
+> **Purpose:** For Solidiom project leads and implementers, records the tooling and process decisions made during creation of [`docs/plans/implementation-plan.md`](../plans/implementation-plan.md) and clarifies how each decision satisfies the normative design in §§1–26.
 
 # 27. Implementation-time decisions
 
@@ -3168,15 +3168,13 @@ Companion file: `docs/plans/implementation-plan.md` breaks these decisions into 
 
 **Rejected:** two real adapters per capability (speculative complexity for virtualization/table/carousel/date-math without user demand), deterministic doubles only (does not satisfy the spirit of §23 #70 for positioning specifically).
 
-## 27.12 Documentation site
+## 27.12 Documentation site — superseded decision
 
-**Decision:** SolidStart + `@mdx-js/solid` + a custom Diátaxis-aware sidebar/routing convention. Playground routes embedded inside `apps/docs` (no separate `apps/playground`).
+**Historical decision:** The original plan selected SolidStart + `@mdx-js/solid` with playground routes inside `apps/docs`.
 
-**Rationale:** SolidStart runs primitives against real Solid 2 in the real supported beta matrix — a documented behavior in the docs site is a live test, not a demo. §17.4 compile-time roadmap deliverables (0.7.x lint, 1.1 recipe extraction, 1.2 variant expansion) validate themselves against `apps/docs` continuously because it lives in the same Nx workspace with the same Vite config as the primitives. §13.15 track-based onboarding requires package-mode and source-mode side-by-side in the same site — trivial in SolidStart, awkward across Astro islands.
+**Superseded on 2026-08-06:** [`docs/architecture/website.md`](website.md) now makes `apps/site` the canonical static Astro application with isolated Solid islands. Documentation and marketing remain static by default; playground and theme-builder functionality is route-local. `apps/docs` is a legacy migration source and must not receive new authoritative docs or demos.
 
-**Rejected:** Astro + Solid islands + Starlight (hydration boundary shape breaks nested overlays and SSR-hydrated Dialog Portals), VitePress (Vue substrate is wrong signal for a Solid-native project), React-based docs (contradicts §3.1 spirit).
-
-**Known cost:** SolidStart on the `next` channel will occasionally break with Solid 2 betas. This is a feature — the docs site running against the same beta matrix as the primitives is early-warning for Solid ecosystem drift. Budget one platform-team afternoon per beta bump.
+The original rationale—testing primitives in a real Solid application and keeping onboarding beside executable examples—still applies, but it is satisfied through route-local Solid islands, generated evidence, and browser suites rather than by making the whole documentation site a SolidStart application. Removal of `apps/docs` remains gated on verified parity.
 
 ## 27.13 Benchmark harness
 
@@ -3199,25 +3197,25 @@ These are pushback-able but recorded for reference. Any of them can be revisited
 | Release cadence       | Changesets-per-PR; `next` channel on `main` merge; `latest` on tagged release | Matches §19.3 `next` channel model and §19 per-package versioning                         |
 | SBOM format           | CycloneDX 1.5 JSON                                                            | Enterprise scanner incumbent; §13.14 requirement satisfied                                |
 | Legacy sunset default | Deprecated 2 minors + removed in next major, unless facade metadata overrides | Bounded but not aggressive; can be tightened by policy per §19.2                          |
-| Playground scope      | Interactive routes inside `apps/docs`; no separate `apps/playground`          | Reduces one app to maintain; every playground is a live test                              |
+| Playground scope      | Route-local tools in `apps/site`; no separate `apps/playground`               | Preserves static content while testing interactive Solid islands                          |
 
 ## 27.15 Traceability
 
 The implementation-plan tasks reference these decisions:
 
-| Decision               | Primary tasks                                                              |
-| ---------------------- | -------------------------------------------------------------------------- |
-| §27.1 Monorepo         | Task 1                                                                     |
-| §27.2 Build tools      | Task 2                                                                     |
-| §27.3 Testing          | Task 3                                                                     |
-| §27.4 CLI              | Task 19                                                                    |
-| §27.5 Registry         | Task 20                                                                    |
-| §27.6 AST              | Tasks 21, 25, 26, 28, 41                                                   |
-| §27.7 Three-way merge  | Task 25                                                                    |
-| §27.8 Signatures       | Tasks 43, 44, 45                                                           |
-| §27.9 Solid 2 matrix   | Tasks 4, 60                                                                |
-| §27.10 Recipes         | Tasks 36, 37, 48                                                           |
-| §27.11 Test doubles    | Tasks 10, 14, 18                                                           |
-| §27.12 Docs            | Task 13 (docs playground first-use), continuous thereafter                 |
-| §27.13 Benchmarks      | Tasks 11, 17, 56                                                           |
-| §27.14 Policy defaults | Various; called out in `solidiom-implementation-plan.md` §Locked decisions |
+| Decision               | Primary tasks                                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| §27.1 Monorepo         | Task 1                                                                                                       |
+| §27.2 Build tools      | Task 2                                                                                                       |
+| §27.3 Testing          | Task 3                                                                                                       |
+| §27.4 CLI              | Task 19                                                                                                      |
+| §27.5 Registry         | Task 20                                                                                                      |
+| §27.6 AST              | Tasks 21, 25, 26, 28, 41                                                                                     |
+| §27.7 Three-way merge  | Task 25                                                                                                      |
+| §27.8 Signatures       | Tasks 43, 44, 45                                                                                             |
+| §27.9 Solid 2 matrix   | Tasks 4, 60                                                                                                  |
+| §27.10 Recipes         | Tasks 36, 37, 48                                                                                             |
+| §27.11 Test doubles    | Tasks 10, 14, 18                                                                                             |
+| §27.12 Docs            | Task 13 (docs playground first-use), continuous thereafter                                                   |
+| §27.13 Benchmarks      | Tasks 11, 17, 56                                                                                             |
+| §27.14 Policy defaults | Various; governed by [`docs/plans/implementation-plan.md`](../plans/implementation-plan.md) locked decisions |

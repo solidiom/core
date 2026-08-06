@@ -294,5 +294,5 @@ We use `[data-scope="prose"]` rather than the industry-conventional `.prose` bec
 
 - `docs/contracts/recipe-contract.md` — the canonical contract: schema, vocabulary, token model, exception model, capability matrix, validation rules
 - `docs/architecture/solid2-migration-notes.md` — Solid 2 API rules for TSX wrappers, including headless `data-state` propagation
-- `docs/plans/website-tasks.md` §7.1 — the RECIPE task line and its acceptance boundaries
-- `docs/plans/typeset-plan.md` — composite-recipe precedent
+- `docs/plans/website-tasks.md` §11.1 — the active RECIPE defect lines and acceptance boundaries
+- `docs/architecture/decisions/typeset.md` — typeset/prose utility-scope precedent

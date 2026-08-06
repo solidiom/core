@@ -1,9 +1,8 @@
 /**
  * Footer link config for SiteFooter.
  *
- * Community is GitHub-only by explicit product decision (see
- * docs/plans/website-plan.md: "Community | GitHub Issues and Discussions only. Do
- * not advertise Discord or other unmaintained channels."). Legal links have
+ * Community is GitHub-only by explicit product decision in
+ * docs/architecture/website.md §6.2. Legal links have
  * no real destination yet: GOV-001 (licensing/brand boundaries), GOV-005
  * (privacy disclosures), and QA-010 (legal/policy review) have not landed,
  * so this list is intentionally empty today rather than pointing at

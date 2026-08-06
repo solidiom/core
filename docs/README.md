@@ -1,86 +1,78 @@
+---
+id: documentation-index
+title: "Solidiom Documentation"
+doc_type: index
+audience: "Solidiom contributors and maintainers"
+tags: [documentation, navigation, lifecycle]
+lifecycle: current
+authority: documentation navigation and conventions
+volatility: medium
+---
+
 # Solidiom Documentation
 
 Internal documentation for Solidiom contributors and maintainers.
 
+## Read first
+
+- **Current plans and priorities:** [`docs/plans/README.md`](plans/README.md)
+- **Website/catalog status and DoD:** [`docs/plans/website-tasks.md`](plans/website-tasks.md)
+- **Catalog delivery order:** [`docs/plans/task-sequencing.md`](plans/task-sequencing.md)
+- **Library/release roadmap:** [`docs/plans/implementation-plan.md`](plans/implementation-plan.md)
+- **Website architecture:** [`docs/architecture/website.md`](architecture/website.md)
+- **Core library architecture:** [`docs/architecture/design.md`](architecture/design.md)
+
 ## Directory structure
 
-| Directory       | Purpose                       | Contents                                                                                  |
-| --------------- | ----------------------------- | ----------------------------------------------------------------------------------------- |
-| `architecture/` | How the system works          | Design documents, Solid 2 migration notes, runtime patterns                               |
-| `contracts/`    | Binding rules and policies    | Recipe contract, authoring guide, translation policy, analytics schema                    |
-| `plans/`        | What we are building and when | Implementation plan, website plan, website tasks, primitives plan, CLI plan, typeset plan |
-| `guides/`       | How to do X                   | Adding a primitive, offline install, deployment                                           |
-| `evidence/`     | What we proved (generated)    | Axe scans, keyboard audits, browser results, build reports                                |
-| `templates/`    | Fill-in-the-blank records     | AT verification template                                                                  |
-| `assets/`       | Non-markdown support files    | Brand screenshot, baseline JSON                                                           |
+| Directory        | Purpose                                              |
+| ---------------- | ---------------------------------------------------- |
+| `architecture/`  | Stable system design and accepted decisions          |
+| `contracts/`     | Binding schemas, rules, and policies                 |
+| `plans/`         | Active status, priorities, and sequencing            |
+| `history/plans/` | Non-authoritative evidence moved out of active plans |
+| `guides/`        | Task-oriented contributor instructions               |
+| `evidence/`      | Generated or recorded verification evidence          |
+| `templates/`     | Fill-in-the-blank records                            |
+| `assets/`        | Images and other documentation support files         |
+
+## Plan authority
+
+| Question                                          | Authority                                          |
+| ------------------------------------------------- | -------------------------------------------------- |
+| What is happening now?                            | `docs/plans/README.md`                             |
+| Which website/catalog tasks are open or complete? | `docs/plans/website-tasks.md`                      |
+| What must catalog items satisfy?                  | `docs/plans/website-tasks.md` §8                   |
+| In what order should catalog work run?            | `docs/plans/task-sequencing.md`                    |
+| What is the active library release roadmap?       | `docs/plans/implementation-plan.md`                |
+| Why were catalog decisions D1–D6 made?            | `docs/architecture/decisions/catalog-decisions.md` |
+| Why are typeset/prose recipe utilities?           | `docs/architecture/decisions/typeset.md`           |
+| What happened during completed phases?            | `docs/history/plans/`                              |
+
+`docs/plans/website-plan.md` and `docs/plans/typeset-plan.md` are compatibility stubs, not active authorities.
 
 ## Lifecycle
 
-Every document carries a `lifecycle` field in its YAML frontmatter.
+Every authored Markdown document carries a `lifecycle` field in YAML frontmatter.
 
-| Value      | Meaning                                     | Action                                             |
-| ---------- | ------------------------------------------- | -------------------------------------------------- |
-| `current`  | Accurate and applicable                     | Use as-is                                          |
-| `active`   | Living document, updated as work progresses | Check for recent changes before relying on details |
-| `stale`    | Content is outdated                         | Regenerate or update before citing                 |
-| `archived` | Task complete or superseded                 | Delete from tree; lives in git history only        |
+| Value        | Meaning                                | Use                                                         |
+| ------------ | -------------------------------------- | ----------------------------------------------------------- |
+| `current`    | Stable and applicable                  | Use as the current design or reference                      |
+| `active`     | Changes as work progresses             | Check recent status before relying on details               |
+| `superseded` | Replaced by a named authority          | Follow `superseded_by`; retain only as a compatibility stub |
+| `stale`      | Known to be outdated                   | Do not cite until repaired                                  |
+| `archived`   | Historical, non-authoritative evidence | Use for context only; never infer current status            |
 
-When a document becomes stale or archived, delete it and let git history serve as the archive. Do not create an `archive/` directory.
+Completed implementation detail may live under `docs/history/plans/` when removing it from an active plan materially improves retrieval. Every history document must identify the active authority and must not duplicate live counters or status claims.
 
 ## Conventions
 
-- **Group by reader intent**, not by document type or audience.
-- **No nesting beyond two levels**: `docs/<category>/<file>` is the deepest normal case.
-- **Generated reports** go in `evidence/`. Authors never edit them by hand. Tools that produce them write directly to `docs/evidence/`.
-- **Non-markdown files** (images, JSON baselines) go in `assets/`.
-- **Frontmatter is mandatory** on every `.md` file: `id`, `title`, `doc_type`, `audience`, `tags`, `lifecycle`.
-- **Cross-references** use repo-root-relative paths: `` `docs/contracts/recipe-contract.md` ``.
-
-## Current inventory
-
-```
-docs/
-├── README.md
-├── architecture/
-│   ├── design.md                      (current)
-│   ├── exit-animations.md             (current)
-│   └── solid2-migration-notes.md      (current)
-├── contracts/
-│   ├── posthog-event-schema.md        (current)
-│   ├── recipe-authoring-guide.md      (current)
-│   ├── recipe-contract.md             (current)
-│   └── translation-policy.md          (current)
-├── plans/
-│   ├── cli-002-010-plan.md            (active)
-│   ├── implementation-plan.md         (active)
-│   ├── primitives.md                  (active)
-│   ├── typeset-plan.md                (current)
-│   ├── website-plan.md                (active)
-│   └── website-tasks.md               (active)
-├── guides/
-│   ├── adding-a-primitive.md          (current)
-│   ├── deployment.md                  (current)
-│   └── offline-install.md             (current)
-├── evidence/
-│   ├── adapter-styling-audit.md       (current)
-│   ├── at-audit-results/
-│   │   └── index.md
-│   ├── axe-scan-results.md            (current)
-│   ├── compile-time-results.md        (current)
-│   ├── cross-browser-results.md       (current)
-│   ├── dependency-audit.md            (current)
-│   ├── infrastructure-audit.md        (current)
-│   ├── keyboard-audit-results.md      (current)
-│   ├── manual-evidence-matrix.md      (current)
-│   ├── no-transform-build-results.md  (current)
-│   ├── recipe-contract-audit.md       (current)
-│   ├── security-audit.md              (current)
-│   ├── ssr-hydration-test-results.md  (current)
-│   └── visual-regression-results.md   (current)
-├── templates/
-│   └── at-verification-template.md    (current)
-└── assets/
-    ├── brand-README.md
-    ├── primitives-baseline.json
-    └── solidiom-site.png
-```
+- Group by reader intent, not by document type alone.
+- Keep normal authored paths at `docs/<category>/<file>`; `docs/history/plans/<file>` and `docs/architecture/decisions/<file>` are the approved deeper namespaces.
+- Put volatile status, counters, queues, and expected command results in one authoritative active plan only.
+- Put durable rationale in architecture or decision records, not task trackers.
+- Keep compatibility stubs short and point them to the replacement authority.
+- Generated reports belong in `docs/evidence/` and are not hand-edited.
+- Non-Markdown support files belong in `docs/assets/` unless a binding contract requires another location.
+- Frontmatter is mandatory for authored Markdown: `id`, `title`, `doc_type`, `audience`, `tags`, and `lifecycle`.
+- Prefer repository-root-relative paths in prose when naming canonical files.
+- Run formatting and link/reference checks after moving a document.

@@ -9,7 +9,7 @@
  *
  * Usage: pnpm exec tsx tools/vertical-slice-gate.ts
  *
- * See: docs/plans/website-tasks.md §6.5 (VS-004)
+ * See: docs/plans/website-tasks.md §2.1 (VS-004)
  */
 
 import { existsSync, readFileSync, readdirSync } from "node:fs"
