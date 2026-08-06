@@ -30,7 +30,7 @@
         "src/recipes/progress.tsx": "a5e72b817d16244e49b869bacd6d0f55fe0a99129d8752a35646857ddb8b3105"
       }
     },
-    "lastGenerated": "2026-08-05T12:38:19.000Z"
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/progress"
   ],
-  "lastUpdated": "2026-08-05T12:38:19.000Z"
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
 }

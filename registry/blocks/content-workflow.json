@@ -1,0 +1,52 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "Content Workflow",
+  "id": "BLOCK-CONTENT-03",
+  "category": "CONTENT",
+  "version": "0.0.1-next.0",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "COMP-001",
+    "COMP-002",
+    "COMP-003",
+    "COMP-004",
+    "COMP-005",
+    "COMP-006",
+    "COMP-007",
+    "COMP-008",
+    "COMP-009",
+    "COMP-010",
+    "COMP-012",
+    "COMP-013",
+    "COMP-017",
+    "COMP-020",
+    "COMP-021",
+    "COMP-023",
+    "COMP-029"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "contentDigest": "3e4f815d3300557ad5a6a08c25ea5080642b9b401dc753886abf199c6bf4e266",
+    "lastGenerated": "2026-08-06T06:15:01.953Z"
+  },
+  "lastUpdated": "2026-08-06T06:15:01.953Z"
+}

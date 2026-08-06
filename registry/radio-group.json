@@ -47,7 +47,11 @@
     }
   },
   "styling": {
-    "outputs": [],
+    "outputs": [
+      "css",
+      "tailwind",
+      "unocss"
+    ],
     "themeCompatible": []
   },
   "search": {
@@ -71,11 +75,11 @@
     "fileDigests": {
       "src/index.tsx": "70b45d82a29ef0eb536603bbbdd660c9cc5bd9c31c070967120d5ee62a9401f6"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/radio-group"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
 }

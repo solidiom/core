@@ -1757,6 +1757,710 @@ export const breadcrumbRecipe: RecipeDefinition = {
   ],
 }
 
+/** Radio Group — single-select radio button group with items and indicator. */
+export const radioGroupRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "radio-group",
+  description:
+    "Single-select radio button group with roving tabindex keyboard navigation and visual indicator.",
+  slots: [
+    {
+      part: "root",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        display: "flex",
+        "flex-direction": "column",
+        gap: "0.5rem",
+      },
+    },
+    {
+      part: "item",
+      element: "button",
+      ownership: "consumer",
+      ownershipReason: "Radio items are consumer-provided options.",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        gap: "0.5rem",
+        padding: "0.5rem",
+        "border-style": "none",
+        "background-color": "transparent",
+        cursor: "pointer",
+        "font-size": "0.875rem",
+        "border-radius": { token: "radius" },
+        "outline": "none",
+      },
+      states: {
+        checked: { "background-color": { token: "surface-accent" } },
+        unchecked: { "background-color": "transparent" },
+      },
+      flags: {
+        disabled: { opacity: "0.5", cursor: "not-allowed" },
+      },
+      pseudos: {
+        ":focus-visible": {
+          outline: "2px solid",
+          "outline-color": { token: "focus-ring" },
+          "outline-offset": "2px",
+        },
+      },
+    },
+    {
+      part: "indicator",
+      element: "span",
+      ownership: "consumer",
+      ownershipReason: "Radio indicator is consumer-provided visual feedback.",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        width: "1rem",
+        height: "1rem",
+        "border-radius": "9999px",
+        "border-style": "solid",
+        "border-width": "2px",
+        "border-color": { token: "border" },
+      },
+      states: {
+        checked: { "border-color": { token: "primary" } },
+        unchecked: { "border-color": { token: "border" } },
+      },
+    },
+  ],
+}
+
+/** Combobox — autocomplete input with filterable listbox. */
+export const comboboxRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "combobox",
+  description:
+    "Autocomplete input with filterable listbox, keyboard navigation, and active descendant pattern.",
+  slots: [
+    {
+      part: "trigger",
+      element: "button",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "space-between",
+        width: "100%",
+        height: "2.5rem",
+        padding: "0.5rem 0.75rem",
+        "border-radius": { token: "radius" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": "transparent",
+        "font-size": "0.875rem",
+        cursor: "pointer",
+        "outline": "none",
+      },
+      flags: {
+        disabled: { opacity: "0.5", cursor: "not-allowed" },
+      },
+      pseudos: {
+        ":focus-visible": {
+          "border-color": { token: "primary" },
+          outline: "2px solid",
+          "outline-color": { token: "focus-ring" },
+          "outline-offset": "2px",
+        },
+      },
+    },
+    {
+      part: "input",
+      element: "input",
+      ownership: "recipe",
+      base: {
+        width: "100%",
+        "min-height": "2.5rem",
+        padding: "0.5rem 0.75rem",
+        "border-radius": { token: "radius" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": "transparent",
+        "font-size": "0.875rem",
+        "outline": "none",
+      },
+      pseudos: {
+        ":focus-visible": {
+          "border-color": { token: "primary" },
+          outline: "2px solid",
+          "outline-color": { token: "focus-ring" },
+          "outline-offset": "2px",
+        },
+      },
+    },
+    {
+      part: "content",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        "z-index": "50",
+        "min-width": "8rem",
+        overflow: "hidden",
+        "border-radius": { token: "radius" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": { token: "surface" },
+        padding: "0.25rem",
+        "box-shadow": { token: "shadow-md" },
+      },
+    },
+    {
+      part: "item",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Combobox items are consumer-provided listbox content.",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        padding: "0.375rem 0.5rem",
+        "border-radius": "0.25rem",
+        "font-size": "0.875rem",
+        cursor: "pointer",
+        outline: "none",
+      },
+      flags: {
+        highlighted: { "background-color": { token: "surface-accent" } },
+        disabled: { opacity: "0.5", cursor: "not-allowed" },
+      },
+    },
+  ],
+}
+
+/** Sheet — side-panel dialog with directional slide-in. */
+export const sheetRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "sheet",
+  description:
+    "Side-panel dialog that slides in from a specified edge with a backdrop overlay.",
+  slots: [
+    {
+      part: "backdrop",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        position: "fixed",
+        inset: "0",
+        "background-color": { token: "surface-overlay" },
+        transition: "opacity 0.15s",
+      },
+      states: {
+        open: { opacity: "1" },
+        closed: { opacity: "0" },
+      },
+    },
+    {
+      part: "content",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        position: "fixed",
+        "z-index": "50",
+        "background-color": { token: "surface-raised" },
+        color: { token: "foreground" },
+        "box-shadow": { token: "shadow-lg" },
+        transition: "transform 0.15s, opacity 0.15s",
+      },
+      states: {
+        open: { opacity: "1" },
+        closed: { opacity: "0" },
+      },
+    },
+    {
+      part: "title",
+      element: "h2",
+      ownership: "consumer",
+      ownershipReason: "Sheet title is optional consumer composition.",
+      base: {
+        margin: "0",
+        "font-size": "1.125rem",
+        "font-weight": "600",
+        color: { token: "foreground" },
+      },
+    },
+    {
+      part: "description",
+      element: "p",
+      ownership: "consumer",
+      ownershipReason: "Sheet description is optional consumer composition.",
+      base: {
+        margin: "0.5rem 0 0",
+        "font-size": "0.875rem",
+        color: { token: "foreground-muted" },
+      },
+    },
+    {
+      part: "close",
+      element: "button",
+      ownership: "consumer",
+      ownershipReason: "Close is optional consumer composition.",
+      base: {
+        position: "absolute",
+        top: "0.75rem",
+        right: "0.75rem",
+        "border-style": "none",
+        "background-color": "transparent",
+        color: { token: "foreground-muted" },
+        cursor: "pointer",
+        "border-radius": { token: "radius-sm" },
+      },
+      pseudos: {
+        ":hover": { color: { token: "foreground" } },
+        ":focus-visible": {
+          outline: "2px solid",
+          "outline-color": { token: "focus-ring" },
+        },
+      },
+    },
+  ],
+}
+
+/** Navigation Menu — top-level navigation with dropdown sub-menus. */
+export const navigationMenuRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "navigation-menu",
+  description:
+    "Top-level navigation bar with accessible dropdown sub-menus and pointer intent detection.",
+  slots: [
+    {
+      part: "list",
+      element: "ul",
+      ownership: "consumer",
+      ownershipReason: "Nav menu items are consumer-provided list items.",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        gap: "0.25rem",
+        padding: "0",
+        margin: "0",
+        "list-style": "none",
+      },
+    },
+    {
+      part: "item",
+      element: "li",
+      ownership: "consumer",
+      ownershipReason: "Nav menu items are consumer-provided.",
+      base: {
+        display: "block",
+        position: "relative",
+      },
+    },
+    {
+      part: "trigger",
+      element: "button",
+      ownership: "consumer",
+      ownershipReason: "Nav triggers are consumer-provided with label content.",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        padding: "0.5rem 1rem",
+        "border-style": "none",
+        "background-color": "transparent",
+        "font-size": "0.875rem",
+        "font-weight": "500",
+        cursor: "pointer",
+        "border-radius": { token: "radius" },
+        "outline": "none",
+      },
+      states: {
+        active: { "background-color": { token: "surface-accent" } },
+      },
+      pseudos: {
+        ":focus-visible": {
+          outline: "2px solid",
+          "outline-color": { token: "focus-ring" },
+          "outline-offset": "2px",
+        },
+      },
+    },
+    {
+      part: "content",
+      element: "div",
+      ownership: "adapter",
+      ownershipReason:
+        "The primitive renders the panel, while an optional PositioningPort supplies its inline placement geometry.",
+      adapterPort: "PositioningPort",
+      adapterOwnedProperties: ["position", "top", "right", "bottom", "left", "transform"],
+      base: {
+        "z-index": "50",
+        "min-width": "12rem",
+        overflow: "hidden",
+        "border-radius": { token: "radius" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": { token: "surface" },
+        padding: "0.5rem",
+        "box-shadow": { token: "shadow-md" },
+        transition: "opacity 0.15s, transform 0.15s",
+      },
+      states: {
+        open: { opacity: "1", transform: "translateY(0)" },
+        closed: { opacity: "0", transform: "translateY(-0.25rem)" },
+      },
+    },
+    {
+      part: "link",
+      element: "a",
+      ownership: "consumer",
+      ownershipReason: "Nav links are consumer-provided with their own href.",
+      base: {
+        display: "block",
+        padding: "0.5rem 0.75rem",
+        "border-radius": "0.25rem",
+        "font-size": "0.875rem",
+        "text-decoration": "none",
+        color: { token: "foreground" },
+      },
+      pseudos: {
+        ":hover": { "background-color": { token: "surface-accent" } },
+      },
+    },
+  ],
+}
+
+/** Command Palette — modal command palette with filtering and group support. */
+export const commandPaletteRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "command-palette",
+  description:
+    "Modal command palette with input filtering, group support, and empty state.",
+  slots: [
+    {
+      part: "dialog",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        "z-index": "50",
+        "max-width": "24rem",
+        width: "100%",
+        "border-radius": { token: "radius" },
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "background-color": { token: "surface-raised" },
+        "box-shadow": { token: "shadow-lg" },
+        transition: "opacity 0.15s, transform 0.15s",
+      },
+      states: {
+        open: { opacity: "1", transform: "translate(-50%, -50%) scale(1)" },
+        closed: { opacity: "0", transform: "translate(-50%, -50%) scale(0.96)" },
+      },
+    },
+    {
+      part: "input",
+      element: "input",
+      ownership: "recipe",
+      base: {
+        width: "100%",
+        "min-height": "2.5rem",
+        padding: "0.75rem",
+        "border-style": "none",
+        "background-color": "transparent",
+        "font-size": "0.875rem",
+        "outline": "none",
+      },
+      pseudos: {
+        ":focus-visible": { "outline": "none" },
+      },
+    },
+    {
+      part: "list",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Command list is consumer-provided content area.",
+      base: {
+        "max-height": "20rem",
+        overflow: "auto",
+        padding: "0.25rem",
+      },
+    },
+    {
+      part: "group",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Command groups are consumer-provided content organization.",
+      base: {
+        display: "block",
+      },
+    },
+    {
+      part: "item",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Command items are consumer-provided actions.",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        gap: "0.5rem",
+        padding: "0.5rem 0.75rem",
+        "border-radius": "0.25rem",
+        "font-size": "0.875rem",
+        cursor: "pointer",
+        outline: "none",
+      },
+      flags: {
+        highlighted: { "background-color": { token: "surface-accent" } },
+      },
+    },
+    {
+      part: "empty",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Empty state is consumer-provided feedback.",
+      base: {
+        padding: "1rem",
+        "font-size": "0.875rem",
+        color: { token: "foreground-muted" },
+        "text-align": "center",
+      },
+    },
+  ],
+}
+
+/** Kbd — keyboard shortcut display element. */
+export const kbdRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "kbd",
+  description: "Semantic keyboard shortcut display element.",
+  slots: [
+    {
+      part: "root",
+      element: "kbd",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        padding: "0.125rem 0.375rem",
+        "font-size": "0.75rem",
+        "line-height": "1rem",
+        "font-family": "monospace",
+        "font-weight": "500",
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "border-radius": "0.25rem",
+        "background-color": { token: "surface-muted" },
+        color: { token: "foreground" },
+        "box-shadow": { token: "shadow-sm" },
+      },
+    },
+  ],
+}
+
+/** Resizable Panels — drag-to-resize panel layout with keyboard support. */
+export const resizablePanelsRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "resizable-panels",
+  description:
+    "Drag-to-resize panel layout with keyboard support, collapse behavior, and ARIA separator semantics.",
+  slots: [
+    {
+      part: "group",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        display: "flex",
+        width: "100%",
+        height: "100%",
+      },
+    },
+    {
+      part: "panel",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Panels are consumer-provided content areas.",
+      base: {
+        overflow: "auto",
+      },
+    },
+    {
+      part: "handle",
+      element: "button",
+      ownership: "consumer",
+      ownershipReason: "Handles are consumer-provided resize affordances.",
+      base: {
+        display: "flex",
+        "align-items": "center",
+        "justify-content": "center",
+        "background-color": { token: "border" },
+        cursor: "pointer",
+        "outline": "none",
+      },
+      pseudos: {
+        ":focus-visible": {
+          "background-color": { token: "primary" },
+        },
+      },
+    },
+  ],
+}
+
+/** Scroll Area — custom-styled scrollbar with native scrolling performance. */
+export const scrollAreaRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "scroll-area",
+  description:
+    "Custom-styled scrollbar replacement with native scrolling performance and configurable visibility.",
+  slots: [
+    {
+      part: "root",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        position: "relative",
+        overflow: "hidden",
+      },
+    },
+    {
+      part: "viewport",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Viewport is consumer-provided scrollable content area.",
+      base: {
+        height: "100%",
+        width: "100%",
+        overflow: "auto",
+      },
+    },
+    {
+      part: "scrollbar",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Scrollbar is consumer-provided visual indicator.",
+      base: {
+        position: "absolute",
+        "background-color": { token: "surface-accent" },
+        "border-radius": "9999px",
+        transition: "opacity 0.15s",
+      },
+    },
+    {
+      part: "thumb",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Thumb is consumer-provided draggable portion of scrollbar.",
+      base: {
+        position: "relative",
+        "flex-grow": "1",
+        "background-color": { token: "border" },
+        "border-radius": "9999px",
+      },
+    },
+  ],
+}
+
+/** Toolbar — grouped actions/controls in a horizontal or vertical bar. */
+export const toolbarRecipe: RecipeDefinition = {
+  contractVersion: CONTRACT_VERSION,
+  scope: "toolbar",
+  description:
+    "Grouped actions and controls in a horizontal or vertical bar with button, toggle, and separator parts.",
+  slots: [
+    {
+      part: "root",
+      element: "div",
+      ownership: "recipe",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        gap: "0.25rem",
+        padding: "0.25rem",
+        "border-radius": { token: "radius" },
+        "background-color": { token: "surface-muted" },
+      },
+    },
+    {
+      part: "button",
+      element: "button",
+      ownership: "consumer",
+      ownershipReason: "Toolbar buttons are consumer-provided actions.",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        padding: "0.375rem 0.75rem",
+        "border-style": "none",
+        "background-color": "transparent",
+        "font-size": "0.875rem",
+        "font-weight": "500",
+        "border-radius": "0.25rem",
+        cursor: "pointer",
+        "outline": "none",
+      },
+      flags: {
+        disabled: { opacity: "0.5", cursor: "not-allowed" },
+      },
+      pseudos: {
+        ":hover": { "background-color": { token: "surface-accent" } },
+        ":focus-visible": {
+          outline: "2px solid",
+          "outline-color": { token: "focus-ring" },
+        },
+      },
+    },
+    {
+      part: "separator",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Toolbar separators are consumer-provided dividers.",
+      base: {
+        width: "1px",
+        "background-color": { token: "border" },
+      },
+    },
+    {
+      part: "toggle-group",
+      element: "div",
+      ownership: "consumer",
+      ownershipReason: "Toggle group is consumer-provided toggle set.",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+      },
+    },
+    {
+      part: "toggle-item",
+      element: "button",
+      ownership: "consumer",
+      ownershipReason: "Toggle items are consumer-provided toggle buttons.",
+      base: {
+        display: "inline-flex",
+        "align-items": "center",
+        "justify-content": "center",
+        padding: "0.375rem 0.5rem",
+        "border-style": "none",
+        "background-color": "transparent",
+        "font-size": "0.875rem",
+        "border-radius": "0.25rem",
+        cursor: "pointer",
+        "outline": "none",
+      },
+      states: {
+        on: { "background-color": { token: "surface-accent" } },
+        off: { "background-color": "transparent" },
+      },
+      pseudos: {
+        ":focus-visible": {
+          outline: "2px solid",
+          "outline-color": { token: "focus-ring" },
+        },
+      },
+    },
+  ],
+}
+
 /** Every recipe definition, keyed by scope. */
 export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> = {
   accordion: accordionRecipe,
@@ -1766,21 +2470,30 @@ export const REFERENCE_DEFINITIONS: Readonly<Record<string, RecipeDefinition>> =
   breadcrumb: breadcrumbRecipe,
   button: buttonRecipe,
   card: cardRecipe,
+  "command-palette": commandPaletteRecipe,
   "data-table": dataTableRecipe,
   checkbox: checkboxRecipe,
+  combobox: comboboxRecipe,
   dialog: dialogRecipe,
   field: fieldRecipe,
   input: inputRecipe,
+  kbd: kbdRecipe,
   menu: menuRecipe,
   meter: meterRecipe,
+  "navigation-menu": navigationMenuRecipe,
   pagination: paginationRecipe,
   popover: popoverRecipe,
   progress: progressRecipe,
+  "radio-group": radioGroupRecipe,
+  "resizable-panels": resizablePanelsRecipe,
+  "scroll-area": scrollAreaRecipe,
   select: selectRecipe,
+  sheet: sheetRecipe,
   spinner: spinnerRecipe,
   switch: switchRecipe,
   tabs: tabsRecipe,
   toast: toastRecipe,
+  toolbar: toolbarRecipe,
   tooltip: tooltipRecipe,
   typeset: typesetRecipe,
   prose: proseRecipe,

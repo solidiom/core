@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "Notifications Center",
+  "id": "BLOCK-SHELL-03",
+  "category": "SHELL",
+  "version": "0.0.1-next.0",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "COMP-001",
+    "COMP-004",
+    "COMP-005",
+    "COMP-007",
+    "COMP-008",
+    "COMP-010",
+    "COMP-012",
+    "COMP-013",
+    "COMP-015",
+    "COMP-017",
+    "COMP-021",
+    "COMP-029"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "contentDigest": "1e6c3a4f93542316415e2d235dec0c8d2d679162246f11c1adc230bb8d8df771",
+    "lastGenerated": "2026-08-06T06:15:01.953Z"
+  },
+  "lastUpdated": "2026-08-06T06:15:01.953Z"
+}

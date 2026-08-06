@@ -1,0 +1,43 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "Dashboard Overview",
+  "id": "BLOCK-OBS-01",
+  "category": "OBS",
+  "version": "0.0.1-next.0",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "COMP-004",
+    "COMP-007",
+    "COMP-009",
+    "COMP-011",
+    "COMP-023",
+    "COMP-025",
+    "COMP-026",
+    "COMP-029"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "contentDigest": "f075f698cdd903f9540ea2552a193ab9c0c05a135a47c6bec8aa211c01f3a1af",
+    "lastGenerated": "2026-08-06T06:15:01.953Z"
+  },
+  "lastUpdated": "2026-08-06T06:15:01.953Z"
+}

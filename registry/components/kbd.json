@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "kbd",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/kbd.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/kbd.tsx"
+    ],
+    "unocss": [
+      "src/recipes/kbd.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/kbd.tsx": "fda73a169db7a435c1a79dd462d970bf9ef2ca958303c9c7ed1bfb83390c5b5e"
+      },
+      "tailwind": {
+        "src/recipes/kbd.tsx": "9f5f0352286a6af8ddce8bff026715703b66f87b3301dcef8f269550f14bd8f3"
+      },
+      "unocss": {
+        "src/recipes/kbd.tsx": "5a0d549a60a39a9be9883b6049fa0954262c2eea719810a2fd2bff28d0a1d4ff"
+      }
+    },
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/kbd"
+  ],
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
+}

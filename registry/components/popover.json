@@ -30,7 +30,7 @@
         "src/recipes/popover.tsx": "5680c5101ab6407ee68f45c702928323cfc6af71c0651255f6a141a4cfd96ac0"
       }
     },
-    "lastGenerated": "2026-08-05T12:38:19.000Z"
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/popover"
   ],
-  "lastUpdated": "2026-08-05T12:38:19.000Z"
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
 }

@@ -23,4 +23,13 @@ export const supportedPrimitives = [
   "pagination",
   "meter",
   "progress",
+  "radio-group",
+  "combobox",
+  "sheet",
+  "navigation-menu",
+  "command-palette",
+  "kbd",
+  "resizable-panels",
+  "scroll-area",
+  "toolbar",
 ] as const

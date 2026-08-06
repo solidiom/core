@@ -30,7 +30,7 @@
         "src/recipes/avatar.tsx": "673bafa4900892f5e95d714bdb224fea55854d872e3e8d384efb8b67e2d1fe53"
       }
     },
-    "lastGenerated": "2026-08-05T12:38:19.000Z"
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/avatar"
   ],
-  "lastUpdated": "2026-08-05T12:38:19.000Z"
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
 }

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "Order Tracking",
+  "id": "BLOCK-COMMERCE-03",
+  "category": "COMMERCE",
+  "version": "0.0.1-next.0",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "COMP-001",
+    "COMP-002",
+    "COMP-004",
+    "COMP-005",
+    "COMP-009",
+    "COMP-011",
+    "COMP-020",
+    "COMP-021",
+    "COMP-023",
+    "COMP-026",
+    "COMP-029"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "contentDigest": "4689141bac00608d252189d60f0c380b8cfe5bd7e3245da83b8e0d6cda81bc96",
+    "lastGenerated": "2026-08-06T06:15:01.953Z"
+  },
+  "lastUpdated": "2026-08-06T06:15:01.953Z"
+}

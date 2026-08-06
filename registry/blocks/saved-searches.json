@@ -1,0 +1,47 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "Saved Searches",
+  "id": "BLOCK-SEARCH-02",
+  "category": "SEARCH",
+  "version": "0.0.1-next.0",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "COMP-001",
+    "COMP-002",
+    "COMP-003",
+    "COMP-004",
+    "COMP-005",
+    "COMP-006",
+    "COMP-008",
+    "COMP-010",
+    "COMP-013",
+    "COMP-015",
+    "COMP-023",
+    "COMP-029"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "contentDigest": "a44dc74ac390702cac70146db3bd15ed0d92f6fc6032974c9d397aefd18169ca",
+    "lastGenerated": "2026-08-06T06:15:01.953Z"
+  },
+  "lastUpdated": "2026-08-06T06:15:01.953Z"
+}

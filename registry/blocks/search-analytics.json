@@ -1,0 +1,43 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "Search Analytics",
+  "id": "BLOCK-SEARCH-03",
+  "category": "SEARCH",
+  "version": "0.0.1-next.0",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "COMP-004",
+    "COMP-007",
+    "COMP-009",
+    "COMP-011",
+    "COMP-023",
+    "COMP-025",
+    "COMP-026",
+    "COMP-029"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "contentDigest": "8a4d9c8a4dce5c6f4edb5c12b692bd57d182e1f8cc650a59947ae2e3c9ac7cd8",
+    "lastGenerated": "2026-08-06T06:15:01.953Z"
+  },
+  "lastUpdated": "2026-08-06T06:15:01.953Z"
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "scroll-area",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/recipes-css",
+  "deliverables": [
+    "component"
+  ],
+  "source": {
+    "css": [
+      "src/recipes/scroll-area.tsx"
+    ],
+    "tailwind": [
+      "src/recipes/scroll-area.tsx"
+    ],
+    "unocss": [
+      "src/recipes/scroll-area.tsx"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "fileDigests": {
+      "css": {
+        "src/recipes/scroll-area.tsx": "beba7a47a5b1c49de1b324beeab450b1e8676d3315b175464c1c1bef71f838a7"
+      },
+      "tailwind": {
+        "src/recipes/scroll-area.tsx": "b5521af2db11348fdf404b84f46d552463856a538b80dfc02a16780180891f90"
+      },
+      "unocss": {
+        "src/recipes/scroll-area.tsx": "74e1fbed50ff2ba20ea4050ef3e802c9c0e9ea621d165e47d64354eb988a7621"
+      }
+    },
+    "lastGenerated": "2026-08-06T00:15:56.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "dependencies": [
+    "@solidiom/scroll-area"
+  ],
+  "lastUpdated": "2026-08-06T00:15:56.000Z"
+}

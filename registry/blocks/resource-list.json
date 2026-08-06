@@ -1,0 +1,46 @@
+{
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "name": "Resource List",
+  "id": "BLOCK-RESOURCE-01",
+  "category": "RESOURCE",
+  "version": "0.0.1-next.0",
+  "deliverables": [
+    "block"
+  ],
+  "componentDependencies": [
+    "COMP-002",
+    "COMP-004",
+    "COMP-005",
+    "COMP-007",
+    "COMP-008",
+    "COMP-012",
+    "COMP-013",
+    "COMP-017",
+    "COMP-021",
+    "COMP-023",
+    "COMP-029"
+  ],
+  "requiredStates": [
+    "loading",
+    "empty",
+    "error",
+    "restricted"
+  ],
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "contentDigest": "4fb373f8db8262391edf2cbf776e7f93e9bb8138bd99a4d93028129ca44f78db",
+    "lastGenerated": "2026-08-06T06:15:01.953Z"
+  },
+  "lastUpdated": "2026-08-06T06:15:01.953Z"
+}
