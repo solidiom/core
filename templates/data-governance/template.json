@@ -1,0 +1,20 @@
+{
+  "name": "data-governance",
+  "stack": "vite-solid-router",
+  "description": "Data governance console with data catalog, lineage explorer, and classification policies.",
+  "variables": ["projectName"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-RESOURCE-03"],
+  "deploymentTarget": "static",
+  "authModel": "email-password",
+  "portfolioTags": ["enterprise"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config."
+    }
+  ],
+  "notes": [
+    "`{{projectName}}` is the only substitution token used in this template's source files."
+  ]
+}

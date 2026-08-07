@@ -1,0 +1,20 @@
+{
+  "name": "search-application",
+  "version": "0.0.1-next.0",
+  "label": "Search Application",
+  "description": "Full-text search application with results view, saved searches, and search analytics.",
+  "status": "preview",
+  "templateId": "TPL-011",
+  "stack": "vite-solid-router",
+  "portfolioTags": ["balanced-product"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-SEARCH-01", "BLOCK-SEARCH-02", "BLOCK-SEARCH-03"],
+  "integrity": {
+    "algorithm": "sha256",
+    "manifestHash": "tpl-011-search-application-manifest",
+    "lastGenerated": "2026-08-06T23:10:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
+  }
+}

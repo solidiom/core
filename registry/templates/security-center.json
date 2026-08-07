@@ -1,0 +1,20 @@
+{
+  "name": "security-center",
+  "version": "0.0.1-next.0",
+  "label": "Security Center",
+  "description": "Security center with threat dashboard, vulnerability scanner, and policy management.",
+  "status": "preview",
+  "templateId": "TPL-024",
+  "stack": "vite-solid-router",
+  "portfolioTags": ["enterprise"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-OBS-03"],
+  "integrity": {
+    "algorithm": "sha256",
+    "manifestHash": "tpl-024-security-center-manifest",
+    "lastGenerated": "2026-08-07T01:30:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
+  }
+}
