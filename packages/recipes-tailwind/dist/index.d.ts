@@ -36,4 +36,7 @@ export { StyledKbd } from "./recipes/kbd";
 export { StyledResizablePanels } from "./recipes/resizable-panels";
 export { StyledScrollArea } from "./recipes/scroll-area";
 export { StyledToolbar } from "./recipes/toolbar";
+export { StyledField } from "./recipes/field";
+export { StyledInput } from "./recipes/input";
+export { StyledMeter } from "./recipes/meter";
 //# sourceMappingURL=index.d.ts.map

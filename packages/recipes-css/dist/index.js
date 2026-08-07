@@ -29,7 +29,10 @@ var supportedPrimitives = [
   "kbd",
   "resizable-panels",
   "scroll-area",
-  "toolbar"
+  "toolbar",
+  "data-table",
+  "field",
+  "input"
 ];
 
 // src/recipes/dialog.tsx
@@ -388,6 +391,30 @@ function StyledToolbar(props) {
   const className = () => [BASE_CLASS14, props.class].filter(Boolean).join(" ");
   return <Toolbar.Root {...props} class={className()} />;
 }
+
+// src/recipes/field.tsx
+import * as Field from "@solidiom/field";
+var BASE_CLASS15 = "solidiom-field";
+function StyledField(props) {
+  const className = () => [BASE_CLASS15, props.class].filter(Boolean).join(" ");
+  return <Field.Root {...props} class={className()} />;
+}
+
+// src/recipes/input.tsx
+import * as Input from "@solidiom/input";
+var BASE_CLASS16 = "solidiom-input";
+function StyledInput(props) {
+  const className = () => [BASE_CLASS16, props.class].filter(Boolean).join(" ");
+  return <Input.Root {...props} class={className()} />;
+}
+
+// src/recipes/meter.tsx
+import * as Meter from "@solidiom/meter";
+var BASE_CLASS17 = "solidiom-meter";
+function StyledMeter(props) {
+  const className = () => [BASE_CLASS17, props.class].filter(Boolean).join(" ");
+  return <Meter.Root {...props} class={className()} />;
+}
 export {
   StyledAccordion,
   StyledAlert,
@@ -401,8 +428,11 @@ export {
   StyledCommandPalette,
   StyledDataTable,
   StyledDialog,
+  StyledField,
+  StyledInput,
   StyledKbd,
   StyledMenu,
+  StyledMeter,
   StyledNavigationMenu,
   StyledPagination,
   StyledPopover,
