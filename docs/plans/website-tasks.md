@@ -519,7 +519,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | Primitives                    |       52 |  52 |     52 |
 | Components                    |       30 |  30 |     30 |
 | Blocks                        |     ≥ 36 |  36 |     36 |
-| Unique templates              |       29 |  10 |     10 |
+| Unique templates              |       29 |  29 |     29 |
 | Template portfolio placements |       32 |   0 |      0 |
 | Theme presets                 |        4 |   0 |      4 |
 | Foundational articles         |        5 |   0 |      0 |

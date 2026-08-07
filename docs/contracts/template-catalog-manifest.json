@@ -29,7 +29,7 @@
     {
       "id": "TPL-002",
       "name": "Onboarding App",
-      "slug": "onboarding",
+      "slug": "onboarding-app",
       "stack": "solid-start",
       "portfolios": ["balanced"],
       "deploymentTarget": "edge",
@@ -95,7 +95,7 @@
     {
       "id": "TPL-008",
       "name": "Observability Console",
-      "slug": "observability",
+      "slug": "observability-console",
       "stack": "solid-start",
       "portfolios": ["balanced", "enterprise"],
       "deploymentTarget": "node",
@@ -128,7 +128,7 @@
     {
       "id": "TPL-011",
       "name": "Search Application",
-      "slug": "search-app",
+      "slug": "search-application",
       "stack": "solid-start",
       "portfolios": ["balanced"],
       "deploymentTarget": "edge",
@@ -183,7 +183,7 @@
     {
       "id": "TPL-016",
       "name": "Documentation/Product Site",
-      "slug": "docs-site",
+      "slug": "documentation-site",
       "stack": "vite-solid-router",
       "portfolios": ["balanced"],
       "deploymentTarget": "static",
@@ -216,7 +216,7 @@
     {
       "id": "TPL-019",
       "name": "Billing Operations",
-      "slug": "billing-ops",
+      "slug": "billing-operations",
       "stack": "solid-start",
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
@@ -238,7 +238,7 @@
     {
       "id": "TPL-021",
       "name": "AI Operations",
-      "slug": "ai-ops",
+      "slug": "ai-operations",
       "stack": "solid-start",
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
@@ -315,7 +315,7 @@
     {
       "id": "TPL-028",
       "name": "Support Operations",
-      "slug": "support-ops",
+      "slug": "support-operations",
       "stack": "solid-start",
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",

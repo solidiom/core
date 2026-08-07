@@ -29,7 +29,10 @@ var supportedPrimitives = [
   "kbd",
   "resizable-panels",
   "scroll-area",
-  "toolbar"
+  "toolbar",
+  "data-table",
+  "field",
+  "input"
 ];
 
 // src/recipes/dialog.tsx

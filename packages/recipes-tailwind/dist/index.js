@@ -29,7 +29,10 @@ var supportedPrimitives = [
   "kbd",
   "resizable-panels",
   "scroll-area",
-  "toolbar"
+  "toolbar",
+  "data-table",
+  "field",
+  "input"
 ];
 
 // src/recipes/dialog.tsx
@@ -391,6 +394,39 @@ function StyledToolbar(props) {
   const className = () => [BASE_CLASS11, props.class].filter(Boolean).join(" ");
   return <Toolbar.Root {...props} class={className()} />;
 }
+
+// src/recipes/field.tsx
+import { twMerge as twMerge6 } from "tailwind-merge";
+import * as Field from "@solidiom/field";
+var ROOT_CLASSES4 = "flex flex-col gap-1 disabled:opacity-50";
+function StyledField(props) {
+  const className = () => twMerge6(ROOT_CLASSES4, props.class);
+  return <Field.Root {...props} class={className()} />;
+}
+
+// src/recipes/input.tsx
+import { twMerge as twMerge7 } from "tailwind-merge";
+import * as Input from "@solidiom/input";
+var BASE_CLASSES = "block w-full min-h-[2.25rem] px-3 py-1.5 text-sm leading-5 border border-solid rounded-md outline-none transition-colors bg-background text-foreground border-border";
+var FOCUS_CLASSES = "focus-visible:border-primary focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2";
+var INVALID_CLASSES = "invalid:border-destructive";
+var DISABLED_CLASSES = "disabled:bg-muted disabled:cursor-not-allowed disabled:opacity-50";
+var READONLY_CLASSES = "readonly:bg-muted readonly:cursor-not-allowed";
+function StyledInput(props) {
+  const className = () => twMerge7(
+    `${BASE_CLASSES} ${FOCUS_CLASSES} ${INVALID_CLASSES} ${DISABLED_CLASSES} ${READONLY_CLASSES}`,
+    props.class
+  );
+  return <Input.Root {...props} class={className()} />;
+}
+
+// src/recipes/meter.tsx
+import * as Meter from "@solidiom/meter";
+var BASE_CLASS12 = "solidiom-meter";
+function StyledMeter(props) {
+  const className = () => [BASE_CLASS12, props.class].filter(Boolean).join(" ");
+  return <Meter.Root {...props} class={className()} />;
+}
 export {
   StyledAccordion,
   StyledAlert,
@@ -404,8 +440,11 @@ export {
   StyledCommandPalette,
   StyledDataTable,
   StyledDialog,
+  StyledField,
+  StyledInput,
   StyledKbd,
   StyledMenu,
+  StyledMeter,
   StyledNavigationMenu,
   StyledPagination,
   StyledPopover,

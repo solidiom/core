@@ -32,4 +32,7 @@ export const supportedPrimitives = [
   "resizable-panels",
   "scroll-area",
   "toolbar",
+  "data-table",
+  "field",
+  "input",
 ] as const
