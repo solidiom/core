@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-api-management"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 API Management provides a production-ready starting point for building API gateway consoles with endpoint discovery, key lifecycle, and analytics.

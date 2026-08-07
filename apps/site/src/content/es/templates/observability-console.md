@@ -10,8 +10,8 @@ productLayer: template
 status: draft
 package: "@solidiom/template-observability-console"
 stack: vite-solid-router
-portfolios: ["balanced-product", "enterprise"]
-translationSourceHash: "e9d858b7110789cbe5dc7480824433f0bc3f49cb279ed03596f909d90dc227ac"
+portfolios: ["balanced-product", "enterprise-platform-governance"]
+translationSourceHash: "a3bbe1efef51753d3a7d02f56b9be8441ffd9189a7a95bd663c4379dad355448"
 translationStatus: draft
 ---
 

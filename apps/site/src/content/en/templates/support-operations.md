@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-support-operations"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Support Operations provides a production-ready starting point for building customer support consoles with ticket management, self-service knowledge, and team performance tracking.

@@ -10,8 +10,8 @@ productLayer: template
 status: draft
 package: "@solidiom/template-incident-response"
 stack: vite-solid-router
-portfolios: ["enterprise"]
-translationSourceHash: "e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1"
+portfolios: ["enterprise-platform-governance"]
+translationSourceHash: "fdad15d8f40d7689a7f40a18bb1ae2e93d2420f36fa7bc07e1c4ae7584f811a5"
 translationStatus: draft
 ---
 

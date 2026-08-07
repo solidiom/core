@@ -10,8 +10,8 @@ productLayer: template
 status: draft
 package: "@solidiom/template-multi-tenant-admin"
 stack: vite-solid-router
-portfolios: ["balanced-product", "enterprise"]
-translationSourceHash: "955b7cd934d0fa7c9df883bfca8cc7e92e553bc4e538091123455d2e4ae569b0"
+portfolios: ["balanced-product", "enterprise-platform-governance"]
+translationSourceHash: "4a3ee446dc4daa200ecd670f52aab6091fd67c052610665e7363c7585b7148db"
 translationStatus: draft
 ---
 

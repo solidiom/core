@@ -11,7 +11,7 @@ status: draft
 package: "@solidiom/template-content-studio"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
-translationSourceHash: "e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5"
+translationSourceHash: "8925fc5c985b15f9723df6bcc888f15a8603b1881309875bff1c7e6671715cda"
 translationStatus: draft
 ---
 

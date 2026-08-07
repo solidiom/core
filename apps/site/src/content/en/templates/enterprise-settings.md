@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-enterprise-settings"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Enterprise Settings provides a production-ready starting point for building organization-level administration consoles with security, identity, and integration management.

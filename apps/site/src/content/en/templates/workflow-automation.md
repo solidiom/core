@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-workflow-automation"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Workflow Automation provides a production-ready starting point for building no-code workflow orchestration platforms with visual design and monitoring.

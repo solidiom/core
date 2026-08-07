@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-incident-response"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Incident Response provides a production-ready starting point for building incident management and operational response consoles.

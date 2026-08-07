@@ -11,7 +11,15 @@
       "types": "./dist/index.d.ts"
     },
     "./css/solidiom-default.css": "./dist/css/solidiom-default.css",
-    "./tailwind/solidiom-default.css": "./dist/tailwind/solidiom-default.css"
+    "./css/ocean.css": "./dist/css/ocean.css",
+    "./css/forest.css": "./dist/css/forest.css",
+    "./css/slate.css": "./dist/css/slate.css",
+    "./css/aurora.css": "./dist/css/aurora.css",
+    "./tailwind/solidiom-default.css": "./dist/tailwind/solidiom-default.css",
+    "./tailwind/ocean.css": "./dist/tailwind/ocean.css",
+    "./tailwind/forest.css": "./dist/tailwind/forest.css",
+    "./tailwind/slate.css": "./dist/tailwind/slate.css",
+    "./tailwind/aurora.css": "./dist/tailwind/aurora.css"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

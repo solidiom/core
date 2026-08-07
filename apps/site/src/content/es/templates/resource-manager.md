@@ -10,8 +10,8 @@ productLayer: template
 status: draft
 package: "@solidiom/template-resource-manager"
 stack: vite-solid-router
-portfolios: ["balanced-product", "enterprise"]
-translationSourceHash: "44e41368250544cd44f6cc4b69867a3adfbae3941502644660065f8b70cefa3d"
+portfolios: ["balanced-product", "enterprise-platform-governance"]
+translationSourceHash: "3820d90bd8b4f0a7348fcf2974f6aadafd964dd3785d99582996a46b33685a8b"
 translationStatus: draft
 ---
 

@@ -10,8 +10,8 @@ productLayer: template
 status: draft
 package: "@solidiom/template-audit-log"
 stack: vite-solid-router
-portfolios: ["enterprise"]
-translationSourceHash: "c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9"
+portfolios: ["enterprise-platform-governance"]
+translationSourceHash: "09efbc606398a27065f29cdf36fc624d25bbb447063a73e957e5bd5655058aad"
 translationStatus: draft
 ---
 
