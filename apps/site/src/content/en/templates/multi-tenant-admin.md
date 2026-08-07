@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-multi-tenant-admin"
 stack: vite-solid-router
-portfolios: ["balanced-product", "enterprise"]
+portfolios: ["balanced-product", "enterprise-platform-governance"]
 ---
 
 Multi-tenant Admin provides a production-ready starting point for multi-tenant administration interfaces.

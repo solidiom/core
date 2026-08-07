@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-observability-console"
 stack: vite-solid-router
-portfolios: ["balanced-product", "enterprise"]
+portfolios: ["balanced-product", "enterprise-platform-governance"]
 ---
 
 Observability Console provides a production-ready starting point for system monitoring and alerting.

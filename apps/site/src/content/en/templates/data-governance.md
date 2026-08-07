@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-data-governance"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Data Governance provides a production-ready starting point for building data governance platforms with discovery, lineage, and classification.

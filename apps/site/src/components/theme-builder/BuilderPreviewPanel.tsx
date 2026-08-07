@@ -313,6 +313,217 @@ function PreviewContent(props: { c: CopyShape }) {
           </Alert.Root>
         </div>
       </div>
+
+      {/* Extended Component Previews — BUILDER-007 */}
+      {/* These use semantic HTML styled by theme tokens to preview all 30 component appearances */}
+
+      {/* Dialog */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Dialog</h3>
+        <div class="theme-builder__preview-dialog-static">
+          <div class="theme-builder__preview-dialog-header">Dialog Title</div>
+          <div class="theme-builder__preview-dialog-body">This is a dialog description.</div>
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--secondary">Close</Button.Root>
+        </div>
+      </div>
+
+      {/* Select */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Select</h3>
+        <div class="theme-builder__preview-select-static">
+          <span>Choose an option ▾</span>
+        </div>
+      </div>
+
+      {/* Dropdown Menu */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Dropdown Menu</h3>
+        <div class="theme-builder__preview-menu-static">
+          <div class="theme-builder__preview-menu-item">Edit</div>
+          <div class="theme-builder__preview-menu-item">Duplicate</div>
+          <div class="theme-builder__preview-menu-separator" />
+          <div class="theme-builder__preview-menu-item theme-builder__preview-menu-item--destructive">Delete</div>
+        </div>
+      </div>
+
+      {/* Toast */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Toast</h3>
+        <div class="theme-builder__preview-toast-static">
+          <span>&#10004;</span> Changes saved successfully.
+        </div>
+      </div>
+
+      {/* Tooltip */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Tooltip</h3>
+        <div class="theme-builder__preview-tooltip-static">Tooltip content</div>
+      </div>
+
+      {/* Avatar */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Avatar</h3>
+        <div class="theme-builder__preview-avatars">
+          <div class="theme-builder__preview-avatar">JD</div>
+          <div class="theme-builder__preview-avatar">AB</div>
+          <div class="theme-builder__preview-avatar">+3</div>
+        </div>
+      </div>
+
+      {/* Radio Group */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Radio Group</h3>
+        <div class="theme-builder__preview-radio-group">
+          <label class="theme-builder__preview-radio"><input type="radio" name="preview-radio" checked /> Option A</label>
+          <label class="theme-builder__preview-radio"><input type="radio" name="preview-radio" /> Option B</label>
+        </div>
+      </div>
+
+      {/* Field */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Field</h3>
+        <div class="theme-builder__preview-field-group">
+          <Label.Root class="theme-builder__preview-label">Username</Label.Root>
+          <Input.Root class="theme-builder__preview-input" placeholder="Enter username" />
+          <span class="theme-builder__preview-field-description">Must be at least 3 characters.</span>
+        </div>
+      </div>
+
+      {/* Popover */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Popover</h3>
+        <div class="theme-builder__preview-popover-static">
+          <p>Popover content with additional details.</p>
+        </div>
+      </div>
+
+      {/* Breadcrumb */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Breadcrumb</h3>
+        <nav class="theme-builder__preview-breadcrumb">
+          <a href="#">Home</a> / <a href="#">Settings</a> / <span>Profile</span>
+        </nav>
+      </div>
+
+      {/* Pagination */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Pagination</h3>
+        <div class="theme-builder__preview-pagination">
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">Prev</Button.Root>
+          <span class="theme-builder__preview-page-number">1</span>
+          <span class="theme-builder__preview-page-number theme-builder__preview-page-number--active">2</span>
+          <span class="theme-builder__preview-page-number">3</span>
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">Next</Button.Root>
+        </div>
+      </div>
+
+      {/* Kbd */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Kbd</h3>
+        <div class="theme-builder__preview-kbd-row">
+          <kbd class="theme-builder__preview-kbd">⌘</kbd>
+          <kbd class="theme-builder__preview-kbd">K</kbd>
+          <span class="theme-builder__preview-kbd-separator">to open search</span>
+        </div>
+      </div>
+
+      {/* Meter */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Meter</h3>
+        <div class="theme-builder__preview-meter">
+          <span>Storage: 72%</span>
+          <div class="theme-builder__preview-meter-track">
+            <div class="theme-builder__preview-meter-fill" style={{ width: "72%" }} />
+          </div>
+        </div>
+      </div>
+
+      {/* Spinner */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Spinner</h3>
+        <div class="theme-builder__preview-spinner-row">
+          <div class="theme-builder__preview-spinner" aria-label="Loading" />
+          <span>Loading content...</span>
+        </div>
+      </div>
+
+      {/* Toolbar */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Toolbar</h3>
+        <div class="theme-builder__preview-toolbar-component" role="toolbar">
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">Bold</Button.Root>
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">Italic</Button.Root>
+          <span class="theme-builder__preview-toolbar-separator" />
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">Link</Button.Root>
+        </div>
+      </div>
+
+      {/* Scroll Area */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Scroll Area</h3>
+        <div class="theme-builder__preview-scroll-area">
+          <p>Scrollable content — resize to see the scrollbar styled by theme tokens.</p>
+          <p>Additional content to demonstrate scrolling behavior.</p>
+          <p>More content to ensure scrollbar is visible.</p>
+        </div>
+      </div>
+
+      {/* Data Table */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Data Table</h3>
+        <table class="theme-builder__preview-table">
+          <thead><tr><th>Name</th><th>Status</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td>Alice</td><td>Active</td><td>Admin</td></tr>
+            <tr><td>Bob</td><td>Inactive</td><td>Viewer</td></tr>
+            <tr><td>Carol</td><td>Active</td><td>Editor</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* Resizable Panels */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Resizable Panels</h3>
+        <div class="theme-builder__preview-resizable">
+          <div class="theme-builder__preview-resizable-panel">Panel A</div>
+          <div class="theme-builder__preview-resizable-handle" />
+          <div class="theme-builder__preview-resizable-panel">Panel B</div>
+        </div>
+      </div>
+
+      {/* Navigation Menu */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Navigation Menu</h3>
+        <nav class="theme-builder__preview-nav">
+          <a href="#" class="theme-builder__preview-nav-link theme-builder__preview-nav-link--active">Dashboard</a>
+          <a href="#" class="theme-builder__preview-nav-link">Projects</a>
+          <a href="#" class="theme-builder__preview-nav-link">Settings</a>
+        </nav>
+      </div>
+
+      {/* Command Palette */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Command Palette</h3>
+        <div class="theme-builder__preview-command-palette">
+          <div class="theme-builder__preview-command-input">
+            <span>⌘</span> Search commands...
+          </div>
+        </div>
+      </div>
+
+      {/* Sheet */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Sheet</h3>
+        <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--secondary">
+          Open Sheet →
+        </Button.Root>
+      </div>
+
+      {/* Combobox */}
+      <div class="theme-builder__preview-section">
+        <h3 class="theme-builder__preview-section-title">Combobox</h3>
+        <Input.Root class="theme-builder__preview-input" placeholder="Search options..." />
+      </div>
     </>
   )
 }

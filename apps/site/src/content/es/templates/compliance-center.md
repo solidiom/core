@@ -10,8 +10,8 @@ productLayer: template
 status: draft
 package: "@solidiom/template-compliance-center"
 stack: vite-solid-router
-portfolios: ["enterprise"]
-translationSourceHash: "d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6"
+portfolios: ["enterprise-platform-governance"]
+translationSourceHash: "cabf97a69b49b604e4eee38ba8cb297080e9d8b38aae38ce21846c3bedb7722b"
 translationStatus: draft
 ---
 

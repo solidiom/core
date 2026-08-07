@@ -10,8 +10,8 @@ productLayer: template
 status: draft
 package: "@solidiom/template-workflow-automation"
 stack: vite-solid-router
-portfolios: ["enterprise"]
-translationSourceHash: "f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8"
+portfolios: ["enterprise-platform-governance"]
+translationSourceHash: "910a7561aa5e67543066783bee7c6bf31dd4ba1992379247bfdaed25f6912b43"
 translationStatus: draft
 ---
 

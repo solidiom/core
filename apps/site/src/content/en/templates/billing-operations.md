@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-billing-operations"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Billing Operations provides a production-ready starting point for building internal billing management and financial operations consoles.

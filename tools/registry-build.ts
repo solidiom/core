@@ -1506,12 +1506,38 @@ function getExpectedNamesForLayer(layer: string): Set<string> {
   switch (layer) {
     case "components":
       return new Set(discoverComponentScopes())
-    case "blocks":
-      return new Set()
-    case "templates":
-      return new Set()
+    case "blocks": {
+      // Read block names from the block catalog manifest
+      const manifestPath = join(ROOT, "docs", "contracts", "block-catalog-manifest.json")
+      if (!existsSync(manifestPath)) return new Set()
+      try {
+        const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as { blocks?: Array<{ name?: string }> }
+        return new Set(
+          (manifest.blocks ?? [])
+            .map((b) => (b.name ?? "").toLowerCase().replace(/\s+/g, "-"))
+            .filter(Boolean),
+        )
+      } catch {
+        return new Set()
+      }
+    }
+    case "templates": {
+      // Read template slugs from the template catalog manifest
+      const manifestPath = join(ROOT, "docs", "contracts", "template-catalog-manifest.json")
+      if (!existsSync(manifestPath)) return new Set()
+      try {
+        const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as { templates?: Array<{ slug?: string }> }
+        return new Set(
+          (manifest.templates ?? [])
+            .map((t) => t.slug ?? "")
+            .filter(Boolean),
+        )
+      } catch {
+        return new Set()
+      }
+    }
     case "themes":
-      return new Set()
+      return new Set(["ocean", "forest", "slate", "aurora"])
     default:
       return new Set()
   }

@@ -10,8 +10,8 @@ productLayer: template
 status: draft
 package: "@solidiom/template-api-management"
 stack: vite-solid-router
-portfolios: ["enterprise"]
-translationSourceHash: "a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3"
+portfolios: ["enterprise-platform-governance"]
+translationSourceHash: "f3a32745276030e2c0f65d54916242f6f3681b4b75c24f9830a23f764b5409a7"
 translationStatus: draft
 ---
 

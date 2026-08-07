@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-security-center"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Security Center provides a production-ready starting point for building security operations consoles with threat visibility, vulnerability management, and policy enforcement.

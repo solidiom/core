@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-resource-manager"
 stack: vite-solid-router
-portfolios: ["balanced-product", "enterprise"]
+portfolios: ["balanced-product", "enterprise-platform-governance"]
 ---
 
 Resource Manager provides a production-ready starting point for CRUD resource management applications.

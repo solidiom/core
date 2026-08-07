@@ -17,7 +17,7 @@ source:
   export: BreadcrumbExample
   language: tsx
 runnable: true
-translationSourceHash: "0000000000000000000000000000000000000000000000000000000000000000"
+translationSourceHash: "26670d63b452345bfde119cd8b98ed8ebb37f9dc6b938543a41c7c00f343de23"
 translationStatus: draft
 ---
 

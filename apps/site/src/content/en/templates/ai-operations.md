@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-ai-operations"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 AI Operations provides a production-ready starting point for building MLOps and AI model management consoles for platform teams.

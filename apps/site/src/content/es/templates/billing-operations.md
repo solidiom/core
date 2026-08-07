@@ -10,8 +10,8 @@ productLayer: template
 status: draft
 package: "@solidiom/template-billing-operations"
 stack: vite-solid-router
-portfolios: ["enterprise"]
-translationSourceHash: "d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0"
+portfolios: ["enterprise-platform-governance"]
+translationSourceHash: "5a61499dc3114a6348110b57008aa6d40a60c4def35083b3be3054b4deb08fc3"
 translationStatus: draft
 ---
 

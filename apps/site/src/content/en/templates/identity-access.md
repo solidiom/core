@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-identity-access"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Identity & Access provides a production-ready starting point for building identity and access management consoles for enterprise organizations.

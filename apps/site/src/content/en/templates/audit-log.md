@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-audit-log"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Audit Log provides a production-ready starting point for building audit trail and compliance event viewers for enterprise applications.

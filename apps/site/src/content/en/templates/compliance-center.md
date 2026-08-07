@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-compliance-center"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Compliance Center provides a production-ready starting point for building compliance management consoles with framework tracking, control assessments, and audit evidence collection.

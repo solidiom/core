@@ -10,7 +10,7 @@ productLayer: template
 status: draft
 package: "@solidiom/template-developer-portal"
 stack: vite-solid-router
-portfolios: ["enterprise"]
+portfolios: ["enterprise-platform-governance"]
 ---
 
 Developer Portal provides a production-ready starting point for building developer experience platforms with documentation, interactive tooling, and app lifecycle management.
