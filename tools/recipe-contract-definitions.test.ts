@@ -18,15 +18,12 @@ const CSS_STYLES = join(ROOT, "packages/recipes-css/src/styles")
 /**
  * Scopes that ship as a stylesheet with no `recipes/<scope>.tsx` wrapper.
  *
- * Typography is presentation applied to native tags, so there is no primitive to
- * compose and nothing for a wrapper to render — see
- * docs/architecture/decisions/typeset.md.
- * RECIPE-007 promoted both into REFERENCE_DEFINITIONS, which is why this list is
- * needed to keep the coverage assertion below strict in both directions rather
- * than simply loosened. Mirrors UTILITY_STYLESHEETS in
- * tools/audit-recipe-dual-emission.ts.
+ * After RECIPE-008, typeset and prose both have data-only recipe files and are
+ * covered by recipeScopes() — this list is empty. Kept for clarity: if a new
+ * stylesheet-only scope is added, it belongs here so the coverage assertion
+ * remains strict in both directions.
  */
-const UTILITY_SCOPES = ["prose", "typeset"] as const
+const UTILITY_SCOPES: readonly string[] = []
 
 function recipeScopes(): string[] {
   return readdirSync(CSS_RECIPES)

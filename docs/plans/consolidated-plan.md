@@ -62,7 +62,7 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 | Status | ID | Size | Description |
 |--------|-----|------|-------------|
 | [ ] | CI-008 | XS | Restore automatic triggers or document accepted dispatch ownership/cadence |
-| [ ] | RECIPE-008 | XS | Remove duplicate utility imports, port typeset/prose demos, preserve utility exceptions |
+| [x] | RECIPE-008 | XS | Remove duplicate utility imports, port typeset/prose demos, preserve utility exceptions |
 | [ ] | REG-008 | M | Asymmetric registry signing (replace symmetric index verification) |
 
 ---
@@ -206,7 +206,7 @@ Per primitive, in order: Spanish flips to `translationStatus: human-reviewed` â†
 - [ ] Production deployment and rollback rehearsed
 - [ ] Legacy docs and POC removed after parity verification
 - [ ] `solidiom.org` and locale alternates resolve correctly
-- [ ] Open defects (CI-008, RECIPE-008, REG-008) closed or formally accepted
+- [x] Open defects (CI-008, RECIPE-008 closed, REG-008) closed or formally accepted
 
 ### M5 Critical Path
 
