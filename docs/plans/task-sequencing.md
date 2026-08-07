@@ -12,7 +12,7 @@ date: 2026-08-06
 
 # Solidiom Catalog — Recovery and Delivery Sequencing
 
-**Status:** template fan-out in progress; all 30 components verified, 36/36 blocks complete, 10/29 templates implemented (TPL-001 through TPL-010), 19 remaining (TPL-011 through TPL-029).
+**Status:** template fan-out complete; all 30 components verified, 36/36 blocks complete, 29/29 templates implemented (TPL-001 through TPL-029). M3 (G3) fully closed — `gate:phase3` passes 21/21. Critical path is G4 exit hardening.
 **Status/DoD/queue authority:** [`docs/plans/website-tasks.md`](./website-tasks.md)
 **Decision authority:** [`docs/architecture/decisions/catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)
 
@@ -29,7 +29,7 @@ Recovery is complete. All four recovery prerequisites are closed:
 3. **`CATALOG-003`: aggregate integration.** Complete — contract (34/34), builds, drift, parity, exports, tools tests (382/382), and phase 1 gate (255/255) are all green.
 4. **`TPL-000` in parallel:** Complete — template architecture manifest (29 templates, 32 placements), required-block graph, portfolio placement, and §8.4.1 validator are approved.
 
-Component verification (30/30) and block pilots are also complete. The current position is block fan-out for the remaining 11 blocks, followed by template implementation.
+Component verification (30/30) and block pilots are also complete. All 36 blocks are implemented. Template fan-out is complete (29/29). M3 (G3) is closed — `gate:phase3` passes 21/21. The current position is G4 exit hardening.
 
 ## 3. Decision pointers D1–D6
 
@@ -158,7 +158,7 @@ Template implementation order:
 5. Implement shared portfolio concepts once and expose the approved placements.
 6. Re-estimate after the first three catalog templates.
 
-Current progress: TPL-001 through TPL-010 are implemented. Next: TPL-011 (Search Application) through TPL-029 (Enterprise Settings).
+Current progress: TPL-001 through TPL-029 are all implemented. Template fan-out is complete. The critical path is now G4 exit hardening.
 
 ## 9. Critical path
 
@@ -167,12 +167,14 @@ TPL-000 (complete) ────────────────────�
                                                                  │
 CATALOG-001/002/003 (complete) ──> components 30/30 (complete) ──> blocks 36/36 (complete)
                                                                  │
-                                     template manifest + complete blocks ──> template fan-out (10/29)
+                                     template manifest + complete blocks ──> template fan-out 29/29 (complete)
                                                                                               ↓
-                                                                                          G4 exit
+                                                                                   G4 exit hardening
+                                                                                              ↓
+                                                                                          G5 / GA
 ```
 
-The catalog critical path is now: **template fan-out** (19 remaining: TPL-011 through TPL-029) → **G4 exit**. Theme preset and builder completion can proceed beside the path but cannot satisfy catalog item counts.
+The catalog critical path is now: **G4 exit hardening** (PM matrix, PRESET-006, BUILDER-007, I18N-005, executable verification) → **G5 GA programme**. Theme preset and builder completion are on the G4 path.
 
 ## 10. Sequencing risks
 
