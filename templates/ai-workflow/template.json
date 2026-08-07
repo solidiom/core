@@ -1,0 +1,20 @@
+{
+  "name": "ai-workflow",
+  "stack": "vite-solid-router",
+  "description": "AI workflow automation with visual pipeline builder, model registry, and execution monitoring.",
+  "variables": ["projectName"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-AI-01", "BLOCK-AI-02", "BLOCK-AI-03"],
+  "deploymentTarget": "static",
+  "authModel": "email-password",
+  "portfolioTags": ["balanced-product"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config."
+    }
+  ],
+  "notes": [
+    "`{{projectName}}` is the only substitution token used in this template's source files."
+  ]
+}
