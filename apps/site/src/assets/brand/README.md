@@ -29,7 +29,7 @@ large-format use, and reduces cleanly to a single flat color.
 | `lockup-stacked.svg`       | Symbol above wordmark, for square/vertical placements          | Full color                            |
 | `social-card-template.svg` | 1200×630 Open Graph/Twitter card template                      | Full color, dark background           |
 
-This covers the required variant set from `docs/plans/website-tasks.md` §5.1
+This covers the required variant set from `docs/plans/consolidated-plan.md`
 (BRAND-004): vector icon, wordmark, monochrome light/dark variants,
 favicon set, and social-card source assets.
 

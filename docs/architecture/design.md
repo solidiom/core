@@ -3070,13 +3070,13 @@ External references retained from v0.3 include:
 
 ---
 
-> **Purpose:** For Solidiom project leads and implementers, records the tooling and process decisions made during creation of [`docs/plans/implementation-plan.md`](../plans/implementation-plan.md) and clarifies how each decision satisfies the normative design in §§1–26.
+> **Purpose:** For Solidiom project leads and implementers, records the tooling and process decisions made during creation of [`docs/plans/consolidated-plan.md`](../plans/consolidated-plan.md) and clarifies how each decision satisfies the normative design in §§1–26.
 
 # 27. Implementation-time decisions
 
 The design in §§1–26 is normative for architecture. This section records the operational choices made during implementation planning. Each decision names the mechanism, the alternatives that were considered and rejected, and the design sections it satisfies. These choices are pushback-able before implementation begins but become normative for the implementation once ratified.
 
-Companion file: `docs/plans/implementation-plan.md` breaks these decisions into 68 sequenced tasks across the four phases in §21.
+Companion file: `docs/plans/consolidated-plan.md` breaks these decisions into sequenced tasks across the phases in §21.
 
 ## 27.1 Monorepo tooling
 
@@ -3218,4 +3218,4 @@ The implementation-plan tasks reference these decisions:
 | §27.11 Test doubles    | Tasks 10, 14, 18                                                                                             |
 | §27.12 Docs            | Task 13 (docs playground first-use), continuous thereafter                                                   |
 | §27.13 Benchmarks      | Tasks 11, 17, 56                                                                                             |
-| §27.14 Policy defaults | Various; governed by [`docs/plans/implementation-plan.md`](../plans/implementation-plan.md) locked decisions |
+| §27.14 Policy defaults | Various; governed by [`docs/plans/consolidated-plan.md`](../plans/consolidated-plan.md) locked decisions |

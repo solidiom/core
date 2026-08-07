@@ -11,7 +11,7 @@ volatility: low
 
 # Website M0–M3 Implementation History
 
-> **Non-authoritative.** This document preserves implementation evidence and incident context. Current status, Definitions of Done, defects, and counters are owned by [`docs/plans/website-tasks.md`](../../plans/website-tasks.md).
+> **Non-authoritative.** This document preserves implementation evidence and incident context. Current status, Definitions of Done, defects, and counters are owned by [`docs/plans/consolidated-plan.md`](../../plans/consolidated-plan.md).
 
 ## Scope
 
@@ -71,7 +71,7 @@ Completed work included:
 
 The historical acceptance evidence included `beta:acceptance:report` at 60/60, `beta:acceptance:e2e` at 111/111 across Chromium, Firefox, and WebKit, site E2E at 435/435 across desktop and mobile projects, and a green phase 3 gate at the historical commit. These are historical measurements, not current claims.
 
-The later catalog expansion regressed `RECIPE-005`, `RECIPE-006`, the aggregate phase gate, and translation/tool evidence. Current values and repair ownership are intentionally kept only in `website-tasks.md`.
+The later catalog expansion regressed `RECIPE-005`, `RECIPE-006`, the aggregate phase gate, and translation/tool evidence. Current values and repair ownership are intentionally kept only in `consolidated-plan.md`.
 
 ## CI configuration incident
 
@@ -83,7 +83,7 @@ The durable lesson is that adding a job is not sufficient. Evidence requires a l
 
 ## Workflow trigger reversal
 
-On 2026-08-04, all five workflows were changed to manual dispatch only. Push and pull-request triggers were commented in `ci.yml` and `preview-deploy.yml`. The job definitions remained, but automatic enforcement and per-PR preview behavior stopped. The active decision is tracked by `CI-001` and `CI-008` in `website-tasks.md`.
+On 2026-08-04, all five workflows were changed to manual dispatch only. Push and pull-request triggers were commented in `ci.yml` and `preview-deploy.yml`. The job definitions remained, but automatic enforcement and per-PR preview behavior stopped. The active decision is tracked by `CI-001` and `CI-008` in `consolidated-plan.md`.
 
 ## Visual baseline incident
 

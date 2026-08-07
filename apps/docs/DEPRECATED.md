@@ -16,7 +16,7 @@ and the migration is complete (CUT-003).
 ## Where to work instead
 
 All new documentation and website work happens in `apps/site/` (the Astro
-static site). See `docs/plans/website-tasks.md` for the implementation backlog.
+static site). See `docs/plans/consolidated-plan.md` for the implementation backlog.
 
 ## Dependencies
 

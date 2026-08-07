@@ -10,7 +10,7 @@ authority: canonical
 volatility: low
 date: 2026-08-03
 last_updated: 2026-08-06
-supersedes: docs/plans/typeset-plan.md
+supersedes: docs/plans/typeset-plan.md (removed)
 ---
 
 # Typeset and Prose Are Recipe Utility Scopes
@@ -24,7 +24,7 @@ supersedes: docs/plans/typeset-plan.md
 - Both belong in the canonical recipe contract and are generated for supported CSS, Tailwind, and UnoCSS profiles.
 - Their source and generated output follow recipe parity, drift, export, and audit policy without being counted as source-owned components.
 
-For implementation status and residual `RECIPE-008` work, see [website-tasks.md §11.1](../../plans/website-tasks.md#111-open-defects-and-evidence-gaps). This record intentionally contains no task status or command output.
+For implementation status and residual `RECIPE-008` work, see [consolidated-plan.md §4](../../plans/consolidated-plan.md#4-open-defects). This record intentionally contains no task status or command output.
 
 ## Context
 

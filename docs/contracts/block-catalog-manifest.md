@@ -9,11 +9,11 @@ tags: [blocks, catalog, manifest, contract, composition]
 lifecycle: current
 ---
 
-> **Purpose:** the normative block catalog manifest. Assigns a concrete name, product outcome, required states, component dependencies, and data boundary to every reserved slot. Supersedes placeholder category labels in `docs/plans/website-tasks.md` §9.3. No placeholder name ships per Block DoD §8.3.
+> **Purpose:** the normative block catalog manifest. Assigns a concrete name, product outcome, required states, component dependencies, and data boundary to every reserved slot. Supersedes placeholder category labels in `docs/plans/consolidated-plan.md` §9.3. No placeholder name ships per Block DoD §8.3.
 
 **Manifest version:** 2
 **Status:** approved; all 36 slots populated.
-**Task:** `docs/plans/website-tasks.md` §9.3 `BLOCK-000`
+**Task:** `docs/plans/consolidated-plan.md` §9.3 `BLOCK-000`
 **Depends on:** representative `COMP-*` components complete
 
 > **Version 2 — component IDs corrected.** Ten citations in version 1 used `PRIM-*` numbers with a `COMP-` prefix; each matched `PRIM-<same number>` exactly, so the names in this document were the authored intent and the IDs were the defect. All ten are corrected. Two of them — `COMP-016` meaning Data Table in 19 blocks, and `COMP-014` meaning Command Palette in one — fell inside `COMP-001..021` and so resolved cleanly to the **wrong** component instead of failing validation. Nine of the intended components were absent from the approved catalog, which `website-tasks.md` §9.2 now extends from 21 to 30. `proposedComponents` is empty for every block; see the `resolution` block in the JSON for the full mapping.

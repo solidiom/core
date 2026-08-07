@@ -13,7 +13,7 @@ lifecycle: current
 
 **Contract version:** 1
 **Status:** schema, validator, migration mechanism, one reference definition (THEME-001), CSS/Tailwind/UnoCSS generation (THEME-002/003/004), and the cross-output parity/contrast/round-trip audit (THEME-005) are all shipped. `audit:theme-parity` passes cleanly with no exceptions.
-**Task:** `docs/plans/website-tasks.md` §7.2 THEME-001..005
+**Task:** `docs/plans/consolidated-plan.md` §9.5 THEME-001..005
 **Depends on:** BRAND-002 (`apps/site/src/assets/tokens.css`), RECIPE-001 (`docs/contracts/recipe-contract.md` §4 token model)
 
 ---

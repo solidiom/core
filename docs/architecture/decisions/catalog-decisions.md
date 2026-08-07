@@ -11,7 +11,7 @@ volatility: low
 
 # Catalog Decisions D1–D6
 
-This document owns the durable rationale for catalog decisions D1–D6. The normative item requirements and current task states remain in [`website-tasks.md`](../../plans/website-tasks.md); implementation order remains in [`task-sequencing.md`](../../plans/task-sequencing.md).
+This document owns the durable rationale for catalog decisions D1–D6. The normative item requirements, current task states, and implementation order remain in [`consolidated-plan.md`](../../plans/consolidated-plan.md).
 
 ## Decision context
 
@@ -79,4 +79,4 @@ Solidiom must ship primitives, styled components, blocks, and templates without 
 
 ## Change policy
 
-A decision change must update this record, the normative DoD clauses in `website-tasks.md`, affected contracts, and sequencing implications together. Current evidence and incident narratives belong in the active backlog or history, not in this low-volatility record.
+A decision change must update this record, the normative DoD clauses in `consolidated-plan.md`, affected contracts, and sequencing implications together. Current evidence and incident narratives belong in the active backlog or history, not in this low-volatility record.
