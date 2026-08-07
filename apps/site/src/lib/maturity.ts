@@ -74,9 +74,9 @@ export const PLATFORM_MATURITY: Record<string, MaturityLevel> = {
   themes: "stable",
   primitives: "beta",
   builder: "beta",
-  components: "upcoming",
-  blocks: "upcoming",
-  templates: "upcoming",
+  components: "beta",
+  blocks: "beta",
+  templates: "beta",
 }
 
 /**

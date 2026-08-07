@@ -1,7 +1,10 @@
 ---
 /**
  * Generic directory listing for content-collection-based catalog layers.
- * Lists every entry in the collection for the given locale.
+ * Lists every entry in the collection for the given locale with filtering
+ * and layer-appropriate metadata display.
+ *
+ * MKT-002: Accurate layer landing/directory shells.
  */
 import { getCollection } from "astro:content"
 import DocsLayout from "../layouts/DocsLayout.astro"
@@ -27,6 +30,9 @@ const sortedEntries = entries
     description: entry.data.description ?? "",
     status: entry.data.status ?? "draft",
     href: layerHref(layer, entryName(entry.id), locale),
+    keywords: entry.data.keywords ?? [],
+    stack: "stack" in entry.data ? (entry.data as Record<string, unknown>).stack as string | undefined : undefined,
+    portfolios: "portfolios" in entry.data ? (entry.data as Record<string, unknown>).portfolios as string[] ?? [] : [],
   }))
   .sort((a, b) => a.label.localeCompare(b.label))
 
@@ -37,6 +43,9 @@ const breadcrumbItems = [
   { name: seoCopy.home, pathname: homePath },
   { name: copy.directoryTitle, pathname: directoryPath },
 ]
+
+const filterLabel = locale === "es" ? "Filtrar por nombre" : "Filter by name"
+const allLabel = locale === "es" ? "Todos" : "All"
 ---
 
 <DocsLayout title={copy.directoryTitle} description={copy.directoryDescription} contentType={layer}>
@@ -53,16 +62,35 @@ const breadcrumbItems = [
     {sortedEntries.length > 0 && <p class="primitive-directory__count">{countLabel}</p>}
   </header>
 
+  {sortedEntries.length > 0 && (
+    <div class="primitive-directory__toolbar">
+      <label class="primitive-directory__filter-label">
+        <span class="sr-only">{filterLabel}</span>
+        <input
+          type="search"
+          class="primitive-directory__filter-input"
+          placeholder={filterLabel}
+          data-directory-filter
+          aria-label={filterLabel}
+        />
+      </label>
+    </div>
+  )}
+
   {
     sortedEntries.length > 0 ? (
-      <ul class="primitive-directory__grid" data-pagefind-ignore="index">
+      <ul class="primitive-directory__grid" data-pagefind-ignore="index" data-directory-list>
         {sortedEntries.map((entry) => (
-          <li class="primitive-directory__item">
+          <li class="primitive-directory__item" data-directory-entry data-name={entry.name} data-label={entry.label.toLowerCase()}>
             <a href={entry.href} class="primitive-directory__link">
               <span class="primitive-directory__name">{entry.label}</span>
               <span class="primitive-directory__description">{entry.description}</span>
               <span class="primitive-directory__meta">
-                <span class="primitive-directory__status">{entry.status}</span>
+                <span class="primitive-directory__status" data-status={entry.status}>{entry.status}</span>
+                {entry.stack && <span class="primitive-directory__stack">{entry.stack}</span>}
+                {entry.portfolios.length > 0 && entry.portfolios.map((p: string) => (
+                  <span class="primitive-directory__portfolio">{p.replace("-", " ")}</span>
+                ))}
               </span>
             </a>
           </li>
@@ -74,4 +102,20 @@ const breadcrumbItems = [
       </p>
     )
   }
+
+  <script>
+    const input = document.querySelector("[data-directory-filter]") as HTMLInputElement | null
+    const entries = document.querySelectorAll("[data-directory-entry]")
+    if (input && entries.length > 0) {
+      input.addEventListener("input", () => {
+        const query = input.value.toLowerCase().trim()
+        entries.forEach((entry) => {
+          const name = entry.getAttribute("data-name") ?? ""
+          const label = entry.getAttribute("data-label") ?? ""
+          const visible = !query || name.includes(query) || label.includes(query)
+          ;(entry as HTMLElement).style.display = visible ? "" : "none"
+        })
+      })
+    }
+  </script>
 </DocsLayout>
