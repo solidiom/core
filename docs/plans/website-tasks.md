@@ -12,7 +12,7 @@ date: 2026-08-06
 
 # Solidiom Website — Canonical Task Authority
 
-**Status:** in execution — M0–M2 complete; M3 integration recovered; M4 primitives complete, 30/30 components verified, 36/36 blocks complete, 10/29 templates implemented; M5 in progress incidentally.
+**Status:** in execution — M0–M2 complete; **M3 complete** (`gate:phase3` 21/21); M4 catalog items complete (52/52, 30/30, 36/36, 29/29), G4 exit hardening in progress; M5 in progress incidentally.
 **Current tree evidence:** `gate:phase1` is green at 255/255; `test:tools` 382/382; recipe contract 34/34; drift/parity/exports all zero issues.
 **Target application:** `apps/site/`
 **Canonical origin:** `https://solidiom.org`
@@ -22,9 +22,9 @@ date: 2026-08-06
 **Durable decisions:** [`catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)
 **History:** [`website-m0-m3.md`](../history/plans/website-m0-m3.md) and [`catalog-foundations-2026-08.md`](../history/plans/catalog-foundations-2026-08.md)
 
-Current position: all 52 primitives meet the M4 bar. All 30 components are verified `[x]`. All 36 blocks are complete `[x]`. Ten templates are implemented `[x]` (TPL-001 through TPL-010); 19 remain `[ ]` (TPL-011 through TPL-029). Two reference templates (`vite-solid-router`, `tanstack-start-solid`) exist but are not approved catalog rows. Untracked registry entries for `accordion`, `badge`, and `menu` are flagged by the corrected gate but not counted. Workflows are dispatch-only.
+Current position: all 52 primitives meet the M4 bar. All 30 components are verified `[x]`. All 36 blocks are complete `[x]`. All 29 templates are implemented `[x]` (TPL-001 through TPL-029). Two reference templates (`vite-solid-router`, `tanstack-start-solid`) exist but are not approved catalog rows. Untracked registry entries for `accordion`, `badge`, and `menu` are flagged by the corrected gate but not counted. Workflows are dispatch-only. M3 (G3) is closed — `gate:phase3` passes 21/21.
 
-Recovery tasks `CATALOG-001`, `CATALOG-002`, `CATALOG-003`, `TPL-000`, and `FOUND-008` are complete. All 30 components and all 36 blocks are verified. Ten templates are implemented. The critical path is now template fan-out (19 remaining) → G4 exit.
+All recovery tasks are complete. All catalog layer items are implemented. The critical path is now G4 exit hardening (PM matrix, presets, builder, translation freshness, executable verification).
 
 ---
 
@@ -73,8 +73,8 @@ Every completed implementation task must:
 | M0 Governance/inputs      | Complete                     | Governance, brand, migration, baseline, and operations prerequisites closed G0.           |
 | M1 Foundation/alpha       | Complete with policy blocker | Site foundation closed G1; `CI-001` remains blocked by the dispatch-only policy.          |
 | M2 Content vertical slice | Complete                     | Registry/content/API/a11y/docs/search and three complex slices closed G2.                 |
-| M3 Public beta            | Recovered                    | Integration evidence restored: contract, builds, drift, parity, exports, tools all green.     |
-| M4 Catalog                | In progress                  | Primitives 52/52; components 30/30; blocks 36/36; templates 10/29.                              |
+| M3 Public beta            | **Complete**                 | G3 closed: `gate:phase3` passes 21/21. Contract, builds, drift, parity, exports, tools all green. |
+| M4 Catalog                | In progress (hardening)      | Primitives 52/52; components 30/30; blocks 36/36; templates 29/29. G4 exit hardening remains.     |
 | M5 GA/cutover             | In progress incidentally     | `MKT-005` and `BUILDER-008` are complete; the remaining GA programme is open.             |
 
 ### 2.1 Compact completion ledger for M0–M3
@@ -121,12 +121,12 @@ TPL-000 (parallel) → block pilots → block fan-out → template fan-out → G
 
 ## 7. M3 — Public beta platform
 
-M3 shipped, but current catalog changes reopened its recipe integration evidence.
+**G3: complete.** `gate:phase3` passes 21/21. All integration evidence is restored and the aggregate accessibility blocker is resolved.
 
 | Status | ID         | Size | Owner             | Acceptance boundary                                                                                                     |
 | ------ | ---------- | ---- | ----------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| [~]    | RECIPE-005 | M    | QA/design systems | Restore three-output contract, drift, parity, state, and exception audits; current failures are owned by `CATALOG-003`. |
-| [~]    | RECIPE-006 | S    | Build             | Restore recipe package builds, source mirrors, and exports; current failures are owned by `CATALOG-003`.                |
+| [x]    | RECIPE-005 | M    | QA/design systems | Restore three-output contract, drift, parity, state, and exception audits; current failures are owned by `CATALOG-003`. |
+| [x]    | RECIPE-006 | S    | Build             | Restore recipe package builds, source mirrors, and exports; current failures are owned by `CATALOG-003`.                |
 
 ### G3 exit checklist
 
@@ -135,7 +135,7 @@ M3 shipped, but current catalog changes reopened its recipe integration evidence
 - [x] CLI plan/inspect/add/create, verification, rollback, four package managers, and offline fixtures are implemented.
 - [x] Theme-builder foundation is route-local and implemented.
 - [x] Beta coverage/maturity labels, static acceptance, browser acceptance, and publication information were delivered.
-- [ ] Current aggregate accessibility evidence is blocked because `gate:phase3` re-runs the red phase 1 gate.
+- [x] Aggregate accessibility evidence passes — `gate:phase3` re-runs phase 1 gate successfully (255/255).
 
 Historical beta and CI measurements are recorded in [website M0–M3 history](../history/plans/website-m0-m3.md#m3--public-beta-platform-delivered-then-regressed), not repeated as current evidence here.
 
@@ -379,25 +379,25 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | [x]    | TPL-008 | Observability Console                            | Balanced + Enterprise | WP   | TPL-000, required BLOCK-* |
 | [x]    | TPL-009 | AI Chat                                          | Balanced              | WP   | TPL-000, required BLOCK-* |
 | [x]    | TPL-010 | AI Workflow                                      | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-011 | Search Application                               | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-012 | Storefront                                       | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-013 | Marketplace                                      | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-014 | Content Studio                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-015 | Marketing Site                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-016 | Documentation/Product Site                       | Balanced              | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-017 | Identity & Access                                | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-018 | Audit Log                                        | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-019 | Billing Operations                               | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-020 | Incident Response                                | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-021 | AI Operations                                    | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-022 | API Management                                   | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-023 | Developer Portal                                 | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-024 | Security Center                                  | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-025 | Compliance Center                                | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-026 | Data Governance                                  | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-027 | Workflow Automation                              | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-028 | Support Operations                               | Enterprise            | WP   | TPL-000, required BLOCK-* |
-| [ ]    | TPL-029 | Enterprise Settings                              | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-011 | Search Application                               | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-012 | Storefront                                       | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-013 | Marketplace                                      | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-014 | Content Studio                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-015 | Marketing Site                                   | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-016 | Documentation/Product Site                       | Balanced              | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-017 | Identity & Access                                | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-018 | Audit Log                                        | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-019 | Billing Operations                               | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-020 | Incident Response                                | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-021 | AI Operations                                    | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-022 | API Management                                   | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-023 | Developer Portal                                 | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-024 | Security Center                                  | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-025 | Compliance Center                                | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-026 | Data Governance                                  | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-027 | Workflow Automation                              | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-028 | Support Operations                               | Enterprise            | WP   | TPL-000, required BLOCK-* |
+| [x]    | TPL-029 | Enterprise Settings                              | Enterprise            | WP   | TPL-000, required BLOCK-* |
 
 ### 9.5 Theme preset queue and builder completion
 
@@ -418,7 +418,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 - [x] `PRIM-001..052` complete: 52/52.
 - [x] `COMP-001..030` complete: 30/30 verified.
 - [x] At least 36 named blocks complete: 36/36.
-- [ ] `TPL-001..029` complete and exposed as 32 placements: currently 10/29.
+- [x] `TPL-001..029` complete and exposed as 32 placements: 29/29.
 - [ ] All template × package-manager smoke combinations pass.
 - [ ] Four presets and the full builder satisfy registry, preview, locale, accessibility, browser, and output gates.
 - [ ] No stale translation, unsigned manifest, placeholder, or maturity exception remains.
@@ -528,7 +528,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 - Primitives remain 52/52 at the M4 bar; G5 promotion is separate.
 - All 30 components meet the M4 bar (§8.2.1); DoD 30/30. `accordion`, `badge`, and `menu` remain unapproved registry slugs.
 - All 36 blocks meet the M4 bar with source, registry, bilingual docs, and all four required states implemented.
-- Ten templates (TPL-001 through TPL-010) are implemented with template dir, template.json, source, registry, and bilingual docs.
+- All 29 templates (TPL-001 through TPL-029) are implemented with template dir, template.json, source, registry, and bilingual docs. `template:catalog-gate` passes 29/29.
 - Theme preset outputs/docs/routes exist, but DoD remains 0 until `PRESET-006` closes.
 - Locale count means two implemented locale systems, not complete per-item human review.
 
@@ -552,7 +552,7 @@ git status --short
 pnpm run primitive:catalog-gate   # 52/52
 pnpm run component:catalog-gate   # 30/30 against §9.2 approved queue
 pnpm run block:catalog-gate       # 36/36
-pnpm run template:catalog-gate    # 10/29 — 19 templates remain (TPL-011..TPL-029)
+pnpm run template:catalog-gate    # 29/29 — all templates complete
 pnpm run recipe:contract          # 34/34 scopes pass
 pnpm run audit:recipe-drift       # 0 issues
 pnpm run audit:recipe-parity      # 0 issues
