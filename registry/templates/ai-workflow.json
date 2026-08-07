@@ -1,0 +1,20 @@
+{
+  "name": "ai-workflow",
+  "version": "0.0.1-next.0",
+  "label": "AI Workflow",
+  "description": "AI workflow automation with visual pipeline builder, model registry, and execution monitoring.",
+  "status": "preview",
+  "templateId": "TPL-010",
+  "stack": "vite-solid-router",
+  "portfolioTags": ["balanced-product"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-AI-01", "BLOCK-AI-02", "BLOCK-AI-03"],
+  "integrity": {
+    "algorithm": "sha256",
+    "manifestHash": "tpl-010-ai-workflow-manifest",
+    "lastGenerated": "2026-08-06T23:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
+  }
+}
