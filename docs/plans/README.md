@@ -17,22 +17,20 @@ Read this page first. It summarizes the current website/catalog position and poi
 
 - M0–M2 are complete.
 - **M3 is complete**: `gate:phase3` passes 21/21. Recipe contract (34/34), builds, drift, parity, exports, tools tests (382/382), and phase 1 gate (255/255) are all green.
-- **M4 is complete** (catalog items): primitives 52/52; components 30/30; blocks 36/36; **templates 29/29**. G4 exit hardening remains.
-- M5 has only incidental progress: `MKT-005` and `BUILDER-008` are complete.
-- `TPL-000` is complete: template manifest (29 templates, 32 placements), dependency graph, and §8.4.1 validator are approved and wired into the phase 1 gate.
+- **M4 is complete**: G4 exit criteria satisfied. Primitives 52/52; components 30/30; blocks 36/36; templates 29/29. All gates pass clean-tree verification. PRESET-006, BUILDER-007, and I18N-005 are closed.
+- M5 is next: GA hardening, playground, marketing, analytics, QA, and production cutover.
 - Two reference templates (`vite-solid-router`, `tanstack-start-solid`) exist but are not approved `TPL-*` catalog rows.
 - Workflows are dispatch-only, so local or explicitly dispatched evidence is required.
 - Historical green evidence must not be treated as evidence for the current tree.
 
 ## Immediate priorities
 
-1. **G4 exit hardening:** pass all template × package-manager smoke combinations; close PRESET-006, BUILDER-007, I18N-005.
-2. **Theme preset registry (`PRESET-006`):** complete preview evidence and registry/catalog integration for all four presets.
-3. **Builder coverage (`BUILDER-007`):** expand preview coverage from 8 to all 30 components.
-4. **Translation freshness (`I18N-005`):** clear stale and missing catalog translation records.
-5. **`CATALOG-001` untracked slugs:** formally reject or add `accordion`, `badge`, and `menu` registry entries that have no COMP-* row.
+1. **M5 GA programme:** begin playground (PLAY-001..008), marketing (MKT-001..013), analytics (ANALYTICS-001..003), and QA (QA-001..010).
+2. **Library release:** close Phase 3 beta blockers (C8, C9/Task 60, C10/Task 68, C11).
+3. **Open defects:** CI-008 (restore CI triggers), RECIPE-008 (utility cleanup), REG-008 (asymmetric signature).
+4. **G5 promotion:** per-primitive human-reviewed Spanish + `stable` status.
 
-All recovery tasks are complete. All catalog layer items (primitives, components, blocks, templates) are implemented. The critical path is now G4 exit hardening → M5 GA programme.
+All recovery tasks, catalog items, and G4 hardening are complete. The project moves to M5 (GA hardening and cutover) and library Phase 3 beta release.
 
 ## Authority map
 

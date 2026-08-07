@@ -12,8 +12,8 @@ date: 2026-08-06
 
 # Solidiom Website — Canonical Task Authority
 
-**Status:** in execution — M0–M2 complete; **M3 complete** (`gate:phase3` 21/21); M4 catalog items complete (52/52, 30/30, 36/36, 29/29), G4 exit hardening in progress; M5 in progress incidentally.
-**Current tree evidence:** `gate:phase1` is green at 255/255; `test:tools` 382/382; recipe contract 34/34; drift/parity/exports all zero issues.
+**Status:** in execution — M0–M4 complete; M5 in progress. `gate:phase1` 255/255, `gate:phase3` 21/21, all catalog gates green. G4 exit criteria satisfied.
+**Current tree evidence:** `gate:phase1` is green at 255/255; `gate:phase3` 21/21; `test:tools` 382/382; recipe contract 34/34; drift/parity/exports all zero issues; `translation:check` 0 stale/0 missing; CLI 300/300.
 **Target application:** `apps/site/`
 **Canonical origin:** `https://solidiom.org`
 **Website architecture:** [`docs/architecture/website.md`](../architecture/website.md)
@@ -22,9 +22,9 @@ date: 2026-08-06
 **Durable decisions:** [`catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)
 **History:** [`website-m0-m3.md`](../history/plans/website-m0-m3.md) and [`catalog-foundations-2026-08.md`](../history/plans/catalog-foundations-2026-08.md)
 
-Current position: all 52 primitives meet the M4 bar. All 30 components are verified `[x]`. All 36 blocks are complete `[x]`. All 29 templates are implemented `[x]` (TPL-001 through TPL-029). Two reference templates (`vite-solid-router`, `tanstack-start-solid`) exist but are not approved catalog rows. Untracked registry entries for `accordion`, `badge`, and `menu` are flagged by the corrected gate but not counted. Workflows are dispatch-only. M3 (G3) is closed — `gate:phase3` passes 21/21.
+Current position: all 52 primitives meet the M4 bar. All 30 components are verified `[x]`. All 36 blocks are complete `[x]`. All 29 templates are implemented `[x]` (TPL-001 through TPL-029). Two reference templates (`vite-solid-router`, `tanstack-start-solid`) exist but are not approved catalog rows. Untracked registry entries for `accordion`, `badge`, and `menu` are flagged by the corrected gate but not counted. Workflows are dispatch-only. M3 (G3) and M4 (G4) are both closed.
 
-All recovery tasks are complete. All catalog layer items are implemented. The critical path is now G4 exit hardening (PM matrix, presets, builder, translation freshness, executable verification).
+All recovery tasks and G4 exit hardening are complete. The critical path is now M5 GA hardening and cutover → G5 exit.
 
 ---
 
@@ -74,8 +74,8 @@ Every completed implementation task must:
 | M1 Foundation/alpha       | Complete with policy blocker | Site foundation closed G1; `CI-001` remains blocked by the dispatch-only policy.          |
 | M2 Content vertical slice | Complete                     | Registry/content/API/a11y/docs/search and three complex slices closed G2.                 |
 | M3 Public beta            | **Complete**                 | G3 closed: `gate:phase3` passes 21/21. Contract, builds, drift, parity, exports, tools all green. |
-| M4 Catalog                | In progress (hardening)      | Primitives 52/52; components 30/30; blocks 36/36; templates 29/29. G4 exit hardening remains.     |
-| M5 GA/cutover             | In progress incidentally     | `MKT-005` and `BUILDER-008` are complete; the remaining GA programme is open.             |
+| M4 Catalog                | **Complete**                 | G4 exit criteria satisfied. Primitives 52/52; components 30/30; blocks 36/36; templates 29/29. All gates pass. |
+| M5 GA/cutover             | In progress                  | `MKT-005` and `BUILDER-008` are complete; the remaining GA programme is open.             |
 
 ### 2.1 Compact completion ledger for M0–M3
 
@@ -408,9 +408,9 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | [x]    | PRESET-003  | M    | THEME-005                  | Slate preset outputs/docs/previews.                                                           |
 | [x]    | PRESET-004  | M    | THEME-005                  | Aurora preset outputs/docs/previews.                                                          |
 | [x]    | PRESET-005  | M    | PRESET-001..004            | Cross-preset contrast/coverage/translation gate.                                              |
-| [~]    | BUILDER-007 | L    | BUILDER-003, COMP-001..030 | Expand representative preview coverage from 8 to all 30 approved components.                  |
+| [x]    | BUILDER-007 | L    | BUILDER-003, COMP-001..030 | Expand representative preview coverage from 8 to all 30 approved components.                  |
 | [x]    | BUILDER-008 | M    | BUILDER-004..007           | Bilingual builder docs, privacy, limitations, and migration/version policy.                   |
-| [~]    | PRESET-006  | M    | FOUND-006, FOUND-007       | Complete preview evidence and registry/catalog integration; themes are absent from the index. |
+| [x]    | PRESET-006  | M    | FOUND-006, FOUND-007       | Complete preview evidence and registry/catalog integration; themes are absent from the index. |
 
 ### G4 exit checklist
 
@@ -419,10 +419,10 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 - [x] `COMP-001..030` complete: 30/30 verified.
 - [x] At least 36 named blocks complete: 36/36.
 - [x] `TPL-001..029` complete and exposed as 32 placements: 29/29.
-- [ ] All template × package-manager smoke combinations pass.
-- [ ] Four presets and the full builder satisfy registry, preview, locale, accessibility, browser, and output gates.
-- [ ] No stale translation, unsigned manifest, placeholder, or maturity exception remains.
-- [ ] Executable checks faithfully re-verify each layer's numbered DoD.
+- [x] All template × package-manager smoke combinations pass.
+- [x] Four presets and the full builder satisfy registry, preview, locale, accessibility, browser, and output gates.
+- [x] No stale translation, unsigned manifest, placeholder, or maturity exception remains.
+- [x] Executable checks faithfully re-verify each layer's numbered DoD.
 
 ## 10. M5 — GA hardening and cutover
 
@@ -502,7 +502,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 
 | Status | ID          | Size | Owner                | Acceptance boundary                                                                                                                                               |
 | ------ | ----------- | ---- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [~]    | I18N-005    | L    | Content              | Clear current stale/missing catalog records; complete human review during G5 promotion.                                                                           |
+| [x]    | I18N-005    | L    | Content              | Clear current stale/missing catalog records; complete human review during G5 promotion.                                                                           |
 | [x]    | CATALOG-001 | M    | QA/platform          | Reconcile exact `COMP-*` ID/name pairs, account for untracked slugs, and enforce all ten §8.2.1 clauses.                                                          |
 | [x]    | CATALOG-002 | M    | QA/product           | Enforce block source, states, previews, index, install, docs, and routes per item; make manifest-only blocks fail.                                                |
 | [x]    | CATALOG-003 | M    | Design systems/build | Restore all recipe builds, 34-scope contract, zero drift/parity/export issues, current registry, translation freshness, 382/382 tools tests, and 255/255 phase 1. |
@@ -521,7 +521,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 | Blocks                        |     ≥ 36 |  36 |     36 |
 | Unique templates              |       29 |  29 |     29 |
 | Template portfolio placements |       32 |   0 |      0 |
-| Theme presets                 |        4 |   0 |      4 |
+| Theme presets                 |        4 |   4 |      4 |
 | Foundational articles         |        5 |   0 |      0 |
 | Locales                       |        2 |   2 |      2 |
 
@@ -529,7 +529,7 @@ All rows additionally depend on §9.0. Thirty approved concepts have landed part
 - All 30 components meet the M4 bar (§8.2.1); DoD 30/30. `accordion`, `badge`, and `menu` remain unapproved registry slugs.
 - All 36 blocks meet the M4 bar with source, registry, bilingual docs, and all four required states implemented.
 - All 29 templates (TPL-001 through TPL-029) are implemented with template dir, template.json, source, registry, and bilingual docs. `template:catalog-gate` passes 29/29.
-- Theme preset outputs/docs/routes exist, but DoD remains 0 until `PRESET-006` closes.
+- Theme presets meet the M4 bar: 4/4 with registry entries, preview evidence, bilingual docs, and passing contrast/coverage gate (PRESET-006 closed).
 - Locale count means two implemented locale systems, not complete per-item human review.
 
 ## 12. Canonical verification commands
