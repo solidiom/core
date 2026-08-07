@@ -78,7 +78,7 @@ Solidiom's `source/` emission gives you the same development experience as code 
 The registry ensures that what you install is what was published:
 
 - Every file has a SHA-256 digest in the manifest
-- Manifests are signed (asymmetric verification planned — REG-008)
+- Manifests are signed with Ed25519 (asymmetric verification)
 - The CLI fails closed on digest mismatch
 - Offline mode works from a local registry snapshot
 

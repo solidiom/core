@@ -30,7 +30,7 @@
         "src/recipes/command-palette.tsx": "faa3d37cf398147120806eba4ede7653bb5fed294a1b2edd3b9b428b215fa850"
       }
     },
-    "lastGenerated": "2026-08-07T14:25:45.000Z"
+    "lastGenerated": "2026-08-07T16:14:27.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/command-palette"
   ],
-  "lastUpdated": "2026-08-07T14:25:45.000Z"
+  "lastUpdated": "2026-08-07T16:14:27.000Z"
 }

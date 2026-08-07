@@ -21,6 +21,7 @@ export { StyledBadge, type BadgeVariant } from "./recipes/badge";
 export { StyledAlert, type AlertVariant } from "./recipes/alert";
 export { StyledAvatar } from "./recipes/avatar";
 export { typeset, type TypesetKey } from "./recipes/typeset";
+export { PROSE_SIZES, type ProseSize } from "./recipes/prose";
 export { StyledSpinner } from "./recipes/spinner";
 export { StyledCard } from "./recipes/card";
 export { StyledBreadcrumb } from "./recipes/breadcrumb";

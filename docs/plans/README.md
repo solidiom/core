@@ -19,13 +19,13 @@ Read this page first. It summarizes the current position and points to the docum
 - **M5 is active:** GA hardening, QA, security, primitive promotion, and production cutover.
 - **M6 follows G5:** playground, marketing, analytics, newsletter, and editorial content.
 - Library Phase 3 beta blockers (C8, C9, C10, C11) track independently.
-- Open defect: REG-008. CI-008 resolved — workflows remain dispatch-only until post-GA automatic triggers are enabled.
+- No open defects.
 
 ## Immediate priorities
 
 1. **M5 production exit:** QA audits (QA-001..010), primitive G5 promotion (52×), operations (OPS-004..005), cutover (CUT-001..006).
 2. **Library release:** close beta blockers (C8, C9/Task 60, C10/Task 68, C11).
-3. **Open defects:** REG-008.
+3. **No open defects.** CI-008 and REG-008 resolved.
 
 ## Authority map
 

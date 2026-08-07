@@ -297,7 +297,7 @@ GitHub Issues and Discussions are the maintained community channels. Do not adve
 
 Deploy static output to Cloudflare Pages at `solidiom.org`, with pull-request previews, headers, redirects, custom-domain configuration, and a rollback path.
 
-Publish a coordinated-disclosure policy and use GitHub private vulnerability reporting. Sign versioned registry indexes, verify downloaded files against per-file hashes, pin generated dependency metadata, and fail closed when signatures or hashes are missing or invalid. Record provenance for submissions and generated artifacts. Apply a strict content security policy and restrictive playground iframe permissions.
+Publish a coordinated-disclosure policy and use GitHub private vulnerability reporting. Sign versioned registry indexes with Ed25519 asymmetric signatures, verify downloaded files against per-file hashes, pin generated dependency metadata, and fail closed when signatures or hashes are missing or invalid. Record provenance for submissions and generated artifacts. Apply a strict content security policy and restrictive playground iframe permissions.
 
 ## 7. Governance
 

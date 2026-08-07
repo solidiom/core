@@ -30,7 +30,7 @@
         "src/recipes/kbd.tsx": "5a0d549a60a39a9be9883b6049fa0954262c2eea719810a2fd2bff28d0a1d4ff"
       }
     },
-    "lastGenerated": "2026-08-07T14:25:45.000Z"
+    "lastGenerated": "2026-08-07T16:14:27.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/kbd"
   ],
-  "lastUpdated": "2026-08-07T14:25:45.000Z"
+  "lastUpdated": "2026-08-07T16:14:27.000Z"
 }

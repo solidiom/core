@@ -44,7 +44,7 @@ export interface VerifySourceIntegrityOptions {
   registryDir?: string
   primitive: string
   files: Map<string, string> | Array<{ relPath: string; content: string }>
-  /** HMAC keys accepted when verifying the registry index signature (see verifyRegistry). */
+  /** Ed25519 public keys (base64-encoded raw) accepted when verifying the registry index signature (see verifyRegistry). */
   verifyKeys?: string[]
   /** When true, verifyRegistry fails closed if the registry index is unsigned. */
   requireSignature?: boolean

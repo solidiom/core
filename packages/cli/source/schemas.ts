@@ -38,12 +38,10 @@ export const PolicySchema = z.object({
   trustedIdentities: z.array(z.string()).optional().default([]),
   /** When true, `solidiom verify --registry` fails closed if the registry index is unsigned. */
   registrySignatureRequired: z.boolean().optional().default(false),
-  /** HMAC keys accepted when verifying the registry index signature. */
-  registryTrustedKeys: z.array(z.string()).optional().default([]),
+  /** Ed25519 public keys (base64-encoded raw) accepted when verifying the registry index signature. */
+  registryPublicKeys: z.array(z.string()).optional().default([]),
   /** When true (the default), source installs must pass byte-level verification against the registry manifest before any file is written (CLI-003). */
   requireVerifiedSource: z.boolean().optional().default(true),
-  /** HMAC keys accepted when verifying source-install byte-level integrity (CLI-003). */
-  sourceInstallTrustedKeys: z.array(z.string()).optional().default([]),
 })
 
 export type Policy = z.infer<typeof PolicySchema>

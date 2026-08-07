@@ -104,7 +104,7 @@ Devuelve un objeto con la ruta del archivo de configuración, si fue creado, y e
 {
   "allowedVersions": {},
   "registrySignatureRequired": false,
-  "registryTrustedKeys": []
+  "registryPublicKeys": []
 }
 ```
 

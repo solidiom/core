@@ -88,19 +88,19 @@ Este modo verifica:
 
 ### Firma del registro
 
-Si `policy.registrySignatureRequired` es `true`, el índice del registro debe携带 una firma válida:
+Si `policy.registrySignatureRequired` es `true`, el índice del registro debe携带 una firma Ed25519 válida:
 
 ```json
 {
   "registrySignatureRequired": true,
-  "registryTrustedKeys": ["mi-clave-hmac-aqui"]
+  "registryPublicKeys": ["clave-publica-ed25519-base64"]
 }
 ```
 
-La CLI prueba las claves en orden: primero `REGISTRY_VERIFY_KEY` desde variables de entorno, luego `policy.registryTrustedKeys`.
+La CLI verifica contra claves públicas embebidas en el paquete CLI, `REGISTRY_VERIFY_KEY` (clave pública Ed25519 en base64), y `policy.registryPublicKeys`.
 
 ```bash
-export REGISTRY_VERIFY_KEY=mi-clave-hmac
+export REGISTRY_VERIFY_KEY=clave-publica-ed25519-base64
 solidiom verify --registry
 ```
 

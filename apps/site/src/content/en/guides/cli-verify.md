@@ -111,12 +111,13 @@ Verification is skipped. This is the default.
 
 1. **Schema check** — `registry/index.json` must parse against a supported schema version
 2. **Manifest integrity** — Each per-primitive manifest's `filesHash` must match a fresh SHA-256 recomputation of its `fileDigests`
-3. **Signature verification** — If `policy.registrySignatureRequired` is true, the index must carry a valid HMAC-SHA256 signature
+3. **Signature verification** — If `policy.registrySignatureRequired` is true, the index must carry a valid Ed25519 signature
 
 Verification keys are gathered from:
 
-- `REGISTRY_VERIFY_KEY` environment variable
-- `policy.registryTrustedKeys` array (tried in order)
+- Embedded public keys in the CLI package (dual-key rotation support)
+- `REGISTRY_VERIFY_KEY` environment variable (base64-encoded raw Ed25519 public key)
+- `policy.registryPublicKeys` array (base64-encoded raw Ed25519 public keys)
 
 ## Output
 

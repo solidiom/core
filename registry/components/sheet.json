@@ -30,7 +30,7 @@
         "src/recipes/sheet.tsx": "582d41bd768d1f3a6c1bccf4b15d1cd8ffd6c945e8017708cdf1513858b1fb65"
       }
     },
-    "lastGenerated": "2026-08-07T14:25:45.000Z"
+    "lastGenerated": "2026-08-07T16:14:27.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/sheet"
   ],
-  "lastUpdated": "2026-08-07T14:25:45.000Z"
+  "lastUpdated": "2026-08-07T16:14:27.000Z"
 }
