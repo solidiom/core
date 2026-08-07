@@ -30,7 +30,7 @@
         "src/recipes/resizable-panels.tsx": "cbeaf8e4443b643e6ec3a835b41c3ba215340be6620bdf68211de742f5fdfec2"
       }
     },
-    "lastGenerated": "2026-08-07T04:00:26.000Z"
+    "lastGenerated": "2026-08-07T14:25:45.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/resizable-panels"
   ],
-  "lastUpdated": "2026-08-07T04:00:26.000Z"
+  "lastUpdated": "2026-08-07T14:25:45.000Z"
 }

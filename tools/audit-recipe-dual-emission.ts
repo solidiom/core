@@ -52,10 +52,13 @@ function readProfileStatus(profileDir: string): { declared: boolean; implemented
 /**
  * Stylesheets that are not recipes and therefore need no paired class-string form.
  *
- * - `prose`, `typeset` — composite typography scopes with no primitive behind them.
  * - `theme` — the profile's token contract (`@theme` registrations), not a recipe.
+ *
+ * After RECIPE-008, `prose` and `typeset` have data-only recipe files and are
+ * handled by the normal TSX-pairing logic (extractPrimitiveImport returns
+ * undefined, so the no-CSS check is skipped).
  */
-const UTILITY_STYLESHEETS = new Set(["prose", "typeset", "theme"])
+const UTILITY_STYLESHEETS = new Set(["theme"])
 
 /**
  * Styled parts that a recipe intentionally leaves to consumer composition.
@@ -223,24 +226,28 @@ export function auditRecipeProfile({
     const tsxContent = readFileSync(join(recipesDir, `${name}.tsx`), "utf8")
     const primitiveImport = extractPrimitiveImport(tsxContent)
 
-    for (const scope of extractDataScopes(cssContent)) {
-      if (!primitiveImport || scope !== primitiveImport) {
-        errors.push({
-          profile: profileName,
-          file: `styles/${name}.css`,
-          message: `data-scope="${scope}" does not match imported primitive "@solidiom/${primitiveImport ?? "missing"}" in recipes/${name}.tsx`,
-        })
+    // Data-only recipes (e.g. typeset, prose) have no primitive import and no
+    // parts to render — skip the scope/primitive and used-parts checks for them.
+    if (primitiveImport) {
+      for (const scope of extractDataScopes(cssContent)) {
+        if (scope !== primitiveImport) {
+          errors.push({
+            profile: profileName,
+            file: `styles/${name}.css`,
+            message: `data-scope="${scope}" does not match imported primitive "@solidiom/${primitiveImport}" in recipes/${name}.tsx`,
+          })
+        }
       }
-    }
 
-    const usedParts = new Set(extractUsedParts(tsxContent))
-    for (const part of extractDataParts(cssContent)) {
-      if (!usedParts.has(part) && !isDocumentedException(name, part)) {
-        errors.push({
-          profile: profileName,
-          file: `styles/${name}.css`,
-          message: `data-part="${part}" is not rendered by recipes/${name}.tsx and has no documented composition exception`,
-        })
+      const usedParts = new Set(extractUsedParts(tsxContent))
+      for (const part of extractDataParts(cssContent)) {
+        if (!usedParts.has(part) && !isDocumentedException(name, part)) {
+          errors.push({
+            profile: profileName,
+            file: `styles/${name}.css`,
+            message: `data-part="${part}" is not rendered by recipes/${name}.tsx and has no documented composition exception`,
+          })
+        }
       }
     }
   }

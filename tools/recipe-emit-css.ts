@@ -46,8 +46,9 @@ function getClassPrefix(scope: string): string {
   return CLASS_PREFIX_EXCEPTIONS[scope] ?? `solidiom-${scope}`
 }
 
-/** Stylesheets that ship in this package but have no canonical definition (composite scopes). */
-const UTILITY_STYLESHEETS = ["typeset", "prose"] as const
+/** Stylesheets that ship in this package but have no canonical definition. After RECIPE-008,
+ * typeset and prose are in REFERENCE_DEFINITIONS, so this list is empty. */
+const UTILITY_STYLESHEETS: readonly string[] = []
 
 function cssDeclarationBlock(declarations: Readonly<Record<string, string>>): string {
   return Object.entries(declarations)
