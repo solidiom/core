@@ -11,13 +11,13 @@ volatility: low
 
 # Catalog Foundations and Corrections — 2026-08
 
-> **Non-authoritative.** This document records how catalog foundations evolved. Current task states, approved queues, Definitions of Done, defects, and counters are owned by [`docs/plans/website-tasks.md`](../../plans/website-tasks.md).
+> **Non-authoritative.** This document records how catalog foundations evolved. Current task states, approved queues, Definitions of Done, defects, and counters are owned by [`docs/plans/consolidated-plan.md`](../../plans/consolidated-plan.md).
 
 ## Purpose
 
 Catalog work began with no trustworthy non-primitive registry population, source-resolution proof, layer routes, or per-layer gates. Foundation work added most of that machinery, but later fan-out exposed incomplete validators and integration regressions. This history preserves the evidence without turning old snapshots into current status.
 
-The durable architectural rationale for D1–D6 is now in [`catalog-decisions.md`](../../architecture/decisions/catalog-decisions.md). Current ordering is in [`task-sequencing.md`](../../plans/task-sequencing.md).
+The durable architectural rationale for D1–D6 is now in [`catalog-decisions.md`](../../architecture/decisions/catalog-decisions.md). Current ordering is in [`consolidated-plan.md`](../../plans/consolidated-plan.md).
 
 ## Foundation work completed
 
@@ -47,7 +47,7 @@ Those findings produced D1–D6. Live repository counts and pass totals were int
 
 Artifacts were produced for the approved component concepts before the component gate proved exact queue identity and all item clauses. The gate classified registry candidates rather than reconciling approved `COMP-*` ID/name pairs, allowing additional slugs to distort the apparent count. Aggregate recipe contract, build, drift, parity, export, and translation failures further showed that generated files alone were not completion evidence.
 
-The recovery response was to restore the original vertical-slice discipline around Button, Input, and Dialog, then order the remainder by block fanout. Current priorities and values are maintained in `website-tasks.md` and `task-sequencing.md`.
+The recovery response was to restore the original vertical-slice discipline around Button, Input, and Dialog, then order the remainder by block fanout. Current priorities and values are maintained in `consolidated-plan.md`.
 
 ## Block manifest citation incident
 
@@ -58,9 +58,9 @@ The recovery response was to restore the original vertical-slice discipline arou
 - a repeated in-range citation named Data Table in the companion but resolved to Combobox by ID;
 - another in-range citation meant Command Palette in one block while the same ID legitimately meant Radio Group elsewhere.
 
-The repair reconciled JSON, companion Markdown, and the component queue by name, emptied `proposedComponents`, and expanded the approved component catalog to include the missing named concepts. The exact approved 30-row queue remains in `website-tasks.md` §9.2.
+The repair reconciled JSON, companion Markdown, and the component queue by name, emptied `proposedComponents`, and expanded the approved component catalog to include the missing named concepts. The exact approved 30-row queue remains in `consolidated-plan.md` §9.2.
 
-The evidence-preserving lesson is that range validation catches only malformed numbers. It cannot catch a valid number with the wrong semantic identity. This is why the manifest still points to `task-sequencing.md §3 (D6)`, whose durable rationale delegates to the decision record.
+The evidence-preserving lesson is that range validation catches only malformed numbers. It cannot catch a valid number with the wrong semantic identity. This is why the manifest still points to `consolidated-plan.md §13 (D6)`, whose durable rationale delegates to the decision record.
 
 ## Manifest approval versus implementation
 
@@ -93,7 +93,7 @@ The original plan estimated foundation, component, block, and template phases as
 5. fan out blocks;
 6. derive template order from an approved template-to-block graph.
 
-Current sequencing, pilots, and unlock points are maintained only in `task-sequencing.md`.
+Current sequencing, pilots, and unlock points are maintained only in `consolidated-plan.md`.
 
 ## What this history must not be used for
 
@@ -101,7 +101,7 @@ Do not use this document to:
 
 - mark a `FOUND-*`, `COMP-*`, `BLOCK-*`, or `TPL-*` row complete;
 - infer scope from generated registry contents;
-- replace any numbered clause in `website-tasks.md` §8;
+- replace any numbered clause in `consolidated-plan.md` §8;
 - claim current recipe, translation, tool, or aggregate gate results;
 - alter the approved component, block, or template queues.
 

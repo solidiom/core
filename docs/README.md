@@ -16,9 +16,7 @@ Internal documentation for Solidiom contributors and maintainers.
 ## Read first
 
 - **Current plans and priorities:** [`docs/plans/README.md`](plans/README.md)
-- **Website/catalog status and DoD:** [`docs/plans/website-tasks.md`](plans/website-tasks.md)
-- **Catalog delivery order:** [`docs/plans/task-sequencing.md`](plans/task-sequencing.md)
-- **Library/release roadmap:** [`docs/plans/implementation-plan.md`](plans/implementation-plan.md)
+- **Consolidated execution plan (status, DoD, sequencing, library roadmap):** [`docs/plans/consolidated-plan.md`](plans/consolidated-plan.md)
 - **Website architecture:** [`docs/architecture/website.md`](architecture/website.md)
 - **Core library architecture:** [`docs/architecture/design.md`](architecture/design.md)
 
@@ -40,15 +38,13 @@ Internal documentation for Solidiom contributors and maintainers.
 | Question                                          | Authority                                          |
 | ------------------------------------------------- | -------------------------------------------------- |
 | What is happening now?                            | `docs/plans/README.md`                             |
-| Which website/catalog tasks are open or complete? | `docs/plans/website-tasks.md`                      |
-| What must catalog items satisfy?                  | `docs/plans/website-tasks.md` §8                   |
-| In what order should catalog work run?            | `docs/plans/task-sequencing.md`                    |
-| What is the active library release roadmap?       | `docs/plans/implementation-plan.md`                |
+| Which tasks are open or complete?                 | `docs/plans/consolidated-plan.md`                  |
+| What must catalog items satisfy?                  | `docs/plans/consolidated-plan.md` §8               |
+| In what order should work run?                    | `docs/plans/consolidated-plan.md` §6/§7            |
+| What is the active library release roadmap?       | `docs/plans/consolidated-plan.md` §5               |
 | Why were catalog decisions D1–D6 made?            | `docs/architecture/decisions/catalog-decisions.md` |
 | Why are typeset/prose recipe utilities?           | `docs/architecture/decisions/typeset.md`           |
 | What happened during completed phases?            | `docs/history/plans/`                              |
-
-`docs/plans/website-plan.md` and `docs/plans/typeset-plan.md` are compatibility stubs, not active authorities.
 
 ## Lifecycle
 

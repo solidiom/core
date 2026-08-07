@@ -12,7 +12,7 @@ volatility: low
 
 # Solidiom library roadmap history — Phases 0–2
 
-> **Historical, non-authoritative context.** This archive preserves completed Phase 0–2 row-level detail and the former dense change log. It must not be used for current status, paths, commands, application ownership, or release decisions. See the authoritative active [`implementation-plan.md`](../../plans/implementation-plan.md). In particular, `apps/site` is now authoritative; historical `apps/docs` references below describe the repository at the time.
+> **Historical, non-authoritative context.** This archive preserves completed Phase 0–2 row-level detail and the former dense change log. It must not be used for current status, paths, commands, application ownership, or release decisions. See the authoritative active [`consolidated-plan.md`](../../plans/consolidated-plan.md). In particular, `apps/site` is now authoritative; historical `apps/docs` references are context only.ocs` references below describe the repository at the time.
 
 Status symbols retain their historical meaning: `[x]` complete and `[-]` descoped. Evidence counts and version pins are snapshots, not current expected results.
 

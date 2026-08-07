@@ -10,15 +10,14 @@ authority: canonical
 volatility: controlled
 date: 2026-07-27
 last_updated: 2026-08-06
-supersedes: docs/plans/website-plan.md
+supersedes: docs/plans/website-plan.md (removed)
 ---
 
 # Solidiom Website Architecture
 
 This document is the durable authority for the product and technical shape of `solidiom.org`. It does not track implementation progress.
 
-- Current status and executable queues: [Website implementation tasks](../plans/website-tasks.md)
-- Catalog dependency order and design sequence: [Task sequencing](../plans/task-sequencing.md)
+- Current status, queues, and sequencing: [Consolidated execution plan](../plans/consolidated-plan.md)
 - Visual reference: `docs/assets/solidiom-site.png`
 - Target application: `apps/site/`
 
@@ -74,7 +73,7 @@ One canonical identity, such as `dialog`, may declare separate primitive-package
 
 **Scope amendment — 2026-08-06.** The approved catalog is **30 components, not 21**. The block catalog exposed nine required concepts that the original component queue omitted because component citations had been misnumbered and interpreted by ID instead of being reconciled by name. The amendment adds Command Palette, Data Table, Kbd, Meter, Progress, Resizable Panels, Scroll Area, Spinner, and Toolbar. Switch remains the original `COMP-015`; a second Switch citation was a duplicate identity, not a 31st component.
 
-The amendment supersedes the 21-component count in all normative scope, quality, and GA statements while preserving the historical decision above. Component dependencies must be reconciled by both stable ID and name. The authoritative queue and exact identifiers live in [website-tasks.md §9.2](../plans/website-tasks.md), and their implementation order lives in [task-sequencing.md](../plans/task-sequencing.md).
+The amendment supersedes the 21-component count in all normative scope, quality, and GA statements while preserving the historical decision above. Component dependencies must be reconciled by both stable ID and name. The authoritative queue and exact identifiers live in [consolidated-plan.md §9.2](../plans/consolidated-plan.md#92-components--3030).
 
 The approved 30 are:
 
@@ -359,4 +358,4 @@ GA requires all of the following:
 15. Production, preview, redirect, and rollback paths for `solidiom.org` are verified.
 16. Legacy `apps/docs` and the POC are removed only after parity and baseline verification.
 
-Implementation state, exceptions, owners, and residual work belong only in [website-tasks.md](../plans/website-tasks.md). Sequence changes belong in [task-sequencing.md](../plans/task-sequencing.md).
+Implementation state, exceptions, owners, and residual work belong only in [consolidated-plan.md](../plans/consolidated-plan.md).
