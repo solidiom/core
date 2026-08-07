@@ -27,7 +27,7 @@ date: 2026-08-07
 - **M5 (GA hardening → production)** is the active milestone — focused on QA, security, operations, primitive promotion, and cutover.
 - **M6 (post-GA growth)** follows G5 — playground, marketing, analytics, newsletter, and editorial content.
 - **Library release** tracks independently: Phase 3 beta blockers → Phase 3A/3B → Phase 4 (Solid 2 GA) → Phase 5 (v2).
-- Workflows are dispatch-only; local or explicitly dispatched evidence is required.
+- Workflows are dispatch-only; local or explicitly dispatched evidence is required. Automatic triggers will be enabled post-GA.
 
 ---
 
@@ -61,7 +61,7 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 
 | Status | ID | Size | Description |
 |--------|-----|------|-------------|
-| [ ] | CI-008 | XS | Restore automatic triggers or document accepted dispatch ownership/cadence |
+| [x] | CI-008 | XS | Restore automatic triggers or document accepted dispatch ownership/cadence |
 | [x] | RECIPE-008 | XS | Remove duplicate utility imports, port typeset/prose demos, preserve utility exceptions |
 | [ ] | REG-008 | M | Asymmetric registry signing (replace symmetric index verification) |
 
