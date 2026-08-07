@@ -12,7 +12,7 @@ date: 2026-08-06
 
 # Solidiom Catalog — Recovery and Delivery Sequencing
 
-**Status:** template fan-out complete; all 30 components verified, 36/36 blocks complete, 29/29 templates implemented (TPL-001 through TPL-029). M3 (G3) fully closed — `gate:phase3` passes 21/21. Critical path is G4 exit hardening.
+**Status:** M4 complete — G4 exit criteria satisfied. All 30 components verified, 36/36 blocks complete, 29/29 templates implemented, PRESET-006/BUILDER-007/I18N-005 closed. All gates pass clean-tree verification. Critical path moves to M5 GA programme.
 **Status/DoD/queue authority:** [`docs/plans/website-tasks.md`](./website-tasks.md)
 **Decision authority:** [`docs/architecture/decisions/catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)
 
@@ -29,7 +29,7 @@ Recovery is complete. All four recovery prerequisites are closed:
 3. **`CATALOG-003`: aggregate integration.** Complete — contract (34/34), builds, drift, parity, exports, tools tests (382/382), and phase 1 gate (255/255) are all green.
 4. **`TPL-000` in parallel:** Complete — template architecture manifest (29 templates, 32 placements), required-block graph, portfolio placement, and §8.4.1 validator are approved.
 
-Component verification (30/30) and block pilots are also complete. All 36 blocks are implemented. Template fan-out is complete (29/29). M3 (G3) is closed — `gate:phase3` passes 21/21. The current position is G4 exit hardening.
+Component verification (30/30) and block pilots are also complete. All 36 blocks are implemented. Template fan-out is complete (29/29). M3 (G3) is closed — `gate:phase3` passes 21/21. M4 (G4) is closed — all exit criteria pass. The project moves to M5 GA hardening.
 
 ## 3. Decision pointers D1–D6
 
@@ -169,12 +169,14 @@ CATALOG-001/002/003 (complete) ──> components 30/30 (complete) ──> block
                                                                  │
                                      template manifest + complete blocks ──> template fan-out 29/29 (complete)
                                                                                               ↓
-                                                                                   G4 exit hardening
+                                                                                   G4 exit (complete)
+                                                                                              ↓
+                                                                                   M5 GA programme
                                                                                               ↓
                                                                                           G5 / GA
 ```
 
-The catalog critical path is now: **G4 exit hardening** (PM matrix, PRESET-006, BUILDER-007, I18N-005, executable verification) → **G5 GA programme**. Theme preset and builder completion are on the G4 path.
+M4 is complete. The critical path is now: **M5 GA hardening** (playground, marketing, QA, security, operations, cutover) → **G5 exit**.
 
 ## 10. Sequencing risks
 
