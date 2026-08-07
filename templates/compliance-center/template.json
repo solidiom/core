@@ -1,0 +1,20 @@
+{
+  "name": "compliance-center",
+  "stack": "vite-solid-router",
+  "description": "Compliance center with framework tracking, control assessments, and evidence collection.",
+  "variables": ["projectName"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-ADMIN-01", "BLOCK-ADMIN-02", "BLOCK-ADMIN-03"],
+  "deploymentTarget": "static",
+  "authModel": "email-password",
+  "portfolioTags": ["enterprise"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config."
+    }
+  ],
+  "notes": [
+    "`{{projectName}}` is the only substitution token used in this template's source files."
+  ]
+}

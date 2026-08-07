@@ -1,0 +1,20 @@
+{
+  "name": "content-studio",
+  "stack": "vite-solid-router",
+  "description": "Content management studio with rich editor, media library, and publishing workflow.",
+  "variables": ["projectName"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-CONTENT-01", "BLOCK-CONTENT-02", "BLOCK-CONTENT-03"],
+  "deploymentTarget": "static",
+  "authModel": "email-password",
+  "portfolioTags": ["balanced-product"],
+  "generatedFiles": [
+    {
+      "path": ".solidiom/config.json",
+      "generatedBy": "src/create/config-gen.ts",
+      "description": "Project-local Solidiom config."
+    }
+  ],
+  "notes": [
+    "`{{projectName}}` is the only substitution token used in this template's source files."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "incident-response",
+  "version": "0.0.1-next.0",
+  "label": "Incident Response",
+  "description": "Incident response console with active incidents, runbooks, and postmortem reports.",
+  "status": "preview",
+  "templateId": "TPL-020",
+  "stack": "vite-solid-router",
+  "portfolioTags": ["enterprise"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-OBS-03"],
+  "integrity": {
+    "algorithm": "sha256",
+    "manifestHash": "tpl-020-incident-response-manifest",
+    "lastGenerated": "2026-08-07T00:40:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
+  }
+}

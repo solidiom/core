@@ -17,7 +17,7 @@ Read this page first. It summarizes the current website/catalog position and poi
 
 - M0–M2 are complete.
 - M3 integration is **recovered**: recipe contract (34/34), builds, drift, parity, exports, tools tests (382/382), and phase 1 gate (255/255) are all green.
-- M4 is in progress: primitives are 52/52; components are **30/30 verified**; blocks are **25/36 complete** (AUTH ×3, ONBOARD ×3, SETTINGS ×3, BILLING ×3, ADMIN ×3, OBS ×3, RESOURCE ×3, AI ×3, SEARCH-01); templates are 0/29.
+- M4 is in progress: primitives are 52/52; components are **30/30 verified**; blocks are **36/36 complete**; templates are **10/29 implemented** (TPL-001 through TPL-010).
 - M5 has only incidental progress: `MKT-005` and `BUILDER-008` are complete.
 - `TPL-000` is complete: template manifest (29 templates, 32 placements), dependency graph, and §8.4.1 validator are approved and wired into the phase 1 gate.
 - Two reference templates (`vite-solid-router`, `tanstack-start-solid`) exist but are not approved `TPL-*` catalog rows.
@@ -26,13 +26,13 @@ Read this page first. It summarizes the current website/catalog position and poi
 
 ## Immediate priorities
 
-1. **Block fan-out (remaining 11):** complete SEARCH-02/03, COMMERCE ×3, CONTENT ×3, and SHELL ×3 — each requires source implementation, registry entries, previews, and bilingual docs per §8.3.1.
-2. **Template implementation:** once all 36 blocks are complete, begin `TPL-001` through `TPL-029` per the dependency-derived order from `TPL-000`'s manifest.
-3. **`CATALOG-001` untracked slugs:** formally reject or add `accordion`, `badge`, and `menu` registry entries that have no COMP-* row.
-4. **Translation freshness (`I18N-005`):** clear stale and missing catalog translation records.
-5. **Theme preset registry (`PRESET-006`):** complete preview evidence and registry/catalog integration for all four presets.
+1. **Template fan-out (19 remaining):** implement TPL-011 through TPL-029 — each requires template dir, `template.json`, page components, registry entry, and bilingual docs per §8.4.1.
+2. **`CATALOG-001` untracked slugs:** formally reject or add `accordion`, `badge`, and `menu` registry entries that have no COMP-* row.
+3. **Translation freshness (`I18N-005`):** clear stale and missing catalog translation records.
+4. **Theme preset registry (`PRESET-006`):** complete preview evidence and registry/catalog integration for all four presets.
+5. **Builder coverage (`BUILDER-007`):** expand preview coverage from 8 to all 30 components.
 
-Recovery tasks `CATALOG-001`, `CATALOG-002`, `CATALOG-003`, `TPL-000`, and `FOUND-008` are complete. Component verification is complete (30/30). The critical path is now block fan-out → template implementation → G4 exit.
+Recovery tasks `CATALOG-001`, `CATALOG-002`, `CATALOG-003`, `TPL-000`, and `FOUND-008` are complete. Component verification is complete (30/30). All 36 blocks are complete. The critical path is now template fan-out (19 remaining) → G4 exit.
 
 ## Authority map
 

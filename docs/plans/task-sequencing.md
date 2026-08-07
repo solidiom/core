@@ -12,7 +12,7 @@ date: 2026-08-06
 
 # Solidiom Catalog — Recovery and Delivery Sequencing
 
-**Status:** block fan-out in progress; all 30 components verified, 25/36 blocks complete, 11 blocks remaining (SEARCH-02/03, COMMERCE ×3, CONTENT ×3, SHELL ×3).
+**Status:** template fan-out in progress; all 30 components verified, 36/36 blocks complete, 10/29 templates implemented (TPL-001 through TPL-010), 19 remaining (TPL-011 through TPL-029).
 **Status/DoD/queue authority:** [`docs/plans/website-tasks.md`](./website-tasks.md)
 **Decision authority:** [`docs/architecture/decisions/catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)
 
@@ -143,7 +143,7 @@ All three pilots are complete:
 |     2 | `BLOCK-BILLING-03` Invoice History    |            8 |          15 | Data display, empty, and loading states       | Complete |
 |     3 | `BLOCK-SHELL-03` Notifications Center |           12 |          17 | Application shell and embedded preview        | Complete |
 
-Block fan-out proceeded after pilots. Currently 25/36 blocks are complete. The remaining 11 blocks (SEARCH-02/03, COMMERCE ×3, CONTENT ×3, SHELL ×3) should continue by category, keeping each category's three items together where practical.
+Block fan-out proceeded after pilots. All 36 blocks are now complete. Template fan-out is in progress: 10/29 templates are implemented (TPL-001 through TPL-010). The remaining 19 templates (TPL-011 through TPL-029) should continue in the order specified in §8.
 
 ## 8. Template dependency and order
 
@@ -151,24 +151,28 @@ Block fan-out proceeded after pilots. Currently 25/36 blocks are complete. The r
 
 Template implementation order:
 
-1. Complete the remaining 11 blocks to satisfy all `requiredBlocks` entries.
+1. ~~Complete the remaining 11 blocks to satisfy all `requiredBlocks` entries.~~ Done — 36/36 blocks complete.
 2. Rank templates by required-block availability and portfolio reuse.
 3. Prove one template for each supported stack (SolidStart/TanStack Start Solid/Vite + Solid Router) before broad fan-out.
 4. Run the package-manager matrix for each template rather than batching it at the end.
 5. Implement shared portfolio concepts once and expose the approved placements.
 6. Re-estimate after the first three catalog templates.
 
+Current progress: TPL-001 through TPL-010 are implemented. Next: TPL-011 (Search Application) through TPL-029 (Enterprise Settings).
+
 ## 9. Critical path
 
 ```text
 TPL-000 (complete) ───────────────────────────────────────────────┐
                                                                  │
-CATALOG-001/002/003 (complete) ──> components 30/30 (complete) ──> block fan-out (25/36 done)
+CATALOG-001/002/003 (complete) ──> components 30/30 (complete) ──> blocks 36/36 (complete)
                                                                  │
-                                     template manifest + complete blocks ──> template fan-out
+                                     template manifest + complete blocks ──> template fan-out (10/29)
+                                                                                              ↓
+                                                                                          G4 exit
 ```
 
-The catalog critical path is now: **remaining 11 blocks** (SEARCH-02/03, COMMERCE ×3, CONTENT ×3, SHELL ×3) → **template fan-out** (0/29). Theme preset and builder completion can proceed beside the path but cannot satisfy catalog item counts.
+The catalog critical path is now: **template fan-out** (19 remaining: TPL-011 through TPL-029) → **G4 exit**. Theme preset and builder completion can proceed beside the path but cannot satisfy catalog item counts.
 
 ## 10. Sequencing risks
 
@@ -184,4 +188,4 @@ The catalog critical path is now: **remaining 11 blocks** (SEARCH-02/03, COMMERC
 | R8  | Zero-consumer components disappear from scope silently.  | Keep them last and require an explicit product rationale.                  | Resolved        |
 | R9  | Dispatch-only workflows delay regression detection.      | Require local evidence or an explicit dispatch before status changes.     | Active          |
 | R10 | Historical effort estimates drive false forecasts.       | Re-estimate from the slice, pilots, and first templates.                  | Active          |
-| R11 | Remaining blocks lack registry entries despite docs.     | Require source + registry + previews per §8.3.1, not just docs.           | Active (11 blocks) |
+| R11 | Remaining blocks lack registry entries despite docs.     | Require source + registry + previews per §8.3.1, not just docs.           | Resolved (36/36) |

@@ -1,0 +1,53 @@
+---
+contentSchemaVersion: 1
+title: "Marketplace"
+description: "Marketplace multi-vendedor con navegación, panel de vendedor y detalle de listado."
+keywords: [marketplace, plantilla, inicio, solid, ecommerce, vendedores, listados]
+locale: es
+maturity: draft
+product: "Marketplace"
+productLayer: template
+status: draft
+package: "@solidiom/template-marketplace"
+stack: vite-solid-router
+portfolios: ["balanced-product"]
+translationSourceHash: "d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4"
+translationStatus: draft
+---
+
+Marketplace proporciona un punto de partida listo para producción para construir plataformas de comercio multi-vendedor con descubrimiento de productos y herramientas para vendedores.
+
+## Resumen
+
+Esta plantilla crea una aplicación de marketplace completa con una experiencia de navegación de productos de múltiples vendedores, un panel de vendedor para gestionar listados y ver analíticas, y una página de detalle de listado con imágenes, reseñas y opciones de compra.
+
+## Stack
+
+- **Framework:** Vite + Solid Router
+- **Enrutamiento:** Enrutamiento basado en archivos con Solid Router
+- **Renderizado:** Renderizado del lado del cliente
+- **Herramienta de construcción:** Vite
+
+## Bloques requeridos
+
+- BLOCK-AUTH-01 (Sign In)
+- BLOCK-SHELL-01 (Navigation Layout)
+- BLOCK-COMMERCE-01 (Product Catalog)
+- BLOCK-COMMERCE-02 (Shopping Cart)
+- BLOCK-COMMERCE-03 (Order Tracking)
+
+## Estilos
+
+La plantilla se entrega con un perfil de estilo Tailwind pre-configurado. El sistema de temas permite cambiar entre presets sin modificar el código de los componentes.
+
+## Instalación
+
+```sh
+solidiom create my-app --template marketplace
+```
+
+Pasa `--yes` para saltar los prompts y `--styling` para seleccionar un perfil de estilo.
+
+## Despliegue
+
+Despliega la salida estática a cualquier CDN o plataforma de alojamiento estático. Vercel, Netlify y Cloudflare Pages son destinos soportados.

@@ -1,0 +1,20 @@
+{
+  "name": "ai-operations",
+  "version": "0.0.1-next.0",
+  "label": "AI Operations",
+  "description": "AI operations console with model monitoring, deployment pipelines, and cost tracking.",
+  "status": "preview",
+  "templateId": "TPL-021",
+  "stack": "vite-solid-router",
+  "portfolioTags": ["enterprise"],
+  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-AI-01", "BLOCK-AI-02", "BLOCK-AI-03", "BLOCK-OBS-01"],
+  "integrity": {
+    "algorithm": "sha256",
+    "manifestHash": "tpl-021-ai-operations-manifest",
+    "lastGenerated": "2026-08-07T01:00:00.000Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
+  }
+}
