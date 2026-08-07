@@ -80,5 +80,5 @@ Optional policy file that controls security and compliance:
 - `allowedPrimitiveVersions` — Version constraints per primitive package
 - `requireVerifiedSource` — Require byte-level verification for source installs (default: `true`)
 - `registrySignatureRequired` — Require signed registry index (default: `false`)
-- `registryTrustedKeys` — HMAC keys for registry index verification
+- `registryPublicKeys` — Ed25519 public keys (base64) for registry index verification
 - `sourceInstallTrustedKeys` — HMAC keys for source-install byte-level integrity

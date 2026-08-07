@@ -11,7 +11,8 @@
  * and `implementedRecipes` are now the same list: every primitive this profile intends
  * to cover ships both emission forms.
  */
-export { recipeProfile, supportedPrimitives } from "./meta";
+import { recipeProfile, supportedPrimitives } from "./meta";
+export { recipeProfile, supportedPrimitives };
 /**
  * Primitives with a shipped UnoCSS recipe in this package.
  *
@@ -51,4 +52,6 @@ export { StyledKbd } from "./recipes/kbd";
 export { StyledResizablePanels } from "./recipes/resizable-panels";
 export { StyledScrollArea } from "./recipes/scroll-area";
 export { StyledToolbar } from "./recipes/toolbar";
+export { typeset, type TypesetKey } from "./recipes/typeset";
+export { PROSE_SIZES, type ProseSize } from "./recipes/prose";
 //# sourceMappingURL=index.d.ts.map

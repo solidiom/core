@@ -52,28 +52,24 @@ export declare const PolicySchema: z.ZodObject<{
     trustedIdentities: z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodString, "many">>>;
     /** When true, `solidiom verify --registry` fails closed if the registry index is unsigned. */
     registrySignatureRequired: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
-    /** HMAC keys accepted when verifying the registry index signature. */
-    registryTrustedKeys: z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodString, "many">>>;
+    /** Ed25519 public keys (base64-encoded raw) accepted when verifying the registry index signature. */
+    registryPublicKeys: z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodString, "many">>>;
     /** When true (the default), source installs must pass byte-level verification against the registry manifest before any file is written (CLI-003). */
     requireVerifiedSource: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
-    /** HMAC keys accepted when verifying source-install byte-level integrity (CLI-003). */
-    sourceInstallTrustedKeys: z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodString, "many">>>;
 }, "strip", z.ZodTypeAny, {
     signatureMode: "sigstore" | "trusted-keys" | "none";
     allowedPrimitiveVersions: Record<string, string>;
     trustedIdentities: string[];
     registrySignatureRequired: boolean;
-    registryTrustedKeys: string[];
+    registryPublicKeys: string[];
     requireVerifiedSource: boolean;
-    sourceInstallTrustedKeys: string[];
 }, {
     signatureMode?: "sigstore" | "trusted-keys" | "none" | undefined;
     allowedPrimitiveVersions?: Record<string, string> | undefined;
     trustedIdentities?: string[] | undefined;
     registrySignatureRequired?: boolean | undefined;
-    registryTrustedKeys?: string[] | undefined;
+    registryPublicKeys?: string[] | undefined;
     requireVerifiedSource?: boolean | undefined;
-    sourceInstallTrustedKeys?: string[] | undefined;
 }>;
 export type Policy = z.infer<typeof PolicySchema>;
 //# sourceMappingURL=schemas.d.ts.map

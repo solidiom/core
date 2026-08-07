@@ -16,9 +16,10 @@
 import { Command, Option } from "clipanion"
 import { readFileSync, existsSync } from "node:fs"
 import { join, dirname, basename } from "node:path"
-import { createVerify, createHmac, createHash } from "node:crypto"
+import { createVerify, createHash, verify as cryptoVerify } from "node:crypto"
 import { PolicySchema } from "../schemas"
 import { readRegistryIndex, readRegistryManifest, RegistrySchemaError } from "../registry-schema"
+import { REGISTRY_PUBLIC_KEYS } from "../registry-public-keys"
 import pc from "picocolors"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -248,11 +249,12 @@ export interface RegistryVerifyResult {
  *      must match a fresh SHA-256 recomputation of its `fileDigests`.
  *   3. If `.solidiom/policy.json` requires a signed registry
  *      (`policy.registrySignatureRequired`), `index.integrity.signature` must
- *      be present and verify against `REGISTRY_VERIFY_KEY` (or
- *      `policy.registryTrustedKeys`, tried in order) via HMAC-SHA256 over the
- *      canonical pre-signature JSON. Any failure — missing file, schema
- *      mismatch, digest mismatch, missing/invalid signature — is reported as
- *      a violation and `verified` is false. No partial trust is extended.
+ *      be present and verify as an Ed25519 signature against an embedded
+ *      public key or `REGISTRY_VERIFY_KEY` env var (base64-encoded raw public
+ *      key). The signature is base64-encoded. Any failure — missing file,
+ *      schema mismatch, digest mismatch, missing/invalid signature — is
+ *      reported as a violation and `verified` is false. No partial trust is
+ *      extended.
  */
 export function verifyRegistry(options: {
   cwd: string
@@ -287,30 +289,56 @@ export function verifyRegistry(options: {
     }
   }
 
-  // Signature check (only enforced when the policy demands it).
+  // Ed25519 signature check (only enforced when the policy demands it).
   if (requireSignature || index.integrity.signature) {
     if (!index.integrity.signature) {
       violations.push("registry index is not signed but signing is required by policy")
-    } else if (verifyKeys.length === 0) {
-      violations.push(
-        "registry index is signed but no verification key was provided (set REGISTRY_VERIFY_KEY or policy.registryTrustedKeys)",
-      )
     } else {
-      const { signature, signedAt, signatureKeyId, ...restIntegrity } = index.integrity
-      const preSigIndex = { ...index, integrity: restIntegrity }
-      const preSigContent = JSON.stringify(preSigIndex, null, 2)
+      // Collect all public keys: embedded + env + policy
+      const allPubKeys = [
+        ...REGISTRY_PUBLIC_KEYS,
+        ...(process.env["REGISTRY_VERIFY_KEY"] ? [process.env["REGISTRY_VERIFY_KEY"]] : []),
+        ...verifyKeys,
+      ]
 
-      const matchedKey = verifyKeys.find((key) => {
-        const expected = createHmac("sha256", key).update(preSigContent).digest("hex")
-        return expected === signature
-      })
+      if (allPubKeys.length === 0) {
+        violations.push(
+          "registry index is signed but no verification key was provided (embed public key or set REGISTRY_VERIFY_KEY or policy.registryPublicKeys)",
+        )
+      } else {
+        const { signature: sigB64, signedAt: _sa, signatureKeyId: _kid, ...restIntegrity } = index.integrity
+        const preSigIndex = { ...index, integrity: restIntegrity }
+        const preSigContent = JSON.stringify(preSigIndex, null, 2)
+        const sigBuf = Buffer.from(sigB64!, "base64")
 
-      if (!matchedKey) {
-        violations.push("registry index signature does not verify against any trusted key")
-      } else if (signatureKeyId) {
-        const expectedKeyId = createHash("sha256").update(matchedKey).digest("hex").slice(0, 16)
-        if (expectedKeyId !== signatureKeyId) {
-          violations.push("registry index signatureKeyId does not match the verifying key")
+        // Try each public key; first match wins
+        let matchedKeyB64: string | null = null
+        for (const keyB64 of allPubKeys) {
+          try {
+            const pubBytes = Buffer.from(keyB64, "base64")
+            // Build SPKI DER for Ed25519: 44 bytes total
+            const spkiHeader = Buffer.from("302a300506032b6570032100", "hex")
+            const spkiDer = Buffer.concat([spkiHeader, pubBytes])
+            const pubKeyPem = `-----BEGIN PUBLIC KEY-----\n${spkiDer.toString("base64").match(/.{1,64}/g)!.join("\n")}\n-----END PUBLIC KEY-----`
+
+            if (cryptoVerify(null, Buffer.from(preSigContent, "utf8"), pubKeyPem, sigBuf)) {
+              matchedKeyB64 = keyB64
+              break
+            }
+          } catch {
+            // Invalid key format — try next
+          }
+        }
+
+        if (!matchedKeyB64) {
+          violations.push("registry index signature does not verify against any trusted public key")
+        } else if (index.integrity.signatureKeyId) {
+          // Verify signatureKeyId matches the fingerprint of the matching key
+          const matchedPubBytes = Buffer.from(matchedKeyB64, "base64")
+          const expectedKeyId = createHash("sha256").update(matchedPubBytes).digest("hex").slice(0, 16)
+          if (expectedKeyId !== index.integrity.signatureKeyId) {
+            violations.push("registry index signatureKeyId does not match the verifying key")
+          }
         }
       }
     }
@@ -418,7 +446,7 @@ export class VerifyCommand extends Command {
         : PolicySchema.parse({})
 
       const envKey = process.env["REGISTRY_VERIFY_KEY"]
-      const verifyKeys = [...(envKey ? [envKey] : []), ...policy.registryTrustedKeys]
+      const verifyKeys = [...(envKey ? [envKey] : []), ...policy.registryPublicKeys]
 
       const result = verifyRegistry({
         cwd,

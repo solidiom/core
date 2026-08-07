@@ -2,8 +2,31 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, rmSync, readdirSync, existsSync } from "node:fs"
 import { join } from "node:path"
 import { tmpdir } from "node:os"
-import { createHash, createHmac } from "node:crypto"
+import { createHash, generateKeyPairSync } from "node:crypto"
 import { verifySourceIntegrity } from "./verify-source"
+
+// Fixed Ed25519 keypair for tests
+const TEST_KEYPAIR = generateKeyPairSync("ed25519")
+const TEST_PRIV_DER = TEST_KEYPAIR.privateKey.export({ format: "der", type: "pkcs8" })
+const TEST_PUB_DER = TEST_KEYPAIR.publicKey.export({ format: "der", type: "spki" })
+const TEST_PUB_RAW = TEST_PUB_DER.slice(-32)
+const TEST_PUB_B64 = TEST_PUB_RAW.toString("base64")
+const TEST_KEY_ID = createHash("sha256").update(TEST_PUB_RAW).digest("hex").slice(0, 16)
+
+const ATTACKER_KEYPAIR = generateKeyPairSync("ed25519")
+const ATTACKER_PRIV_DER = ATTACKER_KEYPAIR.privateKey.export({ format: "der", type: "pkcs8" })
+
+async function signIndexContent(content: string, privDer: Buffer): Promise<string> {
+  const key = await globalThis.crypto.subtle.importKey(
+    "pkcs8",
+    new Uint8Array(privDer),
+    "Ed25519",
+    false,
+    ["sign"],
+  )
+  const sig = await globalThis.crypto.subtle.sign("Ed25519", key, Buffer.from(content, "utf8"))
+  return Buffer.from(sig).toString("base64")
+}
 
 const INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v3.json"
 const MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v2.json"
@@ -266,12 +289,12 @@ describe("verifySourceIntegrity (CLI-003)", () => {
     expect(result.violations.some((v) => v.includes("not signed"))).toBe(true)
   })
 
-  it("fails when the index is signed with a key that does not match the trusted verification key", () => {
+  it("fails when the index is signed with a key that does not match the trusted verification key", async () => {
     const files = { "index.tsx": "export const Widget = 1" }
     const manifest = buildManifest("widget", files)
     const index = buildIndex(manifest)
     const preSigContent = JSON.stringify(index, null, 2)
-    const signature = createHmac("sha256", "attacker-key").update(preSigContent).digest("hex")
+    const signature = await signIndexContent(preSigContent, ATTACKER_PRIV_DER)
     const signed = { ...index, integrity: { ...index.integrity, signature } }
     write(signed, manifest)
 
@@ -279,7 +302,7 @@ describe("verifySourceIntegrity (CLI-003)", () => {
       cwd,
       primitive: "widget",
       files: new Map(Object.entries(files)),
-      verifyKeys: ["correct-key"],
+      verifyKeys: [TEST_PUB_B64],
       requireSignature: true,
     })
 
@@ -287,21 +310,19 @@ describe("verifySourceIntegrity (CLI-003)", () => {
     expect(result.violations.some((v) => v.includes("does not verify"))).toBe(true)
   })
 
-  it("succeeds and surfaces signatureKeyId when the index is signed with the correct trusted key", () => {
+  it("succeeds and surfaces signatureKeyId when the index is signed with the correct trusted key", async () => {
     const files = { "index.tsx": "export const Widget = 1" }
     const manifest = buildManifest("widget", files)
     const index = buildIndex(manifest)
     const preSigContent = JSON.stringify(index, null, 2)
-    const key = "correct-key"
-    const signature = createHmac("sha256", key).update(preSigContent).digest("hex")
-    const signatureKeyId = createHash("sha256").update(key).digest("hex").slice(0, 16)
+    const signature = await signIndexContent(preSigContent, TEST_PRIV_DER)
     const signed = {
       ...index,
       integrity: {
         ...index.integrity,
         signature,
         signedAt: "2025-01-01T00:00:00.000Z",
-        signatureKeyId,
+        signatureKeyId: TEST_KEY_ID,
       },
     }
     write(signed, manifest)
@@ -310,12 +331,12 @@ describe("verifySourceIntegrity (CLI-003)", () => {
       cwd,
       primitive: "widget",
       files: new Map(Object.entries(files)),
-      verifyKeys: [key],
+      verifyKeys: [TEST_PUB_B64],
       requireSignature: true,
     })
 
     expect(result.verified).toBe(true)
-    expect(result.signatureKeyId).toBe(signatureKeyId)
+    expect(result.signatureKeyId).toBe(TEST_KEY_ID)
   })
 
   it("accepts the files param as an array of {relPath, content} in addition to a Map", () => {

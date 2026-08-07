@@ -31,7 +31,7 @@ import {
 } from "node:fs"
 import { join, relative, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
-import { createHash, createHmac } from "node:crypto"
+import { createHash } from "node:crypto"
 import { execSync } from "node:child_process"
 
 const __filename = fileURLToPath(import.meta.url)
@@ -1053,7 +1053,7 @@ function sweepOrphanManifests(
 
 // ─── Main Build Logic ────────────────────────────────────────────────────────
 
-function buildRegistry(): void {
+async function buildRegistry(): Promise<void> {
   const packageDirs = readdirSync(PACKAGES_DIR)
     .map((name: string) => ({ name, path: join(PACKAGES_DIR, name) }))
     .filter((d: { name: string; path: string }) => statSync(d.path).isDirectory())
@@ -1461,22 +1461,42 @@ function buildRegistry(): void {
   // signing, so the signature is computed over stabilized content.
   const stableIndex = withStableIndexStamp(indexV3)
 
-  // REG-005: Sign the index if REGISTRY_SIGN_KEY is set
-  const signKey = process.env.REGISTRY_SIGN_KEY
-  if (signKey) {
+  // REG-005/REG-008: Sign the index with Ed25519 if REGISTRY_SIGN_KEY is set.
+  // REGISTRY_SIGN_KEY is the Ed25519 private key as hex (64 hex chars = 32 bytes raw).
+  const signKeyHex = process.env.REGISTRY_SIGN_KEY
+  if (signKeyHex) {
     const indexContent = JSON.stringify(stableIndex, null, 2)
-    const signature = createHmac("sha256", signKey).update(indexContent).digest("hex")
+    // Reconstruct PKCS#8 DER from raw 32-byte private key
+    const privateKeyBuf = Buffer.from(signKeyHex, "hex")
+    const pkcs8Header = Buffer.from("302e020100300506032b657004220420", "hex")
+    const pkcs8Der = Buffer.concat([pkcs8Header, privateKeyBuf])
+
+    const cryptoKey = await globalThis.crypto.subtle.importKey(
+      "pkcs8", pkcs8Der, "Ed25519", true, ["sign"],
+    )
+
+    const sig = await globalThis.crypto.subtle.sign(
+      "Ed25519",
+      cryptoKey,
+      Buffer.from(indexContent, "utf8"),
+    )
+
+    // Extract public key from the private key via WebCrypto
+    const jwk = await globalThis.crypto.subtle.exportKey("jwk", cryptoKey)
+    // JWK x parameter is the base64url-encoded raw public key
+    const pubKeyBytes = Buffer.from(
+      jwk.x!.replace(/-/g, "+").replace(/_/g, "/") + "==",
+      "base64",
+    )
+
     const committedSignature = committedIndexSignature()
-    stableIndex.integrity.signature = signature
-    // The signature covers stabilized content, so an unchanged index yields an
-    // unchanged signature — in which case keep the committed signing stamp too,
-    // or BUILD-001 sees churn for the same reason it saw it in `generatedAt`.
+    stableIndex.integrity.signature = Buffer.from(sig).toString("base64")
     stableIndex.integrity.signedAt =
-      committedSignature.signature === signature && committedSignature.signedAt
+      committedSignature.signature === stableIndex.integrity.signature && committedSignature.signedAt
         ? committedSignature.signedAt
         : now
     stableIndex.integrity.signatureKeyId = createHash("sha256")
-      .update(signKey)
+      .update(pubKeyBytes)
       .digest("hex")
       .slice(0, 16)
   }
@@ -1593,5 +1613,5 @@ const isMainModule =
   process.argv[1]?.endsWith("registry-build.ts") || process.argv[1]?.endsWith("registry-build")
 
 if (isMainModule) {
-  buildRegistry()
+  buildRegistry().catch(console.error)
 }

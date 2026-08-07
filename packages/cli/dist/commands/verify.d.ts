@@ -39,11 +39,12 @@ export interface RegistryVerifyResult {
  *      must match a fresh SHA-256 recomputation of its `fileDigests`.
  *   3. If `.solidiom/policy.json` requires a signed registry
  *      (`policy.registrySignatureRequired`), `index.integrity.signature` must
- *      be present and verify against `REGISTRY_VERIFY_KEY` (or
- *      `policy.registryTrustedKeys`, tried in order) via HMAC-SHA256 over the
- *      canonical pre-signature JSON. Any failure — missing file, schema
- *      mismatch, digest mismatch, missing/invalid signature — is reported as
- *      a violation and `verified` is false. No partial trust is extended.
+ *      be present and verify as an Ed25519 signature against an embedded
+ *      public key or `REGISTRY_VERIFY_KEY` env var (base64-encoded raw public
+ *      key). The signature is base64-encoded. Any failure — missing file,
+ *      schema mismatch, digest mismatch, missing/invalid signature — is
+ *      reported as a violation and `verified` is false. No partial trust is
+ *      extended.
  */
 export declare function verifyRegistry(options: {
     cwd: string;

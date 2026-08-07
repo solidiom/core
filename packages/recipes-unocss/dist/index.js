@@ -371,10 +371,23 @@ function StyledToolbar(props) {
   return <Toolbar.Root {...props} class={className()} />;
 }
 
+// src/recipes/typeset.tsx
+var typeset = {
+  lead: "data-scope='typeset' data-part='lead'",
+  large: "data-scope='typeset' data-part='large'",
+  muted: "data-scope='typeset' data-part='muted'",
+  blockquote: "data-scope='typeset' data-part='blockquote'",
+  inlineCode: "data-scope='typeset' data-part='inline-code'"
+};
+
+// src/recipes/prose.tsx
+var PROSE_SIZES = ["sm", "base", "lg"];
+
 // src/index.ts
 var implementedRecipes = supportedPrimitives;
 export {
   Alert,
+  PROSE_SIZES,
   StyledAccordion,
   StyledAlert,
   StyledAvatar,
@@ -408,6 +421,7 @@ export {
   buttonVariants,
   implementedRecipes,
   recipeProfile,
-  supportedPrimitives
+  supportedPrimitives,
+  typeset
 };
 //# sourceMappingURL=index.js.map

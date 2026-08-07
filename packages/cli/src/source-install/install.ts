@@ -177,8 +177,7 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
   const envKey = process.env["REGISTRY_VERIFY_KEY"]
   const verifyKeys = [
     ...(envKey ? [envKey] : []),
-    ...policy.registryTrustedKeys,
-    ...policy.sourceInstallTrustedKeys,
+    ...policy.registryPublicKeys,
   ]
 
   // For component/block, verify against the underlying primitive's manifest

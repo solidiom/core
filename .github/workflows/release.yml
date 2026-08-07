@@ -41,6 +41,18 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
+      # REG-008: Sign the registry index with Ed25519 over the published artifact.
+      # The build produces a deterministic, unsigned registry. This step adds the
+      # asymmetric signature using the REGISTRY_SIGN_KEY secret (raw Ed25519 private
+      # key as 64 hex chars). The signed index is then ready for distribution.
+      - name: REG-008 — sign registry index
+        env:
+          REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
+        run: pnpm exec tsx tools/registry-build.ts
+
+      - name: REG-008 — verify signed registry index
+        run: node packages/cli/dist/bin.js verify --registry
+
       # Validate changesets without publishing (non-publishing validation path)
       - name: Check changeset status
         run: pnpm changeset status

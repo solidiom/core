@@ -76,7 +76,7 @@ const integritySchema = z.object({
   entriesHash: z.string().regex(/^[0-9a-f]{64}$/),
   signature: z
     .string()
-    .regex(/^[0-9a-f]{64}$/)
+    .regex(/^[A-Za-z0-9+\/=]+$/)
     .optional(),
   signedAt: z.string().optional(),
   signatureKeyId: z

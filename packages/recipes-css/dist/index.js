@@ -392,6 +392,18 @@ function StyledToolbar(props) {
   return <Toolbar.Root {...props} class={className()} />;
 }
 
+// src/recipes/typeset.tsx
+var typeset = {
+  lead: "data-scope='typeset' data-part='lead'",
+  large: "data-scope='typeset' data-part='large'",
+  muted: "data-scope='typeset' data-part='muted'",
+  blockquote: "data-scope='typeset' data-part='blockquote'",
+  inlineCode: "data-scope='typeset' data-part='inline-code'"
+};
+
+// src/recipes/prose.tsx
+var PROSE_SIZES = ["sm", "base", "lg"];
+
 // src/recipes/field.tsx
 import * as Field from "@solidiom/field";
 var BASE_CLASS15 = "solidiom-field";
@@ -416,6 +428,7 @@ function StyledMeter(props) {
   return <Meter.Root {...props} class={className()} />;
 }
 export {
+  PROSE_SIZES,
   StyledAccordion,
   StyledAlert,
   StyledAvatar,
@@ -450,6 +463,7 @@ export {
   StyledTooltip,
   buttonVariants,
   recipeProfile,
-  supportedPrimitives
+  supportedPrimitives,
+  typeset
 };
 //# sourceMappingURL=index.js.map

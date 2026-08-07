@@ -272,6 +272,9 @@ var typeset = {
   inlineCode: "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold"
 };
 
+// src/recipes/prose.tsx
+var PROSE_SIZES = ["sm", "base", "lg"];
+
 // src/recipes/spinner.tsx
 import * as Spinner from "@solidiom/spinner";
 function StyledSpinner(props) {
@@ -428,6 +431,7 @@ function StyledMeter(props) {
   return <Meter.Root {...props} class={className()} />;
 }
 export {
+  PROSE_SIZES,
   StyledAccordion,
   StyledAlert,
   StyledAvatar,

@@ -2,7 +2,32 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, rmSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import { tmpdir } from "node:os"
-import { createHash, createHmac } from "node:crypto"
+import { createHash, generateKeyPairSync } from "node:crypto"
+
+// Fixed Ed25519 keypair for tests
+const TEST_KEYPAIR = generateKeyPairSync("ed25519")
+const TEST_PRIV_DER = TEST_KEYPAIR.privateKey.export({ format: "der", type: "pkcs8" })
+const TEST_PUB_DER = TEST_KEYPAIR.publicKey.export({ format: "der", type: "spki" })
+const TEST_PUB_RAW = TEST_PUB_DER.slice(-32)
+const TEST_PUB_B64 = TEST_PUB_RAW.toString("base64")
+const TEST_KEY_ID = createHash("sha256").update(TEST_PUB_RAW).digest("hex").slice(0, 16)
+
+// Attacker keypair
+const ATTACKER_KEYPAIR = generateKeyPairSync("ed25519")
+const ATTACKER_PRIV_DER = ATTACKER_KEYPAIR.privateKey.export({ format: "der", type: "pkcs8" })
+
+/** Sign index content with a given private key and return base64 signature. */
+async function signIndex(content: string, privDer: Buffer): Promise<string> {
+  const key = await globalThis.crypto.subtle.importKey(
+    "pkcs8",
+    new Uint8Array(privDer),
+    "Ed25519",
+    false,
+    ["sign"],
+  )
+  const sig = await globalThis.crypto.subtle.sign("Ed25519", key, Buffer.from(content, "utf8"))
+  return Buffer.from(sig).toString("base64")
+}
 import { verifyRegistry } from "./verify"
 
 const SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v3.json"
@@ -172,51 +197,54 @@ describe("verifyRegistry (REG-006)", () => {
     expect(result.violations.some((v) => v.includes("not signed"))).toBe(true)
   })
 
-  it("fails closed when signed but no verification key is configured", () => {
+  it("fails closed when signed but no verification key is configured", async () => {
     const manifest = buttonManifest()
     const index = baseIndex(manifest)
     const preSigContent = JSON.stringify(index, null, 2)
-    const signature = createHmac("sha256", "some-key").update(preSigContent).digest("hex")
+    const signature = await signIndex(preSigContent, TEST_PRIV_DER)
     const signed = { ...index, integrity: { ...index.integrity, signature } }
     write(signed, manifest)
 
     const result = verifyRegistry({ cwd: dir, registryDir: dir })
     expect(result.verified).toBe(false)
-    expect(result.violations.some((v) => v.includes("no verification key"))).toBe(true)
+    // REGISTRY_PUBLIC_KEYS may contain embedded keys.  When none match the
+    // test key the verifier reports "does not verify"; when the array is empty
+    // it reports "no verification key".  Both are acceptable failures.
+    expect(result.violations.some(
+      (v) => v.includes("no verification key") || v.includes("does not verify"),
+    )).toBe(true)
   })
 
-  it("fails closed when signed with a key that is not in the trusted set (tamper)", () => {
+  it("fails closed when signed with a key that is not in the trusted set (tamper)", async () => {
     const manifest = buttonManifest()
     const index = baseIndex(manifest)
     const preSigContent = JSON.stringify(index, null, 2)
-    const signature = createHmac("sha256", "attacker-key").update(preSigContent).digest("hex")
+    const signature = await signIndex(preSigContent, ATTACKER_PRIV_DER)
     const signed = { ...index, integrity: { ...index.integrity, signature } }
     write(signed, manifest)
 
     const result = verifyRegistry({
       cwd: dir,
       registryDir: dir,
-      verifyKeys: ["correct-key"],
+      verifyKeys: [TEST_PUB_B64],
       requireSignature: true,
     })
     expect(result.verified).toBe(false)
     expect(result.violations.some((v) => v.includes("does not verify"))).toBe(true)
   })
 
-  it("verifies a correctly signed index against the trusted key", () => {
+  it("verifies a correctly signed index against the trusted public key", async () => {
     const manifest = buttonManifest()
     const index = baseIndex(manifest)
     const preSigContent = JSON.stringify(index, null, 2)
-    const key = "correct-key"
-    const signature = createHmac("sha256", key).update(preSigContent).digest("hex")
-    const signatureKeyId = createHash("sha256").update(key).digest("hex").slice(0, 16)
+    const signature = await signIndex(preSigContent, TEST_PRIV_DER)
     const signed = {
       ...index,
       integrity: {
         ...index.integrity,
         signature,
         signedAt: "2025-01-01T00:00:00.000Z",
-        signatureKeyId,
+        signatureKeyId: TEST_KEY_ID,
       },
     }
     write(signed, manifest)
@@ -224,18 +252,17 @@ describe("verifyRegistry (REG-006)", () => {
     const result = verifyRegistry({
       cwd: dir,
       registryDir: dir,
-      verifyKeys: [key],
+      verifyKeys: [TEST_PUB_B64],
       requireSignature: true,
     })
     expect(result.verified).toBe(true)
   })
 
-  it("fails closed when signatureKeyId does not match the verifying key (tamper)", () => {
+  it("fails closed when signatureKeyId does not match the verifying key (tamper)", async () => {
     const manifest = buttonManifest()
     const index = baseIndex(manifest)
     const preSigContent = JSON.stringify(index, null, 2)
-    const key = "correct-key"
-    const signature = createHmac("sha256", key).update(preSigContent).digest("hex")
+    const signature = await signIndex(preSigContent, TEST_PRIV_DER)
     const signed = {
       ...index,
       integrity: {
@@ -250,7 +277,7 @@ describe("verifyRegistry (REG-006)", () => {
     const result = verifyRegistry({
       cwd: dir,
       registryDir: dir,
-      verifyKeys: [key],
+      verifyKeys: [TEST_PUB_B64],
       requireSignature: true,
     })
     expect(result.verified).toBe(false)

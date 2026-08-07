@@ -3,7 +3,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync, existsSync
 import { join } from "node:path"
 import { tmpdir } from "node:os"
 import { execSync } from "node:child_process"
-import { createHash, createHmac } from "node:crypto"
+import { createHash, generateKeyPairSync } from "node:crypto"
 
 import { computeFilesHash, computeEntriesHash, generateKeywords } from "./registry-build"
 
@@ -224,30 +224,38 @@ describe("registry build determinism (REG-004)", () => {
   })
 })
 
-// ─── REG-005: Signing Tests ──────────────────────────────────────────────────
+// ─── REG-005/REG-008: Ed25519 Signing Tests ──────────────────────────────
 
-describe("registry index signing (REG-005)", () => {
+describe("registry index signing (REG-005, REG-008 Ed25519)", () => {
   const ROOT = join(import.meta.dirname, "..")
   const REGISTRY_DIR = join(ROOT, "registry")
 
+  // Generate a fixed Ed25519 keypair for tests
+  const testKeyPair = generateKeyPairSync("ed25519")
+  const testPrivDer = testKeyPair.privateKey.export({ format: "der", type: "pkcs8" })
+  const testPrivRaw = testPrivDer.slice(-32).toString("hex")
+  const testPubDer = testKeyPair.publicKey.export({ format: "der", type: "spki" })
+  const testPubRaw = testPubDer.slice(-32)
+  const testPubB64 = testPubRaw.toString("base64")
+  const expectedKeyId = createHash("sha256").update(testPubRaw).digest("hex").slice(0, 16)
+
   it("adds signature fields when REGISTRY_SIGN_KEY is set", () => {
-    const signKey = "test-secret-key-for-registry"
     const env = {
       ...process.env,
       REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
-      REGISTRY_SIGN_KEY: signKey,
+      REGISTRY_SIGN_KEY: testPrivRaw,
     }
+    delete env.REGISTRY_VERIFY_KEY
 
     execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
     const index = JSON.parse(readFileSync(join(REGISTRY_DIR, "index.json"), "utf8"))
 
     expect(index.integrity.signature).toBeDefined()
-    expect(index.integrity.signature).toMatch(/^[0-9a-f]{64}$/)
+    // Ed25519 signature is 64 bytes → base64 encoding
+    const sigBuf = Buffer.from(index.integrity.signature, "base64")
+    expect(sigBuf.length).toBe(64)
     expect(index.integrity.signedAt).toBe("2025-01-01T00:00:00.000Z")
     expect(index.integrity.signatureKeyId).toMatch(/^[0-9a-f]{16}$/)
-
-    // Verify signatureKeyId is the first 16 chars of SHA-256 of the key
-    const expectedKeyId = createHash("sha256").update(signKey).digest("hex").slice(0, 16)
     expect(index.integrity.signatureKeyId).toBe(expectedKeyId)
   })
 
@@ -257,6 +265,7 @@ describe("registry index signing (REG-005)", () => {
       REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
     }
     delete env.REGISTRY_SIGN_KEY
+    delete env.REGISTRY_VERIFY_KEY
 
     execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
     const index = JSON.parse(readFileSync(join(REGISTRY_DIR, "index.json"), "utf8"))
@@ -266,27 +275,38 @@ describe("registry index signing (REG-005)", () => {
     expect(index.integrity.signatureKeyId).toBeUndefined()
   })
 
-  it("signature is a valid HMAC-SHA256 of the pre-signature index content", () => {
-    const signKey = "verify-hmac-key"
+  it("signature is a valid Ed25519 signature of the pre-signature index content", async () => {
     const env = {
       ...process.env,
       REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
-      REGISTRY_SIGN_KEY: signKey,
+      REGISTRY_SIGN_KEY: testPrivRaw,
     }
+    delete env.REGISTRY_VERIFY_KEY
 
     execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
     const index = JSON.parse(readFileSync(join(REGISTRY_DIR, "index.json"), "utf8"))
-    const signature = index.integrity.signature
+    const sigB64 = index.integrity.signature
 
-    // Reconstruct the pre-signature content (without signature, signedAt, signatureKeyId)
-    const preSigIndex = { ...index, integrity: { ...index.integrity } }
-    delete preSigIndex.integrity.signature
-    delete preSigIndex.integrity.signedAt
-    delete preSigIndex.integrity.signatureKeyId
+    // Reconstruct the pre-signature content
+    const { signature: _s, signedAt: _sa, signatureKeyId: _kid, ...restIntegrity } = index.integrity
+    const preSigIndex = { ...index, integrity: restIntegrity }
     const preSigContent = JSON.stringify(preSigIndex, null, 2)
 
-    const expectedSignature = createHmac("sha256", signKey).update(preSigContent).digest("hex")
-    expect(signature).toBe(expectedSignature)
+    // Verify using WebCrypto
+    const pubKey = await globalThis.crypto.subtle.importKey(
+      "spki",
+      testPubDer,
+      "Ed25519",
+      false,
+      ["verify"],
+    )
+    const valid = await globalThis.crypto.subtle.verify(
+      "Ed25519",
+      pubKey,
+      Buffer.from(sigB64, "base64"),
+      Buffer.from(preSigContent, "utf8"),
+    )
+    expect(valid).toBe(true)
   })
 })
 

@@ -70,9 +70,8 @@ Running `solidiom init` with no arguments produces `.solidiom/config.json` with 
   "trustedIdentities": [],
   "allowedPrimitiveVersions": {},
   "registrySignatureRequired": false,
-  "registryTrustedKeys": [],
-  "requireVerifiedSource": true,
-  "sourceInstallTrustedKeys": []
+  "registryPublicKeys": [],
+  "requireVerifiedSource": true
 }
 ```
 
@@ -82,9 +81,8 @@ Running `solidiom init` with no arguments produces `.solidiom/config.json` with 
 | `trustedIdentities`         | string[]                               | `[]`    | Identities allowed for sigstore verification        |
 | `allowedPrimitiveVersions`  | record                                 | `{}`    | Version constraints per package name                |
 | `registrySignatureRequired` | boolean                                | `false` | Require signed registry index                       |
-| `registryTrustedKeys`       | string[]                               | `[]`    | HMAC keys for registry index verification           |
+| `registryPublicKeys`        | string[]                               | `[]`    | Ed25519 public keys (base64) for registry verification |
 | `requireVerifiedSource`     | boolean                                | `true`  | Require byte-level verification for source installs |
-| `sourceInstallTrustedKeys`  | string[]                               | `[]`    | HMAC keys for source-install integrity checks       |
 
 ## Next Steps
 

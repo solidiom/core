@@ -47,12 +47,10 @@ var PolicySchema = z.object({
   trustedIdentities: z.array(z.string()).optional().default([]),
   /** When true, `solidiom verify --registry` fails closed if the registry index is unsigned. */
   registrySignatureRequired: z.boolean().optional().default(false),
-  /** HMAC keys accepted when verifying the registry index signature. */
-  registryTrustedKeys: z.array(z.string()).optional().default([]),
+  /** Ed25519 public keys (base64-encoded raw) accepted when verifying the registry index signature. */
+  registryPublicKeys: z.array(z.string()).optional().default([]),
   /** When true (the default), source installs must pass byte-level verification against the registry manifest before any file is written (CLI-003). */
-  requireVerifiedSource: z.boolean().optional().default(true),
-  /** HMAC keys accepted when verifying source-install byte-level integrity (CLI-003). */
-  sourceInstallTrustedKeys: z.array(z.string()).optional().default([])
+  requireVerifiedSource: z.boolean().optional().default(true)
 });
 
 // src/commands/init.ts
@@ -106,9 +104,9 @@ import { join as join2 } from "path";
 // src/registry-schema.ts
 import { readFileSync as readFileSync2 } from "fs";
 import { z as z2 } from "zod";
-var SUPPORTED_REGISTRY_INDEX_VERSION = 2;
+var SUPPORTED_REGISTRY_INDEX_VERSION = 3;
 var SUPPORTED_MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v2.json";
-var SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v2.json";
+var SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v3.json";
 var DELIVERABLES = ["primitive", "component", "block", "template", "theme"];
 var deliverableSchema = z2.enum(DELIVERABLES);
 var STYLING_PROFILES = ["css", "tailwind", "unocss"];
@@ -151,7 +149,7 @@ var manifestAccessibilitySchema = z2.object({
 var integritySchema = z2.object({
   algorithm: z2.literal("sha256"),
   entriesHash: z2.string().regex(/^[0-9a-f]{64}$/),
-  signature: z2.string().regex(/^[0-9a-f]{64}$/).optional(),
+  signature: z2.string().regex(/^[A-Za-z0-9+\/=]+$/).optional(),
   signedAt: z2.string().optional(),
   signatureKeyId: z2.string().regex(/^[0-9a-f]{16}$/).optional()
 });
@@ -182,13 +180,68 @@ var registryAdapterSchema = z2.object({
   capability: z2.string().regex(/.+@\d+/),
   version: z2.string().min(1)
 });
+var registryComponentSummarySchema = z2.object({
+  name: z2.string().min(1),
+  version: z2.string().min(1),
+  package: z2.string().regex(/^@solidiom\//),
+  label: z2.string().min(1),
+  description: z2.string(),
+  status: z2.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
+  deliverables: z2.array(deliverableSchema),
+  documentationStatus: z2.enum(["stub", "draft", "review", "complete"]),
+  documentationLocales: z2.record(documentationLocaleSchema),
+  stylingOutputs: z2.array(stylingProfileSchema),
+  primitiveDependency: z2.string().min(1),
+  searchKeywords: z2.array(z2.string())
+});
+var registryBlockSummarySchema = z2.object({
+  name: z2.string().min(1),
+  version: z2.string().min(1),
+  package: z2.string().regex(/^@solidiom\//),
+  label: z2.string().min(1),
+  description: z2.string(),
+  status: z2.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
+  deliverables: z2.array(deliverableSchema),
+  documentationStatus: z2.enum(["stub", "draft", "review", "complete"]),
+  documentationLocales: z2.record(documentationLocaleSchema),
+  componentDependencies: z2.array(z2.string()),
+  searchKeywords: z2.array(z2.string())
+});
+var registryTemplateSummarySchema = z2.object({
+  name: z2.string().min(1),
+  version: z2.string().min(1),
+  package: z2.string().regex(/^@solidiom\//),
+  label: z2.string().min(1),
+  description: z2.string(),
+  status: z2.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
+  deliverables: z2.array(deliverableSchema),
+  documentationStatus: z2.enum(["stub", "draft", "review", "complete"]),
+  documentationLocales: z2.record(documentationLocaleSchema),
+  searchKeywords: z2.array(z2.string())
+});
+var registryThemeSummarySchema = z2.object({
+  name: z2.string().min(1),
+  version: z2.string().min(1),
+  package: z2.string().regex(/^@solidiom\//),
+  label: z2.string().min(1),
+  description: z2.string(),
+  status: z2.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
+  deliverables: z2.array(deliverableSchema),
+  documentationStatus: z2.enum(["stub", "draft", "review", "complete"]),
+  documentationLocales: z2.record(documentationLocaleSchema),
+  searchKeywords: z2.array(z2.string())
+});
 var registryIndexSchema = z2.object({
   $schema: z2.literal(SUPPORTED_INDEX_SCHEMA_URL),
   version: z2.literal(SUPPORTED_REGISTRY_INDEX_VERSION),
   generatedAt: z2.string(),
   integrity: integritySchema,
   primitives: z2.array(registryPrimitiveSummarySchema),
-  adapters: z2.array(registryAdapterSchema)
+  adapters: z2.array(registryAdapterSchema),
+  components: z2.array(registryComponentSummarySchema),
+  blocks: z2.array(registryBlockSummarySchema),
+  templates: z2.array(registryTemplateSummarySchema),
+  themes: z2.array(registryThemeSummarySchema)
 });
 var manifestIntegritySchema = z2.object({
   algorithm: z2.literal("sha256"),
@@ -594,7 +647,15 @@ import { join as join5 } from "path";
 import { Command as Command3, Option as Option3 } from "clipanion";
 import { readFileSync as readFileSync5, existsSync as existsSync4 } from "fs";
 import { join as join4, dirname as dirname2, basename } from "path";
-import { createVerify, createHmac, createHash as createHash2 } from "crypto";
+import { createVerify, createHash as createHash2, verify as cryptoVerify } from "crypto";
+
+// src/registry-public-keys.ts
+var REGISTRY_PUBLIC_KEYS = [
+  // Key ID 89cb830913754674 — provisioned 2026-08-07
+  "T9BKxYo4DXXHHw15qe7xCo6pVEMyJ2s++OI1zNn/fes="
+];
+
+// src/commands/verify.ts
 import pc3 from "picocolors";
 async function verifySigstore(artifact, trustedIdentities, noNetwork) {
   let bundleFromJSON;
@@ -765,24 +826,45 @@ function verifyRegistry(options) {
   if (requireSignature || index.integrity.signature) {
     if (!index.integrity.signature) {
       violations.push("registry index is not signed but signing is required by policy");
-    } else if (verifyKeys.length === 0) {
-      violations.push(
-        "registry index is signed but no verification key was provided (set REGISTRY_VERIFY_KEY or policy.registryTrustedKeys)"
-      );
     } else {
-      const { signature, signedAt, signatureKeyId, ...restIntegrity } = index.integrity;
-      const preSigIndex = { ...index, integrity: restIntegrity };
-      const preSigContent = JSON.stringify(preSigIndex, null, 2);
-      const matchedKey = verifyKeys.find((key) => {
-        const expected = createHmac("sha256", key).update(preSigContent).digest("hex");
-        return expected === signature;
-      });
-      if (!matchedKey) {
-        violations.push("registry index signature does not verify against any trusted key");
-      } else if (signatureKeyId) {
-        const expectedKeyId = createHash2("sha256").update(matchedKey).digest("hex").slice(0, 16);
-        if (expectedKeyId !== signatureKeyId) {
-          violations.push("registry index signatureKeyId does not match the verifying key");
+      const allPubKeys = [
+        ...REGISTRY_PUBLIC_KEYS,
+        ...process.env["REGISTRY_VERIFY_KEY"] ? [process.env["REGISTRY_VERIFY_KEY"]] : [],
+        ...verifyKeys
+      ];
+      if (allPubKeys.length === 0) {
+        violations.push(
+          "registry index is signed but no verification key was provided (embed public key or set REGISTRY_VERIFY_KEY or policy.registryPublicKeys)"
+        );
+      } else {
+        const { signature: sigB64, signedAt: _sa, signatureKeyId: _kid, ...restIntegrity } = index.integrity;
+        const preSigIndex = { ...index, integrity: restIntegrity };
+        const preSigContent = JSON.stringify(preSigIndex, null, 2);
+        const sigBuf = Buffer.from(sigB64, "base64");
+        let matchedKeyB64 = null;
+        for (const keyB64 of allPubKeys) {
+          try {
+            const pubBytes = Buffer.from(keyB64, "base64");
+            const spkiHeader = Buffer.from("302a300506032b6570032100", "hex");
+            const spkiDer = Buffer.concat([spkiHeader, pubBytes]);
+            const pubKeyPem = `-----BEGIN PUBLIC KEY-----
+${spkiDer.toString("base64").match(/.{1,64}/g).join("\n")}
+-----END PUBLIC KEY-----`;
+            if (cryptoVerify(null, Buffer.from(preSigContent, "utf8"), pubKeyPem, sigBuf)) {
+              matchedKeyB64 = keyB64;
+              break;
+            }
+          } catch {
+          }
+        }
+        if (!matchedKeyB64) {
+          violations.push("registry index signature does not verify against any trusted public key");
+        } else if (index.integrity.signatureKeyId) {
+          const matchedPubBytes = Buffer.from(matchedKeyB64, "base64");
+          const expectedKeyId = createHash2("sha256").update(matchedPubBytes).digest("hex").slice(0, 16);
+          if (expectedKeyId !== index.integrity.signatureKeyId) {
+            violations.push("registry index signatureKeyId does not match the verifying key");
+          }
         }
       }
     }
@@ -865,7 +947,7 @@ var VerifyCommand = class extends Command3 {
       const policyPath = join4(cwd, ".solidiom", "policy.json");
       const policy = existsSync4(policyPath) ? PolicySchema.parse(JSON.parse(readFileSync5(policyPath, "utf8"))) : PolicySchema.parse({});
       const envKey = process.env["REGISTRY_VERIFY_KEY"];
-      const verifyKeys = [...envKey ? [envKey] : [], ...policy.registryTrustedKeys];
+      const verifyKeys = [...envKey ? [envKey] : [], ...policy.registryPublicKeys];
       const result2 = verifyRegistry({
         cwd,
         verifyKeys,
@@ -1222,27 +1304,34 @@ function installSource(options) {
   const runtimeDir = join7(cwd, config.runtimeDir);
   const filesWritten = [];
   const runtimeDeduped = [];
-  const primitiveSourceDir = resolvePrimitiveSource(primitive, cwd);
-  if (!primitiveSourceDir) {
+  const sourceFiles = resolveDeliverableSource({
+    primitive,
+    cwd,
+    deliverable,
+    config,
+    plan
+  });
+  if (sourceFiles.size === 0) {
     return {
       filesWritten: [],
       runtimeDeduped: [],
       lockUpdated: false,
       verified: false,
-      violations: [`Could not resolve source directory for primitive "${primitive}"`]
+      violations: [
+        `Could not resolve source files for "${deliverable}" "${primitive}"`,
+        deliverable === "component" ? `Ensure config.stylingProfile is set to one of: css, tailwind, unocss` : deliverable === "block" ? `Block source not yet available \u2014 blocks are resolved at work-package split` : `Primitive source directory not found`
+      ]
     };
   }
-  const primitiveTarget = join7(sourceDir, primitive);
-  const sourceFiles = collectSourceFiles(primitiveSourceDir);
   const envKey = process.env["REGISTRY_VERIFY_KEY"];
   const verifyKeys = [
     ...envKey ? [envKey] : [],
-    ...policy.registryTrustedKeys,
-    ...policy.sourceInstallTrustedKeys
+    ...policy.registryPublicKeys
   ];
+  const verifyPrimitive = deliverable === "component" ? primitive : deliverable === "block" ? primitive : primitive;
   const verifyResult = verifySourceIntegrity({
     cwd,
-    primitive,
+    primitive: verifyPrimitive,
     files: sourceFiles,
     verifyKeys,
     requireSignature: policy.registrySignatureRequired
@@ -1258,9 +1347,10 @@ function installSource(options) {
   }
   const provenance = verifyResult.verified ? "verified" : "unverified";
   const lock = readLock(cwd);
+  const deliverableTarget = join7(sourceDir, primitive);
   const plannedFiles = /* @__PURE__ */ new Map();
   for (const [relPath, content] of sourceFiles) {
-    const targetPath = join7(primitiveTarget, relPath);
+    const targetPath = join7(deliverableTarget, relPath);
     const relFromCwd = relative(cwd, targetPath);
     const rewritten = rewriteImports(content, targetPath, runtimeDir);
     plannedFiles.set(relFromCwd, rewritten);
@@ -1297,9 +1387,9 @@ function installSource(options) {
   }
   const journal = createRollbackJournal();
   try {
-    if (!dryRun) mkdirSync4(primitiveTarget, { recursive: true });
+    if (!dryRun) mkdirSync4(deliverableTarget, { recursive: true });
     for (const [relPath, content] of sourceFiles) {
-      const targetPath = join7(primitiveTarget, relPath);
+      const targetPath = join7(deliverableTarget, relPath);
       const rewritten = rewriteImports(content, targetPath, runtimeDir);
       if (!dryRun) {
         journal.recordBeforeWrite(targetPath);
@@ -1369,6 +1459,66 @@ function installSource(options) {
     verified: verifyResult.verified,
     violations: verifyResult.verified ? [] : verifyResult.violations
   };
+}
+function resolveDeliverableSource(options) {
+  const { primitive, cwd, deliverable, config, plan } = options;
+  if (deliverable === "component") {
+    return resolveComponentSource(primitive, cwd, config, plan);
+  }
+  if (deliverable === "block") {
+    return resolveBlockSource(primitive, cwd);
+  }
+  if (deliverable === "theme") {
+    return resolveThemeSource(primitive, cwd);
+  }
+  const primitiveSourceDir = resolvePrimitiveSource(primitive, cwd);
+  if (!primitiveSourceDir) return /* @__PURE__ */ new Map();
+  return collectSourceFiles(primitiveSourceDir);
+}
+function resolveComponentSource(component, cwd, config, plan) {
+  const profile = plan.stylingProfile ?? config.stylingProfile;
+  if (!profile) return /* @__PURE__ */ new Map();
+  const recipePkg = `recipes-${profile}`;
+  const files = /* @__PURE__ */ new Map();
+  const recipeDir = join7(cwd, "..", "..", "packages", recipePkg, "src", "recipes");
+  if (existsSync8(recipeDir)) {
+    const wrapperPath = join7(recipeDir, `${component}.tsx`);
+    if (existsSync8(wrapperPath)) {
+      files.set(`${component}.tsx`, readFileSync8(wrapperPath, "utf8"));
+    }
+    const variantsPath = join7(recipeDir, `${component}.variants.ts`);
+    if (existsSync8(variantsPath)) {
+      files.set(`${component}.variants.ts`, readFileSync8(variantsPath, "utf8"));
+    }
+    if (files.size > 0) return files;
+  }
+  const nmDir = join7(cwd, "node_modules", "@solidiom", recipePkg, "src", "recipes");
+  if (existsSync8(nmDir)) {
+    const wrapperPath = join7(nmDir, `${component}.tsx`);
+    if (existsSync8(wrapperPath)) {
+      files.set(`${component}.tsx`, readFileSync8(wrapperPath, "utf8"));
+    }
+    const variantsPath = join7(nmDir, `${component}.variants.ts`);
+    if (existsSync8(variantsPath)) {
+      files.set(`${component}.variants.ts`, readFileSync8(variantsPath, "utf8"));
+    }
+    if (files.size > 0) return files;
+  }
+  return files;
+}
+function resolveBlockSource(block, cwd) {
+  const monoPath = join7(cwd, "..", "..", "packages", "blocks", block, "source");
+  if (existsSync8(monoPath)) return collectSourceFiles(monoPath);
+  const nmPath = join7(cwd, "node_modules", "@solidiom", "blocks", block, "source");
+  if (existsSync8(nmPath)) return collectSourceFiles(nmPath);
+  return /* @__PURE__ */ new Map();
+}
+function resolveThemeSource(theme, cwd) {
+  const monoPath = join7(cwd, "..", "..", "packages", "themes", theme, "source");
+  if (existsSync8(monoPath)) return collectSourceFiles(monoPath);
+  const nmPath = join7(cwd, "node_modules", "@solidiom", "themes", theme, "source");
+  if (existsSync8(nmPath)) return collectSourceFiles(nmPath);
+  return /* @__PURE__ */ new Map();
 }
 function collectSourceFiles(dir) {
   const files = /* @__PURE__ */ new Map();
