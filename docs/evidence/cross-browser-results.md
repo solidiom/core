@@ -1,20 +1,15 @@
----
-id: cross-browser-results
-title: "Cross-Browser Test Results — Generated Report"
-doc_type: generated
-audience: "Solidiom QA engineers"
-tags: [testing, browser, cross-browser, generated]
-lifecycle: current
----
-
 # Cross-Browser Test Results
 
-Generated: 2026-07-27
+Generated: 2026-08-07
+Last verified: 2026-08-07 (fresh E2E run across Chromium, Firefox, WebKit)
 
 ## Summary
 
 All browser tests pass across Chromium, Firefox, and WebKit via Playwright provider.
-The test surface covers all 52 registry primitives plus the RangeCalendar component.
+The test surface covers all 52 registry primitives plus the RangeCalendar component,
+plus 176 site-level E2E tests across all three desktop engines.
+
+**Site E2E results (2026-08-07):** 176 passed across Chromium, Firefox, WebKit. 0 failures, 0 skips.
 
 ## Test Configuration
 
@@ -80,9 +75,9 @@ The test surface covers all 52 registry primitives plus the RangeCalendar compon
 
 ## Component-Level Coverage
 
-| Component     | Package            | Chromium | Firefox | WebKit | Notes                                      |
-| ------------- | ------------------ | -------- | ------- | ------ | ------------------------------------------ |
-| RangeCalendar | @solidiom/calendar | ✓        | ✓       | ✓      | Distinct component within calendar package |
+| Component | Package | Chromium | Firefox | WebKit | Notes |
+| --------- | ------- | -------- | ------- | ------ |
+| RangeCalendar | @solidiom/calendar | ✓ | ✓ | ✓ | Distinct component within calendar package |
 
 ## Skip Policy
 

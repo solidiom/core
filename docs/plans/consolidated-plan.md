@@ -165,16 +165,16 @@ M5 is scoped to **ship a production-quality product**. It covers QA, security, o
 
 | Status | ID | Size | Description | Depends on |
 |--------|-----|------|-------------|------------|
-| [ ] | QA-001 | L | WCAG 2.2 AA/APG audit and critical/serious fixes | G4 |
-| [ ] | QA-002 | L | Supported desktop/mobile browser matrix and fallbacks | G4 |
-| [ ] | QA-003 | L | Full visual matrix approval and intentional diffs | G4 |
-| [ ] | QA-004 | M | Final performance and bundle budgets | G4 |
-| [ ] | QA-005 | M | Full bilingual, links, SEO, feed, structured-data audit | G4 |
-| [ ] | QA-006 | M | Search coverage, locale, keyboard, ranking, privacy audit | G4 |
-| [ ] | QA-007 | M | Registry, signature, CSP, sandbox, dependency, project security | G4 |
-| [ ] | QA-008 | M | Full CLI command/package-manager/offline/rollback matrix | G4 |
-| [ ] | QA-009 | S | Analytics/newsletter/provider privacy audit | G4 |
-| [ ] | QA-010 | S | Final legal/policy review and publication | GOV-001..006 |
+| [x] | QA-001 | L | WCAG 2.2 AA/APG audit and critical/serious fixes | G4 |
+| [x] | QA-002 | L | Supported desktop/mobile browser matrix and fallbacks | G4 |
+| [x] | QA-003 | L | Full visual matrix approval and intentional diffs | G4 |
+| [x] | QA-004 | M | Final performance and bundle budgets | G4 |
+| [x] | QA-005 | M | Full bilingual, links, SEO, feed, structured-data audit | G4 |
+| [x] | QA-006 | M | Search coverage, locale, keyboard, ranking, privacy audit | G4 |
+| [x] | QA-007 | M | Registry, signature, CSP, sandbox, dependency, project security | G4 |
+| [x] | QA-008 | M | Full CLI command/package-manager/offline/rollback matrix | G4 |
+| [x] | QA-009 | S | Analytics/newsletter/provider privacy audit | G4 |
+| [x] | QA-010 | S | Final legal/policy review and publication | GOV-001..006 |
 
 ### 6.2 G5 Primitive Promotion (52 items)
 
