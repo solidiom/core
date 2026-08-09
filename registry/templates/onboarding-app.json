@@ -1,20 +1,25 @@
 {
   "name": "onboarding-app",
+  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
   "label": "Onboarding App",
   "description": "Onboarding application with multi-step wizards, profile setup, and guided project creation.",
-  "status": "preview",
-  "templateId": "TPL-002",
-  "stack": "vite-solid-router",
-  "portfolioTags": ["balanced-product"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ONBOARD-01", "BLOCK-ONBOARD-02", "BLOCK-ONBOARD-03"],
-  "integrity": {
-    "algorithm": "sha256",
-    "manifestHash": "tpl-002-onboarding-app-manifest",
-    "lastGenerated": "2026-08-06T22:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
-  }
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "searchKeywords": [
+    "a",
+    "balanced-product",
+    "c",
+    "i",
+    "onboarding-app",
+    "s",
+    "t",
+    "t",
+    "template",
+    "vite-solid-router"
+  ]
 }

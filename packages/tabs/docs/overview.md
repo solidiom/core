@@ -4,7 +4,7 @@ title: Tabs
 description: Tabbed content switcher.
 keywords: [content, navigation, runtime, switcher, tabbed, tabs]
 locale: en
-maturity: draft
+maturity: ga
 product: Tabs
 productLayer: primitive
 status: draft

@@ -4,7 +4,7 @@ title: Calendar
 description: Date selection with day/month/year views.
 keywords: [calendar, date, date-math, day, input, month, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Calendar
 productLayer: primitive
 status: draft

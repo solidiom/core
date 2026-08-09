@@ -21,8 +21,8 @@ Solidiom is built strictly for the **Solid 2.0 compiler**, diverging from React/
 # Install dependencies
 pnpm install
 
-# Start the docs dev server
-mise run dev          # or: pnpm --filter @solidiom/docs dev
+# Start the website dev server
+mise run dev:site       # or: pnpm --filter @solidiom/site exec astro dev --force
 
 # Build everything
 mise run build        # or: pnpm nx run-many -t build
@@ -37,7 +37,7 @@ Requires Node >= 24 and pnpm 10. If you use [mise](https://mise.jdx.dev), tool v
 
 ```
 apps/
-  docs/             Vite + Solid 2 documentation SPA (see apps/docs/README.md)
+  site/             Astro static site — product website & docs (see apps/site/README.md)
 
 packages/
   runtime/          Shared runtime utilities (semantic attrs, overlay stack, ports)
@@ -85,7 +85,7 @@ docs/               Architecture and design documentation
 
 ## Documentation app
 
-The interactive docs live in `apps/docs/`. See [`apps/docs/README.md`](apps/docs/README.md) for architecture decisions, development workflow, and route structure.
+The interactive docs live in `apps/site/`. See [`apps/site/README.md`](apps/site/README.md) for architecture decisions, development workflow, and route structure.
 
 ## Common tasks (mise)
 
@@ -96,9 +96,9 @@ All tasks are defined in `.mise.toml`. Run `mise tasks` to list them.
 | `mise run build`                             | Build all packages (nx dependency graph)  |
 | `mise run build:package -- @solidiom/button` | Build a single package                    |
 | `mise run build:recipes`                     | Build CSS + Tailwind recipe packages      |
-| `mise run build:docs`                        | Build the docs app                        |
+| `mise run build:site`                        | Build the site                            |
 | `mise run build:registry`                    | Generate registry manifests               |
-| `mise run dev`                               | Start docs dev server                     |
+| `mise run dev`                               | Start site dev server                     |
 | `mise run test`                              | Run all unit tests                        |
 | `mise run test:browser`                      | Browser-mode component tests (Playwright) |
 | `mise run test:e2e`                          | End-to-end tests                          |
@@ -173,7 +173,7 @@ act push -W .github/workflows/ci.yml -j build \
   --container-architecture linux/amd64
 ```
 
-This emulation is not fully reliable for tasks that invoke native binaries. `vite build` (via esbuild/rolldown) has been observed to segfault under qemu emulation (`qemu: uncaught target signal 11`) for `@solidiom/docs`, `@solidiom/docs-astro-poc`, and `@solidiom/probe-primitive` even though each builds successfully both natively (`pnpm --filter <pkg> build`) and on real hosted CI. Pure `tsup`/`tsc` build tasks (no native binary invocation) do not exhibit this issue and are reliable signal under local `act` runs. If a `vite build` task fails only under local `act` with a segfault, treat it as an emulation artifact and confirm with a native `pnpm --filter <pkg> build` before treating it as a real regression.
+This emulation is not fully reliable for tasks that invoke native binaries. `vite build` (via esbuild/rolldown) has been observed to segfault under qemu emulation (`qemu: uncaught target signal 11`) for `@solidiom/probe-primitive` even though each builds successfully both natively (`pnpm --filter <pkg> build`) and on real hosted CI. Pure `tsup`/`tsc` build tasks (no native binary invocation) do not exhibit this issue and are reliable signal under local `act` runs. If a `vite build` task fails only under local `act` with a segfault, treat it as an emulation artifact and confirm with a native `pnpm --filter <pkg> build` before treating it as a real regression.
 
 **Workaround:** for local iteration, omit `--container-architecture linux/amd64` and let `act` run job containers natively as `arm64`:
 

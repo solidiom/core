@@ -3,7 +3,7 @@
  *
  * Source-derived gate that verifies each block against the M4 bar (§8.3.1),
  * reconciles against the committed registry, and asserts a ratcheting count
- * that must match the number declared in docs/plans/website-tasks.md §11
+ * that must match the number declared in docs/plans/consolidated-plan.md §11
  * scope counters.
  *
  * Run via: pnpm exec tsx tools/block-catalog-gate.ts
@@ -31,7 +31,7 @@
  * to COMP-NNN IDs, and verifies the .json IDs resolve to the same components
  * in §9.2.
  *
- * See: docs/plans/website-tasks.md §8.3.1 (the M4 bar)
+ * See: docs/plans/consolidated-plan.md §8.3.1 (the M4 bar)
  */
 
 import { existsSync, readFileSync } from "node:fs"
@@ -39,7 +39,7 @@ import { join } from "node:path"
 
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 const REGISTRY_DIR = join(ROOT, "registry")
-const TRACKER_PATH = join(ROOT, "docs", "plans", "website-tasks.md")
+const TRACKER_PATH = join(ROOT, "docs", "plans", "consolidated-plan.md")
 const MANIFEST_JSON = join(ROOT, "docs", "contracts", "block-catalog-manifest.json")
 const MANIFEST_MD = join(ROOT, "docs", "contracts", "block-catalog-manifest.md")
 
@@ -118,16 +118,16 @@ function parseSection92Components(): Map<string, ComponentQueueEntry> {
   const map = new Map<string, ComponentQueueEntry>()
 
   // Extract the §9.2 section — from heading to the next ### 9.3
-  const sectionMatch = content.match(/### 9\.2 Component queue[\s\S]*?(?=### 9\.3|$)/)
+  const sectionMatch = content.match(/### 9\.2 Components[^\n]*\n[\s\S]*?(?=### 9\.3|$)/)
   if (!sectionMatch) return map
 
   const section = sectionMatch[0]
-  const compRegex = /\|\s*\[([ x~!])\]\s*\|\s*COMP-(\d{3})\s*\|\s*([^|]+)\|/g
+  const compRegex = /\|\s*COMP-(\d{3})\s*\|\s*([^|]+)\|\s*\[([ x~!])\]\s*\|/g
   let m
   while ((m = compRegex.exec(section)) !== null) {
-    const status = m[1] as ComponentQueueEntry["status"]
-    const id = `COMP-${m[2]}`
-    const name = m[3].trim()
+    const status = m[3] as ComponentQueueEntry["status"]
+    const id = `COMP-${m[1]}`
+    const name = m[2].trim()
     map.set(id, { name, status })
   }
   return map
@@ -326,7 +326,7 @@ function main(): void {
     console.error(
       `\n✗ FAILED: actual count (${actualCount}) ≠ tracker declared count (${declaredCount}).`,
     )
-    console.error(`  Update the Blocks DoD column in docs/plans/website-tasks.md to match,`)
+    console.error(`  Update the Blocks DoD column in docs/plans/consolidated-plan.md to match,`)
     console.error(`  or fix the blocks that should be passing.`)
     process.exit(1)
   }

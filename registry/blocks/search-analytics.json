@@ -1,61 +1,20 @@
 {
   "name": "search-analytics",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Search Analytics",
-  "description": "User views search usage statistics including popular queries, zero-result rates, and search behavior trends. Implements loading, empty, error, and restricted states.",
-  "category": "SEARCH",
-  "status": "preview",
-  "blockId": "BLOCK-SEARCH-03",
+  "description": "Search Analytics block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/card",
-    "@solidiom/select",
-    "@solidiom/tabs",
-    "@solidiom/tooltip",
-    "@solidiom/data-table",
-    "@solidiom/meter",
-    "@solidiom/progress",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/search-analytics/source/search-analytics.tsx",
-      "packages/blocks/search-analytics/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/search-analytics/source/search-analytics.tsx": "741eb8b31f2d1c80307e6974aff63c265dddbe29347ed1c3240c960c4833bbba",
-      "packages/blocks/search-analytics/source/index.ts": "4f33dcc0295a33760bb43cc4f6bb27987a6b9df130945343fc9903ac977b52bb"
-    },
-    "lastGenerated": "2026-08-06T21:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
-    "search",
     "analytics",
-    "statistics",
-    "queries",
-    "analitica",
-    "busqueda"
+    "block",
+    "search",
+    "search-analytics"
   ]
 }

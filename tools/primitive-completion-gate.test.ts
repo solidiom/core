@@ -91,21 +91,7 @@ function createFixture(recipeMode: "recipe" | "headless-only" = "headless-only")
     "packages/primitives/package.json",
     JSON.stringify({ dependencies: { "@solidiom/example": "workspace:*" } }),
   )
-  write(
-    root,
-    "apps/docs/src/demos/index.ts",
-    'export const demos = { example: { component: () => null, code: "" } }\n',
-  )
-  write(
-    root,
-    "apps/docs/src/demos/example-demo.tsx",
-    'import * as Example from "@solidiom/example"\nexport function ExampleDemo() { return <Example.Root /> }\nexport const exampleDemoCode = "example"\n',
-  )
-  write(
-    root,
-    "apps/docs/package.json",
-    JSON.stringify({ dependencies: { "@solidiom/example": "workspace:*" } }),
-  )
+  // docs demo checks removed at CUT-003 — apps/docs/ no longer exists
 
   for (const profile of ["css", "tailwind"]) {
     write(
@@ -165,14 +151,13 @@ describe("auditPrimitiveCompletion", () => {
   it("reports missing test, umbrella, docs, and manifest wiring", () => {
     const root = createFixture()
     rmSync(join(root, "packages/example/src/example.browser.test.tsx"))
+    // docs demo checks removed at CUT-003
     write(root, "packages/primitives/src/index.ts", "export {}\n")
-    write(root, "apps/docs/src/demos/index.ts", "export const demos = {}\n")
     rmSync(join(root, "registry/example.json"))
 
     const messages = auditPrimitiveCompletion(root).failures.map((failure) => failure.message)
     expect(messages).toContain("must include at least one unit or browser test")
     expect(messages).toContain("must be exported by @solidiom/primitives")
-    expect(messages).toContain("must have a docs demo entry")
     expect(messages).toContain("must have registry/example.json")
   })
 

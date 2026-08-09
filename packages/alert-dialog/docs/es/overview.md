@@ -4,7 +4,7 @@ title: Alert Dialog
 description: Modal confirmation dialog requiring explicit user action.
 keywords: [action, alert, confirmation, dialog, explicit, modal, overlay]
 locale: es
-maturity: draft
+maturity: ga
 product: Alert Dialog
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/alert-dialog"
 primitive: alert-dialog
 section: overview
 translationSourceHash: "892f6ba826e46b57fc6259423a1aef5fa58b3a63d4073a80e25b36daed7509a1"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Alert Dialog no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

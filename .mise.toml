@@ -30,9 +30,9 @@ run = "pnpm nx build {{arg(name='package')}}"
 description = "Build both recipe packages"
 run = "pnpm nx run-many -t build --projects=@solidiom/recipes-css,@solidiom/recipes-tailwind"
 
-[tasks."build:docs"]
-description = "Build the docs app"
-run = "pnpm nx build @solidiom/docs"
+[tasks."build:site"]
+description = "Build the Solidiom website (apps/site)"
+run = "pnpm nx build @solidiom/site"
 
 [tasks."validate:site"]
 description = "Validate the website (Astro check, production build, and Pagefind index)"
@@ -51,8 +51,8 @@ run = "pnpm tsx tools/registry-build.ts"
 # ---------------------------------------------------------------------------
 
 [tasks.dev]
-description = "Start the docs dev server"
-run = "pnpm nx dev @solidiom/docs"
+description = "Start the Solidiom website dev server"
+run = "pnpm --filter @solidiom/site exec astro dev --force"
 
 [tasks."dev:site"]
 description = "Start the Solidiom website (apps/site) in dev mode"
@@ -310,7 +310,7 @@ for node_version in 24 26; do
     mise exec "node@${node_version}" -- node scripts/set-solid-version.mjs "$solid_tier"
     mise exec "node@${node_version}" -- pnpm install --no-frozen-lockfile
     mise exec "node@${node_version}" -- pnpm exec playwright install chromium firefox webkit
-    mise exec "node@${node_version}" -- pnpm exec nx run-many -t build --exclude=@solidiom/docs,@solidiom/docs-astro-poc,@solidiom/site
+    mise exec "node@${node_version}" -- pnpm exec nx run-many -t build --exclude=@solidiom/site
     mise exec "node@${node_version}" -- pnpm exec nx run-many -t test --exclude=@solidiom/tests-package-source-parity,@solidiom/site < /dev/null
     mise exec "node@${node_version}" -- pnpm exec vitest run --config vitest.browser.config.ts < /dev/null
   done

@@ -4,7 +4,7 @@ title: Field
 description: "Composition wrapper: label + control + description + error with automatic ARIA wiring."
 keywords: [aria, automatic, composition, control, description, error, field]
 locale: es
-maturity: draft
+maturity: ga
 product: Field
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/field"
 primitive: field
 section: overview
 translationSourceHash: "c1c7ebecdf7a3c79663fe551a5b4536b8c71584cac52716173fb9bf7261f4a71"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Field no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

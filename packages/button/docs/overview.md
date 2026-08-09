@@ -4,7 +4,7 @@ title: Button
 description: Clickable trigger for actions with loading, disabled, and variant support.
 keywords: [button, clickable, action, loading, disabled, submit, toggle]
 locale: en
-maturity: draft
+maturity: ga
 product: Button
 productLayer: primitive
 status: draft

@@ -4,7 +4,7 @@ title: Combobox
 description: Autocomplete input with a filterable listbox for selecting from a set of options.
 keywords: [autocomplete, combobox, dropdown, listbox]
 locale: en
-maturity: beta
+maturity: ga
 product: Combobox
 productLayer: primitive
 status: published

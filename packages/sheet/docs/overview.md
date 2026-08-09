@@ -4,7 +4,7 @@ title: Sheet
 description: Side-panel dialog with slide animation.
 keywords: [animation, dialog, overlay, panel, runtime, sheet, side]
 locale: en
-maturity: draft
+maturity: ga
 product: Sheet
 productLayer: primitive
 status: draft

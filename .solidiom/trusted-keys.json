@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "keys": [
+    {
+      "keyId": "89cb830913754674",
+      "algorithm": "ed25519",
+      "publicKey": "T9BKxYo4DXXHHw15qe7xCo6pVEMyJ2s++OI1zNn/fes=",
+      "provisionedAt": "2026-08-07",
+      "status": "active"
+    }
+  ]
+}

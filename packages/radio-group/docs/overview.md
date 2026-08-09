@@ -4,7 +4,7 @@ title: Radio Group
 description: Single-select radio button set with keyboard navigation.
 keywords: [button, group, input, keyboard, navigation, radio, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Radio Group
 productLayer: primitive
 status: draft

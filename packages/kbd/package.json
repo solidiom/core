@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Kbd",
       "description": "Keyboard shortcut display element.",
-      "category": "display"
+      "category": "display",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

@@ -4,7 +4,7 @@ title: Command Palette
 description: Modal search and action launcher.
 keywords: [action, and, command, launcher, modal, navigation, palette]
 locale: es
-maturity: draft
+maturity: ga
 product: Command Palette
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/command-palette"
 primitive: command-palette
 section: overview
 translationSourceHash: "fb4da8a2ce82413b79f538e5027e6268711f2bad733586077dfe01ca13166b4d"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Command Palette no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

@@ -4,7 +4,7 @@ title: Checkbox
 description: Binary or indeterminate toggle control.
 keywords: [binary, checkbox, control, indeterminate, input, runtime, toggle]
 locale: es
-maturity: draft
+maturity: ga
 product: Checkbox
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/checkbox"
 primitive: checkbox
 section: overview
 translationSourceHash: "f3a82c5e77f6597d31046770d5a7b4afd94c825a5168d8546747ebcbc2e80734"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Checkbox no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

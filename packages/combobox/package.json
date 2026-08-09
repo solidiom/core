@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Combobox",
       "description": "Text input with autocomplete dropdown.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

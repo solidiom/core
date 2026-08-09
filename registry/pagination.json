@@ -17,7 +17,7 @@
   "label": "Pagination",
   "description": "Page navigation with prev/next and page numbers.",
   "category": "navigation",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-pagination-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,7 +39,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -70,11 +71,11 @@
     "fileDigests": {
       "src/index.tsx": "b7845f543a4a13205b3467cdf782a39c0a3594718647afd021a6bb44bd8575b1"
     },
-    "lastGenerated": "2026-08-05T06:07:56.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/pagination"
   },
-  "lastUpdated": "2026-08-05T06:07:56.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

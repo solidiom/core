@@ -37,7 +37,10 @@
     "metadata": {
       "label": "Virtual List",
       "description": "Viewport-windowed list for large datasets.",
-      "category": "layout"
+      "category": "layout",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

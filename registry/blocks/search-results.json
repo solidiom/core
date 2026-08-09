@@ -1,62 +1,20 @@
 {
   "name": "search-results",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Search Results",
-  "description": "Search results with faceted filtering, pagination, and result previews. Implements loading, empty, error, and restricted states.",
-  "category": "SEARCH",
-  "status": "preview",
-  "blockId": "BLOCK-SEARCH-01",
+  "description": "Search Results block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/input",
-    "@solidiom/card",
-    "@solidiom/alert",
-    "@solidiom/select",
-    "@solidiom/checkbox",
-    "@solidiom/pagination",
-    "@solidiom/data-table",
-    "@solidiom/popover",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/search-results/source/search-results.tsx",
-      "packages/blocks/search-results/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/search-results/source/search-results.tsx": "787c4c3d420bab7b2d57cf1d24fba9a6fe9d44f71349991e3ac1483309d83ecb",
-      "packages/blocks/search-results/source/index.ts": "347780a411925fc27cf223fc9932b2346219750437fefe0f868c1627b5782803"
-    },
-    "lastGenerated": "2026-08-06T14:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
-    "search",
+    "block",
     "results",
-    "facets",
-    "filter",
-    "busqueda",
-    "resultados"
+    "search",
+    "search-results"
   ]
 }

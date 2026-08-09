@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Tabs",
       "description": "Tabbed content switcher.",
-      "category": "navigation"
+      "category": "navigation",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

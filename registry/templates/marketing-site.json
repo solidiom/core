@@ -1,20 +1,25 @@
 {
   "name": "marketing-site",
+  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
   "label": "Marketing Site",
   "description": "Marketing website with hero landing page, feature showcase, and pricing plans.",
-  "status": "preview",
-  "templateId": "TPL-015",
-  "stack": "vite-solid-router",
-  "portfolioTags": ["balanced-product"],
-  "requiredBlocks": ["BLOCK-SHELL-01", "BLOCK-CONTENT-01", "BLOCK-CONTENT-02", "BLOCK-CONTENT-03"],
-  "integrity": {
-    "algorithm": "sha256",
-    "manifestHash": "tpl-015-marketing-site-manifest",
-    "lastGenerated": "2026-08-06T23:50:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
-  }
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "searchKeywords": [
+    "a",
+    "balanced-product",
+    "c",
+    "i",
+    "marketing-site",
+    "s",
+    "t",
+    "t",
+    "template",
+    "vite-solid-router"
+  ]
 }

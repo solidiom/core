@@ -1,69 +1,20 @@
 {
   "name": "workflow-builder",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Workflow Builder",
-  "description": "Visual workflow editor with node connections and configuration panels. Implements loading, empty, error, and restricted states.",
-  "category": "AI",
-  "status": "preview",
-  "blockId": "BLOCK-AI-03",
+  "description": "Workflow Builder block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/button",
-    "@solidiom/input",
-    "@solidiom/field",
-    "@solidiom/card",
-    "@solidiom/alert",
-    "@solidiom/dialog",
-    "@solidiom/select",
-    "@solidiom/tabs",
-    "@solidiom/menu",
-    "@solidiom/toast",
-    "@solidiom/checkbox",
-    "@solidiom/switch",
-    "@solidiom/popover",
-    "@solidiom/data-table",
-    "@solidiom/resizable-panels",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/workflow-builder/source/workflow-builder.tsx",
-      "packages/blocks/workflow-builder/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/workflow-builder/source/workflow-builder.tsx": "9bc9e46629f20edfd7a34ab1ab70a58970f82e7d742aaea178e29f2ce4605b3e",
-      "packages/blocks/workflow-builder/source/index.ts": "7ecb4034c5708ef1fd954fdcf3101c7a155931325bcbaf91f49ac7e0e4be6973"
-    },
-    "lastGenerated": "2026-08-06T14:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
-    "workflow",
+    "block",
     "builder",
-    "nodes",
-    "automation",
-    "flujo",
-    "constructor"
+    "workflow",
+    "workflow-builder"
   ]
 }

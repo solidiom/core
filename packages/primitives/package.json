@@ -79,6 +79,11 @@
   "nx": {
     "tags": [
       "layer:primitive"
-    ]
+    ],
+    "metadata": {
+      "registry": {
+        "status": "stable"
+      }
+    }
   }
 }

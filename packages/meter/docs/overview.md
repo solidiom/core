@@ -4,7 +4,7 @@ title: Meter
 description: Scalar measurement within a known range (e.g. disk usage, signal strength).
 keywords: [disk, feedback, known, measurement, meter, range, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Meter
 productLayer: primitive
 status: draft

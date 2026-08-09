@@ -4,7 +4,7 @@ title: Input OTP
 description: A one-time password input with individual character slots.
 keywords: [character, individual, input, one, otp, password, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Input OTP
 productLayer: primitive
 status: draft

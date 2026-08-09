@@ -23,7 +23,7 @@
   "label": "Resizable Panels",
   "description": "Drag-to-resize panel layout.",
   "category": "layout",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -36,7 +36,7 @@
     "evidenceIds": [
       "axe-resizable-panels-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -45,7 +45,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -76,11 +77,11 @@
       "src/panels-context.ts": "9ab5d1c128be258daf202afc585eaa4745e8805ae9af4a4773620815007347ba",
       "src/panels.tsx": "00600ba0ae703e17aea8731f87fbc8c31cdf6934f1c46c973c7a0e463b5465a6"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/resizable-panels"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

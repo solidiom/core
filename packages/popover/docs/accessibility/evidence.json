@@ -1,17 +1,20 @@
 {
   "schemaVersion": 2,
   "primitive": "popover",
-  "evidenceIds": ["axe-popover-scan-v1"],
+  "evidenceIds": [
+    "axe-popover-scan-v1"
+  ],
   "summary": {
     "passes": 8,
     "violations": 0,
     "incomplete": 0,
     "outcome": "pass"
   },
-  "lastRun": "2026-08-03T16:32:53.812Z",
+  "lastRun": "2026-08-07T18:37:43.168Z",
   "provenance": {
     "browser": "chromium",
-    "commitSha": "8fae4dcc363bc8c0b477731379246b48164b6fc7",
-    "ciRunUrl": null
+    "commitSha": "650b0f2810aa69af91bc0dc06001d0b3f1792f02",
+    "ciRunUrl": null,
+    "gaPromotedAt": "2026-08-07"
   }
 }

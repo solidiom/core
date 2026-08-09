@@ -4,7 +4,7 @@ title: Resizable Panels
 description: Drag-to-resize panel layout.
 keywords: [drag, layout, panel, panels, resizable, resize, runtime]
 locale: es
-maturity: draft
+maturity: ga
 product: Resizable Panels
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/resizable-panels"
 primitive: resizable-panels
 section: overview
 translationSourceHash: "341b84aba5b2db799af46d26b3fbee6bbbbc9ee81f4c4c278bba47e4af33996b"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Resizable Panels no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

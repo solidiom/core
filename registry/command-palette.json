@@ -26,7 +26,7 @@
   "label": "Command Palette",
   "description": "Modal search and action launcher.",
   "category": "navigation",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -39,7 +39,7 @@
     "evidenceIds": [
       "axe-command-palette-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -48,7 +48,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -81,11 +82,11 @@
       "src/command-palette.tsx": "f7637e6d1eb9182a4f07272da85820ae8afdda672923023eeb03ac45fa28c8c1",
       "src/index.tsx": "b889c5210bac3669eb6832d02c84314f97cae48b6ee2f6fa50898d2c6cc66539"
     },
-    "lastGenerated": "2026-08-06T00:15:56.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/command-palette"
   },
-  "lastUpdated": "2026-08-06T00:15:56.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

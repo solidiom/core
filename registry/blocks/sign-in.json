@@ -1,49 +1,20 @@
 {
   "name": "sign-in",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Sign In",
-  "description": "Composable authentication form with email/password and OAuth support. Implements loading, empty, error, and restricted states.",
-  "category": "AUTH",
-  "status": "preview",
-  "blockId": "BLOCK-AUTH-01",
-  "deliverables": ["block"],
-  "componentDependencies": [
-    "@solidiom/button",
-    "@solidiom/input",
-    "@solidiom/field",
-    "@solidiom/alert",
-    "@solidiom/spinner"
+  "description": "Sign In block",
+  "status": "stable",
+  "deliverables": [
+    "source"
   ],
-  "requiredStates": ["loading", "empty", "error", "restricted"],
-  "source": {
-    "files": [
-      "packages/blocks/sign-in/source/sign-in.tsx",
-      "packages/blocks/sign-in/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/sign-in/source/sign-in.tsx": "ce5e1b93d0a67f0283d65761e389f4a8f8a0e58505f863782270191d8ce429f1",
-      "packages/blocks/sign-in/source/index.ts": "eb74f616d40a4f3f3537f58e027037794bd7f6ac7a43b2ff83f4c82e07e28600"
-    },
-    "lastGenerated": "2026-08-06T10:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": { "status": "draft" },
-      "es": { "status": "draft" }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
-    "sign-in",
-    "login",
-    "auth",
-    "authentication",
-    "form",
-    "oauth",
-    "iniciar sesion",
-    "autenticacion"
+    "block",
+    "in",
+    "sign",
+    "sign-in"
   ]
 }

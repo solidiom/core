@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Pagination",
       "description": "Page navigation with prev/next and page numbers.",
-      "category": "navigation"
+      "category": "navigation",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

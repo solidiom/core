@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Carousel",
       "description": "Horizontal slide-based content viewer.",
-      "category": "layout"
+      "category": "layout",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

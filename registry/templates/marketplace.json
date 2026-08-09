@@ -1,20 +1,25 @@
 {
   "name": "marketplace",
+  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
   "label": "Marketplace",
   "description": "Multi-vendor marketplace with product browsing, seller dashboard, and listing management.",
-  "status": "preview",
-  "templateId": "TPL-013",
-  "stack": "vite-solid-router",
-  "portfolioTags": ["balanced-product"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-COMMERCE-01", "BLOCK-COMMERCE-02", "BLOCK-COMMERCE-03"],
-  "integrity": {
-    "algorithm": "sha256",
-    "manifestHash": "tpl-013-marketplace-manifest",
-    "lastGenerated": "2026-08-06T23:30:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
-  }
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "searchKeywords": [
+    "a",
+    "balanced-product",
+    "c",
+    "i",
+    "marketplace",
+    "s",
+    "t",
+    "t",
+    "template",
+    "vite-solid-router"
+  ]
 }

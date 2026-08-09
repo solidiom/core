@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Switch",
       "description": "Binary toggle with on/off semantics.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Checkbox",
       "description": "Binary or indeterminate toggle control.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

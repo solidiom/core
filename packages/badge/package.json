@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Badge",
       "description": "Inline status or label indicator.",
-      "category": "feedback"
+      "category": "feedback",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

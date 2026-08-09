@@ -4,7 +4,7 @@ title: Empty State
 description: Placeholder for empty content areas.
 keywords: [areas, content, empty, feedback, for, placeholder, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Empty State
 productLayer: primitive
 status: draft

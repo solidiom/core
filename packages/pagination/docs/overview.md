@@ -4,7 +4,7 @@ title: Pagination
 description: Page navigation with prev/next and page numbers.
 keywords: [and, navigation, next, numbers, page, pagination, prev]
 locale: en
-maturity: draft
+maturity: ga
 product: Pagination
 productLayer: primitive
 status: draft

@@ -1,0 +1,279 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import { getBenchBaseline, type BenchBaseline } from "../../lib/bench-data"
+import { type Locale } from "../../lib/locale"
+
+const locale: Locale = "en"
+const baseline = getBenchBaseline()
+
+const copy = {
+  title: "Performance",
+  description: "Solidiom benchmark results and performance baselines.",
+  subtitle: "Benchmark Results",
+  noData:
+    "Benchmark data has not been collected yet. This dashboard will display throughput, bundle size, and interaction metrics once CI benchmarks are wired up.",
+  throughputSection: "Throughput",
+  throughputDesc: "Operations per second for core primitives.",
+  bundleSection: "Bundle Sizes",
+  bundleDesc: "Gzip bundle sizes per package with budget limits.",
+  interactionSection: "Interaction",
+  interactionDesc: "Playwright-based interaction metrics.",
+  nameCol: "Name",
+  opsCol: "Ops/sec",
+  avgNsCol: "Avg (ns)",
+  samplesCol: "Samples",
+  sizeCol: "Size (gzip)",
+  limitCol: "Limit",
+  statusCol: "Status",
+  metricsCol: "Metrics",
+  passed: "passed",
+  failed: "failed",
+  lastUpdated: "Last updated",
+}
+---
+
+<BaseLayout title={copy.title} description={copy.description}>
+  <div class="perf-page">
+    <header class="perf-page__header">
+      <h1>{copy.title}</h1>
+      <p>{copy.description}</p>
+    </header>
+
+    <section class="perf-section" aria-label={copy.throughputSection}>
+      <h2>{copy.throughputSection}</h2>
+      <p>{copy.throughputDesc}</p>
+      {baseline && baseline.throughput.length > 0 ? (
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th scope="col">{copy.nameCol}</th>
+              <th scope="col">{copy.opsCol}</th>
+              <th scope="col">{copy.avgNsCol}</th>
+              <th scope="col">{copy.samplesCol}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {baseline.throughput.map((r) => (
+              <tr>
+                <td>{r.name}</td>
+                <td>{r.opsPerSecond.toLocaleString()}</td>
+                <td>{r.avgNs.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                <td>{r.samples.toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null}
+    </section>
+
+    <section class="perf-section" aria-label={copy.bundleSection}>
+      <h2>{copy.bundleSection}</h2>
+      <p>{copy.bundleDesc}</p>
+      {baseline && baseline.bundle.length > 0 ? (
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th scope="col">{copy.nameCol}</th>
+              <th scope="col">{copy.sizeCol}</th>
+              <th scope="col">{copy.limitCol}</th>
+              <th scope="col">{copy.statusCol}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {baseline.bundle.map((r) => (
+              <tr>
+                <td>{r.name}</td>
+                <td>{formatBytes(r.gzipBytes)}</td>
+                <td>{formatBytes(r.limitBytes)}</td>
+                <td>
+                  <span class={`perf-badge perf-badge--${r.passed ? "pass" : "fail"}`}>
+                    {r.passed ? copy.passed : copy.failed}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null}
+    </section>
+
+    <section class="perf-section" aria-label={copy.interactionSection}>
+      <h2>{copy.interactionSection}</h2>
+      <p>{copy.interactionDesc}</p>
+      {baseline && baseline.interaction.length > 0 ? (
+        <table class="perf-table">
+          <thead>
+            <tr>
+              <th scope="col">{copy.nameCol}</th>
+              <th scope="col">{copy.metricsCol}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {baseline.interaction.map((r) => (
+              <tr>
+                <td>{r.name}</td>
+                <td>
+                  {Object.entries(r.metrics).map(([k, v]) => `${k}: ${v}`).join(", ")}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null}
+    </section>
+
+    {!baseline ||
+      (baseline.throughput.length === 0 &&
+        baseline.bundle.length === 0 &&
+        baseline.interaction.length === 0) ? (
+      <div class="perf-empty" role="status">
+        <p>{copy.noData}</p>
+      </div>
+    ) : null}
+
+    {baseline && (
+      <footer class="perf-page__footer">
+        <time datetime={baseline.generatedAt}>
+          {copy.lastUpdated}: {new Date(baseline.generatedAt).toLocaleDateString(locale, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+      </footer>
+    )}
+  </div>
+</BaseLayout>
+
+{
+  function formatBytes(bytes: number): string {
+    if (bytes < 1024) return `${bytes} B`
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`
+  }
+}
+
+<style>
+  .perf-page {
+    max-width: var(--prose-max-width, 75ch);
+    margin-inline: auto;
+    padding: 2rem 1rem;
+  }
+
+  .perf-page__header {
+    margin-bottom: 2rem;
+  }
+
+  .perf-page__header h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .perf-page__header p {
+    color: var(--muted, #6b7280);
+  }
+
+  .perf-section {
+    margin-bottom: 3rem;
+  }
+
+  .perf-section h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .perf-section > p {
+    color: var(--muted, #6b7280);
+    margin-bottom: 1rem;
+  }
+
+  .perf-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .perf-table th,
+  .perf-table td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border, #e5e7eb);
+    text-align: left;
+  }
+
+  .perf-table th {
+    font-weight: 600;
+    background: var(--surface, #f9fafb);
+  }
+
+  .perf-badge {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .perf-badge--pass {
+    background: var(--success-bg, #f0fdf4);
+    color: var(--success-fg, #166534);
+  }
+
+  .perf-badge--fail {
+    background: var(--error-bg, #fef2f2);
+    color: var(--error-fg, #991b1b);
+  }
+
+  .perf-empty {
+    margin: 2rem 0;
+    padding: 2rem;
+    border: 1px dashed var(--border, #d1d5db);
+    border-radius: 0.5rem;
+    text-align: center;
+    color: var(--muted, #6b7280);
+  }
+
+  .perf-page__footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border, #e5e7eb);
+    font-size: 0.875rem;
+    color: var(--muted, #6b7280);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .perf-page__header p {
+      color: #9ca3af;
+    }
+
+    .perf-section > p {
+      color: #9ca3af;
+    }
+
+    .perf-table th {
+      background: #111827;
+    }
+
+    .perf-table th,
+    .perf-table td {
+      border-color: #374151;
+    }
+
+    .perf-badge--pass {
+      background: #052e16;
+      color: #86efac;
+    }
+
+    .perf-badge--fail {
+      background: #450a0a;
+      color: #fca5a5;
+    }
+
+    .perf-empty {
+      border-color: #4b5563;
+      color: #9ca3af;
+    }
+
+    .perf-page__footer {
+      border-color: #374151;
+      color: #9ca3af;
+    }
+  }
+</style>

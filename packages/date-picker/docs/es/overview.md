@@ -4,7 +4,7 @@ title: Date Picker
 description: Calendar popup for selecting dates.
 keywords: [calendar, date, date-math, dates, for, input, picker]
 locale: es
-maturity: draft
+maturity: ga
 product: Date Picker
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/date-picker"
 primitive: date-picker
 section: overview
 translationSourceHash: "7ad483091a44552b6b106fed00f5226baaff9999c3373da7861aff4ed41366cf"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Date Picker no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

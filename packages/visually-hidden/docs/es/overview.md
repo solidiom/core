@@ -5,7 +5,7 @@ description: Oculta contenido visualmente manteniéndolo accesible para lectores
 keywords:
   [visually-hidden, lector-de-pantalla, accesibilidad, etiqueta, encabezado, tecnologia-asistiva]
 locale: es
-maturity: draft
+maturity: ga
 product: Visually Hidden
 productLayer: primitive
 status: draft
@@ -13,7 +13,9 @@ package: "@solidiom/visually-hidden"
 primitive: visually-hidden
 section: overview
 translationSourceHash: "c59df02bee085e7c42125494eba9e293b18ae52a0c4116e5ec5d3f3d94683195"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.

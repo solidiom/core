@@ -3,7 +3,7 @@
  *
  * Source-derived gate that verifies each primitive against the M4 bar (§8.1.1),
  * reconciles against the committed registry, and asserts a ratcheting count
- * that must match the number declared in docs/plans/website-tasks.md.
+ * that must match the number declared in docs/plans/consolidated-plan.md.
  *
  * Run via: pnpm exec tsx tools/primitive-catalog-gate.ts
  *          pnpm exec tsx tools/primitive-catalog-gate.ts --audit-only
@@ -20,7 +20,7 @@ import { PUBLIC_PRIMITIVES } from "./axe-results"
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 const PACKAGES_DIR = join(ROOT, "packages")
 const REGISTRY_DIR = join(ROOT, "registry")
-const TRACKER_PATH = join(ROOT, "docs", "plans", "website-tasks.md")
+const TRACKER_PATH = join(ROOT, "docs", "plans", "consolidated-plan.md")
 
 const auditOnly = process.argv.includes("--audit-only")
 
@@ -290,9 +290,9 @@ function verifyPrimitive(name: string): PrimitiveResult {
     if (keywords.length < 3) {
       failures.push(`registry: search.keywords has only ${keywords.length} entries (expected ≥3)`)
     }
-    // Status must remain preview at M4
-    if (registry.status !== "preview") {
-      failures.push(`registry: status="${registry.status}" (expected "preview" at M4)`)
+    // Status must be preview or stable (preview at M4, stable at G5)
+    if (registry.status !== "preview" && registry.status !== "stable") {
+      failures.push(`registry: status="${registry.status}" (expected "preview" or "stable")`)
     }
   }
 
@@ -362,7 +362,7 @@ function main(): void {
     console.error(
       `\n✗ FAILED: actual count (${actualCount}) ≠ tracker declared count (${declaredCount}).`,
     )
-    console.error(`  Update the Primitives DoD column in docs/plans/website-tasks.md to match,`)
+    console.error(`  Update the Primitives DoD column in docs/plans/consolidated-plan.md to match,`)
     console.error(`  or fix the primitives that should be passing.`)
     process.exit(1)
   }

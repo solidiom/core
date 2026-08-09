@@ -4,7 +4,7 @@ title: Input
 description: Text input and textarea with validation states and Field integration.
 keywords: [and, field, input, integration, runtime, states, text]
 locale: es
-maturity: draft
+maturity: ga
 product: Input
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/input"
 primitive: input
 section: overview
 translationSourceHash: "e5eddd465a8e6562094083476addf2f38c18ce786337483bb0e48a1705f390f7"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Input es un primitivo autónomo sin sub-primitivos compuestos.

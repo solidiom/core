@@ -4,7 +4,7 @@ title: Kbd
 description: Keyboard shortcut display element with semantic markup.
 keywords: [kbd, keyboard, shortcut, display, key]
 locale: en
-maturity: draft
+maturity: ga
 product: Kbd
 productLayer: primitive
 status: draft

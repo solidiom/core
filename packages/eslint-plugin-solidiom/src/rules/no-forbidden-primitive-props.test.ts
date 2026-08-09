@@ -7,7 +7,7 @@ import noForbiddenPrimitiveProps from "./no-forbidden-primitive-props"
 function runRule(rule: any, jsx: string) {
   const errors: any[] = []
   const context = {
-    filename: "/project/apps/docs/src/components/example.tsx",
+    filename: "/project/apps/site/src/components/example.tsx",
     report(err: any) {
       errors.push(err)
     },

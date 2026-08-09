@@ -4,7 +4,7 @@ title: Data Table
 description: Headless sortable table with column visibility, row selection, and adapter-based sort delegation.
 keywords: [table, data, sort, columns, rows, selection]
 locale: en
-maturity: beta
+maturity: ga
 product: Data Table
 productLayer: primitive
 status: published

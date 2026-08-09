@@ -4,7 +4,7 @@ title: Combobox
 description: Campo de autocompletado con una lista filtrable para seleccionar entre un conjunto de opciones.
 keywords: [autocompletado, combobox, desplegable, listbox]
 locale: es
-maturity: beta
+maturity: ga
 product: Combobox
 productLayer: primitive
 status: published
@@ -12,7 +12,9 @@ package: "@solidiom/combobox"
 primitive: combobox
 section: overview
 translationSourceHash: "b3bb2ab058919524b06c2d8ec8ac8f3bd2d24517faebbfd1c5cc1553f82b4e1d"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Combobox no tiene primitivos hermanos. Se compone internamente con su listbox e input pero no posee un contrato inter-primitivo.

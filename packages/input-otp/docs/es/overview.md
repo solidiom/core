@@ -4,7 +4,7 @@ title: Input OTP
 description: A one-time password input with individual character slots.
 keywords: [character, individual, input, one, otp, password, runtime]
 locale: es
-maturity: draft
+maturity: ga
 product: Input OTP
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/input-otp"
 primitive: input-otp
 section: overview
 translationSourceHash: "215d4676ae436fbf9b6d3070faeaa0a8843d8510c0180efc7db91cb9df811d14"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Input OTP no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

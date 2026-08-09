@@ -37,7 +37,10 @@
     "metadata": {
       "label": "Resizable Panels",
       "description": "Drag-to-resize panel layout.",
-      "category": "layout"
+      "category": "layout",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

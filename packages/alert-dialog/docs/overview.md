@@ -4,7 +4,7 @@ title: Alert Dialog
 description: Modal confirmation dialog requiring explicit user action.
 keywords: [action, alert, confirmation, dialog, explicit, modal, overlay]
 locale: en
-maturity: draft
+maturity: ga
 product: Alert Dialog
 productLayer: primitive
 status: draft

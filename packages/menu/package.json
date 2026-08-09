@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Menu",
       "description": "Action list triggered by a button.",
-      "category": "navigation"
+      "category": "navigation",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

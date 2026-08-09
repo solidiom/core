@@ -4,7 +4,7 @@ title: Drawer
 description: Slide-in panel from any screen edge.
 keywords: [any, drawer, edge, from, overlay, panel, runtime]
 locale: es
-maturity: draft
+maturity: ga
 product: Drawer
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/drawer"
 primitive: drawer
 section: overview
 translationSourceHash: "77cf13de16b810e396cc7df462c84afbd801b633670b3d2a64095f39737167e5"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Drawer no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

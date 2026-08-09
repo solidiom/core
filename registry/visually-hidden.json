@@ -17,7 +17,7 @@
   "label": "Visually Hidden",
   "description": "Hides content visually while keeping it accessible to screen readers.",
   "category": "layout",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-visually-hidden-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,7 +39,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -74,11 +75,11 @@
     "fileDigests": {
       "src/index.tsx": "3512263f13f19208cb38dd9f3c8a74243dc595b849da5fbb31b581a03e10ff4b"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/visually-hidden"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

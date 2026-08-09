@@ -4,7 +4,7 @@ title: Date Picker
 description: Calendar popup for selecting dates.
 keywords: [calendar, date, date-math, dates, for, input, picker]
 locale: en
-maturity: draft
+maturity: ga
 product: Date Picker
 productLayer: primitive
 status: draft

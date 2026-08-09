@@ -18,7 +18,7 @@
   "label": "Meter",
   "description": "Scalar measurement within a known range (e.g. disk usage, signal strength).",
   "category": "feedback",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -31,7 +31,7 @@
     "evidenceIds": [
       "axe-meter-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -40,7 +40,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -75,11 +76,11 @@
       "src/derive-status.ts": "b9a04deecaea3ae75023eb756629cdf2b26a2de0f573e25d3b63bda5b09ddb5c",
       "src/index.tsx": "1ba74338778b5b554a0fd18cdb7afda7ec0609d199e2ef677ef88b11de456642"
     },
-    "lastGenerated": "2026-08-05T06:07:56.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/meter"
   },
-  "lastUpdated": "2026-08-05T06:07:56.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

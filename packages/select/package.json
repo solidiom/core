@@ -39,7 +39,10 @@
     "metadata": {
       "label": "Select",
       "description": "Dropdown selection from a list of options.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

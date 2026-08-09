@@ -24,7 +24,7 @@
   "label": "Accordion",
   "description": "Vertically stacked set of collapsible sections.",
   "category": "layout",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -37,7 +37,7 @@
     "evidenceIds": [
       "axe-accordion-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,7 +46,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -85,11 +86,11 @@
       "src/accordion.tsx": "01ad14883152d9b6c8c7a154782c0c540ecbd50aee20366ecb6023d7247c1025",
       "src/index.tsx": "e158ccfb3700ecd1551fcc07c206badfb4b41cfdcff915f78bcea532e4397a5e"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/accordion"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

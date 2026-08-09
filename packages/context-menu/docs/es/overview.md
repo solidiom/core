@@ -4,7 +4,7 @@ title: Context Menu
 description: Right-click triggered menu.
 keywords: [click, context, menu, overlay, right, runtime, triggered]
 locale: es
-maturity: draft
+maturity: ga
 product: Context Menu
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/context-menu"
 primitive: context-menu
 section: overview
 translationSourceHash: "7dcf4036af0f531b73929b0a7944fd5c40821f7ff6cb5e909412f873decd9f09"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Context Menu no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

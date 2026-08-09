@@ -4,7 +4,7 @@
  * Source-derived gate that verifies each **approved** component (§9.2 queue)
  * against the M4 bar (§8.2.1), reconciles against the committed registry,
  * flags untracked registry slugs, and asserts a ratcheting count that must
- * match the number declared in docs/plans/website-tasks.md §11 scope counters.
+ * match the number declared in docs/plans/consolidated-plan.md §11 scope counters.
  *
  * Run via: pnpm exec tsx tools/component-catalog-gate.ts
  *          pnpm exec tsx tools/component-catalog-gate.ts --audit-only
@@ -15,7 +15,7 @@
  * rather than iterating registry index entries. Untracked slugs in the registry
  * that have no approved COMP-* row are flagged but do not count.
  *
- * See: docs/plans/website-tasks.md §8.2.1 (the M4 bar)
+ * See: docs/plans/consolidated-plan.md §8.2.1 (the M4 bar)
  */
 
 import { existsSync, readFileSync, readdirSync } from "node:fs"
@@ -26,7 +26,7 @@ const ROOT = join(import.meta.dirname ?? __dirname, "..")
 const PACKAGES_DIR = join(ROOT, "packages")
 const REGISTRY_DIR = join(ROOT, "registry")
 const SITE_CONTENT = join(ROOT, "apps", "site", "src", "content")
-const TRACKER_PATH = join(ROOT, "docs", "plans", "website-tasks.md")
+const TRACKER_PATH = join(ROOT, "docs", "plans", "consolidated-plan.md")
 
 const auditOnly = process.argv.includes("--audit-only")
 
@@ -142,18 +142,18 @@ function normalizeComponentName(rawName: string): string {
 
 function readApprovedComponents(): ApprovedComponent[] {
   const content = readFileSync(TRACKER_PATH, "utf8")
-  const sectionMatch = content.match(/### 9\.2 Component queue[\s\S]*?(?=### 9\.3|$)/)
+  const sectionMatch = content.match(/### 9\.2 Components[^\n]*\n[\s\S]*?(?=### 9\.3|$)/)
   if (!sectionMatch) return []
 
   const section = sectionMatch[0]
   const components: ApprovedComponent[] = []
-  const compRegex = /\|\s*\[([ x~!])\]\s*\|\s*(COMP-\d{3})\s*\|\s*([^|]+)\|/g
+  const compRegex = /\|\s*COMP-(\d{3})\s*\|\s*([^|]+)\|\s*\[([ x~!])\]\s*\|/g
   let m
   while ((m = compRegex.exec(section)) !== null) {
     components.push({
-      id: m[2],
-      name: normalizeComponentName(m[3].trim()),
-      status: m[1],
+      id: `COMP-${m[1]}`,
+      name: normalizeComponentName(m[2].trim()),
+      status: m[3],
     })
   }
   return components
@@ -298,7 +298,7 @@ function verifyComponent(comp: ApprovedComponent, indexComponents: IndexComponen
 
 function main(): void {
   console.log("FOUND-004: Component Catalog Completion Gate (M4 bar)\n")
-  console.log("Source of truth: docs/plans/website-tasks.md §9.2 (approved queue)")
+  console.log("Source of truth: docs/plans/consolidated-plan.md §9.2 (approved queue)")
   console.log("─".repeat(60))
 
   const approvedComponents = readApprovedComponents()
@@ -362,7 +362,7 @@ function main(): void {
     console.error(
       `\n✗ FAILED: actual count (${actualCount}) ≠ tracker declared count (${declaredCount}).`,
     )
-    console.error(`  Update the Components DoD column in docs/plans/website-tasks.md to match,`)
+    console.error(`  Update the Components DoD column in docs/plans/consolidated-plan.md to match,`)
     console.error(`  or fix the components that should be passing.`)
     process.exit(1)
   }

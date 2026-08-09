@@ -1,20 +1,25 @@
 {
   "name": "auth-starter",
+  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
-  "label": "Authentication Starter",
+  "label": "Auth Starter",
   "description": "Authentication starter with sign-in, sign-up, and password reset flows built on Solidiom blocks.",
-  "status": "preview",
-  "templateId": "TPL-001",
-  "stack": "vite-solid-router",
-  "portfolioTags": ["balanced-product"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AUTH-02", "BLOCK-AUTH-03"],
-  "integrity": {
-    "algorithm": "sha256",
-    "manifestHash": "tpl-001-auth-starter-manifest",
-    "lastGenerated": "2026-08-06T22:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
-  }
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "searchKeywords": [
+    "a",
+    "auth-starter",
+    "balanced-product",
+    "c",
+    "i",
+    "s",
+    "t",
+    "t",
+    "template",
+    "vite-solid-router"
+  ]
 }

@@ -4,7 +4,7 @@ title: Toolbar
 description: Grouped actions and controls in a horizontal bar.
 keywords: [actions, and, bar, controls, grouped, horizontal, layout]
 locale: es
-maturity: draft
+maturity: ga
 product: Toolbar
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/toolbar"
 primitive: toolbar
 section: overview
 translationSourceHash: "e9b363ea4a0913ebb269c518fb4c3abee3a1245dcd5c22b4179254b2d42b3982"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Toolbar no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

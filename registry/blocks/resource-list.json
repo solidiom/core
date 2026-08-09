@@ -1,63 +1,20 @@
 {
   "name": "resource-list",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Resource List",
-  "description": "Paginated resource list with search, filters, and bulk actions. Implements loading, empty, error, and restricted states.",
-  "category": "RESOURCE",
-  "status": "preview",
-  "blockId": "BLOCK-RESOURCE-01",
+  "description": "Resource List block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/input",
-    "@solidiom/card",
-    "@solidiom/alert",
-    "@solidiom/select",
-    "@solidiom/avatar",
-    "@solidiom/popover",
-    "@solidiom/pagination",
-    "@solidiom/data-table",
-    "@solidiom/checkbox",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/resource-list/source/resource-list.tsx",
-      "packages/blocks/resource-list/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/resource-list/source/resource-list.tsx": "6dba14fd1cc621d8f740213de4d4582416001de7afdcf3a9ebc44ff72ad06f91",
-      "packages/blocks/resource-list/source/index.ts": "f835975cefa3f7e08ed5adfd6ee9730cb9340413773d7bb4142a29ee61c6bdd0"
-    },
-    "lastGenerated": "2026-08-06T14:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
-    "resource",
+    "block",
     "list",
-    "search",
-    "filter",
-    "recursos",
-    "lista"
+    "resource",
+    "resource-list"
   ]
 }

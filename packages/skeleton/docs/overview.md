@@ -4,7 +4,7 @@ title: Skeleton
 description: Loading placeholder with pulse animation.
 keywords: [animation, feedback, loading, placeholder, pulse, runtime, skeleton]
 locale: en
-maturity: draft
+maturity: ga
 product: Skeleton
 productLayer: primitive
 status: draft

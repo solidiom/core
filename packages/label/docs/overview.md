@@ -4,7 +4,7 @@ title: Label
 description: Accessible label element linked to form controls via htmlFor.
 keywords: [label, form, accessible, htmlfor, input]
 locale: en
-maturity: draft
+maturity: ga
 product: Label
 productLayer: primitive
 status: draft

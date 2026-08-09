@@ -4,7 +4,7 @@ title: Listbox
 description: Single or multi-select list of options.
 keywords: [input, list, listbox, multi, options, runtime, select]
 locale: en
-maturity: draft
+maturity: ga
 product: Listbox
 productLayer: primitive
 status: draft

@@ -119,10 +119,8 @@ will need route-specific CSP when they ship.
 # www → apex
 https://www.solidiom.org/* https://solidiom.org/:splat 301
 
-# Legacy docs app routes (activated at CUT-003)
-# /primitives/:name  /primitives/:name/  301
-# /recipes           /components/        301
-# /accessibility     /accessibility/     301
+# Legacy documentation paths (from CUT-003 removal of apps/docs/)
+/docs/* /primitives/:splat 301
 ```
 
 ---

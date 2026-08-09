@@ -4,7 +4,7 @@ title: Carousel
 description: Horizontal slide-based content viewer.
 keywords: [based, carousel, carousel-physics, content, horizontal, layout, runtime]
 locale: es
-maturity: draft
+maturity: ga
 product: Carousel
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/carousel"
 primitive: carousel
 section: overview
 translationSourceHash: "b417ee075140caf346aa44c9f0d2f6a7269d407fcbb92fc1c2abfdba2523c7ef"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Carousel no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

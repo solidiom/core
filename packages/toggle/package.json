@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Toggle",
       "description": "A two-state button that can be toggled on or off.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

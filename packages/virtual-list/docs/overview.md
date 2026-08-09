@@ -4,7 +4,7 @@ title: Virtual List
 description: Viewport-windowed list for large datasets.
 keywords: [datasets, for, large, layout, list, runtime, viewport]
 locale: en
-maturity: draft
+maturity: ga
 product: Virtual List
 productLayer: primitive
 status: draft

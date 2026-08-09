@@ -1,5 +1,10 @@
-# Canonical production host (Cloudflare Pages applies this after the custom domain is attached).
+# OPS-004: Cloudflare Pages redirects for the Solidiom production site.
+
+# Canonical host — www to apex (301 permanent).
 https://www.solidiom.org/* https://solidiom.org/:splat 301
 
-# Legacy documentation paths retained while the legacy app is read-only.
+# Legacy documentation paths — retained while the legacy app is read-only.
 /docs/* /primitives/:splat 301
+
+# Force trailing slash on locale-root requests to match Astro's trailingSlash: "always".
+/es /es/ 301

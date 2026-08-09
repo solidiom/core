@@ -4,7 +4,7 @@ title: Toggle Group
 description: Group of mutually-exclusive or multi-select toggle buttons.
 keywords: [buttons, exclusive, group, input, multi, mutually, runtime]
 locale: es
-maturity: draft
+maturity: ga
 product: Toggle Group
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/toggle-group"
 primitive: toggle-group
 section: overview
 translationSourceHash: "03f1a40761ca4010a6549cf8d609b39422710b83600efa3dd2b4582d4297ace5"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Toggle Group es un primitivo autónomo sin sub-primitivos compuestos.

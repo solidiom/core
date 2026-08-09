@@ -4,7 +4,7 @@ title: Breadcrumb
 description: Navegación jerárquica de migas de pan con estructura de lista accesible.
 keywords: [breadcrumb, navegación, jerarquía, enlaces, ruta-de-migas]
 locale: es
-maturity: draft
+maturity: ga
 product: Breadcrumb
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/breadcrumb"
 primitive: breadcrumb
 section: overview
 translationSourceHash: "da2227058314f9d5ec3d7900131355fafe240e0822d33053266f9f0961db0c80"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.

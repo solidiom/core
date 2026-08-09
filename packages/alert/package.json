@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Alert",
       "description": "Inline, non-modal alert for status messages with live region semantics.",
-      "category": "feedback"
+      "category": "feedback",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

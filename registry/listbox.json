@@ -26,7 +26,7 @@
   "label": "Listbox",
   "description": "Single or multi-select list of options.",
   "category": "input",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -39,7 +39,7 @@
     "evidenceIds": [
       "axe-listbox-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -48,7 +48,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -76,11 +77,11 @@
       "src/listbox-context.ts": "e309057d5d1e7633d4f6415943191fac74c9191cf80abbe3b8b9f53bb2b40f41",
       "src/listbox.tsx": "f7b172837f2c0f056e0bab9002ceb782915031f0c98ffb052d23325de157d48d"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/listbox"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

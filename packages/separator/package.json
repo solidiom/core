@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Separator",
       "description": "Horizontal or vertical visual divider.",
-      "category": "layout"
+      "category": "layout",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

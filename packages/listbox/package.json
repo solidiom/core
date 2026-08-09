@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Listbox",
       "description": "Single or multi-select list of options.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

@@ -19,7 +19,7 @@
   "label": "Alert",
   "description": "Inline, non-modal alert for status messages with live region semantics.",
   "category": "feedback",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -32,7 +32,7 @@
     "evidenceIds": [
       "axe-alert-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -41,7 +41,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -83,11 +84,11 @@
     "fileDigests": {
       "src/index.tsx": "8bbc6a02e623e3e4016e86ed6e33ddedf593af27ea5cb96d97c95c4ece4e4cee"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/alert"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

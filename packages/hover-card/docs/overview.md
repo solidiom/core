@@ -4,7 +4,7 @@ title: Hover Card
 description: Content preview on hover with open delay and anchored positioning.
 keywords: [anchored, and, card, content, delay, hover, open]
 locale: en
-maturity: draft
+maturity: ga
 product: Hover Card
 productLayer: primitive
 status: draft

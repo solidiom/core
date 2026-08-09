@@ -4,7 +4,7 @@ title: Skeleton
 description: Loading placeholder with pulse animation.
 keywords: [animation, feedback, loading, placeholder, pulse, runtime, skeleton]
 locale: es
-maturity: draft
+maturity: ga
 product: Skeleton
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/skeleton"
 primitive: skeleton
 section: overview
 translationSourceHash: "178617113da88e5bfc705b39ee501903933a8b2a8b758e7619d0a5f4bcc2ae30"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Skeleton es un primitivo autónomo sin sub-primitivos compuestos.

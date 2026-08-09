@@ -1,61 +1,20 @@
 {
   "name": "profile-setup",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Profile Setup",
-  "description": "User profile configuration during onboarding. Implements loading, empty, error, and restricted states.",
-  "category": "ONBOARD",
-  "status": "preview",
-  "blockId": "BLOCK-ONBOARD-02",
+  "description": "Profile Setup block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/button",
-    "@solidiom/input",
-    "@solidiom/field",
-    "@solidiom/alert",
-    "@solidiom/select",
-    "@solidiom/toast",
-    "@solidiom/avatar",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/profile-setup/source/profile-setup.tsx",
-      "packages/blocks/profile-setup/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/profile-setup/source/profile-setup.tsx": "0f2b074c1084cc352025a860c2fce9a6f6133c63175c230453e1daa4a6abdae1",
-      "packages/blocks/profile-setup/source/index.ts": "d892957fdfed65647c9ebe68a4d9ec4ca18da0afcbd7b599de8e349aa39fa27d"
-    },
-    "lastGenerated": "2026-08-06T12:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
+    "block",
     "profile",
-    "setup",
-    "onboarding",
-    "avatar",
-    "perfil",
-    "configuracion"
+    "profile-setup",
+    "setup"
   ]
 }

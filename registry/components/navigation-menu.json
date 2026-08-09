@@ -30,7 +30,7 @@
         "src/recipes/navigation-menu.tsx": "73e4e1223ef8c30bdabf64c76d192bc7949fec0145f9e691773483b634161fa8"
       }
     },
-    "lastGenerated": "2026-08-07T16:14:27.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/navigation-menu"
   ],
-  "lastUpdated": "2026-08-07T16:14:27.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

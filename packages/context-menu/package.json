@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Context Menu",
       "description": "Right-click triggered menu.",
-      "category": "overlay"
+      "category": "overlay",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

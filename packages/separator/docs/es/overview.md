@@ -4,7 +4,7 @@ title: Separator
 description: Divisor visual horizontal o vertical con marcado semántico.
 keywords: [separator, divisor, horizontal, vertical, decorativo]
 locale: es
-maturity: draft
+maturity: ga
 product: Separator
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/separator"
 primitive: separator
 section: overview
 translationSourceHash: "3155f6cb40429d70ca6633761fa0b7a90a509030e42c29e4a85171abe1cbf3d0"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.

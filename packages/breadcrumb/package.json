@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Breadcrumb",
       "description": "Hierarchical location indicator with links.",
-      "category": "navigation"
+      "category": "navigation",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

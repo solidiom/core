@@ -4,7 +4,7 @@ title: Spinner
 description: Loading spinner indicator.
 keywords: [feedback, indicator, loading, runtime, spinner]
 locale: en
-maturity: draft
+maturity: ga
 product: Spinner
 productLayer: primitive
 status: draft

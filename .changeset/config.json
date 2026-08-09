@@ -15,10 +15,11 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "@solidiom/docs",
-    "@solidiom/docs-astro-poc",
     "@solidiom/bench",
-    "@solidiom/eslint-plugin-solidiom"
+    "@solidiom/eslint-plugin-solidiom",
+    "@solidiom/adapter-kit",
+    "@solidiom/release-tools",
+    "@solidiom/test-doubles"
   ],
   "privatePackages": {
     "version": false,

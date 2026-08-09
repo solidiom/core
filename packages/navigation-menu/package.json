@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Navigation Menu",
       "description": "A top-level navigation component with accessible dropdown sub-menus.",
-      "category": "navigation"
+      "category": "navigation",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

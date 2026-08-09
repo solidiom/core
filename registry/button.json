@@ -20,7 +20,7 @@
   "label": "Button",
   "description": "Clickable trigger for actions.",
   "category": "input",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "component",
     "primitive"
@@ -34,7 +34,7 @@
     "evidenceIds": [
       "axe-button-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -43,7 +43,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -86,11 +87,11 @@
       "src/index.tsx": "afbf08de5a4fd3fd5cc54accfc155f04df05e5894a64914fc4903e69452a3855",
       "src/toggle-button.tsx": "a5ca880d302fddc1c78b5f7c609fbaf3c228fadddcbfa7e563ccb1d56748013e"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/button"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

@@ -4,7 +4,7 @@ title: Kbd
 description: Elemento de visualización de atajos de teclado con marcado semántico.
 keywords: [kbd, teclado, atajo, visualización, tecla]
 locale: es
-maturity: draft
+maturity: ga
 product: Kbd
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/kbd"
 primitive: kbd
 section: overview
 translationSourceHash: "bb9ea6df7f21fe27f5e0326b8914f31bd86e18c40d84629b09dcadd6b983f92c"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.

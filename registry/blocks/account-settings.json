@@ -1,62 +1,20 @@
 {
   "name": "account-settings",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Account Settings",
-  "description": "User account management with profile, email, and password sections. Implements loading, empty, error, and restricted states.",
-  "category": "SETTINGS",
-  "status": "preview",
-  "blockId": "BLOCK-SETTINGS-01",
+  "description": "Account Settings block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/button",
-    "@solidiom/input",
-    "@solidiom/field",
-    "@solidiom/alert",
-    "@solidiom/dialog",
-    "@solidiom/tabs",
-    "@solidiom/toast",
-    "@solidiom/avatar",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/account-settings/source/account-settings.tsx",
-      "packages/blocks/account-settings/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/account-settings/source/account-settings.tsx": "dce89b9f3b02477406ab65d432c822dbdbda0cbae92cadffca286c593f3c602d",
-      "packages/blocks/account-settings/source/index.ts": "fc1a809f7a4092dcd38493a17d506f275eeaeed5f7f3842e61ac34d813d77a7a"
-    },
-    "lastGenerated": "2026-08-06T12:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
     "account",
-    "settings",
-    "profile",
-    "password",
-    "cuenta",
-    "configuracion"
+    "account-settings",
+    "block",
+    "settings"
   ]
 }

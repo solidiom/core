@@ -4,7 +4,7 @@ title: Switch
 description: Interruptor binario con semántica de encendido/apagado.
 keywords: [binary, input, off, runtime, semantics, switch, toggle]
 locale: es
-maturity: draft
+maturity: ga
 product: Switch
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/switch"
 primitive: switch
 section: overview
 translationSourceHash: "feffd8fe06554379839ad5b5ce8d452ea72a971502f25854e1803ed9cd6b00da"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Switch es un primitivo autónomo sin sub-primitivos compuestos.

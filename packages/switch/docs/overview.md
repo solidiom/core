@@ -4,7 +4,7 @@ title: Switch
 description: Binary toggle with on/off semantics.
 keywords: [binary, input, off, runtime, semantics, switch, toggle]
 locale: en
-maturity: draft
+maturity: ga
 product: Switch
 productLayer: primitive
 status: draft

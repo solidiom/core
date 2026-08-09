@@ -1,10 +1,10 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "generatedAt": "2026-08-08T03:04:45.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "f949c08404bc7fc0b53e42cd0b14d66354e248ae8b29d94823bec7f0a97707f4"
+    "entriesHash": "d760871e0f7d582e5149b6af1a9399ad0b924be64bc1a07be6a4c4fabf412429"
   },
   "primitives": [
     {
@@ -14,7 +14,7 @@
       "label": "Accordion",
       "description": "Vertically stacked set of collapsible sections.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -31,7 +31,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -69,7 +70,7 @@
       "label": "Alert",
       "description": "Inline, non-modal alert for status messages with live region semantics.",
       "category": "feedback",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -86,7 +87,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -129,7 +131,7 @@
       "label": "Alert Dialog",
       "description": "Modal confirmation dialog requiring explicit user action.",
       "category": "overlay",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -146,7 +148,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -175,7 +178,7 @@
       "label": "Avatar",
       "description": "User avatar with image and fallback.",
       "category": "display",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -192,7 +195,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -228,7 +232,7 @@
       "label": "Badge",
       "description": "Inline status or label indicator.",
       "category": "feedback",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -245,7 +249,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -278,7 +283,7 @@
       "label": "Breadcrumb",
       "description": "Hierarchical location indicator with links.",
       "category": "navigation",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -295,7 +300,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -332,7 +338,7 @@
       "label": "Button",
       "description": "Clickable trigger for actions.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "component",
         "primitive"
@@ -350,7 +356,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -391,7 +398,7 @@
       "label": "Calendar",
       "description": "Date selection with day/month/year views.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -408,7 +415,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -438,7 +446,7 @@
       "label": "Card",
       "description": "Content container with header, body, and footer.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -455,7 +463,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -496,7 +505,7 @@
       "label": "Carousel",
       "description": "Horizontal slide-based content viewer.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -513,7 +522,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -541,7 +551,7 @@
       "label": "Checkbox",
       "description": "Binary or indeterminate toggle control.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -558,7 +568,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -588,7 +599,7 @@
       "label": "Collapsible",
       "description": "Single expandable/collapsible section.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -605,7 +616,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -630,7 +642,7 @@
       "label": "Combobox",
       "description": "Text input with autocomplete dropdown.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -647,7 +659,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -680,7 +693,7 @@
       "label": "Command Palette",
       "description": "Modal search and action launcher.",
       "category": "navigation",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -697,7 +710,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -729,7 +743,7 @@
       "label": "Context Menu",
       "description": "Right-click triggered menu.",
       "category": "overlay",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -746,7 +760,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -772,7 +787,7 @@
       "label": "Data Table",
       "description": "Sortable, selectable table with column control.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -789,7 +804,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -831,7 +847,7 @@
       "label": "Date Picker",
       "description": "Calendar popup for selecting dates.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -848,7 +864,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -877,7 +894,7 @@
       "label": "Dialog",
       "description": "Modal or non-modal overlay window.",
       "category": "overlay",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -894,7 +911,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -928,7 +946,7 @@
       "label": "Drawer",
       "description": "Slide-in panel from any screen edge.",
       "category": "overlay",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -945,7 +963,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -973,7 +992,7 @@
       "label": "Empty State",
       "description": "Placeholder for empty content areas.",
       "category": "feedback",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -990,7 +1009,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -1017,7 +1037,7 @@
       "label": "Field",
       "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1034,7 +1054,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1070,7 +1091,7 @@
       "label": "Hover Card",
       "description": "Content preview on hover with open delay and anchored positioning.",
       "category": "overlay",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1087,7 +1108,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -1118,7 +1140,7 @@
       "label": "Input",
       "description": "Text input and textarea with validation states and Field integration.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1135,7 +1157,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1168,7 +1191,7 @@
       "label": "Input OTP",
       "description": "A one-time password input with individual character slots.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1185,7 +1208,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -1214,7 +1238,7 @@
       "label": "Kbd",
       "description": "Keyboard shortcut display element.",
       "category": "display",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1231,7 +1255,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1265,7 +1290,7 @@
       "label": "Label",
       "description": "Accessible label element linked to form controls via htmlFor.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1282,7 +1307,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -1313,7 +1339,7 @@
       "label": "Listbox",
       "description": "Single or multi-select list of options.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1330,7 +1356,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -1357,7 +1384,7 @@
       "label": "Menu",
       "description": "Action list triggered by a button.",
       "category": "navigation",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1374,7 +1401,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1404,7 +1432,7 @@
       "label": "Meter",
       "description": "Scalar measurement within a known range (e.g. disk usage, signal strength).",
       "category": "feedback",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1421,7 +1449,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1456,7 +1485,7 @@
       "label": "Navigation Menu",
       "description": "A top-level navigation component with accessible dropdown sub-menus.",
       "category": "navigation",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1473,7 +1502,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1508,7 +1538,7 @@
       "label": "Pagination",
       "description": "Page navigation with prev/next and page numbers.",
       "category": "navigation",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1525,7 +1555,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1557,7 +1588,7 @@
       "label": "Popover",
       "description": "Non-modal floating content panel.",
       "category": "overlay",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1574,7 +1605,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1606,7 +1638,7 @@
       "label": "Progress",
       "description": "Determinate and indeterminate progress indicator.",
       "category": "feedback",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1623,7 +1655,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1653,7 +1686,7 @@
       "label": "Radio Group",
       "description": "Single-select radio button set with keyboard navigation.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1670,7 +1703,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1704,7 +1738,7 @@
       "label": "Resizable Panels",
       "description": "Drag-to-resize panel layout.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1721,7 +1755,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1751,7 +1786,7 @@
       "label": "Scroll Area",
       "description": "Custom-styled scrollbar with native scrolling performance.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1768,7 +1803,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1802,7 +1838,7 @@
       "label": "Select",
       "description": "Dropdown selection from a list of options.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1819,7 +1855,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1850,7 +1887,7 @@
       "label": "Separator",
       "description": "Horizontal or vertical visual divider.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1867,7 +1904,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -1896,7 +1934,7 @@
       "label": "Sheet",
       "description": "Side-panel dialog with slide animation.",
       "category": "overlay",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1913,7 +1951,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -1945,7 +1984,7 @@
       "label": "Skeleton",
       "description": "Loading placeholder with pulse animation.",
       "category": "feedback",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -1962,7 +2001,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -1989,7 +2029,7 @@
       "label": "Slider",
       "description": "Numeric range input with thumb control.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2006,7 +2046,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -2033,7 +2074,7 @@
       "label": "Spinner",
       "description": "Loading spinner indicator.",
       "category": "feedback",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2050,7 +2091,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -2078,7 +2120,7 @@
       "label": "Switch",
       "description": "Binary toggle with on/off semantics.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2095,7 +2137,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -2126,7 +2169,7 @@
       "label": "Tabs",
       "description": "Tabbed content switcher.",
       "category": "navigation",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2143,7 +2186,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -2172,7 +2216,7 @@
       "label": "Toast",
       "description": "Temporary non-blocking notification.",
       "category": "feedback",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2189,7 +2233,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -2219,7 +2264,7 @@
       "label": "Toggle",
       "description": "A two-state button that can be toggled on or off.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2236,7 +2281,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -2265,7 +2311,7 @@
       "label": "Toggle Group",
       "description": "Group of mutually-exclusive or multi-select toggle buttons.",
       "category": "input",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2282,7 +2328,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -2310,7 +2357,7 @@
       "label": "Toolbar",
       "description": "Grouped actions and controls in a horizontal bar.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2327,7 +2374,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -2359,7 +2407,7 @@
       "label": "Tooltip",
       "description": "Contextual hint shown on hover/focus.",
       "category": "overlay",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2376,7 +2424,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [
@@ -2408,7 +2457,7 @@
       "label": "Tree",
       "description": "Hierarchical tree view with expand/collapse.",
       "category": "navigation",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2425,7 +2474,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -2452,7 +2502,7 @@
       "label": "Virtual List",
       "description": "Viewport-windowed list for large datasets.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2469,7 +2519,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -2498,7 +2549,7 @@
       "label": "Visually Hidden",
       "description": "Hides content visually while keeping it accessible to screen readers.",
       "category": "layout",
-      "status": "preview",
+      "status": "stable",
       "deliverables": [
         "primitive"
       ],
@@ -2515,7 +2566,8 @@
           "status": "draft"
         },
         "es": {
-          "status": "draft"
+          "status": "reviewed",
+          "lastUpdated": "2026-08-07T05:00:00.000Z"
         }
       },
       "stylingOutputs": [],
@@ -3641,7 +3693,1576 @@
       ]
     }
   ],
-  "blocks": [],
-  "templates": [],
-  "themes": []
+  "blocks": [
+    {
+      "name": "account-settings",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Account Settings",
+      "description": "Account Settings block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "account",
+        "account-settings",
+        "block",
+        "settings"
+      ]
+    },
+    {
+      "name": "alert-configuration",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Alert Configuration",
+      "description": "Alert Configuration block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "alert",
+        "alert-configuration",
+        "block",
+        "configuration"
+      ]
+    },
+    {
+      "name": "audit-log",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Audit Log",
+      "description": "Audit Log block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "audit",
+        "audit-log",
+        "block",
+        "log"
+      ]
+    },
+    {
+      "name": "chat-interface",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Chat Interface",
+      "description": "Chat Interface block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "chat",
+        "chat-interface",
+        "interface"
+      ]
+    },
+    {
+      "name": "command-palette-shell",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Command Palette Shell",
+      "description": "Command Palette Shell block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "command",
+        "command-palette-shell",
+        "palette",
+        "shell"
+      ]
+    },
+    {
+      "name": "content-editor",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Content Editor",
+      "description": "Content Editor block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "content",
+        "content-editor",
+        "editor"
+      ]
+    },
+    {
+      "name": "content-library",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Content Library",
+      "description": "Content Library block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "content",
+        "content-library",
+        "library"
+      ]
+    },
+    {
+      "name": "content-workflow",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Content Workflow",
+      "description": "Content Workflow block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "content",
+        "content-workflow",
+        "workflow"
+      ]
+    },
+    {
+      "name": "danger-zone",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Danger Zone",
+      "description": "Danger Zone block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "danger",
+        "danger-zone",
+        "zone"
+      ]
+    },
+    {
+      "name": "dashboard-overview",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Dashboard Overview",
+      "description": "Dashboard Overview block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "dashboard",
+        "dashboard-overview",
+        "overview"
+      ]
+    },
+    {
+      "name": "invoice-history",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Invoice History",
+      "description": "Invoice History block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "history",
+        "invoice",
+        "invoice-history"
+      ]
+    },
+    {
+      "name": "navigation-layout",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Navigation Layout",
+      "description": "Navigation Layout block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "layout",
+        "navigation",
+        "navigation-layout"
+      ]
+    },
+    {
+      "name": "notification-preferences",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Notification Preferences",
+      "description": "Notification Preferences block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "notification",
+        "notification-preferences",
+        "preferences"
+      ]
+    },
+    {
+      "name": "notifications-center",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Notifications Center",
+      "description": "Notifications Center block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "center",
+        "notifications",
+        "notifications-center"
+      ]
+    },
+    {
+      "name": "order-tracking",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Order Tracking",
+      "description": "Order Tracking block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "order",
+        "order-tracking",
+        "tracking"
+      ]
+    },
+    {
+      "name": "payment-method",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Payment Method",
+      "description": "Payment Method block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "method",
+        "payment",
+        "payment-method"
+      ]
+    },
+    {
+      "name": "product-catalog",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Product Catalog",
+      "description": "Product Catalog block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "catalog",
+        "product",
+        "product-catalog"
+      ]
+    },
+    {
+      "name": "profile-setup",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Profile Setup",
+      "description": "Profile Setup block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "profile",
+        "profile-setup",
+        "setup"
+      ]
+    },
+    {
+      "name": "project-starter",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Project Starter",
+      "description": "Project Starter block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "project",
+        "project-starter",
+        "starter"
+      ]
+    },
+    {
+      "name": "prompt-studio",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Prompt Studio",
+      "description": "Prompt Studio block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "prompt",
+        "prompt-studio",
+        "studio"
+      ]
+    },
+    {
+      "name": "real-time-events",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Real Time Events",
+      "description": "Real Time Events block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "events",
+        "real",
+        "real-time-events",
+        "time"
+      ]
+    },
+    {
+      "name": "reset-password",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Reset Password",
+      "description": "Reset Password block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "password",
+        "reset",
+        "reset-password"
+      ]
+    },
+    {
+      "name": "resource-creator",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Resource Creator",
+      "description": "Resource Creator block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "creator",
+        "resource",
+        "resource-creator"
+      ]
+    },
+    {
+      "name": "resource-detail",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Resource Detail",
+      "description": "Resource Detail block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "detail",
+        "resource",
+        "resource-detail"
+      ]
+    },
+    {
+      "name": "resource-list",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Resource List",
+      "description": "Resource List block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "list",
+        "resource",
+        "resource-list"
+      ]
+    },
+    {
+      "name": "role-permissions",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Role Permissions",
+      "description": "Role Permissions block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "permissions",
+        "role",
+        "role-permissions"
+      ]
+    },
+    {
+      "name": "saved-searches",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Saved Searches",
+      "description": "Saved Searches block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "saved",
+        "saved-searches",
+        "searches"
+      ]
+    },
+    {
+      "name": "search-analytics",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Search Analytics",
+      "description": "Search Analytics block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "analytics",
+        "block",
+        "search",
+        "search-analytics"
+      ]
+    },
+    {
+      "name": "search-results",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Search Results",
+      "description": "Search Results block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "results",
+        "search",
+        "search-results"
+      ]
+    },
+    {
+      "name": "shopping-cart",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Shopping Cart",
+      "description": "Shopping Cart block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "cart",
+        "shopping",
+        "shopping-cart"
+      ]
+    },
+    {
+      "name": "sign-in",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Sign In",
+      "description": "Sign In block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "in",
+        "sign",
+        "sign-in"
+      ]
+    },
+    {
+      "name": "sign-up",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Sign Up",
+      "description": "Sign Up block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "sign",
+        "sign-up",
+        "up"
+      ]
+    },
+    {
+      "name": "subscription-plans",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Subscription Plans",
+      "description": "Subscription Plans block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "plans",
+        "subscription",
+        "subscription-plans"
+      ]
+    },
+    {
+      "name": "team-management",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Team Management",
+      "description": "Team Management block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "management",
+        "team",
+        "team-management"
+      ]
+    },
+    {
+      "name": "welcome-wizard",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Welcome Wizard",
+      "description": "Welcome Wizard block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "welcome",
+        "welcome-wizard",
+        "wizard"
+      ]
+    },
+    {
+      "name": "workflow-builder",
+      "package": "@solidiom/blocks",
+      "version": "0.0.1-next.0",
+      "label": "Workflow Builder",
+      "description": "Workflow Builder block",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "componentDependencies": [],
+      "searchKeywords": [
+        "block",
+        "builder",
+        "workflow",
+        "workflow-builder"
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "name": "ai-chat",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Ai Chat",
+      "description": "AI chat application with conversational interface, prompt studio, and workflow builder.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "ai-chat",
+        "balanced-product",
+        "c",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "ai-operations",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Ai Operations",
+      "description": "AI operations console with model monitoring, deployment pipelines, and cost tracking.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "ai-operations",
+        "c",
+        "enterprise",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "ai-workflow",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Ai Workflow",
+      "description": "AI workflow automation with visual pipeline builder, model registry, and execution monitoring.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "ai-workflow",
+        "balanced-product",
+        "c",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "api-management",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Api Management",
+      "description": "API management console with endpoint catalog, key management, and usage analytics.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "api-management",
+        "c",
+        "enterprise",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "audit-log",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Audit Log",
+      "description": "Audit log viewer with real-time event stream, advanced filters, and data export.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "audit-log",
+        "c",
+        "enterprise",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "auth-starter",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Auth Starter",
+      "description": "Authentication starter with sign-in, sign-up, and password reset flows built on Solidiom blocks.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "auth-starter",
+        "balanced-product",
+        "c",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "billing-operations",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Billing Operations",
+      "description": "Billing operations console with invoice management, payment reconciliation, and financial reports.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "billing-operations",
+        "c",
+        "enterprise",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "billing-portal",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Billing Portal",
+      "description": "Billing portal with subscription plans, payment methods, and invoice history.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "billing-portal",
+        "c",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "compliance-center",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Compliance Center",
+      "description": "Compliance center with framework tracking, control assessments, and evidence collection.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "c",
+        "compliance-center",
+        "enterprise",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "content-studio",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Content Studio",
+      "description": "Content management studio with rich editor, media library, and publishing workflow.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "content-studio",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "data-governance",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Data Governance",
+      "description": "Data governance console with data catalog, lineage explorer, and classification policies.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "c",
+        "data-governance",
+        "enterprise",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "developer-portal",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Developer Portal",
+      "description": "Developer portal with documentation, SDK playground, and application management.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "c",
+        "developer-portal",
+        "enterprise",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "documentation-site",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Documentation Site",
+      "description": "Documentation and product site with docs reader, API reference, and tutorial guides.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "documentation-site",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "enterprise-settings",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Enterprise Settings",
+      "description": "Enterprise settings console with organization config, security policies, and integrations.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "c",
+        "enterprise",
+        "enterprise-settings",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "identity-access",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Identity Access",
+      "description": "Identity and access management with user directory, role-based access control, and session monitoring.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "c",
+        "enterprise",
+        "i",
+        "identity-access",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "incident-response",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Incident Response",
+      "description": "Incident response console with active incidents, runbooks, and postmortem reports.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "c",
+        "enterprise",
+        "i",
+        "incident-response",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "marketing-site",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Marketing Site",
+      "description": "Marketing website with hero landing page, feature showcase, and pricing plans.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "i",
+        "marketing-site",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "marketplace",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Marketplace",
+      "description": "Multi-vendor marketplace with product browsing, seller dashboard, and listing management.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "i",
+        "marketplace",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "multi-tenant-admin",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Multi Tenant Admin",
+      "description": "Multi-tenant administration panel with team management, role permissions, and audit logging.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "enterprise",
+        "i",
+        "multi-tenant-admin",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "observability-console",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Observability Console",
+      "description": "Observability console with dashboards, real-time events, and alert configuration.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "enterprise",
+        "i",
+        "observability-console",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "onboarding-app",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Onboarding App",
+      "description": "Onboarding application with multi-step wizards, profile setup, and guided project creation.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "i",
+        "onboarding-app",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "resource-manager",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Resource Manager",
+      "description": "Resource management application with list, detail, and creation views for generic domain resources.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "enterprise",
+        "i",
+        "resource-manager",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "saas-dashboard",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Saas Dashboard",
+      "description": "SaaS dashboard with navigation, observability metrics, resource management, and notifications.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "i",
+        "s",
+        "saas-dashboard",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "search-application",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Search Application",
+      "description": "Full-text search application with results view, saved searches, and search analytics.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "i",
+        "s",
+        "search-application",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "security-center",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Security Center",
+      "description": "Security center with threat dashboard, vulnerability scanner, and policy management.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "c",
+        "enterprise",
+        "i",
+        "s",
+        "security-center",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "settings-portal",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Settings Portal",
+      "description": "Settings portal with account management, notification preferences, and danger zone operations.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "i",
+        "s",
+        "settings-portal",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "storefront",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Storefront",
+      "description": "E-commerce storefront with product catalog, shopping cart, and checkout flow.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "balanced-product",
+        "c",
+        "i",
+        "s",
+        "storefront",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "support-operations",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Support Operations",
+      "description": "Support operations console with ticket queue, knowledge base, and performance metrics.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "c",
+        "enterprise",
+        "i",
+        "s",
+        "support-operations",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "tanstack-start-solid",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Tanstack Start Solid",
+      "description": "SSR Solid app scaffolded with TanStack Start (Solid) and TanStack Router.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "tanstack-start-solid",
+        "tanstack-start-solid",
+        "template"
+      ]
+    },
+    {
+      "name": "vite-solid-router",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Vite Solid Router",
+      "description": "Client-only Solid app scaffolded with Vite and Solid Router. No SSR.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "template",
+        "vite-solid-router",
+        "vite-solid-router"
+      ]
+    },
+    {
+      "name": "workflow-automation",
+      "package": "@solidiom/templates",
+      "version": "0.0.1-next.0",
+      "label": "Workflow Automation",
+      "description": "Workflow automation with visual designer, run history, and third-party integrations.",
+      "status": "stable",
+      "deliverables": [
+        "source"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "a",
+        "c",
+        "enterprise",
+        "i",
+        "s",
+        "t",
+        "t",
+        "template",
+        "vite-solid-router",
+        "workflow-automation"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "name": "aurora",
+      "package": "@solidiom/themes",
+      "version": "0.0.1-next.0",
+      "label": "Aurora",
+      "description": "Aurora-themed color palette with vibrant gradient tones",
+      "status": "stable",
+      "deliverables": [
+        "css",
+        "tailwind"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "aurora",
+        "css",
+        "tailwind",
+        "theme"
+      ]
+    },
+    {
+      "name": "forest",
+      "package": "@solidiom/themes",
+      "version": "0.0.1-next.0",
+      "label": "Forest",
+      "description": "Forest-themed color palette with green tones",
+      "status": "stable",
+      "deliverables": [
+        "css",
+        "tailwind"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "css",
+        "forest",
+        "tailwind",
+        "theme"
+      ]
+    },
+    {
+      "name": "ocean",
+      "package": "@solidiom/themes",
+      "version": "0.0.1-next.0",
+      "label": "Ocean",
+      "description": "Ocean-themed color palette with deep blue tones",
+      "status": "stable",
+      "deliverables": [
+        "css",
+        "tailwind"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "css",
+        "ocean",
+        "tailwind",
+        "theme"
+      ]
+    },
+    {
+      "name": "slate",
+      "package": "@solidiom/themes",
+      "version": "0.0.1-next.0",
+      "label": "Slate",
+      "description": "Slate-themed color palette with neutral gray tones",
+      "status": "stable",
+      "deliverables": [
+        "css",
+        "tailwind"
+      ],
+      "documentationStatus": "none",
+      "documentationLocales": {},
+      "searchKeywords": [
+        "css",
+        "slate",
+        "tailwind",
+        "theme"
+      ]
+    }
+  ]
 }

@@ -4,7 +4,7 @@ title: Popover
 description: Non-modal floating content panel.
 keywords: [content, floating, modal, non, overlay, panel, popover]
 locale: en
-maturity: draft
+maturity: ga
 product: Popover
 productLayer: primitive
 status: draft

@@ -1,8 +1,8 @@
 # @solidiom/site
 
 Target application for the Solidiom website (`https://solidiom.org`). Configuration and
-integration wiring are copied from `apps/docs-astro-poc`, which stays unchanged as the
-validated proof of concept.
+integration wiring were validated by the Astro MDX POC (archived at
+`docs/history/poc/docs-astro-poc-findings.md`).
 
 ## Baseline commands
 

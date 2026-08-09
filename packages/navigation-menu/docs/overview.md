@@ -4,7 +4,7 @@ title: Navigation Menu
 description: A top-level navigation component with accessible dropdown sub-menus.
 keywords: [accessible, component, dropdown, level, menu, menus, navigation]
 locale: en
-maturity: draft
+maturity: ga
 product: Navigation Menu
 productLayer: primitive
 status: draft

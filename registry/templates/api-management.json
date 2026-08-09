@@ -1,20 +1,25 @@
 {
   "name": "api-management",
+  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
-  "label": "API Management",
+  "label": "Api Management",
   "description": "API management console with endpoint catalog, key management, and usage analytics.",
-  "status": "preview",
-  "templateId": "TPL-022",
-  "stack": "vite-solid-router",
-  "portfolioTags": ["enterprise"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-RESOURCE-03"],
-  "integrity": {
-    "algorithm": "sha256",
-    "manifestHash": "tpl-022-api-management-manifest",
-    "lastGenerated": "2026-08-07T01:10:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
-  }
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "searchKeywords": [
+    "a",
+    "api-management",
+    "c",
+    "enterprise",
+    "i",
+    "s",
+    "t",
+    "t",
+    "template",
+    "vite-solid-router"
+  ]
 }

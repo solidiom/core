@@ -30,7 +30,7 @@
   "label": "Tooltip",
   "description": "Contextual hint shown on hover/focus.",
   "category": "overlay",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -45,7 +45,7 @@
     "evidenceIds": [
       "axe-tooltip-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -54,7 +54,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -87,11 +88,11 @@
       "src/tooltip-context.ts": "55e178d78e98cb4ee9bb9111f683edae1a2a2896b20dd64d7a3af9acdff34dce",
       "src/tooltip.tsx": "aacfec3901f8a4ec21fd7529d2ed41657ee93285a3716134281e52909aa7aff8"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/tooltip"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

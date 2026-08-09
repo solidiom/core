@@ -17,7 +17,7 @@
  *   7 — Registry (registry/templates/<slug>.json with integrity + index)
  *   8 — Bilingual docs and route
  *
- * See: docs/plans/website-tasks.md §8.4.1
+ * See: docs/plans/consolidated-plan.md §8.4.1
  */
 
 import { existsSync, readFileSync } from "node:fs"
@@ -25,7 +25,7 @@ import { join } from "node:path"
 
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 const MANIFEST_PATH = join(ROOT, "docs", "contracts", "template-catalog-manifest.json")
-const TRACKER_PATH = join(ROOT, "docs", "plans", "website-tasks.md")
+const TRACKER_PATH = join(ROOT, "docs", "plans", "consolidated-plan.md")
 const REGISTRY_DIR = join(ROOT, "registry")
 const TEMPLATES_DIR = join(ROOT, "templates")
 const SITE_CONTENT = join(ROOT, "apps", "site", "src", "content")

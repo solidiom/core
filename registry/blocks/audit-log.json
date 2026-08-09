@@ -1,62 +1,20 @@
 {
   "name": "audit-log",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Audit Log",
-  "description": "Searchable, filterable audit event timeline. Implements loading, empty, error, and restricted states.",
-  "category": "ADMIN",
-  "status": "preview",
-  "blockId": "BLOCK-ADMIN-02",
+  "description": "Audit Log block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/input",
-    "@solidiom/card",
-    "@solidiom/select",
-    "@solidiom/checkbox",
-    "@solidiom/popover",
-    "@solidiom/breadcrumb",
-    "@solidiom/pagination",
-    "@solidiom/data-table",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/audit-log/source/audit-log.tsx",
-      "packages/blocks/audit-log/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/audit-log/source/audit-log.tsx": "7d95a8369a40c957f9fa94d0c7e12274364b606d05f6371d9f596973506d3a54",
-      "packages/blocks/audit-log/source/index.ts": "6d1cc8b6a5e4ea629eef17ad2e3732dccddfbdd0ab4b92eafbad09ef2f58b624"
-    },
-    "lastGenerated": "2026-08-06T12:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
     "audit",
-    "log",
-    "events",
-    "compliance",
-    "auditoria",
-    "registro"
+    "audit-log",
+    "block",
+    "log"
   ]
 }

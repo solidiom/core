@@ -4,7 +4,7 @@ title: Tree
 description: Hierarchical tree view with expand/collapse.
 keywords: [collapse, expand, hierarchical, navigation, runtime, tree, view]
 locale: en
-maturity: draft
+maturity: ga
 product: Tree
 productLayer: primitive
 status: draft

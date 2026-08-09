@@ -4,7 +4,7 @@ title: Calendar
 description: Date selection with day/month/year views.
 keywords: [calendar, date, date-math, day, input, month, runtime]
 locale: es
-maturity: draft
+maturity: ga
 product: Calendar
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/calendar"
 primitive: calendar
 section: overview
 translationSourceHash: "585e20fa5fb10146347044b7768feb7d3885c4f2a89557db4dc6be8bba495875"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Calendar no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

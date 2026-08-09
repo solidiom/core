@@ -23,7 +23,7 @@
   "label": "Data Table",
   "description": "Sortable, selectable table with column control.",
   "category": "layout",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -36,7 +36,7 @@
     "evidenceIds": [
       "axe-data-table-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -45,7 +45,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -88,11 +89,11 @@
       "src/data-table.tsx": "8aa83ebf5d8de898261d95afc98c9b24d7ee7b1461f92da64bd08bbfd105f67a",
       "src/index.tsx": "f7f5937850a28dbb5cd26d7ff7f375c690cb45aa5e4d6be554d5bc662af5c345"
     },
-    "lastGenerated": "2026-08-05T06:07:56.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/data-table"
   },
-  "lastUpdated": "2026-08-05T06:07:56.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

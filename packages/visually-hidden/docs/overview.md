@@ -4,7 +4,7 @@ title: Visually Hidden
 description: Hides content visually while keeping it accessible to screen readers.
 keywords: [visually-hidden, screen-reader, accessibility, label, heading, assistive-technology]
 locale: en
-maturity: draft
+maturity: ga
 product: Visually Hidden
 productLayer: primitive
 status: draft

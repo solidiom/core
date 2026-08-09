@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Radio Group",
       "description": "Single-select radio button set with keyboard navigation.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

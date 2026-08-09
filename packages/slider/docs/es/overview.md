@@ -4,7 +4,7 @@ title: Slider
 description: Numeric range input with thumb control.
 keywords: [control, input, numeric, range, runtime, slider, thumb]
 locale: es
-maturity: draft
+maturity: ga
 product: Slider
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/slider"
 primitive: slider
 section: overview
 translationSourceHash: "de11da99e94211d66d1279cf5174cec220f902cf211caaa03dde5a0d9fcc3184"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Slider no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
