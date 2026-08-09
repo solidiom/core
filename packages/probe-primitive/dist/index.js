@@ -1,5 +1,5 @@
 import { createRenderEffect as e, flatten as t, sharedConfig as n } from "solid-js";
-//#region ../../node_modules/.pnpm/@solidjs+web@2.0.0-beta.26_solid-js@2.0.0-beta.26/node_modules/@solidjs/web/dist/web.js
+//#region ../../node_modules/.pnpm/@solidjs+web@2.0.0-beta.32_solid-js@2.0.0-beta.32/node_modules/@solidjs/web/dist/web.js
 var r = /*#__PURE__*/ Symbol("slot"), i = /*#__PURE__*/ Symbol("host"), a = {
 	transparent: !0,
 	sync: !0
@@ -107,7 +107,13 @@ function p(e, t, n, r, i) {
 	} : d : i);
 }
 function m(e) {
-	return n.hydrating && (!e || e.isConnected);
+	if (!n.hydrating) return !1;
+	if (!e || e.isConnected) return !0;
+	let t = n.claimRoots;
+	if (t) {
+		for (let n = 0; n < t.length; n++) if (t[n].contains(e)) return !0;
+	}
+	return !1;
 }
 function h(e, t, n, i) {
 	if (f !== null && m(e) || t === n) return;

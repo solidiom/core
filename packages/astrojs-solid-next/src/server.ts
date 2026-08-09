@@ -3,10 +3,31 @@ import {
   createComponent,
   generateHydrationScript,
   renderToString,
-  renderToStringAsync,
+  renderToStream,
   ssr,
 } from "@solidjs/web"
 import { NoHydration, Loading } from "solid-js"
+
+/**
+ * Replacement for the removed `renderToStringAsync`.
+ * Uses `renderToStream` and collects the full output into a string once all
+ * async suspense boundaries have settled.
+ */
+async function renderToStringAsync(
+  fn: () => any,
+  options: { renderId?: string; noScripts?: boolean } = {},
+): Promise<string> {
+  const stream = renderToStream(fn, { ...options })
+  const reader = stream.readable.getReader()
+  const decoder = new TextDecoder()
+  let html = ""
+  while (true) {
+    const { done, value } = await reader.read()
+    if (done) break
+    html += typeof value === "string" ? value : decoder.decode(value)
+  }
+  return html
+}
 import { getContext, incrementId } from "./context.js"
 import type { RendererContext } from "./types.js"
 
