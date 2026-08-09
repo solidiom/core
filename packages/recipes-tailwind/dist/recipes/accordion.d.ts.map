@@ -1,1 +1,0 @@
-{"version":3,"file":"accordion.d.ts","sourceRoot":"","sources":["../../src/recipes/accordion.tsx"],"names":[],"mappings":"AAAA;;;GAGG;AACH,OAAO,EAAE,KAAK,GAAG,EAAE,MAAM,cAAc,CAAA;AAGvC,wBAAgB,eAAe,CAAC,KAAK,EAAE;IAAE,IAAI,CAAC,EAAE,QAAQ,GAAG,UAAU,CAAC;IAAC,QAAQ,EAAE,GAAG,CAAC,OAAO,CAAA;CAAE,eAE7F"}
