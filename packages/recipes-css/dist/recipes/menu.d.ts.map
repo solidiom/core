@@ -1,1 +1,0 @@
-{"version":3,"file":"menu.d.ts","sourceRoot":"","sources":["../../src/recipes/menu.tsx"],"names":[],"mappings":"AAAA;;;GAGG;AACH,OAAO,EAAE,KAAK,GAAG,EAAE,MAAM,cAAc,CAAA;AAGvC,wBAAgB,UAAU,CAAC,KAAK,EAAE;IAAE,OAAO,EAAE,GAAG,CAAC,OAAO,CAAC;IAAC,QAAQ,EAAE,GAAG,CAAC,OAAO,CAAA;CAAE,eAOhF"}
