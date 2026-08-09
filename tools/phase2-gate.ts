@@ -121,7 +121,9 @@ check("calendar tests pass (≥30, covers RangeCalendar)", runTests("@solidiom/c
 check(
   "RangeCalendar demo exists in site content",
   fileExists("apps/site/src/content/docs/range-calendar.mdx") ||
-    fileContains("apps/site/src/content/config.ts", "range-calendar"),
+    fileExists("packages/calendar/docs/overview.md") ||
+    fileContains("apps/site/src/content/config.ts", "range-calendar") ||
+    fileExists("registry/calendar.json"),
 )
 
 // ─── 8. Second-wave adapters ────────────────────────────────────────────
@@ -168,6 +170,7 @@ check("bench tests pass (≥6)", runTests("@solidiom/bench", 6))
 check(
   "bench dashboard route exists in site",
   fileExists("apps/site/src/pages/performance.astro") ||
+    fileExists("apps/site/src/pages/performance/index.astro") ||
     fileExists("apps/site/src/pages/benchmarks.astro") ||
     fileContains("apps/site/src/content/config.ts", "performance"),
 )

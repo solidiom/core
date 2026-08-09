@@ -23,7 +23,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm run gate:phase0
+      - run: pnpm run gate:phase3
 
   release:
     needs: gate
@@ -31,6 +31,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      id-token: write
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v6
@@ -38,6 +39,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
+          registry-url: "https://registry.npmjs.org"
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
@@ -53,16 +55,45 @@ jobs:
       - name: REG-008 — verify signed registry index
         run: node packages/cli/dist/bin.js verify --registry
 
-      # Validate changesets without publishing (non-publishing validation path)
-      - name: Check changeset status
-        run: pnpm changeset status
+      # Apply changeset versions (bumps package versions, updates changelogs)
+      - name: Apply changeset versions
+        run: pnpm changeset version
 
-      # Create release PR or publish (currently dry-run only for Phase 0)
-      - name: Validate version plan
-        run: pnpm changeset version --dry-run 2>&1 || echo "No changesets to version"
+      # Rebuild with final versions in package.json
+      - name: Rebuild with versioned packages
+        run: pnpm build
 
-      # TODO: Enable actual publishing after Phase 0 exit
-      # - name: Publish packages
-      #   run: pnpm changeset publish
-      #   env:
-      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Publish packages to npm with the beta dist-tag
+      - name: Publish packages
+        run: pnpm changeset publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Generate beta release artifacts (catalog + pointer)
+      - name: Generate beta artifacts
+        run: pnpm exec tsx tools/generate-beta-artifacts.ts --verify
+
+      # Verify beta signing integrity
+      - name: Verify beta signing
+        env:
+          REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
+        run: pnpm exec tsx tools/verify-beta-signing.ts
+
+      # Upload artifacts for audit trail
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: beta-release-artifacts
+          path: |
+            artifacts/beta-catalog.json
+            artifacts/beta-pointer.json
+            registry/index.json
+
+      # Commit version bumps and changelogs back to main
+      - name: Commit release changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore(release): publish beta packages" || echo "No changes to commit"
+          git push

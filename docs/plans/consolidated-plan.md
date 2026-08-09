@@ -97,7 +97,7 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 | Status | ID | Description | Accept |
 |--------|-----|-------------|--------|
 | [x] | C8 | Beta accessibility evidence — axe + keyboard + VoiceOver for all 52 primitives and 30 components | Evidence files enumerate complete beta surface with durable runs |
-| [~] | C9 / Task 60 | Preflight vs final acceptance — `tools/phase3-gate.ts` as final release approval | Preflight green + negative fixtures prove gate rejects missing requirements |
+| [x] | C9 / Task 60 | Preflight vs final acceptance — `tools/phase3-gate.ts` as final release approval | Preflight green + negative fixtures prove gate rejects missing requirements |
 | [x] | C10 / Task 68 | Signed beta artifacts — npm, `apps/site`, immutable catalog, signed pointer | Clean package/source consumers verify tarballs, catalog, and pointer signatures |
 | [x] | C11 | Public-package classification — resolve every publishable-but-untracked package | No publishable package sits outside public catalog or explicit non-public set |
 
@@ -106,11 +106,11 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 | Status | ID | Description |
 |--------|-----|-------------|
 | [x] | Task 59 | Repository truth reconciliation |
-| [~] | Task 60 | Phase 3 preflight and final release gate |
+| [x] | Task 60 | Phase 3 preflight and final release gate |
 | [x] | Task 61 | Beta release notes and docs in `apps/site` |
 | [x] | Task 65 | Cross-browser beta certification (Chromium, Firefox, WebKit) |
 | [-] | Task 66 | Legacy/migration beta readiness (descoped — greenfield product) |
-| [ ] | Task 68 | Initial beta release — promote gate-approved `next` to `beta` |
+| [x] | Task 68 | Initial beta release — promote gate-approved `next` to `beta` |
 
 ### 5.5 Phase 3A — compile-time incubation
 
