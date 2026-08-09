@@ -22,7 +22,7 @@
   "label": "Context Menu",
   "description": "Right-click triggered menu.",
   "category": "overlay",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -35,7 +35,7 @@
     "evidenceIds": [
       "axe-context-menu-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -44,7 +44,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -69,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "88fe81b9a89abdf65ed36f0c806ae5f3bc35ae17b42a98d4bb1e335d6d4055b9"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/context-menu"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

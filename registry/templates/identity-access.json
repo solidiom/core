@@ -1,20 +1,25 @@
 {
   "name": "identity-access",
+  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
-  "label": "Identity & Access",
+  "label": "Identity Access",
   "description": "Identity and access management with user directory, role-based access control, and session monitoring.",
-  "status": "preview",
-  "templateId": "TPL-017",
-  "stack": "vite-solid-router",
-  "portfolioTags": ["enterprise"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AUTH-02", "BLOCK-AUTH-03", "BLOCK-SHELL-01", "BLOCK-ADMIN-01", "BLOCK-ADMIN-02"],
-  "integrity": {
-    "algorithm": "sha256",
-    "manifestHash": "tpl-017-identity-access-manifest",
-    "lastGenerated": "2026-08-07T00:10:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
-  }
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "searchKeywords": [
+    "a",
+    "c",
+    "enterprise",
+    "i",
+    "identity-access",
+    "s",
+    "t",
+    "t",
+    "template",
+    "vite-solid-router"
+  ]
 }

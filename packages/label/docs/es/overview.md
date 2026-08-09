@@ -4,7 +4,7 @@ title: Label - Descripción general
 description: Elemento label accesible vinculado a controles de formulario mediante htmlFor.
 keywords: [label, formulario, accesible, htmlfor, input]
 locale: es
-maturity: draft
+maturity: ga
 product: Label
 productLayer: primitive
 status: draft
@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 translationSourceHash: "2bf275a4442dd0d69e93a5e20fe4d13e9b4f049bcbb4c4df1e49e43e6096d566"
 ---
 

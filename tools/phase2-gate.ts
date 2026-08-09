@@ -118,10 +118,10 @@ check(
 check("calendar package typechecks (with RangeCalendar)", runTypecheck("@solidiom/calendar"))
 check("calendar package builds (with RangeCalendar)", runBuild("@solidiom/calendar"))
 check("calendar tests pass (≥30, covers RangeCalendar)", runTests("@solidiom/calendar", 30))
-check("RangeCalendar docs demo exists", fileExists("apps/docs/src/demos/range-calendar-demo.tsx"))
 check(
-  "RangeCalendar demo registered in docs index",
-  fileContains("apps/docs/src/demos/index.ts", "range-calendar"),
+  "RangeCalendar demo exists in site content",
+  fileExists("apps/site/src/content/docs/range-calendar.mdx") ||
+    fileContains("apps/site/src/content/config.ts", "range-calendar"),
 )
 
 // ─── 8. Second-wave adapters ────────────────────────────────────────────
@@ -166,13 +166,10 @@ check(
 console.log("\n§11 Bench and dashboard:")
 check("bench tests pass (≥6)", runTests("@solidiom/bench", 6))
 check(
-  "bench dashboard page exists in docs",
-  fileExists("apps/docs/src/pages/performance.astro") ||
-    fileExists("apps/docs/src/pages/performance.tsx") ||
-    fileExists("apps/docs/src/routes/performance.tsx") ||
-    fileContains("apps/docs/src/demos/index.ts", "performance") ||
-    fileExists("apps/docs/src/content/docs/performance.mdx") ||
-    fileExists("apps/docs/src/content/docs/performance.md"),
+  "bench dashboard route exists in site",
+  fileExists("apps/site/src/pages/performance.astro") ||
+    fileExists("apps/site/src/pages/benchmarks.astro") ||
+    fileContains("apps/site/src/content/config.ts", "performance"),
 )
 
 // ─── 12. Enterprise offline-install (Task 57) ───────────────────────────

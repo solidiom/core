@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Hover Card",
       "description": "Content preview on hover with open delay and anchored positioning.",
-      "category": "overlay"
+      "category": "overlay",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

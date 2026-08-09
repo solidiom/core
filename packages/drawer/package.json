@@ -37,7 +37,10 @@
     "metadata": {
       "label": "Drawer",
       "description": "Slide-in panel from any screen edge.",
-      "category": "overlay"
+      "category": "overlay",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

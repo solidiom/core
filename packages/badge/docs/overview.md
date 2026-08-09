@@ -4,7 +4,7 @@ title: Badge
 description: Inline status or label indicator with semantic markup.
 keywords: [badge, label, status, indicator, inline]
 locale: en
-maturity: draft
+maturity: ga
 product: Badge
 productLayer: primitive
 status: draft

@@ -4,7 +4,7 @@ title: Tooltip
 description: Contextual hint shown on hover/focus.
 keywords: [contextual, focus, hint, hover, overlay, positioning, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Tooltip
 productLayer: primitive
 status: draft

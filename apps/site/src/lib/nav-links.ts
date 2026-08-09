@@ -21,4 +21,8 @@ export function getPrimaryLinks(locale: Locale): NavLink[] {
   ]
 }
 
-export const resourceLinks: NavLink[] = [{ label: "GitHub", href: "https://github.com/solidiom" }]
+export const resourceLinks: NavLink[] = [
+  { label: "GitHub", href: "https://github.com/solidiom" },
+  { label: "Accessibility", href: "/accessibility/" },
+  { label: "Performance", href: "/performance/" },
+]

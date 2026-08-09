@@ -21,7 +21,7 @@
   "label": "Toast",
   "description": "Temporary non-blocking notification.",
   "category": "feedback",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -34,7 +34,7 @@
     "evidenceIds": [
       "axe-toast-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -43,7 +43,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -74,11 +75,11 @@
       "src/toast-context.ts": "9773f77293a7b980e249649944f023c06afd098b6788d2c4f510665fd4578353",
       "src/toast.tsx": "3488bd66dba6c8580f8b12b9d38fd90e6e7455afb1f7fd5b641eb60f7ed4b55a"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/toast"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

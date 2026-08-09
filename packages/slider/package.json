@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Slider",
       "description": "Numeric range input with thumb control.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

@@ -17,7 +17,7 @@
   "label": "Avatar",
   "description": "User avatar with image and fallback.",
   "category": "display",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-avatar-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,7 +39,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -74,11 +75,11 @@
     "fileDigests": {
       "src/index.tsx": "0e08e24447beb45b5d01a0c72c4d11e260ef46a9adf95156364624558463225e"
     },
-    "lastGenerated": "2026-08-05T06:07:56.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/avatar"
   },
-  "lastUpdated": "2026-08-05T06:07:56.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

@@ -139,10 +139,11 @@ describe("recorded vocabulary exceptions", () => {
     }
   })
 
-  it("gives every exception a reason and an owning task", () => {
+  it("gives every exception a reason, an owning task, and a resolution", () => {
     for (const [key, entry] of Object.entries(VOCABULARY_EXCEPTIONS)) {
       expect(entry.reason.length, `${key} needs a reason`).toBeGreaterThan(20)
       expect(entry.resolvedBy, `${key} needs an owning task`).toMatch(/^(PRIM|RECIPE|THEME)-\d+$/)
+      expect(entry.resolution.length, `${key} needs a resolution`).toBeGreaterThan(20)
     }
   })
 

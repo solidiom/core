@@ -4,7 +4,7 @@ title: Listbox
 description: Single or multi-select list of options.
 keywords: [input, list, listbox, multi, options, runtime, select]
 locale: es
-maturity: draft
+maturity: ga
 product: Listbox
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/listbox"
 primitive: listbox
 section: overview
 translationSourceHash: "d7ddf8dd81bbf90965deb3758e6c66005559e6bf4c62a36d285334aebe95a8ac"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Listbox es un primitivo autónomo sin sub-primitivos compuestos.

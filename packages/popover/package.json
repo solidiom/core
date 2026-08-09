@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Popover",
       "description": "Non-modal floating content panel.",
-      "category": "overlay"
+      "category": "overlay",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

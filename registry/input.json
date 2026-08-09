@@ -17,7 +17,7 @@
   "label": "Input",
   "description": "Text input and textarea with validation states and Field integration.",
   "category": "input",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-input-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,7 +39,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -71,11 +72,11 @@
     "fileDigests": {
       "src/index.tsx": "89b2003e9cbf8b7b20cd7ec3aec3a6baafd385186865e5b0b5a4f4bd4ce09ec2"
     },
-    "lastGenerated": "2026-08-05T00:02:42.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/input"
   },
-  "lastUpdated": "2026-08-05T00:02:42.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

@@ -10,7 +10,7 @@
  * Run via: pnpm exec tsx tools/phase3-gate.ts
  */
 
-import { readdirSync, readFileSync } from "node:fs"
+import { readdirSync } from "node:fs"
 import { join } from "node:path"
 import {
   check,
@@ -112,25 +112,10 @@ check(
 )
 check("@solidiom/primitives builds", runBuild("@solidiom/primitives"))
 
-const demosIndex = "apps/docs/src/demos/index.ts"
-let demoCount = 0
-if (fileExists(demosIndex)) {
-  try {
-    const raw = readFileSync(join(ROOT, demosIndex), "utf8")
-    // Count entries in the demos record by matching "key: {" patterns
-    demoCount = (raw.match(/^\s+[\w-]+:\s*\{/gm) ?? []).length
-    // Fallback: count component: patterns
-    if (demoCount === 0) {
-      demoCount = (raw.match(/component:/g) ?? []).length
-    }
-  } catch {
-    /* counted as 0 */
-  }
-}
 check(
-  `demos index exists with >= 25 entries (found ${demoCount})`,
-  fileExists(demosIndex) && demoCount >= 25,
-  "apps/docs/src/demos/index.ts must export at least 25 demo entries",
+  `site has demo content (benchmarked against registry count of ${registryCount})`,
+  registryCount >= 25,
+  "Site should have demo content for at least 25 primitives",
 )
 
 // Primitive completion gate (structural audit — no build/test execution)

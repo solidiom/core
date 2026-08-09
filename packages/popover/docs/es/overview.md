@@ -4,7 +4,7 @@ title: Popover
 description: Non-modal floating content panel.
 keywords: [content, floating, modal, non, overlay, panel, popover]
 locale: es
-maturity: draft
+maturity: ga
 product: Popover
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/popover"
 primitive: popover
 section: overview
 translationSourceHash: "b4ed1fa7fe2bba1b97c2cc22c000327f4509cc0cd22e62c221cafeb62b8c6609"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Popover no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

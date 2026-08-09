@@ -17,7 +17,7 @@
   "label": "Progress",
   "description": "Determinate and indeterminate progress indicator.",
   "category": "feedback",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-progress-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,7 +39,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -68,11 +69,11 @@
     "fileDigests": {
       "src/index.tsx": "1130ef7e1c908ed8835f4c775e3aa7faf134775d4263957b57577a83fcb0be70"
     },
-    "lastGenerated": "2026-08-05T12:38:19.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/progress"
   },
-  "lastUpdated": "2026-08-05T12:38:19.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

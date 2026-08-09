@@ -42,7 +42,8 @@
       "registry": {
         "deliverables": [
           "component"
-        ]
+        ],
+        "status": "stable"
       }
     }
   }

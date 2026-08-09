@@ -4,7 +4,7 @@ title: Scroll Area
 description: Custom-styled scrollbar with native scrolling performance.
 keywords: [area, custom, layout, native, performance, runtime, scroll]
 locale: es
-maturity: draft
+maturity: ga
 product: Scroll Area
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/scroll-area"
 primitive: scroll-area
 section: overview
 translationSourceHash: "b66bffcfbf3e8d82228f1e42d67f71b333fc8c7f8dfc65735c525e5b25b381dd"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Scroll Area no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

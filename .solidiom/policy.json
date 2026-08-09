@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "signatureMode": "sigstore",
+  "registrySignatureRequired": false,
+  "trustedKeysSource": ".solidiom/trusted-keys.json",
+  "notes": "Beta policy — registry signature required after GA. Sigstore preferred for npm artifacts."
+}

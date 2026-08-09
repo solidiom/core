@@ -4,7 +4,7 @@ title: Collapsible
 description: Single expandable/collapsible section.
 keywords: [collapsible, expandable, layout, runtime, section, single]
 locale: es
-maturity: draft
+maturity: ga
 product: Collapsible
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/collapsible"
 primitive: collapsible
 section: overview
 translationSourceHash: "178e7b358b651daffff4c8c3a5fc94b8f8117ca0ac7543796c60d6040c09b0ff"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Collapsible no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

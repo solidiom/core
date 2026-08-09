@@ -4,7 +4,7 @@ title: Card
 description: Content container with header, body, and footer sections.
 keywords: [card, container, header, title, description, content, footer]
 locale: en
-maturity: draft
+maturity: ga
 product: Card
 productLayer: primitive
 status: draft

@@ -4,7 +4,7 @@ title: Toggle Group
 description: Group of mutually-exclusive or multi-select toggle buttons.
 keywords: [buttons, exclusive, group, input, multi, mutually, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Toggle Group
 productLayer: primitive
 status: draft

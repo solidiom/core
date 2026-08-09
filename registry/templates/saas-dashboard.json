@@ -1,20 +1,25 @@
 {
   "name": "saas-dashboard",
+  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
-  "label": "SaaS Dashboard",
+  "label": "Saas Dashboard",
   "description": "SaaS dashboard with navigation, observability metrics, resource management, and notifications.",
-  "status": "preview",
-  "templateId": "TPL-003",
-  "stack": "vite-solid-router",
-  "portfolioTags": ["balanced-product"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-SHELL-03", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-RESOURCE-01"],
-  "integrity": {
-    "algorithm": "sha256",
-    "manifestHash": "tpl-003-saas-dashboard-manifest",
-    "lastGenerated": "2026-08-06T22:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
-  }
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "searchKeywords": [
+    "a",
+    "balanced-product",
+    "c",
+    "i",
+    "s",
+    "saas-dashboard",
+    "t",
+    "t",
+    "template",
+    "vite-solid-router"
+  ]
 }

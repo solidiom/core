@@ -4,7 +4,7 @@ title: Button
 description: Control clickeable para acciones con soporte de carga, deshabilitado y variantes.
 keywords: [button, clickeable, acción, carga, deshabilitado, enviar, alternar]
 locale: es
-maturity: draft
+maturity: ga
 product: Button
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/button"
 primitive: button
 section: overview
 translationSourceHash: "dffb0d176fb4de32fe8662a5cef0890ff20010ae35de068b196b4d341117f00f"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Button es un primitivo autónomo sin sub-primitivos compuestos.

@@ -4,7 +4,7 @@ title: Select
 description: Dropdown selection from a list of options.
 keywords: [dropdown, from, input, list, options, runtime, select]
 locale: es
-maturity: draft
+maturity: ga
 product: Select
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/select"
 primitive: select
 section: overview
 translationSourceHash: "4b3163a2ea8751bf0d2595a1f2bfe60e059e71ce9a23901d70da207e2aebe8eb"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Select no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

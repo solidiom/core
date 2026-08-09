@@ -4,7 +4,7 @@ title: Toolbar
 description: Grouped actions and controls in a horizontal bar.
 keywords: [actions, and, bar, controls, grouped, horizontal, layout]
 locale: en
-maturity: draft
+maturity: ga
 product: Toolbar
 productLayer: primitive
 status: draft

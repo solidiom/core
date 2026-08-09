@@ -4,7 +4,7 @@ title: Badge
 description: Indicador de estado o etiqueta en línea con marcado semántico.
 keywords: [badge, etiqueta, estado, indicador, inline]
 locale: es
-maturity: draft
+maturity: ga
 product: Badge
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/badge"
 primitive: badge
 section: overview
 translationSourceHash: "d748e3c83d93e56490a8f65902f210809c7ac0be68dee8c4b63125c76dcd3866"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.

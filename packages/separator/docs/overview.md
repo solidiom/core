@@ -4,7 +4,7 @@ title: Separator
 description: Horizontal or vertical visual divider with semantic markup.
 keywords: [separator, divider, horizontal, vertical, decorative]
 locale: en
-maturity: draft
+maturity: ga
 product: Separator
 productLayer: primitive
 status: draft

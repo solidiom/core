@@ -37,7 +37,10 @@
     "metadata": {
       "label": "Data Table",
       "description": "Sortable, selectable table with column control.",
-      "category": "layout"
+      "category": "layout",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

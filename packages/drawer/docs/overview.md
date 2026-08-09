@@ -4,7 +4,7 @@ title: Drawer
 description: Slide-in panel from any screen edge.
 keywords: [any, drawer, edge, from, overlay, panel, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Drawer
 productLayer: primitive
 status: draft

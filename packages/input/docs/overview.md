@@ -4,7 +4,7 @@ title: Input
 description: Text input and textarea with validation states and Field integration.
 keywords: [and, field, input, integration, runtime, states, text]
 locale: en
-maturity: draft
+maturity: ga
 product: Input
 productLayer: primitive
 status: draft

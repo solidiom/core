@@ -4,7 +4,7 @@ title: Alert
 description: Inline, non-modal alert for status messages with live region semantics.
 keywords: [alert, notification, status, live-region, accessibility, info, success, warning, error]
 locale: en
-maturity: draft
+maturity: ga
 product: Alert
 productLayer: primitive
 status: draft

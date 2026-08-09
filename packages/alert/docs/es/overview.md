@@ -5,7 +5,7 @@ description: Alerta en línea, no modal, para mensajes de estado con semántica 
 keywords:
   [alert, notificación, estado, región-en-vivo, accesibilidad, info, éxito, advertencia, error]
 locale: es
-maturity: draft
+maturity: ga
 product: Alert
 productLayer: primitive
 status: draft
@@ -13,7 +13,9 @@ package: "@solidiom/alert"
 primitive: alert
 section: overview
 translationSourceHash: "670555b2a7b5b783a4c63bcf445fbfab6086a709ff0227529d002183874fa58e"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.

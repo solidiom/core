@@ -4,7 +4,7 @@ title: Empty State
 description: Placeholder for empty content areas.
 keywords: [areas, content, empty, feedback, for, placeholder, runtime]
 locale: es
-maturity: draft
+maturity: ga
 product: Empty State
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/empty-state"
 primitive: empty-state
 section: overview
 translationSourceHash: "ac1c7cd2ba31a4ef8a096e37501b470b7de0cc611e5af861548e52357299c5ef"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Empty State no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

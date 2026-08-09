@@ -22,7 +22,7 @@
   "label": "Slider",
   "description": "Numeric range input with thumb control.",
   "category": "input",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -35,7 +35,7 @@
     "evidenceIds": [
       "axe-slider-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -44,7 +44,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -72,11 +73,11 @@
       "src/slider-context.ts": "8e25de30ce30d7c6457d79a3e5571ec8e3b625ebe782c9123021a57056bba217",
       "src/slider.tsx": "9078729ce923206e402d477d681869b28f0662a38da832253493a3e676a033f5"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/slider"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

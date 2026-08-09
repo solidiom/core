@@ -1,20 +1,25 @@
 {
   "name": "support-operations",
+  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
   "label": "Support Operations",
   "description": "Support operations console with ticket queue, knowledge base, and performance metrics.",
-  "status": "preview",
-  "templateId": "TPL-028",
-  "stack": "vite-solid-router",
-  "portfolioTags": ["enterprise"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-CONTENT-01"],
-  "integrity": {
-    "algorithm": "sha256",
-    "manifestHash": "tpl-028-support-operations-manifest",
-    "lastGenerated": "2026-08-07T02:10:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
-  }
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "searchKeywords": [
+    "a",
+    "c",
+    "enterprise",
+    "i",
+    "s",
+    "support-operations",
+    "t",
+    "t",
+    "template",
+    "vite-solid-router"
+  ]
 }

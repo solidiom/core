@@ -1,64 +1,20 @@
 {
   "name": "shopping-cart",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Shopping Cart",
-  "description": "User manages cart items with quantity adjustments, coupon application, and checkout initiation. Implements loading, empty, error, and restricted states.",
-  "category": "COMMERCE",
-  "status": "preview",
-  "blockId": "BLOCK-COMMERCE-02",
+  "description": "Shopping Cart block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/button",
-    "@solidiom/input",
-    "@solidiom/field",
-    "@solidiom/card",
-    "@solidiom/alert",
-    "@solidiom/dialog",
-    "@solidiom/dropdown-menu",
-    "@solidiom/toast",
-    "@solidiom/switch",
-    "@solidiom/data-table",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/shopping-cart/source/shopping-cart.tsx",
-      "packages/blocks/shopping-cart/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/shopping-cart/source/shopping-cart.tsx": "5e2be85e949c7f4fb5a584402fc5e70e99ba73e34ebd8a83ce9f5be06ae5270a",
-      "packages/blocks/shopping-cart/source/index.ts": "09db9b477043038f486b51194d8c1bdffae6d11bc0f5ecdeab3fd8c3eb25112f"
-    },
-    "lastGenerated": "2026-08-06T21:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
-    "shopping",
+    "block",
     "cart",
-    "checkout",
-    "commerce",
-    "carrito",
-    "compras"
+    "shopping",
+    "shopping-cart"
   ]
 }

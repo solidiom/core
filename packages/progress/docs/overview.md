@@ -4,7 +4,7 @@ title: Progress
 description: Determinate and indeterminate progress indicator.
 keywords: [and, determinate, feedback, indeterminate, indicator, progress, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Progress
 productLayer: primitive
 status: draft

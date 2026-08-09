@@ -4,7 +4,7 @@ title: Virtual List
 description: Viewport-windowed list for large datasets.
 keywords: [datasets, for, large, layout, list, runtime, viewport]
 locale: es
-maturity: draft
+maturity: ga
 product: Virtual List
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/virtual-list"
 primitive: virtual-list
 section: overview
 translationSourceHash: "f5fbaa2b0bdeb8d4771f7063123360095c571540441c00755377b92d5c5f3292"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Virtual List es un primitivo autónomo sin sub-primitivos compuestos.

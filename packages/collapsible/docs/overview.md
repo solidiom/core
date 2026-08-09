@@ -4,7 +4,7 @@ title: Collapsible
 description: Single expandable/collapsible section.
 keywords: [collapsible, expandable, layout, runtime, section, single]
 locale: en
-maturity: draft
+maturity: ga
 product: Collapsible
 productLayer: primitive
 status: draft

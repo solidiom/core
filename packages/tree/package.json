@@ -37,7 +37,10 @@
     "metadata": {
       "label": "Tree",
       "description": "Hierarchical tree view with expand/collapse.",
-      "category": "navigation"
+      "category": "navigation",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

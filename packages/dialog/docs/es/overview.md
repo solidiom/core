@@ -4,7 +4,7 @@ title: Dialog
 description: Presenta contenido modal o no modal que requiere una interacción enfocada.
 keywords: [modal, superposición, foco]
 locale: es
-maturity: beta
+maturity: ga
 product: Dialog
 productLayer: primitive
 status: published
@@ -12,7 +12,9 @@ package: "@solidiom/dialog"
 primitive: dialog
 section: overview
 translationSourceHash: "e3c7ee165ff13f34caecab9e2eef73aa4cef8351681b48da58b4f8464c6402b9"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Dialog no tiene primitivos hermanos. Se compone internamente con Portal y Backdrop pero no posee un contrato inter-primitivo.

@@ -4,7 +4,7 @@ title: Pagination
 description: Page navigation with prev/next and page numbers.
 keywords: [and, navigation, next, numbers, page, pagination, prev]
 locale: es
-maturity: draft
+maturity: ga
 product: Pagination
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/pagination"
 primitive: pagination
 section: overview
 translationSourceHash: "b47627c26aa53fae4b19bda270faefc73ef1bf6912847c4dca9c0b1a5d09b71f"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Pagination no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

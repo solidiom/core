@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Tooltip",
       "description": "Contextual hint shown on hover/focus.",
-      "category": "overlay"
+      "category": "overlay",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

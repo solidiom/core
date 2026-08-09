@@ -39,7 +39,10 @@
     "metadata": {
       "label": "Sheet",
       "description": "Side-panel dialog with slide animation.",
-      "category": "overlay"
+      "category": "overlay",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

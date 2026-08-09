@@ -4,7 +4,7 @@ title: Select
 description: Dropdown selection from a list of options.
 keywords: [dropdown, from, input, list, options, runtime, select]
 locale: en
-maturity: draft
+maturity: ga
 product: Select
 productLayer: primitive
 status: draft

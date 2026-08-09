@@ -1,62 +1,20 @@
 {
   "name": "notification-preferences",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Notification Preferences",
-  "description": "Channel and category notification settings with granular toggles. Implements loading, empty, error, and restricted states.",
-  "category": "SETTINGS",
-  "status": "preview",
-  "blockId": "BLOCK-SETTINGS-02",
+  "description": "Notification Preferences block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/button",
-    "@solidiom/field",
-    "@solidiom/card",
-    "@solidiom/tabs",
-    "@solidiom/checkbox",
-    "@solidiom/radio-group",
-    "@solidiom/switch",
-    "@solidiom/pagination",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/notification-preferences/source/notification-preferences.tsx",
-      "packages/blocks/notification-preferences/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/notification-preferences/source/notification-preferences.tsx": "469667745939b53773aaa7410185dd87283afec9afa35f707d592bd4be388549",
-      "packages/blocks/notification-preferences/source/index.ts": "4028b48f862e4a37b989f06074261a1410ce33ead03a18c29ca62038a17ae833"
-    },
-    "lastGenerated": "2026-08-06T13:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
+    "block",
     "notification",
-    "preferences",
-    "settings",
-    "channels",
-    "notificaciones",
-    "preferencias"
+    "notification-preferences",
+    "preferences"
   ]
 }

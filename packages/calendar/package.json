@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Calendar",
       "description": "Date selection with day/month/year views.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

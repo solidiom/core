@@ -4,7 +4,7 @@ title: Avatar
 description: Avatar de usuario con imagen y soporte de reemplazo.
 keywords: [avatar, imagen, reemplazo, iniciales, usuario]
 locale: es
-maturity: draft
+maturity: ga
 product: Avatar
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/avatar"
 primitive: avatar
 section: overview
 translationSourceHash: "a4d705d861b821f7ce738376b8d1bd5184c718b0a6a59d06b0e81fa0e16942dd"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.

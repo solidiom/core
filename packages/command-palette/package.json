@@ -37,7 +37,10 @@
     "metadata": {
       "label": "Command Palette",
       "description": "Modal search and action launcher.",
-      "category": "navigation"
+      "category": "navigation",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

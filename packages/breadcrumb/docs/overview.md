@@ -4,7 +4,7 @@ title: Breadcrumb
 description: Hierarchical navigation breadcrumb with accessible list structure.
 keywords: [breadcrumb, navigation, hierarchy, links, breadcrumb-list]
 locale: en
-maturity: draft
+maturity: ga
 product: Breadcrumb
 productLayer: primitive
 status: draft

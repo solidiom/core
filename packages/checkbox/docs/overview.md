@@ -4,7 +4,7 @@ title: Checkbox
 description: Binary or indeterminate toggle control.
 keywords: [binary, checkbox, control, indeterminate, input, runtime, toggle]
 locale: en
-maturity: draft
+maturity: ga
 product: Checkbox
 productLayer: primitive
 status: draft

@@ -4,7 +4,7 @@ title: Carousel
 description: Horizontal slide-based content viewer.
 keywords: [based, carousel, carousel-physics, content, horizontal, layout, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Carousel
 productLayer: primitive
 status: draft

@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Label",
       "description": "Accessible label element linked to form controls via htmlFor.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

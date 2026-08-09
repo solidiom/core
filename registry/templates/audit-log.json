@@ -1,20 +1,25 @@
 {
   "name": "audit-log",
+  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
   "label": "Audit Log",
   "description": "Audit log viewer with real-time event stream, advanced filters, and data export.",
-  "status": "preview",
-  "templateId": "TPL-018",
-  "stack": "vite-solid-router",
-  "portfolioTags": ["enterprise"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-ADMIN-01", "BLOCK-ADMIN-02", "BLOCK-ADMIN-03"],
-  "integrity": {
-    "algorithm": "sha256",
-    "manifestHash": "tpl-018-audit-log-manifest",
-    "lastGenerated": "2026-08-07T00:20:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
-  }
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "searchKeywords": [
+    "a",
+    "audit-log",
+    "c",
+    "enterprise",
+    "i",
+    "s",
+    "t",
+    "t",
+    "template",
+    "vite-solid-router"
+  ]
 }

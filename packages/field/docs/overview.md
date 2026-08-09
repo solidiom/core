@@ -4,7 +4,7 @@ title: Field
 description: "Composition wrapper: label + control + description + error with automatic ARIA wiring."
 keywords: [aria, automatic, composition, control, description, error, field]
 locale: en
-maturity: draft
+maturity: ga
 product: Field
 productLayer: primitive
 status: draft

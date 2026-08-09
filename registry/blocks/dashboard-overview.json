@@ -1,59 +1,20 @@
 {
   "name": "dashboard-overview",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Dashboard Overview",
-  "description": "Observability dashboard with metric cards, charts, and status indicators. Implements loading, empty, error, and restricted states.",
-  "category": "OBS",
-  "status": "preview",
-  "blockId": "BLOCK-OBS-01",
+  "description": "Dashboard Overview block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/card",
-    "@solidiom/select",
-    "@solidiom/tabs",
-    "@solidiom/tooltip",
-    "@solidiom/meter",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/dashboard-overview/source/dashboard-overview.tsx",
-      "packages/blocks/dashboard-overview/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/dashboard-overview/source/dashboard-overview.tsx": "3b583a52e23184d2d91f9d78b204c35336673db0ab768e6982d92b2e4cb54de7",
-      "packages/blocks/dashboard-overview/source/index.ts": "b0966341684d6a071c172cf5b84fa072359aee917463702d55a8b8e2f0484c6b"
-    },
-    "lastGenerated": "2026-08-06T14:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
+    "block",
     "dashboard",
-    "overview",
-    "metrics",
-    "observability",
-    "panel",
-    "metricas"
+    "dashboard-overview",
+    "overview"
   ]
 }

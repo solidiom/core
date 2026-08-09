@@ -4,7 +4,7 @@ title: Spinner
 description: Loading spinner indicator.
 keywords: [feedback, indicator, loading, runtime, spinner]
 locale: es
-maturity: draft
+maturity: ga
 product: Spinner
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/spinner"
 primitive: spinner
 section: overview
 translationSourceHash: "fd27b43ecda287a6376a4d27a61647968c748246fa67b8ea3eaa413dc66c92cd"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Spinner es un primitivo autónomo sin sub-primitivos compuestos.

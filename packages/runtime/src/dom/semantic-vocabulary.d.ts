@@ -44,6 +44,7 @@ export declare const COMPOSITE_SCOPES: readonly ["prose", "typeset"];
 export declare const VOCABULARY_EXCEPTIONS: Readonly<Record<string, {
     readonly reason: string;
     readonly resolvedBy: string;
+    readonly resolution: string;
 }>>;
 /** Every attribute a recipe selector may target. */
 export declare const SEMANTIC_ATTRIBUTES: readonly string[];
@@ -59,6 +60,7 @@ export declare function isKnownState(scope: string, state: string): boolean;
 export declare function vocabularyException(scope: string, state: string): {
     readonly reason: string;
     readonly resolvedBy: string;
+    readonly resolution: string;
 } | undefined;
 /** Every distinct state value across all scopes, sorted. */
 export declare function allStateValues(): readonly string[];

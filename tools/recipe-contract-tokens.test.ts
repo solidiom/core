@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest"
 import { readFileSync, readdirSync } from "node:fs"
 import { join } from "node:path"
 import {
-  LEGACY_TOKEN_ALIASES,
   SEMANTIC_TOKENS,
   SEMANTIC_TOKEN_IDS,
   isSemanticToken,
@@ -140,9 +139,9 @@ describe("CSS profile token usage", () => {
       ),
     )
     const unaccounted = used.filter(
-      (property) => !spellings.has(property) && !(property in LEGACY_TOKEN_ALIASES),
+      (property) => !spellings.has(property),
     )
-    expect(unaccounted, "add these to recipe-contract-tokens.ts or alias them").toEqual([])
+    expect(unaccounted, "add these to recipe-contract-tokens.ts").toEqual([])
   })
 })
 
@@ -168,7 +167,7 @@ describe("Tailwind profile theme contract", () => {
     const missing = [...referenced].filter((name) => !registered.has(name)).sort()
     expect(
       missing,
-      "packages/recipes-tailwind/src/styles/theme.css must register these, or the profile renders unstyled once apps/docs is removed",
+      "packages/recipes-tailwind/src/styles/theme.css must register these for the profile to render styled",
     ).toEqual([])
   })
 

@@ -1,70 +1,20 @@
 {
   "name": "content-workflow",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Content Workflow",
-  "description": "User manages content through a draft-review-publish pipeline with status tracking, assignments, and approval gates. Implements loading, empty, error, and restricted states.",
-  "category": "CONTENT",
-  "status": "preview",
-  "blockId": "BLOCK-CONTENT-03",
+  "description": "Content Workflow block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/button",
-    "@solidiom/input",
-    "@solidiom/field",
-    "@solidiom/card",
-    "@solidiom/alert",
-    "@solidiom/dialog",
-    "@solidiom/select",
-    "@solidiom/dropdown-menu",
-    "@solidiom/tabs",
-    "@solidiom/toast",
-    "@solidiom/avatar",
-    "@solidiom/checkbox",
-    "@solidiom/popover",
-    "@solidiom/breadcrumb",
-    "@solidiom/pagination",
-    "@solidiom/data-table",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/content-workflow/source/content-workflow.tsx",
-      "packages/blocks/content-workflow/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/content-workflow/source/content-workflow.tsx": "d552cc652f78c45c7b4df787449ba6c3f82e49b862cb5bad37548bca59d4bbe7",
-      "packages/blocks/content-workflow/source/index.ts": "b00dbcec95ac236708ff2252c91bf89434a1dd056cccdd701ca2595738c73f1e"
-    },
-    "lastGenerated": "2026-08-06T21:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
+    "block",
     "content",
-    "workflow",
-    "publish",
-    "review",
-    "flujo",
-    "contenido"
+    "content-workflow",
+    "workflow"
   ]
 }

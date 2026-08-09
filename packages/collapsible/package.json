@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Collapsible",
       "description": "Single expandable/collapsible section.",
-      "category": "layout"
+      "category": "layout",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

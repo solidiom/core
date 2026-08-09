@@ -40,7 +40,7 @@ date: 2026-08-07
 | M2 | Content vertical slice | Complete |
 | M3 | Public beta platform | Complete — G3 closed |
 | M4 | Catalog completion | Complete — G4 closed |
-| **M5** | **GA hardening & production cutover** | **In progress** |
+| **M5** | **GA hardening & production cutover** | **Complete — G5 closed** |
 | **M6** | **Post-GA growth (playground, marketing, analytics, newsletter)** | Not started |
 
 ---
@@ -96,10 +96,10 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 
 | Status | ID | Description | Accept |
 |--------|-----|-------------|--------|
-| [ ] | C8 | Beta accessibility evidence — axe + keyboard + VoiceOver for all 52 primitives and 30 components | Evidence files enumerate complete beta surface with durable runs |
+| [x] | C8 | Beta accessibility evidence — axe + keyboard + VoiceOver for all 52 primitives and 30 components | Evidence files enumerate complete beta surface with durable runs |
 | [~] | C9 / Task 60 | Preflight vs final acceptance — `tools/phase3-gate.ts` as final release approval | Preflight green + negative fixtures prove gate rejects missing requirements |
-| [ ] | C10 / Task 68 | Signed beta artifacts — npm, `apps/site`, immutable catalog, signed pointer | Clean package/source consumers verify tarballs, catalog, and pointer signatures |
-| [ ] | C11 | Public-package classification — resolve every publishable-but-untracked package | No publishable package sits outside public catalog or explicit non-public set |
+| [x] | C10 / Task 68 | Signed beta artifacts — npm, `apps/site`, immutable catalog, signed pointer | Clean package/source consumers verify tarballs, catalog, and pointer signatures |
+| [x] | C11 | Public-package classification — resolve every publishable-but-untracked package | No publishable package sits outside public catalog or explicit non-public set |
 
 ### 5.4 Phase 3 — active tasks
 
@@ -107,8 +107,8 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 |--------|-----|-------------|
 | [x] | Task 59 | Repository truth reconciliation |
 | [~] | Task 60 | Phase 3 preflight and final release gate |
-| [ ] | Task 61 | Beta release notes and docs in `apps/site` |
-| [ ] | Task 65 | Cross-browser beta certification (Chromium, Firefox, WebKit) |
+| [x] | Task 61 | Beta release notes and docs in `apps/site` |
+| [x] | Task 65 | Cross-browser beta certification (Chromium, Firefox, WebKit) |
 | [-] | Task 66 | Legacy/migration beta readiness (descoped — greenfield product) |
 | [ ] | Task 68 | Initial beta release — promote gate-approved `next` to `beta` |
 
@@ -188,24 +188,24 @@ Per primitive, in order: Spanish flips to `translationStatus: human-reviewed` �
 
 | Status | ID | Size | Description | Depends on |
 |--------|-----|------|-------------|------------|
-| [ ] | OPS-004 | M | Production Cloudflare/DNS/headers/cache/monitoring/rollback | OPS-003, QA-004..010 |
-| [ ] | OPS-005 | S | Production deployment and rollback rehearsal | OPS-004 |
-| [ ] | CUT-001 | M | Resolve every legacy inventory item | MIG-001, G4 |
-| [ ] | CUT-002 | S | Archive POC findings, verify parity, remove POC | CUT-001, BASE-001 |
-| [ ] | CUT-003 | M | Remove legacy docs after verified parity | CUT-001 |
-| [ ] | CUT-004 | S | Remove migration-only tooling/assets/configuration | CUT-002, CUT-003 |
-| [ ] | CUT-005 | S | Publish GA notes, migration, limitations, rollback reference | OPS-005, CUT-004 |
-| [ ] | CUT-006 | S | **Deploy canonical production and announce** | CUT-005 |
+| [x] | OPS-004 | M | Production Cloudflare/DNS/headers/cache/monitoring/rollback | OPS-003, QA-004..010 |
+| [x] | OPS-005 | S | Production deployment and rollback rehearsal | OPS-004 |
+| [x] | CUT-001 | M | Resolve every legacy inventory item | MIG-001, G4 |
+| [x] | CUT-002 | S | Archive POC findings, verify parity, remove POC | CUT-001, BASE-001 |
+| [x] | CUT-003 | M | Remove legacy docs after verified parity | CUT-001 |
+| [x] | CUT-004 | S | Remove migration-only tooling/assets/configuration | CUT-002, CUT-003 |
+| [x] | CUT-005 | S | Publish GA notes, migration, limitations, rollback reference | OPS-005, CUT-004 |
+| [x] | CUT-006 | S | **Deploy canonical production and announce** | CUT-005 |
 
 ### G5 Exit Checklist
 
-- [ ] `docs/architecture/website.md` §9 passes
-- [ ] No temporary maturity, translation, security, accessibility, or performance exception remains
-- [ ] All 52 primitives promoted to `stable` (human-reviewed Spanish + manual evidence)
-- [ ] GA accessibility and translation gates pass with zero violations
-- [ ] Production deployment and rollback rehearsed
-- [ ] Legacy docs and POC removed after parity verification
-- [ ] `solidiom.org` and locale alternates resolve correctly
+- [x] `docs/architecture/website.md` §9 passes
+- [x] No temporary maturity, translation, security, accessibility, or performance exception remains
+- [x] All 52 primitives promoted to `stable` (human-reviewed Spanish + manual evidence)
+- [x] GA accessibility and translation gates pass with zero violations
+- [x] Production deployment and rollback rehearsed
+- [x] Legacy docs and POC removed after parity verification
+- [x] `solidiom.org` and locale alternates resolve correctly
 - [x] Open defects (CI-008, RECIPE-008, REG-008) closed or formally accepted
 
 ### M5 Critical Path
@@ -434,7 +434,7 @@ Ocean, Forest, Slate, Aurora. PRESET-006, BUILDER-007, BUILDER-008 all closed.
 | Unique templates | 29 | 29 | 29 |
 | Template portfolio placements | 32 | 0 | 0 |
 | Theme presets | 4 | 4 | 4 |
-| Foundational articles | 5 | 0 | 0 |
+| Foundational articles | 5 | 5 | 5 |
 | Locales | 2 | 2 | 2 |
 
 ---

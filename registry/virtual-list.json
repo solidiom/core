@@ -25,7 +25,7 @@
   "label": "Virtual List",
   "description": "Viewport-windowed list for large datasets.",
   "category": "layout",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -40,7 +40,7 @@
     "evidenceIds": [
       "axe-virtual-list-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -49,7 +49,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -79,11 +80,11 @@
       "src/virtual-list-context.ts": "9cc38eb71a5c2dba32dbeea5c6a420d812c51fe729096aa9aa8f1afbf8bf32c6",
       "src/virtual-list.tsx": "926f02eca17c8299b5dd9ae4bf09d745d19eaf0f1bd8d715e79c62575a53f40d"
     },
-    "lastGenerated": "2026-08-03T17:02:33.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/virtual-list"
   },
-  "lastUpdated": "2026-08-03T17:02:33.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

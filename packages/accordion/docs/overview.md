@@ -4,7 +4,7 @@ title: Accordion
 description: Vertically stacked set of collapsible sections with single or multiple expand modes.
 keywords: [accordion, collapsible, sections, expand, collapse]
 locale: en
-maturity: draft
+maturity: ga
 product: Accordion
 productLayer: primitive
 status: draft

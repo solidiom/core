@@ -4,7 +4,7 @@ title: Context Menu
 description: Right-click triggered menu.
 keywords: [click, context, menu, overlay, right, runtime, triggered]
 locale: en
-maturity: draft
+maturity: ga
 product: Context Menu
 productLayer: primitive
 status: draft

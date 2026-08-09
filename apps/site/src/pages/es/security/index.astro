@@ -1,0 +1,20 @@
+---
+import { getEntry, render } from "astro:content"
+import BaseLayout from "../../../layouts/BaseLayout.astro"
+
+const entry = await getEntry("pages", "es/pages/security")
+if (!entry) throw new Error("Missing content: es/pages/security")
+const { Content } = await render(entry)
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <div
+    class="prose"
+    data-pagefind-body
+    data-pagefind-filter-locale="es"
+    data-pagefind-filter-content_type="page"
+    data-pagefind-meta={`title:${entry.data.title}`}
+  >
+    <Content />
+  </div>
+</BaseLayout>

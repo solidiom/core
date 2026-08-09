@@ -4,7 +4,7 @@ title: Radio Group
 description: Single-select radio button set with keyboard navigation.
 keywords: [button, group, input, keyboard, navigation, radio, runtime]
 locale: es
-maturity: draft
+maturity: ga
 product: Radio Group
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/radio-group"
 primitive: radio-group
 section: overview
 translationSourceHash: "09b9475e9bc53e8debc3cdc7cb716dcfd9d2d40445d780387bae596e4e762e7f"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Radio Group no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

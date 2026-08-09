@@ -1,20 +1,25 @@
 {
   "name": "workflow-automation",
+  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
   "label": "Workflow Automation",
   "description": "Workflow automation with visual designer, run history, and third-party integrations.",
-  "status": "preview",
-  "templateId": "TPL-027",
-  "stack": "vite-solid-router",
-  "portfolioTags": ["enterprise"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-AI-03", "BLOCK-OBS-01", "BLOCK-RESOURCE-01"],
-  "integrity": {
-    "algorithm": "sha256",
-    "manifestHash": "tpl-027-workflow-automation-manifest",
-    "lastGenerated": "2026-08-07T02:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } }
-  }
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "searchKeywords": [
+    "a",
+    "c",
+    "enterprise",
+    "i",
+    "s",
+    "t",
+    "t",
+    "template",
+    "vite-solid-router",
+    "workflow-automation"
+  ]
 }

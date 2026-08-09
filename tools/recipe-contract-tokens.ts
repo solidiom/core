@@ -808,11 +808,7 @@ export function unmappedTokens(namespace: TokenNamespace): SemanticToken[] {
 /**
  * Legacy `--ui-*` spellings with no canonical identity.
  *
- * `--ui-foreground` was used once (packages/recipes-css/src/styles/badge.css) where
- * every other stylesheet used `--ui-fg`. RECIPE-002 replaced that literal with the
- * `foreground` identity's canonical spelling; the alias stays so any external
- * reference to the old name keeps resolving.
+ * No active aliases remain; the set is kept as empty to document that any
+ * `--ui-*` usage must resolve to a canonical identity in SEMANTIC_TOKENS.
  */
-export const LEGACY_TOKEN_ALIASES: Readonly<Record<string, string>> = {
-  "--ui-foreground": "--ui-fg",
-}
+export const LEGACY_TOKEN_ALIASES: Readonly<Record<string, string>> = {}

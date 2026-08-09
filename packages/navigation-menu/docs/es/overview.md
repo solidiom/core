@@ -4,7 +4,7 @@ title: Navigation Menu
 description: Un componente de navegación de nivel superior con sub-menús desplegables accesibles.
 keywords: [accessible, component, dropdown, level, menu, menus, navigation]
 locale: es
-maturity: draft
+maturity: ga
 product: Navigation Menu
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/navigation-menu"
 primitive: navigation-menu
 section: overview
 translationSourceHash: "1dedf4562982d481b82bd8425ecafb5c2179ba91d596fb628856686e851fe026"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Navigation Menu no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

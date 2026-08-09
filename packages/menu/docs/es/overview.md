@@ -4,7 +4,7 @@ title: Menu
 description: Action list triggered by a button.
 keywords: [action, button, list, menu, navigation, runtime, triggered]
 locale: es
-maturity: draft
+maturity: ga
 product: Menu
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/menu"
 primitive: menu
 section: overview
 translationSourceHash: "c678824796683d373f854718663ed084da140d0e3391057048e89f909b9c2adf"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Menu no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

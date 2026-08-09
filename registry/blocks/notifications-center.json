@@ -1,65 +1,20 @@
 {
   "name": "notifications-center",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Notifications Center",
-  "description": "User views, manages, and dismisses notifications from a unified panel with categorization, read/unread states, and mark-all-read. Implements loading, empty, error, and restricted states.",
-  "category": "SHELL",
-  "status": "preview",
-  "blockId": "BLOCK-SHELL-03",
+  "description": "Notifications Center block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/button",
-    "@solidiom/card",
-    "@solidiom/alert",
-    "@solidiom/select",
-    "@solidiom/dropdown-menu",
-    "@solidiom/toast",
-    "@solidiom/avatar",
-    "@solidiom/checkbox",
-    "@solidiom/switch",
-    "@solidiom/popover",
-    "@solidiom/pagination",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/notifications-center/source/notifications-center.tsx",
-      "packages/blocks/notifications-center/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/notifications-center/source/notifications-center.tsx": "b7631726d14ecfd5f1b3affebd9b7d837818f1ebe133db7e6d66b20622ddc656",
-      "packages/blocks/notifications-center/source/index.ts": "ef56939283b20d37898938f0d608e5d68a9f42a7e03fac42c6a120bce5b0d392"
-    },
-    "lastGenerated": "2026-08-06T21:30:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
-    "notifications",
+    "block",
     "center",
-    "alerts",
-    "messages",
-    "notificaciones",
-    "centro"
+    "notifications",
+    "notifications-center"
   ]
 }

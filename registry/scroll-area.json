@@ -17,7 +17,7 @@
   "label": "Scroll Area",
   "description": "Custom-styled scrollbar with native scrolling performance.",
   "category": "layout",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-scroll-area-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,7 +39,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -72,11 +73,11 @@
     "fileDigests": {
       "src/index.tsx": "4b1e201660eb255ec50dc92e6563a337b39fa1c4a4b7f5c08b1d99aad191f813"
     },
-    "lastGenerated": "2026-08-06T00:15:56.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/scroll-area"
   },
-  "lastUpdated": "2026-08-06T00:15:56.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

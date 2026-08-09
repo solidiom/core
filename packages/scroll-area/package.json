@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Scroll Area",
       "description": "Custom-styled scrollbar with native scrolling performance.",
-      "category": "layout"
+      "category": "layout",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

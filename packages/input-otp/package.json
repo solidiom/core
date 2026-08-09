@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Input OTP",
       "description": "A one-time password input with individual character slots.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

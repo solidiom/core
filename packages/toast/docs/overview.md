@@ -4,7 +4,7 @@ title: Toast
 description: Temporary non-blocking notification.
 keywords: [blocking, feedback, non, notification, runtime, temporary, toast]
 locale: en
-maturity: draft
+maturity: ga
 product: Toast
 productLayer: primitive
 status: draft

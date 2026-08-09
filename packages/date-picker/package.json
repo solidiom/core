@@ -37,7 +37,10 @@
     "metadata": {
       "label": "Date Picker",
       "description": "Calendar popup for selecting dates.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

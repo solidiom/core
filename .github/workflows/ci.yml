@@ -243,7 +243,7 @@ jobs:
       - run: node scripts/set-solid-version.mjs ${{ matrix.solid-tier }}
       - run: pnpm install --no-frozen-lockfile
       - run: npx playwright install --with-deps chromium firefox webkit
-      - run: pnpm exec nx run-many -t build --exclude=@solidiom/docs,@solidiom/docs-astro-poc,@solidiom/site
+      - run: pnpm exec nx run-many -t build --exclude=@solidiom/site
       - run: pnpm exec nx run-many -t test --exclude=@solidiom/tests-package-source-parity,@solidiom/site
       - run: pnpm exec vitest run --config vitest.browser.config.ts
 

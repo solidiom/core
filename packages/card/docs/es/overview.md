@@ -4,7 +4,7 @@ title: Card
 description: Contenedor de contenido con secciones de encabezado, cuerpo y pie.
 keywords: [card, contenedor, encabezado, titulo, descripcion, contenido, pie]
 locale: es
-maturity: draft
+maturity: ga
 product: Card
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/card"
 primitive: card
 section: overview
 translationSourceHash: "05fee18fab25b0726e8ac4b7616d4317dee930773b128056ad2b8f996a38abcd"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.

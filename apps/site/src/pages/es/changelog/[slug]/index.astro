@@ -1,0 +1,102 @@
+---
+import { getCollection, getEntry, render } from "astro:content"
+import DocsLayout from "@layouts/DocsLayout.astro"
+import { tocFromHeadings, type DocsTocEntry } from "@lib/docs-nav"
+
+export async function getStaticPaths() {
+  const entries = await getCollection("changelog")
+  return entries.map((entry) => ({
+    params: { slug: entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id },
+  }))
+}
+
+const { slug } = Astro.params
+const changelogPath = "/es/changelog/"
+
+const entry = await getEntry("changelog", `es/changelog/${slug}`)
+if (!entry) throw new Error(`Entrada de registro no encontrada: es/changelog/${slug}`)
+
+const rendered = await render(entry)
+const { Content } = rendered
+const headings = rendered.headings ?? []
+const toc: DocsTocEntry[] = tocFromHeadings(headings as Array<{ depth: number; slug: string; text: string }>)
+
+const allEntries = await getCollection("changelog", (e) => e.data.locale === "es")
+const sorted = [...allEntries].sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+)
+const currentIndex = sorted.findIndex((e) => e.id === entry.id)
+const prevEntry = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : undefined
+const nextEntry = currentIndex > 0 ? sorted[currentIndex - 1] : undefined
+
+const prevSlug = prevEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
+const nextSlug = nextEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
+
+const prevLink = prevSlug && prevEntry ? { label: prevEntry.data.title, href: `${changelogPath}${prevSlug}/` } : undefined
+const nextLink = nextSlug && nextEntry ? { label: nextEntry.data.title, href: `${changelogPath}${nextSlug}/` } : undefined
+---
+
+<DocsLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  toc={toc}
+  previous={prevLink}
+  next={nextLink}
+  contentType="changelog"
+>
+  <div class="changelog-entry__header">
+    <a href={changelogPath} class="changelog-entry__back">
+      ← Registro de cambios
+    </a>
+    <h1>{entry.data.title}</h1>
+    <div class="changelog-entry__meta">
+      <time datetime={entry.data.date.toISOString().split("T")[0]}>
+        {entry.data.date.toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </time>
+      {entry.data.version && <span class="changelog-entry__version">{entry.data.version}</span>}
+      <span class="changelog-entry__maturity" data-maturity={entry.data.maturity}>
+        {entry.data.maturity}
+      </span>
+    </div>
+  </div>
+
+  <Content />
+</DocsLayout>
+
+<style>
+  .changelog-entry__back {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--color-muted, #6b7280);
+    text-decoration: none;
+    margin-bottom: 1rem;
+  }
+
+  .changelog-entry__back:hover {
+    color: var(--color-link, #2563eb);
+  }
+
+  .changelog-entry__meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-muted, #6b7280);
+  }
+
+  .changelog-entry__version {
+    font-family: var(--font-mono, "IBM Plex Mono", monospace);
+    background: var(--color-bg-muted, #f3f4f6);
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .changelog-entry__maturity {
+    text-transform: capitalize;
+  }
+</style>

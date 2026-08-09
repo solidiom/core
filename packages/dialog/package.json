@@ -41,7 +41,7 @@
       "description": "Modal or non-modal overlay window.",
       "category": "overlay",
       "registry": {
-        "status": "preview",
+        "status": "stable",
         "deliverables": [
           "primitive"
         ],

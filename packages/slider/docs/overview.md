@@ -4,7 +4,7 @@ title: Slider
 description: Numeric range input with thumb control.
 keywords: [control, input, numeric, range, runtime, slider, thumb]
 locale: en
-maturity: draft
+maturity: ga
 product: Slider
 productLayer: primitive
 status: draft

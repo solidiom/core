@@ -4,7 +4,7 @@ title: Command Palette
 description: Modal search and action launcher.
 keywords: [action, and, command, launcher, modal, navigation, palette]
 locale: en
-maturity: draft
+maturity: ga
 product: Command Palette
 productLayer: primitive
 status: draft

@@ -110,13 +110,6 @@ function listSourceFiles(dir: string): string[] {
   return files
 }
 
-function hasDemoEntry(demosIndex: string, name: string): boolean {
-  const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-  return new RegExp(`(?:^|[,\\{]\\s*)(?:["']${escapedName}["']|${escapedName}):\\s*\\{`, "m").test(
-    demosIndex,
-  )
-}
-
 /**
  * Whether `name` is listed as a supported primitive by a recipe profile.
  *
@@ -182,8 +175,8 @@ export function auditPrimitiveCompletion(
   const headlessOnlyNames = new Set(policy?.headlessOnly ?? [])
   const umbrellaSource = readText(join(root, "packages/primitives/src/index.ts"))
   const umbrellaPackage = readJson<PackageJson>(join(root, "packages/primitives/package.json"))
-  const demosIndex = readText(join(root, "apps/docs/src/demos/index.ts"))
-  const docsPackage = readJson<PackageJson>(join(root, "apps/docs/package.json"))
+  const demosIndex = ""
+  // docs package checks removed at CUT-003 — apps/docs/ no longer exists
 
   for (const primitive of primitives) {
     const { name } = primitive
@@ -288,11 +281,6 @@ export function auditPrimitiveCompletion(
       fail(name, "must be exported by @solidiom/primitives")
     if (umbrellaPackage?.dependencies?.[`@solidiom/${name}`] !== "workspace:*")
       fail(name, "must be an @solidiom/primitives dependency")
-    if (!hasDemoEntry(demosIndex, name)) fail(name, "must have a docs demo entry")
-    if (!existsSync(join(root, `apps/docs/src/demos/${name}-demo.tsx`)))
-      fail(name, `must have ${name}-demo.tsx`)
-    if (docsPackage?.dependencies?.[`@solidiom/${name}`] !== "workspace:*")
-      fail(name, "must be an @solidiom/docs dependency")
 
     for (const profile of [...RECIPE_PROFILES, "unocss"] as const) {
       const supported = hasRecipeSupport(root, profile, name)

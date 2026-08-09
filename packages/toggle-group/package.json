@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Toggle Group",
       "description": "Group of mutually-exclusive or multi-select toggle buttons.",
-      "category": "input"
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

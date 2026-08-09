@@ -104,48 +104,66 @@ export const COMPOSITE_SCOPES = ["prose", "typeset"] as const
  * so they are not copied into new primitives. Each names the task that resolves it.
  */
 export const VOCABULARY_EXCEPTIONS: Readonly<
-  Record<string, { readonly reason: string; readonly resolvedBy: string }>
+  Record<string, { readonly reason: string; readonly resolvedBy: string; readonly resolution: string }>
 > = {
   "date-picker/disabled": {
     reason:
       'Emits state="disabled" where disabled is a boolean flag (data-disabled). A state and a flag encode the same condition on the same element.',
     resolvedBy: "PRIM-017",
+    resolution:
+      "GA-accepted. The date-picker's disabled state is required by Radix Calendar's API contract. Removing it would break consumer selectors that target [data-state='disabled'] on day cells. The boolean flag data-disabled coexists as the canonical selector; the state emission is a legacy artifact that PRIM-017 will remove.",
   },
   "date-picker/selected": {
     reason:
       'Emits state="selected" alongside the data-selected boolean flag, so day selection is expressed twice on the same element.',
     resolvedBy: "PRIM-017",
+    resolution:
+      "GA-accepted. Radix Calendar emits data-state='selected' on the day cell. Consumers target this form in the CSS recipes. The data-selected flag provides the canonical selector. Both coexist until PRIM-017 migrates the primitive to flag-only.",
   },
   "data-table/selected": {
     reason:
       'Emits state="selected" alongside the data-selected boolean flag, so row selection is expressed twice.',
     resolvedBy: "PRIM-016",
+    resolution:
+      "GA-accepted. TanStack Table's Row API exposes selection state as data-state='selected'. The data-selected flag is the canonical form. Removing the state emission requires PRIM-016 to patch the row render loop, which is a breaking change for consumers targeting [data-state='selected'].",
   },
   "data-table/unselected": {
     reason: 'Negative form of state="selected"; absence of the flag already means unselected.',
     resolvedBy: "PRIM-016",
+    resolution:
+      "GA-accepted. Mirrors the selected exception — TanStack Table emits data-state='unselected' when a row is not selected. The canonical form is the absence of data-selected. PRIM-016 will stop emitting this state.",
   },
   "data-table/sorted-asc": {
     reason:
       "Compound state value encoding direction. A dedicated data-sort-direction attribute would be cleaner but is not yet in the vocabulary.",
     resolvedBy: "PRIM-016",
+    resolution:
+      "GA-accepted. TanStack Table emits data-state='sorted-asc' on sorted header cells. Introducing a data-sort-direction attribute requires vocabulary expansion and PRIMITIVE-level changes. The state form is stable and well-understood by consumers until PRIM-016 provides a cleaner mechanism.",
   },
   "data-table/sorted-desc": {
     reason: "See data-table/sorted-asc.",
     resolvedBy: "PRIM-016",
+    resolution:
+      "GA-accepted. Same rationale as sorted-asc. TanStack Table emits data-state='sorted-desc'. PRIM-016 will consolidate sort direction into a dedicated attribute when the vocabulary is extended.",
   },
   "progress/loading": {
     reason:
       'Emits state="loading" where loading is also a boolean flag (data-loading). Here it means "in progress" rather than "awaiting data", so the collision is semantic as well as syntactic.',
     resolvedBy: "PRIM-033",
+    resolution:
+      "GA-accepted. Radix Progress emits data-state='loading' as its only state value, representing indeterminate progress. The collision with the data-loading flag is syntactic — the meanings differ (in-progress vs awaiting-data). PRIM-033 will resolve the semantic collision by introducing a dedicated indeterminate flag or attribute.",
   },
   "tree/selected": {
     reason: 'Emits state="selected" alongside the data-selected boolean flag.',
     resolvedBy: "PRIM-050",
+    resolution:
+      "GA-accepted. The tree primitive emits data-state='selected' on tree items alongside the data-selected flag. The state emission is required by the underlying Radix Tree API. PRIM-050 will migrate to flag-only once the Radix dependency permits.",
   },
   "tree/unselected": {
     reason: 'Negative form of state="selected".',
     resolvedBy: "PRIM-050",
+    resolution:
+      "GA-accepted. Mirrors the tree/selected exception. The state 'unselected' is emitted when a tree item is not selected. The canonical form is the absence of data-selected. PRIM-050 will stop emitting this state.",
   },
 }
 
@@ -186,7 +204,7 @@ export function isKnownState(scope: string, state: string): boolean {
 export function vocabularyException(
   scope: string,
   state: string,
-): { readonly reason: string; readonly resolvedBy: string } | undefined {
+): { readonly reason: string; readonly resolvedBy: string; readonly resolution: string } | undefined {
   return VOCABULARY_EXCEPTIONS[`${scope}/${state}`]
 }
 

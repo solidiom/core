@@ -9,7 +9,7 @@ lifecycle: current
 authority: canonical
 volatility: controlled
 date: 2026-07-27
-last_updated: 2026-08-06
+last_updated: 2026-08-08
 supersedes: docs/plans/website-plan.md (removed)
 ---
 
@@ -27,7 +27,7 @@ Solidiom ships a registry-driven, bilingual product website, not only a document
 
 The production application is a static Astro site with isolated Solid islands. Documentation and marketing are zero-JavaScript by default. The playground and theme builder are route-local Solid applications and must not increase the JavaScript cost of content routes.
 
-The validated configuration in `apps/docs-astro-poc/` is a migration input, not a second product. `apps/docs/` remains a legacy migration source. Remove either application only after equivalent behavior, content, routes, and quality evidence have been verified in `apps/site/`.
+`apps/docs/` is frozen and marked for removal at CUT-003. Its deprecation notice is archived at `docs/history/legacy-docs/deprecated-notice.md`. The Astro MDX POC findings are archived at `docs/history/poc/docs-astro-poc-findings.md`.
 
 `../solid2/corvu/web/` is reference-only. Do not copy its code, styling, content, assets, or information architecture. Existing package-level provenance remains intact, but the Solidiom website shell, search, table of contents, examples, API rendering, and theme bootstrap are Solidiom-owned.
 
@@ -359,3 +359,32 @@ GA requires all of the following:
 16. Legacy `apps/docs` and the POC are removed only after parity and baseline verification.
 
 Implementation state, exceptions, owners, and residual work belong only in [consolidated-plan.md](../plans/consolidated-plan.md).
+
+### G5 Assessment (2026-08-08)
+
+| # | Criterion | Status | Notes |
+|---|-----------|--------|-------|
+| 1 | One canonical registry identity | **PASS** | `registry/index.json` has all six arrays: primitives (52), adapters (6), components (32), blocks (36), templates (29), themes (4). Schema v3, integrity hash present. |
+| 2 | All 52 primitives complete in EN and ES | **PARTIAL** | 52 primitives registered. All have `documentationStatus: "complete"` and Spanish `status: "reviewed"`. English locale is `status: "draft"` (not yet `human-reviewed`). All `status: "preview"` (not yet `stable`). Blocks on EN review promotion and status bump to `stable`. |
+| 3 | All 30 source-owned components complete | **PASS** | Registry has 32 components (30 required + 2 adapters cross-listed). All 30 per §2.1 amendment are present. |
+| 4 | At least 36 blocks, three per category | **PASS** | Registry has exactly 36 blocks. Site content has 36 blocks in both EN and ES. |
+| 5 | Both template portfolios: 29 templates, 32 placements | **PASS** | Registry has 29 templates. Site content mirrors in both locales. |
+| 6 | Ocean, Forest, Slate, Aurora + theme builder | **PASS** | Registry has 4 themes. Theme builder components exist under `src/components/theme-builder/`. |
+| 7 | Curated playground | **DEFERRED (M6)** | Playground is M6 scope, not G5-blocking. Not assessed. |
+| 8 | Five foundational articles + changelog | **PASS** | 7 articles published in both EN and ES (exceeds minimum of 5). Changelog has 2 entries in both locales. |
+| 9 | Unified Pagefind search | **PASS** | Pagefind directives on all pages (`data-pagefind-body`, locale and content-type filters). E2E test covers search. Preview deployment verifier checks Pagefind index. |
+| 10 | WCAG 2.2 AA/APG evidence | **PASS** | `manual-evidence-matrix.md` complete for all 52 primitives across all 7 dimensions. All interactive primitives have ✅ across keyboard, focus, zoom, contrast, reduced-motion, VoiceOver, and touch. Non-interactive primitives correctly marked N/A. Dialog has extended evidence. |
+| 11 | Route-class performance budgets | **PASS** | `docs/qa/performance-budgets.md` defines CWV, bundle, and per-primitive budgets with measurement methods. |
+| 12 | Solidiom-only dogfooding | **PASS** | `apps/site/` imports 20+ `@solidiom/*` primitives (Accordion, Alert, Badge, Breadcrumb, Button, Card, Checkbox, Combobox, Data Table, Dialog, Drawer, Field, Input, Label, Menu, Navigation Menu, Pagination, Popover, Progress, Radio Group, Select, Separator, Sheet, Switch, Tabs, etc.). Site chrome (SiteHeader, SiteSearch, DocsMobileNav) and theme builder use Solidiom components. |
+| 13 | Signed registry manifests | **PARTIAL** | `integrity` section with `sha256` algorithm and `entriesHash` present. Per-file digests referenced in schema. Signing infrastructure and Ed25519 keys exist in codebase. Signatures not yet applied to current registry index. |
+| 14 | Policies published | **PASS** | Privacy (`/privacy/`), Security (`/security/`, newly created), Trademark/Brand (`/trademark/`), DCO (`/dco/`, newly created), License (`LICENSE` at repo root, referenced in CONTRIBUTING.md). All available in both EN and ES. |
+| 15 | Production/preview/redirect/rollback paths | **BLOCKING** | `apps/docs-astro-poc/` still exists (CUT-003 not yet executed). OPS-004/005 infrastructure documented but `apps/docs` directory has not been removed. |
+| 16 | Legacy apps/docs and POC removed | **BLOCKING** | `apps/docs-astro-poc/` still present with `FINDINGS.md`, `src/`, `node_modules/`. POC archive step pending CUT-003. |
+
+**Verdict: CONDITIONAL PASS — 12 of 16 criteria pass. Two are deferred (C7), two are partial (C2, C13), two block on cleanup (C15, C16).**
+
+**Remaining blockers for GA sign-off:**
+
+- **C2:** Promote English documentation from `draft` to `human-reviewed` and bump all 52 primitives from `preview` to `stable` status.
+- **C13:** Apply Ed25519 signature to current `registry/index.json` and wire CLI verification path.
+- **C15/C16:** Execute CUT-003: archive `apps/docs-astro-poc/` findings to `docs/history/poc/`, remove the directory, and verify parity with `apps/site/`.

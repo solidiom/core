@@ -4,7 +4,7 @@ title: Accordion
 description: Conjunto apilado verticalmente de secciones colapsables con modos de expansión simple o múltiple.
 keywords: [acordeón, colapsable, secciones, expandir, colapsar]
 locale: es
-maturity: draft
+maturity: ga
 product: Accordion
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/accordion"
 primitive: accordion
 section: overview
 translationSourceHash: "1d44ce42cd4fb6fa99edf13b6930bdb02c651db9754484b682ff0b63fa6c192f"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Accordion no tiene primitivos hermanos; se compone con otros pero no posee un contrato inter-primitivo.

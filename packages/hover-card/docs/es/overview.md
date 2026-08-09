@@ -4,7 +4,7 @@ title: Hover Card
 description: Content preview on hover with open delay and anchored positioning.
 keywords: [anchored, and, card, content, delay, hover, open]
 locale: es
-maturity: draft
+maturity: ga
 product: Hover Card
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/hover-card"
 primitive: hover-card
 section: overview
 translationSourceHash: "fc79c03b1bf6cfe69dca9860d23b61462539a08361b4b974822557d9c0acee0c"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Hover Card no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.

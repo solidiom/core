@@ -4,7 +4,7 @@ title: Data Table
 description: Tabla ordenable sin estilos con visibilidad de columnas, selección de filas y delegación de orden basada en adaptador.
 keywords: [tabla, datos, ordenar, columnas, filas, selección]
 locale: es
-maturity: beta
+maturity: ga
 product: Data Table
 productLayer: primitive
 status: published
@@ -12,7 +12,9 @@ package: "@solidiom/data-table"
 primitive: data-table
 section: overview
 translationSourceHash: "33b29388b7cd2e801b3e0c70b1efdaf1f6e5e238b0f0419f50e00308153ec530"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Data Table no tiene primitivos hermanos. Se compone con Checkbox, Pagination y motores adaptadores pero no posee un contrato inter-primitivo.

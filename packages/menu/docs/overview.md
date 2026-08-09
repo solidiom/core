@@ -4,7 +4,7 @@ title: Menu
 description: Action list triggered by a button.
 keywords: [action, button, list, menu, navigation, runtime, triggered]
 locale: en
-maturity: draft
+maturity: ga
 product: Menu
 productLayer: primitive
 status: draft

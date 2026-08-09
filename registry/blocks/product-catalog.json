@@ -1,63 +1,20 @@
 {
   "name": "product-catalog",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Product Catalog",
-  "description": "User browses a product catalog with grid/list views, category filtering, sorting, and product detail previews. Implements loading, empty, error, and restricted states.",
-  "category": "COMMERCE",
-  "status": "preview",
-  "blockId": "BLOCK-COMMERCE-01",
+  "description": "Product Catalog block",
+  "status": "stable",
   "deliverables": [
-    "block"
+    "source"
   ],
-  "componentDependencies": [
-    "@solidiom/button",
-    "@solidiom/input",
-    "@solidiom/card",
-    "@solidiom/alert",
-    "@solidiom/select",
-    "@solidiom/avatar",
-    "@solidiom/checkbox",
-    "@solidiom/popover",
-    "@solidiom/pagination",
-    "@solidiom/spinner"
-  ],
-  "requiredStates": [
-    "loading",
-    "empty",
-    "error",
-    "restricted"
-  ],
-  "source": {
-    "files": [
-      "packages/blocks/product-catalog/source/product-catalog.tsx",
-      "packages/blocks/product-catalog/source/index.ts"
-    ]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/product-catalog/source/product-catalog.tsx": "5c5dac54f500f38a2e895c2955ce0d05c1dd0a30242948fcc44e2e2ac3a23a49",
-      "packages/blocks/product-catalog/source/index.ts": "3c3e8c06a4def7a282c9485aa2489332effd3c9c78ea3d8920c5ff28f0a90ca3"
-    },
-    "lastGenerated": "2026-08-06T21:00:00.000Z"
-  },
-  "documentation": {
-    "status": "complete",
-    "locales": {
-      "en": {
-        "status": "draft"
-      },
-      "es": {
-        "status": "draft"
-      }
-    }
-  },
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
   "searchKeywords": [
-    "product",
+    "block",
     "catalog",
-    "commerce",
-    "browse",
-    "productos",
-    "catalogo"
+    "product",
+    "product-catalog"
   ]
 }

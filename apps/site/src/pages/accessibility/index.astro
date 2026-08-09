@@ -1,0 +1,259 @@
+---
+import { getEntry, render } from "astro:content"
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import { getRegistryPrimitives, getAccessibilityEvidence } from "../../lib/catalog"
+import { localePrefix, type Locale } from "../../lib/locale"
+
+const locale: Locale = "en"
+const prefix = localePrefix(locale)
+const entry = await getEntry("pages", `${locale}/pages/accessibility`)
+if (!entry) throw new Error(`Missing content: ${locale}/pages/accessibility`)
+const { Content } = await render(entry)
+
+const primitives = getRegistryPrimitives()
+const evidenceData = primitives.map((p) => ({
+  name: p.name,
+  href: `${prefix}/primitives/${p.name}/accessibility/`,
+  evidence: getAccessibilityEvidence(p.name),
+}))
+
+const totalScanned = evidenceData.filter((e) => e.evidence !== undefined).length
+const totalPasses = evidenceData.reduce((sum, e) => sum + (e.evidence?.summary.passes ?? 0), 0)
+const totalViolations = evidenceData.reduce(
+  (sum, e) => sum + (e.evidence?.summary.violations ?? 0),
+  0,
+)
+const totalIncomplete = evidenceData.reduce(
+  (sum, e) => sum + (e.evidence?.summary.incomplete ?? 0),
+  0,
+)
+const allPass = totalViolations === 0 && totalScanned > 0
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <div class="accessibility-page">
+    <div
+      class="prose"
+      data-pagefind-body
+      data-pagefind-filter-locale={locale}
+      data-pagefind-filter-content_type="page"
+      data-pagefind-meta={`title:${entry.data.title}`}
+    >
+      <Content />
+    </div>
+
+    <section class="a11y-summary" aria-label="Accessibility evidence summary">
+      <h2>Evidence Summary</h2>
+      <div class="a11y-summary__grid">
+        <div class="a11y-summary__stat">
+          <span class="a11y-summary__stat-value">{totalScanned}</span>
+          <span class="a11y-summary__stat-label">Primitives scanned</span>
+        </div>
+        <div class="a11y-summary__stat">
+          <span class="a11y-summary__stat-value">{totalPasses}</span>
+          <span class="a11y-summary__stat-label">Checks passed</span>
+        </div>
+        <div class="a11y-summary__stat">
+          <span class="a11y-summary__stat-value">{totalViolations}</span>
+          <span class="a11y-summary__stat-label">Violations</span>
+        </div>
+        <div class="a11y-summary__stat">
+          <span class="a11y-summary__stat-value">{totalIncomplete}</span>
+          <span class="a11y-summary__stat-label">Incomplete</span>
+        </div>
+      </div>
+      {allPass && (
+        <p class="a11y-summary__status a11y-summary__status--pass">
+          All {totalScanned} scanned primitives passed with zero violations.
+        </p>
+      )}
+    </section>
+
+    <section class="a11y-primitives" aria-label="Per-primitive evidence">
+      <h2>Per-Primitive Evidence</h2>
+      <table class="a11y-primitives__table">
+        <thead>
+          <tr>
+            <th scope="col">Primitive</th>
+            <th scope="col">Passes</th>
+            <th scope="col">Violations</th>
+            <th scope="col">Incomplete</th>
+            <th scope="col">Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          {evidenceData.map((item) => (
+            <tr>
+              <td>
+                <a href={item.href}>{item.name}</a>
+              </td>
+              <td>{item.evidence?.summary.passes ?? "—"}</td>
+              <td>{item.evidence?.summary.violations ?? "—"}</td>
+              <td>{item.evidence?.summary.incomplete ?? "—"}</td>
+              <td>
+                {item.evidence !== undefined && (
+                  <span
+                    class={`a11y-primitives__badge a11y-primitives__badge--${item.evidence.summary.outcome}`}
+                  >
+                    {item.evidence.summary.outcome}
+                  </span>
+                )}
+                {item.evidence === undefined && "—"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .accessibility-page {
+    max-width: var(--prose-max-width, 75ch);
+    margin-inline: auto;
+    padding: 2rem 1rem;
+  }
+
+  .a11y-summary {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border, #e5e7eb);
+    border-radius: 0.5rem;
+    background: var(--surface, #fafafa);
+  }
+
+  .a11y-summary h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .a11y-summary__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .a11y-summary__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.25rem;
+  }
+
+  .a11y-summary__stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .a11y-summary__stat-label {
+    font-size: 0.875rem;
+    color: var(--muted, #6b7280);
+  }
+
+  .a11y-summary__status {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .a11y-summary__status--pass {
+    background: var(--success-bg, #f0fdf4);
+    color: var(--success-fg, #166534);
+    border: 1px solid var(--success-border, #bbf7d0);
+  }
+
+  .a11y-primitives {
+    margin-top: 3rem;
+  }
+
+  .a11y-primitives h2 {
+    margin-bottom: 1rem;
+  }
+
+  .a11y-primitives__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .a11y-primitives__table th,
+  .a11y-primitives__table td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border, #e5e7eb);
+    text-align: left;
+  }
+
+  .a11y-primitives__table th {
+    font-weight: 600;
+    background: var(--surface, #f9fafb);
+  }
+
+  .a11y-primitives__table td a {
+    color: var(--accent, #2563eb);
+    text-decoration: none;
+  }
+
+  .a11y-primitives__table td a:hover {
+    text-decoration: underline;
+  }
+
+  .a11y-primitives__badge {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .a11y-primitives__badge--pass {
+    background: var(--success-bg, #f0fdf4);
+    color: var(--success-fg, #166534);
+  }
+
+  .a11y-primitives__badge--fail {
+    background: var(--error-bg, #fef2f2);
+    color: var(--error-fg, #991b1b);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .a11y-summary {
+      border-color: #374151;
+      background: #111827;
+    }
+
+    .a11y-summary__stat-label {
+      color: #9ca3af;
+    }
+
+    .a11y-summary__status--pass {
+      background: #052e16;
+      color: #86efac;
+      border-color: #14532d;
+    }
+
+    .a11y-primitives__table th {
+      background: #111827;
+    }
+
+    .a11y-primitives__table th,
+    .a11y-primitives__table td {
+      border-color: #374151;
+    }
+
+    .a11y-primitives__badge--pass {
+      background: #052e16;
+      color: #86efac;
+    }
+
+    .a11y-primitives__badge--fail {
+      background: #450a0a;
+      color: #fca5a5;
+    }
+  }
+</style>

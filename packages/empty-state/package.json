@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Empty State",
       "description": "Placeholder for empty content areas.",
-      "category": "feedback"
+      "category": "feedback",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

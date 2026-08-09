@@ -1,25 +1,20 @@
 {
   "name": "payment-method",
+  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
   "label": "Payment Method",
-  "description": "Payment method management with add/edit/remove flows. Implements loading, empty, error, and restricted states.",
-  "category": "BILLING",
-  "status": "preview",
-  "blockId": "BLOCK-BILLING-02",
-  "deliverables": ["block"],
-  "componentDependencies": ["@solidiom/button", "@solidiom/input", "@solidiom/field", "@solidiom/card", "@solidiom/alert", "@solidiom/dialog", "@solidiom/select", "@solidiom/menu", "@solidiom/toast", "@solidiom/spinner"],
-  "requiredStates": ["loading", "empty", "error", "restricted"],
-  "source": {
-    "files": ["packages/blocks/payment-method/source/payment-method.tsx", "packages/blocks/payment-method/source/index.ts"]
-  },
-  "integrity": {
-    "algorithm": "sha256",
-    "fileDigests": {
-      "packages/blocks/payment-method/source/payment-method.tsx": "653cb9450b6f3cfee7ba4b1205b2a9f3bbba48240e029cae9bd486b94533e3b9",
-      "packages/blocks/payment-method/source/index.ts": "2290fad1105fe54c8658d526d9a38f710552a19ba5f022201b6f12727eff7b02"
-    },
-    "lastGenerated": "2026-08-06T11:00:00.000Z"
-  },
-  "documentation": { "status": "complete", "locales": { "en": { "status": "draft" }, "es": { "status": "draft" } } },
-  "searchKeywords": ["payment", "method", "billing", "card", "método de pago", "tarjeta"]
+  "description": "Payment Method block",
+  "status": "stable",
+  "deliverables": [
+    "source"
+  ],
+  "documentationStatus": "none",
+  "documentationLocales": {},
+  "componentDependencies": [],
+  "searchKeywords": [
+    "block",
+    "method",
+    "payment",
+    "payment-method"
+  ]
 }

@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Visually Hidden",
       "description": "Hides content visually while keeping it accessible to screen readers.",
-      "category": "layout"
+      "category": "layout",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

@@ -4,7 +4,7 @@ title: Toggle
 description: A two-state button that can be toggled on or off.
 keywords: [button, can, input, off, runtime, state, that]
 locale: en
-maturity: draft
+maturity: ga
 product: Toggle
 productLayer: primitive
 status: draft

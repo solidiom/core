@@ -4,7 +4,7 @@ title: Progress
 description: Determinate and indeterminate progress indicator.
 keywords: [and, determinate, feedback, indeterminate, indicator, progress, runtime]
 locale: es
-maturity: draft
+maturity: ga
 product: Progress
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/progress"
 primitive: progress
 section: overview
 translationSourceHash: "87292d0c1a3889924f816f95639d7dad74e480c8c11e140953954966f06349a7"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Progress es un primitivo autónomo sin sub-primitivos compuestos.

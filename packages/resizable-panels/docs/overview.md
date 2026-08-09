@@ -4,7 +4,7 @@ title: Resizable Panels
 description: Drag-to-resize panel layout.
 keywords: [drag, layout, panel, panels, resizable, resize, runtime]
 locale: en
-maturity: draft
+maturity: ga
 product: Resizable Panels
 productLayer: primitive
 status: draft

@@ -25,7 +25,7 @@
   "label": "Combobox",
   "description": "Text input with autocomplete dropdown.",
   "category": "input",
-  "status": "preview",
+  "status": "stable",
   "deliverables": [
     "primitive"
   ],
@@ -38,7 +38,7 @@
     "evidenceIds": [
       "axe-combobox-scan-v1"
     ],
-    "lastReviewed": "2026-08-03T16:32:53.812Z"
+    "lastReviewed": "2026-08-07T18:37:43.168Z"
   },
   "documentation": {
     "status": "complete",
@@ -47,7 +47,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "reviewed",
+        "lastUpdated": "2026-08-07T05:00:00.000Z"
       }
     }
   },
@@ -81,11 +82,11 @@
       "src/combobox.tsx": "a815a32fa87440d20dccd5a48c62d10bcf73ad4f0cd2166c80adb5e33a7d38dc",
       "src/index.tsx": "29894f64708d6022ada60f6167da86e259fac7d09bd578c1fa7df4bb071171e7"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-08T03:04:45.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/combobox"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-08T03:04:45.000Z"
 }

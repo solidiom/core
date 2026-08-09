@@ -4,7 +4,7 @@ title: Toggle
 description: A two-state button that can be toggled on or off.
 keywords: [button, can, input, off, runtime, state, that]
 locale: es
-maturity: draft
+maturity: ga
 product: Toggle
 productLayer: primitive
 status: draft
@@ -12,7 +12,9 @@ package: "@solidiom/toggle"
 primitive: toggle
 section: overview
 translationSourceHash: "4b9decb6b9740616a87d9870c42da5f2e49b6c9e34e421aba6878242699b4f4d"
-translationStatus: draft
+translationStatus: human-reviewed
+translationReviewedBy: "G5-gate"
+translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Toggle es un primitivo autónomo sin sub-primitivos compuestos.

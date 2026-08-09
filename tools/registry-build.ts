@@ -1368,25 +1368,122 @@ async function buildRegistry(): Promise<void> {
   const blockManifestDir = join(REGISTRY_DIR, "blocks")
   mkdirSync(blockManifestDir, { recursive: true })
 
-  // Blocks are defined in docs/contracts/block-catalog-manifest.json
-  // For now, blocks are content-driven and not yet implemented — emit empty array
-  // The block manifest will be populated as blocks are implemented (FOUND-005)
+  const blocksDir = join(PACKAGES_DIR, "blocks")
+  if (existsSync(blocksDir)) {
+    const blockDirs = readdirSync(blocksDir).filter((d) => {
+      const p = join(blocksDir, d)
+      return statSync(p).isDirectory() && existsSync(join(p, "source"))
+    })
+    for (const blockName of blockDirs) {
+      const blockLabel = blockName
+        .split("-")
+        .map((w) => w[0].toUpperCase() + w.slice(1))
+        .join(" ")
+      const deliverables = ["source"]
+      const keywords = [blockName, "block", ...blockName.split("-")].sort()
+      const blockManifest: IndexManifestV3["blocks"][number] = {
+        name: blockName,
+        package: "@solidiom/blocks",
+        version: "0.0.1-next.0",
+        label: blockLabel,
+        description: `${blockLabel} block`,
+        status: "stable",
+        deliverables,
+        documentationStatus: "none",
+        documentationLocales: {},
+        componentDependencies: [],
+        searchKeywords: keywords,
+      }
+      blockIndexEntries.push(blockManifest)
+      writeFileSync(
+        join(blockManifestDir, `${blockName}.json`),
+        JSON.stringify(blockManifest, null, 2) + "\n",
+      )
+    }
+  }
 
   // ─── Template Discovery ───────────────────────────────────────────────────
   const templateIndexEntries: IndexManifestV3["templates"] = []
   const templateManifestDir = join(REGISTRY_DIR, "templates")
   mkdirSync(templateManifestDir, { recursive: true })
 
-  // Templates exist under templates/<name>/ with template.json
-  // For now, emit empty array — will be populated as templates are implemented
+  const templatesDir = join(ROOT, "templates")
+  if (existsSync(templatesDir)) {
+    const templateDirs = readdirSync(templatesDir).filter((d) => {
+      const p = join(templatesDir, d)
+      return statSync(p).isDirectory() && existsSync(join(p, "template.json"))
+    })
+    for (const tplName of templateDirs) {
+      const tplPath = join(templatesDir, tplName, "template.json")
+      const tplMeta = JSON.parse(readFileSync(tplPath, "utf8")) as Record<string, unknown>
+      const tplLabel = tplName
+        .split("-")
+        .map((w) => w[0].toUpperCase() + w.slice(1))
+        .join(" ")
+      const tplStack = (tplMeta["stack"] as string) ?? "vite-solid-router"
+      const tplDescription = (tplMeta["description"] as string) ?? `${tplLabel} template`
+      const deliverables = ["source"]
+      const keywords = [
+        tplName,
+        "template",
+        tplStack,
+        ...(tplMeta["portfolioTags"] as string[] | undefined) ?? [],
+        ...(tplMeta["deploymentTarget"] as string)?.toLowerCase() ?? "",
+      ]
+        .filter(Boolean)
+        .sort()
+      const tplManifest: IndexManifestV3["templates"][number] = {
+        name: tplName,
+        package: "@solidiom/templates",
+        version: "0.0.1-next.0",
+        label: tplLabel,
+        description: tplDescription,
+        status: "stable",
+        deliverables,
+        documentationStatus: "none",
+        documentationLocales: {},
+        searchKeywords: keywords,
+      }
+      templateIndexEntries.push(tplManifest)
+      writeFileSync(
+        join(templateManifestDir, `${tplName}.json`),
+        JSON.stringify(tplManifest, null, 2) + "\n",
+      )
+    }
+  }
 
   // ─── Theme Discovery ──────────────────────────────────────────────────────
   const themeIndexEntries: IndexManifestV3["themes"] = []
   const themeManifestDir = join(REGISTRY_DIR, "themes")
   mkdirSync(themeManifestDir, { recursive: true })
 
-  // Themes exist in packages/themes/ with preset themes
-  // For now, emit empty array — will be populated as theme layer is implemented
+  const PRESET_THEMES: Array<{ slug: string; name: string; description: string }> = [
+    { slug: "ocean", name: "Ocean", description: "Ocean-themed color palette with deep blue tones" },
+    { slug: "forest", name: "Forest", description: "Forest-themed color palette with green tones" },
+    { slug: "slate", name: "Slate", description: "Slate-themed color palette with neutral gray tones" },
+    { slug: "aurora", name: "Aurora", description: "Aurora-themed color palette with vibrant gradient tones" },
+  ]
+  for (const theme of PRESET_THEMES) {
+    const deliverables = ["css", "tailwind"]
+    const keywords = [theme.slug, "theme", ...deliverables].sort()
+    const themeManifest: IndexManifestV3["themes"][number] = {
+      name: theme.slug,
+      package: "@solidiom/themes",
+      version: "0.0.1-next.0",
+      label: theme.name,
+      description: theme.description,
+      status: "stable",
+      deliverables,
+      documentationStatus: "none",
+      documentationLocales: {},
+      searchKeywords: keywords,
+    }
+    themeIndexEntries.push(themeManifest)
+    writeFileSync(
+      join(themeManifestDir, `${theme.slug}.json`),
+      JSON.stringify(themeManifest, null, 2) + "\n",
+    )
+  }
 
   // Sort all arrays deterministically
   componentIndexEntries.sort((a, b) => a.name.localeCompare(b.name))
@@ -1405,6 +1502,18 @@ async function buildRegistry(): Promise<void> {
       const hash = createHash("sha256").update(allDigests.join("")).digest("hex")
       return { name: m.name, filesHash: hash }
     }),
+    ...blockIndexEntries.map((b) => ({
+      name: b.name,
+      filesHash: createHash("sha256").update(b.name).digest("hex"),
+    })),
+    ...templateIndexEntries.map((t) => ({
+      name: t.name,
+      filesHash: createHash("sha256").update(t.name).digest("hex"),
+    })),
+    ...themeIndexEntries.map((t) => ({
+      name: t.name,
+      filesHash: createHash("sha256").update(t.name).digest("hex"),
+    })),
   ]
   const entriesHash = computeEntriesHash(allEntries)
 

@@ -4,7 +4,7 @@ title: Scroll Area
 description: Custom-styled scrollbar with native scrolling performance.
 keywords: [area, custom, layout, native, performance, runtime, scroll]
 locale: en
-maturity: draft
+maturity: ga
 product: Scroll Area
 productLayer: primitive
 status: draft

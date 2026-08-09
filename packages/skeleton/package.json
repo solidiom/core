@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Skeleton",
       "description": "Loading placeholder with pulse animation.",
-      "category": "feedback"
+      "category": "feedback",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

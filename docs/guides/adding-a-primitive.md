@@ -27,7 +27,6 @@ packages/recipes-tailwind/    ← Tailwind recipe (if recipe-classified)
 packages/recipes-css/         ← Plain CSS recipe (if recipe-classified)
 packages/recipes-unocss/      ← UnoCSS supportedPrimitives entry (if recipe-classified)
 packages/primitives/          ← umbrella re-export
-apps/docs/                    ← demo + docs dependency
 registry/<name>.json          ← auto-generated manifest
 tools/primitive-completion-policy.json ← recipe vs headless-only classification
 ```
@@ -311,7 +310,9 @@ export * as <Name> from "@solidiom/<name>"
 
 **`packages/primitives/package.json`** — add `"@solidiom/<name>": "workspace:*"` to `dependencies`.
 
-## Step 8 — Add a demo to the docs app
+## Step 8 — (Legacy) Demo for the docs app
+
+> **Note:** The legacy `apps/docs/` app is frozen. This step is retained for historical reference only. New primitives do not need a demo here — `apps/site/` generates examples from registry and API artifacts at build time.
 
 ### `apps/docs/src/demos/<name>-demo.tsx`
 
@@ -334,7 +335,9 @@ function <Name>Example() {
 `
 ```
 
-### Wire into docs
+### Wire into docs (legacy only)
+
+> These edits are for the frozen `apps/docs/` app. Only required if maintaining the legacy site.
 
 | File                           | Change                                                        |
 | ------------------------------ | ------------------------------------------------------------- |
@@ -404,7 +407,7 @@ Copy this into your PR description:
 - [ ] Tailwind + CSS recipes wired (if recipe-classified)
 - [ ] UnoCSS added to supportedPrimitives (if recipe-classified)
 - [ ] Umbrella: `@solidiom/primitives` re-exports and depends on the new primitive
-- [ ] Docs: demo file, demos/index.ts entry, apps/docs/package.json dependency
+- [ ] (Legacy) Docs: demo file, demos/index.ts entry, apps/docs/package.json dependency
 - [ ] `pnpm registry:build` generates `registry/<name>.json`
 - [ ] `pnpm primitive:gate -- <name>` passes
 ```

@@ -38,7 +38,10 @@
     "metadata": {
       "label": "Avatar",
       "description": "User avatar with image and fallback.",
-      "category": "display"
+      "category": "display",
+      "registry": {
+        "status": "stable"
+      }
     }
   }
 }

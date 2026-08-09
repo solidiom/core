@@ -4,7 +4,7 @@ title: Avatar
 description: User avatar with image and fallback support.
 keywords: [avatar, image, fallback, initials, user]
 locale: en
-maturity: draft
+maturity: ga
 product: Avatar
 productLayer: primitive
 status: draft

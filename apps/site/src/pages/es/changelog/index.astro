@@ -1,0 +1,130 @@
+---
+import { getCollection, render } from "astro:content"
+import DocsLayout from "@layouts/DocsLayout.astro"
+
+const changelogPath = "/es/changelog/"
+const breadcrumbTitle = "Registro de Cambios"
+
+const entries = await getCollection("changelog", (entry) => entry.data.locale === "es")
+const sortedEntries = [...entries].sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+)
+
+const formatDate = (dateVal: Date | string): string => {
+  const d = typeof dateVal === "string" ? new Date(dateVal) : dateVal
+  return d.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+}
+---
+
+<DocsLayout
+  title={breadcrumbTitle}
+  description="Historial de lanzamientos y cambios de Solidiom."
+  contentType="changelog"
+>
+  <nav aria-label="Navegación del registro de cambios">
+    <ol class="changelog-list">
+      {sortedEntries.map((entry) => {
+        const slug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
+        const href = `${changelogPath}${slug}/`
+        return (
+          <li class="changelog-list__item">
+            <a href={href} class="changelog-list__link">
+              <header class="changelog-list__header">
+                <h2 class="changelog-list__title">{entry.data.title}</h2>
+                <time class="changelog-list__date" datetime={entry.data.date.toISOString().split("T")[0]}>
+                  {formatDate(entry.data.date)}
+                </time>
+              </header>
+              <p class="changelog-list__description">{entry.data.description}</p>
+              <footer class="changelog-list__meta">
+                {entry.data.version && (
+                  <span class="changelog-list__version" data-version={entry.data.version}>
+                    {entry.data.version}
+                  </span>
+                )}
+                <span class="changelog-list__status" data-status={entry.data.maturity}>
+                  {entry.data.maturity}
+                </span>
+              </footer>
+            </a>
+          </li>
+        )
+      })}
+    </ol>
+  </nav>
+</DocsLayout>
+
+<style>
+  .changelog-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .changelog-list__item {
+    border-bottom: 1px solid var(--color-border, #e5e7eb);
+  }
+
+  .changelog-list__link {
+    display: block;
+    padding: 1.5rem 0;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .changelog-list__link:first-of-type {
+    padding-top: 0;
+  }
+
+  .changelog-list__link:hover {
+    text-decoration: underline;
+  }
+
+  .changelog-list__header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .changelog-list__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .changelog-list__date {
+    font-size: 0.875rem;
+    color: var(--color-muted, #6b7280);
+    white-space: nowrap;
+  }
+
+  .changelog-list__description {
+    margin: 0 0 0.5rem 0;
+    color: var(--color-body, #374151);
+  }
+
+  .changelog-list__meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .changelog-list__version {
+    font-family: var(--font-mono, "IBM Plex Mono", monospace);
+    font-size: 0.75rem;
+    background: var(--color-bg-muted, #f3f4f6);
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .changelog-list__status {
+    font-size: 0.75rem;
+    text-transform: capitalize;
+    color: var(--color-muted, #6b7280);
+  }
+</style>
