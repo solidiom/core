@@ -86,7 +86,7 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 | 1 — primitive/package alpha | v0.7.x–v0.8.x | Complete |
 | 2 — distribution/enterprise beta | v0.9.x–v0.10.x | Complete |
 | 3 — beta stabilization/release | `v1.0.0-beta.x` | Complete — gate 21/21, release workflow live |
-| 3A — compile-time incubation | later beta.x | Task 67; required before first RC |
+| 3A — compile-time incubation | later beta.x | Complete — 21 tests, all transforms verified |
 | 3B — generative authoring | unversioned | Task 3B.8; independent of release |
 | 4 — Solid 2 GA / stable v1 | `v1.0.x` | Task 70 gate; Task 73 release |
 | 5 — strict enforcement / v2 | `v2.0.x` | Task 78 |
