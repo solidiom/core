@@ -25,7 +25,7 @@ date: 2026-08-08
 
 - **M0–M5 complete.** Primitives 52/52; components 30/30; blocks 36/36; templates 29/29. All gates green. Production deployed.
 - **M6 (post-GA growth)** is the next website milestone — playground, marketing, analytics, newsletter, and editorial content.
-- **Library release** Phase 3 complete (gate 21/21, beta artifacts + workflow ready). Phase 3A compile-time work in progress. Phase 3B, 4, 5 not started.
+- **Library release** Phase 3 complete (gate 21/21, beta artifacts + workflow ready). Phase 3A complete (all 4 compile-time transforms tested). Phase 3B, 4, 5 not started.
 - Workflows are dispatch-only; local or explicitly dispatched evidence is required. Automatic triggers will be enabled post-GA.
 
 ---
@@ -115,10 +115,10 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 
 | Status | ID | Description |
 |--------|-----|-------------|
-| [~] | Task 62 | Static recipe extraction beta |
-| [~] | Task 63 | Static variant expansion beta |
-| [~] | Task 64 | Dead-part elimination beta |
-| [~] | Task 67 | Unused-capability detection and Phase 3A gate |
+| [x] | Task 62 | Static recipe extraction beta |
+| [x] | Task 63 | Static variant expansion beta |
+| [x] | Task 64 | Dead-part elimination beta |
+| [x] | Task 67 | Unused-capability detection and Phase 3A gate |
 
 ### 5.6 Phase 3B — generative authoring tooling
 
