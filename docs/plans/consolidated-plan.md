@@ -133,25 +133,9 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 | [x] | Task 3B.7 | Independent CI drift gate |
 | [x] | Task 3B.8 | Retire copy-paste authoring |
 
-### 5.7 Phase 4 — Solid 2 GA and stable v1
+### 5.7 Phase 4 & 5 — GA and beyond
 
-| Status | ID | Description |
-|--------|-----|-------------|
-| [ ] | Task 69 | Solid 2 GA transition |
-| [ ] | Task 71 | External accessibility audit and full AT records |
-| [ ] | Task 74 | Compile-time optimizations GA |
-| [ ] | Task 75 | Legacy sunset schedule |
-| [ ] | Task 76 | v1.x maintenance policy |
-| [ ] | Task 70 | Stable v1 acceptance gate |
-| [ ] | Task 72 | Release candidate hardening |
-| [ ] | Task 73 | v1 stable release |
-
-### 5.8 Phase 5 — strict enforcement and v2
-
-| Status | ID | Description |
-|--------|-----|-------------|
-| [ ] | Task 77 | v2 strict enforcement |
-| [ ] | Task 78 | v2 stable release |
+> Moved to [`ga-plan.md`](./ga-plan.md) — Phase 4 (Solid 2 GA / v1 stable), Phase 5 (v2), and M6 (post-GA growth).
 
 ---
 
@@ -222,62 +206,7 @@ G5 primitive promotion (52×) ────────────────�
 
 ## 7. M6 — Post-GA Growth
 
-M6 begins after G5 exit. These work streams enhance the live product but do not block production.
-
-### 7.1 Curated Playground
-
-| Status | ID | Size | Description | Depends on |
-|--------|-----|------|-------------|------------|
-| [ ] | PLAY-001 | M | Threat model, sandbox, CSP, protocol, limits, prohibited imports | SITE-012 |
-| [ ] | PLAY-002 | L | Worker-based TSX/CSS compilation with pinned local deps | PLAY-001 |
-| [ ] | PLAY-003 | L | Sandboxed iframe runtime, reset, diagnostics, timeout, teardown | PLAY-001, PLAY-002 |
-| [ ] | PLAY-004 | M | Accessible editor/preview/output controls as route-local app | PLAY-002, SITE-004 |
-| [ ] | PLAY-005 | M | Curated canonical examples (state, form, overlay, composition) | CONTENT-005, PLAY-004 |
-| [ ] | PLAY-006 | S | Categorical analytics only; no source/error payload leakage | PLAY-003, GOV-004 |
-| [ ] | PLAY-007 | M | Browser, a11y, CSP, isolation, leak, and boundary tests | PLAY-001..006 |
-| [ ] | PLAY-008 | S | Static unsupported-browser fallback with source access | PLAY-004 |
-
-### 7.2 Marketing & Editorial
-
-| Status | ID | Size | Description | Depends on |
-|--------|-----|------|-------------|------------|
-| [ ] | MKT-001 | L | Responsive evidence-based homepage | G1, BRAND-004 |
-| [ ] | MKT-002 | M | Accurate layer landing/directory shells | REG-003, SITE-004 |
-| [ ] | MKT-003 | M | Core guide skeletons | CONTENT-002 |
-| [ ] | MKT-004 | M | Accessibility landing page from real evidence | A11Y-003 |
-| [x] | MKT-005 | S | Bilingual registry/CLI ownership guide | REG-003 |
-| [ ] | MKT-006 | M | Technical Enterprise page (no sales/SLA claims) | GOV-002, REG-003 |
-| [ ] | MKT-007 | S | GitHub-only community/contributing pages | GOV-003 |
-| [ ] | MKT-008 | M | Article: Solid 2 architecture | CONTENT-002 |
-| [ ] | MKT-009 | M | Article: accessible interaction contracts | CONTENT-002 |
-| [ ] | MKT-010 | M | Article: source ownership | CONTENT-002 |
-| [ ] | MKT-011 | M | Article: styling-system neutrality | CONTENT-002 |
-| [ ] | MKT-012 | M | Article: building with Solidiom | CONTENT-002 |
-| [ ] | MKT-013 | S | Changelog/migration types, feeds, archives, metadata | CONTENT-002 |
-
-### 7.3 Analytics
-
-| Status | ID | Size | Description | Depends on |
-|--------|-----|------|-------------|------------|
-| [ ] | ANALYTICS-001 | M | Typed PostHog adapter; autocapture/replay disabled | GOV-004, SITE-004 |
-| [ ] | ANALYTICS-002 | S | Tests reject prohibited payload fields | ANALYTICS-001 |
-| [ ] | ANALYTICS-003 | S | Production provider configuration outside source | ANALYTICS-001 |
-
-### 7.4 Newsletter
-
-| Status | ID | Size | Description | Depends on |
-|--------|-----|------|-------------|------------|
-| [ ] | NEWS-001 | M | Consent-based bilingual Buttondown flow | GOV-005, SITE-006 |
-| [ ] | NEWS-002 | S | Keyboard, error, localization, privacy, endpoint tests | NEWS-001 |
-
-### G6 Exit Checklist
-
-- [ ] Playground live, sandboxed, and passing all security/a11y tests
-- [ ] Homepage and landing pages live with real evidence
-- [ ] All 5 foundational articles published
-- [ ] Analytics live with privacy audit passing
-- [ ] Newsletter operational with consent and bilingual support
-- [ ] Community/contributing pages live
+> Moved to [`ga-plan.md`](./ga-plan.md) §3 — Playground, Marketing, Analytics, Newsletter.
 
 ---
 
