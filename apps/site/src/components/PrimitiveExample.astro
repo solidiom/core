@@ -1,0 +1,46 @@
+---
+/**
+ * PrimitiveExample — renders the live Solid island for a primitive's interactive preview.
+ *
+ * Astro requires static imports for hydrated components, so we map primitive names
+ * to their example components here and conditionally render the matching one.
+ */
+import { AccordionExample } from "./AccordionExample"
+import { ButtonExample } from "./ButtonExample"
+import { CheckboxExample } from "./CheckboxExample"
+import { ComboboxExample } from "./ComboboxExample"
+import { DataTableExample } from "./DataTableExample"
+import { DialogExample } from "./DialogExample"
+import { MenuExample } from "./MenuExample"
+import { NavigationMenuExample } from "./NavigationMenuExample"
+import { PaginationExample } from "./PaginationExample"
+import { PopoverExample } from "./PopoverExample"
+import { RadioGroupExample } from "./RadioGroupExample"
+import { SelectExample } from "./SelectExample"
+import { SheetExample } from "./SheetExample"
+import { SwitchExample } from "./SwitchExample"
+import { TabsExample } from "./TabsExample"
+
+interface Props {
+  name: string
+  locale: string
+}
+
+const { name, locale } = Astro.props
+---
+
+{name === "accordion" && <AccordionExample locale={locale} client:visible />}
+{name === "button" && <ButtonExample locale={locale} client:visible />}
+{name === "checkbox" && <CheckboxExample locale={locale} client:visible />}
+{name === "combobox" && <ComboboxExample locale={locale} client:visible />}
+{name === "data-table" && <DataTableExample locale={locale} client:visible />}
+{name === "dialog" && <DialogExample locale={locale} client:visible />}
+{name === "menu" && <MenuExample locale={locale} client:visible />}
+{name === "navigation-menu" && <NavigationMenuExample locale={locale} client:visible />}
+{name === "pagination" && <PaginationExample locale={locale} client:visible />}
+{name === "popover" && <PopoverExample locale={locale} client:visible />}
+{name === "radio-group" && <RadioGroupExample locale={locale} client:visible />}
+{name === "select" && <SelectExample locale={locale} client:visible />}
+{name === "sheet" && <SheetExample locale={locale} client:visible />}
+{name === "switch" && <SwitchExample locale={locale} client:visible />}
+{name === "tabs" && <TabsExample locale={locale} client:visible />}
