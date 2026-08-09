@@ -507,6 +507,20 @@ run = "pnpm changeset status"
 description = "Release: validate the version plan without publishing (dry run)"
 run = 'pnpm changeset version --dry-run 2>&1 || echo "No changesets to version"'
 
+[tasks."release:beta-artifacts"]
+description = "Release: generate and verify beta-catalog.json and beta-pointer.json"
+run = "pnpm tsx tools/generate-beta-artifacts.ts --verify"
+
+[tasks."release:beta-rehearsal"]
+description = "Release: full local rehearsal (gate + artifacts + verify signing) without publishing"
+run = [
+  "mise run gate:phase3",
+  "pnpm run registry:build",
+  "node packages/cli/dist/bin.js verify --registry",
+  "pnpm tsx tools/generate-beta-artifacts.ts --verify",
+  "pnpm tsx tools/verify-beta-signing.ts || echo 'ADVISORY: signing verification requires REGISTRY_SIGN_KEY (CI-only)'",
+]
+
 # ---------------------------------------------------------------------------
 # Workflow orchestrators — call the atomic tasks above in CI order.
 # Runs sequentially and stops on the first failure (fail-fast), except for the

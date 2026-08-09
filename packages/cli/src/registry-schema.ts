@@ -19,7 +19,17 @@ export const SUPPORTED_MANIFEST_SCHEMA_URL =
 export const SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v3.json"
 
 /** Product-layer deliverable kinds a package/manifest may declare (CLI-002). */
-export const DELIVERABLES = ["primitive", "component", "block", "template", "theme"] as const
+export const DELIVERABLES = [
+  "primitive",
+  "component",
+  "block",
+  "template",
+  "theme",
+  "source",
+  "css",
+  "tailwind",
+  "unocss",
+] as const
 export const deliverableSchema = z.enum(DELIVERABLES)
 export type Deliverable = z.infer<typeof deliverableSchema>
 
@@ -99,7 +109,7 @@ const registryPrimitiveSummarySchema = z.object({
     reviewStatus: z.enum(["none", "automated", "manual", "complete"]),
     evidenceIds: z.array(z.string()),
   }),
-  documentationStatus: z.enum(["stub", "draft", "review", "complete"]),
+  documentationStatus: z.enum(["none", "stub", "draft", "review", "complete"]),
   documentationLocales: z.record(documentationLocaleSchema),
   stylingOutputs: z.array(stylingProfileSchema),
   themeCompatible: z.array(z.string()),
@@ -122,7 +132,7 @@ const registryComponentSummarySchema = z.object({
   description: z.string(),
   status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
   deliverables: z.array(deliverableSchema),
-  documentationStatus: z.enum(["stub", "draft", "review", "complete"]),
+  documentationStatus: z.enum(["none", "stub", "draft", "review", "complete"]),
   documentationLocales: z.record(documentationLocaleSchema),
   stylingOutputs: z.array(stylingProfileSchema),
   primitiveDependency: z.string().min(1),
@@ -137,7 +147,7 @@ const registryBlockSummarySchema = z.object({
   description: z.string(),
   status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
   deliverables: z.array(deliverableSchema),
-  documentationStatus: z.enum(["stub", "draft", "review", "complete"]),
+  documentationStatus: z.enum(["none", "stub", "draft", "review", "complete"]),
   documentationLocales: z.record(documentationLocaleSchema),
   componentDependencies: z.array(z.string()),
   searchKeywords: z.array(z.string()),
@@ -151,7 +161,7 @@ const registryTemplateSummarySchema = z.object({
   description: z.string(),
   status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
   deliverables: z.array(deliverableSchema),
-  documentationStatus: z.enum(["stub", "draft", "review", "complete"]),
+  documentationStatus: z.enum(["none", "stub", "draft", "review", "complete"]),
   documentationLocales: z.record(documentationLocaleSchema),
   searchKeywords: z.array(z.string()),
 })
@@ -164,7 +174,7 @@ const registryThemeSummarySchema = z.object({
   description: z.string(),
   status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
   deliverables: z.array(deliverableSchema),
-  documentationStatus: z.enum(["stub", "draft", "review", "complete"]),
+  documentationStatus: z.enum(["none", "stub", "draft", "review", "complete"]),
   documentationLocales: z.record(documentationLocaleSchema),
   searchKeywords: z.array(z.string()),
 })

@@ -85,13 +85,28 @@ function readBlockCompletionStatus(): Set<string> {
   // Parse §9.3 to find which blocks are [x] complete
   try {
     const content = readFileSync(TRACKER_PATH, "utf8")
-    const sectionMatch = content.match(/### 9\.3 Block queue[\s\S]*?(?=### 9\.4|$)/)
+    const sectionMatch = content.match(/### 9\.3 Block[^\n]*[\s\S]*?(?=### 9\.4|$)/)
     if (!sectionMatch) return new Set()
     const complete = new Set<string>()
+    // Support both table format (| [x] | BLOCK-* |) and prose format
     const regex = /\|\s*\[x\]\s*\|\s*(BLOCK-[\w-]+)\s*\|/g
     let m
     while ((m = regex.exec(sectionMatch[0])) !== null) {
       complete.add(m[1])
+    }
+    // If no table rows found, check for prose declaration of completion
+    if (complete.size === 0 && /All `BLOCK-\*` rows complete/i.test(sectionMatch[0])) {
+      // Extract block IDs from the prose (e.g., "AUTH-01..03, ONBOARD-01..03")
+      const groupRegex = /([A-Z][\w-]*)-(\d+)\.\.(\d+)/g
+      let gm
+      while ((gm = groupRegex.exec(sectionMatch[0])) !== null) {
+        const prefix = gm[1]
+        const start = parseInt(gm[2], 10)
+        const end = parseInt(gm[3], 10)
+        for (let i = start; i <= end; i++) {
+          complete.add(`BLOCK-${prefix}-${String(i).padStart(2, "0")}`)
+        }
+      }
     }
     return complete
   } catch {

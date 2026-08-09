@@ -43,6 +43,10 @@ export function resolveDestinationRoot(deliverable: Deliverable, config: Config)
     case "theme":
       return config.themeDir
     case "template":
+    case "source":
+    case "css":
+    case "tailwind":
+    case "unocss":
       throw new UnsupportedDeliverableError(deliverable)
     default: {
       // Exhaustiveness guard — Deliverable is a closed union.

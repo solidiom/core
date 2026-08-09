@@ -1,9 +1,7 @@
 {
   "schemaVersion": 2,
   "primitive": "toggle",
-  "evidenceIds": [
-    "axe-toggle-scan-v1"
-  ],
+  "evidenceIds": ["axe-toggle-scan-v1"],
   "summary": {
     "passes": 8,
     "violations": 0,
@@ -14,7 +12,6 @@
   "provenance": {
     "browser": "chromium",
     "commitSha": "650b0f2810aa69af91bc0dc06001d0b3f1792f02",
-    "ciRunUrl": null,
-    "gaPromotedAt": "2026-08-07"
+    "ciRunUrl": null
   }
 }
