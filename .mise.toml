@@ -617,6 +617,34 @@ run = [
 description = "Check the key third-party libraries for new versions"
 run = "pnpm tsx scripts/check-library-updates.mts"
 
+# ---------------------------------------------------------------------------
+# Scaffolding / Generative Authoring (3B)
+# ---------------------------------------------------------------------------
+
+[tasks."scaffold:primitive"]
+description = "Scaffold a new primitive package → pnpm tsx tools/scaffold-primitive.ts <name>"
+run = "pnpm tsx tools/scaffold-primitive.ts {{arg(name='primitive')}}"
+
+[tasks."scaffold:sync"]
+description = "Regenerate stale generated artifacts (recipes, themes, source/)"
+run = "pnpm tsx tools/scaffold-sync.ts"
+
+[tasks."scaffold:sync:check"]
+description = "Check generated artifacts freshness (CI mode, no writes)"
+run = "pnpm tsx tools/scaffold-sync.ts --check"
+
+[tasks."scaffold:drift-gate"]
+description = "CI gate: verify no generated artifact has drifted from its contract"
+run = "pnpm tsx tools/scaffold-drift-gate.ts"
+
+[tasks."contract:check"]
+description = "Verify all recipe definitions use the current CONTRACT_VERSION"
+run = "pnpm tsx tools/contract-version.ts check"
+
+[tasks."contract:bump"]
+description = "Bump CONTRACT_VERSION and generate a migration stub"
+run = "pnpm tsx tools/contract-version.ts bump"
+
 [tasks."deps:check:group"]
 description = "Check one library group  →  mise run deps:check:group -- solid"
 run = "pnpm tsx scripts/check-library-updates.mts --group {{arg(name='group')}}"

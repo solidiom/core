@@ -1,0 +1,9 @@
+{
+  "versions": [
+    {
+      "version": 1,
+      "date": "2026-07-01",
+      "description": "Initial schema — slots, variants, states, compound variants, flags, pseudos, ownership"
+    }
+  ]
+}

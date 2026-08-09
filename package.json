@@ -84,7 +84,14 @@
     "block:catalog-audit": "tsx tools/block-catalog-gate.ts --audit-only",
     "template:catalog-gate": "tsx tools/template-catalog-gate.ts",
     "template:catalog-audit": "tsx tools/template-catalog-gate.ts --audit-only",
-    "catalog:scaffold-docs": "tsx tools/scaffold-catalog-docs.ts"
+    "catalog:scaffold-docs": "tsx tools/scaffold-catalog-docs.ts",
+    "scaffold:primitive": "tsx tools/scaffold-primitive.ts",
+    "scaffold:sync": "tsx tools/scaffold-sync.ts",
+    "scaffold:sync:check": "tsx tools/scaffold-sync.ts --check",
+    "scaffold:drift-gate": "tsx tools/scaffold-drift-gate.ts",
+    "contract:check": "tsx tools/contract-version.ts check",
+    "contract:bump": "tsx tools/contract-version.ts bump",
+    "contract:history": "tsx tools/contract-version.ts history"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",

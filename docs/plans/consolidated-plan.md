@@ -25,7 +25,7 @@ date: 2026-08-08
 
 - **M0–M5 complete.** Primitives 52/52; components 30/30; blocks 36/36; templates 29/29. All gates green. Production deployed.
 - **M6 (post-GA growth)** is the next website milestone — playground, marketing, analytics, newsletter, and editorial content.
-- **Library release** Phase 3 complete (gate 21/21, beta artifacts + workflow ready). Phase 3A complete (all 4 compile-time transforms tested). Phase 3B, 4, 5 not started.
+- **Library release** Phase 3 complete (gate 21/21, beta artifacts + workflow ready). Phase 3A complete (all 4 compile-time transforms tested). Phase 3B complete (scaffold, sync, drift gate). Phase 4, 5 not started.
 - Workflows are dispatch-only; local or explicitly dispatched evidence is required. Automatic triggers will be enabled post-GA.
 
 ---
@@ -87,7 +87,7 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 | 2 — distribution/enterprise beta | v0.9.x–v0.10.x | Complete |
 | 3 — beta stabilization/release | `v1.0.0-beta.x` | Complete — gate 21/21, release workflow live |
 | 3A — compile-time incubation | later beta.x | Complete — 21 tests, all transforms verified |
-| 3B — generative authoring | unversioned | Task 3B.8; independent of release |
+| 3B — generative authoring | unversioned | Complete — scaffold, sync, drift gate operational |
 | 4 — Solid 2 GA / stable v1 | `v1.0.x` | Task 70 gate; Task 73 release |
 | 5 — strict enforcement / v2 | `v2.0.x` | Task 78 |
 
@@ -124,14 +124,14 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 
 | Status | ID | Description |
 |--------|-----|-------------|
-| [ ] | Task 3B.1 | Versioned primitive contract and manifest migration |
-| [ ] | Task 3B.2 | Internal generator core (`pnpm scaffold primitive`) |
-| [ ] | Task 3B.3 | Generated package and aggregator wiring |
-| [ ] | Task 3B.4 | Complete recipe scaffolding |
-| [ ] | Task 3B.5 | Authored demo starter plus generated registration |
-| [ ] | Task 3B.6 | Idempotent sync/fixer mode |
-| [ ] | Task 3B.7 | Independent CI drift gate |
-| [ ] | Task 3B.8 | Retire copy-paste authoring |
+| [x] | Task 3B.1 | Versioned primitive contract and manifest migration |
+| [x] | Task 3B.2 | Internal generator core (`pnpm scaffold primitive`) |
+| [x] | Task 3B.3 | Generated package and aggregator wiring |
+| [x] | Task 3B.4 | Complete recipe scaffolding |
+| [x] | Task 3B.5 | Authored demo starter plus generated registration |
+| [x] | Task 3B.6 | Idempotent sync/fixer mode |
+| [x] | Task 3B.7 | Independent CI drift gate |
+| [x] | Task 3B.8 | Retire copy-paste authoring |
 
 ### 5.7 Phase 4 — Solid 2 GA and stable v1
 
