@@ -5,13 +5,14 @@ import { resolveEquivalentLocalePath, resolveLocale, type Locale } from "../lib/
 
 interface Props {
   links: NavLink[]
-  resourceLinks: NavLink[]
+  docsLinks: NavLink[]
+  docsLabel: string
   homeHref?: string
   /** Explicit server-resolved locale context from the containing layout. */
   locale?: Locale
 }
 
-const { links, resourceLinks, homeHref, locale: providedLocale } = Astro.props
+const { links, docsLinks, docsLabel, homeHref, locale: providedLocale } = Astro.props
 const pathname = Astro.url.pathname
 const locale = providedLocale ?? resolveLocale(pathname)
 const targetLocalePath = resolveEquivalentLocalePath(pathname, locale === "en" ? "es" : "en")
@@ -19,7 +20,8 @@ const targetLocalePath = resolveEquivalentLocalePath(pathname, locale === "en" ?
 
 <SiteHeader
   links={links}
-  resourceLinks={resourceLinks}
+  docsLinks={docsLinks}
+  docsLabel={docsLabel}
   pathname={pathname}
   homeHref={homeHref}
   locale={locale}

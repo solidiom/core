@@ -18,7 +18,7 @@ import {
   serializeJsonLd,
   type JsonLd,
 } from "../lib/metadata"
-import { getPrimaryLinks, resourceLinks } from "../lib/nav-links"
+import { getPrimaryLinks, getDocsLinks, DOCS_DROPDOWN_LABEL } from "../lib/nav-links"
 import SiteHeader from "../components/SiteHeader.astro"
 import SiteFooter from "../components/SiteFooter.astro"
 import { BetaBanner } from "../components/BetaBanner"
@@ -149,7 +149,8 @@ const homeHref = resolveEquivalentLocalePath("/", locale) ?? "/"
           <BetaBanner locale={locale} client:load />
           <SiteHeader
             links={getPrimaryLinks(locale)}
-            resourceLinks={resourceLinks}
+            docsLinks={getDocsLinks(locale)}
+            docsLabel={DOCS_DROPDOWN_LABEL[locale]}
             homeHref={homeHref}
             locale={locale}
           />

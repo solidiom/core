@@ -14,7 +14,10 @@ export interface NavLink {
 
 export interface SiteHeaderProps {
   links: NavLink[]
-  resourceLinks: NavLink[]
+  docsLinks: NavLink[]
+  docsLabel: string
+  /** @deprecated Use docsLinks */
+  resourceLinks?: NavLink[]
   pathname: string
   homeHref?: string
   locale?: Locale
@@ -47,11 +50,11 @@ export function SiteHeader(props: SiteHeaderProps) {
                   </li>
                 )}
               </For>
-              <NavigationMenu.Item value="resources">
-                <NavigationMenu.Trigger>Resources</NavigationMenu.Trigger>
+              <NavigationMenu.Item value="docs">
+                <NavigationMenu.Trigger>{props.docsLabel}</NavigationMenu.Trigger>
                 <NavigationMenu.Content>
                   <ul class="site-header__dropdown-list">
-                    <For each={props.resourceLinks}>
+                    <For each={props.docsLinks}>
                       {(link) => (
                         <li>
                           <NavigationMenu.Link href={link.href} active={isActive(link.href)}>
@@ -109,9 +112,9 @@ export function SiteHeader(props: SiteHeaderProps) {
                     )}
                   </For>
                 </ul>
-                <p class="site-header__drawer-group-label">Resources</p>
+                <p class="site-header__drawer-group-label">{props.docsLabel}</p>
                 <ul>
-                  <For each={props.resourceLinks}>
+                  <For each={props.docsLinks}>
                     {(link) => (
                       <li>
                         <a
