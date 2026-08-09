@@ -16,8 +16,8 @@ import DocsLayout from "../layouts/DocsLayout.astro"
 import AccessibilityEvidence from "./AccessibilityEvidence.astro"
 import ApiReference from "./ApiReference.astro"
 import CatalogBreadcrumbs from "./CatalogBreadcrumbs.astro"
-import { DialogExample } from "./DialogExample"
 import ExampleSource from "./ExampleSource.astro"
+import PrimitiveExample from "./PrimitiveExample.astro"
 import PrimitiveMetadata from "./PrimitiveMetadata.astro"
 import PrimitiveTabs from "./PrimitiveTabs.astro"
 
@@ -68,7 +68,7 @@ const accessibilityContractEntries =
       )
     : []
 const accessibilityContract = accessibilityContractEntries.at(0)?.data
-const isDialog = primitive.name === "dialog"
+const hasExample = primitive.name in {"accordion":1,"button":1,"checkbox":1,"combobox":1,"data-table":1,"dialog":1,"menu":1,"navigation-menu":1,"pagination":1,"popover":1,"radio-group":1,"select":1,"sheet":1,"switch":1,"tabs":1}
 const registryManifest = getRegistryManifest(primitive.name)
 const homePath = locale === "es" ? "/es/" : "/"
 const directoryPath = locale === "es" ? "/es/primitives/" : "/primitives/"
@@ -132,6 +132,7 @@ const { previous, next } = adjacentPrimitiveLinks(allPrimitives, primitive.name,
     view === "overview" && (
       <section>
         <h2>{copy.preview}</h2>
+        {hasExample && <PrimitiveExample name={primitive.name} locale={locale} />}
         {DocumentContent ? <DocumentContent /> : <p>{primitive.description}</p>}
         <PrimitiveMetadata manifest={registryManifest} copy={copy} />
       </section>
@@ -151,8 +152,8 @@ const { previous, next } = adjacentPrimitiveLinks(allPrimitives, primitive.name,
             {copy.examplesUnavailable}
           </p>
         )}
-        {isDialog && <DialogExample locale={locale} client:load />}
-        {isDialog && <ExampleSource source={exampleSource} locale={locale} />}
+        {hasExample && <PrimitiveExample name={primitive.name} locale={locale} />}
+        {hasExample && <ExampleSource source={exampleSource} locale={locale} />}
       </section>
     )
   }
