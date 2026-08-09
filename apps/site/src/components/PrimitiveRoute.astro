@@ -132,7 +132,16 @@ const { previous, next } = adjacentPrimitiveLinks(allPrimitives, primitive.name,
     view === "overview" && (
       <section>
         <h2>{copy.preview}</h2>
-        {hasExample && <PrimitiveExample name={primitive.name} locale={locale} />}
+        {hasExample && (
+          <>
+            <PrimitiveExample name={primitive.name} locale={locale} />
+            <p class="preview-styling-note">
+              {locale === "es"
+                ? "Este ejemplo usa estilos solo para documentación. En producción, utiliza una de las recetas incluidas (CSS, Tailwind o UnoCSS)."
+                : "This preview uses documentation-only styling. Ship with one of the included recipe outputs (CSS, Tailwind, or UnoCSS) for production styles."}
+            </p>
+          </>
+        )}
         {DocumentContent ? <DocumentContent /> : <p>{primitive.description}</p>}
         <PrimitiveMetadata manifest={registryManifest} copy={copy} />
       </section>
