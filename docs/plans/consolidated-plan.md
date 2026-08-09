@@ -7,7 +7,7 @@ tags: [solidiom, plan, milestones, library, catalog, production]
 lifecycle: active
 authority: canonical status, sequencing, definitions-of-done, defects, queues, counters, and release gates
 volatility: high
-date: 2026-08-07
+date: 2026-08-08
 ---
 
 # Solidiom — Consolidated Execution Plan
@@ -23,10 +23,9 @@ date: 2026-08-07
 
 ## 1. Current Position
 
-- **M0–M4 complete.** Primitives 52/52; components 30/30; blocks 36/36; templates 29/29. All gates green.
-- **M5 (GA hardening → production)** is the active milestone — focused on QA, security, operations, primitive promotion, and cutover.
-- **M6 (post-GA growth)** follows G5 — playground, marketing, analytics, newsletter, and editorial content.
-- **Library release** tracks independently: Phase 3 beta blockers → Phase 3A/3B → Phase 4 (Solid 2 GA) → Phase 5 (v2).
+- **M0–M5 complete.** Primitives 52/52; components 30/30; blocks 36/36; templates 29/29. All gates green. Production deployed.
+- **M6 (post-GA growth)** is the next website milestone — playground, marketing, analytics, newsletter, and editorial content.
+- **Library release** Phase 3 complete (gate 21/21, beta artifacts + workflow ready). Phase 3A compile-time work in progress. Phase 3B, 4, 5 not started.
 - Workflows are dispatch-only; local or explicitly dispatched evidence is required. Automatic triggers will be enabled post-GA.
 
 ---
@@ -86,7 +85,7 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 | 0 — architectural proof | v0.6.x | Complete |
 | 1 — primitive/package alpha | v0.7.x–v0.8.x | Complete |
 | 2 — distribution/enterprise beta | v0.9.x–v0.10.x | Complete |
-| 3 — beta stabilization/release | `v1.0.0-beta.x` | Task 60 gate; Task 68 release |
+| 3 — beta stabilization/release | `v1.0.0-beta.x` | Complete — gate 21/21, release workflow live |
 | 3A — compile-time incubation | later beta.x | Task 67; required before first RC |
 | 3B — generative authoring | unversioned | Task 3B.8; independent of release |
 | 4 — Solid 2 GA / stable v1 | `v1.0.x` | Task 70 gate; Task 73 release |
