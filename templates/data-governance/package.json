@@ -21,7 +21,6 @@
     "@solidiom/select": "workspace:*",
     "@solidiom/pagination": "workspace:*",
     "@solidiom/dialog": "workspace:*",
-    "@solidiom/dropdown-menu": "workspace:*",
     "@solidiom/toast": "workspace:*",
     "@solidiom/tooltip": "workspace:*",
     "@solidiom/breadcrumb": "workspace:*",
@@ -35,7 +34,7 @@
     "tailwindcss": "^4.3.3",
     "typescript": "^5.7.0",
     "vite": "^8.1.5",
-    "vite-plugin-solid": "3.0.0-next.14"
+    "vite-plugin-solid": "3.0.0-next.23"
   },
   "nx": {
     "tags": ["layer:template"]

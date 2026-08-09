@@ -32,6 +32,8 @@ export const LOCALIZED_ROUTE_PATHS = [
   "/",
   "/privacy/",
   "/trademark/",
+  "/dco/",
+  "/security/",
   "/changelog/",
   "/primitives/",
   "/themes/builder/",
