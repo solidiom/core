@@ -52,11 +52,7 @@ run = "pnpm tsx tools/registry-build.ts"
 
 [tasks.dev]
 description = "Start the Solidiom website dev server"
-run = "pnpm --filter @solidiom/site exec astro dev --force"
-
-[tasks."dev:site"]
-description = "Start the Solidiom website (apps/site) in dev mode"
-run = "pnpm --filter @solidiom/site exec astro dev --force"
+run = "pnpm --filter @solidiom/site exec astro dev --host 0.0.0.0 --force"
 
 # ---------------------------------------------------------------------------
 # Test
@@ -617,10 +613,6 @@ run = [
   "mkdir -p artifacts",
   "pnpm tsx scripts/check-library-updates.mts --json > artifacts/library-updates.json",
 ]
-
-[tasks."deps:solid"]
-description = "Check only the Solid toolchain for new betas"
-run = "pnpm tsx scripts/check-library-updates.mts --group solid"
 
 # ---------------------------------------------------------------------------
 # Maintenance
