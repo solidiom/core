@@ -1,7 +1,7 @@
 ---
 contentSchemaVersion: 1
-title: Basic scroll area
-description: Scroll area component with custom-styled scrollbars.
+title: Área de desplazamiento básica
+description: Componente de área de desplazamiento con barras de desplazamiento personalizadas.
 keywords: [scroll-area, scroll, scrollbar, overflow, primitive]
 locale: es
 maturity: draft
@@ -17,18 +17,18 @@ source:
   export: ScrollAreaExample
   language: tsx
   runnable: true
-translationSourceHash: "43ccf233da2d73a151313c169c5b43aa62c4f7b8c6f7ebcbea39b32f36ccdecd"
+translationSourceHash: "a85a0b505300fe38adc42f855813f6e0a56f93fa1fee0616b94d23bd62659103"
 translationStatus: draft
 ---
 
-The Scroll Area component is a styled recipe wrapper around the `@solidiom/scroll-area` primitive. It provides custom-styled scrollbars with native scrolling performance.
+El componente Scroll Area proporciona un contenedor desplazable con estilos personalizados y una barra de desplazamiento visible.
 
 ```tsx
 import { StyledScrollArea, ScrollArea } from "@solidiom/recipes-css"
 
-;<StyledScrollArea style={{ height: "300px" }}>
+;<StyledScrollArea type="always" style={{ height: '200px' }}>
   <ScrollArea.Viewport>
-    <p>Scrollable content goes here...</p>
+    <p>Contenido desplazable aquí...</p>
   </ScrollArea.Viewport>
   <ScrollArea.Scrollbar orientation="vertical">
     <ScrollArea.Thumb />

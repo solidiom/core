@@ -19,14 +19,14 @@ source:
   runnable: true
 ---
 
-The Scroll Area component is a styled recipe wrapper around the `@solidiom/scroll-area` primitive. It provides custom-styled scrollbars with native scrolling performance.
+The Scroll Area component provides a custom-styled scrollable container with a visible scrollbar.
 
 ```tsx
 import { StyledScrollArea, ScrollArea } from "@solidiom/recipes-css"
 
-;<StyledScrollArea style={{ height: "300px" }}>
+;<StyledScrollArea type="always" style={{ height: '200px' }}>
   <ScrollArea.Viewport>
-    <p>Scrollable content goes here...</p>
+    <p>Scrollable content here...</p>
   </ScrollArea.Viewport>
   <ScrollArea.Scrollbar orientation="vertical">
     <ScrollArea.Thumb />

@@ -1,8 +1,8 @@
 ---
 contentSchemaVersion: 1
 title: Progreso básico
-description: Componente Progress con ejemplos determinista e indeterminado.
-keywords: [progress, indicator, loading, determinate, indeterminate]
+description: Componente de barra de progreso con estados determinista e indeterminado.
+keywords: [progress, bar, loading, indicator]
 locale: es
 maturity: draft
 product: Progress
@@ -12,37 +12,33 @@ package: "@solidiom/recipes-css"
 recipe: "progress"
 section: examples
 exampleId: progress-component-basic
+source:
+  path: apps/site/src/components/ProgressExample.tsx
+  export: ProgressExample
+  language: tsx
 runnable: true
 translationSourceHash: "c65ef6a1743946e8d6d92eacdd6bad8d42fd1ccad8c4475f5aa5075ea8b8fbef"
 translationStatus: draft
 ---
 
-El componente Progress es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/progress`. Proporciona un indicador de progreso lineal visual con atributos ARIA semánticos para tecnologías de asistencia.
+El componente Progress indica el estado de completitud de una tarea.
 
 ```tsx
 import { StyledProgress, Progress } from "@solidiom/recipes-css"
 
-;<StyledProgress value={65}>
+;<StyledProgress value={65} aria-label="Progreso de carga">
   <Progress.Indicator />
 </StyledProgress>
 ```
 
-## Progreso indeterminado
+## Indeterminado
 
-Usa `value={null}` para un estado de carga indeterminado.
-
-```tsx
-;<StyledProgress value={null}>
-  <Progress.Indicator />
-</StyledProgress>
-```
-
-## Con máximo personalizado
-
-Controla el valor máximo para el cálculo del porcentaje.
+Para operaciones con duración desconocida:
 
 ```tsx
-;<StyledProgress value={75} max={200}>
+import { StyledProgress, Progress } from "@solidiom/recipes-css"
+
+;<StyledProgress value={null} aria-label="Cargando">
   <Progress.Indicator />
 </StyledProgress>
 ```

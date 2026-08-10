@@ -22,5 +22,33 @@ runnable: true
 ```tsx
 import * as Listbox from "@solidiom/listbox"
 
-;<Listbox.Root>Listbox content</Listbox.Root>
+;<Listbox.Root
+  aria-label="Select a fruit"
+  selectionMode="single"
+  defaultValue={["apple"]}
+  onValueChange={(values) => console.log(values)}
+>
+  <Listbox.Item value="apple">Apple</Listbox.Item>
+  <Listbox.Item value="banana">Banana</Listbox.Item>
+  <Listbox.Item value="cherry">Cherry</Listbox.Item>
+  <Listbox.Item value="date" disabled>Date</Listbox.Item>
+  <Listbox.Item value="elderberry">Elderberry</Listbox.Item>
+</Listbox.Root>
 ```
+
+## Multiple selection
+
+```tsx
+;<Listbox.Root
+  aria-label="Select fruits"
+  selectionMode="multiple"
+  defaultValue={["apple", "cherry"]}
+  onValueChange={(values) => console.log(values)}
+>
+  <Listbox.Item value="apple">Apple</Listbox.Item>
+  <Listbox.Item value="banana">Banana</Listbox.Item>
+  <Listbox.Item value="cherry">Cherry</Listbox.Item>
+</Listbox.Root>
+```
+
+In `single` mode, selecting an item deselects the previous one. In `multiple` mode, items can be toggled independently. The listbox supports keyboard navigation with arrow keys, Home/End, and typeahead.

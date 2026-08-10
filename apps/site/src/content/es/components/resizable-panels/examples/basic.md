@@ -17,19 +17,24 @@ source:
   export: ResizablePanelsExample
   language: tsx
   runnable: true
-translationSourceHash: "26591f9d865ffa7abcf91b31a02627947fed71249420c7ba23c99596ab1c3f1a"
+translationSourceHash: "e72be280bcc16d5d6408dd4c4f36e32e7cbea8854523dae9bb179b227777d1c4"
 translationStatus: draft
 ---
 
-The Resizable Panels component is a styled recipe wrapper around the `@solidiom/resizable-panels` primitive. It provides a draggable split-panel layout.
+El componente Resizable Panels proporciona un diseño con paneles arrastrables que pueden ser redimensionados por el usuario.
 
 ```tsx
-import { StyledResizablePanels } from "@solidiom/recipes-css"
-import { Panel, Handle } from "@solidiom/resizable-panels"
+import { StyledResizablePanels, ResizablePanels } from "@solidiom/recipes-css"
 
-;<StyledResizablePanels direction="horizontal">
-  <Panel defaultSize={50}>Panel 1</Panel>
-  <Handle />
-  <Panel defaultSize={50}>Panel 2</Panel>
-</StyledResizablePanels>
+;<ResizablePanels.PanelGroup direction="horizontal" defaultSizes={[50, 50]}>
+  <ResizablePanels.Panel order={0} defaultSize={50}>
+    <div>Panel 1</div>
+  </ResizablePanels.Panel>
+  <ResizablePanels.Handle index={0}>
+    <div className="handle" />
+  </ResizablePanels.Handle>
+  <ResizablePanels.Panel order={1} defaultSize={50}>
+    <div>Panel 2</div>
+  </ResizablePanels.Panel>
+</ResizablePanels.PanelGroup>
 ```
