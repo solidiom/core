@@ -1,9 +1,27 @@
-import { existsSync, readdirSync, statSync, copyFileSync, mkdirSync } from "node:fs"
-import { resolve, join } from "node:path"
+import { existsSync, readdirSync, statSync, copyFileSync, mkdirSync, readFileSync } from "node:fs"
+import { resolve, join, dirname } from "node:path"
+import { execSync } from "node:child_process"
 
-const workspaceRoot = resolve(process.cwd(), "..", "..")
-const templatesDir = resolve(workspaceRoot, "templates")
-const publicDir = resolve(process.cwd(), "public", "templates")
+// Find the git common dir so we resolve templates/ from the main checkout
+// (where untracked dist/ directories exist), not from a worktree.
+let gitCommonDir: string
+try {
+  gitCommonDir = execSync("git rev-parse --git-common-dir", {
+    cwd: process.cwd(),
+    encoding: "utf8",
+  }).trim()
+} catch {
+  gitCommonDir = process.cwd()
+}
+
+// The main repo root is the parent of the .git directory.
+// In a normal checkout: common dir is .git, parent is repo root.
+// In a worktree: common dir is .git, parent is still repo root.
+const mainRepoRoot = dirname(gitCommonDir)
+const templatesDir = resolve(mainRepoRoot, "templates")
+
+const siteRoot = process.cwd()
+const publicDir = resolve(siteRoot, "public", "templates")
 
 mkdirSync(publicDir, { recursive: true })
 
@@ -34,12 +52,15 @@ for (const name of templateNames) {
       const srcStat = statSync(src)
       if (existsSync(dest)) {
         const destStat = statSync(dest)
-        if (
-          srcStat.mtimeMs === destStat.mtimeMs &&
-          srcStat.size === destStat.size
-        ) {
-          skipped++
-          continue
+        // Compare size first (cheap), then content bytes if sizes match.
+        // copyFileSync changes mtime, so mtime-based skip doesn't work.
+        if (srcStat.size === destStat.size) {
+          const srcBuf = readFileSync(src)
+          const destBuf = readFileSync(dest)
+          if (srcBuf.equals(destBuf)) {
+            skipped++
+            continue
+          }
         }
       }
       copyFileSync(src, dest)
