@@ -6,20 +6,28 @@
  * to their example components here and conditionally render the matching one.
  */
 import { AccordionExample } from "./AccordionExample"
+import { AlertExample } from "./AlertExample"
+import { AvatarExample } from "./AvatarExample"
+import { BadgeExample } from "./BadgeExample"
+import { BreadcrumbExample } from "./BreadcrumbExample"
 import { ButtonExample } from "./ButtonExample"
+import { CardExample } from "./CardExample"
 import { CheckboxExample } from "./CheckboxExample"
 import { ComboboxExample } from "./ComboboxExample"
 import { DataTableExample } from "./DataTableExample"
 import { DialogExample } from "./DialogExample"
+import { KbdExample } from "./KbdExample"
 import { MenuExample } from "./MenuExample"
 import { NavigationMenuExample } from "./NavigationMenuExample"
 import { PaginationExample } from "./PaginationExample"
 import { PopoverExample } from "./PopoverExample"
 import { RadioGroupExample } from "./RadioGroupExample"
 import { SelectExample } from "./SelectExample"
+import { SeparatorExample } from "./SeparatorExample"
 import { SheetExample } from "./SheetExample"
 import { SwitchExample } from "./SwitchExample"
 import { TabsExample } from "./TabsExample"
+import { VisuallyHiddenExample } from "./VisuallyHiddenExample"
 
 interface Props {
   name: string
@@ -30,17 +38,25 @@ const { name, locale } = Astro.props
 ---
 
 {name === "accordion" && <AccordionExample locale={locale} client:visible />}
+{name === "alert" && <AlertExample locale={locale} client:visible />}
+{name === "avatar" && <AvatarExample locale={locale} client:visible />}
+{name === "badge" && <BadgeExample locale={locale} client:visible />}
+{name === "breadcrumb" && <BreadcrumbExample locale={locale} client:visible />}
 {name === "button" && <ButtonExample locale={locale} client:visible />}
+{name === "card" && <CardExample locale={locale} client:visible />}
 {name === "checkbox" && <CheckboxExample locale={locale} client:visible />}
 {name === "combobox" && <ComboboxExample locale={locale} client:visible />}
 {name === "data-table" && <DataTableExample locale={locale} client:visible />}
 {name === "dialog" && <DialogExample locale={locale} client:visible />}
+{name === "kbd" && <KbdExample locale={locale} client:visible />}
 {name === "menu" && <MenuExample locale={locale} client:visible />}
 {name === "navigation-menu" && <NavigationMenuExample locale={locale} client:visible />}
 {name === "pagination" && <PaginationExample locale={locale} client:visible />}
 {name === "popover" && <PopoverExample locale={locale} client:visible />}
 {name === "radio-group" && <RadioGroupExample locale={locale} client:visible />}
 {name === "select" && <SelectExample locale={locale} client:visible />}
+{name === "separator" && <SeparatorExample locale={locale} client:visible />}
 {name === "sheet" && <SheetExample locale={locale} client:visible />}
 {name === "switch" && <SwitchExample locale={locale} client:visible />}
 {name === "tabs" && <TabsExample locale={locale} client:visible />}
+{name === "visually-hidden" && <VisuallyHiddenExample locale={locale} client:visible />}
