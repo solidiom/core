@@ -21,6 +21,7 @@
     "@solidiom/pagination": "workspace:*",
     "@solidiom/breadcrumb": "workspace:*",
     "@solidiom/spinner": "workspace:*",
+    "@solidiom/navigation-menu": "workspace:*",
     "@solidiom/recipes-tailwind": "workspace:*",
     "@solidjs/router": "0.17.0-next.5",
     "@solidjs/web": "catalog:",
