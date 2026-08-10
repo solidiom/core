@@ -1,4 +1,13 @@
-import { existsSync, readdirSync, statSync, copyFileSync, mkdirSync, readFileSync } from "node:fs"
+import {
+  existsSync,
+  readdirSync,
+  statSync,
+  copyFileSync,
+  mkdirSync,
+  readFileSync,
+  cpSync,
+  rmSync,
+} from "node:fs"
 import { resolve, join, dirname } from "node:path"
 import { execSync } from "node:child_process"
 
@@ -32,6 +41,37 @@ const templateNames = readdirSync(templatesDir, { withFileTypes: true })
 let copied = 0
 let skipped = 0
 
+function shouldCopyFile(src: string, dest: string): boolean {
+  if (!existsSync(dest)) return true
+  const srcStat = statSync(src)
+  const destStat = statSync(dest)
+  if (srcStat.size !== destStat.size) return true
+  const srcBuf = readFileSync(src)
+  const destBuf = readFileSync(dest)
+  if (!srcBuf.equals(destBuf)) return true
+  return false
+}
+
+function syncDir(src: string, dest: string): void {
+  const entries = readdirSync(src, { withFileTypes: true })
+  for (const entry of entries) {
+    const srcPath = join(src, entry.name)
+    const destPath = join(dest, entry.name)
+
+    if (entry.isDirectory()) {
+      mkdirSync(destPath, { recursive: true })
+      syncDir(srcPath, destPath)
+    } else {
+      if (shouldCopyFile(srcPath, destPath)) {
+        copyFileSync(srcPath, destPath)
+        copied++
+      } else {
+        skipped++
+      }
+    }
+  }
+}
+
 for (const name of templateNames) {
   const srcDist = join(templatesDir, name, "dist")
   if (!existsSync(srcDist) || !statSync(srcDist).isDirectory()) {
@@ -39,34 +79,14 @@ for (const name of templateNames) {
   }
 
   const destBase = join(publicDir, name)
-  mkdirSync(destBase, { recursive: true })
 
-  const entries = readdirSync(srcDist, { withFileTypes: true })
-  for (const entry of entries) {
-    const src = join(srcDist, entry.name)
-    const dest = join(destBase, entry.name)
-
-    if (entry.isDirectory()) {
-      mkdirSync(dest, { recursive: true })
-    } else {
-      const srcStat = statSync(src)
-      if (existsSync(dest)) {
-        const destStat = statSync(dest)
-        // Compare size first (cheap), then content bytes if sizes match.
-        // copyFileSync changes mtime, so mtime-based skip doesn't work.
-        if (srcStat.size === destStat.size) {
-          const srcBuf = readFileSync(src)
-          const destBuf = readFileSync(dest)
-          if (srcBuf.equals(destBuf)) {
-            skipped++
-            continue
-          }
-        }
-      }
-      copyFileSync(src, dest)
-      copied++
-    }
+  // Remove old preview so newly deleted source files are reflected.
+  if (existsSync(destBase)) {
+    rmSync(destBase, { recursive: true, force: true })
   }
+
+  mkdirSync(destBase, { recursive: true })
+  syncDir(srcDist, destBase)
 }
 
 console.log(`Synced template previews: ${copied} copied, ${skipped} skipped`)

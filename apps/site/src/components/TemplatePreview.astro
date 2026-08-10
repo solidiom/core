@@ -1,4 +1,7 @@
 ---
+import { existsSync } from "fs"
+import { resolve, dirname } from "path"
+import { fileURLToPath } from "url"
 import "../assets/template-preview.css"
 
 interface Props {
@@ -16,21 +19,46 @@ const copy = {
       : "Preview not available for this template.",
 }
 
-const iframeSrc = `/templates/__preview__/${name}/index.html`
+// Sanitize: reject names that could escape the preview directory.
+const isSafeName =
+  !name.includes("..") &&
+  !name.includes("/") &&
+  !name.startsWith("-")
+
+const iframeSrc = isSafeName
+  ? `/templates/__preview__/${name}/index.html`
+  : null
+
+// Check at build time whether the preview file exists.
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const previewExists =
+  isSafeName &&
+  existsSync(resolve(__dirname, "../../../public/templates/__preview__", name, "index.html"))
 ---
 
 <div class="template-preview">
   <div class="template-preview__frame">
     <div class="template-preview__header">
       <span>{copy.previewLabel} — {name}</span>
-      <span class="template-preview__status">live</span>
+      <span class="template-preview__status">preview</span>
     </div>
-    <iframe
-      class="template-preview__iframe"
-      src={iframeSrc}
-      title={`${copy.previewLabel}: ${name}`}
-      loading="lazy"
-      sandbox="allow-scripts allow-same-origin"
-    />
+    {previewExists && iframeSrc ? (
+      /*
+        allow-scripts: the template needs to run its own JS bundle.
+        allow-same-origin: required so the template's JS can access
+        its own CSS/assets served from the same origin (public/).
+        Templates are trusted — they are built from the same repo.
+      */
+      <iframe
+        class="template-preview__iframe"
+        src={iframeSrc}
+        title={`${copy.previewLabel}: ${name}`}
+        loading="lazy"
+        sandbox="allow-scripts allow-same-origin"
+      />
+    ) : (
+      <div class="template-preview__fallback">{copy.fallback}</div>
+    )}
   </div>
 </div>
