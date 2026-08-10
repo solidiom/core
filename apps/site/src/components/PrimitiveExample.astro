@@ -28,6 +28,35 @@ import { SheetExample } from "./SheetExample"
 import { SwitchExample } from "./SwitchExample"
 import { TabsExample } from "./TabsExample"
 import { VisuallyHiddenExample } from "./VisuallyHiddenExample"
+import { EmptyStateExample } from "./EmptyStateExample"
+import { InputExample } from "./InputExample"
+import { LabelExample } from "./LabelExample"
+import { MeterExample } from "./MeterExample"
+import { ProgressExample } from "./ProgressExample"
+import { SkeletonExample } from "./SkeletonExample"
+import { SpinnerExample } from "./SpinnerExample"
+import { ToggleExample } from "./ToggleExample"
+import { TooltipExample } from "./TooltipExample"
+import { CollapsibleExample } from "./CollapsibleExample"
+import { FieldExample } from "./FieldExample"
+import { HoverCardExample } from "./HoverCardExample"
+import { InputOtpExample } from "./InputOtpExample"
+import { ListboxExample } from "./ListboxExample"
+import { ResizablePanelsExample } from "./ResizablePanelsExample"
+import { ScrollAreaExample } from "./ScrollAreaExample"
+import { SliderExample } from "./SliderExample"
+import { ToastExample } from "./ToastExample"
+import { ToggleGroupExample } from "./ToggleGroupExample"
+import { ToolbarExample } from "./ToolbarExample"
+import { AlertDialogExample } from "./AlertDialogExample"
+import { CalendarExample } from "./CalendarExample"
+import { CarouselExample } from "./CarouselExample"
+import { CommandPaletteExample } from "./CommandPaletteExample"
+import { ContextMenuExample } from "./ContextMenuExample"
+import { DatePickerExample } from "./DatePickerExample"
+import { DrawerExample } from "./DrawerExample"
+import { TreeExample } from "./TreeExample"
+import { VirtualListExample } from "./VirtualListExample"
 
 interface Props {
   name: string
@@ -60,3 +89,32 @@ const { name, locale } = Astro.props
 {name === "switch" && <SwitchExample locale={locale} client:visible />}
 {name === "tabs" && <TabsExample locale={locale} client:visible />}
 {name === "visually-hidden" && <VisuallyHiddenExample locale={locale} client:visible />}
+{name === "empty-state" && <EmptyStateExample locale={locale} client:visible />}
+{name === "input" && <InputExample locale={locale} client:visible />}
+{name === "label" && <LabelExample locale={locale} client:visible />}
+{name === "meter" && <MeterExample locale={locale} client:visible />}
+{name === "progress" && <ProgressExample locale={locale} client:visible />}
+{name === "skeleton" && <SkeletonExample locale={locale} client:visible />}
+{name === "spinner" && <SpinnerExample locale={locale} client:visible />}
+{name === "toggle" && <ToggleExample locale={locale} client:visible />}
+{name === "tooltip" && <TooltipExample locale={locale} client:visible />}
+{name === "collapsible" && <CollapsibleExample locale={locale} client:visible />}
+{name === "field" && <FieldExample locale={locale} client:visible />}
+{name === "hover-card" && <HoverCardExample locale={locale} client:visible />}
+{name === "input-otp" && <InputOtpExample locale={locale} client:visible />}
+{name === "listbox" && <ListboxExample locale={locale} client:visible />}
+{name === "resizable-panels" && <ResizablePanelsExample locale={locale} client:visible />}
+{name === "scroll-area" && <ScrollAreaExample locale={locale} client:visible />}
+{name === "slider" && <SliderExample locale={locale} client:visible />}
+{name === "toast" && <ToastExample locale={locale} client:visible />}
+{name === "toggle-group" && <ToggleGroupExample locale={locale} client:visible />}
+{name === "toolbar" && <ToolbarExample locale={locale} client:visible />}
+{name === "alert-dialog" && <AlertDialogExample locale={locale} client:visible />}
+{name === "calendar" && <CalendarExample locale={locale} client:visible />}
+{name === "carousel" && <CarouselExample locale={locale} client:visible />}
+{name === "command-palette" && <CommandPaletteExample locale={locale} client:visible />}
+{name === "context-menu" && <ContextMenuExample locale={locale} client:visible />}
+{name === "date-picker" && <DatePickerExample locale={locale} client:visible />}
+{name === "drawer" && <DrawerExample locale={locale} client:visible />}
+{name === "tree" && <TreeExample locale={locale} client:visible />}
+{name === "virtual-list" && <VirtualListExample locale={locale} client:visible />}

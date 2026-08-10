@@ -1,8 +1,8 @@
 ---
 contentSchemaVersion: 1
 title: Basic meter
-description: Meter component with scalar measurement display examples.
-keywords: [meter, measurement, gauge, primitive]
+description: Gauge meter component with safe, caution, and danger states.
+keywords: [meter, gauge, progress, status]
 locale: en
 maturity: draft
 product: Meter
@@ -19,20 +19,10 @@ source:
 runnable: true
 ---
 
-The Meter component is a styled recipe wrapper around the `@solidiom/meter` primitive. It provides a scalar measurement display using the native HTML `<meter>` element, with status states derived from value thresholds.
+The Meter component displays a scalar measurement within a known range, such as disk usage or a rating.
 
 ```tsx
 import { StyledMeter } from "@solidiom/recipes-css"
 
-;<StyledMeter value={0.7} min={0} max={1} />
-```
-
-## With thresholds
-
-Define low, high, and optimum values to derive status states.
-
-```tsx
-import { StyledMeter } from "@solidiom/recipes-css"
-
-;<StyledMeter value={75} min={0} max={100} low={25} high={75} optimum={100} />
+;<StyledMeter value={0.35} min={0} max={1} low={0.5} high={0.8} optimum={0} aria-label="Disk usage" />
 ```

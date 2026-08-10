@@ -16,41 +16,27 @@ source:
   path: apps/site/src/components/ToastExample.tsx
   export: ToastExample
   language: tsx
-runnable: true
-translationSourceHash: "76102a7d176818a986e704d48ebd987137df6708f8d40e0b310e5458c5100125"
+  runnable: true
+translationSourceHash: "e60cb3d04edb3707f96582a91360346a95e61f2b451da4201dca7b50c40d1768"
 translationStatus: draft
 ---
 
-The Toast component is a styled recipe wrapper around the `@solidiom/toast` primitive. It provides a notification queue with auto-dismiss, pause-on-hover, configurable max visible toasts, and programmatic control through `createToaster()`.
+El componente Toast proporciona notificaciones no bloqueantes que aparecen temporalmente y se cierran automáticamente.
 
 ```tsx
 import { StyledToast, Toast } from "@solidiom/recipes-css"
-import { createToaster } from "@solidiom/toast"
 
-const { toast, regionProps } = createToaster({ max: 3 })
+const toaster = Toast.createToaster({ max: 3 })
 
-;<div>
-  <Toast.Region {...regionProps} />
-  <button onClick={() => toast({ title: "Success", description: "Changes saved." })}>
-    Show toast
-  </button>
-</div>
-```
-
-## With variants
-
-Toasts support the info, success, warning, and error variants for visual distinction.
-
-```tsx
-import { StyledToast, Toast } from "@solidiom/recipes-css"
-import { createToaster } from "@solidiom/toast"
-
-const { toast, regionProps } = createToaster()
-
-;<div>
-  <Toast.Region {...regionProps} />
-  <button onClick={() => toast({ title: "Error", description: "Operation failed.", variant: "error" })}>
-    Show error toast
-  </button>
-</div>
+;<Toast.Region toaster={toaster}>
+  {(toasts) =>
+    toasts().map((entry) => (
+      <Toast.Root toastId={entry.id}>
+        <Toast.Title>{entry.title}</Toast.Title>
+        <Toast.Description>{entry.description}</Toast.Description>
+        <Toast.Close>Dismiss</Toast.Close>
+      </Toast.Root>
+    ))
+  }
+</Toast.Region>
 ```

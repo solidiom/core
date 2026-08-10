@@ -23,5 +23,23 @@ runnableReason: "No keyboard interaction declared in the accessibility contract.
 ```tsx
 import * as ScrollArea from "@solidiom/scroll-area"
 
-;<ScrollArea.Root>Scroll Area content</ScrollArea.Root>
+;<ScrollArea.Root type="hover">
+  <ScrollArea.Viewport style={{ height: 300 }}>
+    <div style={{ padding: 16 }}>
+      {Array.from({ length: 50 }, (_, i) => (
+        <p key={i}>Line {i + 1} of scrollable content.</p>
+      ))}
+    </div>
+  </ScrollArea.Viewport>
+
+  <ScrollArea.Scrollbar orientation="vertical">
+    <ScrollArea.Thumb />
+  </ScrollArea.Scrollbar>
+
+  <ScrollArea.Scrollbar orientation="horizontal">
+    <ScrollArea.Thumb />
+  </ScrollArea.Scrollbar>
+</ScrollArea.Root>
 ```
+
+The scrollbar visibility is controlled by the `type` prop: "auto" (overflow only), "always", "hover" (default), or "scroll" (visible during scroll then hides after `scrollHideDelay` ms).

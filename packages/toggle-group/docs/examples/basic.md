@@ -22,5 +22,29 @@ runnable: true
 ```tsx
 import * as ToggleGroup from "@solidiom/toggle-group"
 
-;<ToggleGroup.Root>Toggle Group content</ToggleGroup.Root>
+;<ToggleGroup.Root
+  type="single"
+  defaultValue={["bold"]}
+  onValueChange={(values) => console.log(values)}
+>
+  <ToggleGroup.Item value="bold">B</ToggleGroup.Item>
+  <ToggleGroup.Item value="italic">I</ToggleGroup.Item>
+  <ToggleGroup.Item value="underline">U</ToggleGroup.Item>
+</ToggleGroup.Root>
 ```
+
+## Multiple selection
+
+```tsx
+;<ToggleGroup.Root
+  type="multiple"
+  defaultValue={["bold", "italic"]}
+  onValueChange={(values) => console.log(values)}
+>
+  <ToggleGroup.Item value="bold">B</ToggleGroup.Item>
+  <ToggleGroup.Item value="italic">I</ToggleGroup.Item>
+  <ToggleGroup.Item value="underline">U</ToggleGroup.Item>
+</ToggleGroup.Root>
+```
+
+In `single` mode, only one item can be active at a time. In `multiple` mode, items toggle independently. Use the `orientation` prop for vertical layout.

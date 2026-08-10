@@ -23,5 +23,16 @@ runnableReason: "No keyboard interaction declared in the accessibility contract.
 ```tsx
 import * as EmptyState from "@solidiom/empty-state"
 
-;<EmptyState.Root>Empty State content</EmptyState.Root>
+;<EmptyState.Root>
+  <EmptyState.Icon>📭</EmptyState.Icon>
+  <EmptyState.Title>No messages</EmptyState.Title>
+  <EmptyState.Description>
+    You don't have any messages yet. Send one to get started.
+  </EmptyState.Description>
+  <EmptyState.Action>
+    <button>Send a message</button>
+  </EmptyState.Action>
+</EmptyState.Root>
 ```
+
+The empty state provides a structured placeholder for void content areas. Each part is purely presentational with no built-in interactivity beyond the action slot.

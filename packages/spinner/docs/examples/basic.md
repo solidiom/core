@@ -23,5 +23,13 @@ runnableReason: "No keyboard interaction declared in the accessibility contract.
 ```tsx
 import * as Spinner from "@solidiom/spinner"
 
-;<Spinner.Root>Spinner content</Spinner.Root>
+;<Spinner.Root label="Loading data..." />
+
+;<Spinner.Root label="Processing">
+  <div class="spinner-visual">
+    <span class="spinner-dot" />
+  </div>
+</Spinner.Root>
 ```
+
+The spinner renders a `<span>` with `role="status"` and announces its `label` to screen readers. Default label is "Loading". Provide custom children for your own spinner visual while keeping the accessible wrapper.

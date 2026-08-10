@@ -1,8 +1,8 @@
 ---
 contentSchemaVersion: 1
 title: Basic toolbar
-description: Toolbar component with action groups and navigation examples.
-keywords: [toolbar, tools, actions, group, component]
+description: Toolbar component with action buttons, toggle buttons, and separators.
+keywords: [toolbar, actions, toggle, separator, component]
 locale: en
 maturity: draft
 product: Toolbar
@@ -19,33 +19,19 @@ source:
 runnable: true
 ---
 
-The Toolbar component is a styled recipe wrapper around the `@solidiom/toolbar` primitive. It provides a toolbar with action groups and keyboard navigation using roving tabindex.
+The Toolbar component provides a container for grouping action buttons, toggle buttons, and separators.
 
 ```tsx
-import { StyledToolbar } from "@solidiom/recipes-css"
+import { StyledToolbar, Toolbar } from "@solidiom/recipes-css"
 
 ;<StyledToolbar>
-  <StyledToolbar.Button>Undo</StyledToolbar.Button>
-  <StyledToolbar.Button>Redo</StyledToolbar.Button>
-  <StyledToolbar.Separator />
-  <StyledToolbar.Button>Save</StyledToolbar.Button>
-</StyledToolbar>
-```
-
-## With groups
-
-Separate actions into groups with visual separators.
-
-```tsx
-import { StyledToolbar } from "@solidiom/recipes-css"
-
-;<StyledToolbar>
-  <StyledToolbar.Button>Cut</StyledToolbar.Button>
-  <StyledToolbar.Button>Copy</StyledToolbar.Button>
-  <StyledToolbar.Button>Paste</StyledToolbar.Button>
-  <StyledToolbar.Separator />
-  <StyledToolbar.Button>Bold</StyledToolbar.Button>
-  <StyledToolbar.Button>Italic</StyledToolbar.Button>
-  <StyledToolbar.Button>Underline</StyledToolbar.Button>
+  <Toolbar.Button>Cut</Toolbar.Button>
+  <Toolbar.Button>Copy</Toolbar.Button>
+  <Toolbar.Button>Paste</Toolbar.Button>
+  <Toolbar.Separator />
+  <Toolbar.ToggleGroup type="single">
+    <Toolbar.ToggleItem pressed={false}>Bold</Toolbar.ToggleItem>
+    <Toolbar.ToggleItem pressed={false}>Italic</Toolbar.ToggleItem>
+  </Toolbar.ToggleGroup>
 </StyledToolbar>
 ```

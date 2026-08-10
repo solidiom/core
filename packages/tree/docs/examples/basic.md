@@ -22,5 +22,32 @@ runnable: true
 ```tsx
 import * as Tree from "@solidiom/tree"
 
-;<Tree.Root>Tree content</Tree.Root>
+;<Tree.Root selectionMode="single" defaultExpandedIds={new Set(["src"])}>
+  <Tree.Item id="src" textValue="src">
+    <Tree.ItemIndicator>▶</Tree.ItemIndicator>
+    src
+    <Tree.Branch>
+      <Tree.Item id="src-components" textValue="components">
+        <Tree.ItemIndicator>▶</Tree.ItemIndicator>
+        components
+        <Tree.Branch>
+          <Tree.Item id="src-components-button" textValue="button.tsx">
+            <Tree.ItemIndicator>▶</Tree.ItemIndicator>
+            button.tsx
+          </Tree.Item>
+          <Tree.Item id="src-components-modal" textValue="modal.tsx">
+            <Tree.ItemIndicator>▶</Tree.ItemIndicator>
+            modal.tsx
+          </Tree.Item>
+        </Tree.Branch>
+      </Tree.Item>
+      <Tree.Item id="src-utils" textValue="utils.ts">
+        <Tree.ItemIndicator>▶</Tree.ItemIndicator>
+        utils.ts
+      </Tree.Item>
+    </Tree.Branch>
+  </Tree.Item>
+</Tree.Root>
 ```
+
+The Branch renders only when its parent Item is expanded. The ItemIndicator toggles expand/collapse on click. The tree supports keyboard navigation with Arrow keys, Home/End, and typeahead. Use `selectionMode="multiple"` for multi-select.

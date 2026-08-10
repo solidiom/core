@@ -23,5 +23,19 @@ runnableReason: "No keyboard interaction declared in the accessibility contract.
 ```tsx
 import * as Progress from "@solidiom/progress"
 
-;<Progress.Root>Progress content</Progress.Root>
+;<div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+  <Progress.Root value={65} aria-label="Upload progress">
+    <Progress.Indicator />
+  </Progress.Root>
+
+  <Progress.Root value={100} aria-label="Complete">
+    <Progress.Indicator />
+  </Progress.Root>
+
+  <Progress.Root value={null} aria-label="Loading">
+    <Progress.Indicator />
+  </Progress.Root>
+</div>
 ```
+
+Pass a numeric value (0 to `max`, default 100) for determinate progress, or `null` for indeterminate loading. The Root emits `data-state` of "loading" or "complete" and `data-percent` for styling the Indicator fill.

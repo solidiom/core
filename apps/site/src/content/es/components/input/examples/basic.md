@@ -1,8 +1,8 @@
 ---
 contentSchemaVersion: 1
 title: Entrada básica
-description: Entrada de texto y área de texto con estados de validación y estilos.
-keywords: [input, textarea, form, styled, recipe]
+description: Componente de entrada de texto con varios tipos y estados.
+keywords: [input, text, form, field]
 locale: es
 maturity: draft
 product: Input
@@ -13,40 +13,34 @@ recipe: "input"
 section: examples
 exampleId: input-component-basic
 source:
-  path: apps/site/src/components/InputComponentExample.tsx
-  export: InputComponentExample
+  path: apps/site/src/components/InputExample.tsx
+  export: InputExample
   language: tsx
 runnable: true
-translationSourceHash: "dc7741696ea6904537d61a3d04cb5f5ef02991712050039e97669f966b968d99"
+translationSourceHash: "6b8052f73a2951bd0338e81e0c54ba5ae259b8184dab7e3f58f7f0e1ab61bf4c"
 translationStatus: draft
 ---
 
-El componente Input proporciona entrada de texto estilizada y área de texto con hooks de estado de validación.
+El componente Input es un envoltorio de receta estilizada alrededor del primitivo `@solidiom/input`. Soporta múltiples tipos de entrada y estados, incluidos deshabilitado e inválido.
 
 ```tsx
-import { StyledInput, StyledTextarea } from "@solidiom/recipes-css"
+import { StyledInput } from "@solidiom/recipes-css"
 
-;<StyledInput placeholder="Enter your name" />
+;<StyledInput type="text" placeholder="Enter your name" />
 ```
 
-## Con estado de validación
-
-Usa la propiedad `invalid` para indicar errores de validación.
+## Entrada de correo electrónico
 
 ```tsx
-;<StyledInput placeholder="Email address" type="email" invalid />
-```
+import { StyledInput } from "@solidiom/recipes-css"
 
-## Textarea
-
-Usa `StyledTextarea` para entrada de texto de varias líneas.
-
-```tsx
-;<StyledTextarea placeholder="Enter a message" rows={4} />
+;<StyledInput type="email" placeholder="you@example.com" />
 ```
 
 ## Estado deshabilitado
 
 ```tsx
-;<StyledInput placeholder="Read-only field" disabled />
+import { StyledInput } from "@solidiom/recipes-css"
+
+;<StyledInput type="text" placeholder="Cannot edit" disabled />
 ```

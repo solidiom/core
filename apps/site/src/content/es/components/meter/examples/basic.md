@@ -1,8 +1,8 @@
 ---
 contentSchemaVersion: 1
-title: Meter básico
-description: Componente meter con ejemplos de visualización de medida escalar.
-keywords: [meter, measurement, gauge, primitive]
+title: Medidor básico
+description: Componente de medidor con estados de seguro, precaución y peligro.
+keywords: [meter, gauge, progress, status]
 locale: es
 maturity: draft
 product: Meter
@@ -21,20 +21,10 @@ translationSourceHash: "e386119a0812a505199c081ad0c00a90e9ad1e69bf17abf139a78d83
 translationStatus: draft
 ---
 
-El componente Meter es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/meter`. Proporciona una visualización de medida escalar utilizando el elemento nativo HTML `<meter>`, con estados derivados de umbrales de valor.
+El componente Meter muestra una medición escalar dentro de un rango conocido, como el uso de disco o una calificación.
 
 ```tsx
 import { StyledMeter } from "@solidiom/recipes-css"
 
-;<StyledMeter value={0.7} min={0} max={1} />
-```
-
-## Con umbrales
-
-Define valores low, high y optimum para derivar estados de estado.
-
-```tsx
-import { StyledMeter } from "@solidiom/recipes-css"
-
-;<StyledMeter value={75} min={0} max={100} low={25} high={75} optimum={100} />
+;<StyledMeter value={0.35} min={0} max={1} low={0.5} high={0.8} optimum={0} aria-label="Uso de disco" />
 ```

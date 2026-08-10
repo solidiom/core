@@ -1,8 +1,8 @@
 ---
 contentSchemaVersion: 1
 title: Basic tooltip
-description: Tooltip component with delay and positioning examples.
-keywords: [tooltip, hover, overlay, hint, primitive]
+description: Tooltip component that appears on hover and focus.
+keywords: [tooltip, hover, popup, overlay]
 locale: en
 maturity: draft
 product: Tooltip
@@ -19,26 +19,15 @@ source:
 runnable: true
 ---
 
-The Tooltip component is a styled recipe wrapper around the `@solidiom/tooltip` primitive. It provides a lightweight overlay with configurable delay and positioning, activated on focus and hover.
+The Tooltip component displays supplementary information when the user hovers over or focuses on an element.
 
 ```tsx
 import { StyledTooltip, Tooltip } from "@solidiom/recipes-css"
 
-;<StyledTooltip>
-  <Tooltip.Trigger>Hover me</Tooltip.Trigger>
-  <Tooltip.Content>Helpful information</Tooltip.Content>
-</StyledTooltip>
-```
-
-## With custom delay
-
-Control the delay before the tooltip appears.
-
-```tsx
-import { StyledTooltip, Tooltip } from "@solidiom/recipes-css"
-
-;<StyledTooltip delayDuration={300}>
-  <Tooltip.Trigger>Hover me</Tooltip.Trigger>
-  <Tooltip.Content>Appears after 300ms</Tooltip.Content>
-</StyledTooltip>
+;<Tooltip.Root>
+  <Tooltip.Trigger>
+    <button type="button">Hover me</button>
+  </Tooltip.Trigger>
+  <Tooltip.Content>Tooltip content</Tooltip.Content>
+</Tooltip.Root>
 ```
