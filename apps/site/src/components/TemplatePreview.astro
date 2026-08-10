@@ -1,0 +1,36 @@
+---
+import "../assets/template-preview.css"
+
+interface Props {
+  name: string
+  locale: "en" | "es"
+}
+
+const { name, locale } = Astro.props
+
+const copy = {
+  previewLabel: locale === "es" ? "Vista previa" : "Preview",
+  fallback:
+    locale === "es"
+      ? "La vista previa no está disponible para esta plantilla."
+      : "Preview not available for this template.",
+}
+
+const iframeSrc = `/templates/${name}/index.html`
+---
+
+<div class="template-preview">
+  <div class="template-preview__frame">
+    <div class="template-preview__header">
+      <span>{copy.previewLabel} — {name}</span>
+      <span class="template-preview__status">live</span>
+    </div>
+    <iframe
+      class="template-preview__iframe"
+      src={iframeSrc}
+      title={`${copy.previewLabel}: ${name}`}
+      loading="lazy"
+      sandbox="allow-scripts allow-same-origin"
+    />
+  </div>
+</div>
