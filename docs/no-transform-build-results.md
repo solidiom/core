@@ -6,7 +6,7 @@ transforms enabled (transforms are opt-in optimizations, not build requirements)
 ## Build Command
 
 ```sh
-pnpm nx run-many -t build --exclude=@solidiom/docs-astro-poc --exclude=@solidiom/site
+pnpm nx run-many -t build --exclude=@solidiom/site
 ```
 
 ## Result
