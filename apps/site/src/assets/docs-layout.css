@@ -182,6 +182,92 @@
   }
 }
 
+/* Blog meta card in the right sidebar */
+.docs-shell__blog-meta {
+  margin-bottom: 1.5rem;
+}
+
+.docs-shell__blog-meta--info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.docs-shell__blog-meta--info dt {
+  color: var(--color-foreground-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.docs-shell__blog-meta--info dd {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-foreground);
+}
+
+.docs-shell__blog-meta--tags dd {
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  font-size: 0.8125rem;
+  word-break: break-word;
+}
+
+.docs-shell__blog-meta--author {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.docs-shell__blog-meta--avatar {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+}
+
+.docs-shell__blog-meta--name {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.docs-shell__blog-meta--name a {
+  color: var(--color-foreground);
+  text-decoration: none;
+}
+
+.docs-shell__blog-meta--name a:hover {
+  color: var(--focus-ring);
+  text-decoration: underline;
+}
+
+.docs-shell__blog-meta--bio {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-foreground-muted);
+  line-height: 1.4;
+}
+
+.docs-shell__blog-meta--links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.docs-shell__blog-meta--links a {
+  color: var(--color-foreground-muted);
+  font-size: 0.8125rem;
+  text-decoration: none;
+}
+
+.docs-shell__blog-meta--links a:hover {
+  color: var(--focus-ring);
+  text-decoration: underline;
+}
+
 /* DocsMobileNav (drawer contents) */
 .docs-mobile-nav__trigger {
   display: inline-flex;

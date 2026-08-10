@@ -13,7 +13,6 @@ const PRIMITIVES_LABEL: Record<Locale, string> = { en: "Primitives", es: "Primit
 const COMPONENTS_LABEL: Record<Locale, string> = { en: "Components", es: "Componentes" }
 const THEMES_LABEL: Record<Locale, string> = { en: "Themes", es: "Temas" }
 const BLOG_LABEL: Record<Locale, string> = { en: "Blog", es: "Blog" }
-const PLAYGROUND_LABEL: Record<Locale, string> = { en: "Playground", es: "Playground" }
 
 export const DOCS_DROPDOWN_LABEL: Record<Locale, string> = { en: "Docs", es: "Docs" }
 
@@ -23,8 +22,7 @@ export function getPrimaryLinks(locale: Locale): NavLink[] {
     { label: PRIMITIVES_LABEL[locale], href: `${prefix}/primitives/` },
     { label: COMPONENTS_LABEL[locale], href: `${prefix}/components/` },
     { label: THEMES_LABEL[locale], href: `${prefix}/themes/` },
-    { label: BLOG_LABEL[locale], href: "https://github.com/solidiom/solidiom/discussions" },
-    { label: PLAYGROUND_LABEL[locale], href: `${prefix}/primitives/` },
+    { label: BLOG_LABEL[locale], href: `${prefix}/blog/` },
   ]
 }
 

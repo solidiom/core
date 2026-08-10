@@ -60,11 +60,14 @@ const guides = defineCollection({
 
 /** Articles are published under the existing /blog content directory. */
 const articles = defineCollection({
-  loader: glob({ pattern: "{en,es}/blog/**/*.{md,mdx}", base: "./src/content" }),
+  loader: glob({ pattern: "{en,es}/articles/**/*.{md,mdx}", base: "./src/content" }),
   schema: z.object({
     ...localizedContentFields,
     date: z.coerce.date(),
+    /** @deprecated Use authors[] instead; kept for backward compatibility. */
     author: z.string().min(1).optional(),
+    /** Author IDs referencing entries in data/authors.json. */
+    authors: z.array(z.string().min(1)).default([]),
     tags: z.array(z.string().min(1)).default([]),
   }),
 })

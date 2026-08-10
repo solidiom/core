@@ -1,0 +1,151 @@
+---
+import { getCollection, getEntry, render } from "astro:content"
+import DocsLayout, { type BlogMeta } from "@layouts/DocsLayout.astro"
+import { tocFromHeadings, type DocsTocEntry, type DocsSidebarGroup } from "@lib/docs-nav"
+import { getAuthorsByIds } from "@lib/authors"
+
+export async function getStaticPaths() {
+  const entries = await getCollection("articles")
+  return entries.map((entry) => ({
+    params: { slug: entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id },
+  }))
+}
+
+const { slug } = Astro.params
+const blogPath = "/es/blog/"
+
+const rawEntry = await getEntry("articles", `es/articles/${slug}`)
+if (!rawEntry) throw new Error(`Artículo no encontrado: es/articles/${slug}`)
+
+const entryData = rawEntry.data
+const entryAuthors: string[] = (entryData as Record<string, unknown>).authors
+  ? ((entryData as Record<string, unknown>).authors as string[])
+  : []
+
+const rendered = await render(rawEntry)
+const { Content } = rendered
+const headings = rendered.headings ?? []
+const toc: DocsTocEntry[] = tocFromHeadings(headings as Array<{ depth: number; slug: string; text: string }>)
+
+const allEntries = await getCollection("articles", (e) => e.data.locale === "es")
+const sorted = [...allEntries].sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+)
+const currentIndex = sorted.findIndex((e) => e.id === rawEntry.id)
+const prevEntry = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : undefined
+const nextEntry = currentIndex > 0 ? sorted[currentIndex - 1] : undefined
+
+const prevSlug = prevEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
+const nextSlug = nextEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
+
+const prevLink = prevSlug && prevEntry ? { label: prevEntry.data.title, href: `${blogPath}${prevSlug}/` } : undefined
+const nextLink = nextSlug && nextEntry ? { label: nextEntry.data.title, href: `${blogPath}${nextSlug}/` } : undefined
+
+const authors = getAuthorsByIds(entryAuthors)
+const blogMeta: BlogMeta = {
+  authors: authors.map((a) => ({
+    avatar: a.avatar,
+    name: a.name,
+    description: a.description,
+    github: a.github ?? undefined,
+    linkedin: a.linkedin ?? undefined,
+    website: a.website ?? undefined,
+  })),
+  date: entryData.date,
+  tags: entryData.tags,
+}
+
+const allTags = [...new Set(sorted.flatMap((e) => e.data.tags))].sort((a, b) => a.localeCompare(b))
+
+const sidebarGroups: DocsSidebarGroup[] = [
+  {
+    label: "Categorías",
+    links: [
+      { label: `Todos (${sorted.length})`, href: `${blogPath}?tag=all` },
+      ...allTags.map((tag) => ({
+        label: `${tag} (${sorted.filter((e) => e.data.tags.includes(tag)).length})`,
+        href: `${blogPath}?tag=${encodeURIComponent(tag)}`,
+      })),
+    ],
+  },
+  {
+    label: "Entradas recientes",
+    links: sorted.slice(0, 10).map((entry) => {
+      const entrySlug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
+      return {
+        label: entry.data.title,
+        href: `${blogPath}${entrySlug}/`,
+      }
+    }),
+  },
+]
+---
+
+<DocsLayout
+  title={entryData.title}
+  description={entryData.description}
+  sidebarGroups={sidebarGroups}
+  toc={toc}
+  previous={prevLink}
+  next={nextLink}
+  contentType="blog"
+  blogMeta={blogMeta}
+>
+  <div class="blog-entry__header">
+    <a href={blogPath} class="blog-entry__back">
+      ← Blog
+    </a>
+    <div class="blog-entry__meta">
+      <time datetime={entryData.date.toISOString().split("T")[0]}>
+        {entryData.date.toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </time>
+      {authors.length > 0 && (
+        <span class="blog-entry__author">
+          por {authors.map((a) => a.name).join(", ")}
+        </span>
+      )}
+      {entryData.tags.length > 0 && (
+        <span class="blog-entry__tags">{entryData.tags.join(", ")}</span>
+      )}
+    </div>
+  </div>
+
+  <Content />
+</DocsLayout>
+
+<style>
+  .blog-entry__back {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--color-muted, #6b7280);
+    text-decoration: none;
+    margin-bottom: 1rem;
+  }
+
+  .blog-entry__back:hover {
+    color: var(--color-link, #2563eb);
+  }
+
+  .blog-entry__meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-muted, #6b7280);
+    flex-wrap: wrap;
+  }
+
+  .blog-entry__author {
+    font-weight: 500;
+  }
+
+  .blog-entry__tags {
+    font-family: var(--font-mono, "IBM Plex Mono", monospace);
+    font-size: 0.75rem;
+  }
+</style>

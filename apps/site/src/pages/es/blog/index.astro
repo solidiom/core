@@ -1,0 +1,302 @@
+---
+import { getCollection } from "astro:content"
+import DocsLayout from "@layouts/DocsLayout.astro"
+import { type DocsSidebarGroup } from "@lib/docs-nav"
+import { getAuthorsByIds } from "@lib/authors"
+
+const blogPath = "/es/blog/"
+
+const entries = await getCollection("articles", (entry) => entry.data.locale === "es")
+const sortedEntries = [...entries].sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+)
+
+const allTags = [...new Set(sortedEntries.flatMap((e) => e.data.tags))].sort((a, b) => a.localeCompare(b))
+
+const tagCounts = allTags.map((tag) => ({
+  tag,
+  count: sortedEntries.filter((e) => e.data.tags.includes(tag)).length,
+}))
+
+const formatDate = (dateVal: Date | string): string => {
+  const d = typeof dateVal === "string" ? new Date(dateVal) : dateVal
+  return d.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+}
+
+const sidebarGroups: DocsSidebarGroup[] = [
+  {
+    label: "Categorías",
+    links: [
+      { label: `Todos (${sortedEntries.length})`, href: `${blogPath}?tag=all` },
+      ...tagCounts.map((tc) => ({
+        label: `${tc.tag} (${tc.count})`,
+        href: `${blogPath}?tag=${encodeURIComponent(tc.tag)}`,
+      })),
+    ],
+  },
+  {
+    label: "Entradas recientes",
+    links: sortedEntries.slice(0, 10).map((entry) => {
+      const slug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
+      return {
+        label: entry.data.title,
+        href: `${blogPath}${slug}/`,
+      }
+    }),
+  },
+]
+---
+
+<DocsLayout
+  title="Blog"
+  description="Artículos y novedades de Solidiom."
+  sidebarGroups={sidebarGroups}
+  contentType="blog"
+>
+  {allTags.length > 0 && (
+    <div class="blog-categories" data-blog-categories>
+      <p class="blog-categories__label">Categorías</p>
+      <ul class="blog-categories__list">
+        <li>
+          <button
+            type="button"
+            class="blog-categories__chip blog-categories__chip--active"
+            data-category="all"
+          >
+            Todos
+          </button>
+        </li>
+        {allTags.map((tag) => (
+          <li>
+            <button
+              type="button"
+              class="blog-categories__chip"
+              data-category={tag}
+            >
+              {tag}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  <nav aria-label="Navegación del blog">
+    {sortedEntries.length > 0 ? (
+      <ol class="blog-list">
+        {sortedEntries.map((entry) => {
+          const slug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
+          const href = `${blogPath}${slug}/`
+          const rawAuthors = (entry.data as typeof entry.data & { authors?: string[] }).authors
+          const authors = rawAuthors ? getAuthorsByIds(rawAuthors) : []
+          return (
+            <li
+              class="blog-list__item"
+              data-blog-entry
+              data-tags={entry.data.tags.join(",")}
+            >
+              <a href={href} class="blog-list__link">
+                <header class="blog-list__header">
+                  <h2 class="blog-list__title">{entry.data.title}</h2>
+                  <time class="blog-list__date" datetime={entry.data.date.toISOString().split("T")[0]}>
+                    {formatDate(entry.data.date)}
+                  </time>
+                </header>
+                <p class="blog-list__description">{entry.data.description}</p>
+                <footer class="blog-list__meta">
+                  {authors.length > 0 && (
+                    <span class="blog-list__author">
+                      {authors.map((a) => a.name).join(", ")}
+                    </span>
+                  )}
+                  {entry.data.author && authors.length === 0 && (
+                    <span class="blog-list__author">{entry.data.author}</span>
+                  )}
+                  {entry.data.tags.length > 0 && (
+                    <span class="blog-list__tags">
+                      {entry.data.tags.join(", ")}
+                    </span>
+                  )}
+                </footer>
+              </a>
+            </li>
+          )
+        })}
+      </ol>
+    ) : (
+      <p class="blog-empty">Aún no hay artículos publicados.</p>
+    )}
+  </nav>
+</DocsLayout>
+
+<style>
+  .blog-categories {
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-categories__label {
+    color: var(--color-foreground-muted, #6b7280);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.5rem;
+  }
+
+  .blog-categories__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .blog-categories__chip {
+    font-family: var(--font-body, inherit);
+    font-size: 0.8125rem;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 9999px;
+    background: none;
+    color: var(--color-foreground, #111827);
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  }
+
+  .blog-categories__chip:hover {
+    background-color: var(--color-bg-muted, #f3f4f6);
+  }
+
+  .blog-categories__chip--active {
+    background-color: var(--color-foreground, #111827);
+    color: var(--color-surface, #ffffff);
+    border-color: var(--color-foreground, #111827);
+  }
+
+  .blog-categories__chip--active:hover {
+    background-color: var(--color-foreground, #111827);
+    opacity: 0.85;
+  }
+
+  .blog-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .blog-list__item {
+    border-bottom: 1px solid var(--color-border, #e5e7eb);
+  }
+
+  .blog-list__link {
+    display: block;
+    padding: 1.5rem 0;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-list__link:first-of-type {
+    padding-top: 0;
+  }
+
+  .blog-list__link:hover {
+    text-decoration: underline;
+  }
+
+  .blog-list__header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-list__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .blog-list__date {
+    font-size: 0.875rem;
+    color: var(--color-muted, #6b7280);
+    white-space: nowrap;
+  }
+
+  .blog-list__description {
+    margin: 0 0 0.5rem 0;
+    color: var(--color-body, #374151);
+  }
+
+  .blog-list__meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--color-muted, #6b7280);
+  }
+
+  .blog-list__author {
+    font-weight: 500;
+  }
+
+  .blog-list__tags {
+    font-family: var(--font-mono, "IBM Plex Mono", monospace);
+    font-size: 0.75rem;
+  }
+
+  .blog-empty {
+    color: var(--color-muted, #6b7280);
+    font-style: italic;
+  }
+</style>
+
+<script>
+  const chips = document.querySelectorAll("[data-blog-categories] [data-category]")
+  const entries = document.querySelectorAll("[data-blog-entry]")
+  const params = new URLSearchParams(window.location.search)
+  const initialTag = params.get("tag")
+
+  if (initialTag && chips.length > 0) {
+    const matchingChip = Array.from(chips).find(
+      (c) => c.getAttribute("data-category") === initialTag
+    )
+    if (matchingChip) {
+      chips.forEach((c) => c.classList.remove("blog-categories__chip--active"))
+      matchingChip.classList.add("blog-categories__chip--active")
+      entries.forEach((entry) => {
+        if (initialTag === "all") {
+          ;(entry as HTMLElement).style.display = ""
+          return
+        }
+        const tags = entry.getAttribute("data-tags")?.split(",").filter(Boolean) ?? []
+        const visible = tags.includes(initialTag)
+        ;(entry as HTMLElement).style.display = visible ? "" : "none"
+      })
+    }
+  }
+
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      chips.forEach((c) => c.classList.remove("blog-categories__chip--active"))
+      chip.classList.add("blog-categories__chip--active")
+
+      const category = chip.getAttribute("data-category") ?? ""
+
+      entries.forEach((entry) => {
+        if (category === "all") {
+          ;(entry as HTMLElement).style.display = ""
+          return
+        }
+        const tags = entry.getAttribute("data-tags")?.split(",").filter(Boolean) ?? []
+        const visible = tags.includes(category)
+        ;(entry as HTMLElement).style.display = visible ? "" : "none"
+      })
+
+      history.replaceState(null, "", `${window.location.pathname}?tag=${category}`)
+    })
+  })
+</script>
