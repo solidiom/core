@@ -9,6 +9,7 @@ import DocsLayout from "../layouts/DocsLayout.astro"
 import CatalogBreadcrumbs from "./CatalogBreadcrumbs.astro"
 import ComponentExample from "./ComponentExample.astro"
 import ThemePreview from "./ThemePreview.astro"
+import TemplatePreview from "./TemplatePreview.astro"
 
 interface Props {
   collectionName: "components" | "blocks" | "templates" | "themes"
@@ -116,6 +117,9 @@ const sidebarGroups: DocsSidebarGroup[] = [
         )}
         {layer === "themes" && (
           <ThemePreview slug={name} locale={locale} />
+        )}
+        {layer === "templates" && (
+          <TemplatePreview name={name} locale={locale} />
         )}
         {DocumentContent ? <DocumentContent /> : <p>{pageDescription}</p>}
       </section>
