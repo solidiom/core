@@ -27,7 +27,7 @@ Solidiom ships a registry-driven, bilingual product website, not only a document
 
 The production application is a static Astro site with isolated Solid islands. Documentation and marketing are zero-JavaScript by default. The playground and theme builder are route-local Solid applications and must not increase the JavaScript cost of content routes.
 
-`apps/docs/` is frozen and marked for removal at CUT-003. Its deprecation notice is archived at `docs/history/legacy-docs/deprecated-notice.md`. The Astro MDX POC findings are archived at `docs/history/poc/docs-astro-poc-findings.md`.
+`apps/docs/` has been removed (CUT-003). Its deprecation notice is archived at `docs/history/legacy-docs/deprecated-notice.md`. The Astro MDX POC findings are archived at `docs/history/poc/docs-astro-poc-findings.md`.
 
 `../solid2/corvu/web/` is reference-only. Do not copy its code, styling, content, assets, or information architecture. Existing package-level provenance remains intact, but the Solidiom website shell, search, table of contents, examples, API rendering, and theme bootstrap are Solidiom-owned.
 
@@ -356,7 +356,7 @@ GA requires all of the following:
 13. Signed registry manifests and fail-closed verification are enabled.
 14. Analytics allowlists, newsletter consent, privacy, security, license, DCO, and brand policies are published.
 15. Production, preview, redirect, and rollback paths for `solidiom.org` are verified.
-16. Legacy `apps/docs` and the POC are removed only after parity and baseline verification.
+16. Legacy `apps/docs` and the POC are removed after parity and baseline verification.
 
 Implementation state, exceptions, owners, and residual work belong only in [consolidated-plan.md](../plans/consolidated-plan.md).
 
@@ -378,13 +378,12 @@ Implementation state, exceptions, owners, and residual work belong only in [cons
 | 12 | Solidiom-only dogfooding | **PASS** | `apps/site/` imports 20+ `@solidiom/*` primitives (Accordion, Alert, Badge, Breadcrumb, Button, Card, Checkbox, Combobox, Data Table, Dialog, Drawer, Field, Input, Label, Menu, Navigation Menu, Pagination, Popover, Progress, Radio Group, Select, Separator, Sheet, Switch, Tabs, etc.). Site chrome (SiteHeader, SiteSearch, DocsMobileNav) and theme builder use Solidiom components. |
 | 13 | Signed registry manifests | **PARTIAL** | `integrity` section with `sha256` algorithm and `entriesHash` present. Per-file digests referenced in schema. Signing infrastructure and Ed25519 keys exist in codebase. Signatures not yet applied to current registry index. |
 | 14 | Policies published | **PASS** | Privacy (`/privacy/`), Security (`/security/`, newly created), Trademark/Brand (`/trademark/`), DCO (`/dco/`, newly created), License (`LICENSE` at repo root, referenced in CONTRIBUTING.md). All available in both EN and ES. |
-| 15 | Production/preview/redirect/rollback paths | **BLOCKING** | `apps/docs-astro-poc/` still exists (CUT-003 not yet executed). OPS-004/005 infrastructure documented but `apps/docs` directory has not been removed. |
-| 16 | Legacy apps/docs and POC removed | **BLOCKING** | `apps/docs-astro-poc/` still present with `FINDINGS.md`, `src/`, `node_modules/`. POC archive step pending CUT-003. |
+| 15 | Production/preview/redirect/rollback paths | **PASS** | `apps/docs/` and `apps/docs-astro-poc/` removed. OPS-004/005 infrastructure documented. |
+| 16 | Legacy apps/docs and POC removed | **PASS** | `apps/docs/` removed at CUT-003. `apps/docs-astro-poc/` removed. POC findings archived at `docs/history/poc/docs-astro-poc-findings.md`. |
 
-**Verdict: CONDITIONAL PASS — 12 of 16 criteria pass. Two are deferred (C7), two are partial (C2, C13), two block on cleanup (C15, C16).**
+**Verdict: CONDITIONAL PASS — 14 of 16 criteria pass. One is deferred (C7), two are partial (C2, C13).**
 
 **Remaining blockers for GA sign-off:**
 
 - **C2:** Promote English documentation from `draft` to `human-reviewed` and bump all 52 primitives from `preview` to `stable` status.
 - **C13:** Apply Ed25519 signature to current `registry/index.json` and wire CLI verification path.
-- **C15/C16:** Execute CUT-003: archive `apps/docs-astro-poc/` findings to `docs/history/poc/`, remove the directory, and verify parity with `apps/site/`.
