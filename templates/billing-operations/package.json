@@ -22,8 +22,9 @@
     "@solidiom/pagination": "workspace:*",
     "@solidiom/dialog": "workspace:*",
     "@solidiom/toast": "workspace:*",
-    "@solidiom/progress": "workspace:*",
     "@solidiom/recipes-tailwind": "workspace:*",
+    "@solidiom/navigation-menu": "workspace:*",
+    "@solidiom/breadcrumb": "workspace:*",
     "@solidjs/router": "0.17.0-next.5",
     "@solidjs/web": "catalog:",
     "solid-js": "catalog:"
