@@ -22,6 +22,7 @@
     "@solidiom/dialog": "workspace:*",
     "@solidiom/tooltip": "workspace:*",
     "@solidiom/kbd": "workspace:*",
+    "@solidiom/navigation-menu": "workspace:*",
     "@solidiom/breadcrumb": "workspace:*",
     "@solidiom/scroll-area": "workspace:*",
     "@solidiom/recipes-tailwind": "workspace:*",

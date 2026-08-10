@@ -23,6 +23,7 @@
     "@solidiom/dialog": "workspace:*",
     "@solidiom/toast": "workspace:*",
     "@solidiom/tooltip": "workspace:*",
+    "@solidiom/navigation-menu": "workspace:*",
     "@solidiom/breadcrumb": "workspace:*",
     "@solidiom/recipes-tailwind": "workspace:*",
     "@solidjs/router": "0.17.0-next.5",

@@ -1604,6 +1604,9 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../../packages/alert
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -1613,6 +1616,9 @@ importers:
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/recipes-tailwind':
         specifier: workspace:*
         version: link:../../packages/recipes-tailwind
@@ -1656,6 +1662,9 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../../packages/alert
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -1671,6 +1680,12 @@ importers:
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/meter':
+        specifier: workspace:*
+        version: link:../../packages/meter
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/progress':
         specifier: workspace:*
         version: link:../../packages/progress
@@ -1723,6 +1738,9 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../../packages/alert
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -1732,9 +1750,15 @@ importers:
       '@solidiom/data-table':
         specifier: workspace:*
         version: link:../../packages/data-table
+      '@solidiom/dialog':
+        specifier: workspace:*
+        version: link:../../packages/dialog
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/progress':
         specifier: workspace:*
         version: link:../../packages/progress
@@ -1787,6 +1811,9 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../../packages/alert
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -1805,6 +1832,9 @@ importers:
       '@solidiom/kbd':
         specifier: workspace:*
         version: link:../../packages/kbd
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/pagination':
         specifier: workspace:*
         version: link:../../packages/pagination
@@ -1857,6 +1887,9 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../../packages/alert
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -1875,6 +1908,9 @@ importers:
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/pagination':
         specifier: workspace:*
         version: link:../../packages/pagination
@@ -2092,6 +2128,9 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../../packages/alert
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -2110,6 +2149,9 @@ importers:
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/pagination':
         specifier: workspace:*
         version: link:../../packages/pagination
@@ -2247,6 +2289,9 @@ importers:
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/pagination':
         specifier: workspace:*
         version: link:../../packages/pagination
@@ -2320,6 +2365,9 @@ importers:
       '@solidiom/kbd':
         specifier: workspace:*
         version: link:../../packages/kbd
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/recipes-tailwind':
         specifier: workspace:*
         version: link:../../packages/recipes-tailwind
@@ -2497,6 +2545,9 @@ importers:
       '@solidiom/avatar':
         specifier: workspace:*
         version: link:../../packages/avatar
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -2515,6 +2566,9 @@ importers:
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/pagination':
         specifier: workspace:*
         version: link:../../packages/pagination
@@ -2570,6 +2624,9 @@ importers:
       '@solidiom/avatar':
         specifier: workspace:*
         version: link:../../packages/avatar
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -2585,6 +2642,9 @@ importers:
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/progress':
         specifier: workspace:*
         version: link:../../packages/progress
@@ -2756,6 +2816,9 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../../packages/alert
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -2771,6 +2834,9 @@ importers:
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/recipes-tailwind':
         specifier: workspace:*
         version: link:../../packages/recipes-tailwind
@@ -2808,6 +2874,9 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../../packages/alert
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -2820,6 +2889,9 @@ importers:
       '@solidiom/meter':
         specifier: workspace:*
         version: link:../../packages/meter
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/progress':
         specifier: workspace:*
         version: link:../../packages/progress
@@ -2936,6 +3008,9 @@ importers:
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/pagination':
         specifier: workspace:*
         version: link:../../packages/pagination
@@ -3092,6 +3167,9 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../../packages/alert
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -3107,6 +3185,9 @@ importers:
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/navigation-menu':
+        specifier: workspace:*
+        version: link:../../packages/navigation-menu
       '@solidiom/pagination':
         specifier: workspace:*
         version: link:../../packages/pagination

@@ -1,13 +1,14 @@
 import { render } from "@solidjs/web"
 import { Router, Route } from "@solidjs/router"
 import "./index.css"
+import { AppShell } from "./components/AppShell"
 import { DataCatalog } from "./pages/DataCatalog"
 import { Lineage } from "./pages/Lineage"
 import { Classification } from "./pages/Classification"
 
 render(
   () => (
-    <Router>
+    <Router root={AppShell}>
       <Route path="/" component={DataCatalog} />
       <Route path="/lineage" component={Lineage} />
       <Route path="/classification" component={Classification} />
