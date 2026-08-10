@@ -1,14 +1,26 @@
 ---
-import BaseLayout from "../../../layouts/BaseLayout.astro"
+import { getEntry, render } from "astro:content"
+import DocsLayout from "../../../layouts/DocsLayout.astro"
 import { getBenchBaseline, type BenchBaseline } from "../../../lib/bench-data"
+import {
+  tocFromHeadings,
+  type DocsTocEntry,
+  type DocsSidebarGroup,
+} from "../../../lib/docs-nav"
 import { type Locale } from "../../../lib/locale"
 
 const locale: Locale = "es"
+const entry = await getEntry("pages", `${locale}/pages/performance`)
+if (!entry) throw new Error(`Missing content: ${locale}/pages/performance`)
+const rendered = await render(entry)
+const { Content } = rendered
+const toc: DocsTocEntry[] = tocFromHeadings(
+  rendered.headings as Array<{ depth: number; slug: string; text: string }> ?? [],
+)
+
 const baseline = getBenchBaseline()
 
 const copy = {
-  title: "Rendimiento",
-  description: "Resultados de benchmarks y líneas base de rendimiento de Solidiom.",
   throughputSection: "Rendimiento",
   throughputDesc: "Operaciones por segundo para primitivas principales.",
   bundleSection: "Tamaños de Bundle",
@@ -29,120 +41,128 @@ const copy = {
     "Los datos de benchmark aún no se han recopilado. Este panel mostrará métricas de rendimiento, tamaño de bundle e interacción una vez que los benchmarks de CI estén conectados.",
   lastUpdated: "Última actualización",
 }
+
+const sidebarGroups: DocsSidebarGroup[] = [
+  {
+    label: "Rendimiento",
+    links: [{ label: "Benchmarks", href: "/es/performance/" }],
+  },
+]
 ---
 
-<BaseLayout title={copy.title} description={copy.description}>
-  <div class="perf-page">
-    <header class="perf-page__header">
-      <h1>{copy.title}</h1>
-      <p>{copy.description}</p>
-    </header>
+<DocsLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  sidebarGroups={sidebarGroups}
+  toc={toc}
+  contentType="page"
+>
+  <Content />
 
-    <section class="perf-section" aria-label={copy.throughputSection}>
-      <h2>{copy.throughputSection}</h2>
-      <p>{copy.throughputDesc}</p>
-      {baseline && baseline.throughput.length > 0 ? (
-        <table class="perf-table">
-          <thead>
+  <section class="perf-section" aria-label={copy.throughputSection}>
+    <h2>{copy.throughputSection}</h2>
+    <p>{copy.throughputDesc}</p>
+    {baseline && baseline.throughput.length > 0 ? (
+      <table class="perf-table">
+        <thead>
+          <tr>
+            <th scope="col">{copy.nameCol}</th>
+            <th scope="col">{copy.opsCol}</th>
+            <th scope="col">{copy.avgNsCol}</th>
+            <th scope="col">{copy.samplesCol}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {baseline.throughput.map((r) => (
             <tr>
-              <th scope="col">{copy.nameCol}</th>
-              <th scope="col">{copy.opsCol}</th>
-              <th scope="col">{copy.avgNsCol}</th>
-              <th scope="col">{copy.samplesCol}</th>
+              <td>{r.name}</td>
+              <td>{r.opsPerSecond.toLocaleString()}</td>
+              <td>{r.avgNs.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+              <td>{r.samples.toLocaleString()}</td>
             </tr>
-          </thead>
-          <tbody>
-            {baseline.throughput.map((r) => (
-              <tr>
-                <td>{r.name}</td>
-                <td>{r.opsPerSecond.toLocaleString()}</td>
-                <td>{r.avgNs.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
-                <td>{r.samples.toLocaleString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : null}
-    </section>
-
-    <section class="perf-section" aria-label={copy.bundleSection}>
-      <h2>{copy.bundleSection}</h2>
-      <p>{copy.bundleDesc}</p>
-      {baseline && baseline.bundle.length > 0 ? (
-        <table class="perf-table">
-          <thead>
-            <tr>
-              <th scope="col">{copy.nameCol}</th>
-              <th scope="col">{copy.sizeCol}</th>
-              <th scope="col">{copy.limitCol}</th>
-              <th scope="col">{copy.statusCol}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {baseline.bundle.map((r) => (
-              <tr>
-                <td>{r.name}</td>
-                <td>{formatBytes(r.gzipBytes)}</td>
-                <td>{formatBytes(r.limitBytes)}</td>
-                <td>
-                  <span class={`perf-badge perf-badge--${r.passed ? "pass" : "fail"}`}>
-                    {r.passed ? copy.passed : copy.failed}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : null}
-    </section>
-
-    <section class="perf-section" aria-label={copy.interactionSection}>
-      <h2>{copy.interactionSection}</h2>
-      <p>{copy.interactionDesc}</p>
-      {baseline && baseline.interaction.length > 0 ? (
-        <table class="perf-table">
-          <thead>
-            <tr>
-              <th scope="col">{copy.nameCol}</th>
-              <th scope="col">{copy.metricsCol}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {baseline.interaction.map((r) => (
-              <tr>
-                <td>{r.name}</td>
-                <td>
-                  {Object.entries(r.metrics).map(([k, v]) => `${k}: ${v}`).join(", ")}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : null}
-    </section>
-
-    {!baseline ||
-      (baseline.throughput.length === 0 &&
-        baseline.bundle.length === 0 &&
-        baseline.interaction.length === 0) ? (
-      <div class="perf-empty" role="status">
-        <p>{copy.noData}</p>
-      </div>
+          ))}
+        </tbody>
+      </table>
     ) : null}
+  </section>
 
-    {baseline && (
-      <footer class="perf-page__footer">
-        <time datetime={baseline.generatedAt}>
-          {copy.lastUpdated}: {new Date(baseline.generatedAt).toLocaleDateString(locale, {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </time>
-      </footer>
-    )}
-  </div>
-</BaseLayout>
+  <section class="perf-section" aria-label={copy.bundleSection}>
+    <h2>{copy.bundleSection}</h2>
+    <p>{copy.bundleDesc}</p>
+    {baseline && baseline.bundle.length > 0 ? (
+      <table class="perf-table">
+        <thead>
+          <tr>
+            <th scope="col">{copy.nameCol}</th>
+            <th scope="col">{copy.sizeCol}</th>
+            <th scope="col">{copy.limitCol}</th>
+            <th scope="col">{copy.statusCol}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {baseline.bundle.map((r) => (
+            <tr>
+              <td>{r.name}</td>
+              <td>{formatBytes(r.gzipBytes)}</td>
+              <td>{formatBytes(r.limitBytes)}</td>
+              <td>
+                <span class={`perf-badge perf-badge--${r.passed ? "pass" : "fail"}`}>
+                  {r.passed ? copy.passed : copy.failed}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : null}
+  </section>
+
+  <section class="perf-section" aria-label={copy.interactionSection}>
+    <h2>{copy.interactionSection}</h2>
+    <p>{copy.interactionDesc}</p>
+    {baseline && baseline.interaction.length > 0 ? (
+      <table class="perf-table">
+        <thead>
+          <tr>
+            <th scope="col">{copy.nameCol}</th>
+            <th scope="col">{copy.metricsCol}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {baseline.interaction.map((r) => (
+            <tr>
+              <td>{r.name}</td>
+              <td>
+                {Object.entries(r.metrics).map(([k, v]) => `${k}: ${v}`).join(", ")}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : null}
+  </section>
+
+  {!baseline ||
+    (baseline.throughput.length === 0 &&
+      baseline.bundle.length === 0 &&
+      baseline.interaction.length === 0) ? (
+    <div class="perf-empty" role="status">
+      <p>{copy.noData}</p>
+    </div>
+  ) : null}
+
+  {baseline && (
+    <footer class="perf-page__footer">
+      <time datetime={baseline.generatedAt}>
+        {copy.lastUpdated}: {new Date(baseline.generatedAt).toLocaleDateString(locale, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </time>
+    </footer>
+  )}
+</DocsLayout>
 
 {
   function formatBytes(bytes: number): string {
@@ -153,24 +173,6 @@ const copy = {
 }
 
 <style>
-  .perf-page {
-    max-width: var(--prose-max-width, 75ch);
-    margin-inline: auto;
-    padding: 2rem 1rem;
-  }
-
-  .perf-page__header {
-    margin-bottom: 2rem;
-  }
-
-  .perf-page__header h1 {
-    margin-bottom: 0.5rem;
-  }
-
-  .perf-page__header p {
-    color: var(--muted, #6b7280);
-  }
-
   .perf-section {
     margin-bottom: 3rem;
   }
@@ -238,10 +240,6 @@ const copy = {
   }
 
   @media (prefers-color-scheme: dark) {
-    .perf-page__header p {
-      color: #9ca3af;
-    }
-
     .perf-section > p {
       color: #9ca3af;
     }
