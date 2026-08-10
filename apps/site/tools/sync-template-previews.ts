@@ -21,7 +21,7 @@ const mainRepoRoot = dirname(gitCommonDir)
 const templatesDir = resolve(mainRepoRoot, "templates")
 
 const siteRoot = process.cwd()
-const publicDir = resolve(siteRoot, "public", "templates")
+const publicDir = resolve(siteRoot, "public", "templates", "__preview__")
 
 mkdirSync(publicDir, { recursive: true })
 
