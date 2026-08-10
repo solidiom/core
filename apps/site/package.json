@@ -24,6 +24,7 @@
     "test:e2e": "playwright test --config playwright.config.ts",
     "test:visual": "playwright test --config playwright.visual.config.ts",
     "test:visual:update": "UPDATE_SNAPSHOTS=1 playwright test --config playwright.visual.config.ts",
+    "templates:sync": "tsx ./tools/sync-templates.ts",
     "verify:preview": "tsx ./tools/verify-preview-deployment.ts"
   },
   "dependencies": {
