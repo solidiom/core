@@ -18,7 +18,7 @@ const rendered = indexEntry ? await render(indexEntry) : undefined
 
 const sidebarGroups: DocsSidebarGroup[] = [
   {
-    label: "Community",
+    label: "Comunidad",
     links: children.map((entry) => {
       const slug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
       return { label: entry.data.title, href: `/es/community/${slug}/` }
@@ -27,7 +27,7 @@ const sidebarGroups: DocsSidebarGroup[] = [
 ]
 ---
 
-<DocsLayout title="Community" description="Contribute, connect, and grow with Solidiom." sidebarGroups={sidebarGroups} contentType="community">
+<DocsLayout title="Comunidad" description="Contribuye, conecta, y crece con Solidiom." sidebarGroups={sidebarGroups} contentType="community">
   {rendered && (
     <rendered.Content />
   )}
