@@ -24,6 +24,8 @@
     "@solidiom/tooltip": "workspace:*",
     "@solidiom/resizable-panels": "workspace:*",
     "@solidiom/recipes-tailwind": "workspace:*",
+    "@solidiom/navigation-menu": "workspace:*",
+    "@solidiom/breadcrumb": "workspace:*",
     "@solidjs/router": "0.17.0-next.5",
     "@solidjs/web": "catalog:",
     "solid-js": "catalog:"

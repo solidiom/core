@@ -1,13 +1,14 @@
 import { render } from "@solidjs/web"
 import { Router, Route } from "@solidjs/router"
 import "./index.css"
+import { AppShell } from "./components/AppShell"
 import { Landing } from "./pages/Landing"
 import { Features } from "./pages/Features"
 import { Pricing } from "./pages/Pricing"
 
 render(
   () => (
-    <Router>
+    <Router root={AppShell}>
       <Route path="/" component={Landing} />
       <Route path="/features" component={Features} />
       <Route path="/pricing" component={Pricing} />
