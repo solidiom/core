@@ -13,7 +13,7 @@ recipe: "card"
 section: examples
 exampleId: card-component-basic
 runnable: true
-translationSourceHash: "2eeadf9d6eae75be4479a8141427efdc7a3d0241a8b534bc3a089dae3abe02b2"
+translationSourceHash: "272f8a21132b8f0cae307f2a3332edc78e6f165f843028a148bc325257f47ac3"
 translationStatus: draft
 ---
 

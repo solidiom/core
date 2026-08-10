@@ -12,9 +12,12 @@ package: "@solidiom/recipes-css"
 recipe: "slider"
 section: examples
 exampleId: slider-component-basic
-source: "@site/components/SliderExample.tsx"
+source:
+  path: apps/site/src/components/SliderExample.tsx
+  export: SliderExample
+  language: tsx
 runnable: true
-translationSourceHash: "705d13d3cf8b4b4cfe116a16827f7ab7c4b0b793c1f44a7c86b7535d67cc7450"
+translationSourceHash: "825cbf13ebef839d112af7342037d206b7ae8ecad49cf8bc5ce0f2fcaa07343e"
 translationStatus: draft
 ---
 
