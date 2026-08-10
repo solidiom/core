@@ -9,6 +9,9 @@ product: "Solidiom"
 productLayer: article
 status: draft
 date: "2026-08-07"
+authors:
+  - solidiom-core
+tags: [architecture, solid-2, reactivity]
 ---
 
 # Building on Solid 2: Architecture Decisions

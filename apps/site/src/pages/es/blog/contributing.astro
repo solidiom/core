@@ -1,0 +1,314 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro"
+import { resolveLocale, type Locale } from "@lib/locale"
+
+const locale: Locale = resolveLocale(Astro.url.pathname)
+const blogPath = "/es/blog/"
+---
+
+<BaseLayout
+  title="Cómo contribuir al blog"
+  description="Guía rápida para crear una nueva entrada en el blog de Solidiom y añadirte como autor."
+>
+  <main class="contributing-page">
+    <nav aria-label="Breadcrumb">
+      <a href={blogPath} class="contributing-page__back">
+        ← Blog
+      </a>
+    </nav>
+
+    <h1>Cómo contribuir al blog</h1>
+
+    <p>
+      ¿Quieres escribir para el blog de Solidiom? Esta guía rápida te explica cómo añadirte como autor y crear tu primera entrada.
+    </p>
+
+    <section class="contributing-page__section">
+      <h2>1. Regístrate como autor</h2>
+      <p>
+        Añade una entrada en <code>apps/site/src/data/authors.json</code>. Cada entrada sigue este formato:
+      </p>
+
+      <div class="contributing-page__code-block">
+        <pre><code class="language-json">{`{
+  "id": "tu-usuario-github",
+  "name": "Tu Nombre Completo",
+  "description": "Biografía corta (por ejemplo, \"Colaborador principal de Solidiom\")",
+  "avatar": "https://github.com/tu-usuario-github.png",
+  "github": "tu-usuario-github",
+  "linkedin": "tu-usuario-linkedin",
+  "website": "https://tu-sitio-web.com"
+}`}</code></pre>
+      </div>
+
+      <p class="contributing-page__note">
+        <strong>Nota:</strong>
+        <code>id</code> debe ser único y se utiliza para hacer referencia a ti en los artículos. Los campos <code>linkedin</code> y <code>website</code> son opcionales.
+      </p>
+    </section>
+
+    <section class="contributing-page__section">
+      <h2>2. Crea tu entrada</h2>
+      <p>
+        Todas las entradas se escriben en Markdown. Añade tu archivo en <code>apps/site/src/content/es/articles/</code>.
+      </p>
+
+      <h3>Nombre del archivo</h3>
+      <p>
+        Usa <code>YYYY-MM-DD-titulo-de-entrada.md</code> como nombre de archivo.
+      </p>
+
+      <h3>Encabezado de la entrada</h3>
+      <p>
+        El encabezado YAML en la parte superior del archivo define la fecha, los autores y los metadatos:
+      </p>
+
+      <div class="contributing-page__code-block">
+        <pre><code class="language-yaml">{`---
+contentSchemaVersion: 1
+title: "Título de tu Entrada"
+description: "Una descripción corta que aparece en la lista del blog."
+keywords: [solidiom, web, componente]
+locale: es
+maturity: draft
+date: "2026-08-10"
+authors:
+  - tu-usuario-github
+tags: [solidiom, arquitectura]
+---
+
+Contenido de tu artículo aquí...`}</code></pre>
+      </div>
+
+      <p class="contributing-page__note">
+        <strong>Nota:</strong>
+        Los valores en <code>authors</code> deben coincidir con el <code>id</code> de una entrada en <code>authors.json</code>.
+      </p>
+    </section>
+
+    <section class="contributing-page__section">
+      <h2>3. Cuerpo del artículo</h2>
+      <p>
+        El formato del artículo es tuyo. Recomendamos añadir una separación de página después del primer párrafo para crear un resumen en la página principal del blog.
+      </p>
+
+      <div class="contributing-page__code-block">
+        <pre><code class="language-markdown">{`Primer párrafo de tu entrada...
+
+<!-- more -->
+
+Resto del contenido del artículo...`}</code></pre>
+      </div>
+    </section>
+
+    <section class="contributing-page__section">
+      <h2>4. Campos disponibles</h2>
+
+      <table class="contributing-page__table">
+        <thead>
+          <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>contentSchemaVersion</code></td>
+            <td><code>1</code></td>
+            <td>Versión del esquema de contenido.</td>
+          </tr>
+          <tr>
+            <td><code>title</code></td>
+            <td><code>string</code></td>
+            <td>Título del artículo.</td>
+          </tr>
+          <tr>
+            <td><code>description</code></td>
+            <td><code>string</code></td>
+            <td>Descripción corta para la lista del blog.</td>
+          </tr>
+          <tr>
+            <td><code>keywords</code></td>
+            <td><code>string[]</code></td>
+            <td>Términos para búsqueda y SEO.</td>
+          </tr>
+          <tr>
+            <td><code>locale</code></td>
+            <td><code>"en" | "es"</code></td>
+            <td>Idioma del artículo.</td>
+          </tr>
+          <tr>
+            <td><code>date</code></td>
+            <td><code>Date</code></td>
+            <td>Fecha de publicación en formato ISO.</td>
+          </tr>
+          <tr>
+            <td><code>authors</code></td>
+            <td><code>string[]</code></td>
+            <td>IDs de autores desde authors.json.</td>
+          </tr>
+          <tr>
+            <td><code>tags</code></td>
+            <td><code>string[]</code></td>
+            <td>Etiquetas visibles en la entrada.</td>
+          </tr>
+          <tr>
+            <td><code>maturity</code></td>
+            <td><code>"draft" | "beta" | "ga"</code></td>
+            <td>Nivel de madurez del contenido.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="contributing-page__section">
+      <h2>5. Previsualiza y envía</h2>
+      <p>
+        Desde la carpeta <code>apps/site/</code>, ejecuta <code>pnpm dev</code> para ver tu entrada en <code>http://localhost:4321/es/blog/tu-titulo/</code>.
+      </p>
+      <p>
+        Una vez satisfecho, abre un Pull Request con tus cambios. El equipo revisará la entrada antes de publicarla.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .contributing-page {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .contributing-page__back {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--color-foreground-muted, #6b7280);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .contributing-page__back:hover {
+    color: var(--focus-ring, #2563eb);
+  }
+
+  .contributing-page h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-foreground, #111827);
+  }
+
+  .contributing-page > p {
+    font-size: 1.125rem;
+    color: var(--color-foreground-muted, #6b7280);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  .contributing-page__section {
+    margin-bottom: 3rem;
+  }
+
+  .contributing-page__section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border, #e5e7eb);
+    color: var(--color-foreground, #111827);
+  }
+
+  .contributing-page__section h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--color-foreground, #111827);
+  }
+
+  .contributing-page__section p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-body, #374151);
+    margin-bottom: 1rem;
+  }
+
+  .contributing-page__section code {
+    font-family: var(--font-mono, "IBM Plex Mono", monospace);
+    font-size: 0.875em;
+    background: var(--color-bg-muted, #f3f4f6);
+    padding: 0.125em 0.375em;
+    border-radius: 0.25rem;
+  }
+
+  .contributing-page__code-block {
+    margin: 1rem 0 1.5rem;
+    overflow-x: auto;
+  }
+
+  .contributing-page__code-block pre {
+    background: var(--color-surface-raised, #1f2937);
+    color: var(--color-foreground, #f9fafb);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .contributing-page__code-block code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .contributing-page__note {
+    font-size: 0.875rem;
+    color: var(--color-foreground-muted, #6b7280);
+    padding: 0.75rem 1rem;
+    background: var(--color-bg-muted, #f9fafb);
+    border-left: 3px solid var(--focus-ring, #2563eb);
+    border-radius: 0 0.25rem 0.25rem 0;
+    margin-top: 1rem;
+  }
+
+  .contributing-page__note strong {
+    color: var(--color-foreground, #111827);
+  }
+
+  .contributing-page__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+  }
+
+  .contributing-page__table thead {
+    background: var(--color-bg-muted, #f3f4f6);
+  }
+
+  .contributing-page__table th {
+    text-align: left;
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 2px solid var(--color-border, #e5e7eb);
+    color: var(--color-foreground, #111827);
+  }
+
+  .contributing-page__table td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--color-border, #e5e7eb);
+    color: var(--color-body, #374151);
+    vertical-align: top;
+  }
+
+  .contributing-page__table td code {
+    font-family: var(--font-mono, "IBM Plex Mono", monospace);
+    font-size: 0.8125rem;
+    background: var(--color-bg-muted, #f3f4f6);
+    padding: 0.125em 0.375em;
+    border-radius: 0.25rem;
+    white-space: nowrap;
+  }
+</style>

@@ -9,6 +9,9 @@ product: "Solidiom"
 productLayer: article
 status: draft
 date: "2026-08-07"
+authors:
+  - solidiom-core
+tags: [limitations, solid-2, operations]
 ---
 
 # Known Limitations

@@ -9,7 +9,7 @@ product: "Solidiom"
 productLayer: article
 status: draft
 date: "2026-08-07"
-translationSourceHash: "placeholder"
+translationSourceHash: "0000000000000000000000000000000000000000000000000000000000000000"
 translationStatus: draft
 ---
 

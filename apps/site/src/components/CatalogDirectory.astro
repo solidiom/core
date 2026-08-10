@@ -23,7 +23,7 @@ interface Props {
 const { collectionName, layer, locale } = Astro.props
 const copy = getLayerCopy(locale, layer)
 const seoCopy = getCatalogSeoCopy(locale)
-const entries = await getCollection(collectionName, (entry) => entry.data.locale === locale)
+const entries = await getCollection(collectionName, (entry) => entry.data.locale === locale && entry.id.split("/").length <= 3)
 const sortedEntries = entries
   .map((entry) => ({
     name: entryName(entry.id),
