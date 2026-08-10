@@ -112,6 +112,9 @@ importers:
       '@solidiom/alert':
         specifier: workspace:*
         version: link:../../packages/alert
+      '@solidiom/alert-dialog':
+        specifier: workspace:*
+        version: link:../../packages/alert-dialog
       '@solidiom/astrojs-solid-next':
         specifier: workspace:*
         version: link:../../packages/astrojs-solid-next
@@ -121,36 +124,78 @@ importers:
       '@solidiom/badge':
         specifier: workspace:*
         version: link:../../packages/badge
+      '@solidiom/breadcrumb':
+        specifier: workspace:*
+        version: link:../../packages/breadcrumb
       '@solidiom/button':
         specifier: workspace:*
         version: link:../../packages/button
+      '@solidiom/calendar':
+        specifier: workspace:*
+        version: link:../../packages/calendar
       '@solidiom/card':
         specifier: workspace:*
         version: link:../../packages/card
+      '@solidiom/carousel':
+        specifier: workspace:*
+        version: link:../../packages/carousel
       '@solidiom/checkbox':
         specifier: workspace:*
         version: link:../../packages/checkbox
+      '@solidiom/collapsible':
+        specifier: workspace:*
+        version: link:../../packages/collapsible
       '@solidiom/combobox':
         specifier: workspace:*
         version: link:../../packages/combobox
+      '@solidiom/command-palette':
+        specifier: workspace:*
+        version: link:../../packages/command-palette
+      '@solidiom/context-menu':
+        specifier: workspace:*
+        version: link:../../packages/context-menu
       '@solidiom/data-table':
         specifier: workspace:*
         version: link:../../packages/data-table
+      '@solidiom/date-picker':
+        specifier: workspace:*
+        version: link:../../packages/date-picker
       '@solidiom/dialog':
         specifier: workspace:*
         version: link:../../packages/dialog
       '@solidiom/drawer':
         specifier: workspace:*
         version: link:../../packages/drawer
+      '@solidiom/empty-state':
+        specifier: workspace:*
+        version: link:../../packages/empty-state
+      '@solidiom/field':
+        specifier: workspace:*
+        version: link:../../packages/field
+      '@solidiom/hover-card':
+        specifier: workspace:*
+        version: link:../../packages/hover-card
       '@solidiom/input':
         specifier: workspace:*
         version: link:../../packages/input
+      '@solidiom/input-otp':
+        specifier: workspace:*
+        version: link:../../packages/input-otp
+      '@solidiom/kbd':
+        specifier: workspace:*
+        version: link:../../packages/kbd
       '@solidiom/label':
         specifier: workspace:*
         version: link:../../packages/label
+      '@solidiom/listbox':
+        specifier: workspace:*
+        version: link:../../packages/listbox
       '@solidiom/menu':
         specifier: workspace:*
         version: link:../../packages/menu
+      '@solidiom/meter':
+        specifier: workspace:*
+        version: link:../../packages/meter
       '@solidiom/navigation-menu':
         specifier: workspace:*
         version: link:../../packages/navigation-menu
@@ -166,6 +211,12 @@ importers:
       '@solidiom/radio-group':
         specifier: workspace:*
         version: link:../../packages/radio-group
+      '@solidiom/resizable-panels':
+        specifier: workspace:*
+        version: link:../../packages/resizable-panels
+      '@solidiom/scroll-area':
+        specifier: workspace:*
+        version: link:../../packages/scroll-area
       '@solidiom/select':
         specifier: workspace:*
         version: link:../../packages/select
@@ -175,6 +226,9 @@ importers:
       '@solidiom/sheet':
         specifier: workspace:*
         version: link:../../packages/sheet
+      '@solidiom/skeleton':
+        specifier: workspace:*
+        version: link:../../packages/skeleton
       '@solidiom/slider':
         specifier: workspace:*
         version: link:../../packages/slider
@@ -187,12 +241,30 @@ importers:
       '@solidiom/tabs':
         specifier: workspace:*
         version: link:../../packages/tabs
+      '@solidiom/toast':
+        specifier: workspace:*
+        version: link:../../packages/toast
       '@solidiom/toggle':
         specifier: workspace:*
         version: link:../../packages/toggle
+      '@solidiom/toggle-group':
+        specifier: workspace:*
+        version: link:../../packages/toggle-group
+      '@solidiom/toolbar':
+        specifier: workspace:*
+        version: link:../../packages/toolbar
       '@solidiom/tooltip':
         specifier: workspace:*
         version: link:../../packages/tooltip
+      '@solidiom/tree':
+        specifier: workspace:*
+        version: link:../../packages/tree
+      '@solidiom/virtual-list':
+        specifier: workspace:*
+        version: link:../../packages/virtual-list
+      '@solidiom/visually-hidden':
+        specifier: workspace:*
+        version: link:../../packages/visually-hidden
       '@solidjs/web':
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
