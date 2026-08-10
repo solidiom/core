@@ -8,6 +8,7 @@ import type { DocsSidebarGroup } from "../lib/docs-nav"
 import DocsLayout from "../layouts/DocsLayout.astro"
 import CatalogBreadcrumbs from "./CatalogBreadcrumbs.astro"
 import ComponentExample from "./ComponentExample.astro"
+import ThemePreview from "./ThemePreview.astro"
 
 interface Props {
   collectionName: "components" | "blocks" | "templates" | "themes"
@@ -112,6 +113,9 @@ const sidebarGroups: DocsSidebarGroup[] = [
           <div class="component-preview-wrap">
             <ComponentExample name={name} locale={locale} />
           </div>
+        )}
+        {layer === "themes" && (
+          <ThemePreview slug={name} locale={locale} />
         )}
         {DocumentContent ? <DocumentContent /> : <p>{pageDescription}</p>}
       </section>
