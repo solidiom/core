@@ -26,14 +26,22 @@ export function getPrimaryLinks(locale: Locale): NavLink[] {
   ]
 }
 
+const CLI_LABEL: Record<Locale, string> = { en: "CLI", es: "CLI" }
+const GUIDES_LABEL: Record<Locale, string> = { en: "Guides", es: "Guías" }
+const BLOCKS_LABEL: Record<Locale, string> = { en: "Blocks", es: "Bloques" }
+const TEMPLATES_LABEL: Record<Locale, string> = { en: "Templates", es: "Plantillas" }
+const ACCESSIBILITY_LABEL: Record<Locale, string> = { en: "Accessibility", es: "Accesibilidad" }
+const PERFORMANCE_LABEL: Record<Locale, string> = { en: "Performance", es: "Rendimiento" }
+
 export function getDocsLinks(locale: Locale): NavLink[] {
   const prefix = localePrefix(locale)
   return [
-    { label: "CLI", href: `${prefix}/primitives/` },
-    { label: locale === "es" ? "Bloques" : "Blocks", href: `${prefix}/blocks/` },
-    { label: locale === "es" ? "Plantillas" : "Templates", href: `${prefix}/templates/` },
-    { label: locale === "es" ? "Accesibilidad" : "Accessibility", href: `${prefix}/accessibility/` },
-    { label: locale === "es" ? "Rendimiento" : "Performance", href: `${prefix}/performance/` },
+    { label: CLI_LABEL[locale], href: `${prefix}/guides/cli-overview/` },
+    { label: GUIDES_LABEL[locale], href: `${prefix}/guides/` },
+    { label: BLOCKS_LABEL[locale], href: `${prefix}/blocks/` },
+    { label: TEMPLATES_LABEL[locale], href: `${prefix}/templates/` },
+    { label: ACCESSIBILITY_LABEL[locale], href: `${prefix}/accessibility/` },
+    { label: PERFORMANCE_LABEL[locale], href: `${prefix}/performance/` },
     { label: "GitHub", href: "https://github.com/solidiom" },
   ]
 }
