@@ -3,6 +3,8 @@ import { createSignal } from "solid-js"
 import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Card from "@solidiom/card"
 import * as Button from "@solidiom/button"
+import * as Input from "@solidiom/input"
+import * as Select from "@solidiom/select"
 
 type Category = "Infrastructure" | "Security" | "Application"
 
@@ -77,23 +79,23 @@ export function Runbooks(): JSX.Element {
 
       <Card.Root class="rounded-lg border border-gray-200 bg-white shadow-sm">
         <Card.Header class="flex flex-wrap items-center gap-4 border-b border-gray-200 px-6 py-4">
-          <input
-            type="text"
+          <Input.Root
             placeholder="Search runbooks..."
             value={search()}
-            onInput={(e: Event) => setSearch((e.target as HTMLInputElement).value)}
+            onValueChange={setSearch}
             class="w-64 rounded-md border border-gray-300 px-3 py-1.5 text-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           />
-          <select
-            value={categoryFilter()}
-            onChange={(e: Event) => setCategoryFilter((e.target as HTMLSelectElement).value)}
-            class="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-          >
-            <option value="all">All Categories</option>
-            <option value="Infrastructure">Infrastructure</option>
-            <option value="Security">Security</option>
-            <option value="Application">Application</option>
-          </select>
+          <Select.Root defaultValue="all" onValueChange={(v) => setCategoryFilter(Array.isArray(v) ? v[0] : v)}>
+            <Select.Trigger class="inline-flex items-center justify-between rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+              <Select.Value placeholder="All Categories" />
+            </Select.Trigger>
+            <Select.Content class="z-50 min-w-[8rem] overflow-hidden rounded-md border border-gray-200 bg-white p-1 shadow-md">
+              <Select.Item value="all" class="relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-gray-100">All Categories</Select.Item>
+              <Select.Item value="Infrastructure" class="relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-gray-100">Infrastructure</Select.Item>
+              <Select.Item value="Security" class="relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-gray-100">Security</Select.Item>
+              <Select.Item value="Application" class="relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-gray-100">Application</Select.Item>
+            </Select.Content>
+          </Select.Root>
           <span class="text-sm text-gray-500">{filteredRunbooks().length} runbooks</span>
           <div class="ml-auto">
             <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">

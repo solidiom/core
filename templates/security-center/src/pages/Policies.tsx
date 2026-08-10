@@ -85,7 +85,7 @@ export function Policies(): JSX.Element {
                 <div class="ml-4">
                   <Switch.Root
                     checked={policy.enforced}
-                    onChange={() => togglePolicy(policy.id)}
+                    onCheckedChange={() => togglePolicy(policy.id)}
                     class="inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 data-[state=checked]:bg-indigo-600"
                   >
                     <Switch.Thumb class={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${

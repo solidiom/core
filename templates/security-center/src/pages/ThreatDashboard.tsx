@@ -2,8 +2,8 @@ import type { JSX } from "solid-js"
 import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Alert from "@solidiom/alert"
 import * as Button from "@solidiom/button"
-import * as Card from "@solidiom/card"
 import { ThreatCard } from "../components/ThreatCard"
+import { MetricCard } from "../components/MetricCard"
 
 const METRIC_DATA = [
   { label: "Active Threats", value: "7", change: "+2 from last hour", changeType: "negative" as const },
@@ -20,30 +20,6 @@ const THREATS = [
   { id: "THR-3997", type: "vulnerability" as const, severity: "high" as const, title: "Zero-day exploit in web application framework", affectedAssets: 8, detected: "3 hours ago", status: "active" as const },
   { id: "THR-3996", type: "intrusion" as const, severity: "low" as const, title: "Port scan detected from external IP range", affectedAssets: 1, detected: "4 hours ago", status: "closed" as const },
 ]
-
-function MetricCard(props: { label: string; value: string; change: string; changeType: "positive" | "negative" | "neutral" }): JSX.Element {
-  return (
-    <Card.Root class="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
-      <Card.Header class="pb-1">
-        <Card.Title class="text-sm font-medium text-gray-500">{props.label}</Card.Title>
-      </Card.Header>
-      <Card.Content>
-        <div class="text-2xl font-bold text-gray-900">{props.value}</div>
-        <p
-          class={`mt-1 text-xs font-medium ${
-            props.changeType === "positive"
-              ? "text-green-600"
-              : props.changeType === "negative"
-                ? "text-red-600"
-                : "text-gray-500"
-          }`}
-        >
-          {props.change}
-        </p>
-      </Card.Content>
-    </Card.Root>
-  )
-}
 
 export function ThreatDashboard(): JSX.Element {
   return (

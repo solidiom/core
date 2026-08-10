@@ -2,7 +2,6 @@ import type { JSX } from "solid-js"
 import { createSignal } from "solid-js"
 import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Button from "@solidiom/button"
-import * as Select from "@solidiom/select"
 import * as Card from "@solidiom/card"
 
 type Severity = "critical" | "warning" | "info" | "debug"
@@ -85,9 +84,9 @@ export function Events(): JSX.Element {
             onInput={(e: Event) => setSearch((e.target as HTMLInputElement).value)}
             class="w-64 rounded-md border border-gray-300 px-3 py-1.5 text-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           />
-          <Select.Root
+          <select
             value={severityFilter()}
-            onChange={(e) => setSeverityFilter(e.currentTarget.value)}
+            onChange={(e: Event) => setSeverityFilter((e.target as HTMLSelectElement).value)}
             class="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           >
             <option value="all">All Severities</option>
@@ -95,7 +94,7 @@ export function Events(): JSX.Element {
             <option value="warning">Warning</option>
             <option value="info">Info</option>
             <option value="debug">Debug</option>
-          </Select.Root>
+          </select>
           <span class="text-sm text-gray-500">{filteredEvents().length} events</span>
         </Card.Header>
         <Card.Content class="p-0">
