@@ -22,6 +22,7 @@ export function getPrimaryLinks(locale: Locale): NavLink[] {
     { label: PRIMITIVES_LABEL[locale], href: `${prefix}/primitives/` },
     { label: COMPONENTS_LABEL[locale], href: `${prefix}/components/` },
     { label: BLOCKS_LABEL[locale], href: `${prefix}/blocks/` },
+    { label: TEMPLATES_LABEL[locale], href: `${prefix}/templates/` },
     { label: THEMES_LABEL[locale], href: `${prefix}/themes/` },
     { label: BLOG_LABEL[locale], href: `${prefix}/blog/` },
   ]
@@ -39,7 +40,6 @@ export function getDocsLinks(locale: Locale): NavLink[] {
   return [
     { label: CLI_LABEL[locale], href: `${prefix}/guides/cli-overview/` },
     { label: GUIDES_LABEL[locale], href: `${prefix}/guides/` },
-    { label: TEMPLATES_LABEL[locale], href: `${prefix}/templates/` },
     { label: ACCESSIBILITY_LABEL[locale], href: `${prefix}/accessibility/` },
     { label: PERFORMANCE_LABEL[locale], href: `${prefix}/performance/` },
     { label: "GitHub", href: "https://github.com/solidiom" },
