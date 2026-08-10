@@ -2,8 +2,9 @@
 import { getCollection, render } from "astro:content"
 import type { Locale } from "../lib/locale"
 import type { CatalogView, CatalogLayer } from "../lib/catalog"
-import { getLayerCopy, layerHref } from "../lib/catalog"
+import { getLayerCopy, layerHref, entryName } from "../lib/catalog"
 import { getCatalogSeoCopy } from "../lib/metadata"
+import type { DocsSidebarGroup } from "../lib/docs-nav"
 import DocsLayout from "../layouts/DocsLayout.astro"
 import CatalogBreadcrumbs from "./CatalogBreadcrumbs.astro"
 
@@ -52,11 +53,26 @@ const breadcrumbItems = [
     pathname: currentPath,
   },
 ]
+
+// Build sidebar from all entries in this layer's collection
+const allEntries = await getCollection(collectionName, (entry) => entry.data.locale === locale)
+const sidebarGroups: DocsSidebarGroup[] = [
+  {
+    label: copy.directoryTitle,
+    links: allEntries
+      .map((entry) => ({
+        label: entry.data.title ?? entryName(entry.id),
+        href: layerHref(layer, entryName(entry.id), locale),
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label)),
+  },
+]
 ---
 
 <DocsLayout
   title={title}
   description={pageDescription}
+  sidebarGroups={sidebarGroups}
   structuredData={undefined}
   contentType={layer}
 >

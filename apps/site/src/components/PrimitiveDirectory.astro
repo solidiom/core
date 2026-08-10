@@ -6,7 +6,7 @@
  */
 import DocsLayout from "../layouts/DocsLayout.astro"
 import { catalogDirectoryStructuredData, getCatalogSeoCopy } from "../lib/metadata"
-import { categoryLabel } from "../lib/docs-nav"
+import { categoryLabel, primitiveSidebarGroups } from "../lib/docs-nav"
 import {
   getCatalogCopy,
   getRegistryPrimitives,
@@ -57,11 +57,16 @@ const structuredData = catalogDirectoryStructuredData({
 function categoryLabelFor(primitive: RegistryPrimitive): string {
   return categoryLabel(primitive.category, locale)
 }
+
+const sidebarGroups = primitiveSidebarGroups(primitives, locale, (name, loc) =>
+  primitiveHref(name, loc),
+)
 ---
 
 <DocsLayout
   title={copy.directoryTitle}
   description={copy.directoryDescription}
+  sidebarGroups={sidebarGroups}
   structuredData={structuredData}
 >
   <CatalogBreadcrumbs

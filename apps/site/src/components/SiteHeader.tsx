@@ -74,6 +74,9 @@ export function SiteHeader(props: SiteHeaderProps) {
           <SiteSearch locale={locale()} />
           <LanguageSwitcher locale={locale()} targetPath={props.alternatePath} />
           <ThemeToggle />
+          <a href="/primitives/" class="site-header__cta">
+            {locale() === "es" ? "Comenzar" : "Get Started"}
+          </a>
         </div>
 
         <div class="site-header__mobile-trigger">

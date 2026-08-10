@@ -10,6 +10,7 @@ import { getCollection } from "astro:content"
 import DocsLayout from "../layouts/DocsLayout.astro"
 import { getCatalogSeoCopy } from "../lib/metadata"
 import { getLayerCopy, entryName, layerHref, type CatalogLayer } from "../lib/catalog"
+import type { DocsSidebarGroup } from "../lib/docs-nav"
 import type { Locale } from "../lib/locale"
 import CatalogBreadcrumbs from "./CatalogBreadcrumbs.astro"
 
@@ -46,9 +47,19 @@ const breadcrumbItems = [
 
 const filterLabel = locale === "es" ? "Filtrar por nombre" : "Filter by name"
 const allLabel = locale === "es" ? "Todos" : "All"
+
+const sidebarGroups: DocsSidebarGroup[] = [
+  {
+    label: copy.directoryTitle,
+    links: sortedEntries.map((entry) => ({
+      label: entry.label,
+      href: entry.href,
+    })),
+  },
+]
 ---
 
-<DocsLayout title={copy.directoryTitle} description={copy.directoryDescription} contentType={layer}>
+<DocsLayout title={copy.directoryTitle} description={copy.directoryDescription} sidebarGroups={sidebarGroups} contentType={layer}>
   <CatalogBreadcrumbs
     label={seoCopy.breadcrumbs}
     items={breadcrumbItems.map((item, index) => ({
