@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "pnpm run templates:sync && astro dev",
     "check": "astro check",
     "lint": "eslint .",
     "boundaries": "tsx ./tools/validate-site-import-boundaries.ts",
@@ -18,7 +18,7 @@
     "lighthouse": "tsx ./tools/lighthouse-report.ts",
     "lighthouse:json": "tsx ./tools/lighthouse-report.ts --json",
     "api": "pnpm --dir ../.. api:generate",
-    "build": "pnpm run i18n:validate && pnpm run boundaries && astro build",
+    "build": "pnpm run templates:sync && pnpm run i18n:validate && pnpm run boundaries && astro build",
     "preview": "astro preview",
     "search-index": "pagefind --site dist",
     "test:e2e": "playwright test --config playwright.config.ts",
