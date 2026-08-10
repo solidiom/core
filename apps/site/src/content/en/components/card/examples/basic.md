@@ -13,6 +13,10 @@ recipe: "card"
 section: examples
 exampleId: card-component-basic
 runnable: true
+source:
+  path: apps/site/src/components/CardExample.tsx
+  export: CardExample
+  language: tsx
 ---
 
 The Card component provides a styled wrapper around content containers with header, body content, and footer composition.

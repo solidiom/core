@@ -7,6 +7,7 @@ import { getCatalogSeoCopy } from "../lib/metadata"
 import type { DocsSidebarGroup } from "../lib/docs-nav"
 import DocsLayout from "../layouts/DocsLayout.astro"
 import CatalogBreadcrumbs from "./CatalogBreadcrumbs.astro"
+import ComponentExample from "./ComponentExample.astro"
 
 interface Props {
   collectionName: "components" | "blocks" | "templates" | "themes"
@@ -38,6 +39,18 @@ const title =
   view === "overview"
     ? (document?.data.title ?? name)
     : `${document?.data.title ?? name} ${sectionTitle[view]}`
+
+const COMPONENTS_WITH_EXAMPLES = new Set([
+  "accordion", "alert", "alert-dialog", "avatar", "badge", "breadcrumb", "button",
+  "calendar", "card", "carousel", "checkbox", "collapsible", "combobox",
+  "command-palette", "context-menu", "data-table", "date-picker", "dialog",
+  "drawer", "empty-state", "field", "hover-card", "input", "input-otp",
+  "kbd", "label", "listbox", "menu", "meter", "navigation-menu", "pagination",
+  "popover", "progress", "radio-group", "resizable-panels", "scroll-area",
+  "select", "sheet", "skeleton", "slider", "spinner", "switch", "tabs",
+  "toast", "toggle", "toggle-group", "toolbar", "tooltip", "tree", "virtual-list",
+])
+const hasComponentExample = COMPONENTS_WITH_EXAMPLES.has(name)
 
 const homePath = locale === "es" ? "/es/" : "/"
 const directoryPath = locale === "es" ? `/es/${layer}/` : `/${layer}/`
@@ -95,6 +108,16 @@ const sidebarGroups: DocsSidebarGroup[] = [
     view === "overview" && (
       <section>
         <h2>{copy.preview}</h2>
+        {hasComponentExample && layer === "components" && (
+          <>
+            <ComponentExample name={name} locale={locale} />
+            <p class="preview-styling-note">
+              {locale === "es"
+                ? "Este ejemplo usa estilos solo para documentación. En producción, utiliza una de las recetas incluidas (CSS, Tailwind o UnoCSS)."
+                : "This preview uses documentation-only styling. Ship with one of the included recipe outputs (CSS, Tailwind, or UnoCSS) for production styles."}
+            </p>
+          </>
+        )}
         {DocumentContent ? <DocumentContent /> : <p>{pageDescription}</p>}
       </section>
     )
@@ -125,6 +148,9 @@ const sidebarGroups: DocsSidebarGroup[] = [
           <p class="catalog-notice" role="status">
             {copy.examplesUnavailable}
           </p>
+        )}
+        {hasComponentExample && layer === "components" && (
+          <ComponentExample name={name} locale={locale} />
         )}
       </section>
     )

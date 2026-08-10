@@ -1,0 +1,117 @@
+---
+/**
+ * ComponentExample — renders the live Solid island for a component's interactive preview.
+ *
+ * Reuses the same *Example.tsx components as PrimitiveExample, keyed by component name.
+ * Astro requires static imports for hydrated components, so we map component names
+ * to their example components here and conditionally render the matching one.
+ */
+import { AccordionExample } from "./AccordionExample"
+import { AlertExample } from "./AlertExample"
+import { AlertDialogExample } from "./AlertDialogExample"
+import { AvatarExample } from "./AvatarExample"
+import { BadgeExample } from "./BadgeExample"
+import { BreadcrumbExample } from "./BreadcrumbExample"
+import { ButtonExample } from "./ButtonExample"
+import { CalendarExample } from "./CalendarExample"
+import { CardExample } from "./CardExample"
+import { CarouselExample } from "./CarouselExample"
+import { CheckboxExample } from "./CheckboxExample"
+import { CollapsibleExample } from "./CollapsibleExample"
+import { ComboboxExample } from "./ComboboxExample"
+import { CommandPaletteExample } from "./CommandPaletteExample"
+import { ContextMenuExample } from "./ContextMenuExample"
+import { DataTableExample } from "./DataTableExample"
+import { DatePickerExample } from "./DatePickerExample"
+import { DialogExample } from "./DialogExample"
+import { DrawerExample } from "./DrawerExample"
+import { EmptyStateExample } from "./EmptyStateExample"
+import { FieldExample } from "./FieldExample"
+import { HoverCardExample } from "./HoverCardExample"
+import { InputExample } from "./InputExample"
+import { InputOtpExample } from "./InputOtpExample"
+import { KbdExample } from "./KbdExample"
+import { LabelExample } from "./LabelExample"
+import { ListboxExample } from "./ListboxExample"
+import { MenuExample } from "./MenuExample"
+import { MeterExample } from "./MeterExample"
+import { NavigationMenuExample } from "./NavigationMenuExample"
+import { PaginationExample } from "./PaginationExample"
+import { PopoverExample } from "./PopoverExample"
+import { ProgressExample } from "./ProgressExample"
+import { RadioGroupExample } from "./RadioGroupExample"
+import { ResizablePanelsExample } from "./ResizablePanelsExample"
+import { ScrollAreaExample } from "./ScrollAreaExample"
+import { SelectExample } from "./SelectExample"
+import { SheetExample } from "./SheetExample"
+import { SkeletonExample } from "./SkeletonExample"
+import { SliderExample } from "./SliderExample"
+import { SpinnerExample } from "./SpinnerExample"
+import { SwitchExample } from "./SwitchExample"
+import { TabsExample } from "./TabsExample"
+import { ToastExample } from "./ToastExample"
+import { ToggleExample } from "./ToggleExample"
+import { ToggleGroupExample } from "./ToggleGroupExample"
+import { ToolbarExample } from "./ToolbarExample"
+import { TooltipExample } from "./TooltipExample"
+import { TreeExample } from "./TreeExample"
+import { VirtualListExample } from "./VirtualListExample"
+
+interface Props {
+  name: string
+  locale: string
+}
+
+const { name, locale } = Astro.props
+---
+
+{name === "accordion" && <AccordionExample locale={locale} client:visible />}
+{name === "alert" && <AlertExample locale={locale} client:visible />}
+{name === "alert-dialog" && <AlertDialogExample locale={locale} client:visible />}
+{name === "avatar" && <AvatarExample locale={locale} client:visible />}
+{name === "badge" && <BadgeExample locale={locale} client:visible />}
+{name === "breadcrumb" && <BreadcrumbExample locale={locale} client:visible />}
+{name === "button" && <ButtonExample locale={locale} client:visible />}
+{name === "calendar" && <CalendarExample locale={locale} client:visible />}
+{name === "card" && <CardExample locale={locale} client:visible />}
+{name === "carousel" && <CarouselExample locale={locale} client:visible />}
+{name === "checkbox" && <CheckboxExample locale={locale} client:visible />}
+{name === "collapsible" && <CollapsibleExample locale={locale} client:visible />}
+{name === "combobox" && <ComboboxExample locale={locale} client:visible />}
+{name === "command-palette" && <CommandPaletteExample locale={locale} client:visible />}
+{name === "context-menu" && <ContextMenuExample locale={locale} client:visible />}
+{name === "data-table" && <DataTableExample locale={locale} client:visible />}
+{name === "date-picker" && <DatePickerExample locale={locale} client:visible />}
+{name === "dialog" && <DialogExample locale={locale} client:visible />}
+{name === "drawer" && <DrawerExample locale={locale} client:visible />}
+{name === "empty-state" && <EmptyStateExample locale={locale} client:visible />}
+{name === "field" && <FieldExample locale={locale} client:visible />}
+{name === "hover-card" && <HoverCardExample locale={locale} client:visible />}
+{name === "input" && <InputExample locale={locale} client:visible />}
+{name === "input-otp" && <InputOtpExample locale={locale} client:visible />}
+{name === "kbd" && <KbdExample locale={locale} client:visible />}
+{name === "label" && <LabelExample locale={locale} client:visible />}
+{name === "listbox" && <ListboxExample locale={locale} client:visible />}
+{name === "menu" && <MenuExample locale={locale} client:visible />}
+{name === "meter" && <MeterExample locale={locale} client:visible />}
+{name === "navigation-menu" && <NavigationMenuExample locale={locale} client:visible />}
+{name === "pagination" && <PaginationExample locale={locale} client:visible />}
+{name === "popover" && <PopoverExample locale={locale} client:visible />}
+{name === "progress" && <ProgressExample locale={locale} client:visible />}
+{name === "radio-group" && <RadioGroupExample locale={locale} client:visible />}
+{name === "resizable-panels" && <ResizablePanelsExample locale={locale} client:visible />}
+{name === "scroll-area" && <ScrollAreaExample locale={locale} client:visible />}
+{name === "select" && <SelectExample locale={locale} client:visible />}
+{name === "sheet" && <SheetExample locale={locale} client:visible />}
+{name === "skeleton" && <SkeletonExample locale={locale} client:visible />}
+{name === "slider" && <SliderExample locale={locale} client:visible />}
+{name === "spinner" && <SpinnerExample locale={locale} client:visible />}
+{name === "switch" && <SwitchExample locale={locale} client:visible />}
+{name === "tabs" && <TabsExample locale={locale} client:visible />}
+{name === "toast" && <ToastExample locale={locale} client:visible />}
+{name === "toggle" && <ToggleExample locale={locale} client:visible />}
+{name === "toggle-group" && <ToggleGroupExample locale={locale} client:visible />}
+{name === "toolbar" && <ToolbarExample locale={locale} client:visible />}
+{name === "tooltip" && <TooltipExample locale={locale} client:visible />}
+{name === "tree" && <TreeExample locale={locale} client:visible />}
+{name === "virtual-list" && <VirtualListExample locale={locale} client:visible />}

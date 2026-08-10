@@ -12,9 +12,12 @@ package: "@solidiom/recipes-css"
 recipe: "collapsible"
 section: examples
 exampleId: collapsible-component-basic
-source: "@site/components/CollapsibleExample.tsx"
+source:
+  path: apps/site/src/components/CollapsibleExample.tsx
+  export: CollapsibleExample
+  language: tsx
 runnable: true
-translationSourceHash: "b9a60f37d61cfb13fb9690db3703f5d46eb1a1615300fa39933a8c4caa191afe"
+translationSourceHash: "1e24075e3babc0772458978203e308240c30f2315301003201d906a671cefcdb"
 translationStatus: draft
 ---
 
