@@ -2,7 +2,6 @@ import type { JSX } from "solid-js"
 import { createSignal } from "solid-js"
 import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Card from "@solidiom/card"
-import * as Select from "@solidiom/select"
 import { StatusBadge } from "../components/StatusBadge"
 
 type VulnSeverity = "critical" | "high" | "medium" | "low"
@@ -88,7 +87,7 @@ export function Vulnerabilities(): JSX.Element {
             onInput={(e: Event) => setSearch((e.target as HTMLInputElement).value)}
             class="w-64 rounded-md border border-gray-300 px-3 py-1.5 text-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           />
-          <Select.Root
+          <select
             value={severityFilter()}
             onChange={(e: Event) => setSeverityFilter((e.target as HTMLSelectElement).value)}
             class="rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
@@ -98,7 +97,7 @@ export function Vulnerabilities(): JSX.Element {
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
-          </Select.Root>
+          </select>
           <span class="text-sm text-gray-500">{filteredVulns().length} vulnerabilities</span>
         </Card.Header>
         <Card.Content class="p-0">
