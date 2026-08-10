@@ -5,8 +5,7 @@ import {
   copyFileSync,
   mkdirSync,
   readFileSync,
-  cpSync,
-  rmSync,
+  writeFileSync,
 } from "node:fs"
 import { resolve, join, dirname } from "node:path"
 import { execSync } from "node:child_process"
@@ -52,6 +51,17 @@ function shouldCopyFile(src: string, dest: string): boolean {
   return false
 }
 
+/**
+ * Rewrites root-relative asset paths to relative paths.
+ * Template dist/index.html references /assets/foo.js, but when served
+ * from /templates/__preview__/{name}/index.html, those resolve to
+ * /assets/foo.js (which doesn't exist). Rewriting to ./assets/foo.js
+ * makes them resolve relative to the template's own assets/ directory.
+ */
+function fixAssetPaths(html: string): string {
+  return html.replace(/"\/assets\//g, '"./assets/').replace(/'\/assets\//g, "'./assets/")
+}
+
 function syncDir(src: string, dest: string): void {
   const entries = readdirSync(src, { withFileTypes: true })
   for (const entry of entries) {
@@ -62,7 +72,21 @@ function syncDir(src: string, dest: string): void {
       mkdirSync(destPath, { recursive: true })
       syncDir(srcPath, destPath)
     } else {
-      if (shouldCopyFile(srcPath, destPath)) {
+      // For index.html, rewrite asset paths before comparing/writing.
+      let destContent: Buffer | null = null
+      if (entry.name === "index.html") {
+        const raw = readFileSync(srcPath, "utf8")
+        destContent = Buffer.from(fixAssetPaths(raw), "utf8")
+        if (existsSync(destPath)) {
+          const existing = readFileSync(destPath)
+          if (existing.equals(destContent)) {
+            skipped++
+            continue
+          }
+        }
+        writeFileSync(destPath, destContent)
+        copied++
+      } else if (shouldCopyFile(srcPath, destPath)) {
         copyFileSync(srcPath, destPath)
         copied++
       } else {
@@ -79,12 +103,6 @@ for (const name of templateNames) {
   }
 
   const destBase = join(publicDir, name)
-
-  // Remove old preview so newly deleted source files are reflected.
-  if (existsSync(destBase)) {
-    rmSync(destBase, { recursive: true, force: true })
-  }
-
   mkdirSync(destBase, { recursive: true })
   syncDir(srcDist, destBase)
 }
