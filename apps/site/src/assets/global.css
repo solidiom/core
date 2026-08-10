@@ -13,6 +13,7 @@
 @import "./theme-builder-preview.css";
 @import "./maturity-badge.css";
 @import "./beta-banner.css";
+@import "./homepage.css";
 @import "./print.css";
 
 :root {
