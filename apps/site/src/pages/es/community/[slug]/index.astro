@@ -1,0 +1,73 @@
+---
+import { getCollection, getEntry, render } from "astro:content"
+import DocsLayout from "@layouts/DocsLayout.astro"
+import { resolveLocale, type Locale } from "@lib/locale"
+import { tocFromHeadings, type DocsTocEntry, type DocsSidebarGroup } from "@lib/docs-nav"
+
+export async function getStaticPaths() {
+  const entries = await getCollection("community")
+  return entries
+    .filter((entry) => !entry.id.endsWith("/community"))
+    .map((entry) => ({
+      params: { slug: entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id },
+    }))
+}
+
+const { slug } = Astro.params
+const locale: Locale = resolveLocale(Astro.url.pathname)
+const isEs = locale === "es"
+const communityPath = isEs ? "/es/community/" : "/community/"
+
+const rawEntry = await getEntry("community", `${locale}/community/${slug}`)
+if (!rawEntry) throw new Error(`Community page not found: ${locale}/community/${slug}`)
+
+const entryData = rawEntry.data
+const rendered = await render(rawEntry)
+const { Content } = rendered
+const headings = rendered.headings ?? []
+const toc: DocsTocEntry[] = tocFromHeadings(headings as Array<{ depth: number; slug: string; text: string }>)
+
+const allEntries = await getCollection("community", (e) => e.data.locale === locale)
+const children = allEntries
+  .filter((e) => !e.id.endsWith("/community"))
+  .sort((a, b) => {
+    const oa = (a.data as Record<string, unknown>).order ?? 999
+    const ob = (b.data as Record<string, unknown>).order ?? 999
+    if (oa !== ob) return oa - ob
+    return a.data.title.localeCompare(b.data.title)
+  })
+const currentIndex = children.findIndex((e) => e.id === rawEntry.id)
+const prevEntry = currentIndex < children.length - 1 ? children[currentIndex + 1] : undefined
+const nextEntry = currentIndex > 0 ? children[currentIndex - 1] : undefined
+
+const prevSlug = prevEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
+const nextSlug = nextEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
+
+const prevLink = prevSlug && prevEntry ? { label: prevEntry.data.title, href: `${communityPath}${prevSlug}/` } : undefined
+const nextLink = nextSlug && nextEntry ? { label: nextEntry.data.title, href: `${communityPath}${nextSlug}/` } : undefined
+
+const sidebarGroups: DocsSidebarGroup[] = [
+  {
+    label: "Community",
+    links: children.map((entry) => {
+      const entrySlug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
+      return {
+        label: entry.data.title,
+        href: `${communityPath}${entrySlug}/`,
+      }
+    }),
+  },
+]
+---
+
+<DocsLayout
+  title={entryData.title}
+  description={entryData.description}
+  sidebarGroups={sidebarGroups}
+  toc={toc}
+  previous={prevLink}
+  next={nextLink}
+  contentType="community"
+>
+  <Content />
+</DocsLayout>

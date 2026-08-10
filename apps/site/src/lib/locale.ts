@@ -45,6 +45,7 @@ export const LOCALIZED_ROUTE_PATHS = [
   "/performance/",
   "/blog/",
   "/guides/",
+  "/community/",
 ] as const
 
 /** Registry-generated primitive routes have a locale counterpart for every entry. */
@@ -63,6 +64,9 @@ const LOCALIZED_ARTICLE_ROUTE = /^\/blog\/[^/]+\/$/
 /** Guide entry routes have a locale counterpart for every published guide. */
 const LOCALIZED_GUIDE_ROUTE = /^\/guides\/[^/]+\/$/
 
+/** Community entry routes have a locale counterpart for every community page. */
+const LOCALIZED_COMMUNITY_ROUTE = /^\/community\/[^/]+\/$/
+
 export function isLocalizedRoute(pathname: string): boolean {
   return (
     LOCALIZED_ROUTE_PATHS.includes(pathname as (typeof LOCALIZED_ROUTE_PATHS)[number]) ||
@@ -70,7 +74,8 @@ export function isLocalizedRoute(pathname: string): boolean {
     LOCALIZED_CATALOG_ROUTE.test(pathname) ||
     LOCALIZED_CHANGELOG_ROUTE.test(pathname) ||
     LOCALIZED_ARTICLE_ROUTE.test(pathname) ||
-    LOCALIZED_GUIDE_ROUTE.test(pathname)
+    LOCALIZED_GUIDE_ROUTE.test(pathname) ||
+    LOCALIZED_COMMUNITY_ROUTE.test(pathname)
   )
 }
 
