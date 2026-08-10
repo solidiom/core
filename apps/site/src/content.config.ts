@@ -162,6 +162,14 @@ const templates = defineCollection({
   }),
 })
 
+const community = defineCollection({
+  loader: glob({ pattern: "{en,es}/community/**/*.{md,mdx}", base: "./src/content" }),
+  schema: z.object({
+    ...localizedContentFields,
+    order: z.number().int().nonnegative().default(999),
+  }),
+})
+
 const themes = defineCollection({
   loader: glob({ pattern: "{en,es}/themes/**/*.{md,mdx}", base: "./src/content" }),
   schema: z.object({
@@ -185,4 +193,5 @@ export const collections = {
   blocks,
   templates,
   themes,
+  community,
 }
