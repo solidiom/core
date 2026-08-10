@@ -4,7 +4,8 @@ import * as Button from "@solidiom/button"
 import * as Input from "@solidiom/input"
 import * as Field from "@solidiom/field"
 import * as Card from "@solidiom/card"
-import { StepIndicator, WizardCard } from "../components/StepIndicator"
+import { StepIndicator } from "../components/StepIndicator"
+import { WizardCard } from "../components/WizardCard"
 
 const TEMPLATES = [
   { name: "Blank Project", description: "Start from scratch with a clean slate." },

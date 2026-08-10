@@ -1,7 +1,8 @@
 import type { JSX } from "solid-js"
 import { A } from "@solidjs/router"
 import * as Button from "@solidiom/button"
-import { StepIndicator, WizardCard } from "../components/StepIndicator"
+import { StepIndicator } from "../components/StepIndicator"
+import { WizardCard } from "../components/WizardCard"
 
 export function Welcome(): JSX.Element {
   return (

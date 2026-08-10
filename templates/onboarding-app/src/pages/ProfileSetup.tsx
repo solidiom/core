@@ -3,7 +3,8 @@ import { A } from "@solidjs/router"
 import * as Button from "@solidiom/button"
 import * as Input from "@solidiom/input"
 import * as Field from "@solidiom/field"
-import { StepIndicator, WizardCard } from "../components/StepIndicator"
+import { StepIndicator } from "../components/StepIndicator"
+import { WizardCard } from "../components/WizardCard"
 
 export function ProfileSetup(): JSX.Element {
   return (
