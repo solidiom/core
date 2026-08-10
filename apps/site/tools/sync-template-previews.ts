@@ -57,9 +57,28 @@ function shouldCopyFile(src: string, dest: string): boolean {
  * from /templates/__preview__/{name}/index.html, those resolve to
  * /assets/foo.js (which doesn't exist). Rewriting to ./assets/foo.js
  * makes them resolve relative to the template's own assets/ directory.
+ *
+ * Also injects a classic <script> just before </body> that resets the
+ * browser pathname to "/" via history.replaceState. This is necessary
+ * because template apps use path-based routers (e.g. @solidjs/router)
+ * whose routes are defined relative to "/", but the preview is served at
+ * /templates/__preview__/{name}/index.html inside an iframe. Placing the
+ * script after all resource tags ensures relative src/href attributes
+ * resolve against the original URL. Module scripts are deferred by spec,
+ * so they execute after this classic script has already patched the path.
  */
+const PATHNAME_RESET_SCRIPT = `<script>history.replaceState(null,"","/");</script>`
+
 function fixAssetPaths(html: string): string {
-  return html.replace(/"\/assets\//g, '"./assets/').replace(/'\/assets\//g, "'./assets/")
+  let result = html.replace(/"\/assets\//g, '"./assets/').replace(/'\/assets\//g, "'./assets/")
+  // Inject the pathname reset script just before </body>. Module scripts
+  // are deferred by spec: they execute in order after the document is parsed,
+  // which is after all inline classic scripts have run.
+  const bodyCloseIndex = result.indexOf('</body>')
+  if (bodyCloseIndex !== -1) {
+    result = result.slice(0, bodyCloseIndex) + PATHNAME_RESET_SCRIPT + result.slice(bodyCloseIndex)
+  }
+  return result
 }
 
 function syncDir(src: string, dest: string): void {
