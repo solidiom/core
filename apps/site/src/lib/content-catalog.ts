@@ -19,6 +19,8 @@ export const VIEWS: ReadonlyArray<Exclude<CatalogView, "overview">> = [
 
 /**
  * Generates static paths for a layer overview route from a content collection.
+ * Only top-level entries generate overview routes; subdirectory entries
+ * (e.g. examples/basic.md) are looked up from within their parent page.
  */
 export async function getLayerOverviewPaths(
   collection: CollectionName,
@@ -37,23 +39,27 @@ export async function getLayerOverviewPaths(
   }>
 > {
   const entries = await getCollection(collection, (entry) => entry.data.locale === locale)
-  return entries.map((entry) => {
-    const name = extractName(entry.id)
-    return {
-      params: { name },
-      props: {
-        collectionName: collection,
-        layer,
-        entryId: entry.id,
-        name,
-        locale,
-      },
-    }
-  })
+  return entries
+    .filter((entry) => entry.id.split("/").length <= 3)
+    .map((entry) => {
+      const name = extractName(entry.id)
+      return {
+        params: { name },
+        props: {
+          collectionName: collection,
+          layer,
+          entryId: entry.id,
+          name,
+          locale,
+        },
+      }
+    })
 }
 
 /**
  * Generates static paths for a layer view route from a content collection.
+ * Only top-level entries generate view routes; subdirectory entries
+ * (e.g. examples/basic.md) are looked up from within their parent page.
  */
 export async function getLayerViewPaths(
   collection: CollectionName,
@@ -73,18 +79,20 @@ export async function getLayerViewPaths(
   }>
 > {
   const entries = await getCollection(collection, (entry) => entry.data.locale === locale)
-  return entries.flatMap((entry) => {
-    const name = extractName(entry.id)
-    return VIEWS.map((view) => ({
-      params: { name, view },
-      props: {
-        collectionName: collection,
-        layer,
-        entryId: entry.id,
-        name,
-        locale,
-        view,
-      },
-    }))
-  })
+  return entries
+    .filter((entry) => entry.id.split("/").length <= 3)
+    .flatMap((entry) => {
+      const name = extractName(entry.id)
+      return VIEWS.map((view) => ({
+        params: { name, view },
+        props: {
+          collectionName: collection,
+          layer,
+          entryId: entry.id,
+          name,
+          locale,
+          view,
+        },
+      }))
+    })
 }

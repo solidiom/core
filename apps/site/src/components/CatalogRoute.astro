@@ -67,8 +67,8 @@ const breadcrumbItems = [
   },
 ]
 
-// Build sidebar from all entries in this layer's collection
-const allEntries = await getCollection(collectionName, (entry) => entry.data.locale === locale)
+// Build sidebar from top-level entries only (skip subdirectory entries like examples/basic.md)
+const allEntries = await getCollection(collectionName, (entry) => entry.data.locale === locale && entry.id.split("/").length <= 3)
 const sidebarGroups: DocsSidebarGroup[] = [
   {
     label: copy.directoryTitle,
