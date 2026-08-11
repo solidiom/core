@@ -21,51 +21,51 @@ lifecycle: current
 
 ## Results Summary
 
-| Browser  | Tests Run | Passed | Failed | Skipped | Status  |
-| -------- | --------- | ------ | ------ | ------- | ------- |
-| Chromium | 52        | 52     | 0      | 0       | Pass |
-| Firefox  | 52        | 52     | 0      | 0       | Pass |
-| WebKit   | 52        | 52     | 0      | 0       | Pass |
+| Browser  | Tests Run | Passed | Failed | Skipped | Status |
+| -------- | --------- | ------ | ------ | ------- | ------ |
+| Chromium | 52        | 52     | 0      | 0       | Pass   |
+| Firefox  | 52        | 52     | 0      | 0       | Pass   |
+| WebKit   | 52        | 52     | 0      | 0       | Pass   |
 
 ## Primitive Coverage
 
 All 52 primitives with browser test files execute successfully across all three browser engines:
 
-| Primitive        | Chromium | Firefox | WebKit |
-| ---------------- | -------- | ------- | ------ |
-| accordion        | Pass     | Pass    | Pass   |
-| alert            | Pass     | Pass    | Pass   |
-| button           | Pass     | Pass    | Pass   |
-| calendar         | Pass     | Pass    | Pass   |
-| checkbox         | Pass     | Pass    | Pass   |
-| collapsible      | Pass     | Pass    | Pass   |
-| combobox         | Pass     | Pass    | Pass   |
-| field            | Pass     | Pass    | Pass   |
-| label            | Pass     | Pass    | Pass   |
-| listbox          | Pass     | Pass    | Pass   |
-| menu             | Pass     | Pass    | Pass   |
-| meter            | Pass     | Pass    | Pass   |
-| pagination       | Pass     | Pass    | Pass   |
-| popover          | Pass     | Pass    | Pass   |
-| progress         | Pass     | Pass    | Pass   |
-| radio-group      | Pass     | Pass    | Pass   |
-| separator        | Pass     | Pass    | Pass   |
-| slider           | Pass     | Pass    | Pass   |
-| switch           | Pass     | Pass    | Pass   |
-| tabs             | Pass     | Pass    | Pass   |
-| toast            | Pass     | Pass    | Pass   |
-| toggle           | Pass     | Pass    | Pass   |
-| toggle-group     | Pass     | Pass    | Pass   |
-| tooltip          | Pass     | Pass    | Pass   |
-| visually-hidden  | Pass     | Pass    | Pass   |
+| Primitive       | Chromium | Firefox | WebKit |
+| --------------- | -------- | ------- | ------ |
+| accordion       | Pass     | Pass    | Pass   |
+| alert           | Pass     | Pass    | Pass   |
+| button          | Pass     | Pass    | Pass   |
+| calendar        | Pass     | Pass    | Pass   |
+| checkbox        | Pass     | Pass    | Pass   |
+| collapsible     | Pass     | Pass    | Pass   |
+| combobox        | Pass     | Pass    | Pass   |
+| field           | Pass     | Pass    | Pass   |
+| label           | Pass     | Pass    | Pass   |
+| listbox         | Pass     | Pass    | Pass   |
+| menu            | Pass     | Pass    | Pass   |
+| meter           | Pass     | Pass    | Pass   |
+| pagination      | Pass     | Pass    | Pass   |
+| popover         | Pass     | Pass    | Pass   |
+| progress        | Pass     | Pass    | Pass   |
+| radio-group     | Pass     | Pass    | Pass   |
+| separator       | Pass     | Pass    | Pass   |
+| slider          | Pass     | Pass    | Pass   |
+| switch          | Pass     | Pass    | Pass   |
+| tabs            | Pass     | Pass    | Pass   |
+| toast           | Pass     | Pass    | Pass   |
+| toggle          | Pass     | Pass    | Pass   |
+| toggle-group    | Pass     | Pass    | Pass   |
+| tooltip         | Pass     | Pass    | Pass   |
+| visually-hidden | Pass     | Pass    | Pass   |
 
 ## Browser Versions
 
-| Browser  | Engine  | Version (Playwright v1.61.1) |
-| -------- | ------- | ---------------------------- |
-| Chromium | Blink   | 136                          |
-| Firefox  | Gecko   | 139                          |
-| WebKit   | WebKit  | 18.4                         |
+| Browser  | Engine | Version (Playwright v1.61.1) |
+| -------- | ------ | ---------------------------- |
+| Chromium | Blink  | 136                          |
+| Firefox  | Gecko  | 139                          |
+| WebKit   | WebKit | 18.4                         |
 
 ## Known Considerations
 
