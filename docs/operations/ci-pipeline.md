@@ -74,39 +74,39 @@ The site (`@solidiom/site`) is excluded from the library `build` job because it 
 
 ## Workflows
 
-| File | Trigger | Purpose |
-|------|---------|---------|
-| `ci.yml` | `workflow_dispatch` | Full CI pipeline (19 jobs) |
-| `solid-compat.yml` | Nightly 04:00 UTC + `workflow_dispatch` | Solid version compatibility matrix |
-| `release.yml` | `workflow_dispatch` | Build → sign → publish → commit back |
-| `preview-deploy.yml` | `workflow_dispatch` | Deploy preview site to Cloudflare Pages |
-| `visual-baselines.yml` | `workflow_dispatch` | Regenerate visual regression baselines |
+| File                   | Trigger                                 | Purpose                                 |
+| ---------------------- | --------------------------------------- | --------------------------------------- |
+| `ci.yml`               | `workflow_dispatch`                     | Full CI pipeline (19 jobs)              |
+| `solid-compat.yml`     | Nightly 04:00 UTC + `workflow_dispatch` | Solid version compatibility matrix      |
+| `release.yml`          | `workflow_dispatch`                     | Build → sign → publish → commit back    |
+| `preview-deploy.yml`   | `workflow_dispatch`                     | Deploy preview site to Cloudflare Pages |
+| `visual-baselines.yml` | `workflow_dispatch`                     | Regenerate visual regression baselines  |
 
 ---
 
 ## Jobs Reference
 
-| Job | Depends On | What It Does |
-|-----|-----------|--------------|
-| `install` | — | `pnpm install --frozen-lockfile`, cache node_modules |
-| `format` | install | `prettier --check .` |
-| `typecheck` | install | `nx run-many -t typecheck` |
-| `build` | install | Build all packages, run 8 integrity/parity audits, upload dist artifacts |
-| `test-node` | build | Unit + tools tests (Node 24/26 matrix), downloads build artifacts |
-| `test-browser` | build | Browser component tests + RECIPE-005 parity |
-| `a11y-axe-scan` | build | Axe accessibility scans, evidence generation, coverage gate |
-| `site-check` | install | Astro check, import boundaries, i18n validation |
-| `site-build` | site-check | Astro build, Pagefind index, REG-007 route check |
-| `site-e2e` | site-build | Playwright E2E against built site |
-| `site-visual` | site-build | Visual regression in pinned Playwright container |
-| `site-lighthouse` | site-build | Lighthouse budgets (advisory, continue-on-error) |
-| `cli-smoke-create-prep` | build | Warm Verdaccio offline registry snapshot |
-| `cli-smoke-create` | build, prep | Offline create/install/build/test (npm, pnpm, yarn, bun) |
-| `beta-acceptance-report` | site-build | BETA-002 static-build acceptance (60 checks) |
-| `beta-acceptance-e2e` | site-build | BETA-002 cross-browser acceptance (111 checks) |
-| `catalog-gates` | build | Component + block catalog verification |
-| `vertical-slice-gate` | build, site-check | VS-004 gate (G2 exit checklist) |
-| `gates` | typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e, catalog-gates | Phase 1→2→0→3 gates sequentially |
+| Job                      | Depends On                                                                        | What It Does                                                             |
+| ------------------------ | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `install`                | —                                                                                 | `pnpm install --frozen-lockfile`, cache node_modules                     |
+| `format`                 | install                                                                           | `prettier --check .`                                                     |
+| `typecheck`              | install                                                                           | `nx run-many -t typecheck`                                               |
+| `build`                  | install                                                                           | Build all packages, run 8 integrity/parity audits, upload dist artifacts |
+| `test-node`              | build                                                                             | Unit + tools tests (Node 24/26 matrix), downloads build artifacts        |
+| `test-browser`           | build                                                                             | Browser component tests + RECIPE-005 parity                              |
+| `a11y-axe-scan`          | build                                                                             | Axe accessibility scans, evidence generation, coverage gate              |
+| `site-check`             | install                                                                           | Astro check, import boundaries, i18n validation                          |
+| `site-build`             | site-check                                                                        | Astro build, Pagefind index, REG-007 route check                         |
+| `site-e2e`               | site-build                                                                        | Playwright E2E against built site                                        |
+| `site-visual`            | site-build                                                                        | Visual regression in pinned Playwright container                         |
+| `site-lighthouse`        | site-build                                                                        | Lighthouse budgets (advisory, continue-on-error)                         |
+| `cli-smoke-create-prep`  | build                                                                             | Warm Verdaccio offline registry snapshot                                 |
+| `cli-smoke-create`       | build, prep                                                                       | Offline create/install/build/test (npm, pnpm, yarn, bun)                 |
+| `beta-acceptance-report` | site-build                                                                        | BETA-002 static-build acceptance (60 checks)                             |
+| `beta-acceptance-e2e`    | site-build                                                                        | BETA-002 cross-browser acceptance (111 checks)                           |
+| `catalog-gates`          | build                                                                             | Component + block catalog verification                                   |
+| `vertical-slice-gate`    | build, site-check                                                                 | VS-004 gate (G2 exit checklist)                                          |
+| `gates`                  | typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e, catalog-gates | Phase 1→2→0→3 gates sequentially                                         |
 
 ---
 
@@ -156,13 +156,13 @@ mise run ci:beta-acceptance-e2e     # BETA-002 E2E
 
 ## Caching Strategy
 
-| Cache | Key | Path | Purpose |
-|-------|-----|------|---------|
-| Node modules | `modules-{lockfile hash}` | `node_modules`, `packages/*/node_modules`, etc. | Avoid re-resolving deps |
-| Playwright browsers | `playwright-{chromium\|all}-{lockfile hash}` | `~/.cache/ms-playwright` | Avoid re-downloading 400MB–1.2GB |
-| Offline registry snapshot | `offline-registry-snapshot-{OS}-{templates+lockfile hash}` | `tools/offline-fixture/.registry-snapshot` | Avoid re-warming Verdaccio |
-| Build artifacts | Uploaded per-run (retention: 1 day) | `packages/*/dist`, `apps/*/dist` | Eliminate redundant builds |
-| Site dist | Uploaded per-run | `apps/site/dist` | Share built site across E2E/visual/lighthouse |
+| Cache                     | Key                                                        | Path                                            | Purpose                                       |
+| ------------------------- | ---------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------- |
+| Node modules              | `modules-{lockfile hash}`                                  | `node_modules`, `packages/*/node_modules`, etc. | Avoid re-resolving deps                       |
+| Playwright browsers       | `playwright-{chromium\|all}-{lockfile hash}`               | `~/.cache/ms-playwright`                        | Avoid re-downloading 400MB–1.2GB              |
+| Offline registry snapshot | `offline-registry-snapshot-{OS}-{templates+lockfile hash}` | `tools/offline-fixture/.registry-snapshot`      | Avoid re-warming Verdaccio                    |
+| Build artifacts           | Uploaded per-run (retention: 1 day)                        | `packages/*/dist`, `apps/*/dist`                | Eliminate redundant builds                    |
+| Site dist                 | Uploaded per-run                                           | `apps/site/dist`                                | Share built site across E2E/visual/lighthouse |
 
 ---
 
@@ -211,6 +211,7 @@ Visual baselines are rendered on Linux (ubuntu-latest). Running `ci:site-visual`
 ## Adding a New CI Job
 
 1. Add the job to `.github/workflows/ci.yml` using the composite action:
+
    ```yaml
    my-new-job:
      needs: build
@@ -226,6 +227,7 @@ Visual baselines are rendered on Linux (ubuntu-latest). Running `ci:site-visual`
    ```
 
 2. Add a corresponding mise task to `.mise.toml`:
+
    ```toml
    [tasks."ci:my-new-job"]
    description = "CI job `my-new-job`: description here"

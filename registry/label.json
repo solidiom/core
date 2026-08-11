@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-label-scan-v1"
     ],
-    "lastReviewed": "2026-08-07T18:37:43.168Z"
+    "lastReviewed": "2026-08-11T19:15:31.011Z"
   },
   "documentation": {
     "status": "complete",
@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "03052f8acac318fb4997cae2d479c21a487d870700c683c83331c130419bcc14"
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T19:27:57.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/label"
   },
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T19:27:57.000Z"
 }

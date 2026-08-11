@@ -45,7 +45,7 @@
     "evidenceIds": [
       "axe-date-picker-scan-v1"
     ],
-    "lastReviewed": "2026-08-07T18:37:43.168Z"
+    "lastReviewed": "2026-08-11T19:15:31.011Z"
   },
   "documentation": {
     "status": "complete",
@@ -85,11 +85,11 @@
       "src/date-picker.tsx": "c4b891a5a3105c669e4ccac993454b6e84c5ac21c75add57c97034678fa72034",
       "src/index.tsx": "2256bd96c34e431823cae2f2d663a347dd96e96707a40a43539b3595bf48a20e"
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T19:27:57.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/date-picker"
   },
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T19:27:57.000Z"
 }

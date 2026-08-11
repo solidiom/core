@@ -42,7 +42,7 @@
     "evidenceIds": [
       "axe-carousel-scan-v1"
     ],
-    "lastReviewed": "2026-08-07T18:37:43.168Z"
+    "lastReviewed": "2026-08-11T19:15:31.011Z"
   },
   "documentation": {
     "status": "complete",
@@ -81,11 +81,11 @@
       "src/carousel.tsx": "53ba31f214b799620a055d56df5eb30782eb60b6366337f4e71634c3b3d3c6b5",
       "src/index.tsx": "caa11d7ef6a9caf4341da76158ba6d7a88683470da22686dc3594529707c3753"
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T19:27:57.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/carousel"
   },
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T19:27:57.000Z"
 }

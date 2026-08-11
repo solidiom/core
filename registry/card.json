@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-card-scan-v1"
     ],
-    "lastReviewed": "2026-08-07T18:37:43.168Z"
+    "lastReviewed": "2026-08-11T19:15:31.011Z"
   },
   "documentation": {
     "status": "complete",
@@ -80,11 +80,11 @@
     "fileDigests": {
       "src/index.tsx": "05c962b66181d38c43b80c8d8d446b9326cc88bb8069949cf54eb121b738fba2"
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T19:27:57.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/card"
   },
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T19:27:57.000Z"
 }

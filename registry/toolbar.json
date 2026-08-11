@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-toolbar-scan-v1"
     ],
-    "lastReviewed": "2026-08-07T18:37:43.168Z"
+    "lastReviewed": "2026-08-11T19:15:31.011Z"
   },
   "documentation": {
     "status": "complete",
@@ -71,11 +71,11 @@
     "fileDigests": {
       "src/index.tsx": "3d35fab4c05616c2d7b32b8b452ac3d767fa4f5d4788bf3bfe046430be7dd0e7"
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T19:27:57.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/toolbar"
   },
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T19:27:57.000Z"
 }

@@ -42,7 +42,7 @@
     "evidenceIds": [
       "axe-hover-card-scan-v1"
     ],
-    "lastReviewed": "2026-08-07T18:37:43.168Z"
+    "lastReviewed": "2026-08-11T19:15:31.011Z"
   },
   "documentation": {
     "status": "complete",
@@ -84,11 +84,11 @@
       "src/hover-card.tsx": "5e8d0af140f413b7564f8a242266d7184a9d1f065d565c7ac511f05bcb87308c",
       "src/index.tsx": "e2bdc40d2040fdbabf8c43e66c47cfebd965f353de2f27e310f38ad6dc227571"
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T19:27:57.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/hover-card"
   },
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T19:27:57.000Z"
 }
