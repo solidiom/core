@@ -7,8 +7,13 @@ const INVOICES = [
   { number: "INV-2026-001", date: "Aug 1, 2026", amount: "$29.00", status: "paid" as const },
   { number: "INV-2026-002", date: "Jul 1, 2026", amount: "$29.00", status: "paid" as const },
   { number: "INV-2026-003", date: "Jun 1, 2026", amount: "$29.00", status: "paid" as const },
-  { number: "INV-2026-004", date: "May 1, 2026", amount: "$0.00", status: "paid" as const },
+  { number: "INV-2026-004", date: "May 1, 2026", amount: "$29.00", status: "pending" as const },
   { number: "INV-2026-005", date: "Apr 1, 2026", amount: "$0.00", status: "paid" as const },
+  { number: "INV-2026-006", date: "Mar 1, 2026", amount: "$0.00", status: "paid" as const },
+  { number: "INV-2026-007", date: "Feb 1, 2026", amount: "$0.00", status: "paid" as const },
+  { number: "INV-2026-008", date: "Jan 1, 2026", amount: "$0.00", status: "paid" as const },
+  { number: "INV-2025-012", date: "Dec 1, 2025", amount: "$0.00", status: "paid" as const },
+  { number: "INV-2025-011", date: "Nov 1, 2025", amount: "$0.00", status: "overdue" as const },
 ]
 
 export function Invoices(): JSX.Element {
@@ -17,6 +22,20 @@ export function Invoices(): JSX.Element {
 
   const filtered = () =>
     filter() === "all" ? INVOICES : INVOICES.filter((i) => i.status === filter())
+
+  const totalSpent = () => {
+    const sum = filtered()
+      .filter((i) => i.status === "paid")
+      .reduce((acc, i) => acc + parseFloat(i.amount.replace("$", "")), 0)
+    return `$${sum.toFixed(2)}`
+  }
+
+  const pendingAmount = () => {
+    const sum = filtered()
+      .filter((i) => i.status === "pending" || i.status === "overdue")
+      .reduce((acc, i) => acc + parseFloat(i.amount.replace("$", "")), 0)
+    return `$${sum.toFixed(2)}`
+  }
 
   return (
     <div class="min-h-screen bg-gray-50">
@@ -54,11 +73,50 @@ export function Invoices(): JSX.Element {
           ))}
         </div>
 
+        <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <Card.Root class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Total Spent</p>
+            <p class="mt-1 text-2xl font-bold text-gray-900">{totalSpent()}</p>
+          </Card.Root>
+          <Card.Root class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Outstanding</p>
+            <p class="mt-1 text-2xl font-bold text-amber-600">{pendingAmount()}</p>
+          </Card.Root>
+          <Card.Root class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            <p class="text-sm font-medium text-gray-500">Invoices</p>
+            <p class="mt-1 text-2xl font-bold text-gray-900">{filtered().length}</p>
+          </Card.Root>
+        </div>
+
         <Card.Root class="mt-6 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+          <div class="flex items-center justify-between border-b border-gray-200 bg-gray-50 px-4 py-2">
+            <span class="text-xs font-medium text-gray-500">
+              Showing {filtered().length} of {INVOICES.length} invoices
+            </span>
+            <button type="button" class="text-xs font-medium text-indigo-600 hover:text-indigo-700">
+              Download All
+            </button>
+          </div>
           {filtered().map((invoice) => (
             <InvoiceRow {...invoice} />
           ))}
         </Card.Root>
+
+        <div class="mt-8">
+          <h2 class="text-lg font-bold text-gray-900">Payment Methods</h2>
+          <Card.Root class="mt-3 flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded bg-gray-100">
+                <span class="text-xs font-bold text-gray-600">VISA</span>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">•••• 4242</p>
+                <p class="text-xs text-gray-500">Expires 12/2027</p>
+              </div>
+            </div>
+            <span class="inline-flex rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">Default</span>
+          </Card.Root>
+        </div>
       </main>
     </div>
   )

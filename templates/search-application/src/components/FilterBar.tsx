@@ -14,7 +14,7 @@ export function FilterBar(props: {
         <div class="mt-3 flex flex-wrap gap-3">
           {props.categories.map((cat, i) => (
             <Checkbox.Root checked={() => cat.checked} onCheckedChange={() => props.onCategoryToggle(i)}>
-              <Checkbox.Label class="text-sm text-gray-700">{cat.label}</Checkbox.Label>
+              <Checkbox.Indicator><span class="text-sm text-gray-700">{cat.label}</span></Checkbox.Indicator>
             </Checkbox.Root>
           ))}
         </div>
@@ -24,7 +24,7 @@ export function FilterBar(props: {
         <div class="mt-3 flex flex-wrap gap-3">
           {props.types.map((type, i) => (
             <Checkbox.Root checked={() => type.checked} onCheckedChange={() => props.onTypeToggle(i)}>
-              <Checkbox.Label class="text-sm text-gray-700">{type.label}</Checkbox.Label>
+              <Checkbox.Indicator><span class="text-sm text-gray-700">{type.label}</span></Checkbox.Indicator>
             </Checkbox.Root>
           ))}
         </div>

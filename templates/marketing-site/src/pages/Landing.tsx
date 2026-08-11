@@ -13,6 +13,15 @@ const STATS = [
 const TESTIMONIALS = [
   { name: "Sarah Chen", role: "CTO, TechCorp", text: "This platform transformed how our team collaborates. The productivity gains were immediate." },
   { name: "Marcus Johnson", role: "Product Lead, StartupXYZ", text: "The best developer experience we've encountered. Setup took minutes, not days." },
+  { name: "Emily Rodriguez", role: "Engineering Manager, ScaleUp", text: "We migrated our entire infrastructure in a weekend. The migration tools are outstanding." },
+  { name: "David Park", role: "Founder, IndieHack", text: "As a solo founder, this gives me the infrastructure of a 50-person engineering team." },
+]
+
+const FEATURES_PREVIEW = [
+  { title: "Real-time Collaboration", description: "Work together with your team in real-time. See changes as they happen." },
+  { title: "Advanced Analytics", description: "Gain insights with powerful dashboards and custom reports." },
+  { title: "Automated Workflows", description: "Build custom automation rules to eliminate repetitive tasks." },
+  { title: "Enterprise Security", description: "Bank-grade security with SSO, MFA, and role-based access control." },
 ]
 
 export function Landing(): JSX.Element {
@@ -54,6 +63,18 @@ export function Landing(): JSX.Element {
       </div>
 
       <div class="mt-16">
+        <h2 class="text-2xl font-bold text-gray-900">Trusted by Teams Worldwide</h2>
+        <p class="mt-2 text-sm text-gray-500">Join thousands of organizations building better products.</p>
+        <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {["TechCorp", "StartupXYZ", "ScaleUp", "IndieHack"].map((company) => (
+            <div class="flex items-center justify-center rounded-lg border border-gray-200 bg-gray-50 py-6">
+              <span class="text-lg font-semibold text-gray-400">{company}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-16">
         <h2 class="text-2xl font-bold text-gray-900">What Our Customers Say</h2>
         <div class="mt-6 grid gap-6 sm:grid-cols-2">
           {TESTIMONIALS.map((t) => (
@@ -67,6 +88,31 @@ export function Landing(): JSX.Element {
               </Alert.Description>
             </Alert.Root>
           ))}
+        </div>
+      </div>
+
+      <div class="mt-16">
+        <h2 class="text-2xl font-bold text-gray-900">Why Choose Us</h2>
+        <p class="mt-2 text-sm text-gray-500">Everything you need to ship products your users love.</p>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+          {FEATURES_PREVIEW.map((feature) => (
+            <div class="rounded-lg border border-gray-200 bg-white p-6">
+              <h3 class="font-semibold text-gray-900">{feature.title}</h3>
+              <p class="mt-2 text-sm text-gray-600">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-16 rounded-lg bg-indigo-50 p-8 text-center">
+        <h2 class="text-2xl font-bold text-gray-900">Ready to Get Started?</h2>
+        <p class="mx-auto mt-2 max-w-xl text-sm text-gray-600">
+          Start your free trial today. No credit card required. Full access for 14 days.
+        </p>
+        <div class="mt-6">
+          <Button.Root class="rounded-md bg-indigo-600 px-6 py-3 text-sm font-medium text-white hover:bg-indigo-700">
+            Start Your Free Trial
+          </Button.Root>
         </div>
       </div>
     </div>
