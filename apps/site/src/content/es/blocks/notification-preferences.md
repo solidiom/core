@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Notification Preferences
 productLayer: block
-status: draft
+status: published
 category: "SETTINGS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "f7786b556671312b33f596a198223e4874128996a7cea7069b7f529edc54d350"

@@ -4,10 +4,10 @@ title: Skeleton
 description: Styled skeleton component — the recipe wrapper for the css, tailwind, unocss profile(s) using the skeleton primitive.
 keywords: [skeleton, loading, placeholder, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Skeleton
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "skeleton"
 stylingOutputs: ["css", "tailwind", "unocss"]

@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Danger Zone
 productLayer: block
-status: draft
+status: published
 category: "SETTINGS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "bcbab7c1749d1618fc32eb66a7aba7da433f0659265325723cde1fc973161f0a"

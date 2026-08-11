@@ -4,10 +4,10 @@ title: Spinner
 description: Styled spinner component — the recipe wrapper for the css, tailwind, unocss profile(s) using the spinner primitive.
 keywords: [spinner, loading, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Spinner
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "spinner"
 stylingOutputs: ["css", "tailwind", "unocss"]

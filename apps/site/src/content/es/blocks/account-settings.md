@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Account Settings
 productLayer: block
-status: draft
+status: published
 category: "SETTINGS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "9e9d885c0801deb7f7e08a9f1a381efc907cfa395983cccd307ef609aedb3850"

@@ -4,10 +4,10 @@ title: Avatar
 description: Styled avatar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the avatar primitive.
 keywords: [avatar, image, user, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Avatar
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "avatar"
 stylingOutputs: ["css", "tailwind", "unocss"]

@@ -4,10 +4,10 @@ title: Tema Forest
 description: An earthy green palette with warm undertones.
 keywords: [forest, tema, preset, tokens, estilos]
 locale: es
-maturity: draft
+maturity: beta
 product: Forest
 productLayer: theme
-status: draft
+status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 translationSourceHash: "de5d84e730f995da22dc98832334afacd8baf16265f59100402b65b36c1ae587"

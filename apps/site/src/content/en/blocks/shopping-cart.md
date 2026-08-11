@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Shopping Cart
 productLayer: block
-status: draft
+status: published
 category: "COMMERCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

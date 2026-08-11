@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Search Analytics
 productLayer: block
-status: draft
+status: published
 category: "SEARCH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

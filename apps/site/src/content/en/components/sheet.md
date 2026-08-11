@@ -4,10 +4,10 @@ title: Sheet
 description: Styled sheet component — the recipe wrapper for the css, tailwind, unocss profile(s) using the sheet primitive.
 keywords: [sheet, side-panel, dialog, overlay, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Sheet
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "sheet"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -68,4 +68,4 @@ Sheet renders as semantic HTML during server rendering. The recipe layer adds no
 
 ## Accessibility
 
-Sheet delegates accessibility to `@solidiom/sheet`. The primitive implements modal isolation, focus scope management, and scroll lock for accessible overlay dialogs. See the primitive's `evidence.json` for the accessibility contract and test results.
+Sheet delegates accessibility to `@solidiom/sheet`. The primitive implements modal isolation, focus scope management, and scroll lock for accessible overlay dialogs. See the [Sheet primitive accessibility contract](/primitives/sheet/accessibility/) for the full keyboard, focus, and ARIA contract. The recipe wrapper does not introduce new semantics or interact with the accessibility tree beyond styling.

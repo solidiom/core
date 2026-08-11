@@ -4,10 +4,10 @@ title: Collapsible
 description: Styled collapsible component — the recipe wrapper for the css, tailwind, unocss profile(s) using the collapsible primitive.
 keywords: [collapsible, disclosure, expand, collapse, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Collapsible
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "collapsible"
 stylingOutputs: ["css", "tailwind", "unocss"]

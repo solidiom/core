@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Order Tracking
 productLayer: block
-status: draft
+status: published
 category: "COMMERCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "14cc59850c86dace8b853fee2c51833ace4e12b83dcde19662d66588983af59b"

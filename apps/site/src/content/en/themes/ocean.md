@@ -4,10 +4,10 @@ title: Ocean Theme
 description: A deep teal and cyan palette inspired by ocean depths.
 keywords: [ocean, theme, preset, tokens, styling]
 locale: en
-maturity: draft
+maturity: beta
 product: Ocean
 productLayer: theme
-status: draft
+status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 ---

@@ -4,10 +4,10 @@ title: Field
 description: Form field wrapper with label, control, description, and error message styling.
 keywords: [field, form, label, validation, error]
 locale: en
-maturity: draft
+maturity: beta
 product: Field
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "field"
 stylingOutputs: ["css", "tailwind", "unocss"]

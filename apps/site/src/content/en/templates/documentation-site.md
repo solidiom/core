@@ -4,10 +4,10 @@ title: "Documentation Site"
 description: "Documentation and product site with docs reader, API reference, and guides."
 keywords: [documentation-site, template, starter, solid, docs, api, guides]
 locale: en
-maturity: draft
+maturity: beta
 product: "Documentation Site"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-documentation-site"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

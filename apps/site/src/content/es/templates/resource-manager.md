@@ -4,10 +4,10 @@ title: "Resource Manager"
 description: "Gestor de recursos con vistas de lista, detalle y creación."
 keywords: [resource-manager, plantilla, inicio, solid, recursos, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "Resource Manager"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-resource-manager"
 stack: vite-solid-router
 portfolios: ["balanced-product", "enterprise-platform-governance"]

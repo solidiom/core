@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Audit Log
 productLayer: block
-status: draft
+status: published
 category: "ADMIN"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "e563d167441780077ac965a27a9ec2eac2cc16653e5ea4fb4e91a777005b2b81"

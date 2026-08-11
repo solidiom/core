@@ -4,10 +4,10 @@ title: "Incident Response"
 description: "Incident response with active incidents, runbooks, and postmortems."
 keywords: [incident-response, template, starter, solid, incidents, runbooks, enterprise]
 locale: en
-maturity: draft
+maturity: beta
 product: "Incident Response"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-incident-response"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

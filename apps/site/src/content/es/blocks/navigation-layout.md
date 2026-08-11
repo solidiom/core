@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Navigation Layout
 productLayer: block
-status: draft
+status: published
 category: "SHELL"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "0091f0a24377dc960e5d5d577e6cac8d59a96340ecf9ec400de6a8940774367f"

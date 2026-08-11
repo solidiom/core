@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Search Results
 productLayer: block
-status: draft
+status: published
 category: "SEARCH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "edb53692d395f8399e78409bcf4b3e3a1fc60035c41504d807a06afd7701b7df"

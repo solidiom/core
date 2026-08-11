@@ -4,10 +4,10 @@ title: TanStack Start Solid
 description: "Starter template for tanstack start solid projects."
 keywords: [tanstack-start-solid, template, starter, solid]
 locale: en
-maturity: draft
+maturity: beta
 product: TanStack Start Solid
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-tanstack-start-solid"
 stack: tanstack-start-solid
 portfolios: ["balanced-product"]

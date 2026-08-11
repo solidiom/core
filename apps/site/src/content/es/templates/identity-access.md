@@ -4,10 +4,10 @@ title: "Identity & Access"
 description: "Gestión de identidad y acceso con usuarios, roles y sesiones."
 keywords: [identity-access, plantilla, inicio, solid, iam, usuarios, roles, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "Identity & Access"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-identity-access"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

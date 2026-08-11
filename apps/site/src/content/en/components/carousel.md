@@ -4,10 +4,10 @@ title: Carousel
 description: Styled carousel component — the recipe wrapper for the css, tailwind, unocss profile(s) using the carousel primitive.
 keywords: [carousel, slider, slideshow, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Carousel
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "carousel"
 stylingOutputs: ["css", "tailwind", "unocss"]

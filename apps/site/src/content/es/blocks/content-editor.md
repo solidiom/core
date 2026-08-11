@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Content Editor
 productLayer: block
-status: draft
+status: published
 category: "CONTENT"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "8d341eaa8177f53a28811368dec4e4dc6490001daf0af8d174c1abd73bf57f41"

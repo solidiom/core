@@ -4,10 +4,10 @@ title: Radio Group
 description: Styled radio group component — the recipe wrapper for the css, tailwind, unocss profile(s) using the radio-group primitive.
 keywords: [radio, group, selection, single, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Radio Group
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "radio-group"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -67,4 +67,4 @@ Radio Group se renderiza como HTML semántico durante el renderizado en servidor
 
 ## Accesibilidad
 
-Radio Group delega la accesibilidad a `@solidiom/radio-group`. El primitivo implementa el patrón WAI-ARIA radiogroup con navegación por teclado roving tabindex donde las teclas de flecha mueven el foco y seleccionan. Consulte el `evidence.json` del primitivo para el contrato de accesibilidad y los resultados de las pruebas.
+Radio Group delega la accesibilidad a `@solidiom/radio-group`. El primitivo implementa el patrón WAI-ARIA radiogroup con navegación por teclado roving tabindex donde las teclas de flecha mueven el foco y seleccionan. Consulta el [contrato de accesibilidad del primitivo Radio Group](/primitives/radio-group/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.

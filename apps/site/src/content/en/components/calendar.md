@@ -4,10 +4,10 @@ title: Calendar
 description: Styled calendar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the calendar primitive.
 keywords: [calendar, date, picker, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Calendar
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "calendar"
 stylingOutputs: ["css", "tailwind", "unocss"]

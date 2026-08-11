@@ -4,10 +4,10 @@ title: Slider
 description: Styled slider component — the recipe wrapper for the css, tailwind, unocss profile(s) using the slider primitive.
 keywords: [slider, range, input, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Slider
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "slider"
 stylingOutputs: ["css", "tailwind", "unocss"]

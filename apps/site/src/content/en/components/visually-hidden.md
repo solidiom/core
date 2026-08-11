@@ -4,10 +4,10 @@ title: Visually Hidden
 description: Styled visually hidden component — the recipe wrapper for the css, tailwind, unocss profile(s) using the visually-hidden primitive.
 keywords: [visually-hidden, sr-only, accessibility, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Visually Hidden
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "visually-hidden"
 stylingOutputs: ["css", "tailwind", "unocss"]

@@ -4,10 +4,10 @@ title: Popover
 description: Styled popover component — the recipe wrapper for the css, tailwind, unocss profile(s) using the popover primitive.
 keywords: [component, css, popover, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Popover
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "popover"
 stylingOutputs: ["css", "tailwind", "unocss"]

@@ -4,10 +4,10 @@ title: Tema Ocean
 description: A deep teal and cyan palette inspired by ocean depths.
 keywords: [ocean, tema, preset, tokens, estilos]
 locale: es
-maturity: draft
+maturity: beta
 product: Ocean
 productLayer: theme
-status: draft
+status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 translationSourceHash: "03c9bb3d74aab44f1d26d0aa0744abb815f1664b38bc86aaf61271497006c613"

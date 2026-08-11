@@ -4,10 +4,10 @@ title: Toggle
 description: Styled toggle component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toggle primitive.
 keywords: [toggle, button, pressed, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Toggle
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "toggle"
 stylingOutputs: ["css", "tailwind", "unocss"]

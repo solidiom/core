@@ -4,10 +4,10 @@ title: "AI Chat"
 description: "Chat IA con interfaz conversacional, prompts y flujos de trabajo."
 keywords: [ai-chat, plantilla, inicio, solid, ia, chat]
 locale: es
-maturity: draft
+maturity: beta
 product: "AI Chat"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-ai-chat"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

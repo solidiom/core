@@ -4,10 +4,10 @@ title: Tooltip
 description: Styled tooltip component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tooltip primitive.
 keywords: [component, css, tailwind, tooltip, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Tooltip
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "tooltip"
 stylingOutputs: ["css", "tailwind", "unocss"]

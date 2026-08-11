@@ -4,10 +4,10 @@ title: Sheet
 description: Styled sheet component — the recipe wrapper for the css, tailwind, unocss profile(s) using the sheet primitive.
 keywords: [sheet, drawer, overlay, dialog, slide, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Sheet
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "sheet"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -69,4 +69,4 @@ Sheet se renderiza como HTML semántico durante el renderizado en servidor. La c
 
 ## Accesibilidad
 
-Sheet delega la accesibilidad a `@solidiom/sheet`. El primitivo implementa aislamiento modal, gestión de ámbito de foco y bloqueo de desplazamiento para diálogos superpuestos accesibles. Consulte el `evidence.json` del primitivo para el contrato de accesibilidad y los resultados de las pruebas.
+Sheet delega la accesibilidad a `@solidiom/sheet`. El primitivo implementa aislamiento modal, gestión de ámbito de foco y bloqueo de desplazamiento para diálogos superpuestos accesibles. Consulta el [contrato de accesibilidad del primitivo Sheet](/primitives/sheet/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.

@@ -4,10 +4,10 @@ title: Tree
 description: Styled tree component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tree primitive.
 keywords: [tree, treeview, hierarchy, file-explorer, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Tree
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "tree"
 stylingOutputs: ["css", "tailwind", "unocss"]

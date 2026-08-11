@@ -4,10 +4,10 @@ title: Menu
 description: Styled menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the menu primitive.
 keywords: [component, css, menu, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Menu
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "menu"
 stylingOutputs: ["css", "tailwind", "unocss"]

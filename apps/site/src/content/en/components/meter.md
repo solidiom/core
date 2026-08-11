@@ -4,10 +4,10 @@ title: Meter
 description: Styled meter component — the recipe wrapper for the css, tailwind, unocss profile(s) using the meter primitive.
 keywords: [meter, measurement, gauge, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Meter
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "meter"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -55,4 +55,4 @@ Meter renders as semantic HTML during server rendering. The recipe layer adds no
 
 ## Accessibility
 
-Meter delegates accessibility to `@solidiom/meter`. The primitive uses the native `<meter>` element for built-in accessibility semantics. The recipe wrapper does not introduce new semantics or interact with the accessibility tree beyond styling.
+Meter delegates accessibility to `@solidiom/meter`. The primitive uses the native `<meter>` element for built-in accessibility semantics. See the [Meter primitive accessibility contract](/primitives/meter/accessibility/) for the full keyboard, focus, and ARIA contract. The recipe wrapper does not introduce new semantics or interact with the accessibility tree beyond styling.

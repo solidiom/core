@@ -4,10 +4,10 @@ title: Label
 description: Styled label component — the recipe wrapper for the css, tailwind, unocss profile(s) using the label primitive.
 keywords: [label, form, input, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Label
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "label"
 stylingOutputs: ["css", "tailwind", "unocss"]

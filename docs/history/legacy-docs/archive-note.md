@@ -1,3 +1,11 @@
+---
+id: legacy-docs-archive-note
+title: "Legacy Docs Archive"
+doc_type: history
+tags: [legacy, archive, migration]
+lifecycle: archived
+---
+
 # Legacy Docs Archive
 
 ## Archive date

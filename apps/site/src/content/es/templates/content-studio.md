@@ -4,10 +4,10 @@ title: "Content Studio"
 description: "Estudio de gestión de contenido con editor, biblioteca y flujo de publicación."
 keywords: [content-studio, plantilla, inicio, solid, cms, editor, contenido]
 locale: es
-maturity: draft
+maturity: beta
 product: "Content Studio"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-content-studio"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

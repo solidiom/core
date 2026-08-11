@@ -4,10 +4,10 @@ title: Virtual List
 description: Styled virtual list component — the recipe wrapper for the css, tailwind, unocss profile(s) using the virtual-list primitive.
 keywords: [virtual-list, virtualization, infinite-scroll, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Virtual List
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "virtual-list"
 stylingOutputs: ["css", "tailwind", "unocss"]

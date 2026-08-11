@@ -4,10 +4,10 @@ title: "AI Workflow"
 description: "Automatización de flujos de trabajo IA con constructor de pipelines, registro de modelos y logs de ejecución."
 keywords: [ai-workflow, plantilla, inicio, solid, ia, pipelines, automatización]
 locale: es
-maturity: draft
+maturity: beta
 product: "AI Workflow"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-ai-workflow"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

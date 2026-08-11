@@ -4,10 +4,10 @@ title: "Workflow Automation"
 description: "Automatización de flujos de trabajo con diseñador visual, historial de ejecución e integraciones."
 keywords: [workflow-automation, plantilla, inicio, solid, flujos, automatización, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "Workflow Automation"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-workflow-automation"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

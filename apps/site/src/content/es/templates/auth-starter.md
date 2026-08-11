@@ -4,10 +4,10 @@ title: "Authentication Starter"
 description: "Plantilla de autenticación con inicio de sesión, registro y restablecimiento de contraseña."
 keywords: [auth-starter, plantilla, inicio, solid, autenticacion]
 locale: es
-maturity: draft
+maturity: beta
 product: "Authentication Starter"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-auth-starter"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

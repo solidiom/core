@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Resource Detail
 productLayer: block
-status: draft
+status: published
 category: "RESOURCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

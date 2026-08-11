@@ -4,10 +4,10 @@ title: Toggle Group
 description: Styled toggle group component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toggle-group primitive.
 keywords: [toggle-group, button-group, segmented, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Toggle Group
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "toggle-group"
 stylingOutputs: ["css", "tailwind", "unocss"]

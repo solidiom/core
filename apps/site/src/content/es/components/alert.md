@@ -4,10 +4,10 @@ title: Alert
 description: Styled alert component — the recipe wrapper for the css, tailwind, unocss profile(s) using the alert primitive.
 keywords: [alert, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Alert
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "alert"
 stylingOutputs: ["css", "tailwind", "unocss"]

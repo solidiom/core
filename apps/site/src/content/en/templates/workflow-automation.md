@@ -4,10 +4,10 @@ title: "Workflow Automation"
 description: "Workflow automation with visual designer, run history, and integrations."
 keywords: [workflow-automation, template, starter, solid, workflows, automation, enterprise]
 locale: en
-maturity: draft
+maturity: beta
 product: "Workflow Automation"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-workflow-automation"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

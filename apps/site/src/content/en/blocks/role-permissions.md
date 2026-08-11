@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Role Permissions
 productLayer: block
-status: draft
+status: published
 category: "ADMIN"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

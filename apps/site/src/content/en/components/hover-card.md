@@ -4,10 +4,10 @@ title: Hover Card
 description: Styled hover card component — the recipe wrapper for the css, tailwind, unocss profile(s) using the hover-card primitive.
 keywords: [hover-card, popover, preview, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Hover Card
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "hover-card"
 stylingOutputs: ["css", "tailwind", "unocss"]

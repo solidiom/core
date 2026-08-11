@@ -4,10 +4,10 @@ title: "Authentication Starter"
 description: "Authentication starter with sign-in, sign-up, and password reset flows."
 keywords: [auth-starter, template, starter, solid, authentication]
 locale: en
-maturity: draft
+maturity: beta
 product: "Authentication Starter"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-auth-starter"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

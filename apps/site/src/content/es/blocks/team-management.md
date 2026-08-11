@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Team Management
 productLayer: block
-status: draft
+status: published
 category: "ADMIN"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "21c7a83fb7f65c37b2d1b7a577f79c5fdaa4effdafef51d0e3dfa5b8762ae06e"

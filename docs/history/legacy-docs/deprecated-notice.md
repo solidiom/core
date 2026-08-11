@@ -1,3 +1,11 @@
+---
+id: legacy-docs-deprecated-notice
+title: "apps/docs — Read-Only (MIG-002)"
+doc_type: history
+tags: [legacy, migration, MIG-002]
+lifecycle: archived
+---
+
 # apps/docs — Read-Only (MIG-002)
 
 **Status:** Frozen — no new features accepted.

@@ -4,10 +4,10 @@ title: "Marketing Site"
 description: "Marketing website with landing page, features, and pricing."
 keywords: [marketing-site, template, starter, solid, marketing, landing, pricing]
 locale: en
-maturity: draft
+maturity: beta
 product: "Marketing Site"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-marketing-site"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Resource Detail
 productLayer: block
-status: draft
+status: published
 category: "RESOURCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "90c522f68bccba21375df4db2527a7fb6791a40214596ebcf2f2917d7d169726"

@@ -4,10 +4,10 @@ title: "Billing Portal"
 description: "Billing portal with subscriptions, payments, and invoices."
 keywords: [billing-portal, template, starter, solid, billing]
 locale: en
-maturity: draft
+maturity: beta
 product: "Billing Portal"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-billing-portal"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

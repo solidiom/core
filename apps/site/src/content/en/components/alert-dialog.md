@@ -4,10 +4,10 @@ title: Alert Dialog
 description: Styled alert dialog component — the recipe wrapper for the css, tailwind, unocss profile(s) using the alert-dialog primitive.
 keywords: [alert-dialog, modal, confirmation, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Alert Dialog
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "alert-dialog"
 stylingOutputs: ["css", "tailwind", "unocss"]

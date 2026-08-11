@@ -4,7 +4,7 @@ title: "CLI Reference"
 description: "Complete reference for the solidiom command-line interface."
 keywords: [cli, commands, create, add, plan, inspect, guide]
 locale: es
-maturity: draft
+maturity: beta
 product: "Solidiom"
 productLayer: guide
 status: draft

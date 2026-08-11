@@ -4,10 +4,10 @@ title: "Developer Portal"
 description: "Developer portal with documentation, SDK playground, and app management."
 keywords: [developer-portal, template, starter, solid, developer, sdk, enterprise]
 locale: en
-maturity: draft
+maturity: beta
 product: "Developer Portal"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-developer-portal"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

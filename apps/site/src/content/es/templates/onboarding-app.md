@@ -4,10 +4,10 @@ title: "Onboarding App"
 description: "Aplicación de incorporación con asistentes de varios pasos y configuración guiada."
 keywords: [onboarding-app, plantilla, inicio, solid, incorporacion]
 locale: es
-maturity: draft
+maturity: beta
 product: "Onboarding App"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-onboarding-app"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

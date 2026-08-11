@@ -4,10 +4,10 @@ title: "Security Center"
 description: "Security center with threat dashboard, vulnerabilities, and policy management."
 keywords: [security-center, template, starter, solid, security, threats, enterprise]
 locale: en
-maturity: draft
+maturity: beta
 product: "Security Center"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-security-center"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

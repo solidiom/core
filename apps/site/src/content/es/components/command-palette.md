@@ -4,10 +4,10 @@ title: Command Palette
 description: Styled command palette component — the recipe wrapper for the css, tailwind, unocss profile(s) using the command-palette primitive.
 keywords: [command, palette, kbd, shortcut, search, overlay, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Command Palette
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "command-palette"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -69,4 +69,4 @@ Command Palette se renderiza como HTML semántico durante el renderizado en serv
 
 ## Accesibilidad
 
-Command Palette delega la accesibilidad a `@solidiom/command-palette`. El primitivo implementa el patrón WAI-ARIA combobox/listbox con navegación por teclado y soporte para lectores de pantalla. Consulte el `evidence.json` del primitivo para el contrato de accesibilidad y los resultados de las pruebas.
+Command Palette delega la accesibilidad a `@solidiom/command-palette`. El primitivo implementa el patrón WAI-ARIA combobox/listbox con navegación por teclado y soporte para lectores de pantalla. Consulta el [contrato de accesibilidad del primitivo Command Palette](/primitives/command-palette/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.

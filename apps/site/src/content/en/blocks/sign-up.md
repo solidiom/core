@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Sign Up
 productLayer: block
-status: draft
+status: published
 category: "AUTH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

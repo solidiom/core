@@ -4,10 +4,10 @@ title: "API Management"
 description: "API management with endpoint catalog, key management, and usage analytics."
 keywords: [api-management, template, starter, solid, api, keys, enterprise]
 locale: en
-maturity: draft
+maturity: beta
 product: "API Management"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-api-management"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

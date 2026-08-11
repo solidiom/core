@@ -4,10 +4,10 @@ title: Solidiom Default Theme
 description: The canonical Solidiom theme with a cool slate canvas and indigo primary.
 keywords: [solidiom-default, theme, preset, tokens, styling]
 locale: en
-maturity: draft
+maturity: beta
 product: Solidiom Default
 productLayer: theme
-status: draft
+status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 ---
