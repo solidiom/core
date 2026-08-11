@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest"
+import { describe, it, expect, beforeEach, afterAll } from "vitest"
 import { mkdirSync, writeFileSync, rmSync, existsSync } from "node:fs"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -15,6 +15,10 @@ function setup(...paths: string[]): string {
 
 describe("assert-no-unverified", () => {
   beforeEach(() => {
+    if (existsSync(TMP)) rmSync(TMP, { recursive: true })
+  })
+
+  afterAll(() => {
     if (existsSync(TMP)) rmSync(TMP, { recursive: true })
   })
 

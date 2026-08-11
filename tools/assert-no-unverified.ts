@@ -42,7 +42,7 @@ export function findLockFiles(root: string): string[] {
     if (!isDirectory(dir)) return
     for (const entry of readdirSync(dir)) {
       const fullPath = join(dir, entry)
-      if (entry === "node_modules" || entry === ".git") continue
+      if (entry === "node_modules" || entry === ".git" || entry === ".tmp") continue
       if (entry === "lock.json" && dirname(fullPath).endsWith(".solidiom")) {
         results.push(fullPath)
       } else if (isDirectory(fullPath)) {

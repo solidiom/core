@@ -412,7 +412,7 @@ describe("REG-003 manifest fields", () => {
       (primitive: { name: string }) => primitive.name === "dialog",
     )
 
-    expect(dialog.status).toBe("preview")
+    expect(dialog.status).toBe("stable")
     expect(dialog.deliverables).toEqual(["primitive"])
     expect(dialog.styling.themeCompatible).toEqual(["site"])
     expect(dialog.search.keywords).toEqual(
@@ -420,7 +420,7 @@ describe("REG-003 manifest fields", () => {
     )
     expect(dialog.documentation.locales).toEqual({
       en: { status: "draft" },
-      es: { status: "draft" },
+      es: { status: "reviewed", lastUpdated: "2026-08-07T05:00:00.000Z" },
     })
     expect(dialog.provenance).toEqual({
       repository: "https://github.com/solidiom/solidiom",
