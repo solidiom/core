@@ -117,6 +117,12 @@ const ALLOWED_VARIABLES = new Set(["projectName"])
  * `template.json`.
  */
 export function resolveTemplateSource(templateName: string): string | null {
+  // SOL-004: Validate template name to prevent path traversal.
+  // Only lowercase alphanumeric characters and hyphens are allowed.
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(templateName)) {
+    return null
+  }
+
   const moduleDir = dirname(fileURLToPath(import.meta.url))
 
   const candidates = [

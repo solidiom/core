@@ -21,16 +21,16 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/avatar.tsx": "b78b5bb90f07c0624a682bafad52dac379899da3c7bdfa99e7e14abf43906cb5"
+        "src/recipes/avatar.tsx": "4fe98a6f11002bbe64d1a79b54fae2ac531c3d8980b2f904d31f4ff6fd775026"
       },
       "tailwind": {
-        "src/recipes/avatar.tsx": "1e362095620bbbd5a94d54ce1bd2859baa88e9b2d3582a4640e6bce7129965df"
+        "src/recipes/avatar.tsx": "1b1cf70b0e1551847ff5a61390e9b12c8b5e52714353846a2752386264db69f8"
       },
       "unocss": {
-        "src/recipes/avatar.tsx": "673bafa4900892f5e95d714bdb224fea55854d872e3e8d384efb8b67e2d1fe53"
+        "src/recipes/avatar.tsx": "4e27a4cdb4533fb1d9750249907eaf0ffcaa5dd4afdf56ecfd1b2a1608b43222"
       }
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T17:44:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/avatar"
   ],
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T17:44:59.000Z"
 }

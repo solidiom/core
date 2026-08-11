@@ -21,16 +21,16 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/breadcrumb.tsx": "ab9a4a8d7330a7124db5cca83b9217b9652b626e16b1602ecab8a0a53677708a"
+        "src/recipes/breadcrumb.tsx": "0d3d508e574b8b4b4e852b9bad8be383329bec1e9bddc589e581754097e6b34c"
       },
       "tailwind": {
-        "src/recipes/breadcrumb.tsx": "d8bee62cef306540f3472303d6f6e761afac60ffcf77306e9ec689f1701665ad"
+        "src/recipes/breadcrumb.tsx": "404f296b5099ee2fc07d98591b7e59e15fa36a47b37f3eb746232f5d37147bb5"
       },
       "unocss": {
-        "src/recipes/breadcrumb.tsx": "beaf36c7f65d904e5a39b1029073bdf867e81b039f329afc8e4d9052e8ef21a7"
+        "src/recipes/breadcrumb.tsx": "3304d5e84d94613996678dba6ad88da1a0d10774c5044b2aead71ea02897c71c"
       }
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T17:44:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/breadcrumb"
   ],
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T17:44:59.000Z"
 }

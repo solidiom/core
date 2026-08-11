@@ -21,16 +21,16 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/kbd.tsx": "fda73a169db7a435c1a79dd462d970bf9ef2ca958303c9c7ed1bfb83390c5b5e"
+        "src/recipes/kbd.tsx": "17066aed148dc826a1c5c5455b6e12b26c1b9c1d8eda3e798ff29cf75358b7ff"
       },
       "tailwind": {
-        "src/recipes/kbd.tsx": "9f5f0352286a6af8ddce8bff026715703b66f87b3301dcef8f269550f14bd8f3"
+        "src/recipes/kbd.tsx": "33d252dbfa04929028df66e31ec1733f15853b39d2bde18fd2978cdf517816ce"
       },
       "unocss": {
-        "src/recipes/kbd.tsx": "5a0d549a60a39a9be9883b6049fa0954262c2eea719810a2fd2bff28d0a1d4ff"
+        "src/recipes/kbd.tsx": "2f764bd4b4586dd3a1f769785d0cf2408a86754917a4ddbae6bcd39457eff56f"
       }
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T17:44:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/kbd"
   ],
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T17:44:59.000Z"
 }

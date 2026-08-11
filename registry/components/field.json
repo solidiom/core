@@ -21,16 +21,16 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/field.tsx": "f82d61a53b59b90c615aba74884ac7fb861dba5ed90459f136e8121d09f22598"
+        "src/recipes/field.tsx": "60b66da7cca735677db4395be6724bbaecd6b992cd761265ba40114fe7bf77cc"
       },
       "tailwind": {
-        "src/recipes/field.tsx": "f5df587d59da8712a352cc2f0a987beb6da607760cbc6428a64834bf7da8c1ac"
+        "src/recipes/field.tsx": "b8ae80a52957e3e624d0c5c845bfa3d36f15ae65278003d8c5cd89e62d356234"
       },
       "unocss": {
-        "src/recipes/field.tsx": "fbf197d2d3e2c1ef518150535819a94879bc04ccf1e7db9b392e0876409c2921"
+        "src/recipes/field.tsx": "f4f41cb6b94851a57804e12bbdda44e0cdcc0863a6bdf0cc6006c44375eb5e1f"
       }
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T17:44:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/field"
   ],
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T17:44:59.000Z"
 }

@@ -21,16 +21,16 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/data-table.tsx": "6315d8c7b209c1286aed7d292bb6b8da56cc6f3f9a8ff0fd8288ffa2c4535ec9"
+        "src/recipes/data-table.tsx": "0d87480b89933186f0b8b8d731ad006f0ffbf4a08c49c0d01691ed8655dbed20"
       },
       "tailwind": {
-        "src/recipes/data-table.tsx": "e61513d4f7c5f0efdd6a05a73d762fed365a28aedfb0c8e2d9175ec4d1b8b1ce"
+        "src/recipes/data-table.tsx": "ae839f539c8d5aae2654e612cd9a5b8e57d34c5ce60b2e5a04089ef3226f9097"
       },
       "unocss": {
-        "src/recipes/data-table.tsx": "ca5c9625339423b143a316e6330ecb1de251280ee3a505450a18dbd030582500"
+        "src/recipes/data-table.tsx": "f4131dbe354e1ae38ee3ffa12f9153e340c2a8a5e3a3f039bd6ef6108ab7aae7"
       }
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T17:44:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/data-table"
   ],
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T17:44:59.000Z"
 }

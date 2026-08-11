@@ -24,13 +24,13 @@
         "src/recipes/sheet.tsx": "017a32c3a4152d72b0eb127bea975b996790091ff643276e58c639ed9336d0ce"
       },
       "tailwind": {
-        "src/recipes/sheet.tsx": "cc721b85330aa56f7892a0e8f98537acac8199cfa3bfa128040b289f23cd1a93"
+        "src/recipes/sheet.tsx": "dcc1be8b9fdc728e94c24363640b1b72cc4ae4a1c2b2497837af6981f07f9635"
       },
       "unocss": {
-        "src/recipes/sheet.tsx": "582d41bd768d1f3a6c1bccf4b15d1cd8ffd6c945e8017708cdf1513858b1fb65"
+        "src/recipes/sheet.tsx": "746541deb766164a671893e867a200996a4f22de503c754f8ca711b4cfa149be"
       }
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T17:44:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/sheet"
   ],
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T17:44:59.000Z"
 }
