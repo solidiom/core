@@ -225,10 +225,6 @@ run = "pnpm tsx tools/generate-axe-report.ts"
 description = "CI job `install`: install workspace deps from the frozen lockfile"
 run = "pnpm install --frozen-lockfile"
 
-[tasks."ci:playwright-install"]
-description = "CI: install Playwright browsers (chromium, firefox, webkit)"
-run = "pnpm exec playwright install chromium firefox webkit"
-
 [tasks."ci:format"]
 description = "CI job `format`: check formatting with Prettier"
 run = "pnpm run format:check"
@@ -269,24 +265,6 @@ run = [
   "pnpm test",
   "pnpm run test:tools",
 ]
-
-[tasks."ci:test-node-matrix"]
-description = "CI job `test-node` with Node 24/26 matrix (rebuilds per version; restores toolchain on exit)"
-run = '''#!/usr/bin/env bash
-set -euo pipefail
-export CI=true
-
-trap 'pnpm install --frozen-lockfile' EXIT
-pnpm exec playwright install chromium
-
-for node_version in 24 26; do
-  echo "==> test-node: Node ${node_version}"
-  mise exec "node@${node_version}" -- pnpm install --frozen-lockfile
-  mise exec "node@${node_version}" -- pnpm build
-  mise exec "node@${node_version}" -- pnpm test < /dev/null
-  mise exec "node@${node_version}" -- pnpm run test:tools < /dev/null
-done
-'''
 
 [tasks."ci:test-browser"]
 description = "CI job `test-browser`: browser-mode component tests plus RECIPE-005 computed-style parity (needs a prior build)"
@@ -448,30 +426,6 @@ if [ -n "$failed" ]; then
 fi
 '''
 
-[tasks."ci:gate-phase1"]
-description = "CI: run Phase 1 acceptance gate (used by ci:gates)"
-env = { CI = "true" }
-run = [
-  "pnpm exec playwright install chromium",
-  "pnpm run gate:phase1",
-]
-
-[tasks."ci:gate-phase2"]
-description = "CI: run Phase 2 acceptance gate (used by ci:gates)"
-run = "pnpm run gate:phase2"
-
-[tasks."ci:gate-phase0"]
-description = "CI: run Phase 0 acceptance gate (used by ci:gates)"
-run = "pnpm run gate:phase0"
-
-[tasks."ci:gate-phase3"]
-description = "CI: run Phase 3 (library beta) gate (used by ci:gates)"
-env = { CI = "true" }
-run = [
-  "pnpm exec playwright install chromium",
-  "pnpm run gate:phase3",
-]
-
 [tasks."ci:catalog-gates"]
 description = "CI job `catalog-gates`: component + block catalog verification (needs a prior build)"
 run = [
@@ -525,7 +479,7 @@ run = "pnpm tsx tools/generate-beta-artifacts.ts --verify"
 [tasks."release:beta-rehearsal"]
 description = "Release: full local rehearsal (gate + artifacts + verify signing) without publishing"
 run = [
-  "mise run ci:gates",
+  "pnpm run gate:phase3",
   "pnpm run registry:build",
   "node packages/cli/dist/bin.js verify --registry",
   "pnpm tsx tools/generate-beta-artifacts.ts --verify",
@@ -550,7 +504,7 @@ run = [
   # needs: site-check
   "mise run ci:site-build",
   # needs: build (tests consume build output in CI; locally they use existing dist/)
-  "mise run ci:test-node-matrix",
+  "mise run ci:test-node",
   "mise run ci:test-browser",
   "mise run ci:a11y-axe-scan",
   "mise run ci:catalog-gates",
