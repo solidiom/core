@@ -1,9 +1,5 @@
 ---
-import {
-  getThemeDefinition,
-  themeToCssVars,
-  getTokenSwatchGroups,
-} from "../lib/theme-preview"
+import { getThemeDefinition, themeToCssVars, getTokenSwatchGroups } from "../lib/theme-preview"
 import "../assets/theme-preview.css"
 
 interface Props {
@@ -77,188 +73,208 @@ const COPY = {
 const c = COPY[locale]
 ---
 
-{definition ? (
-  <div class="theme-preview">
-    <div class="theme-preview__dual">
-      {/* ─── Light Pane ─── */}
-      <div class="theme-preview__pane theme-preview__pane--light">
-        <div class="theme-preview__pane-header">
-          <span class="theme-preview__dot theme-preview__dot--light" />
-          {c.light}
-        </div>
-        <div class="theme-preview__scroll" style={lightStyleVars}>
-          {/* Color Swatches */}
-          <div class="theme-preview__section">
-            <h3 class="theme-preview__section-title">{c.palette}</h3>
-            {lightSwatches.map((group) => (
-              <div class="theme-preview__swatch-group">
-                <h4 class="theme-preview__swatch-group-label">{group.category}</h4>
-                <div class="theme-preview__swatches">
-                  {group.tokens.map((tok) => (
-                    <div class="theme-preview__swatch">
-                      <span
-                        class="theme-preview__swatch-color"
-                        style={{ background: tok.value }}
-                        title={`${tok.variable} = ${tok.value}`}
-                      />
-                      <span class="theme-preview__swatch-id">{tok.id.replace(/-/g, "-")}</span>
-                      <span class="theme-preview__swatch-val">{tok.value}</span>
-                    </div>
-                  ))}
+{
+  definition ? (
+    <div class="theme-preview">
+      <div class="theme-preview__dual">
+        {/* ─── Light Pane ─── */}
+        <div class="theme-preview__pane theme-preview__pane--light">
+          <div class="theme-preview__pane-header">
+            <span class="theme-preview__dot theme-preview__dot--light" />
+            {c.light}
+          </div>
+          <div class="theme-preview__scroll" style={lightStyleVars}>
+            {/* Color Swatches */}
+            <div class="theme-preview__section">
+              <h3 class="theme-preview__section-title">{c.palette}</h3>
+              {lightSwatches.map((group) => (
+                <div class="theme-preview__swatch-group">
+                  <h4 class="theme-preview__swatch-group-label">{group.category}</h4>
+                  <div class="theme-preview__swatches">
+                    {group.tokens.map((tok) => (
+                      <div class="theme-preview__swatch">
+                        <span
+                          class="theme-preview__swatch-color"
+                          style={{ background: tok.value }}
+                          title={`${tok.variable} = ${tok.value}`}
+                        />
+                        <span class="theme-preview__swatch-id">{tok.id.replace(/-/g, "-")}</span>
+                        <span class="theme-preview__swatch-val">{tok.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* UI Preview */}
+            <div class="theme-preview__section">
+              <h3 class="theme-preview__section-title">{c.preview}</h3>
+
+              <div class="theme-preview__row">
+                <button class="theme-preview__btn theme-preview__btn--primary">{c.primary}</button>
+                <button class="theme-preview__btn theme-preview__btn--secondary">
+                  {c.secondary}
+                </button>
+                <button class="theme-preview__btn theme-preview__btn--destructive">
+                  {c.destructive}
+                </button>
+                <button class="theme-preview__btn theme-preview__btn--ghost">{c.ghost}</button>
+              </div>
+
+              <div class="theme-preview__row">
+                <span class="theme-preview__badge theme-preview__badge--default">{c.default}</span>
+                <span class="theme-preview__badge theme-preview__badge--success">{c.success}</span>
+                <span class="theme-preview__badge theme-preview__badge--warning">{c.warning}</span>
+                <span class="theme-preview__badge theme-preview__badge--destructive">
+                  {c.error}
+                </span>
+              </div>
+
+              <div class="theme-preview__card">
+                <div class="theme-preview__card-header">
+                  <h4 class="theme-preview__card-title">{c.cardTitle}</h4>
+                  <p class="theme-preview__card-desc">{c.cardDesc}</p>
+                </div>
+                <div class="theme-preview__card-body">{c.cardText}</div>
+                <div class="theme-preview__card-footer">
+                  <button class="theme-preview__btn theme-preview__btn--primary">{c.action}</button>
+                  <button class="theme-preview__btn theme-preview__btn--secondary">
+                    {c.cancel}
+                  </button>
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* UI Preview */}
-          <div class="theme-preview__section">
-            <h3 class="theme-preview__section-title">{c.preview}</h3>
-
-            <div class="theme-preview__row">
-              <button class="theme-preview__btn theme-preview__btn--primary">{c.primary}</button>
-              <button class="theme-preview__btn theme-preview__btn--secondary">{c.secondary}</button>
-              <button class="theme-preview__btn theme-preview__btn--destructive">{c.destructive}</button>
-              <button class="theme-preview__btn theme-preview__btn--ghost">{c.ghost}</button>
-            </div>
-
-            <div class="theme-preview__row">
-              <span class="theme-preview__badge theme-preview__badge--default">{c.default}</span>
-              <span class="theme-preview__badge theme-preview__badge--success">{c.success}</span>
-              <span class="theme-preview__badge theme-preview__badge--warning">{c.warning}</span>
-              <span class="theme-preview__badge theme-preview__badge--destructive">{c.error}</span>
-            </div>
-
-            <div class="theme-preview__card">
-              <div class="theme-preview__card-header">
-                <h4 class="theme-preview__card-title">{c.cardTitle}</h4>
-                <p class="theme-preview__card-desc">{c.cardDesc}</p>
-              </div>
-              <div class="theme-preview__card-body">{c.cardText}</div>
-              <div class="theme-preview__card-footer">
-                <button class="theme-preview__btn theme-preview__btn--primary">{c.action}</button>
-                <button class="theme-preview__btn theme-preview__btn--secondary">{c.cancel}</button>
-              </div>
-            </div>
-
-            <div class="theme-preview__alerts">
-              <div class="theme-preview__alert theme-preview__alert--info">
-                <span class="theme-preview__alert-icon">&#8505;</span>
-                {c.info}
-              </div>
-              <div class="theme-preview__alert theme-preview__alert--success">
-                <span class="theme-preview__alert-icon">&#10004;</span>
-                {c.successMsg}
-              </div>
-              <div class="theme-preview__alert theme-preview__alert--warning">
-                <span class="theme-preview__alert-icon">&#9888;</span>
-                {c.warningMsg}
-              </div>
-              <div class="theme-preview__alert theme-preview__alert--error">
-                <span class="theme-preview__alert-icon">&#10006;</span>
-                {c.errorMsg}
-              </div>
-            </div>
-
-            <div class="theme-preview__progress-wrap">
-              <div class="theme-preview__progress-track">
-                <div class="theme-preview__progress-fill" style={{ width: "60%" }} />
-              </div>
-              <span class="theme-preview__progress-label">60%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ─── Dark Pane ─── */}
-      <div class="theme-preview__pane theme-preview__pane--dark">
-        <div class="theme-preview__pane-header">
-          <span class="theme-preview__dot theme-preview__dot--dark" />
-          {c.dark}
-        </div>
-        <div class="theme-preview__scroll" style={darkStyleVars}>
-          {/* Color Swatches */}
-          <div class="theme-preview__section">
-            <h3 class="theme-preview__section-title">{c.palette}</h3>
-            {darkSwatches.map((group) => (
-              <div class="theme-preview__swatch-group">
-                <h4 class="theme-preview__swatch-group-label">{group.category}</h4>
-                <div class="theme-preview__swatches">
-                  {group.tokens.map((tok) => (
-                    <div class="theme-preview__swatch">
-                      <span
-                        class="theme-preview__swatch-color"
-                        style={{ background: tok.value }}
-                        title={`${tok.variable} = ${tok.value}`}
-                      />
-                      <span class="theme-preview__swatch-id">{tok.id}</span>
-                      <span class="theme-preview__swatch-val">{tok.value}</span>
-                    </div>
-                  ))}
+              <div class="theme-preview__alerts">
+                <div class="theme-preview__alert theme-preview__alert--info">
+                  <span class="theme-preview__alert-icon">&#8505;</span>
+                  {c.info}
+                </div>
+                <div class="theme-preview__alert theme-preview__alert--success">
+                  <span class="theme-preview__alert-icon">&#10004;</span>
+                  {c.successMsg}
+                </div>
+                <div class="theme-preview__alert theme-preview__alert--warning">
+                  <span class="theme-preview__alert-icon">&#9888;</span>
+                  {c.warningMsg}
+                </div>
+                <div class="theme-preview__alert theme-preview__alert--error">
+                  <span class="theme-preview__alert-icon">&#10006;</span>
+                  {c.errorMsg}
                 </div>
               </div>
-            ))}
+
+              <div class="theme-preview__progress-wrap">
+                <div class="theme-preview__progress-track">
+                  <div class="theme-preview__progress-fill" style={{ width: "60%" }} />
+                </div>
+                <span class="theme-preview__progress-label">60%</span>
+              </div>
+            </div>
           </div>
+        </div>
 
-          {/* UI Preview */}
-          <div class="theme-preview__section">
-            <h3 class="theme-preview__section-title">{c.preview}</h3>
-
-            <div class="theme-preview__row">
-              <button class="theme-preview__btn theme-preview__btn--primary">{c.primary}</button>
-              <button class="theme-preview__btn theme-preview__btn--secondary">{c.secondary}</button>
-              <button class="theme-preview__btn theme-preview__btn--destructive">{c.destructive}</button>
-              <button class="theme-preview__btn theme-preview__btn--ghost">{c.ghost}</button>
+        {/* ─── Dark Pane ─── */}
+        <div class="theme-preview__pane theme-preview__pane--dark">
+          <div class="theme-preview__pane-header">
+            <span class="theme-preview__dot theme-preview__dot--dark" />
+            {c.dark}
+          </div>
+          <div class="theme-preview__scroll" style={darkStyleVars}>
+            {/* Color Swatches */}
+            <div class="theme-preview__section">
+              <h3 class="theme-preview__section-title">{c.palette}</h3>
+              {darkSwatches.map((group) => (
+                <div class="theme-preview__swatch-group">
+                  <h4 class="theme-preview__swatch-group-label">{group.category}</h4>
+                  <div class="theme-preview__swatches">
+                    {group.tokens.map((tok) => (
+                      <div class="theme-preview__swatch">
+                        <span
+                          class="theme-preview__swatch-color"
+                          style={{ background: tok.value }}
+                          title={`${tok.variable} = ${tok.value}`}
+                        />
+                        <span class="theme-preview__swatch-id">{tok.id}</span>
+                        <span class="theme-preview__swatch-val">{tok.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
 
-            <div class="theme-preview__row">
-              <span class="theme-preview__badge theme-preview__badge--default">{c.default}</span>
-              <span class="theme-preview__badge theme-preview__badge--success">{c.success}</span>
-              <span class="theme-preview__badge theme-preview__badge--warning">{c.warning}</span>
-              <span class="theme-preview__badge theme-preview__badge--destructive">{c.error}</span>
-            </div>
+            {/* UI Preview */}
+            <div class="theme-preview__section">
+              <h3 class="theme-preview__section-title">{c.preview}</h3>
 
-            <div class="theme-preview__card">
-              <div class="theme-preview__card-header">
-                <h4 class="theme-preview__card-title">{c.cardTitle}</h4>
-                <p class="theme-preview__card-desc">{c.cardDesc}</p>
+              <div class="theme-preview__row">
+                <button class="theme-preview__btn theme-preview__btn--primary">{c.primary}</button>
+                <button class="theme-preview__btn theme-preview__btn--secondary">
+                  {c.secondary}
+                </button>
+                <button class="theme-preview__btn theme-preview__btn--destructive">
+                  {c.destructive}
+                </button>
+                <button class="theme-preview__btn theme-preview__btn--ghost">{c.ghost}</button>
               </div>
-              <div class="theme-preview__card-body">{c.cardText}</div>
-              <div class="theme-preview__card-footer">
-                <button class="theme-preview__btn theme-preview__btn--primary">{c.action}</button>
-                <button class="theme-preview__btn theme-preview__btn--secondary">{c.cancel}</button>
-              </div>
-            </div>
 
-            <div class="theme-preview__alerts">
-              <div class="theme-preview__alert theme-preview__alert--info">
-                <span class="theme-preview__alert-icon">&#8505;</span>
-                {c.info}
+              <div class="theme-preview__row">
+                <span class="theme-preview__badge theme-preview__badge--default">{c.default}</span>
+                <span class="theme-preview__badge theme-preview__badge--success">{c.success}</span>
+                <span class="theme-preview__badge theme-preview__badge--warning">{c.warning}</span>
+                <span class="theme-preview__badge theme-preview__badge--destructive">
+                  {c.error}
+                </span>
               </div>
-              <div class="theme-preview__alert theme-preview__alert--success">
-                <span class="theme-preview__alert-icon">&#10004;</span>
-                {c.successMsg}
-              </div>
-              <div class="theme-preview__alert theme-preview__alert--warning">
-                <span class="theme-preview__alert-icon">&#9888;</span>
-                {c.warningMsg}
-              </div>
-              <div class="theme-preview__alert theme-preview__alert--error">
-                <span class="theme-preview__alert-icon">&#10006;</span>
-                {c.errorMsg}
-              </div>
-            </div>
 
-            <div class="theme-preview__progress-wrap">
-              <div class="theme-preview__progress-track">
-                <div class="theme-preview__progress-fill" style={{ width: "60%" }} />
+              <div class="theme-preview__card">
+                <div class="theme-preview__card-header">
+                  <h4 class="theme-preview__card-title">{c.cardTitle}</h4>
+                  <p class="theme-preview__card-desc">{c.cardDesc}</p>
+                </div>
+                <div class="theme-preview__card-body">{c.cardText}</div>
+                <div class="theme-preview__card-footer">
+                  <button class="theme-preview__btn theme-preview__btn--primary">{c.action}</button>
+                  <button class="theme-preview__btn theme-preview__btn--secondary">
+                    {c.cancel}
+                  </button>
+                </div>
               </div>
-              <span class="theme-preview__progress-label">60%</span>
+
+              <div class="theme-preview__alerts">
+                <div class="theme-preview__alert theme-preview__alert--info">
+                  <span class="theme-preview__alert-icon">&#8505;</span>
+                  {c.info}
+                </div>
+                <div class="theme-preview__alert theme-preview__alert--success">
+                  <span class="theme-preview__alert-icon">&#10004;</span>
+                  {c.successMsg}
+                </div>
+                <div class="theme-preview__alert theme-preview__alert--warning">
+                  <span class="theme-preview__alert-icon">&#9888;</span>
+                  {c.warningMsg}
+                </div>
+                <div class="theme-preview__alert theme-preview__alert--error">
+                  <span class="theme-preview__alert-icon">&#10006;</span>
+                  {c.errorMsg}
+                </div>
+              </div>
+
+              <div class="theme-preview__progress-wrap">
+                <div class="theme-preview__progress-track">
+                  <div class="theme-preview__progress-fill" style={{ width: "60%" }} />
+                </div>
+                <span class="theme-preview__progress-label">60%</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-) : (
-  <p class="catalog-notice" role="status">Theme definition not found for "{slug}".</p>
-)}
+  ) : (
+    <p class="catalog-notice" role="status">
+      Theme definition not found for "{slug}".
+    </p>
+  )
+}

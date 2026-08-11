@@ -25,9 +25,7 @@ export function SignUp(props: SignUpProps): JSX.Element {
   const [name, setName] = createSignal("")
   const [email, setEmail] = createSignal("")
   const [password, setPassword] = createSignal("")
-  const [state, setState] = createSignal<SignUpState>(
-    props.restricted ? "restricted" : "empty",
-  )
+  const [state, setState] = createSignal<SignUpState>(props.restricted ? "restricted" : "empty")
   const [localError, setLocalError] = createSignal("")
 
   const currentError = () => props.error || localError()
@@ -52,7 +50,10 @@ export function SignUp(props: SignUpProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-sign-up", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-sign-up", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-sign-up__restricted" role="alert">
           <p>{props.restrictedReason || "Registration is currently restricted."}</p>
@@ -69,17 +70,48 @@ export function SignUp(props: SignUpProps): JSX.Element {
         <form onSubmit={handleSubmit} class="solidiom-block-sign-up__form">
           <div class="solidiom-block-sign-up__field">
             <label for="sign-up-name">Name</label>
-            <input id="sign-up-name" type="text" value={name()} onInput={(e) => setName(e.currentTarget.value)} placeholder="Your name" autocomplete="name" required disabled={state() === "loading"} />
+            <input
+              id="sign-up-name"
+              type="text"
+              value={name()}
+              onInput={(e) => setName(e.currentTarget.value)}
+              placeholder="Your name"
+              autocomplete="name"
+              required
+              disabled={state() === "loading"}
+            />
           </div>
           <div class="solidiom-block-sign-up__field">
             <label for="sign-up-email">Email</label>
-            <input id="sign-up-email" type="email" value={email()} onInput={(e) => setEmail(e.currentTarget.value)} placeholder="you@example.com" autocomplete="email" required disabled={state() === "loading"} />
+            <input
+              id="sign-up-email"
+              type="email"
+              value={email()}
+              onInput={(e) => setEmail(e.currentTarget.value)}
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              disabled={state() === "loading"}
+            />
           </div>
           <div class="solidiom-block-sign-up__field">
             <label for="sign-up-password">Password</label>
-            <input id="sign-up-password" type="password" value={password()} onInput={(e) => setPassword(e.currentTarget.value)} placeholder="Password" autocomplete="new-password" required disabled={state() === "loading"} />
+            <input
+              id="sign-up-password"
+              type="password"
+              value={password()}
+              onInput={(e) => setPassword(e.currentTarget.value)}
+              placeholder="Password"
+              autocomplete="new-password"
+              required
+              disabled={state() === "loading"}
+            />
           </div>
-          <button type="submit" class="solidiom-block-sign-up__submit" disabled={state() === "loading"}>
+          <button
+            type="submit"
+            class="solidiom-block-sign-up__submit"
+            disabled={state() === "loading"}
+          >
             <Show when={state() === "loading"} fallback="Create Account">
               <span class="solidiom-block-sign-up__spinner" aria-hidden="true" />
               Creating account...
@@ -89,10 +121,19 @@ export function SignUp(props: SignUpProps): JSX.Element {
 
         <Show when={props.oauthProviders && props.oauthProviders.length > 0}>
           <div class="solidiom-block-sign-up__oauth">
-            <div class="solidiom-block-sign-up__divider"><span>or continue with</span></div>
+            <div class="solidiom-block-sign-up__divider">
+              <span>or continue with</span>
+            </div>
             <div class="solidiom-block-sign-up__oauth-buttons">
               {props.oauthProviders!.map((provider) => (
-                <button type="button" class="solidiom-block-sign-up__oauth-btn" onClick={() => props.onOAuthSelect?.(provider)} disabled={state() === "loading"}>{provider}</button>
+                <button
+                  type="button"
+                  class="solidiom-block-sign-up__oauth-btn"
+                  onClick={() => props.onOAuthSelect?.(provider)}
+                  disabled={state() === "loading"}
+                >
+                  {provider}
+                </button>
               ))}
             </div>
           </div>

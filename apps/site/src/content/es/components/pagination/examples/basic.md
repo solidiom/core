@@ -30,9 +30,15 @@ import * as Pagination from "@solidiom/pagination"
 ;<StyledPagination>
   <Pagination.PreviousButton>Anterior</Pagination.PreviousButton>
   <Pagination.Content>
-    <Pagination.Item><button type="button">1</button></Pagination.Item>
-    <Pagination.Item><button type="button">2</button></Pagination.Item>
-    <Pagination.Item><button type="button">3</button></Pagination.Item>
+    <Pagination.Item>
+      <button type="button">1</button>
+    </Pagination.Item>
+    <Pagination.Item>
+      <button type="button">2</button>
+    </Pagination.Item>
+    <Pagination.Item>
+      <button type="button">3</button>
+    </Pagination.Item>
   </Pagination.Content>
   <Pagination.NextButton>Siguiente</Pagination.NextButton>
 </StyledPagination>
@@ -49,11 +55,19 @@ import * as Pagination from "@solidiom/pagination"
 ;<StyledPagination>
   <Pagination.PreviousButton>Anterior</Pagination.PreviousButton>
   <Pagination.Content>
-    <Pagination.Item><button type="button">1</button></Pagination.Item>
+    <Pagination.Item>
+      <button type="button">1</button>
+    </Pagination.Item>
     <Pagination.Ellipsis />
-    <Pagination.Item><button type="button">8</button></Pagination.Item>
-    <Pagination.Item><button type="button">9</button></Pagination.Item>
-    <Pagination.Item><button type="button">10</button></Pagination.Item>
+    <Pagination.Item>
+      <button type="button">8</button>
+    </Pagination.Item>
+    <Pagination.Item>
+      <button type="button">9</button>
+    </Pagination.Item>
+    <Pagination.Item>
+      <button type="button">10</button>
+    </Pagination.Item>
   </Pagination.Content>
   <Pagination.NextButton>Siguiente</Pagination.NextButton>
 </StyledPagination>

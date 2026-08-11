@@ -27,14 +27,18 @@ export function Metrics(): JSX.Element {
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Metrics</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Metrics
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div class="mt-6">
         <h1 class="text-2xl font-bold text-gray-900">Support Metrics</h1>
-        <p class="mt-1 text-sm text-gray-500">Track resolution times, CSAT scores, and agent performance.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Track resolution times, CSAT scores, and agent performance.
+        </p>
       </div>
 
       <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -46,7 +50,9 @@ export function Metrics(): JSX.Element {
             <Card.Content>
               <div class="flex items-end gap-2">
                 <span class="text-3xl font-bold text-gray-900">{metric.value}</span>
-                <span class={`mb-1 text-sm font-medium ${metric.positive ? "text-green-600" : "text-red-600"}`}>
+                <span
+                  class={`mb-1 text-sm font-medium ${metric.positive ? "text-green-600" : "text-red-600"}`}
+                >
                   {metric.change}
                 </span>
               </div>
@@ -76,11 +82,15 @@ export function Metrics(): JSX.Element {
                   <td class="px-6 py-4 text-gray-600">{agent.avgTime}</td>
                   <td class="px-6 py-4 text-gray-600">{agent.csat}</td>
                   <td class="px-6 py-4">
-                    <span class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
-                      agent.workload === "High" ? "bg-red-100 text-red-700" :
-                      agent.workload === "Medium" ? "bg-yellow-100 text-yellow-700" :
-                      "bg-green-100 text-green-700"
-                    }`}>
+                    <span
+                      class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
+                        agent.workload === "High"
+                          ? "bg-red-100 text-red-700"
+                          : agent.workload === "Medium"
+                            ? "bg-yellow-100 text-yellow-700"
+                            : "bg-green-100 text-green-700"
+                      }`}
+                    >
                       {agent.workload}
                     </span>
                   </td>

@@ -40,11 +40,15 @@ export function LabelExample(props: LabelExampleProps) {
       data-label-example
     >
       <div class="label-example__row">
-        <Label.Root htmlFor="label-demo-username" required>{copy().username}</Label.Root>
+        <Label.Root htmlFor="label-demo-username" required>
+          {copy().username}
+        </Label.Root>
         <Input.Root id="label-demo-username" type="text" required />
       </div>
       <div class="label-example__row">
-        <Label.Root htmlFor="label-demo-email" invalid>{copy().email}</Label.Root>
+        <Label.Root htmlFor="label-demo-email" invalid>
+          {copy().email}
+        </Label.Root>
         <Input.Root id="label-demo-email" type="email" placeholder={copy().placeholder} invalid />
       </div>
     </div>

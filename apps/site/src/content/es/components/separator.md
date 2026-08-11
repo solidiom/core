@@ -27,7 +27,6 @@ import { Separator } from "@solidiom/recipes-css"
 ;<Separator orientation="horizontal" />
 ```
 
-
 ## Instalación
 
 ```sh

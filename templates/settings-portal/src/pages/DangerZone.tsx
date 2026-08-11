@@ -22,7 +22,9 @@ export function DangerZone(): JSX.Element {
     <div class="min-h-screen bg-gray-50">
       <header class="border-b border-gray-200 bg-white">
         <div class="mx-auto flex h-16 max-w-3xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <A href="/" class="text-lg font-bold text-gray-900">Settings</A>
+          <A href="/" class="text-lg font-bold text-gray-900">
+            Settings
+          </A>
           <nav class="flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
               <A
@@ -97,7 +99,9 @@ export function DangerZone(): JSX.Element {
           <Dialog.Root open={exportingOpen} onOpenChange={setExportingOpen}>
             <Dialog.Content class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
               <div class="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
-                <Dialog.Title class="text-lg font-semibold text-gray-900">Export All Data</Dialog.Title>
+                <Dialog.Title class="text-lg font-semibold text-gray-900">
+                  Export All Data
+                </Dialog.Title>
                 <Dialog.Description class="mt-2 text-sm text-gray-500">
                   This will generate a complete export of your account data, including settings,
                   activity history, and stored content. The download may take several minutes.
@@ -128,7 +132,9 @@ export function DangerZone(): JSX.Element {
           <Dialog.Root open={deactivateOpen} onOpenChange={setDeactivateOpen}>
             <Dialog.Content class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
               <div class="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
-                <Dialog.Title class="text-lg font-semibold text-gray-900">Deactivate Account</Dialog.Title>
+                <Dialog.Title class="text-lg font-semibold text-gray-900">
+                  Deactivate Account
+                </Dialog.Title>
                 <Dialog.Description class="mt-2 text-sm text-gray-500">
                   Your account will be hidden from other users. You can reactivate within 30 days;
                   after that, all data will be permanently deleted.
@@ -159,7 +165,9 @@ export function DangerZone(): JSX.Element {
           <Dialog.Root open={revokeOpen} onOpenChange={setRevokeOpen}>
             <Dialog.Content class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
               <div class="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
-                <Dialog.Title class="text-lg font-semibold text-gray-900">Revoke All Sessions</Dialog.Title>
+                <Dialog.Title class="text-lg font-semibold text-gray-900">
+                  Revoke All Sessions
+                </Dialog.Title>
                 <Dialog.Description class="mt-2 text-sm text-gray-500">
                   This will sign you out of 3 active sessions across 2 devices. You will need to
                   sign in again on your current device.

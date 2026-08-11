@@ -3,7 +3,13 @@
   "stack": "vite-solid-router",
   "description": "Billing operations console with invoice management, payment reconciliation, and financial reports.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-BILLING-01", "BLOCK-BILLING-02", "BLOCK-BILLING-03"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-BILLING-01",
+    "BLOCK-BILLING-02",
+    "BLOCK-BILLING-03"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["enterprise"],

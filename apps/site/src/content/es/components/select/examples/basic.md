@@ -32,18 +32,22 @@ export function SelectExample() {
 
   return (
     <StyledSelect
-      trigger={
-        <button class="solidiom-btn">
-          {value() || "Elige un framework"}
-        </button>
-      }
+      trigger={<button class="solidiom-btn">{value() || "Elige un framework"}</button>}
       value={value}
       onValueChange={(v) => setValue(v as string)}
     >
-      <div class="solidiom-select-item" data-value="react">React</div>
-      <div class="solidiom-select-item" data-value="solid">Solid</div>
-      <div class="solidiom-select-item" data-value="vue">Vue</div>
-      <div class="solidiom-select-item" data-value="svelte">Svelte</div>
+      <div class="solidiom-select-item" data-value="react">
+        React
+      </div>
+      <div class="solidiom-select-item" data-value="solid">
+        Solid
+      </div>
+      <div class="solidiom-select-item" data-value="vue">
+        Vue
+      </div>
+      <div class="solidiom-select-item" data-value="svelte">
+        Svelte
+      </div>
     </StyledSelect>
   )
 }

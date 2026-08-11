@@ -42,11 +42,28 @@ export function Invoices(): JSX.Element {
       <header class="border-b border-gray-200 bg-white">
         <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div class="flex items-center gap-8">
-            <A href="/" class="text-lg font-bold text-gray-900">Billing</A>
+            <A href="/" class="text-lg font-bold text-gray-900">
+              Billing
+            </A>
             <nav class="flex items-center gap-1">
-              <A href="/" class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${location.pathname === "/" ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}>Plans</A>
-              <A href="/payment" class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${location.pathname === "/payment" ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}>Payments</A>
-              <A href="/invoices" class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${location.pathname === "/invoices" ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}>Invoices</A>
+              <A
+                href="/"
+                class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${location.pathname === "/" ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}
+              >
+                Plans
+              </A>
+              <A
+                href="/payment"
+                class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${location.pathname === "/payment" ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}
+              >
+                Payments
+              </A>
+              <A
+                href="/invoices"
+                class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${location.pathname === "/invoices" ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}
+              >
+                Invoices
+              </A>
             </nav>
           </div>
         </div>
@@ -114,7 +131,9 @@ export function Invoices(): JSX.Element {
                 <p class="text-xs text-gray-500">Expires 12/2027</p>
               </div>
             </div>
-            <span class="inline-flex rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">Default</span>
+            <span class="inline-flex rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
+              Default
+            </span>
           </Card.Root>
         </div>
       </main>

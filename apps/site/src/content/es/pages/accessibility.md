@@ -30,12 +30,12 @@ Our accessibility evidence is machine-verified and committed to the repository:
 
 ### Automated Testing
 
-| Layer | Coverage | Tool | Evidence |
-|-------|----------|------|----------|
-| Primitives (52) | 100% | axe-core 4.10.2 | `docs/axe-scan-results.md` |
-| Keyboard navigation | 100% | Manual audit | `docs/keyboard-audit-results.md` |
-| Color contrast | All presets | Theme audit | `pnpm run audit:preset-themes` |
-| Focus management | All overlays | Vitest browser | Per-primitive evidence |
+| Layer               | Coverage     | Tool            | Evidence                         |
+| ------------------- | ------------ | --------------- | -------------------------------- |
+| Primitives (52)     | 100%         | axe-core 4.10.2 | `docs/axe-scan-results.md`       |
+| Keyboard navigation | 100%         | Manual audit    | `docs/keyboard-audit-results.md` |
+| Color contrast      | All presets  | Theme audit     | `pnpm run audit:preset-themes`   |
+| Focus management    | All overlays | Vitest browser  | Per-primitive evidence           |
 
 ### Per-Primitive Evidence
 
@@ -48,12 +48,12 @@ Each of the 52 primitives has a committed `packages/<name>/docs/accessibility/ev
 
 ### Screen Reader Testing
 
-| Assistive Technology | Status | Platform |
-|---------------------|--------|----------|
-| VoiceOver | Documented | macOS/iOS |
-| NVDA | Planned (Phase 4) | Windows |
-| JAWS | Planned (Phase 4) | Windows |
-| TalkBack | Planned (Phase 4) | Android |
+| Assistive Technology | Status            | Platform  |
+| -------------------- | ----------------- | --------- |
+| VoiceOver            | Documented        | macOS/iOS |
+| NVDA                 | Planned (Phase 4) | Windows   |
+| JAWS                 | Planned (Phase 4) | Windows   |
+| TalkBack             | Planned (Phase 4) | Android   |
 
 ## WCAG 2.2 AA Compliance
 
@@ -68,19 +68,19 @@ All primitives and components comply with WCAG 2.2 Level AA. Our full audit is d
 
 Interactive primitives implement WAI-ARIA Authoring Practices patterns:
 
-| Pattern | Primitives |
-|---------|-----------|
-| Accordion | accordion |
-| Dialog (Modal) | dialog, alert-dialog |
-| Menu/Menubar | menu, context-menu, dropdown-menu |
-| Tabs | tabs |
-| Combobox | combobox, select |
-| Listbox | listbox, select |
-| Tooltip | tooltip |
-| Switch | switch |
-| Slider | slider |
-| Tree View | tree |
-| Alert | alert, toast |
+| Pattern        | Primitives                        |
+| -------------- | --------------------------------- |
+| Accordion      | accordion                         |
+| Dialog (Modal) | dialog, alert-dialog              |
+| Menu/Menubar   | menu, context-menu, dropdown-menu |
+| Tabs           | tabs                              |
+| Combobox       | combobox, select                  |
+| Listbox        | listbox, select                   |
+| Tooltip        | tooltip                           |
+| Switch         | switch                            |
+| Slider         | slider                            |
+| Tree View      | tree                              |
+| Alert          | alert, toast                      |
 
 ## Reporting Issues
 

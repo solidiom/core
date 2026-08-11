@@ -25,18 +25,24 @@ export function SearchAnalytics(): JSX.Element {
       <Breadcrumb.Root>
         <Breadcrumb.List class="flex items-center gap-2">
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-900">Search</Breadcrumb.Link>
+            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-900">
+              Search
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/analytics" current class="text-sm font-medium text-gray-900">Analytics</Breadcrumb.Link>
+            <Breadcrumb.Link href="/analytics" current class="text-sm font-medium text-gray-900">
+              Analytics
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div>
         <h1 class="text-2xl font-bold text-gray-900">Search Analytics</h1>
-        <p class="mt-1 text-sm text-gray-500">Monitor search performance, popular queries, and zero-result rates.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Monitor search performance, popular queries, and zero-result rates.
+        </p>
       </div>
 
       <Alert.Root type="info" class="rounded-md border border-blue-200 bg-blue-50 p-4">
@@ -52,7 +58,9 @@ export function SearchAnalytics(): JSX.Element {
             <Card.Content class="px-4 py-4">
               <p class="text-sm font-medium text-gray-500">{metric.label}</p>
               <p class="mt-1 text-2xl font-bold text-gray-900">{metric.value}</p>
-              <p class="mt-1 text-xs text-green-600">{metric.trend} {metric.period}</p>
+              <p class="mt-1 text-xs text-green-600">
+                {metric.trend} {metric.period}
+              </p>
             </Card.Content>
           </Card.Root>
         ))}
@@ -71,7 +79,10 @@ export function SearchAnalytics(): JSX.Element {
                   <span class="text-sm text-gray-500">{item.count} searches</span>
                 </div>
                 <div class="mt-1 h-2 overflow-hidden rounded-full bg-gray-200">
-                  <div class="h-full rounded-full bg-indigo-600" style={{ width: `${item.percentage}%` }} />
+                  <div
+                    class="h-full rounded-full bg-indigo-600"
+                    style={{ width: `${item.percentage}%` }}
+                  />
                 </div>
               </div>
             ))}

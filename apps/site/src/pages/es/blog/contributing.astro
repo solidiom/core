@@ -12,21 +12,21 @@ const blogPath = "/es/blog/"
 >
   <main class="contributing-page">
     <nav aria-label="Breadcrumb">
-      <a href={blogPath} class="contributing-page__back">
-        ← Blog
-      </a>
+      <a href={blogPath} class="contributing-page__back"> ← Blog </a>
     </nav>
 
     <h1>Cómo contribuir al blog</h1>
 
     <p>
-      ¿Quieres escribir para el blog de Solidiom? Esta guía rápida te explica cómo añadirte como autor y crear tu primera entrada.
+      ¿Quieres escribir para el blog de Solidiom? Esta guía rápida te explica cómo añadirte como
+      autor y crear tu primera entrada.
     </p>
 
     <section class="contributing-page__section">
       <h2>1. Regístrate como autor</h2>
       <p>
-        Añade una entrada en <code>apps/site/src/data/authors.json</code>. Cada entrada sigue este formato:
+        Añade una entrada en <code>apps/site/src/data/authors.json</code>. Cada entrada sigue este
+        formato:
       </p>
 
       <div class="contributing-page__code-block">
@@ -43,14 +43,17 @@ const blogPath = "/es/blog/"
 
       <p class="contributing-page__note">
         <strong>Nota:</strong>
-        <code>id</code> debe ser único y se utiliza para hacer referencia a ti en los artículos. Los campos <code>linkedin</code> y <code>website</code> son opcionales.
+        <code>id</code> debe ser único y se utiliza para hacer referencia a ti en los artículos. Los campos
+        <code>linkedin</code> y <code>website</code> son opcionales.
       </p>
     </section>
 
     <section class="contributing-page__section">
       <h2>2. Crea tu entrada</h2>
       <p>
-        Todas las entradas se escriben en Markdown. Añade tu archivo en <code>apps/site/src/content/es/articles/</code>.
+        Todas las entradas se escriben en Markdown. Añade tu archivo en <code
+          >apps/site/src/content/es/articles/</code
+        >.
       </p>
 
       <h3>Nombre del archivo</h3>
@@ -60,7 +63,8 @@ const blogPath = "/es/blog/"
 
       <h3>Encabezado de la entrada</h3>
       <p>
-        El encabezado YAML en la parte superior del archivo define la fecha, los autores y los metadatos:
+        El encabezado YAML en la parte superior del archivo define la fecha, los autores y los
+        metadatos:
       </p>
 
       <div class="contributing-page__code-block">
@@ -82,14 +86,17 @@ Contenido de tu artículo aquí...`}</code></pre>
 
       <p class="contributing-page__note">
         <strong>Nota:</strong>
-        Los valores en <code>authors</code> deben coincidir con el <code>id</code> de una entrada en <code>authors.json</code>.
+        Los valores en <code>authors</code> deben coincidir con el <code>id</code> de una entrada en <code
+          >authors.json</code
+        >.
       </p>
     </section>
 
     <section class="contributing-page__section">
       <h2>3. Cuerpo del artículo</h2>
       <p>
-        El formato del artículo es tuyo. Recomendamos añadir una separación de página después del primer párrafo para crear un resumen en la página principal del blog.
+        El formato del artículo es tuyo. Recomendamos añadir una separación de página después del
+        primer párrafo para crear un resumen en la página principal del blog.
       </p>
 
       <div class="contributing-page__code-block">
@@ -165,10 +172,12 @@ Resto del contenido del artículo...`}</code></pre>
     <section class="contributing-page__section">
       <h2>5. Previsualiza y envía</h2>
       <p>
-        Desde la carpeta <code>apps/site/</code>, ejecuta <code>pnpm dev</code> para ver tu entrada en <code>http://localhost:4321/es/blog/tu-titulo/</code>.
+        Desde la carpeta <code>apps/site/</code>, ejecuta <code>pnpm dev</code> para ver tu entrada en
+        <code>http://localhost:4321/es/blog/tu-titulo/</code>.
       </p>
       <p>
-        Una vez satisfecho, abre un Pull Request con tus cambios. El equipo revisará la entrada antes de publicarla.
+        Una vez satisfecho, abre un Pull Request con tus cambios. El equipo revisará la entrada
+        antes de publicarla.
       </p>
     </section>
   </main>

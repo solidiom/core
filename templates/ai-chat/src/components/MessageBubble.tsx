@@ -16,9 +16,7 @@ export function MessageBubble(props: MessageBubbleProps): JSX.Element {
     <div class={`flex ${isUser ? "justify-end" : "justify-start"}`}>
       <div
         class={`max-w-lg rounded-lg px-4 py-3 ${
-          isUser
-            ? "bg-indigo-600 text-white"
-            : "bg-white border border-gray-200 text-gray-900"
+          isUser ? "bg-indigo-600 text-white" : "bg-white border border-gray-200 text-gray-900"
         }`}
       >
         <p class="text-sm whitespace-pre-wrap">{props.content}</p>

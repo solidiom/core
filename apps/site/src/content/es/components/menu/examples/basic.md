@@ -28,11 +28,7 @@ import { StyledMenu } from "@solidiom/recipes-css"
 
 export function MenuExample() {
   return (
-    <StyledMenu
-      trigger={
-        <button class="solidiom-btn">Actions</button>
-      }
-    >
+    <StyledMenu trigger={<button class="solidiom-btn">Actions</button>}>
       <div role="menuitem" tabindex="-1" onClick={() => console.log("Edit")}>
         Edit
       </div>

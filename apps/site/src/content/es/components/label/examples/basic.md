@@ -28,7 +28,9 @@ import { StyledLabel } from "@solidiom/recipes-css"
 import * as Input from "@solidiom/input"
 
 ;<div>
-  <StyledLabel htmlFor="username" required>Username</StyledLabel>
+  <StyledLabel htmlFor="username" required>
+    Username
+  </StyledLabel>
   <Input.Root id="username" type="text" />
 </div>
 ```

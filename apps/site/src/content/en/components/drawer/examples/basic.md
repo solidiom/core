@@ -25,12 +25,16 @@ The Drawer component is a panel that slides in from the edge of the screen.
 import { StyledDrawer, Drawer } from "@solidiom/recipes-css"
 
 ;<Drawer.Root>
-  <Drawer.Trigger><button type="button">Open drawer</button></Drawer.Trigger>
+  <Drawer.Trigger>
+    <button type="button">Open drawer</button>
+  </Drawer.Trigger>
   <Drawer.Backdrop />
   <Drawer.Content>
     <Drawer.Title>Drawer</Drawer.Title>
     <Drawer.Description>Drawer content here.</Drawer.Description>
-    <Drawer.Close><button type="button">Close</button></Drawer.Close>
+    <Drawer.Close>
+      <button type="button">Close</button>
+    </Drawer.Close>
   </Drawer.Content>
 </Drawer.Root>
 ```

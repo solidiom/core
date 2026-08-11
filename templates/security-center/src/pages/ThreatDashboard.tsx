@@ -10,19 +10,82 @@ import { MetricCard } from "../components/MetricCard"
 import { StatusBadge } from "../components/StatusBadge"
 
 const METRIC_DATA = [
-  { label: "Active Threats", value: "7", change: "+2 from last hour", changeType: "negative" as const },
-  { label: "Blocked Attacks", value: "1,847", change: "+234 from last hour", changeType: "positive" as const },
+  {
+    label: "Active Threats",
+    value: "7",
+    change: "+2 from last hour",
+    changeType: "negative" as const,
+  },
+  {
+    label: "Blocked Attacks",
+    value: "1,847",
+    change: "+234 from last hour",
+    changeType: "positive" as const,
+  },
   { label: "Open CVEs", value: "23", change: "-3 from last week", changeType: "positive" as const },
-  { label: "Compliance Score", value: "94.2%", change: "+1.1% from last month", changeType: "positive" as const },
+  {
+    label: "Compliance Score",
+    value: "94.2%",
+    change: "+1.1% from last month",
+    changeType: "positive" as const,
+  },
 ]
 
 const THREATS = [
-  { id: "THR-4001", type: "intrusion" as const, severity: "critical" as const, title: "Unauthorized access attempt from 10.0.0.0/8", affectedAssets: 3, detected: "5 min ago", status: "active" as const },
-  { id: "THR-4000", type: "ddos" as const, severity: "high" as const, title: "Volumetric DDoS targeting API endpoints", affectedAssets: 12, detected: "22 min ago", status: "active" as const },
-  { id: "THR-3999", type: "malware" as const, severity: "critical" as const, title: "Ransomware signature detected in file uploads", affectedAssets: 5, detected: "1 hour ago", status: "mitigated" as const },
-  { id: "THR-3998", type: "phishing" as const, severity: "medium" as const, title: "Phishing campaign targeting employee email accounts", affectedAssets: 45, detected: "2 hours ago", status: "active" as const },
-  { id: "THR-3997", type: "vulnerability" as const, severity: "high" as const, title: "Zero-day exploit in web application framework", affectedAssets: 8, detected: "3 hours ago", status: "active" as const },
-  { id: "THR-3996", type: "intrusion" as const, severity: "low" as const, title: "Port scan detected from external IP range", affectedAssets: 1, detected: "4 hours ago", status: "closed" as const },
+  {
+    id: "THR-4001",
+    type: "intrusion" as const,
+    severity: "critical" as const,
+    title: "Unauthorized access attempt from 10.0.0.0/8",
+    affectedAssets: 3,
+    detected: "5 min ago",
+    status: "active" as const,
+  },
+  {
+    id: "THR-4000",
+    type: "ddos" as const,
+    severity: "high" as const,
+    title: "Volumetric DDoS targeting API endpoints",
+    affectedAssets: 12,
+    detected: "22 min ago",
+    status: "active" as const,
+  },
+  {
+    id: "THR-3999",
+    type: "malware" as const,
+    severity: "critical" as const,
+    title: "Ransomware signature detected in file uploads",
+    affectedAssets: 5,
+    detected: "1 hour ago",
+    status: "mitigated" as const,
+  },
+  {
+    id: "THR-3998",
+    type: "phishing" as const,
+    severity: "medium" as const,
+    title: "Phishing campaign targeting employee email accounts",
+    affectedAssets: 45,
+    detected: "2 hours ago",
+    status: "active" as const,
+  },
+  {
+    id: "THR-3997",
+    type: "vulnerability" as const,
+    severity: "high" as const,
+    title: "Zero-day exploit in web application framework",
+    affectedAssets: 8,
+    detected: "3 hours ago",
+    status: "active" as const,
+  },
+  {
+    id: "THR-3996",
+    type: "intrusion" as const,
+    severity: "low" as const,
+    title: "Port scan detected from external IP range",
+    affectedAssets: 1,
+    detected: "4 hours ago",
+    status: "closed" as const,
+  },
 ]
 
 const SEVERITY_BREAKDOWN = [
@@ -33,19 +96,43 @@ const SEVERITY_BREAKDOWN = [
 ]
 
 const ACTIVE_ALERTS = [
-  { id: "ALT-1024", title: "Critical intrusion detected on production DB", severity: "critical" as const, time: "2 min ago", status: "active" as const },
-  { id: "ALT-1023", title: "DDoS mitigation engaged for EU region", severity: "high" as const, time: "18 min ago", status: "active" as const },
-  { id: "ALT-1022", title: "Malware quarantine complete — 5 files isolated", severity: "critical" as const, time: "1 hour ago", status: "mitigated" as const },
-  { id: "ALT-1021", title: "Suspicious login pattern for admin accounts", severity: "medium" as const, time: "3 hours ago", status: "active" as const },
+  {
+    id: "ALT-1024",
+    title: "Critical intrusion detected on production DB",
+    severity: "critical" as const,
+    time: "2 min ago",
+    status: "active" as const,
+  },
+  {
+    id: "ALT-1023",
+    title: "DDoS mitigation engaged for EU region",
+    severity: "high" as const,
+    time: "18 min ago",
+    status: "active" as const,
+  },
+  {
+    id: "ALT-1022",
+    title: "Malware quarantine complete — 5 files isolated",
+    severity: "critical" as const,
+    time: "1 hour ago",
+    status: "mitigated" as const,
+  },
+  {
+    id: "ALT-1021",
+    title: "Suspicious login pattern for admin accounts",
+    severity: "medium" as const,
+    time: "3 hours ago",
+    status: "active" as const,
+  },
 ]
 
 export function ThreatDashboard(): JSX.Element {
-  const [statusFilter, setStatusFilter] = createSignal<"all" | "active" | "mitigated" | "closed">("all")
+  const [statusFilter, setStatusFilter] = createSignal<"all" | "active" | "mitigated" | "closed">(
+    "all",
+  )
 
   const filteredThreats = () =>
-    statusFilter() === "all"
-      ? THREATS
-      : THREATS.filter((t) => t.status === statusFilter())
+    statusFilter() === "all" ? THREATS : THREATS.filter((t) => t.status === statusFilter())
 
   return (
     <div class="space-y-8">
@@ -54,16 +141,22 @@ export function ThreatDashboard(): JSX.Element {
           <Breadcrumb.Root class="mb-2">
             <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                  Home
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
               <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">Threats</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">
+                  Threats
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
             </Breadcrumb.List>
           </Breadcrumb.Root>
           <h1 class="text-2xl font-bold text-gray-900">Threat Dashboard</h1>
-          <p class="mt-1 text-sm text-gray-500">Real-time threat overview with severity distribution and active alerts.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Real-time threat overview with severity distribution and active alerts.
+          </p>
         </div>
         <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           Run Scan
@@ -111,7 +204,9 @@ export function ThreatDashboard(): JSX.Element {
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card.Root class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
           <Card.Header class="pb-4">
-            <Card.Title class="text-base font-semibold text-gray-900">Severity Breakdown</Card.Title>
+            <Card.Title class="text-base font-semibold text-gray-900">
+              Severity Breakdown
+            </Card.Title>
           </Card.Header>
           <Card.Content>
             <div class="space-y-4">
@@ -119,14 +214,20 @@ export function ThreatDashboard(): JSX.Element {
                 <div>
                   <div class="mb-1 flex items-center justify-between text-sm">
                     <span class="font-medium text-gray-700">{row.level}</span>
-                    <span class="text-gray-500">{row.count} ({row.pct}%)</span>
+                    <span class="text-gray-500">
+                      {row.count} ({row.pct}%)
+                    </span>
                   </div>
-                   <Progress.Root class="h-2 w-full rounded-full bg-gray-100" value={row.pct} aria-label={`${row.level} severity`}>
-                     <Progress.Indicator
-                       class={`h-2 rounded-full ${row.color}`}
-                       style={{ width: `${row.pct}%` }}
-                     />
-                   </Progress.Root>
+                  <Progress.Root
+                    class="h-2 w-full rounded-full bg-gray-100"
+                    value={row.pct}
+                    aria-label={`${row.level} severity`}
+                  >
+                    <Progress.Indicator
+                      class={`h-2 rounded-full ${row.color}`}
+                      style={{ width: `${row.pct}%` }}
+                    />
+                  </Progress.Root>
                 </div>
               ))}
             </div>
@@ -143,7 +244,9 @@ export function ThreatDashboard(): JSX.Element {
                 <div class="flex items-start justify-between gap-3 rounded-md border border-gray-100 p-3">
                   <div class="min-w-0 flex-1">
                     <p class="text-sm font-medium text-gray-900">{alert.title}</p>
-                    <p class="mt-0.5 text-xs text-gray-400">{alert.id} &middot; {alert.time}</p>
+                    <p class="mt-0.5 text-xs text-gray-400">
+                      {alert.id} &middot; {alert.time}
+                    </p>
                   </div>
                   <StatusBadge status={alert.status} />
                 </div>

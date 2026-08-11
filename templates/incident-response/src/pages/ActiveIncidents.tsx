@@ -32,13 +32,62 @@ const ACTIVE_RESPONDERS = [
 ]
 
 const INCIDENTS = [
-  { id: "INC-3042", severity: "critical" as const, title: "Production database failover triggered", responders: ["Alice Chen", "Bob Martinez", "Carol Wu"], started: "12 min ago", updates: 8 },
-  { id: "INC-3041", severity: "critical" as const, title: "Payment processing latency exceeding SLA", responders: ["Dave Kim", "Eve Johnson"], started: "34 min ago", updates: 12 },
-  { id: "INC-3040", severity: "high" as const, title: "API gateway returning 502 errors", responders: ["Alice Chen"], started: "1 hour ago", updates: 5 },
-  { id: "INC-3039", severity: "high" as const, title: "CDN cache invalidation stalled", responders: ["Frank Liu", "Grace Park"], started: "1 hour ago", updates: 3 },
-  { id: "INC-3038", severity: "high" as const, title: "Auth token refresh loop detected", responders: ["Bob Martinez", "Carol Wu"], started: "2 hours ago", updates: 7 },
-  { id: "INC-3037", severity: "high" as const, title: "Worker pool scaling failure", responders: ["Eve Johnson"], started: "3 hours ago", updates: 4 },
-  { id: "INC-3036", severity: "high" as const, title: "SSL certificate near expiry for api.example.com", responders: ["Frank Liu"], started: "4 hours ago", updates: 2 },
+  {
+    id: "INC-3042",
+    severity: "critical" as const,
+    title: "Production database failover triggered",
+    responders: ["Alice Chen", "Bob Martinez", "Carol Wu"],
+    started: "12 min ago",
+    updates: 8,
+  },
+  {
+    id: "INC-3041",
+    severity: "critical" as const,
+    title: "Payment processing latency exceeding SLA",
+    responders: ["Dave Kim", "Eve Johnson"],
+    started: "34 min ago",
+    updates: 12,
+  },
+  {
+    id: "INC-3040",
+    severity: "high" as const,
+    title: "API gateway returning 502 errors",
+    responders: ["Alice Chen"],
+    started: "1 hour ago",
+    updates: 5,
+  },
+  {
+    id: "INC-3039",
+    severity: "high" as const,
+    title: "CDN cache invalidation stalled",
+    responders: ["Frank Liu", "Grace Park"],
+    started: "1 hour ago",
+    updates: 3,
+  },
+  {
+    id: "INC-3038",
+    severity: "high" as const,
+    title: "Auth token refresh loop detected",
+    responders: ["Bob Martinez", "Carol Wu"],
+    started: "2 hours ago",
+    updates: 7,
+  },
+  {
+    id: "INC-3037",
+    severity: "high" as const,
+    title: "Worker pool scaling failure",
+    responders: ["Eve Johnson"],
+    started: "3 hours ago",
+    updates: 4,
+  },
+  {
+    id: "INC-3036",
+    severity: "high" as const,
+    title: "SSL certificate near expiry for api.example.com",
+    responders: ["Frank Liu"],
+    started: "4 hours ago",
+    updates: 2,
+  },
 ]
 
 export function ActiveIncidents(): JSX.Element {
@@ -49,16 +98,22 @@ export function ActiveIncidents(): JSX.Element {
           <Breadcrumb.Root class="mb-2">
             <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                  Home
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
               <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">Active Incidents</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">
+                  Active Incidents
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
             </Breadcrumb.List>
           </Breadcrumb.Root>
           <h1 class="text-2xl font-bold text-gray-900">Active Incidents</h1>
-          <p class="mt-1 text-sm text-gray-500">Track active incidents with severity, responders, and timeline updates.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Track active incidents with severity, responders, and timeline updates.
+          </p>
         </div>
         <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           Create Incident
@@ -66,7 +121,9 @@ export function ActiveIncidents(): JSX.Element {
       </div>
 
       <Alert.Root type="error" class="rounded-md border border-red-200 bg-red-50 p-4">
-        <Alert.Title class="text-sm font-medium text-red-800">2 Critical Incidents Active</Alert.Title>
+        <Alert.Title class="text-sm font-medium text-red-800">
+          2 Critical Incidents Active
+        </Alert.Title>
         <Alert.Description class="mt-1 text-sm text-red-700">
           Immediate attention required. War room has been activated for INC-3042.
         </Alert.Description>
@@ -95,7 +152,9 @@ export function ActiveIncidents(): JSX.Element {
         <Card.Root class="rounded-lg border p-5 shadow-sm">
           <Card.Header class="pb-3">
             <Card.Title class="text-base font-semibold text-gray-900">Recent Timeline</Card.Title>
-            <Card.Description class="mt-1 text-sm text-gray-500">Latest updates across all active incidents.</Card.Description>
+            <Card.Description class="mt-1 text-sm text-gray-500">
+              Latest updates across all active incidents.
+            </Card.Description>
           </Card.Header>
           <Card.Content>
             <div class="space-y-3">
@@ -126,7 +185,10 @@ export function ActiveIncidents(): JSX.Element {
                   <div class="flex items-center gap-3">
                     <Avatar.Root class="h-8 w-8 overflow-hidden rounded-full bg-gray-200">
                       <Avatar.Fallback class="flex h-full w-full items-center justify-center text-xs font-medium text-gray-600">
-                        {responder.name.split(" ").map((n) => n[0]).join("")}
+                        {responder.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
                       </Avatar.Fallback>
                     </Avatar.Root>
                     <div>
@@ -138,7 +200,9 @@ export function ActiveIncidents(): JSX.Element {
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
                       {responder.incidents} incident{responder.incidents > 1 ? "s" : ""}
                     </span>
-                    <span class={`h-2 w-2 rounded-full ${responder.status === "online" ? "bg-green-400" : "bg-yellow-400"}`} />
+                    <span
+                      class={`h-2 w-2 rounded-full ${responder.status === "online" ? "bg-green-400" : "bg-yellow-400"}`}
+                    />
                   </div>
                 </div>
               ))}

@@ -30,7 +30,9 @@ export function FrameworkCard(props: FrameworkCardProps): JSX.Element {
       <Card.Header class="border-b border-gray-100 px-6 py-4">
         <div class="flex items-center justify-between">
           <Card.Title class="text-base font-semibold text-gray-900">{props.name}</Card.Title>
-          <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${STATUS_COLORS[props.status]}`}>
+          <span
+            class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${STATUS_COLORS[props.status]}`}
+          >
             {props.status}
           </span>
         </div>

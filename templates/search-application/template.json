@@ -3,7 +3,13 @@
   "stack": "vite-solid-router",
   "description": "Full-text search application with results view, saved searches, and search analytics.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-SEARCH-01", "BLOCK-SEARCH-02", "BLOCK-SEARCH-03"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-SEARCH-01",
+    "BLOCK-SEARCH-02",
+    "BLOCK-SEARCH-03"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["balanced-product"],

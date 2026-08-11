@@ -34,9 +34,7 @@ export type AuditLogState = "empty" | "loading" | "error" | "restricted"
 
 export function AuditLog(props: AuditLogProps): JSX.Element {
   const [filterQuery, setFilterQuery] = createSignal("")
-  const [state, setState] = createSignal<AuditLogState>(
-    props.restricted ? "restricted" : "empty",
-  )
+  const [state, setState] = createSignal<AuditLogState>(props.restricted ? "restricted" : "empty")
   const [localError, setLocalError] = createSignal("")
 
   const currentError = () => props.error || localError()
@@ -47,29 +45,53 @@ export function AuditLog(props: AuditLogProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-audit-log", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-audit-log", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-audit-log__restricted" role="alert">
           <p>{props.restrictedReason || "Audit log access is restricted."}</p>
         </div>
       </Show>
       <Show when={state() === "error" && currentError()}>
-        <div class="solidiom-block-audit-log__error" role="alert"><p>{currentError()}</p></div>
+        <div class="solidiom-block-audit-log__error" role="alert">
+          <p>{currentError()}</p>
+        </div>
       </Show>
       <Show when={state() !== "restricted"}>
         <div class="solidiom-block-audit-log__filters">
-          <input type="search" value={filterQuery()} onInput={(e) => setFilterQuery(e.currentTarget.value)} placeholder="Search events..." aria-label="Filter audit events" />
-          <button type="button" onClick={handleFilter}>Filter</button>
+          <input
+            type="search"
+            value={filterQuery()}
+            onInput={(e) => setFilterQuery(e.currentTarget.value)}
+            placeholder="Search events..."
+            aria-label="Filter audit events"
+          />
+          <button type="button" onClick={handleFilter}>
+            Filter
+          </button>
         </div>
         <Show when={state() === "loading"}>
-          <div class="solidiom-block-audit-log__loading" aria-live="polite">Loading events...</div>
+          <div class="solidiom-block-audit-log__loading" aria-live="polite">
+            Loading events...
+          </div>
         </Show>
         <Show when={events().length === 0 && state() !== "loading"}>
-          <div class="solidiom-block-audit-log__empty"><p>No audit events found.</p></div>
+          <div class="solidiom-block-audit-log__empty">
+            <p>No audit events found.</p>
+          </div>
         </Show>
         <Show when={events().length > 0}>
           <table class="solidiom-block-audit-log__table">
-            <thead><tr><th>Time</th><th>Actor</th><th>Action</th><th>Resource</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Actor</th>
+                <th>Action</th>
+                <th>Resource</th>
+              </tr>
+            </thead>
             <tbody>
               <For each={events()}>
                 {(event) => (
@@ -85,9 +107,23 @@ export function AuditLog(props: AuditLogProps): JSX.Element {
           </table>
           <Show when={(props.totalPages ?? 1) > 1}>
             <nav class="solidiom-block-audit-log__pagination" aria-label="Audit log pagination">
-              <button type="button" disabled={props.currentPage === 1} onClick={() => props.onPageChange?.((props.currentPage ?? 1) - 1)}>Previous</button>
-              <span>Page {props.currentPage ?? 1} of {props.totalPages ?? 1}</span>
-              <button type="button" disabled={props.currentPage === props.totalPages} onClick={() => props.onPageChange?.((props.currentPage ?? 1) + 1)}>Next</button>
+              <button
+                type="button"
+                disabled={props.currentPage === 1}
+                onClick={() => props.onPageChange?.((props.currentPage ?? 1) - 1)}
+              >
+                Previous
+              </button>
+              <span>
+                Page {props.currentPage ?? 1} of {props.totalPages ?? 1}
+              </span>
+              <button
+                type="button"
+                disabled={props.currentPage === props.totalPages}
+                onClick={() => props.onPageChange?.((props.currentPage ?? 1) + 1)}
+              >
+                Next
+              </button>
             </nav>
           </Show>
         </Show>

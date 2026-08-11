@@ -22,16 +22,22 @@ export function Organization(): JSX.Element {
         <Breadcrumb.Root class="mb-2">
           <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Settings</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Settings
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">Organization</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">
+                Organization
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
         <h1 class="text-2xl font-bold text-gray-900">Organization Settings</h1>
-        <p class="mt-1 text-sm text-gray-500">Manage your organization profile, branding, and domain verification.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Manage your organization profile, branding, and domain verification.
+        </p>
       </div>
 
       <Alert.Root type="success" class="rounded-md border border-green-200 bg-green-50 p-4">
@@ -41,12 +47,22 @@ export function Organization(): JSX.Element {
         </Alert.Description>
       </Alert.Root>
 
-      <SettingGroup title="Organization Profile" description="Basic information about your organization.">
+      <SettingGroup
+        title="Organization Profile"
+        description="Basic information about your organization."
+      >
         <div class="space-y-4">
           <Field.Root>
-            <Field.Label class="block text-sm font-medium text-gray-700">Organization Name</Field.Label>
-            <Input.Root value={orgName()} class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" />
-            <Field.Description class="mt-1 text-xs text-gray-500">This is how your organization appears to users.</Field.Description>
+            <Field.Label class="block text-sm font-medium text-gray-700">
+              Organization Name
+            </Field.Label>
+            <Input.Root
+              value={orgName()}
+              class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            />
+            <Field.Description class="mt-1 text-xs text-gray-500">
+              This is how your organization appears to users.
+            </Field.Description>
           </Field.Root>
 
           <Field.Root>
@@ -62,7 +78,10 @@ export function Organization(): JSX.Element {
         </div>
       </SettingGroup>
 
-      <SettingGroup title="Branding" description="Customize how your organization looks across the platform.">
+      <SettingGroup
+        title="Branding"
+        description="Customize how your organization looks across the platform."
+      >
         <div class="space-y-4">
           <Field.Root>
             <Field.Label class="block text-sm font-medium text-gray-700">Brand Color</Field.Label>
@@ -95,7 +114,10 @@ export function Organization(): JSX.Element {
         </div>
       </SettingGroup>
 
-      <SettingGroup title="Domain Verification" description="Verify and manage your custom domains.">
+      <SettingGroup
+        title="Domain Verification"
+        description="Verify and manage your custom domains."
+      >
         <Card.Root class="rounded-lg border border-gray-200 bg-white">
           <Card.Content class="px-4 py-4">
             <div class="flex items-center justify-between">

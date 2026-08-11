@@ -3,7 +3,13 @@
   "stack": "vite-solid-router",
   "description": "AI chat application with conversational interface, prompt studio, and workflow builder.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-AI-01", "BLOCK-AI-02", "BLOCK-AI-03"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-AI-01",
+    "BLOCK-AI-02",
+    "BLOCK-AI-03"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["balanced-product"],

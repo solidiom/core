@@ -37,7 +37,11 @@ export function ResetPassword(props: ResetPasswordProps): JSX.Element {
   async function handleRequestReset(e: Event) {
     e.preventDefault()
     setLocalError("")
-    if (!email()) { setLocalError("Email is required."); setState("error"); return }
+    if (!email()) {
+      setLocalError("Email is required.")
+      setState("error")
+      return
+    }
     setState("loading")
     try {
       await props.onRequestReset?.(email())
@@ -52,8 +56,16 @@ export function ResetPassword(props: ResetPasswordProps): JSX.Element {
   async function handleSetPassword(e: Event) {
     e.preventDefault()
     setLocalError("")
-    if (!password() || !confirmPassword()) { setLocalError("Both fields are required."); setState("error"); return }
-    if (password() !== confirmPassword()) { setLocalError("Passwords do not match."); setState("error"); return }
+    if (!password() || !confirmPassword()) {
+      setLocalError("Both fields are required.")
+      setState("error")
+      return
+    }
+    if (password() !== confirmPassword()) {
+      setLocalError("Passwords do not match.")
+      setState("error")
+      return
+    }
     setState("loading")
     try {
       await props.onSetNewPassword?.(password(), props.token!)
@@ -64,7 +76,10 @@ export function ResetPassword(props: ResetPasswordProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-reset-password", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-reset-password", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-reset-password__restricted" role="alert">
           <p>{props.restrictedReason || "Password reset is currently unavailable."}</p>
@@ -78,34 +93,79 @@ export function ResetPassword(props: ResetPasswordProps): JSX.Element {
       </Show>
 
       <Show when={state() !== "restricted"}>
-        <Show when={hasToken()} fallback={
-          <Show when={!sent()} fallback={
-            <div class="solidiom-block-reset-password__sent">
-              <p>Check your email for a reset link.</p>
-            </div>
-          }>
-            <form onSubmit={handleRequestReset} class="solidiom-block-reset-password__form">
-              <div class="solidiom-block-reset-password__field">
-                <label for="reset-email">Email</label>
-                <input id="reset-email" type="email" value={email()} onInput={(e) => setEmail(e.currentTarget.value)} placeholder="you@example.com" autocomplete="email" required disabled={state() === "loading"} />
-              </div>
-              <button type="submit" class="solidiom-block-reset-password__submit" disabled={state() === "loading"}>
-                <Show when={state() === "loading"} fallback="Send Reset Link">Sending...</Show>
-              </button>
-            </form>
-          </Show>
-        }>
+        <Show
+          when={hasToken()}
+          fallback={
+            <Show
+              when={!sent()}
+              fallback={
+                <div class="solidiom-block-reset-password__sent">
+                  <p>Check your email for a reset link.</p>
+                </div>
+              }
+            >
+              <form onSubmit={handleRequestReset} class="solidiom-block-reset-password__form">
+                <div class="solidiom-block-reset-password__field">
+                  <label for="reset-email">Email</label>
+                  <input
+                    id="reset-email"
+                    type="email"
+                    value={email()}
+                    onInput={(e) => setEmail(e.currentTarget.value)}
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                    disabled={state() === "loading"}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="solidiom-block-reset-password__submit"
+                  disabled={state() === "loading"}
+                >
+                  <Show when={state() === "loading"} fallback="Send Reset Link">
+                    Sending...
+                  </Show>
+                </button>
+              </form>
+            </Show>
+          }
+        >
           <form onSubmit={handleSetPassword} class="solidiom-block-reset-password__form">
             <div class="solidiom-block-reset-password__field">
               <label for="reset-new-password">New Password</label>
-              <input id="reset-new-password" type="password" value={password()} onInput={(e) => setPassword(e.currentTarget.value)} placeholder="New password" autocomplete="new-password" required disabled={state() === "loading"} />
+              <input
+                id="reset-new-password"
+                type="password"
+                value={password()}
+                onInput={(e) => setPassword(e.currentTarget.value)}
+                placeholder="New password"
+                autocomplete="new-password"
+                required
+                disabled={state() === "loading"}
+              />
             </div>
             <div class="solidiom-block-reset-password__field">
               <label for="reset-confirm-password">Confirm Password</label>
-              <input id="reset-confirm-password" type="password" value={confirmPassword()} onInput={(e) => setConfirmPassword(e.currentTarget.value)} placeholder="Confirm password" autocomplete="new-password" required disabled={state() === "loading"} />
+              <input
+                id="reset-confirm-password"
+                type="password"
+                value={confirmPassword()}
+                onInput={(e) => setConfirmPassword(e.currentTarget.value)}
+                placeholder="Confirm password"
+                autocomplete="new-password"
+                required
+                disabled={state() === "loading"}
+              />
             </div>
-            <button type="submit" class="solidiom-block-reset-password__submit" disabled={state() === "loading"}>
-              <Show when={state() === "loading"} fallback="Set New Password">Updating...</Show>
+            <button
+              type="submit"
+              class="solidiom-block-reset-password__submit"
+              disabled={state() === "loading"}
+            >
+              <Show when={state() === "loading"} fallback="Set New Password">
+                Updating...
+              </Show>
             </button>
           </form>
         </Show>

@@ -36,7 +36,6 @@ import * as Tree from "@solidiom/recipes-css"
 </Tree.Root>
 ```
 
-
 ## Instalación
 
 ```sh

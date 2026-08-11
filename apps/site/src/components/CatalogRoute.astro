@@ -43,14 +43,56 @@ const title =
     : `${document?.data.title ?? name} ${sectionTitle[view]}`
 
 const COMPONENTS_WITH_EXAMPLES = new Set([
-  "accordion", "alert", "alert-dialog", "avatar", "badge", "breadcrumb", "button",
-  "calendar", "card", "carousel", "checkbox", "collapsible", "combobox",
-  "command-palette", "context-menu", "data-table", "date-picker", "dialog",
-  "drawer", "empty-state", "field", "hover-card", "input", "input-otp",
-  "kbd", "label", "listbox", "menu", "meter", "navigation-menu", "pagination",
-  "popover", "progress", "radio-group", "resizable-panels", "scroll-area",
-  "select", "sheet", "skeleton", "slider", "spinner", "switch", "tabs",
-  "toast", "toggle", "toggle-group", "toolbar", "tooltip", "tree", "virtual-list",
+  "accordion",
+  "alert",
+  "alert-dialog",
+  "avatar",
+  "badge",
+  "breadcrumb",
+  "button",
+  "calendar",
+  "card",
+  "carousel",
+  "checkbox",
+  "collapsible",
+  "combobox",
+  "command-palette",
+  "context-menu",
+  "data-table",
+  "date-picker",
+  "dialog",
+  "drawer",
+  "empty-state",
+  "field",
+  "hover-card",
+  "input",
+  "input-otp",
+  "kbd",
+  "label",
+  "listbox",
+  "menu",
+  "meter",
+  "navigation-menu",
+  "pagination",
+  "popover",
+  "progress",
+  "radio-group",
+  "resizable-panels",
+  "scroll-area",
+  "select",
+  "sheet",
+  "skeleton",
+  "slider",
+  "spinner",
+  "switch",
+  "tabs",
+  "toast",
+  "toggle",
+  "toggle-group",
+  "toolbar",
+  "tooltip",
+  "tree",
+  "virtual-list",
 ])
 const hasComponentExample = COMPONENTS_WITH_EXAMPLES.has(name)
 
@@ -70,7 +112,10 @@ const breadcrumbItems = [
 ]
 
 // Build sidebar from top-level entries only (skip subdirectory entries like examples/basic.md)
-const allEntries = await getCollection(collectionName, (entry) => entry.data.locale === locale && entry.id.split("/").length <= 3)
+const allEntries = await getCollection(
+  collectionName,
+  (entry) => entry.data.locale === locale && entry.id.split("/").length <= 3,
+)
 const sidebarGroups: DocsSidebarGroup[] = [
   {
     label: copy.directoryTitle,
@@ -115,12 +160,8 @@ const sidebarGroups: DocsSidebarGroup[] = [
             <ComponentExample name={name} locale={locale} />
           </div>
         )}
-        {layer === "themes" && (
-          <ThemePreview slug={name} locale={locale} />
-        )}
-        {layer === "templates" && (
-          <TemplatePreview name={name} locale={locale} />
-        )}
+        {layer === "themes" && <ThemePreview slug={name} locale={locale} />}
+        {layer === "templates" && <TemplatePreview name={name} locale={locale} />}
         {DocumentContent ? <DocumentContent /> : <p>{pageDescription}</p>}
       </section>
     )

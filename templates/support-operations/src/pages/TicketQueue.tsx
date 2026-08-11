@@ -8,14 +8,70 @@ import { StatusBadge } from "../components/StatusBadge"
 import { TicketCard } from "../components/TicketCard"
 
 const TICKETS = [
-  { id: "TK-1001", subject: "Cannot reset password", priority: "critical", assignee: "Alex Rivera", status: "open" as const, sla: "1h remaining" },
-  { id: "TK-1002", subject: "API returning 500 errors", priority: "critical", assignee: "Jordan Lee", status: "in_progress" as const, sla: "2h remaining" },
-  { id: "TK-1003", subject: "Feature request: Dark mode", priority: "low", assignee: "Unassigned", status: "open" as const, sla: "—" },
-  { id: "TK-1004", subject: "Billing discrepancy on invoice #4521", priority: "high", assignee: "Morgan Chen", status: "pending" as const, sla: "4h remaining" },
-  { id: "TK-1005", subject: "SSO integration not working", priority: "high", assignee: "Alex Rivera", status: "in_progress" as const, sla: "3h remaining" },
-  { id: "TK-1006", subject: "How to export data to CSV", priority: "medium", assignee: "Casey Kim", status: "resolved" as const, sla: "—" },
-  { id: "TK-1007", subject: "Mobile app crashes on login", priority: "high", assignee: "Jordan Lee", status: "open" as const, sla: "2h remaining" },
-  { id: "TK-1008", subject: "Update company logo in profile", priority: "low", assignee: "Unassigned", status: "pending" as const, sla: "—" },
+  {
+    id: "TK-1001",
+    subject: "Cannot reset password",
+    priority: "critical",
+    assignee: "Alex Rivera",
+    status: "open" as const,
+    sla: "1h remaining",
+  },
+  {
+    id: "TK-1002",
+    subject: "API returning 500 errors",
+    priority: "critical",
+    assignee: "Jordan Lee",
+    status: "in_progress" as const,
+    sla: "2h remaining",
+  },
+  {
+    id: "TK-1003",
+    subject: "Feature request: Dark mode",
+    priority: "low",
+    assignee: "Unassigned",
+    status: "open" as const,
+    sla: "—",
+  },
+  {
+    id: "TK-1004",
+    subject: "Billing discrepancy on invoice #4521",
+    priority: "high",
+    assignee: "Morgan Chen",
+    status: "pending" as const,
+    sla: "4h remaining",
+  },
+  {
+    id: "TK-1005",
+    subject: "SSO integration not working",
+    priority: "high",
+    assignee: "Alex Rivera",
+    status: "in_progress" as const,
+    sla: "3h remaining",
+  },
+  {
+    id: "TK-1006",
+    subject: "How to export data to CSV",
+    priority: "medium",
+    assignee: "Casey Kim",
+    status: "resolved" as const,
+    sla: "—",
+  },
+  {
+    id: "TK-1007",
+    subject: "Mobile app crashes on login",
+    priority: "high",
+    assignee: "Jordan Lee",
+    status: "open" as const,
+    sla: "2h remaining",
+  },
+  {
+    id: "TK-1008",
+    subject: "Update company logo in profile",
+    priority: "low",
+    assignee: "Unassigned",
+    status: "pending" as const,
+    sla: "—",
+  },
 ]
 
 const PRIORITY_ORDER = { critical: 0, high: 1, medium: 2, low: 3 }
@@ -25,9 +81,10 @@ export function TicketQueue(): JSX.Element {
   const [statusFilter, setStatusFilter] = createSignal("all")
 
   const filtered = () => {
-    let result = TICKETS.filter((t) =>
-      t.subject.toLowerCase().includes(search().toLowerCase())
-      || t.id.toLowerCase().includes(search().toLowerCase())
+    let result = TICKETS.filter(
+      (t) =>
+        t.subject.toLowerCase().includes(search().toLowerCase()) ||
+        t.id.toLowerCase().includes(search().toLowerCase()),
     )
     if (statusFilter() !== "all") {
       result = result.filter((t) => t.status === statusFilter())
@@ -44,7 +101,9 @@ export function TicketQueue(): JSX.Element {
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Queue</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Queue
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
@@ -52,7 +111,9 @@ export function TicketQueue(): JSX.Element {
       <div class="mt-6 flex items-start justify-between">
         <div>
           <h1 class="text-2xl font-bold text-gray-900">Ticket Queue</h1>
-          <p class="mt-1 text-sm text-gray-500">Manage support tickets with priority, assignment, and SLA tracking.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Manage support tickets with priority, assignment, and SLA tracking.
+          </p>
         </div>
         <Button.Root class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
           New Ticket
@@ -95,12 +156,19 @@ export function TicketQueue(): JSX.Element {
               <StatusBadge status={ticket.status} />
             </div>
             <div class="mt-3 flex items-center gap-4 text-xs text-gray-500">
-              <span>Priority:
-                <span class={`ml-1 font-medium ${
-                  ticket.priority === "critical" ? "text-red-600" :
-                  ticket.priority === "high" ? "text-orange-600" :
-                  ticket.priority === "medium" ? "text-yellow-600" : "text-gray-600"
-                }`}>
+              <span>
+                Priority:
+                <span
+                  class={`ml-1 font-medium ${
+                    ticket.priority === "critical"
+                      ? "text-red-600"
+                      : ticket.priority === "high"
+                        ? "text-orange-600"
+                        : ticket.priority === "medium"
+                          ? "text-yellow-600"
+                          : "text-gray-600"
+                  }`}
+                >
                   {ticket.priority}
                 </span>
               </span>

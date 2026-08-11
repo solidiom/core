@@ -6,12 +6,48 @@ import * as Select from "@solidiom/select"
 import { ContentCard } from "../components/ContentCard"
 
 const ASSETS = [
-  { title: "Q1 Marketing Banner", type: "Image", status: "published", author: "Alice Chen", updatedAt: "2024-03-10" },
-  { title: "Product Demo Video", type: "Video", status: "review", author: "Bob Lee", updatedAt: "2024-03-09" },
-  { title: "Brand Guidelines v2", type: "Document", status: "approved", author: "Alice Chen", updatedAt: "2024-03-08" },
-  { title: "Social Media Template", type: "Image", status: "draft", author: "Carol Wu", updatedAt: "2024-03-07" },
-  { title: "Customer Testimonial", type: "Video", status: "published", author: "Bob Lee", updatedAt: "2024-03-06" },
-  { title: "Press Release Draft", type: "Document", status: "draft", author: "Carol Wu", updatedAt: "2024-03-05" },
+  {
+    title: "Q1 Marketing Banner",
+    type: "Image",
+    status: "published",
+    author: "Alice Chen",
+    updatedAt: "2024-03-10",
+  },
+  {
+    title: "Product Demo Video",
+    type: "Video",
+    status: "review",
+    author: "Bob Lee",
+    updatedAt: "2024-03-09",
+  },
+  {
+    title: "Brand Guidelines v2",
+    type: "Document",
+    status: "approved",
+    author: "Alice Chen",
+    updatedAt: "2024-03-08",
+  },
+  {
+    title: "Social Media Template",
+    type: "Image",
+    status: "draft",
+    author: "Carol Wu",
+    updatedAt: "2024-03-07",
+  },
+  {
+    title: "Customer Testimonial",
+    type: "Video",
+    status: "published",
+    author: "Bob Lee",
+    updatedAt: "2024-03-06",
+  },
+  {
+    title: "Press Release Draft",
+    type: "Document",
+    status: "draft",
+    author: "Carol Wu",
+    updatedAt: "2024-03-05",
+  },
 ]
 
 const FILTERS = ["All", "Image", "Video", "Document"]
@@ -36,14 +72,18 @@ export function Library(): JSX.Element {
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Library</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Library
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div class="mt-6">
         <h1 class="text-2xl font-bold text-gray-900">Content Library</h1>
-        <p class="mt-1 text-sm text-gray-500">Browse, search, and organize your content assets and media files.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Browse, search, and organize your content assets and media files.
+        </p>
       </div>
 
       <div class="mt-6 flex flex-col gap-4 sm:flex-row">

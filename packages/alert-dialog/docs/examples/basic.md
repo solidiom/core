@@ -24,9 +24,7 @@ import * as AlertDialog from "@solidiom/alert-dialog"
 
 ;<>
   <AlertDialog.Root defaultOpen={false} onOpenChange={(open) => console.log(open)}>
-    <AlertDialog.Trigger>
-      Delete Account
-    </AlertDialog.Trigger>
+    <AlertDialog.Trigger>Delete Account</AlertDialog.Trigger>
 
     <AlertDialog.Portal>
       <AlertDialog.Content>

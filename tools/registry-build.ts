@@ -1427,8 +1427,8 @@ async function buildRegistry(): Promise<void> {
         tplName,
         "template",
         tplStack,
-        ...(tplMeta["portfolioTags"] as string[] | undefined) ?? [],
-        ...(tplMeta["deploymentTarget"] as string)?.toLowerCase() ?? "",
+        ...((tplMeta["portfolioTags"] as string[] | undefined) ?? []),
+        ...((tplMeta["deploymentTarget"] as string)?.toLowerCase() ?? ""),
       ]
         .filter(Boolean)
         .sort()
@@ -1458,10 +1458,22 @@ async function buildRegistry(): Promise<void> {
   mkdirSync(themeManifestDir, { recursive: true })
 
   const PRESET_THEMES: Array<{ slug: string; name: string; description: string }> = [
-    { slug: "ocean", name: "Ocean", description: "Ocean-themed color palette with deep blue tones" },
+    {
+      slug: "ocean",
+      name: "Ocean",
+      description: "Ocean-themed color palette with deep blue tones",
+    },
     { slug: "forest", name: "Forest", description: "Forest-themed color palette with green tones" },
-    { slug: "slate", name: "Slate", description: "Slate-themed color palette with neutral gray tones" },
-    { slug: "aurora", name: "Aurora", description: "Aurora-themed color palette with vibrant gradient tones" },
+    {
+      slug: "slate",
+      name: "Slate",
+      description: "Slate-themed color palette with neutral gray tones",
+    },
+    {
+      slug: "aurora",
+      name: "Aurora",
+      description: "Aurora-themed color palette with vibrant gradient tones",
+    },
   ]
   for (const theme of PRESET_THEMES) {
     const deliverables = ["css", "tailwind"]
@@ -1580,9 +1592,9 @@ async function buildRegistry(): Promise<void> {
     const pkcs8Header = Buffer.from("302e020100300506032b657004220420", "hex")
     const pkcs8Der = Buffer.concat([pkcs8Header, privateKeyBuf])
 
-    const cryptoKey = await globalThis.crypto.subtle.importKey(
-      "pkcs8", pkcs8Der, "Ed25519", true, ["sign"],
-    )
+    const cryptoKey = await globalThis.crypto.subtle.importKey("pkcs8", pkcs8Der, "Ed25519", true, [
+      "sign",
+    ])
 
     const sig = await globalThis.crypto.subtle.sign(
       "Ed25519",
@@ -1593,15 +1605,13 @@ async function buildRegistry(): Promise<void> {
     // Extract public key from the private key via WebCrypto
     const jwk = await globalThis.crypto.subtle.exportKey("jwk", cryptoKey)
     // JWK x parameter is the base64url-encoded raw public key
-    const pubKeyBytes = Buffer.from(
-      jwk.x!.replace(/-/g, "+").replace(/_/g, "/") + "==",
-      "base64",
-    )
+    const pubKeyBytes = Buffer.from(jwk.x!.replace(/-/g, "+").replace(/_/g, "/") + "==", "base64")
 
     const committedSignature = committedIndexSignature()
     stableIndex.integrity.signature = Buffer.from(sig).toString("base64")
     stableIndex.integrity.signedAt =
-      committedSignature.signature === stableIndex.integrity.signature && committedSignature.signedAt
+      committedSignature.signature === stableIndex.integrity.signature &&
+      committedSignature.signedAt
         ? committedSignature.signedAt
         : now
     stableIndex.integrity.signatureKeyId = createHash("sha256")
@@ -1640,7 +1650,9 @@ function getExpectedNamesForLayer(layer: string): Set<string> {
       const manifestPath = join(ROOT, "docs", "contracts", "block-catalog-manifest.json")
       if (!existsSync(manifestPath)) return new Set()
       try {
-        const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as { blocks?: Array<{ name?: string }> }
+        const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+          blocks?: Array<{ name?: string }>
+        }
         return new Set(
           (manifest.blocks ?? [])
             .map((b) => (b.name ?? "").toLowerCase().replace(/\s+/g, "-"))
@@ -1655,12 +1667,10 @@ function getExpectedNamesForLayer(layer: string): Set<string> {
       const manifestPath = join(ROOT, "docs", "contracts", "template-catalog-manifest.json")
       if (!existsSync(manifestPath)) return new Set()
       try {
-        const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as { templates?: Array<{ slug?: string }> }
-        return new Set(
-          (manifest.templates ?? [])
-            .map((t) => t.slug ?? "")
-            .filter(Boolean),
-        )
+        const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+          templates?: Array<{ slug?: string }>
+        }
+        return new Set((manifest.templates ?? []).map((t) => t.slug ?? "").filter(Boolean))
       } catch {
         return new Set()
       }

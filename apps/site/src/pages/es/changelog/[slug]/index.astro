@@ -6,7 +6,13 @@ import { tocFromHeadings, type DocsTocEntry } from "@lib/docs-nav"
 export async function getStaticPaths() {
   const entries = await getCollection("changelog")
   return entries.map((entry) => ({
-    params: { slug: entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id },
+    params: {
+      slug:
+        entry.id
+          .split("/")
+          .pop()
+          ?.replace(/\.(md|mdx)$/, "") ?? entry.id,
+    },
   }))
 }
 
@@ -19,7 +25,9 @@ if (!entry) throw new Error(`Entrada de registro no encontrada: es/changelog/${s
 const rendered = await render(entry)
 const { Content } = rendered
 const headings = rendered.headings ?? []
-const toc: DocsTocEntry[] = tocFromHeadings(headings as Array<{ depth: number; slug: string; text: string }>)
+const toc: DocsTocEntry[] = tocFromHeadings(
+  headings as Array<{ depth: number; slug: string; text: string }>,
+)
 
 const allEntries = await getCollection("changelog", (e) => e.data.locale === "es")
 const sorted = [...allEntries].sort(
@@ -29,11 +37,23 @@ const currentIndex = sorted.findIndex((e) => e.id === entry.id)
 const prevEntry = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : undefined
 const nextEntry = currentIndex > 0 ? sorted[currentIndex - 1] : undefined
 
-const prevSlug = prevEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
-const nextSlug = nextEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
+const prevSlug = prevEntry?.id
+  .split("/")
+  .pop()
+  ?.replace(/\.(md|mdx)$/, "")
+const nextSlug = nextEntry?.id
+  .split("/")
+  .pop()
+  ?.replace(/\.(md|mdx)$/, "")
 
-const prevLink = prevSlug && prevEntry ? { label: prevEntry.data.title, href: `${changelogPath}${prevSlug}/` } : undefined
-const nextLink = nextSlug && nextEntry ? { label: nextEntry.data.title, href: `${changelogPath}${nextSlug}/` } : undefined
+const prevLink =
+  prevSlug && prevEntry
+    ? { label: prevEntry.data.title, href: `${changelogPath}${prevSlug}/` }
+    : undefined
+const nextLink =
+  nextSlug && nextEntry
+    ? { label: nextEntry.data.title, href: `${changelogPath}${nextSlug}/` }
+    : undefined
 ---
 
 <DocsLayout
@@ -45,17 +65,17 @@ const nextLink = nextSlug && nextEntry ? { label: nextEntry.data.title, href: `$
   contentType="changelog"
 >
   <div class="changelog-entry__header">
-    <a href={changelogPath} class="changelog-entry__back">
-      ← Registro de cambios
-    </a>
+    <a href={changelogPath} class="changelog-entry__back"> ← Registro de cambios </a>
     <h1>{entry.data.title}</h1>
     <div class="changelog-entry__meta">
       <time datetime={entry.data.date.toISOString().split("T")[0]}>
-        {entry.data.date.toLocaleDateString("es-ES", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
+        {
+          entry.data.date.toLocaleDateString("es-ES", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }
       </time>
       {entry.data.version && <span class="changelog-entry__version">{entry.data.version}</span>}
       <span class="changelog-entry__maturity" data-maturity={entry.data.maturity}>

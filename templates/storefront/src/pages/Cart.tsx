@@ -27,9 +27,9 @@ export function Cart(): JSX.Element {
     setItems((prev) =>
       prev
         .map((item) =>
-          item.id === id ? { ...item, quantity: Math.max(0, item.quantity + delta) } : item
+          item.id === id ? { ...item, quantity: Math.max(0, item.quantity + delta) } : item,
         )
-        .filter((item) => item.quantity > 0)
+        .filter((item) => item.quantity > 0),
     )
   }
 
@@ -42,11 +42,15 @@ export function Cart(): JSX.Element {
       <Breadcrumb.Root class="mb-4">
         <Breadcrumb.List class="flex items-center gap-2">
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">Home</Breadcrumb.Link>
+            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">
+              Home
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/cart" current class="text-sm font-medium text-gray-900">Cart</Breadcrumb.Link>
+            <Breadcrumb.Link href="/cart" current class="text-sm font-medium text-gray-900">
+              Cart
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>

@@ -3,7 +3,13 @@
   "stack": "vite-solid-router",
   "description": "E-commerce storefront with product catalog, shopping cart, and checkout flow.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-COMMERCE-01", "BLOCK-COMMERCE-02", "BLOCK-COMMERCE-03"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-COMMERCE-01",
+    "BLOCK-COMMERCE-02",
+    "BLOCK-COMMERCE-03"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["balanced-product"],

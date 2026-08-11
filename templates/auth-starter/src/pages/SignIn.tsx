@@ -33,7 +33,9 @@ export function SignIn(): JSX.Element {
           <div class="space-y-4">
             {error() && (
               <Alert.Root type="error">
-                <Alert.Title class="text-sm font-medium text-red-800">Invalid credentials</Alert.Title>
+                <Alert.Title class="text-sm font-medium text-red-800">
+                  Invalid credentials
+                </Alert.Title>
                 <Alert.Description class="text-sm text-red-700">{error()}</Alert.Description>
               </Alert.Root>
             )}
@@ -70,7 +72,10 @@ export function SignIn(): JSX.Element {
                 />
                 <span class="text-sm text-gray-600">Remember me</span>
               </label>
-              <A href="/reset-password" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+              <A
+                href="/reset-password"
+                class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+              >
                 Forgot password?
               </A>
             </div>
@@ -84,17 +89,25 @@ export function SignIn(): JSX.Element {
             </Button.Root>
 
             <div class="relative">
-              <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-200" /></div>
+              <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-200" />
+              </div>
               <div class="relative flex justify-center text-sm">
                 <span class="bg-gray-50 px-2 text-gray-500">Or continue with</span>
               </div>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
-              <Button.Root variant="outline" class="inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+              <Button.Root
+                variant="outline"
+                class="inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              >
                 GitHub
               </Button.Root>
-              <Button.Root variant="outline" class="inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+              <Button.Root
+                variant="outline"
+                class="inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              >
                 Google
               </Button.Root>
             </div>

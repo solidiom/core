@@ -1,7 +1,12 @@
 import type { JSX } from "solid-js"
 import * as Card from "@solidiom/card"
 
-export function WorkflowCard(props: { name: string; trigger: string; actions: string[]; status: "active" | "paused" | "draft" }): JSX.Element {
+export function WorkflowCard(props: {
+  name: string
+  trigger: string
+  actions: string[]
+  status: "active" | "paused" | "draft"
+}): JSX.Element {
   const statusStyles = {
     active: "bg-green-100 text-green-800",
     paused: "bg-yellow-100 text-yellow-800",
@@ -17,7 +22,9 @@ export function WorkflowCard(props: { name: string; trigger: string; actions: st
             <p class="text-xs text-gray-500">Trigger: {props.trigger}</p>
             <p class="mt-0.5 text-xs text-gray-400">Actions: {props.actions.join(", ")}</p>
           </div>
-          <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusStyles[props.status]}`}>
+          <span
+            class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusStyles[props.status]}`}
+          >
             {props.status}
           </span>
         </div>

@@ -21,12 +21,66 @@ interface ApiKey {
 }
 
 const API_KEYS: ApiKey[] = [
-  { id: "key-001", name: "Production Backend", key: "sk_live_••••••••••••4f3a", status: "active", scopes: ["read", "write", "admin"], createdAt: "2024-01-15", expiresAt: "2025-01-15", lastUsed: "2 min ago" },
-  { id: "key-002", name: "Staging Service", key: "sk_staging_••••••••••••7b2c", status: "active", scopes: ["read", "write"], createdAt: "2024-03-22", expiresAt: "2025-03-22", lastUsed: "1 hour ago" },
-  { id: "key-003", name: "Mobile App", key: "sk_mobile_••••••••••••9d1e", status: "expiring", scopes: ["read"], createdAt: "2023-11-01", expiresAt: "2024-08-15", lastUsed: "5 min ago" },
-  { id: "key-004", name: "Legacy Integration", key: "sk_legacy_••••••••••••2a8f", status: "revoked", scopes: ["read", "write"], createdAt: "2023-06-10", expiresAt: "2024-06-10", lastUsed: "30 days ago" },
-  { id: "key-005", name: "CI/CD Pipeline", key: "sk_cicd_••••••••••••5c3d", status: "rotated", scopes: ["read"], createdAt: "2024-07-01", expiresAt: "2025-07-01", lastUsed: "4 hours ago" },
-  { id: "key-006", name: "Analytics Worker", key: "sk_analytics_••••••••••••8e4b", status: "inactive", scopes: ["read", "write"], createdAt: "2024-02-28", expiresAt: "2025-02-28", lastUsed: "Never" },
+  {
+    id: "key-001",
+    name: "Production Backend",
+    key: "sk_live_••••••••••••4f3a",
+    status: "active",
+    scopes: ["read", "write", "admin"],
+    createdAt: "2024-01-15",
+    expiresAt: "2025-01-15",
+    lastUsed: "2 min ago",
+  },
+  {
+    id: "key-002",
+    name: "Staging Service",
+    key: "sk_staging_••••••••••••7b2c",
+    status: "active",
+    scopes: ["read", "write"],
+    createdAt: "2024-03-22",
+    expiresAt: "2025-03-22",
+    lastUsed: "1 hour ago",
+  },
+  {
+    id: "key-003",
+    name: "Mobile App",
+    key: "sk_mobile_••••••••••••9d1e",
+    status: "expiring",
+    scopes: ["read"],
+    createdAt: "2023-11-01",
+    expiresAt: "2024-08-15",
+    lastUsed: "5 min ago",
+  },
+  {
+    id: "key-004",
+    name: "Legacy Integration",
+    key: "sk_legacy_••••••••••••2a8f",
+    status: "revoked",
+    scopes: ["read", "write"],
+    createdAt: "2023-06-10",
+    expiresAt: "2024-06-10",
+    lastUsed: "30 days ago",
+  },
+  {
+    id: "key-005",
+    name: "CI/CD Pipeline",
+    key: "sk_cicd_••••••••••••5c3d",
+    status: "rotated",
+    scopes: ["read"],
+    createdAt: "2024-07-01",
+    expiresAt: "2025-07-01",
+    lastUsed: "4 hours ago",
+  },
+  {
+    id: "key-006",
+    name: "Analytics Worker",
+    key: "sk_analytics_••••••••••••8e4b",
+    status: "inactive",
+    scopes: ["read", "write"],
+    createdAt: "2024-02-28",
+    expiresAt: "2025-02-28",
+    lastUsed: "Never",
+  },
 ]
 
 export function ApiKeys(): JSX.Element {
@@ -39,20 +93,29 @@ export function ApiKeys(): JSX.Element {
         <Breadcrumb.Root class="mb-2">
           <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Home
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/keys" current class="text-gray-900 font-medium">API Keys</Breadcrumb.Link>
+              <Breadcrumb.Link href="/keys" current class="text-gray-900 font-medium">
+                API Keys
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
         <div class="flex items-center justify-between">
           <div>
             <h1 class="text-2xl font-bold text-gray-900">API Keys</h1>
-            <p class="mt-1 text-sm text-gray-500">Create, rotate, and revoke API keys with scope management.</p>
+            <p class="mt-1 text-sm text-gray-500">
+              Create, rotate, and revoke API keys with scope management.
+            </p>
           </div>
-          <Button.Root class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700" onClick={() => setShowCreateDialog(true)}>
+          <Button.Root
+            class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
+            onClick={() => setShowCreateDialog(true)}
+          >
             Create Key
           </Button.Root>
         </div>
@@ -61,7 +124,8 @@ export function ApiKeys(): JSX.Element {
       <Alert.Root type="warning" class="rounded-lg">
         <Alert.Title class="text-sm font-medium">Security Notice</Alert.Title>
         <Alert.Description class="mt-1 text-sm text-gray-600">
-          One key is expiring soon. Rotate expiring keys before their expiration date to avoid service disruption.
+          One key is expiring soon. Rotate expiring keys before their expiration date to avoid
+          service disruption.
         </Alert.Description>
       </Alert.Root>
 
@@ -89,7 +153,10 @@ export function ApiKeys(): JSX.Element {
                   <Button.Root class="rounded-md border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50">
                     Rotate
                   </Button.Root>
-                  <Button.Root class="rounded-md border border-red-200 bg-white px-2.5 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50" onClick={() => setShowRevokeDialog(key)}>
+                  <Button.Root
+                    class="rounded-md border border-red-200 bg-white px-2.5 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50"
+                    onClick={() => setShowRevokeDialog(key)}
+                  >
                     Revoke
                   </Button.Root>
                 </>
@@ -113,14 +180,21 @@ export function ApiKeys(): JSX.Element {
             <div class="mt-4 space-y-3">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" placeholder="My Service" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+                <input
+                  type="text"
+                  placeholder="My Service"
+                  class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+                />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700">Scopes</label>
                 <div class="mt-1 space-x-4">
                   {["read", "write", "admin"].map((scope) => (
                     <label class="inline-flex items-center gap-1 text-sm text-gray-700">
-                      <input type="checkbox" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+                      <input
+                        type="checkbox"
+                        class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      />
                       {scope}
                     </label>
                   ))}
@@ -128,13 +202,18 @@ export function ApiKeys(): JSX.Element {
               </div>
             </div>
             <div class="mt-6 flex justify-end gap-3">
-              <Button.Root class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50" onClick={() => setShowCreateDialog(false)}>
+              <Button.Root
+                class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                onClick={() => setShowCreateDialog(false)}
+              >
                 Cancel
               </Button.Root>
-              <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700" onClick={() => {
-                setShowCreateDialog(false)
-
-              }}>
+              <Button.Root
+                class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
+                onClick={() => {
+                  setShowCreateDialog(false)
+                }}
+              >
                 Generate Key
               </Button.Root>
             </div>
@@ -142,22 +221,31 @@ export function ApiKeys(): JSX.Element {
         </Dialog.Portal>
       </Dialog.Root>
 
-      <Dialog.Root open={() => !!showRevokeDialog()} onOpenChange={(open) => !open && setShowRevokeDialog(null)}>
+      <Dialog.Root
+        open={() => !!showRevokeDialog()}
+        onOpenChange={(open) => !open && setShowRevokeDialog(null)}
+      >
         <Dialog.Portal>
           <Dialog.Backdrop class="fixed inset-0 bg-black/40" />
           <Dialog.Content class="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-xl">
             <Dialog.Title class="text-lg font-semibold text-gray-900">Revoke API Key</Dialog.Title>
             <p class="mt-2 text-sm text-gray-500">
-              Are you sure you want to revoke the key "{showRevokeDialog()?.name}"? This action cannot be undone.
+              Are you sure you want to revoke the key "{showRevokeDialog()?.name}"? This action
+              cannot be undone.
             </p>
             <div class="mt-6 flex justify-end gap-3">
-              <Button.Root class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50" onClick={() => setShowRevokeDialog(null)}>
+              <Button.Root
+                class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                onClick={() => setShowRevokeDialog(null)}
+              >
                 Cancel
               </Button.Root>
-              <Button.Root class="inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700" onClick={() => {
-                setShowRevokeDialog(null)
-
-              }}>
+              <Button.Root
+                class="inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-700"
+                onClick={() => {
+                  setShowRevokeDialog(null)
+                }}
+              >
                 Revoke
               </Button.Root>
             </div>

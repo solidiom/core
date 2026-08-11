@@ -15,10 +15,10 @@
  * Must be called during component initialization to maintain server/client parity.
  * The prefix aids DOM inspection but has no semantic meaning.
  */
-export declare function createStableId(prefix?: string): string;
+export declare function createStableId(prefix?: string): string
 /**
  * Resets the ID counter. Used in SSR to synchronize server/client sequences.
  * @internal — not part of the public API; used by framework integration.
  */
-export declare function resetIdCounter(): void;
+export declare function resetIdCounter(): void
 //# sourceMappingURL=stable-id.d.ts.map

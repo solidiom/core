@@ -116,7 +116,9 @@ function extractUsedParts(tsxContent: string): string[] {
   }
   // Named import usage: detect imported names and map to parts
   // e.g. import { PanelGroup, Panel, Handle } → "group", "panel", "handle"
-  const namedImportMatch = tsxContent.match(/import\s+\{([^}]+)\}\s+from\s+["']@solidiom\/([^"']+)["']/)
+  const namedImportMatch = tsxContent.match(
+    /import\s+\{([^}]+)\}\s+from\s+["']@solidiom\/([^"']+)["']/,
+  )
   if (namedImportMatch) {
     const scope = namedImportMatch[2]
     const scopePascal = scope

@@ -52,4 +52,3 @@ export const resourceLinks: NavLink[] = [
   { label: "Accessibility", href: "/accessibility/" },
   { label: "Performance", href: "/performance/" },
 ]
-

@@ -8,14 +8,12 @@ export { Progress }
 
 const BASE_CLASS = "solidiom-progress"
 
-export interface StyledProgressProps
-  extends Omit<Parameters<typeof Progress.Root>[0], "class"> {
+export interface StyledProgressProps extends Omit<Parameters<typeof Progress.Root>[0], "class"> {
   class?: string
 }
 
 export function StyledProgress(props: StyledProgressProps) {
-  const className = () =>
-    [BASE_CLASS, props.class].filter(Boolean).join(" ")
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ")
 
   return <Progress.Root {...props} class={className()} />
 }

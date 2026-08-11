@@ -306,7 +306,12 @@ export function verifyRegistry(options: {
           "registry index is signed but no verification key was provided (embed public key or set REGISTRY_VERIFY_KEY or policy.registryPublicKeys)",
         )
       } else {
-        const { signature: sigB64, signedAt: _sa, signatureKeyId: _kid, ...restIntegrity } = index.integrity
+        const {
+          signature: sigB64,
+          signedAt: _sa,
+          signatureKeyId: _kid,
+          ...restIntegrity
+        } = index.integrity
         const preSigIndex = { ...index, integrity: restIntegrity }
         const preSigContent = JSON.stringify(preSigIndex, null, 2)
         const sigBuf = Buffer.from(sigB64!, "base64")
@@ -319,7 +324,10 @@ export function verifyRegistry(options: {
             // Build SPKI DER for Ed25519: 44 bytes total
             const spkiHeader = Buffer.from("302a300506032b6570032100", "hex")
             const spkiDer = Buffer.concat([spkiHeader, pubBytes])
-            const pubKeyPem = `-----BEGIN PUBLIC KEY-----\n${spkiDer.toString("base64").match(/.{1,64}/g)!.join("\n")}\n-----END PUBLIC KEY-----`
+            const pubKeyPem = `-----BEGIN PUBLIC KEY-----\n${spkiDer
+              .toString("base64")
+              .match(/.{1,64}/g)!
+              .join("\n")}\n-----END PUBLIC KEY-----`
 
             if (cryptoVerify(null, Buffer.from(preSigContent, "utf8"), pubKeyPem, sigBuf)) {
               matchedKeyB64 = keyB64
@@ -335,7 +343,10 @@ export function verifyRegistry(options: {
         } else if (index.integrity.signatureKeyId) {
           // Verify signatureKeyId matches the fingerprint of the matching key
           const matchedPubBytes = Buffer.from(matchedKeyB64, "base64")
-          const expectedKeyId = createHash("sha256").update(matchedPubBytes).digest("hex").slice(0, 16)
+          const expectedKeyId = createHash("sha256")
+            .update(matchedPubBytes)
+            .digest("hex")
+            .slice(0, 16)
           if (expectedKeyId !== index.integrity.signatureKeyId) {
             violations.push("registry index signatureKeyId does not match the verifying key")
           }

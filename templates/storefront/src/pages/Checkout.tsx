@@ -26,18 +26,24 @@ export function Checkout(): JSX.Element {
         <Breadcrumb.Root class="mb-4">
           <Breadcrumb.List class="flex items-center gap-2">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">Home</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">
+                Home
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/checkout" current class="text-sm font-medium text-gray-900">Checkout</Breadcrumb.Link>
+              <Breadcrumb.Link href="/checkout" current class="text-sm font-medium text-gray-900">
+                Checkout
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
 
         <Alert.Root type="success" class="mb-6">
           <Alert.Title>Order confirmed!</Alert.Title>
-          <Alert.Description>Your order has been placed successfully. You will receive a confirmation email shortly.</Alert.Description>
+          <Alert.Description>
+            Your order has been placed successfully. You will receive a confirmation email shortly.
+          </Alert.Description>
         </Alert.Root>
 
         <h1 class="text-2xl font-bold text-gray-900">Thank You</h1>
@@ -51,21 +57,29 @@ export function Checkout(): JSX.Element {
       <Breadcrumb.Root class="mb-4">
         <Breadcrumb.List class="flex items-center gap-2">
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">Home</Breadcrumb.Link>
+            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">
+              Home
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/cart" class="text-sm text-gray-500 hover:text-gray-700">Cart</Breadcrumb.Link>
+            <Breadcrumb.Link href="/cart" class="text-sm text-gray-500 hover:text-gray-700">
+              Cart
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/checkout" current class="text-sm font-medium text-gray-900">Checkout</Breadcrumb.Link>
+            <Breadcrumb.Link href="/checkout" current class="text-sm font-medium text-gray-900">
+              Checkout
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <h1 class="text-2xl font-bold text-gray-900">Checkout</h1>
-      <p class="mt-1 text-sm text-gray-500">Complete your order by filling in shipping and payment details.</p>
+      <p class="mt-1 text-sm text-gray-500">
+        Complete your order by filling in shipping and payment details.
+      </p>
 
       <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card.Root class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">

@@ -2,7 +2,13 @@ import type { JSX } from "solid-js"
 import * as Input from "@solidiom/input"
 import * as Field from "@solidiom/field"
 
-export function FormField(props: { label: string; type?: string; placeholder?: string; error?: string; children?: JSX.Element }): JSX.Element {
+export function FormField(props: {
+  label: string
+  type?: string
+  placeholder?: string
+  error?: string
+  children?: JSX.Element
+}): JSX.Element {
   return (
     <Field.Root>
       <Field.Label class="block text-sm font-medium text-gray-700">{props.label}</Field.Label>

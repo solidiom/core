@@ -24,9 +24,7 @@ export function InputOtpExample(props: InputOtpExampleProps) {
       class="input-otp-example"
       data-input-otp-example
     >
-      <label class="input-otp-example__label">
-        {copy().label}
-      </label>
+      <label class="input-otp-example__label">{copy().label}</label>
       <InputOTP.Root maxLength={6}>
         <InputOTP.Group>
           {[0, 1, 2, 3, 4, 5].map((index) => (

@@ -34,7 +34,9 @@ function parseArgs(): ScaffoldOptions {
   const args = process.argv.slice(2)
   const name = args.find((a) => !a.startsWith("--"))
   if (!name) {
-    console.error("Usage: pnpm tsx tools/scaffold-primitive.ts <name> [--label ...] [--category ...] [--description ...]")
+    console.error(
+      "Usage: pnpm tsx tools/scaffold-primitive.ts <name> [--label ...] [--category ...] [--description ...]",
+    )
     process.exit(1)
   }
 
@@ -43,7 +45,10 @@ function parseArgs(): ScaffoldOptions {
     return idx >= 0 && idx + 1 < args.length ? args[idx + 1] : undefined
   }
 
-  const label = getFlag("--label") ?? name.charAt(0).toUpperCase() + name.slice(1).replace(/-([a-z])/g, (_, c) => " " + c.toUpperCase())
+  const label =
+    getFlag("--label") ??
+    name.charAt(0).toUpperCase() +
+      name.slice(1).replace(/-([a-z])/g, (_, c) => " " + c.toUpperCase())
   const category = getFlag("--category") ?? "layout"
   const description = getFlag("--description") ?? `${label} primitive.`
 
@@ -63,63 +68,67 @@ function writeIfMissing(path: string, content: string, force: boolean): boolean 
 }
 
 function generatePackageJson(opts: ScaffoldOptions): string {
-  return JSON.stringify(
-    {
-      name: `@solidiom/${opts.name}`,
-      version: "0.0.1-next.0",
-      private: false,
-      license: "MIT",
-      type: "module",
-      exports: {
-        ".": {
-          solid: "./source/index.tsx",
-          import: "./dist/index.js",
-          types: "./dist/index.d.ts",
+  return (
+    JSON.stringify(
+      {
+        name: `@solidiom/${opts.name}`,
+        version: "0.0.1-next.0",
+        private: false,
+        license: "MIT",
+        type: "module",
+        exports: {
+          ".": {
+            solid: "./source/index.tsx",
+            import: "./dist/index.js",
+            types: "./dist/index.d.ts",
+          },
+        },
+        main: "./dist/index.js",
+        types: "./dist/index.d.ts",
+        files: ["dist", "source", "src", "!src/**/*.test.*"],
+        scripts: {
+          build: "tsup && tsc --emitDeclarationOnly --outDir dist",
+          test: "vitest run --passWithNoTests",
+          typecheck: "tsc --noEmit",
+        },
+        peerDependencies: {
+          "@solidjs/web": ">=2.0.0-beta",
+          "solid-js": "catalog:",
+        },
+        dependencies: {
+          "@solidiom/runtime": "workspace:*",
+        },
+        nx: {
+          tags: ["layer:primitive"],
+          metadata: {
+            label: opts.label,
+            description: opts.description,
+            category: opts.category,
+            registry: { status: "experimental" },
+          },
         },
       },
-      main: "./dist/index.js",
-      types: "./dist/index.d.ts",
-      files: ["dist", "source", "src", "!src/**/*.test.*"],
-      scripts: {
-        build: "tsup && tsc --emitDeclarationOnly --outDir dist",
-        test: "vitest run --passWithNoTests",
-        typecheck: "tsc --noEmit",
-      },
-      peerDependencies: {
-        "@solidjs/web": ">=2.0.0-beta",
-        "solid-js": "catalog:",
-      },
-      dependencies: {
-        "@solidiom/runtime": "workspace:*",
-      },
-      nx: {
-        tags: ["layer:primitive"],
-        metadata: {
-          label: opts.label,
-          description: opts.description,
-          category: opts.category,
-          registry: { status: "experimental" },
-        },
-      },
-    },
-    null,
-    2,
-  ) + "\n"
+      null,
+      2,
+    ) + "\n"
+  )
 }
 
 function generateTsconfig(): string {
-  return JSON.stringify(
-    {
-      extends: "../../tsconfig.base.json",
-      include: ["src"],
-      compilerOptions: {
-        outDir: "dist",
-        rootDir: "src",
+  return (
+    JSON.stringify(
+      {
+        extends: "../../tsconfig.base.json",
+        include: ["src"],
+        compilerOptions: {
+          outDir: "dist",
+          rootDir: "src",
+        },
       },
-    },
-    null,
-    2,
-  ) + "\n"
+      null,
+      2,
+    ) + "\n"
+  )
 }
 
 function generateTsupConfig(name: string): string {

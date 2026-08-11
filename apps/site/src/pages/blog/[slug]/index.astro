@@ -8,7 +8,13 @@ import { getAuthorsByIds } from "@lib/authors"
 export async function getStaticPaths() {
   const entries = await getCollection("articles")
   return entries.map((entry) => ({
-    params: { slug: entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id },
+    params: {
+      slug:
+        entry.id
+          .split("/")
+          .pop()
+          ?.replace(/\.(md|mdx)$/, "") ?? entry.id,
+    },
   }))
 }
 
@@ -28,7 +34,9 @@ const entryAuthors: string[] = (entryData as Record<string, unknown>).authors
 const rendered = await render(rawEntry)
 const { Content } = rendered
 const headings = rendered.headings ?? []
-const toc: DocsTocEntry[] = tocFromHeadings(headings as Array<{ depth: number; slug: string; text: string }>)
+const toc: DocsTocEntry[] = tocFromHeadings(
+  headings as Array<{ depth: number; slug: string; text: string }>,
+)
 
 const allEntries = await getCollection("articles", (e) => e.data.locale === locale)
 const sorted = [...allEntries].sort(
@@ -38,11 +46,23 @@ const currentIndex = sorted.findIndex((e) => e.id === rawEntry.id)
 const prevEntry = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : undefined
 const nextEntry = currentIndex > 0 ? sorted[currentIndex - 1] : undefined
 
-const prevSlug = prevEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
-const nextSlug = nextEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
+const prevSlug = prevEntry?.id
+  .split("/")
+  .pop()
+  ?.replace(/\.(md|mdx)$/, "")
+const nextSlug = nextEntry?.id
+  .split("/")
+  .pop()
+  ?.replace(/\.(md|mdx)$/, "")
 
-const prevLink = prevSlug && prevEntry ? { label: prevEntry.data.title, href: `${blogPath}${prevSlug}/` } : undefined
-const nextLink = nextSlug && nextEntry ? { label: nextEntry.data.title, href: `${blogPath}${nextSlug}/` } : undefined
+const prevLink =
+  prevSlug && prevEntry
+    ? { label: prevEntry.data.title, href: `${blogPath}${prevSlug}/` }
+    : undefined
+const nextLink =
+  nextSlug && nextEntry
+    ? { label: nextEntry.data.title, href: `${blogPath}${nextSlug}/` }
+    : undefined
 
 const authors = getAuthorsByIds(entryAuthors)
 const blogMeta: BlogMeta = {
@@ -78,7 +98,11 @@ const sidebarGroups: DocsSidebarGroup[] = [
   {
     label: recentLabel,
     links: sorted.slice(0, 10).map((entry) => {
-      const entrySlug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
+      const entrySlug =
+        entry.id
+          .split("/")
+          .pop()
+          ?.replace(/\.(md|mdx)$/, "") ?? entry.id
       return {
         label: entry.data.title,
         href: `${blogPath}${entrySlug}/`,
@@ -104,20 +128,26 @@ const sidebarGroups: DocsSidebarGroup[] = [
     </a>
     <div class="blog-entry__meta">
       <time datetime={entryData.date.toISOString().split("T")[0]}>
-        {entryData.date.toLocaleDateString(isEs ? "es-ES" : "en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
+        {
+          entryData.date.toLocaleDateString(isEs ? "es-ES" : "en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }
       </time>
-      {authors.length > 0 && (
-        <span class="blog-entry__author">
-          {isEs ? "por" : "by"} {authors.map((a) => a.name).join(", ")}
-        </span>
-      )}
-      {entryData.tags.length > 0 && (
-        <span class="blog-entry__tags">{entryData.tags.join(", ")}</span>
-      )}
+      {
+        authors.length > 0 && (
+          <span class="blog-entry__author">
+            {isEs ? "por" : "by"} {authors.map((a) => a.name).join(", ")}
+          </span>
+        )
+      }
+      {
+        entryData.tags.length > 0 && (
+          <span class="blog-entry__tags">{entryData.tags.join(", ")}</span>
+        )
+      }
     </div>
   </div>
 

@@ -25,7 +25,10 @@ export function ProductCard(props: ProductCardProps): JSX.Element {
       </div>
       <Card.Content class="p-4">
         <p class="text-xs text-gray-500">{props.category}</p>
-        <A href={`/product/${props.id}`} class="mt-1 block text-sm font-semibold text-gray-900 hover:text-indigo-600">
+        <A
+          href={`/product/${props.id}`}
+          class="mt-1 block text-sm font-semibold text-gray-900 hover:text-indigo-600"
+        >
           {props.name}
         </A>
         <p class="mt-2 text-sm font-bold text-gray-900">{props.price}</p>

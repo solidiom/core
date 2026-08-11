@@ -28,7 +28,9 @@ export function ThreatCard(props: ThreatCardProps): JSX.Element {
       <div class="flex items-start justify-between">
         <div class="flex-1">
           <div class="flex items-center gap-2">
-            <span class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${severityColors[props.severity]}`}>
+            <span
+              class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${severityColors[props.severity]}`}
+            >
               {props.severity}
             </span>
             <span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
@@ -41,7 +43,9 @@ export function ThreatCard(props: ThreatCardProps): JSX.Element {
         <StatusBadge status={props.status} />
       </div>
       <div class="mt-4 flex items-center justify-between border-t border-gray-100 pt-3">
-        <span class="text-xs text-gray-500">{props.affectedAssets} affected asset{props.affectedAssets !== 1 ? "s" : ""}</span>
+        <span class="text-xs text-gray-500">
+          {props.affectedAssets} affected asset{props.affectedAssets !== 1 ? "s" : ""}
+        </span>
         <span class="text-xs text-gray-400">Detected: {props.detected}</span>
       </div>
     </Card.Root>

@@ -15,16 +15,86 @@ interface DataAsset {
 }
 
 const ASSETS: DataAsset[] = [
-  { name: "customer_transactions", type: "table", owner: "Finance Team", classification: "confidential", description: "Raw transaction records from payment processing systems", lastUpdated: "2024-08-05" },
-  { name: "user_profiles", type: "table", owner: "Engineering", classification: "restricted", description: "Complete user profile data including PII fields", lastUpdated: "2024-08-09" },
-  { name: "product_catalog", type: "dataset", owner: "Product Team", classification: "internal", description: "Master product catalog with pricing and inventory data", lastUpdated: "2024-08-07" },
-  { name: "analytics_events", type: "stream", owner: "Data Science", classification: "internal", description: "Real-time event stream from web and mobile analytics", lastUpdated: "2024-08-10" },
-  { name: "monthly_revenue", type: "report", owner: "Finance Team", classification: "confidential", description: "Aggregated monthly revenue reports by region and product", lastUpdated: "2024-07-31" },
-  { name: "api_gateway_logs", type: "stream", owner: "Platform Team", classification: "internal", description: "Structured logs from API gateway with request/response metadata", lastUpdated: "2024-08-10" },
-  { name: "employee_directory", type: "table", owner: "HR Department", classification: "restricted", description: "Employee contact information and organizational structure", lastUpdated: "2024-08-01" },
-  { name: "public_datasets", type: "dataset", owner: "Open Data Team", classification: "public", description: "Curated datasets published for external consumption", lastUpdated: "2024-08-03" },
-  { name: "compliance_audit", type: "report", owner: "Legal Team", classification: "restricted", description: "Quarterly compliance audit findings and remediation tracking", lastUpdated: "2024-07-15" },
-  { name: "ml_feature_store", type: "dataset", owner: "ML Platform", classification: "internal", description: "Pre-computed features for machine learning model training", lastUpdated: "2024-08-08" },
+  {
+    name: "customer_transactions",
+    type: "table",
+    owner: "Finance Team",
+    classification: "confidential",
+    description: "Raw transaction records from payment processing systems",
+    lastUpdated: "2024-08-05",
+  },
+  {
+    name: "user_profiles",
+    type: "table",
+    owner: "Engineering",
+    classification: "restricted",
+    description: "Complete user profile data including PII fields",
+    lastUpdated: "2024-08-09",
+  },
+  {
+    name: "product_catalog",
+    type: "dataset",
+    owner: "Product Team",
+    classification: "internal",
+    description: "Master product catalog with pricing and inventory data",
+    lastUpdated: "2024-08-07",
+  },
+  {
+    name: "analytics_events",
+    type: "stream",
+    owner: "Data Science",
+    classification: "internal",
+    description: "Real-time event stream from web and mobile analytics",
+    lastUpdated: "2024-08-10",
+  },
+  {
+    name: "monthly_revenue",
+    type: "report",
+    owner: "Finance Team",
+    classification: "confidential",
+    description: "Aggregated monthly revenue reports by region and product",
+    lastUpdated: "2024-07-31",
+  },
+  {
+    name: "api_gateway_logs",
+    type: "stream",
+    owner: "Platform Team",
+    classification: "internal",
+    description: "Structured logs from API gateway with request/response metadata",
+    lastUpdated: "2024-08-10",
+  },
+  {
+    name: "employee_directory",
+    type: "table",
+    owner: "HR Department",
+    classification: "restricted",
+    description: "Employee contact information and organizational structure",
+    lastUpdated: "2024-08-01",
+  },
+  {
+    name: "public_datasets",
+    type: "dataset",
+    owner: "Open Data Team",
+    classification: "public",
+    description: "Curated datasets published for external consumption",
+    lastUpdated: "2024-08-03",
+  },
+  {
+    name: "compliance_audit",
+    type: "report",
+    owner: "Legal Team",
+    classification: "restricted",
+    description: "Quarterly compliance audit findings and remediation tracking",
+    lastUpdated: "2024-07-15",
+  },
+  {
+    name: "ml_feature_store",
+    type: "dataset",
+    owner: "ML Platform",
+    classification: "internal",
+    description: "Pre-computed features for machine learning model training",
+    lastUpdated: "2024-08-08",
+  },
 ]
 
 export function DataCatalog(): JSX.Element {
@@ -48,18 +118,24 @@ export function DataCatalog(): JSX.Element {
         <Breadcrumb.Root class="mb-2">
           <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Home
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">Data Catalog</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">
+                Data Catalog
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
         <div class="flex items-center justify-between">
           <div>
             <h1 class="text-2xl font-bold text-gray-900">Data Catalog</h1>
-            <p class="mt-1 text-sm text-gray-500">Discover, document, and search data assets across the organization.</p>
+            <p class="mt-1 text-sm text-gray-500">
+              Discover, document, and search data assets across the organization.
+            </p>
           </div>
         </div>
       </div>

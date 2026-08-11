@@ -29,7 +29,6 @@ import { Toggle } from "@solidiom/recipes-css"
 </Toggle>
 ```
 
-
 ## Instalación
 
 ```sh

@@ -1,7 +1,19 @@
 import * as CommandPalette from "@solidiom/command-palette"
 import type { Locale } from "../lib/locale"
 
-const COPY: Record<Locale, { placeholder: string; recent: string; actions: string; save: string; undo: string; redo: string; settings: string; noResults: string }> = {
+const COPY: Record<
+  Locale,
+  {
+    placeholder: string
+    recent: string
+    actions: string
+    save: string
+    undo: string
+    redo: string
+    settings: string
+    noResults: string
+  }
+> = {
   en: {
     placeholder: "Type a command or search...",
     recent: "Recent",
@@ -33,7 +45,11 @@ export function CommandPaletteExample(props: CommandPaletteExampleProps) {
   const copy = () => COPY[props.locale]
 
   return (
-    <div ref={(el) => el.setAttribute("data-hydrated", "true")} class="command-palette-example" data-command-palette-example>
+    <div
+      ref={(el) => el.setAttribute("data-hydrated", "true")}
+      class="command-palette-example"
+      data-command-palette-example
+    >
       <CommandPalette.Root defaultOpen={true}>
         <CommandPalette.Input placeholder={copy().placeholder} />
         <CommandPalette.List>

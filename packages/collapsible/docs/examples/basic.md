@@ -23,9 +23,7 @@ runnable: true
 import * as Collapsible from "@solidiom/collapsible"
 
 ;<Collapsible.Root defaultOpen={false} onOpenChange={(open) => console.log(open)}>
-  <Collapsible.Trigger>
-    Toggle Details
-  </Collapsible.Trigger>
+  <Collapsible.Trigger>Toggle Details</Collapsible.Trigger>
 
   <Collapsible.Content>
     <p>This content is revealed when the collapsible is opened.</p>

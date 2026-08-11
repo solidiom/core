@@ -24,34 +24,34 @@ The goal is to verify parity between the legacy docs site and `apps/site/` and r
 
 ### `apps/docs/` — Legacy Vite SPA
 
-| Attribute | Value |
-|-----------|-------|
-| Framework | Vite + SolidJS Router |
-| Status | Frozen (DEPRECATED.md, MIG-002) |
-| Routes | 5 |
-| Primitives documented | 52 (from registry/index.json) |
-| Hand-authored demos | 51 primitive demos + 4 blocks + 7 recipes = 62 demo files |
-| Demo index entries | 51 (in `demos/index.ts`) |
-| Categories | overlay, input, layout, feedback, navigation |
+| Attribute             | Value                                                     |
+| --------------------- | --------------------------------------------------------- |
+| Framework             | Vite + SolidJS Router                                     |
+| Status                | Frozen (DEPRECATED.md, MIG-002)                           |
+| Routes                | 5                                                         |
+| Primitives documented | 52 (from registry/index.json)                             |
+| Hand-authored demos   | 51 primitive demos + 4 blocks + 7 recipes = 62 demo files |
+| Demo index entries    | 51 (in `demos/index.ts`)                                  |
+| Categories            | overlay, input, layout, feedback, navigation              |
 
 ### `apps/docs-astro-poc/` — Astro POC
 
-| Attribute | Value |
-|-----------|-------|
-| Status | Completed, superseded by `apps/site/` |
-| Action | N/A (already resolved by `apps/site/` being the production site) |
+| Attribute | Value                                                            |
+| --------- | ---------------------------------------------------------------- |
+| Status    | Completed, superseded by `apps/site/`                            |
+| Action    | N/A (already resolved by `apps/site/` being the production site) |
 
 ---
 
 ## 2. Route Parity
 
-| # | Legacy Route | Legacy File | apps/site/ Equivalent | Site Route | Status |
-|---|-------------|-------------|----------------------|------------|--------|
-| 1 | `/` (Home) | `src/routes/index.tsx` | `src/pages/index.astro` | `/` | **RESOLVED** |
-| 2 | `/primitives/[name]` | `src/routes/primitives/[name].tsx` | `src/pages/primitives/[name]/index.astro` + `[view].astro` | `/primitives/{name}/` and `/primitives/{name}/{view}/` | **RESOLVED** |
-| 3 | `/performance` | `src/routes/performance.tsx` | — | — | **DEFERRED** |
-| 4 | `/recipes` | `src/routes/recipes.tsx` | `src/pages/components/[name]/[view].astro` (examples view) | `/components/{name}/examples/` | **RESOLVED** |
-| 5 | `/accessibility` | `src/routes/accessibility.tsx` | `src/content/en/pages/accessibility.md` (content exists, no route) | — | **DEFERRED** |
+| #   | Legacy Route         | Legacy File                        | apps/site/ Equivalent                                              | Site Route                                             | Status       |
+| --- | -------------------- | ---------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------ | ------------ |
+| 1   | `/` (Home)           | `src/routes/index.tsx`             | `src/pages/index.astro`                                            | `/`                                                    | **RESOLVED** |
+| 2   | `/primitives/[name]` | `src/routes/primitives/[name].tsx` | `src/pages/primitives/[name]/index.astro` + `[view].astro`         | `/primitives/{name}/` and `/primitives/{name}/{view}/` | **RESOLVED** |
+| 3   | `/performance`       | `src/routes/performance.tsx`       | —                                                                  | —                                                      | **DEFERRED** |
+| 4   | `/recipes`           | `src/routes/recipes.tsx`           | `src/pages/components/[name]/[view].astro` (examples view)         | `/components/{name}/examples/`                         | **RESOLVED** |
+| 5   | `/accessibility`     | `src/routes/accessibility.tsx`     | `src/content/en/pages/accessibility.md` (content exists, no route) | —                                                      | **DEFERRED** |
 
 ### Route parity detail
 
@@ -79,16 +79,17 @@ The legacy site had an aggregate accessibility dashboard showing per-primitive a
 
 ## 3. Demo Parity
 
-| Metric | Legacy (`apps/docs/`) | New site (`apps/site/`) |
-|--------|----------------------|------------------------|
-| Primitive demos | 51 hand-authored TSX demos | Generated from registry/API artifacts at build time |
-| Block demos | 4 hand-authored (app-shell, aspect-ratio, code-block, chat-composer) | 36 block entries in content collections |
-| Recipe demos | 7 hand-authored | 30 component entries with examples |
-| Approach | Hand-authored components with inline code strings | Content-collection-driven with generated examples |
+| Metric          | Legacy (`apps/docs/`)                                                | New site (`apps/site/`)                             |
+| --------------- | -------------------------------------------------------------------- | --------------------------------------------------- |
+| Primitive demos | 51 hand-authored TSX demos                                           | Generated from registry/API artifacts at build time |
+| Block demos     | 4 hand-authored (app-shell, aspect-ratio, code-block, chat-composer) | 36 block entries in content collections             |
+| Recipe demos    | 7 hand-authored                                                      | 30 component entries with examples                  |
+| Approach        | Hand-authored components with inline code strings                    | Content-collection-driven with generated examples   |
 
 The legacy demos were hand-authored TSX files each exporting a component and a code string. The new site does not use hand-authored demos; instead, it generates examples from the registry and API artifacts at build time. This is an architectural improvement: examples are maintained alongside the package source rather than duplicated in the docs app.
 
 Legacy demo files counted:
+
 - Primitive demos: 51 `.tsx` files in `demos/` (root level, excluding `index.ts`, `blocks/`, `recipes/`)
 - Block demos: 4 `.tsx` files in `demos/blocks/`
 - Recipe demos: 7 `.tsx` files in `demos/recipes/`
@@ -127,35 +128,35 @@ All 52 registry primitives have documentation in `apps/site/` via the registry-d
 
 The new site includes capabilities that the legacy site did not have:
 
-| Capability | Legacy | New site |
-|------------|--------|----------|
-| Bilingual (en/es) | No | Yes — full Spanish parity for all content |
-| API reference | No | Yes — generated from package source per primitive |
-| Components layer | Recipe demos only | 30 styled components with full catalog views |
-| Blocks layer | 4 demo blocks | 36 composable blocks with documentation |
-| Templates layer | No | 29 application templates with documentation |
-| Themes layer | No | 5 theme presets + visual theme builder |
-| Accessibility evidence | Manual dashboard | Per-primitive `evidence.json` + accessibility contracts |
-| Changelog | No | Yes |
-| Guides | No | 13 guide entries |
-| Maturity labels | No | Yes — beta/GA labels per area |
-| Search | No | Yes — Pagefind with locale-aware indexing |
+| Capability             | Legacy            | New site                                                |
+| ---------------------- | ----------------- | ------------------------------------------------------- |
+| Bilingual (en/es)      | No                | Yes — full Spanish parity for all content               |
+| API reference          | No                | Yes — generated from package source per primitive       |
+| Components layer       | Recipe demos only | 30 styled components with full catalog views            |
+| Blocks layer           | 4 demo blocks     | 36 composable blocks with documentation                 |
+| Templates layer        | No                | 29 application templates with documentation             |
+| Themes layer           | No                | 5 theme presets + visual theme builder                  |
+| Accessibility evidence | Manual dashboard  | Per-primitive `evidence.json` + accessibility contracts |
+| Changelog              | No                | Yes                                                     |
+| Guides                 | No                | 13 guide entries                                        |
+| Maturity labels        | No                | Yes — beta/GA labels per area                           |
+| Search                 | No                | Yes — Pagefind with locale-aware indexing               |
 
 ---
 
 ## 6. Resolution Status Summary
 
-| Item | Description | Status | Notes |
-|------|-------------|--------|-------|
-| R1 | Home page | ✅ Resolved | New site is a superset with bilingual support, maturity labels |
-| R2 | Primitive documentation | ✅ Resolved | 4 views per primitive (overview, api, examples, accessibility) |
-| R3 | Performance dashboard | ⏳ Deferred | `packages/bench/` exists; no site route. Low priority for beta. |
-| R4 | Recipes page | ✅ Resolved | Superseded by Components layer (30 entries, was 7) |
-| R5 | Accessibility overview | ⏳ Deferred | Content exists at `content/en/pages/accessibility.md`; no route. Wiring fix needed. |
-| R6 | Astro POC (`apps/docs-astro-poc/`) | ✅ Resolved | Superseded by `apps/site/` |
-| D1 | 51 primitive demos | ✅ Resolved | Replaced by generated examples from registry |
-| D2 | 4 block demos | ✅ Resolved | Superseded by 36 block content entries |
-| D3 | 7 recipe demos | ✅ Resolved | Superseded by 30 component content entries |
+| Item | Description                        | Status      | Notes                                                                               |
+| ---- | ---------------------------------- | ----------- | ----------------------------------------------------------------------------------- |
+| R1   | Home page                          | ✅ Resolved | New site is a superset with bilingual support, maturity labels                      |
+| R2   | Primitive documentation            | ✅ Resolved | 4 views per primitive (overview, api, examples, accessibility)                      |
+| R3   | Performance dashboard              | ⏳ Deferred | `packages/bench/` exists; no site route. Low priority for beta.                     |
+| R4   | Recipes page                       | ✅ Resolved | Superseded by Components layer (30 entries, was 7)                                  |
+| R5   | Accessibility overview             | ⏳ Deferred | Content exists at `content/en/pages/accessibility.md`; no route. Wiring fix needed. |
+| R6   | Astro POC (`apps/docs-astro-poc/`) | ✅ Resolved | Superseded by `apps/site/`                                                          |
+| D1   | 51 primitive demos                 | ✅ Resolved | Replaced by generated examples from registry                                        |
+| D2   | 4 block demos                      | ✅ Resolved | Superseded by 36 block content entries                                              |
+| D3   | 7 recipe demos                     | ✅ Resolved | Superseded by 30 component content entries                                          |
 
 ---
 

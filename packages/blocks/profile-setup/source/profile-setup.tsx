@@ -32,7 +32,11 @@ export function ProfileSetup(props: ProfileSetupProps): JSX.Element {
   async function handleSubmit(e: Event) {
     e.preventDefault()
     setLocalError("")
-    if (!displayName()) { setLocalError("Display name is required."); setState("error"); return }
+    if (!displayName()) {
+      setLocalError("Display name is required.")
+      setState("error")
+      return
+    }
     setState("loading")
     try {
       await props.onSubmit?.({ displayName: displayName(), bio: bio() })
@@ -43,30 +47,58 @@ export function ProfileSetup(props: ProfileSetupProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-profile-setup", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-profile-setup", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-profile-setup__restricted" role="alert">
           <p>{props.restrictedReason || "Profile setup is unavailable."}</p>
         </div>
       </Show>
       <Show when={state() === "error" && currentError()}>
-        <div class="solidiom-block-profile-setup__error" role="alert"><p>{currentError()}</p></div>
+        <div class="solidiom-block-profile-setup__error" role="alert">
+          <p>{currentError()}</p>
+        </div>
       </Show>
       <Show when={state() !== "restricted"}>
         <form onSubmit={handleSubmit} class="solidiom-block-profile-setup__form">
           <div class="solidiom-block-profile-setup__avatar">
-            <div class="solidiom-block-profile-setup__avatar-placeholder" aria-label="Avatar preview" />
+            <div
+              class="solidiom-block-profile-setup__avatar-placeholder"
+              aria-label="Avatar preview"
+            />
           </div>
           <div class="solidiom-block-profile-setup__field">
             <label for="profile-display-name">Display Name</label>
-            <input id="profile-display-name" type="text" value={displayName()} onInput={(e) => setDisplayName(e.currentTarget.value)} placeholder="Your display name" required disabled={state() === "loading"} />
+            <input
+              id="profile-display-name"
+              type="text"
+              value={displayName()}
+              onInput={(e) => setDisplayName(e.currentTarget.value)}
+              placeholder="Your display name"
+              required
+              disabled={state() === "loading"}
+            />
           </div>
           <div class="solidiom-block-profile-setup__field">
             <label for="profile-bio">Bio</label>
-            <textarea id="profile-bio" value={bio()} onInput={(e) => setBio(e.currentTarget.value)} placeholder="Tell us about yourself" disabled={state() === "loading"} />
+            <textarea
+              id="profile-bio"
+              value={bio()}
+              onInput={(e) => setBio(e.currentTarget.value)}
+              placeholder="Tell us about yourself"
+              disabled={state() === "loading"}
+            />
           </div>
-          <button type="submit" class="solidiom-block-profile-setup__submit" disabled={state() === "loading"}>
-            <Show when={state() === "loading"} fallback="Save Profile">Saving...</Show>
+          <button
+            type="submit"
+            class="solidiom-block-profile-setup__submit"
+            disabled={state() === "loading"}
+          >
+            <Show when={state() === "loading"} fallback="Save Profile">
+              Saving...
+            </Show>
           </button>
         </form>
       </Show>

@@ -35,7 +35,6 @@ import * as Carousel from "@solidiom/recipes-css"
 </Carousel.Root>
 ```
 
-
 ## Instalación
 
 ```sh

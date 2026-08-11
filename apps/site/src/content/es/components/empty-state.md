@@ -32,7 +32,6 @@ import * as EmptyState from "@solidiom/recipes-css"
 </EmptyState.Root>
 ```
 
-
 ## Instalación
 
 ```sh

@@ -70,36 +70,60 @@ export function RolePermissions(props: RolePermissionsProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-role-permissions", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-role-permissions", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-role-permissions__restricted" role="alert">
           <p>{props.restrictedReason || "Permission management is restricted."}</p>
         </div>
       </Show>
       <Show when={state() === "error" && currentError()}>
-        <div class="solidiom-block-role-permissions__error" role="alert"><p>{currentError()}</p></div>
+        <div class="solidiom-block-role-permissions__error" role="alert">
+          <p>{currentError()}</p>
+        </div>
       </Show>
       <Show when={state() !== "restricted"}>
         <Show when={roles().length === 0 && state() !== "loading"}>
-          <div class="solidiom-block-role-permissions__empty"><p>No roles configured.</p></div>
+          <div class="solidiom-block-role-permissions__empty">
+            <p>No roles configured.</p>
+          </div>
         </Show>
         <div class="solidiom-block-role-permissions__roles">
           <For each={roles()}>
             {(role) => (
-              <div class="solidiom-block-role-permissions__role" classList={{ "is-selected": selectedRole() === role.id }}>
+              <div
+                class="solidiom-block-role-permissions__role"
+                classList={{ "is-selected": selectedRole() === role.id }}
+              >
                 <div class="solidiom-block-role-permissions__role-header">
-                  <button type="button" onClick={() => setSelectedRole(selectedRole() === role.id ? null : role.id)}>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedRole(selectedRole() === role.id ? null : role.id)}
+                  >
                     <strong>{role.name}</strong>
                     <span>{role.description}</span>
                   </button>
-                  <button type="button" onClick={() => handleDelete(role.id)} disabled={state() === "loading"}>Delete</button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(role.id)}
+                    disabled={state() === "loading"}
+                  >
+                    Delete
+                  </button>
                 </div>
                 <Show when={selectedRole() === role.id}>
                   <div class="solidiom-block-role-permissions__permissions">
                     <For each={props.availablePermissions ?? []}>
                       {(perm) => (
                         <label class="solidiom-block-role-permissions__permission">
-                          <input type="checkbox" checked={role.permissions.includes(perm)} onChange={() => handleTogglePermission(role.id, perm)} disabled={state() === "loading"} />
+                          <input
+                            type="checkbox"
+                            checked={role.permissions.includes(perm)}
+                            onChange={() => handleTogglePermission(role.id, perm)}
+                            disabled={state() === "loading"}
+                          />
                           {perm}
                         </label>
                       )}

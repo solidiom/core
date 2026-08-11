@@ -14,10 +14,7 @@ describe("unused-capability detection", () => {
 
     try {
       // Simulate processing a file that imports an adapter but no port
-      const transformFn = plugin.transform as (
-        code: string,
-        id: string,
-      ) => { code: string } | null
+      const transformFn = plugin.transform as (code: string, id: string) => { code: string } | null
       transformFn(
         `import { createPositioning } from "@solidiom/adapter-positioning-floating-ui"`,
         "app.tsx",
@@ -40,10 +37,7 @@ describe("unused-capability detection", () => {
     console.warn = (msg: string) => warnings.push(msg)
 
     try {
-      const transformFn = plugin.transform as (
-        code: string,
-        id: string,
-      ) => { code: string } | null
+      const transformFn = plugin.transform as (code: string, id: string) => { code: string } | null
       // File references both the port and the adapter
       transformFn(
         `import { createPositioning } from "@solidiom/adapter-positioning-floating-ui"\nconst p: PositioningPort = createPositioning()`,

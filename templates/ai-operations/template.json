@@ -3,7 +3,14 @@
   "stack": "vite-solid-router",
   "description": "AI operations console with model monitoring, deployment pipelines, and cost tracking.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-AI-01", "BLOCK-AI-02", "BLOCK-AI-03", "BLOCK-OBS-01"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-AI-01",
+    "BLOCK-AI-02",
+    "BLOCK-AI-03",
+    "BLOCK-OBS-01"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["enterprise"],

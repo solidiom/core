@@ -23,7 +23,10 @@ interface Props {
 const { collectionName, layer, locale } = Astro.props
 const copy = getLayerCopy(locale, layer)
 const seoCopy = getCatalogSeoCopy(locale)
-const entries = await getCollection(collectionName, (entry) => entry.data.locale === locale && entry.id.split("/").length <= 3)
+const entries = await getCollection(
+  collectionName,
+  (entry) => entry.data.locale === locale && entry.id.split("/").length <= 3,
+)
 const sortedEntries = entries
   .map((entry) => ({
     name: entryName(entry.id),
@@ -32,8 +35,14 @@ const sortedEntries = entries
     status: entry.data.status ?? "draft",
     href: layerHref(layer, entryName(entry.id), locale),
     keywords: entry.data.keywords ?? [],
-    stack: "stack" in entry.data ? (entry.data as Record<string, unknown>).stack as string | undefined : undefined,
-    portfolios: "portfolios" in entry.data ? (entry.data as Record<string, unknown>).portfolios as string[] ?? [] : [],
+    stack:
+      "stack" in entry.data
+        ? ((entry.data as Record<string, unknown>).stack as string | undefined)
+        : undefined,
+    portfolios:
+      "portfolios" in entry.data
+        ? (((entry.data as Record<string, unknown>).portfolios as string[]) ?? [])
+        : [],
   }))
   .sort((a, b) => a.label.localeCompare(b.label))
 
@@ -59,7 +68,12 @@ const sidebarGroups: DocsSidebarGroup[] = [
 ]
 ---
 
-<DocsLayout title={copy.directoryTitle} description={copy.directoryDescription} sidebarGroups={sidebarGroups} contentType={layer}>
+<DocsLayout
+  title={copy.directoryTitle}
+  description={copy.directoryDescription}
+  sidebarGroups={sidebarGroups}
+  contentType={layer}
+>
   <CatalogBreadcrumbs
     label={seoCopy.breadcrumbs}
     items={breadcrumbItems.map((item, index) => ({
@@ -73,35 +87,45 @@ const sidebarGroups: DocsSidebarGroup[] = [
     {sortedEntries.length > 0 && <p class="primitive-directory__count">{countLabel}</p>}
   </header>
 
-  {sortedEntries.length > 0 && (
-    <div class="primitive-directory__toolbar">
-      <label class="primitive-directory__filter-label">
-        <span class="sr-only">{filterLabel}</span>
-        <input
-          type="search"
-          class="primitive-directory__filter-input"
-          placeholder={filterLabel}
-          data-directory-filter
-          aria-label={filterLabel}
-        />
-      </label>
-    </div>
-  )}
+  {
+    sortedEntries.length > 0 && (
+      <div class="primitive-directory__toolbar">
+        <label class="primitive-directory__filter-label">
+          <span class="sr-only">{filterLabel}</span>
+          <input
+            type="search"
+            class="primitive-directory__filter-input"
+            placeholder={filterLabel}
+            data-directory-filter
+            aria-label={filterLabel}
+          />
+        </label>
+      </div>
+    )
+  }
 
   {
     sortedEntries.length > 0 ? (
       <ul class="primitive-directory__grid" data-pagefind-ignore="index" data-directory-list>
         {sortedEntries.map((entry) => (
-          <li class="primitive-directory__item" data-directory-entry data-name={entry.name} data-label={entry.label.toLowerCase()}>
+          <li
+            class="primitive-directory__item"
+            data-directory-entry
+            data-name={entry.name}
+            data-label={entry.label.toLowerCase()}
+          >
             <a href={entry.href} class="primitive-directory__link">
               <span class="primitive-directory__name">{entry.label}</span>
               <span class="primitive-directory__description">{entry.description}</span>
               <span class="primitive-directory__meta">
-                <span class="primitive-directory__status" data-status={entry.status}>{entry.status}</span>
+                <span class="primitive-directory__status" data-status={entry.status}>
+                  {entry.status}
+                </span>
                 {entry.stack && <span class="primitive-directory__stack">{entry.stack}</span>}
-                {entry.portfolios.length > 0 && entry.portfolios.map((p: string) => (
-                  <span class="primitive-directory__portfolio">{p.replace("-", " ")}</span>
-                ))}
+                {entry.portfolios.length > 0 &&
+                  entry.portfolios.map((p: string) => (
+                    <span class="primitive-directory__portfolio">{p.replace("-", " ")}</span>
+                  ))}
               </span>
             </a>
           </li>

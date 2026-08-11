@@ -34,7 +34,6 @@ import * as ContextMenu from "@solidiom/recipes-css"
 </ContextMenu.Root>
 ```
 
-
 ## Instalación
 
 ```sh

@@ -7,16 +7,76 @@ import * as Input from "@solidiom/input"
 import { ActivityTable, ActivityRecord } from "../components/ActivityTable"
 
 const ACTIVITY: ActivityRecord[] = [
-  { id: "a1", user: "Alice Chen", action: "created team", resource: "Engineering", timestamp: "2 min ago" },
-  { id: "a2", user: "Bob Martinez", action: "updated role", resource: "Admin permissions", timestamp: "15 min ago" },
-  { id: "a3", user: "Carol Wu", action: "invited member", resource: "dave@example.com", timestamp: "1 hour ago" },
-  { id: "a4", user: "Eva Singh", action: "deleted user", resource: "former-employee@example.com", timestamp: "2 hours ago" },
-  { id: "a5", user: "Frank Lee", action: "modified settings", resource: "Organization defaults", timestamp: "3 hours ago" },
-  { id: "a6", user: "Henry Zhao", action: "created team", resource: "Design", timestamp: "5 hours ago" },
-  { id: "a7", user: "Jack Wilson", action: "suspended member", resource: "karen@example.com", timestamp: "6 hours ago" },
-  { id: "a8", user: "Alice Chen", action: "logged in", resource: "IP 192.168.1.42", timestamp: "8 hours ago" },
-  { id: "a9", user: "Mia Garcia", action: "accepted invite", resource: "Operations team", timestamp: "12 hours ago" },
-  { id: "a10", user: "System", action: "auto-provisioned", resource: "SSO sync completed", timestamp: "1 day ago" },
+  {
+    id: "a1",
+    user: "Alice Chen",
+    action: "created team",
+    resource: "Engineering",
+    timestamp: "2 min ago",
+  },
+  {
+    id: "a2",
+    user: "Bob Martinez",
+    action: "updated role",
+    resource: "Admin permissions",
+    timestamp: "15 min ago",
+  },
+  {
+    id: "a3",
+    user: "Carol Wu",
+    action: "invited member",
+    resource: "dave@example.com",
+    timestamp: "1 hour ago",
+  },
+  {
+    id: "a4",
+    user: "Eva Singh",
+    action: "deleted user",
+    resource: "former-employee@example.com",
+    timestamp: "2 hours ago",
+  },
+  {
+    id: "a5",
+    user: "Frank Lee",
+    action: "modified settings",
+    resource: "Organization defaults",
+    timestamp: "3 hours ago",
+  },
+  {
+    id: "a6",
+    user: "Henry Zhao",
+    action: "created team",
+    resource: "Design",
+    timestamp: "5 hours ago",
+  },
+  {
+    id: "a7",
+    user: "Jack Wilson",
+    action: "suspended member",
+    resource: "karen@example.com",
+    timestamp: "6 hours ago",
+  },
+  {
+    id: "a8",
+    user: "Alice Chen",
+    action: "logged in",
+    resource: "IP 192.168.1.42",
+    timestamp: "8 hours ago",
+  },
+  {
+    id: "a9",
+    user: "Mia Garcia",
+    action: "accepted invite",
+    resource: "Operations team",
+    timestamp: "12 hours ago",
+  },
+  {
+    id: "a10",
+    user: "System",
+    action: "auto-provisioned",
+    resource: "SSO sync completed",
+    timestamp: "1 day ago",
+  },
 ]
 
 export function AuditLog(): JSX.Element {
@@ -37,23 +97,30 @@ export function AuditLog(): JSX.Element {
           <Breadcrumb.Root class="mb-2">
             <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                  Home
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
               <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/audit" current class="text-gray-900 font-medium">Audit Log</Breadcrumb.Link>
+                <Breadcrumb.Link href="/audit" current class="text-gray-900 font-medium">
+                  Audit Log
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
             </Breadcrumb.List>
           </Breadcrumb.Root>
           <h1 class="text-2xl font-bold text-gray-900">Audit Log</h1>
-          <p class="mt-1 text-sm text-gray-500">Searchable timeline of all administrative actions and system events.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Searchable timeline of all administrative actions and system events.
+          </p>
         </div>
       </div>
 
       <Alert.Root type="info" class="rounded-md border border-blue-200 bg-blue-50 p-4">
         <Alert.Title class="text-sm font-medium text-blue-800">Audit Trail</Alert.Title>
         <Alert.Description class="mt-1 text-sm text-blue-700">
-          Showing {filtered().length} of {ACTIVITY.length} events. All events are retained for 90 days.
+          Showing {filtered().length} of {ACTIVITY.length} events. All events are retained for 90
+          days.
         </Alert.Description>
       </Alert.Root>
 

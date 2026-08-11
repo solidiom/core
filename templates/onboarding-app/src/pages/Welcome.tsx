@@ -10,7 +10,8 @@ const FEATURES = [
   {
     icon: "🚀",
     title: "Ship faster",
-    description: "Build production-ready apps with pre-configured tooling and best practices baked in.",
+    description:
+      "Build production-ready apps with pre-configured tooling and best practices baked in.",
   },
   {
     icon: "🔒",
@@ -45,17 +46,23 @@ export function Welcome(): JSX.Element {
         <Alert.Root type="info" class="mb-6">
           <Alert.Title class="text-sm font-medium text-blue-800">Quick setup</Alert.Title>
           <Alert.Description class="text-sm text-blue-700">
-            This wizard takes about 2 minutes. You can always come back and change your settings later.
+            This wizard takes about 2 minutes. You can always come back and change your settings
+            later.
           </Alert.Description>
         </Alert.Root>
 
-        <WizardCard title="What you'll get" description="Everything you need to go from idea to production.">
+        <WizardCard
+          title="What you'll get"
+          description="Everything you need to go from idea to production."
+        >
           <div class="space-y-4">
             <div class="grid gap-4 sm:grid-cols-2">
               {FEATURES.map((feature) => (
                 <Card.Root class="rounded-lg border border-gray-200 bg-gray-50 p-4 transition-colors hover:border-indigo-300 hover:bg-indigo-50">
                   <div class="text-2xl">{feature.icon}</div>
-                  <Card.Title class="mt-2 text-sm font-semibold text-gray-900">{feature.title}</Card.Title>
+                  <Card.Title class="mt-2 text-sm font-semibold text-gray-900">
+                    {feature.title}
+                  </Card.Title>
                   <p class="mt-1 text-xs text-gray-600">{feature.description}</p>
                 </Card.Root>
               ))}

@@ -28,9 +28,7 @@ import * as Tooltip from "@solidiom/tooltip"
     <button type="button">Hover me</button>
   </Tooltip.Trigger>
 
-  <Tooltip.Content>
-    This is a tooltip.
-  </Tooltip.Content>
+  <Tooltip.Content>This is a tooltip.</Tooltip.Content>
 </Tooltip.Root>
 ```
 

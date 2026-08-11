@@ -16,50 +16,50 @@ date: 2026-08-07
 
 ### Desktop (Tier 1 — full support)
 
-| Browser | Minimum Version | Engine | Test Evidence |
-|---------|-----------------|--------|---------------|
-| Chrome | 120+ | Blink | Vitest browser mode (Chromium) |
-| Firefox | 121+ | Gecko | Vitest browser mode (Firefox) |
-| Safari | 17.2+ | WebKit | Vitest browser mode (WebKit) |
-| Edge | 120+ | Blink | Shares Chromium evidence |
+| Browser | Minimum Version | Engine | Test Evidence                  |
+| ------- | --------------- | ------ | ------------------------------ |
+| Chrome  | 120+            | Blink  | Vitest browser mode (Chromium) |
+| Firefox | 121+            | Gecko  | Vitest browser mode (Firefox)  |
+| Safari  | 17.2+           | WebKit | Vitest browser mode (WebKit)   |
+| Edge    | 120+            | Blink  | Shares Chromium evidence       |
 
 ### Mobile (Tier 1 — full support)
 
-| Browser | Minimum Version | Platform | Test Evidence |
-|---------|-----------------|----------|---------------|
-| Safari iOS | 17.2+ | iOS 17+ | WebKit engine parity |
-| Chrome Android | 120+ | Android 12+ | Blink engine parity |
+| Browser        | Minimum Version | Platform    | Test Evidence        |
+| -------------- | --------------- | ----------- | -------------------- |
+| Safari iOS     | 17.2+           | iOS 17+     | WebKit engine parity |
+| Chrome Android | 120+            | Android 12+ | Blink engine parity  |
 
 ### Desktop (Tier 2 — functional, not actively tested)
 
-| Browser | Minimum Version | Notes |
-|---------|-----------------|-------|
-| Opera | 106+ | Blink engine, expected to work |
-| Brave | 1.61+ | Blink engine, expected to work |
-| Vivaldi | 6.5+ | Blink engine, expected to work |
+| Browser | Minimum Version | Notes                          |
+| ------- | --------------- | ------------------------------ |
+| Opera   | 106+            | Blink engine, expected to work |
+| Brave   | 1.61+           | Blink engine, expected to work |
+| Vivaldi | 6.5+            | Blink engine, expected to work |
 
 ### Not Supported
 
-| Browser | Reason |
-|---------|--------|
-| Internet Explorer | End of life; no ES2020+ support |
-| Safari < 17 | Missing CSS features (`:has()`, `@container`) |
-| Chrome < 120 | Missing Popover API, missing CSS features |
+| Browser           | Reason                                        |
+| ----------------- | --------------------------------------------- |
+| Internet Explorer | End of life; no ES2020+ support               |
+| Safari < 17       | Missing CSS features (`:has()`, `@container`) |
+| Chrome < 120      | Missing Popover API, missing CSS features     |
 
 ## Feature Requirements
 
 The following web platform features are required:
 
-| Feature | Used by | Chrome | Firefox | Safari |
-|---------|---------|--------|---------|--------|
-| CSS `:has()` | Conditional styling | 105+ | 121+ | 15.4+ |
-| CSS `@layer` | Recipe cascade isolation | 99+ | 97+ | 15.4+ |
-| CSS Container Queries | Responsive blocks | 105+ | 110+ | 16+ |
-| Popover API | Tooltip, Popover, Select | 114+ | 125+ | 17+ |
-| Dialog element | Dialog, Sheet | 37+ | 98+ | 15.4+ |
-| `inert` attribute | Focus trapping | 102+ | 112+ | 15.5+ |
-| CSS `color-mix()` | Theme tokens | 111+ | 113+ | 16.2+ |
-| View Transitions API | Route transitions (optional) | 111+ | N/A | 18+ |
+| Feature               | Used by                      | Chrome | Firefox | Safari |
+| --------------------- | ---------------------------- | ------ | ------- | ------ |
+| CSS `:has()`          | Conditional styling          | 105+   | 121+    | 15.4+  |
+| CSS `@layer`          | Recipe cascade isolation     | 99+    | 97+     | 15.4+  |
+| CSS Container Queries | Responsive blocks            | 105+   | 110+    | 16+    |
+| Popover API           | Tooltip, Popover, Select     | 114+   | 125+    | 17+    |
+| Dialog element        | Dialog, Sheet                | 37+    | 98+     | 15.4+  |
+| `inert` attribute     | Focus trapping               | 102+   | 112+    | 15.5+  |
+| CSS `color-mix()`     | Theme tokens                 | 111+   | 113+    | 16.2+  |
+| View Transitions API  | Route transitions (optional) | 111+   | N/A     | 18+    |
 
 ## Fallback Strategy
 

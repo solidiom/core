@@ -6,7 +6,8 @@ import { CodeBlock } from "../components/CodeBlock"
 const GUIDES = [
   {
     title: "Setting Up Your First Project",
-    description: "Learn how to scaffold a new project, install dependencies, and run the development server.",
+    description:
+      "Learn how to scaffold a new project, install dependencies, and run the development server.",
     difficulty: "Beginner",
     time: "10 min",
     steps: 5,
@@ -17,7 +18,8 @@ npm run dev`,
   },
   {
     title: "Building a Dashboard Layout",
-    description: "Create a responsive dashboard with sidebar navigation, data tables, and real-time updates.",
+    description:
+      "Create a responsive dashboard with sidebar navigation, data tables, and real-time updates.",
     difficulty: "Intermediate",
     time: "25 min",
     steps: 8,
@@ -31,7 +33,8 @@ export function Dashboard() {
   },
   {
     title: "Authentication and Authorization",
-    description: "Implement user authentication with JWT tokens, role-based access control, and protected routes.",
+    description:
+      "Implement user authentication with JWT tokens, role-based access control, and protected routes.",
     difficulty: "Advanced",
     time: "40 min",
     steps: 12,
@@ -44,7 +47,8 @@ const ProtectedDashboard = createProtectedRoute(Dashboard, {
   },
   {
     title: "Deploying to Production",
-    description: "Configure build optimization, environment variables, and deploy to your preferred hosting platform.",
+    description:
+      "Configure build optimization, environment variables, and deploy to your preferred hosting platform.",
     difficulty: "Intermediate",
     time: "20 min",
     steps: 6,
@@ -61,10 +65,14 @@ vercel deploy --prod`,
 
 const difficultyColor = (difficulty: string) => {
   switch (difficulty) {
-    case "Beginner": return "bg-green-100 text-green-700"
-    case "Intermediate": return "bg-yellow-100 text-yellow-700"
-    case "Advanced": return "bg-red-100 text-red-700"
-    default: return "bg-gray-100 text-gray-700"
+    case "Beginner":
+      return "bg-green-100 text-green-700"
+    case "Intermediate":
+      return "bg-yellow-100 text-yellow-700"
+    case "Advanced":
+      return "bg-red-100 text-red-700"
+    default:
+      return "bg-gray-100 text-gray-700"
   }
 }
 
@@ -78,14 +86,18 @@ export function Guides(): JSX.Element {
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Guides</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Guides
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div class="mt-6">
         <h1 class="text-2xl font-bold text-gray-900">Guides</h1>
-        <p class="mt-1 text-sm text-gray-500">Step-by-step tutorials and how-to guides with code samples.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Step-by-step tutorials and how-to guides with code samples.
+        </p>
       </div>
 
       <div class="mt-8 grid gap-6 sm:grid-cols-2">
@@ -93,7 +105,9 @@ export function Guides(): JSX.Element {
           <Card.Root>
             <Card.Header>
               <div class="mb-2 flex items-center gap-2">
-                <span class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${difficultyColor(guide.difficulty)}`}>
+                <span
+                  class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${difficultyColor(guide.difficulty)}`}
+                >
                   {guide.difficulty}
                 </span>
                 <span class="text-xs text-gray-400">{guide.time}</span>

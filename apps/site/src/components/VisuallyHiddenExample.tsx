@@ -48,7 +48,9 @@ export function VisuallyHiddenExample(props: VisuallyHiddenExampleProps) {
         </button>
       </div>
       <div class="visually-hidden-example__notice">
-        <span data-scope="visually-hidden" data-part="root">{copy().buttonLabel}</span>
+        <span data-scope="visually-hidden" data-part="root">
+          {copy().buttonLabel}
+        </span>
       </div>
       <article class="visually-hidden-example__article">
         <VisuallyHidden.Root>

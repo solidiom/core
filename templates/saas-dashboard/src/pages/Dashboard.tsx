@@ -7,10 +7,30 @@ import { MetricCard } from "../components/MetricCard"
 import { ActivityTable } from "../components/ActivityTable"
 
 const METRICS = [
-  { title: "Total Revenue", value: "$45,231.89", change: "+20.1% from last month", changeType: "positive" as const },
-  { title: "Active Users", value: "2,350", change: "+180 since last week", changeType: "positive" as const },
-  { title: "Deployments", value: "142", change: "+12% from last month", changeType: "positive" as const },
-  { title: "Error Rate", value: "0.12%", change: "-0.03% from last week", changeType: "negative" as const },
+  {
+    title: "Total Revenue",
+    value: "$45,231.89",
+    change: "+20.1% from last month",
+    changeType: "positive" as const,
+  },
+  {
+    title: "Active Users",
+    value: "2,350",
+    change: "+180 since last week",
+    changeType: "positive" as const,
+  },
+  {
+    title: "Deployments",
+    value: "142",
+    change: "+12% from last month",
+    changeType: "positive" as const,
+  },
+  {
+    title: "Error Rate",
+    value: "0.12%",
+    change: "-0.03% from last week",
+    changeType: "negative" as const,
+  },
 ]
 
 export function Dashboard(): JSX.Element {
@@ -21,16 +41,22 @@ export function Dashboard(): JSX.Element {
           <Breadcrumb.Root class="mb-2">
             <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                  Home
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
               <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">Dashboard</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">
+                  Dashboard
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
             </Breadcrumb.List>
           </Breadcrumb.Root>
           <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
-          <p class="mt-1 text-sm text-gray-500">Overview of your platform metrics and recent activity.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Overview of your platform metrics and recent activity.
+          </p>
         </div>
         <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           Create Resource
@@ -40,7 +66,8 @@ export function Dashboard(): JSX.Element {
       <Alert.Root type="info" class="rounded-md border border-blue-200 bg-blue-50 p-4">
         <Alert.Title class="text-sm font-medium text-blue-800">System Notice</Alert.Title>
         <Alert.Description class="mt-1 text-sm text-blue-700">
-          Scheduled maintenance window: Saturday 2:00 AM – 4:00 AM UTC. Services may experience brief interruptions.
+          Scheduled maintenance window: Saturday 2:00 AM – 4:00 AM UTC. Services may experience
+          brief interruptions.
         </Alert.Description>
       </Alert.Root>
 

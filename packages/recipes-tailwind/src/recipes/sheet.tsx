@@ -8,14 +8,12 @@ export { Sheet }
 
 const BASE_CLASS = "solidiom-sheet"
 
-export interface StyledSheetProps
-  extends Omit<Parameters<typeof Sheet.Root>[0], "class"> {
+export interface StyledSheetProps extends Omit<Parameters<typeof Sheet.Root>[0], "class"> {
   class?: string
 }
 
 export function StyledSheet(props: StyledSheetProps) {
-  const className = () =>
-    [BASE_CLASS, props.class].filter(Boolean).join(" ")
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ")
 
   return <Sheet.Root {...props} class={className()} />
 }

@@ -3,14 +3,14 @@
  *
  * Parts: Root.
  */
-import { type JSX } from "@solidjs/web";
+import { type JSX } from "@solidjs/web"
 export interface KbdRootProps {
-    class?: string;
-    style?: JSX.CSSProperties | string;
-    children: JSX.Element;
+  class?: string
+  style?: JSX.CSSProperties | string
+  children: JSX.Element
 }
 /**
  * Kbd root — renders a semantic `<kbd>` element for displaying keyboard shortcuts.
  */
-export declare function Root(props: KbdRootProps): JSX.Element;
+export declare function Root(props: KbdRootProps): JSX.Element
 //# sourceMappingURL=index.d.ts.map

@@ -3,5 +3,18 @@
  *
  * Parts: Root, Input, List, Group, Item, Empty.
  */
-export { Root, Input, List, Group, Item, Empty, type CommandPaletteRootProps, type CommandPaletteInputProps, type CommandPaletteListProps, type CommandPaletteGroupProps, type CommandPaletteItemProps, type CommandPaletteEmptyProps, } from "./command-palette";
+export {
+  Root,
+  Input,
+  List,
+  Group,
+  Item,
+  Empty,
+  type CommandPaletteRootProps,
+  type CommandPaletteInputProps,
+  type CommandPaletteListProps,
+  type CommandPaletteGroupProps,
+  type CommandPaletteItemProps,
+  type CommandPaletteEmptyProps,
+} from "./command-palette"
 //# sourceMappingURL=index.d.ts.map

@@ -11,6 +11,9 @@ registry/**/*.json
 # Nx local metadata
 .nx/
 
+# Git hooks (shell scripts with no extension)
+tools/git-hooks/
+
 
 # Generated changeset entries are authored by the changesets CLI
 .changeset/*.md
@@ -23,3 +26,19 @@ registry/**/*.json
 # docs/evidence/recipe-contract-audit.md is deliberately not listed — its
 # generated output is already Prettier-clean.
 docs/axe-scan-results.md
+
+
+
+# Documentation files with intentional non-parseable code snippets (template
+# placeholders like <Name>, inline JSX examples, etc.)
+docs/architecture/design.md
+docs/architecture/exit-animations.md
+docs/architecture/solid2-migration-notes.md
+docs/assets/brand-README.md
+docs/contracts/recipe-authoring-guide.md
+docs/contracts/recipe-contract.md
+docs/guides/adding-a-primitive.md
+
+# Astro pages with template syntax Prettier cannot parse
+apps/site/src/pages/guides/index.astro
+apps/site/src/pages/es/guides/index.astro

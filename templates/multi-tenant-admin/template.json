@@ -3,7 +3,13 @@
   "stack": "vite-solid-router",
   "description": "Multi-tenant administration panel with team management, role permissions, and audit logging.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-ADMIN-01", "BLOCK-ADMIN-02", "BLOCK-ADMIN-03"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-ADMIN-01",
+    "BLOCK-ADMIN-02",
+    "BLOCK-ADMIN-03"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["balanced-product", "enterprise"],

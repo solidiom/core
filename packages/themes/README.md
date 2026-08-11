@@ -14,13 +14,13 @@ pnpm add @solidiom/themes
 
 ## Available themes
 
-| Theme | Description |
-|-------|-------------|
+| Theme              | Description                             |
+| ------------------ | --------------------------------------- |
 | `solidiom-default` | Neutral baseline with balanced contrast |
-| `ocean` | Cool blue palette with teal accents |
-| `forest` | Natural greens with warm earth tones |
-| `slate` | Muted grays with subtle blue undertones |
-| `aurora` | Vibrant purples and magentas |
+| `ocean`            | Cool blue palette with teal accents     |
+| `forest`           | Natural greens with warm earth tones    |
+| `slate`            | Muted grays with subtle blue undertones |
+| `aurora`           | Vibrant purples and magentas            |
 
 ## Usage
 

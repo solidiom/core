@@ -17,11 +17,11 @@ date: 2026-08-07
 
 ## Browsers Tested
 
-| Browser | Engine | Version | Source |
-|---------|--------|---------|--------|
+| Browser            | Engine           | Version       | Source                    |
+| ------------------ | ---------------- | ------------- | ------------------------- |
 | Chrome for Testing | Blink (Chromium) | 149.0.7827.55 | Playwright chromium v1228 |
-| Firefox | Gecko | 151.0 | Playwright firefox v1532 |
-| WebKit | WebKit | 26.5 | Playwright webkit v2311 |
+| Firefox            | Gecko            | 151.0         | Playwright firefox v1532  |
+| WebKit             | WebKit           | 26.5          | Playwright webkit v2311   |
 
 ## Test Suites Run
 
@@ -29,10 +29,10 @@ date: 2026-08-07
 
 Configuration: `vitest.browser.config.ts` — runs `packages/**/src/**/*.browser.{test,spec}.{ts,tsx}` across configured browser instances. Each test file is executed once per browser instance.
 
-| Browser | Test Files | Tests | Pass | Fail | Skip | Duration |
-|---------|-----------|-------|------|------|------|----------|
-| Chromium | 34 | 315 | 315 | 0 | 0 | ~5s |
-| Firefox | 34 | 315 | 315 | 0 | 0 | ~6s |
+| Browser  | Test Files | Tests | Pass | Fail | Skip | Duration |
+| -------- | ---------- | ----- | ---- | ---- | ---- | -------- |
+| Chromium | 34         | 315   | 315  | 0    | 0    | ~5s      |
+| Firefox  | 34         | 315   | 315  | 0    | 0    | ~6s      |
 
 **Total: 630 passed, 0 failures, 0 skips across 2 engines.**
 
@@ -40,17 +40,17 @@ Configuration: `vitest.browser.config.ts` — runs `packages/**/src/**/*.browser
 
 Configuration: `vitest.a11y.config.ts` — runs `tests/a11y/**/*.browser.{test,spec}.{ts,tsx}` in Chromium. Covers per-primitive axe scans.
 
-| Browser | Test Files | Tests | Pass | Fail | Skip |
-|---------|-----------|-------|------|------|------|
-| Chromium | 1 | 53 | 53 | 0 | 0 |
+| Browser  | Test Files | Tests | Pass | Fail | Skip |
+| -------- | ---------- | ----- | ---- | ---- | ---- |
+| Chromium | 1          | 53    | 53   | 0    | 0    |
 
 ### 3. Site E2E tests
 
 Configuration: `tests/e2e/playwright.config.ts` — runs Playwright E2E tests against the docs app at `localhost:5173`.
 
-| Browser | Tests | Pass | Fail | Skip | Duration |
-|---------|-------|------|------|------|----------|
-| Chromium | 6 | 6 | 0 | 0 | 3.6s |
+| Browser  | Tests | Pass | Fail | Skip | Duration |
+| -------- | ----- | ---- | ---- | ---- | -------- |
+| Chromium | 6     | 6    | 0    | 0    | 3.6s     |
 
 ## WebKit Result
 
@@ -68,59 +68,59 @@ This is an environment limitation, not a Solidiom code issue. The Playwright Web
 
 Each package's browser test file validates DOM structure, ARIA attributes, semantic data attributes, class forwarding, and console cleanliness (no REACTIVE_WRITE_IN_OWNED_SCOPE, STRICT_READ_UNTRACKED, or REACTIVITY_HALTED errors).
 
-| Package | Primitive | Components Tested |
-|---------|-----------|-------------------|
-| @solidiom/accordion | Accordion | Root, Trigger, Content, Item |
-| @solidiom/alert | Alert | Root, Title, Description, Icon |
-| @solidiom/alert-dialog | Alert Dialog | Root, Trigger, Title, Description, Action, Cancel, Overlay, Portal, Content |
-| @solidiom/avatar | Avatar | Root, Image, Fallback |
-| @solidiom/badge | Badge | Root |
-| @solidiom/breadcrumb | Breadcrumb | Root, List, Item, Link, Separator, Ellipsis |
-| @solidiom/button | Button | Root |
-| @solidiom/calendar | Calendar | Root, Cell, Grid, Head, Header, Next, Prev, Row, Title, Body |
-| @solidiom/carousel | Carousel | Root, Content, Item, Previous, Next, Button, Status |
-| @solidiom/checkbox | Checkbox | Root, Indicator |
-| @solidiom/collapsible | Collapsible | Root, Trigger, Content |
-| @solidiom/combobox | Combobox | Root, Trigger, Content, Input, Item, Separator, Empty, List, Arrow, Portal |
-| @solidiom/command | Command Palette | Root, Input, Item, List, Separator, Group, Empty, Dialog |
-| @solidiom/context-menu | Context Menu | Root, Trigger, Content, Item, Label, Separator, CheckboxItem, RadioItem, Group, Sub, SubContent, Portal |
-| @solidiom/data-table | Data Table | Root, Head, Header, Row, Body, Cell, Footer, Empty |
-| @solidiom/date-picker | Date Picker | Root, Trigger, Content, Portal |
-| @solidiom/dialog | Dialog | Root, Trigger, Title, Description, Close, Overlay, Portal, Content |
-| @solidiom/drawer | Drawer | Root, Trigger, Title, Description, Close, Overlay, Portal, Content |
-| @solidiom/empty-state | Empty State | Root, Title, Description, Action |
-| @solidiom/field | Field | Root, Label, Description, Message, Control |
-| @solidiom/hover-card | Hover Card | Root, Trigger, Content, Portal |
-| @solidiom/input | Input | Root |
-| @solidiom/input-otp | Input OTP | Root, Group, Slot, Separator, Controller |
-| @solidiom/kbd | Kbd | Root |
-| @solidiom/label | Label | Root |
-| @solidiom/listbox | Listbox | Root, Trigger, Content, Item, Group, Label, Separator, Empty, Portal |
-| @solidiom/menu | Menu | Root, Trigger, Content, Item, Label, Separator, CheckboxItem, RadioItem, Group, Sub, SubContent, Portal |
-| @solidiom/meter | Meter | Root, Value, Fill |
-| @solidiom/navigation-menu | Navigation Menu | Root, List, Item, Trigger, Content, Indicator, Viewport |
-| @solidiom/pagination | Pagination | Root, Item, Link, Content, PreviousButton, NextButton, Ellipsis |
-| @solidiom/popover | Popover | Root, Trigger, Content, Close, Portal |
-| @solidiom/progress | Progress | Root, Indicator |
-| @solidiom/radio-group | Radio Group | Root, Item, Indicator |
-| @solidiom/resizable | Resizable Panels | Root, Panel, Handle |
-| @solidiom/scroll-area | Scroll Area | Root, Viewport, Scrollbar, Thumb, Corner |
-| @solidiom/select | Select | Root, Trigger, Value, Content, Item, Group, Label, Separator, ScrollUpButton, ScrollDownButton, Portal |
-| @solidiom/separator | Separator | Root |
-| @solidiom/sheet | Sheet | Root, Trigger, Title, Description, Close, Overlay, Portal, Content |
-| @solidiom/skeleton | Skeleton | Root |
-| @solidiom/slider | Slider | Root, Track, Range, Thumb |
-| @solidiom/spinner | Spinner | Root |
-| @solidiom/switch | Switch | Root, Thumb |
-| @solidiom/tabs | Tabs | Root, List, Trigger, Content |
-| @solidiom/toast | Toast | Root, Title, Description, Action, Viewport |
-| @solidiom/toggle | Toggle | Root |
-| @solidiom/toggle-group | Toggle Group | Root, Item |
-| @solidiom/toolbar | Toolbar | Root, ToggleGroup, ToggleItem, Link, Button, Separator |
-| @solidiom/tooltip | Tooltip | Root, Trigger, Content, Arrow, Portal |
-| @solidiom/tree | Tree | Root, Item, Content, Icon, Indicator, Subitems |
-| @solidiom/virtual-list | Virtual List | Root, Item |
-| @solidiom/visually-hidden | Visually Hidden | Root |
+| Package                   | Primitive        | Components Tested                                                                                       |
+| ------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------- |
+| @solidiom/accordion       | Accordion        | Root, Trigger, Content, Item                                                                            |
+| @solidiom/alert           | Alert            | Root, Title, Description, Icon                                                                          |
+| @solidiom/alert-dialog    | Alert Dialog     | Root, Trigger, Title, Description, Action, Cancel, Overlay, Portal, Content                             |
+| @solidiom/avatar          | Avatar           | Root, Image, Fallback                                                                                   |
+| @solidiom/badge           | Badge            | Root                                                                                                    |
+| @solidiom/breadcrumb      | Breadcrumb       | Root, List, Item, Link, Separator, Ellipsis                                                             |
+| @solidiom/button          | Button           | Root                                                                                                    |
+| @solidiom/calendar        | Calendar         | Root, Cell, Grid, Head, Header, Next, Prev, Row, Title, Body                                            |
+| @solidiom/carousel        | Carousel         | Root, Content, Item, Previous, Next, Button, Status                                                     |
+| @solidiom/checkbox        | Checkbox         | Root, Indicator                                                                                         |
+| @solidiom/collapsible     | Collapsible      | Root, Trigger, Content                                                                                  |
+| @solidiom/combobox        | Combobox         | Root, Trigger, Content, Input, Item, Separator, Empty, List, Arrow, Portal                              |
+| @solidiom/command         | Command Palette  | Root, Input, Item, List, Separator, Group, Empty, Dialog                                                |
+| @solidiom/context-menu    | Context Menu     | Root, Trigger, Content, Item, Label, Separator, CheckboxItem, RadioItem, Group, Sub, SubContent, Portal |
+| @solidiom/data-table      | Data Table       | Root, Head, Header, Row, Body, Cell, Footer, Empty                                                      |
+| @solidiom/date-picker     | Date Picker      | Root, Trigger, Content, Portal                                                                          |
+| @solidiom/dialog          | Dialog           | Root, Trigger, Title, Description, Close, Overlay, Portal, Content                                      |
+| @solidiom/drawer          | Drawer           | Root, Trigger, Title, Description, Close, Overlay, Portal, Content                                      |
+| @solidiom/empty-state     | Empty State      | Root, Title, Description, Action                                                                        |
+| @solidiom/field           | Field            | Root, Label, Description, Message, Control                                                              |
+| @solidiom/hover-card      | Hover Card       | Root, Trigger, Content, Portal                                                                          |
+| @solidiom/input           | Input            | Root                                                                                                    |
+| @solidiom/input-otp       | Input OTP        | Root, Group, Slot, Separator, Controller                                                                |
+| @solidiom/kbd             | Kbd              | Root                                                                                                    |
+| @solidiom/label           | Label            | Root                                                                                                    |
+| @solidiom/listbox         | Listbox          | Root, Trigger, Content, Item, Group, Label, Separator, Empty, Portal                                    |
+| @solidiom/menu            | Menu             | Root, Trigger, Content, Item, Label, Separator, CheckboxItem, RadioItem, Group, Sub, SubContent, Portal |
+| @solidiom/meter           | Meter            | Root, Value, Fill                                                                                       |
+| @solidiom/navigation-menu | Navigation Menu  | Root, List, Item, Trigger, Content, Indicator, Viewport                                                 |
+| @solidiom/pagination      | Pagination       | Root, Item, Link, Content, PreviousButton, NextButton, Ellipsis                                         |
+| @solidiom/popover         | Popover          | Root, Trigger, Content, Close, Portal                                                                   |
+| @solidiom/progress        | Progress         | Root, Indicator                                                                                         |
+| @solidiom/radio-group     | Radio Group      | Root, Item, Indicator                                                                                   |
+| @solidiom/resizable       | Resizable Panels | Root, Panel, Handle                                                                                     |
+| @solidiom/scroll-area     | Scroll Area      | Root, Viewport, Scrollbar, Thumb, Corner                                                                |
+| @solidiom/select          | Select           | Root, Trigger, Value, Content, Item, Group, Label, Separator, ScrollUpButton, ScrollDownButton, Portal  |
+| @solidiom/separator       | Separator        | Root                                                                                                    |
+| @solidiom/sheet           | Sheet            | Root, Trigger, Title, Description, Close, Overlay, Portal, Content                                      |
+| @solidiom/skeleton        | Skeleton         | Root                                                                                                    |
+| @solidiom/slider          | Slider           | Root, Track, Range, Thumb                                                                               |
+| @solidiom/spinner         | Spinner          | Root                                                                                                    |
+| @solidiom/switch          | Switch           | Root, Thumb                                                                                             |
+| @solidiom/tabs            | Tabs             | Root, List, Trigger, Content                                                                            |
+| @solidiom/toast           | Toast            | Root, Title, Description, Action, Viewport                                                              |
+| @solidiom/toggle          | Toggle           | Root                                                                                                    |
+| @solidiom/toggle-group    | Toggle Group     | Root, Item                                                                                              |
+| @solidiom/toolbar         | Toolbar          | Root, ToggleGroup, ToggleItem, Link, Button, Separator                                                  |
+| @solidiom/tooltip         | Tooltip          | Root, Trigger, Content, Arrow, Portal                                                                   |
+| @solidiom/tree            | Tree             | Root, Item, Content, Icon, Indicator, Subitems                                                          |
+| @solidiom/virtual-list    | Virtual List     | Root, Item                                                                                              |
+| @solidiom/visually-hidden | Visually Hidden  | Root                                                                                                    |
 
 Additionally, `@solidiom/calendar`'s RangeCalendar component is covered by the same test suite.
 

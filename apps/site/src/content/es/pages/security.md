@@ -13,11 +13,11 @@ translationStatus: draft
 
 ## Versiones Soportadas
 
-| Versión | Soportada |
-|---------|-----------|
-| Último prerelease `next` | Sí |
-| Prerelease `next` anterior | Esfuerzo razonable |
-| Versiones estables (cuando estén disponibles) | Sí |
+| Versión                                       | Soportada          |
+| --------------------------------------------- | ------------------ |
+| Último prerelease `next`                      | Sí                 |
+| Prerelease `next` anterior                    | Esfuerzo razonable |
+| Versiones estables (cuando estén disponibles) | Sí                 |
 
 ## Reportar una Vulnerabilidad
 

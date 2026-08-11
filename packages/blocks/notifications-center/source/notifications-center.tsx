@@ -29,7 +29,10 @@ export function NotificationsCenter(props: NotificationsCenterProps): JSX.Elemen
   const currentError = () => props.error || localError()
 
   return (
-    <div class={["solidiom-block-notifications-center", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-notifications-center", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-notifications-center__restricted" role="alert">
           <p>{props.restrictedReason || "This feature is currently restricted."}</p>
@@ -50,9 +53,7 @@ export function NotificationsCenter(props: NotificationsCenterProps): JSX.Elemen
       </Show>
 
       <Show when={state() !== "restricted" && state() !== "loading"}>
-        <div class="solidiom-block-notifications-center__content">
-          {props.children}
-        </div>
+        <div class="solidiom-block-notifications-center__content">{props.children}</div>
       </Show>
     </div>
   )

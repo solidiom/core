@@ -35,11 +35,7 @@ import * as Calendar from "@solidiom/calendar"
       weeks.map((week, wi) => (
         <tr key={wi}>
           {week.map((day, di) =>
-            day > 0 ? (
-              <Calendar.Cell key={`${wi}-${di}`} day={day} />
-            ) : (
-              <td key={`${wi}-${di}`} />
-            )
+            day > 0 ? <Calendar.Cell key={`${wi}-${di}`} day={day} /> : <td key={`${wi}-${di}`} />,
           )}
         </tr>
       ))

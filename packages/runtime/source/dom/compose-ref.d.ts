@@ -6,7 +6,7 @@
  * Does not use `use:` directives or `forwardRef` abstractions.
  */
 /** A single ref callback or undefined. */
-export type Ref<T extends Element = Element> = ((el: T) => void) | undefined;
+export type Ref<T extends Element = Element> = ((el: T) => void) | undefined
 /**
  * Composes multiple ref callbacks into one.
  *
@@ -21,5 +21,5 @@ export type Ref<T extends Element = Element> = ((el: T) => void) | undefined;
  * <div ref={composed} />
  * ```
  */
-export declare function composeRef<T extends Element = Element>(...refs: Ref<T>[]): (el: T) => void;
+export declare function composeRef<T extends Element = Element>(...refs: Ref<T>[]): (el: T) => void
 //# sourceMappingURL=compose-ref.d.ts.map

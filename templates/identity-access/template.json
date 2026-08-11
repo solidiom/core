@@ -3,7 +3,14 @@
   "stack": "vite-solid-router",
   "description": "Identity and access management with user directory, role-based access control, and session monitoring.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AUTH-02", "BLOCK-AUTH-03", "BLOCK-SHELL-01", "BLOCK-ADMIN-01", "BLOCK-ADMIN-02"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-AUTH-02",
+    "BLOCK-AUTH-03",
+    "BLOCK-SHELL-01",
+    "BLOCK-ADMIN-01",
+    "BLOCK-ADMIN-02"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["enterprise"],

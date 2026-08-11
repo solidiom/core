@@ -2,7 +2,19 @@
 contentSchemaVersion: 1
 title: "Solidiom Beta 1"
 description: "Full catalog release: 52 primitives, 30 components, 36 blocks, 29 templates, and 4 theme presets — accessible by design, bilingual, and CLI-driven."
-keywords: [beta, release, changelog, primitives, components, blocks, templates, accessibility, CLI, cross-browser]
+keywords:
+  [
+    beta,
+    release,
+    changelog,
+    primitives,
+    components,
+    blocks,
+    templates,
+    accessibility,
+    CLI,
+    cross-browser,
+  ]
 locale: en
 maturity: beta
 product: "Solidiom"
@@ -93,13 +105,13 @@ The CLI adds the primitive, all recipe outputs, and theme compatibility to your 
 
 ### Available Commands
 
-| Command | Description |
-|---------|-------------|
-| `solidiom create <name>` | Scaffold a new project |
-| `solidiom add <primitive>` | Add a primitive to your workspace |
-| `solidiom registry verify` | Verify package integrity |
-| `solidiom theme list` | List available presets |
-| `solidiom theme apply <preset>` | Apply a theme preset |
+| Command                         | Description                       |
+| ------------------------------- | --------------------------------- |
+| `solidiom create <name>`        | Scaffold a new project            |
+| `solidiom add <primitive>`      | Add a primitive to your workspace |
+| `solidiom registry verify`      | Verify package integrity          |
+| `solidiom theme list`           | List available presets            |
+| `solidiom theme apply <preset>` | Apply a theme preset              |
 
 ## Known Limitations
 

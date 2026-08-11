@@ -14,9 +14,7 @@ export function PlanCard(props: PlanCardProps): JSX.Element {
   return (
     <Card.Root
       class={`relative flex flex-col rounded-lg border bg-white p-6 shadow-sm ${
-        props.highlighted
-          ? "border-indigo-600 ring-2 ring-indigo-600"
-          : "border-gray-200"
+        props.highlighted ? "border-indigo-600 ring-2 ring-indigo-600" : "border-gray-200"
       }`}
     >
       {props.highlighted && (

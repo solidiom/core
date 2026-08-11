@@ -43,7 +43,10 @@ export function AvatarExample(props: AvatarExampleProps) {
       <div class="avatar-example__stack">
         {copy().users.map((user) => (
           <Avatar.Root>
-            <Avatar.Image src={`/avatars/${user.name.toLowerCase().replace(" ", "-")}.jpg`} alt={`Photo of ${user.name}`} />
+            <Avatar.Image
+              src={`/avatars/${user.name.toLowerCase().replace(" ", "-")}.jpg`}
+              alt={`Photo of ${user.name}`}
+            />
             <Avatar.Fallback>{user.initials}</Avatar.Fallback>
           </Avatar.Root>
         ))}

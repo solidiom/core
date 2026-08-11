@@ -162,19 +162,14 @@ export function NewsletterForm(props: NewsletterFormProps): JSX.Element {
           </div>
 
           <Show when={state() === "error"}>
-            <div
-              id="newsletter-error"
-              class="newsletter__error"
-              role="alert"
-              aria-live="assertive"
-            >
+            <div id="newsletter-error" class="newsletter__error" role="alert" aria-live="assertive">
               <strong>{copy().errorTitle}</strong>
               <p>{errorDetail() || copy().errorMessage}</p>
             </div>
           </Show>
 
           {(() => {
-            const label = () => state() === "submitting" ? copy().submitting : copy().submitLabel
+            const label = () => (state() === "submitting" ? copy().submitting : copy().submitLabel)
             const isDisabled = () => state() === "submitting" || !consent() || !email()
             return (
               <button

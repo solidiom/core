@@ -18,19 +18,28 @@ const POSTMORTEMS: Postmortem[] = [
     id: "INC-2980",
     title: "Database connection pool exhaustion",
     severity: "critical",
-    rootCause: "Slow query from reporting service held connections for 30+ seconds, draining the pool",
+    rootCause:
+      "Slow query from reporting service held connections for 30+ seconds, draining the pool",
     duration: "2h 15m",
     resolved: "2024-03-14",
-    actionItems: ["Add query timeout to reporting service", "Increase connection pool monitoring", "Implement connection pool circuit breaker"],
+    actionItems: [
+      "Add query timeout to reporting service",
+      "Increase connection pool monitoring",
+      "Implement connection pool circuit breaker",
+    ],
   },
   {
     id: "INC-2965",
     title: "CDN misconfiguration caused cache bypass",
     severity: "high",
-    rootCause: "Cache control headers were removed during deployment, causing all requests to hit origin",
+    rootCause:
+      "Cache control headers were removed during deployment, causing all requests to hit origin",
     duration: "1h 45m",
     resolved: "2024-03-12",
-    actionItems: ["Add cache header validation to deployment pipeline", "Set up CDN cache hit rate alerts"],
+    actionItems: [
+      "Add cache header validation to deployment pipeline",
+      "Set up CDN cache hit rate alerts",
+    ],
   },
   {
     id: "INC-2940",
@@ -39,7 +48,11 @@ const POSTMORTEMS: Postmortem[] = [
     rootCause: "Event listener not cleaned up on worker restart, causing gradual memory growth",
     duration: "6h 30m",
     resolved: "2024-03-10",
-    actionItems: ["Fix event listener cleanup in worker lifecycle", "Add memory usage monitoring per worker", "Set up automatic worker restart on memory threshold"],
+    actionItems: [
+      "Fix event listener cleanup in worker lifecycle",
+      "Add memory usage monitoring per worker",
+      "Set up automatic worker restart on memory threshold",
+    ],
   },
   {
     id: "INC-2920",
@@ -48,7 +61,10 @@ const POSTMORTEMS: Postmortem[] = [
     rootCause: "Automated certificate renewal job failed due to DNS misconfiguration",
     duration: "3h 00m",
     resolved: "2024-03-08",
-    actionItems: ["Add DNS health check before cert renewal", "Implement certificate expiry alerts at 30/14/7 days"],
+    actionItems: [
+      "Add DNS health check before cert renewal",
+      "Implement certificate expiry alerts at 30/14/7 days",
+    ],
   },
   {
     id: "INC-2905",
@@ -57,7 +73,11 @@ const POSTMORTEMS: Postmortem[] = [
     rootCause: "Rate limiter configuration was reset during blue-green deployment rollback",
     duration: "45m",
     resolved: "2024-03-05",
-    actionItems: ["Persist rate limiter config across deployments", "Add rate limiter health check to deployment validation", "Implement auth endpoint anomaly detection"],
+    actionItems: [
+      "Persist rate limiter config across deployments",
+      "Add rate limiter health check to deployment validation",
+      "Implement auth endpoint anomaly detection",
+    ],
   },
 ]
 
@@ -68,16 +88,22 @@ export function Postmortems(): JSX.Element {
         <Breadcrumb.Root class="mb-2">
           <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Home
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/postmortems" current class="text-gray-900 font-medium">Postmortems</Breadcrumb.Link>
+              <Breadcrumb.Link href="/postmortems" current class="text-gray-900 font-medium">
+                Postmortems
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
         <h1 class="text-2xl font-bold text-gray-900">Postmortems</h1>
-        <p class="mt-1 text-sm text-gray-500">Resolved incidents with root cause analysis, timeline, and action items.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Resolved incidents with root cause analysis, timeline, and action items.
+        </p>
       </div>
 
       <div class="space-y-4">
@@ -98,11 +124,15 @@ export function Postmortems(): JSX.Element {
             </Card.Header>
             <Card.Content class="px-6 py-4">
               <div class="mb-4">
-                <h4 class="text-xs font-semibold uppercase tracking-wider text-gray-500">Root Cause</h4>
+                <h4 class="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  Root Cause
+                </h4>
                 <p class="mt-1 text-sm text-gray-700">{pm.rootCause}</p>
               </div>
               <div>
-                <h4 class="text-xs font-semibold uppercase tracking-wider text-gray-500">Action Items</h4>
+                <h4 class="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  Action Items
+                </h4>
                 <ul class="mt-2 space-y-1">
                   {pm.actionItems.map((item) => (
                     <li class="flex items-start gap-2 text-sm text-gray-700">

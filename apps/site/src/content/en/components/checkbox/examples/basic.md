@@ -42,10 +42,7 @@ export function ControlledCheckbox() {
   const [checked, setChecked] = createSignal(false)
 
   return (
-    <StyledCheckbox
-      checked={checked()}
-      onCheckedChange={(val) => setChecked(val === "checked")}
-    >
+    <StyledCheckbox checked={checked()} onCheckedChange={(val) => setChecked(val === "checked")}>
       <Checkbox.Box />
       <Checkbox.Label>Controlled checkbox</Checkbox.Label>
     </StyledCheckbox>

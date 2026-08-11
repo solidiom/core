@@ -25,16 +25,16 @@ date: 2026-08-08
 
 **Version target:** `v1.0.x`
 
-| Status | ID | Description | Notes |
-|--------|-----|-------------|-------|
-| [ ] | Task 69 | Solid 2 GA transition | Pin to stable solid-js, remove beta overrides, update solid-matrix.json |
-| [ ] | Task 70 | Stable v1 acceptance gate | Extend phase3-gate.ts with v1-specific checks (no prerelease deps, full docs, AT audit) |
-| [ ] | Task 71 | External accessibility audit and full AT records | Commission third-party WCAG 2.2 AA audit; record AT results for all 52 primitives |
-| [ ] | Task 72 | Release candidate hardening | Publish RC candidates, soak period, collect ecosystem feedback |
-| [ ] | Task 73 | v1 stable release | Final publish to npm `latest` tag, update site, announce |
-| [ ] | Task 74 | Compile-time optimizations GA | Graduate vite-plugin-solidiom transforms from opt-in to recommended defaults |
-| [ ] | Task 75 | Legacy sunset schedule | Document deprecated APIs, set removal timeline for v2 |
-| [ ] | Task 76 | v1.x maintenance policy | Define backport rules, security patch SLA, EOL timeline |
+| Status | ID      | Description                                      | Notes                                                                                   |
+| ------ | ------- | ------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| [ ]    | Task 69 | Solid 2 GA transition                            | Pin to stable solid-js, remove beta overrides, update solid-matrix.json                 |
+| [ ]    | Task 70 | Stable v1 acceptance gate                        | Extend phase3-gate.ts with v1-specific checks (no prerelease deps, full docs, AT audit) |
+| [ ]    | Task 71 | External accessibility audit and full AT records | Commission third-party WCAG 2.2 AA audit; record AT results for all 52 primitives       |
+| [ ]    | Task 72 | Release candidate hardening                      | Publish RC candidates, soak period, collect ecosystem feedback                          |
+| [ ]    | Task 73 | v1 stable release                                | Final publish to npm `latest` tag, update site, announce                                |
+| [ ]    | Task 74 | Compile-time optimizations GA                    | Graduate vite-plugin-solidiom transforms from opt-in to recommended defaults            |
+| [ ]    | Task 75 | Legacy sunset schedule                           | Document deprecated APIs, set removal timeline for v2                                   |
+| [ ]    | Task 76 | v1.x maintenance policy                          | Define backport rules, security patch SLA, EOL timeline                                 |
 
 ### Phase 4 Critical Path
 
@@ -66,10 +66,10 @@ Task 74 (compile-time GA) ──────────────────
 
 **Version target:** `v2.0.x`
 
-| Status | ID | Description | Notes |
-|--------|-----|-------------|-------|
-| [ ] | Task 77 | v2 strict enforcement | Remove deprecated APIs, enforce strict mode by default, breaking changes |
-| [ ] | Task 78 | v2 stable release | Publish v2 to npm, migration guide, announce |
+| Status | ID      | Description           | Notes                                                                    |
+| ------ | ------- | --------------------- | ------------------------------------------------------------------------ |
+| [ ]    | Task 77 | v2 strict enforcement | Remove deprecated APIs, enforce strict mode by default, breaking changes |
+| [ ]    | Task 78 | v2 stable release     | Publish v2 to npm, migration guide, announce                             |
 
 ### Phase 5 Scope
 
@@ -88,18 +88,19 @@ Task 74 (compile-time GA) ──────────────────
 
 ### 3.1 Curated Playground
 
-| Status | ID | Size | Description | Depends on |
-|--------|-----|------|-------------|------------|
-| [ ] | PLAY-001 | M | Threat model, sandbox, CSP, protocol, limits, prohibited imports | SITE-012 |
-| [ ] | PLAY-002 | L | Worker-based TSX/CSS compilation with pinned local deps | PLAY-001 |
-| [ ] | PLAY-003 | L | Sandboxed iframe runtime, reset, diagnostics, timeout, teardown | PLAY-001, PLAY-002 |
-| [ ] | PLAY-004 | M | Accessible editor/preview/output controls as route-local app | PLAY-002, SITE-004 |
-| [ ] | PLAY-005 | M | Curated canonical examples (state, form, overlay, composition) | CONTENT-005, PLAY-004 |
-| [ ] | PLAY-006 | S | Categorical analytics only; no source/error payload leakage | PLAY-003, GOV-004 |
-| [ ] | PLAY-007 | M | Browser, a11y, CSP, isolation, leak, and boundary tests | PLAY-001..006 |
-| [ ] | PLAY-008 | S | Static unsupported-browser fallback with source access | PLAY-004 |
+| Status | ID       | Size | Description                                                      | Depends on            |
+| ------ | -------- | ---- | ---------------------------------------------------------------- | --------------------- |
+| [ ]    | PLAY-001 | M    | Threat model, sandbox, CSP, protocol, limits, prohibited imports | SITE-012              |
+| [ ]    | PLAY-002 | L    | Worker-based TSX/CSS compilation with pinned local deps          | PLAY-001              |
+| [ ]    | PLAY-003 | L    | Sandboxed iframe runtime, reset, diagnostics, timeout, teardown  | PLAY-001, PLAY-002    |
+| [ ]    | PLAY-004 | M    | Accessible editor/preview/output controls as route-local app     | PLAY-002, SITE-004    |
+| [ ]    | PLAY-005 | M    | Curated canonical examples (state, form, overlay, composition)   | CONTENT-005, PLAY-004 |
+| [ ]    | PLAY-006 | S    | Categorical analytics only; no source/error payload leakage      | PLAY-003, GOV-004     |
+| [ ]    | PLAY-007 | M    | Browser, a11y, CSP, isolation, leak, and boundary tests          | PLAY-001..006         |
+| [ ]    | PLAY-008 | S    | Static unsupported-browser fallback with source access           | PLAY-004              |
 
 **Playground Critical Path:**
+
 ```text
 PLAY-001 (threat model) ─→ PLAY-002 (worker compiler) ─→ PLAY-003 (sandbox)
                                      │                           │
@@ -114,35 +115,35 @@ PLAY-001 (threat model) ─→ PLAY-002 (worker compiler) ─→ PLAY-003 (sandb
 
 ### 3.2 Marketing & Editorial
 
-| Status | ID | Size | Description | Depends on |
-|--------|-----|------|-------------|------------|
-| [ ] | MKT-001 | L | Responsive evidence-based homepage | G1, BRAND-004 |
-| [ ] | MKT-002 | M | Accurate layer landing/directory shells | REG-003, SITE-004 |
-| [ ] | MKT-003 | M | Core guide skeletons | CONTENT-002 |
-| [ ] | MKT-004 | M | Accessibility landing page from real evidence | A11Y-003 |
-| [ ] | MKT-006 | M | Technical Enterprise page (no sales/SLA claims) | GOV-002, REG-003 |
-| [ ] | MKT-007 | S | GitHub-only community/contributing pages | GOV-003 |
-| [ ] | MKT-008 | M | Article: Solid 2 architecture | CONTENT-002 |
-| [ ] | MKT-009 | M | Article: accessible interaction contracts | CONTENT-002 |
-| [ ] | MKT-010 | M | Article: source ownership | CONTENT-002 |
-| [ ] | MKT-011 | M | Article: styling-system neutrality | CONTENT-002 |
-| [ ] | MKT-012 | M | Article: building with Solidiom | CONTENT-002 |
-| [ ] | MKT-013 | S | Changelog/migration types, feeds, archives, metadata | CONTENT-002 |
+| Status | ID      | Size | Description                                          | Depends on        |
+| ------ | ------- | ---- | ---------------------------------------------------- | ----------------- |
+| [ ]    | MKT-001 | L    | Responsive evidence-based homepage                   | G1, BRAND-004     |
+| [ ]    | MKT-002 | M    | Accurate layer landing/directory shells              | REG-003, SITE-004 |
+| [ ]    | MKT-003 | M    | Core guide skeletons                                 | CONTENT-002       |
+| [ ]    | MKT-004 | M    | Accessibility landing page from real evidence        | A11Y-003          |
+| [ ]    | MKT-006 | M    | Technical Enterprise page (no sales/SLA claims)      | GOV-002, REG-003  |
+| [ ]    | MKT-007 | S    | GitHub-only community/contributing pages             | GOV-003           |
+| [ ]    | MKT-008 | M    | Article: Solid 2 architecture                        | CONTENT-002       |
+| [ ]    | MKT-009 | M    | Article: accessible interaction contracts            | CONTENT-002       |
+| [ ]    | MKT-010 | M    | Article: source ownership                            | CONTENT-002       |
+| [ ]    | MKT-011 | M    | Article: styling-system neutrality                   | CONTENT-002       |
+| [ ]    | MKT-012 | M    | Article: building with Solidiom                      | CONTENT-002       |
+| [ ]    | MKT-013 | S    | Changelog/migration types, feeds, archives, metadata | CONTENT-002       |
 
 ### 3.3 Analytics
 
-| Status | ID | Size | Description | Depends on |
-|--------|-----|------|-------------|------------|
-| [ ] | ANALYTICS-001 | M | Typed PostHog adapter; autocapture/replay disabled | GOV-004, SITE-004 |
-| [ ] | ANALYTICS-002 | S | Tests reject prohibited payload fields | ANALYTICS-001 |
-| [ ] | ANALYTICS-003 | S | Production provider configuration outside source | ANALYTICS-001 |
+| Status | ID            | Size | Description                                        | Depends on        |
+| ------ | ------------- | ---- | -------------------------------------------------- | ----------------- |
+| [ ]    | ANALYTICS-001 | M    | Typed PostHog adapter; autocapture/replay disabled | GOV-004, SITE-004 |
+| [ ]    | ANALYTICS-002 | S    | Tests reject prohibited payload fields             | ANALYTICS-001     |
+| [ ]    | ANALYTICS-003 | S    | Production provider configuration outside source   | ANALYTICS-001     |
 
 ### 3.4 Newsletter
 
-| Status | ID | Size | Description | Depends on |
-|--------|-----|------|-------------|------------|
-| [ ] | NEWS-001 | M | Consent-based bilingual Buttondown flow | GOV-005, SITE-006 |
-| [ ] | NEWS-002 | S | Keyboard, error, localization, privacy, endpoint tests | NEWS-001 |
+| Status | ID       | Size | Description                                            | Depends on        |
+| ------ | -------- | ---- | ------------------------------------------------------ | ----------------- |
+| [ ]    | NEWS-001 | M    | Consent-based bilingual Buttondown flow                | GOV-005, SITE-006 |
+| [ ]    | NEWS-002 | S    | Keyboard, error, localization, privacy, endpoint tests | NEWS-001          |
 
 ### M6 Exit Checklist
 
@@ -157,15 +158,15 @@ PLAY-001 (threat model) ─→ PLAY-002 (worker compiler) ─→ PLAY-003 (sandb
 
 ## 4. Summary
 
-| Area | Tasks | Status | Blocker |
-|------|:-----:|--------|---------|
-| Phase 4 (v1 stable) | 8 | Not started | Solid 2 GA upstream |
-| Phase 5 (v2) | 2 | Not started | Phase 4 |
-| M6 Playground | 8 | Not started | None |
-| M6 Marketing | 11 | Not started | None |
-| M6 Analytics | 3 | Not started | None |
-| M6 Newsletter | 2 | Not started | None |
-| **Total** | **34** | | |
+| Area                | Tasks  | Status      | Blocker             |
+| ------------------- | :----: | ----------- | ------------------- |
+| Phase 4 (v1 stable) |   8    | Not started | Solid 2 GA upstream |
+| Phase 5 (v2)        |   2    | Not started | Phase 4             |
+| M6 Playground       |   8    | Not started | None                |
+| M6 Marketing        |   11   | Not started | None                |
+| M6 Analytics        |   3    | Not started | None                |
+| M6 Newsletter       |   2    | Not started | None                |
+| **Total**           | **34** |             |                     |
 
 ---
 

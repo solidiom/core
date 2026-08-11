@@ -5,8 +5,9 @@ import { resolve } from "node:path"
 
 // Site commands run from apps/site; resolve workspace root from there.
 const workspaceCandidate = resolve(process.cwd(), "../..")
-const WORKSPACE_ROOT =
-  existsSync(resolve(workspaceCandidate, "packages/bench")) ? workspaceCandidate : process.cwd()
+const WORKSPACE_ROOT = existsSync(resolve(workspaceCandidate, "packages/bench"))
+  ? workspaceCandidate
+  : process.cwd()
 
 const BASELINE_PATH = resolve(WORKSPACE_ROOT, "packages/bench", "baselines", "initial.json")
 

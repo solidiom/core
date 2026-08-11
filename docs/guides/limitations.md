@@ -55,11 +55,11 @@ Safari 17.2+ is required. WebKit has known limitations on some systems:
 
 **Certified browsers:**
 
-| Engine | Browsers | Status |
-|--------|----------|--------|
-| Chromium | Chrome, Edge, Brave | Certified |
-| Gecko | Firefox | Certified |
-| WebKit | Safari 17.2+ | Limited — known issues on some systems |
+| Engine   | Browsers            | Status                                 |
+| -------- | ------------------- | -------------------------------------- |
+| Chromium | Chrome, Edge, Brave | Certified                              |
+| Gecko    | Firefox             | Certified                              |
+| WebKit   | Safari 17.2+        | Limited — known issues on some systems |
 
 **Target:** Full WebKit certification is tracked for a post-GA release.
 

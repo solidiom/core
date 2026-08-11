@@ -32,7 +32,6 @@ import * as Slider from "@solidiom/recipes-css"
 </Slider.Root>
 ```
 
-
 ## Instalación
 
 ```sh

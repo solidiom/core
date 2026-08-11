@@ -1,7 +1,7 @@
 /**
  * Meter status derivation logic — pure function, no JSX dependencies.
  */
-export type MeterStatus = "safe" | "caution" | "danger";
+export type MeterStatus = "safe" | "caution" | "danger"
 /**
  * Derives the meter status based on value relative to low/high/optimum thresholds.
  *
@@ -19,5 +19,10 @@ export type MeterStatus = "safe" | "caution" | "danger";
  *   - otherwise → caution
  * - If no thresholds are specified → safe
  */
-export declare function deriveMeterStatus(value: number, low?: number, high?: number, optimum?: number): MeterStatus;
+export declare function deriveMeterStatus(
+  value: number,
+  low?: number,
+  high?: number,
+  optimum?: number,
+): MeterStatus
 //# sourceMappingURL=derive-status.d.ts.map

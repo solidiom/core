@@ -35,9 +35,13 @@ export function IncidentCard(props: IncidentCardProps): JSX.Element {
               {responder.charAt(0)}
             </span>
           ))}
-          <span class="text-xs text-gray-500">{props.responders.length} responder{props.responders.length > 1 ? "s" : ""}</span>
+          <span class="text-xs text-gray-500">
+            {props.responders.length} responder{props.responders.length > 1 ? "s" : ""}
+          </span>
         </div>
-        <span class="text-xs text-gray-500">{props.updates} update{props.updates !== 1 ? "s" : ""}</span>
+        <span class="text-xs text-gray-500">
+          {props.updates} update{props.updates !== 1 ? "s" : ""}
+        </span>
       </div>
     </Card.Root>
   )

@@ -38,7 +38,6 @@ import * as Drawer from "@solidiom/recipes-css"
 </Drawer.Root>
 ```
 
-
 ## Instalación
 
 ```sh

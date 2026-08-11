@@ -210,9 +210,11 @@ describe("verifyRegistry (REG-006)", () => {
     // REGISTRY_PUBLIC_KEYS may contain embedded keys.  When none match the
     // test key the verifier reports "does not verify"; when the array is empty
     // it reports "no verification key".  Both are acceptable failures.
-    expect(result.violations.some(
-      (v) => v.includes("no verification key") || v.includes("does not verify"),
-    )).toBe(true)
+    expect(
+      result.violations.some(
+        (v) => v.includes("no verification key") || v.includes("does not verify"),
+      ),
+    ).toBe(true)
   })
 
   it("fails closed when signed with a key that is not in the trusted set (tamper)", async () => {

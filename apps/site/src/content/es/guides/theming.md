@@ -20,11 +20,11 @@ Solidiom's theme system uses CSS custom properties to control colors, typography
 
 Four presets ship out of the box:
 
-| Preset | Description | Modes |
-|--------|-------------|-------|
-| Ocean | Deep teal and cyan | Light + Dark |
-| Forest | Earthy greens | Light + Dark |
-| Slate | Neutral grays | Light + Dark |
+| Preset | Description             | Modes        |
+| ------ | ----------------------- | ------------ |
+| Ocean  | Deep teal and cyan      | Light + Dark |
+| Forest | Earthy greens           | Light + Dark |
+| Slate  | Neutral grays           | Light + Dark |
 | Aurora | Vibrant purple and pink | Light + Dark |
 
 ### Install a Preset

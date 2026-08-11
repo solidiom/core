@@ -40,10 +40,7 @@ const [fontSize, setFontSize] = createSignal("medium")
 
     <ContextMenu.Separator />
 
-    <ContextMenu.CheckboxItem
-      checked={showLineNumbers()}
-      onCheckedChange={setShowLineNumbers}
-    >
+    <ContextMenu.CheckboxItem checked={showLineNumbers()} onCheckedChange={setShowLineNumbers}>
       Show Line Numbers
     </ContextMenu.CheckboxItem>
 

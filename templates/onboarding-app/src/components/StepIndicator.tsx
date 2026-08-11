@@ -5,7 +5,7 @@ import * as Progress from "@solidiom/progress"
 const STEPS = ["Welcome", "Profile", "Project"]
 
 export function StepIndicator(props: { currentStep: number }): JSX.Element {
-  const progressValue = ((props.currentStep) / STEPS.length) * 100
+  const progressValue = (props.currentStep / STEPS.length) * 100
 
   return (
     <div class="mb-8">
@@ -33,8 +33,15 @@ export function StepIndicator(props: { currentStep: number }): JSX.Element {
           </div>
         ))}
       </div>
-      <Progress.Root value={progressValue} aria-label="Onboarding progress" class="h-2 w-full overflow-hidden rounded-full bg-gray-200">
-        <Progress.Indicator class="h-full rounded-full bg-indigo-600 transition-all" style={{ width: `${progressValue}%` }} />
+      <Progress.Root
+        value={progressValue}
+        aria-label="Onboarding progress"
+        class="h-2 w-full overflow-hidden rounded-full bg-gray-200"
+      >
+        <Progress.Indicator
+          class="h-full rounded-full bg-indigo-600 transition-all"
+          style={{ width: `${progressValue}%` }}
+        />
       </Progress.Root>
     </div>
   )

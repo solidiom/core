@@ -1,7 +1,12 @@
 import type { JSX } from "solid-js"
 import * as Card from "@solidiom/card"
 
-export function DangerZoneItem(props: { title: string; description: string; actionLabel: string; onConfirm: () => void }): JSX.Element {
+export function DangerZoneItem(props: {
+  title: string
+  description: string
+  actionLabel: string
+  onConfirm: () => void
+}): JSX.Element {
   return (
     <Card.Root class="rounded-lg border border-red-200 bg-red-50">
       <Card.Content class="px-4 py-4">

@@ -4,16 +4,47 @@ import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Input from "@solidiom/input"
 import * as Card from "@solidiom/card"
 
-const CATEGORIES = ["Getting Started", "Troubleshooting", "Account & Billing", "API", "Integrations"]
+const CATEGORIES = [
+  "Getting Started",
+  "Troubleshooting",
+  "Account & Billing",
+  "API",
+  "Integrations",
+]
 
 const ARTICLES = [
-  { title: "How to create a new account", category: "Getting Started", author: "Support Team", views: 1240 },
-  { title: "Resetting your password", category: "Account & Billing", author: "Alex Rivera", views: 890 },
+  {
+    title: "How to create a new account",
+    category: "Getting Started",
+    author: "Support Team",
+    views: 1240,
+  },
+  {
+    title: "Resetting your password",
+    category: "Account & Billing",
+    author: "Alex Rivera",
+    views: 890,
+  },
   { title: "Understanding API rate limits", category: "API", author: "Jordan Lee", views: 2100 },
-  { title: "Fixing common SSO errors", category: "Troubleshooting", author: "Morgan Chen", views: 560 },
+  {
+    title: "Fixing common SSO errors",
+    category: "Troubleshooting",
+    author: "Morgan Chen",
+    views: 560,
+  },
   { title: "Setting up webhooks", category: "Integrations", author: "Casey Kim", views: 780 },
-  { title: "Managing team permissions", category: "Getting Started", author: "Alex Rivera", views: 1560 },
-  { title: "Upgrading your subscription", category: "Account & Billing", author: "Support Team", views: 430 },
+  {
+    title: "Managing team permissions",
+    category: "Getting Started",
+    author: "Alex Rivera",
+    views: 1560,
+  },
+  {
+    title: "Upgrading your subscription",
+    category: "Account & Billing",
+    author: "Support Team",
+    views: 430,
+  },
   { title: "Using the REST API", category: "API", author: "Jordan Lee", views: 3200 },
 ]
 
@@ -37,7 +68,9 @@ export function KnowledgeBase(): JSX.Element {
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Knowledge Base</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Knowledge Base
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>

@@ -773,7 +773,6 @@
   flex-wrap: wrap;
 }
 
-
 /* ─── Button example ────────────────────────────────────────────────────── */
 
 .button-example {
@@ -807,7 +806,9 @@
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .button-example [data-scope="button"][data-part="root"]:hover {
@@ -819,7 +820,6 @@
   opacity: 0.6;
   cursor: wait;
 }
-
 
 .button-example [data-scope="button"][data-part="toggle-button"] {
   appearance: none;
@@ -835,7 +835,9 @@
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .button-example [data-scope="button"][data-part="toggle-button"][data-state="on"] {
@@ -863,7 +865,6 @@
   border-right-width: 1px;
 }
 
-
 /* ─── Checkbox example ──────────────────────────────────────────────────── */
 
 .checkbox-example {
@@ -889,7 +890,9 @@
   border-radius: 0.25rem;
   background: var(--color-surface);
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .checkbox-example [data-scope="checkbox"][data-part="root"][data-state="checked"] {
@@ -908,7 +911,6 @@
   color: var(--color-foreground-muted);
   font-size: 0.875rem;
 }
-
 
 /* ─── Combobox example ──────────────────────────────────────────────────── */
 
@@ -956,7 +958,6 @@
   box-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--color-foreground) 10%, transparent);
 }
 
-
 .combobox-example [data-scope="combobox"][data-part="item"] {
   display: flex;
   align-items: center;
@@ -974,7 +975,6 @@
   font-weight: 600;
   color: var(--sol-primary, #6d9fff);
 }
-
 
 /* ─── Data Table example ────────────────────────────────────────────────── */
 
@@ -1030,7 +1030,6 @@
   color: var(--color-foreground);
 }
 
-
 /* ─── Menu example ──────────────────────────────────────────────────────── */
 
 .menu-example {
@@ -1082,7 +1081,6 @@
 .menu-example [data-scope="menu"][data-part="item"][data-highlighted] {
   background: var(--color-surface-raised);
 }
-
 
 /* ─── Navigation Menu example ───────────────────────────────────────────── */
 
@@ -1139,7 +1137,6 @@
   box-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--color-foreground) 10%, transparent);
 }
 
-
 .navigation-menu-example [data-scope="navigation-menu"][data-part="link"] {
   display: block;
   padding: 0.5rem 0.75rem;
@@ -1152,7 +1149,6 @@
 .navigation-menu-example [data-scope="navigation-menu"][data-part="link"]:hover {
   background: var(--color-surface-raised);
 }
-
 
 /* ─── Pagination example ────────────────────────────────────────────────── */
 
@@ -1219,7 +1215,6 @@
   cursor: pointer;
 }
 
-
 .pagination-example [data-scope="pagination"][data-part="item"] button:hover {
   background: var(--color-surface-raised);
 }
@@ -1230,7 +1225,6 @@
   color: #fff;
   font-weight: 700;
 }
-
 
 /* ─── Popover example ───────────────────────────────────────────────────── */
 
@@ -1290,7 +1284,6 @@
   cursor: pointer;
 }
 
-
 /* ─── Radio Group example ───────────────────────────────────────────────── */
 
 .radio-group-example {
@@ -1328,11 +1321,15 @@
   transition: border-color 0.15s ease;
 }
 
-.radio-group-example [data-scope="radio-group"][data-part="item"][data-state="checked"] [data-part="indicator"] {
+.radio-group-example
+  [data-scope="radio-group"][data-part="item"][data-state="checked"]
+  [data-part="indicator"] {
   border-color: var(--sol-primary, #6d9fff);
 }
 
-.radio-group-example [data-scope="radio-group"][data-part="item"][data-state="checked"] [data-part="indicator"]::after {
+.radio-group-example
+  [data-scope="radio-group"][data-part="item"][data-state="checked"]
+  [data-part="indicator"]::after {
   content: "";
   display: block;
   width: 0.5rem;
@@ -1340,7 +1337,6 @@
   border-radius: 50%;
   background: var(--sol-primary, #6d9fff);
 }
-
 
 /* ─── Select example ────────────────────────────────────────────────────── */
 
@@ -1405,7 +1401,6 @@
   font-weight: 600;
   color: var(--sol-primary, #6d9fff);
 }
-
 
 /* ─── Sheet example ─────────────────────────────────────────────────────── */
 
@@ -1479,7 +1474,6 @@
   cursor: pointer;
 }
 
-
 /* ─── Switch example ────────────────────────────────────────────────────── */
 
 .switch-example {
@@ -1511,7 +1505,9 @@
   border: 2px solid var(--color-border);
   border-radius: 9999px;
   background: var(--color-surface);
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .switch-example [data-scope="switch"][data-part="thumb"]::after {
@@ -1522,7 +1518,9 @@
   border-radius: 50%;
   background: var(--color-foreground-muted);
   transform: translateX(0.125rem);
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
 .switch-example [data-scope="switch"][data-part="root"][data-state="checked"] [data-part="thumb"] {
@@ -1530,11 +1528,12 @@
   border-color: var(--sol-primary, #6d9fff);
 }
 
-.switch-example [data-scope="switch"][data-part="root"][data-state="checked"] [data-part="thumb"]::after {
+.switch-example
+  [data-scope="switch"][data-part="root"][data-state="checked"]
+  [data-part="thumb"]::after {
   background: #fff;
   transform: translateX(1.375rem);
 }
-
 
 /* ─── Tabs example ──────────────────────────────────────────────────────── */
 
@@ -1568,7 +1567,9 @@
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .tabs-example [data-scope="tabs"][data-part="trigger"]:hover {
@@ -1586,7 +1587,6 @@
   color: var(--color-foreground-muted);
   line-height: 1.6;
 }
-
 
 /* ─── Prose example ─────────────────────────────────────────────────────── */
 
@@ -1666,7 +1666,6 @@
   color: var(--color-foreground);
 }
 
-
 /* ─── Typeset example ───────────────────────────────────────────────────── */
 
 .typeset-example {
@@ -1719,7 +1718,6 @@
   color: var(--color-foreground-muted);
 }
 
-
 /* ─── Alert example ───────────────────────────────────────────────────────── */
 
 .alert-example {
@@ -1770,7 +1768,6 @@
   color: var(--color-foreground-muted);
 }
 
-
 /* ─── Avatar example ──────────────────────────────────────────────────────── */
 
 .avatar-example {
@@ -1811,7 +1808,6 @@
   object-fit: cover;
 }
 
-
 /* ─── Badge example ───────────────────────────────────────────────────────── */
 
 .badge-example {
@@ -1842,7 +1838,6 @@
   line-height: 1.5;
   white-space: nowrap;
 }
-
 
 /* ─── Breadcrumb example ──────────────────────────────────────────────────── */
 
@@ -1893,7 +1888,6 @@
   font-size: 0.75rem;
   user-select: none;
 }
-
 
 /* ─── Card example ────────────────────────────────────────────────────────── */
 
@@ -1947,7 +1941,6 @@
   color: var(--sol-primary, #6d9fff);
 }
 
-
 /* ─── Separator example ───────────────────────────────────────────────────── */
 
 .separator-example {
@@ -1974,7 +1967,6 @@
   height: auto;
   min-height: 3rem;
 }
-
 
 /* ─── Kbd example ─────────────────────────────────────────────────────────── */
 
@@ -2017,7 +2009,6 @@
   font-size: 0.8125rem;
   color: var(--color-foreground-muted);
 }
-
 
 /* ─── Visually Hidden example ─────────────────────────────────────────────── */
 
@@ -2125,7 +2116,9 @@
   font-size: 0.875rem;
   line-height: 1.5;
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .input-example [data-scope="input"][data-part="root"]:focus-visible {
@@ -2141,7 +2134,6 @@
 .input-example [data-scope="input"][data-part="root"][data-invalid] {
   border-color: var(--sol-destructive, #ef4444);
 }
-
 
 /* ─── Spinner example ───────────────────────────────────────────────────────── */
 
@@ -2178,7 +2170,6 @@
   }
 }
 
-
 /* ─── Skeleton example ──────────────────────────────────────────────────────── */
 
 .skeleton-example {
@@ -2212,14 +2203,14 @@
 }
 
 @keyframes skeleton-example-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
     opacity: 0.4;
   }
 }
-
 
 /* ─── Label example ─────────────────────────────────────────────────────────── */
 
@@ -2257,7 +2248,6 @@
   opacity: 0.5;
 }
 
-
 /* ─── Toggle example ────────────────────────────────────────────────────────── */
 
 .toggle-example {
@@ -2288,7 +2278,9 @@
   font-size: 0.8125rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .toggle-example [data-scope="toggle"][data-part="root"]:hover {
@@ -2304,7 +2296,6 @@
   outline: 2px solid var(--focus-ring);
   outline-offset: -2px;
 }
-
 
 /* ─── Tooltip example ───────────────────────────────────────────────────────── */
 
@@ -2350,7 +2341,6 @@
   pointer-events: none;
 }
 
-
 /* ─── Progress example ──────────────────────────────────────────────────────── */
 
 .progress-example {
@@ -2386,12 +2376,16 @@
   transition: width 0.3s ease;
 }
 
-.progress-example [data-scope="progress"][data-part="root"][data-state="loading"] [data-part="indicator"] {
+.progress-example
+  [data-scope="progress"][data-part="root"][data-state="loading"]
+  [data-part="indicator"] {
   width: 30%;
   animation: progress-example-indefinite 1.5s ease-in-out infinite;
 }
 
-.progress-example [data-scope="progress"][data-part="root"][data-state="complete"] [data-part="indicator"] {
+.progress-example
+  [data-scope="progress"][data-part="root"][data-state="complete"]
+  [data-part="indicator"] {
   width: 100%;
 }
 
@@ -2408,7 +2402,6 @@
     width: 30%;
   }
 }
-
 
 /* ─── Meter example ─────────────────────────────────────────────────────────── */
 
@@ -2443,18 +2436,20 @@
   background: var(--color-surface);
 }
 
-.meter-example [data-scope="meter"][data-part="root"][data-status="safe"]::-webkit-meter-optimum-value {
+.meter-example
+  [data-scope="meter"][data-part="root"][data-status="safe"]::-webkit-meter-optimum-value {
   background: var(--sol-success, #22c55e);
 }
 
-.meter-example [data-scope="meter"][data-part="root"][data-status="caution"]::-webkit-meter-optimum-value {
+.meter-example
+  [data-scope="meter"][data-part="root"][data-status="caution"]::-webkit-meter-optimum-value {
   background: var(--sol-warning, #f59e0b);
 }
 
-.meter-example [data-scope="meter"][data-part="root"][data-status="danger"]::-webkit-meter-optimum-value {
+.meter-example
+  [data-scope="meter"][data-part="root"][data-status="danger"]::-webkit-meter-optimum-value {
   background: var(--sol-destructive, #ef4444);
 }
-
 
 /* ─── Empty State example ───────────────────────────────────────────────────── */
 
@@ -2550,7 +2545,6 @@
   color: var(--color-foreground-muted);
 }
 
-
 /* ─── Slider example ────────────────────────────────────────────────────────── */
 
 .slider-example {
@@ -2610,7 +2604,6 @@
   outline-offset: 2px;
 }
 
-
 /* ─── Toggle Group example ──────────────────────────────────────────────────── */
 
 .toggle-group-example {
@@ -2641,7 +2634,9 @@
   font-size: 0.8125rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .toggle-group-example [data-scope="toggle-group"][data-part="item"]:hover {
@@ -2652,7 +2647,6 @@
   background: color-mix(in srgb, var(--sol-primary, #6d9fff) 12%, transparent);
   color: var(--sol-primary, #6d9fff);
 }
-
 
 /* ─── Toolbar example ───────────────────────────────────────────────────────── */
 
@@ -2721,7 +2715,6 @@
   color: var(--sol-primary, #6d9fff);
 }
 
-
 /* ─── Field example ─────────────────────────────────────────────────────────── */
 
 .field-example {
@@ -2771,7 +2764,6 @@
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--focus-ring) 30%, transparent);
 }
 
-
 /* ─── Scroll Area example ───────────────────────────────────────────────────── */
 
 .scroll-area-example {
@@ -2817,7 +2809,6 @@
   background: rgba(128, 128, 128, 0.3);
 }
 
-
 /* ─── Resizable Panels example ──────────────────────────────────────────────── */
 
 .resizable-panels-example {
@@ -2857,7 +2848,6 @@
 .resizable-panels-example [data-scope="resizable-panels"][data-part="handle"]:hover {
   background: var(--sol-primary, #6d9fff);
 }
-
 
 /* ─── Toast example ─────────────────────────────────────────────────────────── */
 
@@ -2928,7 +2918,6 @@
   font-size: 0.75rem;
 }
 
-
 /* ─── Hover Card example ────────────────────────────────────────────────────── */
 
 .hover-card-example {
@@ -2971,7 +2960,6 @@
   line-height: 1.4;
 }
 
-
 /* ─── Listbox example ───────────────────────────────────────────────────────── */
 
 .listbox-example {
@@ -3010,7 +2998,6 @@
 .listbox-example [data-scope="listbox"][data-part="item"][data-state="checked"] {
   font-weight: 600;
 }
-
 
 /* ─── Input OTP example ─────────────────────────────────────────────────────── */
 
@@ -3123,7 +3110,6 @@
   cursor: pointer;
 }
 
-
 /* ─── Context Menu example ──────────────────────────────────────────────────── */
 
 .context-menu-example {
@@ -3167,7 +3153,6 @@
   margin: 0.25rem 0;
   background: var(--color-border);
 }
-
 
 /* ─── Drawer example ────────────────────────────────────────────────────────── */
 
@@ -3226,7 +3211,6 @@
   font-size: 0.8125rem;
   cursor: pointer;
 }
-
 
 /* ─── Command Palette example ───────────────────────────────────────────────── */
 
@@ -3288,7 +3272,6 @@
   background: color-mix(in srgb, var(--sol-primary, #6d9fff) 12%, transparent);
 }
 
-
 /* ─── Tree example ──────────────────────────────────────────────────────────── */
 
 .tree-example {
@@ -3337,7 +3320,6 @@
   text-align: center;
 }
 
-
 /* ─── Virtual List example ──────────────────────────────────────────────────── */
 
 .virtual-list-example {
@@ -3362,7 +3344,6 @@
   font-size: 0.8125rem;
   color: var(--color-foreground-muted);
 }
-
 
 /* ─── Calendar example ──────────────────────────────────────────────────────── */
 
@@ -3434,7 +3415,6 @@
   border: 1px solid var(--sol-primary, #6d9fff);
 }
 
-
 /* ─── Date Picker example ───────────────────────────────────────────────────── */
 
 .date-picker-example {
@@ -3488,7 +3468,6 @@
   background: var(--color-surface);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
 
 /* ─── Carousel example ──────────────────────────────────────────────────────── */
 

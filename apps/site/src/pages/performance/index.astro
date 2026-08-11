@@ -2,11 +2,7 @@
 import { getEntry, render } from "astro:content"
 import DocsLayout from "../../layouts/DocsLayout.astro"
 import { getBenchBaseline } from "../../lib/bench-data"
-import {
-  tocFromHeadings,
-  type DocsTocEntry,
-  type DocsSidebarGroup,
-} from "../../lib/docs-nav"
+import { tocFromHeadings, type DocsTocEntry, type DocsSidebarGroup } from "../../lib/docs-nav"
 import { type Locale } from "../../lib/locale"
 
 const locale: Locale = "en"
@@ -15,7 +11,7 @@ if (!entry) throw new Error(`Missing content: ${locale}/pages/performance`)
 const rendered = await render(entry)
 const { Content } = rendered
 const toc: DocsTocEntry[] = tocFromHeadings(
-  rendered.headings as Array<{ depth: number; slug: string; text: string }> ?? [],
+  (rendered.headings as Array<{ depth: number; slug: string; text: string }>) ?? [],
 )
 
 const baseline = getBenchBaseline()
@@ -62,106 +58,119 @@ const sidebarGroups: DocsSidebarGroup[] = [
   <section class="perf-section" aria-label={copy.throughputSection}>
     <h2>{copy.throughputSection}</h2>
     <p>{copy.throughputDesc}</p>
-    {baseline && baseline.throughput.length > 0 ? (
-      <table class="perf-table">
-        <thead>
-          <tr>
-            <th scope="col">{copy.nameCol}</th>
-            <th scope="col">{copy.opsCol}</th>
-            <th scope="col">{copy.avgNsCol}</th>
-            <th scope="col">{copy.samplesCol}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {baseline.throughput.map((r) => (
+    {
+      baseline && baseline.throughput.length > 0 ? (
+        <table class="perf-table">
+          <thead>
             <tr>
-              <td>{r.name}</td>
-              <td>{r.opsPerSecond.toLocaleString()}</td>
-              <td>{r.avgNs.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
-              <td>{r.samples.toLocaleString()}</td>
+              <th scope="col">{copy.nameCol}</th>
+              <th scope="col">{copy.opsCol}</th>
+              <th scope="col">{copy.avgNsCol}</th>
+              <th scope="col">{copy.samplesCol}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    ) : null}
+          </thead>
+          <tbody>
+            {baseline.throughput.map((r) => (
+              <tr>
+                <td>{r.name}</td>
+                <td>{r.opsPerSecond.toLocaleString()}</td>
+                <td>{r.avgNs.toLocaleString(undefined, { maximumFractionDigits: 2 })}</td>
+                <td>{r.samples.toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null
+    }
   </section>
 
   <section class="perf-section" aria-label={copy.bundleSection}>
     <h2>{copy.bundleSection}</h2>
     <p>{copy.bundleDesc}</p>
-    {baseline && baseline.bundle.length > 0 ? (
-      <table class="perf-table">
-        <thead>
-          <tr>
-            <th scope="col">{copy.nameCol}</th>
-            <th scope="col">{copy.sizeCol}</th>
-            <th scope="col">{copy.limitCol}</th>
-            <th scope="col">{copy.statusCol}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {baseline.bundle.map((r) => (
+    {
+      baseline && baseline.bundle.length > 0 ? (
+        <table class="perf-table">
+          <thead>
             <tr>
-              <td>{r.name}</td>
-              <td>{formatBytes(r.gzipBytes)}</td>
-              <td>{formatBytes(r.limitBytes)}</td>
-              <td>
-                <span class={`perf-badge perf-badge--${r.passed ? "pass" : "fail"}`}>
-                  {r.passed ? copy.passed : copy.failed}
-                </span>
-              </td>
+              <th scope="col">{copy.nameCol}</th>
+              <th scope="col">{copy.sizeCol}</th>
+              <th scope="col">{copy.limitCol}</th>
+              <th scope="col">{copy.statusCol}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    ) : null}
+          </thead>
+          <tbody>
+            {baseline.bundle.map((r) => (
+              <tr>
+                <td>{r.name}</td>
+                <td>{formatBytes(r.gzipBytes)}</td>
+                <td>{formatBytes(r.limitBytes)}</td>
+                <td>
+                  <span class={`perf-badge perf-badge--${r.passed ? "pass" : "fail"}`}>
+                    {r.passed ? copy.passed : copy.failed}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null
+    }
   </section>
 
   <section class="perf-section" aria-label={copy.interactionSection}>
     <h2>{copy.interactionSection}</h2>
     <p>{copy.interactionDesc}</p>
-    {baseline && baseline.interaction.length > 0 ? (
-      <table class="perf-table">
-        <thead>
-          <tr>
-            <th scope="col">{copy.nameCol}</th>
-            <th scope="col">{copy.metricsCol}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {baseline.interaction.map((r) => (
+    {
+      baseline && baseline.interaction.length > 0 ? (
+        <table class="perf-table">
+          <thead>
             <tr>
-              <td>{r.name}</td>
-              <td>
-                {Object.entries(r.metrics).map(([k, v]) => `${k}: ${v}`).join(", ")}
-              </td>
+              <th scope="col">{copy.nameCol}</th>
+              <th scope="col">{copy.metricsCol}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    ) : null}
+          </thead>
+          <tbody>
+            {baseline.interaction.map((r) => (
+              <tr>
+                <td>{r.name}</td>
+                <td>
+                  {Object.entries(r.metrics)
+                    .map(([k, v]) => `${k}: ${v}`)
+                    .join(", ")}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null
+    }
   </section>
 
-  {!baseline ||
+  {
+    !baseline ||
     (baseline.throughput.length === 0 &&
       baseline.bundle.length === 0 &&
       baseline.interaction.length === 0) ? (
-    <div class="perf-empty" role="status">
-      <p>{copy.noData}</p>
-    </div>
-  ) : null}
+      <div class="perf-empty" role="status">
+        <p>{copy.noData}</p>
+      </div>
+    ) : null
+  }
 
-  {baseline && (
-    <footer class="perf-page__footer">
-      <time datetime={baseline.generatedAt}>
-        {copy.lastUpdated}: {new Date(baseline.generatedAt).toLocaleDateString(locale, {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-      </time>
-    </footer>
-  )}
+  {
+    baseline && (
+      <footer class="perf-page__footer">
+        <time datetime={baseline.generatedAt}>
+          {copy.lastUpdated}:{" "}
+          {new Date(baseline.generatedAt).toLocaleDateString(locale, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+      </footer>
+    )
+  }
 </DocsLayout>
 
 {

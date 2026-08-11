@@ -35,7 +35,6 @@ import * as AlertDialog from "@solidiom/recipes-css"
 </AlertDialog.Root>
 ```
 
-
 ## Instalación
 
 ```sh

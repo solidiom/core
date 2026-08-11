@@ -78,9 +78,10 @@ export function Teams(): JSX.Element {
   const [inviteEmail, setInviteEmail] = createSignal("")
 
   const filtered = () =>
-    TEAMS.filter((t) =>
-      t.name.toLowerCase().includes(search().toLowerCase()) ||
-      t.slug.toLowerCase().includes(search().toLowerCase()),
+    TEAMS.filter(
+      (t) =>
+        t.name.toLowerCase().includes(search().toLowerCase()) ||
+        t.slug.toLowerCase().includes(search().toLowerCase()),
     )
 
   return (
@@ -90,16 +91,22 @@ export function Teams(): JSX.Element {
           <Breadcrumb.Root class="mb-2">
             <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                  Home
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
               <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">Teams</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">
+                  Teams
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
             </Breadcrumb.List>
           </Breadcrumb.Root>
           <h1 class="text-2xl font-bold text-gray-900">Teams</h1>
-          <p class="mt-1 text-sm text-gray-500">Manage your organization's teams, members, and permissions.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Manage your organization's teams, members, and permissions.
+          </p>
         </div>
         <Dialog.Root open={open} onOpenChange={setOpen}>
           <Dialog.Trigger>
@@ -110,7 +117,9 @@ export function Teams(): JSX.Element {
           <Dialog.Portal>
             <Dialog.Backdrop class="fixed inset-0 bg-black/40" />
             <Dialog.Content class="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-xl">
-              <Dialog.Title class="text-lg font-semibold text-gray-900">Invite Team Member</Dialog.Title>
+              <Dialog.Title class="text-lg font-semibold text-gray-900">
+                Invite Team Member
+              </Dialog.Title>
               <Dialog.Description class="mt-1 text-sm text-gray-500">
                 Send an invitation to join your organization.
               </Dialog.Description>
@@ -144,7 +153,8 @@ export function Teams(): JSX.Element {
       <Alert.Root type="info" class="rounded-md border border-blue-200 bg-blue-50 p-4">
         <Alert.Title class="text-sm font-medium text-blue-800">Team Management</Alert.Title>
         <Alert.Description class="mt-1 text-sm text-blue-700">
-          You have {TEAMS.length} teams with {TEAMS.reduce((s, t) => s + t.members.length, 0)} total members. Invite new members to grow your teams.
+          You have {TEAMS.length} teams with {TEAMS.reduce((s, t) => s + t.members.length, 0)} total
+          members. Invite new members to grow your teams.
         </Alert.Description>
       </Alert.Root>
 
@@ -165,7 +175,9 @@ export function Teams(): JSX.Element {
               <div class="flex items-center justify-between">
                 <div>
                   <Card.Title class="text-base font-semibold text-gray-900">{team.name}</Card.Title>
-                  <p class="mt-0.5 text-xs text-gray-500">/{team.slug} · Created {team.created}</p>
+                  <p class="mt-0.5 text-xs text-gray-500">
+                    /{team.slug} · Created {team.created}
+                  </p>
                 </div>
                 <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
                   {team.members.length} members

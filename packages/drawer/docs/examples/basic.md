@@ -31,9 +31,7 @@ import * as Drawer from "@solidiom/drawer"
     <Drawer.Close aria-label="Close drawer">✕</Drawer.Close>
 
     <Drawer.Title>Edit Profile</Drawer.Title>
-    <Drawer.Description>
-      Make changes to your profile here.
-    </Drawer.Description>
+    <Drawer.Description>Make changes to your profile here.</Drawer.Description>
 
     <div style={{ padding: 16 }}>
       <p>Drawer content goes here.</p>

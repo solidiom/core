@@ -10,11 +10,16 @@ export function TicketCard(props: {
 }): JSX.Element {
   const priorityColor = () => {
     switch (props.priority) {
-      case "critical": return "text-red-700 bg-red-100"
-      case "high": return "text-orange-700 bg-orange-100"
-      case "medium": return "text-yellow-700 bg-yellow-100"
-      case "low": return "text-gray-700 bg-gray-100"
-      default: return "text-gray-700 bg-gray-100"
+      case "critical":
+        return "text-red-700 bg-red-100"
+      case "high":
+        return "text-orange-700 bg-orange-100"
+      case "medium":
+        return "text-yellow-700 bg-yellow-100"
+      case "low":
+        return "text-gray-700 bg-gray-100"
+      default:
+        return "text-gray-700 bg-gray-100"
     }
   }
 
@@ -29,7 +34,9 @@ export function TicketCard(props: {
           <div>Assignee: {props.assignee}</div>
           <div class="flex items-center gap-2">
             <span class="font-medium">Priority:</span>
-            <span class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${priorityColor()}`}>
+            <span
+              class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${priorityColor()}`}
+            >
               {props.priority}
             </span>
           </div>

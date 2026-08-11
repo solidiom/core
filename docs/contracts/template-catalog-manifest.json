@@ -7,12 +7,30 @@
   "taskRef": "docs/plans/website-tasks.md section 9.4 TPL-000",
   "stacks": [
     { "id": "solid-start", "label": "SolidStart", "runtime": "ssr", "router": "file-based" },
-    { "id": "tanstack-start-solid", "label": "TanStack Start (Solid)", "runtime": "ssr", "router": "file-based" },
-    { "id": "vite-solid-router", "label": "Vite + Solid Router", "runtime": "spa", "router": "config-based" }
+    {
+      "id": "tanstack-start-solid",
+      "label": "TanStack Start (Solid)",
+      "runtime": "ssr",
+      "router": "file-based"
+    },
+    {
+      "id": "vite-solid-router",
+      "label": "Vite + Solid Router",
+      "runtime": "spa",
+      "router": "config-based"
+    }
   ],
   "portfolios": [
-    { "id": "balanced", "label": "Balanced", "description": "Full-stack templates for common SaaS patterns." },
-    { "id": "enterprise", "label": "Enterprise", "description": "Templates for compliance, security, and multi-tenant operations." }
+    {
+      "id": "balanced",
+      "label": "Balanced",
+      "description": "Full-stack templates for common SaaS patterns."
+    },
+    {
+      "id": "enterprise",
+      "label": "Enterprise",
+      "description": "Templates for compliance, security, and multi-tenant operations."
+    }
   ],
   "templates": [
     {
@@ -34,7 +52,13 @@
       "portfolios": ["balanced"],
       "deploymentTarget": "edge",
       "authModel": "session",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ONBOARD-01", "BLOCK-ONBOARD-02", "BLOCK-ONBOARD-03", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-ONBOARD-01",
+        "BLOCK-ONBOARD-02",
+        "BLOCK-ONBOARD-03",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["onboarding", "wizard"]
     },
     {
@@ -45,7 +69,14 @@
       "portfolios": ["balanced"],
       "deploymentTarget": "edge",
       "authModel": "session",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-SHELL-02", "BLOCK-OBS-01", "BLOCK-SETTINGS-01", "BLOCK-BILLING-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-02",
+        "BLOCK-OBS-01",
+        "BLOCK-SETTINGS-01",
+        "BLOCK-BILLING-01"
+      ],
       "tags": ["dashboard", "saas"]
     },
     {
@@ -56,7 +87,14 @@
       "portfolios": ["balanced", "enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ADMIN-01", "BLOCK-ADMIN-02", "BLOCK-ADMIN-03", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-ADMIN-01",
+        "BLOCK-ADMIN-02",
+        "BLOCK-ADMIN-03",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-02"
+      ],
       "tags": ["admin", "multi-tenant"]
     },
     {
@@ -67,7 +105,13 @@
       "portfolios": ["balanced"],
       "deploymentTarget": "edge",
       "authModel": "session",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SETTINGS-01", "BLOCK-SETTINGS-02", "BLOCK-SETTINGS-03", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-SETTINGS-01",
+        "BLOCK-SETTINGS-02",
+        "BLOCK-SETTINGS-03",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["settings", "account"]
     },
     {
@@ -78,7 +122,13 @@
       "portfolios": ["balanced"],
       "deploymentTarget": "edge",
       "authModel": "session",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-BILLING-01", "BLOCK-BILLING-02", "BLOCK-BILLING-03", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-BILLING-01",
+        "BLOCK-BILLING-02",
+        "BLOCK-BILLING-03",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["billing", "payments"]
     },
     {
@@ -89,7 +139,14 @@
       "portfolios": ["balanced", "enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-RESOURCE-03", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-RESOURCE-01",
+        "BLOCK-RESOURCE-02",
+        "BLOCK-RESOURCE-03",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-02"
+      ],
       "tags": ["crud", "resources"]
     },
     {
@@ -100,7 +157,14 @@
       "portfolios": ["balanced", "enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-OBS-03", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-OBS-01",
+        "BLOCK-OBS-02",
+        "BLOCK-OBS-03",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-02"
+      ],
       "tags": ["monitoring", "observability"]
     },
     {
@@ -122,7 +186,14 @@
       "portfolios": ["balanced"],
       "deploymentTarget": "node",
       "authModel": "session",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AI-01", "BLOCK-AI-02", "BLOCK-AI-03", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-AI-01",
+        "BLOCK-AI-02",
+        "BLOCK-AI-03",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-02"
+      ],
       "tags": ["ai", "workflow"]
     },
     {
@@ -133,7 +204,13 @@
       "portfolios": ["balanced"],
       "deploymentTarget": "edge",
       "authModel": "session",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SEARCH-01", "BLOCK-SEARCH-02", "BLOCK-SEARCH-03", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-SEARCH-01",
+        "BLOCK-SEARCH-02",
+        "BLOCK-SEARCH-03",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["search"]
     },
     {
@@ -144,7 +221,12 @@
       "portfolios": ["balanced"],
       "deploymentTarget": "edge",
       "authModel": "optional",
-      "requiredBlocks": ["BLOCK-COMMERCE-01", "BLOCK-COMMERCE-02", "BLOCK-COMMERCE-03", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-COMMERCE-01",
+        "BLOCK-COMMERCE-02",
+        "BLOCK-COMMERCE-03",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["commerce", "storefront"]
     },
     {
@@ -155,7 +237,14 @@
       "portfolios": ["balanced"],
       "deploymentTarget": "edge",
       "authModel": "session",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-COMMERCE-01", "BLOCK-COMMERCE-02", "BLOCK-COMMERCE-03", "BLOCK-SEARCH-01", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-COMMERCE-01",
+        "BLOCK-COMMERCE-02",
+        "BLOCK-COMMERCE-03",
+        "BLOCK-SEARCH-01",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["commerce", "marketplace"]
     },
     {
@@ -166,7 +255,14 @@
       "portfolios": ["balanced"],
       "deploymentTarget": "node",
       "authModel": "session",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-CONTENT-01", "BLOCK-CONTENT-02", "BLOCK-CONTENT-03", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-CONTENT-01",
+        "BLOCK-CONTENT-02",
+        "BLOCK-CONTENT-03",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-02"
+      ],
       "tags": ["content", "cms"]
     },
     {
@@ -199,7 +295,14 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AUTH-02", "BLOCK-AUTH-03", "BLOCK-ADMIN-01", "BLOCK-ADMIN-03", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-AUTH-02",
+        "BLOCK-AUTH-03",
+        "BLOCK-ADMIN-01",
+        "BLOCK-ADMIN-03",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["iam", "identity"]
     },
     {
@@ -221,7 +324,14 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-BILLING-01", "BLOCK-BILLING-02", "BLOCK-BILLING-03", "BLOCK-ADMIN-01", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-BILLING-01",
+        "BLOCK-BILLING-02",
+        "BLOCK-BILLING-03",
+        "BLOCK-ADMIN-01",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["billing", "operations"]
     },
     {
@@ -232,7 +342,14 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-OBS-03", "BLOCK-SHELL-01", "BLOCK-SHELL-03"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-OBS-01",
+        "BLOCK-OBS-02",
+        "BLOCK-OBS-03",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-03"
+      ],
       "tags": ["incidents", "sre"]
     },
     {
@@ -243,7 +360,15 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AI-01", "BLOCK-AI-02", "BLOCK-AI-03", "BLOCK-OBS-01", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-AI-01",
+        "BLOCK-AI-02",
+        "BLOCK-AI-03",
+        "BLOCK-OBS-01",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-02"
+      ],
       "tags": ["ai", "operations"]
     },
     {
@@ -254,7 +379,14 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-ADMIN-01", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-RESOURCE-01",
+        "BLOCK-RESOURCE-02",
+        "BLOCK-ADMIN-01",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-02"
+      ],
       "tags": ["api", "gateway"]
     },
     {
@@ -265,7 +397,13 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "edge",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-CONTENT-01", "BLOCK-SEARCH-01", "BLOCK-RESOURCE-01", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-CONTENT-01",
+        "BLOCK-SEARCH-01",
+        "BLOCK-RESOURCE-01",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["devportal", "api"]
     },
     {
@@ -276,7 +414,14 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ADMIN-01", "BLOCK-ADMIN-02", "BLOCK-OBS-01", "BLOCK-OBS-03", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-ADMIN-01",
+        "BLOCK-ADMIN-02",
+        "BLOCK-OBS-01",
+        "BLOCK-OBS-03",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["security", "soc"]
     },
     {
@@ -287,7 +432,13 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-ADMIN-02", "BLOCK-ADMIN-03", "BLOCK-RESOURCE-01", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-ADMIN-02",
+        "BLOCK-ADMIN-03",
+        "BLOCK-RESOURCE-01",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["compliance", "grc"]
     },
     {
@@ -298,7 +449,14 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-RESOURCE-03", "BLOCK-ADMIN-02", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-RESOURCE-01",
+        "BLOCK-RESOURCE-02",
+        "BLOCK-RESOURCE-03",
+        "BLOCK-ADMIN-02",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["data", "governance"]
     },
     {
@@ -309,7 +467,14 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AI-03", "BLOCK-RESOURCE-01", "BLOCK-OBS-01", "BLOCK-SHELL-01", "BLOCK-SHELL-02"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-AI-03",
+        "BLOCK-RESOURCE-01",
+        "BLOCK-OBS-01",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-02"
+      ],
       "tags": ["workflow", "automation"]
     },
     {
@@ -320,7 +485,14 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-AI-01", "BLOCK-SEARCH-01", "BLOCK-RESOURCE-01", "BLOCK-SHELL-01", "BLOCK-SHELL-03"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-AI-01",
+        "BLOCK-SEARCH-01",
+        "BLOCK-RESOURCE-01",
+        "BLOCK-SHELL-01",
+        "BLOCK-SHELL-03"
+      ],
       "tags": ["support", "helpdesk"]
     },
     {
@@ -331,7 +503,15 @@
       "portfolios": ["enterprise"],
       "deploymentTarget": "node",
       "authModel": "token",
-      "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SETTINGS-01", "BLOCK-SETTINGS-02", "BLOCK-SETTINGS-03", "BLOCK-ADMIN-01", "BLOCK-ADMIN-03", "BLOCK-SHELL-01"],
+      "requiredBlocks": [
+        "BLOCK-AUTH-01",
+        "BLOCK-SETTINGS-01",
+        "BLOCK-SETTINGS-02",
+        "BLOCK-SETTINGS-03",
+        "BLOCK-ADMIN-01",
+        "BLOCK-ADMIN-03",
+        "BLOCK-SHELL-01"
+      ],
       "tags": ["settings", "enterprise"]
     }
   ],

@@ -44,7 +44,11 @@ export function TeamManagement(props: TeamManagementProps): JSX.Element {
   async function handleInvite(e: Event) {
     e.preventDefault()
     setLocalError("")
-    if (!inviteEmail()) { setLocalError("Email is required."); setState("error"); return }
+    if (!inviteEmail()) {
+      setLocalError("Email is required.")
+      setState("error")
+      return
+    }
     setState("loading")
     try {
       await props.onInvite?.(inviteEmail(), inviteRole() || "member")
@@ -69,26 +73,47 @@ export function TeamManagement(props: TeamManagementProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-team-management", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-team-management", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-team-management__restricted" role="alert">
           <p>{props.restrictedReason || "Team management is restricted."}</p>
         </div>
       </Show>
       <Show when={state() === "error" && currentError()}>
-        <div class="solidiom-block-team-management__error" role="alert"><p>{currentError()}</p></div>
+        <div class="solidiom-block-team-management__error" role="alert">
+          <p>{currentError()}</p>
+        </div>
       </Show>
       <Show when={state() !== "restricted"}>
         <form onSubmit={handleInvite} class="solidiom-block-team-management__invite">
-          <input type="email" value={inviteEmail()} onInput={(e) => setInviteEmail(e.currentTarget.value)} placeholder="Email address" disabled={state() === "loading"} />
-          <select value={inviteRole()} onChange={(e) => setInviteRole(e.currentTarget.value)} disabled={state() === "loading"}>
+          <input
+            type="email"
+            value={inviteEmail()}
+            onInput={(e) => setInviteEmail(e.currentTarget.value)}
+            placeholder="Email address"
+            disabled={state() === "loading"}
+          />
+          <select
+            value={inviteRole()}
+            onChange={(e) => setInviteRole(e.currentTarget.value)}
+            disabled={state() === "loading"}
+          >
             <option value="">Role</option>
-            <For each={props.roles ?? ["member", "admin"]}>{(role) => <option value={role}>{role}</option>}</For>
+            <For each={props.roles ?? ["member", "admin"]}>
+              {(role) => <option value={role}>{role}</option>}
+            </For>
           </select>
-          <button type="submit" disabled={state() === "loading"}>Invite</button>
+          <button type="submit" disabled={state() === "loading"}>
+            Invite
+          </button>
         </form>
         <Show when={!props.members || props.members.length === 0}>
-          <div class="solidiom-block-team-management__empty"><p>No team members yet.</p></div>
+          <div class="solidiom-block-team-management__empty">
+            <p>No team members yet.</p>
+          </div>
         </Show>
         <div class="solidiom-block-team-management__list">
           <For each={props.members ?? []}>
@@ -99,7 +124,13 @@ export function TeamManagement(props: TeamManagementProps): JSX.Element {
                   <span class="solidiom-block-team-management__email">{member.email}</span>
                   <span class="solidiom-block-team-management__role">{member.role}</span>
                 </div>
-                <button type="button" onClick={() => handleRemove(member.id)} disabled={state() === "loading"}>Remove</button>
+                <button
+                  type="button"
+                  onClick={() => handleRemove(member.id)}
+                  disabled={state() === "loading"}
+                >
+                  Remove
+                </button>
               </div>
             )}
           </For>

@@ -13,21 +13,31 @@ interface ResourceCardProps {
 export function ResourceCard(props: ResourceCardProps): JSX.Element {
   const statusColor = () => {
     switch (props.status) {
-      case "running": return "bg-green-100 text-green-700"
-      case "stopped": return "bg-gray-100 text-gray-600"
-      case "pending": return "bg-yellow-100 text-yellow-700"
-      case "error": return "bg-red-100 text-red-700"
+      case "running":
+        return "bg-green-100 text-green-700"
+      case "stopped":
+        return "bg-gray-100 text-gray-600"
+      case "pending":
+        return "bg-yellow-100 text-yellow-700"
+      case "error":
+        return "bg-red-100 text-red-700"
     }
   }
 
   const typeColor = () => {
     switch (props.type) {
-      case "compute": return "bg-blue-100 text-blue-700"
-      case "storage": return "bg-purple-100 text-purple-700"
-      case "network": return "bg-green-100 text-green-700"
-      case "database": return "bg-orange-100 text-orange-700"
-      case "serverless": return "bg-teal-100 text-teal-700"
-      default: return "bg-gray-100 text-gray-600"
+      case "compute":
+        return "bg-blue-100 text-blue-700"
+      case "storage":
+        return "bg-purple-100 text-purple-700"
+      case "network":
+        return "bg-green-100 text-green-700"
+      case "database":
+        return "bg-orange-100 text-orange-700"
+      case "serverless":
+        return "bg-teal-100 text-teal-700"
+      default:
+        return "bg-gray-100 text-gray-600"
     }
   }
 
@@ -35,12 +45,16 @@ export function ResourceCard(props: ResourceCardProps): JSX.Element {
     <Card.Root class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
       <div class="flex items-center justify-between">
         <h3 class="text-sm font-semibold text-gray-900">{props.name}</h3>
-        <span class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor()}`}>
+        <span
+          class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor()}`}
+        >
           {props.status}
         </span>
       </div>
       <div class="mt-1">
-        <span class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${typeColor()}`}>
+        <span
+          class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${typeColor()}`}
+        >
           {props.type}
         </span>
       </div>

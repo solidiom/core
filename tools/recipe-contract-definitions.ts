@@ -1186,7 +1186,7 @@ export const inputRecipe: RecipeDefinition = {
         "border-width": "1px",
         "border-color": { token: "border" },
         "border-radius": { token: "radius" },
-        "outline": "none",
+        outline: "none",
         transition: "border-color 0.15s, box-shadow 0.15s",
       },
       states: {},
@@ -1196,14 +1196,14 @@ export const inputRecipe: RecipeDefinition = {
         },
         readonly: {
           "background-color": { token: "surface-muted" },
-          "cursor": "not-allowed",
+          cursor: "not-allowed",
         },
         placeholder: {
           opacity: "0.5",
         },
         disabled: {
           "background-color": { token: "surface-muted" },
-          "cursor": "not-allowed",
+          cursor: "not-allowed",
           opacity: "0.5",
         },
         required: {},
@@ -1235,8 +1235,8 @@ export const inputRecipe: RecipeDefinition = {
         "border-width": "1px",
         "border-color": { token: "border" },
         "border-radius": { token: "radius" },
-        "outline": "none",
-        "resize": "vertical",
+        outline: "none",
+        resize: "vertical",
         transition: "border-color 0.15s, box-shadow 0.15s",
       },
       states: {},
@@ -1246,14 +1246,14 @@ export const inputRecipe: RecipeDefinition = {
         },
         readonly: {
           "background-color": { token: "surface-muted" },
-          "cursor": "not-allowed",
+          cursor: "not-allowed",
         },
         placeholder: {
           opacity: "0.5",
         },
         disabled: {
           "background-color": { token: "surface-muted" },
-          "cursor": "not-allowed",
+          cursor: "not-allowed",
           opacity: "0.5",
         },
         required: {},
@@ -1279,8 +1279,7 @@ export const inputRecipe: RecipeDefinition = {
 export const cardRecipe: RecipeDefinition = {
   contractVersion: CONTRACT_VERSION,
   scope: "card",
-  description:
-    "Container component with header, title, description, content, and footer areas.",
+  description: "Container component with header, title, description, content, and footer areas.",
   slots: [
     {
       part: "root",
@@ -1299,7 +1298,8 @@ export const cardRecipe: RecipeDefinition = {
       part: "header",
       element: "div",
       ownership: "consumer",
-      ownershipReason: "The wrapper exposes only Root; consumers compose Header sub-parts within the card.",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers compose Header sub-parts within the card.",
       base: {
         display: "flex",
         "flex-direction": "column",
@@ -1334,7 +1334,8 @@ export const cardRecipe: RecipeDefinition = {
       part: "content",
       element: "div",
       ownership: "consumer",
-      ownershipReason: "The wrapper exposes only Root; consumers compose Content sub-parts within the card.",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers compose Content sub-parts within the card.",
       base: {
         display: "block",
       },
@@ -1343,7 +1344,8 @@ export const cardRecipe: RecipeDefinition = {
       part: "footer",
       element: "div",
       ownership: "consumer",
-      ownershipReason: "The wrapper exposes only Root; consumers compose Footer sub-parts within the card.",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers compose Footer sub-parts within the card.",
       base: {
         display: "flex",
         "align-items": "center",
@@ -1363,8 +1365,7 @@ export const cardRecipe: RecipeDefinition = {
 export const fieldRecipe: RecipeDefinition = {
   contractVersion: CONTRACT_VERSION,
   scope: "field",
-  description:
-    "Form field wrapper with label, control, description, and error message.",
+  description: "Form field wrapper with label, control, description, and error message.",
   slots: [
     {
       part: "root",
@@ -1388,7 +1389,8 @@ export const fieldRecipe: RecipeDefinition = {
       part: "label",
       element: "label",
       ownership: "consumer",
-      ownershipReason: "The wrapper exposes only Root; consumers render Label/Control/Description/Error sub-parts via the primitive",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers render Label/Control/Description/Error sub-parts via the primitive",
       base: {
         "font-size": { token: "font-size-sm" },
         "line-height": { token: "line-height-sm", fallback: "1.25rem" },
@@ -1414,7 +1416,8 @@ export const fieldRecipe: RecipeDefinition = {
       part: "description",
       element: "div",
       ownership: "consumer",
-      ownershipReason: "The wrapper exposes only Root; consumers render Description sub-parts via the primitive",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers render Description sub-parts via the primitive",
       base: {
         "font-size": { token: "font-size-sm" },
         color: { token: "foreground-muted" },
@@ -1424,7 +1427,8 @@ export const fieldRecipe: RecipeDefinition = {
       part: "error",
       element: "div",
       ownership: "consumer",
-      ownershipReason: "The wrapper exposes only Root; consumers render Error sub-parts via the primitive",
+      ownershipReason:
+        "The wrapper exposes only Root; consumers render Error sub-parts via the primitive",
       base: {
         "font-size": { token: "font-size-sm" },
         color: { token: "destructive" },
@@ -1454,8 +1458,7 @@ export const dataTableRecipe: RecipeDefinition = {
       part: "header",
       element: "thead",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply the table header.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply the table header.",
       base: {
         "border-bottom": "1px solid",
         "border-color": { token: "border" },
@@ -1465,8 +1468,7 @@ export const dataTableRecipe: RecipeDefinition = {
       part: "header-cell",
       element: "th",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply header cells.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply header cells.",
       base: {
         padding: "0.75rem",
         "text-align": "left",
@@ -1477,8 +1479,7 @@ export const dataTableRecipe: RecipeDefinition = {
       part: "body",
       element: "tbody",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply the table body.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply the table body.",
       base: {
         display: "block",
       },
@@ -1487,8 +1488,7 @@ export const dataTableRecipe: RecipeDefinition = {
       part: "row",
       element: "tr",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply repeatable rows.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply repeatable rows.",
       base: {
         "border-bottom": "1px solid",
         "border-color": { token: "border" },
@@ -1498,8 +1498,7 @@ export const dataTableRecipe: RecipeDefinition = {
       part: "cell",
       element: "td",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply cells within rows.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply cells within rows.",
       base: {
         padding: "0.75rem",
       },
@@ -1513,8 +1512,7 @@ export const dataTableRecipe: RecipeDefinition = {
 export const meterRecipe: RecipeDefinition = {
   contractVersion: CONTRACT_VERSION,
   scope: "meter",
-  description:
-    "Scalar measurement display with status states derived from value thresholds.",
+  description: "Scalar measurement display with status states derived from value thresholds.",
   slots: [
     {
       part: "root",
@@ -1543,8 +1541,7 @@ export const meterRecipe: RecipeDefinition = {
 export const progressRecipe: RecipeDefinition = {
   contractVersion: CONTRACT_VERSION,
   scope: "progress",
-  description:
-    "Linear progress indicator with determinate (value 0–100) and indeterminate modes.",
+  description: "Linear progress indicator with determinate (value 0–100) and indeterminate modes.",
   slots: [
     {
       part: "root",
@@ -1568,8 +1565,7 @@ export const progressRecipe: RecipeDefinition = {
       part: "indicator",
       element: "div",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply the progress indicator.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply the progress indicator.",
       base: {
         height: "100%",
         "background-color": { token: "primary" },
@@ -1585,8 +1581,7 @@ export const progressRecipe: RecipeDefinition = {
 export const paginationRecipe: RecipeDefinition = {
   contractVersion: CONTRACT_VERSION,
   scope: "pagination",
-  description:
-    "Page navigation with previous, next, ellipsis, and content slots.",
+  description: "Page navigation with previous, next, ellipsis, and content slots.",
   slots: [
     {
       part: "root",
@@ -1602,8 +1597,7 @@ export const paginationRecipe: RecipeDefinition = {
       part: "content",
       element: "ul",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply the page list.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply the page list.",
       base: {
         display: "flex",
         "list-style": "none",
@@ -1616,8 +1610,7 @@ export const paginationRecipe: RecipeDefinition = {
       part: "item",
       element: "li",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply page items.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply page items.",
       base: {
         display: "block",
       },
@@ -1626,8 +1619,7 @@ export const paginationRecipe: RecipeDefinition = {
       part: "previous",
       element: "button",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply the previous button.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply the previous button.",
       base: {
         display: "inline-flex",
         "align-items": "center",
@@ -1641,8 +1633,7 @@ export const paginationRecipe: RecipeDefinition = {
       part: "next",
       element: "button",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply the next button.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply the next button.",
       base: {
         display: "inline-flex",
         "align-items": "center",
@@ -1656,8 +1647,7 @@ export const paginationRecipe: RecipeDefinition = {
       part: "ellipsis",
       element: "span",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply the ellipsis indicator.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply the ellipsis indicator.",
       base: {
         display: "inline-flex",
         "align-items": "center",
@@ -1693,8 +1683,7 @@ export const breadcrumbRecipe: RecipeDefinition = {
       part: "list",
       element: "ol",
       ownership: "consumer",
-      ownershipReason:
-        "The wrapper exposes only Root; consumers supply the breadcrumb list.",
+      ownershipReason: "The wrapper exposes only Root; consumers supply the breadcrumb list.",
       base: {
         display: "flex",
         "align-items": "center",
@@ -1789,7 +1778,7 @@ export const radioGroupRecipe: RecipeDefinition = {
         cursor: "pointer",
         "font-size": "0.875rem",
         "border-radius": { token: "radius" },
-        "outline": "none",
+        outline: "none",
       },
       states: {
         checked: { "background-color": { token: "surface-accent" } },
@@ -1841,7 +1830,8 @@ export const comboboxRecipe: RecipeDefinition = {
       part: "trigger",
       element: "button",
       ownership: "consumer",
-      ownershipReason: "Combobox trigger is composed by the consumer; the wrapper exposes Root only.",
+      ownershipReason:
+        "Combobox trigger is composed by the consumer; the wrapper exposes Root only.",
       base: {
         display: "inline-flex",
         "align-items": "center",
@@ -1856,7 +1846,7 @@ export const comboboxRecipe: RecipeDefinition = {
         "background-color": "transparent",
         "font-size": "0.875rem",
         cursor: "pointer",
-        "outline": "none",
+        outline: "none",
       },
       flags: {
         disabled: { opacity: "0.5", cursor: "not-allowed" },
@@ -1885,7 +1875,7 @@ export const comboboxRecipe: RecipeDefinition = {
         "border-color": { token: "border" },
         "background-color": "transparent",
         "font-size": "0.875rem",
-        "outline": "none",
+        outline: "none",
       },
       pseudos: {
         ":focus-visible": {
@@ -1900,7 +1890,8 @@ export const comboboxRecipe: RecipeDefinition = {
       part: "content",
       element: "div",
       ownership: "consumer",
-      ownershipReason: "Combobox content is composed by the consumer; the wrapper exposes Root only.",
+      ownershipReason:
+        "Combobox content is composed by the consumer; the wrapper exposes Root only.",
       base: {
         "z-index": "50",
         "min-width": "8rem",
@@ -1940,14 +1931,14 @@ export const comboboxRecipe: RecipeDefinition = {
 export const sheetRecipe: RecipeDefinition = {
   contractVersion: CONTRACT_VERSION,
   scope: "sheet",
-  description:
-    "Side-panel dialog that slides in from a specified edge with a backdrop overlay.",
+  description: "Side-panel dialog that slides in from a specified edge with a backdrop overlay.",
   slots: [
     {
       part: "backdrop",
       element: "div",
       ownership: "consumer",
-      ownershipReason: "Sheet backdrop is composed by the consumer via Sheet.Backdrop; the wrapper exposes Root only.",
+      ownershipReason:
+        "Sheet backdrop is composed by the consumer via Sheet.Backdrop; the wrapper exposes Root only.",
       base: {
         position: "fixed",
         inset: "0",
@@ -1963,7 +1954,8 @@ export const sheetRecipe: RecipeDefinition = {
       part: "content",
       element: "div",
       ownership: "consumer",
-      ownershipReason: "Sheet content is composed by the consumer via Sheet.Content; the wrapper exposes Root only.",
+      ownershipReason:
+        "Sheet content is composed by the consumer via Sheet.Content; the wrapper exposes Root only.",
       base: {
         position: "fixed",
         "z-index": "50",
@@ -2072,7 +2064,7 @@ export const navigationMenuRecipe: RecipeDefinition = {
         "font-weight": "500",
         cursor: "pointer",
         "border-radius": { token: "radius" },
-        "outline": "none",
+        outline: "none",
       },
       states: {
         active: { "background-color": { token: "surface-accent" } },
@@ -2135,14 +2127,14 @@ export const navigationMenuRecipe: RecipeDefinition = {
 export const commandPaletteRecipe: RecipeDefinition = {
   contractVersion: CONTRACT_VERSION,
   scope: "command-palette",
-  description:
-    "Modal command palette with input filtering, group support, and empty state.",
+  description: "Modal command palette with input filtering, group support, and empty state.",
   slots: [
     {
       part: "dialog",
       element: "div",
       ownership: "consumer",
-      ownershipReason: "Command palette dialog is composed by the consumer; the wrapper exposes Root only.",
+      ownershipReason:
+        "Command palette dialog is composed by the consumer; the wrapper exposes Root only.",
       base: {
         position: "fixed",
         top: "50%",
@@ -2168,7 +2160,8 @@ export const commandPaletteRecipe: RecipeDefinition = {
       part: "input",
       element: "input",
       ownership: "consumer",
-      ownershipReason: "Command palette input is composed by the consumer; the wrapper exposes Root only.",
+      ownershipReason:
+        "Command palette input is composed by the consumer; the wrapper exposes Root only.",
       base: {
         width: "100%",
         "min-height": "2.5rem",
@@ -2176,10 +2169,10 @@ export const commandPaletteRecipe: RecipeDefinition = {
         "border-style": "none",
         "background-color": "transparent",
         "font-size": "0.875rem",
-        "outline": "none",
+        outline: "none",
       },
       pseudos: {
-        ":focus-visible": { "outline": "none" },
+        ":focus-visible": { outline: "none" },
       },
     },
     {
@@ -2277,7 +2270,8 @@ export const resizablePanelsRecipe: RecipeDefinition = {
       part: "group",
       element: "div",
       ownership: "consumer",
-      ownershipReason: "PanelGroup is the root container imported by name; the wrapper renders it as the top-level element but the audit cannot map the named import to data-part.",
+      ownershipReason:
+        "PanelGroup is the root container imported by name; the wrapper renders it as the top-level element but the audit cannot map the named import to data-part.",
       base: {
         display: "flex",
         width: "100%",
@@ -2304,7 +2298,7 @@ export const resizablePanelsRecipe: RecipeDefinition = {
         "justify-content": "center",
         "background-color": { token: "border" },
         cursor: "pointer",
-        "outline": "none",
+        outline: "none",
       },
       pseudos: {
         ":focus-visible": {
@@ -2405,7 +2399,7 @@ export const toolbarRecipe: RecipeDefinition = {
         "font-weight": "500",
         "border-radius": "0.25rem",
         cursor: "pointer",
-        "outline": "none",
+        outline: "none",
       },
       flags: {
         disabled: { opacity: "0.5", cursor: "not-allowed" },
@@ -2453,7 +2447,7 @@ export const toolbarRecipe: RecipeDefinition = {
         "font-size": "0.875rem",
         "border-radius": "0.25rem",
         cursor: "pointer",
-        "outline": "none",
+        outline: "none",
       },
       states: {
         on: { "background-color": { token: "surface-accent" } },

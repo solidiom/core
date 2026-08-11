@@ -37,7 +37,6 @@ import * as Calendar from "@solidiom/recipes-css"
 </Calendar.Root>
 ```
 
-
 ## Instalación
 
 ```sh

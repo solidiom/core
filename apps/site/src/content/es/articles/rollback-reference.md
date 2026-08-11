@@ -60,10 +60,10 @@ En el caso poco probable de que los cambios de DNS necesiten ser revertidos:
 
 ### Registros DNS Actuales
 
-| Registro | Tipo | Valor | Proxy |
-|----------|------|-------|-------|
-| `solidiom.org` | CNAME | `solidiom.pages.dev` | Sí |
-| `www.solidiom.org` | CNAME | `solidiom.pages.dev` | Sí |
+| Registro           | Tipo  | Valor                | Proxy |
+| ------------------ | ----- | -------------------- | ----- |
+| `solidiom.org`     | CNAME | `solidiom.pages.dev` | Sí    |
+| `www.solidiom.org` | CNAME | `solidiom.pages.dev` | Sí    |
 
 ## Procedimientos de Contacto
 

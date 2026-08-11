@@ -3,7 +3,13 @@
   "stack": "vite-solid-router",
   "description": "Enterprise settings console with organization config, security policies, and integrations.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-SETTINGS-01", "BLOCK-SETTINGS-02", "BLOCK-SETTINGS-03"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-SETTINGS-01",
+    "BLOCK-SETTINGS-02",
+    "BLOCK-SETTINGS-03"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["enterprise"],

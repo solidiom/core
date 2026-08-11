@@ -9,7 +9,13 @@ export async function getStaticPaths() {
   return entries
     .filter((entry) => !entry.id.endsWith("/community"))
     .map((entry) => ({
-      params: { slug: entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id },
+      params: {
+        slug:
+          entry.id
+            .split("/")
+            .pop()
+            ?.replace(/\.(md|mdx)$/, "") ?? entry.id,
+      },
     }))
 }
 
@@ -25,7 +31,9 @@ const entryData = rawEntry.data
 const rendered = await render(rawEntry)
 const { Content } = rendered
 const headings = rendered.headings ?? []
-const toc: DocsTocEntry[] = tocFromHeadings(headings as Array<{ depth: number; slug: string; text: string }>)
+const toc: DocsTocEntry[] = tocFromHeadings(
+  headings as Array<{ depth: number; slug: string; text: string }>,
+)
 
 const allEntries = await getCollection("community", (e) => e.data.locale === locale)
 const children = allEntries
@@ -40,17 +48,33 @@ const currentIndex = children.findIndex((e) => e.id === rawEntry.id)
 const prevEntry = currentIndex < children.length - 1 ? children[currentIndex + 1] : undefined
 const nextEntry = currentIndex > 0 ? children[currentIndex - 1] : undefined
 
-const prevSlug = prevEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
-const nextSlug = nextEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
+const prevSlug = prevEntry?.id
+  .split("/")
+  .pop()
+  ?.replace(/\.(md|mdx)$/, "")
+const nextSlug = nextEntry?.id
+  .split("/")
+  .pop()
+  ?.replace(/\.(md|mdx)$/, "")
 
-const prevLink = prevSlug && prevEntry ? { label: prevEntry.data.title, href: `${communityPath}${prevSlug}/` } : undefined
-const nextLink = nextSlug && nextEntry ? { label: nextEntry.data.title, href: `${communityPath}${nextSlug}/` } : undefined
+const prevLink =
+  prevSlug && prevEntry
+    ? { label: prevEntry.data.title, href: `${communityPath}${prevSlug}/` }
+    : undefined
+const nextLink =
+  nextSlug && nextEntry
+    ? { label: nextEntry.data.title, href: `${communityPath}${nextSlug}/` }
+    : undefined
 
 const sidebarGroups: DocsSidebarGroup[] = [
   {
     label: "Community",
     links: children.map((entry) => {
-      const entrySlug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
+      const entrySlug =
+        entry.id
+          .split("/")
+          .pop()
+          ?.replace(/\.(md|mdx)$/, "") ?? entry.id
       return {
         label: entry.data.title,
         href: `${communityPath}${entrySlug}/`,

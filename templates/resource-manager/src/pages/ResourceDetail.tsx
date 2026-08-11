@@ -55,14 +55,62 @@ const PROPERTIES: ResourceProperty[] = [
 ]
 
 const ACTIVITY: ActivityLog[] = [
-  { id: "act-001", timestamp: "2024-06-20 14:22:00", action: "Configuration Updated", user: "admin@sOLIDio.com", details: "Updated rate limiting rules for /v1/users endpoint" },
-  { id: "act-002", timestamp: "2024-06-18 09:15:00", action: "Scaling Event", user: "auto-scaler", details: "Scaled from 2 to 4 instances due to traffic spike" },
-  { id: "act-003", timestamp: "2024-06-15 22:00:00", action: "Health Check", user: "monitoring", details: "All health checks passing, latency within thresholds" },
-  { id: "act-004", timestamp: "2024-06-10 16:45:00", action: "Certificate Rotation", user: "admin@sOLIDio.com", details: "SSL/TLS certificate renewed, expires 2025-06-10" },
-  { id: "act-005", timestamp: "2024-06-01 11:30:00", action: "Deployment", user: "ci-cd-pipeline", details: "Deployed version 2.4.1 with hotfix for auth token parsing" },
-  { id: "act-006", timestamp: "2024-05-28 08:00:00", action: "Configuration Updated", user: "admin@sOLIDio.com", details: "Enabled CORS for staging.domain.com origin" },
-  { id: "act-007", timestamp: "2024-05-20 19:10:00", action: "Scaling Event", user: "auto-scaler", details: "Scaled back from 4 to 2 instances after traffic normalized" },
-  { id: "act-008", timestamp: "2024-05-15 14:00:00", action: "Health Check", user: "monitoring", details: "Warning: elevated 5xx rate detected on /v1/orders endpoint" },
+  {
+    id: "act-001",
+    timestamp: "2024-06-20 14:22:00",
+    action: "Configuration Updated",
+    user: "admin@sOLIDio.com",
+    details: "Updated rate limiting rules for /v1/users endpoint",
+  },
+  {
+    id: "act-002",
+    timestamp: "2024-06-18 09:15:00",
+    action: "Scaling Event",
+    user: "auto-scaler",
+    details: "Scaled from 2 to 4 instances due to traffic spike",
+  },
+  {
+    id: "act-003",
+    timestamp: "2024-06-15 22:00:00",
+    action: "Health Check",
+    user: "monitoring",
+    details: "All health checks passing, latency within thresholds",
+  },
+  {
+    id: "act-004",
+    timestamp: "2024-06-10 16:45:00",
+    action: "Certificate Rotation",
+    user: "admin@sOLIDio.com",
+    details: "SSL/TLS certificate renewed, expires 2025-06-10",
+  },
+  {
+    id: "act-005",
+    timestamp: "2024-06-01 11:30:00",
+    action: "Deployment",
+    user: "ci-cd-pipeline",
+    details: "Deployed version 2.4.1 with hotfix for auth token parsing",
+  },
+  {
+    id: "act-006",
+    timestamp: "2024-05-28 08:00:00",
+    action: "Configuration Updated",
+    user: "admin@sOLIDio.com",
+    details: "Enabled CORS for staging.domain.com origin",
+  },
+  {
+    id: "act-007",
+    timestamp: "2024-05-20 19:10:00",
+    action: "Scaling Event",
+    user: "auto-scaler",
+    details: "Scaled back from 4 to 2 instances after traffic normalized",
+  },
+  {
+    id: "act-008",
+    timestamp: "2024-05-15 14:00:00",
+    action: "Health Check",
+    user: "monitoring",
+    details: "Warning: elevated 5xx rate detected on /v1/orders endpoint",
+  },
 ]
 
 const CONFIG: ConfigEntry[] = [
@@ -79,10 +127,14 @@ const CONFIG: ConfigEntry[] = [
 
 const statusColor = (status: ResourceStatus): string => {
   switch (status) {
-    case "running": return "bg-green-100 text-green-700"
-    case "stopped": return "bg-gray-100 text-gray-600"
-    case "pending": return "bg-yellow-100 text-yellow-700"
-    case "error": return "bg-red-100 text-red-700"
+    case "running":
+      return "bg-green-100 text-green-700"
+    case "stopped":
+      return "bg-gray-100 text-gray-600"
+    case "pending":
+      return "bg-yellow-100 text-yellow-700"
+    case "error":
+      return "bg-red-100 text-red-700"
   }
 }
 
@@ -91,7 +143,7 @@ export function ResourceDetail(): JSX.Element {
   const [activeTab, setActiveTab] = createSignal("properties")
   const [editing, setEditing] = createSignal(false)
   const [configValues, setConfigValues] = createSignal<Record<string, string>>(
-    Object.fromEntries(CONFIG.map((c) => [c.key, c.value]))
+    Object.fromEntries(CONFIG.map((c) => [c.key, c.value])),
   )
   const [saved, setSaved] = createSignal(false)
 
@@ -111,15 +163,25 @@ export function ResourceDetail(): JSX.Element {
         <Breadcrumb.Root class="mb-2">
           <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Home
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Resources</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Resources
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href={`/resource/${params.id}`} current class="text-gray-900 font-medium">{RESOURCE.name}</Breadcrumb.Link>
+              <Breadcrumb.Link
+                href={`/resource/${params.id}`}
+                current
+                class="text-gray-900 font-medium"
+              >
+                {RESOURCE.name}
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
@@ -127,11 +189,15 @@ export function ResourceDetail(): JSX.Element {
           <div>
             <div class="flex items-center gap-3">
               <h1 class="text-2xl font-bold text-gray-900">{RESOURCE.name}</h1>
-              <span class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(RESOURCE.status)}`}>
+              <span
+                class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor(RESOURCE.status)}`}
+              >
                 {RESOURCE.status}
               </span>
             </div>
-            <p class="mt-1 text-sm text-gray-500">View properties, activity log, and configure {RESOURCE.name}.</p>
+            <p class="mt-1 text-sm text-gray-500">
+              View properties, activity log, and configure {RESOURCE.name}.
+            </p>
           </div>
           <div class="flex items-center gap-2">
             <Button.Root class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
@@ -146,7 +212,9 @@ export function ResourceDetail(): JSX.Element {
 
       {saved() && (
         <Alert.Root type="success" class="rounded-lg border border-green-200 bg-green-50 p-4">
-          <Alert.Title class="text-sm font-medium text-green-800">Configuration saved successfully.</Alert.Title>
+          <Alert.Title class="text-sm font-medium text-green-800">
+            Configuration saved successfully.
+          </Alert.Title>
         </Alert.Root>
       )}
 
@@ -189,7 +257,9 @@ export function ResourceDetail(): JSX.Element {
               <tbody class="divide-y divide-gray-200">
                 {PROPERTIES.map((prop) => (
                   <tr class="hover:bg-gray-50">
-                    <td class="whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">{prop.key}</td>
+                    <td class="whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
+                      {prop.key}
+                    </td>
                     <td class="whitespace-nowrap px-6 py-3 text-sm text-gray-500">{prop.value}</td>
                   </tr>
                 ))}
@@ -203,17 +273,29 @@ export function ResourceDetail(): JSX.Element {
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
-                  <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Time</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Action</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">User</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Details</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                    Time
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                    Action
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                    User
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                    Details
+                  </th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
                 {ACTIVITY.map((entry) => (
                   <tr class="hover:bg-gray-50">
-                    <td class="whitespace-nowrap px-6 py-3 text-sm text-gray-500">{entry.timestamp}</td>
-                    <td class="whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">{entry.action}</td>
+                    <td class="whitespace-nowrap px-6 py-3 text-sm text-gray-500">
+                      {entry.timestamp}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
+                      {entry.action}
+                    </td>
                     <td class="whitespace-nowrap px-6 py-3 text-sm text-gray-500">{entry.user}</td>
                     <td class="px-6 py-3 text-sm text-gray-500">{entry.details}</td>
                   </tr>
@@ -258,14 +340,16 @@ export function ResourceDetail(): JSX.Element {
               <tbody class="divide-y divide-gray-200">
                 {CONFIG.map((entry) => (
                   <tr class="hover:bg-gray-50">
-                    <td class="whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">{entry.key}</td>
+                    <td class="whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
+                      {entry.key}
+                    </td>
                     <td class="px-6 py-3 text-sm text-gray-500">
                       {editing() && entry.editable ? (
                         <Input.Root
-                            type="text"
-                            class="w-full rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            value={configValues()[entry.key]}
-                            onInput={(e) => updateConfigValue(entry.key, e.currentTarget.value)}
+                          type="text"
+                          class="w-full rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                          value={configValues()[entry.key]}
+                          onInput={(e) => updateConfigValue(entry.key, e.currentTarget.value)}
                         />
                       ) : (
                         <span class="font-mono text-sm">{configValues()[entry.key]}</span>
