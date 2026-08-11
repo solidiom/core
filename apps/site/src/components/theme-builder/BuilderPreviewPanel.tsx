@@ -458,7 +458,7 @@ function PreviewContent(props: { c: CopyShape }) {
       <div class="theme-builder__preview-section">
         <h3 class="theme-builder__preview-section-title">Spinner</h3>
         <div class="theme-builder__preview-spinner-row">
-          <div class="theme-builder__preview-spinner" aria-label="Loading" />
+          <div class="theme-builder__preview-spinner" role="status" aria-label="Loading" />
           <span>Loading content...</span>
         </div>
       </div>
