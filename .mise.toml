@@ -310,6 +310,10 @@ env = { CI = "true" }
 run = [
   "pnpm exec playwright install chromium",
   "pnpm run test:a11y",
+  # Remove existing evidence so report:a11y-evidence writes fresh provenance
+  # matching the scan that just executed (withPreservedProvenance would otherwise
+  # keep stale timestamps when substance is unchanged).
+  "find packages -path '*/docs/accessibility/evidence.json' -delete",
   "pnpm run report:a11y-evidence",
   # A11Y-004 — verify GA-status primitive accessibility evidence is current
   "pnpm run a11y:coverage-gate",
