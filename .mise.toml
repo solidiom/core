@@ -199,21 +199,26 @@ run = "pnpm tsx tools/generate-axe-report.ts"
 # CI workflow — atomic steps (mirror .github/workflows/ci.yml jobs)
 #
 # One task per ci.yml job, in file order, running that job's distinctive
-# commands. Two deliberate deviations from the YAML:
+# commands. Deviations from the YAML for local use:
 #
 #   * `pnpm install --frozen-lockfile` is not repeated in every task; CI
-#     repeats it because each job is a fresh runner. Run `ci:install` once
-#     (the `github-workflows` orchestrator does).
+#     repeats it because each job is a fresh runner. Run `ci:install` once.
 #   * `playwright install` drops `--with-deps`, which only installs Linux apt
-#     packages and fails on macOS. Browsers come from `ci:playwright-install`.
+#     packages and fails on macOS.
+#   * CI uploads/downloads build artifacts between jobs. Locally, tasks share
+#     the same dist/ directories, so a single `ci:build` suffices.
+#   * Gate jobs are consolidated into `ci:gates` (mirrors the single `gates`
+#     job in ci.yml). Individual gate tasks still exist for targeted runs.
+#   * The Solid compatibility matrix (solid-compat.yml) runs nightly in CI.
+#     Use `ci:solid-matrix` to run it locally.
 #
-# Tasks that need `pnpm build` or a built site say so in their description.
-#
-# Note: `ci:build` and `ci:site-build` regenerate artifacts this repo tracks in
-# git (`packages/*/dist`, `packages/*/source`, `registry/*.json`), so a local run
-# can leave the working tree dirty even when every check passes. Inspect with
-# `git status` afterwards; `git checkout -- registry packages` discards the
-# regenerated output.
+# Architecture (mirrors ci.yml):
+#   install → format, typecheck, build, site-check
+#   build   → test-node, test-browser, a11y-axe-scan, catalog-gates,
+#             vertical-slice-gate, cli-smoke-create-prep → cli-smoke-create
+#   site-check → site-build → site-e2e, site-visual, site-lighthouse,
+#                              beta-acceptance-report, beta-acceptance-e2e
+#   (all tests + a11y + site-e2e + catalog-gates) → gates (consolidated)
 # ---------------------------------------------------------------------------
 
 [tasks."ci:install"]
@@ -233,7 +238,7 @@ description = "CI job `typecheck`: type-check all packages"
 run = "pnpm typecheck"
 
 [tasks."ci:build"]
-description = "CI job `build`: build all packages, then the seven integrity/parity/provenance verification steps that follow it"
+description = "CI job `build`: build all packages, then integrity/parity/provenance verification"
 run = [
   "pnpm build",
   # REG-006 — verify registry catalog integrity
@@ -248,23 +253,30 @@ run = [
   "pnpm run theme:emit:unocss:check",
   # THEME-005 — theme cross-output parity, contrast, and round-trip audit
   "pnpm run audit:theme-parity",
+  # PRESET-005 — cross-preset contrast, coverage, and translation gate
+  "pnpm run audit:preset-themes",
   # CLI-003 — assert no unverified provenance lock entries
   "pnpm run assert:no-unverified",
-  # CLI-003 — sign registry index (unsigned locally without REGISTRY_SIGN_KEY)
+  # Registry build (unsigned locally without REGISTRY_SIGN_KEY)
   "pnpm run registry:build",
 ]
 
 [tasks."ci:test-node"]
-description = "CI job `test-node`: unit tests across the Node 24/26 matrix (rebuilds per version; restores the default toolchain on exit)"
+description = "CI job `test-node`: unit + tools tests (needs a prior build; in CI this downloads build artifacts)"
+env = { CI = "true" }
+run = [
+  "pnpm exec playwright install chromium",
+  "pnpm test",
+  "pnpm run test:tools",
+]
+
+[tasks."ci:test-node-matrix"]
+description = "CI job `test-node` with Node 24/26 matrix (rebuilds per version; restores toolchain on exit)"
 run = '''#!/usr/bin/env bash
 set -euo pipefail
 export CI=true
 
-# CI runs this as a two-entry matrix on isolated runners. Locally the installs
-# below mutate node_modules for a specific Node version, so restore the
-# default-toolchain install on exit rather than leaving it for the next task.
 trap 'pnpm install --frozen-lockfile' EXIT
-
 pnpm exec playwright install chromium
 
 for node_version in 24 26; do
@@ -272,6 +284,7 @@ for node_version in 24 26; do
   mise exec "node@${node_version}" -- pnpm install --frozen-lockfile
   mise exec "node@${node_version}" -- pnpm build
   mise exec "node@${node_version}" -- pnpm test < /dev/null
+  mise exec "node@${node_version}" -- pnpm run test:tools < /dev/null
 done
 '''
 
@@ -286,7 +299,7 @@ run = [
 ]
 
 [tasks."ci:solid-matrix"]
-description = "CI job `test-solid-matrix`: Solid 2 compatibility matrix (Node 24/26 × low/mid/high tiers)"
+description = "Solid compat matrix (solid-compat.yml, nightly scheduled): Node 24/26 × low/mid/high tiers"
 run = '''#!/usr/bin/env bash
 set -euo pipefail
 export CI=true
@@ -434,7 +447,7 @@ fi
 '''
 
 [tasks."ci:gate-phase1"]
-description = "CI job `phase1-gate`: run the Phase 1 acceptance gate"
+description = "CI: run Phase 1 acceptance gate (used by ci:gates)"
 env = { CI = "true" }
 run = [
   "pnpm exec playwright install chromium",
@@ -442,12 +455,38 @@ run = [
 ]
 
 [tasks."ci:gate-phase2"]
-description = "CI job `phase2-gate`: run the Phase 2 acceptance gate (needs a prior build)"
+description = "CI: run Phase 2 acceptance gate (used by ci:gates)"
 run = "pnpm run gate:phase2"
 
 [tasks."ci:gate-phase0"]
-description = "CI job `phase0-gate`: run the Phase 0 acceptance gate (needs a prior build)"
+description = "CI: run Phase 0 acceptance gate (used by ci:gates)"
 run = "pnpm run gate:phase0"
+
+[tasks."ci:gate-phase3"]
+description = "CI: run Phase 3 (library beta) gate (used by ci:gates)"
+env = { CI = "true" }
+run = [
+  "pnpm exec playwright install chromium",
+  "pnpm run gate:phase3",
+]
+
+[tasks."ci:catalog-gates"]
+description = "CI job `catalog-gates`: component + block catalog verification (needs a prior build)"
+run = [
+  "pnpm run component:catalog-gate",
+  "pnpm run block:catalog-gate",
+]
+
+[tasks."ci:gates"]
+description = "CI job `gates`: consolidated phase1/phase2/phase0/phase3 (needs a prior build + all tests passing)"
+env = { CI = "true" }
+run = [
+  "pnpm exec playwright install chromium",
+  "pnpm run gate:phase1",
+  "pnpm run gate:phase2",
+  "pnpm run gate:phase0",
+  "pnpm run gate:phase3",
+]
 
 [tasks."ci:vertical-slice-gate"]
 description = "CI job `vertical-slice-gate`: VS-004 gate, the executable half of the G2 exit checklist (needs a prior build)"
@@ -458,42 +497,12 @@ description = "CI job `beta-acceptance-report`: BETA-002 static-build acceptance
 run = "pnpm run beta:acceptance:report"
 
 [tasks."ci:beta-acceptance-e2e"]
-description = "CI job `beta-acceptance-e2e`: BETA-002 cross-browser acceptance matrix — ADVISORY, mirrors continue-on-error (run ci:site-build first)"
-run = '''#!/usr/bin/env bash
-set -uo pipefail
-export CI=true
-
-pnpm exec playwright install chromium firefox webkit || exit 1
-
-# ci.yml marks this job `continue-on-error: true`, so a failure must not fail the
-# overall run. 13 checks currently fail on A11Y-008 (--sol-secondary is 3.678:1
-# against white, below the 4.5:1 WCAG AA floor, and it is the site's link colour,
-# so every audited route reports color-contrast). Report loudly and exit 0.
-if ! PLAYWRIGHT_USE_EXISTING_BUILD=1 pnpm run beta:acceptance:e2e; then
-  echo "" >&2
-  echo "ADVISORY: beta-acceptance-e2e failed (continue-on-error: true in ci.yml)." >&2
-  echo "          Expected until A11Y-008 lands; see docs/plans/website-tasks.md §7.3." >&2
-  echo "          Results: test-results/beta-acceptance" >&2
-fi
-'''
-
-[tasks."ci:gate-phase3"]
-description = "CI job `phase3-gate`: Phase 3 (library beta) gate — ADVISORY, mirrors continue-on-error (needs a prior build). NOT the website's G3 gate; see docs/plans/website-tasks.md §3.1"
-run = '''#!/usr/bin/env bash
-set -uo pipefail
-export CI=true
-
-pnpm exec playwright install chromium || exit 1
-
-# ci.yml marks this job `continue-on-error: true`. Three genuinely-absent
-# artifacts still fail it, tracked as A11Y-007: docs/at-audit-results/,
-# docs/keyboard-audit-results.md, and recorded cross-browser results.
-if ! pnpm run gate:phase3; then
-  echo "" >&2
-  echo "ADVISORY: phase3-gate failed (continue-on-error: true in ci.yml)." >&2
-  echo "          Expected until A11Y-007 lands; see docs/plans/website-tasks.md §7.3." >&2
-fi
-'''
+description = "CI job `beta-acceptance-e2e`: BETA-002 cross-browser acceptance (run ci:site-build first)"
+env = { PLAYWRIGHT_USE_EXISTING_BUILD = "1", CI = "true" }
+run = [
+  "pnpm exec playwright install chromium firefox webkit",
+  "pnpm run beta:acceptance:e2e",
+]
 
 # ---------------------------------------------------------------------------
 # Release workflow — atomic steps (mirror .github/workflows/release.yml)
@@ -514,7 +523,7 @@ run = "pnpm tsx tools/generate-beta-artifacts.ts --verify"
 [tasks."release:beta-rehearsal"]
 description = "Release: full local rehearsal (gate + artifacts + verify signing) without publishing"
 run = [
-  "mise run gate:phase3",
+  "mise run ci:gates",
   "pnpm run registry:build",
   "node packages/cli/dist/bin.js verify --registry",
   "pnpm tsx tools/generate-beta-artifacts.ts --verify",
@@ -528,28 +537,24 @@ run = [
 # ---------------------------------------------------------------------------
 
 [tasks."ci:all"]
-description = "Run every .github/workflows/ci.yml job locally, in dependency order (slow: includes both Node and Solid matrices and the offline smoke matrix)"
+description = "Run every ci.yml job locally in dependency order (includes Node matrix and offline smoke; excludes Solid matrix which is in solid-compat.yml)"
 run = [
-  # install
   "mise run ci:install",
-  # needs: install
+  # Parallel in CI: format, typecheck, build, site-check
   "mise run ci:format",
   "mise run ci:typecheck",
   "mise run ci:build",
   "mise run ci:site-check",
-  # needs: install, site-check
+  # needs: site-check
   "mise run ci:site-build",
-  # needs: build
-  "mise run ci:playwright-install",
+  # needs: build (tests consume build output in CI; locally they use existing dist/)
+  "mise run ci:test-node-matrix",
   "mise run ci:test-browser",
   "mise run ci:a11y-axe-scan",
-  "mise run ci:test-node",
-  "mise run ci:solid-matrix",
-  # test-node and solid-matrix rebuild under other Node/Solid versions, so
-  # restore the default-toolchain build before anything depends on dist/ again.
-  "mise run build",
+  "mise run ci:catalog-gates",
+  "mise run ci:vertical-slice-gate",
+  # needs: build (smoke tests)
   "mise run ci:smoke-create-prep",
-  # needs: build, cli-smoke-create-prep
   "mise run ci:smoke-create",
   # needs: site-build
   "mise run ci:site-e2e",
@@ -557,20 +562,26 @@ run = [
   "mise run ci:site-lighthouse",
   "mise run ci:beta-acceptance-report",
   "mise run ci:beta-acceptance-e2e",
-  # needs: build, site-check
-  "mise run ci:vertical-slice-gate",
-  # needs: typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e
-  "mise run ci:gate-phase1",
-  # needs: phase1-gate
-  "mise run ci:gate-phase2",
-  # needs: ..., phase1-gate, phase2-gate
-  "mise run ci:gate-phase0",
-  # needs: phase1-gate, phase2-gate
-  "mise run ci:gate-phase3",
+  # needs: all tests + a11y + site-e2e + catalog-gates (consolidated gates)
+  "mise run ci:gates",
+]
+
+[tasks."ci:quick"]
+description = "Fast local CI: format + typecheck + build + tests + gates (skips site, smoke, node matrix)"
+run = [
+  "mise run ci:install",
+  "mise run ci:format",
+  "mise run ci:typecheck",
+  "mise run ci:build",
+  "mise run ci:test-node",
+  "mise run ci:test-browser",
+  "mise run ci:a11y-axe-scan",
+  "mise run ci:catalog-gates",
+  "mise run ci:gates",
 ]
 
 [tasks."ci:prepush"]
-description = "Fast pre-push gate: every CI job except the Node/Solid matrices and the offline smoke matrix"
+description = "Pre-push gate: all CI jobs except Node matrix, Solid matrix, and offline smoke"
 run = [
   "mise run ci:install",
   "mise run ci:format",
@@ -578,36 +589,27 @@ run = [
   "mise run ci:build",
   "mise run ci:site-check",
   "mise run ci:site-build",
-  "mise run ci:playwright-install",
-  "mise run test",
+  "mise run ci:test-node",
   "mise run ci:test-browser",
   "mise run ci:a11y-axe-scan",
+  "mise run ci:catalog-gates",
+  "mise run ci:vertical-slice-gate",
   "mise run ci:site-e2e",
   "mise run ci:site-visual",
   "mise run ci:beta-acceptance-report",
   "mise run ci:beta-acceptance-e2e",
-  "mise run ci:vertical-slice-gate",
-  "mise run ci:gate-phase1",
-  "mise run ci:gate-phase2",
-  "mise run ci:gate-phase0",
-  "mise run ci:gate-phase3",
+  "mise run ci:gates",
 ]
 
 [tasks.github-workflows]
-description = "Run all CI and release workflow checks locally by calling each task in order"
+description = "Run all CI and release workflow checks locally"
 run = [
-  # .github/workflows/ci.yml — every job
   "mise run ci:all",
-  # .github/workflows/release.yml — the non-publishing steps (its `gate` job is
-  # ci:gate-phase0, already covered above)
   "mise run release:changeset-status",
   "mise run release:version-check",
 ]
-# .github/workflows/website.yml duplicates format:check plus the site
-# check/build/search-index steps, all covered by ci:format, ci:site-check, and
-# ci:site-build. .github/workflows/preview-deploy.yml is not mirrored here: it
-# deploys to Cloudflare and then runs `verify:preview` against the deployed
-# URL, neither of which is reproducible locally.
+# solid-compat.yml runs nightly; use `mise run ci:solid-matrix` to run locally.
+# preview-deploy.yml deploys to Cloudflare — not reproducible locally.
 
 # ---------------------------------------------------------------------------
 # Dependency freshness
