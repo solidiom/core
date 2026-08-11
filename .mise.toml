@@ -235,27 +235,32 @@ run = "pnpm typecheck"
 
 [tasks."ci:build"]
 description = "CI job `build`: build all packages (excluding site), then integrity/parity/provenance verification"
-run = [
-  "pnpm nx run-many -t build --exclude=@solidiom/site",
-  # REG-006 — verify registry catalog integrity
-  "node packages/cli/dist/bin.js verify --registry",
-  # API-004 — verify vertical-slice primitive API coverage
-  "pnpm run api:coverage-gate",
-  # RECIPE-006 / CLI-001 — verify package src/source parity and exports
-  "pnpm run audit:package-source-parity",
-  # THEME-002/003/004 — verify generated theme output is current
-  "pnpm run theme:emit:css:check",
-  "pnpm run theme:emit:tailwind:check",
-  "pnpm run theme:emit:unocss:check",
-  # THEME-005 — theme cross-output parity, contrast, and round-trip audit
-  "pnpm run audit:theme-parity",
-  # PRESET-005 — cross-preset contrast, coverage, and translation gate
-  "pnpm run audit:preset-themes",
-  # CLI-003 — assert no unverified provenance lock entries
-  "pnpm run assert:no-unverified",
-  # Registry build (unsigned locally without REGISTRY_SIGN_KEY)
-  "pnpm run registry:build",
-]
+run = '''#!/usr/bin/env bash
+set -euo pipefail
+
+# Redirect stdin from /dev/null to prevent any tool from blocking on user input
+exec < /dev/null
+
+pnpm nx run-many -t build --exclude=@solidiom/site
+# REG-006 — verify registry catalog integrity
+node packages/cli/dist/bin.js verify --registry
+# API-004 — verify vertical-slice primitive API coverage
+pnpm run api:coverage-gate
+# RECIPE-006 / CLI-001 — verify package src/source parity and exports
+pnpm run audit:package-source-parity
+# THEME-002/003/004 — verify generated theme output is current
+pnpm run theme:emit:css:check
+pnpm run theme:emit:tailwind:check
+pnpm run theme:emit:unocss:check
+# THEME-005 — theme cross-output parity, contrast, and round-trip audit
+pnpm run audit:theme-parity
+# PRESET-005 — cross-preset contrast, coverage, and translation gate
+pnpm run audit:preset-themes
+# CLI-003 — assert no unverified provenance lock entries
+pnpm run assert:no-unverified
+# Registry build (unsigned locally without REGISTRY_SIGN_KEY)
+pnpm run registry:build
+'''
 
 [tasks."ci:test-node"]
 description = "CI job `test-node`: unit + tools tests (needs a prior build; in CI this downloads build artifacts)"
