@@ -3,7 +3,18 @@ import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Alert from "@solidiom/alert"
 import { FrameworkCard } from "../components/FrameworkCard"
 
-const FRAMEWORKS = [
+interface FrameworkData {
+  name: string
+  description: string
+  progress: number
+  totalControls: number
+  implementedControls: number
+  status: "on-track" | "at-risk" | "behind" | "not-started"
+  nextAudit?: string
+  owner?: string
+}
+
+const FRAMEWORKS: FrameworkData[] = [
   {
     name: "SOC 2 Type II",
     description: "Service Organization Control for security, availability, and confidentiality.",
@@ -11,6 +22,8 @@ const FRAMEWORKS = [
     totalControls: 120,
     implementedControls: 94,
     status: "on-track" as const,
+    nextAudit: "2026-10-15",
+    owner: "Security Team",
   },
   {
     name: "ISO 27001",
@@ -19,6 +32,8 @@ const FRAMEWORKS = [
     totalControls: 93,
     implementedControls: 58,
     status: "at-risk" as const,
+    nextAudit: "2026-09-01",
+    owner: "Compliance Team",
   },
   {
     name: "HIPAA",
@@ -27,6 +42,8 @@ const FRAMEWORKS = [
     totalControls: 68,
     implementedControls: 31,
     status: "behind" as const,
+    nextAudit: "2026-11-20",
+    owner: "Legal & Privacy",
   },
   {
     name: "GDPR",
@@ -35,6 +52,8 @@ const FRAMEWORKS = [
     totalControls: 54,
     implementedControls: 48,
     status: "on-track" as const,
+    nextAudit: "2027-01-10",
+    owner: "Privacy Team",
   },
   {
     name: "PCI DSS",
@@ -43,6 +62,8 @@ const FRAMEWORKS = [
     totalControls: 78,
     implementedControls: 0,
     status: "not-started" as const,
+    nextAudit: "2027-03-01",
+    owner: "Payments Team",
   },
 ]
 
@@ -71,6 +92,27 @@ export function Frameworks(): JSX.Element {
           {FRAMEWORKS.filter((f) => f.status === "on-track").length} frameworks on track, {FRAMEWORKS.filter((f) => f.status === "at-risk").length} at risk, {FRAMEWORKS.filter((f) => f.status === "behind").length} behind schedule.
         </Alert.Description>
       </Alert.Root>
+
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+          <p class="text-sm font-medium text-gray-500">Total Frameworks</p>
+          <p class="mt-1 text-2xl font-bold text-gray-900">{FRAMEWORKS.length}</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+          <p class="text-sm font-medium text-gray-500">Total Controls</p>
+          <p class="mt-1 text-2xl font-bold text-gray-900">{FRAMEWORKS.reduce((s, f) => s + f.totalControls, 0)}</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+          <p class="text-sm font-medium text-gray-500">Controls Implemented</p>
+          <p class="mt-1 text-2xl font-bold text-gray-900">{FRAMEWORKS.reduce((s, f) => s + f.implementedControls, 0)}</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+          <p class="text-sm font-medium text-gray-500">Next Audit Due</p>
+          <p class="mt-1 text-sm font-bold text-gray-900">
+            {FRAMEWORKS.filter((f) => f.nextAudit).sort((a, b) => (a.nextAudit || "").localeCompare(b.nextAudit || ""))[0]?.nextAudit ?? "—"}
+          </p>
+        </div>
+      </div>
 
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {FRAMEWORKS.map((fw) => (

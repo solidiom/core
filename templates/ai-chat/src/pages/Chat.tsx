@@ -26,6 +26,8 @@ export function Chat(): JSX.Element {
   const [messages] = createSignal(INITIAL_MESSAGES)
   const [inputValue] = createSignal("")
   const [selectedModel, setSelectedModel] = createSignal("claude-3-opus")
+  const [isTyping] = createSignal(false)
+  const [tokenCount] = createSignal(1247)
 
   return (
     <div class="space-y-6">
@@ -74,6 +76,17 @@ export function Chat(): JSX.Element {
             <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
               Send
             </Button.Root>
+            {isTyping() && (
+              <div class="flex items-center gap-1.5 text-xs text-gray-400">
+                <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-indigo-400"></span>
+                <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-indigo-400" style="animation-delay: 0.15s"></span>
+                <span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-indigo-400" style="animation-delay: 0.3s"></span>
+              </div>
+            )}
+          </div>
+          <div class="mt-2 flex items-center justify-between text-xs text-gray-400">
+            <span>{tokenCount()} tokens used</span>
+            <span>{messages().length} messages</span>
           </div>
         </Card.Content>
       </Card.Root>

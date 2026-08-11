@@ -3,12 +3,32 @@ import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Alert from "@solidiom/alert"
 import * as Button from "@solidiom/button"
 import * as Card from "@solidiom/card"
+import * as Avatar from "@solidiom/avatar"
 import { IncidentCard } from "../components/IncidentCard"
 
 const SEVERITY_METRICS = [
   { label: "Critical", count: 2, color: "bg-red-50 border-red-200" },
   { label: "High", count: 5, color: "bg-orange-50 border-orange-200" },
   { label: "Medium", count: 12, color: "bg-yellow-50 border-yellow-200" },
+]
+
+const RECENT_TIMELINE = [
+  { time: "1 min ago", event: "INC-3042: Database failover initiated by Alice Chen" },
+  { time: "8 min ago", event: "INC-3042: Standby replica promoted to primary" },
+  { time: "15 min ago", event: "INC-3041: Payment retry queue depth at 14k messages" },
+  { time: "22 min ago", event: "INC-3041: Upstream provider acknowledged degradation" },
+  { time: "45 min ago", event: "INC-3040: API gateway config rolled back to v4.8.2" },
+  { time: "1 hour ago", event: "INC-3039: CDN cache purge submitted for us-east-1" },
+]
+
+const ACTIVE_RESPONDERS = [
+  { name: "Alice Chen", role: "Incident Commander", incidents: 2, status: "online" },
+  { name: "Bob Martinez", role: "Lead Engineer", incidents: 2, status: "online" },
+  { name: "Carol Wu", role: "SRE", incidents: 2, status: "online" },
+  { name: "Dave Kim", role: "Payments Engineer", incidents: 1, status: "online" },
+  { name: "Eve Johnson", role: "SRE", incidents: 2, status: "away" },
+  { name: "Frank Liu", role: "Network Engineer", incidents: 2, status: "online" },
+  { name: "Grace Park", role: "CDN Specialist", incidents: 1, status: "online" },
 ]
 
 const INCIDENTS = [
@@ -69,6 +89,62 @@ export function ActiveIncidents(): JSX.Element {
         {INCIDENTS.map((incident) => (
           <IncidentCard {...incident} />
         ))}
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <Card.Root class="rounded-lg border p-5 shadow-sm">
+          <Card.Header class="pb-3">
+            <Card.Title class="text-base font-semibold text-gray-900">Recent Timeline</Card.Title>
+            <Card.Description class="mt-1 text-sm text-gray-500">Latest updates across all active incidents.</Card.Description>
+          </Card.Header>
+          <Card.Content>
+            <div class="space-y-3">
+              {RECENT_TIMELINE.map((entry) => (
+                <div class="flex items-start gap-3">
+                  <div class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-indigo-400" />
+                  <div>
+                    <p class="text-sm text-gray-700">{entry.event}</p>
+                    <p class="text-xs text-gray-400">{entry.time}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card.Content>
+        </Card.Root>
+
+        <Card.Root class="rounded-lg border p-5 shadow-sm">
+          <Card.Header class="pb-3">
+            <Card.Title class="text-base font-semibold text-gray-900">Active Responders</Card.Title>
+            <Card.Description class="mt-1 text-sm text-gray-500">
+              {ACTIVE_RESPONDERS.length} engineers currently assigned.
+            </Card.Description>
+          </Card.Header>
+          <Card.Content>
+            <div class="space-y-3">
+              {ACTIVE_RESPONDERS.map((responder) => (
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <Avatar.Root class="h-8 w-8 overflow-hidden rounded-full bg-gray-200">
+                      <Avatar.Fallback class="flex h-full w-full items-center justify-center text-xs font-medium text-gray-600">
+                        {responder.name.split(" ").map((n) => n[0]).join("")}
+                      </Avatar.Fallback>
+                    </Avatar.Root>
+                    <div>
+                      <p class="text-sm font-medium text-gray-900">{responder.name}</p>
+                      <p class="text-xs text-gray-500">{responder.role}</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
+                      {responder.incidents} incident{responder.incidents > 1 ? "s" : ""}
+                    </span>
+                    <span class={`h-2 w-2 rounded-full ${responder.status === "online" ? "bg-green-400" : "bg-yellow-400"}`} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card.Content>
+        </Card.Root>
       </div>
     </div>
   )

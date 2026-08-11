@@ -10,6 +10,8 @@ const TRANSACTIONS = [
   { id: "TXN-003", invoice: "INV-004", amount: "$5,200.00", received: "$5,200.00", status: "matched" as const, date: "2026-07-29" },
   { id: "TXN-004", invoice: "—", amount: "—", received: "$450.00", status: "unmatched" as const, date: "2026-08-05" },
   { id: "TXN-005", invoice: "INV-003", amount: "$875.00", received: "—", status: "unmatched" as const, date: "—" },
+  { id: "TXN-006", invoice: "INV-005", amount: "$2,100.00", received: "$2,050.00", status: "discrepancy" as const, date: "2026-08-12" },
+  { id: "TXN-007", invoice: "INV-006", amount: "$6,780.00", received: "$6,780.00", status: "matched" as const, date: "2026-08-09" },
 ]
 
 const COLUMNS = [
@@ -63,6 +65,24 @@ export function Reconciliation(): JSX.Element {
       </div>
 
       <Card.Root class="mt-6 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+        <div class="grid grid-cols-4 gap-4 p-4">
+          <div>
+            <p class="text-sm font-medium text-gray-500">Total Records</p>
+            <p class="mt-1 text-2xl font-bold text-gray-900">{filtered().length}</p>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-gray-500">Matched</p>
+            <p class="mt-1 text-2xl font-bold text-emerald-600">{filtered().filter((t) => t.status === "matched").length}</p>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-gray-500">Discrepancies</p>
+            <p class="mt-1 text-2xl font-bold text-amber-600">{filtered().filter((t) => t.status === "discrepancy").length}</p>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-gray-500">Unmatched</p>
+            <p class="mt-1 text-2xl font-bold text-red-600">{filtered().filter((t) => t.status === "unmatched").length}</p>
+          </div>
+        </div>
         <DataTable.Root columns={COLUMNS} data={filtered()}>
           <DataTable.Header>
             {COLUMNS.map((col) => (

@@ -3,9 +3,9 @@ import { A, useLocation } from "@solidjs/router"
 import * as NavigationMenu from "@solidiom/navigation-menu"
 
 const NAV_ITEMS = [
-  { label: "Search Results", href: "/" },
-  { label: "Saved Searches", href: "/saved" },
-  { label: "Search Analytics", href: "/analytics" },
+  { label: "Search", href: "/" },
+  { label: "Saved", href: "/saved" },
+  { label: "Analytics", href: "/analytics" },
 ]
 
 export function AppShell(props: { children: JSX.Element }): JSX.Element {
