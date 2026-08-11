@@ -138,9 +138,7 @@ describe("CSS profile token usage", () => {
         (value): value is string => value !== null,
       ),
     )
-    const unaccounted = used.filter(
-      (property) => !spellings.has(property),
-    )
+    const unaccounted = used.filter((property) => !spellings.has(property))
     expect(unaccounted, "add these to recipe-contract-tokens.ts").toEqual([])
   })
 })

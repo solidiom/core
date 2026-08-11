@@ -11,17 +11,17 @@
 
 Nine scope/state pairs in `VOCABULARY_EXCEPTIONS` conflate a `data-state` emission with a boolean `data-*` flag. They are legal exceptions to the closed-vocabulary rule (§3.6 of the recipe contract). For G5, the pragmatic choice is to accept them with documented rationale rather than break 52 primitives' consumers.
 
-| # | Scope/State | Type | Flag Collision | Resolved By | GA Impact |
-|---|-------------|------|----------------|-------------|-----------|
-| 1 | `date-picker/disabled` | Flag duplication | `data-disabled` | PRIM-017 | Low — consumers target `[data-state='disabled']` on day cells |
-| 2 | `date-picker/selected` | Flag duplication | `data-selected` | PRIM-017 | Low — day selection expressed twice |
-| 3 | `data-table/selected` | Flag duplication | `data-selected` | PRIM-016 | Medium — row selection targeting is common |
-| 4 | `data-table/unselected` | Negative flag form | `data-selected` (absence) | PRIM-016 | Low — rarely targeted directly |
-| 5 | `data-table/sorted-asc` | Compound value | None (structural) | PRIM-016 | Medium — sort direction is actively styled |
-| 6 | `data-table/sorted-desc` | Compound value | None (structural) | PRIM-016 | Medium — sort direction is actively styled |
-| 7 | `progress/loading` | Flag collision + semantic difference | `data-loading` | PRIM-033 | Low — only state value the primitive emits |
-| 8 | `tree/selected` | Flag duplication | `data-selected` | PRIM-050 | Low — tree item selection targeting |
-| 9 | `tree/unselected` | Negative flag form | `data-selected` (absence) | PRIM-050 | Low — rarely targeted directly |
+| #   | Scope/State              | Type                                 | Flag Collision            | Resolved By | GA Impact                                                     |
+| --- | ------------------------ | ------------------------------------ | ------------------------- | ----------- | ------------------------------------------------------------- |
+| 1   | `date-picker/disabled`   | Flag duplication                     | `data-disabled`           | PRIM-017    | Low — consumers target `[data-state='disabled']` on day cells |
+| 2   | `date-picker/selected`   | Flag duplication                     | `data-selected`           | PRIM-017    | Low — day selection expressed twice                           |
+| 3   | `data-table/selected`    | Flag duplication                     | `data-selected`           | PRIM-016    | Medium — row selection targeting is common                    |
+| 4   | `data-table/unselected`  | Negative flag form                   | `data-selected` (absence) | PRIM-016    | Low — rarely targeted directly                                |
+| 5   | `data-table/sorted-asc`  | Compound value                       | None (structural)         | PRIM-016    | Medium — sort direction is actively styled                    |
+| 6   | `data-table/sorted-desc` | Compound value                       | None (structural)         | PRIM-016    | Medium — sort direction is actively styled                    |
+| 7   | `progress/loading`       | Flag collision + semantic difference | `data-loading`            | PRIM-033    | Low — only state value the primitive emits                    |
+| 8   | `tree/selected`          | Flag duplication                     | `data-selected`           | PRIM-050    | Low — tree item selection targeting                           |
+| 9   | `tree/unselected`        | Negative flag form                   | `data-selected` (absence) | PRIM-050    | Low — rarely targeted directly                                |
 
 ## Rationale
 
@@ -44,12 +44,12 @@ Nine scope/state pairs in `VOCABULARY_EXCEPTIONS` conflate a `data-state` emissi
 
 ## Resolution ownership
 
-| Task | Primitives | Expected resolution |
-|------|-----------|-------------------|
-| PRIM-016 | data-table | Remove `selected`/`unselected`/`sorted-*` state emissions; introduce `data-sort-direction` attribute |
-| PRIM-017 | date-picker | Remove `disabled`/`selected` state emissions; rely on boolean flags |
-| PRIM-033 | progress | Rename `loading` state or introduce `data-indeterminate` flag to resolve semantic collision |
-| PRIM-050 | tree | Remove `selected`/`unselected` state emissions; rely on boolean flag |
+| Task     | Primitives  | Expected resolution                                                                                  |
+| -------- | ----------- | ---------------------------------------------------------------------------------------------------- |
+| PRIM-016 | data-table  | Remove `selected`/`unselected`/`sorted-*` state emissions; introduce `data-sort-direction` attribute |
+| PRIM-017 | date-picker | Remove `disabled`/`selected` state emissions; rely on boolean flags                                  |
+| PRIM-033 | progress    | Rename `loading` state or introduce `data-indeterminate` flag to resolve semantic collision          |
+| PRIM-050 | tree        | Remove `selected`/`unselected` state emissions; rely on boolean flag                                 |
 
 ## Related artifacts
 

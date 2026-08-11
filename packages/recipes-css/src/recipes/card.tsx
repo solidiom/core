@@ -8,14 +8,12 @@ export { Card }
 
 const BASE_CLASS = "solidiom-card"
 
-export interface StyledCardProps
-  extends Omit<Parameters<typeof Card.Root>[0], "class"> {
+export interface StyledCardProps extends Omit<Parameters<typeof Card.Root>[0], "class"> {
   class?: string
 }
 
 export function StyledCard(props: StyledCardProps) {
-  const className = () =>
-    [BASE_CLASS, props.class].filter(Boolean).join(" ")
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ")
 
   return <Card.Root {...props} class={className()} />
 }

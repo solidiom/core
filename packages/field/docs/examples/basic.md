@@ -29,11 +29,7 @@ import * as Input from "@solidiom/input"
 
   <Field.Control>
     {(controlProps) => (
-      <Input.Root
-        {...controlProps()}
-        type="email"
-        placeholder="you@example.com"
-      />
+      <Input.Root {...controlProps()} type="email" placeholder="you@example.com" />
     )}
   </Field.Control>
 

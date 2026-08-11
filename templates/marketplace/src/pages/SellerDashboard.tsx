@@ -13,11 +13,46 @@ const METRICS = [
 ]
 
 const ORDERS = [
-  { id: "ORD-001", customer: "Alice Johnson", product: "Wireless Headphones Pro", amount: "$79.99", status: "Shipped", date: "2026-08-05" },
-  { id: "ORD-002", customer: "Bob Smith", product: "Organic Cotton T-Shirt", amount: "$24.99", status: "Processing", date: "2026-08-06" },
-  { id: "ORD-003", customer: "Carol White", product: "Smart Garden Kit", amount: "$49.99", status: "Delivered", date: "2026-08-01" },
-  { id: "ORD-004", customer: "Dave Brown", product: "Yoga Mat Premium", amount: "$34.99", status: "Shipped", date: "2026-08-07" },
-  { id: "ORD-005", customer: "Eve Davis", product: "Mechanical Keyboard RGB", amount: "$129.99", status: "Cancelled", date: "2026-08-03" },
+  {
+    id: "ORD-001",
+    customer: "Alice Johnson",
+    product: "Wireless Headphones Pro",
+    amount: "$79.99",
+    status: "Shipped",
+    date: "2026-08-05",
+  },
+  {
+    id: "ORD-002",
+    customer: "Bob Smith",
+    product: "Organic Cotton T-Shirt",
+    amount: "$24.99",
+    status: "Processing",
+    date: "2026-08-06",
+  },
+  {
+    id: "ORD-003",
+    customer: "Carol White",
+    product: "Smart Garden Kit",
+    amount: "$49.99",
+    status: "Delivered",
+    date: "2026-08-01",
+  },
+  {
+    id: "ORD-004",
+    customer: "Dave Brown",
+    product: "Yoga Mat Premium",
+    amount: "$34.99",
+    status: "Shipped",
+    date: "2026-08-07",
+  },
+  {
+    id: "ORD-005",
+    customer: "Eve Davis",
+    product: "Mechanical Keyboard RGB",
+    amount: "$129.99",
+    status: "Cancelled",
+    date: "2026-08-03",
+  },
 ]
 
 const LISTINGS = [
@@ -52,7 +87,9 @@ function getStatusBadge(status: string): JSX.Element {
     Draft: "bg-gray-100 text-gray-700",
   }
   return (
-    <span class={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${colors[status] ?? "bg-gray-100 text-gray-700"}`}>
+    <span
+      class={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${colors[status] ?? "bg-gray-100 text-gray-700"}`}
+    >
       {status}
     </span>
   )
@@ -66,11 +103,15 @@ export function SellerDashboard(): JSX.Element {
       <Breadcrumb.Root class="mb-4">
         <Breadcrumb.List class="flex items-center gap-2">
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">Home</Breadcrumb.Link>
+            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">
+              Home
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/seller" current class="text-sm font-medium text-gray-900">Seller Dashboard</Breadcrumb.Link>
+            <Breadcrumb.Link href="/seller" current class="text-sm font-medium text-gray-900">
+              Seller Dashboard
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
@@ -78,7 +119,9 @@ export function SellerDashboard(): JSX.Element {
       <div class="flex items-center justify-between">
         <div>
           <h1 class="text-2xl font-bold text-gray-900">Seller Dashboard</h1>
-          <p class="mt-1 text-sm text-gray-500">Manage your listings, view sales analytics, and handle orders.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Manage your listings, view sales analytics, and handle orders.
+          </p>
         </div>
         <Button.Root>Create Listing</Button.Root>
       </div>
@@ -88,9 +131,15 @@ export function SellerDashboard(): JSX.Element {
           <Card.Root class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
             <p class="text-sm font-medium text-gray-500">{m.title}</p>
             <p class="mt-2 text-2xl font-bold text-gray-900">{m.value}</p>
-            <p class={`mt-1 text-xs font-medium ${
-              m.changeType === "positive" ? "text-green-600" : m.changeType === "negative" ? "text-red-600" : "text-gray-500"
-            }`}>
+            <p
+              class={`mt-1 text-xs font-medium ${
+                m.changeType === "positive"
+                  ? "text-green-600"
+                  : m.changeType === "negative"
+                    ? "text-red-600"
+                    : "text-gray-500"
+              }`}
+            >
               {m.change} from last month
             </p>
           </Card.Root>
@@ -100,10 +149,16 @@ export function SellerDashboard(): JSX.Element {
       <Tabs.Root value={tab} onValueChange={setTab} class="mt-8">
         <div class="border-b border-gray-200">
           <Tabs.List class="flex gap-4">
-            <Tabs.Trigger value="orders" class="cursor-pointer border-b-2 px-3 py-2 text-sm font-medium transition-colors data-[selected]:border-indigo-600 data-[selected]:text-indigo-600 border-transparent text-gray-500">
+            <Tabs.Trigger
+              value="orders"
+              class="cursor-pointer border-b-2 px-3 py-2 text-sm font-medium transition-colors data-[selected]:border-indigo-600 data-[selected]:text-indigo-600 border-transparent text-gray-500"
+            >
               Orders
             </Tabs.Trigger>
-            <Tabs.Trigger value="listings" class="cursor-pointer border-b-2 px-3 py-2 text-sm font-medium transition-colors data-[selected]:border-indigo-600 data-[selected]:text-indigo-600 border-transparent text-gray-500">
+            <Tabs.Trigger
+              value="listings"
+              class="cursor-pointer border-b-2 px-3 py-2 text-sm font-medium transition-colors data-[selected]:border-indigo-600 data-[selected]:text-indigo-600 border-transparent text-gray-500"
+            >
               My Listings
             </Tabs.Trigger>
           </Tabs.List>

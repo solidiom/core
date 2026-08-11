@@ -3,7 +3,13 @@
   "stack": "vite-solid-router",
   "description": "Resource management application with list, detail, and creation views for generic domain resources.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-RESOURCE-03"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-RESOURCE-01",
+    "BLOCK-RESOURCE-02",
+    "BLOCK-RESOURCE-03"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["balanced-product", "enterprise"],

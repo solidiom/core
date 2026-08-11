@@ -14,42 +14,42 @@ date: 2026-08-07
 
 ## Site Performance Budgets
 
-| Metric | Budget | Target | Measurement |
-|--------|--------|--------|-------------|
-| Largest Contentful Paint (LCP) | < 2.5s | < 1.5s | Lighthouse navigation audit |
-| First Input Delay (FID) | < 100ms | < 50ms | Lighthouse / CrUX |
-| Cumulative Layout Shift (CLS) | < 0.1 | < 0.05 | Lighthouse navigation audit |
-| Time to Interactive (TTI) | < 3.5s | < 2.0s | Lighthouse navigation audit |
-| Total Blocking Time (TBT) | < 200ms | < 100ms | Lighthouse navigation audit |
+| Metric                         | Budget  | Target  | Measurement                 |
+| ------------------------------ | ------- | ------- | --------------------------- |
+| Largest Contentful Paint (LCP) | < 2.5s  | < 1.5s  | Lighthouse navigation audit |
+| First Input Delay (FID)        | < 100ms | < 50ms  | Lighthouse / CrUX           |
+| Cumulative Layout Shift (CLS)  | < 0.1   | < 0.05  | Lighthouse navigation audit |
+| Time to Interactive (TTI)      | < 3.5s  | < 2.0s  | Lighthouse navigation audit |
+| Total Blocking Time (TBT)      | < 200ms | < 100ms | Lighthouse navigation audit |
 
 ## Bundle Size Budgets
 
 ### Site (apps/site)
 
-| Asset | Budget | Notes |
-|-------|--------|-------|
-| Initial HTML (per page) | < 50 KB | Compressed; static pages |
-| CSS (total) | < 80 KB | Compressed; includes theme tokens |
-| JS (initial load) | < 100 KB | Compressed; route-level code splitting |
-| JS (per route chunk) | < 50 KB | Compressed; lazy-loaded |
-| Total page weight | < 300 KB | Compressed; excluding images |
+| Asset                   | Budget   | Notes                                  |
+| ----------------------- | -------- | -------------------------------------- |
+| Initial HTML (per page) | < 50 KB  | Compressed; static pages               |
+| CSS (total)             | < 80 KB  | Compressed; includes theme tokens      |
+| JS (initial load)       | < 100 KB | Compressed; route-level code splitting |
+| JS (per route chunk)    | < 50 KB  | Compressed; lazy-loaded                |
+| Total page weight       | < 300 KB | Compressed; excluding images           |
 
 ### Packages (per primitive)
 
-| Package | Budget | Notes |
-|---------|--------|-------|
-| Primitive (src/) | < 15 KB | Uncompressed source |
-| Primitive (dist/) | < 10 KB | Minified ESM output |
-| Recipe wrapper | < 5 KB | Uncompressed; styling only |
-| Recipe CSS | < 3 KB | Per-component stylesheet |
+| Package           | Budget  | Notes                      |
+| ----------------- | ------- | -------------------------- |
+| Primitive (src/)  | < 15 KB | Uncompressed source        |
+| Primitive (dist/) | < 10 KB | Minified ESM output        |
+| Recipe wrapper    | < 5 KB  | Uncompressed; styling only |
+| Recipe CSS        | < 3 KB  | Per-component stylesheet   |
 
 ### Templates (generated projects)
 
-| Metric | Budget | Notes |
-|--------|--------|-------|
+| Metric               | Budget   | Notes                      |
+| -------------------- | -------- | -------------------------- |
 | Initial bundle (dev) | < 500 KB | Uncompressed; includes HMR |
-| Production bundle | < 200 KB | Compressed; code-split |
-| Build time | < 10s | Vite production build |
+| Production bundle    | < 200 KB | Compressed; code-split     |
+| Build time           | < 10s    | Vite production build      |
 
 ## Enforcement
 

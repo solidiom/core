@@ -31,7 +31,6 @@ import * as ToggleGroup from "@solidiom/recipes-css"
 </ToggleGroup.Root>
 ```
 
-
 ## Instalación
 
 ```sh

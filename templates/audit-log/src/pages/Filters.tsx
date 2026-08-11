@@ -5,8 +5,22 @@ import * as Card from "@solidiom/card"
 import * as Button from "@solidiom/button"
 import * as Alert from "@solidiom/alert"
 
-const ACTORS = ["alice@example.com", "bob@example.com", "carol@example.com", "system", "eve@example.com"]
-const ACTIONS = ["LOGIN", "LOGOUT", "CREATE_USER", "UPDATE_ROLE", "DELETE_RECORD", "EXPORT_DATA", "MODIFY_PERMISSION"]
+const ACTORS = [
+  "alice@example.com",
+  "bob@example.com",
+  "carol@example.com",
+  "system",
+  "eve@example.com",
+]
+const ACTIONS = [
+  "LOGIN",
+  "LOGOUT",
+  "CREATE_USER",
+  "UPDATE_ROLE",
+  "DELETE_RECORD",
+  "EXPORT_DATA",
+  "MODIFY_PERMISSION",
+]
 const SEVERITIES = ["info", "warning", "error", "success"]
 
 export function Filters(): JSX.Element {
@@ -31,23 +45,31 @@ export function Filters(): JSX.Element {
           <Breadcrumb.Root class="mb-2">
             <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                  Home
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
               <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/filters" current class="text-gray-900 font-medium">Filters</Breadcrumb.Link>
+                <Breadcrumb.Link href="/filters" current class="text-gray-900 font-medium">
+                  Filters
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
             </Breadcrumb.List>
           </Breadcrumb.Root>
           <h1 class="text-2xl font-bold text-gray-900">Advanced Filters</h1>
-          <p class="mt-1 text-sm text-gray-500">Build complex queries to narrow down audit events by actor, action, severity, and date range.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Build complex queries to narrow down audit events by actor, action, severity, and date
+            range.
+          </p>
         </div>
       </div>
 
       <Alert.Root type="info" class="rounded-md border border-blue-200 bg-blue-50 p-4">
         <Alert.Title class="text-sm font-medium text-blue-800">Filter Builder</Alert.Title>
         <Alert.Description class="mt-1 text-sm text-blue-700">
-          {matchCount()} events match your current filter criteria. Adjust filters below to refine results.
+          {matchCount()} events match your current filter criteria. Adjust filters below to refine
+          results.
         </Alert.Description>
       </Alert.Root>
 
@@ -65,7 +87,9 @@ export function Filters(): JSX.Element {
                 onChange={(e) => setActor(e.currentTarget.value)}
               >
                 <option value="">All actors</option>
-                {ACTORS.map((a) => <option value={a}>{a}</option>)}
+                {ACTORS.map((a) => (
+                  <option value={a}>{a}</option>
+                ))}
               </select>
             </div>
             <div>
@@ -76,7 +100,9 @@ export function Filters(): JSX.Element {
                 onChange={(e) => setAction(e.currentTarget.value)}
               >
                 <option value="">All actions</option>
-                {ACTIONS.map((a) => <option value={a}>{a}</option>)}
+                {ACTIONS.map((a) => (
+                  <option value={a}>{a}</option>
+                ))}
               </select>
             </div>
           </Card.Content>
@@ -84,7 +110,9 @@ export function Filters(): JSX.Element {
 
         <Card.Root class="rounded-lg border border-gray-200 bg-white shadow-sm">
           <Card.Header class="border-b border-gray-100 px-6 py-4">
-            <Card.Title class="text-base font-semibold text-gray-900">Severity & Date Range</Card.Title>
+            <Card.Title class="text-base font-semibold text-gray-900">
+              Severity & Date Range
+            </Card.Title>
           </Card.Header>
           <Card.Content class="px-6 py-4 space-y-4">
             <div>
@@ -95,7 +123,9 @@ export function Filters(): JSX.Element {
                 onChange={(e) => setSeverity(e.currentTarget.value)}
               >
                 <option value="">All severities</option>
-                {SEVERITIES.map((s) => <option value={s}>{s}</option>)}
+                {SEVERITIES.map((s) => (
+                  <option value={s}>{s}</option>
+                ))}
               </select>
             </div>
             <div class="grid grid-cols-2 gap-4">

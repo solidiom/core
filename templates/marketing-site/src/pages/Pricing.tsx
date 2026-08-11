@@ -15,14 +15,28 @@ const TIERS = [
     tier: "Pro",
     price: "$29",
     period: "month",
-    features: ["Unlimited projects", "Advanced analytics", "Priority support", "50 GB storage", "Custom integrations", "Team collaboration"],
+    features: [
+      "Unlimited projects",
+      "Advanced analytics",
+      "Priority support",
+      "50 GB storage",
+      "Custom integrations",
+      "Team collaboration",
+    ],
     highlighted: true,
   },
   {
     tier: "Enterprise",
     price: "$99",
     period: "month",
-    features: ["Everything in Pro", "Dedicated support", "Unlimited storage", "SSO & SAML", "Custom SLA", "On-premise deployment"],
+    features: [
+      "Everything in Pro",
+      "Dedicated support",
+      "Unlimited storage",
+      "SSO & SAML",
+      "Custom SLA",
+      "On-premise deployment",
+    ],
     highlighted: false,
   },
 ]
@@ -39,12 +53,35 @@ const COMPARISON = [
 ]
 
 const FAQ = [
-  { question: "Can I switch plans at any time?", answer: "Yes, you can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle." },
-  { question: "Is there a free trial?", answer: "We offer a 14-day free trial for the Pro plan with full access to all features. No credit card required." },
-  { question: "What payment methods do you accept?", answer: "We accept all major credit cards, PayPal, and bank transfers for annual plans." },
-  { question: "Do you offer discounts for nonprofits?", answer: "Yes, we offer a 50% discount for verified nonprofit organizations. Contact our sales team to apply." },
-  { question: "What happens when I exceed my storage limit?", answer: "You'll receive a notification when you reach 80% of your storage limit. You can upgrade your plan or purchase additional storage add-ons." },
-  { question: "Can I cancel my subscription anytime?", answer: "Yes, you can cancel your subscription at any time. Your access will continue until the end of your current billing period." },
+  {
+    question: "Can I switch plans at any time?",
+    answer:
+      "Yes, you can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle.",
+  },
+  {
+    question: "Is there a free trial?",
+    answer:
+      "We offer a 14-day free trial for the Pro plan with full access to all features. No credit card required.",
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept all major credit cards, PayPal, and bank transfers for annual plans.",
+  },
+  {
+    question: "Do you offer discounts for nonprofits?",
+    answer:
+      "Yes, we offer a 50% discount for verified nonprofit organizations. Contact our sales team to apply.",
+  },
+  {
+    question: "What happens when I exceed my storage limit?",
+    answer:
+      "You'll receive a notification when you reach 80% of your storage limit. You can upgrade your plan or purchase additional storage add-ons.",
+  },
+  {
+    question: "Can I cancel my subscription anytime?",
+    answer:
+      "Yes, you can cancel your subscription at any time. Your access will continue until the end of your current billing period.",
+  },
 ]
 
 export function Pricing(): JSX.Element {
@@ -57,14 +94,18 @@ export function Pricing(): JSX.Element {
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Pricing</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Pricing
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div class="mt-6 text-center">
         <h1 class="text-2xl font-bold text-gray-900">Simple, Transparent Pricing</h1>
-        <p class="mt-1 text-sm text-gray-500">Choose the plan that fits your needs. No hidden fees.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Choose the plan that fits your needs. No hidden fees.
+        </p>
       </div>
 
       <div class="mt-12 grid gap-8 sm:grid-cols-3">
@@ -113,9 +154,7 @@ export function Pricing(): JSX.Element {
               <summary class="cursor-pointer px-6 py-4 font-medium text-gray-900">
                 {item.question}
               </summary>
-              <div class="px-6 pb-4 text-sm text-gray-600">
-                {item.answer}
-              </div>
+              <div class="px-6 pb-4 text-sm text-gray-600">{item.answer}</div>
             </details>
           ))}
         </div>

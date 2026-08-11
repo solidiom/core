@@ -4,27 +4,84 @@ import * as Button from "@solidiom/button"
 import { FeatureCard } from "../components/FeatureCard"
 
 const CORE_FEATURES = [
-  { title: "Real-time Collaboration", description: "Work together with your team in real-time. See changes as they happen, leave comments, and resolve conflicts automatically.", icon: "👥" },
-  { title: "Advanced Analytics", description: "Gain insights with powerful dashboards and custom reports. Track KPIs, monitor performance, and make data-driven decisions.", icon: "📊" },
-  { title: "Automated Workflows", description: "Build custom automation rules to eliminate repetitive tasks. Set triggers, conditions, and actions without writing code.", icon: "⚡" },
+  {
+    title: "Real-time Collaboration",
+    description:
+      "Work together with your team in real-time. See changes as they happen, leave comments, and resolve conflicts automatically.",
+    icon: "👥",
+  },
+  {
+    title: "Advanced Analytics",
+    description:
+      "Gain insights with powerful dashboards and custom reports. Track KPIs, monitor performance, and make data-driven decisions.",
+    icon: "📊",
+  },
+  {
+    title: "Automated Workflows",
+    description:
+      "Build custom automation rules to eliminate repetitive tasks. Set triggers, conditions, and actions without writing code.",
+    icon: "⚡",
+  },
 ]
 
 const ADVANCED_FEATURES = [
-  { title: "Enterprise Security", description: "Bank-grade security with SSO, MFA, and role-based access control. SOC 2 Type II certified and GDPR compliant.", icon: "🔒" },
-  { title: "API-First Design", description: "Integrate with your existing tools through our comprehensive REST API. Webhook support for real-time event notifications.", icon: "🔗" },
-  { title: "Global Infrastructure", description: "Deployed across 20+ regions for low-latency access worldwide. Automatic failover and 99.99% uptime SLA.", icon: "🌍" },
+  {
+    title: "Enterprise Security",
+    description:
+      "Bank-grade security with SSO, MFA, and role-based access control. SOC 2 Type II certified and GDPR compliant.",
+    icon: "🔒",
+  },
+  {
+    title: "API-First Design",
+    description:
+      "Integrate with your existing tools through our comprehensive REST API. Webhook support for real-time event notifications.",
+    icon: "🔗",
+  },
+  {
+    title: "Global Infrastructure",
+    description:
+      "Deployed across 20+ regions for low-latency access worldwide. Automatic failover and 99.99% uptime SLA.",
+    icon: "🌍",
+  },
 ]
 
 const DEVELOPER_FEATURES = [
-  { title: "CLI Tools", description: "Powerful command-line interface for scripting, automation, and CI/CD pipeline integration. Available on all major platforms.", icon: "💻" },
-  { title: "Webhooks & Events", description: "Subscribe to platform events with webhooks. Build reactive integrations that respond to changes in real-time.", icon: "🔔" },
-  { title: "SDKs & Libraries", description: "Official SDKs for JavaScript, Python, and Go. Get started in minutes with comprehensive documentation and examples.", icon: "📦" },
+  {
+    title: "CLI Tools",
+    description:
+      "Powerful command-line interface for scripting, automation, and CI/CD pipeline integration. Available on all major platforms.",
+    icon: "💻",
+  },
+  {
+    title: "Webhooks & Events",
+    description:
+      "Subscribe to platform events with webhooks. Build reactive integrations that respond to changes in real-time.",
+    icon: "🔔",
+  },
+  {
+    title: "SDKs & Libraries",
+    description:
+      "Official SDKs for JavaScript, Python, and Go. Get started in minutes with comprehensive documentation and examples.",
+    icon: "📦",
+  },
 ]
 
 const USE_CASES = [
-  { title: "SaaS Startups", description: "Launch and scale your product with infrastructure that grows with you. From MVP to enterprise-ready in weeks." },
-  { title: "Enterprise Teams", description: "Centralize your workflows, enforce governance, and maintain compliance across global teams and regions." },
-  { title: "DevOps & Engineering", description: "Automate deployments, monitor system health, and reduce mean time to recovery with built-in observability." },
+  {
+    title: "SaaS Startups",
+    description:
+      "Launch and scale your product with infrastructure that grows with you. From MVP to enterprise-ready in weeks.",
+  },
+  {
+    title: "Enterprise Teams",
+    description:
+      "Centralize your workflows, enforce governance, and maintain compliance across global teams and regions.",
+  },
+  {
+    title: "DevOps & Engineering",
+    description:
+      "Automate deployments, monitor system health, and reduce mean time to recovery with built-in observability.",
+  },
 ]
 
 export function Features(): JSX.Element {
@@ -37,14 +94,18 @@ export function Features(): JSX.Element {
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Features</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Features
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div class="mt-6">
         <h1 class="text-2xl font-bold text-gray-900">Features</h1>
-        <p class="mt-1 text-sm text-gray-500">Everything you need to build, ship, and scale your products.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Everything you need to build, ship, and scale your products.
+        </p>
       </div>
 
       <div class="mt-12">
@@ -63,7 +124,9 @@ export function Features(): JSX.Element {
 
       <div class="mt-12">
         <h2 class="text-xl font-bold text-gray-900">Advanced Capabilities</h2>
-        <p class="mt-1 text-sm text-gray-500">Enterprise-grade features for teams with demanding requirements.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Enterprise-grade features for teams with demanding requirements.
+        </p>
         <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {ADVANCED_FEATURES.map((feature) => (
             <FeatureCard
@@ -77,7 +140,9 @@ export function Features(): JSX.Element {
 
       <div class="mt-12">
         <h2 class="text-xl font-bold text-gray-900">For Developers</h2>
-        <p class="mt-1 text-sm text-gray-500">Developer-first tooling that fits into your existing workflow.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Developer-first tooling that fits into your existing workflow.
+        </p>
         <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {DEVELOPER_FEATURES.map((feature) => (
             <FeatureCard

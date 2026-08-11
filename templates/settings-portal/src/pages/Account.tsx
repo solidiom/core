@@ -23,7 +23,9 @@ export function Account(): JSX.Element {
     <div class="min-h-screen bg-gray-50">
       <header class="border-b border-gray-200 bg-white">
         <div class="mx-auto flex h-16 max-w-3xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <A href="/" class="text-lg font-bold text-gray-900">Settings</A>
+          <A href="/" class="text-lg font-bold text-gray-900">
+            Settings
+          </A>
           <nav class="flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
               <A
@@ -54,36 +56,68 @@ export function Account(): JSX.Element {
             </Alert.Description>
           </Alert.Root>
 
-          <SettingGroup title="Profile Information" description="Update your name and contact details.">
+          <SettingGroup
+            title="Profile Information"
+            description="Update your name and contact details."
+          >
             <div class="space-y-4">
               <Field.Root>
                 <Field.Label class="block text-sm font-medium text-gray-700">Full Name</Field.Label>
-                <Input.Root value={name()} class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" />
+                <Input.Root
+                  value={name()}
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                />
               </Field.Root>
 
               <Field.Root>
-                <Field.Label class="block text-sm font-medium text-gray-700">Email Address</Field.Label>
-                <Input.Root value={email()} type="email" class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" />
-                <Field.Description class="mt-1 text-xs text-gray-500">We will send a verification email to your new address.</Field.Description>
+                <Field.Label class="block text-sm font-medium text-gray-700">
+                  Email Address
+                </Field.Label>
+                <Input.Root
+                  value={email()}
+                  type="email"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                />
+                <Field.Description class="mt-1 text-xs text-gray-500">
+                  We will send a verification email to your new address.
+                </Field.Description>
               </Field.Root>
             </div>
           </SettingGroup>
 
-          <SettingGroup title="Password" description="Change your password to keep your account secure.">
+          <SettingGroup
+            title="Password"
+            description="Change your password to keep your account secure."
+          >
             <Card.Root class="rounded-lg border border-gray-200 bg-white">
               <Card.Content class="px-4 py-4">
                 <div class="space-y-4">
                   <Field.Root>
-                    <Field.Label class="block text-sm font-medium text-gray-700">Current Password</Field.Label>
-                    <Input.Root type="password" class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" />
+                    <Field.Label class="block text-sm font-medium text-gray-700">
+                      Current Password
+                    </Field.Label>
+                    <Input.Root
+                      type="password"
+                      class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    />
                   </Field.Root>
                   <Field.Root>
-                    <Field.Label class="block text-sm font-medium text-gray-700">New Password</Field.Label>
-                    <Input.Root type="password" class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" />
+                    <Field.Label class="block text-sm font-medium text-gray-700">
+                      New Password
+                    </Field.Label>
+                    <Input.Root
+                      type="password"
+                      class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    />
                   </Field.Root>
                   <Field.Root>
-                    <Field.Label class="block text-sm font-medium text-gray-700">Confirm New Password</Field.Label>
-                    <Input.Root type="password" class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" />
+                    <Field.Label class="block text-sm font-medium text-gray-700">
+                      Confirm New Password
+                    </Field.Label>
+                    <Input.Root
+                      type="password"
+                      class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    />
                   </Field.Root>
                 </div>
               </Card.Content>

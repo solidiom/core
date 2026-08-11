@@ -22,13 +22,13 @@ Superseded by `apps/site/` (the Astro static site) with full parity verified per
 
 ## Legacy routes and their successors in `apps/site/`
 
-| Legacy route | Legacy file | apps/site/ successor |
-|---|---|---|
-| `/` (Home) | `src/routes/index.tsx` | `src/pages/index.astro` |
-| `/primitives/[name]` | `src/routes/primitives/[name].tsx` | `src/pages/primitives/[name]/index.astro` (+ api, examples, accessibility views) |
-| `/performance` | `src/routes/performance.tsx` | **Deferred** — no route yet; `packages/bench/` infrastructure exists |
-| `/recipes` | `src/routes/recipes.tsx` | `src/pages/components/[name]/[view].astro` (examples view) |
-| `/accessibility` | `src/routes/accessibility.tsx` | **Deferred** — content at `src/content/en/pages/accessibility.md`; no route wired yet |
+| Legacy route         | Legacy file                        | apps/site/ successor                                                                  |
+| -------------------- | ---------------------------------- | ------------------------------------------------------------------------------------- |
+| `/` (Home)           | `src/routes/index.tsx`             | `src/pages/index.astro`                                                               |
+| `/primitives/[name]` | `src/routes/primitives/[name].tsx` | `src/pages/primitives/[name]/index.astro` (+ api, examples, accessibility views)      |
+| `/performance`       | `src/routes/performance.tsx`       | **Deferred** — no route yet; `packages/bench/` infrastructure exists                  |
+| `/recipes`           | `src/routes/recipes.tsx`           | `src/pages/components/[name]/[view].astro` (examples view)                            |
+| `/accessibility`     | `src/routes/accessibility.tsx`     | **Deferred** — content at `src/content/en/pages/accessibility.md`; no route wired yet |
 
 ## Demos
 

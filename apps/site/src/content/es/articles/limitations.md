@@ -2,7 +2,8 @@
 contentSchemaVersion: 1
 title: "Limitaciones Conocidas"
 description: "Limitaciones actuales de Solidiom GA incluyendo dependencia de Solid 2 beta, estabilidad de API, soporte de navegador, cobertura de accesibilidad y funcionalidades diferidas."
-keywords: [limitaciones, problemas-conocidos, soporte-navegador, accesibilidad, solid-2, estabilidad-api]
+keywords:
+  [limitaciones, problemas-conocidos, soporte-navegador, accesibilidad, solid-2, estabilidad-api]
 locale: es
 maturity: draft
 product: "Solidiom"
@@ -38,11 +39,11 @@ Sin garantías de versionamiento semántico hasta v1.0 estable. La API pública 
 
 Se requiere Safari 17.2+. WebKit tiene limitaciones conocidas en algunos sistemas. Chromium (Chrome, Edge) y Firefox están totalmente certificados.
 
-| Motor | Navegadores | Estado |
-|-------|-------------|--------|
-| Chromium | Chrome, Edge, Brave | Certificado |
-| Gecko | Firefox | Certificado |
-| WebKit | Safari 17.2+ | Limitado — problemas conocidos en algunos sistemas |
+| Motor    | Navegadores         | Estado                                             |
+| -------- | ------------------- | -------------------------------------------------- |
+| Chromium | Chrome, Edge, Brave | Certificado                                        |
+| Gecko    | Firefox             | Certificado                                        |
+| WebKit   | Safari 17.2+        | Limitado — problemas conocidos en algunos sistemas |
 
 ## Cobertura de Accesibilidad
 

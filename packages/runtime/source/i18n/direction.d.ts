@@ -8,9 +8,9 @@
  *   <DirectionContext value="rtl">…</DirectionContext>
  * Primitives read via useContext(DirectionContext) with "ltr" default.
  */
-import { type Accessor } from "solid-js";
+import { type Accessor } from "solid-js"
 /** Text direction values. */
-export type Direction = "ltr" | "rtl";
+export type Direction = "ltr" | "rtl"
 /**
  * DirectionContext — Solid 2 context for RTL/LTR propagation.
  *
@@ -27,23 +27,23 @@ export type Direction = "ltr" | "rtl";
  * const dir = useDirection() // "rtl"
  * ```
  */
-export declare const DirectionContext: import("solid-js").Context<Direction>;
+export declare const DirectionContext: import("solid-js").Context<Direction>
 /**
  * Reads the current text direction from DirectionContext.
  * Returns "ltr" if no provider is found.
  */
-export declare function useDirection(): Direction;
+export declare function useDirection(): Direction
 /** Options for resolving direction. */
 export interface DirectionOptions {
-    /** Explicit direction override. */
-    direction?: Accessor<Direction | undefined>;
-    /** Element to read `dir` attribute from (fallback). */
-    element?: () => Element | undefined;
+  /** Explicit direction override. */
+  direction?: Accessor<Direction | undefined>
+  /** Element to read `dir` attribute from (fallback). */
+  element?: () => Element | undefined
 }
 /**
  * Resolves the current text direction.
  *
  * Priority: explicit prop > element's computed dir > "ltr" default.
  */
-export declare function resolveDirection(options?: DirectionOptions): Accessor<Direction>;
+export declare function resolveDirection(options?: DirectionOptions): Accessor<Direction>
 //# sourceMappingURL=direction.d.ts.map

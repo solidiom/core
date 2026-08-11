@@ -1,7 +1,12 @@
 import type { JSX } from "solid-js"
 import * as Card from "@solidiom/card"
 
-export function ResultCard(props: { title: string; snippet: string; url?: string; date?: string }): JSX.Element {
+export function ResultCard(props: {
+  title: string
+  snippet: string
+  url?: string
+  date?: string
+}): JSX.Element {
   return (
     <Card.Root class="rounded-lg border border-gray-200 bg-white">
       <Card.Content class="px-4 py-4">

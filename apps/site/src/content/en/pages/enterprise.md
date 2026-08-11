@@ -16,21 +16,21 @@ Solidiom's Enterprise portfolio provides production-ready templates for platform
 
 ## Enterprise Templates
 
-| Template | Purpose |
-|----------|---------|
-| [Identity & Access](/templates/identity-access/) | User directory, RBAC roles, session management |
-| [Audit Log](/templates/audit-log/) | Event stream, filters, compliance export |
-| [Billing Operations](/templates/billing-operations/) | Invoices, reconciliation, financial reports |
-| [Incident Response](/templates/incident-response/) | Active incidents, runbooks, postmortems |
-| [AI Operations](/templates/ai-operations/) | Model monitoring, deployments, cost tracking |
-| [API Management](/templates/api-management/) | Endpoint catalog, key lifecycle, usage analytics |
-| [Developer Portal](/templates/developer-portal/) | Documentation, SDK playground, app management |
-| [Security Center](/templates/security-center/) | Threat dashboard, vulnerabilities, policies |
-| [Compliance Center](/templates/compliance-center/) | Framework tracking, control assessments, evidence |
-| [Data Governance](/templates/data-governance/) | Data catalog, lineage, classification |
-| [Workflow Automation](/templates/workflow-automation/) | Visual designer, run history, integrations |
-| [Support Operations](/templates/support-operations/) | Ticket queue, knowledge base, metrics |
-| [Enterprise Settings](/templates/enterprise-settings/) | Organization config, SSO/MFA, SCIM |
+| Template                                               | Purpose                                           |
+| ------------------------------------------------------ | ------------------------------------------------- |
+| [Identity & Access](/templates/identity-access/)       | User directory, RBAC roles, session management    |
+| [Audit Log](/templates/audit-log/)                     | Event stream, filters, compliance export          |
+| [Billing Operations](/templates/billing-operations/)   | Invoices, reconciliation, financial reports       |
+| [Incident Response](/templates/incident-response/)     | Active incidents, runbooks, postmortems           |
+| [AI Operations](/templates/ai-operations/)             | Model monitoring, deployments, cost tracking      |
+| [API Management](/templates/api-management/)           | Endpoint catalog, key lifecycle, usage analytics  |
+| [Developer Portal](/templates/developer-portal/)       | Documentation, SDK playground, app management     |
+| [Security Center](/templates/security-center/)         | Threat dashboard, vulnerabilities, policies       |
+| [Compliance Center](/templates/compliance-center/)     | Framework tracking, control assessments, evidence |
+| [Data Governance](/templates/data-governance/)         | Data catalog, lineage, classification             |
+| [Workflow Automation](/templates/workflow-automation/) | Visual designer, run history, integrations        |
+| [Support Operations](/templates/support-operations/)   | Ticket queue, knowledge base, metrics             |
+| [Enterprise Settings](/templates/enterprise-settings/) | Organization config, SSO/MFA, SCIM                |
 
 ## Technical Architecture
 

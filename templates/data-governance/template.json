@@ -3,7 +3,13 @@
   "stack": "vite-solid-router",
   "description": "Data governance console with data catalog, lineage explorer, and classification policies.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-RESOURCE-01", "BLOCK-RESOURCE-02", "BLOCK-RESOURCE-03"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-RESOURCE-01",
+    "BLOCK-RESOURCE-02",
+    "BLOCK-RESOURCE-03"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["enterprise"],

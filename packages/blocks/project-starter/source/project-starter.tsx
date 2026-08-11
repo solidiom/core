@@ -54,7 +54,10 @@ export function ProjectStarter(props: ProjectStarterProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-project-starter", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-project-starter", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-project-starter__restricted" role="alert">
           <p>{props.restrictedReason || "Project creation is restricted."}</p>
@@ -71,7 +74,15 @@ export function ProjectStarter(props: ProjectStarterProps): JSX.Element {
         <form onSubmit={handleSubmit} class="solidiom-block-project-starter__form">
           <div class="solidiom-block-project-starter__field">
             <label for="project-name">Project Name</label>
-            <input id="project-name" type="text" value={projectName()} onInput={(e) => setProjectName(e.currentTarget.value)} placeholder="my-project" required disabled={state() === "loading"} />
+            <input
+              id="project-name"
+              type="text"
+              value={projectName()}
+              onInput={(e) => setProjectName(e.currentTarget.value)}
+              placeholder="my-project"
+              required
+              disabled={state() === "loading"}
+            />
           </div>
 
           <div class="solidiom-block-project-starter__templates">
@@ -79,7 +90,13 @@ export function ProjectStarter(props: ProjectStarterProps): JSX.Element {
             <div class="solidiom-block-project-starter__template-grid">
               <For each={props.templates ?? []}>
                 {(tpl) => (
-                  <button type="button" class="solidiom-block-project-starter__template-card" classList={{ "is-selected": selectedTemplate() === tpl.id }} onClick={() => setSelectedTemplate(tpl.id)} disabled={state() === "loading"}>
+                  <button
+                    type="button"
+                    class="solidiom-block-project-starter__template-card"
+                    classList={{ "is-selected": selectedTemplate() === tpl.id }}
+                    onClick={() => setSelectedTemplate(tpl.id)}
+                    disabled={state() === "loading"}
+                  >
                     <strong>{tpl.name}</strong>
                     <p>{tpl.description}</p>
                   </button>
@@ -88,8 +105,14 @@ export function ProjectStarter(props: ProjectStarterProps): JSX.Element {
             </div>
           </div>
 
-          <button type="submit" class="solidiom-block-project-starter__submit" disabled={state() === "loading"}>
-            <Show when={state() === "loading"} fallback="Create Project">Creating...</Show>
+          <button
+            type="submit"
+            class="solidiom-block-project-starter__submit"
+            disabled={state() === "loading"}
+          >
+            <Show when={state() === "loading"} fallback="Create Project">
+              Creating...
+            </Show>
           </button>
         </form>
       </Show>

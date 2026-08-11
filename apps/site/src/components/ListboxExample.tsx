@@ -26,11 +26,7 @@ export function ListboxExample(props: ListboxExampleProps) {
       class="listbox-example"
       data-listbox-example
     >
-      <Listbox.Root
-        selectionMode="single"
-        defaultValue={[]}
-        aria-label={copy().label}
-      >
+      <Listbox.Root selectionMode="single" defaultValue={[]} aria-label={copy().label}>
         {copy().items.map((item) => (
           <Listbox.Item value={item.toLowerCase()}>{item}</Listbox.Item>
         ))}

@@ -13,12 +13,36 @@ const CATEGORIES = [
 ]
 
 const DOCS = [
-  { title: "Quick Start Guide", description: "Get up and running in under 5 minutes with this step-by-step guide.", category: "Getting Started" },
-  { title: "Installation", description: "Install the framework using npm, yarn, or pnpm.", category: "Getting Started" },
-  { title: "Project Structure", description: "Understanding the default project layout and conventions.", category: "Core Concepts" },
-  { title: "Component Basics", description: "Learn how to create and compose components.", category: "Core Concepts" },
-  { title: "State Management", description: "Managing local and global state with signals and stores.", category: "Core Concepts" },
-  { title: "Routing", description: "Client-side navigation with file-based routing.", category: "Core Concepts" },
+  {
+    title: "Quick Start Guide",
+    description: "Get up and running in under 5 minutes with this step-by-step guide.",
+    category: "Getting Started",
+  },
+  {
+    title: "Installation",
+    description: "Install the framework using npm, yarn, or pnpm.",
+    category: "Getting Started",
+  },
+  {
+    title: "Project Structure",
+    description: "Understanding the default project layout and conventions.",
+    category: "Core Concepts",
+  },
+  {
+    title: "Component Basics",
+    description: "Learn how to create and compose components.",
+    category: "Core Concepts",
+  },
+  {
+    title: "State Management",
+    description: "Managing local and global state with signals and stores.",
+    category: "Core Concepts",
+  },
+  {
+    title: "Routing",
+    description: "Client-side navigation with file-based routing.",
+    category: "Core Concepts",
+  },
 ]
 
 export function DocsReader(): JSX.Element {
@@ -27,8 +51,9 @@ export function DocsReader(): JSX.Element {
 
   const filtered = () =>
     DOCS.filter((doc) => {
-      const matchesSearch = doc.title.toLowerCase().includes(search().toLowerCase())
-        || doc.description.toLowerCase().includes(search().toLowerCase())
+      const matchesSearch =
+        doc.title.toLowerCase().includes(search().toLowerCase()) ||
+        doc.description.toLowerCase().includes(search().toLowerCase())
       const matchesCategory = activeCategory() === "All" || doc.category === activeCategory()
       return matchesSearch && matchesCategory
     })
@@ -42,14 +67,18 @@ export function DocsReader(): JSX.Element {
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Overview</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Overview
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div class="mt-6">
         <h1 class="text-2xl font-bold text-gray-900">Documentation</h1>
-        <p class="mt-1 text-sm text-gray-500">Browse documentation with sidebar navigation, search, and versioning.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Browse documentation with sidebar navigation, search, and versioning.
+        </p>
       </div>
 
       <div class="mt-6 flex flex-col gap-6 lg:flex-row">
@@ -66,7 +95,9 @@ export function DocsReader(): JSX.Element {
             <button
               onClick={() => setActiveCategory("All")}
               class={`block w-full rounded-md px-3 py-2 text-left text-sm font-medium ${
-                activeCategory() === "All" ? "bg-indigo-50 text-indigo-700" : "text-gray-700 hover:bg-gray-100"
+                activeCategory() === "All"
+                  ? "bg-indigo-50 text-indigo-700"
+                  : "text-gray-700 hover:bg-gray-100"
               }`}
             >
               All Categories
@@ -75,7 +106,9 @@ export function DocsReader(): JSX.Element {
               <button
                 onClick={() => setActiveCategory(cat.name)}
                 class={`block w-full rounded-md px-3 py-2 text-left text-sm font-medium ${
-                  activeCategory() === cat.name ? "bg-indigo-50 text-indigo-700" : "text-gray-700 hover:bg-gray-100"
+                  activeCategory() === cat.name
+                    ? "bg-indigo-50 text-indigo-700"
+                    : "text-gray-700 hover:bg-gray-100"
                 }`}
               >
                 {cat.name}
@@ -88,11 +121,7 @@ export function DocsReader(): JSX.Element {
         <div class="flex-1">
           <div class="grid gap-6 sm:grid-cols-2">
             {filtered().map((doc) => (
-              <DocCard
-                title={doc.title}
-                description={doc.description}
-                category={doc.category}
-              />
+              <DocCard title={doc.title} description={doc.description} category={doc.category} />
             ))}
           </div>
 

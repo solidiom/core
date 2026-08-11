@@ -35,16 +35,16 @@ Internal documentation for Solidiom contributors and maintainers.
 
 ## Plan authority
 
-| Question                                          | Authority                                          |
-| ------------------------------------------------- | -------------------------------------------------- |
-| What is happening now?                            | `docs/plans/README.md`                             |
-| Which tasks are open or complete?                 | `docs/plans/consolidated-plan.md`                  |
-| What must catalog items satisfy?                  | `docs/plans/consolidated-plan.md` §8               |
-| In what order should work run?                    | `docs/plans/consolidated-plan.md` §6/§7            |
-| What is the active library release roadmap?       | `docs/plans/consolidated-plan.md` §5               |
-| Why were catalog decisions D1–D6 made?            | `docs/architecture/decisions/catalog-decisions.md` |
-| Why are typeset/prose recipe utilities?           | `docs/architecture/decisions/typeset.md`           |
-| What happened during completed phases?            | `docs/history/plans/`                              |
+| Question                                    | Authority                                          |
+| ------------------------------------------- | -------------------------------------------------- |
+| What is happening now?                      | `docs/plans/README.md`                             |
+| Which tasks are open or complete?           | `docs/plans/consolidated-plan.md`                  |
+| What must catalog items satisfy?            | `docs/plans/consolidated-plan.md` §8               |
+| In what order should work run?              | `docs/plans/consolidated-plan.md` §6/§7            |
+| What is the active library release roadmap? | `docs/plans/consolidated-plan.md` §5               |
+| Why were catalog decisions D1–D6 made?      | `docs/architecture/decisions/catalog-decisions.md` |
+| Why are typeset/prose recipe utilities?     | `docs/architecture/decisions/typeset.md`           |
+| What happened during completed phases?      | `docs/history/plans/`                              |
 
 ## Lifecycle
 

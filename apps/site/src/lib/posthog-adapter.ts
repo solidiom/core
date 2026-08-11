@@ -52,24 +52,26 @@ export function initPostHog(apiKey: string | undefined): void {
   if (!apiKey || typeof window === "undefined") return
 
   // Dynamically import posthog-js to avoid bundling it in SSR
-  import("posthog-js").then((posthog) => {
-    const config: PostHogConfig = {
-      api_host: "https://us.i.posthog.com",
-      autocapture: false,
-      capture_pageview: false,
-      capture_pageleave: false,
-      disable_session_recording: true,
-      persistence: "memory",
-    }
+  import("posthog-js")
+    .then((posthog) => {
+      const config: PostHogConfig = {
+        api_host: "https://us.i.posthog.com",
+        autocapture: false,
+        capture_pageview: false,
+        capture_pageleave: false,
+        disable_session_recording: true,
+        persistence: "memory",
+      }
 
-    posthog.default.init(apiKey, config)
-    client = posthog.default as unknown as PostHogClient
+      posthog.default.init(apiKey, config)
+      client = posthog.default as unknown as PostHogClient
 
-    // Subscribe to the internal event bus
-    unsubscribe = subscribe(forwardEvent)
-  }).catch(() => {
-    // PostHog unavailable — degrade gracefully
-  })
+      // Subscribe to the internal event bus
+      unsubscribe = subscribe(forwardEvent)
+    })
+    .catch(() => {
+      // PostHog unavailable — degrade gracefully
+    })
 }
 
 /** Forward a typed analytics event to PostHog. */

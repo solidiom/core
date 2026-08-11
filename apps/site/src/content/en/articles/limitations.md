@@ -40,11 +40,11 @@ No semantic versioning guarantees until v1.0 stable. The public API may change b
 
 Safari 17.2+ is required. WebKit has known limitations on some systems. Chromium (Chrome, Edge) and Firefox are fully certified.
 
-| Engine | Browsers | Status |
-|--------|----------|--------|
-| Chromium | Chrome, Edge, Brave | Certified |
-| Gecko | Firefox | Certified |
-| WebKit | Safari 17.2+ | Limited — known issues on some systems |
+| Engine   | Browsers            | Status                                 |
+| -------- | ------------------- | -------------------------------------- |
+| Chromium | Chrome, Edge, Brave | Certified                              |
+| Gecko    | Firefox             | Certified                              |
+| WebKit   | Safari 17.2+        | Limited — known issues on some systems |
 
 ## Accessibility Coverage
 

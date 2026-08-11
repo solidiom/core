@@ -2,10 +2,10 @@ import type { JSX } from "solid-js"
 import * as Checkbox from "@solidiom/checkbox"
 
 export function FilterBar(props: {
-  categories: { label: string; checked: boolean }[];
-  types: { label: string; checked: boolean }[];
-  onCategoryToggle: (index: number) => void;
-  onTypeToggle: (index: number) => void;
+  categories: { label: string; checked: boolean }[]
+  types: { label: string; checked: boolean }[]
+  onCategoryToggle: (index: number) => void
+  onTypeToggle: (index: number) => void
 }): JSX.Element {
   return (
     <div class="space-y-4">
@@ -13,8 +13,13 @@ export function FilterBar(props: {
         <p class="text-sm font-medium text-gray-900">Categories</p>
         <div class="mt-3 flex flex-wrap gap-3">
           {props.categories.map((cat, i) => (
-            <Checkbox.Root checked={() => cat.checked} onCheckedChange={() => props.onCategoryToggle(i)}>
-              <Checkbox.Indicator><span class="text-sm text-gray-700">{cat.label}</span></Checkbox.Indicator>
+            <Checkbox.Root
+              checked={() => cat.checked}
+              onCheckedChange={() => props.onCategoryToggle(i)}
+            >
+              <Checkbox.Indicator>
+                <span class="text-sm text-gray-700">{cat.label}</span>
+              </Checkbox.Indicator>
             </Checkbox.Root>
           ))}
         </div>
@@ -23,8 +28,13 @@ export function FilterBar(props: {
         <p class="text-sm font-medium text-gray-900">Content Types</p>
         <div class="mt-3 flex flex-wrap gap-3">
           {props.types.map((type, i) => (
-            <Checkbox.Root checked={() => type.checked} onCheckedChange={() => props.onTypeToggle(i)}>
-              <Checkbox.Indicator><span class="text-sm text-gray-700">{type.label}</span></Checkbox.Indicator>
+            <Checkbox.Root
+              checked={() => type.checked}
+              onCheckedChange={() => props.onTypeToggle(i)}
+            >
+              <Checkbox.Indicator>
+                <span class="text-sm text-gray-700">{type.label}</span>
+              </Checkbox.Indicator>
             </Checkbox.Root>
           ))}
         </div>

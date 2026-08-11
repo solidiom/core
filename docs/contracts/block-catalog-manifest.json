@@ -18,21 +18,10 @@
         "Permission-restricted (account locked, MFA required)",
         "Success (redirect to post-auth destination)"
       ],
-      "componentDependencies": [
-        "COMP-001",
-        "COMP-002",
-        "COMP-003",
-        "COMP-005",
-        "COMP-029"
-      ],
+      "componentDependencies": ["COMP-001", "COMP-002", "COMP-003", "COMP-005", "COMP-029"],
       "dataBoundary": "Authentication service via OAuth 2.0 / OIDC or credential endpoint. No persistent data at rest within the block; session token passed to application shell.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-AUTH-02",
@@ -57,12 +46,7 @@
       ],
       "dataBoundary": "User creation service and email delivery service. Temporary verification token; no PII stored within the block.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-AUTH-03",
@@ -87,12 +71,7 @@
       ],
       "dataBoundary": "Password reset service; time-limited tokens. Block never exposes whether an email exists in the system.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-ONBOARD-01",
@@ -120,12 +99,7 @@
       ],
       "dataBoundary": "User preferences service. Skippable steps; partial progress persisted to resume later.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-ONBOARD-02",
@@ -151,12 +125,7 @@
       ],
       "dataBoundary": "User profile service and file storage for avatar. Block reads current user context; writes profile updates.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-ONBOARD-03",
@@ -183,12 +152,7 @@
       ],
       "dataBoundary": "Template catalog service and project creation service. Block reads available templates; creates project resource.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-SETTINGS-01",
@@ -216,12 +180,7 @@
       ],
       "dataBoundary": "User profile and authentication services. Block reads current user data; writes profile and password updates. Email change requires re-verification.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-SETTINGS-02",
@@ -249,12 +208,7 @@
       ],
       "dataBoundary": "Notification preferences service. Block reads per-user notification settings; writes updated preferences.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-SETTINGS-03",
@@ -280,12 +234,7 @@
       ],
       "dataBoundary": "Account lifecycle service and data export service. Block requires re-authentication for destructive actions. Data export is async with status polling.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-BILLING-01",
@@ -312,12 +261,7 @@
       ],
       "dataBoundary": "Billing service for plan catalog and current subscription. Block reads plan metadata and user's active subscription; writes plan changes.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-BILLING-02",
@@ -346,12 +290,7 @@
       ],
       "dataBoundary": "Payment processor via tokenization API. Block never stores raw card numbers; relies on payment provider's hosted fields or tokens.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-BILLING-03",
@@ -377,12 +316,7 @@
       ],
       "dataBoundary": "Billing service invoice endpoint. Read-only block; invoice PDFs served via pre-signed URLs from the billing provider.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-ADMIN-01",
@@ -413,12 +347,7 @@
       ],
       "dataBoundary": "Team management and invitation services. Block requires admin role; reads team roster; writes invites and membership changes.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-ADMIN-02",
@@ -446,12 +375,7 @@
       ],
       "dataBoundary": "Audit event store. Read-only block; requires admin role. Events are immutable append-only records.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-ADMIN-03",
@@ -482,12 +406,7 @@
       ],
       "dataBoundary": "Role and permission services. Block reads role definitions and permission schema; writes role-permission mappings. Changes take effect on next authentication cycle.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-OBS-01",
@@ -514,12 +433,7 @@
       ],
       "dataBoundary": "Metrics aggregation service. Read-only block; data refreshes on a configurable interval. Time-range selector controls query window.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-OBS-02",
@@ -548,12 +462,7 @@
       ],
       "dataBoundary": "Events streaming service via WebSocket or SSE. Read-only block; events are ephemeral unless explicitly saved.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-OBS-03",
@@ -586,12 +495,7 @@
       ],
       "dataBoundary": "Alert rules service and notification channel registry. Block reads existing rules; creates/updates/deletes alert configurations.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-RESOURCE-01",
@@ -621,12 +525,7 @@
       ],
       "dataBoundary": "Resource catalog service. Read-only block with bulk selection for downstream actions. Supports server-side pagination and filtering.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-RESOURCE-02",
@@ -656,12 +555,7 @@
       ],
       "dataBoundary": "Resource detail service and activity log. Block reads resource data; performs scoped actions (start/stop/delete) with confirmation.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-RESOURCE-03",
@@ -695,12 +589,7 @@
       ],
       "dataBoundary": "Resource creation service and template catalog. Block reads templates and quota; creates resource asynchronously.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-AI-01",
@@ -730,12 +619,7 @@
       ],
       "dataBoundary": "AI chat service with streaming responses. Block manages conversation state locally; persists messages to chat history service.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-AI-02",
@@ -769,12 +653,7 @@
       ],
       "dataBoundary": "Prompt storage service and AI execution endpoint. Block reads/writes prompt definitions; executes test prompts against AI service.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-AI-03",
@@ -809,12 +688,7 @@
       ],
       "dataBoundary": "Workflow definition service and execution engine. Block reads/writes workflow definitions; triggers async execution with status polling.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-SEARCH-01",
@@ -842,12 +716,7 @@
       ],
       "dataBoundary": "Search index service. Read-only block; query and filter parameters passed to search API. Results include snippet and metadata.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-SEARCH-02",
@@ -878,12 +747,7 @@
       ],
       "dataBoundary": "Saved search storage and alert notification service. Block reads/writes saved queries; manages alert subscriptions.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-SEARCH-03",
@@ -909,12 +773,7 @@
       ],
       "dataBoundary": "Search analytics aggregation service. Read-only block; aggregates anonymized search metrics. No individual query content exposed.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-COMMERCE-01",
@@ -943,12 +802,7 @@
       ],
       "dataBoundary": "Product catalog service. Read-only block; product images served via CDN. Price and availability cached with TTL.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-COMMERCE-02",
@@ -979,12 +833,7 @@
       ],
       "dataBoundary": "Cart service and pricing service. Block reads cart state; updates quantities and coupons. Checkout transitions to billing flow.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-COMMERCE-03",
@@ -1014,12 +863,7 @@
       ],
       "dataBoundary": "Order management and shipping tracking services. Read-only block; tracking data polled from carrier APIs.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-CONTENT-01",
@@ -1052,12 +896,7 @@
       ],
       "dataBoundary": "Content storage service. Block reads document content; writes incremental saves with conflict detection.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-CONTENT-02",
@@ -1090,12 +929,7 @@
       ],
       "dataBoundary": "Asset storage and metadata service. Block reads asset listing; supports upload and deletion with confirmation.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-CONTENT-03",
@@ -1133,12 +967,7 @@
       ],
       "dataBoundary": "Content workflow and approval services. Block reads pipeline state; transitions items between stages with permission checks.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-SHELL-01",
@@ -1169,12 +998,7 @@
       ],
       "dataBoundary": "Navigation configuration service and user permissions. Block reads menu structure; highlights active route. Sidebar state persisted in local storage.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-SHELL-02",
@@ -1202,12 +1026,7 @@
       ],
       "dataBoundary": "Command registry service. Block reads available commands scoped to user permissions; executes actions via command handlers.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     },
     {
       "id": "BLOCK-SHELL-03",
@@ -1239,12 +1058,7 @@
       ],
       "dataBoundary": "Notification service with real-time updates. Block reads notification feed; writes read/dismiss states. Supports WebSocket push for new notifications.",
       "proposedComponents": [],
-      "requiredStates": [
-        "loading",
-        "empty",
-        "error",
-        "restricted"
-      ]
+      "requiredStates": ["loading", "empty", "error", "restricted"]
     }
   ],
   "resolution": {

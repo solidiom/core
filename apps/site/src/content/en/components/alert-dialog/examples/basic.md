@@ -32,8 +32,12 @@ import { StyledAlertDialog, AlertDialog } from "@solidiom/recipes-css"
     <AlertDialog.Content>
       <AlertDialog.Title>Are you sure?</AlertDialog.Title>
       <AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>
-      <AlertDialog.Cancel><button type="button">Cancel</button></AlertDialog.Cancel>
-      <AlertDialog.Action><button type="button">Delete</button></AlertDialog.Action>
+      <AlertDialog.Cancel>
+        <button type="button">Cancel</button>
+      </AlertDialog.Cancel>
+      <AlertDialog.Action>
+        <button type="button">Delete</button>
+      </AlertDialog.Action>
     </AlertDialog.Content>
   </AlertDialog.Portal>
 </AlertDialog.Root>

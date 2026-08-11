@@ -27,11 +27,15 @@ export function Reports(): JSX.Element {
       <Breadcrumb.Root class="mb-4">
         <Breadcrumb.List class="flex items-center gap-2">
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">Home</Breadcrumb.Link>
+            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">
+              Home
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/reports" current class="text-sm font-medium text-gray-900">Reports</Breadcrumb.Link>
+            <Breadcrumb.Link href="/reports" current class="text-sm font-medium text-gray-900">
+              Reports
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
@@ -39,7 +43,9 @@ export function Reports(): JSX.Element {
       <div class="flex items-center justify-between">
         <div>
           <h1 class="text-2xl font-bold text-gray-900">Financial Reports</h1>
-          <p class="mt-1 text-sm text-gray-500">Generate revenue reports, aging summaries, and financial dashboards.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Generate revenue reports, aging summaries, and financial dashboards.
+          </p>
         </div>
         <Button.Root variant="secondary">Export CSV</Button.Root>
       </div>
@@ -49,9 +55,11 @@ export function Reports(): JSX.Element {
           <Card.Root class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
             <p class="text-sm font-medium text-gray-500">{m.title}</p>
             <p class="mt-2 text-2xl font-bold text-gray-900">{m.value}</p>
-            <p class={`mt-1 text-xs font-medium ${
-              m.changeType === "positive" ? "text-green-600" : "text-red-600"
-            }`}>
+            <p
+              class={`mt-1 text-xs font-medium ${
+                m.changeType === "positive" ? "text-green-600" : "text-red-600"
+              }`}
+            >
               {m.change} from last month
             </p>
           </Card.Root>
@@ -61,10 +69,16 @@ export function Reports(): JSX.Element {
       <Tabs.Root value={tab} onValueChange={setTab} class="mt-8">
         <div class="border-b border-gray-200">
           <Tabs.List class="flex gap-4">
-            <Tabs.Trigger value="overview" class="cursor-pointer border-b-2 px-3 py-2 text-sm font-medium transition-colors data-[selected]:border-indigo-600 data-[selected]:text-indigo-600 border-transparent text-gray-500">
+            <Tabs.Trigger
+              value="overview"
+              class="cursor-pointer border-b-2 px-3 py-2 text-sm font-medium transition-colors data-[selected]:border-indigo-600 data-[selected]:text-indigo-600 border-transparent text-gray-500"
+            >
               Monthly Overview
             </Tabs.Trigger>
-            <Tabs.Trigger value="aging" class="cursor-pointer border-b-2 px-3 py-2 text-sm font-medium transition-colors data-[selected]:border-indigo-600 data-[selected]:text-indigo-600 border-transparent text-gray-500">
+            <Tabs.Trigger
+              value="aging"
+              class="cursor-pointer border-b-2 px-3 py-2 text-sm font-medium transition-colors data-[selected]:border-indigo-600 data-[selected]:text-indigo-600 border-transparent text-gray-500"
+            >
               Aging Summary
             </Tabs.Trigger>
           </Tabs.List>
@@ -75,10 +89,18 @@ export function Reports(): JSX.Element {
             <table class="w-full">
               <thead class="bg-gray-50">
                 <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Month</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Revenue</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Paid</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Outstanding</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Month
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Revenue
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Paid
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Outstanding
+                  </th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-100">
@@ -100,9 +122,15 @@ export function Reports(): JSX.Element {
             <table class="w-full">
               <thead class="bg-gray-50">
                 <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Age Bucket</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Count</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Age Bucket
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Count
+                  </th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Amount
+                  </th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-100">

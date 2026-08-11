@@ -9,9 +9,7 @@ export function FeatureCard(props: {
   return (
     <Card.Root class="max-w-sm">
       <Card.Header>
-        {props.icon && (
-          <div class="text-2xl">{props.icon}</div>
-        )}
+        {props.icon && <div class="text-2xl">{props.icon}</div>}
         <Card.Title>{props.title}</Card.Title>
       </Card.Header>
       <Card.Content>

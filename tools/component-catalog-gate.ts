@@ -183,7 +183,10 @@ function readDeclaredCount(): number {
 
 // ─── Per-component verification ─────────────────────────────────────────────
 
-function verifyComponent(comp: ApprovedComponent, indexComponents: IndexComponent[]): ComponentResult {
+function verifyComponent(
+  comp: ApprovedComponent,
+  indexComponents: IndexComponent[],
+): ComponentResult {
   const failures: string[] = []
   const name = comp.name
 
@@ -288,7 +291,9 @@ function verifyComponent(comp: ApprovedComponent, indexComponents: IndexComponen
       if (!citesEvidence) {
         failures.push("EN doc does not cite primitive's accessibility contract or evidence.json")
       }
-    } catch { /* validated above */ }
+    } catch {
+      /* validated above */
+    }
   }
 
   return { id: comp.id, name, passed: failures.length === 0, failures }

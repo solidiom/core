@@ -12,13 +12,34 @@ const statusStyles: Record<string, string> = {
 
 export function SavedSearches(): JSX.Element {
   const [savedSearches, setSavedSearches] = createSignal([
-    { id: 1, name: "Solid.js Updates", query: "solidjs framework", lastRun: "2 hours ago", resultCount: 42, active: true },
-    { id: 2, name: "TypeScript Tips", query: "typescript advanced patterns", lastRun: "1 day ago", resultCount: 18, active: true },
-    { id: 3, name: "Tailwind v4", query: "tailwindcss v4 migration", lastRun: "3 days ago", resultCount: 0, active: false },
+    {
+      id: 1,
+      name: "Solid.js Updates",
+      query: "solidjs framework",
+      lastRun: "2 hours ago",
+      resultCount: 42,
+      active: true,
+    },
+    {
+      id: 2,
+      name: "TypeScript Tips",
+      query: "typescript advanced patterns",
+      lastRun: "1 day ago",
+      resultCount: 18,
+      active: true,
+    },
+    {
+      id: 3,
+      name: "Tailwind v4",
+      query: "tailwindcss v4 migration",
+      lastRun: "3 days ago",
+      resultCount: 0,
+      active: false,
+    },
   ])
 
   const deleteSearch = (id: number) => {
-    setSavedSearches(prev => prev.filter(item => item.id !== id))
+    setSavedSearches((prev) => prev.filter((item) => item.id !== id))
   }
 
   return (
@@ -26,24 +47,31 @@ export function SavedSearches(): JSX.Element {
       <Breadcrumb.Root>
         <Breadcrumb.List class="flex items-center gap-2">
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-900">Search</Breadcrumb.Link>
+            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-900">
+              Search
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/saved" current class="text-sm font-medium text-gray-900">Saved Searches</Breadcrumb.Link>
+            <Breadcrumb.Link href="/saved" current class="text-sm font-medium text-gray-900">
+              Saved Searches
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div>
         <h1 class="text-2xl font-bold text-gray-900">Saved Searches</h1>
-        <p class="mt-1 text-sm text-gray-500">Manage your saved search queries and alert subscriptions.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Manage your saved search queries and alert subscriptions.
+        </p>
       </div>
 
       <Alert.Root type="info" class="rounded-md border border-blue-200 bg-blue-50 p-4">
         <Alert.Title class="text-sm font-medium text-blue-800">Saved Searches</Alert.Title>
         <Alert.Description class="mt-1 text-sm text-blue-700">
-          You have {savedSearches().length} saved searches. Click "Run" to re-execute or "Delete" to remove.
+          You have {savedSearches().length} saved searches. Click "Run" to re-execute or "Delete" to
+          remove.
         </Alert.Description>
       </Alert.Root>
 
@@ -55,12 +83,16 @@ export function SavedSearches(): JSX.Element {
                 <div>
                   <div class="flex items-center gap-2">
                     <p class="text-sm font-medium text-gray-900">{saved.name}</p>
-                    <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusStyles[saved.active ? "active" : "paused"]}`}>
+                    <span
+                      class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusStyles[saved.active ? "active" : "paused"]}`}
+                    >
                       {saved.active ? "active" : "paused"}
                     </span>
                   </div>
                   <p class="text-xs text-gray-500">Query: {saved.query}</p>
-                  <p class="mt-0.5 text-xs text-gray-400">Last run: {saved.lastRun} • {saved.resultCount} results</p>
+                  <p class="mt-0.5 text-xs text-gray-400">
+                    Last run: {saved.lastRun} • {saved.resultCount} results
+                  </p>
                 </div>
                 <div class="flex gap-2">
                   <Button.Root class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">

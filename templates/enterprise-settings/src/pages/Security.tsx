@@ -22,26 +22,38 @@ export function Security(): JSX.Element {
         <Breadcrumb.Root class="mb-2">
           <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Settings</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Settings
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/security" current class="text-gray-900 font-medium">Security</Breadcrumb.Link>
+              <Breadcrumb.Link href="/security" current class="text-gray-900 font-medium">
+                Security
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
         <h1 class="text-2xl font-bold text-gray-900">Security Settings</h1>
-        <p class="mt-1 text-sm text-gray-500">Configure SSO, MFA enforcement, session policies, and IP allowlists.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Configure SSO, MFA enforcement, session policies, and IP allowlists.
+        </p>
       </div>
 
       <Alert.Root type="warning" class="rounded-md border border-yellow-200 bg-yellow-50 p-4">
-        <Alert.Title class="text-sm font-medium text-yellow-800">Security Recommendation</Alert.Title>
+        <Alert.Title class="text-sm font-medium text-yellow-800">
+          Security Recommendation
+        </Alert.Title>
         <Alert.Description class="mt-1 text-sm text-yellow-700">
-          Multi-factor authentication is not required for all users. Enabling it significantly improves account security.
+          Multi-factor authentication is not required for all users. Enabling it significantly
+          improves account security.
         </Alert.Description>
       </Alert.Root>
 
-      <SettingGroup title="Single Sign-On (SSO)" description="Configure identity provider for centralized authentication.">
+      <SettingGroup
+        title="Single Sign-On (SSO)"
+        description="Configure identity provider for centralized authentication."
+      >
         <div class="space-y-4">
           <ToggleRow
             label="Enable SSO"
@@ -53,12 +65,24 @@ export function Security(): JSX.Element {
             <Card.Content class="px-4 py-4">
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700">Identity Provider URL</label>
-                  <input type="text" value="https://idp.example.com/saml" class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-500" readOnly />
+                  <label class="block text-sm font-medium text-gray-700">
+                    Identity Provider URL
+                  </label>
+                  <input
+                    type="text"
+                    value="https://idp.example.com/saml"
+                    class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-500"
+                    readOnly
+                  />
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700">Entity ID</label>
-                  <input type="text" value="urn:acme:sso:entity" class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-500" readOnly />
+                  <input
+                    type="text"
+                    value="urn:acme:sso:entity"
+                    class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-500"
+                    readOnly
+                  />
                 </div>
               </div>
             </Card.Content>
@@ -66,7 +90,10 @@ export function Security(): JSX.Element {
         </div>
       </SettingGroup>
 
-      <SettingGroup title="Multi-Factor Authentication" description="Require additional verification for user sign-ins.">
+      <SettingGroup
+        title="Multi-Factor Authentication"
+        description="Require additional verification for user sign-ins."
+      >
         <ToggleRow
           label="Require MFA for all users"
           description="All users must enable a second factor before accessing the platform."
@@ -75,7 +102,10 @@ export function Security(): JSX.Element {
         />
       </SettingGroup>
 
-      <SettingGroup title="Session Policies" description="Control how long user sessions remain active.">
+      <SettingGroup
+        title="Session Policies"
+        description="Control how long user sessions remain active."
+      >
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-medium text-gray-700">Session Timeout</label>

@@ -3,10 +3,10 @@
  *
  * Parts: Root.
  */
-import { type JSX } from "@solidjs/web";
+import { type JSX } from "@solidjs/web"
 export interface BadgeProps {
-    children: JSX.Element;
-    class?: string;
+  children: JSX.Element
+  class?: string
 }
-export declare function Root(props: BadgeProps): JSX.Element;
+export declare function Root(props: BadgeProps): JSX.Element
 //# sourceMappingURL=index.d.ts.map

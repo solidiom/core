@@ -293,13 +293,9 @@ describe("registry index signing (REG-005, REG-008 Ed25519)", () => {
     const preSigContent = JSON.stringify(preSigIndex, null, 2)
 
     // Verify using WebCrypto
-    const pubKey = await globalThis.crypto.subtle.importKey(
-      "spki",
-      testPubDer,
-      "Ed25519",
-      false,
-      ["verify"],
-    )
+    const pubKey = await globalThis.crypto.subtle.importKey("spki", testPubDer, "Ed25519", false, [
+      "verify",
+    ])
     const valid = await globalThis.crypto.subtle.verify(
       "Ed25519",
       pubKey,

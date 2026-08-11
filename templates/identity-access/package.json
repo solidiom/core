@@ -40,6 +40,8 @@
     "vite-plugin-solid": "3.0.0-next.23"
   },
   "nx": {
-    "tags": ["layer:template"]
+    "tags": [
+      "layer:template"
+    ]
   }
 }

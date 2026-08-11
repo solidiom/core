@@ -175,10 +175,7 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
 
   // Byte-level verification MUST happen before any write to disk.
   const envKey = process.env["REGISTRY_VERIFY_KEY"]
-  const verifyKeys = [
-    ...(envKey ? [envKey] : []),
-    ...policy.registryPublicKeys,
-  ]
+  const verifyKeys = [...(envKey ? [envKey] : []), ...policy.registryPublicKeys]
 
   // For component/block, verify against the underlying primitive's manifest
   // since the component manifest carries per-output digests and the install

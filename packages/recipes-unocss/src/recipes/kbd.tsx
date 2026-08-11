@@ -8,14 +8,12 @@ export { Kbd }
 
 const BASE_CLASS = "solidiom-kbd"
 
-export interface StyledKbdProps
-  extends Omit<Parameters<typeof Kbd.Root>[0], "class"> {
+export interface StyledKbdProps extends Omit<Parameters<typeof Kbd.Root>[0], "class"> {
   class?: string
 }
 
 export function StyledKbd(props: StyledKbdProps) {
-  const className = () =>
-    [BASE_CLASS, props.class].filter(Boolean).join(" ")
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ")
 
   return <Kbd.Root {...props} class={className()} />
 }

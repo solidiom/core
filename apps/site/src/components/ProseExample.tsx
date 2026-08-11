@@ -18,9 +18,11 @@ const COPY: Record<
       "The prose recipe styles nested semantic HTML when markup comes from Markdown or a rich-text editor.",
     heading2: "Usage",
     list1: "Apply one scope attribute to the container.",
-    list2: 'Choose <code>sm</code>, <code>base</code>, or <code>lg</code> with <code>data-size</code>.',
+    list2:
+      "Choose <code>sm</code>, <code>base</code>, or <code>lg</code> with <code>data-size</code>.",
     list3: "Import the stylesheet for your styling profile.",
-    paragraph2: 'Solid renders the content; the <a href="https://www.solidjs.com">stylesheet</a> handles its presentation.',
+    paragraph2:
+      'Solid renders the content; the <a href="https://www.solidjs.com">stylesheet</a> handles its presentation.',
   },
   es: {
     heading1: "Contenido renderizado",
@@ -28,9 +30,11 @@ const COPY: Record<
       "La receta prose estila HTML semántico anidado cuando la marca proviene de Markdown o un editor de texto enriquecido.",
     heading2: "Uso",
     list1: "Aplique un atributo de scope al contenedor.",
-    list2: 'Elija <code>sm</code>, <code>base</code>, o <code>lg</code> con <code>data-size</code>.',
+    list2:
+      "Elija <code>sm</code>, <code>base</code>, o <code>lg</code> con <code>data-size</code>.",
     list3: "Importe la hoja de estilos para su perfil de estilo.",
-    paragraph2: 'Solid renderiza el contenido; la <a href="https://www.solidjs.com">hoja de estilos</a> maneja su presentación.',
+    paragraph2:
+      'Solid renderiza el contenido; la <a href="https://www.solidjs.com">hoja de estilos</a> maneja su presentación.',
   },
 }
 

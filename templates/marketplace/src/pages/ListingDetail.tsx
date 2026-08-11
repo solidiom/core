@@ -12,7 +12,8 @@ const PRODUCT = {
   seller: "AudioTech",
   rating: 4.5,
   reviews: 128,
-  description: "Premium wireless headphones with active noise cancellation, 30-hour battery life, and Hi-Res Audio certification. Comfortable over-ear design with memory foam cushions.",
+  description:
+    "Premium wireless headphones with active noise cancellation, 30-hour battery life, and Hi-Res Audio certification. Comfortable over-ear design with memory foam cushions.",
   specs: [
     { label: "Battery Life", value: "30 hours" },
     { label: "Connectivity", value: "Bluetooth 5.2" },
@@ -22,9 +23,24 @@ const PRODUCT = {
 }
 
 const REVIEWS = [
-  { author: "Mike R.", rating: 5, date: "2026-07-28", text: "Best headphones I've ever owned. The noise cancellation is incredible." },
-  { author: "Sarah L.", rating: 4, date: "2026-07-15", text: "Great sound quality, but a bit tight on my head. Breaking in nicely though." },
-  { author: "Tom H.", rating: 4, date: "2026-07-02", text: "Solid build, excellent battery life. Wish they came in more colors." },
+  {
+    author: "Mike R.",
+    rating: 5,
+    date: "2026-07-28",
+    text: "Best headphones I've ever owned. The noise cancellation is incredible.",
+  },
+  {
+    author: "Sarah L.",
+    rating: 4,
+    date: "2026-07-15",
+    text: "Great sound quality, but a bit tight on my head. Breaking in nicely though.",
+  },
+  {
+    author: "Tom H.",
+    rating: 4,
+    date: "2026-07-02",
+    text: "Solid build, excellent battery life. Wish they came in more colors.",
+  },
 ]
 
 export function ListingDetail(): JSX.Element {
@@ -33,11 +49,15 @@ export function ListingDetail(): JSX.Element {
       <Breadcrumb.Root class="mb-4">
         <Breadcrumb.List class="flex items-center gap-2">
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">Browse</Breadcrumb.Link>
+            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">
+              Browse
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/listing/1" current class="text-sm font-medium text-gray-900">{PRODUCT.name}</Breadcrumb.Link>
+            <Breadcrumb.Link href="/listing/1" current class="text-sm font-medium text-gray-900">
+              {PRODUCT.name}
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
@@ -74,7 +94,9 @@ export function ListingDetail(): JSX.Element {
           </div>
 
           <div class="mt-8 flex gap-3">
-            <Button.Root class="bg-indigo-600 text-white hover:bg-indigo-700">Add to Cart</Button.Root>
+            <Button.Root class="bg-indigo-600 text-white hover:bg-indigo-700">
+              Add to Cart
+            </Button.Root>
             <Button.Root variant="secondary">Buy Now</Button.Root>
           </div>
         </div>

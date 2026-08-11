@@ -69,11 +69,24 @@ export function SignUp(): JSX.Element {
     return (
       <div class="flex min-h-screen items-center justify-center bg-gray-50">
         <div class="w-full max-w-md px-4">
-          <AuthCard title="Account created" subtitle="You're all set! Check your email to verify your account.">
+          <AuthCard
+            title="Account created"
+            subtitle="You're all set! Check your email to verify your account."
+          >
             <div class="flex flex-col items-center space-y-4 py-4">
               <div class="flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-                <svg class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                <svg
+                  class="h-8 w-8 text-green-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </div>
               <p class="text-center text-sm text-gray-600">
@@ -93,7 +106,10 @@ export function SignUp(): JSX.Element {
   return (
     <div class="flex min-h-screen items-center justify-center bg-gray-50">
       <div class="w-full max-w-md px-4">
-        <AuthCard title="Create account" subtitle="Start your 30-day free trial. No credit card required.">
+        <AuthCard
+          title="Create account"
+          subtitle="Start your 30-day free trial. No credit card required."
+        >
           <div class="space-y-4">
             {error() && (
               <Alert.Root type="error">
@@ -114,7 +130,9 @@ export function SignUp(): JSX.Element {
             </Field.Root>
 
             <Field.Root>
-              <Field.Label class="block text-sm font-medium text-gray-700">Email address</Field.Label>
+              <Field.Label class="block text-sm font-medium text-gray-700">
+                Email address
+              </Field.Label>
               <Input.Root
                 type="email"
                 placeholder="you@example.com"
@@ -169,7 +187,9 @@ export function SignUp(): JSX.Element {
             </Field.Root>
 
             <Field.Root>
-              <Field.Label class="block text-sm font-medium text-gray-700">Confirm password</Field.Label>
+              <Field.Label class="block text-sm font-medium text-gray-700">
+                Confirm password
+              </Field.Label>
               <Input.Root
                 type="password"
                 placeholder="••••••••"
@@ -186,9 +206,7 @@ export function SignUp(): JSX.Element {
               />
               {confirmPassword().length > 0 && (
                 <Field.Error
-                  class={`mt-1 text-xs ${
-                    passwordsMatch() ? "text-green-600" : "text-red-600"
-                  }`}
+                  class={`mt-1 text-xs ${passwordsMatch() ? "text-green-600" : "text-red-600"}`}
                 >
                   {passwordsMatch() ? "Passwords match" : "Passwords do not match"}
                 </Field.Error>

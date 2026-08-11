@@ -6,10 +6,25 @@ import * as Button from "@solidiom/button"
 import * as Alert from "@solidiom/alert"
 
 const FORMATS = [
-  { id: "csv", name: "CSV", description: "Comma-separated values for spreadsheet import.", icon: "📄" },
+  {
+    id: "csv",
+    name: "CSV",
+    description: "Comma-separated values for spreadsheet import.",
+    icon: "📄",
+  },
   { id: "json", name: "JSON", description: "Structured JSON for programmatic access.", icon: "🔧" },
-  { id: "pdf", name: "PDF Report", description: "Formatted compliance report with summary.", icon: "📋" },
-  { id: "xml", name: "XML", description: "XML format for enterprise system integration.", icon: "📦" },
+  {
+    id: "pdf",
+    name: "PDF Report",
+    description: "Formatted compliance report with summary.",
+    icon: "📋",
+  },
+  {
+    id: "xml",
+    name: "XML",
+    description: "XML format for enterprise system integration.",
+    icon: "📦",
+  },
 ]
 
 export function Export(): JSX.Element {
@@ -29,22 +44,29 @@ export function Export(): JSX.Element {
         <Breadcrumb.Root class="mb-2">
           <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Home
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/export" current class="text-gray-900 font-medium">Export</Breadcrumb.Link>
+              <Breadcrumb.Link href="/export" current class="text-gray-900 font-medium">
+                Export
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
         <h1 class="text-2xl font-bold text-gray-900">Export</h1>
-        <p class="mt-1 text-sm text-gray-500">Export filtered audit data in your preferred format for compliance and analysis.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Export filtered audit data in your preferred format for compliance and analysis.
+        </p>
       </div>
 
       <Alert.Root type="success" class="rounded-md border border-green-200 bg-green-50 p-4">
         <Alert.Title class="text-sm font-medium text-green-800">Export Ready</Alert.Title>
         <Alert.Description class="mt-1 text-sm text-green-700">
-          1,247 events available for export in the selected date range. Choose a format and generate your report.
+          1,247 events available for export in the selected date range. Choose a format and generate
+          your report.
         </Alert.Description>
       </Alert.Root>
 

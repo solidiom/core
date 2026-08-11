@@ -29,7 +29,6 @@ import * as VirtualList from "@solidiom/recipes-css"
 </VirtualList.Root>
 ```
 
-
 ## Instalación
 
 ```sh

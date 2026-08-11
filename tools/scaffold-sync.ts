@@ -49,7 +49,11 @@ function checkEmitterParity(checkMode: boolean): SyncResult[] {
     results.push({ area: "recipe-css", status: "stale", detail: "CSS recipes out of date" })
   } else {
     const emit = run("pnpm run recipe:emit:css")
-    results.push({ area: "recipe-css", status: emit.ok ? "regenerated" : "error", detail: emit.ok ? undefined : emit.stdout.slice(0, 200) })
+    results.push({
+      area: "recipe-css",
+      status: emit.ok ? "regenerated" : "error",
+      detail: emit.ok ? undefined : emit.stdout.slice(0, 200),
+    })
   }
 
   // Tailwind emitter
@@ -57,10 +61,18 @@ function checkEmitterParity(checkMode: boolean): SyncResult[] {
   if (twCheck.ok) {
     results.push({ area: "recipe-tailwind", status: "fresh" })
   } else if (checkMode) {
-    results.push({ area: "recipe-tailwind", status: "stale", detail: "Tailwind recipes out of date" })
+    results.push({
+      area: "recipe-tailwind",
+      status: "stale",
+      detail: "Tailwind recipes out of date",
+    })
   } else {
     const emit = run("pnpm run recipe:emit:tailwind")
-    results.push({ area: "recipe-tailwind", status: emit.ok ? "regenerated" : "error", detail: emit.ok ? undefined : emit.stdout.slice(0, 200) })
+    results.push({
+      area: "recipe-tailwind",
+      status: emit.ok ? "regenerated" : "error",
+      detail: emit.ok ? undefined : emit.stdout.slice(0, 200),
+    })
   }
 
   // UnoCSS emitter
@@ -71,7 +83,11 @@ function checkEmitterParity(checkMode: boolean): SyncResult[] {
     results.push({ area: "recipe-unocss", status: "stale", detail: "UnoCSS recipes out of date" })
   } else {
     const emit = run("pnpm run recipe:emit:unocss")
-    results.push({ area: "recipe-unocss", status: emit.ok ? "regenerated" : "error", detail: emit.ok ? undefined : emit.stdout.slice(0, 200) })
+    results.push({
+      area: "recipe-unocss",
+      status: emit.ok ? "regenerated" : "error",
+      detail: emit.ok ? undefined : emit.stdout.slice(0, 200),
+    })
   }
 
   return results
@@ -85,7 +101,11 @@ function checkThemeParity(checkMode: boolean): SyncResult[] {
     if (check.ok) {
       results.push({ area: `theme-${profile}`, status: "fresh" })
     } else if (checkMode) {
-      results.push({ area: `theme-${profile}`, status: "stale", detail: `Theme ${profile} output stale` })
+      results.push({
+        area: `theme-${profile}`,
+        status: "stale",
+        detail: `Theme ${profile} output stale`,
+      })
     } else {
       const emit = run(`pnpm run theme:emit:${profile}`)
       results.push({ area: `theme-${profile}`, status: emit.ok ? "regenerated" : "error" })
@@ -109,18 +129,22 @@ function checkSourceParity(checkMode: boolean): SyncResult[] {
 
 function checkContractVersion(): SyncResult[] {
   const check = run("pnpm tsx tools/contract-version.ts check")
-  return [{
-    area: "contract-version",
-    status: check.ok ? "fresh" : "stale",
-    detail: check.ok ? undefined : "Definitions not aligned with CONTRACT_VERSION",
-  }]
+  return [
+    {
+      area: "contract-version",
+      status: check.ok ? "fresh" : "stale",
+      detail: check.ok ? undefined : "Definitions not aligned with CONTRACT_VERSION",
+    },
+  ]
 }
 
 function main(): void {
   const checkMode = process.argv.includes("--check")
   const allResults: SyncResult[] = []
 
-  console.log(checkMode ? "Checking artifact freshness (no writes)...\n" : "Syncing generated artifacts...\n")
+  console.log(
+    checkMode ? "Checking artifact freshness (no writes)...\n" : "Syncing generated artifacts...\n",
+  )
 
   // Contract version alignment
   allResults.push(...checkContractVersion())
@@ -142,12 +166,21 @@ function main(): void {
   const fresh = allResults.filter((r) => r.status === "fresh")
 
   for (const r of allResults) {
-    const icon = r.status === "fresh" ? "✓" : r.status === "regenerated" ? "↺" : r.status === "stale" ? "✗" : "!"
+    const icon =
+      r.status === "fresh"
+        ? "✓"
+        : r.status === "regenerated"
+          ? "↺"
+          : r.status === "stale"
+            ? "✗"
+            : "!"
     const detail = r.detail ? ` — ${r.detail}` : ""
     console.log(`  ${icon} ${r.area}: ${r.status}${detail}`)
   }
 
-  console.log(`\n  Fresh: ${fresh.length} | Regenerated: ${regenerated.length} | Stale: ${stale.length} | Errors: ${errors.length}`)
+  console.log(
+    `\n  Fresh: ${fresh.length} | Regenerated: ${regenerated.length} | Stale: ${stale.length} | Errors: ${errors.length}`,
+  )
 
   if (checkMode && (stale.length > 0 || errors.length > 0)) {
     console.log("\n✗ Drift detected — run `pnpm tsx tools/scaffold-sync.ts` to regenerate.")

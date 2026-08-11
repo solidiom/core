@@ -20,36 +20,51 @@ const sidebarGroups: DocsSidebarGroup[] = [
   {
     label: "Community",
     links: children.map((entry) => {
-      const slug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
+      const slug =
+        entry.id
+          .split("/")
+          .pop()
+          ?.replace(/\.(md|mdx)$/, "") ?? entry.id
       return { label: entry.data.title, href: `/community/${slug}/` }
     }),
   },
 ]
 ---
 
-<DocsLayout title="Community" description="Contribute, connect, and grow with Solidiom." sidebarGroups={sidebarGroups} contentType="community">
-  {rendered && (
-    <rendered.Content />
-  )}
-  {!rendered && (
-    <header>
-      <h1>Community</h1>
-      <p>Contribute, connect, and grow with Solidiom.</p>
-    </header>
-  )}
+<DocsLayout
+  title="Community"
+  description="Contribute, connect, and grow with Solidiom."
+  sidebarGroups={sidebarGroups}
+  contentType="community"
+>
+  {rendered && <rendered.Content />}
+  {
+    !rendered && (
+      <header>
+        <h1>Community</h1>
+        <p>Contribute, connect, and grow with Solidiom.</p>
+      </header>
+    )
+  }
 
   <ul class="guide-directory__list">
-    {children.map((entry) => {
-      const slug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
-      return (
-        <li class="guide-directory__item">
-          <a href={`/community/${slug}/`} class="guide-directory__link">
-            <span class="guide-directory__title">{entry.data.title}</span>
-            <span class="guide-directory__description">{entry.data.description}</span>
-          </a>
-        </li>
-      )
-    })}
+    {
+      children.map((entry) => {
+        const slug =
+          entry.id
+            .split("/")
+            .pop()
+            ?.replace(/\.(md|mdx)$/, "") ?? entry.id
+        return (
+          <li class="guide-directory__item">
+            <a href={`/community/${slug}/`} class="guide-directory__link">
+              <span class="guide-directory__title">{entry.data.title}</span>
+              <span class="guide-directory__description">{entry.data.description}</span>
+            </a>
+          </li>
+        )
+      })
+    }
   </ul>
 </DocsLayout>
 

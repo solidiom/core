@@ -57,7 +57,10 @@ export function WelcomeWizard(props: WelcomeWizardProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-welcome-wizard", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-welcome-wizard", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-welcome-wizard__restricted" role="alert">
           <p>{props.restrictedReason || "Onboarding is currently unavailable."}</p>
@@ -74,7 +77,13 @@ export function WelcomeWizard(props: WelcomeWizardProps): JSX.Element {
         <nav class="solidiom-block-welcome-wizard__progress" aria-label="Wizard progress">
           <For each={steps()}>
             {(step, i) => (
-              <div class="solidiom-block-welcome-wizard__step" classList={{ "is-active": i() === currentStep(), "is-complete": step.completed || i() < currentStep() }}>
+              <div
+                class="solidiom-block-welcome-wizard__step"
+                classList={{
+                  "is-active": i() === currentStep(),
+                  "is-complete": step.completed || i() < currentStep(),
+                }}
+              >
                 <span class="solidiom-block-welcome-wizard__step-number">{i() + 1}</span>
                 <span class="solidiom-block-welcome-wizard__step-title">{step.title}</span>
               </div>
@@ -95,10 +104,25 @@ export function WelcomeWizard(props: WelcomeWizardProps): JSX.Element {
 
         <div class="solidiom-block-welcome-wizard__actions">
           <Show when={currentStep() > 0}>
-            <button type="button" class="solidiom-block-welcome-wizard__back" onClick={() => setCurrentStep((s) => s - 1)} disabled={state() === "loading"}>Back</button>
+            <button
+              type="button"
+              class="solidiom-block-welcome-wizard__back"
+              onClick={() => setCurrentStep((s) => s - 1)}
+              disabled={state() === "loading"}
+            >
+              Back
+            </button>
           </Show>
-          <button type="button" class="solidiom-block-welcome-wizard__next" onClick={handleNext} disabled={state() === "loading"}>
-            <Show when={state() === "loading"} fallback={currentStep() < steps().length - 1 ? "Next" : "Finish"}>
+          <button
+            type="button"
+            class="solidiom-block-welcome-wizard__next"
+            onClick={handleNext}
+            disabled={state() === "loading"}
+          >
+            <Show
+              when={state() === "loading"}
+              fallback={currentStep() < steps().length - 1 ? "Next" : "Finish"}
+            >
               Processing...
             </Show>
           </button>

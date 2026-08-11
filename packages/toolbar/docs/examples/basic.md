@@ -33,16 +33,10 @@ const [italic, setItalic] = createSignal(false)
   <Toolbar.Separator />
 
   <Toolbar.ToggleGroup>
-    <Toolbar.ToggleItem
-      pressed={bold()}
-      onPressedChange={setBold}
-    >
+    <Toolbar.ToggleItem pressed={bold()} onPressedChange={setBold}>
       Bold
     </Toolbar.ToggleItem>
-    <Toolbar.ToggleItem
-      pressed={italic()}
-      onPressedChange={setItalic}
-    >
+    <Toolbar.ToggleItem pressed={italic()} onPressedChange={setItalic}>
       Italic
     </Toolbar.ToggleItem>
   </Toolbar.ToggleGroup>

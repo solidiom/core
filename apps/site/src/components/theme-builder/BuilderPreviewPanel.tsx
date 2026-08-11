@@ -323,7 +323,9 @@ function PreviewContent(props: { c: CopyShape }) {
         <div class="theme-builder__preview-dialog-static">
           <div class="theme-builder__preview-dialog-header">Dialog Title</div>
           <div class="theme-builder__preview-dialog-body">This is a dialog description.</div>
-          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--secondary">Close</Button.Root>
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--secondary">
+            Close
+          </Button.Root>
         </div>
       </div>
 
@@ -342,7 +344,9 @@ function PreviewContent(props: { c: CopyShape }) {
           <div class="theme-builder__preview-menu-item">Edit</div>
           <div class="theme-builder__preview-menu-item">Duplicate</div>
           <div class="theme-builder__preview-menu-separator" />
-          <div class="theme-builder__preview-menu-item theme-builder__preview-menu-item--destructive">Delete</div>
+          <div class="theme-builder__preview-menu-item theme-builder__preview-menu-item--destructive">
+            Delete
+          </div>
         </div>
       </div>
 
@@ -374,8 +378,12 @@ function PreviewContent(props: { c: CopyShape }) {
       <div class="theme-builder__preview-section">
         <h3 class="theme-builder__preview-section-title">Radio Group</h3>
         <div class="theme-builder__preview-radio-group">
-          <label class="theme-builder__preview-radio"><input type="radio" name="preview-radio" checked /> Option A</label>
-          <label class="theme-builder__preview-radio"><input type="radio" name="preview-radio" /> Option B</label>
+          <label class="theme-builder__preview-radio">
+            <input type="radio" name="preview-radio" checked /> Option A
+          </label>
+          <label class="theme-builder__preview-radio">
+            <input type="radio" name="preview-radio" /> Option B
+          </label>
         </div>
       </div>
 
@@ -385,7 +393,9 @@ function PreviewContent(props: { c: CopyShape }) {
         <div class="theme-builder__preview-field-group">
           <Label.Root class="theme-builder__preview-label">Username</Label.Root>
           <Input.Root class="theme-builder__preview-input" placeholder="Enter username" />
-          <span class="theme-builder__preview-field-description">Must be at least 3 characters.</span>
+          <span class="theme-builder__preview-field-description">
+            Must be at least 3 characters.
+          </span>
         </div>
       </div>
 
@@ -409,11 +419,17 @@ function PreviewContent(props: { c: CopyShape }) {
       <div class="theme-builder__preview-section">
         <h3 class="theme-builder__preview-section-title">Pagination</h3>
         <div class="theme-builder__preview-pagination">
-          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">Prev</Button.Root>
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">
+            Prev
+          </Button.Root>
           <span class="theme-builder__preview-page-number">1</span>
-          <span class="theme-builder__preview-page-number theme-builder__preview-page-number--active">2</span>
+          <span class="theme-builder__preview-page-number theme-builder__preview-page-number--active">
+            2
+          </span>
           <span class="theme-builder__preview-page-number">3</span>
-          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">Next</Button.Root>
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">
+            Next
+          </Button.Root>
         </div>
       </div>
 
@@ -451,10 +467,16 @@ function PreviewContent(props: { c: CopyShape }) {
       <div class="theme-builder__preview-section">
         <h3 class="theme-builder__preview-section-title">Toolbar</h3>
         <div class="theme-builder__preview-toolbar-component" role="toolbar">
-          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">Bold</Button.Root>
-          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">Italic</Button.Root>
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">
+            Bold
+          </Button.Root>
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">
+            Italic
+          </Button.Root>
           <span class="theme-builder__preview-toolbar-separator" />
-          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">Link</Button.Root>
+          <Button.Root class="theme-builder__preview-btn theme-builder__preview-btn--ghost">
+            Link
+          </Button.Root>
         </div>
       </div>
 
@@ -472,11 +494,29 @@ function PreviewContent(props: { c: CopyShape }) {
       <div class="theme-builder__preview-section">
         <h3 class="theme-builder__preview-section-title">Data Table</h3>
         <table class="theme-builder__preview-table">
-          <thead><tr><th>Name</th><th>Status</th><th>Role</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Role</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Alice</td><td>Active</td><td>Admin</td></tr>
-            <tr><td>Bob</td><td>Inactive</td><td>Viewer</td></tr>
-            <tr><td>Carol</td><td>Active</td><td>Editor</td></tr>
+            <tr>
+              <td>Alice</td>
+              <td>Active</td>
+              <td>Admin</td>
+            </tr>
+            <tr>
+              <td>Bob</td>
+              <td>Inactive</td>
+              <td>Viewer</td>
+            </tr>
+            <tr>
+              <td>Carol</td>
+              <td>Active</td>
+              <td>Editor</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -495,9 +535,18 @@ function PreviewContent(props: { c: CopyShape }) {
       <div class="theme-builder__preview-section">
         <h3 class="theme-builder__preview-section-title">Navigation Menu</h3>
         <nav class="theme-builder__preview-nav">
-          <a href="#" class="theme-builder__preview-nav-link theme-builder__preview-nav-link--active">Dashboard</a>
-          <a href="#" class="theme-builder__preview-nav-link">Projects</a>
-          <a href="#" class="theme-builder__preview-nav-link">Settings</a>
+          <a
+            href="#"
+            class="theme-builder__preview-nav-link theme-builder__preview-nav-link--active"
+          >
+            Dashboard
+          </a>
+          <a href="#" class="theme-builder__preview-nav-link">
+            Projects
+          </a>
+          <a href="#" class="theme-builder__preview-nav-link">
+            Settings
+          </a>
         </nav>
       </div>
 

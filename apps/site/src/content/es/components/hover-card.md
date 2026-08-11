@@ -32,7 +32,6 @@ import * as HoverCard from "@solidiom/recipes-css"
 </HoverCard.Root>
 ```
 
-
 ## Instalación
 
 ```sh

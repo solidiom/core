@@ -35,7 +35,9 @@ import { StyledBreadcrumb, Breadcrumb } from "@solidiom/recipes-css"
     </Breadcrumb.Item>
     <Breadcrumb.Separator />
     <Breadcrumb.Item>
-      <Breadcrumb.Link href="/docs/breadcrumb" current>Breadcrumb</Breadcrumb.Link>
+      <Breadcrumb.Link href="/docs/breadcrumb" current>
+        Breadcrumb
+      </Breadcrumb.Link>
     </Breadcrumb.Item>
   </Breadcrumb.List>
 </StyledBreadcrumb>

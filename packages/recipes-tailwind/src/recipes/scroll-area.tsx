@@ -8,14 +8,15 @@ export { ScrollArea }
 
 const BASE_CLASS = "solidiom-scroll-area"
 
-export interface StyledScrollAreaProps
-  extends Omit<Parameters<typeof ScrollArea.Root>[0], "class"> {
+export interface StyledScrollAreaProps extends Omit<
+  Parameters<typeof ScrollArea.Root>[0],
+  "class"
+> {
   class?: string
 }
 
 export function StyledScrollArea(props: StyledScrollAreaProps) {
-  const className = () =>
-    [BASE_CLASS, props.class].filter(Boolean).join(" ")
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ")
 
   return <ScrollArea.Root {...props} class={className()} />
 }

@@ -13,13 +13,15 @@ const COPY: Record<
   en: {
     title: "Get Started",
     description: "Learn how to integrate Solidiom into your project.",
-    content: "Install the primitives you need and compose them with your own styling. No mandatory design system — bring your own CSS, Tailwind, or UnoCSS.",
+    content:
+      "Install the primitives you need and compose them with your own styling. No mandatory design system — bring your own CSS, Tailwind, or UnoCSS.",
     footer: "Documentation →",
   },
   es: {
     title: "Primeros pasos",
     description: "Aprenda cómo integrar Solidiom en su proyecto.",
-    content: "Instale las primitivas que necesite y compléstelas con sus propios estilos. Ningún sistema de diseño obligatorio — use CSS, Tailwind, o UnoCSS.",
+    content:
+      "Instale las primitivas que necesite y compléstelas con sus propios estilos. Ningún sistema de diseño obligatorio — use CSS, Tailwind, o UnoCSS.",
     footer: "Documentación →",
   },
 }

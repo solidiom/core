@@ -27,12 +27,16 @@ El componente Drawer es un panel que se desliza desde el borde de la pantalla.
 import { StyledDrawer, Drawer } from "@solidiom/recipes-css"
 
 ;<Drawer.Root>
-  <Drawer.Trigger><button type="button">Abrir cajón</button></Drawer.Trigger>
+  <Drawer.Trigger>
+    <button type="button">Abrir cajón</button>
+  </Drawer.Trigger>
   <Drawer.Backdrop />
   <Drawer.Content>
     <Drawer.Title>Cajón</Drawer.Title>
     <Drawer.Description>Contenido del cajón aquí.</Drawer.Description>
-    <Drawer.Close><button type="button">Cerrar</button></Drawer.Close>
+    <Drawer.Close>
+      <button type="button">Cerrar</button>
+    </Drawer.Close>
   </Drawer.Content>
 </Drawer.Root>
 ```

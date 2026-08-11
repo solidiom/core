@@ -62,12 +62,7 @@ Habilita selección de filas simple o múltiple con la propiedad `selectionMode`
 ```tsx
 import { StyledDataTable, DataTable } from "@solidiom/recipes-css"
 
-;<StyledDataTable
-  columns={columns}
-  data={data}
-  rowIdKey="id"
-  selectionMode="single"
->
+;<StyledDataTable columns={columns} data={data} rowIdKey="id" selectionMode="single">
   <DataTable.Header>
     <tr>
       <DataTable.HeaderCell columnId="name">Nombre</DataTable.HeaderCell>

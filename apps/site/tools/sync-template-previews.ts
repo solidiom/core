@@ -75,7 +75,7 @@ function fixAssetPaths(html: string): string {
   // Inject the pathname reset script just before </body>. Module scripts
   // are deferred by spec: they execute in order after the document is parsed,
   // which is after all inline classic scripts have run.
-  const bodyCloseIndex = result.indexOf('</body>')
+  const bodyCloseIndex = result.indexOf("</body>")
   if (bodyCloseIndex !== -1) {
     result = result.slice(0, bodyCloseIndex) + PATHNAME_RESET_SCRIPT + result.slice(bodyCloseIndex)
   }

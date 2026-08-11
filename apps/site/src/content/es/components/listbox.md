@@ -34,7 +34,6 @@ import * as Listbox from "@solidiom/recipes-css"
 </Listbox.Root>
 ```
 
-
 ## Instalación
 
 ```sh

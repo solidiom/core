@@ -8,14 +8,15 @@ export { Pagination }
 
 const BASE_CLASS = "solidiom-pagination"
 
-export interface StyledPaginationProps
-  extends Omit<Parameters<typeof Pagination.Root>[0], "class"> {
+export interface StyledPaginationProps extends Omit<
+  Parameters<typeof Pagination.Root>[0],
+  "class"
+> {
   class?: string
 }
 
 export function StyledPagination(props: StyledPaginationProps) {
-  const className = () =>
-    [BASE_CLASS, props.class].filter(Boolean).join(" ")
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ")
 
   return <Pagination.Root {...props} class={className()} />
 }

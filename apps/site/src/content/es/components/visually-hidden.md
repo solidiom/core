@@ -30,7 +30,6 @@ import { VisuallyHidden } from "@solidiom/recipes-css"
 </button>
 ```
 
-
 ## Instalación
 
 ```sh

@@ -32,7 +32,6 @@ import * as Collapsible from "@solidiom/recipes-css"
 </Collapsible.Root>
 ```
 
-
 ## Instalación
 
 ```sh

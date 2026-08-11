@@ -75,14 +75,14 @@ Running `solidiom init` with no arguments produces `.solidiom/config.json` with 
 }
 ```
 
-| Setting                     | Type                                   | Default | Description                                         |
-| --------------------------- | -------------------------------------- | ------- | --------------------------------------------------- |
-| `signatureMode`             | `sigstore` \| `trusted-keys` \| `none` | `none`  | Artifact signature verification mode                |
-| `trustedIdentities`         | string[]                               | `[]`    | Identities allowed for sigstore verification        |
-| `allowedPrimitiveVersions`  | record                                 | `{}`    | Version constraints per package name                |
-| `registrySignatureRequired` | boolean                                | `false` | Require signed registry index                       |
+| Setting                     | Type                                   | Default | Description                                            |
+| --------------------------- | -------------------------------------- | ------- | ------------------------------------------------------ |
+| `signatureMode`             | `sigstore` \| `trusted-keys` \| `none` | `none`  | Artifact signature verification mode                   |
+| `trustedIdentities`         | string[]                               | `[]`    | Identities allowed for sigstore verification           |
+| `allowedPrimitiveVersions`  | record                                 | `{}`    | Version constraints per package name                   |
+| `registrySignatureRequired` | boolean                                | `false` | Require signed registry index                          |
 | `registryPublicKeys`        | string[]                               | `[]`    | Ed25519 public keys (base64) for registry verification |
-| `requireVerifiedSource`     | boolean                                | `true`  | Require byte-level verification for source installs |
+| `requireVerifiedSource`     | boolean                                | `true`  | Require byte-level verification for source installs    |
 
 ## Next Steps
 

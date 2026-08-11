@@ -12,14 +12,12 @@ const COPY: Record<
   en: {
     trigger: "@solidiom",
     title: "Solidiom",
-    description:
-      "A modern UI component library built with SolidJS.",
+    description: "A modern UI component library built with SolidJS.",
   },
   es: {
     trigger: "@solidiom",
     title: "Solidiom",
-    description:
-      "Una biblioteca moderna de componentes UI construida con SolidJS.",
+    description: "Una biblioteca moderna de componentes UI construida con SolidJS.",
   },
 }
 
@@ -39,20 +37,12 @@ export function HoverCardExample(props: HoverCardExampleProps) {
     >
       <HoverCard.Root>
         <HoverCard.Trigger>
-          <span
-            style={{ textDecoration: "underline", cursor: "pointer" }}
-          >
-            {copy().trigger}
-          </span>
+          <span style={{ textDecoration: "underline", cursor: "pointer" }}>{copy().trigger}</span>
         </HoverCard.Trigger>
         <HoverCard.Content>
           <div class="hover-card-example__content">
-            <div class="hover-card-example__title">
-              {copy().title}
-            </div>
-            <div class="hover-card-example__description">
-              {copy().description}
-            </div>
+            <div class="hover-card-example__title">{copy().title}</div>
+            <div class="hover-card-example__description">{copy().description}</div>
           </div>
         </HoverCard.Content>
       </HoverCard.Root>

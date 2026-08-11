@@ -24,7 +24,7 @@ The Scroll Area component provides a custom-styled scrollable container with a v
 ```tsx
 import { StyledScrollArea, ScrollArea } from "@solidiom/recipes-css"
 
-;<StyledScrollArea type="always" style={{ height: '200px' }}>
+;<StyledScrollArea type="always" style={{ height: "200px" }}>
   <ScrollArea.Viewport>
     <p>Scrollable content here...</p>
   </ScrollArea.Viewport>

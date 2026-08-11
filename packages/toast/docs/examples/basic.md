@@ -27,10 +27,14 @@ import { createEffect } from "solid-js"
 const toaster = Toast.createToaster({ max: 3, defaultDuration: 5000 })
 
 ;<div>
-  <button onClick={() => toaster.toast({
-    title: "Saved",
-    description: "Your changes have been saved.",
-  })}>
+  <button
+    onClick={() =>
+      toaster.toast({
+        title: "Saved",
+        description: "Your changes have been saved.",
+      })
+    }
+  >
     Show toast
   </button>
 
@@ -39,9 +43,7 @@ const toaster = Toast.createToaster({ max: 3, defaultDuration: 5000 })
       toasts().map((entry) => (
         <Toast.Root toastId={entry.id}>
           <Toast.Title>{entry.title}</Toast.Title>
-          {entry.description && (
-            <Toast.Description>{entry.description}</Toast.Description>
-          )}
+          {entry.description && <Toast.Description>{entry.description}</Toast.Description>}
           <Toast.Close>×</Toast.Close>
         </Toast.Root>
       ))

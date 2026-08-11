@@ -12,17 +12,23 @@ interface LogEntryProps {
 export function LogEntry(props: LogEntryProps): JSX.Element {
   const levelColor = () => {
     switch (props.level) {
-      case "info": return "text-blue-600"
-      case "warning": return "text-yellow-600"
-      case "error": return "text-red-600"
+      case "info":
+        return "text-blue-600"
+      case "warning":
+        return "text-yellow-600"
+      case "error":
+        return "text-red-600"
     }
   }
 
   const levelBg = () => {
     switch (props.level) {
-      case "info": return "bg-blue-50"
-      case "warning": return "bg-yellow-50"
-      case "error": return "bg-red-50"
+      case "info":
+        return "bg-blue-50"
+      case "warning":
+        return "bg-yellow-50"
+      case "error":
+        return "bg-red-50"
     }
   }
 

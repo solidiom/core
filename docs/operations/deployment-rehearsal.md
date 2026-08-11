@@ -69,6 +69,7 @@ pnpm build
 ```
 
 The build runs:
+
 1. `i18n:validate` — route parity, content collections, translation freshness.
 2. `boundaries` — import boundary validation.
 3. `astro build` — static site generation.
@@ -87,6 +88,7 @@ pnpm preview
 ```
 
 **Verify manually:**
+
 - [ ] Homepage loads at `http://localhost:4321/`.
 - [ ] Spanish homepage loads at `http://localhost:4321/es/`.
 - [ ] Key documentation pages render.
@@ -122,6 +124,7 @@ git push origin main
 ```
 
 Monitor the workflow run at `.github/workflows/preview-deploy.yml` (or the dedicated production workflow). The workflow:
+
 1. Installs dependencies.
 2. Runs `pnpm exec nx run @solidiom/site:build`.
 3. Runs `pnpm exec nx run @solidiom/site:search-index`.
@@ -156,18 +159,22 @@ After deployment, verify the live site:
    - [ ] `https://solidiom.org/es/primitives/button/` returns 200.
 
 2. **Headers:**
+
    ```bash
    curl -I https://solidiom.org
    ```
+
    Verify all security headers present (X-Frame-Options, X-Content-Type-Options, CSP, etc.).
 
 3. **Cache directives:**
+
    ```bash
    curl -I https://solidiom.org/_astro/[any-asset]  # should have immutable
    curl -I https://solidiom.org/pagefind/[any-file]  # should have max-age=86400
    ```
 
 4. **Redirects:**
+
    ```bash
    curl -I https://www.solidiom.org/  # should 301 to https://solidiom.org/
    curl -I http://solidiom.org/       # should 301 to https://solidiom.org/
@@ -233,6 +240,7 @@ curl -X POST "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_
 Immediately after rollback:
 
 1. **Check key routes:**
+
    ```bash
    curl -o /dev/null -s -w "%{http_code}" https://solidiom.org/        # expect 200
    curl -o /dev/null -s -w "%{http_code}" https://solidiom.org/es/     # expect 200
@@ -244,13 +252,13 @@ Immediately after rollback:
 
 ### Step 4 — Rollback Timeline and RTO
 
-| Phase | Target | Notes |
-| --- | --- | --- |
-| Detect bad deployment | < 5 min | Via monitoring alert or user report |
-| Identify good deployment | < 2 min | Dashboard or CLI list |
-| Execute rollback | < 1 min | Atomic on Cloudflare Pages |
-| Verify rollback | < 3 min | Automated curl checks + manual spot-check |
-| **Total RTO** | **< 10 min** | Recovery Time Objective |
+| Phase                    | Target       | Notes                                     |
+| ------------------------ | ------------ | ----------------------------------------- |
+| Detect bad deployment    | < 5 min      | Via monitoring alert or user report       |
+| Identify good deployment | < 2 min      | Dashboard or CLI list                     |
+| Execute rollback         | < 1 min      | Atomic on Cloudflare Pages                |
+| Verify rollback          | < 3 min      | Automated curl checks + manual spot-check |
+| **Total RTO**            | **< 10 min** | Recovery Time Objective                   |
 
 Cloudflare Pages rollback is instant (no rebuild, no DNS propagation). The RTO is dominated by detection time, not rollback execution.
 
@@ -272,17 +280,17 @@ Cloudflare Pages rollback is instant (no rebuild, no DNS propagation). The RTO i
 
 ## 5. Runbook: Common Deployment Issues
 
-| Symptom | Likely Cause | Fix |
-| --- | --- | --- |
-| Build fails with `UNRESOLVED_IMPORT` for existing file | Rolldown (Astro 7) bundler resolution bug | Check Astro issue tracker; workaround may involve import path adjustment or Astro config tweak |
-| Security headers missing on production | `_headers` file not in build output | Verify `apps/site/public/_headers` is committed; Cloudflare Pages copies `public/` to build output |
-| `www.solidiom.org` not redirecting | `_redirects` not in build output or misconfigured | Verify `apps/site/public/_redirects` has the www→apex rule |
-| Search not working | Pagefind index not built | Run `pnpm search-index` and redeploy; verify `/pagefind/` is accessible |
-| CSP blocking resources | CSP policy too restrictive for a route | Adjust `_headers` CSP; tool routes may need route-specific relaxation |
-| PostHog not receiving events | Env vars not configured | Verify `POSTHOG_API_KEY` and `POSTHOG_HOST` in Cloudflare Pages settings |
-| Edge cache serving stale HTML | Cache not purged on deploy | Cloudflare Pages purges automatically; if stale, manually purge via dashboard or API |
-| Spanish locale returning 404 | i18n build misconfiguration | Check that `src/content/es/` has entries and Astro i18n routing is configured |
-| Budget enforcement failing in CI | Route payload exceeded budget | Run `pnpm budget-report:enforce` locally, identify overweight route, reduce payload |
+| Symptom                                                | Likely Cause                                      | Fix                                                                                                |
+| ------------------------------------------------------ | ------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Build fails with `UNRESOLVED_IMPORT` for existing file | Rolldown (Astro 7) bundler resolution bug         | Check Astro issue tracker; workaround may involve import path adjustment or Astro config tweak     |
+| Security headers missing on production                 | `_headers` file not in build output               | Verify `apps/site/public/_headers` is committed; Cloudflare Pages copies `public/` to build output |
+| `www.solidiom.org` not redirecting                     | `_redirects` not in build output or misconfigured | Verify `apps/site/public/_redirects` has the www→apex rule                                         |
+| Search not working                                     | Pagefind index not built                          | Run `pnpm search-index` and redeploy; verify `/pagefind/` is accessible                            |
+| CSP blocking resources                                 | CSP policy too restrictive for a route            | Adjust `_headers` CSP; tool routes may need route-specific relaxation                              |
+| PostHog not receiving events                           | Env vars not configured                           | Verify `POSTHOG_API_KEY` and `POSTHOG_HOST` in Cloudflare Pages settings                           |
+| Edge cache serving stale HTML                          | Cache not purged on deploy                        | Cloudflare Pages purges automatically; if stale, manually purge via dashboard or API               |
+| Spanish locale returning 404                           | i18n build misconfiguration                       | Check that `src/content/es/` has entries and Astro i18n routing is configured                      |
+| Budget enforcement failing in CI                       | Route payload exceeded budget                     | Run `pnpm budget-report:enforce` locally, identify overweight route, reduce payload                |
 
 ---
 
@@ -290,23 +298,23 @@ Cloudflare Pages rollback is instant (no rebuild, no DNS propagation). The RTO i
 
 ### Build (2026-08-07)
 
-| Check | Result |
-| --- | --- |
-| Command | `pnpm --filter @solidiom/site run build` |
-| Duration | ~5.8s |
-| Status | **FAILED** |
-| Error | `[UNRESOLVED_IMPORT] Could not resolve '../../../../layouts/DocsLayout.astro'` in `src/pages/changelog/[slug]/index.astro` |
+| Check      | Result                                                                                                                                                                                       |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Command    | `pnpm --filter @solidiom/site run build`                                                                                                                                                     |
+| Duration   | ~5.8s                                                                                                                                                                                        |
+| Status     | **FAILED**                                                                                                                                                                                   |
+| Error      | `[UNRESOLVED_IMPORT] Could not resolve '../../../../layouts/DocsLayout.astro'` in `src/pages/changelog/[slug]/index.astro`                                                                   |
 | Root cause | Rolldown (Astro 7's default bundler) cannot resolve the `.astro` import despite the file existing at `src/layouts/DocsLayout.astro`. This is a bundler resolution issue, not a missing file. |
-| Blocker | **Yes** — prevents both build and E2E tests. |
+| Blocker    | **Yes** — prevents both build and E2E tests.                                                                                                                                                 |
 
 ### E2E Tests (2026-08-07)
 
-| Check | Result |
-| --- | --- |
-| Command | `pnpm --filter @solidiom/site run test:e2e` |
-| Status | **FAILED** (webServer unable to start) |
-| Error | Same `UNRESOLVED_IMPORT` error prevents Playwright webServer from launching the preview. |
-| Pass/Fail counts | N/A — suite did not execute. |
+| Check            | Result                                                                                   |
+| ---------------- | ---------------------------------------------------------------------------------------- |
+| Command          | `pnpm --filter @solidiom/site run test:e2e`                                              |
+| Status           | **FAILED** (webServer unable to start)                                                   |
+| Error            | Same `UNRESOLVED_IMPORT` error prevents Playwright webServer from launching the preview. |
+| Pass/Fail counts | N/A — suite did not execute.                                                             |
 
 ---
 
@@ -316,36 +324,36 @@ This section is completed after a successful rehearsal with all steps passing.
 
 ### Pre-deployment Checklist
 
-| Checker | Date | DNS | Headers | Cache | Monitoring | Result |
-| --- | --- | --- | --- | --- | --- | --- |
-| | | ☐ | ☐ | ☐ | ☐ | ☐ Pass ☐ Block |
+| Checker | Date | DNS | Headers | Cache | Monitoring | Result         |
+| ------- | ---- | --- | ------- | ----- | ---------- | -------------- |
+|         |      | ☐   | ☐       | ☐     | ☐          | ☐ Pass ☐ Block |
 
 ### Deployment Execution
 
-| Step | Result | Notes |
-| --- | --- | --- |
-| Build verification | ☐ Pass ☐ Fail | |
-| Local preview | ☐ Pass ☐ Fail | |
-| Smoke tests | ☐ Pass ☐ Fail | |
-| Deploy | ☐ Pass ☐ Fail | |
-| Post-deploy verification | ☐ Pass ☐ Fail | |
+| Step                     | Result        | Notes |
+| ------------------------ | ------------- | ----- |
+| Build verification       | ☐ Pass ☐ Fail |       |
+| Local preview            | ☐ Pass ☐ Fail |       |
+| Smoke tests              | ☐ Pass ☐ Fail |       |
+| Deploy                   | ☐ Pass ☐ Fail |       |
+| Post-deploy verification | ☐ Pass ☐ Fail |       |
 
 ### Rollback Rehearsal
 
-| Step | Result | Time |
-| --- | --- | --- |
-| Identify bad deployment | ☐ Done | |
-| Execute rollback | ☐ Done | |
-| Verify rollback | ☐ Done | |
-| Total RTO | | Target: < 10 min |
+| Step                    | Result | Time             |
+| ----------------------- | ------ | ---------------- |
+| Identify bad deployment | ☐ Done |                  |
+| Execute rollback        | ☐ Done |                  |
+| Verify rollback         | ☐ Done |                  |
+| Total RTO               |        | Target: < 10 min |
 
 ### Approvals
 
-| Role | Name | Signature | Date |
-| --- | --- | --- | --- |
-| Deployer | | | |
-| Reviewer | | | |
-| Approver | | | |
+| Role     | Name | Signature | Date |
+| -------- | ---- | --------- | ---- |
+| Deployer |      |           |      |
+| Reviewer |      |           |      |
+| Approver |      |           |      |
 
 ---
 

@@ -15,10 +15,10 @@
  *
  * Returns a deactivation function.
  */
-export declare function activateModalIsolation(element: Element): () => void;
+export declare function activateModalIsolation(element: Element): () => void
 /**
  * Resets all modal isolation state (for testing).
  * @internal
  */
-export declare function resetModalIsolation(): void;
+export declare function resetModalIsolation(): void
 //# sourceMappingURL=modal-isolation.d.ts.map

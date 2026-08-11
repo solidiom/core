@@ -67,7 +67,12 @@ export function ResetPassword(): JSX.Element {
           >
             <div class="flex flex-col items-center space-y-6 py-4">
               <div class="flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100">
-                <svg class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  class="h-8 w-8 text-indigo-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -79,8 +84,7 @@ export function ResetPassword(): JSX.Element {
 
               <div class="text-center space-y-2">
                 <p class="text-sm text-gray-700">
-                  We sent a reset link to{" "}
-                  <span class="font-medium text-gray-900">{email()}</span>
+                  We sent a reset link to <span class="font-medium text-gray-900">{email()}</span>
                 </p>
                 <p class="text-xs text-gray-500">
                   If you don't see it, check your spam folder or wait a few minutes.
@@ -90,7 +94,8 @@ export function ResetPassword(): JSX.Element {
               <div class="w-full space-y-4">
                 <Alert.Root type="info">
                   <Alert.Description class="text-sm text-indigo-700">
-                    The link will expire in 15 minutes. If you don't receive an email, make sure the address is correct.
+                    The link will expire in 15 minutes. If you don't receive an email, make sure the
+                    address is correct.
                   </Alert.Description>
                 </Alert.Root>
 
@@ -135,8 +140,8 @@ export function ResetPassword(): JSX.Element {
                 </svg>
                 <div class="ml-3">
                   <p class="text-sm text-blue-800">
-                    Enter the email address associated with your account and we'll send you instructions to reset your
-                    password.
+                    Enter the email address associated with your account and we'll send you
+                    instructions to reset your password.
                   </p>
                 </div>
               </div>
@@ -149,7 +154,9 @@ export function ResetPassword(): JSX.Element {
             )}
 
             <Field.Root>
-              <Field.Label class="block text-sm font-medium text-gray-700">Email address</Field.Label>
+              <Field.Label class="block text-sm font-medium text-gray-700">
+                Email address
+              </Field.Label>
               <Input.Root
                 type="email"
                 placeholder="you@example.com"

@@ -25,9 +25,7 @@ import { StyledCard, Card } from "@solidiom/recipes-css"
 ;<StyledCard>
   <Card.Header>
     <Card.Title>Comenzar</Card.Title>
-    <Card.Description>
-      Todo lo que necesitas saber para empezar.
-    </Card.Description>
+    <Card.Description>Todo lo que necesitas saber para empezar.</Card.Description>
   </Card.Header>
   <Card.Content>Comienza a construir tu proyecto hoy.</Card.Content>
   <Card.Footer>Acción del pie de página o metadatos van aquí.</Card.Footer>

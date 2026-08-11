@@ -7,20 +7,45 @@ import * as Card from "@solidiom/card"
 import * as Switch from "@solidiom/switch"
 
 const INTEGRATIONS = [
-  { name: "Slack", description: "Send notifications to Slack channels.", connected: true, lastSync: "5 min ago" },
-  { name: "Stripe", description: "Process payments and manage subscriptions.", connected: true, lastSync: "1 hour ago" },
-  { name: "SendGrid", description: "Send transactional and marketing emails.", connected: true, lastSync: "3 hours ago" },
-  { name: "GitHub", description: "Trigger workflows on repository events.", connected: false, lastSync: "—" },
-  { name: "AWS S3", description: "Store and retrieve files from S3 buckets.", connected: false, lastSync: "—" },
+  {
+    name: "Slack",
+    description: "Send notifications to Slack channels.",
+    connected: true,
+    lastSync: "5 min ago",
+  },
+  {
+    name: "Stripe",
+    description: "Process payments and manage subscriptions.",
+    connected: true,
+    lastSync: "1 hour ago",
+  },
+  {
+    name: "SendGrid",
+    description: "Send transactional and marketing emails.",
+    connected: true,
+    lastSync: "3 hours ago",
+  },
+  {
+    name: "GitHub",
+    description: "Trigger workflows on repository events.",
+    connected: false,
+    lastSync: "—",
+  },
+  {
+    name: "AWS S3",
+    description: "Store and retrieve files from S3 buckets.",
+    connected: false,
+    lastSync: "—",
+  },
 ]
 
 export function Integrations(): JSX.Element {
   const [integrations, setIntegrations] = createSignal(INTEGRATIONS)
 
   const toggle = (index: number) => {
-    setIntegrations(prev => prev.map((item, i) =>
-      i === index ? { ...item, connected: !item.connected } : item
-    ))
+    setIntegrations((prev) =>
+      prev.map((item, i) => (i === index ? { ...item, connected: !item.connected } : item)),
+    )
   }
 
   return (
@@ -28,24 +53,31 @@ export function Integrations(): JSX.Element {
       <Breadcrumb.Root>
         <Breadcrumb.List class="flex items-center gap-2">
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-900">Workflows</Breadcrumb.Link>
+            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-900">
+              Workflows
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/integrations" current class="text-sm font-medium text-gray-900">Integrations</Breadcrumb.Link>
+            <Breadcrumb.Link href="/integrations" current class="text-sm font-medium text-gray-900">
+              Integrations
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div>
         <h1 class="text-2xl font-bold text-gray-900">Integrations</h1>
-        <p class="mt-1 text-sm text-gray-500">Configure third-party connectors, webhooks, and service credentials.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Configure third-party connectors, webhooks, and service credentials.
+        </p>
       </div>
 
       <Alert.Root type="info" class="rounded-md border border-blue-200 bg-blue-50 p-4">
         <Alert.Title class="text-sm font-medium text-blue-800">Connected Services</Alert.Title>
         <Alert.Description class="mt-1 text-sm text-blue-700">
-          {integrations().filter(i => i.connected).length} of {integrations().length} services connected. Toggle to enable or disable.
+          {integrations().filter((i) => i.connected).length} of {integrations().length} services
+          connected. Toggle to enable or disable.
         </Alert.Description>
       </Alert.Root>
 

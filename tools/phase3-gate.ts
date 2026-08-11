@@ -32,13 +32,25 @@ const SUB_GATE_TIMEOUT = 600_000 // 10 minutes per sub-gate
 
 console.log("§0 Lower-phase gates:")
 const p0 = run("pnpm exec tsx tools/phase0-gate.ts", { timeout: SUB_GATE_TIMEOUT })
-check("Phase 0 gate passes", p0.ok, p0.timedOut ? "Phase 0 timed out" : "Phase 0 must pass before Phase 3")
+check(
+  "Phase 0 gate passes",
+  p0.ok,
+  p0.timedOut ? "Phase 0 timed out" : "Phase 0 must pass before Phase 3",
+)
 
 const p1 = run("pnpm exec tsx tools/phase1-gate.ts", { timeout: SUB_GATE_TIMEOUT })
-check("Phase 1 gate passes", p1.ok, p1.timedOut ? "Phase 1 timed out" : "Phase 1 must pass before Phase 3")
+check(
+  "Phase 1 gate passes",
+  p1.ok,
+  p1.timedOut ? "Phase 1 timed out" : "Phase 1 must pass before Phase 3",
+)
 
 const p2 = run("pnpm exec tsx tools/phase2-gate.ts", { timeout: SUB_GATE_TIMEOUT })
-check("Phase 2 gate passes", p2.ok, p2.timedOut ? "Phase 2 timed out" : "Phase 2 must pass before Phase 3")
+check(
+  "Phase 2 gate passes",
+  p2.ok,
+  p2.timedOut ? "Phase 2 timed out" : "Phase 2 must pass before Phase 3",
+)
 
 // ─── §1 Beta accessibility evidence ────────────────────────────────────
 console.log("\n§1 Beta accessibility evidence:")

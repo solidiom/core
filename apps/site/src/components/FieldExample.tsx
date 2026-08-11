@@ -1,9 +1,22 @@
 import * as Field from "@solidiom/field"
 import type { Locale } from "../lib/locale"
 
-const COPY: Record<Locale, { label: string; description: string; error: string; placeholder: string }> = {
-  en: { label: "Email", description: "We'll never share your email.", error: "Please enter a valid email address.", placeholder: "you@example.com" },
-  es: { label: "Correo electrónico", description: "Nunca compartiremos su correo.", error: "Ingrese una dirección de correo válida.", placeholder: "usted@ejemplo.com" },
+const COPY: Record<
+  Locale,
+  { label: string; description: string; error: string; placeholder: string }
+> = {
+  en: {
+    label: "Email",
+    description: "We'll never share your email.",
+    error: "Please enter a valid email address.",
+    placeholder: "you@example.com",
+  },
+  es: {
+    label: "Correo electrónico",
+    description: "Nunca compartiremos su correo.",
+    error: "Ingrese una dirección de correo válida.",
+    placeholder: "usted@ejemplo.com",
+  },
 }
 
 export interface FieldExampleProps {

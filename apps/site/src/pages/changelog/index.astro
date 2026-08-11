@@ -27,42 +27,49 @@ const formatDate = (dateVal: Date | string, locale: Locale): string => {
 
 <DocsLayout
   title={breadcrumbTitle}
-  description={
-    isEs
-      ? "Historial de lanzamientos y cambios de Solidiom."
-      : "Release history and changelog for Solidiom."
-  }
+  description={isEs
+    ? "Historial de lanzamientos y cambios de Solidiom."
+    : "Release history and changelog for Solidiom."}
   contentType="changelog"
 >
   <nav aria-label={isEs ? "Navegación del registro de cambios" : "Changelog navigation"}>
     <ol class="changelog-list">
-      {sortedEntries.map((entry) => {
-        const slug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
-        const href = `${changelogPath}${slug}/`
-        return (
-          <li class="changelog-list__item">
-            <a href={href} class="changelog-list__link">
-              <header class="changelog-list__header">
-                <h2 class="changelog-list__title">{entry.data.title}</h2>
-                <time class="changelog-list__date" datetime={entry.data.date.toISOString().split("T")[0]}>
-                  {formatDate(entry.data.date, locale)}
-                </time>
-              </header>
-              <p class="changelog-list__description">{entry.data.description}</p>
-              <footer class="changelog-list__meta">
-                {entry.data.version && (
-                  <span class="changelog-list__version" data-version={entry.data.version}>
-                    {entry.data.version}
+      {
+        sortedEntries.map((entry) => {
+          const slug =
+            entry.id
+              .split("/")
+              .pop()
+              ?.replace(/\.(md|mdx)$/, "") ?? entry.id
+          const href = `${changelogPath}${slug}/`
+          return (
+            <li class="changelog-list__item">
+              <a href={href} class="changelog-list__link">
+                <header class="changelog-list__header">
+                  <h2 class="changelog-list__title">{entry.data.title}</h2>
+                  <time
+                    class="changelog-list__date"
+                    datetime={entry.data.date.toISOString().split("T")[0]}
+                  >
+                    {formatDate(entry.data.date, locale)}
+                  </time>
+                </header>
+                <p class="changelog-list__description">{entry.data.description}</p>
+                <footer class="changelog-list__meta">
+                  {entry.data.version && (
+                    <span class="changelog-list__version" data-version={entry.data.version}>
+                      {entry.data.version}
+                    </span>
+                  )}
+                  <span class="changelog-list__status" data-status={entry.data.maturity}>
+                    {entry.data.maturity}
                   </span>
-                )}
-                <span class="changelog-list__status" data-status={entry.data.maturity}>
-                  {entry.data.maturity}
-                </span>
-              </footer>
-            </a>
-          </li>
-        )
-      })}
+                </footer>
+              </a>
+            </li>
+          )
+        })
+      }
     </ol>
   </nav>
 </DocsLayout>

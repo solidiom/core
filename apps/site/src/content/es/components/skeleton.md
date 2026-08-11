@@ -31,7 +31,6 @@ import { Skeleton } from "@solidiom/recipes-css"
 </div>
 ```
 
-
 ## Instalación
 
 ```sh

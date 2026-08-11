@@ -11,11 +11,11 @@ locale: en
 
 ## Supported Versions
 
-| Version | Supported |
-|---------|-----------|
-| Latest `next` prerelease | Yes |
-| Previous `next` prerelease | Best effort |
-| Stable releases (when available) | Yes |
+| Version                          | Supported   |
+| -------------------------------- | ----------- |
+| Latest `next` prerelease         | Yes         |
+| Previous `next` prerelease       | Best effort |
+| Stable releases (when available) | Yes         |
 
 ## Reporting a Vulnerability
 

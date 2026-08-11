@@ -306,25 +306,41 @@
 }
 
 .theme-preview__alert--info {
-  background: color-mix(in srgb, var(--sio-primary, #5750d6) 6%, var(--sio-surface-raised, #ffffff));
+  background: color-mix(
+    in srgb,
+    var(--sio-primary, #5750d6) 6%,
+    var(--sio-surface-raised, #ffffff)
+  );
   border: 1px solid color-mix(in srgb, var(--sio-primary, #5750d6) 20%, transparent);
   color: var(--sio-foreground, var(--sol-foreground, #111827));
 }
 
 .theme-preview__alert--success {
-  background: color-mix(in srgb, var(--sio-success, #22c55e) 6%, var(--sio-surface-raised, #ffffff));
+  background: color-mix(
+    in srgb,
+    var(--sio-success, #22c55e) 6%,
+    var(--sio-surface-raised, #ffffff)
+  );
   border: 1px solid color-mix(in srgb, var(--sio-success, #22c55e) 20%, transparent);
   color: var(--sio-foreground, var(--sol-foreground, #111827));
 }
 
 .theme-preview__alert--warning {
-  background: color-mix(in srgb, var(--sio-warning, #f59e0b) 6%, var(--sio-surface-raised, #ffffff));
+  background: color-mix(
+    in srgb,
+    var(--sio-warning, #f59e0b) 6%,
+    var(--sio-surface-raised, #ffffff)
+  );
   border: 1px solid color-mix(in srgb, var(--sio-warning, #f59e0b) 20%, transparent);
   color: var(--sio-foreground, var(--sol-foreground, #111827));
 }
 
 .theme-preview__alert--error {
-  background: color-mix(in srgb, var(--sio-destructive, #e5484d) 6%, var(--sio-surface-raised, #ffffff));
+  background: color-mix(
+    in srgb,
+    var(--sio-destructive, #e5484d) 6%,
+    var(--sio-surface-raised, #ffffff)
+  );
   border: 1px solid color-mix(in srgb, var(--sio-destructive, #e5484d) 20%, transparent);
   color: var(--sio-foreground, var(--sol-foreground, #111827));
 }

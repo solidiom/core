@@ -64,7 +64,10 @@ export function PaymentMethodBlock(props: PaymentMethodProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-payment-method", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-payment-method", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-payment-method__restricted" role="alert">
           <p>{props.restrictedReason || "Payment method management is restricted."}</p>
@@ -94,19 +97,38 @@ export function PaymentMethodBlock(props: PaymentMethodProps): JSX.Element {
         <div class="solidiom-block-payment-method__list">
           <For each={props.methods ?? []}>
             {(method) => (
-              <div class="solidiom-block-payment-method__card" classList={{ "is-default": method.isDefault }}>
+              <div
+                class="solidiom-block-payment-method__card"
+                classList={{ "is-default": method.isDefault }}
+              >
                 <div class="solidiom-block-payment-method__info">
-                  <span class="solidiom-block-payment-method__brand">{method.brand ?? method.type}</span>
+                  <span class="solidiom-block-payment-method__brand">
+                    {method.brand ?? method.type}
+                  </span>
                   <span class="solidiom-block-payment-method__last4">····{method.last4}</span>
                   <Show when={method.expiresAt}>
-                    <span class="solidiom-block-payment-method__expires">Expires {method.expiresAt}</span>
+                    <span class="solidiom-block-payment-method__expires">
+                      Expires {method.expiresAt}
+                    </span>
                   </Show>
                 </div>
                 <div class="solidiom-block-payment-method__actions">
                   <Show when={!method.isDefault}>
-                    <button type="button" onClick={() => handleSetDefault(method.id)} disabled={state() === "loading"}>Set Default</button>
+                    <button
+                      type="button"
+                      onClick={() => handleSetDefault(method.id)}
+                      disabled={state() === "loading"}
+                    >
+                      Set Default
+                    </button>
                   </Show>
-                  <button type="button" onClick={() => handleRemove(method.id)} disabled={state() === "loading"}>Remove</button>
+                  <button
+                    type="button"
+                    onClick={() => handleRemove(method.id)}
+                    disabled={state() === "loading"}
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             )}

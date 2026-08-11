@@ -6,13 +6,36 @@ import * as Alert from "@solidiom/alert"
 import { StatusBadge } from "../components/StatusBadge"
 
 const REVIEW_COMMENTS = [
-  { id: 1, item: "Case Study: Acme Corp", author: "Alice Chen", text: "Make sure to include the ROI metrics from Q2.", time: "2h ago" },
-  { id: 2, item: "White Paper: Industry Trends", author: "Bob Lee", text: "The methodology section needs more detail on sample size.", time: "4h ago" },
-  { id: 3, item: "Video Script: Product Demo", author: "Carol Wu", text: "Great flow. Just tighten the intro to under 30 seconds.", time: "1d ago" },
+  {
+    id: 1,
+    item: "Case Study: Acme Corp",
+    author: "Alice Chen",
+    text: "Make sure to include the ROI metrics from Q2.",
+    time: "2h ago",
+  },
+  {
+    id: 2,
+    item: "White Paper: Industry Trends",
+    author: "Bob Lee",
+    text: "The methodology section needs more detail on sample size.",
+    time: "4h ago",
+  },
+  {
+    id: 3,
+    item: "Video Script: Product Demo",
+    author: "Carol Wu",
+    text: "Great flow. Just tighten the intro to under 30 seconds.",
+    time: "1d ago",
+  },
 ]
 
 const ASSIGNMENTS = [
-  { title: "Blog Post: Spring Campaign", author: "Alice Chen", deadline: "Aug 15", priority: "high" },
+  {
+    title: "Blog Post: Spring Campaign",
+    author: "Alice Chen",
+    deadline: "Aug 15",
+    priority: "high",
+  },
   { title: "Email Newsletter #14", author: "Bob Lee", deadline: "Aug 18", priority: "medium" },
   { title: "Landing Page Copy", author: "Carol Wu", deadline: "Aug 20", priority: "low" },
   { title: "Social Media Calendar", author: "Alice Chen", deadline: "Aug 22", priority: "medium" },
@@ -36,14 +59,18 @@ export function Workflow(): JSX.Element {
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Workflow</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Workflow
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div class="mt-6">
         <h1 class="text-2xl font-bold text-gray-900">Editorial Workflow</h1>
-        <p class="mt-1 text-sm text-gray-500">Manage content through the editorial pipeline from draft to published.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Manage content through the editorial pipeline from draft to published.
+        </p>
       </div>
 
       <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -58,17 +85,21 @@ export function Workflow(): JSX.Element {
           >
             <div class="mb-3 flex items-center justify-between">
               <h3 class="font-medium text-gray-900">{stage.name}</h3>
-              <span class={`inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium text-white ${stage.color}`}>
+              <span
+                class={`inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium text-white ${stage.color}`}
+              >
                 {stage.count}
               </span>
             </div>
             <div class="space-y-2">
-              {(PIPELINE_ITEMS as any)[stage.name]?.map((item: { title: string; author: string }) => (
-                <div class="rounded-md border border-gray-100 bg-gray-50 p-3">
-                  <div class="text-sm font-medium text-gray-900">{item.title}</div>
-                  <div class="text-xs text-gray-500">{item.author}</div>
-                </div>
-              ))}
+              {(PIPELINE_ITEMS as any)[stage.name]?.map(
+                (item: { title: string; author: string }) => (
+                  <div class="rounded-md border border-gray-100 bg-gray-50 p-3">
+                    <div class="text-sm font-medium text-gray-900">{item.title}</div>
+                    <div class="text-xs text-gray-500">{item.author}</div>
+                  </div>
+                ),
+              )}
             </div>
           </div>
         ))}
@@ -104,7 +135,7 @@ export function Workflow(): JSX.Element {
           </Card.Header>
           <Card.Content>
             <Alert.Root variant="info" class="mb-4">
-               <Alert.Description>3 assignments due this week — 1 high priority</Alert.Description>
+              <Alert.Description>3 assignments due this week — 1 high priority</Alert.Description>
             </Alert.Root>
             <div class="space-y-3">
               {ASSIGNMENTS.map((assignment) => (
@@ -115,7 +146,9 @@ export function Workflow(): JSX.Element {
                   </div>
                   <div class="flex items-center gap-3">
                     <span class="text-xs text-gray-500">{assignment.deadline}</span>
-                    <span class={`rounded-full px-2 py-0.5 text-xs font-medium ${priorityColors[assignment.priority]}`}>
+                    <span
+                      class={`rounded-full px-2 py-0.5 text-xs font-medium ${priorityColors[assignment.priority]}`}
+                    >
                       {assignment.priority}
                     </span>
                   </div>

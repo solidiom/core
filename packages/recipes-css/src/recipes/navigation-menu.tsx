@@ -8,14 +8,15 @@ export { NavigationMenu }
 
 const BASE_CLASS = "solidiom-navigation-menu"
 
-export interface StyledNavigationMenuProps
-  extends Omit<Parameters<typeof NavigationMenu.Root>[0], "class"> {
+export interface StyledNavigationMenuProps extends Omit<
+  Parameters<typeof NavigationMenu.Root>[0],
+  "class"
+> {
   class?: string
 }
 
 export function StyledNavigationMenu(props: StyledNavigationMenuProps) {
-  const className = () =>
-    [BASE_CLASS, props.class].filter(Boolean).join(" ")
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ")
 
   return <NavigationMenu.Root {...props} class={className()} />
 }

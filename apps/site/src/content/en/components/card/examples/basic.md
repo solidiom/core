@@ -27,9 +27,7 @@ import { StyledCard, Card } from "@solidiom/recipes-css"
 ;<StyledCard>
   <Card.Header>
     <Card.Title>Get Started</Card.Title>
-    <Card.Description>
-      Everything you need to know to get up and running.
-    </Card.Description>
+    <Card.Description>Everything you need to know to get up and running.</Card.Description>
   </Card.Header>
   <Card.Content>Start building your project today.</Card.Content>
   <Card.Footer>Footer action or metadata goes here.</Card.Footer>

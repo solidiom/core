@@ -24,7 +24,9 @@ The Button component is a styled recipe wrapper around the `@solidiom/button` pr
 ```tsx
 import { Button } from "@solidiom/recipes-css"
 
-;<Button variant="default" size="md">Click me</Button>
+;<Button variant="default" size="md">
+  Click me
+</Button>
 ```
 
 ## With variants
@@ -34,8 +36,12 @@ The component supports the same variants as the primitive, with styling applied 
 ```tsx
 import { Button } from "@solidiom/recipes-css"
 
-;<Button variant="destructive" size="sm">Delete</Button>
-;<Button variant="outline" size="lg">Cancel</Button>
+;<Button variant="destructive" size="sm">
+  Delete
+</Button>
+;<Button variant="outline" size="lg">
+  Cancel
+</Button>
 ;<Button variant="ghost">Secondary</Button>
 ;<Button variant="link">Learn more</Button>
 ```

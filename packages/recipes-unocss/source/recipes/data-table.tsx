@@ -8,14 +8,12 @@ export { DataTable }
 
 const BASE_CLASS = "solidiom-data-table"
 
-export interface StyledDataTableProps
-  extends Omit<Parameters<typeof DataTable.Root>[0], "class"> {
+export interface StyledDataTableProps extends Omit<Parameters<typeof DataTable.Root>[0], "class"> {
   class?: string
 }
 
 export function StyledDataTable(props: StyledDataTableProps) {
-  const className = () =>
-    [BASE_CLASS, props.class].filter(Boolean).join(" ")
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ")
 
   return <DataTable.Root {...props} class={className()} />
 }

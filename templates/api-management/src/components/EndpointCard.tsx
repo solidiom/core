@@ -22,9 +22,12 @@ export function EndpointCard(props: EndpointCardProps): JSX.Element {
 
   const statusColor = () => {
     switch (props.status) {
-      case "active": return "bg-green-100 text-green-700"
-      case "deprecated": return "bg-red-100 text-red-700"
-      case "draft": return "bg-gray-100 text-gray-600"
+      case "active":
+        return "bg-green-100 text-green-700"
+      case "deprecated":
+        return "bg-red-100 text-red-700"
+      case "draft":
+        return "bg-gray-100 text-gray-600"
     }
   }
 
@@ -32,12 +35,16 @@ export function EndpointCard(props: EndpointCardProps): JSX.Element {
     <Card.Root class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
       <div class="flex items-start justify-between">
         <div class="flex items-center gap-3">
-          <span class={`inline-flex items-center rounded-md px-2 py-1 text-xs font-bold ${methodColor}`}>
+          <span
+            class={`inline-flex items-center rounded-md px-2 py-1 text-xs font-bold ${methodColor}`}
+          >
             {props.method}
           </span>
           <span class="font-mono text-sm text-gray-900">{props.path}</span>
         </div>
-        <span class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor()}`}>
+        <span
+          class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor()}`}
+        >
           {props.status}
         </span>
       </div>

@@ -104,7 +104,10 @@ export const COMPOSITE_SCOPES = ["prose", "typeset"] as const
  * so they are not copied into new primitives. Each names the task that resolves it.
  */
 export const VOCABULARY_EXCEPTIONS: Readonly<
-  Record<string, { readonly reason: string; readonly resolvedBy: string; readonly resolution: string }>
+  Record<
+    string,
+    { readonly reason: string; readonly resolvedBy: string; readonly resolution: string }
+  >
 > = {
   "date-picker/disabled": {
     reason:
@@ -204,7 +207,9 @@ export function isKnownState(scope: string, state: string): boolean {
 export function vocabularyException(
   scope: string,
   state: string,
-): { readonly reason: string; readonly resolvedBy: string; readonly resolution: string } | undefined {
+):
+  | { readonly reason: string; readonly resolvedBy: string; readonly resolution: string }
+  | undefined {
   return VOCABULARY_EXCEPTIONS[`${scope}/${state}`]
 }
 

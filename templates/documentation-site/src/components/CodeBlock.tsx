@@ -1,9 +1,6 @@
 import type { JSX } from "solid-js"
 
-export function CodeBlock(props: {
-  code: string
-  language?: string
-}): JSX.Element {
+export function CodeBlock(props: { code: string; language?: string }): JSX.Element {
   return (
     <div class="overflow-hidden rounded-lg border border-gray-200 bg-gray-900">
       {props.language && (

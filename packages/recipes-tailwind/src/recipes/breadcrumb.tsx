@@ -8,14 +8,15 @@ export { Breadcrumb }
 
 const ROOT_CLASSES = "flex items-center gap-2 text-sm"
 
-export interface StyledBreadcrumbProps
-  extends Omit<Parameters<typeof Breadcrumb.Root>[0], "class"> {
+export interface StyledBreadcrumbProps extends Omit<
+  Parameters<typeof Breadcrumb.Root>[0],
+  "class"
+> {
   class?: string
 }
 
 export function StyledBreadcrumb(props: StyledBreadcrumbProps) {
-  const className = () =>
-    twMerge(ROOT_CLASSES, props.class)
+  const className = () => twMerge(ROOT_CLASSES, props.class)
 
   return <Breadcrumb.Root {...props} class={className()} />
 }

@@ -1,6 +1,10 @@
 import type { JSX } from "solid-js"
 
-export function SettingGroup(props: { title: string; description?: string; children: JSX.Element }): JSX.Element {
+export function SettingGroup(props: {
+  title: string
+  description?: string
+  children: JSX.Element
+}): JSX.Element {
   return (
     <div class="space-y-4">
       <div>

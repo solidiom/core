@@ -25,9 +25,7 @@ import * as DatePicker from "@solidiom/date-picker"
 ;<DatePicker.Root onValueChange={(date) => console.log(date)}>
   <DatePicker.Input placeholder="Select a date" />
 
-  <DatePicker.Trigger>
-    📅
-  </DatePicker.Trigger>
+  <DatePicker.Trigger>📅</DatePicker.Trigger>
 
   <DatePicker.Content>
     <DatePicker.Calendar>
@@ -42,7 +40,7 @@ import * as DatePicker from "@solidiom/date-picker"
                   <DatePicker.Cell key={`${wi}-${di}`} day={day} />
                 ) : (
                   <td key={`${wi}-${di}`} />
-                )
+                ),
               )}
             </tr>
           ))

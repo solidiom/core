@@ -3,7 +3,13 @@
   "stack": "vite-solid-router",
   "description": "Incident response console with active incidents, runbooks, and postmortem reports.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-OBS-01", "BLOCK-OBS-02", "BLOCK-OBS-03"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-OBS-01",
+    "BLOCK-OBS-02",
+    "BLOCK-OBS-03"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["enterprise"],

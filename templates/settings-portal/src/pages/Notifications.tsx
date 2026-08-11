@@ -23,10 +23,15 @@ export function Notifications(): JSX.Element {
   const location = useLocation()
   const [items, setItems] = createSignal(NOTIFICATION_TYPES)
 
-  const toggleChannel = (index: number, channel: keyof typeof NOTIFICATION_TYPES[0]["channels"]) => {
+  const toggleChannel = (
+    index: number,
+    channel: keyof (typeof NOTIFICATION_TYPES)[0]["channels"],
+  ) => {
     setItems((prev) =>
       prev.map((item, i) =>
-        i === index ? { ...item, channels: { ...item.channels, [channel]: !item.channels[channel] } } : item,
+        i === index
+          ? { ...item, channels: { ...item.channels, [channel]: !item.channels[channel] } }
+          : item,
       ),
     )
   }
@@ -35,7 +40,9 @@ export function Notifications(): JSX.Element {
     <div class="min-h-screen bg-gray-50">
       <header class="border-b border-gray-200 bg-white">
         <div class="mx-auto flex h-16 max-w-3xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <A href="/" class="text-lg font-bold text-gray-900">Settings</A>
+          <A href="/" class="text-lg font-bold text-gray-900">
+            Settings
+          </A>
           <nav class="flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
               <A
@@ -66,7 +73,10 @@ export function Notifications(): JSX.Element {
             </Alert.Description>
           </Alert.Root>
 
-          <SettingGroup title="Notification Channels" description="Manage notifications by category and channel.">
+          <SettingGroup
+            title="Notification Channels"
+            description="Manage notifications by category and channel."
+          >
             <div class="space-y-6">
               {items().map((item, index) => (
                 <div class="rounded-lg border border-gray-200 bg-white px-4 py-3">

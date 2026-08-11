@@ -2,7 +2,19 @@
 contentSchemaVersion: 1
 title: "Solidiom Beta 1"
 description: "Lanzamiento de catálogo completo: 52 primitivas, 30 componentes, 36 bloques, 29 plantillas y 4 presets de tema — accesibles por diseño, bilingües e impulsados por CLI."
-keywords: [beta, lanzamiento, changelog, primitivas, componentes, bloques, plantillas, accesibilidad, CLI, navegador]
+keywords:
+  [
+    beta,
+    lanzamiento,
+    changelog,
+    primitivas,
+    componentes,
+    bloques,
+    plantillas,
+    accesibilidad,
+    CLI,
+    navegador,
+  ]
 locale: es
 maturity: beta
 product: "Solidiom"
@@ -94,13 +106,13 @@ La CLI agrega la primitiva, todas las salidas de recetas y la compatibilidad con
 
 ### Comandos Disponibles
 
-| Comando | Descripción |
-|---------|-------------|
-| `solidiom create <name>` | Crear un nuevo proyecto |
-| `solidiom add <primitive>` | Agregar una primitiva a tu espacio de trabajo |
-| `solidiom registry verify` | Verificar la integridad del paquete |
-| `solidiom theme list` | Listar presets disponibles |
-| `solidiom theme apply <preset>` | Aplicar un preset de tema |
+| Comando                         | Descripción                                   |
+| ------------------------------- | --------------------------------------------- |
+| `solidiom create <name>`        | Crear un nuevo proyecto                       |
+| `solidiom add <primitive>`      | Agregar una primitiva a tu espacio de trabajo |
+| `solidiom registry verify`      | Verificar la integridad del paquete           |
+| `solidiom theme list`           | Listar presets disponibles                    |
+| `solidiom theme apply <preset>` | Aplicar un preset de tema                     |
 
 ## Limitaciones Conocidas
 

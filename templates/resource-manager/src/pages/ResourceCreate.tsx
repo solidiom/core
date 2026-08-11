@@ -13,10 +13,22 @@ type ResourceType = "Service" | "Database" | "Compute" | "Storage" | "Network"
 type FormStep = "type" | "details" | "configure" | "review"
 
 const RESOURCE_TYPES: { value: ResourceType; label: string; description: string }[] = [
-  { value: "Service", label: "Service", description: "API gateway, microservice, or load balancer" },
+  {
+    value: "Service",
+    label: "Service",
+    description: "API gateway, microservice, or load balancer",
+  },
   { value: "Database", label: "Database", description: "Managed relational or NoSQL database" },
-  { value: "Compute", label: "Compute", description: "Virtual machine, container, or serverless function" },
-  { value: "Storage", label: "Storage", description: "Object storage, block storage, or file system" },
+  {
+    value: "Compute",
+    label: "Compute",
+    description: "Virtual machine, container, or serverless function",
+  },
+  {
+    value: "Storage",
+    label: "Storage",
+    description: "Object storage, block storage, or file system",
+  },
   { value: "Network", label: "Network", description: "VPC, subnet, or firewall rule" },
 ]
 
@@ -37,14 +49,24 @@ const getConfigFields = (type: ResourceType) => {
       return [
         { key: "replicas", label: "Replicas", placeholder: "3", required: true },
         { key: "port", label: "Port", placeholder: "8080", required: true },
-        { key: "health_check_path", label: "Health Check Path", placeholder: "/health", required: false },
+        {
+          key: "health_check_path",
+          label: "Health Check Path",
+          placeholder: "/health",
+          required: false,
+        },
         { key: "max_connections", label: "Max Connections", placeholder: "1000", required: false },
       ]
     case "Database":
       return [
         { key: "engine", label: "Engine", placeholder: "postgres", required: true },
         { key: "version", label: "Version", placeholder: "16.1", required: true },
-        { key: "instance_class", label: "Instance Class", placeholder: "db.r5.large", required: true },
+        {
+          key: "instance_class",
+          label: "Instance Class",
+          placeholder: "db.r5.large",
+          required: true,
+        },
         { key: "storage_gb", label: "Storage (GB)", placeholder: "100", required: true },
       ]
     case "Compute":
@@ -97,13 +119,16 @@ export function ResourceCreate(): JSX.Element {
 
   const canProceed = () => {
     switch (step()) {
-      case "type": return resourceType() !== ""
-      case "details": return name().trim() !== "" && region() !== ""
+      case "type":
+        return resourceType() !== ""
+      case "details":
+        return name().trim() !== "" && region() !== ""
       case "configure": {
         const requiredFields = configFields().filter((f) => f.required)
         return requiredFields.every((f) => config()[f.key]?.trim() !== "")
       }
-      case "review": return true
+      case "review":
+        return true
     }
   }
 
@@ -123,20 +148,28 @@ export function ResourceCreate(): JSX.Element {
           <Breadcrumb.Root class="mb-2">
             <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                  Home
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
               <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/create" current class="text-gray-900 font-medium">Create Resource</Breadcrumb.Link>
+                <Breadcrumb.Link href="/create" current class="text-gray-900 font-medium">
+                  Create Resource
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
             </Breadcrumb.List>
           </Breadcrumb.Root>
           <h1 class="text-2xl font-bold text-gray-900">Create Resource</h1>
-          <p class="mt-1 text-sm text-gray-500">Guided resource creation with type, configuration, and validation.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Guided resource creation with type, configuration, and validation.
+          </p>
         </div>
 
         <Alert.Root type="success" class="rounded-lg border border-green-200 bg-green-50 p-4">
-          <Alert.Title class="text-sm font-medium text-green-800">Resource created successfully!</Alert.Title>
+          <Alert.Title class="text-sm font-medium text-green-800">
+            Resource created successfully!
+          </Alert.Title>
           <Alert.Description class="mt-1 text-sm text-green-700">
             {name()} ({resourceType()}) is being provisioned in {region}.
           </Alert.Description>
@@ -172,16 +205,22 @@ export function ResourceCreate(): JSX.Element {
         <Breadcrumb.Root class="mb-2">
           <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Home
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/create" current class="text-gray-900 font-medium">Create Resource</Breadcrumb.Link>
+              <Breadcrumb.Link href="/create" current class="text-gray-900 font-medium">
+                Create Resource
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
         <h1 class="text-2xl font-bold text-gray-900">Create Resource</h1>
-        <p class="mt-1 text-sm text-gray-500">Guided resource creation with type, configuration, and validation.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Guided resource creation with type, configuration, and validation.
+        </p>
       </div>
 
       <div class="flex items-center gap-4">
@@ -191,24 +230,26 @@ export function ResourceCreate(): JSX.Element {
           return (
             <div class="flex items-center gap-4">
               <div class="flex items-center gap-2">
-                <span class={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium ${
-                  isCurrent
-                    ? "bg-indigo-600 text-white"
-                    : isActive
-                      ? "bg-indigo-100 text-indigo-600"
-                      : "bg-gray-100 text-gray-400"
-                }`}>
+                <span
+                  class={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium ${
+                    isCurrent
+                      ? "bg-indigo-600 text-white"
+                      : isActive
+                        ? "bg-indigo-100 text-indigo-600"
+                        : "bg-gray-100 text-gray-400"
+                  }`}
+                >
                   {i + 1}
                 </span>
-                <span class={`text-sm font-medium ${
-                  isCurrent ? "text-gray-900" : isActive ? "text-gray-700" : "text-gray-400"
-                }`}>
+                <span
+                  class={`text-sm font-medium ${
+                    isCurrent ? "text-gray-900" : isActive ? "text-gray-700" : "text-gray-400"
+                  }`}
+                >
                   {stepLabels[s]}
                 </span>
               </div>
-              {i < 3 && (
-                <div class={`h-px w-16 ${isActive ? "bg-indigo-300" : "bg-gray-200"}`} />
-              )}
+              {i < 3 && <div class={`h-px w-16 ${isActive ? "bg-indigo-300" : "bg-gray-200"}`} />}
             </div>
           )
         })}
@@ -232,9 +273,11 @@ export function ResourceCreate(): JSX.Element {
                     }`}
                   >
                     <div class="flex items-center justify-between">
-                      <span class={`text-sm font-semibold ${
-                        resourceType() === rt.value ? "text-indigo-700" : "text-gray-900"
-                      }`}>
+                      <span
+                        class={`text-sm font-semibold ${
+                          resourceType() === rt.value ? "text-indigo-700" : "text-gray-900"
+                        }`}
+                      >
                         {rt.label}
                       </span>
                       {resourceType() === rt.value && (
@@ -253,7 +296,9 @@ export function ResourceCreate(): JSX.Element {
           {step() === "details" && (
             <div class="space-y-6">
               <h2 class="text-lg font-semibold text-gray-900">Resource Details</h2>
-              <p class="text-sm text-gray-500">Name your resource and select a deployment region.</p>
+              <p class="text-sm text-gray-500">
+                Name your resource and select a deployment region.
+              </p>
 
               <Field.Root>
                 <label class="block text-sm font-medium text-gray-700">Name</label>
@@ -300,7 +345,9 @@ export function ResourceCreate(): JSX.Element {
           {step() === "configure" && (
             <div class="space-y-6">
               <h2 class="text-lg font-semibold text-gray-900">Configuration</h2>
-              <p class="text-sm text-gray-500">Configure settings for your {resourceType()} resource.</p>
+              <p class="text-sm text-gray-500">
+                Configure settings for your {resourceType()} resource.
+              </p>
 
               <div class="space-y-4">
                 {configFields().map((field) => (
@@ -317,7 +364,9 @@ export function ResourceCreate(): JSX.Element {
                       onInput={(e) => updateConfig(field.key, e.currentTarget.value)}
                     />
                     {!field.required && (
-                      <Field.Description class="mt-1 text-xs text-gray-400">Optional</Field.Description>
+                      <Field.Description class="mt-1 text-xs text-gray-400">
+                        Optional
+                      </Field.Description>
                     )}
                   </Field.Root>
                 ))}
@@ -326,7 +375,8 @@ export function ResourceCreate(): JSX.Element {
               <div class="rounded-md border border-yellow-200 bg-yellow-50 p-4">
                 <div class="flex items-start gap-2">
                   <span class="text-sm text-yellow-700">
-                    Fields marked with <span class="text-red-500">*</span> are required before proceeding.
+                    Fields marked with <span class="text-red-500">*</span> are required before
+                    proceeding.
                   </span>
                 </div>
               </div>
@@ -336,23 +386,33 @@ export function ResourceCreate(): JSX.Element {
           {step() === "review" && (
             <div class="space-y-6">
               <h2 class="text-lg font-semibold text-gray-900">Review &amp; Create</h2>
-              <p class="text-sm text-gray-500">Review your resource configuration before creating it.</p>
+              <p class="text-sm text-gray-500">
+                Review your resource configuration before creating it.
+              </p>
 
               <div class="rounded-lg border border-gray-200 divide-y divide-gray-200">
                 <div class="px-4 py-3">
-                  <span class="text-xs font-medium uppercase tracking-wider text-gray-500">Type</span>
+                  <span class="text-xs font-medium uppercase tracking-wider text-gray-500">
+                    Type
+                  </span>
                   <p class="mt-1 text-sm font-semibold text-gray-900">{resourceType()}</p>
                 </div>
                 <div class="px-4 py-3">
-                  <span class="text-xs font-medium uppercase tracking-wider text-gray-500">Name</span>
+                  <span class="text-xs font-medium uppercase tracking-wider text-gray-500">
+                    Name
+                  </span>
                   <p class="mt-1 text-sm font-semibold text-gray-900">{name()}</p>
                 </div>
                 <div class="px-4 py-3">
-                  <span class="text-xs font-medium uppercase tracking-wider text-gray-500">Region</span>
+                  <span class="text-xs font-medium uppercase tracking-wider text-gray-500">
+                    Region
+                  </span>
                   <p class="mt-1 text-sm font-semibold text-gray-900">{region()}</p>
                 </div>
                 <div class="px-4 py-3">
-                  <span class="text-xs font-medium uppercase tracking-wider text-gray-500">Configuration</span>
+                  <span class="text-xs font-medium uppercase tracking-wider text-gray-500">
+                    Configuration
+                  </span>
                   <div class="mt-2 grid gap-2 sm:grid-cols-2">
                     {configFields().map((field) => {
                       const val = config()[field.key]
@@ -369,9 +429,12 @@ export function ResourceCreate(): JSX.Element {
               </div>
 
               <Alert.Root type="info" class="rounded-lg border border-blue-200 bg-blue-50 p-4">
-                <Alert.Title class="text-sm font-medium text-blue-800">About to create resource</Alert.Title>
+                <Alert.Title class="text-sm font-medium text-blue-800">
+                  About to create resource
+                </Alert.Title>
                 <Alert.Description class="mt-1 text-sm text-blue-700">
-                  This will create a new {resourceType()} named "{name()}" in the {region} region. The resource will be in "pending" status until provisioning completes.
+                  This will create a new {resourceType()} named "{name()}" in the {region} region.
+                  The resource will be in "pending" status until provisioning completes.
                 </Alert.Description>
               </Alert.Root>
             </div>
@@ -389,7 +452,9 @@ export function ResourceCreate(): JSX.Element {
             disabled={step() === "type"}
           >
             {step() === "type" ? (
-              <A href="/" class="text-sm font-medium text-gray-700">Cancel</A>
+              <A href="/" class="text-sm font-medium text-gray-700">
+                Cancel
+              </A>
             ) : (
               "Previous"
             )}

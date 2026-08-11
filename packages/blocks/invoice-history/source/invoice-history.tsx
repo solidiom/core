@@ -54,35 +54,62 @@ export function InvoiceHistory(props: InvoiceHistoryProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-invoice-history", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-invoice-history", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-invoice-history__restricted" role="alert">
           <p>{props.restrictedReason || "Invoice access is restricted."}</p>
         </div>
       </Show>
       <Show when={state() === "error" && currentError()}>
-        <div class="solidiom-block-invoice-history__error" role="alert"><p>{currentError()}</p></div>
+        <div class="solidiom-block-invoice-history__error" role="alert">
+          <p>{currentError()}</p>
+        </div>
       </Show>
       <Show when={state() !== "restricted"}>
         <Show when={state() === "loading"}>
-          <div class="solidiom-block-invoice-history__loading" aria-live="polite">Loading invoices...</div>
+          <div class="solidiom-block-invoice-history__loading" aria-live="polite">
+            Loading invoices...
+          </div>
         </Show>
         <Show when={invoices().length === 0 && state() !== "loading"}>
-          <div class="solidiom-block-invoice-history__empty"><p>No invoices found.</p></div>
+          <div class="solidiom-block-invoice-history__empty">
+            <p>No invoices found.</p>
+          </div>
         </Show>
         <Show when={invoices().length > 0}>
           <table class="solidiom-block-invoice-history__table">
-            <thead><tr><th>Date</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
             <tbody>
               <For each={invoices()}>
                 {(invoice) => (
-                  <tr class="solidiom-block-invoice-history__row" classList={{ [`is-${invoice.status}`]: true }}>
+                  <tr
+                    class="solidiom-block-invoice-history__row"
+                    classList={{ [`is-${invoice.status}`]: true }}
+                  >
                     <td>{invoice.date}</td>
                     <td>{invoice.amount}</td>
-                    <td><span class="solidiom-block-invoice-history__status">{invoice.status}</span></td>
+                    <td>
+                      <span class="solidiom-block-invoice-history__status">{invoice.status}</span>
+                    </td>
                     <td>
                       <Show when={invoice.downloadUrl}>
-                        <button type="button" onClick={() => handleDownload(invoice.id)} disabled={state() === "loading"}>Download</button>
+                        <button
+                          type="button"
+                          onClick={() => handleDownload(invoice.id)}
+                          disabled={state() === "loading"}
+                        >
+                          Download
+                        </button>
                       </Show>
                     </td>
                   </tr>
@@ -92,9 +119,23 @@ export function InvoiceHistory(props: InvoiceHistoryProps): JSX.Element {
           </table>
           <Show when={(props.totalPages ?? 1) > 1}>
             <nav class="solidiom-block-invoice-history__pagination" aria-label="Invoice pagination">
-              <button type="button" disabled={props.currentPage === 1} onClick={() => props.onPageChange?.((props.currentPage ?? 1) - 1)}>Previous</button>
-              <span>Page {props.currentPage ?? 1} of {props.totalPages ?? 1}</span>
-              <button type="button" disabled={props.currentPage === props.totalPages} onClick={() => props.onPageChange?.((props.currentPage ?? 1) + 1)}>Next</button>
+              <button
+                type="button"
+                disabled={props.currentPage === 1}
+                onClick={() => props.onPageChange?.((props.currentPage ?? 1) - 1)}
+              >
+                Previous
+              </button>
+              <span>
+                Page {props.currentPage ?? 1} of {props.totalPages ?? 1}
+              </span>
+              <button
+                type="button"
+                disabled={props.currentPage === props.totalPages}
+                onClick={() => props.onPageChange?.((props.currentPage ?? 1) + 1)}
+              >
+                Next
+              </button>
             </nav>
           </Show>
         </Show>

@@ -13,17 +13,23 @@ interface ModelCardProps {
 export function ModelCard(props: ModelCardProps): JSX.Element {
   const statusColor = () => {
     switch (props.status) {
-      case "active": return "bg-green-100 text-green-700"
-      case "inactive": return "bg-gray-100 text-gray-600"
-      case "training": return "bg-yellow-100 text-yellow-700"
+      case "active":
+        return "bg-green-100 text-green-700"
+      case "inactive":
+        return "bg-gray-100 text-gray-600"
+      case "training":
+        return "bg-yellow-100 text-yellow-700"
     }
   }
 
   const statusDot = () => {
     switch (props.status) {
-      case "active": return "bg-green-500"
-      case "inactive": return "bg-gray-400"
-      case "training": return "bg-yellow-500"
+      case "active":
+        return "bg-green-500"
+      case "inactive":
+        return "bg-gray-400"
+      case "training":
+        return "bg-yellow-500"
     }
   }
 
@@ -31,12 +37,12 @@ export function ModelCard(props: ModelCardProps): JSX.Element {
     <Card.Root class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
       <Card.Header class="flex items-start justify-between pb-3">
         <div>
-          <Card.Title class="text-base font-semibold text-gray-900">
-            {props.name}
-          </Card.Title>
+          <Card.Title class="text-base font-semibold text-gray-900">{props.name}</Card.Title>
           <p class="text-xs text-gray-500">v{props.version}</p>
         </div>
-        <span class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor()}`}>
+        <span
+          class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor()}`}
+        >
           <span class={`mr-1.5 h-1.5 w-1.5 rounded-full ${statusDot()}`} />
           {props.status}
         </span>

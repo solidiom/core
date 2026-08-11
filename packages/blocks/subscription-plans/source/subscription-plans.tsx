@@ -50,7 +50,10 @@ export function SubscriptionPlans(props: SubscriptionPlansProps): JSX.Element {
   }
 
   return (
-    <div class={["solidiom-block-subscription-plans", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-subscription-plans", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-subscription-plans__restricted" role="alert">
           <p>{props.restrictedReason || "Plan management is restricted."}</p>
@@ -74,13 +77,27 @@ export function SubscriptionPlans(props: SubscriptionPlansProps): JSX.Element {
         <div class="solidiom-block-subscription-plans__grid">
           <For each={props.plans ?? []}>
             {(plan) => (
-              <div class="solidiom-block-subscription-plans__card" classList={{ "is-current": plan.id === props.currentPlanId, "is-recommended": plan.recommended }}>
+              <div
+                class="solidiom-block-subscription-plans__card"
+                classList={{
+                  "is-current": plan.id === props.currentPlanId,
+                  "is-recommended": plan.recommended,
+                }}
+              >
                 <h3>{plan.name}</h3>
-                <p class="solidiom-block-subscription-plans__price">{plan.price}<span>/{plan.interval}</span></p>
+                <p class="solidiom-block-subscription-plans__price">
+                  {plan.price}
+                  <span>/{plan.interval}</span>
+                </p>
                 <ul class="solidiom-block-subscription-plans__features">
                   <For each={plan.features}>{(feature) => <li>{feature}</li>}</For>
                 </ul>
-                <button type="button" class="solidiom-block-subscription-plans__select" onClick={() => handleSelect(plan.id)} disabled={state() === "loading" || plan.id === props.currentPlanId}>
+                <button
+                  type="button"
+                  class="solidiom-block-subscription-plans__select"
+                  onClick={() => handleSelect(plan.id)}
+                  disabled={state() === "loading" || plan.id === props.currentPlanId}
+                >
                   {plan.id === props.currentPlanId ? "Current Plan" : "Select"}
                 </button>
               </div>

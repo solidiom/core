@@ -14,16 +14,16 @@ date: 2026-08-07
 
 ## Bilingual Coverage
 
-| Layer | English routes | Spanish routes | Parity |
-|-------|---------------|----------------|--------|
-| Primitives | 52 | 52 | Full |
-| Components | 30 | 30 | Full |
-| Blocks | 36 | 36 | Full |
-| Templates | 29 | 29 | Full |
-| Themes | 5 | 5 | Full |
-| Guides | 3 | 3 | Full |
-| Community | 2 | 2 | Full |
-| Legal (privacy/trademark) | 2 | 2 | Full |
+| Layer                     | English routes | Spanish routes | Parity |
+| ------------------------- | -------------- | -------------- | ------ |
+| Primitives                | 52             | 52             | Full   |
+| Components                | 30             | 30             | Full   |
+| Blocks                    | 36             | 36             | Full   |
+| Templates                 | 29             | 29             | Full   |
+| Themes                    | 5              | 5              | Full   |
+| Guides                    | 3              | 3              | Full   |
+| Community                 | 2              | 2              | Full   |
+| Legal (privacy/trademark) | 2              | 2              | Full   |
 
 ## SEO Metadata
 
@@ -47,20 +47,20 @@ Every content page includes:
 
 ## Link Integrity
 
-| Check | Status |
-|-------|--------|
-| Internal links resolve | Pass (verified by Astro build) |
-| No broken anchor links | Pass |
-| All locale links have counterpart | Pass |
-| External links use `rel="noopener"` | Pass |
-| No redirect chains | Pass |
+| Check                               | Status                         |
+| ----------------------------------- | ------------------------------ |
+| Internal links resolve              | Pass (verified by Astro build) |
+| No broken anchor links              | Pass                           |
+| All locale links have counterpart   | Pass                           |
+| External links use `rel="noopener"` | Pass                           |
+| No redirect chains                  | Pass                           |
 
 ## Feeds
 
-| Feed | Format | URL |
-|------|--------|-----|
-| Changelog | Atom | `/feed/changelog.xml` |
-| Blog (when launched) | Atom | `/feed/blog.xml` |
+| Feed                 | Format | URL                   |
+| -------------------- | ------ | --------------------- |
+| Changelog            | Atom   | `/feed/changelog.xml` |
+| Blog (when launched) | Atom   | `/feed/blog.xml`      |
 
 ## Search (Pagefind)
 

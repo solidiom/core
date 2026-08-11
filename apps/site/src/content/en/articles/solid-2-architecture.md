@@ -29,7 +29,7 @@ Solid's fine-grained reactivity model eliminates the virtual DOM diffing overhea
 
 ## Reactive Accessibility
 
-Traditional component libraries fight their framework to manage focus. When a dialog opens, the library must ensure focus moves into the dialog *after* it renders. In React, this requires refs, effects, and careful timing. In Solid 2, the DOM is updated synchronously:
+Traditional component libraries fight their framework to manage focus. When a dialog opens, the library must ensure focus moves into the dialog _after_ it renders. In React, this requires refs, effects, and careful timing. In Solid 2, the DOM is updated synchronously:
 
 ```tsx
 function openDialog() {

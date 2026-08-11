@@ -31,9 +31,7 @@ import * as HoverCard from "@solidiom/hover-card"
   <HoverCard.Content>
     <div style={{ padding: 16 }}>
       <strong>John Doe</strong>
-      <p style={{ margin: "8px 0 0" }}>
-        Software developer. Building things with Solid.
-      </p>
+      <p style={{ margin: "8px 0 0" }}>Software developer. Building things with Solid.</p>
     </div>
   </HoverCard.Content>
 </HoverCard.Root>

@@ -39,6 +39,7 @@ solidiom create my-app --yes  # skip prompts
 ```
 
 **Options:**
+
 - `--template <name>` — template to use (29 available)
 - `--styling <profile>` — css, tailwind, or unocss
 - `--package-manager <pm>` — npm, pnpm, yarn, or bun
@@ -55,6 +56,7 @@ solidiom add --theme ocean
 ```
 
 **Options:**
+
 - `--styling <profile>` — override project styling profile
 - `--theme <name>` — install a theme preset
 - `--source` — install source files instead of package dependency

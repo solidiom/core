@@ -3,7 +3,13 @@
   "stack": "vite-solid-router",
   "description": "Workflow automation with visual designer, run history, and third-party integrations.",
   "variables": ["projectName"],
-  "requiredBlocks": ["BLOCK-AUTH-01", "BLOCK-SHELL-01", "BLOCK-AI-03", "BLOCK-OBS-01", "BLOCK-RESOURCE-01"],
+  "requiredBlocks": [
+    "BLOCK-AUTH-01",
+    "BLOCK-SHELL-01",
+    "BLOCK-AI-03",
+    "BLOCK-OBS-01",
+    "BLOCK-RESOURCE-01"
+  ],
   "deploymentTarget": "static",
   "authModel": "email-password",
   "portfolioTags": ["enterprise"],

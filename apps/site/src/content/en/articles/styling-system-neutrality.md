@@ -42,11 +42,11 @@ Primitive (behavior) → Recipe (styling) → Component (composed)
 
 Three recipe profiles ship:
 
-| Profile | Technology | Approach |
-|---------|-----------|----------|
-| `css` | Plain CSS | BEM-like classes + data-attribute selectors |
-| `tailwind` | Tailwind CSS | Utility classes + `@apply` for states |
-| `unocss` | UnoCSS | Atomic utilities + custom rules |
+| Profile    | Technology   | Approach                                    |
+| ---------- | ------------ | ------------------------------------------- |
+| `css`      | Plain CSS    | BEM-like classes + data-attribute selectors |
+| `tailwind` | Tailwind CSS | Utility classes + `@apply` for states       |
+| `unocss`   | UnoCSS       | Atomic utilities + custom rules             |
 
 ## How Parity Is Enforced
 

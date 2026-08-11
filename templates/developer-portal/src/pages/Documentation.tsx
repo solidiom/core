@@ -14,18 +14,102 @@ interface Doc {
 }
 
 const DOCUMENTS: Doc[] = [
-  { title: "Getting Started", category: "Getting Started", version: "2.1.0", description: "Quick start guide for integrating with our API platform", status: "published", lastUpdated: "Aug 8, 2024" },
-  { title: "Authentication", category: "Getting Started", version: "2.1.0", description: "OAuth 2.0 and API key authentication flows", status: "published", lastUpdated: "Aug 5, 2024" },
-  { title: "Rate Limiting", category: "Getting Started", version: "2.0.0", description: "Understanding rate limits, quotas, and best practices", status: "published", lastUpdated: "Jul 22, 2024" },
-  { title: "REST API Reference", category: "API Reference", version: "2.1.0", description: "Complete reference for all REST endpoints and parameters", status: "published", lastUpdated: "Aug 9, 2024" },
-  { title: "WebSocket API", category: "API Reference", version: "1.5.0", description: "Real-time event streaming via WebSocket connections", status: "published", lastUpdated: "Aug 1, 2024" },
-  { title: "GraphQL Schema", category: "API Reference", version: "1.2.0", description: "GraphQL type definitions and query examples", status: "draft", lastUpdated: "Aug 7, 2024" },
-  { title: "Node.js SDK", category: "SDK Guides", version: "3.0.0", description: "Install and use the official Node.js client library", status: "published", lastUpdated: "Aug 3, 2024" },
-  { title: "Python SDK", category: "SDK Guides", version: "2.4.0", description: "Python client library with async support", status: "published", lastUpdated: "Jul 30, 2024" },
-  { title: "Go SDK", category: "SDK Guides", version: "1.8.0", description: "Type-safe Go client for API integration", status: "draft", lastUpdated: "Aug 6, 2024" },
-  { title: "Building a Web App", category: "Tutorials", version: "2.0.0", description: "Step-by-step tutorial for building a web application", status: "published", lastUpdated: "Jul 18, 2024" },
-  { title: "CI/CD Integration", category: "Tutorials", version: "1.0.0", description: "Automate API testing in your CI/CD pipeline", status: "published", lastUpdated: "Jul 15, 2024" },
-  { title: "Error Handling Best Practices", category: "Best Practices", version: "1.1.0", description: "How to handle and retry API errors gracefully", status: "published", lastUpdated: "Jul 25, 2024" },
+  {
+    title: "Getting Started",
+    category: "Getting Started",
+    version: "2.1.0",
+    description: "Quick start guide for integrating with our API platform",
+    status: "published",
+    lastUpdated: "Aug 8, 2024",
+  },
+  {
+    title: "Authentication",
+    category: "Getting Started",
+    version: "2.1.0",
+    description: "OAuth 2.0 and API key authentication flows",
+    status: "published",
+    lastUpdated: "Aug 5, 2024",
+  },
+  {
+    title: "Rate Limiting",
+    category: "Getting Started",
+    version: "2.0.0",
+    description: "Understanding rate limits, quotas, and best practices",
+    status: "published",
+    lastUpdated: "Jul 22, 2024",
+  },
+  {
+    title: "REST API Reference",
+    category: "API Reference",
+    version: "2.1.0",
+    description: "Complete reference for all REST endpoints and parameters",
+    status: "published",
+    lastUpdated: "Aug 9, 2024",
+  },
+  {
+    title: "WebSocket API",
+    category: "API Reference",
+    version: "1.5.0",
+    description: "Real-time event streaming via WebSocket connections",
+    status: "published",
+    lastUpdated: "Aug 1, 2024",
+  },
+  {
+    title: "GraphQL Schema",
+    category: "API Reference",
+    version: "1.2.0",
+    description: "GraphQL type definitions and query examples",
+    status: "draft",
+    lastUpdated: "Aug 7, 2024",
+  },
+  {
+    title: "Node.js SDK",
+    category: "SDK Guides",
+    version: "3.0.0",
+    description: "Install and use the official Node.js client library",
+    status: "published",
+    lastUpdated: "Aug 3, 2024",
+  },
+  {
+    title: "Python SDK",
+    category: "SDK Guides",
+    version: "2.4.0",
+    description: "Python client library with async support",
+    status: "published",
+    lastUpdated: "Jul 30, 2024",
+  },
+  {
+    title: "Go SDK",
+    category: "SDK Guides",
+    version: "1.8.0",
+    description: "Type-safe Go client for API integration",
+    status: "draft",
+    lastUpdated: "Aug 6, 2024",
+  },
+  {
+    title: "Building a Web App",
+    category: "Tutorials",
+    version: "2.0.0",
+    description: "Step-by-step tutorial for building a web application",
+    status: "published",
+    lastUpdated: "Jul 18, 2024",
+  },
+  {
+    title: "CI/CD Integration",
+    category: "Tutorials",
+    version: "1.0.0",
+    description: "Automate API testing in your CI/CD pipeline",
+    status: "published",
+    lastUpdated: "Jul 15, 2024",
+  },
+  {
+    title: "Error Handling Best Practices",
+    category: "Best Practices",
+    version: "1.1.0",
+    description: "How to handle and retry API errors gracefully",
+    status: "published",
+    lastUpdated: "Jul 25, 2024",
+  },
 ]
 
 export function Documentation(): JSX.Element {
@@ -48,17 +132,23 @@ export function Documentation(): JSX.Element {
         <Breadcrumb.Root class="mb-2">
           <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Home
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">Documentation</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" current class="text-gray-900 font-medium">
+                Documentation
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
         <div>
           <h1 class="text-2xl font-bold text-gray-900">Documentation</h1>
-          <p class="mt-1 text-sm text-gray-500">Browse API documentation, guides, and SDK references.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Browse API documentation, guides, and SDK references.
+          </p>
         </div>
       </div>
 

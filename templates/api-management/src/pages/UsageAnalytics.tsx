@@ -5,10 +5,30 @@ import * as Card from "@solidiom/card"
 import * as Tabs from "@solidiom/tabs"
 
 const METRICS = [
-  { title: "Total Requests", value: "2.4M", change: "+12% from last month", changeType: "positive" as const },
-  { title: "Latency p99", value: "142ms", change: "-18ms from last month", changeType: "positive" as const },
-  { title: "Error Rate", value: "0.8%", change: "+0.2% from last month", changeType: "negative" as const },
-  { title: "Bandwidth", value: "340 GB", change: "+28 GB from last month", changeType: "positive" as const },
+  {
+    title: "Total Requests",
+    value: "2.4M",
+    change: "+12% from last month",
+    changeType: "positive" as const,
+  },
+  {
+    title: "Latency p99",
+    value: "142ms",
+    change: "-18ms from last month",
+    changeType: "positive" as const,
+  },
+  {
+    title: "Error Rate",
+    value: "0.8%",
+    change: "+0.2% from last month",
+    changeType: "negative" as const,
+  },
+  {
+    title: "Bandwidth",
+    value: "340 GB",
+    change: "+28 GB from last month",
+    changeType: "positive" as const,
+  },
 ]
 
 interface EndpointUsage {
@@ -22,15 +42,68 @@ interface EndpointUsage {
 }
 
 const ENDPOINT_USAGE: EndpointUsage[] = [
-  { path: "/v1/users", method: "GET", requests: "842,300", avgLatency: "23ms", p99Latency: "89ms", errors: "1,240", errorRate: "0.15%" },
-  { path: "/v1/users", method: "POST", requests: "124,800", avgLatency: "45ms", p99Latency: "178ms", errors: "2,890", errorRate: "2.32%" },
-  { path: "/v2/products", method: "GET", requests: "1,205,400", avgLatency: "18ms", p99Latency: "67ms", errors: "890", errorRate: "0.07%" },
-  { path: "/v1/orders", method: "GET", requests: "203,600", avgLatency: "34ms", p99Latency: "142ms", errors: "1,560", errorRate: "0.77%" },
-  { path: "/v1/orders", method: "POST", requests: "89,200", avgLatency: "67ms", p99Latency: "234ms", errors: "4,120", errorRate: "4.62%" },
-  { path: "/v1/analytics/summary", method: "GET", requests: "12,400", avgLatency: "156ms", p99Latency: "890ms", errors: "320", errorRate: "2.58%" },
+  {
+    path: "/v1/users",
+    method: "GET",
+    requests: "842,300",
+    avgLatency: "23ms",
+    p99Latency: "89ms",
+    errors: "1,240",
+    errorRate: "0.15%",
+  },
+  {
+    path: "/v1/users",
+    method: "POST",
+    requests: "124,800",
+    avgLatency: "45ms",
+    p99Latency: "178ms",
+    errors: "2,890",
+    errorRate: "2.32%",
+  },
+  {
+    path: "/v2/products",
+    method: "GET",
+    requests: "1,205,400",
+    avgLatency: "18ms",
+    p99Latency: "67ms",
+    errors: "890",
+    errorRate: "0.07%",
+  },
+  {
+    path: "/v1/orders",
+    method: "GET",
+    requests: "203,600",
+    avgLatency: "34ms",
+    p99Latency: "142ms",
+    errors: "1,560",
+    errorRate: "0.77%",
+  },
+  {
+    path: "/v1/orders",
+    method: "POST",
+    requests: "89,200",
+    avgLatency: "67ms",
+    p99Latency: "234ms",
+    errors: "4,120",
+    errorRate: "4.62%",
+  },
+  {
+    path: "/v1/analytics/summary",
+    method: "GET",
+    requests: "12,400",
+    avgLatency: "156ms",
+    p99Latency: "890ms",
+    errors: "320",
+    errorRate: "2.58%",
+  },
 ]
 
-function MetricCard(props: { title: string; value: string; change: string; changeType: "positive" | "negative" | "neutral" }): JSX.Element {
+function MetricCard(props: {
+  title: string
+  value: string
+  change: string
+  changeType: "positive" | "negative" | "neutral"
+}): JSX.Element {
   return (
     <Card.Root class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
       <Card.Header class="flex items-center justify-between pb-2">
@@ -38,10 +111,15 @@ function MetricCard(props: { title: string; value: string; change: string; chang
       </Card.Header>
       <Card.Content>
         <div class="text-2xl font-bold text-gray-900">{props.value}</div>
-        <p class={`mt-1 text-xs font-medium ${
-          props.changeType === "positive" ? "text-green-600" :
-          props.changeType === "negative" ? "text-red-600" : "text-gray-500"
-        }`}>
+        <p
+          class={`mt-1 text-xs font-medium ${
+            props.changeType === "positive"
+              ? "text-green-600"
+              : props.changeType === "negative"
+                ? "text-red-600"
+                : "text-gray-500"
+          }`}
+        >
           {props.change}
         </p>
       </Card.Content>
@@ -58,18 +136,24 @@ export function UsageAnalytics(): JSX.Element {
         <Breadcrumb.Root class="mb-2">
           <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+              <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                Home
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
             <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
             <Breadcrumb.Item>
-              <Breadcrumb.Link href="/usage" current class="text-gray-900 font-medium">Usage Analytics</Breadcrumb.Link>
+              <Breadcrumb.Link href="/usage" current class="text-gray-900 font-medium">
+                Usage Analytics
+              </Breadcrumb.Link>
             </Breadcrumb.Item>
           </Breadcrumb.List>
         </Breadcrumb.Root>
         <div class="flex items-center justify-between">
           <div>
             <h1 class="text-2xl font-bold text-gray-900">Usage Analytics</h1>
-            <p class="mt-1 text-sm text-gray-500">Request volume, latency percentiles, and error rates per endpoint.</p>
+            <p class="mt-1 text-sm text-gray-500">
+              Request volume, latency percentiles, and error rates per endpoint.
+            </p>
           </div>
           <select
             class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
@@ -131,9 +215,13 @@ export function UsageAnalytics(): JSX.Element {
                     <tr class="hover:bg-gray-50">
                       <td class="px-4 py-3">
                         <div class="flex items-center gap-2">
-                          <span class={`inline-flex items-center rounded px-1.5 py-0.5 text-xs font-bold ${
-                            row.method === "GET" ? "bg-green-100 text-green-700" : "bg-blue-100 text-blue-700"
-                          }`}>
+                          <span
+                            class={`inline-flex items-center rounded px-1.5 py-0.5 text-xs font-bold ${
+                              row.method === "GET"
+                                ? "bg-green-100 text-green-700"
+                                : "bg-blue-100 text-blue-700"
+                            }`}
+                          >
                             {row.method}
                           </span>
                           <span class="font-mono text-gray-900">{row.path}</span>
@@ -144,10 +232,15 @@ export function UsageAnalytics(): JSX.Element {
                       <td class="px-4 py-3 text-gray-900">{row.p99Latency}</td>
                       <td class="px-4 py-3 text-gray-900">{row.errors}</td>
                       <td class="px-4 py-3">
-                        <span class={`font-medium ${
-                          parseFloat(row.errorRate) > 2 ? "text-red-600" :
-                          parseFloat(row.errorRate) > 1 ? "text-yellow-600" : "text-gray-900"
-                        }`}>
+                        <span
+                          class={`font-medium ${
+                            parseFloat(row.errorRate) > 2
+                              ? "text-red-600"
+                              : parseFloat(row.errorRate) > 1
+                                ? "text-yellow-600"
+                                : "text-gray-900"
+                          }`}
+                        >
                           {row.errorRate}
                         </span>
                       </td>

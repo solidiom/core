@@ -27,16 +27,19 @@ import { For } from "solid-js"
 const TOTAL_ITEMS = 10_000
 const ITEM_HEIGHT = 40
 
-;<VirtualList.Root
-  totalCount={TOTAL_ITEMS}
-  itemSize={ITEM_HEIGHT}
-  height="400px"
->
+;<VirtualList.Root totalCount={TOTAL_ITEMS} itemSize={ITEM_HEIGHT} height="400px">
   {(virtualItems) => (
     <For each={virtualItems()}>
       {(item) => (
         <VirtualList.Item item={item}>
-          <div style={{ padding: "0 12px", display: "flex", alignItems: "center", height: `${item.size}px` }}>
+          <div
+            style={{
+              padding: "0 12px",
+              display: "flex",
+              alignItems: "center",
+              height: `${item.size}px`,
+            }}
+          >
             Item {item.index + 1}
           </div>
         </VirtualList.Item>

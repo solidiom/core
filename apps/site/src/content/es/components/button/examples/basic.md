@@ -26,7 +26,9 @@ El componente Button es un envoltorio de receta estilizado alrededor del primiti
 ```tsx
 import { Button } from "@solidiom/recipes-css"
 
-;<Button variant="default" size="md">Click me</Button>
+;<Button variant="default" size="md">
+  Click me
+</Button>
 ```
 
 ## Con variantes
@@ -36,8 +38,12 @@ El componente soporta las mismas variantes que el primitivo, con estilos aplicad
 ```tsx
 import { Button } from "@solidiom/recipes-css"
 
-;<Button variant="destructive" size="sm">Delete</Button>
-;<Button variant="outline" size="lg">Cancel</Button>
+;<Button variant="destructive" size="sm">
+  Delete
+</Button>
+;<Button variant="outline" size="lg">
+  Cancel
+</Button>
 ;<Button variant="ghost">Secondary</Button>
 ;<Button variant="link">Learn more</Button>
 ```

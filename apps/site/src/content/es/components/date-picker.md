@@ -34,7 +34,6 @@ import * as DatePicker from "@solidiom/recipes-css"
 </DatePicker.Root>
 ```
 
-
 ## Instalación
 
 ```sh

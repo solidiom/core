@@ -31,7 +31,9 @@ import * as Listbox from "@solidiom/listbox"
   <Listbox.Item value="apple">Apple</Listbox.Item>
   <Listbox.Item value="banana">Banana</Listbox.Item>
   <Listbox.Item value="cherry">Cherry</Listbox.Item>
-  <Listbox.Item value="date" disabled>Date</Listbox.Item>
+  <Listbox.Item value="date" disabled>
+    Date
+  </Listbox.Item>
   <Listbox.Item value="elderberry">Elderberry</Listbox.Item>
 </Listbox.Root>
 ```

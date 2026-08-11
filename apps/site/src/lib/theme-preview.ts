@@ -1,5 +1,10 @@
 import { REFERENCE_THEMES } from "../../../../tools/theme-contract-definitions"
-import { resolveTokenValue, categoryOf, type ThemeDefinition, type ThemeMode } from "../../../../tools/theme-contract-schema"
+import {
+  resolveTokenValue,
+  categoryOf,
+  type ThemeDefinition,
+  type ThemeMode,
+} from "../../../../tools/theme-contract-schema"
 
 /**
  * Looks up a theme's ThemeDefinition by slug at build time.

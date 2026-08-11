@@ -62,11 +62,13 @@ const allPass = totalViolations === 0 && totalScanned > 0
           <span class="a11y-summary__stat-label">Incomplete</span>
         </div>
       </div>
-      {allPass && (
-        <p class="a11y-summary__status a11y-summary__status--pass">
-          All {totalScanned} scanned primitives passed with zero violations.
-        </p>
-      )}
+      {
+        allPass && (
+          <p class="a11y-summary__status a11y-summary__status--pass">
+            All {totalScanned} scanned primitives passed with zero violations.
+          </p>
+        )
+      }
     </section>
 
     <section class="a11y-primitives" aria-label="Per-primitive evidence">
@@ -82,26 +84,28 @@ const allPass = totalViolations === 0 && totalScanned > 0
           </tr>
         </thead>
         <tbody>
-          {evidenceData.map((item) => (
-            <tr>
-              <td>
-                <a href={item.href}>{item.name}</a>
-              </td>
-              <td>{item.evidence?.summary.passes ?? "—"}</td>
-              <td>{item.evidence?.summary.violations ?? "—"}</td>
-              <td>{item.evidence?.summary.incomplete ?? "—"}</td>
-              <td>
-                {item.evidence !== undefined && (
-                  <span
-                    class={`a11y-primitives__badge a11y-primitives__badge--${item.evidence.summary.outcome}`}
-                  >
-                    {item.evidence.summary.outcome}
-                  </span>
-                )}
-                {item.evidence === undefined && "—"}
-              </td>
-            </tr>
-          ))}
+          {
+            evidenceData.map((item) => (
+              <tr>
+                <td>
+                  <a href={item.href}>{item.name}</a>
+                </td>
+                <td>{item.evidence?.summary.passes ?? "—"}</td>
+                <td>{item.evidence?.summary.violations ?? "—"}</td>
+                <td>{item.evidence?.summary.incomplete ?? "—"}</td>
+                <td>
+                  {item.evidence !== undefined && (
+                    <span
+                      class={`a11y-primitives__badge a11y-primitives__badge--${item.evidence.summary.outcome}`}
+                    >
+                      {item.evidence.summary.outcome}
+                    </span>
+                  )}
+                  {item.evidence === undefined && "—"}
+                </td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </section>

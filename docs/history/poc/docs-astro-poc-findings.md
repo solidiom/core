@@ -22,22 +22,22 @@ lifecycle: archived
 
 ## Checks
 
-| # | Check | Result | Notes |
-|---|-------|--------|-------|
-| 1 | Integration package resolves | ✅ | `@solidiom/astrojs-solid-next` resolves via `workspace:*`; `pnpm install` clean with monorepo overrides |
-| 2 | POC app scaffolded in workspace | ✅ | `apps/docs-astro-poc/` created with all required deps; detected by `apps/*` workspace pattern |
-| 3 | Dev server starts cleanly | ✅ | `astro dev` boots without errors; Tailwind styles applied via Vite plugin |
-| 4 | Type checking passes (`astro check`) | ✅ | Zero type errors; strict tsconfig with `jsxImportSource: solid-js` |
-| 5 | Production build succeeds | ✅ | `astro build` produces `dist/` with static HTML + JS islands |
-| 6 | MDX content renders correctly | ✅ | `/docs/button/` renders prose, code blocks, and imported Solid component |
-| 7 | Component hydration works | ✅ | `<astro-island>` with `ssr` attribute present; click handler increments counter; no hydration mismatch warnings |
-| 8 | Styling renders (Tailwind) | ✅ | Tailwind CSS 4 utility classes render in both dev and production |
-| 9 | Code highlighting works (Shiki) | ✅ | Fenced code blocks rendered with Shiki syntax highlighting and token colors |
-| 10 | Navigation and heading anchors | ✅ | `h2`/`h3` have `id` attributes; fragment navigation scrolls correctly; nav links keyboard-operable |
-| 11 | Search works (Pagefind) | ✅ | `pagefind --site dist` indexes content; search for "Button" returns 1 page with sub-results |
-| 12 | Accessibility basics pass | ✅ | Lighthouse a11y 100/100; semantic landmarks (`nav`, `main`, `article`) present; `:focus-visible` outlines confirmed |
-| 13 | Build reproducibility (self-contained) | ✅ | Build uses only workspace packages and npm registry; no external path references |
-| 14 | Decision gate evaluated | ✅ | This document — all checks pass, recommending adoption |
+| #   | Check                                  | Result | Notes                                                                                                               |
+| --- | -------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
+| 1   | Integration package resolves           | ✅     | `@solidiom/astrojs-solid-next` resolves via `workspace:*`; `pnpm install` clean with monorepo overrides             |
+| 2   | POC app scaffolded in workspace        | ✅     | `apps/docs-astro-poc/` created with all required deps; detected by `apps/*` workspace pattern                       |
+| 3   | Dev server starts cleanly              | ✅     | `astro dev` boots without errors; Tailwind styles applied via Vite plugin                                           |
+| 4   | Type checking passes (`astro check`)   | ✅     | Zero type errors; strict tsconfig with `jsxImportSource: solid-js`                                                  |
+| 5   | Production build succeeds              | ✅     | `astro build` produces `dist/` with static HTML + JS islands                                                        |
+| 6   | MDX content renders correctly          | ✅     | `/docs/button/` renders prose, code blocks, and imported Solid component                                            |
+| 7   | Component hydration works              | ✅     | `<astro-island>` with `ssr` attribute present; click handler increments counter; no hydration mismatch warnings     |
+| 8   | Styling renders (Tailwind)             | ✅     | Tailwind CSS 4 utility classes render in both dev and production                                                    |
+| 9   | Code highlighting works (Shiki)        | ✅     | Fenced code blocks rendered with Shiki syntax highlighting and token colors                                         |
+| 10  | Navigation and heading anchors         | ✅     | `h2`/`h3` have `id` attributes; fragment navigation scrolls correctly; nav links keyboard-operable                  |
+| 11  | Search works (Pagefind)                | ✅     | `pagefind --site dist` indexes content; search for "Button" returns 1 page with sub-results                         |
+| 12  | Accessibility basics pass              | ✅     | Lighthouse a11y 100/100; semantic landmarks (`nav`, `main`, `article`) present; `:focus-visible` outlines confirmed |
+| 13  | Build reproducibility (self-contained) | ✅     | Build uses only workspace packages and npm registry; no external path references                                    |
+| 14  | Decision gate evaluated                | ✅     | This document — all checks pass, recommending adoption                                                              |
 
 ## Compatibility Notes
 
@@ -61,6 +61,7 @@ lifecycle: archived
 **ADOPT** — All 14 mandatory checks pass. Astro 7 + MDX + Solid 2 is validated as a viable documentation architecture for the Solidiom monorepo.
 
 Key advantages over the current Vite SPA approach:
+
 1. **Content-first authoring** — MDX enables mixing prose and interactive demos without custom build tooling.
 2. **Zero-JS by default** — pages ship static HTML; JavaScript is loaded only for interactive islands.
 3. **Built-in search** — Pagefind provides instant client-side search with no server infrastructure.
@@ -75,18 +76,18 @@ Next steps: migrate existing documentation content to the Astro architecture and
 
 All 14 POC checks were validated in the production implementation at `apps/site/`:
 
-| POC capability | Production equivalent |
-|---|---|
-| Astro 7 + MDX + Solid 2 integration | `apps/site/astro.config.ts` with `@astrojs/mdx`, `@solidiom/astrojs-solid-next` |
+| POC capability                                     | Production equivalent                                                                                    |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Astro 7 + MDX + Solid 2 integration                | `apps/site/astro.config.ts` with `@astrojs/mdx`, `@solidiom/astrojs-solid-next`                          |
 | MDX content with code blocks and interactive demos | `packages/button/docs/` — overview, examples, accessibility contract rendered via `PrimitiveRoute.astro` |
-| Dynamic primitive routing | `apps/site/src/pages/primitives/[name]/` with `getStaticPaths` from registry catalog |
-| Shiki code highlighting | `shiki-copy-button.ts` — copy button per code block |
-| Pagefind search | `pagefind.yml`, `search-index` script, `SiteSearch.tsx` |
-| Tailwind CSS 4 | Tailwind via `@tailwindcss/vite` in site build |
-| Component hydration (islands) | `client:load` directives on `DialogExample`, `ButtonExample`, `ThemeToggle` |
-| Lighthouse a11y 100/100 | CI job `site-lighthouse` with Lighthouse budgets |
-| Accessibility evidence | `AccessibilityEvidence.astro`, axe scans, `accessibility-contract.ts` validation |
-| Build reproducibility | CI `ci:site-build` job with `registry-route-check` invariant |
+| Dynamic primitive routing                          | `apps/site/src/pages/primitives/[name]/` with `getStaticPaths` from registry catalog                     |
+| Shiki code highlighting                            | `shiki-copy-button.ts` — copy button per code block                                                      |
+| Pagefind search                                    | `pagefind.yml`, `search-index` script, `SiteSearch.tsx`                                                  |
+| Tailwind CSS 4                                     | Tailwind via `@tailwindcss/vite` in site build                                                           |
+| Component hydration (islands)                      | `client:load` directives on `DialogExample`, `ButtonExample`, `ThemeToggle`                              |
+| Lighthouse a11y 100/100                            | CI job `site-lighthouse` with Lighthouse budgets                                                         |
+| Accessibility evidence                             | `AccessibilityEvidence.astro`, axe scans, `accessibility-contract.ts` validation                         |
+| Build reproducibility                              | CI `ci:site-build` job with `registry-route-check` invariant                                             |
 
 ## Removal Checklist
 

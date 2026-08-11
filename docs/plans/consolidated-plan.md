@@ -32,15 +32,15 @@ date: 2026-08-08
 
 ## 2. Milestone Map
 
-| Milestone | Scope | Status |
-|-----------|-------|--------|
-| M0 | Governance/inputs | Complete |
-| M1 | Foundation/alpha | Complete (CI-001 policy blocker remains) |
-| M2 | Content vertical slice | Complete |
-| M3 | Public beta platform | Complete — G3 closed |
-| M4 | Catalog completion | Complete — G4 closed |
-| **M5** | **GA hardening & production cutover** | **Complete — G5 closed** |
-| **M6** | **Post-GA growth (playground, marketing, analytics, newsletter)** | Not started |
+| Milestone | Scope                                                             | Status                                   |
+| --------- | ----------------------------------------------------------------- | ---------------------------------------- |
+| M0        | Governance/inputs                                                 | Complete                                 |
+| M1        | Foundation/alpha                                                  | Complete (CI-001 policy blocker remains) |
+| M2        | Content vertical slice                                            | Complete                                 |
+| M3        | Public beta platform                                              | Complete — G3 closed                     |
+| M4        | Catalog completion                                                | Complete — G4 closed                     |
+| **M5**    | **GA hardening & production cutover**                             | **Complete — G5 closed**                 |
+| **M6**    | **Post-GA growth (playground, marketing, analytics, newsletter)** | Not started                              |
 
 ---
 
@@ -58,14 +58,13 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 
 ## 4. Open Defects
 
-| Status | ID | Size | Description |
-|--------|-----|------|-------------|
-| [x] | CI-008 | XS | Restore automatic triggers or document accepted dispatch ownership/cadence |
-| [x] | RECIPE-008 | XS | Remove duplicate utility imports, port typeset/prose demos, preserve utility exceptions |
-| [x] | REG-008 | M | Asymmetric registry signing (replace symmetric index verification) — Ed25519 keypair provisioned, signing in release workflow, CLI verification working |
+| Status | ID         | Size | Description                                                                                                                                             |
+| ------ | ---------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [x]    | CI-008     | XS   | Restore automatic triggers or document accepted dispatch ownership/cadence                                                                              |
+| [x]    | RECIPE-008 | XS   | Remove duplicate utility imports, port typeset/prose demos, preserve utility exceptions                                                                 |
+| [x]    | REG-008    | M    | Asymmetric registry signing (replace symmetric index verification) — Ed25519 keypair provisioned, signing in release workflow, CLI verification working |
 
 ---
-
 
 ## 5. Library Release Roadmap
 
@@ -80,58 +79,58 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 
 ### 5.2 Phase and version map
 
-| Phase | Version | Exit |
-|-------|---------|------|
-| 0 — architectural proof | v0.6.x | Complete |
-| 1 — primitive/package alpha | v0.7.x–v0.8.x | Complete |
-| 2 — distribution/enterprise beta | v0.9.x–v0.10.x | Complete |
-| 3 — beta stabilization/release | `v1.0.0-beta.x` | Complete — gate 21/21, release workflow live |
-| 3A — compile-time incubation | later beta.x | Complete — 21 tests, all transforms verified |
-| 3B — generative authoring | unversioned | Complete — scaffold, sync, drift gate operational |
-| 4 — Solid 2 GA / stable v1 | `v1.0.x` | Task 70 gate; Task 73 release |
-| 5 — strict enforcement / v2 | `v2.0.x` | Task 78 |
+| Phase                            | Version         | Exit                                              |
+| -------------------------------- | --------------- | ------------------------------------------------- |
+| 0 — architectural proof          | v0.6.x          | Complete                                          |
+| 1 — primitive/package alpha      | v0.7.x–v0.8.x   | Complete                                          |
+| 2 — distribution/enterprise beta | v0.9.x–v0.10.x  | Complete                                          |
+| 3 — beta stabilization/release   | `v1.0.0-beta.x` | Complete — gate 21/21, release workflow live      |
+| 3A — compile-time incubation     | later beta.x    | Complete — 21 tests, all transforms verified      |
+| 3B — generative authoring        | unversioned     | Complete — scaffold, sync, drift gate operational |
+| 4 — Solid 2 GA / stable v1       | `v1.0.x`        | Task 70 gate; Task 73 release                     |
+| 5 — strict enforcement / v2      | `v2.0.x`        | Task 78                                           |
 
 ### 5.3 Initial-beta blockers
 
-| Status | ID | Description | Accept |
-|--------|-----|-------------|--------|
-| [x] | C8 | Beta accessibility evidence — axe + keyboard + VoiceOver for all 52 primitives and 30 components | Evidence files enumerate complete beta surface with durable runs |
-| [x] | C9 / Task 60 | Preflight vs final acceptance — `tools/phase3-gate.ts` as final release approval | Preflight green + negative fixtures prove gate rejects missing requirements |
-| [x] | C10 / Task 68 | Signed beta artifacts — npm, `apps/site`, immutable catalog, signed pointer | Clean package/source consumers verify tarballs, catalog, and pointer signatures |
-| [x] | C11 | Public-package classification — resolve every publishable-but-untracked package | No publishable package sits outside public catalog or explicit non-public set |
+| Status | ID            | Description                                                                                      | Accept                                                                          |
+| ------ | ------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| [x]    | C8            | Beta accessibility evidence — axe + keyboard + VoiceOver for all 52 primitives and 30 components | Evidence files enumerate complete beta surface with durable runs                |
+| [x]    | C9 / Task 60  | Preflight vs final acceptance — `tools/phase3-gate.ts` as final release approval                 | Preflight green + negative fixtures prove gate rejects missing requirements     |
+| [x]    | C10 / Task 68 | Signed beta artifacts — npm, `apps/site`, immutable catalog, signed pointer                      | Clean package/source consumers verify tarballs, catalog, and pointer signatures |
+| [x]    | C11           | Public-package classification — resolve every publishable-but-untracked package                  | No publishable package sits outside public catalog or explicit non-public set   |
 
 ### 5.4 Phase 3 — active tasks
 
-| Status | ID | Description |
-|--------|-----|-------------|
-| [x] | Task 59 | Repository truth reconciliation |
-| [x] | Task 60 | Phase 3 preflight and final release gate |
-| [x] | Task 61 | Beta release notes and docs in `apps/site` |
-| [x] | Task 65 | Cross-browser beta certification (Chromium, Firefox, WebKit) |
-| [-] | Task 66 | Legacy/migration beta readiness (descoped — greenfield product) |
-| [x] | Task 68 | Initial beta release — promote gate-approved `next` to `beta` |
+| Status | ID      | Description                                                     |
+| ------ | ------- | --------------------------------------------------------------- |
+| [x]    | Task 59 | Repository truth reconciliation                                 |
+| [x]    | Task 60 | Phase 3 preflight and final release gate                        |
+| [x]    | Task 61 | Beta release notes and docs in `apps/site`                      |
+| [x]    | Task 65 | Cross-browser beta certification (Chromium, Firefox, WebKit)    |
+| [-]    | Task 66 | Legacy/migration beta readiness (descoped — greenfield product) |
+| [x]    | Task 68 | Initial beta release — promote gate-approved `next` to `beta`   |
 
 ### 5.5 Phase 3A — compile-time incubation
 
-| Status | ID | Description |
-|--------|-----|-------------|
-| [x] | Task 62 | Static recipe extraction beta |
-| [x] | Task 63 | Static variant expansion beta |
-| [x] | Task 64 | Dead-part elimination beta |
-| [x] | Task 67 | Unused-capability detection and Phase 3A gate |
+| Status | ID      | Description                                   |
+| ------ | ------- | --------------------------------------------- |
+| [x]    | Task 62 | Static recipe extraction beta                 |
+| [x]    | Task 63 | Static variant expansion beta                 |
+| [x]    | Task 64 | Dead-part elimination beta                    |
+| [x]    | Task 67 | Unused-capability detection and Phase 3A gate |
 
 ### 5.6 Phase 3B — generative authoring tooling
 
-| Status | ID | Description |
-|--------|-----|-------------|
-| [x] | Task 3B.1 | Versioned primitive contract and manifest migration |
-| [x] | Task 3B.2 | Internal generator core (`pnpm scaffold primitive`) |
-| [x] | Task 3B.3 | Generated package and aggregator wiring |
-| [x] | Task 3B.4 | Complete recipe scaffolding |
-| [x] | Task 3B.5 | Authored demo starter plus generated registration |
-| [x] | Task 3B.6 | Idempotent sync/fixer mode |
-| [x] | Task 3B.7 | Independent CI drift gate |
-| [x] | Task 3B.8 | Retire copy-paste authoring |
+| Status | ID        | Description                                         |
+| ------ | --------- | --------------------------------------------------- |
+| [x]    | Task 3B.1 | Versioned primitive contract and manifest migration |
+| [x]    | Task 3B.2 | Internal generator core (`pnpm scaffold primitive`) |
+| [x]    | Task 3B.3 | Generated package and aggregator wiring             |
+| [x]    | Task 3B.4 | Complete recipe scaffolding                         |
+| [x]    | Task 3B.5 | Authored demo starter plus generated registration   |
+| [x]    | Task 3B.6 | Idempotent sync/fixer mode                          |
+| [x]    | Task 3B.7 | Independent CI drift gate                           |
+| [x]    | Task 3B.8 | Retire copy-paste authoring                         |
 
 ### 5.7 Phase 4 & 5 — GA and beyond
 
@@ -139,25 +138,24 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 
 ---
 
-
 ## 6. M5 — GA Hardening and Production Cutover
 
 M5 is scoped to **ship a production-quality product**. It covers QA, security, operations, primitive promotion, legacy cutover, and the production deploy. Marketing, playground, analytics, and newsletter are deferred to M6.
 
 ### 6.1 Quality, Security & Compliance
 
-| Status | ID | Size | Description | Depends on |
-|--------|-----|------|-------------|------------|
-| [x] | QA-001 | L | WCAG 2.2 AA/APG audit and critical/serious fixes | G4 |
-| [x] | QA-002 | L | Supported desktop/mobile browser matrix and fallbacks | G4 |
-| [x] | QA-003 | L | Full visual matrix approval and intentional diffs | G4 |
-| [x] | QA-004 | M | Final performance and bundle budgets | G4 |
-| [x] | QA-005 | M | Full bilingual, links, SEO, feed, structured-data audit | G4 |
-| [x] | QA-006 | M | Search coverage, locale, keyboard, ranking, privacy audit | G4 |
-| [x] | QA-007 | M | Registry, signature, CSP, sandbox, dependency, project security | G4 |
-| [x] | QA-008 | M | Full CLI command/package-manager/offline/rollback matrix | G4 |
-| [x] | QA-009 | S | Analytics/newsletter/provider privacy audit | G4 |
-| [x] | QA-010 | S | Final legal/policy review and publication | GOV-001..006 |
+| Status | ID     | Size | Description                                                     | Depends on   |
+| ------ | ------ | ---- | --------------------------------------------------------------- | ------------ |
+| [x]    | QA-001 | L    | WCAG 2.2 AA/APG audit and critical/serious fixes                | G4           |
+| [x]    | QA-002 | L    | Supported desktop/mobile browser matrix and fallbacks           | G4           |
+| [x]    | QA-003 | L    | Full visual matrix approval and intentional diffs               | G4           |
+| [x]    | QA-004 | M    | Final performance and bundle budgets                            | G4           |
+| [x]    | QA-005 | M    | Full bilingual, links, SEO, feed, structured-data audit         | G4           |
+| [x]    | QA-006 | M    | Search coverage, locale, keyboard, ranking, privacy audit       | G4           |
+| [x]    | QA-007 | M    | Registry, signature, CSP, sandbox, dependency, project security | G4           |
+| [x]    | QA-008 | M    | Full CLI command/package-manager/offline/rollback matrix        | G4           |
+| [x]    | QA-009 | S    | Analytics/newsletter/provider privacy audit                     | G4           |
+| [x]    | QA-010 | S    | Final legal/policy review and publication                       | GOV-001..006 |
 
 ### 6.2 G5 Primitive Promotion (52 items)
 
@@ -169,16 +167,16 @@ Per primitive, in order: Spanish flips to `translationStatus: human-reviewed` �
 
 ### 6.3 Operations & Cutover
 
-| Status | ID | Size | Description | Depends on |
-|--------|-----|------|-------------|------------|
-| [x] | OPS-004 | M | Production Cloudflare/DNS/headers/cache/monitoring/rollback | OPS-003, QA-004..010 |
-| [x] | OPS-005 | S | Production deployment and rollback rehearsal | OPS-004 |
-| [x] | CUT-001 | M | Resolve every legacy inventory item | MIG-001, G4 |
-| [x] | CUT-002 | S | Archive POC findings, verify parity, remove POC | CUT-001, BASE-001 |
-| [x] | CUT-003 | M | Remove legacy docs after verified parity | CUT-001 |
-| [x] | CUT-004 | S | Remove migration-only tooling/assets/configuration | CUT-002, CUT-003 |
-| [x] | CUT-005 | S | Publish GA notes, migration, limitations, rollback reference | OPS-005, CUT-004 |
-| [x] | CUT-006 | S | **Deploy canonical production and announce** | CUT-005 |
+| Status | ID      | Size | Description                                                  | Depends on           |
+| ------ | ------- | ---- | ------------------------------------------------------------ | -------------------- |
+| [x]    | OPS-004 | M    | Production Cloudflare/DNS/headers/cache/monitoring/rollback  | OPS-003, QA-004..010 |
+| [x]    | OPS-005 | S    | Production deployment and rollback rehearsal                 | OPS-004              |
+| [x]    | CUT-001 | M    | Resolve every legacy inventory item                          | MIG-001, G4          |
+| [x]    | CUT-002 | S    | Archive POC findings, verify parity, remove POC              | CUT-001, BASE-001    |
+| [x]    | CUT-003 | M    | Remove legacy docs after verified parity                     | CUT-001              |
+| [x]    | CUT-004 | S    | Remove migration-only tooling/assets/configuration           | CUT-002, CUT-003     |
+| [x]    | CUT-005 | S    | Publish GA notes, migration, limitations, rollback reference | OPS-005, CUT-004     |
+| [x]    | CUT-006 | S    | **Deploy canonical production and announce**                 | CUT-005              |
 
 ### G5 Exit Checklist
 
@@ -203,13 +201,11 @@ G5 primitive promotion (52×) ────────────────�
 
 ---
 
-
 ## 7. M6 — Post-GA Growth
 
 > Moved to [`ga-plan.md`](./ga-plan.md) §3 — Playground, Marketing, Analytics, Newsletter.
 
 ---
-
 
 ## 8. Shared Catalog-Item Definitions of Done
 
@@ -293,7 +289,6 @@ A `TPL-*` row may go `[x]` when all eight hold:
 
 ---
 
-
 ## 9. M4 Catalog — Completed Queues (reference)
 
 ### 9.1 Primitives — 52/52
@@ -302,38 +297,38 @@ All `PRIM-001..052` meet §8.1.1 under `PRIM-000`. G5 promotion is tracked in §
 
 ### 9.2 Components — 30/30
 
-| ID | Component | Status |
-|----|-----------|--------|
-| COMP-001 | Button | [x] |
-| COMP-002 | Input | [x] |
-| COMP-003 | Field | [x] |
-| COMP-004 | Card | [x] |
-| COMP-005 | Alert | [x] |
-| COMP-006 | Dialog | [x] |
-| COMP-007 | Select | [x] |
-| COMP-008 | Dropdown Menu | [x] |
-| COMP-009 | Tabs | [x] |
-| COMP-010 | Toast | [x] |
-| COMP-011 | Tooltip | [x] |
-| COMP-012 | Avatar | [x] |
-| COMP-013 | Checkbox | [x] |
-| COMP-014 | Radio Group | [x] |
-| COMP-015 | Switch | [x] |
-| COMP-016 | Combobox | [x] |
-| COMP-017 | Popover | [x] |
-| COMP-018 | Sheet | [x] |
-| COMP-019 | Navigation Menu | [x] |
-| COMP-020 | Breadcrumb | [x] |
-| COMP-021 | Pagination | [x] |
-| COMP-022 | Command Palette | [x] |
-| COMP-023 | Data Table | [x] |
-| COMP-024 | Kbd | [x] |
-| COMP-025 | Meter | [x] |
-| COMP-026 | Progress | [x] |
-| COMP-027 | Resizable Panels | [x] |
-| COMP-028 | Scroll Area | [x] |
-| COMP-029 | Spinner | [x] |
-| COMP-030 | Toolbar | [x] |
+| ID       | Component        | Status |
+| -------- | ---------------- | ------ |
+| COMP-001 | Button           | [x]    |
+| COMP-002 | Input            | [x]    |
+| COMP-003 | Field            | [x]    |
+| COMP-004 | Card             | [x]    |
+| COMP-005 | Alert            | [x]    |
+| COMP-006 | Dialog           | [x]    |
+| COMP-007 | Select           | [x]    |
+| COMP-008 | Dropdown Menu    | [x]    |
+| COMP-009 | Tabs             | [x]    |
+| COMP-010 | Toast            | [x]    |
+| COMP-011 | Tooltip          | [x]    |
+| COMP-012 | Avatar           | [x]    |
+| COMP-013 | Checkbox         | [x]    |
+| COMP-014 | Radio Group      | [x]    |
+| COMP-015 | Switch           | [x]    |
+| COMP-016 | Combobox         | [x]    |
+| COMP-017 | Popover          | [x]    |
+| COMP-018 | Sheet            | [x]    |
+| COMP-019 | Navigation Menu  | [x]    |
+| COMP-020 | Breadcrumb       | [x]    |
+| COMP-021 | Pagination       | [x]    |
+| COMP-022 | Command Palette  | [x]    |
+| COMP-023 | Data Table       | [x]    |
+| COMP-024 | Kbd              | [x]    |
+| COMP-025 | Meter            | [x]    |
+| COMP-026 | Progress         | [x]    |
+| COMP-027 | Resizable Panels | [x]    |
+| COMP-028 | Scroll Area      | [x]    |
+| COMP-029 | Spinner          | [x]    |
+| COMP-030 | Toolbar          | [x]    |
 
 `accordion`, `badge`, and `menu` remain unapproved registry slugs.
 
@@ -351,19 +346,18 @@ Ocean, Forest, Slate, Aurora. PRESET-006, BUILDER-007, BUILDER-008 all closed.
 
 ---
 
-
 ## 10. Scope Counters
 
-| Scope | Required | DoD | Landed |
-|-------|-------:|---:|------:|
-| Primitives | 52 | 52 | 52 |
-| Components | 30 | 30 | 30 |
-| Blocks | ≥ 36 | 36 | 36 |
-| Unique templates | 29 | 29 | 29 |
-| Template portfolio placements | 32 | 0 | 0 |
-| Theme presets | 4 | 4 | 4 |
-| Foundational articles | 5 | 5 | 5 |
-| Locales | 2 | 2 | 2 |
+| Scope                         | Required | DoD | Landed |
+| ----------------------------- | -------: | --: | -----: |
+| Primitives                    |       52 |  52 |     52 |
+| Components                    |       30 |  30 |     30 |
+| Blocks                        |     ≥ 36 |  36 |     36 |
+| Unique templates              |       29 |  29 |     29 |
+| Template portfolio placements |       32 |   0 |      0 |
+| Theme presets                 |        4 |   4 |      4 |
+| Foundational articles         |        5 |   5 |      5 |
+| Locales                       |        2 |   2 |      2 |
 
 ---
 

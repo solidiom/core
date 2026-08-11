@@ -1,6 +1,8 @@
 import type { JSX } from "solid-js"
 
-export function StatusBadge(props: { type: "success" | "error" | "running" | "queued" | "cancelled" | "active" | "paused" | "draft" }): JSX.Element {
+export function StatusBadge(props: {
+  type: "success" | "error" | "running" | "queued" | "cancelled" | "active" | "paused" | "draft"
+}): JSX.Element {
   const styles: Record<string, string> = {
     success: "bg-green-100 text-green-800",
     error: "bg-red-100 text-red-800",
@@ -13,7 +15,9 @@ export function StatusBadge(props: { type: "success" | "error" | "running" | "qu
   }
 
   return (
-    <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${styles[props.type]}`}>
+    <span
+      class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${styles[props.type]}`}
+    >
       {props.type}
     </span>
   )

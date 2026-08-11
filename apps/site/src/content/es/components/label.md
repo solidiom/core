@@ -27,7 +27,6 @@ import { Label } from "@solidiom/recipes-css"
 ;<Label for="email">Email address</Label>
 ```
 
-
 ## Instalación
 
 ```sh

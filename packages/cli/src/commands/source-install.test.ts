@@ -395,24 +395,14 @@ describe("source/install", () => {
       const blockSource = join(cwd, "..", "..", "packages", "blocks", "button", "source")
       mkdirSync(blockSource, { recursive: true })
       writeFileSync(join(blockSource, "index.tsx"), content)
-      writeMatchingRegistry(
-        cwd,
-        "button",
-        { "index.tsx": content },
-        { deliverables: ["block"] },
-      )
+      writeMatchingRegistry(cwd, "button", { "index.tsx": content }, { deliverables: ["block"] })
     }
 
     function setUpThemeSource(content: string): void {
       const themeSource = join(cwd, "..", "..", "packages", "themes", "button", "source")
       mkdirSync(themeSource, { recursive: true })
       writeFileSync(join(themeSource, "index.tsx"), content)
-      writeMatchingRegistry(
-        cwd,
-        "button",
-        { "index.tsx": content },
-        { deliverables: ["theme"] },
-      )
+      writeMatchingRegistry(cwd, "button", { "index.tsx": content }, { deliverables: ["theme"] })
     }
 
     it("installs a 'component' deliverable under config.componentDir, not sourceDir", () => {

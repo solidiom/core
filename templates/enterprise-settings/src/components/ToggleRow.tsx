@@ -1,7 +1,12 @@
 import type { JSX } from "solid-js"
 import * as Switch from "@solidiom/switch"
 
-export function ToggleRow(props: { label: string; description: string; checked: boolean; onCheckedChange: (checked: boolean) => void }): JSX.Element {
+export function ToggleRow(props: {
+  label: string
+  description: string
+  checked: boolean
+  onCheckedChange: (checked: boolean) => void
+}): JSX.Element {
   return (
     <div class="flex items-center justify-between py-3">
       <div>

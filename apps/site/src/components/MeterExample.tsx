@@ -36,7 +36,15 @@ export function MeterExample(props: MeterExampleProps) {
       data-meter-example
     >
       <div class="meter-example__row">
-        <Meter.Root value={0.35} min={0} max={1} low={0.5} high={0.8} optimum={0} aria-label={copy().diskUsage} />
+        <Meter.Root
+          value={0.35}
+          min={0}
+          max={1}
+          low={0.5}
+          high={0.8}
+          optimum={0}
+          aria-label={copy().diskUsage}
+        />
       </div>
       <div class="meter-example__row">
         <Meter.Root value={3} min={0} max={5} optimum={5} aria-label={copy().rating} />

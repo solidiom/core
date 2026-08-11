@@ -52,7 +52,9 @@ const ROLES: Role[] = [
     description: "Manage users and roles, view sessions and audit logs.",
     memberCount: 5,
     status: "active",
-    permissions: ALL_PERMISSIONS.filter((p) => !["users:delete", "settings:write"].includes(p.name)),
+    permissions: ALL_PERMISSIONS.filter(
+      (p) => !["users:delete", "settings:write"].includes(p.name),
+    ),
   },
   {
     id: "r3",
@@ -60,7 +62,9 @@ const ROLES: Role[] = [
     description: "Read and write access to content, limited to assigned resources.",
     memberCount: 12,
     status: "active",
-    permissions: ALL_PERMISSIONS.filter((p) => ["users:read", "roles:read", "audit:read"].includes(p.name)),
+    permissions: ALL_PERMISSIONS.filter((p) =>
+      ["users:read", "roles:read", "audit:read"].includes(p.name),
+    ),
   },
   {
     id: "r4",
@@ -97,16 +101,22 @@ export function Roles(): JSX.Element {
           <Breadcrumb.Root class="mb-2">
             <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                  Home
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
               <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/roles" current class="text-gray-900 font-medium">Roles</Breadcrumb.Link>
+                <Breadcrumb.Link href="/roles" current class="text-gray-900 font-medium">
+                  Roles
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
             </Breadcrumb.List>
           </Breadcrumb.Root>
           <h1 class="text-2xl font-bold text-gray-900">Roles & Permissions</h1>
-          <p class="mt-1 text-sm text-gray-500">Define roles, assign permissions, and manage access policies.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Define roles, assign permissions, and manage access policies.
+          </p>
         </div>
         <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           Create Role
@@ -116,7 +126,9 @@ export function Roles(): JSX.Element {
       <Alert.Root type="success" class="rounded-md border border-green-200 bg-green-50 p-4">
         <Alert.Title class="text-sm font-medium text-green-800">Role Management</Alert.Title>
         <Alert.Description class="mt-1 text-sm text-green-700">
-          {roles().length} roles configured with a total of {roles().reduce((s, r) => s + r.memberCount, 0)} assigned members across {ALL_PERMISSIONS.length} permissions.
+          {roles().length} roles configured with a total of{" "}
+          {roles().reduce((s, r) => s + r.memberCount, 0)} assigned members across{" "}
+          {ALL_PERMISSIONS.length} permissions.
         </Alert.Description>
       </Alert.Root>
 

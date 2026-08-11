@@ -12,9 +12,7 @@ export function MetricCard(props: MetricCardProps): JSX.Element {
   return (
     <Card.Root class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
       <Card.Header class="flex items-center justify-between pb-2">
-        <Card.Title class="text-sm font-medium text-gray-500">
-          {props.title}
-        </Card.Title>
+        <Card.Title class="text-sm font-medium text-gray-500">{props.title}</Card.Title>
       </Card.Header>
       <Card.Content>
         <div class="text-2xl font-bold text-gray-900">{props.value}</div>

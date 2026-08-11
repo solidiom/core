@@ -67,7 +67,9 @@ function checkCommand(): void {
   const content = readFileSync(DEFINITIONS_PATH, "utf8")
   const hardcoded = content.match(/contractVersion:\s*\d+(?!\s*as\s*const)/g)
   if (hardcoded && hardcoded.length > 0) {
-    console.error(`\n✗ Found ${hardcoded.length} definitions with hardcoded version (should use CONTRACT_VERSION)`)
+    console.error(
+      `\n✗ Found ${hardcoded.length} definitions with hardcoded version (should use CONTRACT_VERSION)`,
+    )
     process.exit(1)
   }
 
@@ -81,10 +83,7 @@ function bumpCommand(): void {
 
   // Update schema
   const schema = readFileSync(SCHEMA_PATH, "utf8")
-  const updated = schema.replace(
-    /CONTRACT_VERSION\s*=\s*\d+/,
-    `CONTRACT_VERSION = ${next}`,
-  )
+  const updated = schema.replace(/CONTRACT_VERSION\s*=\s*\d+/, `CONTRACT_VERSION = ${next}`)
   writeFileSync(SCHEMA_PATH, updated)
 
   // Generate migration stub

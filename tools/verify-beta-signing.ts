@@ -27,10 +27,18 @@ async function main(): Promise<Result[]> {
   // 1. Read the pointer
   const pointer = readJson("artifacts/beta-pointer.json") as Record<string, unknown> | null
   if (!pointer) {
-    results.push({ check: "pointer_exists", pass: false, detail: "artifacts/beta-pointer.json not found" })
+    results.push({
+      check: "pointer_exists",
+      pass: false,
+      detail: "artifacts/beta-pointer.json not found",
+    })
     return results
   }
-  results.push({ check: "pointer_exists", pass: true, detail: `channel=${pointer.channel} release=${pointer.release}` })
+  results.push({
+    check: "pointer_exists",
+    pass: true,
+    detail: `channel=${pointer.channel} release=${pointer.release}`,
+  })
 
   // 2. Verify catalog hash
   const catalogHash = sha256("artifacts/beta-catalog.json")
@@ -57,7 +65,11 @@ async function main(): Promise<Result[]> {
           : `mismatch — computed ${registryHash.slice(0, 16)}… expected ${pointerRegistryHash.slice(0, 16)}…`,
     })
   } else {
-    results.push({ check: "registry_index_sha256", pass: false, detail: "registry/index.json not found" })
+    results.push({
+      check: "registry_index_sha256",
+      pass: false,
+      detail: "registry/index.json not found",
+    })
   }
 
   // 4. Check registry index signature field
@@ -106,19 +118,22 @@ async function main(): Promise<Result[]> {
         ["sign"],
       )
 
-      const sig = await globalThis.crypto.subtle.sign("Ed25519", cryptoKey, Buffer.from(stable, "utf8"))
+      const sig = await globalThis.crypto.subtle.sign(
+        "Ed25519",
+        cryptoKey,
+        Buffer.from(stable, "utf8"),
+      )
       const sigBase64 = Buffer.from(sig).toString("base64")
 
       const jwk = await globalThis.crypto.subtle.exportKey("jwk", cryptoKey)
-      const pubKeyBytes = Buffer.from(
-        jwk.x!.replace(/-/g, "+").replace(/_/g, "/") + "==",
-        "base64",
-      )
+      const pubKeyBytes = Buffer.from(jwk.x!.replace(/-/g, "+").replace(/_/g, "/") + "==", "base64")
 
       const pubKeyBase64 = pubKeyBytes.toString("base64")
       const trustedKeys = readJson(".solidiom/trusted-keys.json") as Record<string, unknown> | null
       const trustedKeyList = (trustedKeys as { keys?: Array<{ publicKey: string }> })?.keys ?? []
-      const keyTrusted = trustedKeyList.some((k: { publicKey: string }) => k.publicKey === pubKeyBase64)
+      const keyTrusted = trustedKeyList.some(
+        (k: { publicKey: string }) => k.publicKey === pubKeyBase64,
+      )
 
       results.push({
         check: "inline_sign_attempt",

@@ -30,25 +30,17 @@ export function DialogExample() {
 
   return (
     <StyledDialog
-      trigger={
-        <button class="solidiom-btn">Open Dialog</button>
-      }
+      trigger={<button class="solidiom-btn">Open Dialog</button>}
       title="Confirm action"
       description="Are you sure you want to continue?"
       open={open}
       onOpenChange={setOpen}
     >
       <div class="flex justify-end gap-2 mt-4">
-        <button
-          class="solidiom-btn solidiom-btn--variant-ghost"
-          onClick={() => setOpen(false)}
-        >
+        <button class="solidiom-btn solidiom-btn--variant-ghost" onClick={() => setOpen(false)}>
           Cancel
         </button>
-        <button
-          class="solidiom-btn solidiom-btn--variant-primary"
-          onClick={() => setOpen(false)}
-        >
+        <button class="solidiom-btn solidiom-btn--variant-primary" onClick={() => setOpen(false)}>
           Confirm
         </button>
       </div>

@@ -18,17 +18,17 @@ Screen reader testing completed for primitives exposing novel ARIA patterns, wit
 
 The following 9 primitives received dedicated VoiceOver verification due to their use of custom or complex ARIA patterns beyond standard attributes:
 
-| Primitive | ARIA Pattern | VoiceOver Verification |
-| --------- | ------------ | ---------------------- |
-| alert-dialog | `role=alertdialog` | Announced with assertive politeness on open. Focus trap verified. Escape restores focus to trigger. |
-| combobox | `role=combobox` with linked listbox | "combobox" role announced. Options listed in popup listbox. Arrow key navigation and selection confirmed. |
-| command-palette | `role=dialog` with `role=group`/`role=option` | Dialog role announced. Filtered results announced as group. Item selection via Enter confirmed. |
-| context-menu | `role=menu` triggered by context event | "menu" role announced on open. Arrow key navigation between menuitems confirmed. Escape closes. |
-| data-table | `role=grid` with `role=row`/`role=gridcell` | Grid role announced. Row and cell navigation confirmed. Sortable column headers announced. |
-| dialog | `role=dialog` with focus trap | "dialog" role announced on open. Focus trap and restoration verified. Title and description connected. |
-| menu | `role=menu` with `role=menuitem` | "menu" role announced. Arrow key navigation and Enter activation confirmed. Submenu navigation verified. |
-| radio-group | `role=radiogroup` with `role=radio` | "radiogroup" role announced. Radio items announced with checked state. Arrow key selection confirmed. |
-| tree | `role=tree` with `role=treeitem` | "tree" role announced. Treeitem expand/collapse state announced. Arrow key navigation confirmed. |
+| Primitive       | ARIA Pattern                                  | VoiceOver Verification                                                                                    |
+| --------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| alert-dialog    | `role=alertdialog`                            | Announced with assertive politeness on open. Focus trap verified. Escape restores focus to trigger.       |
+| combobox        | `role=combobox` with linked listbox           | "combobox" role announced. Options listed in popup listbox. Arrow key navigation and selection confirmed. |
+| command-palette | `role=dialog` with `role=group`/`role=option` | Dialog role announced. Filtered results announced as group. Item selection via Enter confirmed.           |
+| context-menu    | `role=menu` triggered by context event        | "menu" role announced on open. Arrow key navigation between menuitems confirmed. Escape closes.           |
+| data-table      | `role=grid` with `role=row`/`role=gridcell`   | Grid role announced. Row and cell navigation confirmed. Sortable column headers announced.                |
+| dialog          | `role=dialog` with focus trap                 | "dialog" role announced on open. Focus trap and restoration verified. Title and description connected.    |
+| menu            | `role=menu` with `role=menuitem`              | "menu" role announced. Arrow key navigation and Enter activation confirmed. Submenu navigation verified.  |
+| radio-group     | `role=radiogroup` with `role=radio`           | "radiogroup" role announced. Radio items announced with checked state. Arrow key selection confirmed.     |
+| tree            | `role=tree` with `role=treeitem`              | "tree" role announced. Treeitem expand/collapse state announced. Arrow key navigation confirmed.          |
 
 ## Standard ARIA Primitives
 

@@ -31,8 +31,14 @@ export function ProductListing(): JSX.Element {
       return matchSearch && matchCat
     })
 
-    if (sort() === "Price: Low to High") results = [...results].sort((a, b) => parseFloat(a.price.replace("$", "")) - parseFloat(b.price.replace("$", "")))
-    if (sort() === "Price: High to Low") results = [...results].sort((a, b) => parseFloat(b.price.replace("$", "")) - parseFloat(a.price.replace("$", "")))
+    if (sort() === "Price: Low to High")
+      results = [...results].sort(
+        (a, b) => parseFloat(a.price.replace("$", "")) - parseFloat(b.price.replace("$", "")),
+      )
+    if (sort() === "Price: High to Low")
+      results = [...results].sort(
+        (a, b) => parseFloat(b.price.replace("$", "")) - parseFloat(a.price.replace("$", "")),
+      )
 
     return results
   }
@@ -42,11 +48,15 @@ export function ProductListing(): JSX.Element {
       <Breadcrumb.Root class="mb-4">
         <Breadcrumb.List class="flex items-center gap-2">
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">Home</Breadcrumb.Link>
+            <Breadcrumb.Link href="/" class="text-sm text-gray-500 hover:text-gray-700">
+              Home
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
           <Breadcrumb.Separator class="text-gray-400">/</Breadcrumb.Separator>
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="/" current class="text-sm font-medium text-gray-900">Products</Breadcrumb.Link>
+            <Breadcrumb.Link href="/" current class="text-sm font-medium text-gray-900">
+              Products
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>

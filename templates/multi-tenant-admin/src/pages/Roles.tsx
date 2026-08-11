@@ -50,7 +50,9 @@ const ROLES: Role[] = [
     description: "Manage users and teams, view audit logs.",
     memberCount: 5,
     status: "active",
-    permissions: ALL_PERMISSIONS.filter((p) => !["users.delete", "settings.write"].includes(`${p.resource}.${p.action}`)),
+    permissions: ALL_PERMISSIONS.filter(
+      (p) => !["users.delete", "settings.write"].includes(`${p.resource}.${p.action}`),
+    ),
   },
   {
     id: "r3",
@@ -58,7 +60,11 @@ const ROLES: Role[] = [
     description: "Read and write access to content, limited settings.",
     memberCount: 12,
     status: "active",
-    permissions: ALL_PERMISSIONS.filter((p) => ["users.read", "teams.read", "teams.write", "settings.read"].includes(`${p.resource}.${p.action}`)),
+    permissions: ALL_PERMISSIONS.filter((p) =>
+      ["users.read", "teams.read", "teams.write", "settings.read"].includes(
+        `${p.resource}.${p.action}`,
+      ),
+    ),
   },
   {
     id: "r4",
@@ -74,7 +80,9 @@ const ROLES: Role[] = [
     description: "Read access to audit logs and user profiles.",
     memberCount: 3,
     status: "pending",
-    permissions: ALL_PERMISSIONS.filter((p) => ["users.read", "audit.read"].includes(`${p.resource}.${p.action}`)),
+    permissions: ALL_PERMISSIONS.filter((p) =>
+      ["users.read", "audit.read"].includes(`${p.resource}.${p.action}`),
+    ),
   },
 ]
 
@@ -88,16 +96,22 @@ export function Roles(): JSX.Element {
           <Breadcrumb.Root class="mb-2">
             <Breadcrumb.List class="flex items-center gap-1.5 text-sm text-gray-500">
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/" class="hover:text-gray-700">Home</Breadcrumb.Link>
+                <Breadcrumb.Link href="/" class="hover:text-gray-700">
+                  Home
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
               <Breadcrumb.Separator class="text-gray-300">/</Breadcrumb.Separator>
               <Breadcrumb.Item>
-                <Breadcrumb.Link href="/roles" current class="text-gray-900 font-medium">Roles</Breadcrumb.Link>
+                <Breadcrumb.Link href="/roles" current class="text-gray-900 font-medium">
+                  Roles
+                </Breadcrumb.Link>
               </Breadcrumb.Item>
             </Breadcrumb.List>
           </Breadcrumb.Root>
           <h1 class="text-2xl font-bold text-gray-900">Role-Based Access Control</h1>
-          <p class="mt-1 text-sm text-gray-500">Define roles and manage permission matrices across your organization.</p>
+          <p class="mt-1 text-sm text-gray-500">
+            Define roles and manage permission matrices across your organization.
+          </p>
         </div>
         <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           Create Role
@@ -107,7 +121,8 @@ export function Roles(): JSX.Element {
       <Alert.Root type="success" class="rounded-md border border-green-200 bg-green-50 p-4">
         <Alert.Title class="text-sm font-medium text-green-800">RBAC Active</Alert.Title>
         <Alert.Description class="mt-1 text-sm text-green-700">
-          You have {ROLES.length} roles configured with a total of {ROLES.reduce((s, r) => s + r.memberCount, 0)} assigned members.
+          You have {ROLES.length} roles configured with a total of{" "}
+          {ROLES.reduce((s, r) => s + r.memberCount, 0)} assigned members.
         </Alert.Description>
       </Alert.Root>
 
@@ -141,10 +156,18 @@ export function Roles(): JSX.Element {
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                   <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Resource</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Action</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Description</th>
-                    <th class="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-500">Granted</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                      Resource
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                      Action
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                      Description
+                    </th>
+                    <th class="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-500">
+                      Granted
+                    </th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
@@ -152,13 +175,23 @@ export function Roles(): JSX.Element {
                     const hasPerm = role.permissions.some((p) => p.id === perm.id)
                     return (
                       <tr class="hover:bg-gray-50">
-                        <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">{perm.resource}</td>
-                        <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{perm.action}</td>
+                        <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">
+                          {perm.resource}
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
+                          {perm.action}
+                        </td>
                         <td class="px-6 py-4 text-sm text-gray-500">{perm.description}</td>
                         <td class="whitespace-nowrap px-6 py-4 text-center">
-                          {hasPerm
-                            ? <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">Yes</span>
-                            : <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-500">No</span>}
+                          {hasPerm ? (
+                            <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                              Yes
+                            </span>
+                          ) : (
+                            <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-500">
+                              No
+                            </span>
+                          )}
                         </td>
                       </tr>
                     )

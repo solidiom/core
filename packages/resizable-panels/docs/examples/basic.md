@@ -23,10 +23,7 @@ runnableReason: "No keyboard interaction declared in the accessibility contract.
 ```tsx
 import * as ResizablePanels from "@solidiom/resizable-panels"
 
-;<ResizablePanels.PanelGroup
-  direction="horizontal"
-  onSizesChange={(sizes) => console.log(sizes)}
->
+;<ResizablePanels.PanelGroup direction="horizontal" onSizesChange={(sizes) => console.log(sizes)}>
   <ResizablePanels.Panel order={0} defaultSize={60} minSize={20}>
     <div style={{ padding: 16 }}>Left panel</div>
   </ResizablePanels.Panel>

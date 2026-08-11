@@ -60,12 +60,7 @@ Enable single or multiple row selection with the `selectionMode` prop.
 ```tsx
 import { StyledDataTable, DataTable } from "@solidiom/recipes-css"
 
-;<StyledDataTable
-  columns={columns}
-  data={data}
-  rowIdKey="id"
-  selectionMode="single"
->
+;<StyledDataTable columns={columns} data={data} rowIdKey="id" selectionMode="single">
   <DataTable.Header>
     <tr>
       <DataTable.HeaderCell columnId="name">Name</DataTable.HeaderCell>

@@ -35,9 +35,7 @@ export type SignInState = "empty" | "loading" | "error" | "restricted"
 export function SignIn(props: SignInProps): JSX.Element {
   const [email, setEmail] = createSignal("")
   const [password, setPassword] = createSignal("")
-  const [state, setState] = createSignal<SignInState>(
-    props.restricted ? "restricted" : "empty",
-  )
+  const [state, setState] = createSignal<SignInState>(props.restricted ? "restricted" : "empty")
   const [localError, setLocalError] = createSignal("")
 
   const currentError = () => props.error || localError()
@@ -69,7 +67,9 @@ export function SignIn(props: SignInProps): JSX.Element {
       {/* Restricted state */}
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-sign-in__restricted" role="alert">
-          <p>{props.restrictedReason || "Your account access is restricted. Please contact support."}</p>
+          <p>
+            {props.restrictedReason || "Your account access is restricted. Please contact support."}
+          </p>
         </div>
       </Show>
 

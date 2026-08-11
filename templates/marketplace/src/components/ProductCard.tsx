@@ -22,7 +22,10 @@ export function ProductCard(props: ProductCardProps): JSX.Element {
       </div>
       <Card.Content class="p-4">
         <div class="flex items-start justify-between gap-2">
-          <A href={`/listing/${props.id}`} class="text-sm font-semibold text-gray-900 hover:text-indigo-600 line-clamp-1">
+          <A
+            href={`/listing/${props.id}`}
+            class="text-sm font-semibold text-gray-900 hover:text-indigo-600 line-clamp-1"
+          >
             {props.name}
           </A>
           <PriceBadge price={props.price} originalPrice={props.originalPrice} />

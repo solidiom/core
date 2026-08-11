@@ -39,7 +39,6 @@ import * as InputOtp from "@solidiom/recipes-css"
 </InputOtp.Root>
 ```
 
-
 ## Instalación
 
 ```sh

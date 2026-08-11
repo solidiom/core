@@ -67,12 +67,12 @@ Solidiom's `source/` emission gives you the same development experience as code 
 
 ## Trade-offs
 
-| Benefit | Trade-off |
-|---------|-----------|
-| Full control | You're responsible for your modifications |
-| No lock-in | Upstream updates require manual merge (source mode) |
-| Auditable | More files in your project |
-| Forkable | Divergence from upstream is permanent (source mode) |
+| Benefit      | Trade-off                                           |
+| ------------ | --------------------------------------------------- |
+| Full control | You're responsible for your modifications           |
+| No lock-in   | Upstream updates require manual merge (source mode) |
+| Auditable    | More files in your project                          |
+| Forkable     | Divergence from upstream is permanent (source mode) |
 
 ## The Registry Contract
 

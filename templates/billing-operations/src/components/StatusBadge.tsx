@@ -28,7 +28,9 @@ const LABELS: Record<StatusType, string> = {
 
 export function StatusBadge(props: StatusBadgeProps): JSX.Element {
   return (
-    <span class={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STYLES[props.status]}`}>
+    <span
+      class={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STYLES[props.status]}`}
+    >
       {LABELS[props.status]}
     </span>
   )

@@ -7,7 +7,13 @@ import { tocFromHeadings, type DocsTocEntry, type DocsSidebarGroup } from "@lib/
 export async function getStaticPaths() {
   const entries = await getCollection("guides")
   return entries.map((entry) => ({
-    params: { slug: entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id },
+    params: {
+      slug:
+        entry.id
+          .split("/")
+          .pop()
+          ?.replace(/\.(md|mdx)$/, "") ?? entry.id,
+    },
   }))
 }
 
@@ -23,7 +29,9 @@ const entryData = rawEntry.data
 const rendered = await render(rawEntry)
 const { Content } = rendered
 const headings = rendered.headings ?? []
-const toc: DocsTocEntry[] = tocFromHeadings(headings as Array<{ depth: number; slug: string; text: string }>)
+const toc: DocsTocEntry[] = tocFromHeadings(
+  headings as Array<{ depth: number; slug: string; text: string }>,
+)
 
 const allEntries = await getCollection("guides", (e) => e.data.locale === locale)
 const sorted = [...allEntries].sort((a, b) => {
@@ -36,17 +44,33 @@ const currentIndex = sorted.findIndex((e) => e.id === rawEntry.id)
 const prevEntry = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : undefined
 const nextEntry = currentIndex > 0 ? sorted[currentIndex - 1] : undefined
 
-const prevSlug = prevEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
-const nextSlug = nextEntry?.id.split("/").pop()?.replace(/\.(md|mdx)$/, "")
+const prevSlug = prevEntry?.id
+  .split("/")
+  .pop()
+  ?.replace(/\.(md|mdx)$/, "")
+const nextSlug = nextEntry?.id
+  .split("/")
+  .pop()
+  ?.replace(/\.(md|mdx)$/, "")
 
-const prevLink = prevSlug && prevEntry ? { label: prevEntry.data.title, href: `${guidesPath}${prevSlug}/` } : undefined
-const nextLink = nextSlug && nextEntry ? { label: nextEntry.data.title, href: `${guidesPath}${nextSlug}/` } : undefined
+const prevLink =
+  prevSlug && prevEntry
+    ? { label: prevEntry.data.title, href: `${guidesPath}${prevSlug}/` }
+    : undefined
+const nextLink =
+  nextSlug && nextEntry
+    ? { label: nextEntry.data.title, href: `${guidesPath}${nextSlug}/` }
+    : undefined
 
 const sidebarGroups: DocsSidebarGroup[] = [
   {
     label: isEs ? "Guías" : "Guides",
     links: sorted.map((entry) => {
-      const entrySlug = entry.id.split("/").pop()?.replace(/\.(md|mdx)$/, "") ?? entry.id
+      const entrySlug =
+        entry.id
+          .split("/")
+          .pop()
+          ?.replace(/\.(md|mdx)$/, "") ?? entry.id
       return {
         label: entry.data.title,
         href: `${guidesPath}${entrySlug}/`,

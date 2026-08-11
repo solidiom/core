@@ -41,9 +41,7 @@ const data = [
       <DataTable.HeaderCell columnId="email">Email</DataTable.HeaderCell>
     </tr>
   </DataTable.Header>
-  <DataTable.Body>
-    {/* Renderizado de filas por el consumidor */}
-  </DataTable.Body>
+  <DataTable.Body>{/* Renderizado de filas por el consumidor */}</DataTable.Body>
 </StyledDataTable>
 ```
 

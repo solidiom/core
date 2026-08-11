@@ -31,14 +31,18 @@ export function Editor(): JSX.Element {
           </Breadcrumb.Item>
           <Breadcrumb.Separator />
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Editor</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Editor
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
 
       <div class="mt-6">
         <h1 class="text-2xl font-bold text-gray-900">Content Editor</h1>
-        <p class="mt-1 text-sm text-gray-500">Create and edit content with rich text formatting and version history.</p>
+        <p class="mt-1 text-sm text-gray-500">
+          Create and edit content with rich text formatting and version history.
+        </p>
       </div>
 
       <Tabs.Root value={activeTab} onValueChange={setActiveTab} class="mt-8">
@@ -79,11 +83,13 @@ export function Editor(): JSX.Element {
           <div class="min-h-[300px] rounded-lg border border-gray-200 bg-white p-6">
             <h2 class="text-xl font-semibold text-gray-900">Welcome to the Content Editor</h2>
             <p class="mt-4 text-gray-600">
-              Start writing your content here. Use the toolbar above to format your text with bold, italic, underline, headings, and links.
-              Your document is saved automatically as you type.
+              Start writing your content here. Use the toolbar above to format your text with bold,
+              italic, underline, headings, and links. Your document is saved automatically as you
+              type.
             </p>
             <p class="mt-4 text-gray-600">
-              You can switch to the Version History tab to see previous versions of this document and restore earlier drafts.
+              You can switch to the Version History tab to see previous versions of this document
+              and restore earlier drafts.
             </p>
           </div>
 
@@ -106,7 +112,9 @@ export function Editor(): JSX.Element {
                 </div>
                 <div class="flex-1">
                   <div class="font-medium text-gray-900">{v.note}</div>
-                  <div class="text-sm text-gray-500">by {v.author} on {v.date}</div>
+                  <div class="text-sm text-gray-500">
+                    by {v.author} on {v.date}
+                  </div>
                 </div>
                 <Button.Root class="rounded-md px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100">
                   Restore

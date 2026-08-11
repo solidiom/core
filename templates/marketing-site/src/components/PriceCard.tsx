@@ -28,7 +28,13 @@ export function PriceCard(props: {
           ))}
         </ul>
         <div class="mt-6">
-          <Button.Root class={props.highlighted ? "bg-indigo-600 text-white hover:bg-indigo-700" : "bg-gray-100 text-gray-900 hover:bg-gray-200"}>
+          <Button.Root
+            class={
+              props.highlighted
+                ? "bg-indigo-600 text-white hover:bg-indigo-700"
+                : "bg-gray-100 text-gray-900 hover:bg-gray-200"
+            }
+          >
             Get Started
           </Button.Root>
         </div>

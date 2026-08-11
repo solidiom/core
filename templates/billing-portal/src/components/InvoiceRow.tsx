@@ -28,7 +28,9 @@ export function InvoiceRow(props: InvoiceRowProps): JSX.Element {
       </div>
       <div class="flex items-center gap-4">
         <span class="text-sm font-medium text-gray-900">{props.amount}</span>
-        <span class={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_COLORS[props.status]}`}>
+        <span
+          class={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_COLORS[props.status]}`}
+        >
           {STATUS_LABELS[props.status]}
         </span>
         <button type="button" class="text-sm text-indigo-600 hover:text-indigo-700">

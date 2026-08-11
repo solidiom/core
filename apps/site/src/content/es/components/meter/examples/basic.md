@@ -26,5 +26,13 @@ El componente Meter muestra una medición escalar dentro de un rango conocido, c
 ```tsx
 import { StyledMeter } from "@solidiom/recipes-css"
 
-;<StyledMeter value={0.35} min={0} max={1} low={0.5} high={0.8} optimum={0} aria-label="Uso de disco" />
+;<StyledMeter
+  value={0.35}
+  min={0}
+  max={1}
+  low={0.5}
+  high={0.8}
+  optimum={0}
+  aria-label="Uso de disco"
+/>
 ```

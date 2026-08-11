@@ -25,9 +25,13 @@ export function AppShell(props: { children: JSX.Element }): JSX.Element {
                   <li role="none">
                     <NavigationMenu.Link
                       href={item.href}
-                      active={location.pathname === item.href || (item.href === "/listing/1" && location.pathname.startsWith("/listing/"))}
+                      active={
+                        location.pathname === item.href ||
+                        (item.href === "/listing/1" && location.pathname.startsWith("/listing/"))
+                      }
                       class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                        location.pathname === item.href || (item.href === "/listing/1" && location.pathname.startsWith("/listing/"))
+                        location.pathname === item.href ||
+                        (item.href === "/listing/1" && location.pathname.startsWith("/listing/"))
                           ? "bg-gray-100 text-gray-900"
                           : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                       }`}
@@ -46,9 +50,7 @@ export function AppShell(props: { children: JSX.Element }): JSX.Element {
           </div>
         </div>
       </header>
-      <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {props.children}
-      </main>
+      <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">{props.children}</main>
     </div>
   )
 }

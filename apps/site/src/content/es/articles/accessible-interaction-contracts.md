@@ -35,22 +35,22 @@ Each primitive has a contract file at `packages/<name>/docs/accessibility/contra
 ```markdown
 ## Keyboard Interactions
 
-| Key | Action |
-|-----|--------|
-| Enter/Space | Toggle accordion item |
-| Arrow Down | Move focus to next item |
-| Arrow Up | Move focus to previous item |
-| Home | Move focus to first item |
-| End | Move focus to last item |
+| Key         | Action                      |
+| ----------- | --------------------------- |
+| Enter/Space | Toggle accordion item       |
+| Arrow Down  | Move focus to next item     |
+| Arrow Up    | Move focus to previous item |
+| Home        | Move focus to first item    |
+| End         | Move focus to last item     |
 
 ## ARIA Attributes
 
-| Attribute | Element | Value |
-|-----------|---------|-------|
-| role="region" | Content panel | — |
-| aria-expanded | Trigger | true/false |
-| aria-controls | Trigger | Panel ID |
-| aria-labelledby | Panel | Trigger ID |
+| Attribute       | Element       | Value      |
+| --------------- | ------------- | ---------- |
+| role="region"   | Content panel | —          |
+| aria-expanded   | Trigger       | true/false |
+| aria-controls   | Trigger       | Panel ID   |
+| aria-labelledby | Panel         | Trigger ID |
 ```
 
 ## Enforcement Layers
@@ -98,6 +98,6 @@ This chain of verified dependencies means that when you install a Solidiom templ
 
 ## Limitations
 
-- Contracts verify *structure*, not *experience* — a screen reader user's actual experience requires human testing
+- Contracts verify _structure_, not _experience_ — a screen reader user's actual experience requires human testing
 - VoiceOver is the only AT currently tested; NVDA/JAWS/TalkBack are Phase 4 work
 - Dynamic content timing (e.g., toast auto-dismiss) has `incomplete` axe results, not violations

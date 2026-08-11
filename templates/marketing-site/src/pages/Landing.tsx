@@ -11,17 +11,45 @@ const STATS = [
 ]
 
 const TESTIMONIALS = [
-  { name: "Sarah Chen", role: "CTO, TechCorp", text: "This platform transformed how our team collaborates. The productivity gains were immediate." },
-  { name: "Marcus Johnson", role: "Product Lead, StartupXYZ", text: "The best developer experience we've encountered. Setup took minutes, not days." },
-  { name: "Emily Rodriguez", role: "Engineering Manager, ScaleUp", text: "We migrated our entire infrastructure in a weekend. The migration tools are outstanding." },
-  { name: "David Park", role: "Founder, IndieHack", text: "As a solo founder, this gives me the infrastructure of a 50-person engineering team." },
+  {
+    name: "Sarah Chen",
+    role: "CTO, TechCorp",
+    text: "This platform transformed how our team collaborates. The productivity gains were immediate.",
+  },
+  {
+    name: "Marcus Johnson",
+    role: "Product Lead, StartupXYZ",
+    text: "The best developer experience we've encountered. Setup took minutes, not days.",
+  },
+  {
+    name: "Emily Rodriguez",
+    role: "Engineering Manager, ScaleUp",
+    text: "We migrated our entire infrastructure in a weekend. The migration tools are outstanding.",
+  },
+  {
+    name: "David Park",
+    role: "Founder, IndieHack",
+    text: "As a solo founder, this gives me the infrastructure of a 50-person engineering team.",
+  },
 ]
 
 const FEATURES_PREVIEW = [
-  { title: "Real-time Collaboration", description: "Work together with your team in real-time. See changes as they happen." },
-  { title: "Advanced Analytics", description: "Gain insights with powerful dashboards and custom reports." },
-  { title: "Automated Workflows", description: "Build custom automation rules to eliminate repetitive tasks." },
-  { title: "Enterprise Security", description: "Bank-grade security with SSO, MFA, and role-based access control." },
+  {
+    title: "Real-time Collaboration",
+    description: "Work together with your team in real-time. See changes as they happen.",
+  },
+  {
+    title: "Advanced Analytics",
+    description: "Gain insights with powerful dashboards and custom reports.",
+  },
+  {
+    title: "Automated Workflows",
+    description: "Build custom automation rules to eliminate repetitive tasks.",
+  },
+  {
+    title: "Enterprise Security",
+    description: "Bank-grade security with SSO, MFA, and role-based access control.",
+  },
 ]
 
 export function Landing(): JSX.Element {
@@ -30,7 +58,9 @@ export function Landing(): JSX.Element {
       <Breadcrumb.Root>
         <Breadcrumb.List class="flex items-center gap-2">
           <Breadcrumb.Item>
-            <Breadcrumb.Link href="#" current>Home</Breadcrumb.Link>
+            <Breadcrumb.Link href="#" current>
+              Home
+            </Breadcrumb.Link>
           </Breadcrumb.Item>
         </Breadcrumb.List>
       </Breadcrumb.Root>
@@ -40,8 +70,8 @@ export function Landing(): JSX.Element {
           Build Faster, Ship Smarter
         </h1>
         <p class="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
-          The modern platform for teams who want to move fast without breaking things.
-          Streamline your workflow, collaborate seamlessly, and deliver exceptional products.
+          The modern platform for teams who want to move fast without breaking things. Streamline
+          your workflow, collaborate seamlessly, and deliver exceptional products.
         </p>
         <div class="mt-8 flex items-center justify-center gap-4">
           <Button.Root class="rounded-md bg-indigo-600 px-6 py-3 text-sm font-medium text-white hover:bg-indigo-700">
@@ -64,7 +94,9 @@ export function Landing(): JSX.Element {
 
       <div class="mt-16">
         <h2 class="text-2xl font-bold text-gray-900">Trusted by Teams Worldwide</h2>
-        <p class="mt-2 text-sm text-gray-500">Join thousands of organizations building better products.</p>
+        <p class="mt-2 text-sm text-gray-500">
+          Join thousands of organizations building better products.
+        </p>
         <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {["TechCorp", "StartupXYZ", "ScaleUp", "IndieHack"].map((company) => (
             <div class="flex items-center justify-center rounded-lg border border-gray-200 bg-gray-50 py-6">
@@ -93,7 +125,9 @@ export function Landing(): JSX.Element {
 
       <div class="mt-16">
         <h2 class="text-2xl font-bold text-gray-900">Why Choose Us</h2>
-        <p class="mt-2 text-sm text-gray-500">Everything you need to ship products your users love.</p>
+        <p class="mt-2 text-sm text-gray-500">
+          Everything you need to ship products your users love.
+        </p>
         <div class="mt-8 grid gap-6 sm:grid-cols-2">
           {FEATURES_PREVIEW.map((feature) => (
             <div class="rounded-lg border border-gray-200 bg-white p-6">

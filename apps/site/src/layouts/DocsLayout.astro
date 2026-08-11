@@ -167,64 +167,78 @@ const isActive = (href: string) => pathname === href
       </article>
 
       <aside class="docs-shell__toc" aria-label={copy.onThisPage}>
-        {blogMeta && (
-          <div class="docs-shell__blog-meta">
-            <p class="docs-shell__toc-label">{locale === "es" ? "Artículo" : "Article"}</p>
-            <dl class="docs-shell__blog-meta--info">
-              <div class="docs-shell__blog-meta--date">
-                <dt>{locale === "es" ? "Publicado" : "Published"}</dt>
-                <dd>
-                  {blogMeta.date.toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </dd>
-              </div>
-              {blogMeta.tags.length > 0 && (
-                <div class="docs-shell__blog-meta--tags">
-                  <dt>{locale === "es" ? "Etiquetas" : "Tags"}</dt>
-                  <dd>{blogMeta.tags.join(", ")}</dd>
+        {
+          blogMeta && (
+            <div class="docs-shell__blog-meta">
+              <p class="docs-shell__toc-label">{locale === "es" ? "Artículo" : "Article"}</p>
+              <dl class="docs-shell__blog-meta--info">
+                <div class="docs-shell__blog-meta--date">
+                  <dt>{locale === "es" ? "Publicado" : "Published"}</dt>
+                  <dd>
+                    {blogMeta.date.toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </dd>
                 </div>
-              )}
-            </dl>
-            <p class="docs-shell__toc-label">{locale === "es" ? "Autor" : "Author"}</p>
-            {blogMeta.authors.map((author) => (
-              <div class="docs-shell__blog-meta--author">
-                <img
-                  class="docs-shell__blog-meta--avatar"
-                  src={author.avatar}
-                  alt={`${author.name} avatar`}
-                  loading="lazy"
-                  width="48"
-                  height="48"
-                />
-                <div class="docs-shell__blog-meta--info">
-                  <p class="docs-shell__blog-meta--name">
-                    {author.website ? (
-                      <a href={author.website} target="_blank" rel="noopener noreferrer">{author.name}</a>
-                    ) : (
-                      author.name
-                    )}
-                  </p>
-                  <p class="docs-shell__blog-meta--bio">{author.description}</p>
-                  <div class="docs-shell__blog-meta--links">
-                    {author.github && (
-                      <a href={`https://github.com/${author.github}`} target="_blank" rel="noopener noreferrer" aria-label={`${author.name} on GitHub`}>
-                        GitHub
-                      </a>
-                    )}
-                    {author.linkedin && (
-                      <a href={`https://linkedin.com/in/${author.linkedin}`} target="_blank" rel="noopener noreferrer" aria-label={`${author.name} on LinkedIn`}>
-                        LinkedIn
-                      </a>
-                    )}
+                {blogMeta.tags.length > 0 && (
+                  <div class="docs-shell__blog-meta--tags">
+                    <dt>{locale === "es" ? "Etiquetas" : "Tags"}</dt>
+                    <dd>{blogMeta.tags.join(", ")}</dd>
+                  </div>
+                )}
+              </dl>
+              <p class="docs-shell__toc-label">{locale === "es" ? "Autor" : "Author"}</p>
+              {blogMeta.authors.map((author) => (
+                <div class="docs-shell__blog-meta--author">
+                  <img
+                    class="docs-shell__blog-meta--avatar"
+                    src={author.avatar}
+                    alt={`${author.name} avatar`}
+                    loading="lazy"
+                    width="48"
+                    height="48"
+                  />
+                  <div class="docs-shell__blog-meta--info">
+                    <p class="docs-shell__blog-meta--name">
+                      {author.website ? (
+                        <a href={author.website} target="_blank" rel="noopener noreferrer">
+                          {author.name}
+                        </a>
+                      ) : (
+                        author.name
+                      )}
+                    </p>
+                    <p class="docs-shell__blog-meta--bio">{author.description}</p>
+                    <div class="docs-shell__blog-meta--links">
+                      {author.github && (
+                        <a
+                          href={`https://github.com/${author.github}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${author.name} on GitHub`}
+                        >
+                          GitHub
+                        </a>
+                      )}
+                      {author.linkedin && (
+                        <a
+                          href={`https://linkedin.com/in/${author.linkedin}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${author.name} on LinkedIn`}
+                        >
+                          LinkedIn
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )
+        }
         {
           toc.length > 0 && (
             <nav>

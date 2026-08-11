@@ -24,12 +24,7 @@ El componente Combobox es un envoltorio de receta estilizado alrededor del primi
 ```tsx
 import { StyledCombobox } from "@solidiom/recipes-css"
 
-;<StyledCombobox
-  options={OPTIONS}
-  value={state()}
-  onChange={set}
-  placeholder="Select an option"
-/>
+;<StyledCombobox options={OPTIONS} value={state()} onChange={set} placeholder="Select an option" />
 ```
 
 ## Instalación

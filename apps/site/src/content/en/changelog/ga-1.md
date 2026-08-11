@@ -2,7 +2,21 @@
 contentSchemaVersion: 1
 title: "Solidiom GA — General Availability"
 description: "Solidiom is now GA: 52 primitives, 30 components, 36 blocks, 29 templates, signed registry, CLI with Sigstore verification, WCAG 2.2 AA compliance, bilingual support, and cross-browser certification."
-keywords: [ga, general-availability, release, changelog, primitives, components, blocks, templates, accessibility, CLI, registry, cross-browser]
+keywords:
+  [
+    ga,
+    general-availability,
+    release,
+    changelog,
+    primitives,
+    components,
+    blocks,
+    templates,
+    accessibility,
+    CLI,
+    registry,
+    cross-browser,
+  ]
 locale: en
 maturity: ga
 product: "Solidiom"

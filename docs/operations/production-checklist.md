@@ -22,19 +22,19 @@ This document covers all operational configuration required for a production lau
 
 ### Records
 
-| Record | Type | Value | Proxy | TTL |
-| --- | --- | --- | --- | --- |
-| `solidiom.org` | CNAME | `solidiom.pages.dev` | Yes (proxied) | Auto |
+| Record             | Type  | Value                | Proxy         | TTL  |
+| ------------------ | ----- | -------------------- | ------------- | ---- |
+| `solidiom.org`     | CNAME | `solidiom.pages.dev` | Yes (proxied) | Auto |
 | `www.solidiom.org` | CNAME | `solidiom.pages.dev` | Yes (proxied) | Auto |
 
 ### Verification records
 
 If adding domain verification records (e.g., for search console), add them as TXT records in the Cloudflare DNS panel before enabling the Pages custom domain.
 
-| Record | Type | Value | Notes |
-| --- | --- | --- | --- |
-| `solidiom.org` | TXT | `google-site-verification=...` | Google Search Console |
-| `_dnsauth.solidiom.org` | CNAME | `_xxxx.xxxx.akamaiedge.net` | Cloudflare domain verification (auto-provisioned) |
+| Record                  | Type  | Value                          | Notes                                             |
+| ----------------------- | ----- | ------------------------------ | ------------------------------------------------- |
+| `solidiom.org`          | TXT   | `google-site-verification=...` | Google Search Console                             |
+| `_dnsauth.solidiom.org` | CNAME | `_xxxx.xxxx.akamaiedge.net`    | Cloudflare domain verification (auto-provisioned) |
 
 ### Pre-launch checks
 
@@ -51,13 +51,13 @@ Defined in `apps/site/public/_headers`. Verified via `verify-preview-deployment.
 
 ### Global headers (all routes)
 
-| Header | Value | Purpose |
-| --- | --- | --- |
-| `X-Frame-Options` | `DENY` | Prevent clickjacking |
-| `X-Content-Type-Options` | `nosniff` | Prevent MIME-type sniffing |
-| `Referrer-Policy` | `strict-origin-when-cross-origin` | Limit referrer leakage |
-| `Permissions-Policy` | `camera=(), microphone=(), geolocation=(), browsing-topics=()` | Disable unnecessary browser features |
-| `Content-Security-Policy` | See below | Restrict resource loading |
+| Header                    | Value                                                          | Purpose                              |
+| ------------------------- | -------------------------------------------------------------- | ------------------------------------ |
+| `X-Frame-Options`         | `DENY`                                                         | Prevent clickjacking                 |
+| `X-Content-Type-Options`  | `nosniff`                                                      | Prevent MIME-type sniffing           |
+| `Referrer-Policy`         | `strict-origin-when-cross-origin`                              | Limit referrer leakage               |
+| `Permissions-Policy`      | `camera=(), microphone=(), geolocation=(), browsing-topics=()` | Disable unnecessary browser features |
+| `Content-Security-Policy` | See below                                                      | Restrict resource loading            |
 
 ### Content Security Policy
 
@@ -89,14 +89,14 @@ form-action 'self' https://buttondown.com
 
 Defined in `apps/site/public/_headers`. Asset fingerprinting handled by Astro's build pipeline.
 
-| Asset type | Pattern | Cache-Control | Rationale |
-| --- | --- | --- | --- |
-| Hashed JS/CSS | `/_astro/*` | `public, max-age=31536000, immutable` | Content-hashed filenames guarantee cache safety |
-| Fonts | `/fonts/*` | `public, max-age=31536000, immutable` | Versioned, pinned font files |
-| Pagefind index | `/pagefind/*` | `public, max-age=86400, stale-while-revalidate=604800` | Rebuilt per deploy; stale tolerance for search |
-| HTML pages | `/*` (default) | No explicit directive (Cloudflare edge default) | Purged automatically on new deploy |
-| Favicons | `/favicon.*` | `public, max-age=86400` | Rarely changes, but not immutable |
-| Web manifest | `/manifest.webmanifest` | `public, max-age=86400` | Rarely changes |
+| Asset type     | Pattern                 | Cache-Control                                          | Rationale                                       |
+| -------------- | ----------------------- | ------------------------------------------------------ | ----------------------------------------------- |
+| Hashed JS/CSS  | `/_astro/*`             | `public, max-age=31536000, immutable`                  | Content-hashed filenames guarantee cache safety |
+| Fonts          | `/fonts/*`              | `public, max-age=31536000, immutable`                  | Versioned, pinned font files                    |
+| Pagefind index | `/pagefind/*`           | `public, max-age=86400, stale-while-revalidate=604800` | Rebuilt per deploy; stale tolerance for search  |
+| HTML pages     | `/*` (default)          | No explicit directive (Cloudflare edge default)        | Purged automatically on new deploy              |
+| Favicons       | `/favicon.*`            | `public, max-age=86400`                                | Rarely changes, but not immutable               |
+| Web manifest   | `/manifest.webmanifest` | `public, max-age=86400`                                | Rarely changes                                  |
 
 ### Cache behavior notes
 
@@ -117,11 +117,11 @@ Defined in `apps/site/public/_headers`. Asset fingerprinting handled by Astro's 
 
 ### Error tracking
 
-| Tool | Purpose | Configuration |
-| --- | --- | --- |
-| Cloudflare Analytics | Traffic, bandwidth, error rates | Automatic with proxied DNS |
-| PostHog | Client-side error capture, user analytics | `POSTHOG_API_KEY` / `POSTHOG_HOST` env vars |
-| Browser DevTools | CSP violations, console errors | Manual pre-launch audit |
+| Tool                 | Purpose                                   | Configuration                               |
+| -------------------- | ----------------------------------------- | ------------------------------------------- |
+| Cloudflare Analytics | Traffic, bandwidth, error rates           | Automatic with proxied DNS                  |
+| PostHog              | Client-side error capture, user analytics | `POSTHOG_API_KEY` / `POSTHOG_HOST` env vars |
+| Browser DevTools     | CSP violations, console errors            | Manual pre-launch audit                     |
 
 ### Uptime monitoring
 
@@ -131,13 +131,13 @@ Defined in `apps/site/public/_headers`. Asset fingerprinting handled by Astro's 
 
 ### Performance budgets
 
-| Metric | Budget | Enforcement |
-| --- | --- | --- |
-| LCP | < 2.5s | Lighthouse CI (advisory) |
-| CLS | < 0.1 | Lighthouse CI (advisory) |
-| INP | < 200ms | Lighthouse CI (advisory) |
+| Metric               | Budget            | Enforcement                              |
+| -------------------- | ----------------- | ---------------------------------------- |
+| LCP                  | < 2.5s            | Lighthouse CI (advisory)                 |
+| CLS                  | < 0.1             | Lighthouse CI (advisory)                 |
+| INP                  | < 200ms           | Lighthouse CI (advisory)                 |
 | JS payload per route | Per-route budgets | `budget-report:enforce` script (CI gate) |
-| Total build output | Tracked | `budget-report` script |
+| Total build output   | Tracked           | `budget-report` script                   |
 
 Run budgets locally: `pnpm --filter @solidiom/site budget-report:enforce`
 

@@ -8,14 +8,15 @@ export { PanelGroup, Panel, Handle }
 
 const BASE_CLASS = "solidiom-resizable-panels"
 
-export interface StyledResizablePanelsProps
-  extends Omit<Parameters<typeof PanelGroup>[0], "class"> {
+export interface StyledResizablePanelsProps extends Omit<
+  Parameters<typeof PanelGroup>[0],
+  "class"
+> {
   class?: string
 }
 
 export function StyledResizablePanels(props: StyledResizablePanelsProps) {
-  const className = () =>
-    [BASE_CLASS, props.class].filter(Boolean).join(" ")
+  const className = () => [BASE_CLASS, props.class].filter(Boolean).join(" ")
 
   return <PanelGroup {...props} class={className()} />
 }

@@ -28,7 +28,10 @@ export function SearchResults(props: SearchResultsProps): JSX.Element {
   const currentError = () => props.error || localError()
 
   return (
-    <div class={["solidiom-block-search-results", props.class].filter(Boolean).join(" ")} data-state={state()}>
+    <div
+      class={["solidiom-block-search-results", props.class].filter(Boolean).join(" ")}
+      data-state={state()}
+    >
       <Show when={state() === "restricted"}>
         <div class="solidiom-block-search-results__restricted" role="alert">
           <p>{props.restrictedReason || "This feature is currently restricted."}</p>
@@ -49,9 +52,7 @@ export function SearchResults(props: SearchResultsProps): JSX.Element {
       </Show>
 
       <Show when={state() !== "restricted" && state() !== "loading"}>
-        <div class="solidiom-block-search-results__content">
-          {props.children}
-        </div>
+        <div class="solidiom-block-search-results__content">{props.children}</div>
       </Show>
     </div>
   )
