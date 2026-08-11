@@ -1,0 +1,46 @@
+name: "Setup workspace"
+description: "Install pnpm/node, restore module cache, and install dependencies. Must be used AFTER actions/checkout."
+
+inputs:
+  node-version:
+    description: "Node.js version to install"
+    required: false
+    default: "24"
+  install:
+    description: "Whether to run pnpm install (set to 'false' to skip)"
+    required: false
+    default: "true"
+  frozen-lockfile:
+    description: "Use --frozen-lockfile (set to 'false' for non-frozen installs)"
+    required: false
+    default: "true"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: pnpm/action-setup@v6
+
+    - uses: actions/setup-node@v5
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: pnpm
+
+    - uses: actions/cache/restore@v5
+      with:
+        path: |
+          node_modules
+          packages/*/node_modules
+          apps/*/node_modules
+          tests/*/node_modules
+          tools/*/node_modules
+        key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+
+    - name: Install dependencies
+      if: inputs.install == 'true'
+      shell: bash
+      run: |
+        if [ "${{ inputs.frozen-lockfile }}" = "true" ]; then
+          pnpm install --frozen-lockfile
+        else
+          pnpm install --no-frozen-lockfile
+        fi

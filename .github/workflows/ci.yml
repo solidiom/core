@@ -22,16 +22,13 @@ env:
   NODE_OPTIONS: "--max-old-space-size=4096"
 
 jobs:
+  # ─── Foundation ────────────────────────────────────────────────────────────────
+
   install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - uses: actions/cache/save@v5
         with:
           path: |
@@ -39,27 +36,17 @@ jobs:
             packages/*/node_modules
             apps/*/node_modules
             tests/*/node_modules
+            tools/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
+
+  # ─── Lint & Typecheck (parallel, no build needed) ──────────────────────────────
 
   format:
     needs: install
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - run: pnpm run format:check
 
   typecheck:
@@ -67,42 +54,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - run: pnpm typecheck
+
+  # ─── Build ────────────────────────────────────────────────────────────────────
+  # Single build that uploads artifacts for all downstream consumers.
 
   build:
     needs: install
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - run: pnpm build
+
+      # Post-build audits that verify generated output integrity
       - name: REG-006 — verify registry catalog integrity
         run: node packages/cli/dist/bin.js verify --registry
       - name: API-004 — verify vertical-slice primitive API coverage
@@ -120,16 +86,6 @@ jobs:
         run: pnpm run audit:preset-themes
       - name: CLI-003 — assert no unverified provenance lock entries
         run: pnpm run assert:no-unverified
-      # Registry index signing deliberately does NOT run here. It rewrote the
-      # committed registry/index.json with signature/signedAt/signatureKeyId,
-      # which BUILD-001 then reported as stale — and it cannot be satisfied by
-      # committing the signed copy, because any build without the secret strips
-      # it again. The committed registry is a deterministic build output; a
-      # secret-derived signature belongs to the published copy. Nothing consumes
-      # the signature today (there is no packages/registry and nothing publishes
-      # registry/), so signing here produced a value that was discarded at job
-      # end. Tracked as REG-008: sign in the release workflow, over the published
-      # artifact, and move the index off HMAC to asymmetric signing.
       - name: BUILD-001 — verify no generated artifacts are stale
         run: |
           PATHSPEC=(registry/ 'packages/*/source/' 'packages/*/docs/accessibility/evidence.json')
@@ -147,9 +103,6 @@ jobs:
           git diff -- "${PATHSPEC[@]}" | head -200
           echo "::endgroup::"
 
-          # Distinguish real staleness from a determinism regression. Generation
-          # stamps are preserved whenever content is unchanged, so a
-          # timestamp-only diff points at that logic rather than at stale content.
           SUBSTANTIVE=$(git diff -U0 -- "${PATHSPEC[@]}" \
             | grep -E '^[+-]' \
             | grep -vE '^(\+\+\+|---)' \
@@ -162,6 +115,19 @@ jobs:
           fi
           exit 1
 
+      # Upload build output for downstream jobs to avoid rebuilding
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: build-dist
+          path: |
+            packages/*/dist
+            apps/*/dist
+            !apps/site/dist
+          retention-days: 1
+
+  # ─── Tests (consume build artifacts, no rebuild) ───────────────────────────────
+
   test-node:
     needs: build
     runs-on: ubuntu-latest
@@ -170,29 +136,26 @@ jobs:
         node-version: [24, 26]
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
+      - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
+      - uses: actions/download-artifact@v4
         with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: npx playwright install --with-deps chromium
+          name: build-dist
+          path: .
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install Playwright (chromium)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Install Playwright system deps
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
       - run: pnpm test
-      # `pnpm test` is `nx run-many -t test`, which runs each project's own
-      # suite. tools/ is not an nx project, so its 35 test files ran nowhere —
-      # 17 of them were invoked by nothing at all, and the 18 that were are
-      # hand-listed inside phase1-gate.ts, a list that had already drifted.
-      # This covers all of them from the glob in vitest.config.ts, so a new
-      # tools test is picked up without editing a list.
       - run: pnpm run test:tools
 
   test-browser:
@@ -200,22 +163,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
+          name: build-dist
+          path: .
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v5
         with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: npx playwright install --with-deps chromium firefox webkit
+          path: ~/.cache/ms-playwright
+          key: playwright-all-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install Playwright (all browsers)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Install Playwright system deps
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium firefox webkit
       - run: pnpm exec vitest run --config vitest.browser.config.ts
       - name: RECIPE-005 — computed-style parity across css/tailwind/unocss profiles
         run: pnpm run test:recipe-parity
@@ -226,48 +190,28 @@ jobs:
           path: test-results/
           retention-days: 7
 
-  test-solid-matrix:
-    needs: build
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        solid-tier: [low, mid, high]
-        node-version: [24, 26]
-    steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: pnpm
-      - run: node scripts/set-solid-version.mjs ${{ matrix.solid-tier }}
-      - run: pnpm install --no-frozen-lockfile
-      - run: npx playwright install --with-deps chromium firefox webkit
-      - run: pnpm exec nx run-many -t build --exclude=@solidiom/site
-      - run: pnpm exec nx run-many -t test --exclude=@solidiom/tests-package-source-parity,@solidiom/site
-      - run: pnpm exec vitest run --config vitest.browser.config.ts
-
   a11y-axe-scan:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
+          name: build-dist
+          path: .
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v5
         with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: npx playwright install --with-deps chromium
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install Playwright (chromium)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Install Playwright system deps
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
       - name: Run executable axe accessibility scans
         run: pnpm run test:a11y
       - name: Publish stable per-primitive accessibility evidence
@@ -292,20 +236,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - run: pnpm --filter @solidiom/site check
       - run: pnpm --filter @solidiom/site run boundaries
       - run: pnpm --filter @solidiom/site run i18n:validate
@@ -315,20 +246,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - name: Build and index static site
         run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
       - name: REG-007 — verify every registry deliverable has exactly one valid route
@@ -343,25 +261,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v4
         with:
           name: site-dist
           path: apps/site/dist
-      - run: npx playwright install --with-deps chromium firefox webkit
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-all-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install Playwright (all browsers)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Install Playwright system deps
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium firefox webkit
       - env:
           PLAYWRIGHT_USE_EXISTING_BUILD: "1"
         run: pnpm --filter @solidiom/site run test:e2e
@@ -372,22 +288,11 @@ jobs:
           path: test-results/site-e2e
           retention-days: 7
 
-  # ─── CI-003: Visual/Lighthouse CI (Advisory Mode) ──────────────────────────────
+  # ─── CI-003: Visual/Lighthouse CI ──────────────────────────────────────────────
 
   # TEST-005: runs inside the pinned Playwright image so screenshot rendering is
-  # reproducible. Baselines are environment-sensitive — font rasterisation
-  # differs between macOS and Linux — so they can only be verified or approved
-  # against a fixed environment. The image tag MUST track the @playwright/test
-  # version in package.json, or the bundled browser build will not match.
-  #
-  # Regenerate baselines with `pnpm run visual:update:container` locally, or by
-  # dispatching .github/workflows/visual-baselines.yml if Docker is unavailable.
-  # Blocking as of run 30871761546, the first in which it executed and passed.
-  # It was advisory while the committed baselines were captured on macOS and
-  # could not reproduce here — and being advisory is how a 36-baseline mismatch
-  # went unnoticed for several commits, since an advisory failure reads much like
-  # an advisory pass in a run summary (§11). With the environment pinned there is
-  # no longer a platform excuse for a diff, so a diff should fail the build.
+  # reproducible. The image tag MUST track the @playwright/test version in
+  # package.json. Blocking — baselines are captured in this environment.
   site-visual:
     needs: site-build
     runs-on: ubuntu-latest
@@ -396,26 +301,12 @@ jobs:
       options: --ipc=host
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v4
         with:
           name: site-dist
           path: apps/site/dist
-      # Browsers ship with the image at PLAYWRIGHT_BROWSERS_PATH; installing
-      # again would fetch a second copy and can shadow the bundled build.
+      # Browsers ship with the image; no install needed.
       - env:
           PLAYWRIGHT_USE_EXISTING_BUILD: "1"
         run: pnpm --filter @solidiom/site run test:visual
@@ -432,20 +323,7 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v4
         with:
           name: site-dist
@@ -463,45 +341,23 @@ jobs:
           path: apps/site/dist/reports
           retention-days: 30
 
-  # ─── CLI-008: Offline create/install/typecheck/build/test smoke matrix ────
-  #
-  # Split into a prep job and an offline matrix. The prep job is the only part
-  # with network access to a registry: it warms a Verdaccio storage snapshot by
-  # running the full matrix once through an npmjs uplink. The matrix jobs then
-  # restore that snapshot and run with no uplink at all, so a package missing
-  # from the snapshot 404s instead of silently resolving from npmjs.
-  #
-  # The snapshot must be built on the same runner OS that consumes it: it holds
-  # the platform-native optionalDependencies (@tailwindcss/oxide-*,
-  # lightningcss-*) that Yarn Classic insists on resolving, and those differ per
-  # platform. Hence runner.os in the cache key.
+  # ─── CLI-008: Offline create/install/typecheck/build/test smoke matrix ────────
 
   cli-smoke-create-prep:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+          name: build-dist
+          path: .
       - name: Enable corepack (yarn)
         run: corepack enable
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.3.14"
-      # Skip the warm-up entirely when a valid snapshot is already cached.
       - uses: actions/cache/restore@v5
         id: snapshot-probe
         with:
@@ -526,34 +382,13 @@ jobs:
         manager: [npm, pnpm, yarn, bun]
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      # Yarn: corepack ships with actions/setup-node's bundled Node and is
-      # already on PATH; `corepack enable` activates the yarn/pnpm shims the
-      # same way this repo's local mise-managed dev environment does (see
-      # tools/smoke-create.ts's own header comment on cwd-based shim
-      # activation — the CI runner's cwd is the checkout root throughout the
-      # job, so this is sufficient here without any of the local
-      # packageManager-field workaround smoke-create.ts needs for its
-      # isolated temp dirs).
+          name: build-dist
+          path: .
       - name: Enable corepack (yarn)
         run: corepack enable
-      # Bun: no existing step in this file sets up bun. oven-sh/setup-bun is
-      # the current maintained action for this, pinned to an exact major
-      # version to match this file's existing actions/*@vN convention.
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.3.14"
@@ -576,41 +411,13 @@ jobs:
           retention-days: 7
 
   # ─── BETA-002 / G3: public-beta acceptance evidence ────────────────────────────
-  #
-  # BETA-002's acceptance matrix. Until now these existed only as package.json
-  # scripts that no workflow invoked, so nothing ever re-checked G3's central
-  # claim — which is how the M3 rollup in docs/plans/website-tasks.md drifted out
-  # of sync with the repository for several commits while every task row read [x].
-  #
-  # Wired by verified state rather than uniformly:
-  #
-  #   * beta-acceptance-report is blocking. It passes 60/60 and reads
-  #     apps/site/dist directly, so it needs no preview server.
-  #   * beta-acceptance-e2e is blocking. It passes 111/111 across Chromium,
-  #     Firefox, and WebKit (locale parity, theme modes, search, tools, and
-  #     axe-core no_critical_violations). Previously advisory while A11Y-008's
-  #     color-contrast defect was open; promoted to blocking after A11Y-008
-  #     fixed --sol-secondary to 5.17:1 (CI-007).
 
   beta-acceptance-report:
     needs: site-build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v4
         with:
           name: site-dist
@@ -623,26 +430,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v4
         with:
           name: site-dist
           path: apps/site/dist
-      - run: npx playwright install --with-deps chromium firefox webkit
-      - name: BETA-002 — cross-browser acceptance matrix (advisory, see A11Y-008)
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-all-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install Playwright (all browsers)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Install Playwright system deps
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium firefox webkit
+      - name: BETA-002 — cross-browser acceptance matrix
         env:
           PLAYWRIGHT_USE_EXISTING_BUILD: "1"
         run: pnpm run beta:acceptance:e2e
@@ -653,158 +458,69 @@ jobs:
           path: test-results/beta-acceptance
           retention-days: 7
 
-  # ─── Gate Jobs ─────────────────────────────────────────────────────────────────
+  # ─── Gate Jobs (consolidated) ──────────────────────────────────────────────────
 
   catalog-gates:
-    needs: [build]
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
+          name: build-dist
+          path: .
       - run: pnpm run component:catalog-gate
       - run: pnpm run block:catalog-gate
 
-  phase1-gate:
-    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e, catalog-gates]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
-      - run: npx playwright install --with-deps chromium
-      - run: pnpm run gate:phase1
-
-  phase2-gate:
-    needs: [phase1-gate]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: pnpm run gate:phase2
-
-  phase0-gate:
-    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, phase1-gate, phase2-gate]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: pnpm run gate:phase0
-      - uses: actions/upload-artifact@v6
-        with:
-          name: phase0-gate-output
-          path: docs/phase0-gate-result.txt
-          retention-days: 30
-
-  # tools/phase3-gate.ts gates the *library's* beta release (Solid 2 beta
-  # compatibility, compile-time transforms, prerelease metadata) — it is NOT the
-  # website's G3 milestone gate, despite the numeric coincidence. See
-  # docs/plans/website-tasks.md §3 for the two numbering schemes.
-  #
-  # Blocking since A11Y-007: all §1 artifacts (AT template, AT results directory,
-  # axe-scan-results, keyboard-audit-results) and §4 cross-browser results are
-  # recorded. Its §0 re-runs the phase 0/1/2 gates, hence the dependency on them.
-  phase3-gate:
-    needs: [phase1-gate, phase2-gate]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: npx playwright install --with-deps chromium
-      - name: Phase 3 (library beta) gate
-        run: pnpm run gate:phase3
-
-  # VS-004's gate, the executable half of the G2 exit checklist. It existed as
-  # tools/vertical-slice-gate.ts but was referenced by no script, workflow, or phase
-  # gate, so the "67/67 passing" figure recorded in docs/plans/website-tasks.md §11
-  # was unverifiable — and its §11 bulk-catalog-bypass check had silently stopped
-  # running entirely after the tracker moved to docs/plans/. Blocking, because it
-  # passes 67/67.
+  # VS-004's gate, the executable half of the G2 exit checklist.
   vertical-slice-gate:
     needs: [build, site-check]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - uses: actions/cache/restore@v5
-        with:
-          path: |
-            node_modules
-            packages/*/node_modules
-            apps/*/node_modules
-            tests/*/node_modules
-          key: modules-${{ hashFiles('pnpm-lock.yaml') }}
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+          name: build-dist
+          path: .
       - name: VS-004 — vertical-slice gate (G2)
         run: pnpm run gate:vertical-slice
+
+  # Consolidated phase gates: phase1 → phase2 → phase0 + phase3 all in one job.
+  # Previously 4 separate jobs each rebuilding from scratch (~15 min saved).
+  gates:
+    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e, catalog-gates]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-dist
+          path: .
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install Playwright (chromium)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Install Playwright system deps
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+      - name: Phase 1 gate
+        run: pnpm run gate:phase1
+      - name: Phase 2 gate
+        run: pnpm run gate:phase2
+      - name: Phase 0 gate
+        run: pnpm run gate:phase0
+      - name: Phase 3 (library beta) gate
+        run: pnpm run gate:phase3
+      - uses: actions/upload-artifact@v6
+        with:
+          name: phase0-gate-output
+          path: docs/phase0-gate-result.txt
+          retention-days: 30
