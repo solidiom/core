@@ -21,16 +21,16 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/navigation-menu.tsx": "3487d2727fff78747d5ad68b13a8067b4b481811dc78ebc9c3a47b8e1b75a8d5"
+        "src/recipes/navigation-menu.tsx": "68bb8580508528a43875418a5994ef8ea0afd2eb838c28da8debba011e785720"
       },
       "tailwind": {
-        "src/recipes/navigation-menu.tsx": "30beb174f3f175f8954333e021438c51c8a9dafcff8a50ac2b659ee9fbb5a396"
+        "src/recipes/navigation-menu.tsx": "507a9d26005373f888caa616654f7422ee4297e06b1de817ac58aea54b18b47e"
       },
       "unocss": {
-        "src/recipes/navigation-menu.tsx": "73e4e1223ef8c30bdabf64c76d192bc7949fec0145f9e691773483b634161fa8"
+        "src/recipes/navigation-menu.tsx": "5a70a18f69ae5704bd122f5bb766e8cfcf2200f28b1343ede18c0a66422c920e"
       }
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T17:44:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/navigation-menu"
   ],
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T17:44:59.000Z"
 }

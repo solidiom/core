@@ -21,16 +21,16 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/command-palette.tsx": "0cfb07b918007ec0ffb4a17b2e3b26ab34953c8303897e79bac90293d621a7bb"
+        "src/recipes/command-palette.tsx": "ef1817fcacb22cc422dc57707900b903e5c8957a373a4312148f4ec7e03c2d67"
       },
       "tailwind": {
-        "src/recipes/command-palette.tsx": "1df1c6812eecb322944d542aaef42b12376252e50935d1c4ba22089d0ce270c3"
+        "src/recipes/command-palette.tsx": "8371e1da64e4da72637979d9a0231f94a769630bee519f7df57ecf0a184a2b70"
       },
       "unocss": {
-        "src/recipes/command-palette.tsx": "faa3d37cf398147120806eba4ede7653bb5fed294a1b2edd3b9b428b215fa850"
+        "src/recipes/command-palette.tsx": "06f63b96dd740f5fd318fa0b866e123f1d96663c5891e3bbe0fdb11678e02259"
       }
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T17:44:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/command-palette"
   ],
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T17:44:59.000Z"
 }

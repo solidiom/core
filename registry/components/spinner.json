@@ -21,16 +21,16 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/spinner.tsx": "64dd9662c30bed940cc0dadf831c5b98e0484d8d6f458379f20b93bafbdd2def"
+        "src/recipes/spinner.tsx": "41a885a82288d0bab883fc18d6a065f2e977e140d16dd6d8b65023760267435b"
       },
       "tailwind": {
-        "src/recipes/spinner.tsx": "c4009bc901053688e6d59770104d5404416030f556948aefb9511032aaac8daa"
+        "src/recipes/spinner.tsx": "8946a32da8010104dc1e7e86aff46043f0d4992a9b6991e016edd9fe43ed7dbd"
       },
       "unocss": {
-        "src/recipes/spinner.tsx": "ace3bcb6acda3020393077fd2502234ca642856e5915844b9e335d30fe417eeb"
+        "src/recipes/spinner.tsx": "81b873c204c7cdb52adcc3b18211c07c119c91b9eaaf5aa696abef1d67e4af0d"
       }
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T17:44:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/spinner"
   ],
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T17:44:59.000Z"
 }

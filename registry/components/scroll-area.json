@@ -21,16 +21,16 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/scroll-area.tsx": "beba7a47a5b1c49de1b324beeab450b1e8676d3315b175464c1c1bef71f838a7"
+        "src/recipes/scroll-area.tsx": "c21c08544fc556c4b16b4d71e54b99cd1208e5d9d82ee699713dd6bfe520c139"
       },
       "tailwind": {
-        "src/recipes/scroll-area.tsx": "b5521af2db11348fdf404b84f46d552463856a538b80dfc02a16780180891f90"
+        "src/recipes/scroll-area.tsx": "d31b9fc0c877f12bae2dd5eb7746362f55d3bdf1cfefb2dd21fdb5242b4640e9"
       },
       "unocss": {
-        "src/recipes/scroll-area.tsx": "74e1fbed50ff2ba20ea4050ef3e802c9c0e9ea621d165e47d64354eb988a7621"
+        "src/recipes/scroll-area.tsx": "189ad334b7b7ec3df1f09fe548a745997ec4d47e226a3a33500bd747bddf2878"
       }
     },
-    "lastGenerated": "2026-08-08T03:04:45.000Z"
+    "lastGenerated": "2026-08-11T17:44:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/scroll-area"
   ],
-  "lastUpdated": "2026-08-08T03:04:45.000Z"
+  "lastUpdated": "2026-08-11T17:44:59.000Z"
 }
