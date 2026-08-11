@@ -58,7 +58,7 @@ export function Reports(): JSX.Element {
         ))}
       </div>
 
-      <Tabs.Root value={tab()} onChange={setTab} class="mt-8">
+      <Tabs.Root value={tab} onValueChange={setTab} class="mt-8">
         <div class="border-b border-gray-200">
           <Tabs.List class="flex gap-4">
             <Tabs.Trigger value="overview" class="cursor-pointer border-b-2 px-3 py-2 text-sm font-medium transition-colors data-[selected]:border-indigo-600 data-[selected]:text-indigo-600 border-transparent text-gray-500">

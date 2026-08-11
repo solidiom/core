@@ -51,7 +51,7 @@ export function Evidence(): JSX.Element {
           <h1 class="text-2xl font-bold text-gray-900">Evidence Collection</h1>
           <p class="mt-1 text-sm text-gray-500">Collect, organize, and review audit evidence for compliance requirements.</p>
         </div>
-        <Dialog.Root open={open()} onOpenChange={setOpen}>
+        <Dialog.Root open={open} onOpenChange={setOpen}>
           <Dialog.Trigger>
             <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
               Upload Evidence

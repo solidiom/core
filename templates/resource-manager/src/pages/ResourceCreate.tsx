@@ -256,21 +256,21 @@ export function ResourceCreate(): JSX.Element {
               <p class="text-sm text-gray-500">Name your resource and select a deployment region.</p>
 
               <Field.Root>
-                <Input.Label class="block text-sm font-medium text-gray-700">Name</Input.Label>
-                <Input.Input
+                <label class="block text-sm font-medium text-gray-700">Name</label>
+                <Input.Root
                   type="text"
                   placeholder="my-resource"
                   class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                   value={name()}
                   onInput={(e) => setName(e.currentTarget.value)}
                 />
-                <Field.Message class="mt-1 text-xs text-gray-500">
+                <Field.Description class="mt-1 text-xs text-gray-500">
                   A unique identifier for this resource.
-                </Field.Message>
+                </Field.Description>
               </Field.Root>
 
               <Field.Root>
-                <Input.Label class="block text-sm font-medium text-gray-700">Region</Input.Label>
+                <label class="block text-sm font-medium text-gray-700">Region</label>
                 <select
                   class="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                   value={region()}
@@ -281,9 +281,9 @@ export function ResourceCreate(): JSX.Element {
                     <option value={r}>{r}</option>
                   ))}
                 </select>
-                <Field.Message class="mt-1 text-xs text-gray-500">
+                <Field.Description class="mt-1 text-xs text-gray-500">
                   The geographic region where the resource will be deployed.
-                </Field.Message>
+                </Field.Description>
               </Field.Root>
 
               <div class="rounded-md bg-gray-50 p-4">
@@ -305,11 +305,11 @@ export function ResourceCreate(): JSX.Element {
               <div class="space-y-4">
                 {configFields().map((field) => (
                   <Field.Root>
-                    <Input.Label class="block text-sm font-medium text-gray-700">
+                    <label class="block text-sm font-medium text-gray-700">
                       {field.label}
                       {field.required && <span class="ml-1 text-red-500">*</span>}
-                    </Input.Label>
-                    <Input.Input
+                    </label>
+                    <Input.Root
                       type="text"
                       placeholder={field.placeholder}
                       class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
@@ -317,7 +317,7 @@ export function ResourceCreate(): JSX.Element {
                       onInput={(e) => updateConfig(field.key, e.currentTarget.value)}
                     />
                     {!field.required && (
-                      <Field.Message class="mt-1 text-xs text-gray-400">Optional</Field.Message>
+                      <Field.Description class="mt-1 text-xs text-gray-400">Optional</Field.Description>
                     )}
                   </Field.Root>
                 ))}

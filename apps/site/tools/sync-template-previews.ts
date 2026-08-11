@@ -6,6 +6,7 @@ import {
   mkdirSync,
   readFileSync,
   writeFileSync,
+  rmSync,
 } from "node:fs"
 import { resolve, join, dirname } from "node:path"
 import { execSync } from "node:child_process"
@@ -81,8 +82,21 @@ function fixAssetPaths(html: string): string {
   return result
 }
 
-function syncDir(src: string, dest: string): void {
+function syncDir(src: string, dest: string, preserve?: Set<string>): void {
   const entries = readdirSync(src, { withFileTypes: true })
+  const srcNames = new Set(entries.map((e) => e.name))
+
+  // Remove stale files/directories in dest that no longer exist in src.
+  if (existsSync(dest)) {
+    const destEntries = readdirSync(dest, { withFileTypes: true })
+    for (const destEntry of destEntries) {
+      if (!srcNames.has(destEntry.name) && !preserve?.has(destEntry.name)) {
+        const stalePath = join(dest, destEntry.name)
+        rmSync(stalePath, { recursive: true, force: true })
+      }
+    }
+  }
+
   for (const entry of entries) {
     const srcPath = join(src, entry.name)
     const destPath = join(dest, entry.name)
@@ -115,6 +129,54 @@ function syncDir(src: string, dest: string): void {
   }
 }
 
+/**
+ * Generates a static index.html for SSR templates whose build output is
+ * structured as client/ + server/ without a root index.html. The generated
+ * file renders a static preview with just the CSS (no client JS) since the
+ * client bundle is a hydration entry that cannot render without a server.
+ * The HTML mirrors what the server would render for the "/" route.
+ */
+function generateSsrFallbackHtml(clientAssetsDir: string, name: string): string {
+  const assets = readdirSync(clientAssetsDir)
+  const cssEntry = assets.find((f) => f.startsWith("index-") && f.endsWith(".css"))
+
+  const linkTag = cssEntry
+    ? `    <link rel="stylesheet" crossorigin href="./client/assets/${cssEntry}">\n`
+    : ""
+
+  return (
+    `<!doctype html>\n` +
+    `<html lang="en">\n` +
+    `  <head>\n` +
+    `    <meta charset="utf-8" />\n` +
+    `    <meta name="viewport" content="width=device-width, initial-scale=1" />\n` +
+    `    <title>${name}</title>\n` +
+    linkTag +
+    `  </head>\n` +
+    `  <body>\n` +
+    `    <div class="min-h-screen">\n` +
+    `      <header class="flex items-center justify-between border-b p-4">\n` +
+    `        <h1 class="text-lg font-semibold">Solidiom Starter (SSR)</h1>\n` +
+    `        <nav class="flex gap-4">\n` +
+    `          <a href="/">Home</a>\n` +
+    `          <a href="/about">About</a>\n` +
+    `        </nav>\n` +
+    `      </header>\n` +
+    `      <main class="p-4">\n` +
+    `        <section>\n` +
+    `          <h2 class="text-xl font-medium">Welcome</h2>\n` +
+    `          <p class="mt-2 text-sm text-neutral-600">\n` +
+    `            This is a Solidiom starter scaffolded with TanStack Start (Solid), with server-side\n` +
+    `            rendering enabled. Edit <code>src/routes/index.tsx</code> to get started.\n` +
+    `          </p>\n` +
+    `        </section>\n` +
+    `      </main>\n` +
+    `    </div>\n` +
+    `  </body>\n` +
+    `</html>\n`
+  )
+}
+
 for (const name of templateNames) {
   const srcDist = join(templatesDir, name, "dist")
   if (!existsSync(srcDist) || !statSync(srcDist).isDirectory()) {
@@ -123,7 +185,34 @@ for (const name of templateNames) {
 
   const destBase = join(publicDir, name)
   mkdirSync(destBase, { recursive: true })
-  syncDir(srcDist, destBase)
+
+  // Determine if this is an SSR template (no source index.html but has client/ assets).
+  // If so, we'll generate the index.html after syncing — tell syncDir not to remove it.
+  const srcIndex = join(srcDist, "index.html")
+  const clientAssetsDir = join(srcDist, "client", "assets")
+  const isSsr = !existsSync(srcIndex) && existsSync(clientAssetsDir)
+
+  syncDir(srcDist, destBase, isSsr ? new Set(["index.html"]) : undefined)
+
+  // SSR templates (e.g. TanStack Start) produce client/ + server/ but no
+  // root index.html. Generate a static fallback so the preview iframe works.
+  if (isSsr) {
+    const destIndex = join(destBase, "index.html")
+    const fallbackHtml = generateSsrFallbackHtml(clientAssetsDir, name)
+    const fallbackBuf = Buffer.from(fallbackHtml, "utf8")
+    if (existsSync(destIndex)) {
+      const existing = readFileSync(destIndex)
+      if (existing.equals(fallbackBuf)) {
+        skipped++
+      } else {
+        writeFileSync(destIndex, fallbackBuf)
+        copied++
+      }
+    } else {
+      writeFileSync(destIndex, fallbackBuf)
+      copied++
+    }
+  }
 }
 
 console.log(`Synced template previews: ${copied} copied, ${skipped} skipped`)
