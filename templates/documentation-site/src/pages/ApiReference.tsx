@@ -78,7 +78,7 @@ export function ApiReference(): JSX.Element {
         <p class="mt-1 text-sm text-gray-500">Auto-generated API reference with type signatures and examples.</p>
       </div>
 
-      <Tabs.Root value={activeTab()} class="mt-8">
+      <Tabs.Root value={activeTab} class="mt-8">
         <div class="border-b border-gray-200">
           <Tabs.List class="flex items-center gap-1 -mb-px">
             <Tabs.Trigger

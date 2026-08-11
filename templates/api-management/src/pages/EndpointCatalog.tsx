@@ -158,7 +158,7 @@ export function EndpointCatalog(): JSX.Element {
         </Tabs.Root>
       </div>
 
-      <Dialog.Root open={showCreateDialog()} onOpenChange={setShowCreateDialog}>
+      <Dialog.Root open={showCreateDialog} onOpenChange={setShowCreateDialog}>
         <Dialog.Portal>
           <Dialog.Backdrop class="fixed inset-0 bg-black/40" />
           <Dialog.Content class="fixed left-1/2 top-1/2 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-xl">

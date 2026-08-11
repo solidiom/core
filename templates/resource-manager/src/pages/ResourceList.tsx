@@ -90,15 +90,13 @@ export function ResourceList(): JSX.Element {
 
       <Card.Root class="rounded-lg border border-gray-200 bg-white shadow-sm">
         <div class="flex items-center gap-4 border-b border-gray-200 px-6 py-4">
-          <Input.Root class="flex-1">
-            <Input.Input
+          <Input.Root
               type="text"
               placeholder="Search resources..."
-              class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              class="flex-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
               value={search()}
               onInput={(e) => { setSearch(e.currentTarget.value); setPage(1); }}
-            />
-          </Input.Root>
+          />
           <select
             class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             value={typeFilter()}
@@ -140,38 +138,34 @@ export function ResourceList(): JSX.Element {
             <span class="text-sm text-gray-500">
               Page {page()} of {totalPages()}
             </span>
-            <Pagination.Root
-              totalPages={totalPages()}
-              page={page()}
-              onPageChange={(p) => setPage(p)}
-            >
-              <Pagination.List class="flex items-center gap-1">
-                <Pagination.PrevButton
+            <Pagination.Root class="flex items-center gap-1">
+                <Pagination.PreviousButton
                   disabled={page() === 1}
+                  onClick={() => setPage(page() - 1)}
                   class="inline-flex items-center rounded-md border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
                 >
                   Previous
-                </Pagination.PrevButton>
+                </Pagination.PreviousButton>
                 {Array.from({ length: totalPages() }, (_, i) => i + 1).map((p) => (
-                  <Pagination.PageButton
-                    page={p}
-                    current={p === page()}
+                  <button
+                    onClick={() => setPage(p)}
                     class={`inline-flex items-center justify-center rounded-md px-2 py-1 text-sm font-medium ${
                       p === page()
                         ? "bg-indigo-600 text-white"
                         : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
                     }`}
+                    aria-current={p === page() ? "page" : undefined}
                   >
                     {p}
-                  </Pagination.PageButton>
+                  </button>
                 ))}
                 <Pagination.NextButton
                   disabled={page() === totalPages()}
+                  onClick={() => setPage(page() + 1)}
                   class="inline-flex items-center rounded-md border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
                 >
                   Next
                 </Pagination.NextButton>
-              </Pagination.List>
             </Pagination.Root>
           </div>
         )}

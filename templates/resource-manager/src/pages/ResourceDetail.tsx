@@ -261,14 +261,12 @@ export function ResourceDetail(): JSX.Element {
                     <td class="whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">{entry.key}</td>
                     <td class="px-6 py-3 text-sm text-gray-500">
                       {editing() && entry.editable ? (
-                        <Input.Root>
-                          <Input.Input
+                        <Input.Root
                             type="text"
                             class="w-full rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                             value={configValues()[entry.key]}
                             onInput={(e) => updateConfigValue(entry.key, e.currentTarget.value)}
-                          />
-                        </Input.Root>
+                        />
                       ) : (
                         <span class="font-mono text-sm">{configValues()[entry.key]}</span>
                       )}

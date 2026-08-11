@@ -94,7 +94,7 @@ export function DangerZone(): JSX.Element {
             </div>
           </SettingGroup>
 
-          <Dialog.Root open={exportingOpen()} onOpenChange={setExportingOpen}>
+          <Dialog.Root open={exportingOpen} onOpenChange={setExportingOpen}>
             <Dialog.Content class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
               <div class="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
                 <Dialog.Title class="text-lg font-semibold text-gray-900">Export All Data</Dialog.Title>
@@ -125,7 +125,7 @@ export function DangerZone(): JSX.Element {
             </Dialog.Content>
           </Dialog.Root>
 
-          <Dialog.Root open={deactivateOpen()} onOpenChange={setDeactivateOpen}>
+          <Dialog.Root open={deactivateOpen} onOpenChange={setDeactivateOpen}>
             <Dialog.Content class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
               <div class="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
                 <Dialog.Title class="text-lg font-semibold text-gray-900">Deactivate Account</Dialog.Title>
@@ -156,7 +156,7 @@ export function DangerZone(): JSX.Element {
             </Dialog.Content>
           </Dialog.Root>
 
-          <Dialog.Root open={revokeOpen()} onOpenChange={setRevokeOpen}>
+          <Dialog.Root open={revokeOpen} onOpenChange={setRevokeOpen}>
             <Dialog.Content class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
               <div class="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
                 <Dialog.Title class="text-lg font-semibold text-gray-900">Revoke All Sessions</Dialog.Title>
