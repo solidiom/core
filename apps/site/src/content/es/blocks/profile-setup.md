@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Profile Setup
 productLayer: block
-status: draft
+status: published
 category: "ONBOARD"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "15b5d542152cb4594b00aeacd69b527594e6cb5a9c617da51cbb3555ddb4f84f"

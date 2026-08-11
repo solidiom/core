@@ -4,10 +4,10 @@ title: "Security Center"
 description: "Centro de seguridad con dashboard de amenazas, vulnerabilidades y gestión de políticas."
 keywords: [security-center, plantilla, inicio, solid, seguridad, amenazas, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "Security Center"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-security-center"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

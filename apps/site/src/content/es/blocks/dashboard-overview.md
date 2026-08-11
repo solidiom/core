@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Dashboard Overview
 productLayer: block
-status: draft
+status: published
 category: "OBS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "5b7d9cd03f9c0567ddf41360e4b24357d31eb0874c292ec967ca8f03b8c9f6db"

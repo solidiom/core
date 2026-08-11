@@ -4,10 +4,10 @@ title: "Billing Operations"
 description: "Operaciones de facturación con facturas, conciliación e informes financieros."
 keywords: [billing-operations, plantilla, inicio, solid, facturación, facturas, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "Billing Operations"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-billing-operations"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

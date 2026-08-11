@@ -4,10 +4,10 @@ title: Toolbar
 description: Styled toolbar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toolbar primitive.
 keywords: [toolbar, button, actions, controls, horizontal, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Toolbar
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "toolbar"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -66,4 +66,4 @@ Toolbar renders as semantic HTML during server rendering. The recipe layer adds 
 
 ## Accessibility
 
-Toolbar delegates accessibility to `@solidiom/toolbar`. The primitive implements the WAI-ARIA toolbar pattern with roving tabindex keyboard navigation. See the primitive's `evidence.json` for the accessibility contract and test results.
+Toolbar delegates accessibility to `@solidiom/toolbar`. The primitive implements the WAI-ARIA toolbar pattern with roving tabindex keyboard navigation. See the [Toolbar primitive accessibility contract](/primitives/toolbar/accessibility/) for the full keyboard, focus, and ARIA contract. The recipe wrapper does not introduce new semantics or interact with the accessibility tree beyond styling.

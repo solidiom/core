@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Welcome Wizard
 productLayer: block
-status: draft
+status: published
 category: "ONBOARD"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "2836e7ff9cda3cfccd7807175ebab1f3863b88f3c8b21764ff6586f279cd2574"

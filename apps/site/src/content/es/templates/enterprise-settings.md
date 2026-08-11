@@ -4,10 +4,10 @@ title: "Enterprise Settings"
 description: "Configuración empresarial con organización, seguridad e integraciones."
 keywords: [enterprise-settings, plantilla, inicio, solid, configuración, enterprise, sso]
 locale: es
-maturity: draft
+maturity: beta
 product: "Enterprise Settings"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-enterprise-settings"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

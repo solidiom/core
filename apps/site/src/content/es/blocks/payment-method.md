@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Payment Method
 productLayer: block
-status: draft
+status: published
 category: "BILLING"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "a2f3fdc10144b0ee7d5d81f49c910e2d2987631333ff7a9180986ac2a580d432"

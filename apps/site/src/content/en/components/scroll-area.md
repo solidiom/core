@@ -4,10 +4,10 @@ title: Scroll Area
 description: Styled scroll area component — the recipe wrapper for the css, tailwind, unocss profile(s) using the scroll-area primitive.
 keywords: [scroll-area, scroll, scrollbar, overflow, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Scroll Area
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "scroll-area"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -65,4 +65,4 @@ Scroll Area renders as semantic HTML during server rendering. The recipe layer a
 
 ## Accessibility
 
-Scroll Area delegates accessibility to `@solidiom/scroll-area`. The primitive maintains native scrolling behavior for full keyboard and screen reader compatibility. See the primitive's `evidence.json` for the accessibility contract and test results.
+Scroll Area delegates accessibility to `@solidiom/scroll-area`. The primitive maintains native scrolling behavior for full keyboard and screen reader compatibility. See the [Scroll Area primitive accessibility contract](/primitives/scroll-area/accessibility/) for the full keyboard, focus, and ARIA contract. The recipe wrapper does not introduce new semantics or interact with the accessibility tree beyond styling.

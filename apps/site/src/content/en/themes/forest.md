@@ -4,10 +4,10 @@ title: Forest Theme
 description: An earthy green palette with warm undertones.
 keywords: [forest, theme, preset, tokens, styling]
 locale: en
-maturity: draft
+maturity: beta
 product: Forest
 productLayer: theme
-status: draft
+status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 ---

@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Account Settings
 productLayer: block
-status: draft
+status: published
 category: "SETTINGS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

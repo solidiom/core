@@ -4,10 +4,10 @@ title: "Enterprise Settings"
 description: "Enterprise settings with organization config, security, and integrations."
 keywords: [enterprise-settings, template, starter, solid, settings, enterprise, sso]
 locale: en
-maturity: draft
+maturity: beta
 product: "Enterprise Settings"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-enterprise-settings"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

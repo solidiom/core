@@ -4,10 +4,10 @@ title: Card
 description: Container component with header, title, description, content, and footer areas.
 keywords: [card, container, layout, header, footer, content]
 locale: en
-maturity: draft
+maturity: beta
 product: Card
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "card"
 stylingOutputs: ["css", "tailwind", "unocss"]

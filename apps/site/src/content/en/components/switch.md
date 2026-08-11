@@ -4,10 +4,10 @@ title: Switch
 description: Styled switch component — the recipe wrapper for the css, tailwind, unocss profile(s) using the switch primitive.
 keywords: [component, css, switch, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Switch
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "switch"
 stylingOutputs: ["css", "tailwind", "unocss"]

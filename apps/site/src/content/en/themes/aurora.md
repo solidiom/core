@@ -4,10 +4,10 @@ title: Aurora Theme
 description: A vibrant purple and pink gradient palette.
 keywords: [aurora, theme, preset, tokens, styling]
 locale: en
-maturity: draft
+maturity: beta
 product: Aurora
 productLayer: theme
-status: draft
+status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 ---

@@ -4,10 +4,10 @@ title: Tabla de Datos
 description: Componente de tabla de datos estilizado — el envoltorio de receta para los perfiles css, tailwind, unocss usando el primitivo data-table.
 keywords: [data-table, table, sortable, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Data Table
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "data-table"
 stylingOutputs: ["css", "tailwind", "unocss"]

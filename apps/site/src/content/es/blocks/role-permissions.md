@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Role Permissions
 productLayer: block
-status: draft
+status: published
 category: "ADMIN"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "a48efcb086b749063902db82307f015bab85485383bc0c51de2225a8883d5536"

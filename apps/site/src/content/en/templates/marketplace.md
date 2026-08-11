@@ -4,10 +4,10 @@ title: "Marketplace"
 description: "Multi-vendor marketplace with browsing, seller dashboard, and listing detail."
 keywords: [marketplace, template, starter, solid, ecommerce, vendors, listings]
 locale: en
-maturity: draft
+maturity: beta
 product: "Marketplace"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-marketplace"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Content Editor
 productLayer: block
-status: draft
+status: published
 category: "CONTENT"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

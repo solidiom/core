@@ -4,10 +4,10 @@ title: Resizable Panels
 description: Styled resizable panels component — the recipe wrapper for the css, tailwind, unocss profile(s) using the resizable-panels primitive.
 keywords: [resizable-panels, panel, layout, resize, split, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Resizable Panels
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "resizable-panels"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -62,4 +62,4 @@ Resizable Panels renders as semantic HTML during server rendering. The recipe la
 
 ## Accessibility
 
-Resizable Panels delegates accessibility to `@solidiom/resizable-panels`. The primitive provides keyboard-accessible resize handles and semantic panel structure. See the primitive's `evidence.json` for the accessibility contract and test results.
+Resizable Panels delegates accessibility to `@solidiom/resizable-panels`. The primitive provides keyboard-accessible resize handles and semantic panel structure. See the [Resizable Panels primitive accessibility contract](/primitives/resizable-panels/accessibility/) for the full keyboard, focus, and ARIA contract. The recipe wrapper does not introduce new semantics or interact with the accessibility tree beyond styling.

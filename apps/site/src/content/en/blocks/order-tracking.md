@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Order Tracking
 productLayer: block
-status: draft
+status: published
 category: "COMMERCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

@@ -4,10 +4,10 @@ title: "Data Governance"
 description: "Gobernanza de datos con catálogo, linaje y políticas de clasificación."
 keywords: [data-governance, plantilla, inicio, solid, datos, catálogo, linaje, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "Data Governance"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-data-governance"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

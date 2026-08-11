@@ -4,10 +4,10 @@ title: "SaaS Dashboard"
 description: "Panel SaaS con navegación, métricas y gestión de recursos."
 keywords: [saas-dashboard, plantilla, inicio, solid, panel]
 locale: es
-maturity: draft
+maturity: beta
 product: "SaaS Dashboard"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-saas-dashboard"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

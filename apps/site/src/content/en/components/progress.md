@@ -4,10 +4,10 @@ title: Progress
 description: Linear progress indicator with determinate and indeterminate modes.
 keywords: [progress, indicator, loading, determinate, indeterminate, bar]
 locale: en
-maturity: draft
+maturity: beta
 product: Progress
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "progress"
 stylingOutputs: ["css", "tailwind", "unocss"]

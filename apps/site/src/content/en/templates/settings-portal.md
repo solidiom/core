@@ -4,10 +4,10 @@ title: "Settings Portal"
 description: "Settings portal with account, notifications, and danger zone."
 keywords: [settings-portal, template, starter, solid, settings]
 locale: en
-maturity: draft
+maturity: beta
 product: "Settings Portal"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-settings-portal"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

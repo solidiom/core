@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Chat Interface
 productLayer: block
-status: draft
+status: published
 category: "AI"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

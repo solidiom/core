@@ -4,10 +4,10 @@ title: Empty State
 description: Styled empty state component — the recipe wrapper for the css, tailwind, unocss profile(s) using the empty-state primitive.
 keywords: [empty-state, placeholder, no-data, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Empty State
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "empty-state"
 stylingOutputs: ["css", "tailwind", "unocss"]

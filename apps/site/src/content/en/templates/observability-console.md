@@ -4,10 +4,10 @@ title: "Observability Console"
 description: "Observability console with dashboards, events, and alerts."
 keywords: [observability-console, template, starter, solid, monitoring, enterprise]
 locale: en
-maturity: draft
+maturity: beta
 product: "Observability Console"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-observability-console"
 stack: vite-solid-router
 portfolios: ["balanced-product", "enterprise-platform-governance"]

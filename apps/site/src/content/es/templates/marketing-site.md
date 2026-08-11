@@ -4,10 +4,10 @@ title: "Marketing Site"
 description: "Sitio de marketing con página de aterrizaje, funcionalidades y precios."
 keywords: [marketing-site, plantilla, inicio, solid, marketing, landing, precios]
 locale: es
-maturity: draft
+maturity: beta
 product: "Marketing Site"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-marketing-site"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

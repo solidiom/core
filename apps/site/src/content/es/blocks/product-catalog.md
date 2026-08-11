@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Product Catalog
 productLayer: block
-status: draft
+status: published
 category: "COMMERCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "871bac7e1b5189ffff045f14d4187c27a2a91a3556b238d219596dcd3d1245d8"

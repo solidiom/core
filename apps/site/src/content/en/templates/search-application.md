@@ -4,10 +4,10 @@ title: "Search Application"
 description: "Full-text search application with results, saved searches, and analytics."
 keywords: [search-application, template, starter, solid, search, analytics]
 locale: en
-maturity: draft
+maturity: beta
 product: "Search Application"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-search-application"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

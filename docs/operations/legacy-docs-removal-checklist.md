@@ -3,7 +3,7 @@ id: cut-003-removal-checklist
 title: "CUT-003 — Legacy Docs Removal"
 doc_type: operations
 tags: [cutover, legacy, removal, CUT-003]
-lifecycle: complete
+lifecycle: archived
 created: 2026-08-08
 completed: 2026-08-09
 ---

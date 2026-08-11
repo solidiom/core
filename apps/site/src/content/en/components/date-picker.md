@@ -4,10 +4,10 @@ title: Date Picker
 description: Styled date picker component — the recipe wrapper for the css, tailwind, unocss profile(s) using the date-picker primitive.
 keywords: [date-picker, date, input, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Date Picker
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "date-picker"
 stylingOutputs: ["css", "tailwind", "unocss"]

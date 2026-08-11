@@ -4,10 +4,10 @@ title: "AI Operations"
 description: "Operaciones de IA con monitoreo de modelos, despliegues y seguimiento de costos."
 keywords: [ai-operations, plantilla, inicio, solid, mlops, monitoreo, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "AI Operations"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-ai-operations"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

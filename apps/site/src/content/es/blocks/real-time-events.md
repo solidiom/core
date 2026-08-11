@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Real-time Events
 productLayer: block
-status: draft
+status: published
 category: "OBS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "1ed49b76181a4e2d45cd6991dda7824ffe79ad9d6f9e4ef24fcae909e3a55743"

@@ -4,10 +4,10 @@ title: "API Management"
 description: "Gestión de APIs con catálogo de endpoints, gestión de claves y analítica de uso."
 keywords: [api-management, plantilla, inicio, solid, api, claves, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "API Management"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-api-management"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

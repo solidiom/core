@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Alert Configuration
 productLayer: block
-status: draft
+status: published
 category: "OBS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

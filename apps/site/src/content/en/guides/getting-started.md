@@ -4,7 +4,7 @@ title: "Getting Started"
 description: "Install Solidiom and create your first project in under 5 minutes."
 keywords: [getting-started, install, quickstart, tutorial, guide]
 locale: en
-maturity: draft
+maturity: beta
 product: "Solidiom"
 productLayer: guide
 status: draft
@@ -30,7 +30,7 @@ npm run dev
 
 ## Choose a Template
 
-Solidiom ships 29 templates across two portfolios:
+Solidiom ships 31 templates across two portfolios:
 
 - **Balanced Product** — SaaS dashboards, auth flows, billing, content management
 - **Enterprise** — IAM, audit logs, compliance, API management, security
@@ -70,6 +70,6 @@ Available presets: Ocean, Forest, Slate, Aurora.
 ## Next Steps
 
 - [Browse primitives](/primitives/) — 52 headless building blocks
-- [Browse components](/components/) — 30 styled recipe wrappers
+- [Browse components](/components/) — 52 styled recipe wrappers
 - [Theme builder](/themes/builder/) — visual theme editor
-- [CLI reference](/primitives/) — full command documentation
+- [CLI reference](/guides/cli-overview/) — full command documentation

@@ -4,10 +4,10 @@ title: Checkbox
 description: Styled checkbox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the checkbox primitive.
 keywords: [checkbox, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Checkbox
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "checkbox"
 stylingOutputs: ["css", "tailwind", "unocss"]

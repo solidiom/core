@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Shopping Cart
 productLayer: block
-status: draft
+status: published
 category: "COMMERCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "b033b64025737cf3ee0be5270c854be3a3a5acd68becb800f103c69497dbecc1"

@@ -4,10 +4,10 @@ title: Accordion
 description: Styled accordion component — the recipe wrapper for the css, tailwind, unocss profile(s) using the accordion primitive.
 keywords: [accordion, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Accordion
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "accordion"
 stylingOutputs: ["css", "tailwind", "unocss"]

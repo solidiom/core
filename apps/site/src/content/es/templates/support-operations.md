@@ -4,10 +4,10 @@ title: "Support Operations"
 description: "Operaciones de soporte con cola de tickets, base de conocimiento y métricas."
 keywords: [support-operations, plantilla, inicio, solid, soporte, tickets, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "Support Operations"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-support-operations"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

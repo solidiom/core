@@ -4,10 +4,10 @@ title: Tema Aurora
 description: A vibrant purple and pink gradient palette.
 keywords: [aurora, tema, preset, tokens, estilos]
 locale: es
-maturity: draft
+maturity: beta
 product: Aurora
 productLayer: theme
-status: draft
+status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 translationSourceHash: "5926998784e78ee73cacb99830c3ccef059fb05659614a428ca8f14efc639043"

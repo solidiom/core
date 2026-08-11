@@ -4,10 +4,10 @@ title: Data Table
 description: Styled data table component — the recipe wrapper for the css, tailwind, unocss profile(s) using the data-table primitive.
 keywords: [data-table, table, sortable, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Data Table
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "data-table"
 stylingOutputs: ["css", "tailwind", "unocss"]

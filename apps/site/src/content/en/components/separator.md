@@ -4,10 +4,10 @@ title: Separator
 description: Styled separator component — the recipe wrapper for the css, tailwind, unocss profile(s) using the separator primitive.
 keywords: [separator, divider, hr, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Separator
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "separator"
 stylingOutputs: ["css", "tailwind", "unocss"]

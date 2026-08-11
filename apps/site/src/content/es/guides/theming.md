@@ -4,7 +4,7 @@ title: "Theming"
 description: "Customize colors, typography, and spacing with theme presets or the visual builder."
 keywords: [theming, themes, customization, presets, tokens, guide]
 locale: es
-maturity: draft
+maturity: beta
 product: "Solidiom"
 productLayer: guide
 status: draft

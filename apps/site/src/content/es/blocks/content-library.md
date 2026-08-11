@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Content Library
 productLayer: block
-status: draft
+status: published
 category: "CONTENT"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "a1c65ca6ec83c007ce5f79f426796a08214a8a9124167a2782260d65e912537a"

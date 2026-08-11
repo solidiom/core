@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Alert Configuration
 productLayer: block
-status: draft
+status: published
 category: "OBS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "2a2a9436b52d96056c1e0b61120e05d2e6e80db18f50dca69000c4e1877a2266"

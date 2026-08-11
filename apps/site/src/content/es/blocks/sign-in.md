@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Sign In
 productLayer: block
-status: draft
+status: published
 category: "AUTH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "935807cbd4df1102212e5bea69968e0133a9ae31d2de895cda8847f144a5d092"

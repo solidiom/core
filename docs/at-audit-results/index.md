@@ -1,3 +1,11 @@
+---
+id: at-audit-results-index
+title: "Assistive Technology Audit Results"
+doc_type: evidence
+tags: [accessibility, assistive-technology, audit]
+lifecycle: current
+---
+
 # Assistive Technology Audit Results
 
 Generated: 2026-08-07

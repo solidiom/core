@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Chat Interface
 productLayer: block
-status: draft
+status: published
 category: "AI"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "07e313e6a8b154ce0bf782756e9a46fae8a78034e3951ac4d8dd48c299788d58"

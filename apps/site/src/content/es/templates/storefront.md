@@ -4,10 +4,10 @@ title: "Storefront"
 description: "Tienda en línea con catálogo de productos, carrito y checkout."
 keywords: [storefront, plantilla, inicio, solid, ecommerce, comercio, tienda]
 locale: es
-maturity: draft
+maturity: beta
 product: "Storefront"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-storefront"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

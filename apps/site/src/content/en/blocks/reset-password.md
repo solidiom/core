@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Reset Password
 productLayer: block
-status: draft
+status: published
 category: "AUTH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

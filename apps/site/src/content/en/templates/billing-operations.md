@@ -4,10 +4,10 @@ title: "Billing Operations"
 description: "Billing operations with invoices, reconciliation, and financial reports."
 keywords: [billing-operations, template, starter, solid, billing, invoices, enterprise]
 locale: en
-maturity: draft
+maturity: beta
 product: "Billing Operations"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-billing-operations"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

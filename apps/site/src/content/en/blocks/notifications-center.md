@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Notifications Center
 productLayer: block
-status: draft
+status: published
 category: "SHELL"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

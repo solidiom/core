@@ -4,10 +4,10 @@ title: "Compliance Center"
 description: "Centro de cumplimiento con seguimiento de marcos, evaluación de controles y recopilación de evidencia."
 keywords: [compliance-center, plantilla, inicio, solid, cumplimiento, auditoría, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "Compliance Center"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-compliance-center"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

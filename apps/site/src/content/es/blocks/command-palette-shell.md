@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Command Palette
 productLayer: block
-status: draft
+status: published
 category: "SHELL"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "5be4dffe1f13a113a6073606b87b44ad3a92a7ed02eb2c47a9611a5091d857f4"

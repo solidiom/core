@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Invoice History
 productLayer: block
-status: draft
+status: published
 category: "BILLING"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "59095a44589da78347602f95a22eeeae35666e0fb70eb9fc690e140a7ea832de"

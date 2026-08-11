@@ -4,10 +4,10 @@ title: Tema Slate
 description: A neutral monochrome palette with stone tones.
 keywords: [slate, tema, preset, tokens, estilos]
 locale: es
-maturity: draft
+maturity: beta
 product: Slate
 productLayer: theme
-status: draft
+status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 translationSourceHash: "f76489c1e14d163de9b0fa009e8b176f5c3127417fefeb38ca32780ab6ac7886"

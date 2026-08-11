@@ -4,10 +4,10 @@ title: Listbox
 description: Styled listbox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the listbox primitive.
 keywords: [listbox, list, selection, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Listbox
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "listbox"
 stylingOutputs: ["css", "tailwind", "unocss"]

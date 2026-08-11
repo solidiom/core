@@ -4,10 +4,10 @@ title: "Audit Log"
 description: "Audit log viewer with event stream, filters, and export."
 keywords: [audit-log, template, starter, solid, audit, compliance, enterprise]
 locale: en
-maturity: draft
+maturity: beta
 product: "Audit Log"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-audit-log"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]

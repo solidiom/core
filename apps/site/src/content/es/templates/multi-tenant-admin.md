@@ -4,10 +4,10 @@ title: "Multi-tenant Admin"
 description: "Administración multi-inquilino con gestión de equipos, RBAC y auditoría."
 keywords: [multi-tenant-admin, plantilla, inicio, solid, admin, enterprise]
 locale: es
-maturity: draft
+maturity: beta
 product: "Multi-tenant Admin"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-multi-tenant-admin"
 stack: vite-solid-router
 portfolios: ["balanced-product", "enterprise-platform-governance"]

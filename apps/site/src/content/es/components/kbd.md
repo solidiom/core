@@ -4,10 +4,10 @@ title: Kbd
 description: Styled keyboard display component — the recipe wrapper for the css, tailwind, unocss profile(s) using the kbd primitive.
 keywords: [kbd, keyboard, shortcut, display, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Kbd
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "kbd"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -57,4 +57,4 @@ Kbd se renderiza como HTML semántico durante el renderizado en servidor. La cap
 
 ## Accesibilidad
 
-Kbd delega la accesibilidad a `@solidiom/kbd`. El primitivo utiliza el elemento nativo `<kbd>` para el significado semántico integrado de entrada de teclado. Consulte el `evidence.json` del primitivo para el contrato de accesibilidad y los resultados de las pruebas.
+Kbd delega la accesibilidad a `@solidiom/kbd`. El primitivo utiliza el elemento nativo `<kbd>` para el significado semántico integrado de entrada de teclado. Consulta el [contrato de accesibilidad del primitivo Kbd](/primitives/kbd/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.

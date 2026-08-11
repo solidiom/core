@@ -4,10 +4,10 @@ title: Slate Theme
 description: A neutral monochrome palette with stone tones.
 keywords: [slate, theme, preset, tokens, styling]
 locale: en
-maturity: draft
+maturity: beta
 product: Slate
 productLayer: theme
-status: draft
+status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 ---

@@ -4,10 +4,10 @@ title: Navigation Menu
 description: Styled navigation menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the navigation-menu primitive.
 keywords: [navigation, menu, nav, menu bar, dropdown, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Navigation Menu
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "navigation-menu"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -68,4 +68,4 @@ Navigation Menu se renderiza como HTML semántico durante el renderizado en serv
 
 ## Accesibilidad
 
-Navigation Menu delega la accesibilidad a `@solidiom/navigation-menu`. El primitivo implementa el patrón WAI-ARIA navigation menu con navegación por teclado y soporte para lectores de pantalla. Consulte el `evidence.json` del primitivo para el contrato de accesibilidad y los resultados de las pruebas.
+Navigation Menu delega la accesibilidad a `@solidiom/navigation-menu`. El primitivo implementa el patrón WAI-ARIA navigation menu con navegación por teclado y soporte para lectores de pantalla. Consulta el [contrato de accesibilidad del primitivo Navigation Menu](/primitives/navigation-menu/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.

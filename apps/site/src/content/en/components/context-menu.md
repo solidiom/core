@@ -4,10 +4,10 @@ title: Context Menu
 description: Styled context menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the context-menu primitive.
 keywords: [context-menu, right-click, menu, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Context Menu
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "context-menu"
 stylingOutputs: ["css", "tailwind", "unocss"]

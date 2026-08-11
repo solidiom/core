@@ -4,10 +4,10 @@ title: Input
 description: Styled text input and textarea component — the recipe wrapper for the css, tailwind, unocss profile(s) using the input primitive.
 keywords: [input, textarea, form, text, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Input
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "input"
 stylingOutputs: ["css", "tailwind", "unocss"]

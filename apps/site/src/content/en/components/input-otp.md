@@ -4,10 +4,10 @@ title: Input OTP
 description: Styled input OTP component — the recipe wrapper for the css, tailwind, unocss profile(s) using the input-otp primitive.
 keywords: [input-otp, otp, verification, code, component, css, tailwind, unocss]
 locale: en
-maturity: draft
+maturity: beta
 product: Input OTP
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "input-otp"
 stylingOutputs: ["css", "tailwind", "unocss"]

@@ -4,10 +4,10 @@ title: "Billing Portal"
 description: "Portal de facturación con suscripciones, pagos y facturas."
 keywords: [billing-portal, plantilla, inicio, solid, facturacion]
 locale: es
-maturity: draft
+maturity: beta
 product: "Billing Portal"
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-billing-portal"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

@@ -4,10 +4,10 @@ title: Vite + Solid Router Starter
 description: "Plantilla de inicio para proyectos vite solid router."
 keywords: [vite-solid-router, plantilla, inicio, solid]
 locale: es
-maturity: draft
+maturity: beta
 product: Vite + Solid Router Starter
 productLayer: template
-status: draft
+status: published
 package: "@solidiom/template-vite-solid-router"
 stack: vite-solid-router
 portfolios: ["balanced-product"]

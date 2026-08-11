@@ -4,10 +4,10 @@ title: Combobox
 description: Styled combobox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the combobox primitive.
 keywords: [combobox, select, input, dropdown, listbox, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Combobox
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "combobox"
 stylingOutputs: ["css", "tailwind", "unocss"]
@@ -65,4 +65,4 @@ Combobox se renderiza como HTML semántico durante el renderizado en servidor. L
 
 ## Accesibilidad
 
-Combobox delega la accesibilidad a `@solidiom/combobox`. El primitivo implementa el patrón WAI-ARIA combobox con navegación por teclado adecuada, gestión de foco y soporte para lectores de pantalla. Consulte el `evidence.json` del primitivo para el contrato de accesibilidad y los resultados de las pruebas.
+Combobox delega la accesibilidad a `@solidiom/combobox`. El primitivo implementa el patrón WAI-ARIA combobox con navegación por teclado adecuada, gestión de foco y soporte para lectores de pantalla. Consulta el [contrato de accesibilidad del primitivo Combobox](/primitives/combobox/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.

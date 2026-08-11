@@ -4,10 +4,10 @@ title: Dialog
 description: Styled dialog component — the recipe wrapper for the css, tailwind, unocss profile(s) using the dialog primitive.
 keywords: [component, css, dialog, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Dialog
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "dialog"
 stylingOutputs: ["css", "tailwind", "unocss"]

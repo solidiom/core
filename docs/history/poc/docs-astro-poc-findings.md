@@ -1,3 +1,11 @@
+---
+id: docs-astro-poc-findings
+title: "Astro MDX POC — Findings"
+doc_type: history
+tags: [poc, astro, migration, CUT-002]
+lifecycle: archived
+---
+
 # Astro MDX POC — Findings (Archived)
 
 > **Archived:** 2026-08-07 (CUT-002)

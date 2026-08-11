@@ -7,7 +7,7 @@ locale: es
 maturity: draft
 product: Subscription Plans
 productLayer: block
-status: draft
+status: published
 category: "BILLING"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "b23917ece7b092bdf1b896884942662a761ac6b8e4fbf0cb1b91a6517175f726"

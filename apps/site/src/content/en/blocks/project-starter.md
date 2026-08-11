@@ -7,7 +7,7 @@ locale: en
 maturity: draft
 product: Project Starter
 productLayer: block
-status: draft
+status: published
 category: "ONBOARD"
 requiredStates: ["loading", "empty", "error", "restricted"]
 ---

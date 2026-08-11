@@ -4,10 +4,10 @@ title: Pagination
 description: Styled pagination component — the recipe wrapper for the css, tailwind, unocss profile(s) using the pagination primitive.
 keywords: [pagination, navigation, page, component, css, tailwind, unocss]
 locale: es
-maturity: draft
+maturity: beta
 product: Pagination
 productLayer: component
-status: draft
+status: published
 package: "@solidiom/recipes-css"
 recipe: "pagination"
 stylingOutputs: ["css", "tailwind", "unocss"]
