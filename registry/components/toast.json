@@ -30,7 +30,7 @@
         "src/recipes/toast.tsx": "c86956d011fe2ae9254887d55da3332e7ebabadfe016d29af6180303096e3032"
       }
     },
-    "lastGenerated": "2026-08-11T20:16:00.000Z"
+    "lastGenerated": "2026-08-11T22:09:24.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/toast"
   ],
-  "lastUpdated": "2026-08-11T20:16:00.000Z"
+  "lastUpdated": "2026-08-11T22:09:24.000Z"
 }
