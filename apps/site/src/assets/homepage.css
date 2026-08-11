@@ -416,8 +416,8 @@
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
-  color: var(--sol-foreground-subtle);
-  opacity: 0.6;
+  color: var(--sol-foreground-muted);
+  opacity: 0.85;
   transition: opacity 0.15s ease;
 }
 
