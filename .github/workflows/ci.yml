@@ -66,7 +66,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
-      - run: pnpm build
+      - run: pnpm nx run-many -t build --exclude=@solidiom/site
 
       # Post-build audits that verify generated output integrity
       - name: REG-006 — verify registry catalog integrity

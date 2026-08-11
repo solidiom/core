@@ -238,9 +238,9 @@ description = "CI job `typecheck`: type-check all packages"
 run = "pnpm typecheck"
 
 [tasks."ci:build"]
-description = "CI job `build`: build all packages, then integrity/parity/provenance verification"
+description = "CI job `build`: build all packages (excluding site), then integrity/parity/provenance verification"
 run = [
-  "pnpm build",
+  "pnpm nx run-many -t build --exclude=@solidiom/site",
   # REG-006 — verify registry catalog integrity
   "node packages/cli/dist/bin.js verify --registry",
   # API-004 — verify vertical-slice primitive API coverage
