@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+# SOL-008: Pre-commit hook to block accidental commits of .env files
+# containing secrets. Install with: git config core.hooksPath tools/git-hooks
+
+# Check staged files for .env patterns that should never be committed
+BLOCKED_PATTERNS=".env .env.local .env.*.local"
+
+for pattern in $BLOCKED_PATTERNS; do
+  # Use git diff --cached to check only staged files
+  MATCHES=$(git diff --cached --name-only --diff-filter=ACM | grep -E "^(\.env|\.env\.local|\.env\..+\.local)$" || true)
+  if [ -n "$MATCHES" ]; then
+    echo ""
+    echo "ERROR: Attempting to commit secret-bearing files:"
+    echo "$MATCHES" | sed 's/^/  /'
+    echo ""
+    echo "These files are in .gitignore and should NEVER be committed."
+    echo "If you really need to do this, use --no-verify (not recommended)."
+    echo ""
+    exit 1
+  fi
+  break
+done
