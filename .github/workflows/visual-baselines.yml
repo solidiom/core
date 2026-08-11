@@ -40,7 +40,9 @@ jobs:
       options: --ipc=host
     steps:
       - name: Record reason
-        run: echo "Regenerating visual baselines — ${{ inputs.reason }}"
+        env:
+          REASON: ${{ inputs.reason }}
+        run: echo "Regenerating visual baselines — $REASON"
 
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v6

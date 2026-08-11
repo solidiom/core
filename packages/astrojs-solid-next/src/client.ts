@@ -26,6 +26,9 @@ export default (element: HTMLElement) =>
         if (_slots[key]) continue
         _slots[key] = document.createElement("astro-slot")
         if (key !== "default") _slots[key].setAttribute("name", key)
+        // SAFETY: `value` is slot HTML produced by the Astro compiler at build time.
+        // It is NOT user-controlled at runtime. Astro escapes dynamic expressions
+        // in templates before they reach this hydration boundary (SOL-006).
         _slots[key].innerHTML = value
       }
     }
