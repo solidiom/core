@@ -71,8 +71,12 @@ die() {
 # ─── Load environment ───────────────────────────────────────────────────────
 
 if [[ -f "$REPO_ROOT/.env" ]]; then
-  # shellcheck disable=SC2046
-  export $(grep -v '^#' "$REPO_ROOT/.env" | xargs)
+  # Source .env properly, handling quoted values and comments
+  set -a
+  # shellcheck disable=SC1091
+  source "$REPO_ROOT/.env"
+  set +a
+  pass ".env loaded from $REPO_ROOT/.env"
 fi
 
 # ─── Preflight checks ──────────────────────────────────────────────────────
