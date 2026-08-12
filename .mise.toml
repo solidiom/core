@@ -495,6 +495,14 @@ run = [
   "pnpm tsx tools/verify-beta-signing.ts || echo 'ADVISORY: signing verification requires REGISTRY_SIGN_KEY (CI-only)'",
 ]
 
+[tasks."release:publish"]
+description = "Release: run all tests, publish to npm (beta tag) and deploy site to Cloudflare"
+run = "scripts/release.sh"
+
+[tasks."release:publish:dry-run"]
+description = "Release: dry-run — run all tests without publishing"
+run = "scripts/release.sh --dry-run"
+
 # ---------------------------------------------------------------------------
 # Workflow orchestrators — call the atomic tasks above in CI order.
 # Runs sequentially and stops on the first failure (fail-fast), except for the
