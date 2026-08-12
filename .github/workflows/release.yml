@@ -13,7 +13,7 @@ env:
 
 jobs:
   gate:
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v6
@@ -27,7 +27,7 @@ jobs:
 
   release:
     needs: gate
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     permissions:
       contents: write
       pull-requests: write

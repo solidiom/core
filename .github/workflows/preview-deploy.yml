@@ -25,7 +25,7 @@ env:
 jobs:
   deploy-preview:
     if: github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     permissions:
       contents: read
       pull-requests: write
