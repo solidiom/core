@@ -63,7 +63,12 @@ jobs:
       - name: Rebuild with versioned packages
         run: pnpm build
 
-      # Publish packages to npm with the beta dist-tag
+      # Publish packages to npm with the beta dist-tag.
+      # Authentication: OIDC trusted publishing is the long-term mechanism
+      # (id-token: write permission above enables it). NODE_AUTH_TOKEN is
+      # provided as a fallback for the initial publish before trusted publisher
+      # configurations exist on npmjs.com. Once all @solidiom/* packages have
+      # trusted publishers configured, remove the NODE_AUTH_TOKEN env var below.
       - name: Publish packages
         run: pnpm changeset publish --tag beta
         env:
