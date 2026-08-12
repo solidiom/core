@@ -212,6 +212,16 @@ VERDACCIO_CONFIG="$(mktemp -d)/verdaccio-config.yaml"
 sed "s|^storage: .*|storage: ${STORAGE_DIR}|" "$SOURCE_CONFIG" > "$VERDACCIO_CONFIG"
 
 # Step 3: Start verdaccio
+#
+# In prep mode the storage IS the persistent snapshot (not a throwaway copy), so
+# stale @solidiom/* packages from previous runs would collide with republish and
+# leave stale integrity hashes in Verdaccio's in-memory packument cache. Remove
+# them BEFORE Verdaccio starts so it never sees the old metadata.
+if [[ $PREP_MODE -eq 1 ]] && [[ -d "$STORAGE_DIR/@solidiom" ]]; then
+  echo "  removing stale @solidiom/* packages from snapshot..."
+  rm -rf "$STORAGE_DIR/@solidiom"
+fi
+
 echo "[3/8] Starting verdaccio..."
 npx verdaccio --config "$VERDACCIO_CONFIG" --listen "127.0.0.1:${PORT}" &
 VERDACCIO_PID=$!

@@ -32,7 +32,7 @@
     "evidenceIds": [
       "axe-toggle-scan-v1"
     ],
-    "lastReviewed": "2026-08-11T19:15:31.011Z"
+    "lastReviewed": "2026-08-12T00:37:59.400Z"
   },
   "documentation": {
     "status": "complete",
@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "a7b310d0565fe836bd33e2ed5090746f98c9f08f77bcf30d1462898b6245bc77"
     },
-    "lastGenerated": "2026-08-11T19:27:57.000Z"
+    "lastGenerated": "2026-08-11T23:13:29.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/toggle"
   },
-  "lastUpdated": "2026-08-11T19:27:57.000Z"
+  "lastUpdated": "2026-08-11T23:13:29.000Z"
 }

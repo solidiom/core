@@ -37,7 +37,7 @@
     "evidenceIds": [
       "axe-drawer-scan-v1"
     ],
-    "lastReviewed": "2026-08-11T19:15:31.011Z"
+    "lastReviewed": "2026-08-12T00:37:59.400Z"
   },
   "documentation": {
     "status": "complete",
@@ -76,11 +76,11 @@
       "src/drawer.tsx": "1fefafde0b912e0a9260c86a42261d94c93b52a0c76a973e018d0d8dcdfbca7a",
       "src/index.tsx": "d73bd947145a4c6b215eec138ea4da63602602798781e51aee003fdfee842e80"
     },
-    "lastGenerated": "2026-08-11T19:27:57.000Z"
+    "lastGenerated": "2026-08-11T23:13:29.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/drawer"
   },
-  "lastUpdated": "2026-08-11T19:27:57.000Z"
+  "lastUpdated": "2026-08-11T23:13:29.000Z"
 }
