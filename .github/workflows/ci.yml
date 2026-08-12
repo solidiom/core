@@ -25,7 +25,7 @@ jobs:
   # ─── Foundation ────────────────────────────────────────────────────────────────
 
   install:
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -43,7 +43,7 @@ jobs:
 
   format:
     needs: install
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -51,7 +51,7 @@ jobs:
 
   typecheck:
     needs: install
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -62,7 +62,7 @@ jobs:
 
   build:
     needs: install
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -130,7 +130,7 @@ jobs:
 
   test-node:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     strategy:
       matrix:
         node-version: [24, 26]
@@ -160,7 +160,7 @@ jobs:
 
   test-browser:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -192,7 +192,7 @@ jobs:
 
   a11y-axe-scan:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -233,7 +233,7 @@ jobs:
 
   site-check:
     needs: install
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -243,7 +243,7 @@ jobs:
 
   site-build:
     needs: [install, site-check]
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -258,7 +258,7 @@ jobs:
 
   site-e2e:
     needs: site-build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -295,7 +295,7 @@ jobs:
   # package.json. Blocking — baselines are captured in this environment.
   site-visual:
     needs: site-build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     container:
       image: mcr.microsoft.com/playwright:v1.61.1-noble
       options: --ipc=host
@@ -319,7 +319,7 @@ jobs:
 
   site-lighthouse:
     needs: site-build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     continue-on-error: true
     steps:
       - uses: actions/checkout@v5
@@ -345,7 +345,7 @@ jobs:
 
   cli-smoke-create-prep:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -375,7 +375,7 @@ jobs:
 
   cli-smoke-create:
     needs: [build, cli-smoke-create-prep]
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     strategy:
       fail-fast: false
       matrix:
@@ -414,7 +414,7 @@ jobs:
 
   beta-acceptance-report:
     needs: site-build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -427,7 +427,7 @@ jobs:
 
   beta-acceptance-e2e:
     needs: site-build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -464,7 +464,7 @@ jobs:
 
   test-solid-matrix:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -490,7 +490,7 @@ jobs:
 
   catalog-gates:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -504,7 +504,7 @@ jobs:
   # VS-004's gate, the executable half of the G2 exit checklist.
   vertical-slice-gate:
     needs: [build, site-check]
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -519,7 +519,7 @@ jobs:
   # Previously 4 separate jobs each rebuilding from scratch (~15 min saved).
   gates:
     needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e, catalog-gates]
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup

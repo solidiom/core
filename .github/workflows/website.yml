@@ -27,7 +27,7 @@ env:
 jobs:
   format:
     name: Format check
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v6
@@ -40,7 +40,7 @@ jobs:
 
   check:
     name: Astro check
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v6
@@ -54,7 +54,7 @@ jobs:
   build:
     name: Build and index
     needs: check
-    runs-on: ubuntu-latest
+    runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v6
