@@ -34,7 +34,7 @@
     "evidenceIds": [
       "axe-button-scan-v1"
     ],
-    "lastReviewed": "2026-08-11T19:15:31.011Z"
+    "lastReviewed": "2026-08-12T00:37:59.400Z"
   },
   "documentation": {
     "status": "complete",
@@ -87,11 +87,11 @@
       "src/index.tsx": "afbf08de5a4fd3fd5cc54accfc155f04df05e5894a64914fc4903e69452a3855",
       "src/toggle-button.tsx": "a5ca880d302fddc1c78b5f7c609fbaf3c228fadddcbfa7e563ccb1d56748013e"
     },
-    "lastGenerated": "2026-08-11T19:27:57.000Z"
+    "lastGenerated": "2026-08-11T23:13:29.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/button"
   },
-  "lastUpdated": "2026-08-11T19:27:57.000Z"
+  "lastUpdated": "2026-08-11T23:13:29.000Z"
 }

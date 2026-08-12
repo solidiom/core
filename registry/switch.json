@@ -33,7 +33,7 @@
     "evidenceIds": [
       "axe-switch-scan-v1"
     ],
-    "lastReviewed": "2026-08-11T19:15:31.011Z"
+    "lastReviewed": "2026-08-12T00:37:59.400Z"
   },
   "documentation": {
     "status": "complete",
@@ -73,11 +73,11 @@
     "fileDigests": {
       "src/index.tsx": "806c7b01cadb5f4571af470ebee752fa040d57e10e8573872c9027439527fa03"
     },
-    "lastGenerated": "2026-08-11T19:27:57.000Z"
+    "lastGenerated": "2026-08-11T23:13:29.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/switch"
   },
-  "lastUpdated": "2026-08-11T19:27:57.000Z"
+  "lastUpdated": "2026-08-11T23:13:29.000Z"
 }

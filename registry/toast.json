@@ -34,7 +34,7 @@
     "evidenceIds": [
       "axe-toast-scan-v1"
     ],
-    "lastReviewed": "2026-08-11T19:15:31.011Z"
+    "lastReviewed": "2026-08-12T00:37:59.400Z"
   },
   "documentation": {
     "status": "complete",
@@ -75,11 +75,11 @@
       "src/toast-context.ts": "9773f77293a7b980e249649944f023c06afd098b6788d2c4f510665fd4578353",
       "src/toast.tsx": "3488bd66dba6c8580f8b12b9d38fd90e6e7455afb1f7fd5b641eb60f7ed4b55a"
     },
-    "lastGenerated": "2026-08-11T19:27:57.000Z"
+    "lastGenerated": "2026-08-11T23:13:29.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/toast"
   },
-  "lastUpdated": "2026-08-11T19:27:57.000Z"
+  "lastUpdated": "2026-08-11T23:13:29.000Z"
 }

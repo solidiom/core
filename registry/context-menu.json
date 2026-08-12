@@ -35,7 +35,7 @@
     "evidenceIds": [
       "axe-context-menu-scan-v1"
     ],
-    "lastReviewed": "2026-08-11T19:15:31.011Z"
+    "lastReviewed": "2026-08-12T00:37:59.400Z"
   },
   "documentation": {
     "status": "complete",
@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "88fe81b9a89abdf65ed36f0c806ae5f3bc35ae17b42a98d4bb1e335d6d4055b9"
     },
-    "lastGenerated": "2026-08-11T19:27:57.000Z"
+    "lastGenerated": "2026-08-11T23:13:29.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/context-menu"
   },
-  "lastUpdated": "2026-08-11T19:27:57.000Z"
+  "lastUpdated": "2026-08-11T23:13:29.000Z"
 }
