@@ -143,6 +143,6 @@ No breaking changes in this initial beta release.
 
 ## Feedback
 
-- **Bug reports:** [GitHub Issues](https://github.com/solidiom/solidiom/issues)
+- **Bug reports:** [GitHub Issues](https://github.com/solidiom/core/issues)
 - **Feature requests:** Open an issue with the `enhancement` label
-- **Security:** [Responsible disclosure](https://github.com/solidiom/solidiom/security/advisories/new)
+- **Security:** [Responsible disclosure](https://github.com/solidiom/core/security/advisories/new)

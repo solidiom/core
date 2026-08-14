@@ -1804,7 +1804,7 @@ Signature verification requires a defined trust root. Solidiom supports two mode
 
 **Mode A: keyless with OIDC identity binding (default for public artifacts).**
 
-Signatures use a Sigstore-compatible transparency log with keyless signing. Each signed artifact carries an OIDC identity claim (for example `https://github.com/solidiom/solidiom` from the GitHub Actions workflow that published it). The client verifies:
+Signatures use a Sigstore-compatible transparency log with keyless signing. Each signed artifact carries an OIDC identity claim (for example `https://github.com/solidiom/core` from the GitHub Actions workflow that published it). The client verifies:
 
 1. The signature is valid against the Rekor transparency log entry.
 2. The identity claim matches an entry in the project's `trustedIdentities` policy list.
@@ -1816,7 +1816,7 @@ Signatures use a Sigstore-compatible transparency log with keyless signing. Each
   "trustedIdentities": [
     {
       "issuer": "https://token.actions.githubusercontent.com",
-      "subjectPattern": "https://github.com/solidiom/solidiom/.github/workflows/publish.yml@refs/heads/main"
+      "subjectPattern": "https://github.com/solidiom/core/.github/workflows/publish.yml@refs/heads/main"
     }
   ]
 }

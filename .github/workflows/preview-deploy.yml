@@ -41,6 +41,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: Build template previews
+        run: pnpm --filter '@solidiom/template-*' build
+
       - name: Build and index site
         run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
 

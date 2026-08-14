@@ -68,5 +68,5 @@ No server-side runtime is required for the base templates. Add your own API laye
 
 - This is **not a hosted SaaS** — you deploy and operate your own instances
 - There are **no SLAs or support contracts** — this is open-source software
-- There are **no license fees** — MIT licensed
+- There are **no license fees** — Apache 2.0 licensed
 - There is **no vendor lock-in** — source-owned, fork-friendly

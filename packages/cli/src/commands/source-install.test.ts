@@ -69,7 +69,7 @@ function writeMatchingRegistry(
       lastGenerated: "2025-01-01T00:00:00.000Z",
     },
     provenance: {
-      repository: "https://github.com/solidiom/solidiom",
+      repository: "https://github.com/solidiom/core",
       directory: `packages/${primitive}`,
     },
     lastUpdated: "2025-01-01T00:00:00.000Z",

@@ -378,7 +378,7 @@ describe("REG-003 manifest fields", () => {
     for (const file of primitiveFiles.slice(0, 5)) {
       const manifest = JSON.parse(readFileSync(file, "utf8"))
       expect(manifest.provenance).toBeDefined()
-      expect(manifest.provenance.repository).toBe("https://github.com/solidiom/solidiom")
+      expect(manifest.provenance.repository).toBe("https://github.com/solidiom/core")
       expect(manifest.provenance.directory).toMatch(/^packages\//)
     }
   })
@@ -423,7 +423,7 @@ describe("REG-003 manifest fields", () => {
       es: { status: "reviewed", lastUpdated: "2026-08-07T05:00:00.000Z" },
     })
     expect(dialog.provenance).toEqual({
-      repository: "https://github.com/solidiom/solidiom",
+      repository: "https://github.com/solidiom/core",
       directory: "packages/dialog",
     })
     expect(dialogIndex).toMatchObject({

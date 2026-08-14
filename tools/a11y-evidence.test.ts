@@ -21,7 +21,7 @@ function artifact(): AxeResultsArtifact {
     schemaVersion: AXE_RESULTS_SCHEMA_VERSION,
     generatedAt: "2026-07-29T00:00:00.000Z",
     commitSha: "a".repeat(40),
-    ciRunUrl: "https://github.com/solidiom/solidiom/actions/runs/1",
+    ciRunUrl: "https://github.com/solidiom/core/actions/runs/1",
     browser: "chromium",
     results: [
       createAxeScanResult({ primitive: "dialog", passes: 15, violations: 0, incomplete: 0 }),

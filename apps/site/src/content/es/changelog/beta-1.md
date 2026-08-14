@@ -144,6 +144,6 @@ Sin cambios rupturistas en este lanzamiento beta inicial.
 
 ## Retroalimentación
 
-- **Reportes de errores:** [GitHub Issues](https://github.com/solidiom/solidiom/issues)
+- **Reportes de errores:** [GitHub Issues](https://github.com/solidiom/core/issues)
 - **Solicitudes de funcionalidad:** Abra un issue con la etiqueta `enhancement`
-- **Seguridad:** [Divulgación responsable](https://github.com/solidiom/solidiom/security/advisories/new)
+- **Seguridad:** [Divulgación responsable](https://github.com/solidiom/core/security/advisories/new)

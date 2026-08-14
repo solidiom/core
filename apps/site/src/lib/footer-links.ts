@@ -12,9 +12,8 @@
 import type { NavLink } from "../components/SiteHeader"
 
 export const communityLinks: NavLink[] = [
-  { label: "GitHub", href: "https://github.com/solidiom" },
-  { label: "Issues", href: "https://github.com/solidiom/solidiom/issues" },
-  { label: "Discussions", href: "https://github.com/solidiom/solidiom/discussions" },
+  { label: "GitHub", href: "https://github.com/solidiom/core" },
+  { label: "Issues", href: "https://github.com/solidiom/core/issues" },
 ]
 
 /**

@@ -240,6 +240,10 @@ fi
 
 step "6/7" "Building and deploying site"
 
+echo "  Building templates..."
+pnpm --filter '@solidiom/template-*' build || die "Template build failed"
+pass "Templates built"
+
 echo "  Building site..."
 pnpm --filter @solidiom/site build || die "Site build failed"
 pnpm --filter @solidiom/site search-index || die "Search index failed"

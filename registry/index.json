@@ -59,7 +59,7 @@
         "vertically"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/accordion"
       }
     },
@@ -120,7 +120,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/alert"
       }
     },
@@ -167,7 +167,7 @@
         "user"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/alert-dialog"
       }
     },
@@ -221,7 +221,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/avatar"
       }
     },
@@ -272,7 +272,7 @@
         "status"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/badge"
       }
     },
@@ -327,7 +327,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/breadcrumb"
       }
     },
@@ -387,7 +387,7 @@
         "trigger"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/button"
       }
     },
@@ -435,7 +435,7 @@
         "year"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/calendar"
       }
     },
@@ -494,7 +494,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/card"
       }
     },
@@ -540,7 +540,7 @@
         "viewer"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/carousel"
       }
     },
@@ -588,7 +588,7 @@
         "toggle"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/checkbox"
       }
     },
@@ -631,7 +631,7 @@
         "single"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/collapsible"
       }
     },
@@ -682,7 +682,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/combobox"
       }
     },
@@ -732,7 +732,7 @@
         "search"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/command-palette"
       }
     },
@@ -776,7 +776,7 @@
         "triggered"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/context-menu"
       }
     },
@@ -836,7 +836,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/data-table"
       }
     },
@@ -883,7 +883,7 @@
         "selecting"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/date-picker"
       }
     },
@@ -935,7 +935,7 @@
         "window"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/dialog"
       }
     },
@@ -981,7 +981,7 @@
         "slide"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/drawer"
       }
     },
@@ -1026,7 +1026,7 @@
         "state"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/empty-state"
       }
     },
@@ -1080,7 +1080,7 @@
         "wrapper:"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/field"
       }
     },
@@ -1129,7 +1129,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/hover-card"
       }
     },
@@ -1180,7 +1180,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/input"
       }
     },
@@ -1227,7 +1227,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/input-otp"
       }
     },
@@ -1279,7 +1279,7 @@
         "visualización"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/kbd"
       }
     },
@@ -1328,7 +1328,7 @@
         "via"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/label"
       }
     },
@@ -1373,7 +1373,7 @@
         "single"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/listbox"
       }
     },
@@ -1421,7 +1421,7 @@
         "triggered"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/menu"
       }
     },
@@ -1474,7 +1474,7 @@
         "within"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/meter"
       }
     },
@@ -1527,7 +1527,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/navigation-menu"
       }
     },
@@ -1577,7 +1577,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/pagination"
       }
     },
@@ -1627,7 +1627,7 @@
         "runtime"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/popover"
       }
     },
@@ -1675,7 +1675,7 @@
         "runtime"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/progress"
       }
     },
@@ -1727,7 +1727,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/radio-group"
       }
     },
@@ -1775,7 +1775,7 @@
         "runtime"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/resizable-panels"
       }
     },
@@ -1827,7 +1827,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/scroll-area"
       }
     },
@@ -1876,7 +1876,7 @@
         "selection"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/select"
       }
     },
@@ -1923,7 +1923,7 @@
         "visual"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/separator"
       }
     },
@@ -1973,7 +1973,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/sheet"
       }
     },
@@ -2018,7 +2018,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/skeleton"
       }
     },
@@ -2063,7 +2063,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/slider"
       }
     },
@@ -2109,7 +2109,7 @@
         "spinner"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/spinner"
       }
     },
@@ -2158,7 +2158,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/switch"
       }
     },
@@ -2205,7 +2205,7 @@
         "tabs"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/tabs"
       }
     },
@@ -2253,7 +2253,7 @@
         "toast"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/toast"
       }
     },
@@ -2300,7 +2300,7 @@
         "two"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/toggle"
       }
     },
@@ -2346,7 +2346,7 @@
         "toggle"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/toggle-group"
       }
     },
@@ -2396,7 +2396,7 @@
         "toolbar"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/toolbar"
       }
     },
@@ -2446,7 +2446,7 @@
         "tooltip"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/tooltip"
       }
     },
@@ -2491,7 +2491,7 @@
         "with"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/tree"
       }
     },
@@ -2538,7 +2538,7 @@
         "windowed"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/virtual-list"
       }
     },
@@ -2592,7 +2592,7 @@
         "while"
       ],
       "provenance": {
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
         "directory": "packages/visually-hidden"
       }
     }

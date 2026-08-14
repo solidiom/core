@@ -184,13 +184,13 @@ If you fork Solidiom:
 
 ## Reporting Violations
 
-If you believe someone is misusing the Solidiom brand, please report it by opening an issue on the [Solidiom GitHub repository](https://github.com/solidiom/solidiom) or contacting the maintainers through official channels.
+If you believe someone is misusing the Solidiom brand, please report it by opening an issue on the [Solidiom GitHub repository](https://github.com/solidiom/core) or contacting the maintainers through official channels.
 
 ---
 
 ## Permission Requests
 
-To request permission for a use not covered by this policy, open an issue on our [GitHub repository](https://github.com/solidiom/solidiom) with:
+To request permission for a use not covered by this policy, open an issue on our [GitHub repository](https://github.com/solidiom/core) with:
 
 - A description of the intended use.
 - Where and how the brand assets will appear.

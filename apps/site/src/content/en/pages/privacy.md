@@ -276,10 +276,10 @@ We do not sell personal information. We do not share personal information for cr
 
 ## Changes to This Policy
 
-We will update this page when our data practices change. Since Solidiom is open-source, you can review the [commit history](https://github.com/solidiom/solidiom) for this file to see exactly what changed and when.
+We will update this page when our data practices change. Since Solidiom is open-source, you can review the [commit history](https://github.com/solidiom/core) for this file to see exactly what changed and when.
 
 ---
 
 ## Contact
 
-For privacy questions or data requests, open an issue on our [GitHub repository](https://github.com/solidiom/solidiom) or reach out through the channels listed on the website.
+For privacy questions or data requests, open an issue on our [GitHub repository](https://github.com/solidiom/core) or reach out through the channels listed on the website.
