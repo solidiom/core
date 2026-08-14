@@ -30,7 +30,7 @@
         "src/recipes/badge.tsx": "be52ee51723282d816172b12b131fd7b0e477bd37bb067fc926df790e1e2a798"
       }
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2026-08-14T06:04:56.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/badge"
   ],
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2026-08-14T06:04:56.000Z"
 }
