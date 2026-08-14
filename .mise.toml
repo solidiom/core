@@ -503,6 +503,10 @@ run = "scripts/release.sh"
 description = "Release: dry-run — run all tests without publishing"
 run = "scripts/release.sh --dry-run"
 
+[tasks."release:site"]
+description = "Release: build and deploy site only (no npm publish, no tests)"
+run = "scripts/release.sh --site-only"
+
 # ---------------------------------------------------------------------------
 # Workflow orchestrators — call the atomic tasks above in CI order.
 # Runs sequentially and stops on the first failure (fail-fast), except for the
