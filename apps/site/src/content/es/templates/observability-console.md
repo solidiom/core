@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-observability-console"
 stack: vite-solid-router
 portfolios: ["balanced-product", "enterprise-platform-governance"]
-translationSourceHash: "a3bbe1efef51753d3a7d02f56b9be8441ffd9189a7a95bd663c4379dad355448"
+translationSourceHash: "b1cb3a69bc907f4bfbc70ac62497c5a73b6d3d5eb46c26762135f40966f96337"
 translationStatus: draft
 ---
 

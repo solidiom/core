@@ -10,7 +10,7 @@ productLayer: block
 status: published
 category: "SHELL"
 requiredStates: ["loading", "empty", "error", "restricted"]
-translationSourceHash: "5be4dffe1f13a113a6073606b87b44ad3a92a7ed02eb2c47a9611a5091d857f4"
+translationSourceHash: "26f2889ff8bbbde355e6d0ec6015ba30af24270b16dc515794f25d4e81bb48e7"
 translationStatus: draft
 ---
 

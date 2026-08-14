@@ -17,7 +17,7 @@ source:
   export: ScrollAreaExample
   language: tsx
   runnable: true
-translationSourceHash: "a85a0b505300fe38adc42f855813f6e0a56f93fa1fee0616b94d23bd62659103"
+translationSourceHash: "bc86d269236ef181ebd95a2ba10d592cd80903b69810a7c1ce7d5194de8be686"
 translationStatus: draft
 ---
 

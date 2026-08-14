@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "checkbox"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "877775501a1c9f54616322bb4f067c5b019d9a4e90140222559f456f8b81f6d1"
+translationSourceHash: "9d96704753a79d21a27b6649188a74323db742292fd57982c98de8c488ecd62c"
 translationStatus: draft
 ---
 

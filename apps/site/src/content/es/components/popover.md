@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "popover"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "d9c4cf9882bceb661e2b5285ebf7122efe05738bfe01047f499945df31348d34"
+translationSourceHash: "59b97dbfc7144ef1456c0b56668148fe2c2675dd6b7a4ed29ac4c5636ae5d43d"
 translationStatus: draft
 ---
 

@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-multi-tenant-admin"
 stack: vite-solid-router
 portfolios: ["balanced-product", "enterprise-platform-governance"]
-translationSourceHash: "4a3ee446dc4daa200ecd670f52aab6091fd67c052610665e7363c7585b7148db"
+translationSourceHash: "ad8a65637ca548edaeedc40c9123a758001f8170342459119f80c32bb28913af"
 translationStatus: draft
 ---
 

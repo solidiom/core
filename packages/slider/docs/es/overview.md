@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/slider"
 primitive: slider
 section: overview
-translationSourceHash: "de11da99e94211d66d1279cf5174cec220f902cf211caaa03dde5a0d9fcc3184"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Slider no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "0ef9b0bd6365a676ae9a8e24de56494da24aa51c4cdd95950d4e6ac5bf196aa4"
+translationStatus: draft
 ---
 
 Numeric range input with thumb control.

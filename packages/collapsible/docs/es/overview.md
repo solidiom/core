@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/collapsible"
 primitive: collapsible
 section: overview
-translationSourceHash: "178e7b358b651daffff4c8c3a5fc94b8f8117ca0ac7543796c60d6040c09b0ff"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Collapsible no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "79ca91d6e941a42f68ae6e4c1ac72ef7aaf03fe0effe004da98ea87cec4e3a1a"
+translationStatus: draft
 ---
 
 Single expandable/collapsible section.

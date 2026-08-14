@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-onboarding-app"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
-translationSourceHash: "b2e136c0f84cdf73dd56cd22a94c87d04c823bb6f116f4b2056106fe1eca6d69"
+translationSourceHash: "df3cc86cff3e2b18b21cccc73132ece3b562cdb6dd5aefe723044df64ca17fcc"
 translationStatus: draft
 ---
 

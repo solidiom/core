@@ -17,7 +17,7 @@ source:
   export: AvatarExample
   language: tsx
 runnable: true
-translationSourceHash: "3c97dbfdf01412de7df9969e5144a48e345fa14a8a724e1e291f201323ef0233"
+translationSourceHash: "2a40ad7bc42e674334ca7d404337a252fd60879248c8ba86aa1efb479468b475"
 translationStatus: draft
 ---
 

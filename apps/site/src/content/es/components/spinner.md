@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "spinner"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "ffa84b8b7a7cb050b8ef1600f8dd83bcec2498b1eebac5e12db381482bd6289b"
+translationSourceHash: "aa4cde00e706a154aafc78f8e5655bcf35a6649121fcba7eefa2b8d1b1b63949"
 translationStatus: draft
 ---
 

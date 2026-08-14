@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/meter"
 primitive: meter
 section: overview
-translationSourceHash: "31f6e0e5cde4afbcc07a0314605703d65ea4a976aff5a47f3e4202fc0a54e531"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Meter es un primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "6c587d716724fe1733764e62259cbaec3f9762ee81ca526ddbb27a6b2a5a7b45"
+translationStatus: draft
 ---
 
 Scalar measurement within a known range (e.g. disk usage, signal strength).

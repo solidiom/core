@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-ai-workflow"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
-translationSourceHash: "6238dbbda8fa6e3f1508d5e392390a300339d10515f464dbf7b7466480f7104b"
+translationSourceHash: "88df17c0670026ad7102e7ec8c95e1d639711976461f79e21ad849f5f5b76674"
 translationStatus: draft
 ---
 

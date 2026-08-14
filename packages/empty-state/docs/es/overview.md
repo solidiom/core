@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/empty-state"
 primitive: empty-state
 section: overview
-translationSourceHash: "ac1c7cd2ba31a4ef8a096e37501b470b7de0cc611e5af861548e52357299c5ef"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Empty State no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "75db619a3922d126811c841b410e2de6fbd4c6c3f358e1072feda02f973683bf"
+translationStatus: draft
 ---
 
 Placeholder for empty content areas.

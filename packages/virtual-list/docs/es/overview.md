@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/virtual-list"
 primitive: virtual-list
 section: overview
-translationSourceHash: "f5fbaa2b0bdeb8d4771f7063123360095c571540441c00755377b92d5c5f3292"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Virtual List es un primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "c731e66b7d0d8732603e9126f5083230c7e9b8458210d6687a29d33976330e99"
+translationStatus: draft
 ---
 
 Viewport-windowed list for large datasets.

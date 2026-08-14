@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "breadcrumb"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "0af56d3373384cdacb1c4bce8a6f5491d990af02faa3a9651520121c10389593"
+translationSourceHash: "3e0efad77af1850beae86e218336dd99b2201f31ae006a7d43c8483bb94b350c"
 translationStatus: draft
 ---
 

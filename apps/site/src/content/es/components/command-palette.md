@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "command-palette"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "63caaf508bb415e09527cfd73a47d881914a143e3cb4e4efb441a9de8c5d0592"
+translationSourceHash: "ce37746eba1d1985027bdf0d3260faa679046f465973e0bee1901d57d48c4307"
 translationStatus: draft
 ---
 

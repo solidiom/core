@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "button"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "5c7a4ae78d2dc82fb29692da3a51f76e9efcc664304dd6525cd74d03d86045db"
+translationSourceHash: "eed1b4e427b1de8673e34c0c53eb7ffe2ddadea9b8e198971a3d70126a37f2ac"
 translationStatus: draft
 ---
 

@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "card"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "2270a6fe1ccf14954433172dee97d3ee21828668cd2c1a6ce559cf6224ad1ea8"
+translationSourceHash: "88232c2bf77da84a588d988baa4390f23434221b2425f8f8ee153f0e0ff5eeaa"
 translationStatus: draft
 ---
 

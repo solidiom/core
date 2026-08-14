@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "radio-group"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "b544f0c19a96ad7c60d309d65def23c300d63d106859a278cc83874258e87df0"
+translationSourceHash: "7178571133674df32cb70ae34491c1821928caddd8a5d28db4222803de4a892a"
 translationStatus: draft
 ---
 

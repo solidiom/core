@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-developer-portal"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
-translationSourceHash: "c7ada6107fbf8cc89cbb6e56cdc4e9c482568d7e9f130331a0acd05d6f64fd28"
+translationSourceHash: "fcf9d435853a360092f9c76ff8cee607950eb9b0ab76fd2ebcd7ae20ace76751"
 translationStatus: draft
 ---
 

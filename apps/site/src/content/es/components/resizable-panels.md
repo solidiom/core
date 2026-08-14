@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "resizable-panels"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "abfb34d281ba79f7e86e38a0e363b8b26900e1eb0d21cd545a7cb3351c3b7bec"
+translationSourceHash: "10de596d182577369db592d08e06a9defa089ee4550d25e40474e3fbf138f021"
 translationStatus: draft
 ---
 

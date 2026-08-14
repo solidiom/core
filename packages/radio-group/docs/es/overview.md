@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/radio-group"
 primitive: radio-group
 section: overview
-translationSourceHash: "09b9475e9bc53e8debc3cdc7cb716dcfd9d2d40445d780387bae596e4e762e7f"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Radio Group no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "b4715b0161b89348f476e25291c0b4417ae2a0a7bf54490c8a30f4f62cadf31a"
+translationStatus: draft
 ---
 
 Single-select radio button set with keyboard navigation.

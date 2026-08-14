@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-workflow-automation"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
-translationSourceHash: "910a7561aa5e67543066783bee7c6bf31dd4ba1992379247bfdaed25f6912b43"
+translationSourceHash: "40373a060f98405cfe9781708bccf4f9debdcf9defcff28b05efff950a856fab"
 translationStatus: draft
 ---
 

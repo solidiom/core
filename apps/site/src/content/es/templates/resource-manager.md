@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-resource-manager"
 stack: vite-solid-router
 portfolios: ["balanced-product", "enterprise-platform-governance"]
-translationSourceHash: "3820d90bd8b4f0a7348fcf2974f6aadafd964dd3785d99582996a46b33685a8b"
+translationSourceHash: "2daa6da28f8d16250cb945e0d77f2fa8f2d800406b4887659c328145060065d0"
 translationStatus: draft
 ---
 

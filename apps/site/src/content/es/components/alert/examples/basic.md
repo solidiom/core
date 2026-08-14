@@ -17,7 +17,7 @@ source:
   export: AlertExample
   language: tsx
 runnable: true
-translationSourceHash: "a31670f5f9060e8a263eecb72e33bab5e7869603af27fd0845191d52a3e36cd9"
+translationSourceHash: "17c4de3af9bd1a7ac7de8524306f0e9a8ae9c1c450852202d0d88b75df189f13"
 translationStatus: draft
 ---
 

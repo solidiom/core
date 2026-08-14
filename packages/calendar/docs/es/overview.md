@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/calendar"
 primitive: calendar
 section: overview
-translationSourceHash: "585e20fa5fb10146347044b7768feb7d3885c4f2a89557db4dc6be8bba495875"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Calendar no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "b5e2becdece40080b72fbd07ed88eec704e63c7ad377f864fee5b807166370ec"
+translationStatus: draft
 ---
 
 Date selection with day/month/year views.

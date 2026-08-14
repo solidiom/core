@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "badge"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "03b28660444c76f93be4d4e410f391f190a6023084c727531c0a1084e3e16195"
+translationSourceHash: "6be248162bee42576351a19b61f368217a82e9b4e8943fa785b7ecb1a82bc0fe"
 translationStatus: draft
 ---
 

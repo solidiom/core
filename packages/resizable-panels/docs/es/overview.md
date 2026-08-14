@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/resizable-panels"
 primitive: resizable-panels
 section: overview
-translationSourceHash: "341b84aba5b2db799af46d26b3fbee6bbbbc9ee81f4c4c278bba47e4af33996b"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Resizable Panels no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "d648e56479279a6162cec47c22bf3546151f33ec07d3cf8624d7eb915656ca7e"
+translationStatus: draft
 ---
 
 Drag-to-resize panel layout.

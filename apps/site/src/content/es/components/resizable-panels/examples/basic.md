@@ -17,7 +17,7 @@ source:
   export: ResizablePanelsExample
   language: tsx
   runnable: true
-translationSourceHash: "e72be280bcc16d5d6408dd4c4f36e32e7cbea8854523dae9bb179b227777d1c4"
+translationSourceHash: "fbb4e225a23f19aaa19f609b3e3dd34922316dc568d3e486473e7bcd86b38a06"
 translationStatus: draft
 ---
 

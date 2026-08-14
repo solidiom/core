@@ -8,65 +8,65 @@ maturity: draft
 product: "Solidiom"
 productLayer: page
 status: draft
-translationSourceHash: "d964dd606db6eb829efc5ddd126161d57a2a0f318265a602ba2e2706213ed3f0"
+translationSourceHash: "ed8c9a34a75742cbea5b5faecb15e1794e4be18c6862881eaece005fae3b2804"
 translationStatus: draft
 ---
 
-# Enterprise
+# Empresa
 
-Solidiom's Enterprise portfolio provides production-ready templates for platform teams building internal tools, compliance systems, and operational consoles.
+El portafolio Enterprise de Solidiom proporciona plantillas listas para producción para equipos de plataforma que construyen herramientas internas, sistemas de cumplimiento y consolas operacionales.
 
-## Enterprise Templates
+## Plantillas Enterprise
 
-| Template                                               | Purpose                                           |
-| ------------------------------------------------------ | ------------------------------------------------- |
-| [Identity & Access](/templates/identity-access/)       | User directory, RBAC roles, session management    |
-| [Audit Log](/templates/audit-log/)                     | Event stream, filters, compliance export          |
-| [Billing Operations](/templates/billing-operations/)   | Invoices, reconciliation, financial reports       |
-| [Incident Response](/templates/incident-response/)     | Active incidents, runbooks, postmortems           |
-| [AI Operations](/templates/ai-operations/)             | Model monitoring, deployments, cost tracking      |
-| [API Management](/templates/api-management/)           | Endpoint catalog, key lifecycle, usage analytics  |
-| [Developer Portal](/templates/developer-portal/)       | Documentation, SDK playground, app management     |
-| [Security Center](/templates/security-center/)         | Threat dashboard, vulnerabilities, policies       |
-| [Compliance Center](/templates/compliance-center/)     | Framework tracking, control assessments, evidence |
-| [Data Governance](/templates/data-governance/)         | Data catalog, lineage, classification             |
-| [Workflow Automation](/templates/workflow-automation/) | Visual designer, run history, integrations        |
-| [Support Operations](/templates/support-operations/)   | Ticket queue, knowledge base, metrics             |
-| [Enterprise Settings](/templates/enterprise-settings/) | Organization config, SSO/MFA, SCIM                |
+| Plantilla                                              | Propósito                                              |
+| ------------------------------------------------------ | ------------------------------------------------------ |
+| [Identidad y Acceso](/templates/identity-access/)      | Directorio de usuarios, roles RBAC, gestión de sesiones |
+| [Registro de Auditoría](/templates/audit-log/)         | Flujo de eventos, filtros, exportación de cumplimiento  |
+| [Operaciones de Facturación](/templates/billing-operations/) | Facturas, reconciliación, reportes financieros    |
+| [Respuesta a Incidentes](/templates/incident-response/) | Incidentes activos, runbooks, postmortems             |
+| [Operaciones de IA](/templates/ai-operations/)         | Monitoreo de modelos, despliegues, seguimiento de costos |
+| [Gestión de API](/templates/api-management/)           | Catálogo de endpoints, ciclo de vida de claves, analíticas de uso |
+| [Portal de Desarrolladores](/templates/developer-portal/) | Documentación, playground de SDK, gestión de aplicaciones |
+| [Centro de Seguridad](/templates/security-center/)     | Dashboard de amenazas, vulnerabilidades, políticas     |
+| [Centro de Cumplimiento](/templates/compliance-center/) | Seguimiento de frameworks, evaluaciones de controles, evidencia |
+| [Gobernanza de Datos](/templates/data-governance/)     | Catálogo de datos, linaje, clasificación               |
+| [Automatización de Flujos](/templates/workflow-automation/) | Diseñador visual, historial de ejecución, integraciones |
+| [Operaciones de Soporte](/templates/support-operations/) | Cola de tickets, base de conocimiento, métricas       |
+| [Configuración Enterprise](/templates/enterprise-settings/) | Configuración de organización, SSO/MFA, SCIM       |
 
-## Technical Architecture
+## Arquitectura Técnica
 
-All enterprise templates share a common foundation:
+Todas las plantillas enterprise comparten una base común:
 
-- **Solid 2** — reactive UI framework with fine-grained reactivity
-- **Vite + Solid Router** — fast builds with file-based routing
-- **Source ownership** — you own the code; no vendor lock-in or runtime SDK
-- **Theme system** — CSS custom properties for full visual customization
-- **Accessibility** — WCAG 2.2 AA compliance with APG patterns throughout
+- **Solid 2** — framework de UI reactivo con reactividad de grano fino
+- **Vite + Solid Router** — builds rápidos con enrutamiento basado en archivos
+- **Propiedad del codigo fuente** — tú eres dueño del código; sin vendor lock-in ni SDK en runtime
+- **Sistema de temas** — propiedades personalizadas CSS para personalización visual completa
+- **Accesibilidad** — cumplimiento WCAG 2.2 AA con patrones APG en todo
 
-## Security Properties
+## Propiedades de Seguridad
 
-- **Registry signatures** — all installed code is integrity-verified
-- **No runtime SDK** — no phone-home, no telemetry, no external dependencies at runtime
-- **Source-mode install** — inspect, audit, and modify every line of code
-- **CSP-compatible** — no inline scripts, no eval, no external resource loading
-- **Offline capable** — CLI and templates work without network access
+- **Firmas del registro** — todo el código instalado tiene integridad verificada
+- **Sin SDK en runtime** — sin phone-home, sin telemetría, sin dependencias externas en runtime
+- **Instalación en modo fuente** — inspecciona, audita y modifica cada línea de código
+- **Compatible con CSP** — sin scripts inline, sin eval, sin carga de recursos externos
+- **Capaz de operar offline** — el CLI y las plantillas funcionan sin acceso a la red
 
-## Deployment
+## Despliegue
 
-Enterprise templates deploy to any static hosting platform:
+Las plantillas enterprise se despliegan en cualquier plataforma de hosting estático:
 
 - Cloudflare Pages
 - Vercel
 - Netlify
 - AWS S3 + CloudFront
-- Self-hosted (any HTTP server)
+- Auto-hospedado (cualquier servidor HTTP)
 
-No server-side runtime is required for the base templates. Add your own API layer as needed.
+No se requiere runtime del lado del servidor para las plantillas base. Agrega tu propia capa de API según sea necesario.
 
-## What This Is Not
+## Lo Que Esto No Es
 
-- This is **not a hosted SaaS** — you deploy and operate your own instances
-- There are **no SLAs or support contracts** — this is open-source software
-- There are **no license fees** — Apache 2.0 licensed
-- There is **no vendor lock-in** — source-owned, fork-friendly
+- Esto **no es un SaaS hospedado** — tú despliegas y operas tus propias instancias
+- **No hay SLAs ni contratos de soporte** — esto es software de código abierto
+- **No hay tarifas de licencia** — licenciado bajo Apache 2.0
+- **No hay vendor lock-in** — propiedad del codigo fuente, amigable para bifurcación

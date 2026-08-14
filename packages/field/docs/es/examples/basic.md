@@ -17,8 +17,8 @@ source:
   export: Root
   language: tsx
 runnable: false
-runnableReason: "Sin interacción con teclado declarada en el contrato de accesibilidad."
-translationSourceHash: "f4709c17e2ff443a0d42931f66434a125e9233b7300156240722c65b3afe827e"
+runnableReason: "No keyboard interaction declared in the accessibility contract."
+translationSourceHash: "12e77b82e5c081cc33cbf2975a1e27987f0a83bbf72b9e3fded0494337b72266"
 translationStatus: draft
 ---
 

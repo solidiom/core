@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "combobox"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "97fd814333dde282f3accf8ffd4e60457c82ca814069edd9d1ea9fdbfff1ccaa"
+translationSourceHash: "6c4014a458a3747192dddf8bcde9df1220c5e98c5a1f52ff11e534d5cb420eb5"
 translationStatus: draft
 ---
 

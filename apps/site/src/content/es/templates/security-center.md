@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-security-center"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
-translationSourceHash: "9a0909ff67deec0d1c3351b455ecc348052f4876fd678a666bea42daf689de3b"
+translationSourceHash: "328fddfb3986d2083cfb721d6460819be1777449831ad5a363e4929a5de929a3"
 translationStatus: draft
 ---
 

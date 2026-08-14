@@ -17,7 +17,7 @@ source:
   export: ProgressExample
   language: tsx
 runnable: true
-translationSourceHash: "c65ef6a1743946e8d6d92eacdd6bad8d42fd1ccad8c4475f5aa5075ea8b8fbef"
+translationSourceHash: "e635dd4c6782b8b63218d2ced9c8434f6e355cdadb57cf729503fcc9d3b4677d"
 translationStatus: draft
 ---
 

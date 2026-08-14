@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/navigation-menu"
 primitive: navigation-menu
 section: overview
-translationSourceHash: "1dedf4562982d481b82bd8425ecafb5c2179ba91d596fb628856686e851fe026"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Navigation Menu no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "d75e5155dc930908a677969175883ba819ea0de7fb9f4d81669b0c6181fe7151"
+translationStatus: draft
 ---
 
 Un componente de navegación de nivel superior con sub-menús desplegables accesibles.

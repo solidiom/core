@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/pagination"
 primitive: pagination
 section: overview
-translationSourceHash: "b47627c26aa53fae4b19bda270faefc73ef1bf6912847c4dca9c0b1a5d09b71f"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Pagination no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "0f6f0263b2493d3bd3ed7b6280a797cdbffd3c4b705988af528daf692b81045e"
+translationStatus: draft
 ---
 
 Page navigation with prev/next and page numbers.

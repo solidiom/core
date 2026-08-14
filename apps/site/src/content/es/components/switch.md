@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "switch"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "08c4f9699419042ad53c8fc369774a3650255a00f537499cd877432d3d337d1c"
+translationSourceHash: "750907c511f7f268db33c6ad544cfec25d6779d8fa2a7281b68ec3974614fb73"
 translationStatus: draft
 ---
 

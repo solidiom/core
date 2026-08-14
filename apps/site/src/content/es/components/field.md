@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "field"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "aca1f446c5cc0086904d23c13a0fbd28e7e4d42faf4a4449da45106f868c3126"
+translationSourceHash: "f8fb9242d51121e57cd018209de129d556bf82eb45a44e7d529363b5d8f7235f"
 translationStatus: draft
 ---
 

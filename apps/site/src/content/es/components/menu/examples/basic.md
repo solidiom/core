@@ -17,7 +17,7 @@ source:
   export: MenuExample
   language: tsx
 runnable: true
-translationSourceHash: "f6dadd238c4e8297d15c5da9cc784a7a850cc4637e87d4f5e1d58d2f00686223"
+translationSourceHash: "bb4d5a8c7d204a7bd49514174862a7c17a6ca783a0f2c0c8f95d8f9a8b7cb70d"
 translationStatus: draft
 ---
 

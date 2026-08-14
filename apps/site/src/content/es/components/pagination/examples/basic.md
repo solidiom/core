@@ -17,7 +17,7 @@ source:
   export: PaginationExample
   language: tsx
 runnable: true
-translationSourceHash: "dff095187aaa52eb3dafec34c75c0642bc864f52362ef2ab38913d4b2750d6ca"
+translationSourceHash: "b1d041629fb9457d956a403e1346c56788b1f6c5eba251e2edf383426bfec405"
 translationStatus: draft
 ---
 

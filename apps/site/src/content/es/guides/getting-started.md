@@ -8,20 +8,20 @@ maturity: beta
 product: "Solidiom"
 productLayer: guide
 status: draft
-translationSourceHash: "d6676193c4bfaf794b6c9017c97481a4096aa2e950374ca66b04250ef98f3265"
+translationSourceHash: "9342a7b41cbb9a66013b508ac4adc8e6a8fb2b39b7d5c94de2a00e5ec2d64daa"
 translationStatus: draft
 ---
 
-# Getting Started
+# Primeros pasos
 
-Get up and running with Solidiom in under 5 minutes.
+Pon en marcha Solidiom en menos de 5 minutos.
 
-## Prerequisites
+## Requisitos previos
 
-- Node.js 20+ (LTS recommended)
-- A package manager: npm, pnpm, Yarn, or Bun
+- Node.js 20+ (se recomienda LTS)
+- Un gestor de paquetes: npm, pnpm, Yarn o Bun
 
-## Create a Project
+## Crear un proyecto
 
 ```sh
 npx solidiom create my-app --template saas-dashboard
@@ -30,18 +30,18 @@ npm install
 npm run dev
 ```
 
-## Choose a Template
+## Elegir una plantilla
 
-Solidiom ships 31 templates across two portfolios:
+Solidiom incluye 31 plantillas en dos portafolios:
 
-- **Balanced Product** — SaaS dashboards, auth flows, billing, content management
-- **Enterprise** — IAM, audit logs, compliance, API management, security
+- **Balanced Product** — Dashboards SaaS, flujos de autenticación, facturación, gestión de contenido
+- **Enterprise** — IAM, registros de auditoría, cumplimiento, gestión de API, seguridad
 
-Browse all templates at [/templates/](/templates/).
+Explora todas las plantillas en [/templates/](/templates/).
 
-## Add Components
+## Agregar componentes
 
-Add individual components to an existing project:
+Agrega componentes individuales a un proyecto existente:
 
 ```sh
 npx solidiom add button
@@ -49,29 +49,29 @@ npx solidiom add dialog
 npx solidiom add data-table
 ```
 
-## Choose a Styling Profile
+## Elegir un perfil de estilos
 
-Solidiom supports three styling outputs:
+Solidiom soporta tres salidas de estilos:
 
-- **CSS** — Plain CSS with semantic data-attribute selectors
-- **Tailwind** — Tailwind CSS utility classes
-- **UnoCSS** — UnoCSS atomic utilities
+- **CSS** — CSS plano con selectores semánticos de atributos data
+- **Tailwind** — Clases de utilidad Tailwind CSS
+- **UnoCSS** — Utilidades atómicas UnoCSS
 
-Set your profile during project creation or in `.solidiom/config.json`.
+Configura tu perfil durante la creación del proyecto o en `.solidiom/config.json`.
 
-## Choose a Theme
+## Elegir un tema
 
-Apply a preset theme or build your own:
+Aplica un tema predefinido o crea el tuyo propio:
 
 ```sh
 npx solidiom add --theme ocean
 ```
 
-Available presets: Ocean, Forest, Slate, Aurora.
+Presets disponibles: Ocean, Forest, Slate, Aurora.
 
-## Next Steps
+## Siguientes pasos
 
-- [Browse primitives](/primitives/) — 52 headless building blocks
-- [Browse components](/components/) — 52 styled recipe wrappers
-- [Theme builder](/themes/builder/) — visual theme editor
-- [CLI reference](/guides/cli-overview/) — full command documentation
+- [Explorar primitivos](/primitives/) — 52 bloques de construcción headless
+- [Explorar componentes](/components/) — 52 wrappers de recetas con estilos
+- [Constructor de temas](/themes/builder/) — editor visual de temas
+- [Referencia del CLI](/guides/cli-overview/) — documentación completa de comandos

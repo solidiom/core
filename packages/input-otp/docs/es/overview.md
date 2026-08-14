@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/input-otp"
 primitive: input-otp
 section: overview
-translationSourceHash: "215d4676ae436fbf9b6d3070faeaa0a8843d8510c0180efc7db91cb9df811d14"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Input OTP no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "ca64dff65b05a43ef39d0fa78b3ecb740741f9449a02425bc204bc2168bebe61"
+translationStatus: draft
 ---
 
 A one-time password input with individual character slots.

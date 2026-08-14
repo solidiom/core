@@ -17,7 +17,7 @@ source:
   export: DrawerExample
   language: tsx
   runnable: true
-translationSourceHash: "2734513466a958fe45f2c3989889df7a3313e3132bd20dafb989aca26e62b0c9"
+translationSourceHash: "fcbcc489018317b70eaa11d0d3b1bc04a12ba3fdf601a2a5c5208b5c74f1961b"
 translationStatus: draft
 ---
 

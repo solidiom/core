@@ -17,7 +17,7 @@ source:
   export: DataTableExample
   language: tsx
 runnable: true
-translationSourceHash: "dc4478f8f2bc962d05ab3a1058c84740aea31b940b4c0e91083e1d545b2c570c"
+translationSourceHash: "352bd574fdd546ce08d451f66a89e6e213413bc212d33d12dc22f066f19ef1b8"
 translationStatus: draft
 ---
 

@@ -17,11 +17,11 @@ source:
   export: BadgeExample
   language: tsx
 runnable: true
-translationSourceHash: "db48f11571369a4b1685c0d33aab6b44b248d879e0bdb57916cbd6b8565752af"
+translationSourceHash: "110e2de3e7aa7624a6595867f7ae63479770c410cbf61ad675e2592def77474b"
 translationStatus: draft
 ---
 
-The Badge component is a styled recipe wrapper around the `@solidiom/badge` primitive. It provides a visual indicator for status, count, or categorization with variant support.
+El componente Badge es un wrapper de receta con estilos sobre el primitivo `@solidiom/badge`. Proporciona un indicador visual para estado, conteo o categorización con soporte de variantes.
 
 ```tsx
 import { StyledBadge, Badge } from "@solidiom/recipes-css"
@@ -29,9 +29,9 @@ import { StyledBadge, Badge } from "@solidiom/recipes-css"
 ;<StyledBadge variant="default">Default</StyledBadge>
 ```
 
-## Variants
+## Variantes
 
-Badges support default, secondary, destructive, and outline variants.
+Los badges soportan las variantes default, secondary, destructive y outline.
 
 ```tsx
 import { StyledBadge, Badge } from "@solidiom/recipes-css"

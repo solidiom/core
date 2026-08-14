@@ -9,58 +9,61 @@ product: "Solidiom"
 productLayer: article
 status: draft
 date: "2026-08-07"
-translationSourceHash: "ece1e796d124c270b23fa8ce6b8e963317f30f9f3fe5e220a37b23ebd6c78854"
+authors:
+  - solidiom-core
+tags: [styling, tailwind, architecture]
+translationSourceHash: "44f10bc82b67ff8f663b51802cfb70b5096b8ab43afa3c2803c7d42c11ca54b6"
 translationStatus: draft
 ---
 
-# Styling-System Neutrality
+# Neutralidad del Sistema de Estilos
 
-Solidiom doesn't pick a side in the CSS-vs-Tailwind-vs-utility debate. It supports all three with equal fidelity through the recipe system.
+Solidiom no toma partido en el debate CSS-vs-Tailwind-vs-utilidades. Soporta los tres con igual fidelidad a través del sistema de recetas.
 
-## The Problem
+## El Problema
 
-Most component libraries force a styling choice:
+La mayoría de las bibliotecas de componentes fuerzan una elección de estilizado:
 
-- Tailwind libraries require Tailwind
-- CSS-in-JS libraries require a runtime
-- Headless libraries give you nothing — you style everything from scratch
+- Las bibliotecas de Tailwind requieren Tailwind
+- Las bibliotecas CSS-in-JS requieren un runtime
+- Las bibliotecas headless no te dan nada — estilizas todo desde cero
 
-Teams change their minds. Projects have constraints. A library shouldn't be the constraint.
+Los equipos cambian de opinión. Los proyectos tienen restricciones. Una biblioteca no debería ser la restricción.
 
-## The Recipe Architecture
+## La Arquitectura de Recetas
 
-Solidiom separates behavior from styling at the architecture level:
+Solidiom separa el comportamiento del estilizado a nivel de arquitectura:
 
 ```
 Primitive (behavior) → Recipe (styling) → Component (composed)
 ```
 
-- **Primitives** use semantic data attributes (`data-state`, `data-disabled`, `data-expanded`)
-- **Recipes** target those attributes with styling rules
-- **Components** compose primitives + recipes into installable units
+- Los **primitivos** usan atributos de datos semánticos (`data-state`, `data-disabled`, `data-expanded`)
+- Las **recetas** apuntan a esos atributos con reglas de estilo
+- Los **componentes** componen primitivos + recetas en unidades instalables
 
-Three recipe profiles ship:
+Se incluyen tres perfiles de receta:
 
-| Profile    | Technology   | Approach                                    |
-| ---------- | ------------ | ------------------------------------------- |
-| `css`      | Plain CSS    | BEM-like classes + data-attribute selectors |
-| `tailwind` | Tailwind CSS | Utility classes + `@apply` for states       |
-| `unocss`   | UnoCSS       | Atomic utilities + custom rules             |
+| Perfil     | Tecnología   | Enfoque                                          |
+| ---------- | ------------ | ------------------------------------------------ |
+| `css`      | CSS puro     | Clases tipo BEM + selectores de atributos de datos |
+| `tailwind` | Tailwind CSS | Clases de utilidad + `@apply` para estados        |
+| `unocss`   | UnoCSS       | Utilidades atómicas + reglas personalizadas        |
 
-## How Parity Is Enforced
+## Cómo Se Aplica la Paridad
 
-The recipe parity audit (`pnpm run audit:recipe-parity`) ensures:
+La auditoría de paridad de recetas (`pnpm run audit:recipe-parity`) asegura:
 
-1. All three profiles cover the same primitive slots
-2. All three profiles handle the same states (hover, focus, disabled, loading, error)
-3. Visual output is equivalent across profiles (verified by computed-style comparison)
-4. No profile has features the others lack
+1. Los tres perfiles cubren los mismos slots de primitivo
+2. Los tres perfiles manejan los mismos estados (hover, foco, disabled, loading, error)
+3. La salida visual es equivalente entre perfiles (verificado por comparación de computed-style)
+4. Ningún perfil tiene funciones que los otros carezcan
 
-This means switching from Tailwind to plain CSS is a config change, not a rewrite.
+Esto significa que cambiar de Tailwind a CSS puro es un cambio de configuración, no una reescritura.
 
-## Choosing a Profile
+## Elegir un Perfil
 
-Set your profile once in `.solidiom/config.json`:
+Establece tu perfil una vez en `.solidiom/config.json`:
 
 ```json
 {
@@ -68,15 +71,15 @@ Set your profile once in `.solidiom/config.json`:
 }
 ```
 
-Or per-command:
+O por comando:
 
 ```sh
 solidiom add button --styling css
 ```
 
-## The Theme Layer
+## La Capa de Temas
 
-Themes are profile-agnostic. The same theme preset (Ocean, Forest, Slate, Aurora) works identically across all three styling profiles because themes define CSS custom properties, not utility classes.
+Los temas son agnósticos al perfil. El mismo preset de tema (Ocean, Forest, Slate, Aurora) funciona de manera idéntica en los tres perfiles de estilizado porque los temas definen propiedades personalizadas CSS, no clases de utilidad.
 
 ```css
 /* Works with any profile */
@@ -85,22 +88,22 @@ Themes are profile-agnostic. The same theme preset (Ocean, Forest, Slate, Aurora
 }
 ```
 
-## Extending Recipes
+## Extender Recetas
 
-Recipes are source-owned. To customize:
+Las recetas tienen propiedad del codigo fuente. Para personalizar:
 
-1. Install in source mode: `solidiom add button --source`
-2. Modify the recipe file directly
-3. The styling remains connected to the primitive's data attributes
+1. Instala en modo fuente: `solidiom add button --source`
+2. Modifica el archivo de receta directamente
+3. El estilizado permanece conectado a los atributos de datos del primitivo
 
-You're never locked into our design decisions. The recipe is a starting point, not a cage.
+Nunca estás atrapado en nuestras decisiones de diseño. La receta es un punto de partida, no una jaula.
 
-## Compile-Time Optimization
+## Optimización en Tiempo de Compilación
 
-Phase 3A introduces optional compile-time transforms:
+La Fase 3A introduce transformaciones opcionales en tiempo de compilación:
 
-- **Recipe extraction** — moves recipe styles to static CSS at build time
-- **Dead-part elimination** — removes unused component slots from the bundle
-- **Variant expansion** — pre-computes variant combinations
+- **Extracción de recetas** — mueve los estilos de receta a CSS estático en tiempo de build
+- **Eliminación de partes muertas** — elimina slots de componente no utilizados del bundle
+- **Expansión de variantes** — pre-calcula combinaciones de variantes
 
-These optimizations work identically across all three profiles because they operate on the data-attribute contract, not on styling implementation details.
+Estas optimizaciones funcionan de manera idéntica en los tres perfiles porque operan sobre el contrato de atributos de datos, no sobre detalles de implementación de estilizado.

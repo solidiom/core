@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/switch"
 primitive: switch
 section: overview
-translationSourceHash: "feffd8fe06554379839ad5b5ce8d452ea72a971502f25854e1803ed9cd6b00da"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Switch es un primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "c448694bd01222276b113c69c2e5822e20b08fa00f6a1e4e2d77c2ae7df2407b"
+translationStatus: draft
 ---
 
 Interruptor binario con semántica de encendido/apagado.

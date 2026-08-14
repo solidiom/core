@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-saas-dashboard"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
-translationSourceHash: "a624f23044cb96d635eacd4ed886b5251848a8ad3ee0f161c198e4103dd8c7a1"
+translationSourceHash: "27da56b29b21480d5247675f41e66256cb81734b14b7c88759a56e84f9047830"
 translationStatus: draft
 ---
 

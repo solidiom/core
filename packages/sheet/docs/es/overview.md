@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/sheet"
 primitive: sheet
 section: overview
-translationSourceHash: "7dfa8e95ebe3bbb4fdb1a36873ac2fac2cf32f4256aab24fd36d29ee526bc32a"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Sheet no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "44b358e5bcc821c406ae4b8675278fd10f29f9608eb8068143dcea69d4308ec3"
+translationStatus: draft
 ---
 
 Side-panel dialog with slide animation.

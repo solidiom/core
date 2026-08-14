@@ -17,7 +17,7 @@ source:
   export: TooltipExample
   language: tsx
 runnable: true
-translationSourceHash: "4d62ce367c83cc6d0d5c395b248315e57c69f4b7d6d06d0e278b2641d74b0e77"
+translationSourceHash: "8af5242ef1631b36c7a2250cd6ce5445c7e412b8b1eb5ce278507c7801b11a6d"
 translationStatus: draft
 ---
 

@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-audit-log"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
-translationSourceHash: "09efbc606398a27065f29cdf36fc624d25bbb447063a73e957e5bd5655058aad"
+translationSourceHash: "6555ce5ce4c7db5ea2344f7a385a8af182e8f931deaba14d2bab3037d63a8df7"
 translationStatus: draft
 ---
 

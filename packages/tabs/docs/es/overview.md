@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/tabs"
 primitive: tabs
 section: overview
-translationSourceHash: "2617a73648c639709b657e59ff466ded740a8020ba3c37d1f6ef621af9154eaf"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Tabs no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "d495033b19f3b6c3b4bff64806e25d7d8df302a79032a2f43436d2c534a02b9f"
+translationStatus: draft
 ---
 
 Tabbed content switcher.

@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "avatar"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "6b0fa7c4e251167f8f6983fd68303ccf8d20b10510988a962d183c3e1fab11d9"
+translationSourceHash: "f96835a6c7e72959c4a75f87aeedfcc80758ab50cbb2fdd033d19fc0ac0dcb96"
 translationStatus: draft
 ---
 

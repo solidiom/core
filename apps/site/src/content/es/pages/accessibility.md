@@ -8,91 +8,91 @@ maturity: draft
 product: "Solidiom"
 productLayer: page
 status: draft
-translationSourceHash: "66ae67ab4432320a7af3ba4cb90556045827359176208480ce13836b3501fa25"
+translationSourceHash: "4e59697d19c0e2803d286976b8ca32fecfe4ca55652a814da1f75b21a949a156"
 translationStatus: draft
 ---
 
-# Accessibility
+# Accesibilidad
 
-Solidiom is built on the principle that accessible software is not optional. Every primitive, component, and template is designed and tested against WCAG 2.2 Level AA and WAI-ARIA Authoring Practices Guide (APG) patterns.
+Solidiom está construido sobre el principio de que el software accesible no es opcional. Cada primitivo, componente y plantilla está diseñado y probado contra WCAG 2.2 Nivel AA y los patrones de la Guía de Prácticas de Autoría WAI-ARIA (APG).
 
-## Our Commitment
+## Nuestro Compromiso
 
-- Every interactive primitive implements the corresponding APG keyboard and ARIA pattern
-- Every primitive ships with committed accessibility evidence (`evidence.json`)
-- Every theme preset passes AA contrast minimums in both light and dark modes
-- Automated axe-core scans run on every build for all 52 primitives
-- Keyboard navigation is documented and tested for every interactive element
+- Cada primitivo interactivo implementa el patrón APG correspondiente de teclado y ARIA
+- Cada primitivo incluye evidencia de accesibilidad comprometida (`evidence.json`)
+- Cada preset de tema cumple los mínimos de contraste AA tanto en modo claro como oscuro
+- Los escaneos automatizados de axe-core se ejecutan en cada build para los 52 primitivos
+- La navegación por teclado está documentada y probada para cada elemento interactivo
 
-## Evidence
+## Evidencia
 
-Our accessibility evidence is machine-verified and committed to the repository:
+Nuestra evidencia de accesibilidad es verificada por máquina y comprometida en el repositorio:
 
-### Automated Testing
+### Pruebas Automatizadas
 
-| Layer               | Coverage     | Tool            | Evidence                         |
-| ------------------- | ------------ | --------------- | -------------------------------- |
-| Primitives (52)     | 100%         | axe-core 4.10.2 | `docs/axe-scan-results.md`       |
-| Keyboard navigation | 100%         | Manual audit    | `docs/keyboard-audit-results.md` |
-| Color contrast      | All presets  | Theme audit     | `pnpm run audit:preset-themes`   |
-| Focus management    | All overlays | Vitest browser  | Per-primitive evidence           |
+| Capa                       | Cobertura      | Herramienta     | Evidencia                        |
+| -------------------------- | -------------- | --------------- | -------------------------------- |
+| Primitivos (52)            | 100%           | axe-core 4.10.2 | `docs/axe-scan-results.md`       |
+| Navegación por teclado     | 100%           | Auditoría manual | `docs/keyboard-audit-results.md` |
+| Contraste de color         | Todos los presets | Auditoría de tema | `pnpm run audit:preset-themes`   |
+| Gestión del foco           | Todos los overlays | Vitest browser  | Evidencia por primitivo          |
 
-### Per-Primitive Evidence
+### Evidencia por Primitivo
 
-Each of the 52 primitives has a committed `packages/<name>/docs/accessibility/evidence.json` containing:
+Cada uno de los 52 primitivos tiene un archivo `packages/<name>/docs/accessibility/evidence.json` comprometido que contiene:
 
-- axe-core scan results (violations, passes, incomplete)
-- Keyboard navigation contract
-- ARIA attributes and roles used
-- Screen reader behavior expectations
+- Resultados del escaneo axe-core (violaciones, passes, incompletos)
+- Contrato de navegación por teclado
+- Atributos y roles ARIA utilizados
+- Expectativas de comportamiento del lector de pantalla
 
-### Screen Reader Testing
+### Pruebas con Lector de Pantalla
 
-| Assistive Technology | Status            | Platform  |
-| -------------------- | ----------------- | --------- |
-| VoiceOver            | Documented        | macOS/iOS |
-| NVDA                 | Planned (Phase 4) | Windows   |
-| JAWS                 | Planned (Phase 4) | Windows   |
-| TalkBack             | Planned (Phase 4) | Android   |
+| Tecnología de Asistencia | Estado            | Plataforma |
+| ------------------------- | ----------------- | ---------- |
+| VoiceOver                 | Documentado       | macOS/iOS  |
+| NVDA                      | Planificado (Fase 4) | Windows    |
+| JAWS                      | Planificado (Fase 4) | Windows    |
+| TalkBack                  | Planificado (Fase 4) | Android    |
 
-## WCAG 2.2 AA Compliance
+## Cumplimiento WCAG 2.2 AA
 
-All primitives and components comply with WCAG 2.2 Level AA. Our full audit is documented at `docs/qa/wcag-2.2-aa-audit.md` and covers:
+Todos los primitivos y componentes cumplen con WCAG 2.2 Nivel AA. Nuestra auditoría completa está documentada en `docs/qa/wcag-2.2-aa-audit.md` y cubre:
 
-- **Perceivable** — semantic HTML, ARIA roles, 4.5:1+ text contrast, `rem` typography
-- **Operable** — full keyboard navigation, no traps, visible focus, 24px+ targets
-- **Understandable** — `lang` attributes, no unexpected changes, labeled inputs
-- **Robust** — valid ARIA, live regions for dynamic content
+- **Perceptible** — HTML semántico, roles ARIA, contraste de texto 4.5:1+, tipografía en `rem`
+- **Operable** — navegación completa por teclado, sin trampas, foco visible, objetivos táctiles de 24px+
+- **Comprensible** — atributos `lang`, sin cambios inesperados, inputs etiquetados
+- **Robusto** — ARIA válido, regiones en vivo para contenido dinámico
 
-## APG Pattern Compliance
+## Cumplimiento de Patrones APG
 
-Interactive primitives implement WAI-ARIA Authoring Practices patterns:
+Los primitivos interactivos implementan patrones de WAI-ARIA Authoring Practices:
 
-| Pattern        | Primitives                        |
-| -------------- | --------------------------------- |
-| Accordion      | accordion                         |
-| Dialog (Modal) | dialog, alert-dialog              |
-| Menu/Menubar   | menu, context-menu, dropdown-menu |
-| Tabs           | tabs                              |
-| Combobox       | combobox, select                  |
-| Listbox        | listbox, select                   |
-| Tooltip        | tooltip                           |
-| Switch         | switch                            |
-| Slider         | slider                            |
-| Tree View      | tree                              |
-| Alert          | alert, toast                      |
+| Patrón          | Primitivos                        |
+| --------------- | --------------------------------- |
+| Accordion       | accordion                         |
+| Dialog (Modal)  | dialog, alert-dialog              |
+| Menu/Menubar    | menu, context-menu, dropdown-menu |
+| Tabs            | tabs                              |
+| Combobox        | combobox, select                  |
+| Listbox         | listbox, select                   |
+| Tooltip         | tooltip                           |
+| Switch          | switch                            |
+| Slider          | slider                            |
+| Tree View       | tree                              |
+| Alert           | alert, toast                      |
 
-## Reporting Issues
+## Reportar Problemas
 
-If you encounter an accessibility barrier in Solidiom:
+Si encuentras una barrera de accesibilidad en Solidiom:
 
-1. Open a GitHub issue with the `accessibility` label
-2. Include the primitive/component affected
-3. Describe the barrier and the assistive technology used
-4. We prioritize accessibility issues as critical bugs
+1. Abre un issue en GitHub con la etiqueta `accessibility`
+2. Incluye el primitivo/componente afectado
+3. Describe la barrera y la tecnología de asistencia utilizada
+4. Priorizamos los problemas de accesibilidad como bugs críticos
 
-## Resources
+## Recursos
 
-- [WCAG 2.2 Quick Reference](https://www.w3.org/WAI/WCAG22/quickref/)
-- [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
-- [Our full WCAG audit](/docs/qa/wcag-2.2-aa-audit.md)
+- [Referencia Rápida WCAG 2.2](https://www.w3.org/WAI/WCAG22/quickref/)
+- [Guía de Prácticas de Autoría WAI-ARIA](https://www.w3.org/WAI/ARIA/apg/)
+- [Nuestra auditoría WCAG completa](/docs/qa/wcag-2.2-aa-audit.md)

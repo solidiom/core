@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/popover"
 primitive: popover
 section: overview
-translationSourceHash: "b4ed1fa7fe2bba1b97c2cc22c000327f4509cc0cd22e62c221cafeb62b8c6609"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Popover no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "2393f0b5f94918d1a53b7acd418868e2d117c99f3c9d384cb2b2acf532e93d62"
+translationStatus: draft
 ---
 
 Non-modal floating content panel.

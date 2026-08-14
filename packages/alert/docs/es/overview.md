@@ -12,10 +12,6 @@ status: draft
 package: "@solidiom/alert"
 primitive: alert
 section: overview
-translationSourceHash: "670555b2a7b5b783a4c63bcf445fbfab6086a709ff0227529d002183874fa58e"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.
@@ -25,6 +21,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
+translationSourceHash: "58000403f102bee950edac66b0ffc17f2d0ee0d82493ad65ce40be56a7b1c92a"
+translationStatus: draft
 ---
 
 Alert renderiza un área de notificación en línea, no modal, con semántica de región en vivo de ARIA. Soporta cuatro variantes visuales (info, success, warning, error) y dos niveles de asertividad (assertive, polite) para controlar cómo los lector de pantalla anuncian el mensaje. Las partes Title y Description se conectan automáticamente mediante `aria-labelledby` y `aria-describedby` usando IDs estables compatibles con SSR.

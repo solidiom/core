@@ -17,11 +17,11 @@ source:
   export: CheckboxExample
   language: tsx
 runnable: true
-translationSourceHash: "d84ebb42ff432b3c34664f79baa117c6f1340c62dafc6b1bba3adafba6fc94bc"
+translationSourceHash: "bb73254b3196f2f4fd0681544560f31e9446d194ac77098bb22619a299376b9a"
 translationStatus: draft
 ---
 
-The Checkbox component is a styled recipe wrapper around the `@solidiom/checkbox` primitive. It provides a toggle button with checked, unchecked, and indeterminate states, keyboard support, and form integration.
+El componente Checkbox es un wrapper de receta con estilos sobre el primitivo `@solidiom/checkbox`. Proporciona un botón de alternancia con estados marcado, desmarcado e indeterminado, soporte de teclado e integración con formularios.
 
 ```tsx
 import { StyledCheckbox, Checkbox } from "@solidiom/recipes-css"
@@ -32,9 +32,9 @@ import { StyledCheckbox, Checkbox } from "@solidiom/recipes-css"
 </StyledCheckbox>
 ```
 
-## Controlled checkbox
+## Checkbox controlado
 
-Use a controlled checkbox when the checked state is managed by parent state.
+Usa un checkbox controlado cuando el estado marcado es gestionado por el estado del componente padre.
 
 ```tsx
 import { createSignal } from "solid-js"

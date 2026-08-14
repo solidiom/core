@@ -9,77 +9,80 @@ product: "Solidiom"
 productLayer: article
 status: draft
 date: "2026-08-07"
-translationSourceHash: "6f97d1acfc1fed160738e74c7ef362468bc5e2bdccd5a0211441db9e1e5d7f73"
+authors:
+  - solidiom-core
+tags: [open-source, architecture]
+translationSourceHash: "5c0881d1b98fc79ea433ed71d764ce95ff577136fc5baeead127e45a1d4360f8"
 translationStatus: draft
 ---
 
-# Source Ownership
+# Propiedad del Codigo Fuente
 
-When you install a Solidiom primitive or template, you get the source code. Not a compiled bundle. Not a CDN link. The actual TypeScript source files land in your project.
+Cuando instalas un primitivo o plantilla de Solidiom, obtienes el código fuente. No un bundle compilado. No un enlace CDN. Los archivos TypeScript reales se instalan en tu proyecto.
 
-## What Source Ownership Means
+## Qué Significa la Propiedad del Codigo Fuente
 
-1. **You can read it** — no minified mystery code in node_modules
-2. **You can modify it** — change behavior, add features, fix bugs
-3. **You can audit it** — security review every line before deploying
-4. **You can fork it** — take the code and never look back
-5. **You can vendor it** — commit to your repo and disconnect from upstream
+1. **Puedes leerlo** — sin código minificado misterioso en node_modules
+2. **Puedes modificarlo** — cambiar comportamiento, agregar funciones, corregir errores
+3. **Puedes auditarlo** — revisar cada línea por seguridad antes de desplegar
+4. **Puedes bifurcarlo** — tomar el código y nunca mirar atrás
+5. **Puedes venderizarlo** — commitear en tu repositorio y desconectarte del upstream
 
-## How It Works
+## Cómo Funciona
 
-### Package Mode (default)
+### Modo Paquete (por defecto)
 
 ```sh
 solidiom add button
 ```
 
-Installs `@solidiom/button` as a workspace dependency. Source is in `node_modules/@solidiom/button/source/` — readable, but managed by your package manager.
+Instala `@solidiom/button` como dependencia del workspace. El código fuente está en `node_modules/@solidiom/button/source/` — legible, pero gestionado por tu gestor de paquetes.
 
-### Source Mode
+### Modo Fuente
 
 ```sh
 solidiom add button --source
 ```
 
-Copies the primitive source directly into your project at `src/solidiom/button/`. You own these files completely. They're committed to your repository.
+Copia el código fuente del primitivo directamente en tu proyecto en `src/solidiom/button/`. Eres completamente dueño de estos archivos. Se commitean en tu repositorio.
 
-### Integrity Verification
+### Verificación de Integridad
 
-Both modes verify integrity:
+Ambos modos verifican la integridad:
 
 ```sh
 solidiom verify
 ```
 
-Compares installed file digests against the signed registry manifest. If files have been tampered with (or intentionally modified in source mode), the CLI reports the differences.
+Compara los digests de los archivos instalados contra el manifiesto firmado del registro. Si los archivos han sido manipulados (o modificados intencionalmente en modo fuente), el CLI reporta las diferencias.
 
-## Why Not Just npm?
+## ¿Por Qué No Solo npm?
 
-Traditional component libraries give you a compiled bundle:
+Las bibliotecas de componentes tradicionales te dan un bundle compilado:
 
-- You can't see the implementation
-- You can't fix bugs without waiting for a release
-- You can't remove features you don't need
-- You can't audit for security without decompiling
+- No puedes ver la implementación
+- No puedes corregir errores sin esperar un release
+- No puedes eliminar funciones que no necesitas
+- No puedes auditar por seguridad sin decompilar
 
-Solidiom's `source/` emission gives you the same development experience as code you wrote yourself, with the option to stay connected to upstream improvements.
+La emisión `source/` de Solidiom te da la misma experiencia de desarrollo que código que escribiste tú mismo, con la opción de mantenerte conectado a las mejoras del upstream.
 
-## Trade-offs
+## Compensaciones
 
-| Benefit      | Trade-off                                           |
-| ------------ | --------------------------------------------------- |
-| Full control | You're responsible for your modifications           |
-| No lock-in   | Upstream updates require manual merge (source mode) |
-| Auditable    | More files in your project                          |
-| Forkable     | Divergence from upstream is permanent (source mode) |
+| Beneficio       | Compensación                                                    |
+| --------------- | --------------------------------------------------------------- |
+| Control total   | Eres responsable de tus modificaciones                          |
+| Sin lock-in     | Las actualizaciones upstream requieren merge manual (modo fuente) |
+| Auditable       | Más archivos en tu proyecto                                     |
+| Bifurcable      | La divergencia del upstream es permanente (modo fuente)          |
 
-## The Registry Contract
+## El Contrato del Registro
 
-The registry ensures that what you install is what was published:
+El registro asegura que lo que instalas es lo que fue publicado:
 
-- Every file has a SHA-256 digest in the manifest
-- Manifests are signed with Ed25519 (asymmetric verification)
-- The CLI fails closed on digest mismatch
-- Offline mode works from a local registry snapshot
+- Cada archivo tiene un digest SHA-256 en el manifiesto
+- Los manifiestos están firmados con Ed25519 (verificación asimétrica)
+- El CLI falla cerrado ante discrepancia de digest
+- El modo offline funciona desde una instantánea local del registro
 
-You don't have to trust us. You can verify.
+No tienes que confiar en nosotros. Puedes verificar.

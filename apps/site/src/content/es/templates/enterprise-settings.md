@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-enterprise-settings"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
-translationSourceHash: "83fae59ab987cb0d73e3b42eecf82f7a34665050e898362509f41371af357d00"
+translationSourceHash: "76639b4777c6d7c712ec23b8590a9c79286986ebfd02a0a58f050912fb69d019"
 translationStatus: draft
 ---
 

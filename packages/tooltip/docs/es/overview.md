@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/tooltip"
 primitive: tooltip
 section: overview
-translationSourceHash: "23f216510b48ec20d6cf3235dd82d0f1a4e1df87f970e044206a1717569feb1f"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Tooltip no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "d854eaa775431ae1afe8ee9c1908b2b3e31fb3431e78bb011cac09f3ace2d355"
+translationStatus: draft
 ---
 
 Contextual hint shown on hover/focus.

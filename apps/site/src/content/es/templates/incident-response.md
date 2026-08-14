@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-incident-response"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
-translationSourceHash: "fdad15d8f40d7689a7f40a18bb1ae2e93d2420f36fa7bc07e1c4ae7584f811a5"
+translationSourceHash: "b7e1d536ad54c9d2f58d584c3b70e9619fbcd7ea74177f33d798eebe946b6672"
 translationStatus: draft
 ---
 

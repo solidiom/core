@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/avatar"
 primitive: avatar
 section: overview
-translationSourceHash: "a4d705d861b821f7ce738376b8d1bd5184c718b0a6a59d06b0e81fa0e16942dd"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
+translationSourceHash: "ce504880da5a4d3655750d9be4ab7ec4acec5cd5e52111d72f4405892921f533"
+translationStatus: draft
 ---
 
 Avatar renderiza una imagen de perfil de usuario con reemplazo automático a contenido de texto (como iniciales o un nombre) cuando la imagen no se carga correctamente. Gestiona el estado de carga de la imagen internamente y coordina la visibilidad entre las partes de imagen y reemplazo.

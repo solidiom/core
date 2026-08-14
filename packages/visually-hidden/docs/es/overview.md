@@ -12,10 +12,6 @@ status: draft
 package: "@solidiom/visually-hidden"
 primitive: visually-hidden
 section: overview
-translationSourceHash: "c59df02bee085e7c42125494eba9e293b18ae52a0c4116e5ec5d3f3d94683195"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.
@@ -25,6 +21,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
+translationSourceHash: "24550272ae00e680c9813068b1465989ec4b96401ff0023d6e7f971e240cd136"
+translationStatus: draft
 ---
 
 Visually Hidden oculta contenido visualmente manteniéndolo accesible para lector de pantalla. Utiliza la técnica estándar de clip/overflow para eliminar contenido del diseño visual sin retirarlo del árbol de accesibilidad.

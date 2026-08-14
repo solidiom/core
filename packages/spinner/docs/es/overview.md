@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/spinner"
 primitive: spinner
 section: overview
-translationSourceHash: "fd27b43ecda287a6376a4d27a61647968c748246fa67b8ea3eaa413dc66c92cd"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Spinner es un primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "b7d34f744ed8a88569b5ba853246bab14ba506bbb2973e24c5f10a26adbd58e0"
+translationStatus: draft
 ---
 
 Loading spinner indicator.

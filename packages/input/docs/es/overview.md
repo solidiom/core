@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/input"
 primitive: input
 section: overview
-translationSourceHash: "e5eddd465a8e6562094083476addf2f38c18ce786337483bb0e48a1705f390f7"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Input es un primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "a967980de1585fc5f47a190e9be11c27e1cf4f207383028668bb974721b80d6d"
+translationStatus: draft
 ---
 
 Text input and textarea with validation states and Field integration.

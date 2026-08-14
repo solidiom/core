@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-billing-portal"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
-translationSourceHash: "67f3b8ae8973ea53d5fb59727d9ad70335ac18cd365845a9af5528a9228294e3"
+translationSourceHash: "e0b2ae65ec9cdcb516630222632741e28e24cbd60f5a7da1a024193129774991"
 translationStatus: draft
 ---
 

@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "toast"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "38dd52e1d93e6e91c9ad64f8e29d0e18026b2f6224c2bdae5418a652175789f4"
+translationSourceHash: "bd3b6c7196077c92b57df1d2bad84d4cfd11095546db7d0571ce1493bcefc74d"
 translationStatus: draft
 ---
 

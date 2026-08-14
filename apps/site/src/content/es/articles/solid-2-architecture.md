@@ -9,26 +9,29 @@ product: "Solidiom"
 productLayer: article
 status: draft
 date: "2026-08-07"
-translationSourceHash: "32f2eff76f3426ee60f506333346a3631187312df7907120421e4f9ad50d45c5"
+authors:
+  - solidiom-core
+tags: [architecture, solid-2, reactivity]
+translationSourceHash: "a6235813c14877df8aea29c99885b27868a3fa09bd3f4612e3a81432a893b57a"
 translationStatus: draft
 ---
 
-# Building on Solid 2: Architecture Decisions
+# Construido sobre Solid 2: Decisiones de Arquitectura
 
-Solidiom is built exclusively on Solid 2. This article explains why, and how the framework's reactive primitives inform our component architecture.
+Solidiom está construido exclusivamente sobre Solid 2. Este artículo explica por qué, y cómo los primitivos reactivos del framework informan nuestra arquitectura de componentes.
 
-## Why Solid 2
+## Por Qué Solid 2
 
-Solid's fine-grained reactivity model eliminates the virtual DOM diffing overhead that other frameworks carry. For a component library focused on accessibility and performance, this matters:
+El modelo de reactividad de grano fino de Solid elimina la sobrecarga de difusión del DOM virtual que otros frameworks acarrean. Para una biblioteca de componentes enfocada en accesibilidad y rendimiento, esto importa:
 
-- **No wasted renders** — only the exact DOM nodes affected by a state change update
-- **Predictable timing** — effects run synchronously after state changes, making focus management reliable
-- **Small runtime** — no reconciler overhead means smaller bundles per primitive
-- **Composition over inheritance** — signals and stores compose naturally without provider hell
+- **Sin renders desperdiciados** — solo los nodos DOM exactos afectados por un cambio de estado se actualizan
+- **Temporización predecible** — los effects se ejecutan síncronamente después de los cambios de estado, haciendo la gestión del foco confiable
+- **Runtime pequeño** — sin sobrecarga de reconciliador significa bundles más pequeños por primitivo
+- **Composición sobre herencia** — los signals y stores se componen naturalmente sin infierno de proveedores
 
-## Reactive Accessibility
+## Accesibilidad Reactiva
 
-Traditional component libraries fight their framework to manage focus. When a dialog opens, the library must ensure focus moves into the dialog _after_ it renders. In React, this requires refs, effects, and careful timing. In Solid 2, the DOM is updated synchronously:
+Las bibliotecas de componentes tradicionales luchan contra su framework para gestionar el foco. Cuando un diálogo se abre, la biblioteca debe asegurar que el foco se mueva dentro del diálogo _después_ de que se renderice. En React, esto requiere refs, effects y temporización cuidadosa. En Solid 2, el DOM se actualiza síncronamente:
 
 ```tsx
 function openDialog() {
@@ -38,32 +41,32 @@ function openDialog() {
 }
 ```
 
-This synchronous model is why every Solidiom primitive can guarantee its keyboard contract without race conditions.
+Este modelo síncrono es la razón por la que cada primitivo de Solidiom puede garantizar su contrato de teclado sin condiciones de carrera.
 
-## Signal-Driven State Machines
+## Máquinas de Estado Impulsadas por Signals
 
-Each interactive primitive is modeled as a state machine driven by signals:
+Cada primitivo interactivo se modela como una máquina de estados impulsada por signals:
 
-- **Disclosure** — `open` signal drives accordion, dialog, popover, tooltip
-- **Selection** — `value` signal drives tabs, select, radio-group, listbox
-- **Navigation** — `activeIndex` signal drives menu, combobox, tree
-- **Validation** — `validity` signal drives field, input, form controls
+- **Disclosure** — el signal `open` impulsa accordion, dialog, popover, tooltip
+- **Selección** — el signal `value` impulsa tabs, select, radio-group, listbox
+- **Navegación** — el signal `activeIndex` impulsa menu, combobox, tree
+- **Validación** — el signal `validity` impulsa field, input, controles de formulario
 
-The state machine is the primitive. Styling is a separate layer (recipes) that reads the same signals via data attributes.
+La máquina de estados es el primitivo. El estilizado es una capa separada (recetas) que lee los mismos signals a través de atributos de datos.
 
-## Primitives as Boundaries
+## Primitivos como Límites
 
-Solidiom draws a hard boundary between primitives and styled components:
+Solidiom establece un límite firme entre primitivos y componentes estilizados:
 
-- **Primitives** own behavior: state machines, keyboard handling, ARIA attributes
-- **Recipes** own appearance: colors, spacing, typography, animations
-- **Templates** own composition: how primitives and recipes combine into pages
+- Los **primitivos** son dueños del comportamiento: máquinas de estado, manejo de teclado, atributos ARIA
+- Las **recetas** son dueñas de la apariencia: colores, espaciado, tipografía, animaciones
+- Las **plantillas** son dueñas de la composición: cómo los primitivos y recetas se combinan en páginas
 
-This separation means you can swap styling profiles (CSS, Tailwind, UnoCSS) without touching behavior, and upgrade primitives without breaking your design.
+Esta separación significa que puedes cambiar perfiles de estilizado (CSS, Tailwind, UnoCSS) sin tocar el comportamiento, y actualizar primitivos sin romper tu diseño.
 
-## What This Means for Consumers
+## Qué Significa Esto para los Consumidores
 
-1. **No React compatibility layer** — Solidiom is Solid-native, not a port
-2. **No runtime overhead** — primitives compile to direct DOM operations
-3. **Predictable bundle sizes** — each primitive is independently tree-shakeable
-4. **Future-proof** — when Solid 2 reaches stable, Solidiom moves with it
+1. **Sin capa de compatibilidad con React** — Solidiom es nativo de Solid, no un port
+2. **Sin sobrecarga en runtime** — los primitivos se compilan a operaciones DOM directas
+3. **Tamaños de bundle predecibles** — cada primitivo es independientemente tree-shakeable
+4. **A prueba de futuro** — cuando Solid 2 llegue a estable, Solidiom se mueve con él

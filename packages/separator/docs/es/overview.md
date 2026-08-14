@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/separator"
 primitive: separator
 section: overview
-translationSourceHash: "3155f6cb40429d70ca6633761fa0b7a90a509030e42c29e4a85171abe1cbf3d0"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
+translationSourceHash: "efc61e246d90a4495347503c29bb11a1f251f9e5a137565493320d1927bc56db"
+translationStatus: draft
 ---
 
 Separator renderiza un divisor visual entre secciones de contenido con semántica accesible. Soporta orientaciones horizontal y vertical y puede marcarse como puramente decorativo para ocultarlo del árbol de accesibilidad.
