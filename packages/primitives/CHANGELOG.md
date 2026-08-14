@@ -1,0 +1,59 @@
+# @solidiom/primitives
+
+## 0.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`71e20e7`](https://github.com/solidiom/core/commit/71e20e756dae0ac848c6820d4d2dabbacd510202), [`7ef2230`](https://github.com/solidiom/core/commit/7ef223094f1da9df93bd6e1ead7e3a21d8ed5d30), [`71e20e7`](https://github.com/solidiom/core/commit/71e20e756dae0ac848c6820d4d2dabbacd510202), [`0893352`](https://github.com/solidiom/core/commit/08933526925307bead1f90f23db7a4dceffc7c8e)]:
+  - @solidiom/dialog@0.1.0
+  - @solidiom/drawer@0.0.1
+  - @solidiom/button@0.0.1
+  - @solidiom/navigation-menu@0.0.1
+  - @solidiom/accordion@0.0.1
+  - @solidiom/alert@0.0.1
+  - @solidiom/alert-dialog@0.0.1
+  - @solidiom/avatar@0.0.1
+  - @solidiom/badge@0.0.1
+  - @solidiom/breadcrumb@0.0.1
+  - @solidiom/calendar@0.1.0
+  - @solidiom/card@0.0.1
+  - @solidiom/carousel@0.1.0
+  - @solidiom/checkbox@0.0.1
+  - @solidiom/collapsible@0.0.1
+  - @solidiom/combobox@0.0.1
+  - @solidiom/command-palette@0.0.1
+  - @solidiom/context-menu@0.0.1
+  - @solidiom/data-table@0.0.1
+  - @solidiom/date-picker@0.0.1
+  - @solidiom/empty-state@0.0.1
+  - @solidiom/field@0.0.1
+  - @solidiom/hover-card@0.0.1
+  - @solidiom/input@0.0.1
+  - @solidiom/input-otp@0.0.1
+  - @solidiom/kbd@0.0.1
+  - @solidiom/label@0.0.1
+  - @solidiom/listbox@0.0.1
+  - @solidiom/menu@0.0.1
+  - @solidiom/meter@0.0.1
+  - @solidiom/pagination@0.0.1
+  - @solidiom/popover@0.0.1
+  - @solidiom/progress@0.0.1
+  - @solidiom/radio-group@0.0.1
+  - @solidiom/resizable-panels@0.0.1
+  - @solidiom/scroll-area@0.0.1
+  - @solidiom/select@0.1.0
+  - @solidiom/separator@0.0.1
+  - @solidiom/sheet@0.0.1
+  - @solidiom/skeleton@0.0.1
+  - @solidiom/slider@0.0.1
+  - @solidiom/spinner@0.0.1
+  - @solidiom/switch@0.0.1
+  - @solidiom/tabs@0.0.1
+  - @solidiom/toast@0.0.1
+  - @solidiom/toggle@0.0.1
+  - @solidiom/toggle-group@0.0.1
+  - @solidiom/toolbar@0.0.1
+  - @solidiom/tooltip@0.0.1
+  - @solidiom/tree@0.0.1
+  - @solidiom/virtual-list@0.0.1
+  - @solidiom/visually-hidden@0.0.1

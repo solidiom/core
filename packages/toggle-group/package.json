@@ -1,6 +1,6 @@
 {
   "name": "@solidiom/toggle-group",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "private": false,
   "license": "MIT",
   "type": "module",

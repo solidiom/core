@@ -71,7 +71,6 @@
     "@solidiom/tabs": "workspace:*",
     "@solidiom/toggle": "workspace:*",
     "@solidiom/toast": "workspace:*",
-    "@solidiom/toggle": "workspace:*",
     "@solidiom/toggle-group": "workspace:*",
     "@solidiom/toolbar": "workspace:*",
     "@solidiom/tooltip": "workspace:*",
