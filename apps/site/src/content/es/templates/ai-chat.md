@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-ai-chat"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
-translationSourceHash: "2d5aa443e331357c39b3fd984fa2e1afb40511ea8abd01f61e0bb781fbd8c49d"
+translationSourceHash: "8bec254ac57027f1a30b2f1d54c72494f983f522988bf0408e9514ed63d3bbdb"
 translationStatus: draft
 ---
 

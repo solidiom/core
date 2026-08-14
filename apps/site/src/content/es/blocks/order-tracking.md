@@ -10,7 +10,7 @@ productLayer: block
 status: published
 category: "COMMERCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
-translationSourceHash: "14cc59850c86dace8b853fee2c51833ace4e12b83dcde19662d66588983af59b"
+translationSourceHash: "aa49e35d60c477dae50fa5b12e9982c284f8627274f15552f7a5ca72c29106d5"
 translationStatus: draft
 ---
 

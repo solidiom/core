@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-identity-access"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
-translationSourceHash: "47090fff3fae7b29c21bc9c0c9a34462fd0439ffc6ac025d18b973e8e7a25981"
+translationSourceHash: "cb72790d174dff98720d552c1dd017c3684190b19bbbac71ebe63c592445222e"
 translationStatus: draft
 ---
 

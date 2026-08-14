@@ -17,7 +17,7 @@ source:
   export: ButtonComponentExample
   language: tsx
 runnable: true
-translationSourceHash: "ab351d0a5af96edb3fb458266b7c1f31e1099e6016531ae65ee8aae9f83922c3"
+translationSourceHash: "d44359aa8813d74d65990e7c54076725832aeef75d91561938fb4fdb7564ae42"
 translationStatus: draft
 ---
 

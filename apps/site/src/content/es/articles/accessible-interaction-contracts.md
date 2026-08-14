@@ -9,28 +9,31 @@ product: "Solidiom"
 productLayer: article
 status: draft
 date: "2026-08-07"
-translationSourceHash: "13877c38e49e46caba5acf33540951fb422bd8229f6ac92a399167c782432952"
+authors:
+  - solidiom-core
+tags: [accessibility, contracts, a11y]
+translationSourceHash: "0a57c634687fb61e4169f800f123b91486594175c1333b66e5d7347902ea4fbc"
 translationStatus: draft
 ---
 
-# Accessible Interaction Contracts
+# Contratos de Interacción Accesible
 
-Every Solidiom primitive ships with a documented interaction contract. This article explains what that means and how we enforce it.
+Cada primitivo de Solidiom incluye un contrato de interacción documentado. Este artículo explica qué significa eso y cómo lo aplicamos.
 
-## What Is an Interaction Contract?
+## ¿Qué es un Contrato de Interacción?
 
-An interaction contract defines:
+Un contrato de interacción define:
 
-1. **Keyboard behavior** — which keys do what, in which states
-2. **ARIA semantics** — which roles, states, and properties are applied
-3. **Focus management** — where focus goes on open, close, and navigation
-4. **Screen reader announcements** — what is communicated to assistive technology
+1. **Comportamiento de teclado** — qué teclas hacen qué, en qué estados
+2. **Semántica ARIA** — qué roles, estados y propiedades se aplican
+3. **Gestión del foco** — hacia dónde se mueve el foco al abrir, cerrar y navegar
+4. **Anuncios del lector de pantalla** — qué se comunica a la tecnología de asistencia
 
-These contracts are not aspirational documentation. They are machine-verified.
+Estos contratos no son documentación aspiracional. Son verificados por máquina.
 
-## Contract Structure
+## Estructura del Contrato
 
-Each primitive has a contract file at `packages/<name>/docs/accessibility/contract.md` with:
+Cada primitivo tiene un archivo de contrato en `packages/<name>/docs/accessibility/contract.md` con:
 
 ```markdown
 ## Keyboard Interactions
@@ -53,51 +56,51 @@ Each primitive has a contract file at `packages/<name>/docs/accessibility/contra
 | aria-labelledby | Panel         | Trigger ID |
 ```
 
-## Enforcement Layers
+## Capas de Aplicación
 
-### 1. Automated (axe-core)
+### 1. Automatizada (axe-core)
 
-Every primitive is scanned by axe-core in a real browser. The scan verifies:
+Cada primitivo es escaneado por axe-core en un navegador real. El escaneo verifica:
 
-- No missing ARIA attributes
-- No invalid role combinations
-- No missing accessible names
-- Correct heading hierarchy
-- Color contrast (via theme audit)
+- No faltan atributos ARIA
+- No hay combinaciones de roles inválidas
+- No faltan nombres accesibles
+- Jerarquía correcta de encabezados
+- Contraste de color (mediante auditoría de tema)
 
-### 2. Structural (TypeScript)
+### 2. Estructural (TypeScript)
 
-The `applySemanticAttrs` helper enforces that primitives apply data attributes consistently. TypeScript generics ensure the correct ARIA props are passed:
+El helper `applySemanticAttrs` garantiza que los primitivos apliquen atributos de datos de forma consistente. Los genéricos de TypeScript aseguran que se pasen los props ARIA correctos:
 
 ```tsx
 // Compile error if required ARIA attributes are missing
 <Dialog.Content aria-labelledby={titleId} aria-describedby={descId}>
 ```
 
-### 3. Behavioral (Keyboard tests)
+### 3. Comportamental (Pruebas de teclado)
 
-Browser tests simulate keyboard navigation and verify:
+Las pruebas en navegador simulan la navegación por teclado y verifican:
 
-- Focus moves to the correct element
-- Screen reader live regions update
-- State transitions match the documented contract
+- El foco se mueve al elemento correcto
+- Las regiones en vivo del lector de pantalla se actualizan
+- Las transiciones de estado coinciden con el contrato documentado
 
-### 4. Evidence (Committed artifacts)
+### 4. Evidencia (Artefactos comprometidos)
 
-`packages/<name>/docs/accessibility/evidence.json` records the latest scan results. The primitive catalog gate (`PRIM-000`) rejects any primitive where `passes === 0`.
+`packages/<name>/docs/accessibility/evidence.json` registra los resultados del último escaneo. La puerta del catálogo de primitivos (`PRIM-000`) rechaza cualquier primitivo donde `passes === 0`.
 
-## Why Contracts, Not Guidelines
+## Por Qué Contratos, No Directrices
 
-Guidelines are suggestions. Contracts are enforced:
+Las directrices son sugerencias. Los contratos se aplican:
 
-- A primitive cannot pass the catalog gate without evidence
-- A recipe cannot ship without the underlying primitive's contract being met
-- A template cannot declare a block dependency without that block's primitives being verified
+- Un primitivo no puede pasar la puerta del catálogo sin evidencia
+- Una receta no puede publicarse sin que se cumpla el contrato del primitivo subyacente
+- Una plantilla no puede declarar una dependencia de bloque sin que los primitivos de ese bloque estén verificados
 
-This chain of verified dependencies means that when you install a Solidiom template, every interactive element in it has proven accessibility evidence.
+Esta cadena de dependencias verificadas significa que cuando instalas una plantilla de Solidiom, cada elemento interactivo en ella tiene evidencia de accesibilidad comprobada.
 
-## Limitations
+## Limitaciones
 
-- Contracts verify _structure_, not _experience_ — a screen reader user's actual experience requires human testing
-- VoiceOver is the only AT currently tested; NVDA/JAWS/TalkBack are Phase 4 work
-- Dynamic content timing (e.g., toast auto-dismiss) has `incomplete` axe results, not violations
+- Los contratos verifican _estructura_, no _experiencia_ — la experiencia real de un usuario de lector de pantalla requiere pruebas humanas
+- VoiceOver es la única tecnología de asistencia actualmente probada; NVDA/JAWS/TalkBack son trabajo de la Fase 4
+- El contenido dinámico con tiempos (por ejemplo, auto-cierre de toast) tiene resultados `incomplete` de axe, no violaciones

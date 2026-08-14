@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/accordion"
 primitive: accordion
 section: overview
-translationSourceHash: "1d44ce42cd4fb6fa99edf13b6930bdb02c651db9754484b682ff0b63fa6c192f"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Accordion no tiene primitivos hermanos; se compone con otros pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. El comportamiento del teclado está completamente documentado en la sección de interacción por teclado.
+translationSourceHash: "59647b00f0016edda619f0f6a5a85e0794e435d29182afa2f5f2b34d43ad31ab"
+translationStatus: draft
 ---
 
 Accordion presenta un conjunto apilado verticalmente de secciones colapsables. Los usuarios expanden uno o más elementos para revelar el contenido asociado. Úsalo para organizar grandes cantidades de información en grupos manejables y escaneables.

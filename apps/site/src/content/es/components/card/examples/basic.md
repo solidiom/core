@@ -13,7 +13,11 @@ recipe: "card"
 section: examples
 exampleId: card-component-basic
 runnable: true
-translationSourceHash: "272f8a21132b8f0cae307f2a3332edc78e6f165f843028a148bc325257f47ac3"
+source:
+  path: apps/site/src/components/CardExample.tsx
+  export: CardExample
+  language: tsx
+translationSourceHash: "916e51cf492dcf3fed4117a16d9b01d26b4fff81fbc0a20c46032271f93862be"
 translationStatus: draft
 ---
 

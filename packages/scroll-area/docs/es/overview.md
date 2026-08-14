@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/scroll-area"
 primitive: scroll-area
 section: overview
-translationSourceHash: "b66bffcfbf3e8d82228f1e42d67f71b333fc8c7f8dfc65735c525e5b25b381dd"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Scroll Area no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "68e505e3ae9066e312fe4efbd4b46e4779a4201cbb234e839f19d0199169a561"
+translationStatus: draft
 ---
 
 Custom-styled scrollbar with native scrolling performance.

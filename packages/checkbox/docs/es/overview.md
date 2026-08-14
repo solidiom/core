@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/checkbox"
 primitive: checkbox
 section: overview
-translationSourceHash: "f3a82c5e77f6597d31046770d5a7b4afd94c825a5168d8546747ebcbc2e80734"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Checkbox no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "eb89a9ed96ee6180a46cc52e1bfede530ea55d4991cb415491a7d00de490e679"
+translationStatus: draft
 ---
 
 Binary or indeterminate toggle control.

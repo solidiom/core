@@ -17,11 +17,11 @@ source:
   export: SwitchExample
   language: tsx
 runnable: true
-translationSourceHash: "e7f0d635ef6ff51fe3a79f11d48fd710fc9ce36da63ca990394bd9c309c1446a"
+translationSourceHash: "1fdecb888c7b71c53668c85aaa9fad308be82929ba16a00f676c416f8a4e374e"
 translationStatus: draft
 ---
 
-The Switch component is a styled recipe wrapper around the `@solidiom/switch` primitive. It provides a toggle control with on/off states, keyboard support (Space and Enter), and screen reader accessibility.
+El componente Switch es un wrapper de receta con estilos sobre el primitivo `@solidiom/switch`. Proporciona un control de alternancia con estados encendido/apagado, soporte de teclado (Space y Enter) y accesibilidad para lector de pantalla.
 
 ```tsx
 import { StyledSwitch, Switch } from "@solidiom/recipes-css"
@@ -32,9 +32,9 @@ import { StyledSwitch, Switch } from "@solidiom/recipes-css"
 </StyledSwitch>
 ```
 
-## Controlled switch
+## Switch controlado
 
-Use controlled mode when the checked state is managed by parent state.
+Usa el modo controlado cuando el estado marcado es gestionado por el estado del componente padre.
 
 ```tsx
 import { createSignal } from "solid-js"

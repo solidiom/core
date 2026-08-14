@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-auth-starter"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
-translationSourceHash: "89c388ed7eb22286f7219f0190620d0f054c0cb0c6ed95083d9b1e0f53d96dac"
+translationSourceHash: "6ccbe12fead1e26f5a3d0bc16327341fb26ab22740b04a89ae3d32e93eaa9995"
 translationStatus: draft
 ---
 

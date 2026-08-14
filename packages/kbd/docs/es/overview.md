@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/kbd"
 primitive: kbd
 section: overview
-translationSourceHash: "bb9ea6df7f21fe27f5e0326b8914f31bd86e18c40d84629b09dcadd6b983f92c"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
+translationSourceHash: "60bd03649e25b586a46580f9f159380e665a14ce932b22e7cb5c4ea7bca81213"
+translationStatus: draft
 ---
 
 Kbd renderiza un elemento `<kbd>` semántico para mostrar atajos de teclado y combinaciones de teclas. Úsalo para documentar interacciones por teclado dentro de instrucciones, texto de ayuda o etiquetas de interfaz.

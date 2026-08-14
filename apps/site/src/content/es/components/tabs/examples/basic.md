@@ -17,11 +17,11 @@ source:
   export: TabsExample
   language: tsx
 runnable: true
-translationSourceHash: "ef87e8a1f605a8225ec98b07bebfa340803c73dbc00768d10ae0f79711a12c34"
+translationSourceHash: "0a212c81402cf7677bd551daa985edb5195c6be56412d7fad55ed1fef320bad2"
 translationStatus: draft
 ---
 
-The Tabs component is a styled recipe wrapper around the `@solidiom/tabs` primitive. It provides tab selection with keyboard navigation, roving focus, automatic and manual activation modes, and horizontal and vertical orientation.
+El componente Tabs es un wrapper de receta con estilos sobre el primitivo `@solidiom/tabs`. Proporciona selección de pestañas con navegación por teclado, foco itinerante, modos de activación automática y manual, y orientación horizontal y vertical.
 
 ```tsx
 import { StyledTabs, Tabs } from "@solidiom/recipes-css"
@@ -36,9 +36,9 @@ import { StyledTabs, Tabs } from "@solidiom/recipes-css"
 </StyledTabs>
 ```
 
-## Vertical orientation
+## Orientación vertical
 
-Use vertical orientation for side-by-side layouts where tabs act as a navigation panel.
+Usa la orientación vertical para diseños lado a lado donde las pestañas actúan como un panel de navegación.
 
 ```tsx
 import { StyledTabs, Tabs } from "@solidiom/recipes-css"

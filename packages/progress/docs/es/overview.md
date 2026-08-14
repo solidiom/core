@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/progress"
 primitive: progress
 section: overview
-translationSourceHash: "87292d0c1a3889924f816f95639d7dad74e480c8c11e140953954966f06349a7"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Progress es un primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "66583a260b76827ab93e1febfc7bd14fcaebc5e07d2e34b6c694eb83d67b9f99"
+translationStatus: draft
 ---
 
 Determinate and indeterminate progress indicator.

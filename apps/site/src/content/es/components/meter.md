@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "meter"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "8886f24c64a4a245a06f471224bf0b40b86338739e0aea0ed1bceabf2bc9bd74"
+translationSourceHash: "54d273f8b5ed4b69690789ca57416751a38ebd4fd57630a4dfc3cd9e064db2d5"
 translationStatus: draft
 ---
 

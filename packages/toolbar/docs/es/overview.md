@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/toolbar"
 primitive: toolbar
 section: overview
-translationSourceHash: "e9b363ea4a0913ebb269c518fb4c3abee3a1245dcd5c22b4179254b2d42b3982"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Toolbar no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "c12f589fb764eab0dfbad60fd45ac2d5112a17d6acf11a7ff0158b6583d2df23"
+translationStatus: draft
 ---
 
 Grouped actions and controls in a horizontal bar.

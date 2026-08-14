@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "scroll-area"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "d4885ddf3e6b07411d48d1d038159d69b8799a7865be525346d8afff39da8c60"
+translationSourceHash: "f079d2e3dd9afe850a01c5eed650f2c40377cb93009ccbd4101f192f0080a33a"
 translationStatus: draft
 ---
 

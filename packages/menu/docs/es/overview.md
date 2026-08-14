@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/menu"
 primitive: menu
 section: overview
-translationSourceHash: "c678824796683d373f854718663ed084da140d0e3391057048e89f909b9c2adf"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Menu no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "231fb02d34c83422f3ad4f6cb135bc792ee7f25cf575480e1963736404a27285"
+translationStatus: draft
 ---
 
 Action list triggered by a button.

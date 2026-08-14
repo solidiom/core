@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/listbox"
 primitive: listbox
 section: overview
-translationSourceHash: "d7ddf8dd81bbf90965deb3758e6c66005559e6bf4c62a36d285334aebe95a8ac"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Listbox es un primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "29b42ec0d6ec38c655554ac6ef3b1cc94c4013bd67e3845c131801143d619543"
+translationStatus: draft
 ---
 
 Single or multi-select list of options.

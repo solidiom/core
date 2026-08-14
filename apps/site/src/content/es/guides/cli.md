@@ -8,31 +8,31 @@ maturity: beta
 product: "Solidiom"
 productLayer: guide
 status: draft
-translationSourceHash: "4ded976e89442354a9c9d382d1180a03d0c427616447c0ba59e6e38bd54174b9"
+translationSourceHash: "c70c45f4ca568d4689bcc0c001988ad85f31fea1774e073ec98f73405828dcc2"
 translationStatus: draft
 ---
 
-# CLI Reference
+# Referencia del CLI
 
-The `solidiom` CLI manages projects, installs components, and verifies your workspace.
+El CLI `solidiom` gestiona proyectos, instala componentes y verifica tu espacio de trabajo.
 
-## Installation
+## Instalación
 
 ```sh
 npm install -g solidiom
 ```
 
-Or use npx for one-off commands:
+O usa npx para comandos puntuales:
 
 ```sh
 npx solidiom <command>
 ```
 
-## Commands
+## Comandos
 
 ### `solidiom create`
 
-Create a new project from a template.
+Crea un nuevo proyecto a partir de una plantilla.
 
 ```sh
 solidiom create my-app --template saas-dashboard
@@ -40,16 +40,16 @@ solidiom create my-app --template ai-chat --styling tailwind
 solidiom create my-app --yes  # skip prompts
 ```
 
-**Options:**
+**Opciones:**
 
-- `--template <name>` — template to use (29 available)
-- `--styling <profile>` — css, tailwind, or unocss
-- `--package-manager <pm>` — npm, pnpm, yarn, or bun
-- `--yes` — skip all prompts, use defaults
+- `--template <name>` — plantilla a usar (29 disponibles)
+- `--styling <profile>` — css, tailwind o unocss
+- `--package-manager <pm>` — npm, pnpm, yarn o bun
+- `--yes` — omitir todas las preguntas, usar valores por defecto
 
 ### `solidiom add`
 
-Add a primitive or component to your project.
+Agrega un primitivo o componente a tu proyecto.
 
 ```sh
 solidiom add button
@@ -57,15 +57,15 @@ solidiom add dialog --styling tailwind
 solidiom add --theme ocean
 ```
 
-**Options:**
+**Opciones:**
 
-- `--styling <profile>` — override project styling profile
-- `--theme <name>` — install a theme preset
-- `--source` — install source files instead of package dependency
+- `--styling <profile>` — sobrescribir el perfil de estilizado del proyecto
+- `--theme <name>` — instalar un preset de tema
+- `--source` — instalar archivos fuente en lugar de dependencia de paquete
 
 ### `solidiom plan`
 
-Preview what `add` would install without making changes.
+Previsualiza lo que `add` instalaría sin hacer cambios.
 
 ```sh
 solidiom plan button
@@ -74,7 +74,7 @@ solidiom plan dialog --styling css
 
 ### `solidiom inspect`
 
-Show detailed information about a primitive or component.
+Muestra información detallada sobre un primitivo o componente.
 
 ```sh
 solidiom inspect button
@@ -83,7 +83,7 @@ solidiom inspect dialog --json
 
 ### `solidiom verify`
 
-Verify workspace integrity against the registry.
+Verifica la integridad del espacio de trabajo contra el registro.
 
 ```sh
 solidiom verify
@@ -92,16 +92,16 @@ solidiom verify --fix  # auto-fix recoverable issues
 
 ### `solidiom diff`
 
-Show differences between installed and registry versions.
+Muestra las diferencias entre las versiones instaladas y las del registro.
 
 ```sh
 solidiom diff
 solidiom diff button
 ```
 
-## Configuration
+## Configuración
 
-Project configuration lives in `.solidiom/config.json`:
+La configuración del proyecto vive en `.solidiom/config.json`:
 
 ```json
 {
@@ -111,10 +111,10 @@ Project configuration lives in `.solidiom/config.json`:
 }
 ```
 
-## Package Manager Support
+## Soporte de Gestores de Paquetes
 
-All commands work with npm, pnpm, Yarn, and Bun. The CLI detects your package manager from lockfiles automatically.
+Todos los comandos funcionan con npm, pnpm, Yarn y Bun. El CLI detecta tu gestor de paquetes a partir de los archivos de lock automáticamente.
 
-## Offline Mode
+## Modo Offline
 
-The CLI supports offline operation via the local registry snapshot. Use `--offline` to force local resolution without network requests.
+El CLI soporta operación offline a través de la instantánea local del registro. Usa `--offline` para forzar resolución local sin solicitudes de red.

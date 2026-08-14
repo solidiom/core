@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/alert-dialog"
 primitive: alert-dialog
 section: overview
-translationSourceHash: "892f6ba826e46b57fc6259423a1aef5fa58b3a63d4073a80e25b36daed7509a1"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Alert Dialog no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "f2ecee67766b51c97eeb5f2c7f498b719f951e3e5cdd454790cd3ab2ec797d2b"
+translationStatus: draft
 ---
 
 Modal confirmation dialog requiring explicit user action.

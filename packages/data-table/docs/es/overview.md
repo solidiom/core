@@ -11,10 +11,6 @@ status: published
 package: "@solidiom/data-table"
 primitive: data-table
 section: overview
-translationSourceHash: "33b29388b7cd2e801b3e0c70b1efdaf1f6e5e238b0f0419f50e00308153ec530"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Data Table no tiene primitivos hermanos. Se compone con Checkbox, Pagination y motores adaptadores pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. El comportamiento de orden y adaptador está documentado arriba.
+translationSourceHash: "e79d89e64950977b0983ba96f28e37d0657f0d8270f3f1e918544210b478dc4b"
+translationStatus: draft
 ---
 
 Data Table proporciona un primitivo de tabla componible y sin estilos con ordenamiento incorporado, control de visibilidad de columnas y selección de filas. Delega el cómputo de orden a través del patrón adaptador para que los consumidores puedan conectar motores externos sin acoplarse a una implementación específica.

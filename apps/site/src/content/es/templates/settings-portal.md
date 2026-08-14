@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-settings-portal"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
-translationSourceHash: "43045bf6e0dcce2be2438d45ce49a8e4fb542f406626a1d612dfc52aa5519124"
+translationSourceHash: "e76a9d5819cfcb1efd17adb4e5c95eaf69ea3208d1bc8159e8f5ea7e448b6c99"
 translationStatus: draft
 ---
 

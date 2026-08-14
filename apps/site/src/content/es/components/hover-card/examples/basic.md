@@ -17,7 +17,7 @@ source:
   export: HoverCardExample
   language: tsx
   runnable: true
-translationSourceHash: "78e71b50a0b7e754c6fc43a2ea472f1f4a2b93d706f68fb4e68a25df0f96278d"
+translationSourceHash: "74e49a7a3163dcfa2c858037b04b826e9d7f6537e4e398cbc300619188bd2e47"
 translationStatus: draft
 ---
 

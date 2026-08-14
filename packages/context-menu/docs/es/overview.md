@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/context-menu"
 primitive: context-menu
 section: overview
-translationSourceHash: "7dcf4036af0f531b73929b0a7944fd5c40821f7ff6cb5e909412f873decd9f09"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Context Menu no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "52421bbf1a56bde631340ae119efe9938070803ab56d9521077aca6bfaf51f18"
+translationStatus: draft
 ---
 
 Right-click triggered menu.

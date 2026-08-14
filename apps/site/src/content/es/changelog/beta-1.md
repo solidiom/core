@@ -23,6 +23,7 @@ status: published
 date: "2026-08-07"
 kind: release
 version: "0.0.1-beta.1"
+translationSourceHash: "beb5fdd0ae0929fcda5488c04da261a72cd01178d42b9f01ee4d344dd37dd182"
 translationStatus: draft
 ---
 

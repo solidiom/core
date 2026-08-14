@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/hover-card"
 primitive: hover-card
 section: overview
-translationSourceHash: "fc79c03b1bf6cfe69dca9860d23b61462539a08361b4b974822557d9c0acee0c"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Hover Card no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "b2bbba2307036a3245d374dce56ff2ebcdde4f049dee17984cacb5ef624f4d72"
+translationStatus: draft
 ---
 
 Content preview on hover with open delay and anchored positioning.

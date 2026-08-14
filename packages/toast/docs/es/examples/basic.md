@@ -17,8 +17,8 @@ source:
   export: Region
   language: tsx
 runnable: false
-runnableReason: "Se creará un island interactivo cuando este primitivo se retrofit completamente."
-translationSourceHash: "708be1d8d00aacae291a16a598782af766abcd950105aff10b411a4b3fc9bbf7"
+runnableReason: "Runnable island to be created when this primitive is fully retrofitted."
+translationSourceHash: "099aa5eec097485bab7498e03b69521a651e4977570ae7837b403bfc267429e0"
 translationStatus: draft
 ---
 

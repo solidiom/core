@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/skeleton"
 primitive: skeleton
 section: overview
-translationSourceHash: "178617113da88e5bfc705b39ee501903933a8b2a8b758e7619d0a5f4bcc2ae30"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Skeleton es un primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "886b7877358bf36dd89e9c624975110ffb9a0e29b8000ed5251aa812efeaaf72"
+translationStatus: draft
 ---
 
 Loading placeholder with pulse animation.

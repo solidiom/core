@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/date-picker"
 primitive: date-picker
 section: overview
-translationSourceHash: "7ad483091a44552b6b106fed00f5226baaff9999c3373da7861aff4ed41366cf"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Date Picker no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "a7d3f663b022ad9d0ea19e7b15c289bb60b05c5c394b5ebe44fe64a3d5ab0e12"
+translationStatus: draft
 ---
 
 Calendar popup for selecting dates.

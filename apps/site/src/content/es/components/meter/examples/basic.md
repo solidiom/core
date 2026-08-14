@@ -17,7 +17,7 @@ source:
   export: MeterExample
   language: tsx
 runnable: true
-translationSourceHash: "e386119a0812a505199c081ad0c00a90e9ad1e69bf17abf139a78d83ec9fa526"
+translationSourceHash: "8714261d8f47edf16904160b07db000e563ff37f5f16f66fd07a914a607197ae"
 translationStatus: draft
 ---
 

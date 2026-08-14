@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/tree"
 primitive: tree
 section: overview
-translationSourceHash: "5acf49b4879d866bc941e26bb08b9efcb40e13f07400cd248040a185cbf29f93"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Tree no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "fa0f840660c6199207592840704b24030690df2295bc275dd52317f88b0833d3"
+translationStatus: draft
 ---
 
 Hierarchical tree view with expand/collapse.

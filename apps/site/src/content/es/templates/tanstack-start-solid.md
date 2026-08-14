@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-tanstack-start-solid"
 stack: tanstack-start-solid
 portfolios: ["balanced-product"]
-translationSourceHash: "a7d950478aabd5ee5298c77c4203b8bb8bf8a797cedfa169f636824112b6e523"
+translationSourceHash: "9027772860fe3979331922422aedd74205e3d88b2899d66ae7d66838079a8b9b"
 translationStatus: draft
 ---
 

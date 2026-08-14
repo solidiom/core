@@ -17,11 +17,11 @@ source:
   export: PopoverExample
   language: tsx
 runnable: true
-translationSourceHash: "d10250a284fa3dfbfbb908f71f888dd9d36f5b192b08e89c97b1c46ae67d1ad4"
+translationSourceHash: "e7eda9411245f33c3eb92ab0c476840553cd97e5bc54eddc0159a5728e85a2e6"
 translationStatus: draft
 ---
 
-The Popover component is a styled recipe wrapper around the `@solidiom/popover` primitive. It provides an overlay panel positioned near a trigger element, with focus management and escape-to-close behavior.
+El componente Popover es un wrapper de receta con estilos sobre el primitivo `@solidiom/popover`. Proporciona un panel superpuesto posicionado cerca de un elemento disparador, con gestión de foco y comportamiento de cierre con escape.
 
 ```tsx
 import { StyledPopover, Popover } from "@solidiom/recipes-css"
@@ -35,9 +35,9 @@ import { StyledPopover, Popover } from "@solidiom/recipes-css"
 </StyledPopover>
 ```
 
-## Controlled popover
+## Popover controlado
 
-Use controlled mode when managing open state from parent state.
+Usa el modo controlado cuando gestionas el estado de apertura desde el estado del componente padre.
 
 ```tsx
 import { createSignal } from "solid-js"

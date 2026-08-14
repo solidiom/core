@@ -2,7 +2,7 @@
 title: Certificado de Origen del Desarrollador
 description: El requisito de firma DCO para contribuciones a Solidiom.
 locale: es
-translationSourceHash: "0000000000000000000000000000000000000000000000000000000000000000"
+translationSourceHash: "8fa25102c29787ebf6b6b86b36efec5aeef63c50c18150b90bf23bb1d571fa19"
 translationStatus: draft
 ---
 

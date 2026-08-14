@@ -10,7 +10,7 @@ productLayer: theme
 status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
-translationSourceHash: "8cea04559afb70077a980cfa27a25d176ec639a877a1174bb1ea76f35f408932"
+translationSourceHash: "6e41548dc0ad84372fae42e030c338dbaf0763199dd521dcb5f42e4d3d6b2ebb"
 translationStatus: draft
 ---
 

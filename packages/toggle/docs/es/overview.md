@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/toggle"
 primitive: toggle
 section: overview
-translationSourceHash: "4b9decb6b9740616a87d9870c42da5f2e49b6c9e34e421aba6878242699b4f4d"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Toggle es un primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "6403ac5cc2878aed7ccf95fea07ae93f95f690379fe3f0f9d6266f9206b50d17"
+translationStatus: draft
 ---
 
 A two-state button that can be toggled on or off.

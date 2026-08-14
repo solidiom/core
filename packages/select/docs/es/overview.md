@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/select"
 primitive: select
 section: overview
-translationSourceHash: "4b3163a2ea8751bf0d2595a1f2bfe60e059e71ce9a23901d70da207e2aebe8eb"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Select no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "f41b238ce614ea70df9f27db4c7f789e0be210c0fc5132484329238253128804"
+translationStatus: draft
 ---
 
 Dropdown selection from a list of options.

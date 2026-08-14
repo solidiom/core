@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/toast"
 primitive: toast
 section: overview
-translationSourceHash: "3ae1421b54700da5437afd3c9eab89d425e192c7846a5c4ab222d1bdf785b70c"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Toast no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "a388b38374f553aad08a53c546e9d1a122a279cfc300e74ee7f00edafe3a9e0d"
+translationStatus: draft
 ---
 
 Temporary non-blocking notification.

@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/field"
 primitive: field
 section: overview
-translationSourceHash: "c1c7ebecdf7a3c79663fe551a5b4536b8c71584cac52716173fb9bf7261f4a71"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Field no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "ffa65cb74ddfd71eac6a6a2bf023be8280ffce1900ac2455fe844b73a4646c64"
+translationStatus: draft
 ---
 
 Composition wrapper: label + control + description + error with automatic ARIA wiring.

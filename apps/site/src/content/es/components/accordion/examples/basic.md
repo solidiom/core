@@ -17,11 +17,11 @@ source:
   export: AccordionExample
   language: tsx
 runnable: true
-translationSourceHash: "b76ae9a774c5f15bce091044bcdeec0334c470ad03b932eadf64df767f9ec57d"
+translationSourceHash: "22f65eb65229bc7f083749be6fd1dc005c093f28cfa0de0d1b861151bb95a0b5"
 translationStatus: draft
 ---
 
-The Accordion component is a styled recipe wrapper around the `@solidiom/accordion` primitive. It provides expandable sections with keyboard navigation and animated open/close behavior.
+El componente Accordion es un wrapper de receta con estilos sobre el primitivo `@solidiom/accordion`. Proporciona secciones expandibles con navegación por teclado y comportamiento animado de apertura/cierre.
 
 ```tsx
 import { StyledAccordion, Accordion } from "@solidiom/recipes-css"

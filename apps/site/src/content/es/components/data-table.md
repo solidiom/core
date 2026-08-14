@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "data-table"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "1d84fdfef1f3acd6567149fb092d44777daa4eb49b1a169d8bc174330c974915"
+translationSourceHash: "d33119c808339157cfbda7878f4c5b32ec37c3865b4aefadf544a0065850de95"
 translationStatus: draft
 ---
 

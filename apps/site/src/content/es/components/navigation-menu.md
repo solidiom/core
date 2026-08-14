@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "navigation-menu"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "67c9c10aeae502160e1ec2a8d104e7646dea235f39068bc3847c4772b5674316"
+translationSourceHash: "9279724c2e92432e9b1bf577a8ce359fc5eca62484349246d12146329fc3a010"
 translationStatus: draft
 ---
 

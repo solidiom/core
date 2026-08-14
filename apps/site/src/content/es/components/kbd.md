@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/recipes-css"
 recipe: "kbd"
 stylingOutputs: ["css", "tailwind", "unocss"]
-translationSourceHash: "5527d375b58908cdcf109266bda48e341f254c035fe1e224d764c252a0e9dd9e"
+translationSourceHash: "6d13e46f0787425396cb3eb5898038bdd9abf0ad8ab22cabef7fa40fa7c6ec9f"
 translationStatus: draft
 ---
 

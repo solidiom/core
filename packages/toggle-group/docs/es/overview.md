@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/toggle-group"
 primitive: toggle-group
 section: overview
-translationSourceHash: "03f1a40761ca4010a6549cf8d609b39422710b83600efa3dd2b4582d4297ace5"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Toggle Group es un primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
+translationSourceHash: "3ed4e1098200e8a3668ac8fc24d4ff5ff53471abec23c8e93584dcad084b31df"
+translationStatus: draft
 ---
 
 Group of mutually-exclusive or multi-select toggle buttons.

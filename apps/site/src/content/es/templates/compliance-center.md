@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-compliance-center"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
-translationSourceHash: "cabf97a69b49b604e4eee38ba8cb297080e9d8b38aae38ce21846c3bedb7722b"
+translationSourceHash: "340a3bc17ebcd858d2428f053ac024322e04063e04c114834f1ff9ae341a88c7"
 translationStatus: draft
 ---
 

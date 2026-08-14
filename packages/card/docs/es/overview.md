@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/card"
 primitive: card
 section: overview
-translationSourceHash: "05fee18fab25b0726e8ac4b7616d4317dee930773b128056ad2b8f996a38abcd"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
+translationSourceHash: "9fbd58e4bcae7148ca225f5a752d1063d05c3141b94da6dbc0a19a06c569f4ed"
+translationStatus: draft
 ---
 
 Card renderiza un contenedor de contenido con partes componibles para encabezado, titulo, descripcion, cuerpo de contenido y pie. Proporciona una estructura semántica para agrupar contenido y acciones relacionadas.

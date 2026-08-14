@@ -11,10 +11,6 @@ status: published
 package: "@solidiom/dialog"
 primitive: dialog
 section: overview
-translationSourceHash: "e3c7ee165ff13f34caecab9e2eef73aa4cef8351681b48da58b4f8464c6402b9"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: relationships
     reason: Dialog no tiene primitivos hermanos. Se compone internamente con Portal y Backdrop pero no posee un contrato inter-primitivo.
@@ -22,6 +18,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. El atrapamiento de foco y el comportamiento del teclado están documentados en la sección Teclado.
+translationSourceHash: "bbfb08330634934adf2eef2e3aff4adc311696645c8a9b4258c974e6cf4b4d47"
+translationStatus: draft
 ---
 
 Dialog presenta contenido contextual sobre la página actual. Úsalo cuando una decisión enfocada o un flujo breve deba interrumpir la tarea actual.

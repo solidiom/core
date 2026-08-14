@@ -17,7 +17,7 @@ source:
   export: CarouselExample
   language: tsx
   runnable: true
-translationSourceHash: "22a78ae408d4c4bef5cb7d13c86d32201f1319efbbc17bef3371f8c556bbc6ee"
+translationSourceHash: "c62eba75f252232e303ea8e80669e1d4aec2cb9b11148eb0082be20e5a8c52a5"
 translationStatus: draft
 ---
 

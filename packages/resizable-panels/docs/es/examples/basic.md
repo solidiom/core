@@ -17,8 +17,8 @@ source:
   export: PanelGroup
   language: tsx
 runnable: false
-runnableReason: "Sin interacción con teclado declarada en el contrato de accesibilidad."
-translationSourceHash: "9017e40ccef82120e5244ac097b1f1ac5e3585a22d5fbc4688aa3d34a47c3bdc"
+runnableReason: "No keyboard interaction declared in the accessibility contract."
+translationSourceHash: "442d321da7f421762e1e0e6cc1f6cc3e48769bedd7fc7ce18f7ec1bc212cf352"
 translationStatus: draft
 ---
 

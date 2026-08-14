@@ -11,10 +11,6 @@ status: draft
 package: "@solidiom/badge"
 primitive: badge
 section: overview
-translationSourceHash: "d748e3c83d93e56490a8f65902f210809c7ac0be68dee8c4b63125c76dcd3866"
-translationStatus: human-reviewed
-translationReviewedBy: "G5-gate"
-translationReviewedAt: "2026-08-07"
 notApplicable:
   - section: composition
     reason: Primitivo autónomo sin sub-primitivos compuestos.
@@ -24,6 +20,8 @@ notApplicable:
     reason: Sin API previa; esta es la primera versión publicada.
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
+translationSourceHash: "867e08caa02708d0cfc44368e856a10eb5ae6b2df8a603a768ab33ced469b7d6"
+translationStatus: draft
 ---
 
 Badge renderiza una etiqueta o indicador de estado pequeño en línea con semántica accesible. Proporciona un primitivo headless que携带 atributos de datos semánticos para la integración de estilos con tu sistema de diseño.

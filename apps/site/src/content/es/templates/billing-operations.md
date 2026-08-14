@@ -11,7 +11,7 @@ status: published
 package: "@solidiom/template-billing-operations"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
-translationSourceHash: "5a61499dc3114a6348110b57008aa6d40a60c4def35083b3be3054b4deb08fc3"
+translationSourceHash: "9a0f685be8ea0668204f2890386596825eb36186a8b96525e4707b50b89383e4"
 translationStatus: draft
 ---
 

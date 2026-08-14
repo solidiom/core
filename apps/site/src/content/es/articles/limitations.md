@@ -10,6 +10,10 @@ product: "Solidiom"
 productLayer: article
 status: draft
 date: "2026-08-07"
+authors:
+  - solidiom-core
+tags: [limitations, solid-2, operations]
+translationSourceHash: "ee0a2e7114967c1e6be72c5f95b92d70b4ee879183f9b30ce83efb7059bc05c2"
 translationStatus: draft
 ---
 

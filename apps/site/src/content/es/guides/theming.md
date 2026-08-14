@@ -8,32 +8,32 @@ maturity: beta
 product: "Solidiom"
 productLayer: guide
 status: draft
-translationSourceHash: "9bc1814210828ab480018f328c099bfd4a0948b589913d79bf6285a9de54f68e"
+translationSourceHash: "52d0c06814511c1ab99c7c3529ac42b57b86ba5976d093c038cb822f4fd415ef"
 translationStatus: draft
 ---
 
-# Theming
+# Temas
 
-Solidiom's theme system uses CSS custom properties to control colors, typography, spacing, and interactive states across all components.
+El sistema de temas de Solidiom usa propiedades personalizadas de CSS para controlar colores, tipografía, espaciado y estados interactivos en todos los componentes.
 
-## Theme Presets
+## Presets de temas
 
-Four presets ship out of the box:
+Cuatro presets se incluyen de serie:
 
-| Preset | Description             | Modes        |
-| ------ | ----------------------- | ------------ |
-| Ocean  | Deep teal and cyan      | Light + Dark |
-| Forest | Earthy greens           | Light + Dark |
-| Slate  | Neutral grays           | Light + Dark |
-| Aurora | Vibrant purple and pink | Light + Dark |
+| Preset | Descripción               | Modos          |
+| ------ | ------------------------- | -------------- |
+| Ocean  | Teal profundo y cian      | Claro + Oscuro |
+| Forest | Verdes terrosos           | Claro + Oscuro |
+| Slate  | Grises neutros            | Claro + Oscuro |
+| Aurora | Púrpura y rosa vibrantes  | Claro + Oscuro |
 
-### Install a Preset
+### Instalar un preset
 
 ```sh
 npx solidiom add --theme ocean
 ```
 
-Or import directly:
+O importar directamente:
 
 ```css
 @import "@solidiom/themes/css/ocean.css";
@@ -44,18 +44,18 @@ Or import directly:
 @import "@solidiom/themes/tailwind/ocean.css";
 ```
 
-## Theme Builder
+## Constructor de temas
 
-The visual [Theme Builder](/themes/builder/) lets you:
+El [Constructor de temas](/themes/builder/) visual te permite:
 
-- Adjust colors, typography, radius, and spacing in real time
-- Preview all 30 components in light and dark modes
-- Export as CSS variables, Tailwind config, or a shareable link
-- Import existing themes for modification
+- Ajustar colores, tipografía, radio y espaciado en tiempo real
+- Previsualizar los 30 componentes en modos claro y oscuro
+- Exportar como variables CSS, configuración de Tailwind o un enlace compartible
+- Importar temas existentes para modificarlos
 
-## Custom Themes
+## Temas personalizados
 
-Create a custom theme by defining CSS custom properties:
+Crea un tema personalizado definiendo propiedades personalizadas de CSS:
 
 ```css
 :root {
@@ -73,16 +73,16 @@ Create a custom theme by defining CSS custom properties:
 }
 ```
 
-## Contrast Requirements
+## Requisitos de contraste
 
-All theme tokens must meet WCAG 2.2 AA contrast minimums:
+Todos los tokens de tema deben cumplir los mínimos de contraste WCAG 2.2 AA:
 
-- Body text: 4.5:1
-- UI components: 3:1
-- Focus indicators: 3:1
+- Texto del cuerpo: 4.5:1
+- Componentes de UI: 3:1
+- Indicadores de foco: 3:1
 
-The preset audit (`pnpm run audit:preset-themes`) validates these ratios automatically.
+La auditoría de presets (`pnpm run audit:preset-themes`) valida estos ratios automáticamente.
 
-## Dark Mode
+## Modo oscuro
 
-Themes support light and dark modes via the `data-theme` attribute or `prefers-color-scheme` media query. All presets include both modes.
+Los temas soportan modos claro y oscuro mediante el atributo `data-theme` o la media query `prefers-color-scheme`. Todos los presets incluyen ambos modos.
