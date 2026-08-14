@@ -1,5 +1,5 @@
 {
-  "changelog": ["@changesets/changelog-github", { "repo": "openCenter-cloud/solidiom" }],
+  "changelog": ["@changesets/changelog-github", { "repo": "solidiom/core" }],
   "commit": false,
   "fixed": [],
   "linked": [
