@@ -1856,7 +1856,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/accordion",
       "provenance": {
         "directory": "packages/accordion",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "accordion",
@@ -1912,7 +1912,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/alert",
       "provenance": {
         "directory": "packages/alert",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "accessibility",
@@ -1973,7 +1973,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/alert-dialog",
       "provenance": {
         "directory": "packages/alert-dialog",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "action",
@@ -2020,7 +2020,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/avatar",
       "provenance": {
         "directory": "packages/avatar",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "and",
@@ -2074,7 +2074,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/badge",
       "provenance": {
         "directory": "packages/badge",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "badge",
@@ -2125,7 +2125,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/breadcrumb",
       "provenance": {
         "directory": "packages/breadcrumb",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "breadcrumb",
@@ -2181,7 +2181,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/button",
       "provenance": {
         "directory": "packages/button",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "acción",
@@ -2240,7 +2240,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/calendar",
       "provenance": {
         "directory": "packages/calendar",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "calendar",
@@ -2288,7 +2288,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/card",
       "provenance": {
         "directory": "packages/card",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "and",
@@ -2347,7 +2347,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/carousel",
       "provenance": {
         "directory": "packages/carousel",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "based",
@@ -2393,7 +2393,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/checkbox",
       "provenance": {
         "directory": "packages/checkbox",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "binary",
@@ -2441,7 +2441,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/collapsible",
       "provenance": {
         "directory": "packages/collapsible",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "collapsible",
@@ -2484,7 +2484,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/combobox",
       "provenance": {
         "directory": "packages/combobox",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "autocompletado",
@@ -2535,7 +2535,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/command-palette",
       "provenance": {
         "directory": "packages/command-palette",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "action",
@@ -2585,7 +2585,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/context-menu",
       "provenance": {
         "directory": "packages/context-menu",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "click",
@@ -2629,7 +2629,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/data-table",
       "provenance": {
         "directory": "packages/data-table",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "column",
@@ -2689,7 +2689,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/date-picker",
       "provenance": {
         "directory": "packages/date-picker",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "calendar",
@@ -2736,7 +2736,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/dialog",
       "provenance": {
         "directory": "packages/dialog",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "dialog",
@@ -2788,7 +2788,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/drawer",
       "provenance": {
         "directory": "packages/drawer",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "any",
@@ -2834,7 +2834,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/empty-state",
       "provenance": {
         "directory": "packages/empty-state",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "areas",
@@ -2879,7 +2879,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/field",
       "provenance": {
         "directory": "packages/field",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "aria",
@@ -2933,7 +2933,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/hover-card",
       "provenance": {
         "directory": "packages/hover-card",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "anchored",
@@ -2982,7 +2982,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/input",
       "provenance": {
         "directory": "packages/input",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "and",
@@ -3033,7 +3033,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/input-otp",
       "provenance": {
         "directory": "packages/input-otp",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "character",
@@ -3080,7 +3080,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/kbd",
       "provenance": {
         "directory": "packages/kbd",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "atajo",
@@ -3132,7 +3132,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/label",
       "provenance": {
         "directory": "packages/label",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "accesible",
@@ -3181,7 +3181,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/listbox",
       "provenance": {
         "directory": "packages/listbox",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "input",
@@ -3226,7 +3226,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/menu",
       "provenance": {
         "directory": "packages/menu",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "action",
@@ -3274,7 +3274,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/meter",
       "provenance": {
         "directory": "packages/meter",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "disk",
@@ -3327,7 +3327,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/navigation-menu",
       "provenance": {
         "directory": "packages/navigation-menu",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "accessible",
@@ -3380,7 +3380,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/pagination",
       "provenance": {
         "directory": "packages/pagination",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "and",
@@ -3430,7 +3430,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/popover",
       "provenance": {
         "directory": "packages/popover",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "content",
@@ -3480,7 +3480,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/progress",
       "provenance": {
         "directory": "packages/progress",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "and",
@@ -3528,7 +3528,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/radio-group",
       "provenance": {
         "directory": "packages/radio-group",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "button",
@@ -3580,7 +3580,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/resizable-panels",
       "provenance": {
         "directory": "packages/resizable-panels",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "drag",
@@ -3628,7 +3628,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/scroll-area",
       "provenance": {
         "directory": "packages/scroll-area",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "area",
@@ -3680,7 +3680,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/select",
       "provenance": {
         "directory": "packages/select",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "dropdown",
@@ -3729,7 +3729,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/separator",
       "provenance": {
         "directory": "packages/separator",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "decorative",
@@ -3776,7 +3776,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/sheet",
       "provenance": {
         "directory": "packages/sheet",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "animation",
@@ -3826,7 +3826,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/skeleton",
       "provenance": {
         "directory": "packages/skeleton",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "animation",
@@ -3871,7 +3871,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/slider",
       "provenance": {
         "directory": "packages/slider",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "control",
@@ -3916,7 +3916,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/spinner",
       "provenance": {
         "directory": "packages/spinner",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "feedback",
@@ -3962,7 +3962,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/switch",
       "provenance": {
         "directory": "packages/switch",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "binary",
@@ -4011,7 +4011,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/tabs",
       "provenance": {
         "directory": "packages/tabs",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "content",
@@ -4058,7 +4058,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/toast",
       "provenance": {
         "directory": "packages/toast",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "blocking",
@@ -4106,7 +4106,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/toggle",
       "provenance": {
         "directory": "packages/toggle",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "button",
@@ -4153,7 +4153,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/toggle-group",
       "provenance": {
         "directory": "packages/toggle-group",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "buttons",
@@ -4199,7 +4199,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/toolbar",
       "provenance": {
         "directory": "packages/toolbar",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "actions",
@@ -4249,7 +4249,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/tooltip",
       "provenance": {
         "directory": "packages/tooltip",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "contextual",
@@ -4299,7 +4299,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/tree",
       "provenance": {
         "directory": "packages/tree",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "collapse",
@@ -4344,7 +4344,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/virtual-list",
       "provenance": {
         "directory": "packages/virtual-list",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "datasets",
@@ -4391,7 +4391,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "package": "@solidiom/visually-hidden",
       "provenance": {
         "directory": "packages/visually-hidden",
-        "repository": "https://github.com/solidiom/solidiom",
+        "repository": "https://github.com/solidiom/core",
       },
       "searchKeywords": [
         "accessibility",

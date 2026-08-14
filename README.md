@@ -247,4 +247,4 @@ The recipe CSS files do **not** include `@reference "tailwindcss"` — they rely
 
 ## License
 
-MIT
+Apache 2.0 — see [LICENSE](LICENSE) for details. Documentation is licensed under [CC BY 4.0](LICENSE-DOCS).

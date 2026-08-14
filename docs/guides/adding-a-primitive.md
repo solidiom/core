@@ -80,7 +80,7 @@ Create `packages/<name>/` with four files:
   "name": "@solidiom/<name>",
   "version": "0.0.1-next.0",
   "private": false,
-  "license": "MIT",
+  "license": "Apache-2.0",
   "type": "module",
   "exports": {
     ".": {

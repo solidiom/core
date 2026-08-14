@@ -296,7 +296,7 @@ describe("generate-api-docs: v1 schema normalization", () => {
       source: {
         path: "packages/fixture/src/root.tsx",
         line: 10,
-        url: "https://github.com/solidiom/solidiom/blob/main/packages/fixture/src/root.tsx#L10",
+        url: "https://github.com/solidiom/core/blob/main/packages/fixture/src/root.tsx#L10",
       },
       props: [
         {

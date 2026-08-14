@@ -278,10 +278,10 @@ No vendemos información personal. No compartimos información personal para pub
 
 ## Cambios a Esta Política
 
-Actualizaremos esta página cuando cambien nuestras prácticas de datos. Dado que Solidiom es de código abierto, puedes revisar el [historial de commits](https://github.com/solidiom/solidiom) de este archivo para ver exactamente qué cambió y cuándo.
+Actualizaremos esta página cuando cambien nuestras prácticas de datos. Dado que Solidiom es de código abierto, puedes revisar el [historial de commits](https://github.com/solidiom/core) de este archivo para ver exactamente qué cambió y cuándo.
 
 ---
 
 ## Contacto
 
-Para preguntas de privacidad o solicitudes de datos, abre un issue en nuestro [repositorio de GitHub](https://github.com/solidiom/solidiom) o comunícate a través de los canales listados en el sitio web.
+Para preguntas de privacidad o solicitudes de datos, abre un issue en nuestro [repositorio de GitHub](https://github.com/solidiom/core) o comunícate a través de los canales listados en el sitio web.

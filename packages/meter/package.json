@@ -2,7 +2,7 @@
   "name": "@solidiom/meter",
   "version": "0.0.1",
   "private": false,
-  "license": "MIT",
+  "license": "Apache-2.0",
   "type": "module",
   "exports": {
     ".": {

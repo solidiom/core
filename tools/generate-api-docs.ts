@@ -30,7 +30,7 @@ import {
 const ROOT = resolve(import.meta.dirname ?? __dirname, "..")
 const PACKAGES_DIR = join(ROOT, "packages")
 const OUTPUT_DIR = join(ROOT, "artifacts/api")
-const REPOSITORY_URL = "https://github.com/solidiom/solidiom"
+const REPOSITORY_URL = "https://github.com/solidiom/core"
 
 type UnknownRecord = Record<string, unknown>
 

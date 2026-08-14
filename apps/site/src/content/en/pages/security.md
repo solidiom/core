@@ -19,7 +19,7 @@ locale: en
 
 ## Reporting a Vulnerability
 
-We use [GitHub Private Vulnerability Reporting](https://github.com/solidiom/solidiom/security/advisories/new) for coordinated disclosure.
+We use [GitHub Private Vulnerability Reporting](https://github.com/solidiom/core/security/advisories/new) for coordinated disclosure.
 
 When you submit a report:
 

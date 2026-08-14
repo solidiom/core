@@ -21,7 +21,7 @@ translationStatus: draft
 
 ## Reportar una Vulnerabilidad
 
-Usamos [Reporte Privado de Vulnerabilidades de GitHub](https://github.com/solidiom/solidiom/security/advisories/new) para divulgación coordinada.
+Usamos [Reporte Privado de Vulnerabilidades de GitHub](https://github.com/solidiom/core/security/advisories/new) para divulgación coordinada.
 
 Al enviar un reporte:
 

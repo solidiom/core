@@ -2,7 +2,7 @@
   "name": "@solidiom/adapter-kit",
   "version": "0.0.1-next.0",
   "private": false,
-  "license": "MIT",
+  "license": "Apache-2.0",
   "type": "module",
   "description": "Adapter authoring kit — scaffold template and conformance harness for building Solidiom adapters backed by framework-neutral engines.",
   "exports": {

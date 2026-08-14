@@ -42,13 +42,13 @@ export function getDocsLinks(locale: Locale): NavLink[] {
     { label: GUIDES_LABEL[locale], href: `${prefix}/guides/` },
     { label: ACCESSIBILITY_LABEL[locale], href: `${prefix}/accessibility/` },
     { label: PERFORMANCE_LABEL[locale], href: `${prefix}/performance/` },
-    { label: "GitHub", href: "https://github.com/solidiom" },
+    { label: "GitHub", href: "https://github.com/solidiom/core" },
   ]
 }
 
 /** @deprecated Use getDocsLinks instead */
 export const resourceLinks: NavLink[] = [
-  { label: "GitHub", href: "https://github.com/solidiom" },
+  { label: "GitHub", href: "https://github.com/solidiom/core" },
   { label: "Accessibility", href: "/accessibility/" },
   { label: "Performance", href: "/performance/" },
 ]

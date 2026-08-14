@@ -63,6 +63,8 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Build template previews
+        run: pnpm --filter '@solidiom/template-*' build
       - name: Production build
         run: pnpm exec nx run @solidiom/site:build
       - name: Pagefind search index

@@ -122,6 +122,6 @@ Solid 2.0.0-beta.26 is the underlying dependency and is not GA. No semver guaran
 
 ## Feedback
 
-- **Bug reports:** [GitHub Issues](https://github.com/solidiom/solidiom/issues)
+- **Bug reports:** [GitHub Issues](https://github.com/solidiom/core/issues)
 - **Feature requests:** Open an issue with the `enhancement` label
-- **Security:** [Responsible disclosure](https://github.com/solidiom/solidiom/security/advisories/new)
+- **Security:** [Responsible disclosure](https://github.com/solidiom/core/security/advisories/new)

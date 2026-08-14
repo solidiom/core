@@ -123,6 +123,6 @@ Solid 2.0.0-beta.26 es la dependencia subyacente y no es GA. Sin garantías de s
 
 ## Retroalimentación
 
-- **Reportes de errores:** [GitHub Issues](https://github.com/solidiom/solidiom/issues)
+- **Reportes de errores:** [GitHub Issues](https://github.com/solidiom/core/issues)
 - **Solicitudes de funcionalidad:** Abra un issue con la etiqueta `enhancement`
-- **Seguridad:** [Divulgación responsable](https://github.com/solidiom/solidiom/security/advisories/new)
+- **Seguridad:** [Divulgación responsable](https://github.com/solidiom/core/security/advisories/new)

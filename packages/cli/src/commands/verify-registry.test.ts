@@ -74,7 +74,7 @@ function buttonManifest() {
       lastGenerated: "2025-01-01T00:00:00.000Z",
     },
     provenance: {
-      repository: "https://github.com/solidiom/solidiom",
+      repository: "https://github.com/solidiom/core",
       directory: "packages/button",
     },
     lastUpdated: "2025-01-01T00:00:00.000Z",
@@ -108,7 +108,7 @@ function baseIndex(manifest: ReturnType<typeof buttonManifest>) {
         themeCompatible: [] as string[],
         searchKeywords: ["button"],
         provenance: {
-          repository: "https://github.com/solidiom/solidiom",
+          repository: "https://github.com/solidiom/core",
           directory: "packages/button",
         },
       },

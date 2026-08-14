@@ -247,6 +247,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
+      - name: Build template previews
+        run: pnpm --filter '@solidiom/template-*' build
       - name: Build and index static site
         run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
       - name: REG-007 — verify every registry deliverable has exactly one valid route

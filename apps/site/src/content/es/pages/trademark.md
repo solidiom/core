@@ -186,13 +186,13 @@ Si haces un fork de Solidiom:
 
 ## Reportar Violaciones
 
-Si crees que alguien está haciendo un mal uso de la marca Solidiom, por favor repórtalo abriendo un issue en el [repositorio de GitHub de Solidiom](https://github.com/solidiom/solidiom) o contactando a los mantenedores a través de los canales oficiales.
+Si crees que alguien está haciendo un mal uso de la marca Solidiom, por favor repórtalo abriendo un issue en el [repositorio de GitHub de Solidiom](https://github.com/solidiom/core) o contactando a los mantenedores a través de los canales oficiales.
 
 ---
 
 ## Solicitudes de Permiso
 
-Para solicitar permiso para un uso no cubierto por esta política, abre un issue en nuestro [repositorio de GitHub](https://github.com/solidiom/solidiom) con:
+Para solicitar permiso para un uso no cubierto por esta política, abre un issue en nuestro [repositorio de GitHub](https://github.com/solidiom/core) con:
 
 - Una descripción del uso previsto.
 - Dónde y cómo aparecerán los activos de marca.
