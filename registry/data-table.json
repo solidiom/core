@@ -36,7 +36,7 @@
     "evidenceIds": [
       "axe-data-table-scan-v1"
     ],
-    "lastReviewed": "2026-08-12T00:37:59.400Z"
+    "lastReviewed": "2026-08-14T03:47:36.159Z"
   },
   "documentation": {
     "status": "complete",
@@ -89,11 +89,11 @@
       "src/data-table.tsx": "8aa83ebf5d8de898261d95afc98c9b24d7ee7b1461f92da64bd08bbfd105f67a",
       "src/index.tsx": "f7f5937850a28dbb5cd26d7ff7f375c690cb45aa5e4d6be554d5bc662af5c345"
     },
-    "lastGenerated": "2026-08-11T23:13:29.000Z"
+    "lastGenerated": "2026-08-12T22:56:48.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/solidiom",
     "directory": "packages/data-table"
   },
-  "lastUpdated": "2026-08-11T23:13:29.000Z"
+  "lastUpdated": "2026-08-12T22:56:48.000Z"
 }

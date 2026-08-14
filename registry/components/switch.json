@@ -30,7 +30,7 @@
         "src/recipes/switch.tsx": "22384d25357ba6bd2cd01332367494b175b8c0a0c8bf85be52c97d4a1c12da4a"
       }
     },
-    "lastGenerated": "2026-08-12T01:32:07.000Z"
+    "lastGenerated": "2026-08-12T22:56:48.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/switch"
   ],
-  "lastUpdated": "2026-08-12T01:32:07.000Z"
+  "lastUpdated": "2026-08-12T22:56:48.000Z"
 }
