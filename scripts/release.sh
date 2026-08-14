@@ -269,7 +269,11 @@ pnpm --filter '@solidiom/template-*' build || die "Template build failed"
 pass "Templates built"
 
 echo "  Building site..."
-pnpm --filter @solidiom/site build || die "Site build failed"
+if [[ $SITE_ONLY -eq 1 ]]; then
+  pnpm --filter @solidiom/site run build:deploy || die "Site build failed"
+else
+  pnpm --filter @solidiom/site build || die "Site build failed"
+fi
 pnpm --filter @solidiom/site search-index || die "Search index failed"
 pass "Site built with Pagefind index"
 
