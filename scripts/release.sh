@@ -20,6 +20,7 @@
 #   ./scripts/release.sh              # full release (tests + npm + cloudflare)
 #   ./scripts/release.sh --dry-run    # run tests only, no publish
 #   ./scripts/release.sh --skip-tests # skip tests, publish only (use with caution)
+#   ./scripts/release.sh --site-only  # build and deploy site only (no npm, no tests)
 #
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
@@ -34,6 +35,7 @@ CLOUDFLARE_PROJECT="solidiom-site"
 SITE_DIR="apps/site/dist"
 DRY_RUN=0
 SKIP_TESTS=0
+SITE_ONLY=0
 
 # ─── Argument parsing ───────────────────────────────────────────────────────
 
@@ -41,6 +43,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --dry-run)  DRY_RUN=1;    shift ;;
     --skip-tests) SKIP_TESTS=1; shift ;;
+    --site-only) SITE_ONLY=1; SKIP_TESTS=1; shift ;;
     --help|-h)
       head -25 "$0" | grep "^#" | sed 's/^# \?//'
       exit 0
@@ -83,10 +86,12 @@ fi
 
 step "0/7" "Preflight checks"
 
-if [[ -z "${NPM_TOKEN:-}" ]]; then
-  die "NPM_TOKEN not set. Add it to .env or export it."
+if [[ $SITE_ONLY -eq 0 ]]; then
+  if [[ -z "${NPM_TOKEN:-}" ]]; then
+    die "NPM_TOKEN not set. Add it to .env or export it."
+  fi
+  pass "NPM_TOKEN is set"
 fi
-pass "NPM_TOKEN is set"
 
 if [[ $DRY_RUN -eq 0 ]]; then
   if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then
@@ -107,15 +112,17 @@ else
   SKIP_CLOUDFLARE=1
 fi
 
-# Verify npm token is valid
-echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > /tmp/.npmrc-release-check
-NPM_USER=$(npm whoami --registry https://registry.npmjs.org/ --userconfig /tmp/.npmrc-release-check 2>/dev/null || true)
-rm -f /tmp/.npmrc-release-check
+if [[ $SITE_ONLY -eq 0 ]]; then
+  # Verify npm token is valid
+  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > /tmp/.npmrc-release-check
+  NPM_USER=$(npm whoami --registry https://registry.npmjs.org/ --userconfig /tmp/.npmrc-release-check 2>/dev/null || true)
+  rm -f /tmp/.npmrc-release-check
 
-if [[ -z "$NPM_USER" ]]; then
-  die "NPM_TOKEN is invalid (npm whoami failed)"
+  if [[ -z "$NPM_USER" ]]; then
+    die "NPM_TOKEN is invalid (npm whoami failed)"
+  fi
+  pass "npm authenticated as: $NPM_USER"
 fi
-pass "npm authenticated as: $NPM_USER"
 
 # Check working tree is clean
 if [[ -n "$(git status --porcelain)" ]]; then
@@ -132,13 +139,18 @@ pass "On branch: $BRANCH"
 
 echo ""
 echo -e "${BOLD}Release plan:${RESET}"
-echo "  npm publish:  @solidiom/* packages with --tag beta"
+if [[ $SITE_ONLY -eq 1 ]]; then
+  echo "  npm publish:  SKIPPED (--site-only)"
+else
+  echo "  npm publish:  @solidiom/* packages with --tag beta"
+fi
 echo "  site deploy:  $CLOUDFLARE_PROJECT to Cloudflare Pages"
 echo "  dry-run:      $( [[ $DRY_RUN -eq 1 ]] && echo 'YES (no publish)' || echo 'no' )"
+echo "  site-only:    $( [[ $SITE_ONLY -eq 1 ]] && echo 'YES' || echo 'no' )"
 echo ""
 
 if [[ $DRY_RUN -eq 0 ]]; then
-  read -r -p "Proceed with release? [y/N] " confirm
+  read -r -p "Proceed? [y/N] " confirm
   if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
     echo "Aborted."
     exit 0
@@ -195,45 +207,57 @@ fi
 
 # ─── Step 3: Build registry ────────────────────────────────────────────────
 
-step "3/7" "Building and verifying registry"
-pnpm exec tsx tools/registry-build.ts || die "Registry build failed"
-node packages/cli/dist/bin.js verify --registry || die "Registry verification failed"
-pass "Registry built and verified (unsigned — signing is CI-only)"
+if [[ $SITE_ONLY -eq 0 ]]; then
+  step "3/7" "Building and verifying registry"
+  pnpm exec tsx tools/registry-build.ts || die "Registry build failed"
+  node packages/cli/dist/bin.js verify --registry || die "Registry verification failed"
+  pass "Registry built and verified (unsigned — signing is CI-only)"
+else
+  step "3/7" "Skipping registry build (--site-only)"
+fi
 
 # ─── Step 4: Version packages ──────────────────────────────────────────────
 
-step "4/7" "Applying changeset versions"
+if [[ $SITE_ONLY -eq 0 ]]; then
+  step "4/7" "Applying changeset versions"
 
-PENDING=$(pnpm changeset status 2>&1 | grep -c "found [0-9]" || true)
-if [[ "$PENDING" == "0" ]] && ! ls .changeset/*.md > /dev/null 2>&1; then
-  warn "No pending changesets — versions will not be bumped"
+  PENDING=$(pnpm changeset status 2>&1 | grep -c "found [0-9]" || true)
+  if [[ "$PENDING" == "0" ]] && ! ls .changeset/*.md > /dev/null 2>&1; then
+    warn "No pending changesets — versions will not be bumped"
+  else
+    pnpm changeset version || die "Changeset version failed"
+    pass "Versions bumped and changelogs generated"
+
+    # Rebuild with final version strings
+    echo "  Rebuilding with final versions..."
+    pnpm nx run-many -t build --exclude=@solidiom/site || die "Rebuild failed"
+    pass "Rebuilt with versioned packages"
+  fi
 else
-  pnpm changeset version || die "Changeset version failed"
-  pass "Versions bumped and changelogs generated"
-
-  # Rebuild with final version strings
-  echo "  Rebuilding with final versions..."
-  pnpm nx run-many -t build --exclude=@solidiom/site || die "Rebuild failed"
-  pass "Rebuilt with versioned packages"
+  step "4/7" "Skipping versioning (--site-only)"
 fi
 
 # ─── Step 5: Publish to npm ────────────────────────────────────────────────
 
-step "5/7" "Publishing to npm"
+if [[ $SITE_ONLY -eq 0 ]]; then
+  step "5/7" "Publishing to npm"
 
-if [[ $DRY_RUN -eq 1 ]]; then
-  warn "DRY RUN — skipping npm publish"
-  echo "  Would publish with: pnpm changeset publish --tag beta"
+  if [[ $DRY_RUN -eq 1 ]]; then
+    warn "DRY RUN — skipping npm publish"
+    echo "  Would publish with: pnpm changeset publish --tag beta"
+  else
+    # Configure npm auth
+    echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> "$REPO_ROOT/.npmrc"
+    trap 'sed -i "" "/registry.npmjs.org/d" "$REPO_ROOT/.npmrc" 2>/dev/null || true' EXIT
+
+    pnpm changeset publish --tag beta || die "npm publish failed"
+    pass "Published to npm with beta tag"
+
+    # Clean up auth token from .npmrc
+    sed -i "" "/registry.npmjs.org/d" "$REPO_ROOT/.npmrc" 2>/dev/null || true
+  fi
 else
-  # Configure npm auth
-  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> "$REPO_ROOT/.npmrc"
-  trap 'sed -i "" "/registry.npmjs.org/d" "$REPO_ROOT/.npmrc" 2>/dev/null || true' EXIT
-
-  pnpm changeset publish --tag beta || die "npm publish failed"
-  pass "Published to npm with beta tag"
-
-  # Clean up auth token from .npmrc
-  sed -i "" "/registry.npmjs.org/d" "$REPO_ROOT/.npmrc" 2>/dev/null || true
+  step "5/7" "Skipping npm publish (--site-only)"
 fi
 
 # ─── Step 6: Build and deploy site ─────────────────────────────────────────
@@ -265,23 +289,27 @@ fi
 
 # ─── Step 7: Generate artifacts and commit ─────────────────────────────────
 
-step "7/7" "Generating release artifacts"
+if [[ $SITE_ONLY -eq 0 ]]; then
+  step "7/7" "Generating release artifacts"
 
-pnpm exec tsx tools/generate-beta-artifacts.ts --verify || die "Beta artifacts failed"
-pass "Beta artifacts generated and verified"
+  pnpm exec tsx tools/generate-beta-artifacts.ts --verify || die "Beta artifacts failed"
+  pass "Beta artifacts generated and verified"
 
-if [[ $DRY_RUN -eq 0 ]]; then
-  # Commit version bumps and artifacts
-  git add -A
-  if git diff --cached --quiet; then
-    warn "No changes to commit"
-  else
-    git commit -m "chore(release): publish beta packages
+  if [[ $DRY_RUN -eq 0 ]]; then
+    # Commit version bumps and artifacts
+    git add -A
+    if git diff --cached --quiet; then
+      warn "No changes to commit"
+    else
+      git commit -m "chore(release): publish beta packages
 
 Packages published to npm with --tag beta.
 Site deployed to Cloudflare Pages."
-    pass "Release changes committed"
+      pass "Release changes committed"
+    fi
   fi
+else
+  step "7/7" "Skipping artifacts (--site-only)"
 fi
 
 # ─── Done ───────────────────────────────────────────────────────────────────
@@ -292,6 +320,11 @@ if [[ $DRY_RUN -eq 1 ]]; then
   echo -e "${GREEN}${BOLD}  Beta Release Dry Run COMPLETE${RESET}"
   echo ""
   echo "  All checks passed. Run without --dry-run to publish."
+elif [[ $SITE_ONLY -eq 1 ]]; then
+  echo -e "${GREEN}${BOLD}  Site Deploy COMPLETE${RESET}"
+  echo ""
+  [[ ${SKIP_CLOUDFLARE:-0} -eq 0 ]] && echo "  site:  deployed to Cloudflare Pages"
+  [[ ${SKIP_CLOUDFLARE:-0} -eq 1 ]] && echo "  site:  built (deploy skipped — missing credentials)"
 else
   echo -e "${GREEN}${BOLD}  Beta Release COMPLETE${RESET}"
   echo ""
