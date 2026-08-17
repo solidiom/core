@@ -28,11 +28,25 @@ const iframeSrc = isSafeName ? `/templates/__preview__/${name}/index.html` : nul
 // NOTE: SSR templates (e.g. tanstack-start-solid) use static pre-rendered
 // HTML with only CSS — no client JS — because their client bundles are
 // hydration entries that require a running server to function.
+//
+// The preview files live in this app's public/ dir, populated by
+// sync-template-previews.ts. Resolve the check against the site root rather
+// than import.meta.url: when Astro bundles this component for the production
+// build, import.meta.url no longer points at src/components/, so the old
+// "../../public/..." relative path silently missed and every template fell
+// back to "preview not available". We probe the likely site roots
+// (build cwd is apps/site; nx/root invocations use the repo root) plus the
+// original module-relative path as a dev-time fallback.
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-const previewExists =
-  isSafeName &&
-  existsSync(resolve(__dirname, "../../public/templates/__preview__", name, "index.html"))
+const previewCandidates = isSafeName
+  ? [
+      resolve(process.cwd(), "public/templates/__preview__", name, "index.html"),
+      resolve(process.cwd(), "apps/site/public/templates/__preview__", name, "index.html"),
+      resolve(__dirname, "../../public/templates/__preview__", name, "index.html"),
+    ]
+  : []
+const previewExists = previewCandidates.some((candidate) => existsSync(candidate))
 ---
 
 <div class="template-preview">
