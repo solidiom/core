@@ -67,10 +67,11 @@ async function main(): Promise<void> {
     homepage.status === 200,
     `Authenticated preview homepage must return 200; received ${homepage.status}.`,
   )
-  assertHeader(homepage, "x-frame-options", "DENY")
+  assertHeader(homepage, "x-frame-options", "SAMEORIGIN")
   assertHeader(homepage, "x-content-type-options", "nosniff")
   assertHeader(homepage, "referrer-policy", "strict-origin-when-cross-origin")
   assertHeader(homepage, "content-security-policy", "default-src 'self'")
+  assertHeader(homepage, "content-security-policy", "frame-ancestors 'self'")
   assertHeader(homepage, "content-security-policy", "form-action 'self' https://buttondown.com")
 
   const homepageHtml = await homepage.text()
