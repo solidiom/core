@@ -35,6 +35,11 @@ export {
 } from "./dom/semantic-attrs"
 export { sanitizeHref, isSafeHref } from "./dom/sanitize-href"
 export {
+  createClipboard,
+  type Clipboard,
+  type ClipboardOptions,
+} from "./dom/clipboard"
+export {
   SEMANTIC_FLAGS,
   SEMANTIC_ORIENTATIONS,
   SEMANTIC_SIDES,
@@ -51,6 +56,17 @@ export {
   allStateValues,
   type SemanticFlagName,
 } from "./dom/semantic-vocabulary"
+export {
+  createAnnouncer,
+  type Announcer,
+  type AnnouncerOptions,
+  type AnnouncerPoliteness,
+} from "./dom/announcer"
+export {
+  createScrollAnchor,
+  type ScrollAnchor,
+  type ScrollAnchorOptions,
+} from "./dom/scroll-anchor"
 
 // Collection
 export {
@@ -71,6 +87,14 @@ export {
   type RovingFocusOptions,
 } from "./collection/roving-focus"
 export { createTypeahead, type Typeahead, type TypeaheadOptions } from "./collection/typeahead"
+export {
+  createSelection,
+  type Selection,
+  type SelectionOptions,
+  type SelectionMode,
+  type SelectionBehavior,
+  type SelectionModifiers,
+} from "./collection/selection"
 
 // Overlay
 export {
@@ -122,6 +146,20 @@ export {
   type DirectionOptions,
 } from "./i18n/direction"
 export { resolveLocale, type Locale, type LocaleOptions } from "./i18n/locale"
+export {
+  createNumberFormatter,
+  type NumberFormatter,
+  type NumberFormatterOptions,
+} from "./i18n/number-formatter"
+export {
+  createTimeMath,
+  type TimeMath,
+  type TimeValue,
+  type TimeSegments,
+  type HourCycle,
+  type DayPeriod,
+  type TimeFormatterOptions,
+} from "./i18n/time-math"
 
 // Interaction
 export {
@@ -129,3 +167,32 @@ export {
   type PointerIntent,
   type PointerIntentOptions,
 } from "./interaction/pointer-intent"
+export {
+  createSpinButton,
+  type SpinButton,
+  type SpinButtonOptions,
+  type SpinButtonReason,
+  type SpinButtonAriaProps,
+} from "./interaction/spin-button"
+export {
+  createSegmentedEditing,
+  type SegmentedEditing,
+  type SegmentedEditingOptions,
+  type SegmentDefinition,
+  type SegmentState,
+} from "./interaction/segmented-editing"
+export {
+  createDropzone,
+  createSortable,
+  type Dropzone,
+  type DropzoneOptions,
+  type DropzoneProps,
+  type FileInputProps,
+  type FileRejectionReason,
+  type DragItem,
+  type DragStatus,
+  type Sortable,
+  type SortableOptions,
+  type SortableItem,
+  type SortableDraggableProps,
+} from "./interaction/drag-and-drop"
