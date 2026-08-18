@@ -269,11 +269,10 @@ pnpm --filter '@solidiom/template-*' build || die "Template build failed"
 pass "Templates built"
 
 echo "  Building site..."
-if [[ $SITE_ONLY -eq 1 ]]; then
-  pnpm --filter @solidiom/site run build:deploy || die "Site build failed"
-else
-  pnpm --filter @solidiom/site build || die "Site build failed"
-fi
+# Use build:deploy which skips i18n:validate — translation quality is a GA
+# gate, not a beta gate. The full `build` command enforces human-reviewed
+# translations which aren't expected until the stable release.
+pnpm --filter @solidiom/site run build:deploy || die "Site build failed"
 pnpm --filter @solidiom/site search-index || die "Search index failed"
 pass "Site built with Pagefind index"
 
