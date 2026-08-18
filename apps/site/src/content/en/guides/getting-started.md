@@ -69,7 +69,7 @@ Available presets: Ocean, Forest, Slate, Aurora.
 
 ## Next Steps
 
-- [Browse primitives](/primitives/) — 52 headless building blocks
-- [Browse components](/components/) — 52 styled recipe wrappers
+- [Browse primitives](/primitives/) — 86 headless building blocks
+- [Browse components](/components/) — 32 styled recipe wrappers
 - [Theme builder](/themes/builder/) — visual theme editor
 - [CLI reference](/guides/cli-overview/) — full command documentation

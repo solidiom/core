@@ -8,7 +8,7 @@ maturity: beta
 product: "Solidiom"
 productLayer: guide
 status: draft
-translationSourceHash: "52d0c06814511c1ab99c7c3529ac42b57b86ba5976d093c038cb822f4fd415ef"
+translationSourceHash: "21419a26f3ad1ec39ac8355946327fe521ac59f17d42d6d69120e9232cf3ba5d"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
 translationReviewedAt: "2026-08-18"
@@ -51,7 +51,7 @@ O importar directamente:
 El [Constructor de temas](/themes/builder/) visual te permite:
 
 - Ajustar colores, tipografía, radio y espaciado en tiempo real
-- Previsualizar los 30 componentes en modos claro y oscuro
+- Previsualizar los 32 componentes en modos claro y oscuro
 - Exportar como variables CSS, configuración de Tailwind o un enlace compartible
 - Importar temas existentes para modificarlos
 

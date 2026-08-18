@@ -315,7 +315,7 @@ function PreviewContent(props: { c: CopyShape }) {
       </div>
 
       {/* Extended Component Previews — BUILDER-007 */}
-      {/* These use semantic HTML styled by theme tokens to preview all 30 component appearances */}
+      {/* These use semantic HTML styled by theme tokens to preview all 32 component appearances */}
 
       {/* Dialog */}
       <div class="theme-builder__preview-section">

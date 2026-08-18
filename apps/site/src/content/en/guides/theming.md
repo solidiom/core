@@ -47,7 +47,7 @@ Or import directly:
 The visual [Theme Builder](/themes/builder/) lets you:
 
 - Adjust colors, typography, radius, and spacing in real time
-- Preview all 30 components in light and dark modes
+- Preview all 32 components in light and dark modes
 - Export as CSS variables, Tailwind config, or a shareable link
 - Import existing themes for modification
 

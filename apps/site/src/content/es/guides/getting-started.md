@@ -8,7 +8,7 @@ maturity: beta
 product: "Solidiom"
 productLayer: guide
 status: draft
-translationSourceHash: "9342a7b41cbb9a66013b508ac4adc8e6a8fb2b39b7d5c94de2a00e5ec2d64daa"
+translationSourceHash: "a94327207e59b42d9deebce3cf37abc9641eaa28a9097ef985b9106a237200f8"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
 translationReviewedAt: "2026-08-18"
@@ -73,7 +73,7 @@ Presets disponibles: Ocean, Forest, Slate, Aurora.
 
 ## Siguientes pasos
 
-- [Explorar primitivos](/primitives/) — 52 bloques de construcción headless
-- [Explorar componentes](/components/) — 52 wrappers de recetas con estilos
+- [Explorar primitivos](/primitives/) — 86 bloques de construcción headless
+- [Explorar componentes](/components/) — 32 wrappers de recetas con estilos
 - [Constructor de temas](/themes/builder/) — editor visual de temas
 - [Referencia del CLI](/guides/cli-overview/) — documentación completa de comandos

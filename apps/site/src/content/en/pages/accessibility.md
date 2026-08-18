@@ -19,7 +19,7 @@ Solidiom is built on the principle that accessible software is not optional. Eve
 - Every interactive primitive implements the corresponding APG keyboard and ARIA pattern
 - Every primitive ships with committed accessibility evidence (`evidence.json`)
 - Every theme preset passes AA contrast minimums in both light and dark modes
-- Automated axe-core scans run on every build for all 52 primitives
+- Automated axe-core scans run on every build for all 86 primitives
 - Keyboard navigation is documented and tested for every interactive element
 
 ## Evidence
@@ -37,7 +37,7 @@ Our accessibility evidence is machine-verified and committed to the repository:
 
 ### Per-Primitive Evidence
 
-Each of the 52 primitives has a committed `packages/<name>/docs/accessibility/evidence.json` containing:
+Each of the 86 primitives has a committed `packages/<name>/docs/accessibility/evidence.json` containing:
 
 - axe-core scan results (violations, passes, incomplete)
 - Keyboard navigation contract
