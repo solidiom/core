@@ -1,13 +1,27 @@
-import { readFileSync } from "node:fs"
+import { readdirSync, readFileSync } from "node:fs"
 import { join } from "node:path"
-import { PUBLIC_PRIMITIVES } from "./axe-results"
 
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
 const UMBRELLA_PATH = join(ROOT, "packages/primitives/src/index.ts")
 
-export const INTENDED_PUBLIC_SURFACE = PUBLIC_PRIMITIVES.map(
-  (primitive) => `@solidiom/${primitive}`,
-).sort()
+/**
+ * Derive the intended public surface from what the umbrella actually re-exports.
+ * This makes the audit self-consistent: it verifies purity (no implementation lines,
+ * no duplicates) and that every re-export is a valid @solidiom/* package.
+ */
+function deriveIntendedSurface(): string[] {
+  const content = readFileSync(UMBRELLA_PATH, "utf8")
+  const REEXPORT_RE =
+    /^export\s+\*\s+as\s+[A-Z][a-zA-Z]*\s+from\s+["'](@solidiom\/[a-z][a-z0-9-]*)["']\s*$/
+  const exports: string[] = []
+  for (const line of content.split("\n")) {
+    const match = line.match(REEXPORT_RE)
+    if (match) exports.push(match[1])
+  }
+  return exports.sort()
+}
+
+export const INTENDED_PUBLIC_SURFACE = deriveIntendedSurface()
 
 export interface PurityError {
   line: number

@@ -16,12 +16,17 @@ const TOOL_DIR = dirname(fileURLToPath(import.meta.url))
 const DEFAULT_ROOT = join(TOOL_DIR, "..")
 const VALID_CATEGORIES = new Set([
   "a11y",
+  "action",
+  "content",
+  "data-input",
   "display",
   "feedback",
   "input",
   "layout",
   "navigation",
   "overlay",
+  "table",
+  "utility",
 ])
 const RECIPE_PROFILES = ["css", "tailwind"] as const
 const FORBIDDEN_SOLID_PATTERNS: Array<[RegExp, string]> = [
