@@ -1,3 +1,2 @@
 import { createTsupConfig } from "../../tools/build/tsup.config.base"
-
-export default createTsupConfig({ packageName: "chat-tool-calls" })
+export default createTsupConfig({ entry: ["src/index.tsx"] })
