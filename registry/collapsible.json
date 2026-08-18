@@ -33,7 +33,7 @@
     "evidenceIds": [
       "axe-collapsible-scan-v1"
     ],
-    "lastReviewed": "2026-08-18T03:43:47.313Z"
+    "lastReviewed": "2026-08-18T04:35:09.543Z"
   },
   "documentation": {
     "status": "complete",
@@ -66,11 +66,11 @@
     "fileDigests": {
       "src/index.tsx": "e87667e7585ea9c4fd43c0fb9cfeb46905b93487972c5728e299c49395c2e068"
     },
-    "lastGenerated": "2026-08-18T03:16:44.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/collapsible"
   },
-  "lastUpdated": "2026-08-18T03:16:44.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

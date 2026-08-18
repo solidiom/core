@@ -32,7 +32,7 @@
     "evidenceIds": [
       "axe-alert-scan-v1"
     ],
-    "lastReviewed": "2026-08-18T03:43:47.313Z"
+    "lastReviewed": "2026-08-18T04:35:09.543Z"
   },
   "documentation": {
     "status": "complete",
@@ -83,11 +83,11 @@
     "fileDigests": {
       "src/index.tsx": "8bbc6a02e623e3e4016e86ed6e33ddedf593af27ea5cb96d97c95c4ece4e4cee"
     },
-    "lastGenerated": "2026-08-18T03:16:44.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/alert"
   },
-  "lastUpdated": "2026-08-18T03:16:44.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

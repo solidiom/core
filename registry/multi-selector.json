@@ -65,9 +65,9 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "9db9447f9c91560ccba2dd6c6cd5f8c62ab8182fdf4bb0fd5ee56bcbaa1625a2",
+    "filesHash": "9e83418102d325869047588acab4e75d8816058f15ae955c19fbbe66bf7d2045",
     "fileDigests": {
-      "src/index.tsx": "c8544ae8f2c673dc3d474427b03b17c1a0c479175c01640c98ba39a6b9e8966d"
+      "src/index.tsx": "3a01fd65b7c5b1934eced141f9b60232c64a90bb1052ae25648813092a233be4"
     },
     "lastGenerated": "2025-01-01T00:00:00.000Z"
   },

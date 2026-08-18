@@ -37,7 +37,7 @@
     "evidenceIds": [
       "axe-accordion-scan-v1"
     ],
-    "lastReviewed": "2026-08-18T03:43:47.313Z"
+    "lastReviewed": "2026-08-18T04:35:09.543Z"
   },
   "documentation": {
     "status": "complete",
@@ -85,11 +85,11 @@
       "src/accordion.tsx": "01ad14883152d9b6c8c7a154782c0c540ecbd50aee20366ecb6023d7247c1025",
       "src/index.tsx": "e158ccfb3700ecd1551fcc07c206badfb4b41cfdcff915f78bcea532e4397a5e"
     },
-    "lastGenerated": "2026-08-18T03:16:44.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/accordion"
   },
-  "lastUpdated": "2026-08-18T03:16:44.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

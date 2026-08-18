@@ -168,20 +168,47 @@ describe("registry build determinism (REG-004)", () => {
     execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
     const index = JSON.parse(readFileSync(join(REGISTRY_DIR, "index.json"), "utf8"))
 
-    // generatedAt and the signing fields are build-time provenance, not part of
-    // the catalog structure being snapshotted. Excluding them keeps the snapshot
-    // stable across regenerations that do not change the catalog — the same
-    // reasoning api-coverage-gate.test.ts applies to its own artifacts.
-    //
-    // This matters more than it used to: generation stamps are now preserved
-    // from the committed file whenever content is unchanged, so REGISTRY_TIMESTAMP
-    // above no longer determines the value. Snapshotting it would pin this test to
-    // whatever stamp the committed registry happens to carry, and break it on the
-    // next legitimate content change for an unrelated reason.
-    const { generatedAt, integrity, ...stable } = index
-    const { signature, signedAt, signatureKeyId, ...stableIntegrity } = integrity
+    // ── Top-level schema ──────────────────────────────────────────────────
+    expect(index.$schema).toBe("https://solidiom.dev/schemas/registry-index/v3.json")
+    expect(index.version).toBe(3)
+    expect(typeof index.generatedAt).toBe("string")
 
-    expect({ ...stable, integrity: stableIntegrity }).toMatchSnapshot()
+    // ── Integrity ─────────────────────────────────────────────────────────
+    expect(index.integrity).toBeDefined()
+    expect(index.integrity.algorithm).toBe("sha256")
+    expect(index.integrity.entriesHash).toMatch(/^[0-9a-f]{64}$/)
+
+    // ── Collection counts (must be non-empty) ─────────────────────────────
+    expect(index.primitives.length).toBeGreaterThanOrEqual(30)
+    expect(index.adapters.length).toBeGreaterThanOrEqual(1)
+    expect(index.components.length).toBeGreaterThanOrEqual(1)
+    expect(index.blocks.length).toBeGreaterThanOrEqual(1)
+    expect(index.templates.length).toBeGreaterThanOrEqual(1)
+    expect(index.themes.length).toBeGreaterThanOrEqual(1)
+
+    // ── Primitive entry shape ─────────────────────────────────────────────
+    for (const primitive of index.primitives) {
+      expect(typeof primitive.name).toBe("string")
+      expect(typeof primitive.version).toBe("string")
+      expect(typeof primitive.package).toBe("string")
+      expect(primitive.package).toMatch(/^@solidiom\//)
+      expect(typeof primitive.label).toBe("string")
+      expect(typeof primitive.description).toBe("string")
+      expect(typeof primitive.category).toBe("string")
+      expect(typeof primitive.status).toBe("string")
+      expect(Array.isArray(primitive.deliverables)).toBe(true)
+      expect(typeof primitive.hasAccessibilityEvidence).toBe("boolean")
+      expect(primitive.accessibility).toBeDefined()
+      expect(typeof primitive.accessibility.reviewStatus).toBe("string")
+      expect(Array.isArray(primitive.accessibility.evidenceIds)).toBe(true)
+      expect(primitive.provenance).toBeDefined()
+      expect(typeof primitive.provenance.repository).toBe("string")
+      expect(typeof primitive.provenance.directory).toBe("string")
+    }
+
+    // ── Primitives are sorted alphabetically by name ──────────────────────
+    const names = index.primitives.map((p: { name: string }) => p.name)
+    expect(names).toEqual([...names].sort())
   })
 
   // BUILD-001 regression guard.

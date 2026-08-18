@@ -30,7 +30,7 @@
         "src/recipes/spinner.tsx": "81b873c204c7cdb52adcc3b18211c07c119c91b9eaaf5aa696abef1d67e4af0d"
       }
     },
-    "lastGenerated": "2026-08-18T04:04:41.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/spinner"
   ],
-  "lastUpdated": "2026-08-18T04:04:41.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

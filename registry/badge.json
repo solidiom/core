@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-badge-scan-v1"
     ],
-    "lastReviewed": "2026-08-18T03:43:47.313Z"
+    "lastReviewed": "2026-08-18T04:35:09.543Z"
   },
   "documentation": {
     "status": "complete",
@@ -71,11 +71,11 @@
     "fileDigests": {
       "src/index.tsx": "0c24f4abfa5784f6f3207fc2ce074adcc8475bd25dfd533a78985aa986b5e45e"
     },
-    "lastGenerated": "2026-08-18T03:16:44.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/badge"
   },
-  "lastUpdated": "2026-08-18T03:16:44.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }
