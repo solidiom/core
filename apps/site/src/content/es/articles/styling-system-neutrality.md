@@ -46,7 +46,7 @@ Primitive (behavior) → Recipe (styling) → Component (composed)
 
 Se incluyen tres perfiles de receta:
 
-| Perfil     | Tecnología   | Foco                                            |
+| Perfil     | Tecnología   | Foco                                               |
 | ---------- | ------------ | -------------------------------------------------- |
 | `css`      | CSS puro     | Clases tipo BEM + selectores de atributos de datos |
 | `tailwind` | Tailwind CSS | Clases de utilidad + `@apply` para estados         |

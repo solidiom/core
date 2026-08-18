@@ -125,5 +125,7 @@ for (const file of allFiles) {
 if (dryRun) {
   console.log(`\nDry run: ${promoted} files would be promoted.`)
 } else {
-  console.log(`Done: ${promoted} files promoted to human-reviewed (by: ${reviewer}, at: ${reviewedAt}).`)
+  console.log(
+    `Done: ${promoted} files promoted to human-reviewed (by: ${reviewer}, at: ${reviewedAt}).`,
+  )
 }
