@@ -7,7 +7,7 @@
  * ToolCall tracks status: pending, running, success, error.
  */
 
-import { createContext, useContext, type Accessor, Show } from "solid-js"
+import { createContext, useContext, Show } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import { applySemanticAttrs, createDisclosureState, createStableId } from "@solidiom/runtime"
 

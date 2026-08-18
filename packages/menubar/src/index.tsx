@@ -7,15 +7,7 @@
  * ArrowRight on SubTrigger opens sub.
  */
 
-import {
-  createContext,
-  useContext,
-  createSignal,
-  Show,
-  onMount,
-  onCleanup,
-  type Accessor,
-} from "solid-js"
+import { createContext, useContext, createSignal, Show, onCleanup, type Accessor } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   applySemanticAttrs,
@@ -200,7 +192,7 @@ export function Menu(props: MenubarMenuProps) {
 
   const open = () => rootCtx.activeMenuId() === menuId
 
-  const requestOpenChange = (next: boolean, details: ChangeDetails<DisclosureReason>) => {
+  const requestOpenChange = (next: boolean, _details: ChangeDetails<DisclosureReason>) => {
     rootCtx.setActiveMenuId(next ? menuId : undefined)
   }
 
@@ -224,7 +216,8 @@ export function Trigger(props: MenubarTriggerProps) {
   const menuCtx = useMenubarMenuContext()
   let buttonRef: HTMLButtonElement | undefined
 
-  onMount(() => {
+  // Register with collection after ref is assigned (component-level effect)
+  queueMicrotask(() => {
     if (buttonRef) {
       const cleanup = rootCtx.collection.registerItem({
         id: menuCtx.menuId,

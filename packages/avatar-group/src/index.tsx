@@ -55,6 +55,7 @@ export function Root(props: RootProps) {
       style={{
         display: "flex",
         "align-items": "center",
+        gap: spacing(),
         ...(typeof props.style === "object" ? props.style : {}),
       }}
       {...applySemanticAttrs({ scope: "avatar-group", part: "root" })}

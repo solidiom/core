@@ -6,7 +6,7 @@
  * Canvas exposes ref for external libraries to render into.
  */
 
-import { createContext, useContext, createSignal, For, type Accessor } from "solid-js"
+import { createContext, useContext, For, type Accessor } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import { applySemanticAttrs, createStableId } from "@solidiom/runtime"
 
