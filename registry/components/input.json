@@ -30,7 +30,7 @@
         "src/recipes/input.tsx": "f4f47528033682e2e8cb6b99f1a8ee598395dc5f16a7a4cd89a6114aeeb98f4c"
       }
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-18T12:30:14.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/input"
   ],
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-18T12:30:14.000Z"
 }

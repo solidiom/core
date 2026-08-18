@@ -30,7 +30,7 @@
         "src/recipes/accordion.tsx": "22b23e8056df11c32a0131bff3296b8a31e9b61ec0894ea5c6fd0e92d63460e6"
       }
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-18T12:30:14.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/accordion"
   ],
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-18T12:30:14.000Z"
 }
