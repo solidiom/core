@@ -94,6 +94,9 @@ export default [
     files: [
       "src/pages/playground/**/*.{astro,ts,tsx}",
       "src/pages/themes/builder/**/*.{astro,ts,tsx}",
+      "src/pages/*/themes/builder/**/*.{astro,ts,tsx}",
+      "src/components/theme-builder/**/*.{ts,tsx}",
+      "src/lib/theme-builder/**/*.{ts,tsx}",
     ],
     rules: {
       "no-restricted-imports": "off",

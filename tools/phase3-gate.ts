@@ -168,7 +168,10 @@ for (const dir of pkgDirs) {
 
   const version: string = pkgJson.version ?? ""
   const isPrerelease =
-    version.includes("next") || version.includes("beta") || version.includes("rc") || version.startsWith("0.")
+    version.includes("next") ||
+    version.includes("beta") ||
+    version.includes("rc") ||
+    version.startsWith("0.")
   if (!isPrerelease) {
     prereleaseOk = false
     violations.push(`${pkgJson.name}@${version}`)
