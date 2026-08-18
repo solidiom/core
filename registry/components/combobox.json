@@ -30,7 +30,7 @@
         "src/recipes/combobox.tsx": "62d0e30d5dabeaed93cc38dcefba5f972f9d50173f31f192ea5d6df352691302"
       }
     },
-    "lastGenerated": "2026-08-18T04:04:41.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/combobox"
   ],
-  "lastUpdated": "2026-08-18T04:04:41.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

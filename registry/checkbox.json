@@ -32,7 +32,7 @@
     "evidenceIds": [
       "axe-checkbox-scan-v1"
     ],
-    "lastReviewed": "2026-08-18T03:43:47.313Z"
+    "lastReviewed": "2026-08-18T04:35:09.543Z"
   },
   "documentation": {
     "status": "complete",
@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "d1b10d68be834eeae05f5754bdc770777c278e10182a4f66651f6f172cd4c10c"
     },
-    "lastGenerated": "2026-08-18T03:16:44.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/checkbox"
   },
-  "lastUpdated": "2026-08-18T03:16:44.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

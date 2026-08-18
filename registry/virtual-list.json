@@ -40,7 +40,7 @@
     "evidenceIds": [
       "axe-virtual-list-scan-v1"
     ],
-    "lastReviewed": "2026-08-18T03:43:47.313Z"
+    "lastReviewed": "2026-08-18T04:35:09.543Z"
   },
   "documentation": {
     "status": "complete",
@@ -79,11 +79,11 @@
       "src/virtual-list-context.ts": "9cc38eb71a5c2dba32dbeea5c6a420d812c51fe729096aa9aa8f1afbf8bf32c6",
       "src/virtual-list.tsx": "926f02eca17c8299b5dd9ae4bf09d745d19eaf0f1bd8d715e79c62575a53f40d"
     },
-    "lastGenerated": "2026-08-18T03:16:44.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/virtual-list"
   },
-  "lastUpdated": "2026-08-18T03:16:44.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }
