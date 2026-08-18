@@ -507,6 +507,26 @@ run = "scripts/release.sh"
 description = "Release: dry-run — run all tests without publishing"
 run = "scripts/release.sh --dry-run"
 
+[tasks."release:packages-only"]
+description = "Release: publish packages only (no site build/deploy)"
+run = "scripts/release.sh --no-site"
+
+[tasks."release:packages-only:dry-run"]
+description = "Release: packages-only dry-run"
+run = "scripts/release.sh --no-site --dry-run"
+
+[tasks."release:quick"]
+description = "Release: packages-only with quick gate (phase0 instead of phase3)"
+run = "scripts/release.sh --no-site --quick-gate"
+
+[tasks."release:package"]
+description = "Release: publish a single package → mise run release:package -- @solidiom/button"
+run = "scripts/release-package.sh {{arg(name='package')}}"
+
+[tasks."release:package:dry-run"]
+description = "Release: single-package dry-run → mise run release:package:dry-run -- @solidiom/button"
+run = "scripts/release-package.sh {{arg(name='package')}} --dry-run"
+
 [tasks."release:site"]
 description = "Release: build and deploy site only (no npm publish, no tests)"
 run = "scripts/release.sh --site-only"
@@ -591,6 +611,30 @@ run = [
 ]
 # solid-compat.yml runs nightly; use `mise run ci:solid-matrix` to run locally.
 # preview-deploy.yml deploys to Cloudflare — not reproducible locally.
+
+# ---------------------------------------------------------------------------
+# Affected-only (incremental) builds
+# ---------------------------------------------------------------------------
+
+[tasks."affected:build"]
+description = "Build only packages affected by changes since main (nx affected)"
+run = "pnpm nx affected -t build --exclude=@solidiom/site"
+
+[tasks."affected:test"]
+description = "Test only packages affected by changes since main"
+run = "pnpm nx affected -t test --exclude=@solidiom/site"
+
+[tasks."affected:typecheck"]
+description = "Typecheck only packages affected by changes since main"
+run = "pnpm nx affected -t typecheck --exclude='tag:layer:template'"
+
+[tasks."affected:all"]
+description = "Build + typecheck + test affected packages only (fast local CI)"
+run = [
+  "pnpm nx affected -t build --exclude=@solidiom/site",
+  "pnpm nx affected -t typecheck --exclude='tag:layer:template'",
+  "pnpm nx affected -t test --exclude=@solidiom/site",
+]
 
 # ---------------------------------------------------------------------------
 # Dependency freshness

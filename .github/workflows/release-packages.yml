@@ -1,0 +1,117 @@
+name: Release Packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      quick_gate:
+        description: "Use quick gate (phase0 only instead of full phase3)"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+concurrency:
+  group: release-packages-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "24"
+  PNPM_VERSION: "10.34.5"
+
+jobs:
+  gate:
+    runs-on: solidiom-dfw-runner
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm nx run-many -t build --exclude=@solidiom/site
+
+      - name: Run gate (quick or full)
+        run: |
+          if [ "${{ inputs.quick_gate }}" = "true" ]; then
+            pnpm run gate:phase0
+          else
+            pnpm run gate:phase3
+          fi
+
+  publish:
+    needs: gate
+    runs-on: solidiom-dfw-runner
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          registry-url: "https://registry.npmjs.org"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm nx run-many -t build --exclude=@solidiom/site
+
+      # REG-008: Sign the registry index with Ed25519
+      - name: REG-008 — sign registry index
+        env:
+          REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
+        run: pnpm exec tsx tools/registry-build.ts
+
+      - name: REG-008 — verify signed registry index
+        run: node packages/cli/dist/bin.js verify --registry
+
+      # Apply changeset versions (bumps package versions, updates changelogs)
+      - name: Apply changeset versions
+        run: |
+          if ls .changeset/*.md 2>/dev/null | grep -qv "README.md"; then
+            pnpm changeset version
+          else
+            echo "No pending changesets — skipping version bump"
+          fi
+
+      # Rebuild with final versions in package.json
+      - name: Rebuild with versioned packages
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
+
+      # Publish packages to npm with the beta dist-tag
+      - name: Publish packages
+        run: pnpm changeset publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Generate beta release artifacts (catalog + pointer)
+      - name: Generate beta artifacts
+        run: pnpm exec tsx tools/generate-beta-artifacts.ts --verify
+
+      # Verify beta signing integrity
+      - name: Verify beta signing
+        env:
+          REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
+        run: pnpm exec tsx tools/verify-beta-signing.ts
+
+      # Upload artifacts for audit trail
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: beta-release-artifacts
+          path: |
+            artifacts/beta-catalog.json
+            artifacts/beta-pointer.json
+            registry/index.json
+
+      # Commit version bumps and changelogs back to main
+      - name: Commit release changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add packages/*/package.json packages/*/CHANGELOG.md apps/*/package.json .changeset/ pnpm-lock.yaml registry/
+          git commit -m "chore(release): publish beta packages" || echo "No changes to commit"
+          git push

@@ -3,10 +3,7 @@ import type { AstroIntegration } from "astro"
 
 // Mock vite-plugin-solid to avoid pulling in the full Vite dependency graph
 vi.mock("vite-plugin-solid", () => ({
-  default: (opts: any) => [
-    { name: "vite:solid", ...opts },
-    { name: "solid-refresh" },
-  ],
+  default: (opts: any) => [{ name: "vite:solid", ...opts }, { name: "solid-refresh" }],
 }))
 
 // Mock node:fs to control what solidSourceAlias sees
@@ -152,10 +149,7 @@ describe("@solidiom/astrojs-solid-next", () => {
       await (integration.hooks["astro:config:done"] as Function)({
         logger: { warn },
         config: {
-          integrations: [
-            { name: "@astrojs/react" },
-            { name: "@solidiom/astrojs-solid-next" },
-          ],
+          integrations: [{ name: "@astrojs/react" }, { name: "@solidiom/astrojs-solid-next" }],
         },
       })
 
@@ -184,10 +178,7 @@ describe("@solidiom/astrojs-solid-next", () => {
       await (integration.hooks["astro:config:done"] as Function)({
         logger: { warn },
         config: {
-          integrations: [
-            { name: "@astrojs/react" },
-            { name: "@solidiom/astrojs-solid-next" },
-          ],
+          integrations: [{ name: "@astrojs/react" }, { name: "@solidiom/astrojs-solid-next" }],
         },
       })
 
@@ -201,10 +192,7 @@ describe("@solidiom/astrojs-solid-next", () => {
       await (integration.hooks["astro:config:done"] as Function)({
         logger: { warn },
         config: {
-          integrations: [
-            { name: "@astrojs/preact" },
-            { name: "@solidiom/astrojs-solid-next" },
-          ],
+          integrations: [{ name: "@astrojs/preact" }, { name: "@solidiom/astrojs-solid-next" }],
         },
       })
 

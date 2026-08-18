@@ -11,6 +11,15 @@ name: CI
 #     branches: [main]
 on:
   workflow_dispatch:
+    inputs:
+      affected_only:
+        description: "Run only affected packages (faster, uses nx affected)"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -20,6 +29,10 @@ env:
   NODE_VERSION: "24"
   PNPM_VERSION: "10.34.5"
   NODE_OPTIONS: "--max-old-space-size=4096"
+  # For nx affected: compare against main branch by default.
+  # In PRs this is automatically set to the merge base.
+  NX_BASE: ${{ github.event.pull_request.base.sha || 'HEAD~1' }}
+  NX_HEAD: HEAD
 
 jobs:
   # ─── Foundation ────────────────────────────────────────────────────────────────
@@ -65,8 +78,17 @@ jobs:
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: ./.github/actions/setup
-      - run: pnpm nx run-many -t build --exclude=@solidiom/site
+      - name: Build packages
+        run: |
+          if [ "${{ inputs.affected_only }}" = "true" ]; then
+            echo "Building affected packages only (NX_BASE=$NX_BASE)"
+            pnpm nx affected -t build --exclude=@solidiom/site
+          else
+            pnpm nx run-many -t build --exclude=@solidiom/site
+          fi
 
       # Post-build audits that verify generated output integrity
       - name: REG-006 — verify registry catalog integrity
@@ -136,6 +158,8 @@ jobs:
         node-version: [24, 26]
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
@@ -155,7 +179,12 @@ jobs:
       - name: Install Playwright system deps
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
-      - run: pnpm test
+      - run: |
+          if [ "${{ inputs.affected_only }}" = "true" ]; then
+            pnpm nx affected -t test --exclude=@solidiom/site
+          else
+            pnpm test
+          fi
       - run: pnpm run test:tools
 
   test-browser:

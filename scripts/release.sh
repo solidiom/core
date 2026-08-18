@@ -21,6 +21,9 @@
 #   ./scripts/release.sh --dry-run    # run tests only, no publish
 #   ./scripts/release.sh --skip-tests # skip tests, publish only (use with caution)
 #   ./scripts/release.sh --site-only  # build and deploy site only (no npm, no tests)
+#   ./scripts/release.sh --no-site    # publish packages only (no site build/deploy)
+#   ./scripts/release.sh --quick-gate # use phase0 gate instead of full phase3
+#   ./scripts/release.sh --no-site --quick-gate  # fastest package-only release
 #
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
@@ -36,13 +39,18 @@ SITE_DIR="apps/site/dist"
 DRY_RUN=0
 SKIP_TESTS=0
 SITE_ONLY=0
+NO_SITE=0
+QUICK_GATE=0
 
 # ─── Argument parsing ───────────────────────────────────────────────────────
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --dry-run)  DRY_RUN=1;    shift ;;
+    --dry-run)    DRY_RUN=1;    shift ;;
     --skip-tests) SKIP_TESTS=1; shift ;;
+    --site-only)  SITE_ONLY=1; SKIP_TESTS=1; shift ;;
+    --no-site)    NO_SITE=1;    shift ;;
+    --quick-gate) QUICK_GATE=1; shift ;;
     --site-only) SITE_ONLY=1; SKIP_TESTS=1; shift ;;
     --help|-h)
       head -25 "$0" | grep "^#" | sed 's/^# \?//'
@@ -144,9 +152,15 @@ if [[ $SITE_ONLY -eq 1 ]]; then
 else
   echo "  npm publish:  @solidiom/* packages with --tag beta"
 fi
-echo "  site deploy:  $CLOUDFLARE_PROJECT to Cloudflare Pages"
+if [[ $NO_SITE -eq 1 ]]; then
+  echo "  site deploy:  SKIPPED (--no-site)"
+else
+  echo "  site deploy:  $CLOUDFLARE_PROJECT to Cloudflare Pages"
+fi
 echo "  dry-run:      $( [[ $DRY_RUN -eq 1 ]] && echo 'YES (no publish)' || echo 'no' )"
 echo "  site-only:    $( [[ $SITE_ONLY -eq 1 ]] && echo 'YES' || echo 'no' )"
+echo "  no-site:      $( [[ $NO_SITE -eq 1 ]] && echo 'YES' || echo 'no' )"
+echo "  quick-gate:   $( [[ $QUICK_GATE -eq 1 ]] && echo 'YES (phase0 only)' || echo 'no (full phase3)' )"
 echo ""
 
 if [[ $DRY_RUN -eq 0 ]]; then
@@ -197,8 +211,13 @@ if [[ $SKIP_TESTS -eq 0 ]]; then
   pass "Browser tests"
 
   echo "  Running Phase 3 gate..."
-  pnpm run gate:phase3 || die "Phase 3 gate failed"
-  pass "Phase 3 gate (includes Phase 0, 1, 2)"
+  if [[ $QUICK_GATE -eq 1 ]]; then
+    pnpm run gate:phase0 || die "Phase 0 gate failed"
+    pass "Phase 0 gate (quick mode)"
+  else
+    pnpm run gate:phase3 || die "Phase 3 gate failed"
+    pass "Phase 3 gate (includes Phase 0, 1, 2)"
+  fi
 
 else
   step "2/7" "Skipping tests (--skip-tests)"
@@ -262,32 +281,36 @@ fi
 
 # ─── Step 6: Build and deploy site ─────────────────────────────────────────
 
-step "6/7" "Building and deploying site"
-
-echo "  Building templates..."
-pnpm --filter '@solidiom/template-*' build || die "Template build failed"
-pass "Templates built"
-
-echo "  Building site..."
-# Use build:deploy which skips i18n:validate — translation quality is a GA
-# gate, not a beta gate. The full `build` command enforces human-reviewed
-# translations which aren't expected until the stable release.
-pnpm --filter @solidiom/site run build:deploy || die "Site build failed"
-pnpm --filter @solidiom/site search-index || die "Search index failed"
-pass "Site built with Pagefind index"
-
-if [[ $DRY_RUN -eq 1 ]]; then
-  warn "DRY RUN — skipping Cloudflare deploy"
-elif [[ ${SKIP_CLOUDFLARE:-0} -eq 1 ]]; then
-  warn "Cloudflare deploy skipped (missing credentials)"
+if [[ $NO_SITE -eq 1 ]] && [[ $SITE_ONLY -eq 0 ]]; then
+  step "6/7" "Skipping site build/deploy (--no-site)"
 else
-  echo "  Deploying to Cloudflare Pages..."
-  npx wrangler pages deploy "$SITE_DIR" \
-    --project-name="$CLOUDFLARE_PROJECT" \
-    --branch=main \
-    --commit-dirty=true \
-    2>&1 || die "Cloudflare deploy failed"
-  pass "Site deployed to Cloudflare Pages"
+  step "6/7" "Building and deploying site"
+
+  echo "  Building templates..."
+  pnpm --filter '@solidiom/template-*' build || die "Template build failed"
+  pass "Templates built"
+
+  echo "  Building site..."
+  # Use build:deploy which skips i18n:validate — translation quality is a GA
+  # gate, not a beta gate. The full `build` command enforces human-reviewed
+  # translations which aren't expected until the stable release.
+  pnpm --filter @solidiom/site run build:deploy || die "Site build failed"
+  pnpm --filter @solidiom/site search-index || die "Search index failed"
+  pass "Site built with Pagefind index"
+
+  if [[ $DRY_RUN -eq 1 ]]; then
+    warn "DRY RUN — skipping Cloudflare deploy"
+  elif [[ ${SKIP_CLOUDFLARE:-0} -eq 1 ]]; then
+    warn "Cloudflare deploy skipped (missing credentials)"
+  else
+    echo "  Deploying to Cloudflare Pages..."
+    npx wrangler pages deploy "$SITE_DIR" \
+      --project-name="$CLOUDFLARE_PROJECT" \
+      --branch=main \
+      --commit-dirty=true \
+      2>&1 || die "Cloudflare deploy failed"
+    pass "Site deployed to Cloudflare Pages"
+  fi
 fi
 
 # ─── Step 7: Generate artifacts and commit ─────────────────────────────────
