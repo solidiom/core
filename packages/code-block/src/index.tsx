@@ -121,11 +121,7 @@ export function LineNumbers(props: LineNumbersProps) {
     >
       <For each={lines()}>
         {(_, index) => (
-          <li
-            data-highlighted={
-              props.highlightLines?.includes(index() + 1) ? "" : undefined
-            }
-          >
+          <li data-highlighted={props.highlightLines?.includes(index() + 1) ? "" : undefined}>
             {index() + 1}
           </li>
         )}

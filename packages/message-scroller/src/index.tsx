@@ -133,7 +133,8 @@ export function NewContentIndicator(props: MessageScrollerNewContentIndicatorPro
         state: ctx.hasNewContent() ? "visible" : "hidden",
       })}
     >
-      {props.children ?? `${ctx.newContentCount()} new message${ctx.newContentCount() === 1 ? "" : "s"}`}
+      {props.children ??
+        `${ctx.newContentCount()} new message${ctx.newContentCount() === 1 ? "" : "s"}`}
     </button>
   )
 }

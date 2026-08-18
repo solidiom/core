@@ -42,13 +42,23 @@ describe("createTimeMath", () => {
     })
 
     it("converts exact hours", () => {
-      expect(tm.fromMilliseconds(3600000)).toEqual({ hour: 1, minute: 0, second: 0, millisecond: 0 })
+      expect(tm.fromMilliseconds(3600000)).toEqual({
+        hour: 1,
+        minute: 0,
+        second: 0,
+        millisecond: 0,
+      })
     })
 
     it("converts mixed time", () => {
       // 14:30:45.123
       const ms = 14 * 3600000 + 30 * 60000 + 45 * 1000 + 123
-      expect(tm.fromMilliseconds(ms)).toEqual({ hour: 14, minute: 30, second: 45, millisecond: 123 })
+      expect(tm.fromMilliseconds(ms)).toEqual({
+        hour: 14,
+        minute: 30,
+        second: 45,
+        millisecond: 123,
+      })
     })
 
     it("wraps values exceeding 24 hours", () => {
@@ -84,7 +94,12 @@ describe("createTimeMath", () => {
     })
 
     it("parses HH:MM:SS.mmm format", () => {
-      expect(tm.parse("14:30:45.123")).toEqual({ hour: 14, minute: 30, second: 45, millisecond: 123 })
+      expect(tm.parse("14:30:45.123")).toEqual({
+        hour: 14,
+        minute: 30,
+        second: 45,
+        millisecond: 123,
+      })
     })
 
     it("parses single-digit hours", () => {
@@ -192,7 +207,9 @@ describe("createTimeMath", () => {
     })
 
     it("formats with milliseconds when ms > 0", () => {
-      expect(tm.toISOString({ hour: 14, minute: 30, second: 45, millisecond: 123 })).toBe("14:30:45.123")
+      expect(tm.toISOString({ hour: 14, minute: 30, second: 45, millisecond: 123 })).toBe(
+        "14:30:45.123",
+      )
     })
 
     it("pads single-digit values", () => {
@@ -352,7 +369,12 @@ describe("createTimeMath", () => {
   describe("addMilliseconds", () => {
     it("adds milliseconds normally", () => {
       const t = tm.createTime(10, 0, 0, 500)
-      expect(tm.addMilliseconds(t, 200)).toEqual({ hour: 10, minute: 0, second: 0, millisecond: 700 })
+      expect(tm.addMilliseconds(t, 200)).toEqual({
+        hour: 10,
+        minute: 0,
+        second: 0,
+        millisecond: 700,
+      })
     })
 
     it("carries through seconds, minutes, hours", () => {
@@ -362,7 +384,12 @@ describe("createTimeMath", () => {
 
     it("subtracts milliseconds wrapping backward", () => {
       const t = tm.createTime(0, 0, 0, 0)
-      expect(tm.addMilliseconds(t, -1)).toEqual({ hour: 23, minute: 59, second: 59, millisecond: 999 })
+      expect(tm.addMilliseconds(t, -1)).toEqual({
+        hour: 23,
+        minute: 59,
+        second: 59,
+        millisecond: 999,
+      })
     })
   })
 
@@ -556,7 +583,12 @@ describe("createTimeMath", () => {
     })
 
     it("converts 12 PM to hour 12", () => {
-      expect(tm.from12Hour(12, 30, "PM")).toEqual({ hour: 12, minute: 30, second: 0, millisecond: 0 })
+      expect(tm.from12Hour(12, 30, "PM")).toEqual({
+        hour: 12,
+        minute: 30,
+        second: 0,
+        millisecond: 0,
+      })
     })
 
     it("converts 1 AM to hour 1", () => {
@@ -568,11 +600,21 @@ describe("createTimeMath", () => {
     })
 
     it("converts 11 PM to hour 23", () => {
-      expect(tm.from12Hour(11, 59, "PM")).toEqual({ hour: 23, minute: 59, second: 0, millisecond: 0 })
+      expect(tm.from12Hour(11, 59, "PM")).toEqual({
+        hour: 23,
+        minute: 59,
+        second: 0,
+        millisecond: 0,
+      })
     })
 
     it("accepts seconds parameter", () => {
-      expect(tm.from12Hour(3, 30, "PM", 45)).toEqual({ hour: 15, minute: 30, second: 45, millisecond: 0 })
+      expect(tm.from12Hour(3, 30, "PM", 45)).toEqual({
+        hour: 15,
+        minute: 30,
+        second: 45,
+        millisecond: 0,
+      })
     })
   })
 
@@ -646,17 +688,32 @@ describe("createTimeMath", () => {
   describe("fromSegments", () => {
     it("constructs from 24h segments", () => {
       const segs = { hour: "14", minute: "30", second: "45", millisecond: "123" }
-      expect(tm.fromSegments(segs, "24")).toEqual({ hour: 14, minute: 30, second: 45, millisecond: 123 })
+      expect(tm.fromSegments(segs, "24")).toEqual({
+        hour: 14,
+        minute: 30,
+        second: 45,
+        millisecond: 123,
+      })
     })
 
     it("constructs from 12h segments with AM", () => {
       const segs = { hour: "9", minute: "30", second: "00", millisecond: "000", period: "AM" }
-      expect(tm.fromSegments(segs, "12")).toEqual({ hour: 9, minute: 30, second: 0, millisecond: 0 })
+      expect(tm.fromSegments(segs, "12")).toEqual({
+        hour: 9,
+        minute: 30,
+        second: 0,
+        millisecond: 0,
+      })
     })
 
     it("constructs from 12h segments with PM", () => {
       const segs = { hour: "2", minute: "30", second: "00", millisecond: "000", period: "PM" }
-      expect(tm.fromSegments(segs, "12")).toEqual({ hour: 14, minute: 30, second: 0, millisecond: 0 })
+      expect(tm.fromSegments(segs, "12")).toEqual({
+        hour: 14,
+        minute: 30,
+        second: 0,
+        millisecond: 0,
+      })
     })
 
     it("roundtrips with toSegments (24h)", () => {

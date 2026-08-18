@@ -148,7 +148,11 @@ export function ToolInput(props: ChatToolCallToolInputProps) {
     <div
       class={props.class}
       style={props.style}
-      {...applySemanticAttrs({ scope: "chat-tool-calls", part: "tool-input", state: open() ? "open" : "closed" })}
+      {...applySemanticAttrs({
+        scope: "chat-tool-calls",
+        part: "tool-input",
+        state: open() ? "open" : "closed",
+      })}
     >
       <button
         type="button"
@@ -156,7 +160,11 @@ export function ToolInput(props: ChatToolCallToolInputProps) {
         aria-expanded={open() ? "true" : "false"}
         aria-controls={ctx.inputId}
         onClick={toggle}
-        {...applySemanticAttrs({ scope: "chat-tool-calls", part: "tool-input-trigger", state: open() ? "open" : "closed" })}
+        {...applySemanticAttrs({
+          scope: "chat-tool-calls",
+          part: "tool-input-trigger",
+          state: open() ? "open" : "closed",
+        })}
       >
         Input
       </button>
@@ -165,7 +173,11 @@ export function ToolInput(props: ChatToolCallToolInputProps) {
           id={ctx.inputId}
           role="region"
           aria-labelledby={triggerId}
-          {...applySemanticAttrs({ scope: "chat-tool-calls", part: "tool-input-content", state: "open" })}
+          {...applySemanticAttrs({
+            scope: "chat-tool-calls",
+            part: "tool-input-content",
+            state: "open",
+          })}
         >
           {props.children ?? <pre>{props.content}</pre>}
         </div>
@@ -204,7 +216,11 @@ export function ToolOutput(props: ChatToolCallToolOutputProps) {
     <div
       class={props.class}
       style={props.style}
-      {...applySemanticAttrs({ scope: "chat-tool-calls", part: "tool-output", state: open() ? "open" : "closed" })}
+      {...applySemanticAttrs({
+        scope: "chat-tool-calls",
+        part: "tool-output",
+        state: open() ? "open" : "closed",
+      })}
     >
       <button
         type="button"
@@ -212,7 +228,11 @@ export function ToolOutput(props: ChatToolCallToolOutputProps) {
         aria-expanded={open() ? "true" : "false"}
         aria-controls={ctx.outputId}
         onClick={toggle}
-        {...applySemanticAttrs({ scope: "chat-tool-calls", part: "tool-output-trigger", state: open() ? "open" : "closed" })}
+        {...applySemanticAttrs({
+          scope: "chat-tool-calls",
+          part: "tool-output-trigger",
+          state: open() ? "open" : "closed",
+        })}
       >
         Output
       </button>
@@ -221,7 +241,11 @@ export function ToolOutput(props: ChatToolCallToolOutputProps) {
           id={ctx.outputId}
           role="region"
           aria-labelledby={triggerId}
-          {...applySemanticAttrs({ scope: "chat-tool-calls", part: "tool-output-content", state: "open" })}
+          {...applySemanticAttrs({
+            scope: "chat-tool-calls",
+            part: "tool-output-content",
+            state: "open",
+          })}
         >
           {props.children ?? <pre>{props.content}</pre>}
         </div>
@@ -246,7 +270,11 @@ export function ToolStatus(props: ChatToolCallToolStatusProps) {
     <span
       class={props.class}
       style={props.style}
-      {...applySemanticAttrs({ scope: "chat-tool-calls", part: "tool-status", state: ctx.status() })}
+      {...applySemanticAttrs({
+        scope: "chat-tool-calls",
+        part: "tool-status",
+        state: ctx.status(),
+      })}
     >
       {props.children ?? ctx.status()}
     </span>

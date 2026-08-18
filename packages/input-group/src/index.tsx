@@ -83,7 +83,16 @@ export interface InputProps {
  */
 export function Root(props: InputGroupRootProps) {
   return (
-    <InputGroupContext value={{ get disabled() { return props.disabled }, get invalid() { return props.invalid } }}>
+    <InputGroupContext
+      value={{
+        get disabled() {
+          return props.disabled
+        },
+        get invalid() {
+          return props.invalid
+        },
+      }}
+    >
       <div
         class={props.class}
         style={props.style}

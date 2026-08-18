@@ -8,7 +8,15 @@
  * and positioning from @solidiom/runtime.
  */
 
-import { type Accessor, Show, createSignal, createEffect, onCleanup, createContext, useContext } from "solid-js"
+import {
+  type Accessor,
+  Show,
+  createSignal,
+  createEffect,
+  onCleanup,
+  createContext,
+  useContext,
+} from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createDisclosureState,
@@ -150,7 +158,8 @@ export function Root(props: MultiSelectorRootProps) {
   const invalid: Accessor<boolean> = () => props.invalid ?? false
 
   const { open, requestOpenChange } = createDisclosureState({
-    open: props.open !== undefined ? (() => props.open) as Accessor<boolean | undefined> : undefined,
+    open:
+      props.open !== undefined ? ((() => props.open) as Accessor<boolean | undefined>) : undefined,
     defaultOpen: props.defaultOpen,
     onOpenChange: (next, _details) => {
       props.onOpenChange?.(next)
@@ -159,10 +168,10 @@ export function Root(props: MultiSelectorRootProps) {
   })
 
   // Selection state
-  const [internalValues, setInternalValues] = createSignal<string[]>(
-    props.defaultValue ?? [],
-    { equals: false, ownedWrite: true },
-  )
+  const [internalValues, setInternalValues] = createSignal<string[]>(props.defaultValue ?? [], {
+    equals: false,
+    ownedWrite: true,
+  })
 
   const selectedValues: Accessor<string[]> = () => {
     if (props.value !== undefined) return props.value

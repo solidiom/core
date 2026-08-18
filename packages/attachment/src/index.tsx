@@ -138,10 +138,7 @@ export function Name(props: AttachmentNameProps) {
   const ctx = useAttachmentContext()
 
   return (
-    <span
-      class={props.class}
-      {...applySemanticAttrs({ scope: "attachment", part: "name" })}
-    >
+    <span class={props.class} {...applySemanticAttrs({ scope: "attachment", part: "name" })}>
       {props.children ?? ctx.file()?.name ?? ""}
     </span>
   )
@@ -151,10 +148,7 @@ export function Size(props: AttachmentSizeProps) {
   const ctx = useAttachmentContext()
 
   return (
-    <span
-      class={props.class}
-      {...applySemanticAttrs({ scope: "attachment", part: "size" })}
-    >
+    <span class={props.class} {...applySemanticAttrs({ scope: "attachment", part: "size" })}>
       {props.children ?? formatFileSize(ctx.file()?.size ?? 0)}
     </span>
   )

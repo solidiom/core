@@ -227,9 +227,7 @@ export function Root(props: TimeInputRootProps) {
     return values
   }
 
-  const [segmentValues, setSegmentValues] = createSignal<Record<string, string>>(
-    getInitialValues(),
-  )
+  const [segmentValues, setSegmentValues] = createSignal<Record<string, string>>(getInitialValues())
 
   const editing = createSegmentedEditing({
     segments: getSegmentDefs,

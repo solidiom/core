@@ -27,23 +27,34 @@ export interface StackRootProps {
 function mapAlign(value: StackRootProps["align"]): string | undefined {
   if (!value) return undefined
   switch (value) {
-    case "start": return "flex-start"
-    case "end": return "flex-end"
-    case "center": return "center"
-    case "stretch": return "stretch"
-    case "baseline": return "baseline"
+    case "start":
+      return "flex-start"
+    case "end":
+      return "flex-end"
+    case "center":
+      return "center"
+    case "stretch":
+      return "stretch"
+    case "baseline":
+      return "baseline"
   }
 }
 
 function mapJustify(value: StackRootProps["justify"]): string | undefined {
   if (!value) return undefined
   switch (value) {
-    case "start": return "flex-start"
-    case "end": return "flex-end"
-    case "center": return "center"
-    case "between": return "space-between"
-    case "around": return "space-around"
-    case "evenly": return "space-evenly"
+    case "start":
+      return "flex-start"
+    case "end":
+      return "flex-end"
+    case "center":
+      return "center"
+    case "between":
+      return "space-between"
+    case "around":
+      return "space-around"
+    case "evenly":
+      return "space-evenly"
   }
 }
 

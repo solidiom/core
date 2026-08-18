@@ -34,11 +34,7 @@ export {
   type SemanticFlags,
 } from "./dom/semantic-attrs"
 export { sanitizeHref, isSafeHref } from "./dom/sanitize-href"
-export {
-  createClipboard,
-  type Clipboard,
-  type ClipboardOptions,
-} from "./dom/clipboard"
+export { createClipboard, type Clipboard, type ClipboardOptions } from "./dom/clipboard"
 export {
   SEMANTIC_FLAGS,
   SEMANTIC_ORIENTATIONS,

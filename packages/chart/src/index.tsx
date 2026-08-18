@@ -173,10 +173,7 @@ export function Legend(props: ChartLegendProps) {
   useChartContext()
 
   return (
-    <div
-      class={props.class}
-      {...applySemanticAttrs({ scope: "chart", part: "legend" })}
-    >
+    <div class={props.class} {...applySemanticAttrs({ scope: "chart", part: "legend" })}>
       {props.children}
     </div>
   )

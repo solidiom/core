@@ -398,6 +398,30 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/app-shell:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/aspect-ratio:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/astrojs-solid-next:
     dependencies:
       vite-plugin-solid:
@@ -420,6 +444,18 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)
 
+  packages/attachment:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/avatar:
     dependencies:
       '@solidiom/runtime':
@@ -432,7 +468,31 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/avatar-group:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/badge:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/banner:
     dependencies:
       '@solidiom/runtime':
         specifier: workspace:*
@@ -506,6 +566,90 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/chart:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/chat-composer:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/chat-layout:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/chat-message:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/chat-message-metadata:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/chat-system-message:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/chat-tool-calls:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/checkbox:
     dependencies:
       '@solidiom/runtime':
@@ -548,6 +692,18 @@ importers:
       '@types/node':
         specifier: ^20.19.0
         version: 20.19.43
+
+  packages/code-block:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
 
   packages/collapsible:
     dependencies:
@@ -621,7 +777,31 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/date-range-input:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/dialog:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/direction:
     dependencies:
       '@solidiom/runtime':
         specifier: workspace:*
@@ -675,6 +855,30 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/file-input:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/grid:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/hover-card:
     dependencies:
       '@solidiom/runtime':
@@ -688,6 +892,18 @@ importers:
         version: 2.0.0-beta.32
 
   packages/input:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/input-group:
     dependencies:
       '@solidiom/runtime':
         specifier: workspace:*
@@ -735,7 +951,43 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/lightbox:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/link:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/listbox:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/mega-menu:
     dependencies:
       '@solidiom/runtime':
         specifier: workspace:*
@@ -759,6 +1011,30 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/menubar:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/message-scroller:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/meter:
     dependencies:
       '@solidiom/runtime':
@@ -771,7 +1047,31 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/multi-selector:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/navigation-menu:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/number-input:
     dependencies:
       '@solidiom/runtime':
         specifier: workspace:*
@@ -818,12 +1118,27 @@ importers:
       '@solidiom/alert-dialog':
         specifier: workspace:*
         version: link:../alert-dialog
+      '@solidiom/app-shell':
+        specifier: workspace:*
+        version: link:../app-shell
+      '@solidiom/aspect-ratio':
+        specifier: workspace:*
+        version: link:../aspect-ratio
+      '@solidiom/attachment':
+        specifier: workspace:*
+        version: link:../attachment
       '@solidiom/avatar':
         specifier: workspace:*
         version: link:../avatar
+      '@solidiom/avatar-group':
+        specifier: workspace:*
+        version: link:../avatar-group
       '@solidiom/badge':
         specifier: workspace:*
         version: link:../badge
+      '@solidiom/banner':
+        specifier: workspace:*
+        version: link:../banner
       '@solidiom/breadcrumb':
         specifier: workspace:*
         version: link:../breadcrumb
@@ -839,9 +1154,33 @@ importers:
       '@solidiom/carousel':
         specifier: workspace:*
         version: link:../carousel
+      '@solidiom/chart':
+        specifier: workspace:*
+        version: link:../chart
+      '@solidiom/chat-composer':
+        specifier: workspace:*
+        version: link:../chat-composer
+      '@solidiom/chat-layout':
+        specifier: workspace:*
+        version: link:../chat-layout
+      '@solidiom/chat-message':
+        specifier: workspace:*
+        version: link:../chat-message
+      '@solidiom/chat-message-metadata':
+        specifier: workspace:*
+        version: link:../chat-message-metadata
+      '@solidiom/chat-system-message':
+        specifier: workspace:*
+        version: link:../chat-system-message
+      '@solidiom/chat-tool-calls':
+        specifier: workspace:*
+        version: link:../chat-tool-calls
       '@solidiom/checkbox':
         specifier: workspace:*
         version: link:../checkbox
+      '@solidiom/code-block':
+        specifier: workspace:*
+        version: link:../code-block
       '@solidiom/collapsible':
         specifier: workspace:*
         version: link:../collapsible
@@ -860,9 +1199,15 @@ importers:
       '@solidiom/date-picker':
         specifier: workspace:*
         version: link:../date-picker
+      '@solidiom/date-range-input':
+        specifier: workspace:*
+        version: link:../date-range-input
       '@solidiom/dialog':
         specifier: workspace:*
         version: link:../dialog
+      '@solidiom/direction':
+        specifier: workspace:*
+        version: link:../direction
       '@solidiom/drawer':
         specifier: workspace:*
         version: link:../drawer
@@ -872,12 +1217,21 @@ importers:
       '@solidiom/field':
         specifier: workspace:*
         version: link:../field
+      '@solidiom/file-input':
+        specifier: workspace:*
+        version: link:../file-input
+      '@solidiom/grid':
+        specifier: workspace:*
+        version: link:../grid
       '@solidiom/hover-card':
         specifier: workspace:*
         version: link:../hover-card
       '@solidiom/input':
         specifier: workspace:*
         version: link:../input
+      '@solidiom/input-group':
+        specifier: workspace:*
+        version: link:../input-group
       '@solidiom/input-otp':
         specifier: workspace:*
         version: link:../input-otp
@@ -887,18 +1241,39 @@ importers:
       '@solidiom/label':
         specifier: workspace:*
         version: link:../label
+      '@solidiom/lightbox':
+        specifier: workspace:*
+        version: link:../lightbox
+      '@solidiom/link':
+        specifier: workspace:*
+        version: link:../link
       '@solidiom/listbox':
         specifier: workspace:*
         version: link:../listbox
+      '@solidiom/mega-menu':
+        specifier: workspace:*
+        version: link:../mega-menu
       '@solidiom/menu':
         specifier: workspace:*
         version: link:../menu
+      '@solidiom/menubar':
+        specifier: workspace:*
+        version: link:../menubar
+      '@solidiom/message-scroller':
+        specifier: workspace:*
+        version: link:../message-scroller
       '@solidiom/meter':
         specifier: workspace:*
         version: link:../meter
+      '@solidiom/multi-selector':
+        specifier: workspace:*
+        version: link:../multi-selector
       '@solidiom/navigation-menu':
         specifier: workspace:*
         version: link:../navigation-menu
+      '@solidiom/number-input':
+        specifier: workspace:*
+        version: link:../number-input
       '@solidiom/pagination':
         specifier: workspace:*
         version: link:../pagination
@@ -908,6 +1283,9 @@ importers:
       '@solidiom/progress':
         specifier: workspace:*
         version: link:../progress
+      '@solidiom/questionnaire':
+        specifier: workspace:*
+        version: link:../questionnaire
       '@solidiom/radio-group':
         specifier: workspace:*
         version: link:../radio-group
@@ -917,6 +1295,9 @@ importers:
       '@solidiom/scroll-area':
         specifier: workspace:*
         version: link:../scroll-area
+      '@solidiom/segmented-control':
+        specifier: workspace:*
+        version: link:../segmented-control
       '@solidiom/select':
         specifier: workspace:*
         version: link:../select
@@ -926,6 +1307,9 @@ importers:
       '@solidiom/sheet':
         specifier: workspace:*
         version: link:../sheet
+      '@solidiom/sidebar':
+        specifier: workspace:*
+        version: link:../sidebar
       '@solidiom/skeleton':
         specifier: workspace:*
         version: link:../skeleton
@@ -935,12 +1319,24 @@ importers:
       '@solidiom/spinner':
         specifier: workspace:*
         version: link:../spinner
+      '@solidiom/stack':
+        specifier: workspace:*
+        version: link:../stack
+      '@solidiom/status-dot':
+        specifier: workspace:*
+        version: link:../status-dot
       '@solidiom/switch':
         specifier: workspace:*
         version: link:../switch
+      '@solidiom/table':
+        specifier: workspace:*
+        version: link:../table
       '@solidiom/tabs':
         specifier: workspace:*
         version: link:../tabs
+      '@solidiom/time-input':
+        specifier: workspace:*
+        version: link:../time-input
       '@solidiom/toast':
         specifier: workspace:*
         version: link:../toast
@@ -950,6 +1346,9 @@ importers:
       '@solidiom/toggle-group':
         specifier: workspace:*
         version: link:../toggle-group
+      '@solidiom/tokenizer':
+        specifier: workspace:*
+        version: link:../tokenizer
       '@solidiom/toolbar':
         specifier: workspace:*
         version: link:../toolbar
@@ -959,6 +1358,9 @@ importers:
       '@solidiom/tree':
         specifier: workspace:*
         version: link:../tree
+      '@solidiom/typography':
+        specifier: workspace:*
+        version: link:../typography
       '@solidiom/virtual-list':
         specifier: workspace:*
         version: link:../virtual-list
@@ -988,6 +1390,18 @@ importers:
         version: 2.0.0-beta.32
 
   packages/progress:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/questionnaire:
     dependencies:
       '@solidiom/runtime':
         specifier: workspace:*
@@ -1395,6 +1809,18 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/segmented-control:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/select:
     dependencies:
       '@solidiom/runtime':
@@ -1420,6 +1846,18 @@ importers:
         version: 2.0.0-beta.32
 
   packages/sheet:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/sidebar:
     dependencies:
       '@solidiom/runtime':
         specifier: workspace:*
@@ -1467,7 +1905,43 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/stack:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/status-dot:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/switch:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/table:
     dependencies:
       '@solidiom/runtime':
         specifier: workspace:*
@@ -1494,6 +1968,18 @@ importers:
   packages/test-doubles: {}
 
   packages/themes: {}
+
+  packages/time-input:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
 
   packages/toast:
     dependencies:
@@ -1531,6 +2017,18 @@ importers:
         specifier: 2.0.0-beta.32
         version: 2.0.0-beta.32
 
+  packages/tokenizer:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
   packages/toolbar:
     dependencies:
       '@solidiom/runtime':
@@ -1556,6 +2054,18 @@ importers:
         version: 2.0.0-beta.32
 
   packages/tree:
+    dependencies:
+      '@solidiom/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@solidjs/web':
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32(solid-js@2.0.0-beta.32)
+      solid-js:
+        specifier: 2.0.0-beta.32
+        version: 2.0.0-beta.32
+
+  packages/typography:
     dependencies:
       '@solidiom/runtime':
         specifier: workspace:*
