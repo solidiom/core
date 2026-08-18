@@ -1,0 +1,73 @@
+{
+  "name": "lightbox",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/lightbox",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [
+    "state/disclosure-state"
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Lightbox",
+  "description": "Image and media overlay viewer with navigation controls.",
+  "category": "overlay",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add lightbox",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "controls",
+      "image",
+      "lightbox",
+      "media",
+      "navigation",
+      "overlay",
+      "runtime",
+      "viewer",
+      "with"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "2d7e4e7ec828cbdc0b7245789a3d1d8e8399cb997fcaf4f3ee0c50d77cabb448",
+    "fileDigests": {
+      "src/index.tsx": "3b200155c396951297182c8be003f443ba3cc358a6f2aebd671925e0a6dc8407"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/lightbox"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

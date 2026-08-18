@@ -797,7 +797,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -830,7 +830,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -863,7 +863,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -896,7 +896,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -929,7 +929,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -962,7 +962,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -995,7 +995,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1028,7 +1028,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1061,7 +1061,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1094,7 +1094,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1127,7 +1127,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1160,7 +1160,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.1.0",
     },
     {
       "deliverables": [
@@ -1193,7 +1193,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1226,7 +1226,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1259,7 +1259,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1292,7 +1292,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1325,7 +1325,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1358,7 +1358,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1391,7 +1391,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1424,7 +1424,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1457,7 +1457,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1490,7 +1490,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1523,7 +1523,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1556,7 +1556,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1589,7 +1589,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.1.0",
     },
     {
       "deliverables": [
@@ -1622,7 +1622,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1655,7 +1655,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1688,7 +1688,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1721,7 +1721,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1754,7 +1754,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1787,7 +1787,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "deliverables": [
@@ -1820,12 +1820,12 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
   ],
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "cb7ef494a08f659a910083ce6c47d194bb8b60b32ef34ed23226b62698d4c657",
+    "entriesHash": "1776fc4b559f812abe34f55398b55445ea298963b8d12bef22a4dfcb341b0691",
   },
   "primitives": [
     {
@@ -1845,8 +1845,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -1882,7 +1881,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -1901,8 +1900,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -1943,7 +1941,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -1962,8 +1960,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -1990,6 +1987,132 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Top-level application layout with header, sidebar, and main content areas.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "App Shell",
+      "name": "app-shell",
+      "package": "@solidiom/app-shell",
+      "provenance": {
+        "directory": "packages/app-shell",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "app",
+        "application",
+        "areas",
+        "content",
+        "header",
+        "layout",
+        "level",
+        "main",
+        "runtime",
+        "shell",
+        "sidebar",
+        "top",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Container that constrains children to a specified aspect ratio.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Aspect Ratio",
+      "name": "aspect-ratio",
+      "package": "@solidiom/aspect-ratio",
+      "provenance": {
+        "directory": "packages/aspect-ratio",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "aspect",
+        "children",
+        "constrains",
+        "container",
+        "layout",
+        "ratio",
+        "runtime",
+        "specified",
+        "that",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "content",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "File attachment display with preview, name, and size.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Attachment",
+      "name": "attachment",
+      "package": "@solidiom/attachment",
+      "provenance": {
+        "directory": "packages/attachment",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "attachment",
+        "content",
+        "display",
+        "file",
+        "name",
+        "preview",
+        "runtime",
+        "size",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -2009,8 +2132,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2044,6 +2166,47 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "content",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Stacked avatar display for showing multiple users.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Avatar Group",
+      "name": "avatar-group",
+      "package": "@solidiom/avatar-group",
+      "provenance": {
+        "directory": "packages/avatar-group",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "avatar",
+        "content",
+        "display",
+        "for",
+        "group",
+        "multiple",
+        "runtime",
+        "showing",
+        "stacked",
+        "users",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -2063,8 +2226,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2095,6 +2257,45 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "feedback",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Dismissible site-wide notification bar.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Banner",
+      "name": "banner",
+      "package": "@solidiom/banner",
+      "provenance": {
+        "directory": "packages/banner",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "banner",
+        "bar",
+        "dismissible",
+        "feedback",
+        "notification",
+        "runtime",
+        "site",
+        "wide",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -2114,8 +2315,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2150,7 +2350,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2170,8 +2370,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2210,7 +2409,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2229,8 +2428,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2258,7 +2456,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.1.0",
     },
     {
       "accessibility": {
@@ -2277,8 +2475,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2317,7 +2514,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2336,8 +2533,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2363,6 +2559,302 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.1.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "content",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Data visualization wrapper with accessible fallback table.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Chart",
+      "name": "chart",
+      "package": "@solidiom/chart",
+      "provenance": {
+        "directory": "packages/chart",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "accessible",
+        "chart",
+        "content",
+        "data",
+        "fallback",
+        "runtime",
+        "table",
+        "visualization",
+        "with",
+        "wrapper",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "data-input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Rich text input for composing chat messages with send action.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Chat Composer",
+      "name": "chat-composer",
+      "package": "@solidiom/chat-composer",
+      "provenance": {
+        "directory": "packages/chat-composer",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "action",
+        "chat",
+        "composer",
+        "composing",
+        "data",
+        "for",
+        "input",
+        "messages",
+        "rich",
+        "runtime",
+        "send",
+        "text",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Container managing message flow, scroll behavior, and composer positioning.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Chat Layout",
+      "name": "chat-layout",
+      "package": "@solidiom/chat-layout",
+      "provenance": {
+        "directory": "packages/chat-layout",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "behavior",
+        "chat",
+        "composer",
+        "container",
+        "flow",
+        "layout",
+        "managing",
+        "message",
+        "positioning",
+        "runtime",
+        "scroll",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "content",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Message bubble for conversational UI with sender, content, and metadata.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Chat Message",
+      "name": "chat-message",
+      "package": "@solidiom/chat-message",
+      "provenance": {
+        "directory": "packages/chat-message",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "bubble",
+        "chat",
+        "content",
+        "conversational",
+        "for",
+        "message",
+        "metadata",
+        "runtime",
+        "sender",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "content",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Timestamps, read receipts, and sender info for chat messages.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Chat Message Metadata",
+      "name": "chat-message-metadata",
+      "package": "@solidiom/chat-message-metadata",
+      "provenance": {
+        "directory": "packages/chat-message-metadata",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "chat",
+        "content",
+        "for",
+        "info",
+        "message",
+        "messages",
+        "metadata",
+        "read",
+        "receipts",
+        "runtime",
+        "sender",
+        "timestamps",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "content",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "System and bot announcement messages in conversations.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Chat System Message",
+      "name": "chat-system-message",
+      "package": "@solidiom/chat-system-message",
+      "provenance": {
+        "directory": "packages/chat-system-message",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "announcement",
+        "bot",
+        "chat",
+        "content",
+        "conversations",
+        "message",
+        "messages",
+        "runtime",
+        "system",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "content",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Display of tool/function call results in AI chat interfaces.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Chat Tool Calls",
+      "name": "chat-tool-calls",
+      "package": "@solidiom/chat-tool-calls",
+      "provenance": {
+        "directory": "packages/chat-tool-calls",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "call",
+        "calls",
+        "chat",
+        "content",
+        "display",
+        "function",
+        "interfaces",
+        "results",
+        "runtime",
+        "tool",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -2382,8 +2874,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2411,6 +2902,50 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "content",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Syntax-highlighted code display with copy button and line numbers.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Code Block",
+      "name": "code-block",
+      "package": "@solidiom/code-block",
+      "provenance": {
+        "directory": "packages/code-block",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "block",
+        "button",
+        "code",
+        "content",
+        "copy",
+        "display",
+        "highlighted",
+        "line",
+        "numbers",
+        "runtime",
+        "syntax",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -2430,8 +2965,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2454,7 +2988,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2473,8 +3007,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2505,7 +3038,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2524,8 +3057,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2555,7 +3087,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2574,8 +3106,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2599,7 +3130,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2618,8 +3149,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2659,7 +3189,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2678,8 +3208,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2706,6 +3235,51 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "data-input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Date range selection with start/end text fields and calendar picker.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Date Range Input",
+      "name": "date-range-input",
+      "package": "@solidiom/date-range-input",
+      "provenance": {
+        "directory": "packages/date-range-input",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "calendar",
+        "data",
+        "date",
+        "end",
+        "fields",
+        "input",
+        "picker",
+        "range",
+        "runtime",
+        "selection",
+        "start",
+        "text",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -2725,8 +3299,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2758,6 +3331,45 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "themeCompatible": [
         "site",
       ],
+      "version": "0.1.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "utility",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "RTL/LTR direction context provider component.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Direction",
+      "name": "direction",
+      "package": "@solidiom/direction",
+      "provenance": {
+        "directory": "packages/direction",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "component",
+        "context",
+        "direction",
+        "ltr",
+        "provider",
+        "rtl",
+        "runtime",
+        "utility",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -2777,8 +3389,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2804,7 +3415,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2823,8 +3434,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2849,7 +3459,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2868,8 +3478,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2903,6 +3512,89 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "data-input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "File upload trigger with dropzone support and validation.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "File Input",
+      "name": "file-input",
+      "package": "@solidiom/file-input",
+      "provenance": {
+        "directory": "packages/file-input",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "data",
+        "dropzone",
+        "file",
+        "input",
+        "runtime",
+        "support",
+        "trigger",
+        "upload",
+        "validation",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "CSS Grid layout primitive with responsive columns and gap.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Grid",
+      "name": "grid",
+      "package": "@solidiom/grid",
+      "provenance": {
+        "directory": "packages/grid",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "columns",
+        "css",
+        "gap",
+        "grid",
+        "layout",
+        "primitive",
+        "responsive",
+        "runtime",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -2922,8 +3614,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -2952,7 +3643,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -2971,8 +3662,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3003,6 +3693,51 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "data-input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Input wrapper with prefix/suffix addon slots for icons and buttons.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Input Group",
+      "name": "input-group",
+      "package": "@solidiom/input-group",
+      "provenance": {
+        "directory": "packages/input-group",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "addon",
+        "and",
+        "buttons",
+        "data",
+        "for",
+        "group",
+        "icons",
+        "input",
+        "prefix",
+        "runtime",
+        "slots",
+        "suffix",
+        "with",
+        "wrapper",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -3022,8 +3757,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3050,7 +3784,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -3069,8 +3803,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3102,7 +3835,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -3121,8 +3854,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3151,6 +3883,89 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "overlay",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Image and media overlay viewer with navigation controls.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Lightbox",
+      "name": "lightbox",
+      "package": "@solidiom/lightbox",
+      "provenance": {
+        "directory": "packages/lightbox",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "controls",
+        "image",
+        "lightbox",
+        "media",
+        "navigation",
+        "overlay",
+        "runtime",
+        "viewer",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "action",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Styled anchor with router integration and safety validation.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Link",
+      "name": "link",
+      "package": "@solidiom/link",
+      "provenance": {
+        "directory": "packages/link",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "action",
+        "anchor",
+        "and",
+        "integration",
+        "link",
+        "router",
+        "runtime",
+        "safety",
+        "styled",
+        "validation",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -3170,8 +3985,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3196,6 +4010,48 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "navigation",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Expanded navigation dropdown with rich multi-column content.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Mega Menu",
+      "name": "mega-menu",
+      "package": "@solidiom/mega-menu",
+      "provenance": {
+        "directory": "packages/mega-menu",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "column",
+        "content",
+        "dropdown",
+        "expanded",
+        "mega",
+        "menu",
+        "multi",
+        "navigation",
+        "rich",
+        "runtime",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -3215,8 +4071,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3244,6 +4099,90 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "navigation",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Desktop-style horizontal menu bar with dropdown submenus.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Menubar",
+      "name": "menubar",
+      "package": "@solidiom/menubar",
+      "provenance": {
+        "directory": "packages/menubar",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "bar",
+        "desktop",
+        "dropdown",
+        "horizontal",
+        "menu",
+        "menubar",
+        "navigation",
+        "runtime",
+        "style",
+        "submenus",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "utility",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Auto-scrolling message container with new-content indicators.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Message Scroller",
+      "name": "message-scroller",
+      "package": "@solidiom/message-scroller",
+      "provenance": {
+        "directory": "packages/message-scroller",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "auto",
+        "container",
+        "content",
+        "indicators",
+        "message",
+        "new",
+        "runtime",
+        "scroller",
+        "scrolling",
+        "utility",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -3263,8 +4202,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3297,6 +4235,50 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "data-input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Multi-select dropdown with checkbox items and search filtering.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Multi Selector",
+      "name": "multi-selector",
+      "package": "@solidiom/multi-selector",
+      "provenance": {
+        "directory": "packages/multi-selector",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "checkbox",
+        "data",
+        "dropdown",
+        "filtering",
+        "input",
+        "items",
+        "multi",
+        "runtime",
+        "search",
+        "select",
+        "selector",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -3316,8 +4298,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3350,6 +4331,50 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "data-input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Numeric input with increment/decrement controls and locale-aware formatting.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Number Input",
+      "name": "number-input",
+      "package": "@solidiom/number-input",
+      "provenance": {
+        "directory": "packages/number-input",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "aware",
+        "controls",
+        "data",
+        "decrement",
+        "formatting",
+        "increment",
+        "input",
+        "locale",
+        "number",
+        "numeric",
+        "runtime",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -3369,8 +4394,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3400,7 +4424,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -3419,8 +4443,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3450,7 +4473,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -3469,8 +4492,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3498,6 +4520,50 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "data-input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Multi-step form and survey flow with progress tracking.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Questionnaire",
+      "name": "questionnaire",
+      "package": "@solidiom/questionnaire",
+      "provenance": {
+        "directory": "packages/questionnaire",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "data",
+        "flow",
+        "form",
+        "input",
+        "multi",
+        "progress",
+        "questionnaire",
+        "runtime",
+        "step",
+        "survey",
+        "tracking",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -3517,8 +4583,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3550,7 +4615,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -3569,8 +4634,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3598,7 +4662,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -3617,8 +4681,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3650,6 +4713,48 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "action",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Mutually exclusive option selector with connected segments.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Segmented Control",
+      "name": "segmented-control",
+      "package": "@solidiom/segmented-control",
+      "provenance": {
+        "directory": "packages/segmented-control",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "action",
+        "connected",
+        "control",
+        "exclusive",
+        "mutually",
+        "option",
+        "runtime",
+        "segmented",
+        "segments",
+        "selector",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -3669,8 +4774,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3699,7 +4803,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.1.0",
     },
     {
       "accessibility": {
@@ -3718,8 +4822,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3746,7 +4849,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -3765,8 +4868,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3796,6 +4898,43 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "navigation",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Collapsible application sidebar navigation panel.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Sidebar",
+      "name": "sidebar",
+      "package": "@solidiom/sidebar",
+      "provenance": {
+        "directory": "packages/sidebar",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "application",
+        "collapsible",
+        "navigation",
+        "panel",
+        "runtime",
+        "sidebar",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -3815,8 +4954,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3841,7 +4979,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -3860,8 +4998,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3886,7 +5023,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -3905,8 +5042,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3932,6 +5068,87 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "layout",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Flex layout primitive with configurable gap, direction, and alignment.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Stack",
+      "name": "stack",
+      "package": "@solidiom/stack",
+      "provenance": {
+        "directory": "packages/stack",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "alignment",
+        "and",
+        "configurable",
+        "direction",
+        "flex",
+        "gap",
+        "layout",
+        "primitive",
+        "runtime",
+        "stack",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "version": "0.0.1-next.0",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "feedback",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Small colored dot indicating presence or status.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Status Dot",
+      "name": "status-dot",
+      "package": "@solidiom/status-dot",
+      "provenance": {
+        "directory": "packages/status-dot",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "colored",
+        "dot",
+        "feedback",
+        "indicating",
+        "presence",
+        "runtime",
+        "small",
+        "status",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -3951,8 +5168,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -3981,6 +5197,48 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "table",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Simple static data table with header, body, rows, and cells.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Table",
+      "name": "table",
+      "package": "@solidiom/table",
+      "provenance": {
+        "directory": "packages/table",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "body",
+        "cells",
+        "data",
+        "header",
+        "rows",
+        "runtime",
+        "simple",
+        "static",
+        "table",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -4000,8 +5258,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -4028,6 +5285,50 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "data-input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Segmented time entry with hour, minute, second fields and AM/PM toggle.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Time Input",
+      "name": "time-input",
+      "package": "@solidiom/time-input",
+      "provenance": {
+        "directory": "packages/time-input",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "data",
+        "entry",
+        "fields",
+        "hour",
+        "input",
+        "minute",
+        "runtime",
+        "second",
+        "segmented",
+        "time",
+        "toggle",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -4047,8 +5348,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -4076,7 +5376,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -4095,8 +5395,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -4123,7 +5422,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -4142,8 +5441,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -4169,6 +5467,50 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "data-input",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Tag/token input for managing multiple values with keyboard support.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Tokenizer",
+      "name": "tokenizer",
+      "package": "@solidiom/tokenizer",
+      "provenance": {
+        "directory": "packages/tokenizer",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "data",
+        "for",
+        "input",
+        "keyboard",
+        "managing",
+        "multiple",
+        "runtime",
+        "support",
+        "tag",
+        "token",
+        "tokenizer",
+        "values",
+        "with",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -4188,8 +5530,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -4219,7 +5560,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -4238,8 +5579,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -4269,7 +5609,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -4288,8 +5628,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -4314,6 +5653,48 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
+      "version": "0.0.1",
+    },
+    {
+      "accessibility": {
+        "evidenceIds": [],
+        "reviewStatus": "none",
+      },
+      "category": "content",
+      "deliverables": [
+        "primitive",
+      ],
+      "description": "Semantic text primitives for headings, paragraphs, and inline text.",
+      "documentationLocales": {
+        "en": {
+          "status": "missing",
+        },
+      },
+      "documentationStatus": "stub",
+      "hasAccessibilityEvidence": false,
+      "label": "Typography",
+      "name": "typography",
+      "package": "@solidiom/typography",
+      "provenance": {
+        "directory": "packages/typography",
+        "repository": "https://github.com/solidiom/core",
+      },
+      "searchKeywords": [
+        "and",
+        "content",
+        "for",
+        "headings",
+        "inline",
+        "paragraphs",
+        "primitives",
+        "runtime",
+        "semantic",
+        "text",
+        "typography",
+      ],
+      "status": "experimental",
+      "stylingOutputs": [],
+      "themeCompatible": [],
       "version": "0.0.1-next.0",
     },
     {
@@ -4333,8 +5714,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -4361,7 +5741,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
     {
       "accessibility": {
@@ -4380,8 +5760,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
           "status": "draft",
         },
         "es": {
-          "lastUpdated": "2026-08-07T05:00:00.000Z",
-          "status": "reviewed",
+          "status": "draft",
         },
       },
       "documentationStatus": "complete",
@@ -4415,7 +5794,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
     },
   ],
   "templates": [

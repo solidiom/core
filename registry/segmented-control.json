@@ -1,0 +1,76 @@
+{
+  "name": "segmented-control",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/segmented-control",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [
+    "collection/collection",
+    "collection/roving-focus",
+    "state/controllable-value"
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Segmented Control",
+  "description": "Mutually exclusive option selector with connected segments.",
+  "category": "action",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add segmented-control",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "action",
+      "connected",
+      "control",
+      "exclusive",
+      "mutually",
+      "option",
+      "runtime",
+      "segmented",
+      "segments",
+      "selector",
+      "with"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "0efaf991d3f759f554464a6f698250f30bd3d68efd552899ab5c067aaea86f12",
+    "fileDigests": {
+      "src/index.tsx": "5fa7915558757f5700fb4474ed09086be94ba0e251c90ec7739116b7f637fdbe"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/segmented-control"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

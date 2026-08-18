@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
   "name": "combobox",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/recipes-css",
   "deliverables": [
     "component"
@@ -30,7 +30,7 @@
         "src/recipes/combobox.tsx": "62d0e30d5dabeaed93cc38dcefba5f972f9d50173f31f192ea5d6df352691302"
       }
     },
-    "lastGenerated": "2026-08-14T06:06:48.000Z"
+    "lastGenerated": "2026-08-18T00:55:36.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/combobox"
   ],
-  "lastUpdated": "2026-08-14T06:06:48.000Z"
+  "lastUpdated": "2026-08-18T00:55:36.000Z"
 }

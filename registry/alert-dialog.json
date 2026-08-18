@@ -1,6 +1,6 @@
 {
   "name": "alert-dialog",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/alert-dialog",
   "capabilities": [],
   "dependencies": [
@@ -43,8 +43,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -72,11 +71,11 @@
     "fileDigests": {
       "src/index.tsx": "5ccc605a6374420855195af4b1743447eb2e613745497acfbcc357ad32d2b346"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/alert-dialog"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

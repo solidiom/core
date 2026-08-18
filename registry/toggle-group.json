@@ -1,6 +1,6 @@
 {
   "name": "toggle-group",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/toggle-group",
   "capabilities": [],
   "dependencies": [
@@ -41,8 +41,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -69,11 +68,11 @@
     "fileDigests": {
       "src/index.tsx": "1e7c7292ec1b9221f7e82fdb3cf68f2d61ba681d7d8c9e5334dc886ee40bccc9"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/toggle-group"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

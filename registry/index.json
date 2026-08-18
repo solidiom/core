@@ -1,15 +1,15 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-11T17:39:24.000Z",
+  "generatedAt": "2025-01-01T00:00:00.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "cb7ef494a08f659a910083ce6c47d194bb8b60b32ef34ed23226b62698d4c657"
+    "entriesHash": "1776fc4b559f812abe34f55398b55445ea298963b8d12bef22a4dfcb341b0691"
   },
   "primitives": [
     {
       "name": "accordion",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/accordion",
       "label": "Accordion",
       "description": "Vertically stacked set of collapsible sections.",
@@ -31,8 +31,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -65,7 +64,7 @@
     },
     {
       "name": "alert",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/alert",
       "label": "Alert",
       "description": "Inline, non-modal alert for status messages with live region semantics.",
@@ -87,8 +86,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -126,7 +124,7 @@
     },
     {
       "name": "alert-dialog",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/alert-dialog",
       "label": "Alert Dialog",
       "description": "Modal confirmation dialog requiring explicit user action.",
@@ -148,8 +146,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -172,8 +169,134 @@
       }
     },
     {
-      "name": "avatar",
+      "name": "app-shell",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/app-shell",
+      "label": "App Shell",
+      "description": "Top-level application layout with header, sidebar, and main content areas.",
+      "category": "layout",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "app",
+        "application",
+        "areas",
+        "content",
+        "header",
+        "layout",
+        "level",
+        "main",
+        "runtime",
+        "shell",
+        "sidebar",
+        "top",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/app-shell"
+      }
+    },
+    {
+      "name": "aspect-ratio",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/aspect-ratio",
+      "label": "Aspect Ratio",
+      "description": "Container that constrains children to a specified aspect ratio.",
+      "category": "layout",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "aspect",
+        "children",
+        "constrains",
+        "container",
+        "layout",
+        "ratio",
+        "runtime",
+        "specified",
+        "that"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/aspect-ratio"
+      }
+    },
+    {
+      "name": "attachment",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/attachment",
+      "label": "Attachment",
+      "description": "File attachment display with preview, name, and size.",
+      "category": "content",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "attachment",
+        "content",
+        "display",
+        "file",
+        "name",
+        "preview",
+        "runtime",
+        "size",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/attachment"
+      }
+    },
+    {
+      "name": "avatar",
+      "version": "0.0.1",
       "package": "@solidiom/avatar",
       "label": "Avatar",
       "description": "User avatar with image and fallback.",
@@ -195,8 +318,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -226,8 +348,49 @@
       }
     },
     {
-      "name": "badge",
+      "name": "avatar-group",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/avatar-group",
+      "label": "Avatar Group",
+      "description": "Stacked avatar display for showing multiple users.",
+      "category": "content",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "avatar",
+        "content",
+        "display",
+        "for",
+        "group",
+        "multiple",
+        "runtime",
+        "showing",
+        "stacked",
+        "users"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/avatar-group"
+      }
+    },
+    {
+      "name": "badge",
+      "version": "0.0.1",
       "package": "@solidiom/badge",
       "label": "Badge",
       "description": "Inline status or label indicator.",
@@ -249,8 +412,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -277,8 +439,47 @@
       }
     },
     {
-      "name": "breadcrumb",
+      "name": "banner",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/banner",
+      "label": "Banner",
+      "description": "Dismissible site-wide notification bar.",
+      "category": "feedback",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "banner",
+        "bar",
+        "dismissible",
+        "feedback",
+        "notification",
+        "runtime",
+        "site",
+        "wide"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/banner"
+      }
+    },
+    {
+      "name": "breadcrumb",
+      "version": "0.0.1",
       "package": "@solidiom/breadcrumb",
       "label": "Breadcrumb",
       "description": "Hierarchical location indicator with links.",
@@ -300,8 +501,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -333,7 +533,7 @@
     },
     {
       "name": "button",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/button",
       "label": "Button",
       "description": "Clickable trigger for actions.",
@@ -356,8 +556,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -393,7 +592,7 @@
     },
     {
       "name": "calendar",
-      "version": "0.0.1-next.0",
+      "version": "0.1.0",
       "package": "@solidiom/calendar",
       "label": "Calendar",
       "description": "Date selection with day/month/year views.",
@@ -415,8 +614,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -441,7 +639,7 @@
     },
     {
       "name": "card",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/card",
       "label": "Card",
       "description": "Content container with header, body, and footer.",
@@ -463,8 +661,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -500,7 +697,7 @@
     },
     {
       "name": "carousel",
-      "version": "0.0.1-next.0",
+      "version": "0.1.0",
       "package": "@solidiom/carousel",
       "label": "Carousel",
       "description": "Horizontal slide-based content viewer.",
@@ -522,8 +719,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -545,8 +741,304 @@
       }
     },
     {
-      "name": "checkbox",
+      "name": "chart",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/chart",
+      "label": "Chart",
+      "description": "Data visualization wrapper with accessible fallback table.",
+      "category": "content",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "accessible",
+        "chart",
+        "content",
+        "data",
+        "fallback",
+        "runtime",
+        "table",
+        "visualization",
+        "with",
+        "wrapper"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/chart"
+      }
+    },
+    {
+      "name": "chat-composer",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/chat-composer",
+      "label": "Chat Composer",
+      "description": "Rich text input for composing chat messages with send action.",
+      "category": "data-input",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "action",
+        "chat",
+        "composer",
+        "composing",
+        "data",
+        "for",
+        "input",
+        "messages",
+        "rich",
+        "runtime",
+        "send",
+        "text",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/chat-composer"
+      }
+    },
+    {
+      "name": "chat-layout",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/chat-layout",
+      "label": "Chat Layout",
+      "description": "Container managing message flow, scroll behavior, and composer positioning.",
+      "category": "layout",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "behavior",
+        "chat",
+        "composer",
+        "container",
+        "flow",
+        "layout",
+        "managing",
+        "message",
+        "positioning",
+        "runtime",
+        "scroll"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/chat-layout"
+      }
+    },
+    {
+      "name": "chat-message",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/chat-message",
+      "label": "Chat Message",
+      "description": "Message bubble for conversational UI with sender, content, and metadata.",
+      "category": "content",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "bubble",
+        "chat",
+        "content",
+        "conversational",
+        "for",
+        "message",
+        "metadata",
+        "runtime",
+        "sender",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/chat-message"
+      }
+    },
+    {
+      "name": "chat-message-metadata",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/chat-message-metadata",
+      "label": "Chat Message Metadata",
+      "description": "Timestamps, read receipts, and sender info for chat messages.",
+      "category": "content",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "chat",
+        "content",
+        "for",
+        "info",
+        "message",
+        "messages",
+        "metadata",
+        "read",
+        "receipts",
+        "runtime",
+        "sender",
+        "timestamps"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/chat-message-metadata"
+      }
+    },
+    {
+      "name": "chat-system-message",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/chat-system-message",
+      "label": "Chat System Message",
+      "description": "System and bot announcement messages in conversations.",
+      "category": "content",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "announcement",
+        "bot",
+        "chat",
+        "content",
+        "conversations",
+        "message",
+        "messages",
+        "runtime",
+        "system"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/chat-system-message"
+      }
+    },
+    {
+      "name": "chat-tool-calls",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/chat-tool-calls",
+      "label": "Chat Tool Calls",
+      "description": "Display of tool/function call results in AI chat interfaces.",
+      "category": "content",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "call",
+        "calls",
+        "chat",
+        "content",
+        "display",
+        "function",
+        "interfaces",
+        "results",
+        "runtime",
+        "tool"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/chat-tool-calls"
+      }
+    },
+    {
+      "name": "checkbox",
+      "version": "0.0.1",
       "package": "@solidiom/checkbox",
       "label": "Checkbox",
       "description": "Binary or indeterminate toggle control.",
@@ -568,8 +1060,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -593,8 +1084,52 @@
       }
     },
     {
-      "name": "collapsible",
+      "name": "code-block",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/code-block",
+      "label": "Code Block",
+      "description": "Syntax-highlighted code display with copy button and line numbers.",
+      "category": "content",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "block",
+        "button",
+        "code",
+        "content",
+        "copy",
+        "display",
+        "highlighted",
+        "line",
+        "numbers",
+        "runtime",
+        "syntax",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/code-block"
+      }
+    },
+    {
+      "name": "collapsible",
+      "version": "0.0.1",
       "package": "@solidiom/collapsible",
       "label": "Collapsible",
       "description": "Single expandable/collapsible section.",
@@ -616,8 +1151,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -637,7 +1171,7 @@
     },
     {
       "name": "combobox",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/combobox",
       "label": "Combobox",
       "description": "Text input with autocomplete dropdown.",
@@ -659,8 +1193,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -688,7 +1221,7 @@
     },
     {
       "name": "command-palette",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/command-palette",
       "label": "Command Palette",
       "description": "Modal search and action launcher.",
@@ -710,8 +1243,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -738,7 +1270,7 @@
     },
     {
       "name": "context-menu",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/context-menu",
       "label": "Context Menu",
       "description": "Right-click triggered menu.",
@@ -760,8 +1292,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -782,7 +1313,7 @@
     },
     {
       "name": "data-table",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/data-table",
       "label": "Data Table",
       "description": "Sortable, selectable table with column control.",
@@ -804,8 +1335,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -842,7 +1372,7 @@
     },
     {
       "name": "date-picker",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/date-picker",
       "label": "Date Picker",
       "description": "Calendar popup for selecting dates.",
@@ -864,8 +1394,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -888,8 +1417,53 @@
       }
     },
     {
-      "name": "dialog",
+      "name": "date-range-input",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/date-range-input",
+      "label": "Date Range Input",
+      "description": "Date range selection with start/end text fields and calendar picker.",
+      "category": "data-input",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "calendar",
+        "data",
+        "date",
+        "end",
+        "fields",
+        "input",
+        "picker",
+        "range",
+        "runtime",
+        "selection",
+        "start",
+        "text",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/date-range-input"
+      }
+    },
+    {
+      "name": "dialog",
+      "version": "0.1.0",
       "package": "@solidiom/dialog",
       "label": "Dialog",
       "description": "Modal or non-modal overlay window.",
@@ -911,8 +1485,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -940,8 +1513,47 @@
       }
     },
     {
-      "name": "drawer",
+      "name": "direction",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/direction",
+      "label": "Direction",
+      "description": "RTL/LTR direction context provider component.",
+      "category": "utility",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "component",
+        "context",
+        "direction",
+        "ltr",
+        "provider",
+        "rtl",
+        "runtime",
+        "utility"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/direction"
+      }
+    },
+    {
+      "name": "drawer",
+      "version": "0.0.1",
       "package": "@solidiom/drawer",
       "label": "Drawer",
       "description": "Slide-in panel from any screen edge.",
@@ -963,8 +1575,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -987,7 +1598,7 @@
     },
     {
       "name": "empty-state",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/empty-state",
       "label": "Empty State",
       "description": "Placeholder for empty content areas.",
@@ -1009,8 +1620,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1032,7 +1642,7 @@
     },
     {
       "name": "field",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/field",
       "label": "Field",
       "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
@@ -1054,8 +1664,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1085,8 +1694,91 @@
       }
     },
     {
-      "name": "hover-card",
+      "name": "file-input",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/file-input",
+      "label": "File Input",
+      "description": "File upload trigger with dropzone support and validation.",
+      "category": "data-input",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "data",
+        "dropzone",
+        "file",
+        "input",
+        "runtime",
+        "support",
+        "trigger",
+        "upload",
+        "validation",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/file-input"
+      }
+    },
+    {
+      "name": "grid",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/grid",
+      "label": "Grid",
+      "description": "CSS Grid layout primitive with responsive columns and gap.",
+      "category": "layout",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "columns",
+        "css",
+        "gap",
+        "grid",
+        "layout",
+        "primitive",
+        "responsive",
+        "runtime",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/grid"
+      }
+    },
+    {
+      "name": "hover-card",
+      "version": "0.0.1",
       "package": "@solidiom/hover-card",
       "label": "Hover Card",
       "description": "Content preview on hover with open delay and anchored positioning.",
@@ -1108,8 +1800,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1135,7 +1826,7 @@
     },
     {
       "name": "input",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/input",
       "label": "Input",
       "description": "Text input and textarea with validation states and Field integration.",
@@ -1157,8 +1848,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1185,8 +1875,53 @@
       }
     },
     {
-      "name": "input-otp",
+      "name": "input-group",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/input-group",
+      "label": "Input Group",
+      "description": "Input wrapper with prefix/suffix addon slots for icons and buttons.",
+      "category": "data-input",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "addon",
+        "and",
+        "buttons",
+        "data",
+        "for",
+        "group",
+        "icons",
+        "input",
+        "prefix",
+        "runtime",
+        "slots",
+        "suffix",
+        "with",
+        "wrapper"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/input-group"
+      }
+    },
+    {
+      "name": "input-otp",
+      "version": "0.0.1",
       "package": "@solidiom/input-otp",
       "label": "Input OTP",
       "description": "A one-time password input with individual character slots.",
@@ -1208,8 +1943,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1233,7 +1967,7 @@
     },
     {
       "name": "kbd",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/kbd",
       "label": "Kbd",
       "description": "Keyboard shortcut display element.",
@@ -1255,8 +1989,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1285,7 +2018,7 @@
     },
     {
       "name": "label",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/label",
       "label": "Label",
       "description": "Accessible label element linked to form controls via htmlFor.",
@@ -1307,8 +2040,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1333,8 +2065,91 @@
       }
     },
     {
-      "name": "listbox",
+      "name": "lightbox",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/lightbox",
+      "label": "Lightbox",
+      "description": "Image and media overlay viewer with navigation controls.",
+      "category": "overlay",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "controls",
+        "image",
+        "lightbox",
+        "media",
+        "navigation",
+        "overlay",
+        "runtime",
+        "viewer",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/lightbox"
+      }
+    },
+    {
+      "name": "link",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/link",
+      "label": "Link",
+      "description": "Styled anchor with router integration and safety validation.",
+      "category": "action",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "action",
+        "anchor",
+        "and",
+        "integration",
+        "link",
+        "router",
+        "runtime",
+        "safety",
+        "styled",
+        "validation",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/link"
+      }
+    },
+    {
+      "name": "listbox",
+      "version": "0.0.1",
       "package": "@solidiom/listbox",
       "label": "Listbox",
       "description": "Single or multi-select list of options.",
@@ -1356,8 +2171,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1378,8 +2192,50 @@
       }
     },
     {
-      "name": "menu",
+      "name": "mega-menu",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/mega-menu",
+      "label": "Mega Menu",
+      "description": "Expanded navigation dropdown with rich multi-column content.",
+      "category": "navigation",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "column",
+        "content",
+        "dropdown",
+        "expanded",
+        "mega",
+        "menu",
+        "multi",
+        "navigation",
+        "rich",
+        "runtime",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/mega-menu"
+      }
+    },
+    {
+      "name": "menu",
+      "version": "0.0.1",
       "package": "@solidiom/menu",
       "label": "Menu",
       "description": "Action list triggered by a button.",
@@ -1401,8 +2257,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1426,8 +2281,92 @@
       }
     },
     {
-      "name": "meter",
+      "name": "menubar",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/menubar",
+      "label": "Menubar",
+      "description": "Desktop-style horizontal menu bar with dropdown submenus.",
+      "category": "navigation",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "bar",
+        "desktop",
+        "dropdown",
+        "horizontal",
+        "menu",
+        "menubar",
+        "navigation",
+        "runtime",
+        "style",
+        "submenus",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/menubar"
+      }
+    },
+    {
+      "name": "message-scroller",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/message-scroller",
+      "label": "Message Scroller",
+      "description": "Auto-scrolling message container with new-content indicators.",
+      "category": "utility",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "auto",
+        "container",
+        "content",
+        "indicators",
+        "message",
+        "new",
+        "runtime",
+        "scroller",
+        "scrolling",
+        "utility",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/message-scroller"
+      }
+    },
+    {
+      "name": "meter",
+      "version": "0.0.1",
       "package": "@solidiom/meter",
       "label": "Meter",
       "description": "Scalar measurement within a known range (e.g. disk usage, signal strength).",
@@ -1449,8 +2388,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1479,8 +2417,52 @@
       }
     },
     {
-      "name": "navigation-menu",
+      "name": "multi-selector",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/multi-selector",
+      "label": "Multi Selector",
+      "description": "Multi-select dropdown with checkbox items and search filtering.",
+      "category": "data-input",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "checkbox",
+        "data",
+        "dropdown",
+        "filtering",
+        "input",
+        "items",
+        "multi",
+        "runtime",
+        "search",
+        "select",
+        "selector",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/multi-selector"
+      }
+    },
+    {
+      "name": "navigation-menu",
+      "version": "0.0.1",
       "package": "@solidiom/navigation-menu",
       "label": "Navigation Menu",
       "description": "A top-level navigation component with accessible dropdown sub-menus.",
@@ -1502,8 +2484,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1532,8 +2513,52 @@
       }
     },
     {
-      "name": "pagination",
+      "name": "number-input",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/number-input",
+      "label": "Number Input",
+      "description": "Numeric input with increment/decrement controls and locale-aware formatting.",
+      "category": "data-input",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "aware",
+        "controls",
+        "data",
+        "decrement",
+        "formatting",
+        "increment",
+        "input",
+        "locale",
+        "number",
+        "numeric",
+        "runtime",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/number-input"
+      }
+    },
+    {
+      "name": "pagination",
+      "version": "0.0.1",
       "package": "@solidiom/pagination",
       "label": "Pagination",
       "description": "Page navigation with prev/next and page numbers.",
@@ -1555,8 +2580,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1583,7 +2607,7 @@
     },
     {
       "name": "popover",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/popover",
       "label": "Popover",
       "description": "Non-modal floating content panel.",
@@ -1605,8 +2629,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1633,7 +2656,7 @@
     },
     {
       "name": "progress",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/progress",
       "label": "Progress",
       "description": "Determinate and indeterminate progress indicator.",
@@ -1655,8 +2678,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1680,8 +2702,52 @@
       }
     },
     {
-      "name": "radio-group",
+      "name": "questionnaire",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/questionnaire",
+      "label": "Questionnaire",
+      "description": "Multi-step form and survey flow with progress tracking.",
+      "category": "data-input",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "data",
+        "flow",
+        "form",
+        "input",
+        "multi",
+        "progress",
+        "questionnaire",
+        "runtime",
+        "step",
+        "survey",
+        "tracking",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/questionnaire"
+      }
+    },
+    {
+      "name": "radio-group",
+      "version": "0.0.1",
       "package": "@solidiom/radio-group",
       "label": "Radio Group",
       "description": "Single-select radio button set with keyboard navigation.",
@@ -1703,8 +2769,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1733,7 +2798,7 @@
     },
     {
       "name": "resizable-panels",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/resizable-panels",
       "label": "Resizable Panels",
       "description": "Drag-to-resize panel layout.",
@@ -1755,8 +2820,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1781,7 +2845,7 @@
     },
     {
       "name": "scroll-area",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/scroll-area",
       "label": "Scroll Area",
       "description": "Custom-styled scrollbar with native scrolling performance.",
@@ -1803,8 +2867,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1832,8 +2895,50 @@
       }
     },
     {
-      "name": "select",
+      "name": "segmented-control",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/segmented-control",
+      "label": "Segmented Control",
+      "description": "Mutually exclusive option selector with connected segments.",
+      "category": "action",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "action",
+        "connected",
+        "control",
+        "exclusive",
+        "mutually",
+        "option",
+        "runtime",
+        "segmented",
+        "segments",
+        "selector",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/segmented-control"
+      }
+    },
+    {
+      "name": "select",
+      "version": "0.1.0",
       "package": "@solidiom/select",
       "label": "Select",
       "description": "Dropdown selection from a list of options.",
@@ -1855,8 +2960,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1882,7 +2986,7 @@
     },
     {
       "name": "separator",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/separator",
       "label": "Separator",
       "description": "Horizontal or vertical visual divider.",
@@ -1904,8 +3008,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -1929,7 +3032,7 @@
     },
     {
       "name": "sheet",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/sheet",
       "label": "Sheet",
       "description": "Side-panel dialog with slide animation.",
@@ -1951,8 +3054,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -1978,8 +3080,45 @@
       }
     },
     {
-      "name": "skeleton",
+      "name": "sidebar",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/sidebar",
+      "label": "Sidebar",
+      "description": "Collapsible application sidebar navigation panel.",
+      "category": "navigation",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "application",
+        "collapsible",
+        "navigation",
+        "panel",
+        "runtime",
+        "sidebar"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/sidebar"
+      }
+    },
+    {
+      "name": "skeleton",
+      "version": "0.0.1",
       "package": "@solidiom/skeleton",
       "label": "Skeleton",
       "description": "Loading placeholder with pulse animation.",
@@ -2001,8 +3140,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2024,7 +3162,7 @@
     },
     {
       "name": "slider",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/slider",
       "label": "Slider",
       "description": "Numeric range input with thumb control.",
@@ -2046,8 +3184,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2069,7 +3206,7 @@
     },
     {
       "name": "spinner",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/spinner",
       "label": "Spinner",
       "description": "Loading spinner indicator.",
@@ -2091,8 +3228,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2114,8 +3250,89 @@
       }
     },
     {
-      "name": "switch",
+      "name": "stack",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/stack",
+      "label": "Stack",
+      "description": "Flex layout primitive with configurable gap, direction, and alignment.",
+      "category": "layout",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "alignment",
+        "and",
+        "configurable",
+        "direction",
+        "flex",
+        "gap",
+        "layout",
+        "primitive",
+        "runtime",
+        "stack",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/stack"
+      }
+    },
+    {
+      "name": "status-dot",
+      "version": "0.0.1-next.0",
+      "package": "@solidiom/status-dot",
+      "label": "Status Dot",
+      "description": "Small colored dot indicating presence or status.",
+      "category": "feedback",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "colored",
+        "dot",
+        "feedback",
+        "indicating",
+        "presence",
+        "runtime",
+        "small",
+        "status"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/status-dot"
+      }
+    },
+    {
+      "name": "switch",
+      "version": "0.0.1",
       "package": "@solidiom/switch",
       "label": "Switch",
       "description": "Binary toggle with on/off semantics.",
@@ -2137,8 +3354,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2163,8 +3379,50 @@
       }
     },
     {
-      "name": "tabs",
+      "name": "table",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/table",
+      "label": "Table",
+      "description": "Simple static data table with header, body, rows, and cells.",
+      "category": "table",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "body",
+        "cells",
+        "data",
+        "header",
+        "rows",
+        "runtime",
+        "simple",
+        "static",
+        "table",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/table"
+      }
+    },
+    {
+      "name": "tabs",
+      "version": "0.0.1",
       "package": "@solidiom/tabs",
       "label": "Tabs",
       "description": "Tabbed content switcher.",
@@ -2186,8 +3444,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2210,8 +3467,52 @@
       }
     },
     {
-      "name": "toast",
+      "name": "time-input",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/time-input",
+      "label": "Time Input",
+      "description": "Segmented time entry with hour, minute, second fields and AM/PM toggle.",
+      "category": "data-input",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "data",
+        "entry",
+        "fields",
+        "hour",
+        "input",
+        "minute",
+        "runtime",
+        "second",
+        "segmented",
+        "time",
+        "toggle",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/time-input"
+      }
+    },
+    {
+      "name": "toast",
+      "version": "0.0.1",
       "package": "@solidiom/toast",
       "label": "Toast",
       "description": "Temporary non-blocking notification.",
@@ -2233,8 +3534,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2259,7 +3559,7 @@
     },
     {
       "name": "toggle",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/toggle",
       "label": "Toggle",
       "description": "A two-state button that can be toggled on or off.",
@@ -2281,8 +3581,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2306,7 +3605,7 @@
     },
     {
       "name": "toggle-group",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/toggle-group",
       "label": "Toggle Group",
       "description": "Group of mutually-exclusive or multi-select toggle buttons.",
@@ -2328,8 +3627,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2351,8 +3649,52 @@
       }
     },
     {
-      "name": "toolbar",
+      "name": "tokenizer",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/tokenizer",
+      "label": "Tokenizer",
+      "description": "Tag/token input for managing multiple values with keyboard support.",
+      "category": "data-input",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "data",
+        "for",
+        "input",
+        "keyboard",
+        "managing",
+        "multiple",
+        "runtime",
+        "support",
+        "tag",
+        "token",
+        "tokenizer",
+        "values",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/tokenizer"
+      }
+    },
+    {
+      "name": "toolbar",
+      "version": "0.0.1",
       "package": "@solidiom/toolbar",
       "label": "Toolbar",
       "description": "Grouped actions and controls in a horizontal bar.",
@@ -2374,8 +3716,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2402,7 +3743,7 @@
     },
     {
       "name": "tooltip",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/tooltip",
       "label": "Tooltip",
       "description": "Contextual hint shown on hover/focus.",
@@ -2424,8 +3765,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [
@@ -2452,7 +3792,7 @@
     },
     {
       "name": "tree",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/tree",
       "label": "Tree",
       "description": "Hierarchical tree view with expand/collapse.",
@@ -2474,8 +3814,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2496,8 +3835,50 @@
       }
     },
     {
-      "name": "virtual-list",
+      "name": "typography",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/typography",
+      "label": "Typography",
+      "description": "Semantic text primitives for headings, paragraphs, and inline text.",
+      "category": "content",
+      "status": "experimental",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": false,
+      "accessibility": {
+        "reviewStatus": "none",
+        "evidenceIds": []
+      },
+      "documentationStatus": "stub",
+      "documentationLocales": {
+        "en": {
+          "status": "missing"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "content",
+        "for",
+        "headings",
+        "inline",
+        "paragraphs",
+        "primitives",
+        "runtime",
+        "semantic",
+        "text",
+        "typography"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/typography"
+      }
+    },
+    {
+      "name": "virtual-list",
+      "version": "0.0.1",
       "package": "@solidiom/virtual-list",
       "label": "Virtual List",
       "description": "Viewport-windowed list for large datasets.",
@@ -2519,8 +3900,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2544,7 +3924,7 @@
     },
     {
       "name": "visually-hidden",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/visually-hidden",
       "label": "Visually Hidden",
       "description": "Hides content visually while keeping it accessible to screen readers.",
@@ -2566,8 +3946,7 @@
           "status": "draft"
         },
         "es": {
-          "status": "reviewed",
-          "lastUpdated": "2026-08-07T05:00:00.000Z"
+          "status": "draft"
         }
       },
       "stylingOutputs": [],
@@ -2638,7 +4017,7 @@
   "components": [
     {
       "name": "accordion",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Accordion",
       "description": "Styled accordion component — the recipe wrapper for the css, tailwind, unocss profile(s) using the accordion primitive.",
@@ -2671,7 +4050,7 @@
     },
     {
       "name": "alert",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Alert",
       "description": "Styled alert component — the recipe wrapper for the css, tailwind, unocss profile(s) using the alert primitive.",
@@ -2704,7 +4083,7 @@
     },
     {
       "name": "avatar",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Avatar",
       "description": "Styled avatar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the avatar primitive.",
@@ -2737,7 +4116,7 @@
     },
     {
       "name": "badge",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Badge",
       "description": "Styled badge component — the recipe wrapper for the css, tailwind, unocss profile(s) using the badge primitive.",
@@ -2770,7 +4149,7 @@
     },
     {
       "name": "breadcrumb",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Breadcrumb",
       "description": "Styled breadcrumb component — the recipe wrapper for the css, tailwind, unocss profile(s) using the breadcrumb primitive.",
@@ -2803,7 +4182,7 @@
     },
     {
       "name": "button",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Button",
       "description": "Styled button component — the recipe wrapper for the css, tailwind, unocss profile(s) using the button primitive.",
@@ -2836,7 +4215,7 @@
     },
     {
       "name": "card",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Card",
       "description": "Styled card component — the recipe wrapper for the css, tailwind, unocss profile(s) using the card primitive.",
@@ -2869,7 +4248,7 @@
     },
     {
       "name": "checkbox",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Checkbox",
       "description": "Styled checkbox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the checkbox primitive.",
@@ -2902,7 +4281,7 @@
     },
     {
       "name": "combobox",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Combobox",
       "description": "Styled combobox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the combobox primitive.",
@@ -2935,7 +4314,7 @@
     },
     {
       "name": "command-palette",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Command Palette",
       "description": "Styled command-palette component — the recipe wrapper for the css, tailwind, unocss profile(s) using the command-palette primitive.",
@@ -2968,7 +4347,7 @@
     },
     {
       "name": "data-table",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Data Table",
       "description": "Styled data-table component — the recipe wrapper for the css, tailwind, unocss profile(s) using the data-table primitive.",
@@ -3001,7 +4380,7 @@
     },
     {
       "name": "dialog",
-      "version": "0.0.1-next.0",
+      "version": "0.1.0",
       "package": "@solidiom/recipes-css",
       "label": "Dialog",
       "description": "Styled dialog component — the recipe wrapper for the css, tailwind, unocss profile(s) using the dialog primitive.",
@@ -3034,7 +4413,7 @@
     },
     {
       "name": "field",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Field",
       "description": "Styled field component — the recipe wrapper for the css, tailwind, unocss profile(s) using the field primitive.",
@@ -3067,7 +4446,7 @@
     },
     {
       "name": "input",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Input",
       "description": "Styled input component — the recipe wrapper for the css, tailwind, unocss profile(s) using the input primitive.",
@@ -3100,7 +4479,7 @@
     },
     {
       "name": "kbd",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Kbd",
       "description": "Styled kbd component — the recipe wrapper for the css, tailwind, unocss profile(s) using the kbd primitive.",
@@ -3133,7 +4512,7 @@
     },
     {
       "name": "menu",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Menu",
       "description": "Styled menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the menu primitive.",
@@ -3166,7 +4545,7 @@
     },
     {
       "name": "meter",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Meter",
       "description": "Styled meter component — the recipe wrapper for the css, tailwind, unocss profile(s) using the meter primitive.",
@@ -3199,7 +4578,7 @@
     },
     {
       "name": "navigation-menu",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Navigation Menu",
       "description": "Styled navigation-menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the navigation-menu primitive.",
@@ -3232,7 +4611,7 @@
     },
     {
       "name": "pagination",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Pagination",
       "description": "Styled pagination component — the recipe wrapper for the css, tailwind, unocss profile(s) using the pagination primitive.",
@@ -3265,7 +4644,7 @@
     },
     {
       "name": "popover",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Popover",
       "description": "Styled popover component — the recipe wrapper for the css, tailwind, unocss profile(s) using the popover primitive.",
@@ -3298,7 +4677,7 @@
     },
     {
       "name": "progress",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Progress",
       "description": "Styled progress component — the recipe wrapper for the css, tailwind, unocss profile(s) using the progress primitive.",
@@ -3331,7 +4710,7 @@
     },
     {
       "name": "radio-group",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Radio Group",
       "description": "Styled radio-group component — the recipe wrapper for the css, tailwind, unocss profile(s) using the radio-group primitive.",
@@ -3364,7 +4743,7 @@
     },
     {
       "name": "resizable-panels",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Resizable Panels",
       "description": "Styled resizable-panels component — the recipe wrapper for the css, tailwind, unocss profile(s) using the resizable-panels primitive.",
@@ -3397,7 +4776,7 @@
     },
     {
       "name": "scroll-area",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Scroll Area",
       "description": "Styled scroll-area component — the recipe wrapper for the css, tailwind, unocss profile(s) using the scroll-area primitive.",
@@ -3430,7 +4809,7 @@
     },
     {
       "name": "select",
-      "version": "0.0.1-next.0",
+      "version": "0.1.0",
       "package": "@solidiom/recipes-css",
       "label": "Select",
       "description": "Styled select component — the recipe wrapper for the css, tailwind, unocss profile(s) using the select primitive.",
@@ -3463,7 +4842,7 @@
     },
     {
       "name": "sheet",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Sheet",
       "description": "Styled sheet component — the recipe wrapper for the css, tailwind, unocss profile(s) using the sheet primitive.",
@@ -3496,7 +4875,7 @@
     },
     {
       "name": "spinner",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Spinner",
       "description": "Styled spinner component — the recipe wrapper for the css, tailwind, unocss profile(s) using the spinner primitive.",
@@ -3529,7 +4908,7 @@
     },
     {
       "name": "switch",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Switch",
       "description": "Styled switch component — the recipe wrapper for the css, tailwind, unocss profile(s) using the switch primitive.",
@@ -3562,7 +4941,7 @@
     },
     {
       "name": "tabs",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Tabs",
       "description": "Styled tabs component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tabs primitive.",
@@ -3595,7 +4974,7 @@
     },
     {
       "name": "toast",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Toast",
       "description": "Styled toast component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toast primitive.",
@@ -3628,7 +5007,7 @@
     },
     {
       "name": "toolbar",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Toolbar",
       "description": "Styled toolbar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toolbar primitive.",
@@ -3661,7 +5040,7 @@
     },
     {
       "name": "tooltip",
-      "version": "0.0.1-next.0",
+      "version": "0.0.1",
       "package": "@solidiom/recipes-css",
       "label": "Tooltip",
       "description": "Styled tooltip component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tooltip primitive.",

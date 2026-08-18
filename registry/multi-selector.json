@@ -1,0 +1,79 @@
+{
+  "name": "multi-selector",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/multi-selector",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [
+    "collection/collection",
+    "collection/roving-focus",
+    "dom/stable-id",
+    "state/disclosure-state"
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Multi Selector",
+  "description": "Multi-select dropdown with checkbox items and search filtering.",
+  "category": "data-input",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add multi-selector",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "checkbox",
+      "data",
+      "dropdown",
+      "filtering",
+      "input",
+      "items",
+      "multi",
+      "runtime",
+      "search",
+      "select",
+      "selector",
+      "with"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "9db9447f9c91560ccba2dd6c6cd5f8c62ab8182fdf4bb0fd5ee56bcbaa1625a2",
+    "fileDigests": {
+      "src/index.tsx": "c8544ae8f2c673dc3d474427b03b17c1a0c479175c01640c98ba39a6b9e8966d"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/multi-selector"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

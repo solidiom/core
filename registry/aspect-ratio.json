@@ -1,0 +1,70 @@
+{
+  "name": "aspect-ratio",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/aspect-ratio",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Aspect Ratio",
+  "description": "Container that constrains children to a specified aspect ratio.",
+  "category": "layout",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add aspect-ratio",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "aspect",
+      "children",
+      "constrains",
+      "container",
+      "layout",
+      "ratio",
+      "runtime",
+      "specified",
+      "that"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "557fec8561ed1683f70546d02a39fafd2ecbc3c25f5455df6b764f95326f44f8",
+    "fileDigests": {
+      "src/index.tsx": "17abb0b8d9a13f70feb36a8e1ffff2b92ef8f6d5629946463fa4bdc5323774ba"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/aspect-ratio"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

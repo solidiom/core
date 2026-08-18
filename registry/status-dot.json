@@ -1,0 +1,69 @@
+{
+  "name": "status-dot",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/status-dot",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Status Dot",
+  "description": "Small colored dot indicating presence or status.",
+  "category": "feedback",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add status-dot",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "colored",
+      "dot",
+      "feedback",
+      "indicating",
+      "presence",
+      "runtime",
+      "small",
+      "status"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "25c0e26decd4e75f6f8b126967394b3028f18622eeda55bcd7f7abef455dc34b",
+    "fileDigests": {
+      "src/index.tsx": "f8231d5e1d68da0ef22799319629df6dcfac003b3e3c0f4afe6d29604b672304"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/status-dot"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,74 @@
+{
+  "name": "number-input",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/number-input",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Number Input",
+  "description": "Numeric input with increment/decrement controls and locale-aware formatting.",
+  "category": "data-input",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add number-input",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "aware",
+      "controls",
+      "data",
+      "decrement",
+      "formatting",
+      "increment",
+      "input",
+      "locale",
+      "number",
+      "numeric",
+      "runtime",
+      "with"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "afcb64103fcb9b40f4a35be1f560c45a1ce0611f7ba30b023b17987032866d57",
+    "fileDigests": {
+      "src/index.tsx": "76e8707bbc4d5b116a0059a838b840db1970a0374b77deae518943a99cc987ba"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/number-input"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

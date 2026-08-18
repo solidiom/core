@@ -1,0 +1,77 @@
+{
+  "name": "date-range-input",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/date-range-input",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [
+    "dom/stable-id"
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Date Range Input",
+  "description": "Date range selection with start/end text fields and calendar picker.",
+  "category": "data-input",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add date-range-input",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "calendar",
+      "data",
+      "date",
+      "end",
+      "fields",
+      "input",
+      "picker",
+      "range",
+      "runtime",
+      "selection",
+      "start",
+      "text",
+      "with"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "bcd3a20e1dd8d570bb37939994ee704cf1ee386fe0efdbe402ad55717d7e6bcd",
+    "fileDigests": {
+      "src/index.tsx": "5b59497c2459b7a79a7e07eada5cc08f7f98f642ed1fe40ed55ddb0139b95fce"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/date-range-input"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}
