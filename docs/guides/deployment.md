@@ -16,7 +16,7 @@ date: 2026-07-29
 
 ## OPS-003 automated verification
 
-`.github/workflows/preview-deploy.yml` runs only for pull requests originating from this repository, so deploy and Cloudflare Access secrets are never exposed to forks. After Wrangler reports the deployment URL, `apps/site/tools/verify-preview-deployment.ts` verifies all of the following against the deployed preview:
+`.github/workflows/ci.yml` runs the protected preview-deployment job only for pull requests originating from this repository, so deploy and Cloudflare Access secrets are never exposed to forks. After Wrangler reports the deployment URL, `apps/site/tools/verify-preview-deployment.ts` verifies all of the following against the deployed preview:
 
 - An unauthenticated request is rejected or redirected by Cloudflare Access; the configured service token can load the preview.
 - Security headers include frame, MIME-sniffing, referrer, and CSP protections.

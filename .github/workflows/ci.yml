@@ -1,25 +1,29 @@
 name: CI
 
-# Automatic triggers are disabled on request: this workflow runs only when
-# dispatched explicitly (Actions tab or `gh workflow run ci.yml`). Restore the
-# push/pull_request triggers below to re-arm CI-001.
-#
-# on:
-#   push:
-#     branches: [main]
-#   pull_request:
-#     branches: [main]
+# Tiered CI pipeline:
+#   - PR:   Fast feedback (format, typecheck, build, node tests on single version, chromium browser tests)
+#   - Main: Full matrix (node 24+26, chromium browser tests, a11y, CLI smoke, site build+e2e, gates)
+#   - Dispatch: Configurable (affected_only, full_matrix options)
+
 on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
     inputs:
       affected_only:
-        description: "Run only affected packages (faster, uses nx affected)"
+        description: "Run only affected packages (uses nx affected)"
         required: false
         default: "false"
         type: choice
-        options:
-          - "false"
-          - "true"
+        options: ["false", "true"]
+      full_matrix:
+        description: "Run the full test matrix even on dispatch (like main push)"
+        required: false
+        default: "true"
+        type: choice
+        options: ["true", "false"]
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -29,10 +33,10 @@ env:
   NODE_VERSION: "24"
   PNPM_VERSION: "10.34.5"
   NODE_OPTIONS: "--max-old-space-size=4096"
-  # For nx affected: compare against main branch by default.
-  # In PRs this is automatically set to the merge base.
   NX_BASE: ${{ github.event.pull_request.base.sha || 'HEAD~1' }}
   NX_HEAD: HEAD
+  # PRs always run the fast tier. Main pushes and full manual dispatches run the
+  # comprehensive tier; a manual run can set full_matrix=false for fast feedback.
 
 jobs:
   # ─── Foundation ────────────────────────────────────────────────────────────────
@@ -52,7 +56,7 @@ jobs:
             tools/*/node_modules
           key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
-  # ─── Lint & Typecheck (parallel, no build needed) ──────────────────────────────
+  # ─── Lint & Typecheck (always run, no build needed) ────────────────────────────
 
   format:
     needs: install
@@ -71,7 +75,6 @@ jobs:
       - run: pnpm typecheck
 
   # ─── Build ────────────────────────────────────────────────────────────────────
-  # Single build that uploads artifacts for all downstream consumers.
 
   build:
     needs: install
@@ -84,60 +87,50 @@ jobs:
       - name: Build packages
         run: |
           if [ "${{ inputs.affected_only }}" = "true" ]; then
-            echo "Building affected packages only (NX_BASE=$NX_BASE)"
             pnpm nx affected -t build --exclude=@solidiom/site
           else
             pnpm nx run-many -t build --exclude=@solidiom/site
           fi
 
-      # Post-build audits that verify generated output integrity
+      # Post-build audits
       - name: REG-006 — verify registry catalog integrity
         run: node packages/cli/dist/bin.js verify --registry
       - name: API-004 — verify vertical-slice primitive API coverage
         run: pnpm run api:coverage-gate
-      - name: RECIPE-006 / CLI-001 — verify package src/source parity and exports
+      - name: Verify package src/source parity and exports
         run: pnpm run audit:package-source-parity
-      - name: THEME-002/003/004 — verify generated theme output is current
+      - name: Verify generated theme output is current
         run: |
           pnpm run theme:emit:css:check
           pnpm run theme:emit:tailwind:check
           pnpm run theme:emit:unocss:check
-      - name: THEME-005 — theme cross-output parity, contrast, and round-trip audit
+      - name: Theme cross-output parity and contrast audit
         run: pnpm run audit:theme-parity
-      - name: PRESET-005 — cross-preset contrast, coverage, and translation gate
+      - name: Cross-preset contrast, coverage, and translation gate
         run: pnpm run audit:preset-themes
-      - name: CLI-003 — assert no unverified provenance lock entries
+      - name: Assert no unverified provenance lock entries
         run: pnpm run assert:no-unverified
-      - name: BUILD-001 — verify no generated artifacts are stale
+      - name: Verify no generated artifacts are stale
         run: |
           PATHSPEC=(registry/ 'packages/*/source/' 'packages/*/docs/accessibility/evidence.json')
-
           if git diff --quiet -- "${PATHSPEC[@]}"; then
             echo "Generated artifacts are current."
             exit 0
           fi
-
           echo "::group::Stale paths"
           git diff --stat -- "${PATHSPEC[@]}"
           echo "::endgroup::"
-
-          echo "::group::Diff (first 200 lines)"
-          git diff -- "${PATHSPEC[@]}" | head -200
-          echo "::endgroup::"
-
           SUBSTANTIVE=$(git diff -U0 -- "${PATHSPEC[@]}" \
             | grep -E '^[+-]' \
             | grep -vE '^(\+\+\+|---)' \
             | grep -cvE '"(lastGenerated|lastUpdated|generatedAt|signedAt)":' || true)
-
           if [ "$SUBSTANTIVE" -eq 0 ]; then
-            echo "::error::Generated artifacts differ only in generation timestamps. That is a determinism regression in tools/registry-build.ts (withStableManifestStamps / withStableIndexStamp), not stale content — the stamps must be preserved when content is unchanged."
+            echo "::error::Generated artifacts differ only in timestamps — determinism regression."
           else
-            echo "::error::Generated artifacts are stale ($SUBSTANTIVE substantive changed lines). Run 'pnpm build && pnpm run report:a11y-evidence && pnpm run registry:build' and commit the changes."
+            echo "::error::Generated artifacts are stale ($SUBSTANTIVE changed lines). Run 'pnpm build && pnpm run report:a11y-evidence && pnpm run registry:build' and commit."
           fi
           exit 1
 
-      # Upload build output for downstream jobs to avoid rebuilding
       - name: Upload build artifacts
         uses: actions/upload-artifact@v6
         with:
@@ -148,14 +141,15 @@ jobs:
             !apps/site/dist
           retention-days: 1
 
-  # ─── Tests (consume build artifacts, no rebuild) ───────────────────────────────
+  # ─── Tests (Node) ─────────────────────────────────────────────────────────────
+  # PR: single Node version. Main/dispatch: matrix [24, 26].
 
   test-node:
     needs: build
     runs-on: solidiom-dfw-runner
     strategy:
       matrix:
-        node-version: [24, 26]
+        node-version: ${{ (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')) && fromJson('[24, 26]') || fromJson('[24]') }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -163,22 +157,11 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
+          playwright: chromium
       - uses: actions/download-artifact@v4
         with:
           name: build-dist
           path: .
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - name: Install Playwright (chromium)
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
-      - name: Install Playwright system deps
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
       - run: |
           if [ "${{ inputs.affected_only }}" = "true" ]; then
             pnpm nx affected -t test --exclude=@solidiom/site
@@ -187,30 +170,26 @@ jobs:
           fi
       - run: pnpm run test:tools
 
+  # ─── Tests (Browser) ──────────────────────────────────────────────────────────
+  # PR: Chromium only. Main/dispatch: Chromium only (full 3-browser in nightly).
+
   test-browser:
     needs: build
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
+        with:
+          playwright: chromium
       - uses: actions/download-artifact@v4
         with:
           name: build-dist
           path: .
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-all-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - name: Install Playwright (all browsers)
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium firefox webkit
-      - name: Install Playwright system deps
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium firefox webkit
-      - run: pnpm exec vitest run --config vitest.browser.config.ts
-      - name: RECIPE-005 — computed-style parity across css/tailwind/unocss profiles
+      - name: Browser component tests (Chromium)
+        env:
+          VITEST_BROWSERS: chromium
+        run: pnpm exec vitest run --config vitest.browser.config.ts
+      - name: Recipe parity test
         run: pnpm run test:recipe-parity
       - uses: actions/upload-artifact@v6
         if: failure()
@@ -219,36 +198,25 @@ jobs:
           path: test-results/
           retention-days: 7
 
+  # ─── Accessibility (main/dispatch only) ────────────────────────────────────────
+
   a11y-axe-scan:
     needs: build
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
+        with:
+          playwright: chromium
       - uses: actions/download-artifact@v4
         with:
           name: build-dist
           path: .
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - name: Install Playwright (chromium)
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
-      - name: Install Playwright system deps
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
-      - name: Run executable axe accessibility scans
-        run: pnpm run test:a11y
-      - name: Publish stable per-primitive accessibility evidence
-        run: pnpm run report:a11y-evidence
-      - name: A11Y-004 — verify GA-status primitive accessibility evidence is current
-        run: pnpm run a11y:coverage-gate
-      - name: Generate axe report from the executed result artifact
-        run: pnpm run report:axe
+      - run: pnpm run test:a11y
+      - run: pnpm run report:a11y-evidence
+      - run: pnpm run a11y:coverage-gate
+      - run: pnpm run report:axe
       - uses: actions/upload-artifact@v6
         with:
           name: axe-scan-results
@@ -258,10 +226,11 @@ jobs:
             docs/axe-scan-results.md
           retention-days: 30
 
-  # ─── CI-002: Site Check/Build/E2E ───────────────────────────────────────────
+  # ─── Site Pipeline (main/dispatch only) ────────────────────────────────────────
 
   site-check:
     needs: install
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
@@ -272,6 +241,7 @@ jobs:
 
   site-build:
     needs: [install, site-check]
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
@@ -280,7 +250,7 @@ jobs:
         run: pnpm --filter '@solidiom/template-*' build
       - name: Build and index static site
         run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
-      - name: REG-007 — verify every registry deliverable has exactly one valid route
+      - name: Verify registry routes
         run: pnpm --filter @solidiom/site run registry-route-check
       - uses: actions/upload-artifact@v6
         with:
@@ -289,26 +259,17 @@ jobs:
 
   site-e2e:
     needs: site-build
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
+        with:
+          playwright: chromium firefox webkit
       - uses: actions/download-artifact@v4
         with:
           name: site-dist
           path: apps/site/dist
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-all-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - name: Install Playwright (all browsers)
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium firefox webkit
-      - name: Install Playwright system deps
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium firefox webkit
       - env:
           PLAYWRIGHT_USE_EXISTING_BUILD: "1"
         run: pnpm --filter @solidiom/site run test:e2e
@@ -319,13 +280,9 @@ jobs:
           path: test-results/site-e2e
           retention-days: 7
 
-  # ─── CI-003: Visual/Lighthouse CI ──────────────────────────────────────────────
-
-  # TEST-005: runs inside the pinned Playwright image so screenshot rendering is
-  # reproducible. The image tag MUST track the @playwright/test version in
-  # package.json. Blocking — baselines are captured in this environment.
   site-visual:
     needs: site-build
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
     runs-on: solidiom-dfw-runner
     container:
       image: mcr.microsoft.com/playwright:v1.62.1-noble
@@ -337,7 +294,6 @@ jobs:
         with:
           name: site-dist
           path: apps/site/dist
-      # Browsers ship with the image; no install needed.
       - env:
           PLAYWRIGHT_USE_EXISTING_BUILD: "1"
         run: pnpm --filter @solidiom/site run test:visual
@@ -350,6 +306,7 @@ jobs:
 
   site-lighthouse:
     needs: site-build
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
     runs-on: solidiom-dfw-runner
     continue-on-error: true
     steps:
@@ -359,12 +316,13 @@ jobs:
         with:
           name: site-dist
           path: apps/site/dist
-      - name: Install Chrome for Lighthouse
-        uses: browser-actions/setup-chrome@v1
+      - uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable
-      - name: Start static-site preview for Lighthouse
-        run: pnpm --filter @solidiom/site preview --host 127.0.0.1 --port 4322 > /dev/null 2>&1 & for attempt in {1..30}; do curl --fail --silent http://127.0.0.1:4322/ > /dev/null && exit 0; sleep 1; done; exit 1
+      - name: Start preview server
+        run: |
+          pnpm --filter @solidiom/site preview --host 127.0.0.1 --port 4322 > /dev/null 2>&1 &
+          for attempt in $(seq 1 30); do curl --fail --silent http://127.0.0.1:4322/ > /dev/null && exit 0; sleep 1; done; exit 1
       - run: pnpm --filter @solidiom/site run lighthouse:json
       - uses: actions/upload-artifact@v6
         with:
@@ -372,10 +330,11 @@ jobs:
           path: apps/site/dist/reports
           retention-days: 30
 
-  # ─── CLI-008: Offline create/install/typecheck/build/test smoke matrix ────────
+  # ─── CLI Smoke Tests (main/dispatch only) ──────────────────────────────────────
 
   cli-smoke-create-prep:
     needs: build
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
@@ -384,8 +343,7 @@ jobs:
         with:
           name: build-dist
           path: .
-      - name: Enable corepack (yarn)
-        run: corepack enable
+      - run: corepack enable
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.3.14"
@@ -395,7 +353,7 @@ jobs:
           path: tools/offline-fixture/.registry-snapshot
           key: offline-registry-snapshot-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml') }}
           lookup-only: true
-      - name: CLI-008 — warm the offline registry snapshot (network required)
+      - name: Warm offline registry snapshot
         if: steps.snapshot-probe.outputs.cache-hit != 'true'
         run: tools/offline-fixture/run-offline-test.sh --prep
       - uses: actions/cache/save@v5
@@ -406,6 +364,7 @@ jobs:
 
   cli-smoke-create:
     needs: [build, cli-smoke-create-prep]
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
     runs-on: solidiom-dfw-runner
     strategy:
       fail-fast: false
@@ -418,8 +377,7 @@ jobs:
         with:
           name: build-dist
           path: .
-      - name: Enable corepack (yarn)
-        run: corepack enable
+      - run: corepack enable
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.3.14"
@@ -428,7 +386,7 @@ jobs:
           path: tools/offline-fixture/.registry-snapshot
           key: offline-registry-snapshot-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml') }}
           fail-on-cache-miss: true
-      - name: CLI-008 — cold-cache offline create/install/typecheck/build/test (${{ matrix.manager }})
+      - name: Offline create/install/typecheck/build/test (${{ matrix.manager }})
         run: |
           mkdir -p artifacts
           tools/offline-fixture/run-offline-test.sh \
@@ -441,86 +399,66 @@ jobs:
           path: artifacts/smoke-create-${{ matrix.manager }}.json
           retention-days: 7
 
-  # ─── BETA-002 / G3: public-beta acceptance evidence ────────────────────────────
+  # ─── Preview Deploy (PRs only) ────────────────────────────────────────────────
 
-  beta-acceptance-report:
-    needs: site-build
+  preview-deploy:
+    needs: [install]
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: solidiom-dfw-runner
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v4
+      - name: Build template previews
+        run: pnpm --filter '@solidiom/template-*' build
+      - name: Build and index site
+        run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
+      - name: Deploy preview to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
         with:
-          name: site-dist
-          path: apps/site/dist
-      - name: BETA-002 — static-build acceptance report
-        run: pnpm run beta:acceptance:report
-
-  beta-acceptance-e2e:
-    needs: site-build
-    runs-on: solidiom-dfw-runner
-    steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v4
-        with:
-          name: site-dist
-          path: apps/site/dist
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-all-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - name: Install Playwright (all browsers)
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium firefox webkit
-      - name: Install Playwright system deps
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium firefox webkit
-      - name: BETA-002 — cross-browser acceptance matrix
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=solidiom-site
+          workingDirectory: apps/site
+      - name: Verify preview delivery policy
         env:
-          PLAYWRIGHT_USE_EXISTING_BUILD: "1"
-        run: pnpm run beta:acceptance:e2e
-      - uses: actions/upload-artifact@v6
-        if: failure()
+          PREVIEW_URL: ${{ steps.deploy.outputs.deployment-url }}
+          CLOUDFLARE_ACCESS_CLIENT_ID: ${{ secrets.CLOUDFLARE_ACCESS_CLIENT_ID }}
+          CLOUDFLARE_ACCESS_CLIENT_SECRET: ${{ secrets.CLOUDFLARE_ACCESS_CLIENT_SECRET }}
+        run: pnpm --filter @solidiom/site verify:preview
+      - name: Comment preview URL on PR
+        uses: actions/github-script@v7
+        env:
+          DEPLOY_URL: ${{ steps.deploy.outputs.deployment-url }}
         with:
-          name: beta-acceptance-e2e-results
-          path: test-results/beta-acceptance
-          retention-days: 7
+          script: |
+            const url = process.env.DEPLOY_URL;
+            const body = `## Preview Deployment\n\n**URL:** ${url}\n\nDeployed from commit \`${context.sha.slice(0, 7)}\`.`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find(c => c.body?.includes('Preview Deployment'));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                comment_id: existing.id, body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: context.issue.number, body,
+              });
+            }
 
-  # ─── Solid Matrix (single-tier smoke) ────────────────────────────────────────
-  # Full multi-version matrix runs in solid-compat.yml on a nightly schedule.
-  # This job gives CI a fast signal that the pinned Solid version works.
-
-  test-solid-matrix:
-    needs: build
-    runs-on: solidiom-dfw-runner
-    steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v4
-        with:
-          name: build-dist
-          path: .
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - name: Install Playwright (chromium)
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
-      - name: Install Playwright system deps
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
-      - run: pnpm test
-
-  # ─── Gate Jobs (consolidated) ──────────────────────────────────────────────────
+  # ─── Catalog & Vertical Slice Gates (main/dispatch only) ───────────────────────
 
   catalog-gates:
     needs: build
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
@@ -532,9 +470,9 @@ jobs:
       - run: pnpm run component:catalog-gate
       - run: pnpm run block:catalog-gate
 
-  # VS-004's gate, the executable half of the G2 exit checklist.
   vertical-slice-gate:
     needs: [build, site-check]
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
@@ -543,43 +481,40 @@ jobs:
         with:
           name: build-dist
           path: .
-      - name: VS-004 — vertical-slice gate (G2)
-        run: pnpm run gate:vertical-slice
+      - run: pnpm run gate:vertical-slice
 
-  # Consolidated phase gates: phase1 → phase2 → phase0 + phase3 all in one job.
-  # Previously 4 separate jobs each rebuilding from scratch (~15 min saved).
-  gates:
+  # ─── Quality Gate (final) ──────────────────────────────────────────────────────
+  # PR: lightweight gate (format + typecheck + build + tests pass).
+  # Main/dispatch: full gate suite including all phases.
+
+  gate:
+    # `always()` lets the fast tier proceed when full-tier jobs are intentionally
+    # skipped; the explicit result checks still prevent a gate after a failure.
     needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e, catalog-gates]
+    if: >
+      always() &&
+      needs.typecheck.result == 'success' &&
+      needs.build.result == 'success' &&
+      needs.test-node.result == 'success' &&
+      needs.test-browser.result == 'success' &&
+      (!(github.event_name == 'push' ||
+          (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')) ||
+        (needs.a11y-axe-scan.result == 'success' &&
+          needs.site-e2e.result == 'success' &&
+          needs.catalog-gates.result == 'success'))
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
+        with:
+          playwright: chromium
       - uses: actions/download-artifact@v4
         with:
           name: build-dist
           path: .
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - name: Install Playwright (chromium)
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
-      - name: Install Playwright system deps
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
-      - name: Phase 1 gate
-        run: pnpm run gate:phase1
-      - name: Phase 2 gate
-        run: pnpm run gate:phase2
-      - name: Phase 0 gate
-        run: pnpm run gate:phase0
-      - name: Phase 3 (library beta) gate
-        run: pnpm run gate:phase3
-      - uses: actions/upload-artifact@v6
-        with:
-          name: phase0-gate-output
-          path: docs/phase0-gate-result.txt
-          retention-days: 30
+      - name: Gate — quick
+        if: github.event_name != 'push' && (github.event_name != 'workflow_dispatch' || inputs.full_matrix != 'true')
+        run: pnpm run gate:quick
+      - name: Gate — full
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+        run: pnpm run gate:full

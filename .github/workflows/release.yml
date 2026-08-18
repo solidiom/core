@@ -1,7 +1,35 @@
 name: Release
 
+# Consolidated production release workflow. It can publish packages, deploy the
+# site, or perform both actions with a configurable release gate.
+
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: "What to release"
+        required: true
+        type: choice
+        options:
+          - packages
+          - site
+          - all
+      gate:
+        description: "Gate level before publishing"
+        required: false
+        default: "quick"
+        type: choice
+        options:
+          - quick
+          - full
+  push:
+    branches: [main]
+    paths:
+      - "apps/site/**"
+      - "templates/**"
+      - "registry/**"
+      - "packages/*/docs/**"
+      - "docs/**"
 
 concurrency:
   group: release-${{ github.ref }}
@@ -10,23 +38,81 @@ concurrency:
 env:
   NODE_VERSION: "24"
   PNPM_VERSION: "10.34.5"
+  NODE_OPTIONS: "--max-old-space-size=4096"
 
 jobs:
+  # ─── Determine what to do ──────────────────────────────────────────────────────
+  # Push events on site paths → site-only deploy (no gate needed).
+  # Dispatch → respect inputs.
+
+  plan:
+    runs-on: solidiom-dfw-runner
+    outputs:
+      deploy_packages: ${{ steps.plan.outputs.deploy_packages }}
+      deploy_site: ${{ steps.plan.outputs.deploy_site }}
+      run_gate: ${{ steps.plan.outputs.run_gate }}
+      gate_level: ${{ steps.plan.outputs.gate_level }}
+    steps:
+      - id: plan
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # Auto-deploy site on push to main with site path changes
+            echo "deploy_packages=false" >> "$GITHUB_OUTPUT"
+            echo "deploy_site=true" >> "$GITHUB_OUTPUT"
+            echo "run_gate=false" >> "$GITHUB_OUTPUT"
+            echo "gate_level=quick" >> "$GITHUB_OUTPUT"
+          else
+            # Manual dispatch
+            TARGET="${{ inputs.target }}"
+            GATE="${{ inputs.gate }}"
+            case "$TARGET" in
+              packages)
+                echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
+                echo "deploy_site=false" >> "$GITHUB_OUTPUT"
+                ;;
+              site)
+                echo "deploy_packages=false" >> "$GITHUB_OUTPUT"
+                echo "deploy_site=true" >> "$GITHUB_OUTPUT"
+                ;;
+              all)
+                echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
+                echo "deploy_site=true" >> "$GITHUB_OUTPUT"
+                ;;
+            esac
+            # Gate is required for package publishing, optional for site-only
+            if [ "$TARGET" = "site" ]; then
+              echo "run_gate=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "run_gate=true" >> "$GITHUB_OUTPUT"
+            fi
+            echo "gate_level=$GATE" >> "$GITHUB_OUTPUT"
+          fi
+
+  # ─── Gate ──────────────────────────────────────────────────────────────────────
+
   gate:
+    needs: plan
+    if: needs.plan.outputs.run_gate == 'true'
     runs-on: solidiom-dfw-runner
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v5
+      - uses: ./.github/actions/setup
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: pnpm run gate:phase3
+          playwright: chromium
+      - run: pnpm nx run-many -t build --exclude=@solidiom/site
+      - name: Run gate
+        run: |
+          if [ "${{ needs.plan.outputs.gate_level }}" = "full" ]; then
+            pnpm run gate:full
+          else
+            pnpm run gate:quick
+          fi
 
-  release:
-    needs: gate
+  # ─── Publish Packages ─────────────────────────────────────────────────────────
+
+  publish-packages:
+    needs: [plan, gate]
+    if: always() && needs.plan.outputs.deploy_packages == 'true' && (needs.gate.result == 'success' || needs.gate.result == 'skipped')
     runs-on: solidiom-dfw-runner
     permissions:
       contents: write
@@ -34,71 +120,112 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v6
+      - uses: ./.github/actions/setup
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
           registry-url: "https://registry.npmjs.org"
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
 
-      # REG-008: Sign the registry index with Ed25519 over the published artifact.
-      # The build produces a deterministic, unsigned registry. This step adds the
-      # asymmetric signature using the REGISTRY_SIGN_KEY secret (raw Ed25519 private
-      # key as 64 hex chars). The signed index is then ready for distribution.
-      - name: REG-008 — sign registry index
+      - name: Build packages
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
+
+      # REG-008: Sign the registry index with Ed25519
+      - name: Sign registry index
         env:
           REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
         run: pnpm exec tsx tools/registry-build.ts
 
-      - name: REG-008 — verify signed registry index
+      - name: Verify signed registry index
         run: node packages/cli/dist/bin.js verify --registry
 
-      # Apply changeset versions (bumps package versions, updates changelogs)
+      # Apply changeset versions
       - name: Apply changeset versions
-        run: pnpm changeset version
+        run: |
+          if ls .changeset/*.md 2>/dev/null | grep -qv "README.md"; then
+            pnpm changeset version
+          else
+            echo "No pending changesets — skipping version bump"
+          fi
 
-      # Rebuild with final versions in package.json
+      # Rebuild with final versions
       - name: Rebuild with versioned packages
-        run: pnpm build
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
 
-      # Publish packages to npm with the beta dist-tag.
-      # Authentication: OIDC trusted publishing is the long-term mechanism
-      # (id-token: write permission above enables it). NODE_AUTH_TOKEN is
-      # provided as a fallback for the initial publish before trusted publisher
-      # configurations exist on npmjs.com. Once all @solidiom/* packages have
-      # trusted publishers configured, remove the NODE_AUTH_TOKEN env var below.
+      # Publish to npm
       - name: Publish packages
         run: pnpm changeset publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # Generate beta release artifacts (catalog + pointer)
+      # Generate and verify beta artifacts
       - name: Generate beta artifacts
         run: pnpm exec tsx tools/generate-beta-artifacts.ts --verify
 
-      # Verify beta signing integrity
       - name: Verify beta signing
         env:
           REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
         run: pnpm exec tsx tools/verify-beta-signing.ts
 
-      # Upload artifacts for audit trail
       - name: Upload release artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: beta-release-artifacts
           path: |
             artifacts/beta-catalog.json
             artifacts/beta-pointer.json
             registry/index.json
+          retention-days: 30
 
       # Commit version bumps and changelogs back to main
       - name: Commit release changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add packages/*/package.json packages/*/CHANGELOG.md apps/*/package.json .changeset/ pnpm-lock.yaml
+          git add packages/*/package.json packages/*/CHANGELOG.md apps/*/package.json .changeset/ pnpm-lock.yaml registry/
           git commit -m "chore(release): publish beta packages" || echo "No changes to commit"
           git push
+
+  # ─── Deploy Site ───────────────────────────────────────────────────────────────
+
+  deploy-site:
+    needs: [plan, publish-packages]
+    # Run if: site deploy requested AND (packages succeeded/skipped)
+    if: |
+      always() &&
+      needs.plan.outputs.deploy_site == 'true' &&
+      (needs.publish-packages.result == 'success' || needs.publish-packages.result == 'skipped')
+    runs-on: solidiom-dfw-runner
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+
+      # Build packages for source resolution (site depends on primitive builds)
+      - name: Build packages
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
+
+      - name: Build templates
+        run: pnpm --filter '@solidiom/template-*' build
+
+      - name: Validate site structure
+        run: |
+          pnpm --filter @solidiom/site run boundaries
+          pnpm --filter @solidiom/site run route-parity
+
+      - name: Build site
+        run: pnpm --filter @solidiom/site run build:deploy
+
+      - name: Generate search index
+        run: pnpm --filter @solidiom/site search-index
+
+      - name: Deploy to Cloudflare Pages
+        if: github.ref == 'refs/heads/main'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx wrangler pages deploy apps/site/dist \
+            --project-name=solidiom-site \
+            --branch=main \
+            --commit-dirty=true

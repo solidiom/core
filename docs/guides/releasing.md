@@ -2,240 +2,72 @@
 id: releasing
 title: "Releasing Packages and the Website"
 sidebar_label: Releasing
-description: How to publish @solidiom/* packages to npm and deploy the documentation site, both manually and via CI.
+description: How Solidiom maintainers publish packages and deploy the documentation site through GitHub Actions.
 doc_type: how-to
 audience: "Solidiom maintainers"
 tags: [release, publishing, ci, deployment, guide]
 lifecycle: current
 ---
 
-> **Purpose:** For Solidiom maintainers, documents every release path — from publishing a single hotfix package to running a full beta release with site deployment. Covers manual (local) and CI (GitHub Actions) workflows.
+> **Release policy:** package publishing, registry signing, version commits, and Cloudflare deployment run only in GitHub Actions. Local commands dispatch the audited workflow; they do not publish or deploy directly.
 
-## Overview
+## Release paths
 
-The release system supports four levels of granularity:
-
-| Level              | Scope                                | Command                                     | Use when                              |
-| ------------------ | ------------------------------------ | ------------------------------------------- | ------------------------------------- |
-| **Single package** | One `@solidiom/*` package            | `mise run release:package -- @solidiom/pkg` | Hotfix, new package, adapter release  |
-| **Packages only**  | All packages with pending changesets | `mise run release:packages-only`            | Library-only release, no site changes |
-| **Quick release**  | Packages only + lightweight gate     | `mise run release:quick`                    | Confident release with minimal checks |
-| **Full release**   | Packages + site + full gate suite    | `mise run release:publish`                  | Milestone release, first beta, GA     |
+| Need                                   | Command                              | Result                                                          |
+| -------------------------------------- | ------------------------------------ | --------------------------------------------------------------- |
+| Publish one independent public package | `pnpm release:package @solidiom/pkg` | Builds, typechecks, tests, then directly publishes that package |
+| Publish packages from Changesets       | `pnpm release -- --target packages`  | Dispatches CI release with signing and versioning               |
+| Deploy site only                       | `pnpm release -- --target site`      | Dispatches CI site deployment                                   |
+| Publish packages and deploy site       | `pnpm release -- --target all`       | Dispatches CI release and deployment                            |
+| Use full release validation            | Append `--gate full`                 | Uses the full phase gate before package publishing              |
 
 ## Prerequisites
 
-All release paths require:
+- Node >= 24 and pnpm >= 10 (`mise install`)
+- GitHub CLI installed and authenticated: `gh auth login`
+- A branch/ref containing the intended changes (normally `main`)
+- A Changeset for every package change that needs versioning: `pnpm changeset`
 
-- Node >= 24, pnpm >= 10 (`mise install`)
-- `NPM_TOKEN` — set in `.env` or exported (get from npmjs.com → Access Tokens)
-- Clean git working tree (`git status` shows no changes)
-- On the `main` branch (warning issued if not, but not blocked)
+The GitHub repository must have `NPM_TOKEN`, `REGISTRY_SIGN_KEY`, `CLOUDFLARE_API_TOKEN`, and `CLOUDFLARE_ACCOUNT_ID` configured as Actions secrets. Preview deployment also uses the Cloudflare Access service-token secrets.
 
-Site deployment additionally requires:
+## Unified release workflow
 
-- `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in `.env` or exported
-- `wrangler` available (installed via npx)
+`.github/workflows/release.yml` is the only production release workflow.
 
-## Single-Package Publish
+### Manual dispatch
 
-The fastest path. Builds, typechecks, and tests only the target package (plus its dependency graph), then publishes directly to npm.
-
-### Usage
+The wrapper is the preferred interface because it validates GitHub CLI authentication and follows the workflow run:
 
 ```bash
-# Dry run (no publish)
-mise run release:package:dry-run -- @solidiom/astrojs-solid-next
+# Packages and site, quick gate (default)
+pnpm release
 
-# Publish with beta tag (default)
-mise run release:package -- @solidiom/astrojs-solid-next
+# Packages only
+pnpm release -- --target packages
 
-# Publish with a specific tag
-./scripts/release-package.sh @solidiom/button --tag latest
+# Site only
+pnpm release -- --target site
 
-# Bump version before publishing
-./scripts/release-package.sh @solidiom/runtime --bump patch
-./scripts/release-package.sh @solidiom/runtime --bump prerelease --preid rc
+# Packages and site with the comprehensive gate
+pnpm release -- --target all --gate full
 
-# Skip tests (use with caution)
-./scripts/release-package.sh @solidiom/button --skip-tests
+# Submit without following logs
+pnpm release -- --target packages --no-watch
 ```
 
-### What it does
-
-1. **Preflight** — validates npm auth, checks if package is private, warns about linked-package constraints
-2. **Build** — `pnpm nx build @solidiom/pkg` (builds the target + all upstream dependencies via the nx graph)
-3. **Typecheck** — `pnpm nx typecheck @solidiom/pkg`
-4. **Test** — `pnpm nx test @solidiom/pkg`
-5. **Publish** — `pnpm --filter @solidiom/pkg publish --tag <tag> --access public`
-
-### What it skips
-
-- Full workspace build (only builds the target's dependency graph)
-- Phase gates (0/1/2/3)
-- Registry signing
-- Changeset versioning and changelog generation
-- Site build and deploy
-
-### When to use
-
-- Publishing a new package for the first time (e.g. `@solidiom/astrojs-solid-next`)
-- Hotfixing a single package without touching anything else
-- Adapter or integration releases that are independent of primitives
-- Testing a pre-release before committing to a full release
-
-### Linked packages warning
-
-If the target is in a linked group (defined in `.changeset/config.json`), the script warns you. Currently linked:
-
-- `@solidiom/runtime`, `@solidiom/dialog`, `@solidiom/select`, `@solidiom/calendar`, `@solidiom/carousel`
-
-These should normally be published together via the full release path. The single-package script lets you override this for emergencies.
-
-## Packages-Only Release (Changeset Flow)
-
-Publishes all packages that have pending changesets. Skips the site entirely.
-
-### Usage
+Equivalent GitHub CLI commands are:
 
 ```bash
-# Full gate suite, no site
-mise run release:packages-only
-
-# Quick gate (phase0 only), no site
-mise run release:quick
-
-# Dry run
-mise run release:packages-only:dry-run
+gh workflow run release.yml -f target=packages -f gate=quick
+gh workflow run release.yml -f target=site -f gate=quick
+gh workflow run release.yml -f target=all -f gate=full
 ```
 
-### What it does
+`target` accepts `packages`, `site`, or `all`; `gate` accepts `quick` or `full`. Site-only releases skip the package gate because no package artifact is being published.
 
-1. **Install** — `pnpm install --frozen-lockfile`
-2. **Tests and gates** — format, typecheck, build, unit tests, browser tests, tools tests, then gate:
-   - Full mode: `gate:phase3` (includes phases 0, 1, 2 — most thorough)
-   - Quick mode (`--quick-gate`): `gate:phase0` only (structural checks, no browser tests)
-3. **Registry build** — generates and verifies registry manifests (unsigned locally)
-4. **Version** — `pnpm changeset version` (bumps versions, generates changelogs)
-5. **Rebuild** — rebuilds with final version strings
-6. **Publish** — `pnpm changeset publish --tag beta` (all packages with version bumps)
-7. **Artifacts** — generates `beta-catalog.json` and `beta-pointer.json`
-8. **Commit** — commits version bumps, changelogs, and artifacts
+### Automatic site deployment
 
-### Creating changesets
-
-Before running a packages-only release, you need pending changesets:
-
-```bash
-# Interactive changeset creation
-pnpm changeset
-
-# Check what's pending
-pnpm changeset status
-```
-
-Each changeset is a markdown file in `.changeset/` describing what changed and at what semver level (patch/minor/major). The `changeset version` command consumes them all at once.
-
-### No changesets? No problem
-
-If there are no pending changesets, the release script warns and skips the version step. Packages are still published at their current versions (useful for re-publishing after a failed previous attempt).
-
-## Full Release (Packages + Site)
-
-The complete release pipeline. Publishes packages and deploys the site to Cloudflare Pages.
-
-### Usage
-
-```bash
-# Full release
-mise run release:publish
-
-# Dry run (runs all tests, no publish or deploy)
-mise run release:publish:dry-run
-
-# Skip tests (publish + deploy only — use when tests already passed)
-./scripts/release.sh --skip-tests
-```
-
-### What it does
-
-Everything in "Packages-Only" plus:
-
-6. **Site build** — builds templates, builds site with `build:deploy`, generates Pagefind search index
-7. **Site deploy** — deploys `apps/site/dist` to Cloudflare Pages via wrangler
-
-### Flags reference
-
-| Flag           | Effect                                                       |
-| -------------- | ------------------------------------------------------------ |
-| `--dry-run`    | Run all checks, don't publish or deploy                      |
-| `--skip-tests` | Skip step 2 entirely (dangerous)                             |
-| `--no-site`    | Skip site build and deploy (same as `release:packages-only`) |
-| `--quick-gate` | Use phase0 instead of phase3 in the test step                |
-| `--site-only`  | Build and deploy site only, no package publish               |
-
-Flags combine: `./scripts/release.sh --no-site --quick-gate --dry-run`
-
-## Site-Only Deploy
-
-Builds and deploys the documentation site without touching packages.
-
-### Usage
-
-```bash
-mise run release:site
-```
-
-### What it does
-
-1. Builds all templates (`@solidiom/template-*`)
-2. Builds the site with `build:deploy` (skips i18n validation)
-3. Generates Pagefind search index
-4. Deploys to Cloudflare Pages
-
-### When to use
-
-- Documentation-only changes
-- Template updates
-- Registry route updates
-- After a packages-only release, to update the site separately
-
-## CI Workflows (GitHub Actions)
-
-Three workflows are available, all manually dispatched from the Actions tab or via `gh workflow run`:
-
-### `release-packages.yml` — Package Publish
-
-Publishes packages with registry signing (CI has the `REGISTRY_SIGN_KEY` secret).
-
-```bash
-# Trigger with full gate
-gh workflow run release-packages.yml
-
-# Trigger with quick gate
-gh workflow run release-packages.yml -f quick_gate=true
-```
-
-**Jobs:**
-
-1. **gate** — installs, builds all packages (excluding site), runs phase3 or phase0 gate
-2. **publish** — builds, signs registry (Ed25519), applies changeset versions, rebuilds with final versions, publishes to npm with beta tag, generates and verifies artifacts, commits back to main
-
-**Differences from local:**
-
-- Registry is **signed** (local publishes are unsigned)
-- Uses OIDC `id-token: write` for npm trusted publishing
-- Commits version bumps automatically via github-actions bot
-
-### `release-site.yml` — Site Deploy
-
-Deploys the documentation site to Cloudflare Pages.
-
-```bash
-# Manual trigger
-gh workflow run release-site.yml
-```
-
-**Also triggers automatically** on pushes to `main` that change:
+A push to `main` automatically deploys the site when it changes one of these paths:
 
 - `apps/site/**`
 - `templates/**`
@@ -243,123 +75,110 @@ gh workflow run release-site.yml
 - `packages/*/docs/**`
 - `docs/**`
 
-**Jobs:**
+This push path is site-only: it does not publish packages or modify Changesets.
 
-1. **deploy** — installs, builds packages, builds templates, validates site structure (boundaries + route parity), builds site, generates search index, deploys to Cloudflare
+### What CI does
 
-### `release.yml` — Combined (Legacy)
+For a package release, CI:
 
-The original combined workflow. Runs full gate then publishes packages + site in one pipeline. Retained for milestone releases where you want everything in one atomic operation.
+1. Builds packages and runs the selected gate.
+2. Signs and verifies the registry index with `REGISTRY_SIGN_KEY`.
+3. Applies pending Changesets, then rebuilds with the final versions.
+4. Publishes to npm with the `beta` tag.
+5. Generates and verifies beta artifacts.
+6. Commits version bumps, changelogs, lockfile changes, and registry output with the GitHub Actions bot.
 
-```bash
-gh workflow run release.yml
-```
+For a site deployment, CI builds packages and templates, checks site boundaries and routes, runs `build:deploy`, creates the Pagefind index, and deploys `apps/site/dist` to Cloudflare Pages.
 
-### `ci.yml` — CI Pipeline
+## Single-package release
 
-Not a release workflow, but supports incremental builds:
-
-```bash
-# Full CI
-gh workflow run ci.yml
-
-# Affected-only (faster, only tests changed packages)
-gh workflow run ci.yml -f affected_only=true
-```
-
-## Incremental Builds (nx affected)
-
-For local development, use affected-only commands to skip unchanged packages:
+Use this only for an independent public package. Packages in a Changesets linked group must be released through the unified workflow unless an emergency explicitly justifies `--allow-linked`.
 
 ```bash
-# Build only what changed
-mise run affected:build
+# Validate without publishing
+pnpm release:package @solidiom/astrojs-solid-next --dry-run
 
-# Test only what changed
-mise run affected:test
+# Publish under the default beta tag
+NODE_AUTH_TOKEN=... pnpm release:package @solidiom/astrojs-solid-next
 
-# Typecheck only what changed
-mise run affected:typecheck
+# Publish under a specific tag
+NODE_AUTH_TOKEN=... pnpm release:package @solidiom/button --tag latest
 
-# All three (fast local CI substitute)
-mise run affected:all
+# Bump, rebuild, and publish
+NODE_AUTH_TOKEN=... pnpm release:package @solidiom/button --bump patch
 ```
 
-These compare against `HEAD~1` by default. Nx uses its dependency graph to include downstream packages — if you change `@solidiom/runtime`, all packages that depend on it are also built/tested.
+The script validates the workspace package, blocks private packages, builds, typechecks, tests (unless `--skip-tests` is supplied), and publishes without modifying `.npmrc`. It accepts `NODE_AUTH_TOKEN` or `NPM_TOKEN`.
 
-## Decision Guide
+The linked package group is:
 
+- `@solidiom/runtime`
+- `@solidiom/dialog`
+- `@solidiom/select`
+- `@solidiom/calendar`
+- `@solidiom/carousel`
+
+## CI strategy
+
+The CI/release estate has three workflows:
+
+| Workflow      | Trigger                                          | Purpose                                                                                             |
+| ------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `ci.yml`      | Pull requests, pushes to `main`, manual dispatch | Tiered validation and internal PR previews                                                          |
+| `release.yml` | Site-path pushes to `main`, manual dispatch      | Production package release, site deployment, or both                                                |
+| `nightly.yml` | Daily 04:00 UTC, manual dispatch                 | Solid compatibility matrix, full browser suite, dependency checks, and visual-baseline regeneration |
+
+`ci.yml` runs fast checks on pull requests: format, typecheck, build, a single Node test version, Chromium browser tests, a quick gate, and an internal preview deployment. Pushes to `main` and manual runs add the Node compatibility matrix, accessibility, site verification, CLI smoke tests, catalog gates, and the full gate. Browser compatibility across Chromium, Firefox, and WebKit belongs to the nightly suite.
+
+## Visual baselines
+
+Visual screenshots must be captured in the pinned Linux Playwright image. Use a local container runtime when available:
+
+```bash
+pnpm run visual:update:container
 ```
-Need to publish one package quickly?
-  → mise run release:package -- @solidiom/pkg
 
-Need to release all pending changes without touching the site?
-  → mise run release:packages-only
-
-Confident in the code, want the fastest full release?
-  → mise run release:quick
-
-Milestone release, want maximum confidence?
-  → mise run release:publish
-
-Only docs/site changed?
-  → mise run release:site
-
-Want CI to handle signing and publishing?
-  → gh workflow run release-packages.yml
-
-Want the site auto-deployed on merge?
-  → It already does (release-site.yml triggers on path changes to main)
-```
+Otherwise dispatch `nightly.yml` with `regenerate_baselines=true` and a descriptive `baseline_reason`, download the `visual-baselines` artifact, review it, and commit the intentional changes.
 
 ## Troubleshooting
 
-### "No unreleased changesets found"
+### No pending Changesets
 
-`@changesets/cli@3.0.0` exits with code 1 when no changesets exist. The release script handles this gracefully — it checks for pending changesets before calling `changeset version` and skips the step if none are found.
-
-If you see this error, it means you forgot to create a changeset:
+Create one before a package release:
 
 ```bash
 pnpm changeset
+pnpm changeset status
 ```
 
-### "Working tree is not clean"
+If no Changesets exist, the workflow skips the version bump. It does not create an npm release at an unchanged version.
 
-The release script requires a clean git state. Commit or stash your changes first.
+### Release workflow does not start
 
-### "NPM_TOKEN is invalid"
-
-Your token expired or was revoked. Generate a new one at npmjs.com → Access Tokens → Generate New Token (Classic, Publish).
-
-### Linked package warning
-
-If `release:package` warns about linked packages, consider whether the change truly needs to be published alone. If you changed `@solidiom/runtime`'s API, its consumers (`dialog`, `select`, etc.) likely need a coordinated release.
-
-### Registry signing fails in CI
-
-The `REGISTRY_SIGN_KEY` secret must be set in the repository's GitHub Actions secrets. It's a 64-character hex string (Ed25519 private key). Local releases are always unsigned — signing only happens in CI.
-
-### Site build fails with i18n validation
-
-The release script uses `build:deploy` which skips `i18n:validate`. If you need to run the full i18n check:
+Confirm the current GitHub CLI identity can dispatch actions and that the chosen ref exists remotely:
 
 ```bash
-mise run i18n:validate
+gh auth status
+gh workflow list
 ```
 
-This is a GA gate — beta releases are not expected to have fully reviewed translations.
+Use `pnpm release -- --ref main` to dispatch against an explicit branch.
 
-## File Reference
+### Registry signing fails
 
-| File                                     | Purpose                                                     |
-| ---------------------------------------- | ----------------------------------------------------------- |
-| `scripts/release.sh`                     | Main release script (all flags)                             |
-| `scripts/release-package.sh`             | Single-package publish script                               |
-| `.github/workflows/release-packages.yml` | CI: package-only publish with signing                       |
-| `.github/workflows/release-site.yml`     | CI: site deploy (auto + manual)                             |
-| `.github/workflows/release.yml`          | CI: combined release (legacy)                               |
-| `.changeset/config.json`                 | Changeset configuration (linked packages, ignored packages) |
-| `tools/registry-build.ts`                | Registry manifest generator                                 |
-| `tools/generate-beta-artifacts.ts`       | Beta catalog and pointer generator                          |
-| `tools/verify-beta-signing.ts`           | Ed25519 signature verifier                                  |
+Set the repository `REGISTRY_SIGN_KEY` Actions secret. It must contain the configured Ed25519 private-key material. Signing is deliberately CI-only.
+
+### Site deployment fails
+
+Check the `release.yml` run for site boundary, route-parity, build, or Cloudflare errors. `build:deploy` intentionally skips `i18n:validate`; the stricter site validation remains part of CI.
+
+## File reference
+
+| File                            | Purpose                                             |
+| ------------------------------- | --------------------------------------------------- |
+| `scripts/release.sh`            | Thin dispatcher for `release.yml`                   |
+| `scripts/release-package.mjs`   | Independent single-package publisher                |
+| `.github/workflows/release.yml` | Unified package/site production release             |
+| `.github/workflows/ci.yml`      | Tiered pull-request and main-branch CI              |
+| `.github/workflows/nightly.yml` | Scheduled compatibility, browser, and visual checks |
+| `.changeset/config.json`        | Changeset and linked-package configuration          |

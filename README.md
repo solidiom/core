@@ -22,7 +22,7 @@ Solidiom is built strictly for the **Solid 2.0 compiler**, diverging from React/
 pnpm install
 
 # Start the website dev server
-mise run dev:site       # or: pnpm --filter @solidiom/site exec astro dev --force
+mise run dev:site       # or: pnpm --filter @solidiom/site run dev
 
 # Build everything
 mise run build        # or: pnpm nx run-many -t build
@@ -91,25 +91,28 @@ The interactive docs live in `apps/site/`. See [`apps/site/README.md`](apps/site
 
 All tasks are defined in `.mise.toml`. Run `mise tasks` to list them.
 
-| Task                                         | Description                               |
-| -------------------------------------------- | ----------------------------------------- |
-| `mise run build`                             | Build all packages (nx dependency graph)  |
-| `mise run build:package -- @solidiom/button` | Build a single package                    |
-| `mise run build:recipes`                     | Build CSS + Tailwind recipe packages      |
-| `mise run build:site`                        | Build the site                            |
-| `mise run build:registry`                    | Generate registry manifests               |
-| `mise run dev`                               | Start site dev server                     |
-| `mise run test`                              | Run all unit tests                        |
-| `mise run test:browser`                      | Browser-mode component tests (Playwright) |
-| `mise run test:e2e`                          | End-to-end tests                          |
-| `mise run typecheck`                         | Type-check all packages                   |
-| `mise run lint`                              | Lint all packages                         |
-| `mise run format`                            | Format with Prettier                      |
-| `mise run changeset`                         | Create a changeset                        |
-| `mise run version`                           | Bump versions from changesets             |
-| `mise run release`                           | Build + publish to npm                    |
-| `mise run clean`                             | Remove all dist/ directories              |
-| `mise run graph`                             | Open nx dependency graph                  |
+| Task                                           | Description                                     |
+| ---------------------------------------------- | ----------------------------------------------- |
+| `mise run build`                               | Build all packages (Nx dependency graph)        |
+| `mise run build:package -- @solidiom/button`   | Build a single package                          |
+| `mise run build:recipes`                       | Build CSS + Tailwind recipe packages            |
+| `mise run build:site`                          | Build the site                                  |
+| `mise run site:validate`                       | Run the CI-equivalent site validation and build |
+| `mise run build:registry`                      | Generate registry manifests                     |
+| `mise run dev:site`                            | Start the site dev server                       |
+| `mise run test`                                | Run all unit tests                              |
+| `mise run test:browser`                        | Run the full browser component matrix           |
+| `mise run test:e2e`                            | Run end-to-end tests                            |
+| `mise run ci:quick`                            | Run the fast local PR-tier CI checks            |
+| `mise run ci:full`                             | Run the comprehensive local CI checks           |
+| `mise run nightly:browser-full`                | Run the Chromium, Firefox, and WebKit suite     |
+| `mise run changeset`                           | Create a Changeset                              |
+| `mise run release:publish`                     | Dispatch the GitHub package-and-site release    |
+| `mise run release:packages`                    | Dispatch the GitHub package-only release        |
+| `mise run release:site`                        | Dispatch the GitHub site-only release           |
+| `mise run release:package -- @solidiom/button` | Locally publish one independent package         |
+| `mise run clean`                               | Remove all dist/ directories                    |
+| `mise run graph`                               | Open the Nx dependency graph                    |
 
 ## Testing GitHub Actions locally
 
@@ -150,7 +153,7 @@ act push -W .github/workflows/ci.yml -l
 # Run a single job (fast iteration)
 act push -W .github/workflows/ci.yml -j build
 act push -W .github/workflows/ci.yml -j typecheck
-act push -W .github/workflows/ci.yml -j phase1-gate
+act push -W .github/workflows/ci.yml -j gate
 
 # Run the full workflow graph
 act push -W .github/workflows/ci.yml
@@ -187,8 +190,8 @@ This avoids the qemu segfaults entirely, at the cost of no longer testing the ex
 ### Known caveats
 
 - `actions/cache/restore` and `actions/cache/save` have no real backend under `act` and typically no-op; this is not a problem in practice since it forces every local run to be a genuine clean build.
-- Secrets referenced by workflows (none currently active — `release.yml`'s publish step is commented out) need to be supplied with `-s KEY=value` or a `.secrets` file.
-- Full-workflow runs (`test-solid-matrix`'s 6-way matrix, Playwright browser installs) are slow under emulation; prefer targeting individual jobs with `-j` while iterating.
+- Release and preview-deployment workflows require repository secrets. Do not reproduce publishing or Cloudflare deployment locally with `act`; use the GitHub Actions workflow instead.
+- Full workflow runs (the nightly Solid compatibility matrix and Playwright browser installs) are slow under emulation; prefer targeting individual jobs with `-j` while iterating.
 
 ## Key technologies
 

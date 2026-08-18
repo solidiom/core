@@ -1,239 +1,158 @@
 # CI Pipeline
 
-> Architecture, job graph, and local reproduction guide for `.github/workflows/ci.yml`.
-
----
+> Architecture and local reproduction guide for the three-workflow CI/release strategy.
 
 ## Overview
 
-The CI pipeline validates every aspect of the Solidiom monorepo: formatting, types, builds, tests (unit, browser, accessibility, E2E, visual), catalog integrity, and phase gates. It runs on `workflow_dispatch` (manual trigger via GitHub Actions UI or `gh workflow run ci.yml`).
+Solidiom uses tiered validation to keep pull-request feedback fast while retaining broad compatibility and release coverage:
 
-A separate **Solid compatibility matrix** (`solid-compat.yml`) runs nightly to test against multiple SolidJS beta versions without blocking PRs.
+- **Pull requests:** format, typecheck, package build, Node tests on Node 24, Chromium browser tests, quick gate, and protected previews for internal PRs.
+- **Pushes to `main` and manual CI:** the PR checks plus Node 26, accessibility evidence, site build/E2E/visual/Lighthouse, offline CLI smoke tests, catalog gates, and the full gate.
+- **Nightly:** Solid version matrix, Chromium/Firefox/WebKit component tests, dependency freshness, and optional visual-baseline regeneration.
 
----
+## Workflows
 
-## Job Dependency Graph
+| File          | Trigger                                          | Purpose                                                      |
+| ------------- | ------------------------------------------------ | ------------------------------------------------------------ |
+| `ci.yml`      | Pull requests; pushes to `main`; manual dispatch | Tiered validation and internal PR preview deployments        |
+| `release.yml` | Site-path pushes to `main`; manual dispatch      | Unified production package release, site deployment, or both |
+| `nightly.yml` | Daily 04:00 UTC; manual dispatch                 | Full compatibility and environment-sensitive coverage        |
 
-```
+`release.yml` receives `target` (`packages`, `site`, `all`) and `gate` (`quick`, `full`) inputs. Its automatic `main` trigger is site-only and is limited to site, template, registry, package-doc, and documentation paths.
+
+## CI job graph
+
+### Pull request tier
+
+```text
 install
 ├── format
 ├── typecheck
-├── build ─────────────────────────────────────────────┐
-│   ├── test-node (matrix: Node 24, 26)                │
-│   ├── test-browser                                   │
-│   ├── a11y-axe-scan                                  │
-│   ├── catalog-gates                                  │
-│   ├── vertical-slice-gate (also needs site-check)    │
-│   └── cli-smoke-create-prep → cli-smoke-create (×4)  │
-├── site-check                                         │
-│   └── site-build                                     │
-│       ├── site-e2e                                   │
-│       ├── site-visual (container)                    │
-│       ├── site-lighthouse (advisory)                 │
-│       ├── beta-acceptance-report                     │
-│       └── beta-acceptance-e2e                        │
-└── gates (needs: typecheck, build, test-node,         │
-           test-browser, a11y-axe-scan,                │
-           site-e2e, catalog-gates)                    │
+├── build
+│   ├── test-node (Node 24)
+│   └── test-browser (Chromium)
+└── preview-deploy (internal PRs only)
+
+gate ← typecheck + build + test-node + test-browser
 ```
 
----
+### Main/manual tier
 
-## Key Design Decisions
+```text
+install
+├── format
+├── typecheck
+├── build
+│   ├── test-node (Node 24 and 26)
+│   ├── test-browser (Chromium)
+│   ├── a11y-axe-scan
+│   ├── cli-smoke-create-prep → cli-smoke-create (npm, pnpm, yarn, bun)
+│   └── catalog-gates
+├── site-check → site-build → site-e2e + site-visual + site-lighthouse
+└── vertical-slice-gate
 
-### 1. Build Once, Download Everywhere
+gate ← typecheck + build + test-node + test-browser + a11y-axe-scan + site-e2e + catalog-gates
+```
 
-The `build` job uploads all `packages/*/dist` and `apps/*/dist` (excluding the site) as an artifact. Every downstream job downloads these instead of rebuilding, eliminating ~9 redundant `pnpm build` invocations.
+The `gate:quick` command runs Phase 0. `gate:full` runs Phase 3, which invokes Phases 0–2 before its own checks. The older `gate:phase0` through `gate:phase3` aliases remain available for targeted local investigation.
 
-### 2. Playwright Browser Caching
+## Design decisions
 
-Jobs that need Playwright browsers use `actions/cache` keyed on the lockfile hash. On cache hit, only system dependencies are installed (`npx playwright install-deps`), not the browsers themselves (~400MB–1.2GB savings per job).
+### Build artifacts
 
-### 3. Consolidated Gate Jobs
+The package build uploads `packages/*/dist` and non-site `apps/*/dist` once. Downstream tests download those artifacts instead of rebuilding where practical.
 
-The four phase gates (phase1, phase2, phase0, phase3) run sequentially in a single `gates` job rather than as separate jobs. Each gate script is lightweight — the expensive work (build, test) has already passed in upstream jobs.
+### Shared setup
 
-### 4. Solid Matrix Separation
-
-The 6-job Solid compatibility matrix (3 tiers × 2 Node versions) runs in a separate `solid-compat.yml` workflow on a nightly schedule + manual dispatch, keeping ~30 minutes off the PR critical path.
-
-### 5. Composite Setup Action
-
-`.github/actions/setup/action.yml` encapsulates the repeated pnpm/node/cache-restore/install boilerplate. Every job calls:
+`.github/actions/setup/action.yml` centralizes Node/pnpm setup, module-cache restore, dependency installation, and optional Playwright browser setup:
 
 ```yaml
 - uses: actions/checkout@v5
 - uses: ./.github/actions/setup
+  with:
+    playwright: chromium
 ```
 
-### 6. Site Build Exclusion
+### Browser coverage
 
-The site (`@solidiom/site`) is excluded from the library `build` job because it has its own dedicated `site-build` job with independent validation steps.
+CI uses Chromium for rapid feedback. `nightly.yml` adds Firefox and WebKit to catch browser-specific regressions without making each PR expensive. The pinned `mcr.microsoft.com/playwright:v1.62.1-noble` container is used for visual snapshots and their regeneration.
 
----
+### Compatibility coverage
 
-## Workflows
+The nightly Solid matrix tests the `low`, `mid`, and `high` configured Solid versions under Node 24 and Node 26. It uses a non-frozen install only after the matrix script updates the workspace overrides.
 
-| File                   | Trigger                                 | Purpose                                 |
-| ---------------------- | --------------------------------------- | --------------------------------------- |
-| `ci.yml`               | `workflow_dispatch`                     | Full CI pipeline (19 jobs)              |
-| `solid-compat.yml`     | Nightly 04:00 UTC + `workflow_dispatch` | Solid version compatibility matrix      |
-| `release.yml`          | `workflow_dispatch`                     | Build → sign → publish → commit back    |
-| `preview-deploy.yml`   | `workflow_dispatch`                     | Deploy preview site to Cloudflare Pages |
-| `visual-baselines.yml` | `workflow_dispatch`                     | Regenerate visual regression baselines  |
+### Security controls
 
----
+- Fork PRs never receive deployment secrets; preview deployment is limited to PRs from this repository.
+- Release signing uses `REGISTRY_SIGN_KEY` only inside `release.yml`.
+- npm publishing occurs only in CI for Changeset releases.
+- Releases commit only targeted version, changelog, lockfile, Changeset, and registry paths.
+- Every install is frozen except compatibility-matrix installs that intentionally override Solid versions.
 
-## Jobs Reference
-
-| Job                      | Depends On                                                                        | What It Does                                                             |
-| ------------------------ | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `install`                | —                                                                                 | `pnpm install --frozen-lockfile`, cache node_modules                     |
-| `format`                 | install                                                                           | `prettier --check .`                                                     |
-| `typecheck`              | install                                                                           | `nx run-many -t typecheck`                                               |
-| `build`                  | install                                                                           | Build all packages, run 8 integrity/parity audits, upload dist artifacts |
-| `test-node`              | build                                                                             | Unit + tools tests (Node 24/26 matrix), downloads build artifacts        |
-| `test-browser`           | build                                                                             | Browser component tests + RECIPE-005 parity                              |
-| `a11y-axe-scan`          | build                                                                             | Axe accessibility scans, evidence generation, coverage gate              |
-| `site-check`             | install                                                                           | Astro check, import boundaries, i18n validation                          |
-| `site-build`             | site-check                                                                        | Astro build, Pagefind index, REG-007 route check                         |
-| `site-e2e`               | site-build                                                                        | Playwright E2E against built site                                        |
-| `site-visual`            | site-build                                                                        | Visual regression in pinned Playwright container                         |
-| `site-lighthouse`        | site-build                                                                        | Lighthouse budgets (advisory, continue-on-error)                         |
-| `cli-smoke-create-prep`  | build                                                                             | Warm Verdaccio offline registry snapshot                                 |
-| `cli-smoke-create`       | build, prep                                                                       | Offline create/install/build/test (npm, pnpm, yarn, bun)                 |
-| `beta-acceptance-report` | site-build                                                                        | BETA-002 static-build acceptance (60 checks)                             |
-| `beta-acceptance-e2e`    | site-build                                                                        | BETA-002 cross-browser acceptance (111 checks)                           |
-| `catalog-gates`          | build                                                                             | Component + block catalog verification                                   |
-| `vertical-slice-gate`    | build, site-check                                                                 | VS-004 gate (G2 exit checklist)                                          |
-| `gates`                  | typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e, catalog-gates | Phase 1→2→0→3 gates sequentially                                         |
-
----
-
-## Running CI Locally
-
-All CI jobs have equivalent mise tasks. Use the orchestrators for common workflows:
+## Manual operations
 
 ```bash
-# Fast check (format + typecheck + build + tests + gates, ~10 min)
-mise run ci:quick
+# Manual CI; defaults to the full tier
+gh workflow run ci.yml
 
-# Full pre-push (everything except Node matrix and offline smoke, ~20 min)
-mise run ci:prepush
+# Run CI against only affected packages
+gh workflow run ci.yml -f affected_only=true
 
-# Complete CI (mirrors ci.yml, ~45 min)
-mise run ci:all
+# Package release after creating Changesets
+pnpm release -- --target packages
 
-# Solid compatibility matrix (mirrors solid-compat.yml, ~30 min)
-mise run ci:solid-matrix
+# Site-only deployment
+pnpm release -- --target site
+
+# Full release with comprehensive release validation
+pnpm release -- --target all --gate full
+
+# Regenerate visual baselines in the CI container
+gh workflow run nightly.yml -f regenerate_baselines=true -f baseline_reason="intentional visual update"
 ```
 
-### Individual Tasks
+## Local equivalents
 
 ```bash
-mise run ci:install          # Install from frozen lockfile
-mise run ci:format           # Prettier check
-mise run ci:typecheck        # Type-check all packages
-mise run ci:build            # Build + integrity audits
-mise run ci:test-node        # Unit + tools tests
-mise run ci:test-browser     # Browser component tests
-mise run ci:a11y-axe-scan    # Accessibility scans
-mise run ci:site-check       # Site boundaries + content validation
-mise run ci:site-build       # Astro build + search index
-mise run ci:site-e2e         # Site E2E tests
-mise run ci:site-visual      # Visual baselines (advisory on macOS)
-mise run ci:site-lighthouse  # Lighthouse (advisory)
-mise run ci:catalog-gates    # Catalog verification
-mise run ci:vertical-slice-gate  # VS-004 gate
-mise run ci:gates            # Consolidated phase gates
-mise run ci:smoke-create-prep    # Warm offline registry
-mise run ci:smoke-create         # Offline smoke matrix
-mise run ci:beta-acceptance-report  # BETA-002 report
-mise run ci:beta-acceptance-e2e     # BETA-002 E2E
+pnpm run format:check
+pnpm typecheck
+pnpm nx run-many -t build --exclude=@solidiom/site
+pnpm test
+pnpm run test:tools
+pnpm run test:browser
+pnpm run gate:quick
+pnpm run gate:full
 ```
 
----
+For visual snapshots, prefer `pnpm run visual:container` or `pnpm run visual:update:container`; macOS rendering is not comparable to the Linux CI baseline.
 
-## Caching Strategy
+## Caching
 
-| Cache                     | Key                                                        | Path                                            | Purpose                                       |
-| ------------------------- | ---------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------- |
-| Node modules              | `modules-{lockfile hash}`                                  | `node_modules`, `packages/*/node_modules`, etc. | Avoid re-resolving deps                       |
-| Playwright browsers       | `playwright-{chromium\|all}-{lockfile hash}`               | `~/.cache/ms-playwright`                        | Avoid re-downloading 400MB–1.2GB              |
-| Offline registry snapshot | `offline-registry-snapshot-{OS}-{templates+lockfile hash}` | `tools/offline-fixture/.registry-snapshot`      | Avoid re-warming Verdaccio                    |
-| Build artifacts           | Uploaded per-run (retention: 1 day)                        | `packages/*/dist`, `apps/*/dist`                | Eliminate redundant builds                    |
-| Site dist                 | Uploaded per-run                                           | `apps/site/dist`                                | Share built site across E2E/visual/lighthouse |
-
----
-
-## Security Controls
-
-- **Frozen lockfile** in all jobs prevents dependency resolution changes
-- **Fork PR guard** on preview-deploy prevents fork PRs from accessing secrets
-- **No `${{ }}` in shell `run:` steps** — all user/dispatch inputs go through `env:` blocks
-- **Targeted `git add`** in release workflow (no `git add -A`)
-- **`id-token: write`** enables npm provenance via OIDC
-- **Ed25519 registry signing** in release workflow with signature verification
-
----
+| Cache                     | Purpose                                                     |
+| ------------------------- | ----------------------------------------------------------- |
+| pnpm store                | Reuses downloaded package archives                          |
+| module cache              | Restores workspace `node_modules` keyed by `pnpm-lock.yaml` |
+| Playwright browser cache  | Reuses requested browser binaries by lockfile hash          |
+| offline registry snapshot | Reuses the prepared CLI smoke-test registry                 |
+| build/site artifacts      | Shares output among jobs within a workflow run              |
 
 ## Troubleshooting
 
-### `ci:build` fails on "stale artifacts"
+### Stale generated artifacts
 
-The BUILD-001 check detected that `pnpm build` produced different output than what's committed. Run locally and commit:
+The package build rejects stale registry, source-emission, or accessibility artifacts. Regenerate and commit them:
 
 ```bash
-pnpm build && pnpm run report:a11y-evidence && pnpm run registry:build
-git add registry/ packages/*/source/
-git commit -m "chore: regenerate build artifacts"
+pnpm build
+pnpm run report:a11y-evidence
+pnpm run registry:build
+git add registry/ packages/*/source/ packages/*/docs/accessibility/evidence.json
 ```
 
-### `ci:site-check` or `ci:site-build` pre-existing failures
+### CLI smoke tests fail on a cache miss
 
-Two known pre-existing gates that may fail locally:
+The `cli-smoke-create` matrix needs its `cli-smoke-create-prep` job to warm the offline snapshot first. CI enforces this dependency; locally, run `pnpm run smoke:create:prep` before the smoke test.
 
-- **`astro check`** — 148 type errors in Astro pages (tracked separately)
-- **`translation:check`** — 235 stale translations awaiting human review
+### Visual differences on macOS
 
-The mise tasks bypass these. The GitHub CI workflow runs the full `pnpm --filter @solidiom/site check` which includes both.
-
-### Playwright on macOS
-
-Visual baselines are rendered on Linux (ubuntu-latest). Running `ci:site-visual` on macOS will show font-rendering diffs on nearly every snapshot. This is expected — only trust the CI job for visual correctness.
-
-### Offline smoke tests need prep
-
-`ci:smoke-create` requires `ci:smoke-create-prep` to have run first (it warms a local Verdaccio registry). The prep step requires network access.
-
----
-
-## Adding a New CI Job
-
-1. Add the job to `.github/workflows/ci.yml` using the composite action:
-
-   ```yaml
-   my-new-job:
-     needs: build
-     runs-on: ubuntu-latest
-     steps:
-       - uses: actions/checkout@v5
-       - uses: ./.github/actions/setup
-       - uses: actions/download-artifact@v4
-         with:
-           name: build-dist
-           path: .
-       - run: pnpm run my-check
-   ```
-
-2. Add a corresponding mise task to `.mise.toml`:
-
-   ```toml
-   [tasks."ci:my-new-job"]
-   description = "CI job `my-new-job`: description here"
-   run = "pnpm run my-check"
-   ```
-
-3. Add it to the appropriate orchestrator(s) (`ci:all`, `ci:prepush`, `ci:quick`).
-
-4. If it needs Playwright, add the cache + conditional install pattern (see `test-node` for reference).
+Screenshot baselines are Linux-specific. Do not update them with a host Playwright invocation; use the container script or the explicit nightly baseline-dispatch input.

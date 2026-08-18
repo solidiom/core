@@ -1,0 +1,143 @@
+name: Nightly
+
+# Comprehensive nightly suite combining:
+# - Solid compatibility matrix (3 tiers × 2 Node versions)
+# - Full 3-browser component test matrix (Chromium + Firefox + WebKit)
+# - Visual baseline regeneration (on dispatch with reason)
+#
+# These tests are too slow or environment-sensitive for PR/main CI but
+# catch regressions that would otherwise slip through.
+
+on:
+  schedule:
+    # Every day at 04:00 UTC
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+    inputs:
+      regenerate_baselines:
+        description: "Regenerate visual baselines (provide reason below)"
+        required: false
+        default: "false"
+        type: choice
+        options: ["false", "true"]
+      baseline_reason:
+        description: "Why baselines are being regenerated (required if regenerating)"
+        required: false
+        type: string
+
+concurrency:
+  group: nightly-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "24"
+  PNPM_VERSION: "10.34.5"
+  NODE_OPTIONS: "--max-old-space-size=4096"
+
+jobs:
+  # ─── Solid Compatibility Matrix ────────────────────────────────────────────────
+  # Tests against multiple SolidJS beta versions (low/mid/high) to detect
+  # compatibility regressions before they reach users.
+
+  solid-compat:
+    runs-on: solidiom-dfw-runner
+    strategy:
+      fail-fast: false
+      matrix:
+        solid-tier: [low, mid, high]
+        node-version: [24, 26]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node-version }}
+          frozen-lockfile: "false"
+          playwright: chromium firefox webkit
+      - name: Set Solid version (${{ matrix.solid-tier }})
+        run: node scripts/set-solid-version.mjs ${{ matrix.solid-tier }}
+      - name: Reinstall with overridden versions
+        run: pnpm install --no-frozen-lockfile
+      - name: Build
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
+      - name: Unit tests
+        run: pnpm nx run-many -t test --exclude=@solidiom/tests-package-source-parity,@solidiom/site
+      - name: Browser tests (all browsers)
+        run: pnpm exec vitest run --config vitest.browser.config.ts
+
+  # ─── Full Browser Matrix ───────────────────────────────────────────────────────
+  # CI runs browser tests with Chromium only for speed. This job runs the full
+  # 3-browser suite to catch browser-specific regressions nightly.
+
+  browser-full:
+    runs-on: solidiom-dfw-runner
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+        with:
+          playwright: chromium firefox webkit
+      - name: Build packages
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
+      - name: Browser tests (Chromium + Firefox + WebKit)
+        run: pnpm exec vitest run --config vitest.browser.config.ts
+      - name: Recipe parity (cross-browser)
+        run: pnpm run test:recipe-parity
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: nightly-browser-traces
+          path: test-results/
+          retention-days: 7
+
+  # ─── Visual Baseline Regeneration ──────────────────────────────────────────────
+  # Runs inside the pinned Playwright container so screenshot rendering is
+  # reproducible. Only runs on manual dispatch with regenerate_baselines=true.
+
+  visual-baselines:
+    if: github.event_name == 'workflow_dispatch' && inputs.regenerate_baselines == 'true'
+    runs-on: solidiom-dfw-runner
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble
+      options: --ipc=host
+    steps:
+      - name: Record reason
+        run: echo "Regenerating visual baselines — ${{ inputs.baseline_reason }}"
+
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+
+      - name: Build site
+        run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
+
+      - name: Capture baselines
+        env:
+          PLAYWRIGHT_USE_EXISTING_BUILD: "1"
+        run: pnpm --filter @solidiom/site run test:visual:update
+
+      - name: Summarise
+        run: |
+          COUNT=$(find apps/site/tests/visual/__screenshots__ -name '*.png' | wc -l | tr -d ' ')
+          echo "Captured $COUNT baseline images." >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo ""
+            echo "Changed relative to the committed baselines:"
+            echo '```'
+            git -c safe.directory='*' status --short -- apps/site/tests/visual/__screenshots__ || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: visual-baselines
+          path: apps/site/tests/visual/__screenshots__
+          retention-days: 14
+
+  # ─── Dependency Freshness Check ────────────────────────────────────────────────
+  # Checks key libraries for available updates and reports drift.
+
+  deps-check:
+    runs-on: solidiom-dfw-runner
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+      - name: Check for dependency updates
+        run: pnpm run deps:check

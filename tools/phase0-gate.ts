@@ -183,12 +183,16 @@ check("CI workflow exists", fileExists(".github/workflows/ci.yml"))
 check("release workflow exists", fileExists(".github/workflows/release.yml"))
 check("changeset config exists", fileExists(".changeset/config.json"))
 check(
-  "CI has phase0-gate job",
-  fileContains(".github/workflows/ci.yml", "phase0-gate"),
-  "CI must run the phase0 gate",
+  "CI runs gate:quick",
+  fileContains(".github/workflows/ci.yml", "gate:quick"),
+  "CI must run the quick gate (includes phase0)",
 )
 check("CI has browser test job", fileContains(".github/workflows/ci.yml", "test-browser"))
-check("CI has solid matrix job", fileContains(".github/workflows/ci.yml", "test-solid-matrix"))
+check(
+  "Nightly has solid compat matrix",
+  fileContains(".github/workflows/nightly.yml", "solid-compat"),
+  "Nightly workflow must run the Solid compatibility matrix",
+)
 
 // ─── Summary ────────────────────────────────────────────────────────────
 summarize("Phase 0 Gate")
