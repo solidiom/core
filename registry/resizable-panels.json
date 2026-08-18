@@ -36,7 +36,7 @@
     "evidenceIds": [
       "axe-resizable-panels-scan-v1"
     ],
-    "lastReviewed": "2026-08-14T03:47:36.159Z"
+    "lastReviewed": "2026-08-18T03:43:47.313Z"
   },
   "documentation": {
     "status": "complete",
@@ -76,11 +76,11 @@
       "src/panels-context.ts": "9ab5d1c128be258daf202afc585eaa4745e8805ae9af4a4773620815007347ba",
       "src/panels.tsx": "00600ba0ae703e17aea8731f87fbc8c31cdf6934f1c46c973c7a0e463b5465a6"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-18T03:16:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/resizable-panels"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-18T03:16:44.000Z"
 }

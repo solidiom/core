@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-skeleton-scan-v1"
     ],
-    "lastReviewed": "2026-08-14T03:47:36.159Z"
+    "lastReviewed": "2026-08-18T03:43:47.313Z"
   },
   "documentation": {
     "status": "complete",
@@ -65,11 +65,11 @@
     "fileDigests": {
       "src/index.tsx": "0b088d8443d2f846fea69bf7c96b161290b6e91788e786a8c91201d2818999ff"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-18T03:16:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/skeleton"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-18T03:16:44.000Z"
 }

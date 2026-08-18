@@ -6,13 +6,13 @@ This document describes the process and all the places that need updating when b
 
 When bumping versions across all packages, these are the files/locations that need updating:
 
-| Location | What to update |
-|----------|----------------|
-| `packages/*/package.json` | The `"version"` field in every package |
-| `registry/*.json` | Per-primitive manifests (contain `"version"` field) |
-| `registry/index.json` | Catalog index (lists version per primitive) |
-| `registry/components/*.json` | Per-component manifests |
-| `tools/__snapshots__/registry-build.test.ts.snap` | Test snapshot of the registry index structure |
+| Location                                          | What to update                                      |
+| ------------------------------------------------- | --------------------------------------------------- |
+| `packages/*/package.json`                         | The `"version"` field in every package              |
+| `registry/*.json`                                 | Per-primitive manifests (contain `"version"` field) |
+| `registry/index.json`                             | Catalog index (lists version per primitive)         |
+| `registry/components/*.json`                      | Per-component manifests                             |
+| `tools/__snapshots__/registry-build.test.ts.snap` | Test snapshot of the registry index structure       |
 
 ## Step-by-Step Process
 
@@ -42,6 +42,7 @@ pnpm exec tsx tools/registry-build.ts
 ```
 
 This updates:
+
 - `registry/<primitive>.json` — each primitive manifest's `version` field
 - `registry/components/<component>.json` — each component manifest's `version` field
 - `registry/index.json` — the catalog with version info for all entries
@@ -88,6 +89,7 @@ pnpm exec vitest run tools/registry-build.test.ts --update
 ```
 
 Changesets will:
+
 - Bump only the packages that changed
 - Generate `CHANGELOG.md` entries
 - Respect semver (patch/minor/major based on changeset type)

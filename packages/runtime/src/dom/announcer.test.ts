@@ -191,8 +191,8 @@ describe("createAnnouncer", () => {
     })
     // After owner disposal, timers are cleaned up — advancing should not throw
     vi.advanceTimersByTime(10000)
-    // Signal retains last value since cleanup prevents timers from firing
-    expect(politeMsg!()).toBe("owner scoped")
+    // onCleanup calls destroy() which resets the message
+    expect(politeMsg!()).toBe("")
   })
 
   it("uses default clearDelay of 7000ms", () => {

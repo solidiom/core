@@ -38,7 +38,7 @@
     "evidenceIds": [
       "axe-combobox-scan-v1"
     ],
-    "lastReviewed": "2026-08-14T03:47:36.159Z"
+    "lastReviewed": "2026-08-18T03:43:47.313Z"
   },
   "documentation": {
     "status": "complete",
@@ -81,11 +81,11 @@
       "src/combobox.tsx": "a815a32fa87440d20dccd5a48c62d10bcf73ad4f0cd2166c80adb5e33a7d38dc",
       "src/index.tsx": "29894f64708d6022ada60f6167da86e259fac7d09bd578c1fa7df4bb071171e7"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-18T03:16:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/combobox"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-18T03:16:44.000Z"
 }
