@@ -996,6 +996,34 @@ function indexWithoutStamps(index: IndexManifestV3): unknown {
   return { ...rest, integrity: integrityRest }
 }
 
+/** Component manifest body with generation stamps removed. */
+function componentWithoutStamps(manifest: ComponentManifest): unknown {
+  const { lastUpdated: _lastUpdated, integrity, ...rest } = manifest
+  const { lastGenerated: _lastGenerated, ...integrityRest } = integrity
+  return { ...rest, integrity: integrityRest }
+}
+
+/**
+ * Reuse the committed component manifest's stamps when nothing else changed.
+ */
+function withStableComponentStamps(candidate: ComponentManifest): ComponentManifest {
+  const committed = readCommittedJson<ComponentManifest>(`components/${candidate.name}.json`)
+  if (!committed) return candidate
+  if (typeof committed.lastUpdated !== "string") return candidate
+  if (typeof committed.integrity?.lastGenerated !== "string") return candidate
+  if (
+    canonicalJson(componentWithoutStamps(candidate)) !==
+    canonicalJson(componentWithoutStamps(committed))
+  ) {
+    return candidate
+  }
+  return {
+    ...candidate,
+    integrity: { ...candidate.integrity, lastGenerated: committed.integrity.lastGenerated },
+    lastUpdated: committed.lastUpdated,
+  }
+}
+
 /** The signature already recorded in the committed index, if any. */
 function committedIndexSignature(): { signature?: string; signedAt?: string } {
   const committed = readCommittedJson<IndexManifestV3>("index.json")
@@ -1358,8 +1386,9 @@ async function buildRegistry(): Promise<void> {
   for (const manifest of componentManifests) {
     const dir = join(REGISTRY_DIR, "components")
     mkdirSync(dir, { recursive: true })
-    const manifestPath = join(dir, `${manifest.name}.json`)
-    writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n")
+    const stable = withStableComponentStamps(manifest)
+    const manifestPath = join(dir, `${stable.name}.json`)
+    writeFileSync(manifestPath, JSON.stringify(stable, null, 2) + "\n")
   }
 
   // ─── Block Discovery ──────────────────────────────────────────────────────
