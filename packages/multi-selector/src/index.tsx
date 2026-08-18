@@ -65,6 +65,8 @@ export interface MultiSelectorRootProps {
   id?: string
   /** Placeholder text when no items are selected. */
   placeholder?: string
+  /** CSS class name. */
+  class?: string
   /** Children. */
   children?: JSX.Element
 }

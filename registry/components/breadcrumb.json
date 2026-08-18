@@ -30,7 +30,7 @@
         "src/recipes/breadcrumb.tsx": "3304d5e84d94613996678dba6ad88da1a0d10774c5044b2aead71ea02897c71c"
       }
     },
-    "lastGenerated": "2026-08-18T03:16:44.000Z"
+    "lastGenerated": "2026-08-18T04:04:41.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/breadcrumb"
   ],
-  "lastUpdated": "2026-08-18T03:16:44.000Z"
+  "lastUpdated": "2026-08-18T04:04:41.000Z"
 }

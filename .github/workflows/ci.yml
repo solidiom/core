@@ -299,7 +299,7 @@ jobs:
     needs: site-build
     runs-on: solidiom-dfw-runner
     container:
-      image: mcr.microsoft.com/playwright:v1.61.1-noble
+      image: mcr.microsoft.com/playwright:v1.62.1-noble
       options: --ipc=host
     steps:
       - uses: actions/checkout@v5

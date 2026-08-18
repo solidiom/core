@@ -30,7 +30,7 @@
         "src/recipes/scroll-area.tsx": "189ad334b7b7ec3df1f09fe548a745997ec4d47e226a3a33500bd747bddf2878"
       }
     },
-    "lastGenerated": "2026-08-18T03:16:44.000Z"
+    "lastGenerated": "2026-08-18T04:04:41.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/scroll-area"
   ],
-  "lastUpdated": "2026-08-18T03:16:44.000Z"
+  "lastUpdated": "2026-08-18T04:04:41.000Z"
 }

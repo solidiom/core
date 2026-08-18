@@ -26,7 +26,7 @@ set -euo pipefail
 
 # Must track the @playwright/test version in package.json, or the browser build
 # bundled in the image will not match the client library.
-IMAGE_TAG="v1.61.1-noble"
+IMAGE_TAG="v1.62.1-noble"
 IMAGE="mcr.microsoft.com/playwright:${IMAGE_TAG}"
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

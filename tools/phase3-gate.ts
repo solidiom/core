@@ -77,9 +77,9 @@ const rootPkg = readJSON<Record<string, any>>("package.json")
 const solidVersion =
   rootPkg?.devDependencies?.["solid-js"] ?? rootPkg?.dependencies?.["solid-js"] ?? ""
 check(
-  "solid-js is on a beta version",
-  solidVersion.includes("beta"),
-  `Current: ${solidVersion}. Phase 3 targets Solid 2 beta.`,
+  "solid-js is on a prerelease version",
+  solidVersion.includes("beta") || solidVersion.includes("rc"),
+  `Current: ${solidVersion}. Phase 3 targets Solid 2 prerelease.`,
 )
 check(
   "solid matrix file exists",
@@ -168,7 +168,7 @@ for (const dir of pkgDirs) {
 
   const version: string = pkgJson.version ?? ""
   const isPrerelease =
-    version.includes("next") || version.includes("beta") || version.startsWith("0.0.")
+    version.includes("next") || version.includes("beta") || version.includes("rc") || version.startsWith("0.")
   if (!isPrerelease) {
     prereleaseOk = false
     violations.push(`${pkgJson.name}@${version}`)
