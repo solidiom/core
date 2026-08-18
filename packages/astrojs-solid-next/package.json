@@ -2,6 +2,7 @@
   "name": "@solidiom/astrojs-solid-next",
   "version": "0.2.0",
   "type": "module",
+  "license": "Apache-2.0",
   "description": "Astro integration that renders Solid 2 components as islands using the Solidiom/Vite Solid 2 toolchain.",
   "exports": {
     ".": {
@@ -26,7 +27,8 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "LICENSE"
   ],
   "sideEffects": false,
   "scripts": {
@@ -49,6 +51,10 @@
     "solid-js": "^2.0.0-rc.0",
     "typescript": "~6.0.3",
     "vite": "^8.1.5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "engines": {
     "node": ">=24.0.0"

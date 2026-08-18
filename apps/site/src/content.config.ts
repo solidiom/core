@@ -157,7 +157,7 @@ const templates = defineCollection({
     ...localizedContentFields,
     ...productFields,
     productLayer: z.literal("template").default("template"),
-    stack: z.enum(["solidstart", "tanstack-start-solid", "vite-solid-router"]),
+    stack: z.enum(["astro-solid", "solidstart", "tanstack-start-solid", "vite-solid-router"]),
     portfolios: z.array(z.enum(["balanced-product", "enterprise-platform-governance"])).min(1),
   }),
 })
