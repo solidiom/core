@@ -1,6 +1,6 @@
 {
   "name": "input-otp",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "package": "@solidiom/input-otp",
   "capabilities": [],
   "dependencies": [
