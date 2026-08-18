@@ -13,11 +13,11 @@ lifecycle: current
 
 ## Terminology
 
-| Term            | Tag                 | Purpose                                                         | Examples                                              |
-| --------------- | ------------------- | --------------------------------------------------------------- | ----------------------------------------------------- |
+| Term            | Tag                 | Purpose                                                          | Examples                                                    |
+| --------------- | ------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------- |
 | **Adapter**     | `layer:adapter`     | Bridges a Solidiom primitive with an external library dependency | `adapter-positioning-floating-ui`, `adapter-table-tanstack` |
-| **Integration** | `layer:integration` | Framework-level plugin that enables Solidiom in a host framework | `astrojs-solid-next`, `vite-plugin-solidiom`          |
-| **Tooling**     | `layer:tooling`     | Internal build/dev tools not published as adapters              | `adapter-kit`                                         |
+| **Integration** | `layer:integration` | Framework-level plugin that enables Solidiom in a host framework | `astrojs-solid-next`, `vite-plugin-solidiom`                |
+| **Tooling**     | `layer:tooling`     | Internal build/dev tools not published as adapters               | `adapter-kit`                                               |
 
 The key difference from primitives: adapters and integrations do **not** appear in the umbrella package (`@solidiom/primitives`), are **not** included in registry manifests (unless they have `layer:adapter` tag), and do **not** need recipes or accessibility evidence.
 
@@ -82,11 +82,11 @@ packages/<name>/
 
 ### Choosing the `nx.tags` value
 
-| Use case                                             | Tag                   |
-| ---------------------------------------------------- | --------------------- |
-| Wraps an external library for use in primitives      | `layer:adapter`       |
-| Framework plugin (Astro, Vite, Webpack integrations) | `layer:integration`   |
-| Internal-only build tool (not published externally)  | `layer:tooling`       |
+| Use case                                             | Tag                 |
+| ---------------------------------------------------- | ------------------- |
+| Wraps an external library for use in primitives      | `layer:adapter`     |
+| Framework plugin (Astro, Vite, Webpack integrations) | `layer:integration` |
+| Internal-only build tool (not published externally)  | `layer:tooling`     |
 
 **`layer:adapter`** packages are automatically discovered by the registry builder and included in `registry/index.json` under the `adapters` array. Other tags are not included in the registry.
 
@@ -245,15 +245,15 @@ Select your package and describe the change. Changesets are consumed during rele
 
 These steps from the "Adding a Primitive" guide do **not** apply:
 
-| Step                                          | Why not                                                    |
-| --------------------------------------------- | ---------------------------------------------------------- |
-| Add to `packages/primitives/src/index.ts`     | Only primitives go in the umbrella package                  |
-| Classify in `primitive-completion-policy.json` | Only primitives need classification                        |
-| Create recipes (Tailwind/CSS/UnoCSS)          | Adapters don't have styling                                |
-| Run `pnpm primitive:gate`                     | Gate is for primitives only                                |
-| Add axe accessibility scans                   | Adapters are not rendered UI                               |
-| Add to `PUBLIC_PRIMITIVES` in `axe-results.ts`| Only primitives with a11y evidence                         |
-| Create demos in `apps/docs/`                  | Adapters documented via API docs, not interactive demos    |
+| Step                                           | Why not                                                 |
+| ---------------------------------------------- | ------------------------------------------------------- |
+| Add to `packages/primitives/src/index.ts`      | Only primitives go in the umbrella package              |
+| Classify in `primitive-completion-policy.json` | Only primitives need classification                     |
+| Create recipes (Tailwind/CSS/UnoCSS)           | Adapters don't have styling                             |
+| Run `pnpm primitive:gate`                      | Gate is for primitives only                             |
+| Add axe accessibility scans                    | Adapters are not rendered UI                            |
+| Add to `PUBLIC_PRIMITIVES` in `axe-results.ts` | Only primitives with a11y evidence                      |
+| Create demos in `apps/docs/`                   | Adapters documented via API docs, not interactive demos |
 
 ## Checklist
 
@@ -272,9 +272,9 @@ These steps from the "Adding a Primitive" guide do **not** apply:
 
 ## Reference implementations
 
-| Type        | Package                                  | Notes                              |
-| ----------- | ---------------------------------------- | ---------------------------------- |
+| Type        | Package                                    | Notes                              |
+| ----------- | ------------------------------------------ | ---------------------------------- |
 | Adapter     | `packages/adapter-positioning-floating-ui` | Minimal adapter with capability.ts |
-| Adapter     | `packages/adapter-table-tanstack`        | Wraps TanStack Table               |
-| Integration | `packages/astrojs-solid-next`            | Astro framework integration        |
-| Integration | `packages/vite-plugin-solidiom`          | Vite plugin with multiple entries  |
+| Adapter     | `packages/adapter-table-tanstack`          | Wraps TanStack Table               |
+| Integration | `packages/astrojs-solid-next`              | Astro framework integration        |
+| Integration | `packages/vite-plugin-solidiom`            | Vite plugin with multiple entries  |

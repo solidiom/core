@@ -1,4 +1,4 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from "tsup"
 
 /**
  * Build for @solidiom/astrojs-solid-next.
@@ -21,4 +21,4 @@ export default defineConfig({
   clean: true,
   outDir: "dist",
   target: "es2022",
-});
+})
