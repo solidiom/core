@@ -30,12 +30,12 @@ Nuestra evidencia de accesibilidad es verificada por máquina y comprometida en 
 
 ### Pruebas Automatizadas
 
-| Capa                       | Cobertura      | Herramienta     | Evidencia                        |
-| -------------------------- | -------------- | --------------- | -------------------------------- |
-| Primitivos (52)            | 100%           | axe-core 4.10.2 | `docs/axe-scan-results.md`       |
-| Navegación por teclado     | 100%           | Auditoría manual | `docs/keyboard-audit-results.md` |
-| Contraste de color         | Todos los presets | Auditoría de tema | `pnpm run audit:preset-themes`   |
-| Gestión del foco           | Todos los overlays | Vitest browser  | Evidencia por primitivo          |
+| Capa                   | Cobertura          | Herramienta       | Evidencia                        |
+| ---------------------- | ------------------ | ----------------- | -------------------------------- |
+| Primitivos (52)        | 100%               | axe-core 4.10.2   | `docs/axe-scan-results.md`       |
+| Navegación por teclado | 100%               | Auditoría manual  | `docs/keyboard-audit-results.md` |
+| Contraste de color     | Todos los presets  | Auditoría de tema | `pnpm run audit:preset-themes`   |
+| Gestión del foco       | Todos los overlays | Vitest browser    | Evidencia por primitivo          |
 
 ### Evidencia por Primitivo
 
@@ -48,12 +48,12 @@ Cada uno de los 52 primitivos tiene un archivo `packages/<name>/docs/accessibili
 
 ### Pruebas con Lector de Pantalla
 
-| Tecnología de Asistencia | Estado            | Plataforma |
-| ------------------------- | ----------------- | ---------- |
-| VoiceOver                 | Documentado       | macOS/iOS  |
-| NVDA                      | Planificado (Fase 4) | Windows    |
-| JAWS                      | Planificado (Fase 4) | Windows    |
-| TalkBack                  | Planificado (Fase 4) | Android    |
+| Tecnología de Asistencia | Estado               | Plataforma |
+| ------------------------ | -------------------- | ---------- |
+| VoiceOver                | Documentado          | macOS/iOS  |
+| NVDA                     | Planificado (Fase 4) | Windows    |
+| JAWS                     | Planificado (Fase 4) | Windows    |
+| TalkBack                 | Planificado (Fase 4) | Android    |
 
 ## Cumplimiento WCAG 2.2 AA
 
@@ -68,19 +68,19 @@ Todos los primitivos y componentes cumplen con WCAG 2.2 Nivel AA. Nuestra audito
 
 Los primitivos interactivos implementan patrones de WAI-ARIA Authoring Practices:
 
-| Patrón          | Primitivos                        |
-| --------------- | --------------------------------- |
-| Accordion       | accordion                         |
-| Dialog (Modal)  | dialog, alert-dialog              |
-| Menu/Menubar    | menu, context-menu, dropdown-menu |
-| Tabs            | tabs                              |
-| Combobox        | combobox, select                  |
-| Listbox         | listbox, select                   |
-| Tooltip         | tooltip                           |
-| Switch          | switch                            |
-| Slider          | slider                            |
-| Tree View       | tree                              |
-| Alert           | alert, toast                      |
+| Patrón         | Primitivos                        |
+| -------------- | --------------------------------- |
+| Accordion      | accordion                         |
+| Dialog (Modal) | dialog, alert-dialog              |
+| Menu/Menubar   | menu, context-menu, dropdown-menu |
+| Tabs           | tabs                              |
+| Combobox       | combobox, select                  |
+| Listbox        | listbox, select                   |
+| Tooltip        | tooltip                           |
+| Switch         | switch                            |
+| Slider         | slider                            |
+| Tree View      | tree                              |
+| Alert          | alert, toast                      |
 
 ## Reportar Problemas
 

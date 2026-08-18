@@ -2,7 +2,8 @@
 contentSchemaVersion: 1
 title: "When the Previews Went Dark: Debugging Cloudflare Pages"
 description: "How a single CSP keyword and a combined HTTP header silently broke every interactive primitive and template preview on solidiom.org — and the three fixes that brought them back."
-keywords: [csp, strict-dynamic, cloudflare-pages, x-frame-options, astro, iframe, debugging, article]
+keywords:
+  [csp, strict-dynamic, cloudflare-pages, x-frame-options, astro, iframe, debugging, article]
 locale: en
 maturity: draft
 product: "Solidiom"
@@ -45,7 +46,7 @@ Here's the trap. In CSP Level 3, **`'strict-dynamic'` deliberately disables `'se
 
 That's a genuinely good security model. But it only works if your initial scripts are nonce- or hash-tagged. Astro's hydration bootstrap is emitted as plain inline scripts with no nonce. So the browser did exactly what we told it to: it saw `'strict-dynamic'`, ignored `'unsafe-inline'`, found no nonce, and blocked every island's bootstrap.
 
-The `'unsafe-inline'` sitting right next to it was pure decoration — silently overridden. The policy *looked* permissive and *behaved* like a lockdown.
+The `'unsafe-inline'` sitting right next to it was pure decoration — silently overridden. The policy _looked_ permissive and _behaved_ like a lockdown.
 
 ## Symptom 2: templates that were never even there
 
@@ -77,7 +78,7 @@ Even once we fixed the fallback and got the iframe to render, there was a third 
   X-Frame-Options: SAMEORIGIN
 ```
 
-The intent is reasonable: deny framing everywhere, except allow the site to frame its own template previews. On many platforms a more specific rule *overrides* a broader one.
+The intent is reasonable: deny framing everywhere, except allow the site to frame its own template previews. On many platforms a more specific rule _overrides_ a broader one.
 
 Cloudflare Pages doesn't override — it **combines**. The response that actually came back was:
 
@@ -85,7 +86,7 @@ Cloudflare Pages doesn't override — it **combines**. The response that actuall
 X-Frame-Options: DENY, SAMEORIGIN
 ```
 
-Browsers treat a multi-valued, self-contradicting `X-Frame-Options` as deny. So the same-origin iframe was blocked anyway. And critically, Cloudflare Pages' `_headers` has no way to *remove* a header inherited from a broader match — so you can't win this fight by being more specific.
+Browsers treat a multi-valued, self-contradicting `X-Frame-Options` as deny. So the same-origin iframe was blocked anyway. And critically, Cloudflare Pages' `_headers` has no way to _remove_ a header inherited from a broader match — so you can't win this fight by being more specific.
 
 ## The fixes
 
@@ -99,7 +100,7 @@ We rely on un-nonced inline scripts (that's how Astro hydrates islands), so the 
 script-src 'self' 'unsafe-inline'
 ```
 
-This is the policy we'd *documented* all along — the deployed header had quietly drifted. `'strict-dynamic'` is worth adopting later, but only paired with build-time nonces or hashes for every inline script. Half of that pattern is worse than neither half.
+This is the policy we'd _documented_ all along — the deployed header had quietly drifted. `'strict-dynamic'` is worth adopting later, but only paired with build-time nonces or hashes for every inline script. Half of that pattern is worse than neither half.
 
 ### 2. Anchor the build-time check to the site root
 

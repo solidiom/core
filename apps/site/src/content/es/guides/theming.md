@@ -20,12 +20,12 @@ El sistema de temas de Solidiom usa propiedades personalizadas de CSS para contr
 
 Cuatro presets se incluyen de serie:
 
-| Preset | Descripción               | Modos          |
-| ------ | ------------------------- | -------------- |
-| Ocean  | Teal profundo y cian      | Claro + Oscuro |
-| Forest | Verdes terrosos           | Claro + Oscuro |
-| Slate  | Grises neutros            | Claro + Oscuro |
-| Aurora | Púrpura y rosa vibrantes  | Claro + Oscuro |
+| Preset | Descripción              | Modos          |
+| ------ | ------------------------ | -------------- |
+| Ocean  | Teal profundo y cian     | Claro + Oscuro |
+| Forest | Verdes terrosos          | Claro + Oscuro |
+| Slate  | Grises neutros           | Claro + Oscuro |
+| Aurora | Púrpura y rosa vibrantes | Claro + Oscuro |
 
 ### Instalar un preset
 

@@ -1250,8 +1250,7 @@ async function buildRegistry(): Promise<void> {
         lastGenerated: now,
       },
       provenance: {
-        repository:
-          registryMetadata.provenance.repository ?? "https://github.com/solidiom/core",
+        repository: registryMetadata.provenance.repository ?? "https://github.com/solidiom/core",
         directory: registryMetadata.provenance.directory ?? `packages/${primitive.name}`,
         ...(registryMetadata.provenance.sourceCommit
           ? { sourceCommit: registryMetadata.provenance.sourceCommit }

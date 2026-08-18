@@ -18,21 +18,21 @@ El portafolio Enterprise de Solidiom proporciona plantillas listas para producci
 
 ## Plantillas Enterprise
 
-| Plantilla                                              | Propósito                                              |
-| ------------------------------------------------------ | ------------------------------------------------------ |
-| [Identidad y Acceso](/templates/identity-access/)      | Directorio de usuarios, roles RBAC, gestión de sesiones |
-| [Registro de Auditoría](/templates/audit-log/)         | Flujo de eventos, filtros, exportación de cumplimiento  |
-| [Operaciones de Facturación](/templates/billing-operations/) | Facturas, reconciliación, reportes financieros    |
-| [Respuesta a Incidentes](/templates/incident-response/) | Incidentes activos, runbooks, postmortems             |
-| [Operaciones de IA](/templates/ai-operations/)         | Monitoreo de modelos, despliegues, seguimiento de costos |
-| [Gestión de API](/templates/api-management/)           | Catálogo de endpoints, ciclo de vida de claves, analíticas de uso |
-| [Portal de Desarrolladores](/templates/developer-portal/) | Documentación, playground de SDK, gestión de aplicaciones |
-| [Centro de Seguridad](/templates/security-center/)     | Dashboard de amenazas, vulnerabilidades, políticas     |
-| [Centro de Cumplimiento](/templates/compliance-center/) | Seguimiento de frameworks, evaluaciones de controles, evidencia |
-| [Gobernanza de Datos](/templates/data-governance/)     | Catálogo de datos, linaje, clasificación               |
-| [Automatización de Flujos](/templates/workflow-automation/) | Diseñador visual, historial de ejecución, integraciones |
-| [Operaciones de Soporte](/templates/support-operations/) | Cola de tickets, base de conocimiento, métricas       |
-| [Configuración Enterprise](/templates/enterprise-settings/) | Configuración de organización, SSO/MFA, SCIM       |
+| Plantilla                                                    | Propósito                                                         |
+| ------------------------------------------------------------ | ----------------------------------------------------------------- |
+| [Identidad y Acceso](/templates/identity-access/)            | Directorio de usuarios, roles RBAC, gestión de sesiones           |
+| [Registro de Auditoría](/templates/audit-log/)               | Flujo de eventos, filtros, exportación de cumplimiento            |
+| [Operaciones de Facturación](/templates/billing-operations/) | Facturas, reconciliación, reportes financieros                    |
+| [Respuesta a Incidentes](/templates/incident-response/)      | Incidentes activos, runbooks, postmortems                         |
+| [Operaciones de IA](/templates/ai-operations/)               | Monitoreo de modelos, despliegues, seguimiento de costos          |
+| [Gestión de API](/templates/api-management/)                 | Catálogo de endpoints, ciclo de vida de claves, analíticas de uso |
+| [Portal de Desarrolladores](/templates/developer-portal/)    | Documentación, playground de SDK, gestión de aplicaciones         |
+| [Centro de Seguridad](/templates/security-center/)           | Dashboard de amenazas, vulnerabilidades, políticas                |
+| [Centro de Cumplimiento](/templates/compliance-center/)      | Seguimiento de frameworks, evaluaciones de controles, evidencia   |
+| [Gobernanza de Datos](/templates/data-governance/)           | Catálogo de datos, linaje, clasificación                          |
+| [Automatización de Flujos](/templates/workflow-automation/)  | Diseñador visual, historial de ejecución, integraciones           |
+| [Operaciones de Soporte](/templates/support-operations/)     | Cola de tickets, base de conocimiento, métricas                   |
+| [Configuración Enterprise](/templates/enterprise-settings/)  | Configuración de organización, SSO/MFA, SCIM                      |
 
 ## Arquitectura Técnica
 

@@ -69,12 +69,12 @@ La emisión `source/` de Solidiom te da la misma experiencia de desarrollo que c
 
 ## Compensaciones
 
-| Beneficio       | Compensación                                                    |
-| --------------- | --------------------------------------------------------------- |
-| Control total   | Eres responsable de tus modificaciones                          |
-| Sin lock-in     | Las actualizaciones upstream requieren merge manual (modo fuente) |
-| Auditable       | Más archivos en tu proyecto                                     |
-| Bifurcable      | La divergencia del upstream es permanente (modo fuente)          |
+| Beneficio     | Compensación                                                      |
+| ------------- | ----------------------------------------------------------------- |
+| Control total | Eres responsable de tus modificaciones                            |
+| Sin lock-in   | Las actualizaciones upstream requieren merge manual (modo fuente) |
+| Auditable     | Más archivos en tu proyecto                                       |
+| Bifurcable    | La divergencia del upstream es permanente (modo fuente)           |
 
 ## El Contrato del Registro
 
