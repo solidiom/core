@@ -8,37 +8,37 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "capability": "carousel-physics@1",
       "name": "carousel-embla",
       "package": "@solidiom/adapter-carousel-embla",
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "capability": "date-math@1",
       "name": "date-internationalized",
       "package": "@solidiom/adapter-date-internationalized",
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "capability": "positioning@1",
       "name": "positioning-floating-ui",
       "package": "@solidiom/adapter-positioning-floating-ui",
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "capability": "positioning@1",
       "name": "positioning-minimal",
       "package": "@solidiom/adapter-positioning-minimal",
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "capability": "table@1",
       "name": "table-tanstack",
       "package": "@solidiom/adapter-table-tanstack",
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "capability": "virtualization@1",
       "name": "virtualization-tanstack",
       "package": "@solidiom/adapter-virtualization-tanstack",
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
   ],
   "blocks": [
@@ -797,7 +797,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -830,7 +830,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -863,7 +863,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -896,7 +896,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -929,7 +929,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -962,7 +962,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -995,7 +995,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1028,7 +1028,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1061,7 +1061,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1094,7 +1094,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1127,7 +1127,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1160,7 +1160,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1193,7 +1193,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1226,7 +1226,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1259,7 +1259,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1292,7 +1292,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1325,7 +1325,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1358,7 +1358,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1391,7 +1391,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1424,7 +1424,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1457,7 +1457,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1490,7 +1490,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1523,7 +1523,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1556,7 +1556,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1589,7 +1589,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1622,7 +1622,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1655,7 +1655,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1688,7 +1688,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1721,7 +1721,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1754,7 +1754,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1787,7 +1787,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "deliverables": [
@@ -1820,7 +1820,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "tailwind",
         "unocss",
       ],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
   ],
   "integrity": {
@@ -1881,7 +1881,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -1941,7 +1941,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -1987,7 +1987,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2032,7 +2032,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2072,7 +2072,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2113,7 +2113,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2166,7 +2166,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2207,7 +2207,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2257,7 +2257,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2296,7 +2296,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2350,7 +2350,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2409,7 +2409,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2456,7 +2456,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2514,7 +2514,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2559,7 +2559,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2600,7 +2600,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2644,7 +2644,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2687,7 +2687,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2729,7 +2729,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2773,7 +2773,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2814,7 +2814,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2855,7 +2855,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2902,7 +2902,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2946,7 +2946,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -2988,7 +2988,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3038,7 +3038,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3087,7 +3087,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3130,7 +3130,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3189,7 +3189,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3235,7 +3235,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3280,7 +3280,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3331,7 +3331,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "themeCompatible": [
         "site",
       ],
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3370,7 +3370,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3415,7 +3415,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3459,7 +3459,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3512,7 +3512,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3554,7 +3554,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3595,7 +3595,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3643,7 +3643,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3693,7 +3693,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3738,7 +3738,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3784,7 +3784,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3835,7 +3835,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3883,7 +3883,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3924,7 +3924,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -3966,7 +3966,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4010,7 +4010,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4052,7 +4052,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4099,7 +4099,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4141,7 +4141,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4183,7 +4183,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4235,7 +4235,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4279,7 +4279,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4331,7 +4331,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4375,7 +4375,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4424,7 +4424,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4473,7 +4473,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4520,7 +4520,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4564,7 +4564,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4615,7 +4615,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4662,7 +4662,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4713,7 +4713,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4755,7 +4755,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4803,7 +4803,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.1.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4849,7 +4849,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4898,7 +4898,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4935,7 +4935,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -4979,7 +4979,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5023,7 +5023,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5068,7 +5068,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5110,7 +5110,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5149,7 +5149,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5197,7 +5197,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5239,7 +5239,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5285,7 +5285,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5329,7 +5329,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5376,7 +5376,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5422,7 +5422,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5467,7 +5467,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5511,7 +5511,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5560,7 +5560,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5609,7 +5609,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
         "unocss",
       ],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5653,7 +5653,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5695,7 +5695,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "experimental",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1-next.0",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5741,7 +5741,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
     {
       "accessibility": {
@@ -5794,7 +5794,7 @@ exports[`registry build determinism (REG-004) > snapshot: registry/index.json ma
       "status": "stable",
       "stylingOutputs": [],
       "themeCompatible": [],
-      "version": "0.0.1",
+      "version": "0.2.0",
     },
   ],
   "templates": [

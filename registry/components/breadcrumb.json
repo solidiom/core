@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
   "name": "breadcrumb",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "package": "@solidiom/recipes-css",
   "deliverables": [
     "component"
@@ -30,7 +30,7 @@
         "src/recipes/breadcrumb.tsx": "3304d5e84d94613996678dba6ad88da1a0d10774c5044b2aead71ea02897c71c"
       }
     },
-    "lastGenerated": "2026-08-18T00:55:36.000Z"
+    "lastGenerated": "2026-08-18T02:59:33.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/breadcrumb"
   ],
-  "lastUpdated": "2026-08-18T00:55:36.000Z"
+  "lastUpdated": "2026-08-18T02:59:33.000Z"
 }
