@@ -100,7 +100,11 @@ function resolveEntry(
     return { file: relativePath, status: "stale", maturity, reason: "English source has changed" }
   }
 
-  if (fm.translationStatus === "human-reviewed" && fm.translationReviewedBy && fm.translationReviewedAt) {
+  if (
+    fm.translationStatus === "human-reviewed" &&
+    fm.translationReviewedBy &&
+    fm.translationReviewedAt
+  ) {
     return { file: relativePath, status: "ok", maturity, reason: "" }
   }
 

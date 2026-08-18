@@ -2,7 +2,8 @@
 contentSchemaVersion: 1
 title: "Cuando los Previews se Apagaron: Depurando Cloudflare Pages"
 description: "Cómo una sola palabra clave de CSP y un encabezado HTTP combinado rompieron silenciosamente cada primitiva interactiva y vista previa de plantilla en solidiom.org — y las tres correcciones que los restauraron."
-keywords: [csp, strict-dynamic, cloudflare-pages, x-frame-options, astro, iframe, debugging, article]
+keywords:
+  [csp, strict-dynamic, cloudflare-pages, x-frame-options, astro, iframe, debugging, article]
 locale: es
 maturity: draft
 product: "Solidiom"
@@ -47,7 +48,7 @@ Aquí está la trampa. En CSP Level 3, **`'strict-dynamic'` deshabilita delibera
 
 Es un modelo de seguridad genuinamente bueno. Pero solo funciona si tus scripts iniciales están etiquetados con nonce o hash. El bootstrap de hidratación de Astro se emite como scripts inline sin nonce. Así que el navegador hizo exactamente lo que le dijimos: vio `'strict-dynamic'`, ignoró `'unsafe-inline'`, no encontró nonce, y bloqueó el bootstrap de cada isla.
 
-El `'unsafe-inline'` justo al lado era pura decoración — silenciosamente anulado. La política *parecía* permisiva y *se comportaba* como un bloqueo.
+El `'unsafe-inline'` justo al lado era pura decoración — silenciosamente anulado. La política _parecía_ permisiva y _se comportaba_ como un bloqueo.
 
 ## Síntoma 2: plantillas que nunca estuvieron ahí
 
@@ -79,7 +80,7 @@ Incluso una vez que corregimos el fallback y conseguimos que el iframe se render
   X-Frame-Options: SAMEORIGIN
 ```
 
-La intención es razonable: negar el framing en todas partes, excepto permitir que el sitio enmarque sus propias vistas previas de plantillas. En muchas plataformas una regla más específica *anula* una más amplia.
+La intención es razonable: negar el framing en todas partes, excepto permitir que el sitio enmarque sus propias vistas previas de plantillas. En muchas plataformas una regla más específica _anula_ una más amplia.
 
 Cloudflare Pages no anula — **combina**. La respuesta real que llegaba era:
 
@@ -87,7 +88,7 @@ Cloudflare Pages no anula — **combina**. La respuesta real que llegaba era:
 X-Frame-Options: DENY, SAMEORIGIN
 ```
 
-Los navegadores tratan un `X-Frame-Options` multi-valor contradictorio como deny. Así que el iframe same-origin era bloqueado de todas formas. Y críticamente, el `_headers` de Cloudflare Pages no tiene forma de *eliminar* un encabezado heredado de una coincidencia más amplia — así que no puedes ganar esta batalla siendo más específico.
+Los navegadores tratan un `X-Frame-Options` multi-valor contradictorio como deny. Así que el iframe same-origin era bloqueado de todas formas. Y críticamente, el `_headers` de Cloudflare Pages no tiene forma de _eliminar_ un encabezado heredado de una coincidencia más amplia — así que no puedes ganar esta batalla siendo más específico.
 
 ## Las correcciones
 
@@ -101,7 +102,7 @@ Dependemos de scripts inline sin nonce (así es como Astro hidrata islas), así 
 script-src 'self' 'unsafe-inline'
 ```
 
-Esta es la política que habíamos *documentado* todo el tiempo — el encabezado desplegado se había desviado silenciosamente. `'strict-dynamic'` vale la pena adoptarlo después, pero solo emparejado con nonces o hashes en tiempo de build para cada script inline. La mitad de ese patrón es peor que ninguna mitad.
+Esta es la política que habíamos _documentado_ todo el tiempo — el encabezado desplegado se había desviado silenciosamente. `'strict-dynamic'` vale la pena adoptarlo después, pero solo emparejado con nonces o hashes en tiempo de build para cada script inline. La mitad de ese patrón es peor que ninguna mitad.
 
 ### 2. Anclar la verificación de build a la raíz del sitio
 

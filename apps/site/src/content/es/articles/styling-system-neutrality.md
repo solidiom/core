@@ -44,10 +44,10 @@ Primitive (behavior) → Recipe (styling) → Component (composed)
 
 Se incluyen tres perfiles de receta:
 
-| Perfil     | Tecnología   | Enfoque                                          |
-| ---------- | ------------ | ------------------------------------------------ |
+| Perfil     | Tecnología   | Enfoque                                            |
+| ---------- | ------------ | -------------------------------------------------- |
 | `css`      | CSS puro     | Clases tipo BEM + selectores de atributos de datos |
-| `tailwind` | Tailwind CSS | Clases de utilidad + `@apply` para estados        |
+| `tailwind` | Tailwind CSS | Clases de utilidad + `@apply` para estados         |
 | `unocss`   | UnoCSS       | Utilidades atómicas + reglas personalizadas        |
 
 ## Cómo Se Aplica la Paridad
