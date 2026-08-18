@@ -7,7 +7,7 @@
  * Exposes isAtBottom, hasNewContent, newContentCount via context.
  */
 
-import { createContext, useContext, type Accessor, onMount, createSignal } from "solid-js"
+import { createContext, useContext, type Accessor, onCleanup, createSignal } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import { applySemanticAttrs, createScrollAnchor, type ScrollAnchor } from "@solidiom/runtime"
 
@@ -57,9 +57,9 @@ export function Root(props: MessageScrollerRootProps) {
     onNewContentWhileScrolledUp: () => props.onNewContent?.(),
   })
 
-  onMount(() => {
-    scrollAnchor.attach()
-  })
+  // Attach scroll listener (runs at component creation time)
+  const cleanup = scrollAnchor.attach()
+  onCleanup(cleanup)
 
   const ctx: MessageScrollerContextValue = {
     scrollAnchor,

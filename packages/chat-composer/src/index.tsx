@@ -7,7 +7,7 @@
  * and submits on Enter (Shift+Enter for newline). SendButton is disabled when empty.
  */
 
-import { createContext, useContext, createSignal, type Accessor } from "solid-js"
+import { createContext, useContext, type Accessor } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import { applySemanticAttrs, createControllableValue } from "@solidiom/runtime"
 
@@ -131,11 +131,13 @@ export function Input(props: ChatComposerInputProps) {
 
   return (
     <textarea
-      ref={textareaRef}
+      ref={(el: HTMLTextAreaElement) => {
+        textareaRef = el
+      }}
       value={ctx.value()}
       placeholder={ctx.placeholder()}
       disabled={ctx.disabled()}
-      maxLength={ctx.maxLength()}
+      maxlength={ctx.maxLength() || undefined}
       rows={1}
       onInput={handleInput}
       onKeyDown={handleKeyDown}

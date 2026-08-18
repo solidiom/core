@@ -69,7 +69,7 @@ export function Root(props: RootProps) {
   }
 
   return (
-    <BannerCtx.Provider value={context}>
+    <BannerCtx value={context}>
       <div
         role={role()}
         class={props.class}
@@ -80,7 +80,7 @@ export function Root(props: RootProps) {
       >
         {props.children}
       </div>
-    </BannerCtx.Provider>
+    </BannerCtx>
   )
 }
 
