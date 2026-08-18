@@ -38,8 +38,8 @@ type RenderStrategy = "sync" | "async"
 async function check(
   this: RendererContext,
   Component: any,
-  props: Record<string, any>,
-  children: any,
+  _props: Record<string, any>,
+  _children: any,
 ) {
   if (typeof Component !== "function") return false
   if (Component.name === "QwikComponent") return false
