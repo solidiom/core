@@ -123,13 +123,12 @@ Push to the `main` branch. The production deployment workflow triggers automatic
 git push origin main
 ```
 
-Monitor the workflow run at `.github/workflows/preview-deploy.yml` (or the dedicated production workflow). The workflow:
+Monitor the `release.yml` workflow run. It:
 
-1. Installs dependencies.
-2. Runs `pnpm exec nx run @solidiom/site:build`.
-3. Runs `pnpm exec nx run @solidiom/site:search-index`.
-4. Deploys via `wrangler pages deploy`.
-5. Runs `tools/verify-preview-deployment.ts` against the deployment URL.
+1. Installs dependencies and builds the library packages and templates needed by the site.
+2. Validates site boundaries and route parity.
+3. Runs `build:deploy` and generates the Pagefind index.
+4. Deploys `apps/site/dist` with Cloudflare Wrangler.
 
 #### Option B: Manual deploy
 

@@ -511,7 +511,7 @@ check(
 )
 
 const expectedImageTag = `mcr.microsoft.com/playwright:v${pinnedPlaywright}-noble`
-for (const workflow of [".github/workflows/ci.yml", ".github/workflows/visual-baselines.yml"]) {
+for (const workflow of [".github/workflows/ci.yml", ".github/workflows/nightly.yml"]) {
   check(
     `${workflow} pins the Playwright image to v${pinnedPlaywright}`,
     fileContains(workflow, expectedImageTag),

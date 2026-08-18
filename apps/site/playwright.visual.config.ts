@@ -11,9 +11,9 @@ import { defineConfig, devices } from "@playwright/test"
  * between macOS and Linux (all 36 images differ), so the same commit renders
  * differently per platform. Capture and verify them only through the pinned
  * Playwright image, via `pnpm run visual:container` /
- * `pnpm run visual:update:container`, or by dispatching
- * .github/workflows/visual-baselines.yml. Running `test:visual:update` directly
- * on a non-Linux host will produce baselines that CI cannot reproduce.
+ * `pnpm run visual:update:container`, or by dispatching `nightly.yml` with
+ * `regenerate_baselines=true`. Running `test:visual:update` directly on a
+ * non-Linux host will produce baselines that CI cannot reproduce.
  */
 export default defineConfig({
   testDir: "./tests/visual",

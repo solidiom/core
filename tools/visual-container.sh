@@ -14,8 +14,8 @@
 #
 # Prefer the pnpm aliases: `pnpm run visual:container` / `pnpm run visual:update:container`.
 #
-# Without a container runtime, dispatch .github/workflows/visual-baselines.yml
-# and commit the artifact it produces.
+# Without a container runtime, dispatch the `nightly.yml` workflow with
+# `regenerate_baselines=true` and a `baseline_reason`, then commit its artifact.
 #
 # The repository is mounted read-only and cloned inside the container. Nothing is
 # written back except the baseline images, and only with --update. This matters:
@@ -72,7 +72,7 @@ fi
 
 if [[ -z "${RUNTIME}" ]]; then
   echo "error: no container runtime found (looked for podman, docker)." >&2
-  echo "Dispatch .github/workflows/visual-baselines.yml instead and commit the artifact." >&2
+  echo "Dispatch nightly.yml with regenerate_baselines=true instead and commit the artifact." >&2
   exit 1
 fi
 

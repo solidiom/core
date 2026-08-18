@@ -12,8 +12,10 @@ pnpm exec nx run @solidiom/site:build         # static production build -> dist/
 pnpm exec nx run @solidiom/site:search-index  # pagefind --site dist
 ```
 
-`mise run validate:site` runs the three in order. `dev` and `preview` are uncached Nx
-targets; everything else declares inputs and outputs for caching.
+`mise run site:validate` runs the CI-equivalent site pipeline: Astro check, boundaries,
+i18n validation, template builds, static build, Pagefind indexing, and registry-route
+validation. `dev` and `preview` are uncached Nx targets; everything else declares inputs
+and outputs for caching.
 
 ## Dependency notes
 
