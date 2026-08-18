@@ -301,7 +301,9 @@ export function FileList(props: FileInputFileListProps) {
     >
       {typeof props.children === "function" ? (
         <For each={ctx.files()}>
-          {(file, index) => (props.children as (file: File, index: () => number) => JSX.Element)(file, index)}
+          {(file, index) =>
+            (props.children as (file: File, index: () => number) => JSX.Element)(file, index)
+          }
         </For>
       ) : (
         props.children

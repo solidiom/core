@@ -6,11 +6,13 @@ import { createScrollAnchor } from "./scroll-anchor"
  * Creates a mock scroll container with configurable geometry.
  * Uses a plain object cast to HTMLElement since tests run in Node (no DOM).
  */
-function createMockContainer(opts: {
-  scrollTop?: number
-  scrollHeight?: number
-  clientHeight?: number
-} = {}): HTMLElement {
+function createMockContainer(
+  opts: {
+    scrollTop?: number
+    scrollHeight?: number
+    clientHeight?: number
+  } = {},
+): HTMLElement {
   const listeners: Record<string, Array<() => void>> = {}
   const el = {
     scrollTop: opts.scrollTop ?? 0,
@@ -624,11 +626,9 @@ describe("createScrollAnchor", () => {
         anchor.attach()
         flush()
 
-        expect(container.addEventListener).toHaveBeenCalledWith(
-          "scroll",
-          expect.any(Function),
-          { passive: true },
-        )
+        expect(container.addEventListener).toHaveBeenCalledWith("scroll", expect.any(Function), {
+          passive: true,
+        })
         dispose()
       })
     })
@@ -648,10 +648,7 @@ describe("createScrollAnchor", () => {
         const cleanup = anchor.attach()
         cleanup()
 
-        expect(container.removeEventListener).toHaveBeenCalledWith(
-          "scroll",
-          expect.any(Function),
-        )
+        expect(container.removeEventListener).toHaveBeenCalledWith("scroll", expect.any(Function))
         dispose()
       })
     })
@@ -736,10 +733,7 @@ describe("createScrollAnchor", () => {
         dispose()
       })
 
-      expect(container.removeEventListener).toHaveBeenCalledWith(
-        "scroll",
-        expect.any(Function),
-      )
+      expect(container.removeEventListener).toHaveBeenCalledWith("scroll", expect.any(Function))
       expect(mockDisconnect).toHaveBeenCalled()
     })
   })

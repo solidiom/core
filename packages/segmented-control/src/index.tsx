@@ -88,9 +88,7 @@ const SegmentedControlContext = createContext<SegmentedControlContextValue>()
 function useSegmentedControlContext(): SegmentedControlContextValue {
   const ctx = useContext(SegmentedControlContext)
   if (!ctx) {
-    throw new Error(
-      "[solidiom] SegmentedControl parts must be used within SegmentedControl.Root",
-    )
+    throw new Error("[solidiom] SegmentedControl parts must be used within SegmentedControl.Root")
   }
   return ctx
 }
@@ -201,12 +199,9 @@ export function Item(props: SegmentedControlItemProps) {
 
     if (intent) {
       e.preventDefault()
-      const next = resolveNextItem(
-        ctx.collection.enabledItems(),
-        props.value,
-        intent,
-        { loop: ctx.loop },
-      )
+      const next = resolveNextItem(ctx.collection.enabledItems(), props.value, intent, {
+        loop: ctx.loop,
+      })
       if (next?.ref) {
         ctx.rovingFocus.setActiveId(next.id, false)
         // Select on navigation (radio group pattern)

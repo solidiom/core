@@ -517,7 +517,10 @@ export function Input(props: TokenizerInputProps) {
     if (delims.some((d) => value.includes(d))) {
       const parts = splitByDelimiters(value)
       // Add all parts except the last one (which might be incomplete)
-      const toAdd = parts.slice(0, -1).map((p) => p.trim()).filter(Boolean)
+      const toAdd = parts
+        .slice(0, -1)
+        .map((p) => p.trim())
+        .filter(Boolean)
       if (toAdd.length > 0) {
         ctx.addTokens(toAdd)
       }

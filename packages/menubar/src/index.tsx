@@ -214,9 +214,7 @@ export function Menu(props: MenubarMenuProps) {
 
   return (
     <MenubarMenuContext value={ctx}>
-      <div {...applySemanticAttrs({ scope: "menubar", part: "menu" })}>
-        {props.children}
-      </div>
+      <div {...applySemanticAttrs({ scope: "menubar", part: "menu" })}>{props.children}</div>
     </MenubarMenuContext>
   )
 }
@@ -367,9 +365,7 @@ export function SubMenu(props: MenubarSubMenuProps) {
 
   return (
     <MenubarSubMenuContext value={ctx}>
-      <div {...applySemanticAttrs({ scope: "menubar", part: "sub-menu" })}>
-        {props.children}
-      </div>
+      <div {...applySemanticAttrs({ scope: "menubar", part: "sub-menu" })}>{props.children}</div>
     </MenubarSubMenuContext>
   )
 }

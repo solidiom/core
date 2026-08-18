@@ -97,7 +97,7 @@ export function Root(props: NumberInputRootProps) {
   })
 
   const spinButton = createSpinButton({
-    value: props.value !== undefined ? (() => props.value!) : undefined,
+    value: props.value !== undefined ? () => props.value! : undefined,
     defaultValue: props.defaultValue,
     min: props.min,
     max: props.max,

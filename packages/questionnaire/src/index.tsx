@@ -7,11 +7,7 @@
 
 import { createContext, useContext, Show, type Accessor } from "solid-js"
 import { type JSX } from "@solidjs/web"
-import {
-  applySemanticAttrs,
-  createControllableValue,
-  createChangeDetails,
-} from "@solidiom/runtime"
+import { applySemanticAttrs, createControllableValue, createChangeDetails } from "@solidiom/runtime"
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -133,10 +129,7 @@ export function Root(props: QuestionnaireRootProps) {
 
   return (
     <QuestionnaireContext value={ctx}>
-      <div
-        class={props.class}
-        {...applySemanticAttrs({ scope: "questionnaire", part: "root" })}
-      >
+      <div class={props.class} {...applySemanticAttrs({ scope: "questionnaire", part: "root" })}>
         {props.children}
       </div>
     </QuestionnaireContext>
@@ -148,9 +141,7 @@ export function Step(props: QuestionnaireStepProps) {
 
   return (
     <Show when={ctx.currentStep() === props.index}>
-      <div {...applySemanticAttrs({ scope: "questionnaire", part: "step" })}>
-        {props.children}
-      </div>
+      <div {...applySemanticAttrs({ scope: "questionnaire", part: "step" })}>{props.children}</div>
     </Show>
   )
 }
@@ -159,10 +150,7 @@ export function StepTitle(props: QuestionnaireStepTitleProps) {
   useQuestionnaireContext()
 
   return (
-    <h3
-      class={props.class}
-      {...applySemanticAttrs({ scope: "questionnaire", part: "step-title" })}
-    >
+    <h3 class={props.class} {...applySemanticAttrs({ scope: "questionnaire", part: "step-title" })}>
       {props.children}
     </h3>
   )

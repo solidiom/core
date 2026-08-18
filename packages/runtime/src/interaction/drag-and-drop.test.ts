@@ -32,7 +32,7 @@ function createDragEvent(
 
   // Add indexed access
   for (let i = 0; i < files.length; i++) {
-    ;(fileList as unknown as Record<number, File>)[i] = files[i]
+    ;(fileList as unknown as Record<number, File>)[i] = files[i]!
   }
 
   const dataTransfer = {
@@ -96,7 +96,7 @@ describe("createDropzone", () => {
         const { accepted, rejected } = dz.validateFiles([pdf])
         expect(accepted).toHaveLength(0)
         expect(rejected).toHaveLength(1)
-        expect(rejected[0].reason).toBe("type")
+        expect(rejected[0]!.reason).toBe("type")
         dispose()
       })
     })
@@ -108,7 +108,7 @@ describe("createDropzone", () => {
         const { accepted, rejected } = dz.validateFiles([large])
         expect(accepted).toHaveLength(0)
         expect(rejected).toHaveLength(1)
-        expect(rejected[0].reason).toBe("size")
+        expect(rejected[0]!.reason).toBe("size")
         dispose()
       })
     })
@@ -132,7 +132,7 @@ describe("createDropzone", () => {
         const { accepted, rejected } = dz.validateFiles([f1, f2, f3])
         expect(accepted).toHaveLength(2)
         expect(rejected).toHaveLength(1)
-        expect(rejected[0].reason).toBe("count")
+        expect(rejected[0]!.reason).toBe("count")
         dispose()
       })
     })

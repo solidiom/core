@@ -493,9 +493,7 @@ describe("createSegmentedEditing", () => {
   describe("text segments", () => {
     it("accepts alphabetic characters", () => {
       createRoot((dispose) => {
-        const segments: SegmentDefinition[] = [
-          { id: "text", type: "text", maxLength: 5 },
-        ]
+        const segments: SegmentDefinition[] = [{ id: "text", type: "text", maxLength: 5 }]
         const editing = createSegmentedEditing({ segments })
         editing.focusSegment(0)
         flush()
@@ -514,9 +512,7 @@ describe("createSegmentedEditing", () => {
 
     it("rejects non-alphabetic characters for text segments", () => {
       createRoot((dispose) => {
-        const segments: SegmentDefinition[] = [
-          { id: "text", type: "text", maxLength: 5 },
-        ]
+        const segments: SegmentDefinition[] = [{ id: "text", type: "text", maxLength: 5 }]
         const editing = createSegmentedEditing({ segments })
         editing.focusSegment(0)
         flush()
@@ -773,10 +769,7 @@ describe("createSegmentedEditing", () => {
         const segments: SegmentDefinition[] = [
           { id: "val", type: "numeric", min: 0, max: 999, maxLength: 3 },
         ]
-        const [vals] = createSignal<Record<string, string>>(
-          { val: "10" },
-          { ownedWrite: true },
-        )
+        const [vals] = createSignal<Record<string, string>>({ val: "10" }, { ownedWrite: true })
         const onChange = vi.fn()
         const editing = createSegmentedEditing({
           segments,

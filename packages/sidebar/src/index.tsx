@@ -10,7 +10,12 @@
 
 import { type Accessor, createContext, useContext } from "solid-js"
 import { type JSX } from "@solidjs/web"
-import { createDisclosureState, createPresence, createStableId, applySemanticAttrs } from "@solidiom/runtime"
+import {
+  createDisclosureState,
+  createPresence,
+  createStableId,
+  applySemanticAttrs,
+} from "@solidiom/runtime"
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 

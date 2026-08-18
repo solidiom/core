@@ -8,16 +8,7 @@ import {
   createChangeDetails,
   resolveNextItem,
 } from "@solidiom/runtime"
-import {
-  Root,
-  List,
-  Item,
-  Trigger,
-  Content,
-  Link,
-  Group,
-  GroupLabel,
-} from "./index"
+import { Root, List, Item, Trigger, Content, Link, Group, GroupLabel } from "./index"
 
 // ─── Component Exports ──────────────────────────────────────────────────────────
 
@@ -91,7 +82,10 @@ describe("mega-menu disclosure state", () => {
       const { requestOpenChange } = createDisclosureState({ onOpenChange })
       requestOpenChange(true, createChangeDetails("trigger"))
       flush()
-      expect(onOpenChange).toHaveBeenCalledWith(true, expect.objectContaining({ reason: "trigger" }))
+      expect(onOpenChange).toHaveBeenCalledWith(
+        true,
+        expect.objectContaining({ reason: "trigger" }),
+      )
       dispose()
     })
   })
@@ -213,9 +207,21 @@ describe("mega-menu collection", () => {
   it("registers and tracks items", () => {
     createRoot((dispose) => {
       const collection = createCollection({ orientation: () => "horizontal" })
-      collection.registerItem({ id: "products", disabled: () => false, textValue: () => "Products" })
-      collection.registerItem({ id: "solutions", disabled: () => false, textValue: () => "Solutions" })
-      collection.registerItem({ id: "resources", disabled: () => false, textValue: () => "Resources" })
+      collection.registerItem({
+        id: "products",
+        disabled: () => false,
+        textValue: () => "Products",
+      })
+      collection.registerItem({
+        id: "solutions",
+        disabled: () => false,
+        textValue: () => "Solutions",
+      })
+      collection.registerItem({
+        id: "resources",
+        disabled: () => false,
+        textValue: () => "Resources",
+      })
 
       flush()
       expect(collection.items().length).toBe(3)
@@ -241,7 +247,11 @@ describe("mega-menu collection", () => {
   it("unregisters items", () => {
     createRoot((dispose) => {
       const collection = createCollection({ orientation: () => "horizontal" })
-      const cleanup = collection.registerItem({ id: "a", disabled: () => false, textValue: () => "A" })
+      const cleanup = collection.registerItem({
+        id: "a",
+        disabled: () => false,
+        textValue: () => "A",
+      })
       collection.registerItem({ id: "b", disabled: () => false, textValue: () => "B" })
 
       flush()
@@ -296,9 +306,21 @@ describe("mega-menu roving focus", () => {
   it("resolves next item for ArrowRight navigation", () => {
     createRoot((dispose) => {
       const collection = createCollection({ orientation: () => "horizontal" })
-      collection.registerItem({ id: "products", disabled: () => false, textValue: () => "Products" })
-      collection.registerItem({ id: "solutions", disabled: () => false, textValue: () => "Solutions" })
-      collection.registerItem({ id: "resources", disabled: () => false, textValue: () => "Resources" })
+      collection.registerItem({
+        id: "products",
+        disabled: () => false,
+        textValue: () => "Products",
+      })
+      collection.registerItem({
+        id: "solutions",
+        disabled: () => false,
+        textValue: () => "Solutions",
+      })
+      collection.registerItem({
+        id: "resources",
+        disabled: () => false,
+        textValue: () => "Resources",
+      })
       flush()
 
       const enabledItems = collection.enabledItems()
@@ -311,9 +333,21 @@ describe("mega-menu roving focus", () => {
   it("resolves previous item for ArrowLeft navigation", () => {
     createRoot((dispose) => {
       const collection = createCollection({ orientation: () => "horizontal" })
-      collection.registerItem({ id: "products", disabled: () => false, textValue: () => "Products" })
-      collection.registerItem({ id: "solutions", disabled: () => false, textValue: () => "Solutions" })
-      collection.registerItem({ id: "resources", disabled: () => false, textValue: () => "Resources" })
+      collection.registerItem({
+        id: "products",
+        disabled: () => false,
+        textValue: () => "Products",
+      })
+      collection.registerItem({
+        id: "solutions",
+        disabled: () => false,
+        textValue: () => "Solutions",
+      })
+      collection.registerItem({
+        id: "resources",
+        disabled: () => false,
+        textValue: () => "Resources",
+      })
       flush()
 
       const enabledItems = collection.enabledItems()
@@ -402,8 +436,12 @@ describe("mega-menu active value", () => {
 
   it("respects controlled value", () => {
     createRoot((dispose) => {
-      const [controlled, setControlled] = createSignal<string | undefined>("products", { ownedWrite: true })
-      const [internal, setInternal] = createSignal<string | undefined>(undefined, { ownedWrite: true })
+      const [controlled, setControlled] = createSignal<string | undefined>("products", {
+        ownedWrite: true,
+      })
+      const [internal, setInternal] = createSignal<string | undefined>(undefined, {
+        ownedWrite: true,
+      })
 
       const activeValue = () => {
         if (controlled() !== undefined) return controlled()

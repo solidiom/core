@@ -114,7 +114,11 @@ export function Status(props: ChatMessageMetadataStatusProps) {
       data-status={props.status}
       class={props.class}
       style={props.style}
-      {...applySemanticAttrs({ scope: "chat-message-metadata", part: "status", state: props.status })}
+      {...applySemanticAttrs({
+        scope: "chat-message-metadata",
+        part: "status",
+        state: props.status,
+      })}
     >
       {props.children ?? props.status}
     </span>

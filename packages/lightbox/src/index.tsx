@@ -143,7 +143,13 @@ export function Root(props: LightboxRootProps) {
 
   return (
     <LightboxContext value={ctx}>
-      <div {...applySemanticAttrs({ scope: "lightbox", part: "root", state: open() ? "open" : "closed" })}>
+      <div
+        {...applySemanticAttrs({
+          scope: "lightbox",
+          part: "root",
+          state: open() ? "open" : "closed",
+        })}
+      >
         {props.children}
       </div>
     </LightboxContext>

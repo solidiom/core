@@ -165,7 +165,11 @@ export function SendButton(props: ChatComposerSendButtonProps) {
       disabled={isEmpty() || ctx.disabled()}
       class={props.class}
       style={props.style}
-      {...applySemanticAttrs({ scope: "chat-composer", part: "send-button", disabled: isEmpty() || ctx.disabled() })}
+      {...applySemanticAttrs({
+        scope: "chat-composer",
+        part: "send-button",
+        disabled: isEmpty() || ctx.disabled(),
+      })}
     >
       {props.children ?? "Send"}
     </button>
@@ -193,7 +197,11 @@ export function AttachButton(props: ChatComposerAttachButtonProps) {
       onClick={() => props.onClick?.()}
       class={props.class}
       style={props.style}
-      {...applySemanticAttrs({ scope: "chat-composer", part: "attach-button", disabled: ctx.disabled() })}
+      {...applySemanticAttrs({
+        scope: "chat-composer",
+        part: "attach-button",
+        disabled: ctx.disabled(),
+      })}
     >
       {props.children ?? "Attach"}
     </button>
