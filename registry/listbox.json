@@ -39,7 +39,7 @@
     "evidenceIds": [
       "axe-listbox-scan-v1"
     ],
-    "lastReviewed": "2026-08-14T03:47:36.159Z"
+    "lastReviewed": "2026-08-18T03:43:47.313Z"
   },
   "documentation": {
     "status": "complete",
@@ -76,11 +76,11 @@
       "src/listbox-context.ts": "e309057d5d1e7633d4f6415943191fac74c9191cf80abbe3b8b9f53bb2b40f41",
       "src/listbox.tsx": "f7b172837f2c0f056e0bab9002ceb782915031f0c98ffb052d23325de157d48d"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-18T03:16:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/listbox"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-18T03:16:44.000Z"
 }

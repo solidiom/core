@@ -30,7 +30,7 @@
         "src/recipes/alert.tsx": "0b580e8b3dce2719d4954d35dc8bfcd8e232aa10ffe77067afb67a66230649ee"
       }
     },
-    "lastGenerated": "2026-08-18T02:59:33.000Z"
+    "lastGenerated": "2026-08-18T03:16:44.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/alert"
   ],
-  "lastUpdated": "2026-08-18T02:59:33.000Z"
+  "lastUpdated": "2026-08-18T03:16:44.000Z"
 }

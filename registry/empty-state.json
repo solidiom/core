@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-empty-state-scan-v1"
     ],
-    "lastReviewed": "2026-08-14T03:47:36.159Z"
+    "lastReviewed": "2026-08-18T03:43:47.313Z"
   },
   "documentation": {
     "status": "complete",
@@ -65,11 +65,11 @@
     "fileDigests": {
       "src/index.tsx": "5a98290e07f0a6d4a43f84e32888193e28b76c62786a09b02a5d1009e66862f6"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-18T03:16:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/empty-state"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-18T03:16:44.000Z"
 }

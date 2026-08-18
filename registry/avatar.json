@@ -30,7 +30,7 @@
     "evidenceIds": [
       "axe-avatar-scan-v1"
     ],
-    "lastReviewed": "2026-08-14T03:47:36.159Z"
+    "lastReviewed": "2026-08-18T03:43:47.313Z"
   },
   "documentation": {
     "status": "complete",
@@ -74,11 +74,11 @@
     "fileDigests": {
       "src/index.tsx": "0e08e24447beb45b5d01a0c72c4d11e260ef46a9adf95156364624558463225e"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-18T03:16:44.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/avatar"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-18T03:16:44.000Z"
 }

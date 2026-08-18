@@ -7,14 +7,14 @@ packages:
   - "templates/*"
 
 catalog:
-  solid-js: "^2.0.0-beta.32"
-  "@solidjs/web": "^2.0.0-beta.32"
-  babel-preset-solid: "^2.0.0-beta.32"
+  solid-js: "^2.0.0-rc.0"
+  "@solidjs/web": "^2.0.0-rc.0"
+  babel-preset-solid: "^2.0.0-rc.0"
 
 overrides:
-  solid-js: "2.0.0-beta.32"
-  "@solidjs/web": "2.0.0-beta.32"
-  babel-preset-solid: "2.0.0-beta.32"
+  solid-js: "2.0.0-rc.0"
+  "@solidjs/web": "2.0.0-rc.0"
+  babel-preset-solid: "2.0.0-rc.0"
 
 peerDependencyRules:
   allowAny:
