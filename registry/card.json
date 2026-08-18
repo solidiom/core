@@ -1,6 +1,6 @@
 {
   "name": "card",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/card",
   "capabilities": [],
   "dependencies": [
@@ -39,8 +39,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -80,11 +79,11 @@
     "fileDigests": {
       "src/index.tsx": "05c962b66181d38c43b80c8d8d446b9326cc88bb8069949cf54eb121b738fba2"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/card"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

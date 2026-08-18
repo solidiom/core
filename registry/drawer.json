@@ -1,6 +1,6 @@
 {
   "name": "drawer",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/drawer",
   "capabilities": [],
   "dependencies": [
@@ -46,8 +46,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -76,11 +75,11 @@
       "src/drawer.tsx": "1fefafde0b912e0a9260c86a42261d94c93b52a0c76a973e018d0d8dcdfbca7a",
       "src/index.tsx": "d73bd947145a4c6b215eec138ea4da63602602798781e51aee003fdfee842e80"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/drawer"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

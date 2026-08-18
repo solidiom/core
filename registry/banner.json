@@ -1,0 +1,71 @@
+{
+  "name": "banner",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/banner",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [
+    "state/disclosure-state"
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Banner",
+  "description": "Dismissible site-wide notification bar.",
+  "category": "feedback",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add banner",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "banner",
+      "bar",
+      "dismissible",
+      "feedback",
+      "notification",
+      "runtime",
+      "site",
+      "wide"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "5c876ef0d1f26204c4bad0bcab2e53e580a5f913c1b42d1d04b4ef4004fdab14",
+    "fileDigests": {
+      "src/index.tsx": "76614b065d4d34d43b008d3890aecc6c0f2c66fa231feb23298b32b3ddf8dc83"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/banner"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

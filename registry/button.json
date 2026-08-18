@@ -1,6 +1,6 @@
 {
   "name": "button",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/button",
   "capabilities": [],
   "dependencies": [
@@ -43,8 +43,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -87,11 +86,11 @@
       "src/index.tsx": "afbf08de5a4fd3fd5cc54accfc155f04df05e5894a64914fc4903e69452a3855",
       "src/toggle-button.tsx": "a5ca880d302fddc1c78b5f7c609fbaf3c228fadddcbfa7e563ccb1d56748013e"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/button"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

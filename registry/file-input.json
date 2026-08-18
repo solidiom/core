@@ -1,0 +1,72 @@
+{
+  "name": "file-input",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/file-input",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "File Input",
+  "description": "File upload trigger with dropzone support and validation.",
+  "category": "data-input",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add file-input",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "data",
+      "dropzone",
+      "file",
+      "input",
+      "runtime",
+      "support",
+      "trigger",
+      "upload",
+      "validation",
+      "with"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "8bd55c679b73e8267fc0cf5b7e937e7664bb014cf91bfbb41f802df47a0b957a",
+    "fileDigests": {
+      "src/index.tsx": "fa3caf4ef6c85fbfe657dbac799aba441bd867bea36b371a161bec4aafd422c9"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/file-input"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

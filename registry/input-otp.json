@@ -1,6 +1,6 @@
 {
   "name": "input-otp",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/input-otp",
   "capabilities": [],
   "dependencies": [
@@ -41,8 +41,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -70,11 +69,11 @@
     "fileDigests": {
       "src/index.tsx": "d730605b557106a71506fcf48ed6b2a7f4c01b20149a3e2874b93ea895d6a57b"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/input-otp"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

@@ -55,3 +55,47 @@ export * as Tooltip from "@solidiom/tooltip"
 export * as Tree from "@solidiom/tree"
 export * as VirtualList from "@solidiom/virtual-list"
 export * as VisuallyHidden from "@solidiom/visually-hidden"
+
+// Phase 1 — Form completeness
+export * as NumberInput from "@solidiom/number-input"
+export * as FileInput from "@solidiom/file-input"
+export * as DateRangeInput from "@solidiom/date-range-input"
+export * as TimeInput from "@solidiom/time-input"
+export * as MultiSelector from "@solidiom/multi-selector"
+export * as Tokenizer from "@solidiom/tokenizer"
+export * as InputGroup from "@solidiom/input-group"
+
+// Phase 2 — Layout & Navigation
+export * as Stack from "@solidiom/stack"
+export * as Grid from "@solidiom/grid"
+export * as AspectRatio from "@solidiom/aspect-ratio"
+export * as Sidebar from "@solidiom/sidebar"
+export * as AppShell from "@solidiom/app-shell"
+export * as MegaMenu from "@solidiom/mega-menu"
+export * as SegmentedControl from "@solidiom/segmented-control"
+
+// Phase 3 — Content & Display
+export * as Table from "@solidiom/table"
+export * as AvatarGroup from "@solidiom/avatar-group"
+export * as Typography from "@solidiom/typography"
+export * as CodeBlock from "@solidiom/code-block"
+export * as Banner from "@solidiom/banner"
+export * as StatusDot from "@solidiom/status-dot"
+export * as Link from "@solidiom/link"
+
+// Phase 4 — Chat / AI
+export * as ChatMessage from "@solidiom/chat-message"
+export * as ChatComposer from "@solidiom/chat-composer"
+export * as ChatLayout from "@solidiom/chat-layout"
+export * as ChatMessageMetadata from "@solidiom/chat-message-metadata"
+export * as ChatSystemMessage from "@solidiom/chat-system-message"
+export * as ChatToolCalls from "@solidiom/chat-tool-calls"
+export * as MessageScroller from "@solidiom/message-scroller"
+
+// Phase 5 — Polish
+export * as Lightbox from "@solidiom/lightbox"
+export * as Direction from "@solidiom/direction"
+export * as Chart from "@solidiom/chart"
+export * as Questionnaire from "@solidiom/questionnaire"
+export * as Attachment from "@solidiom/attachment"
+export * as Menubar from "@solidiom/menubar"

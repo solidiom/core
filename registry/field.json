@@ -1,6 +1,6 @@
 {
   "name": "field",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/field",
   "capabilities": [],
   "dependencies": [
@@ -41,8 +41,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -77,11 +76,11 @@
     "fileDigests": {
       "src/index.tsx": "ac4930e21ef9845a3e984176c165a8fcd9120c6144857d82e372521d267b7f2e"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/field"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

@@ -1,0 +1,72 @@
+{
+  "name": "table",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/table",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Table",
+  "description": "Simple static data table with header, body, rows, and cells.",
+  "category": "table",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add table",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "body",
+      "cells",
+      "data",
+      "header",
+      "rows",
+      "runtime",
+      "simple",
+      "static",
+      "table",
+      "with"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "3e384bf679dbd9ddaad1a72d3720ba8491aea9516c56a566eafc4aad69d2e391",
+    "fileDigests": {
+      "src/index.tsx": "6b8e5998a88f2c2f75acda5b742f4245fb5e658849efdc407657edc8e3f6251c"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/table"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,71 @@
+{
+  "name": "avatar-group",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/avatar-group",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Avatar Group",
+  "description": "Stacked avatar display for showing multiple users.",
+  "category": "content",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add avatar-group",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "avatar",
+      "content",
+      "display",
+      "for",
+      "group",
+      "multiple",
+      "runtime",
+      "showing",
+      "stacked",
+      "users"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "a8ad2f1a5c641607cc8146c9ef1661bfc7db994aa5c0e128208549ff896da403",
+    "fileDigests": {
+      "src/index.tsx": "4a41be10c86a82fac658107fad5adf2b6f3e6d7e92802be1c6952317768f6a45"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/avatar-group"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

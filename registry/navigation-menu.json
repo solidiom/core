@@ -1,6 +1,6 @@
 {
   "name": "navigation-menu",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/navigation-menu",
   "capabilities": [
     {
@@ -53,8 +53,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -89,11 +88,11 @@
       "src/index.tsx": "9341bcb9923a4bd5c4760b7a9cb73165fe8615c2c42bbaa43e9ff4a180fa0630",
       "src/navigation-menu-context.ts": "ca2efac856f3a583f86434e48f3cf75e3f1412068dcd16fc95600729b26adfef"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/navigation-menu"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

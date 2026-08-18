@@ -1,6 +1,6 @@
 {
   "name": "sheet",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/sheet",
   "capabilities": [],
   "dependencies": [
@@ -43,8 +43,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -75,11 +74,11 @@
     "fileDigests": {
       "src/index.tsx": "36e686002d0f992736b1f7fdb352397b2d6b22707a5a8ea83e5e124fb019ae08"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/sheet"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

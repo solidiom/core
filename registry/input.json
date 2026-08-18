@@ -1,6 +1,6 @@
 {
   "name": "input",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/input",
   "capabilities": [],
   "dependencies": [
@@ -39,8 +39,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -72,11 +71,11 @@
     "fileDigests": {
       "src/index.tsx": "89b2003e9cbf8b7b20cd7ec3aec3a6baafd385186865e5b0b5a4f4bd4ce09ec2"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/input"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

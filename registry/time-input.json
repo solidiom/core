@@ -1,0 +1,76 @@
+{
+  "name": "time-input",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/time-input",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [
+    "dom/stable-id"
+  ],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Time Input",
+  "description": "Segmented time entry with hour, minute, second fields and AM/PM toggle.",
+  "category": "data-input",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add time-input",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "data",
+      "entry",
+      "fields",
+      "hour",
+      "input",
+      "minute",
+      "runtime",
+      "second",
+      "segmented",
+      "time",
+      "toggle",
+      "with"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "974518e9cab91eb5bc0be40bc450109ccc656fd9164a3454eb0681e1e8abb3ba",
+    "fileDigests": {
+      "src/index.tsx": "5b18da44ffcc99c443584b722504eb2629f68c82ffec8fe5c60e07c11d27b47a"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/time-input"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

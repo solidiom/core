@@ -1,0 +1,73 @@
+{
+  "name": "chat-layout",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/chat-layout",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Chat Layout",
+  "description": "Container managing message flow, scroll behavior, and composer positioning.",
+  "category": "layout",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add chat-layout",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "behavior",
+      "chat",
+      "composer",
+      "container",
+      "flow",
+      "layout",
+      "managing",
+      "message",
+      "positioning",
+      "runtime",
+      "scroll"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "25210fbc3ce36cd5c4198bbd306169e4ffe846819deb78fd8b81a4b78c827c53",
+    "fileDigests": {
+      "src/index.tsx": "56da1ec970dbd5ee3301764646509be9d01b2445c990b281019645bd945ec7ac"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/chat-layout"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

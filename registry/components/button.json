@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
   "name": "button",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/recipes-css",
   "deliverables": [
     "component"
@@ -30,7 +30,7 @@
         "src/recipes/button.tsx": "49db8c6a779d42418a736fb79d481fcd9e10b4fd60e4059edffd5edb50e5a66e"
       }
     },
-    "lastGenerated": "2026-08-14T06:06:48.000Z"
+    "lastGenerated": "2026-08-18T00:55:36.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -46,5 +46,5 @@
   "dependencies": [
     "@solidiom/button"
   ],
-  "lastUpdated": "2026-08-14T06:06:48.000Z"
+  "lastUpdated": "2026-08-18T00:55:36.000Z"
 }

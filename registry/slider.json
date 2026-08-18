@@ -1,6 +1,6 @@
 {
   "name": "slider",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1",
   "package": "@solidiom/slider",
   "capabilities": [],
   "dependencies": [
@@ -44,8 +44,7 @@
         "status": "draft"
       },
       "es": {
-        "status": "reviewed",
-        "lastUpdated": "2026-08-07T05:00:00.000Z"
+        "status": "draft"
       }
     }
   },
@@ -73,11 +72,11 @@
       "src/slider-context.ts": "8e25de30ce30d7c6457d79a3e5571ec8e3b625ebe782c9123021a57056bba217",
       "src/slider.tsx": "9078729ce923206e402d477d681869b28f0662a38da832253493a3e676a033f5"
     },
-    "lastGenerated": "2026-08-12T22:56:48.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/slider"
   },
-  "lastUpdated": "2026-08-12T22:56:48.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

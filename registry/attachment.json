@@ -1,0 +1,71 @@
+{
+  "name": "attachment",
+  "version": "0.0.1-next.0",
+  "package": "@solidiom/attachment",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "label": "Attachment",
+  "description": "File attachment display with preview, name, and size.",
+  "category": "content",
+  "status": "experimental",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add attachment",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "none",
+    "evidenceIds": []
+  },
+  "documentation": {
+    "status": "stub",
+    "locales": {
+      "en": {
+        "status": "missing"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "attachment",
+      "content",
+      "display",
+      "file",
+      "name",
+      "preview",
+      "runtime",
+      "size",
+      "with"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "1f723ccc026e6ec06433f94c3015e7e68eb7f65238c57bb9161c674bba38b9a7",
+    "fileDigests": {
+      "src/index.tsx": "2ad7134515bbd4254841216a9a62a719a92e5087ae12eff5f0437bd83b254e2e"
+    },
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/attachment"
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}
