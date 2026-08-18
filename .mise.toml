@@ -46,6 +46,10 @@ run = [
 description = "Generate registry manifests (registry/*.json)"
 run = "pnpm tsx tools/registry-build.ts"
 
+[tasks."i18n:validate"]
+description = "Validate site translations (human-reviewed, freshness, coverage)"
+run = "pnpm --filter @solidiom/site run i18n:validate"
+
 # ---------------------------------------------------------------------------
 # Dev
 # ---------------------------------------------------------------------------
