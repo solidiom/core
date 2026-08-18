@@ -70,4 +70,6 @@ apps/site/public/templates/__preview__/
 
 
 # npm auth token (secrets live in .env)
-.npmrc
+.npmrc 
+
+.opencode
