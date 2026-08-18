@@ -222,7 +222,7 @@ if [[ $SITE_ONLY -eq 0 ]]; then
   step "4/7" "Applying changeset versions"
 
   PENDING=$(pnpm changeset status 2>&1 | grep -c "found [0-9]" || true)
-  if [[ "$PENDING" == "0" ]] && ! ls .changeset/*.md > /dev/null 2>&1; then
+  if [[ "$PENDING" == "0" ]] && ! ls .changeset/*.md 2>/dev/null | grep -qv "README.md"; then
     warn "No pending changesets — versions will not be bumped"
   else
     pnpm changeset version || die "Changeset version failed"
