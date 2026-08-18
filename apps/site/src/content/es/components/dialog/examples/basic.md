@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "2821a69275709d9eac694e49ab89b9a0e56eceaf13132cfd4d70946ace29df39"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Dialog es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/dialog`. Añade composición, slots de estilo semántico y estado de apertura controlado mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.

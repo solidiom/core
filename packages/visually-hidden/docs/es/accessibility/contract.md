@@ -32,5 +32,7 @@ nonApplicableCriteria:
     rationale: Visually Hidden es un elemento de presentación no interactivo y no recibe enfoque.
 reviewStatus: draft
 translationSourceHash: "0e962306d45eca60db7f103f1ef5e0b3d61add0b83b7caffd9297acf0eb46f00"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---

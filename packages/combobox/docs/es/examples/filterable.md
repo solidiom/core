@@ -17,7 +17,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "553c4b4c8f6a47c5daba15a95e8ff2f4a4e936cb1c05fd82e4d977b23658ff30"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El ejemplo en vivo filtra una lista de frutas mientras escribes. Usa <kbd>ArrowDown</kbd> y <kbd>ArrowUp</kbd> para navegar entre elementos, <kbd>Enter</kbd> para seleccionar el elemento resaltado y <kbd>Escape</kbd> para cerrar el listbox. La entrada mantiene el foco durante toda la interacción usando el patrón de descendiente activo.

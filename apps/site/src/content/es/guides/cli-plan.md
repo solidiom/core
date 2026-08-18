@@ -8,7 +8,9 @@ maturity: beta
 order: 5
 audience: intermediate
 translationSourceHash: "4a00ece415cd0a032aad4ea454768c56837c48ac317be9139a2dee5de0966cb2"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Planificar la instalación de un primitivo

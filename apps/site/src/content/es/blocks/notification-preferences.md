@@ -11,7 +11,9 @@ status: published
 category: "SETTINGS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "bdd5143e4428ac73e483cf9d72225396b5419d2638d16628c1e68a969dee8283"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Notification Preferences proporciona un flujo de trabajo settings componible para gestionar operaciones de notification preferences.

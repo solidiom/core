@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "994c8001f90af83a54b9ee80ed17564bd48a802699d383c0f890e0f823dae120"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Spinner proporciona una indicación visual de operaciones en curso.

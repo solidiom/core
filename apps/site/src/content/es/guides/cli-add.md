@@ -8,7 +8,9 @@ maturity: beta
 order: 3
 audience: intermediate
 translationSourceHash: "3bf1065cdc03b61940aa3b5d27a5528b4937be8bfdce395dc1771c81d28ee8f5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Agregar un primitivo

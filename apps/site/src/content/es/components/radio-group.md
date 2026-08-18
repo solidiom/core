@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "radio-group"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "7178571133674df32cb70ae34491c1821928caddd8a5d28db4222803de4a892a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled radio group component — the recipe wrapper for the css, tailwind, unocss profile(s) using the radio-group primitive.

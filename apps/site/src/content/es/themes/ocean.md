@@ -11,7 +11,9 @@ status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 translationSourceHash: "ca4c523f6e0d463805f66303b9c0e87f460159ad638641d3e22f9f7f6002cc8f"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 A deep teal and cyan palette inspired by ocean depths.

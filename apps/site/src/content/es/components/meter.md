@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "meter"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "54d273f8b5ed4b69690789ca57416751a38ebd4fd57630a4dfc3cd9e064db2d5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled meter component — the recipe wrapper for the css, tailwind, unocss profile(s) using the meter primitive.

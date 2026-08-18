@@ -6,7 +6,9 @@ keywords: [performance, benchmark, bundle, metrics, throughput, rendimiento]
 locale: es
 maturity: beta
 translationSourceHash: "119deab17d42413f3eb557be6ef7ed41212c42d31dbae180bd13c54de06209c1"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Rendimiento

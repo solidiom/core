@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "0a212c81402cf7677bd551daa985edb5195c6be56412d7fad55ed1fef320bad2"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Tabs es un wrapper de receta con estilos sobre el primitivo `@solidiom/tabs`. Proporciona selección de pestañas con navegación por teclado, foco itinerante, modos de activación automática y manual, y orientación horizontal y vertical.

@@ -11,7 +11,9 @@ status: published
 category: "RESOURCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "6ff9b94de03a850cc058d41325f64d6b0ad05365608c354aeccd4ada3baa47ad"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Resource Detail proporciona un flujo de trabajo resource componible para gestionar operaciones de resource detail.

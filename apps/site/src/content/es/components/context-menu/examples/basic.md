@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "6fef38a2f0b4e570655ad008e85a198d7130efb40782da9d84d6a1f695abc4e5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Context Menu muestra un menú cuando el usuario hace clic derecho en un elemento.

@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "2b7ca029d9c72c580ee9161df0aa52d69019ffc6885c0a1b70b860b42c9f106d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Breadcrumb es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/breadcrumb`. Proporciona una ruta de navegación jerárquica con estructura accesible, usando elementos semánticos de navegación y lista.

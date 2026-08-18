@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "field"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "f8fb9242d51121e57cd018209de129d556bf82eb45a44e7d529363b5d8f7235f"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Form field wrapper with label, control, description, and error message styling.

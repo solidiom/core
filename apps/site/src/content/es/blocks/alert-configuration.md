@@ -11,7 +11,9 @@ status: published
 category: "OBS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "92f25d72db571ee9555650daa5ffd9d1beee48b6dc4155d486e8c69983b18384"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Alert Configuration proporciona un flujo de trabajo obs componible para gestionar operaciones de alert configuration.

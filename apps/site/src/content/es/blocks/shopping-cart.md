@@ -11,7 +11,9 @@ status: published
 category: "COMMERCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "0f1261a17ce03d8ee9ffde4aa26c38451588f42f066b883841f319c2c23b01e0"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Shopping Cart proporciona un flujo de trabajo commerce componible para gestionar operaciones de shopping cart.

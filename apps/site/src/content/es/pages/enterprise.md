@@ -9,7 +9,9 @@ product: "Solidiom"
 productLayer: page
 status: draft
 translationSourceHash: "ed8c9a34a75742cbea5b5faecb15e1794e4be18c6862881eaece005fae3b2804"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Empresa

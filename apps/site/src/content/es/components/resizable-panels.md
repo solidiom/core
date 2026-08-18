@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "resizable-panels"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "10de596d182577369db592d08e06a9defa089ee4550d25e40474e3fbf138f021"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled resizable panels component — the recipe wrapper for the css, tailwind, unocss profile(s) using the resizable-panels primitive.

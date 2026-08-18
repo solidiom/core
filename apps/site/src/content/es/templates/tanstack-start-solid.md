@@ -12,7 +12,9 @@ package: "@solidiom/template-tanstack-start-solid"
 stack: tanstack-start-solid
 portfolios: ["balanced-product"]
 translationSourceHash: "9027772860fe3979331922422aedd74205e3d88b2899d66ae7d66838079a8b9b"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 TanStack Start Solid proporciona un punto de partida listo para producción para proyectos Solid usando el stack tanstack start solid.

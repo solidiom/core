@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "b2bbba2307036a3245d374dce56ff2ebcdde4f049dee17984cacb5ef624f4d72"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Content preview on hover with open delay and anchored positioning.

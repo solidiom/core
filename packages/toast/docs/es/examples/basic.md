@@ -19,7 +19,9 @@ source:
 runnable: false
 runnableReason: "Runnable island to be created when this primitive is fully retrofitted."
 translationSourceHash: "099aa5eec097485bab7498e03b69521a651e4977570ae7837b403bfc267429e0"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 ```tsx

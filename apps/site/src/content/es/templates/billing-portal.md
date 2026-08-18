@@ -12,7 +12,9 @@ package: "@solidiom/template-billing-portal"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "e0b2ae65ec9cdcb516630222632741e28e24cbd60f5a7da1a024193129774991"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Billing Portal proporciona un punto de partida listo para producción para gestión de suscripciones y pagos.

@@ -12,7 +12,9 @@ package: "@solidiom/template-security-center"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "328fddfb3986d2083cfb721d6460819be1777449831ad5a363e4929a5de929a3"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Security Center proporciona un punto de partida listo para producción para construir consolas de operaciones de seguridad con visibilidad de amenazas, gestión de vulnerabilidades y aplicación de políticas.

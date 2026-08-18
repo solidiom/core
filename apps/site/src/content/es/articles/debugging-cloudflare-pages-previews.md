@@ -13,8 +13,10 @@ date: "2026-08-17"
 authors:
   - solidiom-core
 tags: [operations, security, astro, debugging, solidiom]
-translationSourceHash: "d807aba5b985e54f5de5a4b8c6016431e5c21bb7331dd4c2b73c68ca730c417f"
-translationStatus: draft
+translationSourceHash: "c1fb4c1aa84e4af039ba7ac3f477d39de483afd55f98911bd655b64c966e3f7a"
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Cuando los Previews se Apagaron: Depurando Cloudflare Pages

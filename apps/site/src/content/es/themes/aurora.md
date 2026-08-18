@@ -11,7 +11,9 @@ status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 translationSourceHash: "1276c3229a0b8906e3938fa9a930f88c406cdccef9020b9967b277ae8b784c76"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 A vibrant purple and pink gradient palette.

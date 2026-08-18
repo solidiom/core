@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "b1d041629fb9457d956a403e1346c56788b1f6c5eba251e2edf383426bfec405"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Pagination es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/pagination`. Proporciona navegación de páginas con botones anterior, siguiente y números de página.

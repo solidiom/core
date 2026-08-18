@@ -11,7 +11,9 @@ status: published
 category: "CONTENT"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "dcf3455b681095cc5c865a890de5ccf3c92f1202cbe7eff30c2492ece586718e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Content Workflow proporciona un flujo de trabajo content componible para gestionar operaciones de content workflow.

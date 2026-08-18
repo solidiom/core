@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "b4b8116e5645d9f6d0edd8d69fa7f6b4b2f325561dc42ba9549f6e1f0c90861c"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Empty State proporciona un marcador de posición significativo cuando no hay contenido que mostrar.

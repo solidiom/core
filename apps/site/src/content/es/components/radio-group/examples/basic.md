@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "44cecb057569808c0d4d5151eca281d9db72a54be007d7e46c36e5b9304bfaf9"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 The Radio Group component is a styled recipe wrapper around the `@solidiom/radio-group` primitive. It provides accessible single-selection from a group of options with roving tabindex keyboard navigation.

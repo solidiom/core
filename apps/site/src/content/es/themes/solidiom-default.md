@@ -11,7 +11,9 @@ status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 translationSourceHash: "6e41548dc0ad84372fae42e030c338dbaf0763199dd521dcb5f42e4d3d6b2ebb"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 The canonical Solidiom theme with a cool slate canvas and indigo primary.

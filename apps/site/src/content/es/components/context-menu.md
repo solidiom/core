@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "context-menu"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "30d956103831d184d4ce85c877925dfb5ecd3770fb4ef5976a696a17d93d3c20"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled context menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the context-menu primitive.

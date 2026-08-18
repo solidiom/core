@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "breadcrumb"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "3e0efad77af1850beae86e218336dd99b2201f31ae006a7d43c8483bb94b350c"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled breadcrumb component — the recipe wrapper for the css, tailwind, unocss profile(s) using the breadcrumb primitive.

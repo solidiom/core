@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "virtual-list"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "b13d63ac2a1993a122184bf761113e7c590966f41e7a66e3f414b83e5fe53016"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled virtual list component — the recipe wrapper for the css, tailwind, unocss profile(s) using the virtual-list primitive.

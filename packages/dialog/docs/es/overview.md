@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. El atrapamiento de foco y el comportamiento del teclado están documentados en la sección Teclado.
 translationSourceHash: "bbfb08330634934adf2eef2e3aff4adc311696645c8a9b4258c974e6cf4b4d47"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Dialog presenta contenido contextual sobre la página actual. Úsalo cuando una decisión enfocada o un flujo breve deba interrumpir la tarea actual.

@@ -11,7 +11,9 @@ status: published
 category: "ONBOARD"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "9a6d5cdb7fcf6d7dcd80bb61f3f8036f73f88cab65485c7bc71e50fac118275e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Project Starter proporciona un flujo de trabajo onboard componible para gestionar operaciones de project starter.

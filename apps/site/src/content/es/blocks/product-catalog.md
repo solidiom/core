@@ -11,7 +11,9 @@ status: published
 category: "COMMERCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "45e8d738c691a832d7a78d54bce25dd60e0f692061707071e88dc0fc49bd2d7a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Product Catalog proporciona un flujo de trabajo commerce componible para gestionar operaciones de product catalog.

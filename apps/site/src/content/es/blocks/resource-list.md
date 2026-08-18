@@ -11,7 +11,9 @@ status: published
 category: "RESOURCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "d178990f33768a9968482b10cd995917a351900f204a0ff87a9067c71b7c2450"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Resource List proporciona un flujo de trabajo resource componible para gestionar operaciones de resource list.

@@ -11,7 +11,9 @@ status: published
 category: "COMMERCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "aa49e35d60c477dae50fa5b12e9982c284f8627274f15552f7a5ca72c29106d5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Order Tracking proporciona un flujo de trabajo commerce componible para gestionar operaciones de order tracking.

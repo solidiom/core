@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "8af00d0ebb43ad3be01f8e0c7b75e79d99d09e33d27dd8c718dc10ef3ada79c8"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Select es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/select`. Añade composición, slots de estilo semántico y estado de valor controlado mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.

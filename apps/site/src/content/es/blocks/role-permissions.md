@@ -11,7 +11,9 @@ status: published
 category: "ADMIN"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "f99ebfd0f57c2b29e7e0fba9c42b1f7c1ae2dbd6a892cb1fc4520597a3a18f24"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Role Permissions proporciona un flujo de trabajo admin componible para gestionar operaciones de role permissions.

@@ -22,7 +22,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 translationSourceHash: "58000403f102bee950edac66b0ffc17f2d0ee0d82493ad65ce40be56a7b1c92a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Alert renderiza un área de notificación en línea, no modal, con semántica de región en vivo de ARIA. Soporta cuatro variantes visuales (info, success, warning, error) y dos niveles de asertividad (assertive, polite) para controlar cómo los lector de pantalla anuncian el mensaje. Las partes Title y Description se conectan automáticamente mediante `aria-labelledby` y `aria-describedby` usando IDs estables compatibles con SSR.

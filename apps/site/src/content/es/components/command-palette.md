@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "command-palette"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "ce37746eba1d1985027bdf0d3260faa679046f465973e0bee1901d57d48c4307"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled command palette component — the recipe wrapper for the css, tailwind, unocss profile(s) using the command-palette primitive.
@@ -55,7 +57,7 @@ El componente Command Palette envuelve el primitivo `@solidiom/command-palette`.
 
 ## Variantes y estados
 
-Command Palette hereda su soporte de variantes y estados de `@solidiom/command-palette`. El primitivo implementa el patrón WAI-ARIA combobox/listbox con navegación por teclado y soporte para lectores de pantalla. Consulte la documentación del primitivo para la lista completa de props soportados y estados interactivos.
+Command Palette hereda su soporte de variantes y estados de `@solidiom/command-palette`. El primitivo implementa el patrón WAI-ARIA combobox/listbox con navegación por teclado y soporte para lector de pantalla. Consulte la documentación del primitivo para la lista completa de props soportados y estados interactivos.
 
 ## Estilos
 
@@ -69,4 +71,4 @@ Command Palette se renderiza como HTML semántico durante el renderizado en serv
 
 ## Accesibilidad
 
-Command Palette delega la accesibilidad a `@solidiom/command-palette`. El primitivo implementa el patrón WAI-ARIA combobox/listbox con navegación por teclado y soporte para lectores de pantalla. Consulta el [contrato de accesibilidad del primitivo Command Palette](/primitives/command-palette/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.
+Command Palette delega la accesibilidad a `@solidiom/command-palette`. El primitivo implementa el patrón WAI-ARIA combobox/listbox con navegación por teclado y soporte para lector de pantalla. Consulta el [contrato de accesibilidad del primitivo Command Palette](/primitives/command-palette/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.

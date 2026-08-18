@@ -11,7 +11,9 @@ status: published
 category: "SEARCH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "1b51912a9e35c2f310bfe0a5e2d256e2d9a4ddfdea5a19dda9ca79109ce6d17e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Search Analytics proporciona un flujo de trabajo search componible para gestionar operaciones de search analytics.

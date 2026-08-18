@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "listbox"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "9efab80c0f35ad278872f75d0ea3210afd707f1270b61993ee3d7cc06e5bfeaf"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled listbox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the listbox primitive.

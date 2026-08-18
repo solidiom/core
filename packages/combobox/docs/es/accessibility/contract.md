@@ -43,7 +43,9 @@ consumerDuties:
 nonApplicableCriteria: []
 reviewStatus: draft
 translationSourceHash: "de89b67f6581c613ccbcc449b6e41ea365fbd5d4d81eb25a29323c8709d0ad17"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 ## Evidencia automatizada

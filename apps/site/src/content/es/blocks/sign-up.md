@@ -11,7 +11,9 @@ status: published
 category: "AUTH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "3b03c418e8d1b28ee4d3aefcf1e8ae2813fba633dc28d541732866e9b57f991b"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Sign Up proporciona un flujo de trabajo auth componible para gestionar operaciones de sign up.

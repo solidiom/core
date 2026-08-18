@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "dialog"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "ca4a7cf6d13ee6ca3cb9a3d75e594e20840bfde91b58e13638d886209fe20c08"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled dialog component — the recipe wrapper for the css, tailwind, unocss profile(s) using the dialog primitive.

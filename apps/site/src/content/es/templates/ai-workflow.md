@@ -12,7 +12,9 @@ package: "@solidiom/template-ai-workflow"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "88df17c0670026ad7102e7ec8c95e1d639711976461f79e21ad849f5f5b76674"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 AI Workflow proporciona un punto de partida listo para producción para construir interfaces de automatización de pipelines de IA multi-paso.

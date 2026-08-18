@@ -11,7 +11,9 @@ status: published
 category: "AUTH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "154cdf17563c8ed3a4768ceccec5ff8f54161c0866df6af13c37cefe814e8587"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Sign In proporciona un flujo de trabajo auth componible para gestionar operaciones de sign in.

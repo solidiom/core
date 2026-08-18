@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "66583a260b76827ab93e1febfc7bd14fcaebc5e07d2e34b6c694eb83d67b9f99"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Determinate and indeterminate progress indicator.

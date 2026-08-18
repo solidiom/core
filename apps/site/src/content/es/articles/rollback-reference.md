@@ -13,7 +13,9 @@ authors:
   - solidiom-core
 tags: [operations, deployment, cloudflare]
 translationSourceHash: "65abd0a76c1e0b2114f7c1a2ab7378caf2d724ecf9a29381b9c719e677ee34ea"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Referencia de Rollback

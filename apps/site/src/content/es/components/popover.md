@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "popover"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "59b97dbfc7144ef1456c0b56668148fe2c2675dd6b7a4ed29ac4c5636ae5d43d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled popover component — the recipe wrapper for the css, tailwind, unocss profile(s) using the popover primitive.

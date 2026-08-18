@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "c62eba75f252232e303ea8e80669e1d4aec2cb9b11148eb0082be20e5a8c52a5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Carousel proporciona un contenedor desplazable para mostrar contenido en un área de visualización fija.

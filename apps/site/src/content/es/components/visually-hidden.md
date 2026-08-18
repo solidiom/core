@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "visually-hidden"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "3ed01974c7f271af7fbb9dbd91d7139fbe49dcf9a3d02de3d32233c300eb088c"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled visually hidden component — the recipe wrapper for the css, tailwind, unocss profile(s) using the visually-hidden primitive.

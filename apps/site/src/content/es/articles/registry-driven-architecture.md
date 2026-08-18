@@ -13,7 +13,9 @@ authors:
   - solidiom-core
 tags: [registry, architecture, solidiom]
 translationSourceHash: "3835a9a169112fc9cf36ce8094565ce89cc6d521c688538c23b891a8494b3cab"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Arquitectura Impulsada por Registro

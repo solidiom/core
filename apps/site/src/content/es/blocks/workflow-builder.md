@@ -11,7 +11,9 @@ status: published
 category: "AI"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "f2d604f540194fbb9203a141218cc3a6b73cacfd86852b6de6f2076ff4f505f2"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Workflow Builder proporciona un flujo de trabajo ai componible para gestionar operaciones de workflow builder.

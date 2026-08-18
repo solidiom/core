@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "hover-card"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "793adaf451eaaa24d6786957afb7771fd42b5ea4a3d58cb5cec72ede556961b8"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled hover card component — the recipe wrapper for the css, tailwind, unocss profile(s) using the hover-card primitive.

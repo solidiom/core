@@ -12,7 +12,9 @@ package: "@solidiom/template-onboarding-app"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "df3cc86cff3e2b18b21cccc73132ece3b562cdb6dd5aefe723044df64ca17fcc"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Onboarding App proporciona un punto de partida listo para producción para flujos de incorporación de usuarios guiados.

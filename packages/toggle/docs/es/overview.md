@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "6403ac5cc2878aed7ccf95fea07ae93f95f690379fe3f0f9d6266f9206b50d17"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 A two-state button that can be toggled on or off.

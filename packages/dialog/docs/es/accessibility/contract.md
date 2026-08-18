@@ -40,7 +40,9 @@ reviewStatus: reviewed
 reviewedBy: Revisión de accesibilidad de Solidiom
 reviewedAt: 2026-07-27T00:00:00.000Z
 translationSourceHash: "b758c7d0d172415f0a3eabcf03bd0955ac6ba88c4c7afb68befdd77653506041"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 ## Evidencia automatizada

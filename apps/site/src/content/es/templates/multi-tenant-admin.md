@@ -12,7 +12,9 @@ package: "@solidiom/template-multi-tenant-admin"
 stack: vite-solid-router
 portfolios: ["balanced-product", "enterprise-platform-governance"]
 translationSourceHash: "ad8a65637ca548edaeedc40c9123a758001f8170342459119f80c32bb28913af"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Multi-tenant Admin proporciona un punto de partida listo para producción para interfaces de administración multi-inquilino.

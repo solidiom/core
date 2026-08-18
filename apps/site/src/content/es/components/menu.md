@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "menu"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "da746bbd113220ff9d478f9ce8144e7029ff55b72c93aa512ce824677f769cf8"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the menu primitive.

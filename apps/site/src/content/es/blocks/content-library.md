@@ -11,7 +11,9 @@ status: published
 category: "CONTENT"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "b72240ab1d7b15f90c597438674b77ee032c50ec68c8be670fe34664513a1c3d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Content Library proporciona un flujo de trabajo content componible para gestionar operaciones de content library.

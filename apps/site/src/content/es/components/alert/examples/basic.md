@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "17c4de3af9bd1a7ac7de8524306f0e9a8ae9c1c450852202d0d88b75df189f13"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Alert es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/alert`. Añade estilos de variante, composición con `Alert.Title` y `Alert.Description`, y slots de estilo semántico mientras delega toda la gestión de estado y el comportamiento ARIA al primitivo subyacente.

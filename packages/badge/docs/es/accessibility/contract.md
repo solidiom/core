@@ -32,5 +32,7 @@ nonApplicableCriteria:
     rationale: Badge es un elemento de presentación no interactivo y no recibe enfoque.
 reviewStatus: draft
 translationSourceHash: "2c276dcbc7f6cad9d1b5f649ace1512ad13d012a617dd773a315853578287c79"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---

@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "navigation-menu"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "9279724c2e92432e9b1bf577a8ce359fc5eca62484349246d12146329fc3a010"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled navigation menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the navigation-menu primitive.
@@ -54,7 +56,7 @@ El componente Navigation Menu envuelve el primitivo `@solidiom/navigation-menu`.
 
 ## Variantes y estados
 
-Navigation Menu hereda su soporte de variantes y estados de `@solidiom/navigation-menu`. El primitivo implementa el patrón WAI-ARIA navigation menu con navegación por teclado y soporte para lectores de pantalla. Consulte la documentación del primitivo para la lista completa de props soportados y estados interactivos.
+Navigation Menu hereda su soporte de variantes y estados de `@solidiom/navigation-menu`. El primitivo implementa el patrón WAI-ARIA navigation menu con navegación por teclado y soporte para lector de pantalla. Consulte la documentación del primitivo para la lista completa de props soportados y estados interactivos.
 
 ## Estilos
 
@@ -68,4 +70,4 @@ Navigation Menu se renderiza como HTML semántico durante el renderizado en serv
 
 ## Accesibilidad
 
-Navigation Menu delega la accesibilidad a `@solidiom/navigation-menu`. El primitivo implementa el patrón WAI-ARIA navigation menu con navegación por teclado y soporte para lectores de pantalla. Consulta el [contrato de accesibilidad del primitivo Navigation Menu](/primitives/navigation-menu/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.
+Navigation Menu delega la accesibilidad a `@solidiom/navigation-menu`. El primitivo implementa el patrón WAI-ARIA navigation menu con navegación por teclado y soporte para lector de pantalla. Consulta el [contrato de accesibilidad del primitivo Navigation Menu](/primitives/navigation-menu/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.

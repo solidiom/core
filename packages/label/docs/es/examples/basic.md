@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: false
 translationSourceHash: "afdf96994d9597635735ac7d6fb990282d8d57b06a818ae7b4f6583023c22cf1"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 ```tsx

@@ -22,7 +22,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 translationSourceHash: "24550272ae00e680c9813068b1465989ec4b96401ff0023d6e7f971e240cd136"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Visually Hidden oculta contenido visualmente manteniéndolo accesible para lector de pantalla. Utiliza la técnica estándar de clip/overflow para eliminar contenido del diseño visual sin retirarlo del árbol de accesibilidad.

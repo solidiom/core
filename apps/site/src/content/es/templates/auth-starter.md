@@ -12,7 +12,9 @@ package: "@solidiom/template-auth-starter"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "6ccbe12fead1e26f5a3d0bc16327341fb26ab22740b04a89ae3d32e93eaa9995"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Authentication Starter proporciona un punto de partida listo para producción para proyectos Solid con flujos de autenticación completos.

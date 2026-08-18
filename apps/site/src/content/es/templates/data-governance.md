@@ -12,7 +12,9 @@ package: "@solidiom/template-data-governance"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "e00361d0e24ee45c46c389c91a42b9d00f89565cb60b9a3ab55cc09671cae325"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Data Governance proporciona un punto de partida listo para producción para construir plataformas de gobernanza de datos con descubrimiento, linaje y clasificación.

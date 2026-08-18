@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 translationSourceHash: "efc61e246d90a4495347503c29bb11a1f251f9e5a137565493320d1927bc56db"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Separator renderiza un divisor visual entre secciones de contenido con semántica accesible. Soporta orientaciones horizontal y vertical y puede marcarse como puramente decorativo para ocultarlo del árbol de accesibilidad.

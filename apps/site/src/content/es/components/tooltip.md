@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "tooltip"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "89b8c94fff8e6b350625320a541e0477f9c3b38de3a66f74c5ff1acb3e5595e3"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled tooltip component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tooltip primitive.

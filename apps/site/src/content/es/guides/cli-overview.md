@@ -8,7 +8,9 @@ maturity: beta
 order: 1
 audience: beginner
 translationSourceHash: "d97b7a12a83b3c0421f8868f43b47a6faef92aab5605302b07f2e42c2c45fff5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Vista general de la CLI de Solidiom

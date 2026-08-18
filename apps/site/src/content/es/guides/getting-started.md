@@ -9,7 +9,9 @@ product: "Solidiom"
 productLayer: guide
 status: draft
 translationSourceHash: "9342a7b41cbb9a66013b508ac4adc8e6a8fb2b39b7d5c94de2a00e5ec2d64daa"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Primeros pasos

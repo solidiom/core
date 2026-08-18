@@ -11,7 +11,9 @@ status: published
 category: "BILLING"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "f83ffeb773d2058b174e3fe62b7634298e510b3d340e83796f8b6eb6f243b1e1"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Invoice History proporciona un flujo de trabajo billing componible para gestionar operaciones de invoice history.

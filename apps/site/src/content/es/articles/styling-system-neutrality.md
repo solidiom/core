@@ -13,7 +13,9 @@ authors:
   - solidiom-core
 tags: [styling, tailwind, architecture]
 translationSourceHash: "44f10bc82b67ff8f663b51802cfb70b5096b8ab43afa3c2803c7d42c11ca54b6"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Neutralidad del Sistema de Estilos
@@ -44,7 +46,7 @@ Primitive (behavior) → Recipe (styling) → Component (composed)
 
 Se incluyen tres perfiles de receta:
 
-| Perfil     | Tecnología   | Enfoque                                            |
+| Perfil     | Tecnología   | Foco                                            |
 | ---------- | ------------ | -------------------------------------------------- |
 | `css`      | CSS puro     | Clases tipo BEM + selectores de atributos de datos |
 | `tailwind` | Tailwind CSS | Clases de utilidad + `@apply` para estados         |

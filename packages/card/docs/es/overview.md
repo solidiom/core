@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 translationSourceHash: "9fbd58e4bcae7148ca225f5a752d1063d05c3141b94da6dbc0a19a06c569f4ed"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Card renderiza un contenedor de contenido con partes componibles para encabezado, titulo, descripcion, cuerpo de contenido y pie. Proporciona una estructura semántica para agrupar contenido y acciones relacionadas.

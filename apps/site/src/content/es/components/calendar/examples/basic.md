@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "b6d0e59e58c8fe9d05075df4f77e745a7514b4c420e1304f156fc51e4f3a6798"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Calendar proporciona una cuadrícula interactiva de selección de fechas con navegación por teclado.

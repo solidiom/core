@@ -12,7 +12,9 @@ package: "@solidiom/template-resource-manager"
 stack: vite-solid-router
 portfolios: ["balanced-product", "enterprise-platform-governance"]
 translationSourceHash: "2daa6da28f8d16250cb945e0d77f2fa8f2d800406b4887659c328145060065d0"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Resource Manager proporciona un punto de partida listo para producción para aplicaciones de gestión de recursos CRUD.

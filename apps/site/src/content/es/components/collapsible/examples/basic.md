@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "1e24075e3babc0772458978203e308240c30f2315301003201d906a671cefcdb"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Collapsible gestiona una sección de contenido que puede alternarse entre estados visibles y ocultos.

@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "scroll-area"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "f079d2e3dd9afe850a01c5eed650f2c40377cb93009ccbd4101f192f0080a33a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled scroll area component — the recipe wrapper for the css, tailwind, unocss profile(s) using the scroll-area primitive.
@@ -48,7 +50,7 @@ El componente Scroll Area envuelve el primitivo `@solidiom/scroll-area`. Expone 
 
 ## Variantes y estados
 
-Scroll Area hereda su soporte de variantes y estados de `@solidiom/scroll-area`. El primitivo mantiene el comportamiento nativo de desplazamiento para plena compatibilidad con teclado y lectores de pantalla. El soporte de variantes incluye la propiedad `orientation` para controlar la dirección del desplazamiento (vertical u horizontal). Consulte la documentación del primitivo para la lista completa de props soportados y estados interactivos.
+Scroll Area hereda su soporte de variantes y estados de `@solidiom/scroll-area`. El primitivo mantiene el comportamiento nativo de desplazamiento para plena compatibilidad con teclado y lector de pantalla. El soporte de variantes incluye la propiedad `orientation` para controlar la dirección del desplazamiento (vertical u horizontal). Consulte la documentación del primitivo para la lista completa de props soportados y estados interactivos.
 
 ## Estilos
 
@@ -62,4 +64,4 @@ Scroll Area se renderiza como HTML semántico durante el renderizado en servidor
 
 ## Accesibilidad
 
-Scroll Area delega la accesibilidad a `@solidiom/scroll-area`. El primitivo mantiene el comportamiento nativo de desplazamiento para plena compatibilidad con teclado y lectores de pantalla. Consulta el [contrato de accesibilidad del primitivo Scroll Area](/primitives/scroll-area/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.
+Scroll Area delega la accesibilidad a `@solidiom/scroll-area`. El primitivo mantiene el comportamiento nativo de desplazamiento para plena compatibilidad con teclado y lector de pantalla. Consulta el [contrato de accesibilidad del primitivo Scroll Area](/primitives/scroll-area/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.

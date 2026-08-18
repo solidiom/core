@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "toolbar"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "7c7d0305a33067c9a63b33b5ad421aa9af066dad942e7ad46d58e3def5977619"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled toolbar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toolbar primitive.

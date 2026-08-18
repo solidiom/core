@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "1fdecb888c7b71c53668c85aaa9fad308be82929ba16a00f676c416f8a4e374e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Switch es un wrapper de receta con estilos sobre el primitivo `@solidiom/switch`. Proporciona un control de alternancia con estados encendido/apagado, soporte de teclado (Space y Enter) y accesibilidad para lector de pantalla.

@@ -11,7 +11,9 @@ status: published
 category: "SHELL"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "4cac3052f0aa31e48cf57b3ca408a7bf91324d0bfb8f93956ccf990530b6caf3"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Navigation Layout proporciona un flujo de trabajo shell componible para gestionar operaciones de navigation layout.

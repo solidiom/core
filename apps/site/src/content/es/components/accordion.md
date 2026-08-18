@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "accordion"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "a00cbcb8c2ec2b6a7b0da914579ff3d250cf1f7f97818a76eb3c0d6bc308c9d4"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled accordion component — the recipe wrapper for the css, tailwind, unocss profile(s) using the accordion primitive.

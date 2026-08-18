@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "74e49a7a3163dcfa2c858037b04b826e9d7f6537e4e398cbc300619188bd2e47"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Hover Card muestra un panel de contenido cuando el usuario pasa el cursor sobre un elemento de disparador o lo enfoca.

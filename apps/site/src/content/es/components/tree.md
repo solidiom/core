@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "tree"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "b1a283b647b0e75dea341e0bbb49cda75502ac77648a6c1fc4d905eecab03bf9"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled tree component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tree primitive.

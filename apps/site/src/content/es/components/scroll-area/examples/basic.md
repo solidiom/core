@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "bc86d269236ef181ebd95a2ba10d592cd80903b69810a7c1ce7d5194de8be686"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Scroll Area proporciona un contenedor desplazable con estilos personalizados y una barra de desplazamiento visible.

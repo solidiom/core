@@ -11,7 +11,9 @@ status: published
 category: "AI"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "b71ccc3671a5d747fd81b183d0a46b18a44e09d8c230f9a5b180124fae3a4aa7"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Chat Interface proporciona un flujo de trabajo ai componible para gestionar operaciones de chat interface.

@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "6c587d716724fe1733764e62259cbaec3f9762ee81ca526ddbb27a6b2a5a7b45"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Scalar measurement within a known range (e.g. disk usage, signal strength).

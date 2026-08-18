@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "87a8c2b1ad1b4e38ea903ab8c77e4ca4fcf92f35fcd9c235c8d2fdec85f0a1ba"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 The Toolbar component provides a container for grouping action buttons, toggle buttons, and separators.

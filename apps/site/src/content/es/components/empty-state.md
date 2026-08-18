@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "empty-state"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "f707ecc423f6b999140d294f58478703c8ba255817464d0335389068759f0b14"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled empty state component — the recipe wrapper for the css, tailwind, unocss profile(s) using the empty-state primitive.

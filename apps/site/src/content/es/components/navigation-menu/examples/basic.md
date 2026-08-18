@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "38f0c1414a9f34441899124049771fb899141d64874f87abd6c7aa433d69a9a4"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 The Navigation Menu component is a styled recipe wrapper around the `@solidiom/navigation-menu` primitive. It provides accessible dropdown sub-menus for top-level navigation.

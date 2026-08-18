@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "80b853973a307192db6490444ca5668feb4b658cfd4080fa6afe9333a97a345b"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Listbox proporciona una lista desplazable de opciones desde las cuales el usuario puede seleccionar uno o más elementos.

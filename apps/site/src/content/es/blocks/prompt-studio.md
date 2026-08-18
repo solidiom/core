@@ -11,7 +11,9 @@ status: published
 category: "AI"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "7e4e4b7f16b5f1004671c376ff491ebdaac163dc0bdf19666af3e18615e2d5c6"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Prompt Studio proporciona un flujo de trabajo ai componible para gestionar operaciones de prompt studio.

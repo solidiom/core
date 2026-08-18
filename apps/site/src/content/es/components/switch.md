@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "switch"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "750907c511f7f268db33c6ad544cfec25d6779d8fa2a7281b68ec3974614fb73"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled switch component — the recipe wrapper for the css, tailwind, unocss profile(s) using the switch primitive.

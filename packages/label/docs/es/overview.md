@@ -22,7 +22,9 @@ notApplicable:
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 
 translationSourceHash: "eb5c9de84529497b8460dd109d5cb2d8ac20cad1532d969aad340c8aaadde06e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Label renderiza un elemento nativo `<label>` con atributos de datos semánticos. Úsalo para asociar texto con controles de formulario, proporcionando la conexión de accesibilidad requerida por las tecnologías de asistencia.

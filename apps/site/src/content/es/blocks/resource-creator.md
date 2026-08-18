@@ -11,7 +11,9 @@ status: published
 category: "RESOURCE"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "8daeb61c7e3a9a0ea0e08342cc4146ae4d0bd91be26f99beaf6d0621d7f8ad8a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Resource Creator proporciona un flujo de trabajo resource componible para gestionar operaciones de resource creator.

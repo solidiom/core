@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "059baee864a188a0ac467cec62a8291e35d3bfa1f5ecbf3f9ed0de1ea9c30fef"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Alert Dialog es un diálogo modal para confirmar acciones críticas.

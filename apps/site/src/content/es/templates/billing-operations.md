@@ -12,7 +12,9 @@ package: "@solidiom/template-billing-operations"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "9a0f685be8ea0668204f2890386596825eb36186a8b96525e4707b50b89383e4"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Billing Operations proporciona un punto de partida listo para producción para construir consolas internas de gestión de facturación y operaciones financieras.

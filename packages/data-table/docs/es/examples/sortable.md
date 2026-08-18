@@ -17,7 +17,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "960b67818b203678be9b9659387bd62f11690c50635e850f97c0e9c80eb28eab"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El ejemplo en vivo muestra una tabla de lenguajes de programación que se puede ordenar por nombre, año o paradigma. Haz clic en cualquier encabezado de columna para alternar entre los estados ascendente, descendente y sin ordenar.

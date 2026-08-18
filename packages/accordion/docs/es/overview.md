@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. El comportamiento del teclado está completamente documentado en la sección de interacción por teclado.
 translationSourceHash: "59647b00f0016edda619f0f6a5a85e0794e435d29182afa2f5f2b34d43ad31ab"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Accordion presenta un conjunto apilado verticalmente de secciones colapsables. Los usuarios expanden uno o más elementos para revelar el contenido asociado. Úsalo para organizar grandes cantidades de información en grupos manejables y escaneables.

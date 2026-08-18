@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "ee785ae3aab590816c891168cf10dfe626d0ffff4c881473098a39ec48790cb6"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Skeleton proporciona elementos de marcador de posición que imitan la forma del contenido mientras se carga.

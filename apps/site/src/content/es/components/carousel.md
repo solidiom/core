@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "carousel"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "0c7667be4acb9c7c24692c2e03f02393339327a857abd29489d5fa4942430e57"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled carousel component — the recipe wrapper for the css, tailwind, unocss profile(s) using the carousel primitive.

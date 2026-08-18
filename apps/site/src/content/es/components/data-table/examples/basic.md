@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "352bd574fdd546ce08d451f66a89e6e213413bc212d33d12dc22f066f19ef1b8"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Data Table es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/data-table`. Proporciona una tabla ordenable y seleccionable con celdas de encabezado accesibles y selección de filas.

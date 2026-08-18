@@ -43,7 +43,9 @@ consumerDuties:
 nonApplicableCriteria: []
 reviewStatus: draft
 translationSourceHash: "61750e4a2508d6f40051318ba0590edf9c03f19218c6f1143d4420686fc4626a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 ## Atributos de datos

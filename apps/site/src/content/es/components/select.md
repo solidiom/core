@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "select"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "9c45fba1fba283f4ceaecc91a2d35768f7a1e4ded0be0aec9ec2b0e21969fdf5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled select component — the recipe wrapper for the css, tailwind, unocss profile(s) using the select primitive.

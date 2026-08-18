@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "f477182cd4dfcba8047e1ddc641232e23ad9d3cadd04b93d3ac89bb0f1cb52d5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 The Toggle component is a two-state button that can be pressed or released.

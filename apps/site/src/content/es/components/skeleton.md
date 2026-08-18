@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "skeleton"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "477ad3d3bd6d4add4035b9489a5a7bf277cae63aed510a6929a850cc7c6b61e9"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled skeleton component — the recipe wrapper for the css, tailwind, unocss profile(s) using the skeleton primitive.

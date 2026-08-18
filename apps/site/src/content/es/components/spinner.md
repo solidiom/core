@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "spinner"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "aa4cde00e706a154aafc78f8e5655bcf35a6649121fcba7eefa2b8d1b1b63949"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled spinner component — the recipe wrapper for the css, tailwind, unocss profile(s) using the spinner primitive.

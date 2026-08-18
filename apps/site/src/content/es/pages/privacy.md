@@ -3,7 +3,9 @@ title: Divulgaciones de Privacidad
 description: Cómo Solidiom maneja tus datos — qué recopilamos, qué no, y tus derechos.
 locale: es
 translationSourceHash: "c2731ab3ace6b20461ad0484455bc80b0feeb393dd4d4dbaec870144d3fc300a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Divulgaciones de Privacidad

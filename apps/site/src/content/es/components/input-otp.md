@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "input-otp"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "d0e37427c71490edf1a74dcdb74b94e4789a697cb4c559d06b0b1547a5564476"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled input OTP component — the recipe wrapper for the css, tailwind, unocss profile(s) using the input-otp primitive.

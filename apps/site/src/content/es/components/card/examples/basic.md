@@ -18,7 +18,9 @@ source:
   export: CardExample
   language: tsx
 translationSourceHash: "916e51cf492dcf3fed4117a16d9b01d26b4fff81fbc0a20c46032271f93862be"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Card proporciona un envoltorio estilizado alrededor de contenedores de contenido con composición de encabezado, contenido principal y pie de página.

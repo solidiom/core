@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "d44359aa8813d74d65990e7c54076725832aeef75d91561938fb4fdb7564ae42"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Button es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/button`. Añade estilos de variante, composición y slots de estilo semántico mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.

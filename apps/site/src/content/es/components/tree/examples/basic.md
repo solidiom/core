@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "44af5a5dbabc9be7578708ed8769434f1ac2a8f92974088746d5aa356690d209"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Tree muestra una lista jerárquica de elementos con ramas expandibles.

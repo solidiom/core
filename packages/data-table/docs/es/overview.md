@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. El comportamiento de orden y adaptador está documentado arriba.
 translationSourceHash: "e79d89e64950977b0983ba96f28e37d0657f0d8270f3f1e918544210b478dc4b"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Data Table proporciona un primitivo de tabla componible y sin estilos con ordenamiento incorporado, control de visibilidad de columnas y selección de filas. Delega el cómputo de orden a través del patrón adaptador para que los consumidores puedan conectar motores externos sin acoplarse a una implementación específica.

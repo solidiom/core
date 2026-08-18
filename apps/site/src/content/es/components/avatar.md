@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "avatar"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "f96835a6c7e72959c4a75f87aeedfcc80758ab50cbb2fdd033d19fc0ac0dcb96"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled avatar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the avatar primitive.
