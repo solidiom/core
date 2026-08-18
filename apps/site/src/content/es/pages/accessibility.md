@@ -8,7 +8,7 @@ maturity: draft
 product: "Solidiom"
 productLayer: page
 status: draft
-translationSourceHash: "4e59697d19c0e2803d286976b8ca32fecfe4ca55652a814da1f75b21a949a156"
+translationSourceHash: "7b99aef8aea68d83717cf6818d7c4c8696ace3e381d0bfd0b012bc37b26b17be"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
 translationReviewedAt: "2026-08-18"
@@ -23,7 +23,7 @@ Solidiom está construido sobre el principio de que el software accesible no es 
 - Cada primitivo interactivo implementa el patrón APG correspondiente de teclado y ARIA
 - Cada primitivo incluye evidencia de accesibilidad comprometida (`evidence.json`)
 - Cada preset de tema cumple los mínimos de contraste AA tanto en modo claro como oscuro
-- Los escaneos automatizados de axe-core se ejecutan en cada build para los 52 primitivos
+- Los escaneos automatizados de axe-core se ejecutan en cada build para los 86 primitivos
 - La navegación por teclado está documentada y probada para cada elemento interactivo
 
 ## Evidencia
@@ -41,7 +41,7 @@ Nuestra evidencia de accesibilidad es verificada por máquina y comprometida en 
 
 ### Evidencia por Primitivo
 
-Cada uno de los 52 primitivos tiene un archivo `packages/<name>/docs/accessibility/evidence.json` comprometido que contiene:
+Cada uno de los 86 primitivos tiene un archivo `packages/<name>/docs/accessibility/evidence.json` comprometido que contiene:
 
 - Resultados del escaneo axe-core (violaciones, passes, incompletos)
 - Contrato de navegación por teclado

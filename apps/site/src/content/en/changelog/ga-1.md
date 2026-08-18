@@ -1,7 +1,7 @@
 ---
 contentSchemaVersion: 1
 title: "Solidiom GA — General Availability"
-description: "Solidiom is now GA: 52 primitives, 30 components, 36 blocks, 29 templates, signed registry, CLI with Sigstore verification, WCAG 2.2 AA compliance, bilingual support, and cross-browser certification."
+description: "Solidiom is now GA: 86 primitives, 32 components, 36 blocks, 31 templates, signed registry, CLI with Sigstore verification, WCAG 2.2 AA compliance, bilingual support, and cross-browser certification."
 keywords:
   [
     ga,
@@ -39,10 +39,10 @@ Solidiom GA marks the general availability of a complete, accessible, bilingual 
 
 ### Complete Catalog
 
-- **52 primitives** — All stable. Headless, accessible building blocks with full accessibility evidence.
-- **30 components** — Styled recipe wrappers for CSS, Tailwind, and UnoCSS.
+- **86 primitives** — All stable. Headless, accessible building blocks with full accessibility evidence.
+- **32 components** — Styled recipe wrappers for CSS, Tailwind, and UnoCSS.
 - **36 blocks** — Page-level composables across 12 categories: authentication, settings, billing, observability, enterprise workflows, data tables, forms, navigation, overlays, content, feedback, and layout.
-- **29 templates** — Full application starters with routing, state, and theming. Balanced and Enterprise portfolios.
+- **31 templates** — Full application starters with routing, state, and theming. Balanced and Enterprise portfolios.
 - **4 theme presets** — Ocean, Forest, Slate, and Aurora. All meet WCAG AA contrast compliance.
 - **3 styling recipes** — CSS, Tailwind, and UnoCSS. One primitive, three styling outputs.
 
