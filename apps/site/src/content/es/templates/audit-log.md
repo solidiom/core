@@ -12,7 +12,9 @@ package: "@solidiom/template-audit-log"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "6555ce5ce4c7db5ea2344f7a385a8af182e8f931deaba14d2bab3037d63a8df7"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Audit Log proporciona un punto de partida listo para producción para construir visores de trazabilidad de auditoría y eventos de cumplimiento para aplicaciones empresariales.

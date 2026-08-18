@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "card"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "88232c2bf77da84a588d988baa4390f23434221b2425f8f8ee153f0e0ff5eeaa"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Contenedor con encabezado, título, descripción, contenido y pie de página.

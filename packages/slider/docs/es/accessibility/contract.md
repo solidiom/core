@@ -26,5 +26,7 @@ consumerDuties:
 nonApplicableCriteria: []
 reviewStatus: draft
 translationSourceHash: "3c21c8f59eb791dcd7eb7b0536c40a1d7860a2931fa3bb6c2d3f7f18f3e7aa16"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---

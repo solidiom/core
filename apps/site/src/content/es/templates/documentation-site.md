@@ -12,7 +12,9 @@ package: "@solidiom/template-documentation-site"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "9524d4618434cfd547df5c65d9d6916bfa7600e11f6da3903746d23514cf0092"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Documentation Site proporciona un punto de partida listo para producción para construir sitios web de documentación técnica y referencia de producto.

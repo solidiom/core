@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "1a851ac24229b111d236019b4b59cad5a56b4a23d321484f004bdfcefed3c90f"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Field envuelve un control de formulario con una etiqueta, descripción y mensaje de validación para campos de formulario accesibles.

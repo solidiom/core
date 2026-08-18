@@ -12,7 +12,9 @@ package: "@solidiom/template-content-studio"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "877b25147d36355068f346b708eb82ac866e2fe57f2b667f299bc954d90a3ee3"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Content Studio proporciona un punto de partida listo para producción para construir interfaces de gestión de contenido y publicación editorial.

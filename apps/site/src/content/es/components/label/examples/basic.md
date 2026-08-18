@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "acc87c194e7a3569006869cc89d73cee199bcc61cbf3cbefa66a3f424c5259a4"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Label proporciona etiquetas accesibles para campos de formulario.

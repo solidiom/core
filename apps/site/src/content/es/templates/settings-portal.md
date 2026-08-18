@@ -12,7 +12,9 @@ package: "@solidiom/template-settings-portal"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "e76a9d5819cfcb1efd17adb4e5c95eaf69ea3208d1bc8159e8f5ea7e448b6c99"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Settings Portal proporciona un punto de partida listo para producción para la gestión de configuración de aplicaciones.

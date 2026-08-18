@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "825cbf13ebef839d112af7342037d206b7ae8ecad49cf8bc5ce0f2fcaa07343e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Slider permite a los usuarios seleccionar un valor de un rango arrastrando un control a lo largo de una pista.

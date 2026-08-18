@@ -3,7 +3,9 @@ title: Política de Seguridad
 description: Divulgación coordinada, reporte de vulnerabilidades y versiones soportadas para Solidiom.
 locale: es
 translationSourceHash: "1778e6c6de574f25e1ab744c9b1ba7aba2c3a2394e98975f7742a81f836cf79e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Política de Seguridad

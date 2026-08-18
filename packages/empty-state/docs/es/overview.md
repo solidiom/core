@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "75db619a3922d126811c841b410e2de6fbd4c6c3f358e1072feda02f973683bf"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Placeholder for empty content areas.

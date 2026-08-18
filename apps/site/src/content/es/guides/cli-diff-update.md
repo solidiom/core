@@ -8,7 +8,9 @@ maturity: beta
 order: 7
 audience: intermediate
 translationSourceHash: "c29920805312b9afe82cbf4b97e741d4af65dcf7ef2c0db8299088db5aae2f75"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Comparar y actualizar instalaciones de código fuente

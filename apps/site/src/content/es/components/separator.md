@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "separator"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "9e49d76bd5fbb6e1ff3a9096e9a117302ffecd5c75fdb8186dcd03e5ea37781d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled separator component — the recipe wrapper for the css, tailwind, unocss profile(s) using the separator primitive.

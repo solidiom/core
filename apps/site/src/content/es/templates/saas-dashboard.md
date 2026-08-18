@@ -12,7 +12,9 @@ package: "@solidiom/template-saas-dashboard"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "27da56b29b21480d5247675f41e66256cb81734b14b7c88759a56e84f9047830"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 SaaS Dashboard proporciona un punto de partida listo para producción para aplicaciones SaaS con observabilidad y gestión de recursos.

@@ -11,7 +11,9 @@ status: published
 category: "SEARCH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "11d5da42e0e350110167f6b62c84910da5298a64f9477a8097481ab0f5ded555"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Saved Searches proporciona un flujo de trabajo search componible para gestionar operaciones de saved searches.

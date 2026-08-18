@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "calendar"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "5915f5c222c587f398cac0596522746da3656d6db25ae2e253b26d2a7449e3ed"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled calendar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the calendar primitive.

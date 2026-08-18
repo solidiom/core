@@ -33,5 +33,7 @@ nonApplicableCriteria:
     rationale: Avatar es un elemento de presentación no interactivo y no recibe enfoque.
 reviewStatus: draft
 translationSourceHash: "2f24c866ebf892ec31b5b9b74ae06f90a1e4a5a56825d54194d0f7e77d09c857"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---

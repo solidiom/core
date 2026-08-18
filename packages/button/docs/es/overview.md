@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas de botones se cubre en la guía compartida de pruebas. No existe comportamiento no obvio específico del primitivo más allá de la activación por teclado documentada arriba.
 translationSourceHash: "a750e8c13bc5dab018ce823e4a37fccdb1130d40e3a10c2823fff3c02ec476d3"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Button renderiza un control clickeable para acciones con semántica accesible. Soporta un estado de carga, estado deshabilitado y múltiples partes de componente: `Root`, `IconButton`, `ToggleButton` y `ButtonGroup`.

@@ -38,5 +38,7 @@ nonApplicableCriteria:
     rationale: Alert es un elemento de presentación no interactivo y no recibe enfoque. Anuncia contenido a las tecnologías de asistencia sin robar el enfoque.
 reviewStatus: draft
 translationSourceHash: "cc1300313105dfc71b69aed921d661136cd07954e39746c76401d6d857e83b7e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---

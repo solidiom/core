@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 translationSourceHash: "60bd03649e25b586a46580f9f159380e665a14ce932b22e7cb5c4ea7bca81213"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Kbd renderiza un elemento `<kbd>` semántico para mostrar atajos de teclado y combinaciones de teclas. Úsalo para documentar interacciones por teclado dentro de instrucciones, texto de ayuda o etiquetas de interfaz.

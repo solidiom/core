@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "data-table"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "d33119c808339157cfbda7878f4c5b32ec37c3865b4aefadf544a0065850de95"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Componente de tabla de datos estilizado — el envoltorio de receta para los perfiles css, tailwind, unocss usando el primitivo data-table.

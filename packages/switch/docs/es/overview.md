@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "c448694bd01222276b113c69c2e5822e20b08fa00f6a1e4e2d77c2ae7df2407b"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Interruptor binario con semántica de encendido/apagado.

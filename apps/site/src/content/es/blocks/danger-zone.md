@@ -11,7 +11,9 @@ status: published
 category: "SETTINGS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "3d8b531677d6bf91debdc12df6688b5bd8dfdbcc1fbdd28d66ca667e11d9d17f"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Danger Zone proporciona un flujo de trabajo settings componible para gestionar operaciones de danger zone.

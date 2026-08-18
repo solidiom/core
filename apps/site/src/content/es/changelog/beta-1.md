@@ -24,7 +24,9 @@ date: "2026-08-07"
 kind: release
 version: "0.0.1-beta.1"
 translationSourceHash: "beb5fdd0ae0929fcda5488c04da261a72cd01178d42b9f01ee4d344dd37dd182"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Solidiom Beta 1
@@ -126,7 +128,7 @@ Solidiom se construye sobre Solid 2, que también está en beta. Los cambios en 
 - **Zoom** — Zoom de contenido más allá del 200% no probado para todas las primitivas
 - **Contraste** — Contraste AAA; el objetivo actual es AA
 - **Movimiento reducido** — Adaptaciones de `prefers-reduced-motion` no exhaustivas
-- **Lectores de pantalla** — Solo VoiceOver probado; NVDA, JAWS, TalkBook diferidos
+- **Lector de pantalla** — Solo VoiceOver probado; NVDA, JAWS, TalkBook diferidos
 - **Táctil** — Patrones de interacción táctil no verificados aún
 
 ### Estabilidad de la API

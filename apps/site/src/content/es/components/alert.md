@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "alert"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "d809bcd2045db692daf8c21089db1282a64e817b48677e30ba8492ff5ccd54ba"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled alert component — the recipe wrapper for the css, tailwind, unocss profile(s) using the alert primitive.

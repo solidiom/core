@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "sheet"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "055624387439b293dbd372a467a61d24fbe2ace828bcba4e4c3f811aecc806a6"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled sheet component — the recipe wrapper for the css, tailwind, unocss profile(s) using the sheet primitive.

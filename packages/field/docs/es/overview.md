@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "ffa65cb74ddfd71eac6a6a2bf023be8280ffce1900ac2455fe844b73a4646c64"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Composition wrapper: label + control + description + error with automatic ARIA wiring.

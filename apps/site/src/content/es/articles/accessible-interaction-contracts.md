@@ -13,7 +13,9 @@ authors:
   - solidiom-core
 tags: [accessibility, contracts, a11y]
 translationSourceHash: "0a57c634687fb61e4169f800f123b91486594175c1333b66e5d7347902ea4fbc"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Contratos de Interacción Accesible

@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "c77df4fb9b351d0646e95a954bbf080c2e965b3de63726319b62e5e5f9bd3cbf"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Command Palette proporciona una lista de comandos buscable con navegación por teclado.

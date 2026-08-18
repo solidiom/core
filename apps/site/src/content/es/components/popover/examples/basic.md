@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "e7eda9411245f33c3eb92ab0c476840553cd97e5bc54eddc0159a5728e85a2e6"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Popover es un wrapper de receta con estilos sobre el primitivo `@solidiom/popover`. Proporciona un panel superpuesto posicionado cerca de un elemento disparador, con gestión de foco y comportamiento de cierre con escape.

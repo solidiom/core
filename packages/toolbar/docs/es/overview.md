@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "c12f589fb764eab0dfbad60fd45ac2d5112a17d6acf11a7ff0158b6583d2df23"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Grouped actions and controls in a horizontal bar.

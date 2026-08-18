@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "fcbcc489018317b70eaa11d0d3b1bc04a12ba3fdf601a2a5c5208b5c74f1961b"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Drawer es un panel que se desliza desde el borde de la pantalla.

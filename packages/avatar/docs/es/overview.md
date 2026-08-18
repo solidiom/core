@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 translationSourceHash: "ce504880da5a4d3655750d9be4ab7ec4acec5cd5e52111d72f4405892921f533"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Avatar renderiza una imagen de perfil de usuario con reemplazo automático a contenido de texto (como iniciales o un nombre) cuando la imagen no se carga correctamente. Gestiona el estado de carga de la imagen internamente y coordina la visibilidad entre las partes de imagen y reemplazo.

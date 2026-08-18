@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "input"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "188a0599367291039ee43fddfaef89b786fc1d1dc297a3b25b857587637a3fac"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled text input and textarea component — the recipe wrapper for the css, tailwind, unocss profile(s) using the input primitive.

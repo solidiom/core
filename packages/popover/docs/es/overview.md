@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "2393f0b5f94918d1a53b7acd418868e2d117c99f3c9d384cb2b2acf532e93d62"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Non-modal floating content panel.

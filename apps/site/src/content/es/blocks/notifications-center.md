@@ -11,7 +11,9 @@ status: published
 category: "SHELL"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "f825a257d0e38f6987651bd18e0099437b83ffaa669e462f066729fb7d338c3e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Notifications Center proporciona un flujo de trabajo shell componible para gestionar operaciones de notifications center.

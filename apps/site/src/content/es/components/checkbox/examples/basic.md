@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "bb73254b3196f2f4fd0681544560f31e9446d194ac77098bb22619a299376b9a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Checkbox es un wrapper de receta con estilos sobre el primitivo `@solidiom/checkbox`. Proporciona un botón de alternancia con estados marcado, desmarcado e indeterminado, soporte de teclado e integración con formularios.

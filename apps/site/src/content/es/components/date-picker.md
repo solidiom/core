@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "date-picker"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "f5dbe73e95515632aefa7d1743ae3c97e705d49198b0a635f92442ae29c8d4c5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled date picker component — the recipe wrapper for the css, tailwind, unocss profile(s) using the date-picker primitive.

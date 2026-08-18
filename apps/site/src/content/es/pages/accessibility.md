@@ -9,7 +9,9 @@ product: "Solidiom"
 productLayer: page
 status: draft
 translationSourceHash: "4e59697d19c0e2803d286976b8ca32fecfe4ca55652a814da1f75b21a949a156"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Accesibilidad

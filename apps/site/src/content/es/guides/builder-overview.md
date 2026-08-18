@@ -17,7 +17,9 @@ maturity: beta
 order: 9
 audience: beginner
 translationSourceHash: "7acd2d655551ace500058822d296e5dfb8dbdea262ae3cf697dd0179a564328d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Vista general del Theme Builder

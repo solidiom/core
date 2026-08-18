@@ -12,7 +12,9 @@ package: "@solidiom/template-api-management"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "64dec767a403c9edf27625e4a2352bbb60c18a83a65e7bb9c7b68737f8ce1615"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 API Management proporciona un punto de partida listo para producción para construir consolas de gateway de APIs con descubrimiento de endpoints, ciclo de vida de claves y analítica.

@@ -11,7 +11,9 @@ status: published
 category: "CONTENT"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "af45b7b1e562180b0cfd507401f3578608fc09f083e5fd41266ac7f62c95c951"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Content Editor proporciona un flujo de trabajo content componible para gestionar operaciones de content editor.

@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "combobox"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "6c4014a458a3747192dddf8bcde9df1220c5e98c5a1f52ff11e534d5cb420eb5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled combobox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the combobox primitive.
@@ -46,7 +48,7 @@ El componente Combobox envuelve el primitivo `@solidiom/combobox`. Expone las pa
 
 ## Variantes y estados
 
-Combobox hereda su soporte de variantes y estados de `@solidiom/combobox`. El primitivo implementa el patrón WAI-ARIA combobox con navegación por teclado, gestión de foco y soporte para lectores de pantalla. Consulte la documentación del primitivo para la lista completa de props soportados y estados interactivos.
+Combobox hereda su soporte de variantes y estados de `@solidiom/combobox`. El primitivo implementa el patrón WAI-ARIA combobox con navegación por teclado, gestión de foco y soporte para lector de pantalla. Consulte la documentación del primitivo para la lista completa de props soportados y estados interactivos.
 
 ## Estilos
 
@@ -60,4 +62,4 @@ Combobox se renderiza como HTML semántico durante el renderizado en servidor. L
 
 ## Accesibilidad
 
-Combobox delega la accesibilidad a `@solidiom/combobox`. El primitivo implementa el patrón WAI-ARIA combobox con navegación por teclado adecuada, gestión de foco y soporte para lectores de pantalla. Consulta el [contrato de accesibilidad del primitivo Combobox](/primitives/combobox/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.
+Combobox delega la accesibilidad a `@solidiom/combobox`. El primitivo implementa el patrón WAI-ARIA combobox con navegación por teclado adecuada, gestión de foco y soporte para lector de pantalla. Consulta el [contrato de accesibilidad del primitivo Combobox](/primitives/combobox/accessibility/) para el contrato completo de teclado, foco y ARIA. El envoltorio de receta no introduce nuevas semánticas ni interactúa con el árbol de accesibilidad más allá del estilo.

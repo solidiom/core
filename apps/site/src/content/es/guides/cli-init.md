@@ -8,7 +8,9 @@ maturity: beta
 order: 2
 audience: beginner
 translationSourceHash: "f66ed9876099d32ebecadd763d77142cd300fc0fcc492dcd0972fa964d165eb4"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Inicializar un proyecto

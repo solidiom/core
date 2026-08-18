@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "2a40ad7bc42e674334ca7d404337a252fd60879248c8ba86aa1efb479468b475"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Avatar es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/avatar`. Proporciona una visualización circular de imagen con respaldo automático cuando la imagen no se carga.

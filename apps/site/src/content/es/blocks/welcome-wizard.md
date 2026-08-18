@@ -11,7 +11,9 @@ status: published
 category: "ONBOARD"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "fb6e49413eebcdfe208c61cf20a1dd887a6e79632c0a316e6475cc57ca4b5e39"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Welcome Wizard proporciona un flujo de trabajo onboard componible para gestionar operaciones de welcome wizard.

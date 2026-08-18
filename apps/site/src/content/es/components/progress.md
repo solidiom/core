@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "progress"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "5ec86277da1b094f45d35755c505946ab7ea579d66e2e30d64911afcf8d00315"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Indicador de progreso lineal con modos determinista e indeterminado.

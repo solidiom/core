@@ -19,7 +19,9 @@ source:
 runnable: false
 runnableReason: "No keyboard interaction declared in the accessibility contract."
 translationSourceHash: "d3f8b9a1c5e2f98287352ad54de3979a901692a7a5312889ea5bc041e11f7790"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 ```tsx

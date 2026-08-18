@@ -9,7 +9,9 @@ maturity: beta
 order: 8
 audience: intermediate
 translationSourceHash: "afd97254da709b98cd792db911527d59e5c57daa8609c48e203661b625942c0c"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Recuperación de fallos y operaciones sin conexión

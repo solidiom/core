@@ -12,7 +12,9 @@ package: "@solidiom/template-storefront"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "47f7905c7b106610298ece72e03f3775058005c89f223b6d18c6063d47d5fb12"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Storefront proporciona un punto de partida listo para producción para construir experiencias de navegación y compra de productos e-commerce.

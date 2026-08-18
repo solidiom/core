@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "e635dd4c6782b8b63218d2ced9c8434f6e355cdadb57cf729503fcc9d3b4677d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Progress indica el estado de completitud de una tarea.

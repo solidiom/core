@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "8af5242ef1631b36c7a2250cd6ce5445c7e412b8b1eb5ce278507c7801b11a6d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Tooltip muestra información complementaria cuando el usuario pasa el cursor sobre un elemento o lo enfoca.

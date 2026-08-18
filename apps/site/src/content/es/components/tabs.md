@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "tabs"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "5522e271495793b6118a87da78bce6b920b5df0963c77301ff2be8cfb03c3267"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled tabs component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tabs primitive.

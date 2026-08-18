@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "47f9dd953876bc6de5923d825f0f76d8c093322a9397df3038ff4982c8c7faa2"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Toast proporciona notificaciones no bloqueantes que aparecen temporalmente y se cierran automáticamente.

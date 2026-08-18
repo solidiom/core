@@ -9,7 +9,9 @@ product: "Solidiom"
 productLayer: community
 status: draft
 translationSourceHash: "b4c4e2357e6ae32be00daae09e1a3a37c0415e9efd6774321a17f36e5757ae97"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Community

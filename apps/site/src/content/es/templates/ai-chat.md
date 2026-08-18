@@ -12,7 +12,9 @@ package: "@solidiom/template-ai-chat"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "8bec254ac57027f1a30b2f1d54c72494f983f522988bf0408e9514ed63d3bbdb"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 AI Chat proporciona un punto de partida listo para producción para aplicaciones conversacionales impulsadas por IA.

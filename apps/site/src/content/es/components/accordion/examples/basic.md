@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "22f65eb65229bc7f083749be6fd1dc005c093f28cfa0de0d1b861151bb95a0b5"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Accordion es un wrapper de receta con estilos sobre el primitivo `@solidiom/accordion`. Proporciona secciones expandibles con navegación por teclado y comportamiento animado de apertura/cierre.

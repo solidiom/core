@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "3ed4e1098200e8a3668ac8fc24d4ff5ff53471abec23c8e93584dcad084b31df"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Group of mutually-exclusive or multi-select toggle buttons.

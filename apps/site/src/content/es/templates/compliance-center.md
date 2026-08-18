@@ -12,7 +12,9 @@ package: "@solidiom/template-compliance-center"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "340a3bc17ebcd858d2428f053ac024322e04063e04c114834f1ff9ae341a88c7"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Compliance Center proporciona un punto de partida listo para producción para construir consolas de gestión de cumplimiento con seguimiento de marcos, evaluación de controles y recopilación de evidencia de auditoría.

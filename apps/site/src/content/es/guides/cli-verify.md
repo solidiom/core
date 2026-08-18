@@ -9,7 +9,9 @@ maturity: beta
 order: 6
 audience: advanced
 translationSourceHash: "de05b75ec0583d42e914173c61d2cab2854e5b97f2edb2f7237ea9b2f1100d3f"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Verificar artefactos y registro

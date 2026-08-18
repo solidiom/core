@@ -26,7 +26,9 @@ date: "2026-08-07"
 kind: release
 version: "0.0.1-ga"
 translationSourceHash: "f66e7bfc1f8b129ce2eea2098b60037a7dce8a8d10b4b4af7a8eb56a3a3edd74"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Solidiom GA — Disponibilidad General

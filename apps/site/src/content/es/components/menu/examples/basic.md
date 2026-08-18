@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "bb4d5a8c7d204a7bd49514174862a7c17a6ca783a0f2c0c8f95d8f9a8b7cb70d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Dropdown Menu es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/menu`. Añade composición y slots de estilo semántico mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.

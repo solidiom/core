@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "fbb4e225a23f19aaa19f609b3e3dd34922316dc568d3e486473e7bcd86b38a06"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Resizable Panels proporciona un diseño con paneles arrastrables que pueden ser redimensionados por el usuario.

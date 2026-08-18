@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "kbd"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "6d13e46f0787425396cb3eb5898038bdd9abf0ad8ab22cabef7fa40fa7c6ec9f"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled keyboard display component — the recipe wrapper for the css, tailwind, unocss profile(s) using the kbd primitive.

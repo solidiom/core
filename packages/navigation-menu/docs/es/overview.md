@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "d75e5155dc930908a677969175883ba819ea0de7fb9f4d81669b0c6181fe7151"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Un componente de navegación de nivel superior con sub-menús desplegables accesibles.

@@ -11,7 +11,9 @@ status: published
 category: "ADMIN"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "495a8aba38287f88ec15bf807be74cf3750c3376be3cc057b7bbe606bc46581d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Audit Log proporciona un flujo de trabajo admin componible para gestionar operaciones de audit log.

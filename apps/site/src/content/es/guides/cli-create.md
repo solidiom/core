@@ -8,7 +8,9 @@ maturity: beta
 order: 4
 audience: beginner
 translationSourceHash: "1c416ecf8ecb74b0bc142ec150494518adea1a4ed5d40c5649a6f5bb41e25d4e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Crear un proyecto desde una plantilla

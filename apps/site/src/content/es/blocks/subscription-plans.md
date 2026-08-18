@@ -11,7 +11,9 @@ status: published
 category: "BILLING"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "54dce89dbe841d0a93fff066e5145dcf1aa7279bcdb50d3e7d3fd381982894b0"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Subscription Plans proporciona un flujo de trabajo billing componible para gestionar operaciones de subscription plans.

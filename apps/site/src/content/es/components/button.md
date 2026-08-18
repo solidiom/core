@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "button"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "eed1b4e427b1de8673e34c0c53eb7ffe2ddadea9b8e198971a3d70126a37f2ac"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled button component — the recipe wrapper for the css, tailwind, unocss profile(s) using the button primitive.

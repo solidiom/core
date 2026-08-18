@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "collapsible"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "e65bf19a03db2b7bf7ba14e518e12f3651de4524c5fab88eb80c242105a3c32e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled collapsible component — the recipe wrapper for the css, tailwind, unocss profile(s) using the collapsible primitive.

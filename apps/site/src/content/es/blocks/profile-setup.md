@@ -11,7 +11,9 @@ status: published
 category: "ONBOARD"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "90b7115dd060b7835709deea4a70fb8f14a43f698759192ae284d4155779c789"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Profile Setup proporciona un flujo de trabajo onboard componible para gestionar operaciones de profile setup.

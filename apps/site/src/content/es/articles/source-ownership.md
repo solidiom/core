@@ -13,7 +13,9 @@ authors:
   - solidiom-core
 tags: [open-source, architecture]
 translationSourceHash: "5c0881d1b98fc79ea433ed71d764ce95ff577136fc5baeead127e45a1d4360f8"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Propiedad del Codigo Fuente

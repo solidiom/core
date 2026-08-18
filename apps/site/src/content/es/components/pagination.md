@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "pagination"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "c3f1fedd3d54cdfd4b447b9818a114062e875731dc938c7b9666986142bdb645"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled pagination component — the recipe wrapper for the css, tailwind, unocss profile(s) using the pagination primitive.

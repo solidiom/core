@@ -21,7 +21,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. No existe comportamiento no obvio específico.
 translationSourceHash: "1fa32368798df2edb965b2b9c474701702937c84bbf094474c9a823c5728ac22"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Breadcrumb renderiza un indicador de navegación jerárquica que comunica la ubicación de la página actual dentro de una jerarquía de navegación. Utiliza estructura de lista semántica con marcado ARIA adecuado para compatibilidad con lector de pantalla.

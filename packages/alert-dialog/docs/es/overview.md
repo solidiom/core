@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "f2ecee67766b51c97eeb5f2c7f498b719f951e3e5cdd454790cd3ab2ec797d2b"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Modal confirmation dialog requiring explicit user action.

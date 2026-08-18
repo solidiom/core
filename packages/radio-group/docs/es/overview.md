@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "b4715b0161b89348f476e25291c0b4417ae2a0a7bf54490c8a30f4f62cadf31a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Single-select radio button set with keyboard navigation.

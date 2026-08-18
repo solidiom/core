@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "6b8052f73a2951bd0338e81e0c54ba5ae259b8184dab7e3f58f7f0e1ab61bf4c"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Input es un envoltorio de receta estilizada alrededor del primitivo `@solidiom/input`. Soporta múltiples tipos de entrada y estados, incluidos deshabilitado e inválido.

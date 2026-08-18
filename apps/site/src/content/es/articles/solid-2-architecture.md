@@ -13,7 +13,9 @@ authors:
   - solidiom-core
 tags: [architecture, solid-2, reactivity]
 translationSourceHash: "a6235813c14877df8aea29c99885b27868a3fa09bd3f4612e3a81432a893b57a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Construido sobre Solid 2: Decisiones de Arquitectura

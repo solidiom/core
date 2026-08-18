@@ -12,7 +12,9 @@ package: "@solidiom/template-marketplace"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "d53cdd0bd361517e638dbc1b6baeaf5ad24e8b0119c6bfd4495a2f6fe0271b53"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Marketplace proporciona un punto de partida listo para producción para construir plataformas de comercio multi-vendedor con descubrimiento de productos y herramientas para vendedores.

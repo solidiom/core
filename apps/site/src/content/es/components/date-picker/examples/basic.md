@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "4ba3f7a7ea20104370b52948b5bfc622564dafee75a18eba367c3b32bb2ad4bf"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Date Picker combina un campo de texto con una superposición de calendario para seleccionar fechas.

@@ -17,7 +17,9 @@ maturity: beta
 order: 10
 audience: intermediate
 translationSourceHash: "9e9ee739b9a04107c78e29edc84fd9030218882ac9093b51cd67b20b7a4fd4ec"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Exportación e Integración del Theme Builder

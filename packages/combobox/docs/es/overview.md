@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo. El comportamiento del teclado está documentado en la sección Teclado.
 translationSourceHash: "02fc1109b33381c8815e4377dfe9db2e2cdd0be4c07e518de48ab29f05b87e7d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Combobox combina un campo de texto con una lista filtrable. A medida que el usuario escribe, la lista se reduce a las opciones coincidentes. La navegación por teclado utiliza el patrón active-descendant para que el foco permanezca en el input mientras los elementos se resaltan visualmente.

@@ -11,7 +11,9 @@ status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 translationSourceHash: "2608af2a8b9757b3f131edf62acbc122b650c2492f8d9f7f506d846555951792"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 An earthy green palette with warm undertones.

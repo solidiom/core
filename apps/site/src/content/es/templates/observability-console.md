@@ -12,7 +12,9 @@ package: "@solidiom/template-observability-console"
 stack: vite-solid-router
 portfolios: ["balanced-product", "enterprise-platform-governance"]
 translationSourceHash: "b1cb3a69bc907f4bfbc70ac62497c5a73b6d3d5eb46c26762135f40966f96337"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Observability Console proporciona un punto de partida listo para producción para monitoreo de sistemas y alertas.

@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "slider"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "f1239d2d3d9a4a631825656e8f240578f1f0f330e1944e6de55f56967c0edfc8"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled slider component — the recipe wrapper for the css, tailwind, unocss profile(s) using the slider primitive.

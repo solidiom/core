@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "5e4ff2d4ae7cea27094af7b9f278151cee912b3bd0d503cf493e8f341b9866eb"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 The Kbd component is a styled recipe wrapper around the `@solidiom/kbd` primitive. It renders a semantic keyboard key element for displaying shortcuts.

@@ -11,7 +11,9 @@ status: published
 category: "SETTINGS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "32edabbab4b5f12ffa5fe4e5a7f875d2cf69ec50a54a0c4c3cd1ce7327b6e685"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Account Settings proporciona un flujo de trabajo settings componible para gestionar operaciones de account settings.

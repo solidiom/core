@@ -12,7 +12,9 @@ package: "@solidiom/template-incident-response"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "b7e1d536ad54c9d2f58d584c3b70e9619fbcd7ea74177f33d798eebe946b6672"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Incident Response proporciona un punto de partida listo para producción para construir consolas de gestión de incidentes y respuesta operativa.

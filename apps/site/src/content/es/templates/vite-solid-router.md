@@ -12,7 +12,9 @@ package: "@solidiom/template-vite-solid-router"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "7d4f549f952b3ef0680820f4f839afe0767632fff617db3d017e8159eb6fcd03"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Vite + Solid Router Starter proporciona un punto de partida listo para producción para proyectos Solid usando el stack vite solid router.

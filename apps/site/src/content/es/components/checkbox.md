@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "checkbox"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "9d96704753a79d21a27b6649188a74323db742292fd57982c98de8c488ecd62c"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled checkbox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the checkbox primitive.

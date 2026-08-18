@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "b8c06cf347438d335dc79d96253c8cb53912bfc9968dffcc3e2ca5da5852cec8"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Input OTP proporciona una entrada de contraseña de un solo uso de varios dígitos con avance automático entre espacios.

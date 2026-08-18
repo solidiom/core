@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "drawer"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "4dc6ac5f24d156196ca5274be81ef8ac8ebe3ac181d4f9029576469db5eadcb2"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled drawer component — the recipe wrapper for the css, tailwind, unocss profile(s) using the drawer primitive.

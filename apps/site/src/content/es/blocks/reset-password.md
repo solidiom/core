@@ -11,7 +11,9 @@ status: published
 category: "AUTH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "07f69561ac015f7ce2102e5e3b8cf1dc25352ec16ce7ff510854e149242a46a4"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Reset Password proporciona un flujo de trabajo auth componible para gestionar operaciones de reset password.

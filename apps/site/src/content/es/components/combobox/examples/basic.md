@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "05cd9113fe185e41ffa61214aa0b15e2fb484ef287c184fd5d68c172ee18de3a"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 The Combobox component is a styled recipe wrapper around the `@solidiom/combobox` primitive. It provides an autocomplete dropdown with filtering and keyboard navigation.

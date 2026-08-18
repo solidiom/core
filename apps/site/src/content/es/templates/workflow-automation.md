@@ -12,7 +12,9 @@ package: "@solidiom/template-workflow-automation"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "40373a060f98405cfe9781708bccf4f9debdcf9defcff28b05efff950a856fab"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Workflow Automation proporciona un punto de partida listo para producción para construir plataformas de orquestación de flujos de trabajo sin código con diseño visual y monitoreo.

@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "110e2de3e7aa7624a6595867f7ae63479770c410cbf61ad675e2592def77474b"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Badge es un wrapper de receta con estilos sobre el primitivo `@solidiom/badge`. Proporciona un indicador visual para estado, conteo o categorización con soporte de variantes.

@@ -12,7 +12,9 @@ package: "@solidiom/template-ai-operations"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "43b1fc816553066efd2e606a307e0f033abc2f0465599aac2d300b1c8bf2569c"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 AI Operations proporciona un punto de partida listo para producción para construir consolas de MLOps y gestión de modelos de IA para equipos de plataforma.

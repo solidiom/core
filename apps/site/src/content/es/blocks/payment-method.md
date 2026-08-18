@@ -11,7 +11,9 @@ status: published
 category: "BILLING"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "17cfd62804b87cfb1bf8b8a734a23f74816347d32b847fe4db313ad28d43a47e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Payment Method proporciona un flujo de trabajo billing componible para gestionar operaciones de payment method.

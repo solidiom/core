@@ -11,7 +11,9 @@ status: published
 category: "SHELL"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "26f2889ff8bbbde355e6d0ec6015ba30af24270b16dc515794f25d4e81bb48e7"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Command Palette proporciona un flujo de trabajo shell componible para gestionar operaciones de command palette shell.

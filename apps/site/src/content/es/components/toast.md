@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "toast"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "bd3b6c7196077c92b57df1d2bad84d4cfd11095546db7d0571ce1493bcefc74d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled toast component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toast primitive.

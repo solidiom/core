@@ -11,7 +11,9 @@ status: published
 category: "OBS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "f619d371ac0d0a300902540ec55741da320c7c0ba03d557f5d56d64c7a67f5cb"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Dashboard Overview proporciona un flujo de trabajo obs componible para gestionar operaciones de dashboard overview.

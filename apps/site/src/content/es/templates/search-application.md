@@ -12,7 +12,9 @@ package: "@solidiom/template-search-application"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "ea63c4c382b893e13cdaaa99e7914ba896636556c7d734bde8b2be645214f68e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Search Application proporciona un punto de partida listo para producción para construir interfaces de búsqueda de texto completo con filtrado por facetas.

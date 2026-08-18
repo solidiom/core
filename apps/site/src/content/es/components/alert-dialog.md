@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "alert-dialog"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "3a70186082f206641156305a4e83fc6e95f00cd28cc5c3b5f9bdf836febff48b"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled alert dialog component — the recipe wrapper for the css, tailwind, unocss profile(s) using the alert-dialog primitive.

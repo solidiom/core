@@ -18,7 +18,9 @@ maturity: beta
 order: 11
 audience: intermediate
 translationSourceHash: "abafa5b1117a1ba0c65917717e2ffb86869cc807e1c6a89b28dd3336d2da8ad7"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Registro y Propiedad del Código Fuente Firmado

@@ -12,7 +12,9 @@ package: "@solidiom/template-marketing-site"
 stack: vite-solid-router
 portfolios: ["balanced-product"]
 translationSourceHash: "c6c788a9ce50662777b84fd259551c01903747c20a08be4b9f00759a0a10ce1d"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Marketing Site proporciona un punto de partida listo para producción para construir sitios web de marketing de producto con layouts optimizados para conversión.

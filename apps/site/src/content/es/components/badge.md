@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "badge"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "6be248162bee42576351a19b61f368217a82e9b4e8943fa785b7ecb1a82bc0fe"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled badge component — the recipe wrapper for the css, tailwind, unocss profile(s) using the badge primitive.

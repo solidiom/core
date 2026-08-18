@@ -12,7 +12,9 @@ package: "@solidiom/template-developer-portal"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "fcf9d435853a360092f9c76ff8cee607950eb9b0ab76fd2ebcd7ae20ace76751"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Developer Portal proporciona un punto de partida listo para producción para construir plataformas de experiencia de desarrollador con documentación, herramientas interactivas y gestión del ciclo de vida de aplicaciones.

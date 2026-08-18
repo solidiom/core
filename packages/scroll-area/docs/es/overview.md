@@ -19,7 +19,9 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "68e505e3ae9066e312fe4efbd4b46e4779a4201cbb234e839f19d0199169a561"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Custom-styled scrollbar with native scrolling performance.

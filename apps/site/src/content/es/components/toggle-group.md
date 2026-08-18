@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "toggle-group"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "e47b2788ddf9879b9370eaefc0d19db740d94cf8636fb53900cafc8f6debd08e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled toggle group component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toggle-group primitive.

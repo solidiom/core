@@ -11,7 +11,9 @@ status: published
 category: "SEARCH"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "21ebb9e3e77347a86f9afb33b31ebb027cb453bef9e85108ab18a5f7a97befee"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Search Results proporciona un flujo de trabajo search componible para gestionar operaciones de search results.

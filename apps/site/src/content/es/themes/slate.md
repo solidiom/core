@@ -11,7 +11,9 @@ status: published
 themeSchemaVersion: 1
 outputs: ["css", "tailwind"]
 translationSourceHash: "0e3d3a70de40623d6c275dd0d20c828974cc065ce6598fbd17db354a9dbb7d08"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 A neutral monochrome palette with stone tones.

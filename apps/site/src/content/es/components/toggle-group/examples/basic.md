@@ -18,7 +18,9 @@ source:
   language: tsx
 runnable: true
 translationSourceHash: "9a9082afd1187811e03eff8e930c1536d2f0dc8fb565ab1f0a4448503e035f02"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 The Toggle Group component provides a set of toggle buttons where one or more can be selected at a time.

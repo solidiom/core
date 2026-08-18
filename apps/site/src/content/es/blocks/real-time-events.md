@@ -11,7 +11,9 @@ status: published
 category: "OBS"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "ec1cd1bbce26c5ffcfd37683c5a4859db4e51a17f460f69da5d789d9ae240a8f"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Real-time Events proporciona un flujo de trabajo obs componible para gestionar operaciones de real time events.

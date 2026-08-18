@@ -12,7 +12,9 @@ package: "@solidiom/template-identity-access"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "cb72790d174dff98720d552c1dd017c3684190b19bbbac71ebe63c592445222e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Identity & Access proporciona un punto de partida listo para producción para construir consolas de gestión de identidad y acceso para organizaciones empresariales.

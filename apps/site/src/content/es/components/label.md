@@ -12,7 +12,9 @@ package: "@solidiom/recipes-css"
 recipe: "label"
 stylingOutputs: ["css", "tailwind", "unocss"]
 translationSourceHash: "88a1fc067ee2421e379ec528a446f66b5d6f81d27c7ee6b8fddb24a62f614dde"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Styled label component — the recipe wrapper for the css, tailwind, unocss profile(s) using the label primitive.

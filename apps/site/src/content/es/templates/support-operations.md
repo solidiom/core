@@ -12,7 +12,9 @@ package: "@solidiom/template-support-operations"
 stack: vite-solid-router
 portfolios: ["enterprise-platform-governance"]
 translationSourceHash: "172b6a5fb5b580b6a82fd52bbd21f55e610b7757d526ddcf4070898cb9f9489e"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 Support Operations proporciona un punto de partida listo para producción para construir consolas de soporte al cliente con gestión de tickets, conocimiento de autoservicio y seguimiento del rendimiento del equipo.

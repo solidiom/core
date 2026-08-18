@@ -33,5 +33,7 @@ nonApplicableCriteria:
     rationale: Separator es un elemento de presentación no interactivo y no recibe enfoque.
 reviewStatus: draft
 translationSourceHash: "a253649248ff85c4feeff3ac985829b838edc63b398c94c49ac3dbbc4d712c83"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---

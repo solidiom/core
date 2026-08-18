@@ -9,7 +9,9 @@ product: "Solidiom"
 productLayer: guide
 status: draft
 translationSourceHash: "c70c45f4ca568d4689bcc0c001988ad85f31fea1774e073ec98f73405828dcc2"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 # Referencia del CLI

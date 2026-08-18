@@ -11,7 +11,9 @@ status: published
 category: "ADMIN"
 requiredStates: ["loading", "empty", "error", "restricted"]
 translationSourceHash: "063a7a32fd7260944684fd53a0ced134d40f315f74e496b22bb8475af622b6c1"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El bloque Team Management proporciona un flujo de trabajo admin componible para gestionar operaciones de team management.

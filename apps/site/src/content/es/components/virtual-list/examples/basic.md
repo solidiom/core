@@ -18,7 +18,9 @@ source:
   language: tsx
   runnable: true
 translationSourceHash: "ec6794a67bbbf4a527cb9e04f113236c0a939544b3d7a8cc33d2f0b7d9e6f756"
-translationStatus: draft
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-18"
 ---
 
 El componente Virtual List solo renderiza los elementos visibles en una lista grande para un rendimiento óptimo.
