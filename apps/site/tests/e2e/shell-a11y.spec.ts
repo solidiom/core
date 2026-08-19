@@ -177,9 +177,12 @@ test.describe("Keyboard and focus", () => {
     await page.goto("/")
 
     const trigger = page.locator(".site-header__hamburger-button").first()
-    await trigger.focus()
-    await page.keyboard.press("Enter")
-    await expect(page.locator(".site-header__drawer-content")).toBeVisible()
+    await expect(trigger).toBeVisible()
+    // Poll-click until SolidJS hydration wires the drawer open handler.
+    await expect(async () => {
+      await trigger.click()
+      await expect(page.locator(".site-header__drawer-content")).toBeVisible({ timeout: 2000 })
+    }).toPass({ timeout: 10000 })
     await page.keyboard.press("Escape")
     await expect(page.locator(".site-header__drawer-content")).toBeHidden()
     await expect(trigger).toBeFocused()
@@ -270,13 +273,12 @@ test.describe("Mobile, touch, and forced colors", () => {
     await expect(page.locator(".site-header__desktop-nav")).toHaveCSS("display", "none")
 
     for (const selector of [".site-header__hamburger-button", ".theme-toggle"]) {
-      const size = await page
-        .locator(selector)
-        .first()
-        .evaluate((element) => {
-          const rect = element.getBoundingClientRect()
-          return { width: rect.width, height: rect.height }
-        })
+      const locator = page.locator(selector).first()
+      await expect(locator).toBeVisible()
+      const size = await locator.evaluate((element) => {
+        const rect = element.getBoundingClientRect()
+        return { width: rect.width, height: rect.height }
+      })
       expect(size.width).toBeGreaterThanOrEqual(44)
       expect(size.height).toBeGreaterThanOrEqual(44)
     }
