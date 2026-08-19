@@ -7,17 +7,20 @@
 import { type JSX } from "@solidjs/web"
 import { applySemanticAttrs } from "@solidiom/runtime"
 
-export interface ButtonProps {
+export interface ButtonProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   children: JSX.Element
-  disabled?: boolean
   loading?: boolean
-  onClick?: () => void
-  class?: string
-  type?: "button" | "submit" | "reset"
-  "aria-label"?: string
 }
 
 export function Root(props: ButtonProps) {
+  const {
+    children: _children,
+    disabled: _disabled,
+    loading: _loading,
+    class: _class,
+    type: _type,
+    ...buttonProps
+  } = props
   const isDisabled = () => props.disabled || props.loading
 
   const semanticAttrs = () =>
@@ -30,11 +33,10 @@ export function Root(props: ButtonProps) {
 
   return (
     <button
+      {...buttonProps}
       type={props.type ?? "button"}
       disabled={isDisabled()}
       aria-busy={props.loading ? "true" : undefined}
-      aria-label={props["aria-label"]}
-      onClick={props.onClick}
       class={props.class}
       {...semanticAttrs()}
     >

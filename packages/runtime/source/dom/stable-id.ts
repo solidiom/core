@@ -1,13 +1,11 @@
+import { createUniqueId } from "solid-js"
+
 /**
- * Stable ID generation — SSR-deterministic IDs for ARIA relationships.
+ * Stable ID generation — hydration-aware IDs for ARIA relationships.
  *
- * Per §8.6: IDs must be deterministic between server and client to avoid
- * hydration mismatches. Uses a monotonic counter scoped to the module.
- *
- * In production, Solid's rendering pass will call these in the same order
- * on server and client, producing matching IDs. For non-deterministic
- * environments (tests, dynamic insertion), uniqueness is guaranteed but
- * server/client parity requires component-tree-order stability.
+ * Solid assigns matching IDs to components during server rendering and hydration.
+ * Calls outside a component owner (for example, standalone utilities and tests)
+ * use a local fallback while preserving uniqueness.
  */
 
 let counter = 0
@@ -15,11 +13,15 @@ let counter = 0
 /**
  * Creates a stable, unique ID with an optional prefix for debuggability.
  *
- * Must be called during component initialization to maintain server/client parity.
- * The prefix aids DOM inspection but has no semantic meaning.
+ * Call this while initializing a component to receive Solid's hydration-aware ID.
+ * The fallback supports non-component callers where Solid has no owner ID.
  */
 export function createStableId(prefix = "solidiom"): string {
-  return `${prefix}-${++counter}`
+  try {
+    return `${prefix}-${createUniqueId()}`
+  } catch {
+    return `${prefix}-${++counter}`
+  }
 }
 
 /**

@@ -7,7 +7,8 @@
  * Dependencies: Card, Select, Tabs, Tooltip, Meter, Spinner
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface DashboardOverviewProps {
   error?: string

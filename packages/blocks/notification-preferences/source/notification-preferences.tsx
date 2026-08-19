@@ -7,7 +7,8 @@
  * Dependencies: Button, Field, Card, Tabs, Checkbox, Radio Group, Switch, Pagination, Spinner
  */
 
-import { createSignal, Show, For, type JSX } from "solid-js"
+import { createSignal, Show, For } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface NotificationChannel {
   id: string

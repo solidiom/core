@@ -7,7 +7,8 @@
  * Dependencies: Button, Input, Field, Card, Alert, Dialog, Select, Tabs, Dropdown Menu, Toast, Checkbox, Data Table, Spinner
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface PromptStudioProps {
   error?: string

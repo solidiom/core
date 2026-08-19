@@ -7,7 +7,8 @@
  * Dependencies: Button, Input, Field, Card, Alert, Popover, Scroll Area, Toast, Spinner
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface ChatInterfaceProps {
   error?: string

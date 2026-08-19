@@ -6,7 +6,7 @@
  */
 
 import { type Accessor, createEffect, createSignal, Show } from "solid-js"
-import { type JSX } from "@solidjs/web"
+import { type JSX, Portal as SolidPortal } from "@solidjs/web"
 import {
   createDisclosureState,
   createStableId,
@@ -109,15 +109,15 @@ export interface DialogPortalProps {
   children: JSX.Element
 }
 
-/**
- * Portal wrapper — renders children only when present.
- * In Solid 2 beta, native Portal API is not yet stable.
- * This renders inline with Show; actual DOM portalling deferred.
- */
+/** Renders present dialog content at the document portal target. */
 export function Portal(props: DialogPortalProps) {
   const ctx = useDialogContext()
 
-  return <Show when={ctx.present()}>{props.children}</Show>
+  return (
+    <Show when={ctx.present()}>
+      <SolidPortal>{props.children}</SolidPortal>
+    </Show>
+  )
 }
 
 // ─── Backdrop ──────────────────────────────────────────────────────────────────

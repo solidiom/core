@@ -21,8 +21,7 @@ beforeEach(() => {
 
 afterEach(() => {
   guard.restore()
-  const container = document.getElementById("test-root")
-  if (container) container.innerHTML = ""
+  document.body.innerHTML = ""
 })
 
 function getContainer(): HTMLElement {
@@ -56,7 +55,7 @@ describe("Dialog", () => {
       container,
     )
 
-    const trigger = container.querySelector("[data-scope='dialog'][data-part='trigger']")
+    const trigger = document.querySelector("[data-scope='dialog'][data-part='trigger']")
     expect(trigger).not.toBeNull()
     expect(trigger!.getAttribute("aria-haspopup")).toBe("dialog")
     expect(trigger!.getAttribute("data-state")).toBe("closed")
@@ -78,7 +77,7 @@ describe("Dialog", () => {
       container,
     )
 
-    const content = container.querySelector("[role='dialog']")
+    const content = document.querySelector("[role='dialog']")
     expect(content).toBeNull()
   })
 
@@ -99,7 +98,7 @@ describe("Dialog", () => {
       container,
     )
 
-    const content = container.querySelector("[role='dialog']")
+    const content = document.querySelector("[role='dialog']")
     expect(content).not.toBeNull()
     expect(content!.getAttribute("aria-modal")).toBe("true")
   })
@@ -120,11 +119,11 @@ describe("Dialog", () => {
       container,
     )
 
-    const trigger = container.querySelector("[data-part='trigger']") as HTMLElement
+    const trigger = document.querySelector("[data-part='trigger']") as HTMLElement
     trigger.click()
     flush()
 
-    const content = container.querySelector("[role='dialog']")
+    const content = document.querySelector("[role='dialog']")
     expect(content).not.toBeNull()
     expect(trigger.getAttribute("aria-expanded")).toBe("true")
   })
@@ -146,8 +145,8 @@ describe("Dialog", () => {
       container,
     )
 
-    const content = container.querySelector("[role='dialog']")!
-    const title = container.querySelector("[data-part='title']")!
+    const content = document.querySelector("[role='dialog']")!
+    const title = document.querySelector("[data-part='title']")!
     expect(content.getAttribute("aria-labelledby")).toBe(title.id)
   })
 
@@ -168,8 +167,8 @@ describe("Dialog", () => {
       container,
     )
 
-    const content = container.querySelector("[role='dialog']")!
-    const desc = container.querySelector("[data-part='description']")!
+    const content = document.querySelector("[role='dialog']")!
+    const desc = document.querySelector("[data-part='description']")!
     expect(content.getAttribute("aria-describedby")).toBe(desc.id)
   })
 
@@ -190,12 +189,12 @@ describe("Dialog", () => {
       container,
     )
 
-    const closeBtn = container.querySelector("[data-part='close']") as HTMLElement
+    const closeBtn = document.querySelector("[data-part='close']") as HTMLElement
     expect(closeBtn).not.toBeNull()
     closeBtn.click()
     flush()
 
-    const content = container.querySelector("[role='dialog']")
+    const content = document.querySelector("[role='dialog']")
     expect(content).toBeNull()
   })
 
@@ -216,7 +215,7 @@ describe("Dialog", () => {
       container,
     )
 
-    const trigger = container.querySelector("[data-part='trigger']") as HTMLElement
+    const trigger = document.querySelector("[data-part='trigger']") as HTMLElement
     trigger.click()
     expect(onChange).toHaveBeenCalledWith(true, expect.any(Object))
   })
@@ -238,7 +237,7 @@ describe("Dialog", () => {
       container,
     )
 
-    const backdrop = container.querySelector("[data-part='backdrop']")
+    const backdrop = document.querySelector("[data-part='backdrop']")
     expect(backdrop).not.toBeNull()
     expect(backdrop!.getAttribute("aria-hidden")).toBe("true")
   })
@@ -262,12 +261,12 @@ describe("Dialog", () => {
       container,
     )
 
-    expect(container.querySelector("[data-scope='dialog'][data-part='trigger']")).not.toBeNull()
-    expect(container.querySelector("[data-scope='dialog'][data-part='backdrop']")).not.toBeNull()
-    expect(container.querySelector("[data-scope='dialog'][data-part='content']")).not.toBeNull()
-    expect(container.querySelector("[data-scope='dialog'][data-part='title']")).not.toBeNull()
-    expect(container.querySelector("[data-scope='dialog'][data-part='description']")).not.toBeNull()
-    expect(container.querySelector("[data-scope='dialog'][data-part='close']")).not.toBeNull()
+    expect(document.querySelector("[data-scope='dialog'][data-part='trigger']")).not.toBeNull()
+    expect(document.querySelector("[data-scope='dialog'][data-part='backdrop']")).not.toBeNull()
+    expect(document.querySelector("[data-scope='dialog'][data-part='content']")).not.toBeNull()
+    expect(document.querySelector("[data-scope='dialog'][data-part='title']")).not.toBeNull()
+    expect(document.querySelector("[data-scope='dialog'][data-part='description']")).not.toBeNull()
+    expect(document.querySelector("[data-scope='dialog'][data-part='close']")).not.toBeNull()
   })
 
   it("produces no console errors on render", () => {

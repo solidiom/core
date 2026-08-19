@@ -7,7 +7,8 @@
  * Dependencies: Button, Input, Field, Alert, Select, Toast, Avatar, Spinner
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface ProfileSetupProps {
   onSubmit?: (data: { displayName: string; bio: string; avatarUrl?: string }) => Promise<void>

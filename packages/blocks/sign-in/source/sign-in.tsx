@@ -7,7 +7,8 @@
  * Dependencies: Button, Input, Field, Alert, Spinner (COMP-001, 002, 003, 005, 029)
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, createUniqueId, For, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -35,12 +36,20 @@ export type SignInState = "empty" | "loading" | "error" | "restricted"
 export function SignIn(props: SignInProps): JSX.Element {
   const [email, setEmail] = createSignal("")
   const [password, setPassword] = createSignal("")
-  const [state, setState] = createSignal<SignInState>(props.restricted ? "restricted" : "empty")
+  const [state, setState] = createSignal<SignInState>("empty")
   const [localError, setLocalError] = createSignal("")
+  const id = createUniqueId()
+  const emailId = `sign-in-${id}-email`
+  const passwordId = `sign-in-${id}-password`
 
   const currentError = () => props.error || localError()
+  const currentState = (): SignInState => {
+    if (props.restricted) return "restricted"
+    if (currentError()) return "error"
+    return state()
+  }
 
-  async function handleSubmit(e: Event) {
+  async function handleSubmit(e: SubmitEvent) {
     e.preventDefault()
     setLocalError("")
 
@@ -53,6 +62,7 @@ export function SignIn(props: SignInProps): JSX.Element {
     setState("loading")
     try {
       await props.onSubmit?.({ email: email(), password: password() })
+      setState("empty")
     } catch (err) {
       setLocalError(err instanceof Error ? err.message : "Authentication failed.")
       setState("error")
@@ -62,10 +72,10 @@ export function SignIn(props: SignInProps): JSX.Element {
   return (
     <div
       class={["solidiom-block-sign-in", props.class].filter(Boolean).join(" ")}
-      data-state={state()}
+      data-state={currentState()}
     >
       {/* Restricted state */}
-      <Show when={state() === "restricted"}>
+      <Show when={currentState() === "restricted"}>
         <div class="solidiom-block-sign-in__restricted" role="alert">
           <p>
             {props.restrictedReason || "Your account access is restricted. Please contact support."}
@@ -74,49 +84,49 @@ export function SignIn(props: SignInProps): JSX.Element {
       </Show>
 
       {/* Error state */}
-      <Show when={state() === "error" && currentError()}>
+      <Show when={currentState() === "error" && currentError()}>
         <div class="solidiom-block-sign-in__error" role="alert">
           <p>{currentError()}</p>
         </div>
       </Show>
 
       {/* Form */}
-      <Show when={state() !== "restricted"}>
+      <Show when={currentState() !== "restricted"}>
         <form onSubmit={handleSubmit} class="solidiom-block-sign-in__form">
           <div class="solidiom-block-sign-in__field">
-            <label for="sign-in-email">Email</label>
+            <label for={emailId}>Email</label>
             <input
-              id="sign-in-email"
+              id={emailId}
               type="email"
               value={email()}
               onInput={(e) => setEmail(e.currentTarget.value)}
               placeholder="you@example.com"
               autocomplete="email"
               required
-              disabled={state() === "loading"}
+              disabled={currentState() === "loading"}
             />
           </div>
 
           <div class="solidiom-block-sign-in__field">
-            <label for="sign-in-password">Password</label>
+            <label for={passwordId}>Password</label>
             <input
-              id="sign-in-password"
+              id={passwordId}
               type="password"
               value={password()}
               onInput={(e) => setPassword(e.currentTarget.value)}
               placeholder="Password"
               autocomplete="current-password"
               required
-              disabled={state() === "loading"}
+              disabled={currentState() === "loading"}
             />
           </div>
 
           <button
             type="submit"
             class="solidiom-block-sign-in__submit"
-            disabled={state() === "loading"}
+            disabled={currentState() === "loading"}
           >
-            <Show when={state() === "loading"} fallback="Sign In">
+            <Show when={currentState() === "loading"} fallback="Sign In">
               <span class="solidiom-block-sign-in__spinner" aria-hidden="true" />
               Signing in...
             </Show>
@@ -124,22 +134,24 @@ export function SignIn(props: SignInProps): JSX.Element {
         </form>
 
         {/* OAuth providers */}
-        <Show when={props.oauthProviders && props.oauthProviders.length > 0}>
+        <Show when={props.oauthProviders?.length}>
           <div class="solidiom-block-sign-in__oauth">
             <div class="solidiom-block-sign-in__divider">
               <span>or continue with</span>
             </div>
             <div class="solidiom-block-sign-in__oauth-buttons">
-              {props.oauthProviders!.map((provider) => (
-                <button
-                  type="button"
-                  class="solidiom-block-sign-in__oauth-btn"
-                  onClick={() => props.onOAuthSelect?.(provider)}
-                  disabled={state() === "loading"}
-                >
-                  {provider}
-                </button>
-              ))}
+              <For each={props.oauthProviders}>
+                {(provider) => (
+                  <button
+                    type="button"
+                    class="solidiom-block-sign-in__oauth-btn"
+                    onClick={() => props.onOAuthSelect?.(provider)}
+                    disabled={currentState() === "loading"}
+                  >
+                    {provider}
+                  </button>
+                )}
+              </For>
             </div>
           </div>
         </Show>
