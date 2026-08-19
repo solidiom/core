@@ -46,7 +46,8 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "draft",
+        "lastUpdated": "2026-08-18T05:00:00.000Z"
       }
     }
   },
@@ -75,10 +76,10 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "9c5a54d31056a1f9b8af3a33b9431788bb0374107839ae98d98f0c16eef1c2ea",
+    "filesHash": "c79663511d9d501cb6a3fde644dc138e83e6f2656858affc967878d01e59868a",
     "fileDigests": {
       "src/dialog-context.ts": "fe5dd5cd7ec569a452631de115a0666952944631d37d5c7e801fa9f10fd43928",
-      "src/dialog.tsx": "8c01e0531e61fcb5d77cf7040d9548ef5da6cdbec3c7cf0ed526e3a7b34119a6",
+      "src/dialog.tsx": "7e91e606302fb2258d07dbdbfe17a872e3a0ababba7d390efcca31f386fe1d5c",
       "src/index.tsx": "12a64978fe94873ab58c3da5219a6e75780eae19a1bb8de728143d8e1affcb01"
     },
     "lastGenerated": "2025-01-01T00:00:00.000Z"

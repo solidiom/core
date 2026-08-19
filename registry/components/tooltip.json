@@ -30,7 +30,7 @@
         "src/recipes/tooltip.tsx": "8c836d3d8bd3059572dcb51beda8cae21600051ce9fac7716f1f720672fcbcee"
       }
     },
-    "lastGenerated": "2026-08-18T12:30:14.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,12 +39,13 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "draft",
+        "lastUpdated": "2026-08-18T05:00:00.000Z"
       }
     }
   },
   "dependencies": [
     "@solidiom/tooltip"
   ],
-  "lastUpdated": "2026-08-18T12:30:14.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

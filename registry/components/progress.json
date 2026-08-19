@@ -30,7 +30,7 @@
         "src/recipes/progress.tsx": "f7a7c7ac1061bc9817f98586c1d5b31afdfe54b9246672f72d0806b9cff79325"
       }
     },
-    "lastGenerated": "2026-08-18T12:30:14.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,12 +39,13 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "draft",
+        "lastUpdated": "2026-08-18T05:00:00.000Z"
       }
     }
   },
   "dependencies": [
     "@solidiom/progress"
   ],
-  "lastUpdated": "2026-08-18T12:30:14.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

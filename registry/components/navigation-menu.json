@@ -30,7 +30,7 @@
         "src/recipes/navigation-menu.tsx": "5a70a18f69ae5704bd122f5bb766e8cfcf2200f28b1343ede18c0a66422c920e"
       }
     },
-    "lastGenerated": "2026-08-18T12:30:14.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,12 +39,13 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "draft",
+        "lastUpdated": "2026-08-18T05:00:00.000Z"
       }
     }
   },
   "dependencies": [
     "@solidiom/navigation-menu"
   ],
-  "lastUpdated": "2026-08-18T12:30:14.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }

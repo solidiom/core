@@ -30,7 +30,7 @@
         "src/recipes/switch.tsx": "22384d25357ba6bd2cd01332367494b175b8c0a0c8bf85be52c97d4a1c12da4a"
       }
     },
-    "lastGenerated": "2026-08-18T12:30:14.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,12 +39,13 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "draft",
+        "lastUpdated": "2026-08-18T05:00:00.000Z"
       }
     }
   },
   "dependencies": [
     "@solidiom/switch"
   ],
-  "lastUpdated": "2026-08-18T12:30:14.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }
