@@ -1,4 +1,13 @@
+import { resolve } from "node:path"
 import { defineConfig, devices } from "@playwright/test"
+
+// Load the project root .env so environment variables like NPM_TOKEN are
+// available even when the runner (e.g. mise) doesn't inject them.
+try {
+  process.loadEnvFile(resolve(__dirname, "../../.env"))
+} catch {
+  // .env is optional — CI provides variables through other means.
+}
 
 /**
  * Playwright E2E config for the Solidiom docs app.
@@ -14,7 +23,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://localhost:5173",
+    baseURL: "http://localhost:4321",
     trace: "on-first-retry",
   },
   projects: [
@@ -24,8 +33,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "pnpm --filter docs dev",
-    url: "http://localhost:5173",
+    command: "pnpm --filter @solidiom/site dev",
+    url: "http://localhost:4321",
     reuseExistingServer: !process.env.CI,
     cwd: "../..",
     timeout: 30_000,
