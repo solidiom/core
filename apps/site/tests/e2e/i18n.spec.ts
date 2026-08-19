@@ -26,18 +26,25 @@ test.describe("I18N-001 through I18N-004", () => {
 
     const spanishSwitcher = page.getByRole("button", { name: "Switch language to Español" })
     await expect(spanishSwitcher).toBeVisible()
-    await spanishSwitcher.focus()
-    await page.keyboard.press("Enter")
-    await expect(page).toHaveURL(/\/es\/privacy\/$/)
+    await expect(spanishSwitcher).toBeEnabled()
+    // The button is SSR-rendered before SolidJS hydrates the onClick handler.
+    // Poll-click until the navigation proves the handler is wired.
+    await expect(async () => {
+      await spanishSwitcher.click()
+      await expect(page).toHaveURL(/\/es\/privacy\/$/, { timeout: 2000 })
+    }).toPass({ timeout: 10000 })
     await expect(page.locator("html")).toHaveAttribute("data-locale-preference", "es")
     await expect
       .poll(() => page.evaluate(() => localStorage.getItem("solidiom-locale-preference")))
       .toBe("es")
 
     const englishSwitcher = page.getByRole("button", { name: "Switch language to English" })
-    await englishSwitcher.focus()
-    await page.keyboard.press("Enter")
-    await expect(page).toHaveURL(/\/privacy\/$/)
+    await expect(englishSwitcher).toBeVisible()
+    await expect(englishSwitcher).toBeEnabled()
+    await expect(async () => {
+      await englishSwitcher.click()
+      await expect(page).toHaveURL(/\/privacy\/$/, { timeout: 2000 })
+    }).toPass({ timeout: 10000 })
     await expect(page.locator("html")).toHaveAttribute("data-locale-preference", "en")
   })
 

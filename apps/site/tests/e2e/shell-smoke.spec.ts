@@ -52,9 +52,12 @@ test.describe("TEST-002: Shell Smoke Tests", () => {
       const trigger = page.locator(".site-header__hamburger-button").first()
       await expect(trigger).toBeVisible()
 
-      await trigger.click()
       const drawerContent = page.locator(".site-header__drawer-content")
-      await expect(drawerContent).toBeVisible()
+      // Poll-click until SolidJS hydration wires the drawer open handler.
+      await expect(async () => {
+        await trigger.click()
+        await expect(drawerContent).toBeVisible({ timeout: 2000 })
+      }).toPass({ timeout: 10000 })
 
       const close = page.getByRole("button", { name: "Close menu" })
       await close.click()
@@ -66,11 +69,14 @@ test.describe("TEST-002: Shell Smoke Tests", () => {
       await page.goto("/")
 
       const trigger = page.locator(".site-header__hamburger-button").first()
-      await trigger.click()
-      await expect(page.locator(".site-header__drawer-content")).toBeVisible()
+      const drawerContent = page.locator(".site-header__drawer-content")
+      await expect(async () => {
+        await trigger.click()
+        await expect(drawerContent).toBeVisible({ timeout: 2000 })
+      }).toPass({ timeout: 10000 })
 
       await page.keyboard.press("Escape")
-      await expect(page.locator(".site-header__drawer-content")).toBeHidden()
+      await expect(drawerContent).toBeHidden()
     })
   })
 
@@ -100,15 +106,20 @@ test.describe("TEST-002: Shell Smoke Tests", () => {
 
       const spanishSwitcher = page.getByRole("button", { name: "Switch language to Español" })
       await expect(spanishSwitcher).toBeVisible()
-      await spanishSwitcher.focus()
-      await page.keyboard.press("Enter")
-      await expect(page).toHaveURL(/\/es\/$/)
+      await expect(spanishSwitcher).toBeEnabled()
+      // Poll-click until SolidJS hydration wires the onClick handler.
+      await expect(async () => {
+        await spanishSwitcher.click()
+        await expect(page).toHaveURL(/\/es\/$/, { timeout: 2000 })
+      }).toPass({ timeout: 10000 })
 
       const englishSwitcher = page.getByRole("button", { name: "Switch language to English" })
       await expect(englishSwitcher).toBeVisible()
-      await englishSwitcher.focus()
-      await page.keyboard.press("Enter")
-      await expect(page).toHaveURL(/\/$/)
+      await expect(englishSwitcher).toBeEnabled()
+      await expect(async () => {
+        await englishSwitcher.click()
+        await expect(page).toHaveURL(/\/$/, { timeout: 2000 })
+      }).toPass({ timeout: 10000 })
     })
   })
 

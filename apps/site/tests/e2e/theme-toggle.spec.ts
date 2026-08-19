@@ -131,8 +131,13 @@ test.describe("SITE-009: Theme toggle", () => {
     const toggle = page.locator("button.theme-toggle")
     const html = page.locator("html")
 
-    await toggle.click()
-    await expect(html).toHaveAttribute("data-theme-preference", "light")
+    // The button is SSR-rendered and visible before hydration attaches the
+    // onClick handler. Poll-click until the first transition proves the
+    // handler is wired up, then proceed normally.
+    await expect(async () => {
+      await toggle.click()
+      await expect(html).toHaveAttribute("data-theme-preference", "light", { timeout: 500 })
+    }).toPass({ timeout: 5000 })
     await expect(html).toHaveAttribute("data-theme", "light")
 
     await toggle.click()
