@@ -172,10 +172,23 @@ else
 fi
 
 echo "--- running ${TARGET} ---"
+mkdir -p /out/test-results
+LOG_FILE="/out/test-results/site-visual.log"
+
 set +e
-PLAYWRIGHT_USE_EXISTING_BUILD=1 pnpm --filter @solidiom/site run "${TARGET}" 2>&1 | tail -12
+PLAYWRIGHT_USE_EXISTING_BUILD=1 pnpm --filter @solidiom/site run "${TARGET}" 2>&1 | tee "$LOG_FILE"
 STATUS=${PIPESTATUS[0]}
 set -e
+
+# Copy failure artifacts (traces, screenshots, diffs) out for inspection.
+if [ "${STATUS}" -ne 0 ] && [ -d "test-results/site-visual" ]; then
+  cp -a test-results/site-visual/. /out/test-results/site-visual/ 2>/dev/null || true
+fi
+
+# Copy JSON report if generated.
+if [ -f "test-results/site-visual-results.json" ]; then
+  cp -a test-results/site-visual-results.json /out/test-results/ 2>/dev/null || true
+fi
 
 if [ "${UPDATE}" = "1" ]; then
   cp -a "apps/site/tests/visual/__screenshots__/." /out/
@@ -189,6 +202,24 @@ set +e
 "${RUNTIME}" "${RUN_ARGS[@]}" "${IMAGE}" bash -c "${CONTAINER_SCRIPT}"
 RUN_STATUS=$?
 set -e
+
+if [[ "${UPDATE}" != "1" && ${RUN_STATUS} -ne 0 ]]; then
+  echo ""
+  echo "════════════════════════════════════════════════════════════"
+  echo "  SITE VISUAL FAILURES"
+  echo "════════════════════════════════════════════════════════════"
+  echo ""
+  LOG_FILE="${OUT_DIR}/test-results/site-visual.log"
+  if [[ -f "${LOG_FILE}" ]]; then
+    grep -E "(FAIL|Error|✘|×|expect\(|Screenshot|snapshot)" "${LOG_FILE}" | head -80
+  fi
+  echo ""
+  echo "────────────────────────────────────────────────────────────"
+  echo "  Full log:    ${OUT_DIR}/test-results/site-visual.log"
+  echo "  JSON report: ${OUT_DIR}/test-results/site-visual-results.json"
+  echo "  Artifacts:   ${OUT_DIR}/test-results/site-visual/"
+  echo "════════════════════════════════════════════════════════════"
+fi
 
 if [[ "${UPDATE}" == "1" ]]; then
   CAPTURED=$(find "${OUT_DIR}" -name '*.png' | wc -l | tr -d ' ')

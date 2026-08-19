@@ -24,7 +24,13 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: process.env.CI ? "github" : "list",
+  reporter: process.env.CI
+    ? [
+        ["line"],
+        ["github"],
+        ["json", { outputFile: "../../test-results/site-visual-results.json" }],
+      ]
+    : "list",
   // A visual run must never create a baseline implicitly. Reference images
   // change only through the explicit `test:visual:update` command or an
   // intentional UPDATE_SNAPSHOTS=1 invocation.
