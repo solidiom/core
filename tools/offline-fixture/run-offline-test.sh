@@ -220,6 +220,17 @@ sed "s|^storage: .*|storage: ${STORAGE_DIR}|" "$SOURCE_CONFIG" > "$VERDACCIO_CON
 if [[ $PREP_MODE -eq 1 ]] && [[ -d "$STORAGE_DIR/@solidiom" ]]; then
   echo "  removing stale @solidiom/* packages from snapshot..."
   rm -rf "$STORAGE_DIR/@solidiom"
+  # Also purge @solidiom/* entries from verdaccio's package database so it
+  # doesn't think those packages still exist when it starts up.
+  if [[ -f "$STORAGE_DIR/.verdaccio-db.json" ]]; then
+    node -e "
+      const fs = require('fs');
+      const dbPath = process.argv[1];
+      const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+      db.list = (db.list || []).filter(n => !n.startsWith('@solidiom/'));
+      fs.writeFileSync(dbPath, JSON.stringify(db));
+    " "$STORAGE_DIR/.verdaccio-db.json"
+  fi
 fi
 
 echo "[3/8] Starting verdaccio..."

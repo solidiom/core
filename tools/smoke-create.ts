@@ -421,9 +421,13 @@ function isolationFor(
       }
     case "pnpm":
       return {
-        env: { ...base, npm_config_store_dir: join(cacheDir, "store") },
+        env: {
+          ...base,
+          npm_config_store_dir: join(cacheDir, "store"),
+          npm_config_cache_dir: join(cacheDir, "metadata"),
+        },
         files: {
-          ".npmrc": `registry=${registry}\nstore-dir=${join(cacheDir, "store")}\n`,
+          ".npmrc": `registry=${registry}\nstore-dir=${join(cacheDir, "store")}\ncache-dir=${join(cacheDir, "metadata")}\n`,
         },
       }
     case "yarn":
