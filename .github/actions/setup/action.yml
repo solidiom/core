@@ -23,14 +23,17 @@ runs:
   using: "composite"
   steps:
     # Install Node first so pnpm/action-setup can use a modern Node for its
-    # self-installer (the runner's default Node is too old for node: imports).
+    # corepack self-installer (the runner's system Node is too old).
     - uses: actions/setup-node@v5
       with:
         node-version: ${{ inputs.node-version }}
+        # Disable automatic package-manager caching on this first pass; pnpm
+        # isn't on PATH yet so the cache key hash would fail.
+        cache: ""
 
     - uses: pnpm/action-setup@v6
 
-    # Re-run setup-node with cache now that pnpm is available for key hashing.
+    # Now that pnpm is available, re-run setup-node to enable pnpm store cache.
     - uses: actions/setup-node@v5
       with:
         node-version: ${{ inputs.node-version }}
