@@ -23,6 +23,13 @@ uplinks:
     cache: true
     maxage: 60m
 packages:
+  "@solidiom/*":
+    access: $all
+    publish: $anonymous
+    unpublish: $anonymous
+    # No proxy — local workspace publishes must never be blocked by versions
+    # that already exist on the public registry (the workspace version may
+    # intentionally match a previously-released version during development).
   "**":
     access: $all
     publish: $anonymous
