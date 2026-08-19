@@ -29,7 +29,7 @@ runs:
         node-version: ${{ inputs.node-version }}
         # Disable automatic package-manager caching on this first pass; pnpm
         # isn't on PATH yet so the cache key hash would fail.
-        cache: ""
+        package-manager-cache: false
 
     - uses: pnpm/action-setup@v6
 
