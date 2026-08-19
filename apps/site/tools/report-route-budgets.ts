@@ -18,7 +18,7 @@
  *   pnpm run budget-report --enforce   # fail if budgets exceeded
  *   pnpm run budget-report --json      # output JSON only (for CI artifacts)
  */
-import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, extname, join, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { gzipSync } from "node:zlib"

@@ -56,10 +56,11 @@ import { ToolbarExample } from "./ToolbarExample"
 import { TooltipExample } from "./TooltipExample"
 import { TreeExample } from "./TreeExample"
 import { VirtualListExample } from "./VirtualListExample"
+import type { Locale } from "@lib/locale"
 
 interface Props {
   name: string
-  locale: string
+  locale: Locale
 }
 
 const { name, locale } = Astro.props

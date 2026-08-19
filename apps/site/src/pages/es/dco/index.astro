@@ -7,7 +7,7 @@ if (!entry) throw new Error("Missing content: es/pages/dco")
 const { Content } = await render(entry)
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description} locale="es">
+<BaseLayout title={entry.data.title} description={entry.data.description}>
   <div
     class="prose"
     data-pagefind-body

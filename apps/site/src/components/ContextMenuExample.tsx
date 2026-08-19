@@ -64,10 +64,10 @@ export function ContextMenuExample(props: ContextMenuExampleProps) {
             style={{
               padding: "2rem",
               border: "1px dashed var(--color-border)",
-              borderRadius: "0.5rem",
-              textAlign: "center",
+              "border-radius": "0.5rem",
+              "text-align": "center",
               color: "var(--color-foreground-muted)",
-              fontSize: "0.875rem",
+              "font-size": "0.875rem",
               cursor: "context-menu",
             }}
           >

@@ -57,10 +57,11 @@ import { DatePickerExample } from "./DatePickerExample"
 import { DrawerExample } from "./DrawerExample"
 import { TreeExample } from "./TreeExample"
 import { VirtualListExample } from "./VirtualListExample"
+import type { Locale } from "@lib/locale"
 
 interface Props {
   name: string
-  locale: string
+  locale: Locale
 }
 
 const { name, locale } = Astro.props
