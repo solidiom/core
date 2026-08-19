@@ -8,7 +8,8 @@
  * Dependencies: Card, Select, Tabs, Tooltip, Data Table, Meter, Progress, Spinner
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface SearchAnalyticsProps {
   error?: string

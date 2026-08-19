@@ -7,7 +7,8 @@
  * Dependencies: Button, Card, Alert, Tabs, Avatar, Breadcrumb, Popover, Spinner, Toast, Data Table
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface ResourceDetailProps {
   error?: string

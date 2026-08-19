@@ -7,7 +7,8 @@
  * Dependencies: Button, Input, Field, Card, Alert, Dialog, Select, Avatar, Popover, Pagination, Data Table, Spinner
  */
 
-import { createSignal, Show, For, type JSX } from "solid-js"
+import { createSignal, Show, For } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface TeamMember {
   id: string

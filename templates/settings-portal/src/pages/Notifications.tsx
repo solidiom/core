@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js"
-import type { JSX } from "solid-js"
+import type { JSX } from "@solidjs/web"
 import { A, useLocation } from "@solidjs/router"
 import * as Button from "@solidiom/button"
 import * as Alert from "@solidiom/alert"

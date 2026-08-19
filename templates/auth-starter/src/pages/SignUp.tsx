@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js"
+import type { JSX } from "@solidjs/web"
 import { createSignal, createMemo } from "solid-js"
 import { A } from "@solidjs/router"
 import * as Button from "@solidiom/button"

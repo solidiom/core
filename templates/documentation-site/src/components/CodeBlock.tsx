@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export function CodeBlock(props: { code: string; language?: string }): JSX.Element {
   return (

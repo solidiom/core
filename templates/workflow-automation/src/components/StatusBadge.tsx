@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export function StatusBadge(props: {
   type: "success" | "error" | "running" | "queued" | "cancelled" | "active" | "paused" | "draft"
