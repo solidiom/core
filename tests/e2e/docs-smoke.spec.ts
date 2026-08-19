@@ -14,26 +14,28 @@ test.describe("Docs app navigation", () => {
     const console = createConsoleCollector(page)
 
     await page.goto("/")
-    await expect(page.locator("h1")).toContainText("Build your component library")
-    await expect(page.locator("[role='link'], a").first()).toBeVisible()
+    await expect(page.locator(".hero__title")).toContainText("Accessible behavior")
+    await expect(page.locator("a[href='/primitives/']").first()).toBeVisible()
 
-    console.assertClean()
+    console.assertNoErrors()
+    console.assertNoReactivityErrors()
   })
 
   test("navigates to a primitive page", async ({ page }) => {
     const console = createConsoleCollector(page)
 
-    await page.goto("/primitives/dialog")
+    await page.goto("/primitives/dialog/")
     await expect(page.locator("h1")).toContainText("Dialog")
-    await expect(page.locator("text=Usage")).toBeVisible()
+    await expect(page.locator(".primitive-tabs")).toBeVisible()
 
-    console.assertClean()
+    console.assertNoErrors()
+    console.assertNoReactivityErrors()
   })
 
   test("listbox page renders without REACTIVE_WRITE errors", async ({ page }) => {
     const console = createConsoleCollector(page)
 
-    await page.goto("/primitives/listbox")
+    await page.goto("/primitives/listbox/")
     await expect(page.locator("h1")).toContainText("Listbox")
     await expect(page.locator("[role='listbox']")).toBeVisible()
 
@@ -44,7 +46,7 @@ test.describe("Docs app navigation", () => {
   test("popover page renders without STRICT_READ_UNTRACKED warnings", async ({ page }) => {
     const console = createConsoleCollector(page)
 
-    await page.goto("/primitives/popover")
+    await page.goto("/primitives/popover/")
     await expect(page.locator("h1")).toContainText("Popover")
 
     console.assertNoUntrackedWarnings()
@@ -54,24 +56,26 @@ test.describe("Docs app navigation", () => {
   test("performance page loads", async ({ page }) => {
     const console = createConsoleCollector(page)
 
-    await page.goto("/performance")
-    await expect(page.locator("h1")).toBeVisible()
+    await page.goto("/performance/")
+    await expect(page.locator("h1")).toContainText("Performance")
 
-    console.assertClean()
+    console.assertNoErrors()
+    console.assertNoReactivityErrors()
   })
 
   test("SPA navigation between routes produces no errors", async ({ page }) => {
     const console = createConsoleCollector(page)
 
     await page.goto("/")
-    await expect(page.locator("h1")).toContainText("Build your component library")
+    await expect(page.locator(".hero__title")).toContainText("Accessible behavior")
 
-    await page.click("a[href*='/primitives/']")
-    await expect(page.locator("h1")).toBeVisible()
+    await page.click("a[href='/primitives/']")
+    await expect(page.locator("h1").first()).toBeVisible()
 
     await page.goBack()
-    await expect(page.locator("h1")).toContainText("Build your component library")
+    await expect(page.locator(".hero__title")).toContainText("Accessible behavior")
 
-    console.assertClean()
+    console.assertNoErrors()
+    console.assertNoReactivityErrors()
   })
 })
