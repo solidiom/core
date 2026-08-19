@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js"
+import type { JSX } from "@solidjs/web"
 import * as Switch from "@solidiom/switch"
 
 export function ToggleRow(props: {

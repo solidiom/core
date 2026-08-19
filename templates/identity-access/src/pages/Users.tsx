@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js"
+import type { JSX } from "@solidjs/web"
 import { createSignal } from "solid-js"
 import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Alert from "@solidiom/alert"

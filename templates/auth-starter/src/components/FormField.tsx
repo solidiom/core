@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js"
+import type { JSX } from "@solidjs/web"
 import * as Input from "@solidiom/input"
 import * as Field from "@solidiom/field"
 

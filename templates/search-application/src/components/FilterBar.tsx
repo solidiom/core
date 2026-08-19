@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js"
+import type { JSX } from "@solidjs/web"
 import * as Checkbox from "@solidiom/checkbox"
 
 export function FilterBar(props: {

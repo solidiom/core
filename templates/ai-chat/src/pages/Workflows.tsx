@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js"
+import type { JSX } from "@solidjs/web"
 import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Button from "@solidiom/button"
 import * as Card from "@solidiom/card"

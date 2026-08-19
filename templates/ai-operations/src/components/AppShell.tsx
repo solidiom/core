@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js"
+import type { JSX } from "@solidjs/web"
 import { A, useLocation } from "@solidjs/router"
 import * as NavigationMenu from "@solidiom/navigation-menu"
 
