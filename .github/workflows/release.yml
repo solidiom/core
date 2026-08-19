@@ -46,7 +46,7 @@ jobs:
   # Dispatch → respect inputs.
 
   plan:
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     outputs:
       deploy_packages: ${{ steps.plan.outputs.deploy_packages }}
       deploy_site: ${{ steps.plan.outputs.deploy_site }}
@@ -93,7 +93,7 @@ jobs:
   gate:
     needs: plan
     if: needs.plan.outputs.run_gate == 'true'
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -113,7 +113,7 @@ jobs:
   publish-packages:
     needs: [plan, gate]
     if: always() && needs.plan.outputs.deploy_packages == 'true' && (needs.gate.result == 'success' || needs.gate.result == 'skipped')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     permissions:
       contents: write
       pull-requests: write
@@ -194,7 +194,7 @@ jobs:
       always() &&
       needs.plan.outputs.deploy_site == 'true' &&
       (needs.publish-packages.result == 'success' || needs.publish-packages.result == 'skipped')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     permissions:
       contents: read
     steps:

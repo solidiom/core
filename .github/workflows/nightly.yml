@@ -40,7 +40,7 @@ jobs:
   # compatibility regressions before they reach users.
 
   solid-compat:
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     strategy:
       fail-fast: false
       matrix:
@@ -69,7 +69,7 @@ jobs:
   # 3-browser suite to catch browser-specific regressions nightly.
 
   browser-full:
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -94,7 +94,7 @@ jobs:
 
   visual-baselines:
     if: github.event_name == 'workflow_dispatch' && inputs.regenerate_baselines == 'true'
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     container:
       image: mcr.microsoft.com/playwright:v1.62.1-noble
       options: --ipc=host
@@ -135,7 +135,7 @@ jobs:
   # Checks key libraries for available updates and reports drift.
 
   deps-check:
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup

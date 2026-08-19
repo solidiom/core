@@ -42,7 +42,7 @@ jobs:
   # ─── Foundation ────────────────────────────────────────────────────────────────
 
   install:
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -60,7 +60,7 @@ jobs:
 
   format:
     needs: install
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -68,7 +68,7 @@ jobs:
 
   typecheck:
     needs: install
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -78,7 +78,7 @@ jobs:
 
   build:
     needs: install
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
         with:
@@ -146,7 +146,7 @@ jobs:
 
   test-node:
     needs: build
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     strategy:
       matrix:
         node-version: ${{ (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')) && fromJson('[24, 26]') || fromJson('[24]') }}
@@ -175,7 +175,7 @@ jobs:
 
   test-browser:
     needs: build
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -203,7 +203,7 @@ jobs:
   a11y-axe-scan:
     needs: build
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -231,7 +231,7 @@ jobs:
   site-check:
     needs: install
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -242,7 +242,7 @@ jobs:
   site-build:
     needs: [install, site-check]
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -260,7 +260,7 @@ jobs:
   site-e2e:
     needs: site-build
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -283,7 +283,7 @@ jobs:
   site-visual:
     needs: site-build
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     container:
       image: mcr.microsoft.com/playwright:v1.62.1-noble
       options: --ipc=host
@@ -307,7 +307,7 @@ jobs:
   site-lighthouse:
     needs: site-build
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     continue-on-error: true
     steps:
       - uses: actions/checkout@v5
@@ -335,7 +335,7 @@ jobs:
   cli-smoke-create-prep:
     needs: build
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -365,7 +365,7 @@ jobs:
   cli-smoke-create:
     needs: [build, cli-smoke-create-prep]
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     strategy:
       fail-fast: false
       matrix:
@@ -404,7 +404,7 @@ jobs:
   preview-deploy:
     needs: [install]
     if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     permissions:
       contents: read
       pull-requests: write
@@ -459,7 +459,7 @@ jobs:
   catalog-gates:
     needs: build
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -473,7 +473,7 @@ jobs:
   vertical-slice-gate:
     needs: [build, site-check]
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
@@ -502,7 +502,7 @@ jobs:
         (needs.a11y-axe-scan.result == 'success' &&
           needs.site-e2e.result == 'success' &&
           needs.catalog-gates.result == 'success'))
-    runs-on: solidiom-dfw-runner
+    runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
