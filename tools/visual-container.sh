@@ -157,6 +157,11 @@ tar -C /src -cf - \
   . | tar -C /work -xf -
 cd /work
 
+# The repository prepare script (git config core.hooksPath ...) requires a git
+# directory. Since we excluded .git from the tar copy, initialise a throwaway
+# repo so `pnpm install` lifecycle scripts do not fail.
+git init -q
+
 corepack enable >/dev/null 2>&1
 echo "--- installing dependencies ---"
 pnpm install --frozen-lockfile 2>&1 | tail -3
