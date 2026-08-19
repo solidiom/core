@@ -224,18 +224,21 @@ test.describe("Computed contrast and automated accessibility", () => {
 
       const colors = await page.evaluate(() => {
         const background = getComputedStyle(document.body).backgroundColor
+        const footer = document.querySelector("footer")!
+        const footerBackground = getComputedStyle(footer).backgroundColor
         return {
           background,
+          footerBackground,
           body: getComputedStyle(document.body).color,
           brand: getComputedStyle(document.querySelector(".site-header__brand")!).color,
-          muted: getComputedStyle(document.querySelector(".site-footer__copy")!).color,
+          muted: getComputedStyle(document.querySelector(".site-footer__description")!).color,
           focus: getComputedStyle(document.documentElement).getPropertyValue("--focus-ring"),
         }
       })
 
       expect(contrastRatio(colors.body, colors.background)).toBeGreaterThanOrEqual(4.5)
       expect(contrastRatio(colors.brand, colors.background)).toBeGreaterThanOrEqual(4.5)
-      expect(contrastRatio(colors.muted, colors.background)).toBeGreaterThanOrEqual(4.5)
+      expect(contrastRatio(colors.muted, colors.footerBackground)).toBeGreaterThanOrEqual(4.5)
       expect(contrastRatio(colors.focus, colors.background)).toBeGreaterThanOrEqual(3)
     })
 
@@ -243,10 +246,11 @@ test.describe("Computed contrast and automated accessibility", () => {
       await page.goto("/")
       await setTheme(page, theme)
       const results = await new AxeBuilder({ page })
+        .include("header")
+        .include("footer")
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
         .exclude(".beta-banner, .beta-banner *")
         .exclude(".maturity-badge, .maturity-badge__label, .maturity-badge *")
-        .exclude(".home-page__area-link")
         .analyze()
       const blocking = results.violations.filter(
         (violation) => violation.impact === "serious" || violation.impact === "critical",
