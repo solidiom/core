@@ -53,7 +53,7 @@ export function AlertDialogExample(props: AlertDialogExampleProps) {
               color: "#ef4444",
               padding: "0.5rem 1rem",
               border: "1px solid #ef4444",
-              borderRadius: "0.5rem",
+              "border-radius": "0.5rem",
               background: "transparent",
               cursor: "pointer",
             }}
@@ -69,8 +69,8 @@ export function AlertDialogExample(props: AlertDialogExampleProps) {
               style={{
                 display: "flex",
                 gap: "0.5rem",
-                justifyContent: "flex-end",
-                marginTop: "1rem",
+                "justify-content": "flex-end",
+                "margin-top": "1rem",
               }}
             >
               <AlertDialog.Cancel>
@@ -84,7 +84,7 @@ export function AlertDialogExample(props: AlertDialogExampleProps) {
                     color: "white",
                     padding: "0.5rem 1rem",
                     border: "none",
-                    borderRadius: "0.5rem",
+                    "border-radius": "0.5rem",
                     cursor: "pointer",
                   }}
                 >

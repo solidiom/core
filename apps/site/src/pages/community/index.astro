@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry, render } from "astro:content"
+import { getCollection, render } from "astro:content"
 import DocsLayout from "@layouts/DocsLayout.astro"
 import type { DocsSidebarGroup } from "@lib/docs-nav"
 
@@ -8,8 +8,8 @@ const indexEntry = entries.find((e) => e.id === "en/community")
 const children = entries
   .filter((e) => e.id !== "en/community")
   .sort((a, b) => {
-    const oa = (a.data as Record<string, unknown>).order ?? 999
-    const ob = (b.data as Record<string, unknown>).order ?? 999
+    const oa = Number((a.data as Record<string, unknown>).order ?? 999)
+    const ob = Number((b.data as Record<string, unknown>).order ?? 999)
     if (oa !== ob) return oa - ob
     return a.data.title.localeCompare(b.data.title)
   })

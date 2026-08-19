@@ -22,7 +22,7 @@ export function CalendarExample(props: CalendarExampleProps) {
         <Calendar.Grid>
           {(weeks) =>
             weeks.map((week, wi) => (
-              <tr key={wi}>
+              <tr>
                 {week.map((day) => (
                   <Calendar.Cell day={day} />
                 ))}

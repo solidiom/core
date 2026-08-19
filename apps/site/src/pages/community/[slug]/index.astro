@@ -39,8 +39,8 @@ const allEntries = await getCollection("community", (e) => e.data.locale === loc
 const children = allEntries
   .filter((e) => !e.id.endsWith("/community"))
   .sort((a, b) => {
-    const oa = (a.data as Record<string, unknown>).order ?? 999
-    const ob = (b.data as Record<string, unknown>).order ?? 999
+    const oa = Number((a.data as Record<string, unknown>).order ?? 999)
+    const ob = Number((b.data as Record<string, unknown>).order ?? 999)
     if (oa !== ob) return oa - ob
     return a.data.title.localeCompare(b.data.title)
   })

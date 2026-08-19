@@ -37,7 +37,7 @@ export function HoverCardExample(props: HoverCardExampleProps) {
     >
       <HoverCard.Root>
         <HoverCard.Trigger>
-          <span style={{ textDecoration: "underline", cursor: "pointer" }}>{copy().trigger}</span>
+          <span style={{ "text-decoration": "underline", cursor: "pointer" }}>{copy().trigger}</span>
         </HoverCard.Trigger>
         <HoverCard.Content>
           <div class="hover-card-example__content">
