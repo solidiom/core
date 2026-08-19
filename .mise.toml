@@ -318,6 +318,7 @@ exit $EXIT_CODE
 
 [tasks."ci:site-visual"]
 description = "Verify visual baselines in the pinned Playwright container"
+env = { CI = "true", PLAYWRIGHT_USE_EXISTING_BUILD = "1" }
 run = "pnpm run visual:container"
 
 [tasks."ci:site-lighthouse"]
