@@ -8,7 +8,8 @@
  * Dependencies: Button, Input, Field, Card, Alert, Select, Dropdown Menu, Tabs, Toast, Switch, Popover, Spinner, Toolbar
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface ContentEditorProps {
   error?: string

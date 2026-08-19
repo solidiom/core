@@ -7,7 +7,8 @@
  * Dependencies: Button, Input, Field, Alert, Dialog, Tabs, Toast, Avatar, Spinner
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface AccountSettingsProps {
   onUpdateProfile?: (data: { name: string; email: string }) => Promise<void>

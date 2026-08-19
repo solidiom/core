@@ -7,7 +7,8 @@
  * Dependencies: Button, Input, Card, Alert, Tabs, Tooltip, Breadcrumb, Pagination, Data Table, Progress, Spinner
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface OrderTrackingProps {
   error?: string

@@ -61,27 +61,16 @@ export function createPresence(options: PresenceOptions): PresenceState {
       ? "exiting"
       : "exited"
 
-  const [phase, setPhase] = createSignal<PresencePhase>(initialPhase, { ownedWrite: true })
-  // Track last seen open value to detect transitions
-  let lastOpen = untrack(open)
+  const [storedPhase, setPhase] = createSignal<PresencePhase>(initialPhase, { ownedWrite: true })
+  const phase: Accessor<PresencePhase> = () => {
+    const current = storedPhase()
 
-  const trackedPhase: Accessor<PresencePhase> = () => {
-    const isOpen = open()
-
-    // Detect open change
-    if (isOpen !== lastOpen) {
-      lastOpen = isOpen
-      if (isOpen) {
-        setPhase(animated ? "entering" : "entered")
-      } else {
-        setPhase(animated ? "exiting" : "exited")
-      }
-    }
-
-    return phase()
+    if (!animated) return open() ? "entered" : "exited"
+    if (open()) return current === "entered" ? "entered" : "entering"
+    return current === "exited" ? "exited" : "exiting"
   }
 
-  const present: Accessor<boolean> = () => trackedPhase() !== "exited"
+  const present: Accessor<boolean> = () => phase() !== "exited"
 
   const onEntered = (): void => {
     if (phase() === "entering") {
@@ -95,5 +84,5 @@ export function createPresence(options: PresenceOptions): PresenceState {
     }
   }
 
-  return { open, present, phase: trackedPhase, onEntered, onExited }
+  return { open, present, phase, onEntered, onExited }
 }

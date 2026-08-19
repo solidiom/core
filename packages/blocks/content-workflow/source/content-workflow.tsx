@@ -8,7 +8,8 @@
  * Dependencies: Button, Input, Field, Card, Alert, Dialog, Select, Dropdown Menu, Tabs, Toast, Avatar, Checkbox, Popover, Breadcrumb, Pagination, Data Table, Spinner
  */
 
-import { createSignal, Show, type JSX } from "solid-js"
+import { createSignal, Show } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface ContentWorkflowProps {
   error?: string

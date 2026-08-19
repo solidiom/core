@@ -7,7 +7,8 @@
  * Dependencies: Input, Card, Select, Checkbox, Popover, Breadcrumb, Pagination, Data Table, Spinner
  */
 
-import { createSignal, Show, For, type JSX } from "solid-js"
+import { createSignal, Show, For } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface AuditEvent {
   id: string

@@ -7,7 +7,8 @@
  * Dependencies: Button, Input, Field, Card, Alert, Dialog, Select, Dropdown Menu, Toast, Spinner
  */
 
-import { createSignal, Show, For, type JSX } from "solid-js"
+import { createSignal, Show, For } from "solid-js"
+import type { JSX } from "@solidjs/web"
 
 export interface PaymentMethod {
   id: string
