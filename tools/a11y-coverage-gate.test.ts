@@ -140,9 +140,32 @@ describe("checkPrimitiveEvidence (A11Y-004)", () => {
   })
 
   it("fails when the published evidence predates the latest executed scan (stale)", () => {
-    const path = writeEvidenceFile(publishedEvidence({ lastRun: "2026-07-29T00:00:00.000Z" }))
+    // Evidence is stale when its substance (evidenceIds, summary) differs
+    // from the latest scan results, not merely when timestamps differ.
+    const path = writeEvidenceFile(
+      publishedEvidence({
+        summary: { passes: 10, violations: 0, incomplete: 0, outcome: "pass" },
+      }),
+    )
     const result = checkPrimitiveEvidence(primitiveSummary(), path, scanArtifact())
     expect(result).toMatchObject({ primitive: "dialog", reason: "stale-evidence" })
+  })
+
+  it("succeeds when only provenance (commitSha/lastRun) differs but substance is identical", () => {
+    // withPreservedProvenance keeps old timestamps to avoid churn; the gate
+    // must not treat this as staleness.
+    const path = writeEvidenceFile(
+      publishedEvidence({
+        lastRun: "2026-07-29T00:00:00.000Z",
+        provenance: { browser: "chromium", commitSha: "old-commit", ciRunUrl: null },
+      }),
+    )
+    const result = checkPrimitiveEvidence(primitiveSummary(), path, scanArtifact())
+    expect(result).toEqual({
+      primitive: "dialog",
+      provenance: { browser: "chromium", commitSha: "old-commit", ciRunUrl: null },
+      evidenceIds: ["axe-dialog-scan-v1"],
+    })
   })
 
   it("fails when the latest executed scan has violations", () => {
