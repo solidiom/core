@@ -260,8 +260,8 @@ function verifyComponent(
     if (!esFm) {
       failures.push("ES doc: cannot read frontmatter")
     } else {
-      if (esFm.translationStatus !== "draft") {
-        failures.push(`ES doc: translationStatus="${esFm.translationStatus}" (expected "draft")`)
+      if (esFm.translationStatus !== "draft" && esFm.translationStatus !== "human-reviewed") {
+        failures.push(`ES doc: translationStatus="${esFm.translationStatus}" (expected "draft" or "human-reviewed")`)
       }
       const hash = String(esFm.translationSourceHash || "")
       if (!hash || hash === "0".repeat(64)) {
