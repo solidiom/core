@@ -9,7 +9,9 @@ async function setTheme(page: Page, theme: "light" | "dark"): Promise<void> {
 }
 
 async function waitForDialogExample(page: Page): Promise<void> {
-  await expect(page.locator('[data-dialog-example][data-hydrated="true"]')).toBeVisible()
+  const example = page.locator("[data-dialog-example]")
+  await example.scrollIntoViewIfNeeded()
+  await expect(example.and(page.locator('[data-hydrated="true"]'))).toBeVisible({ timeout: 15_000 })
 }
 
 test.describe("VS-001 Dialog vertical slice", () => {

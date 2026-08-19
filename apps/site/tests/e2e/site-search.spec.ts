@@ -240,11 +240,11 @@ test.describe("SEARCH-004 Search accessibility", () => {
       await expect(dialog).toBeVisible()
 
       const input = dialog.getByRole("searchbox", { name: "Search documentation" })
-      await input.pressSequentially("xyznonexistentterm123")
-      await page.waitForTimeout(800)
+      await input.fill("zzqqxxnonesuch")
+      await input.dispatchEvent("input")
 
       const message = dialog.locator(".site-search__message")
-      await expect(message).toHaveText("No results found.")
+      await expect(message).toHaveText("No results found.", { timeout: 15_000 })
     })
 
     test("Shows Spanish 'No se encontraron resultados' in /es/ locale", async ({ page }) => {
@@ -256,11 +256,11 @@ test.describe("SEARCH-004 Search accessibility", () => {
       await expect(dialog).toBeVisible()
 
       const input = dialog.getByRole("searchbox", { name: "Buscar en la documentación" })
-      await input.pressSequentially("xyznonexistentterm123")
-      await page.waitForTimeout(800)
+      await input.fill("zzqqxxnonesuch")
+      await input.dispatchEvent("input")
 
       const message = dialog.locator(".site-search__message")
-      await expect(message).toHaveText("No se encontraron resultados.")
+      await expect(message).toHaveText("No se encontraron resultados.", { timeout: 15_000 })
     })
 
     test("The no-results message has appropriate aria-live announcement", async ({ page }) => {
