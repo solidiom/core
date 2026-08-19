@@ -447,7 +447,7 @@ describe("REG-003 manifest fields", () => {
     )
     expect(dialog.documentation.locales).toEqual({
       en: { status: "draft" },
-      es: { status: "draft" },
+      es: { status: "draft", lastUpdated: expect.any(String) },
     })
     expect(dialog.provenance).toEqual({
       repository: "https://github.com/solidiom/core",

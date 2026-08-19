@@ -21,16 +21,16 @@
     "algorithm": "sha256",
     "fileDigests": {
       "css": {
-        "src/recipes/button.tsx": "fb8304758e17eb18d92a6cc85c78ac02fdc3b3d0d36099eef49831f438b655e0"
+        "src/recipes/button.tsx": "76021d6eb7ee42816dce6d221016bee0fd877a953e4637ab662ac4b42ac88b42"
       },
       "tailwind": {
-        "src/recipes/button.tsx": "0f1ed7af16a285896617b87506330259f257b0189f87d1e0636598adc061d7fb"
+        "src/recipes/button.tsx": "0bfa74c7275d007b1b99749330fccabbde39b3fe951d394e8d501db5476d31bc"
       },
       "unocss": {
-        "src/recipes/button.tsx": "49db8c6a779d42418a736fb79d481fcd9e10b4fd60e4059edffd5edb50e5a66e"
+        "src/recipes/button.tsx": "eb058db97b2ac98e42eccf7cc7b631f41e492892ca09e62961d56dd85b738b96"
       }
     },
-    "lastGenerated": "2026-08-18T12:30:14.000Z"
+    "lastGenerated": "2025-01-01T00:00:00.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -39,12 +39,13 @@
         "status": "draft"
       },
       "es": {
-        "status": "draft"
+        "status": "draft",
+        "lastUpdated": "2026-08-18T05:00:00.000Z"
       }
     }
   },
   "dependencies": [
     "@solidiom/button"
   ],
-  "lastUpdated": "2026-08-18T12:30:14.000Z"
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
 }
