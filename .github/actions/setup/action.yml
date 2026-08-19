@@ -23,6 +23,8 @@ runs:
   using: "composite"
   steps:
     - uses: pnpm/action-setup@v6
+      with:
+        standalone: true
 
     - uses: actions/setup-node@v5
       with:
