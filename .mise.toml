@@ -282,10 +282,16 @@ run = [
 [tasks."ci:site-e2e"]
 description = "Run site E2E against a prebuilt site (run ci:site-build first)"
 env = { CI = "true", PLAYWRIGHT_USE_EXISTING_BUILD = "1" }
-run = [
-  "pnpm exec playwright install chromium firefox webkit",
-  "pnpm --filter @solidiom/site run test:e2e",
-]
+run = '''#!/usr/bin/env bash
+set -euo pipefail
+
+# Kill any leftover process on port 4322 to avoid "port already in use" errors
+# when Playwright starts its webServer with reuseExistingServer=false.
+lsof -ti :4322 | xargs kill -9 2>/dev/null || true
+
+pnpm exec playwright install chromium firefox webkit
+pnpm --filter @solidiom/site run test:e2e
+'''
 
 [tasks."ci:site-visual"]
 description = "Verify visual baselines in the pinned Playwright container"
@@ -296,9 +302,13 @@ description = "Run Lighthouse locally (advisory; requires a prior site build and
 run = '''#!/usr/bin/env bash
 set -uo pipefail
 
+# Kill any leftover process on port 4322 from a prior task (e.g. ci:site-e2e).
+lsof -ti :4322 | xargs kill -9 2>/dev/null || true
+sleep 1
+
 pnpm --filter @solidiom/site preview --host 127.0.0.1 --port 4322 > /dev/null 2>&1 &
 preview_pid=$!
-trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
+trap 'kill "$preview_pid" 2>/dev/null || true; lsof -ti :4322 | xargs kill -9 2>/dev/null || true' EXIT
 
 for _ in $(seq 1 30); do
   if curl --fail --silent http://127.0.0.1:4322/ > /dev/null; then
