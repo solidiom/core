@@ -175,11 +175,23 @@ export function checkPrimitiveEvidence(
     }
   }
 
-  if (raw.provenance.commitSha !== latestScan.commitSha || raw.lastRun !== latestScan.generatedAt) {
+  // Evidence is considered current when its substance (evidenceIds, summary,
+  // outcome) matches the latest scan. Provenance fields (commitSha, lastRun)
+  // are intentionally NOT compared because they advance on every invocation
+  // even when the scan results are identical — comparing them would create an
+  // unresolvable loop where committing evidence moves HEAD and invalidates the
+  // file just committed. See withPreservedProvenance() in a11y-evidence.ts.
+  const publishedSubstance = JSON.stringify([raw.evidenceIds, raw.summary])
+  const scannedSubstance = JSON.stringify([
+    [latestResult.evidence.id],
+    latestResult.evidence.summary,
+  ])
+
+  if (publishedSubstance !== scannedSubstance) {
     return {
       primitive: primitive.name,
       reason: "stale-evidence",
-      detail: `Published evidence for "${primitive.name}" (commit ${raw.provenance.commitSha ?? "unknown"}) predates the latest executed scan (commit ${latestScan.commitSha ?? "unknown"}); republish with 'pnpm run report:a11y-evidence'`,
+      detail: `Published evidence for "${primitive.name}" does not match the latest executed scan results; republish with 'pnpm run report:a11y-evidence'`,
     }
   }
 
