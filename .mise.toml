@@ -283,14 +283,37 @@ run = [
 description = "Run site E2E against a prebuilt site (run ci:site-build first)"
 env = { CI = "true", PLAYWRIGHT_USE_EXISTING_BUILD = "1" }
 run = '''#!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
 # Kill any leftover process on port 4322 to avoid "port already in use" errors
 # when Playwright starts its webServer with reuseExistingServer=false.
 lsof -ti :4322 | xargs kill -9 2>/dev/null || true
 
 pnpm exec playwright install chromium firefox webkit
-pnpm --filter @solidiom/site run test:e2e
+
+LOG_FILE="test-results/site-e2e.log"
+mkdir -p test-results
+
+pnpm --filter @solidiom/site run test:e2e 2>&1 | tee "$LOG_FILE"
+EXIT_CODE=${PIPESTATUS[0]}
+
+if [ $EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "════════════════════════════════════════════════════════════"
+  echo "  SITE E2E FAILURES"
+  echo "════════════════════════════════════════════════════════════"
+  echo ""
+  # Print lines around failure markers from the log
+  grep -E "(FAIL|Error|✘|×|expect\()" "$LOG_FILE" | head -80
+  echo ""
+  echo "────────────────────────────────────────────────────────────"
+  echo "  Full log:    $LOG_FILE"
+  echo "  JSON report: test-results/site-e2e-results.json"
+  echo "  HTML report: npx playwright show-report test-results/site-e2e-report"
+  echo "════════════════════════════════════════════════════════════"
+fi
+
+exit $EXIT_CODE
 '''
 
 [tasks."ci:site-visual"]
