@@ -22,10 +22,15 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: pnpm/action-setup@v6
+    # Install Node first so pnpm/action-setup can use a modern Node for its
+    # self-installer (the runner's default Node is too old for node: imports).
+    - uses: actions/setup-node@v5
       with:
-        standalone: true
+        node-version: ${{ inputs.node-version }}
 
+    - uses: pnpm/action-setup@v6
+
+    # Re-run setup-node with cache now that pnpm is available for key hashing.
     - uses: actions/setup-node@v5
       with:
         node-version: ${{ inputs.node-version }}
