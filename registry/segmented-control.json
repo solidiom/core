@@ -1,6 +1,6 @@
 {
   "name": "segmented-control",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "package": "@solidiom/segmented-control",
   "capabilities": [],
   "dependencies": [
