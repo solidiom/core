@@ -1,6 +1,6 @@
 {
   "name": "alert-dialog",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "package": "@solidiom/alert-dialog",
   "capabilities": [],
   "dependencies": [
