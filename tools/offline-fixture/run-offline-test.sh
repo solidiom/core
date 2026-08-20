@@ -25,6 +25,29 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MONOREPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
+# Load the project root .env so variables like NPM_TOKEN are available even
+# when the runner (e.g. mise) doesn't inject them — mirrors
+# tests/e2e/playwright.config.ts. Only assigns names not already set in the
+# environment, so a real exported value always wins over the .env entry.
+# .env is optional; CI provides these through other means.
+if [[ -f "$MONOREPO_ROOT/.env" ]]; then
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    [[ "$line" =~ ^[[:space:]]*# ]] && continue
+    [[ "$line" =~ ^[[:space:]]*$ ]] && continue
+    key="${line%%=*}"
+    key="${key#export }"
+    key="$(printf '%s' "$key" | tr -d '[:space:]')"
+    [[ -z "$key" ]] && continue
+    if [[ -z "${!key:-}" ]]; then
+      value="${line#*=}"
+      value="${value%\"}"; value="${value#\"}"
+      value="${value%\'}"; value="${value#\'}"
+      export "$key=$value"
+    fi
+  done < "$MONOREPO_ROOT/.env"
+fi
+
 VERDACCIO_PID=""
 VERDACCIO_CONFIG=""
 STORAGE_DIR=""
@@ -388,6 +411,18 @@ run_manager_smoke() {
   export https_proxy="http://127.0.0.1:1"
   export NO_PROXY="127.0.0.1,localhost"
   export no_proxy="127.0.0.1,localhost"
+
+  # Do not read the developer's real ~/.npmrc: it commonly contains an auth
+  # line like `//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, and Yarn Classic
+  # eagerly expands `${VAR}` when parsing npm config, hard-failing with
+  # "Failed to replace env in config: ${NPM_TOKEN}" when the var is unset in
+  # this child (npm/pnpm/bun tolerate it; only Yarn throws). Point npm's
+  # userconfig at an empty throwaway file. NPM_TOKEN is loaded from the project
+  # .env at startup when the runner didn't inject it; the fallback here only
+  # applies on a machine with neither the env var nor a .env entry.
+  : > "$work_dir/empty-userconfig.npmrc"
+  export npm_config_userconfig="$work_dir/empty-userconfig.npmrc"
+  export NPM_TOKEN="${NPM_TOKEN:-offline-fixture-noop-token}"
 
   case "$manager" in
     npm)

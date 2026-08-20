@@ -72,6 +72,17 @@ import {
   type PackageManagerName,
 } from "../packages/cli/dist/index.js"
 
+// Load the project root .env so environment variables like NPM_TOKEN are
+// available even when the runner (e.g. mise) doesn't inject them. This mirrors
+// tests/e2e/playwright.config.ts. It matters here because the developer's real
+// ~/.npmrc typically has `//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, and
+// Yarn Classic hard-fails expanding that when NPM_TOKEN is unset in the child.
+try {
+  process.loadEnvFile(join(dirname(fileURLToPath(import.meta.url)), "..", ".env"))
+} catch {
+  // .env is optional — CI provides variables through other means.
+}
+
 // ─── Types ──────────────────────────────────────────────────────────────────
 
 type Phase = "create" | "install" | "typecheck" | "build" | "test"
@@ -402,6 +413,13 @@ function baseIsolationEnv(registry: string): Record<string, string> {
     https_proxy: "http://127.0.0.1:1",
     NO_PROXY: "127.0.0.1,localhost",
     no_proxy: "127.0.0.1,localhost",
+    // With npm_config_userconfig redirected below, no manager should read the
+    // developer's ~/.npmrc (the `${NPM_TOKEN}` source that made Yarn Classic
+    // throw). NPM_TOKEN is loaded from the project .env at startup when the
+    // runner didn't inject it; we pass it through here, and keep a harmless
+    // last-resort fallback so any residual `${NPM_TOKEN}` expansion still
+    // succeeds on a machine that has neither the env var nor a .env entry.
+    NPM_TOKEN: process.env["NPM_TOKEN"] ?? "offline-fixture-noop-token",
   }
 }
 
@@ -411,10 +429,17 @@ function isolationFor(
   cacheDir: string,
 ): ManagerIsolation {
   const base = baseIsolationEnv(registry)
+  // Redirect npm's user-level config to a throwaway empty file so no manager
+  // reads the developer's real ~/.npmrc (see NPM_TOKEN note in baseIsolationEnv).
+  // Yarn Classic, npm, and pnpm all honour npm_config_userconfig. The file is
+  // written by the caller (it lives in cacheDir, which is created before this
+  // runs); an absolute path is used so it resolves regardless of the child's cwd.
+  const userconfigPath = join(cacheDir, "empty-userconfig.npmrc")
+  const userconfigEnv = { npm_config_userconfig: userconfigPath }
   switch (manager) {
     case "npm":
       return {
-        env: { ...base, npm_config_cache: cacheDir },
+        env: { ...base, ...userconfigEnv, npm_config_cache: cacheDir },
         files: {
           ".npmrc": `registry=${registry}\ncache=${cacheDir}\n`,
         },
@@ -423,6 +448,7 @@ function isolationFor(
       return {
         env: {
           ...base,
+          ...userconfigEnv,
           npm_config_store_dir: join(cacheDir, "store"),
           npm_config_cache_dir: join(cacheDir, "metadata"),
         },
@@ -432,14 +458,14 @@ function isolationFor(
       }
     case "yarn":
       return {
-        env: { ...base, YARN_REGISTRY: registry, YARN_CACHE_FOLDER: cacheDir },
+        env: { ...base, ...userconfigEnv, YARN_REGISTRY: registry, YARN_CACHE_FOLDER: cacheDir },
         files: {
           ".yarnrc": `registry "${registry}"\ncache-folder "${cacheDir}"\n`,
         },
       }
     case "bun":
       return {
-        env: { ...base, BUN_CONFIG_REGISTRY: registry },
+        env: { ...base, ...userconfigEnv, BUN_CONFIG_REGISTRY: registry },
         files: {
           "bunfig.toml": `[install]\nregistry = "${registry}"\ncache-dir = "${cacheDir}"\n`,
         },
@@ -523,6 +549,11 @@ export async function runCombination(
     for (const [name, content] of Object.entries(isolation.files)) {
       writeFileSync(join(destination, name), content)
     }
+    // Empty user-level npm config so no manager reads the developer's real
+    // ~/.npmrc (which may reference ${NPM_TOKEN}); npm_config_userconfig in
+    // isolation.env points here. Lives in cacheDir (created above), not the
+    // work dir, so it is addressed by absolute path regardless of child cwd.
+    writeFileSync(join(cacheDir, "empty-userconfig.npmrc"), "")
     if (manager === "yarn") {
       const pkgPath = join(destination, "package.json")
       const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as Record<string, unknown>

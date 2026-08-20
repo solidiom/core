@@ -347,7 +347,36 @@ echo "ADVISORY: preview server never became ready." >&2
 
 [tasks."ci:smoke-create-prep"]
 description = "Warm the offline CLI smoke-test registry (network required; requires a prior build)"
-run = "pnpm run smoke:create:prep"
+run = '''#!/usr/bin/env bash
+set -uo pipefail
+
+# Capture the full prep output to a log file (mirrors ci:site-e2e's logging
+# pattern) so long, network-heavy runs can be inspected after the fact and so
+# failures under `mise run ci:full` leave an artifact behind.
+LOG_FILE="test-results/smoke-create-prep.log"
+mkdir -p test-results
+
+pnpm run smoke:create:prep 2>&1 | tee "$LOG_FILE"
+EXIT_CODE=${PIPESTATUS[0]}
+
+if [ $EXIT_CODE -ne 0 ]; then
+  echo ""
+  echo "════════════════════════════════════════════════════════════"
+  echo "  SMOKE CREATE PREP FAILED (exit ${EXIT_CODE})"
+  echo "════════════════════════════════════════════════════════════"
+  echo ""
+  # Surface the most relevant lines from the log.
+  grep -nE "(ERROR|Error|error:|404|409|EEXIST|failed|FAIL)" "$LOG_FILE" | tail -40
+  echo ""
+  echo "────────────────────────────────────────────────────────────"
+  echo "  Full log: $LOG_FILE"
+  echo "════════════════════════════════════════════════════════════"
+else
+  echo "Prep log written to $LOG_FILE"
+fi
+
+exit $EXIT_CODE
+'''
 
 [tasks."ci:smoke-create"]
 description = "Run the offline CLI smoke matrix (run ci:smoke-create-prep first)"

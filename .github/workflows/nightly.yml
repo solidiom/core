@@ -9,9 +9,6 @@ name: Nightly
 # catch regressions that would otherwise slip through.
 
 on:
-  schedule:
-    # Every day at 04:00 UTC
-    - cron: "0 4 * * *"
   workflow_dispatch:
     inputs:
       regenerate_baselines:
