@@ -1,0 +1,130 @@
+name: Version PR
+
+# Step 1 of the two-step release model (see release.yml for step 2).
+#
+# This workflow applies pending changesets and opens a single, reviewable
+# "Version PR" that contains ALL of the release churn:
+#   - packages/*/package.json version bumps
+#   - packages/*/CHANGELOG.md updates
+#   - the regenerated (and re-signed) registry/index.json + per-entry manifests
+#   - pnpm-lock.yaml updates from internal dependency version bumps
+#
+# Nothing is published here and nothing is pushed to main directly. You review
+# the PR, merge it, then create the matching `v*` tag — which triggers
+# release.yml to publish exactly what was merged. This is what removes the
+# "everything gets touched by the release run" problem: the churn is isolated
+# to one PR you approve, not a surprise commit from the publish job.
+#
+# Trigger: manual dispatch. Run it whenever you want to cut a release from the
+# accumulated changesets on the base branch.
+
+on:
+  workflow_dispatch:
+    inputs:
+      base:
+        description: "Base branch to open the Version PR against"
+        required: false
+        default: "main"
+        type: string
+
+concurrency:
+  group: version-pr-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "24"
+  PNPM_VERSION: "10.34.5"
+  NODE_OPTIONS: "--max-old-space-size=4096"
+
+jobs:
+  version:
+    runs-on: self-hosted-dfw-flex
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.base }}
+
+      - uses: ./.github/actions/setup
+
+      - name: Check for pending changesets
+        id: changesets
+        run: |
+          if ls .changeset/*.md 2>/dev/null | grep -qv "README.md"; then
+            echo "pending=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "pending=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::No pending changesets found — nothing to version."
+          fi
+
+      - name: Apply changeset versions
+        if: steps.changesets.outputs.pending == 'true'
+        run: pnpm changeset version
+
+      # The registry embeds a per-entry version copied from each package.json,
+      # so regenerate (and re-sign) it in the same PR the versions changed in.
+      # Build first because registry-build reads built package metadata.
+      - name: Build packages
+        if: steps.changesets.outputs.pending == 'true'
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
+
+      - name: Regenerate and sign registry index
+        if: steps.changesets.outputs.pending == 'true'
+        env:
+          REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
+        run: pnpm exec tsx tools/registry-build.ts
+
+      - name: Verify signed registry index
+        if: steps.changesets.outputs.pending == 'true'
+        run: node packages/cli/dist/bin.js verify --registry
+
+      # Regenerate a11y evidence so the "no stale generated artifacts" CI gate
+      # passes on the Version PR (that gate checks registry/ and source/ trees).
+      - name: Refresh generated artifacts
+        if: steps.changesets.outputs.pending == 'true'
+        run: |
+          pnpm run report:a11y-evidence || true
+          pnpm run source:emit
+
+      - name: Determine release version
+        if: steps.changesets.outputs.pending == 'true'
+        id: version
+        run: |
+          # Use the first publishable package's version as the release label.
+          VERSION=$(node -e '
+            const { readdirSync, readFileSync, existsSync } = require("node:fs");
+            for (const d of readdirSync("packages", { withFileTypes: true })) {
+              if (!d.isDirectory()) continue;
+              const p = `packages/${d.name}/package.json`;
+              if (!existsSync(p)) continue;
+              const pkg = JSON.parse(readFileSync(p, "utf8"));
+              if (pkg.private) continue;
+              process.stdout.write(pkg.version);
+              break;
+            }
+          ')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Release version: $VERSION"
+
+      - name: Create or update Version PR
+        if: steps.changesets.outputs.pending == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          base: ${{ inputs.base }}
+          branch: release/version-${{ steps.version.outputs.version }}
+          commit-message: "chore(release): version packages ${{ steps.version.outputs.version }}"
+          title: "chore(release): version packages ${{ steps.version.outputs.version }}"
+          body: |
+            Automated **Version PR** — applies pending changesets and regenerates the release artifacts.
+
+            This PR contains all the release churn (package versions, changelogs, regenerated + re-signed registry, lockfile). Review it as you would any PR.
+
+            **Merging this PR publishes `v${{ steps.version.outputs.version }}` to npm automatically:** `tag-on-version-merge.yml` creates the `v${{ steps.version.outputs.version }}` tag on merge, which triggers `release.yml` to publish. You do not need to tag manually.
+
+            If you need to publish from a manual tag instead, delete the auto-created tag or push your own `v*` tag.
+          labels: |
+            release
+          delete-branch: true

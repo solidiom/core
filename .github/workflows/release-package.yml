@@ -1,0 +1,123 @@
+name: Release (Single Package)
+
+# Publishes ONE workspace package between full releases.
+#
+# This is the companion to the two-step full-release model (version.yml +
+# release.yml). It exists because the CLI now installs caret ranges from the
+# registry (REL-C1): a single package's patch/minor publish is picked up by
+# consumers without regenerating the registry catalog, so you can ship a fix to
+# one package without cutting a whole release.
+#
+# It wraps scripts/release-package.mjs, which builds, typechecks, tests, then
+# publishes the package. That script refuses packages in a Changesets linked
+# group (e.g. runtime/dialog/select/calendar/carousel) unless --allow-linked is
+# passed, because bumping one member of a linked group in isolation desyncs the
+# group. For those, use the full release (version.yml → tag → release.yml).
+#
+# Trigger: manual dispatch only.
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: "Package to publish (e.g. @solidiom/button)"
+        required: true
+        type: string
+      bump:
+        description: "Version bump to apply before publishing (none = publish committed version)"
+        required: false
+        default: "none"
+        type: choice
+        options:
+          - none
+          - patch
+          - minor
+          - major
+          - prerelease
+      dist_tag:
+        description: "npm dist-tag"
+        required: false
+        default: "beta"
+        type: choice
+        options:
+          - beta
+          - latest
+      dry_run:
+        description: "Build/typecheck/test without publishing"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      allow_linked:
+        description: "Permit publishing a single member of a linked Changesets group (advanced)"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+concurrency:
+  group: release-package-${{ inputs.package }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "24"
+  PNPM_VERSION: "10.34.5"
+  NODE_OPTIONS: "--max-old-space-size=4096"
+
+jobs:
+  publish:
+    runs-on: self-hosted-dfw-flex
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Release single package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          ARGS=("${{ inputs.package }}" --tag "${{ inputs.dist_tag }}")
+
+          if [ "${{ inputs.bump }}" != "none" ]; then
+            ARGS+=(--bump "${{ inputs.bump }}")
+          fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            ARGS+=(--dry-run)
+          fi
+          if [ "${{ inputs.allow_linked }}" = "true" ]; then
+            ARGS+=(--allow-linked)
+          fi
+
+          echo "Running: node scripts/release-package.mjs ${ARGS[*]}"
+          node scripts/release-package.mjs "${ARGS[@]}"
+
+      # If a bump was applied, the package.json version changed on disk. Commit
+      # just that one manifest back so the registry's next regeneration and the
+      # git history reflect the published version. Skipped on dry runs and when
+      # no bump was requested (nothing changed).
+      - name: Commit version bump
+        if: inputs.bump != 'none' && inputs.dry_run == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- 'packages/*/package.json'; then
+            echo "No manifest changes to commit."
+            exit 0
+          fi
+          git add packages/*/package.json
+          git commit -m "chore(release): ${{ inputs.package }} (${{ inputs.bump }})"
+          git push

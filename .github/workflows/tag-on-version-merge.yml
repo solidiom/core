@@ -1,0 +1,77 @@
+name: Tag on Version PR merge
+
+# Bridges the two-step release model: when a Version PR (opened by version.yml
+# on a `release/version-*` branch) is merged into the base branch, this
+# workflow creates and pushes the matching `v<version>` tag.
+#
+# Pushing that tag triggers release.yml, which publishes to npmjs.com. So the
+# end-to-end flow is fully hands-off after you click "Merge":
+#
+#   version.yml (dispatch) → Version PR → review + merge → THIS → tag → release.yml
+#
+# The tag is derived from the first publishable package version committed at the
+# merge commit, so it always matches what will be published.
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+concurrency:
+  group: tag-on-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    # Only merged (not just closed) Version PRs from the release branch prefix.
+    if: >
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'release/version-')
+    runs-on: self-hosted-dfw-flex
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          # Check out the merge commit so we read the versions that landed.
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+
+      - name: Resolve release version
+        id: version
+        run: |
+          VERSION=$(node -e '
+            const { readdirSync, readFileSync, existsSync } = require("node:fs");
+            for (const d of readdirSync("packages", { withFileTypes: true })) {
+              if (!d.isDirectory()) continue;
+              const p = `packages/${d.name}/package.json`;
+              if (!existsSync(p)) continue;
+              const pkg = JSON.parse(readFileSync(p, "utf8"));
+              if (pkg.private) continue;
+              process.stdout.write(pkg.version);
+              break;
+            }
+          ')
+          if [ -z "$VERSION" ]; then
+            echo "::error::Could not resolve a publishable package version from the merge commit."
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Resolved release tag: v$VERSION"
+
+      - name: Create and push tag
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "::warning::Tag $TAG already exists — skipping. (Was this version already released?)"
+            exit 0
+          fi
+
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
+          echo "Pushed $TAG — release.yml will now publish." >> "$GITHUB_STEP_SUMMARY"

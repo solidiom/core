@@ -1,5 +1,14 @@
 # Bumping Package Versions
 
+> **For releasing to npm, see [RELEASING.md](./RELEASING.md).** That is the
+> authoritative guide for the two-step release flow (Version PR → tag →
+> publish) and single-package releases. In normal operation you do **not** bump
+> versions by hand — the **Version PR** workflow runs `changeset version` and
+> regenerates the registry for you.
+>
+> This document remains as a reference for the underlying mechanics and for the
+> rare manual bump (e.g. bootstrapping or a local experiment).
+
 This document describes the process and all the places that need updating when bumping the version across all `@solidiom/*` packages.
 
 ## Quick Reference
@@ -96,7 +105,10 @@ Changesets will:
 
 ## Notes
 
-- The release script (`./scripts/release.sh`) runs `pnpm changeset version` automatically in Step 4 if there are pending changesets.
+- Releases no longer run `changeset version` inside the publish job. The
+  **Version PR** workflow (`version.yml`) applies changesets and regenerates the
+  registry in a reviewable PR; the tag-triggered `release.yml` only publishes.
+  See [RELEASING.md](./RELEASING.md).
 - The registry regeneration in the test suite rebuilds manifests, so stale registry files will cause snapshot mismatches.
 - The `REGISTRY_TIMESTAMP` environment variable can pin the generation timestamp for deterministic builds (used in tests).
 - Private packages (`"private": true`) and probe packages (version `0.0.0`) are excluded from npm publishing but still appear in the registry.
