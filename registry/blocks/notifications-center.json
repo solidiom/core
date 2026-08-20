@@ -1,7 +1,7 @@
 {
   "name": "notifications-center",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Notifications Center",
   "description": "Notifications Center block",
   "status": "stable",

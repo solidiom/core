@@ -1,7 +1,7 @@
 {
   "name": "marketing-site",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Marketing Site",
   "description": "Marketing website with hero landing page, feature showcase, and pricing plans.",
   "status": "stable",

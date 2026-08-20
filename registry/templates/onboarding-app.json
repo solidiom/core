@@ -1,7 +1,7 @@
 {
   "name": "onboarding-app",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Onboarding App",
   "description": "Onboarding application with multi-step wizards, profile setup, and guided project creation.",
   "status": "stable",

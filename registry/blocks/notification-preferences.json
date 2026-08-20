@@ -1,7 +1,7 @@
 {
   "name": "notification-preferences",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Notification Preferences",
   "description": "Notification Preferences block",
   "status": "stable",

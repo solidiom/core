@@ -6,6 +6,13 @@
       "algorithm": "ed25519",
       "publicKey": "T9BKxYo4DXXHHw15qe7xCo6pVEMyJ2s++OI1zNn/fes=",
       "provisionedAt": "2026-08-07",
+      "status": "retired"
+    },
+    {
+      "keyId": "d7b32861c393dafd",
+      "algorithm": "ed25519",
+      "publicKey": "o+CLuzotoxS81gxemQdsn7vCqzJ8MDsKMblA58W6NCQ=",
+      "provisionedAt": "2026-08-20",
       "status": "active"
     }
   ]

@@ -1,7 +1,7 @@
 {
   "name": "ai-operations",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Ai Operations",
   "description": "AI operations console with model monitoring, deployment pipelines, and cost tracking.",
   "status": "stable",

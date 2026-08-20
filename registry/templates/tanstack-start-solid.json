@@ -1,7 +1,7 @@
 {
   "name": "tanstack-start-solid",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Tanstack Start Solid",
   "description": "SSR Solid app scaffolded with TanStack Start (Solid) and TanStack Router.",
   "status": "stable",

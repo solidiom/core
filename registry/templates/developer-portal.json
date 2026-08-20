@@ -1,7 +1,7 @@
 {
   "name": "developer-portal",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Developer Portal",
   "description": "Developer portal with documentation, SDK playground, and application management.",
   "status": "stable",

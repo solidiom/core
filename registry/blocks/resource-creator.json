@@ -1,7 +1,7 @@
 {
   "name": "resource-creator",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Resource Creator",
   "description": "Resource Creator block",
   "status": "stable",

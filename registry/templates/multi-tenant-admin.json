@@ -1,7 +1,7 @@
 {
   "name": "multi-tenant-admin",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Multi Tenant Admin",
   "description": "Multi-tenant administration panel with team management, role permissions, and audit logging.",
   "status": "stable",

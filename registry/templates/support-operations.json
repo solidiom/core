@@ -1,7 +1,7 @@
 {
   "name": "support-operations",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Support Operations",
   "description": "Support operations console with ticket queue, knowledge base, and performance metrics.",
   "status": "stable",

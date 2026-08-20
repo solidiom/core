@@ -1,7 +1,7 @@
 {
   "name": "resource-manager",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Resource Manager",
   "description": "Resource management application with list, detail, and creation views for generic domain resources.",
   "status": "stable",

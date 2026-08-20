@@ -1,7 +1,7 @@
 {
   "name": "content-editor",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Content Editor",
   "description": "Content Editor block",
   "status": "stable",

@@ -1,7 +1,7 @@
 {
   "name": "resource-list",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Resource List",
   "description": "Resource List block",
   "status": "stable",

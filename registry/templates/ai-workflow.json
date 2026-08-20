@@ -1,7 +1,7 @@
 {
   "name": "ai-workflow",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Ai Workflow",
   "description": "AI workflow automation with visual pipeline builder, model registry, and execution monitoring.",
   "status": "stable",

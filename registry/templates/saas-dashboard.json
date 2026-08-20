@@ -1,7 +1,7 @@
 {
   "name": "saas-dashboard",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Saas Dashboard",
   "description": "SaaS dashboard with navigation, observability metrics, resource management, and notifications.",
   "status": "stable",

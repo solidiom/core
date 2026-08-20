@@ -1,7 +1,7 @@
 {
   "name": "documentation-site",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Documentation Site",
   "description": "Documentation and product site with docs reader, API reference, and tutorial guides.",
   "status": "stable",

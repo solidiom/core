@@ -1,7 +1,7 @@
 {
   "name": "real-time-events",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Real Time Events",
   "description": "Real Time Events block",
   "status": "stable",

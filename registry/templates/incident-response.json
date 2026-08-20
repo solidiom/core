@@ -1,7 +1,7 @@
 {
   "name": "incident-response",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Incident Response",
   "description": "Incident response console with active incidents, runbooks, and postmortem reports.",
   "status": "stable",

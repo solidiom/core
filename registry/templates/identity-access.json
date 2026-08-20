@@ -1,7 +1,7 @@
 {
   "name": "identity-access",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Identity Access",
   "description": "Identity and access management with user directory, role-based access control, and session monitoring.",
   "status": "stable",

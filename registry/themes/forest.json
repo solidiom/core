@@ -1,7 +1,7 @@
 {
   "name": "forest",
-  "package": "@solidiom/themes",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/themes",
   "label": "Forest",
   "description": "Forest-themed color palette with green tones",
   "status": "stable",

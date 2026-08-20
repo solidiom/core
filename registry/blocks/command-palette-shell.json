@@ -1,7 +1,7 @@
 {
   "name": "command-palette-shell",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Command Palette Shell",
   "description": "Command Palette Shell block",
   "status": "stable",
