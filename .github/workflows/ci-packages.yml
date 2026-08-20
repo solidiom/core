@@ -111,6 +111,15 @@ jobs:
       # Post-build audits
       - name: REG-006 — verify registry catalog integrity
         run: node packages/cli/dist/bin.js verify --registry
+      - name: Generate vertical-slice API artifacts
+        # api:coverage-gate reads artifacts/api/*.json, which are gitignored and
+        # wiped by the checkout's `git clean -ffdx`. Regenerate the three
+        # vertical-slice primitives here (the full catalog run is memory-heavy
+        # and unnecessary for this gate).
+        run: |
+          pnpm run api:generate -- --package dialog
+          pnpm run api:generate -- --package combobox
+          pnpm run api:generate -- --package data-table
       - name: API-004 — verify vertical-slice primitive API coverage
         run: pnpm run api:coverage-gate
       - name: Verify package src/source parity and exports
