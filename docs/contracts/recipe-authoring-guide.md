@@ -65,15 +65,15 @@ Know which of these blocks a pull request, because they are not equivalent:
 
 | Check                                             | Command                                                               | Enforced in CI?                                                                        |
 | ------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Canonical contract                                | `pnpm run recipe:contract`                                            | **Yes** — `ci.yml` → `phase1-gate` job → `gate:phase1` §9                              |
+| Canonical contract                                | `pnpm run recipe:contract`                                            | **Yes** — `gate:full` (release gate) §3b                                               |
 | Dual-emission drift                               | `pnpm run audit:recipe-drift`                                         | **Yes** — same gate section                                                            |
 | Cross-profile coverage/state/exception parity     | `pnpm run audit:recipe-parity`                                        | **Yes** — same gate section (RECIPE-005)                                               |
-| Computed-style parity                             | `pnpm run test:recipe-parity`                                         | **Yes** — `ci.yml` `test-browser` job (RECIPE-005 phase 3)                             |
+| Computed-style parity                             | `pnpm run test:recipe-parity`                                         | **Yes** — `ci-packages.yml` `test-browser` job (RECIPE-005 phase 3)                    |
 | Recipe-contract selectors                         | `pnpm run audit:recipe-contract`                                      | **Yes** — same gate section                                                            |
 | Generated output is current                       | `pnpm run recipe:emit:{css,tailwind,unocss}:check`                    | **Yes** — same gate section, one check per profile                                     |
 | Typecheck                                         | `pnpm typecheck`                                                      | Yes                                                                                    |
 | Build                                             | `pnpm build`                                                          | Yes                                                                                    |
-| Profile build + dist output                       | via `gate:phase1` §3                                                  | Yes — all three profiles, including `source/` existence                                |
+| Profile build + dist output                       | via `gate:full` §3                                                    | Yes — all three profiles, including `source/` existence                                |
 | `src`/`source` parity and export-map completeness | `pnpm run audit:package-source-parity`, `tests/package-source-parity` | **Yes** — recipe packages included since RECIPE-006; CLI parity included since CLI-001 |
 
 #### What the selector audit actually rejects
@@ -240,7 +240,7 @@ pnpm --filter @solidiom/runtime build
 The full acceptance gate, including all of the above plus every primitive build and the axe accessibility scans:
 
 ```sh
-pnpm run gate:phase1
+pnpm run gate:full
 ```
 
 ---

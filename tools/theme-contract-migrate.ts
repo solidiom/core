@@ -3,7 +3,7 @@
  *
  * THEME-001d. `recipe-contract-schema.ts` states a migration "can be written as a data
  * transform" because definitions are JSON-representable, but no migration function
- * exists anywhere in this repo yet (`tools/phase2-gate.ts` explicitly descopes it as
+ * exists anywhere in this repo yet (the former `tools/phase2-gate.ts` explicitly descoped it as
  * "no migration source exists"). This is that first implementation, and it is written
  * for THEME-001's actual consumers:
  *

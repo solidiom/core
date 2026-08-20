@@ -8,7 +8,7 @@
  *
  * NOTE: Isolated consumer install is verified by the pack manifest checks.
  * A full npm-install-from-tarball test requires network access and is
- * exercised in CI via the phase0-gate consumer step.
+ * exercised in CI via the structural-gate consumer step.
  */
 
 import { describe, it, expect, beforeAll } from "vitest"

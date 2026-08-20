@@ -160,20 +160,16 @@ run = "pnpm release:package --dry-run"
 # ---------------------------------------------------------------------------
 
 [tasks."gate:quick"]
-description = "Run the quick acceptance gate (Phase 0)"
+description = "Run the quick structural acceptance gate"
 run = "pnpm run gate:quick"
 
 [tasks."gate:full"]
-description = "Run the full release gate (Phase 3, including Phases 0–2)"
+description = "Run the full durable release gate"
 run = "pnpm run gate:full"
 
 [tasks."gate:vertical-slice"]
 description = "Run the vertical-slice acceptance gate"
 run = "pnpm run gate:vertical-slice"
-
-[tasks."gate:phase3-preflight"]
-description = "Run the Phase 3 Solid compatibility preflight"
-run = "pnpm run gate:phase3-preflight"
 
 [tasks."a11y:scan"]
 description = "Run executable axe accessibility scans"

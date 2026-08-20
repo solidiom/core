@@ -19,7 +19,7 @@ lifecycle: current
 | Publish packages from Changesets       | `pnpm release -- --target packages`  | Dispatches CI release with signing and versioning               |
 | Deploy site only                       | `pnpm release -- --target site`      | Dispatches CI site deployment                                   |
 | Publish packages and deploy site       | `pnpm release -- --target all`       | Dispatches CI release and deployment                            |
-| Use full release validation            | Append `--gate full`                 | Uses the full phase gate before package publishing              |
+| Use full release validation            | Append `--gate full`                 | Uses the full durable release gate before package publishing    |
 
 ## Prerequisites
 

@@ -128,7 +128,7 @@ function listSourceFiles(dir: string): string[] {
  * survived and turned into a false negative: in `index.ts` the scope names appear only
  * inside module paths (`"./recipes/button"`), which `["']${name}["']` cannot match, so all
  * 13 shipped scopes reported as missing UnoCSS support and the §5 primitive-completion
- * check in `gate:phase3` failed for work that was genuinely complete.
+ * check in `gate:full` failed for work that was genuinely complete.
  */
 function hasRecipeSupport(
   root: string,

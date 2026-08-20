@@ -1,7 +1,7 @@
 /**
  * tools/recipe-contract — validates every recipe definition against the canonical contract.
  *
- * RECIPE-001f/001h. Wired into `gate:phase1` so the contract's rules are enforced rather
+ * RECIPE-001f/001h. Wired into `gate:full` so the contract's rules are enforced rather
  * than agreed. Emitters (RECIPE-002/003/004) consume the same definitions this validates.
  *
  * Usage: pnpm run recipe:contract

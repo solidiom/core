@@ -328,8 +328,8 @@ jobs:
       - run: pnpm run block:catalog-gate
 
   # ─── Quality Gate (final) ──────────────────────────────────────────────────────
-  # full_matrix=false: lightweight gate (format + typecheck + build + tests pass).
-  # full_matrix=true: full gate suite including all phases.
+  # full_matrix=false: lightweight structural gate (format + typecheck + build + tests pass).
+  # full_matrix=true: full durable release gate suite.
 
   gate:
     # `always()` lets the fast tier proceed when full-tier jobs are intentionally
