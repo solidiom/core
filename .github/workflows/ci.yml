@@ -6,10 +6,6 @@ name: CI
 #   - Dispatch: Configurable (affected_only, full_matrix options)
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
     inputs:
       affected_only:
@@ -35,8 +31,8 @@ env:
   NODE_OPTIONS: "--max-old-space-size=4096"
   NX_BASE: ${{ github.event.pull_request.base.sha || 'HEAD~1' }}
   NX_HEAD: HEAD
-  # PRs always run the fast tier. Main pushes and full manual dispatches run the
-  # comprehensive tier; a manual run can set full_matrix=false for fast feedback.
+  # All triggers are manual (workflow_dispatch). Set full_matrix=true (default)
+  # for the comprehensive tier; full_matrix=false runs only the fast-tier jobs.
 
 jobs:
   # ─── Foundation ────────────────────────────────────────────────────────────────
@@ -149,7 +145,7 @@ jobs:
     runs-on: self-hosted-dfw-flex
     strategy:
       matrix:
-        node-version: ${{ (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')) && fromJson('[24, 26]') || fromJson('[24]') }}
+        node-version: ${{ (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true') && fromJson('[24, 26]') || fromJson('[24]') }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -202,7 +198,7 @@ jobs:
 
   a11y-axe-scan:
     needs: build
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+    if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
@@ -230,7 +226,7 @@ jobs:
 
   site-check:
     needs: install
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+    if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
@@ -241,7 +237,7 @@ jobs:
 
   site-build:
     needs: [install, site-check]
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+    if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
@@ -259,7 +255,7 @@ jobs:
 
   site-e2e:
     needs: site-build
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+    if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
@@ -282,7 +278,7 @@ jobs:
 
   site-visual:
     needs: site-build
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+    if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     container:
       image: mcr.microsoft.com/playwright:v1.62.1-noble
@@ -306,7 +302,7 @@ jobs:
 
   site-lighthouse:
     needs: site-build
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+    if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     continue-on-error: true
     steps:
@@ -334,7 +330,7 @@ jobs:
 
   cli-smoke-create-prep:
     needs: build
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+    if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
@@ -364,7 +360,7 @@ jobs:
 
   cli-smoke-create:
     needs: [build, cli-smoke-create-prep]
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+    if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     strategy:
       fail-fast: false
@@ -399,7 +395,11 @@ jobs:
           path: artifacts/smoke-create-${{ matrix.manager }}.json
           retention-days: 7
 
-  # ─── Preview Deploy (PRs only) ────────────────────────────────────────────────
+  # ─── Preview Deploy (disabled under manual-only triggering) ────────────────────
+  # This job requires pull_request context (PR head repo, PR comment target),
+  # which does not exist for workflow_dispatch. With all triggers now manual it
+  # can never run; the guard below keeps it permanently skipped. Restore the
+  # `pull_request` trigger in `on:` to re-enable it.
 
   preview-deploy:
     needs: [install]
@@ -458,7 +458,7 @@ jobs:
 
   catalog-gates:
     needs: build
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+    if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
@@ -472,7 +472,7 @@ jobs:
 
   vertical-slice-gate:
     needs: [build, site-check]
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+    if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
@@ -484,8 +484,8 @@ jobs:
       - run: pnpm run gate:vertical-slice
 
   # ─── Quality Gate (final) ──────────────────────────────────────────────────────
-  # PR: lightweight gate (format + typecheck + build + tests pass).
-  # Main/dispatch: full gate suite including all phases.
+  # full_matrix=false: lightweight gate (format + typecheck + build + tests pass).
+  # full_matrix=true: full gate suite including all phases.
 
   gate:
     # `always()` lets the fast tier proceed when full-tier jobs are intentionally
@@ -497,8 +497,7 @@ jobs:
       needs.build.result == 'success' &&
       needs.test-node.result == 'success' &&
       needs.test-browser.result == 'success' &&
-      (!(github.event_name == 'push' ||
-          (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')) ||
+      (inputs.full_matrix != 'true' ||
         (needs.a11y-axe-scan.result == 'success' &&
           needs.site-e2e.result == 'success' &&
           needs.catalog-gates.result == 'success'))
@@ -513,8 +512,8 @@ jobs:
           name: build-dist
           path: .
       - name: Gate — quick
-        if: github.event_name != 'push' && (github.event_name != 'workflow_dispatch' || inputs.full_matrix != 'true')
+        if: inputs.full_matrix != 'true'
         run: pnpm run gate:quick
       - name: Gate — full
-        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true')
+        if: inputs.full_matrix == 'true'
         run: pnpm run gate:full

@@ -22,14 +22,6 @@ on:
         options:
           - quick
           - full
-  push:
-    branches: [main]
-    paths:
-      - "apps/site/**"
-      - "templates/**"
-      - "registry/**"
-      - "packages/*/docs/**"
-      - "docs/**"
 
 concurrency:
   group: release-${{ github.ref }}
@@ -55,38 +47,30 @@ jobs:
     steps:
       - id: plan
         run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            # Auto-deploy site on push to main with site path changes
-            echo "deploy_packages=false" >> "$GITHUB_OUTPUT"
-            echo "deploy_site=true" >> "$GITHUB_OUTPUT"
+          # Manual dispatch only.
+          TARGET="${{ inputs.target }}"
+          GATE="${{ inputs.gate }}"
+          case "$TARGET" in
+            packages)
+              echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
+              echo "deploy_site=false" >> "$GITHUB_OUTPUT"
+              ;;
+            site)
+              echo "deploy_packages=false" >> "$GITHUB_OUTPUT"
+              echo "deploy_site=true" >> "$GITHUB_OUTPUT"
+              ;;
+            all)
+              echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
+              echo "deploy_site=true" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+          # Gate is required for package publishing, optional for site-only
+          if [ "$TARGET" = "site" ]; then
             echo "run_gate=false" >> "$GITHUB_OUTPUT"
-            echo "gate_level=quick" >> "$GITHUB_OUTPUT"
           else
-            # Manual dispatch
-            TARGET="${{ inputs.target }}"
-            GATE="${{ inputs.gate }}"
-            case "$TARGET" in
-              packages)
-                echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
-                echo "deploy_site=false" >> "$GITHUB_OUTPUT"
-                ;;
-              site)
-                echo "deploy_packages=false" >> "$GITHUB_OUTPUT"
-                echo "deploy_site=true" >> "$GITHUB_OUTPUT"
-                ;;
-              all)
-                echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
-                echo "deploy_site=true" >> "$GITHUB_OUTPUT"
-                ;;
-            esac
-            # Gate is required for package publishing, optional for site-only
-            if [ "$TARGET" = "site" ]; then
-              echo "run_gate=false" >> "$GITHUB_OUTPUT"
-            else
-              echo "run_gate=true" >> "$GITHUB_OUTPUT"
-            fi
-            echo "gate_level=$GATE" >> "$GITHUB_OUTPUT"
+            echo "run_gate=true" >> "$GITHUB_OUTPUT"
           fi
+          echo "gate_level=$GATE" >> "$GITHUB_OUTPUT"
 
   # ─── Gate ──────────────────────────────────────────────────────────────────────
 
