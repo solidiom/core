@@ -429,7 +429,7 @@ run = [
 ]
 
 [tasks."ci:full"]
-description = "Run the local comprehensive main/full-dispatch CI checks"
+description = "Run the local comprehensive main/full-dispatch CI checks (both targets)"
 run = [
   "mise run ci:install",
   "mise run ci:format",
@@ -448,6 +448,66 @@ run = [
   "mise run ci:catalog-gates",
   "mise run ci:vertical-slice",
   "mise run ci:gate:full",
+]
+
+# ---------------------------------------------------------------------------
+# Split-target offline CI mirrors
+#
+# `ci:packages` mirrors .github/workflows/ci-packages.yml and `ci:site` mirrors
+# .github/workflows/ci-site.yml. Each is self-contained (installs + builds from
+# scratch) so it faithfully reproduces its independent workflow. Run the task
+# matching the target you changed before pushing; use `ci:full` to run
+# everything once (it sequences the shared install + build a single time).
+# ---------------------------------------------------------------------------
+
+[tasks."ci:packages"]
+description = "Local mirror of ci-packages.yml (full-matrix package target)"
+run = [
+  "mise run ci:install",
+  "mise run ci:format",
+  "mise run ci:typecheck",
+  "mise run ci:build",
+  "mise run ci:test-node",
+  "mise run ci:test-browser",
+  "mise run ci:a11y",
+  "mise run ci:smoke-create-prep",
+  "mise run ci:smoke-create",
+  "mise run ci:catalog-gates",
+  "mise run ci:gate:full",
+]
+
+[tasks."ci:packages:quick"]
+description = "Local mirror of ci-packages.yml fast tier (full_matrix=false)"
+run = [
+  "mise run ci:install",
+  "mise run ci:format",
+  "mise run ci:typecheck",
+  "mise run ci:build",
+  "mise run ci:test-node",
+  "mise run ci:test-browser",
+  "mise run ci:gate:quick",
+]
+
+[tasks."ci:site"]
+description = "Local mirror of ci-site.yml (full site suite). Builds packages first, as the site resolves built primitives."
+run = [
+  "mise run ci:install",
+  "mise run ci:build",
+  "mise run ci:site-check",
+  "mise run ci:site-build",
+  "mise run ci:site-e2e",
+  "mise run ci:site-visual",
+  "mise run ci:site-lighthouse",
+  "mise run ci:vertical-slice",
+]
+
+[tasks."ci:site:quick"]
+description = "Local mirror of ci-site.yml fast tier: package build + site check + build only"
+run = [
+  "mise run ci:install",
+  "mise run ci:build",
+  "mise run ci:site-check",
+  "mise run ci:site-build",
 ]
 
 # ---------------------------------------------------------------------------
