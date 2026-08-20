@@ -221,7 +221,7 @@ jobs:
         with:
           name: browser-test-traces
           path: test-results/
-          retention-days: 7
+          retention-days: 3
 
   # ─── Accessibility (full_matrix only) ──────────────────────────────────────────
 
@@ -249,7 +249,7 @@ jobs:
             artifacts/axe-results.json
             artifacts/a11y-evidence.json
             docs/axe-scan-results.md
-          retention-days: 30
+          retention-days: 7
 
   # ─── CLI Smoke Tests (full_matrix only) ────────────────────────────────────────
 
@@ -318,7 +318,7 @@ jobs:
         with:
           name: smoke-create-${{ matrix.manager }}-results
           path: artifacts/smoke-create-${{ matrix.manager }}.json
-          retention-days: 7
+          retention-days: 3
 
   # ─── Catalog Gates (full_matrix only) ──────────────────────────────────────────
 

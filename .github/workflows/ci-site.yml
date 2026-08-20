@@ -79,6 +79,7 @@ jobs:
         with:
           name: site-dist
           path: apps/site/dist
+          retention-days: 1
 
   site-e2e:
     needs: site-build
@@ -101,7 +102,7 @@ jobs:
         with:
           name: site-e2e-results
           path: test-results/site-e2e
-          retention-days: 7
+          retention-days: 3
 
   site-visual:
     needs: site-build
@@ -125,7 +126,7 @@ jobs:
         with:
           name: site-visual-diffs
           path: test-results/site-visual
-          retention-days: 7
+          retention-days: 3
 
   site-lighthouse:
     needs: site-build
@@ -151,7 +152,7 @@ jobs:
         with:
           name: site-lighthouse-report
           path: apps/site/dist/reports
-          retention-days: 30
+          retention-days: 7
 
   # ─── Preview Deploy (dormant until pull_request triggers are re-enabled) ─────────
   # Per-PR ephemeral preview: builds the site, deploys it to Cloudflare Pages,
