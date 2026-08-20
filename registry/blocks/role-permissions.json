@@ -1,7 +1,7 @@
 {
   "name": "role-permissions",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Role Permissions",
   "description": "Role Permissions block",
   "status": "stable",

@@ -1411,8 +1411,8 @@ async function buildRegistry(): Promise<void> {
       const keywords = [blockName, "block", ...blockName.split("-")].sort()
       const blockManifest: IndexManifestV3["blocks"][number] = {
         name: blockName,
-        package: "@solidiom/blocks",
         version: "0.0.1-next.0",
+        package: "@solidiom/blocks",
         label: blockLabel,
         description: `${blockLabel} block`,
         status: "stable",
@@ -1462,8 +1462,8 @@ async function buildRegistry(): Promise<void> {
         .sort()
       const tplManifest: IndexManifestV3["templates"][number] = {
         name: tplName,
-        package: "@solidiom/templates",
         version: "0.0.1-next.0",
+        package: "@solidiom/templates",
         label: tplLabel,
         description: tplDescription,
         status: "stable",
@@ -1508,8 +1508,8 @@ async function buildRegistry(): Promise<void> {
     const keywords = [theme.slug, "theme", ...deliverables].sort()
     const themeManifest: IndexManifestV3["themes"][number] = {
       name: theme.slug,
-      package: "@solidiom/themes",
       version: "0.0.1-next.0",
+      package: "@solidiom/themes",
       label: theme.name,
       description: theme.description,
       status: "stable",

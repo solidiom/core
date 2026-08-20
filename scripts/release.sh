@@ -174,15 +174,19 @@ fi
 # ─── Local execution ─────────────────────────────────────────────────────────
 
 # Load secrets from .env if not already present in the environment. `set -a`
-# exports every var defined while sourcing; existing shell vars win because we
-# only fill blanks below.
+# exports every var defined while sourcing. We source via a temp file rather
+# than `source <(...)`: process substitution can race with `source` and drop
+# the final line (e.g. a trailing REGISTRY_SIGN_KEY), silently losing a secret.
 if [[ -f .env ]]; then
   step "Loading secrets from .env"
-  # shellcheck disable=SC1091
+  _env_tmp="$(mktemp)"
+  grep -E '^[A-Z_][A-Z0-9_]*=' .env >"$_env_tmp" || true
   set -a
-  # Only source assignment lines; ignore anything else defensively.
-  source <(grep -E '^[A-Z_][A-Z0-9_]*=' .env || true)
+  # shellcheck disable=SC1090
+  source "$_env_tmp"
   set +a
+  rm -f "$_env_tmp"
+  unset _env_tmp
 fi
 
 command -v pnpm >/dev/null || fail "pnpm is required"

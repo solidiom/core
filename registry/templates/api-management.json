@@ -1,7 +1,7 @@
 {
   "name": "api-management",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Api Management",
   "description": "API management console with endpoint catalog, key management, and usage analytics.",
   "status": "stable",

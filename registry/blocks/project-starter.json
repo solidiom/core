@@ -1,7 +1,7 @@
 {
   "name": "project-starter",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Project Starter",
   "description": "Project Starter block",
   "status": "stable",

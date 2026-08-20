@@ -1,7 +1,7 @@
 {
   "name": "payment-method",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Payment Method",
   "description": "Payment Method block",
   "status": "stable",

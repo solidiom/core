@@ -1,7 +1,7 @@
 {
   "name": "billing-portal",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Billing Portal",
   "description": "Billing portal with subscription plans, payment methods, and invoice history.",
   "status": "stable",

@@ -1,7 +1,7 @@
 {
   "name": "content-studio",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Content Studio",
   "description": "Content management studio with rich editor, media library, and publishing workflow.",
   "status": "stable",

@@ -1,7 +1,7 @@
 {
   "name": "data-governance",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Data Governance",
   "description": "Data governance console with data catalog, lineage explorer, and classification policies.",
   "status": "stable",

@@ -1,7 +1,7 @@
 {
   "name": "security-center",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Security Center",
   "description": "Security center with threat dashboard, vulnerability scanner, and policy management.",
   "status": "stable",

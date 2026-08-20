@@ -1,7 +1,7 @@
 {
   "name": "observability-console",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Observability Console",
   "description": "Observability console with dashboards, real-time events, and alert configuration.",
   "status": "stable",

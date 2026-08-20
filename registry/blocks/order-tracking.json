@@ -1,7 +1,7 @@
 {
   "name": "order-tracking",
-  "package": "@solidiom/blocks",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/blocks",
   "label": "Order Tracking",
   "description": "Order Tracking block",
   "status": "stable",

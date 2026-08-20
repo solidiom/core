@@ -4,7 +4,10 @@
   "generatedAt": "2025-01-01T00:00:00.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "3afb12f617b115dbfba261e112931468ea08980598c071848d5af8b550d6cfe6"
+    "entriesHash": "3afb12f617b115dbfba261e112931468ea08980598c071848d5af8b550d6cfe6",
+    "signature": "XdXupYiybrpoGa864/RxDHm50Swd8lzQOcOBESW7KtQSvkcSZiNniMYj9HpA3J+g25oDNwJLP2cMUOPV/h8hBQ==",
+    "signedAt": "2026-08-20T18:18:34.000Z",
+    "signatureKeyId": "d7b32861c393dafd"
   },
   "primitives": [
     {
@@ -5159,8 +5162,8 @@
   "blocks": [
     {
       "name": "account-settings",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Account Settings",
       "description": "Account Settings block",
       "status": "stable",
@@ -5179,8 +5182,8 @@
     },
     {
       "name": "alert-configuration",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Alert Configuration",
       "description": "Alert Configuration block",
       "status": "stable",
@@ -5199,8 +5202,8 @@
     },
     {
       "name": "audit-log",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Audit Log",
       "description": "Audit Log block",
       "status": "stable",
@@ -5219,8 +5222,8 @@
     },
     {
       "name": "chat-interface",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Chat Interface",
       "description": "Chat Interface block",
       "status": "stable",
@@ -5239,8 +5242,8 @@
     },
     {
       "name": "command-palette-shell",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Command Palette Shell",
       "description": "Command Palette Shell block",
       "status": "stable",
@@ -5260,8 +5263,8 @@
     },
     {
       "name": "content-editor",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Content Editor",
       "description": "Content Editor block",
       "status": "stable",
@@ -5280,8 +5283,8 @@
     },
     {
       "name": "content-library",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Content Library",
       "description": "Content Library block",
       "status": "stable",
@@ -5300,8 +5303,8 @@
     },
     {
       "name": "content-workflow",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Content Workflow",
       "description": "Content Workflow block",
       "status": "stable",
@@ -5320,8 +5323,8 @@
     },
     {
       "name": "danger-zone",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Danger Zone",
       "description": "Danger Zone block",
       "status": "stable",
@@ -5340,8 +5343,8 @@
     },
     {
       "name": "dashboard-overview",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Dashboard Overview",
       "description": "Dashboard Overview block",
       "status": "stable",
@@ -5360,8 +5363,8 @@
     },
     {
       "name": "invoice-history",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Invoice History",
       "description": "Invoice History block",
       "status": "stable",
@@ -5380,8 +5383,8 @@
     },
     {
       "name": "navigation-layout",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Navigation Layout",
       "description": "Navigation Layout block",
       "status": "stable",
@@ -5400,8 +5403,8 @@
     },
     {
       "name": "notification-preferences",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Notification Preferences",
       "description": "Notification Preferences block",
       "status": "stable",
@@ -5420,8 +5423,8 @@
     },
     {
       "name": "notifications-center",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Notifications Center",
       "description": "Notifications Center block",
       "status": "stable",
@@ -5440,8 +5443,8 @@
     },
     {
       "name": "order-tracking",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Order Tracking",
       "description": "Order Tracking block",
       "status": "stable",
@@ -5460,8 +5463,8 @@
     },
     {
       "name": "payment-method",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Payment Method",
       "description": "Payment Method block",
       "status": "stable",
@@ -5480,8 +5483,8 @@
     },
     {
       "name": "product-catalog",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Product Catalog",
       "description": "Product Catalog block",
       "status": "stable",
@@ -5500,8 +5503,8 @@
     },
     {
       "name": "profile-setup",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Profile Setup",
       "description": "Profile Setup block",
       "status": "stable",
@@ -5520,8 +5523,8 @@
     },
     {
       "name": "project-starter",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Project Starter",
       "description": "Project Starter block",
       "status": "stable",
@@ -5540,8 +5543,8 @@
     },
     {
       "name": "prompt-studio",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Prompt Studio",
       "description": "Prompt Studio block",
       "status": "stable",
@@ -5560,8 +5563,8 @@
     },
     {
       "name": "real-time-events",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Real Time Events",
       "description": "Real Time Events block",
       "status": "stable",
@@ -5581,8 +5584,8 @@
     },
     {
       "name": "reset-password",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Reset Password",
       "description": "Reset Password block",
       "status": "stable",
@@ -5601,8 +5604,8 @@
     },
     {
       "name": "resource-creator",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Resource Creator",
       "description": "Resource Creator block",
       "status": "stable",
@@ -5621,8 +5624,8 @@
     },
     {
       "name": "resource-detail",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Resource Detail",
       "description": "Resource Detail block",
       "status": "stable",
@@ -5641,8 +5644,8 @@
     },
     {
       "name": "resource-list",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Resource List",
       "description": "Resource List block",
       "status": "stable",
@@ -5661,8 +5664,8 @@
     },
     {
       "name": "role-permissions",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Role Permissions",
       "description": "Role Permissions block",
       "status": "stable",
@@ -5681,8 +5684,8 @@
     },
     {
       "name": "saved-searches",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Saved Searches",
       "description": "Saved Searches block",
       "status": "stable",
@@ -5701,8 +5704,8 @@
     },
     {
       "name": "search-analytics",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Search Analytics",
       "description": "Search Analytics block",
       "status": "stable",
@@ -5721,8 +5724,8 @@
     },
     {
       "name": "search-results",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Search Results",
       "description": "Search Results block",
       "status": "stable",
@@ -5741,8 +5744,8 @@
     },
     {
       "name": "shopping-cart",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Shopping Cart",
       "description": "Shopping Cart block",
       "status": "stable",
@@ -5761,8 +5764,8 @@
     },
     {
       "name": "sign-in",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Sign In",
       "description": "Sign In block",
       "status": "stable",
@@ -5781,8 +5784,8 @@
     },
     {
       "name": "sign-up",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Sign Up",
       "description": "Sign Up block",
       "status": "stable",
@@ -5801,8 +5804,8 @@
     },
     {
       "name": "subscription-plans",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Subscription Plans",
       "description": "Subscription Plans block",
       "status": "stable",
@@ -5821,8 +5824,8 @@
     },
     {
       "name": "team-management",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Team Management",
       "description": "Team Management block",
       "status": "stable",
@@ -5841,8 +5844,8 @@
     },
     {
       "name": "welcome-wizard",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Welcome Wizard",
       "description": "Welcome Wizard block",
       "status": "stable",
@@ -5861,8 +5864,8 @@
     },
     {
       "name": "workflow-builder",
-      "package": "@solidiom/blocks",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/blocks",
       "label": "Workflow Builder",
       "description": "Workflow Builder block",
       "status": "stable",
@@ -5883,8 +5886,8 @@
   "templates": [
     {
       "name": "ai-chat",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Ai Chat",
       "description": "AI chat application with conversational interface, prompt studio, and workflow builder.",
       "status": "stable",
@@ -5908,8 +5911,8 @@
     },
     {
       "name": "ai-operations",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Ai Operations",
       "description": "AI operations console with model monitoring, deployment pipelines, and cost tracking.",
       "status": "stable",
@@ -5933,8 +5936,8 @@
     },
     {
       "name": "ai-workflow",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Ai Workflow",
       "description": "AI workflow automation with visual pipeline builder, model registry, and execution monitoring.",
       "status": "stable",
@@ -5958,8 +5961,8 @@
     },
     {
       "name": "api-management",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Api Management",
       "description": "API management console with endpoint catalog, key management, and usage analytics.",
       "status": "stable",
@@ -5983,8 +5986,8 @@
     },
     {
       "name": "audit-log",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Audit Log",
       "description": "Audit log viewer with real-time event stream, advanced filters, and data export.",
       "status": "stable",
@@ -6008,8 +6011,8 @@
     },
     {
       "name": "auth-starter",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Auth Starter",
       "description": "Authentication starter with sign-in, sign-up, and password reset flows built on Solidiom blocks.",
       "status": "stable",
@@ -6033,8 +6036,8 @@
     },
     {
       "name": "billing-operations",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Billing Operations",
       "description": "Billing operations console with invoice management, payment reconciliation, and financial reports.",
       "status": "stable",
@@ -6058,8 +6061,8 @@
     },
     {
       "name": "billing-portal",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Billing Portal",
       "description": "Billing portal with subscription plans, payment methods, and invoice history.",
       "status": "stable",
@@ -6083,8 +6086,8 @@
     },
     {
       "name": "compliance-center",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Compliance Center",
       "description": "Compliance center with framework tracking, control assessments, and evidence collection.",
       "status": "stable",
@@ -6108,8 +6111,8 @@
     },
     {
       "name": "content-studio",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Content Studio",
       "description": "Content management studio with rich editor, media library, and publishing workflow.",
       "status": "stable",
@@ -6133,8 +6136,8 @@
     },
     {
       "name": "data-governance",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Data Governance",
       "description": "Data governance console with data catalog, lineage explorer, and classification policies.",
       "status": "stable",
@@ -6158,8 +6161,8 @@
     },
     {
       "name": "developer-portal",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Developer Portal",
       "description": "Developer portal with documentation, SDK playground, and application management.",
       "status": "stable",
@@ -6183,8 +6186,8 @@
     },
     {
       "name": "documentation-site",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Documentation Site",
       "description": "Documentation and product site with docs reader, API reference, and tutorial guides.",
       "status": "stable",
@@ -6208,8 +6211,8 @@
     },
     {
       "name": "enterprise-settings",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Enterprise Settings",
       "description": "Enterprise settings console with organization config, security policies, and integrations.",
       "status": "stable",
@@ -6233,8 +6236,8 @@
     },
     {
       "name": "identity-access",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Identity Access",
       "description": "Identity and access management with user directory, role-based access control, and session monitoring.",
       "status": "stable",
@@ -6258,8 +6261,8 @@
     },
     {
       "name": "incident-response",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Incident Response",
       "description": "Incident response console with active incidents, runbooks, and postmortem reports.",
       "status": "stable",
@@ -6283,8 +6286,8 @@
     },
     {
       "name": "marketing-site",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Marketing Site",
       "description": "Marketing website with hero landing page, feature showcase, and pricing plans.",
       "status": "stable",
@@ -6308,8 +6311,8 @@
     },
     {
       "name": "marketplace",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Marketplace",
       "description": "Multi-vendor marketplace with product browsing, seller dashboard, and listing management.",
       "status": "stable",
@@ -6333,8 +6336,8 @@
     },
     {
       "name": "multi-tenant-admin",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Multi Tenant Admin",
       "description": "Multi-tenant administration panel with team management, role permissions, and audit logging.",
       "status": "stable",
@@ -6359,8 +6362,8 @@
     },
     {
       "name": "observability-console",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Observability Console",
       "description": "Observability console with dashboards, real-time events, and alert configuration.",
       "status": "stable",
@@ -6385,8 +6388,8 @@
     },
     {
       "name": "onboarding-app",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Onboarding App",
       "description": "Onboarding application with multi-step wizards, profile setup, and guided project creation.",
       "status": "stable",
@@ -6410,8 +6413,8 @@
     },
     {
       "name": "resource-manager",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Resource Manager",
       "description": "Resource management application with list, detail, and creation views for generic domain resources.",
       "status": "stable",
@@ -6436,8 +6439,8 @@
     },
     {
       "name": "saas-dashboard",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Saas Dashboard",
       "description": "SaaS dashboard with navigation, observability metrics, resource management, and notifications.",
       "status": "stable",
@@ -6461,8 +6464,8 @@
     },
     {
       "name": "search-application",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Search Application",
       "description": "Full-text search application with results view, saved searches, and search analytics.",
       "status": "stable",
@@ -6486,8 +6489,8 @@
     },
     {
       "name": "security-center",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Security Center",
       "description": "Security center with threat dashboard, vulnerability scanner, and policy management.",
       "status": "stable",
@@ -6511,8 +6514,8 @@
     },
     {
       "name": "settings-portal",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Settings Portal",
       "description": "Settings portal with account management, notification preferences, and danger zone operations.",
       "status": "stable",
@@ -6536,8 +6539,8 @@
     },
     {
       "name": "storefront",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Storefront",
       "description": "E-commerce storefront with product catalog, shopping cart, and checkout flow.",
       "status": "stable",
@@ -6561,8 +6564,8 @@
     },
     {
       "name": "support-operations",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Support Operations",
       "description": "Support operations console with ticket queue, knowledge base, and performance metrics.",
       "status": "stable",
@@ -6586,8 +6589,8 @@
     },
     {
       "name": "tanstack-start-solid",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Tanstack Start Solid",
       "description": "SSR Solid app scaffolded with TanStack Start (Solid) and TanStack Router.",
       "status": "stable",
@@ -6604,8 +6607,8 @@
     },
     {
       "name": "vite-solid-router",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Vite Solid Router",
       "description": "Client-only Solid app scaffolded with Vite and Solid Router. No SSR.",
       "status": "stable",
@@ -6622,8 +6625,8 @@
     },
     {
       "name": "workflow-automation",
-      "package": "@solidiom/templates",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/templates",
       "label": "Workflow Automation",
       "description": "Workflow automation with visual designer, run history, and third-party integrations.",
       "status": "stable",
@@ -6649,8 +6652,8 @@
   "themes": [
     {
       "name": "aurora",
-      "package": "@solidiom/themes",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/themes",
       "label": "Aurora",
       "description": "Aurora-themed color palette with vibrant gradient tones",
       "status": "stable",
@@ -6669,8 +6672,8 @@
     },
     {
       "name": "forest",
-      "package": "@solidiom/themes",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/themes",
       "label": "Forest",
       "description": "Forest-themed color palette with green tones",
       "status": "stable",
@@ -6689,8 +6692,8 @@
     },
     {
       "name": "ocean",
-      "package": "@solidiom/themes",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/themes",
       "label": "Ocean",
       "description": "Ocean-themed color palette with deep blue tones",
       "status": "stable",
@@ -6709,8 +6712,8 @@
     },
     {
       "name": "slate",
-      "package": "@solidiom/themes",
       "version": "0.0.1-next.0",
+      "package": "@solidiom/themes",
       "label": "Slate",
       "description": "Slate-themed color palette with neutral gray tones",
       "status": "stable",

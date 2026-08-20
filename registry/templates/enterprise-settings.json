@@ -1,7 +1,7 @@
 {
   "name": "enterprise-settings",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Enterprise Settings",
   "description": "Enterprise settings console with organization config, security policies, and integrations.",
   "status": "stable",

@@ -1,7 +1,7 @@
 {
   "name": "marketplace",
-  "package": "@solidiom/templates",
   "version": "0.0.1-next.0",
+  "package": "@solidiom/templates",
   "label": "Marketplace",
   "description": "Multi-vendor marketplace with product browsing, seller dashboard, and listing management.",
   "status": "stable",
