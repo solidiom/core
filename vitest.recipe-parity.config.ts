@@ -4,7 +4,7 @@ import { defineConfig } from "vitest/config"
 import solidPlugin from "vite-plugin-solid"
 import { playwright } from "@vitest/browser-playwright"
 
-const ROOT = import.meta.dirname ?? __dirname
+const ROOT = import.meta.dirname
 
 /** Resolve workspace packages for root-level browser tests without publishing them first. */
 function workspacePackageResolver() {
