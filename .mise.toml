@@ -199,38 +199,60 @@ run = "pnpm run report:axe"
 
 [tasks."ci:install"]
 description = "Install dependencies from the frozen lockfile"
-run = "pnpm install --frozen-lockfile"
+run = "scripts/ci-log.sh install -- pnpm install --frozen-lockfile"
 
 [tasks."ci:format"]
 description = "CI format check"
-run = "pnpm run format:check"
+run = "scripts/ci-log.sh format -- pnpm run format:check"
 
 [tasks."ci:typecheck"]
 description = "CI typecheck"
-run = "pnpm typecheck"
+run = "scripts/ci-log.sh typecheck -- pnpm typecheck"
 
 [tasks."ci:build"]
 description = "Build packages and run CI integrity checks without regenerating artifacts"
 run = '''#!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
-pnpm nx run-many -t build --exclude=@solidiom/site
-node packages/cli/dist/bin.js verify --registry
-pnpm run api:coverage-gate
-pnpm run audit:package-source-parity
-pnpm run theme:emit:css:check
-pnpm run theme:emit:tailwind:check
-pnpm run theme:emit:unocss:check
-pnpm run audit:theme-parity
-pnpm run audit:preset-themes
-pnpm run assert:no-unverified
+LOG_FILE="test-results/build.log"
+mkdir -p test-results
 
-PATHSPEC=(registry/ 'packages/*/source/' 'packages/*/docs/accessibility/evidence.json')
-if ! git diff --quiet -- "${PATHSPEC[@]}"; then
-  echo "Generated artifacts are stale. Run 'pnpm build && pnpm run report:a11y-evidence && pnpm run registry:build', then commit the result." >&2
-  git diff --stat -- "${PATHSPEC[@]}" >&2
-  exit 1
+{
+  set -e
+  pnpm nx run-many -t build --exclude=@solidiom/site
+  node packages/cli/dist/bin.js verify --registry
+  pnpm run api:coverage-gate
+  pnpm run audit:package-source-parity
+  pnpm run theme:emit:css:check
+  pnpm run theme:emit:tailwind:check
+  pnpm run theme:emit:unocss:check
+  pnpm run audit:theme-parity
+  pnpm run audit:preset-themes
+  pnpm run assert:no-unverified
+
+  PATHSPEC=(registry/ 'packages/*/source/' 'packages/*/docs/accessibility/evidence.json')
+  if ! git diff --quiet -- "${PATHSPEC[@]}"; then
+    echo "Generated artifacts are stale. Run 'pnpm build && pnpm run report:a11y-evidence && pnpm run registry:build', then commit the result." >&2
+    git diff --stat -- "${PATHSPEC[@]}" >&2
+    exit 1
+  fi
+} 2>&1 | tee "$LOG_FILE"
+EXIT_CODE=${PIPESTATUS[0]}
+
+if [ "$EXIT_CODE" -ne 0 ]; then
+  echo ""
+  echo "════════════════════════════════════════════════════════════"
+  echo "  BUILD FAILED (exit ${EXIT_CODE})"
+  echo "════════════════════════════════════════════════════════════"
+  echo ""
+  grep -nE "(FAIL|ERROR|Error|error:|stale|Cannot|not found|ENOENT|Timeout)" "$LOG_FILE" | tail -60 || echo "  (no recognizable error markers; see full log)"
+  echo ""
+  echo "────────────────────────────────────────────────────────────"
+  echo "  Full log: $LOG_FILE"
+  echo "════════════════════════════════════════════════════════════"
 fi
+
+exit "$EXIT_CODE"
 '''
 
 [tasks."ci:test-node"]
@@ -238,8 +260,8 @@ description = "Run the CI Node test surface (requires a prior build)"
 env = { CI = "true" }
 run = [
   "pnpm exec playwright install chromium",
-  "pnpm test",
-  "pnpm run test:tools",
+  "scripts/ci-log.sh test-node -- pnpm test",
+  "scripts/ci-log.sh test-tools -- pnpm run test:tools",
 ]
 
 [tasks."ci:test-browser"]
@@ -247,8 +269,8 @@ description = "Run Chromium browser component tests and recipe parity (requires 
 env = { CI = "true", VITEST_BROWSERS = "chromium" }
 run = [
   "pnpm exec playwright install chromium",
-  "pnpm exec vitest run --config vitest.browser.config.ts",
-  "pnpm run test:recipe-parity",
+  "scripts/ci-log.sh test-browser -- pnpm exec vitest run --config vitest.browser.config.ts",
+  "scripts/ci-log.sh test-recipe-parity -- pnpm run test:recipe-parity",
 ]
 
 [tasks."ci:a11y"]
@@ -256,27 +278,27 @@ description = "Run CI accessibility scans, evidence, coverage, and report checks
 env = { CI = "true" }
 run = [
   "pnpm exec playwright install chromium",
-  "pnpm run test:a11y",
-  "pnpm run report:a11y-evidence",
-  "pnpm run a11y:coverage-gate",
-  "pnpm run report:axe",
+  "scripts/ci-log.sh a11y-scan -- pnpm run test:a11y",
+  "scripts/ci-log.sh a11y-evidence -- pnpm run report:a11y-evidence",
+  "scripts/ci-log.sh a11y-coverage-gate -- pnpm run a11y:coverage-gate",
+  "scripts/ci-log.sh a11y-report -- pnpm run report:axe",
 ]
 
 [tasks."ci:site-check"]
 description = "Run CI site checks: Astro, boundaries, and i18n"
 run = [
-  "pnpm --filter @solidiom/site check",
-  "pnpm --filter @solidiom/site run boundaries",
-  "pnpm --filter @solidiom/site run i18n:validate",
+  "scripts/ci-log.sh site-check-astro -- pnpm --filter @solidiom/site check",
+  "scripts/ci-log.sh site-check-boundaries -- pnpm --filter @solidiom/site run boundaries",
+  "scripts/ci-log.sh site-check-i18n -- pnpm --filter @solidiom/site run i18n:validate",
 ]
 
 [tasks."ci:site-build"]
 description = "Build templates and the site, index search, and verify registry routes"
 run = [
-  "pnpm --filter '@solidiom/template-*' build",
-  "pnpm --filter @solidiom/site build",
-  "pnpm --filter @solidiom/site search-index",
-  "pnpm --filter @solidiom/site run registry-route-check",
+  "scripts/ci-log.sh site-build-templates -- pnpm --filter '@solidiom/template-*' build",
+  "scripts/ci-log.sh site-build -- pnpm --filter @solidiom/site build",
+  "scripts/ci-log.sh site-search-index -- pnpm --filter @solidiom/site search-index",
+  "scripts/ci-log.sh site-registry-route-check -- pnpm --filter @solidiom/site run registry-route-check",
 ]
 
 [tasks."ci:site-e2e"]
@@ -319,7 +341,7 @@ exit $EXIT_CODE
 [tasks."ci:site-visual"]
 description = "Verify visual baselines in the pinned Playwright container"
 env = { CI = "true", PLAYWRIGHT_USE_EXISTING_BUILD = "1" }
-run = "pnpm run visual:container"
+run = "scripts/ci-log.sh site-visual -- pnpm run visual:container"
 
 [tasks."ci:site-lighthouse"]
 description = "Run Lighthouse locally (advisory; requires a prior site build and local Chrome)"
@@ -402,19 +424,22 @@ fi
 
 [tasks."ci:catalog-gates"]
 description = "Run component and block catalog gates"
-run = ["pnpm run component:catalog-gate", "pnpm run block:catalog-gate"]
+run = [
+  "scripts/ci-log.sh catalog-gate-component -- pnpm run component:catalog-gate",
+  "scripts/ci-log.sh catalog-gate-block -- pnpm run block:catalog-gate",
+]
 
 [tasks."ci:vertical-slice"]
 description = "Run the vertical-slice gate"
-run = "pnpm run gate:vertical-slice"
+run = "scripts/ci-log.sh vertical-slice -- pnpm run gate:vertical-slice"
 
 [tasks."ci:gate:quick"]
 description = "Run the final fast-tier CI gate"
-run = "pnpm run gate:quick"
+run = "scripts/ci-log.sh gate-quick -- pnpm run gate:quick"
 
 [tasks."ci:gate:full"]
 description = "Run the final comprehensive CI gate"
-run = "pnpm run gate:full"
+run = "scripts/ci-log.sh gate-full -- pnpm run gate:full"
 
 [tasks."ci:quick"]
 description = "Run the local fast PR-tier checks"
