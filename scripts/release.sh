@@ -89,37 +89,43 @@ How to generate a valid Cloudflare API token for Pages deploys:
   2. Use the "Create Custom Token" option and grant this permission:
        Account → Cloudflare Pages → Edit
   3. Under "Account Resources", scope it to the account you deploy to
-     (CLOUDFLARE_ACCOUNT_ID).
+     (CLOUDFLARE_ACCOUNT_ID). An account-scoped token is expected and fine.
   4. Leave "Client IP Address Filtering" empty for local use. If you set an IP
      filter, add your current public IP — otherwise Cloudflare rejects the token
      with "Cannot use the access token from location" (error 9109).
-  5. Create the token and copy the value. A real API token is a ~40-char opaque
-     string with NO "cfat_" prefix (a "cfat_" value is a Cloudflare ACCESS
-     token — a different product — and will NOT work here).
-  6. Verify it before saving:
-       curl -s -H "Authorization: Bearer <TOKEN>" \
-         https://api.cloudflare.com/client/v4/user/tokens/verify
-     A valid token returns "status":"active".
-  7. Put it in .env as:
+  5. Create the token and copy the value, then put it in .env as:
        CLOUDFLARE_API_TOKEN="<token>"
+  6. Verify it (account-scoped tokens must use the /accounts endpoint, not /user):
+       curl -s -H "Authorization: Bearer <TOKEN>" \
+         "https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/tokens/verify"
+     A valid token returns "status":"active".
 EOF
 }
 
-# Fail-fast verification that CLOUDFLARE_API_TOKEN is valid, BEFORE the (slow)
-# site build. Uses Cloudflare's own token-verify endpoint so a revoked/expired/
-# wrong-type token is caught immediately with actionable guidance instead of
-# failing at the final `wrangler pages deploy` step after a long build.
+# Fail-fast verification of CLOUDFLARE_API_TOKEN BEFORE the (slow) site build,
+# so a token that is revoked, IP-restricted, or missing the Pages permission is
+# caught immediately with actionable guidance instead of failing at the final
+# `wrangler pages deploy` step after a long build.
+#
+# We probe the SAME endpoint wrangler uses to deploy — the account's Pages
+# projects API — rather than /tokens/verify. A token can verify as "active"
+# yet still lack Pages:Edit or be blocked by an IP allowlist; only the real
+# Pages endpoint exercises both. Common Cloudflare error codes:
+#   10000 → token is missing the "Account → Cloudflare Pages → Edit" permission
+#           (or is scoped to a different account).
+#   9109  → token has an IP allowlist and the current public IP is not in it.
 preflight_cloudflare_token() {
   command -v curl >/dev/null || {
     warn "curl not found — skipping Cloudflare token pre-flight (wrangler will still validate at deploy)."
     return 0
   }
 
-  step "Verifying CLOUDFLARE_API_TOKEN with Cloudflare"
+  step "Verifying CLOUDFLARE_API_TOKEN against the Pages API"
+
   local resp
   resp="$(curl -sS --max-time 15 \
     -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
-    "https://api.cloudflare.com/client/v4/user/tokens/verify" 2>/dev/null || true)"
+    "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects?per_page=1" 2>/dev/null || true)"
 
   if [[ -z "$resp" ]]; then
     warn "Could not reach the Cloudflare API to verify the token (network issue?)."
@@ -127,13 +133,11 @@ preflight_cloudflare_token() {
     return 0
   fi
 
-  # "status":"active" inside a successful response means the token is valid.
-  if printf '%s' "$resp" | grep -q '"status":"active"'; then
-    step "Cloudflare token is valid (status: active)."
+  if printf '%s' "$resp" | grep -q '"success":true'; then
+    step "Cloudflare token can access Pages for this account."
     return 0
   fi
 
-  # Extract the first Cloudflare error code/message for a precise diagnosis.
   local code msg
   code="$(printf '%s' "$resp" | grep -o '"code":[0-9]*' | head -1 | grep -o '[0-9]*')"
   msg="$(printf '%s' "$resp" | grep -o '"message":"[^"]*"' | head -1 | sed 's/^"message":"//; s/"$//')"
@@ -141,19 +145,28 @@ preflight_cloudflare_token() {
   case "$code" in
     9109)
       warn "Cloudflare rejected the token due to an IP restriction (code 9109): ${msg:-location not allowed}."
+      warn "The token is otherwise valid, but your current public IP is not in its allowlist."
+      warn "Fix: edit the token and either clear the IP filter or add your current IP."
       cloudflare_token_help
       fail "CLOUDFLARE_API_TOKEN is IP-restricted and your current IP is not allowed."
       ;;
+    10000)
+      warn "Cloudflare returned an authentication error (code 10000): ${msg:-Authentication error}."
+      warn "The token is likely missing the 'Account → Cloudflare Pages → Edit' permission,"
+      warn "or is scoped to a different account than CLOUDFLARE_ACCOUNT_ID (${CLOUDFLARE_ACCOUNT_ID})."
+      cloudflare_token_help
+      fail "CLOUDFLARE_API_TOKEN cannot access Pages — see guidance above."
+      ;;
     1000)
       warn "Cloudflare reports the token is invalid (code 1000): ${msg:-Invalid API Token}."
-      warn "It may be revoked, expired, or the wrong token type (a 'cfat_' value is a Cloudflare Access token, not an API token)."
+      warn "It may be revoked or expired."
       cloudflare_token_help
       fail "CLOUDFLARE_API_TOKEN is invalid — see guidance above."
       ;;
     *)
       warn "Cloudflare did not accept the token (code ${code:-unknown}): ${msg:-verification failed}."
       cloudflare_token_help
-      fail "CLOUDFLARE_API_TOKEN failed verification — see guidance above."
+      fail "CLOUDFLARE_API_TOKEN failed Pages verification — see guidance above."
       ;;
   esac
 }
