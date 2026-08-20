@@ -1,0 +1,251 @@
+name: CI (Site)
+
+# Site-target CI pipeline (split from the former monolithic ci.yml).
+# Covers everything that checks, builds, tests, and gates the site
+# application. This workflow is fully independent of ci-packages.yml: it
+# rebuilds the workspace packages itself (the site resolves built primitives),
+# so it can be dispatched on its own.
+#
+#   - full_matrix=false: site check + build only (fast structural feedback).
+#   - full_matrix=true:  full suite (check, build, e2e, visual, lighthouse,
+#     vertical-slice gate).
+#
+# Triggers are manual only for now. The `paths` filter below is dormant under
+# workflow_dispatch; re-add a `push:`/`pull_request:` trigger to activate it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      full_matrix:
+        description: "Run the full site suite (e2e, visual, lighthouse, gate)"
+        required: false
+        default: "true"
+        type: choice
+        options: ["true", "false"]
+
+  # Dormant under workflow_dispatch-only triggering. Documents the site target
+  # boundary so re-enabling push/PR triggers scopes this workflow correctly.
+  # The site consumes built packages, so package sources are included.
+  #   paths:
+  #     - "apps/**"
+  #     - "templates/**"
+  #     - "packages/**"
+  #     - "pnpm-lock.yaml"
+  #     - "package.json"
+  #     - "nx.json"
+  #     - ".github/workflows/ci-site.yml"
+  #     - ".github/actions/setup/**"
+
+concurrency:
+  group: ci-site-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "24"
+  PNPM_VERSION: "10.34.5"
+  NODE_OPTIONS: "--max-old-space-size=4096"
+
+jobs:
+  # ─── Site Structural Checks ─────────────────────────────────────────────────────
+
+  site-check:
+    runs-on: self-hosted-dfw-flex
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+      - run: pnpm --filter @solidiom/site check
+      - run: pnpm --filter @solidiom/site run boundaries
+      - run: pnpm --filter @solidiom/site run i18n:validate
+
+  # ─── Site Build ─────────────────────────────────────────────────────────────────
+  # Rebuilds packages first (Option A): the site resolves built primitives, so
+  # this workflow stays independent of ci-packages.yml.
+
+  site-build:
+    needs: site-check
+    runs-on: self-hosted-dfw-flex
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+      - name: Build packages (site depends on built primitives)
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
+      - name: Build template previews
+        run: pnpm --filter '@solidiom/template-*' build
+      - name: Build and index static site
+        run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
+      - name: Verify registry routes
+        run: pnpm --filter @solidiom/site run registry-route-check
+      - uses: actions/upload-artifact@v6
+        with:
+          name: site-dist
+          path: apps/site/dist
+
+  site-e2e:
+    needs: site-build
+    if: inputs.full_matrix == 'true'
+    runs-on: self-hosted-dfw-flex
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+        with:
+          playwright: chromium firefox webkit
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: apps/site/dist
+      - env:
+          PLAYWRIGHT_USE_EXISTING_BUILD: "1"
+        run: pnpm --filter @solidiom/site run test:e2e
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: site-e2e-results
+          path: test-results/site-e2e
+          retention-days: 7
+
+  site-visual:
+    needs: site-build
+    if: inputs.full_matrix == 'true'
+    runs-on: self-hosted-dfw-flex
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble
+      options: --ipc=host
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: apps/site/dist
+      - env:
+          PLAYWRIGHT_USE_EXISTING_BUILD: "1"
+        run: pnpm --filter @solidiom/site run test:visual
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: site-visual-diffs
+          path: test-results/site-visual
+          retention-days: 7
+
+  site-lighthouse:
+    needs: site-build
+    if: inputs.full_matrix == 'true'
+    runs-on: self-hosted-dfw-flex
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: apps/site/dist
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      - name: Start preview server
+        run: |
+          pnpm --filter @solidiom/site preview --host 127.0.0.1 --port 4322 > /dev/null 2>&1 &
+          for attempt in $(seq 1 30); do curl --fail --silent http://127.0.0.1:4322/ > /dev/null && exit 0; sleep 1; done; exit 1
+      - run: pnpm --filter @solidiom/site run lighthouse:json
+      - uses: actions/upload-artifact@v6
+        with:
+          name: site-lighthouse-report
+          path: apps/site/dist/reports
+          retention-days: 30
+
+  # ─── Preview Deploy (dormant until pull_request triggers are re-enabled) ─────────
+  # Per-PR ephemeral preview: builds the site, deploys it to Cloudflare Pages,
+  # verifies delivery, and comments the preview URL on the PR. The guard requires
+  # pull_request context, which does not exist under workflow_dispatch-only
+  # triggering, so this job can never run today. Restore a `pull_request` trigger
+  # in `on:` (and the dormant `paths` filter above) to activate it once CI is
+  # stabilized.
+
+  preview-deploy:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: self-hosted-dfw-flex
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+      - name: Build template previews
+        run: pnpm --filter '@solidiom/template-*' build
+      - name: Build and index site
+        run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
+      - name: Deploy preview to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=solidiom-site
+          workingDirectory: apps/site
+      - name: Verify preview delivery policy
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.deployment-url }}
+          CLOUDFLARE_ACCESS_CLIENT_ID: ${{ secrets.CLOUDFLARE_ACCESS_CLIENT_ID }}
+          CLOUDFLARE_ACCESS_CLIENT_SECRET: ${{ secrets.CLOUDFLARE_ACCESS_CLIENT_SECRET }}
+        run: pnpm --filter @solidiom/site verify:preview
+      - name: Comment preview URL on PR
+        uses: actions/github-script@v7
+        env:
+          DEPLOY_URL: ${{ steps.deploy.outputs.deployment-url }}
+        with:
+          script: |
+            const url = process.env.DEPLOY_URL;
+            const body = `## Preview Deployment\n\n**URL:** ${url}\n\nDeployed from commit \`${context.sha.slice(0, 7)}\`.`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find(c => c.body?.includes('Preview Deployment'));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                comment_id: existing.id, body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: context.issue.number, body,
+              });
+            }
+
+  # ─── Vertical Slice Gate (full_matrix only) ─────────────────────────────────────
+  # Cross-cutting integration gate: verifies a primitive's package build and its
+  # site representation stay coherent. Lives here because site-check is its real
+  # blocker; the package build prelude satisfies its build dependency.
+
+  vertical-slice-gate:
+    needs: site-check
+    if: inputs.full_matrix == 'true'
+    runs-on: self-hosted-dfw-flex
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/setup
+      - name: Build packages (vertical slice needs built primitives)
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
+      - run: pnpm run gate:vertical-slice
+
+  # ─── Site Gate (final, self-gating) ──────────────────────────────────────────────
+  # The site workflow self-gates on its own job results rather than invoking the
+  # aggregate gate:quick/gate:full scripts (which remain owned by ci-packages.yml).
+  # full_matrix=false: pass when check + build succeed.
+  # full_matrix=true:  pass when the full site suite succeeds.
+
+  gate:
+    needs: [site-check, site-build, site-e2e, site-visual, vertical-slice-gate]
+    if: >
+      always() &&
+      needs.site-check.result == 'success' &&
+      needs.site-build.result == 'success' &&
+      (inputs.full_matrix != 'true' ||
+        (needs.site-e2e.result == 'success' &&
+          needs.site-visual.result == 'success' &&
+          needs.vertical-slice-gate.result == 'success'))
+    runs-on: self-hosted-dfw-flex
+    steps:
+      - name: Site gate passed
+        run: echo "✓ Site CI gate passed (full_matrix=${{ inputs.full_matrix }})."

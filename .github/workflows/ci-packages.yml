@@ -1,9 +1,16 @@
-name: CI
+name: CI (Packages)
 
-# Tiered CI pipeline:
-#   - PR:   Fast feedback (format, typecheck, build, node tests on single version, chromium browser tests)
-#   - Main: Full matrix (node 24+26, chromium browser tests, a11y, CLI smoke, site build+e2e, gates)
-#   - Dispatch: Configurable (affected_only, full_matrix options)
+# Package-target CI pipeline (split from the former monolithic ci.yml).
+# Covers everything that builds, tests, and gates the workspace packages —
+# excluding the site application, which lives in ci-site.yml.
+#
+#   - full_matrix=false: fast tier (format, typecheck, build, node tests on a
+#     single Node version, Chromium browser tests) + quick gate.
+#   - full_matrix=true:  comprehensive tier (Node 24+26 matrix, a11y, CLI smoke,
+#     catalog gates) + full gate.
+#
+# Triggers are manual only for now. The `paths` filter below is dormant under
+# workflow_dispatch; re-add a `push:`/`pull_request:` trigger to activate it.
 
 on:
   workflow_dispatch:
@@ -21,8 +28,23 @@ on:
         type: choice
         options: ["true", "false"]
 
+  # Dormant under workflow_dispatch-only triggering. Documents the package
+  # target boundary so re-enabling push/PR triggers scopes this workflow
+  # correctly. To activate, move these keys under a `push:`/`pull_request:` key.
+  #   paths:
+  #     - "packages/**"
+  #     - "tools/**"
+  #     - "registry/**"
+  #     - "pnpm-lock.yaml"
+  #     - "package.json"
+  #     - "nx.json"
+  #     - "tsconfig*.json"
+  #     - "vitest*.config.ts"
+  #     - ".github/workflows/ci-packages.yml"
+  #     - ".github/actions/setup/**"
+
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-packages-${{ github.ref }}
   cancel-in-progress: true
 
 env:
@@ -31,8 +53,6 @@ env:
   NODE_OPTIONS: "--max-old-space-size=4096"
   NX_BASE: ${{ github.event.pull_request.base.sha || 'HEAD~1' }}
   NX_HEAD: HEAD
-  # All triggers are manual (workflow_dispatch). Set full_matrix=true (default)
-  # for the comprehensive tier; full_matrix=false runs only the fast-tier jobs.
 
 jobs:
   # ─── Foundation ────────────────────────────────────────────────────────────────
@@ -138,7 +158,7 @@ jobs:
           retention-days: 1
 
   # ─── Tests (Node) ─────────────────────────────────────────────────────────────
-  # PR: single Node version. Main/dispatch: matrix [24, 26].
+  # full_matrix=false: single Node version. full_matrix=true: matrix [24, 26].
 
   test-node:
     needs: build
@@ -167,7 +187,7 @@ jobs:
       - run: pnpm run test:tools
 
   # ─── Tests (Browser) ──────────────────────────────────────────────────────────
-  # PR: Chromium only. Main/dispatch: Chromium only (full 3-browser in nightly).
+  # Chromium only (full 3-browser matrix runs in nightly).
 
   test-browser:
     needs: build
@@ -194,7 +214,7 @@ jobs:
           path: test-results/
           retention-days: 7
 
-  # ─── Accessibility (main/dispatch only) ────────────────────────────────────────
+  # ─── Accessibility (full_matrix only) ──────────────────────────────────────────
 
   a11y-axe-scan:
     needs: build
@@ -222,111 +242,7 @@ jobs:
             docs/axe-scan-results.md
           retention-days: 30
 
-  # ─── Site Pipeline (main/dispatch only) ────────────────────────────────────────
-
-  site-check:
-    needs: install
-    if: inputs.full_matrix == 'true'
-    runs-on: self-hosted-dfw-flex
-    steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
-      - run: pnpm --filter @solidiom/site check
-      - run: pnpm --filter @solidiom/site run boundaries
-      - run: pnpm --filter @solidiom/site run i18n:validate
-
-  site-build:
-    needs: [install, site-check]
-    if: inputs.full_matrix == 'true'
-    runs-on: self-hosted-dfw-flex
-    steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
-      - name: Build template previews
-        run: pnpm --filter '@solidiom/template-*' build
-      - name: Build and index static site
-        run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
-      - name: Verify registry routes
-        run: pnpm --filter @solidiom/site run registry-route-check
-      - uses: actions/upload-artifact@v6
-        with:
-          name: site-dist
-          path: apps/site/dist
-
-  site-e2e:
-    needs: site-build
-    if: inputs.full_matrix == 'true'
-    runs-on: self-hosted-dfw-flex
-    steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
-        with:
-          playwright: chromium firefox webkit
-      - uses: actions/download-artifact@v4
-        with:
-          name: site-dist
-          path: apps/site/dist
-      - env:
-          PLAYWRIGHT_USE_EXISTING_BUILD: "1"
-        run: pnpm --filter @solidiom/site run test:e2e
-      - uses: actions/upload-artifact@v6
-        if: failure()
-        with:
-          name: site-e2e-results
-          path: test-results/site-e2e
-          retention-days: 7
-
-  site-visual:
-    needs: site-build
-    if: inputs.full_matrix == 'true'
-    runs-on: self-hosted-dfw-flex
-    container:
-      image: mcr.microsoft.com/playwright:v1.62.1-noble
-      options: --ipc=host
-    steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v4
-        with:
-          name: site-dist
-          path: apps/site/dist
-      - env:
-          PLAYWRIGHT_USE_EXISTING_BUILD: "1"
-        run: pnpm --filter @solidiom/site run test:visual
-      - uses: actions/upload-artifact@v6
-        if: failure()
-        with:
-          name: site-visual-diffs
-          path: test-results/site-visual
-          retention-days: 7
-
-  site-lighthouse:
-    needs: site-build
-    if: inputs.full_matrix == 'true'
-    runs-on: self-hosted-dfw-flex
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v4
-        with:
-          name: site-dist
-          path: apps/site/dist
-      - uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: stable
-      - name: Start preview server
-        run: |
-          pnpm --filter @solidiom/site preview --host 127.0.0.1 --port 4322 > /dev/null 2>&1 &
-          for attempt in $(seq 1 30); do curl --fail --silent http://127.0.0.1:4322/ > /dev/null && exit 0; sleep 1; done; exit 1
-      - run: pnpm --filter @solidiom/site run lighthouse:json
-      - uses: actions/upload-artifact@v6
-        with:
-          name: site-lighthouse-report
-          path: apps/site/dist/reports
-          retention-days: 30
-
-  # ─── CLI Smoke Tests (main/dispatch only) ──────────────────────────────────────
+  # ─── CLI Smoke Tests (full_matrix only) ────────────────────────────────────────
 
   cli-smoke-create-prep:
     needs: build
@@ -395,66 +311,7 @@ jobs:
           path: artifacts/smoke-create-${{ matrix.manager }}.json
           retention-days: 7
 
-  # ─── Preview Deploy (disabled under manual-only triggering) ────────────────────
-  # This job requires pull_request context (PR head repo, PR comment target),
-  # which does not exist for workflow_dispatch. With all triggers now manual it
-  # can never run; the guard below keeps it permanently skipped. Restore the
-  # `pull_request` trigger in `on:` to re-enable it.
-
-  preview-deploy:
-    needs: [install]
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: self-hosted-dfw-flex
-    permissions:
-      contents: read
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
-      - name: Build template previews
-        run: pnpm --filter '@solidiom/template-*' build
-      - name: Build and index site
-        run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
-      - name: Deploy preview to Cloudflare Pages
-        id: deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=solidiom-site
-          workingDirectory: apps/site
-      - name: Verify preview delivery policy
-        env:
-          PREVIEW_URL: ${{ steps.deploy.outputs.deployment-url }}
-          CLOUDFLARE_ACCESS_CLIENT_ID: ${{ secrets.CLOUDFLARE_ACCESS_CLIENT_ID }}
-          CLOUDFLARE_ACCESS_CLIENT_SECRET: ${{ secrets.CLOUDFLARE_ACCESS_CLIENT_SECRET }}
-        run: pnpm --filter @solidiom/site verify:preview
-      - name: Comment preview URL on PR
-        uses: actions/github-script@v7
-        env:
-          DEPLOY_URL: ${{ steps.deploy.outputs.deployment-url }}
-        with:
-          script: |
-            const url = process.env.DEPLOY_URL;
-            const body = `## Preview Deployment\n\n**URL:** ${url}\n\nDeployed from commit \`${context.sha.slice(0, 7)}\`.`;
-            const { data: comments } = await github.rest.issues.listComments({
-              owner: context.repo.owner, repo: context.repo.repo,
-              issue_number: context.issue.number,
-            });
-            const existing = comments.find(c => c.body?.includes('Preview Deployment'));
-            if (existing) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner, repo: context.repo.repo,
-                comment_id: existing.id, body,
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner, repo: context.repo.repo,
-                issue_number: context.issue.number, body,
-              });
-            }
-
-  # ─── Catalog & Vertical Slice Gates (main/dispatch only) ───────────────────────
+  # ─── Catalog Gates (full_matrix only) ──────────────────────────────────────────
 
   catalog-gates:
     needs: build
@@ -470,19 +327,6 @@ jobs:
       - run: pnpm run component:catalog-gate
       - run: pnpm run block:catalog-gate
 
-  vertical-slice-gate:
-    needs: [build, site-check]
-    if: inputs.full_matrix == 'true'
-    runs-on: self-hosted-dfw-flex
-    steps:
-      - uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v4
-        with:
-          name: build-dist
-          path: .
-      - run: pnpm run gate:vertical-slice
-
   # ─── Quality Gate (final) ──────────────────────────────────────────────────────
   # full_matrix=false: lightweight gate (format + typecheck + build + tests pass).
   # full_matrix=true: full gate suite including all phases.
@@ -490,7 +334,7 @@ jobs:
   gate:
     # `always()` lets the fast tier proceed when full-tier jobs are intentionally
     # skipped; the explicit result checks still prevent a gate after a failure.
-    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, site-e2e, catalog-gates]
+    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, catalog-gates]
     if: >
       always() &&
       needs.typecheck.result == 'success' &&
@@ -499,7 +343,6 @@ jobs:
       needs.test-browser.result == 'success' &&
       (inputs.full_matrix != 'true' ||
         (needs.a11y-axe-scan.result == 'success' &&
-          needs.site-e2e.result == 'success' &&
           needs.catalog-gates.result == 'success'))
     runs-on: self-hosted-dfw-flex
     steps:
