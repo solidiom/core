@@ -111,17 +111,28 @@ export function runTests(pkg: string, minTests: number, opts?: { timeout?: numbe
 
 /**
  * Run typecheck for a package and verify it passes (exit 0).
+ *
+ * Routes through nx so the target's `dependsOn: ["^build"]` graph builds
+ * dependencies first — the same race that affects umbrella builds also affects
+ * typecheck, which reads sibling `dist/*.d.ts`.
  */
 export function runTypecheck(pkg: string, opts?: { timeout?: number }): boolean {
-  const result = run(`pnpm --filter ${pkg} typecheck`, { cwd: ROOT, timeout: opts?.timeout })
+  const result = run(`pnpm exec nx typecheck ${pkg}`, { cwd: ROOT, timeout: opts?.timeout })
   return result.ok
 }
 
 /**
  * Run build for a package and verify it passes (exit 0).
+ *
+ * Routes through nx (not `pnpm --filter`) so the target's `dependsOn: ["^build"]`
+ * graph builds every workspace dependency first. This matters for umbrella
+ * packages like @solidiom/primitives whose `tsc --emitDeclarationOnly` step reads
+ * sibling `dist/*.d.ts`: a bare `pnpm --filter … build` bypasses the dependency
+ * graph and can race a sibling `dist/` rewrite happening in another gate step,
+ * producing a spurious build failure. nx serializes and caches the dependencies.
  */
 export function runBuild(pkg: string, opts?: { timeout?: number }): boolean {
-  const result = run(`pnpm --filter ${pkg} build`, { cwd: ROOT, timeout: opts?.timeout })
+  const result = run(`pnpm exec nx build ${pkg}`, { cwd: ROOT, timeout: opts?.timeout })
   return result.ok
 }
 

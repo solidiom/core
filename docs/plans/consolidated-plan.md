@@ -95,7 +95,7 @@ A row becomes `[x]` only when its acceptance boundary is re-checked by the named
 | Status | ID            | Description                                                                                      | Accept                                                                          |
 | ------ | ------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
 | [x]    | C8            | Beta accessibility evidence — axe + keyboard + VoiceOver for all 52 primitives and 30 components | Evidence files enumerate complete beta surface with durable runs                |
-| [x]    | C9 / Task 60  | Preflight vs final acceptance — `tools/phase3-gate.ts` as final release approval                 | Preflight green + negative fixtures prove gate rejects missing requirements     |
+| [x]    | C9 / Task 60  | Preflight vs final acceptance — `tools/release-gate.ts` as final release approval                | Preflight green + negative fixtures prove gate rejects missing requirements     |
 | [x]    | C10 / Task 68 | Signed beta artifacts — npm, `apps/site`, immutable catalog, signed pointer                      | Clean package/source consumers verify tarballs, catalog, and pointer signatures |
 | [x]    | C11           | Public-package classification — resolve every publishable-but-untracked package                  | No publishable package sits outside public catalog or explicit non-public set   |
 
@@ -389,7 +389,7 @@ pnpm --filter @solidiom/recipes-css build
 pnpm --filter @solidiom/recipes-tailwind build
 pnpm --filter @solidiom/recipes-unocss build
 pnpm run test:tools               # 382/382
-pnpm run gate:phase1              # 255/255
+pnpm run gate:full               # full durable release gate
 pnpm --filter @solidiom/site run translation:check
 
 # Controls affected by broader work

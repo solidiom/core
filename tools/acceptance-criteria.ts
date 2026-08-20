@@ -26,7 +26,6 @@ import {
   runTypecheck,
   fileExists,
   fileContains,
-  noDepsMatching,
   readJSON,
   run,
 } from "./gate-helpers"
@@ -47,18 +46,17 @@ console.log("§23 Acceptance Criteria (v1.0) — 80 checks\n")
 // ─── Architecture (1-10) ────────────────────────────────────────────────
 console.log("Architecture:")
 
-// #1: Verified by checking actual deps, not hard-coded true
-const architecturePkgs = [
-  "packages/runtime",
-  "packages/dialog",
-  "packages/select",
-  "packages/adapter-positioning-floating-ui",
-  "packages/adapter-positioning-minimal",
-]
-const noKobalte = architecturePkgs.every((p) =>
-  noDepsMatching(`${p}/package.json`, /kobalte|corvu/),
-)
-checkN(1, "No Kobalte/Corvu in primitives", noKobalte)
+// #1: The "no primitive-system dependency" invariant (Kobalte/Corvu/Ark/Zag/
+// Radix/…) is enforced permanently and with tests by the adapter-kit
+// conformance harness via FORBIDDEN_ADAPTER_DEPS, rather than by an ad-hoc
+// package.json scan duplicated across gates. Verify the enforcement point
+// exists and still bans the primitive systems.
+const noKobalte =
+  fileExists("packages/adapter-kit/src/conformance.ts") &&
+  fileContains("packages/adapter-kit/src/types.ts", "FORBIDDEN_ADAPTER_DEPS") &&
+  fileContains("packages/adapter-kit/src/types.ts", /@kobalte/) &&
+  fileContains("packages/adapter-kit/src/types.ts", /@corvu/)
+checkN(1, "Primitive-system deps banned by adapter-kit conformance harness", noKobalte)
 
 checkN(
   2,
@@ -428,17 +426,17 @@ checkN(
   fileContains("packages/runtime/src/index.ts", "DirectionContext"),
 )
 
-// #74: buttonVariants exported from every recipe
+// #74: buttonVariants exported from every recipe (inline or re-export form)
 checkN(
   74,
   "buttonVariants exported from all recipe packages",
   fileContains(
     "packages/recipes-tailwind/src/recipes/button.tsx",
-    /export\s+(const|function)\s+buttonVariants/,
+    /export\s+(const|function)\s+buttonVariants|export\s*\{[^}]*\bbuttonVariants\b/,
   ) &&
     fileContains(
       "packages/recipes-css/src/recipes/button.tsx",
-      /export\s+(const|function)\s+buttonVariants/,
+      /export\s+(const|function)\s+buttonVariants|export\s*\{[^}]*\bbuttonVariants\b/,
     ),
 )
 

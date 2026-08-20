@@ -54,7 +54,7 @@ install
 gate ← typecheck + build + test-node + test-browser + a11y-axe-scan + site-e2e + catalog-gates
 ```
 
-The `gate:quick` command runs Phase 0. `gate:full` runs Phase 3, which invokes Phases 0–2 before its own checks. The older `gate:phase0` through `gate:phase3` aliases remain available for targeted local investigation.
+The `gate:quick` command runs the structural gate (fast, version-agnostic foundation invariants). `gate:full` runs the full durable release gate, which runs the structural gate once and then the complete quality suite (primitives, recipes, ESLint, a11y, enterprise governance, catalog gates, and the §23 acceptance criteria).
 
 ## Design decisions
 

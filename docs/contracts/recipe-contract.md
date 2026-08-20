@@ -39,7 +39,7 @@ lifecycle: current
 | `packages/runtime/src/dom/semantic-vocabulary.ts` | The attribute and state vocabulary, exported from `@solidiom/runtime`                                                                                                   |
 | `packages/recipes-tailwind/src/styles/theme.css`  | The Tailwind profile's theme contract                                                                                                                                   |
 
-These commands participate in `gate:phase1` §9. Current workflow trigger policy and pass/fail status are owned by `docs/plans/consolidated-plan.md`; this contract does not claim that they run on every pull request.
+These commands participate in `gate:full` §3b. Current workflow trigger policy and pass/fail status are owned by `docs/plans/consolidated-plan.md`; this contract does not claim that they run on every pull request.
 
 ## 2. Definition shape
 
