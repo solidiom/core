@@ -235,7 +235,7 @@ jobs:
             artifacts/beta-catalog.json
             artifacts/beta-pointer.json
             registry/index.json
-          retention-days: 30
+          retention-days: 7
 
   # ─── Deploy Site ───────────────────────────────────────────────────────────────
 

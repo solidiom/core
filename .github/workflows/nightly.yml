@@ -83,7 +83,7 @@ jobs:
         with:
           name: nightly-browser-traces
           path: test-results/
-          retention-days: 7
+          retention-days: 3
 
   # ─── Visual Baseline Regeneration ──────────────────────────────────────────────
   # Runs inside the pinned Playwright container so screenshot rendering is
@@ -126,7 +126,7 @@ jobs:
         with:
           name: visual-baselines
           path: apps/site/tests/visual/__screenshots__
-          retention-days: 14
+          retention-days: 7
 
   # ─── Dependency Freshness Check ────────────────────────────────────────────────
   # Checks key libraries for available updates and reports drift.
