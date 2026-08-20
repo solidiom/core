@@ -147,10 +147,7 @@ check(
   fileContains(".github/workflows/ci-packages.yml", "gate:quick"),
   "CI must run the quick gate",
 )
-check(
-  "CI has browser test job",
-  fileContains(".github/workflows/ci-packages.yml", "test-browser"),
-)
+check("CI has browser test job", fileContains(".github/workflows/ci-packages.yml", "test-browser"))
 check(
   "Nightly has solid compat matrix",
   fileContains(".github/workflows/nightly.yml", "solid-compat"),
