@@ -4,7 +4,7 @@ import { defineConfig, devices } from "@playwright/test"
 // Load the project root .env so environment variables like NPM_TOKEN are
 // available even when the runner (e.g. mise) doesn't inject them.
 try {
-  process.loadEnvFile(resolve(__dirname, "../../.env"))
+  process.loadEnvFile(resolve(import.meta.dirname, "../../.env"))
 } catch {
   // .env is optional — CI provides variables through other means.
 }
