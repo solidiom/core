@@ -133,14 +133,18 @@ preflight_cloudflare_token() {
     return 0
   fi
 
-  if printf '%s' "$resp" | grep -q '"success":true'; then
+  if printf '%s' "$resp" | grep -Eq '"success"[[:space:]]*:[[:space:]]*true'; then
     step "Cloudflare token can access Pages for this account."
     return 0
   fi
 
+  # Extract the first Cloudflare error code/message for diagnosis. The `|| true`
+  # on each assignment is essential: under `set -e`, a command substitution
+  # whose final pipe element (grep) matches nothing exits non-zero and would
+  # otherwise kill the script silently.
   local code msg
-  code="$(printf '%s' "$resp" | grep -o '"code":[0-9]*' | head -1 | grep -o '[0-9]*')"
-  msg="$(printf '%s' "$resp" | grep -o '"message":"[^"]*"' | head -1 | sed 's/^"message":"//; s/"$//')"
+  code="$(printf '%s' "$resp" | grep -Eo '"code"[[:space:]]*:[[:space:]]*[0-9]+' | head -1 | grep -Eo '[0-9]+' || true)"
+  msg="$(printf '%s' "$resp" | grep -Eo '"message"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed -E 's/.*"message"[[:space:]]*:[[:space:]]*"//; s/"$//' || true)"
 
   case "$code" in
     9109)
