@@ -80,6 +80,84 @@ run() {
   "$@"
 }
 
+# Print instructions for creating a valid Cloudflare API token for Pages deploys.
+cloudflare_token_help() {
+  cat >&2 <<'EOF'
+
+How to generate a valid Cloudflare API token for Pages deploys:
+  1. Open https://dash.cloudflare.com/profile/api-tokens → "Create Token".
+  2. Use the "Create Custom Token" option and grant this permission:
+       Account → Cloudflare Pages → Edit
+  3. Under "Account Resources", scope it to the account you deploy to
+     (CLOUDFLARE_ACCOUNT_ID).
+  4. Leave "Client IP Address Filtering" empty for local use. If you set an IP
+     filter, add your current public IP — otherwise Cloudflare rejects the token
+     with "Cannot use the access token from location" (error 9109).
+  5. Create the token and copy the value. A real API token is a ~40-char opaque
+     string with NO "cfat_" prefix (a "cfat_" value is a Cloudflare ACCESS
+     token — a different product — and will NOT work here).
+  6. Verify it before saving:
+       curl -s -H "Authorization: Bearer <TOKEN>" \
+         https://api.cloudflare.com/client/v4/user/tokens/verify
+     A valid token returns "status":"active".
+  7. Put it in .env as:
+       CLOUDFLARE_API_TOKEN="<token>"
+EOF
+}
+
+# Fail-fast verification that CLOUDFLARE_API_TOKEN is valid, BEFORE the (slow)
+# site build. Uses Cloudflare's own token-verify endpoint so a revoked/expired/
+# wrong-type token is caught immediately with actionable guidance instead of
+# failing at the final `wrangler pages deploy` step after a long build.
+preflight_cloudflare_token() {
+  command -v curl >/dev/null || {
+    warn "curl not found — skipping Cloudflare token pre-flight (wrangler will still validate at deploy)."
+    return 0
+  }
+
+  step "Verifying CLOUDFLARE_API_TOKEN with Cloudflare"
+  local resp
+  resp="$(curl -sS --max-time 15 \
+    -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+    "https://api.cloudflare.com/client/v4/user/tokens/verify" 2>/dev/null || true)"
+
+  if [[ -z "$resp" ]]; then
+    warn "Could not reach the Cloudflare API to verify the token (network issue?)."
+    warn "Proceeding; wrangler will validate the token at deploy time."
+    return 0
+  fi
+
+  # "status":"active" inside a successful response means the token is valid.
+  if printf '%s' "$resp" | grep -q '"status":"active"'; then
+    step "Cloudflare token is valid (status: active)."
+    return 0
+  fi
+
+  # Extract the first Cloudflare error code/message for a precise diagnosis.
+  local code msg
+  code="$(printf '%s' "$resp" | grep -o '"code":[0-9]*' | head -1 | grep -o '[0-9]*')"
+  msg="$(printf '%s' "$resp" | grep -o '"message":"[^"]*"' | head -1 | sed 's/^"message":"//; s/"$//')"
+
+  case "$code" in
+    9109)
+      warn "Cloudflare rejected the token due to an IP restriction (code 9109): ${msg:-location not allowed}."
+      cloudflare_token_help
+      fail "CLOUDFLARE_API_TOKEN is IP-restricted and your current IP is not allowed."
+      ;;
+    1000)
+      warn "Cloudflare reports the token is invalid (code 1000): ${msg:-Invalid API Token}."
+      warn "It may be revoked, expired, or the wrong token type (a 'cfat_' value is a Cloudflare Access token, not an API token)."
+      cloudflare_token_help
+      fail "CLOUDFLARE_API_TOKEN is invalid — see guidance above."
+      ;;
+    *)
+      warn "Cloudflare did not accept the token (code ${code:-unknown}): ${msg:-verification failed}."
+      cloudflare_token_help
+      fail "CLOUDFLARE_API_TOKEN failed verification — see guidance above."
+      ;;
+  esac
+}
+
 # ─── Parse args ──────────────────────────────────────────────────────────────
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -213,7 +291,12 @@ if [[ "$DRY_RUN" == false ]]; then
   fi
   if [[ "$DO_SITE" == true ]]; then
     [[ -n "${CLOUDFLARE_ACCOUNT_ID:-}" ]] || fail "CLOUDFLARE_ACCOUNT_ID is not set — needed to deploy the site"
-    [[ -n "${CLOUDFLARE_API_TOKEN:-}" ]] || fail "CLOUDFLARE_API_TOKEN is not set — needed to deploy the site"
+    if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then
+      cloudflare_token_help
+      fail "CLOUDFLARE_API_TOKEN is not set — needed to deploy the site (see guidance above)"
+    fi
+    # Verify the token now, before the slow site build, so a bad token fails fast.
+    preflight_cloudflare_token
   fi
 fi
 
