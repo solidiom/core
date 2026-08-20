@@ -111,6 +111,45 @@ function loadRegistry(
 }
 
 /**
+ * Convert an exact version resolved from the registry into an install
+ * specifier that tolerates in-range publishes (REL-C1).
+ *
+ * The registry pins an exact version per entry, but a single-package patch or
+ * minor release publishes a newer package to npm *without* regenerating the
+ * registry catalog. Emitting a caret range (`^0.3.0`) instead of an exact pin
+ * (`0.3.0`) lets consumers pick up those in-range releases at install time, so
+ * the metadata catalog no longer has to be rebuilt for every package bump.
+ *
+ * Rules:
+ *   - `latest` / `next` / any dist-tag → returned unchanged (not a version).
+ *   - A version that already carries a range operator (`^`, `~`, `>=`, `*`,
+ *     `x`, `||`, ` - `) → returned unchanged; it is already a range.
+ *   - A pre-release (contains `-`, e.g. `0.3.0-beta.1`) → returned exact.
+ *     Caret ranges do not span pre-release boundaries predictably, so pinning
+ *     is the safe choice while the workspace is on pre-release versions.
+ *   - `0.y.z` → `^0.y.z`. npm caret semantics keep 0.x safe: `^0.3.0` allows
+ *     `>=0.3.0 <0.4.0`, so patch/minor-within-0.3 releases are picked up but a
+ *     breaking 0.4.0 is not.
+ *   - `x.y.z` (x >= 1) → `^x.y.z`.
+ */
+export function toInstallSpecifier(version: string): string {
+  const v = version.trim()
+
+  // Dist-tags and empty strings are not versions.
+  if (v === "" || !/^\d/.test(v)) return v
+
+  // Already a range specifier — leave it alone.
+  if (/[\^~*x]|>=|<=|>|<|\|\||\s-\s/.test(v)) return v
+
+  // Pre-release identifiers: pin exactly rather than caret-ranging across a
+  // pre-release boundary, whose semver precedence is surprising.
+  if (v.includes("-")) return v
+
+  // Plain semver → caret range.
+  return `^${v}`
+}
+
+/**
  * Resolve the version of a package from:
  * 1. Registry catalog entry
  * 2. node_modules/<pkg>/package.json
@@ -294,37 +333,41 @@ export function runPlan(options: PlanOptions): Plan {
     }
   }
 
-  // Resolve real versions for each entry
+  // Resolve real versions for each entry. Registry/node_modules versions are
+  // exact; toInstallSpecifier widens them to caret ranges so in-range single
+  // package releases are picked up without regenerating the registry (REL-C1).
   const primitiveVersion = resolveVersion(`@solidiom/${primitive}`, cwd, entry.version)
 
   const entries: PlanEntry[] = [
     {
       package: `@solidiom/${primitive}`,
-      version: primitiveVersion,
+      version: toInstallSpecifier(primitiveVersion),
       isAdapter: false,
       reason: "requested",
     },
     ...entry.deps.map((dep) => ({
       package: dep,
-      version: resolveVersion(dep, cwd),
+      version: toInstallSpecifier(resolveVersion(dep, cwd)),
       isAdapter: false,
       reason: "dependency",
     })),
     ...entry.adapters.map((adapter) => ({
       package: adapter,
-      version: resolveVersion(adapter, cwd),
+      version: toInstallSpecifier(resolveVersion(adapter, cwd)),
       isAdapter: true,
       reason: "capability",
     })),
   ]
 
-  // Validate against policy
+  // Validate against policy. Policy versions and resolved specifiers may both
+  // carry a range operator, so compare on the normalized base version.
   const violations: string[] = []
   for (const e of entries) {
     const allowed = policy.allowedPrimitiveVersions[e.package]
     if (allowed) {
       const allowedBase = allowed.replace(/^[\^~]/, "")
-      if (!e.version.startsWith(allowedBase)) {
+      const resolvedBase = e.version.replace(/^[\^~]/, "")
+      if (!resolvedBase.startsWith(allowedBase)) {
         violations.push(`${e.package}@${e.version} not allowed by policy (requires ${allowed})`)
       }
     }

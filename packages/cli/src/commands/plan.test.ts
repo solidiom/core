@@ -2,7 +2,38 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, rmSync } from "node:fs"
 import { join } from "node:path"
 import { tmpdir } from "node:os"
-import { runPlan } from "./plan"
+import { runPlan, toInstallSpecifier } from "./plan"
+
+describe("toInstallSpecifier (REL-C1)", () => {
+  it("widens a plain 0.x version into a caret range", () => {
+    expect(toInstallSpecifier("0.3.0")).toBe("^0.3.0")
+  })
+
+  it("widens a plain >=1 version into a caret range", () => {
+    expect(toInstallSpecifier("1.4.2")).toBe("^1.4.2")
+  })
+
+  it("pins pre-release versions exactly", () => {
+    expect(toInstallSpecifier("0.0.1-next.0")).toBe("0.0.1-next.0")
+    expect(toInstallSpecifier("0.3.0-beta.1")).toBe("0.3.0-beta.1")
+  })
+
+  it("passes dist-tags through unchanged", () => {
+    expect(toInstallSpecifier("latest")).toBe("latest")
+    expect(toInstallSpecifier("next")).toBe("next")
+  })
+
+  it("leaves an already-ranged specifier unchanged", () => {
+    expect(toInstallSpecifier("^0.3.0")).toBe("^0.3.0")
+    expect(toInstallSpecifier("~1.2.0")).toBe("~1.2.0")
+    expect(toInstallSpecifier(">=1.0.0")).toBe(">=1.0.0")
+    expect(toInstallSpecifier("1.x")).toBe("1.x")
+  })
+
+  it("handles empty input without crashing", () => {
+    expect(toInstallSpecifier("")).toBe("")
+  })
+})
 
 describe("runPlan", () => {
   let cwd: string

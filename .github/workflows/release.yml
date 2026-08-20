@@ -1,14 +1,34 @@
 name: Release
 
-# Consolidated production release workflow. It can publish packages, deploy the
-# site, or perform both actions with a configurable release gate.
+# Production release workflow. The release model is split in two so that a
+# release run NEVER mutates the repository:
+#
+#   1. Versioning happens first, in a reviewable "Version PR" (see version.yml).
+#      That PR is where package.json versions, CHANGELOGs, and the regenerated
+#      registry churn lives. You review and merge it like any other PR.
+#   2. Publishing happens here, triggered by a pushed `v*` tag. The tree at that
+#      tag already carries the final versions, so this workflow only builds,
+#      signs, publishes, and uploads artifacts — it does not run
+#      `changeset version` and it does not commit anything back.
+#
+# Triggers:
+#   - push tag `v*`          → publish packages at that tag (git read-only).
+#   - workflow_dispatch      → manual escape hatch: publish packages from the
+#                              dispatched ref and/or deploy the site.
+#
+# "If CI passes I can trigger a release": merge the Version PR (CI green) → a
+# `v*` tag is created → this workflow publishes to npmjs.com.
 
 on:
+  push:
+    tags:
+      - "v*"
   workflow_dispatch:
     inputs:
       target:
         description: "What to release"
         required: true
+        default: "packages"
         type: choice
         options:
           - packages
@@ -22,6 +42,14 @@ on:
         options:
           - quick
           - full
+      dist_tag:
+        description: "npm dist-tag to publish under"
+        required: false
+        default: "beta"
+        type: choice
+        options:
+          - beta
+          - latest
 
 concurrency:
   group: release-${{ github.ref }}
@@ -34,8 +62,8 @@ env:
 
 jobs:
   # ─── Determine what to do ──────────────────────────────────────────────────────
-  # Push events on site paths → site-only deploy (no gate needed).
-  # Dispatch → respect inputs.
+  # Tag push          → publish packages, gate=quick, dist-tag from tag shape.
+  # Dispatch          → respect inputs.
 
   plan:
     runs-on: self-hosted-dfw-flex
@@ -44,39 +72,96 @@ jobs:
       deploy_site: ${{ steps.plan.outputs.deploy_site }}
       run_gate: ${{ steps.plan.outputs.run_gate }}
       gate_level: ${{ steps.plan.outputs.gate_level }}
+      dist_tag: ${{ steps.plan.outputs.dist_tag }}
     steps:
       - id: plan
         run: |
-          # Manual dispatch only.
-          TARGET="${{ inputs.target }}"
-          GATE="${{ inputs.gate }}"
-          case "$TARGET" in
-            packages)
-              echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
-              echo "deploy_site=false" >> "$GITHUB_OUTPUT"
-              ;;
-            site)
-              echo "deploy_packages=false" >> "$GITHUB_OUTPUT"
-              echo "deploy_site=true" >> "$GITHUB_OUTPUT"
-              ;;
-            all)
-              echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
-              echo "deploy_site=true" >> "$GITHUB_OUTPUT"
-              ;;
-          esac
-          # Gate is required for package publishing, optional for site-only
-          if [ "$TARGET" = "site" ]; then
-            echo "run_gate=false" >> "$GITHUB_OUTPUT"
-          else
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # Tag-triggered publish. The tree at the tag is already versioned by
+            # the merged Version PR, so publish packages with a quick gate.
+            echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
+            echo "deploy_site=false" >> "$GITHUB_OUTPUT"
             echo "run_gate=true" >> "$GITHUB_OUTPUT"
+            echo "gate_level=quick" >> "$GITHUB_OUTPUT"
+
+            # A tag like `v0.3.0` publishes `latest`; a pre-release tag like
+            # `v0.3.0-beta.1` publishes `beta`.
+            TAG="${GITHUB_REF_NAME}"
+            if printf '%s' "$TAG" | grep -q -- '-'; then
+              echo "dist_tag=beta" >> "$GITHUB_OUTPUT"
+            else
+              echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            # Manual dispatch.
+            TARGET="${{ inputs.target }}"
+            case "$TARGET" in
+              packages)
+                echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
+                echo "deploy_site=false" >> "$GITHUB_OUTPUT"
+                ;;
+              site)
+                echo "deploy_packages=false" >> "$GITHUB_OUTPUT"
+                echo "deploy_site=true" >> "$GITHUB_OUTPUT"
+                ;;
+              all)
+                echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
+                echo "deploy_site=true" >> "$GITHUB_OUTPUT"
+                ;;
+            esac
+            # Gate is required for package publishing, optional for site-only.
+            if [ "$TARGET" = "site" ]; then
+              echo "run_gate=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "run_gate=true" >> "$GITHUB_OUTPUT"
+            fi
+            echo "gate_level=${{ inputs.gate }}" >> "$GITHUB_OUTPUT"
+            echo "dist_tag=${{ inputs.dist_tag }}" >> "$GITHUB_OUTPUT"
           fi
-          echo "gate_level=$GATE" >> "$GITHUB_OUTPUT"
+
+  # ─── Guard: tag must match committed versions ──────────────────────────────────
+  # A tag-triggered publish publishes whatever versions are committed at the tag.
+  # This guard fails fast if the tag name does not correspond to a package
+  # version present in the tree, catching a tag pushed before the Version PR
+  # merged (the classic "published the wrong thing" footgun).
+
+  verify-tag:
+    needs: plan
+    if: github.event_name == 'push'
+    runs-on: self-hosted-dfw-flex
+    steps:
+      - uses: actions/checkout@v5
+      - name: Assert tag matches a committed package version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          echo "Tag version: $TAG"
+          MATCH=$(node -e '
+            const { readdirSync, readFileSync, existsSync } = require("node:fs");
+            const tag = process.argv[1];
+            const dir = "packages";
+            let found = false;
+            for (const d of readdirSync(dir, { withFileTypes: true })) {
+              if (!d.isDirectory()) continue;
+              const p = `${dir}/${d.name}/package.json`;
+              if (!existsSync(p)) continue;
+              const pkg = JSON.parse(readFileSync(p, "utf8"));
+              if (pkg.private) continue;
+              if (pkg.version === tag) { found = true; break; }
+            }
+            process.stdout.write(found ? "yes" : "no");
+          ' "$TAG")
+          if [ "$MATCH" != "yes" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match any committed publishable package version ($TAG). Merge the Version PR before tagging."
+            exit 1
+          fi
+          echo "Tag matches a committed package version."
 
   # ─── Gate ──────────────────────────────────────────────────────────────────────
 
   gate:
-    needs: plan
-    if: needs.plan.outputs.run_gate == 'true'
+    needs: [plan, verify-tag]
+    # verify-tag is skipped on dispatch; allow the gate to proceed then.
+    if: always() && needs.plan.outputs.run_gate == 'true' && (needs.verify-tag.result == 'success' || needs.verify-tag.result == 'skipped')
     runs-on: self-hosted-dfw-flex
     steps:
       - uses: actions/checkout@v5
@@ -93,14 +178,17 @@ jobs:
           fi
 
   # ─── Publish Packages ─────────────────────────────────────────────────────────
+  # Git read-only. The tree is already at its final versions (from the merged
+  # Version PR), so this job does NOT run `changeset version` and does NOT
+  # commit or push anything. It builds, signs, publishes exactly what is
+  # committed, and uploads immutable artifacts.
 
   publish-packages:
     needs: [plan, gate]
     if: always() && needs.plan.outputs.deploy_packages == 'true' && (needs.gate.result == 'success' || needs.gate.result == 'skipped')
     runs-on: self-hosted-dfw-flex
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
       id-token: write
     steps:
       - uses: actions/checkout@v5
@@ -113,7 +201,8 @@ jobs:
       - name: Build packages
         run: pnpm nx run-many -t build --exclude=@solidiom/site
 
-      # REG-008: Sign the registry index with Ed25519
+      # REG-008: Sign the registry index with Ed25519 (regenerates the signature
+      # over the already-committed registry content; does not change versions).
       - name: Sign registry index
         env:
           REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
@@ -122,26 +211,14 @@ jobs:
       - name: Verify signed registry index
         run: node packages/cli/dist/bin.js verify --registry
 
-      # Apply changeset versions
-      - name: Apply changeset versions
-        run: |
-          if ls .changeset/*.md 2>/dev/null | grep -qv "README.md"; then
-            pnpm changeset version
-          else
-            echo "No pending changesets — skipping version bump"
-          fi
-
-      # Rebuild with final versions
-      - name: Rebuild with versioned packages
-        run: pnpm nx run-many -t build --exclude=@solidiom/site
-
-      # Publish to npm
+      # Publish the versions exactly as committed at this ref. No `changeset
+      # version` — versioning already happened in the merged Version PR.
       - name: Publish packages
-        run: pnpm changeset publish --tag beta
+        run: pnpm changeset publish --tag ${{ needs.plan.outputs.dist_tag }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # Generate and verify beta artifacts
+      # Generate and verify release artifacts (audit trail; not consumed by the CLI).
       - name: Generate beta artifacts
         run: pnpm exec tsx tools/generate-beta-artifacts.ts --verify
 
@@ -153,21 +230,12 @@ jobs:
       - name: Upload release artifacts
         uses: actions/upload-artifact@v6
         with:
-          name: beta-release-artifacts
+          name: release-artifacts
           path: |
             artifacts/beta-catalog.json
             artifacts/beta-pointer.json
             registry/index.json
           retention-days: 30
-
-      # Commit version bumps and changelogs back to main
-      - name: Commit release changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add packages/*/package.json packages/*/CHANGELOG.md apps/*/package.json .changeset/ pnpm-lock.yaml registry/
-          git commit -m "chore(release): publish beta packages" || echo "No changes to commit"
-          git push
 
   # ─── Deploy Site ───────────────────────────────────────────────────────────────
 
@@ -204,7 +272,6 @@ jobs:
         run: pnpm --filter @solidiom/site search-index
 
       - name: Deploy to Cloudflare Pages
-        if: github.ref == 'refs/heads/main'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
