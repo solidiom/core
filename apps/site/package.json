@@ -30,9 +30,9 @@
     "verify:preview": "tsx ./tools/verify-preview-deployment.ts"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.9",
-    "@astrojs/markdown-remark": "7.2.1",
-    "@astrojs/mdx": "7.0.3",
+    "@astrojs/check": "0.9.10",
+    "@astrojs/markdown-remark": "7.2.4",
+    "@astrojs/mdx": "7.0.7",
     "@astrojs/sitemap": "3.7.3",
     "@solidiom/accordion": "workspace:*",
     "@solidiom/alert": "workspace:*",
@@ -89,17 +89,17 @@
     "@solidiom/visually-hidden": "workspace:*",
     "@solidjs/web": "catalog:",
     "@tailwindcss/vite": "4.3.3",
-    "astro": "7.1.3",
+    "astro": "7.2.4",
     "cookie": "2.0.1",
     "github-slugger": "2.0.0",
     "hastscript": "9.0.1",
-    "shiki": "3.23.0",
+    "shiki": "4.4.3",
     "solid-js": "catalog:",
     "tailwindcss": "4.3.3",
     "unist-util-visit": "5.1.0"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.10.0",
+    "@axe-core/playwright": "4.13.0",
     "@playwright/test": "1.62.1",
     "@types/hast": "3.0.5",
     "@typescript-eslint/parser": "^8.65.0",

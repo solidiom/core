@@ -52,7 +52,7 @@ const documentationLocaleSchema = z.object({
 
 const manifestDocumentationSchema = z.object({
   status: z.enum(["stub", "draft", "review", "complete"]),
-  locales: z.record(documentationLocaleSchema),
+  locales: z.record(z.string(), documentationLocaleSchema),
 })
 
 const manifestStylingSchema = z.object({
@@ -110,7 +110,7 @@ const registryPrimitiveSummarySchema = z.object({
     evidenceIds: z.array(z.string()),
   }),
   documentationStatus: z.enum(["none", "stub", "draft", "review", "complete"]),
-  documentationLocales: z.record(documentationLocaleSchema),
+  documentationLocales: z.record(z.string(), documentationLocaleSchema),
   stylingOutputs: z.array(stylingProfileSchema),
   themeCompatible: z.array(z.string()),
   searchKeywords: z.array(z.string()),
@@ -133,7 +133,7 @@ const registryComponentSummarySchema = z.object({
   status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
   deliverables: z.array(deliverableSchema),
   documentationStatus: z.enum(["none", "stub", "draft", "review", "complete"]),
-  documentationLocales: z.record(documentationLocaleSchema),
+  documentationLocales: z.record(z.string(), documentationLocaleSchema),
   stylingOutputs: z.array(stylingProfileSchema),
   primitiveDependency: z.string().min(1),
   searchKeywords: z.array(z.string()),
@@ -148,7 +148,7 @@ const registryBlockSummarySchema = z.object({
   status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
   deliverables: z.array(deliverableSchema),
   documentationStatus: z.enum(["none", "stub", "draft", "review", "complete"]),
-  documentationLocales: z.record(documentationLocaleSchema),
+  documentationLocales: z.record(z.string(), documentationLocaleSchema),
   componentDependencies: z.array(z.string()),
   searchKeywords: z.array(z.string()),
 })
@@ -162,7 +162,7 @@ const registryTemplateSummarySchema = z.object({
   status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
   deliverables: z.array(deliverableSchema),
   documentationStatus: z.enum(["none", "stub", "draft", "review", "complete"]),
-  documentationLocales: z.record(documentationLocaleSchema),
+  documentationLocales: z.record(z.string(), documentationLocaleSchema),
   searchKeywords: z.array(z.string()),
 })
 
@@ -175,7 +175,7 @@ const registryThemeSummarySchema = z.object({
   status: z.enum(["experimental", "preview", "stable", "deprecated"]).optional(),
   deliverables: z.array(deliverableSchema),
   documentationStatus: z.enum(["none", "stub", "draft", "review", "complete"]),
-  documentationLocales: z.record(documentationLocaleSchema),
+  documentationLocales: z.record(z.string(), documentationLocaleSchema),
   searchKeywords: z.array(z.string()),
 })
 
@@ -198,7 +198,7 @@ export type RegistryPrimitiveSummary = z.infer<typeof registryPrimitiveSummarySc
 const manifestIntegritySchema = z.object({
   algorithm: z.literal("sha256"),
   filesHash: z.string().regex(/^[0-9a-f]{64}$/),
-  fileDigests: z.record(z.string().regex(/^[0-9a-f]{64}$/)),
+  fileDigests: z.record(z.string(), z.string().regex(/^[0-9a-f]{64}$/)),
   manifestSignature: z.string().optional(),
   lastGenerated: z.string(),
 })

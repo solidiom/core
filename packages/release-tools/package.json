@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@sigstore/sign": "^5.0.0",
-    "@sigstore/verify": "4.1.0",
+    "@sigstore/verify": "4.1.2",
     "@types/node": "^20.19.0"
   }
 }
