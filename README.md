@@ -248,6 +248,40 @@ The `recipes-tailwind` stylesheets use `@apply` with theme-aware utility classes
 
 The recipe CSS files do **not** include `@reference "tailwindcss"` — they rely on the consumer's context to resolve utilities. This is intentional for portability across different theme configurations.
 
+## AI-Assisted Contributions
+
+AI-assisted and AI-generated contributions are welcome in this project.
+
+We consider AI tools—including coding assistants, large language models, and autonomous or semi-autonomous development agents—to be development tools. Code, documentation, tests, designs, issues, pull requests, and other content produced wholly or partially with AI assistance will be evaluated on the **same technical merits and community standards as any other contribution**.
+
+The use of AI neither disqualifies a contribution nor lowers the standards required for acceptance.
+
+Contributors remain responsible for everything they submit. In particular, contributors are expected to:
+
+- **Understand and stand behind their contribution.** Contributors should be able to explain, review, modify, and maintain the work they submit.
+- **Verify correctness and quality.** AI-generated output must receive appropriate human review, testing, and validation before submission.
+- **Comply with project licensing requirements.** The terms of any AI tool used must not impose restrictions that conflict with this project's license or contribution policies.
+- **Respect copyright and intellectual property.** Contributors must ensure that generated content does not improperly incorporate third-party copyrighted material.
+- **Provide required attribution and provenance.** Third-party code, content, or other material must retain any attribution, notices, or licensing information required by its license.
+- **Meet security and maintainability standards.** AI assistance does not exempt a contribution from security review, testing, documentation, architectural requirements, CI checks, or normal code review.
+- **Avoid shifting the review burden to maintainers.** Large volumes of unreviewed, low-quality, unexplained, or mechanically generated contributions may be rejected regardless of whether AI was involved.
+
+The core principle is:
+
+> **AI assistance is welcome; contributor responsibility remains with the human submitting the contribution.**
+
+AI should be used to augment engineering judgment, not replace it. Maintainers may request additional explanation, testing, provenance information, or disclosure of significant AI assistance when reasonably necessary to evaluate a contribution.
+
+This policy is intentionally aligned with the broader open-source approach advocated by the Linux Foundation and reflected in CNCF community guidance: AI-generated contributions can participate in normal open-source development, provided they meet the same expectations for quality, security, licensing, provenance, accountability, and human review.
+
+### Related guidance
+
+- **Linux Foundation — Guidance Regarding Use of Generative AI Tools for Open Source Software Development:** [Linux Foundation Generative AI Policy](https://www.linuxfoundation.org/legal/generative-ai)
+- **CNCF — Sustaining Open Source in the Age of Generative AI:** [CNCF: Sustaining Open Source in the Age of Generative AI](https://www.cncf.io/blog/2026/03/10/sustaining-open-source-in-the-age-of-generative-ai/)
+- **CNCF — The State of AI in CNCF Projects:** [CNCF: The State of AI in CNCF Projects](https://www.cncf.io/blog/2026/04/29/the-state-of-ai-in-cncf-projects-a-first-look-at-the-data/)
+
+Individual projects and organizations may establish additional requirements for AI-assisted contributions where appropriate.
+
 ## License
 
 Apache 2.0 — see [LICENSE](LICENSE) for details. Documentation is licensed under [CC BY 4.0](LICENSE-DOCS).
