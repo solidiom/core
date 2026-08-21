@@ -7,22 +7,42 @@
  *   - Resources: Docs, GitHub, Changelog, Blog
  *   - Community: Contributing, Code of Conduct
  *   - Stay up to date: GitHub icon (newsletter form disabled until GA)
+ *
+ * Internal links are locale-prefixed from the active route locale; the
+ * Contributing link targets the on-site guide (`/community/contributing/`),
+ * and Code of Conduct points at the Contributor Covenant we follow.
  */
+import { localePrefix, type Locale } from "../lib/locale"
 
-const year = new Date().getFullYear()
+interface Props {
+  locale?: Locale
+}
+
+const { locale = "en" } = Astro.props
+const prefix = localePrefix(locale)
+const isEs = locale === "es"
+
+const columnTitles = {
+  resources: isEs ? "Recursos" : "Resources",
+  community: isEs ? "Comunidad" : "Community",
+  subscribe: isEs ? "Mantente al día" : "Stay up to date",
+}
 
 const resourceLinks = [
-  { label: "Docs", href: "/primitives/" },
+  { label: "Docs", href: `${prefix}/primitives/` },
   { label: "GitHub", href: "https://github.com/solidiom/core" },
-  { label: "Changelog", href: "/changelog/" },
-  { label: "Blog", href: "/blog/" },
+  { label: "Changelog", href: `${prefix}/changelog/` },
+  { label: "Blog", href: `${prefix}/blog/` },
 ]
 
 const communityLinks = [
-  { label: "Contributing", href: "https://github.com/solidiom/core/blob/main/CONTRIBUTING.md" },
   {
-    label: "Code of Conduct",
-    href: "https://github.com/solidiom/core/blob/main/CONTRIBUTING.md",
+    label: isEs ? "Contribuir" : "Contributing",
+    href: `${prefix}/community/contributing/`,
+  },
+  {
+    label: isEs ? "Código de conducta" : "Code of Conduct",
+    href: "https://www.contributor-covenant.org/version/2/1/code_of_conduct/",
   },
 ]
 ---
@@ -44,14 +64,27 @@ const communityLinks = [
         <span class="site-footer__wordmark">Solidiom</span>
       </div>
       <p class="site-footer__description">
-        Solidiom is an open source project.<br />
-        Licensed under Apache 2.0.
+        {
+          isEs ? (
+            <>
+              Solidiom es un proyecto de código abierto.
+              <br />
+              Licenciado bajo Apache 2.0.
+            </>
+          ) : (
+            <>
+              Solidiom is an open source project.
+              <br />
+              Licensed under Apache 2.0.
+            </>
+          )
+        }
       </p>
     </div>
 
     <!-- Resources Column -->
-    <nav class="site-footer__col" aria-label="Resources">
-      <p class="site-footer__col-title">Resources</p>
+    <nav class="site-footer__col" aria-label={columnTitles.resources}>
+      <p class="site-footer__col-title">{columnTitles.resources}</p>
       <ul class="site-footer__list">
         {
           resourceLinks.map((link) => (
@@ -64,8 +97,8 @@ const communityLinks = [
     </nav>
 
     <!-- Community Column -->
-    <nav class="site-footer__col" aria-label="Community">
-      <p class="site-footer__col-title">Community</p>
+    <nav class="site-footer__col" aria-label={columnTitles.community}>
+      <p class="site-footer__col-title">{columnTitles.community}</p>
       <ul class="site-footer__list">
         {
           communityLinks.map((link) => (
@@ -79,9 +112,13 @@ const communityLinks = [
 
     <!-- Stay up to date Column -->
     <div class="site-footer__col site-footer__subscribe">
-      <p class="site-footer__col-title">Stay up to date</p>
+      <p class="site-footer__col-title">{columnTitles.subscribe}</p>
       <p class="site-footer__subscribe-copy">
-        Get updates on new releases, components, and guides.
+        {
+          isEs
+            ? "Recibe novedades sobre nuevas versiones, componentes y guías."
+            : "Get updates on new releases, components, and guides."
+        }
       </p>
       <!-- Newsletter form disabled until GA
       <form class="site-footer__form" aria-label="Newsletter signup">
@@ -99,7 +136,9 @@ const communityLinks = [
         </div>
       </form>
       -->
-      <p class="site-footer__subscribe-copy" style="font-style: italic;">Newsletter coming soon.</p>
+      <p class="site-footer__subscribe-copy" style="font-style: italic;">
+        {isEs ? "Boletín próximamente." : "Newsletter coming soon."}
+      </p>
 
       <!-- Social Icons -->
       <div class="site-footer__social">
