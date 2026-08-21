@@ -160,7 +160,7 @@ const homeHref = resolveEquivalentLocalePath("/", locale) ?? "/"
     <main id={mainId} class="focus-root" tabindex="-1">
       <slot />
     </main>
-    {showFooter && <SiteFooter />}
+    {showFooter && <SiteFooter locale={locale} />}
     <script is:inline>
       {
         ;`document.addEventListener("click", (event) => {
