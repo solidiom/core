@@ -21,7 +21,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tanstack/virtual-core": "3.17.5"
+    "@tanstack/virtual-core": "3.17.8"
   },
   "nx": {
     "tags": [

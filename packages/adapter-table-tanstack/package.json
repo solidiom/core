@@ -21,7 +21,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tanstack/table-core": "8.21.3"
+    "@tanstack/table-core": "9.1.2"
   },
   "nx": {
     "tags": [

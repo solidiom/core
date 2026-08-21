@@ -33,7 +33,7 @@ export const PolicySchema = z.object({
   /** Signature verification mode. */
   signatureMode: z.enum(["sigstore", "trusted-keys", "none"]).optional().default("none"),
   /** Allowed primitive version ranges. */
-  allowedPrimitiveVersions: z.record(z.string()).optional().default({}),
+  allowedPrimitiveVersions: z.record(z.string(), z.string()).optional().default({}),
   /** Trusted identities for sigstore verification. */
   trustedIdentities: z.array(z.string()).optional().default([]),
   /** When true, `solidiom verify --registry` fails closed if the registry index is unsigned. */

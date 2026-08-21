@@ -27,11 +27,11 @@
     "@clack/prompts": "1.7.0",
     "@sigstore/bundle": "5.0.0",
     "@sigstore/tuf": "5.0.0",
-    "@sigstore/verify": "4.1.0",
+    "@sigstore/verify": "4.1.2",
     "clipanion": "4.0.0-rc.4",
     "picocolors": "1.1.1",
-    "ts-morph": "24.0.0",
-    "zod": "^3.23.0"
+    "ts-morph": "28.0.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^20.19.0"

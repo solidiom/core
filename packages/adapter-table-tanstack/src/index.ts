@@ -8,17 +8,42 @@
  */
 
 import {
-  createTable,
-  getCoreRowModel,
-  getSortedRowModel,
-  getFilteredRowModel,
-  type Table,
-  type TableOptionsResolved,
+  columnFilteringFeature,
+  constructTable,
+  createCoreRowModel,
+  createFilteredRowModel,
+  createSortedRowModel,
+  filterFn_includesString,
+  rowSortingFeature,
+  sortFn_alphanumeric,
+  tableFeatures,
   type ColumnDef,
-  type SortingState,
   type ColumnFiltersState,
   type RowModel,
+  type SortingState,
+  type Table,
 } from "@tanstack/table-core"
+import { storeReactivityBindings } from "@tanstack/table-core/store-reactivity-bindings"
+
+/**
+ * TanStack Table v9 is feature-modular: row models and behavior plugins are
+ * registered once on a `tableFeatures(...)` object rather than passed as
+ * per-call `getCoreRowModel()` options (the v8 shape). The core row model is
+ * implicit; sorting and filtering are opt-in via their feature + row model.
+ */
+const tableAdapterFeatures = tableFeatures({
+  coreReactivityFeature: storeReactivityBindings(),
+  coreRowModel: createCoreRowModel(),
+  rowSortingFeature,
+  sortedRowModel: createSortedRowModel(),
+  sortFns: { alphanumeric: sortFn_alphanumeric },
+  columnFilteringFeature,
+  filteredRowModel: createFilteredRowModel(),
+  filterFns: { includesString: filterFn_includesString },
+})
+
+type AdapterFeatures = typeof tableAdapterFeatures
+type Data = Record<string, unknown>
 
 // ─── Capability interface ─────────────────────────────────────────────────────
 
@@ -65,12 +90,12 @@ export interface TableModelCapability {
 // ─── Adapter implementation ───────────────────────────────────────────────────
 
 export function createTanStackTableAdapter(): TableModelCapability {
-  let table: Table<Record<string, unknown>> | null = null
+  let table: Table<AdapterFeatures, Data> | null = null
 
   function compute(input: TableComputeInput): TableComputeResult {
     const { data, columns, sort, filters } = input
 
-    const columnDefs: ColumnDef<Record<string, unknown>>[] = columns.map((col) => ({
+    const columnDefs: ColumnDef<AdapterFeatures, Data>[] = columns.map((col) => ({
       id: col.id,
       header: col.header,
       accessorKey: col.accessorKey,
@@ -85,24 +110,19 @@ export function createTanStackTableAdapter(): TableModelCapability {
       value: f.value,
     }))
 
-    // TanStack Table requires a full options object with state + callbacks.
-    const options: TableOptionsResolved<Record<string, unknown>> = {
+    // v9 tables register features up front; state + data flow through options.
+    table = constructTable<AdapterFeatures, Data>({
+      features: tableAdapterFeatures,
       data,
       columns: columnDefs,
       state: {
         sorting,
         columnFilters,
       },
-      onStateChange: () => {},
-      getCoreRowModel: getCoreRowModel(),
-      getSortedRowModel: getSortedRowModel(),
-      getFilteredRowModel: filters?.length ? getFilteredRowModel() : undefined,
       renderFallbackValue: undefined,
-    }
+    })
 
-    table = createTable(options)
-
-    const rowModel: RowModel<Record<string, unknown>> = table.getRowModel()
+    const rowModel: RowModel<AdapterFeatures, Data> = table.getRowModel()
 
     const rows: TableRow[] = rowModel.rows.map((row) => ({
       id: row.id,
