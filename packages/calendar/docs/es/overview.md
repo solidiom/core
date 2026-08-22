@@ -19,9 +19,7 @@ notApplicable:
   - section: testing
     reason: La guía estándar de pruebas cubre este primitivo.
 translationSourceHash: "b5e2becdece40080b72fbd07ed88eec704e63c7ad377f864fee5b807166370ec"
-translationStatus: "human-reviewed"
-translationReviewedBy: "solidiom-team"
-translationReviewedAt: "2026-08-18"
+translationStatus: "stale"
 ---
 
 Date selection with day/month/year views.
@@ -51,6 +49,35 @@ Calendar expone 7 partes:
 - **NextButton** — `data-part="nextbutton"`.
 - **Grid** — `data-part="grid"`.
 - **Cell** — `data-part="cell"`.
+
+## RangeCalendar
+
+El paquete también exporta **RangeCalendar** — una variante de selección de rango con semántica de inicio/fin/reinicio. Su contrato de valor es `{ start: DateValue; end?: DateValue }`: el primer clic fija `start`, el segundo fija `end`, y un tercer clic reinicia el ciclo con un nuevo `start`. Reutiliza la cuadrícula compartida, la aritmética de fechas, el foco, la localización, el RTL y las fechas deshabilitadas de Calendar, y lleva `data-scope="range-calendar"`.
+
+```tsx
+import * as Calendar from "@solidiom/calendar"
+
+;<Calendar.RangeRoot onValueChange={(range) => console.log(range)}>
+  <Calendar.RangeHeader>
+    <Calendar.RangePrevButton />
+    <Calendar.RangeTitle />
+    <Calendar.RangeNextButton />
+  </Calendar.RangeHeader>
+  <Calendar.RangeGrid>{/* renderiza las semanas de Calendar.RangeCell */}</Calendar.RangeGrid>
+</Calendar.RangeRoot>
+```
+
+RangeCalendar expone 7 partes, reflejando las de Calendar:
+
+- **RangeRoot** — `data-part="root"`. Gestiona el estado de selección de rango, la navegación por meses y el foco.
+- **RangeHeader** — `data-part="header"`.
+- **RangePrevButton** — `data-part="prevbutton"`.
+- **RangeTitle** — `data-part="title"`.
+- **RangeNextButton** — `data-part="nextbutton"`.
+- **RangeGrid** — `data-part="grid"`.
+- **RangeCell** — `data-part="cell"`.
+
+El hook `useRangeCalendarContext` y el tipo `RangeValue` se exportan para composición avanzada.
 
 ## Estilos
 

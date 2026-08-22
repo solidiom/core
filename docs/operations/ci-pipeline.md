@@ -1,58 +1,72 @@
 # CI Pipeline
 
-> Architecture and local reproduction guide for the three-workflow CI/release strategy.
+> Architecture and local reproduction guide for the split-target CI/release strategy.
 
 ## Overview
 
-Solidiom uses tiered validation to keep pull-request feedback fast while retaining broad compatibility and release coverage:
+Solidiom splits package and site validation into two independent workflows, each with a fast and a full tier, keeping feedback fast while retaining broad compatibility and release coverage:
 
-- **Pull requests:** format, typecheck, package build, Node tests on Node 24, Chromium browser tests, quick gate, and protected previews for internal PRs.
-- **Pushes to `main` and manual CI:** the PR checks plus Node 26, accessibility evidence, site build/E2E/visual/Lighthouse, offline CLI smoke tests, catalog gates, and the full gate.
-- **Nightly:** Solid version matrix, Chromium/Firefox/WebKit component tests, dependency freshness, and optional visual-baseline regeneration.
+- **`ci-packages.yml` (fast tier, `full_matrix=false`):** format, typecheck, package build, Node tests on Node 24, Chromium browser tests, and the quick gate.
+- **`ci-packages.yml` (full tier, `full_matrix=true`):** the fast checks plus the Node 24/26 matrix, accessibility evidence, offline CLI smoke tests, catalog gates, and the full gate.
+- **`ci-site.yml` (fast tier, `full_matrix=false`):** site check and site build only.
+- **`ci-site.yml` (full tier, `full_matrix=true`):** the site check/build plus E2E, visual, Lighthouse, and the vertical-slice gate.
+- **`nightly.yml`:** Solid version matrix, Chromium/Firefox/WebKit component tests, dependency freshness, and optional visual-baseline regeneration.
+
+> **Triggers:** `ci-packages.yml` and `ci-site.yml` are currently `workflow_dispatch` (manual) only. Their `push`/`pull_request` triggers and `paths` filters are present but commented out in each workflow; re-enable them to activate automatic per-PR and per-push runs. Jobs run on the `self-hosted-dfw-flex` runner.
 
 ## Workflows
 
-| File          | Trigger                                          | Purpose                                                      |
-| ------------- | ------------------------------------------------ | ------------------------------------------------------------ |
-| `ci.yml`      | Pull requests; pushes to `main`; manual dispatch | Tiered validation and internal PR preview deployments        |
-| `release.yml` | Site-path pushes to `main`; manual dispatch      | Unified production package release, site deployment, or both |
-| `nightly.yml` | Daily 04:00 UTC; manual dispatch                 | Full compatibility and environment-sensitive coverage        |
+| File              | Trigger                                     | Purpose                                                                 |
+| ----------------- | ------------------------------------------- | ----------------------------------------------------------------------- |
+| `ci-packages.yml` | Manual dispatch (push/PR triggers dormant)  | Package build, tests, accessibility, CLI smoke, catalog + quality gates |
+| `ci-site.yml`     | Manual dispatch (push/PR triggers dormant)  | Site check, build, E2E, visual, Lighthouse, vertical-slice gate         |
+| `release.yml`     | Site-path pushes to `main`; manual dispatch | Unified production package release, site deployment, or both            |
+| `nightly.yml`     | Daily 04:00 UTC; manual dispatch            | Full compatibility and environment-sensitive coverage                   |
 
-`release.yml` receives `target` (`packages`, `site`, `all`) and `gate` (`quick`, `full`) inputs. Its automatic `main` trigger is site-only and is limited to site, template, registry, package-doc, and documentation paths.
+`ci-packages.yml` accepts `affected_only` (run only nx-affected packages) and `full_matrix` (run the comprehensive tier) inputs. `ci-site.yml` accepts `full_matrix`. `release.yml` receives `target` (`packages`, `site`, `all`) and `gate` (`quick`, `full`) inputs. The `release.yml` automatic `main` trigger is site-only and is limited to site, template, registry, package-doc, and documentation paths.
 
 ## CI job graph
 
-### Pull request tier
+### `ci-packages.yml`
+
+Fast tier (`full_matrix=false`) runs the unshaded jobs; full tier (`full_matrix=true`) adds the jobs marked _(full only)_.
 
 ```text
 install
 ├── format
 ├── typecheck
-├── build
-│   ├── test-node (Node 24)
-│   └── test-browser (Chromium)
-└── preview-deploy (internal PRs only)
+└── build
+    ├── test-node (Node 24; matrix [24, 26] on full)
+    ├── test-browser (Chromium) + recipe parity
+    ├── a11y-axe-scan                          (full only)
+    ├── cli-smoke-create-prep → cli-smoke-create (npm, pnpm, yarn, bun)  (full only)
+    └── catalog-gates (component + block)      (full only)
 
 gate ← typecheck + build + test-node + test-browser
+       (+ a11y-axe-scan + catalog-gates on full)
 ```
 
-### Main/manual tier
+The `gate` job runs `gate:quick` on the fast tier and `gate:full` on the full tier.
+
+### `ci-site.yml`
+
+Rebuilds the workspace packages itself (the site resolves built primitives), so it is independent of `ci-packages.yml`.
 
 ```text
-install
-├── format
-├── typecheck
-├── build
-│   ├── test-node (Node 24 and 26)
-│   ├── test-browser (Chromium)
-│   ├── a11y-axe-scan
-│   ├── cli-smoke-create-prep → cli-smoke-create (npm, pnpm, yarn, bun)
-│   └── catalog-gates
-├── site-check → site-build → site-e2e + site-visual + site-lighthouse
-└── vertical-slice-gate
+site-check
+└── site-build
+    ├── site-e2e (Chromium/Firefox/WebKit)  (full only)
+    ├── site-visual (pinned Playwright container)  (full only)
+    └── site-lighthouse (advisory)          (full only)
 
-gate ← typecheck + build + test-node + test-browser + a11y-axe-scan + site-e2e + catalog-gates
+vertical-slice-gate ← site-check            (full only)
+preview-deploy ← (dormant; pull_request-gated, never runs under manual dispatch)
+
+gate ← site-check + site-build
+       (+ site-e2e + site-visual + vertical-slice-gate on full)
 ```
+
+The site workflow self-gates on its own job results; the aggregate `gate:quick`/`gate:full` scripts remain owned by `ci-packages.yml`.
 
 The `gate:quick` command runs the structural gate (fast, version-agnostic foundation invariants). `gate:full` runs the full durable release gate, which runs the structural gate once and then the complete quality suite (primitives, recipes, ESLint, a11y, enterprise governance, catalog gates, and the §23 acceptance criteria).
 
@@ -83,7 +97,7 @@ The nightly Solid matrix tests the `low`, `mid`, and `high` configured Solid ver
 
 ### Security controls
 
-- Fork PRs never receive deployment secrets; preview deployment is limited to PRs from this repository.
+- Fork PRs never receive deployment secrets; the `preview-deploy` job in `ci-site.yml` is limited to PRs from this repository (and is currently dormant under manual-dispatch triggering).
 - Release signing uses `REGISTRY_SIGN_KEY` only inside `release.yml`.
 - npm publishing occurs only in CI for Changeset releases.
 - Releases commit only targeted version, changelog, lockfile, Changeset, and registry paths.
@@ -92,11 +106,20 @@ The nightly Solid matrix tests the `low`, `mid`, and `high` configured Solid ver
 ## Manual operations
 
 ```bash
-# Manual CI; defaults to the full tier
-gh workflow run ci.yml
+# Manual package CI; defaults to the full tier (full_matrix=true)
+gh workflow run ci-packages.yml
 
-# Run CI against only affected packages
-gh workflow run ci.yml -f affected_only=true
+# Package CI, fast tier only
+gh workflow run ci-packages.yml -f full_matrix=false
+
+# Package CI against only affected packages
+gh workflow run ci-packages.yml -f affected_only=true
+
+# Manual site CI; defaults to the full site suite
+gh workflow run ci-site.yml
+
+# Site CI, fast tier (check + build only)
+gh workflow run ci-site.yml -f full_matrix=false
 
 # Package release after creating Changesets
 pnpm release -- --target packages

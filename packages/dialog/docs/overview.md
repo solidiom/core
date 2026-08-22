@@ -50,7 +50,7 @@ Install the package with `pnpm add @solidiom/dialog`. The package requires compa
 
 ## Parts
 
-Dialog exposes seven parts:
+Dialog exposes eight parts:
 
 - **Root** — state container managing open/closed, modal/non-modal, and controlled/uncontrolled modes.
 - **Trigger** — the button that opens the dialog. Carries `aria-haspopup="dialog"` and `aria-expanded`.

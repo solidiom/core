@@ -13,7 +13,6 @@ lifecycle: current
 
 **Contract version:** 1
 **Status authority:** The contract and emitters are implemented; current audit, build, and parity status is tracked only in `docs/plans/consolidated-plan.md` §4 and §10.
-**Task history:** `RECIPE-001..004` are recorded in `docs/plans/consolidated-plan.md` §2 and `docs/history/plans/website-m0-m3.md`.
 **Authoring workflow:** `docs/contracts/recipe-authoring-guide.md`
 
 ---

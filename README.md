@@ -116,7 +116,7 @@ All tasks are defined in `.mise.toml`. Run `mise tasks` to list them.
 
 ## Testing GitHub Actions locally
 
-CI (`.github/workflows/ci.yml`, `.github/workflows/release.yml`) can be run locally with [`act`](https://github.com/nektos/act) before pushing, using a clean-checkout build/typecheck rather than relying on cached local state.
+CI (`.github/workflows/ci-packages.yml`, `.github/workflows/ci-site.yml`, `.github/workflows/release.yml`) can be run locally with [`act`](https://github.com/nektos/act) before pushing, using a clean-checkout build/typecheck rather than relying on cached local state.
 
 ### Why this matters
 
@@ -148,21 +148,21 @@ Add this `export` to your shell profile so it persists across sessions.
 
 ```sh
 # List all jobs in a workflow without running them
-act push -W .github/workflows/ci.yml -l
+act push -W .github/workflows/ci-packages.yml -l
 
 # Run a single job (fast iteration)
-act push -W .github/workflows/ci.yml -j build
-act push -W .github/workflows/ci.yml -j typecheck
-act push -W .github/workflows/ci.yml -j gate
+act push -W .github/workflows/ci-packages.yml -j build
+act push -W .github/workflows/ci-packages.yml -j typecheck
+act push -W .github/workflows/ci-packages.yml -j gate
 
 # Run the full workflow graph
-act push -W .github/workflows/ci.yml
+act push -W .github/workflows/ci-packages.yml
 ```
 
 Use a fuller runner image than act's default — the default image is a slimmed-down subset that can miss tools the real `ubuntu-latest` runner has:
 
 ```sh
-act push -W .github/workflows/ci.yml -j build \
+act push -W .github/workflows/ci-packages.yml -j build \
   -P ubuntu-latest=catthehacker/ubuntu:act-22.04
 ```
 
@@ -171,7 +171,7 @@ act push -W .github/workflows/ci.yml -j build \
 GitHub-hosted runners are `amd64`. On Apple Silicon, `act` must emulate that architecture via qemu:
 
 ```sh
-act push -W .github/workflows/ci.yml -j build \
+act push -W .github/workflows/ci-packages.yml -j build \
   -P ubuntu-latest=catthehacker/ubuntu:act-22.04 \
   --container-architecture linux/amd64
 ```
@@ -181,7 +181,7 @@ This emulation is not fully reliable for tasks that invoke native binaries. `vit
 **Workaround:** for local iteration, omit `--container-architecture linux/amd64` and let `act` run job containers natively as `arm64`:
 
 ```sh
-act push -W .github/workflows/ci.yml -j build \
+act push -W .github/workflows/ci-packages.yml -j build \
   -P ubuntu-latest=catthehacker/ubuntu:act-22.04
 ```
 
@@ -197,8 +197,8 @@ This avoids the qemu segfaults entirely, at the cost of no longer testing the ex
 
 | Layer           | Stack                                            |
 | --------------- | ------------------------------------------------ |
-| Reactivity      | solid-js 2.0.0-beta                              |
-| DOM runtime     | @solidjs/web 2.0.0-beta                          |
+| Reactivity      | solid-js 2.0.0-rc.1                              |
+| DOM runtime     | @solidjs/web 2.0.0-rc.1                          |
 | Build           | tsup (ESM, preserved JSX) + tsc (declarations)   |
 | Orchestration   | nx (caching, task graph, affected)               |
 | Test            | vitest (node + browser modes) + Playwright (E2E) |

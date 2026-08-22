@@ -48,6 +48,35 @@ Calendar exposes 7 parts:
 - **Grid** — `data-part="grid"`.
 - **Cell** — `data-part="cell"`.
 
+## RangeCalendar
+
+The package also exports **RangeCalendar** — a range-selection variant with start/end/restart semantics. Its value contract is `{ start: DateValue; end?: DateValue }`: the first click sets `start`, the second sets `end`, and a third click restarts the cycle with a new `start`. It reuses the shared grid, date-math, focus, locale, RTL, and disabled-date internals from Calendar, and carries `data-scope="range-calendar"`.
+
+```tsx
+import * as Calendar from "@solidiom/calendar"
+
+;<Calendar.RangeRoot onValueChange={(range) => console.log(range)}>
+  <Calendar.RangeHeader>
+    <Calendar.RangePrevButton />
+    <Calendar.RangeTitle />
+    <Calendar.RangeNextButton />
+  </Calendar.RangeHeader>
+  <Calendar.RangeGrid>{/* render weeks of Calendar.RangeCell */}</Calendar.RangeGrid>
+</Calendar.RangeRoot>
+```
+
+RangeCalendar exposes 7 parts, mirroring Calendar:
+
+- **RangeRoot** — `data-part="root"`. Manages range selection state, month navigation, and focus.
+- **RangeHeader** — `data-part="header"`.
+- **RangePrevButton** — `data-part="prevbutton"`.
+- **RangeTitle** — `data-part="title"`.
+- **RangeNextButton** — `data-part="nextbutton"`.
+- **RangeGrid** — `data-part="grid"`.
+- **RangeCell** — `data-part="cell"`.
+
+The `useRangeCalendarContext` hook and the `RangeValue` type are exported for advanced composition.
+
 ## Styling
 
 Calendar carries `data-scope="calendar"` and `data-part` attributes on each part for CSS/recipe targeting. State attributes like `data-state`, `data-disabled`, and `data-highlighted` are exposed where applicable.

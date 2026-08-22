@@ -1,8 +1,8 @@
 # @solidiom/site
 
-Target application for the Solidiom website (`https://solidiom.org`). Configuration and
-integration wiring were validated by the Astro MDX POC (archived at
-`docs/history/poc/docs-astro-poc-findings.md`).
+Target application for the Solidiom website (`https://solidiom.org`). It is a static Astro
+site with isolated Solid islands; documentation and marketing are zero-JavaScript by
+default.
 
 ## Baseline commands
 

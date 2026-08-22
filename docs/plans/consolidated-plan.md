@@ -370,9 +370,7 @@ Run from a clean tree before changing status.
 pnpm exec prettier --check \
   docs/plans/README.md \
   docs/plans/consolidated-plan.md \
-  docs/architecture/decisions/catalog-decisions.md \
-  docs/history/plans/website-m0-m3.md \
-  docs/history/plans/catalog-foundations-2026-08.md
+  docs/architecture/decisions/catalog-decisions.md
 git rev-parse HEAD
 git status --short
 

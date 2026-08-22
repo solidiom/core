@@ -3168,13 +3168,9 @@ Companion file: `docs/plans/consolidated-plan.md` breaks these decisions into se
 
 **Rejected:** two real adapters per capability (speculative complexity for virtualization/table/carousel/date-math without user demand), deterministic doubles only (does not satisfy the spirit of §23 #70 for positioning specifically).
 
-## 27.12 Documentation site — superseded decision
+## 27.12 Documentation site
 
-**Historical decision:** The original plan selected SolidStart + `@mdx-js/solid` with playground routes inside `apps/docs`.
-
-**Superseded on 2026-08-06:** [`docs/architecture/website.md`](website.md) now makes `apps/site` the canonical static Astro application with isolated Solid islands. Documentation and marketing remain static by default; playground and theme-builder functionality is route-local. `apps/docs` is a legacy migration source and must not receive new authoritative docs or demos.
-
-The original rationale—testing primitives in a real Solid application and keeping onboarding beside executable examples—still applies, but it is satisfied through route-local Solid islands, generated evidence, and browser suites rather than by making the whole documentation site a SolidStart application. Removal of `apps/docs` remains gated on verified parity.
+**Decision:** The canonical documentation and marketing site is `apps/site` — a static Astro application with isolated Solid islands. Documentation and marketing are zero-JavaScript by default; playground and theme-builder functionality is route-local. See [`docs/architecture/website.md`](website.md) for the authoritative website architecture.
 
 ## 27.13 Benchmark harness
 

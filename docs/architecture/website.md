@@ -27,7 +27,7 @@ Solidiom ships a registry-driven, bilingual product website, not only a document
 
 The production application is a static Astro site with isolated Solid islands. Documentation and marketing are zero-JavaScript by default. The playground and theme builder are route-local Solid applications and must not increase the JavaScript cost of content routes.
 
-`apps/docs/` has been removed (CUT-003). Its deprecation notice is archived at `docs/history/legacy-docs/deprecated-notice.md`. The Astro MDX POC findings are archived at `docs/history/poc/docs-astro-poc-findings.md`.
+`apps/docs/` has been removed (CUT-003).
 
 `../solid2/corvu/web/` is reference-only. Do not copy its code, styling, content, assets, or information architecture. Existing package-level provenance remains intact, but the Solidiom website shell, search, table of contents, examples, API rendering, and theme bootstrap are Solidiom-owned.
 
@@ -379,7 +379,7 @@ Implementation state, exceptions, owners, and residual work belong only in [cons
 | 13  | Signed registry manifests                             | **PARTIAL**       | `integrity` section with `sha256` algorithm and `entriesHash` present. Per-file digests referenced in schema. Signing infrastructure and Ed25519 keys exist in codebase. Signatures not yet applied to current registry index.                                                                                                                                                              |
 | 14  | Policies published                                    | **PASS**          | Privacy (`/privacy/`), Security (`/security/`, newly created), Trademark/Brand (`/trademark/`), DCO (`/dco/`, newly created), License (`LICENSE` at repo root, referenced in CONTRIBUTING.md). All available in both EN and ES.                                                                                                                                                             |
 | 15  | Production/preview/redirect/rollback paths            | **PASS**          | `apps/docs/` and `apps/docs-astro-poc/` removed. OPS-004/005 infrastructure documented.                                                                                                                                                                                                                                                                                                     |
-| 16  | Legacy apps/docs and POC removed                      | **PASS**          | `apps/docs/` removed at CUT-003. `apps/docs-astro-poc/` removed. POC findings archived at `docs/history/poc/docs-astro-poc-findings.md`.                                                                                                                                                                                                                                                    |
+| 16  | Legacy apps/docs and POC removed                      | **PASS**          | `apps/docs/` removed at CUT-003. `apps/docs-astro-poc/` removed.                                                                                                                                                                                                                                                                                                                            |
 
 **Verdict: CONDITIONAL PASS — 14 of 16 criteria pass. One is deferred (C7), two are partial (C2, C13).**
 
