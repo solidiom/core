@@ -81,22 +81,24 @@ solidiom add button --styling css
 
 ## La Capa de Temas
 
-Los temas son agnósticos al perfil. El mismo preset de tema (Ocean, Forest, Slate, Aurora) funciona de manera idéntica en los tres perfiles de estilizado porque los temas definen propiedades personalizadas CSS, no clases de utilidad.
+Los temas son agnósticos al perfil. Los mismos valores de tokens `--ui-*` pueden ser consumidos por las recetas CSS, Tailwind y UnoCSS. El paquete `@solidiom/themes` entrega puntos de entrada CSS y Tailwind para cinco temas: Solidiom Default, Ocean, Forest, Slate y Aurora.
 
 ```css
-/* Works with any profile */
+/* El espacio de nombres compartido por las recetas */
 :root {
-  --sol-color-primary: oklch(0.6 0.2 250);
+  --ui-primary: oklch(0.6 0.2 250);
 }
+```
+
 ```
 
 ## Extender Recetas
 
 Las recetas tienen propiedad del codigo fuente. Para personalizar:
 
-1. Instala en modo fuente: `solidiom add button --source`
-2. Modifica el archivo de receta directamente
-3. El estilizado permanece conectado a los atributos de datos del primitivo
+1. Instala en modo fuente: `solidiom add button --mode source`
+2. Modifica directamente los archivos de código fuente materializados
+3. El estilizado permanece conectado a los atributos de datos de la primitiva
 
 Nunca estás atrapado en nuestras decisiones de diseño. La receta es un punto de partida, no una jaula.
 
@@ -109,3 +111,4 @@ La Fase 3A introduce transformaciones opcionales en tiempo de compilación:
 - **Expansión de variantes** — pre-calcula combinaciones de variantes
 
 Estas optimizaciones funcionan de manera idéntica en los tres perfiles porque operan sobre el contrato de atributos de datos, no sobre detalles de implementación de estilizado.
+```

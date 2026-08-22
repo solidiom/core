@@ -8,9 +8,7 @@ maturity: beta
 product: Virtual List
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "virtual-list"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/virtual-list"
 translationSourceHash: "b13d63ac2a1993a122184bf761113e7c590966f41e7a66e3f414b83e5fe53016"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled virtual list component — the recipe wrapper for the css, tailwind, unoc
 El componente Virtual List es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/virtual-list`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as VirtualList from "@solidiom/recipes-css"
+import * as VirtualList from "@solidiom/virtual-list"
 
 ;<VirtualList.Root count={10000} estimateSize={() => 40}>
   {(item) => <VirtualList.Item>{item.index}</VirtualList.Item>}
@@ -34,7 +32,7 @@ import * as VirtualList from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/virtual-list
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/virtual-list` correspondiente como dependencia par.

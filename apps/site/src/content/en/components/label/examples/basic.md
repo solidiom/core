@@ -22,13 +22,13 @@ runnable: true
 The Label component provides accessible labels for form fields.
 
 ```tsx
-import { StyledLabel } from "@solidiom/recipes-css"
+import * as Label from "@solidiom/label"
 import * as Input from "@solidiom/input"
 
 ;<div>
-  <StyledLabel htmlFor="username" required>
+  <Label.Root htmlFor="username" required>
     Username
-  </StyledLabel>
+  </Label.Root>
   <Input.Root id="username" type="text" />
 </div>
 ```

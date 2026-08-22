@@ -20,10 +20,10 @@ Solidiom is a greenfield product. There are no prior Solidiom versions to migrat
 The most common adoption path. Create a new project with the Solidiom CLI:
 
 ```bash
-npm create solidiom@latest my-app
+npx @solidiom/cli create my-app
 cd my-app
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 The `create` command scaffolds a complete project with routing, state management, and a configured build pipeline.
@@ -34,11 +34,11 @@ The `create` command scaffolds a complete project with routing, state management
 solidiom add accordion
 ```
 
-The CLI handles dependency resolution, recipe generation, and theme integration automatically.
+The CLI resolves the requested deliverable and prints or runs the package-manager install command. Theme files are not added automatically; install `@solidiom/themes` and import a theme entrypoint when needed.
 
 ### Recipe Selection
 
-Each primitive ships with three styling recipes. Select your preference when creating the project or switch later:
+The recipe packages expose CSS, Tailwind, and UnoCSS profiles for their supported primitive set. Check each package's exported `supportedPrimitives` list; not every registry primitive currently has a `Styled*` wrapper.
 
 - **CSS** — Native custom properties and BEM-style class names. No build-time CSS processor required.
 - **Tailwind** — Tailwind CSS utility composition. Requires Tailwind in your project.
@@ -51,16 +51,18 @@ If you already have a Solid 2 application and want to adopt Solidiom components:
 ### 1. Install the CLI
 
 ```bash
-npm install -g solidiom
+pnpm add @solidiom/cli
 ```
+
+The package provides the `solidiom` executable.
 
 ### 2. Initialize Solidiom in Your Project
 
 ```bash
-solidiom plan my-app
+solidiom plan accordion
 ```
 
-The `plan` command scans your project and generates an adoption plan showing which primitives and components are available.
+The `plan` command resolves one named primitive or deliverable and shows the planned packages/files. It is not a whole-project scanner.
 
 ### 3. Add Primitives Incrementally
 
@@ -75,10 +77,10 @@ Each `add` operation is independent — you can adopt primitives one at a time w
 ### 4. Verify Integrity
 
 ```bash
-solidiom verify
+solidiom verify --registry
 ```
 
-Confirms all installed packages match V3 registry signatures.
+For an artifact, pass its path explicitly, for example `solidiom verify ./dist/dialog.tgz`.
 
 ## Coming from Other UI Libraries
 

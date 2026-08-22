@@ -24,9 +24,9 @@ Styled alert component — the recipe wrapper for the css, tailwind, unocss prof
 El componente Alert es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/alert`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import { Alert } from "@solidiom/recipes-css"
+import { StyledAlert } from "@solidiom/recipes-css"
 
-;<Alert>Contenido</Alert>
+;<StyledAlert>Contenido</StyledAlert>
 ```
 
 ## Instalación

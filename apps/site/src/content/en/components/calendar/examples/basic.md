@@ -8,8 +8,7 @@ maturity: draft
 product: Calendar
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "calendar"
+package: "@solidiom/calendar"
 section: examples
 exampleId: calendar-component-basic
 source:
@@ -22,7 +21,7 @@ source:
 The Calendar component provides an interactive date picker grid with keyboard navigation.
 
 ```tsx
-import { StyledCalendar, Calendar } from "@solidiom/recipes-css"
+import * as Calendar from "@solidiom/calendar"
 
 ;<Calendar.Root>
   <Calendar.Header>

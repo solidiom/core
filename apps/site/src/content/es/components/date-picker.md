@@ -8,9 +8,7 @@ maturity: beta
 product: Date Picker
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "date-picker"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/date-picker"
 translationSourceHash: "f5dbe73e95515632aefa7d1743ae3c97e705d49198b0a635f92442ae29c8d4c5"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled date picker component — the recipe wrapper for the css, tailwind, unocs
 El componente Date Picker es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/date-picker`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as DatePicker from "@solidiom/recipes-css"
+import * as DatePicker from "@solidiom/date-picker"
 
 ;<DatePicker.Root>
   <DatePicker.Label>Select date</DatePicker.Label>
@@ -39,7 +37,7 @@ import * as DatePicker from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/date-picker
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/date-picker` correspondiente como dependencia par.

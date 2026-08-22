@@ -8,9 +8,7 @@ maturity: beta
 product: Drawer
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "drawer"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/drawer"
 translationSourceHash: "4dc6ac5f24d156196ca5274be81ef8ac8ebe3ac181d4f9029576469db5eadcb2"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled drawer component — the recipe wrapper for the css, tailwind, unocss pro
 El componente Drawer es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/drawer`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as Drawer from "@solidiom/recipes-css"
+import * as Drawer from "@solidiom/drawer"
 
 ;<Drawer.Root>
   <Drawer.Trigger>Open drawer</Drawer.Trigger>
@@ -43,7 +41,7 @@ import * as Drawer from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/drawer
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/drawer` correspondiente como dependencia par.

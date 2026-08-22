@@ -16,30 +16,26 @@ Solidiom's theme system uses CSS custom properties to control colors, typography
 
 ## Theme Presets
 
-Four presets ship out of the box:
+Five themes ship in `@solidiom/themes`:
 
-| Preset | Description             | Modes        |
-| ------ | ----------------------- | ------------ |
-| Ocean  | Deep teal and cyan      | Light + Dark |
-| Forest | Earthy greens           | Light + Dark |
-| Slate  | Neutral grays           | Light + Dark |
-| Aurora | Vibrant purple and pink | Light + Dark |
+| Preset           | Description             | Modes        |
+| ---------------- | ----------------------- | ------------ |
+| Solidiom Default | Neutral baseline        | Light + Dark |
+| Ocean            | Deep teal and cyan      | Light + Dark |
+| Forest           | Earthy greens           | Light + Dark |
+| Slate            | Neutral grays           | Light + Dark |
+| Aurora           | Vibrant purple and pink | Light + Dark |
 
 ### Install a Preset
 
-```sh
-npx solidiom add --theme ocean
-```
+Install the theme package and import a CSS or Tailwind entrypoint:
 
-Or import directly:
+```sh
+pnpm add @solidiom/themes
+```
 
 ```css
 @import "@solidiom/themes/css/ocean.css";
-```
-
-```css
-/* Tailwind profile */
-@import "@solidiom/themes/tailwind/ocean.css";
 ```
 
 ## Theme Builder
@@ -57,17 +53,16 @@ Create a custom theme by defining CSS custom properties:
 
 ```css
 :root {
-  --sol-color-primary: oklch(0.6 0.2 250);
-  --sol-color-surface: oklch(0.98 0.005 250);
-  --sol-color-text: oklch(0.15 0.02 250);
-  --sol-radius-md: 0.5rem;
-  --sol-font-sans: "Inter", system-ui, sans-serif;
+  --ui-primary: oklch(0.6 0.2 250);
+  --ui-surface: oklch(0.98 0.005 250);
+  --ui-fg: oklch(0.15 0.02 250);
+  --ui-radius: 0.5rem;
 }
 
-[data-theme="dark"] {
-  --sol-color-primary: oklch(0.7 0.18 250);
-  --sol-color-surface: oklch(0.15 0.02 250);
-  --sol-color-text: oklch(0.92 0.01 250);
+:root[data-theme="dark"] {
+  --ui-primary: oklch(0.7 0.18 250);
+  --ui-surface: oklch(0.15 0.02 250);
+  --ui-fg: oklch(0.92 0.01 250);
 }
 ```
 

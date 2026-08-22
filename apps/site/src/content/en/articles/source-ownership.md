@@ -39,20 +39,20 @@ Installs `@solidiom/button` as a workspace dependency. Source is in `node_module
 ### Source Mode
 
 ```sh
-solidiom add button --source
+solidiom add button --mode source
 ```
 
-Copies the primitive source directly into your project at `src/solidiom/button/`. You own these files completely. They're committed to your repository.
+Copies primitive source directly into the configured source directory. You own these files completely and can review conflicts with `solidiom diff --primitive button`.
 
 ### Integrity Verification
 
-Both modes verify integrity:
+For registry integrity, use the registry mode explicitly:
 
 ```sh
-solidiom verify
+solidiom verify --registry
 ```
 
-Compares installed file digests against the signed registry manifest. If files have been tampered with (or intentionally modified in source mode), the CLI reports the differences.
+Artifact verification instead requires an artifact path, for example `solidiom verify ./dist/dialog.tgz`.
 
 ## Why Not Just npm?
 

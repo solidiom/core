@@ -22,7 +22,8 @@ source:
 The Combobox component is a styled recipe wrapper around the `@solidiom/combobox` primitive. It provides an autocomplete dropdown with filtering and keyboard navigation.
 
 ```tsx
-import { StyledCombobox, Combobox } from "@solidiom/recipes-css"
+import { StyledCombobox } from "@solidiom/recipes-css"
+import * as Combobox from "@solidiom/combobox"
 
 ;<StyledCombobox>
   <Combobox.Input placeholder="Select an item..." />

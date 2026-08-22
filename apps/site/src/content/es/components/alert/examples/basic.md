@@ -1,7 +1,7 @@
 ---
 contentSchemaVersion: 1
 title: Alerta básica
-description: Componente de alerta con variantes de información, éxito, advertencia y error.
+description: Primitiva de alerta con tipos de información, éxito, advertencia y error usando estilos de receta.
 keywords: [alert, notification, feedback, variant]
 locale: es
 maturity: draft
@@ -23,52 +23,16 @@ translationReviewedBy: "solidiom-team"
 translationReviewedAt: "2026-08-18"
 ---
 
-El componente Alert es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/alert`. Añade estilos de variante, composición con `Alert.Title` y `Alert.Description`, y slots de estilo semántico mientras delega toda la gestión de estado y el comportamiento ARIA al primitivo subyacente.
+El ejemplo ejecutable usa la primitiva `@solidiom/alert` y la hoja de estilos de receta CSS. La primitiva define los valores de `type` y las partes; la hoja de estilos de receta aporta el estilo visual.
 
 ```tsx
-import { StyledAlert, Alert } from "@solidiom/recipes-css"
+import * as Alert from "@solidiom/alert"
+import "@solidiom/recipes-css/styles/alert.css"
 
-;<StyledAlert variant="info">
-  <Alert.Title>Information</Alert.Title>
-  <Alert.Description>A new software update is available.</Alert.Description>
-</StyledAlert>
+;<Alert.Root type="info">
+  <Alert.Title>Información</Alert.Title>
+  <Alert.Description>Hay una nueva actualización disponible.</Alert.Description>
+</Alert.Root>
 ```
 
-## Variante de éxito
-
-Usa la variante de éxito para resultados positivos y confirmaciones.
-
-```tsx
-import { StyledAlert, Alert } from "@solidiom/recipes-css"
-
-;<StyledAlert variant="success">
-  <Alert.Title>Success</Alert.Title>
-  <Alert.Description>Your changes have been saved.</Alert.Description>
-</StyledAlert>
-```
-
-## Variante de advertencia
-
-Usa la variante de advertencia para mensajes de precaución que requieren atención.
-
-```tsx
-import { StyledAlert, Alert } from "@solidiom/recipes-css"
-
-;<StyledAlert variant="warning">
-  <Alert.Title>Warning</Alert.Title>
-  <Alert.Description>Your session will expire in 5 minutes.</Alert.Description>
-</StyledAlert>
-```
-
-## Variante de error
-
-Usa la variante de error para fallos críticos y mensajes que requieren acción.
-
-```tsx
-import { StyledAlert, Alert } from "@solidiom/recipes-css"
-
-;<StyledAlert variant="error">
-  <Alert.Title>Error</Alert.Title>
-  <Alert.Description>Failed to connect to the server. Please try again.</Alert.Description>
-</StyledAlert>
-```
+Los tipos de la primitiva usados por el ejemplo son `info`, `success`, `warning` y `error`.

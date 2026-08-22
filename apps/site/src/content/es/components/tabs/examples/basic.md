@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Tabs es un wrapper de receta con estilos sobre el primitivo `@solidiom/tabs`. Proporciona selección de pestañas con navegación por teclado, foco itinerante, modos de activación automática y manual, y orientación horizontal y vertical.
 
 ```tsx
-import { StyledTabs, Tabs } from "@solidiom/recipes-css"
+import { StyledTabs } from "@solidiom/recipes-css"
+import * as Tabs from "@solidiom/tabs"
 
 ;<StyledTabs defaultValue="account">
   <Tabs.List>
@@ -43,7 +44,8 @@ import { StyledTabs, Tabs } from "@solidiom/recipes-css"
 Usa la orientación vertical para diseños lado a lado donde las pestañas actúan como un panel de navegación.
 
 ```tsx
-import { StyledTabs, Tabs } from "@solidiom/recipes-css"
+import { StyledTabs } from "@solidiom/recipes-css"
+import * as Tabs from "@solidiom/tabs"
 
 ;<StyledTabs defaultValue="files" orientation="vertical">
   <Tabs.List>

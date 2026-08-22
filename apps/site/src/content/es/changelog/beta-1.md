@@ -68,12 +68,12 @@ La CLI de Solidiom crea proyectos, agrega primitivas y gestiona tu espacio de tr
 ```bash
 solidiom create my-app
 solidiom add accordion
-solidiom registry verify
+solidiom verify --registry
 ```
 
 ### Tres Recetas de Estilo
 
-Una primitiva, tres salidas de estilo:
+Supported recipe wrappers are available as CSS, Tailwind, and UnoCSS outputs for the primitive set covered by each package. A given registry primitive may not have a `Styled*` wrapper in every profile.
 
 - **CSS** — Propiedades personalizadas nativas y nombres de clase estilo BEM
 - **Tailwind** — Composición de utilidades de Tailwind CSS
@@ -93,10 +93,10 @@ Las pruebas de **WebKit** (Safari) están bloqueadas actualmente por restriccion
 ### Instalar
 
 ```bash
-npm create solidiom@latest my-app
+npx @solidiom/cli create my-app
 cd my-app
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ### Agregar tu Primera Primitiva
@@ -105,17 +105,15 @@ npm run dev
 solidiom add accordion
 ```
 
-La CLI agrega la primitiva, todas las salidas de recetas y la compatibilidad con temas a tu espacio de trabajo.
+La CLI agrega el entregable solicitado y cualquier perfil de estilo seleccionado; los envoltorios de receta solo están disponibles para el conjunto de primitivas compatible.
 
 ### Comandos Disponibles
 
-| Comando                         | Descripción                                   |
-| ------------------------------- | --------------------------------------------- |
-| `solidiom create <name>`        | Crear un nuevo proyecto                       |
-| `solidiom add <primitive>`      | Agregar una primitiva a tu espacio de trabajo |
-| `solidiom registry verify`      | Verificar la integridad del paquete           |
-| `solidiom theme list`           | Listar presets disponibles                    |
-| `solidiom theme apply <preset>` | Aplicar un preset de tema                     |
+| Comando                      | Descripción                                   |
+| ---------------------------- | --------------------------------------------- |
+| `solidiom create <name>`     | Crear un nuevo proyecto                       |
+| `solidiom add <primitive>`   | Agregar una primitiva a tu espacio de trabajo |
+| `solidiom verify --registry` | Verificar la integridad del registro          |
 
 ## Limitaciones Conocidas
 

@@ -20,7 +20,8 @@ Styled breadcrumb component — the recipe wrapper for the css, tailwind, unocss
 The Breadcrumb component is a styled recipe wrapper around the `@solidiom/breadcrumb` primitive. It adds composition, semantic styling slots, and variant support while delegating all state management and keyboard behavior to the underlying primitive.
 
 ```tsx
-import { StyledBreadcrumb, Breadcrumb } from "@solidiom/recipes-css"
+import { StyledBreadcrumb } from "@solidiom/recipes-css"
+import * as Breadcrumb from "@solidiom/breadcrumb"
 
 ;<StyledBreadcrumb>
   <Breadcrumb.List>

@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 The Sheet component is a styled recipe wrapper around the `@solidiom/sheet` primitive. It provides a side-panel overlay dialog that slides in from any edge.
 
 ```tsx
-import { StyledSheet, Sheet } from "@solidiom/recipes-css"
+import { StyledSheet } from "@solidiom/recipes-css"
+import * as Sheet from "@solidiom/sheet"
 
 ;<StyledSheet>
   <Sheet.Trigger>Open Sheet</Sheet.Trigger>

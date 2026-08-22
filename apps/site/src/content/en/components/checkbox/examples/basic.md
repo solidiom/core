@@ -22,7 +22,8 @@ runnable: true
 The Checkbox component is a styled recipe wrapper around the `@solidiom/checkbox` primitive. It provides a toggle button with checked, unchecked, and indeterminate states, keyboard support, and form integration.
 
 ```tsx
-import { StyledCheckbox, Checkbox } from "@solidiom/recipes-css"
+import { StyledCheckbox } from "@solidiom/recipes-css"
+import * as Checkbox from "@solidiom/checkbox"
 
 ;<StyledCheckbox>
   <Checkbox.Box />
@@ -36,7 +37,8 @@ Use a controlled checkbox when the checked state is managed by parent state.
 
 ```tsx
 import { createSignal } from "solid-js"
-import { StyledCheckbox, Checkbox } from "@solidiom/recipes-css"
+import { StyledCheckbox } from "@solidiom/recipes-css"
+import * as Checkbox from "@solidiom/checkbox"
 
 export function ControlledCheckbox() {
   const [checked, setChecked] = createSignal(false)

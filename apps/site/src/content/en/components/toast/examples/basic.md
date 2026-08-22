@@ -22,7 +22,8 @@ source:
 The Toast component provides non-blocking notifications that appear temporarily and auto-dismiss.
 
 ```tsx
-import { StyledToast, Toast } from "@solidiom/recipes-css"
+import { StyledToast } from "@solidiom/recipes-css"
+import * as Toast from "@solidiom/toast"
 
 const toaster = Toast.createToaster({ max: 3 })
 

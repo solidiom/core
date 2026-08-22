@@ -26,15 +26,15 @@ translationReviewedAt: "2026-08-18"
 El componente Skeleton proporciona elementos de marcador de posición que imitan la forma del contenido mientras se carga.
 
 ```tsx
-import { StyledSkeleton } from "@solidiom/recipes-css"
+import * as Skeleton from "@solidiom/skeleton"
 
-;<StyledSkeleton variant="text" width="200" />
+;<Skeleton.Root variant="text" width="200" />
 ```
 
 ## Variante circular
 
 ```tsx
-import { StyledSkeleton } from "@solidiom/recipes-css"
+import * as Skeleton from "@solidiom/skeleton"
 
-;<StyledSkeleton variant="circular" width="48" height="48" />
+;<Skeleton.Root variant="circular" width="48" height="48" />
 ```

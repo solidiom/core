@@ -24,9 +24,9 @@ Styled tabs component — the recipe wrapper for the css, tailwind, unocss profi
 El componente Tabs es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/tabs`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import { Tabs } from "@solidiom/recipes-css"
+import { StyledTabs } from "@solidiom/recipes-css"
 
-;<Tabs>Contenido</Tabs>
+;<StyledTabs>Contenido</StyledTabs>
 ```
 
 ## Instalación

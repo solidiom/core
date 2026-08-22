@@ -8,8 +8,7 @@ maturity: draft
 product: Carousel
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "carousel"
+package: "@solidiom/carousel"
 section: examples
 exampleId: carousel-component-basic
 source:
@@ -26,7 +25,7 @@ translationReviewedAt: "2026-08-18"
 El componente Carousel proporciona un contenedor desplazable para mostrar contenido en un área de visualización fija.
 
 ```tsx
-import { StyledCarousel, Carousel } from "@solidiom/recipes-css"
+import * as Carousel from "@solidiom/carousel"
 
 ;<Carousel.Root
   physics={Carousel.simpleSnapPhysics}

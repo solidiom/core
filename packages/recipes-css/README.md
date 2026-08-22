@@ -14,10 +14,10 @@ pnpm add @solidiom/recipes-css
 
 ## Usage
 
-Import components directly from the package:
+Import the styled wrappers exported by the package:
 
 ```tsx
-import { Button, Dialog, Tabs } from "@solidiom/recipes-css"
+import { StyledButton, StyledDialog, StyledTabs } from "@solidiom/recipes-css"
 ```
 
 Or import individual component styles:
@@ -36,7 +36,7 @@ Or import individual component styles:
 
 ## Available components
 
-All 52 Solidiom primitives have corresponding CSS recipes. Import the full bundle via `@solidiom/recipes-css/styles` or individual styles via `@solidiom/recipes-css/styles/{component}.css`.
+The CSS profile currently supports 32 Solidiom primitives. Import the full bundle via `@solidiom/recipes-css/styles` or an individual stylesheet via `@solidiom/recipes-css/styles/{component}.css`.
 
 ## Theming
 

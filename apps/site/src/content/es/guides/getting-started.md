@@ -20,16 +20,16 @@ Pon en marcha Solidiom en menos de 5 minutos.
 
 ## Requisitos previos
 
-- Node.js 20+ (se recomienda LTS)
+- Node.js 24+ (el espacio de trabajo requiere Node 24)
 - Un gestor de paquetes: npm, pnpm, Yarn o Bun
 
 ## Crear un proyecto
 
 ```sh
-npx solidiom create my-app --template saas-dashboard
+npx @solidiom/cli create my-app --template saas-dashboard
 cd my-app
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## Elegir una plantilla
@@ -46,9 +46,9 @@ Explora todas las plantillas en [/templates/](/templates/).
 Agrega componentes individuales a un proyecto existente:
 
 ```sh
-npx solidiom add button
-npx solidiom add dialog
-npx solidiom add data-table
+npx @solidiom/cli add button
+npx @solidiom/cli add dialog
+npx @solidiom/cli add data-table
 ```
 
 ## Elegir un perfil de estilos
@@ -63,17 +63,21 @@ Configura tu perfil durante la creación del proyecto o en `.solidiom/config.jso
 
 ## Elegir un tema
 
-Aplica un tema predefinido o crea el tuyo propio:
+Instala el paquete de temas e importa uno de sus puntos de entrada CSS o Tailwind:
 
 ```sh
-npx solidiom add --theme ocean
+pnpm add @solidiom/themes
 ```
 
-Presets disponibles: Ocean, Forest, Slate, Aurora.
+```css
+@import "@solidiom/themes/css/ocean.css";
+```
+
+Temas disponibles en el paquete: Solidiom Default, Ocean, Forest, Slate y Aurora.
 
 ## Siguientes pasos
 
 - [Explorar primitivos](/primitives/) — 86 bloques de construcción headless
-- [Explorar componentes](/components/) — 32 wrappers de recetas con estilos
+- [Explorar componentes](/components/) — 32 componentes del catálogo con estilos
 - [Constructor de temas](/themes/builder/) — editor visual de temas
 - [Referencia del CLI](/guides/cli-overview/) — documentación completa de comandos

@@ -20,30 +20,26 @@ El sistema de temas de Solidiom usa propiedades personalizadas de CSS para contr
 
 ## Presets de temas
 
-Cuatro presets se incluyen de serie:
+Cinco temas se incluyen en `@solidiom/themes`:
 
-| Preset | Descripción              | Modos          |
-| ------ | ------------------------ | -------------- |
-| Ocean  | Teal profundo y cian     | Claro + Oscuro |
-| Forest | Verdes terrosos          | Claro + Oscuro |
-| Slate  | Grises neutros           | Claro + Oscuro |
-| Aurora | Púrpura y rosa vibrantes | Claro + Oscuro |
+| Preset           | Descripción              | Modos          |
+| ---------------- | ------------------------ | -------------- |
+| Solidiom Default | Base neutra              | Claro + Oscuro |
+| Ocean            | Teal profundo y cian     | Claro + Oscuro |
+| Forest           | Verdes terrosos          | Claro + Oscuro |
+| Slate            | Grises neutros           | Claro + Oscuro |
+| Aurora           | Púrpura y rosa vibrantes | Claro + Oscuro |
 
 ### Instalar un preset
 
-```sh
-npx solidiom add --theme ocean
-```
+Instala el paquete de temas e importa un punto de entrada CSS o Tailwind:
 
-O importar directamente:
+```sh
+pnpm add @solidiom/themes
+```
 
 ```css
 @import "@solidiom/themes/css/ocean.css";
-```
-
-```css
-/* Tailwind profile */
-@import "@solidiom/themes/tailwind/ocean.css";
 ```
 
 ## Constructor de temas
@@ -61,17 +57,16 @@ Crea un tema personalizado definiendo propiedades personalizadas de CSS:
 
 ```css
 :root {
-  --sol-color-primary: oklch(0.6 0.2 250);
-  --sol-color-surface: oklch(0.98 0.005 250);
-  --sol-color-text: oklch(0.15 0.02 250);
-  --sol-radius-md: 0.5rem;
-  --sol-font-sans: "Inter", system-ui, sans-serif;
+  --ui-primary: oklch(0.6 0.2 250);
+  --ui-surface: oklch(0.98 0.005 250);
+  --ui-fg: oklch(0.15 0.02 250);
+  --ui-radius: 0.5rem;
 }
 
-[data-theme="dark"] {
-  --sol-color-primary: oklch(0.7 0.18 250);
-  --sol-color-surface: oklch(0.15 0.02 250);
-  --sol-color-text: oklch(0.92 0.01 250);
+:root[data-theme="dark"] {
+  --ui-primary: oklch(0.7 0.18 250);
+  --ui-surface: oklch(0.15 0.02 250);
+  --ui-fg: oklch(0.92 0.01 250);
 }
 ```
 

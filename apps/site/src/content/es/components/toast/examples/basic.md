@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Toast proporciona notificaciones no bloqueantes que aparecen temporalmente y se cierran automáticamente.
 
 ```tsx
-import { StyledToast, Toast } from "@solidiom/recipes-css"
+import { StyledToast } from "@solidiom/recipes-css"
+import * as Toast from "@solidiom/toast"
 
 const toaster = Toast.createToaster({ max: 3 })
 

@@ -8,8 +8,7 @@ maturity: draft
 product: Calendar
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "calendar"
+package: "@solidiom/calendar"
 section: examples
 exampleId: calendar-component-basic
 source:
@@ -26,7 +25,7 @@ translationReviewedAt: "2026-08-18"
 El componente Calendar proporciona una cuadrícula interactiva de selección de fechas con navegación por teclado.
 
 ```tsx
-import { StyledCalendar, Calendar } from "@solidiom/recipes-css"
+import * as Calendar from "@solidiom/calendar"
 
 ;<Calendar.Root>
   <Calendar.Header>

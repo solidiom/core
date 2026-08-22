@@ -24,9 +24,9 @@ Styled accordion component — the recipe wrapper for the css, tailwind, unocss 
 El componente Accordion es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/accordion`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import { Accordion } from "@solidiom/recipes-css"
+import { StyledAccordion } from "@solidiom/recipes-css"
 
-;<Accordion>Contenido</Accordion>
+;<StyledAccordion>Contenido</StyledAccordion>
 ```
 
 ## Instalación

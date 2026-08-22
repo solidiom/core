@@ -22,15 +22,15 @@ runnable: true
 The Skeleton component provides placeholder elements that mimic the shape of content while it loads.
 
 ```tsx
-import { StyledSkeleton } from "@solidiom/recipes-css"
+import * as Skeleton from "@solidiom/skeleton"
 
-;<StyledSkeleton variant="text" width="200" />
+;<Skeleton.Root variant="text" width="200" />
 ```
 
 ## Circular variant
 
 ```tsx
-import { StyledSkeleton } from "@solidiom/recipes-css"
+import * as Skeleton from "@solidiom/skeleton"
 
-;<StyledSkeleton variant="circular" width="48" height="48" />
+;<Skeleton.Root variant="circular" width="48" height="48" />
 ```

@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 The Toolbar component provides a container for grouping action buttons, toggle buttons, and separators.
 
 ```tsx
-import { StyledToolbar, Toolbar } from "@solidiom/recipes-css"
+import { StyledToolbar } from "@solidiom/recipes-css"
+import * as Toolbar from "@solidiom/toolbar"
 
 ;<StyledToolbar>
   <Toolbar.Button>Cut</Toolbar.Button>

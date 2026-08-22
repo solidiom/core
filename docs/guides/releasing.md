@@ -9,17 +9,17 @@ tags: [release, publishing, ci, deployment, guide]
 lifecycle: current
 ---
 
-> **Release policy:** package publishing, registry signing, version commits, and Cloudflare deployment run only in GitHub Actions. Local commands dispatch the audited workflow; they do not publish or deploy directly.
+> **Release policy:** the GitHub Actions workflow is the production release path for tagged releases and manual workflow dispatches. `scripts/release.sh` runs the same package/site pipeline locally by default; pass `--dispatch` to trigger `release.yml` instead. Local execution can publish packages or deploy the site when the required credentials are present.
 
 ## Release paths
 
-| Need                                   | Command                              | Result                                                          |
-| -------------------------------------- | ------------------------------------ | --------------------------------------------------------------- |
-| Publish one independent public package | `pnpm release:package @solidiom/pkg` | Builds, typechecks, tests, then directly publishes that package |
-| Publish packages from Changesets       | `pnpm release -- --target packages`  | Dispatches CI release with signing and versioning               |
-| Deploy site only                       | `pnpm release -- --target site`      | Dispatches CI site deployment                                   |
-| Publish packages and deploy site       | `pnpm release -- --target all`       | Dispatches CI release and deployment                            |
-| Use full release validation            | Append `--gate full`                 | Uses the full durable release gate before package publishing    |
+| Need                                   | Command                              | Result                                                             |
+| -------------------------------------- | ------------------------------------ | ------------------------------------------------------------------ |
+| Publish one independent public package | `pnpm release:package @solidiom/pkg` | Builds, typechecks, tests, then directly publishes that package    |
+| Publish packages from Changesets       | `pnpm release -- --target packages`  | Runs the package release pipeline locally; use `--dispatch` for CI |
+| Deploy site only                       | `pnpm release -- --target site`      | Runs the site deployment pipeline locally; use `--dispatch` for CI |
+| Publish packages and deploy site       | `pnpm release -- --target all`       | Runs both pipelines locally; use `--dispatch` for CI               |
+| Use full release validation            | Append `--gate full`                 | Uses the full durable release gate before package publishing       |
 
 ## Prerequisites
 
@@ -36,23 +36,17 @@ The GitHub repository must have `NPM_TOKEN`, `REGISTRY_SIGN_KEY`, `CLOUDFLARE_AP
 
 ### Manual dispatch
 
-The wrapper is the preferred interface because it validates GitHub CLI authentication and follows the workflow run:
+The wrapper runs `scripts/release.sh` locally by default. Add `--dispatch` to trigger `.github/workflows/release.yml` through GitHub CLI instead:
 
 ```bash
-# Packages and site, quick gate (default)
+# Local package/site pipeline, quick gate (default)
 pnpm release
 
-# Packages only
-pnpm release -- --target packages
+# Dispatch the same target to GitHub Actions instead of running locally
+pnpm release -- --dispatch --target packages
 
-# Site only
-pnpm release -- --target site
-
-# Packages and site with the comprehensive gate
-pnpm release -- --target all --gate full
-
-# Submit without following logs
-pnpm release -- --target packages --no-watch
+# Local dry run: build, gate, and verify without publishing/deploying
+pnpm release -- --dry-run --target all
 ```
 
 Equivalent GitHub CLI commands are:
@@ -175,12 +169,12 @@ Check the `release.yml` run for site boundary, route-parity, build, or Cloudflar
 
 ## File reference
 
-| File                                | Purpose                                             |
-| ----------------------------------- | --------------------------------------------------- |
-| `scripts/release.sh`                | Thin dispatcher for `release.yml`                   |
-| `scripts/release-package.mjs`       | Independent single-package publisher                |
-| `.github/workflows/release.yml`     | Unified package/site production release             |
-| `.github/workflows/ci-packages.yml` | Package build, tests, and quality gates             |
-| `.github/workflows/ci-site.yml`     | Site check, build, E2E, visual, and Lighthouse      |
-| `.github/workflows/nightly.yml`     | Scheduled compatibility, browser, and visual checks |
-| `.changeset/config.json`            | Changeset and linked-package configuration          |
+| File                                | Purpose                                                                 |
+| ----------------------------------- | ----------------------------------------------------------------------- |
+| `scripts/release.sh`                | Local package/site release pipeline; `--dispatch` is the CI alternative |
+| `scripts/release-package.mjs`       | Independent single-package publisher                                    |
+| `.github/workflows/release.yml`     | Unified package/site production release                                 |
+| `.github/workflows/ci-packages.yml` | Package build, tests, and quality gates                                 |
+| `.github/workflows/ci-site.yml`     | Site check, build, E2E, visual, and Lighthouse                          |
+| `.github/workflows/nightly.yml`     | Scheduled compatibility, browser, and visual checks                     |
+| `.changeset/config.json`            | Changeset and linked-package configuration                              |

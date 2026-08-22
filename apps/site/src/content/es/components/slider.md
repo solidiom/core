@@ -8,9 +8,7 @@ maturity: beta
 product: Slider
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "slider"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/slider"
 translationSourceHash: "f1239d2d3d9a4a631825656e8f240578f1f0f330e1944e6de55f56967c0edfc8"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled slider component — the recipe wrapper for the css, tailwind, unocss pro
 El componente Slider es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/slider`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as Slider from "@solidiom/recipes-css"
+import * as Slider from "@solidiom/slider"
 
 ;<Slider.Root min={0} max={100} value={50}>
   <Slider.Track>
@@ -37,7 +35,7 @@ import * as Slider from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/slider
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/slider` correspondiente como dependencia par.

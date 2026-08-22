@@ -8,9 +8,7 @@ maturity: beta
 product: Toggle Group
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "toggle-group"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/toggle-group"
 translationSourceHash: "e47b2788ddf9879b9370eaefc0d19db740d94cf8636fb53900cafc8f6debd08e"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled toggle group component — the recipe wrapper for the css, tailwind, unoc
 El componente Toggle Group es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/toggle-group`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as ToggleGroup from "@solidiom/recipes-css"
+import * as ToggleGroup from "@solidiom/toggle-group"
 
 ;<ToggleGroup.Root type="single">
   <ToggleGroup.Item value="left">Left</ToggleGroup.Item>
@@ -36,7 +34,7 @@ import * as ToggleGroup from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/toggle-group
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/toggle-group` correspondiente como dependencia par.

@@ -22,7 +22,8 @@ runnable: true
 The Tabs component is a styled recipe wrapper around the `@solidiom/tabs` primitive. It provides tab selection with keyboard navigation, roving focus, automatic and manual activation modes, and horizontal and vertical orientation.
 
 ```tsx
-import { StyledTabs, Tabs } from "@solidiom/recipes-css"
+import { StyledTabs } from "@solidiom/recipes-css"
+import * as Tabs from "@solidiom/tabs"
 
 ;<StyledTabs defaultValue="account">
   <Tabs.List>
@@ -39,7 +40,8 @@ import { StyledTabs, Tabs } from "@solidiom/recipes-css"
 Use vertical orientation for side-by-side layouts where tabs act as a navigation panel.
 
 ```tsx
-import { StyledTabs, Tabs } from "@solidiom/recipes-css"
+import { StyledTabs } from "@solidiom/recipes-css"
+import * as Tabs from "@solidiom/tabs"
 
 ;<StyledTabs defaultValue="files" orientation="vertical">
   <Tabs.List>

@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Checkbox es un wrapper de receta con estilos sobre el primitivo `@solidiom/checkbox`. Proporciona un botón de alternancia con estados marcado, desmarcado e indeterminado, soporte de teclado e integración con formularios.
 
 ```tsx
-import { StyledCheckbox, Checkbox } from "@solidiom/recipes-css"
+import { StyledCheckbox } from "@solidiom/recipes-css"
+import * as Checkbox from "@solidiom/checkbox"
 
 ;<StyledCheckbox>
   <Checkbox.Box />
@@ -40,7 +41,8 @@ Usa un checkbox controlado cuando el estado marcado es gestionado por el estado 
 
 ```tsx
 import { createSignal } from "solid-js"
-import { StyledCheckbox, Checkbox } from "@solidiom/recipes-css"
+import { StyledCheckbox } from "@solidiom/recipes-css"
+import * as Checkbox from "@solidiom/checkbox"
 
 export function ControlledCheckbox() {
   const [checked, setChecked] = createSignal(false)

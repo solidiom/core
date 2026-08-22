@@ -20,9 +20,9 @@ Styled badge component — the recipe wrapper for the css, tailwind, unocss prof
 The Badge component is a styled recipe wrapper around the `@solidiom/badge` primitive. It adds composition, semantic styling slots, and variant support while delegating all state management and keyboard behavior to the underlying primitive.
 
 ```tsx
-import { Badge } from "@solidiom/recipes-css"
+import { StyledBadge } from "@solidiom/recipes-css"
 
-;<Badge>Content</Badge>
+;<StyledBadge>Content</StyledBadge>
 ```
 
 ## Installation

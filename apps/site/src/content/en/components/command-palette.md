@@ -20,7 +20,8 @@ Styled command palette component — the recipe wrapper for the css, tailwind, u
 The Command Palette component is a styled recipe wrapper around the `@solidiom/command-palette` primitive. It provides a modal interface for quick command access and navigation.
 
 ```tsx
-import { StyledCommandPalette, CommandPalette } from "@solidiom/recipes-css"
+import { StyledCommandPalette } from "@solidiom/recipes-css"
+import * as CommandPalette from "@solidiom/command-palette"
 
 ;<StyledCommandPalette>
   <CommandPalette.Input placeholder="Type a command..." />

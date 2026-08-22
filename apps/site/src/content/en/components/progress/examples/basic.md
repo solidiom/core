@@ -22,7 +22,7 @@ runnable: true
 The Progress component indicates the completion status of a task.
 
 ```tsx
-import { StyledProgress, Progress } from "@solidiom/recipes-css"
+import { StyledProgress } from "@solidiom/recipes-css"
 
 ;<StyledProgress value={65} aria-label="Upload progress">
   <Progress.Indicator />
@@ -34,7 +34,7 @@ import { StyledProgress, Progress } from "@solidiom/recipes-css"
 For operations with unknown duration:
 
 ```tsx
-import { StyledProgress, Progress } from "@solidiom/recipes-css"
+import { StyledProgress } from "@solidiom/recipes-css"
 
 ;<StyledProgress value={null} aria-label="Loading">
   <Progress.Indicator />

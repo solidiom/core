@@ -22,7 +22,8 @@ runnable: true
 The Popover component is a styled recipe wrapper around the `@solidiom/popover` primitive. It provides an overlay panel positioned near a trigger element, with focus management and escape-to-close behavior.
 
 ```tsx
-import { StyledPopover, Popover } from "@solidiom/recipes-css"
+import { StyledPopover } from "@solidiom/recipes-css"
+import * as Popover from "@solidiom/popover"
 
 ;<StyledPopover>
   <Popover.Trigger>Open popover</Popover.Trigger>
@@ -39,7 +40,8 @@ Use controlled mode when managing open state from parent state.
 
 ```tsx
 import { createSignal } from "solid-js"
-import { StyledPopover, Popover } from "@solidiom/recipes-css"
+import { StyledPopover } from "@solidiom/recipes-css"
+import * as Popover from "@solidiom/popover"
 
 export function ControlledPopover() {
   const [open, setOpen] = createSignal(false)

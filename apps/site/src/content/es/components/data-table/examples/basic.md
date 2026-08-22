@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Data Table es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/data-table`. Proporciona una tabla ordenable y seleccionable con celdas de encabezado accesibles y selección de filas.
 
 ```tsx
-import { StyledDataTable, DataTable } from "@solidiom/recipes-css"
+import { StyledDataTable } from "@solidiom/recipes-css"
+import * as DataTable from "@solidiom/data-table"
 
 const columns = [
   { id: "name", accessorKey: "name", sortable: true },
@@ -62,7 +63,8 @@ const data = [
 Habilita selección de filas simple o múltiple con la propiedad `selectionMode`.
 
 ```tsx
-import { StyledDataTable, DataTable } from "@solidiom/recipes-css"
+import { StyledDataTable } from "@solidiom/recipes-css"
+import * as DataTable from "@solidiom/data-table"
 
 ;<StyledDataTable columns={columns} data={data} rowIdKey="id" selectionMode="single">
   <DataTable.Header>

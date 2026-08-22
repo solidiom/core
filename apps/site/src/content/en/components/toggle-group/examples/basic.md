@@ -8,8 +8,7 @@ maturity: draft
 product: ToggleGroup
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "toggle-group"
+package: "@solidiom/toggle-group"
 section: examples
 exampleId: toggle-group-component-basic
 source:
@@ -22,11 +21,11 @@ runnable: true
 The Toggle Group component provides a set of toggle buttons where one or more can be selected at a time.
 
 ```tsx
-import { StyledToggleGroup, ToggleGroup } from "@solidiom/recipes-css"
+import * as ToggleGroup from "@solidiom/toggle-group"
 
-;<StyledToggleGroup type="single" defaultValue={["bold"]}>
+;<ToggleGroup.Root type="single" defaultValue={["bold"]}>
   <ToggleGroup.Item value="normal">Normal</ToggleGroup.Item>
   <ToggleGroup.Item value="bold">Bold</ToggleGroup.Item>
   <ToggleGroup.Item value="italic">Italic</ToggleGroup.Item>
-</StyledToggleGroup>
+</ToggleGroup.Root>
 ```

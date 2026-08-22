@@ -8,9 +8,7 @@ maturity: beta
 product: Tree
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "tree"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/tree"
 translationSourceHash: "b1a283b647b0e75dea341e0bbb49cda75502ac77648a6c1fc4d905eecab03bf9"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled tree component — the recipe wrapper for the css, tailwind, unocss profi
 El componente Tree es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/tree`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as Tree from "@solidiom/recipes-css"
+import * as Tree from "@solidiom/tree"
 
 ;<Tree.Root>
   <Tree.Item value="src">
@@ -41,7 +39,7 @@ import * as Tree from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/tree
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/tree` correspondiente como dependencia par.

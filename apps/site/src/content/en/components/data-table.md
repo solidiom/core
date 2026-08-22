@@ -20,7 +20,8 @@ Styled data table component — the recipe wrapper for the css, tailwind, unocss
 The Data Table component is a styled recipe wrapper around the `@solidiom/data-table` primitive. It adds composition, semantic styling slots, and variant support while delegating all state management and keyboard behavior to the underlying primitive.
 
 ```tsx
-import { StyledDataTable, DataTable } from "@solidiom/recipes-css"
+import { StyledDataTable } from "@solidiom/recipes-css"
+import * as DataTable from "@solidiom/data-table"
 
 const columns = [
   { id: "name", accessorKey: "name", sortable: true },

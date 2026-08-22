@@ -61,7 +61,7 @@ Remediation options:
 
 - `solidiom add dialog --mode source --diff` — Preview what would change
 - `solidiom add dialog --mode source --force` — Overwrite local changes
-- `solidiom diff dialog` — Review all local modifications before deciding
+- `solidiom diff --primitive dialog` — Review all local modifications before deciding
 
 ## Cancelled Create
 

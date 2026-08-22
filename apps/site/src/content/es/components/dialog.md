@@ -24,9 +24,11 @@ Styled dialog component — the recipe wrapper for the css, tailwind, unocss pro
 El componente Dialog es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/dialog`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import { Dialog } from "@solidiom/recipes-css"
+import { StyledDialog } from "@solidiom/recipes-css"
 
-;<Dialog>Contenido</Dialog>
+;<StyledDialog trigger={<button type="button">Abrir</button>} title="Diálogo">
+  Contenido
+</StyledDialog>
 ```
 
 ## Instalación

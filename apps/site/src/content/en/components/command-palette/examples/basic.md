@@ -22,7 +22,8 @@ source:
 The Command Palette component provides a searchable list of commands with keyboard navigation.
 
 ```tsx
-import { StyledCommandPalette, CommandPalette } from "@solidiom/recipes-css"
+import { StyledCommandPalette } from "@solidiom/recipes-css"
+import * as CommandPalette from "@solidiom/command-palette"
 
 ;<CommandPalette.Root>
   <CommandPalette.Input placeholder="Type a command..." />

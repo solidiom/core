@@ -90,7 +90,7 @@ Options to resolve conflicts:
 
 1. `solidiom add dialog --mode source --diff` — Preview pending changes before applying
 2. `solidiom add dialog --mode source --force` — Overwrite locally modified files
-3. `solidiom diff dialog` — Review all changes between installed source and lockfile
+3. `solidiom diff --primitive dialog` — Review all changes between installed source and lockfile
 
 ## Verification Bypass
 

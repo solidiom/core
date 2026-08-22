@@ -20,7 +20,8 @@ Form field wrapper with label, control, description, and error message styling.
 The Field component is a styled recipe wrapper around the `@solidiom/field` primitive. It provides a composition layer for form fields with semantic styling for label, description, and error states.
 
 ```tsx
-import { StyledField, Field } from "@solidiom/recipes-css"
+import { StyledField } from "@solidiom/recipes-css"
+import * as Field from "@solidiom/field"
 import { StyledInput } from "@solidiom/recipes-css"
 
 ;<StyledField>

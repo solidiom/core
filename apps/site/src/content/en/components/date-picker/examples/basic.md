@@ -8,8 +8,7 @@ maturity: draft
 product: Date Picker
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "date-picker"
+package: "@solidiom/date-picker"
 section: examples
 exampleId: date-picker-component-basic
 source:
@@ -22,7 +21,7 @@ runnable: true
 The Date Picker component combines a text input with a calendar overlay for selecting dates.
 
 ```tsx
-import { StyledDatePicker, DatePicker } from "@solidiom/recipes-css"
+import * as DatePicker from "@solidiom/date-picker"
 
 ;<DatePicker.Root>
   <DatePicker.Input placeholder="Select a date" />

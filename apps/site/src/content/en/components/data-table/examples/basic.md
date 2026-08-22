@@ -22,7 +22,8 @@ runnable: true
 The Data Table component is a styled recipe wrapper around the `@solidiom/data-table` primitive. It provides a sortable, selectable table with accessible header cells and row selection.
 
 ```tsx
-import { StyledDataTable, DataTable } from "@solidiom/recipes-css"
+import { StyledDataTable } from "@solidiom/recipes-css"
+import * as DataTable from "@solidiom/data-table"
 
 const columns = [
   { id: "name", accessorKey: "name", sortable: true },
@@ -58,7 +59,8 @@ const data = [
 Enable single or multiple row selection with the `selectionMode` prop.
 
 ```tsx
-import { StyledDataTable, DataTable } from "@solidiom/recipes-css"
+import { StyledDataTable } from "@solidiom/recipes-css"
+import * as DataTable from "@solidiom/data-table"
 
 ;<StyledDataTable columns={columns} data={data} rowIdKey="id" selectionMode="single">
   <DataTable.Header>

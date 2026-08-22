@@ -8,9 +8,7 @@ maturity: beta
 product: Input OTP
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "input-otp"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/input-otp"
 translationSourceHash: "d0e37427c71490edf1a74dcdb74b94e4789a697cb4c559d06b0b1547a5564476"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled input OTP component — the recipe wrapper for the css, tailwind, unocss 
 El componente Input OTP es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/input-otp`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as InputOtp from "@solidiom/recipes-css"
+import * as InputOtp from "@solidiom/input-otp"
 
 ;<InputOtp.Root maxLength={6}>
   <InputOtp.Group>
@@ -44,7 +42,7 @@ import * as InputOtp from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/input-otp
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/input-otp` correspondiente como dependencia par.

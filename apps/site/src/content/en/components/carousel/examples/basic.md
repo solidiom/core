@@ -8,8 +8,7 @@ maturity: draft
 product: Carousel
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "carousel"
+package: "@solidiom/carousel"
 section: examples
 exampleId: carousel-component-basic
 source:
@@ -22,7 +21,7 @@ source:
 The Carousel component provides a scrollable container for displaying content in a fixed viewport.
 
 ```tsx
-import { StyledCarousel, Carousel } from "@solidiom/recipes-css"
+import * as Carousel from "@solidiom/carousel"
 
 ;<Carousel.Root
   physics={Carousel.simpleSnapPhysics}

@@ -20,14 +20,10 @@ El comando `solidiom create` genera un nuevo proyecto desde una plantilla, con c
 ## Uso interactivo
 
 ```bash
-solidiom create
+solidiom create my-app
 ```
 
-La CLI solicitará de forma interactiva:
-
-1. Plantilla a utilizar
-2. Nombre del proyecto
-3. Perfil de estilo
+La CLI solicita de forma interactiva la plantilla y el perfil de estilo. El nombre del proyecto es un argumento posicional obligatorio.
 
 ## Uso no interactivo
 
@@ -107,7 +103,7 @@ Estas protecciones son intencionales y no se pueden desactivar con `--force`.
 
 ## Nombre del proyecto
 
-El nombre del proyecto (pasado con `--name` o como argumento posicional) debe cumplir con las reglas de nomenclatura de paquetes npm:
+El nombre del proyecto, pasado como argumento posicional, debe cumplir con las reglas de nomenclatura de paquetes npm:
 
 - Minúsculas
 - Solo caracteres `[a-z0-9-._~]`

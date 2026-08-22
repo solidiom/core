@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Scroll Area proporciona un contenedor desplazable con estilos personalizados y una barra de desplazamiento visible.
 
 ```tsx
-import { StyledScrollArea, ScrollArea } from "@solidiom/recipes-css"
+import { StyledScrollArea } from "@solidiom/recipes-css"
+import * as ScrollArea from "@solidiom/scroll-area"
 
 ;<StyledScrollArea type="always" style={{ height: "200px" }}>
   <ScrollArea.Viewport>

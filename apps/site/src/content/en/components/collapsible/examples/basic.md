@@ -8,8 +8,7 @@ maturity: draft
 product: Collapsible
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "collapsible"
+package: "@solidiom/collapsible"
 section: examples
 exampleId: collapsible-component-basic
 source:
@@ -22,7 +21,7 @@ runnable: true
 The Collapsible component manages a section of content that can be toggled between visible and hidden states.
 
 ```tsx
-import { StyledCollapsible, Collapsible } from "@solidiom/recipes-css"
+import * as Collapsible from "@solidiom/collapsible"
 
 ;<Collapsible.Root>
   <Collapsible.Trigger>Show details</Collapsible.Trigger>

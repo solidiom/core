@@ -8,8 +8,7 @@ maturity: draft
 product: Date Picker
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "date-picker"
+package: "@solidiom/date-picker"
 section: examples
 exampleId: date-picker-component-basic
 source:
@@ -26,7 +25,7 @@ translationReviewedAt: "2026-08-18"
 El componente Date Picker combina un campo de texto con una superposición de calendario para seleccionar fechas.
 
 ```tsx
-import { StyledDatePicker, DatePicker } from "@solidiom/recipes-css"
+import * as DatePicker from "@solidiom/date-picker"
 
 ;<DatePicker.Root>
   <DatePicker.Input placeholder="Seleccione una fecha" />

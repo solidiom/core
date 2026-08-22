@@ -8,9 +8,7 @@ maturity: beta
 product: Collapsible
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "collapsible"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/collapsible"
 translationSourceHash: "e65bf19a03db2b7bf7ba14e518e12f3651de4524c5fab88eb80c242105a3c32e"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled collapsible component — the recipe wrapper for the css, tailwind, unocs
 El componente Collapsible es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/collapsible`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as Collapsible from "@solidiom/recipes-css"
+import * as Collapsible from "@solidiom/collapsible"
 
 ;<Collapsible.Root>
   <Collapsible.Trigger>Toggle content</Collapsible.Trigger>
@@ -37,7 +35,7 @@ import * as Collapsible from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/collapsible
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/collapsible` correspondiente como dependencia par.

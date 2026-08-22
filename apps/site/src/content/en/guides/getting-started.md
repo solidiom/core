@@ -16,16 +16,16 @@ Get up and running with Solidiom in under 5 minutes.
 
 ## Prerequisites
 
-- Node.js 20+ (LTS recommended)
+- Node.js 24+ (the workspace requires Node 24)
 - A package manager: npm, pnpm, Yarn, or Bun
 
 ## Create a Project
 
 ```sh
-npx solidiom create my-app --template saas-dashboard
+npx @solidiom/cli create my-app --template saas-dashboard
 cd my-app
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## Choose a Template
@@ -42,9 +42,9 @@ Browse all templates at [/templates/](/templates/).
 Add individual components to an existing project:
 
 ```sh
-npx solidiom add button
-npx solidiom add dialog
-npx solidiom add data-table
+npx @solidiom/cli add button
+npx @solidiom/cli add dialog
+npx @solidiom/cli add data-table
 ```
 
 ## Choose a Styling Profile
@@ -59,17 +59,21 @@ Set your profile during project creation or in `.solidiom/config.json`.
 
 ## Choose a Theme
 
-Apply a preset theme or build your own:
+Install the theme package and import one of its CSS or Tailwind entrypoints:
 
 ```sh
-npx solidiom add --theme ocean
+pnpm add @solidiom/themes
 ```
 
-Available presets: Ocean, Forest, Slate, Aurora.
+```css
+@import "@solidiom/themes/css/ocean.css";
+```
+
+Available package themes: Solidiom Default, Ocean, Forest, Slate, and Aurora.
 
 ## Next Steps
 
 - [Browse primitives](/primitives/) — 86 headless building blocks
-- [Browse components](/components/) — 32 styled recipe wrappers
+- [Browse components](/components/) — 32 styled catalog components
 - [Theme builder](/themes/builder/) — visual theme editor
 - [CLI reference](/guides/cli-overview/) — full command documentation

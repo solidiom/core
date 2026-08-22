@@ -8,8 +8,7 @@ maturity: draft
 product: Virtual List
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "virtual-list"
+package: "@solidiom/virtual-list"
 section: examples
 exampleId: virtual-list-component-basic
 source:
@@ -26,7 +25,7 @@ translationReviewedAt: "2026-08-18"
 El componente Virtual List solo renderiza los elementos visibles en una lista grande para un rendimiento óptimo.
 
 ```tsx
-import { StyledVirtualList, VirtualList } from "@solidiom/recipes-css"
+import * as VirtualList from "@solidiom/virtual-list"
 
 ;<VirtualList.Root totalCount={1000} itemSize={40} height="200px">
   {(items) =>

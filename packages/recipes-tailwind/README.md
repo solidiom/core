@@ -14,10 +14,10 @@ pnpm add @solidiom/recipes-tailwind tailwindcss @tailwindcss/vite
 
 ## Usage
 
-Import components directly:
+Import the styled wrappers exported by the package:
 
 ```tsx
-import { Button, Dialog, Tabs } from "@solidiom/recipes-tailwind"
+import { StyledButton, StyledDialog, StyledTabs } from "@solidiom/recipes-tailwind"
 ```
 
 Import the theme CSS in your application entry:
@@ -36,7 +36,7 @@ Import the theme CSS in your application entry:
 
 ## Available components
 
-All 52 Solidiom primitives have corresponding Tailwind recipes. Individual component styles can be imported via `@solidiom/recipes-tailwind/styles/{component}.css`.
+The package's current profile inventory is the `supportedPrimitives` export in each recipe package. The Tailwind profile currently lists 32 supported primitives. Individual component styles can be imported via `@solidiom/recipes-tailwind/styles/{component}.css`.
 
 ## Theming
 

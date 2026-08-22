@@ -64,12 +64,12 @@ The Solidiom CLI creates projects, adds primitives, and manages your workspace. 
 ```bash
 solidiom create my-app
 solidiom add accordion
-solidiom registry verify
+solidiom verify --registry
 ```
 
 ### Three Styling Recipes
 
-One primitive, three styling outputs:
+Supported recipe wrappers are available as CSS, Tailwind, and UnoCSS outputs. A given registry primitive may not have a `Styled*` wrapper in every profile.
 
 - **CSS** — Native custom properties and BEM-style class names
 - **Tailwind** — Tailwind CSS utility composition
@@ -89,10 +89,10 @@ Beta 1 is certified on two rendering engines:
 ### Install
 
 ```bash
-npm create solidiom@latest my-app
+npx @solidiom/cli create my-app
 cd my-app
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ### Add Your First Primitive
@@ -101,17 +101,15 @@ npm run dev
 solidiom add accordion
 ```
 
-The CLI adds the primitive, all recipe outputs, and theme compatibility to your workspace.
+The CLI adds the requested deliverable and any selected styling profile; recipe wrappers are available only for the supported primitive set.
 
 ### Available Commands
 
-| Command                         | Description                       |
-| ------------------------------- | --------------------------------- |
-| `solidiom create <name>`        | Scaffold a new project            |
-| `solidiom add <primitive>`      | Add a primitive to your workspace |
-| `solidiom registry verify`      | Verify package integrity          |
-| `solidiom theme list`           | List available presets            |
-| `solidiom theme apply <preset>` | Apply a theme preset              |
+| Command                      | Description                       |
+| ---------------------------- | --------------------------------- |
+| `solidiom create <name>`     | Scaffold a new project            |
+| `solidiom add <primitive>`   | Add a primitive to your workspace |
+| `solidiom verify --registry` | Verify registry integrity         |
 
 ## Known Limitations
 

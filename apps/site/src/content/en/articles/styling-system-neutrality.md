@@ -77,21 +77,23 @@ solidiom add button --styling css
 
 ## The Theme Layer
 
-Themes are profile-agnostic. The same theme preset (Ocean, Forest, Slate, Aurora) works identically across all three styling profiles because themes define CSS custom properties, not utility classes.
+Themes are profile-agnostic. The same `--ui-*` token values can be consumed by the CSS, Tailwind, and UnoCSS recipes. The `@solidiom/themes` package provides CSS and Tailwind entrypoints for five themes: Solidiom Default, Ocean, Forest, Slate, and Aurora.
 
 ```css
-/* Works with any profile */
+/* Shared recipe token namespace */
 :root {
-  --sol-color-primary: oklch(0.6 0.2 250);
+  --ui-primary: oklch(0.6 0.2 250);
 }
+```
+
 ```
 
 ## Extending Recipes
 
 Recipes are source-owned. To customize:
 
-1. Install in source mode: `solidiom add button --source`
-2. Modify the recipe file directly
+1. Install in source mode: `solidiom add button --mode source`
+2. Modify the materialized source files directly
 3. The styling remains connected to the primitive's data attributes
 
 You're never locked into our design decisions. The recipe is a starting point, not a cage.
@@ -105,3 +107,4 @@ Phase 3A introduces optional compile-time transforms:
 - **Variant expansion** — pre-computes variant combinations
 
 These optimizations work identically across all three profiles because they operate on the data-attribute contract, not on styling implementation details.
+```
