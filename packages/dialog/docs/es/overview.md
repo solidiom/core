@@ -54,7 +54,7 @@ Instala el paquete con `pnpm add @solidiom/dialog`. El paquete requiere dependen
 
 ## Partes
 
-Dialog expone siete partes:
+Dialog expone ocho partes:
 
 - **Root** — contenedor de estado que gestiona abierto/cerrado, modal/no modal y modos controlado/no controlado.
 - **Trigger** — el botón que abre el diálogo. Lleva `aria-haspopup="dialog"` y `aria-expanded`.

@@ -13,9 +13,9 @@ lifecycle: current
 
 ## Prerequisites
 
-- Node ≥ 20, pnpm ≥ 10 installed (`mise install` handles this)
+- Node ≥ 24, pnpm ≥ 10 installed (`mise install` handles this)
 - Workspace dependencies installed (`pnpm install`)
-- Familiarity with Solid 2 beta patterns (see `docs/architecture/solid2-migration-notes.md`)
+- Familiarity with Solid 2 patterns (see `docs/architecture/solid2-migration-notes.md`)
 
 ## Overview
 
@@ -310,41 +310,9 @@ export * as <Name> from "@solidiom/<name>"
 
 **`packages/primitives/package.json`** — add `"@solidiom/<name>": "workspace:*"` to `dependencies`.
 
-## Step 8 — (Legacy) Demo for the docs app
+## Step 8 — Examples for the docs site
 
-> **Note:** The legacy `apps/docs/` app is frozen. This step is retained for historical reference only. New primitives do not need a demo here — `apps/site/` generates examples from registry and API artifacts at build time.
-
-### `apps/docs/src/demos/<name>-demo.tsx`
-
-```tsx
-import * as <Name> from "@solidiom/<name>"
-
-export function <Name>Demo() {
-  return (
-    <div class="flex flex-wrap items-center gap-3">
-      <<Name>.Root class="...">Default</<Name>.Root>
-    </div>
-  )
-}
-
-export const <name>DemoCode = `import * as <Name> from "@solidiom/<name>"
-
-function <Name>Example() {
-  return <<Name>.Root>Content</<Name>.Root>
-}
-`
-```
-
-### Wire into docs (legacy only)
-
-> These edits are for the frozen `apps/docs/` app. Only required if maintaining the legacy site.
-
-| File                           | Change                                                        |
-| ------------------------------ | ------------------------------------------------------------- |
-| `apps/docs/src/demos/index.ts` | Import `<Name>Demo` + `<name>DemoCode`, add to `demos` record |
-| `apps/docs/package.json`       | Add `"@solidiom/<name>": "workspace:*"` to `dependencies`     |
-
-Note: `apps/docs/src/lib/primitives.ts` reads from `registry/index.json` automatically — no manual edit needed there.
+New primitives do not need hand-authored demos. The documentation site (`apps/site/`) generates examples from the registry and API artifacts at build time. Author runnable examples under `packages/<name>/docs/examples/` if the primitive needs primitive-specific example coverage.
 
 ## Step 9 — Generate registry manifest
 
@@ -368,7 +336,6 @@ This checks every contract in one command:
 - Test presence and assertions
 - Registry manifest consistency
 - Umbrella package wiring
-- Docs demo and dependency
 - Recipe classification and wiring (if recipe-classified)
 - Builds, typechecks, and tests pass
 
@@ -407,7 +374,6 @@ Copy this into your PR description:
 - [ ] Tailwind + CSS recipes wired (if recipe-classified)
 - [ ] UnoCSS added to supportedPrimitives (if recipe-classified)
 - [ ] Umbrella: `@solidiom/primitives` re-exports and depends on the new primitive
-- [ ] (Legacy) Docs: demo file, demos/index.ts entry, apps/docs/package.json dependency
 - [ ] `pnpm registry:build` generates `registry/<name>.json`
 - [ ] `pnpm primitive:gate -- <name>` passes
 ```

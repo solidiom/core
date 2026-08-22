@@ -120,15 +120,16 @@ The linked package group is:
 
 ## CI strategy
 
-The CI/release estate has three workflows:
+The CI/release estate has four workflows:
 
-| Workflow      | Trigger                                          | Purpose                                                                                             |
-| ------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
-| `ci.yml`      | Pull requests, pushes to `main`, manual dispatch | Tiered validation and internal PR previews                                                          |
-| `release.yml` | Site-path pushes to `main`, manual dispatch      | Production package release, site deployment, or both                                                |
-| `nightly.yml` | Daily 04:00 UTC, manual dispatch                 | Solid compatibility matrix, full browser suite, dependency checks, and visual-baseline regeneration |
+| Workflow          | Trigger                                     | Purpose                                                                                             |
+| ----------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `ci-packages.yml` | Manual dispatch (push/PR triggers dormant)  | Package build, tests, accessibility, CLI smoke, catalog + quality gates                             |
+| `ci-site.yml`     | Manual dispatch (push/PR triggers dormant)  | Site check, build, E2E, visual, Lighthouse, vertical-slice gate                                     |
+| `release.yml`     | Site-path pushes to `main`, manual dispatch | Production package release, site deployment, or both                                                |
+| `nightly.yml`     | Daily 04:00 UTC, manual dispatch            | Solid compatibility matrix, full browser suite, dependency checks, and visual-baseline regeneration |
 
-`ci.yml` runs fast checks on pull requests: format, typecheck, build, a single Node test version, Chromium browser tests, a quick gate, and an internal preview deployment. Pushes to `main` and manual runs add the Node compatibility matrix, accessibility, site verification, CLI smoke tests, catalog gates, and the full gate. Browser compatibility across Chromium, Firefox, and WebKit belongs to the nightly suite.
+`ci-packages.yml` fast tier (`full_matrix=false`) runs format, typecheck, build, a single Node test version, Chromium browser tests, and the quick gate. Its full tier (`full_matrix=true`) adds the Node 24/26 matrix, accessibility, CLI smoke tests, catalog gates, and the full gate. `ci-site.yml` checks and builds the site, and on its full tier adds E2E, visual, Lighthouse, and the vertical-slice gate. Browser compatibility across Chromium, Firefox, and WebKit belongs to the nightly suite. Both CI workflows are currently manual-dispatch only.
 
 ## Visual baselines
 
@@ -174,11 +175,12 @@ Check the `release.yml` run for site boundary, route-parity, build, or Cloudflar
 
 ## File reference
 
-| File                            | Purpose                                             |
-| ------------------------------- | --------------------------------------------------- |
-| `scripts/release.sh`            | Thin dispatcher for `release.yml`                   |
-| `scripts/release-package.mjs`   | Independent single-package publisher                |
-| `.github/workflows/release.yml` | Unified package/site production release             |
-| `.github/workflows/ci.yml`      | Tiered pull-request and main-branch CI              |
-| `.github/workflows/nightly.yml` | Scheduled compatibility, browser, and visual checks |
-| `.changeset/config.json`        | Changeset and linked-package configuration          |
+| File                                | Purpose                                             |
+| ----------------------------------- | --------------------------------------------------- |
+| `scripts/release.sh`                | Thin dispatcher for `release.yml`                   |
+| `scripts/release-package.mjs`       | Independent single-package publisher                |
+| `.github/workflows/release.yml`     | Unified package/site production release             |
+| `.github/workflows/ci-packages.yml` | Package build, tests, and quality gates             |
+| `.github/workflows/ci-site.yml`     | Site check, build, E2E, visual, and Lighthouse      |
+| `.github/workflows/nightly.yml`     | Scheduled compatibility, browser, and visual checks |
+| `.changeset/config.json`            | Changeset and linked-package configuration          |

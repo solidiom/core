@@ -195,7 +195,7 @@ order.
 4. **Round-trip** — `JSON.parse(JSON.stringify(definition))` deep-equals the source
    `ThemeDefinition`, which `BUILDER-004`/`BUILDER-005`'s persistence depends on.
 
-All four checks pass cleanly for every shipped theme; `.github/workflows/ci.yml` runs
+All four checks pass cleanly for every shipped theme; the `build` job in `.github/workflows/ci-packages.yml` runs
 `pnpm run audit:theme-parity` as a blocking step.
 
 ### 5.1 Resolved finding: `solidiom-default`'s light-mode primary/primary-foreground pair

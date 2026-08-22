@@ -22,16 +22,15 @@ Internal documentation for Solidiom contributors and maintainers.
 
 ## Directory structure
 
-| Directory        | Purpose                                              |
-| ---------------- | ---------------------------------------------------- |
-| `architecture/`  | Stable system design and accepted decisions          |
-| `contracts/`     | Binding schemas, rules, and policies                 |
-| `plans/`         | Active status, priorities, and sequencing            |
-| `history/plans/` | Non-authoritative evidence moved out of active plans |
-| `guides/`        | Task-oriented contributor instructions               |
-| `evidence/`      | Generated or recorded verification evidence          |
-| `templates/`     | Fill-in-the-blank records                            |
-| `assets/`        | Images and other documentation support files         |
+| Directory       | Purpose                                      |
+| --------------- | -------------------------------------------- |
+| `architecture/` | Stable system design and accepted decisions  |
+| `contracts/`    | Binding schemas, rules, and policies         |
+| `plans/`        | Active status, priorities, and sequencing    |
+| `guides/`       | Task-oriented contributor instructions       |
+| `evidence/`     | Generated or recorded verification evidence  |
+| `templates/`    | Fill-in-the-blank records                    |
+| `assets/`       | Images and other documentation support files |
 
 ## Plan authority
 
@@ -44,7 +43,6 @@ Internal documentation for Solidiom contributors and maintainers.
 | What is the active library release roadmap? | `docs/plans/consolidated-plan.md` §5               |
 | Why were catalog decisions D1–D6 made?      | `docs/architecture/decisions/catalog-decisions.md` |
 | Why are typeset/prose recipe utilities?     | `docs/architecture/decisions/typeset.md`           |
-| What happened during completed phases?      | `docs/history/plans/`                              |
 
 ## Lifecycle
 
@@ -58,12 +56,10 @@ Every authored Markdown document carries a `lifecycle` field in YAML frontmatter
 | `stale`      | Known to be outdated                   | Do not cite until repaired                                  |
 | `archived`   | Historical, non-authoritative evidence | Use for context only; never infer current status            |
 
-Completed implementation detail may live under `docs/history/plans/` when removing it from an active plan materially improves retrieval. Every history document must identify the active authority and must not duplicate live counters or status claims.
-
 ## Conventions
 
 - Group by reader intent, not by document type alone.
-- Keep normal authored paths at `docs/<category>/<file>`; `docs/history/plans/<file>` and `docs/architecture/decisions/<file>` are the approved deeper namespaces.
+- Keep normal authored paths at `docs/<category>/<file>`; `docs/architecture/decisions/<file>` is the approved deeper namespace.
 - Put volatile status, counters, queues, and expected command results in one authoritative active plan only.
 - Put durable rationale in architecture or decision records, not task trackers.
 - Keep compatibility stubs short and point them to the replacement authority.

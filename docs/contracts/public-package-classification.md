@@ -144,9 +144,9 @@ lifecycle: current
 
 ### Removed at CUT-003
 
-| Package              | Name          | Notes                                                                        |
-| -------------------- | ------------- | ---------------------------------------------------------------------------- |
-| ~~`@solidiom/docs`~~ | Docs (legacy) | Removed. Parity verified at CUT-001. Archive at `docs/history/legacy-docs/`. |
+| Package              | Name          | Notes                                |
+| -------------------- | ------------- | ------------------------------------ |
+| ~~`@solidiom/docs`~~ | Docs (legacy) | Removed. Parity verified at CUT-001. |
 
 ### Tests (layer:test) — `private-internal`
 
