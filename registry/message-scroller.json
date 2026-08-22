@@ -1,6 +1,6 @@
 {
   "name": "message-scroller",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/message-scroller",
   "capabilities": [],
   "dependencies": [
@@ -30,10 +30,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -44,12 +47,15 @@
   "search": {
     "keywords": [
       "auto",
+      "auto-scroll",
       "container",
       "content",
+      "indicator",
       "indicators",
       "message",
       "new",
       "runtime",
+      "scroll anchor",
       "scroller",
       "scrolling",
       "utility",
@@ -62,11 +68,11 @@
     "fileDigests": {
       "src/index.tsx": "8ec08705c47b2d853d2091c48af98c842351ab6e4880f307868febeaf5a82b58"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/message-scroller"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

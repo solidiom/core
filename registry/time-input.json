@@ -1,6 +1,6 @@
 {
   "name": "time-input",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/time-input",
   "capabilities": [],
   "dependencies": [
@@ -32,10 +32,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -45,6 +48,7 @@
   },
   "search": {
     "keywords": [
+      "am pm",
       "and",
       "data",
       "entry",
@@ -55,7 +59,9 @@
       "runtime",
       "second",
       "segmented",
+      "spinbutton",
       "time",
+      "time input",
       "toggle",
       "with"
     ]
@@ -66,11 +72,11 @@
     "fileDigests": {
       "src/index.tsx": "5b18da44ffcc99c443584b722504eb2629f68c82ffec8fe5c60e07c11d27b47a"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/time-input"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

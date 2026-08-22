@@ -1,6 +1,6 @@
 {
   "name": "hover-card",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/hover-card",
   "capabilities": [
     {
@@ -84,11 +84,11 @@
       "src/hover-card.tsx": "5e8d0af140f413b7564f8a242266d7184a9d1f065d565c7ac511f05bcb87308c",
       "src/index.tsx": "e2bdc40d2040fdbabf8c43e66c47cfebd965f353de2f27e310f38ad6dc227571"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/hover-card"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

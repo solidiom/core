@@ -1,6 +1,6 @@
 {
   "name": "tokenizer",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/tokenizer",
   "capabilities": [],
   "dependencies": [
@@ -34,10 +34,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -52,12 +55,17 @@
       "input",
       "keyboard",
       "managing",
+      "multi-value",
       "multiple",
+      "paste",
+      "roving focus",
       "runtime",
       "support",
       "tag",
+      "tags",
       "token",
       "tokenizer",
+      "tokens",
       "values",
       "with"
     ]
@@ -68,11 +76,11 @@
     "fileDigests": {
       "src/index.tsx": "066c63f69a4a076995626f3cae8d0b22589f8289cb638b1a50756448e80c8519"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/tokenizer"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

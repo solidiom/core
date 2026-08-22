@@ -1,6 +1,6 @@
 {
   "name": "aspect-ratio",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/aspect-ratio",
   "capabilities": [],
   "dependencies": [
@@ -30,10 +30,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -44,11 +47,14 @@
   "search": {
     "keywords": [
       "aspect",
+      "aspect-ratio",
       "children",
       "constrains",
       "container",
       "layout",
+      "media",
       "ratio",
+      "responsive",
       "runtime",
       "specified",
       "that"
@@ -60,11 +66,11 @@
     "fileDigests": {
       "src/index.tsx": "17abb0b8d9a13f70feb36a8e1ffff2b92ef8f6d5629946463fa4bdc5323774ba"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/aspect-ratio"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

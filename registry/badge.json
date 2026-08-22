@@ -1,6 +1,6 @@
 {
   "name": "badge",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/badge",
   "capabilities": [],
   "dependencies": [
@@ -72,11 +72,11 @@
     "fileDigests": {
       "src/index.tsx": "0c24f4abfa5784f6f3207fc2ce074adcc8475bd25dfd533a78985aa986b5e45e"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/badge"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

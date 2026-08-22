@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
   "name": "checkbox",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/recipes-css",
   "deliverables": [
     "component"
@@ -30,7 +30,7 @@
         "src/recipes/checkbox.tsx": "cc7d17a3b9524fed5a57818b2569b663c2dda363e2009737455c70f5e0410410"
       }
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -47,5 +47,5 @@
   "dependencies": [
     "@solidiom/checkbox"
   ],
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

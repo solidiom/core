@@ -1,6 +1,6 @@
 {
   "name": "select",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/select",
   "capabilities": [],
   "dependencies": [
@@ -82,11 +82,11 @@
       "src/select-context.ts": "bf10233859db06b551a8a0aeee2039aeb75212be33b6995766035fde6ed9c0d5",
       "src/select.tsx": "f14453d83edd73198be4d35ac759f0b0da6b4db9217e87336bf401236a86e1c5"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/select"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
   "name": "tooltip",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/recipes-css",
   "deliverables": [
     "component"
@@ -30,7 +30,7 @@
         "src/recipes/tooltip.tsx": "8c836d3d8bd3059572dcb51beda8cae21600051ce9fac7716f1f720672fcbcee"
       }
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -47,5 +47,5 @@
   "dependencies": [
     "@solidiom/tooltip"
   ],
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

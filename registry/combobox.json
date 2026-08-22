@@ -1,6 +1,6 @@
 {
   "name": "combobox",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/combobox",
   "capabilities": [],
   "dependencies": [
@@ -82,11 +82,11 @@
       "src/combobox.tsx": "a815a32fa87440d20dccd5a48c62d10bcf73ad4f0cd2166c80adb5e33a7d38dc",
       "src/index.tsx": "29894f64708d6022ada60f6167da86e259fac7d09bd578c1fa7df4bb071171e7"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/combobox"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

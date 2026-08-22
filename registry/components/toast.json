@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
   "name": "toast",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/recipes-css",
   "deliverables": [
     "component"
@@ -30,7 +30,7 @@
         "src/recipes/toast.tsx": "c86956d011fe2ae9254887d55da3332e7ebabadfe016d29af6180303096e3032"
       }
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -47,5 +47,5 @@
   "dependencies": [
     "@solidiom/toast"
   ],
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

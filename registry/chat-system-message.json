@@ -1,6 +1,6 @@
 {
   "name": "chat-system-message",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/chat-system-message",
   "capabilities": [],
   "dependencies": [
@@ -30,10 +30,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -45,6 +48,7 @@
     "keywords": [
       "and",
       "announcement",
+      "aria-live",
       "bot",
       "chat",
       "content",
@@ -52,6 +56,7 @@
       "message",
       "messages",
       "runtime",
+      "status",
       "system"
     ]
   },
@@ -61,11 +66,11 @@
     "fileDigests": {
       "src/index.tsx": "538ae640d13426e0f98b25b7ab3ec1684fe3c98660e186303645bd471b0b4fed"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-system-message"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

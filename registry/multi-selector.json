@@ -1,6 +1,6 @@
 {
   "name": "multi-selector",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/multi-selector",
   "capabilities": [],
   "dependencies": [
@@ -35,10 +35,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -52,14 +55,19 @@
       "checkbox",
       "data",
       "dropdown",
+      "filter",
       "filtering",
       "input",
       "items",
       "multi",
+      "multi-select",
+      "roving focus",
       "runtime",
       "search",
       "select",
+      "selection",
       "selector",
+      "tags",
       "with"
     ]
   },
@@ -69,11 +77,11 @@
     "fileDigests": {
       "src/index.tsx": "3a01fd65b7c5b1934eced141f9b60232c64a90bb1052ae25648813092a233be4"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/multi-selector"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

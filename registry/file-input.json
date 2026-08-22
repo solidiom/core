@@ -1,6 +1,6 @@
 {
   "name": "file-input",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/file-input",
   "capabilities": [],
   "dependencies": [
@@ -30,10 +30,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -45,8 +48,11 @@
     "keywords": [
       "and",
       "data",
+      "drag and drop",
       "dropzone",
       "file",
+      "file input",
+      "file list",
       "input",
       "runtime",
       "support",
@@ -62,11 +68,11 @@
     "fileDigests": {
       "src/index.tsx": "fa3caf4ef6c85fbfe657dbac799aba441bd867bea36b371a161bec4aafd422c9"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/file-input"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

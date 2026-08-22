@@ -1,6 +1,6 @@
 {
   "name": "chart",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/chart",
   "capabilities": [],
   "dependencies": [
@@ -32,10 +32,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -46,10 +49,12 @@
   "search": {
     "keywords": [
       "accessible",
+      "canvas",
       "chart",
       "content",
       "data",
       "fallback",
+      "legend",
       "runtime",
       "table",
       "visualization",
@@ -63,11 +68,11 @@
     "fileDigests": {
       "src/index.tsx": "82de524ede499f420f568f9655e5007d6dbf8bff16c5100463e76eca4c1f21c7"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chart"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

@@ -1,6 +1,6 @@
 {
   "name": "context-menu",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/context-menu",
   "capabilities": [],
   "dependencies": [
@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "88fe81b9a89abdf65ed36f0c806ae5f3bc35ae17b42a98d4bb1e335d6d4055b9"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/context-menu"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

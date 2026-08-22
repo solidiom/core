@@ -1,6 +1,6 @@
 {
   "name": "resizable-panels",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/resizable-panels",
   "capabilities": [],
   "dependencies": [
@@ -77,11 +77,11 @@
       "src/panels-context.ts": "9ab5d1c128be258daf202afc585eaa4745e8805ae9af4a4773620815007347ba",
       "src/panels.tsx": "00600ba0ae703e17aea8731f87fbc8c31cdf6934f1c46c973c7a0e463b5465a6"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/resizable-panels"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

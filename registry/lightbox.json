@@ -1,6 +1,6 @@
 {
   "name": "lightbox",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/lightbox",
   "capabilities": [],
   "dependencies": [
@@ -32,10 +32,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -47,6 +50,7 @@
     "keywords": [
       "and",
       "controls",
+      "gallery",
       "image",
       "lightbox",
       "media",
@@ -63,11 +67,11 @@
     "fileDigests": {
       "src/index.tsx": "3b200155c396951297182c8be003f443ba3cc358a6f2aebd671925e0a6dc8407"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/lightbox"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

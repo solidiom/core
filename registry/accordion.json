@@ -1,6 +1,6 @@
 {
   "name": "accordion",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/accordion",
   "capabilities": [],
   "dependencies": [
@@ -86,11 +86,11 @@
       "src/accordion.tsx": "01ad14883152d9b6c8c7a154782c0c540ecbd50aee20366ecb6023d7247c1025",
       "src/index.tsx": "e158ccfb3700ecd1551fcc07c206badfb4b41cfdcff915f78bcea532e4397a5e"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/accordion"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

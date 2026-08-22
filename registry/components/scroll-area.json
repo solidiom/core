@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
   "name": "scroll-area",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/recipes-css",
   "deliverables": [
     "component"
@@ -30,7 +30,7 @@
         "src/recipes/scroll-area.tsx": "189ad334b7b7ec3df1f09fe548a745997ec4d47e226a3a33500bd747bddf2878"
       }
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -47,5 +47,5 @@
   "dependencies": [
     "@solidiom/scroll-area"
   ],
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }
