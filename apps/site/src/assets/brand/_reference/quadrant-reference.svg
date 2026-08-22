@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Solidiom mark — 2x2 composition, transparent background.
+
+  Geometry (viewBox units):
+    columns : left  x 0..60, right x 69..129   (60 wide, 9 gutter)
+    navy    top-left  "D": rect x 46..60, y 0..92   + semicircle r=46 bulging left
+    amber   top-right  square: 60 x 60 at (69, 0)
+    cream   bottom-left square: 60 x 60 at (0, 108)
+    teal    bottom-right "D": rect x 69..80, y 82..168 + semicircle r=43 bulging right
+
+  Each "D" is a rectangle whose outer side is a true semicircle
+  (radius = half the shape's height), so the curves stay exact at any size.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 168" width="129" height="168" fill="none" role="img">
+  <title>Solidiom</title>
+
+  <!-- top-left: navy half-round, flat edge on the right -->
+  <path d="M60 0H46a46 46 0 0 0 0 92h14z" fill="#050D24"/>
+
+  <!-- top-right: amber square -->
+  <rect x="69" y="0" width="60" height="60" fill="#F5B63D"/>
+
+  <!-- bottom-left: cream square -->
+  <rect x="0" y="108" width="60" height="60" fill="#E8D8C7"/>
+
+  <!-- bottom-right: teal half-round, flat edge on the left -->
+  <path d="M69 82h11a43 43 0 0 1 0 86H69z" fill="#32A98D"/>
+</svg>

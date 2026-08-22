@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="129" height="168" viewBox="0 0 129 168" fill="none" role="img" aria-labelledby="solidiom-symbol-mono-light-a-title">
+  <title id="solidiom-symbol-mono-light-a-title">Solidiom</title>
+  <!--
+    Dark-mode mark, VERSION A (current): single-ink canvas.
+    All four tiles collapse to #F8FAFC. This is the established variant used
+    on the site's dark header/footer today. Identical to symbol-mono-light.svg.
+    Ink: #F8FAFC (canvas), 17.06:1 on the dark canvas #0F172A.
+  -->
+  <g fill="#F8FAFC">
+    <path d="M60 0H46a46 46 0 0 0 0 92h14z"/>
+    <rect x="69" y="0" width="60" height="60"/>
+    <rect x="0" y="108" width="60" height="60"/>
+    <path d="M69 76h14a46 46 0 0 1 0 92H69z"/>
+  </g>
+</svg>

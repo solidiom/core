@@ -1,14 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="solidiom-social-card-title">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none" role="img" aria-labelledby="solidiom-social-card-title">
   <title id="solidiom-social-card-title">Solidiom</title>
   <!--
     Social-card (Open Graph / Twitter card) source template, 1200x630.
-    Default state shown here: masterbrand card with symbol, wordmark, and
-    a one-line descriptor. Per-page cards (guides, blog, catalog entries)
-    should reuse this background/lockup composition and swap only the
-    title/descriptor text region below the lockup — do not redesign the
-    layout per page. The diagonal brand gradient follows the canonical
-    palette (Indigo -> Blue -> Cyan) defined in
-    docs/solidiom/README.md section 8.2.
+    Default state: masterbrand card with symbol, wordmark, and a one-line
+    descriptor. Per-page cards (guides, blog, catalog entries) should reuse
+    this background and lockup composition and swap only the descriptor
+    text — do not redesign the layout per page.
+
+    The diagonal accent band follows the token palette's Indigo -> Blue ->
+    Cyan family (primary #5750D6, secondary #2563EB, accent #06B6D4).
+    It is used once, structurally, as a band — never as an effect applied
+    to the mark itself.
+
+    The symbol uses the monochrome-light variant because the card
+    background is dark; the full-colour mark's dark tile would disappear.
+    Fit: scaled to 220 units tall (s = 220/168) => 168.93 x 220 at (120, 180).
+
+    Convert text to outlined paths before exporting a raster card.
   -->
   <defs>
     <linearGradient id="sol-social-bg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -16,41 +24,24 @@
       <stop offset="100%" stop-color="#1E293B" />
     </linearGradient>
     <linearGradient id="sol-social-accent" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6D66F1" />
-      <stop offset="50%" stop-color="#3B82F6" />
+      <stop offset="0%" stop-color="#5750D6" />
+      <stop offset="50%" stop-color="#2563EB" />
       <stop offset="100%" stop-color="#06B6D4" />
     </linearGradient>
   </defs>
 
   <rect width="1200" height="630" fill="url(#sol-social-bg)" />
-
-  <!-- Diagonal accent band, restrained per the "no gloss/no gradient abuse" rule: used once, structurally, not as decoration on the mark itself. -->
   <rect x="0" y="600" width="1200" height="30" fill="url(#sol-social-accent)" />
 
-  <!-- Symbol, monochrome-light variant scaled up, left-aligned lockup. -->
-  <g transform="translate(120, 180) scale(2.2)">
-    <path
-      d="M 68 18
-         C 50 18, 36 28, 36 42
-         C 36 54, 46 58, 58 60"
-      fill="none"
-      stroke="#F8FAFC"
-      stroke-width="11"
-      stroke-linecap="round"
-    />
-    <path
-      d="M 32 82
-         C 50 82, 64 72, 64 58
-         C 64 46, 54 42, 42 40"
-      fill="none"
-      stroke="#F8FAFC"
-      stroke-width="11"
-      stroke-linecap="round"
-    />
+  <g transform="translate(120 180) scale(1.309524)" fill="#F8FAFC">
+    <path d="M60 0H46a46 46 0 0 0 0 92h14z"/>
+    <rect x="69" y="0" width="60" height="60"/>
+    <rect x="0" y="108" width="60" height="60"/>
+    <path d="M69 76h14a46 46 0 0 1 0 92H69z"/>
   </g>
 
   <text
-    x="380"
+    x="340"
     y="330"
     font-family="Inter Tight, Inter, sans-serif"
     font-size="72"
@@ -61,7 +52,7 @@
 
   <text
     x="120"
-    y="420"
+    y="470"
     font-family="Inter Variable, Inter, sans-serif"
     font-size="30"
     font-weight="400"

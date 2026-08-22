@@ -24,11 +24,48 @@
 }
 
 .site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.125rem;
   color: var(--color-foreground);
   text-decoration: none;
+}
+
+/* Brand mark: full colour on light surfaces, single-ink on dark. */
+.site-header__brand-mark {
+  display: inline-flex;
+  flex: none;
+}
+
+/* Both variants render as blocks; visibility is decided per theme below.
+   These selectors are class+element (specificity 0,2,0) so they outrank the
+   theme rules cleanly and are not undercut by a generic `svg` rule. */
+.site-header__brand-mark svg.site-header__brand-mark-color {
+  display: block;
+}
+.site-header__brand-mark svg.site-header__brand-mark-mono {
+  display: none;
+}
+
+/* Explicit dark theme: swap to the single-ink mark. */
+:root[data-theme="dark"] .site-header__brand-mark svg.site-header__brand-mark-color {
+  display: none;
+}
+:root[data-theme="dark"] .site-header__brand-mark svg.site-header__brand-mark-mono {
+  display: block;
+}
+
+/* No explicit theme + OS prefers dark: same swap. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .site-header__brand-mark svg.site-header__brand-mark-color {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .site-header__brand-mark svg.site-header__brand-mark-mono {
+    display: block;
+  }
 }
 
 /* Desktop nav: hidden below 768px, flex row at/above it. */

@@ -1,30 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none" role="img" aria-labelledby="title">
   <title id="title">Solidiom</title>
   <!--
-    Generated from apps/site/src/assets/brand/symbol.svg (BRAND-004),
-    scaled to a 512x512 canvas with a rounded-square backing surface
-    for maskable PWA icon use. Canonical Indigo background per
-    apps/site/src/assets/tokens.css, sol primary token.
+    Generated from apps/site/src/assets/brand/symbol.svg, on a rounded-square
+    backing surface for maskable PWA icon use. Same composition as
+    icon-192.svg, scaled by 512/192.
+
+    Fit: mark scaled to 298.67 units tall (s = 512/192 * 2/3) => 229.33 x 298.67,
+    centred at x (512 - 229.33) / 2 = 141.33, y (512 - 298.67) / 2 = 106.67.
+
+    Plate: #5750D6 (sol-primary). Ink: #F8FAFC (canvas).
   -->
-  <rect width="512" height="512" rx="108" fill="#6D66F1"/>
-  <g transform="translate(256, 256) scale(3.3) translate(-50, -50)">
-    <path
-      d="M 68 18
-         C 50 18, 36 28, 36 42
-         C 36 54, 46 58, 58 60"
-      fill="none"
-      stroke="#F8FAFC"
-      stroke-width="11"
-      stroke-linecap="round"
-    />
-    <path
-      d="M 32 82
-         C 50 82, 64 72, 64 58
-         C 64 46, 54 42, 42 40"
-      fill="none"
-      stroke="#F8FAFC"
-      stroke-width="11"
-      stroke-linecap="round"
-    />
+  <rect width="512" height="512" rx="108" fill="#5750D6"/>
+  <g transform="translate(141.33 106.67) scale(1.777778)" fill="#F8FAFC">
+    <path d="M60 0H46a46 46 0 0 0 0 92h14z"/>
+    <rect x="69" y="0" width="60" height="60"/>
+    <rect x="0" y="108" width="60" height="60"/>
+    <path d="M69 76h14a46 46 0 0 1 0 92H69z"/>
   </g>
 </svg>

@@ -213,9 +213,19 @@ Dark mode's `#8B83F8` and the light-mode hover state `#5B54E0` already passed an
 left unchanged.
 
 The literal brand mark (`apps/site/src/assets/brand/*.svg`, the PWA icons, and
-`manifest.webmanifest`'s `theme_color`) intentionally keeps the original `#6D66F1` — a
-logo is not held to text-contrast rules, and diverging the _UI token_ from the _brand
-mark_ was a deliberate choice, not an oversight.
+`manifest.webmanifest`'s `theme_color`) no longer diverges. The quadrant mark that
+replaced the earlier "Bracket S" identity draws all four of its fills from existing
+tokens — `surface-inverse` `#0F172A`, `primary`, `border` `#CBD5E1`, and `accent`
+`#06B6D4` — so the mark now tracks the token palette instead of pinning a separate brand
+hex. `manifest.webmanifest`'s `theme_color` is the one remaining value still carrying the
+retired `#6D66F1` and should be reconciled with `--sol-primary`. A logo is still not held
+to text-contrast rules; see `apps/site/src/assets/brand/README.md` for why the
+full-colour mark is restricted to light surfaces.
+
+> **Note on the hexes above:** this section records the BRAND-002 fix as it landed.
+> `--sol-primary` has since moved again and is `#5750D6` in
+> `apps/site/src/assets/tokens.css` today, with `--sol-primary-hover` at `#4C46C5`.
+> Treat `tokens.css` as the source of truth rather than the literals in this narrative.
 
 `tools/audit-theme-parity.test.ts` carries a regression guard asserting the full contrast
 matrix passes with zero violations.

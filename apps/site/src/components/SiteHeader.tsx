@@ -35,7 +35,35 @@ export function SiteHeader(props: SiteHeaderProps) {
     <header class="site-header">
       <div class="site-header__bar">
         <a href={homeHref()} class="site-header__brand">
-          Solidiom
+          <span class="site-header__brand-mark" aria-hidden="true">
+            <svg
+              class="site-header__brand-mark-color"
+              viewBox="0 0 129 168"
+              width="22"
+              height="28"
+              fill="none"
+            >
+              <path d="M60 0H46a46 46 0 0 0 0 92h14z" fill="#0F172A" />
+              <rect x="69" y="0" width="60" height="60" fill="#5750D6" />
+              <rect x="0" y="108" width="60" height="60" fill="#CBD5E1" />
+              <path d="M69 76h14a46 46 0 0 1 0 92H69z" fill="#06B6D4" />
+            </svg>
+            <svg
+              class="site-header__brand-mark-mono"
+              viewBox="0 0 129 168"
+              width="22"
+              height="28"
+              fill="none"
+            >
+              {/* Dark-mode mark, version C (multi-colour, retuned for dark).
+                  Mirrors apps/site/src/assets/brand/symbol-color-dark.svg. */}
+              <path d="M60 0H46a46 46 0 0 0 0 92h14z" fill="#F8FAFC" />
+              <rect x="69" y="0" width="60" height="60" fill="#8B83F8" />
+              <rect x="0" y="108" width="60" height="60" fill="#CBD5E1" />
+              <path d="M69 76h14a46 46 0 0 1 0 92H69z" fill="#22D3EE" />
+            </svg>
+          </span>
+          <span class="site-header__brand-text">Solidiom</span>
         </a>
 
         <nav class="site-header__desktop-nav" aria-hidden="false">

@@ -1,36 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="560" height="100" viewBox="0 0 560 100" role="img" aria-labelledby="solidiom-wordmark-title">
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="100" viewBox="0 0 320 100" fill="none" role="img" aria-labelledby="solidiom-wordmark-title">
   <title id="solidiom-wordmark-title">Solidiom</title>
   <!--
-    Primary horizontal lockup: symbol + lowercase wordmark, per
-    docs/solidiom/README.md section 6 ("lowercase wordmark: solidiom").
-    Source asset — set in Inter Tight (display face, BRAND-003). This
-    file references the font by family name for design-tool editing;
-    production rendering should convert text to outlines before export
-    to any raster/print artifact so the mark does not depend on font
-    availability.
+    Primary horizontal lockup: symbol + lowercase wordmark ("solidiom").
+
+    The quadrant symbol is portrait, so it is scaled to 76 units tall and
+    optically centred in the 100-unit band rather than filling it:
+    s = 76/168 => 58.36 x 76, placed at y (100 - 76) / 2 = 12.
+    The word then starts at x 86, leaving a 28-unit gap after the symbol.
+
+    Set in Inter Tight (display face). This source file references the font
+    by family name for design-tool editing; convert the text to outlined
+    paths before exporting any raster or print artifact so rendering does
+    not depend on font availability on the consuming system.
   -->
-  <g transform="translate(0, 0)">
-    <path
-      d="M 68 18
-         C 50 18, 36 28, 36 42
-         C 36 54, 46 58, 58 60"
-      fill="none"
-      stroke="#6D66F1"
-      stroke-width="11"
-      stroke-linecap="round"
-    />
-    <path
-      d="M 32 82
-         C 50 82, 64 72, 64 58
-         C 64 46, 54 42, 42 40"
-      fill="none"
-      stroke="#6D66F1"
-      stroke-width="11"
-      stroke-linecap="round"
-    />
+  <g transform="translate(0 12) scale(0.452381)">
+    <path d="M60 0H46a46 46 0 0 0 0 92h14z" fill="#0F172A"/>
+    <rect x="69" y="0" width="60" height="60" fill="#5750D6"/>
+    <rect x="0" y="108" width="60" height="60" fill="#CBD5E1"/>
+    <path d="M69 76h14a46 46 0 0 1 0 92H69z" fill="#06B6D4"/>
   </g>
   <text
-    x="118"
+    x="86"
     y="68"
     font-family="Inter Tight, Inter, sans-serif"
     font-size="52"
