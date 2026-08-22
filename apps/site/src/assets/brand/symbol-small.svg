@@ -1,27 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" role="img" aria-labelledby="solidiom-symbol-small-title">
+<svg xmlns="http://www.w3.org/2000/svg" width="132" height="168" viewBox="0 0 132 168" fill="none" role="img" aria-labelledby="solidiom-symbol-small-title">
   <title id="solidiom-symbol-small-title">Solidiom</title>
   <!--
-    Small-size simplified mark: thicker strokes and a slightly more open
-    curve than symbol.svg so the negative-space S remains legible at
-    16-24px (favicon, browser tab, small UI badges). Do not use this
-    variant above ~32px; use symbol.svg instead.
+    Small-size variant for <=32px use (favicon, browser tab, small badges).
+    Tile geometry is unchanged from symbol.svg; the only difference is the
+    gutter, widened from 9 to 12 units (viewBox 132 wide instead of 129).
+    At 16-24px the 9-unit gutter falls below one device pixel and the four
+    tiles bleed into a single blob; 12 units keeps them separate.
+    Do not use this variant above ~32px — use symbol.svg instead.
+
+    Grid: columns left x 0..60, right x 72..132 (60 wide, 12 gutter).
+    Still an exact 180-degree rotation, about (66, 84).
   -->
-  <path
-    d="M 70 20
-       C 50 20, 34 30, 34 44
-       C 34 55, 44 59, 58 61"
-    fill="none"
-    stroke="#6D66F1"
-    stroke-width="15"
-    stroke-linecap="round"
-  />
-  <path
-    d="M 30 80
-       C 50 80, 66 70, 66 56
-       C 66 45, 56 41, 42 39"
-    fill="none"
-    stroke="#6D66F1"
-    stroke-width="15"
-    stroke-linecap="round"
-  />
+  <path d="M60 0H46a46 46 0 0 0 0 92h14z" fill="#0F172A"/>
+  <rect x="72" y="0" width="60" height="60" fill="#5750D6"/>
+  <rect x="0" y="108" width="60" height="60" fill="#CBD5E1"/>
+  <path d="M72 76h14a46 46 0 0 1 0 92H72z" fill="#06B6D4"/>
 </svg>

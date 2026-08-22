@@ -1,35 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="220" viewBox="0 0 300 220" role="img" aria-labelledby="solidiom-lockup-stacked-title">
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" fill="none" role="img" aria-labelledby="solidiom-lockup-stacked-title">
   <title id="solidiom-lockup-stacked-title">Solidiom</title>
   <!--
-    Stacked lockup: symbol centered above the wordmark, for square or
-    vertical placements (app icons with text, title slides, badges).
+    Stacked lockup: symbol above wordmark, for square and vertical
+    placements (avatars, app tiles, merch, poster formats).
+
+    Fit: symbol scaled to 140 units tall (s = 140/168) => 107.5 x 140,
+    horizontally centred at x (240 - 107.5) / 2 = 66.25, top at y 16 so the
+    mark ends at y 156. The word is centre-anchored on the same axis
+    (x 120) with its baseline at y 206.
+
+    Convert text to outlined paths before any raster or print export.
   -->
-  <g transform="translate(100, 10) scale(1)">
-    <path
-      d="M 68 18
-         C 50 18, 36 28, 36 42
-         C 36 54, 46 58, 58 60"
-      fill="none"
-      stroke="#6D66F1"
-      stroke-width="11"
-      stroke-linecap="round"
-    />
-    <path
-      d="M 32 82
-         C 50 82, 64 72, 64 58
-         C 64 46, 54 42, 42 40"
-      fill="none"
-      stroke="#6D66F1"
-      stroke-width="11"
-      stroke-linecap="round"
-    />
+  <g transform="translate(66.25 16) scale(0.833333)">
+    <path d="M60 0H46a46 46 0 0 0 0 92h14z" fill="#0F172A"/>
+    <rect x="69" y="0" width="60" height="60" fill="#5750D6"/>
+    <rect x="0" y="108" width="60" height="60" fill="#CBD5E1"/>
+    <path d="M69 76h14a46 46 0 0 1 0 92H69z" fill="#06B6D4"/>
   </g>
   <text
-    x="150"
-    y="195"
+    x="120"
+    y="206"
     text-anchor="middle"
     font-family="Inter Tight, Inter, sans-serif"
-    font-size="40"
+    font-size="44"
     font-weight="600"
     letter-spacing="-0.5"
     fill="#111827"

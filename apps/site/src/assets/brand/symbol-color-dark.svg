@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="129" height="168" viewBox="0 0 129 168" fill="none" role="img" aria-labelledby="solidiom-symbol-color-dark-title">
+  <title id="solidiom-symbol-color-dark-title">Solidiom</title>
+  <!--
+    Dark-mode mark, VERSION C: multi-colour, retuned for the dark canvas.
+
+    The light-mode full-colour mark cannot be reused on dark surfaces: its
+    top-left tile is #0F172A (surface-inverse), which drops to 1.08:1 against
+    the dark canvas and vanishes. This variant keeps the four-tile colour
+    identity but maps each tile to a token that clears 3:1 on #0F172A, using
+    the palette's dark-mode brand values so the mark matches surrounding UI.
+
+    Tiles (all >=3:1 on the dark canvas):
+      top-left round   canvas  #F8FAFC  (was surface-inverse; lifted so it reads)
+      top-right square primary #8B83F8  (dark-mode primary, 5.70:1)
+      bottom-left sq.  border  #CBD5E1  (12.02:1)
+      bottom-right rd. accent  #22D3EE  (dark-mode accent, 9.88:1)
+  -->
+  <path d="M60 0H46a46 46 0 0 0 0 92h14z" fill="#F8FAFC"/>
+  <rect x="69" y="0" width="60" height="60" fill="#8B83F8"/>
+  <rect x="0" y="108" width="60" height="60" fill="#CBD5E1"/>
+  <path d="M69 76h14a46 46 0 0 1 0 92H69z" fill="#22D3EE"/>
+</svg>

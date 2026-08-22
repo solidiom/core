@@ -1,34 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192" fill="none" role="img" aria-labelledby="title">
   <title id="title">Solidiom</title>
   <!--
-    Generated from apps/site/src/assets/brand/symbol.svg (BRAND-004),
-    scaled to a 192x192 canvas with a rounded-square backing surface
-    for maskable PWA icon use. Canonical Indigo background per
-    apps/site/src/assets/tokens.css, sol primary token.
+    Generated from apps/site/src/assets/brand/symbol.svg, on a rounded-square
+    backing surface for maskable PWA icon use.
+
+    The quadrant mark is portrait (129 x 168) where the previous mark was
+    square, so it is centred with padding rather than scaled to fill.
+    Fit: mark scaled to 112 units tall (s = 112/168 = 2/3) => 86 x 112,
+    centred at x (192 - 86) / 2 = 53, y (192 - 112) / 2 = 40. This keeps the
+    mark inside the ~80% safe area that Android maskable icons crop to.
+
+    The monochrome-light variant is used because the plate is a saturated
+    brand colour — the full-colour mark's dark tile would not read on it.
+    Plate: #5750D6 (sol-primary). Ink: #F8FAFC (canvas), 5.7:1 on the plate.
   -->
-  <rect width="192" height="192" rx="40" fill="#6D66F1"/>
-  <!-- Symbol geometry occupies x:[32,68] y:[18,82] in its native 100x100
-       box; center of that bbox is (50, 50), matching the 100x100 center,
-       so a uniform scale+translate about the viewport center keeps the
-       mark centered on the icon canvas. -->
-  <g transform="translate(96, 96) scale(1.24) translate(-50, -50)">
-    <path
-      d="M 68 18
-         C 50 18, 36 28, 36 42
-         C 36 54, 46 58, 58 60"
-      fill="none"
-      stroke="#F8FAFC"
-      stroke-width="12"
-      stroke-linecap="round"
-    />
-    <path
-      d="M 32 82
-         C 50 82, 64 72, 64 58
-         C 64 46, 54 42, 42 40"
-      fill="none"
-      stroke="#F8FAFC"
-      stroke-width="12"
-      stroke-linecap="round"
-    />
+  <rect width="192" height="192" rx="40" fill="#5750D6"/>
+  <g transform="translate(53 40) scale(0.666667)" fill="#F8FAFC">
+    <path d="M60 0H46a46 46 0 0 0 0 92h14z"/>
+    <rect x="69" y="0" width="60" height="60"/>
+    <rect x="0" y="108" width="60" height="60"/>
+    <path d="M69 76h14a46 46 0 0 1 0 92H69z"/>
   </g>
 </svg>
