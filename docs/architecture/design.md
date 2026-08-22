@@ -14,6 +14,8 @@ lifecycle: current
 
 _Version 0.6 — Generated 2026-07-19T16:50:20Z_
 
+> **Implementation status:** This generated architecture document describes the v0.6 target design, including proposed migration and legacy-facade commands. Those proposed commands are not part of the current CLI implementation. For the implemented command surface, use the site CLI reference and `solidiom --help`.
+
 ---
 
 > **Purpose:** For Solid 2 platform engineers and UI system designers, explains the v0.6 architectural hardening decisions, records the refinements applied over v0.5, and provides an executive summary of the Solidiom architecture.
@@ -1447,8 +1449,8 @@ Package mode provides:
 
 - Source mode is used for at least one item.
 - Organization policy is enforced through `.solidiom/policy.json`.
-- A migration is run through `solidiom migrate`.
-- CI runs `solidiom verify` or `solidiom audit`.
+- A migration is proposed in the v0.6 design but is not implemented by the current CLI.
+- CI runs the implemented verification form with an artifact path or `--registry`, or runs `solidiom audit`.
 
 For teams that never enter source mode, `pnpm add @solidiom/dialog` and normal import statements are sufficient. The CLI treats absence of `.solidiom/config.json` as a valid pure-package-mode project.
 
@@ -2198,8 +2200,7 @@ Compatibility support is split deliberately:
 
 There are no compatibility adapters.
 
-## 20.2 Migration posture
-
+The migration commands in this section are proposed design targets, not currently registered CLI commands.
 Migration is source transformation and diagnostics, not hidden runtime emulation.
 
 Primary packages may include:

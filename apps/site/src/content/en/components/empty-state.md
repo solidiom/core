@@ -8,9 +8,7 @@ maturity: beta
 product: Empty State
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "empty-state"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/empty-state"
 ---
 
 Styled empty state component — the recipe wrapper for the css, tailwind, unocss profile(s) using the empty-state primitive.
@@ -20,7 +18,7 @@ Styled empty state component — the recipe wrapper for the css, tailwind, unocs
 The Empty State component is a styled recipe wrapper around the `@solidiom/empty-state` primitive. It adds composition, semantic styling slots, and variant support while delegating all state management and keyboard behavior to the underlying primitive.
 
 ```tsx
-import * as EmptyState from "@solidiom/recipes-css"
+import * as EmptyState from "@solidiom/empty-state"
 
 ;<EmptyState.Root>
   <EmptyState.Icon />
@@ -33,7 +31,7 @@ import * as EmptyState from "@solidiom/recipes-css"
 ## Installation
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/empty-state
 ```
 
 Install the recipe package for your chosen styling profile. The component requires the corresponding `@solidiom/empty-state` primitive as a peer dependency.

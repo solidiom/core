@@ -8,8 +8,7 @@ maturity: draft
 product: Empty State
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "empty-state"
+package: "@solidiom/empty-state"
 section: examples
 exampleId: empty-state-component-basic
 source:
@@ -26,14 +25,14 @@ translationReviewedAt: "2026-08-18"
 El componente Empty State proporciona un marcador de posición significativo cuando no hay contenido que mostrar.
 
 ```tsx
-import { StyledEmptyState, EmptyState } from "@solidiom/recipes-css"
+import * as EmptyState from "@solidiom/empty-state"
 
-;<StyledEmptyState>
+;<EmptyState.Root>
   <EmptyState.Icon>🔍</EmptyState.Icon>
   <EmptyState.Title>No results found</EmptyState.Title>
   <EmptyState.Description>Try adjusting your search.</EmptyState.Description>
   <EmptyState.Action>
     <button type="button">Clear filters</button>
   </EmptyState.Action>
-</StyledEmptyState>
+</EmptyState.Root>
 ```

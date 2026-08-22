@@ -34,11 +34,11 @@ El tema hereda la configuración de fuentes del proyecto y aplica una escala tip
 
 Ocean expone tokens semánticos a través de propiedades CSS personalizadas:
 
-- Superficie: `--sol-surface`, `--sol-surface-raised`, `--sol-surface-overlay`, `--sol-surface-sunken`
-- Primer plano: `--sol-foreground`, `--sol-foreground-muted`, `--sol-foreground-subtle`
-- Primario: `--sol-primary`, `--sol-primary-hover`, `--sol-primary-foreground`
-- Estados: `--sol-success`, `--sol-warning`, `--sol-destructive`
-- Radio: `--sol-radius-sm`, `--sol-radius`, `--sol-radius-lg`, `--sol-radius-full`
+- Superficie: `--ui-surface`, `--ui-surface-raised`, `--ui-surface-overlay`, `--ui-surface-sunken`
+- Primer plano: `--ui-foreground`, `--ui-foreground-muted`, `--ui-foreground-subtle`
+- Primario: `--ui-primary`, `--ui-primary-hover`, `--ui-primary-foreground`
+- Estados: `--ui-success`, `--ui-warning`, `--ui-destructive`
+- Radio: `--ui-radius-sm`, `--ui-radius`, `--ui-radius-lg`, `--ui-radius-full`
 
 ## Salidas
 

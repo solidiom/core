@@ -8,9 +8,7 @@ maturity: beta
 product: Calendar
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "calendar"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/calendar"
 translationSourceHash: "5915f5c222c587f398cac0596522746da3656d6db25ae2e253b26d2a7449e3ed"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled calendar component — the recipe wrapper for the css, tailwind, unocss p
 El componente Calendar es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/calendar`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as Calendar from "@solidiom/recipes-css"
+import * as Calendar from "@solidiom/calendar"
 
 ;<Calendar.Root>
   <Calendar.Header>
@@ -42,7 +40,7 @@ import * as Calendar from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/calendar
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/calendar` correspondiente como dependencia par.

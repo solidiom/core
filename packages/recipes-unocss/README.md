@@ -14,10 +14,10 @@ pnpm add @solidiom/recipes-unocss unocss @solidiom/unocss-preset
 
 ## Usage
 
-Import components directly:
+Import the styled wrappers exported by the package:
 
 ```tsx
-import { Button, Dialog, Tabs } from "@solidiom/recipes-unocss"
+import { StyledButton, StyledDialog, StyledTabs } from "@solidiom/recipes-unocss"
 ```
 
 Configure UnoCSS with the Solidiom preset:
@@ -41,7 +41,7 @@ export default defineConfig({
 
 ## Available components
 
-All 52 Solidiom primitives have corresponding UnoCSS recipes. Individual component styles can be imported via `@solidiom/recipes-unocss/styles/{component}.css`.
+The package's current profile inventory is the `supportedPrimitives` export in each recipe package. The UnoCSS profile currently lists 32 supported primitives. Individual component styles can be imported via `@solidiom/recipes-unocss/styles/{component}.css`.
 
 ## Related
 

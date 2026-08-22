@@ -24,7 +24,8 @@ Componente de tabla de datos estilizado — el envoltorio de receta para los per
 El componente Data Table es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/data-table`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import { StyledDataTable, DataTable } from "@solidiom/recipes-css"
+import { StyledDataTable } from "@solidiom/recipes-css"
+import * as DataTable from "@solidiom/data-table"
 
 const columns = [
   { id: "name", accessorKey: "name", sortable: true },

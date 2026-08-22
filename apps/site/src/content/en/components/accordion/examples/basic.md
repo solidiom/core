@@ -22,7 +22,8 @@ runnable: true
 The Accordion component is a styled recipe wrapper around the `@solidiom/accordion` primitive. It provides expandable sections with keyboard navigation and animated open/close behavior.
 
 ```tsx
-import { StyledAccordion, Accordion } from "@solidiom/recipes-css"
+import { StyledAccordion } from "@solidiom/recipes-css"
+import * as Accordion from "@solidiom/accordion"
 
 ;<StyledAccordion type="single" collapsible>
   <Accordion.Item value="item-1">

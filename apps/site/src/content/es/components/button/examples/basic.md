@@ -1,7 +1,7 @@
 ---
 contentSchemaVersion: 1
 title: Botón básico
-description: Botón estándar, botón de icono, botón de alternancia y grupo de botones con estilos de receta.
+description: Botón estándar, botón de alternancia y grupo de botones usando la primitiva con estilos de receta.
 keywords: [button, component, styled, recipe, variants]
 locale: es
 maturity: draft
@@ -13,8 +13,8 @@ recipe: "button"
 section: examples
 exampleId: button-component-basic
 source:
-  path: apps/site/src/components/ButtonComponentExample.tsx
-  export: ButtonComponentExample
+  path: apps/site/src/components/ButtonExample.tsx
+  export: ButtonExample
   language: tsx
 runnable: true
 translationSourceHash: "d44359aa8813d74d65990e7c54076725832aeef75d91561938fb4fdb7564ae42"
@@ -23,74 +23,37 @@ translationReviewedBy: "solidiom-team"
 translationReviewedAt: "2026-08-18"
 ---
 
-El componente Button es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/button`. Añade estilos de variante, composición y slots de estilo semántico mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
+El ejemplo ejecutable usa la primitiva `@solidiom/button` y la hoja de estilos de receta CSS. El paquete de recetas exporta `StyledButton`; no exporta `Button`, `IconButton`, `ToggleButton` ni `ButtonGroup` con esos nombres.
 
 ```tsx
-import { Button } from "@solidiom/recipes-css"
+import * as Button from "@solidiom/button"
+import "@solidiom/recipes-css/styles/button.css"
 
-;<Button variant="default" size="md">
-  Click me
-</Button>
+;<Button.Root loading={false}>Haz clic</Button.Root>
 ```
 
-## Con variantes
+## Botón de alternancia
 
-El componente soporta las mismas variantes que el primitivo, con estilos aplicados a través de la capa de receta.
+`ToggleButton` es exportado por la primitiva de botones:
 
 ```tsx
-import { Button } from "@solidiom/recipes-css"
+import * as Button from "@solidiom/button"
 
-;<Button variant="destructive" size="sm">
-  Delete
-</Button>
-;<Button variant="outline" size="lg">
-  Cancel
-</Button>
-;<Button variant="ghost">Secondary</Button>
-;<Button variant="link">Learn more</Button>
+;<Button.ToggleButton pressed={false} onPressedChange={() => undefined}>
+  Negrita
+</Button.ToggleButton>
 ```
 
-## IconButton
+## Grupo de botones
 
-Usa `IconButton` para acciones solo con icono con tamaño consistente.
-
-```tsx
-import { IconButton } from "@solidiom/recipes-css"
-
-;<IconButton aria-label="Cerrar" variant="ghost">
-  <CloseIcon />
-</IconButton>
-```
-
-## ToggleButton
-
-Usa `ToggleButton` para acciones alternables con estados presionados estilizados.
+`ButtonGroup` también es exportado por la primitiva de botones:
 
 ```tsx
-import { ToggleButton } from "@solidiom/recipes-css"
-import { createSignal } from "solid-js"
+import * as Button from "@solidiom/button"
 
-const ToggleExample = () => {
-  const [pressed, setPressed] = createSignal(false)
-
-  return (
-    <ToggleButton pressed={pressed()} onPressedChange={setPressed}>
-      Bold
-    </ToggleButton>
-  )
-}
-```
-
-## ButtonGroup
-
-Usa `ButtonGroup` para agrupar visualmente acciones relacionadas.
-
-```tsx
-import { Button, ButtonGroup } from "@solidiom/recipes-css"
-
-;<ButtonGroup orientation="horizontal">
-  <Button variant="outline">Draft</Button>
-  <Button variant="outline">Preview</Button>
-  <Button>Publish</Button>
-</ButtonGroup>
+;<Button.ButtonGroup orientation="horizontal">
+  <Button.Root>Borrador</Button.Root>
+  <Button.Root>Vista previa</Button.Root>
+  <Button.Root>Publicar</Button.Root>
+</Button.ButtonGroup>
 ```

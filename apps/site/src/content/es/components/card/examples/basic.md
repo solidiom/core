@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Card proporciona un envoltorio estilizado alrededor de contenedores de contenido con composición de encabezado, contenido principal y pie de página.
 
 ```tsx
-import { StyledCard, Card } from "@solidiom/recipes-css"
+import { StyledCard } from "@solidiom/recipes-css"
+import * as Card from "@solidiom/card"
 
 ;<StyledCard>
   <Card.Header>

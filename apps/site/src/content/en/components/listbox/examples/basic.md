@@ -8,8 +8,7 @@ maturity: draft
 product: Listbox
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "listbox"
+package: "@solidiom/listbox"
 section: examples
 exampleId: listbox-component-basic
 source:
@@ -22,11 +21,11 @@ source:
 The Listbox component provides a scrollable list of options from which the user can select one or more items.
 
 ```tsx
-import { StyledListbox, Listbox } from "@solidiom/recipes-css"
+import * as Listbox from "@solidiom/listbox"
 
-;<StyledListbox selectionMode="single" aria-label="Select a fruit">
+;<Listbox.Root selectionMode="single" aria-label="Select a fruit">
   <Listbox.Item value="apple">Apple</Listbox.Item>
   <Listbox.Item value="banana">Banana</Listbox.Item>
   <Listbox.Item value="cherry">Cherry</Listbox.Item>
-</StyledListbox>
+</Listbox.Root>
 ```

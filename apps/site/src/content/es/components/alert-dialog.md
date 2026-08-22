@@ -8,9 +8,7 @@ maturity: beta
 product: Alert Dialog
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "alert-dialog"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/alert-dialog"
 translationSourceHash: "3a70186082f206641156305a4e83fc6e95f00cd28cc5c3b5f9bdf836febff48b"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled alert dialog component — the recipe wrapper for the css, tailwind, unoc
 El componente Alert Dialog es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/alert-dialog`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as AlertDialog from "@solidiom/recipes-css"
+import * as AlertDialog from "@solidiom/alert-dialog"
 
 ;<AlertDialog.Root>
   <AlertDialog.Trigger>Delete item</AlertDialog.Trigger>
@@ -40,7 +38,7 @@ import * as AlertDialog from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/alert-dialog
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/alert-dialog` correspondiente como dependencia par.

@@ -6,7 +6,7 @@ tags: [accessibility, beta, evidence, C8]
 lifecycle: current
 ---
 
-> **Purpose:** Comprehensive index of all accessibility evidence for the Solidiom beta release. Enumerates coverage across 52 primitives and 30 components.
+> This evidence index is a historical Beta 1 snapshot. It documents the 52-primitive/30-component release surface at that time; it is not a current catalog inventory. Use `registry/index.json` and the current package metadata for present-day counts.
 
 ## Scope
 

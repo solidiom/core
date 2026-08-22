@@ -20,7 +20,8 @@ Styled navigation menu component — the recipe wrapper for the css, tailwind, u
 The Navigation Menu component is a styled recipe wrapper around the `@solidiom/navigation-menu` primitive. It provides accessible dropdown sub-menus for top-level navigation.
 
 ```tsx
-import { StyledNavigationMenu, NavigationMenu } from "@solidiom/recipes-css"
+import { StyledNavigationMenu } from "@solidiom/recipes-css"
+import * as NavigationMenu from "@solidiom/navigation-menu"
 
 ;<StyledNavigationMenu>
   <NavigationMenu.List>

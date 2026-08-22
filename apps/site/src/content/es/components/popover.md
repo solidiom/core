@@ -24,9 +24,9 @@ Styled popover component — the recipe wrapper for the css, tailwind, unocss pr
 El componente Popover es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/popover`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import { Popover } from "@solidiom/recipes-css"
+import { StyledPopover } from "@solidiom/recipes-css"
 
-;<Popover>Contenido</Popover>
+;<StyledPopover>Contenido</StyledPopover>
 ```
 
 ## Instalación

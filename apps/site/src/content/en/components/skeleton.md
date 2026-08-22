@@ -1,62 +1,40 @@
 ---
 contentSchemaVersion: 1
 title: Skeleton
-description: Styled skeleton component — the recipe wrapper for the css, tailwind, unocss profile(s) using the skeleton primitive.
-keywords: [skeleton, loading, placeholder, component, css, tailwind, unocss]
+description: Headless skeleton loading placeholder primitive.
+keywords: [skeleton, loading, placeholder, primitive]
 locale: en
 maturity: beta
 product: Skeleton
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "skeleton"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/skeleton"
 ---
 
-Styled skeleton component — the recipe wrapper for the css, tailwind, unocss profile(s) using the skeleton primitive.
+The `@solidiom/skeleton` package exports the `Skeleton.Root` primitive. No `StyledSkeleton` wrapper is exported by the recipe packages.
 
 ## Usage
 
-The Skeleton component is a styled recipe wrapper around the `@solidiom/skeleton` primitive. It adds composition, semantic styling slots, and variant support while delegating all state management and keyboard behavior to the underlying primitive.
-
 ```tsx
-import { Skeleton } from "@solidiom/recipes-css"
+import * as Skeleton from "@solidiom/skeleton"
 
 ;<div>
-  <Skeleton variant="circle" />
-  <Skeleton variant="text" />
-  <Skeleton variant="rectangular" />
+  <Skeleton.Root variant="circular" width="48" height="48" />
+  <Skeleton.Root variant="text" width="200" />
+  <Skeleton.Root variant="rectangular" width="200" height="80" />
 </div>
 ```
+
+`Skeleton.Root` accepts `variant` (`text`, `circular`, or `rectangular`), `width`, `height`, `class`, and `style` props.
 
 ## Installation
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/skeleton
 ```
 
-Install the recipe package for your chosen styling profile. The component requires the corresponding `@solidiom/skeleton` primitive as a peer dependency.
+## Styling and accessibility
 
-## Anatomy
+The primitive emits semantic data attributes, accepts `class` and `style` props, and renders the placeholder with `aria-hidden="true"`. A recipe wrapper is not currently exported for this primitive.
 
-The Skeleton component wraps the `@solidiom/skeleton` primitive. It exposes the primitive's parts through a recipe-applied composition layer:
-
-- **Root** — the skeleton element that applies recipe styles and the pulsing animation.
-
-## Variants & states
-
-Skeleton inherits its variant and state support from `@solidiom/skeleton`. Consult the primitive's documentation for the full list of supported variants, compound variants, and interactive states.
-
-## Styling
-
-Skeleton is available in css, tailwind, unocss profiles. Each profile applies the same semantic slots and variant classes, allowing you to swap profiles without changing component usage.
-
-Recipe classes follow the `solidiom-skeleton` namespace for CSS profiling and targeting.
-
-## SSR and hydration
-
-Skeleton renders as semantic HTML during server rendering. Interactive behavior activates on hydration without layout shift. The recipe layer adds no JavaScript dependencies beyond the underlying primitive.
-
-## Accessibility
-
-Skeleton delegates accessibility to `@solidiom/skeleton`. See the [Skeleton primitive accessibility contract](/primitives/skeleton/accessibility/) for the full keyboard, focus, and ARIA contract. The recipe wrapper does not introduce new semantics or interact with the accessibility tree beyond styling.
+See the [Skeleton primitive accessibility contract](/primitives/skeleton/accessibility/).

@@ -8,8 +8,7 @@ maturity: draft
 product: Tree
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "tree"
+package: "@solidiom/tree"
 section: examples
 exampleId: tree-component-basic
 source:
@@ -22,7 +21,7 @@ source:
 The Tree component displays a hierarchical list of items with expandable branches.
 
 ```tsx
-import { StyledTree, Tree } from "@solidiom/recipes-css"
+import * as Tree from "@solidiom/tree"
 
 ;<Tree.Root>
   <Tree.Item id="folder">

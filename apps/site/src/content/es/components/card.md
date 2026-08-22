@@ -24,7 +24,8 @@ Contenedor con encabezado, título, descripción, contenido y pie de página.
 El componente Card es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/card`. Proporciona una capa de composición para contenedores de contenido con estilos semánticos para secciones de encabezado, título, descripción, contenido principal y pie de página.
 
 ```tsx
-import { StyledCard, Card } from "@solidiom/recipes-css"
+import { StyledCard } from "@solidiom/recipes-css"
+import * as Card from "@solidiom/card"
 
 ;<StyledCard>
   <Card.Header>

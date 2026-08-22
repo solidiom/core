@@ -22,7 +22,8 @@ source:
 The Radio Group component is a styled recipe wrapper around the `@solidiom/radio-group` primitive. It provides accessible single-selection from a group of options with roving tabindex keyboard navigation.
 
 ```tsx
-import { StyledRadioGroup, RadioGroup } from "@solidiom/recipes-css"
+import { StyledRadioGroup } from "@solidiom/recipes-css"
+import * as RadioGroup from "@solidiom/radio-group"
 
 ;<StyledRadioGroup defaultValue="option1">
   <RadioGroup.Item value="option1">Option 1</RadioGroup.Item>

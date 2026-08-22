@@ -26,7 +26,7 @@ translationReviewedAt: "2026-08-18"
 El componente Progress indica el estado de completitud de una tarea.
 
 ```tsx
-import { StyledProgress, Progress } from "@solidiom/recipes-css"
+import { StyledProgress } from "@solidiom/recipes-css"
 
 ;<StyledProgress value={65} aria-label="Progreso de carga">
   <Progress.Indicator />
@@ -38,7 +38,7 @@ import { StyledProgress, Progress } from "@solidiom/recipes-css"
 Para operaciones con duración desconocida:
 
 ```tsx
-import { StyledProgress, Progress } from "@solidiom/recipes-css"
+import { StyledProgress } from "@solidiom/recipes-css"
 
 ;<StyledProgress value={null} aria-label="Cargando">
   <Progress.Indicator />

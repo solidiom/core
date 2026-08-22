@@ -1,7 +1,7 @@
 ---
 contentSchemaVersion: 1
 title: Calendar
-description: Date selection with day/month/year views.
+description: Selección de fechas con vistas de día, mes y año.
 keywords: [calendar, date, date-math, day, input, month, runtime]
 locale: es
 maturity: ga
@@ -15,18 +15,20 @@ notApplicable:
   - section: relationships
     reason: Calendar no tiene primitivos hermanos; se usa dentro de otras composiciones pero no posee un contrato inter-primitivo.
   - section: migration
-    reason: Sin API previa; esta es la primera versión publicada.
+    reason: No existe una API anterior; esta es la primera versión publicada.
   - section: testing
-    reason: La guía estándar de pruebas cubre este primitivo.
-translationSourceHash: "b5e2becdece40080b72fbd07ed88eec704e63c7ad377f864fee5b807166370ec"
-translationStatus: "stale"
+    reason: La guía de pruebas estándar cubre este primitivo.
+translationSourceHash: "fe95243661a87721e125474a76bf7bf97406373b5e19e35f485ef6cdf34e25ec"
+translationStatus: "human-reviewed"
+translationReviewedBy: "solidiom-team"
+translationReviewedAt: "2026-08-22"
 ---
 
-Date selection with day/month/year views.
+Selección de fechas con vistas de día, mes y año.
 
 ## Uso
 
-Compón `Root`, `Header`, `PrevButton`, `Title`, `NextButton`, `Grid`, `Cell`.
+Compón `Root`, `Header`, `PrevButton`, `Title`, `NextButton`, `Grid` y `Cell`.
 
 ```tsx
 import * as Calendar from "@solidiom/calendar"
@@ -52,7 +54,7 @@ Calendar expone 7 partes:
 
 ## RangeCalendar
 
-El paquete también exporta **RangeCalendar** — una variante de selección de rango con semántica de inicio/fin/reinicio. Su contrato de valor es `{ start: DateValue; end?: DateValue }`: el primer clic fija `start`, el segundo fija `end`, y un tercer clic reinicia el ciclo con un nuevo `start`. Reutiliza la cuadrícula compartida, la aritmética de fechas, el foco, la localización, el RTL y las fechas deshabilitadas de Calendar, y lleva `data-scope="range-calendar"`.
+El paquete también exporta **RangeCalendar**, una variante de selección de rango con semántica de inicio, fin y reinicio. Su contrato de valor es `{ start: DateValue; end?: DateValue }`: el primer clic establece `start`, el segundo establece `end` y un tercer clic reinicia el ciclo con un nuevo `start`. Reutiliza los elementos internos compartidos de cuadrícula, aritmética de fechas, foco, localización, RTL y fechas deshabilitadas de Calendar, e incluye `data-scope="range-calendar"`.
 
 ```tsx
 import * as Calendar from "@solidiom/calendar"
@@ -67,7 +69,7 @@ import * as Calendar from "@solidiom/calendar"
 </Calendar.RangeRoot>
 ```
 
-RangeCalendar expone 7 partes, reflejando las de Calendar:
+RangeCalendar expone 7 partes, que reflejan las de Calendar:
 
 - **RangeRoot** — `data-part="root"`. Gestiona el estado de selección de rango, la navegación por meses y el foco.
 - **RangeHeader** — `data-part="header"`.
@@ -81,16 +83,16 @@ El hook `useRangeCalendarContext` y el tipo `RangeValue` se exportan para compos
 
 ## Estilos
 
-Calendar lleva los atributos `data-scope="calendar"` y `data-part` en cada parte para la selección CSS/receta. Los atributos de estado como `data-state`, `data-disabled` y `data-highlighted` se exponen donde corresponda.
+Calendar incluye los atributos `data-scope="calendar"` y `data-part` en cada parte para seleccionar estilos CSS o recetas. Los atributos de estado como `data-state`, `data-disabled` y `data-highlighted` se exponen cuando corresponde.
 
-## Interacción con teclado
+## Teclado y comportamiento
 
-Este primitivo no tiene interacción con teclado. Renderiza contenido que no recibe foco ni responde a eventos de teclado de forma independiente.
+Este primitivo no tiene interacción de teclado. Renderiza contenido que no recibe el foco ni responde de forma independiente a eventos de teclado.
 
 ## Composición
 
-Calendar está diseñado para componerse con otras primitivas. Sus partes pueden combinarse con Field, Button u otras primitivas según sea necesario.
+Calendar está diseñado para componerse con otros primitivos. Sus partes pueden combinarse con Field, Button u otros primitivos según sea necesario.
 
-## Renderizado SSR e hidratación
+## SSR e hidratación
 
-Calendar se renderiza como HTML semántico durante el renderizado en servidor. El comportamiento interactivo (manejadores de teclado, gestión de estado) se activa en la hidratación sin desplazamiento de diseño.
+Calendar se renderiza como HTML semántico durante el renderizado en servidor. El comportamiento interactivo, incluidos los manejadores de teclado y la gestión de estado, se activa durante la hidratación sin desplazamiento de diseño.

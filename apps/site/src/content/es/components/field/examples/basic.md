@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Field envuelve un control de formulario con una etiqueta, descripción y mensaje de validación para campos de formulario accesibles.
 
 ```tsx
-import { StyledField, Field } from "@solidiom/recipes-css"
+import { StyledField } from "@solidiom/recipes-css"
+import * as Field from "@solidiom/field"
 
 ;<StyledField required>
   <Field.Label>Email</Field.Label>

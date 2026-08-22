@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Breadcrumb es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/breadcrumb`. Proporciona una ruta de navegación jerárquica con estructura accesible, usando elementos semánticos de navegación y lista.
 
 ```tsx
-import { StyledBreadcrumb, Breadcrumb } from "@solidiom/recipes-css"
+import { StyledBreadcrumb } from "@solidiom/recipes-css"
+import * as Breadcrumb from "@solidiom/breadcrumb"
 
 ;<StyledBreadcrumb>
   <Breadcrumb.List>
@@ -52,7 +53,8 @@ import { StyledBreadcrumb, Breadcrumb } from "@solidiom/recipes-css"
 Usa la parte Ellipsis para indicar niveles de navegación omitidos.
 
 ```tsx
-import { StyledBreadcrumb, Breadcrumb } from "@solidiom/recipes-css"
+import { StyledBreadcrumb } from "@solidiom/recipes-css"
+import * as Breadcrumb from "@solidiom/breadcrumb"
 
 ;<StyledBreadcrumb>
   <Breadcrumb.List>

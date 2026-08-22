@@ -1,7 +1,7 @@
 ---
 contentSchemaVersion: 1
 title: "CLI Reference"
-description: "Complete reference for the solidiom command-line interface."
+description: "Reference for the solidiom command-line interface."
 keywords: [cli, commands, create, add, plan, inspect, guide]
 locale: en
 maturity: beta
@@ -12,107 +12,115 @@ status: draft
 
 # CLI Reference
 
-The `solidiom` CLI manages projects, installs components, and verifies your workspace.
+The `solidiom` CLI initializes projects, resolves and installs deliverables, scaffolds templates, inspects source installs, and verifies artifacts or the registry catalog.
 
 ## Installation
 
-```sh
-npm install -g solidiom
-```
-
-Or use npx for one-off commands:
+The published package is `@solidiom/cli`:
 
 ```sh
-npx solidiom <command>
+npm install -g @solidiom/cli
 ```
+
+Or run it without a global install:
+
+```sh
+npx @solidiom/cli --help
+```
+
+The executable installed by the package is named `solidiom`.
 
 ## Commands
 
-### `solidiom create`
+### `solidiom init`
 
-Create a new project from a template.
+Create or initialize `.solidiom/config.json` in the current project.
 
-```sh
-solidiom create my-app --template saas-dashboard
-solidiom create my-app --template ai-chat --styling tailwind
-solidiom create my-app --yes  # skip prompts
-```
+### `solidiom plan <primitive>`
 
-**Options:**
-
-- `--template <name>` — template to use (29 available)
-- `--styling <profile>` — css, tailwind, or unocss
-- `--package-manager <pm>` — npm, pnpm, yarn, or bun
-- `--yes` — skip all prompts, use defaults
-
-### `solidiom add`
-
-Add a primitive or component to your project.
-
-```sh
-solidiom add button
-solidiom add dialog --styling tailwind
-solidiom add --theme ocean
-```
-
-**Options:**
-
-- `--styling <profile>` — override project styling profile
-- `--theme <name>` — install a theme preset
-- `--source` — install source files instead of package dependency
-
-### `solidiom plan`
-
-Preview what `add` would install without making changes.
+Resolve a deliverable and show the planned packages/files without installing or writing them.
 
 ```sh
 solidiom plan button
-solidiom plan dialog --styling css
+solidiom plan dialog --styling css --no-network
 ```
 
-### `solidiom inspect`
+### `solidiom add <primitive>`
 
-Show detailed information about a primitive or component.
+Add a primitive or another supported deliverable. Package mode is the default and prints the package-manager command; use `--install` to run it. Use `--mode source` to materialize source files.
 
 ```sh
-solidiom inspect button
-solidiom inspect dialog --json
+solidiom add button
+solidiom add dialog --styling tailwind --install
+solidiom add dialog --mode source
 ```
 
-### `solidiom verify`
+Relevant options include `--mode`, `--registry`, `--no-network`, `--deliverable`, `--styling`, `--package-manager`, `--install`, `--allow-unverified`, `--force`, `--diff`, `--dry-run`, and `--json`.
 
-Verify workspace integrity against the registry.
+### `solidiom create <name>`
+
+Scaffold one of the shipped templates. The project name is a required positional argument. Non-interactive runs also require `--template`.
 
 ```sh
-solidiom verify
-solidiom verify --fix  # auto-fix recoverable issues
+solidiom create my-app --template vite-solid-router --yes
+solidiom create my-app --template tanstack-start-solid --styling tailwind --yes
 ```
 
-### `solidiom diff`
+### `solidiom inspect <subcommand> [primitive]`
 
-Show differences between installed and registry versions.
+Inspect installed source, manifests, files, explanations, or provenance. Run `solidiom inspect --help` for the available subcommands.
+
+### `solidiom diff [--primitive <name>]`
+
+Show changes between source-installed files and their lockfile digests.
 
 ```sh
 solidiom diff
-solidiom diff button
+solidiom diff --primitive dialog
 ```
+
+### `solidiom detach <primitive>`
+
+Detach a source-installed primitive from upstream updates.
+
+### `solidiom update <primitive>`
+
+Update a source-installed primitive from upstream.
+
+### `solidiom doctor`
+
+Check project configuration and source-install health.
+
+### `solidiom verify`
+
+Verify an artifact against the configured policy. An artifact path is required unless `--registry` is used.
+
+```sh
+solidiom verify ./dist/dialog.tgz --no-network
+solidiom verify --registry
+```
+
+Use `--json` for machine-readable output. There is no `--fix` option.
+
+### `solidiom audit`
+
+Generate the CLI's CycloneDX SBOM and license inventory.
 
 ## Configuration
 
-Project configuration lives in `.solidiom/config.json`:
+Project configuration lives in `.solidiom/config.json`. Supported fields are:
 
-```json
-{
-  "stylingProfile": "tailwind",
-  "theme": "ocean",
-  "registry": "https://registry.solidiom.org"
-}
-```
+- `positioningAdapter`
+- `sourceDir`
+- `runtimeDir`
+- `componentDir`
+- `blockDir`
+- `themeDir`
+- `defaultMode` (`package` or `source`)
+- `stylingProfile` (`css`, `tailwind`, or `unocss`)
 
-## Package Manager Support
+Signature and registry-verification settings live separately in `.solidiom/policy.json`.
 
-All commands work with npm, pnpm, Yarn, and Bun. The CLI detects your package manager from lockfiles automatically.
+## Offline operation
 
-## Offline Mode
-
-The CLI supports offline operation via the local registry snapshot. Use `--offline` to force local resolution without network requests.
+Use `--no-network` with commands that resolve registry data when network access must be disabled. `--registry` selects the registry source; it does not define a project configuration field.

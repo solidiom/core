@@ -20,7 +20,8 @@ Styled toolbar component — the recipe wrapper for the css, tailwind, unocss pr
 The Toolbar component is a styled recipe wrapper around the `@solidiom/toolbar` primitive. It provides grouped actions and controls in a horizontal bar.
 
 ```tsx
-import { StyledToolbar, Toolbar } from "@solidiom/recipes-css"
+import { StyledToolbar } from "@solidiom/recipes-css"
+import * as Toolbar from "@solidiom/toolbar"
 
 ;<StyledToolbar>
   <Toolbar.Button>Undo</Toolbar.Button>

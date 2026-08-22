@@ -20,7 +20,8 @@ Styled scroll area component — the recipe wrapper for the css, tailwind, unocs
 The Scroll Area component is a styled recipe wrapper around the `@solidiom/scroll-area` primitive. It provides custom-styled scrollbars while maintaining native scrolling performance.
 
 ```tsx
-import { StyledScrollArea, ScrollArea } from "@solidiom/recipes-css"
+import { StyledScrollArea } from "@solidiom/recipes-css"
+import * as ScrollArea from "@solidiom/scroll-area"
 
 ;<StyledScrollArea style={{ height: "300px" }}>
   <ScrollArea.Viewport>

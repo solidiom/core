@@ -8,8 +8,7 @@ maturity: draft
 product: AlertDialog
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "alert-dialog"
+package: "@solidiom/alert-dialog"
 section: examples
 exampleId: alert-dialog-component-basic
 source:
@@ -22,7 +21,7 @@ runnable: true
 The Alert Dialog component is a modal dialog for confirming critical actions.
 
 ```tsx
-import { StyledAlertDialog, AlertDialog } from "@solidiom/recipes-css"
+import * as AlertDialog from "@solidiom/alert-dialog"
 
 ;<AlertDialog.Root>
   <AlertDialog.Trigger>

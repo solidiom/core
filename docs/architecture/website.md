@@ -337,8 +337,7 @@ Numeric budgets are based on measured foundation and representative vertical-sli
 
 Release validation covers static/type/lint/build checks; registry schemas and route counts; API normalization and export completeness; translation parity/freshness; search coverage and keyboard behavior; island unit/browser tests; automated and manual accessibility; responsive end-to-end and visual matrices; template/package-manager smoke tests; signature/checksum tamper failures; route-class performance; and links, canonical URLs, `hreflang`, sitemap, structured data, and redirects.
 
-## 9. GA acceptance criteria
-
+The current registry contains 86 primitives, 32 components, 36 blocks, and 31 templates. The assessment below is a dated G5 snapshot, not a current implementation inventory.
 GA requires all of the following:
 
 1. One canonical registry identity with explicit deliverables for each product layer.

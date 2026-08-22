@@ -44,7 +44,7 @@ Solidiom GA marks the general availability of a complete, accessible, bilingual 
 - **36 blocks** — Page-level composables across 12 categories: authentication, settings, billing, observability, enterprise workflows, data tables, forms, navigation, overlays, content, feedback, and layout.
 - **31 templates** — Full application starters with routing, state, and theming. Balanced and Enterprise portfolios.
 - **4 theme presets** — Ocean, Forest, Slate, and Aurora. All meet WCAG AA contrast compliance.
-- **3 styling recipes** — CSS, Tailwind, and UnoCSS. One primitive, three styling outputs.
+- **3 styling profiles** — CSS, Tailwind, and UnoCSS outputs for the primitives supported by each recipe package.
 
 ### Accessibility
 
@@ -76,9 +76,9 @@ The `solidiom` CLI manages your workspace with Sigstore-based verification:
 ```bash
 solidiom create my-app
 solidiom add accordion
-solidiom verify
+solidiom verify --registry
 solidiom diff
-solidiom plan my-project
+solidiom plan accordion
 ```
 
 ### Cross-Browser Certified
@@ -98,10 +98,10 @@ solidiom plan my-project
 ### Install
 
 ```bash
-npm create solidiom@latest my-app
+npx @solidiom/cli create my-app
 cd my-app
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ### Add Your First Component

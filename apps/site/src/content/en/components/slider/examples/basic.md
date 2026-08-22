@@ -8,8 +8,7 @@ maturity: draft
 product: Slider
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "slider"
+package: "@solidiom/slider"
 section: examples
 exampleId: slider-component-basic
 source:
@@ -22,12 +21,12 @@ runnable: true
 The Slider component allows users to select a value from a range by dragging a thumb along a track.
 
 ```tsx
-import { StyledSlider, Slider } from "@solidiom/recipes-css"
+import * as Slider from "@solidiom/slider"
 
-;<StyledSlider defaultValue={[50]} min={0} max={100} aria-label="Volume">
+;<Slider.Root defaultValue={[50]} min={0} max={100} aria-label="Volume">
   <Slider.Track>
     <Slider.Range />
     <Slider.Thumb />
   </Slider.Track>
-</StyledSlider>
+</Slider.Root>
 ```

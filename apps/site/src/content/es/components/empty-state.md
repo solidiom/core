@@ -8,9 +8,7 @@ maturity: beta
 product: Empty State
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "empty-state"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/empty-state"
 translationSourceHash: "f707ecc423f6b999140d294f58478703c8ba255817464d0335389068759f0b14"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled empty state component — the recipe wrapper for the css, tailwind, unocs
 El componente Empty State es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/empty-state`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as EmptyState from "@solidiom/recipes-css"
+import * as EmptyState from "@solidiom/empty-state"
 
 ;<EmptyState.Root>
   <EmptyState.Icon />
@@ -37,7 +35,7 @@ import * as EmptyState from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/empty-state
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/empty-state` correspondiente como dependencia par.

@@ -24,7 +24,7 @@ Indicador de progreso lineal con modos determinista e indeterminado.
 El componente Progress es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/progress`. Proporciona una representación visual de la finalización de tareas con estilos semánticos para la pista de progreso y el indicador de llenado.
 
 ```tsx
-import { StyledProgress, Progress } from "@solidiom/recipes-css"
+import { StyledProgress } from "@solidiom/recipes-css"
 
 ;<StyledProgress value={65}>
   <Progress.Indicator />

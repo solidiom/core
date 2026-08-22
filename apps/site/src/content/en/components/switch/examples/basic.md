@@ -22,7 +22,8 @@ runnable: true
 The Switch component is a styled recipe wrapper around the `@solidiom/switch` primitive. It provides a toggle control with on/off states, keyboard support (Space and Enter), and screen reader accessibility.
 
 ```tsx
-import { StyledSwitch, Switch } from "@solidiom/recipes-css"
+import { StyledSwitch } from "@solidiom/recipes-css"
+import * as Switch from "@solidiom/switch"
 
 ;<StyledSwitch>
   <Switch.Box />
@@ -36,7 +37,8 @@ Use controlled mode when the checked state is managed by parent state.
 
 ```tsx
 import { createSignal } from "solid-js"
-import { StyledSwitch, Switch } from "@solidiom/recipes-css"
+import { StyledSwitch } from "@solidiom/recipes-css"
+import * as Switch from "@solidiom/switch"
 
 export function ControlledSwitch() {
   const [checked, setChecked] = createSignal(false)

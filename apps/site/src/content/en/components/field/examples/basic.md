@@ -22,7 +22,8 @@ source:
 The Field component wraps a form control with a label, description, and validation message for accessible form fields.
 
 ```tsx
-import { StyledField, Field } from "@solidiom/recipes-css"
+import { StyledField } from "@solidiom/recipes-css"
+import * as Field from "@solidiom/field"
 
 ;<StyledField required>
   <Field.Label>Email</Field.Label>

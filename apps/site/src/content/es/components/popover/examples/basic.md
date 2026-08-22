@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Popover es un wrapper de receta con estilos sobre el primitivo `@solidiom/popover`. Proporciona un panel superpuesto posicionado cerca de un elemento disparador, con gestión de foco y comportamiento de cierre con escape.
 
 ```tsx
-import { StyledPopover, Popover } from "@solidiom/recipes-css"
+import { StyledPopover } from "@solidiom/recipes-css"
+import * as Popover from "@solidiom/popover"
 
 ;<StyledPopover>
   <Popover.Trigger>Open popover</Popover.Trigger>
@@ -43,7 +44,8 @@ Usa el modo controlado cuando gestionas el estado de apertura desde el estado de
 
 ```tsx
 import { createSignal } from "solid-js"
-import { StyledPopover, Popover } from "@solidiom/recipes-css"
+import { StyledPopover } from "@solidiom/recipes-css"
+import * as Popover from "@solidiom/popover"
 
 export function ControlledPopover() {
   const [open, setOpen] = createSignal(false)

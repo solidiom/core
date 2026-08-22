@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Accordion es un wrapper de receta con estilos sobre el primitivo `@solidiom/accordion`. Proporciona secciones expandibles con navegación por teclado y comportamiento animado de apertura/cierre.
 
 ```tsx
-import { StyledAccordion, Accordion } from "@solidiom/recipes-css"
+import { StyledAccordion } from "@solidiom/recipes-css"
+import * as Accordion from "@solidiom/accordion"
 
 ;<StyledAccordion type="single" collapsible>
   <Accordion.Item value="item-1">

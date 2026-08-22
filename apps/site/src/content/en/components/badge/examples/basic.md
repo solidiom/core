@@ -22,7 +22,7 @@ runnable: true
 The Badge component is a styled recipe wrapper around the `@solidiom/badge` primitive. It provides a visual indicator for status, count, or categorization with variant support.
 
 ```tsx
-import { StyledBadge, Badge } from "@solidiom/recipes-css"
+import { StyledBadge } from "@solidiom/recipes-css"
 
 ;<StyledBadge variant="default">Default</StyledBadge>
 ```
@@ -32,7 +32,7 @@ import { StyledBadge, Badge } from "@solidiom/recipes-css"
 Badges support default, secondary, destructive, and outline variants.
 
 ```tsx
-import { StyledBadge, Badge } from "@solidiom/recipes-css"
+import { StyledBadge } from "@solidiom/recipes-css"
 
 ;<div>
   <StyledBadge variant="default">Default</StyledBadge>

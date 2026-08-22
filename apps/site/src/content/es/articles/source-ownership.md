@@ -43,20 +43,20 @@ Instala `@solidiom/button` como dependencia del workspace. El código fuente est
 ### Modo Fuente
 
 ```sh
-solidiom add button --source
+solidiom add button --mode source
 ```
 
-Copia el código fuente del primitivo directamente en tu proyecto en `src/solidiom/button/`. Eres completamente dueño de estos archivos. Se commitean en tu repositorio.
+Copia el código fuente del primitivo directamente en el directorio de código fuente configurado. Eres completamente dueño de estos archivos y puedes revisar conflictos con `solidiom diff --primitive button`.
 
 ### Verificación de Integridad
 
-Ambos modos verifican la integridad:
+Para comprobar la integridad del registro, usa el modo de registro explícitamente:
 
 ```sh
-solidiom verify
+solidiom verify --registry
 ```
 
-Compara los digests de los archivos instalados contra el manifiesto firmado del registro. Si los archivos han sido manipulados (o modificados intencionalmente en modo fuente), el CLI reporta las diferencias.
+La verificación de un artefacto requiere una ruta al artefacto, por ejemplo `solidiom verify ./dist/dialog.tgz`.
 
 ## ¿Por Qué No Solo npm?
 

@@ -24,9 +24,9 @@ Styled button component — the recipe wrapper for the css, tailwind, unocss pro
 El componente Button es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/button`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import { Button } from "@solidiom/recipes-css"
+import { StyledButton } from "@solidiom/recipes-css"
 
-;<Button>Contenido</Button>
+;<StyledButton>Contenido</StyledButton>
 ```
 
 ## Instalación

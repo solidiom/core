@@ -8,8 +8,7 @@ maturity: draft
 product: Input OTP
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "input-otp"
+package: "@solidiom/input-otp"
 section: examples
 exampleId: input-otp-component-basic
 source:
@@ -22,7 +21,7 @@ runnable: true
 The Input OTP component provides a multi-digit one-time password input with auto-advance between slots.
 
 ```tsx
-import { StyledInputOTP, InputOTP } from "@solidiom/recipes-css"
+import * as InputOTP from "@solidiom/input-otp"
 
 ;<InputOTP.Root maxLength={6}>
   <InputOTP.Group>

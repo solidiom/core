@@ -30,11 +30,11 @@ The theme inherits the project's font configuration and applies a six-step type 
 
 Slate exposes semantic tokens through CSS custom properties:
 
-- Surface: `--sol-surface`, `--sol-surface-raised`, `--sol-surface-overlay`, `--sol-surface-sunken`
-- Foreground: `--sol-foreground`, `--sol-foreground-muted`, `--sol-foreground-subtle`
-- Primary: `--sol-primary`, `--sol-primary-hover`, `--sol-primary-foreground`
-- States: `--sol-success`, `--sol-warning`, `--sol-destructive`
-- Radius: `--sol-radius-sm`, `--sol-radius`, `--sol-radius-lg`, `--sol-radius-full`
+- Surface: `--ui-surface`, `--ui-surface-raised`, `--ui-surface-overlay`, `--ui-surface-sunken`
+- Foreground: `--ui-foreground`, `--ui-foreground-muted`, `--ui-foreground-subtle`
+- Primary: `--ui-primary`, `--ui-primary-hover`, `--ui-primary-foreground`
+- States: `--ui-success`, `--ui-warning`, `--ui-destructive`
+- Radius: `--ui-radius-sm`, `--ui-radius`, `--ui-radius-lg`, `--ui-radius-full`
 
 ## Outputs
 

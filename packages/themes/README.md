@@ -1,10 +1,12 @@
 # @solidiom/themes
 
-Theme presets for Solidiom components.
+Theme presets for Solidiom recipes.
 
 ## Overview
 
-This package provides ready-to-use color schemes and design token presets that work across all three styling profiles (CSS, Tailwind, UnoCSS). Each theme defines a complete set of CSS custom properties covering colors, radii, spacing, and typography scales.
+This package provides five ready-to-use themes: `solidiom-default`, `ocean`, `forest`, `slate`, and `aurora`. Each theme ships CSS custom-property values for the CSS and Tailwind recipe profiles, including light and dark modes, colors, radii, shadows, and type-scale tokens.
+
+The package does not export an UnoCSS-specific theme entrypoint. UnoCSS recipes use the same `--ui-*` custom-property namespace, so a CSS theme stylesheet can provide the shared token values when that integration is appropriate.
 
 ## Installation
 
@@ -36,22 +38,19 @@ pnpm add @solidiom/themes
 ```css
 @import "@solidiom/themes/tailwind/ocean.css";
 @import "@solidiom/recipes-tailwind/styles/theme.css";
+@import "@solidiom/recipes-tailwind/styles";
 ```
 
-### Via CLI
-
-```sh
-npx solidiom add --theme ocean
-```
+There is no `solidiom theme` CLI command. Install a theme package and import the stylesheet explicitly.
 
 ## Customization
 
-Themes are pure CSS custom property definitions. Override individual tokens in your own stylesheet:
+Themes define `--ui-*` custom properties. Override individual tokens in your own stylesheet:
 
 ```css
 :root {
-  --sol-color-primary: oklch(0.6 0.2 250);
-  --sol-radius: 8px;
+  --ui-primary: oklch(0.6 0.2 250);
+  --ui-radius: 8px;
 }
 ```
 

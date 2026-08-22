@@ -24,9 +24,9 @@ Styled checkbox component — the recipe wrapper for the css, tailwind, unocss p
 El componente Checkbox es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/checkbox`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import { Checkbox } from "@solidiom/recipes-css"
+import { StyledCheckbox } from "@solidiom/recipes-css"
 
-;<Checkbox>Contenido</Checkbox>
+;<StyledCheckbox>Contenido</StyledCheckbox>
 ```
 
 ## Instalación

@@ -8,8 +8,7 @@ maturity: draft
 product: Drawer
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "drawer"
+package: "@solidiom/drawer"
 section: examples
 exampleId: drawer-component-basic
 source:
@@ -26,7 +25,7 @@ translationReviewedAt: "2026-08-18"
 El componente Drawer es un panel que se desliza desde el borde de la pantalla.
 
 ```tsx
-import { StyledDrawer, Drawer } from "@solidiom/recipes-css"
+import * as Drawer from "@solidiom/drawer"
 
 ;<Drawer.Root>
   <Drawer.Trigger>

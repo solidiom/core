@@ -20,9 +20,9 @@ Styled switch component — the recipe wrapper for the css, tailwind, unocss pro
 The Switch component is a styled recipe wrapper around the `@solidiom/switch` primitive. It adds composition, semantic styling slots, and variant support while delegating all state management and keyboard behavior to the underlying primitive.
 
 ```tsx
-import { Switch } from "@solidiom/recipes-css"
+import { StyledSwitch } from "@solidiom/recipes-css"
 
-;<Switch>Content</Switch>
+;<StyledSwitch>Content</StyledSwitch>
 ```
 
 ## Installation

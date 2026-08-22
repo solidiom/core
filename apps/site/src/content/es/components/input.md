@@ -24,7 +24,7 @@ Styled text input and textarea component — the recipe wrapper for the css, tai
 El componente Input es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/input`. Añade estilos semánticos para estados de validación (invalid, disabled, readonly) y anillos de foco mientras delega todo el comportamiento de formulario al primitivo subyacente.
 
 ```tsx
-import { StyledInput, StyledTextarea } from "@solidiom/recipes-css"
+import { StyledInput } from "@solidiom/recipes-css"
 
 ;<StyledInput placeholder="Enter your email" type="email" />
 ;<StyledTextarea placeholder="Enter a message" rows={4} />

@@ -8,9 +8,7 @@ maturity: beta
 product: Context Menu
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "context-menu"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/context-menu"
 translationSourceHash: "30d956103831d184d4ce85c877925dfb5ecd3770fb4ef5976a696a17d93d3c20"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled context menu component — the recipe wrapper for the css, tailwind, unoc
 El componente Context Menu es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/context-menu`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as ContextMenu from "@solidiom/recipes-css"
+import * as ContextMenu from "@solidiom/context-menu"
 
 ;<ContextMenu.Root>
   <ContextMenu.Trigger>Right-click here</ContextMenu.Trigger>
@@ -39,7 +37,7 @@ import * as ContextMenu from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/context-menu
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/context-menu` correspondiente como dependencia par.

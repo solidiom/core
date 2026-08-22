@@ -22,7 +22,8 @@ source:
 The Card component provides a styled wrapper around content containers with header, body content, and footer composition.
 
 ```tsx
-import { StyledCard, Card } from "@solidiom/recipes-css"
+import { StyledCard } from "@solidiom/recipes-css"
+import * as Card from "@solidiom/card"
 
 ;<StyledCard>
   <Card.Header>

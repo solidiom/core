@@ -1,7 +1,7 @@
 ---
 contentSchemaVersion: 1
 title: "Solidiom GA — Disponibilidad General"
-description: "Solidiom es ahora GA: 52 primitivas, 30 componentes, 36 bloques, 29 plantillas, registro firmado, CLI con verificación Sigstore, cumplimiento WCAG 2.2 AA, soporte bilingüe y certificación multi-navegador."
+description: "Solidiom es ahora GA: 86 primitivas, 32 componentes, 36 bloques, 31 plantillas, registro firmado, CLI con verificación Sigstore, cumplimiento WCAG 2.2 AA, soporte bilingüe y certificación multi-navegador."
 keywords:
   [
     ga,
@@ -25,10 +25,10 @@ status: published
 date: "2026-08-07"
 kind: release
 version: "0.0.1-ga"
-translationSourceHash: "71b0439d18ef37d6d63c04b88b5a0660000a9e75e8abfb3070792ebc12c60401"
+translationSourceHash: "7b11de3a3b16bf796d1ae4643e0d683a5b444771ddd455558f9aa13e70c1eaf6"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
-translationReviewedAt: "2026-08-18"
+translationReviewedAt: "2026-08-22"
 ---
 
 # Solidiom GA — Disponibilidad General
@@ -43,12 +43,12 @@ Solidiom GA marca la disponibilidad general de una plataforma completa, accesibl
 
 ### Catálogo Completo
 
-- **52 primitivas** — Todas estables. Bloques de construcción headless y accesibles con evidencia completa de accesibilidad.
-- **30 componentes** — Wrappers de recetas con estilo para CSS, Tailwind y UnoCSS.
+- **86 primitivas** — Todas estables. Bloques de construcción headless y accesibles con evidencia completa de accesibilidad.
+- **32 componentes** — Wrappers de recetas con estilo para CSS, Tailwind y UnoCSS.
 - **36 bloques** — Composables a nivel de página en 12 categorías: autenticación, configuración, facturación, observabilidad, flujos empresariales, tablas de datos, formularios, navegación, superposiciones, contenido, retroalimentación y diseño.
-- **29 plantillas** — Starters completos de aplicación con enrutamiento, estado y temas. Portafolios Balanced y Enterprise.
+- **31 plantillas** — Starters completos de aplicación con enrutamiento, estado y temas. Portafolios Balanced y Enterprise.
 - **4 presets de tema** — Ocean, Forest, Slate y Aurora. Todos cumplen el contraste WCAG AA.
-- **3 recetas de estilo** — CSS, Tailwind y UnoCSS. Una primitiva, tres salidas de estilo.
+- **3 perfiles de estilo** — Salidas CSS, Tailwind y UnoCSS para las primitivas compatibles con cada paquete de recetas.
 
 ### Accesibilidad
 
@@ -80,9 +80,9 @@ La CLI `solidiom` gestiona tu espacio de trabajo con verificación basada en Sig
 ```bash
 solidiom create my-app
 solidiom add accordion
-solidiom verify
+solidiom verify --registry
 solidiom diff
-solidiom plan my-project
+solidiom plan accordion
 ```
 
 ### Certificación Multi-Navegador
@@ -102,10 +102,10 @@ solidiom plan my-project
 ### Instalar
 
 ```bash
-npm create solidiom@latest my-app
+npx @solidiom/cli create my-app
 cd my-app
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ### Agregar tu Primer Componente

@@ -8,8 +8,7 @@ maturity: draft
 product: HoverCard
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "hover-card"
+package: "@solidiom/hover-card"
 section: examples
 exampleId: hover-card-component-basic
 source:
@@ -26,7 +25,7 @@ translationReviewedAt: "2026-08-18"
 El componente Hover Card muestra un panel de contenido cuando el usuario pasa el cursor sobre un elemento de disparador o lo enfoca.
 
 ```tsx
-import { StyledHoverCard, HoverCard } from "@solidiom/recipes-css"
+import * as HoverCard from "@solidiom/hover-card"
 
 ;<HoverCard.Root>
   <HoverCard.Trigger>

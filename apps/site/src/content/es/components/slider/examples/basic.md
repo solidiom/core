@@ -8,8 +8,7 @@ maturity: draft
 product: Slider
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "slider"
+package: "@solidiom/slider"
 section: examples
 exampleId: slider-component-basic
 source:
@@ -26,12 +25,12 @@ translationReviewedAt: "2026-08-18"
 El componente Slider permite a los usuarios seleccionar un valor de un rango arrastrando un control a lo largo de una pista.
 
 ```tsx
-import { StyledSlider, Slider } from "@solidiom/recipes-css"
+import * as Slider from "@solidiom/slider"
 
-;<StyledSlider defaultValue={[50]} min={0} max={100} aria-label="Volumen">
+;<Slider.Root defaultValue={[50]} min={0} max={100} aria-label="Volumen">
   <Slider.Track>
     <Slider.Range />
     <Slider.Thumb />
   </Slider.Track>
-</StyledSlider>
+</Slider.Root>
 ```

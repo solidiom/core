@@ -8,9 +8,7 @@ maturity: beta
 product: Listbox
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "listbox"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/listbox"
 ---
 
 Styled listbox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the listbox primitive.
@@ -20,7 +18,7 @@ Styled listbox component — the recipe wrapper for the css, tailwind, unocss pr
 The Listbox component is a styled recipe wrapper around the `@solidiom/listbox` primitive. It adds composition, semantic styling slots, and variant support while delegating all state management and keyboard behavior to the underlying primitive.
 
 ```tsx
-import * as Listbox from "@solidiom/recipes-css"
+import * as Listbox from "@solidiom/listbox"
 
 ;<Listbox.Root>
   <Listbox.Label>Choose a framework</Listbox.Label>
@@ -35,7 +33,7 @@ import * as Listbox from "@solidiom/recipes-css"
 ## Installation
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/listbox
 ```
 
 Install the recipe package for your chosen styling profile. The component requires the corresponding `@solidiom/listbox` primitive as a peer dependency.

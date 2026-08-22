@@ -24,7 +24,8 @@ Form field wrapper with label, control, description, and error message styling.
 El componente Field es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/field`. Proporciona una capa de composición para campos de formulario con estilos semánticos para etiqueta, descripción y estados de error.
 
 ```tsx
-import { StyledField, Field } from "@solidiom/recipes-css"
+import { StyledField } from "@solidiom/recipes-css"
+import * as Field from "@solidiom/field"
 import { StyledInput } from "@solidiom/recipes-css"
 
 ;<StyledField>

@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Resizable Panels proporciona un diseño con paneles arrastrables que pueden ser redimensionados por el usuario.
 
 ```tsx
-import { StyledResizablePanels, ResizablePanels } from "@solidiom/recipes-css"
+import { StyledResizablePanels } from "@solidiom/recipes-css"
+import * as ResizablePanels from "@solidiom/resizable-panels"
 
 ;<ResizablePanels.PanelGroup direction="horizontal" defaultSizes={[50, 50]}>
   <ResizablePanels.Panel order={0} defaultSize={50}>

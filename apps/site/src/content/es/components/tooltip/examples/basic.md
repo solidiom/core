@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Tooltip muestra información complementaria cuando el usuario pasa el cursor sobre un elemento o lo enfoca.
 
 ```tsx
-import { StyledTooltip, Tooltip } from "@solidiom/recipes-css"
+import { StyledTooltip } from "@solidiom/recipes-css"
+import * as Tooltip from "@solidiom/tooltip"
 
 ;<Tooltip.Root>
   <Tooltip.Trigger>

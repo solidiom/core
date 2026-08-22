@@ -22,7 +22,8 @@ source:
 The Resizable Panels component provides a layout with draggable panels that can be resized by the user.
 
 ```tsx
-import { StyledResizablePanels, ResizablePanels } from "@solidiom/recipes-css"
+import { StyledResizablePanels } from "@solidiom/recipes-css"
+import * as ResizablePanels from "@solidiom/resizable-panels"
 
 ;<ResizablePanels.PanelGroup direction="horizontal" defaultSizes={[50, 50]}>
   <ResizablePanels.Panel order={0} defaultSize={50}>

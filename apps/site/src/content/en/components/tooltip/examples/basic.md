@@ -22,7 +22,8 @@ runnable: true
 The Tooltip component displays supplementary information when the user hovers over or focuses on an element.
 
 ```tsx
-import { StyledTooltip, Tooltip } from "@solidiom/recipes-css"
+import { StyledTooltip } from "@solidiom/recipes-css"
+import * as Tooltip from "@solidiom/tooltip"
 
 ;<Tooltip.Root>
   <Tooltip.Trigger>

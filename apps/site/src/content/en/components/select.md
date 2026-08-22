@@ -20,9 +20,9 @@ Styled select component — the recipe wrapper for the css, tailwind, unocss pro
 The Select component is a styled recipe wrapper around the `@solidiom/select` primitive. It adds composition, semantic styling slots, and variant support while delegating all state management and keyboard behavior to the underlying primitive.
 
 ```tsx
-import { Select } from "@solidiom/recipes-css"
+import { StyledSelect } from "@solidiom/recipes-css"
 
-;<Select>Content</Select>
+;<StyledSelect>Content</StyledSelect>
 ```
 
 ## Installation

@@ -8,9 +8,7 @@ maturity: beta
 product: Hover Card
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "hover-card"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/hover-card"
 translationSourceHash: "793adaf451eaaa24d6786957afb7771fd42b5ea4a3d58cb5cec72ede556961b8"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled hover card component — the recipe wrapper for the css, tailwind, unocss
 El componente Hover Card es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/hover-card`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as HoverCard from "@solidiom/recipes-css"
+import * as HoverCard from "@solidiom/hover-card"
 
 ;<HoverCard.Root>
   <HoverCard.Trigger>Hover me</HoverCard.Trigger>
@@ -37,7 +35,7 @@ import * as HoverCard from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/hover-card
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/hover-card` correspondiente como dependencia par.

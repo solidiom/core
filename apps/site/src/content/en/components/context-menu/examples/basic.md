@@ -8,8 +8,7 @@ maturity: draft
 product: ContextMenu
 productLayer: component
 status: draft
-package: "@solidiom/recipes-css"
-recipe: "context-menu"
+package: "@solidiom/context-menu"
 section: examples
 exampleId: context-menu-component-basic
 source:
@@ -22,7 +21,7 @@ runnable: true
 The Context Menu component displays a menu when the user right-clicks on an element.
 
 ```tsx
-import { StyledContextMenu, ContextMenu } from "@solidiom/recipes-css"
+import * as ContextMenu from "@solidiom/context-menu"
 
 ;<ContextMenu.Root>
   <ContextMenu.Trigger>

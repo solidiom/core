@@ -8,9 +8,7 @@ maturity: beta
 product: Carousel
 productLayer: component
 status: published
-package: "@solidiom/recipes-css"
-recipe: "carousel"
-stylingOutputs: ["css", "tailwind", "unocss"]
+package: "@solidiom/carousel"
 translationSourceHash: "0c7667be4acb9c7c24692c2e03f02393339327a857abd29489d5fa4942430e57"
 translationStatus: "human-reviewed"
 translationReviewedBy: "solidiom-team"
@@ -24,7 +22,7 @@ Styled carousel component — the recipe wrapper for the css, tailwind, unocss p
 El componente Carousel es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/carousel`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import * as Carousel from "@solidiom/recipes-css"
+import * as Carousel from "@solidiom/carousel"
 
 ;<Carousel.Root>
   <Carousel.Content>
@@ -40,7 +38,7 @@ import * as Carousel from "@solidiom/recipes-css"
 ## Instalación
 
 ```sh
-pnpm add @solidiom/recipes-css @solidiom/recipes-tailwind @solidiom/recipes-unocss
+pnpm add @solidiom/carousel
 ```
 
 Instala el paquete de receta para tu perfil de estilo elegido. El componente requiere el primitivo `@solidiom/carousel` correspondiente como dependencia par.

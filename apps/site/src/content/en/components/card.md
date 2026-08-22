@@ -20,7 +20,8 @@ Container component with header, title, description, content, and footer areas.
 The Card component is a styled recipe wrapper around the `@solidiom/card` primitive. It provides a composition layer for content containers with semantic styling for header, title, description, body content, and footer sections.
 
 ```tsx
-import { StyledCard, Card } from "@solidiom/recipes-css"
+import { StyledCard } from "@solidiom/recipes-css"
+import * as Card from "@solidiom/card"
 
 ;<StyledCard>
   <Card.Header>

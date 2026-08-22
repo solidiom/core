@@ -26,7 +26,8 @@ translationReviewedAt: "2026-08-18"
 El componente Command Palette proporciona una lista de comandos buscable con navegación por teclado.
 
 ```tsx
-import { StyledCommandPalette, CommandPalette } from "@solidiom/recipes-css"
+import { StyledCommandPalette } from "@solidiom/recipes-css"
+import * as CommandPalette from "@solidiom/command-palette"
 
 ;<CommandPalette.Root>
   <CommandPalette.Input placeholder="Escriba un comando..." />

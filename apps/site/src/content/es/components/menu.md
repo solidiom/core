@@ -24,9 +24,9 @@ Styled menu component — the recipe wrapper for the css, tailwind, unocss profi
 El componente Menu es un envoltorio de receta estilizado alrededor del primitivo `@solidiom/menu`. Añade composición, slots de estilo semántico y soporte de variantes mientras delega toda la gestión de estado y el comportamiento de teclado al primitivo subyacente.
 
 ```tsx
-import { Menu } from "@solidiom/recipes-css"
+import { StyledMenu } from "@solidiom/recipes-css"
 
-;<Menu>Contenido</Menu>
+;<StyledMenu>Contenido</StyledMenu>
 ```
 
 ## Instalación

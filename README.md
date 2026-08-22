@@ -31,7 +31,7 @@ mise run build        # or: pnpm nx run-many -t build
 mise run test         # or: pnpm nx run-many -t test
 ```
 
-Requires Node >= 24 and pnpm 10. If you use [mise](https://mise.jdx.dev), tool versions are pinned in `.mise.toml`.
+Requires Node >= 24 and pnpm 10. If you use [mise](https://mise.jdx.dev), the workspace tool configuration is defined in `.mise.toml`.
 
 ## Workspace layout
 
@@ -65,7 +65,7 @@ packages/
   recipes-unocss/       UnoCSS preset
 
   # Tooling
-  cli/                  solidiom CLI (install, inspect, migrate)
+  cli/                  solidiom CLI (init, plan, add, create, inspect, diff, detach, update, doctor, verify, audit)
   eslint-plugin-solidiom/   ESLint rules
   vite-plugin-solidiom/     Vite integration
   unocss-preset/        UnoCSS atomic preset
@@ -212,9 +212,7 @@ This avoids the qemu segfaults entirely, at the cost of no longer testing the ex
 
 TypeScript is pinned to `~6.0.x` because `@typescript-eslint` (used by our ESLint plugin and linting infrastructure) requires `typescript >=4.8.4 <6.1.0`. Upgrading to TypeScript 7+ will break all lint and typecheck workflows until `@typescript-eslint` releases a version with TS 7 peer support. Do not upgrade TypeScript without first verifying `@typescript-eslint` compatibility.
 
-## Dual-emission recipe builds
-
-Recipe packages (`recipes-css`, `recipes-tailwind`) produce two outputs from a single source:
+## Recipe packages (`recipes-css`, `recipes-tailwind`, and `recipes-unocss`) produce two outputs from a single source:
 
 1. **TSX wrapper components** (`dist/index.js`) — pre-composed primitive + styling, importable as Solid components.
 2. **Raw stylesheets** (`dist/styles/*.css`) — standalone CSS targeting `data-scope`/`data-part` semantic attributes.
