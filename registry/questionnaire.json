@@ -1,6 +1,6 @@
 {
   "name": "questionnaire",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/questionnaire",
   "capabilities": [],
   "dependencies": [
@@ -32,10 +32,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -51,13 +54,16 @@
       "form",
       "input",
       "multi",
+      "multi-step",
       "progress",
       "questionnaire",
       "runtime",
       "step",
+      "steps",
       "survey",
       "tracking",
-      "with"
+      "with",
+      "wizard"
     ]
   },
   "integrity": {
@@ -66,11 +72,11 @@
     "fileDigests": {
       "src/index.tsx": "5e508513afdabd446dc546a3512e4c1733aea9dbb1006f189939d33ca07e7b3d"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/questionnaire"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

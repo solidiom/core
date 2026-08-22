@@ -1,6 +1,6 @@
 {
   "name": "chat-message",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/chat-message",
   "capabilities": [],
   "dependencies": [
@@ -30,10 +30,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -44,9 +47,11 @@
   "search": {
     "keywords": [
       "and",
+      "avatar",
       "bubble",
       "chat",
       "content",
+      "conversation",
       "conversational",
       "for",
       "message",
@@ -62,11 +67,11 @@
     "fileDigests": {
       "src/index.tsx": "7548b0630dd4027e9cff0f87c91226b4567f569af42596f7ab01b6947470d5ab"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-message"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

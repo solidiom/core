@@ -1,6 +1,6 @@
 {
   "name": "attachment",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/attachment",
   "capabilities": [],
   "dependencies": [
@@ -30,10 +30,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -47,11 +50,13 @@
       "attachment",
       "content",
       "display",
+      "download",
       "file",
       "name",
       "preview",
       "runtime",
       "size",
+      "upload",
       "with"
     ]
   },
@@ -61,11 +66,11 @@
     "fileDigests": {
       "src/index.tsx": "2ad7134515bbd4254841216a9a62a719a92e5087ae12eff5f0437bd83b254e2e"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/attachment"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

@@ -1,6 +1,6 @@
 {
   "name": "number-input",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/number-input",
   "capabilities": [],
   "dependencies": [
@@ -30,10 +30,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -53,8 +56,10 @@
       "input",
       "locale",
       "number",
+      "number input",
       "numeric",
       "runtime",
+      "spinbutton",
       "with"
     ]
   },
@@ -64,11 +69,11 @@
     "fileDigests": {
       "src/index.tsx": "76e8707bbc4d5b116a0059a838b840db1970a0374b77deae518943a99cc987ba"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/number-input"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

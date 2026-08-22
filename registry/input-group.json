@@ -1,6 +1,6 @@
 {
   "name": "input-group",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/input-group",
   "capabilities": [],
   "dependencies": [
@@ -30,10 +30,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -45,12 +48,15 @@
     "keywords": [
       "addon",
       "and",
+      "button",
       "buttons",
       "data",
       "for",
       "group",
+      "icon",
       "icons",
       "input",
+      "input group",
       "prefix",
       "runtime",
       "slots",
@@ -65,11 +71,11 @@
     "fileDigests": {
       "src/index.tsx": "18da533ceee285089d5001c744cdef0b2421d9d6d4813de50aef0aa5f26647bc"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/input-group"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

@@ -1,6 +1,6 @@
 {
   "name": "breadcrumb",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/breadcrumb",
   "capabilities": [],
   "dependencies": [
@@ -76,11 +76,11 @@
     "fileDigests": {
       "src/index.tsx": "7c6d2fabb0c065fce76e20ce71df3ac5b0456819b6e4f65f0ed2764371edee75"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/breadcrumb"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

@@ -1,6 +1,6 @@
 {
   "name": "menu",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/menu",
   "capabilities": [],
   "dependencies": [
@@ -80,11 +80,11 @@
       "src/menu-context.ts": "fba8e19b5e9db0519af2c5a12f00e18470b69cad93ea04618fcf9ad0cb72c58e",
       "src/menu.tsx": "b2b375bf7e3d91b4bb5493bad7a773347d522fb23d2d8984e1cd3a023b2f0a05"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/menu"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

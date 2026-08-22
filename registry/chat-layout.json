@@ -1,6 +1,6 @@
 {
   "name": "chat-layout",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/chat-layout",
   "capabilities": [],
   "dependencies": [
@@ -30,10 +30,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -49,9 +52,11 @@
       "composer",
       "container",
       "flow",
+      "header",
       "layout",
       "managing",
       "message",
+      "messages",
       "positioning",
       "runtime",
       "scroll"
@@ -63,11 +68,11 @@
     "fileDigests": {
       "src/index.tsx": "56da1ec970dbd5ee3301764646509be9d01b2445c990b281019645bd945ec7ac"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-layout"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

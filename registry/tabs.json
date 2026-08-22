@@ -1,6 +1,6 @@
 {
   "name": "tabs",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/tabs",
   "capabilities": [],
   "dependencies": [
@@ -78,11 +78,11 @@
       "src/tabs-context.ts": "bcc9b7924560f2bbb04a6535cc2e435fef8818b37cd955f1957e83a379b7532c",
       "src/tabs.tsx": "9b1e8eb3290082742b85353cc70b6e7486d61e8b00c1f894d570cf08870949de"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/tabs"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

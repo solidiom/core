@@ -1,6 +1,6 @@
 {
   "name": "mega-menu",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/mega-menu",
   "capabilities": [],
   "dependencies": [
@@ -34,10 +34,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -49,13 +52,17 @@
     "keywords": [
       "column",
       "content",
+      "disclosure",
       "dropdown",
       "expanded",
       "mega",
+      "mega menu",
       "menu",
       "multi",
+      "multi-column",
       "navigation",
       "rich",
+      "roving focus",
       "runtime",
       "with"
     ]
@@ -66,11 +73,11 @@
     "fileDigests": {
       "src/index.tsx": "aa3a3b150f98d4ff2eb42eabcb3edeeafec0c3e0ed827d3d68fad331d15eabb6"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/mega-menu"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

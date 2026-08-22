@@ -1,6 +1,6 @@
 {
   "name": "segmented-control",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/segmented-control",
   "capabilities": [],
   "dependencies": [
@@ -34,10 +34,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -51,10 +54,14 @@
       "connected",
       "control",
       "exclusive",
+      "indicator",
       "mutually",
       "option",
+      "radio group",
+      "roving focus",
       "runtime",
       "segmented",
+      "segmented control",
       "segments",
       "selector",
       "with"
@@ -66,11 +73,11 @@
     "fileDigests": {
       "src/index.tsx": "5fa7915558757f5700fb4474ed09086be94ba0e251c90ec7739116b7f637fdbe"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/segmented-control"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

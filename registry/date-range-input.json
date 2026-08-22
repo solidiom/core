@@ -1,6 +1,6 @@
 {
   "name": "date-range-input",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/date-range-input",
   "capabilities": [],
   "dependencies": [
@@ -32,10 +32,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -49,6 +52,8 @@
       "calendar",
       "data",
       "date",
+      "date input",
+      "date range",
       "end",
       "fields",
       "input",
@@ -58,6 +63,7 @@
       "selection",
       "start",
       "text",
+      "validation",
       "with"
     ]
   },
@@ -67,11 +73,11 @@
     "fileDigests": {
       "src/index.tsx": "5b59497c2459b7a79a7e07eada5cc08f7f98f642ed1fe40ed55ddb0139b95fce"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/date-range-input"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

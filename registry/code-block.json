@@ -1,6 +1,6 @@
 {
   "name": "code-block",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/code-block",
   "capabilities": [],
   "dependencies": [
@@ -30,10 +30,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -46,12 +49,15 @@
       "and",
       "block",
       "button",
+      "clipboard",
       "code",
       "content",
       "copy",
       "display",
+      "highlight",
       "highlighted",
       "line",
+      "line numbers",
       "numbers",
       "runtime",
       "syntax",
@@ -64,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "60a1e826de1622bcfbad2f610ef93e4a9db4301bc923751506ca41c6a070d711"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/code-block"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

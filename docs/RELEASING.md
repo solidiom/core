@@ -52,6 +52,54 @@ you approve** — not in a surprise commit pushed by the publish job.
 That's the whole loop: **CI green → merge → published.** No editing code, no
 manual commits, no local publishing.
 
+### Coordinated full-catalog bump
+
+The normal loop bumps only the packages named in the accumulated changesets.
+Changesets' `linked` group (`runtime`, `dialog`, `select`, `calendar`,
+`carousel`) moves those five together, but the rest move independently. To move
+the **entire published catalog in lockstep** to a single new version — the way
+`0.3.0` and `0.4.0` were cut — you author **one changeset that names every
+publishable package** at the same bump level.
+
+1. **Enumerate the publishable packages.** These are the non-`private`
+   `packages/*` minus the `ignore` list in `.changeset/config.json`
+   (`bench`, `eslint-plugin-solidiom`, `adapter-kit`, `release-tools`,
+   `test-doubles`). A reliable way to derive the set is the packages tagged at
+   the previous release plus any added since:
+
+   ```bash
+   # packages published at the last release
+   git tag --list '@solidiom/*@0.3.0' | sed -E 's/@0\.3\.0$//' | sort
+   ```
+
+2. **Author a single coordinated changeset** in `.changeset/` (e.g.
+   `beta-release-0-4-0.md`) whose frontmatter lists every package at the same
+   level, followed by a summary of the release:
+
+   ```md
+   ---
+   "@solidiom/accordion": minor
+   "@solidiom/adapter-carousel-embla": minor
+   # …one line per publishable package, all at the same bump level…
+   "@solidiom/vite-plugin": minor
+   ---
+
+   Beta release 0.4.0. Coordinated workspace-wide minor bump.
+
+   - Summarize the notable changes here (Solid window, adapters, CLI, tooling…).
+   ```
+
+   Fold any pre-existing per-package changesets into this summary and delete
+   them, so the generated `CHANGELOG.md` entries are not duplicated.
+
+3. **Run the Version PR workflow as usual** (or the local steps below). Every
+   listed package moves to the new version together; the ignored packages are
+   untouched.
+
+> Note on `0.x`: a `minor` bump on a `0.x` package advances the middle digit
+> (`0.3.0 → 0.4.0`), which is the `0.x` "breaking" boundary the CLI's caret
+> ranges stop at. Use `patch` for a coordinated `0.3.0 → 0.3.1` sweep.
+
 ### Dist-tags
 
 `release.yml` derives the npm dist-tag from the tag shape:
@@ -117,13 +165,104 @@ changing them (or not) never affects `solidiom verify --registry`.
 
 ---
 
+## Full release outside CI
+
+When GitHub Actions is unavailable — or you need to cut a release from a
+developer machine or a self-hosted box — `scripts/release.sh` reproduces the
+`release.yml` jobs locally. The step order and commands mirror the workflow
+exactly: gate → publish packages → deploy site.
+
+**Important:** like the CI publish job, `release.sh` is **not** a versioning
+step. It publishes exactly the versions committed in the current tree via
+`changeset publish`. Do the versioning first (the coordinated bump above, then
+`pnpm changeset version`, `pnpm exec tsx tools/registry-build.ts`, and a
+`chore(release): version packages <v>` commit) so the working tree holds the
+versions you intend to publish.
+
+### 1. Prepare secrets
+
+`release.sh` reads secrets from the shell environment first, then from the
+project `.env`. Values are never printed.
+
+| Variable                                         | Needed for                                                            |
+| ------------------------------------------------ | --------------------------------------------------------------------- |
+| `NPM_TOKEN`                                      | publishing packages (exported as `NODE_AUTH_TOKEN`)                   |
+| `REGISTRY_SIGN_KEY`                              | signing `registry/index.json` (optional; unsigned + warned if absent) |
+| `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | deploying the site                                                    |
+
+Without `REGISTRY_SIGN_KEY` the registry index is built **unsigned** and the
+beta signing verification is downgraded to a warning instead of a hard failure.
+
+### 2. Dry run first
+
+`changeset publish` has no dry-run mode, so `--dry-run` runs the full pipeline
+(build, gate, registry build, verify, artifacts) and skips **only** the publish
+and the site deploy. Use it to confirm the tree is releasable:
+
+```bash
+./scripts/release.sh --dry-run
+```
+
+### 3. Publish
+
+```bash
+# packages + site, quick gate, beta dist-tag (defaults)
+./scripts/release.sh
+
+# packages only, full gate, published under `latest`
+./scripts/release.sh --target packages --gate full --dist-tag latest
+
+# deploy the site only
+./scripts/release.sh --target site
+```
+
+| Flag                           | Default | Meaning                                        |
+| ------------------------------ | ------- | ---------------------------------------------- |
+| `--target packages\|site\|all` | `all`   | what to release                                |
+| `--gate quick\|full`           | `quick` | gate level before publishing                   |
+| `--dist-tag beta\|latest`      | `beta`  | npm dist-tag to publish under                  |
+| `--dry-run`                    | off     | build/gate/verify without publishing/deploying |
+
+What the script runs, in order (mirroring `release.yml`):
+
+1. **Gate** — `nx run-many -t build` (excluding the site) then
+   `gate:quick` or `gate:full`.
+2. **Publish packages** — rebuild → `tools/registry-build.ts` (re-signs when
+   `REGISTRY_SIGN_KEY` is set) → `cli verify --registry` →
+   `changeset publish --tag <dist-tag>` → beta audit artifacts + signing verify.
+3. **Deploy site** — build packages + templates → validate boundaries/route
+   parity → build site + search index → `wrangler pages deploy`.
+
+### 4. Tag the release
+
+CI's `tag-on-version-merge.yml` does not run for a local publish, so create and
+push the version tag yourself so the release is traceable and future
+`verify-tag` checks pass:
+
+```bash
+git tag v0.4.0
+git push origin v0.4.0
+```
+
+> The pre-flight checks abort early with actionable guidance if a required
+> secret is missing or a Cloudflare token is invalid/IP-restricted, so a bad
+> credential fails before the slow build rather than at the final deploy step.
+
+### Legacy: dispatch CI from the CLI
+
+`./scripts/release.sh --dispatch` triggers `release.yml` in GitHub Actions via
+`gh` instead of running locally. This is the pre-local-execution behavior and
+still requires an authenticated `gh` and a valid ref.
+
+---
+
 ## Manual escape hatches
 
 - **Publish packages from a ref without tagging:** Actions → **Release** →
   _Run workflow_, `target=packages`. Respects `gate` and `dist_tag` inputs.
 - **Deploy the site only:** Actions → **Release**, `target=site`.
-- **Dispatch from the CLI:** `scripts/release.sh` still dispatches `release.yml`
-  via `gh` for the manual `workflow_dispatch` path.
+- **Release from a developer machine:** `scripts/release.sh` runs the full
+  pipeline locally — see [Full release outside CI](#full-release-outside-ci).
 
 ---
 

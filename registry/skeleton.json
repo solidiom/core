@@ -1,6 +1,6 @@
 {
   "name": "skeleton",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/skeleton",
   "capabilities": [],
   "dependencies": [
@@ -66,11 +66,11 @@
     "fileDigests": {
       "src/index.tsx": "0b088d8443d2f846fea69bf7c96b161290b6e91788e786a8c91201d2818999ff"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/skeleton"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

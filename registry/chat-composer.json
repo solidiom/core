@@ -1,6 +1,6 @@
 {
   "name": "chat-composer",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/chat-composer",
   "capabilities": [],
   "dependencies": [
@@ -32,10 +32,13 @@
     "evidenceIds": []
   },
   "documentation": {
-    "status": "stub",
+    "status": "draft",
     "locales": {
       "en": {
-        "status": "missing"
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
       }
     }
   },
@@ -51,12 +54,15 @@
       "composing",
       "data",
       "for",
+      "form",
       "input",
+      "message",
       "messages",
       "rich",
       "runtime",
       "send",
       "text",
+      "textarea",
       "with"
     ]
   },
@@ -66,11 +72,11 @@
     "fileDigests": {
       "src/index.tsx": "7ce1954618b072f38d94a997e561b51cb20882471cbc2a66c340d9ba23c9c13c"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-composer"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

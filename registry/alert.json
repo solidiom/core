@@ -1,6 +1,6 @@
 {
   "name": "alert",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/alert",
   "capabilities": [],
   "dependencies": [
@@ -84,11 +84,11 @@
     "fileDigests": {
       "src/index.tsx": "8bbc6a02e623e3e4016e86ed6e33ddedf593af27ea5cb96d97c95c4ece4e4cee"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/alert"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }

@@ -1,6 +1,6 @@
 {
   "name": "pagination",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "package": "@solidiom/pagination",
   "capabilities": [],
   "dependencies": [
@@ -71,11 +71,11 @@
     "fileDigests": {
       "src/index.tsx": "b7845f543a4a13205b3467cdf782a39c0a3594718647afd021a6bb44bd8575b1"
     },
-    "lastGenerated": "2025-01-01T00:00:00.000Z"
+    "lastGenerated": "2026-08-22T06:16:59.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/pagination"
   },
-  "lastUpdated": "2025-01-01T00:00:00.000Z"
+  "lastUpdated": "2026-08-22T06:16:59.000Z"
 }
