@@ -69,6 +69,7 @@
     "api:coverage-gate": "tsx tools/api-coverage-gate.ts",
     "deps:check": "tsx scripts/check-library-updates.mts",
     "deps:check:ci": "tsx scripts/check-library-updates.mts --fail-on-outdated",
+    "deps:catalog-gate": "tsx tools/catalog-gate.ts",
     "smoke:create:prep": "tools/offline-fixture/run-offline-test.sh --prep",
     "smoke:create": "tools/offline-fixture/run-offline-test.sh",
     "assert:no-unverified": "tsx tools/assert-no-unverified.ts",

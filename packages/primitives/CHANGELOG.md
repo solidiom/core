@@ -1,5 +1,101 @@
 # @solidiom/primitives
 
+## 0.4.1
+
+### Patch Changes
+
+- Correct the published Solid peer dependency ranges. All packages now declare `solid-js`, `@solidjs/web`, and `babel-preset-solid` via the shared pnpm catalog, locked to `>=2.0.0-rc.1 <3.0.0`.
+
+  Previously some 0.4.0 packages advertised a `>=2.0.0-beta` peer range (or the catalog resolved to a beta) even though they were built and tested against the Solid 2 RC. Consumers now receive a peer range that matches the version these packages are actually built against.
+
+- Updated dependencies []:
+  - @solidiom/accordion@0.4.1
+  - @solidiom/alert-dialog@0.4.1
+  - @solidiom/alert@0.4.1
+  - @solidiom/app-shell@0.4.1
+  - @solidiom/aspect-ratio@0.4.1
+  - @solidiom/attachment@0.4.1
+  - @solidiom/avatar-group@0.4.1
+  - @solidiom/avatar@0.4.1
+  - @solidiom/badge@0.4.1
+  - @solidiom/banner@0.4.1
+  - @solidiom/breadcrumb@0.4.1
+  - @solidiom/button@0.4.1
+  - @solidiom/calendar@0.4.1
+  - @solidiom/card@0.4.1
+  - @solidiom/carousel@0.4.1
+  - @solidiom/chart@0.4.1
+  - @solidiom/chat-composer@0.4.1
+  - @solidiom/chat-layout@0.4.1
+  - @solidiom/chat-message-metadata@0.4.1
+  - @solidiom/chat-message@0.4.1
+  - @solidiom/chat-system-message@0.4.1
+  - @solidiom/chat-tool-calls@0.4.1
+  - @solidiom/checkbox@0.4.1
+  - @solidiom/code-block@0.4.1
+  - @solidiom/collapsible@0.4.1
+  - @solidiom/combobox@0.4.1
+  - @solidiom/command-palette@0.4.1
+  - @solidiom/context-menu@0.4.1
+  - @solidiom/data-table@0.4.1
+  - @solidiom/date-picker@0.4.1
+  - @solidiom/date-range-input@0.4.1
+  - @solidiom/dialog@0.4.1
+  - @solidiom/direction@0.4.1
+  - @solidiom/drawer@0.4.1
+  - @solidiom/empty-state@0.4.1
+  - @solidiom/field@0.4.1
+  - @solidiom/file-input@0.4.1
+  - @solidiom/grid@0.4.1
+  - @solidiom/hover-card@0.4.1
+  - @solidiom/input-group@0.4.1
+  - @solidiom/input-otp@0.4.1
+  - @solidiom/input@0.4.1
+  - @solidiom/kbd@0.4.1
+  - @solidiom/label@0.4.1
+  - @solidiom/lightbox@0.4.1
+  - @solidiom/link@0.4.1
+  - @solidiom/listbox@0.4.1
+  - @solidiom/mega-menu@0.4.1
+  - @solidiom/menu@0.4.1
+  - @solidiom/menubar@0.4.1
+  - @solidiom/message-scroller@0.4.1
+  - @solidiom/meter@0.4.1
+  - @solidiom/multi-selector@0.4.1
+  - @solidiom/navigation-menu@0.4.1
+  - @solidiom/number-input@0.4.1
+  - @solidiom/pagination@0.4.1
+  - @solidiom/popover@0.4.1
+  - @solidiom/progress@0.4.1
+  - @solidiom/questionnaire@0.4.1
+  - @solidiom/radio-group@0.4.1
+  - @solidiom/resizable-panels@0.4.1
+  - @solidiom/scroll-area@0.4.1
+  - @solidiom/segmented-control@0.4.1
+  - @solidiom/select@0.4.1
+  - @solidiom/separator@0.4.1
+  - @solidiom/sheet@0.4.1
+  - @solidiom/sidebar@0.4.1
+  - @solidiom/skeleton@0.4.1
+  - @solidiom/slider@0.4.1
+  - @solidiom/spinner@0.4.1
+  - @solidiom/stack@0.4.1
+  - @solidiom/status-dot@0.4.1
+  - @solidiom/switch@0.4.1
+  - @solidiom/table@0.4.1
+  - @solidiom/tabs@0.4.1
+  - @solidiom/time-input@0.4.1
+  - @solidiom/toast@0.4.1
+  - @solidiom/toggle-group@0.4.1
+  - @solidiom/toggle@0.4.1
+  - @solidiom/tokenizer@0.4.1
+  - @solidiom/toolbar@0.4.1
+  - @solidiom/tooltip@0.4.1
+  - @solidiom/tree@0.4.1
+  - @solidiom/typography@0.4.1
+  - @solidiom/virtual-list@0.4.1
+  - @solidiom/visually-hidden@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes

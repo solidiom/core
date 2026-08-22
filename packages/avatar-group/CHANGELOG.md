@@ -1,5 +1,16 @@
 # @solidiom/avatar-group
 
+## 0.4.1
+
+### Patch Changes
+
+- Correct the published Solid peer dependency ranges. All packages now declare `solid-js`, `@solidjs/web`, and `babel-preset-solid` via the shared pnpm catalog, locked to `>=2.0.0-rc.1 <3.0.0`.
+
+  Previously some 0.4.0 packages advertised a `>=2.0.0-beta` peer range (or the catalog resolved to a beta) even though they were built and tested against the Solid 2 RC. Consumers now receive a peer range that matches the version these packages are actually built against.
+
+- Updated dependencies []:
+  - @solidiom/runtime@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes

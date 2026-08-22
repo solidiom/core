@@ -25,6 +25,7 @@ import {
   fileContains,
   readJSON,
 } from "./gate-helpers"
+import { globSync } from "node:fs"
 
 console.log("Structural Gate (gate:quick)\n")
 
@@ -153,6 +154,34 @@ check(
   fileContains(".github/workflows/nightly.yml", "solid-compat"),
   "Nightly workflow must run the Solid compatibility matrix",
 )
+
+// ─── 12. Solid dependency catalog (single source of truth) ───────────────
+console.log("\n§12 Solid dependency catalog:")
+{
+  const CATALOGED = new Set(["solid-js", "@solidjs/web", "babel-preset-solid"])
+  const SECTIONS = ["dependencies", "devDependencies", "peerDependencies"] as const
+  const offenders: string[] = []
+  for (const rel of globSync("packages/*/package.json").sort()) {
+    const pkg = readJSON<Record<string, Record<string, string>>>(rel)
+    if (!pkg) continue
+    for (const section of SECTIONS) {
+      const deps = pkg[section]
+      if (!deps) continue
+      for (const [name, value] of Object.entries(deps)) {
+        if (CATALOGED.has(name) && !String(value).startsWith("catalog:")) {
+          offenders.push(`${rel} ${section}.${name}="${value}"`)
+        }
+      }
+    }
+  }
+  check(
+    "all Solid deps use the shared catalog",
+    offenders.length === 0,
+    offenders.length
+      ? `Bypasses catalog: ${offenders.join("; ")}`
+      : "Every package references catalog: for solid-js/@solidjs/web/babel-preset-solid",
+  )
+}
 
 // ─── Summary ────────────────────────────────────────────────────────────
 summarize("Structural Gate")
