@@ -21,7 +21,20 @@ for pattern in $BLOCKED_PATTERNS; do
   break
 done
 
-# Verify staged files are Prettier-formatted; block the commit if any are not.
+# Enforce that Solid deps use the shared pnpm catalog (single source of truth).
+# Only runs when a package.json is staged, to keep the hook fast.
+STAGED_PKG_JSON=$(git diff --cached --name-only --diff-filter=ACM | grep -E '(^|/)package\.json$' || true)
+if [ -n "$STAGED_PKG_JSON" ]; then
+  if ! npx tsx tools/catalog-gate.ts; then
+    echo ""
+    echo "ERROR: A package bypasses the Solid dependency catalog (see above)."
+    echo "Set the version to \"catalog:\" and edit pnpm-workspace.yaml to bump."
+    echo "To bypass (not recommended), commit with --no-verify."
+    echo ""
+    exit 1
+  fi
+fi
+
 # Mirrors CI's `prettier --check` gate so drift is caught before it lands on a
 # branch instead of failing later in the pipeline. Use `pnpm run format` to fix.
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)

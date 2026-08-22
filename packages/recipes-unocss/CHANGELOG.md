@@ -1,5 +1,49 @@
 # @solidiom/recipes-unocss
 
+## 0.4.1
+
+### Patch Changes
+
+- Correct the published Solid peer dependency ranges. All packages now declare `solid-js`, `@solidjs/web`, and `babel-preset-solid` via the shared pnpm catalog, locked to `>=2.0.0-rc.1 <3.0.0`.
+
+  Previously some 0.4.0 packages advertised a `>=2.0.0-beta` peer range (or the catalog resolved to a beta) even though they were built and tested against the Solid 2 RC. Consumers now receive a peer range that matches the version these packages are actually built against.
+
+- Updated dependencies []:
+  - @solidiom/accordion@0.4.1
+  - @solidiom/alert@0.4.1
+  - @solidiom/avatar@0.4.1
+  - @solidiom/badge@0.4.1
+  - @solidiom/breadcrumb@0.4.1
+  - @solidiom/button@0.4.1
+  - @solidiom/card@0.4.1
+  - @solidiom/checkbox@0.4.1
+  - @solidiom/combobox@0.4.1
+  - @solidiom/command-palette@0.4.1
+  - @solidiom/data-table@0.4.1
+  - @solidiom/dialog@0.4.1
+  - @solidiom/field@0.4.1
+  - @solidiom/input@0.4.1
+  - @solidiom/kbd@0.4.1
+  - @solidiom/menu@0.4.1
+  - @solidiom/meter@0.4.1
+  - @solidiom/navigation-menu@0.4.1
+  - @solidiom/pagination@0.4.1
+  - @solidiom/popover@0.4.1
+  - @solidiom/progress@0.4.1
+  - @solidiom/radio-group@0.4.1
+  - @solidiom/resizable-panels@0.4.1
+  - @solidiom/runtime@0.4.1
+  - @solidiom/scroll-area@0.4.1
+  - @solidiom/select@0.4.1
+  - @solidiom/sheet@0.4.1
+  - @solidiom/spinner@0.4.1
+  - @solidiom/switch@0.4.1
+  - @solidiom/tabs@0.4.1
+  - @solidiom/toast@0.4.1
+  - @solidiom/toolbar@0.4.1
+  - @solidiom/tooltip@0.4.1
+  - @solidiom/unocss-preset@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes

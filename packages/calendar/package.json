@@ -1,6 +1,6 @@
 {
   "name": "@solidiom/calendar",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": false,
   "license": "Apache-2.0",
   "type": "module",
@@ -25,7 +25,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@solidjs/web": ">=2.0.0-beta",
+    "@solidjs/web": "catalog:",
     "solid-js": "catalog:"
   },
   "dependencies": {
