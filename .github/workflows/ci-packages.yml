@@ -157,7 +157,7 @@ jobs:
           exit 1
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: build-dist
           path: |
@@ -216,7 +216,7 @@ jobs:
         run: pnpm exec vitest run --config vitest.browser.config.ts
       - name: Recipe parity test
         run: pnpm run test:recipe-parity
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: browser-test-traces
@@ -242,7 +242,7 @@ jobs:
       - run: pnpm run report:a11y-evidence
       - run: pnpm run a11y:coverage-gate
       - run: pnpm run report:axe
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: axe-scan-results
           path: |
@@ -313,7 +313,7 @@ jobs:
           tools/offline-fixture/run-offline-test.sh \
             --manager ${{ matrix.manager }} \
             --smoke-json-out artifacts/smoke-create-${{ matrix.manager }}.json
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: smoke-create-${{ matrix.manager }}-results
