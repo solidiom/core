@@ -25,6 +25,13 @@ overrides:
   "nanoid@3": "^3.3.18"
   "js-yaml@4": "^4.3.1"
   "postcss@8": "^8.5.26"
+  # esbuild GHSA-g7r4-m6w7-qqqr (vulnerable >=0.27.3 <0.28.1). Held at 0.27.7 by
+  # tsup@8.5.1, bundle-require@5.1.0 and one vite@8.2.2 variant. tsup declares
+  # esbuild ^0.27.0, so this override deliberately exceeds its declared range;
+  # tsup only calls esbuild.build/transform/formatMessages (verified against its
+  # dist) and never the serve API the advisory concerns, and package builds are
+  # verified green on 0.28.x.
+  "esbuild@0.27": "^0.28.2"
 
 peerDependencyRules:
   allowAny:
