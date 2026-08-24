@@ -1,0 +1,77 @@
+name: CodeQL
+
+# Static analysis (SAST) for the workspace. Before this workflow the repository
+# had no code scanning at all — the code-scanning API returned "no analysis found".
+#
+# Runner note: this job deliberately uses `ubuntu-latest` rather than the
+# `self-hosted-dfw-flex` runner the rest of CI targets. CodeQL downloads and
+# executes a large prebuilt native analysis bundle, which GitHub-hosted runners
+# cache and keep current; the self-hosted pool has no CodeQL toolcache. This
+# repository is public, so GitHub-hosted minutes are free and unmetered.
+#
+# Trigger note: the rest of this workspace's CI is workflow_dispatch-only, but
+# SAST is only useful if it runs continuously, so a weekly schedule is included.
+# The push/pull_request triggers below follow the dormant-trigger convention used
+# in ci-packages.yml — uncomment to analyse every change.
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    # Mondays 07:00 UTC — after the Dependabot 06:00 America/Chicago window.
+    - cron: "0 7 * * 1"
+
+  # Dormant. To analyse every change, move these keys under `push:` /
+  # `pull_request:` top-level keys:
+  #   push:
+  #     branches: [main]
+  #   pull_request:
+  #     branches: [main]
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Analyze (javascript-typescript)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    permissions:
+      # Required to upload the SARIF results to the Security tab.
+      security-events: write
+      contents: read
+      actions: read
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          # A single language covers both .js and .ts in this workspace.
+          languages: javascript-typescript
+          # No compilation step: CodeQL analyses the TypeScript sources directly.
+          # This avoids building 144 projects (and the memory-heavy site build)
+          # purely to satisfy the scanner.
+          build-mode: none
+          queries: security-and-quality
+          config: |
+            paths-ignore:
+              # Build output and vendored installs.
+              - "**/dist/**"
+              - "**/node_modules/**"
+              # `packages/*/source/` holds emitted copies of package sources for
+              # the CLI's detach/eject flow (see audit:package-source-parity).
+              # Analysing them would duplicate every finding from the real source.
+              - "packages/*/source/**"
+              # Scaffolding consumed by `solidiom create`, not shipped code.
+              - "templates/**"
+              # Generated discovery manifests.
+              - "registry/**"
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:javascript-typescript"
