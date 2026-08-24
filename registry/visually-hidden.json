@@ -1,6 +1,6 @@
 {
   "name": "visually-hidden",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/visually-hidden",
   "capabilities": [],
   "dependencies": [
@@ -75,11 +75,11 @@
     "fileDigests": {
       "src/index.tsx": "3512263f13f19208cb38dd9f3c8a74243dc595b849da5fbb31b581a03e10ff4b"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/visually-hidden"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

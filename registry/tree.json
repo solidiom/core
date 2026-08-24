@@ -1,6 +1,6 @@
 {
   "name": "tree",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/tree",
   "capabilities": [],
   "dependencies": [
@@ -75,11 +75,11 @@
       "src/tree-context.ts": "bcb4a2ba80835f48585ee21da6c7ed7d065b0a36683bc03bd761fd918d642b28",
       "src/tree.tsx": "68fa7871341b9db35124747fedbb46b6c3fb6ca251a622c21c4ca0bfe4ed8e3b"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/tree"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

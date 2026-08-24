@@ -1,6 +1,6 @@
 {
   "name": "separator",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/separator",
   "capabilities": [],
   "dependencies": [
@@ -68,11 +68,11 @@
     "fileDigests": {
       "src/index.tsx": "fde93aafb616eb5bb8f0a8204d6e8b01236f9761a70966802c07cb0fbfc1e583"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/separator"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

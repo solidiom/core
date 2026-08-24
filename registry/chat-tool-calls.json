@@ -1,6 +1,6 @@
 {
   "name": "chat-tool-calls",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/chat-tool-calls",
   "capabilities": [],
   "dependencies": [
@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "6d3a9782efeff779ac7d936311f68952d97957aeff939d562d724756e6fc4e0b"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-tool-calls"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

@@ -1,6 +1,6 @@
 {
   "name": "tooltip",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/tooltip",
   "capabilities": [
     {
@@ -88,11 +88,11 @@
       "src/tooltip-context.ts": "55e178d78e98cb4ee9bb9111f683edae1a2a2896b20dd64d7a3af9acdff34dce",
       "src/tooltip.tsx": "aacfec3901f8a4ec21fd7529d2ed41657ee93285a3716134281e52909aa7aff8"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/tooltip"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

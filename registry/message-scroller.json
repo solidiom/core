@@ -1,6 +1,6 @@
 {
   "name": "message-scroller",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/message-scroller",
   "capabilities": [],
   "dependencies": [
@@ -68,11 +68,11 @@
     "fileDigests": {
       "src/index.tsx": "8ec08705c47b2d853d2091c48af98c842351ab6e4880f307868febeaf5a82b58"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/message-scroller"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

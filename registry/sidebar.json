@@ -1,6 +1,6 @@
 {
   "name": "sidebar",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/sidebar",
   "capabilities": [],
   "dependencies": [
@@ -66,11 +66,11 @@
     "fileDigests": {
       "src/index.tsx": "5b7bb4838681e9ee48b5d541d14c7d959d3416d7aec4d4840d269cd2898fc432"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/sidebar"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

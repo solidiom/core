@@ -1,6 +1,6 @@
 {
   "name": "chat-layout",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/chat-layout",
   "capabilities": [],
   "dependencies": [
@@ -68,11 +68,11 @@
     "fileDigests": {
       "src/index.tsx": "56da1ec970dbd5ee3301764646509be9d01b2445c990b281019645bd945ec7ac"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-layout"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

@@ -1,6 +1,6 @@
 {
   "name": "chat-message-metadata",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/chat-message-metadata",
   "capabilities": [],
   "dependencies": [
@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "9052981138ee9e318e1d121861437b06945abc42000ab6649411528a3d0bc894"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-message-metadata"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

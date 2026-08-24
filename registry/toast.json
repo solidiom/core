@@ -1,6 +1,6 @@
 {
   "name": "toast",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/toast",
   "capabilities": [],
   "dependencies": [
@@ -75,11 +75,11 @@
       "src/toast-context.ts": "9773f77293a7b980e249649944f023c06afd098b6788d2c4f510665fd4578353",
       "src/toast.tsx": "3488bd66dba6c8580f8b12b9d38fd90e6e7455afb1f7fd5b641eb60f7ed4b55a"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/toast"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

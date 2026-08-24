@@ -1,6 +1,6 @@
 {
   "name": "switch",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/switch",
   "capabilities": [],
   "dependencies": [
@@ -73,11 +73,11 @@
     "fileDigests": {
       "src/index.tsx": "806c7b01cadb5f4571af470ebee752fa040d57e10e8573872c9027439527fa03"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/switch"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

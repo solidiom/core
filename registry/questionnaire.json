@@ -1,6 +1,6 @@
 {
   "name": "questionnaire",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/questionnaire",
   "capabilities": [],
   "dependencies": [
@@ -72,11 +72,11 @@
     "fileDigests": {
       "src/index.tsx": "5e508513afdabd446dc546a3512e4c1733aea9dbb1006f189939d33ca07e7b3d"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/questionnaire"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

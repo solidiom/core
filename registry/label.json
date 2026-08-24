@@ -1,6 +1,6 @@
 {
   "name": "label",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/label",
   "capabilities": [],
   "dependencies": [
@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "03052f8acac318fb4997cae2d479c21a487d870700c683c83331c130419bcc14"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/label"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

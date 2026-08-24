@@ -1,6 +1,6 @@
 {
   "name": "avatar",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/avatar",
   "capabilities": [],
   "dependencies": [
@@ -75,11 +75,11 @@
     "fileDigests": {
       "src/index.tsx": "0e08e24447beb45b5d01a0c72c4d11e260ef46a9adf95156364624558463225e"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/avatar"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

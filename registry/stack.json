@@ -1,6 +1,6 @@
 {
   "name": "stack",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/stack",
   "capabilities": [],
   "dependencies": [
@@ -65,11 +65,11 @@
     "fileDigests": {
       "src/index.tsx": "9fc7a10dec1dbb590d2a3e49fab090def759e13dc08fca18b2b459b252e7130b"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/stack"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

@@ -1,6 +1,6 @@
 {
   "name": "table",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/table",
   "capabilities": [],
   "dependencies": [
@@ -69,11 +69,11 @@
     "fileDigests": {
       "src/index.tsx": "6b8e5998a88f2c2f75acda5b742f4245fb5e658849efdc407657edc8e3f6251c"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/table"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

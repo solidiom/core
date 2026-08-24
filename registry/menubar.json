@@ -1,6 +1,6 @@
 {
   "name": "menubar",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/menubar",
   "capabilities": [],
   "dependencies": [
@@ -72,11 +72,11 @@
     "fileDigests": {
       "src/index.tsx": "140520240d8429416c20961004b1ce36486a10af0f541394570ef9f92339f533"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/menubar"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

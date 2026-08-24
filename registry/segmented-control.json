@@ -1,6 +1,6 @@
 {
   "name": "segmented-control",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/segmented-control",
   "capabilities": [],
   "dependencies": [
@@ -73,11 +73,11 @@
     "fileDigests": {
       "src/index.tsx": "5fa7915558757f5700fb4474ed09086be94ba0e251c90ec7739116b7f637fdbe"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/segmented-control"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }
