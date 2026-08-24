@@ -1,6 +1,6 @@
 {
   "name": "command-palette",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/command-palette",
   "capabilities": [],
   "dependencies": [
@@ -82,11 +82,11 @@
       "src/command-palette.tsx": "f7637e6d1eb9182a4f07272da85820ae8afdda672923023eeb03ac45fa28c8c1",
       "src/index.tsx": "b889c5210bac3669eb6832d02c84314f97cae48b6ee2f6fa50898d2c6cc66539"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/command-palette"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

@@ -1,6 +1,6 @@
 {
   "name": "sheet",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/sheet",
   "capabilities": [],
   "dependencies": [
@@ -75,11 +75,11 @@
     "fileDigests": {
       "src/index.tsx": "36e686002d0f992736b1f7fdb352397b2d6b22707a5a8ea83e5e124fb019ae08"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/sheet"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

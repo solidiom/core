@@ -1,6 +1,6 @@
 {
   "name": "time-input",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/time-input",
   "capabilities": [],
   "dependencies": [
@@ -72,11 +72,11 @@
     "fileDigests": {
       "src/index.tsx": "5b18da44ffcc99c443584b722504eb2629f68c82ffec8fe5c60e07c11d27b47a"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/time-input"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

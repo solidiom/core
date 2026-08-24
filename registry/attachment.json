@@ -1,6 +1,6 @@
 {
   "name": "attachment",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/attachment",
   "capabilities": [],
   "dependencies": [
@@ -66,11 +66,11 @@
     "fileDigests": {
       "src/index.tsx": "2ad7134515bbd4254841216a9a62a719a92e5087ae12eff5f0437bd83b254e2e"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/attachment"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

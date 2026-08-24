@@ -1,6 +1,6 @@
 {
   "name": "direction",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/direction",
   "capabilities": [],
   "dependencies": [
@@ -63,11 +63,11 @@
     "fileDigests": {
       "src/index.tsx": "125d04986aa26b50c3d33fadb3e5e329775301c906a7a2634065f930b308c8d1"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/direction"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

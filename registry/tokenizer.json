@@ -1,6 +1,6 @@
 {
   "name": "tokenizer",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/tokenizer",
   "capabilities": [],
   "dependencies": [
@@ -76,11 +76,11 @@
     "fileDigests": {
       "src/index.tsx": "066c63f69a4a076995626f3cae8d0b22589f8289cb638b1a50756448e80c8519"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/tokenizer"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

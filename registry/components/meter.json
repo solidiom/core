@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
   "name": "meter",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/recipes-css",
   "deliverables": [
     "component"
@@ -30,7 +30,7 @@
         "src/recipes/meter.tsx": "8bbe6b4403b5b079579878155c0ffa3936ec1ece0074830f4b5f5b3fa5ae5d4a"
       }
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "documentation": {
     "status": "complete",
@@ -47,5 +47,5 @@
   "dependencies": [
     "@solidiom/meter"
   ],
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

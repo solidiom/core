@@ -1,6 +1,6 @@
 {
   "name": "input-group",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/input-group",
   "capabilities": [],
   "dependencies": [
@@ -71,11 +71,11 @@
     "fileDigests": {
       "src/index.tsx": "18da533ceee285089d5001c744cdef0b2421d9d6d4813de50aef0aa5f26647bc"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/input-group"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

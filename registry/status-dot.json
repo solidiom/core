@@ -1,6 +1,6 @@
 {
   "name": "status-dot",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/status-dot",
   "capabilities": [],
   "dependencies": [
@@ -64,11 +64,11 @@
     "fileDigests": {
       "src/index.tsx": "f8231d5e1d68da0ef22799319629df6dcfac003b3e3c0f4afe6d29604b672304"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/status-dot"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

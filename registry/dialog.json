@@ -1,6 +1,6 @@
 {
   "name": "dialog",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/dialog",
   "capabilities": [],
   "dependencies": [
@@ -80,11 +80,11 @@
       "src/dialog.tsx": "7e91e606302fb2258d07dbdbfe17a872e3a0ababba7d390efcca31f386fe1d5c",
       "src/index.tsx": "12a64978fe94873ab58c3da5219a6e75780eae19a1bb8de728143d8e1affcb01"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/dialog"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

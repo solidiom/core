@@ -1,6 +1,6 @@
 {
   "name": "typography",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/typography",
   "capabilities": [],
   "dependencies": [
@@ -69,11 +69,11 @@
     "fileDigests": {
       "src/index.tsx": "93034c2ad0e57f6b5535236e3ade888bf6fb0c95ba64bd78a6a80cb979a23851"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/typography"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

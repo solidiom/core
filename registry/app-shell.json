@@ -1,6 +1,6 @@
 {
   "name": "app-shell",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/app-shell",
   "capabilities": [],
   "dependencies": [
@@ -70,11 +70,11 @@
     "fileDigests": {
       "src/index.tsx": "d0f492d0089045ce215f3a2f384e00fb9cc084243f6d35a177f959700aee2b82"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/app-shell"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }

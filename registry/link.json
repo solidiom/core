@@ -1,6 +1,6 @@
 {
   "name": "link",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "package": "@solidiom/link",
   "capabilities": [],
   "dependencies": [
@@ -69,11 +69,11 @@
     "fileDigests": {
       "src/index.tsx": "e4a1724a4eafe598b36ffc2e8a0c8ce87b541aa764376e26e4f321391a0d17f2"
     },
-    "lastGenerated": "2026-08-22T06:16:59.000Z"
+    "lastGenerated": "2026-08-22T17:36:37.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/link"
   },
-  "lastUpdated": "2026-08-22T06:16:59.000Z"
+  "lastUpdated": "2026-08-22T17:36:37.000Z"
 }
