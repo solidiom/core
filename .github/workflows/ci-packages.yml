@@ -183,7 +183,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           playwright: chromium
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: build-dist
           path: .
@@ -206,7 +206,7 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           playwright: chromium
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: build-dist
           path: .
@@ -234,7 +234,7 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           playwright: chromium
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: build-dist
           path: .
@@ -260,7 +260,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: build-dist
           path: .
@@ -294,7 +294,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: build-dist
           path: .
@@ -329,7 +329,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: build-dist
           path: .
@@ -359,7 +359,7 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           playwright: chromium
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: build-dist
           path: .
