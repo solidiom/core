@@ -1,0 +1,85 @@
+version: 2
+
+# Dependabot configuration for the Solidiom workspace.
+#
+# Two ecosystems are watched: `npm` (pnpm workspace) and `github-actions`.
+#
+# Volume control: this workspace has 144 projects, so ungrouped updates would
+# produce unreviewable PR spam. Minor/patch version updates are batched into a
+# single grouped PR per ecosystem; major updates deliberately fall outside the
+# groups so each one gets an individual PR and its own review.
+#
+# Security updates are intentionally NOT grouped — Dependabot raises those
+# separately from version updates, and batching them would delay a fix behind
+# unrelated churn.
+
+updates:
+  # ─── npm / pnpm workspace ──────────────────────────────────────────────────
+  - package-ecosystem: npm
+    # The root holds the single pnpm-lock.yaml, but third-party dependencies are
+    # declared in the workspace packages too (embla-carousel, @floating-ui/dom,
+    # @tanstack/*, @sigstore/*, zod, ts-morph) and heavily in apps/site.
+    # Root-only scanning would miss all of them.
+    directories:
+      - "/"
+      - "/packages/*"
+      - "/apps/*"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Chicago
+    open-pull-requests-limit: 8
+    # Exact pins (@tanstack/table-core@9.1.2, @sigstore/verify@4.1.2, …) should be
+    # raised rather than widened into ranges.
+    versioning-strategy: increase
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "fix(deps)"
+      prefix-development: "chore(deps)"
+      include: scope
+    groups:
+      npm-minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Solid 2 RC is pinned to an exact version by the shared pnpm catalog and
+      # workspace overrides (see pnpm-workspace.yaml). Solid RC advances are
+      # tracked deliberately via `pnpm run deps:check`, not by Dependabot, because
+      # each RC bump needs a coordinated catalog + override + compiler review.
+      - dependency-name: solid-js
+      - dependency-name: "@solidjs/web"
+      - dependency-name: babel-preset-solid
+      # TypeScript is pinned to ~6.0.x on purpose: @typescript-eslint requires
+      # `typescript >=4.8.4 <6.1.0`, so 6.1+ breaks every lint and typecheck task
+      # until @typescript-eslint ships TS 7 peer support. See README.
+      - dependency-name: typescript
+        versions:
+          - ">=6.1.0"
+
+  # ─── GitHub Actions ────────────────────────────────────────────────────────
+  # Workflow action majors drift silently and are a supply-chain surface; this
+  # workspace already runs newer majors (checkout@v5, cache@v5, upload-artifact@v6).
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Chicago
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - ci
+    commit-message:
+      prefix: "chore(ci)"
+      include: scope
+    groups:
+      actions-minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - minor
+          - patch
