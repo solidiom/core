@@ -78,7 +78,7 @@ jobs:
         run: pnpm exec vitest run --config vitest.browser.config.ts
       - name: Recipe parity (cross-browser)
         run: pnpm run test:recipe-parity
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: nightly-browser-traces
@@ -122,7 +122,7 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: visual-baselines
           path: apps/site/tests/visual/__screenshots__

@@ -75,7 +75,7 @@ jobs:
         run: pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index
       - name: Verify registry routes
         run: pnpm --filter @solidiom/site run registry-route-check
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: site-dist
           path: apps/site/dist
@@ -97,7 +97,7 @@ jobs:
       - env:
           PLAYWRIGHT_USE_EXISTING_BUILD: "1"
         run: pnpm --filter @solidiom/site run test:e2e
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: site-e2e-results
@@ -121,7 +121,7 @@ jobs:
       - env:
           PLAYWRIGHT_USE_EXISTING_BUILD: "1"
         run: pnpm --filter @solidiom/site run test:visual
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: site-visual-diffs
@@ -148,7 +148,7 @@ jobs:
           pnpm --filter @solidiom/site preview --host 127.0.0.1 --port 4322 > /dev/null 2>&1 &
           for attempt in $(seq 1 30); do curl --fail --silent http://127.0.0.1:4322/ > /dev/null && exit 0; sleep 1; done; exit 1
       - run: pnpm --filter @solidiom/site run lighthouse:json
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: site-lighthouse-report
           path: apps/site/dist/reports
