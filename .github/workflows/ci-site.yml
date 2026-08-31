@@ -51,7 +51,7 @@ jobs:
   site-check:
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - run: pnpm --filter @solidiom/site check
       - run: pnpm --filter @solidiom/site run boundaries
@@ -65,7 +65,7 @@ jobs:
     needs: site-check
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - name: Build packages (site depends on built primitives)
         run: pnpm nx run-many -t build --exclude=@solidiom/site
@@ -86,7 +86,7 @@ jobs:
     if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
         with:
           playwright: chromium firefox webkit
@@ -112,7 +112,7 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.62.1-noble
       options: --ipc=host
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v8
         with:
@@ -134,7 +134,7 @@ jobs:
     runs-on: self-hosted-dfw-flex
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v8
         with:
@@ -169,7 +169,7 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - name: Build template previews
         run: pnpm --filter '@solidiom/template-*' build
@@ -224,7 +224,7 @@ jobs:
     if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - name: Build packages (vertical slice needs built primitives)
         run: pnpm nx run-many -t build --exclude=@solidiom/site
