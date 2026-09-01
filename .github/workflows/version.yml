@@ -111,7 +111,7 @@ jobs:
 
       - name: Create or update Version PR
         if: steps.changesets.outputs.pending == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           base: ${{ inputs.base }}
           branch: release/version-${{ steps.version.outputs.version }}
