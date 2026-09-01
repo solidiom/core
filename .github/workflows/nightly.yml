@@ -44,7 +44,7 @@ jobs:
         solid-tier: [low, mid, high]
         node-version: [24, 26]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
@@ -68,7 +68,7 @@ jobs:
   browser-full:
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
         with:
           playwright: chromium firefox webkit
@@ -99,7 +99,7 @@ jobs:
       - name: Record reason
         run: echo "Regenerating visual baselines — ${{ inputs.baseline_reason }}"
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
 
       - name: Build site
@@ -134,7 +134,7 @@ jobs:
   deps-check:
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - name: Check for dependency updates
         run: pnpm run deps:check

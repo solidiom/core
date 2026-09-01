@@ -60,7 +60,7 @@ jobs:
   install:
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - uses: actions/cache/save@v6
         with:
@@ -78,7 +78,7 @@ jobs:
     needs: install
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - run: pnpm run format:check
 
@@ -86,7 +86,7 @@ jobs:
     needs: install
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - run: pnpm typecheck
 
@@ -96,7 +96,7 @@ jobs:
     needs: install
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
@@ -176,7 +176,7 @@ jobs:
       matrix:
         node-version: ${{ (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true') && fromJson('[24, 26]') || fromJson('[24]') }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
@@ -202,7 +202,7 @@ jobs:
     needs: build
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
         with:
           playwright: chromium
@@ -230,7 +230,7 @@ jobs:
     if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
         with:
           playwright: chromium
@@ -258,7 +258,7 @@ jobs:
     if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v8
         with:
@@ -292,7 +292,7 @@ jobs:
       matrix:
         manager: [npm, pnpm, yarn, bun]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v8
         with:
@@ -327,7 +327,7 @@ jobs:
     if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - uses: actions/download-artifact@v8
         with:
@@ -355,7 +355,7 @@ jobs:
           needs.catalog-gates.result == 'success'))
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
         with:
           playwright: chromium
