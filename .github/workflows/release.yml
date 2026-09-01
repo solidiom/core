@@ -130,7 +130,7 @@ jobs:
     if: github.event_name == 'push'
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Assert tag matches a committed package version
         run: |
           TAG="${GITHUB_REF_NAME#v}"
@@ -164,7 +164,7 @@ jobs:
     if: always() && needs.plan.outputs.run_gate == 'true' && (needs.verify-tag.result == 'success' || needs.verify-tag.result == 'skipped')
     runs-on: self-hosted-dfw-flex
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
         with:
           playwright: chromium
@@ -191,7 +191,7 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - uses: actions/setup-node@v7
         with:
@@ -250,7 +250,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
 
       # Build packages for source resolution (site depends on primitive builds)
