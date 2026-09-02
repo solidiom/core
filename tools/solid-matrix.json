@@ -1,10 +1,10 @@
 {
   "description": "Rolling 3-version window for Solid 2. Updated by scripts/update-solid-window.mts.",
   "window": {
-    "low": "2.0.0-beta.34",
-    "mid": "2.0.0-rc.0",
-    "high": "2.0.0-rc.1"
+    "low": "2.0.0-rc.0",
+    "mid": "2.0.0-rc.1",
+    "high": "2.0.0-rc.6"
   },
-  "peerRange": "^2.0.0-beta.34",
-  "lastUpdated": "2026-08-21"
+  "peerRange": "^2.0.0-rc.0",
+  "lastUpdated": "2026-09-02"
 }
