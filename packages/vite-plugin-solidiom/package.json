@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "nx": {
