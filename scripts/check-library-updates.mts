@@ -482,7 +482,7 @@ async function fetchPackument(
   registry: string,
   timeoutMs: number,
 ): Promise<{ distTags: Record<string, string>; versions: string[] }> {
-  const url = `${registry.replace(/\/$/, "")}/${name.replace("/", "%2f")}`
+  const url = `${registry.replace(/\/$/, "")}/${encodeURIComponent(name)}`
   const res = await fetch(url, {
     headers: { accept: "application/vnd.npm.install-v1+json" },
     signal: AbortSignal.timeout(timeoutMs),

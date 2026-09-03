@@ -88,7 +88,7 @@ function resolveLicenseId(pkg: RawPkg): string {
 
 function buildPurl(name: string, version: string): string {
   // npm purl format: pkg:npm/%40scope%2Fname@version or pkg:npm/name@version
-  const encoded = name.startsWith("@") ? name.replace(/^@/, "%40").replace("/", "%2F") : name
+  const encoded = encodeURIComponent(name)
   return `pkg:npm/${encoded}@${version}`
 }
 
