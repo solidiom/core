@@ -16,7 +16,7 @@ export function themeToCssVariables(
     const resolved =
       typeof value === "string" ? value : resolveTokenValue(definition, mode, tokenId)
     if (resolved === undefined) continue
-    const variableName = `--sio-${tokenId.replace(/-/g, "-")}`
+    const variableName = `--sio-${tokenId}`
     variables[variableName] = resolved
   }
   return variables

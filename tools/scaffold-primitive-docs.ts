@@ -17,7 +17,7 @@
  * --all: scaffold all primitives missing docs/
  */
 
-import { execSync } from "node:child_process"
+import { createHash } from "node:crypto"
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { PUBLIC_PRIMITIVES } from "./axe-results"
@@ -48,6 +48,10 @@ function readJSON<T>(path: string): T | null {
   } catch {
     return null
   }
+}
+
+function sha256File(path: string): string {
+  return createHash("sha256").update(readFileSync(path)).digest("hex")
 }
 
 function titleCase(s: string): string {
@@ -707,18 +711,10 @@ function scaffoldPrimitive(name: string, force: boolean): boolean {
   const enContract = genContract(name, registry, parts, hasKeyboard)
   writeFileSync(join(docsDir, "accessibility", "contract.md"), enContract)
 
-  // Compute EN hashes for ES files
-  const overviewHash = execSync(`shasum -a 256 "${join(docsDir, "overview.md")}" | cut -d' ' -f1`, {
-    encoding: "utf8",
-  }).trim()
-  const exampleHash = execSync(
-    `shasum -a 256 "${join(docsDir, "examples", "basic.md")}" | cut -d' ' -f1`,
-    { encoding: "utf8" },
-  ).trim()
-  const contractHash = execSync(
-    `shasum -a 256 "${join(docsDir, "accessibility", "contract.md")}" | cut -d' ' -f1`,
-    { encoding: "utf8" },
-  ).trim()
+  // Compute EN hashes for ES files without invoking a shell.
+  const overviewHash = sha256File(join(docsDir, "overview.md"))
+  const exampleHash = sha256File(join(docsDir, "examples", "basic.md"))
+  const contractHash = sha256File(join(docsDir, "accessibility", "contract.md"))
 
   // Generate ES files
   const esOverview = genOverviewEs(name, registry, parts, hasKeyboard, overviewHash)
