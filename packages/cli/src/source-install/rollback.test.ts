@@ -1,16 +1,11 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createTempDir } from "../test-utils/temp-dir"
 import { createRollbackJournal } from "./rollback"
 
 function createTmpDir(): string {
-  const dir = join(
-    tmpdir(),
-    `solidiom-rollback-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-  )
-  mkdirSync(dir, { recursive: true })
-  return dir
+  return createTempDir("solidiom-rollback-test")
 }
 
 describe("createRollbackJournal", () => {

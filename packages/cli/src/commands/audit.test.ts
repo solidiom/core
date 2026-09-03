@@ -1,19 +1,18 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, rmSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createNestedTempDir } from "../test-utils/temp-dir"
 import { runAudit } from "./audit"
 
 describe("runAudit", () => {
   let cwd: string
 
   beforeEach(() => {
-    cwd = join(tmpdir(), `solidiom-audit-${Date.now()}`, "consumer", "app")
-    mkdirSync(cwd, { recursive: true })
+    cwd = createNestedTempDir("solidiom-audit", "consumer", "app").cwd
   })
 
   afterEach(() => {
-    rmSync(join(tmpdir(), `solidiom-audit-${Date.now()}`), { recursive: true, force: true })
+    rmSync(join(cwd, "..", ".."), { recursive: true, force: true })
   })
 
   const createMonorepoPkg = (name: string, version: string, license: string) => {

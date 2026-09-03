@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, rmSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createTempDir } from "../test-utils/temp-dir"
 import { runDiff } from "./diff"
 import { computeDigest } from "../source-install/lock"
 
@@ -9,8 +9,7 @@ describe("runDiff", () => {
   let cwd: string
 
   beforeEach(() => {
-    cwd = join(tmpdir(), `solidiom-diff-${Date.now()}-${Math.random().toString(36).slice(2)}`)
-    mkdirSync(cwd, { recursive: true })
+    cwd = createTempDir("solidiom-diff")
     mkdirSync(join(cwd, ".solidiom"), { recursive: true })
   })
 

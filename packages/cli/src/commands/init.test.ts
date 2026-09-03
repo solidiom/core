@@ -1,15 +1,13 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
-import { mkdirSync, existsSync, readFileSync, rmSync } from "node:fs"
-import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { existsSync, readFileSync, rmSync } from "node:fs"
+import { createTempDir } from "../test-utils/temp-dir"
 import { runInit } from "./init"
 
 describe("runInit", () => {
   let cwd: string
 
   beforeEach(() => {
-    cwd = join(tmpdir(), `solidiom-init-${Date.now()}`)
-    mkdirSync(cwd, { recursive: true })
+    cwd = createTempDir("solidiom-init")
   })
 
   afterEach(() => {

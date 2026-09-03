@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, readFileSync, rmSync, existsSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createNestedTempDir } from "../test-utils/temp-dir"
 import { runUpdate } from "./update"
 import { computeDigest, writeLock } from "../source-install/lock"
 
@@ -9,15 +9,14 @@ describe("runUpdate", () => {
   let cwd: string
 
   beforeEach(() => {
-    cwd = join(tmpdir(), `solidiom-update-${Date.now()}`, "consumer", "app")
-    mkdirSync(cwd, { recursive: true })
+    cwd = createNestedTempDir("solidiom-update", "consumer", "app").cwd
     mkdirSync(join(cwd, ".solidiom"), { recursive: true })
     mkdirSync(join(cwd, ".solidiom", "runtime"), { recursive: true })
     writeFileSync(join(cwd, ".solidiom", "config.json"), JSON.stringify({}))
   })
 
   afterEach(() => {
-    rmSync(join(tmpdir(), `solidiom-update-${Date.now()}`), { recursive: true, force: true })
+    rmSync(join(cwd, "..", ".."), { recursive: true, force: true })
   })
 
   const createFixture = (

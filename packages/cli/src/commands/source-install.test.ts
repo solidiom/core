@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createNestedTempDir } from "../test-utils/temp-dir"
 import { createHash } from "node:crypto"
 import { installSource, readLock, computeDigest, rewriteImports } from "../source-install/install"
 import { runDiff } from "../commands/diff"
@@ -12,10 +12,7 @@ function createTmpDir(): string {
   // Nest cwd two levels deep so the production monorepo-resolution heuristic
   // (join(cwd, "..", "..", "packages", ...)) stays inside the writable temp tree
   // rather than escaping to the filesystem root on CI's shallow tmpdir.
-  const root = join(tmpdir(), `solidiom-test-${Date.now()}-${Math.random().toString(36).slice(2)}`)
-  const dir = join(root, "consumer", "app")
-  mkdirSync(dir, { recursive: true })
-  return dir
+  return createNestedTempDir("solidiom-test", "consumer", "app").cwd
 }
 
 /**

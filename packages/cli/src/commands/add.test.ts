@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, rmSync, writeFileSync, readFileSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createNestedTempDir, createNestedTempDirIn, createTempDir } from "../test-utils/temp-dir"
 import { createHash } from "node:crypto"
 import { Cli } from "clipanion"
 import { Writable } from "node:stream"
@@ -11,8 +11,7 @@ describe("runAdd", () => {
   let cwd: string
 
   beforeEach(() => {
-    cwd = join(tmpdir(), `solidiom-add-test-${Date.now()}-${Math.random().toString(36).slice(2)}`)
-    mkdirSync(cwd, { recursive: true })
+    cwd = createTempDir("solidiom-add-test")
   })
 
   afterEach(() => {
@@ -66,12 +65,7 @@ describe("runAdd", () => {
     let nestedCwd: string
 
     beforeEach(() => {
-      const root = join(
-        tmpdir(),
-        `solidiom-add-source-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-      )
-      nestedCwd = join(root, "consumer", "app")
-      mkdirSync(nestedCwd, { recursive: true })
+      nestedCwd = createNestedTempDir("solidiom-add-source-test", "consumer", "app").cwd
 
       const primitiveSource = join(nestedCwd, "..", "..", "packages", "dialog", "source")
       mkdirSync(primitiveSource, { recursive: true })
@@ -176,12 +170,7 @@ describe("runAdd", () => {
     let repoNestedCwd: string
 
     beforeEach(() => {
-      repoNestedCwd = join(
-        REPO_ROOT,
-        `tmp-add-registry-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-        "app",
-      )
-      mkdirSync(repoNestedCwd, { recursive: true })
+      repoNestedCwd = createNestedTempDirIn(REPO_ROOT, "tmp-add-registry-test", "app").cwd
     })
 
     afterEach(() => {
@@ -224,12 +213,7 @@ describe("runAdd", () => {
     let nestedCwd: string
 
     beforeEach(() => {
-      const root = join(
-        tmpdir(),
-        `solidiom-add-conflict-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-      )
-      nestedCwd = join(root, "consumer", "app")
-      mkdirSync(nestedCwd, { recursive: true })
+      nestedCwd = createNestedTempDir("solidiom-add-conflict-test", "consumer", "app").cwd
     })
 
     afterEach(() => {
