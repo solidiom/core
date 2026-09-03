@@ -9,24 +9,18 @@ name: CodeQL
 # cache and keep current; the self-hosted pool has no CodeQL toolcache. This
 # repository is public, so GitHub-hosted minutes are free and unmetered.
 #
-# Trigger note: the rest of this workspace's CI is workflow_dispatch-only, but
-# SAST is only useful if it runs continuously, so a weekly schedule is included.
-# The push/pull_request triggers below follow the dormant-trigger convention used
-# in ci-packages.yml — uncomment to analyse every change.
+# SAST runs on every main-branch change and pull request, with a weekly scan
+# to pick up newly-published queries and vulnerability models.
 
 on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
-
   schedule:
     # Mondays 07:00 UTC — after the Dependabot 06:00 America/Chicago window.
     - cron: "0 7 * * 1"
-
-  # Dormant. To analyse every change, move these keys under `push:` /
-  # `pull_request:` top-level keys:
-  #   push:
-  #     branches: [main]
-  #   pull_request:
-  #     branches: [main]
 
 concurrency:
   group: codeql-${{ github.ref }}
@@ -56,7 +50,9 @@ jobs:
           # This avoids building 144 projects (and the memory-heavy site build)
           # purely to satisfy the scanner.
           build-mode: none
-          queries: security-and-quality
+          # Security-focused extended coverage; ordinary quality diagnostics are
+          # enforced by ESLint and TypeScript rather than mixed into Security alerts.
+          queries: security-extended
           config: |
             paths-ignore:
               # Build output and vendored installs.
