@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, rmSync, readdirSync, existsSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createNestedTempDir } from "../test-utils/temp-dir"
 import { createHash, generateKeyPairSync } from "node:crypto"
 import { verifySourceIntegrity } from "./verify-source"
 
@@ -35,13 +35,7 @@ function createTmpDir(): string {
   // Nest cwd two levels deep so verifySourceIntegrity's monorepo-relative
   // resolution (join(cwd, "..", "..", "registry")) stays inside the writable
   // temp tree, matching source-install.test.ts's createTmpDir convention.
-  const root = join(
-    tmpdir(),
-    `solidiom-verify-source-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-  )
-  const dir = join(root, "consumer", "app")
-  mkdirSync(dir, { recursive: true })
-  return dir
+  return createNestedTempDir("solidiom-verify-source", "consumer", "app").cwd
 }
 
 /** Build a schema-valid manifest fixture for the given file contents. */

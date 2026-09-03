@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, rmSync, readFileSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createTempDir } from "../test-utils/temp-dir"
 import { runDetach } from "./detach"
 
 const lockEntry = (path: string, primitive: string, detached = false) => ({
@@ -19,8 +19,7 @@ describe("runDetach", () => {
   let cwd: string
 
   beforeEach(() => {
-    cwd = join(tmpdir(), `solidiom-detach-${Date.now()}-${Math.random().toString(36).slice(2)}`)
-    mkdirSync(cwd, { recursive: true })
+    cwd = createTempDir("solidiom-detach")
     mkdirSync(join(cwd, ".solidiom"), { recursive: true })
   })
 

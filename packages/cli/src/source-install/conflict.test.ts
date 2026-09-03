@@ -1,17 +1,12 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, rmSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createTempDir } from "../test-utils/temp-dir"
 import { classifyConflicts, renderUnifiedDiff } from "./conflict"
 import { computeDigest, type LockFile } from "./lock"
 
 function createTmpDir(): string {
-  const dir = join(
-    tmpdir(),
-    `solidiom-conflict-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-  )
-  mkdirSync(dir, { recursive: true })
-  return dir
+  return createTempDir("solidiom-conflict-test")
 }
 
 function emptyLock(): LockFile {

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, rmSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createNestedTempDir } from "../test-utils/temp-dir"
 import { detectPackageManager, isPackageManagerName } from "./detect"
 
 describe("isPackageManagerName", () => {
@@ -19,18 +19,29 @@ describe("isPackageManagerName", () => {
 })
 
 describe("detectPackageManager", () => {
+  let root: string
   let cwd: string
 
   beforeEach(() => {
-    cwd = join(
-      tmpdir(),
-      `solidiom-detect-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    const fixture = createNestedTempDir(
+      "solidiom-detect-test",
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
     )
-    mkdirSync(cwd, { recursive: true })
+    root = fixture.root
+    cwd = fixture.cwd
   })
 
   afterEach(() => {
-    rmSync(cwd, { recursive: true, force: true })
+    rmSync(root, { recursive: true, force: true })
   })
 
   describe("precedence", () => {

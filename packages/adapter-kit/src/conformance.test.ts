@@ -6,7 +6,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
-import { mkdirSync, writeFileSync, rmSync } from "node:fs"
+import { mkdirSync, mkdtempSync, writeFileSync, rmSync } from "node:fs"
 import { join, resolve } from "node:path"
 import { tmpdir } from "node:os"
 import { fileURLToPath } from "node:url"
@@ -16,12 +16,7 @@ const __dirname = resolve(fileURLToPath(import.meta.url), "..")
 const REPO_ROOT = resolve(__dirname, "../../..")
 
 function createTmpDir(): string {
-  const dir = join(
-    tmpdir(),
-    `adapter-kit-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-  )
-  mkdirSync(dir, { recursive: true })
-  return dir
+  return mkdtempSync(join(tmpdir(), "adapter-kit-test-"))
 }
 
 function writePackageJson(dir: string, overrides: Record<string, unknown> = {}) {

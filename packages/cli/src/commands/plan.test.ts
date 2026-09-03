@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdirSync, writeFileSync, rmSync } from "node:fs"
 import { join } from "node:path"
-import { tmpdir } from "node:os"
+import { createNestedTempDirIn, createTempDir } from "../test-utils/temp-dir"
 import { runPlan, toInstallSpecifier } from "./plan"
 
 describe("toInstallSpecifier (REL-C1)", () => {
@@ -39,8 +39,7 @@ describe("runPlan", () => {
   let cwd: string
 
   beforeEach(() => {
-    cwd = join(tmpdir(), `solidiom-test-${Date.now()}`)
-    mkdirSync(cwd, { recursive: true })
+    cwd = createTempDir("solidiom-test")
   })
 
   afterEach(() => {
@@ -142,12 +141,7 @@ describe("runPlan", () => {
     let repoNestedCwd: string
 
     beforeEach(() => {
-      repoNestedCwd = join(
-        REPO_ROOT,
-        `tmp-plan-registry-test-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-        "app",
-      )
-      mkdirSync(repoNestedCwd, { recursive: true })
+      repoNestedCwd = createNestedTempDirIn(REPO_ROOT, "tmp-plan-registry-test", "app").cwd
     })
 
     afterEach(() => {
