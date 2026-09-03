@@ -30,6 +30,7 @@ import {
   mkdirSync,
 } from "node:fs"
 import { join, relative, dirname } from "node:path"
+import { readTextFileIfExists } from "./fs-safe"
 import { fileURLToPath } from "node:url"
 import { createHash } from "node:crypto"
 import { execSync } from "node:child_process"
@@ -605,16 +606,17 @@ function extractRuntimeModules(sourceDir: string): string[] {
   if (!existsSync(sourceDir)) return []
 
   function walk(dir: string): void {
-    for (const entry of readdirSync(dir)) {
-      const full = join(dir, entry)
-      if (statSync(full).isDirectory()) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) {
         walk(full)
       } else if (
-        (entry.endsWith(".ts") || entry.endsWith(".tsx")) &&
-        !entry.includes(".test.") &&
-        !entry.endsWith(".d.ts")
+        (entry.name.endsWith(".ts") || entry.name.endsWith(".tsx")) &&
+        !entry.name.includes(".test.") &&
+        !entry.name.endsWith(".d.ts")
       ) {
-        const content = readFileSync(full, "utf8")
+        const content = readTextFileIfExists(full)
+        if (content === null) continue
         // Match: from "@solidiom/runtime/collection/roving-focus"
         const subpathMatches = content.matchAll(/from\s+["']@solidiom\/runtime\/([^"']+)["']/g)
         for (const m of subpathMatches) {
@@ -650,16 +652,17 @@ function detectCapabilities(sourceDir: string): Capability[] {
   if (!existsSync(sourceDir)) return caps
 
   function walk(dir: string): void {
-    for (const entry of readdirSync(dir)) {
-      const full = join(dir, entry)
-      if (statSync(full).isDirectory()) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) {
         walk(full)
       } else if (
-        (entry.endsWith(".ts") || entry.endsWith(".tsx")) &&
-        !entry.includes(".test.") &&
-        !entry.endsWith(".d.ts")
+        (entry.name.endsWith(".ts") || entry.name.endsWith(".tsx")) &&
+        !entry.name.includes(".test.") &&
+        !entry.name.endsWith(".d.ts")
       ) {
-        const content = readFileSync(full, "utf8")
+        const content = readTextFileIfExists(full)
+        if (content === null) continue
         for (const [portName, cap] of Object.entries(PORT_TO_CAPABILITY)) {
           if (content.includes(`interface ${portName}`) || content.includes(`: ${portName}`)) {
             if (!caps.some((c) => c.name === cap.name)) {

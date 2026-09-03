@@ -17,8 +17,13 @@
  * The styling profile comes from `config.stylingProfile` or `plan.stylingProfile`.
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, statSync } from "node:fs"
+import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs"
 import { join, relative, dirname } from "node:path"
+import {
+  atomicWriteFileSync,
+  createFileExclusiveSync,
+  readTextFileIfExists,
+} from "../fs/safe-write"
 import { ConfigSchema, PolicySchema, type Config } from "../schemas"
 import type { Deliverable } from "../registry-schema"
 import type { Plan } from "../commands/plan"
@@ -83,13 +88,14 @@ function collectRuntimeFiles(runtimeSourceDir: string): Map<string, string> {
   if (!existsSync(runtimeSourceDir)) return files
 
   function walk(dir: string, prefix: string): void {
-    for (const entry of readdirSync(dir)) {
-      const full = join(dir, entry)
-      const rel = prefix ? `${prefix}/${entry}` : entry
-      if (statSync(full).isDirectory()) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      const rel = prefix ? `${prefix}/${entry.name}` : entry.name
+      if (entry.isDirectory()) {
         walk(full, rel)
-      } else if (entry.endsWith(".ts") && !entry.includes(".test.")) {
-        files.set(rel, readFileSync(full, "utf8"))
+      } else if (entry.name.endsWith(".ts") && !entry.name.includes(".test.")) {
+        const content = readTextFileIfExists(full)
+        if (content !== null) files.set(rel, content)
       }
     }
   }
@@ -125,16 +131,17 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
     diff = false,
   } = options
 
-  // Load config
+  // Load config and policy without separate existence checks.
   const configPath = join(cwd, ".solidiom", "config.json")
-  const config: Config = existsSync(configPath)
-    ? ConfigSchema.parse(JSON.parse(readFileSync(configPath, "utf8")))
+  const configContent = readTextFileIfExists(configPath)
+  const config: Config = configContent
+    ? ConfigSchema.parse(JSON.parse(configContent))
     : ConfigSchema.parse({})
 
-  // Load policy
   const policyPath = join(cwd, ".solidiom", "policy.json")
-  const policy = existsSync(policyPath)
-    ? PolicySchema.parse(JSON.parse(readFileSync(policyPath, "utf8")))
+  const policyContent = readTextFileIfExists(policyPath)
+  const policy = policyContent
+    ? PolicySchema.parse(JSON.parse(policyContent))
     : PolicySchema.parse({})
 
   // Destination root is keyed off the plan's deliverable kind (CLI-004),
@@ -278,8 +285,7 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
 
       if (!dryRun) {
         journal.recordBeforeWrite(targetPath)
-        mkdirSync(dirname(targetPath), { recursive: true })
-        writeFileSync(targetPath, rewritten)
+        atomicWriteFileSync(targetPath, rewritten)
       }
 
       const relFromCwd = relative(cwd, targetPath)
@@ -305,13 +311,13 @@ export function installSource(options: SourceInstallOptions): SourceInstallResul
         const targetPath = join(runtimeDir, relPath)
         const relFromCwd = relative(cwd, targetPath)
 
-        // Only write if not already present (deduplication)
-        if (!existsSync(targetPath)) {
-          if (!dryRun) {
-            journal.recordBeforeWrite(targetPath)
-            mkdirSync(dirname(targetPath), { recursive: true })
-            writeFileSync(targetPath, content)
-          }
+        // Publish only when absent. Exclusive hard-link publication keeps a
+        // concurrently-created runtime file intact and never exposes partial content.
+        const wroteRuntime = dryRun
+          ? !existsSync(targetPath)
+          : createFileExclusiveSync(targetPath, content)
+        if (wroteRuntime) {
+          if (!dryRun) journal.recordCreated(targetPath)
           filesWritten.push(relFromCwd)
           runtimeDeduped.push(relFromCwd)
         }
@@ -483,13 +489,17 @@ function collectSourceFiles(dir: string): Map<string, string> {
   if (!existsSync(dir)) return files
 
   function walk(d: string, prefix: string): void {
-    for (const entry of readdirSync(d)) {
-      const full = join(d, entry)
-      const rel = prefix ? `${prefix}/${entry}` : entry
-      if (statSync(full).isDirectory()) {
+    for (const entry of readdirSync(d, { withFileTypes: true })) {
+      const full = join(d, entry.name)
+      const rel = prefix ? `${prefix}/${entry.name}` : entry.name
+      if (entry.isDirectory()) {
         walk(full, rel)
-      } else if ((entry.endsWith(".ts") || entry.endsWith(".tsx")) && !entry.includes(".test.")) {
-        files.set(rel, readFileSync(full, "utf8"))
+      } else if (
+        (entry.name.endsWith(".ts") || entry.name.endsWith(".tsx")) &&
+        !entry.name.includes(".test.")
+      ) {
+        const content = readTextFileIfExists(full)
+        if (content !== null) files.set(rel, content)
       }
     }
   }

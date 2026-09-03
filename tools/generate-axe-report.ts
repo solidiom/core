@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { atomicWriteFileSync, readTextFileIfExists } from "./fs-safe"
 import { join, resolve } from "node:path"
 import { AXE_REPORT_STAMPS, stabilizeStamps } from "./report-stamp"
 import {
@@ -91,16 +91,15 @@ function main(): void {
   // Captured before the removal below: the report is deleted up front so a failed
   // validation cannot leave stale evidence in place, but the prior run stamps are
   // still wanted if the regenerated report turns out identical.
-  const previous = existsSync(OUTPUT) ? readFileSync(OUTPUT, "utf8") : undefined
-  rmSync(OUTPUT, { force: true })
-
-  if (!existsSync(resultsPath)) {
+  const previous = readTextFileIfExists(OUTPUT) ?? undefined
+  const resultsContent = readTextFileIfExists(resultsPath)
+  if (resultsContent === null) {
     throw new Error(`Axe result artifact does not exist: ${resultsPath}`)
   }
 
   let parsed: unknown
   try {
-    parsed = JSON.parse(readFileSync(resultsPath, "utf8"))
+    parsed = JSON.parse(resultsContent)
   } catch (error) {
     throw new Error(`Unable to parse axe result artifact: ${String(error)}`)
   }
@@ -115,10 +114,9 @@ function main(): void {
     throw new Error(`Invalid axe result artifact:\n- ${errors.join("\n- ")}`)
   }
 
-  writeFileSync(
+  atomicWriteFileSync(
     OUTPUT,
     stabilizeStamps(generateReport(artifact, resultsPath), previous, AXE_REPORT_STAMPS),
-    "utf8",
   )
   console.log(`✓ Generated ${OUTPUT}`)
   console.log(`  ${artifact.results.length} primitives scanned from executed browser-test results`)

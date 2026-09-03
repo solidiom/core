@@ -15,7 +15,8 @@
  */
 
 import { execSync } from "node:child_process"
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, readFileSync } from "node:fs"
+import { atomicWriteFileSync } from "./fs-safe"
 import { join } from "node:path"
 import { createHash } from "node:crypto"
 
@@ -1299,12 +1300,12 @@ function scaffoldComponent(name: string, force: boolean): boolean {
   }
 
   const enContent = genComponentEN(name, meta)
-  writeFileSync(enPath, enContent)
+  atomicWriteFileSync(enPath, enContent)
 
   const enHash = sha256(enContent)
 
   const esContent = genComponentES(name, meta, enHash)
-  writeFileSync(esPath, esContent)
+  atomicWriteFileSync(esPath, esContent)
 
   console.log(`  ✓ component/${name}`)
   return true
@@ -1330,12 +1331,12 @@ function scaffoldBlock(name: string, force: boolean): boolean {
   }
 
   const enContent = genBlockEN(block)
-  writeFileSync(enPath, enContent)
+  atomicWriteFileSync(enPath, enContent)
 
   const enHash = sha256(enContent)
 
   const esContent = genBlockES(block, enHash)
-  writeFileSync(esPath, esContent)
+  atomicWriteFileSync(esPath, esContent)
 
   console.log(`  ✓ block/${name}`)
   return true
@@ -1364,12 +1365,12 @@ function scaffoldTemplate(name: string, force: boolean): boolean {
   }
 
   const enContent = genTemplateEN(tpl)
-  writeFileSync(enPath, enContent)
+  atomicWriteFileSync(enPath, enContent)
 
   const enHash = sha256(enContent)
 
   const esContent = genTemplateES(tpl, enHash)
-  writeFileSync(esPath, esContent)
+  atomicWriteFileSync(esPath, esContent)
 
   console.log(`  ✓ template/${name}`)
   return true
@@ -1395,12 +1396,12 @@ function scaffoldTheme(name: string, force: boolean): boolean {
   }
 
   const enContent = genThemeEN(theme)
-  writeFileSync(enPath, enContent)
+  atomicWriteFileSync(enPath, enContent)
 
   const enHash = sha256(enContent)
 
   const esContent = genThemeES(theme, enHash)
-  writeFileSync(esPath, esContent)
+  atomicWriteFileSync(esPath, esContent)
 
   console.log(`  ✓ theme/${name}`)
   return true

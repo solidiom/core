@@ -1,15 +1,7 @@
-import {
-  existsSync,
-  readdirSync,
-  statSync,
-  copyFileSync,
-  mkdirSync,
-  readFileSync,
-  writeFileSync,
-  rmSync,
-} from "node:fs"
+import { existsSync, readdirSync, mkdirSync, readFileSync, rmSync } from "node:fs"
 import { resolve, join, dirname } from "node:path"
 import { execSync } from "node:child_process"
+import { atomicWriteFileSync, readBufferIfExists } from "../../../tools/fs-safe"
 
 // Find the git common dir so we resolve templates/ from the main checkout
 // (where untracked dist/ directories exist), not from a worktree.
@@ -41,15 +33,12 @@ const templateNames = readdirSync(templatesDir, { withFileTypes: true })
 let copied = 0
 let skipped = 0
 
-function shouldCopyFile(src: string, dest: string): boolean {
-  if (!existsSync(dest)) return true
-  const srcStat = statSync(src)
-  const destStat = statSync(dest)
-  if (srcStat.size !== destStat.size) return true
-  const srcBuf = readFileSync(src)
-  const destBuf = readFileSync(dest)
-  if (!srcBuf.equals(destBuf)) return true
-  return false
+function copyFileIfChanged(src: string, dest: string): boolean {
+  const srcBuffer = readFileSync(src)
+  const destination = readBufferIfExists(dest)
+  if (destination?.equals(srcBuffer)) return false
+  atomicWriteFileSync(dest, srcBuffer)
+  return true
 }
 
 /**
@@ -110,17 +99,14 @@ function syncDir(src: string, dest: string, preserve?: Set<string>): void {
       if (entry.name === "index.html") {
         const raw = readFileSync(srcPath, "utf8")
         destContent = Buffer.from(fixAssetPaths(raw), "utf8")
-        if (existsSync(destPath)) {
-          const existing = readFileSync(destPath)
-          if (existing.equals(destContent)) {
-            skipped++
-            continue
-          }
+        const existing = readBufferIfExists(destPath)
+        if (existing?.equals(destContent)) {
+          skipped++
+          continue
         }
-        writeFileSync(destPath, destContent)
+        atomicWriteFileSync(destPath, destContent)
         copied++
-      } else if (shouldCopyFile(srcPath, destPath)) {
-        copyFileSync(srcPath, destPath)
+      } else if (copyFileIfChanged(srcPath, destPath)) {
         copied++
       } else {
         skipped++
@@ -179,7 +165,7 @@ function generateSsrFallbackHtml(clientAssetsDir: string, name: string): string 
 
 for (const name of templateNames) {
   const srcDist = join(templatesDir, name, "dist")
-  if (!existsSync(srcDist) || !statSync(srcDist).isDirectory()) {
+  if (!existsSync(srcDist)) {
     continue
   }
 
@@ -200,16 +186,11 @@ for (const name of templateNames) {
     const destIndex = join(destBase, "index.html")
     const fallbackHtml = generateSsrFallbackHtml(clientAssetsDir, name)
     const fallbackBuf = Buffer.from(fallbackHtml, "utf8")
-    if (existsSync(destIndex)) {
-      const existing = readFileSync(destIndex)
-      if (existing.equals(fallbackBuf)) {
-        skipped++
-      } else {
-        writeFileSync(destIndex, fallbackBuf)
-        copied++
-      }
+    const existing = readBufferIfExists(destIndex)
+    if (existing?.equals(fallbackBuf)) {
+      skipped++
     } else {
-      writeFileSync(destIndex, fallbackBuf)
+      atomicWriteFileSync(destIndex, fallbackBuf)
       copied++
     }
   }

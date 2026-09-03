@@ -16,7 +16,7 @@
  * Usage: pnpm exec tsx tools/audit-primitives.ts
  */
 
-import { readdirSync, readFileSync, existsSync, statSync, mkdirSync, writeFileSync } from "node:fs"
+import { readdirSync, readFileSync, existsSync, mkdirSync, writeFileSync } from "node:fs"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -97,12 +97,12 @@ function detectJsxSource(pkgDir: string): JsxSource {
   const jsxImportPattern = /import\s+{[^}]*\btype\s+JSX\b[^}]*}\s+from\s+["']([^"']+)["']/
 
   function walk(dir: string): JsxSource | null {
-    for (const entry of readdirSync(dir)) {
-      const full = join(dir, entry)
-      if (statSync(full).isDirectory()) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) {
         const result = walk(full)
         if (result) return result
-      } else if (entry.endsWith(".tsx")) {
+      } else if (entry.name.endsWith(".tsx")) {
         const content = readFileSync(full, "utf8")
         const match = content.match(jsxImportPattern)
         if (match) {
@@ -124,11 +124,11 @@ function hasBrowserTest(pkgDir: string): boolean {
   if (!existsSync(srcDir)) return false
 
   function walk(dir: string): boolean {
-    for (const entry of readdirSync(dir)) {
-      const full = join(dir, entry)
-      if (statSync(full).isDirectory()) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) {
         if (walk(full)) return true
-      } else if (/\.browser\.test\./.test(entry)) {
+      } else if (/\.browser\.test\./.test(entry.name)) {
         return true
       }
     }
@@ -144,11 +144,11 @@ function hasApplySemanticAttrs(pkgDir: string): boolean {
   if (!existsSync(sourceDir)) return false
 
   function walk(dir: string): boolean {
-    for (const entry of readdirSync(dir)) {
-      const full = join(dir, entry)
-      if (statSync(full).isDirectory()) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) {
         if (walk(full)) return true
-      } else if (entry.endsWith(".tsx") || entry.endsWith(".ts")) {
+      } else if (entry.name.endsWith(".tsx") || entry.name.endsWith(".ts")) {
         const content = readFileSync(full, "utf8")
         if (content.includes("applySemanticAttrs")) return true
       }
@@ -165,11 +165,11 @@ function hasClassProp(pkgDir: string): boolean {
   if (!existsSync(sourceDir)) return false
 
   function walk(dir: string): boolean {
-    for (const entry of readdirSync(dir)) {
-      const full = join(dir, entry)
-      if (statSync(full).isDirectory()) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) {
         if (walk(full)) return true
-      } else if (entry.endsWith(".tsx") || entry.endsWith(".ts")) {
+      } else if (entry.name.endsWith(".tsx") || entry.name.endsWith(".ts")) {
         const content = readFileSync(full, "utf8")
         if (/class\s*\?:\s*string/.test(content) || /class\s*:\s*string/.test(content)) return true
       }
@@ -186,11 +186,11 @@ function hasPresenceUsage(pkgDir: string): boolean {
   if (!existsSync(sourceDir)) return false
 
   function walk(dir: string): boolean {
-    for (const entry of readdirSync(dir)) {
-      const full = join(dir, entry)
-      if (statSync(full).isDirectory()) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) {
         if (walk(full)) return true
-      } else if (entry.endsWith(".tsx") || entry.endsWith(".ts")) {
+      } else if (entry.name.endsWith(".tsx") || entry.name.endsWith(".ts")) {
         const content = readFileSync(full, "utf8")
         if (content.includes("createPresence")) return true
       }

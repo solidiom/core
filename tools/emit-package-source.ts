@@ -10,16 +10,9 @@
  *   pnpm run source:emit           # regenerate source/ for every dual-emission package
  *   pnpm run source:emit:check     # exit 1 on drift, no writes (safe for CI)
  */
-import {
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  readFileSync,
-  rmSync,
-  statSync,
-  writeFileSync,
-} from "node:fs"
+import { existsSync, mkdirSync, readdirSync, rmSync } from "node:fs"
 import { join } from "node:path"
+import { atomicWriteFileSync, readBufferIfExists } from "./fs-safe"
 import { auditSourceParity, type SourceParityError } from "./audit-package-source-parity"
 
 const ROOT = join(import.meta.dirname ?? __dirname, "..")
@@ -45,16 +38,16 @@ function copySourceDir(srcDir: string, destDir: string): void {
   }
   mkdirSync(destDir, { recursive: true })
 
-  const entries = readdirSync(srcDir)
+  const entries = readdirSync(srcDir, { withFileTypes: true })
   for (const entry of entries) {
-    if (isExcludedFromCopy(entry)) continue
-    const srcPath = join(srcDir, entry)
-    const destPath = join(destDir, entry)
-    const stat = statSync(srcPath)
-    if (stat.isDirectory()) {
+    if (isExcludedFromCopy(entry.name)) continue
+    const srcPath = join(srcDir, entry.name)
+    const destPath = join(destDir, entry.name)
+    if (entry.isDirectory()) {
       copySourceDir(srcPath, destPath)
     } else {
-      writeFileSync(destPath, readFileSync(srcPath))
+      const content = readBufferIfExists(srcPath)
+      if (content !== null) atomicWriteFileSync(destPath, content)
     }
   }
 }

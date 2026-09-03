@@ -16,9 +16,10 @@
  * Idempotent: skips files that already exist unless --force is passed.
  */
 
-import { existsSync, mkdirSync, writeFileSync, readFileSync } from "node:fs"
+import { readFileSync } from "node:fs"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
+import { atomicWriteFileSync, createFileExclusiveSync } from "./fs-safe"
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -56,13 +57,13 @@ function parseArgs(): ScaffoldOptions {
 }
 
 function writeIfMissing(path: string, content: string, force: boolean): boolean {
-  if (existsSync(path) && !force) {
+  const written = force
+    ? (atomicWriteFileSync(path, content), true)
+    : createFileExclusiveSync(path, content)
+  if (!written) {
     console.log(`  skip ${path} (exists)`)
     return false
   }
-  const dir = dirname(path)
-  if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
-  writeFileSync(path, content)
   console.log(`  write ${path}`)
   return true
 }

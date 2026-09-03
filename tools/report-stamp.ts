@@ -17,8 +17,7 @@
  * Stamps are preserved whenever the rest of the report is identical, and advance
  * only when the report's substance does.
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
-import { dirname } from "node:path"
+import { atomicWriteFileSync, readTextFileIfExists } from "./fs-safe"
 
 /** `Generated: <iso timestamp>`, used by the audit reports. */
 export const GENERATED_STAMP = /^Generated:\s*\S+/
@@ -82,16 +81,6 @@ export function writeReportWithStableStamp(
   patterns: readonly RegExp[] = [GENERATED_STAMP],
 ): void {
   const next = lines.join("\n") + "\n"
-  mkdirSync(dirname(filePath), { recursive: true })
-
-  let previous: string | undefined
-  if (existsSync(filePath)) {
-    try {
-      previous = readFileSync(filePath, "utf8")
-    } catch {
-      previous = undefined
-    }
-  }
-
-  writeFileSync(filePath, stabilizeStamps(next, previous, patterns))
+  const previous = readTextFileIfExists(filePath) ?? undefined
+  atomicWriteFileSync(filePath, stabilizeStamps(next, previous, patterns))
 }
