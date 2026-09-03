@@ -17,8 +17,9 @@
  */
 
 import { Command, Option } from "clipanion"
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs"
-import { join, dirname, extname } from "node:path"
+import { existsSync } from "node:fs"
+import { join, extname } from "node:path"
+import { atomicWriteFileSync, readTextFileIfExists } from "../fs/safe-write"
 import { readLock, writeLock, computeDigest } from "../source-install/lock"
 import { rewriteImports } from "../source-install/install"
 import { rewriteImportsAst } from "../source-install/ast-transform"
@@ -52,8 +53,9 @@ export function runUpdate(options: UpdateOptions): UpdateResult {
   const lock = readLock(cwd)
 
   const configPath = join(cwd, ".solidiom", "config.json")
-  const config: Config = existsSync(configPath)
-    ? ConfigSchema.parse(JSON.parse(readFileSync(configPath, "utf8")))
+  const configContent = readTextFileIfExists(configPath)
+  const config: Config = configContent
+    ? ConfigSchema.parse(JSON.parse(configContent))
     : ConfigSchema.parse({})
 
   const runtimeDir = join(cwd, config.runtimeDir)
@@ -79,9 +81,10 @@ export function runUpdate(options: UpdateOptions): UpdateResult {
     }
 
     const fullPath = join(cwd, path)
+    const localContent = readTextFileIfExists(fullPath)
 
-    // Skip deleted files
-    if (!existsSync(fullPath)) {
+    // Skip deleted files, including files removed concurrently before the read.
+    if (localContent === null) {
       entries.push({ path, status: "skipped-deleted" })
       continue
     }
@@ -89,13 +92,13 @@ export function runUpdate(options: UpdateOptions): UpdateResult {
     // Find corresponding upstream file
     const relInPrimitive = path.replace(new RegExp(`.*${escapeRegex(primitive)}/`), "")
     const upstreamPath = join(upstreamDir, relInPrimitive)
+    const upstreamRaw = readTextFileIfExists(upstreamPath)
 
-    if (!existsSync(upstreamPath)) {
+    if (upstreamRaw === null) {
       entries.push({ path, status: "skipped-unchanged" })
       continue
     }
 
-    const upstreamRaw = readFileSync(upstreamPath, "utf8")
     const upstreamDigest = computeDigest(upstreamRaw)
 
     // If upstream hasn't changed from what was installed, skip
@@ -109,15 +112,13 @@ export function runUpdate(options: UpdateOptions): UpdateResult {
       ? rewriteWithAst(upstreamRaw, fullPath, runtimeDir)
       : rewriteImports(upstreamRaw, fullPath, runtimeDir)
 
-    const localContent = readFileSync(fullPath, "utf8")
     const localDigest = computeDigest(localContent)
     const localUnmodified = localDigest === lockEntry.digest
 
     if (localUnmodified) {
       // Local unchanged from base — safe to overwrite with upstream
       if (!dryRun) {
-        mkdirSync(dirname(fullPath), { recursive: true })
-        writeFileSync(fullPath, upstreamRewritten)
+        atomicWriteFileSync(fullPath, upstreamRewritten)
         lockEntry.digest = upstreamDigest
       }
       entries.push({ path, status: "updated" })
@@ -130,17 +131,16 @@ export function runUpdate(options: UpdateOptions): UpdateResult {
       if (mergeResult.hasConflicts) {
         // Write conflict file with diff3-style markers
         if (!dryRun) {
-          writeFileSync(fullPath, mergeResult.content)
-          writeFileSync(`${fullPath}.upstream`, upstreamRewritten)
-          writeFileSync(`${fullPath}.local`, localContent)
+          atomicWriteFileSync(fullPath, mergeResult.content)
+          atomicWriteFileSync(`${fullPath}.upstream`, upstreamRewritten)
+          atomicWriteFileSync(`${fullPath}.local`, localContent)
         }
         entries.push({ path, status: "conflict" })
         conflicts.push(path)
       } else {
         // Clean merge — no conflicts
         if (!dryRun) {
-          mkdirSync(dirname(fullPath), { recursive: true })
-          writeFileSync(fullPath, mergeResult.content)
+          atomicWriteFileSync(fullPath, mergeResult.content)
           lockEntry.digest = upstreamDigest
         }
         entries.push({ path, status: "merged" })

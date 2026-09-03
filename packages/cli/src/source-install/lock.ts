@@ -6,9 +6,9 @@
  * in the full install engine.
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
-import { join, dirname } from "node:path"
+import { join } from "node:path"
 import { createHash } from "node:crypto"
+import { atomicWriteFileSync, readTextFileIfExists } from "../fs/safe-write"
 
 /** An entry in .solidiom/lock.json tracking source installs. */
 export interface LockEntry {
@@ -45,15 +45,12 @@ export function computeDigest(content: string): string {
 /** Read existing lockfile, or create fresh. */
 export function readLock(cwd: string): LockFile {
   const lockPath = join(cwd, ".solidiom", "lock.json")
-  if (existsSync(lockPath)) {
-    return JSON.parse(readFileSync(lockPath, "utf8"))
-  }
-  return { version: 1, installed: {} }
+  const content = readTextFileIfExists(lockPath)
+  return content === null ? { version: 1, installed: {} } : JSON.parse(content)
 }
 
-/** Write lockfile. */
+/** Write lockfile via same-directory atomic replacement. */
 export function writeLock(cwd: string, lock: LockFile): void {
   const lockPath = join(cwd, ".solidiom", "lock.json")
-  mkdirSync(dirname(lockPath), { recursive: true })
-  writeFileSync(lockPath, JSON.stringify(lock, null, 2) + "\n")
+  atomicWriteFileSync(lockPath, JSON.stringify(lock, null, 2) + "\n", 0o600)
 }

@@ -297,9 +297,8 @@ export function generatedFileHeader(
 
 // ─── Deterministic write / check-mode helper, shared by all three emitters ─────
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { createRequire } from "node:module"
-import { dirname } from "node:path"
+import { atomicWriteFileSync, readTextFileIfExists } from "./fs-safe"
 
 /**
  * Resolved via `createRequire` rather than a static import.
@@ -349,15 +348,12 @@ export async function writeEmittedFiles(
 
   for (const file of files) {
     const formatted = await formatGenerated(file.path, file.contents)
-    const existing = existsSync(file.path) ? readFileSync(file.path, "utf8") : undefined
+    const existing = readTextFileIfExists(file.path) ?? undefined
 
     if (existing === formatted) continue
     changed.push(file.path)
 
-    if (!options.check) {
-      mkdirSync(dirname(file.path), { recursive: true })
-      writeFileSync(file.path, formatted, "utf8")
-    }
+    if (!options.check) atomicWriteFileSync(file.path, formatted)
   }
 
   return { changed, upToDate: changed.length === 0 }

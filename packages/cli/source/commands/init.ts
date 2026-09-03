@@ -3,7 +3,8 @@
  */
 
 import { Command, Option } from "clipanion"
-import { writeFileSync, readFileSync, mkdirSync, existsSync } from "node:fs"
+import { readFileSync, mkdirSync } from "node:fs"
+import { atomicWriteFileSync, createFileExclusiveSync } from "../fs/safe-write"
 import { join } from "node:path"
 import { ConfigSchema, type Config } from "../schemas"
 import pc from "picocolors"
@@ -27,16 +28,21 @@ export function runInit(options: InitOptions): InitResult {
   const solidiomDir = join(cwd, ".solidiom")
   const configPath = join(solidiomDir, "config.json")
 
-  if (existsSync(configPath) && !force) {
-    const existing = JSON.parse(readFileSync(configPath, "utf8"))
-    return { configPath, created: false, config: ConfigSchema.parse(existing) }
+  const config = ConfigSchema.parse({})
+  const serialized = JSON.stringify(config, null, 2) + "\n"
+  mkdirSync(solidiomDir, { recursive: true })
+
+  if (force) {
+    atomicWriteFileSync(configPath, serialized, 0o600)
+    return { configPath, created: true, config }
   }
 
-  const config = ConfigSchema.parse({})
-  mkdirSync(solidiomDir, { recursive: true })
-  writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n")
+  if (createFileExclusiveSync(configPath, serialized, 0o600)) {
+    return { configPath, created: true, config }
+  }
 
-  return { configPath, created: true, config }
+  const existing = JSON.parse(readFileSync(configPath, "utf8"))
+  return { configPath, created: false, config: ConfigSchema.parse(existing) }
 }
 
 /**

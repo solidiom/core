@@ -13,12 +13,14 @@
  * journal's unwind order.
  */
 
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
-import { dirname } from "node:path"
+import { rmSync } from "node:fs"
+import { atomicWriteFileSync, readTextFileIfExists } from "../fs/safe-write"
 
 export interface RollbackJournal {
   /** Records a path's current on-disk content (or absence) before it is written. Call this BEFORE writing. */
   recordBeforeWrite(path: string): void
+  /** Records a path that this operation created atomically after exclusive publication. */
+  recordCreated(path: string): void
   /** Returns a snapshot of recorded paths, in recording order (for inspection/testing). */
   entries(): string[]
   /** Restores every recorded path to its pre-write state, in reverse order, then clears the journal. */
@@ -43,7 +45,13 @@ export function createRollbackJournal(): RollbackJournal {
       // writes to the same path within one install must still roll back to
       // the ORIGINAL pre-install state, not an intermediate one.
       if (previous.has(path)) return
-      previous.set(path, existsSync(path) ? readFileSync(path, "utf8") : null)
+      previous.set(path, readTextFileIfExists(path))
+      recorded.push(path)
+    },
+
+    recordCreated(path: string): void {
+      if (previous.has(path)) return
+      previous.set(path, null)
       recorded.push(path)
     },
 
@@ -58,8 +66,7 @@ export function createRollbackJournal(): RollbackJournal {
         if (content === null) {
           rmSync(path, { force: true })
         } else {
-          mkdirSync(dirname(path), { recursive: true })
-          writeFileSync(path, content)
+          atomicWriteFileSync(path, content)
         }
       }
       recorded.length = 0
