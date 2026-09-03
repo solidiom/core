@@ -1,4 +1,6 @@
 name: Tag on Version PR merge
+permissions:
+  contents: read
 
 # Bridges the two-step release model: when a Version PR (opened by version.yml
 # on a `release/version-*` branch) is merged into the base branch, this
@@ -27,11 +29,12 @@ jobs:
     if: >
       github.event.pull_request.merged == true &&
       startsWith(github.event.pull_request.head.ref, 'release/version-')
-    runs-on: self-hosted-dfw-flex
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           # Check out the merge commit so we read the versions that landed.

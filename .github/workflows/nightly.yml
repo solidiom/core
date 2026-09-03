@@ -1,4 +1,6 @@
 name: Nightly
+permissions:
+  contents: read
 
 # Comprehensive nightly suite combining:
 # - Solid compatibility matrix (3 tiers × 2 Node versions)
@@ -38,13 +40,16 @@ jobs:
 
   solid-compat:
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
         solid-tier: [low, mid, high]
         node-version: [24, 26]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
@@ -67,8 +72,11 @@ jobs:
 
   browser-full:
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
         with:
           playwright: chromium firefox webkit
@@ -78,7 +86,7 @@ jobs:
         run: pnpm exec vitest run --config vitest.browser.config.ts
       - name: Recipe parity (cross-browser)
         run: pnpm run test:recipe-parity
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
         with:
           name: nightly-browser-traces
@@ -92,14 +100,14 @@ jobs:
   visual-baselines:
     if: github.event_name == 'workflow_dispatch' && inputs.regenerate_baselines == 'true'
     runs-on: self-hosted-dfw-flex
-    container:
-      image: mcr.microsoft.com/playwright:v1.62.1-noble
-      options: --ipc=host
+    timeout-minutes: 45
     steps:
       - name: Record reason
         run: echo "Regenerating visual baselines — ${{ inputs.baseline_reason }}"
 
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
 
       - name: Build site
@@ -122,7 +130,7 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: visual-baselines
           path: apps/site/tests/visual/__screenshots__
@@ -133,8 +141,11 @@ jobs:
 
   deps-check:
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
       - name: Check for dependency updates
         run: pnpm run deps:check

@@ -1,0 +1,221 @@
+name: CI (Required)
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-required-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "24.0.0"
+  PNPM_VERSION: "10.34.5"
+  NODE_OPTIONS: "--max-old-space-size=4096"
+
+jobs:
+  changes:
+    name: Determine applicable lanes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      packages: ${{ steps.scope.outputs.packages }}
+      site: ${{ steps.scope.outputs.site }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - id: scope
+        name: Classify changed paths
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::Invalid HEAD SHA from GitHub event: $HEAD_SHA"
+            exit 1
+          fi
+          if [[ "$BASE_SHA" =~ ^0+$ ]]; then
+            changed_paths_command=(git ls-files -z)
+          elif [[ "$BASE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            changed_paths_command=(git diff --name-only --no-renames -z "$BASE_SHA" "$HEAD_SHA" --)
+          else
+            echo "::error::Invalid base SHA from GitHub event: $BASE_SHA"
+            exit 1
+          fi
+          packages=false
+          site=false
+          while IFS= read -r -d '' path; do
+            case "$path" in
+              packages/*|tests/*|tools/*|registry/*|package.json|pnpm-lock.yaml|pnpm-workspace.yaml|nx.json|tsconfig*.json|vitest*.config.ts|.github/*)
+                packages=true
+                ;;
+            esac
+            case "$path" in
+              apps/site/*|templates/*|packages/*|package.json|pnpm-lock.yaml|pnpm-workspace.yaml|.github/*)
+                site=true
+                ;;
+            esac
+          done < <("${changed_paths_command[@]}")
+          echo "packages=$packages" >> "$GITHUB_OUTPUT"
+          echo "site=$site" >> "$GITHUB_OUTPUT"
+
+  package-quality:
+    name: Packages quality
+    needs: changes
+    if: needs.changes.outputs.packages == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Format check
+        run: pnpm run format:check
+      - name: Production dependency audit
+        run: pnpm audit --prod --audit-level high
+      - name: Package lint
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: pnpm nx affected -t lint --base="$BASE_SHA" --head="$HEAD_SHA"
+      - name: Package typecheck
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: pnpm nx affected -t typecheck --base="$BASE_SHA" --head="$HEAD_SHA" --exclude='tag:layer:template'
+      - name: Targeted package tests
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: pnpm nx affected -t test --base="$BASE_SHA" --head="$HEAD_SHA" --exclude=@solidiom/site
+      - name: Targeted package builds
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: pnpm nx affected -t build --base="$BASE_SHA" --head="$HEAD_SHA" --exclude=@solidiom/site
+      - name: Generated artifact gates
+        run: |
+          pnpm run source:emit:check
+          pnpm run recipe:emit:css:check
+          pnpm run recipe:emit:tailwind:check
+          pnpm run recipe:emit:unocss:check
+          pnpm run theme:emit:css:check
+          pnpm run theme:emit:tailwind:check
+          pnpm run theme:emit:unocss:check
+
+  site-quality:
+    name: Site quality
+    needs: changes
+    if: needs.changes.outputs.site == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Site lint
+        run: pnpm --filter @solidiom/site lint
+      - name: Site type and content checks
+        run: |
+          pnpm --filter @solidiom/site check
+          pnpm --filter @solidiom/site run boundaries
+          pnpm --filter @solidiom/site run i18n:validate
+      - name: Site build
+        run: |
+          pnpm nx run-many -t build --exclude=@solidiom/site
+          pnpm --filter @solidiom/site build
+
+  workflow-policy:
+    name: Workflow policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Validate immutable Actions and runner policy
+        run: node tools/ci/validate-workflows.mjs
+
+  secret-scan:
+    name: Content secret scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      # TruffleHog scans only the introduced commit range for PRs and pushes;
+      # this avoids permanently re-failing on unrelated historical findings.
+      # It receives no repository secret or write-capable token and explicitly
+      # redacts detector output.
+      - name: Scan pull request changes
+        if: github.event_name == 'pull_request'
+        uses: trufflesecurity/trufflehog@ea33cd04a6b7a910430b5ee9b1559576b332c14d # main
+        with:
+          path: ./
+          base: ${{ github.event.pull_request.base.sha }}
+          head: ${{ github.event.pull_request.head.sha }}
+          extra_args: --results=verified,unknown --no-update --redact=100 --fail
+      - name: Scan pushed changes
+        if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
+        uses: trufflesecurity/trufflehog@ea33cd04a6b7a910430b5ee9b1559576b332c14d # main
+        with:
+          path: ./
+          base: ${{ github.event.before }}
+          head: ${{ github.sha }}
+          extra_args: --results=verified,unknown --no-update --redact=100 --fail
+      - name: Scan initial repository contents
+        if: github.event_name == 'push' && github.event.before == '0000000000000000000000000000000000000000'
+        uses: trufflesecurity/trufflehog@ea33cd04a6b7a910430b5ee9b1559576b332c14d # main
+        with:
+          path: ./
+          extra_args: --results=verified,unknown --no-update --redact=100 --fail
+
+  required:
+    name: CI / required
+    needs: [changes, package-quality, site-quality, workflow-policy, secret-scan]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fail when an applicable lane failed or was cancelled
+        env:
+          CHANGES_RESULT: ${{ needs.changes.result }}
+          PACKAGE_RESULT: ${{ needs.package-quality.result }}
+          PACKAGE_APPLICABLE: ${{ needs.changes.outputs.packages }}
+          SITE_RESULT: ${{ needs.site-quality.result }}
+          SITE_APPLICABLE: ${{ needs.changes.outputs.site }}
+          POLICY_RESULT: ${{ needs.workflow-policy.result }}
+          SECRET_RESULT: ${{ needs.secret-scan.result }}
+        run: |
+          set -euo pipefail
+          [[ "$CHANGES_RESULT" == success ]] || { echo "changes: $CHANGES_RESULT"; exit 1; }
+          [[ "$POLICY_RESULT" == success ]] || { echo "workflow-policy: $POLICY_RESULT"; exit 1; }
+          [[ "$SECRET_RESULT" == success ]] || { echo "secret-scan: $SECRET_RESULT"; exit 1; }
+          if [[ "$PACKAGE_APPLICABLE" == true && "$PACKAGE_RESULT" != success ]]; then
+            echo "package-quality: $PACKAGE_RESULT (applicable)"
+            exit 1
+          fi
+          if [[ "$SITE_APPLICABLE" == true && "$SITE_RESULT" != success ]]; then
+            echo "site-quality: $SITE_RESULT (applicable)"
+            exit 1
+          fi
+          echo "CI / required passed; irrelevant lanes were correctly skipped."
