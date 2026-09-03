@@ -1,3 +1,10 @@
+import {
+  applyTextReplacements,
+  findCvaDeclarations,
+  findObjectCalls,
+  parseStaticStringLiteral,
+} from "./static-parser"
+
 /**
  * @solidiom/vite-plugin — Compile-time optimizations for Solidiom.
  *
@@ -151,57 +158,54 @@ export function solidiomPlugin(options: SolidiomPluginOptions = {}) {
  *   }
  */
 function extractStaticRecipes(code: string, _id: string): string | null {
-  // Match: export const <name> = cva("<base>", { variants: ..., defaultVariants: ... })
-  // or: const <name> = cva("<base>", { variants: ..., defaultVariants: ... })
-  const CVA_PATTERN =
-    /(?:export\s+)?const\s+(\w+)\s*=\s*cva\(\s*("(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`)\s*,\s*(\{[\s\S]*?\})\s*\)/g
+  const replacements: Array<{ start: number; end: number; text: string }> = []
 
-  let result = code
-  let matched = false
-
-  result = result.replace(CVA_PATTERN, (fullMatch, varName, baseClass, configStr) => {
-    // Try to parse the config statically
-    const config = parseStaticObject(configStr)
-    if (!config || !config.variants) return fullMatch
-
-    matched = true
+  for (const declaration of findCvaDeclarations(code)) {
+    const config = parseStaticObject(declaration.configSource)
+    if (!config?.variants) continue
 
     const variantsJson = JSON.stringify(config.variants)
     const defaultsJson = JSON.stringify(config.defaultVariants ?? {})
+    const exportPrefix = declaration.exported ? "export " : ""
 
-    return [
-      `const __solidiom_${varName}_base = ${baseClass}`,
-      `const __solidiom_${varName}_map = ${variantsJson}`,
-      `const __solidiom_${varName}_defaults = ${defaultsJson}`,
-      `const ${varName} = (opts) => {`,
-      `  let cls = __solidiom_${varName}_base`,
-      `  for (const k in __solidiom_${varName}_map) {`,
-      `    const v = opts?.[k] ?? __solidiom_${varName}_defaults[k]`,
-      `    if (v && __solidiom_${varName}_map[k][v]) cls += " " + __solidiom_${varName}_map[k][v]`,
-      `  }`,
-      `  return cls`,
-      `}`,
-    ].join("\n")
-  })
+    replacements.push({
+      start: declaration.start,
+      end: declaration.end,
+      text: [
+        `${exportPrefix}const __solidiom_${declaration.name}_base = ${declaration.baseSource}`,
+        `const __solidiom_${declaration.name}_map = ${variantsJson}`,
+        `const __solidiom_${declaration.name}_defaults = ${defaultsJson}`,
+        `const ${declaration.name} = (opts) => {`,
+        `  let cls = __solidiom_${declaration.name}_base`,
+        `  for (const k in __solidiom_${declaration.name}_map) {`,
+        `    const v = opts?.[k] ?? __solidiom_${declaration.name}_defaults[k]`,
+        `    if (v && __solidiom_${declaration.name}_map[k][v]) cls += " " + __solidiom_${declaration.name}_map[k][v]`,
+        `  }`,
+        `  return cls`,
+        `}`,
+      ].join("\n"),
+    })
+  }
 
-  // Remove cva import if all cva calls were replaced
-  if (matched && !result.includes("cva(")) {
+  if (replacements.length === 0) return null
+  let result = applyTextReplacements(code, replacements)
+
+  // Remove the cva import only when no call remains after the static replacements.
+  if (!result.includes("cva(")) {
     result = result.replace(
       /import\s*\{[^}]*\bcva\b[^}]*\}\s*from\s*["']class-variance-authority["']\s*;?\n?/g,
       (importLine) => {
-        // Keep other named imports from CVA (like VariantProps)
         const otherImports = importLine
           .replace(/\bcva\b\s*,?\s*/, "")
           .replace(/,\s*\}/, "}")
           .replace(/\{\s*,/, "{")
         if (otherImports.match(/\{\s*\}/)) return ""
-        if (otherImports.match(/import\s*\{\s*type\s+\w/)) return otherImports
         return otherImports
       },
     )
   }
 
-  return matched ? result : null
+  return result
 }
 
 // ─── v1.2: Static Variant Expansion ─────────────────────────────────────────
@@ -222,48 +226,40 @@ function extractStaticRecipes(code: string, _id: string): string | null {
  * rather than silently expanded with the compound classes missing.
  */
 function expandStaticVariants(code: string, _id: string): string | null {
-  // Match calls like: variantFn({ key: "literal", key2: "literal" })
-  // Only expand when ALL values are string literals
-  const VARIANT_CALL = /(\w+Variants)\(\s*\{([^}]+)\}\s*\)/g
-
-  let result = code
-  let matched = false
-
-  // First, extract variant definitions from this file
   const variantDefs = extractVariantDefs(code)
+  if (variantDefs.size === 0) return null
 
-  result = result.replace(VARIANT_CALL, (fullMatch, fnName, argsStr) => {
-    const def = variantDefs.get(fnName)
-    if (!def) return fullMatch
+  const replacements: Array<{ start: number; end: number; text: string }> = []
+  for (const call of findObjectCalls(code, new Set(variantDefs.keys()))) {
+    const def = variantDefs.get(call.name)
+    if (!def) continue
 
-    // Parse the call arguments — all must be string literals
-    const args = parseStaticCallArgs(argsStr)
-    if (!args) return fullMatch
+    const args = parseStaticCallArgs(call.objectSource)
+    if (!args) continue
 
-    // Compute the result class string
     const classes = [def.base]
     const resolved: Record<string, string | undefined> = {}
     for (const [key, variants] of Object.entries(def.variants)) {
       const value = args[key] ?? def.defaults[key]
       resolved[key] = value
-      if (value && variants[value]) {
-        classes.push(variants[value])
-      }
+      if (value && variants[value]) classes.push(variants[value])
     }
 
-    // Compound variants apply, in declaration order, whenever every axis in `when`
-    // matches the resolved value for that axis — mirrors the contract's cascade.
-    for (const compound of def.compoundVariants ?? []) {
-      const whenEntries = Object.entries(compound.when)
-      const allMatch = whenEntries.every(([axis, value]) => resolved[axis] === value)
+    for (const compound of def.compoundVariants) {
+      const allMatch = Object.entries(compound.when).every(
+        ([axis, value]) => resolved[axis] === value,
+      )
       if (allMatch) classes.push(compound.class)
     }
 
-    matched = true
-    return `"${classes.filter(Boolean).join(" ")}"`
-  })
+    replacements.push({
+      start: call.start,
+      end: call.end,
+      text: JSON.stringify(classes.filter(Boolean).join(" ")),
+    })
+  }
 
-  return matched ? result : null
+  return replacements.length > 0 ? applyTextReplacements(code, replacements) : null
 }
 
 // ─── v1.3: Dead-Part Elimination ────────────────────────────────────────────
@@ -438,15 +434,10 @@ function extractVariantDefs(code: string): Map<
     }
   >()
 
-  const CVA_DEF =
-    /(?:export\s+)?const\s+(\w+)\s*=\s*cva\(\s*["'`]([^"'`]*)["'`]\s*,\s*(\{[\s\S]*?\})\s*\)/g
-  let match: RegExpExecArray | null
-
-  while ((match = CVA_DEF.exec(code)) !== null) {
-    const name = match[1]!
-    const base = match[2]!
-    const configStr = match[3]!
-    const config = parseStaticObject(configStr)
+  for (const declaration of findCvaDeclarations(code)) {
+    const base = parseStaticStringLiteral(declaration.baseSource)
+    if (base === null) continue
+    const config = parseStaticObject(declaration.configSource)
     if (config?.variants) {
       // cva's compoundVariants entries look like { variant: "ghost", size: "icon", class: "..." }
       // (or `className` — support both, matching class-variance-authority's own API).
@@ -461,7 +452,7 @@ function extractVariantDefs(code: string): Map<
             },
           )
         : []
-      defs.set(name, {
+      defs.set(declaration.name, {
         base,
         variants: config.variants,
         defaults: config.defaultVariants ?? {},
