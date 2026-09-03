@@ -24,6 +24,8 @@ updates:
       - "/"
       - "/packages/*"
       - "/apps/*"
+      - "/tests/*"
+      - "/templates/*"
     schedule:
       interval: weekly
       day: monday

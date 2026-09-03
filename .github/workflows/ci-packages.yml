@@ -1,4 +1,6 @@
 name: CI (Packages)
+permissions:
+  contents: read
 
 # Package-target CI pipeline (split from the former monolithic ci.yml).
 # Covers everything that builds, tests, and gates the workspace packages —
@@ -59,10 +61,13 @@ jobs:
 
   install:
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
-      - uses: actions/cache/save@v6
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             node_modules
@@ -77,16 +82,22 @@ jobs:
   format:
     needs: install
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
       - run: pnpm run format:check
 
   typecheck:
     needs: install
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
       - run: pnpm typecheck
 
@@ -95,9 +106,11 @@ jobs:
   build:
     needs: install
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 0
       - uses: ./.github/actions/setup
       - name: Build packages
@@ -157,7 +170,7 @@ jobs:
           exit 1
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: build-dist
           path: |
@@ -172,18 +185,20 @@ jobs:
   test-node:
     needs: build
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     strategy:
       matrix:
         node-version: ${{ (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true') && fromJson('[24, 26]') || fromJson('[24]') }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 0
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
           playwright: chromium
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist
           path: .
@@ -201,12 +216,15 @@ jobs:
   test-browser:
     needs: build
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
         with:
           playwright: chromium
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist
           path: .
@@ -216,7 +234,7 @@ jobs:
         run: pnpm exec vitest run --config vitest.browser.config.ts
       - name: Recipe parity test
         run: pnpm run test:recipe-parity
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
         with:
           name: browser-test-traces
@@ -229,12 +247,15 @@ jobs:
     needs: build
     if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
         with:
           playwright: chromium
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist
           path: .
@@ -242,7 +263,7 @@ jobs:
       - run: pnpm run report:a11y-evidence
       - run: pnpm run a11y:coverage-gate
       - run: pnpm run report:axe
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: axe-scan-results
           path: |
@@ -257,18 +278,21 @@ jobs:
     needs: build
     if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist
           path: .
       - run: corepack enable
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version: "1.3.14"
-      - uses: actions/cache/restore@v6
+      - uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         id: snapshot-probe
         with:
           path: tools/offline-fixture/.registry-snapshot
@@ -277,7 +301,7 @@ jobs:
       - name: Warm offline registry snapshot
         if: steps.snapshot-probe.outputs.cache-hit != 'true'
         run: tools/offline-fixture/run-offline-test.sh --prep
-      - uses: actions/cache/save@v6
+      - uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         if: steps.snapshot-probe.outputs.cache-hit != 'true'
         with:
           path: tools/offline-fixture/.registry-snapshot
@@ -287,22 +311,25 @@ jobs:
     needs: [build, cli-smoke-create-prep]
     if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
         manager: [npm, pnpm, yarn, bun]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist
           path: .
       - run: corepack enable
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version: "1.3.14"
-      - uses: actions/cache/restore@v6
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: tools/offline-fixture/.registry-snapshot
           key: offline-registry-snapshot-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml') }}
@@ -313,7 +340,7 @@ jobs:
           tools/offline-fixture/run-offline-test.sh \
             --manager ${{ matrix.manager }} \
             --smoke-json-out artifacts/smoke-create-${{ matrix.manager }}.json
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
         with:
           name: smoke-create-${{ matrix.manager }}-results
@@ -326,10 +353,13 @@ jobs:
     needs: build
     if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist
           path: .
@@ -354,12 +384,15 @@ jobs:
         (needs.a11y-axe-scan.result == 'success' &&
           needs.catalog-gates.result == 'success'))
     runs-on: self-hosted-dfw-flex
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: ./.github/actions/setup
         with:
           playwright: chromium
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist
           path: .
