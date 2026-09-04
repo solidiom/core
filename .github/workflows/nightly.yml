@@ -100,6 +100,9 @@ jobs:
   visual-baselines:
     if: github.event_name == 'workflow_dispatch' && inputs.regenerate_baselines == 'true'
     runs-on: self-hosted-dfw-flex
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+      options: --ipc=host
     timeout-minutes: 45
     steps:
       - name: Record reason
