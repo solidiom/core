@@ -106,7 +106,7 @@ different value for any shared colour token.
 ### 3.1 The required baseline
 
 `REQUIRED_BASELINE_TOKENS` (`tools/theme-contract-validate.ts`) is deliberately smaller
-than "all 48 canonical identities":
+than "all 60 canonical identities":
 
 ```
 surface, surface-raised, foreground, foreground-muted, border,
@@ -275,6 +275,5 @@ so existing share links, exported JSON files, and installed presets keep resolvi
 
 | Gap                                                       | Owner                          |
 | --------------------------------------------------------- | ------------------------------ |
-| Additional shipped presets (Ocean, Forest, Slate, Aurora) | PRESET-001..004                |
 | Theme-builder UI consuming this schema                    | BUILDER-001..006               |
 | Tailwind v3 `theme.extend.colors` mapping (v4-only today) | Future task, not yet scheduled |

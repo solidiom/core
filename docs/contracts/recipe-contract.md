@@ -22,7 +22,7 @@ lifecycle: current
 | Artifact                                          | Purpose                                                                                                                                                                 |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `tools/recipe-contract-schema.ts`                 | Definition types, `CONTRACT_VERSION`, traversal helpers                                                                                                                 |
-| `tools/recipe-contract-tokens.ts`                 | 48 canonical token identities and their per-namespace spellings                                                                                                         |
+| `tools/recipe-contract-tokens.ts`                 | 60 canonical token identities and their per-namespace spellings                                                                                                         |
 | `tools/recipe-contract-validate.ts`               | `validateRecipeDefinition()` — the rule checker                                                                                                                         |
 | `tools/recipe-contract-definitions.ts`            | Canonical definitions for all shipped recipe scopes                                                                                                                     |
 | `tools/recipe-contract.ts`                        | CLI: `pnpm run recipe:contract`                                                                                                                                         |
@@ -119,7 +119,7 @@ Exported from `@solidiom/runtime`. Fourteen attributes:
 | --------------------------------- | --------------------------------------------------------------------------------- |
 | `data-scope`                      | Primitive package name                                                            |
 | `data-part`                       | Part name                                                                         |
-| `data-state`                      | Per-scope; 35 known scopes (33 stateful, Badge/Toast stateless) in `SCOPE_STATES` |
+| `data-state`                      | Per-scope; 53 known scopes (42 stateful, 11 stateless) in `SCOPE_STATES` |
 | `data-orientation`                | `horizontal`, `vertical`                                                          |
 | `data-side`                       | `top`, `right`, `bottom`, `left` — set directly by positioned overlays            |
 | `data-size`                       | `sm`, `base`, `lg` — composite scopes only                                        |

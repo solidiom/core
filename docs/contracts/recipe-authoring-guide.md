@@ -32,7 +32,7 @@ RECIPE-001 defined one canonical recipe definition — slots, variants, states, 
 
 ### Superseded guidance
 
-A previous revision of this guide instructed authors to let profiles diverge in token strategy and not to introduce cross-profile contracts. **That guidance is withdrawn.** The canonical contract _is_ the cross-profile contract: `tools/recipe-contract-tokens.ts` defines 48 token identities with their per-namespace spellings, and the validator rejects a reference to anything else. See §3.5 for the replacement rule and `docs/contracts/recipe-contract.md` §4 for the model.
+A previous revision of this guide instructed authors to let profiles diverge in token strategy and not to introduce cross-profile contracts. **That guidance is withdrawn.** The canonical contract _is_ the cross-profile contract: `tools/recipe-contract-tokens.ts` defines 60 token identities with their per-namespace spellings, and the validator rejects a reference to anything else. See §3.5 for the replacement rule and `docs/contracts/recipe-contract.md` §4 for the model.
 
 ---
 
@@ -53,11 +53,11 @@ Every recipe's stylesheet form exists inside its profile, generated from the sam
 
 | Package                      | Recipes | Stylesheets                               | Notes                                                                                                                  |
 | ---------------------------- | ------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `@solidiom/recipes-css`      | 13      | 13 + `index`, `prose`, `typeset`          | Generated (RECIPE-002). Tokens via `var(--ui-*, fallback)`                                                             |
-| `@solidiom/recipes-tailwind` | 13      | 13 + `index`, `theme`, `prose`, `typeset` | Generated (RECIPE-003). `@apply` inside `@layer components`; `theme.css` hand-maintained until THEME-003               |
-| `@solidiom/recipes-unocss`   | 13      | 13 + `index`                              | Generated (RECIPE-004). Plain declarations via the `unocss` token namespace — same `--ui-*` custom properties as `css` |
+| `@solidiom/recipes-css`      | 32      | 32 + `index`, `prose`, `typeset`          | Generated (RECIPE-002). Tokens via `var(--ui-*, fallback)`                                                             |
+| `@solidiom/recipes-tailwind` | 32      | 32 + `index`, `theme`, `prose`, `typeset` | Generated (RECIPE-003). `@apply` inside `@layer components`; `theme.css` hand-maintained until THEME-003               |
+| `@solidiom/recipes-unocss`   | 32      | 32 + `index`                              | Generated (RECIPE-004). Plain declarations via the `unocss` token namespace — same `--ui-*` custom properties as `css` |
 
-The 13 covered primitives: accordion, alert, badge, button, checkbox, dialog, menu, popover, select, switch, tabs, toast, tooltip.
+The 32 covered primitives: accordion, alert, avatar, badge, breadcrumb, button, card, checkbox, combobox, command-palette, data-table, dialog, field, input, kbd, menu, meter, navigation-menu, pagination, popover, progress, radio-group, resizable-panels, scroll-area, select, sheet, spinner, switch, tabs, toast, toolbar, tooltip.
 
 ### 2.3 Which checks actually run
 
@@ -113,7 +113,7 @@ If root state changes how a child part looks, the child part must carry its own 
 }
 ```
 
-Before RECIPE-002 both profiles' `switch.css` styled the thumb through an ancestor selector on the root's state — valid CSS, but unexpressible in the class-string form (Tailwind would need `group` plus `group-data-[state=on]:`, and UnoCSS's `presetSolidiom` variants append their selector to the same element only). The generated stylesheets no longer contain that pattern for any of the 13 scopes. If a definition needs a child to react to a parent's state, the primitive must emit `data-state` on the child — fix the primitive, do not add an ancestor selector to the definition.
+Before RECIPE-002 both profiles' `switch.css` styled the thumb through an ancestor selector on the root's state — valid CSS, but unexpressible in the class-string form (Tailwind would need `group` plus `group-data-[state=on]:`, and UnoCSS's `presetSolidiom` variants append their selector to the same element only). The generated stylesheets no longer contain that pattern for any of the 32 scopes. If a definition needs a child to react to a parent's state, the primitive must emit `data-state` on the child — fix the primitive, do not add an ancestor selector to the definition.
 
 ### 3.3 The two forms match in coverage because they share a source
 
@@ -152,7 +152,7 @@ Two attributes sit outside the helper and are set directly by primitives: `data-
 
 When a definition styles a part the TSX wrapper does not render — repeatable items, optional titles, consumer-supplied collection content — declare `ownership: "consumer"` on that slot with an `ownershipReason`. `tools/recipe-contract-validate.ts` §3.7 rejects a non-`"recipe"` slot with no reason.
 
-This replaced `COMPOSED_PART_ALLOWLIST` in `tools/audit-recipe-dual-emission.ts` for every scope with a canonical definition — the audit now checks `ownership` first and falls back to the (now-empty, for all 13 shipped scopes) allowlist only for a scope with no definition. Migrating the allowlist surfaced a real mismatch during RECIPE-002: several slots were marked `ownership: "recipe"` in the definitions despite their wrappers never rendering them (accordion's `item`/`trigger`/`content`, alert's `title`/`description`, menu's `item`/`separator`, popover's `close`, select's `item`, tabs' `list`/`trigger`/`content`, toast's `title`/`description`/`close`/`region`) — all corrected to `ownership: "consumer"`.
+This replaced `COMPOSED_PART_ALLOWLIST` in `tools/audit-recipe-dual-emission.ts` for every scope with a canonical definition — the audit now checks `ownership` first and falls back to the (now-empty, for all 32 shipped scopes) allowlist only for a scope with no definition. Migrating the allowlist surfaced a real mismatch during RECIPE-002: several slots were marked `ownership: "recipe"` in the definitions despite their wrappers never rendering them (accordion's `item`/`trigger`/`content`, alert's `title`/`description`, menu's `item`/`separator`, popover's `close`, select's `item`, tabs' `list`/`trigger`/`content`, toast's `title`/`description`/`close`/`region`) — all corrected to `ownership: "consumer"`.
 
 Adapter-owned geometry is a separate exception: `ownership: "adapter"` plus `adapterPort` and `adapterOwnedProperties`. See `docs/contracts/recipe-contract.md` §5.
 
