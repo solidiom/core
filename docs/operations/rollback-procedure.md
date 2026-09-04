@@ -21,7 +21,7 @@ Cloudflare Pages retains all previous deployments. A rollback is instant — DNS
 
 ### Steps
 
-1. Navigate to the [Cloudflare Dashboard](https://dash.cloudflare.com) → Pages → solidiom → Deployments.
+1. Navigate to the [Cloudflare Dashboard](https://dash.cloudflare.com) → Pages → solidiom-site → Deployments.
 2. Find the previous working deployment. You can identify it by:
    - Git commit SHA
    - Deployment timestamp
@@ -35,11 +35,11 @@ For automated rollback, use the Cloudflare API:
 
 ```bash
 # List recent deployments
-curl -X GET "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/solidiom/deployments" \
+curl -X GET "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/solidiom-site/deployments" \
   -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
 
 # Promote a specific deployment to production
-curl -X POST "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/solidiom/versions/$DEPLOYMENT_ID/restore" \
+curl -X POST "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/solidiom-site/versions/$DEPLOYMENT_ID/restore" \
   -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
 ```
 

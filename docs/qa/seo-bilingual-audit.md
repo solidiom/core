@@ -16,12 +16,12 @@ date: 2026-08-07
 
 | Layer                     | English routes | Spanish routes | Parity |
 | ------------------------- | -------------- | -------------- | ------ |
-| Primitives                | 52             | 52             | Full   |
-| Components                | 30             | 30             | Full   |
+| Primitives                | 86             | 86             | Full   |
+| Components                | 52             | 52             | Full   |
 | Blocks                    | 36             | 36             | Full   |
-| Templates                 | 29             | 29             | Full   |
+| Templates                 | 32             | 32             | Full   |
 | Themes                    | 5              | 5              | Full   |
-| Guides                    | 3              | 3              | Full   |
+| Guides                    | 14             | 14             | Full   |
 | Community                 | 2              | 2              | Full   |
 | Legal (privacy/trademark) | 2              | 2              | Full   |
 

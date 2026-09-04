@@ -16,7 +16,7 @@ date: 2026-08-08
 >
 > - Architecture decisions: [`catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)
 > - Website architecture: [`docs/architecture/website.md`](../architecture/website.md)
-> - History (non-authoritative): [`website-m0-m3.md`](../history/plans/website-m0-m3.md), [`catalog-foundations-2026-08.md`](../history/plans/catalog-foundations-2026-08.md)
+> - History (non-authoritative): `../history/` (currently empty — legacy/POC history removed after parity verification)
 > - Contracts: [`recipe-contract.md`](../contracts/recipe-contract.md), [`block-catalog-manifest.json`](../contracts/block-catalog-manifest.json), [`beta-coverage-matrix.md`](../contracts/beta-coverage-matrix.md)
 
 ---

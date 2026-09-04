@@ -29,12 +29,12 @@ Read this page first. It summarizes the current position and points to the docum
 
 ## Authority map
 
-| Question                                                                | Authority                                                                                                                                    |
-| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Task state, DoD, queues, defects, counters, sequencing, library roadmap | [`consolidated-plan.md`](./consolidated-plan.md)                                                                                             |
-| Architecture decisions (D1–D6)                                          | [`catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)                                                                     |
-| Website architecture, scope, GA criteria                                | [`website.md`](../architecture/website.md)                                                                                                   |
-| History (non-authoritative)                                             | [`website-m0-m3.md`](../history/plans/website-m0-m3.md), [`catalog-foundations-2026-08.md`](../history/plans/catalog-foundations-2026-08.md) |
+| Question                                                                | Authority                                                                              |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Task state, DoD, queues, defects, counters, sequencing, library roadmap | [`consolidated-plan.md`](./consolidated-plan.md)                                       |
+| Architecture decisions (D1–D6)                                          | [`catalog-decisions.md`](../architecture/decisions/catalog-decisions.md)               |
+| Website architecture, scope, GA criteria                                | [`website.md`](../architecture/website.md)                                             |
+| History (non-authoritative)                                             | `../history/` (currently empty — legacy/POC history removed after parity verification) |
 
 ## Active plans
 
@@ -54,8 +54,8 @@ Read this page first. It summarizes the current position and points to the docum
 
 ## History
 
-- [Website M0–M3 implementation history](../history/plans/website-m0-m3.md)
-- [Catalog foundations, corrections, and incidents](../history/plans/catalog-foundations-2026-08.md)
+- `../history/` currently contains no documents. Legacy and POC history were
+  removed after verified parity (CUT-002/CUT-003).
 
 ## Update rules
 

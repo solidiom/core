@@ -24,7 +24,7 @@ export declare function createSignal<T>(
 ): Signal<T>
 ```
 
-**`@solidjs/signals@2.0.0-beta.20` (current, shipped with solid-js@2.0.0-beta.21):**
+**`@solidjs/signals@2.0.0-beta.20` (beta line, shipped with solid-js@2.0.0-beta.21 — the repo now pins the RC line; see Version matrix):**
 
 ```ts
 export declare function createSignal<T>(
@@ -154,17 +154,17 @@ For APIs that need a full render context (`createUniqueId`, `useContext` with pr
 
 Current pinned versions (pnpm catalog):
 
-| Package              | Version                                   |
-| -------------------- | ----------------------------------------- |
-| `solid-js`           | `^2.0.0-beta.21`                          |
-| `babel-preset-solid` | `^2.0.0-beta.21`                          |
-| `@solidjs/signals`   | `2.0.0-beta.20` (transitive via solid-js) |
-| `vite-plugin-solid`  | `3.0.0-next.14`                           |
-| `@solidjs/web`       | `2.0.0-beta.21`                           |
+| Package              | Version                                 |
+| -------------------- | --------------------------------------- |
+| `solid-js`           | `2.0.0-rc.6`                            |
+| `babel-preset-solid` | `2.0.0-rc.2`                            |
+| `@solidjs/signals`   | `2.0.0-rc.6` (transitive via solid-js)  |
+| `vite-plugin-solid`  | `3.0.0-next.27`                         |
+| `@solidjs/web`       | `2.0.0-rc.6`                            |
 
-The 3-beta rolling window (`tools/solid-matrix.json`) tests against `{low, mid, high}` tiers. Update this document when new beta versions introduce additional API changes.
+The 3-version rolling window (`tools/solid-matrix.json`) tests against `{low, mid, high}` tiers (currently `2.0.0-rc.0` / `2.0.0-rc.1` / `2.0.0-rc.6`). Update this document when new versions introduce additional API changes.
 
-**Note:** The `@solidjs/signals` package version does not follow the `solid-js` version. `solid-js@2.0.0-beta.21` bundles `@solidjs/signals@2.0.0-beta.20`. The earlier `@solidjs/signals@0.11.x` was a pre-beta release with different API surfaces (e.g., `pureWrite` instead of `ownedWrite`).
+**Note:** The `@solidjs/signals` package version tracks the `solid-js` version on the RC line: `solid-js@2.0.0-rc.6` bundles `@solidjs/signals@2.0.0-rc.6`. This differed during the beta line (`solid-js@2.0.0-beta.21` bundled `@solidjs/signals@2.0.0-beta.20`). The earlier `@solidjs/signals@0.11.x` was a pre-beta release with different API surfaces (e.g., `pureWrite` instead of `ownedWrite`).
 
 ## `JSX` type — import from `@solidjs/web`, not `solid-js`
 
@@ -470,9 +470,9 @@ const nestedDeps = replaceDev ? ['solid-js', 'solid-js/web', 'solid-js/store', .
 
 Workarounds were required: `dev: false`, `hot: false`, manual resolve conditions, `solid-js/web` aliases.
 
-**`vite-plugin-solid@3.0.0-next.14` (CURRENT — use this):**
+**`vite-plugin-solid@3.0.0-next.27` (CURRENT — use this):**
 
-Targets `solid-js@2.0.0-beta.21` and `@solidjs/web` natively. No workarounds needed:
+Targets `solid-js@2.0.0-rc.6` and `@solidjs/web` natively. No workarounds needed:
 
 ```ts
 import solidPlugin from "vite-plugin-solid"
@@ -487,9 +487,9 @@ Changes in v3:
 - Resolves `@solidjs/web` instead of `solid-js/web`
 - HMR (`@solid-refresh`) compatible with Solid 2 component model
 - Adds turnkey SSR support (opt-in via `ssr: {}`, requires Vite 6+)
-- Uses `@dom-expressions/compiler@0.50.0-next.24`
+- Uses `@dom-expressions/compiler@0.50.0-next.40`
 
-Install: `pnpm add -Dw vite-plugin-solid@3.0.0-next.14`
+Install: `pnpm add -Dw vite-plugin-solid@3.0.0-next.27`
 
 No `moduleName` override, no aliases, no `optimizeDeps.exclude` for old subpaths. The simplified vite config for an app:
 

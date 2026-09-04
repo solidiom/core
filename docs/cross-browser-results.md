@@ -75,4 +75,8 @@ All 52 primitives with browser test files execute successfully across all three 
 
 ## CI Integration
 
-Cross-browser tests run in the `test-browser` job of `.github/workflows/ci.yml` using the Playwright provider with all three browser instances installed.
+The `test-browser` job in `.github/workflows/ci-packages.yml` runs the browser-mode
+primitive tests on **Chromium** on every push/PR (`vitest.browser.config.ts`). The
+full tri-browser matrix (Chromium + Firefox + WebKit) recorded above runs in the
+`.github/workflows/nightly.yml` job using the Playwright provider with all three
+browser engines installed.
