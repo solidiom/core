@@ -3,6 +3,7 @@ import {
   findCvaDeclarations,
   findObjectCalls,
   parseStaticStringLiteral,
+  removeNamedImportSpecifier,
 } from "./static-parser"
 
 /**
@@ -192,17 +193,7 @@ function extractStaticRecipes(code: string, _id: string): string | null {
 
   // Remove the cva import only when no call remains after the static replacements.
   if (!result.includes("cva(")) {
-    result = result.replace(
-      /import\s*\{[^}]*\bcva\b[^}]*\}\s*from\s*["']class-variance-authority["']\s*;?\n?/g,
-      (importLine) => {
-        const otherImports = importLine
-          .replace(/\bcva\b\s*,?\s*/, "")
-          .replace(/,\s*\}/, "}")
-          .replace(/\{\s*,/, "{")
-        if (otherImports.match(/\{\s*\}/)) return ""
-        return otherImports
-      },
-    )
+    result = removeNamedImportSpecifier(result, "class-variance-authority", "cva")
   }
 
   return result

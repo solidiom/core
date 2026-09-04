@@ -38,7 +38,7 @@ describe("createRollbackJournal", () => {
 
     const journal = createRollbackJournal()
     journal.recordBeforeWrite(filePath)
-    writeFileSync(filePath, "new content")
+    writeFileSync(filePath, "new content", { flag: "wx" })
     expect(existsSync(filePath)).toBe(true)
 
     journal.apply()
