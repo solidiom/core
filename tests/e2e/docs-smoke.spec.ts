@@ -25,7 +25,9 @@ test.describe("Docs app navigation", () => {
     const console = createConsoleCollector(page)
 
     await page.goto("/primitives/dialog/")
-    await expect(page.locator("h1")).toContainText("Dialog")
+    await expect(
+      page.getByRole("main").getByRole("heading", { name: "Dialog", exact: true }),
+    ).toBeVisible()
     await expect(page.locator(".primitive-tabs")).toBeVisible()
 
     console.assertNoErrors()
@@ -36,7 +38,9 @@ test.describe("Docs app navigation", () => {
     const console = createConsoleCollector(page)
 
     await page.goto("/primitives/listbox/")
-    await expect(page.locator("h1")).toContainText("Listbox")
+    await expect(
+      page.getByRole("main").getByRole("heading", { name: "Listbox", exact: true }),
+    ).toBeVisible()
     await expect(page.locator("[role='listbox']")).toBeVisible()
 
     console.assertNoReactivityErrors()
@@ -47,7 +51,9 @@ test.describe("Docs app navigation", () => {
     const console = createConsoleCollector(page)
 
     await page.goto("/primitives/popover/")
-    await expect(page.locator("h1")).toContainText("Popover")
+    await expect(
+      page.getByRole("main").getByRole("heading", { name: "Popover", exact: true }),
+    ).toBeVisible()
 
     console.assertNoUntrackedWarnings()
     console.assertNoErrors()
@@ -57,7 +63,9 @@ test.describe("Docs app navigation", () => {
     const console = createConsoleCollector(page)
 
     await page.goto("/performance/")
-    await expect(page.locator("h1")).toContainText("Performance")
+    await expect(
+      page.getByRole("main").getByRole("heading", { name: "Performance", exact: true }),
+    ).toBeVisible()
 
     console.assertNoErrors()
     console.assertNoReactivityErrors()
@@ -70,7 +78,7 @@ test.describe("Docs app navigation", () => {
     await expect(page.locator(".hero__title")).toContainText("Accessible behavior")
 
     await page.click("a[href='/primitives/']")
-    await expect(page.locator("h1").first()).toBeVisible()
+    await expect(page.getByRole("main").getByRole("heading").first()).toBeVisible()
 
     await page.goBack()
     await expect(page.locator(".hero__title")).toContainText("Accessible behavior")

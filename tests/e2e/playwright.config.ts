@@ -34,6 +34,9 @@ export default defineConfig({
   ],
   webServer: {
     command: "pnpm --filter @solidiom/site dev",
+    env: {
+      SOLIDIOM_E2E: "1",
+    },
     url: "http://localhost:4321",
     reuseExistingServer: !process.env.CI,
     cwd: "../..",

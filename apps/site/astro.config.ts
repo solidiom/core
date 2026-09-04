@@ -13,6 +13,9 @@ const processor = unified({
 
 export default defineConfig({
   site: "https://solidiom.org",
+  devToolbar: {
+    enabled: process.env.SOLIDIOM_E2E !== "1",
+  },
   integrations: [
     mdx(),
     sitemap({
