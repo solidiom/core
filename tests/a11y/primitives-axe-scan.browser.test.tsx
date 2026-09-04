@@ -52,6 +52,40 @@ import * as Tooltip from "@solidiom/tooltip"
 import * as Tree from "@solidiom/tree"
 import * as VirtualList from "@solidiom/virtual-list"
 import * as VisuallyHidden from "@solidiom/visually-hidden"
+import * as AppShell from "@solidiom/app-shell"
+import * as AspectRatio from "@solidiom/aspect-ratio"
+import * as Attachment from "@solidiom/attachment"
+import * as AvatarGroup from "@solidiom/avatar-group"
+import * as Banner from "@solidiom/banner"
+import * as Chart from "@solidiom/chart"
+import * as ChatComposer from "@solidiom/chat-composer"
+import * as ChatLayout from "@solidiom/chat-layout"
+import * as ChatMessage from "@solidiom/chat-message"
+import * as ChatMessageMetadata from "@solidiom/chat-message-metadata"
+import * as ChatSystemMessage from "@solidiom/chat-system-message"
+import * as ChatToolCalls from "@solidiom/chat-tool-calls"
+import * as CodeBlock from "@solidiom/code-block"
+import * as DateRangeInput from "@solidiom/date-range-input"
+import * as Direction from "@solidiom/direction"
+import * as FileInput from "@solidiom/file-input"
+import * as Grid from "@solidiom/grid"
+import * as InputGroup from "@solidiom/input-group"
+import * as Lightbox from "@solidiom/lightbox"
+import * as Link from "@solidiom/link"
+import * as MegaMenu from "@solidiom/mega-menu"
+import * as Menubar from "@solidiom/menubar"
+import * as MessageScroller from "@solidiom/message-scroller"
+import * as MultiSelector from "@solidiom/multi-selector"
+import * as NumberInput from "@solidiom/number-input"
+import * as Questionnaire from "@solidiom/questionnaire"
+import * as SegmentedControl from "@solidiom/segmented-control"
+import * as Sidebar from "@solidiom/sidebar"
+import * as Stack from "@solidiom/stack"
+import * as StatusDot from "@solidiom/status-dot"
+import * as Table from "@solidiom/table"
+import * as TimeInput from "@solidiom/time-input"
+import * as Tokenizer from "@solidiom/tokenizer"
+import * as Typography from "@solidiom/typography"
 import {
   AXE_RESULT_PREFIX,
   createAxeScanResult,
@@ -378,12 +412,369 @@ const PRIMITIVE_FIXTURES: Record<PublicPrimitive, () => JSX.Element> = {
       <Toolbar.Button>Italic</Toolbar.Button>
     </Toolbar.Root>
   ),
+  "app-shell": () => (
+    <AppShell.Root>
+      <AppShell.Header>
+        <h1>My Application</h1>
+      </AppShell.Header>
+      <AppShell.Sidebar>
+        <nav aria-label="Sections">
+          <a href="/home">Home</a>
+        </nav>
+      </AppShell.Sidebar>
+      <AppShell.Main>
+        <h2>Dashboard</h2>
+        <p>Main content region.</p>
+      </AppShell.Main>
+      <AppShell.Footer>
+        <p>© 2026 Example Inc.</p>
+      </AppShell.Footer>
+    </AppShell.Root>
+  ),
+  "aspect-ratio": () => (
+    <AspectRatio.Root ratio={16 / 9}>
+      <img src="https://example.com/photo.png" alt="Scenic landscape" />
+    </AspectRatio.Root>
+  ),
+  attachment: () => (
+    <Attachment.Root file={{ name: "report.pdf", size: 20480, type: "application/pdf" }}>
+      <Attachment.Icon>
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+          <rect width="16" height="16" />
+        </svg>
+      </Attachment.Icon>
+      <Attachment.Name />
+      <Attachment.Size />
+      <Attachment.Remove />
+    </Attachment.Root>
+  ),
+  "avatar-group": () => (
+    <AvatarGroup.Root max={2}>
+      <img src="https://example.com/a.png" alt="Alice Chen" width="32" height="32" />
+      <img src="https://example.com/b.png" alt="Bob Diaz" width="32" height="32" />
+      <img src="https://example.com/c.png" alt="Carla Wu" width="32" height="32" />
+    </AvatarGroup.Root>
+  ),
+  banner: () => (
+    <Banner.Root variant="info" dismissible defaultOpen>
+      <Banner.Content>Your trial ends in 3 days.</Banner.Content>
+      <Banner.Close />
+    </Banner.Root>
+  ),
+  chart: () => (
+    <Chart.Root
+      type="bar"
+      data={[
+        { label: "Jan", value: 30 },
+        { label: "Feb", value: 45 },
+      ]}
+    >
+      <Chart.Title>Monthly revenue</Chart.Title>
+      <Chart.Description>Revenue by month in thousands of dollars.</Chart.Description>
+      <Chart.Canvas />
+      <Chart.FallbackTable />
+    </Chart.Root>
+  ),
+  "chat-composer": () => (
+    <ChatComposer.Root placeholder="Type a message">
+      <ChatComposer.Input />
+      <ChatComposer.AttachButton>Attach file</ChatComposer.AttachButton>
+      <ChatComposer.SendButton>Send</ChatComposer.SendButton>
+    </ChatComposer.Root>
+  ),
+  "chat-layout": () => (
+    <ChatLayout.Root>
+      <ChatLayout.Header>
+        <h2>Support chat</h2>
+      </ChatLayout.Header>
+      <ChatLayout.MessageList>
+        <div role="listitem">Hello, how can I help?</div>
+      </ChatLayout.MessageList>
+      <ChatLayout.Composer>
+        <label for="cl-input">Message</label>
+        <input id="cl-input" type="text" />
+      </ChatLayout.Composer>
+    </ChatLayout.Root>
+  ),
+  "chat-message": () => (
+    <div role="list">
+      <ChatMessage.Root variant="received">
+        <ChatMessage.Avatar>
+          <img src="https://example.com/agent.png" alt="Support agent" width="32" height="32" />
+        </ChatMessage.Avatar>
+        <ChatMessage.Content>Thanks for reaching out!</ChatMessage.Content>
+        <ChatMessage.Actions>
+          <button type="button" aria-label="Copy message">
+            Copy
+          </button>
+        </ChatMessage.Actions>
+      </ChatMessage.Root>
+    </div>
+  ),
+  "chat-message-metadata": () => (
+    <ChatMessageMetadata.Root>
+      <ChatMessageMetadata.Sender sender="Alice" />
+      <ChatMessageMetadata.Timestamp timestamp="2026-09-04T10:15:00Z" />
+      <ChatMessageMetadata.Status status="delivered" />
+    </ChatMessageMetadata.Root>
+  ),
+  "chat-system-message": () => (
+    <ChatSystemMessage.Root type="info">
+      <ChatSystemMessage.Icon>
+        <span aria-hidden="true">ℹ️</span>
+      </ChatSystemMessage.Icon>
+      <ChatSystemMessage.Content>Alice joined the channel</ChatSystemMessage.Content>
+      <ChatSystemMessage.Timestamp timestamp="2026-09-04T10:15:00Z" />
+    </ChatSystemMessage.Root>
+  ),
+  "chat-tool-calls": () => (
+    <ChatToolCalls.Root>
+      <ChatToolCalls.ToolCall name="search" status="success" input="{}" output="ok">
+        <ChatToolCalls.ToolName />
+        <ChatToolCalls.ToolStatus />
+        <ChatToolCalls.ToolInput content="{}" />
+        <ChatToolCalls.ToolOutput content="ok" />
+      </ChatToolCalls.ToolCall>
+    </ChatToolCalls.Root>
+  ),
+  "code-block": () => (
+    <CodeBlock.Root code="const x = 1" language="ts">
+      <CodeBlock.Header>
+        <CodeBlock.Language language="ts" />
+        <CodeBlock.CopyButton code="const x = 1" />
+      </CodeBlock.Header>
+      <CodeBlock.Pre>
+        <CodeBlock.LineNumbers code="const x = 1" />
+        <CodeBlock.Code language="ts">const x = 1</CodeBlock.Code>
+      </CodeBlock.Pre>
+    </CodeBlock.Root>
+  ),
+  "date-range-input": () => (
+    <DateRangeInput.Root defaultStartDate="2026-09-01" defaultEndDate="2026-09-30">
+      <DateRangeInput.StartInput />
+      <DateRangeInput.Separator />
+      <DateRangeInput.EndInput />
+      <DateRangeInput.Trigger aria-label="Open calendar">📅</DateRangeInput.Trigger>
+    </DateRangeInput.Root>
+  ),
+  direction: () => (
+    <Direction.Root direction="rtl">
+      <p>مرحبا</p>
+    </Direction.Root>
+  ),
+  "file-input": () => (
+    <FileInput.Root name="attachments" accept={["image/*"]} multiple>
+      <FileInput.Trigger>Upload files</FileInput.Trigger>
+      <FileInput.HiddenInput />
+      <FileInput.FileList />
+    </FileInput.Root>
+  ),
+  grid: () => (
+    <Grid.Root columns={2} gap={8}>
+      <Grid.Item>Cell 1</Grid.Item>
+      <Grid.Item>Cell 2</Grid.Item>
+    </Grid.Root>
+  ),
+  "input-group": () => (
+    <>
+      <label for="ig-amount">Amount</label>
+      <InputGroup.Root>
+        <InputGroup.Prefix>$</InputGroup.Prefix>
+        <InputGroup.Input id="ig-amount" type="number" placeholder="0.00" />
+        <InputGroup.Suffix>USD</InputGroup.Suffix>
+      </InputGroup.Root>
+    </>
+  ),
+  lightbox: () => (
+    <Lightbox.Root defaultOpen items={[{ src: "https://example.com/a.png", alt: "First image" }]}>
+      <Lightbox.Backdrop />
+      <Lightbox.Content>
+        <Lightbox.CloseButton />
+        <Lightbox.PrevButton />
+        <Lightbox.Image />
+        <Lightbox.NextButton />
+        <Lightbox.Counter />
+      </Lightbox.Content>
+    </Lightbox.Root>
+  ),
+  link: () => <Link.Root href="https://example.com">Visit example</Link.Root>,
+  "mega-menu": () => (
+    <nav aria-label="Main navigation">
+      <MegaMenu.Root defaultValue="products">
+        <MegaMenu.List>
+          <MegaMenu.Item value="products">
+            <MegaMenu.Trigger>Products</MegaMenu.Trigger>
+            <MegaMenu.Content>
+              <MegaMenu.Group>
+                <MegaMenu.GroupLabel>Catalog</MegaMenu.GroupLabel>
+                <MegaMenu.Link href="/products/all">All products</MegaMenu.Link>
+              </MegaMenu.Group>
+            </MegaMenu.Content>
+          </MegaMenu.Item>
+        </MegaMenu.List>
+      </MegaMenu.Root>
+    </nav>
+  ),
+  menubar: () => (
+    <Menubar.Root>
+      <Menubar.Menu>
+        <Menubar.Trigger>File</Menubar.Trigger>
+        <Menubar.Content>
+          <Menubar.Item>New</Menubar.Item>
+          <Menubar.Separator />
+          <Menubar.Item>Open</Menubar.Item>
+        </Menubar.Content>
+      </Menubar.Menu>
+    </Menubar.Root>
+  ),
+  "message-scroller": () => (
+    <MessageScroller.Root>
+      <MessageScroller.ScrollArea>
+        <p>Message one</p>
+        <p>Message two</p>
+      </MessageScroller.ScrollArea>
+      <MessageScroller.NewContentIndicator />
+    </MessageScroller.Root>
+  ),
+  "multi-selector": () => (
+    <MultiSelector.Root defaultOpen defaultValue={["apple"]} placeholder="Select fruits">
+      <MultiSelector.Trigger aria-label="Fruits">Fruits</MultiSelector.Trigger>
+      <MultiSelector.TagList>
+        <MultiSelector.Tag value="apple">
+          Apple
+          <MultiSelector.TagRemove>×</MultiSelector.TagRemove>
+        </MultiSelector.Tag>
+      </MultiSelector.TagList>
+      <MultiSelector.Content>
+        <MultiSelector.Item value="apple">
+          Apple
+          <MultiSelector.ItemIndicator>✓</MultiSelector.ItemIndicator>
+        </MultiSelector.Item>
+        <MultiSelector.Item value="banana">
+          Banana
+          <MultiSelector.ItemIndicator>✓</MultiSelector.ItemIndicator>
+        </MultiSelector.Item>
+      </MultiSelector.Content>
+    </MultiSelector.Root>
+  ),
+  "number-input": () => (
+    <>
+      <label for="qty">Quantity</label>
+      <NumberInput.Root id="qty" defaultValue={1} min={0} max={10} step={1}>
+        <NumberInput.DecrementButton>−</NumberInput.DecrementButton>
+        <NumberInput.Input />
+        <NumberInput.IncrementButton>+</NumberInput.IncrementButton>
+      </NumberInput.Root>
+    </>
+  ),
+  questionnaire: () => (
+    <Questionnaire.Root steps={2} defaultStep={0}>
+      <Questionnaire.Progress />
+      <Questionnaire.Step index={0}>
+        <Questionnaire.StepTitle>Your details</Questionnaire.StepTitle>
+        <Questionnaire.StepContent>
+          <label for="q-name">Name</label>
+          <input id="q-name" type="text" />
+        </Questionnaire.StepContent>
+      </Questionnaire.Step>
+      <Questionnaire.Step index={1}>
+        <Questionnaire.StepTitle>Confirm</Questionnaire.StepTitle>
+        <Questionnaire.StepContent>Review and submit.</Questionnaire.StepContent>
+      </Questionnaire.Step>
+      <Questionnaire.Navigation>
+        <Questionnaire.PrevButton />
+        <Questionnaire.NextButton />
+        <Questionnaire.Submit />
+      </Questionnaire.Navigation>
+    </Questionnaire.Root>
+  ),
+  "segmented-control": () => (
+    <SegmentedControl.Root defaultValue="list" aria-label="View mode">
+      <SegmentedControl.Item value="list">List</SegmentedControl.Item>
+      <SegmentedControl.Item value="grid">Grid</SegmentedControl.Item>
+      <SegmentedControl.Indicator />
+    </SegmentedControl.Root>
+  ),
+  sidebar: () => (
+    <Sidebar.Root defaultOpen>
+      <Sidebar.Trigger>Toggle sidebar</Sidebar.Trigger>
+      <Sidebar.Panel aria-label="Main navigation">
+        <Sidebar.Header>App</Sidebar.Header>
+        <Sidebar.Content>
+          <a href="/home">Home</a>
+        </Sidebar.Content>
+        <Sidebar.Footer>Footer</Sidebar.Footer>
+      </Sidebar.Panel>
+    </Sidebar.Root>
+  ),
+  stack: () => (
+    <Stack.Root gap="1rem">
+      <div>First</div>
+      <div>Second</div>
+    </Stack.Root>
+  ),
+  "status-dot": () => <StatusDot.Root label="Online" status="online" />,
+  table: () => (
+    <Table.Root>
+      <Table.Caption>Team members</Table.Caption>
+      <Table.Header>
+        <Table.HeaderRow>
+          <Table.HeaderCell>Name</Table.HeaderCell>
+          <Table.HeaderCell>Role</Table.HeaderCell>
+        </Table.HeaderRow>
+      </Table.Header>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>Ada</Table.Cell>
+          <Table.Cell>Engineer</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table.Root>
+  ),
+  "time-input": () => (
+    <div>
+      <span id="ti-label">Appointment time</span>
+      <TimeInput.Root aria-labelledby="ti-label" hourCycle="12">
+        <TimeInput.Segment type="hour" />
+        <TimeInput.Separator />
+        <TimeInput.Segment type="minute" />
+        <TimeInput.Segment type="period" />
+      </TimeInput.Root>
+    </div>
+  ),
+  tokenizer: () => (
+    <div>
+      <label id="tk-label">Tags</label>
+      <Tokenizer.Root aria-labelledby="tk-label" defaultValue={["design"]}>
+        <Tokenizer.Token value="design" index={0}>
+          design
+          <Tokenizer.TokenRemove />
+        </Tokenizer.Token>
+        <label>
+          Add a tag
+          <Tokenizer.Input placeholder="Add a tag" />
+        </label>
+      </Tokenizer.Root>
+    </div>
+  ),
+  typography: () => (
+    <>
+      <Typography.Heading level={2}>Heading</Typography.Heading>
+      <Typography.Lead>Lead paragraph.</Typography.Lead>
+      <Typography.Text>
+        Body text with <Typography.InlineCode>code</Typography.InlineCode>.
+      </Typography.Text>
+      <Typography.Blockquote>Quote</Typography.Blockquote>
+      <Typography.Small>Small</Typography.Small>
+      <Typography.Muted>Muted</Typography.Muted>
+    </>
+  ),
 }
 
 describe("Primitive axe-core accessibility scans", () => {
   const primitiveNames = Object.keys(PRIMITIVE_FIXTURES).sort()
 
-  it("covers exactly the authoritative 52-entry public surface", () => {
+  it("covers exactly the authoritative 86-entry public surface", () => {
     expect(primitiveNames).toEqual([...PUBLIC_PRIMITIVES].sort())
   })
 

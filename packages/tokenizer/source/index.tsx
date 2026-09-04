@@ -363,8 +363,6 @@ export function Token(props: TokenizerTokenProps) {
         ref = el
       }}
       id={itemId}
-      role="option"
-      aria-selected={isSelected() ? "true" : "false"}
       aria-disabled={props.disabled || ctx.disabled() ? "true" : undefined}
       tabindex={ctx.rovingFocus.getTabIndex(itemId)}
       data-value={props.value}
