@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest"
-import { createRoot, flush } from "solid-js"
+import { describe, it, expect, vi } from "vitest"
+import { createRoot, createSignal, flush } from "solid-js"
 import { createCollection, type CollectionItem } from "./collection"
 
 const makeItem = (
@@ -29,6 +29,30 @@ describe("createCollection", () => {
       expect(col.items()).toHaveLength(1)
       expect(col.items()[0]!.id).toBe("a")
       dispose()
+    })
+  })
+
+  it("registers items with reactive ref getters without untracked-read warnings", () => {
+    createRoot((dispose) => {
+      const col = createCollection()
+      const [ref] = createSignal<Element | undefined>(undefined)
+      const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
+
+      try {
+        col.registerItem({
+          ...makeItem("a"),
+          get ref() {
+            return ref()
+          },
+        })
+        flush()
+
+        const messages = warn.mock.calls.flat().map(String)
+        expect(messages.some((message) => message.includes("STRICT_READ_UNTRACKED"))).toBe(false)
+      } finally {
+        warn.mockRestore()
+        dispose()
+      }
     })
   })
 

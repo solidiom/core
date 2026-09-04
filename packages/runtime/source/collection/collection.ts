@@ -6,7 +6,7 @@
  * composite navigation, and selection primitives.
  */
 
-import { createSignal, type Accessor } from "solid-js"
+import { createSignal, untrack, type Accessor } from "solid-js"
 
 /** Describes a single item in a collection. */
 export interface CollectionItem {
@@ -73,7 +73,7 @@ export function createCollection(options: CollectionOptions = {}): Collection {
   }
 
   const registerItem = (item: CollectionItem): (() => void) => {
-    setItems((prev) => sortByDomOrder([...prev, item]))
+    setItems((prev) => untrack(() => sortByDomOrder([...prev, item])))
     return () => unregisterItem(item.id)
   }
 
