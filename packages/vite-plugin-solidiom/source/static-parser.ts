@@ -225,6 +225,110 @@ function forEachCodeIdentifier(
   }
 }
 
+export function removeNamedImportSpecifier(
+  code: string,
+  moduleName: string,
+  importedName: string,
+): string {
+  const replacements: TextReplacement[] = []
+  const budget: ScanBudget = { remaining: code.length }
+
+  forEachCodeIdentifier(code, (name, importStart, importEnd) => {
+    if (name !== "import" || budget.remaining <= 0) return
+
+    let cursor = skipTrivia(code, importEnd)
+    if (code[cursor] !== "{") return
+    const namedEnd = scanBalanced(code, cursor, "{", "}", budget)
+    if (namedEnd === null) return
+
+    const openBrace = cursor
+    cursor = skipTrivia(code, namedEnd)
+    const from = readIdentifierAt(code, cursor)
+    if (!from || from.name !== "from") return
+
+    cursor = skipTrivia(code, from.end)
+    const moduleEnd = scanQuoted(code, cursor, budget)
+    if (moduleEnd === null) return
+    const moduleSource = code.slice(cursor, moduleEnd)
+    if (parseStaticStringLiteral(moduleSource) !== moduleName) return
+
+    const specifiers = readNamedImportSpecifiers(code, openBrace + 1, namedEnd - 1)
+    if (!specifiers.some((specifier) => specifier.importedName === importedName)) return
+
+    const remaining = specifiers.filter((specifier) => specifier.importedName !== importedName)
+    if (remaining.length > 0) {
+      replacements.push({
+        start: openBrace + 1,
+        end: namedEnd - 1,
+        text: ` ${remaining.map((specifier) => specifier.source).join(", ")} `,
+      })
+      return
+    }
+
+    let declarationEnd = moduleEnd
+    while (code[declarationEnd] === " " || code[declarationEnd] === "\t") declarationEnd++
+    if (code[declarationEnd] === ";") declarationEnd++
+    if (code[declarationEnd] === "\r") declarationEnd++
+    if (code[declarationEnd] === "\n") declarationEnd++
+    replacements.push({ start: importStart, end: declarationEnd, text: "" })
+  })
+
+  return replacements.length > 0 ? applyTextReplacements(code, replacements) : code
+}
+
+function readIdentifierAt(code: string, start: number): { name: string; end: number } | null {
+  if (!isIdentifierStart(code[start])) return null
+  let end = start + 1
+  while (end < code.length && isIdentifierPart(code[end])) end++
+  return { name: code.slice(start, end), end }
+}
+
+function readNamedImportSpecifiers(
+  code: string,
+  start: number,
+  end: number,
+): Array<{ importedName: string | null; source: string }> {
+  const specifiers: Array<{ importedName: string | null; source: string }> = []
+  let segmentStart = start
+  let cursor = start
+
+  const appendSpecifier = (segmentEnd: number) => {
+    const source = code.slice(segmentStart, segmentEnd).trim()
+    if (!source) return
+    let importedName: string | null = null
+    forEachCodeIdentifier(source, (name) => {
+      if (importedName === null && name !== "type") importedName = name
+    })
+    specifiers.push({ importedName, source })
+  }
+
+  while (cursor < end) {
+    const char = code[cursor]
+    if (char === '"' || char === "'" || char === "`") {
+      cursor = Math.min(scanQuoted(code, cursor) ?? end, end)
+      continue
+    }
+    if (char === "/" && code[cursor + 1] === "/") {
+      cursor += 2
+      while (cursor < end && code[cursor] !== "\n") cursor++
+      continue
+    }
+    if (char === "/" && code[cursor + 1] === "*") {
+      const commentEnd = code.indexOf("*/", cursor + 2)
+      cursor = commentEnd === -1 || commentEnd >= end ? end : commentEnd + 2
+      continue
+    }
+    if (char === ",") {
+      appendSpecifier(cursor)
+      segmentStart = cursor + 1
+    }
+    cursor++
+  }
+
+  appendSpecifier(end)
+  return specifiers
+}
+
 export function findCvaDeclarations(code: string): CvaDeclaration[] {
   const declarations: CvaDeclaration[] = []
   const budget: ScanBudget = { remaining: code.length }

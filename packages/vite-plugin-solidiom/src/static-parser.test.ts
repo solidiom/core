@@ -32,6 +32,20 @@ const value = ${longIdentifier}({ size: "sm" })
     expect(transform(input, { variantExpansion: true })).toBeNull()
   }, 1_000)
 
+  it("handles import-like comment content in bounded time", () => {
+    const input = `
+// solidiom
+/* ${"import{{".repeat(20_000)} */
+import { cva } from "class-variance-authority"
+const buttonVariants = cva("button", {
+  variants: { size: { sm: "small" } },
+  defaultVariants: { size: "sm" }
+})
+`
+    const result = transform(input, { recipeExtraction: true })
+    expect(result).not.toContain('from "class-variance-authority"')
+  }, 1_000)
+
   it("parses nested static configuration without backtracking", () => {
     const input = `
 // solidiom

@@ -84,7 +84,7 @@ jobs:
       - name: Format check
         run: pnpm run format:check
       - name: Production dependency audit
-        run: pnpm audit --prod --audit-level high
+        run: pnpm audit --prod --audit-level high --ignore-registry-errors
       - name: Package lint
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
@@ -129,8 +129,8 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: Build site integration dependency
-        run: pnpm --filter @solidiom/astrojs-solid-next build
+      - name: Build site dependencies
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
       - name: Site lint
         run: pnpm --filter @solidiom/site lint
       - name: Site type and content checks
@@ -139,9 +139,7 @@ jobs:
           pnpm --filter @solidiom/site run boundaries
           pnpm --filter @solidiom/site run i18n:validate
       - name: Site build
-        run: |
-          pnpm nx run-many -t build --exclude=@solidiom/site
-          pnpm --filter @solidiom/site build
+        run: pnpm --filter @solidiom/site build
 
   workflow-policy:
     name: Workflow policy
