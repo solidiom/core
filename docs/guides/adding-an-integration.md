@@ -16,8 +16,8 @@ lifecycle: current
 | Term            | Tag                 | Purpose                                                          | Examples                                                    |
 | --------------- | ------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------- |
 | **Adapter**     | `layer:adapter`     | Bridges a Solidiom primitive with an external library dependency | `adapter-positioning-floating-ui`, `adapter-table-tanstack` |
-| **Integration** | `layer:integration` | Framework-level plugin that enables Solidiom in a host framework | `astrojs-solid-next`, `vite-plugin-solidiom`                |
-| **Tooling**     | `layer:tooling`     | Internal build/dev tools not published as adapters               | `adapter-kit`                                               |
+| **Integration** | `layer:integration` | Framework-level plugin that enables Solidiom in a host framework | `astrojs-solid-next`                                        |
+| **Tooling**     | `layer:tooling`     | Internal build/dev tools not published as adapters               | `adapter-kit`, `vite-plugin-solidiom`                       |
 
 The key difference from primitives: adapters and integrations do **not** appear in the umbrella package (`@solidiom/primitives`), are **not** included in registry manifests (unless they have `layer:adapter` tag), and do **not** need recipes or accessibility evidence.
 
@@ -253,7 +253,7 @@ These steps from the "Adding a Primitive" guide do **not** apply:
 | Run `pnpm primitive:gate`                      | Gate is for primitives only                             |
 | Add axe accessibility scans                    | Adapters are not rendered UI                            |
 | Add to `PUBLIC_PRIMITIVES` in `axe-results.ts` | Only primitives with a11y evidence                      |
-| Create demos in `apps/docs/`                   | Adapters documented via API docs, not interactive demos |
+| Create demos in `apps/site/`                   | Adapters documented via API docs, not interactive demos |
 
 ## Checklist
 

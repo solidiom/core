@@ -59,28 +59,23 @@ gh workflow run release.yml -f target=all -f gate=full
 
 `target` accepts `packages`, `site`, or `all`; `gate` accepts `quick` or `full`. Site-only releases skip the package gate because no package artifact is being published.
 
-### Automatic site deployment
+### Tag-triggered publish
 
-A push to `main` automatically deploys the site when it changes one of these paths:
+`release.yml` publishes automatically when a `v*` tag is pushed. Versioning is deliberately kept out of this workflow: it runs git read-only, does not run `changeset version`, and does not commit anything back. Instead the release is a two-step, PR-reviewed model:
 
-- `apps/site/**`
-- `templates/**`
-- `registry/**`
-- `packages/*/docs/**`
-- `docs/**`
+1. **Version PR** — dispatch `.github/workflows/version.yml`. It applies pending Changesets and opens one reviewable `release/version-*` PR containing all the release churn (package.json version bumps, CHANGELOGs, the regenerated/re-signed `registry/index.json`, and `pnpm-lock.yaml` updates).
+2. **Merge → tag → publish** — when you merge that PR, `.github/workflows/tag-on-version-merge.yml` creates and pushes the matching `v<version>` tag, which triggers `release.yml` to publish exactly what was merged.
 
-This push path is site-only: it does not publish packages or modify Changesets.
+A `workflow_dispatch` on `release.yml` is the manual escape hatch: it publishes packages and/or deploys the site (`target` = `packages`, `site`, or `all`) from the dispatched ref without going through the Version PR.
 
 ### What CI does
 
-For a package release, CI:
+For a package release (tag push or dispatch), `release.yml`:
 
 1. Builds packages and runs the selected gate.
 2. Signs and verifies the registry index with `REGISTRY_SIGN_KEY`.
-3. Applies pending Changesets, then rebuilds with the final versions.
-4. Publishes to npm with the `beta` tag.
-5. Generates and verifies beta artifacts.
-6. Commits version bumps, changelogs, lockfile changes, and registry output with the GitHub Actions bot.
+3. Publishes to npm with the `beta` tag. Versions are already committed at the tagged tree (from the merged Version PR) — this workflow does not run `changeset version` and does not commit anything back.
+4. Generates and verifies beta artifacts, then verifies beta signing.
 
 For a site deployment, CI builds packages and templates, checks site boundaries and routes, runs `build:deploy`, creates the Pagefind index, and deploys `apps/site/dist` to Cloudflare Pages.
 
@@ -114,16 +109,19 @@ The linked package group is:
 
 ## CI strategy
 
-The CI/release estate has four workflows:
+The release-relevant workflows are:
 
-| Workflow          | Trigger                                     | Purpose                                                                                             |
-| ----------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `ci-packages.yml` | Manual dispatch (push/PR triggers dormant)  | Package build, tests, accessibility, CLI smoke, catalog + quality gates                             |
-| `ci-site.yml`     | Manual dispatch (push/PR triggers dormant)  | Site check, build, E2E, visual, Lighthouse, vertical-slice gate                                     |
-| `release.yml`     | Site-path pushes to `main`, manual dispatch | Production package release, site deployment, or both                                                |
-| `nightly.yml`     | Daily 04:00 UTC, manual dispatch            | Solid compatibility matrix, full browser suite, dependency checks, and visual-baseline regeneration |
+| Workflow                   | Trigger                                    | Purpose                                                                                             |
+| -------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `ci-packages.yml`          | Manual dispatch (push/PR triggers dormant) | Package build, tests, accessibility, CLI smoke, catalog + quality gates                             |
+| `ci-site.yml`              | Manual dispatch (push/PR triggers dormant) | Site check, build, E2E, visual, Lighthouse, vertical-slice gate                                     |
+| `version.yml`              | Manual dispatch                            | Applies pending Changesets and opens the reviewable Version PR (step 1 of the release model)        |
+| `tag-on-version-merge.yml` | Version PR merged into `main`              | Creates and pushes the matching `v<version>` tag, which triggers `release.yml`                      |
+| `release.yml`              | Pushed `v*` tag, manual dispatch           | Production package release, site deployment, or both                                                |
+| `release-package.yml`      | Manual dispatch                            | Publishes one independent package between full releases (wraps `scripts/release-package.mjs`)       |
+| `nightly.yml`              | Manual dispatch                            | Solid compatibility matrix, full browser suite, dependency checks, and visual-baseline regeneration |
 
-`ci-packages.yml` fast tier (`full_matrix=false`) runs format, typecheck, build, a single Node test version, Chromium browser tests, and the quick gate. Its full tier (`full_matrix=true`) adds the Node 24/26 matrix, accessibility, CLI smoke tests, catalog gates, and the full gate. `ci-site.yml` checks and builds the site, and on its full tier adds E2E, visual, Lighthouse, and the vertical-slice gate. Browser compatibility across Chromium, Firefox, and WebKit belongs to the nightly suite. Both CI workflows are currently manual-dispatch only.
+`ci-packages.yml` fast tier (`full_matrix=false`) runs format, typecheck, build, a single Node test version, Chromium browser tests, and the quick gate. Its full tier (`full_matrix=true`) adds the Node 24/26 matrix, accessibility, CLI smoke tests, catalog gates, and the full gate. `ci-site.yml` checks and builds the site, and on its full tier adds E2E, visual, Lighthouse, and the vertical-slice gate. Browser compatibility across Chromium, Firefox, and WebKit belongs to the nightly suite. Both CI workflows are currently manual-dispatch only, as is `nightly.yml` (it has no scheduled trigger).
 
 ## Visual baselines
 
@@ -169,12 +167,15 @@ Check the `release.yml` run for site boundary, route-parity, build, or Cloudflar
 
 ## File reference
 
-| File                                | Purpose                                                                 |
-| ----------------------------------- | ----------------------------------------------------------------------- |
-| `scripts/release.sh`                | Local package/site release pipeline; `--dispatch` is the CI alternative |
-| `scripts/release-package.mjs`       | Independent single-package publisher                                    |
-| `.github/workflows/release.yml`     | Unified package/site production release                                 |
-| `.github/workflows/ci-packages.yml` | Package build, tests, and quality gates                                 |
-| `.github/workflows/ci-site.yml`     | Site check, build, E2E, visual, and Lighthouse                          |
-| `.github/workflows/nightly.yml`     | Scheduled compatibility, browser, and visual checks                     |
-| `.changeset/config.json`            | Changeset and linked-package configuration                              |
+| File                                         | Purpose                                                                 |
+| -------------------------------------------- | ----------------------------------------------------------------------- |
+| `scripts/release.sh`                         | Local package/site release pipeline; `--dispatch` is the CI alternative |
+| `scripts/release-package.mjs`                | Independent single-package publisher                                    |
+| `.github/workflows/version.yml`              | Opens the reviewable Version PR (applies Changesets); release step 1    |
+| `.github/workflows/tag-on-version-merge.yml` | Tags `v<version>` when the Version PR merges; triggers `release.yml`    |
+| `.github/workflows/release.yml`              | Unified package/site production release (tag-triggered or dispatched)   |
+| `.github/workflows/release-package.yml`      | Manual single-package publish between full releases                     |
+| `.github/workflows/ci-packages.yml`          | Package build, tests, and quality gates                                 |
+| `.github/workflows/ci-site.yml`              | Site check, build, E2E, visual, and Lighthouse                          |
+| `.github/workflows/nightly.yml`              | Manual-dispatch compatibility, browser, and visual checks               |
+| `.changeset/config.json`                     | Changeset and linked-package configuration                              |

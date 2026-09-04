@@ -15,13 +15,13 @@ This document describes the process and all the places that need updating when b
 
 When bumping versions across all packages, these are the files/locations that need updating:
 
-| Location                                          | What to update                                      |
-| ------------------------------------------------- | --------------------------------------------------- |
-| `packages/*/package.json`                         | The `"version"` field in every package              |
-| `registry/*.json`                                 | Per-primitive manifests (contain `"version"` field) |
-| `registry/index.json`                             | Catalog index (lists version per primitive)         |
-| `registry/components/*.json`                      | Per-component manifests                             |
-| `tools/__snapshots__/registry-build.test.ts.snap` | Test snapshot of the registry index structure       |
+| Location                       | What to update                                      |
+| ------------------------------ | --------------------------------------------------- |
+| `packages/*/package.json`      | The `"version"` field in every package              |
+| `registry/*.json`              | Per-primitive manifests (contain `"version"` field) |
+| `registry/index.json`          | Catalog index (lists version per primitive)         |
+| `registry/components/*.json`   | Per-component manifests                             |
+| `tools/registry-build.test.ts` | Structural assertions on the registry index         |
 
 ## Step-by-Step Process
 
@@ -56,12 +56,15 @@ This updates:
 - `registry/components/<component>.json` — each component manifest's `version` field
 - `registry/index.json` — the catalog with version info for all entries
 
-### 3. Update test snapshots
+### 3. Re-check the registry build test
 
-The registry build test has a snapshot of `registry/index.json` that includes version strings. Update it:
+`tools/registry-build.test.ts` rebuilds the registry and asserts the index's
+structure and integrity (schema version, `sha256` entries hash, non-empty
+collections). It has no external `.snap` file to update, so just re-run it to
+confirm the regenerated `registry/index.json` still passes:
 
 ```bash
-pnpm exec vitest run tools/registry-build.test.ts --update
+pnpm exec vitest run tools/registry-build.test.ts
 ```
 
 ### 4. Verify all tests pass
@@ -93,8 +96,8 @@ pnpm changeset version
 # Regenerate registry after version bump
 pnpm exec tsx tools/registry-build.ts
 
-# Update snapshots
-pnpm exec vitest run tools/registry-build.test.ts --update
+# Re-check the registry build test
+pnpm exec vitest run tools/registry-build.test.ts
 ```
 
 Changesets will:

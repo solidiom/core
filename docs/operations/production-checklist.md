@@ -51,13 +51,13 @@ Defined in `apps/site/public/_headers`. Verified via `verify-preview-deployment.
 
 ### Global headers (all routes)
 
-| Header                    | Value                                                          | Purpose                              |
-| ------------------------- | -------------------------------------------------------------- | ------------------------------------ |
-| `X-Frame-Options`         | `DENY`                                                         | Prevent clickjacking                 |
-| `X-Content-Type-Options`  | `nosniff`                                                      | Prevent MIME-type sniffing           |
-| `Referrer-Policy`         | `strict-origin-when-cross-origin`                              | Limit referrer leakage               |
-| `Permissions-Policy`      | `camera=(), microphone=(), geolocation=(), browsing-topics=()` | Disable unnecessary browser features |
-| `Content-Security-Policy` | See below                                                      | Restrict resource loading            |
+| Header                    | Value                                                          | Purpose                                                                                |
+| ------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `X-Frame-Options`         | `SAMEORIGIN`                                                   | Block cross-origin framing (clickjacking) while allowing same-origin template previews |
+| `X-Content-Type-Options`  | `nosniff`                                                      | Prevent MIME-type sniffing                                                             |
+| `Referrer-Policy`         | `strict-origin-when-cross-origin`                              | Limit referrer leakage                                                                 |
+| `Permissions-Policy`      | `camera=(), microphone=(), geolocation=(), browsing-topics=()` | Disable unnecessary browser features                                                   |
+| `Content-Security-Policy` | See below                                                      | Restrict resource loading                                                              |
 
 ### Content Security Policy
 
@@ -68,12 +68,15 @@ style-src 'self' 'unsafe-inline';
 img-src 'self' data:;
 font-src 'self';
 connect-src 'self' https://*.posthog.com;
-frame-src 'none';
+frame-src 'self';
+frame-ancestors 'self';
 base-uri 'self';
-form-action 'self' https://buttondown.com
+form-action 'self' https://buttondown.com;
+upgrade-insecure-requests
 ```
 
 - `'unsafe-inline'` for script/style is required by Astro's SSG hydration model and PostHog snippet.
+- `frame-src 'self'` and `frame-ancestors 'self'` allow the site's own same-origin template preview iframes (`/templates/__preview__/*`) while blocking cross-origin embedding.
 - Tool routes (playground, theme-builder) will need route-specific CSP relaxations when shipped.
 - `form-action` allows newsletter sign-up via Buttondown.
 
@@ -191,7 +194,7 @@ Complete all items before opening the site to public traffic.
 
 - [ ] All security headers present and correct on `curl -I https://solidiom.org`.
 - [ ] CSP does not block any legitimate resources.
-- [ ] `X-Frame-Options: DENY` prevents embedding.
+- [ ] `X-Frame-Options: SAMEORIGIN` blocks cross-origin embedding (same-origin template previews still allowed).
 - [ ] HTTP → HTTPS redirect active (automatic with Cloudflare "Always Use HTTPS").
 
 ### Cache

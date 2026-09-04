@@ -43,39 +43,34 @@ done
 
 Once packages are cached in Verdaccio's `./storage` directory, copy the entire storage folder to your air-gapped environment.
 
-## Step 2: Mirror the static registry catalog to an internal CDN or filesystem
+## Step 2: Mirror the static registry catalog to the air-gapped filesystem
 
-The Solidiom CLI uses a registry catalog (`index.json`) to resolve primitive dependency graphs. Copy this to your internal infrastructure:
-
-```bash
-# From the monorepo root (on the connected machine)
-cp registry/index.json /path/to/internal-cdn/solidiom/registry/index.json
-
-# Or serve it from the Verdaccio storage directory
-cp registry/index.json ./verdaccio-storage/@solidiom/registry/index.json
-```
-
-If using a CDN, ensure the file is accessible at a stable URL, e.g.:
-`https://internal-cdn.corp.example/solidiom/registry/index.json`
-
-## Step 3: Configure .solidiom/config.json to point to internal registry
-
-In your project on the air-gapped machine, create or update `.solidiom/config.json`:
-
-```json
-{
-  "registry": "http://localhost:4873",
-  "registryPath": "/path/to/local/registry"
-}
-```
-
-Or use the `SOLIDIOM_REGISTRY_PATH` environment variable:
+The Solidiom CLI resolves primitive dependency graphs from a registry catalog (`index.json`) that it reads from the **local filesystem** — it does not fetch the catalog over HTTP. Copy the catalog to a directory on the air-gapped machine that the CLI can resolve (see Step 3):
 
 ```bash
+# From the monorepo root (on the connected machine), copy the catalog directory
+# to a location you will point SOLIDIOM_REGISTRY_PATH at:
+cp registry/index.json /path/to/local/registry/index.json
+
+# Or place it where the CLI auto-discovers it inside a project, at
+# .solidiom/registry-cache.json (the lowest-priority resolution candidate):
+cp registry/index.json <project>/.solidiom/registry-cache.json
+```
+
+If you also stage the catalog on an internal CDN for other tooling, note that the CLI itself only reads a local path — a CDN URL is not one of its resolution candidates.
+
+## Step 3: Point the CLI at the internal registry catalog
+
+The Solidiom CLI resolves the primitive dependency graph from a **registry catalog directory** — a folder containing `index.json` (and the per-primitive `*.json` manifests). This is separate from the npm registry (Verdaccio) that serves the package tarballs. Point the CLI at your mirrored catalog directory with the `SOLIDIOM_REGISTRY_PATH` environment variable:
+
+```bash
+# Directory that CONTAINS index.json (not the file itself)
 export SOLIDIOM_REGISTRY_PATH=/path/to/local/registry
 ```
 
-This tells the CLI where to find the `index.json` catalog for dependency resolution.
+Alternatively, pass the same directory per-invocation with the `--registry` flag (see Step 4). The CLI's catalog-resolution order is: `--registry <dir>`, then `SOLIDIOM_REGISTRY_PATH`, then the monorepo-relative `registry/index.json`, then `node_modules/@solidiom/registry/index.json`, then `.solidiom/registry-cache.json`.
+
+> **Note:** `.solidiom/config.json` does **not** carry registry location. Its schema covers install targets and styling profile (`sourceDir`, `runtimeDir`, `componentDir`, `blockDir`, `themeDir`, `positioningAdapter`, `defaultMode`, `stylingProfile`). Use `SOLIDIOM_REGISTRY_PATH` or `--registry` for the catalog location, and your package manager's `.npmrc` / `--registry` for the npm registry that serves tarballs.
 
 ## Step 4: Install primitives in the air-gapped environment
 
@@ -93,7 +88,7 @@ solidiom add select --registry http://localhost:4873 --no-network
 solidiom add calendar --registry http://localhost:4873 --no-network
 ```
 
-The `--no-network` flag ensures the CLI will not attempt any external network requests. All resolution happens against the local registry catalog and the private Verdaccio instance.
+The `--no-network` flag ensures the CLI will not attempt any external network requests. Primitive-graph resolution happens against the local catalog (from `SOLIDIOM_REGISTRY_PATH`, or a `registry/index.json` copied to `.solidiom/registry-cache.json` as in Step 2), and the package tarballs are installed from the private Verdaccio instance. The `--registry` value is forwarded to package resolution; ensure the catalog is also reachable via one of the resolution paths in Step 3 (the reference fixture in `tools/offline-fixture/` copies `registry/index.json` to `.solidiom/registry-cache.json` to guarantee this).
 
 ## Verification
 

@@ -34,7 +34,7 @@ All items from OPS-004 must be verified before deploying. Use `docs/operations/p
 ### Security Headers
 
 - [ ] All headers present on `curl -I https://solidiom.org`:
-  - `X-Frame-Options: DENY`
+  - `X-Frame-Options: SAMEORIGIN`
   - `X-Content-Type-Options: nosniff`
   - `Referrer-Policy: strict-origin-when-cross-origin`
   - `Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=()`
@@ -117,18 +117,24 @@ pnpm budget-report:enforce
 
 #### Option A: GitHub Actions (recommended)
 
-Push to the `main` branch. The production deployment workflow triggers automatically:
+The site is deployed by the `release.yml` workflow. `release.yml` triggers on a
+pushed `v*` tag (packages only — a tag push sets `deploy_site=false`) or on
+manual `workflow_dispatch`. **A plain push to `main` does not deploy the site.**
+To deploy the site, dispatch the release workflow with a site target:
 
 ```bash
-git push origin main
+gh workflow run release.yml -f target=site
+# or deploy packages and site together:
+gh workflow run release.yml -f target=all
 ```
 
-Monitor the `release.yml` workflow run. It:
+Monitor the `release.yml` workflow run. Its `deploy-site` job:
 
 1. Installs dependencies and builds the library packages and templates needed by the site.
-2. Validates site boundaries and route parity.
-3. Runs `build:deploy` and generates the Pagefind index.
-4. Deploys `apps/site/dist` with Cloudflare Wrangler.
+2. Validates site boundaries and route parity (`boundaries`, `route-parity`).
+3. Runs `build:deploy` and generates the Pagefind index (`search-index`).
+4. Deploys `apps/site/dist` to Cloudflare Pages via `cloudflare/wrangler-action`
+   (`pages deploy dist --project-name=solidiom-site --branch=main`).
 
 #### Option B: Manual deploy
 

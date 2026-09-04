@@ -20,17 +20,25 @@ Internal documentation for Solidiom contributors and maintainers.
 - **Website architecture:** [`docs/architecture/website.md`](architecture/website.md)
 - **Core library architecture:** [`docs/architecture/design.md`](architecture/design.md)
 
+## Full table of contents
+
+For a complete, grouped index of every document under `docs/`, see
+[`docs/TOC.md`](TOC.md).
+
 ## Directory structure
 
-| Directory       | Purpose                                      |
-| --------------- | -------------------------------------------- |
-| `architecture/` | Stable system design and accepted decisions  |
-| `contracts/`    | Binding schemas, rules, and policies         |
-| `plans/`        | Active status, priorities, and sequencing    |
-| `guides/`       | Task-oriented contributor instructions       |
-| `evidence/`     | Generated or recorded verification evidence  |
-| `templates/`    | Fill-in-the-blank records                    |
-| `assets/`       | Images and other documentation support files |
+| Directory           | Purpose                                     |
+| ------------------- | ------------------------------------------- |
+| `architecture/`     | Stable system design and accepted decisions |
+| `contracts/`        | Binding schemas, rules, and policies        |
+| `guides/`           | Task-oriented contributor instructions      |
+| `operations/`       | Deployment, CI, rollback, and ops runbooks  |
+| `plans/`            | Active status, priorities, and sequencing   |
+| `qa/`               | Quality audits and support/perf matrices    |
+| `evidence/`         | Generated or recorded verification evidence |
+| `at-audit-results/` | Per-primitive assistive-technology records  |
+| `releases/`         | Published release notes                     |
+| `templates/`        | Fill-in-the-blank records                   |
 
 ## Plan authority
 
