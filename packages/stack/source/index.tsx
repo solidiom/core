@@ -16,7 +16,6 @@ export interface StackRootProps {
   justify?: "start" | "center" | "end" | "between" | "around" | "evenly"
   wrap?: boolean | "wrap" | "nowrap" | "wrap-reverse"
   inline?: boolean
-  as?: string
   class?: string
   style?: JSX.CSSProperties | string
   children?: JSX.Element
@@ -73,8 +72,6 @@ function normalizeGap(gap: string | number | undefined): string | undefined {
 // ─── Components ─────────────────────────────────────────────────────────────
 
 export function Root(props: StackRootProps) {
-  const Tag = (props.as || "div") as keyof JSX.IntrinsicElements
-
   const styles = (): JSX.CSSProperties => ({
     display: props.inline ? "inline-flex" : "flex",
     "flex-direction": props.direction || "column",
@@ -86,12 +83,12 @@ export function Root(props: StackRootProps) {
   })
 
   return (
-    <Tag
+    <div
       class={props.class}
       style={typeof props.style === "string" ? props.style : styles()}
       {...applySemanticAttrs({ scope: "stack", part: "root" })}
     >
       {props.children}
-    </Tag>
+    </div>
   )
 }

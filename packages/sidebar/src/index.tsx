@@ -161,16 +161,15 @@ export function Root(props: SidebarRootProps) {
 /**
  * The sidebar panel (collapsible aside).
  *
- * Renders an `<aside>` with `role="navigation"` and appropriate ARIA attributes.
+ * Renders a `<nav>` (implicit `navigation` landmark) with appropriate ARIA attributes.
  * Emits `data-scope="sidebar"`, `data-part="panel"`, `data-state="open"|"collapsed"`.
  */
 export function Panel(props: SidebarPanelProps) {
   const ctx = useSidebarContext()
 
   return (
-    <aside
+    <nav
       id={ctx.panelId}
-      role="navigation"
       aria-label={props["aria-label"] ?? "Sidebar"}
       class={props.class}
       style={props.style}
@@ -183,7 +182,7 @@ export function Panel(props: SidebarPanelProps) {
       data-side={ctx.side()}
     >
       {props.children}
-    </aside>
+    </nav>
   )
 }
 

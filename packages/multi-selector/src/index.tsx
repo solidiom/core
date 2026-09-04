@@ -84,6 +84,8 @@ export interface MultiSelectorItemProps {
 
 export interface MultiSelectorTriggerProps {
   children?: JSX.Element
+  /** Accessible name for the combobox trigger. Required by ARIA for role="combobox". */
+  "aria-label"?: string
 }
 
 export interface MultiSelectorTagListProps {
@@ -281,6 +283,7 @@ export function Trigger(props: MultiSelectorTriggerProps) {
       id={ctx.triggerId}
       type="button"
       role="combobox"
+      aria-label={props["aria-label"]}
       aria-expanded={ctx.open() ? "true" : "false"}
       aria-haspopup="listbox"
       aria-controls={ctx.listboxId}
