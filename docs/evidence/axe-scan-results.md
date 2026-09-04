@@ -85,6 +85,16 @@ lifecycle: current
 - Passing checks: 433
 - All primitives passing: Yes ✅
 
+> **Coverage update (86-primitive scan):** The table above is the recorded GA
+> snapshot (52 `stable` primitives) from the dated execution in the Methodology
+> section. The scan source has since been extended to **all 86 catalog
+> primitives** and passes 86/86 with 0 violations. The 34 newer primitives are
+> `experimental` — scanned and passing, but intentionally not GA-gated and not
+> yet publishing per-primitive evidence. **86 scanned = 52 GA-conformant + 34
+> experimental.** The live artifact (`artifacts/axe-results.json`, regenerated,
+> gitignored) reflects the full 86-primitive run; regenerate the per-primitive
+> GA snapshot table with `pnpm run report:axe`.
+
 ## Known Beta Gaps
 
 - Calendar/DatePicker: color contrast is not assessed without recipe styling in the isolated fixture.

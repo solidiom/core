@@ -14,6 +14,17 @@ date: 2026-08-07
 **Scope:** All 52 public primitives, 30 components, site routes (en + es).
 **Standard:** WCAG 2.2 Level AA, WAI-ARIA Authoring Practices Guide (APG).
 
+> **Coverage update (86-primitive scan):** The executable axe-core scan
+> (`tests/a11y/primitives-axe-scan.browser.test.tsx`) now covers **all 86
+> catalog primitives** and passes with 0 violations. The pass/keyboard/APG
+> tables below remain scoped to the **52 GA (`stable`) primitives**, which are
+> the accessibility **conformance promise** and carry per-primitive published
+> evidence (`packages/*/docs/accessibility/evidence.json`). The **34 newer
+> primitives are `experimental`**: they are now scanned and passing, but are
+> intentionally not GA-gated and do not yet publish per-primitive evidence.
+> In short — **86 scanned = 52 GA-conformant + 34 experimental (scanned, not
+> yet GA-promised).**
+
 ## Methodology
 
 | Criterion            | Tool / Method                           | Coverage                                |
