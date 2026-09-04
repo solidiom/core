@@ -349,13 +349,13 @@ checkN(
   61,
   "Static recipe extraction plugin (implemented)",
   fileContains("packages/vite-plugin-solidiom/src/index.ts", "extractStaticRecipes") &&
-    fileContains("packages/vite-plugin-solidiom/src/index.ts", "CVA_PATTERN"),
+    fileContains("packages/vite-plugin-solidiom/src/index.ts", "findCvaDeclarations"),
 )
 checkN(
   62,
   "Static variant expansion (implemented)",
   fileContains("packages/vite-plugin-solidiom/src/index.ts", "expandStaticVariants") &&
-    fileContains("packages/vite-plugin-solidiom/src/index.ts", "VARIANT_CALL"),
+    fileContains("packages/vite-plugin-solidiom/src/index.ts", "findObjectCalls"),
 )
 checkN(
   63,

@@ -119,6 +119,9 @@ jobs:
     needs: site-build
     if: inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+      options: --ipc=host
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -201,6 +204,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          packageManager: pnpm
+          wranglerVersion: "4.129.0"
           command: pages deploy dist --project-name=solidiom-site
           workingDirectory: apps/site
       - name: Verify preview delivery policy
