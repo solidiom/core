@@ -129,6 +129,8 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ env.NODE_VERSION }}
+      - name: Build site integration dependency
+        run: pnpm --filter @solidiom/astrojs-solid-next build
       - name: Site lint
         run: pnpm --filter @solidiom/site lint
       - name: Site type and content checks
@@ -164,8 +166,8 @@ jobs:
           fetch-depth: 0
       # TruffleHog scans only the introduced commit range for PRs and pushes;
       # this avoids permanently re-failing on unrelated historical findings.
-      # It receives no repository secret or write-capable token and explicitly
-      # redacts detector output.
+      # The pinned scanner's GitHub Actions formatter reports detector metadata
+      # and source location without emitting raw secret bytes.
       - name: Scan pull request changes
         if: github.event_name == 'pull_request'
         uses: trufflesecurity/trufflehog@ea33cd04a6b7a910430b5ee9b1559576b332c14d # main
@@ -173,7 +175,8 @@ jobs:
           path: ./
           base: ${{ github.event.pull_request.base.sha }}
           head: ${{ github.event.pull_request.head.sha }}
-          extra_args: --results=verified,unknown --no-update --redact=100 --fail
+          version: "3.97.4"
+          extra_args: --results=verified,unknown
       - name: Scan pushed changes
         if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
         uses: trufflesecurity/trufflehog@ea33cd04a6b7a910430b5ee9b1559576b332c14d # main
@@ -181,13 +184,15 @@ jobs:
           path: ./
           base: ${{ github.event.before }}
           head: ${{ github.sha }}
-          extra_args: --results=verified,unknown --no-update --redact=100 --fail
+          version: "3.97.4"
+          extra_args: --results=verified,unknown
       - name: Scan initial repository contents
         if: github.event_name == 'push' && github.event.before == '0000000000000000000000000000000000000000'
         uses: trufflesecurity/trufflehog@ea33cd04a6b7a910430b5ee9b1559576b332c14d # main
         with:
           path: ./
-          extra_args: --results=verified,unknown --no-update --redact=100 --fail
+          version: "3.97.4"
+          extra_args: --results=verified,unknown
 
   required:
     name: CI / required
