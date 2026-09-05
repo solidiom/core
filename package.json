@@ -77,7 +77,7 @@
     "beta:acceptance:e2e": "playwright test --config tests/beta-acceptance/playwright.config.ts",
     "visual:container": "bash tools/visual-container.sh",
     "visual:update:container": "bash tools/visual-container.sh --update",
-    "test:tools": "vitest run --config vitest.config.ts tools/",
+    "test:tools": "vitest run --config vitest.config.ts --no-file-parallelism tools/",
     "audit:adapter-styling": "tsx tools/audit-adapter-styling.ts",
     "beta:artifacts": "tsx tools/generate-beta-artifacts.ts",
     "beta:artifacts:verify": "tsx tools/generate-beta-artifacts.ts --verify",
