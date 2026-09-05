@@ -188,12 +188,19 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
       - name: Validate immutable Actions and runner policy
         run: node tools/ci/validate-workflows.mjs
 
   secret-scan:
     name: Content secret scan
-    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
+    # The TruffleHog action starts a sibling Docker container and bind-mounts
+    # the checkout. Our self-hosted runner itself is containerized, so its
+    # workspace path does not exist on the host Docker daemon.
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

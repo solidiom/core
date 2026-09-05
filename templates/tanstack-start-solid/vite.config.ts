@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite"
 import { tanstackStart } from "@tanstack/solid-start/plugin/vite"
 
 export default defineConfig({
-  plugins: [tailwindcss(), tanstackStart(), solid()],
+  plugins: [tailwindcss(), tanstackStart(), solid({ ssr: true })],
   build: {
     target: "es2022",
   },

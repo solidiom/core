@@ -303,7 +303,7 @@ describe("materialize", () => {
       const templateSrc = join(root, "templates", "fixture")
       writeFileSync(
         join(root, "pnpm-workspace.yaml"),
-        'packages:\n  - "packages/*"\n\ncatalog:\n  solid-js: "^2.0.0-beta.23"\n\noverrides:\n  solid-js: "2.0.0-beta.24"\n  "@solidjs/web": "2.0.0-beta.24"\n',
+        'packages:\n  - "packages/*"\n\ncatalog:\n  solid-js: "^2.0.0-beta.23"\n\noverrides:\n  solid-js: "2.0.0-beta.24"\n  "@solidjs/web": "2.0.0-beta.24"\n  "ip-address@10": "^10.5.0"\n',
       )
       writeFixtureTemplate(templateSrc, {
         "package.json": JSON.stringify(templatePackageJson),
@@ -331,10 +331,15 @@ describe("materialize", () => {
         // npm and bun read top-level `overrides`.
         expect(pkg.overrides["solid-js"]).toBe("2.0.0-beta.24")
         expect(pkg.overrides["@solidjs/web"]).toBe("2.0.0-beta.24")
-        // yarn (and bun) read top-level `resolutions`.
+        expect(pkg.overrides["ip-address@10"]).toBe("^10.5.0")
+        // Yarn (and bun) read top-level `resolutions`, whose keys are package
+        // names rather than pnpm's version-qualified selector syntax.
         expect(pkg.resolutions["solid-js"]).toBe("2.0.0-beta.24")
+        expect(pkg.resolutions["ip-address"]).toBe("^10.5.0")
+        expect(pkg.resolutions["ip-address@10"]).toBeUndefined()
         // pnpm reads `pnpm.overrides`.
         expect(pkg.pnpm.overrides["solid-js"]).toBe("2.0.0-beta.24")
+        expect(pkg.pnpm.overrides["ip-address@10"]).toBe("^10.5.0")
       } finally {
         rmSync(root, { recursive: true, force: true })
       }

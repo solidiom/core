@@ -75,8 +75,18 @@ describe("release workflow policy", () => {
     )
     const tag = read(".github/workflows/tag-on-version-merge.yml")
 
-    expect(required.split(trustedMainRunner)).toHaveLength(8)
-    expect(required).not.toContain("runs-on: ubuntu-latest")
+    const policy = required.slice(
+      required.indexOf("\n  workflow-policy:"),
+      required.indexOf("\n  secret-scan:"),
+    )
+    const secretScan = required.slice(
+      required.indexOf("\n  secret-scan:"),
+      required.indexOf("\n  required:"),
+    )
+
+    expect(required.split(trustedMainRunner)).toHaveLength(7)
+    expect(policy).toContain("actions/setup-node@")
+    expect(secretScan).toContain("runs-on: ubuntu-latest")
     expect(qualification).toContain("runs-on: ubuntu-latest")
     expect(tag).toContain("types: [closed]")
     expect(tag).toContain("github.event.pull_request.merged == true")
