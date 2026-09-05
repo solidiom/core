@@ -20,11 +20,12 @@ env:
 jobs:
   changes:
     name: Determine applicable lanes
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 5
     outputs:
       packages: ${{ steps.scope.outputs.packages }}
       site: ${{ steps.scope.outputs.site }}
+      global_impact: ${{ steps.scope.outputs.global_impact }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -52,6 +53,7 @@ jobs:
           fi
           packages=false
           site=false
+          global_impact=false
           while IFS= read -r -d '' path; do
             case "$path" in
               packages/*|tests/*|tools/*|registry/*|package.json|pnpm-lock.yaml|pnpm-workspace.yaml|nx.json|tsconfig*.json|vitest*.config.ts|.github/*)
@@ -63,15 +65,21 @@ jobs:
                 site=true
                 ;;
             esac
+            case "$path" in
+              tools/*|scripts/*|registry/*|docs/plans/consolidated-plan.md|package.json|pnpm-lock.yaml|pnpm-workspace.yaml|nx.json|tsconfig*.json|vitest*.config.ts|.github/actions/*|.github/workflows/*)
+                global_impact=true
+                ;;
+            esac
           done < <("${changed_paths_command[@]}")
           echo "packages=$packages" >> "$GITHUB_OUTPUT"
           echo "site=$site" >> "$GITHUB_OUTPUT"
+          echo "global_impact=$global_impact" >> "$GITHUB_OUTPUT"
 
   package-quality:
     name: Packages quality
     needs: changes
     if: needs.changes.outputs.packages == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -115,11 +123,41 @@ jobs:
           pnpm run theme:emit:tailwind:check
           pnpm run theme:emit:unocss:check
 
+  release-readiness:
+    name: Release readiness
+    needs: changes
+    if: needs.changes.outputs.global_impact == 'true'
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Build package prerequisites
+        run: pnpm nx run-many -t build --exclude=@solidiom/site
+      - name: Fast structural release gate
+        run: pnpm run gate:quick
+      - name: Prepare clean-checkout catalog inputs
+        run: pnpm run api:generate
+      - name: Primitive catalog release gate
+        run: pnpm run primitive:catalog-gate
+      - name: Release gate regression tests
+        run: >
+          pnpm exec vitest run
+          tools/release-preflight.test.ts
+          tools/gate-helpers.test.ts
+          tools/release-workflow.test.ts
+          --no-file-parallelism
+
   site-quality:
     name: Site quality
     needs: changes
     if: needs.changes.outputs.site == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -143,7 +181,7 @@ jobs:
 
   workflow-policy:
     name: Workflow policy
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -155,7 +193,7 @@ jobs:
 
   secret-scan:
     name: Content secret scan
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -194,9 +232,9 @@ jobs:
 
   required:
     name: CI / required
-    needs: [changes, package-quality, site-quality, workflow-policy, secret-scan]
+    needs: [changes, package-quality, release-readiness, site-quality, workflow-policy, secret-scan]
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 5
     steps:
       - name: Fail when an applicable lane failed or was cancelled
@@ -204,6 +242,8 @@ jobs:
           CHANGES_RESULT: ${{ needs.changes.result }}
           PACKAGE_RESULT: ${{ needs.package-quality.result }}
           PACKAGE_APPLICABLE: ${{ needs.changes.outputs.packages }}
+          RELEASE_RESULT: ${{ needs.release-readiness.result }}
+          RELEASE_APPLICABLE: ${{ needs.changes.outputs.global_impact }}
           SITE_RESULT: ${{ needs.site-quality.result }}
           SITE_APPLICABLE: ${{ needs.changes.outputs.site }}
           POLICY_RESULT: ${{ needs.workflow-policy.result }}
@@ -215,6 +255,10 @@ jobs:
           [[ "$SECRET_RESULT" == success ]] || { echo "secret-scan: $SECRET_RESULT"; exit 1; }
           if [[ "$PACKAGE_APPLICABLE" == true && "$PACKAGE_RESULT" != success ]]; then
             echo "package-quality: $PACKAGE_RESULT (applicable)"
+            exit 1
+          fi
+          if [[ "$RELEASE_APPLICABLE" == true && "$RELEASE_RESULT" != success ]]; then
+            echo "release-readiness: $RELEASE_RESULT (global-impact change)"
             exit 1
           fi
           if [[ "$SITE_APPLICABLE" == true && "$SITE_RESULT" != success ]]; then

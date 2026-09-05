@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest"
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from "node:fs"
 import { tmpdir, homedir } from "node:os"
-import { join, resolve, dirname } from "node:path"
+import { basename, dirname, join, resolve } from "node:path"
 import { runCreate, isValidPackageName, createCleanupJournal } from "./create"
 
 /**
@@ -195,7 +195,7 @@ describe("create", () => {
       // name validator's leading-dot rule.
       const home = resolve(homedir())
       const parent = dirname(home)
-      const base = home.slice(parent.length + 1).toLowerCase()
+      const base = basename(home)
       if (!/^[a-z0-9-._~]+$/.test(base) || base.startsWith(".") || base.startsWith("_")) {
         // If the real home directory's basename isn't a valid package name
         // on this machine, skip — the check itself is still covered by the

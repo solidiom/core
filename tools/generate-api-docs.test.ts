@@ -1,6 +1,29 @@
 import { describe, expect, it } from "vitest"
 import { API_SCHEMA_URL, API_SCHEMA_VERSION } from "./api-schema"
-import { normalizeTypeDocProject } from "./generate-api-docs"
+import { mapWithConcurrency, normalizeTypeDocProject } from "./generate-api-docs"
+
+describe("generate-api-docs: bounded concurrency", () => {
+  it("limits live TypeDoc-style operations while preserving result order", async () => {
+    let active = 0
+    let maximumActive = 0
+    const results = await mapWithConcurrency([1, 2, 3, 4, 5], 2, async (value) => {
+      active++
+      maximumActive = Math.max(maximumActive, active)
+      await new Promise((resolve) => setTimeout(resolve, 2))
+      active--
+      return value * 10
+    })
+
+    expect(maximumActive).toBe(2)
+    expect(results).toEqual([10, 20, 30, 40, 50])
+  })
+
+  it("rejects invalid concurrency", async () => {
+    await expect(mapWithConcurrency([1], 0, async (value) => value)).rejects.toThrow(
+      /positive integer/,
+    )
+  })
+})
 
 /**
  * Minimal serialized-TypeDoc-project fixtures. These mirror the shape

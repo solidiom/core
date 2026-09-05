@@ -1,6 +1,7 @@
 name: Release
 permissions:
   contents: read
+  checks: read
 
 # Production release workflow. The release model is split in two so that a
 # release run NEVER mutates the repository:
@@ -162,12 +163,79 @@ jobs:
           fi
           echo "Tag matches a committed package version."
 
+  # ─── Exact-SHA qualification wait ─────────────────────────────────────────────
+  # Use a GitHub-hosted runner for the wait so a single-capacity self-hosted
+  # pool remains free to execute the package qualification being awaited.
+
+  qualification:
+    needs: [plan, verify-tag]
+    if: >
+      always() &&
+      needs.plan.outputs.deploy_packages == 'true' &&
+      (needs.verify-tag.result == 'success' || needs.verify-tag.result == 'skipped')
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
+      - name: Wait for exact-SHA required CI and release qualification
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >
+          node tools/release-preflight.mjs
+          --packages=false
+          --site=false
+          --verify-ci=true
+
+  # ─── Fail-fast release preflight ──────────────────────────────────────────────
+  # Validate target-specific credentials before dependency installation, builds,
+  # or browser setup. The script uses only Node built-ins so this remains cheap.
+
+  preflight:
+    needs: [plan, verify-tag]
+    if: >
+      always() &&
+      (needs.plan.outputs.deploy_packages == 'true' || needs.plan.outputs.deploy_site == 'true') &&
+      (needs.verify-tag.result == 'success' || needs.verify-tag.result == 'skipped')
+    runs-on: self-hosted-dfw-flex
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          package-manager-cache: false
+      - name: Validate release credentials and service access
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          REGISTRY_SIGN_KEY: ${{ secrets.REGISTRY_SIGN_KEY }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: >
+          node tools/release-preflight.mjs
+          --packages=${{ needs.plan.outputs.deploy_packages }}
+          --site=${{ needs.plan.outputs.deploy_site }}
+          --verify-ci=false
+
   # ─── Gate ──────────────────────────────────────────────────────────────────────
 
   gate:
-    needs: [plan, verify-tag]
-    # verify-tag is skipped on dispatch; allow the gate to proceed then.
-    if: always() && needs.plan.outputs.run_gate == 'true' && (needs.verify-tag.result == 'success' || needs.verify-tag.result == 'skipped')
+    needs: [plan, verify-tag, qualification, preflight]
+    # verify-tag is skipped on dispatch; both exact-SHA qualification and
+    # credential preflight must succeed before the expensive gate begins.
+    if: >
+      always() &&
+      needs.plan.outputs.run_gate == 'true' &&
+      needs.qualification.result == 'success' &&
+      needs.preflight.result == 'success' &&
+      (needs.verify-tag.result == 'success' || needs.verify-tag.result == 'skipped')
     runs-on: self-hosted-dfw-flex
     timeout-minutes: 45
     steps:
@@ -179,12 +247,22 @@ jobs:
           playwright: chromium
       - run: pnpm nx run-many -t build --exclude=@solidiom/site
       - name: Run gate
+        env:
+          SOLIDIOM_GATE_REPORT_DIR: artifacts/gate-reports
         run: |
           if [ "${{ needs.plan.outputs.gate_level }}" = "full" ]; then
             pnpm run gate:full
           else
             pnpm run gate:quick
           fi
+      - name: Upload gate diagnostics
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: release-gate-diagnostics
+          path: artifacts/gate-reports/
+          if-no-files-found: ignore
+          retention-days: 7
 
   # ─── Publish Packages ─────────────────────────────────────────────────────────
   # Git read-only. The tree is already at its final versions (from the merged
@@ -193,8 +271,12 @@ jobs:
   # committed, and uploads immutable artifacts.
 
   publish-packages:
-    needs: [plan, gate]
-    if: always() && needs.plan.outputs.deploy_packages == 'true' && (needs.gate.result == 'success' || needs.gate.result == 'skipped')
+    needs: [plan, preflight, gate]
+    if: >
+      always() &&
+      needs.plan.outputs.deploy_packages == 'true' &&
+      needs.preflight.result == 'success' &&
+      needs.gate.result == 'success'
     runs-on: self-hosted-dfw-flex
     timeout-minutes: 45
     permissions:
@@ -252,12 +334,16 @@ jobs:
   # ─── Deploy Site ───────────────────────────────────────────────────────────────
 
   deploy-site:
-    needs: [plan, publish-packages]
-    # Run if: site deploy requested AND (packages succeeded/skipped)
-    if: |
+    needs: [plan, preflight, gate, publish-packages]
+    # Site-only dispatches do not run a package gate. Combined releases deploy
+    # only after both qualification and package publication succeed; a skipped
+    # publish caused by a failed gate must never authorize deployment.
+    if: >
       always() &&
       needs.plan.outputs.deploy_site == 'true' &&
-      (needs.publish-packages.result == 'success' || needs.publish-packages.result == 'skipped')
+      needs.preflight.result == 'success' &&
+      (needs.plan.outputs.deploy_packages == 'false' ||
+        (needs.gate.result == 'success' && needs.publish-packages.result == 'success'))
     runs-on: self-hosted-dfw-flex
     timeout-minutes: 45
     permissions:

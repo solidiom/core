@@ -29,7 +29,9 @@ jobs:
     if: >
       github.event.pull_request.merged == true &&
       startsWith(github.event.pull_request.head.ref, 'release/version-')
-    runs-on: ubuntu-latest
+    # This job executes only after the reviewed Version PR is merged and checks
+    # out that trusted merge commit, so it is safe to use the self-hosted pool.
+    runs-on: self-hosted-dfw-flex
     timeout-minutes: 45
     permissions:
       contents: write
