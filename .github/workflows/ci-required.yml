@@ -20,7 +20,7 @@ env:
 jobs:
   changes:
     name: Determine applicable lanes
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 5
     outputs:
       packages: ${{ steps.scope.outputs.packages }}
@@ -79,7 +79,7 @@ jobs:
     name: Packages quality
     needs: changes
     if: needs.changes.outputs.packages == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -127,7 +127,7 @@ jobs:
     name: Release readiness
     needs: changes
     if: needs.changes.outputs.global_impact == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -155,7 +155,7 @@ jobs:
     name: Site quality
     needs: changes
     if: needs.changes.outputs.site == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -179,7 +179,7 @@ jobs:
 
   workflow-policy:
     name: Workflow policy
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -191,7 +191,7 @@ jobs:
 
   secret-scan:
     name: Content secret scan
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -232,7 +232,7 @@ jobs:
     name: CI / required
     needs: [changes, package-quality, release-readiness, site-quality, workflow-policy, secret-scan]
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}
     timeout-minutes: 5
     steps:
       - name: Fail when an applicable lane failed or was cancelled

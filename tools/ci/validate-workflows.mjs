@@ -17,8 +17,11 @@ const actionFiles = collectYamlFiles(join(root, ".github", "actions")).sort()
 const files = [...workflowFiles, ...actionFiles]
 const errors = []
 const thirdPartyAction = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+(?:\/[A-Za-z0-9_.-]+)*$/
-const selfHostedRunner =
-  /runs-on:\s*(?:self-hosted(?:[-\w]*)?|\[[^\]]*\bself-hosted(?:[-\w]*)?\b[^\]]*\])/
+const selfHostedLabel = /\bself-hosted(?:[-\w]*)?\b/
+const trustedPullRequestRunner =
+  "${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}"
+const runnerValues = (text) =>
+  [...text.matchAll(/^\s*runs-on:\s*(.+?)\s*$/gm)].map(([, value]) => value)
 
 for (const file of files) {
   const text = readFileSync(file, "utf8")
@@ -54,14 +57,36 @@ if (!/^\s*pull_request:\s*$/m.test(required) || !/^\s*push:\s*$/m.test(required)
 if (!/name:\s*CI \/ required/.test(required) || !/if:\s*always\(\)/.test(required)) {
   errors.push("ci-required.yml: stable always-reporting aggregate is missing")
 }
-if (selfHostedRunner.test(required)) {
-  errors.push("ci-required.yml: untrusted CI must not use self-hosted runners")
+const requiredRunners = runnerValues(required)
+if (
+  requiredRunners.length === 0 ||
+  requiredRunners.some((runner) => runner !== trustedPullRequestRunner)
+) {
+  errors.push(
+    "ci-required.yml: every job must keep pull requests hosted and use self-hosted only for trusted pushes",
+  )
 }
 
 for (const file of workflowFiles) {
+  const display = file.slice(root.length + 1)
   const text = readFileSync(file, "utf8").replace(/^\s*#.*$/gm, "")
-  if (/^\s*pull_request\s*:/m.test(text) && selfHostedRunner.test(text)) {
-    errors.push(`${file.slice(root.length + 1)}: pull_request workflow uses self-hosted runner`)
+  if (!/^\s*pull_request\s*:/m.test(text)) continue
+
+  const hasUnsafeSelfHostedRunner = runnerValues(text).some(
+    (runner) => selfHostedLabel.test(runner) && runner !== trustedPullRequestRunner,
+  )
+  if (!hasUnsafeSelfHostedRunner) continue
+
+  const isTrustedPostMergeTag =
+    display === ".github/workflows/tag-on-version-merge.yml" &&
+    /^\s*types:\s*\[closed\]\s*$/m.test(text) &&
+    /^\s*branches:\s*\[main\]\s*$/m.test(text) &&
+    /github\.event\.pull_request\.merged == true/.test(text) &&
+    /startsWith\(github\.event\.pull_request\.head\.ref, 'release\/version-'\)/.test(text) &&
+    /ref:\s*\$\{\{ github\.event\.pull_request\.merge_commit_sha \}\}/.test(text)
+
+  if (!isTrustedPostMergeTag) {
+    errors.push(`${display}: pull_request workflow exposes an untrusted job to self-hosted runners`)
   }
 }
 

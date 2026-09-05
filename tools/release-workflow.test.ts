@@ -52,6 +52,26 @@ describe("release workflow policy", () => {
     expect(workflow).toContain("pnpm run primitive:catalog-gate")
     expect(workflow).toContain("RELEASE_APPLICABLE: ${{ needs.changes.outputs.global_impact }}")
   })
+
+  it("uses self-hosted runners only for trusted main and post-merge work", () => {
+    const required = read(".github/workflows/ci-required.yml")
+    const trustedMainRunner =
+      "runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}"
+    const release = read(".github/workflows/release.yml")
+    const qualification = release.slice(
+      release.indexOf("\n  qualification:"),
+      release.indexOf("\n  preflight:"),
+    )
+    const tag = read(".github/workflows/tag-on-version-merge.yml")
+
+    expect(required.split(trustedMainRunner)).toHaveLength(8)
+    expect(required).not.toContain("runs-on: ubuntu-latest")
+    expect(qualification).toContain("runs-on: ubuntu-latest")
+    expect(tag).toContain("types: [closed]")
+    expect(tag).toContain("github.event.pull_request.merged == true")
+    expect(tag).toContain("ref: ${{ github.event.pull_request.merge_commit_sha }}")
+    expect(tag).toContain("runs-on: self-hosted-dfw-flex")
+  })
 })
 
 describe("release gate ordering", () => {
