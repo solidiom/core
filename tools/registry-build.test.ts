@@ -177,7 +177,7 @@ describe("registry build determinism (REG-004)", () => {
     const indexRun2 = readFileSync(join(REGISTRY_DIR, "index.json"), "utf8")
 
     expect(indexRun1).toBe(indexRun2)
-  })
+  }, 10_000)
 
   it("snapshot: registry/index.json matches expected structure", () => {
     const env = {

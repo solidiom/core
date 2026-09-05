@@ -210,6 +210,11 @@ jobs:
           else
             pnpm test
           fi
+      - name: Generate vertical-slice API test fixtures
+        run: |
+          pnpm run api:generate -- --package dialog
+          pnpm run api:generate -- --package combobox
+          pnpm run api:generate -- --package data-table
       - run: pnpm run test:tools
 
   # ─── Tests (Browser) ──────────────────────────────────────────────────────────

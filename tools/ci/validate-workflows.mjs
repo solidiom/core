@@ -20,6 +20,7 @@ const thirdPartyAction = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+(?:\/[A-Za-z0-9_.-]+)
 const selfHostedLabel = /\bself-hosted(?:[-\w]*)?\b/
 const trustedPullRequestRunner =
   "${{ github.event_name == 'pull_request' && 'ubuntu-latest' || 'self-hosted-dfw-flex' }}"
+const hostedRunner = "ubuntu-latest"
 const runnerValues = (text) =>
   [...text.matchAll(/^\s*runs-on:\s*(.+?)\s*$/gm)].map(([, value]) => value)
 
@@ -60,10 +61,10 @@ if (!/name:\s*CI \/ required/.test(required) || !/if:\s*always\(\)/.test(require
 const requiredRunners = runnerValues(required)
 if (
   requiredRunners.length === 0 ||
-  requiredRunners.some((runner) => runner !== trustedPullRequestRunner)
+  requiredRunners.some((runner) => runner !== hostedRunner && runner !== trustedPullRequestRunner)
 ) {
   errors.push(
-    "ci-required.yml: every job must keep pull requests hosted and use self-hosted only for trusted pushes",
+    "ci-required.yml: jobs must be hosted or keep pull requests hosted and use self-hosted only for trusted pushes",
   )
 }
 

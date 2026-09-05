@@ -336,28 +336,45 @@ function applyDependencyOverrides(
 
   let changed = false
 
-  const fillGaps = (existing: unknown): Record<string, string> => {
+  const yarnResolutionKey = (selector: string): string => {
+    const separator = selector.startsWith("@")
+      ? selector.indexOf("@", selector.indexOf("/") + 1)
+      : selector.indexOf("@")
+    return separator > 0 ? selector.slice(0, separator) : selector
+  }
+  const yarnResolutions = Object.fromEntries(
+    Object.entries(overrides).map(([selector, version]) => [yarnResolutionKey(selector), version]),
+  )
+
+  const fillGaps = (
+    existing: unknown,
+    defaults: Record<string, string>,
+  ): Record<string, string> => {
     const declared =
       existing && typeof existing === "object" ? (existing as Record<string, string>) : {}
-    return { ...overrides, ...declared }
+    return { ...defaults, ...declared }
   }
 
-  const setIfChanged = (target: Record<string, unknown>, key: string): void => {
-    const next = fillGaps(target[key])
+  const setIfChanged = (
+    target: Record<string, unknown>,
+    key: string,
+    defaults: Record<string, string>,
+  ): void => {
+    const next = fillGaps(target[key], defaults)
     if (JSON.stringify(target[key]) !== JSON.stringify(next)) {
       target[key] = next
       changed = true
     }
   }
 
-  setIfChanged(data, "overrides")
-  setIfChanged(data, "resolutions")
+  setIfChanged(data, "overrides", overrides)
+  setIfChanged(data, "resolutions", yarnResolutions)
 
   const pnpmSection =
     data["pnpm"] && typeof data["pnpm"] === "object"
       ? (data["pnpm"] as Record<string, unknown>)
       : {}
-  setIfChanged(pnpmSection, "overrides")
+  setIfChanged(pnpmSection, "overrides", overrides)
   data["pnpm"] = pnpmSection
 
   return changed
