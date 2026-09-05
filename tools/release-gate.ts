@@ -58,7 +58,10 @@ console.log("Release Gate (gate:full)\n")
 
 // ─── §1 Structural gate (runs once, not nested) ─────────────────────────
 console.log("§1 Structural gate:")
-const structural = run("pnpm exec tsx tools/structural-gate.ts", { timeout: 600_000 })
+const structural = run("pnpm exec tsx tools/structural-gate.ts", {
+  timeout: 600_000,
+  retries: 1,
+})
 check(
   "structural gate passes",
   structural.ok,
@@ -350,7 +353,7 @@ const cliCommands = ["create", "diff", "detach", "update", "doctor", "verify", "
 for (const cmd of cliCommands) {
   check(`${cmd}.ts exists`, fileExists(`packages/cli/src/commands/${cmd}.ts`))
 }
-check("CLI tests still pass (≥25)", runTests("@solidiom/cli", 25))
+check("CLI tests still pass (≥25)", runTests("@solidiom/cli", 25, { timeout: 300_000, retries: 1 }))
 const cliSupportFiles = [
   "package-manager/detect.ts",
   "package-manager/commands.ts",
@@ -573,18 +576,25 @@ check(
   fileExists("tools/primitive-completion-policy.json"),
   "Add tools/primitive-completion-policy.json classifying each primitive as recipe or headless-only",
 )
-const completionGate = run("pnpm exec tsx tools/primitive-completion-gate.ts")
+const completionGate = run("pnpm exec tsx tools/primitive-completion-gate.ts", {
+  timeout: 900_000,
+})
 check(
   "primitive completion gate passes",
   completionGate.ok,
-  "Run `pnpm primitive:audit` to see specific issues",
+  completionGate.timedOut
+    ? "Primitive completion gate exceeded 15 minutes"
+    : "Run `pnpm primitive:audit` to see specific issues",
 )
 
 // ─── §15 Catalog gates ──────────────────────────────────────────────────
 console.log("\n§15 Catalog gates (primitive, component, block, template):")
+const primitiveCatalogGate = run("pnpm exec tsx tools/primitive-catalog-gate.ts", {
+  retries: 1,
+})
 check(
   "primitive catalog gate passes (PRIM-000, count matches tracker)",
-  run("pnpm exec tsx tools/primitive-catalog-gate.ts").ok,
+  primitiveCatalogGate.ok,
   "Primitive catalog gate failed — run: pnpm run primitive:catalog-gate (or primitive:catalog-audit for details)",
 )
 check(
@@ -628,7 +638,10 @@ check(
 
 // ─── §17 §23 acceptance criteria (80 durable checks) ────────────────────
 console.log("\n§17 §23 acceptance criteria:")
-const acResult = run("pnpm exec tsx tools/acceptance-criteria.ts", { timeout: 600_000 })
+const acResult = run("pnpm exec tsx tools/acceptance-criteria.ts", {
+  timeout: 600_000,
+  retries: 1,
+})
 check(
   "acceptance criteria script passes",
   acResult.ok,

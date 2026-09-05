@@ -49,37 +49,88 @@ export function summarize(phase: string): never {
   process.exit(0)
 }
 
-/** Run a shell command and return { ok, stdout, stderr }. */
-export function run(
-  cmd: string,
-  opts?: { cwd?: string; timeout?: number },
-): { ok: boolean; stdout: string; stderr: string; timedOut?: boolean } {
+export interface RunOptions {
+  cwd?: string
+  timeout?: number
+  retries?: number
+}
+
+export interface RunResult {
+  ok: boolean
+  stdout: string
+  stderr: string
+  timedOut?: boolean
+  attempts: number
+}
+
+function outputTail(output: string, maxLines = 80): string {
+  const lines = output.trimEnd().split("\n")
+  return lines.slice(-maxLines).join("\n")
+}
+
+/** Run a shell command and return its captured result. */
+export function run(cmd: string, opts?: RunOptions): RunResult {
   const cwd = opts?.cwd ?? ROOT
   const timeout = opts?.timeout ?? 300_000
-  try {
-    const stdout = execSync(cmd, {
-      cwd,
-      encoding: "utf8",
-      stdio: ["pipe", "pipe", "pipe"],
-      timeout,
-      maxBuffer: 64 * 1024 * 1024,
-    })
-    return { ok: true, stdout, stderr: "" }
-  } catch (err: unknown) {
-    const e = err as { stdout?: string; stderr?: string; status?: number; signal?: string }
-    // execSync kills the process with SIGTERM and sets `signal` (not `status`) on timeout —
-    // surface that distinctly so a slow-but-fine command isn't indistinguishable from a real failure.
-    const timedOut = e.signal === "SIGTERM" || e.signal === "SIGKILL"
-    return { ok: false, stdout: e.stdout ?? "", stderr: e.stderr ?? "", timedOut }
+  const maxAttempts = (opts?.retries ?? 0) + 1
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const stdout = execSync(cmd, {
+        cwd,
+        encoding: "utf8",
+        stdio: ["pipe", "pipe", "pipe"],
+        timeout,
+        maxBuffer: 64 * 1024 * 1024,
+      })
+      return { ok: true, stdout, stderr: "", attempts: attempt }
+    } catch (err: unknown) {
+      const e = err as { stdout?: string; stderr?: string; status?: number; signal?: string }
+      // execSync kills the process with SIGTERM and sets `signal` (not `status`) on timeout —
+      // surface that distinctly so a slow-but-fine command isn't indistinguishable from a real failure.
+      const timedOut = e.signal === "SIGTERM" || e.signal === "SIGKILL"
+      const result: RunResult = {
+        ok: false,
+        stdout: e.stdout ?? "",
+        stderr: e.stderr ?? "",
+        timedOut,
+        attempts: attempt,
+      }
+
+      if (attempt < maxAttempts) {
+        console.warn(
+          `  ↻ command failed${timedOut ? " (timed out)" : ""}; retrying ${cmd} (${attempt + 1}/${maxAttempts})`,
+        )
+        continue
+      }
+
+      const captured = [result.stdout, result.stderr].filter(Boolean).join("\n")
+      console.error(
+        `\n--- failed command (${attempt}/${maxAttempts}${timedOut ? ", timed out" : ""}): ${cmd} ---`,
+      )
+      if (captured) console.error(outputTail(captured))
+      console.error("--- end failed command ---\n")
+      return result
+    }
   }
+
+  throw new Error(`unreachable: no attempt made for ${cmd}`)
 }
 
 /**
  * Run tests for a package and verify they pass with a minimum count AND zero failures.
  * Returns true only if the test output reports >= minTests passing and 0 failed.
  */
-export function runTests(pkg: string, minTests: number, opts?: { timeout?: number }): boolean {
-  const result = run(`pnpm --filter ${pkg} test`, { cwd: ROOT, timeout: opts?.timeout })
+export function runTests(
+  pkg: string,
+  minTests: number,
+  opts?: { timeout?: number; retries?: number },
+): boolean {
+  const result = run(`pnpm --filter ${pkg} test`, {
+    cwd: ROOT,
+    timeout: opts?.timeout,
+    retries: opts?.retries,
+  })
 
   // Strip ANSI escape codes before matching
   const combined = (result.stdout + result.stderr).replace(/\x1B\[[0-9;]*m/g, "")

@@ -449,6 +449,13 @@ run = [
   "mise run ci:gate:quick",
 ]
 
+[tasks."ci:release"]
+description = "Dry-run the complete release path locally: run all CI tests without publishing or deploying"
+run = [
+  'echo "Release dry run: running all CI checks; publishing, signing, uploads, and deployment are disabled."',
+  "mise run ci:full",
+]
+
 [tasks."ci:full"]
 description = "Run the local comprehensive main/full-dispatch CI checks (both targets)"
 run = [

@@ -3273,9 +3273,7 @@ Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
       "signatures": [
         {
           "comment": {
-            "summary": "Portal wrapper — renders children only when present.
-In Solid 2 beta, native Portal API is not yet stable.
-This renders inline with Show; actual DOM portalling deferred.",
+            "summary": "Renders present dialog content at the document portal target.",
             "tags": [],
           },
           "parameters": [
@@ -3287,17 +3285,17 @@ This renders inline with Show; actual DOM portalling deferred.",
           ],
           "returns": "Element",
           "source": {
-            "line": 117,
+            "line": 113,
             "path": "packages/dialog/src/dialog.tsx",
-            "url": "https://github.com/solidiom/core/blob/main/packages/dialog/src/dialog.tsx#L117",
+            "url": "https://github.com/solidiom/core/blob/main/packages/dialog/src/dialog.tsx#L113",
           },
           "typeParameters": [],
         },
       ],
       "source": {
-        "line": 117,
+        "line": 113,
         "path": "packages/dialog/src/dialog.tsx",
-        "url": "https://github.com/solidiom/core/blob/main/packages/dialog/src/dialog.tsx#L117",
+        "url": "https://github.com/solidiom/core/blob/main/packages/dialog/src/dialog.tsx#L113",
       },
     },
     {

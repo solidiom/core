@@ -11,14 +11,19 @@
  * exercised in CI via the structural-gate consumer step.
  */
 
-import { describe, it, expect, beforeAll } from "vitest"
+import { describe, it, expect, beforeAll, afterAll } from "vitest"
 import { execFileSync } from "node:child_process"
-import { existsSync, readFileSync, mkdtempSync, rmSync, readdirSync } from "node:fs"
+import { existsSync, readFileSync, mkdtempSync, rmSync, readdirSync, cpSync } from "node:fs"
 import { join, resolve } from "node:path"
 import { tmpdir } from "node:os"
 
 const ROOT = resolve(import.meta.dirname ?? __dirname, "..")
 const PACK_DIR = mkdtempSync(join(tmpdir(), "solidiom-consumer-proof-"))
+const REGISTRY_PATH = join(ROOT, "registry")
+const REGISTRY_BACKUP_ROOT = mkdtempSync(join(tmpdir(), "solidiom-registry-backup-"))
+const REGISTRY_BACKUP_PATH = join(REGISTRY_BACKUP_ROOT, "registry")
+
+cpSync(REGISTRY_PATH, REGISTRY_BACKUP_PATH, { recursive: true })
 
 function exec(command: string, args: string[], cwd = ROOT): string {
   return execFileSync(command, args, {
@@ -139,10 +144,8 @@ describe("registry determinism", () => {
 
 // Cleanup
 afterAll(() => {
-  try {
-    rmSync(PACK_DIR, { recursive: true, force: true })
-  } catch {}
+  rmSync(REGISTRY_PATH, { recursive: true, force: true })
+  cpSync(REGISTRY_BACKUP_PATH, REGISTRY_PATH, { recursive: true })
+  rmSync(REGISTRY_BACKUP_ROOT, { recursive: true, force: true })
+  rmSync(PACK_DIR, { recursive: true, force: true })
 })
-
-// Need afterAll import
-import { afterAll } from "vitest"

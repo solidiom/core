@@ -105,6 +105,7 @@ All tasks are defined in `.mise.toml`. Run `mise tasks` to list them.
 | `mise run test:e2e`                            | Run end-to-end tests                            |
 | `mise run ci:quick`                            | Run the fast local PR-tier CI checks            |
 | `mise run ci:full`                             | Run the comprehensive local CI checks           |
+| `mise run ci:release`                          | Dry-run release CI without publishing           |
 | `mise run nightly:browser-full`                | Run the Chromium, Firefox, and WebKit suite     |
 | `mise run changeset`                           | Create a Changeset                              |
 | `mise run release:publish`                     | Dispatch the GitHub package-and-site release    |

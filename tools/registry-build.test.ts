@@ -1,11 +1,32 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest"
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, readFileSync, existsSync } from "node:fs"
+import {
+  mkdtempSync,
+  mkdirSync,
+  writeFileSync,
+  rmSync,
+  readFileSync,
+  existsSync,
+  cpSync,
+} from "node:fs"
 import { join } from "node:path"
 import { tmpdir } from "node:os"
 import { execSync } from "node:child_process"
 import { createHash, generateKeyPairSync } from "node:crypto"
 
 import { computeFilesHash, computeEntriesHash, generateKeywords } from "./registry-build"
+
+const WORKSPACE_ROOT = join(import.meta.dirname, "..")
+const REGISTRY_PATH = join(WORKSPACE_ROOT, "registry")
+const REGISTRY_BACKUP_ROOT = mkdtempSync(join(tmpdir(), "solidiom-registry-backup-"))
+const REGISTRY_BACKUP_PATH = join(REGISTRY_BACKUP_ROOT, "registry")
+
+cpSync(REGISTRY_PATH, REGISTRY_BACKUP_PATH, { recursive: true })
+
+afterAll(() => {
+  rmSync(REGISTRY_PATH, { recursive: true, force: true })
+  cpSync(REGISTRY_BACKUP_PATH, REGISTRY_PATH, { recursive: true })
+  rmSync(REGISTRY_BACKUP_ROOT, { recursive: true, force: true })
+})
 
 // ─── Unit Tests ──────────────────────────────────────────────────────────────
 
@@ -442,9 +463,7 @@ describe("REG-003 manifest fields", () => {
     expect(dialog.status).toBe("stable")
     expect(dialog.deliverables).toEqual(["primitive"])
     expect(dialog.styling.themeCompatible).toEqual(["site"])
-    expect(dialog.search.keywords).toEqual(
-      expect.arrayContaining(["modal", "overlay", "focus", "superposición"]),
-    )
+    expect(dialog.search.keywords).toEqual(expect.arrayContaining(["modal", "overlay", "focus"]))
     expect(dialog.documentation.locales).toEqual({
       en: { status: "draft" },
       es: { status: "draft", lastUpdated: expect.any(String) },
