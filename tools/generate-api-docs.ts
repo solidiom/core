@@ -88,12 +88,11 @@ function discoverPrimitivePackages(): PackageInfo[] {
 
       try {
         const pkg = JSON.parse(readFileSync(packagePath, "utf8")) as PackageJson
-        // probe-primitive is a private dual-emission verification fixture from
-        // the workspace bootstrap (see docs/plans/implementation-plan.md
-        // Task 2), not a catalog entry. It carries layer:primitive only to
-        // exercise the same build/tag wiring as real primitives, so it must
-        // stay out of the public API artifacts this generator produces.
-        return pkg.nx?.tags?.includes("layer:primitive") && pkg.name !== "@solidiom/probe-primitive"
+        // probe-primitive is a private dual-emission verification fixture and
+        // @solidiom/primitives is the umbrella re-export package; neither is a
+        // standalone public primitive catalog entry.
+        const excluded = new Set(["@solidiom/probe-primitive", "@solidiom/primitives"])
+        return pkg.nx?.tags?.includes("layer:primitive") && !excluded.has(pkg.name ?? "")
           ? [{ name: pkg.name ?? entry.name, dir }]
           : []
       } catch {
@@ -490,6 +489,27 @@ async function generateForPackage(pkg: PackageInfo): Promise<boolean> {
   }
 }
 
+export async function mapWithConcurrency<T, R>(
+  items: readonly T[],
+  concurrency: number,
+  operation: (item: T) => Promise<R>,
+): Promise<R[]> {
+  if (!Number.isInteger(concurrency) || concurrency < 1) {
+    throw new Error(`Concurrency must be a positive integer (received ${concurrency}).`)
+  }
+  const results = new Array<R>(items.length)
+  let nextIndex = 0
+  const worker = async (): Promise<void> => {
+    while (nextIndex < items.length) {
+      const index = nextIndex++
+      results[index] = await operation(items[index])
+    }
+  }
+  const workerCount = Math.min(concurrency, items.length)
+  await Promise.all(Array.from({ length: workerCount }, () => worker()))
+  return results
+}
+
 async function main(): Promise<void> {
   const { packageFilter } = parseArgs()
   let packages = discoverPrimitivePackages()
@@ -508,7 +528,10 @@ async function main(): Promise<void> {
 
   mkdirSync(OUTPUT_DIR, { recursive: true })
   console.log(`API: generating ${packages.length} normalized TypeDoc artifact(s)...`)
-  const results = await Promise.all(packages.map(generateForPackage))
+  // Each TypeDoc application creates a full TypeScript program. Launching one
+  // per primitive with unbounded Promise.all exceeds the CI Node heap, so keep
+  // only two programs live at once while preserving deterministic output order.
+  const results = await mapWithConcurrency(packages, 2, generateForPackage)
   if (results.some((result) => !result)) {
     throw new Error("API generation failed; no incomplete API artifact may be treated as current.")
   }

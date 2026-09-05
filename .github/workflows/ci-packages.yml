@@ -11,10 +11,27 @@ permissions:
 #   - full_matrix=true:  comprehensive tier (Node 24+26 matrix, a11y, CLI smoke,
 #     catalog gates) + full gate.
 #
-# Triggers are manual only for now. The `paths` filter below is dormant under
-# workflow_dispatch; re-add a `push:`/`pull_request:` trigger to activate it.
+#   - pull requests remain on the lightweight required workflow.
+#   - pushes to main run the comprehensive qualification before release.
+#   - workflow_dispatch can select either tier for diagnostics.
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/**"
+      - "tools/**"
+      - "registry/**"
+      - "docs/plans/consolidated-plan.md"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "package.json"
+      - "nx.json"
+      - "tsconfig*.json"
+      - "vitest*.config.ts"
+      - ".github/workflows/ci-packages.yml"
+      - ".github/workflows/release.yml"
+      - ".github/actions/setup/**"
   workflow_dispatch:
     inputs:
       affected_only:
@@ -29,21 +46,6 @@ on:
         default: "true"
         type: choice
         options: ["true", "false"]
-
-  # Dormant under workflow_dispatch-only triggering. Documents the package
-  # target boundary so re-enabling push/PR triggers scopes this workflow
-  # correctly. To activate, move these keys under a `push:`/`pull_request:` key.
-  #   paths:
-  #     - "packages/**"
-  #     - "tools/**"
-  #     - "registry/**"
-  #     - "pnpm-lock.yaml"
-  #     - "package.json"
-  #     - "nx.json"
-  #     - "tsconfig*.json"
-  #     - "vitest*.config.ts"
-  #     - ".github/workflows/ci-packages.yml"
-  #     - ".github/actions/setup/**"
 
 concurrency:
   group: ci-packages-${{ github.ref }}
@@ -188,7 +190,7 @@ jobs:
     timeout-minutes: 45
     strategy:
       matrix:
-        node-version: ${{ (github.event_name == 'workflow_dispatch' && inputs.full_matrix == 'true') && fromJson('[24, 26]') || fromJson('[24]') }}
+        node-version: ${{ (github.event_name != 'workflow_dispatch' || inputs.full_matrix == 'true') && fromJson('[24, 26]') || fromJson('[24]') }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -245,7 +247,7 @@ jobs:
 
   a11y-axe-scan:
     needs: build
-    if: inputs.full_matrix == 'true'
+    if: github.event_name != 'workflow_dispatch' || inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     timeout-minutes: 45
     steps:
@@ -276,7 +278,7 @@ jobs:
 
   cli-smoke-create-prep:
     needs: build
-    if: inputs.full_matrix == 'true'
+    if: github.event_name != 'workflow_dispatch' || inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     timeout-minutes: 45
     steps:
@@ -309,7 +311,7 @@ jobs:
 
   cli-smoke-create:
     needs: [build, cli-smoke-create-prep]
-    if: inputs.full_matrix == 'true'
+    if: github.event_name != 'workflow_dispatch' || inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     timeout-minutes: 45
     strategy:
@@ -351,7 +353,7 @@ jobs:
 
   catalog-gates:
     needs: build
-    if: inputs.full_matrix == 'true'
+    if: github.event_name != 'workflow_dispatch' || inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
     timeout-minutes: 45
     steps:
@@ -363,25 +365,32 @@ jobs:
         with:
           name: build-dist
           path: .
+      - name: Prepare clean-checkout primitive API artifacts
+        run: pnpm run api:generate
+      - run: pnpm run primitive:catalog-gate
       - run: pnpm run component:catalog-gate
       - run: pnpm run block:catalog-gate
+      - run: pnpm run template:catalog-gate
 
   # ─── Quality Gate (final) ──────────────────────────────────────────────────────
   # full_matrix=false: lightweight structural gate (format + typecheck + build + tests pass).
   # full_matrix=true: full durable release gate suite.
 
   gate:
+    name: Release qualification
     # `always()` lets the fast tier proceed when full-tier jobs are intentionally
     # skipped; the explicit result checks still prevent a gate after a failure.
-    needs: [typecheck, build, test-node, test-browser, a11y-axe-scan, catalog-gates]
+    needs:
+      [typecheck, build, test-node, test-browser, a11y-axe-scan, cli-smoke-create, catalog-gates]
     if: >
       always() &&
       needs.typecheck.result == 'success' &&
       needs.build.result == 'success' &&
       needs.test-node.result == 'success' &&
       needs.test-browser.result == 'success' &&
-      (inputs.full_matrix != 'true' ||
+      ((github.event_name == 'workflow_dispatch' && inputs.full_matrix != 'true') ||
         (needs.a11y-axe-scan.result == 'success' &&
+          needs.cli-smoke-create.result == 'success' &&
           needs.catalog-gates.result == 'success'))
     runs-on: self-hosted-dfw-flex
     timeout-minutes: 45
@@ -397,8 +406,20 @@ jobs:
           name: build-dist
           path: .
       - name: Gate — quick
-        if: inputs.full_matrix != 'true'
+        if: github.event_name == 'workflow_dispatch' && inputs.full_matrix != 'true'
+        env:
+          SOLIDIOM_GATE_REPORT_DIR: artifacts/gate-reports
         run: pnpm run gate:quick
       - name: Gate — full
-        if: inputs.full_matrix == 'true'
+        if: github.event_name != 'workflow_dispatch' || inputs.full_matrix == 'true'
+        env:
+          SOLIDIOM_GATE_REPORT_DIR: artifacts/gate-reports
         run: pnpm run gate:full
+      - name: Upload gate diagnostics
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: qualification-gate-diagnostics
+          path: artifacts/gate-reports/
+          if-no-files-found: ignore
+          retention-days: 7
