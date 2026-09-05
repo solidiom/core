@@ -336,12 +336,15 @@ function main(): void {
   }
 
   // Report failing primitives (with first 3 failures each)
+  // Report incomplete primitives as informational. The ratcheting assertion
+  // below decides whether incompleteness is a failure; red error markers here
+  // made successful 52/86 qualification logs look failed.
   if (failing.length > 0) {
-    console.log(`\n✗ Not yet complete (${failing.length}/${PUBLIC_PRIMITIVES.length}):`)
+    console.log(`\n○ Not yet complete (${failing.length}/${PUBLIC_PRIMITIVES.length}):`)
     for (const r of failing) {
       const detail = r.failures.slice(0, 3).join("; ")
       const more = r.failures.length > 3 ? ` (+${r.failures.length - 3} more)` : ""
-      console.log(`  ✗ ${r.name}: ${detail}${more}`)
+      console.log(`  ○ ${r.name}: ${detail}${more}`)
     }
   }
 

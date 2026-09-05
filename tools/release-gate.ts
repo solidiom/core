@@ -23,8 +23,8 @@
  *   §11 Preset themes + theme parity (THEME-005) + adapter styling audit
  *   §12 Accessibility evidence artifacts + cross-browser results
  *   §13 Bench dashboard + enterprise offline-install
- *   §14 Public primitive coverage (registry + completion gate)
- *   §15 Catalog gates (primitive, component, block, template)
+ *   §14 Catalog prerequisites and gates (primitive, component, block, template)
+ *   §15 Public primitive coverage (registry + completion gate)
  *   §16 Visual harness image pinning
  *   §17 §23 acceptance criteria (the 80 durable v1.0 criteria)
  *
@@ -51,16 +51,17 @@ import {
   fileContains,
   readJSON,
   run,
+  initializeGateDiagnostics,
   ROOT,
 } from "./gate-helpers"
 
+initializeGateDiagnostics()
 console.log("Release Gate (gate:full)\n")
 
 // ─── §1 Structural gate (runs once, not nested) ─────────────────────────
 console.log("§1 Structural gate:")
 const structural = run("pnpm exec tsx tools/structural-gate.ts", {
   timeout: 600_000,
-  retries: 1,
 })
 check(
   "structural gate passes",
@@ -353,7 +354,7 @@ const cliCommands = ["create", "diff", "detach", "update", "doctor", "verify", "
 for (const cmd of cliCommands) {
   check(`${cmd}.ts exists`, fileExists(`packages/cli/src/commands/${cmd}.ts`))
 }
-check("CLI tests still pass (≥25)", runTests("@solidiom/cli", 25, { timeout: 300_000, retries: 1 }))
+check("CLI tests still pass (≥25)", runTests("@solidiom/cli", 25, { timeout: 300_000 }))
 const cliSupportFiles = [
   "package-manager/detect.ts",
   "package-manager/commands.ts",
@@ -557,8 +558,42 @@ check(
   fileContains("packages/cli/src/commands/add.ts", "--no-network"),
 )
 
-// ─── §14 Public primitive coverage ──────────────────────────────────────
-console.log("\n§14 Public primitive coverage:")
+// ─── §14 Catalog prerequisites and gates ────────────────────────────────
+console.log("\n§14 Catalog qualification (generated API + catalog gates):")
+const apiGeneration = run("pnpm run api:generate", { timeout: 600_000 })
+check(
+  "normalized API artifacts generate from a clean checkout",
+  apiGeneration.ok,
+  apiGeneration.timedOut
+    ? "API generation exceeded 10 minutes"
+    : "Run: pnpm run api:generate — catalog qualification may not depend on leftover local artifacts",
+)
+const primitiveCatalogGate = apiGeneration.ok
+  ? run("pnpm exec tsx tools/primitive-catalog-gate.ts")
+  : { ok: false, stdout: "", stderr: "API generation failed", attempts: 0 }
+check(
+  "primitive catalog gate passes (PRIM-000, count matches tracker)",
+  primitiveCatalogGate.ok,
+  "Primitive catalog gate failed — run: pnpm run primitive:catalog-gate (or primitive:catalog-audit for details)",
+)
+check(
+  "component catalog gate passes (FOUND-004)",
+  run("pnpm exec tsx tools/component-catalog-gate.ts").ok,
+  "Component catalog gate failed — run: pnpm run component:catalog-gate",
+)
+check(
+  "block catalog gate passes (FOUND-005)",
+  run("pnpm exec tsx tools/block-catalog-gate.ts").ok,
+  "Block catalog gate failed — run: pnpm run block:catalog-gate",
+)
+check(
+  "template catalog gate passes (TPL-000)",
+  run("pnpm exec tsx tools/template-catalog-gate.ts").ok,
+  "Template catalog gate failed — run: pnpm run template:catalog-gate",
+)
+
+// ─── §15 Public primitive coverage ──────────────────────────────────────
+console.log("\n§15 Public primitive coverage:")
 const registry = readJSON<{ primitives?: unknown[] }>("registry/index.json")
 const registryCount = Array.isArray(registry?.primitives) ? registry.primitives.length : 0
 check(
@@ -585,32 +620,6 @@ check(
   completionGate.timedOut
     ? "Primitive completion gate exceeded 15 minutes"
     : "Run `pnpm primitive:audit` to see specific issues",
-)
-
-// ─── §15 Catalog gates ──────────────────────────────────────────────────
-console.log("\n§15 Catalog gates (primitive, component, block, template):")
-const primitiveCatalogGate = run("pnpm exec tsx tools/primitive-catalog-gate.ts", {
-  retries: 1,
-})
-check(
-  "primitive catalog gate passes (PRIM-000, count matches tracker)",
-  primitiveCatalogGate.ok,
-  "Primitive catalog gate failed — run: pnpm run primitive:catalog-gate (or primitive:catalog-audit for details)",
-)
-check(
-  "component catalog gate passes (FOUND-004)",
-  run("pnpm exec tsx tools/component-catalog-gate.ts").ok,
-  "Component catalog gate failed — run: pnpm run component:catalog-gate",
-)
-check(
-  "block catalog gate passes (FOUND-005)",
-  run("pnpm exec tsx tools/block-catalog-gate.ts").ok,
-  "Block catalog gate failed — run: pnpm run block:catalog-gate",
-)
-check(
-  "template catalog gate passes (TPL-000)",
-  run("pnpm exec tsx tools/template-catalog-gate.ts").ok,
-  "Template catalog gate failed — run: pnpm run template:catalog-gate",
 )
 
 // ─── §16 Visual harness image pinning ───────────────────────────────────
@@ -640,7 +649,6 @@ check(
 console.log("\n§17 §23 acceptance criteria:")
 const acResult = run("pnpm exec tsx tools/acceptance-criteria.ts", {
   timeout: 600_000,
-  retries: 1,
 })
 check(
   "acceptance criteria script passes",
