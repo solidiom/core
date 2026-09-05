@@ -45,11 +45,22 @@ describe("release workflow policy", () => {
 
   it("treats root tooling and workflow changes as global release impact", () => {
     const workflow = read(".github/workflows/ci-required.yml")
+    const releaseReadiness = workflow.slice(
+      workflow.indexOf("\n  release-readiness:"),
+      workflow.indexOf("\n  site-quality:"),
+    )
+    const packageBuild = releaseReadiness.indexOf(
+      "pnpm nx run-many -t build --exclude=@solidiom/site",
+    )
+    const quickGate = releaseReadiness.indexOf("pnpm run gate:quick")
 
     expect(workflow).toContain("global_impact: ${{ steps.scope.outputs.global_impact }}")
     expect(workflow).toContain("tools/*|scripts/*|registry/*")
-    expect(workflow).toContain("name: Release readiness")
-    expect(workflow).toContain("pnpm run primitive:catalog-gate")
+    expect(releaseReadiness).toContain("name: Release readiness")
+    expect(releaseReadiness).toContain("timeout-minutes: 30")
+    expect(packageBuild).toBeGreaterThan(0)
+    expect(quickGate).toBeGreaterThan(packageBuild)
+    expect(releaseReadiness).toContain("pnpm run primitive:catalog-gate")
     expect(workflow).toContain("RELEASE_APPLICABLE: ${{ needs.changes.outputs.global_impact }}")
   })
 
