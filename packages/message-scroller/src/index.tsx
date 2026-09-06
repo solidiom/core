@@ -7,7 +7,14 @@
  * Exposes isAtBottom, hasNewContent, newContentCount via context.
  */
 
-import { createContext, useContext, type Accessor, onCleanup, createSignal } from "solid-js"
+import {
+  createContext,
+  createMemo,
+  useContext,
+  type Accessor,
+  onCleanup,
+  createSignal,
+} from "solid-js"
 import { type JSX } from "@solidjs/web"
 import { applySemanticAttrs, createScrollAnchor, type ScrollAnchor } from "@solidiom/runtime"
 
@@ -48,7 +55,7 @@ export interface MessageScrollerRootProps {
  * MessageScroller.Root — container providing scroll anchor context.
  */
 export function Root(props: MessageScrollerRootProps) {
-  const [scrollAreaRef, setScrollAreaRef] = createSignal<HTMLElement | undefined>(undefined)
+  const [scrollAreaRef, setScrollAreaSignal] = createSignal<HTMLElement | undefined>(undefined)
 
   const scrollAnchor = createScrollAnchor({
     scrollContainer: scrollAreaRef,
@@ -57,9 +64,13 @@ export function Root(props: MessageScrollerRootProps) {
     onNewContentWhileScrolledUp: () => props.onNewContent?.(),
   })
 
-  // Attach scroll listener (runs at component creation time)
-  const cleanup = scrollAnchor.attach()
-  onCleanup(cleanup)
+  let detachScrollArea = () => {}
+  const setScrollAreaRef = (element: HTMLElement): void => {
+    detachScrollArea()
+    setScrollAreaSignal(element)
+    detachScrollArea = scrollAnchor.attach()
+  }
+  onCleanup(() => detachScrollArea())
 
   const ctx: MessageScrollerContextValue = {
     scrollAnchor,
@@ -118,6 +129,17 @@ export interface MessageScrollerNewContentIndicatorProps {
 /** MessageScroller.NewContentIndicator — "new messages" button, visible when hasNewContent. */
 export function NewContentIndicator(props: MessageScrollerNewContentIndicatorProps) {
   const ctx = useMessageScrollerContext()
+  const semanticAttrs = createMemo(() =>
+    applySemanticAttrs({
+      scope: "message-scroller",
+      part: "new-content-indicator",
+      state: ctx.hasNewContent() ? "visible" : "hidden",
+    }),
+  )
+  const defaultLabel = createMemo(() => {
+    const count = ctx.newContentCount()
+    return `${count} new message${count === 1 ? "" : "s"}`
+  })
 
   return (
     <button
@@ -127,14 +149,9 @@ export function NewContentIndicator(props: MessageScrollerNewContentIndicatorPro
       onClick={() => ctx.scrollAnchor.dismissNewContent()}
       class={props.class}
       style={props.style}
-      {...applySemanticAttrs({
-        scope: "message-scroller",
-        part: "new-content-indicator",
-        state: ctx.hasNewContent() ? "visible" : "hidden",
-      })}
+      {...semanticAttrs()}
     >
-      {props.children ??
-        `${ctx.newContentCount()} new message${ctx.newContentCount() === 1 ? "" : "s"}`}
+      {props.children ?? defaultLabel()}
     </button>
   )
 }

@@ -44,7 +44,18 @@ export function PanelGroup(props: PanelGroupProps) {
   const direction = () => props.direction ?? "horizontal"
   const baseId = createStableId("panels")
 
-  const [panels, setPanels] = createSignal<PanelEntry[]>([], { ownedWrite: true })
+  const isServer = typeof document === "undefined"
+  let serverPanels: PanelEntry[] = []
+  const [clientPanels, setClientPanels] = createSignal<PanelEntry[]>([], { ownedWrite: true })
+  const panels: Accessor<PanelEntry[]> = isServer ? () => serverPanels : clientPanels
+
+  const updatePanels = (update: (previous: PanelEntry[]) => PanelEntry[]): void => {
+    if (isServer) {
+      serverPanels = update(serverPanels)
+    } else {
+      setClientPanels(update)
+    }
+  }
 
   const { value: sizes, requestChange: requestSizeChange } = createControllableValue<
     number[],
@@ -57,15 +68,13 @@ export function PanelGroup(props: PanelGroupProps) {
   })
 
   const registerPanel = (entry: PanelEntry): (() => void) => {
-    setPanels((prev) => {
-      const next = [...prev, entry].sort((a, b) => a.order - b.order)
-      return next
-    })
+    updatePanels((prev) => [...prev, entry].sort((a, b) => a.order - b.order))
 
-    // Initialize sizes if we have a default and current sizes are empty/short
-    const currentSizes = untrack(sizes)
-    if (entry.constraints.defaultSize !== undefined) {
-      const panelList = [...untrack(panels), entry].sort((a, b) => a.order - b.order)
+    // Client registration initializes controlled layout state. During SSR,
+    // Panel.currentSize already falls back to the declarative defaultSize.
+    if (!isServer && entry.constraints.defaultSize !== undefined) {
+      const currentSizes = untrack(sizes)
+      const panelList = untrack(panels)
       const idx = panelList.findIndex((p) => p.id === entry.id)
       if (idx >= 0 && (currentSizes.length <= idx || currentSizes[idx] === undefined)) {
         const updated = [...currentSizes]
@@ -76,7 +85,7 @@ export function PanelGroup(props: PanelGroupProps) {
     }
 
     return () => {
-      setPanels((prev) => prev.filter((p) => p.id !== entry.id))
+      updatePanels((prev) => prev.filter((p) => p.id !== entry.id))
     }
   }
 

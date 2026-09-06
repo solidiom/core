@@ -72,15 +72,15 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "454cc8ceb1163b3289ba2b183473f5fd623ab51754f378bb2bbfcbe13344b2a2",
+    "filesHash": "6dee2897661f2cba8e3aaebc8947050769c94dbceb8cfbb55859f5719ab0858f",
     "fileDigests": {
-      "src/index.tsx": "066c63f69a4a076995626f3cae8d0b22589f8289cb638b1a50756448e80c8519"
+      "src/index.tsx": "ba6d40b11e4be8441a34b2fa751947cdc235ea0cccea315c90fe8549172d5a3a"
     },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    "lastGenerated": "2026-09-05T19:21:15.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/tokenizer"
   },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  "lastUpdated": "2026-09-05T19:21:15.000Z"
 }

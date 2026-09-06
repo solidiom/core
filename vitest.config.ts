@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url"
 import { defineConfig } from "vitest/config"
 import solid from "vite-plugin-solid"
 
@@ -9,6 +10,21 @@ import solid from "vite-plugin-solid"
  */
 export default defineConfig({
   plugins: [solid({ extensions: [".tsx"] })],
+  resolve: {
+    // Node unit tests exercise client-side reactive state machines without a DOM.
+    // Vitest externalizes dependencies through Node's `node` condition, which
+    // selects Solid's pure SSR runtime even when Vite's browser condition is set.
+    // Alias only the package root to the client runtime; SSR behavior remains
+    // covered by the site build and E2E suites.
+    alias: [
+      {
+        find: /^solid-js$/,
+        replacement: fileURLToPath(
+          new URL("./node_modules/solid-js/dist/solid.js", import.meta.url),
+        ),
+      },
+    ],
+  },
   test: {
     include: [
       "packages/**/src/**/*.{test,spec}.ts",

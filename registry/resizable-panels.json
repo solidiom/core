@@ -71,17 +71,17 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "98a230824302256cde674ee47f8fa9f1efdbf685fa1966d3c89640fa2b312af0",
+    "filesHash": "579f160b26c1ec75ca74cbddd85d0d18c3eef292d82a156a017f52906c05bf0b",
     "fileDigests": {
       "src/index.tsx": "f22c3c51494c8346a05751a514a00fb9520e1ab003033aa3a40a09d3b72484ee",
       "src/panels-context.ts": "9ab5d1c128be258daf202afc585eaa4745e8805ae9af4a4773620815007347ba",
-      "src/panels.tsx": "00600ba0ae703e17aea8731f87fbc8c31cdf6934f1c46c973c7a0e463b5465a6"
+      "src/panels.tsx": "c4a6b1553bacb3f4c7dc9cb179a6a41e0cc75a18e1a5bab0bba506d107b1cd7d"
     },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    "lastGenerated": "2026-09-05T19:21:15.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/resizable-panels"
   },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  "lastUpdated": "2026-09-05T19:21:15.000Z"
 }
