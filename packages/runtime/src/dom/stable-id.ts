@@ -1,4 +1,4 @@
-import { createUniqueId } from "solid-js"
+import { createUniqueId, getOwner } from "solid-js"
 
 /**
  * Stable ID generation — hydration-aware IDs for ARIA relationships.
@@ -17,11 +17,10 @@ let counter = 0
  * The fallback supports non-component callers where Solid has no owner ID.
  */
 export function createStableId(prefix = "solidiom"): string {
-  try {
+  if (getOwner()) {
     return `${prefix}-${createUniqueId()}`
-  } catch {
-    return `${prefix}-${++counter}`
   }
+  return `${prefix}-${++counter}`
 }
 
 /**

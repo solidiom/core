@@ -216,16 +216,23 @@ export function Trigger(props: MenubarTriggerProps) {
   const menuCtx = useMenubarMenuContext()
   let buttonRef: HTMLButtonElement | undefined
 
-  // Register with collection after ref is assigned (component-level effect)
+  let unregister = () => {}
+  let disposed = false
+  onCleanup(() => {
+    disposed = true
+    unregister()
+  })
+
+  // Register after the ref is assigned, while keeping cleanup attached to
+  // this component's owner rather than the later microtask.
   queueMicrotask(() => {
-    if (buttonRef) {
-      const cleanup = rootCtx.collection.registerItem({
+    if (!disposed && buttonRef) {
+      unregister = rootCtx.collection.registerItem({
         id: menuCtx.menuId,
         ref: buttonRef,
         disabled: () => false,
         textValue: () => buttonRef?.textContent ?? "",
       })
-      onCleanup(cleanup)
     }
   })
 

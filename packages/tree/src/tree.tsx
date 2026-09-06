@@ -72,12 +72,23 @@ export function Root(props: TreeRootProps) {
     equals: (a, b) => a.size === b.size && [...a].every((id) => b.has(id)),
   })
 
-  const [items, setItems] = createSignal<TreeItemEntry[]>([], { ownedWrite: true })
+  const isServer = typeof document === "undefined"
+  let serverItems: TreeItemEntry[] = []
+  const [clientItems, setClientItems] = createSignal<TreeItemEntry[]>([], { ownedWrite: true })
+  const items: Accessor<TreeItemEntry[]> = isServer ? () => serverItems : clientItems
   const [focusedId, setFocusedId] = createSignal<string | null>(null)
 
+  const updateItems = (update: (previous: TreeItemEntry[]) => TreeItemEntry[]): void => {
+    if (isServer) {
+      serverItems = update(serverItems)
+    } else {
+      setClientItems(update)
+    }
+  }
+
   const registerItem = (entry: TreeItemEntry): (() => void) => {
-    setItems((prev) => [...prev, entry])
-    return () => setItems((prev) => prev.filter((i) => i.id !== entry.id))
+    updateItems((prev) => [...prev, entry])
+    return () => updateItems((prev) => prev.filter((item) => item.id !== entry.id))
   }
 
   const typeahead = createTypeahead({

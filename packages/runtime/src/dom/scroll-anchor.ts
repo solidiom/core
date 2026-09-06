@@ -6,7 +6,7 @@
  * and ResizeObserver for performance. SSR-safe: no-ops when container is undefined.
  */
 
-import { createSignal, onCleanup, getOwner, type Accessor } from "solid-js"
+import { createSignal, onCleanup, getOwner, untrack, type Accessor } from "solid-js"
 
 /**
  * Options for configuring scroll anchor behavior.
@@ -138,7 +138,7 @@ export function createScrollAnchor(options: ScrollAnchorOptions): ScrollAnchor {
   }
 
   function attach(): () => void {
-    const container = scrollContainer()
+    const container = untrack(scrollContainer)
     if (!container) return () => {}
 
     const handleScroll = (): void => {
@@ -155,8 +155,8 @@ export function createScrollAnchor(options: ScrollAnchorOptions): ScrollAnchor {
       observer.observe(container)
     }
 
-    // Initial state check
-    updateScrollState()
+    // Initial state check is an imperative snapshot, not a reactive dependency.
+    untrack(updateScrollState)
 
     const cleanup = (): void => {
       container.removeEventListener("scroll", handleScroll)

@@ -259,9 +259,11 @@ export function Trigger(props: NavigationMenuTriggerProps) {
   })
   onCleanup(() => {
     unregister()
-    // Drop the element so a detached node can never be used as a
-    // positioning reference or focus target after unmount.
-    itemCtx.setTriggerRef(undefined)
+    // SSR never assigns a DOM ref, and Solid 2 server rendering is pure: a
+    // cleanup-phase signal write is both unnecessary and deprecated.
+    if (typeof document !== "undefined") {
+      itemCtx.setTriggerRef(undefined)
+    }
   })
 
   const handleClick = () => {

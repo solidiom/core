@@ -53,7 +53,18 @@ export interface Collection {
  * Supports dynamic insert/remove with stable identity.
  */
 export function createCollection(options: CollectionOptions = {}): Collection {
-  const [items, setItems] = createSignal<CollectionItem[]>([], { ownedWrite: true })
+  const isServer = typeof document === "undefined"
+  let serverItems: CollectionItem[] = []
+  const [clientItems, setClientItems] = createSignal<CollectionItem[]>([], { ownedWrite: true })
+  const items: Accessor<CollectionItem[]> = isServer ? () => serverItems : clientItems
+
+  const updateItems = (update: (previous: CollectionItem[]) => CollectionItem[]): void => {
+    if (isServer) {
+      serverItems = update(serverItems)
+    } else {
+      setClientItems(update)
+    }
+  }
 
   const orientation = options.orientation ?? (() => "vertical" as const)
   const direction = options.direction ?? (() => "ltr" as const)
@@ -73,12 +84,12 @@ export function createCollection(options: CollectionOptions = {}): Collection {
   }
 
   const registerItem = (item: CollectionItem): (() => void) => {
-    setItems((prev) => untrack(() => sortByDomOrder([...prev, item])))
+    updateItems((prev) => untrack(() => sortByDomOrder([...prev, item])))
     return () => unregisterItem(item.id)
   }
 
   const unregisterItem = (id: string): void => {
-    setItems((prev) => prev.filter((item) => item.id !== id))
+    updateItems((prev) => prev.filter((item) => item.id !== id))
   }
 
   const enabledItems: Accessor<CollectionItem[]> = () => {

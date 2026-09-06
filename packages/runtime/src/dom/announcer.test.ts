@@ -180,19 +180,18 @@ describe("createAnnouncer", () => {
   })
 
   it("auto-cleans up with reactive owner", () => {
-    let politeMsg: () => string
     createRoot((dispose) => {
       const announcer = createAnnouncer({ clearDelay: 5000 })
-      politeMsg = announcer.politeMessage
       announcer.announce("owner scoped")
       flush()
       expect(announcer.politeMessage()).toBe("owner scoped")
+      expect(vi.getTimerCount()).toBe(1)
       dispose()
     })
-    // After owner disposal, timers are cleaned up — advancing should not throw
+    // Solid 2 freezes owner-scoped signals during disposal, so the meaningful
+    // cleanup invariant is that the pending auto-clear timer is cancelled.
+    expect(vi.getTimerCount()).toBe(0)
     vi.advanceTimersByTime(10000)
-    // onCleanup calls destroy() which resets the message
-    expect(politeMsg!()).toBe("")
   })
 
   it("uses default clearDelay of 7000ms", () => {

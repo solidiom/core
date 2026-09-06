@@ -68,15 +68,15 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "974518e9cab91eb5bc0be40bc450109ccc656fd9164a3454eb0681e1e8abb3ba",
+    "filesHash": "19fe77ce5e5f51d1761fe1646667144c480dadeb085af8dc230ae2922800a334",
     "fileDigests": {
-      "src/index.tsx": "5b18da44ffcc99c443584b722504eb2629f68c82ffec8fe5c60e07c11d27b47a"
+      "src/index.tsx": "11c90aae78bbe4be743f8cd09f5ddbc8dd4e482e8cded2c42d807c1710eba2d0"
     },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    "lastGenerated": "2026-09-05T19:21:15.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/time-input"
   },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  "lastUpdated": "2026-09-05T19:21:15.000Z"
 }

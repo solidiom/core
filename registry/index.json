@@ -1,13 +1,10 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-index/v3.json",
   "version": 3,
-  "generatedAt": "2026-08-22T17:36:37.000Z",
+  "generatedAt": "2026-09-05T19:21:15.000Z",
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "3afb12f617b115dbfba261e112931468ea08980598c071848d5af8b550d6cfe6",
-    "signature": "SnzVEpBA/mMJ7GNjCdzKsgHvOMZg+b7a85b+dbTPJKOQRXjrGvKCZYMF0eU28JGY5hcEux1bXEj1C5wlIAzrDg==",
-    "signedAt": "2026-08-22T17:36:37.000Z",
-    "signatureKeyId": "d7b32861c393dafd"
+    "entriesHash": "e06b8ae3685ff3c381a702bb7d5abd1c37089e564e99dc53924b974e869cfc76"
   },
   "primitives": [
     {

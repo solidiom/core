@@ -84,16 +84,16 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "e2bd4c9c1e8dc59577a8d0cfd4a2f3bee229cf6bb2e4ab95e6809623eb9efd88",
+    "filesHash": "be91ccb1bc403a9e04cbf45d60ae8ccf12689bc8e804b31252564974bd9e1401",
     "fileDigests": {
-      "src/index.tsx": "9341bcb9923a4bd5c4760b7a9cb73165fe8615c2c42bbaa43e9ff4a180fa0630",
+      "src/index.tsx": "c8388abbeaeafc82408cb85c177e33bce4d8e30b1db70320c3ce74175494497e",
       "src/navigation-menu-context.ts": "ca2efac856f3a583f86434e48f3cf75e3f1412068dcd16fc95600729b26adfef"
     },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    "lastGenerated": "2026-09-05T19:21:15.000Z"
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/navigation-menu"
   },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  "lastUpdated": "2026-09-05T19:21:15.000Z"
 }

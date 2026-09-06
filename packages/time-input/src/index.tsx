@@ -7,7 +7,7 @@
  * semantics, keyboard navigation, auto-advance, and native form participation.
  */
 
-import { createSignal, createContext, useContext, type Accessor } from "solid-js"
+import { createSignal, createContext, createMemo, useContext, type Accessor } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   applySemanticAttrs,
@@ -213,8 +213,7 @@ export function Root(props: TimeInputRootProps) {
 
   // ─── Segmented editing ───────────────────────────────────────────────
 
-  const getInitialValues = (): Record<string, string> => {
-    const time = currentTime()
+  const getInitialValues = (time: TimeValue): Record<string, string> => {
     const segments = timeMath.toSegments(time, resolvedHourCycle())
     const values: Record<string, string> = {
       hour: segments.hour,
@@ -227,7 +226,9 @@ export function Root(props: TimeInputRootProps) {
     return values
   }
 
-  const [segmentValues, setSegmentValues] = createSignal<Record<string, string>>(getInitialValues())
+  const [segmentValues, setSegmentValues] = createSignal<Record<string, string>>(
+    getInitialValues(defaultTime),
+  )
 
   const editing = createSegmentedEditing({
     segments: getSegmentDefs,
@@ -442,6 +443,18 @@ export function Segment(props: TimeInputSegmentProps) {
   }
 
   const isFocused = () => ctx.isSegmentFocused(props.type)
+  const ariaProps = createMemo(
+    () => ctx.getSegmentAriaProps(props.type) as Record<string, string | undefined>,
+  )
+  const semanticAttrs = createMemo(() =>
+    applySemanticAttrs({
+      scope: "time-input",
+      part: "segment",
+      disabled: ctx.disabled,
+      readonly: ctx.readOnly,
+      highlighted: isFocused(),
+    }),
+  )
 
   return (
     <span
@@ -454,14 +467,8 @@ export function Segment(props: TimeInputSegmentProps) {
       onKeyDown={handleKeyDown}
       onBeforeInput={handleBeforeInput}
       onFocus={() => ctx.focusSegment(props.type)}
-      {...(ctx.getSegmentAriaProps(props.type) as Record<string, string | undefined>)}
-      {...applySemanticAttrs({
-        scope: "time-input",
-        part: "segment",
-        disabled: ctx.disabled,
-        readonly: ctx.readOnly,
-        highlighted: isFocused(),
-      })}
+      {...ariaProps()}
+      {...semanticAttrs()}
       data-type={props.type}
     >
       {ctx.getSegmentDisplay(props.type)}
