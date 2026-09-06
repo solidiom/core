@@ -2,7 +2,30 @@ import { describe, it, expect, afterEach } from "vitest"
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync, existsSync, readdirSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
-import { runCombination } from "./smoke-create"
+import { parseCatalog, runCombination } from "./smoke-create"
+
+describe("smoke-create catalog parsing", () => {
+  it("preserves quoted semver ranges containing spaces", () => {
+    expect(
+      parseCatalog(`
+packages:
+  - "packages/*"
+
+catalog:
+  solid-js: ">=2.0.0-rc.6 <3.0.0"
+  "@solidjs/web": '>=2.0.0-rc.6 <3.0.0'
+  babel-preset-solid: ^2.0.0-rc.2 # unquoted values and comments remain supported
+
+overrides:
+  solid-js: "2.0.0-rc.6"
+`),
+    ).toEqual({
+      "solid-js": ">=2.0.0-rc.6 <3.0.0",
+      "@solidjs/web": ">=2.0.0-rc.6 <3.0.0",
+      "babel-preset-solid": "^2.0.0-rc.2",
+    })
+  })
+})
 
 /**
  * CLI-008 acceptance criterion: "A deliberately injected `yarn.lock` in a

@@ -206,19 +206,31 @@ function collectSolidiomPackagesToPublish(): string[] {
  * handled where it belongs: materialize.ts emits `overrides`/`resolutions`
  * into the project's own package.json.
  */
-function readCatalog(): Record<string, string> {
-  const content = readFileSync(join(REPO_ROOT, "pnpm-workspace.yaml"), "utf8")
+export function parseCatalog(content: string): Record<string, string> {
   const lines = content.split("\n")
   const catalog: Record<string, string> = {}
-  const start = lines.findIndex((l) => /^catalog:\s*$/.test(l))
+  const start = lines.findIndex((line) => /^catalog:\s*$/.test(line))
   if (start === -1) return catalog
+
   for (let i = start + 1; i < lines.length; i++) {
     const line = lines[i]!
     if (/^\S/.test(line)) break
-    const match = line.match(/^\s*["']?([\w@/.-]+)["']?:\s*["']?([^"'\s]+)["']?\s*$/)
-    if (match) catalog[match[1]!] = match[2]!
+
+    const match = line.match(
+      /^\s+(?:"([^"]+)"|'([^']+)'|([\w@/.-]+))\s*:\s*(?:"([^"]+)"|'([^']+)'|([^#]*?))\s*(?:#.*)?$/,
+    )
+    if (!match) continue
+
+    const name = match[1] ?? match[2] ?? match[3]
+    const value = (match[4] ?? match[5] ?? match[6])?.trim()
+    if (name && value) catalog[name] = value
   }
+
   return catalog
+}
+
+function readCatalog(): Record<string, string> {
+  return parseCatalog(readFileSync(join(REPO_ROOT, "pnpm-workspace.yaml"), "utf8"))
 }
 
 /**
@@ -258,8 +270,12 @@ function packWithRewrittenManifest(pkgDir: string, catalog: Record<string, strin
         const shortName = name.replace(/^@solidiom\//, "")
         const resolved = readSolidiomPackageVersion(shortName)
         if (resolved) deps[name] = resolved
-      } else if (spec === "catalog:" && catalog[name]) {
-        deps[name] = catalog[name]!
+      } else if (spec === "catalog:") {
+        const resolved = catalog[name]
+        if (!resolved) {
+          throw new Error(`Cannot resolve ${field}.${name} from pnpm-workspace.yaml catalog`)
+        }
+        deps[name] = resolved
       }
     }
   }
