@@ -76,8 +76,8 @@ describe("NewsletterForm", () => {
       const checkbox = screen.getByRole("checkbox")
       const button = screen.getByRole("button", { name: "Subscribe" })
 
-      await fireEvent.input(input, { target: { value: "test@example.com" } })
-      await fireEvent.click(checkbox)
+      fireEvent.input(input, { target: { value: "test@example.com" } })
+      fireEvent.click(checkbox)
 
       expect(button).not.toBeDisabled()
     })
@@ -93,9 +93,9 @@ describe("NewsletterForm", () => {
       const input = screen.getByLabelText("Email address")
       const checkbox = screen.getByRole("checkbox")
 
-      await fireEvent.input(input, { target: { value: "bad" } })
-      await fireEvent.click(checkbox)
-      await fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
+      fireEvent.input(input, { target: { value: "bad" } })
+      fireEvent.click(checkbox)
+      fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
 
       // Wait for async state update
       await vi.waitFor(() => {
@@ -116,9 +116,9 @@ describe("NewsletterForm", () => {
       const input = screen.getByLabelText("Email address")
       const checkbox = screen.getByRole("checkbox")
 
-      await fireEvent.input(input, { target: { value: "test@example.com" } })
-      await fireEvent.click(checkbox)
-      await fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
+      fireEvent.input(input, { target: { value: "test@example.com" } })
+      fireEvent.click(checkbox)
+      fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
 
       await vi.waitFor(() => {
         expect(screen.getByRole("status")).toBeTruthy()
@@ -134,11 +134,11 @@ describe("NewsletterForm", () => {
       global.fetch = vi.fn()
       render(() => <NewsletterForm locale="en" publicationId="test-id" />)
       const input = screen.getByLabelText("Email address")
-      await fireEvent.input(input, { target: { value: "test@example.com" } })
+      fireEvent.input(input, { target: { value: "test@example.com" } })
 
       // Try submit without checking consent
       const form = screen.getByRole("button", { name: "Subscribe" }).closest("form")!
-      await fireEvent.submit(form)
+      fireEvent.submit(form)
 
       expect(global.fetch).not.toHaveBeenCalled()
     })
@@ -154,9 +154,9 @@ describe("NewsletterForm", () => {
       const input = screen.getByLabelText("Correo electrónico")
       const checkbox = screen.getByRole("checkbox")
 
-      await fireEvent.input(input, { target: { value: "user@example.com" } })
-      await fireEvent.click(checkbox)
-      await fireEvent.click(screen.getByRole("button", { name: "Suscribirse" }))
+      fireEvent.input(input, { target: { value: "user@example.com" } })
+      fireEvent.click(checkbox)
+      fireEvent.click(screen.getByRole("button", { name: "Suscribirse" }))
 
       await vi.waitFor(() => expect(global.fetch).toHaveBeenCalled())
 
@@ -181,9 +181,9 @@ describe("NewsletterForm", () => {
       const input = screen.getByLabelText("Email address")
       const checkbox = screen.getByRole("checkbox")
 
-      await fireEvent.input(input, { target: { value: "test@example.com" } })
-      await fireEvent.click(checkbox)
-      await fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
+      fireEvent.input(input, { target: { value: "test@example.com" } })
+      fireEvent.click(checkbox)
+      fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
 
       await vi.waitFor(() => expect(global.fetch).toHaveBeenCalled())
 
@@ -203,11 +203,11 @@ describe("NewsletterForm", () => {
       global.fetch = vi.fn().mockResolvedValue({ ok: true, status: 201, json: () => ({}) })
       render(() => <NewsletterForm locale="en" publicationId="my-pub" />)
 
-      await fireEvent.input(screen.getByLabelText("Email address"), {
+      fireEvent.input(screen.getByLabelText("Email address"), {
         target: { value: "a@b.com" },
       })
-      await fireEvent.click(screen.getByRole("checkbox"))
-      await fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
+      fireEvent.click(screen.getByRole("checkbox"))
+      fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
 
       await vi.waitFor(() => expect(global.fetch).toHaveBeenCalled())
       expect((global.fetch as ReturnType<typeof vi.fn>).mock.calls[0][0]).toBe(
@@ -221,11 +221,11 @@ describe("NewsletterForm", () => {
         <NewsletterForm locale="en" publicationId="my-pub" apiBase="https://custom.api" />
       ))
 
-      await fireEvent.input(screen.getByLabelText("Email address"), {
+      fireEvent.input(screen.getByLabelText("Email address"), {
         target: { value: "a@b.com" },
       })
-      await fireEvent.click(screen.getByRole("checkbox"))
-      await fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
+      fireEvent.click(screen.getByRole("checkbox"))
+      fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
 
       await vi.waitFor(() => expect(global.fetch).toHaveBeenCalled())
       expect((global.fetch as ReturnType<typeof vi.fn>).mock.calls[0][0]).toBe(
@@ -237,11 +237,11 @@ describe("NewsletterForm", () => {
       global.fetch = vi.fn().mockRejectedValue(new Error("Network error"))
       render(() => <NewsletterForm locale="en" publicationId="test-id" />)
 
-      await fireEvent.input(screen.getByLabelText("Email address"), {
+      fireEvent.input(screen.getByLabelText("Email address"), {
         target: { value: "a@b.com" },
       })
-      await fireEvent.click(screen.getByRole("checkbox"))
-      await fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
+      fireEvent.click(screen.getByRole("checkbox"))
+      fireEvent.click(screen.getByRole("button", { name: "Subscribe" }))
 
       await vi.waitFor(() => {
         expect(screen.getByRole("alert")).toBeTruthy()

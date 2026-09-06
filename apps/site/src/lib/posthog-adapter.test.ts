@@ -192,7 +192,7 @@ describe("ANALYTICS-002: prohibited payload field rejection", () => {
     // If someone bypasses the type system, the runtime check above catches it.
     const event: SiteAnalyticsEvent = { event: "builder_opened" }
     // @ts-expect-error — extra field not allowed by type
-    const _invalid = { ...event, email: "test@example.com" } satisfies SiteAnalyticsEvent
+    void ({ ...event, email: "test@example.com" } satisfies SiteAnalyticsEvent)
     expect(true).toBe(true) // Compile-time enforcement, not runtime
   })
 })

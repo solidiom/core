@@ -478,6 +478,10 @@ run = [
   "mise run ci:gate:full",
 ]
 
+[tasks."ci:all"]
+description = "Alias for the complete local CI suite"
+run = "mise run ci:full"
+
 # ---------------------------------------------------------------------------
 # Split-target offline CI mirrors
 #

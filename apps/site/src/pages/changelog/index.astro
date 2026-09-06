@@ -1,11 +1,10 @@
 ---
-import { getCollection, render } from "astro:content"
+import { getCollection } from "astro:content"
 import DocsLayout from "@layouts/DocsLayout.astro"
 import { resolveLocale, type Locale } from "@lib/locale"
 
 const locale: Locale = resolveLocale(Astro.url.pathname)
 const isEs = locale === "es"
-const homePath = isEs ? "/es/" : "/"
 const changelogPath = isEs ? "/es/changelog/" : "/changelog/"
 
 const breadcrumbTitle = isEs ? "Registro de Cambios" : "Changelog"

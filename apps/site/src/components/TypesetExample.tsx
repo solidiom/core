@@ -1,4 +1,3 @@
-import type { Element } from "solid-js"
 import type { Locale } from "../lib/locale"
 
 const COPY: Record<

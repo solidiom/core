@@ -10,5 +10,6 @@
       "@assets/*": ["./src/assets/*"],
       "@lib/*": ["./src/lib/*"]
     }
-  }
+  },
+  "exclude": ["dist", "public/templates/__preview__/**"]
 }

@@ -4,7 +4,7 @@ import DocsLayout from "@layouts/DocsLayout.astro"
 import { tocFromHeadings, type DocsTocEntry } from "@lib/docs-nav"
 
 export async function getStaticPaths() {
-  const entries = await getCollection("changelog")
+  const entries = await getCollection("changelog", (entry) => entry.data.locale === "es")
   return entries.map((entry) => ({
     params: {
       slug:

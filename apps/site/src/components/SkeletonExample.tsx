@@ -9,7 +9,7 @@ export interface SkeletonExampleProps {
  * Canonical executable source for the Skeleton documentation example.
  * Demonstrates text, circular, and rectangular skeleton placeholders.
  */
-export function SkeletonExample(props: SkeletonExampleProps) {
+export function SkeletonExample(_props: SkeletonExampleProps) {
   return (
     <div
       ref={(element) => element.setAttribute("data-hydrated", "true")}

@@ -130,9 +130,12 @@ const sidebarGroups: DocsSidebarGroup[] = [
                     {authors.length > 0 && (
                       <span class="blog-list__author">{authors.map((a) => a.name).join(", ")}</span>
                     )}
-                    {entry.data.author && authors.length === 0 && (
-                      <span class="blog-list__author">{entry.data.author}</span>
-                    )}
+                    {(entry.data as unknown as { author?: string }).author &&
+                      authors.length === 0 && (
+                        <span class="blog-list__author">
+                          {(entry.data as unknown as { author?: string }).author}
+                        </span>
+                      )}
                     {entry.data.tags.length > 0 && (
                       <span class="blog-list__tags">{entry.data.tags.join(", ")}</span>
                     )}

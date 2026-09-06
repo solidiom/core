@@ -8,7 +8,6 @@
 import type { NavLink } from "../components/SiteHeader"
 import { localePrefix, type Locale } from "./locale"
 
-const DOCS_LABEL: Record<Locale, string> = { en: "Docs", es: "Docs" }
 const PRIMITIVES_LABEL: Record<Locale, string> = { en: "Primitives", es: "Primitivas" }
 const COMPONENTS_LABEL: Record<Locale, string> = { en: "Components", es: "Componentes" }
 const THEMES_LABEL: Record<Locale, string> = { en: "Themes", es: "Temas" }
