@@ -8,7 +8,7 @@ export interface CarouselExampleProps {
 const SLIDES = [0, 1, 2, 3]
 
 /** Canonical executable source for the Carousel documentation example. */
-export function CarouselExample(props: CarouselExampleProps) {
+export function CarouselExample(_props: CarouselExampleProps) {
   return (
     <div
       ref={(el) => el.setAttribute("data-hydrated", "true")}

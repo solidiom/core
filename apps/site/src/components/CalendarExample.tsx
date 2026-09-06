@@ -6,7 +6,7 @@ export interface CalendarExampleProps {
 }
 
 /** Canonical executable source for the Calendar documentation example. */
-export function CalendarExample(props: CalendarExampleProps) {
+export function CalendarExample(_props: CalendarExampleProps) {
   return (
     <div
       ref={(el) => el.setAttribute("data-hydrated", "true")}
@@ -21,7 +21,7 @@ export function CalendarExample(props: CalendarExampleProps) {
         </Calendar.Header>
         <Calendar.Grid>
           {(weeks) =>
-            weeks.map((week, wi) => (
+            weeks.map((week) => (
               <tr>
                 {week.map((day) => (
                   <Calendar.Cell day={day} />

@@ -292,6 +292,7 @@
 @media (width < 40rem) {
   .site-header__bar {
     gap: 0.5rem;
+    padding-inline: 0.5rem;
   }
 
   .site-header__actions {

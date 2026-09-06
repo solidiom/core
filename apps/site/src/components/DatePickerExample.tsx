@@ -30,7 +30,7 @@ export function DatePickerExample(props: DatePickerExampleProps) {
             <DatePicker.Header />
             <DatePicker.Grid weekStartsOn={0}>
               {(weeks) =>
-                weeks().map((week: number[], wi: number) => (
+                weeks().map((week: number[]) => (
                   <tr>
                     {week.map((day: number) => (
                       <DatePicker.Cell day={day} />

@@ -5,7 +5,7 @@ import { resolveLocale, type Locale } from "@lib/locale"
 import { tocFromHeadings, type DocsTocEntry, type DocsSidebarGroup } from "@lib/docs-nav"
 
 export async function getStaticPaths() {
-  const entries = await getCollection("community")
+  const entries = await getCollection("community", (entry) => entry.data.locale === "en")
   return entries
     .filter((entry) => !entry.id.endsWith("/community"))
     .map((entry) => ({

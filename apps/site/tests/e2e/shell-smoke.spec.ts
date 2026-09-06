@@ -89,8 +89,11 @@ test.describe("TEST-002: Shell Smoke Tests", () => {
       await expect(toggle).toBeVisible()
 
       // system → light → dark → system
-      await toggle.click()
-      await expect(html).toHaveAttribute("data-theme-preference", "light")
+      // Poll-click until SolidJS hydration wires the first onClick handler.
+      await expect(async () => {
+        await toggle.click()
+        await expect(html).toHaveAttribute("data-theme-preference", "light", { timeout: 2000 })
+      }).toPass({ timeout: 10000 })
 
       await toggle.click()
       await expect(html).toHaveAttribute("data-theme-preference", "dark")
