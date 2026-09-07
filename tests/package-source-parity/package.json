@@ -19,6 +19,13 @@
   "nx": {
     "tags": [
       "layer:test"
-    ]
+    ],
+    "targets": {
+      "test": {
+        "dependsOn": [
+          "^build"
+        ]
+      }
+    }
   }
 }

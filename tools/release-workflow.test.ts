@@ -43,6 +43,27 @@ describe("release workflow policy", () => {
     )
   })
 
+  it("builds package-source parity dependencies before its clean-checkout test", () => {
+    const manifest = JSON.parse(read("tests/package-source-parity/package.json")) as {
+      nx?: { targets?: { test?: { dependsOn?: string[] } } }
+    }
+
+    expect(manifest.nx?.targets?.test?.dependsOn).toContain("^build")
+  })
+
+  it("purges stale Solidiom registry metadata before Verdaccio starts", () => {
+    const fixture = read("tools/offline-fixture/run-offline-test.sh")
+    const purgeDirectory = fixture.indexOf('rm -rf "$STORAGE_DIR/@solidiom"')
+    const purgeDatabase = fixture.indexOf(
+      "db.list = (db.list || []).filter(n => !n.startsWith('@solidiom/'));",
+    )
+    const startVerdaccio = fixture.indexOf('echo "[3/8] Starting verdaccio..."')
+
+    expect(purgeDirectory).toBeGreaterThan(0)
+    expect(purgeDatabase).toBeGreaterThan(purgeDirectory)
+    expect(startVerdaccio).toBeGreaterThan(purgeDatabase)
+  })
+
   it("treats root tooling and workflow changes as global release impact", () => {
     const workflow = read(".github/workflows/ci-required.yml")
     const releaseReadiness = workflow.slice(
