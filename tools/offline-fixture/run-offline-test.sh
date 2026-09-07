@@ -236,24 +236,26 @@ sed "s|^storage: .*|storage: ${STORAGE_DIR}|" "$SOURCE_CONFIG" > "$VERDACCIO_CON
 
 # Step 3: Start verdaccio
 #
-# In prep mode the storage IS the persistent snapshot (not a throwaway copy), so
-# stale @solidiom/* packages from previous runs would collide with republish and
-# leave stale integrity hashes in Verdaccio's in-memory packument cache. Remove
-# them BEFORE Verdaccio starts so it never sees the old metadata.
-if [[ $PREP_MODE -eq 1 ]] && [[ -d "$STORAGE_DIR/@solidiom" ]]; then
-  echo "  removing stale @solidiom/* packages from snapshot..."
+# The snapshot may contain @solidiom/* packages from an earlier prep run. Test
+# mode already removes their package directories from the throwaway copy above,
+# but Verdaccio's package database still lists them. Leaving those entries in
+# place lets Verdaccio seed stale in-memory packuments whose integrity hashes no
+# longer match the packages smoke-create.ts is about to publish. pnpm correctly
+# rejects that mismatch as ERR_PNPM_TARBALL_INTEGRITY. Purge both storage layers
+# in every mode BEFORE Verdaccio starts so the current checkout is the only
+# source of @solidiom/* metadata and tarballs.
+if [[ -d "$STORAGE_DIR/@solidiom" ]]; then
+  echo "  removing stale @solidiom/* packages from registry storage..."
   rm -rf "$STORAGE_DIR/@solidiom"
-  # Also purge @solidiom/* entries from verdaccio's package database so it
-  # doesn't think those packages still exist when it starts up.
-  if [[ -f "$STORAGE_DIR/.verdaccio-db.json" ]]; then
-    node -e "
-      const fs = require('fs');
-      const dbPath = process.argv[1];
-      const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-      db.list = (db.list || []).filter(n => !n.startsWith('@solidiom/'));
-      fs.writeFileSync(dbPath, JSON.stringify(db));
-    " "$STORAGE_DIR/.verdaccio-db.json"
-  fi
+fi
+if [[ -f "$STORAGE_DIR/.verdaccio-db.json" ]]; then
+  node -e "
+    const fs = require('fs');
+    const dbPath = process.argv[1];
+    const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+    db.list = (db.list || []).filter(n => !n.startsWith('@solidiom/'));
+    fs.writeFileSync(dbPath, JSON.stringify(db));
+  " "$STORAGE_DIR/.verdaccio-db.json"
 fi
 
 echo "[3/8] Starting verdaccio..."
