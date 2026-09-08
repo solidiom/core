@@ -55,12 +55,14 @@ describe("release preflight", () => {
     ).toMatchObject({ verifyCi: true, githubRepository: "solidiom/core" })
   })
 
-  it("validates npm and Cloudflare access for a combined release", async () => {
+  it("validates npm candidates and Cloudflare access for a combined release", async () => {
+    const publishablePackages = [{ name: "@solidiom/runtime", version: "0.4.2" }]
     const fetchImpl = vi
       .fn()
       .mockResolvedValueOnce(
         new Response(JSON.stringify({ username: "solidiom" }), { status: 200 }),
       )
+      .mockResolvedValueOnce(new Response(null, { status: 404 }))
       .mockResolvedValueOnce(
         new Response(JSON.stringify({ success: true, result: { name: "solidiom-site" } }), {
           status: 200,
@@ -73,10 +75,12 @@ describe("release preflight", () => {
         site: true,
         env: { ...packageEnv, ...siteEnv },
         fetchImpl,
+        publishablePackages,
       }),
     ).resolves.toEqual([
       "npm authentication (solidiom)",
       "registry signing key format",
+      "unpublished npm packages (1)",
       "Cloudflare Pages project access",
     ])
 
@@ -90,12 +94,36 @@ describe("release preflight", () => {
     )
     expect(fetchImpl).toHaveBeenNthCalledWith(
       2,
+      "https://registry.npmjs.org/%40solidiom%2Fruntime/0.4.2",
+      expect.objectContaining({ signal: expect.any(AbortSignal) }),
+    )
+    expect(fetchImpl).toHaveBeenNthCalledWith(
+      3,
       "https://api.cloudflare.com/client/v4/accounts/account-id/pages/projects/solidiom-site",
       expect.objectContaining({
         headers: { Authorization: "Bearer cloudflare-token" },
         signal: expect.any(AbortSignal),
       }),
     )
+  })
+
+  it("rejects package releases that have nothing unpublished", async () => {
+    const fetchImpl = vi
+      .fn()
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ username: "solidiom" }), { status: 200 }),
+      )
+      .mockResolvedValueOnce(new Response(null, { status: 200 }))
+
+    await expect(
+      runReleasePreflight({
+        packages: true,
+        site: false,
+        env: packageEnv,
+        fetchImpl,
+        publishablePackages: [{ name: "@solidiom/runtime", version: "0.4.1" }],
+      }),
+    ).rejects.toMatchObject<Partial<PreflightError>>({ category: "publication" })
   })
 
   it("reports actionable Cloudflare permission failures without exposing the token", async () => {

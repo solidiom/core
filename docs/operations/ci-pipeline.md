@@ -35,10 +35,10 @@ These split package and site validation into two independent manual workflows, e
 | `ci-required.yml` | Every push to `main` and every pull request | **Required** automatic gate: path-scoped package + site quality lanes, workflow policy, secret scan, aggregate `CI / required` |
 | `ci-packages.yml` | Manual dispatch (push/PR triggers dormant)  | Package build, tests, accessibility, CLI smoke, catalog + quality gates                                                        |
 | `ci-site.yml`     | Manual dispatch (push/PR triggers dormant)  | Site check, build, E2E, visual, Lighthouse, vertical-slice gate                                                                |
-| `release.yml`     | Pushed `v*` tag (packages); manual dispatch | Unified production package release, site deployment, or both                                                                   |
+| `release.yml`     | Manual or trusted post-merge dispatch       | Exact-SHA, fail-closed production package release and site deployment                                                          |
 | `nightly.yml`     | Daily 04:00 UTC; manual dispatch            | Full compatibility and environment-sensitive coverage                                                                          |
 
-`ci-required.yml` runs no tier inputs — it always runs the applicable lanes and gates on `CI / required`. `ci-packages.yml` accepts `affected_only` (run only nx-affected packages) and `full_matrix` (run the comprehensive tier) inputs. `ci-site.yml` accepts `full_matrix`. `release.yml` receives `target` (`packages`, `site`, `all`), `gate` (`quick`, `full`), and `dist_tag` (`beta`, `latest`) inputs. A `v*` tag push publishes packages only (the plan sets `deploy_site=false`); site deployment happens through a `workflow_dispatch` run with `target` set to `site` or `all`.
+`ci-required.yml` runs no tier inputs — it always runs the applicable lanes and gates on `CI / required`. `ci-packages.yml` accepts `affected_only` (run only nx-affected packages) and `full_matrix` (run the comprehensive tier) inputs. `ci-site.yml` accepts `full_matrix`. `release.yml` receives `target` (`packages`, `site`, `all`), `gate` (`quick`, `full`), `dist_tag` (`beta`, `latest`), and an internal optional `expected_sha`. The trusted Version PR merge workflow creates a unique marker at the merge commit and dispatches `target=all`; `release.yml` verifies that SHA and requires unpublished npm candidates. Manual dispatch remains available for package-only, site-only, or combined escape hatches.
 
 ## CI job graph
 

@@ -12,13 +12,12 @@ permissions:
 #   - pnpm-lock.yaml updates from internal dependency version bumps
 #
 # Nothing is published here and nothing is pushed to main directly. You review
-# the PR, merge it, then create the matching `v*` tag — which triggers
-# release.yml to publish exactly what was merged. This is what removes the
-# "everything gets touched by the release run" problem: the churn is isolated
-# to one PR you approve, not a surprise commit from the publish job.
+# the PR and merge it. The post-merge workflow then creates a unique immutable
+# release marker and explicitly dispatches release.yml on the exact merge SHA.
+# Package versions remain independent; no global package version is inferred.
 #
 # Trigger: manual dispatch. Run it whenever you want to cut a release from the
-# accumulated changesets on the base branch.
+# accumulated Changesets on the base branch.
 
 on:
   workflow_dispatch:
@@ -92,42 +91,20 @@ jobs:
           pnpm run report:a11y-evidence || true
           pnpm run source:emit
 
-      - name: Determine release version
-        if: steps.changesets.outputs.pending == 'true'
-        id: version
-        run: |
-          # Use the first publishable package's version as the release label.
-          VERSION=$(node -e '
-            const { readdirSync, readFileSync, existsSync } = require("node:fs");
-            for (const d of readdirSync("packages", { withFileTypes: true })) {
-              if (!d.isDirectory()) continue;
-              const p = `packages/${d.name}/package.json`;
-              if (!existsSync(p)) continue;
-              const pkg = JSON.parse(readFileSync(p, "utf8"));
-              if (pkg.private) continue;
-              process.stdout.write(pkg.version);
-              break;
-            }
-          ')
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "Release version: $VERSION"
-
-      - name: Create or update Version PR
+      - name: Create Version PR
         if: steps.changesets.outputs.pending == 'true'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           base: ${{ inputs.base }}
-          branch: release/version-${{ steps.version.outputs.version }}
-          commit-message: "chore(release): version packages ${{ steps.version.outputs.version }}"
-          title: "chore(release): version packages ${{ steps.version.outputs.version }}"
+          branch: release/version-${{ github.run_id }}
+          commit-message: "chore(release): version packages"
+          title: "chore(release): version packages"
           body: |
-            Automated **Version PR** — applies pending changesets and regenerates the release artifacts.
+            Automated **Version PR** — applies pending Changesets and regenerates the release artifacts.
 
-            This PR contains all the release churn (package versions, changelogs, regenerated + re-signed registry, lockfile). Review it as you would any PR.
+            This PR contains all release churn (independent package versions, changelogs, regenerated and re-signed registry, and lockfile). Review it as you would any PR.
 
-            **Merging this PR publishes `v${{ steps.version.outputs.version }}` to npm automatically:** `tag-on-version-merge.yml` creates the `v${{ steps.version.outputs.version }}` tag on merge, which triggers `release.yml` to publish. You do not need to tag manually.
-
-            If you need to publish from a manual tag instead, delete the auto-created tag or push your own `v*` tag.
+            **Merging this PR creates an immutable `release-pr-<PR>-<SHA12>` marker and explicitly dispatches the package-and-site release at the exact merge SHA.** The release fails closed if no unpublished package versions are present.
           labels: |
             release
           delete-branch: true

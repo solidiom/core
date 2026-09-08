@@ -3,29 +3,20 @@ permissions:
   contents: read
   checks: read
 
-# Production release workflow. The release model is split in two so that a
-# release run NEVER mutates the repository:
+# Production release workflow. A release run never mutates the repository:
 #
-#   1. Versioning happens first, in a reviewable "Version PR" (see version.yml).
-#      That PR is where package.json versions, CHANGELOGs, and the regenerated
-#      registry churn lives. You review and merge it like any other PR.
-#   2. Publishing happens here, triggered by a pushed `v*` tag. The tree at that
-#      tag already carries the final versions, so this workflow only builds,
-#      signs, publishes, and uploads artifacts — it does not run
-#      `changeset version` and it does not commit anything back.
+#   1. version.yml applies pending Changesets in a reviewable Version PR.
+#   2. After that PR merges, tag-on-version-merge.yml creates a unique immutable
+#      `release-pr-<PR>-<SHA12>` marker and explicitly dispatches this workflow
+#      on that tag with the full expected commit SHA.
+#   3. This workflow verifies the ref resolves to that exact SHA, requires at
+#      least one unpublished package version, then publishes packages and deploys
+#      the site. It never runs `changeset version` or commits back.
 #
-# Triggers:
-#   - push tag `v*`          → publish packages at that tag (git read-only).
-#   - workflow_dispatch      → manual escape hatch: publish packages from the
-#                              dispatched ref and/or deploy the site.
-#
-# "If CI passes I can trigger a release": merge the Version PR (CI green) → a
-# `v*` tag is created → this workflow publishes to npmjs.com.
+# Manual workflow_dispatch remains an escape hatch. Package targets still fail
+# closed when every committed version already exists on npm.
 
 on:
-  push:
-    tags:
-      - "v*"
   workflow_dispatch:
     inputs:
       target:
@@ -53,9 +44,14 @@ on:
         options:
           - beta
           - latest
+      expected_sha:
+        description: "Internal exact-SHA guard used by Version PR automation"
+        required: false
+        default: ""
+        type: string
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: release-${{ inputs.expected_sha || github.sha }}
   cancel-in-progress: false
 
 env:
@@ -65,8 +61,6 @@ env:
 
 jobs:
   # ─── Determine what to do ──────────────────────────────────────────────────────
-  # Tag push          → publish packages, gate=quick, dist-tag from tag shape.
-  # Dispatch          → respect inputs.
 
   plan:
     runs-on: self-hosted-dfw-flex
@@ -77,102 +71,86 @@ jobs:
       run_gate: ${{ steps.plan.outputs.run_gate }}
       gate_level: ${{ steps.plan.outputs.gate_level }}
       dist_tag: ${{ steps.plan.outputs.dist_tag }}
+      expected_sha: ${{ steps.plan.outputs.expected_sha }}
     steps:
       - id: plan
+        env:
+          TARGET: ${{ inputs.target }}
+          GATE_LEVEL: ${{ inputs.gate }}
+          DIST_TAG: ${{ inputs.dist_tag }}
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
         run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            # Tag-triggered publish. The tree at the tag is already versioned by
-            # the merged Version PR, so publish packages with a quick gate.
-            echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
-            echo "deploy_site=false" >> "$GITHUB_OUTPUT"
-            echo "run_gate=true" >> "$GITHUB_OUTPUT"
-            echo "gate_level=quick" >> "$GITHUB_OUTPUT"
+          case "$TARGET" in
+            packages)
+              echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
+              echo "deploy_site=false" >> "$GITHUB_OUTPUT"
+              ;;
+            site)
+              echo "deploy_packages=false" >> "$GITHUB_OUTPUT"
+              echo "deploy_site=true" >> "$GITHUB_OUTPUT"
+              ;;
+            all)
+              echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
+              echo "deploy_site=true" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "::error::Unknown release target: $TARGET"
+              exit 1
+              ;;
+          esac
 
-            # A tag like `v0.3.0` publishes `latest`; a pre-release tag like
-            # `v0.3.0-beta.1` publishes `beta`.
-            TAG="${GITHUB_REF_NAME}"
-            if printf '%s' "$TAG" | grep -q -- '-'; then
-              echo "dist_tag=beta" >> "$GITHUB_OUTPUT"
-            else
-              echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
-            fi
+          if [ "$TARGET" = "site" ]; then
+            echo "run_gate=false" >> "$GITHUB_OUTPUT"
           else
-            # Manual dispatch.
-            TARGET="${{ inputs.target }}"
-            case "$TARGET" in
-              packages)
-                echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
-                echo "deploy_site=false" >> "$GITHUB_OUTPUT"
-                ;;
-              site)
-                echo "deploy_packages=false" >> "$GITHUB_OUTPUT"
-                echo "deploy_site=true" >> "$GITHUB_OUTPUT"
-                ;;
-              all)
-                echo "deploy_packages=true" >> "$GITHUB_OUTPUT"
-                echo "deploy_site=true" >> "$GITHUB_OUTPUT"
-                ;;
-            esac
-            # Gate is required for package publishing, optional for site-only.
-            if [ "$TARGET" = "site" ]; then
-              echo "run_gate=false" >> "$GITHUB_OUTPUT"
-            else
-              echo "run_gate=true" >> "$GITHUB_OUTPUT"
-            fi
-            echo "gate_level=${{ inputs.gate }}" >> "$GITHUB_OUTPUT"
-            echo "dist_tag=${{ inputs.dist_tag }}" >> "$GITHUB_OUTPUT"
+            echo "run_gate=true" >> "$GITHUB_OUTPUT"
           fi
+          echo "gate_level=$GATE_LEVEL" >> "$GITHUB_OUTPUT"
+          echo "dist_tag=$DIST_TAG" >> "$GITHUB_OUTPUT"
+          echo "expected_sha=$EXPECTED_SHA" >> "$GITHUB_OUTPUT"
 
-  # ─── Guard: tag must match committed versions ──────────────────────────────────
-  # A tag-triggered publish publishes whatever versions are committed at the tag.
-  # This guard fails fast if the tag name does not correspond to a package
-  # version present in the tree, catching a tag pushed before the Version PR
-  # merged (the classic "published the wrong thing" footgun).
+  # ─── Guard automated releases to the merged Version PR SHA ─────────────────────
 
-  verify-tag:
+  verify-ref:
     needs: plan
-    if: github.event_name == 'push'
+    if: needs.plan.outputs.expected_sha != ''
     runs-on: self-hosted-dfw-flex
-    timeout-minutes: 45
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Assert tag matches a committed package version
+      - name: Assert immutable release ref matches the expected SHA
+        env:
+          EXPECTED_SHA: ${{ needs.plan.outputs.expected_sha }}
         run: |
-          TAG="${GITHUB_REF_NAME#v}"
-          echo "Tag version: $TAG"
-          MATCH=$(node -e '
-            const { readdirSync, readFileSync, existsSync } = require("node:fs");
-            const tag = process.argv[1];
-            const dir = "packages";
-            let found = false;
-            for (const d of readdirSync(dir, { withFileTypes: true })) {
-              if (!d.isDirectory()) continue;
-              const p = `${dir}/${d.name}/package.json`;
-              if (!existsSync(p)) continue;
-              const pkg = JSON.parse(readFileSync(p, "utf8"));
-              if (pkg.private) continue;
-              if (pkg.version === tag) { found = true; break; }
-            }
-            process.stdout.write(found ? "yes" : "no");
-          ' "$TAG")
-          if [ "$MATCH" != "yes" ]; then
-            echo "::error::Tag $GITHUB_REF_NAME does not match any committed publishable package version ($TAG). Merge the Version PR before tagging."
+          if ! printf '%s' "$EXPECTED_SHA" | grep -Eq '^[0-9a-f]{40}$'; then
+            echo "::error::expected_sha must be a full 40-character commit SHA"
             exit 1
           fi
-          echo "Tag matches a committed package version."
+          if [ "$GITHUB_SHA" != "$EXPECTED_SHA" ]; then
+            echo "::error::Release ref resolved to $GITHUB_SHA, expected $EXPECTED_SHA"
+            exit 1
+          fi
+          EXPECTED_SUFFIX="${EXPECTED_SHA:0:12}"
+          case "$GITHUB_REF_NAME" in
+            release-pr-*-$EXPECTED_SUFFIX) ;;
+            *)
+              echo "::error::Automated release ref $GITHUB_REF_NAME is not bound to $EXPECTED_SUFFIX"
+              exit 1
+              ;;
+          esac
+          echo "Verified $GITHUB_REF_NAME at exact SHA $EXPECTED_SHA."
 
   # ─── Exact-SHA qualification wait ─────────────────────────────────────────────
   # Use a GitHub-hosted runner for the wait so a single-capacity self-hosted
   # pool remains free to execute the package qualification being awaited.
 
   qualification:
-    needs: [plan, verify-tag]
+    needs: [plan, verify-ref]
     if: >
       always() &&
       needs.plan.outputs.deploy_packages == 'true' &&
-      (needs.verify-tag.result == 'success' || needs.verify-tag.result == 'skipped')
+      (needs.verify-ref.result == 'success' || needs.verify-ref.result == 'skipped')
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -197,11 +175,11 @@ jobs:
   # or browser setup. The script uses only Node built-ins so this remains cheap.
 
   preflight:
-    needs: [plan, verify-tag]
+    needs: [plan, verify-ref]
     if: >
       always() &&
       (needs.plan.outputs.deploy_packages == 'true' || needs.plan.outputs.deploy_site == 'true') &&
-      (needs.verify-tag.result == 'success' || needs.verify-tag.result == 'skipped')
+      (needs.verify-ref.result == 'success' || needs.verify-ref.result == 'skipped')
     runs-on: self-hosted-dfw-flex
     timeout-minutes: 5
     steps:
@@ -227,15 +205,15 @@ jobs:
   # ─── Gate ──────────────────────────────────────────────────────────────────────
 
   gate:
-    needs: [plan, verify-tag, qualification, preflight]
-    # verify-tag is skipped on dispatch; both exact-SHA qualification and
+    needs: [plan, verify-ref, qualification, preflight]
+    # verify-ref is skipped on dispatch; both exact-SHA qualification and
     # credential preflight must succeed before the expensive gate begins.
     if: >
       always() &&
       needs.plan.outputs.run_gate == 'true' &&
       needs.qualification.result == 'success' &&
       needs.preflight.result == 'success' &&
-      (needs.verify-tag.result == 'success' || needs.verify-tag.result == 'skipped')
+      (needs.verify-ref.result == 'success' || needs.verify-ref.result == 'skipped')
     runs-on: self-hosted-dfw-flex
     timeout-minutes: 45
     steps:
@@ -308,12 +286,23 @@ jobs:
       # Publish the versions exactly as committed at this ref. No `changeset
       # version` — versioning already happened in the merged Version PR.
       - name: Publish packages
-        run: pnpm changeset publish --tag ${{ needs.plan.outputs.dist_tag }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DIST_TAG: ${{ needs.plan.outputs.dist_tag }}
+        run: |
+          set -o pipefail
+          PUBLISH_LOG="$(mktemp)"
+          trap 'rm -f "$PUBLISH_LOG"' EXIT
+          pnpm changeset publish --tag "$DIST_TAG" 2>&1 | tee "$PUBLISH_LOG"
+          if grep -Fq "No unpublished projects to publish." "$PUBLISH_LOG"; then
+            echo "::error::changeset publish completed without publishing a package"
+            exit 1
+          fi
 
       # Generate and verify release artifacts (audit trail; not consumed by the CLI).
       - name: Generate beta artifacts
+        env:
+          SOLIDIOM_RELEASE_ID: ${{ github.ref_name }}
         run: pnpm exec tsx tools/generate-beta-artifacts.ts --verify
 
       - name: Verify beta signing

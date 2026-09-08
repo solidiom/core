@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { pathToFileURL } from "node:url"
+import { ReleaseCandidateError, requireUnpublishedPackages } from "./release-candidates.mjs"
 
 const DEFAULT_TIMEOUT_MS = 15_000
 const DEFAULT_CI_WAIT_MS = 20 * 60_000
@@ -176,6 +177,7 @@ export async function runReleasePreflight({
   ciWaitMs = DEFAULT_CI_WAIT_MS,
   ciPollMs = DEFAULT_CI_POLL_MS,
   sleepImpl = delay,
+  publishablePackages,
 }) {
   const config = validateReleaseEnvironment({ packages, site, verifyCi, env })
   const checks = []
@@ -194,6 +196,21 @@ export async function runReleasePreflight({
     }
     checks.push(`npm authentication (${body.username})`)
     checks.push("registry signing key format")
+
+    let unpublished
+    try {
+      unpublished = await requireUnpublishedPackages({
+        packages: publishablePackages,
+        fetchImpl,
+        timeoutMs,
+      })
+    } catch (error) {
+      if (error instanceof ReleaseCandidateError) {
+        throw new PreflightError(error.message, error.category)
+      }
+      throw error
+    }
+    checks.push(`unpublished npm packages (${unpublished.length})`)
   }
 
   if (site) {

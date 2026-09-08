@@ -6,20 +6,24 @@ const root = join(import.meta.dirname, "..")
 const read = (path: string) => readFileSync(join(root, path), "utf8")
 
 describe("release workflow policy", () => {
-  it("runs credential and exact-SHA preflight before qualification", () => {
+  it("runs exact-SHA, credential, candidate, and CI preflight before qualification", () => {
     const workflow = read(".github/workflows/release.yml")
+    const verifyRef = workflow.indexOf("\n  verify-ref:")
     const preflight = workflow.indexOf("\n  preflight:")
     const gate = workflow.indexOf("\n  gate:")
 
-    expect(preflight).toBeGreaterThan(0)
+    expect(verifyRef).toBeGreaterThan(0)
+    expect(preflight).toBeGreaterThan(verifyRef)
     expect(gate).toBeGreaterThan(preflight)
     expect(workflow).toContain("runs-on: ubuntu-latest")
     expect(workflow).toContain(
       "--packages=false\n          --site=false\n          --verify-ci=true",
     )
-    expect(workflow).toMatch(/gate:\n\s+needs: \[plan, verify-tag, qualification, preflight\]/)
+    expect(workflow).toMatch(/gate:\n\s+needs: \[plan, verify-ref, qualification, preflight\]/)
     expect(workflow).toContain("needs.qualification.result == 'success'")
     expect(workflow).toContain("needs.preflight.result == 'success'")
+    expect(workflow).toContain('if [ "$GITHUB_SHA" != "$EXPECTED_SHA" ]')
+    expect(workflow).toContain("release-pr-*-$EXPECTED_SUFFIX")
   })
 
   it("does not authorize a combined site deployment from a skipped publish", () => {
@@ -30,6 +34,35 @@ describe("release workflow policy", () => {
     expect(deploy).toContain("needs.gate.result == 'success'")
     expect(deploy).toContain("needs.publish-packages.result == 'success'")
     expect(deploy).not.toContain("needs.publish-packages.result == 'skipped'")
+  })
+
+  it("dispatches a collision-safe exact-SHA combined release after a Version PR merge", () => {
+    const version = read(".github/workflows/version.yml")
+    const postMerge = read(".github/workflows/tag-on-version-merge.yml")
+
+    expect(version).toContain("branch: release/version-${{ github.run_id }}")
+    expect(version).not.toContain("first publishable package")
+    expect(postMerge).toContain("release-pr-${process.env.PR_NUMBER}-${shortSha}")
+    expect(postMerge).toContain('if [ "$EXISTING_SHA" != "$MERGE_SHA" ]')
+    expect(postMerge).toContain("actions/workflows/release.yml/dispatches")
+    expect(postMerge).toContain('target: "all"')
+    expect(postMerge).toContain("expected_sha: process.env.EXPECTED_SHA")
+    expect(postMerge).not.toContain("git tag -a")
+    expect(read("tools/generate-beta-artifacts.ts")).toContain(
+      'process.env.SOLIDIOM_RELEASE_ID?.trim() || "local-unversioned"',
+    )
+  })
+
+  it("fails package publishing closed when npm has no unpublished versions", () => {
+    const workflow = read(".github/workflows/release.yml")
+    const localRelease = read("scripts/release.sh")
+    const preflight = read("tools/release-preflight.mjs")
+
+    expect(preflight).toContain("requireUnpublishedPackages")
+    expect(workflow).toContain('grep -Fq "No unpublished projects to publish."')
+    expect(workflow).toContain("changeset publish completed without publishing a package")
+    expect(localRelease).toContain("run node tools/release-candidates.mjs")
+    expect(localRelease).toContain("changeset publish completed without publishing a package")
   })
 
   it("qualifies main pushes with hermetic catalog inputs", () => {
