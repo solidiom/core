@@ -135,9 +135,9 @@ function main(): void {
   const catalogHash = sha256Content(catalogContent)
   const registryHash = sha256File(REGISTRY_INDEX)
 
-  // Determine release identifier from first publishable package version
-  const releaseVersion = publishable[0]?.version ?? "0.0.0"
-  const release = `v${releaseVersion}`
+  // Release runs provide the immutable release marker. Package versions are
+  // independent, so no single package version can identify the whole catalog.
+  const release = process.env.SOLIDIOM_RELEASE_ID?.trim() || "local-unversioned"
 
   // Generate pointer
   const pointer: BetaPointer = {

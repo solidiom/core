@@ -305,6 +305,8 @@ if [[ "$DRY_RUN" == false ]]; then
   if [[ "$DO_PACKAGES" == true ]]; then
     [[ -n "${NPM_TOKEN:-}" ]] || fail "NPM_TOKEN is not set (shell env or .env) — needed to publish packages"
     export NODE_AUTH_TOKEN="${NPM_TOKEN}"
+    log "Package publication preflight"
+    run node tools/release-candidates.mjs
   fi
   if [[ "$DO_SITE" == true ]]; then
     [[ -n "${CLOUDFLARE_ACCOUNT_ID:-}" ]] || fail "CLOUDFLARE_ACCOUNT_ID is not set — needed to deploy the site"
@@ -357,13 +359,25 @@ if [[ "$DO_PACKAGES" == true ]]; then
     log "[dry-run] skipping 'changeset publish --tag $DIST_TAG' (would publish now)"
     step "changeset has no dry-run mode; run without --dry-run to publish to npm."
   else
-    run pnpm changeset publish --tag "$DIST_TAG"
+    step "pnpm changeset publish --tag $DIST_TAG"
+    _publish_log="$(mktemp)"
+    if ! pnpm changeset publish --tag "$DIST_TAG" 2>&1 | tee "$_publish_log"; then
+      rm -f "$_publish_log"
+      fail "changeset publish failed"
+    fi
+    if grep -Fq "No unpublished projects to publish." "$_publish_log"; then
+      rm -f "$_publish_log"
+      fail "changeset publish completed without publishing a package"
+    fi
+    rm -f "$_publish_log"
+    unset _publish_log
   fi
 
   # Audit-trail artifacts (not consumed by the CLI, and independent of the npm
   # publish — they snapshot committed versions and hash registry/index.json).
   # --verify fails if the generated artifacts don't round-trip.
-  run pnpm exec tsx tools/generate-beta-artifacts.ts --verify
+  run env "SOLIDIOM_RELEASE_ID=${SOLIDIOM_RELEASE_ID:-local-$(git rev-parse --short=12 HEAD)}" \
+    pnpm exec tsx tools/generate-beta-artifacts.ts --verify
 
   # Beta signing verification. When REGISTRY_SIGN_KEY is set (the CI case, and
   # any real signed release), a failure here is fatal. When the key is absent

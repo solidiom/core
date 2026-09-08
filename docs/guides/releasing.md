@@ -9,7 +9,7 @@ tags: [release, publishing, ci, deployment, guide]
 lifecycle: current
 ---
 
-> **Release policy:** the GitHub Actions workflow is the production release path for tagged releases and manual workflow dispatches. `scripts/release.sh` runs the same package/site pipeline locally by default; pass `--dispatch` to trigger `release.yml` instead. Local execution can publish packages or deploy the site when the required credentials are present.
+> **Release policy:** the GitHub Actions workflow is the production release path for trusted Version PR merge dispatches and manual escape hatches. `scripts/release.sh` runs the same package/site pipeline locally by default; pass `--dispatch` to invoke `release.yml` manually instead. Local execution can publish packages or deploy the site when the required credentials are present.
 
 ## Release paths
 
@@ -59,25 +59,33 @@ gh workflow run release.yml -f target=all -f gate=full
 
 `target` accepts `packages`, `site`, or `all`; `gate` accepts `quick` or `full`. Site-only releases skip the package gate because no package artifact is being published.
 
-### Tag-triggered publish
+### Version PR merge release
 
-`release.yml` publishes automatically when a `v*` tag is pushed. Versioning is deliberately kept out of this workflow: it runs git read-only, does not run `changeset version`, and does not commit anything back. Instead the release is a two-step, PR-reviewed model:
+Versioning stays out of `release.yml`: publishing runs git read-only, never runs
+`changeset version`, and never commits back. The reviewed flow is:
 
-1. **Version PR** — dispatch `.github/workflows/version.yml`. It applies pending Changesets and opens one reviewable `release/version-*` PR containing all the release churn (package.json version bumps, CHANGELOGs, the regenerated/re-signed `registry/index.json`, and `pnpm-lock.yaml` updates).
-2. **Merge → tag → publish** — when you merge that PR, `.github/workflows/tag-on-version-merge.yml` creates and pushes the matching `v<version>` tag, which triggers `release.yml` to publish exactly what was merged.
+1. **Version PR** — dispatch `.github/workflows/version.yml`. It applies pending Changesets and opens a `release/version-<run-id>` PR containing package version bumps, changelogs, the regenerated/re-signed registry, and lockfile updates.
+2. **Merge → immutable marker → explicit dispatch** — merging that PR creates `release-pr-<PR>-<SHA12>` at the merge commit and explicitly dispatches `.github/workflows/release.yml` on that ref with the full expected SHA, `target=all`, and the npm channel derived from changed versions.
+3. **Fail-closed release** — `release.yml` verifies the ref resolves to the expected SHA and requires at least one package version absent from npm before running the gate. After publication succeeds, it deploys the website.
 
-A `workflow_dispatch` on `release.yml` is the manual escape hatch: it publishes packages and/or deploys the site (`target` = `packages`, `site`, or `all`) from the dispatched ref without going through the Version PR.
+A plain tag push does not release anything. This is deliberate: package versions
+are independent, so a global `v<version>` tag is ambiguous, and tag pushes made
+with `GITHUB_TOKEN` are not a reliable downstream workflow trigger.
+
+A manual `workflow_dispatch` remains the escape hatch for package, site, or
+combined releases from a selected ref. Package targets still fail if every
+committed version already exists on npm.
 
 ### What CI does
 
-For a package release (tag push or dispatch), `release.yml`:
+For an automated Version PR merge release, `release.yml`:
 
-1. Builds packages and runs the selected gate.
-2. Signs and verifies the registry index with `REGISTRY_SIGN_KEY`.
-3. Publishes to npm with the `beta` tag. Versions are already committed at the tagged tree (from the merged Version PR) — this workflow does not run `changeset version` and does not commit anything back.
-4. Generates and verifies beta artifacts, then verifies beta signing.
-
-For a site deployment, CI builds packages and templates, checks site boundaries and routes, runs `build:deploy`, creates the Pagefind index, and deploys `apps/site/dist` to Cloudflare Pages.
+1. Verifies the immutable release marker resolves to the full expected merge SHA.
+2. Validates npm/Cloudflare credentials and requires at least one unpublished package version.
+3. Builds packages and runs the selected gate.
+4. Signs and verifies the registry, then publishes committed versions to npm. A Changesets no-op is treated as failure.
+5. Generates release artifacts and verifies signing.
+6. Builds and deploys `apps/site/dist` plus its Pagefind index to Cloudflare Pages.
 
 ## Single-package release
 
@@ -116,8 +124,8 @@ The release-relevant workflows are:
 | `ci-packages.yml`          | Manual dispatch (push/PR triggers dormant) | Package build, tests, accessibility, CLI smoke, catalog + quality gates                             |
 | `ci-site.yml`              | Manual dispatch (push/PR triggers dormant) | Site check, build, E2E, visual, Lighthouse, vertical-slice gate                                     |
 | `version.yml`              | Manual dispatch                            | Applies pending Changesets and opens the reviewable Version PR (step 1 of the release model)        |
-| `tag-on-version-merge.yml` | Version PR merged into `main`              | Creates and pushes the matching `v<version>` tag, which triggers `release.yml`                      |
-| `release.yml`              | Pushed `v*` tag, manual dispatch           | Production package release, site deployment, or both                                                |
+| `tag-on-version-merge.yml` | Version PR merged into `main`              | Creates an immutable exact-SHA marker and explicitly dispatches a combined release                  |
+| `release.yml`              | Manual or trusted post-merge dispatch      | Verifies candidates/SHA, publishes packages, and optionally deploys the site                        |
 | `release-package.yml`      | Manual dispatch                            | Publishes one independent package between full releases (wraps `scripts/release-package.mjs`)       |
 | `nightly.yml`              | Manual dispatch                            | Solid compatibility matrix, full browser suite, dependency checks, and visual-baseline regeneration |
 
@@ -167,15 +175,16 @@ Check the `release.yml` run for site boundary, route-parity, build, or Cloudflar
 
 ## File reference
 
-| File                                         | Purpose                                                                 |
-| -------------------------------------------- | ----------------------------------------------------------------------- |
-| `scripts/release.sh`                         | Local package/site release pipeline; `--dispatch` is the CI alternative |
-| `scripts/release-package.mjs`                | Independent single-package publisher                                    |
-| `.github/workflows/version.yml`              | Opens the reviewable Version PR (applies Changesets); release step 1    |
-| `.github/workflows/tag-on-version-merge.yml` | Tags `v<version>` when the Version PR merges; triggers `release.yml`    |
-| `.github/workflows/release.yml`              | Unified package/site production release (tag-triggered or dispatched)   |
-| `.github/workflows/release-package.yml`      | Manual single-package publish between full releases                     |
-| `.github/workflows/ci-packages.yml`          | Package build, tests, and quality gates                                 |
-| `.github/workflows/ci-site.yml`              | Site check, build, E2E, visual, and Lighthouse                          |
-| `.github/workflows/nightly.yml`              | Manual-dispatch compatibility, browser, and visual checks               |
-| `.changeset/config.json`                     | Changeset and linked-package configuration                              |
+| File                                         | Purpose                                                                      |
+| -------------------------------------------- | ---------------------------------------------------------------------------- |
+| `scripts/release.sh`                         | Local package/site release pipeline; `--dispatch` is the CI alternative      |
+| `scripts/release-package.mjs`                | Independent single-package publisher                                         |
+| `.github/workflows/version.yml`              | Opens the reviewable Version PR (applies Changesets); release step 1         |
+| `.github/workflows/tag-on-version-merge.yml` | Creates an immutable marker and dispatches the exact-SHA combined release    |
+| `.github/workflows/release.yml`              | Fail-closed package/site production release; release step 2                  |
+| `tools/release-candidates.mjs`               | Requires at least one committed package version not already published on npm |
+| `.github/workflows/release-package.yml`      | Manual single-package publish between full releases                          |
+| `.github/workflows/ci-packages.yml`          | Package build, tests, and quality gates                                      |
+| `.github/workflows/ci-site.yml`              | Site check, build, E2E, visual, and Lighthouse                               |
+| `.github/workflows/nightly.yml`              | Manual-dispatch compatibility, browser, and visual checks                    |
+| `.changeset/config.json`                     | Changeset and linked-package configuration                                   |

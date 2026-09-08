@@ -1,8 +1,8 @@
 # Bumping Package Versions
 
 > **For releasing to npm, see [RELEASING.md](./RELEASING.md).** That is the
-> authoritative guide for the two-step release flow (Version PR → tag →
-> publish) and single-package releases. In normal operation you do **not** bump
+> authoritative guide for the two-step release flow (Version PR → immutable
+> exact-SHA marker → explicit package/site dispatch) and single-package releases. In normal operation you do **not** bump
 > versions by hand — the **Version PR** workflow runs `changeset version` and
 > regenerates the registry for you.
 >
@@ -109,9 +109,10 @@ Changesets will:
 ## Notes
 
 - Releases no longer run `changeset version` inside the publish job. The
-  **Version PR** workflow (`version.yml`) applies changesets and regenerates the
-  registry in a reviewable PR; the tag-triggered `release.yml` only publishes.
-  See [RELEASING.md](./RELEASING.md).
+  **Version PR** workflow (`version.yml`) applies Changesets and regenerates the
+  registry in a reviewable PR. Merging it creates a unique marker tied to the
+  merge SHA and explicitly dispatches the fail-closed package/site release. See
+  [RELEASING.md](./RELEASING.md).
 - The registry regeneration in the test suite rebuilds manifests, so stale registry files will cause snapshot mismatches.
 - The `REGISTRY_TIMESTAMP` environment variable can pin the generation timestamp for deterministic builds (used in tests).
 - Private packages (`"private": true`) and probe packages (version `0.0.0`) are excluded from npm publishing but still appear in the registry.

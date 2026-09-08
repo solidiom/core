@@ -1,8 +1,9 @@
 # Releasing
 
 Solidiom uses a **two-step release model** so that a publish run never mutates
-the repository. Versioning happens first, in a reviewable PR; publishing happens
-second, triggered by a tag.
+the repository. Versioning happens first in a reviewable PR; merging that PR
+creates an immutable release marker and explicitly dispatches publishing and the
+website deployment at the exact merge commit.
 
 ```
  ┌─ accumulate changesets on main
@@ -11,24 +12,32 @@ second, triggered by a tag.
  version.yml (manual dispatch)
  │   • pnpm changeset version   (bumps package.json + CHANGELOGs)
  │   • regenerate + re-sign registry/index.json
- │   • opens a "Version PR"     (branch: release/version-<v>)
+ │   • opens a Version PR       (branch: release/version-<run-id>)
  ▼
  Version PR ──► review ──► merge
  │
  ▼
  tag-on-version-merge.yml  (auto, on PR merge)
- │   • pushes tag v<version>
+ │   • verifies publishable package versions changed
+ │   • creates release-pr-<PR>-<SHA12> at the merge commit
+ │   • dispatches release.yml on that tag with expected_sha=<full SHA>
  ▼
- release.yml  (on: push tag v*)
- │   • build → sign → `changeset publish` → upload artifacts
+ release.yml  (workflow_dispatch at the immutable marker)
+ │   • verify exact SHA and unpublished npm candidates
+ │   • build → sign → changeset publish → deploy site → upload artifacts
  │   • GIT READ-ONLY — no version bump, no commit-back
  ▼
- published to npmjs.com
+ published to npmjs.com and deployed to Cloudflare Pages
 ```
 
-The point of the split: **all the file churn** (every `packages/*/package.json`,
-every `CHANGELOG.md`, the regenerated registry, the lockfile) lands in **one PR
-you approve** — not in a surprise commit pushed by the publish job.
+The marker is a release-run identifier, not a package version. Packages version
+independently, so release automation must not derive a global tag from whichever
+package happens to sort first. Explicit dispatch also avoids relying on a tag
+push made with `GITHUB_TOKEN` to start another workflow.
+
+The point of the split: **all the file churn** (changed `package.json` and
+`CHANGELOG.md` files, the regenerated registry, and the lockfile) lands in **one
+PR you approve** — not in a surprise commit pushed by the publish job.
 
 ---
 
@@ -46,11 +55,14 @@ you approve** — not in a surprise commit pushed by the publish job.
    changelog entries, and the regenerated registry. CI runs against it like any
    other PR.
 
-4. **Merge it.** On merge, `tag-on-version-merge.yml` pushes `v<version>`, which
-   triggers `release.yml` to publish. Nothing else to do.
+4. **Merge it.** The post-merge workflow verifies which public package versions
+   changed, creates `release-pr-<PR>-<SHA12>` at the merge commit, and explicitly
+   dispatches `release.yml` for `target=all` with that full expected SHA.
+   `release.yml` verifies the immutable ref, requires at least one unpublished
+   npm version, publishes packages, then deploys the website.
 
-That's the whole loop: **CI green → merge → published.** No editing code, no
-manual commits, no local publishing.
+That's the whole loop: **CI green → merge → packages and website released.** No
+manual tag, local publishing, or global package-version guess is involved.
 
 ### Coordinated full-catalog bump
 
@@ -102,15 +114,14 @@ publishable package** at the same bump level.
 
 ### Dist-tags
 
-`release.yml` derives the npm dist-tag from the tag shape:
+The post-merge workflow derives one npm channel from the versions changed by the
+Version PR: if any changed version is a prerelease, the release uses `beta`;
+otherwise it uses `latest`. The immutable release marker itself does not encode a
+package version.
 
-| Tag             | Dist-tag |
-| --------------- | -------- |
-| `v0.3.0`        | `latest` |
-| `v0.3.0-beta.1` | `beta`   |
-
-To publish a pre-release, produce a pre-release version in the Version PR (e.g.
-via `changeset pre enter beta`).
+To publish a prerelease, produce prerelease versions in the Version PR (for
+example with `changeset pre enter beta`). Manual dispatches choose `dist_tag`
+explicitly.
 
 ---
 
@@ -233,20 +244,23 @@ What the script runs, in order (mirroring `release.yml`):
 3. **Deploy site** — build packages + templates → validate boundaries/route
    parity → build site + search index → `wrangler pages deploy`.
 
-### 4. Tag the release
+### 4. Record an optional local release marker
 
-CI's `tag-on-version-merge.yml` does not run for a local publish, so create and
-push the version tag yourself so the release is traceable and future
-`verify-tag` checks pass:
+A local publish does not run the Version PR post-merge automation. If you need a
+traceability marker, use the same collision-safe shape and point it at the exact
+published commit. Pushing this marker does **not** dispatch `release.yml`; only
+the trusted post-merge workflow performs that explicit dispatch.
 
 ```bash
-git tag v0.4.0
-git push origin v0.4.0
+SHA="$(git rev-parse HEAD)"
+git tag "release-local-${SHA:0:12}" "$SHA"
+git push origin "release-local-${SHA:0:12}"
 ```
 
-> The pre-flight checks abort early with actionable guidance if a required
-> secret is missing or a Cloudflare token is invalid/IP-restricted, so a bad
-> credential fails before the slow build rather than at the final deploy step.
+> The preflight checks abort early if no committed package version is
+> unpublished, if a required secret is missing, or if Cloudflare rejects the
+> configured account/token. A second no-op check around `changeset publish`
+> protects against a candidate being published concurrently.
 
 ### Legacy: dispatch CI from the CLI
 
@@ -268,19 +282,24 @@ still requires an authenticated `gh` and a valid ref.
 
 ## Troubleshooting
 
-**"Tag does not match any committed publishable package version"** —
-`release.yml`'s `verify-tag` job failed. The tag was pushed before the Version
-PR merged, or points at a commit without the bumped versions. Merge the Version
-PR (or push a tag that matches a committed version).
+**“No unpublished package versions were found”** — the selected ref contains
+only versions that already exist on npm. Run and merge the Version PR first. Do
+not create a package-looking Git tag; tags never change package manifests.
 
-**Version PR CI fails on "stale generated artifacts"** — the registry or
+**Exact-SHA verification failed** — the automated release marker did not resolve
+to the Version PR merge SHA passed by the post-merge workflow. Do not move or
+reuse release markers. Rerun the post-merge workflow after investigating the ref.
+
+**Version PR CI fails on “stale generated artifacts”** — the registry or
 `source/` trees drifted. `version.yml` regenerates them, but if you edited the
 branch by hand, run `pnpm nx run-many -t build --exclude=@solidiom/site`,
 `pnpm exec tsx tools/registry-build.ts`, and `pnpm run source:emit`, then commit.
 
-**Auto-tag didn't fire on merge** — `tag-on-version-merge.yml` only runs for
-merged PRs whose head branch starts with `release/version-`. If you renamed the
-branch, push the tag manually: `git tag v<version> && git push origin v<version>`.
+**Post-merge release did not dispatch** —
+`tag-on-version-merge.yml` only accepts merged PRs whose head branch starts with
+`release/version-`. Inspect that workflow first. It is responsible for both the
+immutable marker and the explicit `release.yml` dispatch; manually pushing a tag
+is not an equivalent trigger.
 
 **A single-package release was refused** — the package is in the linked group.
 Use the full release flow, or pass `allow_linked` if you understand the desync

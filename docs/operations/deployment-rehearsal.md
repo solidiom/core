@@ -117,14 +117,16 @@ pnpm budget-report:enforce
 
 #### Option A: GitHub Actions (recommended)
 
-The site is deployed by the `release.yml` workflow. `release.yml` triggers on a
-pushed `v*` tag (packages only — a tag push sets `deploy_site=false`) or on
-manual `workflow_dispatch`. **A plain push to `main` does not deploy the site.**
-To deploy the site, dispatch the release workflow with a site target:
+The site is deployed by the `release.yml` workflow. Merging an automated
+Version PR creates an immutable `release-pr-<PR>-<SHA12>` marker and explicitly
+dispatches `release.yml` with `target=all` at that exact merge SHA. A plain push
+to `main` or a manually pushed tag does not deploy the site.
+
+For a site-only escape hatch, dispatch the release workflow directly:
 
 ```bash
 gh workflow run release.yml -f target=site
-# or deploy packages and site together:
+# or manually release packages and site together:
 gh workflow run release.yml -f target=all
 ```
 

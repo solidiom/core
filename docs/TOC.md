@@ -27,7 +27,7 @@ lifecycle model, and plan authority, see [`README.md`](README.md).
 ## Top level
 
 - [`README.md`](README.md) — Documentation index: navigation, directory structure, plan authority, lifecycle model, and authoring conventions.
-- [`RELEASING.md`](RELEASING.md) — The two-step release model (Version PR → tag → publish) so a publish run never mutates the repo.
+- [`RELEASING.md`](RELEASING.md) — The two-step release model (Version PR → immutable exact-SHA dispatch) so a publish run never mutates the repo.
 - [`bumping-version.md`](bumping-version.md) — Reference for the underlying version-bump mechanics and the rare manual bump; defers to `RELEASING.md` for normal releases.
 - [`axe-scan-results.md`](axe-scan-results.md) — Automated accessibility scan results (axe-core via Vitest browser mode) per primitive.
 - [`keyboard-audit-results.md`](keyboard-audit-results.md) — Keyboard navigation / activation / focus verification for all interactive primitives against APG 1.2.
