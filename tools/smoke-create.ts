@@ -61,7 +61,7 @@
 
 import { mkdtempSync, rmSync, writeFileSync, mkdirSync, existsSync, readFileSync } from "node:fs"
 import { tmpdir } from "node:os"
-import { dirname, join } from "node:path"
+import { delimiter, dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { execFileSync } from "node:child_process"
 import {
@@ -123,6 +123,33 @@ const MANAGERS: PackageManagerName[] = ["npm", "pnpm", "yarn", "bun"]
 const TEMPLATES_NEEDING_BUILD_BEFORE_TYPECHECK = new Set<string>(["tanstack-start-solid"])
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..")
+
+function resolveManagerBinary(manager: PackageManagerName): string {
+  if (manager !== "pnpm") return manager
+
+  try {
+    const manifest = JSON.parse(readFileSync(join(REPO_ROOT, "package.json"), "utf8")) as {
+      packageManager?: string
+    }
+    const version = manifest.packageManager?.match(/^pnpm@([^+]+)/)?.[1]
+    if (!version) return manager
+
+    // `mise which pnpm` can return its `latest` installation and let pnpm
+    // auto-switch by cwd, which is exactly what an external generated project
+    // must not depend on. Resolve the declared version's installation root and
+    // invoke that binary directly.
+    const installRoot = execFileSync("mise", ["where", `pnpm@${version}`], {
+      cwd: REPO_ROOT,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim()
+    const candidates = [join(installRoot, "pnpm"), join(installRoot, "bin", "pnpm.cjs")]
+    return candidates.find((candidate) => existsSync(candidate)) ?? manager
+  } catch {
+    // Hosted CI installs PNPM_VERSION explicitly and does not require mise.
+    return manager
+  }
+}
 
 /**
  * Every `@solidiom/*` package the two templates need, derived transitively
@@ -390,36 +417,57 @@ function parseArgs(argv: string[]): CliArgs {
 // diverge on what "offline" means. See that script's step 8 comment for the
 // full rationale on why each manager needs its own file, not just an env var.
 
-interface ManagerIsolation {
+export interface ManagerIsolation {
+  /** Complete, sanitized child environment reused for every lifecycle phase. */
   env: Record<string, string>
   /** Extra files to write into the work dir before install (registry/cache config). */
   files: Record<string, string>
+  /** Private state directories that must exist before the manager starts. */
+  directories: string[]
+  /** Effective pnpm config required before install; absent for other managers. */
+  expectedPnpmConfig?: Record<"store-dir" | "cache-dir" | "state-dir", string>
+}
+
+function sanitizedInheritedEnv(
+  manager: PackageManagerName,
+  inheritedEnv: NodeJS.ProcessEnv,
+): Record<string, string> {
+  const result: Record<string, string> = {}
+
+  for (const [key, value] of Object.entries(inheritedEnv)) {
+    if (value === undefined) continue
+    const upper = key.toUpperCase()
+
+    // npm-style config is case-insensitive and is also consumed by pnpm,
+    // Yarn, and Bun. Never let a runner-level cache/store/registry setting
+    // cross the fixture boundary; each manager gets an explicit replacement.
+    if (upper.startsWith("NPM_CONFIG_")) continue
+    if (manager === "pnpm" && (upper.startsWith("PNPM_") || upper.startsWith("XDG_"))) continue
+    if (manager === "yarn" && upper.startsWith("YARN_")) continue
+    if (manager === "bun" && upper.startsWith("BUN_")) continue
+
+    result[key] = value
+  }
+
+  return result
 }
 
 /**
  * Environment applied to EVERY manager, regardless of its own config file.
  *
- * Two independent guarantees, because relying on a config file alone proved
- * insufficient:
- *
- * 1. `npm_config_registry` is set explicitly. `pnpm run <script>` injects
- *    `npm_config_registry=https://registry.npmjs.org/` into the script
- *    environment (`pnpm exec` does not), and Bun honours that variable in
- *    preference to its own bunfig.toml. The result was an offline guarantee
- *    that silently depended on how the harness happened to be launched:
- *    invoked directly the Bun leg resolved everything from the local registry,
- *    but invoked via `pnpm run smoke:create` it resolved 314 packages straight
- *    from registry.npmjs.org and only failed because `@solidiom/*` is not
- *    published there. Setting this here overrides any inherited value.
- *
- * 2. Outbound HTTP is pointed at a closed local port while 127.0.0.1 is
- *    exempted, so the local Verdaccio still works but any attempt to reach an
- *    external host fails immediately. This turns a silent fallthrough into a
- *    loud failure even if some future manager version ignores both its config
- *    file and `npm_config_registry`.
+ * The returned object is a COMPLETE child environment, not a partial overlay.
+ * This matters because pnpm stores registry metadata separately from its
+ * content-addressable store; allowing an inherited npm_config_*, PNPM_*, or
+ * XDG_* path through can reintroduce an old integrity record even when
+ * `store-dir` and `cache-dir` look isolated.
  */
-function baseIsolationEnv(registry: string): Record<string, string> {
+function baseIsolationEnv(
+  manager: PackageManagerName,
+  registry: string,
+  inheritedEnv: NodeJS.ProcessEnv,
+): Record<string, string> {
   return {
+    ...sanitizedInheritedEnv(manager, inheritedEnv),
     npm_config_registry: registry,
     NPM_CONFIG_REGISTRY: registry,
     // Deliberately a closed port, not a real proxy.
@@ -430,54 +478,124 @@ function baseIsolationEnv(registry: string): Record<string, string> {
     NO_PROXY: "127.0.0.1,localhost",
     no_proxy: "127.0.0.1,localhost",
     // With npm_config_userconfig redirected below, no manager should read the
-    // developer's ~/.npmrc (the `${NPM_TOKEN}` source that made Yarn Classic
-    // throw). NPM_TOKEN is loaded from the project .env at startup when the
-    // runner didn't inject it; we pass it through here, and keep a harmless
-    // last-resort fallback so any residual `${NPM_TOKEN}` expansion still
-    // succeeds on a machine that has neither the env var nor a .env entry.
-    NPM_TOKEN: process.env["NPM_TOKEN"] ?? "offline-fixture-noop-token",
+    // developer's ~/.npmrc. Keep a harmless fallback for residual token
+    // interpolation on machines without an exported value or project .env.
+    NPM_TOKEN: inheritedEnv["NPM_TOKEN"] ?? "offline-fixture-noop-token",
   }
 }
 
-function isolationFor(
+function miseCompatibilityEnv(inheritedEnv: NodeJS.ProcessEnv): Record<string, string> {
+  const home = inheritedEnv["HOME"]
+  if (!home) return {}
+
+  const dataRoot = inheritedEnv["XDG_DATA_HOME"] ?? join(home, ".local", "share")
+  const configRoot = inheritedEnv["XDG_CONFIG_HOME"] ?? join(home, ".config")
+  const stateRoot = inheritedEnv["XDG_STATE_HOME"] ?? join(home, ".local", "state")
+  const cacheRoot =
+    inheritedEnv["XDG_CACHE_HOME"] ??
+    (process.platform === "darwin" ? join(home, "Library", "Caches") : join(home, ".cache"))
+
+  // mise shims use XDG themselves. Preserve their original roots before pnpm
+  // receives private XDG paths; otherwise the shim can lose its trusted config
+  // or even install a different pnpm version in the throwaway data directory.
+  return {
+    MISE_DATA_DIR: inheritedEnv["MISE_DATA_DIR"] ?? join(dataRoot, "mise"),
+    MISE_CONFIG_DIR: inheritedEnv["MISE_CONFIG_DIR"] ?? join(configRoot, "mise"),
+    MISE_STATE_DIR: inheritedEnv["MISE_STATE_DIR"] ?? join(stateRoot, "mise"),
+    MISE_CACHE_DIR: inheritedEnv["MISE_CACHE_DIR"] ?? join(cacheRoot, "mise"),
+  }
+}
+
+export function isolationFor(
   manager: PackageManagerName,
   registry: string,
   cacheDir: string,
+  inheritedEnv: NodeJS.ProcessEnv = process.env,
 ): ManagerIsolation {
-  const base = baseIsolationEnv(registry)
-  // Redirect npm's user-level config to a throwaway empty file so no manager
-  // reads the developer's real ~/.npmrc (see NPM_TOKEN note in baseIsolationEnv).
-  // Yarn Classic, npm, and pnpm all honour npm_config_userconfig. The file is
-  // written by the caller (it lives in cacheDir, which is created before this
-  // runs); an absolute path is used so it resolves regardless of the child's cwd.
+  const base = baseIsolationEnv(manager, registry, inheritedEnv)
   const userconfigPath = join(cacheDir, "empty-userconfig.npmrc")
-  const userconfigEnv = { npm_config_userconfig: userconfigPath }
+  const userconfigEnv = {
+    npm_config_userconfig: userconfigPath,
+    NPM_CONFIG_USERCONFIG: userconfigPath,
+  }
+
   switch (manager) {
     case "npm":
-      return {
-        env: { ...base, ...userconfigEnv, npm_config_cache: cacheDir },
-        files: {
-          ".npmrc": `registry=${registry}\ncache=${cacheDir}\n`,
-        },
-      }
-    case "pnpm":
       return {
         env: {
           ...base,
           ...userconfigEnv,
-          npm_config_store_dir: join(cacheDir, "store"),
-          npm_config_cache_dir: join(cacheDir, "metadata"),
+          npm_config_cache: cacheDir,
+          NPM_CONFIG_CACHE: cacheDir,
         },
         files: {
-          ".npmrc": `registry=${registry}\nstore-dir=${join(cacheDir, "store")}\ncache-dir=${join(cacheDir, "metadata")}\n`,
+          ".npmrc": `registry=${registry}\ncache=${cacheDir}\n`,
         },
+        directories: [cacheDir],
       }
+    case "pnpm": {
+      const storeDir = join(cacheDir, "store")
+      const metadataDir = join(cacheDir, "metadata")
+      const stateDir = join(cacheDir, "state")
+      const xdgCacheDir = join(cacheDir, "xdg-cache")
+      const xdgConfigDir = join(cacheDir, "xdg-config")
+      const xdgStateDir = join(cacheDir, "xdg-state")
+      const expectedPnpmConfig = {
+        "store-dir": storeDir,
+        "cache-dir": metadataDir,
+        "state-dir": stateDir,
+      }
+
+      return {
+        env: {
+          ...base,
+          ...userconfigEnv,
+          ...miseCompatibilityEnv(inheritedEnv),
+          npm_config_store_dir: storeDir,
+          NPM_CONFIG_STORE_DIR: storeDir,
+          npm_config_cache_dir: metadataDir,
+          NPM_CONFIG_CACHE_DIR: metadataDir,
+          npm_config_state_dir: stateDir,
+          NPM_CONFIG_STATE_DIR: stateDir,
+          XDG_CACHE_HOME: xdgCacheDir,
+          XDG_CONFIG_HOME: xdgConfigDir,
+          XDG_STATE_HOME: xdgStateDir,
+          // XDG_DATA_HOME and PNPM_HOME locate pnpm/corepack executables and
+          // version caches, not registry metadata. Preserve them when present;
+          // redirecting them makes an offline run try to bootstrap pnpm itself.
+          ...(inheritedEnv["XDG_DATA_HOME"]
+            ? { XDG_DATA_HOME: inheritedEnv["XDG_DATA_HOME"] }
+            : {}),
+          ...(inheritedEnv["PNPM_HOME"] ? { PNPM_HOME: inheritedEnv["PNPM_HOME"] } : {}),
+        },
+        files: {
+          ".npmrc": [
+            `registry=${registry}`,
+            `store-dir=${storeDir}`,
+            `cache-dir=${metadataDir}`,
+            `state-dir=${stateDir}`,
+            "",
+          ].join("\n"),
+        },
+        directories: [
+          cacheDir,
+          storeDir,
+          metadataDir,
+          stateDir,
+          xdgCacheDir,
+          xdgConfigDir,
+          xdgStateDir,
+        ],
+        expectedPnpmConfig,
+      }
+    }
     case "yarn":
       return {
         env: { ...base, ...userconfigEnv, YARN_REGISTRY: registry, YARN_CACHE_FOLDER: cacheDir },
         files: {
           ".yarnrc": `registry "${registry}"\ncache-folder "${cacheDir}"\n`,
         },
+        directories: [cacheDir],
       }
     case "bun":
       return {
@@ -485,19 +603,64 @@ function isolationFor(
         files: {
           "bunfig.toml": `[install]\nregistry = "${registry}"\ncache-dir = "${cacheDir}"\n`,
         },
+        directories: [cacheDir],
       }
   }
 }
 
+async function verifyPnpmIsolation(
+  destination: string,
+  managerBin: string,
+  isolation: ManagerIsolation,
+): Promise<void> {
+  const expected = isolation.expectedPnpmConfig
+  if (!expected) return
+
+  for (const [key, expectedPath] of Object.entries(expected)) {
+    // `pnpm config list --json` has omitted store-dir in some invocation
+    // contexts even when `pnpm config get store-dir` returns the applied
+    // value. Query each key directly so the guard validates behavior rather
+    // than depending on the aggregate command's serialization details.
+    const result = await runPackageManager({
+      command: { bin: managerBin as PackageManagerName, args: ["config", "get", key] },
+      cwd: destination,
+      env: isolation.env,
+    })
+    if (result.code !== 0) {
+      throw new Error(
+        `Unable to verify pnpm ${key}: ${result.stderr || result.stdout || `exit code ${result.code}`}`,
+      )
+    }
+
+    const effectivePath = result.stdout.trim()
+    if (effectivePath !== expectedPath) {
+      throw new Error(
+        `pnpm isolation failed: effective ${key} is ${JSON.stringify(effectivePath)}, expected ${expectedPath}`,
+      )
+    }
+  }
+
+  console.error(
+    `  pnpm state isolated: store=${expected["store-dir"]}, metadata=${expected["cache-dir"]}, state=${expected["state-dir"]}`,
+  )
+}
+
 /**
- * Corepack refuses to run yarn from a directory whose nearest package.json
- * doesn't declare a compatible "packageManager" field (verified empirically
- * — see the CLI-008 report). Every isolated work dir gets its own
- * package.json anyway (materialize() writes one from the template), so this
- * only matters for yarn: we patch the materialized package.json to add the
- * field after create() runs and before install runs.
+ * Corepack/mise choose a package-manager version from the nearest
+ * package.json. Pin generated projects so local smoke runs use the same pnpm
+ * 10 version as CI instead of a developer's global/default pnpm, while Yarn
+ * Classic also gets the field required by Corepack's compatibility guard.
  */
 const YARN_PACKAGE_MANAGER_FIELD = "yarn@1.22.22"
+const PNPM_PACKAGE_MANAGER_FIELD = (() => {
+  const manifest = JSON.parse(readFileSync(join(REPO_ROOT, "package.json"), "utf8")) as {
+    packageManager?: string
+  }
+  if (!manifest.packageManager?.startsWith("pnpm@")) {
+    throw new Error("Root package.json must declare the pnpm packageManager used by smoke tests")
+  }
+  return manifest.packageManager
+})()
 
 // ─── Harness ────────────────────────────────────────────────────────────────
 
@@ -524,6 +687,7 @@ export async function runCombination(
   const projectName = `smoke-${template}-${manager}`.replace(/[^a-z0-9-]/g, "-")
   const workspaceDir = mkdtempSync(join(rootTempDir, `${manager}-${template}-`))
   const cacheDir = join(workspaceDir, "cache")
+  const managerBin = resolveManagerBinary(manager)
   mkdirSync(cacheDir, { recursive: true })
   const destination = join(workspaceDir, projectName)
 
@@ -559,32 +723,52 @@ export async function runCombination(
     }
     phases.push({ phase: "create", status: "passed", durationMs: createMs })
 
-    // ── isolate registry/cache for this manager, and (yarn only) satisfy
-    //    corepack's packageManager-field guard ──
+    // ── isolate registry/cache for this manager, and pin managers whose
+    //    project-local version selection would otherwise drift ──
     const isolation = isolationFor(manager, registry, cacheDir)
+    if (manager === "pnpm" && managerBin !== "pnpm") {
+      // Package scripts can invoke `pnpm` recursively. Put the exact binary's
+      // directory first so those nested calls cannot fall back to a Corepack
+      // or mise shim after XDG cache isolation hides its downloaded versions.
+      const managerBinDir = dirname(managerBin)
+      isolation.env.PATH = isolation.env.PATH
+        ? `${managerBinDir}${delimiter}${isolation.env.PATH}`
+        : managerBinDir
+    }
+    for (const directory of isolation.directories) {
+      mkdirSync(directory, { recursive: true })
+    }
     for (const [name, content] of Object.entries(isolation.files)) {
       writeFileSync(join(destination, name), content)
     }
     // Empty user-level npm config so no manager reads the developer's real
-    // ~/.npmrc (which may reference ${NPM_TOKEN}); npm_config_userconfig in
-    // isolation.env points here. Lives in cacheDir (created above), not the
-    // work dir, so it is addressed by absolute path regardless of child cwd.
+    // ~/.npmrc (which may reference ${NPM_TOKEN}); both lower- and uppercase
+    // userconfig variables in isolation.env point here.
     writeFileSync(join(cacheDir, "empty-userconfig.npmrc"), "")
-    if (manager === "yarn") {
+    if (manager === "yarn" || manager === "pnpm") {
       const pkgPath = join(destination, "package.json")
       const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as Record<string, unknown>
-      pkg["packageManager"] = YARN_PACKAGE_MANAGER_FIELD
+      pkg["packageManager"] =
+        manager === "yarn" ? YARN_PACKAGE_MANAGER_FIELD : PNPM_PACKAGE_MANAGER_FIELD
       writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n")
     }
+
+    // Fail before installation if pnpm ignored any private path. This validates
+    // the effective child-process configuration rather than trusting that the
+    // intended env/.npmrc precedence remains stable across pnpm releases.
+    await verifyPnpmIsolation(destination, managerBin, isolation)
 
     // ── install ──
     phaseReached = "install"
     const detected = detectPackageManager({ cwd: destination, override: manager })
     const { result: installRun, durationMs: installMs } = await time(() =>
       runPackageManager({
-        command: installPackageManagerCommand(detected),
+        command: {
+          ...installPackageManagerCommand(detected),
+          bin: managerBin as PackageManagerName,
+        },
         cwd: destination,
-        env: { ...process.env, ...isolation.env },
+        env: isolation.env,
       }),
     )
     if (installRun.code !== 0) {
@@ -650,9 +834,9 @@ export async function runCombination(
       }
       const { result: typecheckRun, durationMs: typecheckMs } = await time(() =>
         runPackageManager({
-          command: { bin: manager, args: ["run", "typecheck"] },
+          command: { bin: managerBin as PackageManagerName, args: ["run", "typecheck"] },
           cwd: destination,
-          env: { ...process.env, ...isolation.env },
+          env: isolation.env,
         }),
       )
       if (typecheckRun.code !== 0) {
@@ -684,9 +868,9 @@ export async function runCombination(
       }
       const { result: buildRun, durationMs: buildMs } = await time(() =>
         runPackageManager({
-          command: { bin: manager, args: ["run", "build"] },
+          command: { bin: managerBin as PackageManagerName, args: ["run", "build"] },
           cwd: destination,
-          env: { ...process.env, ...isolation.env },
+          env: isolation.env,
         }),
       )
       if (buildRun.code !== 0) {
@@ -723,9 +907,9 @@ export async function runCombination(
     } else {
       const { result: testRun, durationMs: testMs } = await time(() =>
         runPackageManager({
-          command: { bin: manager, args: ["run", "test"] },
+          command: { bin: managerBin as PackageManagerName, args: ["run", "test"] },
           cwd: destination,
-          env: { ...process.env, ...isolation.env },
+          env: isolation.env,
         }),
       )
       if (testRun.code !== 0) {

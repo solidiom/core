@@ -303,7 +303,7 @@ jobs:
         id: snapshot-probe
         with:
           path: tools/offline-fixture/.registry-snapshot
-          key: offline-registry-snapshot-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml') }}
+          key: offline-registry-snapshot-v2-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml', 'tools/offline-fixture/verdaccio-prep-config.yaml') }}
           lookup-only: true
       - name: Warm offline registry snapshot
         if: steps.snapshot-probe.outputs.cache-hit != 'true'
@@ -312,7 +312,7 @@ jobs:
         if: steps.snapshot-probe.outputs.cache-hit != 'true'
         with:
           path: tools/offline-fixture/.registry-snapshot
-          key: offline-registry-snapshot-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml') }}
+          key: offline-registry-snapshot-v2-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml', 'tools/offline-fixture/verdaccio-prep-config.yaml') }}
 
   cli-smoke-create:
     needs: [build, cli-smoke-create-prep]
@@ -339,14 +339,26 @@ jobs:
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: tools/offline-fixture/.registry-snapshot
-          key: offline-registry-snapshot-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml') }}
+          key: offline-registry-snapshot-v2-${{ runner.os }}-${{ hashFiles('templates/*/package.json', 'pnpm-lock.yaml', 'tools/offline-fixture/verdaccio-prep-config.yaml') }}
           fail-on-cache-miss: true
       - name: Offline create/install/typecheck/build/test (${{ matrix.manager }})
+        env:
+          SMOKE_MANAGER: ${{ matrix.manager }}
         run: |
           mkdir -p artifacts
+          # A distinct registry origin per run/manager prevents metadata from a
+          # leaked package-manager cache aliasing a same-version fixture tarball.
+          case "$SMOKE_MANAGER" in
+            npm) manager_offset=0 ;;
+            pnpm) manager_offset=1 ;;
+            yarn) manager_offset=2 ;;
+            bun) manager_offset=3 ;;
+          esac
+          registry_port=$((20000 + (GITHUB_RUN_ID % 10000) * 4 + manager_offset))
           tools/offline-fixture/run-offline-test.sh \
-            --manager ${{ matrix.manager }} \
-            --smoke-json-out artifacts/smoke-create-${{ matrix.manager }}.json
+            --manager "$SMOKE_MANAGER" \
+            --port "$registry_port" \
+            --smoke-json-out "artifacts/smoke-create-${SMOKE_MANAGER}.json"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
         with:

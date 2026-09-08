@@ -25,6 +25,9 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MONOREPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+PNPM_PACKAGE_MANAGER="$(node -p 'require(process.argv[1]).packageManager' "$MONOREPO_ROOT/package.json")"
+PNPM_FIXTURE_VERSION="${PNPM_PACKAGE_MANAGER#pnpm@}"
+PNPM_FIXTURE_VERSION="${PNPM_FIXTURE_VERSION%%+*}"
 
 # Load the project root .env so variables like NPM_TOKEN are available even
 # when the runner (e.g. mise) doesn't inject them — mirrors
@@ -376,9 +379,12 @@ fi
 #           / npm_config_cache env vars as belt-and-suspenders (env wins over
 #           .npmrc, so either alone would suffice, but both makes the
 #           isolation robust to which mechanism a given npm version honors).
-#   pnpm  - same temp .npmrc (pnpm reads npm-style .npmrc) plus explicit
-#           --registry/--store-dir/--virtual-store-dir flags, since pnpm's
-#           own docs treat the CLI flags as the authoritative override.
+#   pnpm  - temp .npmrc plus explicit registry/store/cache/state env vars and
+#           private XDG cache/config/state directories. pnpm keeps registry
+#           metadata outside its content-addressable store, so isolating only
+#           store-dir does not prevent a same-version stale integrity record.
+#           XDG_DATA_HOME/PNPM_HOME remain available because they locate the
+#           pnpm executable/version cache required to run offline.
 #   yarn  - yarn Classic (1.x) does NOT read .npmrc for its registry; it
 #           needs its own `.yarnrc` with `registry "<url>"` plus
 #           `--cache-folder`. Corepack's guard (see below) also requires the
@@ -455,11 +461,35 @@ EOF
       ;;
 
     pnpm)
+      local mise_data_dir="${MISE_DATA_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/mise}"
+      local mise_config_dir="${MISE_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/mise}"
+      local mise_state_dir="${MISE_STATE_DIR:-${XDG_STATE_HOME:-$HOME/.local/state}/mise}"
+      local default_mise_cache_root="${XDG_CACHE_HOME:-$HOME/.cache}"
+      if [[ "$(uname -s)" == "Darwin" ]] && [[ -z "${XDG_CACHE_HOME:-}" ]]; then
+        default_mise_cache_root="$HOME/Library/Caches"
+      fi
+      local mise_cache_dir="${MISE_CACHE_DIR:-$default_mise_cache_root/mise}"
+      local pnpm_executable
+      pnpm_executable="$(command -v pnpm)"
+      if command -v mise >/dev/null 2>&1; then
+        local pnpm_install_root
+        pnpm_install_root="$(mise where "pnpm@$PNPM_FIXTURE_VERSION" 2>/dev/null || true)"
+        if [[ -x "$pnpm_install_root/pnpm" ]]; then
+          pnpm_executable="$pnpm_install_root/pnpm"
+        fi
+      fi
+      local pnpm_bin_dir="$work_dir/pnpm-bin"
+      mkdir -p "$pnpm_bin_dir"
+      printf '#!/usr/bin/env bash\nexec %q "$@"\n' "$pnpm_executable" > "$pnpm_bin_dir/pnpm"
+      chmod +x "$pnpm_bin_dir/pnpm"
+      local pnpm_fixture_path="$pnpm_bin_dir:$PATH"
+
       cat > "$work_dir/package.json" <<EOF
 {
   "name": "offline-matrix-pnpm",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "$PNPM_PACKAGE_MANAGER",
   "overrides": {
     "solid-js": "2.0.0-beta.24",
     "@solidjs/web": "2.0.0-beta.24"
@@ -470,14 +500,34 @@ EOF
   }
 }
 EOF
+      mkdir -p \
+        "$cache_dir/store" \
+        "$cache_dir/metadata" \
+        "$cache_dir/state" \
+        "$cache_dir/xdg-cache" \
+        "$cache_dir/xdg-config" \
+        "$cache_dir/xdg-state"
       cat > "$work_dir/.npmrc" <<EOF
 registry=$REGISTRY_URL
 store-dir=$cache_dir/store
+cache-dir=$cache_dir/metadata
+state-dir=$cache_dir/state
 virtual-store-dir=$work_dir/node_modules/.pnpm
 EOF
       (
         cd "$work_dir" && \
         npm_config_registry="$REGISTRY_URL" \
+        npm_config_store_dir="$cache_dir/store" \
+        npm_config_cache_dir="$cache_dir/metadata" \
+        npm_config_state_dir="$cache_dir/state" \
+        MISE_DATA_DIR="$mise_data_dir" \
+        MISE_CONFIG_DIR="$mise_config_dir" \
+        MISE_STATE_DIR="$mise_state_dir" \
+        MISE_CACHE_DIR="$mise_cache_dir" \
+        XDG_CACHE_HOME="$cache_dir/xdg-cache" \
+        XDG_CONFIG_HOME="$cache_dir/xdg-config" \
+        XDG_STATE_HOME="$cache_dir/xdg-state" \
+        PATH="$pnpm_fixture_path" \
         node "$SOLIDIOM_BIN" add dialog --registry "$REGISTRY_URL" --no-network --install --package-manager pnpm
       ) || { echo "  ERROR: pnpm matrix leg failed."; return 1; }
       ;;

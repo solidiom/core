@@ -97,6 +97,27 @@ describe("release workflow policy", () => {
     expect(startVerdaccio).toBeGreaterThan(purgeDatabase)
   })
 
+  it("isolates pnpm metadata and rotates the offline registry cache identity", () => {
+    const fixture = read("tools/offline-fixture/run-offline-test.sh")
+    const workflow = read(".github/workflows/ci-packages.yml")
+
+    expect(fixture).toContain("cache-dir=$cache_dir/metadata")
+    expect(fixture).toContain("state-dir=$cache_dir/state")
+    expect(fixture).toContain('XDG_CACHE_HOME="$cache_dir/xdg-cache"')
+    expect(fixture).toContain('XDG_STATE_HOME="$cache_dir/xdg-state"')
+    expect(fixture).toContain('MISE_STATE_DIR="$mise_state_dir"')
+    expect(fixture).toContain('"packageManager": "$PNPM_PACKAGE_MANAGER"')
+    expect(fixture).toContain('mise where "pnpm@$PNPM_FIXTURE_VERSION"')
+    expect(fixture).toContain("exec %q")
+    expect(fixture).toContain('pnpm_executable="$pnpm_install_root/pnpm"')
+    expect(fixture).toContain('PATH="$pnpm_fixture_path"')
+
+    expect(workflow).toContain("offline-registry-snapshot-v2-")
+    expect(workflow).toContain("tools/offline-fixture/verdaccio-prep-config.yaml")
+    expect(workflow).toContain("GITHUB_RUN_ID % 10000")
+    expect(workflow).toContain('--port "$registry_port"')
+  })
+
   it("treats root tooling and workflow changes as global release impact", () => {
     const workflow = read(".github/workflows/ci-required.yml")
     const releaseReadiness = workflow.slice(

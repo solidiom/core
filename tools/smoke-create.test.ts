@@ -2,7 +2,7 @@ import { describe, it, expect, afterEach } from "vitest"
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync, existsSync, readdirSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
-import { parseCatalog, runCombination } from "./smoke-create"
+import { isolationFor, parseCatalog, runCombination } from "./smoke-create"
 
 describe("smoke-create catalog parsing", () => {
   it("preserves quoted semver ranges containing spaces", () => {
@@ -24,6 +24,64 @@ overrides:
       "@solidjs/web": ">=2.0.0-rc.6 <3.0.0",
       "babel-preset-solid": "^2.0.0-rc.2",
     })
+  })
+})
+
+describe("smoke-create pnpm isolation", () => {
+  it("replaces inherited pnpm, npm, and XDG state with combination-private paths", () => {
+    const cacheDir = join(tmpdir(), "solidiom-pnpm-isolation-test")
+    const isolation = isolationFor("pnpm", "http://127.0.0.1:54321", cacheDir, {
+      PATH: "/host/bin",
+      HOME: "/host/home",
+      NPM_TOKEN: "test-token",
+      npm_config_registry: "https://registry.npmjs.org/",
+      npm_config_cache_dir: "/host/pnpm/metadata",
+      NPM_CONFIG_STORE_DIR: "/host/pnpm/store",
+      npm_config_state_dir: "/host/pnpm/state",
+      PNPM_HOME: "/host/pnpm/home",
+      PNPM_STORE_PATH: "/host/pnpm/other-store",
+      XDG_CACHE_HOME: "/host/xdg/cache",
+      XDG_CONFIG_HOME: "/host/xdg/config",
+      XDG_DATA_HOME: "/host/xdg/data",
+      XDG_STATE_HOME: "/host/xdg/state",
+    })
+
+    expect(isolation.env.PATH).toBe("/host/bin")
+    // HOME remains available so mise/corepack shims can resolve their own
+    // installations; every pnpm state location beneath it is overridden.
+    expect(isolation.env.HOME).toBe("/host/home")
+    expect(isolation.env.MISE_DATA_DIR).toBe("/host/xdg/data/mise")
+    expect(isolation.env.MISE_CONFIG_DIR).toBe("/host/xdg/config/mise")
+    expect(isolation.env.MISE_STATE_DIR).toBe("/host/xdg/state/mise")
+    expect(isolation.env.NPM_TOKEN).toBe("test-token")
+    expect(isolation.env.PNPM_STORE_PATH).toBeUndefined()
+
+    const expected = {
+      "store-dir": join(cacheDir, "store"),
+      "cache-dir": join(cacheDir, "metadata"),
+      "state-dir": join(cacheDir, "state"),
+    }
+    expect(isolation.expectedPnpmConfig).toEqual(expected)
+    expect(isolation.env.npm_config_store_dir).toBe(expected["store-dir"])
+    expect(isolation.env.NPM_CONFIG_STORE_DIR).toBe(expected["store-dir"])
+    expect(isolation.env.npm_config_cache_dir).toBe(expected["cache-dir"])
+    expect(isolation.env.NPM_CONFIG_CACHE_DIR).toBe(expected["cache-dir"])
+    expect(isolation.env.npm_config_state_dir).toBe(expected["state-dir"])
+    expect(isolation.env.NPM_CONFIG_STATE_DIR).toBe(expected["state-dir"])
+    expect(isolation.env.XDG_CACHE_HOME).toBe(join(cacheDir, "xdg-cache"))
+    expect(isolation.env.XDG_CONFIG_HOME).toBe(join(cacheDir, "xdg-config"))
+    expect(isolation.env.XDG_STATE_HOME).toBe(join(cacheDir, "xdg-state"))
+    // Tool/version caches are preserved so pnpm itself remains available
+    // offline; package metadata and install state are still private.
+    expect(isolation.env.XDG_DATA_HOME).toBe("/host/xdg/data")
+    expect(isolation.env.PNPM_HOME).toBe("/host/pnpm/home")
+
+    for (const path of isolation.directories) {
+      expect(path.startsWith(`${cacheDir}/`) || path === cacheDir).toBe(true)
+    }
+    expect(isolation.files[".npmrc"]).toContain(`store-dir=${expected["store-dir"]}`)
+    expect(isolation.files[".npmrc"]).toContain(`cache-dir=${expected["cache-dir"]}`)
+    expect(isolation.files[".npmrc"]).toContain(`state-dir=${expected["state-dir"]}`)
   })
 })
 
