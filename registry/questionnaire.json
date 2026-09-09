@@ -15,7 +15,7 @@
   "runtime": [
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Questionnaire",
   "description": "Multi-step form and survey flow with progress tracking.",
   "category": "data-input",
@@ -71,12 +71,10 @@
     "filesHash": "b961edeb99faa00df4158f725694c4c9640c2362658ac4a0c91b3ef20d2b81cd",
     "fileDigests": {
       "src/index.tsx": "5e508513afdabd446dc546a3512e4c1733aea9dbb1006f189939d33ca07e7b3d"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/questionnaire"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

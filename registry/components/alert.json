@@ -1,5 +1,5 @@
 {
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "name": "alert",
   "version": "0.4.1",
   "package": "@solidiom/recipes-css",
@@ -29,8 +29,7 @@
       "unocss": {
         "src/recipes/alert.tsx": "0b580e8b3dce2719d4954d35dc8bfcd8e232aa10ffe77067afb67a66230649ee"
       }
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "documentation": {
     "status": "complete",
@@ -46,6 +45,5 @@
   },
   "dependencies": [
     "@solidiom/alert"
-  ],
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  ]
 }

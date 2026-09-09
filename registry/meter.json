@@ -14,7 +14,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Meter",
   "description": "Scalar measurement within a known range (e.g. disk usage, signal strength).",
   "category": "feedback",
@@ -75,12 +75,10 @@
     "fileDigests": {
       "src/derive-status.ts": "b9a04deecaea3ae75023eb756629cdf2b26a2de0f573e25d3b63bda5b09ddb5c",
       "src/index.tsx": "1ba74338778b5b554a0fd18cdb7afda7ec0609d199e2ef677ef88b11de456642"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/meter"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

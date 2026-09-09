@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Skeleton",
   "description": "Loading placeholder with pulse animation.",
   "category": "feedback",
@@ -65,12 +65,10 @@
     "filesHash": "30723256b83c226fff5d3b898c1120be23027cbffd7e0885bd70b02afcc9c88f",
     "fileDigests": {
       "src/index.tsx": "0b088d8443d2f846fea69bf7c96b161290b6e91788e786a8c91201d2818999ff"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/skeleton"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

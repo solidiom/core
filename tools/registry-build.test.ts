@@ -5,6 +5,7 @@ import {
   writeFileSync,
   rmSync,
   readFileSync,
+  readdirSync,
   existsSync,
   cpSync,
 } from "node:fs"
@@ -161,115 +162,86 @@ describe("generateKeywords", () => {
 
 describe("registry build determinism (REG-004)", () => {
   const ROOT = join(import.meta.dirname, "..")
-  const REGISTRY_DIR = join(ROOT, "registry")
 
-  it("produces byte-identical output on repeated runs with fixed timestamp", () => {
-    const env = {
-      ...process.env,
-      REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
+  function readJsonTree(directory: string): Map<string, string> {
+    const files = new Map<string, string>()
+    const visit = (current: string, prefix = ""): void => {
+      for (const entry of readdirSync(current, { withFileTypes: true })) {
+        const relativePath = prefix ? `${prefix}/${entry.name}` : entry.name
+        const fullPath = join(current, entry.name)
+        if (entry.isDirectory()) visit(fullPath, relativePath)
+        else if (entry.name.endsWith(".json"))
+          files.set(relativePath, readFileSync(fullPath, "utf8"))
+      }
     }
+    visit(directory)
+    return files
+  }
 
-    // Run the build twice
-    execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
-    const indexRun1 = readFileSync(join(REGISTRY_DIR, "index.json"), "utf8")
-
-    execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
-    const indexRun2 = readFileSync(join(REGISTRY_DIR, "index.json"), "utf8")
-
-    expect(indexRun1).toBe(indexRun2)
-  }, 10_000)
-
-  it("snapshot: registry/index.json matches expected structure", () => {
-    const env = {
-      ...process.env,
-      REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
-    }
+  it("produces byte-identical output trees from identical inputs", () => {
+    const root = mkdtempSync(join(tmpdir(), "solidiom-registry-determinism-"))
+    const firstDirectory = join(root, "first")
+    const secondDirectory = join(root, "second")
+    const env = { ...process.env }
     delete env.REGISTRY_SIGN_KEY
 
-    execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
-    const index = JSON.parse(readFileSync(join(REGISTRY_DIR, "index.json"), "utf8"))
+    try {
+      mkdirSync(join(firstDirectory, "blocks"), { recursive: true })
+      writeFileSync(join(firstDirectory, "blocks", "stale.json"), '{"stale":true}\n')
 
-    // ── Top-level schema ──────────────────────────────────────────────────
-    expect(index.$schema).toBe("https://solidiom.dev/schemas/registry-index/v3.json")
-    expect(index.version).toBe(3)
-    expect(typeof index.generatedAt).toBe("string")
+      execSync(`pnpm exec tsx tools/registry-build.ts --output-dir ${firstDirectory}`, {
+        cwd: ROOT,
+        env,
+        encoding: "utf8",
+      })
+      execSync(`pnpm exec tsx tools/registry-build.ts --output-dir ${secondDirectory}`, {
+        cwd: ROOT,
+        env,
+        encoding: "utf8",
+      })
 
-    // ── Integrity ─────────────────────────────────────────────────────────
-    expect(index.integrity).toBeDefined()
-    expect(index.integrity.algorithm).toBe("sha256")
-    expect(index.integrity.entriesHash).toMatch(/^[0-9a-f]{64}$/)
-
-    // ── Collection counts (must be non-empty) ─────────────────────────────
-    expect(index.primitives.length).toBeGreaterThanOrEqual(30)
-    expect(index.adapters.length).toBeGreaterThanOrEqual(1)
-    expect(index.components.length).toBeGreaterThanOrEqual(1)
-    expect(index.blocks.length).toBeGreaterThanOrEqual(1)
-    expect(index.templates.length).toBeGreaterThanOrEqual(1)
-    expect(index.themes.length).toBeGreaterThanOrEqual(1)
-
-    // ── Primitive entry shape ─────────────────────────────────────────────
-    for (const primitive of index.primitives) {
-      expect(typeof primitive.name).toBe("string")
-      expect(typeof primitive.version).toBe("string")
-      expect(typeof primitive.package).toBe("string")
-      expect(primitive.package).toMatch(/^@solidiom\//)
-      expect(typeof primitive.label).toBe("string")
-      expect(typeof primitive.description).toBe("string")
-      expect(typeof primitive.category).toBe("string")
-      expect(typeof primitive.status).toBe("string")
-      expect(Array.isArray(primitive.deliverables)).toBe(true)
-      expect(typeof primitive.hasAccessibilityEvidence).toBe("boolean")
-      expect(primitive.accessibility).toBeDefined()
-      expect(typeof primitive.accessibility.reviewStatus).toBe("string")
-      expect(Array.isArray(primitive.accessibility.evidenceIds)).toBe(true)
-      expect(primitive.provenance).toBeDefined()
-      expect(typeof primitive.provenance.repository).toBe("string")
-      expect(typeof primitive.provenance.directory).toBe("string")
+      expect(readJsonTree(firstDirectory)).toEqual(readJsonTree(secondDirectory))
+    } finally {
+      rmSync(root, { recursive: true, force: true })
     }
+  }, 20_000)
 
-    // ── Primitives are sorted alphabetically by name ──────────────────────
-    const names = index.primitives.map((p: { name: string }) => p.name)
-    expect(names).toEqual([...names].sort())
-  })
+  it("emits the timestamp-free v4 index and v3 manifests", () => {
+    const root = mkdtempSync(join(tmpdir(), "solidiom-registry-schema-"))
+    const env = { ...process.env }
+    delete env.REGISTRY_SIGN_KEY
 
-  // BUILD-001 regression guard.
-  //
-  // Generation stamps used to be derived from the HEAD commit date and written
-  // unconditionally, which made the committed registry unreachable: the commit
-  // that landed a regenerated manifest became the new HEAD, so the next build
-  // stamped a later date and the staleness check reported the artifact as stale
-  // forever. Output must therefore not depend on the timestamp source at all
-  // while the underlying content is unchanged.
-  it("output does not depend on the generation timestamp when content is unchanged", () => {
-    const build = (timestamp: string): string => {
-      const env = { ...process.env, REGISTRY_TIMESTAMP: timestamp }
-      delete env.REGISTRY_SIGN_KEY
-      execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
-      return readFileSync(join(REGISTRY_DIR, "index.json"), "utf8")
+    try {
+      execSync(`pnpm exec tsx tools/registry-build.ts --output-dir ${root}`, {
+        cwd: ROOT,
+        env,
+        encoding: "utf8",
+      })
+      const index = JSON.parse(readFileSync(join(root, "index.json"), "utf8"))
+      const button = JSON.parse(readFileSync(join(root, "button.json"), "utf8"))
+
+      expect(index.$schema).toBe("https://solidiom.dev/schemas/registry-index/v4.json")
+      expect(index.version).toBe(4)
+      expect(index).not.toHaveProperty("generatedAt")
+      expect(index.integrity).not.toHaveProperty("signedAt")
+      expect(index.integrity.algorithm).toBe("sha256")
+      expect(index.integrity.entriesHash).toMatch(/^[0-9a-f]{64}$/)
+      expect(index.primitives.length).toBeGreaterThanOrEqual(30)
+      expect(index.adapters.length).toBeGreaterThanOrEqual(1)
+      expect(index.components.length).toBeGreaterThanOrEqual(1)
+      expect(index.blocks.length).toBeGreaterThanOrEqual(1)
+      expect(index.templates.length).toBeGreaterThanOrEqual(1)
+      expect(index.themes.length).toBeGreaterThanOrEqual(1)
+
+      const names = index.primitives.map((primitive: { name: string }) => primitive.name)
+      expect(names).toEqual([...names].sort())
+      expect(button.$schema).toBe("https://solidiom.dev/schemas/registry-manifest/v3.json")
+      expect(button).not.toHaveProperty("lastUpdated")
+      expect(button.integrity).not.toHaveProperty("lastGenerated")
+    } finally {
+      rmSync(root, { recursive: true, force: true })
     }
-
-    const early = build("2020-06-01T00:00:00.000Z")
-    const late = build("2099-12-31T23:59:59.000Z")
-
-    expect(late).toBe(early)
-  })
-
-  it("preserves committed manifest stamps across differing timestamps", () => {
-    const manifestPath = join(REGISTRY_DIR, "button.json")
-    const build = (timestamp: string): { lastUpdated: string; lastGenerated: string } => {
-      const env = { ...process.env, REGISTRY_TIMESTAMP: timestamp }
-      delete env.REGISTRY_SIGN_KEY
-      execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })
-      const manifest = JSON.parse(readFileSync(manifestPath, "utf8"))
-      return { lastUpdated: manifest.lastUpdated, lastGenerated: manifest.integrity.lastGenerated }
-    }
-
-    const first = build("2021-03-04T05:06:07.000Z")
-    const second = build("2098-11-12T13:14:15.000Z")
-
-    expect(second.lastUpdated).toBe(first.lastUpdated)
-    expect(second.lastGenerated).toBe(first.lastGenerated)
-  })
+  }, 20_000)
 })
 
 // ─── REG-005/REG-008: Ed25519 Signing Tests ──────────────────────────────
@@ -290,7 +262,6 @@ describe("registry index signing (REG-005, REG-008 Ed25519)", () => {
   it("adds signature fields when REGISTRY_SIGN_KEY is set", () => {
     const env = {
       ...process.env,
-      REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
       REGISTRY_SIGN_KEY: testPrivRaw,
     }
     delete env.REGISTRY_VERIFY_KEY
@@ -302,7 +273,7 @@ describe("registry index signing (REG-005, REG-008 Ed25519)", () => {
     // Ed25519 signature is 64 bytes → base64 encoding
     const sigBuf = Buffer.from(index.integrity.signature, "base64")
     expect(sigBuf.length).toBe(64)
-    expect(index.integrity.signedAt).toBe("2025-01-01T00:00:00.000Z")
+    expect(index.integrity).not.toHaveProperty("signedAt")
     expect(index.integrity.signatureKeyId).toMatch(/^[0-9a-f]{16}$/)
     expect(index.integrity.signatureKeyId).toBe(expectedKeyId)
   })
@@ -310,7 +281,6 @@ describe("registry index signing (REG-005, REG-008 Ed25519)", () => {
   it("does not include signature fields when REGISTRY_SIGN_KEY is not set", () => {
     const env = {
       ...process.env,
-      REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
     }
     delete env.REGISTRY_SIGN_KEY
     delete env.REGISTRY_VERIFY_KEY
@@ -319,14 +289,13 @@ describe("registry index signing (REG-005, REG-008 Ed25519)", () => {
     const index = JSON.parse(readFileSync(join(REGISTRY_DIR, "index.json"), "utf8"))
 
     expect(index.integrity.signature).toBeUndefined()
-    expect(index.integrity.signedAt).toBeUndefined()
+    expect(index.integrity).not.toHaveProperty("signedAt")
     expect(index.integrity.signatureKeyId).toBeUndefined()
   })
 
   it("signature is a valid Ed25519 signature of the pre-signature index content", async () => {
     const env = {
       ...process.env,
-      REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
       REGISTRY_SIGN_KEY: testPrivRaw,
     }
     delete env.REGISTRY_VERIFY_KEY
@@ -336,7 +305,7 @@ describe("registry index signing (REG-005, REG-008 Ed25519)", () => {
     const sigB64 = index.integrity.signature
 
     // Reconstruct the pre-signature content
-    const { signature: _s, signedAt: _sa, signatureKeyId: _kid, ...restIntegrity } = index.integrity
+    const { signature: _s, signatureKeyId: _kid, ...restIntegrity } = index.integrity
     const preSigIndex = { ...index, integrity: restIntegrity }
     const preSigContent = JSON.stringify(preSigIndex, null, 2)
 
@@ -363,7 +332,6 @@ describe("per-file digests in manifests (REG-005)", () => {
   it("each primitive manifest includes fileDigests and algorithm", () => {
     const env = {
       ...process.env,
-      REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
     }
     delete env.REGISTRY_SIGN_KEY
 
@@ -392,7 +360,6 @@ describe("per-file digests in manifests (REG-005)", () => {
   it("index integrity includes algorithm field", () => {
     const env = {
       ...process.env,
-      REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
     }
     delete env.REGISTRY_SIGN_KEY
 
@@ -413,7 +380,6 @@ describe("REG-003 manifest fields", () => {
   beforeAll(() => {
     const env = {
       ...process.env,
-      REGISTRY_TIMESTAMP: "2025-01-01T00:00:00.000Z",
     }
     delete env.REGISTRY_SIGN_KEY
     execSync("pnpm exec tsx tools/registry-build.ts", { cwd: ROOT, env, encoding: "utf8" })

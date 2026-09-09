@@ -28,8 +28,8 @@ async function signIndexContent(content: string, privDer: Buffer): Promise<strin
   return Buffer.from(sig).toString("base64")
 }
 
-const INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v3.json"
-const MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v2.json"
+const INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v4.json"
+const MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v3.json"
 
 function createTmpDir(): string {
   // Nest cwd two levels deep so verifySourceIntegrity's monorepo-relative
@@ -72,13 +72,11 @@ function buildManifest(primitive: string, files: Record<string, string>) {
       algorithm: "sha256" as const,
       filesHash,
       fileDigests,
-      lastGenerated: "2025-01-01T00:00:00.000Z",
     },
     provenance: {
       repository: "https://github.com/solidiom/core",
       directory: `packages/${primitive}`,
     },
-    lastUpdated: "2025-01-01T00:00:00.000Z",
   }
 }
 
@@ -86,8 +84,7 @@ function buildManifest(primitive: string, files: Record<string, string>) {
 function buildIndex(manifest: ReturnType<typeof buildManifest>) {
   return {
     $schema: INDEX_SCHEMA_URL,
-    version: 3 as const,
-    generatedAt: "2025-01-01T00:00:00.000Z",
+    version: 4 as const,
     integrity: { algorithm: "sha256" as const, entriesHash: "a".repeat(64) },
     primitives: [
       {
@@ -315,7 +312,6 @@ describe("verifySourceIntegrity (CLI-003)", () => {
       integrity: {
         ...index.integrity,
         signature,
-        signedAt: "2025-01-01T00:00:00.000Z",
         signatureKeyId: TEST_KEY_ID,
       },
     }

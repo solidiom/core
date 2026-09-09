@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "App Shell",
   "description": "Top-level application layout with header, sidebar, and main content areas.",
   "category": "layout",
@@ -69,12 +69,10 @@
     "filesHash": "e0497510e5db9f0ccf2693a2987d6c9fa88b1306ad346d5689c5e60c277706a2",
     "fileDigests": {
       "src/index.tsx": "d0f492d0089045ce215f3a2f384e00fb9cc084243f6d35a177f959700aee2b82"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/app-shell"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

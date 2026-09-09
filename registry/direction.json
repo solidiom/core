@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Direction",
   "description": "RTL/LTR direction context provider component.",
   "category": "utility",
@@ -62,12 +62,10 @@
     "filesHash": "0f81e08c013b93a1943fb64ce6d4da60e888aa4ea8eb2d9ff7876d8fb5c00268",
     "fileDigests": {
       "src/index.tsx": "125d04986aa26b50c3d33fadb3e5e329775301c906a7a2634065f930b308c8d1"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/direction"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

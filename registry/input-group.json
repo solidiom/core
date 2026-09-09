@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Input Group",
   "description": "Input wrapper with prefix/suffix addon slots for icons and buttons.",
   "category": "data-input",
@@ -70,12 +70,10 @@
     "filesHash": "c2898ea391af386d80d92c0d0861f3e159c468d59ca7620cf709e82346232de7",
     "fileDigests": {
       "src/index.tsx": "18da533ceee285089d5001c744cdef0b2421d9d6d4813de50aef0aa5f26647bc"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/input-group"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

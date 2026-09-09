@@ -74,7 +74,6 @@ export interface RegistryManifest {
   integrity: {
     algorithm: string
     filesHash: string
-    lastGenerated: string
   }
 }
 
@@ -121,7 +120,6 @@ export interface CatalogCopy {
   capabilities: string
   integrity: string
   fileHash: string
-  generated: string
   none: string
   apiUnavailable: string
   apiMalformed: string
@@ -193,7 +191,6 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
     capabilities: "Capabilities",
     integrity: "Integrity",
     fileHash: "File hash",
-    generated: "Generated",
     none: "None",
     apiUnavailable: "Generated API reference is not available yet.",
     apiMalformed: "The generated API artifact for this primitive could not be read.",
@@ -271,7 +268,6 @@ const CATALOG_COPY: Record<Locale, CatalogCopy> = {
     capabilities: "Capacidades",
     integrity: "Integridad",
     fileHash: "Hash de archivos",
-    generated: "Generado",
     none: "Ninguna",
     apiUnavailable: "La referencia de API generada aún no está disponible.",
     apiMalformed: "No se pudo leer el artefacto de API generado para esta primitiva.",
@@ -344,14 +340,14 @@ function readJson(path: string): unknown {
 function isRegistryIndex(value: unknown): value is RegistryIndex {
   if (!value || typeof value !== "object") return false
   const index = value as Partial<RegistryIndex>
-  return (index.version === 2 || index.version === 3) && Array.isArray(index.primitives)
+  return index.version === 4 && Array.isArray(index.primitives)
 }
 
 function isRegistryManifest(value: unknown): value is RegistryManifest {
   if (!value || typeof value !== "object") return false
   const manifest = value as Partial<RegistryManifest>
   return (
-    manifest.$schema === "https://solidiom.dev/schemas/registry-manifest/v2.json" &&
+    manifest.$schema === "https://solidiom.dev/schemas/registry-manifest/v3.json" &&
     typeof manifest.name === "string" &&
     typeof manifest.version === "string" &&
     typeof manifest.package === "string" &&
@@ -376,21 +372,20 @@ function isRegistryManifest(value: unknown): value is RegistryManifest {
     manifest.cli.installDeps.every((dependency) => typeof dependency === "string") &&
     !!manifest.integrity &&
     typeof manifest.integrity.algorithm === "string" &&
-    typeof manifest.integrity.filesHash === "string" &&
-    typeof manifest.integrity.lastGenerated === "string"
+    typeof manifest.integrity.filesHash === "string"
   )
 }
 
 export function getRegistryPrimitives(): RegistryPrimitive[] {
   const raw = readJson(REGISTRY_INDEX_PATH)
   if (!isRegistryIndex(raw)) {
-    throw new Error("DOCS-002: registry/index.json is not a Registry v2 index.")
+    throw new Error("DOCS-002: registry/index.json is not a Registry v4 index.")
   }
 
   return [...raw.primitives].sort((a, b) => a.name.localeCompare(b.name))
 }
 
-/** Returns validated, canonical Registry v2 metadata for one primitive (DOCS-005). */
+/** Returns validated, canonical Registry v3 metadata for one primitive (DOCS-005). */
 export function getRegistryManifest(name: string): RegistryManifest {
   if (!/^[a-z][a-z0-9-]*$/.test(name)) {
     throw new Error(`DOCS-005: invalid registry primitive name: ${name}`)
@@ -398,7 +393,7 @@ export function getRegistryManifest(name: string): RegistryManifest {
 
   const raw = readJson(resolve(WORKSPACE_ROOT, "registry", `${name}.json`))
   if (!isRegistryManifest(raw) || raw.name !== name) {
-    throw new Error(`DOCS-005: registry/${name}.json is not a valid Registry v2 manifest.`)
+    throw new Error(`DOCS-005: registry/${name}.json is not a valid Registry v3 manifest.`)
   }
 
   return raw

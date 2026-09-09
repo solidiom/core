@@ -21,7 +21,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Virtual List",
   "description": "Viewport-windowed list for large datasets.",
   "category": "layout",
@@ -79,12 +79,10 @@
       "src/index.tsx": "a790ae7dc1c71f6aaf98a53845f8ab2ba6355128373296b9d9c052ed283531b3",
       "src/virtual-list-context.ts": "9cc38eb71a5c2dba32dbeea5c6a420d812c51fe729096aa9aa8f1afbf8bf32c6",
       "src/virtual-list.tsx": "926f02eca17c8299b5dd9ae4bf09d745d19eaf0f1bd8d715e79c62575a53f40d"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/virtual-list"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "name": "spinner",
   "version": "0.4.1",
   "package": "@solidiom/recipes-css",
@@ -29,8 +29,7 @@
       "unocss": {
         "src/recipes/spinner.tsx": "81b873c204c7cdb52adcc3b18211c07c119c91b9eaaf5aa696abef1d67e4af0d"
       }
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "documentation": {
     "status": "complete",
@@ -46,6 +45,5 @@
   },
   "dependencies": [
     "@solidiom/spinner"
-  ],
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  ]
 }

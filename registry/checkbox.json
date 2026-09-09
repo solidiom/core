@@ -15,7 +15,7 @@
   "runtime": [
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Checkbox",
   "description": "Binary or indeterminate toggle control.",
   "category": "input",
@@ -70,12 +70,10 @@
     "filesHash": "668f6bd8a145d9caa4e0dd916bb33151fc478c69fb4728854ce9e4f05a1205a6",
     "fileDigests": {
       "src/index.tsx": "d1b10d68be834eeae05f5754bdc770777c278e10182a4f66651f6f172cd4c10c"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/checkbox"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

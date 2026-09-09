@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Stack",
   "description": "Flex layout primitive with configurable gap, direction, and alignment.",
   "category": "layout",
@@ -64,12 +64,10 @@
     "filesHash": "591fb75b8ba9b7969c795909abd12c06cbad5a3f5c2a030924a7fc45f3ce4703",
     "fileDigests": {
       "src/index.tsx": "12e1a651dfe89614839034e1cb62a9472310fb7d652029615d854e729dd3ebdd"
-    },
-    "lastGenerated": "2026-09-05T19:21:15.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/stack"
-  },
-  "lastUpdated": "2026-09-05T19:21:15.000Z"
+  }
 }

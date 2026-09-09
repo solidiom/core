@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Table",
   "description": "Simple static data table with header, body, rows, and cells.",
   "category": "table",
@@ -68,12 +68,10 @@
     "filesHash": "3e384bf679dbd9ddaad1a72d3720ba8491aea9516c56a566eafc4aad69d2e391",
     "fileDigests": {
       "src/index.tsx": "6b8e5998a88f2c2f75acda5b742f4245fb5e658849efdc407657edc8e3f6251c"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/table"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

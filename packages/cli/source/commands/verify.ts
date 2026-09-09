@@ -306,12 +306,7 @@ export function verifyRegistry(options: {
           "registry index is signed but no verification key was provided (embed public key or set REGISTRY_VERIFY_KEY or policy.registryPublicKeys)",
         )
       } else {
-        const {
-          signature: sigB64,
-          signedAt: _sa,
-          signatureKeyId: _kid,
-          ...restIntegrity
-        } = index.integrity
+        const { signature: sigB64, signatureKeyId: _kid, ...restIntegrity } = index.integrity
         const preSigIndex = { ...index, integrity: restIntegrity }
         const preSigContent = JSON.stringify(preSigIndex, null, 2)
         const sigBuf = Buffer.from(sigB64!, "base64")

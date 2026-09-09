@@ -20,7 +20,7 @@
     "events/change-details",
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Accordion",
   "description": "Vertically stacked set of collapsible sections.",
   "category": "layout",
@@ -85,12 +85,10 @@
       "src/accordion-context.ts": "f260d0576ea8b78832b41c69a8d766c57a7192d81d7ec57e7ce5db54a9e6d172",
       "src/accordion.tsx": "01ad14883152d9b6c8c7a154782c0c540ecbd50aee20366ecb6023d7247c1025",
       "src/index.tsx": "e158ccfb3700ecd1551fcc07c206badfb4b41cfdcff915f78bcea532e4397a5e"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/accordion"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

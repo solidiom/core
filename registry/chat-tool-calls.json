@@ -16,7 +16,7 @@
     "dom/stable-id",
     "state/disclosure-state"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Chat Tool Calls",
   "description": "Display of tool/function call results in AI chat interfaces.",
   "category": "content",
@@ -69,12 +69,10 @@
     "filesHash": "a9eff4b32d9d0ccfcfadd1bdbaa6faeda989cc2636fce1a819c7cf3515d08d7d",
     "fileDigests": {
       "src/index.tsx": "6d3a9782efeff779ac7d936311f68952d97957aeff939d562d724756e6fc4e0b"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-tool-calls"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

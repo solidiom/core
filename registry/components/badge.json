@@ -1,5 +1,5 @@
 {
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "name": "badge",
   "version": "0.4.1",
   "package": "@solidiom/recipes-css",
@@ -29,8 +29,7 @@
       "unocss": {
         "src/recipes/badge.tsx": "be52ee51723282d816172b12b131fd7b0e477bd37bb067fc926df790e1e2a798"
       }
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "documentation": {
     "status": "complete",
@@ -46,6 +45,5 @@
   },
   "dependencies": [
     "@solidiom/badge"
-  ],
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  ]
 }

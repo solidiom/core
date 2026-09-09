@@ -41,7 +41,7 @@ function writeMatchingRegistry(
     .digest("hex")
 
   const manifest = {
-    $schema: "https://solidiom.dev/schemas/registry-manifest/v2.json",
+    $schema: "https://solidiom.dev/schemas/registry-manifest/v3.json",
     name: primitive,
     version: "0.0.1-next.0",
     package: `@solidiom/${primitive}`,
@@ -63,21 +63,18 @@ function writeMatchingRegistry(
       algorithm: "sha256" as const,
       filesHash,
       fileDigests,
-      lastGenerated: "2025-01-01T00:00:00.000Z",
     },
     provenance: {
       repository: "https://github.com/solidiom/core",
       directory: `packages/${primitive}`,
     },
-    lastUpdated: "2025-01-01T00:00:00.000Z",
   }
   writeFileSync(join(registryDir, `${primitive}.json`), JSON.stringify(manifest))
 
   const entriesHash = createHash("sha256").update("").digest("hex")
   const index = {
-    $schema: "https://solidiom.dev/schemas/registry-index/v3.json",
-    version: 3,
-    generatedAt: "2025-01-01T00:00:00.000Z",
+    $schema: "https://solidiom.dev/schemas/registry-index/v4.json",
+    version: 4,
     integrity: { algorithm: "sha256" as const, entriesHash },
     primitives: [],
     adapters: [],

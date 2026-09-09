@@ -16,7 +16,7 @@
  * Usage: pnpm exec tsx tools/audit-primitives.ts
  */
 
-import { readdirSync, readFileSync, existsSync, mkdirSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs"
 import { join, dirname } from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -254,7 +254,6 @@ function main(): void {
   // Write JSON
   mkdirSync(OUTPUT_DIR, { recursive: true })
   const report = {
-    generatedAt: new Date().toISOString(),
     total: results.length,
     pass: passCount,
     needFix: fixCount,

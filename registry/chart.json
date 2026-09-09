@@ -15,7 +15,7 @@
   "runtime": [
     "dom/stable-id"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Chart",
   "description": "Data visualization wrapper with accessible fallback table.",
   "category": "content",
@@ -67,12 +67,10 @@
     "filesHash": "1079f434af7e3d9203aa9137cd18d0a29c15fee05845b2195b9b4e55952f49f8",
     "fileDigests": {
       "src/index.tsx": "82de524ede499f420f568f9655e5007d6dbf8bff16c5100463e76eca4c1f21c7"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chart"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

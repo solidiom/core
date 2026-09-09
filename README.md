@@ -198,8 +198,8 @@ This avoids the qemu segfaults entirely, at the cost of no longer testing the ex
 
 | Layer           | Stack                                            |
 | --------------- | ------------------------------------------------ |
-| Reactivity      | solid-js 2.0.0-rc.1                              |
-| DOM runtime     | @solidjs/web 2.0.0-rc.1                          |
+| Reactivity      | solid-js 2.0.0-rc.7                              |
+| DOM runtime     | @solidjs/web 2.0.0-rc.7                          |
 | Build           | tsup (ESM, preserved JSX) + tsc (declarations)   |
 | Orchestration   | nx (caching, task graph, affected)               |
 | Test            | vitest (node + browser modes) + Playwright (E2E) |

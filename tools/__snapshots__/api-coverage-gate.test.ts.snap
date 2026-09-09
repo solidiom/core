@@ -2,7 +2,7 @@
 
 exports[`vertical-slice normalized API snapshots (API-004) > combobox: normalized API document matches snapshot 1`] = `
 {
-  "$schema": "https://solidiom.org/schemas/api/v1.json",
+  "$schema": "https://solidiom.org/schemas/api/v2.json",
   "entryPoints": [
     "packages/combobox/src/index.tsx",
   ],
@@ -946,13 +946,13 @@ Parts: Root, Input, Content, Item, ItemText.",
     },
   ],
   "packageName": "@solidiom/combobox",
-  "schemaVersion": 1,
+  "schemaVersion": 2,
 }
 `;
 
 exports[`vertical-slice normalized API snapshots (API-004) > data-table: normalized API document matches snapshot 1`] = `
 {
-  "$schema": "https://solidiom.org/schemas/api/v1.json",
+  "$schema": "https://solidiom.org/schemas/api/v2.json",
   "entryPoints": [
     "packages/data-table/src/index.tsx",
   ],
@@ -2527,13 +2527,13 @@ Following the adapter pattern used by calendar/carousel.",
     },
   ],
   "packageName": "@solidiom/data-table",
-  "schemaVersion": 1,
+  "schemaVersion": 2,
 }
 `;
 
 exports[`vertical-slice normalized API snapshots (API-004) > dialog: normalized API document matches snapshot 1`] = `
 {
-  "$schema": "https://solidiom.org/schemas/api/v1.json",
+  "$schema": "https://solidiom.org/schemas/api/v2.json",
   "entryPoints": [
     "packages/dialog/src/index.tsx",
   ],
@@ -3532,6 +3532,6 @@ Parts: Root, Trigger, Portal, Backdrop, Content, Title, Description, Close.",
     },
   ],
   "packageName": "@solidiom/dialog",
-  "schemaVersion": 1,
+  "schemaVersion": 2,
 }
 `;

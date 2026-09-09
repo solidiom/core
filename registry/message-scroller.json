@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Message Scroller",
   "description": "Auto-scrolling message container with new-content indicators.",
   "category": "utility",
@@ -67,12 +67,10 @@
     "filesHash": "4929f4dbc50218d46fca371a3aa12272cc954b1f8d17e0075ec14db93c240051",
     "fileDigests": {
       "src/index.tsx": "3473e3109f26a5104f09282184ba5c8482b4f1f7d8244c542cc6130baf1377c0"
-    },
-    "lastGenerated": "2026-09-05T19:21:15.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/message-scroller"
-  },
-  "lastUpdated": "2026-09-05T19:21:15.000Z"
+  }
 }

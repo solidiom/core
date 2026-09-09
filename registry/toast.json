@@ -17,7 +17,7 @@
   "runtime": [
     "dom/stable-id"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Toast",
   "description": "Temporary non-blocking notification.",
   "category": "feedback",
@@ -74,12 +74,10 @@
       "src/index.tsx": "1175b2e3575471ffc707fdc7b8495eeb8f512c8760a53fe8eb4c7c4b688f81e0",
       "src/toast-context.ts": "9773f77293a7b980e249649944f023c06afd098b6788d2c4f510665fd4578353",
       "src/toast.tsx": "3488bd66dba6c8580f8b12b9d38fd90e6e7455afb1f7fd5b641eb60f7ed4b55a"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/toast"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

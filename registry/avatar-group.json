@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Avatar Group",
   "description": "Stacked avatar display for showing multiple users.",
   "category": "content",
@@ -67,12 +67,10 @@
     "filesHash": "a8ad2f1a5c641607cc8146c9ef1661bfc7db994aa5c0e128208549ff896da403",
     "fileDigests": {
       "src/index.tsx": "4a41be10c86a82fac658107fad5adf2b6f3e6d7e92802be1c6952317768f6a45"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/avatar-group"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

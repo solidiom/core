@@ -18,7 +18,7 @@
     "dom/stable-id",
     "state/disclosure-state"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Menubar",
   "description": "Desktop-style horizontal menu bar with dropdown submenus.",
   "category": "navigation",
@@ -71,12 +71,10 @@
     "filesHash": "09c73afd5157bc96209ac7081b2e681c138adbf4c1a64888c4bc9c1c49877425",
     "fileDigests": {
       "src/index.tsx": "b4259f96c235f95a146766794eca6c3b2b79849b3b29c0d38bd94c1f53c944a1"
-    },
-    "lastGenerated": "2026-09-05T19:21:15.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/menubar"
-  },
-  "lastUpdated": "2026-09-05T19:21:15.000Z"
+  }
 }

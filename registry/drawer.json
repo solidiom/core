@@ -20,7 +20,7 @@
     "presence/presence",
     "state/disclosure-state"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Drawer",
   "description": "Slide-in panel from any screen edge.",
   "category": "overlay",
@@ -75,12 +75,10 @@
       "src/drawer-context.ts": "2302a7451db298e1ffd71c835dc751dfc72c69d3f671ec5e49672fc8311ec8e5",
       "src/drawer.tsx": "1fefafde0b912e0a9260c86a42261d94c93b52a0c76a973e018d0d8dcdfbca7a",
       "src/index.tsx": "d73bd947145a4c6b215eec138ea4da63602602798781e51aee003fdfee842e80"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/drawer"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

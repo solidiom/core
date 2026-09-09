@@ -51,7 +51,7 @@ interface RegistryManifest {
   documentation: { status: string; locales: Record<string, { status: string }> }
   accessibility: { reviewStatus: string; evidenceIds: string[] }
   search: { keywords: string[] }
-  integrity: { lastGenerated: string }
+  integrity: { filesHash: string }
 }
 
 interface EvidenceFile {

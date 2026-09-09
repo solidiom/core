@@ -15,7 +15,7 @@
   "runtime": [
     "state/disclosure-state"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Lightbox",
   "description": "Image and media overlay viewer with navigation controls.",
   "category": "overlay",
@@ -66,12 +66,10 @@
     "filesHash": "2d7e4e7ec828cbdc0b7245789a3d1d8e8399cb997fcaf4f3ee0c50d77cabb448",
     "fileDigests": {
       "src/index.tsx": "3b200155c396951297182c8be003f443ba3cc358a6f2aebd671925e0a6dc8407"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/lightbox"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

@@ -17,7 +17,7 @@
     "collection/roving-focus",
     "dom/stable-id"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Mega Menu",
   "description": "Expanded navigation dropdown with rich multi-column content.",
   "category": "navigation",
@@ -72,12 +72,10 @@
     "filesHash": "db5f3b3f98420e234e1dc05fd724cef93b948ea70146a53665cb5622d61f2ab5",
     "fileDigests": {
       "src/index.tsx": "aa3a3b150f98d4ff2eb42eabcb3edeeafec0c3e0ed827d3d68fad331d15eabb6"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/mega-menu"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

@@ -15,7 +15,7 @@
   "runtime": [
     "dom/stable-id"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Alert",
   "description": "Inline, non-modal alert for status messages with live region semantics.",
   "category": "feedback",
@@ -83,12 +83,10 @@
     "filesHash": "e2f60bd87f55ce12079333a40521942afc764529e79062ad12738749f5471003",
     "fileDigests": {
       "src/index.tsx": "8bbc6a02e623e3e4016e86ed6e33ddedf593af27ea5cb96d97c95c4ece4e4cee"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/alert"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

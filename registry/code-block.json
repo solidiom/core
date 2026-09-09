@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Code Block",
   "description": "Syntax-highlighted code display with copy button and line numbers.",
   "category": "content",
@@ -69,12 +69,10 @@
     "filesHash": "440f8de4c0bf11b6801de3e6ddcc999e632e4708e5948725ab2e7a6fcc49ccaa",
     "fileDigests": {
       "src/index.tsx": "60a1e826de1622bcfbad2f610ef93e4a9db4301bc923751506ca41c6a070d711"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/code-block"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

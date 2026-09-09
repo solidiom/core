@@ -21,7 +21,7 @@
     "events/change-details",
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Tabs",
   "description": "Tabbed content switcher.",
   "category": "navigation",
@@ -77,12 +77,10 @@
       "src/index.tsx": "6d47cad4f11cf63e683e5444a9a3ac6fb9474e32d7d3199e89083e234af15c3a",
       "src/tabs-context.ts": "bcc9b7924560f2bbb04a6535cc2e435fef8818b37cd955f1957e83a379b7532c",
       "src/tabs.tsx": "9b1e8eb3290082742b85353cc70b6e7486d61e8b00c1f894d570cf08870949de"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/tabs"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

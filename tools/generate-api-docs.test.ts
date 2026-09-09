@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest"
+import { mkdtempSync, readFileSync, rmSync } from "node:fs"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
 import { API_SCHEMA_URL, API_SCHEMA_VERSION } from "./api-schema"
-import { mapWithConcurrency, normalizeTypeDocProject } from "./generate-api-docs"
+import {
+  mapWithConcurrency,
+  normalizeTypeDocProject,
+  writeNormalizedApiDocument,
+} from "./generate-api-docs"
 
 describe("generate-api-docs: bounded concurrency", () => {
   it("limits live TypeDoc-style operations while preserving result order", async () => {
@@ -291,7 +298,7 @@ function schemaCoverageProject() {
   }
 }
 
-describe("generate-api-docs: v1 schema normalization", () => {
+describe("generate-api-docs: v2 schema normalization", () => {
   const document = normalizeTypeDocProject(schemaCoverageProject(), "@solidiom/fixture", [
     "packages/fixture/src/index.ts",
   ])
@@ -378,5 +385,29 @@ describe("generate-api-docs: v1 schema normalization", () => {
         },
       ],
     })
+  })
+})
+
+describe("generate-api-docs determinism", () => {
+  it("writes byte-identical artifacts to isolated output directories", () => {
+    const root = mkdtempSync(join(tmpdir(), "solidiom-api-artifacts-"))
+    const firstDirectory = join(root, "first")
+    const secondDirectory = join(root, "second")
+
+    try {
+      const firstDocument = normalizeTypeDocProject(schemaCoverageProject(), "@solidiom/fixture", [
+        "packages/fixture/src/index.ts",
+      ])
+      const secondDocument = normalizeTypeDocProject(schemaCoverageProject(), "@solidiom/fixture", [
+        "packages/fixture/src/index.ts",
+      ])
+      const firstPath = writeNormalizedApiDocument(firstDirectory, "fixture", firstDocument)
+      const secondPath = writeNormalizedApiDocument(secondDirectory, "fixture", secondDocument)
+
+      expect(readFileSync(firstPath)).toEqual(readFileSync(secondPath))
+      expect(firstDocument).not.toHaveProperty("generatedAt")
+    } finally {
+      rmSync(root, { recursive: true, force: true })
+    }
   })
 })

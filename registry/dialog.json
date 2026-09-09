@@ -20,7 +20,7 @@
     "presence/presence",
     "state/disclosure-state"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Dialog",
   "description": "Modal or non-modal overlay window.",
   "category": "overlay",
@@ -79,12 +79,10 @@
       "src/dialog-context.ts": "fe5dd5cd7ec569a452631de115a0666952944631d37d5c7e801fa9f10fd43928",
       "src/dialog.tsx": "7e91e606302fb2258d07dbdbfe17a872e3a0ababba7d390efcca31f386fe1d5c",
       "src/index.tsx": "12a64978fe94873ab58c3da5219a6e75780eae19a1bb8de728143d8e1affcb01"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/dialog"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

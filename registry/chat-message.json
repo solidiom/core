@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Chat Message",
   "description": "Message bubble for conversational UI with sender, content, and metadata.",
   "category": "content",
@@ -66,12 +66,10 @@
     "filesHash": "9f9cab7ffb45a320f7ec3b611a1dcc80fb67dabd6e7bead5e90c1b9a19a1a0ec",
     "fileDigests": {
       "src/index.tsx": "7548b0630dd4027e9cff0f87c91226b4567f569af42596f7ab01b6947470d5ab"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-message"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

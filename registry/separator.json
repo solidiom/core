@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Separator",
   "description": "Horizontal or vertical visual divider.",
   "category": "layout",
@@ -67,12 +67,10 @@
     "filesHash": "7aafb04922e98b8fa9d485b47965ddacf4f73bed064079199b1ff60550a2e37b",
     "fileDigests": {
       "src/index.tsx": "fde93aafb616eb5bb8f0a8204d6e8b01236f9761a70966802c07cb0fbfc1e583"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/separator"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

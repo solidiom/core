@@ -196,7 +196,7 @@ describe("runInspect", () => {
 /** A minimal but schema-valid registry manifest fixture (CLI-002). */
 function validManifest(name: string) {
   return {
-    $schema: "https://solidiom.dev/schemas/registry-manifest/v2.json",
+    $schema: "https://solidiom.dev/schemas/registry-manifest/v3.json",
     name,
     version: "0.0.1-next.0",
     package: `@solidiom/${name}`,
@@ -218,12 +218,10 @@ function validManifest(name: string) {
       algorithm: "sha256" as const,
       filesHash: "a".repeat(64),
       fileDigests: { "src/index.tsx": "b".repeat(64) },
-      lastGenerated: "2025-01-01T00:00:00.000Z",
     },
     provenance: {
       repository: "https://github.com/solidiom/core",
       directory: `packages/${name}`,
     },
-    lastUpdated: "2025-01-01T00:00:00.000Z",
   }
 }

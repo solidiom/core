@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Card",
   "description": "Content container with header, body, and footer.",
   "category": "layout",
@@ -79,12 +79,10 @@
     "filesHash": "5740b25414e7264a95b2cfba96319764634a7c695a2c7921af8cb601d9a9b220",
     "fileDigests": {
       "src/index.tsx": "05c962b66181d38c43b80c8d8d446b9326cc88bb8069949cf54eb121b738fba2"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/card"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

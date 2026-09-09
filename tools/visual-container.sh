@@ -26,7 +26,7 @@ set -euo pipefail
 
 # Must track the @playwright/test version in package.json, or the browser build
 # bundled in the image will not match the client library.
-IMAGE_TAG="v1.62.1-noble"
+IMAGE_TAG="v1.63.0-noble"
 IMAGE="mcr.microsoft.com/playwright:${IMAGE_TAG}"
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -103,8 +103,10 @@ fi
 
 # ─── Run ─────────────────────────────────────────────────────────────────────
 
-rm -rf "${OUT_DIR}"
+# Keep the shared-directory inode stable. Deleting and recreating the mount root
+# can race Podman Desktop's virtiofs path tracking between rapid reruns.
 mkdir -p "${OUT_DIR}"
+find "${OUT_DIR}" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
 
 echo "runtime: ${RUNTIME}   image: ${IMAGE}   target: ${TARGET}"
 
@@ -143,18 +145,19 @@ echo "--- HEAD: $(git -C /src log --oneline -1) ---"
 # candidate baselines that are not yet committed would compare the container
 # render against the previous committed images instead of the new ones.
 #
-# node_modules is excluded so the container installs Linux-native binaries of
-# its own; .git and caches are excluded for size. apps/site/dist is handled
+# Archive tracked files plus intentional untracked files only. This preserves
+# candidate changes while excluding ignored node_modules, caches, and generated
+# build outputs that may be changing concurrently. apps/site/dist is handled
 # separately below.
 mkdir -p /work
-tar -C /src -cf - \
-  --exclude=.git \
-  --exclude=node_modules \
-  --exclude=.nx \
-  --exclude=test-results \
-  --exclude=apps/site/dist \
-  --exclude=apps/site/.astro \
-  . | tar -C /work -xf -
+git -C /src ls-files -z --cached --others --exclude-standard |
+  while IFS= read -r -d "" path; do
+    if [[ -e "/src/${path}" || -L "/src/${path}" ]]; then
+      printf "%s\\0" "${path}"
+    fi
+  done |
+  tar -C /src --null -T - -cf - |
+  tar -C /work -xf -
 cd /work
 
 # The repository prepare script (git config core.hooksPath ...) requires a git
@@ -164,7 +167,14 @@ git init -q
 
 corepack enable >/dev/null 2>&1
 echo "--- installing dependencies ---"
-pnpm install --frozen-lockfile 2>&1 | tail -3
+if [ "${REUSE_HOST_DIST:-0}" = "1" ]; then
+  # Static preview + Playwright need package links, not build lifecycle scripts.
+  # Skipping scripts also avoids native postinstall crashes under --amd64 qemu
+  # on Apple Silicon. A container that builds the site still runs every script.
+  pnpm install --frozen-lockfile --ignore-scripts 2>&1 | tail -3
+else
+  pnpm install --frozen-lockfile 2>&1 | tail -3
+fi
 
 if [ "${REUSE_HOST_DIST:-0}" = "1" ]; then
   echo "--- copying prebuilt dist ---"
@@ -195,7 +205,7 @@ if [ -f "test-results/site-visual-results.json" ]; then
   cp -a test-results/site-visual-results.json /out/test-results/ 2>/dev/null || true
 fi
 
-if [ "${UPDATE}" = "1" ]; then
+if [ "${UPDATE}" = "1" ] && [ "${STATUS}" -eq 0 ]; then
   cp -a "apps/site/tests/visual/__screenshots__/." /out/
   echo "--- baselines copied out ---"
 fi
@@ -216,7 +226,7 @@ if [[ "${UPDATE}" != "1" && ${RUN_STATUS} -ne 0 ]]; then
   echo ""
   LOG_FILE="${OUT_DIR}/test-results/site-visual.log"
   if [[ -f "${LOG_FILE}" ]]; then
-    grep -E "(FAIL|Error|✘|×|expect\(|Screenshot|snapshot)" "${LOG_FILE}" | head -80
+    grep -E "(FAIL|Error|✘|×|expect\(|Screenshot|snapshot)" "${LOG_FILE}" | head -80 || true
   fi
   echo ""
   echo "────────────────────────────────────────────────────────────"
@@ -227,6 +237,11 @@ if [[ "${UPDATE}" != "1" && ${RUN_STATUS} -ne 0 ]]; then
 fi
 
 if [[ "${UPDATE}" == "1" ]]; then
+  if [[ ${RUN_STATUS} -ne 0 ]]; then
+    echo "error: visual baseline capture failed; leaving ${SNAPSHOT_REL} untouched." >&2
+    exit "${RUN_STATUS}"
+  fi
+
   CAPTURED=$(find "${OUT_DIR}" -name '*.png' | wc -l | tr -d ' ')
   if [[ "${CAPTURED}" == "0" ]]; then
     echo "error: no baselines were captured; leaving ${SNAPSHOT_REL} untouched." >&2

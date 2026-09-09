@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Avatar",
   "description": "User avatar with image and fallback.",
   "category": "display",
@@ -74,12 +74,10 @@
     "filesHash": "e6aafa29fde7714039baae3edbf3b93a13863eb4a2605fbd24baf22c2c6c2d2a",
     "fileDigests": {
       "src/index.tsx": "0e08e24447beb45b5d01a0c72c4d11e260ef46a9adf95156364624558463225e"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/avatar"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }
