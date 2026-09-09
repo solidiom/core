@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Chat Layout",
   "description": "Container managing message flow, scroll behavior, and composer positioning.",
   "category": "layout",
@@ -67,12 +67,10 @@
     "filesHash": "25210fbc3ce36cd5c4198bbd306169e4ffe846819deb78fd8b81a4b78c827c53",
     "fileDigests": {
       "src/index.tsx": "56da1ec970dbd5ee3301764646509be9d01b2445c990b281019645bd945ec7ac"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-layout"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

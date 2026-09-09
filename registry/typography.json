@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Typography",
   "description": "Semantic text primitives for headings, paragraphs, and inline text.",
   "category": "content",
@@ -68,12 +68,10 @@
     "filesHash": "50f5cf359e61e1fa21dcad733326dfbb4eda65987f25b20bfbf301415f3e796e",
     "fileDigests": {
       "src/index.tsx": "93034c2ad0e57f6b5535236e3ade888bf6fb0c95ba64bd78a6a80cb979a23851"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/typography"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

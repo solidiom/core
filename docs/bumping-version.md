@@ -114,5 +114,5 @@ Changesets will:
   merge SHA and explicitly dispatches the fail-closed package/site release. See
   [RELEASING.md](./RELEASING.md).
 - The registry regeneration in the test suite rebuilds manifests, so stale registry files will cause snapshot mismatches.
-- The `REGISTRY_TIMESTAMP` environment variable can pin the generation timestamp for deterministic builds (used in tests).
+- Registry generation is timestamp-free: identical source inputs produce byte-identical manifests, indexes, signatures, and hashes.
 - Private packages (`"private": true`) and probe packages (version `0.0.0`) are excluded from npm publishing but still appear in the registry.

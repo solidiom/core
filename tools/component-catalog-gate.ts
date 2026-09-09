@@ -53,7 +53,7 @@ interface ComponentResult {
 interface ComponentRegistry {
   name: string
   source: Record<string, string[]>
-  integrity: { fileDigests: Record<string, Record<string, string>>; lastGenerated: string }
+  integrity: { fileDigests: Record<string, Record<string, string>> }
   documentation: { status: string; locales: Record<string, { status: string }> }
 }
 

@@ -25,7 +25,7 @@
   "runtime": [
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Calendar",
   "description": "Date selection with day/month/year views.",
   "category": "input",
@@ -86,12 +86,10 @@
       "src/index.tsx": "983a3dd5be6d1bf9d70ea319a5e63ad067837bcf556c16b088b4c22be2efa2e2",
       "src/range-calendar-context.ts": "aa0a042cb7eb03a86716ac46b99c7a9b0b7c5f0281cd206f94f256cb63f592d1",
       "src/range-calendar.tsx": "a2e11784aa50c97706e029d73d9018f2bbfdcb0e747eba0e6e729d67a197b34c"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/calendar"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

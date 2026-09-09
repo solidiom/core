@@ -1,13 +1,15 @@
 import { describe, it, expect } from "vitest"
 import { readFileSync } from "node:fs"
-import { join, dirname } from "node:path"
+import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { checkCoverage, VERTICAL_SLICE_PRIMITIVES } from "./api-coverage-gate"
 import type { NormalizedApiDocument, NormalizedApiExport } from "./api-schema"
 import { API_SCHEMA_URL, API_SCHEMA_VERSION } from "./api-schema"
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..")
-const ARTIFACTS_DIR = join(ROOT, "artifacts", "api")
+const ARTIFACTS_DIR = process.env.SOLIDIOM_API_ARTIFACTS_DIR
+  ? resolve(process.env.SOLIDIOM_API_ARTIFACTS_DIR)
+  : join(ROOT, "artifacts", "api")
 
 function baseExport(overrides: Partial<NormalizedApiExport> = {}): NormalizedApiExport {
   return {
@@ -25,7 +27,6 @@ function document(exports: NormalizedApiExport[]): NormalizedApiDocument {
     $schema: API_SCHEMA_URL,
     schemaVersion: API_SCHEMA_VERSION,
     packageName: "@solidiom/fixture",
-    generatedAt: "2025-01-01T00:00:00.000Z",
     entryPoints: ["src/index.ts"],
     exports,
   }
@@ -105,11 +106,7 @@ describe("vertical-slice normalized API snapshots (API-004)", () => {
     it(`${primitive}: normalized API document matches snapshot`, () => {
       const artifactPath = join(ARTIFACTS_DIR, `${primitive}.json`)
       const doc = JSON.parse(readFileSync(artifactPath, "utf8")) as NormalizedApiDocument
-      // generatedAt is a build-time timestamp, not part of the API surface
-      // being snapshotted — excluding it keeps the snapshot stable across
-      // regenerations that don't change the actual exports.
-      const { generatedAt, ...stable } = doc
-      expect(stable).toMatchSnapshot()
+      expect(doc).toMatchSnapshot()
     })
   }
 })

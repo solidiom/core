@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Visually Hidden",
   "description": "Hides content visually while keeping it accessible to screen readers.",
   "category": "layout",
@@ -74,12 +74,10 @@
     "filesHash": "41666b248cd21a95f93874bcf8c985cbb781bdbb78d089d25d38c3de360cbca1",
     "fileDigests": {
       "src/index.tsx": "3512263f13f19208cb38dd9f3c8a74243dc595b849da5fbb31b581a03e10ff4b"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/visually-hidden"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

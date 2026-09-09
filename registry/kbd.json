@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Kbd",
   "description": "Keyboard shortcut display element.",
   "category": "display",
@@ -72,12 +72,10 @@
     "filesHash": "f22a100ae429b358b84144c2b9360f45f4cd340d86b5429a6b64b5645d8bd971",
     "fileDigests": {
       "src/index.tsx": "726922c768549e03a4820a47c9ae747cd092add393838f6acc33dfcaee19e42d"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/kbd"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

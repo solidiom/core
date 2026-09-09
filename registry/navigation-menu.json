@@ -25,7 +25,7 @@
     "dom/stable-id",
     "presence/presence"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Navigation Menu",
   "description": "A top-level navigation component with accessible dropdown sub-menus.",
   "category": "navigation",
@@ -88,12 +88,10 @@
     "fileDigests": {
       "src/index.tsx": "c8388abbeaeafc82408cb85c177e33bce4d8e30b1db70320c3ce74175494497e",
       "src/navigation-menu-context.ts": "ca2efac856f3a583f86434e48f3cf75e3f1412068dcd16fc95600729b26adfef"
-    },
-    "lastGenerated": "2026-09-05T19:21:15.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/navigation-menu"
-  },
-  "lastUpdated": "2026-09-05T19:21:15.000Z"
+  }
 }

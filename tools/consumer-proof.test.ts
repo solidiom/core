@@ -128,17 +128,14 @@ describe("package consumer proofs", () => {
 })
 
 describe("registry determinism", () => {
-  it("regenerating registry/index.json twice produces zero diff (excluding timestamp)", () => {
-    // Regenerate twice
+  it("regenerating registry/index.json twice produces byte-identical output", () => {
     exec("pnpm", ["run", "registry:build"])
     const after1 = readFileSync(join(ROOT, "registry/index.json"), "utf8")
 
     exec("pnpm", ["run", "registry:build"])
     const after2 = readFileSync(join(ROOT, "registry/index.json"), "utf8")
 
-    // Strip generatedAt timestamp for comparison (it changes per run)
-    const normalize = (s: string) => s.replace(/"generatedAt":\s*"[^"]*"/, '"generatedAt": ""')
-    expect(normalize(after1)).toBe(normalize(after2))
+    expect(after1).toBe(after2)
   }, 30_000)
 })
 

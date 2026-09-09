@@ -22,7 +22,7 @@
     "events/change-details",
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Listbox",
   "description": "Single or multi-select list of options.",
   "category": "input",
@@ -76,12 +76,10 @@
       "src/index.tsx": "7cca431652bded7cf5cc3be568983e4aad81299d80a6f4f727acad6351d1dc8d",
       "src/listbox-context.ts": "e309057d5d1e7633d4f6415943191fac74c9191cf80abbe3b8b9f53bb2b40f41",
       "src/listbox.tsx": "f7b172837f2c0f056e0bab9002ceb782915031f0c98ffb052d23325de157d48d"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/listbox"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

@@ -1,5 +1,5 @@
 /**
- * Registry v3 schema + versioned reader shared by CLI commands.
+ * Registry v4 schema + versioned reader shared by CLI commands.
  *
  * REG-004: centralizes the schema-version guard so every command that reads
  * registry/index.json or a per-primitive manifest fails closed on an
@@ -11,12 +11,12 @@ import { readFileSync } from "node:fs"
 import { z } from "zod"
 
 /** The only registry index schema version this CLI build understands. */
-export const SUPPORTED_REGISTRY_INDEX_VERSION = 3 as const
+export const SUPPORTED_REGISTRY_INDEX_VERSION = 4 as const
 
 /** The only per-primitive manifest schema this CLI build understands. */
 export const SUPPORTED_MANIFEST_SCHEMA_URL =
-  "https://solidiom.dev/schemas/registry-manifest/v2.json"
-export const SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v3.json"
+  "https://solidiom.dev/schemas/registry-manifest/v3.json"
+export const SUPPORTED_INDEX_SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v4.json"
 
 /** Product-layer deliverable kinds a package/manifest may declare (CLI-002). */
 export const DELIVERABLES = [
@@ -88,7 +88,6 @@ const integritySchema = z.object({
     .string()
     .regex(/^[A-Za-z0-9+\/=]+$/)
     .optional(),
-  signedAt: z.string().optional(),
   signatureKeyId: z
     .string()
     .regex(/^[0-9a-f]{16}$/)
@@ -182,7 +181,6 @@ const registryThemeSummarySchema = z.object({
 export const registryIndexSchema = z.object({
   $schema: z.literal(SUPPORTED_INDEX_SCHEMA_URL),
   version: z.literal(SUPPORTED_REGISTRY_INDEX_VERSION),
-  generatedAt: z.string(),
   integrity: integritySchema,
   primitives: z.array(registryPrimitiveSummarySchema),
   adapters: z.array(registryAdapterSchema),
@@ -200,7 +198,6 @@ const manifestIntegritySchema = z.object({
   filesHash: z.string().regex(/^[0-9a-f]{64}$/),
   fileDigests: z.record(z.string(), z.string().regex(/^[0-9a-f]{64}$/)),
   manifestSignature: z.string().optional(),
-  lastGenerated: z.string(),
 })
 
 export const registryManifestSchema = z.object({
@@ -227,7 +224,6 @@ export const registryManifestSchema = z.object({
   runtime: z.array(z.string()),
   integrity: manifestIntegritySchema,
   provenance: manifestProvenanceSchema,
-  lastUpdated: z.string(),
 })
 
 export type RegistryManifest = z.infer<typeof registryManifestSchema>

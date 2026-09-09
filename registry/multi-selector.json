@@ -18,7 +18,7 @@
     "dom/stable-id",
     "state/disclosure-state"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Multi Selector",
   "description": "Multi-select dropdown with checkbox items and search filtering.",
   "category": "data-input",
@@ -76,12 +76,10 @@
     "filesHash": "5f343ad3533487da678cbeaa7e1de45297dc07bdca5ca3d9804b8d37f3adf515",
     "fileDigests": {
       "src/index.tsx": "dffdcbbe13920fe05dc1532bac52e15902653221095641116eb3a16166070438"
-    },
-    "lastGenerated": "2026-09-05T19:21:15.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/multi-selector"
-  },
-  "lastUpdated": "2026-09-05T19:21:15.000Z"
+  }
 }

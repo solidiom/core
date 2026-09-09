@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Status Dot",
   "description": "Small colored dot indicating presence or status.",
   "category": "feedback",
@@ -63,12 +63,10 @@
     "filesHash": "25c0e26decd4e75f6f8b126967394b3028f18622eeda55bcd7f7abef455dc34b",
     "fileDigests": {
       "src/index.tsx": "f8231d5e1d68da0ef22799319629df6dcfac003b3e3c0f4afe6d29604b672304"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/status-dot"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

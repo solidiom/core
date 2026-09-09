@@ -104,7 +104,7 @@ The package build uploads `packages/*/dist` and non-site `apps/*/dist` once. Dow
 
 ### Browser coverage
 
-CI uses Chromium for rapid feedback. `nightly.yml` adds Firefox and WebKit to catch browser-specific regressions without making each PR expensive. The pinned `mcr.microsoft.com/playwright:v1.62.1-noble` container is used for visual snapshots and their regeneration.
+CI uses Chromium for rapid feedback. `nightly.yml` adds Firefox and WebKit to catch browser-specific regressions without making each PR expensive. The pinned `mcr.microsoft.com/playwright:v1.63.0-noble` container is used for visual snapshots and their regeneration.
 
 ### Compatibility coverage
 

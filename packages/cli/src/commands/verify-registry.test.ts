@@ -30,8 +30,8 @@ async function signIndex(content: string, privDer: Buffer): Promise<string> {
 }
 import { verifyRegistry } from "./verify"
 
-const SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v3.json"
-const MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v2.json"
+const SCHEMA_URL = "https://solidiom.dev/schemas/registry-index/v4.json"
+const MANIFEST_SCHEMA_URL = "https://solidiom.dev/schemas/registry-manifest/v3.json"
 
 function buttonManifest() {
   const fileDigests = {
@@ -71,21 +71,18 @@ function buttonManifest() {
       algorithm: "sha256" as const,
       filesHash,
       fileDigests,
-      lastGenerated: "2025-01-01T00:00:00.000Z",
     },
     provenance: {
       repository: "https://github.com/solidiom/core",
       directory: "packages/button",
     },
-    lastUpdated: "2025-01-01T00:00:00.000Z",
   }
 }
 
 function baseIndex(manifest: ReturnType<typeof buttonManifest>) {
   return {
     $schema: SCHEMA_URL,
-    version: 3 as const,
-    generatedAt: "2025-01-01T00:00:00.000Z",
+    version: 4 as const,
     integrity: {
       algorithm: "sha256" as const,
       entriesHash: "a".repeat(64),
@@ -245,7 +242,6 @@ describe("verifyRegistry (REG-006)", () => {
       integrity: {
         ...index.integrity,
         signature,
-        signedAt: "2025-01-01T00:00:00.000Z",
         signatureKeyId: TEST_KEY_ID,
       },
     }
@@ -270,7 +266,6 @@ describe("verifyRegistry (REG-006)", () => {
       integrity: {
         ...index.integrity,
         signature,
-        signedAt: "2025-01-01T00:00:00.000Z",
         signatureKeyId: "0".repeat(16),
       },
     }
@@ -292,7 +287,7 @@ describe("verifyRegistry (REG-006)", () => {
     const ROOT = join(import.meta.dirname, "..", "..", "..", "..")
     const registryDir = join(ROOT, "registry")
     const raw = JSON.parse(readFileSync(join(registryDir, "index.json"), "utf8"))
-    expect(raw.version).toBe(3)
+    expect(raw.version).toBe(4)
 
     const result = verifyRegistry({ cwd: ROOT, registryDir })
     // The checked-in registry is unsigned in this workspace, so signature

@@ -17,7 +17,7 @@
     "collection/roving-focus",
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Segmented Control",
   "description": "Mutually exclusive option selector with connected segments.",
   "category": "action",
@@ -72,12 +72,10 @@
     "filesHash": "0efaf991d3f759f554464a6f698250f30bd3d68efd552899ab5c067aaea86f12",
     "fileDigests": {
       "src/index.tsx": "5fa7915558757f5700fb4474ed09086be94ba0e251c90ec7739116b7f637fdbe"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/segmented-control"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

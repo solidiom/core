@@ -74,7 +74,6 @@ interface StylesheetEntry {
 }
 
 interface BudgetReport {
-  generatedAt: string
   buildDirectory: string
   routes: RouteReport[]
   summary: BudgetSummary
@@ -341,7 +340,6 @@ function generateReport(): BudgetReport {
   }
 
   return {
-    generatedAt: new Date().toISOString(),
     buildDirectory: relative(projectRoot, distRoot),
     routes,
     summary,
@@ -428,7 +426,6 @@ function checkBudgets(report: BudgetReport, budgets: BudgetThresholds): BudgetVi
 
 function printSummary(report: BudgetReport): void {
   console.log("\n━━━ SITE-013 Route Bundle & Hydration Report ━━━\n")
-  console.log(`Generated: ${report.generatedAt}`)
   console.log(`Routes analyzed: ${report.summary.totalRoutes}`)
   console.log(`Unique JS assets: ${report.summary.uniqueJsAssets}`)
   console.log(`Unique CSS assets: ${report.summary.uniqueCssAssets}`)

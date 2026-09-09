@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Number Input",
   "description": "Numeric input with increment/decrement controls and locale-aware formatting.",
   "category": "data-input",
@@ -68,12 +68,10 @@
     "filesHash": "afcb64103fcb9b40f4a35be1f560c45a1ce0611f7ba30b023b17987032866d57",
     "fileDigests": {
       "src/index.tsx": "76e8707bbc4d5b116a0059a838b840db1970a0374b77deae518943a99cc987ba"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/number-input"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

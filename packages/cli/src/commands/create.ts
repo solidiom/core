@@ -230,7 +230,7 @@ async function promptForMissing(
     const result = await clack.text({
       message: "Which template would you like to use?",
     })
-    if (clack.isCancel(result)) return "cancelled"
+    if (clack.isCancel(result) || typeof result !== "string") return "cancelled"
     template = result
   }
 
@@ -238,7 +238,7 @@ async function promptForMissing(
     const result = await clack.text({
       message: "What is the name of your project?",
     })
-    if (clack.isCancel(result)) return "cancelled"
+    if (clack.isCancel(result) || typeof result !== "string") return "cancelled"
     name = result
   }
 

@@ -29,7 +29,7 @@ import {
 
 const ROOT = resolve(import.meta.dirname ?? __dirname, "..")
 const PACKAGES_DIR = join(ROOT, "packages")
-const OUTPUT_DIR = join(ROOT, "artifacts/api")
+const DEFAULT_OUTPUT_DIR = join(ROOT, "artifacts/api")
 const REPOSITORY_URL = "https://github.com/solidiom/core"
 
 type UnknownRecord = Record<string, unknown>
@@ -71,9 +71,25 @@ function numberValue(value: unknown): number | undefined {
   return typeof value === "number" && Number.isFinite(value) ? value : undefined
 }
 
-function parseArgs(): { packageFilter: string | undefined } {
-  const index = process.argv.indexOf("--package")
-  return index === -1 ? {} : { packageFilter: process.argv[index + 1] }
+function argumentValue(args: readonly string[], name: string): string | undefined {
+  const index = args.indexOf(name)
+  if (index === -1) return undefined
+  const value = args[index + 1]
+  if (!value || value.startsWith("--")) {
+    throw new Error(`${name} requires a value.`)
+  }
+  return value
+}
+
+function parseArgs(args = process.argv.slice(2)): {
+  packageFilter: string | undefined
+  outputDirectory: string
+} {
+  const output = argumentValue(args, "--output-dir")
+  return {
+    packageFilter: argumentValue(args, "--package"),
+    outputDirectory: output ? resolve(process.cwd(), output) : DEFAULT_OUTPUT_DIR,
+  }
 }
 
 function discoverPrimitivePackages(): PackageInfo[] {
@@ -446,13 +462,27 @@ export function normalizeTypeDocProject(
     $schema: API_SCHEMA_URL,
     schemaVersion: API_SCHEMA_VERSION,
     packageName,
-    generatedAt: new Date().toISOString(),
     entryPoints: entryPoints.map((entryPoint) => relative(ROOT, entryPoint).replaceAll("\\", "/")),
     exports,
   }
 }
 
-async function generateForPackage(pkg: PackageInfo): Promise<boolean> {
+export function serializeNormalizedApiDocument(document: NormalizedApiDocument): string {
+  return `${JSON.stringify(document, null, 2)}\n`
+}
+
+export function writeNormalizedApiDocument(
+  outputDirectory: string,
+  shortName: string,
+  document: NormalizedApiDocument,
+): string {
+  mkdirSync(outputDirectory, { recursive: true })
+  const outputPath = join(outputDirectory, `${shortName}.json`)
+  writeFileSync(outputPath, serializeNormalizedApiDocument(document), "utf8")
+  return outputPath
+}
+
+async function generateForPackage(pkg: PackageInfo, outputDirectory: string): Promise<boolean> {
   const entryPoint = findEntryPoint(pkg.dir)
   const shortName = basename(pkg.dir)
   if (!entryPoint) {
@@ -479,8 +509,7 @@ async function generateForPackage(pkg: PackageInfo): Promise<boolean> {
 
     const serialized = app.serializer.projectToObject(project, ROOT)
     const output = normalizeTypeDocProject(serialized, pkg.name, [entryPoint], dirname(entryPoint))
-    const outputPath = join(OUTPUT_DIR, `${shortName}.json`)
-    writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`, "utf8")
+    const outputPath = writeNormalizedApiDocument(outputDirectory, shortName, output)
     console.log(`  ✓ ${outputPath} (${output.exports.length} exports)`)
     return true
   } catch (error) {
@@ -511,7 +540,7 @@ export async function mapWithConcurrency<T, R>(
 }
 
 async function main(): Promise<void> {
-  const { packageFilter } = parseArgs()
+  const { packageFilter, outputDirectory } = parseArgs()
   let packages = discoverPrimitivePackages()
   if (packageFilter) {
     packages = packages.filter(
@@ -526,12 +555,14 @@ async function main(): Promise<void> {
     )
   }
 
-  mkdirSync(OUTPUT_DIR, { recursive: true })
+  mkdirSync(outputDirectory, { recursive: true })
   console.log(`API: generating ${packages.length} normalized TypeDoc artifact(s)...`)
   // Each TypeDoc application creates a full TypeScript program. Launching one
   // per primitive with unbounded Promise.all exceeds the CI Node heap, so keep
   // only two programs live at once while preserving deterministic output order.
-  const results = await mapWithConcurrency(packages, 2, generateForPackage)
+  const results = await mapWithConcurrency(packages, 2, (pkg) =>
+    generateForPackage(pkg, outputDirectory),
+  )
   if (results.some((result) => !result)) {
     throw new Error("API generation failed; no incomplete API artifact may be treated as current.")
   }

@@ -15,7 +15,7 @@
   "runtime": [
     "dom/stable-id"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Time Input",
   "description": "Segmented time entry with hour, minute, second fields and AM/PM toggle.",
   "category": "data-input",
@@ -71,12 +71,10 @@
     "filesHash": "19fe77ce5e5f51d1761fe1646667144c480dadeb085af8dc230ae2922800a334",
     "fileDigests": {
       "src/index.tsx": "11c90aae78bbe4be743f8cd09f5ddbc8dd4e482e8cded2c42d807c1710eba2d0"
-    },
-    "lastGenerated": "2026-09-05T19:21:15.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/time-input"
-  },
-  "lastUpdated": "2026-09-05T19:21:15.000Z"
+  }
 }

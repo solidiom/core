@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Scroll Area",
   "description": "Custom-styled scrollbar with native scrolling performance.",
   "category": "layout",
@@ -72,12 +72,10 @@
     "filesHash": "3db3b9167390bad82a1f58d936e450fcd9396e0b039be40d37a83bddf044f8e3",
     "fileDigests": {
       "src/index.tsx": "4b1e201660eb255ec50dc92e6563a337b39fa1c4a4b7f5c08b1d99aad191f813"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/scroll-area"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

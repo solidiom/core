@@ -49,7 +49,7 @@ export default defineConfig({
   webServer: {
     command:
       process.env.PLAYWRIGHT_USE_EXISTING_BUILD === "1"
-        ? "pnpm preview --host 127.0.0.1 --port 4322"
+        ? "node scripts/serve-static.mjs"
         : "pnpm build && pnpm search-index && pnpm preview --host 127.0.0.1 --port 4322",
     url: "http://127.0.0.1:4322",
     reuseExistingServer: !process.env.CI,

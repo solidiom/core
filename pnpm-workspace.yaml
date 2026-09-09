@@ -7,13 +7,13 @@ packages:
   - "templates/*"
 
 catalog:
-  solid-js: ">=2.0.0-rc.6 <3.0.0"
-  "@solidjs/web": ">=2.0.0-rc.6 <3.0.0"
+  solid-js: ">=2.0.0-rc.7 <3.0.0"
+  "@solidjs/web": ">=2.0.0-rc.7 <3.0.0"
   babel-preset-solid: ">=2.0.0-rc.2 <3.0.0"
 
 overrides:
-  solid-js: "2.0.0-rc.6"
-  "@solidjs/web": "2.0.0-rc.6"
+  solid-js: "2.0.0-rc.7"
+  "@solidjs/web": "2.0.0-rc.7"
   babel-preset-solid: "2.0.0-rc.2"
   # Security overrides for transitive dependencies. Each target is bounded to the
   # existing major so a floor never becomes an accidental major upgrade.

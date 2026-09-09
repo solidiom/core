@@ -160,15 +160,7 @@ jobs:
           echo "::group::Stale paths"
           git diff --stat -- "${PATHSPEC[@]}"
           echo "::endgroup::"
-          SUBSTANTIVE=$(git diff -U0 -- "${PATHSPEC[@]}" \
-            | grep -E '^[+-]' \
-            | grep -vE '^(\+\+\+|---)' \
-            | grep -cvE '"(lastGenerated|lastUpdated|generatedAt|signedAt)":' || true)
-          if [ "$SUBSTANTIVE" -eq 0 ]; then
-            echo "::error::Generated artifacts differ only in timestamps — determinism regression."
-          else
-            echo "::error::Generated artifacts are stale ($SUBSTANTIVE changed lines). Run 'pnpm build && pnpm run report:a11y-evidence && pnpm run registry:build' and commit."
-          fi
+          echo "::error::Generated artifacts are stale. Run 'pnpm build && pnpm run report:a11y-evidence && pnpm run registry:build' and commit."
           exit 1
 
       - name: Upload build artifacts

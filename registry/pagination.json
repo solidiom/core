@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Pagination",
   "description": "Page navigation with prev/next and page numbers.",
   "category": "navigation",
@@ -70,12 +70,10 @@
     "filesHash": "14daa904db66d0547ce0b8e900d9cbcc7adf89ee7ec6fb05f0a06b6aecc01d26",
     "fileDigests": {
       "src/index.tsx": "b7845f543a4a13205b3467cdf782a39c0a3594718647afd021a6bb44bd8575b1"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/pagination"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

@@ -81,7 +81,7 @@ async function main(): Promise<Result[]> {
       check: "registry_signature_present",
       pass: hasSignature,
       detail: hasSignature
-        ? `signed with keyId=${integrity.signatureKeyId} at ${integrity.signedAt}`
+        ? `signed with keyId=${integrity.signatureKeyId}`
         : "no signature — REGISTRY_SIGN_KEY was not set during build",
     })
   }
@@ -101,7 +101,6 @@ async function main(): Promise<Result[]> {
 
       if (idxParsed.integrity) {
         delete idxParsed.integrity.signature
-        delete idxParsed.integrity.signedAt
         delete idxParsed.integrity.signatureKeyId
       }
 

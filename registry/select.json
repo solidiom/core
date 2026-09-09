@@ -23,7 +23,7 @@
     "state/controllable-value",
     "state/disclosure-state"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Select",
   "description": "Dropdown selection from a list of options.",
   "category": "input",
@@ -81,12 +81,10 @@
       "src/index.tsx": "24028e338b8f3842a8f710ef53129f6d5cfd747ad122e9bf6e0a900168baa12c",
       "src/select-context.ts": "bf10233859db06b551a8a0aeee2039aeb75212be33b6995766035fde6ed9c0d5",
       "src/select.tsx": "f14453d83edd73198be4d35ac759f0b0da6b4db9217e87336bf401236a86e1c5"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/select"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

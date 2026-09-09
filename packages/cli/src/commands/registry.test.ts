@@ -17,7 +17,7 @@ const ROOT = join(__dirname, "..", "..", "..", "..")
 describe("registry", () => {
   it("registry/index.json is valid and has required fields", () => {
     const registry = JSON.parse(readFileSync(join(ROOT, "registry/index.json"), "utf8"))
-    expect(registry.version).toBe(3)
+    expect(registry.version).toBe(4)
     expect(registry.primitives).toBeInstanceOf(Array)
     expect(registry.adapters).toBeInstanceOf(Array)
     expect(registry.primitives.length).toBeGreaterThanOrEqual(4)
@@ -78,7 +78,6 @@ describe("registry schema version guard (REG-004)", () => {
     const path = withTempFile("index.json", {
       $schema: "https://solidiom.dev/schemas/registry-index/v2.json",
       version: 1,
-      generatedAt: "2025-01-01T00:00:00.000Z",
       integrity: { algorithm: "sha256", entriesHash: "a".repeat(64) },
       primitives: [],
       adapters: [],
@@ -90,9 +89,8 @@ describe("registry schema version guard (REG-004)", () => {
   it("rejects an index missing required integrity fields", () => {
     tempDir = mkdtempSync(join(tmpdir(), "registry-schema-test-"))
     const path = withTempFile("index.json", {
-      $schema: "https://solidiom.dev/schemas/registry-index/v3.json",
-      version: 3,
-      generatedAt: "2025-01-01T00:00:00.000Z",
+      $schema: "https://solidiom.dev/schemas/registry-index/v4.json",
+      version: 4,
       primitives: [],
       adapters: [],
       components: [],
@@ -121,7 +119,6 @@ describe("registry schema version guard (REG-004)", () => {
         algorithm: "sha256",
         filesHash: "a".repeat(64),
         fileDigests: {},
-        lastGenerated: "2025-01-01T00:00:00.000Z",
       },
     })
     expect(() => readRegistryManifest(path)).toThrow(RegistrySchemaError)

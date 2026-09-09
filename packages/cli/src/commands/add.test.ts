@@ -226,7 +226,7 @@ describe("runAdd", () => {
       const digest = createHash("sha256").update(content, "utf8").digest("hex")
       const filesHash = createHash("sha256").update(digest).digest("hex")
       const manifest = {
-        $schema: "https://solidiom.dev/schemas/registry-manifest/v2.json",
+        $schema: "https://solidiom.dev/schemas/registry-manifest/v3.json",
         name: primitive,
         version: "0.0.1-next.0",
         package: `@solidiom/${primitive}`,
@@ -248,19 +248,16 @@ describe("runAdd", () => {
           algorithm: "sha256",
           filesHash,
           fileDigests: { "index.tsx": digest },
-          lastGenerated: "2025-01-01T00:00:00.000Z",
         },
         provenance: {
           repository: "https://github.com/solidiom/core",
           directory: `packages/${primitive}`,
         },
-        lastUpdated: "2025-01-01T00:00:00.000Z",
       }
       writeFileSync(join(registryDir, `${primitive}.json`), JSON.stringify(manifest))
       const index = {
-        $schema: "https://solidiom.dev/schemas/registry-index/v3.json",
-        version: 3,
-        generatedAt: "2025-01-01T00:00:00.000Z",
+        $schema: "https://solidiom.dev/schemas/registry-index/v4.json",
+        version: 4,
         integrity: {
           algorithm: "sha256",
           entriesHash: createHash("sha256").update("").digest("hex"),

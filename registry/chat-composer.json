@@ -15,7 +15,7 @@
   "runtime": [
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Chat Composer",
   "description": "Rich text input for composing chat messages with send action.",
   "category": "data-input",
@@ -71,12 +71,10 @@
     "filesHash": "9e707900ab10db91c0384fbcbf2d844137fb3025f4de73ffa5640c62d52c7ca3",
     "fileDigests": {
       "src/index.tsx": "7ce1954618b072f38d94a997e561b51cb20882471cbc2a66c340d9ba23c9c13c"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/chat-composer"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

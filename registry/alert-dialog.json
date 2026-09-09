@@ -17,7 +17,7 @@
     "presence/presence",
     "state/disclosure-state"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Alert Dialog",
   "description": "Modal confirmation dialog requiring explicit user action.",
   "category": "overlay",
@@ -71,12 +71,10 @@
     "filesHash": "e96447c9a766b660323d340b4dcf1fd1a6cd4fc5a0d660ff3a141df6baa996ff",
     "fileDigests": {
       "src/index.tsx": "5ccc605a6374420855195af4b1743447eb2e613745497acfbcc357ad32d2b346"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/alert-dialog"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

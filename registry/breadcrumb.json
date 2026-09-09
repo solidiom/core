@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Breadcrumb",
   "description": "Hierarchical location indicator with links.",
   "category": "navigation",
@@ -75,12 +75,10 @@
     "filesHash": "fcd218669021989e1e642daf2814421000fa899a507a141eef741db1800b4026",
     "fileDigests": {
       "src/index.tsx": "7c6d2fabb0c065fce76e20ce71df3ac5b0456819b6e4f65f0ed2764371edee75"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/breadcrumb"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

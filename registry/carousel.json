@@ -23,7 +23,7 @@
   "runtime": [
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Carousel",
   "description": "Horizontal slide-based content viewer.",
   "category": "layout",
@@ -80,12 +80,10 @@
       "src/carousel-context.ts": "620e9b19be47357cc2f1c744e52a95629aa1d2d7d474aa999f3c5070050e1ccb",
       "src/carousel.tsx": "53ba31f214b799620a055d56df5eb30782eb60b6366337f4e71634c3b3d3c6b5",
       "src/index.tsx": "caa11d7ef6a9caf4341da76158ba6d7a88683470da22686dc3594529707c3753"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/carousel"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

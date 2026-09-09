@@ -19,7 +19,7 @@
     "events/change-details",
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Data Table",
   "description": "Sortable, selectable table with column control.",
   "category": "layout",
@@ -88,12 +88,10 @@
       "src/data-table-context.ts": "51135e97f748133bae1fc3286bf59acce4c159306bd7d821efd8e363701f95df",
       "src/data-table.tsx": "8aa83ebf5d8de898261d95afc98c9b24d7ee7b1461f92da64bd08bbfd105f67a",
       "src/index.tsx": "f7f5937850a28dbb5cd26d7ff7f375c690cb45aa5e4d6be554d5bc662af5c345"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/data-table"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

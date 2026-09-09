@@ -48,9 +48,9 @@ describe("release workflow policy", () => {
     expect(postMerge).toContain('target: "all"')
     expect(postMerge).toContain("expected_sha: process.env.EXPECTED_SHA")
     expect(postMerge).not.toContain("git tag -a")
-    expect(read("tools/generate-beta-artifacts.ts")).toContain(
-      'process.env.SOLIDIOM_RELEASE_ID?.trim() || "local-unversioned"',
-    )
+    const betaArtifacts = read("tools/generate-beta-artifacts.ts")
+    expect(betaArtifacts).toContain('options.releaseId?.trim() || "local-unversioned"')
+    expect(betaArtifacts).toContain("releaseId: process.env.SOLIDIOM_RELEASE_ID")
   })
 
   it("fails package publishing closed when npm has no unpublished versions", () => {

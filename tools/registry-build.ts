@@ -29,17 +29,25 @@ import {
   unlinkSync,
   mkdirSync,
 } from "node:fs"
-import { join, relative, dirname } from "node:path"
+import { dirname, join, relative, resolve } from "node:path"
 import { readTextFileIfExists } from "./fs-safe"
 import { fileURLToPath } from "node:url"
 import { createHash } from "node:crypto"
-import { execSync } from "node:child_process"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const ROOT = join(__dirname, "..")
 const PACKAGES_DIR = join(ROOT, "packages")
-const REGISTRY_DIR = join(ROOT, "registry")
+
+function registryOutputDirectory(args = process.argv.slice(2)): string {
+  const index = args.indexOf("--output-dir")
+  if (index === -1) return join(ROOT, "registry")
+  const value = args[index + 1]
+  if (!value || value.startsWith("--")) throw new Error("--output-dir requires a value.")
+  return resolve(process.cwd(), value)
+}
+
+const REGISTRY_DIR = registryOutputDirectory()
 const SITE_CONTENT_DIR = join(ROOT, "apps", "site", "src", "content")
 
 interface A11yEvidenceRecord {
@@ -408,14 +416,12 @@ interface PrimitiveManifestV2 extends PrimitiveManifest {
     filesHash: string
     fileDigests: Record<string, string>
     manifestSignature?: string
-    lastGenerated: string
   }
   provenance: {
     repository: string
     directory: string
     sourceCommit?: string
   }
-  lastUpdated: string
 }
 
 /** Component manifest — the recipe wrapper for the active styling profile. */
@@ -429,7 +435,6 @@ interface ComponentManifest {
   integrity: {
     algorithm: "sha256"
     fileDigests: Record<StylingOutput, Record<string, string>>
-    lastGenerated: string
   }
   documentation: {
     status: "stub" | "draft" | "review" | "complete"
@@ -443,18 +448,15 @@ interface ComponentManifest {
     >
   }
   dependencies: string[]
-  lastUpdated: string
 }
 
-interface IndexManifestV3 {
+interface IndexManifestV4 {
   $schema: string
-  version: 3
-  generatedAt: string
+  version: 4
   integrity: {
     algorithm: "sha256"
     entriesHash: string
     signature?: string
-    signedAt?: string
     signatureKeyId?: string
   }
   primitives: Array<{
@@ -533,9 +535,6 @@ interface IndexManifestV3 {
     searchKeywords: string[]
   }>
 }
-
-// Kept for backward-compatible type exports
-type IndexManifestV2 = IndexManifestV3
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -888,157 +887,6 @@ function discoverComponentScopes(): string[] {
   return components.sort()
 }
 
-// ─── Deterministic Timestamp ─────────────────────────────────────────────────
-
-/** Get a deterministic timestamp: env override > git HEAD commit date > current time. */
-function getDeterministicTimestamp(): string {
-  if (process.env.REGISTRY_TIMESTAMP) {
-    return process.env.REGISTRY_TIMESTAMP
-  }
-  try {
-    const gitDate = execSync("git log -1 --format=%cI", { cwd: ROOT, encoding: "utf8" }).trim()
-    if (gitDate) return new Date(gitDate).toISOString()
-  } catch {
-    // git not available, fall through
-  }
-  return new Date().toISOString()
-}
-
-// ─── Timestamp Stability (BUILD-001) ─────────────────────────────────────────
-//
-// `getDeterministicTimestamp()` is deterministic for a given HEAD, but the
-// registry is a committed artifact, which makes a HEAD-derived stamp
-// self-referentially unstable: the commit that lands a regenerated manifest
-// becomes the new HEAD, so the next build stamps a later date and BUILD-001's
-// `git diff --exit-code` reports the artifact as stale. Regenerating and
-// committing can never reach a fixed point.
-//
-// The stamps are not inputs to `computeFilesHash` or `computeEntriesHash`, so
-// they carry no integrity meaning. Preserving the committed value whenever
-// everything else in the artifact is byte-identical makes each file a pure
-// function of its inputs — the stamp then moves exactly when real content
-// moves, and the staleness comparison converges after one regeneration.
-
-/** Serialize with sorted keys so comparison is insensitive to construction order. */
-function canonicalJson(value: unknown): string {
-  return JSON.stringify(value, (_key, val: unknown) =>
-    val && typeof val === "object" && !Array.isArray(val)
-      ? Object.fromEntries(
-          Object.entries(val as Record<string, unknown>).sort(([a], [b]) => a.localeCompare(b)),
-        )
-      : val,
-  )
-}
-
-function readCommittedJson<T>(fileName: string): T | undefined {
-  const path = join(REGISTRY_DIR, fileName)
-  if (!existsSync(path)) return undefined
-  try {
-    return JSON.parse(readFileSync(path, "utf8")) as T
-  } catch {
-    return undefined
-  }
-}
-
-/** Manifest body with the two generation stamps removed. */
-function manifestWithoutStamps(manifest: PrimitiveManifestV2): unknown {
-  const { lastUpdated: _lastUpdated, integrity, ...rest } = manifest
-  const { lastGenerated: _lastGenerated, ...integrityRest } = integrity
-  return { ...rest, integrity: integrityRest }
-}
-
-/**
- * Reuse the committed manifest's stamps when nothing else about the manifest
- * changed. Returns the candidate untouched when the file is absent, unreadable,
- * substantively different, or missing usable stamps.
- */
-function withStableManifestStamps(candidate: PrimitiveManifestV2): PrimitiveManifestV2 {
-  const committed = readCommittedJson<PrimitiveManifestV2>(`${candidate.name}.json`)
-  if (!committed) return candidate
-  if (typeof committed.lastUpdated !== "string") return candidate
-  if (typeof committed.integrity?.lastGenerated !== "string") return candidate
-  if (
-    canonicalJson(manifestWithoutStamps(candidate)) !==
-    canonicalJson(manifestWithoutStamps(committed))
-  ) {
-    return candidate
-  }
-  return {
-    ...candidate,
-    integrity: { ...candidate.integrity, lastGenerated: committed.integrity.lastGenerated },
-    lastUpdated: committed.lastUpdated,
-  }
-}
-
-/**
- * Reuse the committed index stamp when nothing else about the index changed.
- *
- * Signing fields are excluded from the comparison: they are injected after this
- * runs, so the committed file may carry them while the candidate does not.
- */
-function withStableIndexStamp(candidate: IndexManifestV3): IndexManifestV3 {
-  const committed = readCommittedJson<IndexManifestV3>("index.json")
-  if (!committed || typeof committed.generatedAt !== "string") return candidate
-  if (
-    canonicalJson(indexWithoutStamps(candidate)) !== canonicalJson(indexWithoutStamps(committed))
-  ) {
-    return candidate
-  }
-  return { ...candidate, generatedAt: committed.generatedAt }
-}
-
-/** Index body with the generation stamp and all signing fields removed. */
-function indexWithoutStamps(index: IndexManifestV3): unknown {
-  const { generatedAt: _generatedAt, integrity, ...rest } = index
-  const {
-    signature: _signature,
-    signedAt: _signedAt,
-    signatureKeyId: _signatureKeyId,
-    ...integrityRest
-  } = integrity as Record<string, unknown>
-  return { ...rest, integrity: integrityRest }
-}
-
-/** Component manifest body with generation stamps removed. */
-function componentWithoutStamps(manifest: ComponentManifest): unknown {
-  const { lastUpdated: _lastUpdated, integrity, ...rest } = manifest
-  const { lastGenerated: _lastGenerated, ...integrityRest } = integrity
-  return { ...rest, integrity: integrityRest }
-}
-
-/**
- * Reuse the committed component manifest's stamps when nothing else changed.
- */
-function withStableComponentStamps(candidate: ComponentManifest): ComponentManifest {
-  const committed = readCommittedJson<ComponentManifest>(`components/${candidate.name}.json`)
-  if (!committed) return candidate
-  if (typeof committed.lastUpdated !== "string") return candidate
-  if (typeof committed.integrity?.lastGenerated !== "string") return candidate
-  if (
-    canonicalJson(componentWithoutStamps(candidate)) !==
-    canonicalJson(componentWithoutStamps(committed))
-  ) {
-    return candidate
-  }
-  return {
-    ...candidate,
-    integrity: { ...candidate.integrity, lastGenerated: committed.integrity.lastGenerated },
-    lastUpdated: committed.lastUpdated,
-  }
-}
-
-/** The signature already recorded in the committed index, if any. */
-function committedIndexSignature(): { signature?: string; signedAt?: string } {
-  const committed = readCommittedJson<IndexManifestV3>("index.json")
-  const integrity = committed?.integrity as Record<string, unknown> | undefined
-  return {
-    signature:
-      typeof integrity?.["signature"] === "string" ? (integrity["signature"] as string) : undefined,
-    signedAt:
-      typeof integrity?.["signedAt"] === "string" ? (integrity["signedAt"] as string) : undefined,
-  }
-}
-
 // ─── Recursive Orphan Sweep ──────────────────────────────────────────────────
 
 /**
@@ -1085,6 +933,7 @@ function sweepOrphanManifests(
 // ─── Main Build Logic ────────────────────────────────────────────────────────
 
 async function buildRegistry(): Promise<void> {
+  mkdirSync(REGISTRY_DIR, { recursive: true })
   const packageDirs = readdirSync(PACKAGES_DIR)
     .map((name: string) => ({ name, path: join(PACKAGES_DIR, name) }))
     .filter((d: { name: string; path: string }) => statSync(d.path).isDirectory())
@@ -1207,8 +1056,7 @@ async function buildRegistry(): Promise<void> {
     unlinkSync(fullPath)
   }
 
-  // Generate V2 manifests with integrity and metadata
-  const now = getDeterministicTimestamp()
+  // Generate timestamp-free manifests with integrity and metadata
   const v2Manifests: PrimitiveManifestV2[] = []
 
   for (const primitive of primitives) {
@@ -1249,7 +1097,7 @@ async function buildRegistry(): Promise<void> {
 
     const v2: PrimitiveManifestV2 = {
       ...primitive,
-      $schema: "https://solidiom.dev/schemas/registry-manifest/v2.json",
+      $schema: "https://solidiom.dev/schemas/registry-manifest/v3.json",
       label,
       description,
       category,
@@ -1278,7 +1126,6 @@ async function buildRegistry(): Promise<void> {
         algorithm: "sha256",
         filesHash,
         fileDigests,
-        lastGenerated: now,
       },
       provenance: {
         repository: registryMetadata.provenance.repository ?? "https://github.com/solidiom/core",
@@ -1287,11 +1134,9 @@ async function buildRegistry(): Promise<void> {
           ? { sourceCommit: registryMetadata.provenance.sourceCommit }
           : {}),
       },
-      lastUpdated: now,
     }
 
-    // BUILD-001: keep the committed stamps when nothing else changed.
-    v2Manifests.push(withStableManifestStamps(v2))
+    v2Manifests.push(v2)
   }
 
   for (const manifest of v2Manifests) {
@@ -1302,7 +1147,7 @@ async function buildRegistry(): Promise<void> {
   // ─── Component Discovery & Manifest Generation ────────────────────────────
   const componentScopes = discoverComponentScopes()
   const componentManifests: ComponentManifest[] = []
-  const componentIndexEntries: IndexManifestV3["components"] = []
+  const componentIndexEntries: IndexManifestV4["components"] = []
 
   for (const scope of componentScopes) {
     const stylingOutputs = detectStylingOutputs(scope)
@@ -1344,7 +1189,7 @@ async function buildRegistry(): Promise<void> {
     const docs = layerDocumentationMetadata("components", scope)
 
     const manifest: ComponentManifest = {
-      $schema: "https://solidiom.dev/schemas/registry-manifest/v2.json",
+      $schema: "https://solidiom.dev/schemas/registry-manifest/v3.json",
       name: scope,
       version: primitive.version,
       package: `@solidiom/recipes-${stylingOutputs[0]}`,
@@ -1353,11 +1198,9 @@ async function buildRegistry(): Promise<void> {
       integrity: {
         algorithm: "sha256",
         fileDigests: integrityMap,
-        lastGenerated: now,
       },
       documentation: docs,
       dependencies: [primitive.package],
-      lastUpdated: now,
     }
 
     componentManifests.push(manifest)
@@ -1389,13 +1232,12 @@ async function buildRegistry(): Promise<void> {
   for (const manifest of componentManifests) {
     const dir = join(REGISTRY_DIR, "components")
     mkdirSync(dir, { recursive: true })
-    const stable = withStableComponentStamps(manifest)
-    const manifestPath = join(dir, `${stable.name}.json`)
-    writeFileSync(manifestPath, JSON.stringify(stable, null, 2) + "\n")
+    const manifestPath = join(dir, `${manifest.name}.json`)
+    writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n")
   }
 
   // ─── Block Discovery ──────────────────────────────────────────────────────
-  const blockIndexEntries: IndexManifestV3["blocks"] = []
+  const blockIndexEntries: IndexManifestV4["blocks"] = []
   const blockManifestDir = join(REGISTRY_DIR, "blocks")
   mkdirSync(blockManifestDir, { recursive: true })
 
@@ -1412,7 +1254,7 @@ async function buildRegistry(): Promise<void> {
         .join(" ")
       const deliverables = ["source"]
       const keywords = [blockName, "block", ...blockName.split("-")].sort()
-      const blockManifest: IndexManifestV3["blocks"][number] = {
+      const blockManifest: IndexManifestV4["blocks"][number] = {
         name: blockName,
         version: "0.0.1-next.0",
         package: "@solidiom/blocks",
@@ -1434,7 +1276,7 @@ async function buildRegistry(): Promise<void> {
   }
 
   // ─── Template Discovery ───────────────────────────────────────────────────
-  const templateIndexEntries: IndexManifestV3["templates"] = []
+  const templateIndexEntries: IndexManifestV4["templates"] = []
   const templateManifestDir = join(REGISTRY_DIR, "templates")
   mkdirSync(templateManifestDir, { recursive: true })
 
@@ -1463,7 +1305,7 @@ async function buildRegistry(): Promise<void> {
       ]
         .filter(Boolean)
         .sort()
-      const tplManifest: IndexManifestV3["templates"][number] = {
+      const tplManifest: IndexManifestV4["templates"][number] = {
         name: tplName,
         version: "0.0.1-next.0",
         package: "@solidiom/templates",
@@ -1484,7 +1326,7 @@ async function buildRegistry(): Promise<void> {
   }
 
   // ─── Theme Discovery ──────────────────────────────────────────────────────
-  const themeIndexEntries: IndexManifestV3["themes"] = []
+  const themeIndexEntries: IndexManifestV4["themes"] = []
   const themeManifestDir = join(REGISTRY_DIR, "themes")
   mkdirSync(themeManifestDir, { recursive: true })
 
@@ -1509,7 +1351,7 @@ async function buildRegistry(): Promise<void> {
   for (const theme of PRESET_THEMES) {
     const deliverables = ["css", "tailwind"]
     const keywords = [theme.slug, "theme", ...deliverables].sort()
-    const themeManifest: IndexManifestV3["themes"][number] = {
+    const themeManifest: IndexManifestV4["themes"][number] = {
       name: theme.slug,
       version: "0.0.1-next.0",
       package: "@solidiom/themes",
@@ -1560,11 +1402,10 @@ async function buildRegistry(): Promise<void> {
   ]
   const entriesHash = computeEntriesHash(allEntries)
 
-  // Write V3 index.json
-  const indexV3: IndexManifestV3 = {
-    $schema: "https://solidiom.dev/schemas/registry-index/v3.json",
-    version: 3,
-    generatedAt: now,
+  // Write timestamp-free v4 index.json
+  const indexV4: IndexManifestV4 = {
+    $schema: "https://solidiom.dev/schemas/registry-index/v4.json",
+    version: 4,
     integrity: { algorithm: "sha256", entriesHash },
     primitives: v2Manifests
       .map((m) => ({
@@ -1609,15 +1450,11 @@ async function buildRegistry(): Promise<void> {
     themes: themeIndexEntries,
   }
 
-  // BUILD-001: keep the committed stamp when nothing else changed, before
-  // signing, so the signature is computed over stabilized content.
-  const stableIndex = withStableIndexStamp(indexV3)
-
   // REG-005/REG-008: Sign the index with Ed25519 if REGISTRY_SIGN_KEY is set.
   // REGISTRY_SIGN_KEY is the Ed25519 private key as hex (64 hex chars = 32 bytes raw).
   const signKeyHex = process.env.REGISTRY_SIGN_KEY
   if (signKeyHex) {
-    const indexContent = JSON.stringify(stableIndex, null, 2)
+    const indexContent = JSON.stringify(indexV4, null, 2)
     // Reconstruct PKCS#8 DER from raw 32-byte private key
     const privateKeyBuf = Buffer.from(signKeyHex, "hex")
     const pkcs8Header = Buffer.from("302e020100300506032b657004220420", "hex")
@@ -1638,20 +1475,14 @@ async function buildRegistry(): Promise<void> {
     // JWK x parameter is the base64url-encoded raw public key
     const pubKeyBytes = Buffer.from(jwk.x!.replace(/-/g, "+").replace(/_/g, "/") + "==", "base64")
 
-    const committedSignature = committedIndexSignature()
-    stableIndex.integrity.signature = Buffer.from(sig).toString("base64")
-    stableIndex.integrity.signedAt =
-      committedSignature.signature === stableIndex.integrity.signature &&
-      committedSignature.signedAt
-        ? committedSignature.signedAt
-        : now
-    stableIndex.integrity.signatureKeyId = createHash("sha256")
+    indexV4.integrity.signature = Buffer.from(sig).toString("base64")
+    indexV4.integrity.signatureKeyId = createHash("sha256")
       .update(pubKeyBytes)
       .digest("hex")
       .slice(0, 16)
   }
 
-  writeFileSync(join(REGISTRY_DIR, "index.json"), JSON.stringify(stableIndex, null, 2) + "\n")
+  writeFileSync(join(REGISTRY_DIR, "index.json"), JSON.stringify(indexV4, null, 2) + "\n")
 
   // Summary
   console.log(`registry-build: generated ${primitives.length} primitive manifests`)
@@ -1660,7 +1491,7 @@ async function buildRegistry(): Promise<void> {
   console.log(`registry-build: ${blockIndexEntries.length} blocks`)
   console.log(`registry-build: ${templateIndexEntries.length} templates`)
   console.log(`registry-build: ${themeIndexEntries.length} themes`)
-  console.log(`registry-build: wrote registry/index.json (v3)`)
+  console.log(`registry-build: wrote registry/index.json (v4)`)
 
   for (const p of primitives.sort((a, b) => a.name.localeCompare(b.name))) {
     const caps =
@@ -1677,34 +1508,24 @@ function getExpectedNamesForLayer(layer: string): Set<string> {
     case "components":
       return new Set(discoverComponentScopes())
     case "blocks": {
-      // Read block names from the block catalog manifest
-      const manifestPath = join(ROOT, "docs", "contracts", "block-catalog-manifest.json")
-      if (!existsSync(manifestPath)) return new Set()
-      try {
-        const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
-          blocks?: Array<{ name?: string }>
-        }
-        return new Set(
-          (manifest.blocks ?? [])
-            .map((b) => (b.name ?? "").toLowerCase().replace(/\s+/g, "-"))
-            .filter(Boolean),
-        )
-      } catch {
-        return new Set()
-      }
+      const blocksDir = join(PACKAGES_DIR, "blocks")
+      if (!existsSync(blocksDir)) return new Set()
+      return new Set(
+        readdirSync(blocksDir).filter((name) => {
+          const path = join(blocksDir, name)
+          return statSync(path).isDirectory() && existsSync(join(path, "source"))
+        }),
+      )
     }
     case "templates": {
-      // Read template slugs from the template catalog manifest
-      const manifestPath = join(ROOT, "docs", "contracts", "template-catalog-manifest.json")
-      if (!existsSync(manifestPath)) return new Set()
-      try {
-        const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
-          templates?: Array<{ slug?: string }>
-        }
-        return new Set((manifest.templates ?? []).map((t) => t.slug ?? "").filter(Boolean))
-      } catch {
-        return new Set()
-      }
+      const templatesDir = join(ROOT, "templates")
+      if (!existsSync(templatesDir)) return new Set()
+      return new Set(
+        readdirSync(templatesDir).filter((name) => {
+          const path = join(templatesDir, name)
+          return statSync(path).isDirectory() && existsSync(join(path, "template.json"))
+        }),
+      )
     }
     case "themes":
       return new Set(["ocean", "forest", "slate", "aurora"])
@@ -1747,7 +1568,6 @@ export {
   computeEntriesHash,
   generateKeywords,
   detectStylingOutputs,
-  getDeterministicTimestamp,
   buildRegistry,
   collectSourceFiles,
   detectCapabilities,
@@ -1756,7 +1576,7 @@ export {
   layerDocumentationMetadata,
 }
 
-export type { PrimitiveManifestV2, IndexManifestV3, Capability, ComponentManifest }
+export type { PrimitiveManifestV2, IndexManifestV4, Capability, ComponentManifest }
 
 // Run the build when executed directly
 const isMainModule =

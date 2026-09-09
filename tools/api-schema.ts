@@ -5,8 +5,8 @@
  * importing TypeDoc, so a renderer can evolve independently of TypeDoc's
  * serialized reflection format.
  */
-export const API_SCHEMA_VERSION = 1 as const
-export const API_SCHEMA_URL = "https://solidiom.org/schemas/api/v1.json"
+export const API_SCHEMA_VERSION = 2 as const
+export const API_SCHEMA_URL = "https://solidiom.org/schemas/api/v2.json"
 
 export type ApiDeclarationKind =
   | "class"
@@ -91,7 +91,6 @@ export interface NormalizedApiDocument {
   $schema: typeof API_SCHEMA_URL
   schemaVersion: typeof API_SCHEMA_VERSION
   packageName: string
-  generatedAt: string
   entryPoints: string[]
   exports: NormalizedApiExport[]
 }

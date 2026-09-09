@@ -85,13 +85,6 @@ const capabilityLabels = manifest.capabilities.map(
             <code>{manifest.integrity.algorithm}:{manifest.integrity.filesHash}</code>
           </dd>
         </div>
-        <div>
-          <dt>{copy.generated}</dt><dd>
-            <time datetime={manifest.integrity.lastGenerated}
-              >{manifest.integrity.lastGenerated}</time
-            >
-          </dd>
-        </div>
       </dl>
     </section>
   </div>

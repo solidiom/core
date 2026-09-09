@@ -156,15 +156,15 @@ Current pinned versions (pnpm catalog):
 
 | Package              | Version                                 |
 | -------------------- | --------------------------------------- |
-| `solid-js`           | `2.0.0-rc.6`                            |
+| `solid-js`           | `2.0.0-rc.7`                            |
 | `babel-preset-solid` | `2.0.0-rc.2`                            |
-| `@solidjs/signals`   | `2.0.0-rc.6` (transitive via solid-js)  |
+| `@solidjs/signals`   | `2.0.0-rc.7` (transitive via solid-js)  |
 | `vite-plugin-solid`  | `3.0.0-next.27`                         |
-| `@solidjs/web`       | `2.0.0-rc.6`                            |
+| `@solidjs/web`       | `2.0.0-rc.7`                            |
 
-The 3-version rolling window (`tools/solid-matrix.json`) tests against `{low, mid, high}` tiers (currently `2.0.0-rc.0` / `2.0.0-rc.1` / `2.0.0-rc.6`). Update this document when new versions introduce additional API changes.
+The 3-version rolling window (`tools/solid-matrix.json`) tests against `{low, mid, high}` tiers (currently `2.0.0-rc.1` / `2.0.0-rc.6` / `2.0.0-rc.7`). Update this document when new versions introduce additional API changes.
 
-**Note:** The `@solidjs/signals` package version tracks the `solid-js` version on the RC line: `solid-js@2.0.0-rc.6` bundles `@solidjs/signals@2.0.0-rc.6`. This differed during the beta line (`solid-js@2.0.0-beta.21` bundled `@solidjs/signals@2.0.0-beta.20`). The earlier `@solidjs/signals@0.11.x` was a pre-beta release with different API surfaces (e.g., `pureWrite` instead of `ownedWrite`).
+**Note:** The `@solidjs/signals` package version tracks the `solid-js` version on the RC line: `solid-js@2.0.0-rc.7` bundles `@solidjs/signals@2.0.0-rc.7`. This differed during the beta line (`solid-js@2.0.0-beta.21` bundled `@solidjs/signals@2.0.0-beta.20`). The earlier `@solidjs/signals@0.11.x` was a pre-beta release with different API surfaces (e.g., `pureWrite` instead of `ownedWrite`).
 
 ## `JSX` type — import from `@solidjs/web`, not `solid-js`
 
@@ -472,7 +472,7 @@ Workarounds were required: `dev: false`, `hot: false`, manual resolve conditions
 
 **`vite-plugin-solid@3.0.0-next.27` (CURRENT — use this):**
 
-Targets `solid-js@2.0.0-rc.6` and `@solidjs/web` natively. No workarounds needed:
+Targets `solid-js@2.0.0-rc.7` and `@solidjs/web` natively. No workarounds needed:
 
 ```ts
 import solidPlugin from "vite-plugin-solid"

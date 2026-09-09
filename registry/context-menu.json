@@ -18,7 +18,7 @@
     "collection/typeahead",
     "dom/stable-id"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Context Menu",
   "description": "Right-click triggered menu.",
   "category": "overlay",
@@ -69,12 +69,10 @@
     "filesHash": "7b68a949dd8feeab0dfdda1fa9e26819d3f98256eddd692aec9b245cb261cfea",
     "fileDigests": {
       "src/index.tsx": "88fe81b9a89abdf65ed36f0c806ae5f3bc35ae17b42a98d4bb1e335d6d4055b9"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/context-menu"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

@@ -4,11 +4,11 @@
 "@solidiom/astrojs-solid-next": patch
 ---
 
-Bump the Solid 2 rolling prerelease window to `2.0.0-rc.6` (latest on npm, published 2026-09-02).
+Bump the Solid 2 rolling prerelease window to `2.0.0-rc.7` (latest on npm, published 2026-09-09).
 
-- `solid-js` and `@solidjs/web` pinned to `2.0.0-rc.6` (was `2.0.0-rc.1`).
-- `babel-preset-solid` pinned to `2.0.0-rc.2` — the compiler lags the runtime; `rc.6` does not exist for it.
+- `solid-js` and `@solidjs/web` pinned to `2.0.0-rc.7` (was `2.0.0-rc.1`).
+- `babel-preset-solid` stays pinned to `2.0.0-rc.2` — the compiler version line lags the runtime.
 - `@solidjs/testing-library` bumped to `1.0.0-beta.3`.
-- `@solidjs/router` (templates) stays at `0.17.0-next.6`; its peer range already accepts `rc.6` and it now resolves its peer against `rc.6`.
+- `@solidjs/router` in the templates stays at `0.17.0-next.6`, the newest 0.x prerelease compatible with Solid 2; Router `2.0.0-next.23` removes the templates' `Router`, `Route`, and `A` APIs and requires a separate routing-architecture migration.
 
-The Solid 2 `rc.1` → `rc.6` gap is prerelease patch-level changes (no breaking API). Verified green across the monorepo: build (140/140), typecheck (109 projects, 0 errors), lint (0), and tests (108/108 projects).
+The workspace dependency graph and Solid compatibility window were refreshed together and validated against the repository's build, typecheck, and test gates.

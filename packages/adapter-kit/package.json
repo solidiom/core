@@ -26,10 +26,9 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@types/node": "^20.19.0",
-    "vitest": "^4.1.10"
+    "@types/node": "^26.5.0",
+    "vitest": "^4.1.11"
   },
   "nx": {
     "tags": [

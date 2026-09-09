@@ -16,7 +16,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Button",
   "description": "Clickable trigger for actions.",
   "category": "input",
@@ -86,12 +86,10 @@
       "src/icon-button.tsx": "7a0925d5dddd30e0ba2ee660843807bd81ba7413fef095d9ab83fb33271488ac",
       "src/index.tsx": "6ad69234ae5514541a2e69fa4c0091eea54c999bda3ed1cddf832f8b29199b38",
       "src/toggle-button.tsx": "a5ca880d302fddc1c78b5f7c609fbaf3c228fadddcbfa7e563ccb1d56748013e"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/button"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

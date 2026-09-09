@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Input",
   "description": "Text input and textarea with validation states and Field integration.",
   "category": "input",
@@ -71,12 +71,10 @@
     "filesHash": "1ae38ebb9acf16175706e000a8f5ab6623568b7149574caa2ac3b53f36f2c5ea",
     "fileDigests": {
       "src/index.tsx": "89b2003e9cbf8b7b20cd7ec3aec3a6baafd385186865e5b0b5a4f4bd4ce09ec2"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/input"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

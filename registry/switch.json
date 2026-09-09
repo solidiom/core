@@ -16,7 +16,7 @@
     "dom/stable-id",
     "state/controllable-value"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Switch",
   "description": "Binary toggle with on/off semantics.",
   "category": "input",
@@ -72,12 +72,10 @@
     "filesHash": "5b60a8a8bca392ed3eeab3dcf03581d59e72b8b5daa995b190bbad0280441bfa",
     "fileDigests": {
       "src/index.tsx": "806c7b01cadb5f4571af470ebee752fa040d57e10e8573872c9027439527fa03"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/switch"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

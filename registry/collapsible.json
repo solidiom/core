@@ -16,7 +16,7 @@
     "dom/stable-id",
     "state/disclosure-state"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Collapsible",
   "description": "Single expandable/collapsible section.",
   "category": "layout",
@@ -66,12 +66,10 @@
     "filesHash": "f02b4727361bbb68e11079770e83c5c7a7788a2fe39153de016d891c73915a74",
     "fileDigests": {
       "src/index.tsx": "e87667e7585ea9c4fd43c0fb9cfeb46905b93487972c5728e299c49395c2e068"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/collapsible"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

@@ -15,7 +15,7 @@
   "runtime": [
     "form/form-control"
   ],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Field",
   "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
   "category": "input",
@@ -76,12 +76,10 @@
     "filesHash": "c480a0213cd8d67403f8317919b1f3724939bb9a9572ec6a9798228dd47ed74b",
     "fileDigests": {
       "src/index.tsx": "ac4930e21ef9845a3e984176c165a8fcd9120c6144857d82e372521d267b7f2e"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/field"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }

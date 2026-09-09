@@ -12,9 +12,9 @@
   "dependencies": {
     "@solidiom/button": "workspace:*",
     "@solidiom/recipes-tailwind": "workspace:*",
+    "@solidjs/web": "catalog:",
     "@tanstack/solid-router": "2.0.0-beta.28",
     "@tanstack/solid-start": "2.0.0-beta.29",
-    "@solidjs/web": "catalog:",
     "solid-js": "catalog:"
   },
   "devDependencies": {

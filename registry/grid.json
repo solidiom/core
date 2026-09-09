@@ -13,7 +13,7 @@
     ]
   },
   "runtime": [],
-  "$schema": "https://solidiom.dev/schemas/registry-manifest/v2.json",
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "label": "Grid",
   "description": "CSS Grid layout primitive with responsive columns and gap.",
   "category": "layout",
@@ -64,12 +64,10 @@
     "filesHash": "fd8afecf0c8a9defce9fd0f38a22c15dbd38f623dc7b21f6a48c2c85b0c6d190",
     "fileDigests": {
       "src/index.tsx": "3ee6c657674f2b763c8f11c718a01c57f5360642c563c3fbcbf2dfdf74dab473"
-    },
-    "lastGenerated": "2026-08-22T17:36:37.000Z"
+    }
   },
   "provenance": {
     "repository": "https://github.com/solidiom/core",
     "directory": "packages/grid"
-  },
-  "lastUpdated": "2026-08-22T17:36:37.000Z"
+  }
 }
