@@ -45,6 +45,18 @@ runs:
           tools/*/node_modules
         key: modules-${{ hashFiles('pnpm-lock.yaml') }}
 
+    # actions/checkout records safe.directory in a temporary HOME. Job
+    # containers restore HOME before this action runs, so Git no longer trusts
+    # the differently-owned mounted checkout when the root prepare lifecycle
+    # configures hooks.
+    - name: Trust mounted checkout for lifecycle scripts
+      shell: bash
+      run: |
+        if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        fi
+        git rev-parse --is-inside-work-tree >/dev/null
+
     - name: Install dependencies
       if: inputs.install == 'true'
       shell: bash
