@@ -1,5 +1,5 @@
 name: "Setup workspace"
-description: "Install pnpm/node, restore module cache, install dependencies, and optionally set up Playwright."
+description: "Install pnpm/node, restore the module cache, and install workspace dependencies."
 
 inputs:
   node-version:
@@ -14,10 +14,6 @@ inputs:
     description: "Use --frozen-lockfile (set to 'false' for non-frozen installs)"
     required: false
     default: "true"
-  playwright:
-    description: "Playwright browsers to install (e.g. 'chromium', 'chromium firefox webkit', or 'false' to skip)"
-    required: false
-    default: "false"
 
 runs:
   using: "composite"
@@ -58,39 +54,3 @@ runs:
         else
           pnpm install --no-frozen-lockfile
         fi
-
-    - name: Cache Playwright browsers
-      if: inputs.playwright != 'false'
-      id: playwright-cache
-      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-      with:
-        path: ~/.cache/ms-playwright
-        key: playwright-${{ inputs.playwright }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-    - name: Install Playwright system deps
-      if: inputs.playwright != 'false'
-      shell: bash
-      run: |
-        set -euo pipefail
-        log_file="$(mktemp)"
-        trap 'rm -f "$log_file"' EXIT
-        set +e
-        pnpm exec playwright install-deps ${{ inputs.playwright }} > "$log_file" 2>&1
-        install_status=$?
-        set -e
-        cat "$log_file"
-        if [ "$install_status" -eq 0 ]; then
-          exit 0
-        fi
-        if grep -Fq "your OS is not officially supported" "$log_file" && \
-          grep -Fq "Cannot install dependencies for" "$log_file"; then
-          echo "::warning::Playwright does not support dependency installation on this runner image; using its preinstalled system libraries."
-          exit 0
-        fi
-        echo "::error::Playwright system dependency installation failed."
-        exit "$install_status"
-
-    - name: Install Playwright browsers
-      if: inputs.playwright != 'false' && steps.playwright-cache.outputs.cache-hit != 'true'
-      shell: bash
-      run: pnpm exec playwright install ${{ inputs.playwright }}

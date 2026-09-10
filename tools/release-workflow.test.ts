@@ -118,16 +118,27 @@ describe("release workflow policy", () => {
     expect(workflow).toContain('--port "$registry_port"')
   })
 
-  it("keeps browser-only tests out of Node lanes and installs Playwright portably", () => {
+  it("keeps Node tests browser-free and runs browser jobs in the pinned Playwright image", () => {
     const required = read(".github/workflows/ci-required.yml")
+    const packages = read(".github/workflows/ci-packages.yml")
+    const site = read(".github/workflows/ci-site.yml")
+    const nightly = read(".github/workflows/nightly.yml")
+    const release = read(".github/workflows/release.yml")
     const setup = read(".github/actions/setup/action.yml")
+    const image =
+      "mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27"
 
     expect(required).toContain("--exclude=@solidiom/site,@solidiom/tests-recipe-parity")
-    expect(setup).toContain("pnpm exec playwright install-deps")
-    expect(setup).toContain('grep -Fq "your OS is not officially supported"')
-    expect(setup).toContain('grep -Fq "Cannot install dependencies for"')
-    expect(setup).toContain("pnpm exec playwright install ${{ inputs.playwright }}")
-    expect(setup).not.toContain("playwright install --with-deps")
+    expect(packages).toContain("--exclude=@solidiom/site,@solidiom/tests-recipe-parity")
+    expect(setup).not.toContain("playwright")
+    expect(packages.match(new RegExp(image, "g"))).toHaveLength(3)
+    expect(site.match(new RegExp(image, "g"))).toHaveLength(2)
+    expect(nightly.match(new RegExp(image, "g"))).toHaveLength(3)
+    expect(release.match(new RegExp(image, "g"))).toHaveLength(1)
+
+    for (const workflow of [packages, site, nightly, release]) {
+      expect(workflow).not.toMatch(/^\s+playwright:\s/m)
+    }
   })
 
   it("maps display labels to canonical generated block registry slugs", () => {
