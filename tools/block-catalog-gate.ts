@@ -51,6 +51,7 @@ interface BlockManifest {
   id: string
   category: string
   name: string
+  registryName?: string
   outcome: string
   states: string[]
   requiredStates?: string[]
@@ -245,11 +246,18 @@ function verifyBlock(
     failures.push(`states: ${stateFailures.join("; ")}`)
   }
 
-  // §8.3.1 req 7: Registry entry
-  const blockNameSlug = block.name.toLowerCase().replace(/\s+/g, "-")
-  const registryPath = join(REGISTRY_DIR, "blocks", `${blockNameSlug}.json`)
-  if (!existsSync(registryPath)) {
-    failures.push(`missing registry/blocks/${blockNameSlug}.json`)
+  // §8.3.1 req 7: Registry entry. Most registry slugs derive from the
+  // display name; registryName handles intentional implementation-specific
+  // names such as the Command Palette's command-palette-shell package.
+  const derivedRegistryName = block.name.toLowerCase().replace(/\s+/g, "-")
+  const registryName = block.registryName?.trim() || derivedRegistryName
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(registryName)) {
+    failures.push(`invalid registryName "${registryName}"`)
+  } else {
+    const registryPath = join(REGISTRY_DIR, "blocks", `${registryName}.json`)
+    if (!existsSync(registryPath)) {
+      failures.push(`missing registry/blocks/${registryName}.json`)
+    }
   }
 
   return {

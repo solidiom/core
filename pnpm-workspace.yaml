@@ -19,6 +19,8 @@ overrides:
   # existing major so a floor never becomes an accidental major upgrade.
   # ip-address     GHSA-mwp4-54f8-5fhr / -4xrf-jv44-h6hh / -22jq-vg5j-6vgg (via socks@2, declares ^10.1.1)
   # brace-expansion GHSA-rgw5-rvv9-x895 (vulnerable < 5.0.9; via minimatch@10, declares ^5.0.5)
+  # smol-toml GHSA-7w5x-hrqm-74c2 (vulnerable <= 1.7.0; nx@23.2.0 pins 1.6.1).
+  "smol-toml@1": "1.8.0"
   # nanoid/js-yaml/postcss: regression floors — dedupe already resolves these correctly.
   "ip-address@10": "^10.5.0"
   "brace-expansion@5": "^5.0.9"
