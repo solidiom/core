@@ -28,6 +28,18 @@ These split package and site validation into two independent manual workflows, e
 
 > **Triggers:** `ci-packages.yml` and `ci-site.yml` are currently `workflow_dispatch` (manual) only. Their `push`/`pull_request` triggers and `paths` filters are present but commented out in each workflow; re-enable them to activate automatic per-PR and per-push runs. These two workflows' jobs run on the `self-hosted-dfw-flex` runner; `ci-required.yml` runs on `ubuntu-latest`.
 
+> **Runner constraint — job containers must be hosted.** Any job that declares a
+> `container:` (the browser, a11y, visual, nightly, and release-gate lanes on the
+> pinned Playwright image) must set `runs-on: ubuntu-latest`. The
+> `self-hosted-dfw-flex` agent is itself containerized, so when it starts a job
+> container it bind-mounts its externals directory from a path that does not
+> exist on the container host; `/__e/node<version>/bin/node` is then missing and
+> every JavaScript action fails immediately with an OCI runtime error. Those
+> lanes cannot fall back to installing browsers on the self-hosted host either:
+> the pool is Ubuntu 20.04, which Playwright 1.63 no longer supports at all
+> (`Playwright does not support chromium on ubuntu20.04-x64`). `tools/ci/validate-workflows.mjs`
+> enforces the hosted-runner pairing and fails closed.
+
 ## Workflows
 
 | File              | Trigger                                     | Purpose                                                                                                                        |

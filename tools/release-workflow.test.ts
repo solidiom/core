@@ -138,7 +138,20 @@ describe("release workflow policy", () => {
 
     for (const workflow of [packages, site, nightly, release]) {
       expect(workflow).not.toMatch(/^\s+playwright:\s/m)
+      // A job container cannot run on the self-hosted pool: that runner agent
+      // is itself containerized, so its externals mount (/__e) is absent on the
+      // container host and every JavaScript action fails to start.
+      for (const [, runner] of workflow.matchAll(
+        /^ {4}runs-on:\s*(.+?)\s*\n(?:^ {4}#.*\n)*^ {4}container:/gm,
+      )) {
+        expect(runner).toBe("ubuntu-latest")
+      }
+      expect(workflow).not.toMatch(/^ {4}runs-on:.*self-hosted.*\n(?:^ {4}#.*\n)*^ {4}container:/m)
     }
+
+    expect(read("tools/ci/validate-workflows.mjs")).toContain(
+      "declares a job container and must set runs-on:",
+    )
   })
 
   it("maps display labels to canonical generated block registry slugs", () => {

@@ -24,6 +24,27 @@ const hostedRunner = "ubuntu-latest"
 const runnerValues = (text) =>
   [...text.matchAll(/^\s*runs-on:\s*(.+?)\s*$/gm)].map(([, value]) => value)
 
+// Split a workflow's `jobs:` mapping into per-job text blocks so job-scoped
+// policy (runner vs container pairing) can be checked without a YAML parser.
+const jobBlocks = (text) => {
+  const lines = text.split("\n")
+  const jobsIndex = lines.findIndex((line) => /^jobs:\s*$/.test(line))
+  if (jobsIndex === -1) return []
+  const blocks = []
+  let current = null
+  for (const line of lines.slice(jobsIndex + 1)) {
+    const header = line.match(/^ {2}([A-Za-z0-9_-]+):\s*$/)
+    if (header) {
+      current = { name: header[1], lines: [] }
+      blocks.push(current)
+      continue
+    }
+    if (/^\S/.test(line)) break
+    current?.lines.push(line)
+  }
+  return blocks.map(({ name, lines: body }) => ({ name, text: body.join("\n") }))
+}
+
 for (const file of files) {
   const text = readFileSync(file, "utf8")
   const display = file.slice(root.length + 1)
@@ -47,6 +68,19 @@ for (const file of files) {
   for (const [, image] of images) {
     if (!/^\S+@sha256:[0-9a-f]{64}$/.test(image)) {
       errors.push(`${display}: workflow container image must be pinned by digest`)
+    }
+  }
+  // The self-hosted pool runs the runner agent itself inside a container, so a
+  // job container's externals mount (/__e) resolves to a path that does not
+  // exist on the container host and no JavaScript action can start. Job
+  // containers must therefore run on hosted runners.
+  for (const job of jobBlocks(text)) {
+    if (!/^ {4}container:/m.test(job.text)) continue
+    const jobRunners = runnerValues(job.text)
+    if (jobRunners.length !== 1 || jobRunners[0] !== hostedRunner) {
+      errors.push(
+        `${display}: job '${job.name}' declares a job container and must set runs-on: ${hostedRunner} (self-hosted runners cannot mount runner externals into a job container)`,
+      )
     }
   }
 }

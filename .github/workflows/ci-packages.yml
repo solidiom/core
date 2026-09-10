@@ -213,7 +213,8 @@ jobs:
 
   test-browser:
     needs: build
-    runs-on: self-hosted-dfw-flex
+    # Job containers require a hosted runner (see validate-workflows.mjs).
+    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
       options: --ipc=host
@@ -245,7 +246,8 @@ jobs:
   a11y-axe-scan:
     needs: build
     if: github.event_name != 'workflow_dispatch' || inputs.full_matrix == 'true'
-    runs-on: self-hosted-dfw-flex
+    # Job containers require a hosted runner (see validate-workflows.mjs).
+    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
       options: --ipc=host
@@ -402,7 +404,8 @@ jobs:
         (needs.a11y-axe-scan.result == 'success' &&
           needs.cli-smoke-create.result == 'success' &&
           needs.catalog-gates.result == 'success'))
-    runs-on: self-hosted-dfw-flex
+    # Job containers require a hosted runner (see validate-workflows.mjs).
+    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
       options: --ipc=host
