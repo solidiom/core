@@ -118,6 +118,32 @@ describe("release workflow policy", () => {
     expect(workflow).toContain('--port "$registry_port"')
   })
 
+  it("keeps browser-only tests out of Node lanes and installs Playwright portably", () => {
+    const required = read(".github/workflows/ci-required.yml")
+    const setup = read(".github/actions/setup/action.yml")
+
+    expect(required).toContain("--exclude=@solidiom/site,@solidiom/tests-recipe-parity")
+    expect(setup).toContain("pnpm exec playwright install-deps")
+    expect(setup).toContain('grep -Fq "your OS is not officially supported"')
+    expect(setup).toContain('grep -Fq "Cannot install dependencies for"')
+    expect(setup).toContain("pnpm exec playwright install ${{ inputs.playwright }}")
+    expect(setup).not.toContain("playwright install --with-deps")
+  })
+
+  it("maps display labels to canonical generated block registry slugs", () => {
+    const manifest = JSON.parse(read("docs/contracts/block-catalog-manifest.json")) as {
+      blocks: Array<{ id: string; registryName?: string }>
+    }
+    const commandPalette = manifest.blocks.find((block) => block.id === "BLOCK-SHELL-02")
+    const gate = read("tools/block-catalog-gate.ts")
+
+    expect(commandPalette?.registryName).toBe("command-palette-shell")
+    expect(gate).toContain("block.registryName")
+    expect(read("registry/blocks/command-palette-shell.json")).toContain(
+      '"name": "command-palette-shell"',
+    )
+  })
+
   it("treats root tooling and workflow changes as global release impact", () => {
     const workflow = read(".github/workflows/ci-required.yml")
     const releaseReadiness = workflow.slice(

@@ -67,12 +67,30 @@ runs:
         path: ~/.cache/ms-playwright
         key: playwright-${{ inputs.playwright }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
+    - name: Install Playwright system deps
+      if: inputs.playwright != 'false'
+      shell: bash
+      run: |
+        set -euo pipefail
+        log_file="$(mktemp)"
+        trap 'rm -f "$log_file"' EXIT
+        set +e
+        pnpm exec playwright install-deps ${{ inputs.playwright }} > "$log_file" 2>&1
+        install_status=$?
+        set -e
+        cat "$log_file"
+        if [ "$install_status" -eq 0 ]; then
+          exit 0
+        fi
+        if grep -Fq "your OS is not officially supported" "$log_file" && \
+          grep -Fq "Cannot install dependencies for" "$log_file"; then
+          echo "::warning::Playwright does not support dependency installation on this runner image; using its preinstalled system libraries."
+          exit 0
+        fi
+        echo "::error::Playwright system dependency installation failed."
+        exit "$install_status"
+
     - name: Install Playwright browsers
       if: inputs.playwright != 'false' && steps.playwright-cache.outputs.cache-hit != 'true'
       shell: bash
-      run: pnpm exec playwright install --with-deps ${{ inputs.playwright }}
-
-    - name: Install Playwright system deps
-      if: inputs.playwright != 'false' && steps.playwright-cache.outputs.cache-hit == 'true'
-      shell: bash
-      run: pnpm exec playwright install-deps ${{ inputs.playwright }}
+      run: pnpm exec playwright install ${{ inputs.playwright }}

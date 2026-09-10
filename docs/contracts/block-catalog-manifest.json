@@ -1004,6 +1004,7 @@
       "id": "BLOCK-SHELL-02",
       "category": "SHELL",
       "name": "Command Palette",
+      "registryName": "command-palette-shell",
       "outcome": "User accesses a global keyboard-driven command menu for quick navigation, search, and action execution.",
       "states": [
         "Loading (commands fetch, search execute)",
