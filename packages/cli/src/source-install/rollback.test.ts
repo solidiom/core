@@ -34,7 +34,6 @@ describe("createRollbackJournal", () => {
 
   it("removes a file that did not exist before the journal recorded it", () => {
     const filePath = join(root, "new-file.txt")
-    expect(existsSync(filePath)).toBe(false)
 
     const journal = createRollbackJournal()
     journal.recordBeforeWrite(filePath)

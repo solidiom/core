@@ -5,6 +5,18 @@ import { describe, expect, it } from "vitest"
 const root = join(import.meta.dirname, "..")
 const read = (path: string) => readFileSync(join(root, path), "utf8")
 
+function countLiteralOccurrences(source: string, value: string): number {
+  if (value.length === 0) return 0
+
+  let count = 0
+  let offset = 0
+  while ((offset = source.indexOf(value, offset)) !== -1) {
+    count++
+    offset += value.length
+  }
+  return count
+}
+
 describe("release workflow policy", () => {
   it("runs exact-SHA, credential, candidate, and CI preflight before qualification", () => {
     const workflow = read(".github/workflows/release.yml")
@@ -135,10 +147,10 @@ describe("release workflow policy", () => {
     expect(setup.indexOf("safe.directory")).toBeLessThan(
       setup.indexOf("pnpm install --frozen-lockfile"),
     )
-    expect(packages.match(new RegExp(image, "g"))).toHaveLength(3)
-    expect(site.match(new RegExp(image, "g"))).toHaveLength(2)
-    expect(nightly.match(new RegExp(image, "g"))).toHaveLength(3)
-    expect(release.match(new RegExp(image, "g"))).toHaveLength(1)
+    expect(countLiteralOccurrences(packages, image)).toBe(3)
+    expect(countLiteralOccurrences(site, image)).toBe(2)
+    expect(countLiteralOccurrences(nightly, image)).toBe(3)
+    expect(countLiteralOccurrences(release, image)).toBe(1)
 
     for (const workflow of [packages, site, nightly, release]) {
       expect(workflow).not.toMatch(/^\s+playwright:\s/m)
