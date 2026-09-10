@@ -131,6 +131,10 @@ describe("release workflow policy", () => {
     expect(required).toContain("--exclude=@solidiom/site,@solidiom/tests-recipe-parity")
     expect(packages).toContain("--exclude=@solidiom/site,@solidiom/tests-recipe-parity")
     expect(setup).not.toContain("playwright")
+    expect(setup).toContain('git config --global --add safe.directory "$GITHUB_WORKSPACE"')
+    expect(setup.indexOf("safe.directory")).toBeLessThan(
+      setup.indexOf("pnpm install --frozen-lockfile"),
+    )
     expect(packages.match(new RegExp(image, "g"))).toHaveLength(3)
     expect(site.match(new RegExp(image, "g"))).toHaveLength(2)
     expect(nightly.match(new RegExp(image, "g"))).toHaveLength(3)
