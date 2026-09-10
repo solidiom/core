@@ -257,7 +257,18 @@ env = { CI = "true" }
 run = [
   "pnpm exec playwright install chromium",
   "scripts/ci-log.sh test-node -- pnpm test",
-  "scripts/ci-log.sh test-tools -- pnpm run test:tools",
+  '''#!/usr/bin/env bash
+set -euo pipefail
+
+api_artifacts_dir="$(mktemp -d)"
+trap 'rm -rf "$api_artifacts_dir"' EXIT
+
+pnpm run api:generate -- --package dialog --output-dir "$api_artifacts_dir"
+pnpm run api:generate -- --package combobox --output-dir "$api_artifacts_dir"
+pnpm run api:generate -- --package data-table --output-dir "$api_artifacts_dir"
+SOLIDIOM_API_ARTIFACTS_DIR="$api_artifacts_dir" \
+  scripts/ci-log.sh test-tools -- pnpm run test:tools
+''',
 ]
 
 [tasks."ci:test-browser"]
