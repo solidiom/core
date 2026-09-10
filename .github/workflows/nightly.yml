@@ -39,7 +39,8 @@ jobs:
   # compatibility regressions before they reach users.
 
   solid-compat:
-    runs-on: self-hosted-dfw-flex
+    # Job containers require a hosted runner (see validate-workflows.mjs).
+    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
       options: --ipc=host
@@ -73,7 +74,8 @@ jobs:
   # 3-browser suite to catch browser-specific regressions nightly.
 
   browser-full:
-    runs-on: self-hosted-dfw-flex
+    # Job containers require a hosted runner (see validate-workflows.mjs).
+    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
       options: --ipc=host
@@ -102,7 +104,8 @@ jobs:
 
   visual-baselines:
     if: github.event_name == 'workflow_dispatch' && inputs.regenerate_baselines == 'true'
-    runs-on: self-hosted-dfw-flex
+    # Job containers require a hosted runner (see validate-workflows.mjs).
+    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
       options: --ipc=host
