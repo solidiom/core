@@ -191,16 +191,15 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
-          playwright: chromium
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist
           path: .
       - run: |
           if [ "${{ inputs.affected_only }}" = "true" ]; then
-            pnpm nx affected -t test --exclude=@solidiom/site
+            pnpm nx affected -t test --exclude=@solidiom/site,@solidiom/tests-recipe-parity
           else
-            pnpm test
+            pnpm nx run-many -t test --exclude=@solidiom/site,@solidiom/tests-recipe-parity
           fi
       - name: Generate vertical-slice API test fixtures
         run: |
@@ -215,14 +214,15 @@ jobs:
   test-browser:
     needs: build
     runs-on: self-hosted-dfw-flex
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+      options: --ipc=host
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup
-        with:
-          playwright: chromium
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist
@@ -246,14 +246,15 @@ jobs:
     needs: build
     if: github.event_name != 'workflow_dispatch' || inputs.full_matrix == 'true'
     runs-on: self-hosted-dfw-flex
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+      options: --ipc=host
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup
-        with:
-          playwright: chromium
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist
@@ -402,14 +403,15 @@ jobs:
           needs.cli-smoke-create.result == 'success' &&
           needs.catalog-gates.result == 'success'))
     runs-on: self-hosted-dfw-flex
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+      options: --ipc=host
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup
-        with:
-          playwright: chromium
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: build-dist

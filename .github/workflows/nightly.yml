@@ -40,6 +40,9 @@ jobs:
 
   solid-compat:
     runs-on: self-hosted-dfw-flex
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+      options: --ipc=host
     timeout-minutes: 45
     strategy:
       fail-fast: false
@@ -54,7 +57,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           frozen-lockfile: "false"
-          playwright: chromium firefox webkit
       - name: Set Solid version (${{ matrix.solid-tier }})
         run: node scripts/set-solid-version.mjs ${{ matrix.solid-tier }}
       - name: Reinstall with overridden versions
@@ -72,14 +74,15 @@ jobs:
 
   browser-full:
     runs-on: self-hosted-dfw-flex
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
+      options: --ipc=host
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - uses: ./.github/actions/setup
-        with:
-          playwright: chromium firefox webkit
       - name: Build packages
         run: pnpm nx run-many -t build --exclude=@solidiom/site
       - name: Browser tests (Chromium + Firefox + WebKit)
