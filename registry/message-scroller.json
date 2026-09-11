@@ -1,6 +1,6 @@
 {
   "name": "message-scroller",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "package": "@solidiom/message-scroller",
   "capabilities": [],
   "dependencies": [

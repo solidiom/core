@@ -3,12 +3,14 @@
   "version": 4,
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "e06b8ae3685ff3c381a702bb7d5abd1c37089e564e99dc53924b974e869cfc76"
+    "entriesHash": "e06b8ae3685ff3c381a702bb7d5abd1c37089e564e99dc53924b974e869cfc76",
+    "signature": "nwCOUFxtdZqmPoTirI/Of2Maqi7h1FrQVKHOYRHkm/pudY0DjVrWHaQPEpDCCvZYWYulM2DxyU+B+bOIqw36CQ==",
+    "signatureKeyId": "d7b32861c393dafd"
   },
   "primitives": [
     {
       "name": "accordion",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/accordion",
       "label": "Accordion",
       "description": "Vertically stacked set of collapsible sections.",
@@ -64,7 +66,7 @@
     },
     {
       "name": "alert",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/alert",
       "label": "Alert",
       "description": "Inline, non-modal alert for status messages with live region semantics.",
@@ -125,7 +127,7 @@
     },
     {
       "name": "alert-dialog",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/alert-dialog",
       "label": "Alert Dialog",
       "description": "Modal confirmation dialog requiring explicit user action.",
@@ -172,7 +174,7 @@
     },
     {
       "name": "app-shell",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/app-shell",
       "label": "App Shell",
       "description": "Top-level application layout with header, sidebar, and main content areas.",
@@ -222,7 +224,7 @@
     },
     {
       "name": "aspect-ratio",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/aspect-ratio",
       "label": "Aspect Ratio",
       "description": "Container that constrains children to a specified aspect ratio.",
@@ -268,7 +270,7 @@
     },
     {
       "name": "attachment",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/attachment",
       "label": "Attachment",
       "description": "File attachment display with preview, name, and size.",
@@ -314,7 +316,7 @@
     },
     {
       "name": "avatar",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/avatar",
       "label": "Avatar",
       "description": "User avatar with image and fallback.",
@@ -368,7 +370,7 @@
     },
     {
       "name": "avatar-group",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/avatar-group",
       "label": "Avatar Group",
       "description": "Stacked avatar display for showing multiple users.",
@@ -416,7 +418,7 @@
     },
     {
       "name": "badge",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/badge",
       "label": "Badge",
       "description": "Inline status or label indicator.",
@@ -467,7 +469,7 @@
     },
     {
       "name": "banner",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/banner",
       "label": "Banner",
       "description": "Dismissible site-wide notification bar.",
@@ -511,7 +513,7 @@
     },
     {
       "name": "breadcrumb",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/breadcrumb",
       "label": "Breadcrumb",
       "description": "Hierarchical location indicator with links.",
@@ -566,7 +568,7 @@
     },
     {
       "name": "button",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/button",
       "label": "Button",
       "description": "Clickable trigger for actions.",
@@ -626,7 +628,7 @@
     },
     {
       "name": "calendar",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/calendar",
       "label": "Calendar",
       "description": "Date selection with day/month/year views.",
@@ -674,7 +676,7 @@
     },
     {
       "name": "card",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/card",
       "label": "Card",
       "description": "Content container with header, body, and footer.",
@@ -733,7 +735,7 @@
     },
     {
       "name": "carousel",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/carousel",
       "label": "Carousel",
       "description": "Horizontal slide-based content viewer.",
@@ -779,7 +781,7 @@
     },
     {
       "name": "chart",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/chart",
       "label": "Chart",
       "description": "Data visualization wrapper with accessible fallback table.",
@@ -825,7 +827,7 @@
     },
     {
       "name": "chat-composer",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/chat-composer",
       "label": "Chat Composer",
       "description": "Rich text input for composing chat messages with send action.",
@@ -875,7 +877,7 @@
     },
     {
       "name": "chat-layout",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/chat-layout",
       "label": "Chat Layout",
       "description": "Container managing message flow, scroll behavior, and composer positioning.",
@@ -923,7 +925,7 @@
     },
     {
       "name": "chat-message",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/chat-message",
       "label": "Chat Message",
       "description": "Message bubble for conversational UI with sender, content, and metadata.",
@@ -970,7 +972,7 @@
     },
     {
       "name": "chat-message-metadata",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/chat-message-metadata",
       "label": "Chat Message Metadata",
       "description": "Timestamps, read receipts, and sender info for chat messages.",
@@ -1020,7 +1022,7 @@
     },
     {
       "name": "chat-system-message",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/chat-system-message",
       "label": "Chat System Message",
       "description": "System and bot announcement messages in conversations.",
@@ -1066,7 +1068,7 @@
     },
     {
       "name": "chat-tool-calls",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/chat-tool-calls",
       "label": "Chat Tool Calls",
       "description": "Display of tool/function call results in AI chat interfaces.",
@@ -1113,7 +1115,7 @@
     },
     {
       "name": "checkbox",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/checkbox",
       "label": "Checkbox",
       "description": "Binary or indeterminate toggle control.",
@@ -1161,7 +1163,7 @@
     },
     {
       "name": "code-block",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/code-block",
       "label": "Code Block",
       "description": "Syntax-highlighted code display with copy button and line numbers.",
@@ -1211,7 +1213,7 @@
     },
     {
       "name": "collapsible",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/collapsible",
       "label": "Collapsible",
       "description": "Single expandable/collapsible section.",
@@ -1254,7 +1256,7 @@
     },
     {
       "name": "combobox",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/combobox",
       "label": "Combobox",
       "description": "Text input with autocomplete dropdown.",
@@ -1305,7 +1307,7 @@
     },
     {
       "name": "command-palette",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/command-palette",
       "label": "Command Palette",
       "description": "Modal search and action launcher.",
@@ -1355,7 +1357,7 @@
     },
     {
       "name": "context-menu",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/context-menu",
       "label": "Context Menu",
       "description": "Right-click triggered menu.",
@@ -1399,7 +1401,7 @@
     },
     {
       "name": "data-table",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/data-table",
       "label": "Data Table",
       "description": "Sortable, selectable table with column control.",
@@ -1459,7 +1461,7 @@
     },
     {
       "name": "date-picker",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/date-picker",
       "label": "Date Picker",
       "description": "Calendar popup for selecting dates.",
@@ -1506,7 +1508,7 @@
     },
     {
       "name": "date-range-input",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/date-range-input",
       "label": "Date Range Input",
       "description": "Date range selection with start/end text fields and calendar picker.",
@@ -1557,7 +1559,7 @@
     },
     {
       "name": "dialog",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/dialog",
       "label": "Dialog",
       "description": "Modal or non-modal overlay window.",
@@ -1607,7 +1609,7 @@
     },
     {
       "name": "direction",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/direction",
       "label": "Direction",
       "description": "RTL/LTR direction context provider component.",
@@ -1650,7 +1652,7 @@
     },
     {
       "name": "drawer",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/drawer",
       "label": "Drawer",
       "description": "Slide-in panel from any screen edge.",
@@ -1696,7 +1698,7 @@
     },
     {
       "name": "empty-state",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/empty-state",
       "label": "Empty State",
       "description": "Placeholder for empty content areas.",
@@ -1741,7 +1743,7 @@
     },
     {
       "name": "field",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/field",
       "label": "Field",
       "description": "Composition wrapper: label + control + description + error with automatic ARIA wiring.",
@@ -1795,7 +1797,7 @@
     },
     {
       "name": "file-input",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/file-input",
       "label": "File Input",
       "description": "File upload trigger with dropzone support and validation.",
@@ -1843,7 +1845,7 @@
     },
     {
       "name": "grid",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/grid",
       "label": "Grid",
       "description": "CSS Grid layout primitive with responsive columns and gap.",
@@ -1888,7 +1890,7 @@
     },
     {
       "name": "hover-card",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/hover-card",
       "label": "Hover Card",
       "description": "Content preview on hover with open delay and anchored positioning.",
@@ -1937,7 +1939,7 @@
     },
     {
       "name": "input",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/input",
       "label": "Input",
       "description": "Text input and textarea with validation states and Field integration.",
@@ -1988,7 +1990,7 @@
     },
     {
       "name": "input-group",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/input-group",
       "label": "Input Group",
       "description": "Input wrapper with prefix/suffix addon slots for icons and buttons.",
@@ -2039,7 +2041,7 @@
     },
     {
       "name": "input-otp",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/input-otp",
       "label": "Input OTP",
       "description": "A one-time password input with individual character slots.",
@@ -2086,7 +2088,7 @@
     },
     {
       "name": "kbd",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/kbd",
       "label": "Kbd",
       "description": "Keyboard shortcut display element.",
@@ -2138,7 +2140,7 @@
     },
     {
       "name": "label",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/label",
       "label": "Label",
       "description": "Accessible label element linked to form controls via htmlFor.",
@@ -2187,7 +2189,7 @@
     },
     {
       "name": "lightbox",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/lightbox",
       "label": "Lightbox",
       "description": "Image and media overlay viewer with navigation controls.",
@@ -2232,7 +2234,7 @@
     },
     {
       "name": "link",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/link",
       "label": "Link",
       "description": "Styled anchor with router integration and safety validation.",
@@ -2281,7 +2283,7 @@
     },
     {
       "name": "listbox",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/listbox",
       "label": "Listbox",
       "description": "Single or multi-select list of options.",
@@ -2326,7 +2328,7 @@
     },
     {
       "name": "mega-menu",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/mega-menu",
       "label": "Mega Menu",
       "description": "Expanded navigation dropdown with rich multi-column content.",
@@ -2375,7 +2377,7 @@
     },
     {
       "name": "menu",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/menu",
       "label": "Menu",
       "description": "Action list triggered by a button.",
@@ -2423,7 +2425,7 @@
     },
     {
       "name": "menubar",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/menubar",
       "label": "Menubar",
       "description": "Desktop-style horizontal menu bar with dropdown submenus.",
@@ -2470,7 +2472,7 @@
     },
     {
       "name": "message-scroller",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/message-scroller",
       "label": "Message Scroller",
       "description": "Auto-scrolling message container with new-content indicators.",
@@ -2518,7 +2520,7 @@
     },
     {
       "name": "meter",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/meter",
       "label": "Meter",
       "description": "Scalar measurement within a known range (e.g. disk usage, signal strength).",
@@ -2571,7 +2573,7 @@
     },
     {
       "name": "multi-selector",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/multi-selector",
       "label": "Multi Selector",
       "description": "Multi-select dropdown with checkbox items and search filtering.",
@@ -2623,7 +2625,7 @@
     },
     {
       "name": "navigation-menu",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/navigation-menu",
       "label": "Navigation Menu",
       "description": "A top-level navigation component with accessible dropdown sub-menus.",
@@ -2676,7 +2678,7 @@
     },
     {
       "name": "number-input",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/number-input",
       "label": "Number Input",
       "description": "Numeric input with increment/decrement controls and locale-aware formatting.",
@@ -2725,7 +2727,7 @@
     },
     {
       "name": "pagination",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/pagination",
       "label": "Pagination",
       "description": "Page navigation with prev/next and page numbers.",
@@ -2775,7 +2777,7 @@
     },
     {
       "name": "popover",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/popover",
       "label": "Popover",
       "description": "Non-modal floating content panel.",
@@ -2825,7 +2827,7 @@
     },
     {
       "name": "progress",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/progress",
       "label": "Progress",
       "description": "Determinate and indeterminate progress indicator.",
@@ -2873,7 +2875,7 @@
     },
     {
       "name": "questionnaire",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/questionnaire",
       "label": "Questionnaire",
       "description": "Multi-step form and survey flow with progress tracking.",
@@ -2923,7 +2925,7 @@
     },
     {
       "name": "radio-group",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/radio-group",
       "label": "Radio Group",
       "description": "Single-select radio button set with keyboard navigation.",
@@ -2975,7 +2977,7 @@
     },
     {
       "name": "resizable-panels",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/resizable-panels",
       "label": "Resizable Panels",
       "description": "Drag-to-resize panel layout.",
@@ -3023,7 +3025,7 @@
     },
     {
       "name": "scroll-area",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/scroll-area",
       "label": "Scroll Area",
       "description": "Custom-styled scrollbar with native scrolling performance.",
@@ -3075,7 +3077,7 @@
     },
     {
       "name": "segmented-control",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/segmented-control",
       "label": "Segmented Control",
       "description": "Mutually exclusive option selector with connected segments.",
@@ -3124,7 +3126,7 @@
     },
     {
       "name": "select",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/select",
       "label": "Select",
       "description": "Dropdown selection from a list of options.",
@@ -3173,7 +3175,7 @@
     },
     {
       "name": "separator",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/separator",
       "label": "Separator",
       "description": "Horizontal or vertical visual divider.",
@@ -3220,7 +3222,7 @@
     },
     {
       "name": "sheet",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/sheet",
       "label": "Sheet",
       "description": "Side-panel dialog with slide animation.",
@@ -3270,7 +3272,7 @@
     },
     {
       "name": "sidebar",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/sidebar",
       "label": "Sidebar",
       "description": "Collapsible application sidebar navigation panel.",
@@ -3312,7 +3314,7 @@
     },
     {
       "name": "skeleton",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/skeleton",
       "label": "Skeleton",
       "description": "Loading placeholder with pulse animation.",
@@ -3357,7 +3359,7 @@
     },
     {
       "name": "slider",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/slider",
       "label": "Slider",
       "description": "Numeric range input with thumb control.",
@@ -3402,7 +3404,7 @@
     },
     {
       "name": "spinner",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/spinner",
       "label": "Spinner",
       "description": "Loading spinner indicator.",
@@ -3448,7 +3450,7 @@
     },
     {
       "name": "stack",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/stack",
       "label": "Stack",
       "description": "Flex layout primitive with configurable gap, direction, and alignment.",
@@ -3493,7 +3495,7 @@
     },
     {
       "name": "status-dot",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/status-dot",
       "label": "Status Dot",
       "description": "Small colored dot indicating presence or status.",
@@ -3537,7 +3539,7 @@
     },
     {
       "name": "switch",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/switch",
       "label": "Switch",
       "description": "Binary toggle with on/off semantics.",
@@ -3586,7 +3588,7 @@
     },
     {
       "name": "table",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/table",
       "label": "Table",
       "description": "Simple static data table with header, body, rows, and cells.",
@@ -3635,7 +3637,7 @@
     },
     {
       "name": "tabs",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/tabs",
       "label": "Tabs",
       "description": "Tabbed content switcher.",
@@ -3682,7 +3684,7 @@
     },
     {
       "name": "time-input",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/time-input",
       "label": "Time Input",
       "description": "Segmented time entry with hour, minute, second fields and AM/PM toggle.",
@@ -3732,7 +3734,7 @@
     },
     {
       "name": "toast",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/toast",
       "label": "Toast",
       "description": "Temporary non-blocking notification.",
@@ -3780,7 +3782,7 @@
     },
     {
       "name": "toggle",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/toggle",
       "label": "Toggle",
       "description": "A two-state button that can be toggled on or off.",
@@ -3827,7 +3829,7 @@
     },
     {
       "name": "toggle-group",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/toggle-group",
       "label": "Toggle Group",
       "description": "Group of mutually-exclusive or multi-select toggle buttons.",
@@ -3873,7 +3875,7 @@
     },
     {
       "name": "tokenizer",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/tokenizer",
       "label": "Tokenizer",
       "description": "Tag/token input for managing multiple values with keyboard support.",
@@ -3925,7 +3927,7 @@
     },
     {
       "name": "toolbar",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/toolbar",
       "label": "Toolbar",
       "description": "Grouped actions and controls in a horizontal bar.",
@@ -3975,7 +3977,7 @@
     },
     {
       "name": "tooltip",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/tooltip",
       "label": "Tooltip",
       "description": "Contextual hint shown on hover/focus.",
@@ -4025,7 +4027,7 @@
     },
     {
       "name": "tree",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/tree",
       "label": "Tree",
       "description": "Hierarchical tree view with expand/collapse.",
@@ -4070,7 +4072,7 @@
     },
     {
       "name": "typography",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/typography",
       "label": "Typography",
       "description": "Semantic text primitives for headings, paragraphs, and inline text.",
@@ -4119,7 +4121,7 @@
     },
     {
       "name": "virtual-list",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/virtual-list",
       "label": "Virtual List",
       "description": "Viewport-windowed list for large datasets.",
@@ -4166,7 +4168,7 @@
     },
     {
       "name": "visually-hidden",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/visually-hidden",
       "label": "Visually Hidden",
       "description": "Hides content visually while keeping it accessible to screen readers.",
@@ -4260,7 +4262,7 @@
   "components": [
     {
       "name": "accordion",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Accordion",
       "description": "Styled accordion component — the recipe wrapper for the css, tailwind, unocss profile(s) using the accordion primitive.",
@@ -4294,7 +4296,7 @@
     },
     {
       "name": "alert",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Alert",
       "description": "Styled alert component — the recipe wrapper for the css, tailwind, unocss profile(s) using the alert primitive.",
@@ -4328,7 +4330,7 @@
     },
     {
       "name": "avatar",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Avatar",
       "description": "Styled avatar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the avatar primitive.",
@@ -4362,7 +4364,7 @@
     },
     {
       "name": "badge",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Badge",
       "description": "Styled badge component — the recipe wrapper for the css, tailwind, unocss profile(s) using the badge primitive.",
@@ -4396,7 +4398,7 @@
     },
     {
       "name": "breadcrumb",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Breadcrumb",
       "description": "Styled breadcrumb component — the recipe wrapper for the css, tailwind, unocss profile(s) using the breadcrumb primitive.",
@@ -4430,7 +4432,7 @@
     },
     {
       "name": "button",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Button",
       "description": "Styled button component — the recipe wrapper for the css, tailwind, unocss profile(s) using the button primitive.",
@@ -4464,7 +4466,7 @@
     },
     {
       "name": "card",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Card",
       "description": "Styled card component — the recipe wrapper for the css, tailwind, unocss profile(s) using the card primitive.",
@@ -4498,7 +4500,7 @@
     },
     {
       "name": "checkbox",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Checkbox",
       "description": "Styled checkbox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the checkbox primitive.",
@@ -4532,7 +4534,7 @@
     },
     {
       "name": "combobox",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Combobox",
       "description": "Styled combobox component — the recipe wrapper for the css, tailwind, unocss profile(s) using the combobox primitive.",
@@ -4566,7 +4568,7 @@
     },
     {
       "name": "command-palette",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Command Palette",
       "description": "Styled command-palette component — the recipe wrapper for the css, tailwind, unocss profile(s) using the command-palette primitive.",
@@ -4600,7 +4602,7 @@
     },
     {
       "name": "data-table",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Data Table",
       "description": "Styled data-table component — the recipe wrapper for the css, tailwind, unocss profile(s) using the data-table primitive.",
@@ -4634,7 +4636,7 @@
     },
     {
       "name": "dialog",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Dialog",
       "description": "Styled dialog component — the recipe wrapper for the css, tailwind, unocss profile(s) using the dialog primitive.",
@@ -4668,7 +4670,7 @@
     },
     {
       "name": "field",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Field",
       "description": "Styled field component — the recipe wrapper for the css, tailwind, unocss profile(s) using the field primitive.",
@@ -4702,7 +4704,7 @@
     },
     {
       "name": "input",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Input",
       "description": "Styled input component — the recipe wrapper for the css, tailwind, unocss profile(s) using the input primitive.",
@@ -4736,7 +4738,7 @@
     },
     {
       "name": "kbd",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Kbd",
       "description": "Styled kbd component — the recipe wrapper for the css, tailwind, unocss profile(s) using the kbd primitive.",
@@ -4770,7 +4772,7 @@
     },
     {
       "name": "menu",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Menu",
       "description": "Styled menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the menu primitive.",
@@ -4804,7 +4806,7 @@
     },
     {
       "name": "meter",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Meter",
       "description": "Styled meter component — the recipe wrapper for the css, tailwind, unocss profile(s) using the meter primitive.",
@@ -4838,7 +4840,7 @@
     },
     {
       "name": "navigation-menu",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Navigation Menu",
       "description": "Styled navigation-menu component — the recipe wrapper for the css, tailwind, unocss profile(s) using the navigation-menu primitive.",
@@ -4872,7 +4874,7 @@
     },
     {
       "name": "pagination",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Pagination",
       "description": "Styled pagination component — the recipe wrapper for the css, tailwind, unocss profile(s) using the pagination primitive.",
@@ -4906,7 +4908,7 @@
     },
     {
       "name": "popover",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Popover",
       "description": "Styled popover component — the recipe wrapper for the css, tailwind, unocss profile(s) using the popover primitive.",
@@ -4940,7 +4942,7 @@
     },
     {
       "name": "progress",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Progress",
       "description": "Styled progress component — the recipe wrapper for the css, tailwind, unocss profile(s) using the progress primitive.",
@@ -4974,7 +4976,7 @@
     },
     {
       "name": "radio-group",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Radio Group",
       "description": "Styled radio-group component — the recipe wrapper for the css, tailwind, unocss profile(s) using the radio-group primitive.",
@@ -5008,7 +5010,7 @@
     },
     {
       "name": "resizable-panels",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Resizable Panels",
       "description": "Styled resizable-panels component — the recipe wrapper for the css, tailwind, unocss profile(s) using the resizable-panels primitive.",
@@ -5042,7 +5044,7 @@
     },
     {
       "name": "scroll-area",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Scroll Area",
       "description": "Styled scroll-area component — the recipe wrapper for the css, tailwind, unocss profile(s) using the scroll-area primitive.",
@@ -5076,7 +5078,7 @@
     },
     {
       "name": "select",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Select",
       "description": "Styled select component — the recipe wrapper for the css, tailwind, unocss profile(s) using the select primitive.",
@@ -5110,7 +5112,7 @@
     },
     {
       "name": "sheet",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Sheet",
       "description": "Styled sheet component — the recipe wrapper for the css, tailwind, unocss profile(s) using the sheet primitive.",
@@ -5144,7 +5146,7 @@
     },
     {
       "name": "spinner",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Spinner",
       "description": "Styled spinner component — the recipe wrapper for the css, tailwind, unocss profile(s) using the spinner primitive.",
@@ -5178,7 +5180,7 @@
     },
     {
       "name": "switch",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Switch",
       "description": "Styled switch component — the recipe wrapper for the css, tailwind, unocss profile(s) using the switch primitive.",
@@ -5212,7 +5214,7 @@
     },
     {
       "name": "tabs",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Tabs",
       "description": "Styled tabs component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tabs primitive.",
@@ -5246,7 +5248,7 @@
     },
     {
       "name": "toast",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Toast",
       "description": "Styled toast component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toast primitive.",
@@ -5280,7 +5282,7 @@
     },
     {
       "name": "toolbar",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Toolbar",
       "description": "Styled toolbar component — the recipe wrapper for the css, tailwind, unocss profile(s) using the toolbar primitive.",
@@ -5314,7 +5316,7 @@
     },
     {
       "name": "tooltip",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "package": "@solidiom/recipes-css",
       "label": "Tooltip",
       "description": "Styled tooltip component — the recipe wrapper for the css, tailwind, unocss profile(s) using the tooltip primitive.",
