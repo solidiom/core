@@ -3,13 +3,15 @@
 #
 # The workflow's publish-packages / deploy-site jobs are reproduced here so a
 # release can be cut from a developer machine (or a self-hosted box) without
-# GitHub Actions. The step order and commands match the workflow exactly:
+# GitHub Actions. The same release operations are ordered fail-closed locally:
+# every requested build and validation finishes before npm or Cloudflare sees a
+# publication.
 #
-#   gate            → build + gate:quick|full
-#   publish-packages→ build → sign registry → verify → changeset publish
-#                     → beta artifacts (+verify) → beta signing verify
-#   deploy-site     → build packages+templates → validate → build site
-#                     → search index → wrangler pages deploy
+#   gate             → build packages + gate:quick|full
+#   prepare-packages → rebuild → sign registry → verify release artifacts
+#   prepare-site     → build packages+templates → validate → build + search index
+#   publish-packages → changeset publish
+#   deploy-site      → deploy the already-built site to Cloudflare Pages
 #
 # Usage:
 #   ./scripts/release.sh                              # packages + site, quick gate, beta tag
@@ -17,6 +19,7 @@
 #   ./scripts/release.sh --target site                # deploy site only
 #   ./scripts/release.sh --target all --gate full     # full release gate
 #   ./scripts/release.sh --dist-tag latest            # publish under `latest`
+#   ./scripts/release.sh --prepare-version            # version, commit, then release locally
 #   ./scripts/release.sh --dry-run                    # build/gate/verify, no publish or deploy
 #   ./scripts/release.sh --dispatch                   # legacy: trigger release.yml in CI instead
 #
@@ -26,12 +29,15 @@
 
 set -euo pipefail
 
+ORIGINAL_ARGS=("$@")
+
 # ─── Defaults ────────────────────────────────────────────────────────────────
 TARGET="all"
 GATE="quick"
 DIST_TAG="beta"
 DRY_RUN=false
 DISPATCH=false
+PREPARE_VERSION=false
 REF="$(git branch --show-current 2>/dev/null || echo main)"
 WATCH=true
 
@@ -49,7 +55,12 @@ Options:
   --target <packages|site|all>  Release target (default: all)
   --gate <quick|full>           Gate level before publishing (default: quick)
   --dist-tag <beta|latest>      npm dist-tag to publish under (default: beta)
+  --prepare-version             From a clean attached Git tree: install with the
+                                frozen lockfile, apply pending Changesets, rebuild
+                                generated release artifacts, and create the release
+                                commit before validating and publishing it
   --dry-run                     Build, gate, and verify without publishing/deploying
+                                (cannot be combined with --prepare-version)
   --dispatch                    Trigger .github/workflows/release.yml in CI instead
                                 of running locally (legacy behavior)
   --ref <branch>                Branch/ref to dispatch from (only with --dispatch)
@@ -190,6 +201,10 @@ while [[ $# -gt 0 ]]; do
       DIST_TAG="${2:-}"
       shift 2
       ;;
+    --prepare-version)
+      PREPARE_VERSION=true
+      shift
+      ;;
     --dry-run)
       DRY_RUN=true
       shift
@@ -235,6 +250,12 @@ done
 [[ "$TARGET" =~ ^(packages|site|all)$ ]] || fail "--target must be packages, site, or all"
 [[ "$GATE" =~ ^(quick|full)$ ]] || fail "--gate must be quick or full"
 [[ "$DIST_TAG" =~ ^(beta|latest)$ ]] || fail "--dist-tag must be beta or latest"
+
+if [[ "$PREPARE_VERSION" == true ]]; then
+  [[ "$DISPATCH" == false ]] || fail "--prepare-version is local-only and cannot be combined with --dispatch"
+  [[ "$DRY_RUN" == false ]] || fail "--prepare-version creates a release commit and cannot be combined with --dry-run"
+  [[ "$TARGET" != "site" ]] || fail "--prepare-version requires a package target (packages or all)"
+fi
 
 # ─── Dispatch path (legacy CI trigger) ───────────────────────────────────────
 if [[ "$DISPATCH" == true ]]; then
@@ -284,7 +305,19 @@ if [[ -f .env ]]; then
   unset _env_tmp
 fi
 
-command -v pnpm >/dev/null || fail "pnpm is required"
+command -v node >/dev/null || fail "Node.js is required"
+
+EXPECTED_PNPM_VERSION="$(node -p 'JSON.parse(require("fs").readFileSync("package.json", "utf8")).packageManager.match(/^pnpm@([^+]+)/)[1]')"
+CURRENT_PNPM_VERSION="$(pnpm --version 2>/dev/null || true)"
+if [[ "$CURRENT_PNPM_VERSION" != "$EXPECTED_PNPM_VERSION" ]]; then
+  if command -v mise >/dev/null && [[ "${SOLIDIOM_RELEASE_PNPM_REEXEC:-}" != "1" ]]; then
+    step "Re-running with repository-pinned pnpm@$EXPECTED_PNPM_VERSION via mise"
+    exec env SOLIDIOM_RELEASE_PNPM_REEXEC=1 \
+      mise exec "pnpm@$EXPECTED_PNPM_VERSION" -- \
+      bash "$ROOT/scripts/release.sh" "${ORIGINAL_ARGS[@]}"
+  fi
+  fail "pnpm@$EXPECTED_PNPM_VERSION is required (found ${CURRENT_PNPM_VERSION:-none}); run through 'mise exec pnpm@$EXPECTED_PNPM_VERSION -- ...'"
+fi
 
 DO_PACKAGES=false
 DO_SITE=false
@@ -298,15 +331,17 @@ case "$TARGET" in
 esac
 
 log "Local release pipeline"
-step "target: $TARGET   gate: $GATE   dist-tag: $DIST_TAG   dry-run: $DRY_RUN"
+step "target: $TARGET   gate: $GATE   dist-tag: $DIST_TAG   dry-run: $DRY_RUN   prepare-version: $PREPARE_VERSION"
 
-# Pre-flight credential checks (skipped for dry runs, which never publish/deploy).
+# Validate credentials before --prepare-version mutates or commits anything.
+# Dry runs never publish or deploy, so they do not require credentials.
 if [[ "$DRY_RUN" == false ]]; then
   if [[ "$DO_PACKAGES" == true ]]; then
     [[ -n "${NPM_TOKEN:-}" ]] || fail "NPM_TOKEN is not set (shell env or .env) — needed to publish packages"
     export NODE_AUTH_TOKEN="${NPM_TOKEN}"
-    log "Package publication preflight"
-    run node tools/release-candidates.mjs
+    if [[ "$PREPARE_VERSION" == true ]]; then
+      [[ -n "${REGISTRY_SIGN_KEY:-}" ]] || fail "REGISTRY_SIGN_KEY is required with --prepare-version so the committed registry is signed"
+    fi
   fi
   if [[ "$DO_SITE" == true ]]; then
     [[ -n "${CLOUDFLARE_ACCOUNT_ID:-}" ]] || fail "CLOUDFLARE_ACCOUNT_ID is not set — needed to deploy the site"
@@ -314,9 +349,72 @@ if [[ "$DRY_RUN" == false ]]; then
       cloudflare_token_help
       fail "CLOUDFLARE_API_TOKEN is not set — needed to deploy the site (see guidance above)"
     fi
-    # Verify the token now, before the slow site build, so a bad token fails fast.
+    # Verify the token now, before versioning or the slow site build, so a bad
+    # token cannot leave behind a release commit that cannot be deployed.
     preflight_cloudflare_token
   fi
+fi
+
+CANDIDATES_PREFLIGHTED=false
+
+prepare_local_version() {
+  log "Prepare and commit package versions"
+
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail "--prepare-version must run inside a Git worktree"
+
+  local branch
+  branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+  [[ -n "$branch" ]] || fail "--prepare-version requires an attached Git branch, not a detached HEAD"
+  [[ -z "$(git status --porcelain --untracked-files=normal)" ]] || \
+    fail "--prepare-version requires a clean Git tree; commit or stash existing changes first"
+  step "Preparing versions on branch $branch"
+
+  local pending_count=0 changeset
+  for changeset in .changeset/*.md; do
+    [[ "$changeset" == ".changeset/README.md" ]] && continue
+    pending_count=$((pending_count + 1))
+  done
+  [[ "$pending_count" -gt 0 ]] || fail "No pending Changesets found; create or commit a Changeset before preparing a release"
+  step "Found $pending_count pending Changeset(s)"
+
+  run pnpm install --frozen-lockfile
+  run pnpm changeset status
+  run pnpm changeset version
+
+  # Match the generated release state produced by version.yml before committing.
+  run pnpm nx run-many -t build --exclude=@solidiom/site
+  run pnpm exec tsx tools/registry-build.ts
+  run node packages/cli/dist/bin.js verify --registry
+  run pnpm run source:emit
+
+  # Verify the newly calculated versions are publishable before recording the
+  # release commit. The publish step has a second no-op guard for race safety.
+  log "Prepared package candidate preflight"
+  run node tools/release-candidates.mjs
+  CANDIDATES_PREFLIGHTED=true
+
+  # The tree was clean at entry, so these scoped paths contain only deterministic
+  # Changesets/version artifacts. Never use `git add .` in release automation.
+  run git add -- .changeset packages pnpm-lock.yaml registry
+  git diff --cached --quiet && fail "Version preparation produced no staged release changes"
+
+  if ! git diff --quiet || [[ -n "$(git ls-files --others --exclude-standard)" ]]; then
+    fail "Version preparation produced changes outside the scoped release paths; review the tree before committing"
+  fi
+
+  run git commit -m "chore(release): version packages"
+  [[ -z "$(git status --porcelain --untracked-files=normal)" ]] || \
+    fail "The release commit completed but the Git tree is not clean"
+  step "Release versions committed at $(git rev-parse --short=12 HEAD)"
+}
+
+if [[ "$PREPARE_VERSION" == true ]]; then
+  prepare_local_version
+fi
+
+if [[ "$DRY_RUN" == false && "$DO_PACKAGES" == true && "$CANDIDATES_PREFLIGHTED" == false ]]; then
+  log "Package publication preflight"
+  run node tools/release-candidates.mjs
 fi
 
 # ─── Gate (mirrors release.yml `gate` job) ────────────────────────────────────
@@ -332,29 +430,66 @@ if [[ "$DO_PACKAGES" == true ]]; then
   fi
 fi
 
-# ─── Publish packages (mirrors release.yml `publish-packages` job) ────────────
+# ─── Prepare package publication artifacts ───────────────────────────────────
+# Complete every package build and deterministic release-artifact validation
+# before the first irreversible operation (`changeset publish`).
 if [[ "$DO_PACKAGES" == true ]]; then
-  log "Publish packages"
+  log "Prepare package publication artifacts"
 
   # Rebuild to guarantee dist/ matches the committed tree (the workflow builds
   # again in the publish job on a clean checkout).
   run pnpm nx run-many -t build --exclude=@solidiom/site
 
-  # REG-008: sign the registry index. Signing is optional — the tool no-ops
-  # without REGISTRY_SIGN_KEY — but an unsigned index means the beta signing
-  # verification below will report "no signature".
+  # REG-008: sign the registry index. Signing is optional outside the integrated
+  # versioning path, but an unsigned index is called out explicitly.
   if [[ -z "${REGISTRY_SIGN_KEY:-}" ]]; then
     warn "REGISTRY_SIGN_KEY is not set — the registry index will be built UNSIGNED."
     warn "Set it in .env or the environment to produce a signed release."
   fi
   run pnpm exec tsx tools/registry-build.ts
-
   run node packages/cli/dist/bin.js verify --registry
 
-  # Publish exactly the versions committed at the current tree. Versioning is
-  # expected to have already happened (via `changeset version` / the Version PR).
-  # Note: `changeset publish` has no dry-run mode, so on --dry-run we skip only
-  # the publish itself; everything else still runs to exercise the pipeline.
+  # Generate and verify all audit-trail artifacts before npm publication. A
+  # failure here must not leave a partially published release.
+  run env "SOLIDIOM_RELEASE_ID=${SOLIDIOM_RELEASE_ID:-local-$(git rev-parse --short=12 HEAD)}" \
+    pnpm exec tsx tools/generate-beta-artifacts.ts --verify
+
+  if [[ -n "${REGISTRY_SIGN_KEY:-}" ]]; then
+    run pnpm exec tsx tools/verify-beta-signing.ts
+  else
+    step "pnpm exec tsx tools/verify-beta-signing.ts (unsigned — non-fatal)"
+    if ! pnpm exec tsx tools/verify-beta-signing.ts; then
+      warn "Beta signing verification reported failures (expected: REGISTRY_SIGN_KEY unset, release is UNSIGNED)."
+    fi
+  fi
+fi
+
+# ─── Prepare site deployment artifact ────────────────────────────────────────
+# For combined releases this entire site build runs before npm publication, so
+# a broken website can never be discovered after packages are already public.
+if [[ "$DO_SITE" == true ]]; then
+  log "Build and validate site before publication"
+
+  run pnpm nx run-many -t build --exclude=@solidiom/site
+  run pnpm --filter '@solidiom/template-*' build
+
+  step "Validate site structure"
+  run pnpm --filter @solidiom/site run boundaries
+  run pnpm --filter @solidiom/site run route-parity
+  run pnpm --filter @solidiom/site run build:deploy
+  run pnpm --filter @solidiom/site search-index
+fi
+
+# ─── Publish packages ─────────────────────────────────────────────────────────
+# Every requested package and site build/validation has succeeded before this
+# point. From here onward the operations may be externally visible.
+if [[ "$DO_PACKAGES" == true ]]; then
+  log "Publish packages"
+
+  # Publish exactly the versions committed at the current tree. Versioning has
+  # either already happened through the Version PR/manual flow or was performed
+  # and committed above by --prepare-version. The publish phase itself remains
+  # Git read-only.
   if [[ "$DRY_RUN" == true ]]; then
     log "[dry-run] skipping 'changeset publish --tag $DIST_TAG' (would publish now)"
     step "changeset has no dry-run mode; run without --dry-run to publish to npm."
@@ -372,41 +507,11 @@ if [[ "$DO_PACKAGES" == true ]]; then
     rm -f "$_publish_log"
     unset _publish_log
   fi
-
-  # Audit-trail artifacts (not consumed by the CLI, and independent of the npm
-  # publish — they snapshot committed versions and hash registry/index.json).
-  # --verify fails if the generated artifacts don't round-trip.
-  run env "SOLIDIOM_RELEASE_ID=${SOLIDIOM_RELEASE_ID:-local-$(git rev-parse --short=12 HEAD)}" \
-    pnpm exec tsx tools/generate-beta-artifacts.ts --verify
-
-  # Beta signing verification. When REGISTRY_SIGN_KEY is set (the CI case, and
-  # any real signed release), a failure here is fatal. When the key is absent
-  # the index was built unsigned on purpose, so verify-beta-signing.ts is
-  # expected to fail its signature checks — surface it as a warning instead of
-  # aborting, since we already warned that the release is unsigned.
-  if [[ -n "${REGISTRY_SIGN_KEY:-}" ]]; then
-    run pnpm exec tsx tools/verify-beta-signing.ts
-  else
-    step "pnpm exec tsx tools/verify-beta-signing.ts (unsigned — non-fatal)"
-    if ! pnpm exec tsx tools/verify-beta-signing.ts; then
-      warn "Beta signing verification reported failures (expected: REGISTRY_SIGN_KEY unset, release is UNSIGNED)."
-    fi
-  fi
 fi
 
-# ─── Deploy site (mirrors release.yml `deploy-site` job) ──────────────────────
+# ─── Deploy prebuilt site ─────────────────────────────────────────────────────
 if [[ "$DO_SITE" == true ]]; then
-  log "Deploy site"
-
-  run pnpm nx run-many -t build --exclude=@solidiom/site
-  run pnpm --filter '@solidiom/template-*' build
-
-  step "Validate site structure"
-  run pnpm --filter @solidiom/site run boundaries
-  run pnpm --filter @solidiom/site run route-parity
-
-  run pnpm --filter @solidiom/site run build:deploy
-  run pnpm --filter @solidiom/site search-index
+  log "Deploy prebuilt site"
 
   if [[ "$DRY_RUN" == true ]]; then
     log "[dry-run] skipping 'wrangler pages deploy' — site built at apps/site/dist"

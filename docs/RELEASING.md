@@ -181,40 +181,94 @@ changing them (or not) never affects `solidiom verify --registry`.
 When GitHub Actions is unavailable — or you need to cut a release from a
 developer machine or a self-hosted box — `scripts/release.sh` reproduces the
 `release.yml` jobs locally. The step order and commands mirror the workflow
-exactly: gate → publish packages → deploy site.
+exactly: optional version preparation → gate → publish packages → deploy site.
 
-**Important:** like the CI publish job, `release.sh` is **not** a versioning
-step. It publishes exactly the versions committed in the current tree via
-`changeset publish`. Do the versioning first (the coordinated bump above, then
-`pnpm changeset version`, `pnpm exec tsx tools/registry-build.ts`, and a
-`chore(release): version packages <v>` commit) so the working tree holds the
-versions you intend to publish.
+The default mode still publishes only versions already committed in the current
+Git tree. Pass `--prepare-version` for the integrated local path: the script
+requires a clean attached branch, installs the frozen lockfile with the exact
+pnpm version pinned in `package.json`, validates pending Changesets, applies
+`changeset version`, builds packages, regenerates and verifies the signed
+registry, refreshes package `source/` mirrors, verifies npm candidates, stages
+only release-owned paths, and creates `chore(release): version packages`. It
+then continues into the existing gate and publish pipeline. It never pushes or
+creates a tag.
+
+`--prepare-version` is deliberately explicit because it creates a Git commit and
+npm publication is irreversible. It requires a package target, cannot be
+combined with `--dispatch` or `--dry-run`, and requires the tree to stay clean
+after the release commit. If a later gate fails, the safe version commit remains
+locally for diagnosis; no package is published until the gate succeeds.
 
 ### 1. Prepare secrets
 
 `release.sh` reads secrets from the shell environment first, then from the
 project `.env`. Values are never printed.
 
-| Variable                                         | Needed for                                                            |
-| ------------------------------------------------ | --------------------------------------------------------------------- |
-| `NPM_TOKEN`                                      | publishing packages (exported as `NODE_AUTH_TOKEN`)                   |
-| `REGISTRY_SIGN_KEY`                              | signing `registry/index.json` (optional; unsigned + warned if absent) |
-| `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | deploying the site                                                    |
+| Variable                                         | Needed for                                                       |
+| ------------------------------------------------ | ---------------------------------------------------------------- |
+| `NPM_TOKEN`                                      | publishing packages (exported as `NODE_AUTH_TOKEN`)              |
+| `REGISTRY_SIGN_KEY`                              | required by `--prepare-version`; optional with publish-only mode |
+| `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` | deploying the site (`--target site` or `--target all`)           |
 
-Without `REGISTRY_SIGN_KEY` the registry index is built **unsigned** and the
-beta signing verification is downgraded to a warning instead of a hard failure.
+Publish-only local runs may still build an unsigned registry when
+`REGISTRY_SIGN_KEY` is absent, with an explicit warning. The integrated
+`--prepare-version` path refuses to commit an unsigned registry.
 
-### 2. Dry run first
+### 2. Integrated Changesets-to-npm preparation and package release
 
-`changeset publish` has no dry-run mode, so `--dry-run` runs the full pipeline
-(build, gate, registry build, verify, artifacts) and skips **only** the publish
-and the site deploy. Use it to confirm the tree is releasable:
+Author and commit the intended Changesets first. Their bump levels remain the
+release contract: for example, `0.4.1` with `minor` becomes `0.5.0`, while
+`patch` becomes `0.4.2`. The packages-only integrated path applies and commits
+those versions before it validates and publishes them:
 
 ```bash
-./scripts/release.sh --dry-run
+mise run release:local:packages
 ```
 
-### 3. Publish
+This command performs credential, exact-pnpm, attached-branch, clean-tree, and
+pending-Changeset checks; installs from the frozen lockfile; applies
+`changeset version`; regenerates signed registry and package-source artifacts;
+validates npm candidates; creates the hook-checked release commit; runs the full
+package gate; and publishes under `latest`.
+
+### 3. Build, publish, and deploy an already-versioned commit
+
+After package versions and changelogs are committed, use the combined release
+target:
+
+```bash
+mise run release:all
+```
+
+It is equivalent to:
+
+```bash
+./scripts/release.sh --target all --gate full --dist-tag latest
+```
+
+The combined command performs, in order:
+
+1. npm and Cloudflare credential preflight plus unpublished-candidate validation;
+2. the full package release gate and a second package build;
+3. registry, release-artifact, and signature verification;
+4. template build, site structural validation, deploy build, and search-index generation;
+5. only after every preceding build passes, `changeset publish --tag latest`;
+6. only after npm publication succeeds, deployment of the already-built site to Cloudflare Pages.
+
+No npm or Cloudflare publication begins before both the package and website
+artifacts are successfully built.
+
+### 4. Validate or publish versions that are already committed
+
+`changeset publish` has no dry-run mode, so `--dry-run` runs the full pipeline
+(build, gate, registry build, verify, artifacts) and skips only publication and
+site deployment:
+
+```bash
+./scripts/release.sh --target packages --gate full --dist-tag latest --dry-run
+```
+
+To publish versions that were prepared and committed separately:
 
 ```bash
 # packages + site, quick gate, beta dist-tag (defaults)
@@ -227,24 +281,28 @@ and the site deploy. Use it to confirm the tree is releasable:
 ./scripts/release.sh --target site
 ```
 
-| Flag                           | Default | Meaning                                        |
-| ------------------------------ | ------- | ---------------------------------------------- |
-| `--target packages\|site\|all` | `all`   | what to release                                |
-| `--gate quick\|full`           | `quick` | gate level before publishing                   |
-| `--dist-tag beta\|latest`      | `beta`  | npm dist-tag to publish under                  |
-| `--dry-run`                    | off     | build/gate/verify without publishing/deploying |
+| Flag                           | Default | Meaning                                                                     |
+| ------------------------------ | ------- | --------------------------------------------------------------------------- |
+| `--target packages\|site\|all` | `all`   | what to release                                                             |
+| `--gate quick\|full`           | `quick` | gate level before publishing                                                |
+| `--dist-tag beta\|latest`      | `beta`  | npm dist-tag to publish under                                               |
+| `--prepare-version`            | off     | consume Changesets, generate artifacts, and commit before local publication |
+| `--dry-run`                    | off     | build/gate/verify without publishing/deploying                              |
 
-What the script runs, in order (mirroring `release.yml`):
+The publish/deploy portion runs in strict phase order:
 
-1. **Gate** — `nx run-many -t build` (excluding the site) then
-   `gate:quick` or `gate:full`.
-2. **Publish packages** — rebuild → `tools/registry-build.ts` (re-signs when
-   `REGISTRY_SIGN_KEY` is set) → `cli verify --registry` →
-   `changeset publish --tag <dist-tag>` → beta audit artifacts + signing verify.
-3. **Deploy site** — build packages + templates → validate boundaries/route
-   parity → build site + search index → `wrangler pages deploy`.
+1. **Gate** — build packages, then run `gate:quick` or `gate:full`.
+2. **Prepare package publication** — rebuild packages, sign and verify the
+   registry, generate release artifacts, and verify signing.
+3. **Prepare site deployment** — build packages and templates, validate
+   boundaries/route parity, build the deployable site, and generate its search
+   index.
+4. **Publish packages** — run `changeset publish --tag <dist-tag>` only after all
+   requested package and site preparation succeeds.
+5. **Deploy site** — send the already-built artifact to Cloudflare Pages only
+   after npm publication succeeds.
 
-### 4. Record an optional local release marker
+### 5. Record an optional local release marker
 
 A local publish does not run the Version PR post-merge automation. If you need a
 traceability marker, use the same collision-safe shape and point it at the exact
@@ -283,8 +341,11 @@ still requires an authenticated `gh` and a valid ref.
 ## Troubleshooting
 
 **“No unpublished package versions were found”** — the selected ref contains
-only versions that already exist on npm. Run and merge the Version PR first. Do
-not create a package-looking Git tag; tags never change package manifests.
+only versions that already exist on npm. For the hosted path, run and merge the
+Version PR. For the integrated local path, commit the intended Changesets and
+run `mise run release:local:packages`; it applies and commits those versions
+before candidate validation. Do not create a package-looking Git tag; tags never
+change package manifests.
 
 **Exact-SHA verification failed** — the automated release marker did not resolve
 to the Version PR merge SHA passed by the post-merge workflow. Do not move or

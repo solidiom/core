@@ -1,5 +1,44 @@
 # @solidiom/recipes-css
 
+## 0.4.2
+
+### Patch Changes
+
+- Updated dependencies [[`04f0829`](https://github.com/solidiom/core/commit/04f0829e58575e7462dd236f0959f2246db604c0)]:
+  - @solidiom/runtime@0.4.2
+  - @solidiom/accordion@0.4.2
+  - @solidiom/alert@0.4.2
+  - @solidiom/avatar@0.4.2
+  - @solidiom/badge@0.4.2
+  - @solidiom/breadcrumb@0.4.2
+  - @solidiom/button@0.4.2
+  - @solidiom/card@0.4.2
+  - @solidiom/checkbox@0.4.2
+  - @solidiom/combobox@0.4.2
+  - @solidiom/command-palette@0.4.2
+  - @solidiom/data-table@0.4.2
+  - @solidiom/dialog@0.4.2
+  - @solidiom/field@0.4.2
+  - @solidiom/input@0.4.2
+  - @solidiom/kbd@0.4.2
+  - @solidiom/menu@0.4.2
+  - @solidiom/meter@0.4.2
+  - @solidiom/navigation-menu@0.4.2
+  - @solidiom/pagination@0.4.2
+  - @solidiom/popover@0.4.2
+  - @solidiom/progress@0.4.2
+  - @solidiom/radio-group@0.4.2
+  - @solidiom/resizable-panels@0.4.2
+  - @solidiom/scroll-area@0.4.2
+  - @solidiom/select@0.4.2
+  - @solidiom/sheet@0.4.2
+  - @solidiom/spinner@0.4.2
+  - @solidiom/switch@0.4.2
+  - @solidiom/tabs@0.4.2
+  - @solidiom/toast@0.4.2
+  - @solidiom/toolbar@0.4.2
+  - @solidiom/tooltip@0.4.2
+
 ## 0.4.1
 
 ### Patch Changes

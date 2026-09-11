@@ -1,5 +1,12 @@
 # @solidiom/date-picker
 
+## 0.4.2
+
+### Patch Changes
+
+- Updated dependencies [[`04f0829`](https://github.com/solidiom/core/commit/04f0829e58575e7462dd236f0959f2246db604c0)]:
+  - @solidiom/runtime@0.4.2
+
 ## 0.4.1
 
 ### Patch Changes
