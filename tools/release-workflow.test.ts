@@ -77,6 +77,74 @@ describe("release workflow policy", () => {
     expect(localRelease).toContain("changeset publish completed without publishing a package")
   })
 
+  it("prepares, commits, and validates local package versions before publishing", () => {
+    const localRelease = read("scripts/release.sh")
+    const prepareFlag = localRelease.indexOf("--prepare-version")
+    const cleanTree = localRelease.indexOf(
+      'fail "--prepare-version requires a clean Git tree; commit or stash existing changes first"',
+    )
+    const install = localRelease.indexOf("run pnpm install --frozen-lockfile")
+    const version = localRelease.indexOf("run pnpm changeset version")
+    const registry = localRelease.indexOf("run pnpm exec tsx tools/registry-build.ts")
+    const source = localRelease.indexOf("run pnpm run source:emit")
+    const candidates = localRelease.indexOf("run node tools/release-candidates.mjs", source)
+    const scopedStage = localRelease.indexOf(
+      "run git add -- .changeset packages pnpm-lock.yaml registry",
+    )
+    const commit = localRelease.indexOf('run git commit -m "chore(release): version packages"')
+    const gate = localRelease.indexOf('log "Gate — build + gate:$GATE"')
+
+    expect(prepareFlag).toBeGreaterThan(0)
+    expect(cleanTree).toBeGreaterThan(prepareFlag)
+    expect(install).toBeGreaterThan(cleanTree)
+    expect(version).toBeGreaterThan(install)
+    expect(registry).toBeGreaterThan(version)
+    expect(source).toBeGreaterThan(registry)
+    expect(candidates).toBeGreaterThan(source)
+    expect(scopedStage).toBeGreaterThan(candidates)
+    expect(commit).toBeGreaterThan(scopedStage)
+    expect(gate).toBeGreaterThan(commit)
+    expect(localRelease).toContain("EXPECTED_PNPM_VERSION=")
+    expect(localRelease).toContain('mise exec "pnpm@$EXPECTED_PNPM_VERSION"')
+    expect(localRelease).toContain(
+      "REGISTRY_SIGN_KEY is required with --prepare-version so the committed registry is signed",
+    )
+    expect(localRelease).not.toMatch(/^\s*run git add \.\s*$/m)
+  })
+
+  it("prepares every package and site artifact before any local publication", () => {
+    const localRelease = read("scripts/release.sh")
+    const mise = read(".mise.toml")
+    const gate = localRelease.indexOf('log "Gate — build + gate:$GATE"')
+    const packagePreparation = localRelease.indexOf('log "Prepare package publication artifacts"')
+    const packageArtifactVerification = localRelease.indexOf(
+      "pnpm exec tsx tools/verify-beta-signing.ts",
+      packagePreparation,
+    )
+    const sitePreparation = localRelease.indexOf('log "Build and validate site before publication"')
+    const siteBuild = localRelease.indexOf(
+      "run pnpm --filter @solidiom/site run build:deploy",
+      sitePreparation,
+    )
+    const searchIndex = localRelease.indexOf(
+      "run pnpm --filter @solidiom/site search-index",
+      siteBuild,
+    )
+    const npmPublish = localRelease.indexOf('step "pnpm changeset publish --tag $DIST_TAG"')
+    const siteDeploy = localRelease.indexOf("run npx wrangler pages deploy apps/site/dist")
+
+    expect(gate).toBeGreaterThan(0)
+    expect(packagePreparation).toBeGreaterThan(gate)
+    expect(packageArtifactVerification).toBeGreaterThan(packagePreparation)
+    expect(sitePreparation).toBeGreaterThan(packageArtifactVerification)
+    expect(siteBuild).toBeGreaterThan(sitePreparation)
+    expect(searchIndex).toBeGreaterThan(siteBuild)
+    expect(npmPublish).toBeGreaterThan(searchIndex)
+    expect(siteDeploy).toBeGreaterThan(npmPublish)
+    expect(mise).toContain('[tasks."release:all"]')
+    expect(mise).toContain('run = "scripts/release.sh --target all --gate full --dist-tag latest"')
+  })
+
   it("qualifies main pushes with hermetic catalog inputs", () => {
     const workflow = read(".github/workflows/ci-packages.yml")
 

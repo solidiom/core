@@ -108,9 +108,11 @@ All tasks are defined in `.mise.toml`. Run `mise tasks` to list them.
 | `mise run ci:release`                          | Dry-run release CI without publishing           |
 | `mise run nightly:browser-full`                | Run the Chromium, Firefox, and WebKit suite     |
 | `mise run changeset`                           | Create a Changeset                              |
-| `mise run release:publish`                     | Dispatch the GitHub package-and-site release    |
-| `mise run release:packages`                    | Dispatch the GitHub package-only release        |
-| `mise run release:site`                        | Dispatch the GitHub site-only release           |
+| `mise run release:publish`                     | Locally publish packages and deploy the site    |
+| `mise run release:packages`                    | Locally publish committed package versions      |
+| `mise run release:all`                         | Build everything, publish, and deploy           |
+| `mise run release:local:packages`              | Version, commit, full-gate, and publish locally |
+| `mise run release:site`                        | Locally deploy the site                         |
 | `mise run release:package -- @solidiom/button` | Locally publish one independent package         |
 | `mise run clean`                               | Remove all dist/ directories                    |
 | `mise run graph`                               | Open the Nx dependency graph                    |

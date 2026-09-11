@@ -2,9 +2,12 @@
 
 > **For releasing to npm, see [RELEASING.md](./RELEASING.md).** That is the
 > authoritative guide for the two-step release flow (Version PR → immutable
-> exact-SHA marker → explicit package/site dispatch) and single-package releases. In normal operation you do **not** bump
-> versions by hand — the **Version PR** workflow runs `changeset version` and
-> regenerates the registry for you.
+> exact-SHA marker → explicit package/site dispatch), the integrated local
+> `release.sh --prepare-version` flow, and single-package releases. In normal
+> hosted operation you do **not** bump versions by hand — the **Version PR**
+> workflow runs `changeset version` and regenerates the registry for you. The
+> integrated local mode performs those same preparation steps and records the
+> release commit before it publishes.
 >
 > This document remains as a reference for the underlying mechanics and for the
 > rare manual bump (e.g. bootstrapping or a local experiment).

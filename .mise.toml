@@ -124,27 +124,36 @@ run = "pnpm changeset"
 description = "Show pending Changesets"
 run = "pnpm changeset status"
 
-# Changeset package releases, registry signing, version commits, and Cloudflare
-# deployment are owned by .github/workflows/release.yml. These tasks only
-# dispatch and follow that workflow through scripts/release.sh.
+# GitHub's production path remains the reviewed Version PR flow. These tasks run
+# scripts/release.sh locally; pass --dispatch directly when the CI escape hatch is
+# required. release:local:packages is the integrated Changesets-to-commit path;
+# release:all publishes an already-versioned commit and deploys its website.
 [tasks."release:publish"]
-description = "Dispatch the GitHub release workflow for packages and site (quick gate)"
+description = "Locally publish packages and deploy the site (quick gate)"
 run = "scripts/release.sh --target all --gate quick"
 
 [tasks."release:publish:full"]
-description = "Dispatch the GitHub release workflow for packages and site (full gate)"
+description = "Locally publish packages and deploy the site (full gate)"
 run = "scripts/release.sh --target all --gate full"
 
 [tasks."release:packages"]
-description = "Dispatch the GitHub release workflow for packages only (quick gate)"
+description = "Locally publish committed package versions (quick gate)"
 run = "scripts/release.sh --target packages --gate quick"
 
 [tasks."release:packages:full"]
-description = "Dispatch the GitHub release workflow for packages only (full gate)"
+description = "Locally publish committed package versions (full gate)"
 run = "scripts/release.sh --target packages --gate full"
 
+[tasks."release:all"]
+description = "Build and validate everything, publish committed packages, and deploy the website"
+run = "scripts/release.sh --target all --gate full --dist-tag latest"
+
+[tasks."release:local:packages"]
+description = "Apply pending Changesets, commit, validate, and publish packages under latest"
+run = "scripts/release.sh --prepare-version --target packages --gate full --dist-tag latest"
+
 [tasks."release:site"]
-description = "Dispatch the GitHub release workflow for the site only"
+description = "Locally deploy the site"
 run = "scripts/release.sh --target site"
 
 [tasks."release:package"]

@@ -1,5 +1,106 @@
 # @solidiom/primitives
 
+## 0.4.2
+
+### Patch Changes
+
+- [`04f0829`](https://github.com/solidiom/core/commit/04f0829e58575e7462dd236f0959f2246db604c0) - Bump the Solid 2 rolling prerelease window to `2.0.0-rc.7` (latest on npm, published 2026-09-09).
+
+  - `solid-js` and `@solidjs/web` pinned to `2.0.0-rc.7` (was `2.0.0-rc.1`).
+  - `babel-preset-solid` stays pinned to `2.0.0-rc.2` — the compiler version line lags the runtime.
+  - `@solidjs/testing-library` bumped to `1.0.0-beta.3`.
+  - `@solidjs/router` in the templates stays at `0.17.0-next.6`, the newest 0.x prerelease compatible with Solid 2; Router `2.0.0-next.23` removes the templates' `Router`, `Route`, and `A` APIs and requires a separate routing-architecture migration.
+
+  The workspace dependency graph and Solid compatibility window were refreshed together and validated against the repository's build, typecheck, and test gates.
+
+- Updated dependencies []:
+  - @solidiom/accordion@0.4.2
+  - @solidiom/alert@0.4.2
+  - @solidiom/alert-dialog@0.4.2
+  - @solidiom/app-shell@0.4.2
+  - @solidiom/aspect-ratio@0.4.2
+  - @solidiom/attachment@0.4.2
+  - @solidiom/avatar@0.4.2
+  - @solidiom/avatar-group@0.4.2
+  - @solidiom/badge@0.4.2
+  - @solidiom/banner@0.4.2
+  - @solidiom/breadcrumb@0.4.2
+  - @solidiom/button@0.4.2
+  - @solidiom/calendar@0.4.2
+  - @solidiom/card@0.4.2
+  - @solidiom/carousel@0.4.2
+  - @solidiom/chart@0.4.2
+  - @solidiom/chat-composer@0.4.2
+  - @solidiom/chat-layout@0.4.2
+  - @solidiom/chat-message@0.4.2
+  - @solidiom/chat-message-metadata@0.4.2
+  - @solidiom/chat-system-message@0.4.2
+  - @solidiom/chat-tool-calls@0.4.2
+  - @solidiom/checkbox@0.4.2
+  - @solidiom/code-block@0.4.2
+  - @solidiom/collapsible@0.4.2
+  - @solidiom/combobox@0.4.2
+  - @solidiom/command-palette@0.4.2
+  - @solidiom/context-menu@0.4.2
+  - @solidiom/data-table@0.4.2
+  - @solidiom/date-picker@0.4.2
+  - @solidiom/date-range-input@0.4.2
+  - @solidiom/dialog@0.4.2
+  - @solidiom/direction@0.4.2
+  - @solidiom/drawer@0.4.2
+  - @solidiom/empty-state@0.4.2
+  - @solidiom/field@0.4.2
+  - @solidiom/file-input@0.4.2
+  - @solidiom/grid@0.4.2
+  - @solidiom/hover-card@0.4.2
+  - @solidiom/input@0.4.2
+  - @solidiom/input-group@0.4.2
+  - @solidiom/input-otp@0.4.2
+  - @solidiom/kbd@0.4.2
+  - @solidiom/label@0.4.2
+  - @solidiom/lightbox@0.4.2
+  - @solidiom/link@0.4.2
+  - @solidiom/listbox@0.4.2
+  - @solidiom/mega-menu@0.4.2
+  - @solidiom/menu@0.4.2
+  - @solidiom/menubar@0.4.2
+  - @solidiom/message-scroller@0.4.2
+  - @solidiom/meter@0.4.2
+  - @solidiom/multi-selector@0.4.2
+  - @solidiom/navigation-menu@0.4.2
+  - @solidiom/number-input@0.4.2
+  - @solidiom/pagination@0.4.2
+  - @solidiom/popover@0.4.2
+  - @solidiom/progress@0.4.2
+  - @solidiom/questionnaire@0.4.2
+  - @solidiom/radio-group@0.4.2
+  - @solidiom/resizable-panels@0.4.2
+  - @solidiom/scroll-area@0.4.2
+  - @solidiom/segmented-control@0.4.2
+  - @solidiom/select@0.4.2
+  - @solidiom/separator@0.4.2
+  - @solidiom/sheet@0.4.2
+  - @solidiom/sidebar@0.4.2
+  - @solidiom/skeleton@0.4.2
+  - @solidiom/slider@0.4.2
+  - @solidiom/spinner@0.4.2
+  - @solidiom/stack@0.4.2
+  - @solidiom/status-dot@0.4.2
+  - @solidiom/switch@0.4.2
+  - @solidiom/table@0.4.2
+  - @solidiom/tabs@0.4.2
+  - @solidiom/time-input@0.4.2
+  - @solidiom/toast@0.4.2
+  - @solidiom/toggle@0.4.2
+  - @solidiom/toggle-group@0.4.2
+  - @solidiom/tokenizer@0.4.2
+  - @solidiom/toolbar@0.4.2
+  - @solidiom/tooltip@0.4.2
+  - @solidiom/tree@0.4.2
+  - @solidiom/typography@0.4.2
+  - @solidiom/virtual-list@0.4.2
+  - @solidiom/visually-hidden@0.4.2
+
 ## 0.4.1
 
 ### Patch Changes
