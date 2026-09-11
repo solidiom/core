@@ -1,6 +1,6 @@
 {
   "name": "slider",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "package": "@solidiom/slider",
   "capabilities": [],
   "dependencies": [

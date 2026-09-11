@@ -1,7 +1,7 @@
 {
   "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
   "name": "scroll-area",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "package": "@solidiom/recipes-css",
   "deliverables": [
     "component"

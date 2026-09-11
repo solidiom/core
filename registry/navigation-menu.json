@@ -1,6 +1,6 @@
 {
   "name": "navigation-menu",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "package": "@solidiom/navigation-menu",
   "capabilities": [
     {
