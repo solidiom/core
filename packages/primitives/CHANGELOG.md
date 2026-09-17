@@ -1,16 +1,101 @@
 # @solidiom/primitives
 
-## 0.6.0
+## 0.5.0
 
 ### Minor Changes
 
-- Coordinated workspace-wide minor bump to 0.6.0.
+- [`7253b42`](https://github.com/solidiom/core/commit/7253b42359b80003b82d70ccb383193461c1b9f2) Thanks [@devx](https://github.com/devx)! - This is the workspace-wide 0.5.0 release.
 
-  - **Solid 2 toolchain** advanced to the `2.0.0-rc.11` rolling window (solid-js, @solidjs/web); babel-preset-solid stays at its latest in-line release.
-  - **Dependency refresh**: build/test/lint tooling moved to current releases (vite 8.3, vitest 5, eslint 10.11, astro 7.3.5, tsx, nx, prettier, @changesets/cli), plus adapter upstreams (@floating-ui/dom 1.8, embla-carousel 8.6, @tanstack/virtual-core 3.17.11, zod 4.6). TypeScript is intentionally held at 6.x — the native TS 7 compiler does not yet ship the programmatic API Solid's jsx:preserve typechecking relies on.
-  - **New primitive**: `@solidiom/textarea` (native textarea).
-  - **UI behavior + visual design** updates across components.
-  - **Fixes**: navigation-menu positioning is now robust to Solid rc.11 ref/reconciliation ordering; node test lanes point at the shared vitest config so browser tests are excluded by default under vitest 5.
+### Patch Changes
+
+- Updated dependencies [[`7253b42`](https://github.com/solidiom/core/commit/7253b42359b80003b82d70ccb383193461c1b9f2)]:
+  - @solidiom/accordion@0.5.0
+  - @solidiom/alert@0.5.0
+  - @solidiom/alert-dialog@0.5.0
+  - @solidiom/app-shell@0.5.0
+  - @solidiom/aspect-ratio@0.5.0
+  - @solidiom/attachment@0.5.0
+  - @solidiom/avatar@0.5.0
+  - @solidiom/avatar-group@0.5.0
+  - @solidiom/badge@0.5.0
+  - @solidiom/banner@0.5.0
+  - @solidiom/breadcrumb@0.5.0
+  - @solidiom/button@0.5.0
+  - @solidiom/calendar@0.5.0
+  - @solidiom/card@0.5.0
+  - @solidiom/carousel@0.5.0
+  - @solidiom/chart@0.5.0
+  - @solidiom/chat-composer@0.5.0
+  - @solidiom/chat-layout@0.5.0
+  - @solidiom/chat-message@0.5.0
+  - @solidiom/chat-message-metadata@0.5.0
+  - @solidiom/chat-system-message@0.5.0
+  - @solidiom/chat-tool-calls@0.5.0
+  - @solidiom/checkbox@0.5.0
+  - @solidiom/code-block@0.5.0
+  - @solidiom/collapsible@0.5.0
+  - @solidiom/combobox@0.5.0
+  - @solidiom/command-palette@0.5.0
+  - @solidiom/context-menu@0.5.0
+  - @solidiom/data-table@0.5.0
+  - @solidiom/date-picker@0.5.0
+  - @solidiom/date-range-input@0.5.0
+  - @solidiom/dialog@0.5.0
+  - @solidiom/direction@0.5.0
+  - @solidiom/drawer@0.5.0
+  - @solidiom/empty-state@0.5.0
+  - @solidiom/field@0.5.0
+  - @solidiom/file-input@0.5.0
+  - @solidiom/grid@0.5.0
+  - @solidiom/hover-card@0.5.0
+  - @solidiom/input@0.5.0
+  - @solidiom/input-group@0.5.0
+  - @solidiom/input-otp@0.5.0
+  - @solidiom/kbd@0.5.0
+  - @solidiom/label@0.5.0
+  - @solidiom/lightbox@0.5.0
+  - @solidiom/link@0.5.0
+  - @solidiom/listbox@0.5.0
+  - @solidiom/mega-menu@0.5.0
+  - @solidiom/menu@0.5.0
+  - @solidiom/menubar@0.5.0
+  - @solidiom/message-scroller@0.5.0
+  - @solidiom/meter@0.5.0
+  - @solidiom/multi-selector@0.5.0
+  - @solidiom/navigation-menu@0.5.0
+  - @solidiom/number-input@0.5.0
+  - @solidiom/pagination@0.5.0
+  - @solidiom/popover@0.5.0
+  - @solidiom/progress@0.5.0
+  - @solidiom/questionnaire@0.5.0
+  - @solidiom/radio-group@0.5.0
+  - @solidiom/resizable-panels@0.5.0
+  - @solidiom/scroll-area@0.5.0
+  - @solidiom/segmented-control@0.5.0
+  - @solidiom/select@0.5.0
+  - @solidiom/separator@0.5.0
+  - @solidiom/sheet@0.5.0
+  - @solidiom/sidebar@0.5.0
+  - @solidiom/skeleton@0.5.0
+  - @solidiom/slider@0.5.0
+  - @solidiom/spinner@0.5.0
+  - @solidiom/stack@0.5.0
+  - @solidiom/status-dot@0.5.0
+  - @solidiom/switch@0.5.0
+  - @solidiom/table@0.5.0
+  - @solidiom/tabs@0.5.0
+  - @solidiom/textarea@0.5.0
+  - @solidiom/time-input@0.5.0
+  - @solidiom/toast@0.5.0
+  - @solidiom/toggle@0.5.0
+  - @solidiom/toggle-group@0.5.0
+  - @solidiom/tokenizer@0.5.0
+  - @solidiom/toolbar@0.5.0
+  - @solidiom/tooltip@0.5.0
+  - @solidiom/tree@0.5.0
+  - @solidiom/typography@0.5.0
+  - @solidiom/virtual-list@0.5.0
+  - @solidiom/visually-hidden@0.5.0
 
 ## 0.4.2
 

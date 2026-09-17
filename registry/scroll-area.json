@@ -1,6 +1,6 @@
 {
   "name": "scroll-area",
-  "version": "0.6.0",
+  "version": "0.5.0",
   "package": "@solidiom/scroll-area",
   "capabilities": [],
   "dependencies": [

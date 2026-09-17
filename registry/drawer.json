@@ -1,6 +1,6 @@
 {
   "name": "drawer",
-  "version": "0.6.0",
+  "version": "0.5.0",
   "package": "@solidiom/drawer",
   "capabilities": [],
   "dependencies": [
@@ -70,10 +70,10 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "f53e6f29fa9e429dc84f6507c39be8ba2ed267f60dfcf244d670288a85a06fd9",
+    "filesHash": "ea6c44f1cbd0c48c3c74a79856b3f2c255c5e3694d020278d496bc08bf3414a4",
     "fileDigests": {
       "src/drawer-context.ts": "2302a7451db298e1ffd71c835dc751dfc72c69d3f671ec5e49672fc8311ec8e5",
-      "src/drawer.tsx": "f191c5062a8e2cb17351c5884eef85452ab0ebd5700ea064ebde101ee69f6335",
+      "src/drawer.tsx": "1fefafde0b912e0a9260c86a42261d94c93b52a0c76a973e018d0d8dcdfbca7a",
       "src/index.tsx": "d73bd947145a4c6b215eec138ea4da63602602798781e51aee003fdfee842e80"
     }
   },

@@ -1,6 +1,6 @@
 {
   "name": "status-dot",
-  "version": "0.6.0",
+  "version": "0.5.0",
   "package": "@solidiom/status-dot",
   "capabilities": [],
   "dependencies": [

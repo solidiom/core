@@ -1,6 +1,6 @@
 {
   "name": "date-range-input",
-  "version": "0.6.0",
+  "version": "0.5.0",
   "package": "@solidiom/date-range-input",
   "capabilities": [],
   "dependencies": [

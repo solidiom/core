@@ -1,6 +1,6 @@
 {
   "name": "radio-group",
-  "version": "0.6.0",
+  "version": "0.5.0",
   "package": "@solidiom/radio-group",
   "capabilities": [],
   "dependencies": [
@@ -72,9 +72,9 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "7a4f918585277f45cf48b0b58eb58347bf2fc824fae849b0bd47222b9b7985f2",
+    "filesHash": "ebe72e8391d5ae6789c7334d1bc80ee5fc20507a63387ab80caa6ac24148f7e4",
     "fileDigests": {
-      "src/index.tsx": "9a43afb877ba5342dd685751e7075a25aecdb9e14f806b8bf76ab19a41b61ba6"
+      "src/index.tsx": "70b45d82a29ef0eb536603bbbdd660c9cc5bd9c31c070967120d5ee62a9401f6"
     }
   },
   "provenance": {
