@@ -1,0 +1,51 @@
+{
+  "name": "@solidiom/textarea",
+  "version": "0.4.2",
+  "private": false,
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "solid": "./source/index.tsx",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "source",
+    "src",
+    "!src/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "test": "vitest run --config vitest.config.ts --passWithNoTests",
+    "test:ssr": "vitest run --config vitest.ssr.config.ts --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@solidjs/web": "catalog:",
+    "solid-js": "catalog:"
+  },
+  "dependencies": {
+    "@solidiom/runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@solidiom/field": "workspace:*"
+  },
+  "nx": {
+    "tags": [
+      "layer:primitive"
+    ],
+    "metadata": {
+      "label": "Textarea",
+      "description": "Native textarea primitive with validation states and optional auto-resizing.",
+      "category": "input",
+      "registry": {
+        "status": "stable"
+      }
+    }
+  }
+}

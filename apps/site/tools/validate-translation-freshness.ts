@@ -201,10 +201,8 @@ const siteResults = siteFiles.map((file) =>
 
 // ─── Source B: package-colocated content (packages/*/docs/**) — CONTENT-004 ─
 //
-// A package doc's GA-blocking maturity is derived from the primitive's
-// registry status (registry/index.json), not a separate frontmatter field:
-// a "stable" registry entry is GA and its translations must be fresh and
-// human-reviewed; "preview"/"experimental"/"deprecated" remain report-only.
+// A package doc's GA-blocking maturity normally comes from the primitive's
+// registry status, unless English frontmatter explicitly keeps it draft/beta.
 
 interface RegistryIndexSummary {
   version: number
@@ -221,7 +219,12 @@ function loadPrimitiveStatuses(): Map<string, string> {
 function packageDocMaturityOf(
   primitiveName: string,
   primitiveStatuses: Map<string, string>,
+  frontmatter: Record<string, string>,
 ): Maturity {
+  // Intentional draft/beta docs stay report-only even when their package is stable.
+  if (frontmatter.maturity === "draft" || frontmatter.maturity === "beta") {
+    return frontmatter.maturity
+  }
   const status = primitiveStatuses.get(primitiveName)
   return status === "stable" ? "ga" : "beta"
 }
@@ -242,9 +245,10 @@ if (existsSync(packagesRoot)) {
     )
     if (englishRelativeFiles.length === 0) continue
 
-    const maturity = packageDocMaturityOf(packageName, primitiveStatuses)
     for (const relativeFile of englishRelativeFiles) {
-      const result = resolveFileStatus(docsDir, join(docsDir, "es"), relativeFile, () => maturity)
+      const result = resolveFileStatus(docsDir, join(docsDir, "es"), relativeFile, (frontmatter) =>
+        packageDocMaturityOf(packageName, primitiveStatuses, frontmatter),
+      )
       packageResults.push({ ...result, file: `packages/${packageName}/docs/${relativeFile}` })
     }
   }
