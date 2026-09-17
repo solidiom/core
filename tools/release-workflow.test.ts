@@ -65,6 +65,16 @@ describe("release workflow policy", () => {
     expect(betaArtifacts).toContain("releaseId: process.env.SOLIDIOM_RELEASE_ID")
   })
 
+  it("provides the GitHub token to the changeset version step", () => {
+    const workflow = read(".github/workflows/version.yml")
+    const stepStart = workflow.indexOf("\n      - name: Apply changeset versions")
+    const nextStep = workflow.indexOf("\n      - name:", stepStart + 1)
+
+    expect(stepStart).toBeGreaterThan(0)
+    expect(nextStep).toBeGreaterThan(stepStart)
+    expect(workflow.slice(stepStart, nextStep)).toContain("GITHUB_TOKEN: ${{ github.token }}")
+  })
+
   it("fails package publishing closed when npm has no unpublished versions", () => {
     const workflow = read(".github/workflows/release.yml")
     const localRelease = read("scripts/release.sh")
