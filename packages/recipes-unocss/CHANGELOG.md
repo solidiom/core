@@ -1,5 +1,49 @@
 # @solidiom/recipes-unocss
 
+## 0.5.0
+
+### Minor Changes
+
+- [`7253b42`](https://github.com/solidiom/core/commit/7253b42359b80003b82d70ccb383193461c1b9f2) Thanks [@devx](https://github.com/devx)! - This is the workspace-wide 0.5.0 release.
+
+### Patch Changes
+
+- Updated dependencies [[`7253b42`](https://github.com/solidiom/core/commit/7253b42359b80003b82d70ccb383193461c1b9f2)]:
+  - @solidiom/accordion@0.5.0
+  - @solidiom/alert@0.5.0
+  - @solidiom/avatar@0.5.0
+  - @solidiom/badge@0.5.0
+  - @solidiom/breadcrumb@0.5.0
+  - @solidiom/button@0.5.0
+  - @solidiom/card@0.5.0
+  - @solidiom/checkbox@0.5.0
+  - @solidiom/combobox@0.5.0
+  - @solidiom/command-palette@0.5.0
+  - @solidiom/data-table@0.5.0
+  - @solidiom/dialog@0.5.0
+  - @solidiom/field@0.5.0
+  - @solidiom/input@0.5.0
+  - @solidiom/kbd@0.5.0
+  - @solidiom/menu@0.5.0
+  - @solidiom/meter@0.5.0
+  - @solidiom/navigation-menu@0.5.0
+  - @solidiom/pagination@0.5.0
+  - @solidiom/popover@0.5.0
+  - @solidiom/progress@0.5.0
+  - @solidiom/radio-group@0.5.0
+  - @solidiom/resizable-panels@0.5.0
+  - @solidiom/runtime@0.5.0
+  - @solidiom/scroll-area@0.5.0
+  - @solidiom/select@0.5.0
+  - @solidiom/sheet@0.5.0
+  - @solidiom/spinner@0.5.0
+  - @solidiom/switch@0.5.0
+  - @solidiom/tabs@0.5.0
+  - @solidiom/toast@0.5.0
+  - @solidiom/toolbar@0.5.0
+  - @solidiom/tooltip@0.5.0
+  - @solidiom/unocss-preset@0.5.0
+
 ## 0.4.2
 
 ### Patch Changes

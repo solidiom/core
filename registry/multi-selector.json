@@ -1,6 +1,6 @@
 {
   "name": "multi-selector",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "package": "@solidiom/multi-selector",
   "capabilities": [],
   "dependencies": [

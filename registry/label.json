@@ -1,6 +1,6 @@
 {
   "name": "label",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "package": "@solidiom/label",
   "capabilities": [],
   "dependencies": [

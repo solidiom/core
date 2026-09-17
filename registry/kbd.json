@@ -1,6 +1,6 @@
 {
   "name": "kbd",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "package": "@solidiom/kbd",
   "capabilities": [],
   "dependencies": [

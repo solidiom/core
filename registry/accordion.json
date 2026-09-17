@@ -1,6 +1,6 @@
 {
   "name": "accordion",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "package": "@solidiom/accordion",
   "capabilities": [],
   "dependencies": [
