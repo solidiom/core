@@ -64,6 +64,8 @@ jobs:
 
       - name: Apply changeset versions
         if: steps.changesets.outputs.pending == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: pnpm changeset version
 
       # The registry embeds a per-entry version copied from each package.json,
