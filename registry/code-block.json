@@ -1,6 +1,6 @@
 {
   "name": "code-block",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "package": "@solidiom/code-block",
   "capabilities": [],
   "dependencies": [

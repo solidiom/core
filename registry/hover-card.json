@@ -1,6 +1,6 @@
 {
   "name": "hover-card",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "package": "@solidiom/hover-card",
   "capabilities": [
     {
@@ -52,7 +52,7 @@
       },
       "es": {
         "status": "draft",
-        "lastUpdated": "2026-08-18T05:00:00.000Z"
+        "lastUpdated": "2026-08-18T00:00:00.000Z"
       }
     }
   },

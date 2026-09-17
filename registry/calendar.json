@@ -1,6 +1,6 @@
 {
   "name": "calendar",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "package": "@solidiom/calendar",
   "capabilities": [
     {
@@ -54,7 +54,7 @@
       },
       "es": {
         "status": "draft",
-        "lastUpdated": "2026-08-22T05:00:00.000Z"
+        "lastUpdated": "2026-08-22T00:00:00.000Z"
       }
     }
   },
