@@ -10,7 +10,6 @@ bun = "1.3.14"
 [env]
 # Prevent global mise npm tools from conflicting with workspace-local tools
 # managed by pnpm.
-MISE_DISABLE_TOOLS = "npm:opencode-ai,npm:opencode-codebase-index,npm:playwright,npm:slides-grab,npm:@openai/codex,npm:@playwright/cli,npm:@storybook/addon-mcp,npm:@bitbonsai/mcpvault,npm:@swarmvaultai/cli,npm:corepack,npm:typescript,npm:tsx,npm:rimraf"
 
 # ---------------------------------------------------------------------------
 # Build and development

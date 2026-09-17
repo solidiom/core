@@ -35,11 +35,12 @@ export default defineConfig({
   webServer: {
     command: "pnpm --filter @solidiom/site dev",
     env: {
+      ASTRO_DEV_BACKGROUND: "0",
       SOLIDIOM_E2E: "1",
     },
     url: "http://localhost:4321",
     reuseExistingServer: !process.env.CI,
     cwd: "../..",
-    timeout: 30_000,
+    timeout: 120_000,
   },
 })
