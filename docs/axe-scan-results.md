@@ -13,8 +13,8 @@ tags: [accessibility, axe, automated-testing]
 - Tool: axe-core 4.10.2 via Vitest browser mode
 - Browser: chromium (Playwright)
 - Scope: Each public primitive rendered in isolation with minimal valid props
-- Executed: 2026-09-05T04:09:11.750Z
-- Commit: `0bbc4ad2cb1086b8ac95c3d68d86b1c05ce628f8`
+- Executed: 2026-09-17T17:41:36.519Z
+- Commit: `def9b23fcf4c115067d0ea71d5071d9ea90dc4ec`
 - CI run: Local execution (not CI evidence)
 - Test file: `tests/a11y/primitives-axe-scan.browser.test.tsx`
 - Results artifact: `artifacts/axe-results.json`
@@ -98,6 +98,7 @@ tags: [accessibility, axe, automated-testing]
 | switch           | axe-switch-scan-v1            | 0          | 0          | 12     | ✅ Pass |
 | table            | axe-table-scan-v1             | 0          | 0          | 6      | ✅ Pass |
 | tabs             | axe-tabs-scan-v1              | 0          | 0          | 16     | ✅ Pass |
+| textarea         | axe-textarea-scan-v1          | 0          | 0          | 9      | ✅ Pass |
 | time-input       | axe-time-input-scan-v1        | 0          | 0          | 13     | ✅ Pass |
 | toast            | axe-toast-scan-v1             | 0          | 0          | 10     | ✅ Pass |
 | toggle           | axe-toggle-scan-v1            | 0          | 0          | 8      | ✅ Pass |
@@ -112,10 +113,10 @@ tags: [accessibility, axe, automated-testing]
 
 ## Coverage
 
-- Total primitives scanned: 86/86
+- Total primitives scanned: 87/87
 - Violations found: 0
 - Incomplete checks: 10
-- Passing checks: 779
+- Passing checks: 788
 - All primitives passing: Yes ✅
 
 ## Known Beta Gaps
