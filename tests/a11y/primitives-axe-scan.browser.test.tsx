@@ -44,6 +44,7 @@ import * as Slider from "@solidiom/slider"
 import * as Spinner from "@solidiom/spinner"
 import * as Switch from "@solidiom/switch"
 import * as Tabs from "@solidiom/tabs"
+import * as Textarea from "@solidiom/textarea"
 import * as Toast from "@solidiom/toast"
 import * as Toggle from "@solidiom/toggle"
 import * as ToggleGroup from "@solidiom/toggle-group"
@@ -281,6 +282,7 @@ const PRIMITIVE_FIXTURES: Record<PublicPrimitive, () => JSX.Element> = {
       <Tabs.Content value="tab2">Advanced settings</Tabs.Content>
     </Tabs.Root>
   ),
+  textarea: () => <Textarea.Root aria-label="Message" />,
   toast: () => (
     <Toast.Root aria-label="Notification">
       <Toast.Title>Success</Toast.Title>

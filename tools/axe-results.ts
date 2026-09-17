@@ -74,6 +74,7 @@ export const PUBLIC_PRIMITIVES = [
   "switch",
   "table",
   "tabs",
+  "textarea",
   "time-input",
   "toast",
   "toggle",

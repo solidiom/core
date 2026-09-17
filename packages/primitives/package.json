@@ -64,6 +64,7 @@
     "@solidiom/spinner": "workspace:*",
     "@solidiom/switch": "workspace:*",
     "@solidiom/tabs": "workspace:*",
+    "@solidiom/textarea": "workspace:*",
     "@solidiom/toast": "workspace:*",
     "@solidiom/toggle": "workspace:*",
     "@solidiom/toggle-group": "workspace:*",

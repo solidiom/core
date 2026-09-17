@@ -1,0 +1,77 @@
+{
+  "name": "textarea",
+  "version": "0.4.2",
+  "package": "@solidiom/textarea",
+  "capabilities": [],
+  "dependencies": [
+    "@solidiom/runtime"
+  ],
+  "source": {
+    "entry": "src/index.tsx",
+    "files": [
+      "src/index.tsx"
+    ]
+  },
+  "runtime": [],
+  "$schema": "https://solidiom.dev/schemas/registry-manifest/v3.json",
+  "label": "Textarea",
+  "description": "Native textarea primitive with validation states and optional auto-resizing.",
+  "category": "input",
+  "status": "stable",
+  "deliverables": [
+    "primitive"
+  ],
+  "cli": {
+    "addCommand": "solidiom add textarea",
+    "installDeps": []
+  },
+  "accessibility": {
+    "reviewStatus": "automated",
+    "evidenceIds": [
+      "axe-textarea-scan-v1"
+    ],
+    "lastReviewed": "2026-09-17T03:33:45.907Z"
+  },
+  "documentation": {
+    "status": "complete",
+    "locales": {
+      "en": {
+        "status": "draft"
+      },
+      "es": {
+        "status": "draft"
+      }
+    }
+  },
+  "styling": {
+    "outputs": [],
+    "themeCompatible": []
+  },
+  "search": {
+    "keywords": [
+      "and",
+      "auto",
+      "input",
+      "native",
+      "optional",
+      "primitive",
+      "resizing",
+      "runtime",
+      "states",
+      "textarea",
+      "validation",
+      "with"
+    ]
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "filesHash": "01d588cc55ce0bd91d9a2b1bb6700b3a3c9a37921757f0794ab81aa4b4c2c2c9",
+    "fileDigests": {
+      "src/index.tsx": "347dffb4c76745e1a495e33f14cabd7c970e02079921d563294974ee723e8e37"
+    }
+  },
+  "provenance": {
+    "repository": "https://github.com/solidiom/core",
+    "directory": "packages/textarea"
+  }
+}

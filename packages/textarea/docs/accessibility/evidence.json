@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "primitive": "textarea",
+  "evidenceIds": ["axe-textarea-scan-v1"],
+  "summary": {
+    "passes": 9,
+    "violations": 0,
+    "incomplete": 0,
+    "outcome": "pass"
+  },
+  "lastRun": "2026-09-17T03:33:45.907Z",
+  "provenance": {
+    "browser": "chromium",
+    "commitSha": "91f79bfb9e20c4623a5120e5c1c1ba7efad9927d",
+    "ciRunUrl": null
+  }
+}

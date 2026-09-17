@@ -3,9 +3,7 @@
   "version": 4,
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "e06b8ae3685ff3c381a702bb7d5abd1c37089e564e99dc53924b974e869cfc76",
-    "signature": "nwCOUFxtdZqmPoTirI/Of2Maqi7h1FrQVKHOYRHkm/pudY0DjVrWHaQPEpDCCvZYWYulM2DxyU+B+bOIqw36CQ==",
-    "signatureKeyId": "d7b32861c393dafd"
+    "entriesHash": "e56388354ea137c264ae50b35ccb1ffc3c514c05427ae6b37d19ea6408df843e"
   },
   "primitives": [
     {
@@ -3680,6 +3678,54 @@
       "provenance": {
         "repository": "https://github.com/solidiom/core",
         "directory": "packages/tabs"
+      }
+    },
+    {
+      "name": "textarea",
+      "version": "0.4.2",
+      "package": "@solidiom/textarea",
+      "label": "Textarea",
+      "description": "Native textarea primitive with validation states and optional auto-resizing.",
+      "category": "input",
+      "status": "stable",
+      "deliverables": [
+        "primitive"
+      ],
+      "hasAccessibilityEvidence": true,
+      "accessibility": {
+        "reviewStatus": "automated",
+        "evidenceIds": [
+          "axe-textarea-scan-v1"
+        ]
+      },
+      "documentationStatus": "complete",
+      "documentationLocales": {
+        "en": {
+          "status": "draft"
+        },
+        "es": {
+          "status": "draft"
+        }
+      },
+      "stylingOutputs": [],
+      "themeCompatible": [],
+      "searchKeywords": [
+        "and",
+        "auto",
+        "input",
+        "native",
+        "optional",
+        "primitive",
+        "resizing",
+        "runtime",
+        "states",
+        "textarea",
+        "validation",
+        "with"
+      ],
+      "provenance": {
+        "repository": "https://github.com/solidiom/core",
+        "directory": "packages/textarea"
       }
     },
     {
