@@ -8,8 +8,8 @@
       "sitePath": "/components/button/examples"
     },
     "status": "mapped",
-    "parts": [],
-    "tokens": {},
+    "parts": ["Root"],
+    "tokens": { "Root": { "fontSize": ">=12px" } },
     "interactions": [],
     "states": ["default"],
     "themes": ["light", "dark"],

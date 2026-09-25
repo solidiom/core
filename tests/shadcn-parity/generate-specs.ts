@@ -10,10 +10,21 @@ import type { MappingEntry } from "./lib/types"
 // a path relative to that cwd.
 const OUT_DIR = "../../artifacts/shadcn-parity"
 
+// The site is an astro app configured with `trailingSlash: "always"`. Under
+// `astro preview` EVERY directory route 404s without a trailing slash
+// (`/components/button/examples` → 404, `/components/button/examples/` → 200).
+// `sitePath` in the mapping is stored in the canonical no-slash form, so the
+// generated spec must append a trailing slash at navigation time or the Solidiom
+// frame loads the 404 page and the whole comparison runs against empty DOM.
+function solPath(p: string): string {
+  return p.endsWith("/") ? p : p + "/"
+}
+
 // The generated spec embeds the entry as a JSON literal and calls the shared engine.
 export function generateSpecForEntry(entry: MappingEntry): string {
   if (entry.status !== "mapped") return ""
   const literal = JSON.stringify(entry, null, 2)
+  const sitePath = solPath(entry.solidiom.sitePath)
   return [
     'import { test, expect, type Page } from "@playwright/test"',
     'import { verifyEntry } from "../lib/verify"',
@@ -23,13 +34,13 @@ export function generateSpecForEntry(entry: MappingEntry): string {
     'const REF_BASE = "http://127.0.0.1:4333"',
     'const SOL_BASE = "http://127.0.0.1:4322"',
     "",
-    `test("${entry.id} - shadcn parity", async (context) => {`,
-    "  const refCtx = await context.browser.newContext()",
-    "  const solCtx = await context.browser.newContext()",
+    `test("${entry.id} - shadcn parity", async ({ browser }) => {`,
+    "  const refCtx = await browser.newContext()",
+    "  const solCtx = await browser.newContext()",
     "  const refPage: Page = await refCtx.newPage()",
     "  const solPage: Page = await solCtx.newPage()",
     `  await refPage.goto(REF_BASE + "/" + ENTRY.shadcn.ref, { waitUntil: "networkidle" })`,
-    '  await solPage.goto(SOL_BASE + ENTRY.solidiom.sitePath, { waitUntil: "networkidle" })',
+    `  await solPage.goto(SOL_BASE + ${JSON.stringify(sitePath)}, { waitUntil: "networkidle" })`,
     `  const report = await verifyEntry(ENTRY, refPage, solPage, "${OUT_DIR}")`,
     `  const path = await writeReport(ENTRY, report, "${OUT_DIR}")`,
     "  // A gap fails the test; accepted/parity pass.",

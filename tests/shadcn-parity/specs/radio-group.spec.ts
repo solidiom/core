@@ -27,13 +27,13 @@ const ENTRY = {
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"
 
-test("radio-group - shadcn parity", async (context) => {
-  const refCtx = await context.browser.newContext()
-  const solCtx = await context.browser.newContext()
+test("radio-group - shadcn parity", async ({ browser }) => {
+  const refCtx = await browser.newContext()
+  const solCtx = await browser.newContext()
   const refPage: Page = await refCtx.newPage()
   const solPage: Page = await solCtx.newPage()
   await refPage.goto(REF_BASE + "/" + ENTRY.shadcn.ref, { waitUntil: "networkidle" })
-  await solPage.goto(SOL_BASE + ENTRY.solidiom.sitePath, { waitUntil: "networkidle" })
+  await solPage.goto(SOL_BASE + "/components/radio-group/examples/", { waitUntil: "networkidle" })
   const report = await verifyEntry(ENTRY, refPage, solPage, "../../artifacts/shadcn-parity")
   const path = await writeReport(ENTRY, report, "../../artifacts/shadcn-parity")
   // A gap fails the test; accepted/parity pass.

@@ -1,5 +1,5 @@
 import { mkdir, copyFile, writeFile } from "node:fs/promises"
-import { join } from "node:path"
+import { join, basename } from "node:path"
 import { execSync } from "node:child_process"
 import type { Page } from "@playwright/test"
 import type { MappingEntry, SignalResult, SignalVerdict, VerdictReport } from "./types"
@@ -389,11 +389,18 @@ async function pixelDiffPct(refPng: string, solPng: string): Promise<number | nu
 }
 
 export async function copyAssets(assetDir: string, outDir: string): Promise<void> {
-  const target = join(outDir, "assets", assetDir)
+  // assetDir may be a full (relative) path like `../../artifacts/.../button`;
+  // only its basename is the per-component subdirectory under assets/. Using the
+  // full path would collapse the `..` segments and double the `artifacts/`
+  // prefix (e.g. `artifacts/artifacts/shadcn-parity/button`), so the PNGs would
+  // land in a stray tree instead of next to the report's "see assets/".
+  const assetsRoot = join(outDir, "assets")
+  const target = join(assetsRoot, basename(assetDir))
   await mkdir(target, { recursive: true })
   const { readdir } = await import("node:fs/promises")
   for (const f of await readdir(assetDir)) {
     await copyFile(join(assetDir, f), join(target, f))
   }
-  await writeFile(join(outDir, "assets", "COPYING"), `copied from ${assetDir}\n`)
+  await mkdir(assetsRoot, { recursive: true })
+  await writeFile(join(assetsRoot, "COPYING"), `copied from ${assetDir}\n`)
 }
