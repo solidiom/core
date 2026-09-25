@@ -21,12 +21,16 @@ export interface MappingEntry {
 
 export interface SignalResult {
   signal: string
+  expected: string
+  actual: string
   verdict: SignalVerdict
-  detail?: string
 }
 
 export interface VerdictReport {
   id: string
+  shadcnVersion: string
+  solidiomSha: string
   signals: SignalResult[]
-  overall: SignalVerdict
+  failures: number
+  accepted: number
 }
