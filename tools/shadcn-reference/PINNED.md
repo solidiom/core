@@ -8,6 +8,18 @@ base theme: neutral (init -b neutral), style new-york, cssVariables true
 Components added (id: version-if-shown):
 
 - button: registry new-york (no version field in registry entry)
+- input: registry new-york (no version field)
+- label: registry new-york (no version field)
+- checkbox: registry new-york (no version field)
+- radio-group: registry new-york (no version field)
+- switch: registry new-york (no version field)
+- slider: registry new-york (no version field)
+- select: registry new-york (no version field)
+- textarea: registry new-york (no version field)
+- input-otp: registry new-york (no version field); dep `input-otp` ^1.5.0
+- field: registry new-york (no version field); pulled in `separator` dependency (@radix-ui/react-separator)
+- input-group: registry new-york (no version field); ran with `--overwrite` because its button.tsx template differed from Task 1's — only formatting changed, no class/API change
+- combobox: **not available in pinned version** — shadcn 3.8.5 registry returns "The item at https://ui.shadcn.com/r/styles/new-york/combobox.json was not found". No page created, no hand-approximation (per brief).
 
 Note: the shadcn CLI 3.8.5 registry writes **oklch** token values into
 `src/index.css` but generates a v3 `tailwind.config.js` that wraps them as

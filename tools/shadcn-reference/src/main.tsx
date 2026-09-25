@@ -3,8 +3,32 @@ import ReactDOM from "react-dom/client"
 import { BrowserRouter, Routes, Route, Link, useParams, Navigate } from "react-router-dom"
 import "./index.css"
 import Button from "./pages/button"
+import Input from "./pages/input"
+import Label from "./pages/label"
+import Checkbox from "./pages/checkbox"
+import RadioGroup from "./pages/radio-group"
+import Switch from "./pages/switch"
+import Slider from "./pages/slider"
+import Select from "./pages/select"
+import Textarea from "./pages/textarea"
+import InputOtp from "./pages/input-otp"
+import Field from "./pages/field"
+import InputGroup from "./pages/input-group"
 
-const pages: Record<string, React.ComponentType> = { button: Button }
+const pages: Record<string, React.ComponentType> = {
+  button: Button,
+  input: Input,
+  label: Label,
+  checkbox: Checkbox,
+  "radio-group": RadioGroup,
+  switch: Switch,
+  slider: Slider,
+  select: Select,
+  textarea: Textarea,
+  "input-otp": InputOtp,
+  field: Field,
+  "input-group": InputGroup,
+}
 
 function ComponentPage() {
   const { id } = useParams<{ id: string }>()
