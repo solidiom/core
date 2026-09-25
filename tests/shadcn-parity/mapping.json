@@ -1,0 +1,226 @@
+[
+  {
+    "id": "button",
+    "shadcn": { "ref": "button" },
+    "solidiom": {
+      "package": "@solidiom/button",
+      "siteSlug": "button",
+      "sitePath": "/components/button/examples"
+    },
+    "status": "mapped",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "input",
+    "shadcn": { "ref": "input" },
+    "solidiom": {
+      "package": "@solidiom/input",
+      "siteSlug": "input",
+      "sitePath": "/components/input/examples"
+    },
+    "status": "mapped",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "label",
+    "shadcn": { "ref": "label" },
+    "solidiom": {
+      "package": "@solidiom/label",
+      "siteSlug": "label",
+      "sitePath": "/components/label/examples"
+    },
+    "status": "mapped",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "checkbox",
+    "shadcn": { "ref": "checkbox" },
+    "solidiom": {
+      "package": "@solidiom/checkbox",
+      "siteSlug": "checkbox",
+      "sitePath": "/components/checkbox/examples"
+    },
+    "status": "mapped",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "radio-group",
+    "shadcn": { "ref": "radio-group" },
+    "solidiom": {
+      "package": "@solidiom/radio-group",
+      "siteSlug": "radio-group",
+      "sitePath": "/components/radio-group/examples"
+    },
+    "status": "mapped",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "switch",
+    "shadcn": { "ref": "switch" },
+    "solidiom": {
+      "package": "@solidiom/switch",
+      "siteSlug": "switch",
+      "sitePath": "/components/switch/examples"
+    },
+    "status": "mapped",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "slider",
+    "shadcn": { "ref": "slider" },
+    "solidiom": {
+      "package": "@solidiom/slider",
+      "siteSlug": "slider",
+      "sitePath": "/components/slider/examples"
+    },
+    "status": "mapped",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "select",
+    "shadcn": { "ref": "select" },
+    "solidiom": {
+      "package": "@solidiom/select",
+      "siteSlug": "select",
+      "sitePath": "/components/select/examples"
+    },
+    "status": "mapped",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "combobox",
+    "shadcn": { "ref": "combobox" },
+    "solidiom": {
+      "package": "@solidiom/combobox",
+      "siteSlug": "combobox",
+      "sitePath": "/components/combobox/examples"
+    },
+    "status": "gap",
+    "gapReason": "no shadcn reference page in pinned 3.8.5 registry (it is a Command+Popover recipe, not a single registry component); Solidiom live island exists.",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "textarea",
+    "shadcn": { "ref": "textarea" },
+    "solidiom": {
+      "package": "@solidiom/textarea",
+      "siteSlug": "textarea",
+      "sitePath": "/components/textarea/examples"
+    },
+    "status": "gap",
+    "gapReason": "no Solidiom live examples island (slug not in COMPONENTS_WITH_EXAMPLES); shadcn reference page exists.",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "field",
+    "shadcn": { "ref": "field" },
+    "solidiom": {
+      "package": "@solidiom/field",
+      "siteSlug": "field",
+      "sitePath": "/components/field/examples"
+    },
+    "status": "mapped",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "input-otp",
+    "shadcn": { "ref": "input-otp" },
+    "solidiom": {
+      "package": "@solidiom/input-otp",
+      "siteSlug": "input-otp",
+      "sitePath": "/components/input-otp/examples"
+    },
+    "status": "mapped",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "input-group",
+    "shadcn": { "ref": "input-group" },
+    "solidiom": {
+      "package": "@solidiom/input-group",
+      "siteSlug": "input-group",
+      "sitePath": "/components/input-group/examples"
+    },
+    "status": "gap",
+    "gapReason": "no Solidiom live examples island (slug not in COMPONENTS_WITH_EXAMPLES); shadcn reference page exists.",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": []
+  }
+]
