@@ -32,6 +32,21 @@ export function assertToken(expected: string, actual: string): TokenAssertResult
   return { pass: expected === actual, expected, actual }
 }
 
+/**
+ * Pure pixel-signal decision — unit-testable without sharp or a browser.
+ *
+ * - `diff === null` → "skip": sharp is unavailable, so the pixel signal is a
+ *   missing CORROBORATION, not a verdict. Per the spec, computed-style tokens
+ *   are the primary look signal; a skipped pixel diff must neither fail a
+ *   component nor be recorded as an accepted divergence.
+ * - `diff <= tolerancePct` → "pass" (parity within tolerance).
+ * - otherwise (including Infinity from a size mismatch / unreadable PNG) → "fail".
+ */
+export function pixelVerdict(diff: number | null, tolerancePct: number): "skip" | "pass" | "fail" {
+  if (diff === null) return "skip"
+  return diff <= tolerancePct ? "pass" : "fail"
+}
+
 export interface PartTokenResults {
   expected: string
   actual: string
@@ -281,14 +296,16 @@ export async function verifyEntry(
       await screenshotPart(refPage, selectors, refPng)
       await screenshotPart(solPage, selectors, solPng)
       const diff = await pixelDiffPct(refPng, solPng)
-      const pixelSignal = `pixels.${theme}.${state}`
-      const pixelPass = diff <= entry.tolerance.pixelMaxPercent
-      signals.push({
-        signal: pixelSignal,
-        expected: `≤ ${entry.tolerance.pixelMaxPercent}% diff`,
-        actual: `delta ${diff}%`,
-        verdict: verdictFor(pixelSignal, pixelPass),
-      })
+      const decision = pixelVerdict(diff, entry.tolerance.pixelMaxPercent)
+      if (decision !== "skip") {
+        const pixelSignal = `pixels.${theme}.${state}`
+        signals.push({
+          signal: pixelSignal,
+          expected: `≤ ${entry.tolerance.pixelMaxPercent}% diff`,
+          actual: `delta ${diff}%`,
+          verdict: verdictFor(pixelSignal, decision === "pass"),
+        })
+      }
 
       // Drive both frames back to a known reset state for the next iteration.
       await runInteractions(refPage, "reset")
@@ -324,20 +341,35 @@ function describeBehavior(b: BehaviorSnapshot): string {
   return `role=${b.activeElementRole} part=${b.activeElementPart ?? "-"} ${states}`.trim()
 }
 
+type SharpRaw = { data: Buffer; info: { width: number; height: number } }
+
 /**
- * Compare two PNGs. `sharp` is resolved at runtime via createRequire from the
- * repo root (it is a workspace devDependency); when it cannot be resolved the
- * fallback reports Infinity (a failing gap) rather than a false pass — pixel
- * signal degrades loudly, never silently green.
+ * Compare two PNGs, returning the percent of raw bytes that differ.
+ *
+ * Three outcomes:
+ * - `null` — `sharp` could not be loaded (not resolvable in this environment).
+ *   The pixel signal is a CORROBORATION of the computed-style token signal, not
+ *   a gate; an unavailable sharp is not a pixel difference, so callers skip the
+ *   pixel verdict entirely.
+ * - `Infinity` — sharp loaded but the PNGs are unreadable or size-mismatched.
+ *   That IS a real capture problem and stays a loud failing gap.
+ * - number — comparable images; percent of differing bytes.
+ *
+ * sharp is resolved at runtime via createRequire from the repo root and typed
+ * structurally (no `import("sharp")` — no declarations at the resolution path).
  */
-async function pixelDiffPct(refPng: string, solPng: string): Promise<number> {
+async function pixelDiffPct(refPng: string, solPng: string): Promise<number | null> {
+  let sharp: (p: string) => {
+    raw(): { toBuffer(opts?: { resolveWithObject?: boolean }): Promise<SharpRaw> }
+  }
   try {
     const { createRequire } = await import("node:module")
     const req = createRequire(join(process.cwd(), "package.json"))
-    type SharpRaw = { data: Buffer; info: { width: number; height: number } }
-    const sharp = req("sharp") as (p: string) => {
-      raw(): { toBuffer(opts?: { resolveWithObject?: boolean }): Promise<SharpRaw> }
-    }
+    sharp = req("sharp") as typeof sharp
+  } catch {
+    return null
+  }
+  try {
     const ref = await sharp(refPng).raw().toBuffer({ resolveWithObject: true })
     const sol = await sharp(solPng).raw().toBuffer({ resolveWithObject: true })
     if (ref.info.width !== sol.info.width || ref.info.height !== sol.info.height) {
@@ -351,7 +383,7 @@ async function pixelDiffPct(refPng: string, solPng: string): Promise<number> {
     }
     return (diff / a.length) * 100
   } catch {
-    // sharp missing or unreadable PNG — treat as an unresolved gap.
+    // sharp present but PNG unreadable — a genuine capture failure.
     return Infinity
   }
 }

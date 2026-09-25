@@ -1,5 +1,20 @@
 import { describe, it, expect } from "vitest"
-import { assertToken } from "./verify"
+import { assertToken, pixelVerdict } from "./verify"
+
+describe("pixelVerdict", () => {
+  it("skips when sharp is unavailable (diff === null)", () => {
+    expect(pixelVerdict(null, 5)).toBe("skip")
+  })
+  it("passes when diff is within tolerance", () => {
+    expect(pixelVerdict(0, 5)).toBe("pass")
+    expect(pixelVerdict(5, 5)).toBe("pass")
+    expect(pixelVerdict(1.2, 5)).toBe("pass")
+  })
+  it("fails when diff exceeds tolerance (including Infinity)", () => {
+    expect(pixelVerdict(5.01, 5)).toBe("fail")
+    expect(pixelVerdict(Infinity, 5)).toBe("fail")
+  })
+})
 
 describe("assertToken", () => {
   it("passes an exact match", () => {
