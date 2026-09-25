@@ -1,5 +1,8 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs"
 import { join } from "node:path"
+// Prettier API so generated specs are byte-identical to what the repo's
+// format-on-commit hook produces — re-running parity:generate keeps the tree clean.
+import prettier from "prettier"
 import type { MappingEntry } from "./lib/types"
 
 // Artifacts land in the worktree-root artifacts/shadcn-parity/ (gitignored).
@@ -38,7 +41,7 @@ export function generateSpecForEntry(entry: MappingEntry): string {
   ].join("\n")
 }
 
-export function generateAll(): string[] {
+export async function generateAll(): Promise<string[]> {
   const mapping = JSON.parse(
     readFileSync(join(import.meta.dirname, "mapping.json"), "utf8"),
   ) as MappingEntry[]
@@ -49,14 +52,15 @@ export function generateAll(): string[] {
     const code = generateSpecForEntry(entry)
     if (!code) continue
     const file = join(outDir, `${entry.id}.spec.ts`)
-    writeFileSync(file, code)
+    const options = await prettier.resolveConfig(file, { editorconfig: true })
+    writeFileSync(file, await prettier.format(code, { parser: "typescript", ...options }))
     written.push(file)
   }
   return written
 }
 
 if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
-  const written = generateAll()
+  const written = await generateAll()
   console.log(`generated ${written.length} specs:`)
   for (const f of written) console.log("  " + f)
 }
