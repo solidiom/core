@@ -30,7 +30,7 @@ export function RadioGroupExample(props: RadioGroupExampleProps) {
 
   return (
     <div ref={(el) => el.setAttribute("data-hydrated", "true")} class="radio-group-example">
-      <RadioGroup.Root aria-label={copy().label}>
+      <RadioGroup.Root aria-label={copy().label} defaultValue="red">
         {copy().items.map((item) => (
           <RadioGroup.Item value={item.value}>
             <RadioGroup.Indicator />

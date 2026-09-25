@@ -4,6 +4,9 @@ packages:
   - "registry/*"
   - "tests/*"
   - "tools/*"
+  # shadcn-reference is an isolated npm-managed fixture (own package-lock.json),
+  # intentionally NOT part of the pnpm workspace.
+  - "!tools/shadcn-reference"
   - "templates/*"
 
 catalog:

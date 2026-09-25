@@ -23,6 +23,7 @@
 
 [data-scope="progress"][data-part="indicator"] {
   height: 100%;
+  border-radius: 0;
   background-color: var(--ui-primary, hsl(222 47% 11%));
   transition: width 0.15s;
 }

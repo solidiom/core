@@ -25,7 +25,7 @@
   --ui-primary: #5750d6;
   --ui-primary-fg: #ffffff;
   --ui-primary-hover: #4c46c5;
-  --ui-radius: 12px;
+  --ui-radius: 6px;
   --ui-radius-full: 999px;
   --ui-radius-lg: 16px;
   --ui-radius-sm: 8px;
@@ -60,7 +60,7 @@
   --ui-primary: #8b83f8;
   --ui-primary-fg: #0f172a;
   --ui-primary-hover: #a19bfa;
-  --ui-radius: 12px;
+  --ui-radius: 6px;
   --ui-radius-full: 999px;
   --ui-radius-lg: 16px;
   --ui-radius-sm: 8px;

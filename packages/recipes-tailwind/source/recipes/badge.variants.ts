@@ -7,7 +7,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { twMerge } from "tailwind-merge"
 
 const badgeVariantsCva = cva(
-  "inline-flex items-center py-0.5 px-2.5 border-solid border-transparent rounded-radius text-xs leading-4 font-semibold transition-colors",
+  "inline-flex items-center py-0.5 px-3 border-solid border-transparent rounded-radius text-xs leading-4 font-semibold transition-colors",
   {
     variants: {
       variant: {

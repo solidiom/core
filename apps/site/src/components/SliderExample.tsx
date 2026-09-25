@@ -23,8 +23,8 @@ export function SliderExample(props: SliderExampleProps) {
         <Slider.Root defaultValue={[50]} min={0} max={100} step={1} aria-label={copy().label}>
           <Slider.Track>
             <Slider.Range />
-            <Slider.Thumb aria-label={copy().label} />
           </Slider.Track>
+          <Slider.Thumb aria-label={copy().label} />
         </Slider.Root>
       </div>
     </div>

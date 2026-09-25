@@ -7,7 +7,7 @@
  * keyboard navigation (Arrow keys move focus and select).
  */
 
-import { type Accessor, createContext, useContext } from "solid-js"
+import { type Accessor, createContext, createEffect, useContext } from "solid-js"
 import { type JSX } from "@solidjs/web"
 import {
   createControllableValue,
@@ -171,9 +171,10 @@ export function Item(props: RadioGroupItemProps) {
   const isDisabled = () => props.disabled || ctx.disabled
   const isSelected = () => ctx.value() === props.value
 
-  const handleClick = () => {
+  const handleClick = (e: Event) => {
     if (isDisabled()) return
     ctx.setValue(props.value)
+    ;(e.currentTarget as HTMLElement).focus()
   }
 
   // Roving tabindex: only the selected item (or first if none selected) is tabbable
@@ -183,6 +184,16 @@ export function Item(props: RadioGroupItemProps) {
     if (!ctx.value()) return 0 // first item gets focus when nothing selected
     return -1
   }
+
+  // Re-sync the child indicator(s) with this item's checked state whenever the
+  // selection changes (the indicator mirrors the parent item's `aria-checked`).
+  let itemEl: HTMLButtonElement | undefined
+  createEffect(
+    () => isChecked(),
+    () => {
+      if (itemEl) syncItemIndicators(itemEl)
+    },
+  )
 
   return (
     <button
@@ -196,6 +207,7 @@ export function Item(props: RadioGroupItemProps) {
       data-value={props.value}
       class={props.class}
       style={props.style}
+      ref={(el) => (itemEl = el)}
       {...applySemanticAttrs({
         scope: "radio-group",
         part: "item",
@@ -207,6 +219,17 @@ export function Item(props: RadioGroupItemProps) {
       {props.children}
     </button>
   )
+}
+
+/** Re-write the `aria-checked`/`data-state` of every indicator inside an item
+ *  to mirror the item's own checked state (the indicator has no value of its
+ *  own; it is purely visual and must expose the same canonical flag). */
+function syncItemIndicators(itemEl: HTMLElement) {
+  const checked = itemEl.getAttribute("aria-checked") === "true"
+  for (const ind of itemEl.querySelectorAll<HTMLElement>("[data-part='indicator']")) {
+    ind.setAttribute("aria-checked", checked ? "true" : "false")
+    ind.setAttribute("data-state", checked ? "checked" : "unchecked")
+  }
 }
 
 // ─── Indicator ───────────────────────────────────────────────────────────────
@@ -225,13 +248,23 @@ export interface RadioGroupIndicatorProps {
  * the nearest Item via DOM (checks parent's aria-checked).
  */
 export function Indicator(props: RadioGroupIndicatorProps) {
+  // The indicator mirrors the checked state of its parent Item. It reads the
+  // parent's `aria-checked` from the DOM after mount so it exposes the same
+  // canonical `checked` flag as the item (the parity contract expects this).
   return (
     <span
       class={props.class}
       style={props.style}
+      ref={(n) => n && syncIndicatorFromParent(n)}
       {...applySemanticAttrs({ scope: "radio-group", part: "indicator" })}
     >
       {props.children}
     </span>
   )
+}
+
+function syncIndicatorFromParent(el: HTMLElement) {
+  const checked = el.closest("[data-part='item']")?.getAttribute("aria-checked") === "true"
+  el.setAttribute("aria-checked", checked ? "true" : "false")
+  el.setAttribute("data-state", checked ? "checked" : "unchecked")
 }
