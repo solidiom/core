@@ -21,7 +21,7 @@
   }
 
   [data-scope="switch"][data-part="thumb"] {
-    @apply block w-5 h-5 rounded-radius-full bg-overlay shadow-sm transition-transform;
+    @apply block w-5 h-5 rounded-radius-full bg-background shadow-sm transition-transform;
   }
 
   [data-scope="switch"][data-part="thumb"][data-state="on"] {
