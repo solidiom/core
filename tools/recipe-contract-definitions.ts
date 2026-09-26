@@ -238,7 +238,7 @@ export const dialogRecipe: RecipeDefinition = {
         padding: "1.5rem",
         "background-color": { token: "surface-raised" },
         color: { token: "foreground" },
-        "border-radius": { token: "radius-lg" },
+        "border-radius": { token: "radius" },
         "box-shadow": { token: "shadow-lg" },
         transition: "opacity 0.15s, transform 0.15s",
       },
