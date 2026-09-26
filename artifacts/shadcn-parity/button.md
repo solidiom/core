@@ -1,5 +1,5 @@
 # button — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ 570d3a83
+Reference: shadcn@3.8.5, solidiom @ ac63cebb
 Status: ❌ 4 failures, 8 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |

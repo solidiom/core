@@ -12,6 +12,7 @@ export type Action =
   | { kind: "fill"; selector: string; value: string }
   | { kind: "hover"; selector: string }
   | { kind: "wait"; selector?: string; ms?: number }
+  | { kind: "right-click"; selector: string }
 
 /**
  * Deterministic interaction scripts, keyed by name. The SAME name drives both
@@ -46,6 +47,14 @@ export const scripts: Record<string, Action[]> = {
   ],
   // Toggle a checkbox/radio into the checked state.
   check: [{ kind: "click", selector: T }],
+  // Batch-2 (overlays). `right-click` opens a context menu (Radix ContextMenu
+  // and Solidiom ContextMenu both bind the native contextmenu event, so a
+  // single action is frame-agnostic).
+  "right-click": [{ kind: "right-click", selector: T }],
+  // `hover`/`close-esc`/`close-overlay-click` scripts above double as the
+  // tooltip + hover-card state scripts (hover opens them; Escape closes the
+  // ref Radix side — the sol side keeps showing, which the behavior signal
+  // records).
   // Return to a known closed/idle state between iterations. Pressing Escape
   // dismisses any open Radix portal (select content, popover) on BOTH frames —
   // without it, an open content overlay intercepts pointer events and the next
@@ -72,6 +81,7 @@ export async function runInteractions(page: Page, name: string, target?: string)
     const sel: string =
       a.selector === T ? (target ?? genericFor(a.kind, name)) : (a.selector as string)
     if (a.kind === "click") await page.click(sel)
+    else if (a.kind === "right-click") await page.click(sel, { button: "right" })
     else if (a.kind === "hover") await page.hover(sel)
     else if (a.kind === "fill") await page.fill(sel, a.value)
     else if (a.kind === "press")

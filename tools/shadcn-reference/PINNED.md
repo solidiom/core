@@ -21,6 +21,37 @@ Components added (id: version-if-shown):
 - input-group: registry new-york (no version field); ran with `--overwrite` because its button.tsx template differed from Task 1's — only formatting changed, no class/API change
 - combobox: **not available in pinned version** — shadcn 3.8.5 registry returns "The item at https://ui.shadcn.com/r/styles/new-york/combobox.json was not found". No page created, no hand-approximation (per brief).
 
+Batch 2 (overlays) — all 10 resolved cleanly in the 3.8.5 registry
+(`npx -y shadcn@3.8.5 add <name> -y`; `alert-dialog` added separately after the
+bulk add stalled on the button.tsx overwrite prompt — answered `n`, then ran
+`add alert-dialog`):
+
+- dialog: registry new-york; dep @radix-ui/react-dialog ^1.1.23
+- alert-dialog: registry new-york; dep @radix-ui/react-alert-dialog ^1.1.23
+- sheet: registry new-york; dep @radix-ui/react-dialog (reused from dialog)
+- drawer: registry new-york; dep vaul ^1.1.2 (vaul-based, NOT radix dialog — vaul
+  is the shadcn drawer implementation; behaves as a bottom sheet by default)
+- popover: registry new-york; dep @radix-ui/react-popover ^1.1.23
+- tooltip: registry new-york; dep @radix-ui/react-tooltip ^1.2.16
+- hover-card: registry new-york; dep @radix-ui/react-hover-card ^1.1.23
+- dropdown-menu: registry new-york; dep @radix-ui/react-dropdown-menu ^2.1.24
+- context-menu: registry new-york; dep @radix-ui/react-context-menu ^2.3.7
+- menubar: registry new-york; dep @radix-ui/react-menubar ^1.1.24 (page created;
+  mapping entry is `gap` — no Solidiom live island, see mapping.json)
+
+No 3.8.5 registry 404s in Batch 2: all 10 names returned HTTP 200 from
+https://ui.shadcn.com/r/styles/new-york/<name>.json and `shadcn add` wrote
+`src/components/ui/<name>.tsx` for each.
+
+Reference pages (src/pages/<id>.tsx, registered in src/main.tsx `pages`):
+each overlay uses the real shadcn API with a minimal interactive setup —
+dialog/alert-dialog/sheet/drawer/popover/tooltip/hover-card/dropdown-menu/
+context-menu/menubar, all at 1280×720 viewport. tooltip page uses
+`<TooltipProvider delayDuration={0}>` so the Radix tooltip opens immediately on
+hover (the default 700ms hover-delay would otherwise race the parity engine's
+per-state settle window and capture the tooltip still closed, producing a
+false behavior gap).
+
 Note: the shadcn CLI 3.8.5 registry writes **oklch** token values into
 `src/index.css` but generates a v3 `tailwind.config.js` that wraps them as
 `hsl(var(--token))` — `hsl()` of an `oklch(...)` value is an invalid CSS color
@@ -34,22 +65,31 @@ makes the v3 token system self-consistent. The shadcn-generated
 
 Lockfile-pinned versions (package-lock.json, npm 11.19.0, Node v26.7.0):
 
-| package                  | version |
-| ------------------------ | ------- |
-| react                    | 19.3.0  |
-| react-dom                | 19.3.0  |
-| react-router-dom         | 7.18.4  |
-| class-variance-authority | 0.7.1   |
-| clsx                     | 2.1.1   |
-| tailwind-merge           | 2.6.1   |
-| lucide-react             | 0.469.0 |
-| @radix-ui/react-slot     | 1.3.3   |
-| tailwindcss-animate      | 1.0.7   |
-| tailwindcss              | 3.4.19  |
-| vite                     | 6.4.3   |
-| typescript               | 5.6.3   |
-| @vitejs/plugin-react     | 4.7.0   |
-| postcss                  | 8.5.28  |
-| autoprefixer             | 10.6.1  |
-| @types/react             | 19.3.0  |
-| @types/react-dom         | 19.3.0  |
+| package                       | version |
+| ----------------------------- | ------- |
+| react                         | 19.3.0  |
+| react-dom                     | 19.3.0  |
+| react-router-dom              | 7.18.4  |
+| class-variance-authority      | 0.7.1   |
+| clsx                          | 2.1.1   |
+| tailwind-merge                | 2.6.1   |
+| lucide-react                  | 0.469.0 |
+| @radix-ui/react-slot          | 1.3.3   |
+| vaul                          | 1.1.2   |
+| @radix-ui/react-dialog        | 1.1.23  |
+| @radix-ui/react-alert-dialog  | 1.1.23  |
+| @radix-ui/react-popover       | 1.1.23  |
+| @radix-ui/react-tooltip       | 1.2.16  |
+| @radix-ui/react-hover-card    | 1.1.23  |
+| @radix-ui/react-dropdown-menu | 2.1.24  |
+| @radix-ui/react-context-menu  | 2.3.7   |
+| @radix-ui/react-menubar       | 1.1.24  |
+| tailwindcss-animate           | 1.0.7   |
+| tailwindcss                   | 3.4.19  |
+| vite                          | 6.4.3   |
+| typescript                    | 5.6.3   |
+| @vitejs/plugin-react          | 4.7.0   |
+| postcss                       | 8.5.28  |
+| autoprefixer                  | 10.6.1  |
+| @types/react                  | 19.3.0  |
+| @types/react-dom              | 19.3.0  |

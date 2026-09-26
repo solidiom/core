@@ -14,6 +14,16 @@ import Textarea from "./pages/textarea"
 import InputOtp from "./pages/input-otp"
 import Field from "./pages/field"
 import InputGroup from "./pages/input-group"
+import Dialog from "./pages/dialog"
+import AlertDialog from "./pages/alert-dialog"
+import Sheet from "./pages/sheet"
+import Drawer from "./pages/drawer"
+import Popover from "./pages/popover"
+import Tooltip from "./pages/tooltip"
+import HoverCard from "./pages/hover-card"
+import DropdownMenu from "./pages/dropdown-menu"
+import ContextMenu from "./pages/context-menu"
+import Menubar from "./pages/menubar"
 
 const pages: Record<string, React.ComponentType> = {
   button: Button,
@@ -28,6 +38,16 @@ const pages: Record<string, React.ComponentType> = {
   "input-otp": InputOtp,
   field: Field,
   "input-group": InputGroup,
+  dialog: Dialog,
+  "alert-dialog": AlertDialog,
+  sheet: Sheet,
+  drawer: Drawer,
+  popover: Popover,
+  tooltip: Tooltip,
+  "hover-card": HoverCard,
+  "dropdown-menu": DropdownMenu,
+  "context-menu": ContextMenu,
+  menubar: Menubar,
 }
 
 function ComponentPage() {
