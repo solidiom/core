@@ -14,19 +14,43 @@ const ENTRY = {
   },
   status: "mapped",
   parts: ["Root"],
-  tokens: {
+  selectors: {
     Root: {
-      fontSize: ">=12px",
+      ref: "button:not([class*='ml-auto']):not([class*='px-2']):not([class*='text-xs'])",
+      sol: "[data-button-example] [data-scope='button'][data-part='root']",
     },
   },
-  interactions: [],
-  states: ["default"],
+  tokens: {
+    Root: {
+      "background-color": "rgb(37, 99, 235)",
+      color: "rgb(248, 250, 252)",
+      "border-radius": "6px",
+      padding: "8px 16px",
+      "font-size": "14px",
+      "font-weight": "500",
+      height: "36px",
+      "border-width": "0px",
+    },
+  },
+  interactions: ["hover"],
+  states: ["default", "hover"],
   themes: ["light", "dark"],
   tolerance: {
     pixelMaxDiff: 2,
     pixelMaxPercent: 1,
   },
-  acceptedDivergences: [],
+  acceptedDivergences: [
+    {
+      signal: "tokens.Root.background-color",
+      reason:
+        "shadcn 'default' variant is a filled primary button (light: rgb(37, 99, 235)); Solidiom's island Root is its light/secondary style (rgb(248, 250, 252)). Deliberate: Solidiom's default button is filled-light, not brand-colored.",
+    },
+    {
+      signal: "tokens.Root.color",
+      reason:
+        "Foreground tracks the fill: shadcn default is white-on-primary (rgb(248, 250, 252)); Solidiom is near-black on light (rgb(17, 24, 39)). Deliberate, follows the accepted background divergence.",
+    },
+  ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"

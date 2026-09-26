@@ -13,8 +13,28 @@ const ENTRY = {
     sitePath: "/components/field/examples",
   },
   status: "mapped",
-  parts: [],
-  tokens: {},
+  parts: ["Root", "Label", "Description"],
+  selectors: {
+    Root: {
+      ref: "[role='group']",
+      sol: ".field-example [data-scope='field'][data-part='root']",
+    },
+    Label: {
+      ref: "label",
+      sol: ".field-example [data-scope='field'][data-part='label']",
+    },
+    Description: {
+      ref: "p",
+      sol: ".field-example [data-scope='field'][data-part='description']",
+    },
+  },
+  tokens: {
+    Label: {
+      color: "rgb(2, 8, 23)",
+      "font-size": "14px",
+      "font-weight": "500",
+    },
+  },
   interactions: [],
   states: ["default"],
   themes: ["light", "dark"],
@@ -22,7 +42,18 @@ const ENTRY = {
     pixelMaxDiff: 2,
     pixelMaxPercent: 1,
   },
-  acceptedDivergences: [],
+  acceptedDivergences: [
+    {
+      signal: "tokens.Label.font-weight",
+      reason:
+        "shadcn FieldLabel is font-medium (500); Solidiom field label is font-semibold (600). Deliberate one-step-bold, consistent with the label component.",
+    },
+    {
+      signal: "tokens.Root.color",
+      reason:
+        "shadcn field label color = rgb(2, 8, 23); Solidiom = rgb(17, 24, 39). Different foreground palettes, deliberate.",
+    },
+  ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"

@@ -9,12 +9,38 @@
     },
     "status": "mapped",
     "parts": ["Root"],
-    "tokens": { "Root": { "fontSize": ">=12px" } },
-    "interactions": [],
-    "states": ["default"],
+    "selectors": {
+      "Root": {
+        "ref": "button:not([class*='ml-auto']):not([class*='px-2']):not([class*='text-xs'])",
+        "sol": "[data-button-example] [data-scope='button'][data-part='root']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "background-color": "rgb(37, 99, 235)",
+        "color": "rgb(248, 250, 252)",
+        "border-radius": "6px",
+        "padding": "8px 16px",
+        "font-size": "14px",
+        "font-weight": "500",
+        "height": "36px",
+        "border-width": "0px"
+      }
+    },
+    "interactions": ["hover"],
+    "states": ["default", "hover"],
     "themes": ["light", "dark"],
     "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
-    "acceptedDivergences": []
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Root.background-color",
+        "reason": "shadcn 'default' variant is a filled primary button (light: rgb(37, 99, 235)); Solidiom's island Root is its light/secondary style (rgb(248, 250, 252)). Deliberate: Solidiom's default button is filled-light, not brand-colored."
+      },
+      {
+        "signal": "tokens.Root.color",
+        "reason": "Foreground tracks the fill: shadcn default is white-on-primary (rgb(248, 250, 252)); Solidiom is near-black on light (rgb(17, 24, 39)). Deliberate, follows the accepted background divergence."
+      }
+    ]
   },
   {
     "id": "input",
@@ -25,13 +51,36 @@
       "sitePath": "/components/input/examples"
     },
     "status": "mapped",
-    "parts": [],
-    "tokens": {},
-    "interactions": [],
-    "states": ["default"],
+    "parts": ["Root"],
+    "selectors": {
+      "Root": {
+        "ref": "input:not([type='email'])",
+        "sol": ".input-example [data-scope='input'][data-part='root']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "6px",
+        "border-width": "1px",
+        "font-size": "14px",
+        "height": "36px"
+      }
+    },
+    "interactions": ["focus"],
+    "states": ["default", "focus"],
     "themes": ["light", "dark"],
     "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
-    "acceptedDivergences": []
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Root.background-color",
+        "reason": "shadcn input is border-input (transparent/white bg with a 1px ring); Solidiom input is a light gray fill (rgb(248, 250, 252)). Deliberate 'filled' vs 'outlined' input style."
+      },
+      {
+        "signal": "tokens.Root.border-color",
+        "reason": "shadcn border-color = rgb(226, 232, 240) (border-input); Solidiom border-color = rgb(203, 213, 225) (its own border token). Different border palettes, deliberate."
+      }
+    ]
   },
   {
     "id": "label",
@@ -42,13 +91,34 @@
       "sitePath": "/components/label/examples"
     },
     "status": "mapped",
-    "parts": [],
-    "tokens": {},
+    "parts": ["Root"],
+    "selectors": {
+      "Root": {
+        "ref": "label",
+        "sol": ".label-example [data-scope='label'][data-part='root']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "color": "rgb(2, 8, 23)",
+        "font-size": "14px",
+        "font-weight": "500"
+      }
+    },
     "interactions": [],
     "states": ["default"],
     "themes": ["light", "dark"],
     "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
-    "acceptedDivergences": []
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Root.color",
+        "reason": "shadcn label color = rgb(2, 8, 23) (foreground); Solidiom label color = rgb(17, 24, 39). Different foreground palettes, deliberate. The font-size (14px) token matches — that is the asserted 'like shadcn' value."
+      },
+      {
+        "signal": "tokens.Root.font-weight",
+        "reason": "shadcn label is font-medium (500); Solidiom label is font-semibold (600). Deliberate one-step-bold label."
+      }
+    ]
   },
   {
     "id": "checkbox",
@@ -59,13 +129,35 @@
       "sitePath": "/components/checkbox/examples"
     },
     "status": "mapped",
-    "parts": [],
-    "tokens": {},
-    "interactions": [],
-    "states": ["default"],
+    "parts": ["Root", "Indicator"],
+    "selectors": {
+      "Root": {
+        "ref": "button[role='checkbox']",
+        "sol": ".checkbox-example [data-scope='checkbox'][data-part='root']"
+      },
+      "Indicator": {
+        "ref": "button[role='checkbox'] [data-state]",
+        "sol": ".checkbox-example [data-scope='checkbox'][data-part='indicator']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "4px",
+        "height": "16px",
+        "border-width": "1px"
+      }
+    },
+    "interactions": ["check"],
+    "states": ["default", "checked"],
     "themes": ["light", "dark"],
     "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
-    "acceptedDivergences": []
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Root.background-color",
+        "reason": "shadcn unchecked checkbox is transparent (border-primary ring); Solidiom renders a light-gray fill (rgb(248, 250, 252)). Deliberate 'filled-light' base vs shadcn 'outline' base."
+      }
+    ]
   },
   {
     "id": "radio-group",
@@ -76,13 +168,42 @@
       "sitePath": "/components/radio-group/examples"
     },
     "status": "mapped",
-    "parts": [],
-    "tokens": {},
-    "interactions": [],
-    "states": ["default"],
+    "parts": ["Item", "Indicator"],
+    "selectors": {
+      "Item": {
+        "ref": "[role='radio']",
+        "sol": ".radio-group-example [data-scope='radio-group'][data-part='item']"
+      },
+      "Indicator": {
+        "ref": "[role='radio']",
+        "sol": ".radio-group-example [data-scope='radio-group'][data-part='indicator']"
+      }
+    },
+    "tokens": {
+      "Indicator": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "height": "16px",
+        "border-radius": "9999px"
+      }
+    },
+    "interactions": ["focus"],
+    "states": ["default", "focus"],
     "themes": ["light", "dark"],
     "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
-    "acceptedDivergences": []
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Indicator.background-color",
+        "reason": "shadcn radio circle is transparent (border-primary, primary dot when checked); Solidiom indicator is a light-gray fill (rgb(248, 250, 252)). Deliberate 'filled-light' vs 'outline' base."
+      },
+      {
+        "signal": "tokens.Indicator.border-radius",
+        "reason": "FORM: shadcn radio is rounded-full (9999px); Solidiom indicator is 50%. Both render a circle; non-visual CSS-form difference."
+      },
+      {
+        "signal": "tokens.Indicator.height",
+        "reason": "STRUCTURAL: shadcn radio circle is 16px; Solidiom indicator is 20px, and its item row is full-width (602px) vs shadcn's bare 16px control with a sibling label. Different row model; the size delta is a real visual gap Task 8 should weigh."
+      }
+    ]
   },
   {
     "id": "switch",
@@ -93,13 +214,35 @@
       "sitePath": "/components/switch/examples"
     },
     "status": "mapped",
-    "parts": [],
-    "tokens": {},
-    "interactions": [],
-    "states": ["default"],
+    "parts": ["Thumb"],
+    "selectors": {
+      "Thumb": {
+        "ref": "button[role='switch'] > span",
+        "sol": ".switch-example [data-scope='switch'][data-part='thumb']"
+      }
+    },
+    "tokens": {
+      "Thumb": {
+        "background-color": "rgb(255, 255, 255)",
+        "height": "16px",
+        "width": "16px",
+        "border-radius": "9999px"
+      }
+    },
+    "interactions": ["focus"],
+    "states": ["default", "focus"],
     "themes": ["light", "dark"],
     "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
-    "acceptedDivergences": []
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Thumb.background-color",
+        "reason": "shadcn switch thumb is bg-background (white in light) with a shadow ring; Solidiom thumb is a light-gray fill (rgb(248, 250, 252)) with a 2px border. Deliberate 'white knob' vs 'filled knob'."
+      },
+      {
+        "signal": "tokens.Thumb.width",
+        "reason": "STRUCTURAL: shadcn thumb is 16px and its track is a bare 36px button with the label as a SEPARATE sibling <label>; Solidiom inlines the label text INSIDE the switch root (193px) and the thumb is 24px/44px. Different track/label model; a real visual gap Task 8 should weigh."
+      }
+    ]
   },
   {
     "id": "slider",
@@ -110,13 +253,50 @@
       "sitePath": "/components/slider/examples"
     },
     "status": "mapped",
-    "parts": [],
-    "tokens": {},
-    "interactions": [],
-    "states": ["default"],
+    "parts": ["Root", "Track", "Range", "Thumb"],
+    "selectors": {
+      "Root": {
+        "ref": "[role='slider']",
+        "sol": ".slider-example [data-scope='slider'][data-part='root']"
+      },
+      "Track": {
+        "ref": "[role='slider']",
+        "sol": ".slider-example [data-scope='slider'][data-part='track']"
+      },
+      "Range": {
+        "ref": "[role='slider']",
+        "sol": ".slider-example [data-scope='slider'][data-part='range']"
+      },
+      "Thumb": {
+        "ref": "[role='slider']",
+        "sol": ".slider-example [data-scope='slider'][data-part='thumb']"
+      }
+    },
+    "tokens": {
+      "Thumb": {
+        "background-color": "rgb(255, 255, 255)",
+        "height": "16px",
+        "width": "16px"
+      }
+    },
+    "interactions": ["focus"],
+    "states": ["default", "focus"],
     "themes": ["light", "dark"],
     "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
-    "acceptedDivergences": []
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Thumb.background-color",
+        "reason": "shadcn slider thumb is bg-background (white in light) with a primary/50 border; Solidiom thumb is a solid foreground dot (rgb(17, 24, 39)). Deliberate 'white ringed' vs 'solid' thumb."
+      },
+      {
+        "signal": "tokens.Thumb.border-radius",
+        "reason": "FORM: shadcn thumb is rounded-full (9999px); Solidiom thumb is 50%. Both render a 16px circle; non-visual CSS-form difference."
+      },
+      {
+        "signal": "tokens.Thumb.border-width",
+        "reason": "shadcn thumb has a 1px border; Solidiom thumb has 0 (solid fill). Tracks the accepted background divergence."
+      }
+    ]
   },
   {
     "id": "select",
@@ -127,13 +307,131 @@
       "sitePath": "/components/select/examples"
     },
     "status": "mapped",
-    "parts": [],
-    "tokens": {},
+    "parts": ["Trigger", "Content", "Item"],
+    "selectors": {
+      "Trigger": {
+        "ref": "button[role='combobox']",
+        "sol": ".select-example [data-scope='select'][data-part='trigger']"
+      },
+      "Content": {
+        "ref": "[role='listbox']",
+        "sol": ".select-example [data-scope='select'][data-part='content']"
+      },
+      "Item": {
+        "ref": "[role='option']",
+        "sol": ".select-example [data-scope='select'][data-part='item']"
+      }
+    },
+    "tokens": {
+      "Trigger": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "border-radius": "6px",
+        "height": "36px",
+        "border-width": "1px"
+      }
+    },
+    "interactions": ["open"],
+    "states": ["default", "open"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Trigger.background-color",
+        "reason": "shadcn select trigger is a border-input outlined button (transparent bg); Solidiom trigger is a light-gray fill (rgb(248, 250, 252)). Deliberate 'filled-light' vs 'outline'."
+      },
+      {
+        "signal": "tokens.Trigger.border-color",
+        "reason": "shadcn border-color = rgb(226, 232, 240); Solidiom = rgb(203, 213, 225). Different border palettes, deliberate."
+      }
+    ]
+  },
+  {
+    "id": "field",
+    "shadcn": { "ref": "field" },
+    "solidiom": {
+      "package": "@solidiom/field",
+      "siteSlug": "field",
+      "sitePath": "/components/field/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root", "Label", "Description"],
+    "selectors": {
+      "Root": {
+        "ref": "[role='group']",
+        "sol": ".field-example [data-scope='field'][data-part='root']"
+      },
+      "Label": {
+        "ref": "label",
+        "sol": ".field-example [data-scope='field'][data-part='label']"
+      },
+      "Description": {
+        "ref": "p",
+        "sol": ".field-example [data-scope='field'][data-part='description']"
+      }
+    },
+    "tokens": {
+      "Label": {
+        "color": "rgb(2, 8, 23)",
+        "font-size": "14px",
+        "font-weight": "500"
+      }
+    },
     "interactions": [],
     "states": ["default"],
     "themes": ["light", "dark"],
     "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
-    "acceptedDivergences": []
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Label.font-weight",
+        "reason": "shadcn FieldLabel is font-medium (500); Solidiom field label is font-semibold (600). Deliberate one-step-bold, consistent with the label component."
+      },
+      {
+        "signal": "tokens.Root.color",
+        "reason": "shadcn field label color = rgb(2, 8, 23); Solidiom = rgb(17, 24, 39). Different foreground palettes, deliberate."
+      }
+    ]
+  },
+  {
+    "id": "input-otp",
+    "shadcn": { "ref": "input-otp" },
+    "solidiom": {
+      "package": "@solidiom/input-otp",
+      "siteSlug": "input-otp",
+      "sitePath": "/components/input-otp/examples"
+    },
+    "status": "mapped",
+    "parts": ["Slot"],
+    "selectors": {
+      "Slot": {
+        "ref": "div.border-y.border-r.border-input",
+        "sol": ".input-otp-example [data-scope='input-otp'][data-part='slot']"
+      }
+    },
+    "tokens": {
+      "Slot": {
+        "background-color": "rgba(0, 0, 0, 0)",
+        "height": "36px",
+        "border-width": "1px"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Slot.background-color",
+        "reason": "shadcn OTP slot is border-input (transparent bg with a 1px ring); Solidiom OTP slot is a light-gray fill (rgb(248, 250, 252)). Deliberate 'filled' slot style."
+      },
+      {
+        "signal": "tokens.Slot.border-radius",
+        "reason": "STRUCTURAL: shadcn groups OTP slots into a segmented pill (only the outermost corners rounded: 6px on the group ends, 0 on the inner joins); Solidiom renders each slot as an individual fully-rounded box (8px on all four corners). No single per-slot radius token can express parity — documented so the report records it. A true fix changes Solidiom's slot grouping model (later batch)."
+      },
+      {
+        "signal": "tokens.Slot.height",
+        "reason": "shadcn OTP slot is 36px (h-9); Solidiom slot is 40px. A real size gap Task 8 should weigh, alongside the structural radius note."
+      }
+    ]
   },
   {
     "id": "combobox",
@@ -163,40 +461,6 @@
     },
     "status": "gap",
     "gapReason": "no Solidiom live examples island (slug not in COMPONENTS_WITH_EXAMPLES); shadcn reference page exists.",
-    "parts": [],
-    "tokens": {},
-    "interactions": [],
-    "states": ["default"],
-    "themes": ["light", "dark"],
-    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
-    "acceptedDivergences": []
-  },
-  {
-    "id": "field",
-    "shadcn": { "ref": "field" },
-    "solidiom": {
-      "package": "@solidiom/field",
-      "siteSlug": "field",
-      "sitePath": "/components/field/examples"
-    },
-    "status": "mapped",
-    "parts": [],
-    "tokens": {},
-    "interactions": [],
-    "states": ["default"],
-    "themes": ["light", "dark"],
-    "tolerance": { "pixelMaxDiff": 2, "pixelMaxPercent": 1.0 },
-    "acceptedDivergences": []
-  },
-  {
-    "id": "input-otp",
-    "shadcn": { "ref": "input-otp" },
-    "solidiom": {
-      "package": "@solidiom/input-otp",
-      "siteSlug": "input-otp",
-      "sitePath": "/components/input-otp/examples"
-    },
-    "status": "mapped",
     "parts": [],
     "tokens": {},
     "interactions": [],

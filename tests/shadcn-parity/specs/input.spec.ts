@@ -13,16 +13,41 @@ const ENTRY = {
     sitePath: "/components/input/examples",
   },
   status: "mapped",
-  parts: [],
-  tokens: {},
-  interactions: [],
-  states: ["default"],
+  parts: ["Root"],
+  selectors: {
+    Root: {
+      ref: "input:not([type='email'])",
+      sol: ".input-example [data-scope='input'][data-part='root']",
+    },
+  },
+  tokens: {
+    Root: {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "border-radius": "6px",
+      "border-width": "1px",
+      "font-size": "14px",
+      height: "36px",
+    },
+  },
+  interactions: ["focus"],
+  states: ["default", "focus"],
   themes: ["light", "dark"],
   tolerance: {
     pixelMaxDiff: 2,
     pixelMaxPercent: 1,
   },
-  acceptedDivergences: [],
+  acceptedDivergences: [
+    {
+      signal: "tokens.Root.background-color",
+      reason:
+        "shadcn input is border-input (transparent/white bg with a 1px ring); Solidiom input is a light gray fill (rgb(248, 250, 252)). Deliberate 'filled' vs 'outlined' input style.",
+    },
+    {
+      signal: "tokens.Root.border-color",
+      reason:
+        "shadcn border-color = rgb(226, 232, 240) (border-input); Solidiom border-color = rgb(203, 213, 225) (its own border token). Different border palettes, deliberate.",
+    },
+  ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"

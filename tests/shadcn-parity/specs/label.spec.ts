@@ -13,8 +13,20 @@ const ENTRY = {
     sitePath: "/components/label/examples",
   },
   status: "mapped",
-  parts: [],
-  tokens: {},
+  parts: ["Root"],
+  selectors: {
+    Root: {
+      ref: "label",
+      sol: ".label-example [data-scope='label'][data-part='root']",
+    },
+  },
+  tokens: {
+    Root: {
+      color: "rgb(2, 8, 23)",
+      "font-size": "14px",
+      "font-weight": "500",
+    },
+  },
   interactions: [],
   states: ["default"],
   themes: ["light", "dark"],
@@ -22,7 +34,18 @@ const ENTRY = {
     pixelMaxDiff: 2,
     pixelMaxPercent: 1,
   },
-  acceptedDivergences: [],
+  acceptedDivergences: [
+    {
+      signal: "tokens.Root.color",
+      reason:
+        "shadcn label color = rgb(2, 8, 23) (foreground); Solidiom label color = rgb(17, 24, 39). Different foreground palettes, deliberate. The font-size (14px) token matches — that is the asserted 'like shadcn' value.",
+    },
+    {
+      signal: "tokens.Root.font-weight",
+      reason:
+        "shadcn label is font-medium (500); Solidiom label is font-semibold (600). Deliberate one-step-bold label.",
+    },
+  ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"

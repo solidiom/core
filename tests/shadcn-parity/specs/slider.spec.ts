@@ -13,16 +13,56 @@ const ENTRY = {
     sitePath: "/components/slider/examples",
   },
   status: "mapped",
-  parts: [],
-  tokens: {},
-  interactions: [],
-  states: ["default"],
+  parts: ["Root", "Track", "Range", "Thumb"],
+  selectors: {
+    Root: {
+      ref: "[role='slider']",
+      sol: ".slider-example [data-scope='slider'][data-part='root']",
+    },
+    Track: {
+      ref: "[role='slider']",
+      sol: ".slider-example [data-scope='slider'][data-part='track']",
+    },
+    Range: {
+      ref: "[role='slider']",
+      sol: ".slider-example [data-scope='slider'][data-part='range']",
+    },
+    Thumb: {
+      ref: "[role='slider']",
+      sol: ".slider-example [data-scope='slider'][data-part='thumb']",
+    },
+  },
+  tokens: {
+    Thumb: {
+      "background-color": "rgb(255, 255, 255)",
+      height: "16px",
+      width: "16px",
+    },
+  },
+  interactions: ["focus"],
+  states: ["default", "focus"],
   themes: ["light", "dark"],
   tolerance: {
     pixelMaxDiff: 2,
     pixelMaxPercent: 1,
   },
-  acceptedDivergences: [],
+  acceptedDivergences: [
+    {
+      signal: "tokens.Thumb.background-color",
+      reason:
+        "shadcn slider thumb is bg-background (white in light) with a primary/50 border; Solidiom thumb is a solid foreground dot (rgb(17, 24, 39)). Deliberate 'white ringed' vs 'solid' thumb.",
+    },
+    {
+      signal: "tokens.Thumb.border-radius",
+      reason:
+        "FORM: shadcn thumb is rounded-full (9999px); Solidiom thumb is 50%. Both render a 16px circle; non-visual CSS-form difference.",
+    },
+    {
+      signal: "tokens.Thumb.border-width",
+      reason:
+        "shadcn thumb has a 1px border; Solidiom thumb has 0 (solid fill). Tracks the accepted background divergence.",
+    },
+  ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"

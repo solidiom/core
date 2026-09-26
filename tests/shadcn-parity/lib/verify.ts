@@ -198,6 +198,25 @@ function partSelector(part: string): string {
   return `[data-part='${part}'], ${partToElement(part)}`
 }
 
+/**
+ * Resolve the selector for one part on one frame, honoring the Phase A
+ * `selectors` override in the mapping.
+ *
+ * - a string override is used verbatim on both frames;
+ * - an object override uses `frame === "ref" ? sel.ref : sel.sol`;
+ * - when no override exists for the part, fall back to the generic
+ *   `partSelector(part)` (which may degrade to `body` for unrecognized parts).
+ */
+function resolveSelector(entry: MappingEntry, part: string, frame: "ref" | "sol"): string {
+  const override = entry.selectors?.[part]
+  if (typeof override === "string") return override
+  if (override && typeof override === "object") {
+    const sel = frame === "ref" ? override.ref : override.sol
+    if (sel) return sel
+  }
+  return partSelector(part)
+}
+
 function partToElement(part: string): string {
   const p = part.toLowerCase()
   if (p.includes("content")) return `div, [role='dialog'], [role='presentation']`
@@ -232,7 +251,34 @@ export async function verifyEntry(
   await mkdir(assetDir, { recursive: true })
 
   const declaredParts = entry.parts.length > 0 ? entry.parts : Object.keys(entry.tokens)
-  const selectors = Object.fromEntries(declaredParts.map((p) => [p, partSelector(p)]))
+  // Two per-frame selector maps: shadcn and solidiom use different attribute
+  // schemes (no data-part vs data-scope/data-part), so a single shared map is
+  // only correct when the part's selector is frame-agnostic. resolveSelector
+  // honors entry.selectors and falls back to the generic partSelector.
+  const refSelectors = Object.fromEntries(
+    declaredParts.map((p) => [p, resolveSelector(entry, p, "ref")]),
+  )
+  const solSelectors = Object.fromEntries(
+    declaredParts.map((p) => [p, resolveSelector(entry, p, "sol")]),
+  )
+  // The interaction "target": the component's primary interactive element per
+  // frame. We use the first declared part's resolved selector — for every
+  // Batch-1 component that part is the thing you click/hover/focus (Root for
+  // button/checkbox, Trigger for select, Item for radio, Thumb for switch,
+  // Root for slider). Passing this to runInteractions scopes the state scripts
+  // to the component instead of letting them hit ambient site chrome (the nav
+  // "toggle dark" button, the search input, etc.).
+  const refTarget = declaredParts.length > 0 ? refSelectors[declaredParts[0]] : undefined
+  const solTarget = declaredParts.length > 0 ? solSelectors[declaredParts[0]] : undefined
+
+  // The SOL islands are Astro `client:visible` — they hydrate (and become
+  // interactive) only once scrolled into the viewport. The example wrapper
+  // sits well below the fold on a 720px viewport, so without an explicit
+  // scroll the island is SSR'd markup with no event handlers, and every
+  // stateful interaction (select open, checkbox toggle, switch flip) silently
+  // no-ops while the token capture still reads the static SSR styles. Prime the
+  // island: scroll its first part into view and wait for `data-hydrated`.
+  if (solTarget) await primeSolIsland(solPage, solTarget)
   const scriptForState = (state: string): string =>
     entry.interactions.includes(state) ? state : "reset"
 
@@ -248,14 +294,14 @@ export async function verifyEntry(
 
     for (const state of entry.states) {
       const script = scriptForState(state)
-      await runInteractions(refPage, script)
-      await runInteractions(solPage, script)
+      await runInteractions(refPage, script, refTarget)
+      await runInteractions(solPage, script, solTarget)
       await Promise.all([refPage.waitForTimeout(100), solPage.waitForTimeout(100)])
 
       // Signal 1: computed tokens.
       const [refTokens, solTokens] = await Promise.all([
-        readComputedTokens(refPage, selectors, entry.tokens),
-        readComputedTokens(solPage, selectors, entry.tokens),
+        readComputedTokens(refPage, refSelectors, entry.tokens),
+        readComputedTokens(solPage, solSelectors, entry.tokens),
       ])
       for (const [part, props] of Object.entries(entry.tokens)) {
         for (const [prop] of Object.entries(props)) {
@@ -274,8 +320,8 @@ export async function verifyEntry(
 
       // Signal 2: behavior.
       const [refBehavior, solBehavior] = await Promise.all([
-        captureBehavior(refPage, selectors),
-        captureBehavior(solPage, selectors),
+        captureBehavior(refPage, refSelectors),
+        captureBehavior(solPage, solSelectors),
       ])
       const behaviorPass =
         refBehavior.activeElementRole === solBehavior.activeElementRole &&
@@ -293,8 +339,8 @@ export async function verifyEntry(
       // Signal 3: pixels.
       const refPng = join(assetDir, `${entry.id}-${theme}-${state}-shadcn.png`)
       const solPng = join(assetDir, `${entry.id}-${theme}-${state}-solidiom.png`)
-      await screenshotPart(refPage, selectors, refPng)
-      await screenshotPart(solPage, selectors, solPng)
+      await screenshotPart(refPage, refSelectors, refPng)
+      await screenshotPart(solPage, solSelectors, solPng)
       const diff = await pixelDiffPct(refPng, solPng)
       const decision = pixelVerdict(diff, entry.tolerance.pixelMaxPercent)
       if (decision !== "skip") {
@@ -308,8 +354,8 @@ export async function verifyEntry(
       }
 
       // Drive both frames back to a known reset state for the next iteration.
-      await runInteractions(refPage, "reset")
-      await runInteractions(solPage, "reset")
+      await runInteractions(refPage, "reset", refTarget)
+      await runInteractions(solPage, "reset", solTarget)
     }
   }
 
@@ -320,6 +366,44 @@ export async function verifyEntry(
     signals,
     failures: signals.filter((s) => s.verdict === "gap").length,
     accepted: signals.filter((s) => s.verdict === "accepted").length,
+  }
+}
+
+/**
+ * Scroll the SOL island into the viewport and wait for it to hydrate.
+ *
+ * Islands are Astro `client:visible`, so they only mount + wire event handlers
+ * once visible. The selector here is the first resolved part, which is already
+ * scoped to the example wrapper (e.g. `.select-example [data-scope=...]`); we
+ * scroll it into view, then wait (up to ~3s) for the wrapper's
+ * `data-hydrated="true"` attribute. If the wrapper never hydrates (e.g. the
+ * island is static or the attribute name differs) we still proceed after the
+ * timeout — the token capture works on SSR markup; only stateful interactions
+ * depend on hydration, and a missing island is reported as a gap downstream.
+ */
+async function primeSolIsland(solPage: Page, partSelector: string): Promise<void> {
+  try {
+    await solPage.evaluate((sel) => {
+      const el = document.querySelector(sel)
+      el?.scrollIntoView({ block: "center" })
+    }, partSelector)
+    // Wait for the nearest ancestor that carries data-hydrated, or the element
+    // itself. Bounded so a static island can't hang the suite.
+    await solPage
+      .waitForFunction(
+        (sel) => {
+          const el = document.querySelector(sel)
+          return !!el && !!el.closest('[data-hydrated="true"]')
+        },
+        partSelector,
+        { timeout: 3000 },
+      )
+      .catch(() => {
+        /* island may be static — proceed anyway */
+      })
+    await solPage.waitForTimeout(120)
+  } catch {
+    /* a selector that matches nothing is non-fatal here */
   }
 }
 

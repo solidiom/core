@@ -1,5 +1,11 @@
 import type { Page } from "@playwright/test"
 
+// The token `$$target$$` is replaced at run time with the component's primary
+// interactive element selector (resolved per-frame by the engine from the
+// mapping's `selectors`). When no target is supplied the script falls back to
+// its generic selector so simple components still work unmodified.
+const T = "$$target$$"
+
 export type Action =
   | { kind: "click"; selector: string }
   | { kind: "press"; selector?: string; key: string }
@@ -11,45 +17,75 @@ export type Action =
  * Deterministic interaction scripts, keyed by name. The SAME name drives both
  * frames identically, so a per-interaction behavior diff is concrete.
  *
- * Selectors are best-effort generic (role- + data-part-based). Per-component
- * Phase A passes refine the selectors (a `selectors` override in the mapping)
- * so the script targets the real element; the generic defaults keep this file
- * DRY and let simple components work unmodified.
+ * State-advancing scripts target the component's primary interactive element
+ * via the `$$target$$` placeholder (resolved per-frame from the mapping's
+ * `selectors`); generic selectors are the fallback when no target is passed.
+ * This matters because the SOL islands live inside a full site chrome (nav,
+ * search, language switcher) that also contains buttons/inputs — a generic
+ * `button` click would hit the ambient "toggle dark" / nav instead of the
+ * component under test.
  */
 export const scripts: Record<string, Action[]> = {
   // state-advancing scripts used by `states` entries
-  open: [{ kind: "click", selector: "[data-part='trigger'], [role='combobox'], button" }],
+  open: [{ kind: "click", selector: T }],
   "close-esc": [
-    { kind: "click", selector: "[data-part='trigger'], button" },
+    { kind: "click", selector: T },
     { kind: "press", key: "Escape" },
   ],
   "close-overlay-click": [
-    { kind: "click", selector: "[data-part='trigger'], button" },
+    { kind: "click", selector: T },
     { kind: "click", selector: "body" },
   ],
-  focus: [{ kind: "click", selector: "input, [role='slider'], [role='switch']" }],
-  hover: [{ kind: "hover", selector: "button, [role='switch'], [role='slider']" }],
-  active: [{ kind: "click", selector: "button, [role='switch'], [role='slider']" }],
+  focus: [{ kind: "click", selector: T }],
+  hover: [{ kind: "hover", selector: T }],
+  active: [{ kind: "click", selector: T }],
   "select-item": [
-    { kind: "click", selector: "[role='combobox'], [data-part='trigger'], button" },
+    { kind: "click", selector: T },
     { kind: "press", key: "ArrowDown" },
     { kind: "press", key: "Enter" },
   ],
-  reset: [{ kind: "wait", ms: 50 }],
+  // Toggle a checkbox/radio into the checked state.
+  check: [{ kind: "click", selector: T }],
+  // Return to a known closed/idle state between iterations. Pressing Escape
+  // dismisses any open Radix portal (select content, popover) on BOTH frames —
+  // without it, an open content overlay intercepts pointer events and the next
+  // state's click hangs until the Playwright action timeout. A plain wait is
+  // not enough for stateful components.
+  reset: [
+    { kind: "press", key: "Escape" },
+    { kind: "wait", ms: 50 },
+  ],
 }
 
-/** Drive the named script into one page. Throws on an unknown script name. */
-export async function runInteractions(page: Page, name: string): Promise<void> {
+/**
+ * Drive the named script into one page. `target` is the component's primary
+ * interactive element selector for this frame (from the mapping's `selectors`);
+ * the `$$target$$` placeholder is replaced with it. Throws on an unknown script
+ * name or on a click/hover/fill whose resolved selector matches no element.
+ */
+export async function runInteractions(page: Page, name: string, target?: string): Promise<void> {
   const steps = scripts[name]
   if (!steps) throw new Error(`Unknown interaction script: ${name}`)
   for (const a of steps) {
-    if (a.kind === "click") await page.click(a.selector)
-    else if (a.kind === "hover") await page.hover(a.selector)
-    else if (a.kind === "fill") await page.fill(a.selector, a.value)
+    // `$$target$$` resolves to the per-frame component selector (or its generic
+    // fallback). Any other selector is used verbatim.
+    const sel: string =
+      a.selector === T ? (target ?? genericFor(a.kind, name)) : (a.selector as string)
+    if (a.kind === "click") await page.click(sel)
+    else if (a.kind === "hover") await page.hover(sel)
+    else if (a.kind === "fill") await page.fill(sel, a.value)
     else if (a.kind === "press")
-      if (a.selector) await page.locator(a.selector).press(a.key)
+      if (a.selector) await page.locator(sel).press(a.key)
       else await page.keyboard.press(a.key)
     else if (a.kind === "wait")
       await (a.selector ? page.waitForSelector(a.selector) : page.waitForTimeout(a.ms ?? 50))
   }
+}
+
+// Fallback generic selector when a `$$target$$` script runs with no target.
+function genericFor(kind: Action["kind"], name: string): string {
+  if (kind === "hover" || name === "active") return "button, [role='switch'], [role='slider']"
+  if (name === "check") return "[role='checkbox'], [role='radio']"
+  if (name === "focus") return "input, [role='slider'], [role='switch']"
+  return "[data-part='trigger'], [role='combobox'], button"
 }

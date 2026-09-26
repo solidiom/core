@@ -13,8 +13,20 @@ const ENTRY = {
     sitePath: "/components/input-otp/examples",
   },
   status: "mapped",
-  parts: [],
-  tokens: {},
+  parts: ["Slot"],
+  selectors: {
+    Slot: {
+      ref: "div.border-y.border-r.border-input",
+      sol: ".input-otp-example [data-scope='input-otp'][data-part='slot']",
+    },
+  },
+  tokens: {
+    Slot: {
+      "background-color": "rgba(0, 0, 0, 0)",
+      height: "36px",
+      "border-width": "1px",
+    },
+  },
   interactions: [],
   states: ["default"],
   themes: ["light", "dark"],
@@ -22,7 +34,23 @@ const ENTRY = {
     pixelMaxDiff: 2,
     pixelMaxPercent: 1,
   },
-  acceptedDivergences: [],
+  acceptedDivergences: [
+    {
+      signal: "tokens.Slot.background-color",
+      reason:
+        "shadcn OTP slot is border-input (transparent bg with a 1px ring); Solidiom OTP slot is a light-gray fill (rgb(248, 250, 252)). Deliberate 'filled' slot style.",
+    },
+    {
+      signal: "tokens.Slot.border-radius",
+      reason:
+        "STRUCTURAL: shadcn groups OTP slots into a segmented pill (only the outermost corners rounded: 6px on the group ends, 0 on the inner joins); Solidiom renders each slot as an individual fully-rounded box (8px on all four corners). No single per-slot radius token can express parity — documented so the report records it. A true fix changes Solidiom's slot grouping model (later batch).",
+    },
+    {
+      signal: "tokens.Slot.height",
+      reason:
+        "shadcn OTP slot is 36px (h-9); Solidiom slot is 40px. A real size gap Task 8 should weigh, alongside the structural radius note.",
+    },
+  ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"

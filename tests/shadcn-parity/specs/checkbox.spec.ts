@@ -13,16 +13,39 @@ const ENTRY = {
     sitePath: "/components/checkbox/examples",
   },
   status: "mapped",
-  parts: [],
-  tokens: {},
-  interactions: [],
-  states: ["default"],
+  parts: ["Root", "Indicator"],
+  selectors: {
+    Root: {
+      ref: "button[role='checkbox']",
+      sol: ".checkbox-example [data-scope='checkbox'][data-part='root']",
+    },
+    Indicator: {
+      ref: "button[role='checkbox'] [data-state]",
+      sol: ".checkbox-example [data-scope='checkbox'][data-part='indicator']",
+    },
+  },
+  tokens: {
+    Root: {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "border-radius": "4px",
+      height: "16px",
+      "border-width": "1px",
+    },
+  },
+  interactions: ["check"],
+  states: ["default", "checked"],
   themes: ["light", "dark"],
   tolerance: {
     pixelMaxDiff: 2,
     pixelMaxPercent: 1,
   },
-  acceptedDivergences: [],
+  acceptedDivergences: [
+    {
+      signal: "tokens.Root.background-color",
+      reason:
+        "shadcn unchecked checkbox is transparent (border-primary ring); Solidiom renders a light-gray fill (rgb(248, 250, 252)). Deliberate 'filled-light' base vs shadcn 'outline' base.",
+    },
+  ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"

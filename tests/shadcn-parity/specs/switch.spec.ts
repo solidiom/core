@@ -13,16 +13,40 @@ const ENTRY = {
     sitePath: "/components/switch/examples",
   },
   status: "mapped",
-  parts: [],
-  tokens: {},
-  interactions: [],
-  states: ["default"],
+  parts: ["Thumb"],
+  selectors: {
+    Thumb: {
+      ref: "button[role='switch'] > span",
+      sol: ".switch-example [data-scope='switch'][data-part='thumb']",
+    },
+  },
+  tokens: {
+    Thumb: {
+      "background-color": "rgb(255, 255, 255)",
+      height: "16px",
+      width: "16px",
+      "border-radius": "9999px",
+    },
+  },
+  interactions: ["focus"],
+  states: ["default", "focus"],
   themes: ["light", "dark"],
   tolerance: {
     pixelMaxDiff: 2,
     pixelMaxPercent: 1,
   },
-  acceptedDivergences: [],
+  acceptedDivergences: [
+    {
+      signal: "tokens.Thumb.background-color",
+      reason:
+        "shadcn switch thumb is bg-background (white in light) with a shadow ring; Solidiom thumb is a light-gray fill (rgb(248, 250, 252)) with a 2px border. Deliberate 'white knob' vs 'filled knob'.",
+    },
+    {
+      signal: "tokens.Thumb.width",
+      reason:
+        "STRUCTURAL: shadcn thumb is 16px and its track is a bare 36px button with the label as a SEPARATE sibling <label>; Solidiom inlines the label text INSIDE the switch root (193px) and the thumb is 24px/44px. Different track/label model; a real visual gap Task 8 should weigh.",
+    },
+  ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"
