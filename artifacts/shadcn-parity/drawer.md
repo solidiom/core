@@ -1,5 +1,5 @@
 # drawer — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ ac63cebb
+Reference: shadcn@3.8.5, solidiom @ ddb8b2cf
 Status: ❌ 16 failures, 14 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
