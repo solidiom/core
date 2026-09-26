@@ -14,14 +14,14 @@ export interface SwitchExampleProps {
 /** Canonical executable source for the Switch documentation example. */
 export function SwitchExample(props: SwitchExampleProps) {
   const copy = () => COPY[props.locale]
-  const [on, setOn] = createSignal(false)
+  const [on, setOn] = createSignal(true)
 
   return (
     <div ref={(el) => el.setAttribute("data-hydrated", "true")} class="switch-example">
-      <Switch.Root checked={on} onCheckedChange={setOn}>
-        {copy().label}
+      <Switch.Root checked={on} onCheckedChange={setOn} aria-label={copy().label}>
         <Switch.Thumb />
       </Switch.Root>
+      <span class="switch-example__label">{copy().label}</span>
     </div>
   )
 }

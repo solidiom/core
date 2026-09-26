@@ -795,16 +795,17 @@
 .button-example [data-scope="button"][data-part="root"] {
   appearance: none;
   display: inline-flex;
-  min-height: 2.5rem;
+  height: 2.25rem;
   align-items: center;
   justify-content: center;
   padding: 0.5rem 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border: none;
+  border-radius: 0.375rem;
   background: var(--color-surface);
   color: var(--color-foreground);
-  font: inherit;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
   cursor: pointer;
   transition:
     background 0.15s ease,
@@ -882,11 +883,11 @@
   appearance: none;
   display: inline-flex;
   width: 1.25rem;
-  height: 1.25rem;
+  height: 1rem;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: 0.25rem;
   background: var(--color-surface);
   cursor: pointer;
@@ -910,6 +911,7 @@
 .checkbox-example span {
   color: var(--color-foreground-muted);
   font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 /* ─── Combobox example ──────────────────────────────────────────────────── */
@@ -1355,15 +1357,16 @@
   appearance: none;
   display: inline-flex;
   min-width: 14rem;
-  min-height: 2.5rem;
+  height: 2.25rem;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.375rem;
   background: var(--color-surface);
   color: var(--color-foreground);
-  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   cursor: pointer;
 }
 
@@ -1487,52 +1490,53 @@
   background: var(--color-surface-raised);
 }
 
-.switch-example [data-scope="switch"][data-part="root"] {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem;
-  cursor: pointer;
-  font-size: 0.9375rem;
+.switch-example__label {
+  font-size: 0.875rem;
+  color: var(--color-foreground);
 }
 
-.switch-example [data-scope="switch"][data-part="thumb"] {
+.switch-example [data-scope="switch"][data-part="root"] {
   position: relative;
   display: inline-flex;
-  width: 2.75rem;
-  height: 1.5rem;
+  width: 2.25rem;
+  height: 1.25rem;
   flex-shrink: 0;
   align-items: center;
   border: 2px solid var(--color-border);
   border-radius: 9999px;
   background: var(--color-surface);
+  cursor: pointer;
   transition:
     background 0.2s ease,
     border-color 0.2s ease;
 }
 
-.switch-example [data-scope="switch"][data-part="thumb"]::after {
+/* The visible knob: a 16px circle (rounded-full) that slides when checked.
+   The parity "Thumb" part resolves to the root track; the label text that
+   shadcn keeps as a sibling is inlined into the track in Solidiom's example
+   (accepted structural divergence on width). */
+.switch-example [data-scope="switch"][data-part="root"]::after {
   content: "";
+  position: absolute;
+  left: 0;
   display: block;
   width: 1rem;
   height: 1rem;
-  border-radius: 50%;
-  background: var(--color-foreground-muted);
+  border-radius: 9999px;
+  background: #fff;
   transform: translateX(0.125rem);
   transition:
     transform 0.2s ease,
     background 0.2s ease;
 }
 
-.switch-example [data-scope="switch"][data-part="root"][data-state="checked"] [data-part="thumb"] {
+.switch-example [data-scope="switch"][data-part="root"][data-state="checked"] {
   background: var(--sol-primary, #6d9fff);
   border-color: var(--sol-primary, #6d9fff);
 }
 
-.switch-example
-  [data-scope="switch"][data-part="root"][data-state="checked"]
-  [data-part="thumb"]::after {
-  background: #fff;
-  transform: translateX(1.375rem);
+.switch-example [data-scope="switch"][data-part="root"][data-state="checked"]::after {
+  transform: translateX(1.125rem);
 }
 
 /* ─── Tabs example ──────────────────────────────────────────────────────── */
@@ -2108,9 +2112,10 @@
 .input-example [data-scope="input"][data-part="root"] {
   width: 100%;
   max-width: 16rem;
+  height: 2.25rem;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.375rem;
   background: var(--color-surface);
   color: var(--color-foreground);
   font-size: 0.875rem;
@@ -2733,8 +2738,12 @@
 
 .field-example [data-scope="field"][data-part="label"] {
   font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-foreground);
+  font-weight: 500;
+  color: rgb(2, 8, 23);
+}
+
+:root[data-theme="dark"] .field-example [data-scope="field"][data-part="label"] {
+  color: rgb(248, 250, 252);
 }
 
 .field-example [data-scope="field"][data-part="description"] {
