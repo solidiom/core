@@ -1,14 +1,18 @@
 # label — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ b7b01971
-Status: ❌ 4 failures, 0 accepted divergences
+Reference: shadcn@3.8.5, solidiom @ 5092f901
+Status: ❌ 2 failures, 4 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
 |---|---|---|---|
+| tokens.Root.color | rgb(2, 8, 23) | rgb(17, 24, 39) | 🟡 accepted |
 | tokens.Root.font-size | 14px | 14px | ✅ |
-| behavior.reset | role= part=- button..grid place-content-center peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground=unchecked | role= part=- button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed | ❌ |
-| pixels.light.default | ≤ 1% diff | delta Infinity% | ❌ |
+| tokens.Root.font-weight | 500 | 600 | 🟡 accepted |
+| behavior.reset | role= part=- | role= part=- | ✅ |
+| pixels.light.default | ≤ 1% diff | delta 43.1875% | ❌ |
+| tokens.Root.color | rgb(248, 250, 252) | rgb(241, 245, 249) | 🟡 accepted |
 | tokens.Root.font-size | 14px | 14px | ✅ |
-| behavior.reset | role= part=- button..grid place-content-center peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground=unchecked | role= part=- button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed | ❌ |
-| pixels.dark.default | ≤ 1% diff | delta Infinity% | ❌ |
+| tokens.Root.font-weight | 500 | 600 | 🟡 accepted |
+| behavior.reset | role= part=- | role= part=- | ✅ |
+| pixels.dark.default | ≤ 1% diff | delta 99.335% | ❌ |
 
 [side-by-side PNGs + delta heatmaps: see assets/]

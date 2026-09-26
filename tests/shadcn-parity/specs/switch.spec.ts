@@ -13,11 +13,15 @@ const ENTRY = {
     sitePath: "/components/switch/examples",
   },
   status: "mapped",
-  parts: ["Thumb"],
+  parts: ["Root", "Thumb"],
   selectors: {
+    Root: {
+      ref: "button[role='switch']",
+      sol: ".switch-example [data-scope='switch'][data-part='root']",
+    },
     Thumb: {
-      ref: "button[role='switch'] > span",
-      sol: ".switch-example [data-scope='switch'][data-part='thumb']",
+      ref: "[role='switch']",
+      sol: ".switch-example [data-scope='switch'][data-part='root']",
     },
   },
   tokens: {

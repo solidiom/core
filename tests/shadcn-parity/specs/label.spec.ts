@@ -16,7 +16,7 @@ const ENTRY = {
   parts: ["Root"],
   selectors: {
     Root: {
-      ref: "label",
+      ref: "[role='checkbox'] + label",
       sol: ".label-example [data-scope='label'][data-part='root']",
     },
   },

@@ -16,7 +16,7 @@ const ENTRY = {
   parts: ["Slot"],
   selectors: {
     Slot: {
-      ref: "div.border-y.border-r.border-input",
+      ref: "div.border-y.border-r.border-input:first-of-type",
       sol: ".input-otp-example [data-scope='input-otp'][data-part='slot']",
     },
   },

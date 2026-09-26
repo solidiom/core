@@ -1,32 +1,36 @@
 # input — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ b7b01971
-Status: ❌ 16 failures, 0 accepted divergences
+Reference: shadcn@3.8.5, solidiom @ 5092f901
+Status: ❌ 12 failures, 4 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
 |---|---|---|---|
+| tokens.Root.background-color | rgba(0, 0, 0, 0) | rgb(248, 250, 252) | 🟡 accepted |
 | tokens.Root.border-radius | 6px | 8px | ❌ |
 | tokens.Root.border-width | 1px | 1px | ✅ |
 | tokens.Root.font-size | 14px | 14px | ✅ |
 | tokens.Root.height | 36px | 39px | ❌ |
-| behavior.reset | role= part=- | role= part=- button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed | ❌ |
-| pixels.light.default | ≤ 1% diff | delta Infinity% | ❌ |
+| behavior.reset | role= part=- | role= part=- | ✅ |
+| pixels.light.default | ≤ 1% diff | delta 99.91250000000001% | ❌ |
+| tokens.Root.background-color | rgba(0, 0, 0, 0) | rgb(248, 250, 252) | 🟡 accepted |
 | tokens.Root.border-radius | 6px | 8px | ❌ |
 | tokens.Root.border-width | 1px | 1px | ✅ |
 | tokens.Root.font-size | 14px | 14px | ✅ |
 | tokens.Root.height | 36px | 39px | ❌ |
-| behavior.focus | role= part=Root | role= part=Root button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed | ❌ |
-| pixels.light.focus | ≤ 1% diff | delta Infinity% | ❌ |
+| behavior.focus | role= part=Root | role= part=Root | ✅ |
+| pixels.light.focus | ≤ 1% diff | delta 99.97833333333334% | ❌ |
+| tokens.Root.background-color | rgba(0, 0, 0, 0) | rgb(15, 23, 42) | 🟡 accepted |
 | tokens.Root.border-radius | 6px | 8px | ❌ |
 | tokens.Root.border-width | 1px | 1px | ✅ |
 | tokens.Root.font-size | 14px | 14px | ✅ |
 | tokens.Root.height | 36px | 39px | ❌ |
-| behavior.reset | role= part=Root | role= part=Root button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed | ❌ |
-| pixels.dark.default | ≤ 1% diff | delta Infinity% | ❌ |
+| behavior.reset | role= part=Root | role= part=Root | ✅ |
+| pixels.dark.default | ≤ 1% diff | delta 99.99083333333333% | ❌ |
+| tokens.Root.background-color | rgba(0, 0, 0, 0) | rgb(15, 23, 42) | 🟡 accepted |
 | tokens.Root.border-radius | 6px | 8px | ❌ |
 | tokens.Root.border-width | 1px | 1px | ✅ |
 | tokens.Root.font-size | 14px | 14px | ✅ |
 | tokens.Root.height | 36px | 39px | ❌ |
-| behavior.focus | role= part=Root | role= part=Root button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed | ❌ |
-| pixels.dark.focus | ≤ 1% diff | delta Infinity% | ❌ |
+| behavior.focus | role= part=Root | role= part=Root | ✅ |
+| pixels.dark.focus | ≤ 1% diff | delta 99.99083333333333% | ❌ |
 
 [side-by-side PNGs + delta heatmaps: see assets/]

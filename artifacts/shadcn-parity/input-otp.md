@@ -1,16 +1,18 @@
 # input-otp — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ b7b01971
-Status: ❌ 4 failures, 2 accepted divergences
+Reference: shadcn@3.8.5, solidiom @ 5092f901
+Status: ❌ 4 failures, 4 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
 |---|---|---|---|
+| tokens.Slot.background-color | rgba(0, 0, 0, 0) | rgb(248, 250, 252) | 🟡 accepted |
 | tokens.Slot.height | 36px | 40px | 🟡 accepted |
 | tokens.Slot.border-width | 1px | 1px | ✅ |
-| behavior.reset | role= part=- | role= part=- button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed div.slot.=inactive | ❌ |
-| pixels.light.default | ≤ 1% diff | delta Infinity% | ❌ |
+| behavior.reset | role= part=- | role= part=- div:slot=inactive | ❌ |
+| pixels.light.default | ≤ 1% diff | delta 99.22833333333332% | ❌ |
+| tokens.Slot.background-color | rgba(0, 0, 0, 0) | rgb(15, 23, 42) | 🟡 accepted |
 | tokens.Slot.height | 36px | 40px | 🟡 accepted |
 | tokens.Slot.border-width | 1px | 1px | ✅ |
-| behavior.reset | role= part=- | role= part=- button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed div.slot.=inactive | ❌ |
-| pixels.dark.default | ≤ 1% diff | delta Infinity% | ❌ |
+| behavior.reset | role= part=- | role= part=- div:slot=inactive | ❌ |
+| pixels.dark.default | ≤ 1% diff | delta 99.4675% | ❌ |
 
 [side-by-side PNGs + delta heatmaps: see assets/]

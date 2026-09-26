@@ -16,7 +16,7 @@ const ENTRY = {
   parts: ["Trigger", "Content", "Item"],
   selectors: {
     Trigger: {
-      ref: "button[role='combobox']",
+      ref: "button[role='combobox']:first-of-type",
       sol: ".select-example [data-scope='select'][data-part='trigger']",
     },
     Content: {

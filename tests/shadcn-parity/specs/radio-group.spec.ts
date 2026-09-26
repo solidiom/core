@@ -16,11 +16,11 @@ const ENTRY = {
   parts: ["Item", "Indicator"],
   selectors: {
     Item: {
-      ref: "[role='radio']",
-      sol: ".radio-group-example [data-scope='radio-group'][data-part='item']",
+      ref: "[role='radio']:first-of-type",
+      sol: ".radio-group-example [data-scope='radio-group'][data-part='indicator']",
     },
     Indicator: {
-      ref: "[role='radio']",
+      ref: "[role='radio']:first-of-type",
       sol: ".radio-group-example [data-scope='radio-group'][data-part='indicator']",
     },
   },

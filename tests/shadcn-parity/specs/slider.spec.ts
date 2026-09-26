@@ -16,19 +16,19 @@ const ENTRY = {
   parts: ["Root", "Track", "Range", "Thumb"],
   selectors: {
     Root: {
-      ref: "[role='slider']",
+      ref: "[data-orientation='horizontal']:first-of-type",
       sol: ".slider-example [data-scope='slider'][data-part='root']",
     },
     Track: {
-      ref: "[role='slider']",
+      ref: "[data-orientation='horizontal']:first-of-type > span:first-of-type",
       sol: ".slider-example [data-scope='slider'][data-part='track']",
     },
     Range: {
-      ref: "[role='slider']",
+      ref: "[data-orientation='horizontal']:first-of-type > span:first-of-type > span",
       sol: ".slider-example [data-scope='slider'][data-part='range']",
     },
     Thumb: {
-      ref: "[role='slider']",
+      ref: "[role='slider']:first-of-type",
       sol: ".slider-example [data-scope='slider'][data-part='thumb']",
     },
   },

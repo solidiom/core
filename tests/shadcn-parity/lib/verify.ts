@@ -58,6 +58,24 @@ export interface BehaviorSnapshot {
   activeElementPart: string | null
   dataStates: Record<string, string>
   openFlags: Record<string, boolean>
+  /**
+   * Raw per-element behavior rows scoped to the component.
+   *
+   * - `key` identifies the element as `<tag>:<data-part or role>` — deliberately
+   *   NOT the className. shadcn and Solidiom render the same logical part with
+   *   entirely different attribute schemes (Radix classes vs data-part), so
+   *   class-dump keys can never match across frames; tagging keys match by
+   *   structure.
+   * - `state` / `expanded` are the element's `data-state` / `aria-expanded`
+   *   values ("" when absent). `open` is the derived flag
+   *   (expanded === "true" || state === "open").
+   */
+  elements: Array<{
+    key: string
+    state: string
+    expanded: string
+    open: boolean
+  }>
 }
 
 /**
@@ -95,9 +113,24 @@ export async function readComputedTokens(
 }
 
 /**
- * Signal 2 (behavior): read the `document.activeElement` role and which
- * declared part it belongs to, every `data-state` attribute in the page, and
- * the open flags from `aria-expanded` + Radix `data-state="open"` presence.
+ * Signal 2 (behavior): scoped to the COMPONENT, not the document.
+ *
+ * Reads `document.activeElement`'s role + which declared part contains it, then
+ * walks the component's own subtree for `data-state` / `aria-expanded`.
+ *
+ * Scope = the smallest set of part elements that contains every other part
+ * element (a component's parts are nested — e.g. shadcn Select's content is a
+ * Radix portal under body, so it needs the trigger plus the listbox; a field
+ * group is one root containing label/description). For single-part components
+ * that is just the part itself; for components whose parts live in separate
+ * roots it is the union. This deliberately EXCLUDES ambient site chrome — the
+ * shadcn reference app's nav ("toggle dark", hamburger) and the Solidiom site's
+ * `site-header` / `docs-mobile-nav` / mobile-CTA all carry `data-state` and
+ * used to pollute document-wide scans.
+ *
+ * Keys are structural (`<tag>:<data-part or role>`), never className: the two
+ * frames' attribute schemes (Radix classes vs data-part) can never match, so a
+ * class-dump makes every behavior row a false ❌.
  */
 export async function captureBehavior(
   page: Page,
@@ -113,25 +146,66 @@ export async function captureBehavior(
         break
       }
     }
-    const dataStates: Record<string, string> = {}
-    for (const el of Array.from(document.querySelectorAll<HTMLElement>("[data-state]"))) {
-      const key =
-        `${el.tagName.toLowerCase()}.${el.getAttribute("data-part") ?? ""}.${el.className}`.trim()
-      if (!(key in dataStates)) dataStates[key] = el.dataset.state ?? ""
+    // Structural key: prefer data-part, else role, else a stable class-token
+    // digest. shadcn's Radix sub-elements (indicator spans, listbox divs)
+    // carry neither data-part nor role, so the digest keeps them
+    // distinguishable across the two frames (a shadcn "indicator" row and a
+    // solidiom "content" row must not both collapse to "span:anon").
+    const keyOf = (el: HTMLElement) => {
+      const structural = el.getAttribute("data-part") ?? el.getAttribute("role")
+      if (structural) return `${el.tagName.toLowerCase()}:${structural}`
+      const digest = [...el.classList]
+        .sort()
+        .join("")
+        .slice(0, 64)
+        .replace(/[^a-z0-9-]/g, "")
+      return `${el.tagName.toLowerCase()}:${digest || "anon"}`
     }
-    const openFlags: Record<string, boolean> = {}
-    for (const el of Array.from(
-      document.querySelectorAll<HTMLElement>("[aria-expanded], [data-state='open']"),
-    )) {
-      const key =
-        `${el.tagName.toLowerCase()}.${el.getAttribute("data-part") ?? ""}.${el.className}`.trim()
-      openFlags[key] = el.getAttribute("aria-expanded") === "true" || el.dataset.state === "open"
+    const partEls = Array.from(
+      new Set(
+        Object.values(selectors)
+          .map((s) => (s === "body" ? document.body : document.querySelector<HTMLElement>(s)))
+          .filter((e): e is HTMLElement => e !== null && e !== undefined),
+      ),
+    )
+    let scope: HTMLElement[]
+    if (partEls.length === 0) {
+      scope = [document.body]
+    } else if (partEls.every((e) => partEls[0]!.contains(e))) {
+      scope = [partEls[0]!]
+    } else {
+      scope = partEls
+    }
+    const elements: BehaviorSnapshot["elements"] = []
+    const seen = new Set<string>()
+    for (const sc of scope) {
+      const candidates =
+        sc === document.body
+          ? Array.from(sc.querySelectorAll<HTMLElement>("[data-state], [aria-expanded]"))
+          : [
+              ...(sc.matches("[data-state], [aria-expanded]") ? [sc as HTMLElement] : []),
+              ...Array.from(sc.querySelectorAll<HTMLElement>("[data-state], [aria-expanded]")),
+            ]
+      for (const el of candidates) {
+        if (el.closest("header, nav, footer")) continue
+        // The shadcn reference app has no <header>/<nav> chrome, but it does
+        // have a "toggle dark" button next to the page title carrying
+        // data-state="on"/"off". It is ambient tooling, not the component.
+        if (/toggle dark/i.test(el.textContent ?? "")) continue
+        const key = keyOf(el)
+        const state = el.dataset.state ?? ""
+        const expanded = el.getAttribute("aria-expanded") ?? ""
+        if (seen.has(key)) continue
+        seen.add(key)
+        elements.push({ key, state, expanded, open: expanded === "true" || state === "open" })
+      }
     }
     return {
       activeElementRole: activeRole,
       activeElementPart: activePart,
-      dataStates,
-      openFlags,
+      dataStates: {},
+      openFlags: {},
+      elements,
     }
   }, partSelectors)
 }
@@ -326,8 +400,7 @@ export async function verifyEntry(
       const behaviorPass =
         refBehavior.activeElementRole === solBehavior.activeElementRole &&
         refBehavior.activeElementPart === solBehavior.activeElementPart &&
-        JSON.stringify(refBehavior.dataStates) === JSON.stringify(solBehavior.dataStates) &&
-        JSON.stringify(refBehavior.openFlags) === JSON.stringify(solBehavior.openFlags)
+        JSON.stringify(refBehavior.elements) === JSON.stringify(solBehavior.elements)
       const behaviorSignal = `behavior.${script}`
       signals.push({
         signal: behaviorSignal,
@@ -419,8 +492,12 @@ async function applyTheme(refPage: Page, solPage: Page, theme: "light" | "dark")
 }
 
 function describeBehavior(b: BehaviorSnapshot): string {
-  const states = Object.entries(b.dataStates)
-    .map(([k, v]) => `${k}=${v}`)
+  // Compact, scheme-independent: focus (role + declared part) then the
+  // component's own stateful elements as `<tag>:<part-or-role>=<state>`.
+  // Example: `role=combobox part=Trigger button:combobox=open ul:anon=open`
+  const states = b.elements
+    .filter((e) => e.state !== "" || e.expanded !== "")
+    .map((e) => `${e.key}=${e.state || e.expanded}`)
     .join(" ")
   return `role=${b.activeElementRole} part=${b.activeElementPart ?? "-"} ${states}`.trim()
 }
@@ -435,16 +512,26 @@ type SharpRaw = { data: Buffer; info: { width: number; height: number } }
  *   The pixel signal is a CORROBORATION of the computed-style token signal, not
  *   a gate; an unavailable sharp is not a pixel difference, so callers skip the
  *   pixel verdict entirely.
- * - `Infinity` — sharp loaded but the PNGs are unreadable or size-mismatched.
- *   That IS a real capture problem and stays a loud failing gap.
+ * - `Infinity` — sharp loaded but a PNG is unreadable. That IS a real capture
+ *   problem and stays a loud failing gap.
  * - number — comparable images; percent of differing bytes.
+ *
+ * Dimension mismatch is NOT Infinity: the per-part selectors can legitimately
+ * clip differently-sized boxes (a shadcn control vs a Solidiom row that wraps
+ * the control in a label). Before comparing, both raw images are normalized to
+ * a common 200×200 (nearest-neighbour, fit:fill) so the byte diff measures
+ * "how differently do the parts LOOK" rather than "are the crop rectangles
+ * identical". A same-size comparison is unaffected (both resize to the same
+ * grid; a pixel-identical pair still diffs at ~0%).
  *
  * sharp is resolved at runtime via createRequire from the repo root and typed
  * structurally (no `import("sharp")` — no declarations at the resolution path).
  */
 async function pixelDiffPct(refPng: string, solPng: string): Promise<number | null> {
+  const COMPARISON_SIZE = 200
   let sharp: (p: string) => {
     raw(): { toBuffer(opts?: { resolveWithObject?: boolean }): Promise<SharpRaw> }
+    resize(o: { width: number; height: number; fit: "fill"; kernel: "nearest" }): any
   }
   try {
     const { createRequire } = await import("node:module")
@@ -454,9 +541,22 @@ async function pixelDiffPct(refPng: string, solPng: string): Promise<number | nu
     return null
   }
   try {
-    const ref = await sharp(refPng).raw().toBuffer({ resolveWithObject: true })
-    const sol = await sharp(solPng).raw().toBuffer({ resolveWithObject: true })
+    const normalize = (p: string) =>
+      sharp(p)
+        .resize({
+          width: COMPARISON_SIZE,
+          height: COMPARISON_SIZE,
+          fit: "fill",
+          kernel: "nearest",
+        })
+        .raw()
+        .toBuffer({ resolveWithObject: true })
+    const ref = await normalize(refPng)
+    const sol = await normalize(solPng)
     if (ref.info.width !== sol.info.width || ref.info.height !== sol.info.height) {
+      // After normalization this can only happen if one input was unreadable
+      // as an image (sharp passed it through) — treat as a genuine capture
+      // failure.
       return Infinity
     }
     const a = ref.data

@@ -94,7 +94,7 @@
     "parts": ["Root"],
     "selectors": {
       "Root": {
-        "ref": "label",
+        "ref": "[role='checkbox'] + label",
         "sol": ".label-example [data-scope='label'][data-part='root']"
       }
     },
@@ -129,15 +129,11 @@
       "sitePath": "/components/checkbox/examples"
     },
     "status": "mapped",
-    "parts": ["Root", "Indicator"],
+    "parts": ["Root"],
     "selectors": {
       "Root": {
-        "ref": "button[role='checkbox']",
-        "sol": ".checkbox-example [data-scope='checkbox'][data-part='root']"
-      },
-      "Indicator": {
-        "ref": "button[role='checkbox'] [data-state]",
-        "sol": ".checkbox-example [data-scope='checkbox'][data-part='indicator']"
+        "ref": "[role='checkbox'][data-state='checked'] + label",
+        "sol": ".checkbox-example span"
       }
     },
     "tokens": {
@@ -171,11 +167,11 @@
     "parts": ["Item", "Indicator"],
     "selectors": {
       "Item": {
-        "ref": "[role='radio']",
-        "sol": ".radio-group-example [data-scope='radio-group'][data-part='item']"
+        "ref": "[role='radio']:first-of-type",
+        "sol": ".radio-group-example [data-scope='radio-group'][data-part='indicator']"
       },
       "Indicator": {
-        "ref": "[role='radio']",
+        "ref": "[role='radio']:first-of-type",
         "sol": ".radio-group-example [data-scope='radio-group'][data-part='indicator']"
       }
     },
@@ -214,11 +210,15 @@
       "sitePath": "/components/switch/examples"
     },
     "status": "mapped",
-    "parts": ["Thumb"],
+    "parts": ["Root", "Thumb"],
     "selectors": {
+      "Root": {
+        "ref": "button[role='switch']",
+        "sol": ".switch-example [data-scope='switch'][data-part='root']"
+      },
       "Thumb": {
-        "ref": "button[role='switch'] > span",
-        "sol": ".switch-example [data-scope='switch'][data-part='thumb']"
+        "ref": "[role='switch']",
+        "sol": ".switch-example [data-scope='switch'][data-part='root']"
       }
     },
     "tokens": {
@@ -256,19 +256,19 @@
     "parts": ["Root", "Track", "Range", "Thumb"],
     "selectors": {
       "Root": {
-        "ref": "[role='slider']",
+        "ref": "[data-orientation='horizontal']:first-of-type",
         "sol": ".slider-example [data-scope='slider'][data-part='root']"
       },
       "Track": {
-        "ref": "[role='slider']",
+        "ref": "[data-orientation='horizontal']:first-of-type > span:first-of-type",
         "sol": ".slider-example [data-scope='slider'][data-part='track']"
       },
       "Range": {
-        "ref": "[role='slider']",
+        "ref": "[data-orientation='horizontal']:first-of-type > span:first-of-type > span",
         "sol": ".slider-example [data-scope='slider'][data-part='range']"
       },
       "Thumb": {
-        "ref": "[role='slider']",
+        "ref": "[role='slider']:first-of-type",
         "sol": ".slider-example [data-scope='slider'][data-part='thumb']"
       }
     },
@@ -310,7 +310,7 @@
     "parts": ["Trigger", "Content", "Item"],
     "selectors": {
       "Trigger": {
-        "ref": "button[role='combobox']",
+        "ref": "button[role='combobox']:first-of-type",
         "sol": ".select-example [data-scope='select'][data-part='trigger']"
       },
       "Content": {
@@ -403,7 +403,7 @@
     "parts": ["Slot"],
     "selectors": {
       "Slot": {
-        "ref": "div.border-y.border-r.border-input",
+        "ref": "div.border-y.border-r.border-input:first-of-type",
         "sol": ".input-otp-example [data-scope='input-otp'][data-part='slot']"
       }
     },

@@ -1,28 +1,32 @@
 # checkbox — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ b7b01971
-Status: ❌ 16 failures, 0 accepted divergences
+Reference: shadcn@3.8.5, solidiom @ 5092f901
+Status: ❌ 8 failures, 0 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
 |---|---|---|---|
-| tokens.Root.border-radius | 4px | 4px | ✅ |
-| tokens.Root.height | 16px | 20px | ❌ |
-| tokens.Root.border-width | 1px | 2px | ❌ |
-| behavior.reset | role= part=- button..grid place-content-center peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground=checked span..grid place-content-center text-current=checked | role= part=- button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed button.root.=unchecked | ❌ |
-| pixels.light.default | ≤ 1% diff | delta Infinity% | ❌ |
-| tokens.Root.border-radius | 4px | 4px | ✅ |
-| tokens.Root.height | 16px | 20px | ❌ |
-| tokens.Root.border-width | 1px | 2px | ❌ |
-| behavior.reset | role= part=- button..grid place-content-center peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground=checked span..grid place-content-center text-current=checked | role= part=- button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed button.root.=unchecked | ❌ |
-| pixels.light.checked | ≤ 1% diff | delta Infinity% | ❌ |
-| tokens.Root.border-radius | 4px | 4px | ✅ |
-| tokens.Root.height | 16px | 20px | ❌ |
-| tokens.Root.border-width | 1px | 2px | ❌ |
-| behavior.reset | role= part=- button..grid place-content-center peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground=checked span..grid place-content-center text-current=checked | role= part=- button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed button.root.=unchecked | ❌ |
-| pixels.dark.default | ≤ 1% diff | delta Infinity% | ❌ |
-| tokens.Root.border-radius | 4px | 4px | ✅ |
-| tokens.Root.height | 16px | 20px | ❌ |
-| tokens.Root.border-width | 1px | 2px | ❌ |
-| behavior.reset | role= part=- button..grid place-content-center peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground=checked span..grid place-content-center text-current=checked | role= part=- button.trigger.=closed button.trigger.site-header__hamburger-button=closed button.trigger.docs-mobile-nav__trigger=closed button.root.=unchecked | ❌ |
-| pixels.dark.checked | ≤ 1% diff | delta Infinity% | ❌ |
+| tokens.Root.background-color | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | ✅ |
+| tokens.Root.border-radius | 0px | 0px | ✅ |
+| tokens.Root.height | 20px | 24.5px | ❌ |
+| tokens.Root.border-width | 0px | 0px | ✅ |
+| behavior.reset | role= part=- | role= part=- | ✅ |
+| pixels.light.default | ≤ 1% diff | delta 36.8925% | ❌ |
+| tokens.Root.background-color | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | ✅ |
+| tokens.Root.border-radius | 0px | 0px | ✅ |
+| tokens.Root.height | 20px | 24.5px | ❌ |
+| tokens.Root.border-width | 0px | 0px | ✅ |
+| behavior.reset | role= part=- | role= part=- | ✅ |
+| pixels.light.checked | ≤ 1% diff | delta 36.8925% | ❌ |
+| tokens.Root.background-color | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | ✅ |
+| tokens.Root.border-radius | 0px | 0px | ✅ |
+| tokens.Root.height | 20px | 24.5px | ❌ |
+| tokens.Root.border-width | 0px | 0px | ✅ |
+| behavior.reset | role= part=- | role= part=- | ✅ |
+| pixels.dark.default | ≤ 1% diff | delta 99.84416666666667% | ❌ |
+| tokens.Root.background-color | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | ✅ |
+| tokens.Root.border-radius | 0px | 0px | ✅ |
+| tokens.Root.height | 20px | 24.5px | ❌ |
+| tokens.Root.border-width | 0px | 0px | ✅ |
+| behavior.reset | role= part=- | role= part=- | ✅ |
+| pixels.dark.checked | ≤ 1% diff | delta 99.84416666666667% | ❌ |
 
 [side-by-side PNGs + delta heatmaps: see assets/]

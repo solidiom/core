@@ -13,15 +13,11 @@ const ENTRY = {
     sitePath: "/components/checkbox/examples",
   },
   status: "mapped",
-  parts: ["Root", "Indicator"],
+  parts: ["Root"],
   selectors: {
     Root: {
-      ref: "button[role='checkbox']",
-      sol: ".checkbox-example [data-scope='checkbox'][data-part='root']",
-    },
-    Indicator: {
-      ref: "button[role='checkbox'] [data-state]",
-      sol: ".checkbox-example [data-scope='checkbox'][data-part='indicator']",
+      ref: "[role='checkbox'][data-state='checked'] + label",
+      sol: ".checkbox-example span",
     },
   },
   tokens: {

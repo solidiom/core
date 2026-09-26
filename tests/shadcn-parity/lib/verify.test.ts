@@ -1,5 +1,7 @@
+// @vitest-environment jsdom
 import { describe, it, expect } from "vitest"
-import { assertToken, pixelVerdict } from "./verify"
+import type { Page } from "@playwright/test"
+import { assertToken, pixelVerdict, captureBehavior } from "./verify"
 
 describe("pixelVerdict", () => {
   it("skips when sharp is unavailable (diff === null)", () => {
@@ -34,5 +36,63 @@ describe("assertToken", () => {
   })
   it("fails a non-matching exact value", () => {
     expect(assertToken("0.5rem", "8px")).toEqual({ pass: false, expected: "0.5rem", actual: "8px" })
+  })
+})
+
+describe("captureBehavior", () => {
+  function jsdomPage(bodyHtml: string): Page {
+    document.body.innerHTML = bodyHtml
+    return {
+      evaluate: (
+        fn: (selectors: Record<string, string>) => unknown,
+        selectors?: Record<string, string>,
+      ) => (fn as (s: Record<string, string>) => unknown)(selectors ?? {}),
+    } as unknown as Page
+  }
+
+  it("scopes state capture to the component subtree and excludes ambient chrome", async () => {
+    const snap = await captureBehavior(
+      jsdomPage(`
+        <header>
+          <nav>
+            <button class="site-header__hamburger-button" data-state="closed">nav</button>
+          </nav>
+          <button class="docs-theme-toggle" data-state="off">toggle</button>
+        </header>
+        <div class="select-example">
+          <button
+            class="flex h-9 items-center gap-2 rounded-md border ..."
+            data-state="closed" aria-expanded="false" role="combobox"
+          >Select</button>
+        </div>`),
+      { Trigger: ".select-example [role='combobox']" },
+    )
+    const keys = snap.elements.map((e) => e.key)
+    expect(keys).toContain("button:combobox")
+    expect(keys).not.toContain("button:hamburger")
+    expect(snap.elements.find((e) => e.key === "button:combobox")?.open).toBe(false)
+    // structural key — no className in it
+    expect(keys.join(" ")).not.toContain("rounded-md")
+  })
+
+  it("reports open state via aria-expanded / data-state=open", async () => {
+    const snap = await captureBehavior(
+      jsdomPage(`
+        <div class="select-example">
+          <button data-part="trigger" data-state="open" aria-expanded="true" role="combobox">S</button>
+        </div>`),
+      { Trigger: "[data-part='trigger']" },
+    )
+    expect(snap.elements.find((e) => e.key === "button:trigger")?.open).toBe(true)
+  })
+
+  it("resolves the active element's declared part via closest()", async () => {
+    const page = jsdomPage(
+      `<div class="cb-example"><button data-part="root" role="checkbox">x</button></div>`,
+    )
+    document.querySelector("button")!.focus()
+    const snap = await captureBehavior(page, { Root: "[data-part='root']" })
+    expect(snap.activeElementRole).toBe("checkbox")
+    expect(snap.activeElementPart).toBe("Root")
   })
 })
