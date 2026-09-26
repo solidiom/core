@@ -53,29 +53,79 @@ export interface PartTokenResults {
   pass: boolean
 }
 
+/**
+ * Canonical behavior snapshot — scheme-independent facts keyed by the
+ * mapping's declared part names, not by the frame's raw attributes.
+ *
+ * shadcn (Radix) and Solidiom (data-part/data-scope) express the same logical
+ * state with DIFFERENT attribute vocabularies: the select trigger is
+ * `role=combobox data-state=closed` on the ref frame and `data-part=trigger
+ * data-state=closed` on the sol frame; the switch thumb is
+ * `data-state=unchecked` vs `data-state=off`/`aria-checked`. Comparing raw
+ * `tag:part=value` strings therefore flags every scheme difference as a
+ * divergence. The canonical form normalizes each frame down to:
+ *
+ * - `focusedPart` — the declared part name whose element currently holds
+ *   `document.activeElement` (resolved with `activeElement.closest(partSelector)`),
+ *   or null. Scheme-independent by construction: it uses OUR part names.
+ * - `open` — one boolean per part for which open/closed is meaningful, derived
+ *   from `aria-expanded` / `data-state=open|closed`. Both frames carry explicit
+ *   vocabulary (the shadcn trigger has `aria-expanded`, the Radix portal has
+ *   `data-state` even while closed, the Solidiom trigger has both). An unmounted
+ *   overlay (Solidiom's closed Select content) is recorded as `open:false` by the
+ *   absence branch — presence alone is never an open signal because Radix keeps
+ *   closed portals in the DOM.
+ * - `checked` — one boolean per part for which checked/unchecked is
+ *   meaningful, derived from `aria-checked` / `data-state=on|checked`.
+ *
+ * Two frames are behaviorally equal iff their canonical snapshots deep-equal.
+ */
 export interface BehaviorSnapshot {
-  activeElementRole: string
-  activeElementPart: string | null
-  dataStates: Record<string, string>
-  openFlags: Record<string, boolean>
-  /**
-   * Raw per-element behavior rows scoped to the component.
-   *
-   * - `key` identifies the element as `<tag>:<data-part or role>` — deliberately
-   *   NOT the className. shadcn and Solidiom render the same logical part with
-   *   entirely different attribute schemes (Radix classes vs data-part), so
-   *   class-dump keys can never match across frames; tagging keys match by
-   *   structure.
-   * - `state` / `expanded` are the element's `data-state` / `aria-expanded`
-   *   values ("" when absent). `open` is the derived flag
-   *   (expanded === "true" || state === "open").
-   */
-  elements: Array<{
-    key: string
-    state: string
-    expanded: string
-    open: boolean
-  }>
+  focusedPart: string | null
+  open: Record<string, boolean>
+  checked: Record<string, boolean>
+}
+
+/**
+ * Pure normalization of one element's raw attributes to canonical flags —
+ * unit-testable without a browser.
+ *
+ * - `checked`: `aria-checked` wins (true/false/mixed→true, "indeterminate"),
+ *   else `data-state` in {`on`, `checked`}. shadcn switches/checkboxes/radios
+ *   use `data-state=checked|unchecked`; Solidiom switches use
+ *   `data-state=on|off` + `aria-checked` — both normalize to one boolean.
+ *   (Solidiom Select items use `data-state=checked` for the SELECTED option;
+ *   in that context `checked` == "selected", which is still a per-item
+ *   boolean and compares correctly across frames because Radix items expose
+ *   the same selection via `data-state`.)
+ * - `open`: `aria-expanded === "true"` OR `data-state === "open"`.
+ */
+export function canonicalState(el: {
+  dataset: { state?: string }
+  getAttribute: (name: string) => string | null
+}): { checked?: boolean; open?: boolean } {
+  const out: { checked?: boolean; open?: boolean } = {}
+  const checkedAttr = el.getAttribute("aria-checked")
+  if (checkedAttr !== null) {
+    out.checked = checkedAttr === "true" || checkedAttr === "mixed"
+  } else {
+    const ds = el.dataset.state
+    if (ds === "on" || ds === "checked") out.checked = true
+    else if (ds === "off" || ds === "unchecked") out.checked = false
+  }
+  if (el.getAttribute("aria-expanded") === "true") out.open = true
+  else if (el.dataset.state === "open") out.open = true
+  else if (el.getAttribute("aria-expanded") === "false") out.open = false
+  else if (el.dataset.state === "closed") out.open = false
+  return out
+}
+
+function behaviorSnapshotsEqual(a: BehaviorSnapshot, b: BehaviorSnapshot): boolean {
+  return (
+    a.focusedPart === b.focusedPart &&
+    JSON.stringify(a.open) === JSON.stringify(b.open) &&
+    JSON.stringify(a.checked) === JSON.stringify(b.checked)
+  )
 }
 
 /**
@@ -113,100 +163,94 @@ export async function readComputedTokens(
 }
 
 /**
- * Signal 2 (behavior): scoped to the COMPONENT, not the document.
+ * Signal 2 (behavior), canonical form.
  *
- * Reads `document.activeElement`'s role + which declared part contains it, then
- * walks the component's own subtree for `data-state` / `aria-expanded`.
+ * Resolves each DECLARED part to its element via the per-frame selector map
+ * (so part identity comes from OUR mapping, never the frame's attributes) and
+ * reduces the frame to scheme-independent facts:
  *
- * Scope = the smallest set of part elements that contains every other part
- * element (a component's parts are nested — e.g. shadcn Select's content is a
- * Radix portal under body, so it needs the trigger plus the listbox; a field
- * group is one root containing label/description). For single-part components
- * that is just the part itself; for components whose parts live in separate
- * roots it is the union. This deliberately EXCLUDES ambient site chrome — the
- * shadcn reference app's nav ("toggle dark", hamburger) and the Solidiom site's
- * `site-header` / `docs-mobile-nav` / mobile-CTA all carry `data-state` and
- * used to pollute document-wide scans.
+ * - `focusedPart`: the part whose element contains `document.activeElement`
+ *   (`activeElement.closest(partSelector)`).
+ * - `open[part]`: the part's canonical open/closed flag, from `aria-expanded`
+ *   / `data-state=open|closed`. Both frames carry explicit vocabulary here —
+ *   the shadcn trigger has `aria-expanded`, the Radix portal has
+ *   `data-state=open|closed` (stays mounted while closed), and the Solidiom
+ *   trigger has both while its content is unmounted when closed (recorded as
+ *   `open=false` by the absence branch). Presence alone is never an open
+ *   signal, because Radix keeps closed portals in the DOM.
+ * - `checked[part]`: the part's canonical checked/unchecked flag, from
+ *   `aria-checked` / `data-state=on|checked` (see `canonicalState`).
  *
- * Keys are structural (`<tag>:<data-part or role>`), never className: the two
- * frames' attribute schemes (Radix classes vs data-part) can never match, so a
- * class-dump makes every behavior row a false ❌.
+ * Only parts whose state actually differs from the neutral default are
+ * recorded (checked parts: `true`; open parts: `false`, since an open overlay
+ * is the exceptional state worth flagging). Two snapshots compare equal iff
+ * `focusedPart` and both maps match — a raw-attribute comparison would false-❌
+ * on every Radix-vs-data-part vocabulary difference.
  */
 export async function captureBehavior(
   page: Page,
   partSelectors: Record<string, string>,
 ): Promise<BehaviorSnapshot> {
   return page.evaluate((selectors) => {
+    // Inlined (not imported) because page.evaluate serializes this function
+    // body into the browser context, where module scope is unavailable.
+    const canonical = (el: Element) => {
+      const out: { checked?: boolean; open?: boolean } = {}
+      const ca = el.getAttribute("aria-checked")
+      if (ca !== null) out.checked = ca === "true" || ca === "mixed"
+      else {
+        const ds = (el as HTMLElement).dataset.state
+        if (ds === "on" || ds === "checked") out.checked = true
+        else if (ds === "off" || ds === "unchecked") out.checked = false
+      }
+      if (el.getAttribute("aria-expanded") === "true") out.open = true
+      else if ((el as HTMLElement).dataset.state === "open") out.open = true
+      else if (el.getAttribute("aria-expanded") === "false") out.open = false
+      else if ((el as HTMLElement).dataset.state === "closed") out.open = false
+      return out
+    }
     const active = document.activeElement as HTMLElement | null
-    const activeRole = active ? (active.getAttribute("role") ?? "") : ""
-    let activePart: string | null = null
+    let focusedPart: string | null = null
+    if (active) {
+      for (const [part, sel] of Object.entries(selectors)) {
+        if (sel === "body") {
+          focusedPart = part
+          break
+        }
+        try {
+          if (active.closest(sel)) {
+            focusedPart = part
+            break
+          }
+        } catch {
+          /* invalid selector for this frame — skip the part */
+        }
+      }
+    }
+    const open: Record<string, boolean> = {}
+    const checked: Record<string, boolean> = {}
     for (const [part, sel] of Object.entries(selectors)) {
-      if (active && (sel === "body" || active.closest(sel))) {
-        activePart = part
-        break
+      if (sel === "body") continue
+      let el: HTMLElement | null = null
+      try {
+        el = document.querySelector(sel)
+      } catch {
+        continue
       }
-    }
-    // Structural key: prefer data-part, else role, else a stable class-token
-    // digest. shadcn's Radix sub-elements (indicator spans, listbox divs)
-    // carry neither data-part nor role, so the digest keeps them
-    // distinguishable across the two frames (a shadcn "indicator" row and a
-    // solidiom "content" row must not both collapse to "span:anon").
-    const keyOf = (el: HTMLElement) => {
-      const structural = el.getAttribute("data-part") ?? el.getAttribute("role")
-      if (structural) return `${el.tagName.toLowerCase()}:${structural}`
-      const digest = [...el.classList]
-        .sort()
-        .join("")
-        .slice(0, 64)
-        .replace(/[^a-z0-9-]/g, "")
-      return `${el.tagName.toLowerCase()}:${digest || "anon"}`
-    }
-    const partEls = Array.from(
-      new Set(
-        Object.values(selectors)
-          .map((s) => (s === "body" ? document.body : document.querySelector<HTMLElement>(s)))
-          .filter((e): e is HTMLElement => e !== null && e !== undefined),
-      ),
-    )
-    let scope: HTMLElement[]
-    if (partEls.length === 0) {
-      scope = [document.body]
-    } else if (partEls.every((e) => partEls[0]!.contains(e))) {
-      scope = [partEls[0]!]
-    } else {
-      scope = partEls
-    }
-    const elements: BehaviorSnapshot["elements"] = []
-    const seen = new Set<string>()
-    for (const sc of scope) {
-      const candidates =
-        sc === document.body
-          ? Array.from(sc.querySelectorAll<HTMLElement>("[data-state], [aria-expanded]"))
-          : [
-              ...(sc.matches("[data-state], [aria-expanded]") ? [sc as HTMLElement] : []),
-              ...Array.from(sc.querySelectorAll<HTMLElement>("[data-state], [aria-expanded]")),
-            ]
-      for (const el of candidates) {
-        if (el.closest("header, nav, footer")) continue
-        // The shadcn reference app has no <header>/<nav> chrome, but it does
-        // have a "toggle dark" button next to the page title carrying
-        // data-state="on"/"off". It is ambient tooling, not the component.
-        if (/toggle dark/i.test(el.textContent ?? "")) continue
-        const key = keyOf(el)
-        const state = el.dataset.state ?? ""
-        const expanded = el.getAttribute("aria-expanded") ?? ""
-        if (seen.has(key)) continue
-        seen.add(key)
-        elements.push({ key, state, expanded, open: expanded === "true" || state === "open" })
+      if (!el) {
+        // Part element absent from the DOM. For parts whose open/closed is
+        // meaningful, absence on the Solidiom frame means closed (unmounted);
+        // on the shadcn frame it means "not rendered yet" — neither frame's
+        // presence is asserted, so record false only when the part name
+        // denotes an overlay (content) to keep both frames comparable.
+        if (/content/i.test(part)) open[part] = false
+        continue
       }
+      const c = canonical(el)
+      if (c.open !== undefined) open[part] = c.open
+      if (c.checked !== undefined) checked[part] = c.checked
     }
-    return {
-      activeElementRole: activeRole,
-      activeElementPart: activePart,
-      dataStates: {},
-      openFlags: {},
-      elements,
-    }
+    return { focusedPart, open, checked }
   }, partSelectors)
 }
 
@@ -368,8 +412,23 @@ export async function verifyEntry(
 
     for (const state of entry.states) {
       const script = scriptForState(state)
+      // Reset to a deterministic baseline BEFORE advancing into the state,
+      // regardless of the state's own script: a stateful component (switch,
+      // radio, checkbox) would otherwise be captured "after the previous
+      // run's interactions" (e.g. left ON) and the behavior signal would
+      // report a spurious checked divergence.
+      await runInteractions(refPage, "reset", refTarget)
+      await runInteractions(solPage, "reset", solTarget)
       await runInteractions(refPage, script, refTarget)
       await runInteractions(solPage, script, solTarget)
+      // Re-prime the SOL island before capture. `client:visible` islands
+      // re-observe on scroll: after the per-state reset (an Escape press that
+      // can leave the island mid-hydration or the viewport shifted), the
+      // example may re-hydrate and briefly present stale SSR state. Scrolling
+      // it back into view and waiting for `data-hydrated` before the token /
+      // behavior / pixel captures ensures we read the settled, interactive
+      // island — not a half-hydrated snapshot.
+      if (solTarget) await primeSolIsland(solPage, solTarget)
       await Promise.all([refPage.waitForTimeout(100), solPage.waitForTimeout(100)])
 
       // Signal 1: computed tokens.
@@ -397,10 +456,7 @@ export async function verifyEntry(
         captureBehavior(refPage, refSelectors),
         captureBehavior(solPage, solSelectors),
       ])
-      const behaviorPass =
-        refBehavior.activeElementRole === solBehavior.activeElementRole &&
-        refBehavior.activeElementPart === solBehavior.activeElementPart &&
-        JSON.stringify(refBehavior.elements) === JSON.stringify(solBehavior.elements)
+      const behaviorPass = behaviorSnapshotsEqual(refBehavior, solBehavior)
       const behaviorSignal = `behavior.${script}`
       signals.push({
         signal: behaviorSignal,
@@ -492,14 +548,15 @@ async function applyTheme(refPage: Page, solPage: Page, theme: "light" | "dark")
 }
 
 function describeBehavior(b: BehaviorSnapshot): string {
-  // Compact, scheme-independent: focus (role + declared part) then the
-  // component's own stateful elements as `<tag>:<part-or-role>=<state>`.
-  // Example: `role=combobox part=Trigger button:combobox=open ul:anon=open`
-  const states = b.elements
-    .filter((e) => e.state !== "" || e.expanded !== "")
-    .map((e) => `${e.key}=${e.state || e.expanded}`)
-    .join(" ")
-  return `role=${b.activeElementRole} part=${b.activeElementPart ?? "-"} ${states}`.trim()
+  // Compact canonical rendering: `focus=<part|->` plus only the non-default
+  // flags (checked parts: true; open parts: false — the exceptional states).
+  // Example: `focus=Trigger open=Content:false checked=Root:true`.
+  const parts: string[] = []
+  parts.push(`focus=${b.focusedPart ?? "-"}`)
+  for (const [part, v] of Object.entries(b.open)) if (v === false) parts.push(`open=${part}:false`)
+  for (const [part, v] of Object.entries(b.checked))
+    if (v === true) parts.push(`checked=${part}:true`)
+  return parts.join(" ")
 }
 
 type SharpRaw = { data: Buffer; info: { width: number; height: number } }
