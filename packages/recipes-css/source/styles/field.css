@@ -16,7 +16,7 @@
 [data-scope="field"][data-part="label"] {
   font-size: var(--ui-font-size-sm, 0.875rem);
   line-height: var(--ui-line-height-sm, 1.25rem);
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ui-fg, hsl(222 47% 11%));
 }
 

@@ -5,7 +5,7 @@
 
 @layer components {
   [data-scope="switch"][data-part="root"] {
-    @apply inline-flex items-center w-11 h-6 p-[2px] rounded-radius-full border-none cursor-pointer bg-input transition-all focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2;
+    @apply inline-flex items-center w-9 h-5 p-[2px] rounded-radius-full border-none cursor-pointer bg-input transition-all focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2;
   }
 
   [data-scope="switch"][data-part="root"][data-state="on"] {
@@ -21,11 +21,11 @@
   }
 
   [data-scope="switch"][data-part="thumb"] {
-    @apply block w-5 h-5 rounded-radius-full bg-background shadow-sm transition-transform;
+    @apply block w-5 h-5 rounded-radius-full bg-overlay shadow-sm transition-transform;
   }
 
   [data-scope="switch"][data-part="thumb"][data-state="on"] {
-    @apply translate-x-5;
+    @apply translate-x-4;
   }
 
   [data-scope="switch"][data-part="thumb"][data-state="off"] {

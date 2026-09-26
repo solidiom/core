@@ -48,8 +48,8 @@
   border-style: solid;
   border-width: 1px;
   border-color: var(--ui-border, hsl(214 32% 91%));
-  background-color: var(--ui-surface, hsl(0 0% 100%));
-  padding: 0.5rem;
+  background-color: var(--ui-surface-overlay, rgb(0 0 0 / 0.8));
+  padding: 0.25rem;
   box-shadow: var(--ui-shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1));
   transition:
     opacity 0.15s,

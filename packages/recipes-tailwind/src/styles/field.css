@@ -13,7 +13,7 @@
   }
 
   [data-scope="field"][data-part="label"] {
-    @apply text-[fontSize-sm] leading-5 font-semibold text-foreground;
+    @apply text-[fontSize-sm] leading-5 font-medium text-foreground;
   }
 
   [data-scope="field"][data-part="label"][data-disabled] {

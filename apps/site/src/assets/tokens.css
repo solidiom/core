@@ -79,7 +79,7 @@
 
   /* ── Radius ── */
   --sol-radius-sm: 8px;
-  --sol-radius-md: 12px;
+  --sol-radius-md: 6px;
   --sol-radius-lg: 16px;
   --sol-radius-xl: 20px;
   --sol-radius-full: 999px;
@@ -153,7 +153,7 @@
 
   /* ── Radius (same across themes) ── */
   --sol-radius-sm: 8px;
-  --sol-radius-md: 12px;
+  --sol-radius-md: 6px;
   --sol-radius-lg: 16px;
   --sol-radius-xl: 20px;
   --sol-radius-full: 999px;
@@ -229,7 +229,7 @@
 
     /* ── Radius ── */
     --sol-radius-sm: 8px;
-    --sol-radius-md: 12px;
+    --sol-radius-md: 6px;
     --sol-radius-lg: 16px;
     --sol-radius-xl: 20px;
     --sol-radius-full: 999px;

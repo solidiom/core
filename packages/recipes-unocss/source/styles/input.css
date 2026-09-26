@@ -12,7 +12,7 @@
   line-height: 1.25rem;
   font-family: var(--ui-font-sans, system-ui, -apple-system, sans-serif);
   color: var(--ui-fg, hsl(222 47% 11%));
-  background-color: var(--ui-surface, hsl(0 0% 100%));
+  background-color: var(--ui-surface-overlay, rgb(0 0 0 / 0.8));
   border-style: solid;
   border-width: 1px;
   border-color: var(--ui-border, hsl(214 32% 91%));

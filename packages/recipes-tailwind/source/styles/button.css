@@ -53,7 +53,7 @@
   }
 
   [data-scope="button"][data-part="root"].solidiom-btn--md {
-    @apply h-10 py-2 px-4 text-[0.875rem];
+    @apply h-9 py-2 px-4 text-[0.875rem];
   }
 
   [data-scope="button"][data-part="root"].solidiom-btn--lg {
