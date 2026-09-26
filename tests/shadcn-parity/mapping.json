@@ -603,10 +603,6 @@
         "reason": "shadcn dialog content is sm:rounded-lg (8px); Solidiom dialog content is 12px. Deliberate larger-radius modal surface (Solidiom card radius token); recorded, not a Batch-2 look fix."
       },
       {
-        "signal": "tokens.Content.padding",
-        "reason": "shadcn dialog content is p-6 (24px); Solidiom dialog content pads 24px horizontally but 32px vertically (content-box h=226 vs 146). Deliberate roomier modal; recorded."
-      },
-      {
         "signal": "tokens.Content.background-color",
         "reason": "dark theme: shadcn content is bg-background (rgb(2, 8, 23) near-black); Solidiom content is rgb(30, 41, 59) (slate-800 surface). Different dark surface palettes, consistent with the Batch-1 filled-light vs outline palette decisions."
       },
