@@ -1,5 +1,5 @@
 # input-otp — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ 52ca1525
+Reference: shadcn@3.8.5, solidiom @ 570d3a83
 Status: ❌ 2 failures, 4 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |

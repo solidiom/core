@@ -1,32 +1,32 @@
 # switch — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ 52ca1525
-Status: ❌ 16 failures, 6 accepted divergences
+Reference: shadcn@3.8.5, solidiom @ 570d3a83
+Status: ❌ 4 failures, 4 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
 |---|---|---|---|
-| tokens.Thumb.background-color | rgb(37, 99, 235) | rgba(0, 0, 0, 0) | 🟡 accepted |
-| tokens.Thumb.height | 20px | 26.25px | ❌ |
-| tokens.Thumb.width | 36px | 192.578px | 🟡 accepted |
-| tokens.Thumb.border-radius | 9999px | 0px | ❌ |
-| behavior.reset | focus=- checked=Root:true checked=Thumb:true | focus=- | ❌ |
-| pixels.light.default | ≤ 1% diff | delta 83.91999999999999% | ❌ |
-| tokens.Thumb.background-color | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | ✅ |
-| tokens.Thumb.height | 20px | 26.25px | ❌ |
-| tokens.Thumb.width | 36px | 192.578px | 🟡 accepted |
-| tokens.Thumb.border-radius | 9999px | 0px | ❌ |
-| behavior.focus | focus=Root | focus=Root checked=Root:true checked=Thumb:true | ❌ |
-| pixels.light.focus | ≤ 1% diff | delta 53.75% | ❌ |
-| tokens.Thumb.background-color | rgba(0, 0, 0, 0) | rgba(0, 0, 0, 0) | ✅ |
-| tokens.Thumb.height | 20px | 26.25px | ❌ |
-| tokens.Thumb.width | 36px | 192.578px | 🟡 accepted |
-| tokens.Thumb.border-radius | 9999px | 0px | ❌ |
-| behavior.reset | focus=Root | focus=Root checked=Root:true checked=Thumb:true | ❌ |
-| pixels.dark.default | ≤ 1% diff | delta 99.62416666666667% | ❌ |
-| tokens.Thumb.background-color | rgb(59, 130, 246) | rgba(0, 0, 0, 0) | 🟡 accepted |
-| tokens.Thumb.height | 20px | 26.25px | ❌ |
-| tokens.Thumb.width | 36px | 192.578px | 🟡 accepted |
-| tokens.Thumb.border-radius | 9999px | 0px | ❌ |
-| behavior.focus | focus=Root checked=Root:true checked=Thumb:true | focus=Root | ❌ |
-| pixels.dark.focus | ≤ 1% diff | delta 99.435% | ❌ |
+| tokens.Thumb.background-color | rgb(37, 99, 235) | rgb(248, 250, 252) | 🟡 accepted |
+| tokens.Thumb.height | 20px | 20px | ✅ |
+| tokens.Thumb.width | 36px | 36px | ✅ |
+| tokens.Thumb.border-radius | 9999px | 9999px | ✅ |
+| behavior.reset | focus=- checked=Root:true checked=Thumb:true | focus=- checked=Root:true checked=Thumb:true | ✅ |
+| pixels.light.default | ≤ 1% diff | delta 93.6925% | ❌ |
+| tokens.Thumb.background-color | rgba(0, 0, 0, 0) | rgb(248, 250, 252) | 🟡 accepted |
+| tokens.Thumb.height | 20px | 20px | ✅ |
+| tokens.Thumb.width | 36px | 36px | ✅ |
+| tokens.Thumb.border-radius | 9999px | 9999px | ✅ |
+| behavior.focus | focus=Root | focus=Root | ✅ |
+| pixels.light.focus | ≤ 1% diff | delta 71.15% | ❌ |
+| tokens.Thumb.background-color | rgba(0, 0, 0, 0) | rgb(15, 23, 42) | 🟡 accepted |
+| tokens.Thumb.height | 20px | 20px | ✅ |
+| tokens.Thumb.width | 36px | 36px | ✅ |
+| tokens.Thumb.border-radius | 9999px | 9999px | ✅ |
+| behavior.reset | focus=Root | focus=Root | ✅ |
+| pixels.dark.default | ≤ 1% diff | delta 100% | ❌ |
+| tokens.Thumb.background-color | rgb(59, 130, 246) | rgb(15, 23, 42) | 🟡 accepted |
+| tokens.Thumb.height | 20px | 20px | ✅ |
+| tokens.Thumb.width | 36px | 36px | ✅ |
+| tokens.Thumb.border-radius | 9999px | 9999px | ✅ |
+| behavior.focus | focus=Root checked=Root:true checked=Thumb:true | focus=Root checked=Root:true checked=Thumb:true | ✅ |
+| pixels.dark.focus | ≤ 1% diff | delta 99.77083333333333% | ❌ |
 
 [side-by-side PNGs + delta heatmaps: see assets/]

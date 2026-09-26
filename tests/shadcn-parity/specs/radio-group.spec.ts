@@ -17,11 +17,11 @@ const ENTRY = {
   selectors: {
     Item: {
       ref: "[role='radio']:first-of-type",
-      sol: ".radio-group-example [data-scope='radio-group'][data-part='indicator']",
+      sol: ".radio-group-example [data-scope='radio-group'][data-part='item']:first-of-type",
     },
     Indicator: {
       ref: "[role='radio']:first-of-type",
-      sol: ".radio-group-example [data-scope='radio-group'][data-part='indicator']",
+      sol: ".radio-group-example [data-scope='radio-group'][data-part='indicator']:first-of-type",
     },
   },
   tokens: {
