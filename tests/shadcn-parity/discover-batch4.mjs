@@ -289,7 +289,6 @@ async function dumpSolIslandParts(page, wrapSel) {
         seen.add(key)
         const r = el.getBoundingClientRect()
         const cs = getComputedStyle(el)
-        seen.add && seen.size // no-op
       }
     }
     const list = []

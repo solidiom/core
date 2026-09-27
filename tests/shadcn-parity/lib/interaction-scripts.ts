@@ -73,10 +73,32 @@ export const scripts: Record<string, Action[]> = {
     },
     { kind: "wait", ms: 250 },
   ],
+  // Both carousel frames label their next-slide control with the accessible
+  // name "Next slide" (shadcn embla-carousel carries it in a `.sr-only` span,
+  // the Solidiom carousel sets it as `aria-label`), so `:has-text` matches the
+  // ref; the SOL side is addressed by its scoped `data-part` for symmetry.
+  "click-carousel-next": [
+    {
+      kind: "click",
+      selector: "button:has-text('Next slide'), [data-scope='carousel'][data-part='next-button']",
+    },
+    { kind: "wait", ms: 350 },
+  ],
   // Both toast demos are triggered by a "Show ... toast" button; the ref's
   // button text is "Show a toast" and the sol island's is
   // "Show notification" (en locale), so match on the shared "Show" prefix.
   "show-toast": [
+    // The SOL toast island is `client:visible` and sits below the fold, and its
+    // `Root` part (the engine's prime target) does not exist until a toast is
+    // shown — so the engine never scrolls it into view and it never hydrates in
+    // the first (light) state. Two clicks fix this frame-agnostically: the
+    // first click's Playwright auto-scroll makes the trigger visible (firing
+    // `client:visible` hydration on the SOL side; a no-op that just re-clicks
+    // on the ref, whose handler is bound at load), and a settle wait lets the
+    // SOL `$$click` handler bind in its hydration tick; the second click then
+    // fires the toast on both frames.
+    { kind: "click", selector: "button:has-text('Show')" },
+    { kind: "wait", ms: 600 },
     { kind: "click", selector: "button:has-text('Show')" },
     { kind: "wait", ms: 400 },
   ],

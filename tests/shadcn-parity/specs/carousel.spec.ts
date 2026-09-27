@@ -52,8 +52,8 @@ const ENTRY = {
       "font-weight": "500",
     },
   },
-  interactions: ["click-next"],
-  states: ["default", "slide-2"],
+  interactions: ["click-carousel-next"],
+  states: ["default", "click-carousel-next"],
   themes: ["light", "dark"],
   tolerance: {
     pixelMaxDiff: 2,

@@ -16,20 +16,20 @@ const ENTRY = {
   parts: ["Root", "Title", "Description", "Close"],
   selectors: {
     Root: {
-      ref: "li[data-state]",
-      sol: "[data-scope='toast'][data-part='root']",
+      ref: "li[data-state='open']:has(.font-semibold)",
+      sol: ".toast-example [data-scope='toast'][data-part='root']",
     },
     Title: {
-      ref: "li[data-state] .font-semibold",
-      sol: "[data-scope='toast'][data-part='title']",
+      ref: "li[data-state='open'] .font-semibold",
+      sol: ".toast-example [data-scope='toast'][data-part='title']",
     },
     Description: {
-      ref: "li[data-state] .opacity-90",
-      sol: "[data-scope='toast'][data-part='description']",
+      ref: "li[data-state='open'] .opacity-90",
+      sol: ".toast-example [data-scope='toast'][data-part='description']",
     },
     Close: {
-      ref: "li[data-state] button",
-      sol: "[data-scope='toast'][data-part='close']",
+      ref: "li[data-state='open'] button",
+      sol: ".toast-example [data-scope='toast'][data-part='close']",
     },
   },
   tokens: {
@@ -47,7 +47,7 @@ const ENTRY = {
     },
   },
   interactions: ["show-toast"],
-  states: ["default", "toast-open"],
+  states: ["default", "show-toast"],
   themes: ["light", "dark"],
   tolerance: {
     pixelMaxDiff: 2,

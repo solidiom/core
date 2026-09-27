@@ -70,7 +70,7 @@ const ENTRY = {
     },
   },
   interactions: ["click-calendar-next"],
-  states: ["default", "next-month"],
+  states: ["default", "click-calendar-next"],
   themes: ["light", "dark"],
   tolerance: {
     pixelMaxDiff: 2,

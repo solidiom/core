@@ -1470,7 +1470,8 @@ export const dataTableRecipe: RecipeDefinition = {
       ownership: "consumer",
       ownershipReason: "The wrapper exposes only Root; consumers supply header cells.",
       base: {
-        padding: "0.75rem",
+        height: "2.5rem",
+        padding: "0.0625rem 0.5rem",
         "text-align": "left",
         "font-weight": "500",
       },
@@ -1500,7 +1501,8 @@ export const dataTableRecipe: RecipeDefinition = {
       ownership: "consumer",
       ownershipReason: "The wrapper exposes only Root; consumers supply cells within rows.",
       base: {
-        padding: "0.75rem",
+        padding: "0.5rem",
+        "font-weight": "400",
       },
     },
   ],
@@ -1568,6 +1570,7 @@ export const progressRecipe: RecipeDefinition = {
       ownershipReason: "The wrapper exposes only Root; consumers supply the progress indicator.",
       base: {
         height: "100%",
+        "border-radius": "0",
         "background-color": { token: "primary" },
         transition: "width 0.15s",
       },
