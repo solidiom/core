@@ -13,6 +13,8 @@ export interface FocusScopeOptions {
   enabled?: boolean
   /** Element to restore focus to on deactivation. */
   restoreTarget?: () => Element | null | undefined
+  /** Whether to move focus into the scope on activation. Default true. Set false to keep focus on the triggering element (vaul drawer model) while still trapping Tab and restoring focus on close. */
+  moveFocus?: boolean
 }
 
 /** Returns all focusable elements within a container. */
@@ -37,14 +39,16 @@ function getFocusableElements(container: Element): HTMLElement[] {
  *
  * On activation:
  * - Records the currently focused element for restoration.
- * - Moves focus to the first focusable element inside the container.
+ * - Moves focus to the first focusable element inside the container (unless
+ *   `moveFocus` is false, which keeps focus on the triggering element — the
+ *   vaul drawer model — while still trapping Tab and restoring focus on close).
  *
  * On deactivation (returned cleanup):
  * - Removes the Tab trap listener.
  * - Restores focus to the recorded element (or restoreTarget if provided).
  */
 export function activateFocusScope(options: FocusScopeOptions): () => void {
-  const { element, enabled = true, restoreTarget } = options
+  const { element, enabled = true, restoreTarget, moveFocus = true } = options
 
   if (!enabled) return () => {}
 
@@ -54,16 +58,20 @@ export function activateFocusScope(options: FocusScopeOptions): () => void {
   // Record focus for restoration
   const previouslyFocused = doc.activeElement as HTMLElement | null
 
-  // Move focus into the scope
-  const container = element()
-  if (container) {
-    const focusable = getFocusableElements(container)
-    if (focusable.length > 0) {
-      focusable[0]!.focus()
-    } else if (container instanceof HTMLElement) {
-      // If no focusable children, focus the container itself
-      container.setAttribute("tabindex", "-1")
-      container.focus()
+  // Move focus into the scope (skipped when moveFocus is false — e.g. the
+  // vaul drawer model keeps focus on the trigger; the Tab trap below still
+  // captures focus once the user tabs in, and close still restores it).
+  if (moveFocus) {
+    const container = element()
+    if (container) {
+      const focusable = getFocusableElements(container)
+      if (focusable.length > 0) {
+        focusable[0]!.focus()
+      } else if (container instanceof HTMLElement) {
+        // If no focusable children, focus the container itself
+        container.setAttribute("tabindex", "-1")
+        container.focus()
+      }
     }
   }
 
