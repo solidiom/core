@@ -1,6 +1,6 @@
 # drawer — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ ddb8b2cf
-Status: ❌ 16 failures, 14 accepted divergences
+Reference: shadcn@3.8.5, solidiom @ 5a06a28f
+Status: ❌ 14 failures, 14 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
 |---|---|---|---|
@@ -16,7 +16,7 @@ Status: ❌ 16 failures, 14 accepted divergences
 | tokens.Content.width | 1280px | 288px | ❌ |
 | tokens.Content.height | 158px | 720px | ❌ |
 | tokens.Backdrop.background-color | rgba(0, 0, 0, 0.8) | rgba(0, 0, 0, 0) | 🟡 accepted |
-| behavior.open | focus=Trigger | focus=Content | ❌ |
+| behavior.open | focus=Trigger | focus=Trigger | ✅ |
 | pixels.light.open | ≤ 1% diff | delta 99.9825% | ❌ |
 | tokens.Content.background-color | rgb(255, 255, 255) | (missing element) | 🟡 accepted |
 | tokens.Content.border-radius | 10px 10px 0px 0px | (missing element) | 🟡 accepted |
@@ -37,7 +37,7 @@ Status: ❌ 16 failures, 14 accepted divergences
 | tokens.Content.width | 1280px | 288px | ❌ |
 | tokens.Content.height | 158px | 720px | ❌ |
 | tokens.Backdrop.background-color | rgba(0, 0, 0, 0.8) | rgba(0, 0, 0, 0) | 🟡 accepted |
-| behavior.open | focus=Trigger | focus=Content | ❌ |
+| behavior.open | focus=Trigger | focus=Trigger | ✅ |
 | pixels.dark.open | ≤ 1% diff | delta 99.995% | ❌ |
 | tokens.Content.background-color | rgb(2, 8, 23) | (missing element) | 🟡 accepted |
 | tokens.Content.border-radius | 10px 10px 0px 0px | (missing element) | 🟡 accepted |
