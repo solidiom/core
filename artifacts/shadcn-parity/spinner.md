@@ -1,5 +1,5 @@
 # spinner — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ ef92d5ae
+Reference: shadcn@3.8.5, solidiom @ 65af4c6b
 Status: ❌ 2 failures, 0 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
@@ -7,7 +7,7 @@ Status: ❌ 2 failures, 0 accepted divergences
 | tokens.Root.width | 16px | 16px | ✅ |
 | tokens.Root.height | 16px | 16px | ✅ |
 | behavior.reset | focus=- | focus=- | ✅ |
-| pixels.light.default | ≤ 1% diff | delta 57.725% | ❌ |
+| pixels.light.default | ≤ 1% diff | delta 49.80583333333333% | ❌ |
 | tokens.Root.width | 16px | 16px | ✅ |
 | tokens.Root.height | 16px | 16px | ✅ |
 | behavior.reset | focus=- | focus=- | ✅ |

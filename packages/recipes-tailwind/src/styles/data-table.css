@@ -25,6 +25,6 @@
   }
 
   [data-scope="data-table"][data-part="cell"] {
-    @apply p-2 font-normal;
+    @apply p-2 font-medium;
   }
 }

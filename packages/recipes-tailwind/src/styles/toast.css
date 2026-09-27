@@ -9,11 +9,11 @@
   }
 
   [data-scope="toast"][data-part="root"] {
-    @apply flex items-start gap-3 rounded-radius border-solid border-border bg-background p-4 shadow-md;
+    @apply flex items-start gap-3 rounded-radius border-solid border-border bg-background p-4 text-[0.875rem] shadow-md;
   }
 
   [data-scope="toast"][data-part="title"] {
-    @apply text-[0.875rem] font-medium;
+    @apply text-[0.875rem] font-semibold;
   }
 
   [data-scope="toast"][data-part="description"] {

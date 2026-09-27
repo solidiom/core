@@ -1,6 +1,6 @@
 # toast — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ ef92d5ae
-Status: ❌ 16 failures, 0 accepted divergences
+Reference: shadcn@3.8.5, solidiom @ 65af4c6b
+Status: ❌ 14 failures, 0 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
 |---|---|---|---|
@@ -15,7 +15,7 @@ Status: ❌ 16 failures, 0 accepted divergences
 | tokens.Root.border-radius | 6px | 8px | ❌ |
 | tokens.Root.border-width | 1px | 1px | ✅ |
 | tokens.Root.font-size | 16px | 16px | ✅ |
-| tokens.Title.font-size | 14px | 13px | ❌ |
+| tokens.Title.font-size | 14px | 14px | ✅ |
 | tokens.Title.font-weight | 600 | 600 | ✅ |
 | tokens.Description.font-size | 12px | 12px | ✅ |
 | behavior.show-toast | focus=- | focus=- | ❌ |
@@ -23,7 +23,7 @@ Status: ❌ 16 failures, 0 accepted divergences
 | tokens.Root.border-radius | (missing element) | 8px | ❌ |
 | tokens.Root.border-width | (missing element) | 1px | ❌ |
 | tokens.Root.font-size | (missing element) | 16px | ❌ |
-| tokens.Title.font-size | (missing element) | 13px | ❌ |
+| tokens.Title.font-size | (missing element) | 14px | ❌ |
 | tokens.Title.font-weight | (missing element) | 600 | ❌ |
 | tokens.Description.font-size | (missing element) | 12px | ❌ |
 | behavior.reset | focus=- | focus=- | ✅ |
@@ -31,10 +31,10 @@ Status: ❌ 16 failures, 0 accepted divergences
 | tokens.Root.border-radius | 6px | 8px | ❌ |
 | tokens.Root.border-width | 1px | 1px | ✅ |
 | tokens.Root.font-size | 16px | 16px | ✅ |
-| tokens.Title.font-size | 14px | 13px | ❌ |
+| tokens.Title.font-size | 14px | 14px | ✅ |
 | tokens.Title.font-weight | 600 | 600 | ✅ |
 | tokens.Description.font-size | 12px | 12px | ✅ |
 | behavior.show-toast | focus=- | focus=- | ❌ |
-| pixels.dark.show-toast | ≤ 1% diff | delta 99.96416666666667% | ❌ |
+| pixels.dark.show-toast | ≤ 1% diff | delta 99.965% | ❌ |
 
 [side-by-side PNGs + delta heatmaps: see assets/]

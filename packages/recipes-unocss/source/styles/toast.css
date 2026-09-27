@@ -24,12 +24,13 @@
   border-color: var(--ui-border, hsl(214 32% 91%));
   background-color: var(--ui-surface, hsl(0 0% 100%));
   padding: 1rem;
+  font-size: 0.875rem;
   box-shadow: var(--ui-shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1));
 }
 
 [data-scope="toast"][data-part="title"] {
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 [data-scope="toast"][data-part="description"] {

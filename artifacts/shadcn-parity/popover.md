@@ -1,5 +1,5 @@
 # popover — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ ba53c237
+Reference: shadcn@3.8.5, solidiom @ 65af4c6b
 Status: ❌ 8 failures, 2 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |

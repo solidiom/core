@@ -100,6 +100,13 @@ export const scripts: Record<string, Action[]> = {
     { kind: "click", selector: "button:has-text('Show')" },
     { kind: "wait", ms: 600 },
     { kind: "click", selector: "button:has-text('Show')" },
+    // Wait for the toast to be present AND open on the frame being driven.
+    // `li[data-state='open']` is the shadcn (Radix) toast; the Solidiom island
+    // renders its toast as a `role='status'` div (no li), which already exists
+    // after the 400ms settle, so `waitForSelector` is a no-op there. Without
+    // the wait the ref frame captured before its Radix viewport mounted the
+    // toast node, so the ref title/description read "(missing element)".
+    { kind: "wait", selector: "li[data-state='open'], [role='status']" },
     { kind: "wait", ms: 400 },
   ],
   "right-click": [{ kind: "right-click", selector: T }],

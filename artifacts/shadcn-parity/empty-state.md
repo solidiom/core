@@ -1,5 +1,5 @@
 # empty-state — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ ef92d5ae
+Reference: shadcn@3.8.5, solidiom @ 65af4c6b
 Status: ❌ 2 failures, 0 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
