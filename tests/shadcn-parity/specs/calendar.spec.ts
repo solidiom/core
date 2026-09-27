@@ -65,7 +65,7 @@ const ENTRY = {
     Cell: {
       width: "32px",
       height: "32px",
-      "font-size": "16px",
+      "font-size": "14px",
       "border-radius": "6px",
     },
   },

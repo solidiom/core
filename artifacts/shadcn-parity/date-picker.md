@@ -1,5 +1,5 @@
 # date-picker — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ 2b33596b
+Reference: shadcn@3.8.5, solidiom @ 46291271
 Status: ❌ 4 failures, 2 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |

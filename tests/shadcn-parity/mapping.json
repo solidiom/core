@@ -127,7 +127,7 @@
     "acceptedDivergences": [
       {
         "signal": "tokens.Root.color",
-        "reason": "shadcn label color = rgb(2, 8, 23) (foreground); Solidiom label color = rgb(17, 24, 39). Different foreground palettes, deliberate. The font-size (14px) token matches \u2014 that is the asserted 'like shadcn' value."
+        "reason": "shadcn label color = rgb(2, 8, 23) (foreground); Solidiom label color = rgb(17, 24, 39). Different foreground palettes, deliberate. The font-size (14px) token matches — that is the asserted 'like shadcn' value."
       },
       {
         "signal": "tokens.Root.font-weight",
@@ -475,7 +475,7 @@
       },
       {
         "signal": "tokens.Slot.border-radius",
-        "reason": "STRUCTURAL: shadcn groups OTP slots into a segmented pill (only the outermost corners rounded: 6px on the group ends, 0 on the inner joins); Solidiom renders each slot as an individual fully-rounded box (8px on all four corners). No single per-slot radius token can express parity \u2014 documented so the report records it. A true fix changes Solidiom's slot grouping model (later batch)."
+        "reason": "STRUCTURAL: shadcn groups OTP slots into a segmented pill (only the outermost corners rounded: 6px on the group ends, 0 on the inner joins); Solidiom renders each slot as an individual fully-rounded box (8px on all four corners). No single per-slot radius token can express parity — documented so the report records it. A true fix changes Solidiom's slot grouping model (later batch)."
       },
       {
         "signal": "tokens.Slot.height",
@@ -669,7 +669,7 @@
       },
       {
         "signal": "behavior.close-overlay-click",
-        "reason": "Deliberate (Radix AlertDialog semantics): clicking the overlay/backdrop does NOT dismiss an alert dialog \u2014 the shadcn reference stays open with focus on Cancel (focus=Content, open=Trigger/Content:true). Solidiom (per WAI-ARIA alert-dialog role) closes on overlay click and focus drops to body. The mismatch is the intended alert-dialog product behavior; recorded so the harness does not flag it as a fixable gap."
+        "reason": "Deliberate (Radix AlertDialog semantics): clicking the overlay/backdrop does NOT dismiss an alert dialog — the shadcn reference stays open with focus on Cancel (focus=Content, open=Trigger/Content:true). Solidiom (per WAI-ARIA alert-dialog role) closes on overlay click and focus drops to body. The mismatch is the intended alert-dialog product behavior; recorded so the harness does not flag it as a fixable gap."
       },
       {
         "signal": "behavior.reset",
@@ -733,7 +733,7 @@
       },
       {
         "signal": "behavior.open",
-        "reason": "Open-state focus parity holds (both frames trap focus inside the sheet content, on the Close button \u2192 focus=Content on both sides). The snapshot deep-equal still fails on ONE open flag: the shadcn reference carries a Backdrop part whose Radix overlay stays mounted with data-state=open (open.Backdrop:true), while the Solidiom sheet backdrop element is not resolved in the open capture (no open flag recorded). Portal/part-model difference between Radix overlay and Solidiom backdrop; recorded so the fix pass does not chase a focus bug that is actually at parity."
+        "reason": "Open-state focus parity holds (both frames trap focus inside the sheet content, on the Close button → focus=Content on both sides). The snapshot deep-equal still fails on ONE open flag: the shadcn reference carries a Backdrop part whose Radix overlay stays mounted with data-state=open (open.Backdrop:true), while the Solidiom sheet backdrop element is not resolved in the open capture (no open flag recorded). Portal/part-model difference between Radix overlay and Solidiom backdrop; recorded so the fix pass does not chase a focus bug that is actually at parity."
       }
     ]
   },
@@ -900,7 +900,7 @@
       },
       {
         "signal": "behavior.reset",
-        "reason": "Pointer-gated overlay vocabulary: on the dark-theme baseline the Radix reference (data-state=delayed-open / hover-gated) records no canonical open flags (open map empty), while Solidiom records open=Trigger:false open=Content:false. Both frames are closed (open=false) and unfocused \u2014 the mismatch is pure state-vocabulary (delayed-open is not in the canonical open|closed set), not a behavioral divergence. Recorded."
+        "reason": "Pointer-gated overlay vocabulary: on the dark-theme baseline the Radix reference (data-state=delayed-open / hover-gated) records no canonical open flags (open map empty), while Solidiom records open=Trigger:false open=Content:false. Both frames are closed (open=false) and unfocused — the mismatch is pure state-vocabulary (delayed-open is not in the canonical open|closed set), not a behavioral divergence. Recorded."
       }
     ]
   },
@@ -949,15 +949,15 @@
       },
       {
         "signal": "behavior.close-esc",
-        "reason": "Deliberate (Radix HoverCard semantics): hover-cards are pointer-gated and NOT dismissed by Escape \u2014 the shadcn reference stays open on Esc until the pointer leaves. Solidiom closes on Esc (WAI-ARIA popup-role behavior). The mismatch is intentional; recorded."
+        "reason": "Deliberate (Radix HoverCard semantics): hover-cards are pointer-gated and NOT dismissed by Escape — the shadcn reference stays open on Esc until the pointer leaves. Solidiom closes on Esc (WAI-ARIA popup-role behavior). The mismatch is intentional; recorded."
       },
       {
         "signal": "behavior.hover",
-        "reason": "Open-state parity holds on the second capture pass (Radix hover-card data-state=open on the ref, open=Trigger:false open=Content:false recorded on both frames; focus=- on both). The first pass of the engine occasionally captures the Radix side pre-open (its 50ms hover settle is shorter than Radix hover open-delay under load) \u2014 an engine-timing artifact of pointer-gated overlays, not a recipe divergence. Recorded so the fix pass does not chase it."
+        "reason": "Open-state parity holds on the second capture pass (Radix hover-card data-state=open on the ref, open=Trigger:false open=Content:false recorded on both frames; focus=- on both). The first pass of the engine occasionally captures the Radix side pre-open (its 50ms hover settle is shorter than Radix hover open-delay under load) — an engine-timing artifact of pointer-gated overlays, not a recipe divergence. Recorded so the fix pass does not chase it."
       },
       {
         "signal": "behavior.reset",
-        "reason": "Pointer-gated overlay vocabulary: on the dark-theme baseline the Radix reference (data-state=delayed-open / hover-gated) records no canonical open flags (open map empty), while Solidiom records open=Trigger:false open=Content:false. Both frames are closed (open=false) and unfocused \u2014 the mismatch is pure state-vocabulary (delayed-open is not in the canonical open|closed set), not a behavioral divergence. Recorded."
+        "reason": "Pointer-gated overlay vocabulary: on the dark-theme baseline the Radix reference (data-state=delayed-open / hover-gated) records no canonical open flags (open map empty), while Solidiom records open=Trigger:false open=Content:false. Both frames are closed (open=false) and unfocused — the mismatch is pure state-vocabulary (delayed-open is not in the canonical open|closed set), not a behavioral divergence. Recorded."
       }
     ]
   },
@@ -1085,11 +1085,11 @@
       },
       {
         "signal": "behavior.close-esc",
-        "reason": "Focus-on-open: shadcn (Radix ContextMenu) moves focus into the menu content; Solidiom context-menu opens without moving focus (activeElement stays on main). Esc-close parity holds (both close; content unmounts on the sol side). Focus-return differs (shadcn returns to body \u2014 Radix ContextMenu has no persistent trigger \u2014 vs sol stays on main). Recorded so the canonical mismatch reads as known."
+        "reason": "Focus-on-open: shadcn (Radix ContextMenu) moves focus into the menu content; Solidiom context-menu opens without moving focus (activeElement stays on main). Esc-close parity holds (both close; content unmounts on the sol side). Focus-return differs (shadcn returns to body — Radix ContextMenu has no persistent trigger — vs sol stays on main). Recorded so the canonical mismatch reads as known."
       },
       {
         "signal": "behavior.right-click",
-        "reason": "Open-state focus: the Radix reference keeps focus on the trigger element (focus=Trigger \u2014 Radix ContextMenu focuses the trigger, not the menu), while Solidiom leaves focus on <main> (focus=-). Both frames open the menu and Esc closes it (content unmounts on solid). The focus-on-open difference is Radix vs Solidiom context-menu focus models; recorded."
+        "reason": "Open-state focus: the Radix reference keeps focus on the trigger element (focus=Trigger — Radix ContextMenu focuses the trigger, not the menu), while Solidiom leaves focus on <main> (focus=-). Both frames open the menu and Esc closes it (content unmounts on solid). The focus-on-open difference is Radix vs Solidiom context-menu focus models; recorded."
       }
     ]
   },
@@ -1443,11 +1443,11 @@
       },
       {
         "signal": "behavior.open",
-        "reason": "The shadcn reference opens a floating NavigationMenuContent viewport on trigger click; the Solidiom navigation-menu island does not render a content/viewport part in its example (the live island exposes only root/list/item/trigger). The open-state snapshot therefore cannot be compared \u2014 recorded as a structural island difference, not a fixable look gap. Parts limited to Trigger+List (both present on both frames)."
+        "reason": "The shadcn reference opens a floating NavigationMenuContent viewport on trigger click; the Solidiom navigation-menu island does not render a content/viewport part in its example (the live island exposes only root/list/item/trigger). The open-state snapshot therefore cannot be compared — recorded as a structural island difference, not a fixable look gap. Parts limited to Trigger+List (both present on both frames)."
       },
       {
         "signal": "behavior.reset",
-        "reason": "State-lexicality difference: the shadcn (Radix) navigation-menu trigger has NO data-state attribute when fully closed (canonicalState yields no flag), while the Solidiom island trigger always carries data-state (open=Trigger:false recorded). After the open+Esc reset both frames are closed, but the snapshot deep-equal trips on the presence/absence of the closed flag. No open-state behavior divergence \u2014 both close. Recorded."
+        "reason": "State-lexicality difference: the shadcn (Radix) navigation-menu trigger has NO data-state attribute when fully closed (canonicalState yields no flag), while the Solidiom island trigger always carries data-state (open=Trigger:false recorded). After the open+Esc reset both frames are closed, but the snapshot deep-equal trips on the presence/absence of the closed flag. No open-state behavior divergence — both close. Recorded."
       },
       {
         "signal": "pixels",
@@ -1509,11 +1509,11 @@
       },
       {
         "signal": "behavior.click-next",
-        "reason": "Clicking Next on the shadcn reference navigates to a '#' href (no client-side page state \u2014 the href does not advance an active item); the Solidiom pagination island has real page state so clicking Next advances the current page (1->2) and moves aria-current. Different state model (link-anchors vs stateful pager). Recorded; the visual geometry (Next/Previous) is at parity."
+        "reason": "Clicking Next on the shadcn reference navigates to a '#' href (no client-side page state — the href does not advance an active item); the Solidiom pagination island has real page state so clicking Next advances the current page (1->2) and moves aria-current. Different state model (link-anchors vs stateful pager). Recorded; the visual geometry (Next/Previous) is at parity."
       },
       {
         "signal": "pixels",
-        "reason": "Pixel crops include differing island chrome (the sol island wraps the pagination in a bordered surface-raised card) + differing page-count/copy (shadcn 1/2/3/\u2026/next vs Solidiom its numbered pages) + the structural state model (shadcn Next is a '#' anchor that does not advance an active item; Solidiom is a stateful pager where click-next moves aria-current). The Next/Previous geometry (h-36px, rounded-6px, 14px, 500) is at parity on the token rows; the delta is framing + copy + the state model, not a component look gap."
+        "reason": "Pixel crops include differing island chrome (the sol island wraps the pagination in a bordered surface-raised card) + differing page-count/copy (shadcn 1/2/3/…/next vs Solidiom its numbered pages) + the structural state model (shadcn Next is a '#' anchor that does not advance an active item; Solidiom is a stateful pager where click-next moves aria-current). The Next/Previous geometry (h-36px, rounded-6px, 14px, 500) is at parity on the token rows; the delta is framing + copy + the state model, not a component look gap."
       }
     ]
   },
@@ -1574,7 +1574,7 @@
       },
       {
         "signal": "tokens.Group.border-radius",
-        "reason": "STRUCTURAL: the shadcn resizable group element itself is borderless (border-radius 0px \u2014 its rounded-lg frame comes from the page's separate wrapper div); the Solidiom island's group carries the rounded overflow-hidden frame (6px, from the radius token). Both present a rounded, borderless-panel split visually; the radius sits on a different DOM node. Not a fixable look gap without moving the frame to a wrapper."
+        "reason": "STRUCTURAL: the shadcn resizable group element itself is borderless (border-radius 0px — its rounded-lg frame comes from the page's separate wrapper div); the Solidiom island's group carries the rounded overflow-hidden frame (6px, from the radius token). Both present a rounded, borderless-panel split visually; the radius sits on a different DOM node. Not a fixable look gap without moving the frame to a wrapper."
       }
     ]
   },
@@ -1845,7 +1845,7 @@
       "sitePath": "/components/table/examples"
     },
     "status": "gap",
-    "gapReason": "no Solidiom live examples island for plain table \u2014 Solidiom ships data-table only (there is no `table` entry in COMPONENTS_WITH_EXAMPLES); shadcn 3.8.5 registry reference page exists.",
+    "gapReason": "no Solidiom live examples island for plain table — Solidiom ships data-table only (there is no `table` entry in COMPONENTS_WITH_EXAMPLES); shadcn 3.8.5 registry reference page exists.",
     "parts": [],
     "tokens": {},
     "interactions": [],
@@ -1920,7 +1920,7 @@
       "Cell": {
         "width": "32px",
         "height": "32px",
-        "font-size": "16px",
+        "font-size": "14px",
         "border-radius": "6px"
       }
     },
@@ -2403,7 +2403,7 @@
       "sitePath": "/components/separator/examples"
     },
     "status": "gap",
-    "gapReason": "no Solidiom live examples island (separator is not in COMPONENTS_WITH_EXAMPLES \u2014 SeparatorExample.tsx exists but is not registered in ComponentExample.astro or the content collection); shadcn 3.8.5 registry reference page exists.",
+    "gapReason": "no Solidiom live examples island (separator is not in COMPONENTS_WITH_EXAMPLES — SeparatorExample.tsx exists but is not registered in ComponentExample.astro or the content collection); shadcn 3.8.5 registry reference page exists.",
     "parts": [],
     "tokens": {},
     "interactions": [],
