@@ -67,6 +67,36 @@ No 3.8.5 registry 404s in Batch 3: all names resolved and `shadcn add` wrote
 no oklch clobber occurred (the `--sidebar-*` hsl tokens the sidebar component needs
 are present in the canonical block).
 
+Batch 4 (data & feedback) — 10 pages added; 2 names 404 in the 3.8.5 registry:
+
+- table: registry new-york (no new dep; renders table/thead/tbody)
+- calendar: registry new-york; deps react-day-picker ^10.0.1 + date-fns ^4.4.0
+  (react-day-picker v10 — the v9-era `initialFocus` prop is gone; pages do not set it)
+- carousel: registry new-york; dep embla-carousel-react ^8.6.0
+- progress: registry new-york; dep @radix-ui/react-progress ^1.1.16
+- skeleton: registry new-york (no new dep; div + animate-pulse) — the file already
+  existed from the Batch-3 dep add and was identical, so `shadcn add` skipped it
+- spinner: registry new-york (no new dep; lucide `Loader2Icon` wrapper)
+- toast: registry new-york; dep @radix-ui/react-toast ^1.2.23 (writes ui/toast.tsx,
+  hooks/use-toast.ts, ui/toaster.tsx)
+- empty: registry new-york (no new dep; cva EmptyHeader/Media/Title/Description/
+  Content layout) — used as the shadcn reference for the Solidiom `empty-state`
+  island (the registry name is `empty`, not `empty-state`)
+- data-table: **NOT in the 3.8.5 registry** (exact 404 on
+  https://ui.shadcn.com/r/styles/new-york/data-table.json). The page is built from
+  the available primitives: `table.tsx` + `pagination.tsx` in a bordered wrapper
+  (the classic shadcn data-table recipe = table + pagination + column actions).
+- date-picker: **NOT in the 3.8.5 registry** (exact 404). The page is built from
+  the available primitives: `popover.tsx` + `calendar.tsx` + a formatted
+  `Button` trigger (the classic shadcn date-picker recipe).
+- chart: not added (no Solidiom island → mapping entry `gap`).
+
+No oklch clobber in Batch 4 either: `src/index.css` still the canonical hsl block
+(0 `oklch` occurrences) and `tailwind.config.js` still `plugins: []`; `/button`
+regression-checked styled. The `shadcn add` bulk prompt on the pre-existing
+`skeleton.tsx`/`button.tsx` was answered `n` (files identical — only formatting
+differs from the registry template); each remaining name was re-added with `-y`.
+
 Reference pages (src/pages/<id>.tsx, registered in src/main.tsx `pages`):
 each overlay uses the real shadcn API with a minimal interactive setup —
 dialog/alert-dialog/sheet/drawer/popover/tooltip/hover-card/dropdown-menu/
@@ -100,6 +130,11 @@ Lockfile-pinned versions (package-lock.json, npm 11.19.0, Node v26.7.0):
 | lucide-react                  | 0.469.0 |
 | @radix-ui/react-slot          | 1.3.3   |
 | vaul                          | 1.1.2   |
+| react-day-picker              | 10.0.1  |
+| date-fns                      | 4.4.0   |
+| embla-carousel-react          | 8.6.0   |
+| @radix-ui/react-progress      | 1.1.16  |
+| @radix-ui/react-toast         | 1.2.23  |
 | @radix-ui/react-dialog        | 1.1.23  |
 | @radix-ui/react-alert-dialog  | 1.1.23  |
 | @radix-ui/react-popover       | 1.1.23  |

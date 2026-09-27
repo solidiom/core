@@ -36,6 +36,16 @@ import Avatar from "./pages/avatar"
 import Badge from "./pages/badge"
 import Kbd from "./pages/kbd"
 import Sidebar from "./pages/sidebar"
+import Table from "./pages/table"
+import Calendar from "./pages/calendar"
+import DatePicker from "./pages/date-picker"
+import DataTable from "./pages/data-table"
+import Carousel from "./pages/carousel"
+import Progress from "./pages/progress"
+import Skeleton from "./pages/skeleton"
+import Spinner from "./pages/spinner"
+import Toast from "./pages/toast"
+import Empty from "./pages/empty"
 
 const pages: Record<string, React.ComponentType> = {
   button: Button,
@@ -72,6 +82,16 @@ const pages: Record<string, React.ComponentType> = {
   badge: Badge,
   kbd: Kbd,
   sidebar: Sidebar,
+  table: Table,
+  calendar: Calendar,
+  "date-picker": DatePicker,
+  "data-table": DataTable,
+  carousel: Carousel,
+  progress: Progress,
+  skeleton: Skeleton,
+  spinner: Spinner,
+  toast: Toast,
+  empty: Empty,
 }
 
 function ComponentPage() {
