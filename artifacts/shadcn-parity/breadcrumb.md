@@ -1,5 +1,5 @@
 # breadcrumb — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ b4adaad9
+Reference: shadcn@3.8.5, solidiom @ ba53c237
 Status: ✅ 0 failures, 4 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |

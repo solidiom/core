@@ -63,6 +63,23 @@ export const scripts: Record<string, Action[]> = {
     { kind: "click", selector: "[role='tab']:nth-of-type(2)" },
     { kind: "wait", ms: 150 },
   ],
+  // Batch-4 (data & feedback). Frame-agnostic: the shadcn (react-day-picker)
+  // calendar next-month button carries the class `rdp-button_next`; the
+  // Solidiom calendar exposes `data-part='next-button'` on its own scope.
+  "click-calendar-next": [
+    {
+      kind: "click",
+      selector: "button.rdp-button_next, [data-scope='calendar'][data-part='next-button']",
+    },
+    { kind: "wait", ms: 250 },
+  ],
+  // Both toast demos are triggered by a "Show ... toast" button; the ref's
+  // button text is "Show a toast" and the sol island's is
+  // "Show notification" (en locale), so match on the shared "Show" prefix.
+  "show-toast": [
+    { kind: "click", selector: "button:has-text('Show')" },
+    { kind: "wait", ms: 400 },
+  ],
   "right-click": [{ kind: "right-click", selector: T }],
   // `hover`/`close-esc`/`close-overlay-click` scripts above double as the
   // tooltip + hover-card state scripts (hover opens them; Escape closes the

@@ -1,5 +1,5 @@
 # hover-card — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ ddb8b2cf
+Reference: shadcn@3.8.5, solidiom @ ba53c237
 Status: ❌ 12 failures, 3 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |

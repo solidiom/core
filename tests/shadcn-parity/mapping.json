@@ -127,7 +127,7 @@
     "acceptedDivergences": [
       {
         "signal": "tokens.Root.color",
-        "reason": "shadcn label color = rgb(2, 8, 23) (foreground); Solidiom label color = rgb(17, 24, 39). Different foreground palettes, deliberate. The font-size (14px) token matches — that is the asserted 'like shadcn' value."
+        "reason": "shadcn label color = rgb(2, 8, 23) (foreground); Solidiom label color = rgb(17, 24, 39). Different foreground palettes, deliberate. The font-size (14px) token matches \u2014 that is the asserted 'like shadcn' value."
       },
       {
         "signal": "tokens.Root.font-weight",
@@ -475,7 +475,7 @@
       },
       {
         "signal": "tokens.Slot.border-radius",
-        "reason": "STRUCTURAL: shadcn groups OTP slots into a segmented pill (only the outermost corners rounded: 6px on the group ends, 0 on the inner joins); Solidiom renders each slot as an individual fully-rounded box (8px on all four corners). No single per-slot radius token can express parity — documented so the report records it. A true fix changes Solidiom's slot grouping model (later batch)."
+        "reason": "STRUCTURAL: shadcn groups OTP slots into a segmented pill (only the outermost corners rounded: 6px on the group ends, 0 on the inner joins); Solidiom renders each slot as an individual fully-rounded box (8px on all four corners). No single per-slot radius token can express parity \u2014 documented so the report records it. A true fix changes Solidiom's slot grouping model (later batch)."
       },
       {
         "signal": "tokens.Slot.height",
@@ -669,7 +669,7 @@
       },
       {
         "signal": "behavior.close-overlay-click",
-        "reason": "Deliberate (Radix AlertDialog semantics): clicking the overlay/backdrop does NOT dismiss an alert dialog — the shadcn reference stays open with focus on Cancel (focus=Content, open=Trigger/Content:true). Solidiom (per WAI-ARIA alert-dialog role) closes on overlay click and focus drops to body. The mismatch is the intended alert-dialog product behavior; recorded so the harness does not flag it as a fixable gap."
+        "reason": "Deliberate (Radix AlertDialog semantics): clicking the overlay/backdrop does NOT dismiss an alert dialog \u2014 the shadcn reference stays open with focus on Cancel (focus=Content, open=Trigger/Content:true). Solidiom (per WAI-ARIA alert-dialog role) closes on overlay click and focus drops to body. The mismatch is the intended alert-dialog product behavior; recorded so the harness does not flag it as a fixable gap."
       },
       {
         "signal": "behavior.reset",
@@ -733,7 +733,7 @@
       },
       {
         "signal": "behavior.open",
-        "reason": "Open-state focus parity holds (both frames trap focus inside the sheet content, on the Close button → focus=Content on both sides). The snapshot deep-equal still fails on ONE open flag: the shadcn reference carries a Backdrop part whose Radix overlay stays mounted with data-state=open (open.Backdrop:true), while the Solidiom sheet backdrop element is not resolved in the open capture (no open flag recorded). Portal/part-model difference between Radix overlay and Solidiom backdrop; recorded so the fix pass does not chase a focus bug that is actually at parity."
+        "reason": "Open-state focus parity holds (both frames trap focus inside the sheet content, on the Close button \u2192 focus=Content on both sides). The snapshot deep-equal still fails on ONE open flag: the shadcn reference carries a Backdrop part whose Radix overlay stays mounted with data-state=open (open.Backdrop:true), while the Solidiom sheet backdrop element is not resolved in the open capture (no open flag recorded). Portal/part-model difference between Radix overlay and Solidiom backdrop; recorded so the fix pass does not chase a focus bug that is actually at parity."
       }
     ]
   },
@@ -896,7 +896,7 @@
       },
       {
         "signal": "behavior.reset",
-        "reason": "Pointer-gated overlay vocabulary: on the dark-theme baseline the Radix reference (data-state=delayed-open / hover-gated) records no canonical open flags (open map empty), while Solidiom records open=Trigger:false open=Content:false. Both frames are closed (open=false) and unfocused — the mismatch is pure state-vocabulary (delayed-open is not in the canonical open|closed set), not a behavioral divergence. Recorded."
+        "reason": "Pointer-gated overlay vocabulary: on the dark-theme baseline the Radix reference (data-state=delayed-open / hover-gated) records no canonical open flags (open map empty), while Solidiom records open=Trigger:false open=Content:false. Both frames are closed (open=false) and unfocused \u2014 the mismatch is pure state-vocabulary (delayed-open is not in the canonical open|closed set), not a behavioral divergence. Recorded."
       }
     ]
   },
@@ -945,15 +945,15 @@
       },
       {
         "signal": "behavior.close-esc",
-        "reason": "Deliberate (Radix HoverCard semantics): hover-cards are pointer-gated and NOT dismissed by Escape — the shadcn reference stays open on Esc until the pointer leaves. Solidiom closes on Esc (WAI-ARIA popup-role behavior). The mismatch is intentional; recorded."
+        "reason": "Deliberate (Radix HoverCard semantics): hover-cards are pointer-gated and NOT dismissed by Escape \u2014 the shadcn reference stays open on Esc until the pointer leaves. Solidiom closes on Esc (WAI-ARIA popup-role behavior). The mismatch is intentional; recorded."
       },
       {
         "signal": "behavior.hover",
-        "reason": "Open-state parity holds on the second capture pass (Radix hover-card data-state=open on the ref, open=Trigger:false open=Content:false recorded on both frames; focus=- on both). The first pass of the engine occasionally captures the Radix side pre-open (its 50ms hover settle is shorter than Radix hover open-delay under load) — an engine-timing artifact of pointer-gated overlays, not a recipe divergence. Recorded so the fix pass does not chase it."
+        "reason": "Open-state parity holds on the second capture pass (Radix hover-card data-state=open on the ref, open=Trigger:false open=Content:false recorded on both frames; focus=- on both). The first pass of the engine occasionally captures the Radix side pre-open (its 50ms hover settle is shorter than Radix hover open-delay under load) \u2014 an engine-timing artifact of pointer-gated overlays, not a recipe divergence. Recorded so the fix pass does not chase it."
       },
       {
         "signal": "behavior.reset",
-        "reason": "Pointer-gated overlay vocabulary: on the dark-theme baseline the Radix reference (data-state=delayed-open / hover-gated) records no canonical open flags (open map empty), while Solidiom records open=Trigger:false open=Content:false. Both frames are closed (open=false) and unfocused — the mismatch is pure state-vocabulary (delayed-open is not in the canonical open|closed set), not a behavioral divergence. Recorded."
+        "reason": "Pointer-gated overlay vocabulary: on the dark-theme baseline the Radix reference (data-state=delayed-open / hover-gated) records no canonical open flags (open map empty), while Solidiom records open=Trigger:false open=Content:false. Both frames are closed (open=false) and unfocused \u2014 the mismatch is pure state-vocabulary (delayed-open is not in the canonical open|closed set), not a behavioral divergence. Recorded."
       }
     ]
   },
@@ -1081,11 +1081,11 @@
       },
       {
         "signal": "behavior.close-esc",
-        "reason": "Focus-on-open: shadcn (Radix ContextMenu) moves focus into the menu content; Solidiom context-menu opens without moving focus (activeElement stays on main). Esc-close parity holds (both close; content unmounts on the sol side). Focus-return differs (shadcn returns to body — Radix ContextMenu has no persistent trigger — vs sol stays on main). Recorded so the canonical mismatch reads as known."
+        "reason": "Focus-on-open: shadcn (Radix ContextMenu) moves focus into the menu content; Solidiom context-menu opens without moving focus (activeElement stays on main). Esc-close parity holds (both close; content unmounts on the sol side). Focus-return differs (shadcn returns to body \u2014 Radix ContextMenu has no persistent trigger \u2014 vs sol stays on main). Recorded so the canonical mismatch reads as known."
       },
       {
         "signal": "behavior.right-click",
-        "reason": "Open-state focus: the Radix reference keeps focus on the trigger element (focus=Trigger — Radix ContextMenu focuses the trigger, not the menu), while Solidiom leaves focus on <main> (focus=-). Both frames open the menu and Esc closes it (content unmounts on solid). The focus-on-open difference is Radix vs Solidiom context-menu focus models; recorded."
+        "reason": "Open-state focus: the Radix reference keeps focus on the trigger element (focus=Trigger \u2014 Radix ContextMenu focuses the trigger, not the menu), while Solidiom leaves focus on <main> (focus=-). Both frames open the menu and Esc closes it (content unmounts on solid). The focus-on-open difference is Radix vs Solidiom context-menu focus models; recorded."
       }
     ]
   },
@@ -1439,11 +1439,11 @@
       },
       {
         "signal": "behavior.open",
-        "reason": "The shadcn reference opens a floating NavigationMenuContent viewport on trigger click; the Solidiom navigation-menu island does not render a content/viewport part in its example (the live island exposes only root/list/item/trigger). The open-state snapshot therefore cannot be compared — recorded as a structural island difference, not a fixable look gap. Parts limited to Trigger+List (both present on both frames)."
+        "reason": "The shadcn reference opens a floating NavigationMenuContent viewport on trigger click; the Solidiom navigation-menu island does not render a content/viewport part in its example (the live island exposes only root/list/item/trigger). The open-state snapshot therefore cannot be compared \u2014 recorded as a structural island difference, not a fixable look gap. Parts limited to Trigger+List (both present on both frames)."
       },
       {
         "signal": "behavior.reset",
-        "reason": "State-lexicality difference: the shadcn (Radix) navigation-menu trigger has NO data-state attribute when fully closed (canonicalState yields no flag), while the Solidiom island trigger always carries data-state (open=Trigger:false recorded). After the open+Esc reset both frames are closed, but the snapshot deep-equal trips on the presence/absence of the closed flag. No open-state behavior divergence — both close. Recorded."
+        "reason": "State-lexicality difference: the shadcn (Radix) navigation-menu trigger has NO data-state attribute when fully closed (canonicalState yields no flag), while the Solidiom island trigger always carries data-state (open=Trigger:false recorded). After the open+Esc reset both frames are closed, but the snapshot deep-equal trips on the presence/absence of the closed flag. No open-state behavior divergence \u2014 both close. Recorded."
       },
       {
         "signal": "pixels",
@@ -1505,11 +1505,11 @@
       },
       {
         "signal": "behavior.click-next",
-        "reason": "Clicking Next on the shadcn reference navigates to a '#' href (no client-side page state — the href does not advance an active item); the Solidiom pagination island has real page state so clicking Next advances the current page (1->2) and moves aria-current. Different state model (link-anchors vs stateful pager). Recorded; the visual geometry (Next/Previous) is at parity."
+        "reason": "Clicking Next on the shadcn reference navigates to a '#' href (no client-side page state \u2014 the href does not advance an active item); the Solidiom pagination island has real page state so clicking Next advances the current page (1->2) and moves aria-current. Different state model (link-anchors vs stateful pager). Recorded; the visual geometry (Next/Previous) is at parity."
       },
       {
         "signal": "pixels",
-        "reason": "Pixel crops include differing island chrome (the sol island wraps the pagination in a bordered surface-raised card) + differing page-count/copy (shadcn 1/2/3/…/next vs Solidiom its numbered pages) + the structural state model (shadcn Next is a '#' anchor that does not advance an active item; Solidiom is a stateful pager where click-next moves aria-current). The Next/Previous geometry (h-36px, rounded-6px, 14px, 500) is at parity on the token rows; the delta is framing + copy + the state model, not a component look gap."
+        "reason": "Pixel crops include differing island chrome (the sol island wraps the pagination in a bordered surface-raised card) + differing page-count/copy (shadcn 1/2/3/\u2026/next vs Solidiom its numbered pages) + the structural state model (shadcn Next is a '#' anchor that does not advance an active item; Solidiom is a stateful pager where click-next moves aria-current). The Next/Previous geometry (h-36px, rounded-6px, 14px, 500) is at parity on the token rows; the delta is framing + copy + the state model, not a component look gap."
       }
     ]
   },
@@ -1570,7 +1570,7 @@
       },
       {
         "signal": "tokens.Group.border-radius",
-        "reason": "STRUCTURAL: the shadcn resizable group element itself is borderless (border-radius 0px — its rounded-lg frame comes from the page's separate wrapper div); the Solidiom island's group carries the rounded overflow-hidden frame (6px, from the radius token). Both present a rounded, borderless-panel split visually; the radius sits on a different DOM node. Not a fixable look gap without moving the frame to a wrapper."
+        "reason": "STRUCTURAL: the shadcn resizable group element itself is borderless (border-radius 0px \u2014 its rounded-lg frame comes from the page's separate wrapper div); the Solidiom island's group carries the rounded overflow-hidden frame (6px, from the radius token). Both present a rounded, borderless-panel split visually; the radius sits on a different DOM node. Not a fixable look gap without moving the frame to a wrapper."
       }
     ]
   },
@@ -1831,6 +1831,519 @@
     ]
   },
   {
+    "id": "table",
+    "shadcn": {
+      "ref": "table"
+    },
+    "solidiom": {
+      "package": "@solidiom/table",
+      "siteSlug": "table",
+      "sitePath": "/components/table/examples"
+    },
+    "status": "gap",
+    "gapReason": "no Solidiom live examples island for plain table \u2014 Solidiom ships data-table only (there is no `table` entry in COMPONENTS_WITH_EXAMPLES); shadcn 3.8.5 registry reference page exists.",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "calendar",
+    "shadcn": {
+      "ref": "calendar"
+    },
+    "solidiom": {
+      "package": "@solidiom/calendar",
+      "siteSlug": "calendar",
+      "sitePath": "/components/calendar/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root", "Title", "Prev", "Next", "Grid", "Cell"],
+    "selectors": {
+      "Root": {
+        "ref": "[data-slot='calendar']",
+        "sol": ".calendar-example [data-scope='calendar'][data-part='root']"
+      },
+      "Title": {
+        "ref": ".rdp-caption_label",
+        "sol": ".calendar-example [data-scope='calendar'][data-part='title']"
+      },
+      "Prev": {
+        "ref": "button.rdp-button_previous",
+        "sol": ".calendar-example [data-scope='calendar'][data-part='prev-button']"
+      },
+      "Next": {
+        "ref": "button.rdp-button_next",
+        "sol": ".calendar-example [data-scope='calendar'][data-part='next-button']"
+      },
+      "Grid": {
+        "ref": ".rdp-month_grid",
+        "sol": ".calendar-example [data-scope='calendar'][data-part='grid']"
+      },
+      "Cell": {
+        "ref": ".rdp-day",
+        "sol": ".calendar-example [data-scope='calendar'][data-part='cell']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "border-radius": "0px",
+        "padding": "12px",
+        "border-width": "0px"
+      },
+      "Prev": {
+        "height": "32px",
+        "width": "32px",
+        "border-radius": "6px",
+        "font-size": "14px"
+      },
+      "Next": {
+        "height": "32px",
+        "width": "32px",
+        "border-radius": "6px",
+        "font-size": "14px"
+      },
+      "Title": {
+        "font-size": "14px",
+        "font-weight": "500"
+      },
+      "Cell": {
+        "width": "32px",
+        "height": "32px",
+        "font-size": "16px",
+        "border-radius": "0px"
+      }
+    },
+    "interactions": ["click-calendar-next"],
+    "states": ["default", "next-month"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "date-picker",
+    "shadcn": {
+      "ref": "date-picker"
+    },
+    "solidiom": {
+      "package": "@solidiom/date-picker",
+      "siteSlug": "date-picker",
+      "sitePath": "/components/date-picker/examples"
+    },
+    "status": "mapped",
+    "parts": ["Trigger", "Content", "Calendar"],
+    "selectors": {
+      "Trigger": {
+        "ref": "button[data-state]",
+        "sol": ".date-picker-example [data-scope='date-picker'][data-part='trigger']"
+      },
+      "Content": {
+        "ref": "div[role='dialog'][data-state='open']",
+        "sol": "[data-scope='date-picker'][data-part='content']"
+      },
+      "Calendar": {
+        "ref": "[data-slot='calendar']",
+        "sol": "[data-scope='date-picker'][data-part='calendar']"
+      }
+    },
+    "tokens": {
+      "Trigger": {
+        "border-radius": "6px",
+        "height": "36px",
+        "padding": "8px 16px",
+        "font-size": "14px",
+        "border-width": "1px"
+      },
+      "Content": {
+        "border-radius": "6px",
+        "padding": "0px",
+        "border-width": "1px"
+      },
+      "Calendar": {
+        "padding": "12px"
+      }
+    },
+    "interactions": ["open"],
+    "states": ["default", "open"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "data-table",
+    "shadcn": {
+      "ref": "data-table"
+    },
+    "solidiom": {
+      "package": "@solidiom/data-table",
+      "siteSlug": "data-table",
+      "sitePath": "/components/data-table/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root", "Header", "HeaderCell", "Row", "Cell"],
+    "selectors": {
+      "Root": {
+        "ref": "table",
+        "sol": ".data-table-example [data-scope='data-table'][data-part='root']"
+      },
+      "Header": {
+        "ref": "thead",
+        "sol": ".data-table-example [data-scope='data-table'][data-part='header']"
+      },
+      "HeaderCell": {
+        "ref": "th",
+        "sol": ".data-table-example [data-scope='data-table'][data-part='header-cell']"
+      },
+      "Row": {
+        "ref": "tbody tr",
+        "sol": ".data-table-example [data-scope='data-table'][data-part='row']"
+      },
+      "Cell": {
+        "ref": "tbody td",
+        "sol": ".data-table-example [data-scope='data-table'][data-part='cell']"
+      }
+    },
+    "tokens": {
+      "HeaderCell": {
+        "height": "40px",
+        "padding": "1px 8px",
+        "font-size": "14px",
+        "font-weight": "500"
+      },
+      "Cell": {
+        "padding": "8px",
+        "font-size": "14px",
+        "font-weight": "400"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "carousel",
+    "shadcn": {
+      "ref": "carousel"
+    },
+    "solidiom": {
+      "package": "@solidiom/carousel",
+      "siteSlug": "carousel",
+      "sitePath": "/components/carousel/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root", "Viewport", "Slide", "Prev", "Next"],
+    "selectors": {
+      "Root": {
+        "ref": "[aria-roledescription='carousel']",
+        "sol": ".carousel-example [data-scope='carousel'][data-part='root']"
+      },
+      "Viewport": {
+        "ref": "[aria-roledescription='carousel'] > div.overflow-hidden",
+        "sol": ".carousel-example [data-scope='carousel'][data-part='viewport']"
+      },
+      "Slide": {
+        "ref": "[aria-roledescription='slide']",
+        "sol": ".carousel-example [data-scope='carousel'][data-part='slide']"
+      },
+      "Prev": {
+        "ref": "button:has(.sr-only):first-of-type",
+        "sol": ".carousel-example [data-scope='carousel'][data-part='prev-button']"
+      },
+      "Next": {
+        "ref": "button:has(.sr-only)",
+        "sol": ".carousel-example [data-scope='carousel'][data-part='next-button']"
+      }
+    },
+    "tokens": {
+      "Prev": {
+        "height": "32px",
+        "width": "32px",
+        "border-radius": "9999px",
+        "border-width": "1px",
+        "font-weight": "500"
+      },
+      "Next": {
+        "height": "32px",
+        "width": "32px",
+        "border-radius": "9999px",
+        "border-width": "1px",
+        "font-weight": "500"
+      }
+    },
+    "interactions": ["click-next"],
+    "states": ["default", "slide-2"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "progress",
+    "shadcn": {
+      "ref": "progress"
+    },
+    "solidiom": {
+      "package": "@solidiom/progress",
+      "siteSlug": "progress",
+      "sitePath": "/components/progress/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root", "Indicator"],
+    "selectors": {
+      "Root": {
+        "ref": "[role='progressbar']",
+        "sol": ".progress-example [data-scope='progress'][data-part='root']"
+      },
+      "Indicator": {
+        "ref": "[role='progressbar'] > div",
+        "sol": ".progress-example [data-scope='progress'][data-part='indicator']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "height": "8px",
+        "border-radius": "9999px"
+      },
+      "Indicator": {
+        "height": "8px",
+        "border-radius": "0px"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "skeleton",
+    "shadcn": {
+      "ref": "skeleton"
+    },
+    "solidiom": {
+      "package": "@solidiom/skeleton",
+      "siteSlug": "skeleton",
+      "sitePath": "/components/skeleton/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root"],
+    "selectors": {
+      "Root": {
+        "ref": "div.animate-pulse.rounded-md",
+        "sol": ".skeleton-example [data-scope='skeleton'][data-part='root']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "border-radius": "6px"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "spinner",
+    "shadcn": {
+      "ref": "spinner"
+    },
+    "solidiom": {
+      "package": "@solidiom/spinner",
+      "siteSlug": "spinner",
+      "sitePath": "/components/spinner/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root"],
+    "selectors": {
+      "Root": {
+        "ref": "svg[role='status']",
+        "sol": ".spinner-example [data-scope='spinner'][data-part='root']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "width": "16px",
+        "height": "16px"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "toast",
+    "shadcn": {
+      "ref": "toast"
+    },
+    "solidiom": {
+      "package": "@solidiom/toast",
+      "siteSlug": "toast",
+      "sitePath": "/components/toast/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root", "Title", "Description", "Close"],
+    "selectors": {
+      "Root": {
+        "ref": "li[data-state]",
+        "sol": "[data-scope='toast'][data-part='root']"
+      },
+      "Title": {
+        "ref": "li[data-state] .font-semibold",
+        "sol": "[data-scope='toast'][data-part='title']"
+      },
+      "Description": {
+        "ref": "li[data-state] .opacity-90",
+        "sol": "[data-scope='toast'][data-part='description']"
+      },
+      "Close": {
+        "ref": "li[data-state] button",
+        "sol": "[data-scope='toast'][data-part='close']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "border-radius": "6px",
+        "border-width": "1px",
+        "font-size": "14px"
+      },
+      "Title": {
+        "font-size": "14px",
+        "font-weight": "600"
+      },
+      "Description": {
+        "font-size": "12px"
+      }
+    },
+    "interactions": ["show-toast"],
+    "states": ["default", "toast-open"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "empty-state",
+    "shadcn": {
+      "ref": "empty"
+    },
+    "solidiom": {
+      "package": "@solidiom/empty-state",
+      "siteSlug": "empty-state",
+      "sitePath": "/components/empty-state/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root", "Icon", "Title", "Description", "Action"],
+    "selectors": {
+      "Root": {
+        "ref": "[data-slot='empty']",
+        "sol": ".empty-state-example [data-scope='empty-state'][data-part='root']"
+      },
+      "Icon": {
+        "ref": "[data-slot='empty-icon']",
+        "sol": ".empty-state-example [data-scope='empty-state'][data-part='icon']"
+      },
+      "Title": {
+        "ref": "[data-slot='empty-title']",
+        "sol": ".empty-state-example [data-scope='empty-state'][data-part='title']"
+      },
+      "Description": {
+        "ref": "[data-slot='empty-description']",
+        "sol": ".empty-state-example [data-scope='empty-state'][data-part='description']"
+      },
+      "Action": {
+        "ref": "[data-slot='empty-content']",
+        "sol": ".empty-state-example [data-scope='empty-state'][data-part='action']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "border-radius": "8px",
+        "border-width": "0px",
+        "padding": "48px"
+      },
+      "Icon": {
+        "width": "40px",
+        "height": "40px",
+        "border-radius": "8px"
+      },
+      "Title": {
+        "font-size": "18px",
+        "font-weight": "500"
+      },
+      "Description": {
+        "font-size": "14px"
+      },
+      "Action": {
+        "height": "32px"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "chart",
+    "shadcn": {
+      "ref": "chart"
+    },
+    "solidiom": {
+      "package": "@solidiom/chart",
+      "siteSlug": "chart",
+      "sitePath": "/components/chart/examples"
+    },
+    "status": "gap",
+    "gapReason": "no Solidiom live examples island for chart (there is no `chart` entry in COMPONENTS_WITH_EXAMPLES); shadcn 3.8.5 registry reference exists but was not added to the pin (no ref page needed for a gap).",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
     "id": "sidebar",
     "shadcn": {
       "ref": "sidebar"
@@ -1864,7 +2377,7 @@
       "sitePath": "/components/separator/examples"
     },
     "status": "gap",
-    "gapReason": "no Solidiom live examples island (separator is not in COMPONENTS_WITH_EXAMPLES — SeparatorExample.tsx exists but is not registered in ComponentExample.astro or the content collection); shadcn 3.8.5 registry reference page exists.",
+    "gapReason": "no Solidiom live examples island (separator is not in COMPONENTS_WITH_EXAMPLES \u2014 SeparatorExample.tsx exists but is not registered in ComponentExample.astro or the content collection); shadcn 3.8.5 registry reference page exists.",
     "parts": [],
     "tokens": {},
     "interactions": [],

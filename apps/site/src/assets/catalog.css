@@ -1000,12 +1000,11 @@
 }
 
 .data-table-example [data-scope="data-table"][data-part="header-cell"] {
-  padding: 0.75rem 1rem;
+  height: 2.5rem;
+  padding: 0.0625rem 0.5rem;
   text-align: left;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--color-foreground-muted);
-  cursor: pointer;
-  user-select: none;
 }
 
 .data-table-example [data-scope="data-table"][data-part="header-cell"]:hover {
@@ -1021,7 +1020,8 @@
 }
 
 .data-table-example [data-scope="data-table"][data-part="cell"] {
-  padding: 0.625rem 1rem;
+  padding: 0.5rem;
+  font-weight: 400;
 }
 
 .data-table-example__header-label {
@@ -2173,8 +2173,8 @@
 
 .spinner-example [data-scope="spinner"][data-part="root"] {
   display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1rem;
+  height: 1rem;
   border: 2px solid var(--color-border);
   border-top-color: var(--sol-primary, #6d9fff);
   border-radius: 50%;
@@ -2206,7 +2206,7 @@
 }
 
 .skeleton-example [data-scope="skeleton"][data-part="root"] {
-  border-radius: 0.25rem;
+  border-radius: 0.375rem;
   background: var(--color-surface);
   animation: skeleton-example-pulse 1.5s ease-in-out infinite;
 }
@@ -2388,7 +2388,7 @@
 .progress-example [data-scope="progress"][data-part="indicator"] {
   display: block;
   height: 100%;
-  border-radius: 9999px;
+  border-radius: 0;
   background: var(--sol-primary, #6d9fff);
   transition: width 0.3s ease;
 }
@@ -2482,19 +2482,27 @@
   display: grid;
   justify-items: center;
   text-align: center;
-  gap: 0.75rem;
-  padding: 2rem 1rem;
+  gap: 1.5rem;
+  padding: 3rem;
+  border-radius: 0.5rem;
 }
 
 .empty-state-example [data-scope="empty-state"][data-part="icon"] {
-  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: var(--color-surface-muted, var(--color-surface));
+  font-size: 1rem;
   line-height: 1;
 }
 
 .empty-state-example [data-scope="empty-state"][data-part="title"] {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.125rem;
+  font-weight: 500;
   color: var(--color-foreground);
 }
 
@@ -2507,19 +2515,21 @@
 }
 
 .empty-state-example [data-scope="empty-state"][data-part="action"] button {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  background: var(--color-surface);
-  color: var(--color-foreground);
-  font-size: 0.8125rem;
-  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: var(--sol-primary, #6d9fff);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
   cursor: pointer;
   transition: background-color 0.15s ease;
+  min-height: 2rem;
 }
 
 .empty-state-example [data-scope="empty-state"][data-part="action"] button:hover {
-  background: var(--color-surface-raised);
+  background: var(--sol-primary, #6d9fff);
+  opacity: 0.9;
 }
 
 /* ─── Collapsible example ───────────────────────────────────────────────────── */
@@ -3388,9 +3398,9 @@
   gap: 0.75rem;
   max-width: 16rem;
   padding: 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  background: var(--color-surface);
+  border: none;
+  border-radius: 0;
+  background: transparent;
 }
 
 .calendar-example [data-scope="calendar"][data-part="header"] {
@@ -3401,7 +3411,7 @@
 
 .calendar-example [data-scope="calendar"][data-part="title"] {
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-foreground);
 }
 
@@ -3410,14 +3420,20 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 1px solid var(--color-border);
+  width: 2rem;
+  height: 2rem;
+  border: none;
   border-radius: 0.375rem;
-  background: var(--color-surface);
+  background: transparent;
   color: var(--color-foreground);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
+}
+
+.calendar-example [data-scope="calendar"][data-part="prev-button"]:hover,
+.calendar-example [data-scope="calendar"][data-part="next-button"]:hover {
+  background: var(--color-surface-muted, var(--color-surface));
 }
 
 .calendar-example [data-scope="calendar"][data-part="grid"] {
