@@ -43,6 +43,30 @@ No 3.8.5 registry 404s in Batch 2: all 10 names returned HTTP 200 from
 https://ui.shadcn.com/r/styles/new-york/<name>.json and `shadcn add` wrote
 `src/components/ui/<name>.tsx` for each.
 
+Batch 3 (navigation & structure) — 11 mapped + 2 deps/extras added:
+
+- tabs: registry new-york; dep @radix-ui/react-tabs ^1.1.21
+- accordion: registry new-york; dep @radix-ui/react-accordion ^1.2.20
+- collapsible: registry new-york; dep @radix-ui/react-collapsible ^1.1.20
+- breadcrumb: registry new-york (no new radix dep; renders nav/ol/li)
+- navigation-menu: registry new-york; dep @radix-ui/react-navigation-menu ^1.2.22
+- pagination: registry new-york (no new radix dep; renders nav/ul)
+- resizable-panels: shadcn slug `resizable-panels` → the `resizable` component file
+  (`src/components/ui/resizable.tsx`); dep react-resizable-panels ^4.14.1 (NOT radix)
+- scroll-area: registry new-york; dep @radix-ui/react-scroll-area ^1.2.18
+- avatar: registry new-york; dep @radix-ui/react-avatar ^1.2.6
+- badge: registry new-york (no new radix dep; cva variants)
+- kbd: registry new-york (no new radix dep)
+- sidebar: added as a DEPENDENCY/extras (uses @radix-ui/react-separator via field +
+  react-resizable-panels); page created but mapping entry is `gap` — no Solidiom live island
+- skeleton: added as a dep/extra (no mapping entry)
+
+No 3.8.5 registry 404s in Batch 3: all names resolved and `shadcn add` wrote
+`src/components/ui/<name>.tsx`. `src/index.css` (canonical hsl token set) and
+`tailwind.config.js` (`plugins: []`) were re-verified unchanged after the adds —
+no oklch clobber occurred (the `--sidebar-*` hsl tokens the sidebar component needs
+are present in the canonical block).
+
 Reference pages (src/pages/<id>.tsx, registered in src/main.tsx `pages`):
 each overlay uses the real shadcn API with a minimal interactive setup —
 dialog/alert-dialog/sheet/drawer/popover/tooltip/hover-card/dropdown-menu/

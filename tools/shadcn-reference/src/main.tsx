@@ -24,6 +24,18 @@ import HoverCard from "./pages/hover-card"
 import DropdownMenu from "./pages/dropdown-menu"
 import ContextMenu from "./pages/context-menu"
 import Menubar from "./pages/menubar"
+import Tabs from "./pages/tabs"
+import Accordion from "./pages/accordion"
+import Collapsible from "./pages/collapsible"
+import Breadcrumb from "./pages/breadcrumb"
+import NavigationMenu from "./pages/navigation-menu"
+import Pagination from "./pages/pagination"
+import ResizablePanels from "./pages/resizable-panels"
+import ScrollArea from "./pages/scroll-area"
+import Avatar from "./pages/avatar"
+import Badge from "./pages/badge"
+import Kbd from "./pages/kbd"
+import Sidebar from "./pages/sidebar"
 
 const pages: Record<string, React.ComponentType> = {
   button: Button,
@@ -48,6 +60,18 @@ const pages: Record<string, React.ComponentType> = {
   "dropdown-menu": DropdownMenu,
   "context-menu": ContextMenu,
   menubar: Menubar,
+  tabs: Tabs,
+  accordion: Accordion,
+  collapsible: Collapsible,
+  breadcrumb: Breadcrumb,
+  "navigation-menu": NavigationMenu,
+  pagination: Pagination,
+  "resizable-panels": ResizablePanels,
+  "scroll-area": ScrollArea,
+  avatar: Avatar,
+  badge: Badge,
+  kbd: Kbd,
+  sidebar: Sidebar,
 }
 
 function ComponentPage() {
