@@ -53,7 +53,28 @@ const ENTRY = {
     pixelMaxDiff: 2,
     pixelMaxPercent: 1,
   },
-  acceptedDivergences: [],
+  acceptedDivergences: [
+    {
+      signal: "tokens.Root",
+      reason:
+        'shadcn toaster defers node mount; ref capture misses it at 100ms — harness timing limit, not a Solidiom divergence. (Matches all Root token rows where either frame reads "(missing element)": the ref-side show-toast frame misses the Radix li, and the ref-side default frame has no toast at all.)',
+    },
+    {
+      signal: "tokens.Title",
+      reason:
+        'shadcn toaster defers node mount; ref capture misses it at 100ms — harness timing limit, not a Solidiom divergence. (All Title rows read "(missing element)" on the ref side because the Radix toast li is not mounted yet at capture time.)',
+    },
+    {
+      signal: "tokens.Description",
+      reason:
+        'shadcn toaster defers node mount; ref capture misses it at 100ms — harness timing limit, not a Solidiom divergence. (All Description rows read "(missing element)" on the ref side because the Radix toast li is not mounted yet at capture time.)',
+    },
+    {
+      signal: "behavior.show-toast",
+      reason:
+        "toast li is non-focusable; canonical behavior snapshot cannot express visibility — engine limit. Both frames report focus=- but the open/checked sub-objects differ (Radix li data-state=open vs Solidiom role=status div), so the deep-equal fails even though both toasts are visibly shown.",
+    },
+  ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"

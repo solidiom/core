@@ -52,7 +52,13 @@ const ENTRY = {
     pixelMaxDiff: 2,
     pixelMaxPercent: 1,
   },
-  acceptedDivergences: [],
+  acceptedDivergences: [
+    {
+      signal: "tokens.Calendar.padding",
+      reason:
+        "shadcn's date-picker is composed as PopoverContent (p-0) wrapping the standalone Calendar (12px padding on the [data-slot=calendar] node). Solidiom renders the 12px padding on the DatePicker.Content div instead of the inner Calendar wrapper node the harness measures (data-part=calendar), so that node reports 0px. The open calendar visually carries the same 12px padding in both frames — this is a DOM-node placement measurement artifact, not a Solidiom look gap.",
+    },
+  ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
 const SOL_BASE = "http://127.0.0.1:4322"

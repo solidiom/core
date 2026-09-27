@@ -1,6 +1,6 @@
 # date-picker — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ 65af4c6b
-Status: ❌ 6 failures, 0 accepted divergences
+Reference: shadcn@3.8.5, solidiom @ 2b33596b
+Status: ❌ 4 failures, 2 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
 |---|---|---|---|
@@ -23,7 +23,7 @@ Status: ❌ 6 failures, 0 accepted divergences
 | tokens.Content.border-radius | 6px | 6px | ✅ |
 | tokens.Content.padding | 0px | 0px | ✅ |
 | tokens.Content.border-width | 1px | 1px | ✅ |
-| tokens.Calendar.padding | 12px | 0px | ❌ |
+| tokens.Calendar.padding | 12px | 0px | 🟡 accepted |
 | behavior.open | focus=Content | focus=Content | ✅ |
 | pixels.light.open | ≤ 1% diff | delta 99.03999999999999% | ❌ |
 | tokens.Trigger.border-radius | 6px | 6px | ✅ |
@@ -45,7 +45,7 @@ Status: ❌ 6 failures, 0 accepted divergences
 | tokens.Content.border-radius | 6px | 6px | ✅ |
 | tokens.Content.padding | 0px | 0px | ✅ |
 | tokens.Content.border-width | 1px | 1px | ✅ |
-| tokens.Calendar.padding | 12px | 0px | ❌ |
+| tokens.Calendar.padding | 12px | 0px | 🟡 accepted |
 | behavior.open | focus=Content | focus=Content | ✅ |
 | pixels.dark.open | ≤ 1% diff | delta 97.33083333333333% | ❌ |
 

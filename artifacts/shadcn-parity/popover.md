@@ -1,6 +1,6 @@
 # popover — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ 65af4c6b
-Status: ❌ 8 failures, 2 accepted divergences
+Reference: shadcn@3.8.5, solidiom @ 2b33596b
+Status: ❌ 6 failures, 4 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
 |---|---|---|---|
@@ -16,7 +16,7 @@ Status: ❌ 8 failures, 2 accepted divergences
 | tokens.Content.border-width | 1px | 1px | ✅ |
 | tokens.Content.padding | 16px | 16px | ✅ |
 | tokens.Content.width | 320px | 320px | ✅ |
-| behavior.open | focus=Content | focus=Trigger | ❌ |
+| behavior.open | focus=Content | focus=Trigger | 🟡 accepted |
 | pixels.light.open | ≤ 1% diff | delta 90.32333333333334% | ❌ |
 | tokens.Content.background-color | (missing element) | (missing element) | ✅ |
 | tokens.Content.border-radius | (missing element) | (missing element) | ✅ |
@@ -37,7 +37,7 @@ Status: ❌ 8 failures, 2 accepted divergences
 | tokens.Content.border-width | 1px | 1px | ✅ |
 | tokens.Content.padding | 16px | 16px | ✅ |
 | tokens.Content.width | 320px | 320px | ✅ |
-| behavior.open | focus=Content | focus=Trigger | ❌ |
+| behavior.open | focus=Content | focus=Trigger | 🟡 accepted |
 | pixels.dark.open | ≤ 1% diff | delta 97.53500000000001% | ❌ |
 | tokens.Content.background-color | (missing element) | (missing element) | ✅ |
 | tokens.Content.border-radius | (missing element) | (missing element) | ✅ |

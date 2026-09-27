@@ -828,7 +828,10 @@ export const toastRecipe: RecipeDefinition = {
         display: "flex",
         "align-items": "flex-start",
         gap: "0.75rem",
-        "border-radius": { token: "radius" },
+        // shadcn parity: the toast card is rounded-md (6px). The generic
+        // `radius` token is 8px in the Solidiom theme; the smaller `radius-sm`
+        // maps to the same 6px value and is the exact shadcn match.
+        "border-radius": { token: "radius-sm" },
         "border-style": "solid",
         "border-width": "1px",
         "border-color": { token: "border" },

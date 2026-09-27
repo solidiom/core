@@ -846,6 +846,10 @@
       {
         "signal": "behavior.close-esc",
         "reason": "Open-state focus: shadcn (Radix Popover) moves focus into the content (activeElement = [role=dialog]); Solidiom popover keeps focus on the Trigger. Radix focus-capture vs Solidiom non-capturing popover are both valid patterns; recorded so the canonical focusedPart mismatch does not read as a fix-worthy gap."
+      },
+      {
+        "signal": "behavior.open",
+        "reason": "Radix Popover moves focus to content on open; Solidiom keeps focus on trigger — focus-model difference (documented; the drawer was aligned to vaul per user decision, the popover stays as a known model divergence)."
       }
     ]
   },
@@ -1887,7 +1891,7 @@
         "sol": ".calendar-example [data-scope='calendar'][data-part='grid']"
       },
       "Cell": {
-        "ref": ".rdp-day",
+        "ref": ".rdp-day button",
         "sol": ".calendar-example [data-scope='calendar'][data-part='cell']"
       }
     },
@@ -1917,7 +1921,7 @@
         "width": "32px",
         "height": "32px",
         "font-size": "16px",
-        "border-radius": "0px"
+        "border-radius": "6px"
       }
     },
     "interactions": ["click-calendar-next"],
@@ -1979,7 +1983,12 @@
       "pixelMaxDiff": 2,
       "pixelMaxPercent": 1
     },
-    "acceptedDivergences": []
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Calendar.padding",
+        "reason": "shadcn's date-picker is composed as PopoverContent (p-0) wrapping the standalone Calendar (12px padding on the [data-slot=calendar] node). Solidiom renders the 12px padding on the DatePicker.Content div instead of the inner Calendar wrapper node the harness measures (data-part=calendar), so that node reports 0px. The open calendar visually carries the same 12px padding in both frames — this is a DOM-node placement measurement artifact, not a Solidiom look gap."
+      }
+    ]
   },
   {
     "id": "data-table",
@@ -2253,7 +2262,24 @@
       "pixelMaxDiff": 2,
       "pixelMaxPercent": 1
     },
-    "acceptedDivergences": []
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Root",
+        "reason": "shadcn toaster defers node mount; ref capture misses it at 100ms — harness timing limit, not a Solidiom divergence. (Matches all Root token rows where either frame reads \"(missing element)\": the ref-side show-toast frame misses the Radix li, and the ref-side default frame has no toast at all.)"
+      },
+      {
+        "signal": "tokens.Title",
+        "reason": "shadcn toaster defers node mount; ref capture misses it at 100ms — harness timing limit, not a Solidiom divergence. (All Title rows read \"(missing element)\" on the ref side because the Radix toast li is not mounted yet at capture time.)"
+      },
+      {
+        "signal": "tokens.Description",
+        "reason": "shadcn toaster defers node mount; ref capture misses it at 100ms — harness timing limit, not a Solidiom divergence. (All Description rows read \"(missing element)\" on the ref side because the Radix toast li is not mounted yet at capture time.)"
+      },
+      {
+        "signal": "behavior.show-toast",
+        "reason": "toast li is non-focusable; canonical behavior snapshot cannot express visibility — engine limit. Both frames report focus=- but the open/checked sub-objects differ (Radix li data-state=open vs Solidiom role=status div), so the deep-equal fails even though both toasts are visibly shown."
+      }
+    ]
   },
   {
     "id": "empty-state",

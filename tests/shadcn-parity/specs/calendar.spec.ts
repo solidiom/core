@@ -36,7 +36,7 @@ const ENTRY = {
       sol: ".calendar-example [data-scope='calendar'][data-part='grid']",
     },
     Cell: {
-      ref: ".rdp-day",
+      ref: ".rdp-day button",
       sol: ".calendar-example [data-scope='calendar'][data-part='cell']",
     },
   },
@@ -66,7 +66,7 @@ const ENTRY = {
       width: "32px",
       height: "32px",
       "font-size": "16px",
-      "border-radius": "0px",
+      "border-radius": "6px",
     },
   },
   interactions: ["click-calendar-next"],

@@ -51,6 +51,11 @@ const ENTRY = {
       reason:
         "Open-state focus: shadcn (Radix Popover) moves focus into the content (activeElement = [role=dialog]); Solidiom popover keeps focus on the Trigger. Radix focus-capture vs Solidiom non-capturing popover are both valid patterns; recorded so the canonical focusedPart mismatch does not read as a fix-worthy gap.",
     },
+    {
+      signal: "behavior.open",
+      reason:
+        "Radix Popover moves focus to content on open; Solidiom keeps focus on trigger — focus-model difference (documented; the drawer was aligned to vaul per user decision, the popover stays as a known model divergence).",
+    },
   ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"
