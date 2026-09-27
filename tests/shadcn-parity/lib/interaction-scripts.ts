@@ -50,6 +50,19 @@ export const scripts: Record<string, Action[]> = {
   // Batch-2 (overlays). `right-click` opens a context menu (Radix ContextMenu
   // and Solidiom ContextMenu both bind the native contextmenu event, so a
   // single action is frame-agnostic).
+  // Batch-3 (navigation & structure). Frame-agnostic: both frames use
+  // aria-label="Go to next page" for pagination Next and role=tab for tabs.
+  "click-next": [
+    {
+      kind: "click",
+      selector: "a[aria-label='Go to next page'], button[aria-label='Go to next page']",
+    },
+    { kind: "wait", ms: 150 },
+  ],
+  "click-tab-2": [
+    { kind: "click", selector: "[role='tab']:nth-of-type(2)" },
+    { kind: "wait", ms: 150 },
+  ],
   "right-click": [{ kind: "right-click", selector: T }],
   // `hover`/`close-esc`/`close-overlay-click` scripts above double as the
   // tooltip + hover-card state scripts (hover opens them; Escape closes the

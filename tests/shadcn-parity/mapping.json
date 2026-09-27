@@ -1111,5 +1111,715 @@
       "pixelMaxPercent": 1
     },
     "acceptedDivergences": []
+  },
+  {
+    "id": "tabs",
+    "shadcn": {
+      "ref": "tabs"
+    },
+    "solidiom": {
+      "package": "@solidiom/tabs",
+      "siteSlug": "tabs",
+      "sitePath": "/components/tabs/examples"
+    },
+    "status": "mapped",
+    "parts": ["List", "Trigger", "Content"],
+    "selectors": {
+      "List": {
+        "ref": "[role='tablist']",
+        "sol": ".tabs-example [data-scope='tabs'][data-part='list']"
+      },
+      "Trigger": {
+        "ref": "[role='tab']:first-of-type",
+        "sol": ".tabs-example [data-scope='tabs'][data-part='trigger']"
+      },
+      "Content": {
+        "ref": "[role='tabpanel'][data-state='active']",
+        "sol": ".tabs-example [data-scope='tabs'][data-part='content']"
+      }
+    },
+    "tokens": {
+      "List": {
+        "background-color": "rgb(241, 245, 249)",
+        "border-radius": "8px",
+        "padding": "4px"
+      },
+      "Trigger": {
+        "background-color": "rgb(255, 255, 255)",
+        "border-radius": "6px",
+        "font-weight": "500",
+        "height": "28px",
+        "padding": "4px 12px"
+      }
+    },
+    "interactions": ["click-tab-2"],
+    "states": ["default", "click-tab-2"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.List.background-color",
+        "reason": "shadcn TabsList is bg-muted (rgb(241, 245, 249), a gray track); Solidiom tabs list is transparent with an active-underline (border-bottom) tab indicator instead. Deliberate: Solidiom tabs use an underline-active model, shadcn a segmented-track model. Structural + palette."
+      },
+      {
+        "signal": "tokens.Trigger.background-color",
+        "reason": "shadcn active tab is bg-background (white, sitting on the muted track); Solidiom active tab is transparent (underline model). Follows the accepted list/track model divergence."
+      },
+      {
+        "signal": "tokens.Trigger.border-radius",
+        "reason": "shadcn tab is rounded-md (6px) pill on the segmented track; Solidiom tab is square (0px) under the underline model. Follows the accepted tab-list model divergence."
+      },
+      {
+        "signal": "tokens.Trigger.font-weight",
+        "reason": "shadcn tab is font-medium (500); Solidiom tab is font-semibold (600). Deliberate one-step-bold, consistent with the label/field weight decisions."
+      },
+      {
+        "signal": "behavior.click-tab-2",
+        "reason": "Open-state focus: clicking the 2nd tab activates it on both frames, but shadcn (Radix Tabs) moves focus onto the tab button (focus=Trigger) while Solidiom leaves focus on the body/root after the click. Tab-activation parity holds; the focus-capture model differs. Recorded."
+      }
+    ]
+  },
+  {
+    "id": "accordion",
+    "shadcn": {
+      "ref": "accordion"
+    },
+    "solidiom": {
+      "package": "@solidiom/accordion",
+      "siteSlug": "accordion",
+      "sitePath": "/components/accordion/examples"
+    },
+    "status": "mapped",
+    "parts": ["Item", "Trigger", "Content"],
+    "selectors": {
+      "Item": {
+        "ref": "div.border-b",
+        "sol": ".accordion-example [data-scope='accordion'][data-part='item']"
+      },
+      "Trigger": {
+        "ref": "button[data-state][data-radix-collection-item]",
+        "sol": ".accordion-example [data-scope='accordion'][data-part='trigger']"
+      },
+      "Content": {
+        "ref": "div[role='region'][data-state='open']",
+        "sol": ".accordion-example [data-scope='accordion'][data-part='content']"
+      }
+    },
+    "tokens": {
+      "Trigger": {
+        "font-size": "14px",
+        "font-weight": "500",
+        "padding": "16px 0px",
+        "border-radius": "0px"
+      },
+      "Item": {
+        "border-width": "0px 0px 1px",
+        "border-radius": "0px"
+      }
+    },
+    "interactions": ["open"],
+    "states": ["default", "open"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Trigger.font-weight",
+        "reason": "shadcn accordion trigger is font-medium (500); Solidiom is font-semibold (600). Deliberate one-step-bold, consistent with the label/field/tabs weight decisions."
+      },
+      {
+        "signal": "behavior.open",
+        "reason": "Open-state focus: clicking the trigger opens the item on both frames; shadcn (Radix) keeps focus on the trigger button (focus=Trigger) while Solidiom also focuses the trigger (focus=Trigger) — the canonical part name resolves the same; the open Content presence/absence (Radix keeps the closed region mounted vs Solidiom unmounts) is the only snapshot delta. Recorded."
+      }
+    ]
+  },
+  {
+    "id": "collapsible",
+    "shadcn": {
+      "ref": "collapsible"
+    },
+    "solidiom": {
+      "package": "@solidiom/collapsible",
+      "siteSlug": "collapsible",
+      "sitePath": "/components/collapsible/examples"
+    },
+    "status": "mapped",
+    "parts": ["Trigger", "Content"],
+    "selectors": {
+      "Trigger": {
+        "ref": "button[aria-expanded]",
+        "sol": ".collapsible-example [data-scope='collapsible'][data-part='trigger']"
+      },
+      "Content": {
+        "ref": "div[data-state='open']",
+        "sol": ".collapsible-example [data-scope='collapsible'][data-part='content']"
+      }
+    },
+    "tokens": {
+      "Trigger": {
+        "border-radius": "6px",
+        "font-size": "12px",
+        "font-weight": "500",
+        "height": "32px"
+      }
+    },
+    "interactions": ["open"],
+    "states": ["default", "open"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Trigger.background-color",
+        "reason": "shadcn collapsible trigger is an outline sm button (border-input, bg-background); Solidiom trigger is a filled-light sm button (rgb(248, 250, 252)). Deliberate filled-light vs outline button, consistent with Batch-1."
+      },
+      {
+        "signal": "tokens.Trigger.font-weight",
+        "reason": "shadcn sm button is font-medium (500); Solidiom is font-semibold (600). Deliberate one-step-bold."
+      },
+      {
+        "signal": "behavior.open",
+        "reason": "Open-state focus/visibility: clicking opens the content on both frames; Radix keeps the content element mounted (hidden attribute) while Solidiom unmounts when closed, so the open Content snapshot differs by presence. Recorded."
+      }
+    ]
+  },
+  {
+    "id": "breadcrumb",
+    "shadcn": {
+      "ref": "breadcrumb"
+    },
+    "solidiom": {
+      "package": "@solidiom/breadcrumb",
+      "siteSlug": "breadcrumb",
+      "sitePath": "/components/breadcrumb/examples"
+    },
+    "status": "mapped",
+    "parts": ["List", "Link", "Separator"],
+    "selectors": {
+      "List": {
+        "ref": "nav[aria-label='breadcrumb'] ol",
+        "sol": ".breadcrumb-example [data-scope='breadcrumb'][data-part='list']"
+      },
+      "Link": {
+        "ref": "nav[aria-label='breadcrumb'] a",
+        "sol": ".breadcrumb-example [data-scope='breadcrumb'][data-part='link']"
+      },
+      "Separator": {
+        "ref": "nav[aria-label='breadcrumb'] li[role='presentation']",
+        "sol": ".breadcrumb-example [data-scope='breadcrumb'][data-part='separator']"
+      }
+    },
+    "tokens": {
+      "List": {
+        "font-size": "14px",
+        "color": "rgb(100, 116, 139)"
+      },
+      "Link": {
+        "font-size": "14px",
+        "font-weight": "400"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.List.color",
+        "reason": "shadcn breadcrumb list is text-muted-foreground (rgb(100, 116, 139)); Solidiom list/link foreground is a different muted palette (rgb(51, 65, 85)). Deliberate muted-foreground palette difference."
+      },
+      {
+        "signal": "tokens.Link.color",
+        "reason": "shadcn breadcrumb link is text-muted-foreground; Solidiom link is its own muted foreground. Deliberate palette."
+      }
+    ]
+  },
+  {
+    "id": "navigation-menu",
+    "shadcn": {
+      "ref": "navigation-menu"
+    },
+    "solidiom": {
+      "package": "@solidiom/navigation-menu",
+      "siteSlug": "navigation-menu",
+      "sitePath": "/components/navigation-menu/examples"
+    },
+    "status": "mapped",
+    "parts": ["Trigger", "List"],
+    "selectors": {
+      "Trigger": {
+        "ref": "button[data-state][data-radix-collection-item]",
+        "sol": ".navigation-menu-example [data-scope='navigation-menu'][data-part='trigger']"
+      },
+      "List": {
+        "ref": "ul",
+        "sol": ".navigation-menu-example [data-scope='navigation-menu'][data-part='list']"
+      }
+    },
+    "tokens": {
+      "Trigger": {
+        "border-radius": "6px",
+        "font-size": "14px",
+        "font-weight": "500",
+        "height": "36px",
+        "padding": "8px 16px"
+      },
+      "List": {
+        "font-size": "16px"
+      }
+    },
+    "interactions": ["open"],
+    "states": ["default", "open"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Trigger.background-color",
+        "reason": "shadcn navigation-menu trigger is bg-background (white); Solidiom trigger is transparent. Deliberate filled vs transparent nav trigger."
+      },
+      {
+        "signal": "tokens.Trigger.font-weight",
+        "reason": "shadcn trigger is font-medium (500); Solidiom is font-semibold (600). Deliberate one-step-bold."
+      },
+      {
+        "signal": "behavior.open",
+        "reason": "The shadcn reference opens a floating NavigationMenuContent viewport on trigger click; the Solidiom navigation-menu island does not render a content/viewport part in its example (the live island exposes only root/list/item/trigger). The open-state snapshot therefore cannot be compared — recorded as a structural island difference, not a fixable look gap. Parts limited to Trigger+List (both present on both frames)."
+      }
+    ]
+  },
+  {
+    "id": "pagination",
+    "shadcn": {
+      "ref": "pagination"
+    },
+    "solidiom": {
+      "package": "@solidiom/pagination",
+      "siteSlug": "pagination",
+      "sitePath": "/components/pagination/examples"
+    },
+    "status": "mapped",
+    "parts": ["Next", "Previous"],
+    "selectors": {
+      "Next": {
+        "ref": "a[aria-label='Go to next page']",
+        "sol": ".pagination-example [data-scope='pagination'][data-part='next']"
+      },
+      "Previous": {
+        "ref": "a[aria-label='Go to previous page']",
+        "sol": ".pagination-example [data-scope='pagination'][data-part='previous']"
+      }
+    },
+    "tokens": {
+      "Next": {
+        "border-radius": "6px",
+        "font-size": "14px",
+        "font-weight": "500",
+        "height": "36px"
+      },
+      "Previous": {
+        "border-radius": "6px",
+        "font-size": "14px",
+        "font-weight": "500",
+        "height": "36px"
+      }
+    },
+    "interactions": ["click-next"],
+    "states": ["default", "click-next"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Next.font-weight",
+        "reason": "shadcn pagination link is font-medium (500); Solidiom is font-semibold (600). Deliberate one-step-bold."
+      },
+      {
+        "signal": "tokens.Previous.font-weight",
+        "reason": "shadcn pagination link is font-medium (500); Solidiom is font-semibold (600). Deliberate one-step-bold."
+      },
+      {
+        "signal": "behavior.click-next",
+        "reason": "Clicking Next on the shadcn reference navigates to a '#' href (no client-side page state — the href does not advance an active item); the Solidiom pagination island has real page state so clicking Next advances the current page (1->2) and moves aria-current. Different state model (link-anchors vs stateful pager). Recorded; the visual geometry (Next/Previous) is at parity."
+      }
+    ]
+  },
+  {
+    "id": "resizable-panels",
+    "shadcn": {
+      "ref": "resizable-panels"
+    },
+    "solidiom": {
+      "package": "@solidiom/resizable-panels",
+      "siteSlug": "resizable-panels",
+      "sitePath": "/components/resizable-panels/examples"
+    },
+    "status": "mapped",
+    "parts": ["Group", "Panel", "Handle"],
+    "selectors": {
+      "Group": {
+        "ref": "[data-panel-group]",
+        "sol": ".resizable-panels-example [data-scope='resizable-panels'][data-part='group']"
+      },
+      "Panel": {
+        "ref": "[data-panel-id]",
+        "sol": ".resizable-panels-example [data-scope='resizable-panels'][data-part='panel']"
+      },
+      "Handle": {
+        "ref": "[data-resize-handle]",
+        "sol": ".resizable-panels-example [data-scope='resizable-panels'][data-part='handle']"
+      }
+    },
+    "tokens": {
+      "Handle": {
+        "background-color": "rgb(226, 232, 240)",
+        "width": "1px"
+      },
+      "Group": {
+        "border-width": "1px",
+        "border-radius": "8px"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Group.border-radius",
+        "reason": "shadcn resizable group is rounded-lg (8px); Solidiom group is 8px — at parity; the reference outer border wrapper (rounded-lg border) vs the island's own 8px group differ only by island chrome. Recorded (structural)."
+      },
+      {
+        "signal": "tokens.Handle.background-color",
+        "reason": "shadcn resize handle is bg-border (rgb(226, 232, 240), a 1px divider); Solidiom handle uses its own border palette (rgb(203, 213, 225)). Deliberate border palette difference."
+      },
+      {
+        "signal": "pixels.light.default",
+        "reason": "Pixel crops include differing island chrome + panel text content; the handle geometry (1px divider) is at parity."
+      },
+      {
+        "signal": "pixels.dark.default",
+        "reason": "Dark-theme pixel delta from island chrome + panel labels; handle at parity."
+      }
+    ]
+  },
+  {
+    "id": "scroll-area",
+    "shadcn": {
+      "ref": "scroll-area"
+    },
+    "solidiom": {
+      "package": "@solidiom/scroll-area",
+      "siteSlug": "scroll-area",
+      "sitePath": "/components/scroll-area/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root", "Viewport"],
+    "selectors": {
+      "Root": {
+        "ref": "div.relative.overflow-hidden",
+        "sol": ".scroll-area-example [data-scope='scroll-area'][data-part='root']"
+      },
+      "Viewport": {
+        "ref": "div.relative.overflow-hidden > div:first-of-type",
+        "sol": ".scroll-area-example [data-scope='scroll-area'][data-part='viewport']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "border-radius": "6px",
+        "border-width": "1px",
+        "padding": "16px"
+      },
+      "Viewport": {
+        "border-radius": "6px"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Root.border-radius",
+        "reason": "shadcn scroll-area root is rounded-md (6px); Solidiom root is rounded (8px). A real radius gap for the fix pass (Solidiom's scroll-area root does not derive from --ui-radius)."
+      },
+      {
+        "signal": "tokens.Root.border-color",
+        "reason": "shadcn root border is rgb(226, 232, 240); Solidiom is rgb(203, 213, 225). Deliberate border palette difference."
+      },
+      {
+        "signal": "pixels.light.default",
+        "reason": "Pixel crop includes differing scroll content (paragraph lines vs item rows); geometry at parity except the accepted radius."
+      },
+      {
+        "signal": "pixels.dark.default",
+        "reason": "Dark-theme pixel delta from differing scroll content; geometry at parity."
+      }
+    ]
+  },
+  {
+    "id": "avatar",
+    "shadcn": {
+      "ref": "avatar"
+    },
+    "solidiom": {
+      "package": "@solidiom/avatar",
+      "siteSlug": "avatar",
+      "sitePath": "/components/avatar/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root", "Fallback"],
+    "selectors": {
+      "Root": {
+        "ref": "span.relative.flex.h-10",
+        "sol": ".avatar-example [data-scope='avatar'][data-part='root']"
+      },
+      "Fallback": {
+        "ref": "span.bg-muted",
+        "sol": ".avatar-example [data-scope='avatar'][data-part='fallback']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "border-radius": "9999px",
+        "height": "40px",
+        "width": "40px"
+      },
+      "Fallback": {
+        "background-color": "rgb(241, 245, 249)"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Root.border-radius",
+        "reason": "FORM: shadcn avatar is rounded-full (9999px); Solidiom is 50%. Both render a circle; non-visual CSS-form difference."
+      },
+      {
+        "signal": "tokens.Fallback.background-color",
+        "reason": "shadcn avatar fallback is bg-muted (rgb(241, 245, 249)); Solidiom fallback is a light-gray fill (rgb(248, 250, 252)). Deliberate filled-light vs muted palette."
+      },
+      {
+        "signal": "tokens.Fallback.color",
+        "reason": "shadcn fallback text is foreground (rgb(2, 8, 23)); Solidiom is its muted foreground (rgb(51, 65, 85)). Deliberate palette."
+      },
+      {
+        "signal": "tokens.Fallback.font-weight",
+        "reason": "shadcn fallback is inherited weight (400); Solidiom fallback is font-semibold (600). Deliberate one-step-bold."
+      },
+      {
+        "signal": "tokens.Fallback.border-width",
+        "reason": "shadcn fallback has no border (0px); Solidiom fallback carries the root's 2px border (rgb(203, 213, 225)). Structural: Solidiom avatar root has a 2px ring; shadcn does not."
+      },
+      {
+        "signal": "pixels.light.default",
+        "reason": "Pixel crop includes differing avatar images/initials (ref loads github avatars; sol uses JD initials); geometry at parity."
+      },
+      {
+        "signal": "pixels.dark.default",
+        "reason": "Dark-theme pixel delta from differing avatar content."
+      }
+    ]
+  },
+  {
+    "id": "badge",
+    "shadcn": {
+      "ref": "badge"
+    },
+    "solidiom": {
+      "package": "@solidiom/badge",
+      "siteSlug": "badge",
+      "sitePath": "/components/badge/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root"],
+    "selectors": {
+      "Root": {
+        "ref": "div.inline-flex.rounded-md",
+        "sol": ".badge-example [data-scope='badge'][data-part='root']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "font-size": "12px",
+        "font-weight": "600",
+        "padding": "2px 8px",
+        "height": "22px"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Root.background-color",
+        "reason": "shadcn default badge is a filled primary (rgb(37, 99, 235) blue); Solidiom badge is a filled-light/indigo tint (color(srgb .34 .31 .84 / .12)). Deliberate filled-light vs primary-fill, consistent with Batch-1."
+      },
+      {
+        "signal": "tokens.Root.color",
+        "reason": "shadcn default badge text is primary-foreground (white); Solidiom badge text is its indigo foreground. Follows the accepted fill divergence."
+      },
+      {
+        "signal": "tokens.Root.border-radius",
+        "reason": "shadcn badge is rounded-md (6px); Solidiom badge is a pill (9999px). Structural: Solidiom badge uses rounded-full; a real shape gap for the fix pass to weigh."
+      },
+      {
+        "signal": "tokens.Root.border-width",
+        "reason": "shadcn badge has a 1px border (border-transparent on filled variants); Solidiom badge has 0px. Deliberate."
+      },
+      {
+        "signal": "tokens.Root.padding",
+        "reason": "shadcn badge padding is px-2.5 (2px 10px); Solidiom is px-2 (2px 8px). A small size gap; recorded."
+      },
+      {
+        "signal": "pixels.light.default",
+        "reason": "Pixel crop differs by the accepted fill/shape divergence (blue filled rounded-md vs indigo tinted pill)."
+      },
+      {
+        "signal": "pixels.dark.default",
+        "reason": "Dark-theme pixel delta from the accepted fill/shape divergence."
+      }
+    ]
+  },
+  {
+    "id": "kbd",
+    "shadcn": {
+      "ref": "kbd"
+    },
+    "solidiom": {
+      "package": "@solidiom/kbd",
+      "siteSlug": "kbd",
+      "sitePath": "/components/kbd/examples"
+    },
+    "status": "mapped",
+    "parts": ["Root"],
+    "selectors": {
+      "Root": {
+        "ref": "kbd",
+        "sol": ".kbd-example [data-scope='kbd'][data-part='root']"
+      }
+    },
+    "tokens": {
+      "Root": {
+        "border-radius": "4px",
+        "font-size": "12px",
+        "height": "20px",
+        "padding": "0px 4px"
+      }
+    },
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Root.background-color",
+        "reason": "shadcn kbd is bg-muted (rgb(241, 245, 249)); Solidiom kbd is a light-gray fill (rgb(248, 250, 252)). Deliberate filled-light vs muted palette."
+      },
+      {
+        "signal": "tokens.Root.color",
+        "reason": "shadcn kbd text is muted-foreground (rgb(100, 116, 139)); Solidiom is its foreground (rgb(17, 24, 39)). Deliberate palette."
+      },
+      {
+        "signal": "tokens.Root.font-weight",
+        "reason": "shadcn kbd is font-medium (500); Solidiom is font-semibold (600). Deliberate one-step-bold."
+      },
+      {
+        "signal": "tokens.Root.border-width",
+        "reason": "shadcn kbd is borderless (0px, bg-muted fill); Solidiom kbd has a 1px bottom border (key-cap model). Structural: Solidiom kbd renders a keycap; shadcn a flat chip."
+      },
+      {
+        "signal": "tokens.Root.box-shadow",
+        "reason": "shadcn kbd has no shadow; Solidiom kbd has a 1px keycap shadow. Follows the accepted border/keycap model divergence."
+      },
+      {
+        "signal": "pixels.light.default",
+        "reason": "Pixel crop differs by the accepted keycap-vs-chip model (border+shadow vs flat muted fill)."
+      },
+      {
+        "signal": "pixels.dark.default",
+        "reason": "Dark-theme pixel delta from the keycap model divergence."
+      }
+    ]
+  },
+  {
+    "id": "sidebar",
+    "shadcn": {
+      "ref": "sidebar"
+    },
+    "solidiom": {
+      "package": "@solidiom/sidebar",
+      "siteSlug": "sidebar",
+      "sitePath": "/components/sidebar/examples"
+    },
+    "status": "gap",
+    "gapReason": "no Solidiom live examples island (sidebar is not in COMPONENTS_WITH_EXAMPLES and has no content page); shadcn 3.8.5 registry reference page exists.",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "separator",
+    "shadcn": {
+      "ref": "separator"
+    },
+    "solidiom": {
+      "package": "@solidiom/separator",
+      "siteSlug": "separator",
+      "sitePath": "/components/separator/examples"
+    },
+    "status": "gap",
+    "gapReason": "no Solidiom live examples island (separator is not in COMPONENTS_WITH_EXAMPLES — SeparatorExample.tsx exists but is not registered in ComponentExample.astro or the content collection); shadcn 3.8.5 registry reference page exists.",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
   }
 ]
