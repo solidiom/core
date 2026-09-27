@@ -6,6 +6,7 @@
 [data-scope="scroll-area"][data-part="root"] {
   position: relative;
   overflow: hidden;
+  border-radius: var(--ui-radius, 0.375rem);
 }
 
 [data-scope="scroll-area"][data-part="viewport"] {

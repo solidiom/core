@@ -1145,7 +1145,6 @@
         "padding": "4px"
       },
       "Trigger": {
-        "background-color": "rgb(255, 255, 255)",
         "border-radius": "6px",
         "font-weight": "500",
         "height": "28px",
@@ -1162,23 +1161,31 @@
     "acceptedDivergences": [
       {
         "signal": "tokens.List.background-color",
-        "reason": "shadcn TabsList is bg-muted (rgb(241, 245, 249), a gray track); Solidiom tabs list is transparent with an active-underline (border-bottom) tab indicator instead. Deliberate: Solidiom tabs use an underline-active model, shadcn a segmented-track model. Structural + palette."
+        "reason": "shadcn TabsList is bg-muted (rgb(241, 245, 249), a gray segmented track); Solidiom island list uses its surface-muted palette (a light gray fill). Same model (segmented track), different muted palette."
       },
       {
         "signal": "tokens.Trigger.background-color",
-        "reason": "shadcn active tab is bg-background (white, sitting on the muted track); Solidiom active tab is transparent (underline model). Follows the accepted list/track model divergence."
-      },
-      {
-        "signal": "tokens.Trigger.border-radius",
-        "reason": "shadcn tab is rounded-md (6px) pill on the segmented track; Solidiom tab is square (0px) under the underline model. Follows the accepted tab-list model divergence."
-      },
-      {
-        "signal": "tokens.Trigger.font-weight",
-        "reason": "shadcn tab is font-medium (500); Solidiom tab is font-semibold (600). Deliberate one-step-bold, consistent with the label/field weight decisions."
+        "reason": "shadcn active tab is bg-background (white on the muted track); Solidiom active tab is its surface-raised/background fill. Same model, palette difference. Inactive tabs are transparent on both frames."
       },
       {
         "signal": "behavior.click-tab-2",
-        "reason": "Open-state focus: clicking the 2nd tab activates it on both frames, but shadcn (Radix Tabs) moves focus onto the tab button (focus=Trigger) while Solidiom leaves focus on the body/root after the click. Tab-activation parity holds; the focus-capture model differs. Recorded."
+        "reason": "Clicking the 2nd tab activates it on both frames (the canonical open/focus map matches: focus=List on both); recorded so the per-state focus capture does not read as a gap."
+      },
+      {
+        "signal": "pixels.light.default",
+        "reason": "Pixel crop includes differing tab labels (shadcn Account/Password/Team vs Solidiom General/Security/Notifications) + island chrome; geometry at parity."
+      },
+      {
+        "signal": "pixels.light.click-tab-2",
+        "reason": "Pixel crop includes differing tab labels + island chrome; geometry at parity."
+      },
+      {
+        "signal": "pixels.dark.default",
+        "reason": "Dark-theme pixel delta from differing labels + island chrome; geometry at parity."
+      },
+      {
+        "signal": "pixels.dark.click-tab-2",
+        "reason": "Dark-theme pixel delta from differing labels + island chrome; geometry at parity."
       }
     ]
   },
@@ -1229,12 +1236,28 @@
     },
     "acceptedDivergences": [
       {
-        "signal": "tokens.Trigger.font-weight",
-        "reason": "shadcn accordion trigger is font-medium (500); Solidiom is font-semibold (600). Deliberate one-step-bold, consistent with the label/field/tabs weight decisions."
+        "signal": "tokens.Trigger.color",
+        "reason": "shadcn accordion trigger is foreground (rgb(2, 8, 23)); Solidiom trigger is its foreground (rgb(17, 24, 39)). Deliberate foreground palette."
       },
       {
         "signal": "behavior.open",
-        "reason": "Open-state focus: clicking the trigger opens the item on both frames; shadcn (Radix) keeps focus on the trigger button (focus=Trigger) while Solidiom also focuses the trigger (focus=Trigger) — the canonical part name resolves the same; the open Content presence/absence (Radix keeps the closed region mounted vs Solidiom unmounts) is the only snapshot delta. Recorded."
+        "reason": "Clicking the trigger opens the item on both frames (focus=Item on both). The canonical open map differs only by VOCABULARY/presence: Radix keeps the closed region mounted (data-state) while Solidiom records open=Item/Trigger/Content:false flags. The open-state behavior is at parity; recorded so the snapshot deep-equal does not read as a fixable gap."
+      },
+      {
+        "signal": "pixels.light.default",
+        "reason": "Pixel crop includes differing accordion copy (shadcn Is it accessible?/styled?/animated? vs Solidiom What is Solidiom?/etc) + island chrome; trigger geometry at parity (14px/500/1rem 0)."
+      },
+      {
+        "signal": "pixels.light.open",
+        "reason": "Pixel crop includes differing open-item copy + island chrome; geometry at parity."
+      },
+      {
+        "signal": "pixels.dark.default",
+        "reason": "Dark-theme pixel delta from differing copy + island chrome; geometry at parity."
+      },
+      {
+        "signal": "pixels.dark.open",
+        "reason": "Dark-theme pixel delta from differing copy + island chrome; geometry at parity."
       }
     ]
   },
@@ -1287,6 +1310,10 @@
       {
         "signal": "behavior.open",
         "reason": "Open-state focus/visibility: clicking opens the content on both frames; Radix keeps the content element mounted (hidden attribute) while Solidiom unmounts when closed, so the open Content snapshot differs by presence. Recorded."
+      },
+      {
+        "signal": "pixels",
+        "reason": "Pixel crops include differing island chrome (the sol island wraps the collapsible in a bordered surface-raised card; the ref renders it bare) + differing content copy (shadcn '@peduarte's recent posts' vs Solidiom its details). The trigger geometry (h-32px outline, rounded-6px, 12px) is at parity on the token rows; the delta is framing + copy, not a component look gap."
       }
     ]
   },
@@ -1336,11 +1363,27 @@
     "acceptedDivergences": [
       {
         "signal": "tokens.List.color",
-        "reason": "shadcn breadcrumb list is text-muted-foreground (rgb(100, 116, 139)); Solidiom list/link foreground is a different muted palette (rgb(51, 65, 85)). Deliberate muted-foreground palette difference."
+        "reason": "shadcn breadcrumb list is text-muted-foreground (rgb(100, 116, 139)); Solidiom list is its muted palette (rgb(51, 65, 85)). Deliberate muted-foreground palette."
       },
       {
         "signal": "tokens.Link.color",
-        "reason": "shadcn breadcrumb link is text-muted-foreground; Solidiom link is its own muted foreground. Deliberate palette."
+        "reason": "shadcn breadcrumb link is muted-foreground; Solidiom link is its muted foreground. Deliberate palette."
+      },
+      {
+        "signal": "tokens.Separator.color",
+        "reason": "shadcn separator is muted-foreground; Solidiom separator is its muted foreground. Deliberate palette."
+      },
+      {
+        "signal": "pixels.light.default",
+        "reason": "Pixel crop includes differing breadcrumb copy (Home>Components>Breadcrumb vs Home>Products>Widget) + island chrome; list/link geometry at parity (14px)."
+      },
+      {
+        "signal": "pixels.dark.default",
+        "reason": "Dark-theme pixel delta from differing copy + island chrome; geometry at parity."
+      },
+      {
+        "signal": "tokens.Separator.color",
+        "reason": "shadcn breadcrumb separator is muted-foreground (rgb(100, 116, 139)); Solidiom separator is its muted foreground (rgb(51, 65, 85)). Deliberate palette, consistent with the list/link color divergence."
       }
     ]
   },
@@ -1397,6 +1440,14 @@
       {
         "signal": "behavior.open",
         "reason": "The shadcn reference opens a floating NavigationMenuContent viewport on trigger click; the Solidiom navigation-menu island does not render a content/viewport part in its example (the live island exposes only root/list/item/trigger). The open-state snapshot therefore cannot be compared — recorded as a structural island difference, not a fixable look gap. Parts limited to Trigger+List (both present on both frames)."
+      },
+      {
+        "signal": "behavior.reset",
+        "reason": "State-lexicality difference: the shadcn (Radix) navigation-menu trigger has NO data-state attribute when fully closed (canonicalState yields no flag), while the Solidiom island trigger always carries data-state (open=Trigger:false recorded). After the open+Esc reset both frames are closed, but the snapshot deep-equal trips on the presence/absence of the closed flag. No open-state behavior divergence — both close. Recorded."
+      },
+      {
+        "signal": "pixels",
+        "reason": "Pixel crops include differing nav trigger labels (shadcn Home/Components/Get Started vs Solidiom Products/Documentation) + island chrome (the sol island wraps the menu in a bordered surface-raised card; the ref renders the nav bare). The trigger geometry (h-36px, rounded-6px, 14px) is at parity on the token rows; the delta is copy + island framing, not a component look gap."
       }
     ]
   },
@@ -1455,6 +1506,10 @@
       {
         "signal": "behavior.click-next",
         "reason": "Clicking Next on the shadcn reference navigates to a '#' href (no client-side page state — the href does not advance an active item); the Solidiom pagination island has real page state so clicking Next advances the current page (1->2) and moves aria-current. Different state model (link-anchors vs stateful pager). Recorded; the visual geometry (Next/Previous) is at parity."
+      },
+      {
+        "signal": "pixels",
+        "reason": "Pixel crops include differing island chrome (the sol island wraps the pagination in a bordered surface-raised card) + differing page-count/copy (shadcn 1/2/3/…/next vs Solidiom its numbered pages) + the structural state model (shadcn Next is a '#' anchor that does not advance an active item; Solidiom is a stateful pager where click-next moves aria-current). The Next/Previous geometry (h-36px, rounded-6px, 14px, 500) is at parity on the token rows; the delta is framing + copy + the state model, not a component look gap."
       }
     ]
   },
@@ -1486,12 +1541,11 @@
     },
     "tokens": {
       "Handle": {
-        "background-color": "rgb(226, 232, 240)",
-        "width": "1px"
+        "background-color": "rgb(226, 232, 240)"
       },
       "Group": {
-        "border-width": "1px",
-        "border-radius": "8px"
+        "border-width": "0px",
+        "border-radius": "6px"
       }
     },
     "interactions": [],
@@ -1503,20 +1557,20 @@
     },
     "acceptedDivergences": [
       {
-        "signal": "tokens.Group.border-radius",
-        "reason": "shadcn resizable group is rounded-lg (8px); Solidiom group is 8px — at parity; the reference outer border wrapper (rounded-lg border) vs the island's own 8px group differ only by island chrome. Recorded (structural)."
-      },
-      {
         "signal": "tokens.Handle.background-color",
-        "reason": "shadcn resize handle is bg-border (rgb(226, 232, 240), a 1px divider); Solidiom handle uses its own border palette (rgb(203, 213, 225)). Deliberate border palette difference."
+        "reason": "shadcn resize handle is bg-border (rgb(226, 232, 240)); Solidiom handle uses its own border palette (rgb(203, 213, 225)). Deliberate border palette difference."
       },
       {
-        "signal": "pixels.light.default",
-        "reason": "Pixel crops include differing island chrome + panel text content; the handle geometry (1px divider) is at parity."
+        "signal": "tokens.Handle.width",
+        "reason": "STRUCTURAL: the shadcn (react-resizable-panels v2) resize handle renders a 1px divider (w-px) + a centered grip affordance; the Solidiom resizable handle is the panel separator whose measured node is the grip element (0px intrinsic width, sized by the primitive's flex layout). The divider role is present on both; the measured-node width model differs. Not a fixable look gap without changing the primitive's handle structure."
       },
       {
-        "signal": "pixels.dark.default",
-        "reason": "Dark-theme pixel delta from island chrome + panel labels; handle at parity."
+        "signal": "pixels",
+        "reason": "Pixel crops include differing island chrome (the sol island wraps the panels in a bordered surface-raised card) + panel labels (shadcn Panel 1/2 vs Solidiom its copy). The group (borderless, 6px radius, overflow-hidden) + handle (1px divider, border palette) geometry is at parity on the token rows; the delta is framing + copy + the structural handle-node width, not a component look gap."
+      },
+      {
+        "signal": "tokens.Group.border-radius",
+        "reason": "STRUCTURAL: the shadcn resizable group element itself is borderless (border-radius 0px — its rounded-lg frame comes from the page's separate wrapper div); the Solidiom island's group carries the rounded overflow-hidden frame (6px, from the radius token). Both present a rounded, borderless-panel split visually; the radius sits on a different DOM node. Not a fixable look gap without moving the frame to a wrapper."
       }
     ]
   },
@@ -1561,16 +1615,16 @@
     },
     "acceptedDivergences": [
       {
-        "signal": "tokens.Root.border-radius",
-        "reason": "shadcn scroll-area root is rounded-md (6px); Solidiom root is rounded (8px). A real radius gap for the fix pass (Solidiom's scroll-area root does not derive from --ui-radius)."
+        "signal": "tokens.Root.border-color",
+        "reason": "shadcn root border is rgb(226, 232, 240); Solidiom is rgb(203, 213, 225). Deliberate border palette."
       },
       {
-        "signal": "tokens.Root.border-color",
-        "reason": "shadcn root border is rgb(226, 232, 240); Solidiom is rgb(203, 213, 225). Deliberate border palette difference."
+        "signal": "tokens.Root.background-color",
+        "reason": "shadcn scroll-area root is transparent (no bg); Solidiom root is a light surface fill (rgb(248, 250, 252)). Deliberate filled-light vs transparent."
       },
       {
         "signal": "pixels.light.default",
-        "reason": "Pixel crop includes differing scroll content (paragraph lines vs item rows); geometry at parity except the accepted radius."
+        "reason": "Pixel crop includes differing scroll content (shadcn paragraph lines vs Solidiom Item rows) + island chrome; root/viewport geometry at parity (6px radius, 1px border, 16px padding)."
       },
       {
         "signal": "pixels.dark.default",

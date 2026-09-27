@@ -1,5 +1,5 @@
 # avatar — shadcn parity
-Reference: shadcn@3.8.5, solidiom @ f771f2dd
+Reference: shadcn@3.8.5, solidiom @ b4adaad9
 Status: ✅ 0 failures, 6 accepted divergences
 
 | Signal | Expected (shadcn) | Actual (solidiom) | Verdict |

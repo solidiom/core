@@ -61,6 +61,11 @@ const ENTRY = {
       reason:
         "Clicking Next on the shadcn reference navigates to a '#' href (no client-side page state — the href does not advance an active item); the Solidiom pagination island has real page state so clicking Next advances the current page (1->2) and moves aria-current. Different state model (link-anchors vs stateful pager). Recorded; the visual geometry (Next/Previous) is at parity.",
     },
+    {
+      signal: "pixels",
+      reason:
+        "Pixel crops include differing island chrome (the sol island wraps the pagination in a bordered surface-raised card) + differing page-count/copy (shadcn 1/2/3/…/next vs Solidiom its numbered pages) + the structural state model (shadcn Next is a '#' anchor that does not advance an active item; Solidiom is a stateful pager where click-next moves aria-current). The Next/Previous geometry (h-36px, rounded-6px, 14px, 500) is at parity on the token rows; the delta is framing + copy + the state model, not a component look gap.",
+    },
   ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"

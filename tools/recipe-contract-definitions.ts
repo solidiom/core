@@ -430,7 +430,7 @@ export const badgeRecipe: RecipeDefinition = {
       base: {
         display: "inline-flex",
         "align-items": "center",
-        padding: "0.125rem 0.625rem",
+        padding: "0.125rem 0.75rem",
         "border-style": "solid",
         "border-width": "1px",
         "border-color": "transparent",
@@ -2323,6 +2323,7 @@ export const scrollAreaRecipe: RecipeDefinition = {
       base: {
         position: "relative",
         overflow: "hidden",
+        "border-radius": { token: "radius" },
       },
     },
     {

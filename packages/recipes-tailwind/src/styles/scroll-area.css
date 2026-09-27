@@ -5,7 +5,7 @@
 
 @layer components {
   [data-scope="scroll-area"][data-part="root"] {
-    @apply relative overflow-hidden;
+    @apply relative overflow-hidden rounded-radius;
   }
 
   [data-scope="scroll-area"][data-part="viewport"] {

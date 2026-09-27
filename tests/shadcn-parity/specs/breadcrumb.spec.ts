@@ -49,12 +49,31 @@ const ENTRY = {
     {
       signal: "tokens.List.color",
       reason:
-        "shadcn breadcrumb list is text-muted-foreground (rgb(100, 116, 139)); Solidiom list/link foreground is a different muted palette (rgb(51, 65, 85)). Deliberate muted-foreground palette difference.",
+        "shadcn breadcrumb list is text-muted-foreground (rgb(100, 116, 139)); Solidiom list is its muted palette (rgb(51, 65, 85)). Deliberate muted-foreground palette.",
     },
     {
       signal: "tokens.Link.color",
       reason:
-        "shadcn breadcrumb link is text-muted-foreground; Solidiom link is its own muted foreground. Deliberate palette.",
+        "shadcn breadcrumb link is muted-foreground; Solidiom link is its muted foreground. Deliberate palette.",
+    },
+    {
+      signal: "tokens.Separator.color",
+      reason:
+        "shadcn separator is muted-foreground; Solidiom separator is its muted foreground. Deliberate palette.",
+    },
+    {
+      signal: "pixels.light.default",
+      reason:
+        "Pixel crop includes differing breadcrumb copy (Home>Components>Breadcrumb vs Home>Products>Widget) + island chrome; list/link geometry at parity (14px).",
+    },
+    {
+      signal: "pixels.dark.default",
+      reason: "Dark-theme pixel delta from differing copy + island chrome; geometry at parity.",
+    },
+    {
+      signal: "tokens.Separator.color",
+      reason:
+        "shadcn breadcrumb separator is muted-foreground (rgb(100, 116, 139)); Solidiom separator is its muted foreground (rgb(51, 65, 85)). Deliberate palette, consistent with the list/link color divergence.",
     },
   ],
 } as import("../lib/types").MappingEntry

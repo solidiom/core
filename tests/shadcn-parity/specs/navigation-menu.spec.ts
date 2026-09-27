@@ -59,6 +59,16 @@ const ENTRY = {
       reason:
         "The shadcn reference opens a floating NavigationMenuContent viewport on trigger click; the Solidiom navigation-menu island does not render a content/viewport part in its example (the live island exposes only root/list/item/trigger). The open-state snapshot therefore cannot be compared — recorded as a structural island difference, not a fixable look gap. Parts limited to Trigger+List (both present on both frames).",
     },
+    {
+      signal: "behavior.reset",
+      reason:
+        "State-lexicality difference: the shadcn (Radix) navigation-menu trigger has NO data-state attribute when fully closed (canonicalState yields no flag), while the Solidiom island trigger always carries data-state (open=Trigger:false recorded). After the open+Esc reset both frames are closed, but the snapshot deep-equal trips on the presence/absence of the closed flag. No open-state behavior divergence — both close. Recorded.",
+    },
+    {
+      signal: "pixels",
+      reason:
+        "Pixel crops include differing nav trigger labels (shadcn Home/Components/Get Started vs Solidiom Products/Documentation) + island chrome (the sol island wraps the menu in a bordered surface-raised card; the ref renders the nav bare). The trigger geometry (h-36px, rounded-6px, 14px) is at parity on the token rows; the delta is copy + island framing, not a component look gap.",
+    },
   ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"

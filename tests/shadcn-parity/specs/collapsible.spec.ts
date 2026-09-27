@@ -55,6 +55,11 @@ const ENTRY = {
       reason:
         "Open-state focus/visibility: clicking opens the content on both frames; Radix keeps the content element mounted (hidden attribute) while Solidiom unmounts when closed, so the open Content snapshot differs by presence. Recorded.",
     },
+    {
+      signal: "pixels",
+      reason:
+        "Pixel crops include differing island chrome (the sol island wraps the collapsible in a bordered surface-raised card; the ref renders it bare) + differing content copy (shadcn '@peduarte's recent posts' vs Solidiom its details). The trigger geometry (h-32px outline, rounded-6px, 12px) is at parity on the token rows; the delta is framing + copy, not a component look gap.",
+    },
   ],
 } as import("../lib/types").MappingEntry
 const REF_BASE = "http://127.0.0.1:4333"

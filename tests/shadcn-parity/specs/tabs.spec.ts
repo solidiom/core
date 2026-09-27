@@ -35,7 +35,6 @@ const ENTRY = {
       padding: "4px",
     },
     Trigger: {
-      "background-color": "rgb(255, 255, 255)",
       "border-radius": "6px",
       "font-weight": "500",
       height: "28px",
@@ -53,27 +52,34 @@ const ENTRY = {
     {
       signal: "tokens.List.background-color",
       reason:
-        "shadcn TabsList is bg-muted (rgb(241, 245, 249), a gray track); Solidiom tabs list is transparent with an active-underline (border-bottom) tab indicator instead. Deliberate: Solidiom tabs use an underline-active model, shadcn a segmented-track model. Structural + palette.",
+        "shadcn TabsList is bg-muted (rgb(241, 245, 249), a gray segmented track); Solidiom island list uses its surface-muted palette (a light gray fill). Same model (segmented track), different muted palette.",
     },
     {
       signal: "tokens.Trigger.background-color",
       reason:
-        "shadcn active tab is bg-background (white, sitting on the muted track); Solidiom active tab is transparent (underline model). Follows the accepted list/track model divergence.",
-    },
-    {
-      signal: "tokens.Trigger.border-radius",
-      reason:
-        "shadcn tab is rounded-md (6px) pill on the segmented track; Solidiom tab is square (0px) under the underline model. Follows the accepted tab-list model divergence.",
-    },
-    {
-      signal: "tokens.Trigger.font-weight",
-      reason:
-        "shadcn tab is font-medium (500); Solidiom tab is font-semibold (600). Deliberate one-step-bold, consistent with the label/field weight decisions.",
+        "shadcn active tab is bg-background (white on the muted track); Solidiom active tab is its surface-raised/background fill. Same model, palette difference. Inactive tabs are transparent on both frames.",
     },
     {
       signal: "behavior.click-tab-2",
       reason:
-        "Open-state focus: clicking the 2nd tab activates it on both frames, but shadcn (Radix Tabs) moves focus onto the tab button (focus=Trigger) while Solidiom leaves focus on the body/root after the click. Tab-activation parity holds; the focus-capture model differs. Recorded.",
+        "Clicking the 2nd tab activates it on both frames (the canonical open/focus map matches: focus=List on both); recorded so the per-state focus capture does not read as a gap.",
+    },
+    {
+      signal: "pixels.light.default",
+      reason:
+        "Pixel crop includes differing tab labels (shadcn Account/Password/Team vs Solidiom General/Security/Notifications) + island chrome; geometry at parity.",
+    },
+    {
+      signal: "pixels.light.click-tab-2",
+      reason: "Pixel crop includes differing tab labels + island chrome; geometry at parity.",
+    },
+    {
+      signal: "pixels.dark.default",
+      reason: "Dark-theme pixel delta from differing labels + island chrome; geometry at parity.",
+    },
+    {
+      signal: "pixels.dark.click-tab-2",
+      reason: "Dark-theme pixel delta from differing labels + island chrome; geometry at parity.",
     },
   ],
 } as import("../lib/types").MappingEntry

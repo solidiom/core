@@ -31,11 +31,10 @@ const ENTRY = {
   tokens: {
     Handle: {
       "background-color": "rgb(226, 232, 240)",
-      width: "1px",
     },
     Group: {
-      "border-width": "1px",
-      "border-radius": "8px",
+      "border-width": "0px",
+      "border-radius": "6px",
     },
   },
   interactions: [],
@@ -47,23 +46,24 @@ const ENTRY = {
   },
   acceptedDivergences: [
     {
-      signal: "tokens.Group.border-radius",
-      reason:
-        "shadcn resizable group is rounded-lg (8px); Solidiom group is 8px — at parity; the reference outer border wrapper (rounded-lg border) vs the island's own 8px group differ only by island chrome. Recorded (structural).",
-    },
-    {
       signal: "tokens.Handle.background-color",
       reason:
-        "shadcn resize handle is bg-border (rgb(226, 232, 240), a 1px divider); Solidiom handle uses its own border palette (rgb(203, 213, 225)). Deliberate border palette difference.",
+        "shadcn resize handle is bg-border (rgb(226, 232, 240)); Solidiom handle uses its own border palette (rgb(203, 213, 225)). Deliberate border palette difference.",
     },
     {
-      signal: "pixels.light.default",
+      signal: "tokens.Handle.width",
       reason:
-        "Pixel crops include differing island chrome + panel text content; the handle geometry (1px divider) is at parity.",
+        "STRUCTURAL: the shadcn (react-resizable-panels v2) resize handle renders a 1px divider (w-px) + a centered grip affordance; the Solidiom resizable handle is the panel separator whose measured node is the grip element (0px intrinsic width, sized by the primitive's flex layout). The divider role is present on both; the measured-node width model differs. Not a fixable look gap without changing the primitive's handle structure.",
     },
     {
-      signal: "pixels.dark.default",
-      reason: "Dark-theme pixel delta from island chrome + panel labels; handle at parity.",
+      signal: "pixels",
+      reason:
+        "Pixel crops include differing island chrome (the sol island wraps the panels in a bordered surface-raised card) + panel labels (shadcn Panel 1/2 vs Solidiom its copy). The group (borderless, 6px radius, overflow-hidden) + handle (1px divider, border palette) geometry is at parity on the token rows; the delta is framing + copy + the structural handle-node width, not a component look gap.",
+    },
+    {
+      signal: "tokens.Group.border-radius",
+      reason:
+        "STRUCTURAL: the shadcn resizable group element itself is borderless (border-radius 0px — its rounded-lg frame comes from the page's separate wrapper div); the Solidiom island's group carries the rounded overflow-hidden frame (6px, from the radius token). Both present a rounded, borderless-panel split visually; the radius sits on a different DOM node. Not a fixable look gap without moving the frame to a wrapper.",
     },
   ],
 } as import("../lib/types").MappingEntry

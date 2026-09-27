@@ -49,14 +49,31 @@ const ENTRY = {
   },
   acceptedDivergences: [
     {
-      signal: "tokens.Trigger.font-weight",
+      signal: "tokens.Trigger.color",
       reason:
-        "shadcn accordion trigger is font-medium (500); Solidiom is font-semibold (600). Deliberate one-step-bold, consistent with the label/field/tabs weight decisions.",
+        "shadcn accordion trigger is foreground (rgb(2, 8, 23)); Solidiom trigger is its foreground (rgb(17, 24, 39)). Deliberate foreground palette.",
     },
     {
       signal: "behavior.open",
       reason:
-        "Open-state focus: clicking the trigger opens the item on both frames; shadcn (Radix) keeps focus on the trigger button (focus=Trigger) while Solidiom also focuses the trigger (focus=Trigger) — the canonical part name resolves the same; the open Content presence/absence (Radix keeps the closed region mounted vs Solidiom unmounts) is the only snapshot delta. Recorded.",
+        "Clicking the trigger opens the item on both frames (focus=Item on both). The canonical open map differs only by VOCABULARY/presence: Radix keeps the closed region mounted (data-state) while Solidiom records open=Item/Trigger/Content:false flags. The open-state behavior is at parity; recorded so the snapshot deep-equal does not read as a fixable gap.",
+    },
+    {
+      signal: "pixels.light.default",
+      reason:
+        "Pixel crop includes differing accordion copy (shadcn Is it accessible?/styled?/animated? vs Solidiom What is Solidiom?/etc) + island chrome; trigger geometry at parity (14px/500/1rem 0).",
+    },
+    {
+      signal: "pixels.light.open",
+      reason: "Pixel crop includes differing open-item copy + island chrome; geometry at parity.",
+    },
+    {
+      signal: "pixels.dark.default",
+      reason: "Dark-theme pixel delta from differing copy + island chrome; geometry at parity.",
+    },
+    {
+      signal: "pixels.dark.open",
+      reason: "Dark-theme pixel delta from differing copy + island chrome; geometry at parity.",
     },
   ],
 } as import("../lib/types").MappingEntry

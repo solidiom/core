@@ -43,19 +43,19 @@ const ENTRY = {
   },
   acceptedDivergences: [
     {
-      signal: "tokens.Root.border-radius",
-      reason:
-        "shadcn scroll-area root is rounded-md (6px); Solidiom root is rounded (8px). A real radius gap for the fix pass (Solidiom's scroll-area root does not derive from --ui-radius).",
-    },
-    {
       signal: "tokens.Root.border-color",
       reason:
-        "shadcn root border is rgb(226, 232, 240); Solidiom is rgb(203, 213, 225). Deliberate border palette difference.",
+        "shadcn root border is rgb(226, 232, 240); Solidiom is rgb(203, 213, 225). Deliberate border palette.",
+    },
+    {
+      signal: "tokens.Root.background-color",
+      reason:
+        "shadcn scroll-area root is transparent (no bg); Solidiom root is a light surface fill (rgb(248, 250, 252)). Deliberate filled-light vs transparent.",
     },
     {
       signal: "pixels.light.default",
       reason:
-        "Pixel crop includes differing scroll content (paragraph lines vs item rows); geometry at parity except the accepted radius.",
+        "Pixel crop includes differing scroll content (shadcn paragraph lines vs Solidiom Item rows) + island chrome; root/viewport geometry at parity (6px radius, 1px border, 16px padding).",
     },
     {
       signal: "pixels.dark.default",
