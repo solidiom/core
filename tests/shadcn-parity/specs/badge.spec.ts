@@ -39,7 +39,7 @@ const ENTRY = {
     {
       signal: "tokens.Root.background-color",
       reason:
-        "shadcn default badge is a filled primary (rgb(37, 99, 235) blue); Solidiom badge is a filled-light/indigo tint (color(srgb .34 .31 .84 / .12)). Deliberate filled-light vs primary-fill, consistent with Batch-1.",
+        "shadcn badge is a filled primary (rgb(37, 99, 235) blue); Solidiom badge is a filled-light/indigo tint (color(srgb .34 .31 .84 / .12)). Deliberate filled-light vs primary-fill, consistent with Batch-1.",
     },
     {
       signal: "tokens.Root.color",

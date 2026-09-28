@@ -7,7 +7,7 @@ import type { Page } from "@playwright/test"
 const T = "$$target$$"
 
 export type Action =
-  | { kind: "click"; selector: string }
+  | { kind: "click"; selector: string; tolerant?: boolean }
   | { kind: "press"; selector?: string; key: string }
   | { kind: "fill"; selector: string; value: string }
   | { kind: "hover"; selector: string }
@@ -110,6 +110,23 @@ export const scripts: Record<string, Action[]> = {
     { kind: "wait", ms: 400 },
   ],
   "right-click": [{ kind: "right-click", selector: T }],
+  // Batch 5 (command & composites). The command palette's SOL island is mounted
+  // `defaultOpen={true}` (it has no trigger), so it is ALWAYS open — the engine
+  // only needs to open the shadcn REFERENCE. The generic `open` script (click
+  // $$target$$) cannot work here because $$target$$ = the first part = Content,
+  // which does not exist on the closed ref and is an in-flow div on the sol
+  // side. `open-command` clicks the ref's outline trigger button (matched by its
+  // Tailwind class, which is absent on the SOL island) with `tolerant: true` so
+  // the SOL frame (0 matches) becomes a no-op, then settles, leaving both frames
+  // open and comparable.
+  "open-command": [
+    // The shadcn command reference page opens via an outline Button labelled
+    // "Open command palette" (no `gap-2` class, so the generic icon-button
+    // selector misses it). Target it by accessible text; `tolerant` no-ops on
+    // the SOL island, which is mounted `defaultOpen` (no trigger to click).
+    { kind: "click", selector: "button:has-text('Open command palette')", tolerant: true },
+    { kind: "wait", ms: 450 },
+  ],
   // `hover`/`close-esc`/`close-overlay-click` scripts above double as the
   // tooltip + hover-card state scripts (hover opens them; Escape closes the
   // ref Radix side — the sol side keeps showing, which the behavior signal
@@ -139,7 +156,15 @@ export async function runInteractions(page: Page, name: string, target?: string)
     // fallback). Any other selector is used verbatim.
     const sel: string =
       a.selector === T ? (target ?? genericFor(a.kind, name)) : (a.selector as string)
-    if (a.kind === "click") await page.click(sel)
+    if (a.kind === "click")
+      if (a.tolerant) {
+        // Frame-robust click: act only when the selector resolves on THIS frame.
+        // Used when one frame has the component's trigger and the other (an
+        // always-open island) does not — the no-match frame becomes a no-op
+        // instead of throwing.
+        const count = await page.locator(sel).count()
+        if (count > 0) await page.click(sel)
+      } else await page.click(sel)
     else if (a.kind === "right-click") await page.click(sel, { button: "right" })
     else if (a.kind === "hover") await page.hover(sel)
     else if (a.kind === "fill") await page.fill(sel, a.value)

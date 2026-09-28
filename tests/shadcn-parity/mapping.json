@@ -1742,7 +1742,7 @@
     "acceptedDivergences": [
       {
         "signal": "tokens.Root.background-color",
-        "reason": "shadcn default badge is a filled primary (rgb(37, 99, 235) blue); Solidiom badge is a filled-light/indigo tint (color(srgb .34 .31 .84 / .12)). Deliberate filled-light vs primary-fill, consistent with Batch-1."
+        "reason": "shadcn badge is a filled primary (rgb(37, 99, 235) blue); Solidiom badge is a filled-light/indigo tint (color(srgb .34 .31 .84 / .12)). Deliberate filled-light vs primary-fill, consistent with Batch-1."
       },
       {
         "signal": "tokens.Root.color",
@@ -2404,6 +2404,180 @@
     },
     "status": "gap",
     "gapReason": "no Solidiom live examples island (separator is not in COMPONENTS_WITH_EXAMPLES — SeparatorExample.tsx exists but is not registered in ComponentExample.astro or the content collection); shadcn 3.8.5 registry reference page exists.",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "command-palette",
+    "shadcn": {
+      "ref": "command-palette"
+    },
+    "solidiom": {
+      "package": "@solidiom/command-palette",
+      "siteSlug": "command-palette",
+      "sitePath": "/components/command-palette/examples"
+    },
+    "status": "mapped",
+    "parts": ["Content", "Input", "List", "GroupHeading", "Item"],
+    "selectors": {
+      "Content": {
+        "ref": "[role='dialog'][data-state='open']",
+        "sol": ".command-palette-example [data-scope='command-palette'][data-part='root']"
+      },
+      "Input": {
+        "ref": "[role='combobox']",
+        "sol": ".command-palette-example [data-scope='command-palette'][data-part='input']"
+      },
+      "List": {
+        "ref": "[role='listbox']",
+        "sol": ".command-palette-example [data-scope='command-palette'][data-part='list']"
+      },
+      "GroupHeading": {
+        "ref": "[cmdk-group-heading]",
+        "sol": ".command-palette-example [data-scope='command-palette'][data-part='group-heading']"
+      },
+      "Item": {
+        "ref": "[role='option']:not([data-selected]):not([data-disabled])",
+        "sol": ".command-palette-example [data-scope='command-palette'][data-part='item']"
+      }
+    },
+    "tokens": {
+      "Content": {
+        "border-radius": "8px",
+        "border-width": "1px",
+        "width": "512px"
+      },
+      "Input": {
+        "font-size": "14px",
+        "border-radius": "6px"
+      },
+      "Item": {
+        "border-radius": "4px",
+        "font-size": "14px",
+        "padding": "12px 8px"
+      },
+      "GroupHeading": {
+        "font-size": "12px",
+        "font-weight": "500"
+      }
+    },
+    "interactions": ["open-command"],
+    "states": ["open-command"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": [
+      {
+        "signal": "tokens.Content.background-color",
+        "reason": "shadcn command content (Dialog) is bg-background (rgb(255,255,255) light / rgb(2,8,23) dark); Solidiom command-palette root is a filled-light surface (rgb(248,250,252) light / rgb(15,23,42) dark). Consistent with the Batch-1/2/4 filled-light vs outline palette decision (dialog/sheet/popover)."
+      },
+      {
+        "signal": "tokens.Item.background-color",
+        "reason": "shadcn command item is bg-accent (rgb(241,245,249) light / rgb(30,41,59) dark) on the SELECTED (first) option; the ref's unselected option is transparent (rgba(0,0,0,0)). The SOL item is always transparent (no cmdk selection model in the island). The two frames' item fill differs by the accent palette (a structural fill-model difference, not a fixable geometry gap). The SELECTED vs unselected comparison is ambiguous under the engine's first() read."
+      },
+      {
+        "signal": "tokens.Item.color",
+        "reason": "shadcn item color is foreground (rgb(2,8,23) light / rgb(248,250,252) dark); Solidiom item color is its own foreground (rgb(17,24,39) light / rgb(241,245,249) dark). Deliberate foreground palette, consistent with Batch-1."
+      },
+      {
+        "signal": "behavior.open",
+        "reason": "STRUCTURAL: the SOL command-palette island is mounted `defaultOpen={true}` (it has no trigger, so it is always present), while the shadcn reference is a closed Radix Dialog until the 'Open command palette' button is clicked. The engine's per-state reset (Escape) closes the Radix reference (open=Content:false, focus=body) but the SOL island stays open (open=Content:true, focus=Input) — a mount-model difference, not a fixable behavior gap. The two frames are therefore only comparable in the `open` state. The Content token rows in `default` read (missing element) on the ref side by design."
+      },
+      {
+        "signal": "behavior.reset",
+        "reason": "Same mount-model difference as behavior.open: after the per-state Escape reset the Radix reference is closed (focus=body) while the SOL island is open (focus=Input). Recorded so the deep-equal does not read as a fixable gap."
+      },
+      {
+        "signal": "pixels.light.default",
+        "reason": "Pixel crop in default state: the shadcn reference shows only the closed trigger button (the command dialog is unmounted), while the SOL island shows the full open command palette (defaultOpen). Structural mount-model difference; geometry at parity in the open state."
+      },
+      {
+        "signal": "pixels.dark.default",
+        "reason": "Dark-theme default-state pixel: same structural mount-model difference (ref closed vs sol open)."
+      },
+      {
+        "signal": "pixels.light.open",
+        "reason": "Pixel crop in open state: the SOL island renders in-flow (no scrim, no focus-trap portal) and its items are 13px/35px vs shadcn's 14px/44px + accent-fill first option + search icon + different copy (Save/Undo/Redo/Settings vs shadcn's Save/Undo/Redo/Settings — same). The remaining delta is the fill-model (accent vs transparent) + the in-flow layout (no 80% black scrim). Geometry tokens (Content radius 8px, Item radius 4px, font 14px) at parity."
+      },
+      {
+        "signal": "pixels.dark.open",
+        "reason": "Dark-theme open-state pixel: same fill-model + in-flow layout delta as light."
+      },
+      {
+        "signal": "tokens.Content.border-radius",
+        "reason": "MOUNT-MODEL: SOL command-palette island is defaultOpen (uncontrolled, no trigger). The engine's per-state reset (Escape) closes it and there is no trigger to re-open, so the open-state SOL tokens read (missing element). shadcn's discovered open-palette geometry (ref side) is: Content radius 8px / border 1px / width 512px; Input font 14px / radius 6px; GroupHeading font 12px / weight 500. Not comparable live; recorded for reference. (A sol trigger would be needed for clean parity — out of scope for discovery.)"
+      },
+      {
+        "signal": "tokens.Content.border-width",
+        "reason": "MOUNT-MODEL: SOL command-palette island is defaultOpen (uncontrolled, no trigger). The engine's per-state reset (Escape) closes it and there is no trigger to re-open, so the open-state SOL tokens read (missing element). shadcn's discovered open-palette geometry (ref side) is: Content radius 8px / border 1px / width 512px; Input font 14px / radius 6px; GroupHeading font 12px / weight 500. Not comparable live; recorded for reference. (A sol trigger would be needed for clean parity — out of scope for discovery.)"
+      },
+      {
+        "signal": "tokens.Content.width",
+        "reason": "MOUNT-MODEL: SOL command-palette island is defaultOpen (uncontrolled, no trigger). The engine's per-state reset (Escape) closes it and there is no trigger to re-open, so the open-state SOL tokens read (missing element). shadcn's discovered open-palette geometry (ref side) is: Content radius 8px / border 1px / width 512px; Input font 14px / radius 6px; GroupHeading font 12px / weight 500. Not comparable live; recorded for reference. (A sol trigger would be needed for clean parity — out of scope for discovery.)"
+      },
+      {
+        "signal": "tokens.Input.font-size",
+        "reason": "MOUNT-MODEL: SOL command-palette island is defaultOpen (uncontrolled, no trigger). The engine's per-state reset (Escape) closes it and there is no trigger to re-open, so the open-state SOL tokens read (missing element). shadcn's discovered open-palette geometry (ref side) is: Content radius 8px / border 1px / width 512px; Input font 14px / radius 6px; GroupHeading font 12px / weight 500. Not comparable live; recorded for reference. (A sol trigger would be needed for clean parity — out of scope for discovery.)"
+      },
+      {
+        "signal": "tokens.Input.border-radius",
+        "reason": "MOUNT-MODEL: SOL command-palette island is defaultOpen (uncontrolled, no trigger). The engine's per-state reset (Escape) closes it and there is no trigger to re-open, so the open-state SOL tokens read (missing element). shadcn's discovered open-palette geometry (ref side) is: Content radius 8px / border 1px / width 512px; Input font 14px / radius 6px; GroupHeading font 12px / weight 500. Not comparable live; recorded for reference. (A sol trigger would be needed for clean parity — out of scope for discovery.)"
+      },
+      {
+        "signal": "tokens.GroupHeading.font-size",
+        "reason": "MOUNT-MODEL: SOL command-palette island is defaultOpen (uncontrolled, no trigger). The engine's per-state reset (Escape) closes it and there is no trigger to re-open, so the open-state SOL tokens read (missing element). shadcn's discovered open-palette geometry (ref side) is: Content radius 8px / border 1px / width 512px; Input font 14px / radius 6px; GroupHeading font 12px / weight 500. Not comparable live; recorded for reference. (A sol trigger would be needed for clean parity — out of scope for discovery.)"
+      },
+      {
+        "signal": "tokens.GroupHeading.font-weight",
+        "reason": "MOUNT-MODEL: SOL command-palette island is defaultOpen (uncontrolled, no trigger). The engine's per-state reset (Escape) closes it and there is no trigger to re-open, so the open-state SOL tokens read (missing element). shadcn's discovered open-palette geometry (ref side) is: Content radius 8px / border 1px / width 512px; Input font 14px / radius 6px; GroupHeading font 12px / weight 500. Not comparable live; recorded for reference. (A sol trigger would be needed for clean parity — out of scope for discovery.)"
+      }
+    ]
+  },
+  {
+    "id": "tree",
+    "shadcn": {
+      "ref": "tree"
+    },
+    "solidiom": {
+      "package": "@solidiom/tree",
+      "siteSlug": "tree",
+      "sitePath": "/components/tree/examples"
+    },
+    "status": "na",
+    "gapReason": "Solidiom-only primitive, no shadcn/ui component to compare against (not a parity target). Verified: the shadcn 3.8.5 new-york registry returns HTTP 404 on https://ui.shadcn.com/r/styles/new-york/tree.json — shadcn has no `tree` component (tree-view is not in the 3.8.5 registry). The Solidiom live island exists (/components/tree/examples) but there is no shadcn reference to compare it to, so it is documented as na, not gap.",
+    "parts": [],
+    "tokens": {},
+    "interactions": [],
+    "states": ["default"],
+    "themes": ["light", "dark"],
+    "tolerance": {
+      "pixelMaxDiff": 2,
+      "pixelMaxPercent": 1
+    },
+    "acceptedDivergences": []
+  },
+  {
+    "id": "listbox",
+    "shadcn": {
+      "ref": "listbox"
+    },
+    "solidiom": {
+      "package": "@solidiom/listbox",
+      "siteSlug": "listbox",
+      "sitePath": "/components/listbox/examples"
+    },
+    "status": "na",
+    "gapReason": "Solidiom-only primitive, no shadcn/ui component to compare against (not a parity target). Verified: the shadcn 3.8.5 new-york registry returns HTTP 404 on https://ui.shadcn.com/r/styles/new-york/listbox.json — shadcn has no standalone `listbox` component (its listbox behavior lives inside `select`/`command`, both of which are separately mapped). The Solidiom live island exists (/components/listbox/examples) but there is no shadcn reference to compare it to, so it is documented as na, not gap.",
     "parts": [],
     "tokens": {},
     "interactions": [],

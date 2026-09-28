@@ -46,6 +46,7 @@ import Skeleton from "./pages/skeleton"
 import Spinner from "./pages/spinner"
 import Toast from "./pages/toast"
 import Empty from "./pages/empty"
+import Command from "./pages/command"
 
 const pages: Record<string, React.ComponentType> = {
   button: Button,
@@ -92,6 +93,7 @@ const pages: Record<string, React.ComponentType> = {
   spinner: Spinner,
   toast: Toast,
   empty: Empty,
+  "command-palette": Command,
 }
 
 function ComponentPage() {

@@ -117,10 +117,34 @@ makes the v3 token system self-consistent. The shadcn-generated
 `tailwindcss-animate` plugin (CJS `require`) is not loaded in this ESM
 `type: module` project and is excluded (plugins: []).
 
+Batch 5 (command & composites) — 1 page added:
+
+- command-palette (shadcn `command`): registry new-york; deps cmdk ^1.1.1 +
+  @radix-ui/react-dialog (reused from dialog). The shadcn Command palette is a
+  cmdk-based `CommandDialog` (a Radix Dialog + CommandContent). Page
+  `src/pages/command.tsx` registered in `main.tsx` under key `command-palette`
+  (the mapping's `shadcn.ref`); an outline "Open command palette" button + a
+  Cmd+K global hotkey open the dialog. `shadcn add command` answered `n` to the
+  pre-existing `dialog.tsx` overwrite prompt (files identical) and wrote
+  `src/components/ui/command.tsx`.
+- tree: **NOT in the 3.8.5 registry** (exact 404 on
+  https://ui.shadcn.com/r/styles/new-york/tree.json). tree is a Solidiom-only
+  primitive — no shadcn component to compare against, so the mapping entry is
+  `na` (not a parity target). No page created.
+- listbox: **NOT in the 3.8.5 registry** (exact 404 on
+  https://ui.shadcn.com/r/styles/new-york/listbox.json). listbox is a Solidiom
+  primitive (the shadcn listbox behavior lives inside select/command, not a
+  standalone component) — no shadcn component to compare against, so the mapping
+  entry is `na` (not a parity target). No page created.
+
+`src/index.css` (canonical hsl block, 0 `oklch`) and `tailwind.config.js`
+(`plugins: []`) re-verified unchanged after the command add.
+
 Lockfile-pinned versions (package-lock.json, npm 11.19.0, Node v26.7.0):
 
 | package                       | version |
 | ----------------------------- | ------- |
+| cmdk                          | 1.1.1   |
 | react                         | 19.3.0  |
 | react-dom                     | 19.3.0  |
 | react-router-dom              | 7.18.4  |
