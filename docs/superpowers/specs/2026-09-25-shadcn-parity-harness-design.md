@@ -13,6 +13,7 @@ Scope: Verify every shadcn/ui component with a Solidiom equivalent **behaves** a
 For every shadcn/ui component that has a Solidiom equivalent, verify that the Solidiom
 component **behaves** (interaction, keyboard, focus, ARIA, state) and **looks** (color,
 spacing, radius, border, typography, dark mode) like shadcn. Verification is done two ways:
+
 - **Live** through the Chrome DevTools MCP tools (the discovery pass, Phase A).
 - **Durable** through a Playwright parity suite that replays the same per-component spec (Phase B).
 
@@ -31,13 +32,14 @@ Solidiom-specific token), the harness records it as an **accepted divergence**
 
 ### Governing rule
 
-A *declared* set of parts, tokens, and interactions per component (in the mapping file,
+A _declared_ set of parts, tokens, and interactions per component (in the mapping file,
 §2a) defines "like shadcn" for that component. Anything not declared is out of scope for
 that component's parity verdict.
 
 ### Success criteria (per component)
 
 A component is one of:
+
 - ✅ **parity** — every declared signal within tolerance.
 - 🟡 **accepted divergence** — differences documented with rationale.
 - ❌ **gap** — a declared signal fails → produces a fix task (Phase C).
@@ -101,6 +103,7 @@ the shadcn registry. One route per component:
 token-matched shell. Served on a fixed port.
 
 **Isolation (hard requirement):**
+
 - Own `package.json` + own lockfile (not the pnpm workspace).
 - Excluded from the `nx` dependency graph and the release/vertical-slice gates — it is a
   comparison fixture, never a product dependency.
@@ -111,6 +114,7 @@ token-matched shell. Served on a fixed port.
 New Playwright config `apps/site/playwright.shadcn.config.ts` (sibling to the existing
 `playwright.visual.config.ts`). One spec per component, generated from `mapping.json`.
 Each spec:
+
 1. Opens **two isolated contexts** (no shared state): `ref` → reference app page;
    `sol` → Solidiom site `solidiom.sitePath`.
 2. For each declared **state × theme**, runs the **interaction script** into both and
@@ -121,11 +125,11 @@ Each spec:
 
 **Ownership:** Phase A is **agent-driven** — performed by the assistant (this session) via
 the Chrome DevTools MCP tools, per batch. Phase B is the **committed** Playwright suite
-that any contributor/CI can re-run without the assistant. Phase A's job is to *discover*
-the true tokens/interactions and produce the first findings; Phase B's job is to *record*
+that any contributor/CI can re-run without the assistant. Phase A's job is to _discover_
+the true tokens/interactions and produce the first findings; Phase B's job is to _record_
 them durably.
 
-The **Chrome DevTools MCP tools** do the comparison *live* per batch: open both apps in
+The **Chrome DevTools MCP tools** do the comparison _live_ per batch: open both apps in
 tabs, `take_snapshot` for the a11y/DOM tree, `evaluate_script` for computed styles,
 `take_screenshot` for pixels, `click`/`press_key`/`fill`/`hover` for interactions. Phase A
 produces the first findings reports and **proves out the exact token list + interaction
@@ -143,21 +147,24 @@ Phase B (replayed).
 `tokens`, `interactions`, `states`, `themes`, `tolerance`, `acceptedDivergences`.
 
 **Step 1 — Render both.**
+
 - Reference: navigate to the reference app page for `<id>`.
 - Solidiom: navigate to `solidiom.sitePath` (the site `examples` view, recipe rendered
   live with its theme).
 - Wait for stable DOM in both. Light default, no theme override yet.
 
 **Step 2 — For each theme in `themes`:** apply to both.
+
 - Reference: set shadcn's dark class.
 - Solidiom: set `document.documentElement.dataset.theme` (same idiom as
   `apps/site/tests/visual/visual-baseline.spec.ts:setTheme`).
 - Wait ~100ms for transitions to settle.
 
 **Step 3 — For each state in `states`:** drive both from a known closed/reset state using
-the same **interaction script**. Each interaction is an *ordered, deterministic* sequence
+the same **interaction script**. Each interaction is an _ordered, deterministic_ sequence
 of `click` / `press_key` / `fill` / `hover` / `wait` steps — identical on both frames.
 After each step, capture on both frames:
+
 - **Behavior snapshot**: `activeElement` (part + role), the part's `aria-*` attributes,
   `data-state` / open-closed DOM flags, whether focus is trapped/returned.
 - **Computed styles**: for every declared `tokens[part][prop]`, read `getComputedStyle`
@@ -166,6 +173,7 @@ After each step, capture on both frames:
   the findings artifacts.
 
 **Step 4 — Diff and verdict.** Per signal:
+
 - **Token diff**: each assertion ✅ (within tolerance) / ❌ (mismatched, expected vs.
   actual recorded) / 🟡 (in `acceptedDivergences`).
 - **Behavior diff**: each interaction step's snapshot pair ✅/❌/🟡. A mismatch is
@@ -177,19 +185,21 @@ After each step, capture on both frames:
 
 ```markdown
 # dialog — shadcn parity
+
 Reference: shadcn@<pinned-version>, solidiom @ <git sha>
 Status: ❌ 2 failures, 1 accepted divergence
 
-| Signal | Expected (shadcn) | Actual (solidiom) | Verdict |
-|---|---|---|---|
-| pixels/light/default | — | delta 3.1% | ❌ |
-| tokens/Trigger.borderRadius | 0.5rem | 0.625rem | 🟡 accepted |
-| behavior/close-esc | closed | still open | ❌ |
-| behavior/focus-return | focus on Trigger | focus lost to body | ❌ |
+| Signal                      | Expected (shadcn) | Actual (solidiom)  | Verdict     |
+| --------------------------- | ----------------- | ------------------ | ----------- |
+| pixels/light/default        | —                 | delta 3.1%         | ❌          |
+| tokens/Trigger.borderRadius | 0.5rem            | 0.625rem           | 🟡 accepted |
+| behavior/close-esc          | closed            | still open         | ❌          |
+| behavior/focus-return       | focus on Trigger  | focus lost to body | ❌          |
 
 [side-by-side PNGs + delta heatmaps + failing interaction DOM traces]
 
 Fixes:
+
 - [ ] recipe: dialog content bg uses --card, expected --popover
 - [ ] primitive: Esc keypress does not close; close handler missing on Content
 ```
@@ -217,11 +227,11 @@ last):
 - **Batch 0 — Foundation (setup only).** Build `tools/shadcn-reference/` Vite+React app,
   install the shadcn components, verify it renders; wire the two-context harness skeleton
   (no per-component assertions yet).
-  *Checkpoint: user confirms the reference app looks like real shadcn.*
+  _Checkpoint: user confirms the reference app looks like real shadcn._
 - **Batch 1 — Form & input primitives.** button, input, label, checkbox, radio-group,
   switch, slider, select, combobox, textarea, field, input-otp, input-group.
   High-value, mostly static states, establishes the token/interaction idioms.
-  *Review gate (below).*
+  _Review gate (below)._
 - **Batch 2 — Overlays & popovers.** dialog, alert-dialog, sheet, drawer, popover,
   tooltip, hover-card, dropdown-menu, context-menu, menubar. Behavior-heavy: focus trap,
   Esc, portal, positioning. Where real divergences will surface.
@@ -242,15 +252,15 @@ status (per component: ✅ / 🟡 / ❌ counts + what needs fixing).
 
 ## 5. Risks and mitigations
 
-| Risk | Mitigation |
-|---|---|
-| **Reference app rots** (shadcn publishes new versions, styling drifts between runs) | Pin shadcn registry versions in `tools/shadcn-reference/` (own lockfile, no auto-update). Re-baseline only on a deliberate versioned re-init. Record the shadcn version in every findings report header. |
-| **Theme tokens don't line up 1:1** (Solidiom token system ≠ shadcn CSS vars) | Compare *computed/resolved* values, not token names, for the "look" signal. Where token identity is itself the point, it goes in `acceptedDivergences` with rationale. Resolved values (color, px, radius) are what "looks like" means. |
-| **Pixel diff too brittle** (fonts, anti-aliasing, 1px shifts, sub-pixel) | Bounding-box crop (not full page) + `tolerance.pixelMaxPercent` + **computed-style token assertions as the primary "look" signal** (robust, points at the exact drifted value). Pixel diff is corroboration, not the sole gate. Disable animations (existing idiom: `animations: "disabled"`). |
-| **Interaction scripts not deterministic** (timing, async open/close) | Each step includes an explicit `wait` for the stable state (e.g. `waitFor` `[data-state=open]`). Scripts are ordered and idempotent-from-reset; the same sequence drives both frames so timing noise is symmetric. |
-| **`sitePath` examples view doesn't render the recipe in the needed state** | Verify in Batch 0 that each `examples` view renders the component with recipe styling. A missing/inert example is a small *site* fix recorded alongside, not silently skipped. |
-| **Scope creep into "make the API match"** | Non-goal is hard (§1). Every fix touches recipe/primitive *behavior or look*, never public API/props/names. Mapping file + this design doc are the guardrail. |
-| **Reference app pollutes build/publish graph** | Isolated `package.json`/lockfile, excluded from the `nx` graph and release gates. Confirm `vertical-slice-gate`/`release-gate` don't sweep it in (Batch 0). |
+| Risk                                                                                | Mitigation                                                                                                                                                                                                                                                                                     |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Reference app rots** (shadcn publishes new versions, styling drifts between runs) | Pin shadcn registry versions in `tools/shadcn-reference/` (own lockfile, no auto-update). Re-baseline only on a deliberate versioned re-init. Record the shadcn version in every findings report header.                                                                                       |
+| **Theme tokens don't line up 1:1** (Solidiom token system ≠ shadcn CSS vars)        | Compare _computed/resolved_ values, not token names, for the "look" signal. Where token identity is itself the point, it goes in `acceptedDivergences` with rationale. Resolved values (color, px, radius) are what "looks like" means.                                                        |
+| **Pixel diff too brittle** (fonts, anti-aliasing, 1px shifts, sub-pixel)            | Bounding-box crop (not full page) + `tolerance.pixelMaxPercent` + **computed-style token assertions as the primary "look" signal** (robust, points at the exact drifted value). Pixel diff is corroboration, not the sole gate. Disable animations (existing idiom: `animations: "disabled"`). |
+| **Interaction scripts not deterministic** (timing, async open/close)                | Each step includes an explicit `wait` for the stable state (e.g. `waitFor` `[data-state=open]`). Scripts are ordered and idempotent-from-reset; the same sequence drives both frames so timing noise is symmetric.                                                                             |
+| **`sitePath` examples view doesn't render the recipe in the needed state**          | Verify in Batch 0 that each `examples` view renders the component with recipe styling. A missing/inert example is a small _site_ fix recorded alongside, not silently skipped.                                                                                                                 |
+| **Scope creep into "make the API match"**                                           | Non-goal is hard (§1). Every fix touches recipe/primitive _behavior or look_, never public API/props/names. Mapping file + this design doc are the guardrail.                                                                                                                                  |
+| **Reference app pollutes build/publish graph**                                      | Isolated `package.json`/lockfile, excluded from the `nx` graph and release gates. Confirm `vertical-slice-gate`/`release-gate` don't sweep it in (Batch 0).                                                                                                                                    |
 
 ---
 
@@ -267,5 +277,27 @@ status (per component: ✅ / 🟡 / ❌ counts + what needs fixing).
 
 - No new public API/props on any Solidiom package.
 - No renaming of Solidiom primitives or registry entries to match shadcn.
-- No changes to the theme-token *system* (only resolved-value convergence where a declared
+- No changes to the theme-token _system_ (only resolved-value convergence where a declared
   token asserts a specific look, or a recorded accepted divergence).
+
+---
+
+## As-built (2026-09-25)
+
+- **shadcn pinned:** CLI **3.8.5** (last release with classic `-b neutral`; 4.x rejects it),
+  new-york style, neutral base theme — see `tools/shadcn-reference/PINNED.md`.
+- **Comparison set:** 50 entries in `tests/shadcn-parity/mapping.json` —
+  **40 mapped** (compared + converged), **8 gap** (no shadcn ref or no Solidiom live
+  island), **2 na** (Solidiom-only primitives: tree, listbox).
+- **Convergence:** Batches 1/3/4/5 are at **0 real token/behavior ❌** (pixel-only ❌
+  remain where the divergence is an accepted palette/dark-theme difference). Batch 2
+  overlays converged **radius** (content 6px, item 4px) + the drawer focus model;
+  **7 width/padding residuals** remain on alert-dialog, sheet, drawer, tooltip,
+  hover-card, dropdown-menu, context-menu (documented in `artifacts/shadcn-parity/ROLLUP.md`).
+- **User decisions at the gates:** (1) full **look parity** — pixel-level convergence
+  was pursued, not token-only; (2) **fix the published recipe** rather than the site or
+  the reference when a look gap surfaced (Phase C fixes landed in `packages/recipes-*`);
+  (3) drawer uses the **vaul** trigger-focus model, matching shadcn's vaul-based drawer.
+- **CI posture:** `test:parity` is **local/mise only, gated out of CI by default**
+  (pixel-sensitive, needs both servers, human-in-loop per §4). Operator guide:
+  `docs/shadcn-parity.md`.
