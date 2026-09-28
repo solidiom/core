@@ -123,6 +123,72 @@ run = "pnpm run format:check"
 description = "Create a Changeset"
 run = "pnpm changeset"
 
+# Manual coordinated version bump — the rare hand path documented in
+# docs/bumping-version.md (hosted releases use the reviewed Version PR flow
+# instead). The script (scripts/bump-version.mjs) does one thing: rewrite the
+# version field of every publishable package, idempotently. This target is
+# where the whole step sequence is driven:
+#   1. bump package.json versions
+#   2. regenerate the registry (reads versions from package.json)
+#   3. re-check the registry build test
+#   4. verify the tools test suite
+#   5. commit (only with --commit; the default leaves changes staged for review)
+#
+#   mise run version:bump -- 0.7.0            # steps 1-4, no commit
+#   mise run version:bump -- 0.7.0 --commit   # also create the release commit
+#   mise run version:bump -- 0.7.0 --dry-run  # show the bump, write nothing
+[tasks."version:bump"]
+description = "Bump all publishable packages to a version, regen registry, verify (→ docs/bumping-version.md)"
+run = '''#!/usr/bin/env bash
+set -euo pipefail
+
+args=("$@")
+version=""
+do_commit=0
+do_dry_run=0
+for a in "${args[@]}"; do
+  case "$a" in
+    --commit)   do_commit=1 ;;
+    --dry-run)  do_dry_run=1 ;;
+    --*)        echo "version:bump: unknown flag: $a" >&2; exit 2 ;;
+    *)          version="$a" ;;
+  esac
+done
+
+if [ -z "$version" ]; then
+  echo "Usage: mise run version:bump -- <semver> [--commit] [--dry-run]" >&2
+  exit 2
+fi
+
+if [ "$do_dry_run" -eq 1 ]; then
+  # A dry run only exercises the idempotent bump; it must not regenerate,
+  # test, or commit against a tree it did not change.
+  node scripts/bump-version.mjs --dry-run "$version"
+  exit 0
+fi
+
+echo "==> [1/5] Bump packages to ${version}"
+node scripts/bump-version.mjs "$version"
+
+echo "==> [2/5] Regenerate registry"
+pnpm run registry:build
+
+echo "==> [3/5] Re-check registry build test"
+pnpm exec vitest run tools/registry-build.test.ts
+
+echo "==> [4/5] Verify tools test suite"
+pnpm run test:tools
+
+if [ "$do_commit" -eq 1 ]; then
+  echo "==> [5/5] Commit"
+  git add -A
+  git commit -m "chore: bump all packages to ${version}"
+else
+  echo "==> [5/5] Commit skipped (pass --commit to create it)"
+  echo "    Staged/working-tree changes are ready to review."
+fi
+'''
+
 [tasks."release:changeset-status"]
 description = "Show pending Changesets"
 run = "pnpm changeset status"

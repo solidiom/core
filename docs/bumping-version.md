@@ -14,6 +14,24 @@
 
 This document describes the process and all the places that need updating when bumping the version across all `@solidiom/*` packages.
 
+## Automated (preferred)
+
+The whole step sequence below is driven by a single mise target:
+
+```bash
+mise run version:bump -- 0.7.0            # bump → regenerate registry → verify, no commit
+mise run version:bump -- 0.7.0 --commit   # also create `chore: bump all packages to 0.7.0`
+mise run version:bump -- 0.7.0 --dry-run  # show the bump, write nothing
+```
+
+It calls `scripts/bump-version.mjs` for the version rewrite (one job: set the
+`version` field on every **publishable** package — non-`private` and not in the
+changeset `ignore` list — idempotently, so re-running with the same version is a
+no-op), then regenerates the registry and re-runs the registry build test and
+the tools suite. The steps below remain the manual reference for what the
+target does and for one-offs it does not cover (e.g. granular per-package
+changesets).
+
 ## Quick Reference
 
 When bumping versions across all packages, these are the files/locations that need updating:
@@ -30,10 +48,22 @@ When bumping versions across all packages, these are the files/locations that ne
 
 ### 1. Bump `package.json` versions
 
-Update the `"version"` field in every package under `packages/`:
+Use the idempotent script (the same one `version:bump` calls):
 
 ```bash
-# Bump all packages to a specific version (e.g., 0.2.0)
+node scripts/bump-version.mjs 0.2.0          # rewrite publishable packages
+node scripts/bump-version.mjs --dry-run 0.2.0  # preview without writing
+```
+
+It sets `version` on every **publishable** package — non-`private` and not in
+the changeset `ignore` list — and leaves tooling, probe (`0.0.0`), and private
+packages untouched. Running it again with the same version reports
+`already at 0.2.0` and writes nothing.
+
+ <details>
+ <summary>Raw fallback (bumps every package.json, including tooling)</summary>
+
+```bash
 grep -rl '"version"' packages/*/package.json | grep -v node_modules | \
   xargs -I{} sed -i '' 's/"version": "[^"]*"/"version": "0.2.0"/' "{}"
 ```
@@ -44,6 +74,8 @@ Verify:
 grep -r '"version"' packages/*/package.json | grep -v node_modules | grep -v "0.2.0"
 # Should return nothing
 ```
+
+ </details>
 
 ### 2. Regenerate the registry
 
@@ -79,6 +111,8 @@ pnpm run test:tools
 All 35 test files (382+ tests) should pass.
 
 ### 5. Commit
+
+The `version:bump` target does this with `--commit`; manually:
 
 ```bash
 git add -A
