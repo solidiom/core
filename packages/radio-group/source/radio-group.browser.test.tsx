@@ -94,6 +94,37 @@ describe("RadioGroup", () => {
     expect(items[0]!.getAttribute("aria-checked")).toBe("false")
   })
 
+  it("moves focus to the clicked item and mirrors the checked state on its indicator", () => {
+    const container = getContainer()
+    render(
+      () => (
+        <RadioGroup.Root>
+          <RadioGroup.Item value="a">
+            <RadioGroup.Indicator />A
+          </RadioGroup.Item>
+          <RadioGroup.Item value="b">
+            <RadioGroup.Indicator />B
+          </RadioGroup.Item>
+        </RadioGroup.Root>
+      ),
+      container,
+    )
+
+    const items = container.querySelectorAll<HTMLElement>("[role='radio']")
+    items[1]!.click()
+    flush()
+
+    // Focus lands on the clicked item (Radix/shadcn focus=Item).
+    expect(document.activeElement).toBe(items[1])
+
+    // The item's indicator mirrors the checked state.
+    const indicators = container.querySelectorAll<HTMLElement>("[data-part='indicator']")
+    expect(indicators[1]!.getAttribute("aria-checked")).toBe("true")
+    expect(indicators[1]!.getAttribute("data-state")).toBe("checked")
+    expect(indicators[0]!.getAttribute("aria-checked")).toBe("false")
+    expect(indicators[0]!.getAttribute("data-state")).toBe("unchecked")
+  })
+
   it("applies defaultValue on initial render", () => {
     const container = getContainer()
     render(

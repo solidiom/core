@@ -53,7 +53,7 @@ run = "pnpm --filter @solidiom/site run i18n:validate"
 
 [tasks."dev:site"]
 description = "Start the site development server"
-run = "pnpm --filter @solidiom/site run dev"
+run = "pnpm --filter @solidiom/site run dev --host 0.0.0.0"
 
 # ---------------------------------------------------------------------------
 # Test, type-check, and formatting
@@ -68,8 +68,8 @@ description = "Run Vitest unit tests directly"
 run = "pnpm exec vitest run --config vitest.config.ts"
 
 [tasks."test:browser"]
-description = "Run the full browser component matrix"
-run = "pnpm run test:browser"
+description = "Run the full browser component matrix (skips browsers that cannot launch in this environment)"
+run = "node scripts/run-browser-tests.mjs"
 
 [tasks."test:e2e"]
 description = "Run Playwright end-to-end tests"

@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "vite build",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run --passWithNoTests --config ../../vitest.config.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

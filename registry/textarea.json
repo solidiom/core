@@ -1,6 +1,6 @@
 {
   "name": "textarea",
-  "version": "0.4.2",
+  "version": "0.6.0",
   "package": "@solidiom/textarea",
   "capabilities": [],
   "dependencies": [
@@ -65,9 +65,9 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "01d588cc55ce0bd91d9a2b1bb6700b3a3c9a37921757f0794ab81aa4b4c2c2c9",
+    "filesHash": "6b491c28e6e517886a75d462c7449e852ddd2dbadbd8d3269dbbf949a8020596",
     "fileDigests": {
-      "src/index.tsx": "347dffb4c76745e1a495e33f14cabd7c970e02079921d563294974ee723e8e37"
+      "src/index.tsx": "b79132dcf3e92d4cc251d7e8edbe30bc77178e966097da814632e1f8048fc2d7"
     }
   },
   "provenance": {

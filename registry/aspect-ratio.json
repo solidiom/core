@@ -1,6 +1,6 @@
 {
   "name": "aspect-ratio",
-  "version": "0.4.2",
+  "version": "0.6.0",
   "package": "@solidiom/aspect-ratio",
   "capabilities": [],
   "dependencies": [

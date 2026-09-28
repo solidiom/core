@@ -1,6 +1,6 @@
 {
   "name": "select",
-  "version": "0.4.2",
+  "version": "0.6.0",
   "package": "@solidiom/select",
   "capabilities": [],
   "dependencies": [
@@ -76,11 +76,11 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "069d62de1ed5ec429384819998fd5fcc845e79a0179c853e7e043f54b375ad1c",
+    "filesHash": "2d9ec870e84622b35050a01da8f4d92bf1c3cd632bf247e48aa9b5ceb6d09e1f",
     "fileDigests": {
       "src/index.tsx": "24028e338b8f3842a8f710ef53129f6d5cfd747ad122e9bf6e0a900168baa12c",
       "src/select-context.ts": "bf10233859db06b551a8a0aeee2039aeb75212be33b6995766035fde6ed9c0d5",
-      "src/select.tsx": "f14453d83edd73198be4d35ac759f0b0da6b4db9217e87336bf401236a86e1c5"
+      "src/select.tsx": "2b03262d97c6ad8297f273d6e79867ae6ba1ba27f80d83b58883e6ab1202ac4f"
     }
   },
   "provenance": {

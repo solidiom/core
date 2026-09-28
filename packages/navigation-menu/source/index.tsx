@@ -257,11 +257,20 @@ export function Trigger(props: NavigationMenuTriggerProps) {
     disabled: () => false,
     textValue: () => itemId,
   })
+
+  // Track the element this trigger instance assigned so cleanup only clears the
+  // shared signal if it still points at our node. Under Solid 2 rc.11 an item
+  // subtree can reconcile (remount) during initial render; the *previous*
+  // trigger's cleanup then runs *after* the replacement's ref callback has set
+  // the signal, and an unconditional `setTriggerRef(undefined)` clobbers the
+  // fresh element — leaving Content's positioning effect reading `undefined`
+  // on first open. Guarding on identity makes the late cleanup a no-op.
+  let ownTriggerElement: HTMLElement | undefined
   onCleanup(() => {
     unregister()
     // SSR never assigns a DOM ref, and Solid 2 server rendering is pure: a
     // cleanup-phase signal write is both unnecessary and deprecated.
-    if (typeof document !== "undefined") {
+    if (typeof document !== "undefined" && itemCtx.triggerRef() === ownTriggerElement) {
       itemCtx.setTriggerRef(undefined)
     }
   })
@@ -292,7 +301,10 @@ export function Trigger(props: NavigationMenuTriggerProps) {
 
   return (
     <button
-      ref={(element: HTMLButtonElement) => itemCtx.setTriggerRef(element)}
+      ref={(element: HTMLButtonElement) => {
+        ownTriggerElement = element
+        itemCtx.setTriggerRef(element)
+      }}
       id={itemCtx.triggerId}
       type="button"
       role="menuitem"

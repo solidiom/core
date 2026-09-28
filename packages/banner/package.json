@@ -1,6 +1,6 @@
 {
   "name": "@solidiom/banner",
-  "version": "0.4.2",
+  "version": "0.6.0",
   "private": false,
   "license": "MIT",
   "type": "module",
@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run --passWithNoTests --config ../../vitest.config.ts",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {

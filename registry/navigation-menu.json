@@ -1,6 +1,6 @@
 {
   "name": "navigation-menu",
-  "version": "0.4.2",
+  "version": "0.6.0",
   "package": "@solidiom/navigation-menu",
   "capabilities": [
     {
@@ -84,9 +84,9 @@
   },
   "integrity": {
     "algorithm": "sha256",
-    "filesHash": "be91ccb1bc403a9e04cbf45d60ae8ccf12689bc8e804b31252564974bd9e1401",
+    "filesHash": "392af595959e9ee5fc3b5bbca6f9acb9fdab6b05b9c3adef43aada1d194a7a74",
     "fileDigests": {
-      "src/index.tsx": "c8388abbeaeafc82408cb85c177e33bce4d8e30b1db70320c3ce74175494497e",
+      "src/index.tsx": "cc190433e4ba202c37903089f0f33ead4f3ce6248974a596cd29535953a0766c",
       "src/navigation-menu-context.ts": "ca2efac856f3a583f86434e48f3cf75e3f1412068dcd16fc95600729b26adfef"
     }
   },

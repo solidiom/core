@@ -108,6 +108,69 @@ describe("Select", () => {
     expect(trigger.getAttribute("aria-expanded")).toBe("true")
   })
 
+  it("moves focus into the listbox when the content opens", async () => {
+    const container = getContainer()
+    render(
+      () => (
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Pick one" />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Item value="a">A</Select.Item>
+            <Select.Item value="b">B</Select.Item>
+          </Select.Content>
+        </Select.Root>
+      ),
+      container,
+    )
+
+    const trigger = container.querySelector("[role='combobox']") as HTMLElement
+    trigger.focus()
+    trigger.click()
+    flush()
+    await Promise.resolve()
+
+    const listbox = container.querySelector("[role='listbox']")
+    expect(listbox).not.toBeNull()
+    expect(document.activeElement).toBe(listbox)
+  })
+
+  it("restores focus to the trigger when the content closes without a selection", async () => {
+    const container = getContainer()
+    render(
+      () => (
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value placeholder="Pick one" />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Item value="a">A</Select.Item>
+            <Select.Item value="b">B</Select.Item>
+          </Select.Content>
+        </Select.Root>
+      ),
+      container,
+    )
+
+    const trigger = container.querySelector("[role='combobox']") as HTMLElement
+    trigger.focus()
+    trigger.click()
+    flush()
+    await Promise.resolve()
+
+    const listbox = container.querySelector("[role='listbox']")
+    expect(listbox).not.toBeNull()
+    expect(document.activeElement).toBe(listbox)
+
+    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }))
+    flush()
+    await Promise.resolve()
+
+    expect(container.querySelector("[role='listbox']")).toBeNull()
+    expect(document.activeElement).toBe(trigger)
+  })
+
   it("renders items with role=option", () => {
     const container = getContainer()
     render(

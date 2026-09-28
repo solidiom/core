@@ -23,12 +23,12 @@
   ],
   "scripts": {
     "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests --config ../../vitest.config.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/node": "^26.5.0",
-    "vitest": "^4.1.11"
+    "vitest": "^5.0.2"
   },
   "nx": {
     "tags": [
