@@ -12,6 +12,8 @@ export interface FocusScopeOptions {
   enabled?: boolean
   /** Element to restore focus to on deactivation. */
   restoreTarget?: () => Element | null | undefined
+  /** Whether to move focus into the scope on activation. Default true. Set false to keep focus on the triggering element (vaul drawer model) while still trapping Tab and restoring focus on close. */
+  moveFocus?: boolean
 }
 /**
  * Activates a focus scope that traps Tab/Shift+Tab within the container.

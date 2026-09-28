@@ -75,6 +75,10 @@ run = "pnpm run test:browser"
 description = "Run Playwright end-to-end tests"
 run = "pnpm run test:e2e"
 
+[tasks."test:parity"]
+description = "Run the shadcn parity suite (needs reference app :4333 + site :4322 running)"
+run = "pnpm run test:parity"
+
 [tasks."test:all"]
 description = "Run unit, browser, and end-to-end tests"
 run = ["mise run test", "mise run test:browser", "mise run test:e2e"]

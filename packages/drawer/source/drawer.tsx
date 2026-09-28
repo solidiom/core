@@ -202,6 +202,10 @@ export function Content(props: DrawerContentProps) {
         ? activateFocusScope({
             element: () => el,
             restoreTarget: () => doc.getElementById(ctx.triggerId),
+            // vaul drawer model: keep focus on the trigger when the drawer
+            // opens (no focus move into content); Tab is still trapped and
+            // focus is still restored to the trigger on close.
+            moveFocus: false,
           })
         : () => {}
 

@@ -5,7 +5,7 @@
 
 @layer components {
   [data-scope="badge"][data-part="root"] {
-    @apply inline-flex items-center py-0.5 px-2.5 border-solid border-transparent rounded-radius text-xs leading-4 font-semibold transition-colors;
+    @apply inline-flex items-center py-0.5 px-3 border-solid border-transparent rounded-radius text-xs leading-4 font-semibold transition-colors;
   }
 
   [data-scope="badge"][data-part="root"].solidiom-badge--default {

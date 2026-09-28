@@ -17,6 +17,6 @@
   }
 
   [data-scope="progress"][data-part="indicator"] {
-    @apply h-full bg-primary transition-all;
+    @apply h-full rounded-[0] bg-primary transition-all;
   }
 }

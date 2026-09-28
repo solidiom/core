@@ -99,7 +99,7 @@ export const SOLIDIOM_VARIANT_RULES: UnocssStaticRule[] = [
   [
     "solidiom-btn--md",
     {
-      height: "2.5rem",
+      height: "2.25rem",
       padding: "0.5rem 1rem",
       "font-size": "0.875rem",
     },

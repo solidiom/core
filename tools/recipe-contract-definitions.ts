@@ -112,7 +112,7 @@ export const buttonRecipe: RecipeDefinition = {
       name: "size",
       values: {
         sm: { root: { height: "2.25rem", padding: "0 0.75rem", "font-size": "0.875rem" } },
-        md: { root: { height: "2.5rem", padding: "0.5rem 1rem", "font-size": "0.875rem" } },
+        md: { root: { height: "2.25rem", padding: "0.5rem 1rem", "font-size": "0.875rem" } },
         lg: { root: { height: "2.75rem", padding: "0 2rem", "font-size": "1rem" } },
         icon: { root: { height: "2.5rem", width: "2.5rem", padding: "0" } },
       },
@@ -153,8 +153,8 @@ export const switchRecipe: RecipeDefinition = {
       base: {
         display: "inline-flex",
         "align-items": "center",
-        width: "2.75rem",
-        height: "1.5rem",
+        width: "2.25rem",
+        height: "1.25rem",
         padding: "2px",
         "border-radius": { token: "radius-full" },
         "border-style": "none",
@@ -190,7 +190,7 @@ export const switchRecipe: RecipeDefinition = {
       },
       states: {
         // Declared on the thumb, not inherited from the root's state.
-        on: { transform: "translateX(1.25rem)" },
+        on: { transform: "translateX(1rem)" },
         off: { transform: "translateX(0)" },
       },
     },
@@ -238,7 +238,7 @@ export const dialogRecipe: RecipeDefinition = {
         padding: "1.5rem",
         "background-color": { token: "surface-raised" },
         color: { token: "foreground" },
-        "border-radius": { token: "radius-lg" },
+        "border-radius": { token: "radius" },
         "box-shadow": { token: "shadow-lg" },
         transition: "opacity 0.15s, transform 0.15s",
       },
@@ -430,7 +430,7 @@ export const badgeRecipe: RecipeDefinition = {
       base: {
         display: "inline-flex",
         "align-items": "center",
-        padding: "0.125rem 0.625rem",
+        padding: "0.125rem 0.75rem",
         "border-style": "solid",
         "border-width": "1px",
         "border-color": "transparent",
@@ -612,8 +612,18 @@ export const popoverRecipe: RecipeDefinition = {
       base: {
         display: "inline-flex",
         "align-items": "center",
-        "border-style": "none",
+        "justify-content": "center",
+        height: "2.25rem",
+        "min-width": "8rem",
+        padding: "0.5rem 1rem",
+        "border-style": "solid",
+        "border-width": "1px",
+        "border-color": { token: "border" },
+        "border-radius": { token: "radius" },
         "background-color": "transparent",
+        "font-size": "0.875rem",
+        "font-weight": "500",
+        "line-height": "1",
         cursor: "pointer",
       },
     },
@@ -679,7 +689,7 @@ export const selectRecipe: RecipeDefinition = {
         "align-items": "center",
         "justify-content": "space-between",
         width: "100%",
-        height: "2.5rem",
+        height: "2.25rem",
         padding: "0.5rem 0.75rem",
         "border-radius": { token: "radius" },
         "border-style": "solid",
@@ -818,12 +828,16 @@ export const toastRecipe: RecipeDefinition = {
         display: "flex",
         "align-items": "flex-start",
         gap: "0.75rem",
-        "border-radius": { token: "radius" },
+        // shadcn parity: the toast card is rounded-md (6px). The generic
+        // `radius` token is 8px in the Solidiom theme; the smaller `radius-sm`
+        // maps to the same 6px value and is the exact shadcn match.
+        "border-radius": { token: "radius-sm" },
         "border-style": "solid",
         "border-width": "1px",
         "border-color": { token: "border" },
         "background-color": { token: "surface" },
         padding: "1rem",
+        "font-size": "0.875rem",
         "box-shadow": { token: "shadow-md" },
       },
     },
@@ -832,7 +846,7 @@ export const toastRecipe: RecipeDefinition = {
       element: "div",
       ownership: "consumer",
       ownershipReason: "Toast title is optional consumer composition.",
-      base: { "font-size": "0.875rem", "font-weight": "500" },
+      base: { "font-size": "0.875rem", "font-weight": "600" },
     },
     {
       part: "description",
@@ -1394,7 +1408,7 @@ export const fieldRecipe: RecipeDefinition = {
       base: {
         "font-size": { token: "font-size-sm" },
         "line-height": { token: "line-height-sm", fallback: "1.25rem" },
-        "font-weight": "600",
+        "font-weight": "500",
         color: { token: "foreground" },
       },
       flags: {
@@ -1470,7 +1484,8 @@ export const dataTableRecipe: RecipeDefinition = {
       ownership: "consumer",
       ownershipReason: "The wrapper exposes only Root; consumers supply header cells.",
       base: {
-        padding: "0.75rem",
+        height: "2.5rem",
+        padding: "0.0625rem 0.5rem",
         "text-align": "left",
         "font-weight": "500",
       },
@@ -1500,7 +1515,8 @@ export const dataTableRecipe: RecipeDefinition = {
       ownership: "consumer",
       ownershipReason: "The wrapper exposes only Root; consumers supply cells within rows.",
       base: {
-        padding: "0.75rem",
+        padding: "0.5rem",
+        "font-weight": "500",
       },
     },
   ],
@@ -1568,6 +1584,7 @@ export const progressRecipe: RecipeDefinition = {
       ownershipReason: "The wrapper exposes only Root; consumers supply the progress indicator.",
       base: {
         height: "100%",
+        "border-radius": "0",
         "background-color": { token: "primary" },
         transition: "width 0.15s",
       },
@@ -2094,7 +2111,7 @@ export const navigationMenuRecipe: RecipeDefinition = {
         "border-width": "1px",
         "border-color": { token: "border" },
         "background-color": { token: "surface" },
-        padding: "0.5rem",
+        padding: "0.25rem",
         "box-shadow": { token: "shadow-md" },
         transition: "opacity 0.15s, transform 0.15s",
       },
@@ -2323,6 +2340,7 @@ export const scrollAreaRecipe: RecipeDefinition = {
       base: {
         position: "relative",
         overflow: "hidden",
+        "border-radius": { token: "radius" },
       },
     },
     {

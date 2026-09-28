@@ -6,8 +6,8 @@
 [data-scope="switch"][data-part="root"] {
   display: inline-flex;
   align-items: center;
-  width: 2.75rem;
-  height: 1.5rem;
+  width: 2.25rem;
+  height: 1.25rem;
   padding: 2px;
   border-radius: var(--ui-radius-full, 9999px);
   border-style: none;
@@ -47,7 +47,7 @@
 }
 
 [data-scope="switch"][data-part="thumb"][data-state="on"] {
-  transform: translateX(1.25rem);
+  transform: translateX(1rem);
 }
 
 [data-scope="switch"][data-part="thumb"][data-state="off"] {

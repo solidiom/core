@@ -5,7 +5,7 @@
 
 @layer components {
   [data-scope="select"][data-part="trigger"] {
-    @apply inline-flex items-center justify-between w-full h-10 py-2 px-3 rounded-radius border-solid border-border bg-transparent text-[0.875rem] cursor-pointer;
+    @apply inline-flex items-center justify-between w-full h-9 py-2 px-3 rounded-radius border-solid border-border bg-transparent text-[0.875rem] cursor-pointer;
   }
 
   [data-scope="select"][data-part="trigger"][data-disabled] {

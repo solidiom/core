@@ -181,7 +181,15 @@ export function Content(props: SelectContentProps) {
           return trigger ? [trigger] : []
         },
         onDismiss: (reason) => {
+          const wasOpen = ctx.open()
           ctx.requestOpenChange(false, createChangeDetails(reason))
+          // On close, return focus to the trigger (Radix/shadcn focus management).
+          // Selecting an item also closes via this path; Radix keeps focus on the
+          // trigger in that case as well.
+          if (wasOpen && !ctx.disabled()) {
+            const trigger = doc.getElementById(ctx.triggerId)
+            trigger?.focus()
+          }
         },
       })
 
@@ -206,7 +214,10 @@ export function Content(props: SelectContentProps) {
         intent,
         { loop: true },
       )
-      if (next) ctx.rovingFocus.setActiveId(next.id)
+      if (next) {
+        ctx.rovingFocus.setActiveId(next.id)
+        contentEl()?.focus()
+      }
       return
     }
 
@@ -225,6 +236,11 @@ export function Content(props: SelectContentProps) {
     ctx.typeahead.handle(e.key, ctx.collection.items(), ctx.rovingFocus.activeId())
   }
 
+  const focusContent = () => {
+    const el = contentEl()
+    if (el && ctx.open()) el.focus()
+  }
+
   return (
     <Show when={ctx.open()}>
       <div
@@ -236,6 +252,13 @@ export function Content(props: SelectContentProps) {
         onKeyDown={handleKeyDown}
         ref={(el: HTMLDivElement) => {
           setContentEl(el)
+          if (el) {
+            // Focus into the listbox when it opens (Radix parity), but defer to
+            // the microtask so the ref callback is not re-entered by the focus
+            // change itself and so any open transition can settle first.
+            el.addEventListener("animationend", focusContent, { once: true })
+            queueMicrotask(focusContent)
+          }
           props.ref?.(el)
         }}
         {...applySemanticAttrs({
