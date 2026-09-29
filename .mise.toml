@@ -205,6 +205,10 @@ run = "scripts/release.sh --target all --gate quick"
 description = "Locally publish packages and deploy the site (full gate)"
 run = "scripts/release.sh --target all --gate full"
 
+[tasks."release:dispatch"]
+description = "Dispatch the release workflow through GitHub Actions → mise run release:dispatch -- --target packages"
+run = "scripts/release.sh --dispatch"
+
 [tasks."release:packages"]
 description = "Locally publish committed package versions (quick gate)"
 run = "scripts/release.sh --target packages --gate quick"
@@ -231,7 +235,7 @@ run = "pnpm release:package"
 
 [tasks."release:package:dry-run"]
 description = "Validate one package release without publishing → mise run release:package:dry-run -- @solidiom/button"
-run = "pnpm release:package --dry-run"
+run = "pnpm release:package -- --dry-run"
 
 # ---------------------------------------------------------------------------
 # Acceptance gates and accessibility

@@ -91,31 +91,36 @@ The interactive docs live in `apps/site/`. See [`apps/site/README.md`](apps/site
 
 All tasks are defined in `.mise.toml`. Run `mise tasks` to list them.
 
-| Task                                           | Description                                     |
-| ---------------------------------------------- | ----------------------------------------------- |
-| `mise run build`                               | Build all packages (Nx dependency graph)        |
-| `mise run build:package -- @solidiom/button`   | Build a single package                          |
-| `mise run build:recipes`                       | Build CSS + Tailwind recipe packages            |
-| `mise run build:site`                          | Build the site                                  |
-| `mise run site:validate`                       | Run the CI-equivalent site validation and build |
-| `mise run build:registry`                      | Generate registry manifests                     |
-| `mise run dev:site`                            | Start the site dev server                       |
-| `mise run test`                                | Run all unit tests                              |
-| `mise run test:browser`                        | Run the full browser component matrix           |
-| `mise run test:e2e`                            | Run end-to-end tests                            |
-| `mise run ci:quick`                            | Run the fast local PR-tier CI checks            |
-| `mise run ci:full`                             | Run the comprehensive local CI checks           |
-| `mise run ci:release`                          | Dry-run release CI without publishing           |
-| `mise run nightly:browser-full`                | Run the Chromium, Firefox, and WebKit suite     |
-| `mise run changeset`                           | Create a Changeset                              |
-| `mise run release:publish`                     | Locally publish packages and deploy the site    |
-| `mise run release:packages`                    | Locally publish committed package versions      |
-| `mise run release:all`                         | Build everything, publish, and deploy           |
-| `mise run release:local:packages`              | Version, commit, full-gate, and publish locally |
-| `mise run release:site`                        | Locally deploy the site                         |
-| `mise run release:package -- @solidiom/button` | Locally publish one independent package         |
-| `mise run clean`                               | Remove all dist/ directories                    |
-| `mise run graph`                               | Open the Nx dependency graph                    |
+| Task                                                   | Description                                              |
+| ------------------------------------------------------ | -------------------------------------------------------- |
+| `mise run build`                                       | Build all packages (Nx dependency graph)                 |
+| `mise run build:package -- @solidiom/button`           | Build a single package                                   |
+| `mise run build:recipes`                               | Build CSS + Tailwind recipe packages                     |
+| `mise run build:site`                                  | Build the site                                           |
+| `mise run site:validate`                               | Run the CI-equivalent site validation and build          |
+| `mise run build:registry`                              | Generate registry manifests                              |
+| `mise run dev:site`                                    | Start the site dev server                                |
+| `mise run test`                                        | Run all unit tests                                       |
+| `mise run test:browser`                                | Run the full browser component matrix                    |
+| `mise run test:e2e`                                    | Run end-to-end tests                                     |
+| `mise run ci:quick`                                    | Run the fast local PR-tier CI checks                     |
+| `mise run ci:full`                                     | Run the comprehensive local CI checks                    |
+| `mise run ci:release`                                  | Dry-run release CI without publishing                    |
+| `mise run nightly:browser-full`                        | Run the Chromium, Firefox, and WebKit suite              |
+| `mise run changeset`                                   | Create a Changeset                                       |
+| `mise run release:changeset-status`                    | Show pending Changesets                                  |
+| `mise run release:publish`                             | Locally publish packages and deploy the site             |
+| `mise run release:publish:full`                        | Locally publish packages and deploy the site (full gate) |
+| `mise run release:dispatch -- --target packages`       | Dispatch the release workflow through GitHub Actions     |
+| `mise run release:packages`                            | Locally publish committed package versions               |
+| `mise run release:packages:full`                       | Locally publish committed package versions (full gate)   |
+| `mise run release:all`                                 | Build everything, publish, and deploy                    |
+| `mise run release:local:packages`                      | Version, commit, full-gate, and publish locally          |
+| `mise run release:site`                                | Locally deploy the site                                  |
+| `mise run release:package -- @solidiom/button`         | Locally publish one independent package                  |
+| `mise run release:package:dry-run -- @solidiom/button` | Validate one package release without publishing          |
+| `mise run clean`                                       | Remove all dist/ directories                             |
+| `mise run graph`                                       | Open the Nx dependency graph                             |
 
 ## Testing GitHub Actions locally
 
