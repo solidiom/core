@@ -3,7 +3,9 @@
   "version": 4,
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "1fe616253733e55a10e831c69b7118dba3ae99e2c298631fea268101d2913387"
+    "entriesHash": "1fe616253733e55a10e831c69b7118dba3ae99e2c298631fea268101d2913387",
+    "signature": "gfXNUjObLaoJkuE35AGCSWWsQw0sHeJ6kDpYCNJDp75OnB8LHtW64LCktmatSG0ZcRpZIf+9sT7ZA8bmXnG+Aw==",
+    "signatureKeyId": "d7b32861c393dafd"
   },
   "primitives": [
     {
