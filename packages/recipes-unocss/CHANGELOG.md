@@ -1,5 +1,49 @@
 # @solidiom/recipes-unocss
 
+## 0.6.0
+
+### Minor Changes
+
+- Release all publishable workspace packages as 0.6.0.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @solidiom/accordion@0.6.0
+  - @solidiom/alert@0.6.0
+  - @solidiom/avatar@0.6.0
+  - @solidiom/badge@0.6.0
+  - @solidiom/breadcrumb@0.6.0
+  - @solidiom/button@0.6.0
+  - @solidiom/card@0.6.0
+  - @solidiom/checkbox@0.6.0
+  - @solidiom/combobox@0.6.0
+  - @solidiom/command-palette@0.6.0
+  - @solidiom/data-table@0.6.0
+  - @solidiom/dialog@0.6.0
+  - @solidiom/field@0.6.0
+  - @solidiom/input@0.6.0
+  - @solidiom/kbd@0.6.0
+  - @solidiom/menu@0.6.0
+  - @solidiom/meter@0.6.0
+  - @solidiom/navigation-menu@0.6.0
+  - @solidiom/pagination@0.6.0
+  - @solidiom/popover@0.6.0
+  - @solidiom/progress@0.6.0
+  - @solidiom/radio-group@0.6.0
+  - @solidiom/resizable-panels@0.6.0
+  - @solidiom/runtime@0.6.0
+  - @solidiom/scroll-area@0.6.0
+  - @solidiom/select@0.6.0
+  - @solidiom/sheet@0.6.0
+  - @solidiom/spinner@0.6.0
+  - @solidiom/switch@0.6.0
+  - @solidiom/tabs@0.6.0
+  - @solidiom/toast@0.6.0
+  - @solidiom/toolbar@0.6.0
+  - @solidiom/tooltip@0.6.0
+  - @solidiom/unocss-preset@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes

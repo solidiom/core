@@ -1,6 +1,6 @@
 {
   "name": "grid",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "package": "@solidiom/grid",
   "capabilities": [],
   "dependencies": [

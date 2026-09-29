@@ -1,5 +1,11 @@
 # @solidiom/adapter-positioning-floating-ui
 
+## 0.6.0
+
+### Minor Changes
+
+- Release all publishable workspace packages as 0.6.0.
+
 ## 0.5.0
 
 ### Minor Changes
