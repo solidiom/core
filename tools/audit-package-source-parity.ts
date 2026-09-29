@@ -42,7 +42,7 @@ export interface SourceParityError {
 
 /** Files `packages/<name>/tsup.config.ts`'s `copyDir` deliberately excludes from `source/`. */
 function isExcludedFromCopy(fileName: string): boolean {
-  return fileName.endsWith(".test.ts") || fileName.endsWith(".spec.ts")
+  return fileName.includes(".test.") || fileName.includes(".spec.")
 }
 
 /** Recursively lists files under `dir`, returning paths relative to `dir`. */

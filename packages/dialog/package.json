@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
-    "test": "vitest run",
+    "test": "vitest run --config ../../tools/test/vitest.node.config.ts",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {

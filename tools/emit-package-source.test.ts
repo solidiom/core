@@ -57,13 +57,17 @@ describe("emitPackageSource", () => {
     expect(existsSync(join(root, "packages/fixture/source/stale.ts"))).toBe(false)
   })
 
-  it("excludes .test.ts and .spec.ts files from the emission", () => {
+  it("excludes .test.* and .spec.* files from the emission", () => {
     const root = createWorkspace({
       "packages/fixture/src/index.ts": "export const x = 1\n",
       "packages/fixture/src/index.test.ts": "it.todo('x')\n",
+      "packages/fixture/src/widget.browser.test.tsx": "it.todo('browser')\n",
+      "packages/fixture/src/widget.spec.tsx": "it.todo('spec')\n",
     })
     emitPackageSource("fixture", root)
     expect(existsSync(join(root, "packages/fixture/source/index.test.ts"))).toBe(false)
+    expect(existsSync(join(root, "packages/fixture/source/widget.browser.test.tsx"))).toBe(false)
+    expect(existsSync(join(root, "packages/fixture/source/widget.spec.tsx"))).toBe(false)
     expect(existsSync(join(root, "packages/fixture/source/index.ts"))).toBe(true)
   })
 
@@ -89,6 +93,7 @@ describe("emitPackageSource", () => {
       "packages/fixture/src/index.ts": "export const x = 1\n",
       "packages/fixture/src/nested/deep.ts": "export const y = 2\n",
       "packages/fixture/src/index.test.ts": "it.todo('x')\n",
+      "packages/fixture/src/nested/widget.spec.tsx": "it.todo('spec')\n",
     })
     emitPackageSource("fixture", root)
     expect(auditSourceParity("fixture", join(root, "packages/fixture"))).toEqual([])

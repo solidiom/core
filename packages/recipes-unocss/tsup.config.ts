@@ -82,7 +82,7 @@ function copyDir(src: string, dest: string) {
   mkdirSync(dest, { recursive: true })
   const entries = readdirSync(src)
   for (const entry of entries) {
-    if (entry.endsWith(".test.ts") || entry.endsWith(".spec.ts")) continue
+    if (entry.includes(".test.") || entry.includes(".spec.")) continue
     const srcPath = join(src, entry)
     const destPath = join(dest, entry)
     const stat = statSync(srcPath)

@@ -93,10 +93,12 @@ describe("auditSourceParity", () => {
     )
   })
 
-  it("does not require .test.ts/.spec.ts files to be copied", () => {
+  it("does not require .test.* and .spec.* files to be copied", () => {
     const pkgDir = createPackage({
       "src/index.ts": "export const x = 1\n",
       "src/index.test.ts": "it.todo('x')\n",
+      "src/widget.browser.test.tsx": "it.todo('browser')\n",
+      "src/widget.spec.tsx": "it.todo('spec')\n",
       "source/index.ts": "export const x = 1\n",
     })
     expect(auditSourceParity("fixture", pkgDir)).toEqual([])

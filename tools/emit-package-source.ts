@@ -28,7 +28,7 @@ const DUAL_EMISSION_PACKAGES = [
 
 /** Files the copy step deliberately excludes from `source/` (mirrors tsup.config.base.ts). */
 function isExcludedFromCopy(fileName: string): boolean {
-  return fileName.endsWith(".test.ts") || fileName.endsWith(".spec.ts")
+  return fileName.includes(".test.") || fileName.includes(".spec.")
 }
 
 /** Recursively copies `srcDir` into `destDir`, skipping excluded files, clearing stale output first. */

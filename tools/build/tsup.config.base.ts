@@ -41,8 +41,8 @@ function copySourceDir(srcDir: string, destDir: string): void {
 
   const entries = readdirSync(srcDir)
   for (const entry of entries) {
-    // Skip test files from source/ emission
-    if (entry.endsWith(".test.ts") || entry.endsWith(".spec.ts")) continue
+    // Skip test files from source/ emission, regardless of their extension.
+    if (entry.includes(".test.") || entry.includes(".spec.")) continue
     const srcPath = join(srcDir, entry)
     const destPath = join(destDir, entry)
     const stat = statSync(srcPath)
