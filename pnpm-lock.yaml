@@ -41,8 +41,8 @@ importers:
         specifier: 1.63.0
         version: 1.63.0
       '@solidjs/testing-library':
-        specifier: ^1.0.0-beta.3
-        version: 1.0.0-beta.3(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: ^1.0.0-rc.2
+        version: 1.0.0-rc.2(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -6296,8 +6296,8 @@ packages:
     resolution: {integrity: sha512-BIL5dKm0dAtPGsCEuLSNw60spDbmYG5QFK+aHUxPIgPLweA8IeJKd62DiqqqU/jqX0x39ty31GoP1n+ZINkrcg==}
     engines: {node: '>=22.12.0'}
 
-  '@solidjs/testing-library@1.0.0-beta.3':
-    resolution: {integrity: sha512-yJtAa6H76xr5lSkT7LVmaaTFCZZzxcwejzQ4UBV/+koZFByVZ5J0XMDVHZ539PGso+fyncI5iRxWyDWFqhtcLg==}
+  '@solidjs/testing-library@1.0.0-rc.2':
+    resolution: {integrity: sha512-QZqIVoyDAqaGgSsWQ3gnYGaG1peFkNF0/n5uM+393g5plZlcvgxmUgdjsQtwrRLVZCrh0K1lp7YHxsAlN5XPkA==}
     engines: {node: '>= 14'}
     peerDependencies:
       '@solidjs/web': 2.0.0-rc.20
@@ -11940,7 +11940,7 @@ snapshots:
 
   '@solidjs/signals@2.0.0-rc.20': {}
 
-  '@solidjs/testing-library@1.0.0-beta.3(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)':
+  '@solidjs/testing-library@1.0.0-rc.2(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)':
     dependencies:
       '@solidjs/web': 2.0.0-rc.20(solid-js@2.0.0-rc.20)
       '@testing-library/dom': 10.4.2
