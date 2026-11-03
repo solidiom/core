@@ -168,7 +168,7 @@ export function Root(props: FileInputRootProps) {
         id={props.id}
         class={props.class}
         style={props.style}
-        {...(dropzone.dropzoneProps() as JSX.HTMLAttributes<HTMLDivElement>)}
+        {...(dropzone.dropzoneProps() as unknown as JSX.HTMLAttributes<HTMLDivElement>)}
         {...applySemanticAttrs({
           scope: "file-input",
           part: "root",

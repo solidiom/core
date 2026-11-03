@@ -154,17 +154,19 @@ For APIs that need a full render context (`createUniqueId`, `useContext` with pr
 
 Current pinned versions (pnpm catalog):
 
-| Package              | Version                                 |
-| -------------------- | --------------------------------------- |
-| `solid-js`           | `2.0.0-rc.7`                            |
-| `babel-preset-solid` | `2.0.0-rc.2`                            |
-| `@solidjs/signals`   | `2.0.0-rc.7` (transitive via solid-js)  |
-| `vite-plugin-solid`  | `3.0.0-next.27`                         |
-| `@solidjs/web`       | `2.0.0-rc.7`                            |
+| Package              | Version                                  |
+| -------------------- | ---------------------------------------- |
+| `solid-js`           | `2.0.0-rc.20`                            |
+| `babel-preset-solid` | `2.0.0-rc.2` (compiler line lags runtime) |
+| `@solidjs/signals`   | `2.0.0-rc.20` (transitive via solid-js)  |
+| `vite-plugin-solid`  | `3.0.0-next.27`                          |
+| `@solidjs/web`       | `2.0.0-rc.20`                            |
 
-The 3-version rolling window (`tools/solid-matrix.json`) tests against `{low, mid, high}` tiers (currently `2.0.0-rc.1` / `2.0.0-rc.6` / `2.0.0-rc.7`). Update this document when new versions introduce additional API changes.
+The 3-version rolling window (`tools/solid-matrix.json`) tests against `{low, mid, high}` tiers (currently `2.0.0-rc.16` / `2.0.0-rc.18` / `2.0.0-rc.20`). The matrix's `compiler` field pins `babel-preset-solid` separately: its release line is version-decoupled from the runtime and stops at `2.0.0-rc.2`, so tier overrides must never rewrite it (pnpm silently ignores overrides that target nonexistent versions — `scripts/set-solid-version.mjs` now verifies every pin against the npm registry). Update this document when new versions introduce additional API changes.
 
-**Note:** The `@solidjs/signals` package version tracks the `solid-js` version on the RC line: `solid-js@2.0.0-rc.7` bundles `@solidjs/signals@2.0.0-rc.7`. This differed during the beta line (`solid-js@2.0.0-beta.21` bundled `@solidjs/signals@2.0.0-beta.20`). The earlier `@solidjs/signals@0.11.x` was a pre-beta release with different API surfaces (e.g., `pureWrite` instead of `ownedWrite`).
+**rc.9 runtime break (found testing the rc.8 low tier):** `@solidjs/web` gained the `./performance-tracks` subpath export in rc.9 (consumed by the recipe-parity harness), and `@solidjs/testing-library@1.0.0-beta.3` binds a dev-mode `setConsoleFooter` export that only exists from rc.9. Runtimes below rc.9 crash those suites with `setConsoleFooter is not a function` / an unresolved-export error. The peer floor therefore sits at `>=2.0.0-rc.16 <3.0.0` — rc.16 is the lowest tier verified green (build + node + browser all pass on it).
+
+**Note:** The `@solidjs/signals` package version tracks the `solid-js` version on the RC line: `solid-js@2.0.0-rc.20` bundles `@solidjs/signals@2.0.0-rc.20`. This differed during the beta line (`solid-js@2.0.0-beta.21` bundled `@solidjs/signals@2.0.0-beta.20`). The earlier `@solidjs/signals@0.11.x` was a pre-beta release with different API surfaces (e.g., `pureWrite` instead of `ownedWrite`).
 
 ## `JSX` type — import from `@solidjs/web`, not `solid-js`
 

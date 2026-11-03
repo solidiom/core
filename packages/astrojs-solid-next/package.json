@@ -33,7 +33,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run --config ../../vitest.config.ts --passWithNoTests",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
