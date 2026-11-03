@@ -1,5 +1,5 @@
 import type { JSX } from "@solidjs/web"
-import { A, useLocation } from "@solidjs/router"
+import { useLocation } from "@solidjs/router"
 import * as NavigationMenu from "@solidiom/navigation-menu"
 
 const NAV_ITEMS = [
@@ -15,9 +15,9 @@ export function AppShell(props: { children: JSX.Element }): JSX.Element {
       <header class="border-b border-gray-200 bg-white">
         <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div class="flex items-center gap-8">
-            <A href="/" class="text-lg font-bold text-gray-900">
+            <a href="/" class="text-lg font-bold text-gray-900">
               Resources
-            </A>
+            </a>
             <NavigationMenu.Root aria-label="Main navigation">
               <NavigationMenu.List class="flex items-center gap-1">
                 {NAV_ITEMS.map((item) => (

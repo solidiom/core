@@ -13,7 +13,7 @@
   "dependencies": {
     "@solidiom/button": "workspace:*",
     "@solidiom/recipes-tailwind": "workspace:*",
-    "@solidjs/router": "0.17.0-next.6",
+    "@solidjs/router": "2.0.0-next.43",
     "@solidjs/web": "catalog:",
     "solid-js": "catalog:"
   },

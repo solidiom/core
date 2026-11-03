@@ -1,6 +1,6 @@
 /* @refresh reload */
 import { render } from "@solidjs/web"
-import { Router, Route } from "@solidjs/router"
+import { createRouter, defineRoutes } from "@solidjs/router"
 import App from "./App"
 import Home from "./pages/Home"
 import About from "./pages/About"
@@ -12,12 +12,13 @@ if (!root) {
   throw new Error("Root element #app not found — check index.html.")
 }
 
-render(
-  () => (
-    <Router root={App}>
-      <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
-    </Router>
-  ),
-  root,
-)
+// Router 2.x: routes are config objects created outside JSX; the instance is
+// the provider and the render-prop child plays the old `root` prop's role.
+const Router = createRouter({
+  routes: defineRoutes([
+    { path: "/", component: Home },
+    { path: "/about", component: About },
+  ]),
+})
+
+render(() => <Router>{(props) => <App>{props.children}</App>}</Router>, root)

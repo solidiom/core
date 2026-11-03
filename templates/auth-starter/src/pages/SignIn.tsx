@@ -1,6 +1,5 @@
 import type { JSX } from "@solidjs/web"
 import { createSignal } from "solid-js"
-import { A } from "@solidjs/router"
 import * as Button from "@solidiom/button"
 import * as Alert from "@solidiom/alert"
 import * as Input from "@solidiom/input"
@@ -72,12 +71,12 @@ export function SignIn(): JSX.Element {
                 />
                 <span class="text-sm text-gray-600">Remember me</span>
               </label>
-              <A
+              <a
                 href="/reset-password"
                 class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
               >
                 Forgot password?
-              </A>
+              </a>
             </div>
 
             <Button.Root
@@ -115,9 +114,9 @@ export function SignIn(): JSX.Element {
 
           <p class="mt-4 text-center text-sm text-gray-500">
             Don't have an account?{" "}
-            <A href="/sign-up" class="font-medium text-indigo-600 hover:text-indigo-500">
+            <a href="/sign-up" class="font-medium text-indigo-600 hover:text-indigo-500">
               Sign up
-            </A>
+            </a>
           </p>
         </AuthCard>
       </div>

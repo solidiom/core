@@ -1,5 +1,4 @@
 import type { JSX } from "@solidjs/web"
-import { A } from "@solidjs/router"
 import * as Button from "@solidiom/button"
 import * as Card from "@solidiom/card"
 import * as Alert from "@solidiom/alert"
@@ -79,7 +78,7 @@ export function Welcome(): JSX.Element {
 
             <div class="flex justify-end">
               <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-6 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-indigo-700">
-                <A href="/profile">Get started</A>
+                <a href="/profile">Get started</a>
               </Button.Root>
             </div>
           </div>
@@ -87,9 +86,9 @@ export function Welcome(): JSX.Element {
 
         <p class="mt-6 text-center text-sm text-gray-500">
           Already have an account?{" "}
-          <A href="/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">
+          <a href="/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">
             Sign in
-          </A>
+          </a>
         </p>
       </div>
     </div>

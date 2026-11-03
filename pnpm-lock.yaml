@@ -2173,8 +2173,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tabs
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2249,8 +2249,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2322,8 +2322,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2398,8 +2398,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2471,8 +2471,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/toast
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2517,8 +2517,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/recipes-tailwind
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2587,8 +2587,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/toast
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2642,8 +2642,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tabs
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2718,8 +2718,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/toast
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2791,8 +2791,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2864,8 +2864,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2937,8 +2937,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -2995,8 +2995,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3068,8 +3068,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/toast
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3147,8 +3147,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/toast
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3223,8 +3223,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3275,8 +3275,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3348,8 +3348,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/toast
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3406,8 +3406,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tabs
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3470,8 +3470,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tabs
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3519,8 +3519,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/recipes-tailwind
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3583,8 +3583,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/spinner
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3638,8 +3638,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tabs
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3708,8 +3708,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tabs
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3784,8 +3784,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/toast
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3839,8 +3839,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tabs
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3909,8 +3909,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/toast
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -3985,8 +3985,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -4056,8 +4056,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/recipes-tailwind
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -4132,8 +4132,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tooltip
       '@solidjs/router':
-        specifier: 0.17.0-next.6
-        version: 0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
+        specifier: 2.0.0-next.43
+        version: 2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)
       '@solidjs/web':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(solid-js@2.0.0-rc.20)
@@ -6286,11 +6286,15 @@ packages:
     peerDependencies:
       solid-js: 2.0.0-rc.20
 
-  '@solidjs/router@0.17.0-next.6':
-    resolution: {integrity: sha512-ulG/o5lOP6ekWDqAEsaxneJu0yh01Fnwqw1HTgPZ6C06MLcMXWwOxntDO7F8muUHQ/rFa9vK1Q15xtXv6GTRUA==}
+  '@solidjs/router@2.0.0-next.43':
+    resolution: {integrity: sha512-anKDu9sg8hjer4dOcs3YKOivoNvjb0aSP9W58HYT42P+59dktNXHhNvi9Cj6dRizM2cQGed14Swv4wqEMx2Fsw==}
     peerDependencies:
       '@solidjs/web': 2.0.0-rc.20
+      filesystem-routing: '>=0.4.0'
       solid-js: 2.0.0-rc.20
+    peerDependenciesMeta:
+      filesystem-routing:
+        optional: true
 
   '@solidjs/signals@2.0.0-rc.20':
     resolution: {integrity: sha512-BIL5dKm0dAtPGsCEuLSNw60spDbmYG5QFK+aHUxPIgPLweA8IeJKd62DiqqqU/jqX0x39ty31GoP1n+ZINkrcg==}
@@ -11933,7 +11937,7 @@ snapshots:
     dependencies:
       solid-js: 2.0.0-rc.20
 
-  '@solidjs/router@0.17.0-next.6(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)':
+  '@solidjs/router@2.0.0-next.43(@solidjs/web@2.0.0-rc.20(solid-js@2.0.0-rc.20))(solid-js@2.0.0-rc.20)':
     dependencies:
       '@solidjs/web': 2.0.0-rc.20(solid-js@2.0.0-rc.20)
       solid-js: 2.0.0-rc.20

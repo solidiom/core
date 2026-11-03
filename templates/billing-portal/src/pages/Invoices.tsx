@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js"
 import type { JSX } from "@solidjs/web"
-import { A, useLocation } from "@solidjs/router"
+import { useLocation } from "@solidjs/router"
 import * as Card from "@solidiom/card"
 import { InvoiceRow } from "../components/InvoiceRow"
 
@@ -43,28 +43,28 @@ export function Invoices(): JSX.Element {
       <header class="border-b border-gray-200 bg-white">
         <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div class="flex items-center gap-8">
-            <A href="/" class="text-lg font-bold text-gray-900">
+            <a href="/" class="text-lg font-bold text-gray-900">
               Billing
-            </A>
+            </a>
             <nav class="flex items-center gap-1">
-              <A
+              <a
                 href="/"
                 class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${location.pathname === "/" ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}
               >
                 Plans
-              </A>
-              <A
+              </a>
+              <a
                 href="/payment"
                 class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${location.pathname === "/payment" ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}
               >
                 Payments
-              </A>
-              <A
+              </a>
+              <a
                 href="/invoices"
                 class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${location.pathname === "/invoices" ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}
               >
                 Invoices
-              </A>
+              </a>
             </nav>
           </div>
         </div>

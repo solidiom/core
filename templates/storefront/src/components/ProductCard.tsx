@@ -1,5 +1,4 @@
 import type { JSX } from "@solidjs/web"
-import { A } from "@solidjs/router"
 import * as Card from "@solidiom/card"
 
 interface ProductCardProps {
@@ -25,12 +24,12 @@ export function ProductCard(props: ProductCardProps): JSX.Element {
       </div>
       <Card.Content class="p-4">
         <p class="text-xs text-gray-500">{props.category}</p>
-        <A
+        <a
           href={`/product/${props.id}`}
           class="mt-1 block text-sm font-semibold text-gray-900 hover:text-indigo-600"
         >
           {props.name}
-        </A>
+        </a>
         <p class="mt-2 text-sm font-bold text-gray-900">{props.price}</p>
       </Card.Content>
     </Card.Root>

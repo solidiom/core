@@ -1,18 +1,22 @@
 import { render } from "@solidjs/web"
-import { Router, Route } from "@solidjs/router"
+import { createRouter, defineRoutes } from "@solidjs/router"
 import "./index.css"
 import { AppShell } from "./components/AppShell"
 import { ModelMonitoring } from "./pages/ModelMonitoring"
 import { Deployments } from "./pages/Deployments"
 import { CostTracking } from "./pages/CostTracking"
 
+// Router 2.x: routes are config objects created outside JSX; the instance is
+// the provider and the render-prop child plays the old `root` prop's role.
+const Router = createRouter({
+  routes: defineRoutes([
+    { path: "/", component: ModelMonitoring },
+    { path: "/deployments", component: Deployments },
+    { path: "/costs", component: CostTracking },
+  ]),
+})
+
 render(
-  () => (
-    <Router root={AppShell}>
-      <Route path="/" component={ModelMonitoring} />
-      <Route path="/deployments" component={Deployments} />
-      <Route path="/costs" component={CostTracking} />
-    </Router>
-  ),
+  () => <Router>{(props) => <AppShell>{props.children}</AppShell>}</Router>,
   document.getElementById("app")!,
 )

@@ -1,6 +1,5 @@
 import type { JSX } from "@solidjs/web"
 import { createSignal, createMemo } from "solid-js"
-import { A } from "@solidjs/router"
 import * as Button from "@solidiom/button"
 import * as Alert from "@solidiom/alert"
 import * as Input from "@solidiom/input"
@@ -93,9 +92,9 @@ export function SignUp(): JSX.Element {
                 We've sent a verification email to{" "}
                 <span class="font-medium text-gray-900">{email()}</span>
               </p>
-              <A href="/" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+              <a href="/" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                 Back to sign in
-              </A>
+              </a>
             </div>
           </AuthCard>
         </div>
@@ -267,9 +266,9 @@ export function SignUp(): JSX.Element {
 
           <p class="mt-4 text-center text-sm text-gray-500">
             Already have an account?{" "}
-            <A href="/" class="font-medium text-indigo-600 hover:text-indigo-500">
+            <a href="/" class="font-medium text-indigo-600 hover:text-indigo-500">
               Sign in
-            </A>
+            </a>
           </p>
         </AuthCard>
       </div>

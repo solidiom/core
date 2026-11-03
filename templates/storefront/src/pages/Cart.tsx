@@ -1,6 +1,5 @@
 import { createSignal } from "solid-js"
 import type { JSX } from "@solidjs/web"
-import { A } from "@solidjs/router"
 import * as Breadcrumb from "@solidiom/breadcrumb"
 import * as Card from "@solidiom/card"
 import * as Input from "@solidiom/input"
@@ -116,11 +115,11 @@ export function Cart(): JSX.Element {
         <div>
           <CartSummary items={items()} />
           <div class="mt-4">
-            <A href="/checkout">
+            <a href="/checkout">
               <Button.Root class="w-full bg-indigo-600 text-white hover:bg-indigo-700">
                 Proceed to Checkout
               </Button.Root>
-            </A>
+            </a>
           </div>
         </div>
       </div>

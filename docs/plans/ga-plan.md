@@ -25,16 +25,17 @@ date: 2026-08-08
 
 **Version target:** `v1.0.x`
 
-| Status | ID      | Description                                      | Notes                                                                                                                                                      |
-| ------ | ------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [~]    | Task 69 | Solid 2 GA transition                            | Tooling ready: `scripts/solid2-stable-transition.mts` rewrites matrix/catalog/overrides/devDeps with npm-verified versions; blocked on Solid 2 GA upstream |
-| [ ]    | Task 70 | Stable v1 acceptance gate                        | Extend release-gate.ts with v1-specific checks (no prerelease deps, full docs, AT audit)                                                                   |
-| [ ]    | Task 71 | External accessibility audit and full AT records | Commission third-party WCAG 2.2 AA audit; record AT results for all 52 primitives                                                                          |
-| [ ]    | Task 72 | Release candidate hardening                      | Publish RC candidates, soak period, collect ecosystem feedback                                                                                             |
-| [ ]    | Task 73 | v1 stable release                                | Final publish to npm `latest` tag, update site, announce                                                                                                   |
-| [ ]    | Task 74 | Compile-time optimizations GA                    | Graduate vite-plugin-solidiom transforms from opt-in to recommended defaults                                                                               |
-| [ ]    | Task 75 | Legacy sunset schedule                           | Document deprecated APIs, set removal timeline for v2                                                                                                      |
-| [ ]    | Task 76 | v1.x maintenance policy                          | Define backport rules, security patch SLA, EOL timeline                                                                                                    |
+| Status | ID      | Description                                      | Notes                                                                                                                                                                           |
+| ------ | ------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [~]    | Task 69 | Solid 2 GA transition                            | Tooling ready: `scripts/solid2-stable-transition.mts` rewrites matrix/catalog/overrides/devDeps with npm-verified versions; blocked on Solid 2 GA upstream                      |
+| [ ]    | Task 70 | Stable v1 acceptance gate                        | Extend release-gate.ts with v1-specific checks (no prerelease deps, full docs, AT audit)                                                                                        |
+| [ ]    | Task 71 | External accessibility audit and full AT records | Commission third-party WCAG 2.2 AA audit; record AT results for all 52 primitives                                                                                               |
+| [ ]    | Task 72 | Release candidate hardening                      | Publish RC candidates, soak period, collect ecosystem feedback                                                                                                                  |
+| [ ]    | Task 73 | v1 stable release                                | Final publish to npm `latest` tag, update site, announce                                                                                                                        |
+| [ ]    | Task 74 | Compile-time optimizations GA                    | Graduate vite-plugin-solidiom transforms from opt-in to recommended defaults                                                                                                    |
+| [ ]    | Task 75 | Legacy sunset schedule                           | Document deprecated APIs, set removal timeline for v2                                                                                                                           |
+| [ ]    | Task 76 | v1.x maintenance policy                          | Define backport rules, security patch SLA, EOL timeline                                                                                                                         |
+| [ ]    | Task 79 | Solid Router 2.x template migration              | 30 templates migrated to `@solidjs/router@2.0.0-next.43` (createRouter config API, plain `<a>` links, `jsxImportSource` fix); re-verify and move to the stable router tag at GA |
 
 ### Phase 4 Critical Path
 

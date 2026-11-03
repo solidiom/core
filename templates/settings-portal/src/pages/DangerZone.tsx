@@ -1,6 +1,6 @@
 import type { JSX } from "@solidjs/web"
 import { createSignal } from "solid-js"
-import { A, useLocation } from "@solidjs/router"
+import { useLocation } from "@solidjs/router"
 import * as Alert from "@solidiom/alert"
 import * as Dialog from "@solidiom/dialog"
 import { SettingGroup } from "../components/SettingGroup"
@@ -22,12 +22,12 @@ export function DangerZone(): JSX.Element {
     <div class="min-h-screen bg-gray-50">
       <header class="border-b border-gray-200 bg-white">
         <div class="mx-auto flex h-16 max-w-3xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <A href="/" class="text-lg font-bold text-gray-900">
+          <a href="/" class="text-lg font-bold text-gray-900">
             Settings
-          </A>
+          </a>
           <nav class="flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
-              <A
+              <a
                 href={item.href}
                 class={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                   location.pathname === item.href
@@ -36,7 +36,7 @@ export function DangerZone(): JSX.Element {
                 }`}
               >
                 {item.label}
-              </A>
+              </a>
             ))}
           </nav>
         </div>

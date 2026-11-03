@@ -6,7 +6,6 @@ import * as Input from "@solidiom/input"
 import * as Field from "@solidiom/field"
 import * as Card from "@solidiom/card"
 import * as Alert from "@solidiom/alert"
-import { A } from "@solidjs/router"
 
 type ResourceType = "Service" | "Database" | "Compute" | "Storage" | "Network"
 
@@ -176,11 +175,11 @@ export function ResourceCreate(): JSX.Element {
         </Alert.Root>
 
         <div class="flex items-center gap-3">
-          <A href="/">
+          <a href="/">
             <Button.Root class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
               Back to Resources
             </Button.Root>
-          </A>
+          </a>
           <Button.Root
             class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
             onClick={() => {
@@ -452,9 +451,9 @@ export function ResourceCreate(): JSX.Element {
             disabled={step() === "type"}
           >
             {step() === "type" ? (
-              <A href="/" class="text-sm font-medium text-gray-700">
+              <a href="/" class="text-sm font-medium text-gray-700">
                 Cancel
-              </A>
+              </a>
             ) : (
               "Previous"
             )}

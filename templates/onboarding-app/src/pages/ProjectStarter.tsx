@@ -1,5 +1,4 @@
 import type { JSX } from "@solidjs/web"
-import { A } from "@solidjs/router"
 import * as Button from "@solidiom/button"
 import * as Input from "@solidiom/input"
 import * as Field from "@solidiom/field"
@@ -120,7 +119,7 @@ export function ProjectStarter(): JSX.Element {
 
             <div class="flex justify-between">
               <Button.Root class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
-                <A href="/profile">Back</A>
+                <a href="/profile">Back</a>
               </Button.Root>
               <Button.Root class="inline-flex items-center rounded-md bg-indigo-600 px-6 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700">
                 Create project

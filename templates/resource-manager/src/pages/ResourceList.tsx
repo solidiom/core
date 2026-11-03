@@ -5,7 +5,6 @@ import * as Button from "@solidiom/button"
 import * as Input from "@solidiom/input"
 import * as Card from "@solidiom/card"
 import * as Pagination from "@solidiom/pagination"
-import { A } from "@solidjs/router"
 import { ResourceCard } from "../components/ResourceCard"
 
 type ResourceType = "Service" | "Database" | "Compute" | "Storage" | "Network"
@@ -182,11 +181,11 @@ export function ResourceList(): JSX.Element {
               Manage your infrastructure resources across all regions.
             </p>
           </div>
-          <A href="/create">
+          <a href="/create">
             <Button.Root class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700">
               Add Resource
             </Button.Root>
-          </A>
+          </a>
         </div>
       </div>
 
@@ -222,7 +221,7 @@ export function ResourceList(): JSX.Element {
 
         <div class="grid gap-4 p-6 sm:grid-cols-2 lg:grid-cols-3">
           {paged().map((resource) => (
-            <A href={`/resource/${resource.id}`}>
+            <a href={`/resource/${resource.id}`}>
               <ResourceCard
                 name={resource.name}
                 type={resource.type.toLowerCase()}
@@ -231,7 +230,7 @@ export function ResourceList(): JSX.Element {
                 created={resource.created}
                 tags={resource.tags}
               />
-            </A>
+            </a>
           ))}
         </div>
 
