@@ -91,20 +91,18 @@ const sidebarGroups = primitiveSidebarGroups(primitives, locale, (name, loc) =>
 
   <div id="primitive-directory-fallback" class="primitive-directory__fallback">
     <ul class="primitive-directory__grid" data-pagefind-ignore="index">
-      {
-        primitives.map((primitive) => (
-          <li class="primitive-directory__item">
-            <a href={primitiveHref(primitive.name, locale)} class="primitive-directory__link">
-              <span class="primitive-directory__name">{primitive.label}</span>
-              <span class="primitive-directory__description">{primitive.description}</span>
-              <span class="primitive-directory__meta">
-                <span class="primitive-directory__category">{categoryLabelFor(primitive)}</span>
-                <span class="primitive-directory__status">{primitive.status}</span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
+      {primitives.map((primitive) => (
+        <li class="primitive-directory__item">
+          <a href={primitiveHref(primitive.name, locale)} class="primitive-directory__link">
+            <span class="primitive-directory__name">{primitive.label}</span>
+            <span class="primitive-directory__description">{primitive.description}</span>
+            <span class="primitive-directory__meta">
+              <span class="primitive-directory__category">{categoryLabelFor(primitive)}</span>
+              <span class="primitive-directory__status">{primitive.status}</span>
+            </span>
+          </a>
+        </li>
+      ))}
     </ul>
   </div>
 </DocsLayout>

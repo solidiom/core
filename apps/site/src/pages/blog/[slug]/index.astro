@@ -128,26 +128,20 @@ const sidebarGroups: DocsSidebarGroup[] = [
     </a>
     <div class="blog-entry__meta">
       <time datetime={entryData.date.toISOString().split("T")[0]}>
-        {
-          entryData.date.toLocaleDateString(isEs ? "es-ES" : "en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }
+        {entryData.date.toLocaleDateString(isEs ? "es-ES" : "en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
       </time>
-      {
-        authors.length > 0 && (
-          <span class="blog-entry__author">
-            {isEs ? "por" : "by"} {authors.map((a) => a.name).join(", ")}
-          </span>
-        )
-      }
-      {
-        entryData.tags.length > 0 && (
-          <span class="blog-entry__tags">{entryData.tags.join(", ")}</span>
-        )
-      }
+      {authors.length > 0 && (
+        <span class="blog-entry__author">
+          {isEs ? "por" : "by"} {authors.map((a) => a.name).join(", ")}
+        </span>
+      )}
+      {entryData.tags.length > 0 && (
+        <span class="blog-entry__tags">{entryData.tags.join(", ")}</span>
+      )}
     </div>
   </div>
 

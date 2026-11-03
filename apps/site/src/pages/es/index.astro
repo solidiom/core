@@ -94,38 +94,36 @@ const SECTIONS = [
     </header>
 
     <nav class="home-page__areas" aria-label="Áreas de la plataforma">
-      {
-        SECTIONS.map((section) => {
-          const maturity = getMaturityInfo(section.area, "es")
-          const available = isAreaAvailable(section.area)
-          return (
-            <article class="home-page__area">
-              <header class="home-page__area-header">
-                <div class="home-page__area-title">
-                  <h2>{section.title}</h2>
-                  <span
-                    class="maturity-badge__label"
-                    data-maturity={maturity.level}
-                    title={maturity.tooltip}
-                  >
-                    {maturity.label}
-                  </span>
-                </div>
-              </header>
-              <p class="home-page__area-description">{section.description}</p>
-              {available && section.href ? (
-                <a href={section.href} class="home-page__area-link">
-                  Explorar →
-                </a>
-              ) : (
-                <span class="home-page__area-unavailable" aria-hidden="true">
-                  Próximamente en M4
+      {SECTIONS.map((section) => {
+        const maturity = getMaturityInfo(section.area, "es")
+        const available = isAreaAvailable(section.area)
+        return (
+          <article class="home-page__area">
+            <header class="home-page__area-header">
+              <div class="home-page__area-title">
+                <h2>{section.title}</h2>
+                <span
+                  class="maturity-badge__label"
+                  data-maturity={maturity.level}
+                  title={maturity.tooltip}
+                >
+                  {maturity.label}
                 </span>
-              )}
-            </article>
-          )
-        })
-      }
+              </div>
+            </header>
+            <p class="home-page__area-description">{section.description}</p>
+            {available && section.href ? (
+              <a href={section.href} class="home-page__area-link">
+                Explorar →
+              </a>
+            ) : (
+              <span class="home-page__area-unavailable" aria-hidden="true">
+                Próximamente en M4
+              </span>
+            )}
+          </article>
+        )
+      })}
     </nav>
   </div>
 </BaseLayout>

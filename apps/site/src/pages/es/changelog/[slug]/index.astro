@@ -65,17 +65,18 @@ const nextLink =
   contentType="changelog"
 >
   <div class="changelog-entry__header">
-    <a href={changelogPath} class="changelog-entry__back"> ← Registro de cambios </a>
+    <a href={changelogPath} class="changelog-entry__back">
+      {" "}
+      ← Registro de cambios{" "}
+    </a>
     <h1>{entry.data.title}</h1>
     <div class="changelog-entry__meta">
       <time datetime={entry.data.date.toISOString().split("T")[0]}>
-        {
-          entry.data.date.toLocaleDateString("es-ES", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }
+        {entry.data.date.toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
       </time>
       {entry.data.version && <span class="changelog-entry__version">{entry.data.version}</span>}
       <span class="changelog-entry__maturity" data-maturity={entry.data.maturity}>

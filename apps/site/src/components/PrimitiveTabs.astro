@@ -21,17 +21,15 @@ const tabs: Array<{ view: PrimitiveView; label: string }> = [
 
 <nav class="primitive-tabs" aria-label={copy.tabsLabel.replace("{name}", label)}>
   <ul>
-    {
-      tabs.map((tab) => (
-        <li>
-          <a
-            href={primitiveHref(name, locale, tab.view)}
-            aria-current={current === tab.view ? "page" : undefined}
-          >
-            {tab.label}
-          </a>
-        </li>
-      ))
-    }
+    {tabs.map((tab) => (
+      <li>
+        <a
+          href={primitiveHref(name, locale, tab.view)}
+          aria-current={current === tab.view ? "page" : undefined}
+        >
+          {tab.label}
+        </a>
+      </li>
+    ))}
   </ul>
 </nav>

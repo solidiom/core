@@ -10,7 +10,10 @@ const blogPath = "/es/blog/"
 >
   <main class="contributing-page">
     <nav aria-label="Breadcrumb">
-      <a href={blogPath} class="contributing-page__back"> ← Blog </a>
+      <a href={blogPath} class="contributing-page__back">
+        {" "}
+        ← Blog{" "}
+      </a>
     </nav>
 
     <h1>Cómo contribuir al blog</h1>
@@ -41,7 +44,8 @@ const blogPath = "/es/blog/"
 
       <p class="contributing-page__note">
         <strong>Nota:</strong>
-        <code>id</code> debe ser único y se utiliza para hacer referencia a ti en los artículos. Los campos
+        <code>id</code> debe ser único y se utiliza para hacer referencia a ti en los artículos. Los
+        campos
         <code>linkedin</code> y <code>website</code> son opcionales.
       </p>
     </section>
@@ -49,9 +53,8 @@ const blogPath = "/es/blog/"
     <section class="contributing-page__section">
       <h2>2. Crea tu entrada</h2>
       <p>
-        Todas las entradas se escriben en Markdown. Añade tu archivo en <code
-          >apps/site/src/content/es/articles/</code
-        >.
+        Todas las entradas se escriben en Markdown. Añade tu archivo en{" "}
+        <code>apps/site/src/content/es/articles/</code>.
       </p>
 
       <h3>Nombre del archivo</h3>
@@ -84,9 +87,8 @@ Contenido de tu artículo aquí...`}</code></pre>
 
       <p class="contributing-page__note">
         <strong>Nota:</strong>
-        Los valores en <code>authors</code> deben coincidir con el <code>id</code> de una entrada en <code
-          >authors.json</code
-        >.
+        Los valores en <code>authors</code> deben coincidir con el <code>id</code> de una entrada en{" "}
+        <code>authors.json</code>.
       </p>
     </section>
 
@@ -119,48 +121,84 @@ Resto del contenido del artículo...`}</code></pre>
         </thead>
         <tbody>
           <tr>
-            <td><code>contentSchemaVersion</code></td>
-            <td><code>1</code></td>
+            <td>
+              <code>contentSchemaVersion</code>
+            </td>
+            <td>
+              <code>1</code>
+            </td>
             <td>Versión del esquema de contenido.</td>
           </tr>
           <tr>
-            <td><code>title</code></td>
-            <td><code>string</code></td>
+            <td>
+              <code>title</code>
+            </td>
+            <td>
+              <code>string</code>
+            </td>
             <td>Título del artículo.</td>
           </tr>
           <tr>
-            <td><code>description</code></td>
-            <td><code>string</code></td>
+            <td>
+              <code>description</code>
+            </td>
+            <td>
+              <code>string</code>
+            </td>
             <td>Descripción corta para la lista del blog.</td>
           </tr>
           <tr>
-            <td><code>keywords</code></td>
-            <td><code>string[]</code></td>
+            <td>
+              <code>keywords</code>
+            </td>
+            <td>
+              <code>string[]</code>
+            </td>
             <td>Términos para búsqueda y SEO.</td>
           </tr>
           <tr>
-            <td><code>locale</code></td>
-            <td><code>"en" | "es"</code></td>
+            <td>
+              <code>locale</code>
+            </td>
+            <td>
+              <code>"en" | "es"</code>
+            </td>
             <td>Idioma del artículo.</td>
           </tr>
           <tr>
-            <td><code>date</code></td>
-            <td><code>Date</code></td>
+            <td>
+              <code>date</code>
+            </td>
+            <td>
+              <code>Date</code>
+            </td>
             <td>Fecha de publicación en formato ISO.</td>
           </tr>
           <tr>
-            <td><code>authors</code></td>
-            <td><code>string[]</code></td>
+            <td>
+              <code>authors</code>
+            </td>
+            <td>
+              <code>string[]</code>
+            </td>
             <td>IDs de autores desde authors.json.</td>
           </tr>
           <tr>
-            <td><code>tags</code></td>
-            <td><code>string[]</code></td>
+            <td>
+              <code>tags</code>
+            </td>
+            <td>
+              <code>string[]</code>
+            </td>
             <td>Etiquetas visibles en la entrada.</td>
           </tr>
           <tr>
-            <td><code>maturity</code></td>
-            <td><code>"draft" | "beta" | "ga"</code></td>
+            <td>
+              <code>maturity</code>
+            </td>
+            <td>
+              <code>"draft" | "beta" | "ga"</code>
+            </td>
             <td>Nivel de madurez del contenido.</td>
           </tr>
         </tbody>
@@ -170,7 +208,8 @@ Resto del contenido del artículo...`}</code></pre>
     <section class="contributing-page__section">
       <h2>5. Previsualiza y envía</h2>
       <p>
-        Desde la carpeta <code>apps/site/</code>, ejecuta <code>pnpm dev</code> para ver tu entrada en
+        Desde la carpeta <code>apps/site/</code>, ejecuta <code>pnpm dev</code> para ver tu entrada
+        en
         <code>http://localhost:4321/es/blog/tu-titulo/</code>.
       </p>
       <p>

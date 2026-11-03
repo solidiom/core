@@ -63,81 +63,77 @@ const sidebarGroups: DocsSidebarGroup[] = [
   sidebarGroups={sidebarGroups}
   contentType="blog"
 >
-  {
-    allTags.length > 0 && (
-      <div class="blog-categories" data-blog-categories>
-        <p class="blog-categories__label">Categorías</p>
-        <ul class="blog-categories__list">
+  {allTags.length > 0 && (
+    <div class="blog-categories" data-blog-categories>
+      <p class="blog-categories__label">Categorías</p>
+      <ul class="blog-categories__list">
+        <li>
+          <button
+            type="button"
+            class="blog-categories__chip blog-categories__chip--active"
+            data-category="all"
+          >
+            Todos
+          </button>
+        </li>
+        {allTags.map((tag) => (
           <li>
-            <button
-              type="button"
-              class="blog-categories__chip blog-categories__chip--active"
-              data-category="all"
-            >
-              Todos
+            <button type="button" class="blog-categories__chip" data-category={tag}>
+              {tag}
             </button>
           </li>
-          {allTags.map((tag) => (
-            <li>
-              <button type="button" class="blog-categories__chip" data-category={tag}>
-                {tag}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )
-  }
+        ))}
+      </ul>
+    </div>
+  )}
 
   <nav aria-label="Navegación del blog">
-    {
-      sortedEntries.length > 0 ? (
-        <ol class="blog-list">
-          {sortedEntries.map((entry) => {
-            const slug =
-              entry.id
-                .split("/")
-                .pop()
-                ?.replace(/\.(md|mdx)$/, "") ?? entry.id
-            const href = `${blogPath}${slug}/`
-            const rawAuthors = (entry.data as typeof entry.data & { authors?: string[] }).authors
-            const authors = rawAuthors ? getAuthorsByIds(rawAuthors) : []
-            return (
-              <li class="blog-list__item" data-blog-entry data-tags={entry.data.tags.join(",")}>
-                <a href={href} class="blog-list__link">
-                  <header class="blog-list__header">
-                    <h2 class="blog-list__title">{entry.data.title}</h2>
-                    <time
-                      class="blog-list__date"
-                      datetime={entry.data.date.toISOString().split("T")[0]}
-                    >
-                      {formatDate(entry.data.date)}
-                    </time>
-                  </header>
-                  <p class="blog-list__description">{entry.data.description}</p>
-                  <footer class="blog-list__meta">
-                    {authors.length > 0 && (
-                      <span class="blog-list__author">{authors.map((a) => a.name).join(", ")}</span>
+    {sortedEntries.length > 0 ? (
+      <ol class="blog-list">
+        {sortedEntries.map((entry) => {
+          const slug =
+            entry.id
+              .split("/")
+              .pop()
+              ?.replace(/\.(md|mdx)$/, "") ?? entry.id
+          const href = `${blogPath}${slug}/`
+          const rawAuthors = (entry.data as typeof entry.data & { authors?: string[] }).authors
+          const authors = rawAuthors ? getAuthorsByIds(rawAuthors) : []
+          return (
+            <li class="blog-list__item" data-blog-entry data-tags={entry.data.tags.join(",")}>
+              <a href={href} class="blog-list__link">
+                <header class="blog-list__header">
+                  <h2 class="blog-list__title">{entry.data.title}</h2>
+                  <time
+                    class="blog-list__date"
+                    datetime={entry.data.date.toISOString().split("T")[0]}
+                  >
+                    {formatDate(entry.data.date)}
+                  </time>
+                </header>
+                <p class="blog-list__description">{entry.data.description}</p>
+                <footer class="blog-list__meta">
+                  {authors.length > 0 && (
+                    <span class="blog-list__author">{authors.map((a) => a.name).join(", ")}</span>
+                  )}
+                  {(entry.data as unknown as { author?: string }).author &&
+                    authors.length === 0 && (
+                      <span class="blog-list__author">
+                        {(entry.data as unknown as { author?: string }).author}
+                      </span>
                     )}
-                    {(entry.data as unknown as { author?: string }).author &&
-                      authors.length === 0 && (
-                        <span class="blog-list__author">
-                          {(entry.data as unknown as { author?: string }).author}
-                        </span>
-                      )}
-                    {entry.data.tags.length > 0 && (
-                      <span class="blog-list__tags">{entry.data.tags.join(", ")}</span>
-                    )}
-                  </footer>
-                </a>
-              </li>
-            )
-          })}
-        </ol>
-      ) : (
-        <p class="blog-empty">Aún no hay artículos publicados.</p>
-      )
-    }
+                  {entry.data.tags.length > 0 && (
+                    <span class="blog-list__tags">{entry.data.tags.join(", ")}</span>
+                  )}
+                </footer>
+              </a>
+            </li>
+          )
+        })}
+      </ol>
+    ) : (
+      <p class="blog-empty">Aún no hay artículos publicados.</p>
+    )}
   </nav>
 </DocsLayout>
 

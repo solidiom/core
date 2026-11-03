@@ -25,128 +25,124 @@ const reviewedAt =
   )
 ---
 
-{
-  contract ? (
-    <section class="accessibility-contract" aria-labelledby="accessibility-contract-heading">
-      <h3 id="accessibility-contract-heading">{copy.contractHeading}</h3>
-      {contract.keyboard.length > 0 && (
-        <div class="accessibility-contract__group">
-          <h4>{copy.contractKeyboard}</h4>
-          <dl class="accessibility-contract__keyboard">
-            {contract.keyboard.map((interaction) => (
-              <>
-                <dt>
-                  <kbd>{interaction.key}</kbd>
-                </dt>
-                <dd>{interaction.behavior}</dd>
-              </>
-            ))}
-          </dl>
-        </div>
-      )}
-      {contract.focus.length > 0 && (
-        <div class="accessibility-contract__group">
-          <h4>{copy.contractFocus}</h4>
-          <ul>
-            {contract.focus.map((statement) => (
-              <li>{statement}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {contract.semantics.length > 0 && (
-        <div class="accessibility-contract__group">
-          <h4>{copy.contractSemantics}</h4>
-          <ul>
-            {contract.semantics.map((statement) => (
-              <li>{statement}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {contract.aria.length > 0 && (
-        <div class="accessibility-contract__group">
-          <h4>{copy.contractAria}</h4>
-          <ul>
-            {contract.aria.map((statement) => (
-              <li>{statement}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+{contract ? (
+  <section class="accessibility-contract" aria-labelledby="accessibility-contract-heading">
+    <h3 id="accessibility-contract-heading">{copy.contractHeading}</h3>
+    {contract.keyboard.length > 0 && (
       <div class="accessibility-contract__group">
-        <h4>{copy.contractConsumerDuties}</h4>
+        <h4>{copy.contractKeyboard}</h4>
+        <dl class="accessibility-contract__keyboard">
+          {contract.keyboard.map((interaction) => (
+            <>
+              <dt>
+                <kbd>{interaction.key}</kbd>
+              </dt>
+              <dd>{interaction.behavior}</dd>
+            </>
+          ))}
+        </dl>
+      </div>
+    )}
+    {contract.focus.length > 0 && (
+      <div class="accessibility-contract__group">
+        <h4>{copy.contractFocus}</h4>
         <ul>
-          {contract.consumerDuties.map((duty) => (
-            <li>{duty}</li>
+          {contract.focus.map((statement) => (
+            <li>{statement}</li>
           ))}
         </ul>
       </div>
-      {contract.nonApplicableCriteria.length > 0 && (
-        <div class="accessibility-contract__group">
-          <h4>{copy.contractNonApplicable}</h4>
-          <dl class="accessibility-contract__non-applicable">
-            {contract.nonApplicableCriteria.map((entry) => (
-              <>
-                <dt>{entry.criterion}</dt>
-                <dd>{entry.rationale}</dd>
-              </>
-            ))}
-          </dl>
-        </div>
+    )}
+    {contract.semantics.length > 0 && (
+      <div class="accessibility-contract__group">
+        <h4>{copy.contractSemantics}</h4>
+        <ul>
+          {contract.semantics.map((statement) => (
+            <li>{statement}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+    {contract.aria.length > 0 && (
+      <div class="accessibility-contract__group">
+        <h4>{copy.contractAria}</h4>
+        <ul>
+          {contract.aria.map((statement) => (
+            <li>{statement}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+    <div class="accessibility-contract__group">
+      <h4>{copy.contractConsumerDuties}</h4>
+      <ul>
+        {contract.consumerDuties.map((duty) => (
+          <li>{duty}</li>
+        ))}
+      </ul>
+    </div>
+    {contract.nonApplicableCriteria.length > 0 && (
+      <div class="accessibility-contract__group">
+        <h4>{copy.contractNonApplicable}</h4>
+        <dl class="accessibility-contract__non-applicable">
+          {contract.nonApplicableCriteria.map((entry) => (
+            <>
+              <dt>{entry.criterion}</dt>
+              <dd>{entry.rationale}</dd>
+            </>
+          ))}
+        </dl>
+      </div>
+    )}
+    <p class="accessibility-contract__review-status">
+      {copy.contractReviewStatus}: {copy.contractReviewStatusLabels[contract.reviewStatus]}
+      {contract.reviewedBy && reviewedAt && (
+        <>
+          {" "}
+          (
+          {copy.contractReviewedBy
+            .replace("{name}", contract.reviewedBy)
+            .replace("{date}", reviewedAt)}
+          )
+        </>
       )}
-      <p class="accessibility-contract__review-status">
-        {copy.contractReviewStatus}: {copy.contractReviewStatusLabels[contract.reviewStatus]}
-        {contract.reviewedBy && reviewedAt && (
-          <>
-            {" "}
-            (
-            {copy.contractReviewedBy
-              .replace("{name}", contract.reviewedBy)
-              .replace("{date}", reviewedAt)}
-            )
-          </>
-        )}
-      </p>
-      <p class="accessibility-contract__notice">{copy.contractNotice}</p>
-    </section>
-  ) : (
-    <p class="catalog-notice" role="status">
-      {copy.contractUnavailable}
     </p>
-  )
-}
+    <p class="accessibility-contract__notice">{copy.contractNotice}</p>
+  </section>
+) : (
+  <p class="catalog-notice" role="status">
+    {copy.contractUnavailable}
+  </p>
+)}
 
-{
-  evidence ? (
-    <section class="accessibility-evidence" aria-labelledby="automated-evidence-heading">
-      <p class="accessibility-evidence__eyebrow">{copy.automatedEvidence}</p>
-      <h3 id="automated-evidence-heading">{copy.evidenceSummary}</h3>
-      <dl class="accessibility-evidence__summary">
-        <div>
-          <dt>{copy.passes}</dt>
-          <dd>{evidence.summary.passes}</dd>
-        </div>
-        <div>
-          <dt>{copy.violations}</dt>
-          <dd>{evidence.summary.violations}</dd>
-        </div>
-        <div>
-          <dt>{copy.incomplete}</dt>
-          <dd>{evidence.summary.incomplete}</dd>
-        </div>
-      </dl>
-      <p>{copy.evidenceLastRun.replace("{date}", date ?? "")}</p>
-      {evidence.evidenceIds.length > 0 && (
-        <p class="accessibility-evidence__ids">
-          {copy.evidenceIds}: <code>{evidence.evidenceIds.join(", ")}</code>
-        </p>
-      )}
-      <p class="accessibility-evidence__notice">{copy.evidenceNotice}</p>
-    </section>
-  ) : (
-    <p class="catalog-notice" role="status">
-      {copy.evidenceUnavailable}
-    </p>
-  )
-}
+{evidence ? (
+  <section class="accessibility-evidence" aria-labelledby="automated-evidence-heading">
+    <p class="accessibility-evidence__eyebrow">{copy.automatedEvidence}</p>
+    <h3 id="automated-evidence-heading">{copy.evidenceSummary}</h3>
+    <dl class="accessibility-evidence__summary">
+      <div>
+        <dt>{copy.passes}</dt>
+        <dd>{evidence.summary.passes}</dd>
+      </div>
+      <div>
+        <dt>{copy.violations}</dt>
+        <dd>{evidence.summary.violations}</dd>
+      </div>
+      <div>
+        <dt>{copy.incomplete}</dt>
+        <dd>{evidence.summary.incomplete}</dd>
+      </div>
+    </dl>
+    <p>{copy.evidenceLastRun.replace("{date}", date ?? "")}</p>
+    {evidence.evidenceIds.length > 0 && (
+      <p class="accessibility-evidence__ids">
+        {copy.evidenceIds}: <code>{evidence.evidenceIds.join(", ")}</code>
+      </p>
+    )}
+    <p class="accessibility-evidence__notice">{copy.evidenceNotice}</p>
+  </section>
+) : (
+  <p class="catalog-notice" role="status">
+    {copy.evidenceUnavailable}
+  </p>
+)}

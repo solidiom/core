@@ -174,70 +174,77 @@ const { previous, next } = adjacentPrimitiveLinks(allPrimitives, primitive.name,
     <h1>{primitive.label}</h1>
     <p>{pageDescription}</p>
     <dl class="primitive-header__meta">
-      <div><dt>{copy.package}</dt><dd><code>{primitive.package}</code></dd></div>
-      <div><dt>{copy.version}</dt><dd><code>{primitive.version}</code></dd></div>
-      <div><dt>{copy.status}</dt><dd>{primitive.status}</dd></div>
+      <div>
+        <dt>{copy.package}</dt>
+        <dd>
+          <code>{primitive.package}</code>
+        </dd>
+      </div>
+      <div>
+        <dt>{copy.version}</dt>
+        <dd>
+          <code>{primitive.version}</code>
+        </dd>
+      </div>
+      <div>
+        <dt>{copy.status}</dt>
+        <dd>{primitive.status}</dd>
+      </div>
     </dl>
   </header>
 
   <PrimitiveTabs name={primitive.name} label={primitive.label} locale={locale} current={view} />
 
-  {
-    view === "overview" && (
-      <section>
-        <h2>{copy.preview}</h2>
-        {hasExample && (
-          <>
-            <PrimitiveExample name={primitive.name} locale={locale} />
-            <p class="preview-styling-note">
-              {locale === "es"
-                ? "Este ejemplo usa estilos solo para documentación. En producción, utiliza una de las recetas incluidas (CSS, Tailwind o UnoCSS)."
-                : "This preview uses documentation-only styling. Ship with one of the included recipe outputs (CSS, Tailwind, or UnoCSS) for production styles."}
-            </p>
-          </>
-        )}
-        {DocumentContent ? <DocumentContent /> : <p>{primitive.description}</p>}
-        <PrimitiveMetadata manifest={registryManifest} copy={copy} />
-      </section>
-    )
-  }
+  {view === "overview" && (
+    <section>
+      <h2>{copy.preview}</h2>
+      {hasExample && (
+        <>
+          <PrimitiveExample name={primitive.name} locale={locale} />
+          <p class="preview-styling-note">
+            {locale === "es"
+              ? "Este ejemplo usa estilos solo para documentación. En producción, utiliza una de las recetas incluidas (CSS, Tailwind o UnoCSS)."
+              : "This preview uses documentation-only styling. Ship with one of the included recipe outputs (CSS, Tailwind, or UnoCSS) for production styles."}
+          </p>
+        </>
+      )}
+      {DocumentContent ? <DocumentContent /> : <p>{primitive.description}</p>}
+      <PrimitiveMetadata manifest={registryManifest} copy={copy} />
+    </section>
+  )}
 
   {view === "api" && <ApiReference result={apiDocumentResult} locale={locale} />}
 
-  {
-    view === "examples" && (
-      <section>
-        <h2>{copy.examples}</h2>
-        {DocumentContent ? (
-          <DocumentContent />
-        ) : (
-          <p class="catalog-notice" role="status">
-            {copy.examplesUnavailable}
-          </p>
-        )}
-        {hasExample && <PrimitiveExample name={primitive.name} locale={locale} />}
-        {hasExample && <ExampleSource source={exampleSource} locale={locale} />}
-      </section>
-    )
-  }
+  {view === "examples" && (
+    <section>
+      <h2>{copy.examples}</h2>
+      {DocumentContent ? (
+        <DocumentContent />
+      ) : (
+        <p class="catalog-notice" role="status">
+          {copy.examplesUnavailable}
+        </p>
+      )}
+      {hasExample && <PrimitiveExample name={primitive.name} locale={locale} />}
+      {hasExample && <ExampleSource source={exampleSource} locale={locale} />}
+    </section>
+  )}
 
-  {
-    view === "accessibility" && (
-      <section>
-        <h2>{copy.accessibility}</h2>
-        {DocumentContent ? (
-          <DocumentContent />
-        ) : (
-          <p class="catalog-notice" role="status">
-            {copy.accessibilityUnavailable}
-          </p>
-        )}
-        <AccessibilityEvidence
-          contract={accessibilityContract}
-          evidence={accessibilityEvidence}
-          locale={locale}
-        />
-      </section>
-    )
-  }
+  {view === "accessibility" && (
+    <section>
+      <h2>{copy.accessibility}</h2>
+      {DocumentContent ? (
+        <DocumentContent />
+      ) : (
+        <p class="catalog-notice" role="status">
+          {copy.accessibilityUnavailable}
+        </p>
+      )}
+      <AccessibilityEvidence
+        contract={accessibilityContract}
+        evidence={accessibilityEvidence}
+        locale={locale}
+      />
+    </section>
+  )}
 </DocsLayout>

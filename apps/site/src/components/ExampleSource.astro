@@ -37,13 +37,11 @@ const sourceCode =
     : fileContents
 ---
 
-{
-  source && sourceCode && (
-    <details class="example-source">
-      <summary>{copy.viewSource}</summary>
-      <pre>
+{source && sourceCode && (
+  <details class="example-source">
+    <summary>{copy.viewSource}</summary>
+    <pre>
         <code data-language={source.language}>{sourceCode}</code>
       </pre>
-    </details>
-  )
-}
+  </details>
+)}

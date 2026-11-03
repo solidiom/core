@@ -14,21 +14,19 @@ const { items, label } = Astro.props
 
 <nav class="catalog-breadcrumbs" aria-label={label}>
   <ol>
-    {
-      items.map((item, index) => (
-        <li>
-          {index > 0 && (
-            <span class="catalog-breadcrumbs__separator" aria-hidden="true">
-              /
-            </span>
-          )}
-          {item.href ? (
-            <a href={item.href}>{item.label}</a>
-          ) : (
-            <span aria-current="page">{item.label}</span>
-          )}
-        </li>
-      ))
-    }
+    {items.map((item, index) => (
+      <li>
+        {index > 0 && (
+          <span class="catalog-breadcrumbs__separator" aria-hidden="true">
+            /
+          </span>
+        )}
+        {item.href ? (
+          <a href={item.href}>{item.label}</a>
+        ) : (
+          <span aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
   </ol>
 </nav>

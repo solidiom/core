@@ -52,27 +52,27 @@ const previewExists = previewCandidates.some((candidate) => existsSync(candidate
 <div class="template-preview">
   <div class="template-preview__frame">
     <div class="template-preview__header">
-      <span>{copy.previewLabel} — {name}</span>
+      <span>
+        {copy.previewLabel} — {name}
+      </span>
       <span class="template-preview__status">preview</span>
     </div>
-    {
-      previewExists && iframeSrc ? (
-        /*
+    {previewExists && iframeSrc ? (
+      /*
         allow-scripts: the template needs to run its own JS bundle.
         allow-same-origin: required so the template's JS can access
         its own CSS/assets served from the same origin (public/).
         Templates are trusted — they are built from the same repo.
       */
-        <iframe
-          class="template-preview__iframe"
-          src={iframeSrc}
-          title={`${copy.previewLabel}: ${name}`}
-          loading="lazy"
-          sandbox="allow-scripts allow-same-origin"
-        />
-      ) : (
-        <div class="template-preview__fallback">{copy.fallback}</div>
-      )
-    }
+      <iframe
+        class="template-preview__iframe"
+        src={iframeSrc}
+        title={`${copy.previewLabel}: ${name}`}
+        loading="lazy"
+        sandbox="allow-scripts allow-same-origin"
+      />
+    ) : (
+      <div class="template-preview__fallback">{copy.fallback}</div>
+    )}
   </div>
 </div>

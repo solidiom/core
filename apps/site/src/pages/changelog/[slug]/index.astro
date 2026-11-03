@@ -74,13 +74,11 @@ const nextLink =
     <h1>{entry.data.title}</h1>
     <div class="changelog-entry__meta">
       <time datetime={entry.data.date.toISOString().split("T")[0]}>
-        {
-          entry.data.date.toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }
+        {entry.data.date.toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
       </time>
       {entry.data.version && <span class="changelog-entry__version">{entry.data.version}</span>}
       <span class="changelog-entry__maturity" data-maturity={entry.data.maturity}>

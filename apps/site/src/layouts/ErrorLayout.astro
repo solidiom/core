@@ -47,11 +47,9 @@ const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
     <meta name="description" content={metadata.description} />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href={metadata.canonicalUrl} />
-    {
-      alternates.map((alternate) => (
-        <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
-      ))
-    }
+    {alternates.map((alternate) => (
+      <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+    ))}
     <meta property="og:type" content={social["og:type"]} />
     <meta property="og:site_name" content={social["og:site_name"]} />
     <meta property="og:title" content={social["og:title"]} />
@@ -65,7 +63,9 @@ const alternates = resolveHreflangAlternates(Astro.url.pathname, locale)
     <script is:inline set:html={bootstrapThemeScript()} />
   </head>
   <body>
-    <a class="skip-link" href={`#${mainId}`}>Skip to main content</a>
+    <a class="skip-link" href={`#${mainId}`}>
+      Skip to main content
+    </a>
     <main id={mainId} class="focus-root" tabindex="-1">
       <slot />
     </main>

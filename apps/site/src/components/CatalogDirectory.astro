@@ -86,56 +86,52 @@ const sidebarGroups: DocsSidebarGroup[] = [
     {sortedEntries.length > 0 && <p class="primitive-directory__count">{countLabel}</p>}
   </header>
 
-  {
-    sortedEntries.length > 0 && (
-      <div class="primitive-directory__toolbar">
-        <label class="primitive-directory__filter-label">
-          <span class="sr-only">{filterLabel}</span>
-          <input
-            type="search"
-            class="primitive-directory__filter-input"
-            placeholder={filterLabel}
-            data-directory-filter
-            aria-label={filterLabel}
-          />
-        </label>
-      </div>
-    )
-  }
+  {sortedEntries.length > 0 && (
+    <div class="primitive-directory__toolbar">
+      <label class="primitive-directory__filter-label">
+        <span class="sr-only">{filterLabel}</span>
+        <input
+          type="search"
+          class="primitive-directory__filter-input"
+          placeholder={filterLabel}
+          data-directory-filter
+          aria-label={filterLabel}
+        />
+      </label>
+    </div>
+  )}
 
-  {
-    sortedEntries.length > 0 ? (
-      <ul class="primitive-directory__grid" data-pagefind-ignore="index" data-directory-list>
-        {sortedEntries.map((entry) => (
-          <li
-            class="primitive-directory__item"
-            data-directory-entry
-            data-name={entry.name}
-            data-label={entry.label.toLowerCase()}
-          >
-            <a href={entry.href} class="primitive-directory__link">
-              <span class="primitive-directory__name">{entry.label}</span>
-              <span class="primitive-directory__description">{entry.description}</span>
-              <span class="primitive-directory__meta">
-                <span class="primitive-directory__status" data-status={entry.status}>
-                  {entry.status}
-                </span>
-                {entry.stack && <span class="primitive-directory__stack">{entry.stack}</span>}
-                {entry.portfolios.length > 0 &&
-                  entry.portfolios.map((p: string) => (
-                    <span class="primitive-directory__portfolio">{p.replace("-", " ")}</span>
-                  ))}
+  {sortedEntries.length > 0 ? (
+    <ul class="primitive-directory__grid" data-pagefind-ignore="index" data-directory-list>
+      {sortedEntries.map((entry) => (
+        <li
+          class="primitive-directory__item"
+          data-directory-entry
+          data-name={entry.name}
+          data-label={entry.label.toLowerCase()}
+        >
+          <a href={entry.href} class="primitive-directory__link">
+            <span class="primitive-directory__name">{entry.label}</span>
+            <span class="primitive-directory__description">{entry.description}</span>
+            <span class="primitive-directory__meta">
+              <span class="primitive-directory__status" data-status={entry.status}>
+                {entry.status}
               </span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p class="catalog-notice" role="status">
-        No entries available yet.
-      </p>
-    )
-  }
+              {entry.stack && <span class="primitive-directory__stack">{entry.stack}</span>}
+              {entry.portfolios.length > 0 &&
+                entry.portfolios.map((p: string) => (
+                  <span class="primitive-directory__portfolio">{p.replace("-", " ")}</span>
+                ))}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="catalog-notice" role="status">
+      No entries available yet.
+    </p>
+  )}
 
   <script>
     const input = document.querySelector("[data-directory-filter]") as HTMLInputElement | null

@@ -103,28 +103,26 @@ const isActive = (href: string) => pathname === href
 
     <div class="docs-shell__grid">
       <aside class="docs-shell__sidebar" aria-label={copy.navigationLabel}>
-        {
-          sidebarGroups.length > 0 ? (
-            <nav>
-              {sidebarGroups.map((group) => (
-                <div class="docs-shell__sidebar-group">
-                  <p class="docs-shell__sidebar-group-label">{group.label}</p>
-                  <ul>
-                    {group.links.map((link) => (
-                      <li>
-                        <a href={link.href} aria-current={isActive(link.href) ? "page" : undefined}>
-                          {link.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </nav>
-          ) : (
-            <p class="docs-shell__sidebar-empty">{copy.noSections}</p>
-          )
-        }
+        {sidebarGroups.length > 0 ? (
+          <nav>
+            {sidebarGroups.map((group) => (
+              <div class="docs-shell__sidebar-group">
+                <p class="docs-shell__sidebar-group-label">{group.label}</p>
+                <ul>
+                  {group.links.map((link) => (
+                    <li>
+                      <a href={link.href} aria-current={isActive(link.href) ? "page" : undefined}>
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+        ) : (
+          <p class="docs-shell__sidebar-empty">{copy.noSections}</p>
+        )}
       </aside>
 
       <article
@@ -136,123 +134,114 @@ const isActive = (href: string) => pathname === href
       >
         <slot />
 
-        {
-          (previous || next) && (
-            <nav class="docs-shell__adjacent" aria-label={copy.adjacentPages}>
-              {previous ? (
-                <a
-                  class="docs-shell__adjacent-link docs-shell__adjacent-link--previous"
-                  href={previous.href}
-                >
-                  <span class="docs-shell__adjacent-direction">{copy.previous}</span>
-                  <span class="docs-shell__adjacent-label">{previous.label}</span>
-                </a>
-              ) : (
-                <span />
-              )}
-              {next ? (
-                <a
-                  class="docs-shell__adjacent-link docs-shell__adjacent-link--next"
-                  href={next.href}
-                >
-                  <span class="docs-shell__adjacent-direction">{copy.next}</span>
-                  <span class="docs-shell__adjacent-label">{next.label}</span>
-                </a>
-              ) : (
-                <span />
-              )}
-            </nav>
-          )
-        }
+        {(previous || next) && (
+          <nav class="docs-shell__adjacent" aria-label={copy.adjacentPages}>
+            {previous ? (
+              <a
+                class="docs-shell__adjacent-link docs-shell__adjacent-link--previous"
+                href={previous.href}
+              >
+                <span class="docs-shell__adjacent-direction">{copy.previous}</span>
+                <span class="docs-shell__adjacent-label">{previous.label}</span>
+              </a>
+            ) : (
+              <span />
+            )}
+            {next ? (
+              <a class="docs-shell__adjacent-link docs-shell__adjacent-link--next" href={next.href}>
+                <span class="docs-shell__adjacent-direction">{copy.next}</span>
+                <span class="docs-shell__adjacent-label">{next.label}</span>
+              </a>
+            ) : (
+              <span />
+            )}
+          </nav>
+        )}
       </article>
 
       <aside class="docs-shell__toc" aria-label={copy.onThisPage}>
-        {
-          blogMeta && (
-            <div class="docs-shell__blog-meta">
-              <p class="docs-shell__toc-label">{locale === "es" ? "Artículo" : "Article"}</p>
-              <dl class="docs-shell__blog-meta--info">
-                <div class="docs-shell__blog-meta--date">
-                  <dt>{locale === "es" ? "Publicado" : "Published"}</dt>
-                  <dd>
-                    {blogMeta.date.toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </dd>
+        {blogMeta && (
+          <div class="docs-shell__blog-meta">
+            <p class="docs-shell__toc-label">{locale === "es" ? "Artículo" : "Article"}</p>
+            <dl class="docs-shell__blog-meta--info">
+              <div class="docs-shell__blog-meta--date">
+                <dt>{locale === "es" ? "Publicado" : "Published"}</dt>
+                <dd>
+                  {blogMeta.date.toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </dd>
+              </div>
+              {blogMeta.tags.length > 0 && (
+                <div class="docs-shell__blog-meta--tags">
+                  <dt>{locale === "es" ? "Etiquetas" : "Tags"}</dt>
+                  <dd>{blogMeta.tags.join(", ")}</dd>
                 </div>
-                {blogMeta.tags.length > 0 && (
-                  <div class="docs-shell__blog-meta--tags">
-                    <dt>{locale === "es" ? "Etiquetas" : "Tags"}</dt>
-                    <dd>{blogMeta.tags.join(", ")}</dd>
-                  </div>
-                )}
-              </dl>
-              <p class="docs-shell__toc-label">{locale === "es" ? "Autor" : "Author"}</p>
-              {blogMeta.authors.map((author) => (
-                <div class="docs-shell__blog-meta--author">
-                  <img
-                    class="docs-shell__blog-meta--avatar"
-                    src={author.avatar}
-                    alt={`${author.name} avatar`}
-                    loading="lazy"
-                    width="48"
-                    height="48"
-                  />
-                  <div class="docs-shell__blog-meta--info">
-                    <p class="docs-shell__blog-meta--name">
-                      {author.website ? (
-                        <a href={author.website} target="_blank" rel="noopener noreferrer">
-                          {author.name}
-                        </a>
-                      ) : (
-                        author.name
-                      )}
-                    </p>
-                    <p class="docs-shell__blog-meta--bio">{author.description}</p>
-                    <div class="docs-shell__blog-meta--links">
-                      {author.github && (
-                        <a
-                          href={`https://github.com/${author.github}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${author.name} on GitHub`}
-                        >
-                          GitHub
-                        </a>
-                      )}
-                      {author.linkedin && (
-                        <a
-                          href={`https://linkedin.com/in/${author.linkedin}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${author.name} on LinkedIn`}
-                        >
-                          LinkedIn
-                        </a>
-                      )}
-                    </div>
+              )}
+            </dl>
+            <p class="docs-shell__toc-label">{locale === "es" ? "Autor" : "Author"}</p>
+            {blogMeta.authors.map((author) => (
+              <div class="docs-shell__blog-meta--author">
+                <img
+                  class="docs-shell__blog-meta--avatar"
+                  src={author.avatar}
+                  alt={`${author.name} avatar`}
+                  loading="lazy"
+                  width="48"
+                  height="48"
+                />
+                <div class="docs-shell__blog-meta--info">
+                  <p class="docs-shell__blog-meta--name">
+                    {author.website ? (
+                      <a href={author.website} target="_blank" rel="noopener noreferrer">
+                        {author.name}
+                      </a>
+                    ) : (
+                      author.name
+                    )}
+                  </p>
+                  <p class="docs-shell__blog-meta--bio">{author.description}</p>
+                  <div class="docs-shell__blog-meta--links">
+                    {author.github && (
+                      <a
+                        href={`https://github.com/${author.github}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${author.name} on GitHub`}
+                      >
+                        GitHub
+                      </a>
+                    )}
+                    {author.linkedin && (
+                      <a
+                        href={`https://linkedin.com/in/${author.linkedin}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${author.name} on LinkedIn`}
+                      >
+                        LinkedIn
+                      </a>
+                    )}
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        )}
+        {toc.length > 0 && (
+          <nav>
+            <p class="docs-shell__toc-label">{copy.onThisPage}</p>
+            <ul>
+              {toc.map((entry) => (
+                <li class={`docs-shell__toc-item docs-shell__toc-item--depth-${entry.depth}`}>
+                  <a href={`#${entry.id}`}>{entry.text}</a>
+                </li>
               ))}
-            </div>
-          )
-        }
-        {
-          toc.length > 0 && (
-            <nav>
-              <p class="docs-shell__toc-label">{copy.onThisPage}</p>
-              <ul>
-                {toc.map((entry) => (
-                  <li class={`docs-shell__toc-item docs-shell__toc-item--depth-${entry.depth}`}>
-                    <a href={`#${entry.id}`}>{entry.text}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          )
-        }
+            </ul>
+          </nav>
+        )}
       </aside>
     </div>
   </div>

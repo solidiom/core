@@ -61,101 +61,99 @@ for (const entry of document?.exports ?? []) {
 }
 ---
 
-{
-  document ? (
-    <section class="api-reference" aria-labelledby="api-reference-heading">
-      <p class="api-reference__eyebrow">{copy.generatedFrom}</p>
-      <h2 id="api-reference-heading">{copy.api}</h2>
-      {diagnostic === "empty" && (
-        <p class="catalog-notice" role="status">
-          {copy.apiEmpty}
-        </p>
-      )}
-      {document.exports.length > 0 && (
-        <div class="api-reference__exports">
-          {document.exports.map((entry) => {
-            const headingId = exportIds.get(entry.name) ?? entry.name
-            return (
-              <section class="api-reference__export" aria-labelledby={`api-${headingId}`}>
-                <h3 id={`api-${headingId}`} class="api-reference__export-heading">
-                  <a
-                    href={`#api-${headingId}`}
-                    class="heading-anchor"
-                    aria-label={copy.linkToSection}
-                    data-heading-anchor
-                  >
-                    <span aria-hidden="true">#</span>
-                  </a>
-                  <span class="heading-anchor-text">
-                    <code>{entry.name}</code>
-                    <span>{copy.apiKindLabels[entry.kind]}</span>
-                  </span>
-                </h3>
-                {entry.comment?.summary && <p>{entry.comment.summary}</p>}
-                {entry.signatures.map((signature) => {
-                  const signatureCode = `${signatureLabel(entry.name, signature.parameters)}: ${signature.returns}`
-                  return (
-                    <div class="api-reference__signature code-block" data-code-block>
-                      <pre class="api-reference__signature-pre">
+{document ? (
+  <section class="api-reference" aria-labelledby="api-reference-heading">
+    <p class="api-reference__eyebrow">{copy.generatedFrom}</p>
+    <h2 id="api-reference-heading">{copy.api}</h2>
+    {diagnostic === "empty" && (
+      <p class="catalog-notice" role="status">
+        {copy.apiEmpty}
+      </p>
+    )}
+    {document.exports.length > 0 && (
+      <div class="api-reference__exports">
+        {document.exports.map((entry) => {
+          const headingId = exportIds.get(entry.name) ?? entry.name
+          return (
+            <section class="api-reference__export" aria-labelledby={`api-${headingId}`}>
+              <h3 id={`api-${headingId}`} class="api-reference__export-heading">
+                <a
+                  href={`#api-${headingId}`}
+                  class="heading-anchor"
+                  aria-label={copy.linkToSection}
+                  data-heading-anchor
+                >
+                  <span aria-hidden="true">#</span>
+                </a>
+                <span class="heading-anchor-text">
+                  <code>{entry.name}</code>
+                  <span>{copy.apiKindLabels[entry.kind]}</span>
+                </span>
+              </h3>
+              {entry.comment?.summary && <p>{entry.comment.summary}</p>}
+              {entry.signatures.map((signature) => {
+                const signatureCode = `${signatureLabel(entry.name, signature.parameters)}: ${signature.returns}`
+                return (
+                  <div class="api-reference__signature code-block" data-code-block>
+                    <pre class="api-reference__signature-pre">
                         <code>{signatureCode}</code>
                       </pre>
-                      <button
-                        type="button"
-                        class="code-block__copy"
-                        data-copy-code
-                        data-code={signatureCode}
-                        aria-label={copy.copyCode}
-                      >
-                        <span class="code-block__copy-label" data-copy-label>
-                          {copy.copyCode}
-                        </span>
-                      </button>
-                    </div>
-                  )
-                })}
-                {entry.props.length > 0 && (
-                  <div class="api-reference__members">
-                    <h4>{copy.props}</h4>
-                    <dl>
-                      {entry.props.map((prop) => (
-                        <div>
-                          <dt>
-                            <code>
-                              {prop.name}
-                              {prop.optional ? "?" : ""}
-                            </code>
-                          </dt>
-                          <dd>
-                            <code>{prop.type}</code>
-                            {prop.comment?.summary ? ` — ${prop.comment.summary}` : ""}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
+                    <button
+                      type="button"
+                      class="code-block__copy"
+                      data-copy-code
+                      data-code={signatureCode}
+                      aria-label={copy.copyCode}
+                    >
+                      <span class="code-block__copy-label" data-copy-label>
+                        {copy.copyCode}
+                      </span>
+                    </button>
                   </div>
-                )}
-                {entry.children && (
-                  <p>
-                    <strong>{copy.children}:</strong> <code>{entry.children.type}</code>
-                  </p>
-                )}
-                {entry.source && (
-                  <p class="api-reference__source">
-                    <a href={entry.source.url}>{copy.viewSource}</a>
-                  </p>
-                )}
-              </section>
-            )
-          })}
-        </div>
-      )}
-    </section>
-  ) : (
-    <p class="catalog-notice" role="status">
-      {unavailableMessage(diagnostic)}
-    </p>
-  )
-}
+                )
+              })}
+              {entry.props.length > 0 && (
+                <div class="api-reference__members">
+                  <h4>{copy.props}</h4>
+                  <dl>
+                    {entry.props.map((prop) => (
+                      <div>
+                        <dt>
+                          <code>
+                            {prop.name}
+                            {prop.optional ? "?" : ""}
+                          </code>
+                        </dt>
+                        <dd>
+                          <code>{prop.type}</code>
+                          {prop.comment?.summary ? ` — ${prop.comment.summary}` : ""}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              )}
+              {entry.children && (
+                <p>
+                  <strong>{copy.children}:</strong> <code>{entry.children.type}</code>
+                </p>
+              )}
+              {entry.source && (
+                <p class="api-reference__source">
+                  <a href={entry.source.url}>{copy.viewSource}</a>
+                </p>
+              )}
+            </section>
+          )
+        })}
+      </div>
+    )}
+  </section>
+) : (
+  <p class="catalog-notice" role="status">
+    {unavailableMessage(diagnostic)}
+  </p>
+)}
 
 <style>
   /* This component renders outside the `.prose` article column (it is

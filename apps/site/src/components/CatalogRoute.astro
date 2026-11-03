@@ -147,73 +147,68 @@ const sidebarGroups: DocsSidebarGroup[] = [
     <h1>{document?.data.title ?? name}</h1>
     <p>{pageDescription}</p>
     <dl class={layer === "components" ? "component-header__meta" : "primitive-header__meta"}>
-      <div><dt>{copy.status}</dt><dd>{document?.data.status ?? "draft"}</dd></div>
+      <div>
+        <dt>{copy.status}</dt>
+        <dd>{document?.data.status ?? "draft"}</dd>
+      </div>
     </dl>
   </header>
 
-  {
-    view === "overview" && (
-      <section>
-        <h2>{copy.preview}</h2>
-        {hasComponentExample && layer === "components" && (
-          <div class="component-preview-wrap">
-            <ComponentExample name={name} locale={locale} />
-          </div>
-        )}
-        {layer === "themes" && <ThemePreview slug={name} locale={locale} />}
-        {layer === "templates" && <TemplatePreview name={name} locale={locale} />}
-        {DocumentContent ? <DocumentContent /> : <p>{pageDescription}</p>}
-      </section>
-    )
-  }
+  {view === "overview" && (
+    <section>
+      <h2>{copy.preview}</h2>
+      {hasComponentExample && layer === "components" && (
+        <div class="component-preview-wrap">
+          <ComponentExample name={name} locale={locale} />
+        </div>
+      )}
+      {layer === "themes" && <ThemePreview slug={name} locale={locale} />}
+      {layer === "templates" && <TemplatePreview name={name} locale={locale} />}
+      {DocumentContent ? <DocumentContent /> : <p>{pageDescription}</p>}
+    </section>
+  )}
 
-  {
-    view === "api" && (
-      <section>
-        <h2>{copy.api}</h2>
-        {DocumentContent ? (
-          <DocumentContent />
-        ) : (
-          <p class="catalog-notice" role="status">
-            {copy.apiUnavailable}
-          </p>
-        )}
-      </section>
-    )
-  }
+  {view === "api" && (
+    <section>
+      <h2>{copy.api}</h2>
+      {DocumentContent ? (
+        <DocumentContent />
+      ) : (
+        <p class="catalog-notice" role="status">
+          {copy.apiUnavailable}
+        </p>
+      )}
+    </section>
+  )}
 
-  {
-    view === "examples" && (
-      <section>
-        <h2>{copy.examples}</h2>
-        {DocumentContent ? (
-          <DocumentContent />
-        ) : (
-          <p class="catalog-notice" role="status">
-            {copy.examplesUnavailable}
-          </p>
-        )}
-        {hasComponentExample && layer === "components" && (
-          <div class="component-preview-wrap">
-            <ComponentExample name={name} locale={locale} />
-          </div>
-        )}
-      </section>
-    )
-  }
+  {view === "examples" && (
+    <section>
+      <h2>{copy.examples}</h2>
+      {DocumentContent ? (
+        <DocumentContent />
+      ) : (
+        <p class="catalog-notice" role="status">
+          {copy.examplesUnavailable}
+        </p>
+      )}
+      {hasComponentExample && layer === "components" && (
+        <div class="component-preview-wrap">
+          <ComponentExample name={name} locale={locale} />
+        </div>
+      )}
+    </section>
+  )}
 
-  {
-    view === "accessibility" && (
-      <section>
-        <h2>{copy.accessibility}</h2>
-        {DocumentContent ? (
-          <DocumentContent />
-        ) : (
-          <p class="catalog-notice" role="status">
-            {copy.accessibilityUnavailable}
-          </p>
-        )}
-      </section>
-    )
-  }
+  {view === "accessibility" && (
+    <section>
+      <h2>{copy.accessibility}</h2>
+      {DocumentContent ? (
+        <DocumentContent />
+      ) : (
+        <p class="catalog-notice" role="status">
+          {copy.accessibilityUnavailable}
+        </p>
+      )}
+    </section>
+  )}
 </DocsLayout>
