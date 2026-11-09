@@ -3,15 +3,15 @@
   "primitive": "drawer",
   "evidenceIds": ["axe-drawer-scan-v1"],
   "summary": {
-    "passes": 14,
+    "passes": 13,
     "violations": 0,
     "incomplete": 1,
     "outcome": "pass"
   },
-  "lastRun": "2026-08-18T04:35:09.543Z",
+  "lastRun": "2026-11-09T20:18:17.366Z",
   "provenance": {
     "browser": "chromium",
-    "commitSha": "e4a06acf6bacf39eb81cbe65350ee29565f58f86",
+    "commitSha": "171574f5fd35983d39ba59cb1f5fd4b5e0a7f39a",
     "ciRunUrl": null
   }
 }
