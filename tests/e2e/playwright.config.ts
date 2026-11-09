@@ -23,7 +23,9 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://localhost:4321",
+    // `E2E_PORT` lets a run point at a dev server on a free port when the
+    // default 4321 is occupied by an unrelated process on the machine.
+    baseURL: `http://localhost:${process.env.E2E_PORT ?? 4321}`,
     trace: "on-first-retry",
   },
   projects: [
@@ -33,13 +35,21 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "pnpm --filter @solidiom/site dev",
+    // `--ignore-lock` + the explicit port keep the dev server bound to
+    // E2E_PORT: astro's lock file is per-project, so without it a server
+    // already holding the lock (e.g. one on the default 4321) makes this
+    // command exit immediately and Playwright waits forever on `url`.
+    command: `pnpm --filter @solidiom/site exec astro dev --ignore-lock --port ${process.env.E2E_PORT ?? 4321}`,
     env: {
       ASTRO_DEV_BACKGROUND: "0",
       SOLIDIOM_E2E: "1",
     },
-    url: "http://localhost:4321",
-    reuseExistingServer: !process.env.CI,
+    url: `http://localhost:${process.env.E2E_PORT ?? 4321}`,
+    // Astro 7's `astro dev` daemonizes by default (prints the URL, exits 0),
+    // so the spawned process always "exits early" from Playwright's view.
+    // Reuse a server that is already up, including in CI, where the port is
+    // owned by this same job.
+    reuseExistingServer: true,
     cwd: "../..",
     timeout: 120_000,
   },
