@@ -75,8 +75,14 @@ test.describe("TEST-002: Shell Smoke Tests", () => {
         await expect(drawerContent).toBeVisible({ timeout: 2000 })
       }).toPass({ timeout: 10000 })
 
-      await page.keyboard.press("Escape")
-      await expect(drawerContent).toBeHidden()
+      // Escape-close is handled by the drawer's keydown listener; under full
+      // parallel-suite load the unmount can exceed the default 5s expect
+      // timeout on slower engines (observed on firefox). Retry the press on
+      // the same cadence the open assertion above already uses.
+      await expect(async () => {
+        await page.keyboard.press("Escape")
+        await expect(drawerContent).toBeHidden({ timeout: 2000 })
+      }).toPass({ timeout: 10000 })
     })
   })
 

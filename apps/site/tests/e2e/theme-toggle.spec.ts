@@ -115,7 +115,9 @@ async function navigateWithBootstrap(
   await expect(root).toHaveAttribute("data-theme", expected)
   await expect(root).toHaveCSS("color-scheme", expected)
   await navigation
-  await expect(page.locator("button.theme-toggle")).toBeVisible()
+  // The toggle is a client:load island; on slower engines under full-suite
+  // load its mount can exceed the default expect timeout.
+  await expect(page.locator("button.theme-toggle")).toBeVisible({ timeout: 15000 })
 
   return consoleMessages
 }

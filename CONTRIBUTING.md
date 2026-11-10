@@ -38,7 +38,14 @@ proposed behavior, and any alternatives considered.
    pnpm test
    pnpm format:check
    ```
-4. Open a pull request with a clear description.
+4. If your machine cannot bind the default e2e dev-server port (4321) because
+   another process owns it, point the suite at a free port:
+   ```sh
+   E2E_PORT=4399 pnpm test:e2e
+   ```
+   The browser matrix skips browsers that cannot launch on your host; force a
+   subset with `VITEST_BROWSERS=chromium,firefox pnpm test:browser`.
+5. Open a pull request with a clear description.
 
 ## Developer Certificate of Origin (DCO)
 

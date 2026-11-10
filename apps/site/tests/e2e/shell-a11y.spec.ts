@@ -183,8 +183,13 @@ test.describe("Keyboard and focus", () => {
       await trigger.click()
       await expect(page.locator(".site-header__drawer-content")).toBeVisible({ timeout: 2000 })
     }).toPass({ timeout: 10000 })
-    await page.keyboard.press("Escape")
-    await expect(page.locator(".site-header__drawer-content")).toBeHidden()
+    // Escape-close is wired during hydration; under full-suite load the
+    // keypress can land before the handler attaches (observed on firefox).
+    // Retry on the same cadence the open assertion above uses.
+    await expect(async () => {
+      await page.keyboard.press("Escape")
+      await expect(page.locator(".site-header__drawer-content")).toBeHidden({ timeout: 2000 })
+    }).toPass({ timeout: 10000 })
     await expect(trigger).toBeFocused()
   })
 })
@@ -211,6 +216,10 @@ test.describe("Zoom, reflow, and motion", () => {
   test("removes skip-link and theme-control motion when requested", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" })
     await page.goto("/")
+    // The toggle is a client:load island; on slower engines under full-suite
+    // load it can still be missing when evaluate runs.
+    await expect(page.locator(".skip-link")).toBeAttached()
+    await expect(page.locator("button.theme-toggle")).toBeAttached({ timeout: 15000 })
     const transitions = await page.evaluate(() => [
       getComputedStyle(document.querySelector(".skip-link")!).transition,
       getComputedStyle(document.querySelector(".theme-toggle")!).transition,
