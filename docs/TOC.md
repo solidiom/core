@@ -173,7 +173,6 @@ file in this directory (`accordion.md`, `alert.md`, `alert-dialog.md`, …,
 ## Release notes — `releases/`
 
 - [`releases/0.7.0.md`](releases/0.7.0.md) — Release 0.7.0: coordinated workspace-wide minor bump moving all 103 packages to 0.7.0; Solid 2 window to the rc.21 tier (peer floor rc.18); all 30 Router templates migrated to Router 2.x; compat-matrix tooling repairs.
-- [`releases/0.5.0.md`](releases/0.5.0.md) — Release 0.5.0: coordinated workspace-wide minor bump moving all 103 packages to 0.5.0; catalog grows to 86 primitives; axe scan extended to the full catalog; recipe contract widened to 60 token identities.
 - [`releases/ga-2026-08-07.md`](releases/ga-2026-08-07.md) — Solidiom GA Release Notes: full catalog, signed V3 registry, production CLI, cross-browser certification, and the live solidiom.org site.
 - [`releases/0.4.0.md`](releases/0.4.0.md) — Release 0.4.0: coordinated workspace-wide minor bump moving all 102 packages to 0.4.0; Solid 2 window to rc.1; TanStack table adapter rewritten against v9.
 - [`releases/beta-2026-08-01.md`](releases/beta-2026-08-01.md) — Solidiom Beta 1 (August 7, 2026): full catalog (52 primitives, 30 components, 36 blocks, templates, themes) at the M4 Definition of Done.
