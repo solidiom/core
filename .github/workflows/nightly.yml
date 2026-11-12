@@ -158,3 +158,9 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Check for dependency updates
         run: pnpm run deps:check
+      # The @tanstack/start-server-core override in pnpm-workspace.yaml is
+      # capped below 1.169.41 (that release dropped exports solid-start still
+      # imports). This probe fails once a newer server-core satisfies the
+      # pinned solid-start — i.e. the ceiling can be raised/dropped.
+      - name: Check the start-server-core ceiling
+        run: pnpm run deps:start-ceiling:ci

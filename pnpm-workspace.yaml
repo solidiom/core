@@ -52,8 +52,12 @@ overrides:
   "smol-toml@1": "^1.9.1"
   # zod                GHSA-mrhx-c7xc-m3w5 (via @astrojs/sitemap@3.7.4, the newest 3.x; declares ^4.3.6)
   "zod@4": "^4.6.7"
-  # 1.169.41 dropped getResponse/requestHandler, which @tanstack/solid-start 2.0.0-rc.10
-  # still imports, so the ceiling stays below it.
+  # TEMP CEILING — remove when the probe goes green. 1.169.41 dropped
+  # getResponse/requestHandler, which @tanstack/solid-start 2.0.0-rc.10 still
+  # imports, so the ceiling stays below it. tools/tanstack-start-compat.mts
+  # (pnpm deps:start-ceiling / deps:start-ceiling:ci, wired into CI) probes each
+  # newer 1.169.x against solid-start's actual imports and reports when this
+  # ceiling can be raised or dropped.
   "@tanstack/start-server-core@1": ">=1.169.39 <1.169.41"
   # browserslist/nanoid/js-yaml/postcss: regression floors — dedupe already resolves these correctly.
   "browserslist@4": "4.28.8"

@@ -25,7 +25,7 @@ import {
   fileContains,
   readJSON,
 } from "./gate-helpers"
-import { globSync } from "node:fs"
+import { globSync, readFileSync } from "node:fs"
 
 console.log("Structural Gate (gate:quick)\n")
 
@@ -180,6 +180,50 @@ console.log("\n§12 Solid dependency catalog:")
     offenders.length
       ? `Bypasses catalog: ${offenders.join("; ")}`
       : "Every package references catalog: for solid-js/@solidjs/web/babel-preset-solid",
+  )
+}
+
+// ─── 13. Solid pin synchronization (catalog ⇄ overrides ⇄ root) ─────────
+// The catalog pins the Solid runtime exactly (not a range), so a bump that
+// moves one of the three declaration sites without the others silently
+// splits the workspace across two runtime copies. update-solid-window.mts
+// writes all three together; this check catches hand-edits that skip it.
+console.log("\n§13 Solid pin synchronization:")
+{
+  const workspace = readFileSync("pnpm-workspace.yaml", "utf8")
+  const pinOf = (block: string, pkg: string): string | undefined => {
+    const start = workspace.indexOf(`\n${block}\n`)
+    if (start === -1) return undefined
+    const bodyStart = start + block.length + 2
+    const rest = workspace.slice(bodyStart)
+    const endRel = rest.search(/^\S.*$/m)
+    const body = rest.slice(0, endRel === -1 ? rest.length : endRel)
+    const escaped = pkg.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    return body.match(new RegExp(`^\\s*"?${escaped}"?:\\s*"([^"]+)"`, "m"))?.[1]
+  }
+  const root = readJSON<{ devDependencies: Record<string, string> }>("package.json")
+  const sites: Record<string, Record<string, string | undefined>> = {}
+  for (const pkg of ["solid-js", "@solidjs/web"]) {
+    sites[pkg] = {
+      catalog: pinOf("catalog:", pkg),
+      overrides: pinOf("overrides:", pkg),
+      "package.json": root?.devDependencies?.[pkg],
+    }
+  }
+  const unsynced = Object.entries(sites)
+    .filter(([, v]) => new Set(Object.values(v)).size !== 1)
+    .map(
+      ([pkg, v]) =>
+        `${pkg}: ${Object.entries(v)
+          .map(([k, val]) => `${k}=${val}`)
+          .join(" ")}`,
+    )
+  check(
+    "Solid pins stay synchronized across catalog/overrides/root",
+    unsynced.length === 0,
+    unsynced.length
+      ? `Out of sync (run scripts/update-solid-window.mts): ${unsynced.join("; ")}`
+      : "catalog, overrides, and root devDependencies pin the same Solid runtime version",
   )
 }
 
