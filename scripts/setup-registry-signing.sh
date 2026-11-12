@@ -18,6 +18,24 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
+# ─── Hex helpers ─────────────────────────────────────────────────────────────
+#
+# Only POSIX tools are used: `xxd` ships with vim-common and is absent from
+# minimal images, and OpenSSL 3.x dropped the `-rawout` pkey option, so the
+# previous extraction produced an empty key.
+
+# raw bytes -> lowercase hex, no whitespace
+bin2hex() {
+  od -An -v -tx1 | tr -d ' \n'
+}
+
+# lowercase/uppercase hex on argv -> raw bytes on stdout. Key material only ever
+# reaches this (max 96 hex chars), so sed's `\xHH` escapes stay well inside
+# xargs' single-argument limit.
+hex2bin() {
+  printf '%s' "$1" | sed 's/../\\x&/g' | xargs -0 printf
+}
+
 # ─── Defaults ────────────────────────────────────────────────────────────────
 
 detect_repo() {
@@ -80,7 +98,10 @@ fi
 
 if [[ -z "$SIGNING_KEY" ]]; then
   echo "Generating Ed25519 keypair..."
-  SIGNING_KEY="$(openssl genpkey -algorithm Ed25519 2>/dev/null | openssl pkey -rawout -outform DER 2>/dev/null | xxd -p | tr -d '\n')"
+  SIGNING_KEY="$(
+    openssl genpkey -algorithm Ed25519 2>/dev/null | openssl pkey -outform DER 2>/dev/null |
+      bin2hex | tail -c 64
+  )"
 fi
 
 # Ed25519 private key is 32 bytes = 64 hex chars
@@ -91,6 +112,18 @@ fi
 
 if ! [[ "$SIGNING_KEY" =~ ^[0-9a-fA-F]+$ ]]; then
   echo "Error: Private key must be hexadecimal."
+  exit 1
+fi
+SIGNING_KEY="$(printf '%s' "$SIGNING_KEY" | tr 'A-F' 'a-f')"
+
+# The same PKCS#8 header tools/registry-build.ts prepends to the raw 32-byte
+# key, so the public key and key ID printed here are exactly what the signer and
+# the CLI trust store will agree on. Wrapping with it also proves openssl can
+# load the key before anything is written to GitHub or printed.
+PKCS8_HEADER="302e020100300506032b657004220420"
+
+if ! hex2bin "${PKCS8_HEADER}${SIGNING_KEY}" | openssl pkey -inform DER -noout 2>/dev/null; then
+  echo "Error: The hex is well-formed but not a usable Ed25519 private key."
   exit 1
 fi
 
@@ -125,15 +158,26 @@ fi
 
 # ─── Derive public key for display ────────────────────────────────────────────
 
-# Reconstruct PEM from raw private key hex, then extract public key
-PRIVATE_PEM=$(printf '%s' "$SIGNING_KEY" | xxd -r -p | openssl pkey -inform DER 2>/dev/null)
-PUBLIC_KEY_DER=$(printf '%s' "$PRIVATE_PEM" | openssl pkey -pubout -outform DER 2>/dev/null)
-# Ed25519 public key is the last 32 bytes of the DER encoding
-PUBLIC_KEY_HEX=$(printf '%s' "$PUBLIC_KEY_DER" | xxd -p | tr -d '\n' | tail -c 64)
-PUBLIC_KEY_B64=$(printf '%s' "$PUBLIC_KEY_HEX" | xxd -r -p | base64)
+# Reconstruct the PKCS#8 DER the signer uses (PKCS8_HEADER, defined with the
+# validation checks, plus the raw 32-byte key), then derive the raw public key.
+PUBLIC_KEY_HEX="$(
+  hex2bin "${PKCS8_HEADER}${SIGNING_KEY}" | openssl pkey -inform DER -pubout -outform DER 2>/dev/null |
+    bin2hex | tail -c 64
+)"
+if [[ -z "$PUBLIC_KEY_HEX" ]]; then
+  echo "Error: Could not derive the public key from the supplied private key."
+  exit 1
+fi
+PUBLIC_KEY_B64="$(hex2bin "$PUBLIC_KEY_HEX" | base64)"
 
-# Compute signature key ID: first 16 hex chars of SHA-256 of raw public key bytes
-SIGNATURE_KEY_ID=$(printf '%s' "$PUBLIC_KEY_HEX" | xxd -r -p | openssl dgst -sha256 -hex 2>/dev/null | awk '{print $NF}' | cut -c1-16)
+# Signature key ID: first 16 hex chars of SHA-256 of the raw public key bytes,
+# matching indexV4.integrity.signatureKeyId in tools/registry-build.ts.
+SIGNATURE_KEY_ID="$(hex2bin "$PUBLIC_KEY_HEX" | openssl dgst -sha256 -hex 2>/dev/null |
+  awk '{print $NF}' | cut -c1-16)"
+if [[ ! "$SIGNATURE_KEY_ID" =~ ^[0-9a-f]{16}$ ]]; then
+  echo "Error: Could not compute the signature key ID (openssl dgst failed)."
+  exit 1
+fi
 
 # ─── Provision secret ────────────────────────────────────────────────────────
 
@@ -167,8 +211,13 @@ fi
 echo ""
 echo "=== Next steps ==="
 echo ""
-echo "1. Embed the public key in the CLI package:"
-echo "   echo '$PUBLIC_KEY_B64' > packages/cli/source/registry-public-key.b64"
+echo "1. Append the public key to the CLI trust store (keep existing entries so"
+echo "   already-signed indexes still verify during rotation):"
+echo "   packages/cli/src/registry-public-keys.ts and packages/cli/source/registry-public-keys.ts"
+echo "     // Key ID $SIGNATURE_KEY_ID — provisioned $(date -u +%Y-%m-%d)."
+echo "     \"$PUBLIC_KEY_B64\","
+echo "   and add the matching entry to .solidiom/trusted-keys.json (mark the"
+echo "   previous active key \"retired\" only after one release cycle)."
 echo ""
 echo "2. The next CI run will sign registry/index.json with Ed25519."
 echo ""
