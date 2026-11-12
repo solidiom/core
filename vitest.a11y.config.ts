@@ -30,7 +30,7 @@ function workspacePackageResolver() {
  * per-primitive outcomes are collected by tools/run-a11y.ts.
  */
 export default defineConfig({
-  plugins: [workspacePackageResolver(), solidPlugin({ hot: false })],
+  plugins: [workspacePackageResolver(), solidPlugin({ refresh: false })],
   optimizeDeps: {
     include: ["axe-core"],
   },

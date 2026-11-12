@@ -2,7 +2,7 @@ import { defineConfig } from "vitest/config"
 import solid from "vite-plugin-solid"
 
 export default defineConfig({
-  plugins: [solid({ extensions: [".tsx"], hot: false })],
+  plugins: [solid({ extensions: [".tsx"], refresh: false })],
   resolve: {
     conditions: ["node"],
   },

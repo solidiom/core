@@ -7,34 +7,71 @@ packages:
   - "templates/*"
 
 catalog:
-  solid-js: ">=2.0.0-rc.18 <3.0.0"
-  "@solidjs/web": ">=2.0.0-rc.18 <3.0.0"
-  babel-preset-solid: ">=2.0.0-rc.2 <3.0.0"
+  # Solid 2 line, tracked exactly: the workspace overrides below and these
+  # entries move together on every solid-js 2.0.0-rc bump.
+  solid-js: "2.0.0-rc.21"
+  "@solidjs/web": "2.0.0-rc.21"
+  babel-preset-solid: "2.0.0-rc.2"
 
 overrides:
   solid-js: "2.0.0-rc.21"
   "@solidjs/web": "2.0.0-rc.21"
   babel-preset-solid: "2.0.0-rc.2"
-  # Security overrides for transitive dependencies. Each target is bounded to the
-  # existing major so a floor never becomes an accidental major upgrade.
-  # ip-address     GHSA-mwp4-54f8-5fhr / -4xrf-jv44-h6hh / -22jq-vg5j-6vgg (via socks@2, declares ^10.1.1)
-  # brace-expansion GHSA-rgw5-rvv9-x895 (vulnerable < 5.0.9; via minimatch@10, declares ^5.0.5)
-  # smol-toml GHSA-7w5x-hrqm-74c2 (vulnerable <= 1.7.0; nx@23.2.0 pins 1.6.1).
-  "smol-toml@1": "1.8.0"
-  # nanoid/js-yaml/postcss: regression floors — dedupe already resolves these correctly.
-  "ip-address@10": "^10.5.0"
-  "brace-expansion@5": "^5.0.9"
-  "fast-uri@3": "3.1.7"
+  # Security overrides for transitive dependencies. Each target is bounded to
+  # the major its dependents declare, so a floor never becomes an accidental
+  # major upgrade. Each row lists the advisories it answers; raise the floor
+  # (or drop the row) when the dependents move.
+  # shell-quote        GHSA-pqg4-j6r4-53mv (critical; via launch-editor@2.14.x, declares ^1.8.0)
+  # undici             GHSA-2m5v-pch6-74hx / -4w7w-5xrc-9h26 / -qrxm-fqhp-jwvm / -xjj6-f33q-929c / -9fm3-97px-rjf6 (via astro@7, jsdom@30, h3, crossws, all ^8)
+  # axios              GHSA-3pq3-5fj3-cg6v / -m8m8-qj5v-23w3 / -r4gj-5m52-g5wh / -x97p-jq2g-jp4f / -44g4-m2mj-wpvx / -4hqw-qxg8-jxx2 / -9fr6-4gfg-395g / -j8rh-479h-cp32 / -vh66-26gq-q6x8 (via nx@23 + @nx/*, declares ^1.x)
+  # follow-redirects   GHSA-8r9p-f939-6h3c / -mrwp-f3q8-3g9p / -q3jh-wrc6-jgq8 (via axios, declares ^1.16.0)
+  # markdown-it        GHSA-gfr2-rv44-r23c / -vfgh-jcmw-g37q (via typedoc, eslint, astro, all ^14)
+  # source-map-js      GHSA-68fv-2mgg-jv7q (via astro, css-tree, jsdom toolchain, all ^1)
+  # launch-editor      GHSA-587h-7wmj-h5pm / -698v-4r3x-3vcv / -r825-w8mm-5pxw (via vite@8, declares ^2.14.1)
+  # fast-uri           GHSA-hrr3-gc8f-f4qj / -333x-w4r6-6crp / -xhq7-xmqj-769h / -w74x-v6f9-j3xg / -wjr9-j795-jxcr (via ajv@8 in yaml-language-server, declares ^3.0.1)
+  # glob               GHSA-3g3m-2fjr-6pw4 (via cacache@21.0.2 in the sigstore signing chain, declares ^14)
+  # ip-address         GHSA-rxp7-6hxx-x8q5 / -mwp4-54f8-5fhr / -4xrf-jv44-h6hh / -22jq-vg5j-6vgg (via socks@2, declares ^10.1.1)
+  # brace-expansion    GHSA-q2hr-2g5m-vwhr / -rgw5-rvv9-x895 (via minimatch, declares ^5)
+  # minimatch          GHSA-g3hv-75wg-m249 (via @nx/devkit exact 10.2.5 pin + eslint/typedoc/ts-morph/
+  #                    @tufjs/models ^10 ranges; aliased to 11.0.8 — 10.x has no patched release,
+  #                    and minimatch 11 keeps the same API surface these callers use)
+  # smol-toml          GHSA-r4xh-jqrq-34v2 / -7w5x-hrqm-74c2 (via nx@23, declares ^1.6.1)
+  # @tanstack/start-server-core GHSA-qx66-fv34-fjm8 (critical; @tanstack/solid-start pins 1.169.x exactly, patched is >=1.169.39)
+  "shell-quote@1": "^1.12.0"
+  "undici@8": "^8.12.4"
+  "axios@1": "^1.21.1"
+  "follow-redirects@1": "^1.16.3"
+  "markdown-it@14": "^14.3.3"
+  "source-map-js@1": "^1.2.2"
+  "launch-editor@2": "^2.14.2"
+  "fast-uri@3": "^3.1.9"
+  "glob@14": "^14.0.6"
+  "ip-address@10": "^10.7.6"
+  "minimatch@10": "npm:minimatch@11.0.8"
+  "minimatch@11": "^11.0.8"
+  "smol-toml@1": "^1.9.1"
+  # zod                GHSA-mrhx-c7xc-m3w5 (via @astrojs/sitemap@3.7.4, the newest 3.x; declares ^4.3.6)
+  "zod@4": "^4.6.7"
+  # 1.169.41 dropped getResponse/requestHandler, which @tanstack/solid-start 2.0.0-rc.10
+  # still imports, so the ceiling stays below it.
+  "@tanstack/start-server-core@1": ">=1.169.39 <1.169.41"
+  # browserslist/nanoid/js-yaml/postcss: regression floors — dedupe already resolves these correctly.
   "browserslist@4": "4.28.8"
   "nanoid@3": "^3.3.18"
   "js-yaml@4": "^4.3.1"
   "postcss@8": "^8.5.26"
+  # playwright: one copy for the whole workspace. @vitest/browser-playwright declares
+  # playwright "*", and autoInstallPeers would otherwise link a second playwright
+  # version beside the pinned @playwright/test, splitting Page’s type identity
+  # (axe-core/playwright stops typechecking). All e2e + browser tests share one version.
+  "playwright": "1.63.0"
+  "playwright-core": "1.63.0"
   # esbuild GHSA-g7r4-m6w7-qqqr (vulnerable >=0.27.3 <0.28.1). Held at 0.27.7 by
-  # tsup@8.5.1, bundle-require@5.1.0 and one vite@8.2.2 variant. tsup declares
-  # esbuild ^0.27.0, so this override deliberately exceeds its declared range;
-  # tsup only calls esbuild.build/transform/formatMessages (verified against its
-  # dist) and never the serve API the advisory concerns, and package builds are
-  # verified green on 0.28.x.
+  # tsup@8.5.1 and bundle-require@5.1.0. tsup declares esbuild ^0.27.0, so this
+  # override deliberately exceeds its declared range; tsup only calls
+  # esbuild.build/transform/formatMessages (verified against its dist) and never
+  # the serve API the advisory concerns, and package builds are verified green
+  # on 0.28.x.
   "esbuild@0.27": "^0.28.2"
 
 peerDependencyRules:

@@ -32,7 +32,7 @@ function workspacePackageResolver() {
  * to the suite without a build step in between.
  */
 export default defineConfig({
-  plugins: [workspacePackageResolver(), solidPlugin({ hot: false })],
+  plugins: [workspacePackageResolver(), solidPlugin({ refresh: false })],
   test: {
     include: ["tests/recipe-parity/**/*.browser.{test,spec}.{ts,tsx}"],
     globalSetup: ["tests/recipe-parity/globalSetupTailwind.ts"],

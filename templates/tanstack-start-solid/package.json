@@ -13,15 +13,15 @@
     "@solidiom/button": "workspace:*",
     "@solidiom/recipes-tailwind": "workspace:*",
     "@solidjs/web": "catalog:",
-    "@tanstack/solid-router": "2.0.0-beta.28",
-    "@tanstack/solid-start": "2.0.0-beta.29",
+    "@tanstack/solid-router": "2.0.0-rc.10",
+    "@tanstack/solid-start": "2.0.0-rc.10",
     "solid-js": "catalog:"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.3",
-    "vite": "^8.3.1",
+    "vite": "^8.3.8",
     "vite-plugin-solid": "3.0.0-next.27"
   },
   "nx": {

@@ -26,7 +26,7 @@ const browserInstances = selectedBrowsers.map((browser) => ({
  * HMR is disabled because this is a one-shot test environment.
  */
 export default defineConfig({
-  plugins: [solidPlugin({ hot: false })],
+  plugins: [solidPlugin({ refresh: false })],
   test: {
     include: ["packages/**/src/**/*.browser.{test,spec}.{ts,tsx}"],
     browser: {
