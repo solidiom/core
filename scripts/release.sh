@@ -494,18 +494,29 @@ if [[ "$DO_PACKAGES" == true ]]; then
     log "[dry-run] skipping 'changeset publish --tag $DIST_TAG' (would publish now)"
     step "changeset has no dry-run mode; run without --dry-run to publish to npm."
   else
+    # npm reads credentials from an npmrc `//registry.npmjs.org/:_authToken=`,
+    # never from NODE_AUTH_TOKEN directly. On CI, actions/setup-node writes that
+    # npmrc; locally there is usually no ~/.npmrc at all, so `changeset publish`
+    # fails ENEEDAUTH even though NPM_TOKEN is set. Point npm at a generated
+    # npmrc whose token line references NODE_AUTH_TOKEN, so the secret stays in
+    # the environment instead of being written to disk.
+    _npmrc="$(mktemp)"
+    printf '//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}\n' >"$_npmrc"
+    export NPM_CONFIG_USERCONFIG="$_npmrc"
     step "pnpm changeset publish --tag $DIST_TAG"
     _publish_log="$(mktemp)"
     if ! pnpm changeset publish --tag "$DIST_TAG" 2>&1 | tee "$_publish_log"; then
-      rm -f "$_publish_log"
+      rm -f "$_publish_log" "$_npmrc"
+      unset NPM_CONFIG_USERCONFIG
       fail "changeset publish failed"
     fi
     if grep -Fq "No unpublished projects to publish." "$_publish_log"; then
-      rm -f "$_publish_log"
+      rm -f "$_publish_log" "$_npmrc"
+      unset NPM_CONFIG_USERCONFIG
       fail "changeset publish completed without publishing a package"
     fi
-    rm -f "$_publish_log"
-    unset _publish_log
+    rm -f "$_publish_log" "$_npmrc"
+    unset _publish_log NPM_CONFIG_USERCONFIG
   fi
 fi
 
