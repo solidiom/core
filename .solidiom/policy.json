@@ -3,5 +3,6 @@
   "signatureMode": "sigstore",
   "registrySignatureRequired": false,
   "trustedKeysSource": ".solidiom/trusted-keys.json",
+  "registryPublicKeys": ["e+jbnAMIIbjAp9B6bWc8ZMCpCBGIZqaSvaQ/oC2/fPg="],
   "notes": "Beta policy — registry signature required after GA. Sigstore preferred for npm artifacts."
 }

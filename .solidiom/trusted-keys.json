@@ -14,6 +14,13 @@
       "publicKey": "o+CLuzotoxS81gxemQdsn7vCqzJ8MDsKMblA58W6NCQ=",
       "provisionedAt": "2026-08-20",
       "status": "active"
+    },
+    {
+      "keyId": "47b6d7ed94fc17ee",
+      "algorithm": "ed25519",
+      "publicKey": "e+jbnAMIIbjAp9B6bWc8ZMCpCBGIZqaSvaQ/oC2/fPg=",
+      "provisionedAt": "2026-11-13",
+      "status": "active"
     }
   ]
 }

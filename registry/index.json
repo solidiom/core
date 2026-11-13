@@ -3,9 +3,9 @@
   "version": 4,
   "integrity": {
     "algorithm": "sha256",
-    "entriesHash": "1fe616253733e55a10e831c69b7118dba3ae99e2c298631fea268101d2913387",
-    "signature": "gfXNUjObLaoJkuE35AGCSWWsQw0sHeJ6kDpYCNJDp75OnB8LHtW64LCktmatSG0ZcRpZIf+9sT7ZA8bmXnG+Aw==",
-    "signatureKeyId": "d7b32861c393dafd"
+    "entriesHash": "63985126aef171b4f453809d28b76a1d552756bf16f5c1cd901b67ddd24f5a98",
+    "signature": "PYr12zza4fG/D3mbhTaz39JGB6iFcuDd8fwlQ3aboWqLusxXqv38qJ+u+GpFePTl6Rk1wTm0C+6NtdpNCfelBw==",
+    "signatureKeyId": "47b6d7ed94fc17ee"
   },
   "primitives": [
     {
