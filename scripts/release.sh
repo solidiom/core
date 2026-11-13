@@ -505,6 +505,9 @@ if [[ "$DO_PACKAGES" == true ]]; then
     export NPM_CONFIG_USERCONFIG="$_npmrc"
     step "pnpm changeset publish --tag $DIST_TAG"
     _publish_log="$(mktemp)"
+    # Mirrors release.yml: pipefail so a publish failure reaches the guard below,
+    # not tee's exit status.
+    set -o pipefail
     if ! pnpm changeset publish --tag "$DIST_TAG" 2>&1 | tee "$_publish_log"; then
       rm -f "$_publish_log" "$_npmrc"
       unset NPM_CONFIG_USERCONFIG
