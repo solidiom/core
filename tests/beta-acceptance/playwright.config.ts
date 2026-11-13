@@ -1,5 +1,10 @@
 import { defineConfig, devices } from "@playwright/test"
 
+/**
+ * Preview-server port; `E2E_PORT` overrides the 4322 default when it is
+ * occupied by an unrelated process on the machine.
+ */
+const E2E_PORT = process.env.E2E_PORT ?? "4322"
 export default defineConfig({
   testDir: "./",
   outputDir: "../../test-results/beta-acceptance",
@@ -9,7 +14,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://127.0.0.1:4322",
+    baseURL: `http://127.0.0.1:${E2E_PORT}`,
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
   },
@@ -30,9 +35,9 @@ export default defineConfig({
   webServer: {
     command:
       process.env.PLAYWRIGHT_USE_EXISTING_BUILD === "1"
-        ? "pnpm --filter @solidiom/site preview --host 127.0.0.1 --port 4322"
-        : "pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index && pnpm --filter @solidiom/site preview --host 127.0.0.1 --port 4322",
-    url: "http://127.0.0.1:4322",
+        ? `pnpm --filter @solidiom/site preview --host 127.0.0.1 --port ${E2E_PORT}`
+        : `pnpm --filter @solidiom/site build && pnpm --filter @solidiom/site search-index && pnpm --filter @solidiom/site preview --host 127.0.0.1 --port ${E2E_PORT}`,
+    url: `http://127.0.0.1:${E2E_PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

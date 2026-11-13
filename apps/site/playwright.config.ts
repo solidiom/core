@@ -20,6 +20,12 @@ const BROWSER_SPECIFIC_TESTS = [
   "focus-root.spec.ts",
 ]
 
+/**
+ * Preview-server port; `E2E_PORT` overrides the 4322 default when it is
+ * occupied by an unrelated process on the machine.
+ */
+const E2E_PORT = process.env.E2E_PORT ?? "4322"
+
 export default defineConfig({
   testDir: "./tests/e2e",
   outputDir: "../../test-results/site-e2e",
@@ -31,7 +37,7 @@ export default defineConfig({
     ? [["line"], ["github"], ["json", { outputFile: "../../test-results/site-e2e-results.json" }]]
     : "list",
   use: {
-    baseURL: "http://127.0.0.1:4322",
+    baseURL: `http://127.0.0.1:${E2E_PORT}`,
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
     video: "retain-on-failure",
@@ -65,9 +71,9 @@ export default defineConfig({
   webServer: {
     command:
       process.env.PLAYWRIGHT_USE_EXISTING_BUILD === "1"
-        ? "pnpm preview --host 127.0.0.1 --port 4322"
-        : "pnpm build && pnpm search-index && pnpm preview --host 127.0.0.1 --port 4322",
-    url: "http://127.0.0.1:4322",
+        ? `pnpm preview --host 127.0.0.1 --port ${E2E_PORT}`
+        : `pnpm build && pnpm search-index && pnpm preview --host 127.0.0.1 --port ${E2E_PORT}`,
+    url: `http://127.0.0.1:${E2E_PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
   },

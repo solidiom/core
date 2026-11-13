@@ -15,6 +15,12 @@ import { defineConfig, devices } from "@playwright/test"
  * `regenerate_baselines=true`. Running `test:visual:update` directly on a
  * non-Linux host will produce baselines that CI cannot reproduce.
  */
+
+/**
+ * Preview-server port; `E2E_PORT` overrides the 4322 default when it is
+ * occupied by an unrelated process on the machine.
+ */
+const E2E_PORT = process.env.E2E_PORT ?? "4322"
 export default defineConfig({
   testDir: "./tests/visual",
   outputDir: "../../test-results/site-visual",
@@ -36,7 +42,7 @@ export default defineConfig({
   // intentional UPDATE_SNAPSHOTS=1 invocation.
   updateSnapshots: process.env.UPDATE_SNAPSHOTS === "1" ? "all" : "none",
   use: {
-    baseURL: "http://127.0.0.1:4322",
+    baseURL: `http://127.0.0.1:${E2E_PORT}`,
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
   },
@@ -49,9 +55,9 @@ export default defineConfig({
   webServer: {
     command:
       process.env.PLAYWRIGHT_USE_EXISTING_BUILD === "1"
-        ? "node scripts/serve-static.mjs"
-        : "pnpm build && pnpm search-index && pnpm preview --host 127.0.0.1 --port 4322",
-    url: "http://127.0.0.1:4322",
+        ? `PORT=${E2E_PORT} node scripts/serve-static.mjs`
+        : `pnpm build && pnpm search-index && pnpm preview --host 127.0.0.1 --port ${E2E_PORT}`,
+    url: `http://127.0.0.1:${E2E_PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
   },

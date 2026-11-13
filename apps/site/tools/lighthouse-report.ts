@@ -23,6 +23,10 @@ import { fileURLToPath } from "node:url"
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const distDir = join(projectRoot, "dist")
 const reportDir = join(projectRoot, "dist", "reports")
+// Preview-server port; `E2E_PORT` overrides the 4322 default when it is
+// occupied by an unrelated process on the machine.
+const e2ePort = process.env.E2E_PORT ?? "4322"
+const siteUrl = `http://127.0.0.1:${e2ePort}/`
 
 interface LighthouseScore {
   performance: number
@@ -64,7 +68,7 @@ function main(): void {
   // Both need a running server. The actual implementation will use
   // the preview server started by the Nx target dependency chain.
   const report: LighthouseReport = {
-    url: "http://127.0.0.1:4322/",
+    url: siteUrl,
     scores: {
       performance: 0,
       accessibility: 0,
@@ -77,7 +81,7 @@ function main(): void {
   // Try to run Lighthouse if available
   try {
     const result = execSync(
-      `npx lighthouse http://127.0.0.1:4322/ --output=json --chrome-flags="--headless --no-sandbox" --quiet`,
+      `npx lighthouse ${siteUrl} --output=json --chrome-flags="--headless --no-sandbox" --quiet`,
       { timeout: 120_000, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] },
     )
     const lhr = JSON.parse(result) as { categories: Record<string, { score: number }> }
